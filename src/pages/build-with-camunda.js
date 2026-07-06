@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
@@ -68,6 +68,177 @@ function CheckIcon({ color = "#78a9ff" }) {
         strokeWidth="1.6"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+        stroke="#fc5d0d"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function DownloadBtnIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      style={{ marginRight: 6, verticalAlign: "-2px" }}
+    >
+      <path
+        d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function SparklesIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <path
+        d="M32 18l3.2 9 9 3.2-9 3.2-3.2 9-3.2-9-9-3.2 9-3.2L32 18z"
+        fill="#fc5d0d"
+      />
+      <path
+        d="M46 38l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7L46 38z"
+        fill="#fc5d0d"
+      />
+      <path
+        d="M18 42l1.1 3.1 3.1 1.1-3.1 1.1-1.1 3.1-1.1-3.1-3.1-1.1 3.1-1.1L18 42z"
+        fill="#fc5d0d"
+      />
+    </svg>
+  );
+}
+
+function PencilIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <path
+        d="M18 46l3-12 20-20 9 9-20 20-12 3z"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <path
+        d="M37 17l9 9"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M18 46l5-2"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function PlayIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <circle
+        cx="32"
+        cy="32"
+        r="18"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        fill="none"
+      />
+      <path d="M28 24l13 8-13 8z" fill="#fc5d0d" />
+    </svg>
+  );
+}
+
+function RpaIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <path
+        d="M32 14v6"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <circle cx="32" cy="12" r="2" fill="#fc5d0d" />
+      <rect
+        x="18"
+        y="22"
+        width="28"
+        height="22"
+        rx="4"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        fill="none"
+      />
+      <circle cx="26" cy="32" r="2.5" fill="#fc5d0d" />
+      <circle cx="38" cy="32" r="2.5" fill="#fc5d0d" />
+      <path
+        d="M26 39h12"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M14 30v8M50 30v8"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M22 48v4M42 48v4"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -384,7 +555,25 @@ function CodeBlock({ children }) {
   return <code className={styles.inlineCode}>{children}</code>;
 }
 
-function TerminalWindow({ title, children }) {
+function TerminalWindow({ title, children, copyable = true }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    const text = typeof children === "string" ? children : String(children);
+    const stripped = text
+      .split("\n")
+      .map((line) => line.replace(/^\$\s?/, ""))
+      .filter((line) => !line.startsWith("#") && !line.startsWith("✓"))
+      .join("\n")
+      .trim();
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(stripped).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1500);
+      });
+    }
+  };
+
   return (
     <div className={styles.terminalWindow}>
       <div className={styles.terminalHeader}>
@@ -403,6 +592,43 @@ function TerminalWindow({ title, children }) {
         {title && <span className={styles.terminalTitle}>{title}</span>}
       </div>
       <div className={styles.terminalBody}>
+        {copyable && (
+          <button
+            type="button"
+            aria-label={copied ? "Copied" : "Copy code to clipboard"}
+            title={copied ? "Copied" : "Copy"}
+            className={clsx(
+              styles.copyButton,
+              copied && styles.copyButtonCopied
+            )}
+            onClick={handleCopy}
+          >
+            <span className={styles.copyButtonIcons} aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                className={styles.copyIcon}
+                width="16"
+                height="16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"
+                />
+              </svg>
+              <svg
+                viewBox="0 0 24 24"
+                className={styles.successIcon}
+                width="16"
+                height="16"
+              >
+                <path
+                  fill="currentColor"
+                  d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+                />
+              </svg>
+            </span>
+          </button>
+        )}
         <pre className={styles.terminalPre}>{children}</pre>
       </div>
     </div>
@@ -415,430 +641,401 @@ function BuildWithCamunda() {
   return (
     <Layout
       title="Build with Camunda"
-      description="Process orchestration for developers. Go from zero to a running workflow in under two minutes."
+      description="Process orchestration for users. Go from zero to a running workflow in minutes."
     >
       <div className={styles.page}>
-        {/* ─── Hero + Start cards wrapper ─── */}
+        {/* ─── Hero: Start from your terminal ─── */}
         <div className={styles.heroWrapper}>
           <div className={styles.heroGlow} />
 
-          {/* ─── Hero ─── */}
-          <header className={styles.hero}>
-            <div className={clsx("container", styles.heroInner)}>
-              <h1 className={styles.heroTitle}>Build with Camunda 8.9</h1>
-              <p className={styles.heroSub}>
-                Go from zero to a running workflow in under two minutes.
-              </p>
-              <p className={styles.heroSub}>
-                Choose how you want to get started:
+          <section
+            className={clsx("container", styles.terminalHeroSection)}
+            id="get-started"
+            style={{ scrollMarginTop: "5rem" }}
+          >
+            <div className={styles.terminalHeroIntro}>
+              <h1 className={styles.terminalHeroTitle}>
+                Start building with Camunda
+              </h1>
+              <p className={styles.terminalHeroSub}>
+                Get started with a running workflow in minutes.
               </p>
             </div>
-          </header>
 
-          {/* ─── Two-card start options ─── */}
-          <section className={clsx("container", styles.section)}>
-            <div className={styles.startGrid}>
-              {/* SaaS card */}
-              <div className={clsx(styles.startCard, styles.startCardSaas)}>
-                <span className={styles.startCardIcon}>
-                  <CloudIcon />
-                </span>
-                <span
-                  className={styles.startCardLabel}
-                  style={{ color: "#78a9ff" }}
-                >
-                  FASTEST START
-                </span>
-                <h2 className={styles.startCardTitle}>Free trial on SaaS</h2>
-                <p className={styles.startCardDesc}>
-                  Get your own fully managed Camunda cluster. Nothing to
-                  install, just sign up and start modeling today.
-                </p>
-                <ul className={styles.checkList}>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> Zero setup - runs in Camunda's
-                    cloud
-                  </li>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> Web Modeler included
-                  </li>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> AI agent skills built in
-                  </li>
-                  <li>
-                    <CheckIcon color="#78a9ff" /> 30 days free, fully featured
-                  </li>
-                </ul>
-                <div className={styles.startCardFooter}>
-                  <Link
-                    className={styles.ctaButton}
-                    to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
+            {/* ─── Hero: 2-card choice ─── */}
+            <div className={styles.heroLayoutTwo}>
+              {/* Self-Managed (left, priority) */}
+              <Link
+                className={clsx(styles.heroCard, styles.heroCardPriority)}
+                to="#self-managed"
+              >
+                <span className={styles.recommendedBadge}>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    style={{ marginRight: 4 }}
                   >
-                    Create free account <ArrowRight />
-                  </Link>
-                  <span className={styles.ctaNote}>
-                    ~60 seconds to your first cluster
-                  </span>
-                </div>
-              </div>
-
-              {/* OR badge */}
-              <div className={styles.orBadge}>OR</div>
-
-              {/* CLI card */}
-              <div className={clsx(styles.startCard, styles.startCardCli)}>
-                <span className={styles.startCardIcon}>
+                    <path
+                      d="M12 2.5l1.7 4.8 4.8 1.7-4.8 1.7-1.7 4.8-1.7-4.8-4.8-1.7 4.8-1.7L12 2.5z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M19 13l.9 2.6L22.5 16.5l-2.6.9L19 20l-.9-2.6-2.6-.9 2.6-.9L19 13z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M5.5 15l.6 1.7 1.7.6-1.7.6-.6 1.7-.6-1.7-1.7-.6 1.7-.6.6-1.7z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  Recommended for AI builders
+                </span>
+                <span className={clsx(styles.cardTag, styles.cardTagLocal)}>
+                  Self-Managed
+                </span>
+                <span className={styles.heroCardIcon}>
                   <TerminalIcon />
                 </span>
-                <span
-                  className={styles.startCardLabel}
-                  style={{ color: "#fc5d0d" }}
-                >
-                  FULL CONTROL
-                </span>
-                <h2 className={styles.startCardTitle}>
-                  Run locally with the CLI <VersionBadge />
-                </h2>
-                <p className={styles.startCardDesc}>
-                  Use the{" "}
-                  <Link
-                    to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}
-                  >
-                    <CodeBlock>c8ctl</CodeBlock>
-                  </Link>
-                  Camunda CLI tool. Run locally and scale seamlessly to
-                  enterprise clusters with the same runtime and stack, deploying
-                  anywhere with one command.
+                <h2 className={styles.heroCardTitle}>Run Camunda locally</h2>
+                <p className={styles.heroCardMeta}>
+                  Camunda 8.9+ · macOS, Linux, Windows
                 </p>
-                <ul className={styles.checkList}>
+                <p className={styles.heroCardDesc}>
+                  Install and start Camunda locally, deploy your first process,
+                  and see it running. All from your terminal.
+                </p>
+                <ul className={styles.heroCardChecks}>
                   <li>
-                    <CheckIcon color="#fc5d0d" /> Works on macOS, Linux, Windows
+                    <CheckIcon color="#22a06b" /> One command to install Camunda
                   </li>
                   <li>
-                    <CheckIcon color="#fc5d0d" /> Desktop Modeler for modeling
+                    <CheckIcon color="#22a06b" /> AI agent skills built in
                   </li>
                   <li>
-                    <CheckIcon color="#fc5d0d" /> AI agent skills built in
-                  </li>
-                  <li>
-                    <CheckIcon color="#fc5d0d" /> Your data stays on your
-                    machine
+                    <CheckIcon color="#22a06b" /> Data stays on your machine
                   </li>
                 </ul>
-                <div className={styles.startCardFooter}>
-                  <Link
-                    className={clsx(styles.ctaButton, styles.ctaButtonCli)}
-                    to="#get-started"
-                  >
-                    Install now <ArrowDown />
-                  </Link>
-                  <span className={styles.ctaNote}>
-                    ~2 minutes to a running engine
-                  </span>
-                </div>
-              </div>
+                <span className={styles.heroCardCta}>
+                  Start building <ArrowDown />
+                </span>
+              </Link>
+
+              {/* SaaS (right) */}
+              <Link
+                className={clsx(styles.heroCard, styles.heroCardSaas)}
+                to="https://accounts.cloud.camunda.io/signup?utm_source=camunda_docs&utm_medium=cta&utm_campaign=cli_landing_page"
+              >
+                <span className={clsx(styles.cardTag, styles.cardTagCloud)}>
+                  Cloud
+                </span>
+                <span className={styles.heroCardIcon}>
+                  <CloudIcon />
+                </span>
+                <h2 className={styles.heroCardTitle}>Free SaaS trial</h2>
+                <p className={styles.heroCardMeta}>Fully managed cloud</p>
+                <p className={styles.heroCardDesc}>
+                  Get your own fully managed Camunda cluster. No install, sign
+                  up and start modeling today.
+                </p>
+                <ul className={styles.heroCardChecks}>
+                  <li>
+                    <CheckIcon color="#22a06b" /> Zero setup
+                  </li>
+                  <li>
+                    <CheckIcon color="#22a06b" /> Web Modeler included
+                  </li>
+                  <li>
+                    <CheckIcon color="#22a06b" /> AI agent skills built in
+                  </li>
+                  <li>
+                    <CheckIcon color="#22a06b" /> Free LLM tokens to run your
+                    first agent!
+                  </li>
+                </ul>
+                <span className={styles.heroCardCtaAlt}>
+                  Create free account <ArrowRight />
+                </span>
+              </Link>
             </div>
           </section>
         </div>
 
-        {/* ─── Quick install ─── */}
+        {/* ─── Self-Managed: tabbed install ─── */}
         <section
-          id="get-started"
-          className={clsx("container", styles.section)}
+          className={clsx(
+            "container",
+            styles.section,
+            styles.cliInstallSection
+          )}
+          id="self-managed"
           style={{ scrollMarginTop: "5rem" }}
         >
-          <div
-            className={styles.sectionHeader}
-            style={{ marginBottom: "1rem" }}
-          >
-            <h2 className={styles.sectionTitle}>
-              Get started with c8ctl <VersionBadge />
-            </h2>
-            <p className={styles.sectionSub}>
-              Install{" "}
-              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                <CodeBlock>c8ctl</CodeBlock>
-              </Link>{" "}
-              from npm and spin up a Self-Managed Camunda cluster on your
-              machine.
-            </p>
-          </div>
-          <div
-            className={styles.modelerNote}
-            style={{ marginTop: "0", marginBottom: "1.5rem" }}
-          >
-            <p>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              <code>c8ctl</code> uses c8run, which requires{" "}
-              <Link
-                to={useBaseUrl(
-                  "docs/next/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                )}
-              >
-                OpenJDK 21–25
-              </Link>{" "}
-              .
-            </p>
-          </div>
-
-          <TerminalWindow title="Terminal">
-            {`$ npm install @camunda8/cli -g
-$ c8ctl cluster start
-
-# Camunda is now running! Deploy your first process:
-$ git clone https://github.com/camunda/camunda-8-get-started.git
-$ cd camunda-8-get-started/1-rocket-launch/
-$ c8ctl deploy .
-$ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'
-
-# Open Operate at http://localhost:8080/operate to see your process instance running. Log in with the credentials \`demo/demo\`. `}
-          </TerminalWindow>
-
-          {/* c8run direct download */}
-          <div className={styles.modelerNote}>
-            <p>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              No npm? Download Camunda 8 Run directly and start a local Camunda
-              cluster without the CLI.
-            </p>
-            <details className={styles.collapsible}>
-              <summary>Download Camunda 8 Run</summary>
-              <div className={styles.collapsibleContent}>
-                <p style={{ marginBottom: "0.75rem" }}>
-                  Requires{" "}
-                  <a
-                    href="https://adoptium.net/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    OpenJDK 21–25
-                  </a>
-                  . Extract the archive and run:
-                </p>
-                <TerminalWindow title="Terminal">
-                  {`# macOS / Linux
-./start.sh
-
-# Windows
-.\\c8run.exe start`}
-                </TerminalWindow>
-                <div
-                  className={styles.downloadButtons}
-                  style={{ marginTop: "1rem" }}
-                >
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-aarch64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Apple Silicon)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-darwin-x86_64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Intel)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-linux-x86_64.tar.gz"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Linux
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda/c8run/8.9/camunda8-run-8.9-windows-x86_64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Windows
-                  </a>
-                </div>
-                <p className={styles.downloadMeta}>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                    )}
-                  >
-                    Installation guide
-                  </Link>
-                </p>
-              </div>
-            </details>
-          </div>
-
-          {/* Desktop Modeler download */}
-          <div className={styles.modelerNote}>
-            <p>
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                style={{ marginRight: "0.4rem", verticalAlign: "middle" }}
-              >
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="7"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  fill="none"
-                />
-                <path
-                  d="M8 7v4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
-              </svg>
-              Download Desktop Modeler to design and edit BPMN diagrams, DMN
-              decisions, and forms.
-            </p>
-            <details className={styles.collapsible}>
-              <summary>Download Desktop Modeler </summary>
-              <div className={styles.collapsibleContent}>
-                {/* Homebrew install option (macOS) */}
-                <p style={{ marginBottom: "0.75rem" }}>
-                  On macOS, you can install the Desktop Modeler via{" "}
-                  <a
-                    href="https://brew.sh/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Homebrew
-                  </a>
-                  :
-                </p>
-                <TerminalWindow title="Terminal">
-                  {`$ brew install --cask camunda-modeler`}
-                </TerminalWindow>
-
-                {/* Manual download buttons */}
-                <p style={{ marginTop: "1rem", marginBottom: "0.75rem" }}>
-                  Or download and install manually:
-                </p>
-                <div className={styles.downloadButtons}>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-arm64.dmg"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Apple Silicon)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-mac-x64.dmg"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    macOS (Intel)
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-win-x64.zip"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Windows
-                  </a>
-                  <a
-                    href="https://downloads.camunda.cloud/release/camunda-modeler/5.45.0/camunda-modeler-5.45.0-linux-x64.tar.gz"
-                    className={styles.downloadButton}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Linux
-                  </a>
-                </div>
-                <p className={styles.downloadMeta}>
-                  Version 5.45 ·{" "}
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/modeler/desktop-modeler/install-the-modeler/"
-                    )}
-                  >
-                    Installation guide
-                  </Link>
-                </p>
-              </div>
-            </details>
-          </div>
-        </section>
-
-        {/* ─── Everything from your terminal ─── */}
-        <section className={clsx("container", styles.section)}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Everything from your terminal <VersionBadge />
+              Run Camunda locally <VersionBadge />
             </h2>
             <p className={styles.sectionSub}>
-              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
-                <CodeBlock>c8ctl</CodeBlock>
-              </Link>{" "}
-              gives you a single CLI for the full Camunda lifecycle with no
-              browser required.
+              Install the Camunda CLI via npm and start a local Camunda
+              environment.
+            </p>
+          </div>
+
+          {/* ─── Primary: CLI install ─── */}
+          <div className={styles.cliInstallBlock}>
+            <p className={styles.quickStartLabel}>
+              <span className={styles.stepNumber}>1</span> Install the Camunda
+              CLI
+              <span
+                style={{
+                  marginLeft: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              ></span>
+            </p>
+            <TerminalWindow copyable>
+              {`$ npm install -g @camunda8/cli`}
+            </TerminalWindow>
+
+            <p className={styles.quickStartLabel}>
+              <span className={styles.stepNumber}>2</span> Start Camunda 8 Run
+              <span
+                style={{
+                  marginLeft: "auto",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              ></span>
+            </p>
+            <TerminalWindow copyable>
+              {`$ c8ctl cluster start 8.10.0-alpha2`}
+            </TerminalWindow>
+
+            <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <span>
+                <Link
+                  to="https://www.npmjs.com/package/@camunda8/cli"
+                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
+                >
+                  Install via npm
+                </Link>{" "}
+                requires Node.js 18+.
+              </span>
+            </p>
+          </div>
+
+          {/* ─── Fallback: Download bundle ─── */}
+          <details className={styles.bundleFallback}>
+            <summary className={styles.bundleFallbackSummary}>
+              <span>
+                No Node.js or npm? Download and run the getting started bundle
+                instead
+              </span>
+            </summary>
+            <div className={styles.bundleFallbackContent}>
+              <ol className={styles.bundleFallbackDesc}>
+                <li>
+                  Download, extract, and run the getting started bundle for a
+                  Camunda 8 Run environment.
+                </li>
+                <li>
+                  Follow the instructions in{" "}
+                  <Link
+                    to={useBaseUrl(
+                      "/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
+                    )}
+                  >
+                    run your first BPMN process
+                  </Link>{" "}
+                  to deploy and run your model.
+                </li>
+              </ol>
+              <div className={styles.downloadButtons}>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-aarch64.zip"
+                >
+                  <DownloadBtnIcon /> macOS (Apple Silicon)
+                </a>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-x86_64.zip"
+                >
+                  <DownloadBtnIcon /> macOS (Intel)
+                </a>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-windows-x86_64.zip"
+                >
+                  <DownloadBtnIcon /> Windows
+                </a>
+                <a
+                  className={styles.downloadButton}
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-linux-x86_64.tar.gz"
+                >
+                  <DownloadBtnIcon /> Linux
+                </a>
+              </div>
+              <TerminalWindow copyable>
+                {`# macOS / Linux
+$ unzip camunda8-getting-started-bundle-*.zip
+$ cd camunda8-getting-started-bundle-*
+$ ./camunda-start.sh
+
+# Windows
+# Extract the .zip and run camunda-start.bat`}
+              </TerminalWindow>
+              <p
+                className={styles.cliInfoNote}
+                style={{
+                  textAlign: "left",
+                  justifyContent: "flex-start",
+                  marginTop: "1.5rem",
+                }}
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="8"
+                    cy="8"
+                    r="7"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    fill="none"
+                  />
+                  <path
+                    d="M8 7v4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+                </svg>
+                <span>
+                  Camunda 8 Run requires OpenJDK 21–25. Node.js/npm not required
+                  for getting started bundle.
+                </span>
+              </p>
+            </div>
+          </details>
+
+          {/* ─── Deploy your first process ─── */}
+          <div className={styles.pillSeparator}>
+            <span className={styles.sectionPill}>
+              Deploy your first process
+            </span>
+          </div>
+
+          <div className={styles.cliInstallBlock}>
+            <p className={styles.quickStartLabel}>
+              <span className={styles.stepNumber}>3</span> Deploy and run the
+              example process
+            </p>
+            <TerminalWindow copyable>
+              {`$ git clone https://github.com/camunda/camunda-8-get-started.git
+$ cd camunda-8-get-started/1-rocket-launch/
+$ c8ctl deploy .
+$ c8ctl run rocket-launch.bpmn --variables='{"fuelLevel":90}'`}
+            </TerminalWindow>
+
+            <p className={styles.quickStartLabel}>
+              <span className={styles.stepNumber}>4</span> See the process
+              running in Operate
+            </p>
+            <TerminalWindow copyable={false}>
+              {`# Open Operate at http://localhost:8080/operate
+# Log in with demo / demo
+# Find the Rocket Launch process and click your running instance`}
+            </TerminalWindow>
+
+            <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <span>
+                Your process instance appears once data has synced to Operate.
+                See{" "}
+                <Link
+                  to={useBaseUrl(
+                    "/docs/guides/getting-started-hello-world#step-3-explore-your-process-in-operate"
+                  )}
+                >
+                  explore your process in Operate
+                </Link>
+                .
+              </span>
+            </p>
+          </div>
+
+          <div className={styles.pillSeparator}>
+            <span className={styles.sectionPill}>How to use the CLI</span>
+          </div>
+
+          {/* Everything from your terminal (moved into CLI section) */}
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>
+              Manage Camunda from your terminal
+            </h2>
+            <p className={styles.sectionSub}>
+              Use the CLI for the full Camunda lifecycle. No browser required.
             </p>
           </div>
           <div className={styles.commandGrid}>
             <div className={styles.commandCard}>
               <h4>Manage your clusters</h4>
               <TerminalWindow title="Terminal">
-                {`$ c8ctl cluster start 8.9.0-alpha5
-$ c8ctl cluster stop
-
-`}
+                {`$ c8ctl cluster start 8.9
+$ c8ctl cluster stop`}
               </TerminalWindow>
             </div>
             <div className={styles.commandCard}>
@@ -866,95 +1063,83 @@ $ c8ctl resolve inc 2251799813685251`}
               </TerminalWindow>
             </div>
           </div>
-        </section>
 
-        {/* ─── Teach your AI Agent ─── */}
-        <section
-          className={clsx("container", styles.section, styles.sectionLast)}
-        >
+          <p
+            className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+            style={{ marginTop: "2.5rem" }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8"
+                cy="8"
+                r="7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
+              <path
+                d="M8 7v4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+            </svg>
+            <span>
+              Learn more about using the{" "}
+              <Link to={useBaseUrl("docs/apis-tools/c8ctl/getting-started/")}>
+                Camunda CLI
+              </Link>{" "}
+              to manage Camunda directly from the terminal.
+            </span>
+          </p>
+
+          <div className={styles.pillSeparator}>
+            <span className={styles.sectionPill}>AI agent integration</span>
+          </div>
+
+          {/* Teach AI agent (moved into CLI section) */}
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>
-              Teach your AI agent Camunda <VersionBadge />
+              Train your AI agents on Camunda
             </h2>
             <p className={styles.sectionSub}>
-              Give your coding assistant Camunda superpowers. Deploy processes,
-              manage clusters, and query instances right from your AI workflow.
+              Deploy processes, manage clusters, and query instances directly
+              from your AI workflow.
             </p>
           </div>
           <div className={styles.aiGrid}>
             <div className={styles.aiCard}>
-              <h4 style={{ color: "inherit" }}>
-                Add Camunda skills as Claude plugin{" "}
-                <span
-                  style={{
-                    marginLeft: "0.5rem",
-                    display: "inline-block",
-                    padding: "0.15rem 0.5rem",
-                    borderRadius: "999px",
-                    fontSize: "0.75rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.02em",
-                    backgroundColor: "#fc5d0d",
-                    border: "1px solid #fc5d0d",
-                    color: "#ffffff",
-                    verticalAlign: "middle",
-                    lineHeight: 1.2,
-                  }}
-                >
-                  Coming soon
-                </span>
+              <h4 style={{ display: "flex", alignItems: "center" }}>
+                Add Camunda Skills as Claude plugin
               </h4>
               <TerminalWindow title="Terminal">
-                {`$ claude plugin add camunda/camunda-ai-dev-kit
+                {`$ claude plugin marketplace add camunda/skills
+$ claude plugin install camunda-skills@camunda-skills
 
 Available skills:
-  /new-project  — scaffold a new Camunda project
-  /new-process  — generate a BPMN process
-  /new-agent    — generate an agentic AI process (ad-hoc sub-process + AI Agent connector)
-  /new-dmn      — generate a DMN decision table
-  /new-form     — generate a Camunda Form
-  /new-worker   — generate a job worker
-  /deploy       — deploy resources to Camunda
-  /start        — start a process instance
-  /status       — check instance/incident status
-  /view-process       — visualize BPMN, DMN, or Form files
-  /setup-environment  — install and start Camunda 8 Run locally`}
+  /camunda-c8ctl                    — install and configure c8ctl
+  /camunda-ai-agent                 — build AI agents in BPMN
+  /camunda-bpmn                     — create and edit BPMN 2.0 processes
+  /camunda-connectors               — configure pre-built connectors
+  /camunda-connectors-development   — build custom connectors
+  /camunda-development              — choose the integration type
+  /camunda-docs                     — search the Camunda 8 docs
+  /camunda-feel                     — write and debug FEEL expressions
+  /camunda-forms                    — create Camunda Form schemas
+  /camunda-job-workers              — implement job workers (Java, Spring, TypeScript)
+  /camunda-process-mgmt             — deploy, operate, and debug processes`}
               </TerminalWindow>
             </div>
             <div className={styles.aiCard}>
               <h4 style={{ display: "flex", alignItems: "center" }}>
                 Connect to Camunda via MCP
-                <span
-                  style={{
-                    marginLeft: "auto",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <Link
-                    to={useBaseUrl(
-                      "docs/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
-                    )}
-                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                  >
-                    Orchestration Cluster MCP
-                  </Link>
-                  <span
-                    style={{
-                      color: "var(--muted-color)",
-                      margin: "0 0.4rem",
-                      fontWeight: 300,
-                    }}
-                  >
-                    |
-                  </span>
-                  <Link
-                    to={useBaseUrl("docs/reference/mcp-docs/")}
-                    style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                  >
-                    Docs MCP
-                  </Link>
-                </span>
               </h4>
               <TerminalWindow title="Terminal">
                 {`// mcp.json
@@ -975,29 +1160,113 @@ Available skills:
               </TerminalWindow>
             </div>
           </div>
+          <p
+            className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+            style={{ marginTop: "2.5rem" }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8"
+                cy="8"
+                r="7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
+              <path
+                d="M8 7v4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+            </svg>
+            <span>
+              Learn more about{" "}
+              <Link
+                to="https://github.com/camunda/skills"
+                style={{ fontWeight: 400, fontSize: "0.85rem" }}
+              >
+                Camunda Skills
+              </Link>
+              {", and the "}
+              <Link
+                to={useBaseUrl(
+                  "docs/apis-tools/orchestration-cluster-api-mcp/orchestration-cluster-api-mcp-overview/"
+                )}
+                style={{ fontWeight: 400, fontSize: "0.85rem" }}
+              >
+                Orchestration Cluster MCP
+              </Link>{" "}
+              and{" "}
+              <Link
+                to={useBaseUrl("docs/reference/mcp-docs/")}
+                style={{ fontWeight: 400, fontSize: "0.85rem" }}
+              >
+                Docs MCP
+              </Link>{" "}
+              servers.
+            </span>
+          </p>
           <div className={styles.aiExamples}>
-            <h4>Then ask your agent:</h4>
+            <h4>...then ask your agent</h4>
+            <p className={styles.aiExamplesSub}>
+              Try one of these prompts to see Camunda Skills in action.
+            </p>
             <div className={styles.aiExampleGrid}>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Deploy the order-process.bpmn and start an instance with
+                "Create an invoice approval process with a user task for review
+                and an HTTP connector to notify accounting"
+              </div>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Build an AI agent to triage and route customer support tickets
+                to the correct team"
+              </div>
+              <div className={styles.aiExampleItem}>
+                <span className={styles.aiPromptIcon}>💬</span>
+                "Deploy order-process.bpmn and start an instance with
                 orderId=42"
               </div>
               <div className={styles.aiExampleItem}>
                 <span className={styles.aiPromptIcon}>💬</span>
-                "Show me all incidents on the payment-flow process"
-              </div>
-              <div className={styles.aiExampleItem}>
-                <span className={styles.aiPromptIcon}>💬</span>
                 "Investigate incidents on the payment-flow process and resolve
-                any that are due to missing payment details"
+                any that are caused by missing payment details"
               </div>
+            </div>
+
+            <div className={styles.aiExamplesCta}>
+              <Link className={styles.heroCardCta} to="#self-managed">
+                Start building
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  style={{ marginLeft: 6 }}
+                >
+                  <path
+                    d="M8 13V3M4 7l4-4 4 4"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* ─── More ways to run ─── */}
-        <section className={styles.moreSection}>
+        {/* ─── More ways to run (duplicate) ─── */}
+        <section className={clsx(styles.moreSection, styles.darkSection)}>
           <div className="container">
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>
@@ -1084,316 +1353,37 @@ Available skills:
           </div>
         </section>
 
-        {/* ─── Architecture ─── */}
-        <section className={styles.exploreSection}>
+        {/* ─── Camunda downloads ─── */}
+        <section
+          id="downloads"
+          className={clsx(
+            styles.moreSection,
+            styles.darkSection,
+            styles.noTopBorder,
+            styles.exploreSectionLast
+          )}
+          style={{
+            scrollMarginTop: "5rem",
+            paddingTop: "3rem",
+            paddingBottom: "8rem",
+          }}
+        >
           <div className="container">
             <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Architecture at a glance</h2>
+              <h2 className={styles.sectionTitle}>Camunda downloads</h2>
               <p className={styles.sectionSub}>
-                Learn more about how Camunda's components and features work
-                together to power your process orchestration.
+                Download everything you need for local Camunda 8 development.
               </p>
             </div>
-            <div className={styles.archDiagram}>
-              <div className={styles.archGroup}>
-                <h3 className={styles.archGroupTitle}>Design and manage</h3>
-                <div className={styles.archRow}>
-                  <Link
-                    to={useBaseUrl("docs/components/modeler/about-modeler/")}
-                    className={styles.archBox}
-                  >
-                    <ModelerIcon />
-                    <strong>Modeler</strong>
-                    <span>Design and model BPMN, DMN, and Forms</span>
-                  </Link>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/console/introduction-to-console/"
-                    )}
-                    className={styles.archBox}
-                  >
-                    <ConsoleIcon />
-                    <strong>Console</strong>
-                    <span>Manage clusters and settings</span>
-                  </Link>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/optimize/what-is-optimize/"
-                    )}
-                    className={styles.archBox}
-                  >
-                    <OptimizeIcon />
-                    <strong>Optimize</strong>
-                    <span>Analyze and improve</span>
-                  </Link>
-                </div>
-              </div>
-
-              <div className={styles.archConnector}>
-                <svg width="32" height="48" viewBox="0 0 32 48" fill="none">
-                  <path
-                    d="M16 0l8 10H8l8-10z"
-                    fill="var(--arch-connector-color)"
-                  />
-                  <line
-                    x1="16"
-                    y1="10"
-                    x2="16"
-                    y2="38"
-                    stroke="var(--arch-connector-color)"
-                    strokeWidth="3.5"
-                  />
-                  <path
-                    d="M16 48l8-10H8l8 10z"
-                    fill="var(--arch-connector-color)"
-                  />
-                </svg>
-              </div>
-
-              <div
-                className={clsx(styles.archGroup, styles.archGroupHighlight)}
-              >
-                <h3 className={styles.archGroupTitle}>Orchestration Cluster</h3>
-                <div className={styles.archRow}>
-                  <Link
-                    to={useBaseUrl("docs/components/zeebe/zeebe-overview/")}
-                    className={clsx(styles.archBox, styles.archBoxPrimary)}
-                  >
-                    <ZeebeIcon />
-                    <strong>Zeebe</strong>
-                    <span>Core workflow engine</span>
-                  </Link>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/tasklist/introduction-to-tasklist/"
-                    )}
-                    className={styles.archBox}
-                  >
-                    <TasklistIcon />
-                    <strong>Tasklist</strong>
-                    <span>Human task management</span>
-                  </Link>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/operate/operate-introduction/"
-                    )}
-                    className={styles.archBox}
-                  >
-                    <OperateIcon />
-                    <strong>Operate</strong>
-                    <span>Monitor and troubleshoot</span>
-                  </Link>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/concepts/access-control/access-control-overview/"
-                    )}
-                    className={styles.archBox}
-                  >
-                    <AdminIcon />
-                    <strong>Admin</strong>
-                    <span>Authentication and authorization</span>
-                  </Link>
-                </div>
-              </div>
-
-              <div className={styles.archConnector}>
-                <svg width="32" height="48" viewBox="0 0 32 48" fill="none">
-                  <path
-                    d="M16 0l8 10H8l8-10z"
-                    fill="var(--arch-connector-color)"
-                  />
-                  <line
-                    x1="16"
-                    y1="10"
-                    x2="16"
-                    y2="38"
-                    stroke="var(--arch-connector-color)"
-                    strokeWidth="3.5"
-                  />
-                  <path
-                    d="M16 48l8-10H8l8 10z"
-                    fill="var(--arch-connector-color)"
-                  />
-                </svg>
-              </div>
-
-              <div className={styles.archGroup}>
-                <h3 className={styles.archGroupTitle}>Connectors and tools</h3>
-                <div className={styles.archRow}>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/components/connectors/introduction-to-connectors/"
-                    )}
-                    className={styles.archBox}
-                  >
-                    <ConnectorsIcon />
-                    <strong>Connectors</strong>
-                    <span>Integrate external systems</span>
-                  </Link>
-                  <Link
-                    to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
-                    className={styles.archBox}
-                  >
-                    <ClientsIcon />
-                    <strong>APIs</strong>
-                    <span>APIs for integration and automation</span>
-                  </Link>
-                  <Link
-                    to={useBaseUrl(
-                      "docs/apis-tools/working-with-apis-tools/#api-clients"
-                    )}
-                    className={styles.archBox}
-                  >
-                    <SDKsIcon />
-                    <strong>Clients & SDKs</strong>
-                    <span>Official and community clients and SDKs</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ─── Agentic orchestration ─── */}
-        <section className={styles.exploreSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Agentic orchestration</h2>
-            <p className={styles.sectionSub}>
-              Orchestrate AI agents in BPMN-based workflows. Design, deploy, and
-              monitor intelligent agents combining human tasks with LLM
-              reasoning.
-            </p>
-          </div>
-          <div className={styles.agenticGrid}>
-            <Link
-              to={useBaseUrl(
-                "docs/guides/getting-started-agentic-orchestration/"
-              )}
-              className={styles.agenticCard}
-            >
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
-                  stroke="#78a9ff"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                />
-              </svg>
-              <h4>Build your first AI agent</h4>
-              <p>Get started by building and running your first AI agent.</p>
-            </Link>
-            <Link
-              to={useBaseUrl(
-                "docs/components/agentic-orchestration/agentic-orchestration-overview/"
-              )}
-              className={styles.agenticCard}
-            >
-              <img
-                src={IconAgenticImg}
-                alt="Agentic orchestration"
-                width="40"
-                height="40"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(62%) sepia(52%) saturate(1041%) hue-rotate(189deg) brightness(101%) contrast(101%)",
-                }}
-              />
-              <h4>Agentic orchestration</h4>
-              <p>
-                Orchestrate AI agents alongside human tasks and system
-                integrations.
-              </p>
-            </Link>
-            <Link
-              to={useBaseUrl(
-                "docs/components/agentic-orchestration/ai-agents/"
-              )}
-              className={styles.agenticCard}
-            >
-              <img
-                src={IconAgenticImg}
-                alt="Agentic orchestration"
-                width="40"
-                height="40"
-                style={{
-                  filter:
-                    "brightness(0) saturate(100%) invert(62%) sepia(52%) saturate(1041%) hue-rotate(189deg) brightness(101%) contrast(101%)",
-                }}
-              />
-              <h4>About AI agents</h4>
-              <p>
-                Build agents that reason, plan, and act using LLMs within your
-                processes.
-              </p>
-            </Link>
-          </div>
-        </section>
-
-        {/* ─── Explore docs ─── */}
-        <section className={styles.exploreSection}>
-          <div className="container">
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Explore the docs</h2>
-              <p className={styles.sectionSub}>
-                Browse Camunda 8 guides, resources, SDK, and API documentation.
-              </p>
-            </div>
-            <div className={styles.exploreGrid}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Link
-                to={useBaseUrl("docs/guides/")}
-                className={styles.exploreCard}
+                to={useBaseUrl("/downloads")}
+                className={styles.heroCardCtaAlt}
               >
-                <h3>Get started</h3>
-                <p>
-                  New to Camunda? Create an account and model your first
-                  process.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/components/")}
-                className={styles.exploreCard}
-              >
-                <h3>Using Camunda</h3>
-                <p>Learn about Modeler, Zeebe, Operate, Tasklist, and more.</p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/self-managed/about-self-managed/")}
-                className={styles.exploreCard}
-              >
-                <h3>Self-Managed</h3>
-                <p>Host and operate Camunda on your own infrastructure.</p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/apis-tools/working-with-apis-tools/")}
-                className={styles.exploreCard}
-              >
-                <h3>APIs and tools</h3>
-                <p>Client libraries, REST APIs, SDKs, and integrations.</p>
-              </Link>
-              <Link
-                to={useBaseUrl(
-                  "docs/components/best-practices/best-practices-overview/"
-                )}
-                className={styles.exploreCard}
-              >
-                <h3>Best Practices</h3>
-                <p>
-                  Level up your BPMN, DMN, and process orchestration skills.
-                </p>
-              </Link>
-              <Link
-                to={useBaseUrl("docs/reference/")}
-                className={styles.exploreCard}
-              >
-                <h3>Reference</h3>
-                <p>Release notes, supported environments, and licenses.</p>
+                Go to downloads <ArrowRight />
               </Link>
             </div>
           </div>
-          <br />
-          <br />
         </section>
       </div>
     </Layout>

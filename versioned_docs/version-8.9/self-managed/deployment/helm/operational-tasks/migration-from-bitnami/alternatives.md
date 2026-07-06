@@ -211,7 +211,7 @@ For VM-based or Docker Compose targets, include network connectivity testing (fi
 
 Create a step-by-step runbook and walk through it without executing destructive commands. Document each command and expected output.
 
-For inspiration, review the [backup](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/2-backup.sh) and [cutover](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/migration/3-cutover.sh) migration scripts used by the automated paths. They illustrate the sequence of operations and safety checks you should replicate in your runbook.
+For inspiration, review the [backup](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/2-backup.sh) and [cutover](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/migration/3-cutover.sh) migration scripts used by the automated paths. They illustrate the sequence of operations and safety checks you should replicate in your runbook.
 
 ### Pre-migration checklist
 

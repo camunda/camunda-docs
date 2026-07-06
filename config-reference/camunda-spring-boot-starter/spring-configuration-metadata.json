@@ -28,6 +28,13 @@
       "sourceMethod": "getCloud()"
     },
     {
+      "name": "camunda.client.cluster-variables",
+      "type": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "description": "Properties for setting cluster variables at startup.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "sourceMethod": "getClusterVariables()"
+    },
+    {
       "name": "camunda.client.deployment",
       "type": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "description": "Properties for automatic deployment at startup.",
@@ -187,9 +194,8 @@
     {
       "name": "camunda.client.auth.credentials-cache-path",
       "type": "java.lang.String",
-      "description": "The path to the credentials cache file.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
-      "defaultValue": "$HOME\/.camunda\/credentials"
+      "description": "The path to the credentials cache file. If unset or empty, the OAuth provider caches credentials only in memory and does not persist them across restarts. Set this to a writable path to opt in to persistent file-based caching. See issue #13124.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
       "name": "camunda.client.auth.issuer-url",
@@ -230,8 +236,9 @@
     {
       "name": "camunda.client.auth.proactive-token-refresh-threshold",
       "type": "java.time.Duration",
-      "description": "The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+      "description": "Controls how far before token expiry a background refresh is triggered. The token remains valid within this window, so callers don't block on a synchronous refresh at expiry. Must be strictly greater than the internal expiry grace period.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
+      "defaultValue": "PT30S"
     },
     {
       "name": "camunda.client.auth.read-timeout",
@@ -251,6 +258,41 @@
       "type": "java.lang.String",
       "description": "The scopes of the access token.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-backoff-multiplier",
+      "type": "java.lang.Double",
+      "description": "The multiplier applied to the backoff duration between successive token fetch retry attempts. Must be greater than or equal to 1.0.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
+      "defaultValue": 2
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-initial-backoff",
+      "type": "java.time.Duration",
+      "description": "The initial backoff duration applied between token fetch retry attempts. Each subsequent delay is multiplied by {@code camunda.client.auth.token-fetch-backoff-multiplier}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
+      "defaultValue": "PT1S"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via {@code tokenFetchRetryableStatusCodes}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
+      "defaultValue": 5
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-non-retryable-cooldown",
+      "type": "java.time.Duration",
+      "description": "If the token endpoint returns a non-retryable response, subsequent token fetch attempts fail immediately without making a request. This property specifies the duration of this cooldown period. After the cooldown period elapses, the next request retries; if it also fails with a non-retryable error, the cooldown resets. Set to {@code Duration.ZERO} to disable the cooldown.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
+      "defaultValue": "PT5M"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-retryable-status-codes",
+      "type": "java.util.Set<java.lang.Integer>",
+      "description": "The set of HTTP status codes from the token endpoint that are retried with backoff. Any other non-200 status code triggers the {@code camunda.client.auth.token-fetch-non-retryable-cooldown} cooldown.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties",
+      "defaultValue": [404, 429, 500, 502, 503, 504]
     },
     {
       "name": "camunda.client.auth.token-url",
@@ -313,6 +355,25 @@
       "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties"
     },
     {
+      "name": "camunda.client.cluster-variables.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Indicates if cluster variable processing is enabled. When {@code true}, variables configured via <code>@ClusterVariables<\/code> annotations and via the {@code global}\/{@code tenant} properties are applied at startup. When {@code false}, all cluster variable processing is skipped.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camunda.client.cluster-variables.global",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Globally-scoped cluster variables to set at startup as key-value pairs.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
+    },
+    {
+      "name": "camunda.client.cluster-variables.tenant",
+      "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
+      "description": "Tenant-scoped cluster variables to set at startup, keyed by tenant ID.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
+    },
+    {
       "name": "camunda.client.deployment.enabled",
       "type": "java.lang.Boolean",
       "description": "Indicates if the <code>@Deployment<\/code> annotation is processed.",
@@ -351,7 +412,8 @@
       "name": "camunda.client.keep-alive",
       "type": "java.time.Duration",
       "description": "The time interval between keep-alive messages sent to the gateway.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "defaultValue": "PT45S"
     },
     {
       "name": "camunda.client.max-http-connections",
@@ -391,6 +453,12 @@
       "name": "camunda.client.override-authority",
       "type": "java.lang.String",
       "description": "Overrides the authority used with TLS virtual hosting to change hostname verification during the TLS handshake. It does not change the actual host connected to.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
+    },
+    {
+      "name": "camunda.client.physical-tenant-id",
+      "type": "java.lang.String",
+      "description": "The physical tenant ID sent as the {@code Camunda-Physical-Tenant} gRPC header on every outgoing call. When {@code null} the header is omitted.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties"
     },
     {
@@ -512,6 +580,13 @@
       "defaultValue": false
     },
     {
+      "name": "camunda.client.worker.defaults.stream-inactivity-timeout",
+      "type": "java.time.Duration",
+      "description": "If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before canceling and recreating it. The timer is reset every time a job is received. Must be strictly less than {@code streamTimeout} when both are set.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties",
+      "defaultValue": "PT10M"
+    },
+    {
       "name": "camunda.client.worker.defaults.stream-timeout",
       "type": "java.time.Duration",
       "description": "If streaming is enabled, sets the maximum lifetime for a stream. When this timeout is reached, the stream closes, and no more jobs are activated or received. If the worker is still open, a new stream opens immediately.",
@@ -548,8 +623,9 @@
     {
       "name": "camunda.client.worker.override",
       "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
-      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties"
+      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties",
+      "defaultValue": {}
     },
     {
       "name": "management.endpoint.jobworkers.access",

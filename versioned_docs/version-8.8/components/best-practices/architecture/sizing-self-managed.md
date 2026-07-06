@@ -50,7 +50,7 @@ Considering this [baseline resource configuration](#baseline-resource-configurat
 | Data availability (query API latency)           | < 5 seconds                                    |
 
 :::important
-These numbers were measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/main/zeebe/load-tests/project/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md).
+These numbers were measured using Camunda's [load test application](https://github.com/camunda/camunda/tree/main/load-tests/load-tester) with a [realistic reference process](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/bankCustomerComplaintDisputeHandling.bpmn) and [realistic payload](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/realistic/realisticPayload.json) (~11 KB). For details on the testing methodology, see the [reliability testing documentation](https://github.com/camunda/camunda/blob/main/docs/testing/reliability-testing.md).
 :::
 
 The realistic reference process starts one root process instance, which spawns 50 sub-process instances via call activities. It covers a wide variety of BPMN elements, including call activities, multi-instance, sub-processes, and DMN. The process is based on the [Credit Card Fraud Dispute Handling](https://marketplace.camunda.com/en-US/apps/449510/credit-card-fraud-dispute-handling) blueprint from the Camunda Marketplace.
@@ -145,7 +145,15 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 
 - **Memory:** Increase Elasticsearch memory to store more historical data without performance degradation.
 - **Nodes:** Add Elasticsearch statefulset replicas for more IOPS and query throughput.
-- **Disk:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), Elasticsearch disk can fill rapidly (for example, 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
+- **Disk size:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), Elasticsearch disk can fill rapidly (for example, 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
+- **Disk type:** Use SSDs for Elasticsearch storage. Disk latency, not throughput, is the critical factor. HDD-backed Elasticsearch has been observed to cause 8–10s flush durations, a growing export backlog, increased broker memory from in-flight records, and up to ~70% throughput degradation versus an equivalent SSD setup. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for details, and [Export pipeline](data-flow.md#export-pipeline) for background on how slow secondary storage affects overall throughput.
+- **Index replicas:** The disk estimates in the baseline tables above do not account for index-level replicas. In multi-node clusters, configure at least one replica per index for fault tolerance — each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [managing replicas](/self-managed/concepts/secondary-storage-management.md#replicas).
+
+## Primary storage considerations
+
+Primary storage must use low-latency **SSDs**; HDD-backed volumes are not supported. Disk **latency** — not throughput — is the critical metric: cloud providers often report similar throughput figures for HDD and SSD volumes, but the latency difference is what matters for Camunda. In testing, HDD-backed primary storage degraded throughput by around 50% compared to SSDs, increased commit latencies, and triggered additional Raft snapshot replication between brokers.
+
+See [Command processing path](data-flow.md#command-processing-path) for the architectural context on why disk latency sits on the critical path, the [reference architecture minimum cluster requirements](/self-managed/reference-architecture/kubernetes.md#minimum-cluster-requirements) for concrete per-platform disk recommendations, and the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
 
 ## Secondary storage considerations
 

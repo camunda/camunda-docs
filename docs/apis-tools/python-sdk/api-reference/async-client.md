@@ -146,8 +146,17 @@ Assign a client to a group
 Members of the group inherit the group authorizations, roles, and tenant assignments.
 
 - **Parameters:**
-  - **group_id** (_str_)
-  - **client_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
+  - **client_id** (_str_) –
+
+    The unique identifier of an OAuth client.
+    Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+    with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+    Okta). In Self-Managed with Basic authentication, machine-to-machine
+    applications are modelled as users instead — see the user identifier.
+
+    > Example: my-application.
+
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -168,12 +177,12 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
 **Assign a client to a group:**
 
 ```python
-def assign_client_to_group_example() -> None:
+def assign_client_to_group_example(group_id: GroupId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.assign_client_to_group(
-        group_id="engineering",
-        client_id="my-service-account",
+        group_id=group_id,
+        client_id=client_id,
     )
 ```
 
@@ -191,7 +200,16 @@ The client can then access tenant data and perform authorized actions.
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **client_id** (_str_)
+  - **client_id** (_str_) –
+
+    The unique identifier of an OAuth client.
+    Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+    with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+    Okta). In Self-Managed with Basic authentication, machine-to-machine
+    applications are modelled as users instead — see the user identifier.
+
+    > Example: my-application.
+
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -211,12 +229,12 @@ The client can then access tenant data and perform authorized actions.
 **Assign a client to a tenant:**
 
 ```python
-def assign_client_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_client_to_tenant_example(tenant_id: TenantId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.assign_client_to_tenant(
         tenant_id=tenant_id,
-        client_id="my-service-account",
+        client_id=client_id,
     )
 ```
 
@@ -234,7 +252,7 @@ Group members (users, clients) can then access tenant data and perform authorize
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -254,12 +272,12 @@ Group members (users, clients) can then access tenant data and perform authorize
 **Assign a group to a tenant:**
 
 ```python
-def assign_group_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_group_to_tenant_example(tenant_id: TenantId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.assign_group_to_tenant(
         tenant_id=tenant_id,
-        group_id="engineering",
+        group_id=group_id,
     )
 ```
 
@@ -274,8 +292,8 @@ Assign a mapping rule to a group
 > Assigns a mapping rule to a group.
 
 - **Parameters:**
-  - **group_id** (_str_)
-  - **mapping_rule_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -296,12 +314,12 @@ Assign a mapping rule to a group
 **Assign a mapping rule to a group:**
 
 ```python
-def assign_mapping_rule_to_group_example() -> None:
+def assign_mapping_rule_to_group_example(group_id: GroupId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.assign_mapping_rule_to_group(
-        group_id="engineering",
-        mapping_rule_id="rule-123",
+        group_id=group_id,
+        mapping_rule_id=mapping_rule_id,
     )
 ```
 
@@ -317,7 +335,7 @@ Assign a mapping rule to a tenant
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **mapping_rule_id** (_str_)
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -337,12 +355,12 @@ Assign a mapping rule to a tenant
 **Assign a mapping rule to a tenant:**
 
 ```python
-def assign_mapping_rule_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_mapping_rule_to_tenant_example(tenant_id: TenantId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.assign_mapping_rule_to_tenant(
         tenant_id=tenant_id,
-        mapping_rule_id="rule-123",
+        mapping_rule_id=mapping_rule_id,
     )
 ```
 
@@ -359,8 +377,17 @@ Assign a role to a client
 this role.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **client_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **client_id** (_str_) –
+
+    The unique identifier of an OAuth client.
+    Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+    with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+    Okta). In Self-Managed with Basic authentication, machine-to-machine
+    applications are modelled as users instead — see the user identifier.
+
+    > Example: my-application.
+
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -381,12 +408,12 @@ this role.
 **Assign a role to a client:**
 
 ```python
-def assign_role_to_client_example() -> None:
+def assign_role_to_client_example(role_id: RoleId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_client(
-        role_id="developer",
-        client_id="my-service-account",
+        role_id=role_id,
+        client_id=client_id,
     )
 ```
 
@@ -403,8 +430,8 @@ Assign a role to a group
 authorizations associated with this role.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **group_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -425,12 +452,12 @@ authorizations associated with this role.
 **Assign a role to a group:**
 
 ```python
-def assign_role_to_group_example() -> None:
+def assign_role_to_group_example(role_id: RoleId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_group(
-        role_id="developer",
-        group_id="engineering",
+        role_id=role_id,
+        group_id=group_id,
     )
 ```
 
@@ -445,8 +472,8 @@ Assign a role to a mapping rule
 > Assigns a role to a mapping rule.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **mapping_rule_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -467,12 +494,12 @@ Assign a role to a mapping rule
 **Assign a role to a mapping rule:**
 
 ```python
-def assign_role_to_mapping_rule_example() -> None:
+def assign_role_to_mapping_rule_example(role_id: RoleId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_mapping_rule(
-        role_id="developer",
-        mapping_rule_id="rule-123",
+        role_id=role_id,
+        mapping_rule_id=mapping_rule_id,
     )
 ```
 
@@ -491,7 +518,7 @@ perform actions according to their authorizations.
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -511,12 +538,12 @@ perform actions according to their authorizations.
 **Assign a role to a tenant:**
 
 ```python
-def assign_role_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_role_to_tenant_example(tenant_id: TenantId, role_id: RoleId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_tenant(
         tenant_id=tenant_id,
-        role_id="developer",
+        role_id=role_id,
     )
 ```
 
@@ -533,7 +560,7 @@ Assign a role to a user
 this role.
 
 - **Parameters:**
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **username** (_str_) – The unique name of a user. Example: swillis.
   - **kwargs** (_Any_)
 - **Raises:**
@@ -555,11 +582,11 @@ this role.
 **Assign a role to a user:**
 
 ```python
-def assign_role_to_user_example(username: Username) -> None:
+def assign_role_to_user_example(role_id: RoleId, username: Username) -> None:
     client = CamundaClient()
 
     client.assign_role_to_user(
-        role_id="developer",
+        role_id=role_id,
         username=username,
     )
 ```
@@ -626,7 +653,7 @@ Assign a user to a group
 Group members inherit the group authorizations, roles, and tenant assignments.
 
 - **Parameters:**
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **username** (_str_) – The unique name of a user. Example: swillis.
   - **kwargs** (_Any_)
 - **Raises:**
@@ -648,11 +675,11 @@ Group members inherit the group authorizations, roles, and tenant assignments.
 **Assign a user to a group:**
 
 ```python
-def assign_user_to_group_example(username: Username) -> None:
+def assign_user_to_group_example(group_id: GroupId, username: Username) -> None:
     client = CamundaClient()
 
     client.assign_user_to_group(
-        group_id="engineering",
+        group_id=group_id,
         username=username,
     )
 ```
@@ -809,8 +836,8 @@ worker availability and logs when this repeats.
 
 - **Parameters:**
   - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **body** (_CancelProcessInstanceData_ _|_ _None_ _|_ _Unset_)
-  - **data** (_CancelProcessInstanceData_ _|_ _None_ _|_ _Unset_)
+  - **body** (_CancelProcessInstanceRequest_ _|_ _None_ _|_ _Unset_)
+  - **data** (_CancelProcessInstanceRequest_ _|_ _None_ _|_ _Unset_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -1072,6 +1099,7 @@ managed in the Orchestration Cluster and while no user is assigned to the admin 
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. A user with this username already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -1099,6 +1127,119 @@ def create_admin_user_example(username: Username) -> None:
     )
 
     print(f"Admin user: {result.username}")
+```
+
+### create_agent_instance()
+
+```python
+async def create_agent_instance(, data, **kwargs)
+```
+
+Create agent instance
+
+> Creates a new agent instance. The returned key identifies the instance and must
+
+be used in subsequent update and query calls.
+
+- **Parameters:**
+  - **body** (_AgentInstanceCreationRequest_) – Request to create a new agent instance.
+  - **data** (_AgentInstanceCreationRequest_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The elementInstanceKey does not correspond to an active element instance. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  AgentInstanceCreationResult
+- **Return type:**
+  AgentInstanceCreationResult
+
+#### Examples
+
+**Create an agent instance:**
+
+```python
+def create_agent_instance_example(element_instance_key: ElementInstanceKey) -> None:
+    client = CamundaClient()
+
+    result = client.create_agent_instance(
+        data=AgentInstanceCreationRequest(
+            element_instance_key=element_instance_key,
+            definition=AgentInstanceCreationRequestDefinition(
+                model="gpt-4o",
+                provider="openai",
+                system_prompt="You are a helpful assistant.",
+            ),
+        ),
+    )
+
+    print(f"Created agent instance: {result.agent_instance_key}")
+```
+
+### create_agent_instance_history_item()
+
+```python
+async def create_agent_instance_history_item(agent_instance_key, , data, **kwargs)
+```
+
+Create agent instance history item
+
+> Appends a single history item to an agent instance’s conversation history.
+
+The created item has commitStatus PENDING until the job identified by jobLease
+completes successfully, at which point it transitions to COMMITTED. If the job
+fails or is superseded by a retry, the item is marked DISCARDED.
+
+- **Parameters:**
+  - **agent_instance_key** (_str_) – System-generated key for an agent instance. Example: 4503599627370496.
+  - **body** (_AgentInstanceHistoryItemRequest_) – Request to append a single history item to an
+    agent instance’s conversation history.
+  - **data** (_AgentInstanceHistoryItemRequest_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The agent instance with the given key was not found, or the specified jobKey does not correspond to an active job. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  AgentInstanceHistoryItemCreationResult
+- **Return type:**
+  AgentInstanceHistoryItemCreationResult
+
+#### Examples
+
+**Append an agent instance history item:**
+
+```python
+def create_agent_instance_history_item_example(
+    agent_instance_key: AgentInstanceKey,
+    element_instance_key: ElementInstanceKey,
+    job_key: JobKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.create_agent_instance_history_item(
+        agent_instance_key=agent_instance_key,
+        data=AgentInstanceHistoryItemRequest(
+            element_instance_key=element_instance_key,
+            job_key=job_key,
+            job_lease="lease-token",
+            role=AgentInstanceHistoryItemRequestRole.ASSISTANT,
+            content=[TextContent(content_type="TEXT", text="How can I help you today?")],
+            produced_at=datetime.datetime.now(datetime.timezone.utc),
+        ),
+    )
+
+    print(f"Created history item: {result.history_item_key}")
 ```
 
 ### create_authorization()
@@ -1161,8 +1302,11 @@ async def create_deployment(, data, **kwargs)
 
 Deploy resources
 
-> Deploys one or more resources (e.g. processes, decision models, or forms).
+> Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources,
 
+and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA
+resources are stored as deployable generic resources in the engine.
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
 - **Parameters:**
@@ -1225,7 +1369,7 @@ Upload document
 
 > Upload a document to the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-
 production), local (non-production)
 
 - **Parameters:**
@@ -1273,7 +1417,7 @@ Create document link
 
 > Create a link to a document in the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP
+Note that this is currently supported for document stores of type: AWS, Azure, GCP
 
 - **Parameters:**
   - **document_id** (_str_) – Document Id that uniquely identifies a document.
@@ -1335,7 +1479,7 @@ each of which contains the file name of the document that failed to upload and t
 failure.
 The client can choose to retry the whole batch or individual documents based on the response.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-
 production), local (non-production)
 
 - **Parameters:**
@@ -1416,7 +1560,9 @@ repeats.
 **Create element instance variables:**
 
 ```python
-def create_element_instance_variables_example(element_instance_key: ElementInstanceKey) -> None:
+def create_element_instance_variables_example(
+    element_instance_key: ElementInstanceKey,
+) -> None:
     client = CamundaClient()
 
     variables = SetVariableRequestVariables.from_dict({"myVar": "myValue"})
@@ -1446,6 +1592,7 @@ Create a global-scoped cluster variable
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. A cluster variable with this name already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
@@ -1459,12 +1606,12 @@ Create a global-scoped cluster variable
 **Create a global cluster variable:**
 
 ```python
-def create_global_cluster_variable_example() -> None:
+def create_global_cluster_variable_example(name: ClusterVariableName) -> None:
     client = CamundaClient()
 
     result = client.create_global_cluster_variable(
         data=CreateClusterVariableRequest(
-            name="my-variable",
+            name=name,
             value=CreateClusterVariableRequestValue.from_dict({"key": "my-value"}),
         ),
     )
@@ -1529,6 +1676,21 @@ Create group
 
 > Create a new group.
 
+The supplied groupId is validated against ^[a-zA-Z0-9_~@.+-]+$
+(max 256 characters) by IdentifierValidator.validateId in the
+runtime. This strict validation applies wherever the Groups API
+is available: in OIDC deployments that set
+camunda.security.authentication.oidc.groupsClaim the Groups
+API (including this endpoint) is disabled entirely, so group
+CRUD never sees externally-minted IdP IDs. The BYOG relaxation
+only loosens validation when a group is referenced _as a member_
+of a role or tenant (assignRoleToGroup,
+assignGroupToTenant); group CRUD itself always uses the strict
+default-id regex. The constraint is not advertised on the
+GroupId schema so that the same schema can be reused at
+member-reference sites without falsely rejecting
+externally-minted IdP group IDs there.
+
 - **Parameters:**
   - **body** (_GroupCreateRequest_ _|_ _Unset_)
   - **data** (_GroupCreateRequest_ _|_ _Unset_)
@@ -1537,6 +1699,7 @@ Create group
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. Group with this id already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -1551,11 +1714,11 @@ Create group
 **Create a group:**
 
 ```python
-def create_group_example() -> None:
+def create_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.create_group(
-        data=GroupCreateRequest(group_id="engineering", name="Engineering"),
+        data=GroupCreateRequest(group_id=group_id, name="Engineering"),
     )
 
     print(f"Group: {result.group_id}")
@@ -1567,7 +1730,7 @@ def create_group_example() -> None:
 
 - **Parameters:**
   - **config** ([_WorkerConfig_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.WorkerConfig))
-  - **callback** (_Callable_ _[_ _[_[_ConnectedJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext) _]_ _,_ _Coroutine_ _[\*\*Any_ _,_ _Any_ _,_ _dict_ _[\*\*str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_SyncJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.SyncJobContext) _]_ _,_ _dict_ _[\*\*str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _Coroutine_ _[\*\*Any_ _,_ _Any_ _,_ _dict_ _[\*\*str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _dict_ _[\*\*str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_)
+  - **callback** (_Callable_ _[_ _[_[_ConnectedJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext) _]_ _,_ _Coroutine_ _[__Any_ _,_ _Any_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_SyncJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.SyncJobContext) _]_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _Coroutine_ _[__Any_ _,_ _Any_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_)
   - **auto_start** (_bool_)
   - **execution_strategy** (_Literal_ _[_ _'auto'_ _,_ _'async'_ _,_ _'thread'_ _,_ _'process'_ _]_)
   - **startup_jitter_max_seconds** (_float_ _|_ _None_)
@@ -1592,25 +1755,26 @@ Create mapping rule
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. The request to create a mapping rule was denied. More details are provided in the response body.
   - **errors.NotFoundError** – If the response status code is 404. The request to create a mapping rule was denied.
+  - **errors.ConflictError** – If the response status code is 409. Mapping rule with this id already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  CreateMappingRuleResponse201
+  MappingRuleCreateResult
 - **Return type:**
-  CreateMappingRuleResponse201
+  MappingRuleCreateResult
 
 #### Examples
 
 **Create a mapping rule:**
 
 ```python
-def create_mapping_rule_example() -> None:
+def create_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     result = client.create_mapping_rule(
         data=MappingRuleCreateRequest(
-            mapping_rule_id="engineering-group-mapping",
+            mapping_rule_id=mapping_rule_id,
             claim_name="groups",
             claim_value="engineering",
             name="Engineering Group Mapping",
@@ -1728,6 +1892,7 @@ Create role
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. Role with this id already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -1742,11 +1907,11 @@ Create role
 **Create a role:**
 
 ```python
-def create_role_example() -> None:
+def create_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.create_role(
-        data=RoleCreateRequest(role_id="developer", name="Developer"),
+        data=RoleCreateRequest(role_id=role_id, name="Developer"),
     )
 
     print(f"Role: {result.role_id}")
@@ -1817,6 +1982,8 @@ Create a tenant-scoped cluster variable
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The tenant with the given ID was not found.
+  - **errors.ConflictError** – If the response status code is 409. A cluster variable with this name already exists for the given tenant.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
@@ -1830,13 +1997,13 @@ Create a tenant-scoped cluster variable
 **Create a tenant cluster variable:**
 
 ```python
-def create_tenant_cluster_variable_example(tenant_id: TenantId) -> None:
+def create_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
     client = CamundaClient()
 
     result = client.create_tenant_cluster_variable(
         tenant_id=tenant_id,
         data=CreateClusterVariableRequest(
-            name="my-variable",
+            name=name,
             value=CreateClusterVariableRequestValue.from_dict({"key": "tenant-value"}),
         ),
     )
@@ -1942,8 +2109,8 @@ Delete decision instance
 
 - **Parameters:**
   - **decision_evaluation_key** (_str_) – System-generated key for a decision evaluation. Example: 2251792362345323.
-  - **body** (_DeleteDecisionInstanceData_ _|_ _None_ _|_ _Unset_)
-  - **data** (_DeleteDecisionInstanceData_ _|_ _None_ _|_ _Unset_)
+  - **body** (_DeleteDecisionInstanceRequest_ _|_ _None_ _|_ _Unset_)
+  - **data** (_DeleteDecisionInstanceRequest_ _|_ _None_ _|_ _Unset_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -2028,7 +2195,7 @@ Delete document
 
 > Delete a document from the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-
 production), local (non-production)
 
 - **Parameters:**
@@ -2067,7 +2234,8 @@ Delete a global-scoped cluster variable
 > Delete a global-scoped cluster variable.
 
 - **Parameters:**
-  - **name** (_str_)
+  - **name** (_str_) – The name of a cluster variable. Unique within its scope (global or tenant-
+    specific). Example: feature-flag-checkout.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -2087,10 +2255,10 @@ Delete a global-scoped cluster variable
 **Delete a global cluster variable:**
 
 ```python
-def delete_global_cluster_variable_example() -> None:
+def delete_global_cluster_variable_example(name: ClusterVariableName) -> None:
     client = CamundaClient()
 
-    client.delete_global_cluster_variable(name="my-variable")
+    client.delete_global_cluster_variable(name=name)
 ```
 
 ### delete_global_task_listener()
@@ -2142,7 +2310,7 @@ Delete group
 > Deletes the group with the given ID.
 
 - **Parameters:**
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -2161,10 +2329,10 @@ Delete group
 **Delete a group:**
 
 ```python
-def delete_group_example() -> None:
+def delete_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
-    client.delete_group(group_id="engineering")
+    client.delete_group(group_id=group_id)
 ```
 
 ### delete_mapping_rule()
@@ -2178,7 +2346,7 @@ Delete a mapping rule
 > Deletes the mapping rule with the given ID.
 
 - **Parameters:**
-  - **mapping_rule_id** (_str_)
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -2197,10 +2365,10 @@ Delete a mapping rule
 **Delete a mapping rule:**
 
 ```python
-def delete_mapping_rule_example() -> None:
+def delete_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
-    client.delete_mapping_rule(mapping_rule_id="rule-123")
+    client.delete_mapping_rule(mapping_rule_id=mapping_rule_id)
 ```
 
 ### delete_process_instance()
@@ -2215,8 +2383,8 @@ Delete process instance
 
 - **Parameters:**
   - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
-  - **body** (_DeleteProcessInstanceData_ _|_ _None_ _|_ _Unset_)
-  - **data** (_DeleteProcessInstanceData_ _|_ _None_ _|_ _Unset_)
+  - **body** (_DeleteProcessInstanceRequest_ _|_ _None_ _|_ _Unset_)
+  - **data** (_DeleteProcessInstanceRequest_ _|_ _None_ _|_ _Unset_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -2356,7 +2524,7 @@ Delete role
 > Deletes the role with the given ID.
 
 - **Parameters:**
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -2375,10 +2543,10 @@ Delete role
 **Delete a role:**
 
 ```python
-def delete_role_example() -> None:
+def delete_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
-    client.delete_role(role_id="developer")
+    client.delete_role(role_id=role_id)
 ```
 
 ### delete_tenant()
@@ -2430,7 +2598,8 @@ Delete a tenant-scoped cluster variable
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **name** (_str_)
+  - **name** (_str_) – The name of a cluster variable. Unique within its scope (global or tenant-
+    specific). Example: feature-flag-checkout.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -2450,12 +2619,12 @@ Delete a tenant-scoped cluster variable
 **Delete a tenant cluster variable:**
 
 ```python
-def delete_tenant_cluster_variable_example(tenant_id: TenantId) -> None:
+def delete_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
     client = CamundaClient()
 
     client.delete_tenant_cluster_variable(
         tenant_id=tenant_id,
-        name="my-variable",
+        name=name,
     )
 ```
 
@@ -2513,7 +2682,7 @@ Note: file reads are currently performed using blocking I/O (`open(...).read()`)
 need fully non-blocking file access, load the bytes yourself and call [`create_deployment()`](#create_deployment).
 
 - **Parameters:**
-  - **files** (_list_ _[\*\*str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
+  - **files** (_list_ _[__str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
   - **tenant_id** (_str_ _|_ _None_) – Optional tenant identifier. If not provided, the default tenant is used.
 - **Returns:**
   The deployment result with extracted resource lists.
@@ -2646,9 +2815,11 @@ async def evaluate_expression(, data, **kwargs)
 
 Evaluate an expression
 
-> Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster
+> Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
 
-variables when a tenant ID is provided.
+cluster variables when a tenant ID is provided. Optionally, provide a scopeKey to make the
+variables of a specific process instance or element instance visible while evaluating the
+expression.
 
 - **Parameters:**
   - **body** (_ExpressionEvaluationRequest_)
@@ -2729,10 +2900,51 @@ def fail_job_example(job_key: JobKey) -> None:
     )
 ```
 
+### get_agent_instance()
+
+```python
+async def get_agent_instance(agent_instance_key, , consistency=None, **kwargs)
+```
+
+Get agent instance
+
+> Returns agent instance as JSON.
+
+- **Parameters:**
+  - **agent_instance_key** (_str_) – System-generated key for an agent instance. Example: 4503599627370496.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The agent instance with the given key was not found. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  AgentInstanceResult
+- **Return type:**
+  AgentInstanceResult
+
+#### Examples
+
+**Get an agent instance:**
+
+```python
+def get_agent_instance_example(agent_instance_key: AgentInstanceKey) -> None:
+    client = CamundaClient()
+
+    agent_instance = client.get_agent_instance(agent_instance_key=agent_instance_key)
+
+    print(f"Agent instance status: {agent_instance.status}")
+```
+
 ### get_audit_log()
 
 ```python
-async def get_audit_log(audit_log_key, **kwargs)
+async def get_audit_log(audit_log_key, , consistency=None, **kwargs)
 ```
 
 Get audit log
@@ -2741,6 +2953,7 @@ Get audit log
 
 - **Parameters:**
   - **audit_log_key** (_str_) – System-generated key for an audit log entry. Example: 22517998136843567.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -2806,7 +3019,7 @@ def get_authentication_example() -> None:
 ### get_authorization()
 
 ```python
-async def get_authorization(authorization_key, **kwargs)
+async def get_authorization(authorization_key, , consistency=None, **kwargs)
 ```
 
 Get authorization
@@ -2815,6 +3028,7 @@ Get authorization
 
 - **Parameters:**
   - **authorization_key** (_str_) – System-generated key for an authorization. Example: 2251799813684332.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -2846,7 +3060,7 @@ def get_authorization_example(authorization_key: AuthorizationKey) -> None:
 ### get_batch_operation()
 
 ```python
-async def get_batch_operation(batch_operation_key, **kwargs)
+async def get_batch_operation(batch_operation_key, , consistency=None, **kwargs)
 ```
 
 Get batch operation
@@ -2855,6 +3069,7 @@ Get batch operation
 
 - **Parameters:**
   - **batch_operation_key** (_str_) – System-generated key for an batch operation. Example: 2251799813684321.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -2885,7 +3100,7 @@ def get_batch_operation_example(batch_operation_key: BatchOperationKey) -> None:
 ### get_decision_definition()
 
 ```python
-async def get_decision_definition(decision_definition_key, **kwargs)
+async def get_decision_definition(decision_definition_key, , consistency=None, **kwargs)
 ```
 
 Get decision definition
@@ -2894,6 +3109,7 @@ Get decision definition
 
 - **Parameters:**
   - **decision_definition_key** (_str_) – System-generated key for a decision definition. Example: 2251799813326547.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -2926,7 +3142,7 @@ def get_decision_definition_example(decision_definition_key: DecisionDefinitionK
 ### get_decision_definition_xml()
 
 ```python
-async def get_decision_definition_xml(decision_definition_key, **kwargs)
+async def get_decision_definition_xml(decision_definition_key, , consistency=None, **kwargs)
 ```
 
 Get decision definition XML
@@ -2935,6 +3151,7 @@ Get decision definition XML
 
 - **Parameters:**
   - **decision_definition_key** (_str_) – System-generated key for a decision definition. Example: 2251799813326547.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -2967,7 +3184,7 @@ def get_decision_definition_xml_example(decision_definition_key: DecisionDefinit
 ### get_decision_instance()
 
 ```python
-async def get_decision_instance(decision_evaluation_instance_key, **kwargs)
+async def get_decision_instance(decision_evaluation_instance_key, , consistency=None, **kwargs)
 ```
 
 Get decision instance
@@ -2975,8 +3192,16 @@ Get decision instance
 > Returns a decision instance.
 
 - **Parameters:**
-  - **decision_evaluation_instance_key** (_str_) – System-generated key for a decision evaluation
-    instance. Example: 2251799813684367.
+  - **decision_evaluation_instance_key** (_str_) –
+
+    System-generated identifier for a decision
+    evaluation instance. It is composed of the
+    parent decision evaluation key and the 1-based index of the evaluated decision within
+    that evaluation, joined by a hyphen (format: <decisionEvaluationKey>-<index>).
+
+    > Example: 2251799813684367-1.
+
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3009,7 +3234,7 @@ def get_decision_instance_example(decision_evaluation_instance_key: DecisionEval
 ### get_decision_requirements()
 
 ```python
-async def get_decision_requirements(decision_requirements_key, **kwargs)
+async def get_decision_requirements(decision_requirements_key, , consistency=None, **kwargs)
 ```
 
 Get decision requirements
@@ -3019,6 +3244,7 @@ Get decision requirements
 - **Parameters:**
   - **decision_requirements_key** (_str_) – System-generated key for a deployed decision requirements
     definition. Example: 2251799813683346.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3051,7 +3277,7 @@ def get_decision_requirements_example(decision_requirements_key: DecisionRequire
 ### get_decision_requirements_xml()
 
 ```python
-async def get_decision_requirements_xml(decision_requirements_key, **kwargs)
+async def get_decision_requirements_xml(decision_requirements_key, , consistency=None, **kwargs)
 ```
 
 Get decision requirements XML
@@ -3061,6 +3287,7 @@ Get decision requirements XML
 - **Parameters:**
   - **decision_requirements_key** (_str_) – System-generated key for a deployed decision requirements
     definition. Example: 2251799813683346.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3100,7 +3327,7 @@ Download document
 
 > Download a document from the Camunda 8 cluster.
 
-Note that this is currently supported for document stores of type: AWS, GCP, in-memory (non-
+Note that this is currently supported for document stores of type: AWS, Azure, GCP, in-memory (non-
 production), local (non-production)
 
 - **Parameters:**
@@ -3134,7 +3361,7 @@ def get_document_example(document_id: DocumentId) -> None:
 ### get_element_instance()
 
 ```python
-async def get_element_instance(element_instance_key, **kwargs)
+async def get_element_instance(element_instance_key, , consistency=None, **kwargs)
 ```
 
 Get element instance
@@ -3143,6 +3370,7 @@ Get element instance
 
 - **Parameters:**
   - **element_instance_key** (_str_) – System-generated key for a element instance. Example: 2251799813686789.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3172,10 +3400,50 @@ def get_element_instance_example(element_instance_key: ElementInstanceKey) -> No
     print(f"Element: {result.element_id}")
 ```
 
+### get_form_by_key()
+
+```python
+async def get_form_by_key(form_key, , consistency=None, **kwargs)
+```
+
+Get form by key
+
+> Get a form by its unique form key.
+
+- **Parameters:**
+  - **form_key** (_str_) – System-generated key for a deployed form. Example: 2251799813684365.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The form with the given key was not found.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  FormResult
+- **Return type:**
+  FormResult
+
+#### Examples
+
+**Get a form by key:**
+
+```python
+def get_form_by_key_example(form_key: FormKey) -> None:
+    client = CamundaClient()
+
+    result = client.get_form_by_key(form_key=form_key)
+
+    print(f"Form: {result.form_id}")
+```
+
 ### get_global_cluster_variable()
 
 ```python
-async def get_global_cluster_variable(name, **kwargs)
+async def get_global_cluster_variable(name, , consistency=None, **kwargs)
 ```
 
 Get a global-scoped cluster variable
@@ -3183,7 +3451,9 @@ Get a global-scoped cluster variable
 > Get a global-scoped cluster variable.
 
 - **Parameters:**
-  - **name** (_str_)
+  - **name** (_str_) – The name of a cluster variable. Unique within its scope (global or tenant-
+    specific). Example: feature-flag-checkout.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3203,10 +3473,10 @@ Get a global-scoped cluster variable
 **Get a global cluster variable:**
 
 ```python
-def get_global_cluster_variable_example() -> None:
+def get_global_cluster_variable_example(name: ClusterVariableName) -> None:
     client = CamundaClient()
 
-    result = client.get_global_cluster_variable(name="my-variable")
+    result = client.get_global_cluster_variable(name=name)
 
     print(f"Variable: {result.name} = {result.value}")
 ```
@@ -3214,7 +3484,7 @@ def get_global_cluster_variable_example() -> None:
 ### get_global_job_statistics()
 
 ```python
-async def get_global_job_statistics(*, from_, to, job_type=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def get_global_job_statistics(*, from_, to, job_type=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Global job statistics
@@ -3227,7 +3497,8 @@ optionally by jobType.
   - **from** (_datetime.datetime_)
   - **to** (_datetime.datetime_)
   - **job_type** (_str_ _|_ _Unset_)
-  - **from\_** (_datetime.datetime_)
+  - **from_** (_datetime.datetime_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3260,7 +3531,7 @@ def get_global_job_statistics_example() -> None:
 ### get_global_task_listener()
 
 ```python
-async def get_global_task_listener(id, **kwargs)
+async def get_global_task_listener(id, , consistency=None, **kwargs)
 ```
 
 Get global user task listener
@@ -3269,6 +3540,7 @@ Get global user task listener
 
 - **Parameters:**
   - **id** (_str_) – The user-defined id for the global listener Example: GlobalListener_1.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3298,7 +3570,7 @@ def get_global_task_listener_example(listener_id: GlobalListenerId) -> None:
 ### get_group()
 
 ```python
-async def get_group(group_id, **kwargs)
+async def get_group(group_id, , consistency=None, **kwargs)
 ```
 
 Get group
@@ -3306,7 +3578,8 @@ Get group
 > Get a group by its ID.
 
 - **Parameters:**
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3325,10 +3598,10 @@ Get group
 **Get a group:**
 
 ```python
-def get_group_example() -> None:
+def get_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
-    result = client.get_group(group_id="engineering")
+    result = client.get_group(group_id=group_id)
 
     print(f"Group: {result.name}")
 ```
@@ -3336,7 +3609,7 @@ def get_group_example() -> None:
 ### get_incident()
 
 ```python
-async def get_incident(incident_key, **kwargs)
+async def get_incident(incident_key, , consistency=None, **kwargs)
 ```
 
 Get incident
@@ -3345,6 +3618,7 @@ Get incident
 
 - **Parameters:**
   - **incident_key** (_str_) – System-generated key for a incident. Example: 2251799813689432.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3375,7 +3649,7 @@ def get_incident_example(incident_key: IncidentKey) -> None:
 ### get_job_error_statistics()
 
 ```python
-async def get_job_error_statistics(, data, **kwargs)
+async def get_job_error_statistics(, data, consistency=None, **kwargs)
 ```
 
 Get error metrics for a job type
@@ -3385,6 +3659,7 @@ Get error metrics for a job type
 - **Parameters:**
   - **body** (_JobErrorStatisticsQuery_) – Job error statistics query.
   - **data** (_JobErrorStatisticsQuery_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3424,7 +3699,7 @@ def get_job_error_statistics_example() -> None:
 ### get_job_time_series_statistics()
 
 ```python
-async def get_job_time_series_statistics(, data, **kwargs)
+async def get_job_time_series_statistics(, data, consistency=None, **kwargs)
 ```
 
 Get time-series metrics for a job type
@@ -3437,6 +3712,7 @@ Each item in the response corresponds to one time bucket of the requested resolu
 - **Parameters:**
   - **body** (_JobTimeSeriesStatisticsQuery_) – Job time-series statistics query.
   - **data** (_JobTimeSeriesStatisticsQuery_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3476,7 +3752,7 @@ def get_job_time_series_statistics_example() -> None:
 ### get_job_type_statistics()
 
 ```python
-async def get_job_type_statistics(, data, **kwargs)
+async def get_job_type_statistics(, data, consistency=None, **kwargs)
 ```
 
 Get job statistics by type
@@ -3486,6 +3762,7 @@ Get job statistics by type
 - **Parameters:**
   - **body** (_JobTypeStatisticsQuery_) – Job type statistics query.
   - **data** (_JobTypeStatisticsQuery_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3519,7 +3796,7 @@ def get_job_type_statistics_example() -> None:
 ### get_job_worker_statistics()
 
 ```python
-async def get_job_worker_statistics(, data, **kwargs)
+async def get_job_worker_statistics(, data, consistency=None, **kwargs)
 ```
 
 Get job statistics by worker
@@ -3529,6 +3806,7 @@ Get job statistics by worker
 - **Parameters:**
   - **body** (_JobWorkerStatisticsQuery_) – Job worker statistics query.
   - **data** (_JobWorkerStatisticsQuery_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3602,7 +3880,7 @@ def get_license_example() -> None:
 ### get_mapping_rule()
 
 ```python
-async def get_mapping_rule(mapping_rule_id, **kwargs)
+async def get_mapping_rule(mapping_rule_id, , consistency=None, **kwargs)
 ```
 
 Get a mapping rule
@@ -3610,7 +3888,8 @@ Get a mapping rule
 > Gets the mapping rule with the given ID.
 
 - **Parameters:**
-  - **mapping_rule_id** (_str_)
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3628,10 +3907,10 @@ Get a mapping rule
 **Get a mapping rule:**
 
 ```python
-def get_mapping_rule_example() -> None:
+def get_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
-    result = client.get_mapping_rule(mapping_rule_id="rule-123")
+    result = client.get_mapping_rule(mapping_rule_id=mapping_rule_id)
 
     print(f"Mapping rule: {result.name}")
 ```
@@ -3639,7 +3918,7 @@ def get_mapping_rule_example() -> None:
 ### get_process_definition()
 
 ```python
-async def get_process_definition(process_definition_key, **kwargs)
+async def get_process_definition(process_definition_key, , consistency=None, **kwargs)
 ```
 
 Get process definition
@@ -3649,6 +3928,7 @@ Get process definition
 - **Parameters:**
   - **process_definition_key** (_str_) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3668,7 +3948,9 @@ Get process definition
 **Get a process definition:**
 
 ```python
-def get_process_definition_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition(
@@ -3681,7 +3963,7 @@ def get_process_definition_example(process_definition_key: ProcessDefinitionKey)
 ### get_process_definition_instance_statistics()
 
 ```python
-async def get_process_definition_instance_statistics(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def get_process_definition_instance_statistics(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Get process instance statistics
@@ -3691,6 +3973,7 @@ Get process instance statistics
 - **Parameters:**
   - **body** (_ProcessDefinitionInstanceStatisticsQuery_ _|_ _Unset_)
   - **data** (_ProcessDefinitionInstanceStatisticsQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3724,7 +4007,7 @@ def get_process_definition_instance_statistics_example() -> None:
 ### get_process_definition_instance_version_statistics()
 
 ```python
-async def get_process_definition_instance_version_statistics(, data, **kwargs)
+async def get_process_definition_instance_version_statistics(, data, consistency=None, **kwargs)
 ```
 
 Get process instance statistics by version
@@ -3736,6 +4019,7 @@ The process definition ID must be provided as a required field in the request bo
 - **Parameters:**
   - **body** (_ProcessDefinitionInstanceVersionStatisticsQuery_)
   - **data** (_ProcessDefinitionInstanceVersionStatisticsQuery_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3754,7 +4038,9 @@ The process definition ID must be provided as a required field in the request bo
 **Get version statistics:**
 
 ```python
-def get_process_definition_instance_version_statistics_example(process_definition_id: ProcessDefinitionId) -> None:
+def get_process_definition_instance_version_statistics_example(
+    process_definition_id: ProcessDefinitionId,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition_instance_version_statistics(
@@ -3773,7 +4059,7 @@ def get_process_definition_instance_version_statistics_example(process_definitio
 ### get_process_definition_message_subscription_statistics()
 
 ```python
-async def get_process_definition_message_subscription_statistics(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def get_process_definition_message_subscription_statistics(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Get message subscription statistics
@@ -3783,6 +4069,7 @@ Get message subscription statistics
 - **Parameters:**
   - **body** (_ProcessDefinitionMessageSubscriptionStatisticsQuery_ _|_ _Unset_)
   - **data** (_ProcessDefinitionMessageSubscriptionStatisticsQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3810,13 +4097,15 @@ def get_process_definition_message_subscription_statistics_example() -> None:
 
     if not isinstance(result.items, Unset):
         for stat in result.items:
-            print(f"Definition: {stat.process_definition_id}, subscriptions: {stat.active_subscriptions}")
+            print(
+                f"Definition: {stat.process_definition_id}, subscriptions: {stat.active_subscriptions}"
+            )
 ```
 
 ### get_process_definition_statistics()
 
 ```python
-async def get_process_definition_statistics(process_definition_key, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def get_process_definition_statistics(process_definition_key, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Get process definition statistics
@@ -3831,6 +4120,7 @@ search filter.
   - **body** (_ProcessDefinitionElementStatisticsQuery_ _|_ _Unset_) – Process definition element
     statistics request.
   - **data** (_ProcessDefinitionElementStatisticsQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3849,7 +4139,9 @@ search filter.
 **Get process definition element statistics:**
 
 ```python
-def get_process_definition_statistics_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_statistics_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition_statistics(
@@ -3864,7 +4156,7 @@ def get_process_definition_statistics_example(process_definition_key: ProcessDef
 ### get_process_definition_xml()
 
 ```python
-async def get_process_definition_xml(process_definition_key, **kwargs)
+async def get_process_definition_xml(process_definition_key, , consistency=None, **kwargs)
 ```
 
 Get process definition XML
@@ -3874,6 +4166,7 @@ Get process definition XML
 - **Parameters:**
   - **process_definition_key** (_str_) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3893,7 +4186,9 @@ Get process definition XML
 **Get process definition XML:**
 
 ```python
-def get_process_definition_xml_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_xml_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     xml = client.get_process_definition_xml(
@@ -3906,7 +4201,7 @@ def get_process_definition_xml_example(process_definition_key: ProcessDefinition
 ### get_process_instance()
 
 ```python
-async def get_process_instance(process_instance_key, **kwargs)
+async def get_process_instance(process_instance_key, , consistency=None, **kwargs)
 ```
 
 Get process instance
@@ -3915,6 +4210,7 @@ Get process instance
 
 - **Parameters:**
   - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3947,7 +4243,7 @@ def get_process_instance_example(process_instance_key: ProcessInstanceKey) -> No
 ### get_process_instance_call_hierarchy()
 
 ```python
-async def get_process_instance_call_hierarchy(process_instance_key, **kwargs)
+async def get_process_instance_call_hierarchy(process_instance_key, , consistency=None, **kwargs)
 ```
 
 Get call hierarchy
@@ -3958,6 +4254,7 @@ instance.
 
 - **Parameters:**
   - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -3977,7 +4274,9 @@ instance.
 **Get process instance call hierarchy:**
 
 ```python
-def get_process_instance_call_hierarchy_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_call_hierarchy_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_call_hierarchy(
@@ -3991,7 +4290,7 @@ def get_process_instance_call_hierarchy_example(process_instance_key: ProcessIns
 ### get_process_instance_sequence_flows()
 
 ```python
-async def get_process_instance_sequence_flows(process_instance_key, **kwargs)
+async def get_process_instance_sequence_flows(process_instance_key, , consistency=None, **kwargs)
 ```
 
 Get sequence flows
@@ -4000,6 +4299,7 @@ Get sequence flows
 
 - **Parameters:**
   - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4018,7 +4318,9 @@ Get sequence flows
 **Get process instance sequence flows:**
 
 ```python
-def get_process_instance_sequence_flows_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_sequence_flows_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_sequence_flows(
@@ -4033,7 +4335,7 @@ def get_process_instance_sequence_flows_example(process_instance_key: ProcessIns
 ### get_process_instance_statistics()
 
 ```python
-async def get_process_instance_statistics(process_instance_key, **kwargs)
+async def get_process_instance_statistics(process_instance_key, , consistency=None, **kwargs)
 ```
 
 Get element instance statistics
@@ -4042,6 +4344,7 @@ Get element instance statistics
 
 - **Parameters:**
   - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4060,7 +4363,9 @@ Get element instance statistics
 **Get process instance statistics:**
 
 ```python
-def get_process_instance_statistics_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_statistics(
@@ -4075,7 +4380,7 @@ def get_process_instance_statistics_example(process_instance_key: ProcessInstanc
 ### get_process_instance_statistics_by_definition()
 
 ```python
-async def get_process_instance_statistics_by_definition(, data, **kwargs)
+async def get_process_instance_statistics_by_definition(, data, consistency=None, **kwargs)
 ```
 
 Get process instance statistics by definition
@@ -4088,6 +4393,7 @@ provided as a filter in the request body.
 - **Parameters:**
   - **body** (_IncidentProcessInstanceStatisticsByDefinitionQuery_)
   - **data** (_IncidentProcessInstanceStatisticsByDefinitionQuery_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4125,7 +4431,7 @@ def get_process_instance_statistics_by_definition_example() -> None:
 ### get_process_instance_statistics_by_error()
 
 ```python
-async def get_process_instance_statistics_by_error(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def get_process_instance_statistics_by_error(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Get process instance statistics by error
@@ -4137,6 +4443,7 @@ grouped by incident error hash code.
 - **Parameters:**
   - **body** (_IncidentProcessInstanceStatisticsByErrorQuery_ _|_ _Unset_)
   - **data** (_IncidentProcessInstanceStatisticsByErrorQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4170,7 +4477,7 @@ def get_process_instance_statistics_by_error_example() -> None:
 ### get_resource()
 
 ```python
-async def get_resource(resource_key, **kwargs)
+async def get_resource(resource_key, , consistency=None, **kwargs)
 ```
 
 Get resource
@@ -4178,7 +4485,9 @@ Get resource
 > Returns a deployed resource.
 
 :::info
-Currently, this endpoint only supports RPA resources.
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
 :::
 
 - **resource_key**: The system-assigned key for this resource.
@@ -4194,6 +4503,7 @@ Currently, this endpoint only supports RPA resources.
   ResourceResult
 * **Parameters:**
   * **resource_key** (*str*)
+  * **consistency** (*ConsistencyOptions* *|* *None*)
   * **kwargs** (*Any*)
 * **Return type:**
   ResourceResult
@@ -4214,15 +4524,67 @@ def get_resource_example() -> None:
 ### get_resource_content()
 
 ```python
-async def get_resource_content(resource_key, **kwargs)
+async def get_resource_content(resource_key, , consistency=None, **kwargs)
 ```
 
-Get resource content
+Get RPA resource content (deprecated)
 
-> Returns the content of a deployed resource.
+> **Deprecated** — use /resources/{resourceKey}/content/binary instead, which supports all
+
+resource types and returns content as binary (octet-stream).
+
+Returns the content of a deployed RPA resource as JSON.
+:::info
+This endpoint only supports RPA resources. For generic resource content in binary format,
+use the /resources/{resourceKey}/content/binary endpoint.
+:::
+
+- **resource_key**: The system-assigned key for this resource.
+
+````
+
+* **Raises:**
+  * **errors.NotFoundError** – If the response status code is 404. A resource with the given key was not found.
+  * **errors.NotAcceptableError** – If the response status code is 406. The resource exists but is not an RPA resource.
+  * **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  GetResourceContentResponse200
+* **Parameters:**
+  * **resource_key** (*str*)
+  * **consistency** (*ConsistencyOptions* *|* *None*)
+  * **kwargs** (*Any*)
+* **Return type:**
+  GetResourceContentResponse200
+
+#### Examples
+
+**Get resource content:**
+
+```python
+def get_resource_content_example() -> None:
+    client = CamundaClient()
+
+    content = client.get_resource_content(resource_key="123456")
+
+    print(f"Content: {content}")
+````
+
+### get_resource_content_binary()
+
+```python
+async def get_resource_content_binary(resource_key, , consistency=None, **kwargs)
+```
+
+Get resource content as binary
+
+> Returns the content of a deployed resource in binary format (octet-stream).
 
 :::info
-Currently, this endpoint only supports RPA resources.
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective APIs.
 :::
 
 - **resource_key**: The system-assigned key for this resource.
@@ -4235,30 +4597,31 @@ Currently, this endpoint only supports RPA resources.
   * **errors.UnexpectedStatus** – If the response status code is not documented.
   * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 * **Returns:**
-  str
+  File
 * **Parameters:**
   * **resource_key** (*str*)
+  * **consistency** (*ConsistencyOptions* *|* *None*)
   * **kwargs** (*Any*)
 * **Return type:**
-  str
+  File
 
 #### Examples
 
-**Get resource content:**
+**Get resource content as binary:**
 
 ```python
-def get_resource_content_example() -> None:
+def get_resource_content_binary_example() -> None:
     client = CamundaClient()
 
-    content = client.get_resource_content(resource_key="123456")
+    content = client.get_resource_content_binary(resource_key="123456")
 
-    print(f"Content length: {len(content)}")
+    print(f"Binary content size: {len(content.payload.read())}")
 ````
 
 ### get_role()
 
 ```python
-async def get_role(role_id, **kwargs)
+async def get_role(role_id, , consistency=None, **kwargs)
 ```
 
 Get role
@@ -4266,7 +4629,8 @@ Get role
 > Get a role by its ID.
 
 - **Parameters:**
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -4285,10 +4649,10 @@ Get role
 **Get a role:**
 
 ```python
-def get_role_example() -> None:
+def get_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
-    result = client.get_role(role_id="developer")
+    result = client.get_role(role_id=role_id)
 
     print(f"Role: {result.name}")
 ```
@@ -4296,7 +4660,7 @@ def get_role_example() -> None:
 ### get_start_process_form()
 
 ```python
-async def get_start_process_form(process_definition_key, **kwargs)
+async def get_start_process_form(process_definition_key, , consistency=None, **kwargs)
 ```
 
 Get process start form
@@ -4309,6 +4673,7 @@ forms.
 - **Parameters:**
   - **process_definition_key** (_str_) – System-generated key for a deployed process definition.
     Example: 2251799813686749.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4328,7 +4693,9 @@ forms.
 **Get start process form:**
 
 ```python
-def get_start_process_form_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_start_process_form_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_start_process_form(
@@ -4413,7 +4780,7 @@ def get_system_configuration_example() -> None:
 ### get_tenant()
 
 ```python
-async def get_tenant(tenant_id, **kwargs)
+async def get_tenant(tenant_id, , consistency=None, **kwargs)
 ```
 
 Get tenant
@@ -4422,6 +4789,7 @@ Get tenant
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4452,7 +4820,7 @@ def get_tenant_example(tenant_id: TenantId) -> None:
 ### get_tenant_cluster_variable()
 
 ```python
-async def get_tenant_cluster_variable(tenant_id, name, **kwargs)
+async def get_tenant_cluster_variable(tenant_id, name, , consistency=None, **kwargs)
 ```
 
 Get a tenant-scoped cluster variable
@@ -4461,7 +4829,9 @@ Get a tenant-scoped cluster variable
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **name** (_str_)
+  - **name** (_str_) – The name of a cluster variable. Unique within its scope (global or tenant-
+    specific). Example: feature-flag-checkout.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4481,12 +4851,12 @@ Get a tenant-scoped cluster variable
 **Get a tenant cluster variable:**
 
 ```python
-def get_tenant_cluster_variable_example(tenant_id: TenantId) -> None:
+def get_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
     client = CamundaClient()
 
     result = client.get_tenant_cluster_variable(
         tenant_id=tenant_id,
-        name="my-variable",
+        name=name,
     )
 
     print(f"Variable: {result.name} = {result.value}")
@@ -4530,7 +4900,7 @@ def get_topology_example() -> None:
 ### get_usage_metrics()
 
 ```python
-async def get_usage_metrics(*, start_time, end_time, tenant_id=<camunda_orchestration_sdk.types.Unset object>, with_tenants=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def get_usage_metrics(*, start_time, end_time, tenant_id=<camunda_orchestration_sdk.types.Unset object>, with_tenants=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Get usage metrics
@@ -4542,6 +4912,7 @@ Get usage metrics
   - **end_time** (_datetime.datetime_) – Example: 2025-06-07T13:14:15Z.
   - **tenant_id** (_str_ _|_ _Unset_) – The unique identifier of the tenant. Example: customer-service.
   - **with_tenants** (_bool_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4574,7 +4945,7 @@ def get_usage_metrics_example() -> None:
 ### get_user()
 
 ```python
-async def get_user(username, **kwargs)
+async def get_user(username, , consistency=None, **kwargs)
 ```
 
 Get user
@@ -4583,6 +4954,7 @@ Get user
 
 - **Parameters:**
   - **username** (_str_) – The unique name of a user. Example: swillis.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -4592,9 +4964,9 @@ Get user
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  GetUserResponse200
+  UserResult
 - **Return type:**
-  GetUserResponse200
+  UserResult
 
 #### Examples
 
@@ -4612,7 +4984,7 @@ def get_user_example(username: Username) -> None:
 ### get_user_task()
 
 ```python
-async def get_user_task(user_task_key, **kwargs)
+async def get_user_task(user_task_key, , consistency=None, **kwargs)
 ```
 
 Get user task
@@ -4621,6 +4993,7 @@ Get user task
 
 - **Parameters:**
   - **user_task_key** (_str_) – System-generated key for a user task.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4651,7 +5024,7 @@ def get_user_task_example(user_task_key: UserTaskKey) -> None:
 ### get_user_task_form()
 
 ```python
-async def get_user_task_form(user_task_key, **kwargs)
+async def get_user_task_form(user_task_key, , consistency=None, **kwargs)
 ```
 
 Get user task form
@@ -4663,6 +5036,7 @@ forms.
 
 - **Parameters:**
   - **user_task_key** (_str_) – System-generated key for a user task.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4695,7 +5069,7 @@ def get_user_task_form_example(user_task_key: UserTaskKey) -> None:
 ### get_variable()
 
 ```python
-async def get_variable(variable_key, **kwargs)
+async def get_variable(variable_key, , consistency=None, **kwargs)
 ```
 
 Get variable
@@ -4708,6 +5082,7 @@ specific element instance.
 
 - **Parameters:**
   - **variable_key** (_str_) – System-generated key for a variable. Example: 2251799813683287.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -4778,7 +5153,12 @@ latest process improvements.
 **Migrate a process instance:**
 
 ```python
-def migrate_process_instance_example(process_instance_key: ProcessInstanceKey, target_process_definition_key: ProcessDefinitionKey, source_element_id: ElementId, target_element_id: ElementId) -> None:
+def migrate_process_instance_example(
+    process_instance_key: ProcessInstanceKey,
+    target_process_definition_key: ProcessDefinitionKey,
+    source_element_id: ElementId,
+    target_element_id: ElementId,
+) -> None:
     client = CamundaClient()
 
     client.migrate_process_instance(
@@ -5214,7 +5594,9 @@ Resolve related incidents
 **Resolve process instance incidents:**
 
 ```python
-def resolve_process_instance_incidents_example(process_instance_key: ProcessInstanceKey) -> None:
+def resolve_process_instance_incidents_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.resolve_process_instance_incidents(
@@ -5274,10 +5656,99 @@ def resume_batch_operation_example(batch_operation_key: BatchOperationKey) -> No
 async def run_workers()
 ```
 
+### search_agent_instance_history()
+
+```python
+async def search_agent_instance_history(agent_instance_key, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
+```
+
+Search agent instance history
+
+> Searches the conversation history of an agent instance. Committed items
+
+are returned by default.
+
+- **Parameters:**
+  - **agent_instance_key** (_str_) – System-generated key for an agent instance. Example: 4503599627370496.
+  - **body** (_AgentInstanceHistorySearchQuery_ _|_ _Unset_) – Agent instance history search request.
+  - **data** (_AgentInstanceHistorySearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The agent instance with the given key was not found. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  AgentInstanceHistorySearchQueryResult
+- **Return type:**
+  AgentInstanceHistorySearchQueryResult
+
+#### Examples
+
+**Search agent instance history:**
+
+```python
+def search_agent_instance_history_example(agent_instance_key: AgentInstanceKey) -> None:
+    client = CamundaClient()
+
+    result = client.search_agent_instance_history(
+        agent_instance_key=agent_instance_key,
+        data=AgentInstanceHistorySearchQuery(),
+    )
+
+    print(f"Found {len(result.items)} history items")
+```
+
+### search_agent_instances()
+
+```python
+async def search_agent_instances(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
+```
+
+Search agent instances
+
+> Search for agent instances based on given criteria.
+
+- **Parameters:**
+  - **body** (_AgentInstanceSearchQuery_ _|_ _Unset_) – Agent instance search request.
+  - **data** (_AgentInstanceSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  AgentInstanceSearchQueryResult
+- **Return type:**
+  AgentInstanceSearchQueryResult
+
+#### Examples
+
+**Search agent instances:**
+
+```python
+def search_agent_instances_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_agent_instances(data=AgentInstanceSearchQuery())
+
+    if not isinstance(result.items, Unset):
+        for agent_instance in result.items:
+            print(f"Agent instance key: {agent_instance.agent_instance_key}")
+```
+
 ### search_audit_logs()
 
 ```python
-async def search_audit_logs(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_audit_logs(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search audit logs
@@ -5287,6 +5758,7 @@ Search audit logs
 - **Parameters:**
   - **body** (_AuditLogSearchQueryRequest_ _|_ _Unset_) – Audit log search request.
   - **data** (_AuditLogSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5320,7 +5792,7 @@ def search_audit_logs_example() -> None:
 ### search_authorizations()
 
 ```python
-async def search_authorizations(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_authorizations(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search authorizations
@@ -5330,6 +5802,7 @@ Search authorizations
 - **Parameters:**
   - **body** (_AuthorizationSearchQuery_ _|_ _Unset_)
   - **data** (_AuthorizationSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5363,7 +5836,7 @@ def search_authorizations_example() -> None:
 ### search_batch_operation_items()
 
 ```python
-async def search_batch_operation_items(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_batch_operation_items(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search batch operation items
@@ -5373,6 +5846,7 @@ Search batch operation items
 - **Parameters:**
   - **body** (_BatchOperationItemSearchQuery_ _|_ _Unset_) – Batch operation item search request.
   - **data** (_BatchOperationItemSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5405,7 +5879,7 @@ def search_batch_operation_items_example(batch_operation_key: BatchOperationKey)
 ### search_batch_operations()
 
 ```python
-async def search_batch_operations(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_batch_operations(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search batch operations
@@ -5415,6 +5889,7 @@ Search batch operations
 - **Parameters:**
   - **body** (_BatchOperationSearchQuery_ _|_ _Unset_) – Batch operation search request.
   - **data** (_BatchOperationSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5446,7 +5921,7 @@ def search_batch_operations_example() -> None:
 ### search_clients_for_group()
 
 ```python
-async def search_clients_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_clients_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search group clients
@@ -5454,9 +5929,10 @@ Search group clients
 > Search clients assigned to a group.
 
 - **Parameters:**
-  - **group_id** (_str_)
-  - **body** (_SearchClientsForGroupData_ _|_ _Unset_)
-  - **data** (_SearchClientsForGroupData_ _|_ _Unset_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
+  - **body** (_GroupClientSearchQueryRequest_ _|_ _Unset_)
+  - **data** (_GroupClientSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5467,20 +5943,20 @@ Search group clients
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchClientsForGroupResponse200
+  GroupClientSearchResult
 - **Return type:**
-  SearchClientsForGroupResponse200
+  GroupClientSearchResult
 
 #### Examples
 
 **Search clients in a group:**
 
 ```python
-def search_clients_for_group_example() -> None:
+def search_clients_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_clients_for_group(
-        group_id="engineering",
+        group_id=group_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -5491,7 +5967,7 @@ def search_clients_for_group_example() -> None:
 ### search_clients_for_role()
 
 ```python
-async def search_clients_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_clients_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search role clients
@@ -5499,9 +5975,10 @@ Search role clients
 > Search clients with assigned role.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **body** (_SearchClientsForRoleData_ _|_ _Unset_)
-  - **data** (_SearchClientsForRoleData_ _|_ _Unset_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **body** (_RoleClientSearchQueryRequest_ _|_ _Unset_)
+  - **data** (_RoleClientSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5512,20 +5989,20 @@ Search role clients
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchClientsForRoleResponse200
+  RoleClientSearchResult
 - **Return type:**
-  SearchClientsForRoleResponse200
+  RoleClientSearchResult
 
 #### Examples
 
 **Search clients for a role:**
 
 ```python
-def search_clients_for_role_example() -> None:
+def search_clients_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_clients_for_role(
-        role_id="developer",
+        role_id=role_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -5536,7 +6013,7 @@ def search_clients_for_role_example() -> None:
 ### search_clients_for_tenant()
 
 ```python
-async def search_clients_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_clients_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search clients for tenant
@@ -5545,16 +6022,17 @@ Search clients for tenant
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_SearchClientsForTenantData_ _|_ _Unset_)
-  - **data** (_SearchClientsForTenantData_ _|_ _Unset_)
+  - **body** (_TenantClientSearchQueryRequest_ _|_ _Unset_)
+  - **data** (_TenantClientSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchClientsForTenantResponse200
+  TenantClientSearchResult
 - **Return type:**
-  SearchClientsForTenantResponse200
+  TenantClientSearchResult
 
 #### Examples
 
@@ -5576,7 +6054,7 @@ def search_clients_for_tenant_example(tenant_id: TenantId) -> None:
 ### search_cluster_variables()
 
 ```python
-async def search_cluster_variables(*, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_cluster_variables(*, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search for cluster variables based on given criteria. By default, long variable values in the
@@ -5586,6 +6064,7 @@ response are truncated.
   - **truncate_values** (_bool_ _|_ _Unset_)
   - **body** (_ClusterVariableSearchQueryRequest_ _|_ _Unset_) – Cluster variable search query request.
   - **data** (_ClusterVariableSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5619,7 +6098,7 @@ def search_cluster_variables_example() -> None:
 ### search_correlated_message_subscriptions()
 
 ```python
-async def search_correlated_message_subscriptions(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_correlated_message_subscriptions(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search correlated message subscriptions
@@ -5629,6 +6108,7 @@ Search correlated message subscriptions
 - **Parameters:**
   - **body** (_CorrelatedMessageSubscriptionSearchQuery_ _|_ _Unset_)
   - **data** (_CorrelatedMessageSubscriptionSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5662,7 +6142,7 @@ def search_correlated_message_subscriptions_example() -> None:
 ### search_decision_definitions()
 
 ```python
-async def search_decision_definitions(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_decision_definitions(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search decision definitions
@@ -5672,6 +6152,7 @@ Search decision definitions
 - **Parameters:**
   - **body** (_DecisionDefinitionSearchQuery_ _|_ _Unset_)
   - **data** (_DecisionDefinitionSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5705,7 +6186,7 @@ def search_decision_definitions_example() -> None:
 ### search_decision_instances()
 
 ```python
-async def search_decision_instances(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_decision_instances(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search decision instances
@@ -5715,6 +6196,7 @@ Search decision instances
 - **Parameters:**
   - **body** (_DecisionInstanceSearchQuery_ _|_ _Unset_)
   - **data** (_DecisionInstanceSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5748,7 +6230,7 @@ def search_decision_instances_example() -> None:
 ### search_decision_requirements()
 
 ```python
-async def search_decision_requirements(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_decision_requirements(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search decision requirements
@@ -5758,6 +6240,7 @@ Search decision requirements
 - **Parameters:**
   - **body** (_DecisionRequirementsSearchQuery_ _|_ _Unset_)
   - **data** (_DecisionRequirementsSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5791,7 +6274,7 @@ def search_decision_requirements_example() -> None:
 ### search_element_instance_incidents()
 
 ```python
-async def search_element_instance_incidents(element_instance_key, , data, **kwargs)
+async def search_element_instance_incidents(element_instance_key, , data, consistency=None, **kwargs)
 ```
 
 Search for incidents of a specific element instance
@@ -5813,6 +6296,7 @@ to the root element itself.
   - **element_instance_key** (_str_) – System-generated key for a element instance. Example: 2251799813686789.
   - **body** (_IncidentSearchQuery_)
   - **data** (_IncidentSearchQuery_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5832,7 +6316,9 @@ to the root element itself.
 **Search element instance incidents:**
 
 ```python
-def search_element_instance_incidents_example(element_instance_key: ElementInstanceKey) -> None:
+def search_element_instance_incidents_example(
+    element_instance_key: ElementInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.search_element_instance_incidents(
@@ -5845,10 +6331,63 @@ def search_element_instance_incidents_example(element_instance_key: ElementInsta
             print(f"Incident: {incident.incident_key}")
 ```
 
+### search_element_instance_wait_states()
+
+```python
+async def search_element_instance_wait_states(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
+```
+
+Search element instance wait states
+
+> Returns the wait states for element instances matching the given filter.
+
+- **Parameters:**
+  - **body** (_ElementInstanceWaitStateQuery_ _|_ _Unset_) – Element instance inspection request.
+  - **data** (_ElementInstanceWaitStateQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ElementInstanceWaitStateQueryResult
+- **Return type:**
+  ElementInstanceWaitStateQueryResult
+
+#### Examples
+
+**Search element instance wait states:**
+
+```python
+def search_element_instance_wait_states_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_element_instance_wait_states(
+        data=ElementInstanceWaitStateQuery(),
+    )
+
+    for wait_state in result.items:
+        details = wait_state.details
+        if isinstance(details, JobWaitStateDetails):
+            info = f"waiting on job '{details.job_type}'"
+        elif isinstance(details, MessageWaitStateDetails):
+            info = f"waiting for message '{details.message_name}'"
+        else:
+            info = f"waiting ({details.wait_state_type})"
+        print(
+            f"Element {wait_state.element_id} "
+            f"(instance {wait_state.element_instance_key}) {info}"
+        )
+```
+
 ### search_element_instances()
 
 ```python
-async def search_element_instances(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_element_instances(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search element instances
@@ -5858,6 +6397,7 @@ Search element instances
 - **Parameters:**
   - **body** (_ElementInstanceSearchQuery_ _|_ _Unset_) – Element instance search request.
   - **data** (_ElementInstanceSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5891,7 +6431,7 @@ def search_element_instances_example() -> None:
 ### search_global_task_listeners()
 
 ```python
-async def search_global_task_listeners(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_global_task_listeners(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search global user task listeners
@@ -5901,6 +6441,7 @@ Search global user task listeners
 - **Parameters:**
   - **body** (_GlobalTaskListenerSearchQueryRequest_ _|_ _Unset_) – Global listener search query request.
   - **data** (_GlobalTaskListenerSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -5934,7 +6475,7 @@ def search_global_task_listeners_example() -> None:
 ### search_group_ids_for_tenant()
 
 ```python
-async def search_group_ids_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_group_ids_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search groups for tenant
@@ -5945,6 +6486,7 @@ Search groups for tenant
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
   - **body** (_TenantGroupSearchQueryRequest_ _|_ _Unset_)
   - **data** (_TenantGroupSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -5975,7 +6517,7 @@ def search_group_ids_for_tenant_example(tenant_id: TenantId) -> None:
 ### search_groups()
 
 ```python
-async def search_groups(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_groups(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search groups
@@ -5985,6 +6527,7 @@ Search groups
 - **Parameters:**
   - **body** (_GroupSearchQueryRequest_ _|_ _Unset_) – Group search request.
   - **data** (_GroupSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6018,7 +6561,7 @@ def search_groups_example() -> None:
 ### search_groups_for_role()
 
 ```python
-async def search_groups_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_groups_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search role groups
@@ -6026,9 +6569,10 @@ Search role groups
 > Search groups with assigned role.
 
 - **Parameters:**
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **body** (_RoleGroupSearchQueryRequest_ _|_ _Unset_)
   - **data** (_RoleGroupSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6048,11 +6592,11 @@ Search role groups
 **Search groups for a role:**
 
 ```python
-def search_groups_for_role_example() -> None:
+def search_groups_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_groups_for_role(
-        role_id="developer",
+        role_id=role_id,
         data=RoleGroupSearchQueryRequest(),
     )
 
@@ -6064,7 +6608,7 @@ def search_groups_for_role_example() -> None:
 ### search_incidents()
 
 ```python
-async def search_incidents(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_incidents(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search incidents
@@ -6074,6 +6618,7 @@ Search incidents
 - **Parameters:**
   - **body** (_IncidentSearchQuery_ _|_ _Unset_)
   - **data** (_IncidentSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6107,7 +6652,7 @@ def search_incidents_example() -> None:
 ### search_jobs()
 
 ```python
-async def search_jobs(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_jobs(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search jobs
@@ -6117,6 +6662,7 @@ Search jobs
 - **Parameters:**
   - **body** (_JobSearchQuery_ _|_ _Unset_) – Job search request.
   - **data** (_JobSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6150,7 +6696,7 @@ def search_jobs_example() -> None:
 ### search_mapping_rule()
 
 ```python
-async def search_mapping_rule(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_mapping_rule(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search mapping rules
@@ -6160,6 +6706,7 @@ Search mapping rules
 - **Parameters:**
   - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
   - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6169,9 +6716,9 @@ Search mapping rules
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchMappingRuleResponse200
+  MappingRuleSearchQueryResult
 - **Return type:**
-  SearchMappingRuleResponse200
+  MappingRuleSearchQueryResult
 
 #### Examples
 
@@ -6193,7 +6740,7 @@ def search_mapping_rule_example() -> None:
 ### search_mapping_rules_for_group()
 
 ```python
-async def search_mapping_rules_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_mapping_rules_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search group mapping rules
@@ -6201,9 +6748,10 @@ Search group mapping rules
 > Search mapping rules assigned to a group.
 
 - **Parameters:**
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
   - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6214,20 +6762,20 @@ Search group mapping rules
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchMappingRulesForGroupResponse200
+  GroupMappingRuleSearchResult
 - **Return type:**
-  SearchMappingRulesForGroupResponse200
+  GroupMappingRuleSearchResult
 
 #### Examples
 
 **Search mapping rules for a group:**
 
 ```python
-def search_mapping_rules_for_group_example() -> None:
+def search_mapping_rules_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_mapping_rules_for_group(
-        group_id="engineering",
+        group_id=group_id,
         data=MappingRuleSearchQueryRequest(),
     )
 
@@ -6239,7 +6787,7 @@ def search_mapping_rules_for_group_example() -> None:
 ### search_mapping_rules_for_role()
 
 ```python
-async def search_mapping_rules_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_mapping_rules_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search role mapping rules
@@ -6247,9 +6795,10 @@ Search role mapping rules
 > Search mapping rules with assigned role.
 
 - **Parameters:**
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
   - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6260,20 +6809,20 @@ Search role mapping rules
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchMappingRulesForRoleResponse200
+  RoleMappingRuleSearchResult
 - **Return type:**
-  SearchMappingRulesForRoleResponse200
+  RoleMappingRuleSearchResult
 
 #### Examples
 
 **Search mapping rules for a role:**
 
 ```python
-def search_mapping_rules_for_role_example() -> None:
+def search_mapping_rules_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_mapping_rules_for_role(
-        role_id="developer",
+        role_id=role_id,
         data=MappingRuleSearchQueryRequest(),
     )
 
@@ -6285,7 +6834,7 @@ def search_mapping_rules_for_role_example() -> None:
 ### search_mapping_rules_for_tenant()
 
 ```python
-async def search_mapping_rules_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_mapping_rules_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search mapping rules for tenant
@@ -6296,14 +6845,15 @@ Search mapping rules for tenant
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
   - **body** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
   - **data** (_MappingRuleSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchMappingRulesForTenantResponse200
+  TenantMappingRuleSearchResult
 - **Return type:**
-  SearchMappingRulesForTenantResponse200
+  TenantMappingRuleSearchResult
 
 #### Examples
 
@@ -6326,27 +6876,43 @@ def search_mapping_rules_for_tenant_example(tenant_id: TenantId) -> None:
 ### search_message_subscriptions()
 
 ```python
-async def search_message_subscriptions(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_message_subscriptions(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search message subscriptions
 
 > Search for message subscriptions based on given criteria.
 
-- **Parameters:**
+By default, both start and intermediate event subscriptions are returned. Use the
+messageSubscriptionType filter to restrict results to a single type.
+
+**Version notes:**
+
+- Start event subscriptions are only captured for deployments made with 8.10 or later.
+- The messageSubscriptionType field is only populated for data created
+
+> with Camunda 8.10 or later. For pre-8.10 data, intermediate event entries have no
+> messageSubscriptionType value stored. For convenience, the API returns PROCESS_EVENT
+> as a default for such search results, though.
+
+- Searching for intermediate event subscriptions **including legacy data** can be achieved
+  by filtering for messageSubscriptionType not matching START_EVENT.
+
+* **Parameters:**
   - **body** (_MessageSubscriptionSearchQuery_ _|_ _Unset_)
   - **data** (_MessageSubscriptionSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
-- **Raises:**
+* **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
-- **Returns:**
+* **Returns:**
   MessageSubscriptionSearchQueryResult
-- **Return type:**
+* **Return type:**
   MessageSubscriptionSearchQueryResult
 
 #### Examples
@@ -6369,7 +6935,7 @@ def search_message_subscriptions_example() -> None:
 ### search_process_definitions()
 
 ```python
-async def search_process_definitions(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_process_definitions(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search process definitions
@@ -6379,6 +6945,7 @@ Search process definitions
 - **Parameters:**
   - **body** (_ProcessDefinitionSearchQuery_ _|_ _Unset_)
   - **data** (_ProcessDefinitionSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6412,7 +6979,7 @@ def search_process_definitions_example() -> None:
 ### search_process_instance_incidents()
 
 ```python
-async def search_process_instance_incidents(process_instance_key, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_process_instance_incidents(process_instance_key, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search related incidents
@@ -6433,6 +7000,7 @@ the root.
   - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
   - **body** (_IncidentSearchQuery_ _|_ _Unset_)
   - **data** (_IncidentSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6452,7 +7020,9 @@ the root.
 **Search process instance incidents:**
 
 ```python
-def search_process_instance_incidents_example(process_instance_key: ProcessInstanceKey) -> None:
+def search_process_instance_incidents_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.search_process_instance_incidents(
@@ -6468,7 +7038,7 @@ def search_process_instance_incidents_example(process_instance_key: ProcessInsta
 ### search_process_instances()
 
 ```python
-async def search_process_instances(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_process_instances(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search process instances
@@ -6478,6 +7048,7 @@ Search process instances
 - **Parameters:**
   - **body** (_ProcessInstanceSearchQuery_ _|_ _Unset_) – Process instance search request.
   - **data** (_ProcessInstanceSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6519,10 +7090,63 @@ def search_process_instances_example() -> None:
     print(f"Total: {result.page.total_items}")
 ```
 
+### search_resources()
+
+```python
+async def search_resources(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
+```
+
+Search resources
+
+> Search for deployed resources based on given criteria.
+
+:::info
+This endpoint does not return BPMN process definitions, DMN decision definitions, or form
+resources. To query BPMN process definitions or DMN decision definitions, use their
+respective search APIs.
+:::
+
+- **body**: :type body: ResourceSearchQuery | Unset
+
+````
+
+* **Raises:**
+  * **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  * **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  * **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  * **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  * **errors.UnexpectedStatus** – If the response status code is not documented.
+  * **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+* **Returns:**
+  ResourceSearchQueryResult
+* **Parameters:**
+  * **data** (*ResourceSearchQuery* *|* *Unset*)
+  * **consistency** (*ConsistencyOptions* *|* *None*)
+  * **kwargs** (*Any*)
+* **Return type:**
+  ResourceSearchQueryResult
+
+#### Examples
+
+**Search resources:**
+
+```python
+def search_resources_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_resources(
+        data=ResourceSearchQuery(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for resource in result.items:
+            print(f"Resource: {resource.resource_name}")
+````
+
 ### search_roles()
 
 ```python
-async def search_roles(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_roles(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search roles
@@ -6532,6 +7156,7 @@ Search roles
 - **Parameters:**
   - **body** (_RoleSearchQueryRequest_ _|_ _Unset_) – Role search request.
   - **data** (_RoleSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6565,7 +7190,7 @@ def search_roles_example() -> None:
 ### search_roles_for_group()
 
 ```python
-async def search_roles_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_roles_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search group roles
@@ -6573,9 +7198,10 @@ Search group roles
 > Search roles assigned to a group.
 
 - **Parameters:**
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **body** (_RoleSearchQueryRequest_ _|_ _Unset_) – Role search request.
   - **data** (_RoleSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6586,20 +7212,20 @@ Search group roles
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchRolesForGroupResponse200
+  GroupRoleSearchResult
 - **Return type:**
-  SearchRolesForGroupResponse200
+  GroupRoleSearchResult
 
 #### Examples
 
 **Search roles for a group:**
 
 ```python
-def search_roles_for_group_example() -> None:
+def search_roles_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_roles_for_group(
-        group_id="engineering",
+        group_id=group_id,
         data=RoleSearchQueryRequest(),
     )
 
@@ -6611,7 +7237,7 @@ def search_roles_for_group_example() -> None:
 ### search_roles_for_tenant()
 
 ```python
-async def search_roles_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_roles_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search roles for tenant
@@ -6622,14 +7248,15 @@ Search roles for tenant
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
   - **body** (_RoleSearchQueryRequest_ _|_ _Unset_) – Role search request.
   - **data** (_RoleSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchRolesForTenantResponse200
+  TenantRoleSearchResult
 - **Return type:**
-  SearchRolesForTenantResponse200
+  TenantRoleSearchResult
 
 #### Examples
 
@@ -6652,7 +7279,7 @@ def search_roles_for_tenant_example(tenant_id: TenantId) -> None:
 ### search_tenants()
 
 ```python
-async def search_tenants(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_tenants(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search tenants
@@ -6662,6 +7289,7 @@ Search tenants
 - **Parameters:**
   - **body** (_TenantSearchQueryRequest_ _|_ _Unset_) – Tenant search request
   - **data** (_TenantSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6696,7 +7324,7 @@ def search_tenants_example() -> None:
 ### search_user_task_audit_logs()
 
 ```python
-async def search_user_task_audit_logs(user_task_key, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_user_task_audit_logs(user_task_key, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search user task audit logs
@@ -6707,6 +7335,7 @@ Search user task audit logs
   - **user_task_key** (_str_) – System-generated key for a user task.
   - **body** (_UserTaskAuditLogSearchQueryRequest_ _|_ _Unset_) – User task search query request.
   - **data** (_UserTaskAuditLogSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6739,7 +7368,7 @@ def search_user_task_audit_logs_example(user_task_key: UserTaskKey) -> None:
 ### search_user_task_effective_variables()
 
 ```python
-async def search_user_task_effective_variables(user_task_key, *, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_user_task_effective_variables(user_task_key, *, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search user task effective variables
@@ -6755,9 +7384,10 @@ truncated.
 - **Parameters:**
   - **user_task_key** (_str_) – System-generated key for a user task.
   - **truncate_values** (_bool_ _|_ _Unset_)
-  - **body** (_SearchUserTaskEffectiveVariablesData_ _|_ _Unset_) – User task effective variable search
-    query request. Uses offset-based pagination only.
-  - **data** (_SearchUserTaskEffectiveVariablesData_ _|_ _Unset_)
+  - **body** (_UserTaskEffectiveVariableSearchQueryRequest_ _|_ _Unset_) – User task effective variable
+    search query request. Uses offset-based pagination only.
+  - **data** (_UserTaskEffectiveVariableSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6789,7 +7419,7 @@ def search_user_task_effective_variables_example(user_task_key: UserTaskKey) -> 
 ### search_user_task_variables()
 
 ```python
-async def search_user_task_variables(user_task_key, *, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_user_task_variables(user_task_key, *, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search user task variables
@@ -6806,8 +7436,9 @@ are truncated.
 - **Parameters:**
   - **user_task_key** (_str_) – System-generated key for a user task.
   - **truncate_values** (_bool_ _|_ _Unset_)
-  - **body** (_SearchUserTaskVariablesData_ _|_ _Unset_) – User task search query request.
-  - **data** (_SearchUserTaskVariablesData_ _|_ _Unset_)
+  - **body** (_UserTaskVariableSearchQueryRequest_ _|_ _Unset_) – User task search query request.
+  - **data** (_UserTaskVariableSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6839,7 +7470,7 @@ def search_user_task_variables_example(user_task_key: UserTaskKey) -> None:
 ### search_user_tasks()
 
 ```python
-async def search_user_tasks(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_user_tasks(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search user tasks
@@ -6849,6 +7480,7 @@ Search user tasks
 - **Parameters:**
   - **body** (_UserTaskSearchQuery_ _|_ _Unset_) – User task search query request.
   - **data** (_UserTaskSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6882,7 +7514,7 @@ def search_user_tasks_example() -> None:
 ### search_users()
 
 ```python
-async def search_users(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_users(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search users
@@ -6892,6 +7524,7 @@ Search users
 - **Parameters:**
   - **body** (_UserSearchQueryRequest_ _|_ _Unset_)
   - **data** (_UserSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6901,9 +7534,9 @@ Search users
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchUsersResponse200
+  UserSearchResult
 - **Return type:**
-  SearchUsersResponse200
+  UserSearchResult
 
 #### Examples
 
@@ -6925,7 +7558,7 @@ def search_users_example() -> None:
 ### search_users_for_group()
 
 ```python
-async def search_users_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_users_for_group(group_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search group users
@@ -6933,9 +7566,10 @@ Search group users
 > Search users assigned to a group.
 
 - **Parameters:**
-  - **group_id** (_str_)
-  - **body** (_SearchUsersForGroupData_ _|_ _Unset_)
-  - **data** (_SearchUsersForGroupData_ _|_ _Unset_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
+  - **body** (_GroupUserSearchQueryRequest_ _|_ _Unset_)
+  - **data** (_GroupUserSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6946,20 +7580,20 @@ Search group users
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchUsersForGroupResponse200
+  GroupUserSearchResult
 - **Return type:**
-  SearchUsersForGroupResponse200
+  GroupUserSearchResult
 
 #### Examples
 
 **Search users in a group:**
 
 ```python
-def search_users_for_group_example() -> None:
+def search_users_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_users_for_group(
-        group_id="engineering",
+        group_id=group_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -6970,7 +7604,7 @@ def search_users_for_group_example() -> None:
 ### search_users_for_role()
 
 ```python
-async def search_users_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_users_for_role(role_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search role users
@@ -6978,9 +7612,10 @@ Search role users
 > Search users with assigned role.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **body** (_SearchUsersForRoleData_ _|_ _Unset_)
-  - **data** (_SearchUsersForRoleData_ _|_ _Unset_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **body** (_RoleUserSearchQueryRequest_ _|_ _Unset_)
+  - **data** (_RoleUserSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -6991,20 +7626,20 @@ Search role users
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchUsersForRoleResponse200
+  RoleUserSearchResult
 - **Return type:**
-  SearchUsersForRoleResponse200
+  RoleUserSearchResult
 
 #### Examples
 
 **Search users for a role:**
 
 ```python
-def search_users_for_role_example() -> None:
+def search_users_for_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     result = client.search_users_for_role(
-        role_id="developer",
+        role_id=role_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -7015,7 +7650,7 @@ def search_users_for_role_example() -> None:
 ### search_users_for_tenant()
 
 ```python
-async def search_users_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_users_for_tenant(tenant_id, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search users for tenant
@@ -7024,16 +7659,17 @@ Search users for tenant
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **body** (_SearchUsersForTenantData_ _|_ _Unset_)
-  - **data** (_SearchUsersForTenantData_ _|_ _Unset_)
+  - **body** (_TenantUserSearchQueryRequest_ _|_ _Unset_)
+  - **data** (_TenantUserSearchQueryRequest_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  SearchUsersForTenantResponse200
+  TenantUserSearchResult
 - **Return type:**
-  SearchUsersForTenantResponse200
+  TenantUserSearchResult
 
 #### Examples
 
@@ -7055,7 +7691,7 @@ def search_users_for_tenant_example(tenant_id: TenantId) -> None:
 ### search_variables()
 
 ```python
-async def search_variables(*, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+async def search_variables(*, data=<camunda_orchestration_sdk.types.Unset object>, truncate_values=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
 ```
 
 Search variables
@@ -7072,8 +7708,9 @@ By default, long variable values in the response are truncated.
 
 - **Parameters:**
   - **truncate_values** (_bool_ _|_ _Unset_)
-  - **body** (_SearchVariablesData_ _|_ _Unset_) – Variable search query request.
-  - **data** (_SearchVariablesData_ _|_ _Unset_)
+  - **body** (_VariableSearchQuery_ _|_ _Unset_) – Variable search query request.
+  - **data** (_VariableSearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7101,6 +7738,26 @@ def search_variables_example() -> None:
         for var in result.items:
             print(f"Variable: {var.name}")
 ```
+
+### search_variables_as_dto()
+
+```python
+async def search_variables_as_dto(dto, , process_instance_key, scope_key=None, tenant_id=None, page_size=100, consistency=None)
+```
+
+Fetch the variables declared by a Pydantic model for a process instance.
+
+Async variant of [`CamundaClient.search_variables_as_dto()`](client.md#camunda_orchestration_sdk.CamundaClient.search_variables_as_dto).
+
+- **Parameters:**
+  - **dto** (_type_ _[_ _\_VarDtoT_ _]_)
+  - **process_instance_key** (_str_)
+  - **scope_key** (_str_ _|_ _None_)
+  - **tenant_id** (_str_ _|_ _None_)
+  - **page_size** (_int_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+- **Return type:**
+  _VariableMap_[ _\_VarDtoT_]
 
 ### suspend_batch_operation()
 
@@ -7205,8 +7862,17 @@ The client is removed as a group member, with associated authorizations, roles, 
 assignments no longer applied.
 
 - **Parameters:**
-  - **group_id** (_str_)
-  - **client_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
+  - **client_id** (_str_) –
+
+    The unique identifier of an OAuth client.
+    Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+    with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+    Okta). In Self-Managed with Basic authentication, machine-to-machine
+    applications are modelled as users instead — see the user identifier.
+
+    > Example: my-application.
+
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7226,12 +7892,12 @@ assignments no longer applied.
 **Unassign a client from a group:**
 
 ```python
-def unassign_client_from_group_example() -> None:
+def unassign_client_from_group_example(group_id: GroupId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.unassign_client_from_group(
-        group_id="engineering",
-        client_id="my-service-account",
+        group_id=group_id,
+        client_id=client_id,
     )
 ```
 
@@ -7249,7 +7915,16 @@ The client can no longer access tenant data.
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **client_id** (_str_)
+  - **client_id** (_str_) –
+
+    The unique identifier of an OAuth client.
+    Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+    with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+    Okta). In Self-Managed with Basic authentication, machine-to-machine
+    applications are modelled as users instead — see the user identifier.
+
+    > Example: my-application.
+
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7269,12 +7944,12 @@ The client can no longer access tenant data.
 **Unassign a client from a tenant:**
 
 ```python
-def unassign_client_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_client_from_tenant_example(tenant_id: TenantId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.unassign_client_from_tenant(
         tenant_id=tenant_id,
-        client_id="my-service-account",
+        client_id=client_id,
     )
 ```
 
@@ -7293,7 +7968,7 @@ are assigned directly to the tenant.
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7313,12 +7988,12 @@ are assigned directly to the tenant.
 **Unassign a group from a tenant:**
 
 ```python
-def unassign_group_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_group_from_tenant_example(tenant_id: TenantId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.unassign_group_from_tenant(
         tenant_id=tenant_id,
-        group_id="engineering",
+        group_id=group_id,
     )
 ```
 
@@ -7333,8 +8008,8 @@ Unassign a mapping rule from a group
 > Unassigns a mapping rule from a group.
 
 - **Parameters:**
-  - **group_id** (_str_)
-  - **mapping_rule_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7354,12 +8029,12 @@ Unassign a mapping rule from a group
 **Unassign a mapping rule from a group:**
 
 ```python
-def unassign_mapping_rule_from_group_example() -> None:
+def unassign_mapping_rule_from_group_example(group_id: GroupId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.unassign_mapping_rule_from_group(
-        group_id="engineering",
-        mapping_rule_id="rule-123",
+        group_id=group_id,
+        mapping_rule_id=mapping_rule_id,
     )
 ```
 
@@ -7375,7 +8050,7 @@ Unassign a mapping rule from a tenant
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **mapping_rule_id** (_str_)
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7395,12 +8070,12 @@ Unassign a mapping rule from a tenant
 **Unassign a mapping rule from a tenant:**
 
 ```python
-def unassign_mapping_rule_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_mapping_rule_from_tenant_example(tenant_id: TenantId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.unassign_mapping_rule_from_tenant(
         tenant_id=tenant_id,
-        mapping_rule_id="rule-123",
+        mapping_rule_id=mapping_rule_id,
     )
 ```
 
@@ -7417,8 +8092,17 @@ Unassign a role from a client
 associated with this role.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **client_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **client_id** (_str_) –
+
+    The unique identifier of an OAuth client.
+    Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+    with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+    Okta). In Self-Managed with Basic authentication, machine-to-machine
+    applications are modelled as users instead — see the user identifier.
+
+    > Example: my-application.
+
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7438,12 +8122,12 @@ associated with this role.
 **Unassign a role from a client:**
 
 ```python
-def unassign_role_from_client_example() -> None:
+def unassign_role_from_client_example(role_id: RoleId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_client(
-        role_id="developer",
-        client_id="my-service-account",
+        role_id=role_id,
+        client_id=client_id,
     )
 ```
 
@@ -7460,8 +8144,8 @@ Unassign a role from a group
 the authorizations associated with this role.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **group_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7481,12 +8165,12 @@ the authorizations associated with this role.
 **Unassign a role from a group:**
 
 ```python
-def unassign_role_from_group_example() -> None:
+def unassign_role_from_group_example(role_id: RoleId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_group(
-        role_id="developer",
-        group_id="engineering",
+        role_id=role_id,
+        group_id=group_id,
     )
 ```
 
@@ -7501,8 +8185,8 @@ Unassign a role from a mapping rule
 > Unassigns a role from a mapping rule.
 
 - **Parameters:**
-  - **role_id** (_str_)
-  - **mapping_rule_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7522,12 +8206,12 @@ Unassign a role from a mapping rule
 **Unassign a role from a mapping rule:**
 
 ```python
-def unassign_role_from_mapping_rule_example() -> None:
+def unassign_role_from_mapping_rule_example(role_id: RoleId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_mapping_rule(
-        role_id="developer",
-        mapping_rule_id="rule-123",
+        role_id=role_id,
+        mapping_rule_id=mapping_rule_id,
     )
 ```
 
@@ -7546,7 +8230,7 @@ tenant’s data - unless they are assigned directly to the tenant.
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **kwargs** (_Any_)
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -7566,12 +8250,12 @@ tenant’s data - unless they are assigned directly to the tenant.
 **Unassign a role from a tenant:**
 
 ```python
-def unassign_role_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_role_from_tenant_example(tenant_id: TenantId, role_id: RoleId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_tenant(
         tenant_id=tenant_id,
-        role_id="developer",
+        role_id=role_id,
     )
 ```
 
@@ -7588,7 +8272,7 @@ Unassign a role from a user
 this role.
 
 - **Parameters:**
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **username** (_str_) – The unique name of a user. Example: swillis.
   - **kwargs** (_Any_)
 - **Raises:**
@@ -7609,11 +8293,11 @@ this role.
 **Unassign a role from a user:**
 
 ```python
-def unassign_role_from_user_example(username: Username) -> None:
+def unassign_role_from_user_example(role_id: RoleId, username: Username) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_user(
-        role_id="developer",
+        role_id=role_id,
         username=username,
     )
 ```
@@ -7632,7 +8316,7 @@ The user is removed as a group member, with associated authorizations, roles, an
 no longer applied.
 
 - **Parameters:**
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **username** (_str_) – The unique name of a user. Example: swillis.
   - **kwargs** (_Any_)
 - **Raises:**
@@ -7653,11 +8337,11 @@ no longer applied.
 **Unassign a user from a group:**
 
 ```python
-def unassign_user_from_group_example(username: Username) -> None:
+def unassign_user_from_group_example(group_id: GroupId, username: Username) -> None:
     client = CamundaClient()
 
     client.unassign_user_from_group(
-        group_id="engineering",
+        group_id=group_id,
         username=username,
     )
 ```
@@ -7747,6 +8431,58 @@ def unassign_user_task_example(user_task_key: UserTaskKey) -> None:
     client.unassign_user_task(user_task_key=user_task_key)
 ```
 
+### update_agent_instance()
+
+```python
+async def update_agent_instance(agent_instance_key, , data, **kwargs)
+```
+
+Update agent instance
+
+> Updates the mutable fields of an agent instance: status, metric counters, and
+
+tools. Metric values are treated as deltas and applied immediately to the
+aggregate counters. Tool updates replace the existing tool list.
+
+- **Parameters:**
+  - **agent_instance_key** (_str_) – System-generated key for an agent instance. Example: 4503599627370496.
+  - **body** (_AgentInstanceUpdateRequest_) – Request to update the mutable state of an agent
+    instance.
+  - **data** (_AgentInstanceUpdateRequest_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The agent instance with the given key was not found. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  None
+- **Return type:**
+  None
+
+#### Examples
+
+**Update an agent instance:**
+
+```python
+def update_agent_instance_example(
+    agent_instance_key: AgentInstanceKey,
+    element_instance_key: ElementInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    client.update_agent_instance(
+        agent_instance_key=agent_instance_key,
+        data=AgentInstanceUpdateRequest(
+            element_instance_key=element_instance_key,
+            status=AgentInstanceUpdateRequestStatus.THINKING,
+        ),
+    )
+```
+
 ### update_authorization()
 
 ```python
@@ -7811,7 +8547,8 @@ Update a global-scoped cluster variable
 The variable must exist, otherwise a 404 error is returned.
 
 - **Parameters:**
-  - **name** (_str_)
+  - **name** (_str_) – The name of a cluster variable. Unique within its scope (global or tenant-
+    specific). Example: feature-flag-checkout.
   - **body** (_UpdateClusterVariableRequest_)
   - **data** (_UpdateClusterVariableRequest_)
   - **kwargs** (_Any_)
@@ -7833,11 +8570,11 @@ The variable must exist, otherwise a 404 error is returned.
 **Update a global cluster variable:**
 
 ```python
-def update_global_cluster_variable_example() -> None:
+def update_global_cluster_variable_example(name: ClusterVariableName) -> None:
     client = CamundaClient()
 
     result = client.update_global_cluster_variable(
-        name="my-variable",
+        name=name,
         data=UpdateClusterVariableRequest(
             value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-value"}),
         ),
@@ -7905,7 +8642,7 @@ Update group
 > Update a group with the given ID.
 
 - **Parameters:**
-  - **group_id** (_str_)
+  - **group_id** (_str_) – The unique identifier of a group. Example: engineering.
   - **body** (_GroupUpdateRequest_)
   - **data** (_GroupUpdateRequest_)
   - **kwargs** (_Any_)
@@ -7927,11 +8664,11 @@ Update group
 **Update a group:**
 
 ```python
-def update_group_example() -> None:
+def update_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.update_group(
-        group_id="engineering",
+        group_id=group_id,
         data=GroupUpdateRequest(name="engineering-team"),
     )
 ```
@@ -7982,6 +8719,60 @@ def update_job_example(job_key: JobKey) -> None:
     )
 ```
 
+### update_jobs_batch_operation()
+
+```python
+async def update_jobs_batch_operation(, data, **kwargs)
+```
+
+Update jobs (batch)
+
+> Creates a batch operation to update jobs matching the given filter. At least one changeset field
+
+must be non-null. This is done asynchronously; the progress can be tracked using the
+batchOperationKey from the response and the batch operation status endpoint (/batch-
+operations/{batchOperationKey}).
+
+- **Parameters:**
+  - **body** (_JobBatchUpdateRequest_) – The filter and changeset for a batch job update operation.
+    The filter defines which jobs are updated; the changeset defines what to update. At least
+    one changeset field must be non-null.
+  - **data** (_JobBatchUpdateRequest_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The job batch update operation failed. More details are provided in the response body.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  BatchOperationCreatedResult
+- **Return type:**
+  BatchOperationCreatedResult
+
+#### Examples
+
+**Update jobs in batch:**
+
+```python
+def update_jobs_batch_operation_example() -> None:
+    client = CamundaClient()
+
+    result = client.update_jobs_batch_operation(
+        data=JobBatchUpdateRequest(
+            filter_=JobBatchUpdateRequestFilter(
+                type_="my-job-type",
+            ),
+            changeset=JobBatchUpdateRequestChangeset(
+                retries=3,
+            ),
+        ),
+    )
+
+    print(f"Batch operation key: {result.batch_operation_key}")
+```
+
 ### update_mapping_rule()
 
 ```python
@@ -7993,7 +8784,7 @@ Update mapping rule
 > Update a mapping rule.
 
 - **Parameters:**
-  - **mapping_rule_id** (_str_)
+  - **mapping_rule_id** (_str_) – The unique identifier of a mapping rule. Example: my-mapping-rule.
   - **body** (_MappingRuleUpdateRequest_ _|_ _Unset_)
   - **data** (_MappingRuleUpdateRequest_ _|_ _Unset_)
   - **kwargs** (_Any_)
@@ -8006,20 +8797,20 @@ Update mapping rule
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  UpdateMappingRuleResponse200
+  MappingRuleUpdateResult
 - **Return type:**
-  UpdateMappingRuleResponse200
+  MappingRuleUpdateResult
 
 #### Examples
 
 **Update a mapping rule:**
 
 ```python
-def update_mapping_rule_example() -> None:
+def update_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.update_mapping_rule(
-        mapping_rule_id="rule-123",
+        mapping_rule_id=mapping_rule_id,
         data=MappingRuleUpdateRequest(
             claim_name="groups",
             claim_value="senior-engineering",
@@ -8039,7 +8830,7 @@ Update role
 > Update a role with the given ID.
 
 - **Parameters:**
-  - **role_id** (_str_)
+  - **role_id** (_str_) – The unique identifier of a role. Example: admin.
   - **body** (_RoleUpdateRequest_)
   - **data** (_RoleUpdateRequest_)
   - **kwargs** (_Any_)
@@ -8061,11 +8852,11 @@ Update role
 **Update a role:**
 
 ```python
-def update_role_example() -> None:
+def update_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     client.update_role(
-        role_id="developer",
+        role_id=role_id,
         data=RoleUpdateRequest(name="senior-developer"),
     )
 ```
@@ -8126,7 +8917,8 @@ The variable must exist, otherwise a 404 error is returned.
 
 - **Parameters:**
   - **tenant_id** (_str_) – The unique identifier of the tenant. Example: customer-service.
-  - **name** (_str_)
+  - **name** (_str_) – The name of a cluster variable. Unique within its scope (global or tenant-
+    specific). Example: feature-flag-checkout.
   - **body** (_UpdateClusterVariableRequest_)
   - **data** (_UpdateClusterVariableRequest_)
   - **kwargs** (_Any_)
@@ -8148,12 +8940,12 @@ The variable must exist, otherwise a 404 error is returned.
 **Update a tenant cluster variable:**
 
 ```python
-def update_tenant_cluster_variable_example(tenant_id: TenantId) -> None:
+def update_tenant_cluster_variable_example(tenant_id: TenantId, name: ClusterVariableName) -> None:
     client = CamundaClient()
 
     result = client.update_tenant_cluster_variable(
         tenant_id=tenant_id,
-        name="my-variable",
+        name=name,
         data=UpdateClusterVariableRequest(
             value=UpdateClusterVariableRequestValue.from_dict({"key": "updated-tenant-value"}),
         ),
@@ -8186,9 +8978,9 @@ Update user
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
 - **Returns:**
-  UpdateUserResponse200
+  UserUpdateResult
 - **Return type:**
-  UpdateUserResponse200
+  UserUpdateResult
 
 #### Examples
 

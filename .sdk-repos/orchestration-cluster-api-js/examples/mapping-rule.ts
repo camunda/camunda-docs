@@ -1,14 +1,14 @@
 // Compilable usage examples for mapping rule operations.
 // These examples are type-checked during build to guard against API regressions.
 
-import { createCamundaClient } from '@camunda8/orchestration-cluster-api';
+import { createCamundaClient, type MappingRuleId } from '@camunda8/orchestration-cluster-api';
 
 //#region CreateMappingRule
-async function createMappingRuleExample() {
+async function createMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
   const result = await camunda.createMappingRule({
-    mappingRuleId: 'ldap-group-mapping',
+    mappingRuleId,
     name: 'LDAP Group Mapping',
     claimName: 'groups',
     claimValue: 'engineering',
@@ -19,11 +19,11 @@ async function createMappingRuleExample() {
 //#endregion CreateMappingRule
 
 //#region GetMappingRule
-async function getMappingRuleExample() {
+async function getMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
   const rule = await camunda.getMappingRule(
-    { mappingRuleId: 'ldap-group-mapping' },
+    { mappingRuleId },
     { consistency: { waitUpToMs: 5000 } }
   );
 
@@ -49,11 +49,11 @@ async function searchMappingRulesExample() {
 //#endregion SearchMappingRule
 
 //#region UpdateMappingRule
-async function updateMappingRuleExample() {
+async function updateMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
   await camunda.updateMappingRule({
-    mappingRuleId: 'ldap-group-mapping',
+    mappingRuleId,
     name: 'LDAP Group Mapping',
     claimName: 'groups',
     claimValue: 'engineering-team',
@@ -62,10 +62,10 @@ async function updateMappingRuleExample() {
 //#endregion UpdateMappingRule
 
 //#region DeleteMappingRule
-async function deleteMappingRuleExample() {
+async function deleteMappingRuleExample(mappingRuleId: MappingRuleId) {
   const camunda = createCamundaClient();
 
-  await camunda.deleteMappingRule({ mappingRuleId: 'ldap-group-mapping' });
+  await camunda.deleteMappingRule({ mappingRuleId });
 }
 //#endregion DeleteMappingRule
 

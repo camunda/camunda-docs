@@ -8,7 +8,7 @@ import RegionMapImg from './img/diagram-regions-map.png';
 
 When you [create a cluster](/components/console/manage-clusters/create-cluster.md) in Camunda 8 SaaS, you must specify a region for that cluster.
 
-The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also discuss custom regions with their Customer Success Manager.
+The following regions are available for customers on Trial, Starter, and Enterprise Plans. Enterprise customers can also [reach out to Camunda](https://camunda.com/contact-us/) to discuss custom regions.
 
 <img src={RegionMapImg} alt="World map showing the location of each GCP and AWS region" class="img-noborder"/>
 
@@ -41,6 +41,7 @@ The following AWS regions are currently supported in Camunda 8 SaaS.
 | Frankfurt, Europe (eu-central-1)    | Ireland, Europe (eu-west-1)         |
 | Paris, Europe (eu-west-3)           | Ireland, Europe (eu-west-1)         |
 | North America, Ohio (us-east-2)     | Oregon, North America (us-west-2)   |
+| Oregon, North America (us-west-2)   | North America, Ohio (us-east-2)     |
 | North America, Virginia (us-east-1) | Oregon, North America (us-west-2)   |
 | Singapore, Asia (ap-southeast-1)    | Jakarta, Indonesia (ap-southeast-3) |
 

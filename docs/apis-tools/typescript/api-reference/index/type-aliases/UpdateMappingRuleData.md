@@ -30,7 +30,7 @@ path: object;
 #### mappingRuleId
 
 ```ts
-mappingRuleId: string;
+mappingRuleId: MappingRuleId;
 ```
 
 The ID of the mapping rule to update.

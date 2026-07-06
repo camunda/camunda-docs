@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type DecisionInstanceStateFilterProperty =
-  | DecisionInstanceStateExactMatch
-  | AdvancedDecisionInstanceStateFilter;
+  DecisionInstanceStateExactMatch | AdvancedDecisionInstanceStateFilter;
 ```
 
 DecisionInstanceStateEnum property with full advanced search capabilities.

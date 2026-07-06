@@ -40,7 +40,7 @@ Additional information and a high-level overview of Kubernetes as the upstream p
 
 <SecondaryStorageOptionsNote />
 
-For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
+For the tool versions used, check the [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/.tool-versions) file in the repository. It contains an up-to-date list of versions that we also use for testing.
 
 ## Architecture
 
@@ -77,7 +77,7 @@ For OpenShift deployments, the following OpenShift-specific configurations are a
 All configuration files, deployment scripts, and Helm values referenced in this guide are available in the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/get-your-copy.sh
 ```
 
 This places you at the repository root, from which both directories are accessible:
@@ -90,7 +90,7 @@ This places you at the repository root, from which both directories are accessib
 Source the environment variables required by the deployment scripts:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/0-set-environment.sh
 ```
 
 :::note
@@ -117,7 +117,7 @@ Keep both in sync when adding or modifying overlays. -->
 <summary>Review the base Helm values</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/base.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/helm-values/base.yml
 ```
 
 </details>
@@ -151,7 +151,7 @@ The route created by OpenShift will use a domain to provide access to the platfo
 To retrieve the OpenShift applications domain (used as an example here), run the following command and define the route domain that will be used for the Camunda 8 deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/setup-application-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/setup-application-domain.sh
 ```
 
 If you choose to use a custom domain instead, ensure it is supported by your router configuration and replace the example domain with your desired domain. For more details on configuring custom domains in OpenShift, refer to the official [custom domain OpenShift documentation](https://docs.openshift.com/dedicated/applications/deployments/osd-config-custom-domains-applications.html).
@@ -169,7 +169,7 @@ oc get ingresses.config/cluster -o json | jq '.metadata.annotations."ingress.ope
 Alternatively, if you use a dedicated IngressController for the deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/get-ingress-http2-status.sh
 ```
 
 - If the output is `"true"`, it means HTTP/2 is enabled.
@@ -183,7 +183,7 @@ If HTTP/2 is not enabled, you can enable it by running the following command:
 **IngressController configuration:**
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/enable-ingress-http2.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/enable-ingress-http2.sh
 ```
 
 **Global cluster configuration:**
@@ -196,11 +196,47 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 </details>
 
+<details>
+   <summary>ROSA HCP — additional steps for ALPN h2</summary>
+
+These steps are required only on **Red Hat OpenShift Service on AWS – Hosted Control Planes (ROSA HCP)** managed clusters. Self-managed OpenShift clusters where the cluster-wide `ingress.operator.openshift.io/default-enable-http2=true` annotation is honored do **not** need this workaround.
+
+On ROSA HCP, the `ingress-config-validation.managed.openshift.io` admission webhook denies the cluster-wide annotation, and the per-`IngressController` annotation alone does not make HAProxy advertise ALPN `h2` on the default certificate path. As a result, gRPC clients (Zeebe) fail with `No ALPN negotiated`.
+
+The OpenShift router advertises ALPN `h2` on a per-SNI basis through a `crt-list` entry that HAProxy generates only for Routes that carry an explicit `spec.tls.certificate`. In other words, the gRPC Route must reference a TLS Secret in the Camunda namespace; the default `secretName: '-'` (Ingress-Operator-managed) is not enough on ROSA HCP.
+
+To fix this, copy the router default wildcard TLS Secret from `openshift-ingress` into the Camunda namespace, then point the gRPC Ingress to it:
+
+1. Copy the router wildcard certificate Secret into the Camunda namespace:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   ```
+
+   ```bash
+   export CAMUNDA_NAMESPACE="camunda"
+   export CAMUNDA_PLATFORM_ROUTER_TLS_SECRET="camunda-platform-router-tls"
+   ./generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   ```
+
+2. After you have merged the OpenShift overlay into your local `values.yml` (see the _Configure Route TLS_ section below), override `orchestration.ingress.grpc.tls.secretName` in that `values.yml`. The default value `'-'` lets the Ingress Operator manage the certificate automatically; on ROSA HCP, replace it with the Secret you just created:
+
+   ```bash
+   yq -i ".orchestration.ingress.grpc.tls.secretName = \"$CAMUNDA_PLATFORM_ROUTER_TLS_SECRET\"" \
+       values.yml
+   ```
+
+   This keeps the upstream `orchestration-route.yml` overlay file untouched so future updates can be pulled cleanly.
+
+After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
+
+</details>
+
 #### Configure Route TLS
 
-Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
+Configure the Zeebe Gateway to use an encrypted TLS connection. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encrypt or pass-through routes, not for edge-terminated or insecure routes.
 
-1. **Zeebe cluster:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
+1. **Zeebe cluster:** at least one [TLS secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) is required for the Zeebe Gateway **service**; a second TLS secret for the **route** is optional and depends on your OpenShift flavor:
 
 - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also used in the other components such as Operate, Tasklist.
 
@@ -219,7 +255,7 @@ PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header 
 
 </details>
 
-- The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
+- The second TLS secret is optional and applies only to the exposed Route. By default, `orchestration-route.yml` ships with `orchestration.ingress.grpc.tls.secretName: '-'`, which lets the OpenShift Ingress Operator manage the Route TLS certificate automatically by using the cluster's default wildcard. This is the recommended setup on self-managed OpenShift. If you want to terminate the Route with your own custom certificate, for example, the same TLS secret used for Ingress, set `orchestration.ingress.grpc.tls.secretName` to the name of a TLS secret in the Camunda namespace. The Zeebe Gateway Ingress is configured as a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration) in either case. On ROSA HCP, an explicit per-Route certificate is required for ALPN `h2` to work. See the _ROSA HCP — additional steps for ALPN h2_ section above.
 
 To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
 
@@ -236,7 +272,7 @@ yq '. *+ load("generic/openshift/single-region/helm-values/orchestration-route.y
    <summary>Review the orchestration route configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/orchestration-route.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/helm-values/orchestration-route.yml
 ```
 
    </details>
@@ -253,7 +289,7 @@ The actual configuration properties can be reviewed [in the Zeebe Gateway config
    <summary>Review the connectors route configuration</summary>
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/connectors-route.yml
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/helm-values/connectors-route.yml
    ```
 
    </details>
@@ -272,7 +308,7 @@ The actual configuration properties can be reviewed [in the Zeebe Gateway config
    <summary>Review the domain configuration</summary>
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/domain.yml
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/helm-values/domain.yml
    ```
 
    </details>
@@ -312,7 +348,7 @@ yq '. *+ load("generic/openshift/single-region/helm-values/no-domain.yml")' valu
 <summary>Review the no-domain configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/helm-values/no-domain.yml
 ```
 
 </details>
@@ -362,7 +398,7 @@ yq '. *+ load("generic/openshift/single-region/helm-values/scc.yml")' values.yml
 <summary>Review the restrictive SCC configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/helm-values/scc.yml
 ```
 
 </details>
@@ -380,7 +416,7 @@ yq '. *+ load("generic/openshift/single-region/helm-values/no-scc.yml")' values.
 <summary>Review the permissive SCC configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/helm-values/no-scc.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/helm-values/no-scc.yml
 ```
 
 </details>
@@ -431,7 +467,7 @@ The following PostgreSQL clusters are created:
 <summary>Review the PostgreSQL cluster configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
 ```
 
 </details>
@@ -460,7 +496,7 @@ export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-openshift.yml"
 <summary>Review the OpenShift Keycloak instance configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml
 ```
 
 </details>
@@ -483,7 +519,7 @@ export KEYCLOAK_CONFIG_FILE="keycloak-instance-domain-nginx.yml"
 <summary>Review the nginx Keycloak instance configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
 ```
 
 </details>
@@ -506,7 +542,7 @@ export KEYCLOAK_CONFIG_FILE="keycloak-instance-no-domain.yml"
 <summary>Review the no-domain Keycloak instance configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml
 ```
 
 </details>
@@ -530,7 +566,7 @@ yq '. *+ load("generic/kubernetes/operator-based/elasticsearch/camunda-elastic-v
 <summary>Review the Elasticsearch Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
 ```
 
 </details>
@@ -545,7 +581,7 @@ yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-identity-val
 <summary>Review the Identity PostgreSQL Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
 ```
 
 </details>
@@ -560,7 +596,7 @@ yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-webmodeler-v
 <summary>Review the Web Modeler PostgreSQL Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
 ```
 
 </details>
@@ -578,7 +614,7 @@ yq '. *+ load("generic/kubernetes/operator-based/keycloak/camunda-keycloak-domai
 <summary>Review the Keycloak domain Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
 ```
 
 </details>
@@ -594,7 +630,7 @@ yq '. *+ load("generic/kubernetes/operator-based/keycloak/camunda-keycloak-domai
 <summary>Review the Keycloak domain Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
 ```
 
 </details>
@@ -610,7 +646,7 @@ yq '. *+ load("generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-do
 <summary>Review the Keycloak no-domain Helm overlay</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml
 ```
 
 </details>
@@ -623,7 +659,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 If **Web Modeler** is enabled, create the SMTP secret:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/create-webmodeler-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/create-webmodeler-secret.sh
 ```
 
 :::note
@@ -640,7 +676,7 @@ Only the SMTP password for Web Modeler needs to be created manually.
 Once you've prepared the `values.yml` file with all overlays merged, run the following `envsubst` command to substitute the environment variables with their actual values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/assemble-envsubst-values.sh
 ```
 
 ### Install Camunda 8 using Helm
@@ -650,7 +686,7 @@ Now that the `generated-values.yml` is ready, you can install Camunda 8 using He
 The following are the required environment variables with some example values:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/chart-env.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/chart-env.sh
 ```
 
 - `CAMUNDA_NAMESPACE` is the Kubernetes namespace where Camunda will be installed.
@@ -659,7 +695,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 Then run the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/openshift/single-region/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/install-chart.sh
 ```
 
 This command:
@@ -673,7 +709,7 @@ This command:
 You can track the progress of the installation using the following command:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
 ## Verify connectivity to Camunda 8
@@ -774,7 +810,7 @@ For a detailed guide on generating and using a token, consult the relevant docum
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/export-verify-zeebe-domain.sh
 ```
 
   </TabItem>
@@ -789,7 +825,7 @@ kubectl port-forward "services/$CAMUNDA_RELEASE_NAME-zeebe-gateway" 8080:8080 --
 Export the following environment variables:
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/export-verify-zeebe-local.sh
 ```
 
   </TabItem>
@@ -799,7 +835,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 Generate a temporary token to access the Orchestration Cluster REST API, then capture the value of the `access_token` property and store it as your token. Use the stored token (referred to as `TOKEN` in this case) to interact with the Orchestration Cluster REST API and display the cluster topology:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology.sh
 ```
 
 ...and results in the following output:
@@ -808,7 +844,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
   <summary>Example output</summary>
 
 ```json reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-zeebe-cluster-topology-output.json
 ```
 
 </details>
@@ -862,7 +898,7 @@ The following values are required for OAuth authentication:
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
 
 ### Persistent volume reclaim policy
 
@@ -875,7 +911,7 @@ oc get storageclass
 # RECLAIMPOLICY should show "Retain", not "Delete"
 ```
 
-For more details, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
+For more details, including accepted alternatives to a cluster-wide `Retain` policy, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
 
 ### Security Context Constraints (SCCs)
 

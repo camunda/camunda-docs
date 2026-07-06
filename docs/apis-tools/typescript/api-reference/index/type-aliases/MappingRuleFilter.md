@@ -38,7 +38,7 @@ The value of the claim to match.
 ### mappingRuleId?
 
 ```ts
-optional mappingRuleId?: string;
+optional mappingRuleId?: MappingRuleId;
 ```
 
 The ID of the mapping rule.

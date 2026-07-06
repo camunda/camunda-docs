@@ -46,7 +46,7 @@ Not found. The resource was not found.
 ### 409
 
 ```ts
-409: unknown;
+409: ProblemDetail;
 ```
 
 Tenant with this id already exists.

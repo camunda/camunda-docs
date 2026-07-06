@@ -34,7 +34,7 @@ In Camunda Modeler, select **ServiceNow Outbound Connector** from the connector 
 | Authentication   | ServiceNow credentials (username and password).                                                         |
 
 :::tip
-Store ServiceNow credentials securely as [Camunda secrets](/components/console/manage-clusters/manage-secrets.md) and reference them in the connector configuration (e.g., `{{secrets.snUser}}` and `{{secrets.snPwd}}`).
+Store ServiceNow credentials securely as [Camunda secrets](/components/hub/organization/manage-clusters/manage-secrets.md) and reference them in the connector configuration (e.g., `{{secrets.snUser}}` and `{{secrets.snPwd}}`).
 :::
 
 ![ServiceNow Outbound Connector example](../img/outbound-connector.png)  

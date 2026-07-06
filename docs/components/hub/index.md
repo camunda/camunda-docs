@@ -1,0 +1,73 @@
+---
+id: camunda-hub
+title: Camunda Hub
+description: "Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub."
+---
+
+import DocsIcon from "@site/docs/components/assets/icon-docs.png";
+import AoGrid from '../react-components/\_ao-card';
+
+Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
+
+## About Camunda Hub
+
+Camunda Hub is the unified platform where:
+
+- **Center of excellence teams** manage infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
+- **Delivery teams** collaborate in managed workspaces, discover and use approved catalog assets, and model and deploy business processes.
+
+## Manage organizational resources
+
+Manage organizational resources, including clusters and workspaces, and govern the use of reusable assets:
+
+<AoGrid ao={[
+{
+link: "./organization/manage-workspaces",
+title: "Manage workspaces",
+image: DocsIcon,
+description: "Create and manage workspaces within your organization.",
+},
+{
+link: "./organization/manage-clusters/manage-cluster",
+title: "Manage clusters",
+image: DocsIcon,
+description: "Create, monitor, and assign clusters for seamless execution across all rollout stages.",
+},
+{
+link: "./organization/manage-members/manage-users",
+title: "Manage members",
+image: DocsIcon,
+description: "Manage the users, user groups, and roles in your organization.",
+},
+{
+link: "./organization/manage-organization-settings/organization-settings",
+title: "Manage organization",
+image: DocsIcon,
+description: "Manage organizational settings, and view usage alerts and history.",
+},
+{
+link: "./organization/analyze-operations/",
+title: "Analyze operations",
+image: DocsIcon,
+description: "Monitor cluster health, track job and process execution, and measure business value across your Camunda organization.",
+},
+]} columns={3}/>
+
+## Build within a workspace
+
+Discover and use approved reusable assets, manage projects, and deliver business processes:
+
+<AoGrid ao={[
+{
+link: "./workspace/manage-projects",
+title: "Manage projects",
+image: DocsIcon,
+description: "Develop project releases through the stages of a typical development lifecycle.",
+},
+{
+link: "./workspace/modeler",
+title: "Model business processes",
+image: DocsIcon,
+description: "Collaboratively design executable processes as the foundation for scalable IT and business automation.",
+},
+]} columns={2}/>

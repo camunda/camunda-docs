@@ -211,7 +211,7 @@ The **Slack connector** uses an OAuth bearer token (for example, the Slack app b
 
 We advise you to keep your Slack bot token safe and avoid exposing it in the BPMN `xml` file by creating a secret:
 
-1. Follow our [guide for creating secrets](/components/console/manage-clusters/manage-secrets.md).
+1. Follow our [guide for creating secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 2. Name your secret `SLACK_OAUTH_TOKEN` so you can reference it later in the connector.
 
 </TabItem>

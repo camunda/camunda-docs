@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import { activeVersionURLPath as linkBase } from "../Versions";
+import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 import ModelerIcon from "./icons/icon-modeler.svg";
 import ClusterOrchestrationIcon from "./icons/icon-orchestration-cluster.svg";
 import ConnectorsIcon from "./icons/icon-connectors.svg";
@@ -21,6 +22,9 @@ const ComponentCard = ({ link, title, icon: Icon, description }) => {
 };
 
 const Components = () => {
+  const docsVersion = useActiveVersion();
+  const isNextVersion = docsVersion?.name === "current";
+
   const componentItems = [
     {
       title: "Orchestration cluster",
@@ -43,20 +47,32 @@ const Components = () => {
         "Business intelligence and analytics for enterprise customers.",
       link: "/self-managed/components/optimize/overview",
     },
-    {
-      title: "Web Modeler",
-      icon: ModelerIcon,
-      description:
-        "Use Web Modeler and Desktop Modeler to model your BPMN diagrams.",
-      link: "/self-managed/components/modeler/web-modeler/overview",
-    },
-    {
-      title: "Console",
-      icon: ConsoleIcon,
-      description:
-        "Manage and monitor your Camunda 8 Self-Managed deployments.",
-      link: "/self-managed/components/console/overview",
-    },
+    ...(isNextVersion
+      ? [
+          {
+            title: "Camunda Hub",
+            icon: ConsoleIcon,
+            description:
+              "Manage deployments and model your BPMN diagrams in one place.",
+            link: "/self-managed/components/hub",
+          },
+        ]
+      : [
+          {
+            title: "Web Modeler",
+            icon: ModelerIcon,
+            description:
+              "Use Web Modeler and Desktop Modeler to model your BPMN diagrams.",
+            link: "/self-managed/components/modeler/web-modeler/overview",
+          },
+          {
+            title: "Console",
+            icon: ConsoleIcon,
+            description:
+              "Manage and monitor your Camunda 8 Self-Managed deployments.",
+            link: "/self-managed/components/console/overview",
+          },
+        ]),
     {
       title: "Management Identity",
       icon: IdentityIcon,

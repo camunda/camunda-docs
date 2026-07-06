@@ -16,9 +16,9 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first local project, building your first AI agent, and orchestrating human tasks and APIs using connectors.
+Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first AI agent, and orchestrating human tasks and APIs using connectors.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first Spring Boot or Node.js project with Camunda 8" href="getting-started-example" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first Spring Boot or Node.js project with Camunda 8</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -27,6 +27,12 @@ Get hands-on with [Camunda 8](https://camunda.io) with our getting started guide
 
 </div>
 </div>
+
+## Run your first BPMN process with Camunda 8
+
+Launch a fully-automated Rocket Launch process on your local machine with no code required. Provide a fuel level, and let Camunda 8 run pre-flight checks, plot a destination with DMN, and generate a mission report using only FEEL expressions.
+
+<p><a href="./getting-started-hello-world/" class="link-arrow">Run your first BPMN process</a></p>
 
 ## Run your first Spring Boot or Node.js project with Camunda 8
 

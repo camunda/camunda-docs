@@ -21,7 +21,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <td>14 April 2026</td>
 <td>[8.9 release announcements](/reference/announcements-release-notes/890/890-announcements.md)</td>
 <td>[8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md)</td>
-<td>13 October 2028</td>
+<td>13 October 2027</td>
 </tr>
 <tr>
 <td>8.8</td>
@@ -36,13 +36,6 @@ import PageDescription from '@site/src/components/PageDescription';
 <td>[8.7 release announcements](/reference/announcements-release-notes/870/870-announcements.md)</td>
 <td>[8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md)</td>
 <td>13 October 2026</td>
-</tr>
-<tr>
-<td>8.6</td>
-<td>8 October 2024</td>
-<td>[8.6 release announcements](/reference/announcements-release-notes/860/860-announcements.md)</td>
-<td>[8.6 release notes](/reference/announcements-release-notes/860/860-release-notes.md)</td>
-<td>14 April 2026</td>
 </tr>
 </table>
 

@@ -135,25 +135,26 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
 
    **Verify the installation:**
 
-   Test the Zeebe Gateway HTTP endpoint (Orchestration Cluster REST API):
+Test the [Zeebe Gateway](/reference/glossary.md#zeebe-gateway) HTTP endpoint (Orchestration Cluster REST API):
 
-   ```bash
-   curl -u demo:demo http://localhost:8080/v2/topology
-   ```
+```bash
+curl -u demo:demo http://localhost:8080/v2/topology
+```
 
-   You should see a JSON response with the cluster topology information.
+You should see a JSON response with the cluster topology information.
 
-   Available services:
-   - **Operate:** [http://localhost:8080/operate](http://localhost:8080/operate) - Monitor process instances
-   - **Tasklist:** [http://localhost:8080/tasklist](http://localhost:8080/tasklist) - Complete user tasks
-   - **Identity:** [http://localhost:8080/identity](http://localhost:8080/identity) - User and permission management
-   - **Connectors:** [http://localhost:8088](http://localhost:8088) - External system integrations
-   - **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
-   - **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Orchestration Cluster REST API
+Available services:
 
-   :::note
-   In Camunda 8.8+, Operate, Tasklist, and Identity are integrated into the Orchestration Cluster and share the same endpoint (port 8080).
-   :::
+- **Operate:** [http://localhost:8080/operate](http://localhost:8080/operate) - Monitor process instances
+- **Tasklist:** [http://localhost:8080/tasklist](http://localhost:8080/tasklist) - Complete user tasks
+- **Admin:** [http://localhost:8080/admin](http://localhost:8080/admin) - User and permission management
+- **Connectors:** [http://localhost:8088](http://localhost:8088) - External system integrations
+- **Zeebe Gateway (gRPC):** localhost:26500 - Process deployment and execution
+- **Zeebe Gateway (HTTP):** [http://localhost:8080](http://localhost:8080) - Orchestration Cluster REST API
+
+:::note
+In Camunda 8.8+, Operate, Tasklist, and Admin are integrated into the Orchestration Cluster and share the same endpoint (port 8080).
+:::
 
 ## Full Cluster
 

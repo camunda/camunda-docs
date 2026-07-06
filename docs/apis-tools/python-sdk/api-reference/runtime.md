@@ -211,13 +211,13 @@ Return a copy of httpx_args with a request hook that applies auth headers.
 This uses httpx event hooks so we don’t have to inject headers in every generated API call.
 
 - **Parameters:**
-  - **httpx_args** (_dict_ _[\*\*str_ _,_ _Any_ _]_ _|_ _None_)
+  - **httpx_args** (_dict_ _[__str_ _,_ _Any_ _]_ _|_ _None_)
   - **auth_provider** (_object_)
   - **async_client** (_bool_)
   - **log_level** (_str_ _|_ _None_)
   - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
 - **Return type:**
-  dict[str, *Any*]
+  dict[str, _Any_]
 
 ## Logging
 
@@ -491,7 +491,7 @@ alias of [`ConnectedJobContext`](#connectedjobcontext)
 ## ConnectedJobContext
 
 ```python
-class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, log=NOTHING, , client)
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, log=NOTHING, , client)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -507,7 +507,7 @@ For `"thread"` handlers, see [`SyncJobContext`](#syncjobcontext).
 For `"process"` handlers, see [`JobContext`](#jobcontext).
 
 - **Parameters:**
-  - **type\_** (_str_)
+  - **type_** (_str_)
   - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
   - **process_definition_version** (_int_)
   - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
@@ -524,8 +524,10 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
   - **kind** (_JobKindEnum_)
   - **listener_event_type** (_JobListenerEventTypeEnum_)
   - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
-  - **tags** (_list_ _[\*\*str_ _]_)
+  - **tags** (_list_ _[__str_ _]_)
   - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **business_id** (_None_ _|_ [_BusinessId_](types.md#camunda_orchestration_sdk.semantic_types.BusinessId))
+  - **priority** (_int_)
   - **log** ([_SdkLogger_](#sdklogger))
   - **client** ([_CamundaAsyncClient_](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
 
@@ -539,15 +541,15 @@ client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAs
 
 - **Parameters:**
   - **job** (_ActivatedJobResult_)
-  - **client** ([_CamundaAsyncClient_](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
+  - **client** (_Any_)
   - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
 - **Return type:**
-  [ConnectedJobContext](#connectedjobcontext)
+  [_ConnectedJobContext_](#connectedjobcontext)
 
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
@@ -555,7 +557,7 @@ Bases: `ActivatedJobResult`
 Read-only context for a job execution.
 
 - **Parameters:**
-  - **type\_** (_str_)
+  - **type_** (_str_)
   - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
   - **process_definition_version** (_int_)
   - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
@@ -572,8 +574,10 @@ Read-only context for a job execution.
   - **kind** (_JobKindEnum_)
   - **listener_event_type** (_JobListenerEventTypeEnum_)
   - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
-  - **tags** (_list_ _[\*\*str_ _]_)
+  - **tags** (_list_ _[__str_ _]_)
   - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **business_id** (_None_ _|_ [_BusinessId_](types.md#camunda_orchestration_sdk.semantic_types.BusinessId))
+  - **priority** (_int_)
   - **log** ([_SdkLogger_](#sdklogger))
 
 ### log
@@ -599,7 +603,7 @@ structured log messages.
 log: [SdkLogger](#sdklogger)
 ```
 
-### _exception_ JobError(error_code, message='')
+### _exception_ JobError(error_code, message='', variables=None)
 
 Bases: `Exception`
 
@@ -608,8 +612,9 @@ Raise this exception to throw a BPMN error.
 - **Parameters:**
   - **error_code** (_str_)
   - **message** (_str_)
+  - **variables** (_dict_ _[__str_ _,_ _Any_ _]_ _|_ _None_)
 
-### _exception_ JobFailure(message, retries=None, retry_back_off=0)
+### _exception_ JobFailure(message, retries=None, retry_back_off=0, variables=None)
 
 Bases: `Exception`
 
@@ -619,6 +624,7 @@ Raise this exception to explicitly fail a job with custom retries/backoff.
   - **message** (_str_)
   - **retries** (_int_ _|_ _None_)
   - **retry_back_off** (_int_)
+  - **variables** (_dict_ _[__str_ _,_ _Any_ _]_ _|_ _None_)
 
 ## JobWorker
 
@@ -636,6 +642,53 @@ Bases: `object`
   - **execution_strategy** (_EXECUTION_STRATEGY_)
   - **startup_jitter_max_seconds** (_float_)
 
+### aclose()
+
+```python
+async def aclose()
+```
+
+Async-aware teardown.
+
+Cancels any in-flight job tasks and awaits their cancellation
+(bounded by a timeout) before delegating to the synchronous
+`close()`. Prefer this over `stop()`/`close()` from inside
+a running event loop — it gives cancelled tasks a chance to
+propagate before the pools they depend on are shut down, which
+prevents ‘cannot schedule new futures after shutdown’ (and the
+post-#150 ‘JobWorker is closed’) errors from surfacing as task
+exceptions.
+
+- **Return type:**
+  None
+
+### close()
+
+```python
+def close()
+```
+
+Release any resources this worker lazily allocated.
+
+Safe to call multiple times and from multiple threads concurrently.
+Use as a context manager (`with JobWorker(...) as worker:`) or in
+a pytest fixture teardown to avoid leaking file descriptors across
+many short-lived worker instances (see issue #148).
+
+Blocks until pools have finished shutdown so file descriptors and
+worker processes are reliably released before the references are
+cleared. If invoked from inside a pool worker thread, falls back
+to a non-waiting shutdown for that pool to avoid a self-join
+deadlock. If invoked from the worker loop thread, skips joining
+the worker thread (same self-join hazard).
+
+After `close()` returns, accessing `thread_pool`,
+`process_pool`, or `worker_loop` raises `RuntimeError`;
+a closed JobWorker cannot be reused.
+
+- **Return type:**
+  None
+
 ### poll_loop()
 
 ```python
@@ -643,6 +696,8 @@ async def poll_loop()
 ```
 
 Background polling loop - always async
+
+### _property_ process_pool _: ProcessPoolExecutor_
 
 ### start()
 
@@ -656,10 +711,14 @@ def start()
 def stop()
 ```
 
+### _property_ thread_pool _: ThreadPoolExecutor_
+
+### _property_ worker_loop _: AbstractEventLoop_
+
 ## SyncJobContext
 
 ```python
-class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, log=NOTHING, , client)
+class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, log=NOTHING, , client)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -675,7 +734,7 @@ For `"async"` handlers, see [`ConnectedJobContext`](#connectedjobcontext).
 For `"process"` handlers, see [`JobContext`](#jobcontext).
 
 - **Parameters:**
-  - **type\_** (_str_)
+  - **type_** (_str_)
   - **process_definition_id** ([_ProcessDefinitionId_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionId))
   - **process_definition_version** (_int_)
   - **element_id** ([_ElementId_](types.md#camunda_orchestration_sdk.semantic_types.ElementId))
@@ -692,8 +751,10 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
   - **kind** (_JobKindEnum_)
   - **listener_event_type** (_JobListenerEventTypeEnum_)
   - **user_task** (_ActivatedJobResultUserTask_ _|_ _None_)
-  - **tags** (_list_ _[\*\*str_ _]_)
+  - **tags** (_list_ _[__str_ _]_)
   - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
+  - **business_id** (_None_ _|_ [_BusinessId_](types.md#camunda_orchestration_sdk.semantic_types.BusinessId))
+  - **priority** (_int_)
   - **log** ([_SdkLogger_](#sdklogger))
   - **client** ([_CamundaClient_](client.md#camunda_orchestration_sdk.CamundaClient))
 
@@ -707,10 +768,10 @@ client: [CamundaClient](client.md#camunda_orchestration_sdk.CamundaClient)
 
 - **Parameters:**
   - **job** (_ActivatedJobResult_)
-  - **client** ([_CamundaClient_](client.md#camunda_orchestration_sdk.CamundaClient))
+  - **client** (_Any_)
   - **logger** ([_SdkLogger_](#sdklogger) _|_ _None_)
 - **Return type:**
-  [SyncJobContext](#syncjobcontext)
+  [_SyncJobContext_](#syncjobcontext)
 
 ## WorkerConfig
 
@@ -731,7 +792,7 @@ falling back to the hardcoded SDK default when neither is set.
   - **job_timeout_milliseconds** (_int_ _|_ _None_)
   - **request_timeout_milliseconds** (_int_ _|_ _None_)
   - **max_concurrent_jobs** (_int_ _|_ _None_)
-  - **fetch_variables** (_list_ _[\*\*str_ _]_ _|_ _None_)
+  - **fetch_variables** (_list_ _[__str_ _]_ _|_ _None_)
   - **worker_name** (_str_ _|_ _None_)
 
 ### fetch_variables
@@ -931,6 +992,12 @@ CAMUNDA_SDK_LOG_LEVEL: Literal['silent', 'error', 'warn', 'info', 'debug', 'trac
 CAMUNDA_TENANT_ID: str
 ```
 
+### CAMUNDA_TENANT_IDS
+
+```python
+CAMUNDA_TENANT_IDS: str | list[str]
+```
+
 ### CAMUNDA_TOKEN_AUDIENCE
 
 ```python
@@ -988,7 +1055,7 @@ ZEEBE_REST_ADDRESS: str
 ## CamundaSdkConfiguration
 
 ```python
-class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
+class CamundaSdkConfiguration(, ZEEBE_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_REST_ADDRESS='http://localhost:8080/v2', CAMUNDA_TOKEN_AUDIENCE='zeebe.camunda.io', CAMUNDA_OAUTH_URL='https://login.cloud.camunda.io/oauth/token', CAMUNDA_CLIENT_ID=None, CAMUNDA_CLIENT_SECRET=None, CAMUNDA_CLIENT_AUTH_CLIENTID=None, CAMUNDA_CLIENT_AUTH_CLIENTSECRET=None, CAMUNDA_AUTH_STRATEGY='NONE', CAMUNDA_BASIC_AUTH_USERNAME=None, CAMUNDA_BASIC_AUTH_PASSWORD=None, CAMUNDA_SDK_LOG_LEVEL='error', CAMUNDA_TOKEN_CACHE_DIR=None, CAMUNDA_TOKEN_DISK_CACHE_DISABLE=False, CAMUNDA_SDK_BACKPRESSURE_PROFILE='BALANCED', CAMUNDA_TENANT_ID=None, CAMUNDA_TENANT_IDS=None, CAMUNDA_WORKER_TIMEOUT=None, CAMUNDA_WORKER_MAX_CONCURRENT_JOBS=None, CAMUNDA_WORKER_REQUEST_TIMEOUT=None, CAMUNDA_WORKER_NAME=None, CAMUNDA_WORKER_STARTUP_JITTER_MAX_SECONDS=None, CAMUNDA_MTLS_CERT_PATH=None, CAMUNDA_MTLS_KEY_PATH=None, CAMUNDA_MTLS_CA_PATH=None, CAMUNDA_MTLS_CERT=None, CAMUNDA_MTLS_KEY=None, CAMUNDA_MTLS_CA=None, CAMUNDA_MTLS_KEY_PASSPHRASE=None)
 ```
 
 Bases: `BaseModel`
@@ -1010,6 +1077,7 @@ Bases: `BaseModel`
   - **CAMUNDA_TOKEN_DISK_CACHE_DISABLE** (_bool_)
   - **CAMUNDA_SDK_BACKPRESSURE_PROFILE** (_Literal_ _[_ _'BALANCED'_ _,_ _'LEGACY'_ _]_)
   - **CAMUNDA_TENANT_ID** (_str_ _|_ _None_)
+  - **CAMUNDA_TENANT_IDS** (_list_ _[__str_ _]_ _|_ _None_)
   - **CAMUNDA_WORKER_TIMEOUT** (_int_ _|_ _None_)
   - **CAMUNDA_WORKER_MAX_CONCURRENT_JOBS** (_int_ _|_ _None_)
   - **CAMUNDA_WORKER_REQUEST_TIMEOUT** (_int_ _|_ _None_)
@@ -1137,6 +1205,12 @@ CAMUNDA_SDK_LOG_LEVEL: CamundaSdkLogLevel
 CAMUNDA_TENANT_ID: str | None
 ```
 
+### CAMUNDA_TENANT_IDS
+
+```python
+CAMUNDA_TENANT_IDS: list[str] | None
+```
+
 ### CAMUNDA_TOKEN_AUDIENCE
 
 ```python
@@ -1191,7 +1265,7 @@ CAMUNDA_WORKER_TIMEOUT: int | None
 ZEEBE_REST_ADDRESS: str
 ```
 
-### model*config *= {'extra': 'forbid'}\_
+### model_config _= {'extra': 'forbid'}_
 
 Configuration for the model, should be a dictionary conforming to [ConfigDict][pydantic.config.ConfigDict].
 
@@ -1206,8 +1280,8 @@ Bases: `object`
 Resolves an effective configuration from environment + explicit overrides.
 
 - **Parameters:**
-  - **environment** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial) _|_ _Mapping_ _[\*\*str_ _,_ _Any_ _]_)
-  - **explicit_configuration** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial) _|_ _Mapping_ _[\*\*str_ _,_ _Any_ _]_ _|_ _None_)
+  - **environment** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial) _|_ _Mapping_ _[__str_ _,_ _Any_ _]_)
+  - **explicit_configuration** ([_CamundaSdkConfigPartial_](#camundasdkconfigpartial) _|_ _Mapping_ _[__str_ _,_ _Any_ _]_ _|_ _None_)
 
 ### resolve()
 
@@ -1256,6 +1330,6 @@ def read_environment(environ=None)
 ```
 
 - **Parameters:**
-  **environ** (_Mapping_ _[\*\*str_ _,_ _str_ _]_ _|_ _None_)
+  **environ** (_Mapping_ _[__str_ _,_ _str_ _]_ _|_ _None_)
 - **Return type:**
   [_CamundaSdkConfigPartial_](#camundasdkconfigpartial)

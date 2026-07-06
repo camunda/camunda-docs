@@ -18,7 +18,7 @@ Cluster variable response item.
 ### name
 
 ```ts
-name: string;
+name: ClusterVariableName;
 ```
 
 The name of the cluster variable. Unique within its scope (global or tenant-specific).

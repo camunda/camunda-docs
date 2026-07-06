@@ -288,11 +288,11 @@ Orchestration Cluster Identity provides several advantages:
 
 The impact of these changes and what action you need to take depends on your deployment type. For example:
 
-| Area                              | Impact                                                                                                                                                                                                             |
-| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authorization                     | The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.                     |
-| Roles, tenants, and mapping rules | Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.                                                                                                               |
-| User Task authorizations          | [User Task access restrictions](/components/tasklist/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply. |
+| Area                              | Impact                                                                                                                                                                                                                                        |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authorization                     | The new [authorization](/components/concepts/access-control/authorizations.md) model introduces fine-grained access control for Orchestration Cluster resources, replacing the previous model.                                                |
+| Roles, tenants, and mapping rules | Now managed within Orchestration Cluster Identity, replacing the previous Management Identity setup.                                                                                                                                          |
+| User Task authorizations          | [User Task access restrictions](/versioned_docs/version-8.9/components/tasklist/user-task-access-restrictions.md) only apply to the Tasklist v1 API. After switching to the v2 API with Tasklist, user task access restrictions do not apply. |
 
 Each deployment type has a clear upgrade path and migration guidance to help administrators transition from Camunda 8.7 to Camunda 8.8.
 
@@ -327,6 +327,7 @@ After you deploy all Camunda 8 components in a Self-Managed environment, you wil
 - Management Identity, Keycloak and Postgres are no longer needed for an Orchestration Cluster. They are only needed when using Web Modeler, Console or Optimize.
   - For the Orchestration Cluster, you can bring your own Identity Provider (for example, Keycloak, Microsoft EntraID, Okta) or use the built-in Basic authentication method.
   - A special setup is no longer required for Keycloak as it is now integrated like any other Identity Provider via OpenID Connect (OIDC). Management Identity relies by default on Keycloak, but you can also configure it to use any OIDC-compatible Identity Provider.
+- For OIDC-based Self-Managed deployments, you can reuse groups from your identity provider for authorization, role, and tenant assignment. See [bring your own groups](../../../self-managed/components/orchestration-cluster/admin/bring-your-groups.md).
 
 The following table summarizes where Orchestration Cluster Identity entities are managed in Camunda 8.8 Self-Managed:
 

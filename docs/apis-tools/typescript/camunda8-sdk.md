@@ -23,7 +23,7 @@ Use the [`@camunda8/sdk`](https://www.npmjs.com/package/@camunda8/sdk) package i
 - You want to migrate an existing application to the Orchestration Cluster API.
 
 :::info
-If you do not need to use gRPC or the V1 APIs, use the [Orchestration Cluster API TypeScript client](oca-client.md).
+If you do not need to use gRPC, use the [Orchestration Cluster API TypeScript client](oca-client.md).
 :::
 
 ## Prerequisites
@@ -55,7 +55,7 @@ Get started with the Orchestration Cluster API.
 :::info
 
 - A complete working version of the quickstart code is [available on GitHub](https://github.com/camunda-community-hub/c8-sdk-demo).
-- For earlier versions using the v1 APIs, refer to the [SDK README file](https://github.com/camunda/camunda-8-js-sdk).
+- For earlier versions (Camunda 8.7 and below), refer to the [SDK README file](https://github.com/camunda/camunda-8-js-sdk).
 
 :::
 
@@ -71,7 +71,7 @@ The recommended configuration is via the zero-configuration constructor, with al
 **The environment variables you must set are outlined below. Replace these with your secrets and URLs.**
 
 :::info
-To configure a client and capture these values when creating the client, see [setting up client connection credentials](/components/console/manage-clusters/manage-api-clients.md#create-a-client).
+To configure a client and capture these values when creating the client, see [setting up client connection credentials](/components/hub/organization/manage-clusters/manage-api-clients.md#create-a-client).
 :::
 
 ### Self-managed configuration

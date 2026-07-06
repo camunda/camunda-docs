@@ -101,32 +101,32 @@ Camunda supports **Oracle LTS releases**.
 
 ### H2
 
-H2 is supported for development, testing, and evaluation only. Production use is not recommended.
+Camunda recommends H2 for development, testing, and evaluation. It is not recommended for production workloads.
 
-For Camunda Orchestration Cluster secondary storage, H2 is a single-broker option only:
+For Camunda Orchestration Cluster secondary storage, H2 is best suited to single-broker setups:
 
 - Multi-broker clusters with H2 are not a valid architecture.
 - H2 does not provide a shared database across brokers.
 - In-memory H2 is ephemeral and does not survive restarts.
-- File-based H2 persists on local disk and is suitable for local/dev usage only.
+- File-based H2 persists on local disk and is best suited to local and developer-focused usage.
 
 ## Supported JDBC driver versions
 
 Camunda bundles JDBC drivers for databases where redistribution is permitted and expects you to provide drivers where licensing or distribution constraints apply (for example, Oracle).
 
-Driver versions are not pinned as a formal support guarantee unless explicitly stated. Bundled and tested versions can change with dependency updates (for example, Spring Boot updates).
+Bundled driver versions are not pinned as a formal support guarantee. Each bundled driver is tested in CI against every supported version of the corresponding database listed above, and the exact version may change between Camunda patch releases as dependencies are updated. To inspect the precise driver version bundled in a given Camunda release, see the `lib/` directory of the distribution archive.
 
 ### Bundled drivers
 
-The following JDBC drivers and wrappers are included in the Camunda application images:
+The following JDBC drivers and wrappers are included in the Camunda application images. Each is known to be compatible with every supported version of the corresponding database listed above:
 
-| Database / platform      | Driver artifact                                  | Version       | Notes                                                          |
-| :----------------------- | :----------------------------------------------- | :------------ | :------------------------------------------------------------- |
-| PostgreSQL               | `org.postgresql:postgresql`                      | 42.7.8        | Bundled in Camunda images.                                     |
-| MariaDB                  | `org.mariadb.jdbc:mariadb-java-client`           | 3.5.7         | Bundled in Camunda images.                                     |
-| Microsoft SQL Server     | `com.microsoft.sqlserver:mssql-jdbc`             | 12.10.2.jre11 | Bundled in Camunda images (JRE 11).                            |
-| H2                       | `com.h2database:h2`                              | 2.3.232       | Bundled in Camunda images.                                     |
-| Amazon Aurora (AWS JDBC) | `software.amazon.jdbc:aws-advanced-jdbc-wrapper` | 2.6.8         | JDBC wrapper for AWS Aurora; requires a supported base driver. |
+| Database / platform      | Driver artifact                                  | Notes                                                          |
+| :----------------------- | :----------------------------------------------- | :------------------------------------------------------------- |
+| PostgreSQL               | `org.postgresql:postgresql`                      | Bundled in Camunda images.                                     |
+| MariaDB                  | `org.mariadb.jdbc:mariadb-java-client`           | Bundled in Camunda images.                                     |
+| Microsoft SQL Server     | `com.microsoft.sqlserver:mssql-jdbc`             | Bundled in Camunda images (JRE 11).                            |
+| H2                       | `com.h2database:h2`                              | Bundled in Camunda images.                                     |
+| Amazon Aurora (AWS JDBC) | `software.amazon.jdbc:aws-advanced-jdbc-wrapper` | JDBC wrapper for AWS Aurora; requires a supported base driver. |
 
 ### User-supplied drivers
 
@@ -157,14 +157,14 @@ This table shows RDBMS support status by component (including RDBMS as secondary
 | :------------------------ | :----------------- | :---------------------------------------------------------------------------------------------------------------- |
 | **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                                              |
 | Tasklist UI               | ✅ Fully supported | All functionality available.                                                                                      |
-| Operate UI                | ⚠️ Limited         | Partial support in **8.9-alpha3**. See [Operate limitations](#operate-with-rdbms) below.                          |
+| Operate UI                | ✅ Fully supported | All functionality available.                                                                                      |
 | Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                                   |
 | Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md). |
 | Identity                  | ✅ Fully supported | All functionality available.                                                                                      |
 | Management API (REST API) | ✅ Fully supported | All functionality available.                                                                                      |
 
 :::note
-"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their RDBMS support and maturity can differ by the alpha release.
+"Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their support status can differ by component.
 :::
 
 ## Known limitations
@@ -196,16 +196,6 @@ The `LIKE` comparison operator is not affected by this limitation.
 
 Because collation behavior varies across database vendors, results sorted by string fields may differ between systems. Ensure your application accounts for potential sorting variations when migrating between different RDBMS vendors.
 
-### Operate with RDBMS
-
-Operate has partial support for RDBMS as secondary storage in Camunda 8.9-alpha3, and is under active development. Most core features work, but the following functionality is not yet available:
-
-- Dashboard statistics (process statistics, incident statistics by error message)
-- Batch operation monitoring and batch move operations
-- Variable panel in process instance details
-- Process instance modification
-- Deleting process definitions, process instances, or decision definitions
-
 ## Installation and deployment guides
 
 For hands-on instructions to deploy Camunda with RDBMS, start with:
@@ -214,6 +204,7 @@ For hands-on instructions to deploy Camunda with RDBMS, start with:
 
 Then choose your deployment pattern:
 
-- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Reference topology and design considerations.
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) - Canonical backend trade-offs and production architecture guidance.
+- [Production architecture with RDBMS](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) - Manual deployment topology guidance for RDBMS.
 - [Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md) - Entry point for manual installation, configuration, and operations.
 - [RDBMS example deployment for Helm](/self-managed/deployment/helm/install/helm-with-rdbms.md) - Kubernetes/Helm-based example walkthrough.

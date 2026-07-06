@@ -12,17 +12,17 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide is retained to help customers migrate before upgrading from 8.9 to 8.10. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
 
-This document outlines the changes required to continue using the component REST APIs after upgrading to Camunda 8.8, if migration to the new [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) is not yet possible.
+This document outlines the changes required to migrate from the component REST APIs before upgrading to Camunda 8.10, where the V1 component APIs are removed. Use it if migration to the new [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) was not yet possible during your 8.8 or 8.9 upgrade.
 
 In this context, **components** refer to the standalone Camunda applications **Operate** and **Tasklist**, each exposing its own V1 REST API.
 
 :::note
-As of version 8.8, the V1 component APIs are deprecated. We strongly recommend [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) where possible.
+As of version 8.8, the V1 component APIs are deprecated. They are removed in 8.10, so complete this migration before upgrading. We strongly recommend [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) where possible.
 :::
 
 ## Migrate V1 APIs
@@ -56,29 +56,29 @@ To maintain the same access level for the Operate V1 API, apply the following au
 To enable more fine-grained access control, the matrix below details the required permissions for each Operate V1 API endpoint.
 Ensure the user has general access (resource ID `*`) for each listed resource and permission type.
 
-| Endpoint                                                                                                       | Resource Type                    | Permission type          |
-| -------------------------------------------------------------------------------------------------------------- | -------------------------------- | ------------------------ |
-| [`POST /v1/process-definitions/search`](../operate-api/specifications/search-2.api.mdx)                        | PROCESS_DEFINITION               | READ_PROCESS_DEFINITION  |
-| [`GET /v1/process-definitions/:key`](../operate-api/specifications/by-key-2.api.mdx)                           | PROCESS_DEFINITION               | READ_PROCESS_DEFINITION  |
-| [`GET v1/process-definitions/:key/xml`](../operate-api/specifications/xml-by-key.api.mdx)                      | PROCESS_DEFINITION               | READ_PROCESS_DEFINITION  |
-| [`POST /v1/decision-definitions/search`](../operate-api/specifications/search-7.api.mdx)                       | DECISION_DEFINITION              | READ_DECISION_DEFINITION |
-| [`GET /v1/decision-definitions/:key`](../operate-api/specifications/by-key-6.api.mdx)                          | DECISION_DEFINITION              | READ_DECISION_DEFINITION |
-| [`POST /v1/decision-instances/search`](../operate-api/specifications/search-6.api.mdx)                         | DECISION_DEFINITION              | READ_DECISION_INSTANCE   |
-| [`GET /v1/decision-instances/:id`](../operate-api/specifications/by-id.api.mdx)                                | DECISION_DEFINITION              | READ_DECISION_INSTANCE   |
-| [`POST /v1/flownode-instances/search`](../operate-api/specifications/search-4.api.mdx)                         | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`GET /v1/flownode-instances/:key`](../operate-api/specifications/by-key-4.api.mdx)                            | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`POST /v1/variables/search`](../operate-api/specifications/search.api.mdx)                                    | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`GET /v1/variables/:key`](../operate-api/specifications/by-key.api.mdx)                                       | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`POST /v1/process-instances/search`](../operate-api/specifications/search-1.api.mdx)                          | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`GET /v1/process-instances/:key`](../operate-api/specifications/by-key-1.api.mdx)                             | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`GET /v1/process-instances/:key/statistics`](../operate-api/specifications/get-statistics.api.mdx)            | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`GET /v1/process-instances/:key/sequence-flows`](../operate-api/specifications/sequence-flows-by-key.api.mdx) | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`DEL /v1/process-instances/:key`](../operate-api/specifications/delete.api.mdx)                               | PROCESS_DEFINITION               | DELETE_PROCESS_INSTANCE  |
-| [`POST /v1/drd/search`](../operate-api/specifications/search-5.api.mdx)                                        | DECISION_REQUIREMENTS_DEFINITION | READ                     |
-| [`GET /v1/drd/:key`](../operate-api/specifications/by-key-5.api.mdx)                                           | DECISION_REQUIREMENTS_DEFINITION | READ                     |
-| [`GET /v1/drd/:key/xml`](../operate-api/specifications/xml-by-key-1.api.mdx)                                   | DECISION_REQUIREMENTS_DEFINITION | READ                     |
-| [`POST /v1/incidents/search`](../operate-api/specifications/search-3.api.mdx)                                  | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
-| [`GET /v1/incidents/:key`](../operate-api/specifications/by-key-3.api.mdx)                                     | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| Endpoint                                        | Resource Type                    | Permission type          |
+| ----------------------------------------------- | -------------------------------- | ------------------------ |
+| `POST /v1/process-definitions/search`           | PROCESS_DEFINITION               | READ_PROCESS_DEFINITION  |
+| `GET /v1/process-definitions/:key`              | PROCESS_DEFINITION               | READ_PROCESS_DEFINITION  |
+| `GET v1/process-definitions/:key/xml`           | PROCESS_DEFINITION               | READ_PROCESS_DEFINITION  |
+| `POST /v1/decision-definitions/search`          | DECISION_DEFINITION              | READ_DECISION_DEFINITION |
+| `GET /v1/decision-definitions/:key`             | DECISION_DEFINITION              | READ_DECISION_DEFINITION |
+| `POST /v1/decision-instances/search`            | DECISION_DEFINITION              | READ_DECISION_INSTANCE   |
+| `GET /v1/decision-instances/:id`                | DECISION_DEFINITION              | READ_DECISION_INSTANCE   |
+| `POST /v1/flownode-instances/search`            | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `GET /v1/flownode-instances/:key`               | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `POST /v1/variables/search`                     | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `GET /v1/variables/:key`                        | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `POST /v1/process-instances/search`             | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `GET /v1/process-instances/:key`                | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `GET /v1/process-instances/:key/statistics`     | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `GET /v1/process-instances/:key/sequence-flows` | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `DEL /v1/process-instances/:key`                | PROCESS_DEFINITION               | DELETE_PROCESS_INSTANCE  |
+| `POST /v1/drd/search`                           | DECISION_REQUIREMENTS_DEFINITION | READ                     |
+| `GET /v1/drd/:key`                              | DECISION_REQUIREMENTS_DEFINITION | READ                     |
+| `GET /v1/drd/:key/xml`                          | DECISION_REQUIREMENTS_DEFINITION | READ                     |
+| `POST /v1/incidents/search`                     | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
+| `GET /v1/incidents/:key`                        | PROCESS_DEFINITION               | READ_PROCESS_INSTANCE    |
 
 ### Mapping Tasklist permissions to new authorizations
 
@@ -97,14 +97,14 @@ To maintain the same access level for the Tasklist V1 API, apply the following a
 To enable more fine-grained access control, the matrix below details the required permissions for each Tasklist V1 API endpoint.  
 Ensure the user has general access (resource ID `*`) for each listed resource and permission type.
 
-| Endpoint                                                                                                       | Resource Type      | Permission type  |
-| -------------------------------------------------------------------------------------------------------------- | ------------------ | ---------------- |
-| [`GET /v1/forms/:formId`](../tasklist-api-rest/specifications/get-form.api.mdx)                                | PROCESS_DEFINITION | READ_USER_TASK   |
-| [`POST /v1/tasks/search`](../tasklist-api-rest/specifications/search-tasks.api.mdx)                            | PROCESS_DEFINITION | READ_USER_TASK   |
-| [`GET /v1/tasks/:taskId`](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)                          | PROCESS_DEFINITION | READ_USER_TASK   |
-| [`PATCH /v1/tasks/:taskId/assign`](../tasklist-api-rest/specifications/assign-task.api.mdx)                    | PROCESS_DEFINITION | UPDATE_USER_TASK |
-| [`PATCH /v1/tasks/:taskId/unassign`](../tasklist-api-rest/specifications/unassign-task.api.mdx)                | PROCESS_DEFINITION | UPDATE_USER_TASK |
-| [`PATCH /v1/tasks/:taskId/complete`](../tasklist-api-rest/specifications/complete-task.api.mdx)                | PROCESS_DEFINITION | UPDATE_USER_TASK |
-| [`POST /v1/tasks/:taskId/variables`](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)    | PROCESS_DEFINTION  | UPDATE_USER_TASK |
-| [`POST /v1/tasks/:taskId/variables/search`](../tasklist-api-rest/specifications/search-task-variables.api.mdx) | PROCESS_DEFINITION | READ_USER_TASK   |
-| [`GET /v1/variables/:variableId`](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)              | PROCESS_DEFINITION | READ_USER_TASK   |
+| Endpoint                                  | Resource Type      | Permission type  |
+| ----------------------------------------- | ------------------ | ---------------- |
+| `GET /v1/forms/:formId`                   | PROCESS_DEFINITION | READ_USER_TASK   |
+| `POST /v1/tasks/search`                   | PROCESS_DEFINITION | READ_USER_TASK   |
+| `GET /v1/tasks/:taskId`                   | PROCESS_DEFINITION | READ_USER_TASK   |
+| `PATCH /v1/tasks/:taskId/assign`          | PROCESS_DEFINITION | UPDATE_USER_TASK |
+| `PATCH /v1/tasks/:taskId/unassign`        | PROCESS_DEFINITION | UPDATE_USER_TASK |
+| `PATCH /v1/tasks/:taskId/complete`        | PROCESS_DEFINITION | UPDATE_USER_TASK |
+| `POST /v1/tasks/:taskId/variables`        | PROCESS_DEFINTION  | UPDATE_USER_TASK |
+| `POST /v1/tasks/:taskId/variables/search` | PROCESS_DEFINITION | READ_USER_TASK   |
+| `GET /v1/variables/:variableId`           | PROCESS_DEFINITION | READ_USER_TASK   |

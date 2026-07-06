@@ -7,6 +7,10 @@ description: "Understand patterns to convert your code written for Camunda 7 to 
 
 As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Orchestration Cluster REST API.
 
+:::tip Easiest path: use the Camunda migration agent skill
+If you use an [Agent Skills](https://agentskills.io/)-compatible AI coding agent (such as Claude Code), you can run an interactive end-to-end migration with the [Camunda migration agent skill](#camunda-migration-agent-skill). See [Leverage AI for code migration](#leverage-ai-for-code-migration) for details.
+:::
+
 ## Overview
 
 You must especially rewrite code that does the following:
@@ -23,7 +27,7 @@ This guide covers tools and approaches to help with code conversion:
 1. [API Mapping Guide](#api-mapping-guide): Understand how Camunda 7 REST API endpoints map to Camunda 8
 2. [OpenRewrite Recipes](#refactoring-recipes-using-openrewrite): Automatically refactor Java code with configurable recipes
 3. [Code Conversion Patterns](#code-conversion-patterns): Detailed technical reference for manual migration
-4. [AI-Assisted Code Migration](#leveraging-ai-for-code-migration): Use AI coding agents for interactive and agentic migration
+4. [AI-Assisted Code Migration](#leverage-ai-for-code-migration): Use AI coding agents for interactive and agentic migration, including the [Camunda migration agent skill](#camunda-migration-agent-skill) for an end-to-end interactive workflow
 
 Additionally, you will find information about:
 
@@ -305,13 +309,50 @@ Find the diagram conversion tooling and its documentation in the [Migration Tool
 
 ## Leverage AI for code migration
 
-AI coding agents such as Claude Code, GitHub Copilot, Cursor, Windsurf, or ChatGPT can accelerate code migration by applying the [code conversion patterns](#code-conversion-patterns) interactively. This is especially valuable for code that OpenRewrite recipes cannot handle automatically, such as custom superclasses, complex test cases, or configuration files.
+AI can accelerate code migration by applying the [code conversion patterns](#code-conversion-patterns) interactively. This is especially valuable for code that OpenRewrite recipes cannot handle automatically, such as custom superclasses, complex test cases, or configuration files.
 
 You can use AI in three ways:
 
 1. **Standalone**: Give the AI agent your Camunda 7 code and the conversion patterns, and let it produce Camunda 8 equivalents.
-2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to fix remaining TODOs and compilation errors.
+2. **Post-OpenRewrite cleanup**: Run OpenRewrite first, then use AI to handle the remaining tasks and compilation errors.
 3. **Full agentic migration**: Let an AI agent assess your codebase, run OpenRewrite, and handle all remaining migration tasks.
+
+:::tip
+The fastest path is the [Camunda migration agent skill](#camunda-migration-agent-skill): it packages all three approaches into an interactive workflow inside your AI coding agent.
+:::
+
+The rest of this section describes the underlying pattern catalog and prompts the Camunda migration agent skill uses, which you can also apply manually with any AI coding agent or chat assistant.
+
+### Camunda migration agent skill
+
+Use the official Camunda migration [Agent Skill](https://agentskills.io/). It packages everything, including assessment, OpenRewrite, AI cleanup, and validation, into an interactive workflow that runs inside your AI coding agent.
+
+1. Install it. You can use Claude Code:
+
+```bash
+claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
+claude plugin install camunda-migration
+```
+
+:::note Install with other agents
+The skill follows the open [Agent Skills](https://agentskills.io/) format and works with any compatible agent. See the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/agentic-migration-skills) for manual installation.
+:::
+
+2. Run from your Camunda 7 project directory:
+
+```
+/camunda-migration:migrate-c7-to-c8-code
+```
+
+The skill asks for your project path and migration approach, then guides you through:
+
+| Approach                             | What it does                                                                                                 |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| **OpenRewrite + AI** _(recommended)_ | Runs OpenRewrite recipes for bulk transforms, then AI resolves remaining TODOs, configuration, and test code |
+| **AI only**                          | AI migrates everything directly — for non-Maven/Gradle builds or when you want to review every change        |
+| **Assessment only**                  | Scans the codebase and reports files, complexity, and effort estimate — no code changes                      |
+
+The skill fetches the latest [pattern catalog](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/code-conversion/patterns/ALL_IN_ONE.md) at runtime, so it always reflects current migration guidance.
 
 ### Recommended combined workflow
 

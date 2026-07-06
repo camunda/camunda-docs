@@ -8,7 +8,7 @@ Use these practices to build secure, reliable, and maintainable Camunda–Servic
 
 ### Manage credentials securely
 
-- Store and manage ServiceNow credentials using [Camunda secrets](../../../components/console/manage-clusters/manage-secrets.md).
+- Store and manage ServiceNow credentials using [Camunda secrets](../../../components/hub/organization/manage-clusters/manage-secrets.md).
 - Never hardcode usernames or passwords in connector configurations or BPMN models.
 - Reference secrets with the `{{secrets.<name>}}` syntax in connector fields.
 - Apply this consistently across all ServiceNow connectors to maintain a unified security model.

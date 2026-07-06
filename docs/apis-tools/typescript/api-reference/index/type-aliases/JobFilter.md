@@ -155,6 +155,16 @@ The listener event type of the job.
 
 ---
 
+### priority?
+
+```ts
+optional priority?: IntegerFilterProperty;
+```
+
+The priority of the job. Jobs created before 8.10 have no stored priority and are excluded from results when this filter is applied.
+
+---
+
 ### processDefinitionId?
 
 ```ts

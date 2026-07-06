@@ -72,6 +72,18 @@ We use the same procedure to handle the loss of both active and passive regions.
 
 **Temporary Loss Scenario:** If a region loss is temporary — such as from transient network issues — Zeebe can handle this situation without initiating recovery procedures, provided there is sufficient free space on the persistent disk. However, processing may halt due to a loss of quorum during this time.
 
+:::warning Expect transient cross-region disruptions
+While cross-region connectivity and DNS converge, some failover and failback steps may take longer than expected or return transient errors, and Zeebe brokers may stay `Running` without becoming `Ready`. This is expected, not a failure. Follow the remediation steps below before treating a step as failed.
+:::
+
+Failover and failback depend on cross-region network connectivity and DNS resolution between both regions. For example, Submariner `ServiceExport` resources and clusterset DNS on OpenShift, or VPC peering on Amazon EKS. While this connectivity converges, Zeebe brokers may stay `Running` without becoming `Ready` until they can resolve their peers in the other region.
+
+If a step does not converge on the first attempt:
+
+- Allow extra time for cross-region DNS and Zeebe quorum to stabilize before concluding the step has failed.
+- Re-run the step. These procedures are idempotent.
+- Restart any Zeebe broker that stays `Running` but never becomes `Ready`, so it can resolve its cross-region peers and rejoin the cluster.
+
 #### Key steps to handle passive region loss
 
 1. **Traffic rerouting:** Use DNS to reroute traffic to the surviving active region. (Details on managing DNS rerouting depend on your specific DNS setup and are not covered in this guide.)
@@ -173,7 +185,7 @@ desired={<img src={Five} alt="Desired state diagram" style={{border: 'none', tra
 
 #### Procedure
 
-Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host to interact with the Gateway.
+Start with creating a port-forward to the `Zeebe Gateway` in the surviving region to the local host so you can interact with the Zeebe Gateway.
 
 The following alternatives to port-forwarding are possible:
 
@@ -656,7 +668,7 @@ desired={<img src={Eight} alt="Desired state diagram" style={{border: 'none', tr
 
 This step involves redeploying the recreated region using the same values files from the initial deployment.
 
-The Helm command also disables Operate and Tasklist. These components will be re-enabled only after region recovery is complete. Keeping them disabled in the newly created region helps prevent data loss, as Operate and Tasklist may still rely on v1 APIs and functionality that are isolated to a single region. Disabling them also prevents user confusion, since no visible updates will appear for their actions while the exporters remain disabled in the following steps.
+The Helm command also disables Operate and Tasklist. These components will be re-enabled only after region recovery is complete. Disabling them prevents user confusion, since no visible updates will appear for their actions while the exporters remain disabled in the following steps.
 
 <Tabs groupId="clusters-types">
   <TabItem value="EKS" label="EKS">
@@ -830,7 +842,7 @@ Half of the amount of your set `clusterSize` is used to spawn Zeebe brokers.
 For example, in the case of `clusterSize: 8`, four Zeebe brokers are provisioned in the newly created region.
 
 :::danger
-It is expected that the Zeebe broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
+It is expected that the Zeebe Broker pods will not reach the "Ready" state since they are not yet part of a Zeebe cluster and, therefore, not considered healthy by the readiness probe.
 :::
 
 Port-forwarding the Zeebe Gateway via `kubectl` and printing the topology should reveal that the new Zeebe brokers are recognized but yet a full member of the Zeebe cluster.

@@ -26,7 +26,7 @@ The description of the new group.
 ### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
 The ID of the new group.

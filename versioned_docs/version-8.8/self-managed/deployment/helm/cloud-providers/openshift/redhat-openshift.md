@@ -565,7 +565,7 @@ oc get storageclass
 # RECLAIMPOLICY should show "Retain", not "Delete"
 ```
 
-For more details, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
+For more details, including accepted alternatives to a cluster-wide `Retain` policy, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
 
 ### Security Context Constraints (SCCs)
 

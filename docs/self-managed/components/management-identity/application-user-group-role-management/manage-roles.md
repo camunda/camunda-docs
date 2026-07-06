@@ -20,14 +20,14 @@ Management Identity includes a set of default roles that are available out-of-th
 
 The following table lists the default roles and their descriptions:
 
-| Name                | Description                                                                                                                                 |
-| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------ |
-| Default user role   | The role does not grant any permissions by default. It is applied to all users, including service accounts.                                 |
-| Management Identity | Provides full access to [Management Identity](../overview.md).                                                                              |
-| Console             | Provides full access to [Console](../../console/overview.md).                                                                               |
-| Optimize            | Grants full access to [Optimize](../../optimize/overview.md).                                                                               |
-| Web Modeler         | Grants access to [Web Modeler](../../modeler/web-modeler/overview.md) for creating and collaborating on projects.                           |
-| Web Modeler Admin   | Grants full access to [Web Modeler](../../modeler/web-modeler/overview.md), including all projects and the ability to manage collaborators. |
+| Name                | Description                                                                                                 |
+| :------------------ | :---------------------------------------------------------------------------------------------------------- |
+| Default user role   | The role does not grant any permissions by default. It is applied to all users, including service accounts. |
+| Management Identity | Provides full access to [Management Identity](../overview.md).                                              |
+| Console             | Provides full access to Console.                                                                            |
+| Optimize            | Grants full access to [Optimize](../../optimize/overview.md).                                               |
+| Web Modeler         | Grants access to Web Modeler for creating and collaborating on projects.                                    |
+| Web Modeler Admin   | Grants full access to Web Modeler, including all projects and the ability to manage collaborators.          |
 
 ## Add a role
 

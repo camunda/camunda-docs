@@ -15,4 +15,4 @@ yq ". *+ load(\"camunda-keycloak-domain-values.yml\")" values.yml > values-merge
 yq ". *+ load(\"camunda-values-identity-secrets.yml\")" values.yml > values-merged.yml && mv values-merged.yml values.yml
 ```
 
-The overlay files are available in the [Keycloak operator-based directory](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based/keycloak). The identity secrets are created automatically by the Keycloak Operator.
+The overlay files are available in the [Keycloak operator-based directory](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/generic/kubernetes/operator-based/keycloak). The identity secrets are created automatically by the Keycloak Operator.

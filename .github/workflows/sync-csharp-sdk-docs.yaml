@@ -30,7 +30,11 @@ jobs:
         run: |
           VERSION="${{ github.event.inputs.docs_version }}"
           if [ -n "$VERSION" ]; then
-            echo "sdk_ref=stable/${VERSION}" >> "$GITHUB_OUTPUT"
+            if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+$'; then
+              echo "::error::docs_version must be in X.Y format (e.g. '8.9'), got: '$VERSION'"
+              exit 1
+            fi
+            echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
             echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
             echo "pr_branch=update-csharp-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
             echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
@@ -42,13 +46,13 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout C# SDK
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/orchestration-cluster-api-csharp
           ref: ${{ steps.resolve.outputs.sdk_ref }}
@@ -79,11 +83,16 @@ jobs:
 
       - name: Copy SDK examples for code samples
         run: |
-          EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-csharp/examples"
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            EXAMPLES_TARGET="docs/.sdk-repos/version-${VERSION}/orchestration-cluster-api-csharp/examples"
+          else
+            EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-csharp/examples"
+          fi
           rm -rf "$EXAMPLES_TARGET"
           mkdir -p "$EXAMPLES_TARGET"
           cp -R csharp-sdk/examples/* "$EXAMPLES_TARGET/"
-          echo "Copied C# SDK examples → .sdk-repos/"
+          echo "Copied C# SDK examples → $EXAMPLES_TARGET"
 
       - name: Generate DocFX metadata
         working-directory: csharp-sdk
@@ -161,13 +170,26 @@ jobs:
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
-          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
@@ -195,3 +217,12 @@ jobs:
           branch: ${{ steps.resolve.outputs.pr_branch }}
           commit-message: "docs: update C# SDK API reference (${{ steps.resolve.outputs.version_label }})"
           labels: "component:docs"
+  notify-failure:
+    needs:
+      - sync-csharp-sdk-docs
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

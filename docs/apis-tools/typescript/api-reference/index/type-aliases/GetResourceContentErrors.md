@@ -23,6 +23,16 @@ A resource with the given key was not found.
 
 ---
 
+### 406
+
+```ts
+406: ProblemDetail;
+```
+
+The resource exists but is not an RPA resource.
+
+---
+
 ### 500
 
 ```ts

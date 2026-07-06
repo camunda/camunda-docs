@@ -12,7 +12,7 @@ This guide provides a unified approach to configuring relational databases for C
 :::info
 
 - For **Orchestration Cluster configuration reference**, see [RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md).
-- For **Web Modeler configuration reference**, see [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md).
+- For **Web Modeler configuration reference**, see [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md).
 - For **supported vendors and versions**, see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - For **deployment-specific setup**, see [Helm RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md) or [manual RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md).
   :::
@@ -37,7 +37,7 @@ Both topologies are fully supported. Choose based on your organizational model a
 - **Supported RDBMS**: PostgreSQL (recommended), MariaDB, MySQL, SQL Server, Oracle, or H2 (development only).
 - **Versions**: See the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - **Network and credentials**: Ensure reachable database and user with DDL permissions (CREATE TABLE, ALTER TABLE) for schema initialization.
-- **SSL/TLS**: Optional but recommended. See [Web Modeler SSL configuration](/self-managed/components/modeler/web-modeler/configuration/database.md#configuring-ssl-for-the-database-connection) for guidance on JDBC URL parameters.
+- **SSL/TLS**: Optional but recommended. See [Web Modeler SSL configuration](/self-managed/components/hub/configuration/database.md#configuring-ssl-for-the-database-connection) for guidance on JDBC URL parameters.
 
 ### Create database and user
 
@@ -165,7 +165,7 @@ webModeler:
       # Or use existingSecret for production
 ```
 
-For full Web Modeler reference, see [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md).
+For full Web Modeler reference, see [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md).
 
 </TabItem>
 
@@ -237,7 +237,7 @@ webModeler:
       # No password needed; IAM token generated at runtime
 ```
 
-For detailed Aurora setup, see [Orchestration Cluster RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and [Web Modeler configuration](/self-managed/components/modeler/web-modeler/configuration/database.md).
+For detailed Aurora setup, see [Orchestration Cluster RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and [Web Modeler configuration](/self-managed/components/hub/configuration/database.md).
 
 ## Step 4: JDBC driver management
 
@@ -247,7 +247,7 @@ For detailed driver provisioning strategies (init containers, custom images, vol
 
 - **Helm**: [JDBC driver management in Helm](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 - **Manual**: [Manual installation driver setup](/self-managed/deployment/manual/rdbms/configuration.md#jdbc-driver-management)
-- **Web Modeler**: [Web Modeler database configuration](/self-managed/components/modeler/web-modeler/configuration/database.md)
+- **Web Modeler**: [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md)
 
 ## Step 5: Schema management
 
@@ -288,7 +288,7 @@ For access to SQL/Liquibase scripts or manual DBA procedures, see [Access SQL an
 For detailed troubleshooting, see:
 
 - [RDBMS troubleshooting](/self-managed/deployment/helm/configure/database/rdbms-troubleshooting.md)
-- [Web Modeler database troubleshooting](/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection.md)
+- [Web Modeler database troubleshooting](/self-managed/components/hub/troubleshooting/troubleshoot-database-connection.md)
 
 ## Step 7: Backup and restore
 

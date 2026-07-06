@@ -7,13 +7,13 @@ description: Learn how to use connectors in Web Modeler by creating a connector 
 Any task can be transformed into a connector task. This guide details the basic functionality all connectors share.
 
 Find available connectors in [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
-To add connectors from your BPMN diagram, visit the [Camunda Marketplace](/components/modeler/web-modeler/modeling/camunda-marketplace.md).
+To add connectors from your BPMN diagram, visit the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
 
 :::note
 Learn how to [install connectors in Self-Managed](/self-managed/components/connectors/overview.md).
 
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools.
-[Model your first diagram](/components/modeler/web-modeler/modeling/model-your-first-diagram.md) to learn how to work with Web Modeler.
+[Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to work with Web Modeler.
 :::
 
 ## Using secrets
@@ -23,7 +23,7 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 :::
 
 You can use sensitive information in your connectors without exposing it in your BPMN processes by referencing secrets.
-Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
+Use Camunda Hub to [create and manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 
 You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties
 panel that supports this.
@@ -261,8 +261,7 @@ Use the provided FEEL functions:
   a [CompleteJob call](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx) to the workflow
   engine.
 
-The `bpmnError` FEEL function optionally allows you to pass variables as the third parameter. You can combine this with
-a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
+The `bpmnError` FEEL function can be called with one, two, or three parameters. Optionally, you can pass variables as the third parameter and combine this with a boundary event to use the variables in condition expressions when handling the error event. Example FEEL expression:
 
 ```
 if response.body.status = "failed" then bpmnError("FAILED", "The action failed", response.body) else null
@@ -277,6 +276,10 @@ Within the FEEL expression, you access the following temporary variables:
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code
   is only available if the connector's runtime behavior provided a code in the exception it threw.
 
+:::info
+If a **Result Variable** or **Result Expression** is configured on the connector task, the raw connector response is **not** available as `response` in the error expression. Instead, `response` contains only the mapped output variables. Reference those variables by name (for example, `myVar.status`) rather than using `response.body`.
+:::
+
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on
 technical exceptions thrown by a connector as well as regular results returned by the external system you integrated.
 The [example expressions](#bpmn-error-examples) below can serve as templates for such scenarios.
@@ -287,12 +290,15 @@ Returns a context entry with an `errorType`, `errorCode` and `errorMessage`.
 
 - parameters:
   - `errorCode`: string
-  - `errorMessage`: string
+  - `errorMessage`: string (optional)
 - result: context
 
 ```feel
 bpmnError("123", "error received")
 // { errorType: "bpmnError", errorCode: "123", errorMessage: "error received" }
+
+bpmnError("123")
+// { errorType: "bpmnError", errorCode: "123" }
 ```
 
 ### Function bpmnError with variables

@@ -12,7 +12,7 @@ Select and configure authentication for the LLM model **Provider** you want to u
 :::note
 
 - Different setup/authentication fields are shown depending on the provider you select.
-- Use [connector secrets](/components/console/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly from the process.
+- Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly from the process.
 
 :::
 
@@ -148,7 +148,7 @@ To learn more about authentication to the OpenAPI API, refer to [OpenAPI platfor
 
 #### OpenAI-compatible
 
-Select this option to use an LLM provider that provides OpenAI-compatible endpoints.
+With this option, you can connect to any LLM that exposes an OpenAI-compatible API, including open-weight models such as Qwen, Llama, and Mistral, hosted via Ollama or any compatible inference platform.
 
 | Field                | Required | Description                                                                                                                                                                                                             |
 | :------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

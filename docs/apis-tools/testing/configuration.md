@@ -492,6 +492,7 @@ Implement a `CamundaProcessTestContainerProvider` bean that creates the custom c
 In this example, we create a WireMock container to mock external HTTP calls in the tests.
 
 ```java
+
 @Configuration
 public class TestConfig {
 
@@ -597,12 +598,12 @@ Alternatively, you can register the container provider on the JUnit extension us
 // No annotation: @CamundaProcessTest
 public class MyProcessTest {
 
-  @RegisterExtension
-  private static final CamundaProcessTestExtension EXTENSION =
-          new CamundaProcessTestExtension()
-                  .withContainerProvider(new WireMockContainerProvider())
-                  .withConnectorsEnabled(true)
-                  .withConnectorsSecret("BASE_URL", "http://wiremock:8080");
+    @RegisterExtension
+    private static final CamundaProcessTestExtension EXTENSION =
+            new CamundaProcessTestExtension()
+                    .withContainerProvider(new WireMockContainerProvider())
+                    .withConnectorsEnabled(true)
+                    .withConnectorsSecret("BASE_URL", "http://wiremock:8080");
 }
 ```
 
@@ -724,13 +725,17 @@ camunda:
     # Change the connection (default: Camunda 8 Run)
     remote:
       camunda-monitoring-api-address: http://0.0.0.0:9600
-      connectors-rest-api-address: http://0.0.0.0:8085
+      connectors-rest-api-address: http://0.0.0.0:8086
       # The connection timeout in ISO-8601 duration format (default: PT1M)
       runtime-connection-timeout: PT1M
-      client:
-        rest-address: http://0.0.0.0:8080
-        grpc-address: http://0.0.0.0:26500
+  client:
+    rest-address: http://0.0.0.0:8080
+    grpc-address: http://0.0.0.0:26500
 ```
+
+:::note
+The properties `camunda.process-test.remote.client.rest-address` and `camunda.process-test.remote.client.grpc-address` are deprecated. Use `camunda.client.rest-address` and `camunda.client.grpc-address` instead.
+:::
 
 </TabItem>
 
@@ -742,12 +747,16 @@ In your `/camunda-container-runtime.properties` file:
 runtimeMode=remote
 # Change the connection (default: Camunda 8 Run)
 remote.camundaMonitoringApiAddress=http://0.0.0.0:9600
-remote.connectorsRestApiAddress=http://0.0.0.0:8085
-remote.client.grpcAddress=http://0.0.0.0:26500
-remote.client.restAddress=http://0.0.0.0:8080
+remote.connectorsRestApiAddress=http://0.0.0.0:8086
+camunda.client.gateway.grpc.address=http://0.0.0.0:26500
+camunda.client.gateway.rest.address=http://0.0.0.0:8080
 # The connection timeout in ISO-8601 duration format (default: PT1M)
 remote.runtimeConnectionTimeout=PT1M
 ```
+
+:::note
+The properties `remote.client.grpcAddress` and `remote.client.restAddress` are deprecated. Use `camunda.client.gateway.grpc.address` and `camunda.client.gateway.rest.address` instead.
+:::
 
 Alternatively, register the JUnit extension manually and use the fluent builder:
 
@@ -765,12 +774,12 @@ public class MyProcessTest {
             new CamundaProcessTestExtension()
                     .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
                     // Change the connection (default: Camunda 8 Run)
-                    .withRemoteCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
+                    .withCamundaClientBuilderFactory(() -> CamundaClient.newClientBuilder()
                             .restAddress(URI.create("http://0.0.0.0:8080"))
                             .grpcAddress(URI.create("http://0.0.0.0:26500"))
                     )
                     .withRemoteCamundaMonitoringApiAddress(URI.create("http://0.0.0.0:9600"))
-                    .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8085"))
+                    .withRemoteConnectorsRestApiAddress(URI.create("http://0.0.0.0:8086"))
                     // Change the connection timeout (default: PT1M)
                     .withRemoteRuntimeConnectionTimeout(Duration.ofMinutes(1));
 }
@@ -788,10 +797,104 @@ the test in debug mode from your IDE.
 When the test execution stops at a breakpoint, you can inspect the process instance state using Operate and the user
 task state using Tasklist. You can also use the Camunda client to interact with the runtime from the debugger console.
 
+## Client configuration
+
+CPT configures the Camunda client automatically based on the runtime mode. You can customize the client
+configuration beyond the connection addresses, for example, to set up authentication.
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+CPT applies all [Camunda client configurations](/apis-tools/camunda-spring-boot-starter/configuration.md) from your
+`application.yml`. For example, to configure Basic authentication for a remote runtime:
+
+```yaml
+camunda:
+  client:
+    grpc-address: http://localhost:26500
+    rest-address: http://localhost:8080
+    auth:
+      method: basic
+      username: demo
+      password: demo
+```
+
+For full flexibility, provide a `CamundaClientBuilderFactory` bean:
+
+```java
+
+@Bean
+public CamundaClientBuilderFactory customClientBuilderFactory() {
+    return () ->
+            CamundaClient.newClientBuilder()
+                    .restAddress(URI.create("http://0.0.0.0:8080"))
+                    .grpcAddress(URI.create("http://0.0.0.0:26500"))
+                    .credentialsProvider(
+                            CredentialsProvider.newBasicAuthCredentialsProviderBuilder()
+                                    .username("demo")
+                                    .password("demo")
+                                    .build());
+}
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In the `camunda-container-runtime.properties` file, you can set any
+[`ClientProperties`](https://javadoc.io/doc/io.camunda/camunda-client-java/latest/io/camunda/client/ClientProperties.html).
+For example, to configure the connection to a remote runtime:
+
+```properties
+camunda.client.gateway.rest.address=http://0.0.0.0:8080
+camunda.client.gateway.grpc.address=http://0.0.0.0:26500
+```
+
+For more flexibility, use the fluent builder to set a client builder factory:
+
+```java
+
+@RegisterExtension
+private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+                .withRuntimeMode(CamundaProcessTestRuntimeMode.REMOTE)
+                .withCamundaClientBuilderFactory(
+                        () ->
+                                CamundaClient.newClientBuilder()
+                                        .restAddress(URI.create("http://0.0.0.0:8080"))
+                                        .grpcAddress(URI.create("http://0.0.0.0:26500")));
+```
+
+To override specific client properties, for example to configure a credential provider, use
+`withCamundaClientBuilderOverrides`. This works together with the client builder factory and the configuration file:
+
+```java
+
+@RegisterExtension
+private static final CamundaProcessTestExtension EXTENSION =
+        new CamundaProcessTestExtension()
+                .withCamundaClientBuilderOverrides(
+                        camundaClientBuilder ->
+                                camundaClientBuilder
+                                        .credentialsProvider(
+                                                CredentialsProvider.newBasicAuthCredentialsProviderBuilder()
+                                                        .username("demo")
+                                                        .password("demo")
+                                                        .build()));
+```
+
+</TabItem>
+
+</Tabs>
+
 ## Process Test Coverage
 
-CPT generates an HTML and JSON coverage report of your BPMN processes. You can configure the report generation in the
-following way.
+CPT generates an HTML and JSON coverage report of your BPMN processes and DMN decision tables. You can configure the
+report generation in the following way.
 
 <Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
 {label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
@@ -808,10 +911,14 @@ camunda:
     coverage:
       # Change the directory where the report is generated
       reportDirectory: target/coverage-report
-      # Exclude processes from the report
+      # Exclude processes from the report by their process definition ID
       excludedProcesses:
         - process_1
         - process_2
+      # Exclude decisions from the report by their decision definition ID
+      excludedDecisions:
+        - decision_1
+        - decision_2
 ```
 
 </TabItem>
@@ -823,9 +930,12 @@ In your `/camunda-container-runtime.properties` file:
 ```properties
 # Change the directory where the report is generated
 coverage.reportDirectory=target/coverage-report
-# Exclude processes from the report
+# Exclude processes from the report by their process definition ID
 excludedProcesses[0]=process_1
 excludedProcesses[1]=process_2
+# Exclude decisions from the report by their decision definition ID
+excludedDecisions[0]=decision_1
+excludedDecisions[1]=decision_2
 ```
 
 </TabItem>
@@ -844,7 +954,7 @@ for the following packages:
 
 ## Judge configuration
 
-[Judge assertions](assertions.md#hasvariablesatisfiesjudge) use a configured LLM to score process variables against
+[Judge assertions](assertions.md#hasvariablesatisfiesjudge) use a configured LLM to score process variables (or plain values) against
 natural language expectations. This section covers how to set up the LLM provider and tune the judge behavior.
 
 ### Prerequisites
@@ -852,10 +962,10 @@ natural language expectations. This section covers how to set up the LLM provide
 CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured
 support for major LLM providers: OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and OpenAI-compatible APIs.
 LangChain4j requires Java 17+. You can provide your own LLM integration through a
-custom `ChatModelAdapter` instead (see [Custom ChatModelAdapter](#custom-chatmodeladapter)).
+custom `ChatModelAdapter` instead (see [custom ChatModelAdapter](#custom-chatmodeladapter)).
 
 :::tip
-For a guided walkthrough of setting up and testing AI agents, see [Test your AI agents](/components/agentic-orchestration/test-ai-agents.md).
+For a guided walkthrough of setting up and testing AI agents, see [test your AI agents](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md).
 :::
 
 <Tabs groupId="client" defaultValue="spring-sdk-pre" queryString values={[
@@ -875,6 +985,7 @@ dependency is needed.
 Add the `camunda-process-test-langchain4j` dependency to your project:
 
 ```xml
+
 <dependency>
     <groupId>io.camunda</groupId>
     <artifactId>camunda-process-test-langchain4j</artifactId>
@@ -886,7 +997,7 @@ Add the `camunda-process-test-langchain4j` dependency to your project:
 
 </Tabs>
 
-If you provide a custom `ChatModelAdapter` (see [Custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency
+If you provide a custom `ChatModelAdapter` (see [custom ChatModelAdapter](#custom-chatmodeladapter)), this dependency
 is not required.
 
 ### Property reference
@@ -894,16 +1005,17 @@ is not required.
 All judge properties are nested under `camunda.process-test.judge` in Spring configuration. In Java properties files,
 use the `judge.` prefix with camelCase keys (for example, `judge.chat-model.api-key` becomes `judge.chatModel.apiKey`).
 
-For configuration examples, see [Step 2: Configure the LLM provider and connectors](/components/agentic-orchestration/test-ai-agents.md#step-2-configure-the-llm-provider-and-connectors).
+For configuration examples, see [Step 2: configure the LLM provider and connectors](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md#step-2-configure-the-llm-provider-and-connectors).
 
 Unless noted otherwise, properties in the provider tables are required.
 
 #### Judge settings
 
-| Property              | Type     | Default | Description                                              |
-| --------------------- | -------- | ------- | -------------------------------------------------------- |
-| `judge.threshold`     | `double` | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass. |
-| `judge.custom-prompt` | `string` |         | Custom evaluation prompt replacing the default criteria. |
+| Property                 | Type      | Default | Description                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------ | --------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `judge.threshold`        | `double`  | `0.5`   | Confidence threshold (0.0 to 1.0) for the judge to pass.                                                                                                                                                                                                                                                                                      |
+| `judge.custom-prompt`    | `string`  |         | Custom evaluation prompt replacing the default criteria.                                                                                                                                                                                                                                                                                      |
+| `judge.attach-documents` | `boolean` | `false` | When `true`, resolves Camunda document references in the evaluated variable and attaches their content to the judge. Disabled by default to avoid unnecessary token cost. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON. See [document attachment](#document-attachment). |
 
 The default threshold of `0.5` treats a response as acceptable when it is at least partially satisfied according to the
 judge rubric. This is a practical default for AI-generated output, where wording and level of detail may vary between
@@ -1090,6 +1202,63 @@ camunda:
 
 </Tabs>
 
+### Document attachment
+
+When `judge.attach-documents` is enabled, CPT scans the serialized variable JSON for [Camunda document](/components/document-handling/getting-started.md) references, downloads their content, and passes it to the judge alongside the text prompt as structured content blocks. This lets the judge evaluate document content, such as generated PDFs, images, or text files.
+
+Document attachment is disabled by default. Enable it globally:
+
+<Tabs groupId="client" defaultValue="spring-sdk-attach" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-attach' },
+{label: 'Java client', value: 'java-client-attach' },
+]}>
+
+<TabItem value='spring-sdk-attach'>
+
+```yaml
+camunda:
+  process-test:
+    judge:
+      attach-documents: true
+```
+
+</TabItem>
+
+<TabItem value='java-client-attach'>
+
+```properties
+judge.attachDocuments=true
+```
+
+</TabItem>
+
+</Tabs>
+
+You can also enable it per assertion using `withJudgeConfig`:
+
+```java
+assertThat(processInstance)
+    .withJudgeConfig(config -> config.withAttachDocuments(true))
+    .hasVariableSatisfiesJudge("report", "Contains an executive summary with at least three key findings.");
+```
+
+#### Content type handling
+
+How the document is passed to the judge depends on its MIME content type:
+
+| Content type                                                                                                                                            | Passed to judge as                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `image/*`                                                                                                                                               | Inline image block                                                      |
+| `application/pdf`                                                                                                                                       | PDF file block                                                          |
+| `text/*`, `application/json`, `application/xml`, `application/yaml`, `application/x-yaml`, or types with a structured suffix (`+json`, `+xml`, `+yaml`) | Inline text block (UTF-8)                                               |
+| All other types                                                                                                                                         | Placeholder text only; content is not inspectable. A warning is logged. |
+
+#### Behavior
+
+- Built-in LangChain4j providers implement `MultimodalChatModelAdapter`. Custom `ChatModelAdapter` implementations must implement `MultimodalChatModelAdapter` to receive documents. Otherwise, document attachment does not take effect and the judge evaluates only the raw variable JSON.
+- Documents with the same document ID and store ID are deduplicated and downloaded only once.
+- If a document fails to download, the assertion fails with an `IllegalStateException`.
+
 ### Custom prompt
 
 You can replace the default evaluation criteria with a custom prompt. The custom prompt replaces only the evaluation
@@ -1157,6 +1326,7 @@ module. A `ChatModelAdapter` is a functional interface that takes a prompt strin
 If you have a single `ChatModelAdapter` bean and no `provider` property is set, CPT auto-detects and uses it:
 
 ```java
+
 @TestConfiguration
 class JudgeTestConfig {
 
@@ -1171,6 +1341,7 @@ When you have multiple beans, set `provider` to the bean name you want to use. I
 the method name:
 
 ```java
+
 @TestConfiguration
 class JudgeTestConfig {
 
@@ -1249,10 +1420,431 @@ CamundaAssert.setJudgeConfig(
 Or register the JUnit extension manually with a judge configuration:
 
 ```java
+
 @RegisterExtension
 CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
     .withJudgeConfig(JudgeConfig.of(prompt -> myChatModelAdapter.generate(prompt))
         .withThreshold(0.8));
+```
+
+</TabItem>
+
+</Tabs>
+
+#### Multimodal support
+
+To use [document attachment](#document-attachment) with a custom adapter, implement `MultimodalChatModelAdapter` instead of `ChatModelAdapter`. `MultimodalChatModelAdapter` extends `ChatModelAdapter` and adds a second `generate` overload that receives the resolved documents.
+
+Each `ResolvedDocument` provides the binary content via `getContent()` and metadata via `getDocumentId()`, `getFileName()`, and `getContentType()`. Pass each document to the provider as a native structured content block (image block, file block, or text block depending on the content type). Prefix each block with a text content header containing the document metadata so the judge can correlate the block back to the document reference in `<actual_value>`:
+
+```java
+public class MyMultimodalAdapter implements MultimodalChatModelAdapter {
+
+    @Override
+    public String generate(String prompt) {
+        return myClient.chat(prompt);
+    }
+
+    @Override
+    public String generate(String prompt, List<ResolvedDocument> documents) {
+        List<Object> parts = new ArrayList<>();
+        parts.add(new TextPart(prompt));
+
+        for (ResolvedDocument doc : documents) {
+            // text header identifying this document block
+            parts.add(new TextPart(
+                "--- documentId=\"" + doc.getDocumentId()
+                + "\" fileName=\"" + doc.getFileName()
+                + "\" contentType=\"" + doc.getContentType() + "\" ---"));
+            // binary content as a native structured block
+            parts.add(new BinaryPart(doc.getContent(), doc.getContentType()));
+        }
+
+        return myClient.chat(parts);
+    }
+}
+```
+
+Replace `TextPart` and `BinaryPart` with the content-block types your provider's SDK defines. If document attachment is enabled but the adapter only implements `ChatModelAdapter`, document attachment does not take effect and the judge evaluates only the raw variable JSON.
+
+## Semantic similarity configuration
+
+[Semantic similarity assertions](assertions.md#hasvariablesimilarto) use a configured embedding model to compare process variables (or plain values) to an expected string using vector embeddings.
+The assertion converts both values to embeddings and compares them using cosine similarity.
+
+This section covers how to set up the embedding model provider and tune the similarity behavior.
+
+### Prerequisites
+
+CPT provides an optional [LangChain4j](https://docs.langchain4j.dev/) integration module that ships with preconfigured support for major embedding model providers, such as OpenAI, Azure OpenAI, Amazon Bedrock, and OpenAI-compatible APIs.
+
+:::note
+LangChain4j requires Java 17+.
+:::
+
+<Tabs groupId="client" defaultValue="spring-sdk-similarity-pre" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-similarity-pre' },
+{label: 'Java client', value: 'java-client-similarity-pre' },
+]}>
+
+<TabItem value='spring-sdk-similarity-pre'>
+
+Camunda Process Test Spring includes the LangChain4j providers as a transitive dependency. No additional
+dependency or configuration is needed.
+
+</TabItem>
+
+<TabItem value='java-client-similarity-pre'>
+
+Add the `camunda-process-test-langchain4j` dependency to your project:
+
+```xml
+<dependency>
+    <groupId>io.camunda</groupId>
+    <artifactId>camunda-process-test-langchain4j</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+
+</TabItem>
+
+</Tabs>
+
+:::important
+You can provide your own embedding integration through a custom `EmbeddingModelAdapter`. In that case, this dependency is not required. See [custom EmbeddingModelAdapter](#custom-embeddingmodeladapter) for more details.
+:::
+
+### Property reference
+
+All semantic similarity properties are nested under `camunda.process-test.similarity` in Spring configuration.
+In Java properties files, use the `similarity.` prefix with camelCase keys. For example, `similarity.embedding-model.api-key` becomes `similarity.embeddingModel.apiKey`.
+
+:::note
+Unless noted otherwise, properties in the provider tables are required.
+:::
+
+#### Similarity settings
+
+| Property                                   | Type      | Default | Description                                                                                                                  |
+| ------------------------------------------ | --------- | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `similarity.threshold`                     | `double`  | `0.5`   | Cosine similarity threshold (0.0 to 1.0) for the assertion to pass.                                                          |
+| `similarity.default-preprocessors-enabled` | `boolean` | `true`  | When `true`, applies the default text preprocessors (lowercase, Unicode NFC, and whitespace normalization) before embedding. |
+
+The default threshold of 0.5 treats two strings as similar when their cosine similarity is at least 0.5. This is a practical default for AI-generated text, where wording and phrasing may vary between runs even when the meaning is the same.
+Increase the threshold when your assertion needs stricter semantic agreement.
+
+#### Embedding model settings
+
+<Tabs groupId="provider" defaultValue="openai-embedding" queryString values={[
+{label: 'OpenAI', value: 'openai-embedding' },
+{label: 'Amazon Bedrock', value: 'amazon-bedrock-embedding' },
+{label: 'Azure OpenAI', value: 'azure-openai-embedding' },
+{label: 'OpenAI-compatible', value: 'openai-compatible-embedding' },
+{label: 'Custom/SPI', value: 'custom-embedding' },
+]}>
+
+<TabItem value='openai-embedding'>
+
+| Property                                | Required | Type       | Description                                                            |
+| --------------------------------------- | -------- | ---------- | ---------------------------------------------------------------------- |
+| `similarity.embedding-model.provider`   | Yes      | `string`   | Set to `openai`.                                                       |
+| `similarity.embedding-model.model`      | Yes      | `string`   | Model name (for example `text-embedding-3-small`).                     |
+| `similarity.embedding-model.api-key`    | Yes      | `string`   | API key.                                                               |
+| `similarity.embedding-model.dimensions` | No       | `integer`  | Number of output dimensions for models that support custom dimensions. |
+| `similarity.embedding-model.timeout`    | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).              |
+
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      embedding-model:
+        provider: "openai"
+        model: "text-embedding-3-small"
+        api-key: ${OPENAI_API_KEY}
+```
+
+</TabItem>
+
+<TabItem value='amazon-bedrock-embedding'>
+
+It supports Bedrock long-term API keys or AWS IAM credentials. It falls back to the
+[AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
+
+| Property                                            | Required                       | Type       | Description                                                                                    |
+| --------------------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
+| `similarity.embedding-model.provider`               | Yes                            | `string`   | Set to `amazon-bedrock`.                                                                       |
+| `similarity.embedding-model.model`                  | Yes                            | `string`   | Model name (for example `amazon.titan-embed-text-v2:0`).                                       |
+| `similarity.embedding-model.region`                 | No                             | `string`   | AWS region (for example `eu-central-1`).                                                       |
+| `similarity.embedding-model.api-key`                | No                             | `string`   | Bedrock long-term API key. Optional if using IAM credentials or the default credentials chain. |
+| `similarity.embedding-model.credentials.access-key` | Conditionally, with secret key | `string`   | AWS IAM access key. Optional if using an API key or the default credentials chain.             |
+| `similarity.embedding-model.credentials.secret-key` | Conditionally, with access key | `string`   | AWS IAM secret key. Optional if using an API key or the default credentials chain.             |
+| `similarity.embedding-model.dimensions`             | No                             | `integer`  | Number of output dimensions for models that support custom dimensions.                         |
+| `similarity.embedding-model.normalize`              | No                             | `boolean`  | Whether to normalize the output embeddings.                                                    |
+| `similarity.embedding-model.timeout`                | No                             | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                      |
+
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      embedding-model:
+        provider: "amazon-bedrock"
+        model: "amazon.titan-embed-text-v2:0"
+        region: "eu-central-1"
+        credentials:
+          access-key: ${AWS_BEDROCK_ACCESS_KEY}
+          secret-key: ${AWS_BEDROCK_SECRET_KEY}
+```
+
+</TabItem>
+
+<TabItem value='azure-openai-embedding'>
+
+It supports API key authentication. It falls back to
+[`DefaultAzureCredential`](https://learn.microsoft.com/en-us/java/api/com.azure.identity.defaultazurecredential).
+
+| Property                                | Required | Type       | Description                                                                                                                |
+| --------------------------------------- | -------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `similarity.embedding-model.provider`   | Yes      | `string`   | Set to `azure-openai`.                                                                                                     |
+| `similarity.embedding-model.model`      | Yes      | `string`   | Azure [deployment name](https://learn.microsoft.com/en-us/azure/ai-services/openai/how-to/create-resource#deploy-a-model). |
+| `similarity.embedding-model.endpoint`   | Yes      | `string`   | Azure OpenAI resource URL (for example `https://my-resource.openai.azure.com/`).                                           |
+| `similarity.embedding-model.api-key`    | No       | `string`   | API key. Optional; if omitted, falls back to `DefaultAzureCredential`.                                                     |
+| `similarity.embedding-model.dimensions` | No       | `integer`  | Number of output dimensions for models that support custom dimensions.                                                     |
+| `similarity.embedding-model.timeout`    | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                                                  |
+
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      embedding-model:
+        provider: "azure-openai"
+        model: "my-embedding-deployment"
+        endpoint: "https://my-resource.openai.azure.com/"
+        api-key: ${AZURE_OPENAI_API_KEY}
+```
+
+</TabItem>
+
+<TabItem value='openai-compatible-embedding'>
+
+For local models, such as [Ollama](https://ollama.com/), or any third-party API that implements the
+[OpenAI embeddings format](https://platform.openai.com/docs/api-reference/embeddings).
+
+| Property                                | Required | Type       | Description                                                              |
+| --------------------------------------- | -------- | ---------- | ------------------------------------------------------------------------ |
+| `similarity.embedding-model.provider`   | Yes      | `string`   | Set to `openai-compatible`.                                              |
+| `similarity.embedding-model.model`      | Yes      | `string`   | Model name (for example `nomic-embed-text`).                             |
+| `similarity.embedding-model.base-url`   | Yes      | `string`   | Base URL for the API endpoint (for example `http://localhost:11434/v1`). |
+| `similarity.embedding-model.api-key`    | No       | `string`   | API key. Optional for local providers.                                   |
+| `similarity.embedding-model.headers.*`  | No       | `map`      | Custom HTTP headers.                                                     |
+| `similarity.embedding-model.dimensions` | No       | `integer`  | Number of output dimensions for models that support custom dimensions.   |
+| `similarity.embedding-model.timeout`    | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                |
+
+**Example (Ollama):**
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      embedding-model:
+        provider: "openai-compatible"
+        model: "nomic-embed-text"
+        base-url: "http://localhost:11434/v1"
+```
+
+</TabItem>
+
+<TabItem value='custom-embedding'>
+
+For providers not listed above, use a custom provider name and pass arbitrary properties. See
+[custom EmbeddingModelAdapter](#custom-embeddingmodeladapter) for implementation details.
+
+| Property                                         | Required | Type       | Description                                                                                   |
+| ------------------------------------------------ | -------- | ---------- | --------------------------------------------------------------------------------------------- |
+| `similarity.embedding-model.provider`            | Yes      | `string`   | Custom provider name matching your SPI implementation.                                        |
+| `similarity.embedding-model.model`               | Yes      | `string`   | Model name.                                                                                   |
+| `similarity.embedding-model.custom-properties.*` | No       | `map`      | Arbitrary key-value pairs passed to SPI providers via `ProviderConfig.getCustomProperties()`. |
+| `similarity.embedding-model.timeout`             | No       | `duration` | Request timeout (ISO-8601 duration, for example `PT30S`).                                     |
+
+**Example:**
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      embedding-model:
+        provider: "my-custom-provider"
+        model: "my-model"
+        custom-properties:
+          endpoint: "https://my-embeddings.example.com/v1"
+```
+
+</TabItem>
+</Tabs>
+
+### Text preprocessors
+
+By default, CPT applies a set of text preprocessors to both the actual and expected values before computing embeddings.
+This improves stability of similarity scores by reducing noise from formatting differences. The default preprocessors are:
+
+- **Lowercase normalization**: converts text to lowercase.
+- **Unicode normalization**: applies Unicode NFC normalization.
+- **Whitespace normalization**: collapses repeated whitespace and trims leading/trailing whitespace.
+
+To disable the default preprocessors, set `similarity.default-preprocessors-enabled` to `false`:
+
+<Tabs groupId="client" defaultValue="spring-sdk-preprocessors" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-preprocessors' },
+{label: 'Java client', value: 'java-client-preprocessors' },
+]}>
+
+<TabItem value='spring-sdk-preprocessors'>
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      default-preprocessors-enabled: false
+```
+
+</TabItem>
+
+<TabItem value='java-client-preprocessors'>
+
+```properties
+similarity.defaultPreprocessorsEnabled=false
+```
+
+</TabItem>
+
+</Tabs>
+
+You can also configure preprocessors programmatically using `SemanticSimilarityConfig`:
+
+```java
+SemanticSimilarityConfig.of(myEmbeddingAdapter, 0.7)
+    .withoutPreprocessors();
+```
+
+### Custom EmbeddingModelAdapter
+
+You can provide your own `EmbeddingModelAdapter` implementation without depending on the `camunda-process-test-langchain4j`
+module.
+
+An `EmbeddingModelAdapter` is a functional interface that takes a string and returns a vector of floating-point numbers representing the text's semantic embedding.
+
+<Tabs groupId="client" defaultValue="spring-sdk-embed" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk-embed' },
+{label: 'Java client', value: 'java-client-embed' },
+]}>
+
+<TabItem value='spring-sdk-embed'>
+
+If you have a single `EmbeddingModelAdapter` bean and no `provider` property is set, CPT auto-detects and uses it:
+
+```java
+
+@TestConfiguration
+class SimilarityTestConfig {
+
+    @Bean
+    EmbeddingModelAdapter embeddingModelAdapter() {
+        return text -> myEmbeddingClient.embed(text);
+    }
+}
+```
+
+When you have multiple beans, set `provider` to the bean name you want to use. In Spring, the bean name defaults to
+the method name:
+
+```java
+
+@TestConfiguration
+class SimilarityTestConfig {
+
+    @Bean
+    EmbeddingModelAdapter openAiEmbeddingAdapter() { /* ... */ }
+
+    @Bean
+    EmbeddingModelAdapter ollamaEmbeddingAdapter() { /* ... */ }
+}
+```
+
+```yaml
+camunda:
+  process-test:
+    similarity:
+      embedding-model:
+        provider: "ollamaEmbeddingAdapter" # matches the bean method name
+```
+
+:::note Resolution order
+When using `@CamundaSpringProcessTest`, CPT resolves the embedding adapter in the following order:
+
+1. If a single `EmbeddingModelAdapter` bean exists and no `provider` property is configured, that bean is used automatically.
+2. If the `provider` property is configured and a bean with a matching name exists, that bean is selected.
+3. If no matching bean is found, CPT falls back to the built-in LangChain4j implementations, provided that `camunda-process-test-langchain4j` is on the classpath.
+4. If a `provider` is configured but no matching implementation can be resolved at all, CPT throws an exception.
+
+:::
+
+Alternatively, you can configure semantic similarity programmatically. Set the configuration globally
+using `CamundaAssert.setSemanticSimilarityConfig()`:
+
+```java
+CamundaAssert.setSemanticSimilarityConfig(
+        SemanticSimilarityConfig.of(text -> myEmbeddingClient.embed(text), 0.8));
+```
+
+</TabItem>
+
+<TabItem value='java-client-embed'>
+
+Implement `EmbeddingModelAdapterProvider` and register it through `META-INF/services`:
+
+```java
+public class MyCustomEmbeddingProvider implements EmbeddingModelAdapterProvider {
+
+    @Override
+    public String getProviderName() {
+        return "my-provider";
+    }
+
+    @Override
+    public EmbeddingModelAdapter create(ProviderConfig config) {
+        String endpoint = config.getCustomProperties().get("endpoint");
+        return text -> callEndpoint(endpoint, text);
+    }
+}
+```
+
+Register the provider in `META-INF/services/io.camunda.process.test.api.similarity.EmbeddingModelAdapterProvider`:
+
+```
+com.example.MyCustomEmbeddingProvider
+```
+
+Alternatively, you can configure semantic similarity programmatically. Set the configuration globally
+using `CamundaAssert.setSemanticSimilarityConfig()`:
+
+```java
+CamundaAssert.setSemanticSimilarityConfig(
+        SemanticSimilarityConfig.of(text -> myEmbeddingClient.embed(text), 0.8));
+```
+
+Or register the JUnit extension manually with a semantic similarity configuration:
+
+```java
+
+@RegisterExtension
+CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
+        .withSemanticSimilarityConfig(
+                SemanticSimilarityConfig.of(text -> myEmbeddingClient.embed(text), 0.8));
 ```
 
 </TabItem>

@@ -85,7 +85,7 @@ Example of a valid message attribute as a FEEL value:
 
 ### How do I store AWS IAM Secrets for my SQS connector?
 
-Store your AWS IAM credentials as Camunda secrets to avoid exposing sensitive information. Follow our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Store your AWS IAM credentials as Camunda secrets to avoid exposing sensitive information. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 
@@ -106,7 +106,7 @@ a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amaz
 Before using the Amazon SQS inbound connector, ensure you have the following:
 
 1. An active SQS Queue in your AWS account.
-2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. Use Camunda secrets to store your AWS IAM credentials securely. Refer to the [Camunda secrets documentation](/components/console/manage-clusters/manage-secrets.md) for more details.
+2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. Use Camunda secrets to store your AWS IAM credentials securely. Refer to the [Camunda secrets documentation](/components/hub/organization/manage-clusters/manage-secrets.md) for more details.
 
 ## Create an SQS inbound connector task
 

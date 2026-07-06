@@ -5,7 +5,9 @@ tags:
 description: "Choose the resource binding type and understand the differences between 'latest' and 'deployment' binding for linked resources."
 ---
 
-Camunda 8 offers version binding for linked processes, decisions, or forms. This allows you to deploy new versions without disrupting live processes, and prevents production outages.
+Camunda 8 offers version binding for linked processes, decisions, forms, and deployment-bound resources.
+
+Use deployment binding when a resource is deployed together with the process and should be consumed as the version that shipped with that deployment. This also applies to generic resources that are packaged and deployed with the process application.
 
 You can choose the binding type for the linked target resource for the following BPMN process elements:
 
@@ -57,7 +59,7 @@ Camunda 8 supports the following binding types:
           <li><p>It is ideal for self-contained projects without external or shared dependencies.</p></li>
           <li>
             <p>
-              To use the <code>deployment</code> binding option, create and deploy a <a href="../../../modeler/web-modeler/process-applications/#deploy-and-run-a-process-application">process application in Web Modeler</a>,
+              To use the <code>deployment</code> binding option, create and deploy a <a href="../../../hub/workspace/manage-projects/#deploy-and-run-a-project">process application in Web Modeler</a>,
               or deploy multiple resources together via the <a href="../../../../apis-tools/zeebe-api/gateway-service/#deployresource-rpc"> Zeebe API</a>.
             </p>
           </li>
@@ -75,6 +77,7 @@ Camunda 8 supports the following binding types:
               You can set the version tag for a BPMN process, DMN decision, or Form in the Modeler's properties panel.
             </p>
           </li>
+          <li><p>A version tag is different from the numeric process definition version assigned by the Orchestration Cluster.</p></li>
           <li><p>Using the <code>versionTag</code> binding option ensures that the right version of the target resource is always used, regardless of future deployments, by pinning the dependency to a specific version.</p></li>
           <li><p>The option is ideal for managing external or shared dependencies.</p></li>
         </ul>

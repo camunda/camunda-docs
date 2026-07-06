@@ -48,21 +48,20 @@ If you configured external Elasticsearch, inspect that deployment's logs separat
 
 ### Java version issues
 
-**Problem:** Camunda 8 Run fails to start due to incorrect Java version or missing `JAVA_HOME`.
+**Problem:** Camunda 8 Run fails to start with a Java-related error.
 
 **Solution:**
 
-1. Verify Java is installed (OpenJDK 21–25 required):
+Camunda 8 Run includes a bundled Java runtime. In most cases, no Java installation is needed. If the bundled runtime is missing or corrupted, Camunda 8 Run falls back to the system JDK.
 
-   ```bash
-   java -version
-   ```
+1. Re-download and extract the Camunda 8 Run archive to restore the bundled runtime.
 
-2. Ensure `JAVA_HOME` is set:
+2. If you want to use a system JDK instead, ensure `JAVA_HOME` points to OpenJDK 21–25 and verify it is set correctly:
 
    ```bash
    # macOS/Linux
    echo $JAVA_HOME
+   java -version
 
    # Windows
    echo %JAVA_HOME%
@@ -81,7 +80,13 @@ If you configured external Elasticsearch, inspect that deployment's logs separat
    setx JAVA_HOME "C:\Program Files\Java\jdk-21"
    ```
 
-Replace `21` in the examples with the version you installed (21–25), and open a new terminal after setting `JAVA_HOME`.
+   Replace `21` with your installed version (21–25), and open a new terminal after setting `JAVA_HOME`.
+
+### Unexpected JVM flags in logs
+
+**Problem:** Camunda 8 Run appends `--enable-native-access=ALL-UNNAMED` and `--sun-misc-unsafe-memory-access=allow` to `JDK_JAVA_OPTIONS` when using Java 25 or newer. This may appear in logs or interfere with tools that inspect JVM options.
+
+**Solution:** This is expected behavior. These flags are required for Java 25 compatibility and are appended automatically. Any values you set in `JDK_JAVA_OPTIONS` beforehand are preserved.
 
 ### Incomplete startup
 

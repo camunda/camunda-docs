@@ -8,7 +8,7 @@ description: "Learn how to run connectors in hybrid mode."
 <span className="badge badge--active--inbound">Inbound</span>
 
 :::note
-Hybrid mode is supported as of the connectors `0.23.0` release.
+Hybrid mode is supported as of the connectors `0.23.0` release. Use the latest stable version from the [Camunda connectors Docker registry](https://hub.docker.com/r/camunda/connectors-bundle/tags).
 :::
 
 **Hybrid mode** is where you can run a Self-Managed connector runtime instance attached to a Camunda SaaS cluster or another Self-Managed cluster that has another instance of the connector runtime attached.
@@ -82,6 +82,23 @@ Note the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'`. This l
 The `X` is normalized to the environment variable connector name. For example, the [HTTP REST connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L33)
 `HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
 becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in the `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
+
+#### Common connector types
+
+| Connector                 | Environment variable               | Example value                         |
+| ------------------------- | ---------------------------------- | ------------------------------------- |
+| HTTP REST                 | `CONNECTOR_HTTP_REST_TYPE`         | `io.camunda:http-json:local`          |
+| AWS SQS (Outbound)        | `CONNECTOR_AWS_SQS_OUTBOUND_TYPE`  | `io.camunda:aws-sqs:local`            |
+| Kafka consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| Kafka producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| SendGrid                  | `CONNECTOR_SENDGRID_TYPE`          | `io.camunda:sendgrid:local`           |
+| Slack                     | `CONNECTOR_SLACK_TYPE`             | `io.camunda:slack:local`              |
+| Gmail                     | `CONNECTOR_GMAIL_TYPE`             | `io.camunda:gmail:local`              |
+| Google Drive              | `CONNECTOR_GOOGLE_DRIVE_TYPE`      | `io.camunda:google-drive:local`       |
+| RabbitMQ (Inbound)        | `CONNECTOR_RABBITMQ_CONSUMER_TYPE` | `io.camunda:connector-rabbitmq:local` |
+| RabbitMQ (Outbound)       | `CONNECTOR_RABBITMQ_PRODUCER_TYPE` | `io.camunda:connector-rabbitmq:local` |
+
+For a complete list of all available connectors and their types, see the [available connectors overview](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) or check the [official connectors repository](https://github.com/camunda/connectors).
 
 ## Using SaaS secrets
 

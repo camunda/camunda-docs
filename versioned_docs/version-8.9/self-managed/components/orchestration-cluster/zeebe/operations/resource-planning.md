@@ -142,6 +142,8 @@ If an external system relied on by an exporter fails (for example, if you are ex
 
 To ensure your brokers are resilient in the event of external system failure, give them sufficient disk space to continue operating without truncating the event log until the connection to the external system is restored.
 
+During a [hot backup (soft-pause window)](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#soft-pause-exports), log compaction is intentionally blocked for the duration of the backup. This adds a predictable, temporary disk requirement: roughly `throughput × backup_window_duration` of additional log data per partition, replicated across all followers. Size broker disks with enough headroom to absorb at least one full backup window on top of the steady-state estimates above.
+
 ### Effect on exporters of node failure
 
 Only the leader of a partition exports events. Only committed events (events that have been replicated) are passed to exporters. The exporter then updates its read position. The exporter read position is only replicated between brokers in the snapshot. It is not itself written to the event log. This means _an exporter’s current position cannot be reconstructed from the replicated event log, only from a snapshot_.
@@ -160,13 +162,9 @@ Memory usage is determined by the Java heap size (by default, [25% of the maximu
 
 Zeebe supports multiple RocksDB memory allocation strategies, configured via the `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY` setting in the broker configuration:
 
-- `PARTITION` (default): Total RocksDB memory equals the configured number of partitions multiplied by the configured memory limit.
+- `PARTITION` (default): Total RocksDB memory equals the actual number of partitions per broker (from the cluster topology) multiplied by the configured memory limit.
 - `BROKER`: Total RocksDB memory equals the configured memory limit, regardless of the number of partitions.
 - `FRACTION`: RocksDB memory is allocated as a fraction of total available memory.
-
-:::note
-When using the `PARTITION` strategy, the calculation is based on the configured number of partitions, not necessarily the current number in the cluster. These values can differ when using dynamic partition scaling. If you use the `PARTITION` strategy together with dynamic scaling, update the configured number of partitions after scaling operations.
-:::
 
 When using the `FRACTION` strategy, configure the fraction using `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYFRACTION` (range `[0,1]`). The default is `0.1` (10% of total memory).
 

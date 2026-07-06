@@ -1,7 +1,7 @@
 The migration scripts are part of the [Camunda deployment references](https://github.com/camunda/camunda-deployment-references) repository. Clone the repository and navigate to the migration directory:
 
 ```bash
-git clone https://github.com/camunda/camunda-deployment-references.git
+git clone --branch stable/8.9 https://github.com/camunda/camunda-deployment-references.git
 cd camunda-deployment-references/generic/kubernetes/migration
 ```
 

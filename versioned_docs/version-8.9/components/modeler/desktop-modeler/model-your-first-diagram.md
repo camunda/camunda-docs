@@ -14,9 +14,9 @@ The BPMN diagram opens with a start event. [Events](/components/modeler/bpmn/eve
 
 ![new diagram](./img/new-diagram.png)
 
-2. The basic elements of BPMN processes are [tasks](/components/modeler/bpmn/tasks.md), or atomic units of work composed to create a meaningful result. Click on the start event and select the rectangular task element. This creates a task directly following the start event, connected by an arrow. Next, double-click the task and type in a name for the element. For example, `My Service Task`.
+1. The basic elements of BPMN processes are [tasks](/components/modeler/bpmn/tasks.md), or atomic units of work composed to create a meaningful result. Click on the start event and select the rectangular task element. This creates a task directly following the start event, connected by an arrow. Next, double-click the task and type in a name for the element. For example, `My Service Task`.
 
-3. Click on the task and select the dark circle in the top left. This attaches an end event directly to the task. On the left side of the screen you will find the element palette, where you can also drag and drop elements onto the canvas.
+1. Click on the task and select the dark circle in the top left. This attaches an end event directly to the task. On the left side of the screen you will find the element palette, where you can also drag and drop elements onto the canvas.
 
 ![elements](./img/elements.png)
 
@@ -26,10 +26,12 @@ Above, you can see that elements that support different types can be reconfigure
 
 You can also [orchestrate human tasks](/guides/getting-started-orchestrate-human-tasks.md). Review the [complete list of supported BPMN elements](/components/modeler/bpmn/bpmn-coverage.md)
 
-4. Open the properties panel by selecting the light gray arrow on the right side of the page halfway down the canvas. Here, you can edit the properties of the currently selected element:
+1. Open the properties panel by selecting the light gray arrow on the right side of the page halfway down the canvas. Here, you can edit the properties of the currently selected element:
 
 ![properties panel](img/properties-panel.png)
 
 For example, you might name your element and give it an ID under the **General** section.
 
-5. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda 8 cluster](./connect-to-camunda-8.md).
+1. Save the diagram using **File > Save**, **File > Save As**, or the keyboard shortcut (`Cmd + S` on macOS or `Ctrl + S` on Windows and Linux). Desktop Modeler saves the file to the location you choose on your local file system; it does not store diagrams in a separate internal workspace. To find the file again, reopen it from that folder or from the recent files list on the Desktop Modeler start screen.
+
+1. Once you finish modeling and configuring your diagram, you can deploy it to a [Camunda 8 cluster](./connect-to-camunda-8.md).

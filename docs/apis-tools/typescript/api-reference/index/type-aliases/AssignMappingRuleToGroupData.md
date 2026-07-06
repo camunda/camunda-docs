@@ -30,7 +30,7 @@ path: object;
 #### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
 The group ID.
@@ -38,7 +38,7 @@ The group ID.
 #### mappingRuleId
 
 ```ts
-mappingRuleId: string;
+mappingRuleId: MappingRuleId;
 ```
 
 The mapping rule ID.

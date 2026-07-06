@@ -322,7 +322,7 @@ The following example uses scripts from the Terraform installation to deploy and
 1. Navigate to the procedure directory:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/procedure
+cd procedure
 ```
 
 The `procedure` directory contains Bash scripts for installing and configuring Camunda 8.
@@ -387,7 +387,7 @@ Using Terraform, you can obtain the HTTP endpoint of the Application Load Balanc
 1. Navigate to the Terraform folder:
 
 ```sh
-cd camunda-deployment-references-main/aws/ec2/terraform
+cd terraform
 ```
 
 2. Retrieve the Application Load Balancer output:
@@ -401,14 +401,6 @@ terraform output -raw alb_endpoint
 Follow the example in the [Orchestration Cluster REST API documentation](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) to authenticate and retrieve the cluster topology.
 
 ## Manage Camunda 8
-
-### Upgrade Camunda 8
-
-:::info Direct upgrade not supported
-Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
-:::
-
-For manual installations, see the [upgrade guide](/self-managed/upgrade/manual/index.md) for detailed instructions.
 
 ### Monitoring
 

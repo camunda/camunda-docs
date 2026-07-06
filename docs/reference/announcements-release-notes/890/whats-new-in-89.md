@@ -241,6 +241,31 @@ You are affected if your `values.yaml` uses any of the legacy secret keys (such 
 
 See the [release announcements](/reference/announcements-release-notes/890/890-announcements.md#helm-chart-deprecated-secret-keys-removed) for the full list of removed keys.
 
+## Reference architectures {#reference-architectures}
+
+Camunda 8.9 introduces major changes to the [deployment references](https://github.com/camunda/camunda-deployment-references) used by Self-Managed reference architectures.
+
+### Operator-based infrastructure replaces Bitnami
+
+All reference architectures (AKS, EKS, OpenShift, Kind) now use Kubernetes operators — CloudNativePG, ECK, and Keycloak operator — instead of embedded Bitnami subcharts for infrastructure services.
+
+If you follow a reference architecture, your next deployment will use operator-managed PostgreSQL, Elasticsearch, and Keycloak. Existing deployments can migrate using the new [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+
+#### Are you affected?
+
+You are affected if you deploy Self-Managed using a reference architecture from the `camunda-deployment-references` repository and rely on Bitnami-managed infrastructure. Follow the migration guide to transition to operator-managed services.
+
+### New deployment options
+
+- **Amazon ECS on Fargate** is now available as a container-based deployment without Kubernetes.
+- **AKS RDBMS variant** provides a lighter Azure deployment using PostgreSQL as secondary storage (no Elasticsearch).
+- **Kind local development** reference architecture is available for local testing with Makefile-based commands.
+
+### Dual-region changes
+
+- EKS and OpenShift dual-region now use the ECK operator for Elasticsearch.
+- Headless service DNS is used for initial contact points, improving cross-region connectivity.
+
 ## Migration from Camunda 7 to Camunda 8 {#migration}
 
 Camunda 8.9 introduces the following additional tools and features to help you migrate from Camunda 7 to Camunda 8.
@@ -281,10 +306,10 @@ Camunda 8.9 introduces the following enhancements and changes in Web Modeler.
 
 The following usability improvements simplify collaboration and help teams keep event configurations consistent.
 
-| Feature                                                                                                   | Description                                                                                                                                                                        |
-| :-------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Element templates](/components/modeler/element-templates/defining-templates.md)                          | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
-| [Email invitations](/components/modeler/web-modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
+| Feature                                                                                                     | Description                                                                                                                                                                        |
+| :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Element templates](/components/modeler/element-templates/defining-templates.md)                            | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
+| [Email invitations](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
 
 ### Improved Self-Managed installation
 
@@ -293,7 +318,7 @@ The separate `webapp` component has been removed, and its functionality is now c
 
 This change might require updates to your application configuration.
 
-<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+<p class="link-arrow">[Migrate configuration](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
 
 ### Log4j2 and Tomcat changes
 
@@ -313,7 +338,7 @@ You should:
 - Update any tooling that relies on old log formats or server behavior.
 - Validate the new setup in a staging environment before upgrading production.
 
-<p class="link-arrow">[Web Modeler logging](/self-managed/components/modeler/web-modeler/configuration/logging.md)</p>
+<p class="link-arrow">[Web Modeler logging](/self-managed/components/hub/configuration/logging.md)</p>
 
 ## Orchestration Cluster {#ocluster}
 

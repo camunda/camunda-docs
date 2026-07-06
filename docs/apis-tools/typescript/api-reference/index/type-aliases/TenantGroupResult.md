@@ -16,7 +16,7 @@ type TenantGroupResult = object;
 ### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
-The groupId of the group.
+The group ID.

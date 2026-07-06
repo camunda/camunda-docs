@@ -40,12 +40,6 @@ Once initial [configuration](idp/idp-configuration.md#configure-idp) is complete
 
 <IdpGrid idp={gettingStartedCards} />
 
-<!-- 1. Create and publish your IDP projects in your IDP application folder:
-
-   - Create a [document extraction](idp/idp-document-extraction.md) project to identify and extract data from a single type of document (for example, an invoice).
-
-   - Create a [document automation](idp/idp-document-automation.md) project to automatically extract data from larger, more complex documents (for example, a multi-page PDF document made up of many types of documents and data). This project type is based on and requires one or more linked document extraction project(s). -->
-
 ## IDP concepts
 
 Learn about key [IDP concepts](idp/idp-key-concepts.md) and terms, such as the difference between structured and unstructured documents, document classification, and how IDP uses LLM Foundation models.

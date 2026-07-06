@@ -1,0 +1,529 @@
+---
+id: restore-file
+title: "Restore a recently deleted file"
+description: "Restores a soft-deleted file back to the live project. If the file's original parent folder was also deleted, the file is restored into a new wrapper folder at the project root. The file cannot be restored if its containing project has been deleted."
+sidebar_label: "Restore a recently deleted file"
+hide_title: true
+hide_table_of_contents: true
+api: eJztW/1u2zgSf5WB9o8mXUt2nKRNfftx2XaLTff2GiTpFrg6gGlpbLOhSC1JxfEGBu4h7gnvSQ5DUrJkO+l20QMOOP+x3SSihvP5mxlydB+pAjWzXMmzLBpEGo1VGl9zgVEnytCkmhf0NBpEF/6ZAQZGTWycoUCLGUy4QBiz9AasAjtDEPwWodDqI6Y2gbOJ+yOtemJAaT7lkgkomEZpYaJEhhrmzAATRkEg2qnfAW4gcJUBl1YBA4lzmGtWFKgrAsy6N8KuoJWyCVxVNFImpbIwxgapCXBrIFXSMi65nNbvzpiBMaKseEmGMupEdzHLMsxiLuNb1MarpJccJD330GDOpOVprPG3kms00eA+uuGSlBq0OXa/3UfE0c+4cD9qlUeDqGB2FnUiyXKMBvXz5XLZiSybmmjwwdO47kQF0yxHi5r+er/+SifickUvsJJFA6tLXDcnKaeU/LcS4QYXwDOUlk8WpIlK90nUiUw6w5wRs+3XLxfGYh5PUZL/YOaITJQGVr9qFwUxZ6zmchp1oonSObNBIZ7dhuLC6tUzvGN5ISrx4ucnL+K7xe9El1vRXLpcXpOwplDSeMX3e71NjmtvIGer/cCUaYrGTEohFglcoC21NE4D9ZJKHvIVlJYos6IQPHVx0/1oiPx9Q1NBFDUmf2pK0jD+ulDBkkpnqONCK2IqGRc5+V7wTP9eoT/GGU7io+NnTqfk/oGiyOLeQT+ezjgZjtOe5+QKg6gbKKLpbt0hZVJJnjJRrW/Q6q5xqvGWe/8/rG1ckak0FH3z/V0uIETKt08Okt4TQJmqjMvpt0/eXb2OT558/12SOL1qJA+KBlG/1z+Oe4fxwfHVQW9w2Bv0ekmv1/vHatEPLm6Cst4wifBKUXBhzriIBtFHJjHJFP416DxJVR4tO1FZZK09nsUHvauDo0G/39gjLPpzeyybAfehEZKOUMuITbO1DLVuiIayg6pXOl7pramclaRNca7d9gVqy32ANDDoM1CBmzoWmBBvJw6C/ndh4XpZhdU2KekJqEkL7NqsLduRt40ISRdoVOmjVhOMUSg5NWBVAucaDeU7LsFwORUYuyU1asHeFG0HvCE74E23D+PSgiyFcO8h0+mMXimFNX8BgqxVwkOjREmcOW2311IOpfy3QAumLAql67RGxNmY9OZzxJ+wa5XpHzPtedP5N63berwycBvqKvs2FjsTNyDwUyZq1hwJ/N0pdtIqNZht1xBfRkVhx0edv4EIW9y/8bQRAC3Ar/2/XuvU08wD2/QzK3MmY40sIyGBaodmWMCc2xmXrlh60NLLjQyybad6CeydvYrHzGC2/6f3W2WhrVuV2pm6WgWyzMeoO1AaSuhKgyosz7mxPAWh0hsup4/B2iM0iXkPbp+kHoTg0uIUddP6XNrD/oPAd9FIAg2Qq//s7OzXb2OcnjyOdJ0IZZlT2gqJPHP/Env0TGCO0sYW80IwS0lIFyzqRDnTN5maO77QWBMRH40qaYsO/cMWN18eG50JCtROvTIlUswoaTzkrYveju9lox7Zqkyeo7EsL2A+Q9lwW2YCh9mjcU68x0QkWq4VNVsSsaHWaKYqwi0Lrlx1vdxsEzoFjRPUSHpw3RNRTaJ2tRJqFF/hbFQLDyfRjJtCsEUrmVb0N0I21E/b6LhHwLJMozGPE2ro0hN0bVIIi3cG9UUlro+LuvL7XGsKZmxwts8waauGfMSkTeo7u362XZfrUEiBTy3zshMd9Q62c0OaQWNBsPTGwC0TPANW2hnVuL6Zo0hzJS8ThlicIctcr30fvX//Pj5dLcatLV+llOXywXax0GosMP96s21ct++5XwkZWtKi9wNgBvzCsTsQgQ8Xr1/Ci6Pj59d7M2sLM+h25/N5oidpjBm3SidKT7t6ktJ/tG7fHYxohJwt6EiEZRmnPZmrJoN7gCkw5ROeVoc6gW2XTFo4Wrtn0+9Cr+JN1ImMZbY0zoVJFHdOYSxB86ZTVnnsQe8oNd8SDO8uzjbOMFo8u3cmjNxkELGxKu1gLJi8aVVUlQYzlZokZXkpM5Zw1WUF7972k15lPZedTXfMsjg4VbTyyE3e15k1ZZ4z3WwdWnyu+PmBZXCx2iDocbXDI6XEpvv/dHV1Dp4EpCpDlyZduxIYaO191Ot1opxLnlNl4H9jd/63Z73esjbmp+WVgHeFYNKH2JrQXEKuNAYvb4sfRK/8cgEfcnb3Ro3NlTpNLb9lFs1143SvYNpgRpqq/esTnhTXIPqAT7n6dN2x/CnmmiRt1ru3/e5HNTZd5hl1ddqy1cXQS6+8DpetQ6LAcNtJayiUBFlK899dk1+5xFHvYGURZ27q9ATHDYgLzeCKiksf7hTMewP1kqVOnSuu9BiFIHDHQaaG2sNN5Hqt9JhnGUp/AluhbrWvEGruM+oOIXcIuUPIHUJ+YYSs8acFj4cNeHxbXXq1EAl+lKbUCAtVajg9P2sWgzBjtxiuBXwQU4OZc0MNuHkMKdvH5xVsHj1UoaYorVhA63KNuhFidKJKuQPOHXDugHMHnH8cOAPivHjkRnTL/fgYU1YabJ7Dbt6M76BoB0U7KNpB0WdB0fG24YxTScM9qCk+UWu6QkndhUsG8xlBVBhYqHgL/rhDoB0C7RBoh0D/hS7yrIKjS9S3qOFHQqVGR3lMlqo7ylMJpcS7AlPq2j6FYK7DrCAMzgUyg2D1AtiUcQl0yao/efrmZLEoXQfqLoxu3BjYlknFTnTLRIn1xOKys1q8OblYr/4CE4w0mpejnSkiUyhDAFZUM2auPb4Pq5ddX3t6E3Yi49TuBSs16fjeQ/hy0O3ez5Sxy8E9jbIsg2oc35rTVa4LXVri4b5CI6FSJmaeiS2DEMrY5n3XT+XYnQJ4RhI3DqT0GsmT3snJVmq09BFKzWxU0SJQ3ErLL36QmlOywbTU3C6cvsbINGq6rYoGH66bjy+JlNdPc1EdC4EHt6Mb7HOLyPbuh9dVSL95f7UlkN+8v6pPktUNSlBjmq6lcwytcu/2PsbtguLhlrtBnNdKwyVjl26Awsn4ltiCftKDVHCaPWgexUyEmrsxEbfUL4CzV8BkBgZTjba+MOcSXvrsAi+VNIrGDdxuKCbxL0yyKc0aNw7IEW4584ymSk74tKQAfnv26mXNL+xhMk068DMuUqHYTQd+lFYzOHu1Twl76VBxopxSA5YEk23PFsGcAq2hjSF3bMFc6RtTsBRNp2rATMe1a/Q/N+NjOkMZQtx0nPg50kiKacpN9AutpprlOSMZadB1KIfyq6/gtHUzQH88FQJQZoXi0prqrAtYuCwl+3pH8PZN4K0zMLBg79rMQ7lh5wHRj+HpUzL106fw73/+K9jJH7Z5OzYNzf2N/JoFSdChBMC7dMbk1DlMHgatPBdkwj/kRUlgqOENgbGWSzhUNvZxtyCW9jZ9ogPEmFR2hhreFijPXpEgElMbpyovmOU0dnWWne87q5zJVJSZjwIvDZeAt6gXVcIYDOVoNBrK03CB42w3gB+8Xb4hJmP35ndhoTO1S1+GfnE/NaZrqpir6tu6HvY5E3wadwE3lKOXvtqOrxYFDuChgnuUwCV6sqNWBh4FMBtKXxQhFUoyY5qOOlFkpnLNc0bfCVRueenne1aeSShTWGAwKtgUR1XR7lBhRF44gj01mRi0+y4wRoLn3I6G9AEBNQxaiTAtBHMuMzWnES24qJXCgxm2bTCUI6ssE2cWczOqGL4gT3G7OC03QztT6A9wwwiZWACS/CnSIXIcPF+vCCTw0v3NDKWZqVJk4Ib4cj9+RrNMblaPPrqI1WTiJNRIBYSxRGZKnYVVMGMyEzgkV5TGbeIqEwN7rkY96r8g7zzuHe5XUvx6ABkWGleIQIL8euDk2Bv5VHvQHe3TdV61ku4Y3XTHSXLQc8zMuRD+OClXtw6Hh/IkOegn8AufOkGtgl/7NG7pggqZFpwq0FTJW5TcTbVQHBrvRUP5IXcvUmE7LXmGqy5svYeg37sS7ywxa2KrlDDd+u04Z7Jk9V8wJmeJ5ziOc0XHWhQ78awcxyTpvndTX+WF8bHV1x/9pOe+/nDfkKS2MTQeEItmsF3l8gCrVAgInqI0uPky/M0/Af+JSZuQwCkTNaVU5V1Ph8tpzGQWO7iJ3arYos7NV897ffbsRXoUH7447MdHz8eHMUufH8WH4+Pj5xPEjB2fuNxFRVrOZIOh8OEPsO3XE+tZ7b7xGcD/9zdDoaay5IuFYFy6ATHtWjlfBPvvBKjkHqw+GGjWwdedUMd+iO7vaWT2nRbLJf35txI1VXvXq7LXD65yQz9n0WDChFn/7KdpnL2LcJKwD3/wY6CtAlVdlFw0+oyoExqMSXMa349TNXqVUwfjjfc2PqxpNRDnby+vouXyP+Gh8HI=
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Restore a recently deleted file"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/files/{fileKey}/restoration"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Restores a soft-deleted file back to the live project. If the file's original parent folder was also deleted, the file is restored into a new wrapper folder at the project root. The file cannot be restored if its containing project has been deleted.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "fileKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the file.",
+      schema: {
+        description: "System-generated key for a file.",
+        type: "string",
+        format: "FileKey",
+        "x-semantic-type": "FileKey",
+        example: "file-789-xyz",
+        title: "FileKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The file was restored successfully. Returns the restored file.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              fileKey: "file-789-xyz",
+              name: "order-process.bpmn",
+              projectKey: "prj-def-456",
+              folderKey: "fld-012-ghi",
+              simplePath: "/processes/order-process.bpmn",
+              canonicalPath: "/fld-012-ghi/file-789-xyz",
+              revision: 3,
+              type: "bpmn",
+              content: "<?xml version='1.0' encoding='UTF-8'?>...",
+              created: "2025-03-15T10:30:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              updated: "2025-06-10T14:22:00.000Z",
+              updatedBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+            },
+            required: [
+              "fileKey",
+              "name",
+              "projectKey",
+              "folderKey",
+              "simplePath",
+              "canonicalPath",
+              "revision",
+              "type",
+              "content",
+              "created",
+              "createdBy",
+              "updated",
+              "updatedBy",
+            ],
+            properties: {
+              fileKey: {
+                description: "The unique key identifying this file.",
+                allOf: [
+                  {
+                    description: "System-generated key for a file.",
+                    type: "string",
+                    format: "FileKey",
+                    "x-semantic-type": "FileKey",
+                    example: "file-789-xyz",
+                    title: "FileKey",
+                  },
+                ],
+              },
+              name: { description: "The name of the file.", type: "string" },
+              projectKey: {
+                description:
+                  "The key of the project this file belongs to. Present in single-file responses (get, create, update) but null in search results; full project resolution for search results is not yet supported.\n",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "System-generated key for a project.",
+                    type: "string",
+                    format: "ProjectKey",
+                    "x-semantic-type": "ProjectKey",
+                    example: "prj-def-456",
+                    title: "ProjectKey",
+                  },
+                ],
+              },
+              folderKey: {
+                description:
+                  "The key of the parent folder. Null if the file is at project root.",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "System-generated key for a folder.",
+                    type: "string",
+                    format: "FolderKey",
+                    "x-semantic-type": "FolderKey",
+                    example: "fld-012-ghi",
+                    title: "FolderKey",
+                  },
+                ],
+              },
+              simplePath: {
+                description:
+                  "The human-readable path of the file within its project.",
+                type: "string",
+              },
+              canonicalPath: {
+                description:
+                  "The canonical (ID-based) path of the file within its project.",
+                type: "string",
+              },
+              revision: {
+                description:
+                  "The current revision number, used for optimistic locking.",
+                allOf: [
+                  {
+                    description:
+                      "The current revision number of a file, used for optimistic locking.",
+                    type: "integer",
+                    format: "int32",
+                    "x-semantic-type": "FileRevision",
+                    title: "FileRevision",
+                  },
+                ],
+              },
+              type: {
+                description: "The type of the file.",
+                type: "string",
+                enum: [
+                  "bpmn",
+                  "dmn",
+                  "form",
+                  "element-template",
+                  "rpa",
+                  "markdown",
+                  "tests",
+                ],
+              },
+              content: {
+                description:
+                  "The content of the file. Present in single-file responses (get, create, update) but null in search results for performance reasons.\n",
+                type: "string",
+                nullable: true,
+              },
+              created: {
+                description: "The timestamp when the file was created.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description: "The user who created the file.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              updated: {
+                description: "The timestamp when the file was last updated.",
+                type: "string",
+                format: "date-time",
+              },
+              updatedBy: {
+                description: "The user who last updated the file.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "FileResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The recently deleted file was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The file cannot be restored because its project has been deleted.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

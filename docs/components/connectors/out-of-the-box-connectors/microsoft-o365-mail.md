@@ -19,7 +19,7 @@ Learn more about [creating, configuring, and authorizing a Microsoft app](https:
 
 :::note
 Use Camunda secrets to avoid exposing your Microsoft credentials as plain text.
-Refer to our documentation on [managing secrets](/components/console/manage-clusters/manage-secrets.md) to learn more.
+Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create a Microsoft 365 connector task
@@ -39,7 +39,7 @@ By default, an application with Mail API permissions can access _all mailboxes_ 
 ### Bearer token authentication
 
 If you own a bearer token, in the **Authentication** section select **Bearer token** in the **Type** field.
-Enter a bearer token in the field **Bearer token**. Use [Camunda secrets](/components/console/manage-clusters/manage-secrets.md) to avoid exposing sensitive credentials.
+Enter a bearer token in the field **Bearer token**. Use [Camunda secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to avoid exposing sensitive credentials.
 
 :::note
 The default time-to-live (TTL) for bearer tokens is 3600 seconds. Therefore, this approach might not work for long-living and/or repetitive processes.

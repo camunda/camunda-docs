@@ -30,6 +30,8 @@
     "api:generate:zeebe": "npm run api:generate zeebe",
     "api:generate:adminsm": "npm run api:generate adminsm",
     "api:generate:camunda": "npm run api:generate camunda",
+    "api:generate:hubsm": "npm run api:generate hubsm",
+    "api:generate:hubsaas": "npm run api:generate hubsaas",
     "config-reference:download": "node ./config-reference/generate-config-reference.js download",
     "config-reference:download:camunda-spring-boot-starter": "npm run config-reference:download camunda-spring-boot-starter",
     "config-reference:download:camunda-spring-boot-starter:8.8": "npm run config-reference:download:camunda-spring-boot-starter 8.8",
@@ -43,12 +45,13 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
     "@bpmn-io/form-js": "^1.15.2",
-    "@camunda8/docusaurus-plugin-openapi-docs": "^4.6.5",
-    "@camunda8/docusaurus-theme-openapi-docs": "^4.6.5",
+    "@camunda8/docusaurus-plugin-openapi-docs": "4.6.7",
+    "@camunda8/docusaurus-theme-openapi-docs": "4.6.7",
     "@docusaurus/core": "^3.8.0",
     "@docusaurus/faster": "^3.8.0",
     "@docusaurus/preset-classic": "^3.8.0",
     "@docusaurus/theme-mermaid": "^3.8.0",
+    "@iconify-json/logos": "^1.2.11",
     "@mdx-js/react": "^3.1.0",
     "@saucelabs/theme-github-codeblock": "^0.3.0",
     "cheerio": "^1.1.2",
@@ -58,6 +61,7 @@
     "pushfeedback-react": "^0.1.63",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
     "react-player": "^3.0.0",
     "unist-util-visit": "^5.0.0"
   },
@@ -76,11 +80,12 @@
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/jest": "^30.0.0",
+    "docusaurus-plugin-llms": "^0.4.0",
     "husky": "^9.1.7",
     "jest": "^30.0.0",
-    "lint-staged": "^16.0.0",
+    "lint-staged": "^17.0.0",
     "playwright": "^1.52.0",
-    "prettier": "3.8.2"
+    "prettier": "3.9.4"
   },
   "lint-staged": {
     "*.{css,js,json,MD,md,mdx,yaml,yml}": "prettier --write"
@@ -90,11 +95,13 @@
   },
   "overrides": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0"
+    "postman-code-generators": "2.1.0",
+    "@docusaurus/plugin-content-docs": "3.9.2"
   },
   "resolutions": {
     "react-live": ">=3.1.1 <4.2.0",
-    "postman-code-generators": "2.1.0"
+    "postman-code-generators": "2.1.0",
+    "@docusaurus/plugin-content-docs": "3.9.2"
   },
   "engines": {
     "node": ">=18.0"

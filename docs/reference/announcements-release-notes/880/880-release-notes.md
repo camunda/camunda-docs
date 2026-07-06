@@ -29,7 +29,7 @@ These release notes identify the main new features included in the 8.8 minor rel
   <summary>View GitHub changelogs for all patch releases</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.8.22 (16.04.2026)](https://github.com/camunda/camunda/releases/tag/8.8.22)</li><li>[Camunda 8.8.21 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.21)</li><li>[Camunda 8.8.20 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.20)</li><li>[Camunda 8.8.19 (23.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.19)</li><li>[Camunda 8.8.18 (20.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.18)</li><li>[Camunda 8.8.17 (17.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.17)</li><li>[Camunda 8.8.16 (09.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.16)</li><li>[Camunda 8.8.15 (04.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.15)</li><li>[Camunda 8.8.14 (20.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.14)</li><li>[Camunda 8.8.13 (18.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.13)</li><li>[Camunda 8.8.12 (17.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.12)</li><li>[Camunda 8.8.11 (05.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.11)</li><li>[Camunda 8.8.10 (04.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.10)</li><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.10 (30.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.10)</li><li>[Connectors 8.8.9 (26.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.9)</li><li>[Connectors 8.8.8 (26.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.8)</li><li>[Connectors 8.8.7 (02.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.7)</li><li>[Connectors 8.8.6 (27.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.6)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
+<ul><li>[Camunda 8.8.30 (01.07.2026)](https://github.com/camunda/camunda/releases/tag/8.8.30)</li><li>[Camunda 8.8.29 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.8.29)</li><li>[Camunda 8.8.28 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.8.28)</li><li>[Camunda 8.8.27 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.8.27)</li><li>[Camunda 8.8.26 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.8.26)</li><li>[Camunda 8.8.25 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.8.25)</li><li>[Camunda 8.8.24 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.8.24)</li><li>[Camunda 8.8.23 (22.04.2026)](https://github.com/camunda/camunda/releases/tag/8.8.23)</li><li>[Camunda 8.8.22 (16.04.2026)](https://github.com/camunda/camunda/releases/tag/8.8.22)</li><li>[Camunda 8.8.21 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.21)</li><li>[Camunda 8.8.20 (30.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.20)</li><li>[Camunda 8.8.19 (23.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.19)</li><li>[Camunda 8.8.18 (20.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.18)</li><li>[Camunda 8.8.17 (17.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.17)</li><li>[Camunda 8.8.16 (09.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.16)</li><li>[Camunda 8.8.15 (04.03.2026)](https://github.com/camunda/camunda/releases/tag/8.8.15)</li><li>[Camunda 8.8.14 (20.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.14)</li><li>[Camunda 8.8.13 (18.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.13)</li><li>[Camunda 8.8.12 (17.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.12)</li><li>[Camunda 8.8.11 (05.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.11)</li><li>[Camunda 8.8.10 (04.02.2026)](https://github.com/camunda/camunda/releases/tag/8.8.10)</li><li>[Camunda 8.8.9 (06.01.2026)](https://github.com/camunda/camunda/releases/tag/8.8.9)</li><li>[Camunda 8.8.8 (11.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.8)</li><li>[Camunda 8.8.7 (09.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.7)</li><li>[Camunda 8.8.6 (02.12.2025)](https://github.com/camunda/camunda/releases/tag/8.8.6)</li><li>[Camunda 8.8.5 (27.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.5)</li><li>[Camunda 8.8.4 (17.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.4)</li><li>[Camunda 8.8.3 (05.11.2025)](https://github.com/camunda/camunda/releases/tag/8.8.3)</li><li>[Camunda 8.8.2 (27.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.2)</li><li>[Camunda 8.8.1 (22.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.1)</li><li>[Camunda 8.8.0 (09.10.2025)](https://github.com/camunda/camunda/releases/tag/8.8.0)</li><li>[Connectors 8.8.15 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.8.15)</li><li>[Connectors 8.8.14 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.8.14)</li><li>[Connectors 8.8.13 (22.05.2026)](https://github.com/camunda/connectors/releases/tag/8.8.13)</li><li>[Connectors 8.8.12 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.8.12)</li><li>[Connectors 8.8.11 (05.05.2026)](https://github.com/camunda/connectors/releases/tag/8.8.11)</li><li>[Connectors 8.8.10 (30.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.10)</li><li>[Connectors 8.8.9 (26.03.2026)](https://github.com/camunda/connectors/releases/tag/8.8.9)</li><li>[Connectors 8.8.8 (26.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.8)</li><li>[Connectors 8.8.7 (02.02.2026)](https://github.com/camunda/connectors/releases/tag/8.8.7)</li><li>[Connectors 8.8.6 (27.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.6)</li><li>[Connectors 8.8.5 (07.01.2026)](https://github.com/camunda/connectors/releases/tag/8.8.5)</li><li>[Connectors 8.8.4 (01.12.2025)](https://github.com/camunda/connectors/releases/tag/8.8.4)</li><li>[Connectors 8.8.3 (19.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.3)</li><li>[Connectors 8.8.2 (06.11.2025)](https://github.com/camunda/connectors/releases/tag/8.8.2)</li><li>[Connectors 8.8.1 (16.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.1)</li><li>[Connectors 8.8.0 (10.10.2025)](https://github.com/camunda/connectors/releases/tag/8.8.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -255,7 +255,7 @@ The SQL connector now supports Oracle Database connections.
 
 Connector manage and run in Console now supports management of multiple connector runtime instances.
 
-<p><a href="../../../../components/console/manage-clusters/cluster-connectors" class="link-arrow">Manage your connectors</a></p>
+<p><a href="../../../../components/hub/organization/manage-clusters/cluster-connectors" class="link-arrow">Manage your connectors</a></p>
 
 ### Docker distribution
 
@@ -435,7 +435,7 @@ Supported providers are:
 - **GCP**: Google Cloud Platform with Vertex AI and Document AI (supports both structured and unstructured extraction).
 - **OpenAI compatible**: Supports OpenAI and any provider implementing the OpenAI `/chat/completions` API (unstructured extraction only).
 
-<p><a href="../../../../components/modeler/web-modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/idp/idp-document-extraction/" class="link-arrow">Document extraction</a></p>
 
 ### Structured data form extraction
 
@@ -446,7 +446,7 @@ You can use form-based structured document extraction to capture data from struc
 - For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
 - Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
 
-<p><a href="../../../../components/modeler/web-modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/idp/idp-structured-extraction" class="link-arrow">Extract structured data</a></p>
 
 ## Migration from Camunda 7 to Camunda 8
 
@@ -659,7 +659,7 @@ In addition to bearer token authentication, you can now configure Web Modeler in
 - Set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
 
-<p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
+<p><a href="../../../../self-managed/components/hub/configuration/properties/#available-authentication-methods" class="link-arrow">Available authentication methods</a></p>
 
 ### Element template editor onboarding
 
@@ -668,7 +668,7 @@ In addition to bearer token authentication, you can now configure Web Modeler in
 Web Modeler now provides a low-coder friendly UX for creating building blocks.
 Whether you create an element template from scratch or from a task, you can quickly set and narrow down the properties so process developers using these templates can quickly and confidently wire building blocks together into an E2E process.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/element-templates/element-template-generator" class="link-arrow">Generate an element template</a></p>
 
 ### Element template support for all tasks
 
@@ -680,7 +680,7 @@ You can now save any configured task as a reusable element template directly fro
 - Edit templates to adjust input/output bindings, validation rules, categories, and more.
 - Publish templates to your project or organization for reuse.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/element-templates/save-as-element-templates" class="link-arrow">Save tasks as element templates</a></p>
 
 ### Unlock element template fields
 
@@ -692,7 +692,7 @@ Element template management is now more flexible for developers and DevOps teams
 - Template names and file names can be managed independently, and you can quickly import templates using copy and paste, git sync, or CI/CD pipeline.
 - Safeguards now notify you of ID or version conflicts to prevent accidental overwrites when publishing templates.
 
-<p><a href="../../../../components/modeler/web-modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/element-templates/manage-element-templates/" class="link-arrow">Manage element templates</a></p>
 
 ### FEEL Copilot
 
@@ -717,7 +717,7 @@ Use the FEEL Playground to validate and troubleshoot your FEEL expressions when 
 
 In addition to GitHub and GitLab, Web Modeler now supports integration with Azure DevOps and Atlassian Bitbucket.
 
-<p><a href="../../../../components/modeler/web-modeler/process-applications/git-sync" class="link-arrow">Git sync</a></p>
+<p><a href="../../../../components/hub/workspace/manage-projects/git-sync" class="link-arrow">Git sync</a></p>
 
 ### Low-code process testing
 
@@ -729,7 +729,7 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 - Ideal for process developers and CoEs
 - Enables behavior-driven development with Camunda Process Test
 
-<p><a href="../../../../components/modeler/web-modeler/validation/play-your-process/" class="link-arrow">Scenarios</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/validation/play-your-process/" class="link-arrow">Scenarios</a></p>
 
 ### RDBMS support for Oracle and MS SQL in Self-Managed
 
@@ -737,7 +737,7 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 
 Web Modeler Self-Managed now supports Oracle Database and Microsoft SQL Server for simpler setup and maintenance.
 
-<p><a href="../../../../self-managed/components/modeler/web-modeler/configuration/database/#using-alternative-database-vendors" class="link-arrow">Set up Oracle or MS SQL</a></p>
+<p><a href="../../../../self-managed/components/hub/configuration/database/#using-alternative-database-vendors" class="link-arrow">Set up Oracle or MS SQL</a></p>
 
 ### Username claim configuration
 
@@ -751,7 +751,7 @@ Configure the ID token claim used for usernames via the `CAMUNDA_IDENTITY_USERNA
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-<p><a href="../../../../components/modeler/web-modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/modeling/versions" class="link-arrow">Web Modeler versioning</a></p>
 
 ## 8.8.0-alpha8
 
@@ -838,7 +838,7 @@ You can now save any configured task as a reusable element template directly fro
 - Edit templates to adjust input/output bindings, validation rules, categories, and more
 - Publish templates to your project or organization for reuse
 
-See [save tasks as element templates](/components/modeler/web-modeler/element-templates/save-as-element-templates.md) for details.
+See [save tasks as element templates](/components/hub/workspace/modeler/element-templates/save-as-element-templates.md) for details.
 
 Additional support includes:
 
@@ -1055,7 +1055,7 @@ You can use form-based structured document extraction to capture data from struc
 - For example, you can use this extraction method for documents with a consistent layout, such as invoices, tax forms (for example, W-2s, VAT declarations), and loan or insurance applications.
 - Projects can be shared organization-wide, enhancing accessibility to extraction capabilities.
 
-To learn more, see [extract structured data](/components/modeler/web-modeler/idp/idp-structured-extraction.md).
+To learn more, see [extract structured data](/components/hub/workspace/modeler/idp/idp-structured-extraction.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2707 -->
 
@@ -1113,7 +1113,7 @@ Camunda 8 now supports integration with [Atlassian Bitbucket Cloud](https://bitb
 - This helps customers who use Jira for their development processes.
 - Organization owners and administrators can connect their Web Modeler process applications to Bitbucket Cloud, allowing users to keep their Web Modeler, Desktop Modeler, and official version control projects synced.
 
-To learn more, see [Git sync](/components/modeler/web-modeler/process-applications/git-sync.md?platform=bitbucket).
+To learn more, see [Git sync](/components/hub/workspace/manage-projects/git-sync.md?platform=bitbucket).
 
 ### Camunda 8 REST API renamed to Orchestration Cluster REST API <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects APIs">API</span>
 
@@ -1287,7 +1287,7 @@ To learn more about this connector, see [vector database connector](/components/
 
 ### Azure DevOps integration for Git sync <span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-Camunda now supports [an integration with Azure DevOps](/components/modeler/web-modeler/process-applications/git-sync.md) that allows for direct syncing with Azure repositories.
+Camunda now supports [an integration with Azure DevOps](/components/hub/workspace/manage-projects/git-sync.md) that allows for direct syncing with Azure repositories.
 
 <!-- https://github.com/camunda/product-hub/issues/2580 -->
 
@@ -1397,7 +1397,7 @@ To learn more about Camunda Process Test, see [Camunda Process Test](/apis-tools
 
 Connector manage and run in Console now supports management of multiple connector runtime instances.
 
-To learn more about this feature, see [manage your connectors](/components/console/manage-clusters/manage-connectors.md).
+To learn more about this feature, see [manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md).
 
 ### Connectors <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span> {#connectorsalpha4}
 
@@ -1446,7 +1446,7 @@ To learn more about these settings, see [Desktop Modeler settings](/components/m
 
 Use the version **Description** field to track changes alongside the version tag (for example, as a change log or Git commit message). This helps make versioning more intuitive and collaborative, keeps teams aligned, and reduces ambiguity.
 
-To learn more about versioning your diagrams, see [versions](components/modeler/web-modeler/modeling/versions.md).
+To learn more about versioning your diagrams, see [versions](components/hub/workspace/modeler/modeling/versions.md).
 
 ### Web Modeler cluster Basic authentication <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
@@ -1457,7 +1457,7 @@ As well as bearer token and client credentials authentication, you can now confi
 - To use Basic authentication, set the `CAMUNDA_MODELER_CLUSTERS_0_AUTHENTICATION` environment variable value to `BASIC`.
 - Web Modeler sends a username and password with every request to the cluster.
 
-To learn more about Basic authentication, see [available authentication methods](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods).
+To learn more about Basic authentication, see [available authentication methods](/self-managed/components/hub/configuration/properties.md#available-authentication-methods).
 
 ## 8.8.0-alpha3
 
@@ -1547,7 +1547,7 @@ Built-in Keycloak integration in Self-Managed is removed, allowing customers to 
 
 #### Resource-based authorizations
 
-Resource-based authorizations control read and write permissions per specific resource. See [manage users](/components/console/manage-organization/manage-users.md#resource-based-authorizations).
+Resource-based authorizations control read and write permissions per specific resource. See [manage users](/components/hub/organization/manage-members/manage-users.md#resource-based-authorizations).
 
 - Admin users retain full access, but regular users must be granted specific permissions to perform operations or view resources.
 - For organizations that build custom front-ends and access Camunda via API, users or clients with API permissions can still access data through the V2 API, respecting their resource permissions.

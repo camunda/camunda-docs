@@ -1,0 +1,584 @@
+---
+id: update-version
+title: "Update a version"
+description: "Updates the name of an existing version."
+sidebar_label: "Update a version"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "patch api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Update a version"}
+></Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/versions/{versionKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Updates the name of an existing version.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "versionKey",
+      in: "path",
+      required: true,
+      description: "The unique key of the version.",
+      schema: {
+        description: "System-generated key for a version.",
+        type: "string",
+        format: "VersionKey",
+        "x-semantic-type": "VersionKey",
+        example: "ver-345-jkl",
+        title: "VersionKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["name"],
+          example: {
+            name: "Release 1.1",
+            description: "Updated with error-handling improvements.",
+          },
+          properties: {
+            name: {
+              description: "The new name for the version.",
+              type: "string",
+              minLength: 1,
+              maxLength: 255,
+            },
+            description: {
+              description: "An optional description for the version.",
+              type: "string",
+              nullable: true,
+              maxLength: 255,
+            },
+            organizationPublic: {
+              description:
+                "Whether the version is published to shared resources (visible organization-wide). Only applicable to element template files.\n",
+              type: "boolean",
+            },
+          },
+          title: "VersionUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The version was updated successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              versionKey: "ver-345-jkl",
+              name: "Release 1.0",
+              description: "First stable release of the order process.",
+              fileKey: "file-789-xyz",
+              organizationPublic: false,
+              created: "2025-03-15T10:30:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              updated: "2025-03-15T10:30:00.000Z",
+              updatedBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+            },
+            required: [
+              "versionKey",
+              "name",
+              "description",
+              "fileKey",
+              "created",
+              "createdBy",
+              "updated",
+              "updatedBy",
+              "organizationPublic",
+            ],
+            properties: {
+              versionKey: {
+                description: "The unique key of the version.",
+                allOf: [
+                  {
+                    description: "System-generated key for a version.",
+                    type: "string",
+                    format: "VersionKey",
+                    "x-semantic-type": "VersionKey",
+                    example: "ver-345-jkl",
+                    title: "VersionKey",
+                  },
+                ],
+              },
+              name: { description: "The name of the version.", type: "string" },
+              description: {
+                description: "The description of the version.",
+                type: "string",
+                nullable: true,
+              },
+              fileKey: {
+                description: "The key of the file this version belongs to.",
+                allOf: [
+                  {
+                    description: "System-generated key for a file.",
+                    type: "string",
+                    format: "FileKey",
+                    "x-semantic-type": "FileKey",
+                    example: "file-789-xyz",
+                    title: "FileKey",
+                  },
+                ],
+              },
+              organizationPublic: {
+                description:
+                  "Whether the version is published to shared resources.",
+                type: "boolean",
+              },
+              created: {
+                description: "The timestamp when the version was created.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description:
+                  "The user who created the version. May be null for legacy or system-created versions.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              updated: {
+                description: "The timestamp when the version was last updated.",
+                type: "string",
+                format: "date-time",
+              },
+              updatedBy: {
+                description:
+                  "The user who last updated the version. May be null for legacy or system-created versions.",
+                nullable: true,
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "VersionResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
+        },
+      },
+    },
+    "409": {
+      description: "A conflict occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Conflict",
+            status: 409,
+            detail:
+              "The request conflicts with the current state of the resource.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

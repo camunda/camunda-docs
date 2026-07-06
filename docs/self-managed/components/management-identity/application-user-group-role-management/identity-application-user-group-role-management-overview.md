@@ -5,7 +5,7 @@ sidebar_label: "Users, groups, roles, and applications"
 description: "Learn more about how Management Identity makes use of users, groups, and roles for management and modeling components"
 ---
 
-Manage and organize access to Camunda 8 management and modeling components ([Web Modeler](../../modeler/web-modeler/overview.md), [Console](../../console/overview.md), and [Optimize](../../optimize/overview.md)) using users, groups, roles, and applications.
+Manage and organize access to Camunda 8 management and modeling components ([Camunda Hub](../../hub/index.md) and [Optimize](../../optimize/overview.md)) using users, groups, roles, and applications.
 
 ## About managing users in Management Identity
 

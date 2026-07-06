@@ -20,7 +20,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#h">H</a></div>
     <div class="letter-link"><a href="#i">I</a></div>
     <div class="letter-link"><a href="#j">J</a></div>
-    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#k">K</a></div>
     <div class="letter-link"><a href="#l">L</a></div>
     <div class="letter-link"><a href="#m">M</a></div>
   </div>
@@ -33,7 +33,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#s">S</a></div>
     <div class="letter-link"><a href="#t">T</a></div>
     <div class="letter-link"><a href="#u">U</a></div>
-    <div class="letter-link">V</div>
+    <div class="letter-link"><a href="#v">V</a></div>
     <div class="letter-link"><a href="#w">W</a></div>
     <div class="letter-link">X</div>
     <div class="letter-link">Y</div>
@@ -42,6 +42,14 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 </div>
 
 ## A
+
+### Ad-hoc sub-process
+
+A special type of BPMN subprocess that allows activities to be executed in any order, skipped, or repeated, without a predefined sequence. Activities are activated dynamically at runtime, either by a human or a system, rather than following a fixed flow.
+
+In Camunda, ad-hoc sub-processes are the foundation for AI agent tool execution: each activity inside the sub-process acts as a tool the LLM can select and invoke during a feedback loop.
+
+- [Ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)
 
 ### Admin
 
@@ -217,6 +225,14 @@ An event represents a state change associated with an aspect of an executing [pr
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
+### Execution platform version
+
+In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
+
+The execution platform version is not a deployed process definition version, a Web Modeler version, or a SaaS cluster generation.
+
+- [Desktop Modeler flags](/components/modeler/desktop-modeler/flags/flags.md#default-execution-platform-version)
+
 ### Execution listener
 
 An execution listener is a mechanism that allows users to execute custom logic at specific points during [workflow](#workflow) execution. Execution listeners can be attached to [BPMN elements](#element) to react to lifecycle events, such as when an element starts or ends. This feature facilitates pre-processing and post-processing tasks without cluttering the BPMN model, functioning similarly to [job workers](#job-worker) by leveraging the same infrastructure.
@@ -247,11 +263,29 @@ In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#l
 
 ### Gateway
 
-See [Zeebe Gateway](#zeebe-gateway).
+Gateway can refer to different concepts in Camunda docs, depending on the context:
+
+- In BPMN, a gateway controls how a process flow branches, merges, or synchronizes.
+- In runtime and API contexts, the [Zeebe Gateway](#zeebe-gateway) is the component that exposes APIs and routes requests to Zeebe brokers.
+- In Kubernetes deployment docs, Gateway can also refer to Kubernetes Gateway API resources.
 
 ### Generative AI
 
 Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
+
+### Generation
+
+In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Console uses generations instead of a single engine version because the underlying component versions can change independently.
+
+A generation is not a process definition version, a version tag, or a Web Modeler version.
+
+- [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
+
+### GPAI model
+
+A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
 
 ## H
 
@@ -273,6 +307,10 @@ H2 is not intended for production usage. For Camunda secondary storage, H2 is a 
 - [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
 
 See also: [Secondary storage](#secondary-storage)
+
+### Human-in-the-Loop (HITL)
+
+A human review and approval step before AI-generated outputs with legal, financial, or safety-relevant effects are acted upon.
 
 ### Human task
 
@@ -333,6 +371,14 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 - [Job workers](/components/concepts/job-workers.md)
 
+## K
+
+### Kill switch
+
+A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+
 ## L
 
 ### Large language model (LLM)
@@ -364,6 +410,12 @@ A manual task defines a task that requires human interaction but no external too
 Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](#user-task) which define an actionable task assisted by a workflow engine or software application.
 
 - [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
+
+### Multi-tenancy
+
+Multi-tenancy allows a single Camunda 8 installation to serve multiple tenants while keeping each tenant's data, configurations, and access logically isolated.
+
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
 
 ### Message
 
@@ -426,6 +478,15 @@ Identified by:
 - **version**: Version number assigned by the engine
 
 The engine uses process definitions to start [process instances](#process-instance).
+
+### Process definition version
+
+A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
+
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a Web Modeler version, which is a saved file or project snapshot.
+
+- [Process definition](#process-definition)
+- [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
 
 ### Process instance
 
@@ -576,6 +637,13 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ## T
 
+### Tenant
+
+A tenant is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions.
+
+- [Tenant management](/components/admin/tenant.md)
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+
 ### Temperature
 
 A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
@@ -608,6 +676,38 @@ Camunda recommends using Camunda user tasks in your process definitions. With 8.
 A user task listener allows users to execute custom logic in response to specific user task lifecycle events, such as assigning or completing a task. User task listeners are attached to BPMN user tasks and facilitate validation, custom task assignment, and other operations during user task execution. They operate similarly to [job workers](#job-worker), leveraging the same infrastructure for processing external logic.
 
 - [User task listeners](/components/concepts/user-task-listeners.md)
+
+## V
+
+### Variable
+
+A variable stores data for a [process instance](#process-instance) or a local scope within a process. Variables can hold JSON values and are used to pass business data between tasks, expressions, and events.
+
+- [Variables](/components/concepts/variables.md)
+
+### Version
+
+In Camunda 8, version is an overloaded term. Depending on context, it can refer to a [process definition version](#process-definition-version), a [version tag](#version-tag), a [Web Modeler version](#web-modeler-version), an [execution platform version](#execution-platform-version), or a SaaS [generation](#generation).
+
+### Version tag
+
+A version tag is a user-defined string label for a specific resource or snapshot.
+
+For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Web Modeler process application versioning, a version tag labels a saved process application snapshot.
+
+A version tag is not generated automatically and does not replace the numeric process definition version.
+
+- [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
+- [Process application versioning](/components/modeler/web-modeler/process-applications/process-application-versioning.md)
+
+### Web Modeler version
+
+A Web Modeler version is a saved snapshot of a BPMN or DMN file, or of an entire project. Diagram versions were previously called milestones.
+
+Web Modeler versions help you compare, restore, review, and deploy snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Versions](/components/modeler/web-modeler/modeling/versions.md)
+- [Process application versioning](/components/modeler/web-modeler/process-applications/process-application-versioning.md)
 
 ## W
 
@@ -682,4 +782,4 @@ The Zeebe Exporter system provides an event stream of state changes within Zeebe
 
 The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster that allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a Zeebe cluster.
 
-- [Zeebe Gateway](self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)
+- [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)

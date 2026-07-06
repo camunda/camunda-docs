@@ -48,7 +48,7 @@ To learn more about choosing your cluster size, see [sizing your environment](/c
 - You can change the cluster size at any time. See [resize a cluster](/components/console/manage-clusters/manage-cluster.md#resize-a-cluster).
 
 :::note
-Contact your Customer Success Manager to increase the cluster size beyond the maximum 4x size. This requires custom sizing and pricing.
+To increase the cluster size beyond the maximum 4x size, [reach out to Camunda](https://camunda.com/contact-us/). This requires custom sizing and pricing.
 :::
 
 ## Free Trial clusters

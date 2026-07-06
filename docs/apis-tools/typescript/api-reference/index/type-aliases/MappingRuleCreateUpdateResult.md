@@ -36,7 +36,7 @@ The value of the claim to map.
 ### mappingRuleId
 
 ```ts
-mappingRuleId: string;
+mappingRuleId: MappingRuleId;
 ```
 
 The unique ID of the mapping rule.

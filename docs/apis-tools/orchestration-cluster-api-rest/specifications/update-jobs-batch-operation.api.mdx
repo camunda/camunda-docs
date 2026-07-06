@@ -1,0 +1,2272 @@
+---
+id: update-jobs-batch-operation
+title: "Update jobs (batch)"
+sidebar_label: "Update jobs (batch)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Update jobs (batch)"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/jobs/batch-update"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/\{batchOperationKey\}).
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          description:
+            "The filter and changeset for a batch job update operation. The filter defines which jobs are updated; the changeset defines what to update. At least one changeset field must be non-null.\n",
+          properties: {
+            filter: {
+              allOf: [
+                {
+                  description: "Job search filter.",
+                  type: "object",
+                  properties: {
+                    deadline: {
+                      description: "When the job can next be activated.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    deniedReason: {
+                      description:
+                        "The reason provided by the user task listener for denying the work.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      description: "The element ID associated with the job.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    elementInstanceKey: {
+                      description:
+                        "The element instance key associated with the job.",
+                      allOf: [
+                        {
+                          description:
+                            "ElementInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a element instance.",
+                                  format: "ElementInstanceKey",
+                                  example: "2251799813686789",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ElementInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ElementInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a element instance.",
+                                      format: "ElementInstanceKey",
+                                      example: "2251799813686789",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ElementInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a element instance.",
+                                    format: "ElementInstanceKey",
+                                    example: "2251799813686789",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ElementInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ElementInstanceKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    endTime: {
+                      description: "When the job ended.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    errorCode: {
+                      description:
+                        "The error code provided for the failed job.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    errorMessage: {
+                      description:
+                        "The error message that provides additional context for a failed job.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    hasFailedWithRetriesLeft: {
+                      description:
+                        "Indicates whether the job has failed with retries left.",
+                      type: "boolean",
+                    },
+                    isDenied: {
+                      description:
+                        "Indicates whether the user task listener denies the work.",
+                      type: "boolean",
+                      nullable: true,
+                    },
+                    jobKey: {
+                      description: "The key, a unique identifier for the job.",
+                      allOf: [
+                        {
+                          description:
+                            "JobKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a job.",
+                                  format: "JobKey",
+                                  example: "2251799813653498",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "JobKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced JobKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a job.",
+                                      format: "JobKey",
+                                      example: "2251799813653498",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "JobKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a job.",
+                                      format: "JobKey",
+                                      example: "2251799813653498",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "JobKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a job.",
+                                    format: "JobKey",
+                                    example: "2251799813653498",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "JobKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a job.",
+                                    format: "JobKey",
+                                    example: "2251799813653498",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "JobKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "JobKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    kind: {
+                      description: "The kind of the job.",
+                      allOf: [
+                        {
+                          description:
+                            "JobKindEnum property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description: "The job kind.",
+                                  example: "BPMN_ELEMENT",
+                                  type: "string",
+                                  enum: [
+                                    "BPMN_ELEMENT",
+                                    "EXECUTION_LISTENER",
+                                    "TASK_LISTENER",
+                                    "AD_HOC_SUB_PROCESS",
+                                  ],
+                                  title: "JobKindEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced JobKindEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description: "The job kind.",
+                                      example: "BPMN_ELEMENT",
+                                      type: "string",
+                                      enum: [
+                                        "BPMN_ELEMENT",
+                                        "EXECUTION_LISTENER",
+                                        "TASK_LISTENER",
+                                        "AD_HOC_SUB_PROCESS",
+                                      ],
+                                      title: "JobKindEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description: "The job kind.",
+                                      example: "BPMN_ELEMENT",
+                                      type: "string",
+                                      enum: [
+                                        "BPMN_ELEMENT",
+                                        "EXECUTION_LISTENER",
+                                        "TASK_LISTENER",
+                                        "AD_HOC_SUB_PROCESS",
+                                      ],
+                                      title: "JobKindEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description: "The job kind.",
+                                    example: "BPMN_ELEMENT",
+                                    type: "string",
+                                    enum: [
+                                      "BPMN_ELEMENT",
+                                      "EXECUTION_LISTENER",
+                                      "TASK_LISTENER",
+                                      "AD_HOC_SUB_PROCESS",
+                                    ],
+                                    title: "JobKindEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "JobKindFilterProperty",
+                        },
+                      ],
+                    },
+                    listenerEventType: {
+                      description: "The listener event type of the job.",
+                      allOf: [
+                        {
+                          description:
+                            "JobListenerEventTypeEnum property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  example: "UNSPECIFIED",
+                                  description:
+                                    "The listener event type of the job.",
+                                  type: "string",
+                                  enum: [
+                                    "ASSIGNING",
+                                    "BEFORE_ALL",
+                                    "CANCEL",
+                                    "CANCELING",
+                                    "COMPLETING",
+                                    "CREATING",
+                                    "END",
+                                    "START",
+                                    "UNSPECIFIED",
+                                    "UPDATING",
+                                  ],
+                                  title: "JobListenerEventTypeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced JobListenerEventTypeEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      example: "UNSPECIFIED",
+                                      description:
+                                        "The listener event type of the job.",
+                                      type: "string",
+                                      enum: [
+                                        "ASSIGNING",
+                                        "BEFORE_ALL",
+                                        "CANCEL",
+                                        "CANCELING",
+                                        "COMPLETING",
+                                        "CREATING",
+                                        "END",
+                                        "START",
+                                        "UNSPECIFIED",
+                                        "UPDATING",
+                                      ],
+                                      title: "JobListenerEventTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      example: "UNSPECIFIED",
+                                      description:
+                                        "The listener event type of the job.",
+                                      type: "string",
+                                      enum: [
+                                        "ASSIGNING",
+                                        "BEFORE_ALL",
+                                        "CANCEL",
+                                        "CANCELING",
+                                        "COMPLETING",
+                                        "CREATING",
+                                        "END",
+                                        "START",
+                                        "UNSPECIFIED",
+                                        "UPDATING",
+                                      ],
+                                      title: "JobListenerEventTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    example: "UNSPECIFIED",
+                                    description:
+                                      "The listener event type of the job.",
+                                    type: "string",
+                                    enum: [
+                                      "ASSIGNING",
+                                      "BEFORE_ALL",
+                                      "CANCEL",
+                                      "CANCELING",
+                                      "COMPLETING",
+                                      "CREATING",
+                                      "END",
+                                      "START",
+                                      "UNSPECIFIED",
+                                      "UPDATING",
+                                    ],
+                                    title: "JobListenerEventTypeEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "JobListenerEventTypeFilterProperty",
+                        },
+                      ],
+                    },
+                    priority: {
+                      description:
+                        "The priority of the job. Jobs created before 8.10 have no stored priority and are excluded from results when this filter is applied.\n",
+                      allOf: [
+                        {
+                          description:
+                            "Integer property with advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "integer",
+                              format: "int32",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced integer (int32) filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int32" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "IntegerFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The process definition ID associated with the job.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      description:
+                        "The process definition key associated with the job.",
+                      allOf: [
+                        {
+                          description:
+                            "ProcessDefinitionKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a deployed process definition.",
+                                  format: "ProcessDefinitionKey",
+                                  example: "2251799813686749",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessDefinitionKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessDefinitionKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessDefinitionKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    processInstanceKey: {
+                      description:
+                        "The process instance key associated with the job.",
+                      allOf: [
+                        {
+                          description:
+                            "ProcessInstanceKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a process instance.",
+                                  format: "ProcessInstanceKey",
+                                  example: "2251799813690746",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessInstanceKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessInstanceKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a process instance.",
+                                      format: "ProcessInstanceKey",
+                                      example: "2251799813690746",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessInstanceKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a process instance.",
+                                    format: "ProcessInstanceKey",
+                                    example: "2251799813690746",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessInstanceKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessInstanceKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    retries: {
+                      description: "The number of retries left.",
+                      allOf: [
+                        {
+                          description:
+                            "Integer property with advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "integer",
+                              format: "int32",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced integer (int32) filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int32" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "IntegerFilterProperty",
+                        },
+                      ],
+                    },
+                    state: {
+                      description: "The state of the job.",
+                      allOf: [
+                        {
+                          description:
+                            "JobStateEnum property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              format: "JobStateEnum",
+                              allOf: [
+                                {
+                                  description: "The state of the job.",
+                                  type: "string",
+                                  enum: [
+                                    "CANCELED",
+                                    "COMPLETED",
+                                    "CREATED",
+                                    "ERROR_THROWN",
+                                    "FAILED",
+                                    "MIGRATED",
+                                    "PRIORITY_UPDATED",
+                                    "RETRIES_UPDATED",
+                                    "TIMED_OUT",
+                                  ],
+                                  title: "JobStateEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced JobStateEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description: "The state of the job.",
+                                      type: "string",
+                                      enum: [
+                                        "CANCELED",
+                                        "COMPLETED",
+                                        "CREATED",
+                                        "ERROR_THROWN",
+                                        "FAILED",
+                                        "MIGRATED",
+                                        "PRIORITY_UPDATED",
+                                        "RETRIES_UPDATED",
+                                        "TIMED_OUT",
+                                      ],
+                                      title: "JobStateEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description: "The state of the job.",
+                                      type: "string",
+                                      enum: [
+                                        "CANCELED",
+                                        "COMPLETED",
+                                        "CREATED",
+                                        "ERROR_THROWN",
+                                        "FAILED",
+                                        "MIGRATED",
+                                        "PRIORITY_UPDATED",
+                                        "RETRIES_UPDATED",
+                                        "TIMED_OUT",
+                                      ],
+                                      title: "JobStateEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description: "The state of the job.",
+                                    type: "string",
+                                    enum: [
+                                      "CANCELED",
+                                      "COMPLETED",
+                                      "CREATED",
+                                      "ERROR_THROWN",
+                                      "FAILED",
+                                      "MIGRATED",
+                                      "PRIORITY_UPDATED",
+                                      "RETRIES_UPDATED",
+                                      "TIMED_OUT",
+                                    ],
+                                    title: "JobStateEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "JobStateFilterProperty",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description: "The tenant ID.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    type: {
+                      description: "The type of the job.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    worker: {
+                      description: "The name of the worker for this job.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    creationTime: {
+                      description:
+                        "When the job was created. Field is present for jobs created after 8.9.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                    lastUpdateTime: {
+                      description:
+                        "When the job was last updated. Field is present for jobs created after 8.9.",
+                      allOf: [
+                        {
+                          description:
+                            "Date-time property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              format: "date-time",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced date-time filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "string",
+                                  format: "date-time",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    type: "string",
+                                    format: "date-time",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "DateTimeFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "JobFilter",
+                },
+              ],
+              description:
+                "The job filter. At least one dimension must be set.",
+            },
+            changeset: {
+              allOf: [
+                {
+                  description:
+                    "JSON object with changed job attribute values. The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.",
+                  type: "object",
+                  properties: {
+                    retries: {
+                      type: "integer",
+                      format: "int32",
+                      description: "The new number of retries for the job.",
+                      nullable: true,
+                    },
+                    timeout: {
+                      type: "integer",
+                      format: "int64",
+                      description:
+                        "The new timeout for the job in milliseconds.",
+                      nullable: true,
+                    },
+                    priority: {
+                      type: "integer",
+                      format: "int32",
+                      description:
+                        "The new priority for the job. Higher values indicate higher priority.",
+                      nullable: true,
+                    },
+                  },
+                  title: "JobChangeset",
+                },
+              ],
+              description:
+                "The fields to update. At least one field must be non-null.",
+            },
+            operationReference: {
+              description:
+                "A reference key chosen by the user that will be part of all records resulting from this operation.\nMust be > 0 if provided.\n",
+              type: "integer",
+              format: "int64",
+              minimum: 1,
+              title: "OperationReference",
+            },
+          },
+          required: ["filter", "changeset"],
+          "x-added-in-version": "8.10",
+          title: "JobBatchUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The batch operation was created.",
+      content: {
+        "application/json": {
+          schema: {
+            required: ["batchOperationKey", "batchOperationType"],
+            description: "The created batch operation.",
+            type: "object",
+            properties: {
+              batchOperationKey: {
+                allOf: [
+                  {
+                    format: "BatchOperationKey | uuid",
+                    type: "string",
+                    description: "System-generated key for an batch operation.",
+                    example: "2251799813684321",
+                    title: "BatchOperationKey",
+                  },
+                ],
+                description: "Key of the batch operation.",
+              },
+              batchOperationType: {
+                description: "The type of the batch operation.",
+                type: "string",
+                enum: [
+                  "ADD_VARIABLE",
+                  "CANCEL_PROCESS_INSTANCE",
+                  "DELETE_DECISION_DEFINITION",
+                  "DELETE_DECISION_INSTANCE",
+                  "DELETE_PROCESS_DEFINITION",
+                  "DELETE_PROCESS_INSTANCE",
+                  "MIGRATE_PROCESS_INSTANCE",
+                  "MODIFY_PROCESS_INSTANCE",
+                  "RESOLVE_INCIDENT",
+                  "UPDATE_JOB",
+                  "UPDATE_VARIABLE",
+                ],
+                title: "BatchOperationTypeEnum",
+              },
+            },
+            title: "BatchOperationCreatedResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description:
+        "The job batch update operation failed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

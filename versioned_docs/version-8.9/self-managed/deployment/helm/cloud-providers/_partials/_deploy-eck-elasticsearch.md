@@ -10,7 +10,7 @@ The script installs the ECK operator, deploys an Elasticsearch cluster, and wait
 <summary>Review the Elasticsearch cluster configuration</summary>
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
 </details>

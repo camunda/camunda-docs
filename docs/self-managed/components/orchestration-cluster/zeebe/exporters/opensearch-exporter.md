@@ -11,8 +11,7 @@ import TabItem from "@theme/TabItem";
 :::note
 For supported OpenSearch versions in Camunda 8 Self-Managed, see [Supported Environments](../../../../../reference/supported-environments.md#camunda-8-self-managed).
 
-Starting with Camunda 8.8, Camunda uses the [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md)
-to consume new records. Records from 8.7 and earlier are consumed only during migration.
+Starting with Camunda 8.8, Camunda uses the [Camunda exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/camunda-exporter.md) to consume new records. Records from 8.7 and earlier are consumed only during migration.
 
 The Elasticsearch and OpenSearch exporters remain fully usable after migration (for example, for existing setups, Optimize, or other custom use cases). Their functionality is not limited to the migration period.
 
@@ -21,21 +20,14 @@ From 8.9 onward, the OpenSearch exporter also supports Optimize-focused export f
 For Optimize-specific guidance and recommended settings, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 :::
 
-The Zeebe OpenSearch Exporter acts as a bridge between
-[Zeebe](https://camunda.com/platform/zeebe/) and [OpenSearch](https://opensearch.org) by
+The Zeebe OpenSearch exporter acts as a bridge between [Zeebe](https://camunda.com/platform/zeebe/) and [OpenSearch](https://opensearch.org) by
 exporting records written to Zeebe streams as documents into several indices.
 
 ## Concept
 
-The exporter operates on the idea that it should perform as little as possible on the Zeebe side of
-things. In other words, you can think of the indexes into which the records are exported as a
-staging data warehouse. Any enrichment or transformation on the exported data should be performed by
-your own ETL jobs.
+The exporter operates on the idea that it should perform as little as possible on the Zeebe side of things. In other words, you can think of the indexes into which the records are exported as a staging data warehouse. Any enrichment or transformation on the exported data should be performed by your own ETL jobs.
 
-When configured to do so, the exporter will automatically create an index per
-record value type (see the value type in the Zeebe protocol). Each of these indexes has a
-corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find
-those as templates in this module's resources folder.
+When configured to do so, the exporter will automatically create an index per record value type (see the value type in the Zeebe protocol). Each of these indexes has a corresponding pre-defined mapping to facilitate data ingestion for your own ETL jobs. You can find those as templates in this module's resources folder.
 
 :::note
 The indexes are created as required, and will not be created twice if they already exist. However, once disabled, they will not be deleted (that is up to the administrator). Similarly, data is never deleted by the exporter, and must be deleted by the administrator when it is safe to do so.
@@ -58,14 +50,14 @@ camunda:
   data:
     exporters:
       opensearch:
-        class-name: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+        className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
         args:
         # Refer to the table below for the available args options
 ```
 
 **Environment variables:**
 
-Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` (e.g., `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_URL`).
+Set environment variables in the format `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_...` (for example, `CAMUNDA_DATA_EXPORTERS_OPENSEARCH_URL`).
 
 **Helm:**
 
@@ -75,8 +67,7 @@ Add the same configuration under `orchestration.configuration` in your `values.y
 Do not configure both legacy (`zeebe.broker.exporters.*`) and unified (`camunda.data.exporters.*`) exporter properties at the same time. Exporter properties are a breaking-change mapping in unified configuration, and the application fails to start until legacy properties are removed.
 :::
 
-The exporter can be configured by providing `args`. The table below explains all the different
-options, and the default values for these options:
+The exporter can be configured by providing `args`. The table below explains all the different options, and the default values for these options:
 
 | Option                  | Description                                                                                                                                                                                      | Default                 |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------- |
@@ -93,145 +84,83 @@ options, and the default values for these options:
 
 <TabItem value="index">
 
-In most cases, you will not be interested in exporting every single record produced by a Zeebe
-cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (e.g. only events, no commands), and the value type of these records (e.g. only job
-and process values).
+In most cases, you will not be interested in exporting every single record produced by a Zeebe cluster, but rather only a subset of them. This can also be configured to limit the kinds of records exported (for example, only events, no commands), and the value type of these records (for example, only job and process values).
 
-| Option                           | Description                                                                                                                                                                                                | Default      |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                    | zeebe-record |
-| create-template                  | If `true` missing indexes will be created automatically.                                                                                                                                                   | `true`       |
-| number-of-shards                 | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | 3            |
-| number-of-replicas               | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created. | 0            |
-| command                          | If `true` command records will be exported                                                                                                                                                                 | `false`      |
-| event                            | If `true` event records will be exported                                                                                                                                                                   | `true`       |
-| rejection                        | If `true` rejection records will be exported                                                                                                                                                               | `false`      |
-| checkpoint                       | If `true` records related to checkpoints will be exported                                                                                                                                                  | `false`      |
-| command-distribution             | If `true` records related to command distributions will be exported                                                                                                                                        | `true`       |
-| decision                         | If `true` records related to decisions will be exported                                                                                                                                                    | `true`       |
-| decision-evaluation              | If `true` records related to decision evaluations will be exported                                                                                                                                         | `true`       |
-| decision-requirements            | If `true` records related to decision requirements will be exported                                                                                                                                        | `true`       |
-| deployment                       | If `true` records related to deployments will be exported                                                                                                                                                  | `true`       |
-| deployment-distribution          | If `true` records related to deployment distributions will be exported                                                                                                                                     | `true`       |
-| error                            | If `true` records related to errors will be exported                                                                                                                                                       | `true`       |
-| escalation                       | If `true` records related to escalations will be exported                                                                                                                                                  | `true`       |
-| form                             | If `true` records related to forms will be exported                                                                                                                                                        | `true`       |
-| incident                         | If `true` records related to incidents will be exported                                                                                                                                                    | `true`       |
-| job                              | If `true` records related to jobs will be exported                                                                                                                                                         | `true`       |
-| job-batch                        | If `true` records related to job batches will be exported                                                                                                                                                  | `false`      |
-| message                          | If `true` records related to messages will be exported                                                                                                                                                     | `true`       |
-| message-batch                    | If `true` records related to message batches will be exported                                                                                                                                              | `false`      |
-| message-subscription             | If `true` records related to message subscriptions will be exported                                                                                                                                        | `true`       |
-| message-start-event-subscription | If `true` records related to message start event subscriptions will be exported                                                                                                                            | `true`       |
-| process                          | If `true` records related to processes will be exported                                                                                                                                                    | `true`       |
-| process-event                    | If `true` records related to process events will be exported                                                                                                                                               | `false`      |
-| process-instance                 | If `true` records related to process instances will be exported                                                                                                                                            | `true`       |
-| process-instance-batch           | If `true` records related to process instances batches will be exported                                                                                                                                    | `false`      |
-| process-instance-creation        | If `true` records related to process instance creations will be exported                                                                                                                                   | `true`       |
-| process-instance-migration       | If `true` records related to process instance migrations will be exported                                                                                                                                  | `true`       |
-| process-instance-modification    | If `true` records related to process instance modifications will be exported                                                                                                                               | `true`       |
-| process-message-subscription     | If `true` records related to process message subscriptions will be exported                                                                                                                                | `true`       |
-| resource-deletion                | If `true` records related to resource deletions will be exported                                                                                                                                           | `true`       |
-| signal                           | If `true` records related to signals will be exported                                                                                                                                                      | `true`       |
-| signal-subscription              | If `true` records related to signal subscriptions will be exported                                                                                                                                         | `true`       |
-| timer                            | If `true` records related to timers will be exported                                                                                                                                                       | `true`       |
-| user-task                        | If `true` records related to user tasks will be exported                                                                                                                                                   | `true`       |
-| variable                         | If `true` records related to variables will be exported                                                                                                                                                    | `true`       |
-| variable-document                | If `true` records related to variable documents will be exported                                                                                                                                           | `true`       |
-
-### Variable-name filters
-
-Starting with Camunda 8.9, you can filter exported variable records by variable name.
-
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            variable-name-inclusion-start-with:
-              - business_
-            variable-name-exclusion-start-with:
-              - business_debug
-```
-
-The exporter first matches variable names against inclusion rules (if present), then against exclusion rules. If a variable matches both, the exclusion wins.
-
-For details on how this interacts with Optimize, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
-### Variable-type filters
-
-Variable-type filters let you restrict exported variables by their inferred JSON type,
-such as `String`, `Number`, `Boolean`, `Object` or `Null`.
-
-Configuration:
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            variable-value-type-inclusion:
-              - Object
-              - String
-            variable-value-type-exclusion:
-              - Object
-```
-
-Use this filter to drop large object or array payloads at export time. Type inference is similar to what Optimize uses. For details on which types to include or exclude for reporting, see
-[Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
-
-### BPMN process filters
-
-BPMN process filters control which processes (by `bpmnProcessId`) are exported. All records that carry the given `bpmnProcessId` follow the same decision.
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            bpmn-process-id-inclusion:
-              - orderProcess
-            bpmn-process-id-exclusion:
-              - debugProcess
-```
-
-Processes listed under `inclusion` are candidates; `exclusion` removes any of those candidates again.
-
-Some value types that never expose `bpmnProcessId` (for example, `DEPLOYMENT`, `DECISION`) are not affected and remain controlled only via the `index.*` flags.
-
-### Optimize mode
-
-With Optimize mode, you can restrict exported records to those used by Optimize, reducing index size.
-
-```yaml
-camunda:
-  data:
-    exporters:
-      opensearch:
-        args:
-          index:
-            optimize-mode-enabled: true
-```
-
-When enabled, the exporter emits only the value types and intents that Optimize imports. Other value types are dropped unless you explicitly opt in to the legacy behavior (for example, via `include-enabled-records`).
-
-Use this flag only if the exporter indices are dedicated to Optimize. For SaaS and Self-Managed recommendations, see [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
+| Option                              | Description                                                                                                                                                                                                                                                                                                                                                                                                              | Default      |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| bpmnProcessIdExclusion              | Excludes all records with these BPMN process IDs. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                         | `[]`         |
+| bpmnProcessIdInclusion              | Restricts exported records to these BPMN process IDs. If empty, all processes are included. Value types without a `bpmnProcessId` (such as `DEPLOYMENT`, `DECISION`) are not affected by this filter.                                                                                                                                                                                                                    | `[]`         |
+| checkpoint                          | If `true` records related to checkpoints will be exported.                                                                                                                                                                                                                                                                                                                                                               | `false`      |
+| command                             | If `true` command records will be exported.                                                                                                                                                                                                                                                                                                                                                                              | `false`      |
+| command-distribution                | If `true` records related to command distributions will be exported.                                                                                                                                                                                                                                                                                                                                                     | `true`       |
+| create-template                     | If `true` missing indexes will be created automatically.                                                                                                                                                                                                                                                                                                                                                                 | `true`       |
+| decision                            | If `true` records related to decisions will be exported.                                                                                                                                                                                                                                                                                                                                                                 | `true`       |
+| decision-evaluation                 | If `true` records related to decision evaluations will be exported.                                                                                                                                                                                                                                                                                                                                                      | `true`       |
+| decision-requirements               | If `true` records related to decision requirements will be exported.                                                                                                                                                                                                                                                                                                                                                     | `true`       |
+| deployment                          | If `true` records related to deployments will be exported.                                                                                                                                                                                                                                                                                                                                                               | `true`       |
+| deployment-distribution             | If `true` records related to deployment distributions will be exported.                                                                                                                                                                                                                                                                                                                                                  | `true`       |
+| error                               | If `true` records related to errors will be exported.                                                                                                                                                                                                                                                                                                                                                                    | `true`       |
+| escalation                          | If `true` records related to escalations will be exported.                                                                                                                                                                                                                                                                                                                                                               | `true`       |
+| event                               | If `true` event records will be exported.                                                                                                                                                                                                                                                                                                                                                                                | `true`       |
+| exportLocalVariablesEnabled         | If `false`, local (child-scope) variables are not exported. Root variables are scoped to the process instance; local variables are scoped to sub-processes, call activities, and tasks. When all scope-specific lists are empty, global `variableName*` and `variableValueType*` filters apply to all variables. When any scope-specific list is non-empty, that scope uses both its own filters and the global filters. | `true`       |
+| form                                | If `true` records related to forms will be exported.                                                                                                                                                                                                                                                                                                                                                                     | `true`       |
+| incident                            | If `true` records related to incidents will be exported.                                                                                                                                                                                                                                                                                                                                                                 | `true`       |
+| job                                 | If `true` records related to jobs will be exported.                                                                                                                                                                                                                                                                                                                                                                      | `true`       |
+| job-batch                           | If `true` records related to job batches will be exported.                                                                                                                                                                                                                                                                                                                                                               | `false`      |
+| localVariableNameExclusionEndWith   | Excludes local variables whose names end with these suffixes. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                             | `[]`         |
+| localVariableNameExclusionExact     | Excludes local variables whose names exactly match. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                       | `[]`         |
+| localVariableNameExclusionStartWith | Excludes local variables whose names start with these prefixes. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                           | `[]`         |
+| localVariableNameInclusionEndWith   | Includes local variables whose names end with these suffixes. If empty, no local name inclusion filter applies.                                                                                                                                                                                                                                                                                                          | `[]`         |
+| localVariableNameInclusionExact     | Includes local variables whose names exactly match. If empty, no local name inclusion filter applies.                                                                                                                                                                                                                                                                                                                    | `[]`         |
+| localVariableNameInclusionStartWith | Includes local variables whose names start with these prefixes. If empty, no local name inclusion filter applies.                                                                                                                                                                                                                                                                                                        | `[]`         |
+| localVariableValueTypeExclusion     | Excludes local variables of these inferred JSON types. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                    | `[]`         |
+| localVariableValueTypeInclusion     | Restricts exported local variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`).                                                                                                                                                                                                                                                                                                       | `[]`         |
+| message                             | If `true` records related to messages will be exported.                                                                                                                                                                                                                                                                                                                                                                  | `true`       |
+| message-batch                       | If `true` records related to message batches will be exported.                                                                                                                                                                                                                                                                                                                                                           | `false`      |
+| message-start-event-subscription    | If `true` records related to message start event subscriptions will be exported.                                                                                                                                                                                                                                                                                                                                         | `true`       |
+| message-subscription                | If `true` records related to message subscriptions will be exported.                                                                                                                                                                                                                                                                                                                                                     | `true`       |
+| number-of-replicas                  | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created.                                                                                                                                                                                                               | 0            |
+| number-of-shards                    | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.                                                                                                                                                                                                                        | 3            |
+| optimizeModeEnabled                 | If `true`, restricts exported record types to those consumed by Optimize. Other value types are dropped. Use only when these indices are dedicated to Optimize.                                                                                                                                                                                                                                                          | `false`      |
+| prefix                              | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                                                                                                                                                                                                                                  | zeebe-record |
+| process                             | If `true` records related to processes will be exported.                                                                                                                                                                                                                                                                                                                                                                 | `true`       |
+| process-event                       | If `true` records related to process events will be exported.                                                                                                                                                                                                                                                                                                                                                            | `false`      |
+| process-instance                    | If `true` records related to process instances will be exported.                                                                                                                                                                                                                                                                                                                                                         | `true`       |
+| process-instance-batch              | If `true` records related to process instances batches will be exported.                                                                                                                                                                                                                                                                                                                                                 | `false`      |
+| process-instance-creation           | If `true` records related to process instance creations will be exported.                                                                                                                                                                                                                                                                                                                                                | `true`       |
+| process-instance-migration          | If `true` records related to process instance migrations will be exported.                                                                                                                                                                                                                                                                                                                                               | `true`       |
+| process-instance-modification       | If `true` records related to process instance modifications will be exported.                                                                                                                                                                                                                                                                                                                                            | `true`       |
+| process-message-subscription        | If `true` records related to process message subscriptions will be exported.                                                                                                                                                                                                                                                                                                                                             | `true`       |
+| rejection                           | If `true` rejection records will be exported.                                                                                                                                                                                                                                                                                                                                                                            | `false`      |
+| resource-deletion                   | If `true` records related to resource deletions will be exported.                                                                                                                                                                                                                                                                                                                                                        | `true`       |
+| rootVariableNameExclusionEndWith    | Excludes root variables whose names end with these suffixes. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                              | `[]`         |
+| rootVariableNameExclusionExact      | Excludes root variables whose names exactly match. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                        | `[]`         |
+| rootVariableNameExclusionStartWith  | Excludes root variables whose names start with these prefixes. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                            | `[]`         |
+| rootVariableNameInclusionEndWith    | Includes root variables whose names end with these suffixes. If empty, no root name inclusion filter applies.                                                                                                                                                                                                                                                                                                            | `[]`         |
+| rootVariableNameInclusionExact      | Includes root variables whose names exactly match. If empty, no root name inclusion filter applies.                                                                                                                                                                                                                                                                                                                      | `[]`         |
+| rootVariableNameInclusionStartWith  | Includes root variables whose names start with these prefixes. If empty, no root name inclusion filter applies.                                                                                                                                                                                                                                                                                                          | `[]`         |
+| rootVariableValueTypeExclusion      | Excludes root variables of these inferred JSON types. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                     | `[]`         |
+| rootVariableValueTypeInclusion      | Restricts exported root variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`).                                                                                                                                                                                                                                                                                                        | `[]`         |
+| signal                              | If `true` records related to signals will be exported.                                                                                                                                                                                                                                                                                                                                                                   | `true`       |
+| signal-subscription                 | If `true` records related to signal subscriptions will be exported.                                                                                                                                                                                                                                                                                                                                                      | `true`       |
+| timer                               | If `true` records related to timers will be exported.                                                                                                                                                                                                                                                                                                                                                                    | `true`       |
+| user-task                           | If `true` records related to user tasks will be exported.                                                                                                                                                                                                                                                                                                                                                                | `true`       |
+| variable                            | If `true` records related to variables will be exported.                                                                                                                                                                                                                                                                                                                                                                 | `true`       |
+| variable-document                   | If `true` records related to variable documents will be exported.                                                                                                                                                                                                                                                                                                                                                        | `true`       |
+| variableNameExclusionEndWith        | Excludes variables whose names end with these suffixes. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                   | `[]`         |
+| variableNameExclusionExact          | Excludes variables whose names exactly match. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                             | `[]`         |
+| variableNameExclusionStartWith      | Excludes variables whose names start with these prefixes. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                 | `[]`         |
+| variableNameInclusionEndWith        | Includes variables whose names end with these suffixes. If empty, no name inclusion filter applies.                                                                                                                                                                                                                                                                                                                      | `[]`         |
+| variableNameInclusionExact          | Includes variables whose names exactly match. If empty, no name inclusion filter applies. Inclusion rules are evaluated first; if a variable also matches an exclusion rule, exclusion takes precedence.                                                                                                                                                                                                                 | `[]`         |
+| variableNameInclusionStartWith      | Includes variables whose names start with these prefixes. If empty, no name inclusion filter applies.                                                                                                                                                                                                                                                                                                                    | `[]`         |
+| variableValueTypeExclusion          | Excludes variables of these inferred JSON types. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                                                                          | `[]`         |
+| variableValueTypeInclusion          | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included. Use to drop large object or array payloads at export time.                                                                                                                                                                                                                | `[]`         |
 
 </TabItem>
 
 <TabItem value="bulk">
 
-To avoid too many expensive requests to the OpenSearch cluster, the exporter performs batch
-updates by default. The size of the batch, along with how often it should be flushed (regardless of
-size) can be controlled by configuration.
+To avoid too many expensive requests to the OpenSearch cluster, the exporter performs batch updates by default. The size of the batch, along with how often it should be flushed (regardless of size) can be controlled by configuration.
 
 | Option       | Description                                                                                                                                                    | Default            |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
@@ -239,8 +168,7 @@ size) can be controlled by configuration.
 | size         | The amount of records a batch should have before we flush the batch.                                                                                           | `1000`             |
 | memory-limit | The size of the batch, in bytes, before we flush the batch.                                                                                                    | `10485760` (10 MB) |
 
-With the default configuration, the exporter would aggregate records and flush them to OpenSearch
-either:
+With the default configuration, the exporter would aggregate records and flush them to OpenSearch either:
 
 1. When it has aggregated 1000 records.
 2. When the batch memory size exceeds 10 MB.
@@ -251,19 +179,27 @@ either:
 <TabItem value="retention">
 
 A retention policy can be set up to delete old data.
-When enabled, this creates an Index State Management (ISM) policy that deletes the data after the
-specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
+When enabled, this creates an Index State Management (ISM) policy that deletes the data after the specified `minimumAge`. All index templates created by this exporter apply the created ISM policy.
 
-| Option             | Description                                                                   | Default                         |
-| ------------------ | ----------------------------------------------------------------------------- | ------------------------------- |
-| enabled            | If `true` the ISM policy is created and applied to the index templates.       | `false`                         |
-| minimum-age        | Specifies how old the data must be, before the data is deleted as a duration. | `30d`                           |
-| policy-name        | The name of the created and applied ISM policy.                               | `zeebe-record-retention-policy` |
-| policy-description | The description of the created and applied ISM policy.                        | `Zeebe record retention policy` |
+| Option             | Description                                                                                                                                                                                   | Default                         |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- |
+| enabled            | If `true` the ISM policy is created and applied to the index templates.                                                                                                                       | `false`                         |
+| minimum-age        | Specifies how old the data must be, before the data is deleted as a duration.                                                                                                                 | `30d`                           |
+| policy-name        | The name of the created and applied ISM policy.                                                                                                                                               | `zeebe-record-retention-policy` |
+| policy-description | The description of the created and applied ISM policy.                                                                                                                                        | `Zeebe record retention policy` |
+| manage-policy      | If `true` the exporter creates, updates, and removes the ISM policy on its own. Set to `false` to leave an externally managed policy untouched (the exporter neither creates nor removes it). | `true`                          |
 
 :::note
 The duration can be specified in days `d`, hours `h`, minutes `m`, seconds `s`, milliseconds `ms`, and/or
 nanoseconds `nanos`.
+:::
+
+:::note Externally managed policy
+
+When `manage-policy: false`, the exporter still attaches the policy named by `policy-name` (default `zeebe-record-retention-policy`) to the indices it creates. The policy must already exist in your OpenSearch cluster under that name when the exporter starts.
+
+If the policy does not exist, OpenSearch's ISM `add` API rejects the call and the exporter fails to start with `OpensearchExporterException: Failed to add policy to indices`. Provision the ISM policy before starting Camunda when using `manage-policy: false`.
+
 :::
 
 </TabItem>
@@ -281,13 +217,9 @@ Providing these authentication options will enable Basic authentication on the e
 
 <TabItem value="aws">
 
-When running OpenSearch in AWS, you may require requests to be signed. By enabling AWS in the
-configurations, a request interceptor will be added to the exporter. This interceptor will take care
-of signing the requests.
+When running OpenSearch in AWS, you may require requests to be signed. By enabling AWS in the configuration, a request interceptor will be added to the exporter. This interceptor will take care of signing the requests.
 
-Signing requests requires credentials. These credentials are not directly configurable in the
-exporter. Instead, they are resolved by following the
-[Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
+Signing requests requires credentials. These credentials are not directly configurable in the exporter. Instead, they are resolved by following the [Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html).
 
 | Option       | Description                                                                             | Default                                            |
 | ------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -300,7 +232,7 @@ exporter. Instead, they are resolved by following the
 
 ## Example
 
-Here is an example configuration of the exporter:
+The following is an example configuration of the exporter:
 
 ```yaml
 ---
@@ -308,12 +240,12 @@ camunda:
   data:
     exporters:
       opensearch:
-        # Opensearch Exporter ----------
+        # Opensearch exporter ----------
         # An example configuration for the opensearch exporter:
         #
         # These settings can also be overridden using environment variables "CAMUNDA_DATA_EXPORTERS_OPENSEARCH_..."
 
-        class-name: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
+        className: io.camunda.zeebe.exporter.opensearch.OpensearchExporter
         args:
           # A comma separated list of URLs pointing to the Opensearch instances you wish to export to.
           # For example, if you want to connect to multiple nodes for redundancy:
@@ -323,13 +255,13 @@ camunda:
           bulk:
             delay: 5
             size: 1000
-            memory-limit: 10485760
+            memoryLimit: 10485760
 
           retention:
             enabled: true
-            minimum-age: 30d
-            policy-name: zeebe-records-retention-policy
-            policy-description: Zeebe records retention policy
+            minimumAge: 30d
+            policyName: zeebe-records-retention-policy
+            policyDescription: Zeebe records retention policy
 
           authentication:
             username: opensearch
@@ -337,46 +269,46 @@ camunda:
 
           aws:
             enabled: true
-            service-name: es
+            serviceName: es
             region: eu-west-1
 
           index:
             prefix: zeebe-record
-            create-template: true
+            createTemplate: true
 
             command: false
             event: true
             rejection: false
 
-            command-distribution: true
-            decision-requirements: true
+            commandDistribution: true
+            decisionRequirements: true
             decision: true
-            decision-evaluation: true
+            decisionEvaluation: true
             deployment: true
-            deployment-distribution: true
+            deploymentDistribution: true
             error: true
             escalation: true
             form: true
             incident: true
             job: true
-            job-batch: false
+            jobBatch: false
             message: true
-            message-start-event-subscription: true
-            message-subscription: true
+            messageStartEventSubscription: true
+            messageSubscription: true
             process: true
-            process-event: false
-            process-instance: true
-            process-instance-creation: true
-            process-instance-migration: true
-            process-instance-modification: true
-            process-message-subscription: true
-            resource-deletion: true
+            processEvent: false
+            processInstance: true
+            processInstanceCreation: true
+            processInstanceMigration: true
+            processInstanceModification: true
+            processMessageSubscription: true
+            resourceDeletion: true
             signal: true
-            signal-subscription: true
+            signalSubscription: true
             timer: true
-            user-task: true
+            userTask: true
             variable: true
-            variable-document: true
+            variableDocument: true
 ```
 
 ## Self-signed certificates
@@ -384,15 +316,14 @@ camunda:
 The Zeebe OpenSearch exporter does not [currently support](https://github.com/camunda/camunda/issues/9839) connecting to OpenSearch using self-signed certificates.
 If you must use self-signed certificates, it is possible to build your own trust store and have the application use it.
 
-In this case, it is recommended to create a new custom trust store based on the default one. This way, it will also be able to verify certificates
-signed using trusted root certificate authorities.
+In this case, it is recommended to create a new custom trust store based on the default one. This way, it will also be able to verify certificates signed using trusted root certificate authorities.
 
 1.  First, create a new custom trust store which contains the same data as the default one, using PKCS12 format. To do so, find the
     location of the default `cacerts` trust store:
     - On Linux systems, find it at `$JAVA_HOME/lib/security/cacerts`.
     - For macOS, find it under `$(/usr/libexec/java_home)/jre/lib/security/cacerts`.
 
-    Once you have the right location, e.g. `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
+    Once you have the right location, for example, `$JAVA_HOME/lib/security/cacerts`, run the following to create a new trust store:
 
     ```sh
     keytool -importkeystore -srckeystore $JAVA_HOME/lib/security/cacerts -destkeystore zeebeTrustStore.jks -srcstoretype PKCS12 -deststoretype JKS
@@ -431,14 +362,12 @@ signed using trusted root certificate authorities.
     ```
 
 :::warning
-If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on
-your deployment method (e.g. Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies
-the environment variable.
+If you're using containers, you will need to mount the trust store to the container such that it can be found by the `java` process. This will depend on your deployment method (for example, Helm chart, Docker Compose). The simplest way is to build a custom image which already contains your trust store, and specifies the environment variable.
 :::
 
 ## Legacy Zeebe records and Optimize filters
 
-With the introduction of the Camunda Exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
+With the introduction of the Camunda exporter, the Elasticsearch and OpenSearch exporters no longer export all record types by default.
 By default, they emit only the record value types and intents required by Optimize.
 
 To export additional record types, enable the [`include-enabled-records`](#configuration) configuration property.

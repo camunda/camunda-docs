@@ -109,7 +109,7 @@ Type: <code>duration</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>&quot;PT45S&quot;</code>
 </td>
 </tr>
 <tr>
@@ -200,6 +200,22 @@ Type: <code>enum[self-managed, saas]</code>
 <td>
 
 Overrides the authority used with TLS virtual hosting to change hostname verification during the TLS handshake. It does not change the actual host connected to.
+
+Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.physical-tenant-id" env="CAMUNDA_CLIENT_PHYSICALTENANTID"/><a href="#camundaclientphysicaltenantid" id="camundaclientphysicaltenantid" class="hash-link"/>
+</td>
+
+<td>
+
+The physical tenant ID sent as the `camunda-physical-tenant` gRPC header on every outgoing call. When `null` the header is omitted.
 
 Type: <code>string</code>
 
@@ -391,13 +407,13 @@ Type: <code>duration</code>
 
 <td>
 
-The path to the credentials cache file.
+The path to the credentials cache file. If unset or empty, the OAuth provider caches credentials only in memory and does not persist them across restarts. Set this to a writable path to opt in to persistent file-based caching. See issue #13124.
 
 Type: <code>string</code>
 
 </td>
 <td>
-  <code>&quot;$HOME&#x2F;.camunda&#x2F;credentials&quot;</code>
+  <code>null</code>
 </td>
 </tr>
 <tr>
@@ -503,13 +519,13 @@ Type: <code>string</code>
 
 <td>
 
-The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.
+Controls how far before token expiry a background refresh is triggered. The token remains valid within this window, so callers don't block on a synchronous refresh at expiry. Must be strictly greater than the internal expiry grace period.
 
 Type: <code>duration</code>
 
 </td>
 <td>
-  <code>null</code>
+  <code>&quot;PT30S&quot;</code>
 </td>
 </tr>
 <tr>
@@ -558,6 +574,86 @@ Type: <code>string</code>
 </td>
 <td>
   <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-backoff-multiplier" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHBACKOFFMULTIPLIER"/><a href="#camundaclientauthtokenfetchbackoffmultiplier" id="camundaclientauthtokenfetchbackoffmultiplier" class="hash-link"/>
+</td>
+
+<td>
+
+The multiplier applied to the backoff duration between successive token fetch retry attempts. Must be greater than or equal to 1.0.
+
+Type: <code>double</code>
+
+</td>
+<td>
+  <code>2</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-initial-backoff" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHINITIALBACKOFF"/><a href="#camundaclientauthtokenfetchinitialbackoff" id="camundaclientauthtokenfetchinitialbackoff" class="hash-link"/>
+</td>
+
+<td>
+
+The initial backoff duration applied between token fetch retry attempts. Each subsequent delay is multiplied by `camunda.client.auth.token-fetch-backoff-multiplier`.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;PT1S&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-max-retries" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHMAXRETRIES"/><a href="#camundaclientauthtokenfetchmaxretries" id="camundaclientauthtokenfetchmaxretries" class="hash-link"/>
+</td>
+
+<td>
+
+The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via `token-fetch-retryable-status-codes`.
+
+Type: <code>integer</code>
+
+</td>
+<td>
+  <code>5</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-non-retryable-cooldown" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHNONRETRYABLECOOLDOWN"/><a href="#camundaclientauthtokenfetchnonretryablecooldown" id="camundaclientauthtokenfetchnonretryablecooldown" class="hash-link"/>
+</td>
+
+<td>
+
+If the token endpoint returns a non-retryable response, subsequent token fetch attempts fail immediately without making a request. This property specifies the duration of this cooldown period. After the cooldown period elapses, the next request retries; if it also fails with a non-retryable error, the cooldown resets. Set to `duration.zero` to disable the cooldown.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;PT5M&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.auth.token-fetch-retryable-status-codes" env="CAMUNDA_CLIENT_AUTH_TOKENFETCHRETRYABLESTATUSCODES"/><a href="#camundaclientauthtokenfetchretryablestatuscodes" id="camundaclientauthtokenfetchretryablestatuscodes" class="hash-link"/>
+</td>
+
+<td>
+
+The set of HTTP status codes from the token endpoint that are retried with backoff. Any other non-200 status code triggers the `camunda.client.auth.token-fetch-non-retryable-cooldown` cooldown.
+
+Type: <code>array[integer]</code>
+
+</td>
+<td>
+  <code>[404,429,500,502,503,504]</code>
 </td>
 </tr>
 <tr>
@@ -794,6 +890,70 @@ Type: <code>integer</code>
 The region the Camunda client connects to.
 
 Type: <code>string</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+### `camunda.client.cluster-variables`
+
+Properties for setting cluster variables at startup.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.enabled" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_ENABLED"/><a href="#camundaclientclustervariablesenabled" id="camundaclientclustervariablesenabled" class="hash-link"/>
+</td>
+
+<td>
+
+Indicates if cluster variable processing is enabled. When `true`, variables configured via `@ClusterVariables` annotations and via the `global`/`tenant` properties are applied at startup. When `false`, all cluster variable processing is skipped.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>true</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.global" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_GLOBAL"/><a href="#camundaclientclustervariablesglobal" id="camundaclientclustervariablesglobal" class="hash-link"/>
+</td>
+
+<td>
+
+Globally-scoped cluster variables to set at startup as key-value pairs.
+
+Type: <code>map[string,object]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.tenant" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_TENANT"/><a href="#camundaclientclustervariablestenant" id="camundaclientclustervariablestenant" class="hash-link"/>
+</td>
+
+<td>
+
+Tenant-scoped cluster variables to set at startup, keyed by tenant ID.
+
+Type: <code>map[string,map[string,object]]</code>
 
 </td>
 <td>
@@ -1042,6 +1202,22 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-inactivity-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMINACTIVITYTIMEOUT"/><a href="#camundaclientworkerdefaultsstreaminactivitytimeout" id="camundaclientworkerdefaultsstreaminactivitytimeout" class="hash-link"/>
+</td>
+
+<td>
+
+If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before canceling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
+
+Type: <code>duration</code>
+
+</td>
+<td>
+  <code>&quot;PT10M&quot;</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.defaults.stream-timeout" env="CAMUNDA_CLIENT_WORKER_DEFAULTS_STREAMTIMEOUT"/><a href="#camundaclientworkerdefaultsstreamtimeout" id="camundaclientworkerdefaultsstreamtimeout" class="hash-link"/>
 </td>
 
@@ -1173,7 +1349,7 @@ Type: <code>duration</code>
 
 ### `camunda.client.worker.override`
 
-Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.
+Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.
 
 <table>
 <thead>
@@ -1354,6 +1530,22 @@ Type: <code>duration</code>
 Opt-in feature flag that enables job streaming. When enabled, the job worker uses both streaming and polling to activate jobs. A long-lived stream eagerly pushes new jobs, and polling retrieves jobs created <em>before</em> any streams were opened.
 
 Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.worker.override.&lt;job-type|worker-name&gt;.stream-inactivity-timeout" env="CAMUNDA_CLIENT_WORKER_OVERRIDE_&lt;JOBTYPE|WORKERNAME&gt;_STREAMINACTIVITYTIMEOUT"/><a href="#camundaclientworkeroverridejobtypeworkernamestreaminactivitytimeout" id="camundaclientworkeroverridejobtypeworkernamestreaminactivitytimeout" class="hash-link"/>
+</td>
+
+<td>
+
+If streaming is enabled, sets the maximum duration the worker will wait without receiving any job on the open stream before canceling and recreating it. The timer is reset every time a job is received. Must be strictly less than `stream-timeout` when both are set.
+
+Type: <code>duration</code>
 
 </td>
 <td>
@@ -1583,7 +1775,7 @@ Identity is now part of Camunda.
   <Property defaultValue="property" groupId="property-format" property="camunda.client.identity.base-url" env="CAMUNDA_CLIENT_IDENTITY_BASEURL"/><a href="#camundaclientidentitybaseurl" id="camundaclientidentitybaseurl" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 Identity is now part of Camunda.
@@ -2118,7 +2310,7 @@ Deprecated Keycloak-specific properties.
   <Property defaultValue="property" groupId="property-format" property="common.keycloak.realm" env="COMMON_KEYCLOAK_REALM"/><a href="#commonkeycloakrealm" id="commonkeycloakrealm" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 There is no keycloak-specific configuration for Camunda; the issuer is provided as a URL.
@@ -2167,7 +2359,7 @@ Deprecated Zeebe client properties.
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.apply-environment-variable-overrides" env="ZEEBE_CLIENT_APPLYENVIRONMENTVARIABLEOVERRIDES"/><a href="#zeebeclientapplyenvironmentvariableoverrides" id="zeebeclientapplyenvironmentvariableoverrides" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 Only the environment variables belonging to the Spring SDK are applied.
@@ -2386,7 +2578,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.cloud.port" env="ZEEBE_CLIENT_CLOUD_PORT"/><a href="#zeebeclientcloudport" id="zeebeclientcloudport" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 The Zeebe client URL is now configured as HTTP&#x2F;HTTPS URL.
@@ -2533,7 +2725,7 @@ N/A
   <Property defaultValue="property" groupId="property-format" property="zeebe.client.security.plaintext" env="ZEEBE_CLIENT_SECURITY_PLAINTEXT"/><a href="#zeebeclientsecurityplaintext" id="zeebeclientsecurityplaintext" class="hash-link"/>
 </td>
 <td>
-  
+
 </td>
 <td>
 plaintext is now determined by the URL protocol (HTTP or HTTPS).

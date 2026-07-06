@@ -8,7 +8,7 @@ description: "Learn how to run connectors in hybrid mode."
 <span className="badge badge--active--inbound">Inbound</span>
 
 :::note
-Hybrid mode is supported as of the connectors `0.23.0` release.
+Hybrid mode is supported as of the connectors `0.23.0` release. Use the latest stable version from the [Camunda connectors Docker registry](https://hub.docker.com/r/camunda/connectors-bundle/tags).
 :::
 
 **Hybrid mode** is where you can run a Self-Managed connector runtime instance attached to a Camunda SaaS cluster or another Self-Managed cluster that has another instance of the connector runtime attached.
@@ -36,7 +36,7 @@ Refer to the [element template](https://github.com/camunda/connectors/blob/main/
 
 ### Prerequisites
 
-Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Orchestration Cluster REST API` scope. Learn more about [how to obtain required credentials](/components/console/manage-clusters/manage-api-clients.md).
+Ensure you have a running Camunda cluster, and a pair of `Client ID`/`Client Secret` with `Orchestration Cluster REST API` scope. Learn more about [how to obtain required credentials](/components/hub/organization/manage-clusters/manage-api-clients.md).
 
 To use secrets managed by the SaaS environment, add the `Secrets` scope.
 
@@ -80,8 +80,25 @@ Note the line `-e CONNECTOR_HTTP_REST_TYPE='io.camunda:http-json:local'`. This l
 `CONNECTOR_X_TYPE` with a given type. In this case, we want to register a local Self-Managed HTTP REST connector as `io.camunda:http-json:local`.
 
 The `X` is normalized to the environment variable connector name. For example, the [HTTP REST connector](https://github.com/camunda/connectors/blob/main/connectors/http/rest/src/main/java/io/camunda/connector/http/rest/HttpJsonFunction.java#L33)
-`HTTP REST` name becomes `HTTP_REST`, or the [Kafka Consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
+`HTTP REST` name becomes `HTTP_REST`, or the [Kafka consumer connector](https://github.com/camunda/connectors/blob/main/connectors/kafka/src/main/java/io/camunda/connector/kafka/inbound/KafkaExecutable.java#L20) name
 becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in the `CONNECTOR_KAFKA_CONSUMER_TYPE=xxx` environment variable.
+
+#### Common connector types
+
+| Connector                 | Environment variable               | Example value                         |
+| ------------------------- | ---------------------------------- | ------------------------------------- |
+| HTTP REST                 | `CONNECTOR_HTTP_REST_TYPE`         | `io.camunda:http-json:local`          |
+| AWS SQS (Outbound)        | `CONNECTOR_AWS_SQS_OUTBOUND_TYPE`  | `io.camunda:aws-sqs:local`            |
+| Kafka consumer (Inbound)  | `CONNECTOR_KAFKA_CONSUMER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| Kafka producer (Outbound) | `CONNECTOR_KAFKA_PRODUCER_TYPE`    | `io.camunda:connector-kafka:local`    |
+| SendGrid                  | `CONNECTOR_SENDGRID_TYPE`          | `io.camunda:sendgrid:local`           |
+| Slack                     | `CONNECTOR_SLACK_TYPE`             | `io.camunda:slack:local`              |
+| Gmail                     | `CONNECTOR_GMAIL_TYPE`             | `io.camunda:gmail:local`              |
+| Google Drive              | `CONNECTOR_GOOGLE_DRIVE_TYPE`      | `io.camunda:google-drive:local`       |
+| RabbitMQ (Inbound)        | `CONNECTOR_RABBITMQ_CONSUMER_TYPE` | `io.camunda:connector-rabbitmq:local` |
+| RabbitMQ (Outbound)       | `CONNECTOR_RABBITMQ_PRODUCER_TYPE` | `io.camunda:connector-rabbitmq:local` |
+
+For a complete list of all available connectors and their types, see the [available connectors overview](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) or check the [official connectors repository](https://github.com/camunda/connectors).
 
 ## Using SaaS secrets
 
@@ -101,8 +118,7 @@ CAMUNDA_CONNECTOR_SECRETPROVIDER_CONSOLE_ENABLED = true
 camunda.connector.secretprovider.console.enabled = true
 ```
 
-After enabling Console, secret provider secrets used in an external connectors
-runtime will be resolved by fetching them from Console.
+After enabling Camunda Hub, secret provider secrets used in an external connector's runtime will be resolved by fetching them from Camunda Hub.
 
 ## Preparing element template for hybrid mode
 
@@ -192,4 +208,4 @@ The following example demonstrates this approach:
 
 ## Appendix
 
-See ready-to-use hybrid element templates examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/hybrid/http-json-connector-hybrid.json) and [Kafka Consumer](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates/hybrid).
+See ready-to-use hybrid element templates examples for [HTTP REST](https://github.com/camunda/connectors/blob/main/connectors/http/rest/element-templates/hybrid/http-json-connector-hybrid.json) and [Kafka consumer](https://github.com/camunda/connectors/tree/main/connectors/kafka/element-templates/hybrid).

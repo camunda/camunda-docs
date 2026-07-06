@@ -2,7 +2,7 @@
 
 Select and configure authentication for the LLM model **Provider** you want to use, from the following supported providers:
 
-- [Anthropic](http://anthropic.com/) (Claude models)
+- [Anthropic](http://anthropic.com/) (Claude models, including models deployed on [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry))
 - [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html)
 - [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/overview)
 - [Google Vertex AI](https://cloud.google.com/vertex-ai)
@@ -24,6 +24,10 @@ Select this option to use an Anthropic Claude LLM model (uses the [Anthropic Mes
 | Field             | Required | Description                                                                                                                   |
 | :---------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
 | Anthropic API key | Yes      | Your Anthropic account API key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
+
+:::tip
+You can also use this provider for Anthropic Claude models deployed on [Azure AI Foundry](https://azure.microsoft.com/en-us/products/ai-foundry) with API key authentication. Set the endpoint to your Foundry URL with the `/anthropic/v1` path appended, for example, `https://<your-resource>.services.ai.azure.com/anthropic/v1`.
+:::
 
 :::info
 For more information about Anthropic Claude LLM models, refer to the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
@@ -68,6 +72,10 @@ Two authentication methods are currently supported:
 To use an Azure OpenAI model, you must first deploy it in the Azure AI Foundry portal. For details, see [Deploy a model in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model). The deployment ID must then be provided in the **Model** field.
 :::
 
+:::tip
+To use **Anthropic Claude** models deployed on Azure AI Foundry, configure the [Anthropic](#anthropic) provider instead of this one.
+:::
+
 #### Google Vertex AI
 
 Select this option to use [Google Vertex AI](https://cloud.google.com/vertex-ai) models.
@@ -105,7 +113,7 @@ To learn more about authentication to the OpenAPI API, refer to [OpenAPI platfor
 
 #### OpenAI-compatible
 
-Select this option to use an LLM provider that provides OpenAI-compatible endpoints.
+With this option, you can connect to any LLM that exposes an OpenAI-compatible API, including open-weight models such as Qwen, Llama, and Mistral, hosted via Ollama or any compatible inference platform.
 
 | Field        | Required | Description                                                                                                                                                                       |
 | :----------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

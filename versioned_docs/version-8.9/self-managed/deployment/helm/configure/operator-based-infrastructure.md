@@ -28,8 +28,8 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
 - **Operator support**: For operational support on infrastructure components, engage the respective project teams or community support channels directly (CloudNativePG, Elastic, Keycloak), or use managed services.
   :::
 
-:::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+:::warning Transitional path: Bitnami enterprise images (deprecated in this release)
+If you're still using Bitnami subcharts during migration, you can continue with Bitnami Premium images in Camunda 8.9. Bitnami subcharts will be **removed in Camunda 8.10** — complete your migration before upgrading. See [Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for transitional configuration, or [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for migration instructions.
 :::
 
 <MigrationTip />
@@ -45,7 +45,7 @@ Using official Kubernetes operators provides several advantages over traditional
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
 - **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies (through vendor support channels)
-- **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
+- **Future-proof architecture**: Eliminates dependency on third-party image supply chains (Bitnami/Broadcom), giving you direct control over infrastructure image sources, base OS, and update cadence. Bitnami subcharts are removed in Camunda 8.10.
 
 ## Prerequisites
 
@@ -82,13 +82,13 @@ This approach uses three operator-managed infrastructure components, each mainta
 
 All configuration files, deployment scripts, and automation tools referenced in this guide are available in the Camunda deployment references repository:
 
-**Repository**: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references/tree/main/generic/kubernetes/operator-based)
+**Repository**: [camunda-deployment-references](https://github.com/camunda/camunda-deployment-references/tree/stable/8.9/generic/kubernetes/operator-based)
 
 <details>
 <summary><strong>Quick deployment commands</strong></summary>
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/get-your-copy.sh
 ```
 
 Then execute:
@@ -123,7 +123,7 @@ The deployment scripts (`deploy.sh`) contain all the necessary steps to install 
 All deployment scripts require environment variables to be set. This is a prerequisite for all subsequent steps:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/0-set-environment.sh
 ```
 
 :::note
@@ -172,7 +172,7 @@ If you don't plan to use certain components (for example, Web Modeler), you can 
 The PostgreSQL deployment follows these steps, automated via the `postgresql/deploy.sh` script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/deploy.sh
 ```
 
 **Deployment steps performed by the script:**
@@ -193,7 +193,7 @@ This configuration creates three dedicated PostgreSQL clusters, each optimized f
 **Save as** `postgresql-clusters.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/postgresql-clusters.yml
 ```
 
 **Use cases:**
@@ -231,7 +231,7 @@ Configure Camunda Identity to use the PostgreSQL cluster.
 **Save as** `camunda-identity-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml
 ```
 
 **Installation**: Add `-f camunda-identity-values.yml` to your Helm install command.
@@ -244,7 +244,7 @@ Configure Web Modeler to use the PostgreSQL cluster.
 **Save as** `camunda-webmodeler-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml
 ```
 
 **Installation**: Add `-f camunda-webmodeler-values.yml` to your Helm install command.
@@ -288,7 +288,7 @@ Elasticsearch serves as the secondary storage for Camunda 8 orchestration cluste
 The Elasticsearch deployment follows these steps, automated via the `elasticsearch/deploy.sh` script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/deploy.sh
 ```
 
 **Deployment steps performed by the script:**
@@ -308,7 +308,7 @@ This configuration creates a production-ready Elasticsearch cluster with securit
 **Save as** `elasticsearch-cluster.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/elasticsearch-cluster.yml
 ```
 
 </TabItem>
@@ -336,7 +336,7 @@ Configure Camunda components to use the ECK-managed Elasticsearch.
 **Save as** `camunda-elastic-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/elasticsearch/camunda-elastic-values.yml
 ```
 
 **Use case**: External Elasticsearch connection for all orchestration cluster components (Zeebe, Operate, Tasklist, Optimize).
@@ -384,7 +384,7 @@ The dedicated Ingress configuration is integrated directly within the operator m
 The Keycloak deployment follows these steps, automated via the `keycloak/deploy.sh` script:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/deploy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/deploy.sh
 ```
 
 **Deployment steps performed by the script:**
@@ -404,7 +404,7 @@ Basic Keycloak instance for local development.
 **Save as** `keycloak-instance-no-domain.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-no-domain.yml
 ```
 
 **Use case**: Local development and testing without external domain.
@@ -421,7 +421,7 @@ Production Keycloak instance with nginx-ingress.
 **Save as** `keycloak-instance-domain-nginx.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-nginx.yml
 ```
 
 **Use case**: Production deployment with external domain using [nginx-ingress controller](https://kubernetes.github.io/ingress-nginx/).
@@ -434,7 +434,7 @@ Keycloak instance configured for OpenShift Routes.
 **Save as** `keycloak-instance-domain-openshift.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/keycloak-instance-domain-openshift.yml
 ```
 
 **Use case**: [OpenShift](https://docs.redhat.com/en/documentation/openshift_container_platform/4.11/html/networking/configuring-routes) deployment using native Route resources.
@@ -466,7 +466,7 @@ Configure Camunda to use Keycloak for local development.
 **Save as** `camunda-keycloak-no-domain-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml
 ```
 
 **Use case**: Local development setup with port-forwarding access.
@@ -481,7 +481,7 @@ Configure Camunda to use Keycloak with external domain.
 **Save as** `camunda-keycloak-domain-values.yml`:
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml
 ```
 
 :::note Domain configuration step
@@ -549,7 +549,7 @@ Before deploying Camunda, ensure you have completed the following:
 First, source the environment setup script to set `HELM_CHART_VERSION` and other required variables. See the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) to choose the appropriate chart version for your deployment:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/0-set-environment.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/operator-based/0-set-environment.sh
 ```
 
 Then, deploy Camunda using the infrastructure configuration files you saved from previous sections.
@@ -690,6 +690,30 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - Verify redirect URLs match your deployment setup
 
 **Reference:** [Keycloak Operator Documentation](https://www.keycloak.org/operator/basic-deployment)
+
+#### Keycloak pod crashes on HTTP/2 cleartext (h2c) requests
+
+**Symptoms:** The Keycloak pod exits or enters `CrashLoopBackOff` when it receives an HTTP/2 cleartext (h2c) request, such as a client sending an `Upgrade: h2c` header over a plain-HTTP port-forward. Clients receive an empty reply, and the Keycloak logs show a `java.lang.NoSuchMethodError` originating from Vert.x and Netty.
+
+**Cause:** `camunda/keycloak:quay-optimized-*` image tags older than `quay-optimized-26.6.4` bundle a conflicting Netty HTTP/2 codec under `/opt/keycloak/providers`, pulled in transitively by the AWS Advanced JDBC Wrapper. It shadows the Netty version shipped with Keycloak and breaks h2c handling.
+
+**Solutions:**
+
+- Upgrade the Keycloak image to `camunda/keycloak:quay-optimized-26.6.4` or later, where the conflicting Netty libraries are removed. Update the `image` field in your Keycloak custom resource (`keycloak-instance-*.yml`). This is the recommended fix.
+- If you cannot upgrade, disable HTTP/2 so Keycloak falls back to HTTP/1.1. Set the `QUARKUS_HTTP_HTTP2` environment variable to `false` in the Keycloak custom resource:
+
+  ```yaml
+  spec:
+    unsupported:
+      podTemplate:
+        spec:
+          containers:
+            - env:
+                - name: QUARKUS_HTTP_HTTP2
+                  value: "false"
+  ```
+
+**Reference:** [camunda/keycloak HTTP/2 cleartext crash issue](https://github.com/camunda/camunda-deployment-references/issues/2809)
 
 ## Production considerations
 

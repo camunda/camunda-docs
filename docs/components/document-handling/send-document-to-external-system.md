@@ -29,6 +29,40 @@ In most cases for the following outbound connectors, you can include a **Request
 | [SendGrid](/components/connectors/out-of-the-box-connectors/sendgrid.md)                         | Provides attachment support.                                                                                                                                                                                                   |
 | [Slack](/components/connectors/out-of-the-box-connectors/slack.md)                               | Supports adding attachments and increasing template versions.                                                                                                                                                                  |
 
+## Inline documents
+
+An inline document embeds content directly in a process variable, with no document store upload required. This is useful when you want to generate a document on-the-fly from a FEEL expression and pass it immediately to a connector.
+
+To create an inline document, set a process variable to the following structure:
+
+```json
+{
+  "camunda.document.type": "inline",
+  "content": "Invoice #1234 — Amount due: $99.00",
+  "name": "invoice.txt",
+  "contentType": "text/plain"
+}
+```
+
+You can also construct this with a FEEL expression, for example to build the content dynamically from other process variables:
+
+```feel
+= {
+  "camunda.document.type": "inline",
+  "content": "Invoice #" + invoiceId + " — Amount due: $" + string(amount),
+  "name": "invoice-" + invoiceId + ".txt"
+}
+```
+
+### Fields
+
+| Field                   | Required | Description                                                                                                                                                                                        |
+| ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.type` | Yes      | Must be `"inline"`.                                                                                                                                                                                |
+| `content`               | Yes      | The document content.                                                                                                                                                                              |
+| `name`                  | No       | The filename. If omitted, a UUID is generated automatically.                                                                                                                                       |
+| `contentType`           | No       | The MIME type of the content. If omitted, the type is inferred from the file extension of `name`. If the extension is unrecognized or no name is provided, defaults to `application/octet-stream`. |
+
 ## Additional resources
 
 - [Camunda Academy: How To Handle Documents with Email Connector](https://academy.camunda.com/c8-h2-handle-documents-email-connector)

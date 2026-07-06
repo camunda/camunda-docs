@@ -31,13 +31,13 @@ You sign in using your organization's Microsoft account, and then link it to you
 
 ### Key features
 
-| Feature             | Description                                                         |
-| :------------------ | :------------------------------------------------------------------ |
-| Task management     | View, claim, assign, and complete user tasks directly in Teams.     |
-| Start processes     | Browse process definitions and start new instances from Teams.      |
-| Incident monitoring | View incidents, retry failed jobs, and open them in Operate.        |
-| Notifications       | Receive personal and channel alerts for new or assigned user tasks. |
-| Cluster management  | View cluster health and wake up suspended clusters.                 |
+| Feature                                      | Description                                                                                         |
+| :------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| Task management                              | View, claim, assign, and complete user tasks directly in Microsoft Teams.                           |
+| Start processes                              | Browse process definitions and start new instances from Microsoft Teams.                            |
+| Incident monitoring                          | View incidents, retry failed jobs, and open them in Operate.                                        |
+| [Notifications](./ms-teams-notifications.md) | Receive personal and channel notifications for user tasks based on configurable notification rules. |
+| Cluster management                           | View cluster health and wake up suspended clusters.                                                 |
 
 ## Process variable: `appContext`
 
@@ -45,13 +45,13 @@ When a process is started or a user task is completed through Microsoft Teams, t
 
 The `appContext` variable has the following shape:
 
-| Field            | Type                                  | Description                                                                      |
-| :--------------- | :------------------------------------ | :------------------------------------------------------------------------------- |
-| `integration`    | `"teams"`                             | The platform that initiated the action.                                          |
-| `externalUserId` | `string`                              | The Microsoft Teams user ID of the person who triggered the action.              |
-| `email`          | `string`                              | The Camunda account email associated with the user.                              |
-| `source`         | `"tab"` \| `"message"` \| `"channel"` | The UI surface that triggered the action (see below).                            |
-| `channel`        | `string` (optional)                   | The Teams channel or conversation ID. Present only when `source` is `"channel"`. |
+| Field            | Type                                  | Description                                                                                |
+| :--------------- | :------------------------------------ | :----------------------------------------------------------------------------------------- |
+| `integration`    | `"teams"`                             | The platform that initiated the action.                                                    |
+| `externalUserId` | `string`                              | The Microsoft Teams user ID of the person who triggered the action.                        |
+| `email`          | `string`                              | The Camunda account email associated with the user.                                        |
+| `source`         | `"tab"` \| `"message"` \| `"channel"` | The UI surface that triggered the action (see below).                                      |
+| `channel`        | `string` (optional)                   | The Microsoft Teams channel or conversation ID. Present only when `source` is `"channel"`. |
 
 ### Source values
 
@@ -125,7 +125,7 @@ The Self-Managed setup first requires installation and configuration by your org
 :::
 
 1. Open **Microsoft Teams**.
-2. Open **Apps** and search for **Camunda** in the **Built for your org** organization.
+2. Open **Apps** and search for **Camunda** in the **Built for your org** section.
 
 :::note
 Your administrator may have renamed the app. Contact them if you cannot find it.

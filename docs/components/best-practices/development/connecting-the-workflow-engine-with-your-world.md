@@ -147,6 +147,8 @@ There is also documentation on [how to write a good job worker](../writing-good-
 
 Most projects want to connect to specific technologies. Currently, most people ask for REST, messaging, or Kafka.
 
+REST and messaging are common core integration patterns. Kafka is different: it is optional infrastructure that you would typically introduce for event streaming or broader event-driven architectures, not because Zeebe requires it to execute workflows.
+
 ### REST
 
 You could build a piece of code that provides a REST endpoint in the language of choice and then starts a process instance.
@@ -173,7 +175,16 @@ The [Ticket Booking Example](https://github.com/berndruecker/ticket-booking-camu
 
 ### Apache Kafka
 
-You can do the same trick with Kafka topics. The [Flowing Retail example](https://github.com/berndruecker/flowing-retail) shows this using Java, Spring Boot, and Spring Cloud Streams. There is [code to subscribe to a Kafka topic and start new process instances for new records](https://github.com/berndruecker/flowing-retail/blob/master/kafka/java/order-zeebe/src/main/java/io/flowing/retail/kafka/order/messages/MessageListener.java#L39), and there is some glue code to create new records when a process instance executes a service task. Of course, you could also use other frameworks to achieve the same result.
+Kafka is not required for Camunda 8 or Zeebe to work. Zeebe executes workflows itself, while Kafka can optionally be used as an event backbone around the workflow engine.
+
+Typical Kafka-based patterns are:
+
+- **Kafka to Zeebe**: Consume records from a Kafka topic and translate them into Zeebe API calls, such as starting a process instance or correlating a message.
+- **Zeebe to Kafka**: When a workflow reaches a service task or other integration point, write a record to Kafka so downstream systems can react asynchronously.
+
+You can implement these patterns with custom glue code. The [Flowing Retail example](https://github.com/berndruecker/flowing-retail) shows this using Java, Spring Boot, and Spring Cloud Streams. There is [code to subscribe to a Kafka topic and start new process instances for new records](https://github.com/berndruecker/flowing-retail/blob/master/kafka/java/order-zeebe/src/main/java/io/flowing/retail/kafka/order/messages/MessageListener.java#L39), and there is some glue code to create new records when a process instance executes a service task. Of course, you could also use other frameworks to achieve the same result.
+
+This means Kafka is a good fit if you already use Kafka, need loose coupling, or want to broadcast workflow-related events to multiple consumers. If you simply need to call a remote system from a workflow, a job worker or connector is often the more direct option.
 
 ![Kafka Example](connecting-the-workflow-engine-with-your-world-assets/kafka-example.png)
 
@@ -209,7 +220,7 @@ Another example is the [Kafka connector](https://github.com/camunda-community-hu
 
 ![Kafka connector](connecting-the-workflow-engine-with-your-world-assets/kafka-connector.png)
 
-This is a bidirectional connector which contains a Kafka listener for forwarding Kafka records to Zeebe and also a job worker which creates Kafka records every time a service task is executed. This is illustrated by the following example:
+This is a bidirectional connector which contains a Kafka listener for forwarding Kafka records to Zeebe and also a job worker which creates Kafka records every time a service task is executed. In other words, the connector helps Kafka exchange events with Zeebe; it does not replace Zeebe's own workflow execution or state handling. This is illustrated by the following example:
 
 ![Kafka connector Details](connecting-the-workflow-engine-with-your-world-assets/kafka-connector-details.png)
 

@@ -135,6 +135,7 @@ Download scripts: [Access SQL and Liquibase scripts](/self-managed/deployment/he
 ## Next steps
 
 - [Operations and maintenance](/self-managed/deployment/manual/rdbms/operations.md)
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md)
 - [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
 - [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)

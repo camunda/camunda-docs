@@ -21,9 +21,9 @@ The outcome of an LLM call is stored as an **assistant message** designed to con
 If not configured otherwise, this format is used by default and returns a `responseText` string as part of the
 connector response.
 
-| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| :----------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Parse text as JSON | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li><p>Use this option for models that do not support setting JSON as response format (such as Anthropic models) in combination with a prompt instructing the model to return a JSON response.</p></li><li><p>If parsing fails, the connector does not return an `responseJson` object, but only returns the original response text as `responseText`.</p></li></ul></p> |
+| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :----------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Parse text as JSON | No       | <p>If this option is selected, the connector will attempt to parse the response text as JSON and return the parsed object as `responseJson` in the connector response.</p><p><ul><li><p>Use this option for models that do not support the JSON response format in combination with a prompt instructing the model to return a JSON response.</p></li><li><p>If parsing fails, the connector does not return an `responseJson` object, but only returns the original response text as `responseText`.</p></li></ul></p> |
 
 For an example prompt that instructs the model to return a JSON response,
 (see [Anthropic documenation](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency#example-enhancing-it-support-consistency)):
@@ -34,30 +34,23 @@ Output in JSON format with keys: "sentiment" (positive/negative/neutral), "key_i
 
 #### JSON response format
 
-:::note
-
-The JSON response format is currently only supported for OpenAI and Google Vertex AI models. Use the text response format in combination with
-the **Parse text as JSON** option for other providers.
-
-:::
-
 If the model supports it, selecting JSON as response format instructs the model to always return a JSON response. If the model does not return a valid JSON response, the connector throws an error.
 
 To ensure the model generates data according to a specific JSON structure, you can optionally provide a
 [JSON Schema](https://json-schema.org/). Alternatively, you can instruct the model to return JSON following a specific
 structure as shown in the text example above.
 
-Support for JSON responses varies by provider and model.
+Support for JSON responses varies by provider and model:
 
-For OpenAI, selecting the JSON response format is equivalent to using
-the [JSON mode](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#json-mode). Providing a
-JSON Schema instructs the model to return
-[structured outputs](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#structured-outputs-vs-json-mode).
+- **OpenAI**: Selecting the JSON response format is equivalent to using the [JSON mode](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#json-mode). Providing a JSON Schema instructs the model to return [structured outputs](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#structured-outputs-vs-json-mode).
+- **Anthropic**: JSON response format requires a JSON Schema. See [Anthropic's structured outputs documentation](https://platform.claude.com/docs/en/build-with-claude/structured-outputs).
+- **AWS Bedrock**: JSON response format requires a JSON Schema. See [AWS Bedrock structured output documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/structured-output.html).
+- **Other providers**: Consult the provider's documentation to check if JSON response format is supported. If not, use the text response format with the **Parse text as JSON** option instead.
 
-| Field                     | Required | Description                                                                                                                                                                                                                                                           |
-| :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Response JSON schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p><p><ul><li>See [OpenAI's structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#introduction) for examples.</li></ul></p> |
-| Response JSON schema name | No       | <p>Depending on the provider, the schema must be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p>                                              |
+| Field                     | Required | Description                                                                                                                                                                                                                                         |
+| :------------------------ | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Response JSON schema      | No       | <p>Describes the desired response format as [JSON Schema](https://json-schema.org/).</p><p>See [OpenAI's structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs?api-mode=chat#introduction) for examples.</p> |
+| Response JSON schema name | No       | <p>Depending on the provider, the schema must be configured with a name for the schema (such as `Person`).</p><p>Ideally this name describes the purpose of the schema to make the model aware of the expected data.</p>                            |
 
 For example, the following shows an example JSON Schema describing the expected response format for a user profile:
 

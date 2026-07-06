@@ -206,9 +206,11 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 2. **Periodic cleanup job**  
    A scheduled cleanup job deletes marked records in batches and adjusts future intervals dynamically:
 
-- If no records are deleted → interval doubles (up to `maxHistoryCleanupInterval`)
-- If the batch size is fully used → interval halves (down to `minHistoryCleanupInterval`)
+- If no records are deleted → interval doubles (up to `max-history-cleanup-interval`)
+- If the batch size is fully used → interval halves (down to `min-history-cleanup-interval`)
 - Otherwise → interval remains unchanged
+- additionally the cleanup is only allowed to take a maximum of `max-history-cleanup-usage` execution time. This will not
+  cut off the current execution, but it will affect the interval for the next one.
 
 ### History cleanup configuration
 
@@ -218,21 +220,22 @@ RDBMS history configuration properties are defined under:
 camunda.data.secondary-storage.rdbms.history.*
 ```
 
-| Property name                                  | Description                                                             | Default |
-| ---------------------------------------------- | ----------------------------------------------------------------------- | ------- |
-| `default-history-ttl`                          | TTL for finished process instances and related data (ISO-8601 duration) | P30D    |
-| `default-batch-operation-ttl`                  | TTL for batch operation history                                         | P5D     |
-| `batch-operation-cancel-process-instance-ttl`  | TTL for cancel-process-instance batch operations                        | P5D     |
-| `batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                       | P5D     |
-| `batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                        | P5D     |
-| `batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                               | P5D     |
-| `historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                       | 1000    |
-| `minHistoryCleanupInterval`                    | Minimum duration between cleanup runs (ISO-8601 duration)               | PT1M    |
-| `maxHistoryCleanupInterval`                    | Maximum duration between cleanup runs (ISO-8601 duration)               | PT60M   |
-| `history-cleanup-process-instance-batch-size`  | Number of process instances to be cleaned per cleanup run               | 500     |
-| `history-cleanup-batch-size`                   | Number of rows to be cleaned per cleanup run in each table              | 10000   |
-| `usage-metrics-ttl`                            | TTL for usage metrics                                                   | P730D   |
-| `usage-metrics-cleanup`                        | Interval between usage metrics cleanup runs (ISO-8601 duration)         | PT24H   |
+| Property name                                  | Description                                                                                     | Default    |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------- |
+| `default-history-ttl`                          | TTL for finished process instances and related data (ISO-8601 duration)                         | P30D       |
+| `default-batch-operation-ttl`                  | TTL for batch operation history                                                                 | P5D        |
+| `batch-operation-cancel-process-instance-ttl`  | TTL for cancel-process-instance batch operations                                                | P5D        |
+| `batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                                               | P5D        |
+| `batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                                                | P5D        |
+| `batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                                                       | P5D        |
+| `historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                                               | 1000       |
+| `min-history-cleanup-interval`                 | Minimum duration between cleanup runs (ISO-8601 duration)                                       | PT1M       |
+| `max-history-cleanup-interval`                 | Maximum duration between cleanup runs (ISO-8601 duration)                                       | PT60M      |
+| `max-history-cleanup-usage`                    | Maximum percentage of usage time the history cleanup is allowed to use (values between 0 and 1) | 0.25 (25%) |
+| `history-cleanup-process-instance-batch-size`  | Number of process instances to be cleaned per cleanup run                                       | 500        |
+| `history-cleanup-batch-size`                   | Number of rows to be cleaned per cleanup run in each table                                      | 10000      |
+| `usage-metrics-ttl`                            | TTL for usage metrics                                                                           | P730D      |
+| `usage-metrics-cleanup`                        | Interval between usage metrics cleanup runs (ISO-8601 duration)                                 | PT24H      |
 
 ## Exporter cache configuration
 

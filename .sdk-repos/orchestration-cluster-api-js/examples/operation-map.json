@@ -1,4 +1,46 @@
 {
+  "getAgentInstance": [
+    {
+      "file": "agent-instance.ts",
+      "region": "GetAgentInstance",
+      "label": "Get an agent instance"
+    }
+  ],
+  "searchAgentInstances": [
+    {
+      "file": "agent-instance.ts",
+      "region": "SearchAgentInstances",
+      "label": "Search agent instances"
+    }
+  ],
+  "createAgentInstance": [
+    {
+      "file": "agent-instance.ts",
+      "region": "CreateAgentInstance",
+      "label": "Create an agent instance"
+    }
+  ],
+  "createAgentInstanceHistoryItem": [
+    {
+      "file": "agent-instance.ts",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Append an agent instance history item"
+    }
+  ],
+  "searchAgentInstanceHistory": [
+    {
+      "file": "agent-instance.ts",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
+  "updateAgentInstance": [
+    {
+      "file": "agent-instance.ts",
+      "region": "UpdateAgentInstance",
+      "label": "Update an agent instance"
+    }
+  ],
   "getTopology": [
     {
       "file": "client.ts",
@@ -730,6 +772,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "deleteProcessInstance": [
     {
       "file": "extended-operations.ts",
@@ -842,6 +891,13 @@
       "label": "Get start process form"
     }
   ],
+  "getFormByKey": [
+    {
+      "file": "admin-operations.ts",
+      "region": "GetFormByKey",
+      "label": "Get a form by key"
+    }
+  ],
   "getVariable": [
     {
       "file": "extended-operations.ts",
@@ -875,6 +931,13 @@
       "file": "extended-operations.ts",
       "region": "SearchElementInstanceIncidents",
       "label": "Search element instance incidents"
+    }
+  ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "extended-operations.ts",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
     }
   ],
   "createElementInstanceVariables": [
@@ -1176,6 +1239,20 @@
       "file": "admin-operations.ts",
       "region": "GetResourceContent",
       "label": "Get resource content"
+    }
+  ],
+  "getResourceContentBinary": [
+    {
+      "file": "admin-operations.ts",
+      "region": "GetResourceContentBinary",
+      "label": "Get resource content as binary"
+    }
+  ],
+  "searchResources": [
+    {
+      "file": "admin-operations.ts",
+      "region": "SearchResources",
+      "label": "Search resources"
     }
   ],
   "getUsageMetrics": [

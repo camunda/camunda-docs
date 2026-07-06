@@ -1,0 +1,472 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Project resource paths and schemas
+paths:
+  /projects:
+    post:
+      operationId: createProject
+      summary: Create a project
+      description: Creates a new empty project in the specified workspace.
+      x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - projectKey
+      tags:
+        - Project
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectCreateRequest"
+      responses:
+        "200":
+          description: The project was created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}:
+    get:
+      operationId: getProject
+      summary: Get a project
+      description: Returns the project metadata and its content (child folders and files).
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "200":
+          description: The project was retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectDetailResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    patch:
+      operationId: updateProject
+      summary: Update a project
+      description: Updates the name and/or workspace of an existing project.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectUpdateRequest"
+      responses:
+        "200":
+          description: The project was updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+    delete:
+      operationId: deleteProject
+      summary: Delete a project
+      description: >
+        Soft-deletes the project with the given project key. The project is moved
+        to the recently deleted state and can be recovered during the retention
+        window. The project must have no files in the project or any of its
+        descendants. To permanently and irreversibly remove a project, use
+        `DELETE /projects/{projectKey}/permanent` instead.
+      x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "204":
+          description: The project was deleted successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/permanent:
+    delete:
+      operationId: permanentlyDeleteProject
+      summary: Permanently delete a project
+      description: >
+        Permanently and irreversibly removes the project with the given project
+        key. The project cannot be recovered afterwards. The project must have no
+        files in the project or any of its descendants. Empty folders and version
+        history are removed as part of the deletion. This works in one step and
+        does not require the project to be soft-deleted first.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "204":
+          description: The project was permanently deleted successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The project was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/search:
+    post:
+      operationId: searchProjects
+      summary: Search projects
+      description: Returns projects matching the given search criteria across all workspaces in the caller's organization.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Project
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    ProjectKeyPathParam:
+      name: projectKey
+      in: path
+      required: true
+      description: The unique key identifying the project.
+      schema:
+        $ref: "keys.yaml#/components/schemas/ProjectKey"
+
+  schemas:
+    # --- Request schemas ---
+
+    ProjectCreateRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - workspaceKey
+      example:
+        name: "Payment Flow"
+        workspaceKey: "wks-abc-123"
+      properties:
+        name:
+          description: The name of the project.
+          type: string
+          minLength: 1
+          maxLength: 255
+        workspaceKey:
+          description: The key of the workspace this project belongs to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+
+    ProjectUpdateRequest:
+      type: object
+      additionalProperties: false
+      example:
+        name: "Payment Flow v2"
+      properties:
+        name:
+          description: The updated name of the project.
+          type: string
+          minLength: 1
+          maxLength: 255
+        workspaceKey:
+          description: The key of the workspace to move the project to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+
+    # --- Response schemas ---
+
+    ProjectDetailResult:
+      type: object
+      description: A project with its metadata and content (child folders and files).
+      example:
+        project:
+          projectKey: "prj-def-456"
+          name: "Payment Flow"
+          workspaceKey: "wks-abc-123"
+          created: "2025-02-01T08:00:00.000Z"
+          createdBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          updated: "2025-06-10T14:22:00.000Z"
+          updatedBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+        content:
+          folders:
+            - folderKey: "fld-012-ghi"
+              name: "processes"
+              projectKey: "prj-def-456"
+              parentFolderKey: "fld-parent-001"
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-03-15T10:30:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+          files:
+            - fileKey: "file-789-xyz"
+              name: "order-process.bpmn"
+              projectKey: "prj-def-456"
+              folderKey: "fld-012-ghi"
+              simplePath: "/processes/order-process.bpmn"
+              canonicalPath: "/fld-012-ghi/file-789-xyz"
+              revision: 1
+              type: "bpmn"
+              content: "<?xml version='1.0' encoding='UTF-8'?>..."
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-06-10T14:22:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+      required:
+        - project
+        - content
+      properties:
+        project:
+          description: The project metadata.
+          allOf:
+            - $ref: "#/components/schemas/ProjectResult"
+        content:
+          description: The content of the project (child folders and files).
+          allOf:
+            - $ref: "#/components/schemas/ProjectContent"
+
+    ProjectContent:
+      type: object
+      description: The content of a project, listing its direct children.
+      required:
+        - folders
+        - files
+      properties:
+        folders:
+          description: The child folders within this project.
+          type: array
+          items:
+            $ref: "folders.yaml#/components/schemas/FolderResult"
+        files:
+          description: The files within this project.
+          type: array
+          items:
+            $ref: "files.yaml#/components/schemas/FileResult"
+
+    ProjectResult:
+      type: object
+      example:
+        projectKey: "prj-def-456"
+        name: "Payment Flow"
+        workspaceKey: "wks-abc-123"
+        created: "2025-02-01T08:00:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+      required:
+        - projectKey
+        - name
+        - workspaceKey
+        - created
+        - createdBy
+        - updated
+        - updatedBy
+      properties:
+        projectKey:
+          description: The unique key identifying this project.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        name:
+          description: The name of the project.
+          type: string
+        workspaceKey:
+          description: The key of the workspace this project belongs to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+        created:
+          description: The timestamp when the project was created.
+          type: string
+          format: date-time
+        createdBy:
+          description: The user who created the project.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+        updated:
+          description: The timestamp when the project was last updated.
+          type: string
+          format: date-time
+        updatedBy:
+          description: The user who last updated the project.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+
+    # --- Search schemas ---
+
+    ProjectSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProjectSearchQuerySortRequest"
+        filter:
+          description: The project search filters.
+          allOf:
+            - $ref: "#/components/schemas/ProjectFilter"
+
+    ProjectSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - created
+            - updated
+        order:
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    ProjectFilter:
+      type: object
+      description: Filter criteria for searching projects.
+      properties:
+        workspaceKey:
+          description: Filter by workspace key.
+          x-semantic-type: WorkspaceKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        name:
+          description: Filter by project name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        created:
+          description: Filter by creation date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        updated:
+          description: Filter by last update date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        createdBy:
+          description: Filter by creator email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        updatedBy:
+          description: Filter by last updater email address.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+
+    ProjectSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching projects.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProjectResult"
+        page:
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

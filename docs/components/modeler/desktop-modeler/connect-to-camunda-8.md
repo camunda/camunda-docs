@@ -20,7 +20,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    ![Connection manager showing add button](./img/connection-manager-add.png)
 
-4. Enter a name, the cluster URL, and the credentials (client ID and client secret) for your [API client](../../console/manage-clusters/manage-api-clients.md).
+4. Enter a name, the cluster URL, and the credentials (client ID and client secret) for your [API client](../../hub/organization/manage-clusters/manage-api-clients.md).
 
    ![Connection manager with new connection information filled in](./img/connection-manager-new-connection-loading.png)
 

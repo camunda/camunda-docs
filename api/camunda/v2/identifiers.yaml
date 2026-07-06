@@ -35,6 +35,36 @@ components:
       format: Username
       description: The unique name of a user.
       type: string
+    RoleId:
+      example: admin
+      description: The unique identifier of a role.
+      format: RoleId
+      type: string
+    GroupId:
+      example: engineering
+      description: The unique identifier of a group.
+      format: GroupId
+      type: string
+    MappingRuleId:
+      example: my-mapping-rule
+      description: The unique identifier of a mapping rule.
+      format: MappingRuleId
+      type: string
+    ClientId:
+      example: my-application
+      description: |
+        The unique identifier of an OAuth client.
+        Minted outside the Camunda REST API: in SaaS by Console, in Self-Managed
+        with OIDC by the external identity provider (e.g. EntraID, Keycloak,
+        Okta). In Self-Managed with Basic authentication, machine-to-machine
+        applications are modelled as users instead — see the user identifier.
+      format: ClientId
+      type: string
+    ClusterVariableName:
+      example: feature-flag-checkout
+      description: The name of a cluster variable. Unique within its scope (global or tenant-specific).
+      format: ClusterVariableName
+      type: string
     Tag:
       description: A tag. Needs to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.
       example: business_key:1234
@@ -61,3 +91,113 @@ components:
       format: BusinessId
       type: string
       example: order-12345
+    IterationId:
+      description: |
+        A client-provided sequential integer identifying a logical iteration: one LLM
+        call, its tool dispatches, and their results. Must be a positive integer,
+        increasing with each iteration. Established by the
+        connector when appending the first history item of an iteration.
+      type: integer
+      format: int32
+      minimum: 1
+      example: 1
+    ElementIdFilterProperty:
+      description: ElementId property with full advanced search capabilities.
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/ElementId"
+        - $ref: "#/components/schemas/AdvancedElementIdFilter"
+    AdvancedElementIdFilter:
+      title: Advanced filter
+      description: Advanced ElementId filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ElementId"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ElementId"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/ElementId"
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/ElementId"
+        $like:
+          $ref: "filters.yaml#/components/schemas/LikeFilter"
+      x-properties-added-in-version:
+        - propertyName: $eq
+          addedInVersion: "8.10"
+        - propertyName: $neq
+          addedInVersion: "8.10"
+        - propertyName: $exists
+          addedInVersion: "8.10"
+        - propertyName: $in
+          addedInVersion: "8.10"
+        - propertyName: $notIn
+          addedInVersion: "8.10"
+        - propertyName: $like
+          addedInVersion: "8.10"
+    ProcessDefinitionIdFilterProperty:
+      description: ProcessDefinitionId property with full advanced search capabilities.
+      oneOf:
+        - type: string
+          title: Exact match
+          description: Matches the value exactly.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionId"
+        - $ref: "#/components/schemas/AdvancedProcessDefinitionIdFilter"
+    AdvancedProcessDefinitionIdFilter:
+      title: Advanced filter
+      description: Advanced ProcessDefinitionId filter.
+      type: object
+      properties:
+        $eq:
+          description: Checks for equality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionId"
+        $neq:
+          description: Checks for inequality with the provided value.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionId"
+        $exists:
+          description: Checks if the current property exists.
+          type: boolean
+        $in:
+          description: Checks if the property matches any of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessDefinitionId"
+        $notIn:
+          description: Checks if the property matches none of the provided values.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessDefinitionId"
+        $like:
+          $ref: "filters.yaml#/components/schemas/LikeFilter"
+      x-properties-added-in-version:
+        - propertyName: $eq
+          addedInVersion: "8.10"
+        - propertyName: $neq
+          addedInVersion: "8.10"
+        - propertyName: $exists
+          addedInVersion: "8.10"
+        - propertyName: $in
+          addedInVersion: "8.10"
+        - propertyName: $notIn
+          addedInVersion: "8.10"
+        - propertyName: $like
+          addedInVersion: "8.10"

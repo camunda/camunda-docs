@@ -148,7 +148,7 @@ For example:
 - **Username claim**: By default, the `sub` (subject) claim from the token is used as the username. If you want to use a different claim (such as `preferred_username` or `email`), ensure your IdP includes it in the token and set the `username-claim` property accordingly. You can use a [JSONPath expression](https://www.rfc-editor.org/rfc/rfc9535.html) to locate the username claim in the token (for example, `$['camundaorg']['username']`).
 
 :::info
-If you're using Web Modeler and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/modeler/web-modeler/configuration/configuration.md#available-authentication-methods)),
+If you're using Web Modeler and want to allow deployments to the Orchestration Cluster from there (with the [`BEARER_TOKEN` authentication](/self-managed/components/hub/configuration/properties.md#available-authentication-methods)),
 both applications must use the same IdP. You also need to make the cluster accept the token passed by Web Modeler.
 To do so, include the Web Modeler UI's token audience in the configured list of audiences.
 :::
@@ -660,6 +660,21 @@ No valid post-logout redirect URL found in session, falling back to default: '/'
 ```
 
 Ensure that the post-logout redirect URL (`<camunda-host>/post-logout`) is registered in your IdP configuration.
+
+#### IdP `end_session_endpoint` not available
+
+If RP-initiated logout is enabled but the IdP does not expose an `end_session_endpoint`, the local Orchestration Cluster session is terminated and the following message is displayed:
+
+```
+The identity provider's end_session_endpoint is not available. The local session has been terminated, but the IdP session will still be active.
+```
+
+The user is signed out of Camunda, but their IdP session remains active.
+
+To resolve this:
+
+- Verify that your IdP supports RP-initiated logout and exposes an `end_session_endpoint`.
+- If your IdP does not support RP-initiated logout, disable it by setting `idp-logout-enabled` to `false`.
 
 ## Further resources
 

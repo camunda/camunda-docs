@@ -2,7 +2,7 @@
 id: quick-start-zero-config-recommended
 title: Quick start (Zero-config – recommended)
 sidebar_label: Quick start (Zero-config – recommended)
-sidebar_position: 5
+sidebar_position: 6
 mdx:
   format: md
 ---

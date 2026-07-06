@@ -15,6 +15,7 @@ This page provides:
 
 Related guides:
 
+- [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
 - [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
@@ -109,7 +110,7 @@ For Liquibase lock recovery behavior, configure `camunda.data.secondary-storage.
 ### Example usage
 
 :::note
-Operate has limited functionality when using RDBMS as secondary storage in Camunda 8.9-alpha3. See [Operate limitations](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms) for details.
+RDBMS is fully supported as secondary storage. For production planning, review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
 ```yaml
@@ -230,6 +231,10 @@ Cross-region RDBMS deployments are **not yet tested or supported** in Camunda 8.
 ### Self-managed database HA
 
 Camunda assumes your RDBMS handles its own HA (replication, failover). Use cloud-managed databases or vendor-specific HA solutions for production.
+
+### v1 API not supported
+
+❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
 ### Custom JDBC driver libraries
 

@@ -28,7 +28,7 @@ The group description.
 ### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
 The group ID.

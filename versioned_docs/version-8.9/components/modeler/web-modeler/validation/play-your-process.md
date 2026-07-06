@@ -175,7 +175,6 @@ You can run scenarios on the process definition page by clicking either the **Ru
 - Call activities are not supported. Scenarios containing call activities cannot be executed successfully.
 - Scenario paths that include process modifications are not supported.
 - Similarly to process instances, scenarios do not run in isolation. For example, if two scenario paths are defined for a process and both contain the same message event or signal event, running these scenarios simultaneously might lead to unintended consequences. Publishing a scenario or broadcasting a signal could inadvertently impact the other scenario, resulting in the failure of both.
-- Processes with multiple start events are not supported. If a process has multiple start events, Play only considers the first start event in the BPMN XML, and scenarios will only run from that start event.
 
 ## Modify a process instance
 
@@ -271,6 +270,6 @@ After selecting the **Play** tab in Self-Managed, you are prompted to select fro
 
 The use of Play may result in additional charges depending on your organization's plan and the type of cluster you are using. To avoid extra costs, follow these guidelines based on your plan:
 
-- **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, contact your Customer Success Manager.
+- **Enterprise Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-enterprise-plan) to avoid costs. Alternatively, ensure your organization is designated as a development organization. For further assistance, [contact Camunda support](https://camunda.com/services/support/).
 - **Professional Plans:** Use a [development cluster](/components/concepts/clusters.md#development-clusters-in-the-starter-plan) to avoid costs. For Professional Plans, you may need to purchase a development cluster.
 - **Trial Plans:** You can use any cluster.

@@ -59,16 +59,16 @@ Task details are shown when a task is selected from the queue. A [form](/compone
 :::tip
 Typically, a task application utilizes forms to capture information from the user, to make a decision, to collect the results from a real-world task, or to provide task instructions to the user.
 
-However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by using the [APIs](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) or registering a [job worker](/components/concepts/job-workers.md) to the job type `io.camunda.zeebe:userTask` (compatible with [job worker-based user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) only).
+However, a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms) is not limited to forms. A user task could also represent navigating to an external desktop or web application, where a task is to be performed, such as updating a record in a CRM. You can even use them to track physical work or actions using sensors, IoT devices, or any interface that can talk to the web, by using the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-For these cases, utilize the flexible [custom form key](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#custom-form-key).
+For these cases, utilize the flexible [custom form key](/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking.md#custom-form-key).
 :::
 
 On the top of the form, a header shows the title of the task to work on, and the current assignee. Depending on the status of the assignment, a button allows you to assign the task to yourself or release it to the queue.
 
 At the bottom of the form there is a button with which you can complete the task.
 
-To the right of the task, you find additional information about the task, such as the [due date](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) of the task, or the [user groups that can work on this task](/components/tasklist/user-task-access-restrictions.md).
+To the right of the task, you find additional information about the task, such as the [due date](/components/modeler/bpmn/user-tasks/user-tasks.md#scheduling) of the task, or the authorization data that controls who can work on the task.
 
 Potential extensions are dependent on your use case. You can consider adding more buttons to the bottom of the panel to indicate different task outcomes such as "approve" or "reject", or you could add a list of attachments to the right panel.
 

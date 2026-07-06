@@ -29,7 +29,7 @@ Every oval is a state. Every arrow is a state transition. Note how each state tr
 
 Every state change in a state machine is called an **event**. Zeebe publishes every event as a record on the stream.
 
-State changes can be requested by submitting a **command**. A Zeebe broker receives commands from two sources:
+State changes can be requested by submitting a **command**. A Zeebe Broker receives commands from two sources:
 
 - Clients send commands remotely. For example, deploying processes, starting process instances, creating and completing jobs, etc.
 - The broker itself generates commands. For example, locking a job for exclusive processing by a worker.
@@ -81,11 +81,13 @@ To avoid such problems, Zeebe employs [flow control](/self-managed/operational-g
 In the case of backpressure when the broker receives more requests than it can process with an acceptable latency, it rejects some requests. For flow control, it can be used with static write rate limits or throttling which prevents the
 partition from building an excessive backlog of records not exported.
 
-Backpressure is indicated to the client by throwing a **resource exhausted** exception. If a client sees this exception, it can retry the requests with an appropriate retry strategy. If the rejection rate is high, it indicates the broker is constantly under high load and you need to reduce the rate of requests. Alternatively, you can also increase broker resources to adjust to your needs. In high-load scenarios, it is recommended to [benchmark](https://camunda.com/blog/2022/05/how-to-benchmark-your-camunda-platform-8-cluster/) your Zeebe broker up front to size it correctly.
+Backpressure is indicated to the client by throwing a **resource exhausted** exception. If a client sees this exception, it can retry the requests with an appropriate retry strategy. If the rejection rate is high, it indicates the broker is constantly under high load and you need to reduce the rate of requests. Alternatively, you can also increase broker resources to adjust to your needs. In high-load scenarios, it is recommended to [benchmark](https://camunda.com/blog/2022/05/how-to-benchmark-your-camunda-platform-8-cluster/) your Zeebe Broker up front to size it correctly.
 
 The maximum rate of requests that can be processed by a broker depends on the processing capacity of the machine, the network latency, current load of the system, etc. There is no fixed limit configured in Zeebe for the maximum rate of requests it accepts. Instead, Zeebe uses an adaptive algorithm to dynamically determine the limit of the number of in-flight requests (the requests that are accepted by the broker, but not yet processed).
 
 The in-flight request count is incremented when a request is accepted, and decremented when a response is sent back to the client. The broker rejects requests when the in-flight request count reaches the limit.
+
+This is not a single static threshold for the whole broker. Zeebe calculates the in-flight count and the limit per partition, and the current limit changes over time based on the configured backpressure algorithm. To observe the current limit, monitor the `zeebe_backpressure_requests_limit` metric. For more details, see [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md) and [metrics](/self-managed/operational-guides/monitoring/metrics.md#performance-metrics).
 
 import BackpressureWarning from '../../../components/react-components/backpressure-warning.md'
 

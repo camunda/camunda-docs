@@ -68,14 +68,19 @@ Example unstructured documents include:
 
 ## Document classification {#classification}
 
-Document classification is performed as part of document automation.
+Document classification uses an [LLM foundation model](#llms) to analyze, categorize, and assign a document type to incoming documents based on their content.
 
-<!-- Document classification is performed as part of [document automation](idp-document-automation.md). -->
+- Create a [document classification template](idp-document-classification.md) to define the document types you want to classify (such as invoices, contracts, or identity documents), test classification accuracy, and publish the template for use in your processes.
+- Classification enables you to route different document types to the correct downstream process step or [document extraction](idp-document-extraction.md) template.
+- Classification accuracy is improved with well-defined document types (including clear descriptions and classification instructions) and a set of test documents that accurately represents each type of document you want to process.
 
-- Documents are analyzed, classified, and assigned to the relevant [document extraction](idp-document-extraction.md) template, based on the document content.
+### Fallback output value {#fallback}
 
-- Classification ensures that documents processed through IDP are organized into the correct type, so that extracted data is assigned/mapped to the correct property.
-- Classification accuracy is improved with a well-defined taxonomy (set of extraction fields) and a set of example documents that accurately represents each type of document you want to process.
+The fallback output value is the value returned when a document cannot be classified as any of the defined types. By default, this value is `unclassified-document`, but you can customize it to align with your process routing logic.
+
+### Preconfigured document types {#preconfigured-types}
+
+IDP provides a set of preconfigured document types (such as invoice, contract, identity document) to help you get started quickly when creating a [classification template](idp-document-classification.md#define-document-types). You can also create custom document types for categories specific to your business.
 
 ## Extraction model/Large Language Models (LLM) {#llms}
 
@@ -86,6 +91,20 @@ LLM Foundation models are large-scale, pre-trained AI models that can be adapted
 - IDP allows you to work with and test different extraction models until you find the model that best suits your budget and accuracy requirements.
 
 - See [extraction models](idp-reference.md#extraction-models) for a list of currently supported LLM extraction models.
+
+## Text extraction engines {#extraction-engines}
+
+A text extraction engine determines how text is extracted from a document before the LLM processes its content. Different document types and quality levels benefit from different extraction approaches.
+
+- **Lightweight parsing** (Fast Extract): For digitally generated PDFs where text is already embedded, a fast built-in parser can extract text without OCR, reducing processing time and cost.
+- **OCR-based extraction** (AWS Textract, Azure Document Intelligence, GCP Document AI): For scanned or image-based documents, OCR engines provide high-accuracy text recognition from images.
+- **Multimodal**: For LLMs that support vision capabilities, the document can be sent directly to the model for native interpretation, bypassing a separate text extraction step entirely.
+
+You can select the extraction engine per unstructured extraction template during [extraction testing](idp-unstructured-extraction.md#extract-data), [validation](idp-unstructured-extraction.md#validate-extraction), and [publishing](idp-unstructured-extraction.md#publish-template), to optimize accuracy, performance, and cost for each document type.
+
+:::info
+For a full list of available extraction engines, see [text extraction engines](idp-reference.md#extraction-engines).
+:::
 
 ## Extraction fields {#fields}
 

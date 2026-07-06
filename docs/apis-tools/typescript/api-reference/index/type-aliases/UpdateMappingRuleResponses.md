@@ -16,7 +16,7 @@ type UpdateMappingRuleResponses = object;
 ### 200
 
 ```ts
-200: MappingRuleCreateUpdateResult;
+200: MappingRuleUpdateResult;
 ```
 
 The mapping rule was updated successfully.

@@ -105,5 +105,5 @@ Camunda 8 SaaS supports the following access controls.
 | [Resource-based authorization](/components/console/manage-organization/manage-users.md#resource-based-authorizations) | Resource authorizations allow you to control the level of access a user has to a particular resource in the system.                                                                                                                              |
 
 :::note
-In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. To learn more, contact your Customer Success Manager.
+In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. To learn more, [contact Camunda support](https://camunda.com/services/support/).
 :::

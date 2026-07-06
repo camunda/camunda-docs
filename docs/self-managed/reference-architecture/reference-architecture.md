@@ -57,20 +57,19 @@ Tightly integrated with the Orchestration Cluster:
 
 This unified architecture ensures seamless communication, consistent state management, and reliable process execution across all components.
 
-#### Web Modeler and Console
+#### Camunda Hub
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667245523380&cot=14 -->
+<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764670398265451&cot=14 -->
 
-![Web Modeler and Console](./img/management-cluster.jpg)
+![Camunda Hub](./img/management-cluster.jpg)
 
-Web Modeler and Console are designed to interact with multiple orchestration clusters:
+Camunda Hub is designed to interact with multiple orchestration clusters:
 
-- [Console](/components/console/introduction-to-console.md): Central management interface for monitoring and managing multiple orchestration clusters.
-- [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md): Web-based tool for designing and deploying workflow models to any available orchestration cluster.
+- [Camunda Hub](/components/hub/index.md): Manage organizational resources, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.
 - [Management Identity](/self-managed/components/management-identity/overview.md): Centralized authentication and authorization service.
 
 :::note Admin separation
-Web Modeler and Console use a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
+Camunda Hub uses a separate Management Identity deployment, distinct from the embedded Admin in the Orchestration Cluster. Optimize also requires Management Identity and cannot use the embedded Orchestration Cluster Admin.  
 :::
 
 :::tip New in Camunda 8.8
@@ -102,6 +101,59 @@ Databases can be deployed as part of the Camunda clusters, but using external da
 - **Compliance**: External databases support specific governance and compliance requirements.
 
 While some guides explain how to deploy databases with Camunda, the recommendation is to manage databases externally for greater control and flexibility.
+
+### Secondary storage architecture
+
+Choose the secondary storage architecture before you finalize a production deployment pattern. This decision applies across manual, containerized, and Kubernetes deployments.
+
+For production, use an external managed service or an externally operated database cluster whenever possible. Camunda does not manage database high availability, failover, backups, or lifecycle operations for you.
+
+#### Production topology baseline
+
+For a production Orchestration Cluster, use these baseline assumptions regardless of deployment method:
+
+- Run at least three brokers across three availability zones for high availability.
+- Use one secondary storage backend family for the Orchestration Cluster's web applications and APIs.
+- Keep the secondary storage backend in the same region as the Orchestration Cluster to reduce latency and failure domains.
+- Treat secondary storage as part of your production data layer, with its own backup, monitoring, and scaling plan.
+
+#### Compare Elasticsearch/OpenSearch and RDBMS
+
+Both backend families are supported for production in the right scenarios. Choose based on query patterns, operational preferences, and component requirements.
+
+| Topic                              | Elasticsearch/OpenSearch                                                              | RDBMS                                                                                                                        |
+| ---------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Best fit                           | Search-heavy, filter-heavy, analytics-heavy workloads                                 | Teams that prefer relational database operations and moderate query workloads                                                |
+| Write throughput profile           | Higher write throughput in published comparison tests                                 | Lower write throughput than Elasticsearch/OpenSearch in current published tests                                              |
+| Read/query profile                 | Better suited for broad filtering, sorting, aggregations, and dashboard-style queries | Better suited for key-based access and moderate query workloads; broad filters and statistics queries need closer validation |
+| Optimize support                   | Required for Optimize                                                                 | Optimize still requires Elasticsearch or OpenSearch                                                                          |
+| Operational model                  | Adds a document-store technology to your stack                                        | Reuses standard relational database tooling and operational practices                                                        |
+| Migration between backend families | Not supported as an in-place production migration                                     | Not supported as an in-place production migration                                                                            |
+
+Use benchmarking and workload validation before choosing a backend for production. For current published PostgreSQL results and caveats, see [RDBMS benchmark results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md). For general capacity planning, see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
+
+#### Backend-specific guidance
+
+Choose Elasticsearch/OpenSearch when:
+
+- You expect heavy search, filtering, sorting, or dashboard-style query workloads.
+- You need Optimize and want to avoid running two secondary storage technologies.
+- You want the strongest current fit for large query-heavy environments.
+
+Choose RDBMS when:
+
+- You already operate relational databases at scale and want to align with existing tooling.
+- Your workloads are moderate and you can validate query performance with production-like data.
+- You prefer a relational secondary storage model for Orchestration Cluster APIs and web applications.
+
+If you deploy Optimize with RDBMS-based secondary storage, plan for both backends: RDBMS for the Orchestration Cluster and Elasticsearch or OpenSearch for Optimize.
+
+For supported versions and configuration details, see:
+
+- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
+- [Configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)
+- [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
+- [Supported environments](/reference/supported-environments.md)
 
 ### High availability (HA)
 

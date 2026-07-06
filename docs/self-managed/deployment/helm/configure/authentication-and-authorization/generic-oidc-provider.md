@@ -21,7 +21,7 @@ Before you begin, ensure you have:
 - An OIDC-compliant provider already deployed and accessible.
 - Administrative access to create and configure OIDC clients in your provider.
 - Access to your provider's discovery document to obtain endpoint URLs.
-- A Kubernetes cluster with Helm 3.x installed.
+- A Kubernetes cluster with the Helm CLI v4 installed.
 - kubectl configured to access your cluster.
 
 :::note
@@ -307,9 +307,9 @@ orchestration:
 :::note Username display in Web Modeler (Helm)
 In Helm deployments, the default OIDC username claim is `preferred_username`, which often maps to an email address.
 
-If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
+If you want Web Modeler to display usernames based on a different claim (for example `name`), set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Web Modeler `restapi` environment.
 
-For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md#identity--keycloak-1).
+For available Web Modeler environment variables, see [Identity/Keycloak configuration](/self-managed/components/hub/configuration/properties.md#identity--keycloak-1).
 :::
 
 #### Default roles
@@ -376,7 +376,7 @@ optimize:
 Web Modeler requires two OIDC clients: one for the UI (public) and one for the API (confidential).
 
 :::note
-If your IdP provides user-friendly names in the `name` claim and you want Web Modeler to use that claim, configure the Web Modeler `restapi` environment variable `CAMUNDA_IDENTITY_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
+If your IdP provides user-friendly names in the `name` claim, and you want Web Modeler to use that claim, configure the Web Modeler `restapi` environment variable `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name`. Without this override, Helm defaults typically resolve usernames from `preferred_username`.
 :::
 
 ```yaml
@@ -419,7 +419,7 @@ webModelerPostgresql:
 
 Web Modeler requires email configuration for notifications. Update `restapi.mail.fromAddress` with an appropriate sender address.
 
-For full SMTP configuration, see [Web Modeler configuration](/self-managed/components/modeler/web-modeler/configuration/configuration.md).
+For full SMTP configuration, see [Web Modeler configuration](/self-managed/components/hub/configuration/properties.md).
 
 ### Configure Console
 

@@ -11,9 +11,11 @@ Install Camunda 8 Self-Managed manually on a VM, bare-metal server, or standalon
 Manual installation is **not** supported for Kubernetes. If you run on Kubernetes, use the [Helm charts](/self-managed/deployment/helm/index.md).
 :::
 
-## Secondary storage architecture
+## Manual deployment data flow
 
-The Orchestration Cluster reads from a single configured secondary storage type (RDBMS in this deployment). However, the Zeebe broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and an Elasticsearch/OpenSearch exporter for Optimize.
+For backend trade-offs and production architecture decisions, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
+
+In this manual deployment path, the Orchestration Cluster reads from a single configured secondary storage type: RDBMS. However, the Zeebe Broker can export to multiple targets simultaneously. If you deploy Optimize, configure both the RDBMS exporter (for Orchestration Cluster operations) and an Elasticsearch/OpenSearch exporter for Optimize.
 
 ```mermaid
 graph LR
@@ -53,9 +55,9 @@ graph LR
 
 **Key points:**
 
-- Operate, Tasklist, and Admin use the Orchestration Cluster API, and that API reads from the configured secondary storage (RDBMS).
+- Operate, Tasklist, and Admin use the Orchestration Cluster API rather than reading directly from secondary storage. The Orchestration Cluster API reads from the configured secondary storage (RDBMS).
 - Optimize requires Elasticsearch or OpenSearch and reads and writes directly to it.
-- The Zeebe broker can export to multiple targets simultaneously to support this architecture.
+- The Zeebe Broker can export to multiple targets simultaneously to support this architecture.
 
 ## Supported installation targets
 
@@ -83,7 +85,7 @@ The Orchestration Cluster is fully supported with RDBMS secondary storage for wo
 
 1. [Configure drivers and connections](/self-managed/deployment/manual/rdbms/configuration.md).
 2. Review [operations and maintenance](/self-managed/deployment/manual/rdbms/operations.md) for backup, upgrades, troubleshooting, and tuning.
-3. Review the [production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for sizing and topology guidance.
+3. Review [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) for backend trade-offs and [manual production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for manual deployment topology guidance.
 
 ## Related documentation
 

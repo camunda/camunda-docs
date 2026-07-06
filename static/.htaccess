@@ -46,8 +46,24 @@ AddType text/plain      graphqls
 # Add diff mime type
 AddType text/plain      diff
 
+# Content negotiation: serve .md when Accept: text/markdown is requested
+# Only applies to /docs/ paths that are not already static assets or .md files
+RewriteCond %{HTTP_ACCEPT} text/markdown
+RewriteCond %{REQUEST_URI} ^/docs/
+RewriteCond %{REQUEST_URI} !\.(md|js|css|png|jpg|svg|json|xml|yaml|bpmn|pdf)$
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}.md -f [OR]
+RewriteCond %{DOCUMENT_ROOT}/%{REQUEST_URI}index.md -f
+RewriteRule ^(docs/.+?)/?$ /$1.md [L]
+
+# Ensure Vary: Accept header is set on docs pages for proper caching
+SetEnvIf Request_URI "^/docs/" DOCS_PATH
+Header append Vary Accept env=DOCS_PATH
+
 # workaround for 404 with trailing slashes https://github.com/camunda-cloud/camunda-cloud-documentation/issues/403
 RewriteRule ^(.*\.(yaml|bpmn|xml|png|jpeg|jpg|yml|pdf|svg|graphqls|diff))/$ /$1 [R=301,L]
+
+## Redirect for case-sensitive llms.txt
+RewriteRule ^LLMs\.txt$ /llms.txt [R=301,L]
 
 ##################################################################################
 # 2. Broad version (or unversioned) redirects
@@ -76,6 +92,7 @@ RewriteRule ^optimize/3.10.0/(.*)$ https://unsupported.docs.camunda.io/8.2/optim
 RewriteRule ^docs/8.3/(.*)$ https://unsupported.docs.camunda.io/8.3/docs/$1 [R=301,L]
 RewriteRule ^docs/8.4/(.*)$ https://unsupported.docs.camunda.io/8.4/docs/$1 [R=301,L]
 RewriteRule ^docs/8.5/(.*)$ https://unsupported.docs.camunda.io/8.5/docs/$1 [R=301,L]
+RewriteRule ^docs/8.6/(.*)$ https://unsupported.docs.camunda.io/8.6/docs/$1 [R=301,L]
 
 # Timeless classics.
 # rules required after update to docusaurus 2.0.0-beta.15 see https://github.com/camunda-cloud/camunda-cloud-documentation/pull/531
@@ -121,6 +138,10 @@ RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/rest/? /docs/components/connectors/protocol/rest/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/connectors/available-connectors/sendgrid/? /docs/components/connectors/out-of-the-box-connectors/sendgrid/ [R=301,L]
 RewriteRule ^docs/next/components/connectors/out-of-the-box-connectors/operate/?$ /docs/next/reference/announcements-release-notes/890/890-announcements/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-long-term-memory/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
+RewriteRule ^docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-knowledgebase/?$ /docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/ [R=301,L]
 
 
 ## Reabsorbed Optimize docs
@@ -160,7 +181,104 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 #   8.10 (next): add vNext redirects here while the docs live under /docs/next/.
 #---------------------------------------------------------------------------------
 
-# Fix broken links from camunda-platform-get-started README
+# Bitnami subcharts are dropped in 8.10 (Helm chart 15.x); the "migrate from Bitnami" procedure is 8.9-only.
+# The next sub-pages were removed in favor of a stub index that links to the 8.9 guide (PR #9013).
+RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+
+# Console telemetry page removed; monitoring is the closest replacement
+RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
+
+# Administration SM API removed; replaced by Camunda Hub
+RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-overview/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-authentication/?$ /docs/next/apis-tools/web-modeler-api/authentication/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+
+# Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
+RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/tasklist-api-rest/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/testing/zeebe-process-test/?$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-process-test/ [R=301,L]
+RewriteRule ^docs/next/components/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions/?$ /docs/next/components/tasklist/user-task-authorization/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/?$ /docs/next/components/tasklist/userguide/starting-processes/ [R=301,L]
+
+# Redirects associated with Camunda Hub
+RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-members/manage-user-groups [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-members/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
+RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
+
+# Process applications - specific renamed files
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/?$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-application-versioning/?$ /docs/next/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-application-pipeline/?$ /docs/next/components/hub/workspace/manage-projects/project-pipeline/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/create-a-process-application/?$ /docs/next/components/hub/workspace/manage-projects/create-a-project/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/deploy-process-application/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/hub/workspace/manage-projects/git-sync/ [R=301,L]
+
+# Process applications - general redirect
+RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
+
+# Web Modeler moved to Hub Workspace Modeler - specific renamed files
+RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/launch-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /docs/next/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/hub/workspace/modeler/modeling/camunda-marketplace/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/hub/workspace/modeler/modeling/file-download/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/import-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/next/components/hub/workspace/modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/components/hub/workspace/modeler/modeling/versions/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-scenario-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/design-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/design-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ /docs/next/components/hub/workspace/modeler/collaboration/collaborate-with-modes/ [R=301,L]
+
+# Web Modeler moved to Hub Workspace Modeler - general redirect
+RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
+
+# Move Console and Web Modeler docs to Camunda Hub (next version)
+RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/usage-metrics/?$ /docs/next/self-managed/components/hub/usage-metrics/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/monitoring/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/database/?$ /docs/next/self-managed/components/hub/configuration/database/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/identity/?$ /docs/next/self-managed/components/hub/configuration/identity/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/logging/?$ /docs/next/self-managed/components/hub/configuration/logging/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/copilot/?$ /docs/next/self-managed/components/hub/configuration/copilot/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-database-connection/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-missing-data/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-proxy-configuration/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-proxy-configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-other-problems/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-other-problems/ [R=301,L]
 
 # Get started with Optimize
 RewriteRule ^docs/next/guides/improve-processes-with-optimize/?$ /docs/next/components/optimize/improve-processes-with-optimize/ [R=301,L]
@@ -175,7 +293,7 @@ RewriteRule ^docs/next/guides/getting-started/?$ /docs/components/saas/ [R=301,L
 RewriteRule ^docs/guides/create-cluster/?$ /docs/components/console/manage-clusters/create-cluster/ [R=301,L]
 
 # Service task (microservice orchestration)
-RewriteRule ^docs/next/guides/orchestrate-microservices/?$ /docs/8.6/guides/orchestrate-microservices/ [R=301,L]
+RewriteRule ^docs/next/guides/orchestrate-microservices/?$ /docs/8.7/guides/orchestrate-microservices/ [R=301,L]
 
 # Connect to a mail provider
 RewriteRule ^docs/next/guides/configuring-out-of-the-box-connectors/?$ /docs/components/connectors/use-connectors/configuring-out-of-the-box-connectors/ [R=301,L]
@@ -214,7 +332,7 @@ RewriteRule ^docs/self-managed/deployment/helm/upgrade/?$ /docs/self-managed/upg
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-820-830/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-830-840/?$ https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-840-850/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/ [R=301,L]
-RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/8.6/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-860-870/?$ /docs/8.7/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region/?$ /docs/self-managed/upgrade/helm/870-to-880-dual-region/ [R=301,L]
 RewriteRule ^docs/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
@@ -226,6 +344,22 @@ RewriteRule ^docs/components/agentic-orchestration/?$ /docs/components/agentic-o
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
+
+# Web Modeler product links pre 8.10:
+# Before 8.10, these links were hardcoded in the product, so we have to maintain them until those versions are no longer supported.
+# Starting with 8.10, the product moved to pinned version links using /docs/8.10. These can, therefore, be removed with version 8.9.
+RewriteRule ^docs/components/connectors/protocol/webhook/$ /docs/components/connectors/protocol/http-webhook/ [R=301,L]
+RewriteRule ^docs/components/integration-framework/connectors/out-of-the-box-connectors/rest/$ /docs/components/connectors/protocol/rest/ [R=301,L]
+RewriteRule ^docs/components/tasklist/userguide/overview/$ /docs/components/tasklist/userguide/using-tasklist/ [R=301,L]
+RewriteRule ^docs/guides/orchestrate-api-endpoints/$ /docs/guides/orchestrate-apis/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/cli-client/$ /docs/next/apis-tools/c8ctl/getting-started/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/community-clients/c-sharp/$ /docs/next/apis-tools/csharp-sdk/ [R=301,L]
+RewriteRule ^docs/next/apis-clients/go-client/$ https://unsupported.docs.camunda.io/8.5/docs/apis-tools/go-client/go-get-started/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/camunda-api-rest/specifications/create-document-link/$ /docs/next/apis-tools/orchestration-cluster-api-rest/specifications/create-document-link/ [R=301,L]
+RewriteRule ^docs/next/guides/setup-client-connection-credentials$ /docs/components/console/introduction-to-console/ [R=301,L]
+RewriteRule ^docs/product-manuals/tasklist/introduction$ /docs/components/tasklist/introduction-to-tasklist/ [R=301,L]
+RewriteRule ^docs/product-manuals/tasklist/userguide/camunda-forms$ /docs/components/modeler/forms/camunda-forms-reference/ [R=301,L]
+RewriteRule ^docs/self-managed/operate-deployment/configuration/$ /docs/self-managed/components/orchestration-cluster/operate/operate-configuration/ [R=301,L]
 
 # APIs & tools migration guide root
 RewriteRule ^docs/apis-tools/migration-manuals/?$ /docs/apis-tools/migration-manuals/migrate-to-89/ [R=301,L]
@@ -273,7 +407,7 @@ RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/?$ /docs/next/self-m
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-820-830/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/operational-guides/update-guide/820-to-830/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-830-840/?$ https://unsupported.docs.camunda.io/8.4/docs/self-managed/platform-deployment/helm-kubernetes/upgrade/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-840-850/?$ https://unsupported.docs.camunda.io/8.5/docs/self-managed/setup/upgrade/ [R=301,L]
-RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ /docs/8.6/self-managed/setup/upgrade [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-850-860/?$ https://unsupported.docs.camunda.io/8.6/docs/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-860-870/?$ /docs/8.7/self-managed/setup/upgrade [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880-dual-region/?$ /docs/self-managed/upgrade/helm/870-to-880-dual-region/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/upgrade/upgrade-hc-870-880/?$ /docs/self-managed/upgrade/helm/870-to-880/ [R=301,L]
@@ -333,9 +467,35 @@ RewriteRule ^docs/reference/announcements-release-notes/850/(.*)$ /docs/referenc
 RewriteRule ^docs/8.7/reference/announcements-release-notes/850/(.*)$ /docs/8.7/reference/announcements-release-notes/overview/$1 [R=301,L]
 RewriteRule ^docs/8.7/reference/announcements-release-notes/850/850-announcements/?$ /docs/8.7/reference/announcements-release-notes/overview/ [R=301,L]
 RewriteRule ^docs/8.7/reference/announcements-release-notes/850/850-release-notes/?$ /docs/8.7/reference/announcements-release-notes/overview/ [R=301,L]
-RewriteRule ^docs/8.6/reference/announcements-release-notes/850/(.*)$ /docs/8.6/reference/announcements-release-notes/overview/$1 [R=301,L]
-RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-announcements/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
-RewriteRule ^docs/8.6/reference/announcements-release-notes/850/850-release-notes/?$ /docs/8.6/reference/announcements-release-notes/overview/ [R=301,L]
+
+# Removal of 8.6 announcements/release notes
+RewriteRule ^docs/next/reference/announcements-release-notes/860/(.*)$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements-release-notes/860/860-announcements/?$ /docs/next/reference/announcements-release-notes/overview/ [R=301,L]
+RewriteRule ^docs/reference/announcements-release-notes/860/860-release-notes/?$ /docs/next/reference/announcements-release-notes/overview/ [R=301,L]
+RewriteRule ^docs/reference/announcements-release-notes/860/860-announcements/?$ /docs/reference/announcements-release-notes/overview/ [R=301,L]
+RewriteRule ^docs/reference/announcements-release-notes/860/860-release-notes/?$ /docs/reference/announcements-release-notes/overview/ [R=301,L]
+RewriteRule ^docs/reference/announcements-release-notes/860/(.*)$ /docs/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/announcements-release-notes/860/(.*)$ /docs/8.7/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/8.7/reference/announcements-release-notes/860/860-announcements/?$ /docs/8.7/reference/announcements-release-notes/overview/ [R=301,L]
+RewriteRule ^docs/reference/release-notes/860/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
+RewriteRule ^docs/reference/announcements/announcements-860/?$ /docs/next/reference/announcements-release-notes/overview/$1 [R=301,L]
+
+# Support 8.6 connectors element template links
+RewriteRule ^docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-sagemaker/?$ https://unsupported.docs.camunda.io/8.6/docs/components/connectors/out-of-the-box-connectors/amazon-sagemaker/ [R=301,L]
+RewriteRule ^docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/amazon-textract/?$ https://unsupported.docs.camunda.io/8.6/docs/components/connectors/out-of-the-box-connectors/amazon-textract/ [R=301,L]
+RewriteRule ^docs.camunda.io/docs/8.6/components/connectors/out-of-the-box-connectors/sql/(.*)$ https://unsupported.docs.camunda.io/8.6/docs/components/connectors/out-of-the-box-connectors/sql/$1 [R=301,L]
+
+# Removed Desktop Modeler variables page (8.9)
+RewriteRule ^docs/next/components/modeler/desktop-modeler/variables/?$ /docs/next/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/8.9/components/modeler/desktop-modeler/variables/?$ /docs/8.9/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/desktop-modeler/variables/?$ /docs/8.8/components/modeler/data-handling/ [R=301,L]
+RewriteRule ^docs/components/modeler/desktop-modeler/variables/?$ /docs/components/modeler/data-handling/ [R=301,L]
+
+# Removed Web Modeler context pad page, merged into model-your-first-diagram (8.9)
+RewriteRule ^docs/next/components/modeler/web-modeler/modeling/context-pad/?$ /docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/8.9/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.9/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.8/components/modeler/web-modeler/model-your-first-diagram/ [R=301,L]
+RewriteRule ^docs/components/modeler/web-modeler/modeling/context-pad/?$ /docs/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
@@ -347,37 +507,6 @@ RewriteRule ^docs/8.8/self-managed/deployment/helm/configure/vendor-supported-in
 RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
 
 # Restructure Web Modeler Docs (8.8)
-## Web Modeler folder restructure - moved to modeling/
-RewriteRule ^docs/next/components/modeler/web-modeler/camunda-marketplace/?$ /docs/next/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/context-pad/?$ /docs/next/components/modeler/web-modeler/modeling/context-pad/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/file-download/?$ /docs/next/components/modeler/web-modeler/modeling/file-download/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/fix-problems-in-your-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/fix-problems-in-your-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/import-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/import-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/model-your-first-diagram/?$ /docs/next/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/versions/?$ /docs/next/components/modeler/web-modeler/modeling/versions/ [R=301,L]
-
-## Web Modeler folder restructure - moved to modeling/advanced-modeling/
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/business-rule-task-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/business-rule-task-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/call-activity-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/call-activity-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/camunda-docs-ai/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/camunda-docs-ai/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-linking/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/form-linking/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/web-modeler/modeling/advanced-modeling/refactoring-suggestions/ [R=301,L]
-
-## Web Modeler folder restructure - moved to validation/
-RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/modeler/web-modeler/validation/play-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/modeler/web-modeler/validation/task-testing/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/modeler/web-modeler/validation/test-scenario-files/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/modeler/web-modeler/validation/token-simulation/ [R=301,L]
-
-## Web Modeler folder restructure - moved to process-applications/
-RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/components/modeler/web-modeler/process-applications/git-sync/ [R=301,L]
-
-## Web Modeler folder restructure - moved to collaboration/
-RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/modeler/web-modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
-
 ## Current Web Modeler folder restructure
 RewriteRule ^docs/components/modeler/web-modeler/camunda-marketplace/?$ /docs/components/modeler/web-modeler/modeling/camunda-marketplace/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/context-pad/?$ /docs/components/modeler/web-modeler/modeling/context-pad/ [R=301,L]
@@ -592,7 +721,6 @@ RewriteRule ^docs/self-managed/components/orchestration-cluster/tasklist/usage-m
 # Remove Helm chart multi-namespace deployment
 RewriteRule ^docs/self-managed/deployment/helm/configure/multi-namespace-deployment/?$ /docs/self-managed/deployment/helm/install/production/ [R=301,L]
 RewriteRule ^docs/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/setup/guides/multi-namespace-deployment/?$ /docs/self-managed/operational-guides/production-guide/helm-chart-production-guide/ [R=301,L]
 
 # Rename Self-Managed installation methods (8.8)
 RewriteRule ^docs/self-managed/installation-methods/(.*)$ /docs/next/self-managed/deployment/ [R=301,L]
@@ -718,10 +846,8 @@ RewriteRule ^docs/8.7/self-managed/document-handling/(.*)$ /docs/8.7/self-manage
 
 # Remove Starter Plan
 RewriteRule ^docs/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
-RewriteRule ^docs/8.6/components/console/manage-plan/upgrade-to-starter-plan/?$ /docs/8.6/components/console/manage-plan/upgrade-to-enterprise-plan/ [R=301,L]
 
 RewriteRule ^docs/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/components/console/manage-plan/available-plans/ [R=301,L]
-RewriteRule ^docs/8.6/components/console/manage-plan/migrate-from-prof-to-starter/?$ /docs/components/console/manage-plan/available-plans/ [R=301,L]
 
 RewriteRule ^docs/components/console/manage-plan/cancel-starter-subscription/?$ /docs/components/console/manage-plan/available-plans/ [R=301,L]
 RewriteRule ^docs/components/console/manage-plan/retrieve-invoices-or-update-billing-info/?$ /docs/components/console/manage-plan/available-plans/ [R=301,L]
@@ -805,7 +931,6 @@ RewriteRule ^docs/8.7/self-managed/operational-guides/update-guide/820-to-830/(.
 # Rename indices page
 RewriteRule ^docs/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
 RewriteRule ^docs/8.7/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.7/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/setup/guides/prefix-elasticsearch-opensearch-indices/(.*)$ /docs/8.6/self-managed/setup/guides/prefix-elasticsearch-indices/ [R=301,L]
 
 # Remove Tasklist GraphQL API in 8.8
 RewriteRule ^docs/apis-tools/tasklist-api/(.*)$ /docs/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview/ [R=301,L]
@@ -872,47 +997,19 @@ RewriteRule ^docs/self-managed/concepts/access-control/apis/?$ /docs/self-manage
 RewriteRule ^docs/self-managed/components/management-identity/install-identity/?$ /docs/self-managed/components/management-identity/overview/ [R=301,L]
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
 
-# Restructure Identity Docs (8.6)
-RewriteRule ^docs/8.6/self-managed/setup/guides/using-existing-keycloak/?$ /docs/8.6/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/setup/guides/connect-to-an-oidc-provider/?$ /docs/8.6/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/applications/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/resource-authorizations/?$ /docs/8.6/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/user-task-access-restrictions/?$ /docs/8.6/self-managed/components/tasklist/user-task-access-restrictions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/mapping-rules/?$ /docs/8.6/self-managed/components/management-identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/getting-started/install-identity/?$ /docs/8.6/self-managed/components/management-identity/install-identity/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/making-identity-production-ready/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/making-identity-production-ready/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/configure-external-identity-provider/?$ /docs/8.6/self-managed/components/management-identity/configuration/configure-external-identity-provider/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/configure-logging/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/configure-logging/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/connect-to-an-existing-keycloak/?$ /docs/8.6/self-managed/components/management-identity/configuration/connect-to-an-existing-keycloak/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-roles/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/manage-roles/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-permissions/?$ /docs/8.6/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-groups/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/manage-groups/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/managing-resource-authorizations/?$ /docs/8.6/self-managed/components/management-identity/access-management/resource-authorizations/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/managing-user-access/?$ /docs/8.6/self-managed/components/management-identity/access-management/manage-permissions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/authorizations/generating-m2m-tokens/?$ /docs/8.6/self-managed/components/management-identity/authentication/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/tenants/managing-tenants/?$ /docs/8.6/self-managed/components/management-identity/manage-tenants/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/8.6/self-managed/components/management-identity/mapping-rules/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/additional-features/adding-an-api/?$ /docs/8.6/self-managed/components/management-identity/access-management/access-management-overview/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/additional-features/incorporate-applications/?$ /docs/8.6/self-managed/components/management-identity/application-user-group-role-management/applications/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/configuration-variables/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/configuration-variables/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/application-monitoring/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/application-monitoring/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/starting-configuration-for-identity/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/starting-configuration/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/deployment/resource-management/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/resource-management/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/troubleshooting/troubleshoot-identity/?$ /docs/8.6/self-managed/components/management-identity/miscellaneous/troubleshoot-identity/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/concepts/access-control/apis/?$ /docs/8.6/self-managed/components/management-identity/access-management/access-management-overview [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/install-identity/?$ /docs/8.6/self-managed/components/management-identity/identity-first-steps/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/configuration/alternative-db/?$ /docs/8.6/self-managed/components/management-identity/configuration/alternative-db/ [R=301,L]
-
 # Remove V2 REST user search API from 8.7 and 8.8 docs
 RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api/ [R=301,L]
-RewriteRule ^docs/8.6/apis-tools/camunda-api-rest/specifications/find-all-users/?$ /docs/apis-tools/camunda-api-rest/specifications/camunda-8-rest-api/ [R=301,L]
 
 # Move SAP integrations page to a new folder
 RewriteRule ^docs/components/camunda-integrations/sap/?$ /docs/components/camunda-integrations/sap/sap-integration/ [R=301,L]
 
 # Restructure Agentic AI docs
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-example/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/analyze-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/analyze-ai-agents/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/monitor-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/monitor-ai-agents/ [R=301,L]
+RewriteRule ^docs/components/agentic-orchestration/test-ai-agents/?$ /docs/components/agentic-orchestration/evaluate-agents/test-ai-agents/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/analyze-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/analyze-ai-agents/ [R=301,L]
+RewriteRule ^docs/8.8/components/agentic-orchestration/monitor-ai-agents/?$ /docs/8.8/components/agentic-orchestration/evaluate-agents/monitor-ai-agents/ [R=301,L]
 
 RewriteRule ^docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
 RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-process-example/?$ /docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example/ [R=301,L]
@@ -923,7 +1020,6 @@ RewriteRule ^docs/8.8/components/connectors/out-of-the-box-connectors/agentic-ai
 # Restructure Backup and restore guide
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 RewriteRule ^docs/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/operational-guides/backup-restore/modeler-backup-and-restore/?$ /docs/8.6/self-managed/operational-guides/backup-restore/backup-and-restore/ [R=301,L]
 
 # Restructure Using Camunda section and content moves
 RewriteRule ^docs/components/whats-new-in-88/?$ /docs/reference/announcements-release-notes/880/whats-new-in-88/ [R=301,L]
@@ -943,22 +1039,16 @@ RewriteRule ^docs/reference/saas-ip-addresses/?$ /docs/components/saas/saas-ip-a
 # Identity user guide "manage" pages
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/roles/add-assign-permission/?$ /docs/self-managed/components/management-identity/user-guide/roles/manage-permissions/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/add-assign-permission/?$ /docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-permissions/ [R=301,L]
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/groups/create-group/?$ /docs/self-managed/components/management-identity/user-guide/groups/manage-groups/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/create-group/?$ /docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-groups/ [R=301,L]
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/groups/assign-users-roles-to-group/?$ /docs/8.6/self-managed/components/management-identity/user-guide/groups/manage-users-roles-to-group/ [R=301,L]
 
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/roles/add-assign-role/?$ /docs/self-managed/components/management-identity/user-guide/roles/manage-roles/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/components/management-identity/user-guide/roles/add-assign-role/?$ /docs/8.6/self-managed/components/management-identity/user-guide/roles/manage-roles/ [R=301,L]
 
 # Remove go and zbctl pages, redirect to CCH
 RewriteRule ^docs/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
 RewriteRule ^docs/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
-RewriteRule ^docs/8.6/apis-tools/community-clients/cli-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md [R=301,L]
-RewriteRule ^docs/8.6/apis-tools/community-clients/go-client/(.*)$ https://github.com/camunda-community-hub/zeebe-client-go [R=301,L]
 
 # Remove meta page
 RewriteRule ^meta/ / [R=301,L]
@@ -968,10 +1058,8 @@ RewriteRule ^docs/components/early-access/sap/?$ /docs/components/camunda-integr
 
 # Reroute element templates and HTTL to C7 docs
 RewriteRule ^docs/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
-RewriteRule ^docs/8.6/components/modeler/desktop-modeler/element-templates/c7-defining-templates/(.*)$ https://docs.camunda.org/manual/latest/modeler/element-templates/ [R=301,L]
 
 RewriteRule ^docs/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
-RewriteRule ^docs/8.6/components/modeler/reference/modeling-guidance/rules/history-time-to-live/(.*)$ https://docs.camunda.org/manual/latest/modeler/history-time-to-live/ [R=301,L]
 
 # Remove event ingestion from 3.14
 RewriteRule ^optimize/apis-tools/optimize-api/event-ingestion/(.*)$ /optimize/apis-tools/optimize-api/overview/$1 [R=301,L]
@@ -986,8 +1074,6 @@ RewriteRule ^docs/apis-tools/camunda-api-rest/specifications/report-error-for-jo
 RewriteRule ^docs/reference/release-notes/870/?$ /docs/reference/announcements-release-notes/870/870-release-notes/ [R=301,L]
 RewriteRule ^docs/reference/announcements/announcements-850/?$ /docs/reference/announcements-release-notes/850/850-announcements/ [R=301,L]
 RewriteRule ^docs/reference/release-notes/850/?$ /docs/reference/announcements-release-notes/850/850-release-notes/ [R=301,L]
-RewriteRule ^docs/reference/announcements/announcements-860/?$ /docs/reference/announcements-release-notes/860/860-announcements/ [R=301,L]
-RewriteRule ^docs/reference/release-notes/860/?$ /docs/reference/announcements-release-notes/860/860-release-notes/ [R=301,L]
 RewriteRule ^docs/reference/release-policy/?$ /docs/reference/announcements-release-notes/release-policy/ [R=301,L]
 RewriteRule ^docs/reference/release-notes/release-notes/?$ /docs/reference/announcements-release-notes/overview/ [R=301,L]
 RewriteRule ^docs/reference/release-notes/?$ /docs/reference/announcements-release-notes/overview/ [R=301,L]
@@ -1024,11 +1110,11 @@ RewriteRule ^optimize/self-managed/components/optimize/advanced-features/import-
 RewriteRule ^optimize/self-managed/components/optimize/advanced-features/engine-data-deletion/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 
 # Finalize the renaming of Console SM API to Administration API (Self-Managed)
+# This was removed with the introduction of Camunda Hub. When 8.10 becomes the next "current" docs, we should redirect to the Hub API SM.
 RewriteRule ^docs/apis-tools/administration-sm-api/specifications/sm-admin(istration)?-api/?$ /docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed/ [R=301,L]
 
 # Move migrating to Zeebe user tasks
 RewriteRule ^docs/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/ [R=301,L]
-RewriteRule ^docs/8.6/apis-tools/tasklist-api-rest/migrate-to-zeebe-user-tasks/?$ /docs/8.6/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/ [R=301,L]
 RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-zeebe-user-tasks/?$ /docs/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/ [R=301,L]
 
 # Remove community clients
@@ -1047,7 +1133,6 @@ RewriteRule ^docs/components/connectors/custom-built-connectors/update-guide/(.*
 
 # Remove outdated message correlation guide
 RewriteRule ^docs/guides/message-correlation/?$ /docs/guides/ [R=301,L]
-RewriteRule ^docs/8.6/guides/message-correlation/?$ /docs/guides/ [R=301,L]
 
 # Remove the Getting Started partials as full pages
 RewriteRule ^docs/guides/react-components/sm-prerequisites/?$ /docs/guides/ [R=301,L]
@@ -1058,11 +1143,9 @@ RewriteRule ^docs/guides/react-components/install-c8run/?$  /docs/guides/ [R=301
 
 # Move logging from troubleshooting to monitoring
 RewriteRule ^docs/8.7/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.7/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
-RewriteRule ^docs/8.6/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
-RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/8.6/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
+RewriteRule ^docs/self-managed/operational-guides/troubleshooting/log-levels/?$ /docs/self-managed/operational-guides/monitoring/log-levels/ [R=301,L]
 
 # Move metrics from zeebe-deployment to monitoring
-RewriteRule ^docs/8.6/self-managed/components/orchestration-cluster/zeebe/operations/metrics/?$ /docs/8.6/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/operations/metrics/?$ /docs/self-managed/operational-guides/monitoring/metrics/ [R=301,L]
 
 # Move alpha features to components
@@ -1090,117 +1173,6 @@ RewriteRule ^docs/components/camunda-integrations/sap/?$ /docs/components/camund
 
 # Move mapping rules docs to new location in 8.8
 RewriteRule ^docs/self-managed/components/management-identity/user-guide/mapping-rules/managing-mapping-rules/?$ /docs/self-managed/components/management-identity/orchestration-identity/mapping-rules/managing-mapping-rules/ [R=301,L]
-#---------------------------------------------------------------------------------
-#   8.6: content moves introduced prior to the release of version 8.6.
-#---------------------------------------------------------------------------------
-
-# Move Go and CLI client to community section
-RewriteRule ^docs/apis-tools/cli-client/(.*)$ /docs/next/apis-tools/community-clients/cli-client/$1 [R=301,L]
-RewriteRule ^docs/apis-tools/go-client/(.*)$ /docs/next/apis-tools/community-clients/go-client/$1 [R=301,L]
-
-# Remove rename, resume, update, and delete a cluster
-RewriteRule ^docs/components/console/manage-clusters/rename-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-clusters/resume-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-clusters/update-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-RewriteRule ^docs/components/console/manage-clusters/delete-cluster/?$ /docs/components/console/manage-clusters/manage-cluster/$1 [R=301,L]
-
-# Remove community-supported Spring Zeebe SDK
-RewriteRule ^docs/apis-tools/community-clients/spring/?$ /docs/apis-tools/spring-zeebe-sdk/getting-started/$1 [R=301,L]
-# Rename Console SM to Administration API (Self-Managed)
-RewriteRule ^docs/apis-tools/console-sm-api/(.*)$ /docs/apis-tools/administration-sm-api/$1 [R=301,L]
-
-#remove SM Architecture page
-RewriteRule ^docs/self-managed/platform-architecture/overview/?$ /docs/self-managed/about-self-managed/$1 [R=301,L]
-
-# remove tasklist API + Spring Zeebe tutorial
-RewriteRule ^docs/apis-tools/tasklist-api-rest/tasklist-api-rest-tutorial/?$ /docs/apis-tools/tasklist-api-rest/tasklist-api-rest-overview/$1 [R=301,L]
-
-# remove unmaintained versions
-RewriteRule ^docs/self-managed/operational-guides/update-guide/800-to-810/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/self-managed/operational-guides/update-guide/130-to-800/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-RewriteRule ^docs/self-managed/operational-guides/update-guide/810-to-820/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-
-# redirect new-context-pad to context-pad
-RewriteRule ^docs/components/modeler/web-modeler/new-context-pad/?$ /docs/components/modeler/web-modeler/context-pad/$1 [R=301,L]
-
-# Remove Cawemo
-RewriteRule ^docs/guides/migrating-from-cawemo/?$ https://docs.camunda.org/enterprise/announcement/#cawemo-saas-announcements [R=301,L]
-
-# Move Help Center
-RewriteRule ^docs/guides/camunda-help-center/(.*)$ /docs/reference/camunda-help-center/$1 [R=301,L]
-
-# Removing telemetry page
-RewriteRule ^optimize/self-managed/components/optimize/configuration/telemetry/(.*)$ /optimize/self-managed/components/optimize/configuration/getting-started/$1 [R=301,L]
-
-# Remove updating-tasklist pages
-RewriteRule ^docs/components/tasklist/userguide/updating-tasklist-cloud/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-
-RewriteRule ^docs/self-managed/components/tasklist/updating-tasklist/?$ /docs/self-managed/operational-guides/update-guide/introduction/$1 [R=301,L]
-
-# Remove community Node Zeebe page
-RewriteRule ^docs/apis-tools/community-clients/javascript/?$ /docs/apis-tools/node-js-sdk/$1 [R=301,L]
-
-# Remove "new web modeler" page, re-route to launch-web-modeler rather than launch-cloud-modeler
-RewriteRule ^docs/components/modeler/web-modeler/new-web-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
-RewriteRule ^docs/components/modeler/web-modeler/launch-cloud-modeler/?$ /docs/components/modeler/web-modeler/launch-web-modeler/$1 [R=301,L]
-
-## optimize splitting of upgrade guides
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/2.1-to-2.2/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/2.1-to-2.2/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/2.2-to-2.3/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/2.2-to-2.3/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/2.3-to-2.4/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/2.3-to-2.4/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/2.4-to-2.5/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/2.4-to-2.5/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/2.5-to-2.6/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/2.5-to-2.6/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/2.6-to-2.7/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/2.6-to-2.7/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/2.7-to-3.0/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/2.7-to-3.0/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.0-to-3.1/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/3.0-to-3.1/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.1-to-3.2/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/3.1-to-3.2/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.2-to-3.3/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/3.2-to-3.3/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.3-to-3.4/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/3.3-to-3.4/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.4-to-3.5/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/3.4-to-3.5/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.5-to-3.6/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/3.5-to-3.6/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.6-to-3.7/?$ /optimize/self-managed/components/optimize/migration-update/camunda-7/3.6-to-3.7/ [R=301,L]
-
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.7-to-3.8/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/3.7-to-3.8/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.8-to-3.9-preview-1/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/3.8-to-3.9-preview-1/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.9-preview-1-to-3.9/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/3.9-preview-1-to-3.9/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.9-to-3.10/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/3.9-to-3.10/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.10-to-3.11_8.3/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/3.10-to-3.11_8.3/ [R=301,L]
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/3.13_8.5-to-8.6/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/3.13_8.5-to-8.6/ [R=301,L]
-
-RewriteRule ^optimize/self-managed/components/optimize/migration-update/instructions/?$ /optimize/self-managed/components/optimize/migration-update/camunda-8/instructions/ [R=301,L]
-
-# Updated web-modeler troubleshooting
-RewriteRule ^docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-login/?$ /docs/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-missing-data/ [R=301,L]
-
-# Migrating from Camunda 7 - Migration Tooling reorganization
-RewriteRule ^docs/guides/migrating-from-camunda-7/code-conversion/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/code-conversion/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/cockpit-plugin/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/config-examples/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-examples/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/config-properties/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/database/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/database/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/history/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/install/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/install/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/limitations/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/runtime/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/troubleshooting/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/variables/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables/ [R=301,L]
-RewriteRule ^docs/guides/migrating-from-camunda-7/data-migrator/version-compatibility/?$ /docs/guides/migrating-from-camunda-7/migration-tooling/version-compatibility/ [R=301,L]
-
-# Migrating from Camunda 7 - Migration Tooling reorganization (version 8.8)
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/code-conversion/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/code-conversion/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/cockpit-plugin/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/cockpit-plugin/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/config-examples/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-examples/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/config-properties/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/config-properties/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/database/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/database/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/history/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/history/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/install/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/install/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/limitations/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/limitations/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/runtime/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/runtime/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/troubleshooting/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/troubleshooting/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/variables/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/data-migrator/variables/ [R=301,L]
-RewriteRule ^docs/8.8/guides/migrating-from-camunda-7/data-migrator/version-compatibility/?$ /docs/8.8/guides/migrating-from-camunda-7/migration-tooling/version-compatibility/ [R=301,L]
 
 ##################################################################################
 #
