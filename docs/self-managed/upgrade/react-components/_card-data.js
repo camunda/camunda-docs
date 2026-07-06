@@ -18,6 +18,13 @@ export const overviewCards = [
 
 export const helmIndexCards = [
   {
+    link: "./890-to-8100",
+    title: "Upgrade Camunda 8.9 to 8.10 using Helm",
+    image: IconArrow,
+    description:
+      "Follow the main Helm upgrade guide to perform the required configuration changes, including the Camunda Hub consolidation, and run the Helm upgrade.",
+  },
+  {
     link: "./880-to-890",
     title: "Upgrade Camunda 8.8 to 8.9 using Helm",
     image: IconArrow,

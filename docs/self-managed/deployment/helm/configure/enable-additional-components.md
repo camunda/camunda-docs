@@ -53,6 +53,10 @@ If you enable Web Modeler, Console, or Optimize without enabling Management Iden
 
 ## Web Modeler
 
+:::info Consolidated into Camunda Hub in 8.10
+In 8.10, Web Modeler is part of **Camunda Hub**. The `webModeler.enabled` key is deprecated in favor of `camundaHub.enabled` and will be removed in a future version. The legacy `webModeler.*` keys continue to work, and any overrides can be placed under `camundaHub.webModeler.*`. See [Upgrade 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md#camunda-hub-console-and-web-modeler-consolidation).
+:::
+
 To enable Web Modeler, configure the required values in the Helm chart. For the full list of options, see the [Web Modeler Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
 - Set `webModeler.enabled: true` (disabled by default).
@@ -109,6 +113,10 @@ webModelerPostgresql:
 For more details, see the [Web Modeler Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
 
 ## Console
+
+:::info Consolidated into Camunda Hub in 8.10
+In 8.10, Console is no longer a standalone component. It is provided as an in-Modeler feature within **Camunda Hub**. The `console.enabled` key is deprecated in favor of `camundaHub.enabled` and will be removed in a future version. The legacy `console.*` keys continue to work, and any overrides can be placed under `camundaHub.console.*`. See [Upgrade 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md#camunda-hub-console-and-web-modeler-consolidation).
+:::
 
 Console Self-Managed is disabled by default in the Camunda 8 Helm chart. To enable it:
 
