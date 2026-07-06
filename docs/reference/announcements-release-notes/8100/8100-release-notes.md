@@ -36,7 +36,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Release date | Changelog(s)                                                                                        | Blog |
 | :----------- | :-------------------------------------------------------------------------------------------------- | :--- |
-| 07 July 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha3)</li></ul> | -    |
+| 14 July 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha3)</li></ul> | -    |
 
 ### Operate
 
