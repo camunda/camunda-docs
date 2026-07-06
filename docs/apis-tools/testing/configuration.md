@@ -1086,7 +1086,9 @@ camunda:
 Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
 
+:::note
 The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the chosen region. If you configure both a chat model and an embedding model through Bedrock, each model requires its own `bedrock:InvokeModel` grant — access to one does not imply access to the other.
+:::
 
 | Property                                  | Required                       | Type       | Description                                                                                    |
 | ----------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
@@ -1574,7 +1576,9 @@ camunda:
 It supports Bedrock long-term API keys or AWS IAM credentials. It falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
 
+:::note
 The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured embedding model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the chosen region. If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate `bedrock:InvokeModel` grant — access to one does not imply access to the other.
+:::
 
 | Property                                            | Required                       | Type       | Description                                                                                    |
 | --------------------------------------------------- | ------------------------------ | ---------- | ---------------------------------------------------------------------------------------------- |
@@ -1854,22 +1858,3 @@ CamundaProcessTestExtension extension = new CamundaProcessTestExtension()
 </TabItem>
 
 </Tabs>
-
-## Troubleshooting
-
-### Amazon Bedrock `AccessDeniedException`
-
-If a judge or semantic similarity assertion fails with an error like the following:
-
-```text
-dev.langchain4j.exception.AuthenticationException:
-software.amazon.awssdk.services.bedrockruntime.model.AccessDeniedException:
-User: arn:aws:iam::123456789012:user/my-user is not authorized to perform:
-bedrock:InvokeModel on resource: arn:aws:bedrock:eu-central-1::foundation-model/amazon.titan-embed-text-v2:0
-```
-
-This means the AWS principal does not have permission to invoke the specified model. To resolve:
-
-1. **Add the IAM permission.** Attach a policy that grants `bedrock:InvokeModel` on each model ARN you configured (both the chat model and the embedding model, if applicable). See the [AWS documentation on Bedrock IAM policy examples](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-perform-actions-pt).
-2. **Enable model access in the region.** Bedrock model access must be enabled per model, per region. A model that works in one region is not automatically available in another. See [Manage access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
-3. **Verify both models separately.** If you configured Bedrock for both the judge chat model and the similarity embedding model, verify that the IAM principal has `bedrock:InvokeModel` permission on both model ARNs. A common error is authorizing only the chat model (for example Claude) and forgetting the embedding model (for example Titan).
