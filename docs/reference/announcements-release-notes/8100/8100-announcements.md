@@ -326,13 +326,13 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 
 #### Individual component Docker images no longer produced
 
-Starting with Camunda 8.10 and Camunda 8.9.12, the following individual component Docker images will no longer be produced:
+Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
 
 - [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
 - [camunda/operate](https://hub.docker.com/r/camunda/operate)
 - [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 
-**Action:** Switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image before upgrading to Camunda 8.10 or Camunda 8.9.12+.
+**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>

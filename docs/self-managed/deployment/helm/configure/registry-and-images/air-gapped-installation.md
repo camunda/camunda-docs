@@ -108,11 +108,11 @@ All required images published on Docker Hub (Camunda and Bitnami organizations) 
 - `registry.camunda.cloud/camunda/<image>`
 - `registry.camunda.cloud/bitnami/<image>`
 
-For example, you can pull the Zeebe and PostgreSQL images from Docker Hub or the Camunda registry:
+For example, you can pull the Camunda and PostgreSQL images from Docker Hub or the Camunda registry:
 
 ```shell
 docker pull camunda/camunda:latest
-docker pull registry.camunda.cloud/camunda/zeebe:latest
+docker pull registry.camunda.cloud/camunda/camunda:latest
 
 docker pull bitnamilegacy/postgresql:latest
 docker pull registry.camunda.cloud/bitnami/postgresql:latest

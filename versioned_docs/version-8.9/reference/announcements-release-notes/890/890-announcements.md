@@ -133,10 +133,11 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 The following key changes were also released as part of an 8.9.x patch release.
 
-| Patch release                                                  | Type            | Key change                                                                                                       |
-| :------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| Patch release                                                    | Type            | Key change                                                                                                       |
+| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| [8.9.12](https://github.com/camunda/camunda/releases/tag/8.9.12) | Breaking change | [Individual component Docker images no longer produced](#individual-component-docker-images-no-longer-produced)  |
 
 ## Agentic orchestration
 
@@ -787,13 +788,13 @@ This aligns the Helm chart with the Orchestration Cluster's default configuratio
 
 #### Individual component Docker images no longer produced
 
-Starting with Camunda 8.9.12, the following individual component Docker images will no longer be produced:
+Camunda no longer produces the following individual component Docker images in Camunda 8.9, starting from patch release 8.9.12:
 
 - [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
 - [camunda/operate](https://hub.docker.com/r/camunda/operate)
 - [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
 
-**Action:** Switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image before upgrading to Camunda 8.10 or Camunda 8.9.12+.
+**Action:** Before updating to Camunda 8.9.12 or later, or upgrading to Camunda 8.10, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>
