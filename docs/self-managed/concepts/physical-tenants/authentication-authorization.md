@@ -39,7 +39,7 @@ Use Model A when:
 
 ### Model B: Single IdP, multiple role-level clients
 
-All Physical Tenants use one identity provider, but each tenant (or role level) has a dedicated client registration. Camunda distinguishes tenants by matching both the **issuer** (to identify the IdP) and the **audience** (`aud` claim) (to identify the specific client).
+All Physical Tenants use one identity provider, but each tenant (or role level) has a dedicated client registration. Camunda distinguishes clients by matching both the **issuer** (`iss` claim) to identify the IdP and the **audience** (`aud` claim) to identify the specific role-level client.
 
 Use Model B when:
 

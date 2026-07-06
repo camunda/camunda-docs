@@ -14,7 +14,7 @@ This page describes the authorization model for Physical Tenants in Camunda 8.10
 In Camunda 8.10, the Physical Tenant authorization model is designed around per-engine, per-tenant role and permission management. Key design principles for 8.10:
 
 - **Per-tenant authorization is independently managed.** Each Physical Tenant defines its own roles, permissions, and mapping rules. A change in one tenant's authorization configuration does not affect other tenants.
-- **Cluster-wide governance via Camunda Hub is a future capability.** Cross-tenant administration using Camunda Hub is not available in 8.10. Cluster-wide authorization operations are currently limited to ClusterAdmin-level access.
+- **Cluster-wide governance via Camunda Hub is a future capability.** Cross-tenant administration using Camunda Hub is not available in 8.10. A dedicated cluster-admin role for cluster-wide operations is also planned for a future release.
 - **Per-engine IdP fragmentation is not recommended.** Using a different identity provider for each Zeebe/Operate/Tasklist engine (as opposed to a single cluster-level IdP) is explicitly discouraged. See [authentication and authorization](./authentication-authorization.md) for the supported identity deployment models.
 
 ## Cluster-wide operations
@@ -84,7 +84,7 @@ Access to a Physical Tenant is determined by two independent checks:
 
 2. **Authorization:** The user's roles and permissions (derived from token claims via the tenant's local mapping rules) must allow the requested operation. If the user is authenticated but lacks permission, the request fails with `403 Forbidden`.
 
-An unknown tenant ID returns `404 Not Found`. This applies to both the tenant-prefixed REST paths and (once available) gRPC header-based routing.
+An unknown tenant ID returns `404 Not Found` on the tenant-prefixed REST paths. The equivalent error semantics for gRPC header-based routing are not yet defined and will be documented when per-tenant gRPC routing becomes available.
 
 ## Role inheritance and override behavior
 
