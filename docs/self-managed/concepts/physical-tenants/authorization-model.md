@@ -36,7 +36,7 @@ Examples of cluster-wide operations and their endpoint patterns:
 | Cluster topology        | `GET /v2/topology`                                                  |
 | License information     | `GET /v2/license`                                                   |
 | Cluster health / status | `GET /actuator/health`                                              |
-| Backup and restore      | Depends on component (Zeebe, Elasticsearch, Opensearch backup APIs) |
+| Backup and restore      | Depends on component (Zeebe, Elasticsearch, OpenSearch backup APIs) |
 
 <!-- TODO: Expand this table with the full list of cluster-wide endpoints once OpenAPI spec updates for Physical Tenants are published (camunda/camunda#54651 and #8892). -->
 
