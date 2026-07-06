@@ -244,21 +244,36 @@ See [Azure Blob Storage configuration](#azure-blob-storage-configuration) below 
 
 Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
 
-If checksum-related errors appear, disable automated checksum creation by adding these environment variables to your Zeebe and Tasklist pods via `extraEnv`:
+If checksum-related errors appear, disable automated checksum creation by adding these environment variables under `orchestration.env` and `connectors.env`:
 
 ```yaml
-extraEnv:
-  - name: AWS_REQUEST_CHECKSUM_CALCULATION
-    value: WHEN_REQUIRED
-  - name: AWS_RESPONSE_CHECKSUM_VALIDATION
-    value: WHEN_REQUIRED
+orchestration:
+  env:
+    - name: AWS_REQUEST_CHECKSUM_CALCULATION
+      value: WHEN_REQUIRED
+    - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+      value: WHEN_REQUIRED
+
+connectors:
+  env:
+    - name: AWS_REQUEST_CHECKSUM_CALCULATION
+      value: WHEN_REQUIRED
+    - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+      value: WHEN_REQUIRED
 ```
 
-If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by adding to the same `extraEnv` list:
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by adding to the same `env` lists:
 
 ```yaml
-  - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
-    value: "true"
+orchestration:
+  env:
+    - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
+      value: "true"
+
+connectors:
+  env:
+    - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
+      value: "true"
 ```
 
 ## Azure Blob Storage configuration

@@ -97,7 +97,7 @@ For Garage, add `chunked-encoding-enabled: false` to the same block.
 
 Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
 
-If checksum-related errors appear, disable automated checksum creation by setting these environment variables on your Zeebe and Tasklist containers:
+If checksum-related errors appear, disable automated checksum creation by setting these environment variables on your orchestration and connectors containers:
 
 ```
 AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
