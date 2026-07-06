@@ -1087,7 +1087,9 @@ Supports Bedrock long-term API keys or AWS IAM credentials. Falls back to the
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
 
 :::note
-The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the chosen region. If you configure both a chat model and an embedding model through Bedrock, each model requires its own `bedrock:InvokeModel` grant — access to one does not imply access to the other.
+The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the chosen region.
+
+If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate `bedrock:InvokeModel` grant; access to one does not imply access to the other.
 :::
 
 | Property                                  | Required                       | Type       | Description                                                                                    |
@@ -1577,7 +1579,9 @@ It supports Bedrock long-term API keys or AWS IAM credentials. It falls back to 
 [AWS default credentials provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html).
 
 :::note
-The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured embedding model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the chosen region. If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate `bedrock:InvokeModel` grant — access to one does not imply access to the other.
+The AWS principal must be authorized to perform [`bedrock:InvokeModel`](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html) on the configured embedding model ARN. The model must also be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the chosen region.
+
+If you use Bedrock for both the judge chat model and the embedding model, each model requires a separate bedrock:InvokeModel grant; access to one does not imply access to the other.
 :::
 
 | Property                                            | Required                       | Type       | Description                                                                                    |
