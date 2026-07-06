@@ -211,6 +211,27 @@ The top-level filters `assignee`, `processInstanceKey`, and `candidateGroups` ar
 
 </details>
 
+<details>
+<summary>Example: $or</summary>
+
+```
+POST /v2/user-tasks/search
+
+{
+  "filter": {
+    "state": "CREATED",
+    "$or": [
+      { "assignee": "demo" },
+      { "assignee": { "$exists": false } }
+    ]
+  }
+}
+```
+
+This returns created user tasks that are either assigned to `demo` or have no assignee. The top-level `state` filter applies to both branches of the `$or` condition via an implicit AND.
+
+</details>
+
 #### Variables
 
 Search endpoints can support filtering by variable values. This allows querying for process-related resources based on the values of specific variables that exist in their respective scope. For example, user task search supports filtering using the `localVariables` array and defining filter criteria for specific variables.
