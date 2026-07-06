@@ -23,12 +23,6 @@ These release notes identify the main new features included in the 8.8 minor rel
 
 :::
 
-## 8.8.30
-
-### Camunda Spring Boot Starter - Spring Boot 4.1 support
-
-The `camunda-spring-boot-4-starter` bundles Spring Boot 4.0.x. As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.8.30` patch onward. The `camunda-spring-boot-4-starter` continues to bundle Spring Boot 4.0.x by default.
-
 ### Technical changelogs for all 8.8.x releases
 
 <details className="changelog-dropdown">
@@ -147,6 +141,12 @@ Find out what’s included in Camunda 8's public API, the policies around versio
 Manually execute and test individual tasks or segments (connectors, RPA bots, IDP extractions) without running full processes, improving debugging and development efficiency.
 
 <p><a href="../../../../components/concepts/process-instance-creation/#run-process-segment" class="link-arrow">Run process segment</a></p>
+
+### Spring Boot 4.1 support
+
+The `camunda-spring-boot-4-starter` bundles Spring Boot 4.0.x by default.
+
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.8.30` patch onward.
 
 ## Connectors
 

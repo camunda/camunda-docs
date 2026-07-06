@@ -25,12 +25,6 @@ import PageDescription from '@site/src/components/PageDescription';
 
 :::
 
-## 8.9.12
-
-### Camunda Spring Boot Starter - Spring Boot 4.1 support
-
-As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.9.12` patch onward. Spring Boot 4.0.x remains the default bundled version.
-
 ### Technical Changelogs for all 8.9.x releases
 
 <details className="changelog-dropdown">
@@ -127,6 +121,10 @@ Camunda Process Test now adds dedicated support for AI agent testing, making it 
 Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can query the latest official Camunda documentation directly. This gives developers a lightweight way to bring product documentation into coding and support workflows without leaving their editor.
 
 <p class="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
+
+### Camunda Spring Boot Starter - Spring Boot 4.1 support
+
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.9.12` patch onward. Spring Boot 4.0.x remains the default bundled version.
 
 ## Camunda 8 Run
 
