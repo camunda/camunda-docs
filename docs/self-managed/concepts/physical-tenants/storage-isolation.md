@@ -27,93 +27,35 @@ camunda:
       data:
         secondary-storage:
           rdbms:
-            jdbc:
-              url: jdbc:postgresql://db.example.com:5432/camunda
-    tenant-a:
+            url: jdbc:postgresql://db.example.com:5432/camunda?currentSchema=default_schema
+    tenanta:
       data:
         secondary-storage:
           rdbms:
-            jdbc:
-              url: jdbc:postgresql://db.example.com:5432/camunda
-              # Schema 'tenant_a_schema' must exist before startup
+            url: jdbc:postgresql://db.example.com:5432/camunda?currentSchema=tenant_a_schema
+            # Each schema must exist before startup
 ```
 
 **Separate database instance** (maximum isolation):
 
 ```yaml
-tenant-a:
+tenanta:
   data:
     secondary-storage:
       rdbms:
-        jdbc:
-          url: jdbc:postgresql://db-tenant-a.example.com:5432/camunda
+        url: jdbc:postgresql://db-tenant-a.example.com:5432/camunda
 ```
 
 **Mixed vendors**: Different Physical Tenants can use PostgreSQL, MySQL, Oracle, etc. in the same cluster.
 
 ### Validation and operations
 
-- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message
+- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message. For Oracle, schema isolation uses distinct authenticated users rather than URL differences; a known false positive startup conflict may be reported for identical Oracle URLs in the current alpha release.
 - **Pre-startup**: Ensure each tenant's schema exists, is empty, and has valid credentials
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
 
 <!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. --->
-
-## Elasticsearch/OpenSearch storage
-
-Use separate clusters or a shared cluster with per-tenant index prefixes.
-
-### Configuration models
-
-**Separate cluster** (maximum isolation):
-
-```yaml
-camunda:
-  physical-tenants:
-    default:
-      data:
-        secondary-storage:
-          elasticsearchos:
-            connection:
-              url: https://es-default.example.com:9200
-    tenant-a:
-      data:
-        secondary-storage:
-          elasticsearchos:
-            connection:
-              url: https://es-tenant-a.example.com:9200
-```
-
-**Shared cluster with index prefix** (cost-effective):
-
-```yaml
-camunda:
-  physical-tenants:
-    default:
-      data:
-        secondary-storage:
-          elasticsearchos:
-            connection:
-              url: https://es.example.com:9200
-            # Empty prefix for default tenant (indices: process-instances, incidents, etc.)
-    tenant-a:
-      data:
-        secondary-storage:
-          elasticsearchos:
-            connection:
-              url: https://es.example.com:9200
-            index-prefix: "tenant-a-"
-            # Indices: tenant-a-process-instances, tenant-a-incidents, etc.
-```
-
-### Naming and collision prevention
-
-- **Prefix format**: `{tenantId}-` (dash automatically appended)
-- **Collision prevention**: Use full tenant ID; avoid overlapping prefixes (for example, `eu` and `eu-west`)
-- **Validation**: Cluster fails at startup if two tenants have overlapping index names
-
-<!--- **Pending verification**: Collision detection for overlapping tenant IDs (for example, `eu` vs `eu-west`) is being verified in code. --->
 
 ## Document Store storage
 
@@ -125,53 +67,76 @@ Store documents globally with per-tenant subpaths, or use dedicated stores per t
 
 ```yaml
 camunda:
-  document-store:
-    type: S3
-    config:
-      bucket-name: "camunda-documents"
+  document:
+    default-store-id: shared-s3
+    aws:
+      shared-s3:
+        bucket-name: "camunda-documents"
   physical-tenants:
     default:
-      # Subpath: s3://camunda-documents/default/
-    tenant-a:
-      # Subpath: s3://camunda-documents/tenant-a/
+      document:
+        assigned: [shared-s3]
+        aws:
+          shared-s3:
+            bucket-path: "default"
+    tenanta:
+      document:
+        assigned: [shared-s3]
+        aws:
+          shared-s3:
+            bucket-path: "tenant-a"
 ```
 
 **Dedicated store per tenant**:
 
 ```yaml
-physical-tenants:
-  default:
-    document-store:
-      type: S3
-      config:
-        bucket-name: "camunda-documents-default"
-  tenant-a:
-    document-store:
-      type: S3
-      config:
-        bucket-name: "camunda-documents-tenant-a"
+camunda:
+  physical-tenants:
+    default:
+      document:
+        assigned: [default-s3]
+        default-store-id: default-s3
+        aws:
+          default-s3:
+            bucket-name: "camunda-documents-default"
+    tenanta:
+      document:
+        assigned: [tenant-a-s3]
+        default-store-id: tenant-a-s3
+        aws:
+          tenant-a-s3:
+            bucket-name: "camunda-documents-tenant-a"
 ```
 
 **Hybrid** (global default + per-tenant overrides):
 
 ```yaml
-document-store: # Global default
-  type: S3
-  config:
-    bucket-name: "camunda-documents-shared"
-physical-tenants:
-  tenant-a: # Override for specific tenant
-    document-store:
-      type: S3
-      config:
-        bucket-name: "camunda-documents-tenant-a-compliance"
+camunda:
+  document:
+    aws:
+      default-s3:
+        bucket-name: "camunda-documents-default"
+  physical-tenants:
+    default:
+      document:
+        assigned: [default-s3]
+        default-store-id: default-s3
+    tenanta:
+      document:
+        assigned: [default-s3, tenant-a-compliance]
+        default-store-id: tenant-a-compliance
+        aws:
+          tenant-a-compliance:
+            bucket-name: "camunda-documents-tenant-a-compliance"
+          default-s3:
+            bucket-prefix: "tenant-a"
 ```
 
 ### Availability and validation
 
 - **At startup**: Warning if bucket is missing or credentials are invalid; cluster continues
 - **At runtime**: An error is returned when a tenant tries to create/retrieve a document if the store is unavailable
-- **Validation**: Cluster rejects config if two tenants point to same storage location
+- **Validation**: Startup warning logged if two tenants share the same storage location
 - **Subpath structure**: `s3://bucket/{physicalTenantId}/documents/`
 
 ## Operational considerations
@@ -205,14 +170,14 @@ Storage isolation prevents data leakage structurally:
 
 Risks to avoid:
 
-- Don't share JDBC URLs between tenants
+- Don't share JDBC connection URLs between tenants (for Oracle, two tenants can share the same URL while remaining isolated by distinct authenticated database users)
 - Don't overlap index prefixes
 - Don't point two tenants to the same bucket without distinct subpaths
 
 ### Scaling and capacity planning
 
 - **RDBMS**: Monitor schema size per tenant; high-traffic tenants may need dedicated instances
-- **ES/OS**: Monitor index size per prefix; set retention policies independently per tenant
+- **ES/OS**: Monitor index size per prefix; set retention policies independently per tenant. If ES/OS is shared across multiple Physical Tenants, also monitor overall cluster health and capacity.
 - **Document Store**: Monitor bucket size per tenant; set lifecycle policies for archival
 
 ### Migration scenarios
@@ -228,7 +193,7 @@ Risks to avoid:
 | Aspect                   | RDBMS                    | Elasticsearch/OpenSearch         | Document Store                  |
 | ------------------------ | ------------------------ | -------------------------------- | ------------------------------- |
 | **Isolation**            | Separate schema/database | Separate cluster OR index prefix | Separate bucket OR subpath      |
-| **Per-tenant config**    | JDBC URL                 | `connect.url` + `index-prefix`   | Bucket or inherited global      |
-| **Collision detection**  | Startup error            | Startup error                    | Startup validation              |
+| **Per-tenant config**    | JDBC URL                 | `url` + `index-prefix`           | Bucket + prefix                 |
+| **Collision detection**  | Startup error            | Startup error                    | Startup warning (logs)          |
 | **Unavailable behavior** | Startup failure          | Startup failure                  | Runtime error (no fallback)     |
 | **Mixed vendors**        | Yes                      | Yes (ES or OpenSearch)           | Yes (different cloud providers) |
