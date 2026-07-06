@@ -95,7 +95,7 @@ Validation errors include an additional `violations` array:
 
 Offset pagination in Camunda Hub API v2 is different from Web Modeler API v1.
 
-In Web Modeler API v1, you used two fields to paginate items in a response:
+In Web Modeler API v1, you used two fields to paginate items:
 
 - `page` specified the page to return, starting with page 0.
 - `size` specified the number of items per page.
