@@ -47,19 +47,19 @@ chmod +x camunda-collect-diagnostics.sh
 ./camunda-collect-diagnostics.sh --namespace <namespace>
 ```
 
-4. **Review the generated `.zip` archive** and remove any sensitive or personally identifiable information (PII) before sharing.
+4. Review the generated `.zip` archive and remove any sensitive or personally identifiable information (PII) before sharing.
 
 5. Share the reviewed `.zip` archive with Camunda Support.
 
 #### Required/Optional flags
 
 | Flag                       | Description                                                       |
-|----------------------------|-------------------------------------------------------------------|
+| -------------------------- | ----------------------------------------------------------------- |
 | `--namespace <namespace>`  | **(Required)** Kubernetes namespace of your Camunda deployment.   |
 | `--skip-es-os`             | Skip Elasticsearch/OpenSearch diagnostics entirely.               |
 | `--skip-data`              | Skip exporting data from indexes (post-importer queue documents). |
-| `--es-user <user>`         | Username for Elasticsearch/OpenSearch basic authentication.       |
-| `--es-password <password>` | Password for Elasticsearch/OpenSearch basic authentication.       |
+| `--es-user <user>`         | Username for Elasticsearch/OpenSearch Basic authentication.       |
+| `--es-password <password>` | Password for Elasticsearch/OpenSearch Basic authentication.       |
 | `--es-port <port>`         | Elasticsearch/OpenSearch port (default: `9200`).                  |
 
 ### Diagnostic collection script
