@@ -253,6 +253,20 @@ Helm deployments in 8.9 now support fully integrated RDBMS secondary storage, ex
 
 <p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
 
+### Docker images
+
+<!-- https://github.com/camunda/camunda/issues/50159 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+The following Docker images will no longer be produced for Camunda 8.9 (starting with 8.9.12):
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
+
 ## Reference architectures
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects deployment references">Deployment references</span></div>
