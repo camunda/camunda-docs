@@ -1,12 +1,12 @@
 ---
-id: permanently-delete-file
-title: "Permanently delete a file"
-description: "Permanently and irreversibly removes the file with the given file key. Process application snapshot references to the file are detached so snapshot data is preserved. The file cannot be recovered afterwards. This works in one step and does not require the file to be soft-deleted first."
-sidebar_label: "Permanently delete a file"
+id: create-cluster-registration
+title: "Create or update a cluster registration"
+description: "Creates or updates a cluster registration in Camunda Hub via discovery. This does not provision infrastructure — it only creates or updates the cluster registration in Hub. This endpoint requires dynamic cluster management to be enabled. If a cluster with the resolved ID already exists, its registration will be updated."
+sidebar_label: "Create or update a cluster registration"
 hide_title: true
 hide_table_of_contents: true
-api: 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
-sidebar_class_name: "delete api-method"
+api: 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
+sidebar_class_name: "post api-method"
 info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
@@ -24,47 +24,168 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Permanently delete a file"}
+  children={"Create or update a cluster registration"}
 ></Heading>
 
 <MethodEndpoint
-  method={"delete"}
-  path={"/files/{fileKey}/permanent"}
+  method={"post"}
+  path={"/clusters"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Permanently and irreversibly removes the file with the given file key. Process application snapshot references to the file are detached so snapshot data is preserved. The file cannot be recovered afterwards. This works in one step and does not require the file to be soft-deleted first.
+Creates or updates a cluster registration in Camunda Hub via discovery. This does not provision infrastructure — it only creates or updates the cluster registration in Hub. This endpoint requires dynamic cluster management to be enabled. If a cluster with the resolved ID already exists, its registration will be updated.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
 </Heading>
 
-<ParamsDetails
-  parameters={[
-    {
-      name: "fileKey",
-      in: "path",
-      required: true,
-      description: "The unique key identifying the file.",
-      schema: {
-        description: "System-generated key for a file.",
-        type: "string",
-        format: "FileKey",
-        "x-semantic-type": "FileKey",
-        example: "file-789-xyz",
-        title: "FileKey",
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["clusterName", "version", "license"],
+          properties: {
+            clusterId: {
+              description:
+                "The unique identifier of the cluster. If omitted, resolved from X-Forwarded-For or remote address.",
+              type: "string",
+              nullable: true,
+              minLength: 1,
+              maxLength: 255,
+            },
+            clusterName: {
+              description: "The name of the cluster.",
+              type: "string",
+              minLength: 1,
+              maxLength: 255,
+            },
+            version: {
+              description: "The version of the cluster.",
+              type: "string",
+              minLength: 1,
+              maxLength: 255,
+            },
+            license: {
+              description: "The license information of the cluster.",
+              allOf: [
+                {
+                  type: "object",
+                  additionalProperties: false,
+                  required: ["validLicense", "licenseType"],
+                  properties: {
+                    validLicense: {
+                      description: "Whether the license is valid.",
+                      type: "boolean",
+                    },
+                    licenseType: {
+                      description: "The type of the license.",
+                      type: "string",
+                      minLength: 1,
+                      maxLength: 255,
+                    },
+                    isCommercial: {
+                      description: "Whether the license is commercial.",
+                      type: "boolean",
+                      nullable: true,
+                    },
+                    expiresAt: {
+                      description: "The expiry date of the license.",
+                      type: "string",
+                      format: "date-time",
+                      nullable: true,
+                    },
+                  },
+                  title: "CreateClusterLicense",
+                },
+              ],
+            },
+            properties: {
+              description: "The discovered properties of the cluster.",
+              type: "object",
+              nullable: true,
+              additionalProperties: { type: "string" },
+            },
+          },
+          title: "CreateClusterRequest",
+        },
       },
     },
-  ]}
-></ParamsDetails>
-
-<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+  }}
+></RequestSchema>
 
 <StatusCodes
   id={undefined}
   label={undefined}
   responses={{
-    "204": { description: "The file was permanently deleted successfully." },
+    "204": {
+      description:
+        "The cluster registration was created or updated successfully.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -178,56 +299,6 @@ Permanently and irreversibly removes the file with the given file key. Process a
             detail:
               "Operation not allowed. Ensure your API credentials have the required permissions.",
             instance: "/api/v2/files/file-789-xyz",
-          },
-        },
-      },
-    },
-    "404": {
-      description: "The file was not found.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            required: ["type", "title", "status", "detail", "instance"],
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-                example:
-                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-                example: "Bad Request",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                example: 400,
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-                example:
-                  "Request property [maxJobsToActivates] cannot be parsed",
-              },
-              instance: {
-                type: "string",
-                format: "uri-reference",
-                description:
-                  "A URI path identifying the origin of the problem.",
-                example: "/v2/jobs/activation",
-              },
-            },
-            title: "ProblemDetail",
           },
         },
       },
