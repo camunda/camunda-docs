@@ -48,16 +48,16 @@ For the full authentication reference, including SaaS and Self-Managed setup, se
 
 The Processes MCP Server uses [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) and is served at the `/mcp/processes` endpoint on the Orchestration Cluster. It is stateless; no session management is required.
 
-### Auditing
+### Audit logging for MCP operations
 
-Operations triggered through the Processes MCP Server are recorded in the [audit log](/components/audit-log/overview.md) like any other operation. Because the tool call enters through MCP, each resulting record has an inbound channel of `MCP` and captures the name of the MCP tool that triggered it, so you can distinguish operations initiated by AI agents through MCP from those performed directly by users or clients.
+Operations triggered through the Processes MCP Server are recorded in the [audit log](/components/audit-log/overview.md), like any other operation. Because the tool call enters through MCP, each resulting record has an inbound channel of `MCP` and captures the name of the MCP tool that triggered it, so you can distinguish operations initiated by AI agents through MCP from those performed directly by users or clients.
 
 See [inbound channel](/components/audit-log/overview/operation-structure.md#inbound-channel) for details on how this is presented in the applications and the REST API.
 
 :::note
 The Processes MCP Server uses the same authentication as the REST API, so a tool call is attributed to the authenticated user or client.
-By default, [only user operations are recorded](/components/audit-log/overview/recorded-operations.md#limitations-and-constraints), not client operations.
-To capture MCP tool calls made by a client, configure the audit log to also track client operations.
+
+By default, [only user operations are recorded](/components/audit-log/overview/recorded-operations.md#limitations-and-constraints), not client operations. To capture MCP tool calls made by a client, configure the audit log to also track client operations.
 :::
 
 ## Get started
