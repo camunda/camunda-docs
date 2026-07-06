@@ -32,34 +32,18 @@ For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestr
 
 ### Bitnami subcharts
 
-| Section                | Purpose                                                                             |
-| ---------------------- | ----------------------------------------------------------------------------------- |
-| `elasticsearch`        | Provides an embedded Elasticsearch backend (Bitnami subchart)                       |
-| `identityKeycloak`     | Provides an embedded Keycloak service for Management Identity (Bitnami subchart)    |
-| `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart) |
-| `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart)         |
+| Section                | Purpose                                                                                                                  |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `elasticsearch`        | Provides an embedded Elasticsearch backend (Bitnami subchart) — deprecated in 8.9, removed in 8.10                       |
+| `identityKeycloak`     | Provides an embedded Keycloak service for Management Identity (Bitnami subchart) — deprecated in 8.9, removed in 8.10    |
+| `identityPostgresql`   | Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart) — deprecated in 8.9, removed in 8.10 |
+| `webModelerPostgresql` | Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart) — deprecated in 8.9, removed in 8.10         |
 
-:::info
-Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production.
+:::warning Bitnami subcharts deprecated — action required before upgrading to 8.10
+Bitnami subcharts are intended for development, testing, and transitional use only. They are deprecated in Camunda 8.9 and will be **removed in Camunda 8.10**. Migrate all production deployments to externally managed services or Kubernetes operators before upgrading.
 
-For production environments, Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you use your preferred deployment methods, leverage managed services such as AWS OpenSearch, and manage their lifecycle independently of Camunda—providing greater operational control and flexibility.
-
-**Alternative deployment approach:**  
-See [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
+See [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for the recommended approach, or [Migrate from Bitnami subcharts](/versioned_docs/version-8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for step-by-step migration instructions.
 :::
-
-#### Bitnami subcharts guidance
-
-**Development and testing environments**: Bitnami subcharts provide ready-to-use infrastructure components that you can deploy with Camunda applications using minimal configuration.
-
-**Production environments**: Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you:
-
-- Use your preferred deployment method and operational tooling
-- Leverage managed services such as AWS RDS, Azure Database, or Google Cloud SQL
-- Manage infrastructure lifecycle independently of Camunda applications
-- Implement your organization's security, backup, and monitoring standards
-
-If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
 
 ### Observability
 
