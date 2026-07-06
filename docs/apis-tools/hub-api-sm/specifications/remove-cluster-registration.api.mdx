@@ -1,13 +1,13 @@
 ---
-id: remove-collaborator
-title: "Remove a collaborator"
-description: "Removes a collaborator from the workspace."
-sidebar_label: "Remove a collaborator"
+id: remove-cluster-registration
+title: "Remove a cluster registration"
+description: "Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic cluster management to be enabled."
+sidebar_label: "Remove a cluster registration"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/SsYnJIpJSqO06a8ufmYJO3B4yr1QdVhCSwtxCDAAKBkRcP/3lmQlKgPJ3XOOngkEYvdt4vdR/htuK3QQVDWfJQ84w5Lu8Q3VmvIrYNgHU+4RC+cqsiIZ/wmmngGTAzMWOFsycIC2cq6e1+BwDFP+MMIpEQ5Uma0ROdbD5Pxi/GEJzzAnefZjO+Fmye8AgclBnS0uuEGSuQZ3/r9E9c84Yo8VRAWPOEOv9bKoeRZcDUeAp4ukNVGfa2R3eOaKYkmqGKtzN0xXi8WWALPNjysK4rqg1PmjjdNsgWCJSj9ZARxFwMpHXrPbBFjDyv4vfAJL6wrIWyjN82cgvrKGo+eNlxMLunjOPDeKa3As/aMJfO1EOh9UWu9HvMm4ZeTF6ddUHboA9Mg7j1bglaSQR0WVEgRm4cJh7GuoD0lskCQ8fw2/Pb2dnS1M0Z69niZm4QLawKaQKtQVbqLkFbO5hrLX754wjX0sQ/4il23lkxioJrb/AuKwMCz1jBHyZRhs5v3b9jvl69+mz9bhFD5LE1Xq9XYFWKEUtGBWHeXukLQH9k9H7PpAh2yEtYsRzpLRTFBs8rRGAWFnvkKhSqUYMHGI+5gM0p0/K+htm9TbmHt9c6sXUt4UEHTpw8Qah9HMPRN5wMYgXFOtlF3lfxO59ROHQ3zFft88/FoJPYwxz0F1Jp8QG7rkOUazD1POD5AWWmK1ldQWuHHAsraSBgrm0Kl0uXFeNKf3ohc+jQHOeqaihqvTfcE9kOwvi5LcOt+fA5x7vD8AZLd7AJ0ddxFUCbgHbpheZQJLy+OYlL7f5hOr1nrggkrkRXWsbBQvgewF/tyMkl4qYwq67L/BQ/tr18nk2Z7mD/O1zB8qDSYdsQOklaGldZh1+X76Xep9325ZrMSHj7Z3E/tlQhqCQH9nAkwxgZq5QqcR0mV2vbXDzpp5LBAh2R5uqeIGI8ayzp1pw4z2YeeLi/SLzb3KbRAyWez6xHeDffbtoZNZIzLyctjHnhvXa6kRBPHdsthyjNKGrS2K5QU+8w3Z745882Zb57CN4/ctbZ3SWbd8cWLki9sbc6sc2adM+ucWeeJrPNqMjnBA4bRKTuaT3TOOmaFqJ1DyVYLpWN4+i+vx9b145mBzgx0ZqAzAz2FgRraHtCQitcqc/e45tkpjS/hS9A1brU+UqtKDAtLGqNEjYHSidpZxtPtrcmnm6HK16TDK5RPN1H7amhe0S17ebB2mmd809JUk6XpZmF9aLJNZV1ousmIiJyCXLdDTCYtpfUTp60AHR+fak1aIPmvL+mHOmdX1x9ZCySqZxRu3+XryevXJ72R6Xc8DRm390WDf9JXa/yotygUehS1U2Ed65UjOHSkyPFsNh8u/02u2voMjbYN2mGIEel3a8ST7sv7vm0/3U6PoH66nbJg79EwmwdQBuVOMSYp0Tr1rR2/HXSaksJGAF1TUnrXda6ViFn+c8wj9LiIl++yrE18p5k7tlJhwd60dEk1olE41qPphQgiHmIn9XZbeNJ1WU+/PfMKW0aclfWhBDPY2arkByL5IdrN7h38NFm9O5CADyGtNChDbRMhbrqpmu30cnqvZQfq+d5g0XorK8+TbjJmfLPJweNnp5uGHn+t0VH/zHeDFLtJKk/fJc8K0P5Q+R4m+Oyme/8+Z09R5E+m2j0Esx5QDU86QtrLlYT7nwb5v0T7n0DYifjzplfKB3R6JQRWYbDr0cvZHqu+fffXu+k73jT/AUqG7+A=
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-sm/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Remove a collaborator"}
+  children={"Remove a cluster registration"}
 ></Heading>
 
 <MethodEndpoint
   method={"delete"}
-  path={"/workspaces/{workspaceKey}/collaborators/{email}"}
+  path={"/clusters/{clusterId}"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Removes a collaborator from the workspace.
+Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic cluster management to be enabled.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -42,18 +42,11 @@ Removes a collaborator from the workspace.
 <ParamsDetails
   parameters={[
     {
-      name: "workspaceKey",
+      name: "clusterId",
       in: "path",
       required: true,
-      description: "The unique key identifying the workspace.",
+      description: "The unique ID identifying the cluster.",
       schema: { type: "string" },
-    },
-    {
-      name: "email",
-      in: "path",
-      required: true,
-      description: "The email address of the collaborator.",
-      schema: { type: "string", format: "email" },
     },
   ]}
 ></ParamsDetails>
@@ -64,7 +57,9 @@ Removes a collaborator from the workspace.
   id={undefined}
   label={undefined}
   responses={{
-    "204": { description: "The collaborator was removed successfully." },
+    "204": {
+      description: "The cluster registration was removed successfully.",
+    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -112,6 +107,14 @@ Removes a collaborator from the workspace.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
           },
         },
       },
@@ -163,11 +166,19 @@ Removes a collaborator from the workspace.
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
         },
       },
     },
     "404": {
-      description: "The workspace or collaborator was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -212,6 +223,13 @@ Removes a collaborator from the workspace.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/file-789-xyz",
           },
         },
       },
@@ -262,6 +280,14 @@ Removes a collaborator from the workspace.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },

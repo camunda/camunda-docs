@@ -1,13 +1,13 @@
 ---
-id: remove-collaborator
-title: "Remove a collaborator"
-description: "Removes a collaborator from the workspace."
-sidebar_label: "Remove a collaborator"
+id: permanently-delete-file
+title: "Permanently delete a file"
+description: "Permanently and irreversibly removes the file with the given file key. Process application snapshot references to the file are detached so snapshot data is preserved. The file cannot be recovered afterwards. This works in one step and does not require the file to be soft-deleted first."
+sidebar_label: "Permanently delete a file"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/SsYnJIpJSqO06a8ufmYJO3B4yr1QdVhCSwtxCDAAKBkRcP/3lmQlKgPJ3XOOngkEYvdt4vdR/htuK3QQVDWfJQ84w5Lu8Q3VmvIrYNgHU+4RC+cqsiIZ/wmmngGTAzMWOFsycIC2cq6e1+BwDFP+MMIpEQ5Uma0ROdbD5Pxi/GEJzzAnefZjO+Fmye8AgclBnS0uuEGSuQZ3/r9E9c84Yo8VRAWPOEOv9bKoeRZcDUeAp4ukNVGfa2R3eOaKYkmqGKtzN0xXi8WWALPNjysK4rqg1PmjjdNsgWCJSj9ZARxFwMpHXrPbBFjDyv4vfAJL6wrIWyjN82cgvrKGo+eNlxMLunjOPDeKa3As/aMJfO1EOh9UWu9HvMm4ZeTF6ddUHboA9Mg7j1bglaSQR0WVEgRm4cJh7GuoD0lskCQ8fw2/Pb2dnS1M0Z69niZm4QLawKaQKtQVbqLkFbO5hrLX754wjX0sQ/4il23lkxioJrb/AuKwMCz1jBHyZRhs5v3b9jvl69+mz9bhFD5LE1Xq9XYFWKEUtGBWHeXukLQH9k9H7PpAh2yEtYsRzpLRTFBs8rRGAWFnvkKhSqUYMHGI+5gM0p0/K+htm9TbmHt9c6sXUt4UEHTpw8Qah9HMPRN5wMYgXFOtlF3lfxO59ROHQ3zFft88/FoJPYwxz0F1Jp8QG7rkOUazD1POD5AWWmK1ldQWuHHAsraSBgrm0Kl0uXFeNKf3ohc+jQHOeqaihqvTfcE9kOwvi5LcOt+fA5x7vD8AZLd7AJ0ddxFUCbgHbpheZQJLy+OYlL7f5hOr1nrggkrkRXWsbBQvgewF/tyMkl4qYwq67L/BQ/tr18nk2Z7mD/O1zB8qDSYdsQOklaGldZh1+X76Xep9325ZrMSHj7Z3E/tlQhqCQH9nAkwxgZq5QqcR0mV2vbXDzpp5LBAh2R5uqeIGI8ayzp1pw4z2YeeLi/SLzb3KbRAyWez6xHeDffbtoZNZIzLyctjHnhvXa6kRBPHdsthyjNKGrS2K5QU+8w3Z745882Zb57CN4/ctbZ3SWbd8cWLki9sbc6sc2adM+ucWeeJrPNqMjnBA4bRKTuaT3TOOmaFqJ1DyVYLpWN4+i+vx9b145mBzgx0ZqAzAz2FgRraHtCQitcqc/e45tkpjS/hS9A1brU+UqtKDAtLGqNEjYHSidpZxtPtrcmnm6HK16TDK5RPN1H7amhe0S17ebB2mmd809JUk6XpZmF9aLJNZV1ousmIiJyCXLdDTCYtpfUTp60AHR+fak1aIPmvL+mHOmdX1x9ZCySqZxRu3+XryevXJ72R6Xc8DRm390WDf9JXa/yotygUehS1U2Ed65UjOHSkyPFsNh8u/02u2voMjbYN2mGIEel3a8ST7sv7vm0/3U6PoH66nbJg79EwmwdQBuVOMSYp0Tr1rR2/HXSaksJGAF1TUnrXda6ViFn+c8wj9LiIl++yrE18p5k7tlJhwd60dEk1olE41qPphQgiHmIn9XZbeNJ1WU+/PfMKW0aclfWhBDPY2arkByL5IdrN7h38NFm9O5CADyGtNChDbRMhbrqpmu30cnqvZQfq+d5g0XorK8+TbjJmfLPJweNnp5uGHn+t0VH/zHeDFLtJKk/fJc8K0P5Q+R4m+Oyme/8+Z09R5E+m2j0Esx5QDU86QtrLlYT7nwb5v0T7n0DYifjzplfKB3R6JQRWYbDr0cvZHqu+fffXu+k73jT/AUqG7+A=
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-saas/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Remove a collaborator"}
+  children={"Permanently delete a file"}
 ></Heading>
 
 <MethodEndpoint
   method={"delete"}
-  path={"/workspaces/{workspaceKey}/collaborators/{email}"}
+  path={"/files/{fileKey}/permanent"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Removes a collaborator from the workspace.
+Permanently and irreversibly removes the file with the given file key. Process application snapshot references to the file are detached so snapshot data is preserved. The file cannot be recovered afterwards. This works in one step and does not require the file to be soft-deleted first.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -42,18 +42,18 @@ Removes a collaborator from the workspace.
 <ParamsDetails
   parameters={[
     {
-      name: "workspaceKey",
+      name: "fileKey",
       in: "path",
       required: true,
-      description: "The unique key identifying the workspace.",
-      schema: { type: "string" },
-    },
-    {
-      name: "email",
-      in: "path",
-      required: true,
-      description: "The email address of the collaborator.",
-      schema: { type: "string", format: "email" },
+      description: "The unique key identifying the file.",
+      schema: {
+        description: "System-generated key for a file.",
+        type: "string",
+        format: "FileKey",
+        "x-semantic-type": "FileKey",
+        example: "file-789-xyz",
+        title: "FileKey",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -64,7 +64,7 @@ Removes a collaborator from the workspace.
   id={undefined}
   label={undefined}
   responses={{
-    "204": { description: "The collaborator was removed successfully." },
+    "204": { description: "The file was permanently deleted successfully." },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -112,6 +112,14 @@ Removes a collaborator from the workspace.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
           },
         },
       },
@@ -163,11 +171,19 @@ Removes a collaborator from the workspace.
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
         },
       },
     },
     "404": {
-      description: "The workspace or collaborator was not found.",
+      description: "The file was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -262,6 +278,14 @@ Removes a collaborator from the workspace.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },

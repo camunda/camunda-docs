@@ -1,13 +1,13 @@
 ---
 id: delete-project
 title: "Delete a project"
-description: "Deletes the project with the given project key. The project must have no files in the project or any of its descendants. Empty folders and version history are removed as part of the deletion."
+description: "Soft-deletes the project with the given project key. The project is moved to the recently deleted state and can be recovered during the retention window. The project must have no files in the project or any of its descendants. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead."
 sidebar_label: "Delete a project"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWU1z2zYQ/Ss7OCVTSlScpE15cxNnkrQHj+vUB1eHJbGUEIMAA4CyVQ3/e2dB0vpME187PHgkEcDu28XbR3ixEbYmh0FZ81GKTEjSFOjS2S9UBJEISb5wquZxkYl3cdRDWBLU3Ry4V2EZHyzUiszj4ztaT+F6Z17V+ABLXBEYC6XS5EGZPUvWAZo12BJU8MCeyUg0wU/hoqrDGkqrJTkPaCSsyHllDSyVD9atAR2Bo8quSAJ6qNEFtsT2Y0zKmunfRiTiYYJSkpwoM+ltiEzMpi+mM5GIgAsvslsxJGCeiBodVhTI8cBGGKxIZKLH/DutRSIUm6gxLEUiHH1tlCMpsuAaOkwgJ6Qx6mtDnCBQkkxQ5VqZxW4mpiIRvlhShSLbiLCu2aMPTpmFaNs5O/G1NZ48j5/NXvHHsaPHHULf5YAk+KYoyPuy0Xo9FW0iXs1m31y9UpIkSAwIyoOxAVaolWR4hTWBTOClWNdaFZFCae1srqn66YtnO5udKPYdnMNlNxMkBVQabB6hYrfvTuUkmR63V+/fwq+vXv8yf7YMofZZmt7f309dWUxIqmDd1LpF6sqC/3je80g6R1DhGnIClFKxT9QcUE0uKPLgaypUqQoIdsh7BMOp7ljSJ72Dtbett91YIoIKmj99wND4WCscSuSDD2gKivR59Lrdy8M9TURpXYVBZKJx6qjqzuHz1cdTXNlijmtKbDTbwNw2Ics1mjuRCHrAqtbsbcigtIWfFlg1RuJU2RRrla7OprNh9yZs0qc5ygmHTT4wUbpwT2A/BOubqkK3HqrvEOcWz28o4WrroM/j1oMygRbkdtOjTHh5duST6frh+voSOhNQWElQWgdhqfwAYM/3q9ksEZUyqmqq4Rc+dL9+ns3ax838frwG6KHWaGIBHAatDFTWUc/y/fD70AderuG2wodPNvfX9rwIaoWB/BwKNFx4ObGkeZKcqUd+fYdJE0clOeKZpznFmnVELOvUQh1Gsg89XZ2lX2zuU+yAss12yxHRF/e7Lodt20aheXFaaHqOgcbizncKA9iEJaPqZAUKRxEkas9AloQy6vFG3NzcTM63k2lfdA6lsx2FaxSuUbhG4XqacL081oH31uVKSjLdIXfQsP6YhFrbexoPSqPejHoz6s2T9eYH/p/jUEvbmFFjRo0ZNWbUmCdqzOtTXZ9zA7zLjuuTnLMObFE0zpGE+6XS0T03jwZsPR9HBRoVaFSgUYGeokAtLw9kuP3e9dXvaC2yU835RKxQN/TYpOf+d0VhabfXFSLpuu+ZSPszkk832w59y1VJbjW08BunRSY2nRi1WZpultaHNtvU1oW253/06xTmuitVntIJ11BX2hao4+NTBOQBvisYEvehyeH88iN0QGLrnd3tm3wze/PmpDWe+h+WdnV1sMXlfdJWN/mb1uIFg6eicSqsY75yQkeOu2wiu53vDv/Jprr87E56pGGPIXrk390kkfRf3g/k/HRzfQT10801BHtHBmweUBmSUDpbRdDcHrRO/dMV2RY610JpI4CeehzeZZNrVcQo/zpWC37M4lDYqmpMfHOZRXer9bYTRc4RE/74uohfe1jETezvhfolIulZNojsoK+FrSLO2vpQodlZ2d2tAQ7H/EOgm+1L9n9xD9dTJNBDSGuNyjCRY9I2fTXfDrds/DbNdm7c5klfjrdis8nR02en25Yff23IMWnn2+qNFJbK83cpshK1P7yW203ts6v+1f4cfvyy7mQs/UM06x0NE0mvdDvhtPN26GnvSOF5UVAddpZ+82C1p4jvLv64uL4QbfsvQrpWZg==
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-sm/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Deletes the project with the given project key. The project must have no files in the project or any of its descendants. Empty folders and version history are removed as part of the deletion.
+Soft-deletes the project with the given project key. The project is moved to the recently deleted state and can be recovered during the retention window. The project must have no files in the project or any of its descendants. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -46,7 +46,14 @@ Deletes the project with the given project key. The project must have no files i
       in: "path",
       required: true,
       description: "The unique key identifying the project.",
-      schema: { type: "string" },
+      schema: {
+        description: "System-generated key for a project.",
+        type: "string",
+        format: "ProjectKey",
+        "x-semantic-type": "ProjectKey",
+        example: "prj-def-456",
+        title: "ProjectKey",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -105,6 +112,14 @@ Deletes the project with the given project key. The project must have no files i
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -156,6 +171,14 @@ Deletes the project with the given project key. The project must have no files i
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -206,11 +229,19 @@ Deletes the project with the given project key. The project must have no files i
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
         },
       },
     },
     "404": {
-      description: "The project was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -255,6 +286,13 @@ Deletes the project with the given project key. The project must have no files i
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/file-789-xyz",
           },
         },
       },
@@ -305,6 +343,14 @@ Deletes the project with the given project key. The project must have no files i
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },
