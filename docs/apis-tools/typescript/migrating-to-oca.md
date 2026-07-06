@@ -14,7 +14,6 @@ For existing applications using `@camunda8/sdk`, the SDK includes the Orchestrat
 Use the bundled client if:
 
 - You depend on APIs not supported by the focused client, such as gRPC.
-- Your application must use APIs that are not supported in 8.9, such as the earlier Operate query API.
 - You do not care about application size and do not want to modify your environment configuration.
 
 Import the focused client directly alongside the SDK if:
