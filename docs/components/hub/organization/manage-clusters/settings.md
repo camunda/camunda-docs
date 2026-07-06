@@ -24,7 +24,24 @@ You can enable authorizations on a per-cluster basis to control the level of acc
 - Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Admin, but they are only applied to cluster when you enable this setting.
 
 :::tip
-For more information, see [authorizations](/components/concepts/access-control/authorizations.md).
+Learn more about [resource-based authorizations](/components/concepts/access-control/authorizations.md).
+:::
+
+## Multi-tenancy
+
+You can enable multi-tenancy checks on a per-cluster basis to enforce tenant-level authorization for the cluster's Orchestration Cluster resources.
+
+- Enable this setting to enforce tenant-level authorization checks. Users, groups, and roles not assigned to a tenant lose access to any resources scoped to that tenant.
+- Disable this setting to allow tenants to be created and principals assigned without enforcing checks. All data maps to the `<default>` tenant.
+
+This setting is disabled by default. Only organization admins can change it, and it is available for clusters running generation 8.8 and later. The setting is reversible: disabling it restores the implicit `<default>`-tenant behavior.
+
+For details on creating tenants and managing assignments, see [tenant management](/components/admin/tenant.md).
+
+<!-- TODO: Confirm the exact minimum cluster generation and the final in-UI toggle label ("Multi-tenancy" vs "Multi-Tenancy") with eng. The Console toggle is shown on clusters that ship MultiTenancyConfiguration (Zeebe 8.8.0-alpha7+)... -->
+
+:::warning
+Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
 :::
 
 ## Automatic cluster updates
