@@ -18,6 +18,53 @@ Web Modeler API v1 is the REST API for Web Modeler, a standalone product for mod
 
 [Camunda Hub API v2](/apis-tools/hub-api-sm/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
 
+Before migrating, familiarize yourself with the structural and terminology changes introduced in Camunda 8.10.
+
+## Structure and terminology
+
+Camunda 8.10 changes how resources are organized.
+
+Before Camunda 8.10, Web Modeler resources were organized like this:
+
+```
+Organization
+├─ Project
+│  ├─ Process application
+│  │   ├─ File
+│  │   └─ Folder
+│  │      └─ File
+│  ├─ Folder
+│  │   └─ File
+│  └─ File
+└─ Project
+```
+
+Organizations had projects. Projects optionally contained process applications, folders, and files.
+
+Starting with Camunda 8.10, Camunda Hub resources are organized like this:
+
+```
+Organization
+└─ Workspace
+   ├─ Project
+   │  ├─ Folder
+   │  │   ├─ File
+   │  │   └─ Folder
+   │  └─ File
+   └─ Project
+```
+
+Organizations have workspaces. Workspaces contain projects. Projects optionally contain folders and files.
+
+The new structure introduces the following terminology changes:
+
+| Web Modeler (\<8.10) | Camunda Hub (8.10+) | Notes                                                                  |
+| :------------------- | :------------------ | :--------------------------------------------------------------------- |
+| Project              | Workspace           | Files and folders can no longer be created at the workspace level.     |
+| Process application  | Project             | Process applications weren't explicitly exposed in Web Modeler API v1. |
+
+In Camunda Hub API v2, both the structural and terminology changes are reflected in the endpoint paths, field names, and underlying data. In Web Modeler API v1 running on Camunda 8.10+, only the underlying data reflects the new organization. The sections below identify all affected endpoints and fields.
+
 ## Deprecation timeline
 
 | Version  | Action                                                                                                                                                        |
@@ -142,36 +189,6 @@ Paginated responses in Camunda Hub API v2 have the following changes:
 | `total`            | `page.totalItems`        | Moved into the `page` object |
 | -                  | `page.hasMoreTotalItems` | New field                    |
 
-### Projects renamed to workspaces
-
-In Web Modeler API v1, _projects_ are the top-level container for files and folders:
-
-```
-Organization
-└─ Project        # top-level container
-   ├─ Folder
-   │   ├─ File
-   │   └─ Folder  # nested
-   └─ File        # root-level
-
-```
-
-In Camunda Hub API v2, _workspaces_ are a new organizational level above projects:
-
-```
-Organization
-└─ Workspace         # new top-level container, groups projects
-   ├─ Project        # same as v1 project, now inside a workspace
-   │  ├─ Folder
-   │  │   ├─ File
-   │  │   └─ Folder  # nested
-   │  └─ File        # root-level
-   └─ Project
-      └─ File        # root-level
-```
-
-In the workspace API, the v1 `projectId` is now called the v2 `workspaceKey`. The same UUID works in both. In files and folders, the v1 `projectId` maps to the v2 `projectKey`.
-
 ### Date filters
 
 Web Modeler API v1 supports a custom date precision syntax that encodes a comparison operator, timestamp, and truncation unit into a single string. Camunda Hub API v2 drops this encoding in favor of explicit operators. You compute period boundaries yourself.
@@ -266,14 +283,14 @@ All file API endpoints have a Camunda Hub API v2 equivalent:
 
 The following fields have changed across all file endpoints:
 
-| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                                                                                                                                                                                                                                                                                                                                             |
-| ------------------ | ------------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `fileType`         | `type`             | Request/response | Renamed. `connector_template` is no longer supported. `element_template` is now `element-template`.                                                                                                                                                                                                                                                                               |
-| `folderId`         | `folderKey`        | Request/response | Renamed                                                                                                                                                                                                                                                                                                                                                                           |
-| `projectId`        | `projectKey`       | Request/response | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#projects-renamed-to-workspaces)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#projects-renamed-to-workspaces), but process application data is not explicitly exposed in v1. |
-| -                  | `content`          | Response         | New field                                                                                                                                                                                                                                                                                                                                                                         |
-| `id`               | `fileKey`          | Response         | Renamed                                                                                                                                                                                                                                                                                                                                                                           |
-| `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` is a list of objects. In v2, it's a [string](#canonical-path).                                                                                                                                                                                                                                                                                             |
+| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------ | ------------------ | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `fileType`         | `type`             | Request/response | Renamed. `connector_template` is no longer supported. `element_template` is now `element-template`.                                                                                                                                                                                                                                                                     |
+| `folderId`         | `folderKey`        | Request/response | Renamed                                                                                                                                                                                                                                                                                                                                                                 |
+| `projectId`        | `projectKey`       | Request/response | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#structure-and-terminology)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#structure-and-terminology), but process application data is not explicitly exposed in v1. |
+| -                  | `content`          | Response         | New field                                                                                                                                                                                                                                                                                                                                                               |
+| `id`               | `fileKey`          | Response         | Renamed                                                                                                                                                                                                                                                                                                                                                                 |
+| `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` is a list of objects. In v2, it's a [string](#canonical-path).                                                                                                                                                                                                                                                                                   |
 
 ### Canonical path
 
@@ -289,7 +306,7 @@ In Web Modeler API v1, `canonicalPath` is an array of objects containing an `id`
 }
 ```
 
-In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`-delimited string. Unlike Web Modeler API v1, which includes "projects" ([called "process applications" before Camunda 8.10](#projects-renamed-to-workspaces)), Camunda Hub API v2 only includes folder and file keys. The "project" is given in a separate field, called `projectKey`:
+In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`-delimited string. Unlike Web Modeler API v1, which includes "projects" ([called "process applications" before Camunda 8.10](#structure-and-terminology)), Camunda Hub API v2 only includes folder and file keys. The "project" is given in a separate field, called `projectKey`:
 
 ```json
 {
@@ -310,14 +327,14 @@ A `revision` is now required to prevent overwriting concurrent changes. Fetch th
 
 In addition to the [general field changes](#file-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1       | Camunda Hub API v2  | Notes                                                                                                                                                                                                                                                                                                                                                                       |
-| ------------------------ | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `filter`                 | `filter`            | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`                                                                                                                                                                                                                                                                                         |
-| `filter.projectId`       | `filter.projectKey` | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#projects-renamed-to-workspaces)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#projects-renamed-to-workspaces), but you can't filter on process application data in v1. |
-| `filter.folderId`        | `filter.folderKey`  | Renamed                                                                                                                                                                                                                                                                                                                                                                     |
-| `filter.createdBy.email` | `filter.createdBy`  | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address.                                                                                                                                                                                                                                                                             |
-| `filter.updatedBy.email` | `filter.updatedBy`  | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address.                                                                                                                                                                                                                                                                             |
-| `sort.direction`         | `sort.order`        | Renamed                                                                                                                                                                                                                                                                                                                                                                     |
+| Web Modeler API v1       | Camunda Hub API v2  | Notes                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------ | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter`                 | `filter`            | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`                                                                                                                                                                                                                                                                               |
+| `filter.projectId`       | `filter.projectKey` | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#structure-and-terminology)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#structure-and-terminology), but you can't filter on process application data in v1. |
+| `filter.folderId`        | `filter.folderKey`  | Renamed                                                                                                                                                                                                                                                                                                                                                           |
+| `filter.createdBy.email` | `filter.createdBy`  | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address.                                                                                                                                                                                                                                                                   |
+| `filter.updatedBy.email` | `filter.updatedBy`  | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address.                                                                                                                                                                                                                                                                   |
+| `sort.direction`         | `sort.order`        | Renamed                                                                                                                                                                                                                                                                                                                                                           |
 
 `content` is `null` on all items in the search response. Fetch individual files to retrieve content.
 
@@ -340,11 +357,11 @@ All folder API endpoints have a Camunda Hub API v2 equivalent:
 
 The following fields have changed across all folder endpoints:
 
-| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                                                                                                                                                                                                                                                                                                                                             |
-| ------------------ | ------------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `parentId`         | `parentFolderKey`  | Request/response | Renamed                                                                                                                                                                                                                                                                                                                                                                           |
-| `projectId`        | `projectKey`       | Request/response | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#projects-renamed-to-workspaces)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#projects-renamed-to-workspaces), but process application data is not explicitly exposed in v1. |
-| `id`               | `folderKey`        | Response         | Renamed                                                                                                                                                                                                                                                                                                                                                                           |
+| Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------ | ------------------ | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `parentId`         | `parentFolderKey`  | Request/response | Renamed                                                                                                                                                                                                                                                                                                                                                                 |
+| `projectId`        | `projectKey`       | Request/response | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#structure-and-terminology)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#structure-and-terminology), but process application data is not explicitly exposed in v1. |
+| `id`               | `folderKey`        | Response         | Renamed                                                                                                                                                                                                                                                                                                                                                                 |
 
 ### Get a folder
 
