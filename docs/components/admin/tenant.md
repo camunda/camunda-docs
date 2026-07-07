@@ -23,10 +23,10 @@ To learn more about tenants, see [multi-tenancy](../concepts/multi-tenancy.md).
 
 You can manage your Orchestration Cluster tenants directly in [Admin](admin-introduction.md).
 
-- **Tenancy** is enabled by default.
-- **Tenancy checks** are disabled by default. All data maps to the `<default>` tenant.
+- **Multi-tenancy** is enabled by default.
+- **Multi-tenancy checks** are disabled by default. All data maps to the `<default>` tenant.
 
-This allows administrators to set up tenants and assignments before enforcing tenancy checks.
+This allows administrators to set up tenants and assignments before enforcing multi-tenancy checks.
 
 How you enable multi-tenancy checks depends on your deployment model:
 

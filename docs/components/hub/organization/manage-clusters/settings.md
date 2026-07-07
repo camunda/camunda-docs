@@ -21,7 +21,7 @@ To manage your cluster settings:
 You can enable authorizations on a per-cluster basis to control the level of access users and clients have over Orchestration Cluster resources.
 
 - Enable this setting to use [authorizations](/components/concepts/access-control/authorizations.md) in the cluster.
-- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Admin, but they are only applied to cluster when you enable this setting.
+- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Admin, but they are only applied to the cluster when you enable this setting.
 
 :::tip
 Learn more about [resource-based authorizations](/components/concepts/access-control/authorizations.md).
@@ -29,7 +29,7 @@ Learn more about [resource-based authorizations](/components/concepts/access-con
 
 ## Multi-tenancy
 
-You can enable multi-tenancy checks on a per-cluster basis to enforce tenant-level authorization for the cluster's Orchestration Cluster resources.
+You can enable multi-tenancy checks on a per-cluster basis to enforce tenant-level authorization for Orchestration Cluster resources.
 
 - Enable this setting to enforce tenant-level authorization checks. Users, groups, and roles not assigned to a tenant lose access to any resources scoped to that tenant.
 - Disable this setting to allow tenants to be created and principals assigned without enforcing checks. All data maps to the `<default>` tenant.
