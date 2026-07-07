@@ -273,7 +273,30 @@ The following fields have changed across all file endpoints:
 | `projectId`        | `projectKey`       | Request/response | Renamed                                                                                             |
 | -                  | `content`          | Response         | New field                                                                                           |
 | `id`               | `fileKey`          | Response         | Renamed                                                                                             |
-| `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` was an object. In v2, it's a string.                                         |
+| `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` was a list of objects. In v2, it's a [string](#canonical-path).              |
+
+### Canonical path
+
+In Web Modeler API v1, `canonicalPath` was an array of objects containing an `id` and a `name` for each path element in the file's unique path:
+
+```json
+{
+  "canonicalPath": [
+    { "id": "pa-123", "name": "Order Management" },
+    { "id": "folder-456", "name": "Approvals" },
+    { "id": "file-789", "name": "approve-order.bpmn" }
+  ]
+}
+```
+
+In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`-delimited string. Unlike Web Modeler API v1, which included "projects" ([called "process applications" before Camunda 8.10](#projects-renamed-to-workspaces)), Camunda Hub API v2 only includes folder and file keys. The "project" is given in a separate field, called `projectKey`:
+
+```json
+{
+  "projectKey": "pa-123",
+  "canonicalPath": "/folder-456/file-789"
+}
+```
 
 ### Get a file
 
