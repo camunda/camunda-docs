@@ -141,7 +141,7 @@ Always increment the `version` when you change an element template's content. Th
 
 Rather than relying on reviewers to catch a missing version bump, validate it automatically before the submission ever reaches the catalog. Add a check to your CI pipeline that compares each changed element template against its previous state and fails the pull request when the content changed but the `version` field did not increase.
 
-The [example repository](https://github.com/camunda/catalog-template) includes a GitHub Actions workflow that performs this check on every pull request, so a template change with a stale `version` is caught before it is merged and synced. You can extend the check to allow exceptions—for example, by skipping the validation when a specific pull request label is present.
+The example repository includes a [version-check GitHub Actions workflow](https://github.com/camunda/catalog-template/blob/main/.github/workflows/check-versions.yml) that runs on every pull request, so a template change with a stale `version` is caught before it is merged and synced. You can bypass the check for intentional exceptions by adding the `skip-version-check` label to the pull request.
 
 ## Connect the repository to Hub
 
