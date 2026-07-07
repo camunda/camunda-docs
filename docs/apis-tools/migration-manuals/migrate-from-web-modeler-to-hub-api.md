@@ -14,7 +14,7 @@ Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. Mi
 
 ## About
 
-Web Modeler API v1 was the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposed resources like projects, folders, files, and collaborators as they existed within Web Modeler.
+Web Modeler API v1 is the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposed resources like projects, folders, files, and collaborators as they existed within Web Modeler.
 
 [Camunda Hub API v2](/apis-tools/hub-api-sm/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
 
@@ -47,7 +47,7 @@ See the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentica
 
 ### Error responses
 
-In Web Modeler API v1, error responses used a custom format:
+In Web Modeler API v1, error responses use a custom format:
 
 ```json title="Web Modeler API v1"
 {
@@ -95,7 +95,7 @@ Validation errors include an additional `violations` array:
 
 Offset pagination in Camunda Hub API v2 is different from Web Modeler API v1.
 
-In Web Modeler API v1, you used two fields to paginate items:
+In Web Modeler API v1, you use two fields to paginate items:
 
 - `page` specified the page to return, starting with page 0.
 - `size` specified the number of items per page.
@@ -130,7 +130,7 @@ For example:
 Instead of specifying the number of pages to skip, you specify the index to start _from_ (60) and the maximum number, or _limit_, of items to return (20). This request returns the items at indexes 60–79. As in v1, if there are fewer items than the limit, you receive all remaining items.
 
 :::note
-In addition to the different pagination model, the default page size has changed. In v1, the default page size was 10. In v2, the default limit is 100.
+In addition to the different pagination model, the default page size has changed. In v1, the default page size is 10. In v2, the default limit is 100.
 :::
 
 Paginated responses in Camunda Hub API v2 have the following changes:
@@ -144,7 +144,7 @@ Paginated responses in Camunda Hub API v2 have the following changes:
 
 ### Projects renamed to workspaces
 
-In Web Modeler API v1, _projects_ were the top-level container for files and folders:
+In Web Modeler API v1, _projects_ are the top-level container for files and folders:
 
 ```
 Organization
@@ -273,11 +273,11 @@ The following fields have changed across all file endpoints:
 | `projectId`        | `projectKey`       | Request/response | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#projects-renamed-to-workspaces)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#projects-renamed-to-workspaces), but process application data is not explicitly exposed in v1. |
 | -                  | `content`          | Response         | New field                                                                                                                                                                                                                                                                                                                                                                         |
 | `id`               | `fileKey`          | Response         | Renamed                                                                                                                                                                                                                                                                                                                                                                           |
-| `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` was a list of objects. In v2, it's a [string](#canonical-path).                                                                                                                                                                                                                                                                                            |
+| `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` is a list of objects. In v2, it's a [string](#canonical-path).                                                                                                                                                                                                                                                                                             |
 
 ### Canonical path
 
-In Web Modeler API v1, `canonicalPath` was an array of objects containing an `id` and a `name` for each path element in the file's unique path:
+In Web Modeler API v1, `canonicalPath` is an array of objects containing an `id` and a `name` for each path element in the file's unique path:
 
 ```json
 {
@@ -289,7 +289,7 @@ In Web Modeler API v1, `canonicalPath` was an array of objects containing an `id
 }
 ```
 
-In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`-delimited string. Unlike Web Modeler API v1, which included "projects" ([called "process applications" before Camunda 8.10](#projects-renamed-to-workspaces)), Camunda Hub API v2 only includes folder and file keys. The "project" is given in a separate field, called `projectKey`:
+In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`-delimited string. Unlike Web Modeler API v1, which includes "projects" ([called "process applications" before Camunda 8.10](#projects-renamed-to-workspaces)), Camunda Hub API v2 only includes folder and file keys. The "project" is given in a separate field, called `projectKey`:
 
 ```json
 {
@@ -300,7 +300,7 @@ In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`
 
 ### Get a file
 
-The v1 response returned a nested structure, with `metadata` and `content` as separate top-level fields. The v2 response is a flat object.
+The v1 response returns a nested structure, with `metadata` and `content` as separate top-level fields. The v2 response is a flat object.
 
 ### Update a file
 
@@ -315,8 +315,8 @@ In addition to the [general field changes](#file-api-field-mapping), the followi
 | `filter`                 | `filter`            | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`                                                                                                                                                                                                                                                                                         |
 | `filter.projectId`       | `filter.projectKey` | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#projects-renamed-to-workspaces)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#projects-renamed-to-workspaces), but you can't filter on process application data in v1. |
 | `filter.folderId`        | `filter.folderKey`  | Renamed                                                                                                                                                                                                                                                                                                                                                                     |
-| `filter.createdBy.email` | `filter.createdBy`  | In v1, `createdBy` was an object. In v2, it's a string representing the creator's email address                                                                                                                                                                                                                                                                             |
-| `filter.updatedBy.email` | `filter.updatedBy`  | In v1, `updatedBy` was an object. In v2, it's a string representing the updater's email address                                                                                                                                                                                                                                                                             |
+| `filter.createdBy.email` | `filter.createdBy`  | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address.                                                                                                                                                                                                                                                                             |
+| `filter.updatedBy.email` | `filter.updatedBy`  | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address.                                                                                                                                                                                                                                                                             |
 | `sort.direction`         | `sort.order`        | Renamed                                                                                                                                                                                                                                                                                                                                                                     |
 
 `content` is `null` on all items in the search response. Fetch individual files to retrieve content.
@@ -348,7 +348,7 @@ The following fields have changed across all folder endpoints:
 
 ### Get a folder
 
-In Web Modeler API v1, folder data in the response was nested under a `metadata` key:
+In Web Modeler API v1, folder data in the response is nested under a `metadata` key:
 
 ```json title="Web Modeler API v1"
 {
@@ -414,7 +414,7 @@ The following fields have changed across all workspace endpoints:
 
 ### Get a workspace
 
-In Web Modeler API v1, project data in the response was nested under a `metadata` key:
+In Web Modeler API v1, project data in the response is nested under a `metadata` key:
 
 ```json title="Web Modeler API v1"
 {
@@ -446,14 +446,14 @@ In Camunda Hub API v2, workspace data is nested under a `workspace` key with `pr
 
 In addition to the [general field changes](#workspace-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                           |
-| ------------------------ | ------------------ | ----------------------------------------------------------------------------------------------- |
-| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`             |
-| `filter.id`              | -                  | Removed                                                                                         |
-| `filter.description`     | -                  | Removed                                                                                         |
-| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` was an object. In v2, it's a string representing the creator's email address |
-| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` was an object. In v2, it's a string representing the updater's email address |
-| `sort.direction`         | `sort.order`       | Renamed                                                                                         |
+| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                          |
+| ------------------------ | ------------------ | ---------------------------------------------------------------------------------------------- |
+| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`            |
+| `filter.id`              | -                  | Removed                                                                                        |
+| `filter.description`     | -                  | Removed                                                                                        |
+| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address |
+| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address |
+| `sort.direction`         | `sort.order`       | Renamed                                                                                        |
 
 ## Collaborator API
 
@@ -556,7 +556,7 @@ The following fields have changed across all version endpoints:
 
 ### Get a version
 
-In Web Modeler API v1, version data in the response was nested under a `metadata` key:
+In Web Modeler API v1, version data in the response is nested under a `metadata` key:
 
 ```json title="Web Modeler API v1"
 {
@@ -590,7 +590,7 @@ In addition to the [general field changes](#version-api-field-mapping), the foll
 
 ### Restore a version
 
-In Web Modeler API v1, you used the verb "restore" and passed the `versionId` in the path and the request body:
+In Web Modeler API v1, you use the verb "restore" and pass the `versionId` in the path and the request body:
 
 ```json title="Web Modeler API v1"
 POST /api/v1/versions/{versionId}/restore
@@ -617,7 +617,7 @@ POST /api/v2/versions/{versionKey}/restoration
 
 The compare versions endpoint `GET /versions/compare/{version1Id}...{version2Id}` no longer exists in Camunda Hub API v2.
 
-In Web Modeler API v1, the compare versions endpoint returned a link to a visual comparison between two versions, with `version1Id` as the baseline and `version2Id` as the version being compared.
+In Web Modeler API v1, the compare versions endpoint returns a link to a visual comparison between two versions, with `version1Id` as the baseline and `version2Id` as the version being compared.
 
 Instead of making an API request for this link, you can construct it yourself:
 
