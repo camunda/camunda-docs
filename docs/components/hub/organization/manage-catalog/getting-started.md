@@ -67,6 +67,10 @@ Each asset directory contains exactly two files:
 
 The sync script only looks at these two files; any other files in the repository are ignored.
 
+:::note
+Only the README and element template file are published to the catalog. The asset's implementation—such as the connector code, job workers, or BPMN files—stays in your repository as the source of truth and is deployed to your cluster through your own deployment pipeline. The catalog holds the element template and its description; it does not run or deploy the underlying implementation.
+:::
+
 ### Define the asset README
 
 The README is the asset's metadata file. Camunda Hub detects an asset by the presence of a README with valid frontmatter:
@@ -180,16 +184,17 @@ Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-saas/authe
 
 <TabItem value='self-managed'>
 
-In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance. There is no `audience`, and the Camunda Hub API is served from your own installation, which defaults to `http://localhost:8088`. Adjust the URLs to match your installation:
+In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance. The Camunda Hub API is served from your own installation. The example URLs below use the local defaults (`http://localhost:8088` for the API). In a Helm/Kubernetes deployment, use the service or ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation:
 
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
 export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
+export CAMUNDA_CONSOLE_OAUTH_AUDIENCE="web-modeler-public-api"
 export CAMUNDA_HUB_REST_URL="http://localhost:8088"
 ```
 
-Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions.
+Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions. The token must be issued for the `web-modeler-public-api` audience.
 
 </TabItem>
 </Tabs>
