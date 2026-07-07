@@ -58,10 +58,10 @@ Organizations have workspaces. Workspaces contain projects. Projects optionally 
 
 The new structure introduces the following terminology changes:
 
-| Web Modeler (\<8.10) | Camunda Hub (8.10+) | Notes                                                                  |
-| :------------------- | :------------------ | :--------------------------------------------------------------------- |
-| Project              | Workspace           | Files and folders can no longer be created at the workspace level.     |
-| Process application  | Project             | Process applications weren't explicitly exposed in Web Modeler API v1. |
+| Web Modeler (\<8.10) | Camunda Hub (8.10+) | Notes                                                                                                                                                                                                  |
+| :------------------- | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project              | Workspace           | Files and folders can no longer be created at the workspace level.                                                                                                                                     |
+| Process application  | Project             | Process applications weren't explicitly exposed in Web Modeler API v1. In Camunda Hub API v2, there is a dedicated [project API](/docs/apis-tools/hub-api-saas/specifications/create-project.api.mdx). |
 
 In Camunda Hub API v2, both the structural and terminology changes are reflected in the endpoint paths, field names, and underlying data. In Web Modeler API v1 running on Camunda 8.10+, only the underlying data reflects the new organization. The sections below identify all affected endpoints and fields.
 
