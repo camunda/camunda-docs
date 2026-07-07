@@ -542,7 +542,7 @@ All version API endpoints have a Camunda Hub API v2 equivalent, except the compa
 | Delete a version     | `DELETE /v1/versions/{versionId}`                      | `DELETE /v2/versions/{versionKey}`           |
 | Search versions      | `POST /v1/versions/search`                             | `POST /v2/versions/search`                   |
 | Restore a version    | `POST /v1/versions/{versionId}/restore`                | `POST /v2/versions/{versionKey}/restoration` |
-| Compare two versions | `GET /v1/versions/compare/{version1Id}...{version2Id}` | Does not exist                               |
+| Compare two versions | `GET /v1/versions/compare/{version1Id}...{version2Id}` | [Does not exist](#compare-two-versions)      |
 
 ### Field mapping {#version-api-field-mapping}
 
