@@ -28,13 +28,6 @@ To activate an RDBMS backend, configure two components:
 Example configuration:
 
 ```yaml
-# Enable the RDBMS exporter in Zeebe
-zeebe:
-  broker:
-    exporters:
-      rdbms:
-        className: camunda.data.exporters.rdbms.className
-
 # Configure secondary storage for Camunda applications
 camunda:
   data:
