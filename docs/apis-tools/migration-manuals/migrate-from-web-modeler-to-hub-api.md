@@ -12,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. Migrate to [Camunda Hub API v2](/apis-tools/hub-api-sm/overview.md) before upgrading to 8.12.
 :::
 
-## About
+## About this migration
 
 Web Modeler API v1 is the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposed resources like projects, folders, files, and collaborators as they existed within Web Modeler.
 
@@ -70,7 +70,7 @@ In Camunda Hub API v2, both the structural and terminology changes are reflected
 | Version  | Action                                                                                                                                                        |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **8.10** | Camunda Hub API v2 ships alongside Web Modeler API v1. Web Modeler API v1 is documented as **deprecated**, and its OpenAPI spec is marked `deprecated: true`. |
-| **8.11** | Web Modeler API v1 remains available but is not extended. No new features are added to deprecated endpoints.                                                  |
+| **8.11** | Web Modeler API v1 remains available but isn't extended. No new features are added to deprecated endpoints.                                                   |
 | **8.12** | Web Modeler API v1 endpoints are removed. Applications still using v1 receive `404`.                                                                          |
 
 ## General changes
@@ -191,7 +191,7 @@ Paginated responses in Camunda Hub API v2 have the following changes:
 
 ### Date filters
 
-Web Modeler API v1 supports a custom date precision syntax that encodes a comparison operator, timestamp, and truncation unit into a single string. Camunda Hub API v2 drops this encoding in favor of explicit operators. You compute period boundaries yourself.
+Web Modeler API v1 supports a custom date precision syntax that encodes a comparison operator, timestamp, and truncation unit into a single string. Camunda Hub API v2 uses explicit operators instead. You compute period boundaries yourself.
 
 The following examples show equivalent date filters in Web Modeler API v1 and Camunda Hub API v2:
 
@@ -238,7 +238,7 @@ Camunda Hub API v2 replaces these with an explicit operator set:
 }
 ```
 
-The following filter operators are available in Camunda Hub API:
+The following filter operators are available in Camunda Hub API v2:
 
 | Operator         | Description                             | Example                                                                     |
 | ---------------- | --------------------------------------- | --------------------------------------------------------------------------- |
@@ -288,7 +288,7 @@ The following fields have changed across all file endpoints:
 | `fileType`         | `type`             | Request/response | Renamed. `connector_template` is no longer supported. `element_template` is now `element-template`.                                                                                                                                                                                                                                                                     |
 | `folderId`         | `folderKey`        | Request/response | Renamed. If the file isn't in a folder, v1 endpoints return the project ID (["process application" before Camunda 8.10](#structure-and-terminology)), and v2 endpoints return `null`.                                                                                                                                                                                   |
 | `projectId`        | `projectKey`       | Request/response | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#structure-and-terminology)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#structure-and-terminology), but process application data is not explicitly exposed in v1. |
-| -                  | `content`          | Response         | New field                                                                                                                                                                                                                                                                                                                                                               |
+| -                  | `content`          | Response         | In v1, `content` is returned as a separate top-level field alongside `metadata`. In v2, it's included in the flat file object.                                                                                                                                                                                                                                          |
 | `id`               | `fileKey`          | Response         | Renamed                                                                                                                                                                                                                                                                                                                                                                 |
 | `canonicalPath`    | `canonicalPath`    | Response         | In v1, `canonicalPath` is a list of objects. In v2, it's a [string](#canonical-path).                                                                                                                                                                                                                                                                                   |
 
@@ -506,11 +506,11 @@ The following fields have changed across all collaborator endpoints:
 
 In addition to the [general field changes](#collaborator-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1 | Camunda Hub API v2    | Notes                                                                                                   |
-| ------------------ | --------------------- | ------------------------------------------------------------------------------------------------------- |
-| `filter`           | `filter`              | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`                     |
-| `filter.projectId` | `filter.workspaceKey` | Renamed. In v2, `filter.workspaceKey` is required — collaborators cannot be searched across workspaces. |
-| `sort.direction`   | `sort.order`          | Renamed                                                                                                 |
+| Web Modeler API v1 | Camunda Hub API v2    | Notes                                                                                                 |
+| ------------------ | --------------------- | ----------------------------------------------------------------------------------------------------- |
+| `filter`           | `filter`              | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`                   |
+| `filter.projectId` | `filter.workspaceKey` | Renamed. In v2, `filter.workspaceKey` is required. Collaborators can't be searched across workspaces. |
+| `sort.direction`   | `sort.order`          | Renamed                                                                                               |
 
 Here is an example request from v1:
 
@@ -599,15 +599,15 @@ In Camunda Hub API v2, version data is at the top level of the response body:
 
 In addition to the [general field changes](#version-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                                    |
-| ------------------ | ------------------ | ---------------------------------------------------------------------------------------- |
-| `filter`           | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`      |
-| `filter.fileId`    | `filter.fileKey`   | Renamed. In v2, `filter.fileKey` is required — versions cannot be searched across files. |
-| `sort.direction`   | `sort.order`       | Renamed                                                                                  |
+| Web Modeler API v1 | Camunda Hub API v2 | Notes                                                                                  |
+| ------------------ | ------------------ | -------------------------------------------------------------------------------------- |
+| `filter`           | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`    |
+| `filter.fileId`    | `filter.fileKey`   | Renamed. In v2, `filter.fileKey` is required. Versions can't be searched across files. |
+| `sort.direction`   | `sort.order`       | Renamed                                                                                |
 
 ### Restore a version
 
-In Web Modeler API v1, you use the verb "restore" and pass the `versionId` in the path and the request body:
+In Web Modeler API v1, the endpoint path uses `/restore`, and you pass the `versionId` in both the path and the request body:
 
 ```json title="Web Modeler API v1"
 POST /api/v1/versions/{versionId}/restore
@@ -616,7 +616,7 @@ POST /api/v1/versions/{versionId}/restore
 }
 ```
 
-In Camunda Hub API v2, use the noun "restoration" and identify the version to restore using the path parameter:
+In Camunda Hub API v2, the endpoint path uses `/restoration`, and you identify the version using the path parameter:
 
 ```json title="Camunda Hub API v2"
 POST /api/v2/versions/{versionKey}/restoration
