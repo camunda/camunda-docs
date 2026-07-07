@@ -91,7 +91,7 @@ Track import progress with the [Optimize metrics and bundled Grafana dashboards]
 
 ##### Keep variables out of Optimize (highest impact, lowest risk)
 
-Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are three levers, from most to least aggressive:
+Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables; see [why](./data-flow.md#optimize-data-flow)), so almost the entire cost lives in Optimize's analytics indices. There are three levers, from most to least aggressive:
 
 - **Stop exporting variables entirely.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) at the exporter to drop all variable records. This is the only lever that also recovers throughput because the exporter write path is the bottleneck at maximum load.
 - **Export only the variables you need (name and prefix filters).** Keep a subset with name or prefix filters, for example only `customer`-prefixed variables. Use this when some variables drive Optimize reports, but most are noise.
