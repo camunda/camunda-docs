@@ -53,7 +53,7 @@ The following key changes were also released as part of an 8.7.x patch release.
 | Patch release                                                    | Type            | Key change                                                                                                       |
 | :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
-| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for composite variables](#output-mapping-behavior-change)                        |
+| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
@@ -90,11 +90,11 @@ Under these conditions:
 - Before the fix is available: ensure all variable names inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
 - After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
 
-### Output mapping behavior change for composite variables {#output-mapping-behavior-change}
+### Output mapping behavior change for object variables {#output-mapping-behavior-change}
 
 **Affected versions:** 8.7.28–8.7.32. Fixed in 8.7.33.
 
-Patches 8.7.28–8.7.32 changed how output mappings behave when writing to composite (object) variables. Upgrading to 8.7.33+ reverts this change, which can alter the behavior of your running processes.
+Patches 8.7.28–8.7.32 changed how output mappings behave when writing to object variables. Upgrading to 8.7.33+ reverts this change, which can alter the behavior of your running processes.
 
 Before 8.7.28 and from 8.7.33+, assigning an object literal to a variable replaces the variable entirely. In 8.7.28–8.7.32, the behavior changed to _merge_: existing keys in the variable are preserved and new keys are added.
 

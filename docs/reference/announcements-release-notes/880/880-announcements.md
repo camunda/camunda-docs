@@ -79,7 +79,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 | :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
 | [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Output mapping behavior change for composite variables](#output-mapping-behavior-change)                                                             |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
@@ -1039,11 +1039,11 @@ Under these conditions:
 </div>
 <div className="release-announcement-content">
 
-#### Output mapping behavior change for composite variables {#output-mapping-behavior-change}
+#### Output mapping behavior change for object variables {#output-mapping-behavior-change}
 
 **Affected versions:** 8.8.23–8.8.27. Fixed in 8.8.28.
 
-Patches 8.8.23–8.8.27 changed how output mappings behave when writing to composite (object) variables. Upgrading to 8.8.28+ reverts this change, which can alter the behavior of your running processes.
+Patches 8.8.23–8.8.27 changed how output mappings behave when writing to object variables. Upgrading to 8.8.28+ reverts this change, which can alter the behavior of your running processes.
 
 Before 8.8.23 and from 8.8.28+, assigning an object literal to a variable replaces the variable entirely. In 8.8.23–8.8.27, the behavior changed to _merge_: existing keys in the variable are preserved and new keys are added.
 
