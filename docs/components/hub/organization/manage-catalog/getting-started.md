@@ -137,6 +137,12 @@ Additionally, every `id` in a single submission must be unique. If two templates
 Always increment the `version` when you change an element template's content. The catalog API validates the whole submission as a single transaction. If any asset fails validation, _no_ changes are applied.
 :::
 
+### Enforce version increments in CI
+
+Rather than relying on reviewers to catch a missing version bump, validate it automatically before the submission ever reaches the catalog. Add a check to your CI pipeline that compares each changed element template against its previous state and fails the pull request when the content changed but the `version` field did not increase.
+
+The [example repository](https://github.com/camunda/catalog-template) includes a GitHub Actions workflow that performs this check on every pull request, so a template change with a stale `version` is caught before it is merged and synced. You can extend the check to allow exceptions—for example, by skipping the validation when a specific pull request label is present.
+
 ## Connect the repository to Hub
 
 Use a CI/CD job in your repository to authenticate with the Camunda Hub API and submit the current set of element templates to the catalog whenever the repository changes.
