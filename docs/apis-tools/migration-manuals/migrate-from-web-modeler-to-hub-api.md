@@ -58,10 +58,10 @@ Organizations have workspaces. Workspaces contain projects. Projects optionally 
 
 The new structure introduces the following terminology changes:
 
-| Web Modeler (\<8.10) | Camunda Hub (8.10+) | Notes                                                                                                                                                                                                  |
-| :------------------- | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project              | Workspace           | Files and folders can no longer be created at the workspace level.                                                                                                                                     |
-| Process application  | Project             | Process applications weren't explicitly exposed in Web Modeler API v1. In Camunda Hub API v2, there is a dedicated [project API](/docs/apis-tools/hub-api-saas/specifications/create-project.api.mdx). |
+| Web Modeler (\<8.10) | Camunda Hub (8.10+) | Notes                                                                                                                                                                                             |
+| :------------------- | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Project              | Workspace           | Files and folders can no longer be created at the workspace level.                                                                                                                                |
+| Process application  | Project             | Process applications weren't explicitly exposed in Web Modeler API v1. In Camunda Hub API v2, there is a dedicated [project API](/apis-tools/hub-api-saas/specifications/create-project.api.mdx). |
 
 In Camunda Hub API v2, both the structural and terminology changes are reflected in the endpoint paths, field names, and underlying data. In Web Modeler API v1 running on Camunda 8.10+, only the underlying data reflects the new organization. The sections below identify all affected endpoints and fields.
 
@@ -359,7 +359,7 @@ The following fields have changed across all folder endpoints:
 
 | Web Modeler API v1 | Camunda Hub API v2 | Application      | Notes                                                                                                                                                                                                                                                                                                                                                                   |
 | ------------------ | ------------------ | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `parentId`         | `parentFolderKey`  | Request/response | Renamed. If the file isn't in a folder, v1 endpoints return the project ID (["process application" before Camunda 8.10](#structure-and-terminology)), and v2 endpoints return `null`.                                                                                                                                                                                   |
+| `parentId`         | `parentFolderKey`  | Request/response | Renamed. If the folder isn't in another folder, v1 endpoints return the project ID (["process application" before Camunda 8.10](#structure-and-terminology)), and v2 endpoints return `null`.                                                                                                                                                                           |
 | `projectId`        | `projectKey`       | Request/response | In v1, `projectId` refers to the ID of the "workspace" ([called the "project" before Camunda 8.10](#structure-and-terminology)). In v2, `projectKey` refers to the key of the "project". The concept of a "project" was [called a "process application" before Camunda 8.10](#structure-and-terminology), but process application data is not explicitly exposed in v1. |
 | `id`               | `folderKey`        | Response         | Renamed                                                                                                                                                                                                                                                                                                                                                                 |
 
@@ -373,7 +373,7 @@ In Web Modeler API v1, folder data in the response is nested under a `metadata` 
     "id": "f-456",
     "name": "processes",
     "projectId": "p-123",
-    "parentId": null,
+    "parentId": "parent-789",
     "created": "...",
     "createdBy": { "name": "...", "email": "..." }
   },
@@ -391,7 +391,7 @@ In Camunda Hub API v2, folder data is nested under a `folder` key:
   "folder": {
     "folderKey": "f-456",
     "name": "processes",
-    "projectKey": "p-123",
+    "projectKey": "parent-789",
     "parentFolderKey": null,
     "created": "...",
     "createdBy": { "name": "...", "email": "..." },
