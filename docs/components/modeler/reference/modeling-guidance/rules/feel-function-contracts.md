@@ -41,6 +41,25 @@ The documented signature has up to five parameters: `fromAi(value, description, 
 = fromAi(toolCall.maxResults, "How many results to return.", "number")
 ```
 
+## Declaring a sub-process as agentic
+
+This rule only applies inside an agentic ad-hoc sub-process. An ad-hoc sub-process is recognized as agentic when it carries a `zeebe:property` named `io.camunda.agenticai.role` with one of:
+
+- `agent`: an embedded AI Agent sub-process, where the sub-process itself is the agent.
+- `toolContainer`: a detached tools sub-process, whose tools are driven by a separate AI Agent task.
+
+To set it, select the ad-hoc sub-process, open the **Extension properties** section in the properties panel, and add a property with name `io.camunda.agenticai.role` and value `toolContainer` (or `agent`). In the XML:
+
+```xml
+<bpmn:adHocSubProcess id="Tools">
+  <bpmn:extensionElements>
+    <zeebe:properties>
+      <zeebe:property name="io.camunda.agenticai.role" value="toolContainer" />
+    </zeebe:properties>
+  </bpmn:extensionElements>
+</bpmn:adHocSubProcess>
+```
+
 ## References
 
 - [AI Agent tool definitions](../../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
