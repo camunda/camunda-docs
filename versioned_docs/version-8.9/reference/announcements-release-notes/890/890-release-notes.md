@@ -122,6 +122,10 @@ Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can que
 
 <p class="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
 
+### Camunda Spring Boot Starter - Spring Boot 4.1 support
+
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.9.12` patch onward. Spring Boot 4.0.x remains the default bundled version.
+
 ## Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
@@ -252,6 +256,20 @@ The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated valu
 Helm deployments in 8.9 now support fully integrated RDBMS secondary storage, expose the Orchestration Cluster REST port on 8080 by default, and allow authorization rules to be initialized directly from `values.yaml`. This reduces post-install manual setup and makes Helm-based deployments align more closely with current platform defaults.
 
 <p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
+
+### Docker images
+
+<!-- https://github.com/camunda/camunda/issues/50159 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+Camunda no longer produces the following Docker images in Camunda 8.9, starting from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
 
 ## Reference architectures
 

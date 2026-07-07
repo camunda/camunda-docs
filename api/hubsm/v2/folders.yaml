@@ -12,6 +12,8 @@ paths:
       summary: Create a folder
       description: Creates a new folder in the specified project and/or parent folder.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - folderKey
       tags:
         - Folder
       requestBody:
@@ -42,6 +44,12 @@ paths:
       summary: Get a folder
       description: Returns the folder metadata and its content (child folders and files).
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Folder
+        bind:
+          folderKey:
+            from: path
+            name: folderKey
       tags:
         - Folder
       parameters:
@@ -67,6 +75,12 @@ paths:
       summary: Update a folder
       description: Updates the name and/or location of an existing folder.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Folder
+        bind:
+          folderKey:
+            from: path
+            name: folderKey
       tags:
         - Folder
       parameters:
@@ -98,8 +112,19 @@ paths:
     delete:
       operationId: deleteFolder
       summary: Delete a folder
-      description: Deletes the folder with the given folder key. The folder must have no files in the folder or any of its descendants.
+      description: >-
+        Soft-deletes the folder with the given folder key. The folder is moved to
+        the recently deleted state and can be recovered during the retention
+        window. The folder must have no files in the folder or any of its
+        descendants. To permanently and irreversibly remove a folder, use
+        `DELETE /folders/{folderKey}/permanent` instead.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Folder
+        bind:
+          folderKey:
+            from: path
+            name: folderKey
       tags:
         - Folder
       parameters:
@@ -118,6 +143,38 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
+  /folders/{folderKey}/permanent:
+    delete:
+      operationId: permanentlyDeleteFolder
+      summary: Permanently delete a folder
+      description: >-
+        Permanently and irreversibly removes the folder with the given folder
+        key. The folder cannot be recovered afterwards. The folder must have no
+        files in the folder or any of its descendants. This works in one step and
+        does not require the folder to be soft-deleted first.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Folder
+      parameters:
+        - $ref: "#/components/parameters/FolderKeyPathParam"
+      responses:
+        "204":
+          description: The folder was permanently deleted successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The folder was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
 components:
   parameters:
     FolderKeyPathParam:
@@ -126,7 +183,7 @@ components:
       required: true
       description: The unique key identifying the folder.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/FolderKey"
 
   schemas:
     # --- Request schemas ---
@@ -148,12 +205,14 @@ components:
           maxLength: 255
         projectKey:
           description: The key of the project this folder belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         parentFolderKey:
           description: >
             The key of the parent folder. If omitted or null, the folder is created at project root.
-          type: string
           nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
 
     FolderUpdateRequest:
       type: object
@@ -169,13 +228,15 @@ components:
           maxLength: 255
         projectKey:
           description: The project to move the folder to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         parentFolderKey:
           description: >
             The updated parent folder key. Set to null to move to project root.
             Cannot be the same as the folder being updated.
-          type: string
           nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
 
     # --- Response schemas ---
 
@@ -206,17 +267,20 @@ components:
       properties:
         folderKey:
           description: The unique key identifying this folder.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
         name:
           description: The name of the folder.
           type: string
         projectKey:
           description: The key of the project this folder belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         parentFolderKey:
           description: The key of the parent folder. Null if the folder is at project root.
-          type: string
           nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
         created:
           description: The timestamp when the folder was created.
           type: string

@@ -97,6 +97,10 @@ Elasticsearch needs enough memory available to load a large amount of this data 
 Use SSD-backed storage for Zeebe (your primary storage). Every command is written and flushed to the Zeebe Raft log before it is processed: the leader must persist the entry and followers must flush it before acknowledging, so disk write and flush **latency** sits directly on the processing critical path. As with Elasticsearch, the critical factor is latency, not throughput — cloud-provider throughput figures often look similar for HDD and SSD, which is misleading. In testing, HDD-backed primary storage degraded throughput by roughly 50%, raised commit latency, and triggered additional Raft snapshot replication. Provision performant, low-latency (single-digit-millisecond write latency) disks for Zeebe. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for the detailed findings.
 :::
 
+:::note Index replicas in multi-node clusters
+The disk estimates in this section do not account for index-level replicas. In multi-node Elasticsearch/OpenSearch clusters, configure at least one replica per index for fault tolerance — each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [Configuring shards and replicas](/self-managed/concepts/secondary-storage-management.md#replicas) for guidance.
+:::
+
 Assuming a [typical payload of 15 process variables (simple strings, numbers or booleans)](https://github.com/camunda/camunda/blob/main/load-tests/load-tester/src/main/resources/bpmn/typical_payload.json), Camunda measured the following approximate disk space requirements using Camunda 8 SaaS 1.2.4. These are not exact numbers, but they can help you estimate what to expect:
 
 - Zeebe: 75 kb / PI
@@ -121,6 +125,23 @@ Using your throughput and retention settings, you can now calculate the required
 | PI in retention time       |    \* 6 months     |      3,600,000 |                                                                                                    |
 | Disk space                 |     \* 21 kib      |      72.10 GiB |                                                                                                    |
 | **Sum**                    |                    | **113.87 GiB** |                                                                                                    |
+
+### Zeebe record ILM retention
+
+When the [Elasticsearch exporter retention policy](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#retention) is enabled, Zeebe record indices are deleted after the configured `minimum-age`. Optimize reads from these same indices, so the retention window must be long enough to cover Optimize's worst-case import lag. If the exporter deletes records before Optimize imports them, process instance completion events are permanently lost: Optimize records the instance as `ACTIVE` with no `endDate`, and history cleanup can never remove it.
+
+**Minimum recommended retention:** Set `minimum-age` to at least **3 days** when running Optimize; **7 or more days** is recommended. This provides headroom for:
+
+- Import lag that grows as the Optimize process instance index grows larger.
+- Recovery time after Elasticsearch cluster events such as node restarts, rolling upgrades, and shard rebalancing.
+
+The default `minimum-age` of `30d` provides sufficient headroom. If you reduced it to limit disk usage, verify that the new value still exceeds your observed Optimize import lag before applying it to production.
+
+**Disk sizing:** A longer ILM retention window means Zeebe record indices are kept on disk longer before deletion. Factor the additional raw exporter index volume into your Elasticsearch disk budget when increasing `minimum-age` beyond the default.
+
+**Self-reinforcing failure mode:** As Optimize's process instance index grows, Elasticsearch write latency increases, which raises per-batch import lag. Higher import lag increases the probability of an ILM race on the next cluster event. This cycle compounds on long-lived clusters running at sustained load. To break it, increase ILM retention and reduce the Optimize index size through history cleanup or variable filtering.
+
+**Symptom:** If Optimize history cleanup runs on schedule but consistently completes in zero seconds against a large dataset, orphaned `ACTIVE` documents are likely accumulating. See [diagnosing stalled cleanup](/self-managed/optimize-deployment/configuration/history-cleanup.md#diagnosing-stalled-cleanup).
 
 ## Understanding sizing and scalability behavior
 

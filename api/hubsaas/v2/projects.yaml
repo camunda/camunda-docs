@@ -12,6 +12,8 @@ paths:
       summary: Create a project
       description: Creates a new empty project in the specified workspace.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - projectKey
       tags:
         - Project
       requestBody:
@@ -42,6 +44,12 @@ paths:
       summary: Get a project
       description: Returns the project metadata and its content (child folders and files).
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -67,6 +75,12 @@ paths:
       summary: Update a project
       description: Updates the name and/or workspace of an existing project.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -99,10 +113,18 @@ paths:
       operationId: deleteProject
       summary: Delete a project
       description: >
-        Deletes the project with the given project key. The project must have no
-        files in the project or any of its descendants. Empty folders and version
-        history are removed as part of the deletion.
+        Soft-deletes the project with the given project key. The project is moved
+        to the recently deleted state and can be recovered during the retention
+        window. The project must have no files in the project or any of its
+        descendants. To permanently and irreversibly remove a project, use
+        `DELETE /projects/{projectKey}/permanent` instead.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -118,6 +140,39 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/permanent:
+    delete:
+      operationId: permanentlyDeleteProject
+      summary: Permanently delete a project
+      description: >
+        Permanently and irreversibly removes the project with the given project
+        key. The project cannot be recovered afterwards. The project must have no
+        files in the project or any of its descendants. Empty folders and version
+        history are removed as part of the deletion. This works in one step and
+        does not require the project to be soft-deleted first.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "204":
+          description: The project was permanently deleted successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: The project was not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -159,7 +214,7 @@ components:
       required: true
       description: The unique key identifying the project.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/ProjectKey"
 
   schemas:
     # --- Request schemas ---
@@ -181,7 +236,8 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     ProjectUpdateRequest:
       type: object
@@ -196,7 +252,8 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace to move the project to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     # --- Response schemas ---
 
@@ -304,13 +361,15 @@ components:
       properties:
         projectKey:
           description: The unique key identifying this project.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         name:
           description: The name of the project.
           type: string
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
         created:
           description: The timestamp when the project was created.
           type: string
@@ -372,6 +431,7 @@ components:
       properties:
         workspaceKey:
           description: Filter by workspace key.
+          x-semantic-type: WorkspaceKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:

@@ -136,7 +136,9 @@ The following key changes were also released as part of an 8.9.x patch release.
 | Patch release                                                    | Type            | Key change                                                                                                       |
 | :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
 | [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                     |
+| [8.9.12](https://github.com/camunda/camunda/releases/tag/8.9.12) | Breaking change | [Individual component Docker images no longer produced](#individual-component-docker-images-no-longer-produced)  |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
 ## Agentic orchestration
@@ -419,6 +421,41 @@ The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*
 **Action:** Update your integrations to use the new endpoint format and review the streamlined architecture documentation for details.
 
 <p className="link-arrow">[Streamlined SaaS orchestration architecture](../../../apis-tools/migration-manuals/saas-orchestration-architecture.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Frontend application URLs now require explicit application prefix {#frontend-path-prefix-required}
+
+In Camunda 8.9, Operate and Tasklist run in a single unified frontend application rather than as separate deployments. This architectural change requires explicit path prefixes to route requests to the correct handler. As a result, the automatic path redirection that previously allowed access without an explicit application prefix has been removed.
+
+Before 8.9, both of the following URLs worked:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/processes/<process-id>
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+```
+
+From 8.9, only the URL with the explicit application prefix is valid:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+https://<region>.tasklist.camunda.io/<cluster-id>/tasklist/tasks/<task-id>
+```
+
+Prefix-less paths now return `404 Not Found` instead of redirecting.
+
+**Impact:** Any bookmarks, external links, scripts, or applications that use prefix-less frontend URLs will break after upgrading to 8.9.
+
+**Action:** Update all stored or constructed frontend URLs to include the explicit application prefix (`/operate/` or `/tasklist/`). If you use reverse proxies or load balancers, consider adding redirect rules to handle legacy URL formats.
+
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#frontend-application-urls-now-require-explicit-application-prefix-breaking)</p>
 
 </div>
 </div>
@@ -776,6 +813,25 @@ The Orchestration Cluster's default HTTP port has changed from 8090 to 8080 (`or
 This aligns the Helm chart with the Orchestration Cluster's default configuration.
 
 **Action:** If you have hardcoded port 8090 in network policies, Ingress rules, health check probes, or service mesh configuration, update these references to 8080 or explicitly set `orchestration.service.httpPort: 8090` in your `values.yaml`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Individual component Docker images no longer produced
+
+Camunda no longer produces the following individual component Docker images in Camunda 8.9, starting from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+**Action:** Before updating to Camunda 8.9.12 or later, or upgrading to Camunda 8.10, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>
@@ -1401,6 +1457,35 @@ Under these conditions:
 
 - Before the fix is available: ensure all variable names inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
 - After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Output mapping behavior change for object variables {#output-mapping-behavior-change}
+
+**Affected versions:** 8.9.1–8.9.8. Fixed in 8.9.9.
+
+Patches 8.9.1–8.9.8 changed how output mappings behave when writing to object variables. Upgrading to 8.9.9+ reverts this change, which can alter the behavior of your running processes.
+
+Before 8.9.1 and from 8.9.9+, assigning an object literal to a variable replaces the variable entirely. In 8.9.1–8.9.8, the behavior changed to _merge_: existing keys in the variable are preserved and new keys are added.
+
+Example: task A sets `result = {a: 1}`, then task B sets `result = {b: 2}`:
+
+- _Replace_ (before 8.9.1 and from 8.9.9+): `result = {"b": 2}` — task A's value is overwritten.
+- _Merge_ (8.9.1–8.9.8): `result = {"a": 1, "b": 2}` — task A's value is preserved.
+
+Replace is the intended long-term behavior. The merge behavior in the affected patches was an unintended regression.
+
+**Action:**
+
+- **Running 8.9.1–8.9.8:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
+- **Upgrading to 8.9.9+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
 
 </div>
 </div>

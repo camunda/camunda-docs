@@ -28,8 +28,8 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
 - **Operator support**: For operational support on infrastructure components, engage the respective project teams or community support channels directly (CloudNativePG, Elastic, Keycloak), or use managed services.
   :::
 
-:::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+:::warning Transitional path: Bitnami enterprise images (deprecated in this release)
+If you're still using Bitnami subcharts during migration, you can continue with Bitnami Premium images in Camunda 8.9. Bitnami subcharts will be **removed in Camunda 8.10** — complete your migration before upgrading. See [Bitnami enterprise images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for transitional configuration, or [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for migration instructions.
 :::
 
 <MigrationTip />
@@ -45,7 +45,7 @@ Using official Kubernetes operators provides several advantages over traditional
 - **Advanced lifecycle management**: Automated upgrades, failover, and disaster recovery capabilities
 - **Best practices implementation**: Following upstream recommended deployment patterns established by vendor experts
 - **Vendor expertise**: Access to specialized knowledge and troubleshooting from the teams that build these technologies (through vendor support channels)
-- **Future-proof architecture**: Doesn't depend on deprecated Bitnami subcharts, ensuring long-term maintainability
+- **Future-proof architecture**: Eliminates dependency on third-party image supply chains (Bitnami/Broadcom), giving you direct control over infrastructure image sources, base OS, and update cadence. Bitnami subcharts are removed in Camunda 8.10.
 
 ## Prerequisites
 
@@ -690,6 +690,30 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 - Verify redirect URLs match your deployment setup
 
 **Reference:** [Keycloak Operator Documentation](https://www.keycloak.org/operator/basic-deployment)
+
+#### Keycloak pod crashes on HTTP/2 cleartext (h2c) requests
+
+**Symptoms:** The Keycloak pod exits or enters `CrashLoopBackOff` when it receives an HTTP/2 cleartext (h2c) request, such as a client sending an `Upgrade: h2c` header over a plain-HTTP port-forward. Clients receive an empty reply, and the Keycloak logs show a `java.lang.NoSuchMethodError` originating from Vert.x and Netty.
+
+**Cause:** `camunda/keycloak:quay-optimized-*` image tags older than `quay-optimized-26.6.4` bundle a conflicting Netty HTTP/2 codec under `/opt/keycloak/providers`, pulled in transitively by the AWS Advanced JDBC Wrapper. It shadows the Netty version shipped with Keycloak and breaks h2c handling.
+
+**Solutions:**
+
+- Upgrade the Keycloak image to `camunda/keycloak:quay-optimized-26.6.4` or later, where the conflicting Netty libraries are removed. Update the `image` field in your Keycloak custom resource (`keycloak-instance-*.yml`). This is the recommended fix.
+- If you cannot upgrade, disable HTTP/2 so Keycloak falls back to HTTP/1.1. Set the `QUARKUS_HTTP_HTTP2` environment variable to `false` in the Keycloak custom resource:
+
+  ```yaml
+  spec:
+    unsupported:
+      podTemplate:
+        spec:
+          containers:
+            - env:
+                - name: QUARKUS_HTTP_HTTP2
+                  value: "false"
+  ```
+
+**Reference:** [camunda/keycloak HTTP/2 cleartext crash issue](https://github.com/camunda/camunda-deployment-references/issues/2809)
 
 ## Production considerations
 
