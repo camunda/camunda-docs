@@ -68,7 +68,7 @@ Each asset directory contains exactly two files:
 The sync script only looks at these two files; any other files in the repository are ignored.
 
 :::note
-Only the README and element template file are published to the catalog. The asset's implementation—such as the connector code, job workers, or BPMN files—stays in your repository as the source of truth and is deployed to your cluster through your own deployment pipeline. The catalog holds the element template and its description; it does not run or deploy the underlying implementation.
+Only the README and element template file are published to the catalog. The asset's implementation—such as job workers, BPMN files, or linked forms—stays in your repository as the source of truth and is deployed to your cluster through your own deployment pipeline. The catalog holds the element template and its description; it does not run or deploy the underlying implementation.
 :::
 
 ### Define the asset README
@@ -190,7 +190,7 @@ Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-saas/authe
 
 <TabItem value='self-managed'>
 
-In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance. There is no `audience`, and the Camunda Hub API is served from your own installation. The example URLs below use the local defaults (`http://localhost:8088` for the API). In a Helm/Kubernetes deployment, use the service or ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation:
+In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance. There is no `audience`, and the Camunda Hub API is served from your own installation. The example URLs below use the local defaults (`http://localhost:8088` for the API). In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation:
 
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
