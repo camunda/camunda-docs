@@ -136,6 +136,7 @@ The following key changes were also released as part of an 8.9.x patch release.
 | Patch release                                                    | Type            | Key change                                                                                                       |
 | :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
 | [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                     |
+| [8.9.12](https://github.com/camunda/camunda/releases/tag/8.9.12) | Breaking change | [Individual component Docker images no longer produced](#individual-component-docker-images-no-longer-produced)  |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
@@ -811,6 +812,25 @@ The Orchestration Cluster's default HTTP port has changed from 8090 to 8080 (`or
 This aligns the Helm chart with the Orchestration Cluster's default configuration.
 
 **Action:** If you have hardcoded port 8090 in network policies, Ingress rules, health check probes, or service mesh configuration, update these references to 8080 or explicitly set `orchestration.service.httpPort: 8090` in your `values.yaml`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Individual component Docker images no longer produced
+
+Camunda no longer produces the following individual component Docker images in Camunda 8.9, starting from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+**Action:** Before updating to Camunda 8.9.12 or later, or upgrading to Camunda 8.10, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>
