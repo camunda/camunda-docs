@@ -1778,7 +1778,6 @@ module.exports = {
                   },
                   items: [
                     "self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation",
-                    "self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images",
                   ],
                 },
                 {

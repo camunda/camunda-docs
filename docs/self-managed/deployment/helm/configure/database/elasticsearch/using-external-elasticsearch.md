@@ -12,7 +12,7 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
 This page applies to the Orchestration Cluster only. If you also deploy Optimize, configure Optimize separately using [use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md).
 
 :::note
-The bundled Elasticsearch Bitnami subchart (`elasticsearch.enabled: true`) is deprecated and will be removed in a future release. For production deployments, use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for details.
+The bundled Elasticsearch Bitnami subchart is removed in Camunda 8.10 (Helm chart `15.x`). Use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for details.
 :::
 
 ## Prerequisites
@@ -42,12 +42,6 @@ Before configuring, collect the following information about your external Elasti
 | `orchestration.data.secondaryStorage.elasticsearch.tls.secret.existingSecret`     | string | `""`    | Reference to an existing Kubernetes Secret containing the TLS trust store.                            |
 | `orchestration.data.secondaryStorage.elasticsearch.tls.secret.existingSecretKey`  | string | `""`    | Key within the existing Kubernetes Secret for the TLS trust store.                                    |
 | `orchestration.index.prefix`                                                      | string | `""`    | Index prefix in Elasticsearch for the new Camunda exporter and the Orchestration Cluster.             |
-
-#### Bundled Elasticsearch subchart (deprecated)
-
-| values.yaml option      | type    | default | description                                             |
-| ----------------------- | ------- | ------- | ------------------------------------------------------- |
-| `elasticsearch.enabled` | boolean | `false` | Enables or disables the bundled Elasticsearch subchart. |
 
 ### Example usage
 

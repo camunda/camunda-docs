@@ -309,10 +309,6 @@ If a legacy JKS field and `global.tls.caBundle` are both set, the legacy field t
 
 The init container builds a PKCS12 truststore; the chart omits `-Djavax.net.ssl.trustStoreType` to match the JVM default. If you supply a legacy JKS via `tls.secret.existingSecret`, add `-Djavax.net.ssl.trustStoreType=jks` to `javaOpts` explicitly.
 
-### Bitnami PostgreSQL `tls.certCAFilename` enables mTLS
-
-Do not set `tls.certCAFilename` on the bundled Bitnami PostgreSQL subchart. It switches PostgreSQL into `clientcert=verify-full` mode (`pg_hba.conf`) and breaks plain clients. Use `tls.certFilename` and `tls.certKeyFilename` only.
-
 ### Console and Web Modeler websockets are Node.js
 
 The chart sets both `SSL_CERT_FILE` and `NODE_EXTRA_CA_CERTS` on Node.js components automatically. Do not add `NODE_EXTRA_CA_CERTS` via `console.env` or `webModeler.websockets.env` — Kubernetes last-wins env semantics make the value undefined.

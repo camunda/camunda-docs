@@ -156,7 +156,7 @@ You must create Kubernetes secrets for all client secrets required by your ident
 ### Connect external databases
 
 :::note
-To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
+Camunda 8.10 does not bundle databases. Provide PostgreSQL and Elasticsearch through managed services or Kubernetes operators (see [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md)), and use production-grade databases.
 :::
 
 This guide keeps database configuration in one flow and provides two options:
@@ -170,7 +170,7 @@ You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL 
 
 #### Connecting to Amazon OpenSearch
 
-The following example `values.yaml` enables OpenSearch with the required configuration. This example also globally disables all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false`, and disables internal Elasticsearch through `elasticsearch.enabled: false`:
+The following example `values.yaml` enables OpenSearch with the required configuration. This example also disables Elasticsearch as the secondary storage for all components through `global.elasticsearch.enabled: false`:
 
 ```yaml
 global:
@@ -187,9 +187,6 @@ global:
       protocol: https
       host: opensearch.example.com
       port: 443
-
-elasticsearch:
-  enabled: false
 ```
 
 #### Connect to an external database for Management Identity
@@ -548,8 +545,10 @@ identity:
       existingSecret: identity-db-secret
       existingSecretKey: database-password
 
+camundaHub:
+  enabled: true # Deploys both Console and Web Modeler
+
 webModeler:
-  enabled: true
   contextPath: /modeler
   restapi:
     mail:
@@ -571,8 +570,6 @@ orchestration:
 optimize:
   enabled: false
 connectors:
-  enabled: false
-elasticsearch:
   enabled: false
 console:
   # Multi-namespace deployments require manual console.configuration to define
@@ -708,13 +705,7 @@ optimize:
   contextPath: /optimize
 identity:
   enabled: false
-identityKeycloak:
-  enabled: false
-webModeler:
-  enabled: false
-webModelerPostgresql:
-  enabled: false
-elasticsearch:
+camundaHub:
   enabled: false
 ```
 
