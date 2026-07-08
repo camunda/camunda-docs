@@ -36,7 +36,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 | Release date | Changelog(s)                                                                                        | Blog |
 | :----------- | :-------------------------------------------------------------------------------------------------- | :--- |
-| 07 July 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha3)</li></ul> | -    |
+| 14 July 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha3)</li></ul> | -    |
 
 ### APIs & tools
 
@@ -170,6 +170,21 @@ On new trial clusters in Camunda 8 SaaS, Optimize is now disabled by default. Wh
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
+### Helm chart deployment
+
+#### Docker images
+
+<!-- https://github.com/camunda/camunda/issues/50159 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+Camunda no longer produces the following Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+Use the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image instead.
 
 ## 8.10.0-alpha2
 

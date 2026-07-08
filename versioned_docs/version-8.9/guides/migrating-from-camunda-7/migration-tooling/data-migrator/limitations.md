@@ -203,10 +203,12 @@ The history migration has the following limitations.
     - See https://github.com/camunda/camunda/issues/47927
   - Please use [RDBMS History Cleanup](/self-managed/concepts/databases/relational-db/configuration.md#history-cleanup-1) to delete the migrated data.
 - The minimum required history level in Camunda 7 is `FULL` to ensure that sufficient data is available for migration.
-- To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
-  - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
-  - These migrated definitions are visible in Camunda 8 Tasklist but cannot be started. To start new instances, you need to use the [Diagram Converter](../diagram-converter.md) to migrate your legacy processes to Camunda 8 compatible versions and deploy them to Camunda 8 as described in the [preparation step for runtime migration](runtime.md#1-preparation).
-    - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1000
+- To avoid collisions with native Camunda 8 definitions, the Data Migrator prefixes each migrated Camunda 7 history definition ID (process, decision, and form definitions) with `c7-legacy-` by default.
+  - (Optional) You can configure a different prefix with the `camunda.migrator.history.legacy-id-prefix` property. If you don't set this property, the default prefix is used. For configuration details and validation rules, see the [property reference](config-properties.md#camundamigrator).
+  - The same effective prefix is applied to all migrated history definition types and to the entities that reference them.
+  - Do not deploy new definitions in Camunda 8 with IDs starting with the effective prefix. Changing or removing the default prefix increases the risk of ID collisions, so only change it when you are sure your Camunda 8 definition IDs cannot clash with migrated IDs.
+- Migrated definitions are visible in Camunda 8 Tasklist but cannot be started. To start new instances, you need to use the [Diagram Converter](../diagram-converter.md) to migrate your legacy processes to Camunda 8 compatible versions and deploy them to Camunda 8 as described in the [preparation step for runtime migration](runtime.md#1-preparation).
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1000
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
 - During migration, some entities may be skipped due to unresolved dependencies (for example, when a parent entity has not yet been migrated).
   - After the initial migration completes, the migrator automatically retries skipped entities to resolve cross-entity dependencies.

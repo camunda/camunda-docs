@@ -287,6 +287,15 @@ Starting with 8.10, the `JobIntent.COMPLETED` follow-up event is emitted without
 With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Hub REST API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-hub-rest-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
 
 **Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Hub REST API before 8.12.
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
+
+Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
+
+**Action:** Migrate your application to Spring Boot 4.1.x. See the [version compatibility table](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) for details.
 
 </div>
 </div>
@@ -344,6 +353,25 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
 
 **Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Individual component Docker images no longer produced
+
+Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>
