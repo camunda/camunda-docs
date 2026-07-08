@@ -8,7 +8,7 @@ import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
 The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule catches the **structural** breaks the AI Agent connector cannot recover from: the call resolves to nothing at runtime, with no error and no value. Because the failure is silent and deterministic, these are reported as errors.
 
-The judgment-call parts of the same function (a missing description, an ambiguous conditional key) are warnings and live in [FEEL function contracts](./feel-function-contracts.md).
+The judgment-call parts of the same function (a missing description, an ambiguous conditional key) are warnings and live in [Agent fromAi() guidance](./agent-fromai-guidance.md).
 
 ## <MarkerGuideline.Invalid /> Contract breaks
 
@@ -19,6 +19,7 @@ The rule reports:
 - **Key is nested**: the connector uses the last path segment as the parameter name, so `toolCall.input.filter` registers `filter` but reads a path the connector never populates. Use a single name: `toolCall.filter`.
 - **Key is declared twice in one tool**: all `fromAi()` calls on a tool's entry element combine into one input schema, so a duplicated key collides. Declare each key once and reference the variable directly elsewhere.
 - **Wrong function-name casing**: the name is case-sensitive. Use `fromAi`, not `fromai` or `fromAI`.
+- **Description is a bare number or `null`**: unlike a missing description or a dynamically-built one, there is no legitimate reading of a numeric or `null` literal as documentation text for the LLM. Use a quoted string, for example `fromAi(toolCall.url, "The URL to fetch.")`.
 - **`fromAi()` in the wrong place**: the connector populates `toolCall` only for a tool's inputs, and only on the tool's entry element. A call in an output mapping, in a sequence-flow condition, on a non-entry element, or outside an agentic ad-hoc sub-process resolves to null. Define the parameter in an input mapping on the entry element and read the resulting variable where you need it.
 
 ## <MarkerGuideline.Valid /> Correct `fromAi()` usage
@@ -50,7 +51,7 @@ To set it, select the ad-hoc sub-process, open the **Extension properties** sect
 
 ## References
 
-- [FEEL function contracts](./feel-function-contracts.md), covering the warning-level checks on the same `fromAi()` call
+- [Agent fromAi() guidance](./agent-fromai-guidance.md), covering the warning-level checks on the same `fromAi()` call
 - [AI Agent tool definitions](../../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
 - [`fromAi()` FEEL function](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md)
 - [Rule source](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/agent-fromai-contract.js)
