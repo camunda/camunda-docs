@@ -152,7 +152,7 @@ Deletion no longer corrupts process application version history, as existing sna
 
 <p class="link-arrow">[Recover deleted resources](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
 
-#### Desktop Modeler improvements
+#### Variables panel improvements
 
 <!-- https://github.com/camunda/camunda-modeler/issues/5934, https://github.com/camunda/camunda-modeler/issues/5938 -->
 
@@ -160,6 +160,8 @@ Deletion no longer corrupts process application version history, as existing sna
 
 - When you hover over "written in X elements" or an element ID in the variables panel, the diagram now highlights the corresponding element or elements so you can quickly see where a variable is used.
 - FEEL expressions in the variable outline now use the same syntax highlighting as the FEEL editor, with more granular tokens that distinguish function names from arguments and operators from literals, making complex expressions easier to read.
+
+<p class="link-arrow">[Inspecting variables](/components/modeler/data-handling.md#inspecting-variables)</p>
 
 ### Operate
 
