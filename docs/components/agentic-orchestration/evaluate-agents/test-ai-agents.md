@@ -386,10 +386,6 @@ camunda:
           secret-key: ${AWS_LLM_BEDROCK_SECRET_KEY}
 ```
 
-:::note Bedrock IAM requirements
-The AWS principal must have `bedrock:InvokeModel` permission on the embedding model ARN, and the model must be [enabled for access](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) in the configured region. This is a separate grant from the judge chat model.
-:::
-
 </TabItem>
 
 <TabItem value='openai-compatible-similarity'>
