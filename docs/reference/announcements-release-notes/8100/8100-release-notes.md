@@ -38,6 +38,21 @@ import PageDescription from '@site/src/components/PageDescription';
 | :----------- | :-------------------------------------------------------------------------------------------------- | :--- |
 | 14 July 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha3)</li></ul> | -    |
 
+### Agentic orchestration
+
+#### AI agent testing assertions in Camunda Process Test
+
+<!-- https://github.com/camunda/product-hub/issues/3315 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span></div>
+
+You can now test non-deterministic AI agent behavior in Camunda Process Test with conditional behavior controls and evaluation-based assertions. This helps teams validate agent behavior and output quality with clearer, more reliable test outcomes.
+
+- Define conditional behavior in tests with a `when(condition).then(action)` API for activation-based flow control.
+- Assert output quality with LLM-as-Judge expectations when exact matching is not enough.
+- Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
+- Configure remote or local models through code and properties for both local development and CI/CD pipelines.
+
 ### APIs & tools
 
 #### Public Hub REST API
