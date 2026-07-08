@@ -16,7 +16,7 @@ Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it 
 ## Generate a token
 
 1. [Add an M2M application in Management Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
-2. [Grant this application access](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the **Camunda Hub API** with the necessary permissions.
+2. [Grant this application access](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the **Web Modeler API** with the necessary permissions.
 3. Capture the `Client ID` and `Client Secret` from the application in Management Identity.
 4. [Generate a token](/self-managed/components/management-identity/authentication.md#generate-a-token), providing the previously-captured values as the `client_id` and `client_secret`:
    ```shell
