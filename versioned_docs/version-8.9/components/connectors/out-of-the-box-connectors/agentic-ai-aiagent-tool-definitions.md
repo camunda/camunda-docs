@@ -90,8 +90,8 @@ You can use the `fromAi` function in:
 - Input mappings (for example, service task, script task, user task).
 - Custom input fields provided by an element template if an element template is applied to the activity as technically these are handled as input mappings.
 
-:::important
-`fromAi` only applies to activities resolved as **static tool definitions**. [Gateway tool definitions](#gateway-tool-definitions) (for example, MCP Client or A2A activities) determine their input schemas dynamically from the external source they connect to, so `fromAi` calls in their input mappings have no effect and are ignored.
+:::note
+`fromAi` only applies to activities resolved as **static tool definitions**. [Gateway tool definitions](#gateway-tool-definitions), such as MCP Client or A2A activities, determine their input schemas dynamically from the external source they connect to. As a result, `fromAi` calls in their input mappings have no effect and are ignored.
 :::
 
 For example, the following image shows an example of `fromAi` function usage on a [REST outbound connector](../protocol/rest.md):
@@ -215,7 +215,9 @@ Gateway tools are activities that expose multiple tools from an external source,
 
 To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
 
-Because the tools behind a gateway activity are discovered dynamically rather than resolved from the BPMN model, their input schemas are not derived from [`fromAi`](#ai-generated-parameters-via-fromai) function calls in the gateway activity's input mappings. Instead, each discovered tool's input schema is provided by the external source itself, for example, the input schema included in the `tools/list` response returned by an MCP server. Any `fromAi` calls configured on a gateway tool activity's input mappings are ignored.
+Because the tools behind a gateway activity are discovered dynamically rather than resolved from the BPMN model, their input schemas are not derived from [`fromAi`](#ai-generated-parameters-via-fromai) function calls in the gateway activity's input mappings.
+
+Instead, each discovered tool's input schema is provided by the external source itself, for example, the input schema included in the `tools/list` response returned by an MCP server. Any `fromAi` calls configured on a gateway tool activity's input mappings are ignored.
 
 For more details, see the available gateway tool implementations:
 
