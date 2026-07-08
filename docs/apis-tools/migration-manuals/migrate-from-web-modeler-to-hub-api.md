@@ -63,7 +63,7 @@ The new structure introduces the following terminology changes:
 | Project              | Workspace           | Files and folders can no longer be created at the workspace level.                                                                                                                                |
 | Process application  | Project             | Process applications weren't explicitly exposed in Web Modeler API v1. In Camunda Hub API v2, there is a dedicated [project API](/apis-tools/hub-api-saas/specifications/create-project.api.mdx). |
 
-In Camunda Hub API v2, both the structural and terminology changes are reflected in the endpoint paths, field names, and underlying data. In Web Modeler API v1 running on Camunda 8.10+, only the underlying data reflects the new organization. The sections below identify all affected endpoints and fields.
+In Camunda Hub API v2, the endpoint paths, field names, and underlying data all reflect the structural and terminology changes. In Web Modeler API v1 running on Camunda 8.10+, only the underlying data reflects the new organization. The sections below identify all affected endpoints and fields.
 
 ## Deprecation timeline
 
@@ -152,8 +152,8 @@ Offset pagination in Camunda Hub API v2 is different from Web Modeler API v1.
 
 In Web Modeler API v1, you use two fields to paginate items:
 
-- `page` specified the page to return, starting with page 0.
-- `size` specified the number of items per page.
+- `page` specifies the page to return, starting with page 0.
+- `size` specifies the number of items per page.
 
 For example:
 
@@ -275,7 +275,7 @@ The following filter operators are available in Camunda Hub API v2:
 
 ## Dropped endpoints
 
-The following v1 endpoints have no v2 equivalent and are not carried forward:
+The following v1 endpoints have no v2 equivalent:
 
 | Web Modeler API v1                                     | Notes                                                                                    |
 | ------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
@@ -445,7 +445,7 @@ In addition to the [general field changes](#file-api-field-mapping), the followi
 
 `content` is `null` on all items in the search response. Fetch individual files to retrieve content.
 
-Here is an example request from v1:
+The following example shows a v1 request:
 
 ```json title="Web Modeler API v1"
 {
@@ -462,7 +462,7 @@ Here is an example request from v1:
 }
 ```
 
-Here is an equivalent request from v2:
+The equivalent v2 request:
 
 ```json title="Camunda Hub API v2"
 {
@@ -560,7 +560,7 @@ In Camunda Hub API v2, folder data is nested under a `folder` key:
 
 ## Workspace API
 
-In Web Modeler API v1, you managed projects with the `projects` resource. In Camunda Hub API v2, projects are now called workspaces, and you manage them with the `workspaces` resource. The UUID values are the same. The concept, field names, and API paths have changed.
+In Web Modeler API v1, you manage workspaces ([called "projects" before Camunda 8.10](#structure-and-terminology)) with the `projects` resource. In Camunda Hub API v2, you manage them with the `workspaces` resource. The UUID values are the same. The concept, field names, and API paths have changed.
 
 ### Endpoint mapping
 
@@ -647,7 +647,7 @@ In addition to the [general field changes](#workspace-api-field-mapping), the fo
 | `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address |
 | `sort.direction`         | `sort.order`       | Renamed                                                                                        |
 
-Here is an example request from v1:
+The following example shows a v1 request:
 
 ```json title="Web Modeler API v1"
 {
@@ -663,7 +663,7 @@ Here is an example request from v1:
 }
 ```
 
-Here is an equivalent request from v2:
+The equivalent v2 request:
 
 ```json title="Camunda Hub API v2"
 {
@@ -679,11 +679,7 @@ Here is an equivalent request from v2:
 
 ## Member API
 
-Camunda Hub API v2 makes three important changes to the v1 collaborator API:
-
-- The [path](#endpoint-mapping) is restructured under workspaces and renamed to "members".
-- The HTTP method for [adding a member](#add-a-member) changes from `PUT` to `POST`.
-- The [role enum](#role) is renamed.
+In Camunda Hub API v2, the collaborators API has been renamed to "members". The following sections cover changes that apply to the member API endpoints.
 
 ### Endpoint mapping
 
@@ -736,7 +732,7 @@ In addition to the [general field changes](#member-api-field-mapping), the follo
 | `filter.projectId` | `filter.workspaceKey` | Renamed. In v2, `filter.workspaceKey` is required. Members can't be searched across workspaces. |
 | `sort.direction`   | `sort.order`          | Renamed                                                                                         |
 
-Here is an example request from v1:
+The following example shows a v1 request:
 
 ```json title="Web Modeler API v1"
 {
@@ -751,7 +747,7 @@ Here is an example request from v1:
 }
 ```
 
-Here is an equivalent request from v2:
+The equivalent v2 request:
 
 ```json title="Camunda Hub API v2"
 {
@@ -862,7 +858,7 @@ In addition to the [general field changes](#version-api-field-mapping), the foll
 | `filter.fileId`    | `filter.fileKey`   | Renamed. In v2, `filter.fileKey` is required. Versions can't be searched across files. |
 | `sort.direction`   | `sort.order`       | Renamed                                                                                |
 
-Here is an example request from v1:
+The following example shows a v1 request:
 
 ```json title="Web Modeler API v1"
 {
@@ -876,7 +872,7 @@ Here is an example request from v1:
 }
 ```
 
-Here is an equivalent request from v2:
+The equivalent v2 request:
 
 ```json title="Camunda Hub API v2"
 {
@@ -933,7 +929,7 @@ Instead of making an API request for this link, you can construct it yourself:
 | Form             | `{baseURL}/forms/{fileKey}/versions/{versionKey1}...{versionKey2}`               |
 | RPA              | `{baseURL}/rpa-scripts/{fileKey}/versions/{versionKey1}...{versionKey2}`         |
 
-Replace `{baseURL}` with the Web Modeler base URL. The version keys must be for the same file.
+Replace `{baseURL}` with the Camunda Hub base URL. The version keys must be for the same file.
 
 For example:
 
