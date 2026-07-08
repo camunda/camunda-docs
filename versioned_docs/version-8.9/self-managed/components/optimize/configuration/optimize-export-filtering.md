@@ -32,7 +32,7 @@ This is useful when you have high-volume processes that don't need analytics in 
 | Export only specific processes | `bpmnProcessIdInclusion` |
 | Exclude specific processes     | `bpmnProcessIdExclusion` |
 
-Exclusion wins over inclusion when both lists contain a matching ID. Value types without a `bpmnProcessId` (such as `DEPLOYMENT` and `DECISION`) are not affected by these filters.
+Both options can coexist in the same configuration, with exclusion taking precedence when an ID appears in both lists. Value types without a `bpmnProcessId`, such as `DEPLOYMENT` and `DECISION`, are not affected by these filters.
 
 **Example**
 
@@ -70,8 +70,6 @@ camunda:
 
 </TabItem>
 </Tabs>
-
-Both options can coexist in the same configuration. In this example, only `orderProcess` is exported; if it were also listed under `bpmnProcessIdExclusion`, the exclusion would take precedence and it would be dropped.
 
 ## Variable filtering
 
