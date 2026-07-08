@@ -639,7 +639,7 @@ In Web Modeler API v1, the compare versions endpoint returns a link to a visual 
 Instead of making an API request for this link, you can construct it yourself:
 
 1. Get the file and version keys from the search or get version API.
-2. Insert the keys into one of the following URL patterns:
+2. Insert the keys into one of the following URL patterns, and open the URL in your browser:
 
 | Resource type    | Template URL                                                                     |
 | :--------------- | :------------------------------------------------------------------------------- |
@@ -649,6 +649,12 @@ Instead of making an API request for this link, you can construct it yourself:
 | RPA              | `{baseURL}/rpa-scripts/{fileKey}/versions/{versionKey1}...{versionKey2}`         |
 
 Replace `{baseURL}` with the Web Modeler base URL. The version keys must be for the same file.
+
+For example:
+
+```bash
+https://hub.cloud.camunda.io/diagrams/98634f96-52e9-4c00-8702-893a12803771/versions/2b6fd548-e107-4338-ae59-37a609f65202...78e0f8c5-0462-4521-bff9-5f432d689925
+```
 
 ## Info API
 
