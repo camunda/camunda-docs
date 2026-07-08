@@ -101,7 +101,11 @@ When you upgrade an orchestration cluster that has more than one valid upgrade t
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of a process as low-code integration tests. Run segment tests individually or in batches to validate process changes faster, and test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run. Reuse saved segment tests during iterative model changes to catch regressions earlier.
+When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
+
+- Run segment tests individually or in batches to validate process changes faster.
+- Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
+- Reuse saved segment tests during iterative model changes to catch regressions earlier.
 
 <p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/play-your-process.md)</p>
 
@@ -159,7 +163,9 @@ In Operate, you can now combine multiple variable filters with AND logic to find
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-On new trial clusters in Camunda 8 SaaS, Optimize is now disabled by default. When Optimize is disabled, the overview shows a muted tile with an **Enable Optimize** prompt so it stays discoverable. Upgrading from a trial to a paid plan automatically enables Optimize, with no manual action required.
+On new trial clusters in Camunda 8 SaaS, Optimize is now disabled by default. When Optimize is disabled, the overview shows a muted tile with an **Enable Optimize** prompt so it stays discoverable.
+
+Upgrading from a trial to a paid plan automatically enables Optimize, with no manual action required.
 
 ### Orchestration Cluster
 
@@ -170,6 +176,7 @@ On new trial clusters in Camunda 8 SaaS, Optimize is now disabled by default. Wh
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
+
 ### Helm chart deployment
 
 #### Docker images
