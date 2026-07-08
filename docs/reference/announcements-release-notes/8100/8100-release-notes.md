@@ -208,7 +208,9 @@ You can now call a dynamically calculated version of a DMN decision from a BPMN 
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 adds support for new relational database versions. Operators running self-managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances. New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, MariaDB 12.3, and Microsoft SQL Server 2025.
+Camunda 8.10 adds support for new relational database versions. Operators running self-managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
+
+New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, MariaDB 12.3, and Microsoft SQL Server 2025.
 
 <p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
