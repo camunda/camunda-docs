@@ -946,6 +946,12 @@ const sidebar: SidebarsConfig = {
           label: "Get element instance statistics",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-wait-state-statistics",
+          label: "Get wait state statistics",
+          className: "api-method get",
+        },
       ],
     },
     {

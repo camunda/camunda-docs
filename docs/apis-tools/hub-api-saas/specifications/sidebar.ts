@@ -30,14 +30,14 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/get-clusters",
-          label: "Get all clusters",
+          id: "apis-tools/hub-api-saas/specifications/get-cluster-registrations",
+          label: "Get all cluster registrations",
           className: "api-method get",
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/create-cluster",
-          label: "Create or update a cluster",
+          id: "apis-tools/hub-api-saas/specifications/create-cluster-registration",
+          label: "Create or update a cluster registration",
           className: "api-method post",
         },
         {
@@ -48,8 +48,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/delete-cluster",
-          label: "Delete a cluster",
+          id: "apis-tools/hub-api-saas/specifications/remove-cluster-registration",
+          label: "Remove a cluster registration",
           className: "api-method delete",
         },
       ],
@@ -84,9 +84,33 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/permanently-delete-file",
+          label: "Permanently delete a file",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "apis-tools/hub-api-saas/specifications/search-files",
           label: "Search files",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/search-recently-deleted-files",
+          label: "Search recently deleted files",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/restore-file",
+          label: "Restore a recently deleted file",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/purge-file",
+          label: "Purge a file from all version history",
+          className: "api-method delete",
         },
       ],
     },
@@ -116,6 +140,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-saas/specifications/delete-folder",
           label: "Delete a folder",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/permanently-delete-folder",
+          label: "Permanently delete a folder",
           className: "api-method delete",
         },
       ],
@@ -158,6 +188,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-saas/specifications/delete-project",
           label: "Delete a project",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/permanently-delete-project",
+          label: "Permanently delete a project",
           className: "api-method delete",
         },
         {
