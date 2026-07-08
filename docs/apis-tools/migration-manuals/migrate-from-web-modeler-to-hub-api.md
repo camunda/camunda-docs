@@ -92,60 +92,6 @@ In Camunda 8 Self-Managed, the URLs depend on your configuration. The URLs and p
 
 See the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) for setup instructions.
 
-### Error responses
-
-<!--- TODO: check if this is correct --->
-
-In Web Modeler API v1, error responses use a custom format:
-
-```json title="Web Modeler API v1"
-{
-  "message": "File not found",
-  "status": 404
-}
-```
-
-In Camunda Hub API v2, all error responses use the [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) "problem detail" format with `Content-Type: application/problem+json`:
-
-```json title="Camunda Hub API v2"
-{
-  "type": "about:blank",
-  "title": "Not Found",
-  "status": 404,
-  "detail": "Not Found",
-  "instance": "/api/v2/files/12345a67-89b0-1c23-4567-890d12345678"
-}
-```
-
-This format includes the following fields:
-
-| Field      | Description                                              |
-| ---------- | -------------------------------------------------------- |
-| `type`     | URI identifying the problem type (usually `about:blank`) |
-| `title`    | Short human-readable summary                             |
-| `status`   | HTTP status code                                         |
-| `detail`   | Explanation with actionable guidance                     |
-| `instance` | URI of the request that caused the error                 |
-
-Validation errors include an additional `invalidParams` array:
-
-```json title="Camunda Hub API v2"
-{
-  "type": "about:blank",
-  "title": "Bad Request",
-  "status": 400,
-  "detail": "Validation failed",
-  "instance": "/api/v2/files",
-  "invalidParams": [
-    {
-      "rejectedValue": "",
-      "name": "name",
-      "reason": "size must be between 1 and 255"
-    }
-  ]
-}
-```
-
 ### Pagination
 
 Offset pagination in Camunda Hub API v2 is different from Web Modeler API v1.
