@@ -150,6 +150,8 @@ Deleting an item in Web Modeler no longer removes it immediately. Deleted projec
 
 Deletion no longer corrupts process application version history, as existing snapshots continue to reference deleted files correctly. The recovery window applies to deletions made in 8.10 and later; items deleted before upgrading cannot be recovered.
 
+<p class="link-arrow">[Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
+
 ### Operate
 
 #### Wait states
