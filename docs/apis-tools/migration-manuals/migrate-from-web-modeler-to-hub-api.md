@@ -9,14 +9,14 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::warning Deprecation notice
-Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. Migrate to [Camunda Hub API v2](/apis-tools/hub-api-sm/overview.md) before upgrading to 8.12.
+Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. Migrate to [Camunda Hub API v2](/apis-tools/hub-api-saas/overview.md) before upgrading to 8.12.
 :::
 
 ## About this migration
 
 Web Modeler API v1 is the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposes resources like projects, folders, files, and collaborators as they exist within Web Modeler.
 
-[Camunda Hub API v2](/apis-tools/hub-api-sm/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
+[Camunda Hub API v2](/apis-tools/hub-api-saas/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
 
 Before migrating, familiarize yourself with the structural and terminology changes introduced in Camunda 8.10.
 
@@ -90,7 +90,7 @@ In Camunda 8 Self-Managed, the URLs depend on your configuration. The URLs and p
 
 ### Authentication
 
-See the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) for setup instructions.
+See the Camunda Hub API authentication guide for [SaaS](/apis-tools/hub-api-saas/authentication.md) or [Self-Managed](/apis-tools/hub-api-sm/authentication.md) for setup instructions.
 
 ### Pagination
 
