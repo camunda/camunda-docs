@@ -232,18 +232,13 @@ Users need specific permissions to access Orchestration Cluster web components:
   - `*` for access to all components
 - Without these permissions, users cannot access the components.
 
-#### Tasklist V1 and Tasklist V2
+#### Tasklist authorization model
 
-Tasklist uses different mechanisms to control user task visibility, depending on the API version:
+Tasklist uses the Orchestration Cluster authorization model, including process-level permissions on `Process Definition` and task-level authorizations on `USER_TASK` (with property-based access control). For Tasklist-specific behavior and recommended patterns, see [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
 
-- Tasklist V1: Uses user task access restrictions based on BPMN assignee, candidate users, and candidate groups.
-  These restrictions are configured separately and apply only to Tasklist V1.
-- Tasklist V2 and the Orchestration Cluster REST API: Use the Orchestration Cluster authorization model,
-  including process-level permissions on `Process Definition` and task-level authorizations on `USER_TASK`
-  (with property-based access control). For Tasklist-specific behavior and recommended patterns, see
-  [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
-
-After switching from Tasklist V1 to Tasklist V2, user task access restrictions no longer apply. Instead, configure the appropriate `Process Definition` and `USER_TASK` authorizations to control who can see, claim, and complete tasks.
+:::note
+Tasklist V1 and its user task access restrictions (based on BPMN assignee, candidate users, and candidate groups) were removed in Camunda 8.10. If you're migrating from an earlier version, configure the appropriate `Process Definition` and `USER_TASK` authorizations to control who can see, claim, and complete tasks.
+:::
 
 ### Resource-level access
 
