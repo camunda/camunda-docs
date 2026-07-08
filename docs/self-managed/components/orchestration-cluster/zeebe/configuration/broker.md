@@ -960,27 +960,39 @@ security:
 
 ### Camunda Hub ping configuration
 
-This feature enables components like the Zeebe Broker, Tasklist, Operate, and Zeebe Gateway to ping Camunda Hub with license information. For this feature to work, you must enable [dynamic cluster configuration](/self-managed/components/hub/configuration/properties.md#dynamic-cluster-management), which exposes the create cluster API endpoint.
+This feature enables components like the Zeebe Broker, Tasklist, Operate, and Zeebe Gateway to ping Camunda Hub with license information. For this feature to work, you must enable [dynamic cluster management](/self-managed/components/hub/configuration/properties.md#dynamic-cluster-management), which exposes the `POST /clusters` API endpoint.
 
-#### camunda.console.ping
+#### camunda.hub.ping
 
-| Field                        | Description                                                                                                                                                                                 | Example value                              |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| `enabled`                    | Enables or disables the ping to console feature. Disabled by default. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED`                     | `true`                                     |
-| `endpoint`                   | Create cluster API endpoint where pings should be sent. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENDPOINT`.                                 | `https://hub.endpoint.com/api/v1/clusters` |
-| `clusterName`                | Cluster name sent with telemetry. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_CLUSTERNAME`.                                                    | `test_cluster_name`                        |
-| `pingPeriod`                 | Frequency of pings (for example, `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PINGPERIOD`.                                  | `1h`                                       |
-| `properties`                 | Additional properties to include in the ping payload (as key-value pairs). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PROPERTIES`.            | `testProperty: 123`                        |
-| `retry.maxRetries`           | Maximum number of retry attempts after a failed ping. Uses exponential backoff. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MAXRETRIES`. | `1`                                        |
-| `retry.minRetryDelay`        | Minimum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MINRETRYDELAY`.                                               | `1s`                                       |
-| `retry.maxRetryDelay`        | Maximum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MAXRETRYDELAY`.                                               | `10s`                                      |
-| `retry.retryDelayMultiplier` | Multiplier applied to delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_RETRYDELAYMULTIPLIER`.                          | `2`                                        |
+| Field                        | Description                                                                                                                                                                             | Example value                              |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `enabled`                    | Enables or disables the ping to Hub feature. Disabled by default. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_ENABLED`.                        | `true`                                     |
+| `endpoint`                   | The `POST /clusters` API endpoint where pings are sent. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_ENDPOINT`.                                 | `https://hub.endpoint.com/api/v1/clusters` |
+| `clusterName`                | Cluster name sent with telemetry. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CLUSTERNAME`.                                                    | `test_cluster_name`                        |
+| `pingPeriod`                 | Frequency of pings (for example, `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_PINGPERIOD`.                                  | `1h`                                       |
+| `properties`                 | Additional properties to include in the ping payload (as key-value pairs). This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_PROPERTIES`.            | `testProperty: 123`                        |
+| `retry.maxRetries`           | Maximum number of retry attempts after a failed ping. Uses exponential backoff. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_RETRY_MAXRETRIES`. | `1`                                        |
+| `retry.minRetryDelay`        | Minimum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_RETRY_MINRETRYDELAY`.                                               | `1s`                                       |
+| `retry.maxRetryDelay`        | Maximum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_RETRY_MAXRETRYDELAY`.                                               | `10s`                                      |
+| `retry.retryDelayMultiplier` | Multiplier applied to delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_RETRY_RETRYDELAYMULTIPLIER`.                          | `2`                                        |
+
+#### camunda.hub.ping.credentials
+
+The `POST /clusters` endpoint requires an OAuth 2.0 M2M (machine-to-machine) token. Configure credentials so the cluster can authenticate with Camunda Hub when sending pings.
+
+The client must be granted the `create:*` and `update:*` permissions on the `web-modeler-public-api` application in [Management Identity](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions).
+
+| Field           | Description                                                                                                                                                                             | Example value                                                               |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `tokenEndpoint` | The OAuth 2.0 token endpoint used to request an access token. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_TOKENENDPOINT`.         | `https://keycloak.example.com/realms/camunda/protocol/openid-connect/token` |
+| `clientId`      | The client ID of the M2M application registered in your identity provider. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_CLIENTID`. | `zeebe-ping-client`                                                         |
+| `clientSecret`  | The client secret for the M2M application. This setting can also be overridden using the environment variable `CAMUNDA_HUB_PING_CREDENTIALS_CLIENTSECRET`.                              | `***`                                                                       |
 
 ##### YAML snippet
 
 ```yaml
 camunda:
-  console:
+  hub:
     ping:
       enabled: true
       endpoint: https://hub.endpoint.com/api/v1/clusters
@@ -993,6 +1005,10 @@ camunda:
         minRetryDelay: 1s
         maxRetryDelay: 10s
         retryDelayMultiplier: 2
+      credentials:
+        tokenEndpoint: https://keycloak.example.com/realms/camunda/protocol/openid-connect/token
+        clientId: zeebe-ping-client
+        clientSecret: "***"
 ```
 
 ### Continuous backups configuration
