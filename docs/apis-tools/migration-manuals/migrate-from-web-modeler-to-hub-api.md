@@ -14,7 +14,7 @@ Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. Mi
 
 ## About this migration
 
-Web Modeler API v1 is the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposed resources like projects, folders, files, and collaborators as they existed within Web Modeler.
+Web Modeler API v1 is the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposes resources like projects, folders, files, and collaborators as they exist within Web Modeler.
 
 [Camunda Hub API v2](/apis-tools/hub-api-sm/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
 
@@ -110,7 +110,7 @@ For example:
 }
 ```
 
-This request skips the first three _pages_ of 20 items (pages 0-2 and item indexes 0–59, inclusive) and returns the fourth page of 20 items (indexes 60–79). If there aren't enough items to fill the fourth page, you receive all remaining items.
+This request skips the first three _pages_ of 20 items (pages 0–2 and item indexes 0–59, inclusive) and returns the fourth page of 20 items (indexes 60–79). If there aren't enough items to fill the fourth page, you receive all remaining items.
 
 The response includes two fields, `items` and `total`:
 
@@ -283,7 +283,7 @@ In Web Modeler API v1, `canonicalPath` is an array of objects containing an `id`
 }
 ```
 
-In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`-delimited string. Unlike Web Modeler API v1, which includes "projects" ([called "process applications" before Camunda 8.10](#structure-and-terminology)), Camunda Hub API v2 only includes folder keys. The "project" is given in a separate field, called `projectKey`:
+In Camunda Hub API v2, `canonicalPath` expresses the file's unique path as a `/`-delimited string. Unlike Web Modeler API v1, which includes `projects` ([called `process applications` before Camunda 8.10](#structure-and-terminology)), Camunda Hub API v2 only includes folder keys. The project is given in a separate field, called `projectKey`:
 
 ```json title="Camunda Hub API v2"
 {
@@ -584,14 +584,14 @@ In Camunda Hub API v2, workspace data is nested under a `workspace` key with `pr
 
 In addition to the [general field changes](#workspace-api-field-mapping), the following request fields have changed:
 
-| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                          |
-| ------------------------ | ------------------ | ---------------------------------------------------------------------------------------------- |
-| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`            |
-| `filter.id`              | -                  | Removed                                                                                        |
-| `filter.description`     | -                  | Removed                                                                                        |
-| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address |
-| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address |
-| `sort.direction`         | `sort.order`       | Renamed                                                                                        |
+| Web Modeler API v1       | Camunda Hub API v2 | Notes                                                                                           |
+| ------------------------ | ------------------ | ----------------------------------------------------------------------------------------------- |
+| `filter`                 | `filter`           | Now uses [advanced operators](#search-filters), including `$eq`, `$in`, and `$like`             |
+| `filter.id`              | -                  | Removed                                                                                         |
+| `filter.description`     | -                  | Removed                                                                                         |
+| `filter.createdBy.email` | `filter.createdBy` | In v1, `createdBy` is an object. In v2, it's a string representing the creator's email address. |
+| `filter.updatedBy.email` | `filter.updatedBy` | In v1, `updatedBy` is an object. In v2, it's a string representing the updater's email address. |
+| `sort.direction`         | `sort.order`       | Renamed                                                                                         |
 
 The following example shows a v1 request:
 
@@ -625,7 +625,7 @@ The equivalent v2 request:
 
 ## Member API
 
-In Camunda Hub API v2, the collaborators API has been renamed to "members". The following sections cover changes that apply to the member API endpoints.
+In Camunda Hub API v2, the collaborators API has been renamed to `members`. The following sections cover changes that apply to the member API endpoints.
 
 ### Endpoint mapping
 
@@ -904,4 +904,4 @@ The following response fields have changed:
 | `updatePermission` | -                  | Removed |
 | `deletePermission` | -                  | Removed |
 
-To determine your permissions, check the scopes configured when your API token was created. If a request lacks the required permission, the API returns `403 Forbidden` with a `ProblemDetail` body explaining which permission is missing.
+To determine your permissions, check the scopes you configured when creating your API token. If a request lacks the required permission, the API returns `403 Forbidden` with a `ProblemDetail` body explaining which permission is missing.
