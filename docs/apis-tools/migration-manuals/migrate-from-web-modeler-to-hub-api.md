@@ -467,7 +467,7 @@ Here is an equivalent request from v2:
 ```json title="Camunda Hub API v2"
 {
   "filter": {
-    "folderKey": "16b0beb0-e6c0-494b-9953-c3ff461975f7",
+    "folderKey": { "$eq": "16b0beb0-e6c0-494b-9953-c3ff461975f7" },
     "createdBy": "jane.doe@email.com"
   },
   "sort": {
