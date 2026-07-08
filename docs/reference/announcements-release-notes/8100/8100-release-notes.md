@@ -198,6 +198,8 @@ Upgrading from a trial to a paid plan automatically enables Optimize, with no ma
 
 You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
 
+<p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
+
 ### Helm chart deployment
 
 #### Docker images
