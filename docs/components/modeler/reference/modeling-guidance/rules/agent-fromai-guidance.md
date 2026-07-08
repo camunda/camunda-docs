@@ -6,13 +6,12 @@ description: Reference for the `agent-fromai-guidance` rule.
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
-The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule flags calls that have a plausible, not-obviously-wrong reading but might not work the way you expect: the connector's behavior in these cases is unsupported or degraded rather than a hard failure.
+The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule flags a call that has a plausible reading but might not resolve the way you expect.
 
-Breaks with no legitimate reading (wrong key type, a description that is not a string literal, wrong context, and others) are unambiguous mistakes and live in [Agent fromAi() contract](./agent-fromai-contract.md) as errors.
+Breaks with no legitimate reading (wrong key type, a description that is not a string literal, wrong context, and others) are unambiguous mistakes and live in [Agent fromAi() contract](./agent-fromai-contract.md) as errors. A tool's own missing documentation is covered by [Agent tool documentation](./agent-tool-documentation.md).
 
 ## <MarkerGuideline.Invalid /> Valid but not recommended
 
-- **The input has no description**: the second argument is optional, so omitting it or passing an empty string is allowed, but not recommended. Without a description the LLM has only the parameter name to work from. Add a quoted string describing what the agent should provide.
 - **Key is a conditional expression** (`if ... then ... else ...`): a conditional key might be correct depending on which branch fires at runtime. Ensure at least one branch resolves to a `toolCall.*` path.
 
 ## <MarkerGuideline.Valid /> Correct `fromAi()` usage
