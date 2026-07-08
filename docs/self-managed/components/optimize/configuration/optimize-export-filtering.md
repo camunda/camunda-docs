@@ -132,7 +132,7 @@ camunda:
         args:
           index:
             variableNameInclusionStartWith:
-              - business_
+              - business
             variableNameExclusionStartWith:
               - business_debug
 ```
@@ -148,7 +148,7 @@ camunda:
         args:
           index:
             variableNameInclusionStartWith:
-              - business_
+              - business
             variableNameExclusionStartWith:
               - business_debug
 ```
