@@ -158,7 +158,7 @@ Deletion no longer corrupts process application version history, as existing sna
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
-Operate now shows what an active process instance is waiting for. When you inspect an active element, you can see the wait state and its details — for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+Operate now shows what an active process instance is waiting for. When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
 
 Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
@@ -170,7 +170,9 @@ Wait state tracking is enabled by default and writes records to secondary storag
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-In Operate, you can now combine multiple variable filters with AND logic to find exactly the process instances you need. Filter by variable name, value, and comparison operators — equals, contains, greater than, and less than — including nested JSON paths.
+In Operate, you can now combine multiple variable filters with `AND` logic to find exactly the process instances you need.
+
+Filter by variable name, value, and comparison operators, such as `equals`, `contains`, `greater than`, and `less than`, including nested JSON paths.
 
 ### Optimize
 
