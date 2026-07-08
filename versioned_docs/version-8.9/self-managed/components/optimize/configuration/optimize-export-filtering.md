@@ -178,7 +178,6 @@ camunda:
         args:
           index:
             variableValueTypeInclusion:
-              - Object
               - String
             variableValueTypeExclusion:
               - Object
@@ -195,7 +194,6 @@ camunda:
         args:
           index:
             variableValueTypeInclusion:
-              - Object
               - String
             variableValueTypeExclusion:
               - Object
