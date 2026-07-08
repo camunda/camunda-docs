@@ -836,7 +836,7 @@ The equivalent v2 request:
 
 In Web Modeler API v1, the endpoint path uses `/restore`, and you pass the `versionId` in both the path and the request body:
 
-```json title="Web Modeler API v1"
+```bash title="Web Modeler API v1"
 POST /api/v1/versions/{versionId}/restore
 {
   "versionId": {versionId}
@@ -845,14 +845,14 @@ POST /api/v1/versions/{versionId}/restore
 
 In Camunda Hub API v2, the endpoint path uses `/restoration`, and you identify the version using the path parameter:
 
-```json title="Camunda Hub API v2"
+```bash title="Camunda Hub API v2"
 POST /api/v2/versions/{versionKey}/restoration
 (no body)
 ```
 
 For element template files, include a `version` integer in the request body to set the target version number in the restored content:
 
-```json title="Camunda Hub API v2"
+```bash title="Camunda Hub API v2"
 POST /api/v2/versions/{versionKey}/restoration
 { "version": 2 }
 ```
