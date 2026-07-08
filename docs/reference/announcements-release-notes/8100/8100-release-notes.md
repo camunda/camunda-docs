@@ -53,7 +53,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 - Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
 - Configure remote or local models through code and properties for both local development and CI/CD pipelines.
 
-<p class="link-arrow">[Test AI agents](/components/agentic-orchestration/evaluate-agents/test-ai-agents/)</p>
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
 
 ### APIs & tools
 
