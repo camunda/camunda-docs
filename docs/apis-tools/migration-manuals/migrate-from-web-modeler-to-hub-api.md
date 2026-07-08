@@ -533,7 +533,7 @@ The following fields have changed across all workspace endpoints:
 
 ### Get a workspace
 
-In Web Modeler API v1, project data in the response is nested under a `metadata` key with `folders` and `files` in the `content`:
+In Web Modeler API v1, workspace data in the response is nested under a `metadata` key with `folders` and `files` in the `content`:
 
 ```json title="Web Modeler API v1"
 {
