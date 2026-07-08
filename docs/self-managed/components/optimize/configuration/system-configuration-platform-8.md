@@ -71,7 +71,7 @@ Optimize requires at least the following record value types to populate standard
 - `USER_TASK`
 - `VARIABLE`
 
-Starting with Camunda 8.10, `optimizeModeEnabled` defaults to `true`, which automatically restricts exported record types to those required by Optimize. If you disable `optimizeModeEnabled`, ensure these record value types remain enabled in the exporter configuration.
+Starting with Camunda 8.10, `index.optimizeModeEnabled` defaults to `true`, which automatically restricts exported record types to those required by Optimize. If you disable `index.optimizeModeEnabled`, ensure these record value types remain enabled in the exporter configuration.
 
 If exporter settings or Optimize mode disable these value types, Optimize data and reports will become incomplete or fail to load.
 

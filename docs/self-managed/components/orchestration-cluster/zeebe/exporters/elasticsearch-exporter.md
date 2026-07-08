@@ -367,6 +367,6 @@ When upgrading from 8.8 to 8.9, exporter filtering behavior may affect data comp
 
 :::info Upgrade note (8.9 to 8.10)
 
-In Camunda 8.10, `optimizeModeEnabled` defaults to `true` (previously `false`) and `index.job` defaults to `false` (previously `true`). If you use these exporters for purposes beyond Optimize — for example, to export job records to Elasticsearch for custom consumers — set `optimizeModeEnabled: false` and explicitly enable the record types you need. See the [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md) for guidance.
+In Camunda 8.10, `index.optimizeModeEnabled` defaults to `true` (previously `false`) and `index.job` defaults to `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported and the individual `job` flag has no effect. If you use these exporters for purposes beyond Optimize and need record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need. See the [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md) for guidance.
 
 :::

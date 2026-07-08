@@ -324,10 +324,10 @@ Connectors change 1 description.
 
 Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
 
-- `optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record types to those consumed by Optimize and drops other record types.
-- `index.job` is now `false` (previously `true`). Job records are no longer exported individually; Optimize does not require them.
+- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
+- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
 
-**Action:** Review your exporter configuration before upgrading. If your deployment relies on job records or other non-Optimize record types being exported by default, set `optimizeModeEnabled: false` and add explicit configuration to preserve that behavior.
+**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
 
 <p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
 <p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
