@@ -8,12 +8,11 @@ import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
 The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule flags calls that have a plausible, not-obviously-wrong reading but might not work the way you expect: the connector's behavior in these cases is unsupported or degraded rather than a hard failure.
 
-Breaks with no legitimate reading (wrong key type, a description that is a bare number or `null`, wrong context, and others) are unambiguous mistakes and live in [Agent fromAi() contract](./agent-fromai-contract.md) as errors.
+Breaks with no legitimate reading (wrong key type, a description that is not a string literal, wrong context, and others) are unambiguous mistakes and live in [Agent fromAi() contract](./agent-fromai-contract.md) as errors.
 
 ## <MarkerGuideline.Invalid /> Things that probably won't work as intended
 
 - **Description is missing or blank**: the second argument is syntactically optional, but the LLM reads it to decide what value to supply. A missing or blank description is a normal state while a model is still being built, not necessarily a mistake, but it degrades the agent's accuracy until filled in.
-- **Description is a FEEL expression, not a string literal** (for example, a variable reference): you might be trying to build the description dynamically. The connector does not evaluate this as documentation text today, so the agent might not receive a usable description.
 - **Key is a conditional expression** (`if ... then ... else ...`): a conditional key might be correct depending on which branch fires at runtime. Ensure at least one branch resolves to a `toolCall.*` path.
 
 ## <MarkerGuideline.Valid /> Correct `fromAi()` usage
