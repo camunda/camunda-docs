@@ -99,6 +99,10 @@ Variables dominate Optimize's storage and CPU costs on secondary storage: Optimi
 
 **Trade-off:** Filtered variables are unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns. These levers affect **Optimize only**; Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
 
+##### Disable object variable flattening (high impact for object-heavy processes)
+
+By default, Optimize [flattens each object variable](/self-managed/components/optimize/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable. Each of these is a separate stored variable and pays the storage cost described above independently, so a single object variable with several properties can cost several times more than a single scalar variable. If you don't rely on flattened object-variable filtering, grouping, or raw-data columns in Optimize reports, disable it with `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false` (or `zeebe.includeObjectVariableValue: false`). This is enabled by default in Self-Managed; Camunda SaaS disables it.
+
 ##### Other mitigations
 
 - **Run Optimize on a separate Elasticsearch/OpenSearch instance.** Contention is bidirectional: Optimize's write spikes degrade Operate, Tasklist, and the Camunda Exporter, while heavy exporter activity degrades Optimize import. Isolation removes this mutual interference.

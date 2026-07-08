@@ -31,6 +31,8 @@ The value of list properties within objects as well as variables which are lists
 
 The import of object variable values is enabled by default and can be disabled using the `zeebe.includeObjectVariableValue` configuration. Alternatively, this can be set using the `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE` Environment Variable.
 
+Because each flattened property, plus the raw object itself, is stored as its own variable, enabling this on object-heavy processes can significantly increase Optimize's storage and CPU usage. See [Impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize) for sizing guidance.
+
 Depending on where the imported object variables originate, the following configuration is required to ensure that your system produces object variable data that Optimize can import correctly:
 
 <Tabs groupId="systemconfig" defaultValue="zeebeobject" queryString values={
