@@ -174,6 +174,8 @@ In Operate, you can now combine multiple variable filters with `AND` logic to fi
 
 Filter by variable name, value, and comparison operators, such as `equals`, `contains`, `greater than`, and `less than`, including nested JSON paths.
 
+<p class="link-arrow">[Multi-variable filters](/components/operate/userguide/filter-process-instances.md#multi-variable-filters)</p>
+
 ### Optimize
 
 #### Optimize disabled by default on new trial clusters
