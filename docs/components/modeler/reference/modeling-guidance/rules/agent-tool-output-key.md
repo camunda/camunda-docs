@@ -36,6 +36,10 @@ This pattern works for elements that run in the workflow engine (script tasks, o
 
 Results written from arbitrary FEEL expressions elsewhere (for example, a variable set by a called process) are not statically detectable. If your tool sets `toolCallResult` through such a channel, you can ignore the warning, or make the wiring explicit with an output mapping.
 
+### The result variable name
+
+This rule assumes the result variable is `toolCallResult`, the default for the AI Agent connector. An AI Agent Task with an attached ad-hoc sub-process can model a different result variable (via its `tool_call_result_variable` configuration). The rule does not follow that override: it always checks for `toolCallResult`, so a tool that deliberately returns through a renamed variable will still be flagged. This is a known limitation; if you override the result variable, you can ignore the warning for that tool.
+
 ## <MarkerGuideline.Invalid /> Result never reaches the agent
 
 The tool maps its output to `result` instead of `toolCallResult`, or no element in its flow sets a result at all.
