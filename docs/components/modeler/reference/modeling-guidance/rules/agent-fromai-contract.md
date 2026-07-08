@@ -8,13 +8,13 @@ import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
 The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule catches the **structural** breaks the AI Agent connector cannot recover from: the call resolves to nothing at runtime, with no error and no value. Because the failure is silent and deterministic, these are reported as errors.
 
-The description argument is optional, so a call with no description is valid and is not reported. The remaining advisory case on this function (an ambiguous conditional key) is a warning and lives in [Agent fromAi() guidance](./agent-fromai-guidance.md).
+The description argument is optional, so a call with no description is valid and is not reported.
 
 ## <MarkerGuideline.Invalid /> Contract breaks
 
 The rule reports:
 
-- **Key is not a FEEL path**: the first argument must be a path expression, not a string literal (`"toolCall.url"`), a number, `null`, an arithmetic expression, or bracket notation (`toolCall["url"]`).
+- **Key is not a FEEL path**: the first argument must be a path expression, not a string literal (`"toolCall.url"`), a number, `null`, an arithmetic expression, bracket notation (`toolCall["url"]`), or a conditional expression (`if ... then ... else ...`). The connector requires a plain reference regardless of which branch would apply at runtime, so a conditional key never resolves.
 - **Key does not start with `toolCall.`**: the connector only populates fields of the `toolCall` context, so a bare name (`url`) or a different root (`context.url`) is never filled in.
 - **Key is nested**: the connector uses the last path segment as the parameter name, so `toolCall.input.filter` registers `filter` but reads a path the connector never populates. Use a single name: `toolCall.filter`.
 - **Key is declared twice in one tool**: all `fromAi()` calls on a tool's entry element combine into one input schema, so a duplicated key collides. Declare each key once and reference the variable directly elsewhere.
@@ -51,7 +51,6 @@ To set it, select the ad-hoc sub-process, open the **Extension properties** sect
 
 ## References
 
-- [Agent fromAi() guidance](./agent-fromai-guidance.md), covering the warning-level checks on the same `fromAi()` call
 - [AI Agent tool definitions](../../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
 - [`fromAi()` FEEL function](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md)
 - [Rule source](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/agent-fromai-contract.js)

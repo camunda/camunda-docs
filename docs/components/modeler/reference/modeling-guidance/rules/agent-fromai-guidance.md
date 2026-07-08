@@ -6,13 +6,9 @@ description: Reference for the `agent-fromai-guidance` rule.
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
-The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule flags a call that has a plausible reading but might not resolve the way you expect.
+The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule is currently a placeholder: every `fromAi()` violation has a legitimate-reading test that resolves to either "valid, not reported" (an omitted or empty description) or "no legitimate reading, an error" (everything else), so nothing currently falls into a not-recommended-but-valid warning here.
 
-Breaks with no legitimate reading (wrong key type, a description that is not a string literal, wrong context, and others) are unambiguous mistakes and live in [Agent fromAi() contract](./agent-fromai-contract.md) as errors. A tool's own missing documentation is covered by [Agent tool documentation](./agent-tool-documentation.md).
-
-## <MarkerGuideline.Invalid /> Valid but not recommended
-
-- **Key is a conditional expression** (`if ... then ... else ...`): a conditional key might be correct depending on which branch fires at runtime. Ensure at least one branch resolves to a `toolCall.*` path.
+All checks on the same function live in [Agent fromAi() contract](./agent-fromai-contract.md) as errors. A tool's own missing documentation is covered by [Agent tool documentation](./agent-tool-documentation.md).
 
 ## <MarkerGuideline.Valid /> Correct `fromAi()` usage
 
