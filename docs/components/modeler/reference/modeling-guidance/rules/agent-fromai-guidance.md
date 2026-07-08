@@ -10,9 +10,9 @@ The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functi
 
 Breaks with no legitimate reading (wrong key type, a description that is not a string literal, wrong context, and others) are unambiguous mistakes and live in [Agent fromAi() contract](./agent-fromai-contract.md) as errors.
 
-## <MarkerGuideline.Invalid /> Things that probably won't work as intended
+## <MarkerGuideline.Invalid /> Valid but not recommended
 
-- **Description is missing or blank**: the second argument is syntactically optional, but the LLM reads it to decide what value to supply. A missing or blank description is a normal state while a model is still being built, not necessarily a mistake, but it degrades the agent's accuracy until filled in.
+- **The input has no description**: the second argument is optional, so omitting it or passing an empty string is allowed, but not recommended. Without a description the LLM has only the parameter name to work from. Add a quoted string describing what the agent should provide.
 - **Key is a conditional expression** (`if ... then ... else ...`): a conditional key might be correct depending on which branch fires at runtime. Ensure at least one branch resolves to a `toolCall.*` path.
 
 ## <MarkerGuideline.Valid /> Correct `fromAi()` usage

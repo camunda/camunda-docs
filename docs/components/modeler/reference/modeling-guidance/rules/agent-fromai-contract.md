@@ -8,7 +8,7 @@ import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 
 The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). This rule catches the **structural** breaks the AI Agent connector cannot recover from: the call resolves to nothing at runtime, with no error and no value. Because the failure is silent and deterministic, these are reported as errors.
 
-The judgment-call parts of the same function (a missing or blank description, an ambiguous conditional key) are warnings and live in [Agent fromAi() guidance](./agent-fromai-guidance.md).
+Valid but not-recommended patterns on the same function (no description, an ambiguous conditional key) are warnings and live in [Agent fromAi() guidance](./agent-fromai-guidance.md).
 
 ## <MarkerGuideline.Invalid /> Contract breaks
 
