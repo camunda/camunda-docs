@@ -71,6 +71,8 @@ camunda:
 </TabItem>
 </Tabs>
 
+Both options can coexist in the same configuration. In this example, only `orderProcess` is exported; if it were also listed under `bpmnProcessIdExclusion`, the exclusion would take precedence and it would be dropped.
+
 ## Variable filtering
 
 Use variable filtering to control which variables are exported to Optimize. It is an effective mitigation for Optimize's impact on Elasticsearch or OpenSearch sizing. See [impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize) for details.
