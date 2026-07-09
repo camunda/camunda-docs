@@ -31,6 +31,10 @@ Learn more about [resource-based authorizations](/components/concepts/access-con
 
 You can enable multi-tenancy checks on a per-cluster basis to enforce tenant-level authorization for Orchestration Cluster resources.
 
+:::note
+This setting applies to Camunda 8 SaaS. In Self-Managed, multi-tenancy checks are not configured through this UI — set them using [configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#multi-tenancy) at startup.
+:::
+
 - Enable this setting to enforce tenant-level authorization checks. Users, groups, and roles not assigned to a tenant lose access to any resources scoped to that tenant.
 - Disable this setting to allow tenants to be created and principals assigned without enforcing checks. All data maps to the `<default>` tenant.
 
