@@ -12,6 +12,8 @@ paths:
       summary: Create a workspace
       description: Creates a new workspace in the caller's organization.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - workspaceKey
       tags:
         - Workspace
       requestBody:
@@ -42,6 +44,12 @@ paths:
       summary: Get a workspace
       description: Returns the workspace metadata and its contained projects.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
       tags:
         - Workspace
       parameters:
@@ -67,6 +75,12 @@ paths:
       summary: Update a workspace
       description: Updates an existing workspace.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
       tags:
         - Workspace
       parameters:
@@ -102,6 +116,12 @@ paths:
         Deletes the workspace with the given key. The workspace must be empty,
         meaning it contains no files, no projects, and no IDP applications.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
       tags:
         - Workspace
       parameters:
@@ -158,7 +178,7 @@ components:
       required: true
       description: The unique key identifying the workspace.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
   schemas:
     # --- Request schemas ---
@@ -230,7 +250,8 @@ components:
       properties:
         workspaceKey:
           description: The unique key identifying this workspace.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
         name:
           description: The name of the workspace.
           type: string

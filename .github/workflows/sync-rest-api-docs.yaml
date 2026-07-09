@@ -147,6 +147,18 @@ jobs:
         id: check_changes
         run: |
           cd docs
+
+          # We run lint-staged as a pre-commit hook. One of the format changes it performs
+          # is to remove whitespace-only changes. Therefore, if the REST API spec changes only
+          # include whitespace changes, lint-staged removes them and results in an error:
+          # "[FAILED] Prevented an empty git commit!"
+          # 
+          # To mitigate this, we stage the changes _before_ we check if there are any.
+          # Then, we run lint-staged manually. Finally, we check if there are changes.
+          # This should get rid of the whitespace-only changes and avoid an empty commit.
+          git add .
+          npx lint-staged --allow-empty
+
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
@@ -158,9 +170,9 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request

@@ -14,6 +14,8 @@ paths:
         Creates a new version by taking a snapshot of the current content of the
         specified file.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - versionKey
       tags:
         - Version
       requestBody:
@@ -47,6 +49,12 @@ paths:
       description: >
         Returns the version metadata and the file content at that version.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -72,6 +80,12 @@ paths:
       summary: Update a version
       description: Updates the name of an existing version.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -107,6 +121,12 @@ paths:
       summary: Delete a version
       description: Deletes the specified version.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -163,6 +183,12 @@ paths:
         version is created representing the restored state. For element template
         files, the request body must include the target version number.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -201,7 +227,7 @@ components:
       required: true
       description: The unique key of the version.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/VersionKey"
 
   schemas:
     # --- Request schemas ---
@@ -220,7 +246,8 @@ components:
       properties:
         fileKey:
           description: The key of the file to create a version for.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         name:
           description: The name for the version.
           type: string
@@ -306,7 +333,8 @@ components:
       properties:
         versionKey:
           description: The unique key of the version.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/VersionKey"
         name:
           description: The name of the version.
           type: string
@@ -316,7 +344,8 @@ components:
           nullable: true
         fileKey:
           description: The key of the file this version belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         organizationPublic:
           description: Whether the version is published to shared resources.
           type: boolean
@@ -371,7 +400,8 @@ components:
       properties:
         versionKey:
           description: The unique key of the version.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/VersionKey"
         name:
           description: The name of the version.
           type: string
@@ -381,7 +411,8 @@ components:
           nullable: true
         fileKey:
           description: The key of the file this version belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         organizationPublic:
           description: Whether the version is published to shared resources.
           type: boolean
@@ -457,6 +488,7 @@ components:
           description: >
             Filter by file key. This is a required filter — versions
             cannot be searched across files.
+          x-semantic-type: FileKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         name:

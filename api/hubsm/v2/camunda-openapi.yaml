@@ -78,7 +78,7 @@ tags:
   - name: Catalog
     description: Catalog asset management operations.
   - name: Cluster
-    description: Cluster management operations.
+    description: Cluster registration operations.
   - name: File
     description: File management operations.
   - name: Folder
