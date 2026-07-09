@@ -1504,10 +1504,13 @@ h2.openapi-tabs__response-header {
   border-bottom: none;
 }
 /* Required permissions renders as its own section between the description and the
-   Request section. Drop the default h2 underline; the section is instead set off
-   by the top divider on the Request heading below (matching the Responses section). */
+   Request section. Give it a top divider and spacing matching the Request and
+   Responses sections for consistency. */
 h2#required-permissions {
   border-bottom: none;
+  border-top: 1px solid var(--ifm-toc-border-color);
+  margin-top: 2rem;
+  padding-top: 1rem;
 }
 /* Separate the Request section with a top divider, mirroring the Responses
    section's .openapi-tabs__response-header-section border-top. */
