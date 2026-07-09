@@ -133,15 +133,11 @@ For example:
 ## Cluster-admin role
 
 :::note
-Cluster-admin role support is planned for a future release and is not available in 8.10. Cluster-wide operations currently require a separate authorization path.
+Cluster-admin role support and cluster-wide operations are not available in 8.10. They are planned for a future release.
 :::
 
 In a future release, the cluster-admin role will be resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service will be required. Multiple mechanisms will be supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for basic auth.
 
 ## gRPC authentication
 
-:::note
-Per-Physical-Tenant gRPC routing is planned for a future release and is not available in 8.10.
-:::
-
-Once available, gRPC clients will specify the target Physical Tenant using the `Camunda-Physical-Tenant` request header (metadata in gRPC terms). Requests that omit the header will route to the `default` Physical Tenant.
+gRPC clients specify the target Physical Tenant using the `Camunda-Physical-Tenant` request header (metadata in gRPC terms). Requests that omit the header route to the `default` Physical Tenant.

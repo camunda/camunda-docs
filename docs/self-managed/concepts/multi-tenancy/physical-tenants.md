@@ -39,10 +39,10 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 
 **Tenant-scoped APIs** are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
 
-- REST API: `POST /physical-tenants/my-tenant/v2/process-definitions`
-- Webapps: `https://your-cluster/physical-tenants/my-tenant/operate`
+- REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
+- Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-**Cluster-wide APIs** (such as topology and license) are not tenant-scoped. They remain at their standard `/v2/...` paths and are not available at the tenant-prefixed path.
+**Cluster-wide APIs** are not available yet. When added, they will be exposed under a dedicated `/cluster/v2/...` path prefix. Endpoints at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
 
 **gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 

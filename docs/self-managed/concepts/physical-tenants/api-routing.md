@@ -2,7 +2,7 @@
 id: api-routing
 title: "API routing for Physical Tenants"
 sidebar_label: "API routing"
-description: "Learn how REST API requests are routed to Physical Tenants, including tenant-scoped paths, default tenant routing, and cluster-wide endpoints."
+description: "Learn how REST API requests are routed to Physical Tenants, including tenant-scoped paths, default tenant routing, and gRPC routing."
 ---
 
 This page explains how REST API requests are routed to Physical Tenants in Camunda 8.10.
@@ -18,8 +18,8 @@ To target a specific Physical Tenant, use the tenant-prefixed path format:
 For example:
 
 ```
-GET  /physical-tenants/risk-production/v2/process-definitions/search
-POST /physical-tenants/risk-production/v2/process-instances
+GET  /physical-tenants/riskproduction/v2/process-definitions/search
+POST /physical-tenants/riskproduction/v2/process-instances
 ```
 
 The `physicalTenantId` in the path must match a configured Physical Tenant. The tenant segment comes **before** `/v2/`. Tenant-facing endpoints available at the standard `/v2/...` paths are also available at their tenant-prefixed equivalents.
@@ -42,14 +42,9 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 ## Cluster-wide endpoints
 
-Some endpoints apply to the whole cluster and are intentionally not tenant-scoped. These endpoints are available only at their standard `/v2/...` paths and are not available at `/physical-tenants/{id}/v2/...`.
+Cluster-wide endpoints — endpoints that apply to the whole cluster rather than a single Physical Tenant — are not available yet. When they are added in a future release, they will be exposed under a dedicated `/cluster/v2/...` path prefix.
 
-Examples of cluster-wide endpoints (not tenant-scoped):
-
-- `GET /v2/topology` — cluster topology
-- `GET /v2/license` — license status
-
-For operations that require cluster-admin authorization (such as backups and restore), see [Authentication and authorization](./authentication-authorization.md).
+Endpoints served at the standard `/v2/...` paths are scoped to a Physical Tenant, not the cluster. For example, `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view.
 
 ## HTTP status codes
 
@@ -63,38 +58,9 @@ A `404` for an unknown tenant does not indicate an authorization failure — the
 
 ## Per-tenant endpoint reference
 
-The following table shows common tenant-scoped endpoint paths. Replace `{physicalTenantId}` with the configured tenant ID (for example, `tenanta` or `default`).
+There is no separate API specification for Physical Tenants. All endpoints in the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) are available per Physical Tenant. To target a specific tenant, prepend `/physical-tenants/{physicalTenantId}` to the standard `/v2/...` path.
 
-<!-- TODO: This table is a representative subset. The full endpoint list will be published once the OpenAPI spec is updated for Physical Tenants (camunda/camunda#54651). -->
-
-| Operation                  | Method   | Endpoint path                                                                        |
-| -------------------------- | -------- | ------------------------------------------------------------------------------------ |
-| Search process definitions | `GET`    | `/physical-tenants/{physicalTenantId}/v2/process-definitions`                        |
-| Get process definition     | `GET`    | `/physical-tenants/{physicalTenantId}/v2/process-definitions/{processDefinitionKey}` |
-| Deploy resources           | `POST`   | `/physical-tenants/{physicalTenantId}/v2/deployments`                                |
-| Create process instance    | `POST`   | `/physical-tenants/{physicalTenantId}/v2/process-instances`                          |
-| Search process instances   | `POST`   | `/physical-tenants/{physicalTenantId}/v2/process-instances/search`                   |
-| Cancel process instance    | `DELETE` | `/physical-tenants/{physicalTenantId}/v2/process-instances/{processInstanceKey}`     |
-| Search user tasks          | `POST`   | `/physical-tenants/{physicalTenantId}/v2/user-tasks/search`                          |
-| Complete user task         | `POST`   | `/physical-tenants/{physicalTenantId}/v2/user-tasks/{userTaskKey}/completion`        |
-| Assign user task           | `POST`   | `/physical-tenants/{physicalTenantId}/v2/user-tasks/{userTaskKey}/assignment`        |
-| Get variable               | `GET`    | `/physical-tenants/{physicalTenantId}/v2/variables/{variableKey}`                    |
-| Publish message            | `POST`   | `/physical-tenants/{physicalTenantId}/v2/messages/publication`                       |
-| Search incidents           | `POST`   | `/physical-tenants/{physicalTenantId}/v2/incidents/search`                           |
-
-## Cluster-wide endpoint reference
-
-Cluster-wide endpoints are not scoped to a Physical Tenant. They are available at the standard `/v2/...` path only and are **not** available at `/physical-tenants/{id}/v2/...`.
-
-| Operation           | Method | Endpoint path      |
-| ------------------- | ------ | ------------------ |
-| Cluster topology    | `GET`  | `/v2/topology`     |
-| License information | `GET`  | `/v2/license`      |
-| Cluster health      | `GET`  | `/actuator/health` |
-
-<!-- TODO: Expand this table once the full list of cluster-wide endpoints is confirmed after the OpenAPI spec update (camunda/camunda#54651). -->
-
-For authorization requirements for cluster-wide operations, see [authorization model](./authorization-model.md).
+For example, the standard `/v2/process-definitions/search` endpoint is available per tenant at `/physical-tenants/{physicalTenantId}/v2/process-definitions/search`. Replace `{physicalTenantId}` with the configured tenant ID (for example, `tenanta` or `default`).
 
 ## Cross-tenant queries
 
@@ -104,7 +70,7 @@ This is the core isolation guarantee of Physical Tenants: no operation can read 
 
 ## Webapp routing
 
-Camunda web applications (Operate, Tasklist, Modeler) follow the same path convention:
+Camunda web applications (Operate, Tasklist, and Admin) follow the same path convention:
 
 ```
 /physical-tenants/{physicalTenantId}/{webapp}
@@ -113,16 +79,12 @@ Camunda web applications (Operate, Tasklist, Modeler) follow the same path conve
 For example:
 
 ```
-https://your-cluster/physical-tenants/risk-production/operate
+https://your-cluster/physical-tenants/riskproduction/operate
 ```
 
 ## gRPC routing
 
-:::note
-Per-Physical-Tenant gRPC routing is planned for a future release and is not available in 8.10.
-:::
-
-Once available, gRPC clients will specify the target Physical Tenant using the `Camunda-Physical-Tenant` request header (metadata in gRPC terms). Requests that omit the header will route to the `default` Physical Tenant.
+gRPC clients specify the target Physical Tenant using the `Camunda-Physical-Tenant` request header (metadata in gRPC terms). Requests that omit the header route to the `default` Physical Tenant.
 
 ## Backward compatibility and migration
 
