@@ -471,11 +471,11 @@ The secret filter applies to outbound connectors only. Support for inbound conne
 
 Configure the secret filter with the `camunda.connector.secret-resolver.secret-filter.mode` property:
 
-| Mode | Behavior |
-| --- | --- |
-| `DISABLED` | All secrets resolve freely. This is the default and matches the behavior before this feature was introduced. |
-| `LAX` | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
-| `STRICT` | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. Choose this mode when strict secret isolation is required. |
+| Mode       | Behavior                                                                                                                                                                                                                                                                                                               |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DISABLED` | All secrets resolve freely. This is the default and matches the behavior before this feature was introduced.                                                                                                                                                                                                           |
+| `LAX`      | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
+| `STRICT`   | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. Choose this mode when strict secret isolation is required.                                                                                                                      |
 
 The allow-list is derived automatically from the BPMN input mappings of the connector element. No manual configuration of individual secrets is required.
 
@@ -507,10 +507,10 @@ camunda:
 
 The secret filter caches process definition lookups to avoid repeated API calls. You can configure the cache with the following properties:
 
-| Property | Environment variable | Description | Default |
-| --- | --- | --- | --- |
-| `camunda.connector.secret-resolver.secret-filter.cache.enabled` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_ENABLED` | Whether caching is enabled. | `true` |
-| `camunda.connector.secret-resolver.secret-filter.cache.max-size` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_MAXSIZE` | Maximum number of process definitions to cache. | `1000` |
+| Property                                                         | Environment variable                                          | Description                                     | Default |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------- | ------- |
+| `camunda.connector.secret-resolver.secret-filter.cache.enabled`  | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_ENABLED` | Whether caching is enabled.                     | `true`  |
+| `camunda.connector.secret-resolver.secret-filter.cache.max-size` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_MAXSIZE` | Maximum number of process definitions to cache. | `1000`  |
 
 ## HTTP proxy configuration
 
