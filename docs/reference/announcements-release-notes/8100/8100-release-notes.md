@@ -71,6 +71,14 @@ The Console Self-Managed and Web Modeler APIs are deprecated in favor of the pub
 
 ### Camunda Hub
 
+#### Bespoke cluster generations for SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/3704 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+Organizations can now access exclusive Camunda 8 generation versions tailored specifically for their organization, available for both new cluster creation and upgrades. These generations are not visible to other organizations.
+
 #### Git-based catalog
 
 <!-- https://github.com/camunda/product-hub/issues/3402 -->
@@ -80,14 +88,6 @@ The Console Self-Managed and Web Modeler APIs are deprecated in favor of the pub
 Camunda Hub introduces an organization-level catalog for reusable, Center of Excellence (CoE)-approved assets, such as element templates, connectors, forms, and DMNs, backed by source control management (SCM).
 
 CoE teams can submit assets through the API from their SCM workflows, and delivery teams can browse catalog entries in Hub and inspect asset details. This release also adds in-diagram notifications for updated shared assets and pre-deployment dependency checks that surface missing DMNs, forms, connectors, and other dependencies on the target cluster before deployment.
-
-#### Bespoke cluster generations for SaaS
-
-<!-- https://github.com/camunda/product-hub/issues/3704 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-Organizations can now access exclusive Camunda 8 generation versions tailored specifically for their organization, available for both new cluster creation and upgrades. These generations are not visible to other organizations.
 
 #### Outdated catalog assets visibility
 
@@ -170,18 +170,6 @@ FEEL expressions in the variable outline now use the same syntax highlighting as
 
 ### Operate
 
-#### Wait states
-
-<!-- https://github.com/camunda/camunda/issues/45040 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
-
-Operate now shows what an active process instance is waiting for. When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
-
-Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
-
-<p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
-
 #### Multi-variable filtering
 
 <!-- https://github.com/camunda/product-hub/issues/3459 -->
@@ -193,6 +181,18 @@ In Operate, you can now combine multiple variable filters with `AND` logic to fi
 Filter by variable name, value, and comparison operators, such as `equals`, `contains`, `greater than`, and `less than`, including nested JSON paths.
 
 <p class="link-arrow">[Multi-variable filters](/components/operate/userguide/filter-process-instances.md#multi-variable-filters)</p>
+
+#### Wait states
+
+<!-- https://github.com/camunda/camunda/issues/45040 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+Operate now shows what an active process instance is waiting for. When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+
+Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+
+<p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
 ### Optimize
 
@@ -208,16 +208,6 @@ Upgrading from a trial to a paid plan automatically enables Optimize, with no ma
 
 ### Orchestration Cluster
 
-#### Select a DMN version with a FEEL expression
-
-<!-- https://github.com/camunda/product-hub/issues/3501 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
-
-<p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
-
 #### New RDBMS version support
 
 <!-- https://github.com/camunda/product-hub/issues/3589 -->
@@ -229,6 +219,16 @@ Camunda 8.10 adds support for new relational database versions. Operators runnin
 New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, MariaDB 12.3, and Microsoft SQL Server 2025.
 
 <p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+#### Select a DMN version with a FEEL expression
+
+<!-- https://github.com/camunda/product-hub/issues/3501 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
+
+<p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
 
 ### Helm chart deployment
 
