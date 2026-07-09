@@ -899,11 +899,12 @@ The info API endpoint has a Camunda Hub API v2 equivalent:
 
 The following response fields have changed:
 
-| Web Modeler API v1 | Camunda Hub API v2 | Notes   |
-| ------------------ | ------------------ | ------- |
-| `createPermission` | -                  | Removed |
-| `readPermission`   | -                  | Removed |
-| `updatePermission` | -                  | Removed |
-| `deletePermission` | -                  | Removed |
+| Web Modeler API v1         | Camunda Hub API v2         | Notes     |
+| -------------------------- | -------------------------- | --------- |
+| `version` (returns `"v1"`) | `version` (returns `"v2"`) | New value |
+| `createPermission`         | -                          | Removed   |
+| `readPermission`           | -                          | Removed   |
+| `updatePermission`         | -                          | Removed   |
+| `deletePermission`         | -                          | Removed   |
 
 To determine your permissions, check the scopes you configured when creating your API token. If a request lacks the required permission, the API returns `403 Forbidden` with a `ProblemDetail` body explaining which permission is missing.
