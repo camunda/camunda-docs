@@ -199,7 +199,7 @@ Web Modeler API v1 uses equality-only filters, except for dates:
 }
 ```
 
-Camunda Hub API v2 extends this behavior with a set of explicit operators:
+You can still use simple equality filters in Camunda Hub API v2, and you can also use more advanced explicit filter operators:
 
 ```json title="Camunda Hub API v2"
 {
@@ -210,7 +210,7 @@ Camunda Hub API v2 extends this behavior with a set of explicit operators:
 }
 ```
 
-The following filter operators are available in Camunda Hub API v2:
+The following advanced filter operators are available in Camunda Hub API v2:
 
 | Operator         | Description                             | Example                                                                     |
 | ---------------- | --------------------------------------- | --------------------------------------------------------------------------- |
