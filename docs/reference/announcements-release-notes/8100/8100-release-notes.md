@@ -232,7 +232,7 @@ Camunda 8.10 adds a dual-region reference architecture for running the Orchestra
 
 The documentation covers the recommended topology, exporter configuration, and RDBMS replication setup, and includes step-by-step failover and failback procedures for active-active and active-passive two-region ECS environments.
 
-<p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
+<p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
 #### New RDBMS version support
 
