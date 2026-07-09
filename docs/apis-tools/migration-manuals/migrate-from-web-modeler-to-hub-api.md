@@ -17,8 +17,9 @@ Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. Mi
 Web Modeler API v1 is the REST API for Web Modeler, a standalone product for modeling and managing process diagrams. It exposes resources like projects, folders, files, and collaborators as they exist within Web Modeler.
 
 [Camunda Hub API v2](/apis-tools/hub-api-saas/overview.md) is the successor API for the broader Camunda Hub platform. Camunda Hub unifies organizational management, workspace governance, and process modeling into a single platform. As a result, the conceptual model and architecture of the API have changed.
+
 :::tip
-Camunda Hub API v2 adopts the Orchestration Cluster API v2 conventions. If you're already familiar with the Orchestration Cluster API v2, you will recognize patterns such as the offset-based pagination model, explicit filter operators, and flat response structures used throughout Camunda Hub API v2.
+Camunda Hub API v2 adopts the [Orchestration Cluster API v2](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) conventions. If you're already familiar with the Orchestration Cluster API v2, you will recognize patterns such as the offset-based pagination model, explicit filter operators, and flat response structures used throughout Camunda Hub API v2.
 :::
 
 Before migrating, familiarize yourself with the structural and terminology changes introduced in Camunda 8.10.
