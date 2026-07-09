@@ -459,6 +459,59 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 </TabItem>
 </Tabs>
 
+## Secret filter
+
+The secret filter restricts outbound connectors to resolving only the secrets they declare in their BPMN input mappings. This prevents a connector from accessing secrets that are available in the runtime environment but not referenced in the process definition.
+
+:::note
+The secret filter applies to outbound connectors only. Support for inbound connectors is planned for a future release.
+:::
+
+### Modes
+
+Configure the secret filter with the `camunda.connector.secret-resolver.secret-filter.mode` property:
+
+| Mode | Behavior |
+| --- | --- |
+| `DISABLED` | All secrets resolve freely. This is the default and matches the behavior before this feature was introduced. |
+| `LAX` | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
+| `STRICT` | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. Choose this mode when strict secret isolation is required. |
+
+The allow-list is derived automatically from the BPMN input mappings of the connector element. No manual configuration of individual secrets is required.
+
+<Tabs groupId="secret-filter-config" defaultValue="environment-variables" queryString values={[
+{label: 'Environment variables', value: 'environment-variables' },
+{label: 'Application.yaml', value: 'application-yaml' },
+]}>
+<TabItem value="environment-variables">
+
+```bash
+CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE=LAX
+```
+
+</TabItem>
+<TabItem value="application-yaml">
+
+```yaml
+camunda:
+  connector:
+    secret-resolver:
+      secret-filter:
+        mode: LAX
+```
+
+</TabItem>
+</Tabs>
+
+### Cache configuration
+
+The secret filter caches process definition lookups to avoid repeated API calls. You can configure the cache with the following properties:
+
+| Property | Environment variable | Description | Default |
+| --- | --- | --- | --- |
+| `camunda.connector.secret-resolver.secret-filter.cache.enabled` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_ENABLED` | Whether caching is enabled. | `true` |
+| `camunda.connector.secret-resolver.secret-filter.cache.max-size` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_MAXSIZE` | Maximum number of process definitions to cache. | `1000` |
+
 ## HTTP proxy configuration
 
 You can configure connectors to route HTTP requests through a proxy server. See [HTTP proxy configuration](./http-proxy-configuration.md) for details.
