@@ -208,18 +208,22 @@ Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
 Available component types and requirements:
 
-| Configuration value     | Component             | Requirements                                   |
-| :---------------------- | :-------------------- | :--------------------------------------------- |
-| `connectors`            | Connectors            | REST URL                                       |
-| `identity`              | Management Identity   | -                                              |
-| `webModelerWebApp`      | Camunda Hub           | -                                              |
-| `operate`               | Operate               | -                                              |
-| `optimize`              | Optimize              | -                                              |
-| `orchestration`         | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
-| `orchestrationIdentity` | Admin                 | -                                              |
-| `tasklist`              | Tasklist              | -                                              |
-| `zeebe`                 | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
-| `zeebeGateway`          | Zeebe Gateway         | Cluster version < 8.8                          |
+| Configuration value | Component             | Requirements                                   |
+| :------------------ | :-------------------- | :--------------------------------------------- |
+| `connectors`        | Connectors            | REST URL                                       |
+| `identity`          | Management Identity   | -                                              |
+| `hub`               | Camunda Hub           | -                                              |
+| `operate`           | Operate               | -                                              |
+| `optimize`          | Optimize              | -                                              |
+| `orchestration`     | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
+| `admin`             | Admin                 | -                                              |
+| `tasklist`          | Tasklist              | -                                              |
+| `zeebe`             | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
+| `zeebeGateway`      | Zeebe Gateway         | Cluster version < 8.8                          |
+
+:::note Backward compatibility
+The old values `webModelerWebApp` (replaced by `hub`) and `orchestrationIdentity` (replaced by `admin`) are still accepted for backward compatibility.
+:::
 
 Example configuration:
 
@@ -241,7 +245,7 @@ camunda:
               rest: "https://camunda.example.com"
               readiness: "https://camunda.example.com:9600/core/actuator/health/readiness"
           - name: "Orchestration Admin"
-            type: "orchestrationIdentity"
+            type: "admin"
             version: "8.10-SNAPSHOT"
             urls:
               webapp: "https://camunda.example.com"
@@ -260,7 +264,7 @@ CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST=https://camunda.example.com
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness
 
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_NAME='Orchestration Admin'
-CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_TYPE=orchestrationIdentity
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_TYPE=admin
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_VERSION=8.10-SNAPSHOT
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_WEBAPP=https://camunda.example.com
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness

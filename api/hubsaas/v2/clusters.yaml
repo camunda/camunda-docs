@@ -8,15 +8,15 @@
 paths:
   /clusters:
     get:
-      operationId: getClusters
-      summary: Get all clusters
-      description: Returns all clusters.
+      operationId: getClusterRegistrations
+      summary: Get all cluster registrations
+      description: Returns all cluster registrations.
       x-added-in-version: "0.4.0"
       tags:
         - Cluster
       responses:
         "200":
-          description: The clusters were retrieved successfully.
+          description: The cluster registrations were retrieved successfully.
           content:
             application/json:
               schema:
@@ -28,11 +28,13 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
     post:
-      operationId: createCluster
-      summary: Create or update a cluster
+      operationId: createClusterRegistration
+      summary: Create or update a cluster registration
       description: >-
-        Creates or updates a cluster via discovery. This endpoint requires dynamic cluster management to be
-        enabled. If a cluster with the resolved ID already exists, it will be updated.
+        Creates or updates a cluster registration in Camunda Hub via discovery. This does not
+        provision infrastructure — it only creates or updates the cluster registration in Hub. This endpoint requires
+        dynamic cluster management to be enabled. If a cluster with the resolved ID already exists, its
+        registration will be updated.
       x-added-in-version: "0.4.0"
       tags:
         - Cluster
@@ -44,7 +46,7 @@ paths:
               $ref: "#/components/schemas/CreateClusterRequest"
       responses:
         "204":
-          description: The cluster was created or updated successfully.
+          description: The cluster registration was created or updated successfully.
         "400":
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
@@ -104,10 +106,12 @@ paths:
 
   /clusters/{clusterId}:
     delete:
-      operationId: deleteCluster
-      summary: Delete a cluster
+      operationId: removeClusterRegistration
+      summary: Remove a cluster registration
       description: >-
-        Deletes a cluster. This endpoint requires dynamic cluster management to be enabled.
+        Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual
+        cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic
+        cluster management to be enabled.
       x-added-in-version: "0.4.0"
       tags:
         - Cluster
@@ -115,7 +119,7 @@ paths:
         - $ref: "#/components/parameters/ClusterIdPathParam"
       responses:
         "204":
-          description: The cluster was deleted successfully.
+          description: The cluster registration was removed successfully.
         "401":
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":

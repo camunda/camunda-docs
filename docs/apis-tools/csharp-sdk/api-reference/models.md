@@ -11,7 +11,7 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Request and response model classes (608 types).
+Request and response model classes (612 types).
 
 ## Quick Reference
 
@@ -170,6 +170,8 @@ Request and response model classes (608 types).
 - [ClientId](#clientid) — The unique identifier of an OAuth client
 - [ClockPinRequest](#clockpinrequest) — ClockPinRequest
 - [CloudConfigurationResponse](#cloudconfigurationresponse) — Configuration for SaaS/cloud-specific settings
+- [ClusterModeChangeOperation](#clustermodechangeoperation) — A single operation that is part of a cluster mode change
+- [ClusterModeChangeResponse](#clustermodechangeresponse) — The planned changes resulting from a cluster mode transition request
 - [ClusterVariableName](#clustervariablename) — The name of a cluster variable
 - [ClusterVariableResult](#clustervariableresult) — ClusterVariableResult
 - [ClusterVariableResultBase](#clustervariableresultbase) — Cluster variable response item
@@ -345,8 +347,6 @@ Request and response model classes (608 types).
 - [IncidentStateFilterProperty](#incidentstatefilterproperty) — IncidentStateEnum with full advanced search capabilities
 - [InferredAncestorKeyInstruction](#inferredancestorkeyinstruction) — Instructs the engine to derive the ancestor scope key from the source element's hierarchy
 - [IntegerFilterProperty](#integerfilterproperty) — Integer property with advanced search capabilities
-- [IterationId](#iterationid) — A client-provided sequential integer identifying a logical iteration: one LLM
-  call, its tool dispatches, and their results
 - [JobActivationRequest](#jobactivationrequest) — JobActivationRequest
 - [JobActivationResult](#jobactivationresult) — The list of activated jobs
 - [JobBatchUpdateRequest](#jobbatchupdaterequest) — The filter and changeset for a batch job update operation
@@ -398,6 +398,8 @@ Request and response model classes (608 types).
 - [LicenseResponse](#licenseresponse) — The response of a license request
 - [LikeFilter](#likefilter) — Checks if the property matches the provided like value
 - [LimitPagination](#limitpagination) — LimitPagination
+- [LoopIterationId](#loopiterationid) — A client-provided sequential integer identifying one pass through the agent
+  feedback loop: one LLM call, its tool dispatches, and their results
 - [MappingRuleCreateRequest](#mappingrulecreaterequest) — MappingRuleCreateRequest
 - [MappingRuleCreateResult](#mappingrulecreateresult) — MappingRuleCreateResult
 - [MappingRuleCreateUpdateRequest](#mappingrulecreateupdaterequest) — MappingRuleCreateUpdateRequest
@@ -498,6 +500,8 @@ Request and response model classes (608 types).
 - [ProcessInstanceSequenceFlowsQueryResult](#processinstancesequenceflowsqueryresult) — Process instance sequence flows query response
 - [ProcessInstanceStateExactMatch](#processinstancestateexactmatch) — Matches the value exactly
 - [ProcessInstanceStateFilterProperty](#processinstancestatefilterproperty) — ProcessInstanceStateEnum property with full advanced search capabilities
+- [ProcessInstanceWaitStateStatisticsQueryResult](#processinstancewaitstatestatisticsqueryresult) — Process instance wait state statistics query response
+- [ProcessInstanceWaitStateStatisticsResult](#processinstancewaitstatestatisticsresult) — Process instance wait state statistics response item
 - [ResourceFilter](#resourcefilter) — Resource search filter
 - [ResourceKeyExactMatch](#resourcekeyexactmatch) — Matches the value exactly
 - [ResourceKeyFilterProperty](#resourcekeyfilterproperty) — ResourceKey property with full advanced search capabilities
@@ -687,6 +691,7 @@ public sealed class ActivatedJobResult
 | `Deadline`                 | `Int64`                        | When the job can be activated again, sent as a UNIX epoch timestamp.                                                                                                                                                                        |
 | `Variables`                | `Object`                       | All variables visible to the task scope, computed at activation time.                                                                                                                                                                       |
 | `TenantId`                 | `TenantId`                     | The ID of the tenant that owns the job.                                                                                                                                                                                                     |
+| `PhysicalTenantId`         | `String`                       | The ID of the physical tenant that the job-activation request was routed to; the default physical tenant when the request did not specify one.                                                                                              |
 | `JobKey`                   | `JobKey`                       | The key, a unique identifier for the job.                                                                                                                                                                                                   |
 | `ProcessInstanceKey`       | `ProcessInstanceKey`           | The job's process instance key.                                                                                                                                                                                                             |
 | `ProcessDefinitionKey`     | `ProcessDefinitionKey`         | The key of the job's process definition.                                                                                                                                                                                                    |
@@ -698,6 +703,7 @@ public sealed class ActivatedJobResult
 | `RootProcessInstanceKey`   | `Nullable<ProcessInstanceKey>` | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. This field is only present for data belonging to process instance hierarchies created in version 8.9 or later. |
 | `BusinessId`               | `Nullable<BusinessId>`         | The business ID of the owning process instance, inherited when the job was created. This is `null` for jobs created before version 8.10 and for jobs whose owning process instance has no business ID.                                      |
 | `Priority`                 | `Int32`                        | The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.                                                                                         |
+| `LeaseToken`               | `String`                       | The lease token identifying this activation. This is `null` when the job was activated without a lease.                                                                                                                                     |
 
 ## AdHocSubProcessActivateActivitiesInstruction
 
@@ -1683,7 +1689,7 @@ public sealed class AgentInstanceHistoryFilter
 | `Role`               | `AgentInstanceHistoryRoleFilterProperty`         | The role of the history item.                                                                                                                        |
 | `ElementInstanceKey` | `ElementInstanceKeyFilterProperty`               | The key of the element instance under which the history item was produced.                                                                           |
 | `JobKey`             | `JobKeyFilterProperty`                           | The key of the job activation that produced the history item.                                                                                        |
-| `Iteration`          | `IntegerFilterProperty`                          | The iteration number.                                                                                                                                |
+| `LoopIteration`      | `IntegerFilterProperty`                          | Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).  |
 | `CommitStatus`       | `AgentInstanceHistoryCommitStatusFilterProperty` | The commit status of the history item. Defaults to COMMITTED only. Include PENDING or DISCARDED explicitly to debug in-flight or failed activations. |
 | `ProducedAt`         | `DateTimeFilterProperty`                         | The timestamp when the history item was produced.                                                                                                    |
 
@@ -1726,7 +1732,7 @@ public sealed class AgentInstanceHistoryItemRequest
 | `ElementInstanceKey` | `ElementInstanceKey`                | The key of the currently-active element instance.                                                                                                                                                                                                                   |
 | `JobKey`             | `JobKey`                            | The key of the current job activation during which this history item was produced.                                                                                                                                                                                  |
 | `JobLease`           | `String`                            | Opaque lease token received from the job activation response.                                                                                                                                                                                                       |
-| `Iteration`          | `Nullable<IterationId>`             | Sequential iteration number this item belongs to. Omit if not grouping items into iterations.                                                                                                                                                                       |
+| `LoopIteration`      | `Nullable<LoopIterationId>`         | The loopIteration this item belongs to. A loopIteration is one pass through the agent feedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping items by loopIteration.                                                             |
 | `Role`               | `AgentInstanceHistoryRoleEnum`      | The role of this history item in the conversation.                                                                                                                                                                                                                  |
 | `Content`            | `List<AgentInstanceMessageContent>` | The content blocks of this history item.                                                                                                                                                                                                                            |
 | `ToolCalls`          | `List<AgentInstanceToolCall>`       | Tool calls associated with this history item. For ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated. For TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null. Omit for USER items. |
@@ -1748,7 +1754,7 @@ public sealed class AgentInstanceHistoryItemResult
 | `ElementInstanceKey` | `ElementInstanceKey`                   | The key of the AI Agent Task or ad-hoc sub-process element instance under which this item was produced.                                                                                                                                                    |
 | `JobKey`             | `JobKey`                               | The key of the job activation during which this item was produced.                                                                                                                                                                                         |
 | `JobLease`           | `String`                               | The lease token of the activation that produced this item.                                                                                                                                                                                                 |
-| `Iteration`          | `Nullable<IterationId>`                | The sequential iteration number this item belongs to. Null if not provided by the connector.                                                                                                                                                               |
+| `LoopIteration`      | `Nullable<LoopIterationId>`            | The loopIteration this item belongs to. A loopIteration is one pass through the agent feedback loop: one LLM call, its tool dispatches, and their results. Null if not provided by the connector.                                                          |
 | `Role`               | `AgentInstanceHistoryRoleEnum`         | The role of this history item in the conversation.                                                                                                                                                                                                         |
 | `Content`            | `List<AgentInstanceMessageContent>`    | The content blocks of this history item.                                                                                                                                                                                                                   |
 | `ToolCalls`          | `List<AgentInstanceToolCall>`          | Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches. ASSISTANT items: dispatched tool calls with arguments populated. TOOL_RESULT items: single-entry array referencing the originating tool call (arguments null). |
@@ -1909,15 +1915,18 @@ public sealed class AgentInstanceMetricsDelta
 
 ## AgentInstanceObjectContent
 
-An arbitrary structured content block.
+An arbitrary structured content block. Accepts any valid JSON value:
+objects, arrays, numbers, booleans, or strings.
+Use TEXT content for human-readable natural language;
+use OBJECT content for machine-readable structured data.
 
 ```csharp
 public sealed class AgentInstanceObjectContent : AgentInstanceMessageContent
 ```
 
-| Property | Type     | Description                   |
-| -------- | -------- | ----------------------------- |
-| `Object` | `Object` | Arbitrary structured content. |
+| Property | Type     | Description                                                                                      |
+| -------- | -------- | ------------------------------------------------------------------------------------------------ |
+| `Object` | `Object` | Arbitrary structured content — any valid JSON value (object, array, number, boolean, or string). |
 
 ## AgentInstanceResult
 
@@ -1932,7 +1941,7 @@ public sealed class AgentInstanceResult
 | `AgentInstanceKey`            | `AgentInstanceKey`         | The unique key for this agent instance.                                                                                      |
 | `Status`                      | `AgentInstanceStatusEnum`  | The current status of an agent instance.                                                                                     |
 | `Definition`                  | `AgentInstanceDefinition`  | The static definition of the agent, including model, provider, and system prompt.                                            |
-| `Metrics`                     | `AgentInstanceMetrics`     | Aggregated metrics across all iterations of this agent instance.                                                             |
+| `Metrics`                     | `AgentInstanceMetrics`     | Aggregated metrics across all loopIterations of this agent instance.                                                         |
 | `Limits`                      | `AgentInstanceLimits`      | The configured limits for this agent instance, set once at creation.                                                         |
 | `Tools`                       | `List<AgentTool>`          | The tools available to the agent.                                                                                            |
 | `ElementId`                   | `ElementId`                | The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.                                |
@@ -3057,6 +3066,32 @@ public sealed class CloudConfigurationResponse
 | Property | Type     | Description                 |
 | -------- | -------- | --------------------------- |
 | `Stage`  | `String` | The cloud deployment stage. |
+
+## ClusterModeChangeOperation
+
+A single operation that is part of a cluster mode change.
+
+```csharp
+public sealed class ClusterModeChangeOperation
+```
+
+| Property    | Type     | Description                                      |
+| ----------- | -------- | ------------------------------------------------ |
+| `Operation` | `String` | The type of the operation.                       |
+| `Mode`      | `String` | The target mode of the operation, if applicable. |
+
+## ClusterModeChangeResponse
+
+The planned changes resulting from a cluster mode transition request.
+
+```csharp
+public sealed class ClusterModeChangeResponse
+```
+
+| Property         | Type                               | Description                                                                 |
+| ---------------- | ---------------------------------- | --------------------------------------------------------------------------- |
+| `ChangeId`       | `String`                           | The ID of the cluster change that was triggered by the request.             |
+| `PlannedChanges` | `List<ClusterModeChangeOperation>` | The ordered list of operations that will be applied to complete the change. |
 
 ## ClusterVariableName
 
@@ -5640,21 +5675,6 @@ public sealed class IntegerFilterProperty
 | `Lte`        | `Nullable<Int32>`   | Lower than or equal comparison with the provided value.                                                                          |
 | `In`         | `List<Int32>`       | Checks if the property matches any of the provided values.                                                                       |
 
-## IterationId
-
-A client-provided sequential integer identifying a logical iteration: one LLM
-call, its tool dispatches, and their results. Must be a positive integer,
-increasing with each iteration. Established by the
-connector when appending the first history item of an iteration.
-
-```csharp
-public readonly record struct IterationId : ICamundaLongKey, IEquatable<IterationId>
-```
-
-| Property | Type    | Description                |
-| -------- | ------- | -------------------------- |
-| `Value`  | `Int64` | The underlying long value. |
-
 ## JobActivationRequest
 
 JobActivationRequest
@@ -5663,16 +5683,17 @@ JobActivationRequest
 public sealed class JobActivationRequest : ITenantIdsSettable
 ```
 
-| Property            | Type                         | Description                                                                                                                                                                                                                                                                                 |
-| ------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Type`              | `String`                     | The job type, as defined in the BPMN process (e.g. &lt;zeebe:taskDefinition type="payment-service" /&gt;)                                                                                                                                                                                   |
-| `Worker`            | `String`                     | The name of the worker activating the jobs, mostly used for logging purposes.                                                                                                                                                                                                               |
-| `Timeout`           | `Int64`                      | A job returned after this call will not be activated by another call until the timeout (in ms) has been reached.                                                                                                                                                                            |
-| `MaxJobsToActivate` | `Int32`                      | The maximum jobs to activate by this request.                                                                                                                                                                                                                                               |
-| `FetchVariable`     | `List<String>`               | A list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned.                                                                                                                                     |
-| `RequestTimeout`    | `Nullable<Int64>`            | The request will be completed when at least one job is activated or after the requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used. If the requestTimeout &lt; 0, long polling is disabled and the request is completed immediately, even when no job is activated. |
-| `TenantIds`         | `List<TenantId>`             | A list of IDs of tenants for which to activate jobs.                                                                                                                                                                                                                                        |
-| `TenantFilter`      | `Nullable<TenantFilterEnum>` | The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.                                                                                                                                 |
+| Property            | Type                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Type`              | `String`                     | The job type, as defined in the BPMN process (e.g. &lt;zeebe:taskDefinition type="payment-service" /&gt;)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `Worker`            | `String`                     | The name of the worker activating the jobs, mostly used for logging purposes.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `Timeout`           | `Int64`                      | A job returned after this call will not be activated by another call until the timeout (in ms) has been reached.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `MaxJobsToActivate` | `Int32`                      | The maximum jobs to activate by this request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `FetchVariable`     | `List<String>`               | A list of variables to fetch as the job variables; if empty, all visible variables at the time of activation for the scope of the job will be returned.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `RequestTimeout`    | `Nullable<Int64>`            | The request will be completed when at least one job is activated or after the requestTimeout (in ms). If the requestTimeout = 0, a default timeout is used. If the requestTimeout &lt; 0, long polling is disabled and the request is completed immediately, even when no job is activated.                                                                                                                                                                                                                                                                                                                                                                                        |
+| `TenantIds`         | `List<TenantId>`             | A list of IDs of tenants for which to activate jobs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `TenantFilter`      | `Nullable<TenantFilterEnum>` | The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `WithLease`         | `Nullable<Boolean>`          | Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease. |
 
 ## JobActivationResult
 
@@ -6425,6 +6446,21 @@ public sealed class LimitPagination : SearchQueryPageRequest
 | Property | Type              | Description                                           |
 | -------- | ----------------- | ----------------------------------------------------- |
 | `Limit`  | `Nullable<Int32>` | The maximum number of items to return in one request. |
+
+## LoopIterationId
+
+A client-provided sequential integer identifying one pass through the agent
+feedback loop: one LLM call, its tool dispatches, and their results. Must be
+a positive integer, increasing with each loopIteration. Established by the
+connector when appending the first history item of a loopIteration.
+
+```csharp
+public readonly record struct LoopIterationId : ICamundaLongKey, IEquatable<LoopIterationId>
+```
+
+| Property | Type    | Description                |
+| -------- | ------- | -------------------------- |
+| `Value`  | `Int64` | The underlying long value. |
 
 ## MappingRuleCreateRequest
 
@@ -7911,6 +7947,31 @@ public sealed class ProcessInstanceStateFilterProperty
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ProcessInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## ProcessInstanceWaitStateStatisticsQueryResult
+
+Process instance wait state statistics query response.
+
+```csharp
+public sealed class ProcessInstanceWaitStateStatisticsQueryResult
+```
+
+| Property | Type                                             | Description                |
+| -------- | ------------------------------------------------ | -------------------------- |
+| `Items`  | `List<ProcessInstanceWaitStateStatisticsResult>` | The wait state statistics. |
+
+## ProcessInstanceWaitStateStatisticsResult
+
+Process instance wait state statistics response item.
+
+```csharp
+public sealed class ProcessInstanceWaitStateStatisticsResult
+```
+
+| Property       | Type        | Description                                              |
+| -------------- | ----------- | -------------------------------------------------------- |
+| `ElementId`    | `ElementId` | The element id for which the wait states are aggregated. |
+| `WaitingCount` | `Int64`     | The total number of waiting instances of the element.    |
 
 ## ResourceFilter
 

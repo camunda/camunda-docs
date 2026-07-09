@@ -9,10 +9,14 @@ description: "A dual-region setup allows you to run Camunda in two regions synch
 
 import DualRegion from "./img/dual-region.jpg";
 
-Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). Starting with version 8.9, this setup runs **active-active** by default when using the v2 REST API and Tasklist V2 — both regions process data and serve user traffic. Deployments still on v1 APIs operate in a hybrid mode: active-active data replication with active-passive user traffic routing (see [Active-active](#active-active)).
+:::note
+Starting in Camunda 8.10, Tasklist V1 and Operate V1 APIs were removed. This page describes the **active-active** dual-region behavior for **Next** (unreleased/post-8.10) documentation. For 8.9 behavior, which includes active-passive user traffic routing for v1 API deployments, see the 8.9 versioned documentation. For details on what changed, see the [8.10 announcements](../../../reference/announcements-release-notes/8100/8100-announcements.md).
+:::
+
+Camunda 8 can be deployed in a dual-region configuration with certain [limitations](#camunda-8-dual-region-limitations). Starting with version 8.9, this setup runs **active-active** by default — both regions process data and serve user traffic (see [active-active](#active-active)).
 
 :::important
-**Both regions must be fully operational at all times.** With v2 APIs, both regions also serve user traffic simultaneously. With v1 APIs, one region serves user traffic (primary) while the other only processes and replicates data (secondary).
+**Both regions must be fully operational at all times.** Both regions serve user traffic simultaneously.
 :::
 
 :::caution
@@ -23,20 +27,20 @@ Before implementing a dual-region setup, ensure you understand the topic, the [l
 
 ## Architecture overview
 
-The dual-region setup is active-active by default with v2 APIs (8.9+), and a hybrid active-active data / active-passive user-traffic architecture with v1 APIs:
+The dual-region setup is active-active (8.9+):
 
-|                                 **Component** | **Mode**                                                | **Both Regions Running** | **User Traffic**                          | **RPO** |
-| --------------------------------------------: | ------------------------------------------------------- | ------------------------ | ----------------------------------------- | ------- |
-| <p align="left">**Orchestration Cluster**</p> |                                                         | ✅ Required              |                                           |         |
-|                                         Zeebe | Active-active                                           | ✅ Required              | Both regions process data                 | 0       |
-|                                         Admin | Active-active                                           | ✅ Required              | Cluster-level identity                    | 0       |
-|                                       Operate | Active-active with v2 API (active-passive with v1)      | ✅ Required              | Both regions serve users with v2 API      | 0       |
-|                                      Tasklist | Active-active with Tasklist V2 (active-passive with v1) | ✅ Required              | Both regions serve users with Tasklist V2 | 0       |
-|         <p align="left">**Elasticsearch**</p> | Active-active                                           | ✅ Required              | Data replicated to both                   | 0       |
+|                                 **Component** | **Mode**      | **Both Regions Running** | **User Traffic**          | **RPO** |
+| --------------------------------------------: | ------------- | ------------------------ | ------------------------- | ------- |
+| <p align="left">**Orchestration Cluster**</p> |               | ✅ Required              |                           |         |
+|                                         Zeebe | Active-active | ✅ Required              | Both regions process data | 0       |
+|                                         Admin | Active-active | ✅ Required              | Cluster-level identity    | 0       |
+|                                       Operate | Active-active | ✅ Required              | Both regions serve users  | 0       |
+|                                      Tasklist | Active-active | ✅ Required              | Both regions serve users  | 0       |
+|         <p align="left">**Elasticsearch**</p> | Active-active | ✅ Required              | Data replicated to both   | 0       |
 
 :::important
 
-**All components in both regions must be fully operational at all times.** "Passive" refers only to user traffic routing, not system operation. Both regions actively participate in data processing and replication.
+**All components in both regions must be fully operational at all times.** Both regions actively participate in data processing and replication.
 
 :::
 
@@ -44,26 +48,13 @@ The dual-region setup is active-active by default with v2 APIs (8.9+), and a hyb
 
 ### Primary and secondary regions
 
-With v2 APIs (default in 8.9+), **both regions serve user traffic simultaneously** — there is no primary/secondary distinction at the UI layer. Load can be distributed across regions via DNS or load balancer.
+**Both regions serve user traffic simultaneously** — there is no primary/secondary distinction at the UI layer. Load can be distributed across regions via DNS or load balancer.
 
-The primary/secondary terminology only applies to deployments still using v1 APIs:
-
-- **Primary region**: Serves user traffic (UI access, API calls).
-- **Secondary region**: Fully operational but does not serve user traffic under normal conditions.
-
-In both cases, both regions are operationally active with all components running and replicating data.
+Both regions are operationally active with all components running and replicating data.
 
 ### User traffic management
 
-With v2 APIs (default in 8.9+), user traffic can be served from both regions simultaneously. Distribute traffic via DNS, load balancer, or network routing policies as appropriate for your setup.
-
-With v1 APIs, you must route user traffic exclusively to the primary region. Methods include:
-
-- DNS configuration
-- Load balancer settings
-- Network routing policies
-
-If the primary region fails in a v1-API setup, traffic must be redirected manually to the secondary region.
+User traffic can be served from both regions simultaneously. Distribute traffic via DNS, load balancer, or network routing policies as appropriate for your setup.
 
 ## Active-active vs active-passive comparison
 
@@ -71,10 +62,9 @@ If the primary region fails in a v1-API setup, traffic must be redirected manual
 
 - **Active-passive** setups designate one region for user traffic while keeping backup regions on standby.
 
-- **Camunda's approach** depends on the API version in use:
-  - **Data layer (all setups)**: Active-active replication ensures zero data loss (RPO = 0).
-  - **User interface layer with v2 APIs (default in 8.9+)**: Active-active — both regions serve user traffic; consistency is maintained because all writes flow through the Camunda Exporter, not region-local stores.
-  - **User interface layer with v1 APIs**: Active-passive routing prevents conflicts caused by region-local v1 state (batch operations, task assignments).
+- **Camunda's approach**: Active-active for both data and user traffic:
+  - **Data layer**: Active-active replication ensures zero data loss (RPO = 0).
+  - **User interface layer**: Active-active — both regions serve user traffic; consistency is maintained because all writes flow through the Camunda Exporter, not region-local stores.
 
 ## Disclaimer
 
@@ -86,9 +76,7 @@ Running dual-region setups requires developing, testing, and executing custom [o
 
 :::info Active-Active <a id="active-active"></a>
 
-Starting in Camunda 8.8, the **v2 REST API** removed previous region-specific limitations. In current releases, Tasklist also uses only the Orchestration Cluster REST API, so user task operations are no longer tied to the legacy Tasklist V1 behavior.
-
-These improvements also make a user-facing **active-active** setup feasible. Starting with version 8.9, this configuration will become the default for dual-region deployments. This note serves as an early indication that **active-active** functionality is already supported.
+Starting in Camunda 8.8, the Orchestration Cluster REST API removed previous region-specific limitations. Both regions serve user traffic simultaneously, and all data is replicated via the Camunda Exporter.
 
 :::
 
@@ -98,10 +86,7 @@ These improvements also make a user-facing **active-active** setup feasible. Sta
 
 The dual-region architecture consists of two regions in a Kubernetes-based installation. Each region has a Kubernetes cluster with all Camunda 8 components fully operational.
 
-- With v2 APIs (default in 8.9+), both regions serve user traffic simultaneously.
-- With v1 APIs, **Region 0** acts as the primary region serving user traffic and **Region 1** acts as the secondary region, fully operational but not serving user traffic.
-
-Both regions actively participate in data processing and replication.
+Both regions serve user traffic simultaneously and actively participate in data processing and replication.
 
 :::note
 The visual representation shows both regions as operational. Any grayed-out appearance in the diagram represents user traffic routing, not system operational status. All components in both regions must be running and operational.
@@ -116,15 +101,7 @@ The Orchestration Cluster consists of multiple components:
 
 ### User traffic
 
-With v2 APIs (default in 8.9+), both regions serve user traffic simultaneously, and traffic can be distributed via DNS, load balancer, or network routing policies.
-
-With v1 APIs, the system uses active-passive user traffic routing. You must designate one region as the primary and route all user traffic to it. The secondary region remains fully operational but does not serve user requests (see [Active-active](#active-active)).
-
-Traffic management responsibilities (v1-API setups):
-
-- Configure DNS to route to primary region.
-- Implement health checks and failover procedures.
-- Manually redirect traffic during primary region failure in combination with the [operational failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover).
+Both regions serve user traffic simultaneously. Traffic can be distributed via DNS, load balancer, or network routing policies.
 
 :::warning Operation requirement
 
@@ -145,14 +122,14 @@ The currently supported Camunda 8 Self-Managed components are:
 
 #### Component requirements
 
-|                                     Component | Mode                                                    | Requirement                           | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                                            |
-| --------------------------------------------: | ------------------------------------------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| <p align="left">**Orchestration Cluster**</p> |                                                         |                                       |                                                                                                                                                                                                                                                                                                                                      |                                                                                           |
-|                                         Zeebe | Active-active                                           | All brokers in both regions must run  | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured                      |
-|                                         Admin | Active-active                                           | Embedded in the Orchestration cluster | <ul><li>Admin provides unified, cluster-level identity management and authorization</li></ul>                                                                                                                                                                                                                                        | Can handle region failure without data loss                                               |
-|                                       Operate | Active-active with v2 API (active-passive with v1)      | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Both regions serve users when using v2 API</li><li>**Region-specific data**: Uncompleted batch operations only when using v1 API</li></ul>                                                                                                                             | Data loss possible only if using v1 API, as changes are isolated to the initiated region. |
-|                                      Tasklist | Active-active with Tasklist V2 (active-passive with v1) | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Both regions serve users when using Tasklist V2</li><li>**Region-specific data**: Task assignments only when using v1 API</li></ul>                                                                                                                                    | Data loss possible only if using v1 API, as changes are isolated to the initiated region. |
-|         <p align="left">**Elasticsearch**</p> | Active-active                                           | Both clusters must run                | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down                                 |
+|                                     Component | Mode          | Requirement                           | Function                                                                                                                                                                                                                                                                                                                             | Data loss risk                                                       |
+| --------------------------------------------: | ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| <p align="left">**Orchestration Cluster**</p> |               |                                       |                                                                                                                                                                                                                                                                                                                                      |                                                                      |
+|                                         Zeebe | Active-active | All brokers in both regions must run  | <ul><li>Leaders and followers distributed across regions</li><li>Continuous replication via Raft protocol</li><li>Both regions required for quorum maintenance</li></ul>                                                                                                                                                             | Can handle region failure without data loss when properly configured |
+|                                         Admin | Active-active | Embedded in the Orchestration cluster | <ul><li>Admin provides unified, cluster-level identity management and authorization</li></ul>                                                                                                                                                                                                                                        | Can handle region failure without data loss                          |
+|                                       Operate | Active-active | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Both regions serve users</li></ul>                                                                                                                                                                                                                                     | No data loss — all data is replicated via the Camunda Exporter.      |
+|                                      Tasklist | Active-active | Embedded in the Orchestration cluster | <ul><li>Both regions maintain synchronized data state</li><li>Both regions serve users</li></ul>                                                                                                                                                                                                                                     | No data loss — all data is replicated via the Camunda Exporter.      |
+|         <p align="left">**Elasticsearch**</p> | Active-active | Both clusters must run                | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Data consistency maintained through Zeebe's dual export mechanism, not Elasticsearch replication</li><li>The clusters do not communicate with each other—replication happens at the Zeebe level</li></ul> | Zeebe exporters may fail globally if secondary ES is down            |
 
 ## Requirements and limitations
 
@@ -206,7 +183,7 @@ Follow the [Cluster Scaling steps](../../components/orchestration-cluster/zeebe/
 | **Aspect**                  | **Details**                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | :-------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Installation methods        | <p><ul><li>For Kubernetes we recommend using a dual-region Kubernetes setup with the [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) installed in two Kubernetes clusters.</li><li>For other platforms, using alternative installation methods (for example, docker-compose) is not covered by our guides.</li></ul></p>                                                                                                                       |
-| Traffic Management          | <p><ul><li>**Data Layer**: Active-active replication with zero RPO (all setups).</li><li>**User Traffic**: Active-active with v2 APIs (8.9+ default); active-passive routing with v1 APIs to prevent region-local conflicts.</li><li>**All Components**: Must be operational in both regions.</li></ul></p>                                                                                                                                                                 |
+| Traffic Management          | <p><ul><li>**Data Layer**: Active-active replication with zero RPO (all setups).</li><li>**User Traffic**: Active-active — both regions serve user traffic simultaneously.</li><li>**All Components**: Must be operational in both regions.</li></ul></p>                                                                                                                                                                                                                   |
 | Management Identity Support | Management Identity, including multi-tenancy and role-based access control (RBAC), is currently unavailable in this setup. Multi-tenancy and RBAC are supported using the Orchestration Cluster level Admin.                                                                                                                                                                                                                                                                |
 | Optimize Support            | Not supported (requires Management Identity with specific configuration).                                                                                                                                                                                                                                                                                                                                                                                                   |
 | Connectors Deployment       | Connectors can be deployed in a dual-region setup, but attention to [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) is required to avoid event duplication. In a dual-region setup, you'll have two connector deployments, so using message idempotency is critical.                                                                                                                                                   |
@@ -260,7 +237,7 @@ Region failure results in **immediate service interruption**:
 
 - No new process instances can start
 - Running process instances are suspended
-- User interfaces become unavailable if primary region is lost
+- User interfaces remain available in the surviving region
   :::
 
 See the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) for recovery steps from region loss and re-establishment procedures.
@@ -269,38 +246,20 @@ See the [operational procedure](/self-managed/deployment/helm/operational-tasks/
 You must monitor for region failures and execute the necessary [operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) to ensure smooth recovery and failover.
 :::
 
-### Primary region loss
+### Region loss impact
 
-If the primary region is lost:
+If either region is lost:
 
-- **Service disruption**: User traffic is unavailable
-- **Zeebe halt**: Processing stops due to quorum loss
-- **Data loss**: Region-specific data (batch operations, task assignments) is lost **only for deployments still using v1 APIs**. With v2 REST API and Tasklist V2, all data is replicated via the Camunda Exporter and survives region loss (see [Active-active](#active-active)).
+- **Zeebe halt**: Processing stops due to quorum loss (half of the brokers become unreachable).
+- **User traffic**: The surviving region keeps serving user traffic. Remove the failed region from the traffic pool so requests are not routed to it.
+- **No data loss**: All data is replicated to both regions via the Camunda Exporter and survives region loss (see [active-active](#active-active)).
 
-#### Recovery steps for primary region loss
+#### Recovery steps
 
-1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (zeebe).
-2. **Traffic rerouting:** With v2 APIs (default in 8.9+), remove the failed region from serving traffic (for example, via DNS or load balancer health checks). With v1 APIs, redirect user traffic to the secondary region (now primary).
-3. **Data and task management**:
-   - Reassign uncompleted tasks lost from the previous primary region.
-   - Recreate batch operations in Operate.
-4. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback-phase) to create a new secondary region.
-
-### Secondary region loss
-
-If the secondary region is lost:
-
-- **Zeebe halt**: Processing stops due to quorum loss.
-- **No user impact**: Traffic continues to be served by the primary region during recovery.
-
-#### Recovery steps for secondary region loss
-
-1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover) to temporarily recover and restore processing.
-2. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback) to create a new secondary region.
-
-:::note
-Unlike primary region loss, no user-facing data is lost and no traffic rerouting is necessary.
-:::
+1. **Temporary recovery:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failover-phase) for temporary recovery to restore functionality and unblock the process automation engine (Zeebe).
+2. **Traffic rerouting:** Remove the failed region from serving traffic (for example, via DNS or load balancer health checks).
+3. **Data recovery:** No manual recovery is required — all Operate and Tasklist data is replicated via the Camunda Exporter and remains available in the surviving region.
+4. **Permanent region setup:** Follow the [operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md#failback-phase) to recreate the lost region.
 
 ### Disaster recovery
 
