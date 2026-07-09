@@ -50,12 +50,9 @@ An output mapping targets `toolCallResult` (or a part like `toolCallResult.statu
 
 ## Declaring a sub-process as agentic
 
-This rule only applies inside an agentic ad-hoc sub-process. An ad-hoc sub-process is recognized as agentic when it carries a `zeebe:property` named `io.camunda.agenticai.role` with one of:
+This rule only applies inside an ad-hoc sub-process recognized as a tool container: one that carries a `zeebe:property` named `io.camunda.agenticai.role` with value `toolContainer`, whether its tools are driven by an AI Agent task in the same process or a separate one.
 
-- `agent`: an embedded AI Agent sub-process, where the sub-process itself is the agent.
-- `toolContainer`: a detached tools sub-process, whose tools are driven by a separate AI Agent task.
-
-To set it, select the ad-hoc sub-process, open the **Extension properties** section in the properties panel, and add a property with name `io.camunda.agenticai.role` and value `toolContainer` (or `agent`). In the XML:
+To set it, select the ad-hoc sub-process, open the **Extension properties** section in the properties panel, and add a property with name `io.camunda.agenticai.role` and value `toolContainer`. In the XML:
 
 ```xml
 <bpmn:adHocSubProcess id="Tools">
