@@ -133,10 +133,8 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 
 ### Assign mapping rules to a tenant
 
-<!-- TODO: Confirm with eng whether the "OIDC in Self-Managed only" restriction on mapping rule assignment also applies to SaaS. On SaaS, Console manages the identity provider integration, so mapping rules may behave differently... -->
-
 :::note
-Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication in Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed).
+Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication in Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed). On SaaS, identity is managed by Camunda, so mapping rules cannot map claims from a customer identity provider.
 :::
 
 1. Select the **Mapping rules** tab.

@@ -2,14 +2,12 @@
 id: multi-tenancy
 title: "Multi-tenancy"
 sidebar_label: "Multi-tenancy"
-description: "Multi-tenancy allows you to host multiple tenants within a single Camunda installation."
+description: "Multi-tenancy lets you host multiple isolated tenants within a single Camunda 8 installation, on both SaaS and Self-Managed."
 ---
 
-:::info
-Multi-tenancy is only supported in Camunda 8 Self-Managed. It is not available in Camunda 8 SaaS.
-:::
-
 [Multi-tenancy](/reference/glossary.md#multi-tenancy) in Camunda 8 enables a single installation to serve multiple [tenants](/reference/glossary.md#tenant) such as departments, teams, or external clients, while keeping each tenant's data and processes logically isolated.
+
+Multi-tenancy (logical tenancy) is available on both **Camunda 8 SaaS** and **Camunda 8 Self-Managed**.
 
 The following sections explain how multi-tenancy works in Camunda 8.
 
@@ -76,7 +74,11 @@ Multi-tenancy checks enforce tenant-based access control.
 
 By default, multi-tenancy checks are **disabled**. This means that although tenants can be created and assigned, the system does not restrict access based on those assignments. All data is associated with the `<default>` tenant.
 
-When **enabled**, the system verifies that users can only access resources associated with their assigned tenants.
+When **enabled**, the system verifies that users can only access resources associated with their assigned tenants. Users, groups, and roles not assigned to a tenant lose access to resources scoped to that tenant.
+
+:::warning
+Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
+:::
 
 ### Inherited tenant ownership
 
@@ -86,6 +88,28 @@ A user can only deploy resources to authorized tenants. Any data created by thos
 The following diagram illustrates tenant ownership inheritance:
 
 ![Tenant ownership inheritance diagram](img/multi-tenancy.png)
+
+## Enable multi-tenancy checks
+
+Tenants can be created and principals assigned regardless of whether checks are enabled. Enabling checks enforces the assignments. How you enable checks depends on your deployment model.
+
+### SaaS
+
+On SaaS, enable multi-tenancy checks per cluster using the **Multi-tenancy** toggle in Console:
+
+1. Navigate to **Console**, and select the **Clusters** tab.
+2. Select the cluster you want to manage, and select the **Settings** tab.
+3. Enable the **Multi-tenancy** setting.
+
+For details on the toggle, see [cluster settings](/components/console/manage-clusters/settings.md#multi-tenancy). The toggle is available for clusters running generation 8.8 and later, is disabled by default, and can be changed only by organization admins.
+
+### Self-Managed
+
+On Self-Managed, operators enable multi-tenancy checks through configuration properties. See [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#multi-tenancy).
+
+## Optimize and multi-tenancy
+
+Optimize multi-tenancy is available in **Self-Managed only**. On SaaS, Optimize can only access data from the `<default>` tenant.
 
 ## Management Identity
 
