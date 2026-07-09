@@ -359,14 +359,12 @@ To export additional record types, enable the [`include-enabled-records`](#confi
 When you enable exporter-side filters (`optimize-mode-enabled`, `variable-name`,
 `variable-type`, or `bpmn-process-id`), filtering applies only to newly produced records. Existing documents in Elasticsearch or OpenSearch are not rewritten.
 
-:::info Upgrade note (8.8 to 8.9)
+:::info Upgrade notes
 
-When upgrading from 8.8 to 8.9, exporter filtering behavior may affect data completeness. See the [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md) for guidance.
+**Upgrading 8.8 to 8.9:** Exporter filtering behavior may affect data completeness.
 
-:::
+**Upgrading 8.9 to 8.10:** `index.optimizeModeEnabled` defaults to `true` (previously `false`) and `index.job` defaults to `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported and the individual `job` flag has no effect. If you use these exporters for purposes beyond Optimize and need record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and enable the [`include-enabled-records`](#configuration) configuration property to export the record value types you need.
 
-:::info Upgrade note (8.9 to 8.10)
-
-In Camunda 8.10, `index.optimizeModeEnabled` defaults to `true` (previously `false`) and `index.job` defaults to `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported and the individual `job` flag has no effect. If you use these exporters for purposes beyond Optimize and need record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need. See the [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md) for guidance.
+For more information, see the [Camunda 8 system configuration](../../../optimize/configuration/system-configuration-platform-8.md).
 
 :::
