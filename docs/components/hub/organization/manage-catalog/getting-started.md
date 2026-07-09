@@ -67,6 +67,10 @@ Each asset directory contains exactly two files:
 
 The sync script only looks at these two files; any other files in the repository are ignored.
 
+:::note
+Only the README and element template file are published to the catalog. The asset's implementation—such as job workers, BPMN files, or linked forms—stays in your repository as the source of truth and is deployed to your cluster through your own deployment pipeline. The catalog holds the element template and its description; it does not run or deploy the underlying implementation.
+:::
+
 ### Define the asset README
 
 The README is the asset's metadata file. Camunda Hub detects an asset by the presence of a README with valid frontmatter:
@@ -133,6 +137,12 @@ Additionally, every `id` in a single submission must be unique. If two templates
 Always increment the `version` when you change an element template's content. The catalog API validates the whole submission as a single transaction. If any asset fails validation, _no_ changes are applied.
 :::
 
+### Enforce version increments in CI
+
+Rather than relying on reviewers to catch a missing version bump, validate it automatically before the submission ever reaches the catalog. Add a check to your CI pipeline that compares each changed element template against its previous state and fails the pull request when the content changed but the `version` field did not increase.
+
+The example repository includes a [version-check GitHub Actions workflow](https://github.com/camunda/catalog-template/blob/main/.github/workflows/check-versions.yml) that runs on every pull request, so a template change with a stale `version` is caught before it is merged and synced. You can bypass the check for intentional exceptions by adding the `skip-version-check` label to the pull request.
+
 ## Connect the repository to Hub
 
 Use a CI/CD job in your repository to authenticate with the Camunda Hub API and submit the current set of element templates to the catalog whenever the repository changes.
@@ -180,7 +190,7 @@ Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-saas/authe
 
 <TabItem value='self-managed'>
 
-In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance. There is no `audience`, and the Camunda Hub API is served from your own installation, which defaults to `http://localhost:8088`. Adjust the URLs to match your installation:
+In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance, and the Camunda Hub API is served from your own installation:
 
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
@@ -189,7 +199,11 @@ export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/pr
 export CAMUNDA_HUB_REST_URL="http://localhost:8088"
 ```
 
-Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions.
+:::note
+The URLs used in this example are local defaults, for example, `http://localhost:8088` for the API. In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation.
+:::
+
+Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions. In doing this, Management Identity automatically adds the `web-modeler-public-api` audience to tokens issued for your application. Therefore, unlike Camunda 8 SaaS, an `audience` parameter is not required for the token request during sync.
 
 </TabItem>
 </Tabs>
