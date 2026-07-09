@@ -33,7 +33,7 @@ camunda:
         secondary-storage:
           rdbms:
             url: jdbc:postgresql://db.example.com:5432/camunda?currentSchema=tenant_a_schema
-            # Each schema must exist before startup
+            # The 'default_schema' and 'tenant_a_schema' schemas must exist before startup
 ```
 
 **Separate database instance** (maximum isolation):
@@ -143,7 +143,7 @@ camunda:
 
 ### Backup and restore
 
-- **Per-tenant**: Snapshot only one tenant's RDBMS schema, ES/OS indices (prefix match), or document bucket
+- **Per-tenant**: Back up one tenant's RDBMS schema or document bucket individually. A per-tenant Elasticsearch/OpenSearch backup is not yet available (see the note below).
 - **Full cluster**: Back up all schemas, all index prefixes, all buckets simultaneously
 - **Restore options**: Individual tenant or full cluster from backup
 
@@ -153,12 +153,13 @@ Example — back up Tenant A only:
 # RDBMS
 pg_dump -h db.example.com -U user tenant_a_schema > backup.sql
 
-# Elasticsearch (with prefix)
-curl -X PUT "localhost:9200/_snapshot/repo/tenant-a-snap?indices=tenant-a-*"
-
-# S3
+# Document store (S3)
 aws s3 sync s3://camunda-documents/tenant-a/ ./backup/
 ```
+
+:::note
+Elasticsearch and OpenSearch backups are created through the [web applications backup endpoint](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md#2-start-the-web-applications-backup-operate--tasklist), which operates at the cluster level. A per-tenant Elasticsearch/OpenSearch backup endpoint is not yet available and is planned as part of the management API.
+:::
 
 ### Cross-tenant isolation
 
