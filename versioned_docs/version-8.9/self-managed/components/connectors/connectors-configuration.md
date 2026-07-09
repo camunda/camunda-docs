@@ -33,11 +33,11 @@ For example, the Java configuration property `camunda.client.grpc-address` can b
 
 To connect to the Orchestration Cluster, provide the following configuration:
 
-<Tabs groupId="connection-url" defaultValue="environment-variables" queryString values={[
-{label: 'Environment variables', value: 'environment-variables' },
-{label: 'Application.yaml', value: 'application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_MODE=self-managed
@@ -46,7 +46,7 @@ CAMUNDA_CLIENT_RESTADDRESS=http://localhost:8080
 ```
 
 </TabItem>
-<TabItem value="application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -63,18 +63,18 @@ camunda:
 
 If using an HTTPS connection, you may need to provide a certificate to validate the Zeebe Gateway's certificate chain.
 
-<Tabs groupId="https-config" defaultValue="environment-variables" queryString values={[
-{label: 'Environment variables', value: 'environment-variables' },
-{label: 'Application.yaml', value: 'application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_CACERTIFICATEPATH=/path/to/certificate.pem
 ```
 
 </TabItem>
-<TabItem value="application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -183,11 +183,11 @@ See the [Camunda Spring Boot Starter documentation](../../../../apis-tools/camun
 
 To use Camunda 8 SaaS, specify the connection properties:
 
-<Tabs groupId="saas-config" defaultValue="saas-environment-variables" queryString values={[
-{label: 'Environment variables', value: 'saas-environment-variables' },
-{label: 'Application.yaml', value: 'saas-application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="saas-environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_MODE=saas
@@ -198,7 +198,7 @@ CAMUNDA_CLIENT_CLOUD_CLUSTERID=xxx
 ```
 
 </TabItem>
-<TabItem value="saas-application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -483,18 +483,18 @@ Configure the secret filter with the `camunda.connector.secret-resolver.secret-f
 
 The allow-list is derived automatically from the BPMN input mappings of the connector element. No manual configuration of individual secrets is required.
 
-<Tabs groupId="secret-filter-config" defaultValue="environment-variables" queryString values={[
-{label: 'Environment variables', value: 'environment-variables' },
-{label: 'Application.yaml', value: 'application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE=LAX
 ```
 
 </TabItem>
-<TabItem value="application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
