@@ -52,7 +52,7 @@ description: "Orchestrate AI agents alongside human tasks and system integration
 link: "../../../components/connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
 title: "AI Agent connector",
 image: IconConnectorsImg,
-description: "Embed an LLM-powered agent in your process with the out-of-the-box AI Agent connector.",
+description: "Embed LLM-powered agents in your processes with the AI Agent connector.",
 },
 ]} />
 

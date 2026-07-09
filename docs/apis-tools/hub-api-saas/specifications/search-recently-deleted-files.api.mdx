@@ -1,0 +1,476 @@
+---
+id: search-recently-deleted-files
+title: "Search recently deleted files"
+description: "Returns soft-deleted files scoped to the caller's organization. Files remain listed until the retention period expires and the scheduled cleanup job runs; they can also be restored with `POST /files/{fileKey}/restoration` or permanently removed with `DELETE /files/{fileKey}/permanent`."
+sidebar_label: "Search recently deleted files"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Search recently deleted files"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/files/recently-deleted/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns soft-deleted files scoped to the caller's organization. Files remain listed until the retention period expires and the scheduled cleanup job runs; they can also be restored with `POST /files/{fileKey}/restoration` or permanently removed with `DELETE /files/{fileKey}/permanent`.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            page: {
+              description:
+                "Pagination criteria. Supports offset-based pagination (from/limit) or a simple limit.\n",
+              allOf: [
+                {
+                  oneOf: [
+                    {
+                      type: "object",
+                      title: "Limit-based pagination",
+                      properties: {
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                          maximum: 10000,
+                        },
+                      },
+                    },
+                    {
+                      type: "object",
+                      title: "Offset-based pagination",
+                      required: ["from"],
+                      properties: {
+                        from: {
+                          description:
+                            "The index of items to start searching from.",
+                          type: "integer",
+                          format: "int32",
+                          minimum: 0,
+                        },
+                        limit: {
+                          description:
+                            "The maximum number of items to return in one request.",
+                          type: "integer",
+                          format: "int32",
+                          default: 100,
+                          minimum: 1,
+                        },
+                      },
+                    },
+                  ],
+                  title: "SearchQueryPage",
+                },
+              ],
+            },
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                required: ["field"],
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: ["name", "type", "deleted"],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                title: "RecentlyDeletedFileSearchQuerySortRequest",
+              },
+            },
+          },
+          title: "RecentlyDeletedFileSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The search completed successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items", "page"],
+            properties: {
+              items: {
+                description: "The recently deleted files.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "fileKey",
+                    "name",
+                    "type",
+                    "projectKey",
+                    "deleted",
+                    "deletedBy",
+                  ],
+                  properties: {
+                    fileKey: {
+                      description:
+                        "The unique key identifying the deleted file.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the deleted file.",
+                      type: "string",
+                    },
+                    type: {
+                      description: "The type of the deleted file.",
+                      type: "string",
+                      enum: [
+                        "bpmn",
+                        "dmn",
+                        "form",
+                        "element-template",
+                        "rpa",
+                        "markdown",
+                        "tests",
+                      ],
+                    },
+                    projectKey: {
+                      description:
+                        "The key of the project the file belonged to.",
+                      type: "string",
+                    },
+                    deleted: {
+                      description: "The timestamp when the file was deleted.",
+                      type: "string",
+                      format: "date-time",
+                    },
+                    deletedBy: {
+                      description: "The user who deleted the file.",
+                      allOf: [
+                        {
+                          type: "object",
+                          description: "A reference to a user.",
+                          required: ["name", "email"],
+                          properties: {
+                            name: {
+                              description: "The display name of the user.",
+                              type: "string",
+                            },
+                            email: {
+                              description: "The email address of the user.",
+                              type: "string",
+                              format: "email",
+                            },
+                          },
+                          title: "UserReference",
+                        },
+                      ],
+                      nullable: true,
+                    },
+                  },
+                  title: "RecentlyDeletedFileResult",
+                },
+              },
+              page: {
+                description: "Pagination information about the search results.",
+                type: "object",
+                required: ["totalItems", "hasMoreTotalItems"],
+                properties: {
+                  totalItems: {
+                    description: "Total items matching the criteria.",
+                    type: "integer",
+                    format: "int64",
+                  },
+                  hasMoreTotalItems: {
+                    description:
+                      "Indicates whether the `totalItems` value has been capped due to system limits.\nWhen true, `totalItems` is a lower bound and the actual number of matching\nitems is greater than the reported value.\n",
+                    type: "boolean",
+                  },
+                },
+                title: "SearchQueryPageResponse",
+              },
+            },
+            title: "RecentlyDeletedFileSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

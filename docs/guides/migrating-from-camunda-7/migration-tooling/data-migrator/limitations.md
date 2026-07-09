@@ -48,6 +48,7 @@ The runtime migration has the following limitations.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5175
 - Data changed via user operations
   - Data set via user operations like setting a due date to a user task cannot be migrated currently.
+  - Job and process priority values are not migrated. During migration a new Camunda 8 process instance is created, so it uses the job priorities defined on its Camunda 8 process definition rather than any values from the Camunda 7 instance.
   - See https://github.com/camunda/camunda-bpm-platform/issues/5182
 
 ### Variables
@@ -203,10 +204,12 @@ The history migration has the following limitations.
     - See https://github.com/camunda/camunda/issues/47927
   - Please use [RDBMS History Cleanup](/self-managed/concepts/databases/relational-db/configuration.md#history-cleanup-1) to delete the migrated data.
 - The minimum required history level in Camunda 7 is `FULL` to ensure that sufficient data is available for migration.
-- To avoid collisions between definitions (process/decision/form), each definition migrated from Camunda 7 to 8 has its ID prefixed with `c7-legacy-`.
-  - Do not deploy new definitions in Camunda 8 with IDs starting with this prefix to avoid conflicts.
-  - These migrated definitions are visible in Camunda 8 Tasklist but cannot be started. To start new instances, you need to use the [Diagram Converter](../diagram-converter.md) to migrate your legacy processes to Camunda 8 compatible versions and deploy them to Camunda 8 as described in the [preparation step for runtime migration](runtime.md#1-preparation).
-    - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1000
+- To avoid collisions with native Camunda 8 definitions, the Data Migrator prefixes each migrated Camunda 7 history definition ID (process, decision, and form definitions) with `c7-legacy-` by default.
+  - (Optional) You can configure a different prefix with the `camunda.migrator.history.legacy-id-prefix` property. For configuration details and validation rules, see the [property reference](config-properties.md#camundamigrator).
+  - The same effective prefix is applied to all migrated history definition types and to the entities that reference them.
+  - Do not deploy new definitions in Camunda 8 with IDs starting with the effective prefix. Changing or removing the default prefix increases the risk of ID collisions, so only change it when you are sure your Camunda 8 definition IDs cannot clash with migrated IDs.
+- Migrated definitions are visible in Camunda 8 Tasklist but cannot be started. To start new instances, you need to use the [Diagram Converter](../diagram-converter.md) to migrate your legacy processes to Camunda 8 compatible versions and deploy them to Camunda 8 as described in the [preparation step for runtime migration](runtime.md#1-preparation).
+  - See https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1000
 - Avoid manipulating Camunda 7 data in between History Data Migrator runs to ensure data consistency unless there is a specific migration issue to fix (e.g. moving instances out of states that are not migratable). See [Auto-cancellation of active instances](history.md#auto-cancellation-of-active-instances) for details.
 - During migration, some entities may be skipped due to unresolved dependencies (for example, when a parent entity has not yet been migrated).
   - After the initial migration completes, the migrator automatically retries skipped entities to resolve cross-entity dependencies.
@@ -253,7 +256,8 @@ The History Data Migrator supports migration of Camunda Forms, but with the foll
 
 The History Data Migrator migrates only jobs of type [asynchronous continuation](https://docs.camunda.org/manual/7.24/user-guide/process-engine/transactions-in-processes/#configure-asynchronous-continuations).
 
-- The jobs associated with multi-instance activities will be skipped. (https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1103)
+- Jobs associated with multi-instance activities are skipped. (https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1103)
+- Jobs whose corresponding Camunda 7 historic activity instance was never persisted are skipped. This happens for async-before activities that fail on all available retries before the activity is entered, so no `elementInstanceKey` can be resolved. Camunda 8.10 enforces non-nullability on `elementInstanceKey`; previously these jobs were migrated with a null value. The skip is recorded in the skip log with a reason.
 
 ### Incidents
 
@@ -263,7 +267,8 @@ The History Data Migrator supports migration of DMN entities, but with the follo
   therefore incidents of migrated process instances will not be visible in Operate.
   Audit data related to incidents can be observed by querying APIs.
 - When there's a failing start timer in Camunda 7, the incident cannot be migrated (as there's no process instance history) and will be skipped.
-- The incidents associated with multi-instance activities will be skipped. (https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1103)
+- Incidents associated with multi-instance activities are skipped. (https://github.com/camunda/camunda-7-to-8-migration-tooling/issues/1103)
+- Incidents whose corresponding Camunda 7 historic activity instance was never persisted are skipped. This happens for async-before activities that fail on all available retries before the activity is entered, so no `flowNodeInstanceKey` can be resolved. Camunda 8.10 enforces non-nullability on `flowNodeInstanceKey`; previously these incidents were migrated with a null value. The skip is recorded in the skip log with a reason.
 
 ### Audit logs
 

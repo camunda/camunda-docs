@@ -28,6 +28,13 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
+    link: "../../connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
+    title: "AI Agent connector",
+    image: IconConnectorImg,
+    description:
+      "Embed LLM-powered agents in your processes with the AI Agent connector.",
+  },
+  {
     link: "../camunda-provided-llm/",
     title: "Camunda-provided LLM",
     image: IconAoLlmImg,
@@ -42,7 +49,7 @@ export const fundamentalCards = [
   },
   {
     link: "../evaluate-agents/evaluate-agents-overview/",
-    title: "Evaluate your AI agents",
+    title: "Evaluate AI agents",
     image: IconTest,
     description:
       "Evaluate the performance and effectiveness of your AI agents.",

@@ -21,6 +21,7 @@ mdx:
   - [Job Worker](runtime.md#module-camunda_orchestration_sdk.runtime.job_worker)
   - [Configuration Resolver](runtime.md#module-camunda_orchestration_sdk.runtime.configuration_resolver)
 - [Semantic Types](types.md)
+  - [`AgentHistoryItemKey`](types.md#camunda_orchestration_sdk.semantic_types.AgentHistoryItemKey)
   - [`AgentInstanceKey`](types.md#camunda_orchestration_sdk.semantic_types.AgentInstanceKey)
   - [`AuditLogEntityKey`](types.md#camunda_orchestration_sdk.semantic_types.AuditLogEntityKey)
   - [`AuditLogKey`](types.md#camunda_orchestration_sdk.semantic_types.AuditLogKey)

@@ -232,7 +232,7 @@ An instruction to assert the evaluation of a decision. See the [assertions docum
   </tr>
   <tr>
     <td>output</td>
-    <td>Expected output of the decision (any JSON type)</td>
+    <td>Expected output of the decision. Can be any JSON type.</td>
     <td>any</td>
     <td>No</td>
     <td></td>
@@ -604,6 +604,171 @@ Example:
   "state": "IS_CREATED",
   "assignee": "zee-astronaut",
   "priority": 100
+}
+```
+
+### ASSERT_VARIABLE
+
+An instruction to assert a single variable of a process instance. See the [assertions documentation](assertions.md#variable-assertions) for more details.
+
+<table>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>Instruction type, must be "ASSERT_VARIABLE"</td>
+    <td>string</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>processInstanceSelector</td>
+    <td>The selector to identify the process instance.</td>
+    <td><a href="#process-instance-selector">ProcessInstanceSelector</a></td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>elementSelector</td>
+    <td>The selector to identify the element for local variables.</td>
+    <td><a href="#element-selector">ElementSelector</a></td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>variableName</td>
+    <td>The name of the variable to evaluate.</td>
+    <td>string</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>satisfiesExpression</td>
+    <td>A FEEL expression assertion that must evaluate to <code>true</code> for the given variable.</td>
+    <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>satisfiesJudge</td>
+    <td>An LLM judge assertion that evaluates the variable against a semantic expectation.</td>
+    <td><a href="#judge-assertion">JudgeAssertion</a></td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>similarTo</td>
+    <td>A semantic similarity assertion that checks the variable value against an expected value using text embeddings.</td>
+    <td><a href="#semantic-similarity-assertion">SemanticSimilarityAssertion</a></td>
+    <td>No</td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "MoonExplorationProcess"
+  },
+  "variableName": "mission",
+  "satisfiesExpression": "mission.status = \"completed\" and list contains(mission.astronauts, \"Zee\")"
+}
+```
+
+#### Judge Assertion
+
+An LLM-as-judge assertion that evaluates a variable against a semantic expectation.
+
+<table style={{width: '90%'}}>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+  </tr>
+  <tr>
+    <td>expectation</td>
+    <td>The semantic expectation for the variable value.</td>
+    <td>string</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>threshold</td>
+    <td>The score threshold (0.0–1.0) at or above which the assertion passes. Defaults to the threshold configured in the CPT runtime (0.5 if not configured).</td>
+    <td>number (0.0–1.0)</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>customPrompt</td>
+    <td>A custom prompt for the judge evaluation. Overrides the configured custom prompt.</td>
+    <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>attachDocuments</td>
+    <td>When true, resolves Camunda document references in the variable value and attaches their content to the judge. Overrides the configured <code>judge.attach-documents</code> setting. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON.</td>
+    <td>boolean</td>
+    <td>No</td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "MoonExplorationProcess"
+  },
+  "variableName": "missionSummary",
+  "satisfiesJudge": {
+    "expectation": "The summary confirms a successful moon landing.",
+    "threshold": 0.8
+  }
+}
+```
+
+#### Semantic Similarity Assertion
+
+A semantic similarity assertion that checks a variable value against an expected value using text embeddings.
+
+<table style={{width: '90%'}}>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+  </tr>
+  <tr>
+    <td>expectedValue</td>
+    <td>The expected value the variable should be semantically similar to.</td>
+    <td>string</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>threshold</td>
+    <td>The minimum similarity score (0.0–1.0) for the assertion to pass. Defaults to the threshold configured in the CPT runtime (0.5 if not configured).</td>
+    <td>number (0.0–1.0)</td>
+    <td>No</td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "MoonExplorationProcess"
+  },
+  "elementSelector": {
+    "elementId": "ReviewMissionPlan"
+  },
+  "variableName": "reviewComment",
+  "similarTo": {
+    "expectedValue": "The mission plan meets the required standards.",
+    "threshold": 0.85
+  }
 }
 ```
 
@@ -1048,6 +1213,79 @@ Example:
 }
 ```
 
+### CONDITIONAL_BEHAVIOR
+
+An instruction to register a conditional behavior that reacts to process state changes. See the [utilities documentation](utilities.md#conditional-behavior) for more details.
+
+The conditions form a conjunction; the behavior fires only when every assertion succeeds. Actions are consumed in order: the first match fires the first action, the second match fires the second, and the last action repeats indefinitely.
+
+<table>
+  <tbody><tr>
+    <th style={{width: '25%'}}>Property</th>
+    <th style={{width: '35%'}}>Description</th>
+    <th style={{width: '20%'}}>Type</th>
+    <th style={{width: '10%'}}>Required</th>
+    <th style={{width: '10%'}}>Default</th>
+  </tr>
+  <tr>
+    <td>type</td>
+    <td>Instruction type, must be "CONDITIONAL_BEHAVIOR"</td>
+    <td>string</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>A descriptive name for diagnostics and log messages.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>conditions</td>
+    <td>The ASSERT_* instructions to watch. The behavior fires only when every condition succeeds (conjunction).</td>
+    <td>array of instructions</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>actions</td>
+    <td>The action instructions to execute when all conditions are met. Consumed in order; the last action repeats indefinitely.</td>
+    <td>array of instructions</td>
+    <td>Yes</td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+Example:
+
+```json
+{
+  "type": "CONDITIONAL_BEHAVIOR",
+  "name": "auto-complete-review-task",
+  "conditions": [
+    {
+      "type": "ASSERT_USER_TASK",
+      "userTaskSelector": {
+        "taskName": "Review Task"
+      },
+      "state": "IS_CREATED"
+    }
+  ],
+  "actions": [
+    {
+      "type": "COMPLETE_USER_TASK",
+      "userTaskSelector": {
+        "taskName": "Review Task"
+      },
+      "variables": {
+        "approved": true
+      }
+    }
+  ]
+}
+```
+
 ### CORRELATE_MESSAGE
 
 An instruction to correlate a message.
@@ -1416,8 +1654,15 @@ An instruction to mock a DMN decision. See the [utilities documentation](utiliti
   </tr>
   <tr>
     <td>variables</td>
-    <td>The variables to set as the decision output.</td>
+    <td>The variables to set as the decision output. Deprecated, use <code>decisionOutput</code>.</td>
     <td>object</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>decisionOutput</td>
+    <td>The decision output to mock. Can be any JSON type.</td>
+    <td>any</td>
     <td>No</td>
     <td></td>
   </tr>
@@ -1429,9 +1674,7 @@ Example:
 {
   "type": "MOCK_DMN_DECISION",
   "decisionDefinitionId": "ChooseRocket",
-  "variables": {
-    "rocket": "Falcon Heavy"
-  }
+  "decisionOutput": "Falcon Heavy"
 }
 ```
 

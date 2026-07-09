@@ -16,42 +16,44 @@ description: "Complete reference of all c8ctl CLI commands, flags, resources, an
 
 These flags are accepted by every command.
 
-| Flag               | Type    | Required | Description                                                                                             |
-| ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------- |
-| `--help` / `-h`    | boolean |          | Show help                                                                                               |
-| `--version` / `-v` | string  |          | Show CLI version, or filter by process definition version on supported commands                         |
-| `--profile`        | string  |          | Use a specific profile                                                                                  |
-| `--dry-run`        | boolean |          | Preview the API request without executing                                                               |
-| `--verbose`        | boolean |          | Show verbose output                                                                                     |
-| `--fields`         | string  |          | Comma-separated list of fields to display                                                               |
-| `--json`           | boolean |          | Force JSON output for this invocation (does not persist; overrides session state and C8CTL_OUTPUT_MODE) |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--help` / `-h` | boolean |  | Show help |
+| `--version` / `-v` | string |  | Show CLI version, or filter by process definition version on supported commands |
+| `--profile` | string |  | Use a specific profile |
+| `--dry-run` | boolean |  | Preview the API request without executing |
+| `--verbose` | boolean |  | Show verbose output |
+| `--fields` | string |  | Comma-separated list of fields to display |
+| `--json` | boolean |  | Force JSON output for this invocation (does not persist; overrides session state and C8CTL_OUTPUT_MODE) |
+| `--yes` / `-y` | boolean |  | Skip confirmation prompts |
 
 ## Resource Aliases
 
-| Alias  | Resource             |
-| ------ | -------------------- |
-| `auth` | `authorization`      |
-| `inc`  | `incident`           |
-| `mr`   | `mapping-rule`       |
-| `msg`  | `message`            |
-| `pd`   | `process-definition` |
-| `pi`   | `process-instance`   |
-| `ut`   | `user-task`          |
-| `vars` | `variable`           |
-| `var`  | `variable`           |
+| Alias | Resource |
+|-------|----------|
+| `auth` | `authorization` |
+| `inc` | `incident` |
+| `mr` | `mapping-rule` |
+| `msg` | `message` |
+| `pd` | `process-definition` |
+| `pi` | `process-instance` |
+| `ut` | `user-task` |
+| `vars` | `variable` |
+| `var` | `variable` |
+| `ws` | `wait-state` |
 
 ## Search Flags
 
 These flags are available on `list` and `search` commands.
 
-| Flag          | Type    | Required | Description                                              |
-| ------------- | ------- | -------- | -------------------------------------------------------- |
-| `--sortBy`    | string  |          | Sort results by field                                    |
-| `--asc`       | boolean |          | Sort ascending                                           |
-| `--desc`      | boolean |          | Sort descending                                          |
-| `--limit`     | string  |          | Maximum number of results                                |
-| `--between`   | string  |          | Date range filter (e.g. 7d, 30d, 2024-01-01..2024-12-31) |
-| `--dateField` | string  |          | Date field for --between filter                          |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--sortBy` | string |  | Sort results by field |
+| `--asc` | boolean |  | Sort ascending |
+| `--desc` | boolean |  | Sort descending |
+| `--limit` | string |  | Maximum number of results |
+| `--between` | string |  | Date range filter (e.g. 2024-01-01..2024-12-31, ..2024-12-31, 2024-01-01..) |
+| `--dateField` | string |  | Date field for --between filter |
 
 ## Commands
 
@@ -63,150 +65,150 @@ List resources
 
 **Verb-level flags:**
 
-| Flag    | Type    | Required | Description                         |
-| ------- | ------- | -------- | ----------------------------------- |
-| `--all` | boolean |          | List all (disable pagination limit) |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--all` | boolean |  | List all (disable pagination limit) |
 
 **Resource-specific flags:**
 
 <details>
 <summary><code>process-definition</code> (<code>pd</code>)</summary>
 
-| Flag                    | Type   | Required | Description                                |
-| ----------------------- | ------ | -------- | ------------------------------------------ |
-| `--bpmnProcessId`       | string |          | Filter by BPMN process ID                  |
-| `--id`                  | string |          | Filter by BPMN process ID (alias)          |
-| `--processDefinitionId` | string |          | Filter by process definition ID            |
-| `--name`                | string |          | Filter by name                             |
-| `--key`                 | string |          | Filter by key                              |
-| `--iid`                 | string |          | Case-insensitive filter by BPMN process ID |
-| `--iname`               | string |          | Case-insensitive filter by name            |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--bpmnProcessId` | string |  | Filter by BPMN process ID |
+| `--id` | string |  | Filter by BPMN process ID (alias) |
+| `--processDefinitionId` | string |  | Filter by process definition ID |
+| `--name` | string |  | Filter by name |
+| `--key` | string |  | Filter by key |
+| `--iid` | string |  | Case-insensitive filter by BPMN process ID |
+| `--iname` | string |  | Case-insensitive filter by name |
 
 </details>
 
 <details>
 <summary><code>process-instance</code> (<code>pi</code>)</summary>
 
-| Flag                         | Type   | Required | Description                                |
-| ---------------------------- | ------ | -------- | ------------------------------------------ |
-| `--bpmnProcessId`            | string |          | Filter by BPMN process ID                  |
-| `--id`                       | string |          | Filter by BPMN process ID (alias)          |
-| `--processDefinitionId`      | string |          | Filter by process definition ID            |
-| `--processDefinitionKey`     | string |          | Filter by process definition key           |
-| `--state`                    | string |          | Filter by state (ACTIVE, COMPLETED, etc)   |
-| `--key`                      | string |          | Filter by key                              |
-| `--parentProcessInstanceKey` | string |          | Filter by parent process instance key      |
-| `--iid`                      | string |          | Case-insensitive filter by BPMN process ID |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--bpmnProcessId` | string |  | Filter by BPMN process ID |
+| `--id` | string |  | Filter by BPMN process ID (alias) |
+| `--processDefinitionId` | string |  | Filter by process definition ID |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--state` | string |  | Filter by state (ACTIVE, COMPLETED, etc) |
+| `--key` | string |  | Filter by key |
+| `--parentProcessInstanceKey` | string |  | Filter by parent process instance key |
+| `--iid` | string |  | Case-insensitive filter by BPMN process ID |
 
 </details>
 
 <details>
 <summary><code>user-task</code> (<code>ut</code>)</summary>
 
-| Flag                     | Type   | Required | Description                         |
-| ------------------------ | ------ | -------- | ----------------------------------- |
-| `--state`                | string |          | Filter by state                     |
-| `--assignee`             | string |          | Filter by assignee                  |
-| `--processInstanceKey`   | string |          | Filter by process instance key      |
-| `--processDefinitionKey` | string |          | Filter by process definition key    |
-| `--elementId`            | string |          | Filter by element ID                |
-| `--iassignee`            | string |          | Case-insensitive filter by assignee |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--state` | string |  | Filter by state |
+| `--assignee` | string |  | Filter by assignee |
+| `--processInstanceKey` | string |  | Filter by process instance key |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--elementId` | string |  | Filter by element ID |
+| `--iassignee` | string |  | Case-insensitive filter by assignee |
 
 </details>
 
 <details>
 <summary><code>incident</code> (<code>inc</code>)</summary>
 
-| Flag                     | Type   | Required | Description                                |
-| ------------------------ | ------ | -------- | ------------------------------------------ |
-| `--state`                | string |          | Filter by state                            |
-| `--processInstanceKey`   | string |          | Filter by process instance key             |
-| `--processDefinitionKey` | string |          | Filter by process definition key           |
-| `--bpmnProcessId`        | string |          | Filter by BPMN process ID                  |
-| `--id`                   | string |          | Filter by BPMN process ID (alias)          |
-| `--processDefinitionId`  | string |          | Filter by process definition ID            |
-| `--errorType`            | string |          | Filter by error type                       |
-| `--errorMessage`         | string |          | Filter by error message                    |
-| `--ierrorMessage`        | string |          | Case-insensitive filter by error message   |
-| `--iid`                  | string |          | Case-insensitive filter by BPMN process ID |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--state` | string |  | Filter by state |
+| `--processInstanceKey` | string |  | Filter by process instance key |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--bpmnProcessId` | string |  | Filter by BPMN process ID |
+| `--id` | string |  | Filter by BPMN process ID (alias) |
+| `--processDefinitionId` | string |  | Filter by process definition ID |
+| `--errorType` | string |  | Filter by error type |
+| `--errorMessage` | string |  | Filter by error message |
+| `--ierrorMessage` | string |  | Case-insensitive filter by error message |
+| `--iid` | string |  | Case-insensitive filter by BPMN process ID |
 
 </details>
 
 <details>
 <summary><code>jobs</code></summary>
 
-| Flag                     | Type   | Required | Description                         |
-| ------------------------ | ------ | -------- | ----------------------------------- |
-| `--state`                | string |          | Filter by state                     |
-| `--type`                 | string |          | Filter by job type                  |
-| `--processInstanceKey`   | string |          | Filter by process instance key      |
-| `--processDefinitionKey` | string |          | Filter by process definition key    |
-| `--itype`                | string |          | Case-insensitive filter by job type |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--state` | string |  | Filter by state |
+| `--type` | string |  | Filter by job type |
+| `--processInstanceKey` | string |  | Filter by process instance key |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--itype` | string |  | Case-insensitive filter by job type |
 
 </details>
 
 <details>
 <summary><code>user</code></summary>
 
-| Flag         | Type   | Required | Description        |
-| ------------ | ------ | -------- | ------------------ |
-| `--username` | string |          | Filter by username |
-| `--name`     | string |          | Filter by name     |
-| `--email`    | string |          | Filter by email    |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--username` | string |  | Filter by username |
+| `--name` | string |  | Filter by name |
+| `--email` | string |  | Filter by email |
 
 </details>
 
 <details>
 <summary><code>role</code></summary>
 
-| Flag       | Type   | Required | Description       |
-| ---------- | ------ | -------- | ----------------- |
-| `--roleId` | string |          | Filter by role ID |
-| `--name`   | string |          | Filter by name    |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--roleId` | string |  | Filter by role ID |
+| `--name` | string |  | Filter by name |
 
 </details>
 
 <details>
 <summary><code>group</code></summary>
 
-| Flag        | Type   | Required | Description        |
-| ----------- | ------ | -------- | ------------------ |
-| `--groupId` | string |          | Filter by group ID |
-| `--name`    | string |          | Filter by name     |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--groupId` | string |  | Filter by group ID |
+| `--name` | string |  | Filter by name |
 
 </details>
 
 <details>
 <summary><code>tenant</code></summary>
 
-| Flag         | Type   | Required | Description         |
-| ------------ | ------ | -------- | ------------------- |
-| `--tenantId` | string |          | Filter by tenant ID |
-| `--name`     | string |          | Filter by name      |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--tenantId` | string |  | Filter by tenant ID |
+| `--name` | string |  | Filter by name |
 
 </details>
 
 <details>
 <summary><code>authorization</code> (<code>auth</code>)</summary>
 
-| Flag             | Type   | Required | Description             |
-| ---------------- | ------ | -------- | ----------------------- |
-| `--ownerId`      | string |          | Filter by owner ID      |
-| `--ownerType`    | string |          | Filter by owner type    |
-| `--resourceType` | string |          | Filter by resource type |
-| `--resourceId`   | string |          | Filter by resource ID   |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--ownerId` | string |  | Filter by owner ID |
+| `--ownerType` | string |  | Filter by owner type |
+| `--resourceType` | string |  | Filter by resource type |
+| `--resourceId` | string |  | Filter by resource ID |
 
 </details>
 
 <details>
 <summary><code>mapping-rule</code> (<code>mr</code>)</summary>
 
-| Flag              | Type   | Required | Description               |
-| ----------------- | ------ | -------- | ------------------------- |
-| `--mappingRuleId` | string |          | Filter by mapping rule ID |
-| `--name`          | string |          | Filter by name            |
-| `--claimName`     | string |          | Filter by claim name      |
-| `--claimValue`    | string |          | Filter by claim value     |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--mappingRuleId` | string |  | Filter by mapping rule ID |
+| `--name` | string |  | Filter by name |
+| `--claimName` | string |  | Filter by claim name |
+| `--claimValue` | string |  | Filter by claim value |
 
 </details>
 
@@ -224,163 +226,177 @@ c8ctl list users                                            # List users
 
 Search resources with filters (wildcards, date ranges, case-insensitive)
 
-**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule)
+**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule), wait-state
 
 **Resource-specific flags:**
 
 <details>
 <summary><code>process-definition</code> (<code>pd</code>)</summary>
 
-| Flag                    | Type   | Required | Description                                |
-| ----------------------- | ------ | -------- | ------------------------------------------ |
-| `--bpmnProcessId`       | string |          | Filter by BPMN process ID                  |
-| `--id`                  | string |          | Filter by BPMN process ID (alias)          |
-| `--processDefinitionId` | string |          | Filter by process definition ID            |
-| `--name`                | string |          | Filter by name                             |
-| `--key`                 | string |          | Filter by key                              |
-| `--iid`                 | string |          | Case-insensitive filter by BPMN process ID |
-| `--iname`               | string |          | Case-insensitive filter by name            |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--bpmnProcessId` | string |  | Filter by BPMN process ID |
+| `--id` | string |  | Filter by BPMN process ID (alias) |
+| `--processDefinitionId` | string |  | Filter by process definition ID |
+| `--name` | string |  | Filter by name |
+| `--key` | string |  | Filter by key |
+| `--iid` | string |  | Case-insensitive filter by BPMN process ID |
+| `--iname` | string |  | Case-insensitive filter by name |
 
 </details>
 
 <details>
 <summary><code>process-instance</code> (<code>pi</code>)</summary>
 
-| Flag                         | Type   | Required | Description                                |
-| ---------------------------- | ------ | -------- | ------------------------------------------ |
-| `--bpmnProcessId`            | string |          | Filter by BPMN process ID                  |
-| `--id`                       | string |          | Filter by BPMN process ID (alias)          |
-| `--processDefinitionId`      | string |          | Filter by process definition ID            |
-| `--processDefinitionKey`     | string |          | Filter by process definition key           |
-| `--state`                    | string |          | Filter by state (ACTIVE, COMPLETED, etc)   |
-| `--key`                      | string |          | Filter by key                              |
-| `--parentProcessInstanceKey` | string |          | Filter by parent process instance key      |
-| `--iid`                      | string |          | Case-insensitive filter by BPMN process ID |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--bpmnProcessId` | string |  | Filter by BPMN process ID |
+| `--id` | string |  | Filter by BPMN process ID (alias) |
+| `--processDefinitionId` | string |  | Filter by process definition ID |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--state` | string |  | Filter by state (ACTIVE, COMPLETED, etc) |
+| `--key` | string |  | Filter by key |
+| `--parentProcessInstanceKey` | string |  | Filter by parent process instance key |
+| `--iid` | string |  | Case-insensitive filter by BPMN process ID |
 
 </details>
 
 <details>
 <summary><code>user-task</code> (<code>ut</code>)</summary>
 
-| Flag                     | Type   | Required | Description                         |
-| ------------------------ | ------ | -------- | ----------------------------------- |
-| `--state`                | string |          | Filter by state                     |
-| `--assignee`             | string |          | Filter by assignee                  |
-| `--processInstanceKey`   | string |          | Filter by process instance key      |
-| `--processDefinitionKey` | string |          | Filter by process definition key    |
-| `--elementId`            | string |          | Filter by element ID                |
-| `--iassignee`            | string |          | Case-insensitive filter by assignee |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--state` | string |  | Filter by state |
+| `--assignee` | string |  | Filter by assignee |
+| `--processInstanceKey` | string |  | Filter by process instance key |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--elementId` | string |  | Filter by element ID |
+| `--iassignee` | string |  | Case-insensitive filter by assignee |
 
 </details>
 
 <details>
 <summary><code>incident</code> (<code>inc</code>)</summary>
 
-| Flag                     | Type   | Required | Description                                |
-| ------------------------ | ------ | -------- | ------------------------------------------ |
-| `--state`                | string |          | Filter by state                            |
-| `--processInstanceKey`   | string |          | Filter by process instance key             |
-| `--processDefinitionKey` | string |          | Filter by process definition key           |
-| `--bpmnProcessId`        | string |          | Filter by BPMN process ID                  |
-| `--id`                   | string |          | Filter by BPMN process ID (alias)          |
-| `--processDefinitionId`  | string |          | Filter by process definition ID            |
-| `--errorType`            | string |          | Filter by error type                       |
-| `--errorMessage`         | string |          | Filter by error message                    |
-| `--ierrorMessage`        | string |          | Case-insensitive filter by error message   |
-| `--iid`                  | string |          | Case-insensitive filter by BPMN process ID |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--state` | string |  | Filter by state |
+| `--processInstanceKey` | string |  | Filter by process instance key |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--bpmnProcessId` | string |  | Filter by BPMN process ID |
+| `--id` | string |  | Filter by BPMN process ID (alias) |
+| `--processDefinitionId` | string |  | Filter by process definition ID |
+| `--errorType` | string |  | Filter by error type |
+| `--errorMessage` | string |  | Filter by error message |
+| `--ierrorMessage` | string |  | Case-insensitive filter by error message |
+| `--iid` | string |  | Case-insensitive filter by BPMN process ID |
 
 </details>
 
 <details>
 <summary><code>jobs</code></summary>
 
-| Flag                     | Type   | Required | Description                         |
-| ------------------------ | ------ | -------- | ----------------------------------- |
-| `--state`                | string |          | Filter by state                     |
-| `--type`                 | string |          | Filter by job type                  |
-| `--processInstanceKey`   | string |          | Filter by process instance key      |
-| `--processDefinitionKey` | string |          | Filter by process definition key    |
-| `--itype`                | string |          | Case-insensitive filter by job type |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--state` | string |  | Filter by state |
+| `--type` | string |  | Filter by job type |
+| `--processInstanceKey` | string |  | Filter by process instance key |
+| `--processDefinitionKey` | string |  | Filter by process definition key |
+| `--itype` | string |  | Case-insensitive filter by job type |
 
 </details>
 
 <details>
 <summary><code>variable</code> (<code>var</code>, <code>vars</code>)</summary>
 
-| Flag                   | Type    | Required | Description                                 |
-| ---------------------- | ------- | -------- | ------------------------------------------- |
-| `--name`               | string  |          | Filter by variable name                     |
-| `--value`              | string  |          | Filter by value                             |
-| `--processInstanceKey` | string  |          | Filter by process instance key              |
-| `--scopeKey`           | string  |          | Filter by scope key                         |
-| `--fullValue`          | boolean |          | Return full variable values (not truncated) |
-| `--iname`              | string  |          | Case-insensitive filter by name             |
-| `--ivalue`             | string  |          | Case-insensitive filter by value            |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--name` | string |  | Filter by variable name |
+| `--value` | string |  | Filter by value |
+| `--processInstanceKey` | string |  | Filter by process instance key |
+| `--scopeKey` | string |  | Filter by scope key |
+| `--fullValue` | boolean |  | Return full variable values (not truncated) |
+| `--iname` | string |  | Case-insensitive filter by name |
+| `--ivalue` | string |  | Case-insensitive filter by value |
 
 </details>
 
 <details>
 <summary><code>user</code></summary>
 
-| Flag         | Type   | Required | Description        |
-| ------------ | ------ | -------- | ------------------ |
-| `--username` | string |          | Filter by username |
-| `--name`     | string |          | Filter by name     |
-| `--email`    | string |          | Filter by email    |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--username` | string |  | Filter by username |
+| `--name` | string |  | Filter by name |
+| `--email` | string |  | Filter by email |
 
 </details>
 
 <details>
 <summary><code>role</code></summary>
 
-| Flag       | Type   | Required | Description       |
-| ---------- | ------ | -------- | ----------------- |
-| `--roleId` | string |          | Filter by role ID |
-| `--name`   | string |          | Filter by name    |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--roleId` | string |  | Filter by role ID |
+| `--name` | string |  | Filter by name |
 
 </details>
 
 <details>
 <summary><code>group</code></summary>
 
-| Flag        | Type   | Required | Description        |
-| ----------- | ------ | -------- | ------------------ |
-| `--groupId` | string |          | Filter by group ID |
-| `--name`    | string |          | Filter by name     |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--groupId` | string |  | Filter by group ID |
+| `--name` | string |  | Filter by name |
 
 </details>
 
 <details>
 <summary><code>tenant</code></summary>
 
-| Flag         | Type   | Required | Description         |
-| ------------ | ------ | -------- | ------------------- |
-| `--tenantId` | string |          | Filter by tenant ID |
-| `--name`     | string |          | Filter by name      |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--tenantId` | string |  | Filter by tenant ID |
+| `--name` | string |  | Filter by name |
 
 </details>
 
 <details>
 <summary><code>authorization</code> (<code>auth</code>)</summary>
 
-| Flag             | Type   | Required | Description             |
-| ---------------- | ------ | -------- | ----------------------- |
-| `--ownerId`      | string |          | Filter by owner ID      |
-| `--ownerType`    | string |          | Filter by owner type    |
-| `--resourceType` | string |          | Filter by resource type |
-| `--resourceId`   | string |          | Filter by resource ID   |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--ownerId` | string |  | Filter by owner ID |
+| `--ownerType` | string |  | Filter by owner type |
+| `--resourceType` | string |  | Filter by resource type |
+| `--resourceId` | string |  | Filter by resource ID |
 
 </details>
 
 <details>
 <summary><code>mapping-rule</code> (<code>mr</code>)</summary>
 
-| Flag              | Type   | Required | Description               |
-| ----------------- | ------ | -------- | ------------------------- |
-| `--mappingRuleId` | string |          | Filter by mapping rule ID |
-| `--name`          | string |          | Filter by name            |
-| `--claimName`     | string |          | Filter by claim name      |
-| `--claimValue`    | string |          | Filter by claim value     |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--mappingRuleId` | string |  | Filter by mapping rule ID |
+| `--name` | string |  | Filter by name |
+| `--claimName` | string |  | Filter by claim name |
+| `--claimValue` | string |  | Filter by claim value |
+
+</details>
+
+<details>
+<summary><code>wait-state</code> (<code>ws</code>)</summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--processInstanceKey` / `-k` | string |  | Filter by process instance key |
+| `--rootProcessInstanceKey` / `-r` | string |  | Filter by root process instance key |
+| `--elementInstanceKey` / `-e` | string |  | Filter by element instance key |
+| `--elementId` | string |  | Filter by element ID (supports wildcards, e.g. `*Task*`) |
+| `--elementType` | string |  | Filter by BPMN element type (e.g. SERVICE_TASK, USER_TASK, CALL_ACTIVITY) |
+| `--waitStateType` | string |  | Filter by wait state type (JOB, MESSAGE, TIMER, CONDITION, USER_TASK, SIGNAL) |
 
 </details>
 
@@ -399,6 +415,8 @@ c8ctl search variables --value=foo                          # Search for variabl
 c8ctl search variables --processInstanceKey=123 --fullValue  # Search variables with full values
 c8ctl search pd --iname='*order*'                           # Case-insensitive search by name
 c8ctl search ut --iassignee=John                            # Case-insensitive search by assignee
+c8ctl search ws --waitStateType=JOB                         # Search wait states of type JOB
+c8ctl search ws --elementType=SERVICE_TASK                  # Search wait states on service tasks
 ```
 
 ---
@@ -427,30 +445,30 @@ Get a resource by key
 <details>
 <summary><code>process-definition</code> (<code>pd</code>)</summary>
 
-| Flag    | Type    | Required | Description                        |
-| ------- | ------- | -------- | ---------------------------------- |
-| `--xml` | boolean |          | Get BPMN XML (process definitions) |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--xml` | boolean |  | Get BPMN XML (process definitions) |
 
 </details>
 
 <details>
 <summary><code>form</code></summary>
 
-| Flag                  | Type    | Required | Description                     |
-| --------------------- | ------- | -------- | ------------------------------- |
-| `--userTask`          | boolean |          | Get form for user task          |
-| `--ut`                | boolean |          | Alias for --userTask            |
-| `--processDefinition` | boolean |          | Get form for process definition |
-| `--pd`                | boolean |          | Alias for --processDefinition   |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--userTask` | boolean |  | Get form for user task |
+| `--ut` | boolean |  | Alias for --userTask |
+| `--processDefinition` | boolean |  | Get form for process definition |
+| `--pd` | boolean |  | Alias for --processDefinition |
 
 </details>
 
 <details>
 <summary><code>process-instance</code> (<code>pi</code>)</summary>
 
-| Flag          | Type    | Required | Description                 |
-| ------------- | ------- | -------- | --------------------------- |
-| `--variables` | boolean |          | Include variables in output |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--variables` | boolean |  | Include variables in output |
 
 </details>
 
@@ -477,38 +495,38 @@ Create a resource (process instance, identity)
 
 **Verb-level flags:**
 
-| Flag                    | Type    | Required | Description                                             |
-| ----------------------- | ------- | -------- | ------------------------------------------------------- |
-| `--processDefinitionId` | string  |          | Process definition ID (BPMN process ID)                 |
-| `--id`                  | string  |          | Process definition ID (alias for --processDefinitionId) |
-| `--bpmnProcessId`       | string  |          | BPMN process ID (alias for --processDefinitionId)       |
-| `--variables`           | string  |          | JSON variables                                          |
-| `--awaitCompletion`     | boolean |          | Wait for process to complete                            |
-| `--fetchVariables`      | boolean |          | Fetch result variables on completion                    |
-| `--requestTimeout`      | string  |          | Await timeout in milliseconds                           |
-| `--username`            | string  |          | Username                                                |
-| `--name`                | string  |          | Display name                                            |
-| `--email`               | string  |          | Email address                                           |
-| `--password`            | string  |          | Password                                                |
-| `--roleId`              | string  |          | Role ID                                                 |
-| `--groupId`             | string  |          | Group ID                                                |
-| `--tenantId`            | string  |          | Tenant ID                                               |
-| `--mappingRuleId`       | string  |          | Mapping rule ID                                         |
-| `--claimName`           | string  |          | Claim name                                              |
-| `--claimValue`          | string  |          | Claim value                                             |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
+| `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
+| `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
+| `--variables` | string |  | JSON variables |
+| `--awaitCompletion` | boolean |  | Wait for process to complete |
+| `--fetchVariables` | boolean |  | Fetch result variables on completion |
+| `--requestTimeout` | string |  | Await timeout in milliseconds |
+| `--username` | string |  | Username |
+| `--name` | string |  | Display name |
+| `--email` | string |  | Email address |
+| `--password` | string |  | Password |
+| `--roleId` | string |  | Role ID |
+| `--groupId` | string |  | Group ID |
+| `--tenantId` | string |  | Tenant ID |
+| `--mappingRuleId` | string |  | Mapping rule ID |
+| `--claimName` | string |  | Claim name |
+| `--claimValue` | string |  | Claim value |
 
 **Resource-specific flags:**
 
 <details>
 <summary><code>authorization</code> (<code>auth</code>)</summary>
 
-| Flag             | Type   | Required | Description                 |
-| ---------------- | ------ | -------- | --------------------------- |
-| `--ownerId`      | string | Yes      | Authorization owner ID      |
-| `--ownerType`    | string | Yes      | Authorization owner type    |
-| `--resourceType` | string | Yes      | Authorization resource type |
-| `--resourceId`   | string | Yes      | Authorization resource ID   |
-| `--permissions`  | string | Yes      | Comma-separated permissions |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--ownerId` | string | Yes | Authorization owner ID |
+| `--ownerType` | string | Yes | Authorization owner type |
+| `--resourceType` | string | Yes | Authorization resource type |
+| `--resourceId` | string | Yes | Authorization resource ID |
+| `--permissions` | string | Yes | Comma-separated permissions |
 
 </details>
 
@@ -571,14 +589,14 @@ Create and await process instance completion (server-side waiting)
 
 **Flags:**
 
-| Flag                    | Type    | Required | Description                                             |
-| ----------------------- | ------- | -------- | ------------------------------------------------------- |
-| `--processDefinitionId` | string  |          | Process definition ID (BPMN process ID)                 |
-| `--id`                  | string  |          | Process definition ID (alias for --processDefinitionId) |
-| `--bpmnProcessId`       | string  |          | BPMN process ID (alias for --processDefinitionId)       |
-| `--variables`           | string  |          | JSON variables                                          |
-| `--fetchVariables`      | boolean |          | Fetch result variables on completion                    |
-| `--requestTimeout`      | string  |          | Await timeout in milliseconds                           |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
+| `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
+| `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
+| `--variables` | string |  | JSON variables |
+| `--fetchVariables` | boolean |  | Fetch result variables on completion |
+| `--requestTimeout` | string |  | Await timeout in milliseconds |
 
 **Examples:**
 
@@ -603,9 +621,9 @@ Complete a user task or job
 
 **Flags:**
 
-| Flag          | Type   | Required | Description    |
-| ------------- | ------ | -------- | -------------- |
-| `--variables` | string |          | JSON variables |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--variables` | string |  | JSON variables |
 
 ---
 
@@ -621,10 +639,37 @@ Mark a job as failed with optional error message and retry count
 
 **Flags:**
 
-| Flag             | Type   | Required | Description       |
-| ---------------- | ------ | -------- | ----------------- |
-| `--retries`      | string |          | Remaining retries |
-| `--errorMessage` | string |          | Error message     |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--retries` | string |  | Remaining retries |
+| `--errorMessage` | string |  | Error message |
+
+---
+
+### `update`
+
+Update the retries or timeout of a job. At least one of --retries or --timeout must be provided.
+
+**Resources:** job
+
+**Positional arguments:**
+
+- **job:** `<key>` (required)
+
+**Flags:**
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--retries` | string |  | New number of retries for the job |
+| `--timeout` | string |  | New job timeout in milliseconds |
+| `--operationReference` | string |  | Optional operation reference (long integer) |
+
+**Examples:**
+
+```bash
+c8ctl update job 12345 --retries 3                          # Set the retry count for a job
+c8ctl update job 12345 --timeout 60000                      # Set the job timeout to 60 seconds
+```
 
 ---
 
@@ -640,11 +685,12 @@ Activate jobs of a specific type for processing
 
 **Flags:**
 
-| Flag                  | Type   | Required | Description                        |
-| --------------------- | ------ | -------- | ---------------------------------- |
-| `--maxJobsToActivate` | string |          | Maximum number of jobs to activate |
-| `--timeout`           | string |          | Job timeout in milliseconds        |
-| `--worker`            | string |          | Worker name                        |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--maxJobsToActivate` | string |  | Maximum number of jobs to activate |
+| `--timeout` | string |  | Job timeout in milliseconds |
+| `--worker` | string |  | Worker name |
+| `--customHeaders` | boolean |  | Include custom headers in output |
 
 ---
 
@@ -672,11 +718,11 @@ Publish a message for message correlation
 
 **Flags:**
 
-| Flag               | Type   | Required | Description                  |
-| ------------------ | ------ | -------- | ---------------------------- |
-| `--correlationKey` | string |          | Correlation key              |
-| `--variables`      | string |          | JSON variables               |
-| `--timeToLive`     | string |          | Time to live in milliseconds |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--correlationKey` | string |  | Correlation key |
+| `--variables` | string |  | JSON variables |
+| `--timeToLive` | string |  | Time to live in milliseconds |
 
 ---
 
@@ -692,11 +738,11 @@ Correlate a message to a specific process instance
 
 **Flags:**
 
-| Flag               | Type   | Required | Description                  |
-| ------------------ | ------ | -------- | ---------------------------- |
-| `--correlationKey` | string | Yes      | Correlation key              |
-| `--variables`      | string |          | JSON variables               |
-| `--timeToLive`     | string |          | Time to live in milliseconds |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--correlationKey` | string | Yes | Correlation key |
+| `--variables` | string |  | JSON variables |
+| `--timeToLive` | string |  | Time to live in milliseconds |
 
 ---
 
@@ -714,10 +760,10 @@ Set variables on an element instance (process instance or flow element scope). V
 
 **Flags:**
 
-| Flag          | Type    | Required | Description                                                               |
-| ------------- | ------- | -------- | ------------------------------------------------------------------------- |
-| `--variables` | string  | Yes      | JSON object of variables to set (required)                                |
-| `--local`     | boolean |          | Set variables in local scope only (default: propagate to outermost scope) |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--variables` | string | Yes | JSON object of variables to set (required) |
+| `--local` | boolean |  | Set variables in local scope only (default: propagate to outermost scope) |
 
 **Examples:**
 
@@ -730,22 +776,23 @@ c8ctl set variable 2251799813685249 --variables='{"x":1}' --local  # Set variabl
 
 ### `deploy`
 
-Deploy files to Camunda (auto-discovers deployable files in directories)
+Deploy files to Camunda (auto-discovers deployable files in directories). When deploying a directory that is inside a process application (a parent directory contains a .process-application marker), the entire application root is deployed. Explicit file paths are not expanded.
 
 **Usage:** `c8ctl deploy [path...]`
 
 **Flags:**
 
-| Flag               | Type    | Required | Description                                                                                                                                                   |
-| ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--force`          | boolean |          | Deploy any file type, ignoring the default extension allow-list                                                                                               |
-| `--extensions`     | string  |          | Comma-separated list of additional file extensions to include when scanning directories (e.g. .md,.txt). Explicit file paths bypass the extension allow-list. |
-| `--all-extensions` | boolean |          | Include all server-supported file extensions during directory discovery                                                                                       |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--force` | boolean |  | Deploy any file type, ignoring the default extension allow-list |
+| `--extensions` | string |  | Comma-separated list of additional file extensions to include when scanning directories (e.g. .md,.txt). Explicit file paths bypass the extension allow-list. |
+| `--all-extensions` | boolean |  | Include all server-supported file extensions during directory discovery |
 
 **Examples:**
 
 ```bash
 c8ctl deploy ./my-process.bpmn                              # Deploy a BPMN file
+c8ctl deploy                                                # Deploy from current directory (detects process application root)
 ```
 
 ---
@@ -758,10 +805,10 @@ Deploy and start a process instance from a BPMN file
 
 **Flags:**
 
-| Flag          | Type    | Required | Description                                                     |
-| ------------- | ------- | -------- | --------------------------------------------------------------- |
-| `--variables` | string  |          | JSON variables                                                  |
-| `--force`     | boolean |          | Deploy any file type, ignoring the default extension allow-list |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--variables` | string |  | JSON variables |
+| `--force` | boolean |  | Deploy any file type, ignoring the default extension allow-list |
 
 **Examples:**
 
@@ -788,12 +835,12 @@ Assign a resource to a target (--to-user, --to-group, etc.)
 
 **Flags:**
 
-| Flag                | Type   | Required | Description            |
-| ------------------- | ------ | -------- | ---------------------- |
-| `--to-user`         | string |          | Target user ID         |
-| `--to-group`        | string |          | Target group ID        |
-| `--to-tenant`       | string |          | Target tenant ID       |
-| `--to-mapping-rule` | string |          | Target mapping rule ID |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--to-user` | string |  | Target user ID |
+| `--to-group` | string |  | Target group ID |
+| `--to-tenant` | string |  | Target tenant ID |
+| `--to-mapping-rule` | string |  | Target mapping rule ID |
 
 **Examples:**
 
@@ -820,12 +867,12 @@ Unassign a resource from a target (--from-user, --from-group, etc.)
 
 **Flags:**
 
-| Flag                  | Type   | Required | Description            |
-| --------------------- | ------ | -------- | ---------------------- |
-| `--from-user`         | string |          | Source user ID         |
-| `--from-group`        | string |          | Source group ID        |
-| `--from-tenant`       | string |          | Source tenant ID       |
-| `--from-mapping-rule` | string |          | Source mapping rule ID |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--from-user` | string |  | Source user ID |
+| `--from-group` | string |  | Source group ID |
+| `--from-tenant` | string |  | Source tenant ID |
+| `--from-mapping-rule` | string |  | Source mapping rule ID |
 
 **Examples:**
 
@@ -845,11 +892,13 @@ Watch files for changes and auto-deploy
 
 **Flags:**
 
-| Flag               | Type    | Required | Description                                                                                       |
-| ------------------ | ------- | -------- | ------------------------------------------------------------------------------------------------- |
-| `--force`          | boolean |          | Continue watching after all deployment errors                                                     |
-| `--extensions`     | string  |          | Comma-separated list of additional file extensions to watch (merged with defaults, e.g. .md,.txt) |
-| `--all-extensions` | boolean |          | Watch all server-supported file extensions                                                        |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--force` | boolean |  | Continue watching after all deployment errors |
+| `--extensions` | string |  | Comma-separated list of additional file extensions to watch (merged with defaults, e.g. .md,.txt) |
+| `--all-extensions` | boolean |  | Watch all server-supported file extensions |
+| `--process-application` | boolean |  | Watch and deploy the entire process application (requires .process-application marker) |
+| `--pa` | boolean |  | Alias for --process-application |
 
 **Examples:**
 
@@ -889,18 +938,19 @@ Add a profile
 
 **Flags:**
 
-| Flag                | Type    | Required | Description                       |
-| ------------------- | ------- | -------- | --------------------------------- |
-| `--baseUrl`         | string  |          | Cluster base URL                  |
-| `--clientId`        | string  |          | OAuth client ID                   |
-| `--clientSecret`    | string  |          | OAuth client secret               |
-| `--audience`        | string  |          | OAuth audience                    |
-| `--oAuthUrl`        | string  |          | OAuth token URL                   |
-| `--defaultTenantId` | string  |          | Default tenant ID                 |
-| `--username`        | string  |          | Basic auth username               |
-| `--password`        | string  |          | Basic auth password               |
-| `--from-file`       | string  |          | Import from .env file             |
-| `--from-env`        | boolean |          | Import from environment variables |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--baseUrl` | string |  | Cluster base URL |
+| `--clientId` | string |  | OAuth client ID |
+| `--clientSecret` | string |  | OAuth client secret |
+| `--audience` | string |  | OAuth audience |
+| `--oAuthUrl` | string |  | OAuth token URL |
+| `--scope` | string |  | OAuth scope (space-separated) |
+| `--defaultTenantId` | string |  | Default tenant ID |
+| `--username` | string |  | Basic auth username |
+| `--password` | string |  | Basic auth password |
+| `--from-file` | string |  | Import from .env file |
+| `--from-env` | boolean |  | Import from environment variables |
 
 ---
 
@@ -912,18 +962,17 @@ Remove a profile (alias: rm)
 
 **Aliases:** `rm`
 
-**Resources:** profile, plugin
+**Resources:** profile
 
 **Positional arguments:**
 
-- **profile:** `<name>` (required)
-- **plugin:** `<package>` (required)
+- **profile:** `<name>` (optional)
 
 **Flags:**
 
-| Flag     | Type    | Required | Description          |
-| -------- | ------- | -------- | -------------------- |
-| `--none` | boolean |          | Clear active profile |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--none` | boolean |  | Clear active profile |
 
 ---
 
@@ -941,9 +990,9 @@ Load a c8ctl plugin (npm registry or URL)
 
 **Flags:**
 
-| Flag     | Type   | Required | Description          |
-| -------- | ------ | -------- | -------------------- |
-| `--from` | string |          | Load plugin from URL |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--from` | string |  | Load plugin from URL |
 
 **Examples:**
 
@@ -970,9 +1019,9 @@ Unload a c8ctl plugin (npm uninstall wrapper)
 
 **Flags:**
 
-| Flag      | Type    | Required | Description                       |
-| --------- | ------- | -------- | --------------------------------- |
-| `--force` | boolean |          | Force unload without confirmation |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--force` | boolean |  | Force unload without confirmation |
 
 ---
 
@@ -1073,9 +1122,9 @@ Set active profile or tenant
 
 **Flags:**
 
-| Flag     | Type    | Required | Description                 |
-| -------- | ------- | -------- | --------------------------- |
-| `--none` | boolean |          | Clear active profile/tenant |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--none` | boolean |  | Clear active profile/tenant |
 
 **Examples:**
 
@@ -1114,9 +1163,9 @@ Generate shell completion script
 <details>
 <summary><code>install</code></summary>
 
-| Flag      | Type   | Required | Description                                        |
-| --------- | ------ | -------- | -------------------------------------------------- |
-| `--shell` | string |          | Shell to install completions for (bash, zsh, fish) |
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
+| `--shell` | string |  | Shell to install completions for (bash, zsh, fish) |
 
 </details>
 
@@ -1166,3 +1215,4 @@ Show active profile or output mode
 c8ctl which profile                                         # Show currently active profile
 c8ctl which output                                          # Show current output mode
 ```
+

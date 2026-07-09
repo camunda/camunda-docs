@@ -15,10 +15,10 @@ Cursor-based forward pagination
 
 ## Properties
 
-### after
+### after?
 
 ```ts
-after: EndCursor;
+optional after?: EndCursor;
 ```
 
 Use the `endCursor` value from the previous response to fetch the next page of results.

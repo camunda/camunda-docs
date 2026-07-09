@@ -4,6 +4,9 @@ paths:
       tags:
         - Process instance
       operationId: createProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create process instance
       description: |-
 
@@ -75,6 +78,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process instance
       description: |-
 
@@ -121,6 +127,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstanceSequenceFlows
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get sequence flows
       description: |-
 
@@ -161,6 +170,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstanceStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get element instance statistics
       description: |-
 
@@ -196,11 +208,57 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
       x-added-in-version: "8.8"
+  /process-instances/{processInstanceKey}/statistics/wait-states:
+    get:
+      tags:
+        - Process instance
+      operationId: getProcessInstanceWaitStateStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Get wait state statistics
+      description: |-
+
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get statistics about waiting element instances by the process instance key, grouped by element id.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+            format: string<ProcessInstanceKey>
+            example: "2251799813690746"
+            description: System-generated key for a process instance.
+      responses:
+        "200":
+          description: The process instance wait state statistics result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceWaitStateStatisticsQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
   /process-instances/search:
     post:
       tags:
         - Process instance
       operationId: searchProcessInstances
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search process instances
       description: |-
 
@@ -237,6 +295,9 @@ paths:
       tags:
         - Process instance
       operationId: searchProcessInstanceIncidents
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search related incidents
       description: |-
 
@@ -294,6 +355,9 @@ paths:
       tags:
         - Process instance
       operationId: resolveProcessInstanceIncidents
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Resolve related incidents
       description: |-
 
@@ -340,6 +404,9 @@ paths:
       tags:
         - Process instance
       operationId: cancelProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Cancel process instance
       description: |-
 
@@ -388,6 +455,9 @@ paths:
       tags:
         - Process instance
       operationId: cancelProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Cancel process instances (batch)
       description: |-
 
@@ -432,6 +502,9 @@ paths:
       tags:
         - Process instance
       operationId: resolveIncidentsBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Resolve related incidents (batch)
       description: |-
 
@@ -476,6 +549,9 @@ paths:
       tags:
         - Process instance
       operationId: migrateProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Migrate process instances (batch)
       description: |-
 
@@ -520,6 +596,9 @@ paths:
       tags:
         - Process instance
       operationId: modifyProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Modify process instances (batch)
       description: |-
 
@@ -566,6 +645,9 @@ paths:
       tags:
         - Process instance
       operationId: deleteProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete process instance
       description: |-
 
@@ -620,6 +702,9 @@ paths:
       tags:
         - Process instance
       operationId: deleteProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete process instances (batch)
       description: |-
 
@@ -663,6 +748,9 @@ paths:
       tags:
         - Process instance
       operationId: migrateProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Migrate process instance
       description: |-
 
@@ -722,6 +810,9 @@ paths:
       tags:
         - Process instance
       operationId: modifyProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Modify process instance
       description: |-
 
@@ -773,6 +864,9 @@ paths:
       tags:
         - Process instance
       operationId: getProcessInstanceCallHierarchy
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get call hierarchy
       description: |-
 
@@ -1599,6 +1693,32 @@ components:
           type: array
           items:
             $ref: "process-definitions.yaml#/components/schemas/ProcessElementStatisticsResult"
+    ProcessInstanceWaitStateStatisticsQueryResult:
+      description: Process instance wait state statistics query response.
+      required:
+        - items
+      type: object
+      properties:
+        items:
+          description: The wait state statistics.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceWaitStateStatisticsResult"
+    ProcessInstanceWaitStateStatisticsResult:
+      description: Process instance wait state statistics response item.
+      type: object
+      required:
+        - elementId
+        - waitingCount
+      properties:
+        elementId:
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/ElementId"
+          description: The element id for which the wait states are aggregated.
+        waitingCount:
+          description: The total number of waiting instances of the element.
+          type: integer
+          format: int64
     ProcessInstanceMigrationInstruction:
       type: object
       description: |
@@ -1803,7 +1923,7 @@ components:
             Set to -1 to create the new element instance within an existing element instance of the
             flow scope. If multiple instances of the target element's flow scope exist, choose one
             specifically with this property by providing its key.
-          oneOf:
+          allOf:
             - $ref: "keys.yaml#/components/schemas/ElementInstanceKey"
       required:
         - ancestorElementInstanceKey

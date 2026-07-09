@@ -749,6 +749,10 @@ function BuildWithCamunda() {
                   <li>
                     <CheckIcon color="#22a06b" /> AI agent skills built in
                   </li>
+                  <li>
+                    <CheckIcon color="#22a06b" /> Free LLM tokens to run your
+                    first agent!
+                  </li>
                 </ul>
                 <span className={styles.heroCardCtaAlt}>
                   Create free account <ArrowRight />
@@ -806,7 +810,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start 8.9`}
+              {`$ c8ctl cluster start 8.10.0-alpha2`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -840,16 +844,7 @@ function BuildWithCamunda() {
                 >
                   Install via npm
                 </Link>{" "}
-                requires Node.js 18+.{" "}
-                <Link
-                  to={useBaseUrl(
-                    "docs/self-managed/quickstart/developer-quickstart/c8run/install-start/"
-                  )}
-                  style={{ fontWeight: 400, fontSize: "0.85rem" }}
-                >
-                  Camunda 8 Run
-                </Link>{" "}
-                requires OpenJDK 21–25.
+                requires Node.js 18+.
               </span>
             </p>
           </div>
@@ -883,25 +878,25 @@ function BuildWithCamunda() {
               <div className={styles.downloadButtons}>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-aarch64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-aarch64.zip"
                 >
                   <DownloadBtnIcon /> macOS (Apple Silicon)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-darwin-x86_64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-x86_64.zip"
                 >
                   <DownloadBtnIcon /> macOS (Intel)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-windows-x86_64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-windows-x86_64.zip"
                 >
                   <DownloadBtnIcon /> Windows
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.9.0/camunda8-getting-started-bundle-8.9.0-linux-x86_64.tar.gz"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-linux-x86_64.tar.gz"
                 >
                   <DownloadBtnIcon /> Linux
                 </a>

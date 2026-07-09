@@ -27,11 +27,32 @@
       "label": "Update an agent instance"
     }
   ],
+  "createAgentInstanceHistoryItem": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Append an agent instance history item"
+    }
+  ],
+  "searchAgentInstanceHistory": [
+    {
+      "file": "AgentInstance.cs",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
   "getTopology": [
     {
       "file": "Client.cs",
       "region": "GetTopology",
       "label": "Get cluster topology"
+    }
+  ],
+  "changeClusterMode": [
+    {
+      "file": "Client.cs",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
     }
   ],
   "createProcessInstance": [
@@ -93,6 +114,13 @@
       "file": "ProcessInstance.cs",
       "region": "GetProcessInstanceStatistics",
       "label": "Get process instance statistics"
+    }
+  ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
     }
   ],
   "getProcessInstanceSequenceFlows": [
@@ -1031,6 +1059,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "getVariable": [
     {
       "file": "VariableElement.cs",
@@ -1064,6 +1099,13 @@
       "file": "VariableElement.cs",
       "region": "SearchElementInstanceIncidents",
       "label": "Search element instance incidents"
+    }
+  ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "VariableElement.cs",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
     }
   ],
   "createElementInstanceVariables": [

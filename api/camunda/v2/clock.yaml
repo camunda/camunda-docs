@@ -4,6 +4,9 @@ paths:
       tags:
         - Clock
       operationId: pinClock
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Pin internal clock (alpha)
       description: |-
 
@@ -41,6 +44,9 @@ paths:
       tags:
         - Clock
       operationId: resetClock
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Reset internal clock (alpha)
       description: |-
 

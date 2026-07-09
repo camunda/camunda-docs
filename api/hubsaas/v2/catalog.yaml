@@ -1,0 +1,119 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Catalog resource paths and schemas
+paths:
+  /catalog/assets/ingestion:
+    put:
+      operationId: ingestCatalogAssets
+      summary: Ingest catalog assets
+      description: |
+        Ingests the full set of catalog assets.
+
+        For each asset, the actual element template JSON file as well as an accompanying README file must be provided.
+        The README should provide a description of the asset and can use Markdown syntax. It must contain a YAML
+        frontmatter section with a `template` field that references the element template by its file name. Optionally,
+        the frontmatter can specify a `category` and a list of `tags` that can be used to search and filter assets in
+        the catalog.
+
+        ```
+        ---
+        template: banking-system-connector.json
+        category: Finance
+        tags:
+          - invoice
+          - payment
+          - transaction
+        ---
+        ## Description
+        ...
+
+        ## Usage
+        ...
+        ```
+
+        The files must be provided as `multipart/form-data` with the named parts `readme` and `template` (the part name
+        is the same for each file of the respective type).
+
+        Previously ingested assets that are not included in the request payload will be marked as unpublished in the
+        catalog. Unpublished assets are only accessible to administrators; regular modeling users cannot use them for
+        new diagram elements anymore. Existing diagrams using assets that get unpublished will continue to work as
+        before.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Catalog
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/CatalogAssetIngestionRequest"
+      responses:
+        "204":
+          description: The catalog assets were ingested successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /catalog/assets/{assetKey}:
+    delete:
+      operationId: deleteCatalogAsset
+      summary: Delete a catalog asset
+      description: Deletes the catalog asset with the given asset key.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Catalog
+      parameters:
+        - $ref: "#/components/parameters/AssetKeyPathParam"
+      responses:
+        "204":
+          description: The catalog asset was deleted successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    AssetKeyPathParam:
+      name: assetKey
+      in: path
+      required: true
+      description: The unique key identifying the catalog asset.
+      schema:
+        type: string
+
+  schemas:
+    CatalogAssetIngestionRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - readme
+        - template
+      properties:
+        readme:
+          description: The README files. Each README must reference an element template in its YAML frontmatter.
+          type: array
+          items:
+            type: string
+            format: binary
+          minItems: 1
+        template:
+          description: The element template files. Each element template must have a corresponding README file.
+          type: array
+          items:
+            type: string
+            format: binary
+          minItems: 1

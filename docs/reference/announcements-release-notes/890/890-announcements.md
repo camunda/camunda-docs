@@ -131,11 +131,14 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 ### 8.9.x patch releases
 
-The following key change was also released as part of an 8.9.x patch release.
+The following key changes were also released as part of an 8.9.x patch release.
 
-| Patch release                                                  | Type            | Key change                                                                                              |
-| :------------------------------------------------------------- | :-------------- | :------------------------------------------------------------------------------------------------------ |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record) |
+| Patch release                                                    | Type            | Key change                                                                                                       |
+| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                     |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
 ## Agentic orchestration
 
@@ -175,7 +178,7 @@ Camunda clients (Java client, Spring SDK, Node.js SDK) and Camunda Process Test 
 
 [Camunda 8.9.1](/reference/announcements-release-notes/890/890-release-notes.md) unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.9.1 or any later 8.9.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
 
-A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.9.x patch.
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and is available in 8.9.9.
 
 **Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
 
@@ -262,14 +265,14 @@ Previously, a shared `DocumentMetadata` schema was used for both creating and re
 </div>
 <div className="release-announcement-content">
 
-#### Camunda Spring Boot Starter now requires Spring Boot 4.0.x
+#### Camunda Spring Boot Starter default now requires Spring Boot 4.0.x
 
-Starting with 8.9.0-alpha3, the [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) requires Spring Boot 4.0.x.
+Starting with 8.9.0-alpha3, the default [Camunda Spring Boot Starter](../../../apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter`) is bundled with Spring Boot 4.0.x.
 
-**Action:** To remain compatible, migrate your application to Spring Boot 4.0.x.
+**Action:** Migrate your application to Spring Boot 4.0.x and continue using `camunda-spring-boot-starter`. If you're not yet ready to upgrade, switch to `camunda-spring-boot-3-starter`, which is bundled with Spring Boot 3.5.x and has no announced end date. See [dedicated Spring Boot 3 and 4 modules](/apis-tools/camunda-spring-boot-starter/getting-started.md#dedicated-spring-boot-3-and-4-modules).
 
 :::info Spring Boot support timeline
-This change aligns with the Spring Boot support policy, as OSS support for Spring Boot 3.x ends in June 2026. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support).
+OSS support for Spring Boot 3.x ends in June 2026. This is a Spring framework lifecycle change. Camunda will continue to maintain `camunda-spring-boot-3-starter` beyond that date. See the [Spring Boot support timeline](https://spring.io/projects/spring-boot#support) for context on Spring's support lifecycle.
 :::
 
 </div>
@@ -417,6 +420,41 @@ The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*
 **Action:** Update your integrations to use the new endpoint format and review the streamlined architecture documentation for details.
 
 <p className="link-arrow">[Streamlined SaaS orchestration architecture](../../../apis-tools/migration-manuals/saas-orchestration-architecture.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Frontend application URLs now require explicit application prefix {#frontend-path-prefix-required}
+
+In Camunda 8.9, Operate and Tasklist run in a single unified frontend application rather than as separate deployments. This architectural change requires explicit path prefixes to route requests to the correct handler. As a result, the automatic path redirection that previously allowed access without an explicit application prefix has been removed.
+
+Before 8.9, both of the following URLs worked:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/processes/<process-id>
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+```
+
+From 8.9, only the URL with the explicit application prefix is valid:
+
+```text
+https://<region>.operate.camunda.io/<cluster-id>/operate/processes/<process-id>
+https://<region>.tasklist.camunda.io/<cluster-id>/tasklist/tasks/<task-id>
+```
+
+Prefix-less paths now return `404 Not Found` instead of redirecting.
+
+**Impact:** Any bookmarks, external links, scripts, or applications that use prefix-less frontend URLs will break after upgrading to 8.9.
+
+**Action:** Update all stored or constructed frontend URLs to include the explicit application prefix (`/operate/` or `/tasklist/`). If you use reverse proxies or load balancers, consider adding redirect rules to handle legacy URL formats.
+
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#frontend-application-urls-now-require-explicit-application-prefix-breaking)</p>
 
 </div>
 </div>
@@ -575,7 +613,7 @@ Starting with Camunda 8.9, the environment-based connector secret provider uses 
 - Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
 
 <p className="link-arrow">[connector secrets configuration](/self-managed/components/connectors/connectors-configuration.md#secrets)</p>
-<p className="link-arrow">[Upgrade 8.8 to 8.9](/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
+<p className="link-arrow">[Upgrade 8.8 to 8.9](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#default-secret-provider-prefix-change-breaking)</p>
 
 </div>
 </div>
@@ -1366,6 +1404,72 @@ OpenShift dual-region reference architecture now supports ECK (Elastic Cloud on 
 </div>
 </div>
 
+## Engine
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
+
+Camunda 8.9.1 introduced a regression in which output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to propagate to the parent scope.
+
+You're affected if your process contains a multi-instance sub-process that meets both of the following conditions:
+
+1. The sub-process defines an output collection.
+2. One or more elements inside the sub-process define output mappings.
+
+Under these conditions:
+
+- Local variables from inside the sub-process appear in the parent scope and are visible in Operate.
+- If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
+
+**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+
+**Fix:** A fix is available in 8.9.9. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
+
+- [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
+- [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
+
+**Action:**
+
+- Before the fix is available: ensure all variable names inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+- After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Output mapping behavior change for object variables {#output-mapping-behavior-change}
+
+**Affected versions:** 8.9.1–8.9.8. Fixed in 8.9.9.
+
+Patches 8.9.1–8.9.8 changed how output mappings behave when writing to object variables. Upgrading to 8.9.9+ reverts this change, which can alter the behavior of your running processes.
+
+Before 8.9.1 and from 8.9.9+, assigning an object literal to a variable replaces the variable entirely. In 8.9.1–8.9.8, the behavior changed to _merge_: existing keys in the variable are preserved and new keys are added.
+
+Example: task A sets `result = {a: 1}`, then task B sets `result = {b: 2}`:
+
+- _Replace_ (before 8.9.1 and from 8.9.9+): `result = {"b": 2}` — task A's value is overwritten.
+- _Merge_ (8.9.1–8.9.8): `result = {"a": 1, "b": 2}` — task A's value is preserved.
+
+Replace is the intended long-term behavior. The merge behavior in the affected patches was an unintended regression.
+
+**Action:**
+
+- **Running 8.9.1–8.9.8:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
+- **Upgrading to 8.9.9+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
@@ -1405,7 +1509,7 @@ The separate `webapp` component has been removed and its functionality is now co
 
 This change might require updates to your application configuration.
 
-<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+<p class="link-arrow">[Migrate configuration](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
 
 </div>
 </div>
@@ -1437,7 +1541,7 @@ Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded 
 
 This enhancement ensures consistency across environments and simplifies setup for administrators.
 
-<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
+<p class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 </div>
 </div>
@@ -1556,6 +1660,33 @@ Additionally, users have the freedom to deploy and run any process within a proc
 
 Starting with Camunda 8.9, users have full control over the `versionTag` attribute across all resource types in a process application. The `versionTag` is no longer automatically set on the main process XML when creating a process application version.
 Instead, users can set the `versionTag` manually in the properties panel for BPMN, DMN, form, and RPA files, allowing them to choose a `versionTag` for each resource independently.
+
+</div>
+</div>
+
+## Tasklist
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tasklist V1: candidate group task visibility {#tasklist-v1-candidate-group-task-visibility}
+
+Camunda 8.9.7 introduced a regression in which user tasks become invisible in the Tasklist V1 API when a candidate group's name differs from its ID ([camunda/camunda#55576](https://github.com/camunda/camunda/issues/55576)).
+
+With this regression, the Zeebe engine resolves candidate group names to IDs at task creation time, while the Tasklist V1 API resolves the authenticated user's group IDs to names before comparing them against the stored candidate groups. When a group's name and ID differ, this mismatch causes tasks to be invisible to all members of that group.
+
+You're affected if you use the Tasklist V1 API with user task access restrictions enabled and any group used as a candidate group in your processes has a name that differs from its ID.
+
+**Workaround:** Set the Zeebe broker environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION` to `false` (default: `true`) and ensure your BPMN models reference candidate groups by name rather than ID. This restores correct task visibility for newly created tasks. Tasks created while the regression was active remain affected.
+
+**Fix:** The fix was released in [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10). After upgrading, tasks created while the regression was active are also fixed without requiring manual intervention.
+
+:::note
+The Tasklist V1 API is deprecated and will be removed in Camunda 8.10. Consider [migrating to the Tasklist V2 API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to avoid disruption when upgrading to 8.10 or later.
+:::
 
 </div>
 </div>

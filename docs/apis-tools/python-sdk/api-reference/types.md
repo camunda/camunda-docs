@@ -8,6 +8,19 @@ mdx:
 
 # Semantic Types
 
+## AgentHistoryItemKey
+
+```python
+class AgentHistoryItemKey(value)
+```
+
+Bases: `str`
+
+- **Parameters:**
+  **value** (_str_)
+- **Return type:**
+  [AgentHistoryItemKey](#agenthistoryitemkey)
+
 ## AgentInstanceKey
 
 ```python

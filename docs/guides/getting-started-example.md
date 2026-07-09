@@ -41,7 +41,6 @@ You will:
   </TabItem>
   <TabItem value="nodejs">
 <ul>
-    <li>[JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Node.js](https://nodejs.org/en) 20+</li>
     <li>NPM 11+</li>
 </ul>

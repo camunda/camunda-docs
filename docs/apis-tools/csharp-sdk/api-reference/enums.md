@@ -11,18 +11,67 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Enumeration types (77 enums).
+Enumeration types (86 enums).
+
+## AgentInstanceHistoryCommitStatusEnum
+
+The commit status of a history item.
+COMMITTED: the producing job completed successfully.
+PENDING: the producing job is still active (in-flight).
+DISCARDED: the producing job failed; this item was superseded by a later activation.
+
+| Value       | Description |
+| ----------- | ----------- |
+| `COMMITTED` |             |
+| `PENDING`   |             |
+| `DISCARDED` |             |
+
+## AgentInstanceHistoryRoleEnum
+
+The role of a history item in the agent conversation.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `USER`       |             |
+| `ASSISTANT`  |             |
+| `TOOLRESULT` |             |
+
+## AgentInstanceHistorySearchQuerySortRequestField
+
+The field to sort by.
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `ProducedAt`     |             |
+| `HistoryItemKey` |             |
+| `LoopIteration`  |             |
+
+## AgentInstanceMessageContentTypeEnum
+
+The content type discriminator for a history item content block.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `TEXT`     |             |
+| `DOCUMENT` |             |
+| `OBJECT`   |             |
 
 ## AgentInstanceSearchQuerySortRequestField
 
 The field to sort by.
 
-| Value             | Description |
-| ----------------- | ----------- |
-| `CreationDate`    |             |
-| `LastUpdatedDate` |             |
-| `CompletionDate`  |             |
-| `Status`          |             |
+| Value                    | Description |
+| ------------------------ | ----------- |
+| `AgentInstanceKey`       |             |
+| `Status`                 |             |
+| `ElementId`              |             |
+| `ProcessInstanceKey`     |             |
+| `RootProcessInstanceKey` |             |
+| `ProcessDefinitionKey`   |             |
+| `TenantId`               |             |
+| `CreationDate`           |             |
+| `LastUpdatedDate`        |             |
+| `CompletionDate`         |             |
 
 ## AgentInstanceStatusEnum
 
@@ -30,9 +79,21 @@ The current status of an agent instance.
 
 | Value           | Description |
 | --------------- | ----------- |
+| `UNKNOWN`       |             |
 | `COMPLETED`     |             |
 | `IDLE`          |             |
 | `INITIALIZING`  |             |
+| `THINKING`      |             |
+| `TOOLCALLING`   |             |
+| `TOOLDISCOVERY` |             |
+
+## AgentInstanceUpdateStatusEnum
+
+The status values that can be set on an agent instance via an update request.
+
+| Value           | Description |
+| --------------- | ----------- |
+| `IDLE`          |             |
 | `THINKING`      |             |
 | `TOOLCALLING`   |             |
 | `TOOLDISCOVERY` |             |
@@ -135,6 +196,8 @@ The field to sort by.
 | `ProcessDefinitionId`     |             |
 | `ProcessDefinitionKey`    |             |
 | `ProcessInstanceKey`      |             |
+| `InboundChannelType`      |             |
+| `InboundChannelToolName`  |             |
 | `Result`                  |             |
 | `TenantId`                |             |
 | `Timestamp`               |             |
@@ -239,6 +302,7 @@ The type of the batch operation.
 | `MIGRATEPROCESSINSTANCE`   |             |
 | `MODIFYPROCESSINSTANCE`    |             |
 | `RESOLVEINCIDENT`          |             |
+| `UPDATEJOB`                |             |
 | `UPDATEVARIABLE`           |             |
 
 ## CamundaAuthErrorCode
@@ -289,6 +353,7 @@ The field to sort by.
 
 | Value                  | Description |
 | ---------------------- | ----------- |
+| `BusinessId`           |             |
 | `CorrelationKey`       |             |
 | `CorrelationTime`      |             |
 | `ElementId`            |             |
@@ -335,6 +400,7 @@ The field to sort by.
 
 | Value                           | Description |
 | ------------------------------- | ----------- |
+| `BusinessId`                    |             |
 | `DecisionDefinitionId`          |             |
 | `DecisionDefinitionKey`         |             |
 | `DecisionDefinitionName`        |             |
@@ -381,6 +447,40 @@ Document discriminator. Always set to "camunda".
 | Value     | Description |
 | --------- | ----------- |
 | `Camunda` |             |
+
+## ElementInstanceFilterFieldsType
+
+Type of element as defined set of values.
+
+| Value                          | Description |
+| ------------------------------ | ----------- |
+| `UNSPECIFIED`                  |             |
+| `PROCESS`                      |             |
+| `SUBPROCESS`                   |             |
+| `EVENTSUBPROCESS`              |             |
+| `ADHOCSUBPROCESS`              |             |
+| `ADHOCSUBPROCESSINNERINSTANCE` |             |
+| `STARTEVENT`                   |             |
+| `INTERMEDIATECATCHEVENT`       |             |
+| `INTERMEDIATETHROWEVENT`       |             |
+| `BOUNDARYEVENT`                |             |
+| `ENDEVENT`                     |             |
+| `SERVICETASK`                  |             |
+| `RECEIVETASK`                  |             |
+| `USERTASK`                     |             |
+| `MANUALTASK`                   |             |
+| `TASK`                         |             |
+| `EXCLUSIVEGATEWAY`             |             |
+| `INCLUSIVEGATEWAY`             |             |
+| `PARALLELGATEWAY`              |             |
+| `EVENTBASEDGATEWAY`            |             |
+| `SEQUENCEFLOW`                 |             |
+| `MULTIINSTANCEBODY`            |             |
+| `CALLACTIVITY`                 |             |
+| `BUSINESSRULETASK`             |             |
+| `SCRIPTTASK`                   |             |
+| `SENDTASK`                     |             |
+| `UNKNOWN`                      |             |
 
 ## ElementInstanceFilterType
 
@@ -478,6 +578,17 @@ Element states
 | `ACTIVE`     |             |
 | `COMPLETED`  |             |
 | `TERMINATED` |             |
+
+## ElementInstanceWaitStateQuerySortRequestField
+
+The field to sort by.
+
+| Value                    | Description |
+| ------------------------ | ----------- |
+| `ElementInstanceKey`     |             |
+| `ProcessInstanceKey`     |             |
+| `RootProcessInstanceKey` |             |
+| `ElementId`              |             |
 
 ## GlobalListenerSourceEnum
 
@@ -629,6 +740,7 @@ The listener event type of the job.
 | ------------- | ----------- |
 | `ASSIGNING`   |             |
 | `BEFOREALL`   |             |
+| `CANCEL`      |             |
 | `CANCELING`   |             |
 | `COMPLETING`  |             |
 | `CREATING`    |             |
@@ -655,6 +767,7 @@ The field to sort by.
 | `JobKey`                   |             |
 | `Kind`                     |             |
 | `ListenerEventType`        |             |
+| `Priority`                 |             |
 | `ProcessDefinitionId`      |             |
 | `ProcessDefinitionKey`     |             |
 | `ProcessInstanceKey`       |             |
@@ -668,16 +781,18 @@ The field to sort by.
 
 The state of the job.
 
-| Value            | Description |
-| ---------------- | ----------- |
-| `CANCELED`       |             |
-| `COMPLETED`      |             |
-| `CREATED`        |             |
-| `ERRORTHROWN`    |             |
-| `FAILED`         |             |
-| `MIGRATED`       |             |
-| `RETRIESUPDATED` |             |
-| `TIMEDOUT`       |             |
+| Value             | Description |
+| ----------------- | ----------- |
+| `CANCELED`        |             |
+| `COMPLETED`       |             |
+| `CREATED`         |             |
+| `ERRORTHROWN`     |             |
+| `FAILED`          |             |
+| `MIGRATED`        |             |
+| `PRIORITYUPDATED` |             |
+| `RETRIESUPDATED`  |             |
+| `TIMEOUTUPDATED`  |             |
+| `TIMEDOUT`        |             |
 
 ## MappingRuleSearchQuerySortRequestField
 
@@ -715,6 +830,10 @@ The field to sort by.
 ## MessageSubscriptionStateEnum
 
 The state of message subscription.
+
+**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not
+tracked for these subscriptions. To query correlation history for process start events,
+use the `/correlated-message-subscriptions/search` endpoint.
 
 | Value        | Description |
 | ------------ | ----------- |
@@ -790,6 +909,7 @@ Specifies the type of permissions.
 | `CREATEBATCHOPERATIONMIGRATEPROCESSINSTANCE`   |             |
 | `CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE`    |             |
 | `CREATEBATCHOPERATIONRESOLVEINCIDENT`          |             |
+| `CREATEBATCHOPERATIONUPDATEJOB`                |             |
 | `CREATEDECISIONINSTANCE`                       |             |
 | `CREATEPROCESSINSTANCE`                        |             |
 | `CREATETASKLISTENER`                           |             |
@@ -1033,6 +1153,7 @@ The field to sort by.
 | `DueDate`        |             |
 | `Priority`       |             |
 | `Name`           |             |
+| `BusinessId`     |             |
 
 ## UserTaskStateEnum
 
@@ -1076,6 +1197,53 @@ The field to sort by.
 | `VariableKey`        |             |
 | `ScopeKey`           |             |
 | `ProcessInstanceKey` |             |
+
+## WaitStateElementTypeEnum
+
+The BPMN element type of a waiting element instance.
+
+| Value                          | Description |
+| ------------------------------ | ----------- |
+| `ADHOCSUBPROCESS`              |             |
+| `ADHOCSUBPROCESSINNERINSTANCE` |             |
+| `BOUNDARYEVENT`                |             |
+| `BUSINESSRULETASK`             |             |
+| `CALLACTIVITY`                 |             |
+| `ENDEVENT`                     |             |
+| `EVENTBASEDGATEWAY`            |             |
+| `EVENTSUBPROCESS`              |             |
+| `EXCLUSIVEGATEWAY`             |             |
+| `INCLUSIVEGATEWAY`             |             |
+| `INTERMEDIATECATCHEVENT`       |             |
+| `INTERMEDIATETHROWEVENT`       |             |
+| `MANUALTASK`                   |             |
+| `MULTIINSTANCEBODY`            |             |
+| `PARALLELGATEWAY`              |             |
+| `PROCESS`                      |             |
+| `RECEIVETASK`                  |             |
+| `SCRIPTTASK`                   |             |
+| `SENDTASK`                     |             |
+| `SEQUENCEFLOW`                 |             |
+| `SERVICETASK`                  |             |
+| `STARTEVENT`                   |             |
+| `SUBPROCESS`                   |             |
+| `TASK`                         |             |
+| `UNKNOWN`                      |             |
+| `UNSPECIFIED`                  |             |
+| `USERTASK`                     |             |
+
+## WaitStateTypeEnum
+
+The type of waiting state an element instance is in.
+
+| Value       | Description |
+| ----------- | ----------- |
+| `JOB`       |             |
+| `MESSAGE`   |             |
+| `USERTASK`  |             |
+| `TIMER`     |             |
+| `SIGNAL`    |             |
+| `CONDITION` |             |
 
 ## WebappComponent
 

@@ -129,7 +129,7 @@ Web Modeler is not included in the lightweight configuration. To use Web Modeler
 1. Manually configure the cluster connection in Web Modeler.
 1. Use `NONE` or `BASIC` authentication for the lightweight Orchestration Cluster.
 
-For details, see [configure Web Modeler clusters](/self-managed/components/hub/configuration/modeler-configuration.md#clusters).
+For details, see [configure Web Modeler clusters](/self-managed/components/hub/configuration/properties.md#clusters).
 :::
 
 #### Emails

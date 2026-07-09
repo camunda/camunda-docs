@@ -4,6 +4,9 @@ paths:
       tags:
         - Process definition
       operationId: searchProcessDefinitions
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search process definitions
       description: |-
 
@@ -40,6 +43,9 @@ paths:
       tags:
         - Process definition
       operationId: getProcessDefinition
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process definition
       description: |-
 
@@ -88,6 +94,9 @@ paths:
       tags:
         - Process definition
       operationId: getProcessDefinitionXML
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process definition XML
       description: |-
 
@@ -143,6 +152,9 @@ paths:
       tags:
         - Process definition
       operationId: getStartProcessForm
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process start form
       description: |-
 
@@ -192,6 +204,9 @@ paths:
       tags:
         - Process definition
       operationId: getProcessDefinitionStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process definition statistics
       description: |-
 
@@ -238,6 +253,9 @@ paths:
       tags:
         - Process definition
       operationId: getProcessDefinitionMessageSubscriptionStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get message subscription statistics
       description: |-
 
@@ -274,6 +292,9 @@ paths:
       tags:
         - Process definition
       operationId: getProcessDefinitionInstanceStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process instance statistics
       description: |-
 
@@ -310,6 +331,9 @@ paths:
       tags:
         - Process definition
       operationId: getProcessDefinitionInstanceVersionStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process instance statistics by version
       description: |-
 

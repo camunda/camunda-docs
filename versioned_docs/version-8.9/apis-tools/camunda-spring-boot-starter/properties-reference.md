@@ -867,6 +867,70 @@ Type: <code>string</code>
 </tbody>
 </table>
 
+### `camunda.client.cluster-variables`
+
+Properties for setting cluster variables at startup.
+
+<table>
+<thead>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default value</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.enabled" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_ENABLED"/><a href="#camundaclientclustervariablesenabled" id="camundaclientclustervariablesenabled" class="hash-link"/>
+</td>
+
+<td>
+
+Indicates if cluster variable processing is enabled. When `true`, variables configured via `@ClusterVariables` annotations and via the `global`/`tenant` properties are applied at startup. When `false`, all cluster variable processing is skipped.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>true</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.global" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_GLOBAL"/><a href="#camundaclientclustervariablesglobal" id="camundaclientclustervariablesglobal" class="hash-link"/>
+</td>
+
+<td>
+
+Globally-scoped cluster variables to set at startup as key-value pairs.
+
+Type: <code>map[string,object]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+<tr>
+<td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.cluster-variables.tenant" env="CAMUNDA_CLIENT_CLUSTERVARIABLES_TENANT"/><a href="#camundaclientclustervariablestenant" id="camundaclientclustervariablestenant" class="hash-link"/>
+</td>
+
+<td>
+
+Tenant-scoped cluster variables to set at startup, keyed by tenant ID.
+
+Type: <code>map[string,map[string,object]]</code>
+
+</td>
+<td>
+  <code>null</code>
+</td>
+</tr>
+</tbody>
+</table>
+
 ### `camunda.client.deployment`
 
 Properties for automatic deployment at startup.

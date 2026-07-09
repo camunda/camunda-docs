@@ -59,7 +59,7 @@ public static class AgentInstanceExamples
     #region UpdateAgentInstance
 
     // <UpdateAgentInstance>
-    public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+    public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
     {
         using var client = CamundaClient.Create();
 
@@ -67,7 +67,8 @@ public static class AgentInstanceExamples
             agentInstanceKey,
             new AgentInstanceUpdateRequest
             {
-                Status = AgentInstanceStatusEnum.THINKING,
+                ElementInstanceKey = elementInstanceKey,
+                Status = AgentInstanceUpdateStatusEnum.THINKING,
                 Metrics = new AgentInstanceMetricsDelta
                 {
                     InputTokens = 150,
@@ -80,4 +81,65 @@ public static class AgentInstanceExamples
     }
     // </UpdateAgentInstance>
     #endregion UpdateAgentInstance
+
+    #region CreateAgentInstanceHistoryItem
+
+    // <CreateAgentInstanceHistoryItem>
+    public static async Task CreateAgentInstanceHistoryItemExample(
+        AgentInstanceKey agentInstanceKey,
+        ElementInstanceKey elementInstanceKey,
+        JobKey jobKey,
+        string jobLease)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.CreateAgentInstanceHistoryItemAsync(
+            agentInstanceKey,
+            new AgentInstanceHistoryItemRequest
+            {
+                ElementInstanceKey = elementInstanceKey,
+                JobKey = jobKey,
+                JobLease = jobLease,
+                Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+                Content = new List<AgentInstanceMessageContent>
+                {
+                    new AgentInstanceTextContent { Text = "How can I help you today?" },
+                },
+                ProducedAt = DateTimeOffset.UtcNow,
+            });
+
+        Console.WriteLine($"Created history item: {result.HistoryItemKey}");
+    }
+    // </CreateAgentInstanceHistoryItem>
+    #endregion CreateAgentInstanceHistoryItem
+
+    #region SearchAgentInstanceHistory
+
+    // <SearchAgentInstanceHistory>
+    public static async Task SearchAgentInstanceHistoryExample(AgentInstanceKey agentInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchAgentInstanceHistoryAsync(
+            agentInstanceKey,
+            new AgentInstanceHistorySearchQuery
+            {
+                Sort = new List<AgentInstanceHistorySearchQuerySortRequest>
+                {
+                    new AgentInstanceHistorySearchQuerySortRequest
+                    {
+                        Field = AgentInstanceHistorySearchQuerySortRequestField.ProducedAt,
+                        Order = SortOrderEnum.ASC,
+                    },
+                },
+                Page = new LimitPagination { Limit = 20 },
+            });
+
+        foreach (var item in result.Items)
+        {
+            Console.WriteLine($"{item.HistoryItemKey} ({item.Role})");
+        }
+    }
+    // </SearchAgentInstanceHistory>
+    #endregion SearchAgentInstanceHistory
 }

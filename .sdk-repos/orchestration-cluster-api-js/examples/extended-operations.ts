@@ -10,6 +10,7 @@ import {
   type ProcessInstanceKey,
   type VariableKey,
 } from '@camunda8/orchestration-cluster-api';
+import { z } from 'zod';
 
 //#region DeleteProcessInstance
 async function deleteProcessInstanceExample(processInstanceKey: ProcessInstanceKey) {
@@ -71,6 +72,23 @@ async function getProcessInstanceStatisticsExample(processInstanceKey: ProcessIn
   }
 }
 //#endregion GetProcessInstanceStatistics
+
+//#region GetProcessInstanceWaitStateStatistics
+async function getProcessInstanceWaitStateStatisticsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceWaitStateStatistics(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Element ${stat.elementId}: waiting=${stat.waitingCount}`);
+  }
+}
+//#endregion GetProcessInstanceWaitStateStatistics
 
 //#region GetProcessInstanceSequenceFlows
 async function getProcessInstanceSequenceFlowsExample(processInstanceKey: ProcessInstanceKey) {
@@ -290,6 +308,32 @@ async function searchVariablesExample(processInstanceKey: ProcessInstanceKey) {
 }
 //#endregion SearchVariables
 
+//#region SearchVariablesAsDto
+async function searchVariablesAsDtoExample(processInstanceKey: ProcessInstanceKey) {
+  const camunda = createCamundaClient();
+
+  // The Zod schema is the DTO: its keys are the variable names to fetch, and its
+  // shape drives validation. Only these declared variables are queried, so memory
+  // stays bound by the DTO — not by the total number of variables on the instance.
+  const OrderVariables = z.object({
+    orderId: z.string(), // required
+    amount: z.number().optional(), // optional
+  });
+
+  const map = await camunda.searchVariablesAsDto(OrderVariables, { processInstanceKey });
+
+  // Lenient access: defensive reads that never throw on missing variables.
+  if (map.has('amount')) {
+    console.log('Amount:', map.get('amount'));
+  }
+
+  // Strict access: returns a fully-typed object, or throws a ZodError when a
+  // required variable is missing or malformed.
+  const order = map.validate(); // { orderId: string; amount?: number }
+  console.log('Order:', order.orderId);
+}
+//#endregion SearchVariablesAsDto
+
 //#region GetElementInstance
 async function getElementInstanceExample(elementInstanceKey: ElementInstanceKey) {
   const camunda = createCamundaClient();
@@ -338,6 +382,35 @@ async function searchElementInstanceIncidentsExample(elementInstanceKey: Element
 }
 //#endregion SearchElementInstanceIncidents
 
+//#region SearchElementInstanceWaitStates
+async function searchElementInstanceWaitStatesExample(processInstanceKey: ProcessInstanceKey) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchElementInstanceWaitStates(
+    {
+      filter: {
+        processInstanceKey,
+      },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const waitState of result.items ?? []) {
+    const { details } = waitState;
+    let description: string;
+    if (details.waitStateType === 'JOB') {
+      description = `waiting on job '${details.jobType}'`;
+    } else if (details.waitStateType === 'MESSAGE') {
+      description = `waiting for message '${details.messageName}'`;
+    } else {
+      description = `waiting (${details.waitStateType})`;
+    }
+    console.log(`${waitState.elementId}: ${description}`);
+  }
+}
+//#endregion SearchElementInstanceWaitStates
+
 //#region CreateElementInstanceVariables
 async function createElementInstanceVariablesExample(elementInstanceKey: ElementInstanceKey) {
   const camunda = createCamundaClient();
@@ -368,6 +441,7 @@ void deleteProcessInstanceExample;
 void migrateProcessInstanceExample;
 void modifyProcessInstanceExample;
 void getProcessInstanceStatisticsExample;
+void getProcessInstanceWaitStateStatisticsExample;
 void getProcessInstanceSequenceFlowsExample;
 void getProcessInstanceCallHierarchyExample;
 void searchProcessInstanceIncidentsExample;
@@ -382,8 +456,10 @@ void getProcessDefinitionMessageSubscriptionStatisticsExample;
 void getStartProcessFormExample;
 void getVariableExample;
 void searchVariablesExample;
+void searchVariablesAsDtoExample;
 void getElementInstanceExample;
 void searchElementInstancesExample;
 void searchElementInstanceIncidentsExample;
+void searchElementInstanceWaitStatesExample;
 void createElementInstanceVariablesExample;
 void activateAdHocSubProcessActivitiesExample;

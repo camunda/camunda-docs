@@ -101,7 +101,7 @@ Since there are several environment variables that can be used to configure an `
 - `ZEEBE_TOKEN_AUDIENCE` - The audience for which the token should be valid.
 - `ZEEBE_TOKEN_SCOPE` - The [OAuth scope](https://oauth.net/2/scope/) which can be set optionally, not sent if left unset.
 - `ZEEBE_AUTHORIZATION_SERVER_URL` - The URL of the authorization server from which the access token will be requested (by default, configured for Camunda 8).
-- `ZEEBE_CLIENT_CONFIG_PATH` - The path to a cache file where the access tokens will be stored (by default, it's `$HOME/.camunda/credentials`).
+- `ZEEBE_CLIENT_CONFIG_PATH` - Optional path to a file used to cache access tokens on disk. When set, tokens are persisted across JVM restarts. When unset (the default), credentials are cached in memory only.
 
 ### Custom Credentials provider
 

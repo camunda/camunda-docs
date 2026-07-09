@@ -43,6 +43,14 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 
 ## A
 
+### Ad-hoc sub-process
+
+A special type of BPMN subprocess that allows activities to be executed in any order, skipped, or repeated, without a predefined sequence. Activities are activated dynamically at runtime, either by a human or a system, rather than following a fixed flow.
+
+In Camunda, ad-hoc sub-processes are the foundation for AI agent tool execution: each activity inside the sub-process acts as a tool the LLM can select and invoke during a feedback loop.
+
+- [Ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)
+
 ### Admin
 
 Use Admin in the [Orchestration Cluster](#orchestration-cluster) to administer authentication, authorization, and cluster administration features.
@@ -126,7 +134,7 @@ A cluster [variable](../../components/concepts/variables/) is a centrally manage
 
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ### Camunda 8
 
@@ -406,7 +414,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ## M
 
@@ -536,7 +544,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 - [Logical Tenant](#logical-tenant)
 - [Multi-tenancy](#multi-tenancy)
 
@@ -677,7 +685,7 @@ A [Logical Tenant](#logical-tenant) is a logically isolated space within a share
 
 An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/index.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
 ### Temperature
 

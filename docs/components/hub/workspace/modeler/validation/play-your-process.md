@@ -14,7 +14,7 @@ Play is a Zeebe-powered playground environment within Web Modeler for validating
 
 To use Play, open a BPMN diagram and click the **Play** tab. Read the [limitations and availability section](#limitations-and-availability) if this section is missing.
 
-To play a process, you must first configure a cluster. A **setup environment** overlay prompts you to select a cluster and deploy your process. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+To play a process, you must first configure a cluster. A **setup environment** overlay prompts you to select a cluster and deploy your process. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
 Click **Deploy** in the overlay to deploy. The current version of the active process and all its dependencies, like called processes or DMN files, are deployed to the selected cluster.
 
@@ -304,7 +304,7 @@ Additionally, within their organization, users need to have a [role](/components
 
 ### Camunda 8 Self-Managed
 
-In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/components/hub/configuration/modeler-configuration.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
+In Self-Managed, Play is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.6 release, Play can be accessed by installing the 8.6.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/blob/camunda-platform-10.4.0/charts/camunda-platform-alpha), or running the 8.6.0-alpha [Docker Compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) configuration.
 

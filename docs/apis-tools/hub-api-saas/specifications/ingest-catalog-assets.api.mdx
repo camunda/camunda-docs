@@ -1,0 +1,346 @@
+---
+id: ingest-catalog-assets
+title: "Ingest catalog assets"
+description: "Ingests the full set of catalog assets."
+sidebar_label: "Ingest catalog assets"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "put api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Ingest catalog assets"}
+></Heading>
+
+<MethodEndpoint
+  method={"put"}
+  path={"/catalog/assets/ingestion"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Ingests the full set of catalog assets.
+
+For each asset, the actual element template JSON file as well as an accompanying README file must be provided.
+The README should provide a description of the asset and can use Markdown syntax. It must contain a YAML
+frontmatter section with a `template` field that references the element template by its file name. Optionally,
+the frontmatter can specify a `category` and a list of `tags` that can be used to search and filter assets in
+the catalog.
+
+```
+---
+template: banking-system-connector.json
+category: Finance
+tags:
+  - invoice
+  - payment
+  - transaction
+---
+## Description
+...
+
+## Usage
+...
+```
+
+The files must be provided as `multipart/form-data` with the named parts `readme` and `template` (the part name
+is the same for each file of the respective type).
+
+Previously ingested assets that are not included in the request payload will be marked as unpublished in the
+catalog. Unpublished assets are only accessible to administrators; regular modeling users cannot use them for
+new diagram elements anymore. Existing diagrams using assets that get unpublished will continue to work as
+before.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "multipart/form-data": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["readme", "template"],
+          properties: {
+            readme: {
+              description:
+                "The README files. Each README must reference an element template in its YAML frontmatter.",
+              type: "array",
+              items: { type: "string", format: "binary" },
+              minItems: 1,
+            },
+            template: {
+              description:
+                "The element template files. Each element template must have a corresponding README file.",
+              type: "array",
+              items: { type: "string", format: "binary" },
+              minItems: 1,
+            },
+          },
+          title: "CatalogAssetIngestionRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The catalog assets were ingested successfully." },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/file-789-xyz",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

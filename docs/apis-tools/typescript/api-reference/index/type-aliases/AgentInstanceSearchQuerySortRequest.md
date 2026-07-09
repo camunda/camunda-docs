@@ -16,7 +16,17 @@ type AgentInstanceSearchQuerySortRequest = object;
 ### field
 
 ```ts
-field: "creationDate" | "lastUpdatedDate" | "completionDate" | "status";
+field:
+  | "agentInstanceKey"
+  | "status"
+  | "elementId"
+  | "processInstanceKey"
+  | "rootProcessInstanceKey"
+  | "processDefinitionKey"
+  | "tenantId"
+  | "creationDate"
+  | "lastUpdatedDate"
+  | "completionDate";
 ```
 
 The field to sort by.

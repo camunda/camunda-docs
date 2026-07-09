@@ -15,10 +15,10 @@ Cursor-based backward pagination
 
 ## Properties
 
-### before
+### before?
 
 ```ts
-before: StartCursor;
+optional before?: StartCursor;
 ```
 
 Use the `startCursor` value from the previous response to fetch the previous page of results.

@@ -29,8 +29,9 @@ Supported environment changes and breaking changes or deprecations for the Camun
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Elasticsearch and OpenSearch minimal supported versions
+
 Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions to ensure you can benefit from the latest, most stable database releases. Older versions are no longer supported.
 
 </div>
@@ -41,8 +42,9 @@ Elasticsearch 8.16+ and OpenSearch 2.17+ are now supported as minimal versions t
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### PostgreSQL, Oracle and Microsoft SQL Server supported versions
+
 Management Identity now supports PostgreSQL and Amazon Aurora PostgreSQL versions 16.x and 17.x.
 
 Web Modeler now supports PostgreSQL version 18.x, Amazon Aurora PostgreSQL version 17.x, Oracle versions 19c and 23ai and Microsoft SQL Server versions 2019 and 2022.
@@ -55,8 +57,9 @@ Web Modeler now supports PostgreSQL version 18.x, Amazon Aurora PostgreSQL versi
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Zeebe, Operate, Tasklist, and Identity must run on same minor and patch levels
+
 From version `8.8.0` onwards, the Zeebe, Operate, Tasklist, and Identity [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) components must run on the exact same `minor`and `patch` level to ensure compatibility.
 
 :::info
@@ -74,6 +77,9 @@ The following key changes were also released as part of an 8.8.x patch release.
 
 | Patch release                                                    | Type            | Key change                                                                                                                                            |
 | :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
@@ -90,7 +96,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 
 Camunda 8.8.22 unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.8.22 or any later 8.8.x patch. The built-in Elasticsearch, OpenSearch, and RDBMS exporters are unaffected.
 
-A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and will be available in a later 8.8.x patch.
+A fix that restores the method (now deprecated, returning an empty list for records produced by newer versions) is tracked in [camunda/camunda#54823](https://github.com/camunda/camunda/issues/54823) and is available in 8.8.28.
 
 **Action:** If you maintain a custom exporter that reads message batch records, avoid calling `getMessageKeys()` until you upgrade to a patch that includes the fix.
 
@@ -102,7 +108,7 @@ A fix that restores the method (now deprecated, returning an empty list for reco
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Orchestration Cluster: Zeebe Java Client &lt;=8.7.15 with REST API enabled
 
 The Zeebe Java Client &lt;=8.7.15 with REST API enabled is incompatible with Camunda 8.8 if you are running:
@@ -206,7 +212,7 @@ What to do:
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Removed: Tasklist GraphQL API
 
 With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed.
@@ -219,7 +225,7 @@ With the Camunda 8.8 release, the deprecated Tasklist GraphQL API is removed.
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Removed: Deprecated OpenAPI objects
 
 With the Camunda 8.8 release, deprecated API objects containing number keys are removed, including the
@@ -242,7 +248,7 @@ To learn more about the key attribute type change, see [8.7 API key attributes o
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Removed: Optimize Index Rollover
 
 Prior to the Camunda 8.8 release, Optimize used the following configuration properties to apply index rollover to its External Variable Indices:
@@ -260,7 +266,7 @@ These properties are deleted in Camunda 8.8, with External Variables now stored 
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: Web Modeler API milestone endpoints
 
 With the Camunda 8.8 release, the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoints under `/api/v1/milestones` are deprecated and scheduled for removal in 8.9. You can use the corresponding endpoints under `/api/v1/versions` instead.
@@ -273,7 +279,7 @@ With the Camunda 8.8 release, the [Web Modeler API](/apis-tools/web-modeler-api/
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: Operate and Tasklist v1 REST APIs
 
 With the Camunda 8.8 release, the deprecation process for the [Operate](/apis-tools/operate-api/overview.md) and [Tasklist](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) REST APIs begins.
@@ -302,7 +308,7 @@ To learn more about the differences between Tasklist v1 and v2 UI modes, see [Ta
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: Job-based user tasks querying
 
 With the Camunda 8.8 release, the deprecation process for job-based user tasks begins.
@@ -323,7 +329,7 @@ With the Camunda 8.8 release, the deprecation process for job-based user tasks b
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: Zeebe Client job worker metrics
 
 With the Camunda 8.8 release, the deprecation of Zeebe client job worker metrics is announced.
@@ -342,7 +348,7 @@ To learn more, see [Zeebe client job worker](/apis-tools/java-client/job-worker.
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: Zeebe gRPC DeployProcess endpoint
 
 The `DeployProcess` endpoint was deprecated with 8.0, replaced with `DeployResource` RPC.
@@ -357,7 +363,7 @@ This endpoint is scheduled for removal in the Camunda 8.10 release.
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: File type `connector_template` in Web Modeler API
 
 With the Camunda 8.8 release, the `connector_template` file type in the [Web Modeler API](/apis-tools/web-modeler-api/index.md) endpoint for file creation (`POST /api/v1/files`) is deprecated.
@@ -374,7 +380,7 @@ You should use `element_template` instead, which provides equivalent functionali
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: Zeebe Process Test
 
 With the Camunda 8.8 release, the deprecation of [Zeebe Process Test](../../../apis-tools/testing/zeebe-process-test.md) is announced.
@@ -394,7 +400,7 @@ To learn more, see [migrate to Camunda Process Test](../../../apis-tools/migrati
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Deprecated: Operate & Tasklist usage metrics endpoints
 
 With the Camunda 8.8 release, the deprecation of usage metrics endpoints in Operate and Tasklist is announced.
@@ -433,7 +439,7 @@ With the Camunda 8.8 release, the deprecation of the [start public process via f
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-   
+
 #### Public API definition for greater platform stability
 
 To enhance predictability and offer a more stable experience for developers, Camunda introduced the official [public API definition for Camunda 8](/reference/public-api.md).
@@ -450,7 +456,7 @@ To enhance predictability and offer a more stable experience for developers, Cam
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Camunda Java client and Camunda Spring Boot Starter
 
 With the Camunda 8.8 release, Camunda Java Client and Camunda Spring Boot Starter replace the Zeebe Java client and Spring Zeebe SDK. This allows you to use a single consolidated client to interact with Camunda orchestration clusters.
@@ -527,7 +533,7 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Connector SDK: Core SDK restructuring
 
 The internal structure of the Connector SDK has been updated to make the Core SDK more lightweight, with **no dependency on the Camunda client**.
@@ -559,7 +565,7 @@ DocumentReference
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Connector SDK: Changes to activity logging in inbound connectors
 
 The Connector SDK 8.8 introduces a new way to [log activities](/components/console/manage-clusters/manage-connectors.md#activity-log) in inbound connectors.
@@ -597,7 +603,7 @@ The new `ActivityBuilder` interface provides a more flexible and fluent API for 
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Harmonized Error Contexts for jobError and bpmnError in Connectors
 
 With the Camunda 8.8 release, Camunda has harmonized the error context structures returned by the `jobError` and `bpmnError` functions in connectors to align with the corresponding error handling in Camunda core.
@@ -647,7 +653,7 @@ For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Elasticsearch and OpenSearch: Single instance
 
 With the Camunda 8.8 release, the use of more than one isolated Elasticsearch/OpenSearch instance for exported Zeebe, Operate, and Tasklist data is no longer supported.
@@ -730,7 +736,7 @@ The existing data schema in the secondary storage has been harmonized, to be use
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Helm chart: Separated Ingress deprecation
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed was deprecated in Camunda 8.6 and is removed from the Helm chart in Camunda 8.8.
@@ -752,7 +758,7 @@ Additional upgrade considerations are necessary for deployments that use custom 
 <span className="badge badge--breaking-change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Helm chart: Custom users and clients for Management Identity
 
 You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
@@ -771,7 +777,7 @@ Additional upgrade considerations are required for deployments that use custom e
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Orchestration Cluster: Unified component configuration
 
 With the Camunda 8.8 release, the new unified configuration is introduced.
@@ -813,7 +819,7 @@ As a result, the following Docker images are deprecated as of Camunda 8.8:
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Helm chart: Secret management improvements and deprecations
 
 With the Camunda 8.8 release, a consistent secret pattern for Helm charts is introduced. The legacy secret configuration is deprecated and will be removed with 8.9, but remains functional during the transition period.
@@ -830,7 +836,7 @@ See the [secret management guide](/self-managed/deployment/helm/configure/secret
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Helm chart: External database for Web Modeler REST API
 
 With the Camunda 8.8 release, the configuration for the external database used by the Web Modeler REST API is updated to align with the Identity component's database configuration.
@@ -846,7 +852,7 @@ With the Camunda 8.8 release, the configuration for the external database used b
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Helm chart: Default username claim in Web Modeler
 
 With the Camunda 8.8 release, the default ID token claim that Web Modeler uses to assign usernames has changed from `name` to `preferred_username`.
@@ -879,7 +885,7 @@ See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bi
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Bitnami: Alternative container images
 
 <!-- https://github.com/camunda/product-hub/issues/2826 -->
@@ -904,7 +910,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Helm chart: Alternative infrastructure methods
 
 For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use.
@@ -932,7 +938,7 @@ This change reduces the risk of unexpected breaking changes from upstream Bitnam
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Reference architecture: EC2
 
 New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. Includes managed OpenSearch, optional Aurora PostgreSQL, dual load balancer pattern, VPN/bastion access, and modular Terraform setup. See [Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
@@ -945,7 +951,7 @@ New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. In
 <span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Reference architecture: Azure AKS
 
 New Azure AKS architecture with a zonal AKS baseline, managed or operator-based data services, unified Ingress and Identity patterns, private networking, and a modular Terraform and Helm workflow.  
@@ -959,7 +965,7 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Reference architecture: General updates
 
 - Managed search (EKS single-region & EC2): OpenSearch upgraded 2.15 → 2.19 (aligns with [supported environments](/reference/supported-environments.md)).
@@ -971,6 +977,72 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 - High availability: Refreshed dual region deployment material (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
 - Core diagrams: Updated generic reference architecture visuals for 8.8 Orchestration Cluster changes (see [reference architectures](/self-managed/reference-architecture/reference-architecture.md)).
 - Terraform module upgrade: AWS EKS module v5 → v6 (review [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading).
+
+</div>
+</div>
+
+### Engine
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Multi-instance sub-process output mapping variable scope regression {#multi-instance-output-mapping-regression}
+
+Camunda 8.8.23 introduced a regression in which output mappings inside a multi-instance sub-process that also defines an output collection cause local variables to propagate to the parent scope.
+
+You're affected if your process contains a multi-instance sub-process that meets both of the following conditions:
+
+1. The sub-process defines an output collection.
+2. One or more elements inside the sub-process define output mappings.
+
+Under these conditions:
+
+- Local variables from inside the sub-process appear in the parent scope and are visible in Operate.
+- If any leaked variable shares a name with a variable on the parent scope, the parent scope value is overwritten.
+
+**Workaround:** Ensure all variable names used inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+
+**Fix:** A fix is available in 8.8.28. The fix reverts the input/output mapping changes that introduced this regression. As a side effect, two previously resolved bugs are reintroduced:
+
+- [camunda/camunda#11789](https://github.com/camunda/camunda/issues/11789): FEEL expressions used as mapping sources may not evaluate correctly due to ordering.
+- [camunda/camunda#35251](https://github.com/camunda/camunda/issues/35251): When one value from a nested variable is listed as an output mapping, all values in the nested variable are merged into the parent scope. Workaround: map the full nested variable instead of individual values.
+
+**Action:**
+
+- Before the fix is available: ensure all variable names inside the multi-instance sub-process are unique and do not reuse names that exist on the parent scope.
+- After upgrading to the fixed patch: bugs #11789 and #35251 are reintroduced by the fix. If you previously had adaptations in place to work around these bugs and removed them, reapply those adaptations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Output mapping behavior change for object variables {#output-mapping-behavior-change}
+
+**Affected versions:** 8.8.23–8.8.27. Fixed in 8.8.28.
+
+Patches 8.8.23–8.8.27 changed how output mappings behave when writing to object variables. Upgrading to 8.8.28+ reverts this change, which can alter the behavior of your running processes.
+
+Before 8.8.23 and from 8.8.28+, assigning an object literal to a variable replaces the variable entirely. In 8.8.23–8.8.27, the behavior changed to _merge_: existing keys in the variable are preserved and new keys are added.
+
+Example: task A sets `result = {a: 1}`, then task B sets `result = {b: 2}`:
+
+- _Replace_ (before 8.8.23 and from 8.8.28+): `result = {"b": 2}` — task A's value is overwritten.
+- _Merge_ (8.8.23–8.8.27): `result = {"a": 1, "b": 2}` — task A's value is preserved.
+
+Replace is the intended long-term behavior. The merge behavior in the affected patches was an unintended regression.
+
+**Action:**
+
+- **Running 8.8.23–8.8.27:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
+- **Upgrading to 8.8.28+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
 
 </div>
 </div>
@@ -1029,7 +1101,7 @@ You must transition to use [OIDC or Basic authentication](/self-managed/concepts
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### AWS Marketplace offering for Self-Managed
 
 As of October 2025, the Self-Managed AWS Marketplace offering is deprecated and no longer publicly available.  
@@ -1078,7 +1150,7 @@ For more information on how to modify your existing configuration, see the [upgr
 <span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Play job-based user tasks
 
 With the Camunda 8.8 release, user tasks with a job worker implementation are deprecated and no longer supported in Play from cluster versions 8.8 and above.
@@ -1098,13 +1170,40 @@ You should consider migrating to [Camunda user tasks](/components/modeler/bpmn/u
 <span className="badge badge--breaking-change">Removed</span>
 </div>
 <div className="release-announcement-content">
-  
+
 #### Removed: Starter plan
 
 The Camunda SaaS Starter plan is no longer available.
 
 - Existing customers using a Starter plan must upgrade to the Enterprise plan or move to the Free plan.
 - Compare plan features and contact us for advice and an Enterprise plan quote. See [Camunda 8 pricing](https://camunda.com/pricing/?utm_source=docs.camunda.io&utm_medium=referral).
+
+</div>
+</div>
+
+### Tasklist
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Tasklist V1: candidate group task visibility {#tasklist-v1-candidate-group-task-visibility}
+
+Camunda 8.8.26 introduced a regression in which user tasks become invisible in the Tasklist V1 API when a candidate group's name differs from its ID ([camunda/camunda#55576](https://github.com/camunda/camunda/issues/55576)).
+
+With this regression, the Zeebe engine resolves candidate group names to IDs at task creation time, while the Tasklist V1 API resolves the authenticated user's group IDs to names before comparing them against the stored candidate groups. When a group's name and ID differ, this mismatch causes tasks to be invisible to all members of that group.
+
+You're affected if you use the Tasklist V1 API with user task access restrictions enabled and any group used as a candidate group in your processes has a name that differs from its ID.
+
+**Workaround:** Set the Zeebe broker environment variable `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION` to `false` (default: `true`) and ensure your BPMN models reference candidate groups by name rather than ID. This restores correct task visibility for newly created tasks. Tasks created while the regression was active remain affected.
+
+**Fix:** The fix was released in [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29). After upgrading, tasks created while the regression was active are also fixed without requiring manual intervention.
+
+:::note
+The Tasklist V1 API is deprecated and will be removed in Camunda 8.10. Consider [migrating to the Tasklist V2 API](/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) to avoid disruption when upgrading to 8.10 or later.
+:::
 
 </div>
 </div>

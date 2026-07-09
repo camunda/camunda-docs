@@ -28,10 +28,6 @@ In this guide, you’ll deploy and run a **Rocket Launch** BPMN process where yo
 
 After completing this guide, you will have a BPMN process running locally in Camunda 8 and understand how basic concepts, such as variables, DMN, and FEEL expressions, work together in an automated BPMN workflow.
 
-## Prerequisites
-
-- [JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/): Required by Camunda 8 Run to start the engine locally.
-
 ## Step 1: Download the Getting Started Package
 
 Download the Getting Started Package from [Camunda Downloads](/downloads).

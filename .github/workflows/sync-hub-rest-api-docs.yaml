@@ -2,7 +2,7 @@ name: Sync Camunda Hub REST API
 
 on:
   schedule:
-    - cron: "0 15 * * 4" # Runs every Thursday at 3 PM UTC
+    - cron: "0 15 * * *"
   workflow_dispatch:
 
 jobs:
@@ -11,14 +11,14 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -31,9 +31,9 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
           repositories: camunda-hub
 
@@ -78,7 +78,7 @@ jobs:
           fi
 
       - name: Checkout Camunda Hub (Self-Managed)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -91,13 +91,17 @@ jobs:
         run: |
           cd docs
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsm/v2
+
+          # Format spec files
+          npm ci
+          npx prettier --write api/hubsm/v2/*.yaml
+
           cd api/hubsm/v2
           mv rest-api.yaml camunda-openapi.yaml
-          npm i
           npm run api:generate:hubsm
 
       - name: Upload Self-Managed changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: sm-changes
           path: |
@@ -109,14 +113,14 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -129,14 +133,14 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
           repositories: camunda-hub
 
       - name: Checkout Camunda Hub (SaaS)
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-hub
           token: ${{ steps.generate_token.outputs.token }}
@@ -149,13 +153,17 @@ jobs:
         run: |
           cd docs
           mv ../rest-spec/restapi/public-api/src/main/resources/openapi/v2/* api/hubsaas/v2
+
+          # Format spec files
+          npm ci
+          npx prettier --write api/hubsaas/v2/*.yaml
+
           cd api/hubsaas/v2
           mv rest-api.yaml camunda-openapi.yaml
-          npm i
           npm run api:generate:hubsaas
 
       - name: Upload SaaS changes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: saas-changes
           path: |
@@ -168,26 +176,26 @@ jobs:
 
     steps:
       - name: Checkout Camunda docs repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Download Self-Managed changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: sm-changes
           path: docs/
 
       - name: Download SaaS changes
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: saas-changes
           path: docs/
 
       - name: Import Secrets
         id: secrets
-        uses: hashicorp/vault-action@v3.4.0
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: approle
@@ -200,9 +208,9 @@ jobs:
 
       - name: Generate token
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
           repositories: camunda-docs
 
@@ -210,6 +218,19 @@ jobs:
         id: check_changes
         run: |
           cd docs
+
+          # We run lint-staged as a pre-commit hook. One of the format changes it performs
+          # is to remove whitespace-only changes. Therefore, if the REST API spec changes only
+          # include whitespace changes, lint-staged removes them and results in an error:
+          # "[FAILED] Prevented an empty git commit!"
+          # 
+          # To mitigate this, we stage the changes _before_ we check if there are any.
+          # Then, we run lint-staged manually. Finally, we check if there are changes.
+          # This should get rid of the whitespace-only changes and avoid an empty commit.
+          npm ci
+          git add .
+          npx lint-staged --allow-empty
+
           if [ -z "$(git status --porcelain)" ]; then
             echo "No changes to commit."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
@@ -247,3 +268,14 @@ jobs:
           team-reviewers: camunda/tech-writers
           base: main
           labels: deploy
+  notify-failure:
+    needs:
+      - sync-sm
+      - sync-saas
+      - create-pr
+    if: failure()
+    uses: ./.github/workflows/notify-failure.yml
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

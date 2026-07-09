@@ -50,7 +50,7 @@ public static IServiceCollection AddCamundaClient(this IServiceCollection servic
 Registers a singleton using an section.
 
 Typically called as services.AddCamundaClient(configuration.GetSection("Camunda")).
-PascalCase keys in the section are mapped to canonical CAMUNDA\_\* env-var names internally.
+PascalCase keys in the section are mapped to canonical CAMUNDA_* env-var names internally.
 Environment variables still apply as a base layer; section values override them.
 
 | Parameter              | Type                 | Description |
@@ -136,6 +136,43 @@ Performs application-defined tasks associated with freeing, releasing, or resett
 
 **Returns:** `ValueTask` — A task that represents the asynchronous dispose operation.
 
+#### ChangeClusterModeAsync(string, bool?, CancellationToken)
+
+```csharp
+public Task<ClusterModeChangeResponse> ChangeClusterModeAsync(string mode, bool? dryRun = null, CancellationToken ct = default)
+```
+
+Change cluster mode
+Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `mode`    | `String`            |             |
+| `dryRun`  | `Nullable<Boolean>` |             |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ClusterModeChangeResponse>`
+
+**Example**
+
+```csharp
+public static async Task ChangeClusterModeExample()
+{
+    using var client = CamundaClient.Create();
+
+    // Pass dryRun: true to validate the request and inspect the resulting plan
+    // without applying it. Omit it (or set it to false) to trigger the transition.
+    var change = await client.ChangeClusterModeAsync("RECOVERING", dryRun: true);
+
+    Console.WriteLine($"Cluster change {change.ChangeId}:");
+    foreach (var operation in change.PlannedChanges)
+    {
+        var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+        Console.WriteLine($"  {operation.Operation}{suffix}");
+    }
+}
+```
+
 #### CreateAdminUserAsync(UserRequest, CancellationToken)
 
 ```csharp
@@ -207,6 +244,56 @@ public static async Task CreateAgentInstanceExample(ElementInstanceKey elementIn
     });
 
     Console.WriteLine($"Created agent instance: {result.AgentInstanceKey}");
+}
+```
+
+#### CreateAgentInstanceHistoryItemAsync(AgentInstanceKey, AgentInstanceHistoryItemRequest, CancellationToken)
+
+```csharp
+public Task<AgentInstanceHistoryItemCreationResult> CreateAgentInstanceHistoryItemAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistoryItemRequest body, CancellationToken ct = default)
+```
+
+Create agent instance history item
+Appends a single history item to an agent instance's conversation history.
+The created item has commitStatus PENDING until the job identified by jobLease
+completes successfully, at which point it transitions to COMMITTED. If the job
+fails or is superseded by a retry, the item is marked DISCARDED.
+
+| Parameter          | Type                              | Description |
+| ------------------ | --------------------------------- | ----------- |
+| `agentInstanceKey` | `AgentInstanceKey`                |             |
+| `body`             | `AgentInstanceHistoryItemRequest` |             |
+| `ct`               | `CancellationToken`               |             |
+
+**Returns:** `Task<AgentInstanceHistoryItemCreationResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateAgentInstanceHistoryItemExample(
+    AgentInstanceKey agentInstanceKey,
+    ElementInstanceKey elementInstanceKey,
+    JobKey jobKey,
+    string jobLease)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateAgentInstanceHistoryItemAsync(
+        agentInstanceKey,
+        new AgentInstanceHistoryItemRequest
+        {
+            ElementInstanceKey = elementInstanceKey,
+            JobKey = jobKey,
+            JobLease = jobLease,
+            Role = AgentInstanceHistoryRoleEnum.ASSISTANT,
+            Content = new List<AgentInstanceMessageContent>
+            {
+                new AgentInstanceTextContent { Text = "How can I help you today?" },
+            },
+            ProducedAt = DateTimeOffset.UtcNow,
+        });
+
+    Console.WriteLine($"Created history item: {result.HistoryItemKey}");
 }
 ```
 
@@ -373,7 +460,10 @@ public Task<ExpressionEvaluationResult> EvaluateExpressionAsync(ExpressionEvalua
 ```
 
 Evaluate an expression
-Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
+Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+cluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the
+variables of a specific process instance or element instance visible while evaluating the
+expression.
 
 | Parameter | Type                          | Description |
 | --------- | ----------------------------- | ----------- |
@@ -563,6 +653,54 @@ Get a user by its username.
 
 **Returns:** `Task<UserResult>`
 
+#### SearchAgentInstanceHistoryAsync(AgentInstanceKey, AgentInstanceHistorySearchQuery, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<AgentInstanceHistorySearchQueryResult> SearchAgentInstanceHistoryAsync(AgentInstanceKey agentInstanceKey, AgentInstanceHistorySearchQuery body, ConsistencyOptions<AgentInstanceHistorySearchQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search agent instance history
+Searches the conversation history of an agent instance. Committed items
+are returned by default.
+
+| Parameter          | Type                                                        | Description |
+| ------------------ | ----------------------------------------------------------- | ----------- |
+| `agentInstanceKey` | `AgentInstanceKey`                                          |             |
+| `body`             | `AgentInstanceHistorySearchQuery`                           |             |
+| `consistency`      | `ConsistencyOptions<AgentInstanceHistorySearchQueryResult>` |             |
+| `ct`               | `CancellationToken`                                         |             |
+
+**Returns:** `Task<AgentInstanceHistorySearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchAgentInstanceHistoryExample(AgentInstanceKey agentInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchAgentInstanceHistoryAsync(
+        agentInstanceKey,
+        new AgentInstanceHistorySearchQuery
+        {
+            Sort = new List<AgentInstanceHistorySearchQuerySortRequest>
+            {
+                new AgentInstanceHistorySearchQuerySortRequest
+                {
+                    Field = AgentInstanceHistorySearchQuerySortRequestField.ProducedAt,
+                    Order = SortOrderEnum.ASC,
+                },
+            },
+            Page = new LimitPagination { Limit = 20 },
+        });
+
+    foreach (var item in result.Items)
+    {
+        Console.WriteLine($"{item.HistoryItemKey} ({item.Role})");
+    }
+}
+```
+
 #### SearchAgentInstancesAsync(AgentInstanceSearchQuery, ConsistencyOptions<AgentInstanceSearchQueryResult>?, CancellationToken)
 
 ```csharp
@@ -656,8 +794,7 @@ public Task UpdateAgentInstanceAsync(AgentInstanceKey agentInstanceKey, AgentIns
 Update agent instance
 Updates the mutable fields of an agent instance: status, metric counters, and
 tools. Metric values are treated as deltas and applied immediately to the
-aggregate counters. Tool updates replace the existing tool list. At least one of
-status, metrics, or tools must be provided.
+aggregate counters. Tool updates replace the existing tool list.
 
 | Parameter          | Type                         | Description |
 | ------------------ | ---------------------------- | ----------- |
@@ -670,7 +807,7 @@ status, metrics, or tools must be provided.
 **Example**
 
 ```csharp
-public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey)
+public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstanceKey, ElementInstanceKey elementInstanceKey)
 {
     using var client = CamundaClient.Create();
 
@@ -678,7 +815,8 @@ public static async Task UpdateAgentInstanceExample(AgentInstanceKey agentInstan
         agentInstanceKey,
         new AgentInstanceUpdateRequest
         {
-            Status = AgentInstanceStatusEnum.THINKING,
+            ElementInstanceKey = elementInstanceKey,
+            Status = AgentInstanceUpdateStatusEnum.THINKING,
             Metrics = new AgentInstanceMetricsDelta
             {
                 InputTokens = 150,
@@ -1120,6 +1258,767 @@ public static async Task SearchResourcesExample()
     foreach (var resource in result.Items!)
     {
         Console.WriteLine($"Resource: {resource.ResourceName}");
+    }
+}
+```
+
+### Process Instances
+
+#### SearchVariablesAsDtoAsync<T>(ProcessInstanceKey, ScopeKey?, TenantId?, int, CancellationToken)
+
+```csharp
+public Task<VariableMap<T>> SearchVariablesAsDtoAsync<T>(ProcessInstanceKey processInstanceKey, ScopeKey? scopeKey = null, TenantId? tenantId = null, int pageSize = 100, CancellationToken ct = default) where T : class
+```
+
+Fetch the variables declared by a DTO type for a process instance, mapping them onto a
+strongly-typed result.
+
+The query is derived from the DTO's members (honouring [JsonPropertyName]): only
+the declared variable names are fetched via a name $in [...] filter, so memory is
+bounded by the DTO shape rather than the total number of variables on the process
+instance. Results are paged to exhaustion over the filtered set, collapsed by name, and
+parsed into a .
+
+Access modes on the returned map:
+
+Lenient — /
+tolerate absent variables.
+
+Strict — constructs the DTO and throws if a
+required member is absent.
+
+public record OrderVars(string OrderId, decimal? Amount);
+
+var vars = await client.SearchVariablesAsDtoAsync&lt;OrderVars&gt;(processInstanceKey);
+var amount = vars.Get&lt;decimal&gt;("amount"); // lenient
+var typed = vars.Validate(); // strict: throws if OrderId missing
+
+| Parameter            | Type                 | Description                                                                                                                                                    |
+| -------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `processInstanceKey` | `ProcessInstanceKey` | The process instance whose variables to search.                                                                                                                |
+| `scopeKey`           | `Nullable<ScopeKey>` | Optional scope key to disambiguate variables that exist at multiple scopes. When omitted and a declared variable resolves to more than one scope, a is thrown. |
+| `tenantId`           | `Nullable<TenantId>` | Optional tenant ID filter.                                                                                                                                     |
+| `pageSize`           | `Int32`              | The page size used while paging the filtered result set.                                                                                                       |
+| `ct`                 | `CancellationToken`  | Cancellation token.                                                                                                                                            |
+
+**Returns:** `Task<VariableMap{{T>}}` — A over the declared variables.
+
+**Example**
+
+```csharp
+public record OrderVariables(string OrderId, decimal Amount, string? Notes);
+
+public static async Task SearchVariablesAsDtoExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    // Search a process instance for exactly the variables declared on the DTO,
+    // pages and all, and collapse them into a single typed object.
+    var map = await client.SearchVariablesAsDtoAsync<OrderVariables>(processInstanceKey);
+
+    // Read individual values lazily without materializing the whole DTO.
+    if (map.Contains("amount"))
+    {
+        var amount = map.Get<decimal>("amount");
+        Console.WriteLine($"Amount: {amount}");
+    }
+
+    // Validate() enforces that every non-nullable member is present,
+    // throwing VariableValidationException if a required variable is missing.
+    OrderVariables order = map.Validate();
+    Console.WriteLine($"Order {order.OrderId}: {order.Amount}");
+}
+```
+
+#### CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)
+
+```csharp
+public Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest body, CancellationToken ct = default)
+```
+
+Cancel process instance
+Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
+
+| Parameter            | Type                           | Description |
+| -------------------- | ------------------------------ | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`           |             |
+| `body`               | `CancelProcessInstanceRequest` |             |
+| `ct`                 | `CancellationToken`            |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.CancelProcessInstanceAsync(
+        processInstanceKey,
+        new CancelProcessInstanceRequest());
+}
+```
+
+#### CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest body, CancellationToken ct = default)
+```
+
+Cancel process instances (batch)
+Cancels multiple running process instances.
+Since only ACTIVE root instances can be cancelled, any given filters for state and
+parentProcessInstanceKey are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                                               | Description |
+| --------- | -------------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceCancellationBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                                |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task CancelProcessInstancesBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CancelProcessInstancesBatchOperationAsync(
+        new ProcessInstanceCancellationBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### CreateProcessInstanceAsync(ProcessInstanceCreationInstruction, CancellationToken)
+
+```csharp
+public Task<CreateProcessInstanceResult> CreateProcessInstanceAsync(ProcessInstanceCreationInstruction body, CancellationToken ct = default)
+```
+
+Create process instance
+Creates and starts an instance of the specified process.
+The process definition to use to create the instance can be specified either using its unique key
+(as returned by Deploy resources), or using the BPMN process id and a version.
+
+Waits for the completion of the process instance before returning a result
+when awaitCompletion is enabled.
+
+| Parameter | Type                                 | Description |
+| --------- | ------------------------------------ | ----------- |
+| `body`    | `ProcessInstanceCreationInstruction` |             |
+| `ct`      | `CancellationToken`                  |             |
+
+**Returns:** `Task<CreateProcessInstanceResult>`
+
+**Example**
+
+```csharp
+public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
+    {
+        ProcessDefinitionId = processDefinitionId,
+    });
+
+    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+}
+
+public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
+    {
+        ProcessDefinitionKey = processDefinitionKey,
+    });
+
+    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
+}
+```
+
+#### DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)
+
+```csharp
+public Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
+```
+
+Delete process instance
+Deletes a process instance. Only instances that are completed or terminated can be deleted.
+
+| Parameter            | Type                           | Description |
+| -------------------- | ------------------------------ | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`           |             |
+| `body`               | `DeleteProcessInstanceRequest` |             |
+| `ct`                 | `CancellationToken`            |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteProcessInstanceAsync(
+        processInstanceKey,
+        new DeleteProcessInstanceRequest());
+}
+```
+
+#### DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
+```
+
+Delete process instances (batch)
+Delete multiple process instances. This will delete the historic data from secondary storage.
+Only process instances in a final state (COMPLETED or TERMINATED) can be deleted.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                                           | Description |
+| --------- | ---------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceDeletionBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                            |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task DeleteProcessInstancesBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.DeleteProcessInstancesBatchOperationAsync(
+        new ProcessInstanceDeletionBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### GetProcessInstanceAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceResult> GetProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get process instance
+Get the process instance by the process instance key.
+
+| Parameter            | Type                                        | Description |
+| -------------------- | ------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                        |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceResult>` |             |
+| `ct`                 | `CancellationToken`                         |             |
+
+**Returns:** `Task<ProcessInstanceResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceAsync(processInstanceKey);
+    Console.WriteLine($"Process instance: {result.ProcessDefinitionId}");
+}
+```
+
+#### GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey, ConsistencyOptions<object>?, CancellationToken)
+
+```csharp
+public Task<object> GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
+```
+
+Get call hierarchy
+Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
+
+| Parameter            | Type                         | Description |
+| -------------------- | ---------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`         |             |
+| `consistency`        | `ConsistencyOptions<Object>` |             |
+| `ct`                 | `CancellationToken`          |             |
+
+**Returns:** `Task<Object>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceCallHierarchyAsync(
+        processInstanceKey);
+
+    Console.WriteLine($"Call hierarchy: {result}");
+}
+```
+
+#### GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get sequence flows
+Get sequence flows taken by the process instance.
+
+| Parameter            | Type                                                          | Description |
+| -------------------- | ------------------------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                                          |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>` |             |
+| `ct`                 | `CancellationToken`                                           |             |
+
+**Returns:** `Task<ProcessInstanceSequenceFlowsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceSequenceFlowsAsync(
+        processInstanceKey);
+
+    foreach (var flow in result.Items)
+    {
+        Console.WriteLine($"Sequence flow: {flow}");
+    }
+}
+```
+
+#### GetProcessInstanceStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceElementStatisticsQueryResult> GetProcessInstanceStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get element instance statistics
+Get statistics about elements by the process instance key.
+
+| Parameter            | Type                                                              | Description |
+| -------------------- | ----------------------------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                                              |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>` |             |
+| `ct`                 | `CancellationToken`                                               |             |
+
+**Returns:** `Task<ProcessInstanceElementStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceStatisticsAsync(
+        processInstanceKey);
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Element: {stat.ElementId}");
+    }
+}
+```
+
+#### GetProcessInstanceStatisticsByDefinitionAsync(IncidentProcessInstanceStatisticsByDefinitionQuery, ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>?, CancellationToken)
+
+```csharp
+public Task<IncidentProcessInstanceStatisticsByDefinitionQueryResult> GetProcessInstanceStatisticsByDefinitionAsync(IncidentProcessInstanceStatisticsByDefinitionQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get process instance statistics by definition
+Returns statistics for active process instances with incidents, grouped by process
+definition. The result set is scoped to a specific incident error hash code, which must be
+provided as a filter in the request body.
+
+| Parameter     | Type                                                                           | Description |
+| ------------- | ------------------------------------------------------------------------------ | ----------- |
+| `body`        | `IncidentProcessInstanceStatisticsByDefinitionQuery`                           |             |
+| `consistency` | `ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>` |             |
+| `ct`          | `CancellationToken`                                                            |             |
+
+**Returns:** `Task<IncidentProcessInstanceStatisticsByDefinitionQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceStatisticsByDefinitionExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceStatisticsByDefinitionAsync(
+        new IncidentProcessInstanceStatisticsByDefinitionQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Definition: {stat.ProcessDefinitionKey}");
+    }
+}
+```
+
+#### GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>?, CancellationToken)
+
+```csharp
+public Task<IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get process instance statistics by error
+Returns statistics for active process instances that currently have active incidents,
+grouped by incident error hash code.
+
+| Parameter     | Type                                                                      | Description |
+| ------------- | ------------------------------------------------------------------------- | ----------- |
+| `body`        | `IncidentProcessInstanceStatisticsByErrorQuery`                           |             |
+| `consistency` | `ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>` |             |
+| `ct`          | `CancellationToken`                                                       |             |
+
+**Returns:** `Task<IncidentProcessInstanceStatisticsByErrorQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceStatisticsByErrorExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceStatisticsByErrorAsync(
+        new IncidentProcessInstanceStatisticsByErrorQuery());
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Error: {stat.ErrorMessage}");
+    }
+}
+```
+
+#### GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get wait state statistics
+Get statistics about waiting element instances by the process instance key, grouped by element id.
+
+| Parameter            | Type                                                                | Description |
+| -------------------- | ------------------------------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                                                |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>` |             |
+| `ct`                 | `CancellationToken`                                                 |             |
+
+**Returns:** `Task<ProcessInstanceWaitStateStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceWaitStateStatisticsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
+        processInstanceKey);
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Element: {stat.ElementId}, waiting: {stat.WaitingCount}");
+    }
+}
+```
+
+#### MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)
+
+```csharp
+public Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceMigrationInstruction body, CancellationToken ct = default)
+```
+
+Migrate process instance
+Migrates a process instance to a new process definition.
+This request can contain multiple mapping instructions to define mapping between the active
+process instance's elements and target process definition elements.
+
+Use this to upgrade a process instance to a new version of a process or to
+a different process definition, e.g. to keep your running instances up-to-date with the
+latest process improvements.
+
+| Parameter            | Type                                  | Description |
+| -------------------- | ------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                  |             |
+| `body`               | `ProcessInstanceMigrationInstruction` |             |
+| `ct`                 | `CancellationToken`                   |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.MigrateProcessInstanceAsync(
+        processInstanceKey,
+        new ProcessInstanceMigrationInstruction
+        {
+            TargetProcessDefinitionKey = targetProcessDefinitionKey,
+        });
+}
+```
+
+#### MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest body, CancellationToken ct = default)
+```
+
+Migrate process instances (batch)
+Migrate multiple process instances.
+Since only process instances with ACTIVE state can be migrated, any given
+filters for state are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                                            | Description |
+| --------- | ----------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceMigrationBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                             |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.MigrateProcessInstancesBatchOperationAsync(
+        new ProcessInstanceMigrationBatchOperationRequest
+        {
+            Filter = new ProcessInstanceFilter(),
+            MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
+            {
+                TargetProcessDefinitionKey = targetProcessDefinitionKey,
+            },
+        });
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### ModifyProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceModificationInstruction, CancellationToken)
+
+```csharp
+public Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceModificationInstruction body, CancellationToken ct = default)
+```
+
+Modify process instance
+Modifies a running process instance.
+This request can contain multiple instructions to activate an element of the process or
+to terminate an active instance of an element.
+
+Use this to repair a process instance that is stuck on an element or took an unintended path.
+For example, because an external system is not available or doesn't respond as expected.
+
+| Parameter            | Type                                     | Description |
+| -------------------- | ---------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                     |             |
+| `body`               | `ProcessInstanceModificationInstruction` |             |
+| `ct`                 | `CancellationToken`                      |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    await client.ModifyProcessInstanceAsync(
+        processInstanceKey,
+        new ProcessInstanceModificationInstruction());
+}
+```
+
+#### ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest body, CancellationToken ct = default)
+```
+
+Modify process instances (batch)
+Modify multiple process instances.
+Since only process instances with ACTIVE state can be modified, any given
+filters for state are ignored and overridden during this batch operation.
+In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
+It is only possible to use the element id of the source and target.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                                               | Description |
+| --------- | -------------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceModificationBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                                |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task ModifyProcessInstancesBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ModifyProcessInstancesBatchOperationAsync(
+        new ProcessInstanceModificationBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest body, CancellationToken ct = default)
+```
+
+Resolve related incidents (batch)
+Resolves multiple instances of process instances.
+Since only process instances with ACTIVE state can have unresolved incidents, any given
+filters for state are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                                                     | Description |
+| --------- | -------------------------------------------------------- | ----------- |
+| `body`    | `ProcessInstanceIncidentResolutionBatchOperationRequest` |             |
+| `ct`      | `CancellationToken`                                      |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task ResolveIncidentsBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ResolveIncidentsBatchOperationAsync(
+        new ProcessInstanceIncidentResolutionBatchOperationRequest());
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, CancellationToken ct = default)
+```
+
+Resolve related incidents
+Creates a batch operation to resolve multiple incidents of a process instance.
+
+| Parameter            | Type                 | Description |
+| -------------------- | -------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey` |             |
+| `ct`                 | `CancellationToken`  |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.ResolveProcessInstanceIncidentsAsync(
+        processInstanceKey);
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
+#### SearchProcessInstanceIncidentsAsync(ProcessInstanceKey, IncidentSearchQuery, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search related incidents
+Search for incidents caused by the process instance or any of its called process or decision instances.
+
+Although the `processInstanceKey` is provided as a path parameter to indicate the root process instance,
+you may also include a `processInstanceKey` within the filter object to narrow results to specific
+child process instances. This is useful, for example, if you want to isolate incidents associated with
+subprocesses or called processes under the root instance while excluding incidents directly tied to the root.
+
+| Parameter            | Type                                            | Description |
+| -------------------- | ----------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                            |             |
+| `body`               | `IncidentSearchQuery`                           |             |
+| `consistency`        | `ConsistencyOptions<IncidentSearchQueryResult>` |             |
+| `ct`                 | `CancellationToken`                             |             |
+
+**Returns:** `Task<IncidentSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchProcessInstanceIncidentsAsync(
+        processInstanceKey,
+        new IncidentSearchQuery());
+
+    foreach (var incident in result.Items)
+    {
+        Console.WriteLine($"Incident: {incident.IncidentKey}");
+    }
+}
+```
+
+#### SearchProcessInstancesAsync(ProcessInstanceSearchQuery, ConsistencyOptions<ProcessInstanceSearchQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery body, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search process instances
+Search for process instances based on given criteria.
+
+| Parameter     | Type                                                   | Description |
+| ------------- | ------------------------------------------------------ | ----------- |
+| `body`        | `ProcessInstanceSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<ProcessInstanceSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                    |             |
+
+**Returns:** `Task<ProcessInstanceSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchProcessInstancesExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
+
+    foreach (var instance in result.Items)
+    {
+        Console.WriteLine($"Process instance: {instance.ProcessInstanceKey}");
     }
 }
 ```
@@ -1571,6 +2470,43 @@ public static async Task UpdateJobExample(JobKey jobKey)
 }
 ```
 
+#### UpdateJobsBatchOperationAsync(JobBatchUpdateRequest, CancellationToken)
+
+```csharp
+public Task<BatchOperationCreatedResult> UpdateJobsBatchOperationAsync(JobBatchUpdateRequest body, CancellationToken ct = default)
+```
+
+Update jobs (batch)
+Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+| Parameter | Type                    | Description |
+| --------- | ----------------------- | ----------- |
+| `body`    | `JobBatchUpdateRequest` |             |
+| `ct`      | `CancellationToken`     |             |
+
+**Returns:** `Task<BatchOperationCreatedResult>`
+
+**Example**
+
+```csharp
+public static async Task UpdateJobsBatchOperationExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.UpdateJobsBatchOperationAsync(
+        new JobBatchUpdateRequest
+        {
+            Filter = new JobFilter
+            {
+                Type = new StringFilterProperty { Eq = "my-job-type" },
+            },
+            Changeset = new JobChangeset { Retries = 3 },
+        });
+
+    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+}
+```
+
 ### Job Workers
 
 #### RunWorkersAsync(TimeSpan?, CancellationToken)
@@ -1738,6 +2674,55 @@ public static async Task GetElementInstanceExample(ElementInstanceKey elementIns
         elementInstanceKey);
 
     Console.WriteLine($"Element: {result.ElementId}");
+}
+```
+
+#### SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery, ConsistencyOptions<ElementInstanceWaitStateQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ElementInstanceWaitStateQueryResult> SearchElementInstanceWaitStatesAsync(ElementInstanceWaitStateQuery body, ConsistencyOptions<ElementInstanceWaitStateQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search element instance wait states
+Returns the wait states for element instances matching the given filter.
+
+| Parameter     | Type                                                      | Description |
+| ------------- | --------------------------------------------------------- | ----------- |
+| `body`        | `ElementInstanceWaitStateQuery`                           |             |
+| `consistency` | `ConsistencyOptions<ElementInstanceWaitStateQueryResult>` |             |
+| `ct`          | `CancellationToken`                                       |             |
+
+**Returns:** `Task<ElementInstanceWaitStateQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchElementInstanceWaitStatesExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchElementInstanceWaitStatesAsync(
+        new ElementInstanceWaitStateQuery
+        {
+            Filter = new ElementInstanceWaitStateFilter
+            {
+                ProcessInstanceKey = new ProcessInstanceKeyFilterProperty
+                {
+                    Eq = processInstanceKey,
+                },
+            },
+        });
+
+    foreach (var waitState in result.Items)
+    {
+        var details = waitState.Details switch
+        {
+            JobWaitStateDetails job => $"waiting on job '{job.JobType}'",
+            MessageWaitStateDetails message => $"waiting for message '{message.MessageName}'",
+            _ => "waiting",
+        };
+        Console.WriteLine($"{waitState.ElementId}: {details}");
+    }
 }
 ```
 
@@ -3433,667 +4418,6 @@ public static async Task SuspendBatchOperationExample(BatchOperationKey batchOpe
 }
 ```
 
-### Process Instances
-
-#### CancelProcessInstanceAsync(ProcessInstanceKey, CancelProcessInstanceRequest, CancellationToken)
-
-```csharp
-public Task CancelProcessInstanceAsync(ProcessInstanceKey processInstanceKey, CancelProcessInstanceRequest body, CancellationToken ct = default)
-```
-
-Cancel process instance
-Cancels a running process instance. As a cancellation includes more than just the removal of the process instance resource, the cancellation resource must be posted. Cancellation can wait on listener-related processing; when that processing does not complete in time, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
-
-| Parameter            | Type                           | Description |
-| -------------------- | ------------------------------ | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`           |             |
-| `body`               | `CancelProcessInstanceRequest` |             |
-| `ct`                 | `CancellationToken`            |             |
-
-**Returns:** `Task`
-
-**Example**
-
-```csharp
-public static async Task CancelProcessInstanceExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    await client.CancelProcessInstanceAsync(
-        processInstanceKey,
-        new CancelProcessInstanceRequest());
-}
-```
-
-#### CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest, CancellationToken)
-
-```csharp
-public Task<BatchOperationCreatedResult> CancelProcessInstancesBatchOperationAsync(ProcessInstanceCancellationBatchOperationRequest body, CancellationToken ct = default)
-```
-
-Cancel process instances (batch)
-Cancels multiple running process instances.
-Since only ACTIVE root instances can be cancelled, any given filters for state and
-parentProcessInstanceKey are ignored and overridden during this batch operation.
-This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
-
-| Parameter | Type                                               | Description |
-| --------- | -------------------------------------------------- | ----------- |
-| `body`    | `ProcessInstanceCancellationBatchOperationRequest` |             |
-| `ct`      | `CancellationToken`                                |             |
-
-**Returns:** `Task<BatchOperationCreatedResult>`
-
-**Example**
-
-```csharp
-public static async Task CancelProcessInstancesBatchOperationExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.CancelProcessInstancesBatchOperationAsync(
-        new ProcessInstanceCancellationBatchOperationRequest());
-
-    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
-}
-```
-
-#### CreateProcessInstanceAsync(ProcessInstanceCreationInstruction, CancellationToken)
-
-```csharp
-public Task<CreateProcessInstanceResult> CreateProcessInstanceAsync(ProcessInstanceCreationInstruction body, CancellationToken ct = default)
-```
-
-Create process instance
-Creates and starts an instance of the specified process.
-The process definition to use to create the instance can be specified either using its unique key
-(as returned by Deploy resources), or using the BPMN process id and a version.
-
-Waits for the completion of the process instance before returning a result
-when awaitCompletion is enabled.
-
-| Parameter | Type                                 | Description |
-| --------- | ------------------------------------ | ----------- |
-| `body`    | `ProcessInstanceCreationInstruction` |             |
-| `ct`      | `CancellationToken`                  |             |
-
-**Returns:** `Task<CreateProcessInstanceResult>`
-
-**Example**
-
-```csharp
-public static async Task CreateProcessInstanceByIdExample(ProcessDefinitionId processDefinitionId)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionById
-    {
-        ProcessDefinitionId = processDefinitionId,
-    });
-
-    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
-}
-
-public static async Task CreateProcessInstanceByKeyExample(ProcessDefinitionKey processDefinitionKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.CreateProcessInstanceAsync(new ProcessInstanceCreationInstructionByKey
-    {
-        ProcessDefinitionKey = processDefinitionKey,
-    });
-
-    Console.WriteLine($"Process instance key: {result.ProcessInstanceKey}");
-}
-```
-
-#### DeleteProcessInstanceAsync(ProcessInstanceKey, DeleteProcessInstanceRequest, CancellationToken)
-
-```csharp
-public Task DeleteProcessInstanceAsync(ProcessInstanceKey processInstanceKey, DeleteProcessInstanceRequest body, CancellationToken ct = default)
-```
-
-Delete process instance
-Deletes a process instance. Only instances that are completed or terminated can be deleted.
-
-| Parameter            | Type                           | Description |
-| -------------------- | ------------------------------ | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`           |             |
-| `body`               | `DeleteProcessInstanceRequest` |             |
-| `ct`                 | `CancellationToken`            |             |
-
-**Returns:** `Task`
-
-**Example**
-
-```csharp
-public static async Task DeleteProcessInstanceExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    await client.DeleteProcessInstanceAsync(
-        processInstanceKey,
-        new DeleteProcessInstanceRequest());
-}
-```
-
-#### DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest, CancellationToken)
-
-```csharp
-public Task<BatchOperationCreatedResult> DeleteProcessInstancesBatchOperationAsync(ProcessInstanceDeletionBatchOperationRequest body, CancellationToken ct = default)
-```
-
-Delete process instances (batch)
-Delete multiple process instances. This will delete the historic data from secondary storage.
-Only process instances in a final state (COMPLETED or TERMINATED) can be deleted.
-This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
-
-| Parameter | Type                                           | Description |
-| --------- | ---------------------------------------------- | ----------- |
-| `body`    | `ProcessInstanceDeletionBatchOperationRequest` |             |
-| `ct`      | `CancellationToken`                            |             |
-
-**Returns:** `Task<BatchOperationCreatedResult>`
-
-**Example**
-
-```csharp
-public static async Task DeleteProcessInstancesBatchOperationExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.DeleteProcessInstancesBatchOperationAsync(
-        new ProcessInstanceDeletionBatchOperationRequest());
-
-    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
-}
-```
-
-#### GetProcessInstanceAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceResult>?, CancellationToken)
-
-```csharp
-public Task<ProcessInstanceResult> GetProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceResult>? consistency = null, CancellationToken ct = default)
-```
-
-Get process instance
-Get the process instance by the process instance key.
-
-| Parameter            | Type                                        | Description |
-| -------------------- | ------------------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                        |             |
-| `consistency`        | `ConsistencyOptions<ProcessInstanceResult>` |             |
-| `ct`                 | `CancellationToken`                         |             |
-
-**Returns:** `Task<ProcessInstanceResult>`
-
-**Example**
-
-```csharp
-public static async Task GetProcessInstanceExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.GetProcessInstanceAsync(processInstanceKey);
-    Console.WriteLine($"Process instance: {result.ProcessDefinitionId}");
-}
-```
-
-#### GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey, ConsistencyOptions<object>?, CancellationToken)
-
-```csharp
-public Task<object> GetProcessInstanceCallHierarchyAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<object>? consistency = null, CancellationToken ct = default)
-```
-
-Get call hierarchy
-Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance.
-
-| Parameter            | Type                         | Description |
-| -------------------- | ---------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`         |             |
-| `consistency`        | `ConsistencyOptions<Object>` |             |
-| `ct`                 | `CancellationToken`          |             |
-
-**Returns:** `Task<Object>`
-
-**Example**
-
-```csharp
-public static async Task GetProcessInstanceCallHierarchyExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.GetProcessInstanceCallHierarchyAsync(
-        processInstanceKey);
-
-    Console.WriteLine($"Call hierarchy: {result}");
-}
-```
-
-#### GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>?, CancellationToken)
-
-```csharp
-public Task<ProcessInstanceSequenceFlowsQueryResult> GetProcessInstanceSequenceFlowsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>? consistency = null, CancellationToken ct = default)
-```
-
-Get sequence flows
-Get sequence flows taken by the process instance.
-
-| Parameter            | Type                                                          | Description |
-| -------------------- | ------------------------------------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                                          |             |
-| `consistency`        | `ConsistencyOptions<ProcessInstanceSequenceFlowsQueryResult>` |             |
-| `ct`                 | `CancellationToken`                                           |             |
-
-**Returns:** `Task<ProcessInstanceSequenceFlowsQueryResult>`
-
-**Example**
-
-```csharp
-public static async Task GetProcessInstanceSequenceFlowsExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.GetProcessInstanceSequenceFlowsAsync(
-        processInstanceKey);
-
-    foreach (var flow in result.Items)
-    {
-        Console.WriteLine($"Sequence flow: {flow}");
-    }
-}
-```
-
-#### GetProcessInstanceStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>?, CancellationToken)
-
-```csharp
-public Task<ProcessInstanceElementStatisticsQueryResult> GetProcessInstanceStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
-```
-
-Get element instance statistics
-Get statistics about elements by the process instance key.
-
-| Parameter            | Type                                                              | Description |
-| -------------------- | ----------------------------------------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                                              |             |
-| `consistency`        | `ConsistencyOptions<ProcessInstanceElementStatisticsQueryResult>` |             |
-| `ct`                 | `CancellationToken`                                               |             |
-
-**Returns:** `Task<ProcessInstanceElementStatisticsQueryResult>`
-
-**Example**
-
-```csharp
-public static async Task GetProcessInstanceStatisticsExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.GetProcessInstanceStatisticsAsync(
-        processInstanceKey);
-
-    foreach (var stat in result.Items)
-    {
-        Console.WriteLine($"Element: {stat.ElementId}");
-    }
-}
-```
-
-#### GetProcessInstanceStatisticsByDefinitionAsync(IncidentProcessInstanceStatisticsByDefinitionQuery, ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>?, CancellationToken)
-
-```csharp
-public Task<IncidentProcessInstanceStatisticsByDefinitionQueryResult> GetProcessInstanceStatisticsByDefinitionAsync(IncidentProcessInstanceStatisticsByDefinitionQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>? consistency = null, CancellationToken ct = default)
-```
-
-Get process instance statistics by definition
-Returns statistics for active process instances with incidents, grouped by process
-definition. The result set is scoped to a specific incident error hash code, which must be
-provided as a filter in the request body.
-
-| Parameter     | Type                                                                           | Description |
-| ------------- | ------------------------------------------------------------------------------ | ----------- |
-| `body`        | `IncidentProcessInstanceStatisticsByDefinitionQuery`                           |             |
-| `consistency` | `ConsistencyOptions<IncidentProcessInstanceStatisticsByDefinitionQueryResult>` |             |
-| `ct`          | `CancellationToken`                                                            |             |
-
-**Returns:** `Task<IncidentProcessInstanceStatisticsByDefinitionQueryResult>`
-
-**Example**
-
-```csharp
-public static async Task GetProcessInstanceStatisticsByDefinitionExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.GetProcessInstanceStatisticsByDefinitionAsync(
-        new IncidentProcessInstanceStatisticsByDefinitionQuery());
-
-    foreach (var stat in result.Items)
-    {
-        Console.WriteLine($"Definition: {stat.ProcessDefinitionKey}");
-    }
-}
-```
-
-#### GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>?, CancellationToken)
-
-```csharp
-public Task<IncidentProcessInstanceStatisticsByErrorQueryResult> GetProcessInstanceStatisticsByErrorAsync(IncidentProcessInstanceStatisticsByErrorQuery body, ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>? consistency = null, CancellationToken ct = default)
-```
-
-Get process instance statistics by error
-Returns statistics for active process instances that currently have active incidents,
-grouped by incident error hash code.
-
-| Parameter     | Type                                                                      | Description |
-| ------------- | ------------------------------------------------------------------------- | ----------- |
-| `body`        | `IncidentProcessInstanceStatisticsByErrorQuery`                           |             |
-| `consistency` | `ConsistencyOptions<IncidentProcessInstanceStatisticsByErrorQueryResult>` |             |
-| `ct`          | `CancellationToken`                                                       |             |
-
-**Returns:** `Task<IncidentProcessInstanceStatisticsByErrorQueryResult>`
-
-**Example**
-
-```csharp
-public static async Task GetProcessInstanceStatisticsByErrorExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.GetProcessInstanceStatisticsByErrorAsync(
-        new IncidentProcessInstanceStatisticsByErrorQuery());
-
-    foreach (var stat in result.Items)
-    {
-        Console.WriteLine($"Error: {stat.ErrorMessage}");
-    }
-}
-```
-
-#### MigrateProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceMigrationInstruction, CancellationToken)
-
-```csharp
-public Task MigrateProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceMigrationInstruction body, CancellationToken ct = default)
-```
-
-Migrate process instance
-Migrates a process instance to a new process definition.
-This request can contain multiple mapping instructions to define mapping between the active
-process instance's elements and target process definition elements.
-
-Use this to upgrade a process instance to a new version of a process or to
-a different process definition, e.g. to keep your running instances up-to-date with the
-latest process improvements.
-
-| Parameter            | Type                                  | Description |
-| -------------------- | ------------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                  |             |
-| `body`               | `ProcessInstanceMigrationInstruction` |             |
-| `ct`                 | `CancellationToken`                   |             |
-
-**Returns:** `Task`
-
-**Example**
-
-```csharp
-public static async Task MigrateProcessInstanceExample(ProcessInstanceKey processInstanceKey, ProcessDefinitionKey targetProcessDefinitionKey)
-{
-    using var client = CamundaClient.Create();
-
-    await client.MigrateProcessInstanceAsync(
-        processInstanceKey,
-        new ProcessInstanceMigrationInstruction
-        {
-            TargetProcessDefinitionKey = targetProcessDefinitionKey,
-        });
-}
-```
-
-#### MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest, CancellationToken)
-
-```csharp
-public Task<BatchOperationCreatedResult> MigrateProcessInstancesBatchOperationAsync(ProcessInstanceMigrationBatchOperationRequest body, CancellationToken ct = default)
-```
-
-Migrate process instances (batch)
-Migrate multiple process instances.
-Since only process instances with ACTIVE state can be migrated, any given
-filters for state are ignored and overridden during this batch operation.
-This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
-
-| Parameter | Type                                            | Description |
-| --------- | ----------------------------------------------- | ----------- |
-| `body`    | `ProcessInstanceMigrationBatchOperationRequest` |             |
-| `ct`      | `CancellationToken`                             |             |
-
-**Returns:** `Task<BatchOperationCreatedResult>`
-
-**Example**
-
-```csharp
-public static async Task MigrateProcessInstancesBatchOperationExample(ProcessDefinitionKey targetProcessDefinitionKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.MigrateProcessInstancesBatchOperationAsync(
-        new ProcessInstanceMigrationBatchOperationRequest
-        {
-            Filter = new ProcessInstanceFilter(),
-            MigrationPlan = new ProcessInstanceMigrationBatchOperationPlan
-            {
-                TargetProcessDefinitionKey = targetProcessDefinitionKey,
-            },
-        });
-
-    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
-}
-```
-
-#### ModifyProcessInstanceAsync(ProcessInstanceKey, ProcessInstanceModificationInstruction, CancellationToken)
-
-```csharp
-public Task ModifyProcessInstanceAsync(ProcessInstanceKey processInstanceKey, ProcessInstanceModificationInstruction body, CancellationToken ct = default)
-```
-
-Modify process instance
-Modifies a running process instance.
-This request can contain multiple instructions to activate an element of the process or
-to terminate an active instance of an element.
-
-Use this to repair a process instance that is stuck on an element or took an unintended path.
-For example, because an external system is not available or doesn't respond as expected.
-
-| Parameter            | Type                                     | Description |
-| -------------------- | ---------------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                     |             |
-| `body`               | `ProcessInstanceModificationInstruction` |             |
-| `ct`                 | `CancellationToken`                      |             |
-
-**Returns:** `Task`
-
-**Example**
-
-```csharp
-public static async Task ModifyProcessInstanceExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    await client.ModifyProcessInstanceAsync(
-        processInstanceKey,
-        new ProcessInstanceModificationInstruction());
-}
-```
-
-#### ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest, CancellationToken)
-
-```csharp
-public Task<BatchOperationCreatedResult> ModifyProcessInstancesBatchOperationAsync(ProcessInstanceModificationBatchOperationRequest body, CancellationToken ct = default)
-```
-
-Modify process instances (batch)
-Modify multiple process instances.
-Since only process instances with ACTIVE state can be modified, any given
-filters for state are ignored and overridden during this batch operation.
-In contrast to single modification operation, it is not possible to add variable instructions or modify by element key.
-It is only possible to use the element id of the source and target.
-This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
-
-| Parameter | Type                                               | Description |
-| --------- | -------------------------------------------------- | ----------- |
-| `body`    | `ProcessInstanceModificationBatchOperationRequest` |             |
-| `ct`      | `CancellationToken`                                |             |
-
-**Returns:** `Task<BatchOperationCreatedResult>`
-
-**Example**
-
-```csharp
-public static async Task ModifyProcessInstancesBatchOperationExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.ModifyProcessInstancesBatchOperationAsync(
-        new ProcessInstanceModificationBatchOperationRequest());
-
-    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
-}
-```
-
-#### ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest, CancellationToken)
-
-```csharp
-public Task<BatchOperationCreatedResult> ResolveIncidentsBatchOperationAsync(ProcessInstanceIncidentResolutionBatchOperationRequest body, CancellationToken ct = default)
-```
-
-Resolve related incidents (batch)
-Resolves multiple instances of process instances.
-Since only process instances with ACTIVE state can have unresolved incidents, any given
-filters for state are ignored and overridden during this batch operation.
-This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
-
-| Parameter | Type                                                     | Description |
-| --------- | -------------------------------------------------------- | ----------- |
-| `body`    | `ProcessInstanceIncidentResolutionBatchOperationRequest` |             |
-| `ct`      | `CancellationToken`                                      |             |
-
-**Returns:** `Task<BatchOperationCreatedResult>`
-
-**Example**
-
-```csharp
-public static async Task ResolveIncidentsBatchOperationExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.ResolveIncidentsBatchOperationAsync(
-        new ProcessInstanceIncidentResolutionBatchOperationRequest());
-
-    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
-}
-```
-
-#### ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey, CancellationToken)
-
-```csharp
-public Task<BatchOperationCreatedResult> ResolveProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, CancellationToken ct = default)
-```
-
-Resolve related incidents
-Creates a batch operation to resolve multiple incidents of a process instance.
-
-| Parameter            | Type                 | Description |
-| -------------------- | -------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey` |             |
-| `ct`                 | `CancellationToken`  |             |
-
-**Returns:** `Task<BatchOperationCreatedResult>`
-
-**Example**
-
-```csharp
-public static async Task ResolveProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.ResolveProcessInstanceIncidentsAsync(
-        processInstanceKey);
-
-    Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
-}
-```
-
-#### SearchProcessInstanceIncidentsAsync(ProcessInstanceKey, IncidentSearchQuery, ConsistencyOptions<IncidentSearchQueryResult>?, CancellationToken)
-
-```csharp
-public Task<IncidentSearchQueryResult> SearchProcessInstanceIncidentsAsync(ProcessInstanceKey processInstanceKey, IncidentSearchQuery body, ConsistencyOptions<IncidentSearchQueryResult>? consistency = null, CancellationToken ct = default)
-```
-
-Search related incidents
-Search for incidents caused by the process instance or any of its called process or decision instances.
-
-Although the `processInstanceKey` is provided as a path parameter to indicate the root process instance,
-you may also include a `processInstanceKey` within the filter object to narrow results to specific
-child process instances. This is useful, for example, if you want to isolate incidents associated with
-subprocesses or called processes under the root instance while excluding incidents directly tied to the root.
-
-| Parameter            | Type                                            | Description |
-| -------------------- | ----------------------------------------------- | ----------- |
-| `processInstanceKey` | `ProcessInstanceKey`                            |             |
-| `body`               | `IncidentSearchQuery`                           |             |
-| `consistency`        | `ConsistencyOptions<IncidentSearchQueryResult>` |             |
-| `ct`                 | `CancellationToken`                             |             |
-
-**Returns:** `Task<IncidentSearchQueryResult>`
-
-**Example**
-
-```csharp
-public static async Task SearchProcessInstanceIncidentsExample(ProcessInstanceKey processInstanceKey)
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.SearchProcessInstanceIncidentsAsync(
-        processInstanceKey,
-        new IncidentSearchQuery());
-
-    foreach (var incident in result.Items)
-    {
-        Console.WriteLine($"Incident: {incident.IncidentKey}");
-    }
-}
-```
-
-#### SearchProcessInstancesAsync(ProcessInstanceSearchQuery, ConsistencyOptions<ProcessInstanceSearchQueryResult>?, CancellationToken)
-
-```csharp
-public Task<ProcessInstanceSearchQueryResult> SearchProcessInstancesAsync(ProcessInstanceSearchQuery body, ConsistencyOptions<ProcessInstanceSearchQueryResult>? consistency = null, CancellationToken ct = default)
-```
-
-Search process instances
-Search for process instances based on given criteria.
-
-| Parameter     | Type                                                   | Description |
-| ------------- | ------------------------------------------------------ | ----------- |
-| `body`        | `ProcessInstanceSearchQuery`                           |             |
-| `consistency` | `ConsistencyOptions<ProcessInstanceSearchQueryResult>` |             |
-| `ct`          | `CancellationToken`                                    |             |
-
-**Returns:** `Task<ProcessInstanceSearchQueryResult>`
-
-**Example**
-
-```csharp
-public static async Task SearchProcessInstancesExample()
-{
-    using var client = CamundaClient.Create();
-
-    var result = await client.SearchProcessInstancesAsync(new ProcessInstanceSearchQuery());
-
-    foreach (var instance in result.Items)
-    {
-        Console.WriteLine($"Process instance: {instance.ProcessInstanceKey}");
-    }
-}
-```
-
 ### Messages
 
 #### CorrelateMessageAsync(MessageCorrelationRequest, CancellationToken)
@@ -4427,7 +4751,8 @@ public Task<DeploymentResult> CreateDeploymentAsync(MultipartFormDataContent con
 ```
 
 Deploy resources
-Deploys one or more resources (e.g. processes, decision models, or forms).
+Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA resources are stored as deployable generic resources in the engine.
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
 | Parameter | Type                       | Description |

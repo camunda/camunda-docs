@@ -177,6 +177,110 @@ function RpaIconLg() {
   );
 }
 
+function GearIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <g
+        transform="translate(12,12) scale(1.667)"
+        stroke="#fc5d0d"
+        fill="none"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <circle cx="12" cy="12" r="3" />
+      </g>
+    </svg>
+  );
+}
+
+function BuildingIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      {/* Main building */}
+      <rect
+        x="16"
+        y="20"
+        width="32"
+        height="30"
+        rx="1.5"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+      />
+      {/* Roof line */}
+      <path
+        d="M13 20h38"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+      {/* Windows row 1 */}
+      <rect x="21" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
+      <rect x="30" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
+      <rect x="39" y="26" width="5" height="5" rx="1" fill="#fc5d0d" />
+      {/* Windows row 2 */}
+      <rect x="21" y="35" width="5" height="5" rx="1" fill="#fc5d0d" />
+      <rect x="39" y="35" width="5" height="5" rx="1" fill="#fc5d0d" />
+      {/* Door */}
+      <rect
+        x="29"
+        y="38"
+        width="7"
+        height="12"
+        rx="1"
+        stroke="#fc5d0d"
+        strokeWidth="2"
+      />
+      {/* Ground */}
+      <path
+        d="M13 50h38"
+        stroke="#fc5d0d"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function ConnectorIconLg() {
+  return (
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+      <rect
+        x="6"
+        y="6"
+        width="52"
+        height="52"
+        rx="12"
+        fill="rgba(252,93,13,0.12)"
+      />
+      <g transform="translate(12, 10) scale(0.08)">
+        <path
+          fillRule="evenodd"
+          fill="#fc5d0d"
+          d="M439.6,229.32c-18.39,0-34.08,11.71-40.05,27.99h-94.5c-6.44-23.89-28.34-41.46-54.22-41.46s-47.78,17.57-54.22,41.46h-94.39c-5.97-16.39-21.66-27.99-40.05-27.99-23.66,0-42.74,19.09-42.74,42.63s19.09,42.63,42.63,42.63c18.39,0,34.08-11.71,40.05-27.99h94.5c6.44,23.89,28.34,41.46,54.22,41.46s47.78-17.57,54.22-41.46h94.5c5.97,16.39,21.66,27.99,40.05,27.99,23.54,0,42.63-19.09,42.63-42.63s-19.09-42.63-42.63-42.63h0ZM250.83,301.22c-16.16,0-29.16-13.12-29.16-29.16s13.12-29.28,29.16-29.28,29.16,13.12,29.16,29.16c.12,16.16-13,29.28-29.16,29.28h0Z"
+        />
+      </g>
+    </svg>
+  );
+}
+
 function CheckIcon({ color = "#22a06b" }) {
   return (
     <svg
@@ -366,7 +470,7 @@ const DESKTOP_MODELER = {
 const CAMUNDA_RUN = {
   version: "8.9.6",
   date: "Jun 9, 2026",
-  alphaVersion: "8.9.0-alpha5",
+  alphaVersion: "8.10.0-alpha2",
   links: {
     mac: {
       stable: [
@@ -382,11 +486,11 @@ const CAMUNDA_RUN = {
       experimental: [
         {
           label: "Alpha Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-darwin-aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-darwin-aarch64.zip",
         },
         {
           label: "Alpha Intel",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-darwin-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-darwin-x86_64.zip",
         },
       ],
     },
@@ -400,7 +504,7 @@ const CAMUNDA_RUN = {
       experimental: [
         {
           label: "Alpha Windows",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-windows-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-windows-x86_64.zip",
         },
       ],
     },
@@ -414,7 +518,7 @@ const CAMUNDA_RUN = {
       experimental: [
         {
           label: "Alpha Linux",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.0-alpha5/camunda8-run-8.9.0-alpha5-linux-x86_64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha2/camunda8-run-8.10.0-alpha2-linux-x86_64.tar.gz",
         },
       ],
     },
@@ -484,6 +588,106 @@ const RPA_WORKER = {
   previousVersions: "https://downloads.camunda.cloud/release/rpa-worker/",
 };
 
+const ADDITIONAL_RELEASES = [
+  {
+    title: "Camunda Orchestration Cluster",
+    description:
+      "Download self-managed orchestration runtime artifacts and view all release notes.",
+    version: "8.9.8",
+    date: "Jun 10, 2026",
+    primaryLink: {
+      label: "View latest release on GitHub",
+      url: "https://github.com/camunda/camunda/releases/latest",
+    },
+    previousVersions: "https://github.com/camunda/camunda/releases",
+    icon: <GearIconLg />,
+  },
+  {
+    title: "Connectors",
+    description:
+      "Get prebuilt connector artifacts and review release history for connector updates.",
+    version: "8.10.0-alpha2",
+    date: "Jun 2, 2026",
+    primaryLink: {
+      label: "View latest release on GitHub",
+      url: "https://github.com/camunda/connectors/releases/latest",
+    },
+    previousVersions: "https://github.com/camunda/connectors/releases",
+    icon: <ConnectorIconLg />,
+  },
+  {
+    title: "Enterprise download center",
+    description:
+      "Enterprise-only downloads for Camunda 7 and Camunda 8 Web Modeler artifacts.",
+    primaryLink: {
+      label: "Browse enterprise downloads",
+      url: "https://downloads.camunda.cloud/enterprise-release/",
+    },
+    icon: <BuildingIconLg />,
+    loginRequired: true,
+  },
+];
+
+/* ─── CLI snippet (matches build-with-camunda terminal style) ─── */
+
+function BundleButtons({ activeOS }) {
+  const links = GETTING_STARTED.links[activeOS] || [];
+  return (
+    <div className={styles.downloadCardButtons}>
+      {links.map((link) => (
+        <a key={link.url} href={link.url} className={bwcStyles.downloadButton}>
+          <DownloadBtnIcon /> {link.label}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Getting Started card: version, date, and bundle download ─── */
+
+function GettingStartedCard({ activeOS }) {
+  return (
+    <div className={clsx(styles.downloadCard, styles.downloadCardFeatured)}>
+      <span className={bwcStyles.recommendedBadge}>
+        Recommended for new users
+      </span>
+      <div className={styles.downloadCardIcon}>
+        <SparklesIconLg />
+      </div>
+      <h3 className={bwcStyles.downloadBlockTitle}>Getting Started Package</h3>
+      <p className={styles.downloadCardDesc}>
+        Prebuilt bundle with Desktop Modeler, the Camunda 8 runtime, and example
+        processes for local development.
+      </p>
+      <div className={styles.downloadCardMeta}>
+        <span className={styles.downloadCardVersion}>
+          v{GETTING_STARTED.version}
+        </span>
+        <span className={styles.downloadCardDate}>{GETTING_STARTED.date}</span>
+      </div>
+
+      <BundleButtons activeOS={activeOS} />
+
+      <p className={styles.downloadCardNote}>
+        Unzip the bundle and start Camunda 8 Run from the extracted folder with{" "}
+        <code>camunda-start.sh</code> (macOS/Linux) or
+        <code>camunda-start.bat</code> (Windows).
+      </p>
+
+      <div className={styles.downloadCardFooter}>
+        <Link
+          to={useBaseUrl(
+            "/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
+          )}
+          className={styles.downloadCardFooterLink}
+        >
+          Setup guide
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Download card component ─── */
 
 function DownloadCard({
@@ -493,13 +697,15 @@ function DownloadCard({
   version,
   date,
   links,
+  primaryLink,
   docsLink,
   previousVersions,
   activeOS,
   badge,
+  loginRequired,
 }) {
   const [showExperimental, setShowExperimental] = useState(false);
-  const osLinks = links[activeOS] || {};
+  const osLinks = (links && links[activeOS]) || {};
   // Support both flat array (Getting Started) and { stable, experimental } shape
   const isFlat = Array.isArray(osLinks);
   const stableLinks = isFlat ? osLinks : osLinks.stable || [];
@@ -516,25 +722,59 @@ function DownloadCard({
       <div className={styles.downloadCardIcon}>{icon}</div>
       <h3 className={bwcStyles.downloadBlockTitle}>{title}</h3>
       <p className={styles.downloadCardDesc}>{description}</p>
-      <div className={styles.downloadCardMeta}>
-        <span className={styles.downloadCardVersion}>v{version}</span>
-        <span className={styles.downloadCardDate}>{date}</span>
-      </div>
-
-      <div className={styles.downloadCardLinks}>
-        <span className={styles.downloadCardLabel}>Stable</span>
-        <div className={styles.downloadCardButtons}>
-          {stableLinks.map((link) => (
-            <a
-              key={link.url}
-              href={link.url}
-              className={bwcStyles.downloadButton}
-            >
-              <DownloadBtnIcon /> {link.label}
-            </a>
-          ))}
+      {loginRequired && (
+        <span className={styles.loginBadge}>
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ flexShrink: 0 }}
+          >
+            <rect x="3" y="11" width="18" height="11" rx="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          Requires login
+        </span>
+      )}
+      {version && (
+        <div className={styles.downloadCardMeta}>
+          <span className={styles.downloadCardVersion}>v{version}</span>
+          {date && <span className={styles.downloadCardDate}>{date}</span>}
         </div>
-      </div>
+      )}
+
+      {primaryLink ? (
+        <div className={styles.downloadCardLinks}>
+          <a
+            href={primaryLink.url}
+            className={styles.downloadCardFooterLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {primaryLink.label} <ExternalLinkIcon />
+          </a>
+        </div>
+      ) : (
+        <div className={styles.downloadCardLinks}>
+          <span className={styles.downloadCardLabel}>Stable</span>
+          <div className={styles.downloadCardButtons}>
+            {stableLinks.map((link) => (
+              <a
+                key={link.url}
+                href={link.url}
+                className={bwcStyles.downloadButton}
+              >
+                <DownloadBtnIcon /> {link.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       {experimentalLinks.length > 0 && (
         <div className={styles.downloadCardLinks}>
@@ -567,26 +807,28 @@ function DownloadCard({
         </div>
       )}
 
-      <div className={styles.downloadCardFooter}>
-        {docsLink && (
-          <Link
-            to={useBaseUrl(docsLink)}
-            className={styles.downloadCardFooterLink}
-          >
-            Setup guide
-          </Link>
-        )}
-        {previousVersions && (
-          <a
-            href={previousVersions}
-            className={styles.downloadCardFooterLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Previous versions <ExternalLinkIcon />
-          </a>
-        )}
-      </div>
+      {(docsLink || previousVersions) && (
+        <div className={styles.downloadCardFooter}>
+          {docsLink && (
+            <Link
+              to={useBaseUrl(docsLink)}
+              className={styles.downloadCardFooterLink}
+            >
+              Setup guide
+            </Link>
+          )}
+          {previousVersions && (
+            <a
+              href={previousVersions}
+              className={styles.downloadCardFooterLink}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Previous versions <ExternalLinkIcon />
+            </a>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -691,18 +933,10 @@ function Downloads() {
             </p>
           )}
 
-          <div className={bwcStyles.downloadsGrid}>
-            <DownloadCard
-              icon={<SparklesIconLg />}
-              title="Getting Started Package"
-              description="Complete bundle with Desktop Modeler, Runtime, and example processes. Everything you need to build your first process in one download."
-              version={GETTING_STARTED.version}
-              date={GETTING_STARTED.date}
-              links={GETTING_STARTED.links}
-              docsLink="/docs/guides/getting-started-hello-world#step-2-deploy-and-run-your-model"
-              activeOS={activeOS}
-              badge="Recommended for new users"
-            />
+          <div
+            className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridTwo)}
+          >
+            <GettingStartedCard activeOS={activeOS} />
             <DownloadCard
               icon={<PencilIconLg />}
               title="Desktop Modeler"
@@ -738,15 +972,36 @@ function Downloads() {
             />
           </div>
 
-          <div className={styles.browseMoreWrap}>
-            <a
-              href="https://downloads.camunda.cloud/"
-              className={styles.browseMoreButton}
-              target="_blank"
-              rel="noopener noreferrer"
+          <div className={styles.additionalReleasesSection}>
+            <h2 className={styles.additionalReleasesTitle}>
+              Additional downloads
+            </h2>
+            <p className={styles.additionalReleasesSub}>
+              Get the latest Orchestration Cluster and connector releases, and
+              browse enterprise downloads.
+            </p>
+            <div
+              className={clsx(
+                bwcStyles.downloadsGrid,
+                styles.downloadsGridFull
+              )}
             >
-              Browse more downloads <ExternalLinkIcon />
-            </a>
+              {ADDITIONAL_RELEASES.map((resource) => (
+                <DownloadCard
+                  key={resource.title}
+                  icon={resource.icon}
+                  title={resource.title}
+                  description={resource.description}
+                  version={resource.version}
+                  date={resource.date}
+                  links={resource.links}
+                  primaryLink={resource.primaryLink}
+                  previousVersions={resource.previousVersions}
+                  loginRequired={resource.loginRequired}
+                  activeOS={activeOS}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -761,7 +1016,7 @@ function Downloads() {
           <div className="container">
             <div className={bwcStyles.sectionHeader}>
               <h2 className={bwcStyles.sectionTitle}>
-                More ways to run Camunda locally
+                More ways to run your own Camunda
               </h2>
               <p className={bwcStyles.sectionSub}>
                 Choose the setup that fits your workflow and infrastructure.

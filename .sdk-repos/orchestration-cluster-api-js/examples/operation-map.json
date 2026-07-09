@@ -20,6 +20,20 @@
       "label": "Create an agent instance"
     }
   ],
+  "createAgentInstanceHistoryItem": [
+    {
+      "file": "agent-instance.ts",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Append an agent instance history item"
+    }
+  ],
+  "searchAgentInstanceHistory": [
+    {
+      "file": "agent-instance.ts",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
   "updateAgentInstance": [
     {
       "file": "agent-instance.ts",
@@ -32,6 +46,13 @@
       "file": "client.ts",
       "region": "GetTopology",
       "label": "Get cluster topology"
+    }
+  ],
+  "changeClusterMode": [
+    {
+      "file": "client.ts",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
     }
   ],
   "createProcessInstance": [
@@ -758,6 +779,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "deleteProcessInstance": [
     {
       "file": "extended-operations.ts",
@@ -784,6 +812,13 @@
       "file": "extended-operations.ts",
       "region": "GetProcessInstanceStatistics",
       "label": "Get process instance statistics"
+    }
+  ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "extended-operations.ts",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
     }
   ],
   "getProcessInstanceSequenceFlows": [
@@ -910,6 +945,13 @@
       "file": "extended-operations.ts",
       "region": "SearchElementInstanceIncidents",
       "label": "Search element instance incidents"
+    }
+  ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "extended-operations.ts",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
     }
   ],
   "createElementInstanceVariables": [

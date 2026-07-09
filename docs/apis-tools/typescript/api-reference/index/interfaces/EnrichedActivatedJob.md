@@ -25,6 +25,24 @@ Set true once any acknowledgement method is invoked.
 
 ---
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business ID of the owning process instance, inherited when the job was created.
+This is `null` for jobs created before version 8.10 and for jobs whose owning process
+instance has no business ID.
+
+#### Inherited from
+
+```ts
+ActivatedJobResult.businessId;
+```
+
+---
+
 ### customHeaders
 
 ```ts
@@ -186,6 +204,22 @@ modifyRetries: (__namedParameters) => Promise<void>;
 #### Returns
 
 `Promise`\<`void`\>
+
+---
+
+### priority
+
+```ts
+priority: number;
+```
+
+The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.
+
+#### Inherited from
+
+```ts
+ActivatedJobResult.priority;
+```
 
 ---
 

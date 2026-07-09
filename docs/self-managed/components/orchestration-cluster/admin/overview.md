@@ -272,7 +272,7 @@ To enable authorizations, API protection must also be enabled.
 Basic authentication credentials are then required when making API requests, as in the following:
 
 ```shell
-curl --request POST 'http://localhost:8080/v1/process-definitions/search'  \
+curl --request POST 'http://localhost:8080/v2/process-definitions/search'  \
   -u demo:demo \
   --header 'Content-Type: application/json' \
   --data-raw '{}'

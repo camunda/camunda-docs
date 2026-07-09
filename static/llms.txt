@@ -16,3 +16,9 @@ For detailed content, use these section-level indexes:
 - [APIs & Tools](/llms-apis-tools.txt): REST APIs, SDKs, clients, and CLI.
 - [Self-Managed](/llms-self-managed.txt): Deployment, configuration, and operations for Self-Managed installations.
 - [Reference](/llms-reference.txt): Release notes, glossary, licenses, and supported environments.
+
+## Full content
+
+For RAG pipelines and offline indexing only, not suitable for in-context reading, use:
+
+- [Full documentation](/llms-full.txt): Complete documentation content in a single file (multiple megabytes).

@@ -144,7 +144,6 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -198,7 +197,6 @@ The client can then access tenant data and perform authorized actions.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -377,7 +375,6 @@ this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -909,6 +906,57 @@ def cancel_process_instances_batch_operation_example() -> None:
     print(f"Batch operation key: {result.batch_operation_key}")
 ```
 
+### change_cluster_mode()
+
+```python
+def change_cluster_mode(*, mode, dry_run=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+```
+
+Change cluster mode
+
+> Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the
+
+request is acknowledged once the change has been accepted, before the transition itself has
+completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-
+only operations remains available; exiting recovery mode returns the cluster to normal processing.
+Returns the planned cluster change so its progress can be monitored via the topology.
+
+- **Parameters:**
+  - **mode** (_ChangeClusterModeMode_)
+  - **dry_run** (_bool_ _|_ _Unset_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ClusterModeChangeResponse
+- **Return type:**
+  ClusterModeChangeResponse
+
+#### Examples
+
+**Change cluster mode:**
+
+```python
+def change_cluster_mode_example() -> None:
+    client = CamundaClient()
+
+    # Pass dry_run=True to validate the request and inspect the resulting plan
+    # without applying it. Omit it (or set it to False) to trigger the transition.
+    result = client.change_cluster_mode(
+        mode=ChangeClusterModeMode.RECOVERING,
+        dry_run=True,
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for operation in result.planned_changes:
+        suffix = f" -> {operation.mode}" if operation.mode else ""
+        print(f"  {operation.operation}{suffix}")
+```
+
 ### client
 
 ```python
@@ -1102,6 +1150,7 @@ managed in the Orchestration Cluster and while no user is assigned to the admin 
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. A user with this username already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -1183,6 +1232,67 @@ def create_agent_instance_example(element_instance_key: ElementInstanceKey) -> N
     print(f"Created agent instance: {result.agent_instance_key}")
 ```
 
+### create_agent_instance_history_item()
+
+```python
+def create_agent_instance_history_item(agent_instance_key, , data, **kwargs)
+```
+
+Create agent instance history item
+
+> Appends a single history item to an agent instance’s conversation history.
+
+The created item has commitStatus PENDING until the job identified by jobLease
+completes successfully, at which point it transitions to COMMITTED. If the job
+fails or is superseded by a retry, the item is marked DISCARDED.
+
+- **Parameters:**
+  - **agent_instance_key** (_str_) – System-generated key for an agent instance. Example: 4503599627370496.
+  - **body** (_AgentInstanceHistoryItemRequest_) – Request to append a single history item to an
+    agent instance’s conversation history.
+  - **data** (_AgentInstanceHistoryItemRequest_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The agent instance with the given key was not found, or the specified jobKey does not correspond to an active job. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  AgentInstanceHistoryItemCreationResult
+- **Return type:**
+  AgentInstanceHistoryItemCreationResult
+
+#### Examples
+
+**Append an agent instance history item:**
+
+```python
+def create_agent_instance_history_item_example(
+    agent_instance_key: AgentInstanceKey,
+    element_instance_key: ElementInstanceKey,
+    job_key: JobKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.create_agent_instance_history_item(
+        agent_instance_key=agent_instance_key,
+        data=AgentInstanceHistoryItemRequest(
+            element_instance_key=element_instance_key,
+            job_key=job_key,
+            job_lease="lease-token",
+            role=AgentInstanceHistoryItemRequestRole.ASSISTANT,
+            content=[TextContent(content_type="TEXT", text="How can I help you today?")],
+            produced_at=datetime.datetime.now(datetime.timezone.utc),
+        ),
+    )
+
+    print(f"Created history item: {result.history_item_key}")
+```
+
 ### create_authorization()
 
 ```python
@@ -1243,8 +1353,11 @@ def create_deployment(, data, **kwargs)
 
 Deploy resources
 
-> Deploys one or more resources (e.g. processes, decision models, or forms).
+> Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources,
 
+and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA
+resources are stored as deployable generic resources in the engine.
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
 - **Parameters:**
@@ -1498,7 +1611,9 @@ repeats.
 **Create element instance variables:**
 
 ```python
-def create_element_instance_variables_example(element_instance_key: ElementInstanceKey) -> None:
+def create_element_instance_variables_example(
+    element_instance_key: ElementInstanceKey,
+) -> None:
     client = CamundaClient()
 
     variables = SetVariableRequestVariables.from_dict({"myVar": "myValue"})
@@ -1528,6 +1643,7 @@ Create a global-scoped cluster variable
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. A cluster variable with this name already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
@@ -1634,6 +1750,7 @@ externally-minted IdP group IDs there.
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. Group with this id already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -1676,6 +1793,7 @@ Create mapping rule
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. The request to create a mapping rule was denied. More details are provided in the response body.
   - **errors.NotFoundError** – If the response status code is 404. The request to create a mapping rule was denied.
+  - **errors.ConflictError** – If the response status code is 409. Mapping rule with this id already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
@@ -1812,6 +1930,7 @@ Create role
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. Role with this id already exists.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -1902,6 +2021,7 @@ Create a tenant-scoped cluster variable
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.NotFoundError** – If the response status code is 404. The tenant with the given ID was not found.
+  - **errors.ConflictError** – If the response status code is 409. A cluster variable with this name already exists for the given tenant.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.UnexpectedStatus** – If the response status code is not documented.
   - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
@@ -2601,7 +2721,7 @@ This is a convenience wrapper around [`create_deployment()`](#create_deployment)
   convenience lists (`processes`, `decisions`, `decision_requirements`, `forms`).
 
 * **Parameters:**
-  - **files** (_list_ _[\*\*str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
+  - **files** (_list_ _[__str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
   - **tenant_id** (_str_ _|_ _None_) – Optional tenant identifier. If not provided, the default tenant is used.
 * **Returns:**
   The deployment result with extracted resource lists.
@@ -2734,9 +2854,11 @@ def evaluate_expression(, data, **kwargs)
 
 Evaluate an expression
 
-> Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster
+> Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
 
-variables when a tenant ID is provided.
+cluster variables when a tenant ID is provided. Optionally, provide a scopeKey to make the
+variables of a specific process instance or element instance visible while evaluating the
+expression.
 
 - **Parameters:**
   - **body** (_ExpressionEvaluationRequest_)
@@ -3120,7 +3242,6 @@ Get decision instance
 
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3415,7 +3536,7 @@ optionally by jobType.
   - **from** (_datetime.datetime_)
   - **to** (_datetime.datetime_)
   - **job_type** (_str_ _|_ _Unset_)
-  - **from\_** (_datetime.datetime_)
+  - **from_** (_datetime.datetime_)
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
@@ -3866,7 +3987,9 @@ Get process definition
 **Get a process definition:**
 
 ```python
-def get_process_definition_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition(
@@ -3954,7 +4077,9 @@ The process definition ID must be provided as a required field in the request bo
 **Get version statistics:**
 
 ```python
-def get_process_definition_instance_version_statistics_example(process_definition_id: ProcessDefinitionId) -> None:
+def get_process_definition_instance_version_statistics_example(
+    process_definition_id: ProcessDefinitionId,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition_instance_version_statistics(
@@ -4011,7 +4136,9 @@ def get_process_definition_message_subscription_statistics_example() -> None:
 
     if not isinstance(result.items, Unset):
         for stat in result.items:
-            print(f"Definition: {stat.process_definition_id}, subscriptions: {stat.active_subscriptions}")
+            print(
+                f"Definition: {stat.process_definition_id}, subscriptions: {stat.active_subscriptions}"
+            )
 ```
 
 ### get_process_definition_statistics()
@@ -4051,7 +4178,9 @@ search filter.
 **Get process definition element statistics:**
 
 ```python
-def get_process_definition_statistics_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_statistics_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_definition_statistics(
@@ -4096,7 +4225,9 @@ Get process definition XML
 **Get process definition XML:**
 
 ```python
-def get_process_definition_xml_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_process_definition_xml_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     xml = client.get_process_definition_xml(
@@ -4182,7 +4313,9 @@ instance.
 **Get process instance call hierarchy:**
 
 ```python
-def get_process_instance_call_hierarchy_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_call_hierarchy_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_call_hierarchy(
@@ -4224,7 +4357,9 @@ Get sequence flows
 **Get process instance sequence flows:**
 
 ```python
-def get_process_instance_sequence_flows_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_sequence_flows_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_sequence_flows(
@@ -4267,7 +4402,9 @@ Get element instance statistics
 **Get process instance statistics:**
 
 ```python
-def get_process_instance_statistics_example(process_instance_key: ProcessInstanceKey) -> None:
+def get_process_instance_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_process_instance_statistics(
@@ -4374,6 +4511,50 @@ def get_process_instance_statistics_by_error_example() -> None:
     if not isinstance(result.items, Unset):
         for stat in result.items:
             print(f"Error: {stat.error_message}")
+```
+
+### get_process_instance_wait_state_statistics()
+
+```python
+def get_process_instance_wait_state_statistics(process_instance_key, , consistency=None, **kwargs)
+```
+
+Get wait state statistics
+
+> Get statistics about waiting element instances by the process instance key, grouped by element id.
+
+- **Parameters:**
+  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ProcessInstanceWaitStateStatisticsQueryResult
+- **Return type:**
+  ProcessInstanceWaitStateStatisticsQueryResult
+
+#### Examples
+
+**Get process instance wait state statistics:**
+
+```python
+def get_process_instance_wait_state_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_wait_state_statistics(
+        process_instance_key=process_instance_key,
+    )
+
+    for stat in result.items:
+        print(f"Element: {stat.element_id}, Waiting: {stat.waiting_count}")
 ```
 
 ### get_resource()
@@ -4595,7 +4776,9 @@ forms.
 **Get start process form:**
 
 ```python
-def get_start_process_form_example(process_definition_key: ProcessDefinitionKey) -> None:
+def get_start_process_form_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
     client = CamundaClient()
 
     result = client.get_start_process_form(
@@ -5053,7 +5236,12 @@ latest process improvements.
 **Migrate a process instance:**
 
 ```python
-def migrate_process_instance_example(process_instance_key: ProcessInstanceKey, target_process_definition_key: ProcessDefinitionKey, source_element_id: ElementId, target_element_id: ElementId) -> None:
+def migrate_process_instance_example(
+    process_instance_key: ProcessInstanceKey,
+    target_process_definition_key: ProcessDefinitionKey,
+    source_element_id: ElementId,
+    target_element_id: ElementId,
+) -> None:
     client = CamundaClient()
 
     client.migrate_process_instance(
@@ -5489,7 +5677,9 @@ Resolve related incidents
 **Resolve process instance incidents:**
 
 ```python
-def resolve_process_instance_incidents_example(process_instance_key: ProcessInstanceKey) -> None:
+def resolve_process_instance_incidents_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.resolve_process_instance_incidents(
@@ -5543,6 +5733,53 @@ def resume_batch_operation_example(batch_operation_key: BatchOperationKey) -> No
     )
 ```
 
+### search_agent_instance_history()
+
+```python
+def search_agent_instance_history(agent_instance_key, *, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
+```
+
+Search agent instance history
+
+> Searches the conversation history of an agent instance. Committed items
+
+are returned by default.
+
+- **Parameters:**
+  - **agent_instance_key** (_str_) – System-generated key for an agent instance. Example: 4503599627370496.
+  - **body** (_AgentInstanceHistorySearchQuery_ _|_ _Unset_) – Agent instance history search request.
+  - **data** (_AgentInstanceHistorySearchQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. The agent instance with the given key was not found. More details are provided in the response body.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  AgentInstanceHistorySearchQueryResult
+- **Return type:**
+  AgentInstanceHistorySearchQueryResult
+
+#### Examples
+
+**Search agent instance history:**
+
+```python
+def search_agent_instance_history_example(agent_instance_key: AgentInstanceKey) -> None:
+    client = CamundaClient()
+
+    result = client.search_agent_instance_history(
+        agent_instance_key=agent_instance_key,
+        data=AgentInstanceHistorySearchQuery(),
+    )
+
+    print(f"Found {len(result.items)} history items")
+```
+
 ### search_agent_instances()
 
 ```python
@@ -5578,9 +5815,7 @@ Search agent instances
 def search_agent_instances_example() -> None:
     client = CamundaClient()
 
-    result = client.search_agent_instances(
-        data=AgentInstanceSearchQuery()
-    )
+    result = client.search_agent_instances(data=AgentInstanceSearchQuery())
 
     if not isinstance(result.items, Unset):
         for agent_instance in result.items:
@@ -6158,7 +6393,9 @@ to the root element itself.
 **Search element instance incidents:**
 
 ```python
-def search_element_instance_incidents_example(element_instance_key: ElementInstanceKey) -> None:
+def search_element_instance_incidents_example(
+    element_instance_key: ElementInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.search_element_instance_incidents(
@@ -6169,6 +6406,59 @@ def search_element_instance_incidents_example(element_instance_key: ElementInsta
     if not isinstance(result.items, Unset):
         for incident in result.items:
             print(f"Incident: {incident.incident_key}")
+```
+
+### search_element_instance_wait_states()
+
+```python
+def search_element_instance_wait_states(*, data=<camunda_orchestration_sdk.types.Unset object>, consistency=None, **kwargs)
+```
+
+Search element instance wait states
+
+> Returns the wait states for element instances matching the given filter.
+
+- **Parameters:**
+  - **body** (_ElementInstanceWaitStateQuery_ _|_ _Unset_) – Element instance inspection request.
+  - **data** (_ElementInstanceWaitStateQuery_ _|_ _Unset_)
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ElementInstanceWaitStateQueryResult
+- **Return type:**
+  ElementInstanceWaitStateQueryResult
+
+#### Examples
+
+**Search element instance wait states:**
+
+```python
+def search_element_instance_wait_states_example() -> None:
+    client = CamundaClient()
+
+    result = client.search_element_instance_wait_states(
+        data=ElementInstanceWaitStateQuery(),
+    )
+
+    for wait_state in result.items:
+        details = wait_state.details
+        if isinstance(details, JobWaitStateDetails):
+            info = f"waiting on job '{details.job_type}'"
+        elif isinstance(details, MessageWaitStateDetails):
+            info = f"waiting for message '{details.message_name}'"
+        else:
+            info = f"waiting ({details.wait_state_type})"
+        print(
+            f"Element {wait_state.element_id} "
+            f"(instance {wait_state.element_instance_key}) {info}"
+        )
 ```
 
 ### search_element_instances()
@@ -6807,7 +7097,9 @@ the root.
 **Search process instance incidents:**
 
 ```python
-def search_process_instance_incidents_example(process_instance_key: ProcessInstanceKey) -> None:
+def search_process_instance_incidents_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
     client = CamundaClient()
 
     result = client.search_process_instance_incidents(
@@ -7524,6 +7816,45 @@ def search_variables_example() -> None:
             print(f"Variable: {var.name}")
 ```
 
+### search_variables_as_dto()
+
+```python
+def search_variables_as_dto(dto, , process_instance_key, scope_key=None, tenant_id=None, page_size=100, consistency=None)
+```
+
+Fetch the variables declared by a Pydantic model for a process instance.
+
+Derives a `name $in [...]` filter from the fields of `dto` (honouring
+Pydantic aliases), so only the declared variables are fetched — memory is
+bounded by the model shape, not by the total variable count. The result is
+a `camunda_orchestration_sdk.runtime.typed_variables.VariableMap`,
+which offers lenient access via `.get(name)` and strict, fully-typed
+access via `.validate()` (which constructs `dto` and raises
+`pydantic.ValidationError` on missing or invalid values).
+
+- **Parameters:**
+  - **dto** (_type_ _[_ _\_VarDtoT_ _]_) – A `pydantic.BaseModel` subclass describing the variables of interest.
+  - **process_instance_key** (_str_) – The process instance whose variables to search.
+  - **scope_key** (_str_ _|_ _None_) – Optional scope key to disambiguate variables that exist at
+    multiple scopes. Required when a variable name collides across scopes.
+  - **tenant_id** (_str_ _|_ _None_) – Optional tenant identifier to filter by.
+  - **page_size** (_int_) – Page size used while paginating to exhaustion. Defaults to 100.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_) – Optional eventual-consistency budget. When supplied, the
+    whole collection is re-read until every declared variable is visible
+    or `wait_up_to_ms` expires (the best snapshot is returned on
+    expiry). Variable indexes update asynchronously, so a freshly
+    written variable may not be visible immediately; without this the
+    variables are read exactly once.
+- **Returns:**
+  The parsed variable map keyed by the declared field names.
+- **Return type:**
+  VariableMap
+- **Raises:**
+  - **TypeError** – If `dto` is not a pydantic `BaseModel` subclass.
+  - **camunda_orchestration_sdk.runtime.typed_variables.VariableScopeCollisionError** – If a declared variable is found at more than one scope and no
+    `scope_key` was supplied.
+  - **camunda_orchestration_sdk.runtime.typed_variables.VariableDeserializationError** – If a returned variable value is present but not valid JSON.
+
 ### suspend_batch_operation()
 
 ```python
@@ -7639,7 +7970,6 @@ assignments no longer applied.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -7692,7 +8022,6 @@ The client can no longer access tenant data.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -7871,7 +8200,6 @@ associated with this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -8210,14 +8538,12 @@ Update agent instance
 > Updates the mutable fields of an agent instance: status, metric counters, and
 
 tools. Metric values are treated as deltas and applied immediately to the
-aggregate counters. Tool updates replace the existing tool list. At least one of
-status, metrics, or tools must be provided.
+aggregate counters. Tool updates replace the existing tool list.
 
 - **Parameters:**
   - **agent_instance_key** (_str_) – System-generated key for an agent instance. Example: 4503599627370496.
   - **body** (_AgentInstanceUpdateRequest_) – Request to update the mutable state of an agent
-    instance. At least one of
-    status, metrics, or tools must be provided.
+    instance.
   - **data** (_AgentInstanceUpdateRequest_)
   - **kwargs** (_Any_)
 - **Raises:**
@@ -8238,12 +8564,16 @@ status, metrics, or tools must be provided.
 **Update an agent instance:**
 
 ```python
-def update_agent_instance_example(agent_instance_key: AgentInstanceKey) -> None:
+def update_agent_instance_example(
+    agent_instance_key: AgentInstanceKey,
+    element_instance_key: ElementInstanceKey,
+) -> None:
     client = CamundaClient()
 
     client.update_agent_instance(
         agent_instance_key=agent_instance_key,
         data=AgentInstanceUpdateRequest(
+            element_instance_key=element_instance_key,
             status=AgentInstanceUpdateRequestStatus.THINKING,
         ),
     )
@@ -8483,6 +8813,60 @@ def update_job_example(job_key: JobKey) -> None:
             ),
         ),
     )
+```
+
+### update_jobs_batch_operation()
+
+```python
+def update_jobs_batch_operation(, data, **kwargs)
+```
+
+Update jobs (batch)
+
+> Creates a batch operation to update jobs matching the given filter. At least one changeset field
+
+must be non-null. This is done asynchronously; the progress can be tracked using the
+batchOperationKey from the response and the batch operation status endpoint (/batch-
+operations/{batchOperationKey}).
+
+- **Parameters:**
+  - **body** (_JobBatchUpdateRequest_) – The filter and changeset for a batch job update operation.
+    The filter defines which jobs are updated; the changeset defines what to update. At least
+    one changeset field must be non-null.
+  - **data** (_JobBatchUpdateRequest_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The job batch update operation failed. More details are provided in the response body.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  BatchOperationCreatedResult
+- **Return type:**
+  BatchOperationCreatedResult
+
+#### Examples
+
+**Update jobs in batch:**
+
+```python
+def update_jobs_batch_operation_example() -> None:
+    client = CamundaClient()
+
+    result = client.update_jobs_batch_operation(
+        data=JobBatchUpdateRequest(
+            filter_=JobBatchUpdateRequestFilter(
+                type_="my-job-type",
+            ),
+            changeset=JobBatchUpdateRequestChangeset(
+                retries=3,
+            ),
+        ),
+    )
+
+    print(f"Batch operation key: {result.batch_operation_key}")
 ```
 
 ### update_mapping_rule()

@@ -46,6 +46,18 @@ const sidebar: SidebarsConfig = {
           label: "Search agent instances",
           className: "api-method post",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item",
+          label: "Create agent instance history item",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instance-history",
+          label: "Search agent instance history",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -390,6 +402,12 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instance-wait-states",
+          label: "Search element instance wait states",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instances",
           label: "Search element instances",
           className: "api-method post",
@@ -644,6 +662,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/fail-job",
           label: "Fail job",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-jobs-batch-operation",
+          label: "Update jobs (batch)",
           className: "api-method post",
         },
         {
@@ -920,6 +944,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics",
           label: "Get element instance statistics",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-wait-state-statistics",
+          label: "Get wait state statistics",
           className: "api-method get",
         },
       ],

@@ -15,17 +15,13 @@ Learn more about where your Camunda 8 SaaS data is located and how data is handl
 Unless specifically mentioned, Camunda does not process personal data on behalf of its customers. It is the responsibility of you as the customer to decide whether to use Camunda for processing personal data.
 :::
 
-:::note planned changes from GCP to AWS
-Some components are changing from GCP to AWS as part of planned improvements to Camunda 8 SaaS. For example, Console and connector secrets are planned to change to AWS hosting in December 2025.
-:::
-
 ## Alerts
 
 Camunda 8 [Alerts](/components/console/manage-clusters/manage-alerts.md) can notify you when process instances stop with an error.
 
 | Host location     | Data handled                                          | Personal data processing |
 | :---------------- | :---------------------------------------------------- | :----------------------- |
-| Belgium, EU (GCP) | Route alerts containing administrative metadata only. | N/A                      |
+| Germany, EU (AWS) | Route alerts containing administrative metadata only. | N/A                      |
 
 :::note optional
 Camunda 8 Alerts are optional. This information only applies if you use Alerts.
@@ -50,9 +46,9 @@ Connector secrets are optional. This information only applies if you use connect
 
 The Camunda‑hosted [Console](/components/console/introduction-to-console.md) admin UI is used for cluster and organization management.
 
-| Host location                                                        | Data handled                                      | Personal data processing                                                                                                                                                        |
-| :------------------------------------------------------------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <p>Belgium, EU (GCP)</p><p>From December 2025: Germany, EU (AWS)</p> | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
+| Host location     | Data handled                                      | Personal data processing                                                                                                                                                        |
+| :---------------- | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Germany, EU (AWS) | Only stores administrative metadata and settings. | Limited to account/authentication data to access Camunda Platform SaaS. It does not include personal data in scope of [Data Processing Agreements](https://legal.camunda.com/). |
 
 ## Admin
 
@@ -67,6 +63,18 @@ The Camunda‑hosted [Console](/components/console/introduction-to-console.md) a
 - [Admin](/components/admin/admin-introduction.md)
 - [Connect to an identity provider](/components/console/manage-organization/external-sso.md)
 
+:::
+
+## App Integrations
+
+App Integrations enable connection between Camunda 8 clusters and your productivity tools, currently Microsoft Teams and Slack.
+
+| Host location     | Data handled                                                               | Personal data processing                                                                                                                                                                                                                                           |
+| :---------------- | :------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Germany, EU (AWS) | User accounts and authentication metadata. Separate from process payloads. | Limited to account/authentication data to access the Camunda Platform SaaS. Dependent on the data you send to Camunda over App Integrations. We do not expect that personal data in scope of [Data Processing Agreements](https://legal.camunda.com/) is included. |
+
+:::note optional
+App Integrations are optional. This information only applies if you use App Integrations.
 :::
 
 ## Orchestration Clusters and backups
