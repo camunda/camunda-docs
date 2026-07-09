@@ -25,6 +25,24 @@ Set true once any acknowledgement method is invoked.
 
 ---
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business ID of the owning process instance, inherited when the job was created.
+This is `null` for jobs created before version 8.10 and for jobs whose owning process
+instance has no business ID.
+
+#### Inherited from
+
+```ts
+ActivatedJobResult.businessId;
+```
+
+---
+
 ### customHeaders
 
 ```ts

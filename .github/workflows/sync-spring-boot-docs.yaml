@@ -83,9 +83,9 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create pull request
