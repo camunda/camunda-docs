@@ -12,6 +12,9 @@ paths:
       summary: Create a file
       description: Creates a new file in the specified project and folder.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - fileKey
+        - revision
       tags:
         - File
       requestBody:
@@ -42,6 +45,12 @@ paths:
       summary: Get a file
       description: Returns the file metadata and content for the given file key.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
       tags:
         - File
       parameters:
@@ -67,6 +76,12 @@ paths:
       summary: Update a file
       description: Updates the metadata and/or content of an existing file.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
       tags:
         - File
       parameters:
@@ -107,6 +122,12 @@ paths:
         To permanently and irreversibly remove a file, use
         `DELETE /files/{fileKey}/permanent` instead.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
       tags:
         - File
       parameters:
@@ -229,6 +250,12 @@ paths:
         new wrapper folder at the project root. The file cannot be restored if
         its containing project has been deleted.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: File
+        bind:
+          fileKey:
+            from: path
+            name: fileKey
       tags:
         - File
       parameters:
@@ -303,9 +330,17 @@ components:
       required: true
       description: The unique key identifying the file.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/FileKey"
 
   schemas:
+    # --- Identifier schemas ---
+
+    FileRevision:
+      description: The current revision number of a file, used for optimistic locking.
+      type: integer
+      format: int32
+      x-semantic-type: FileRevision
+
     # --- Request schemas ---
 
     FileCreateRequest:
@@ -330,11 +365,13 @@ components:
           maxLength: 255
         projectKey:
           description: The key of the project this file belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         folderKey:
           description: The key of the parent folder. If omitted or null, the file is created at project root.
-          type: string
           nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
         type:
           description: The type of the file.
           type: string
@@ -368,18 +405,20 @@ components:
           maxLength: 255
         projectKey:
           description: The project to move the file to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         folderKey:
           description: The updated parent folder key. Set to null to move to project root.
-          type: string
           nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
         content:
           description: The updated content of the file.
           type: string
         revision:
           description: The current revision of the file for optimistic locking.
-          type: integer
-          format: int32
+          allOf:
+            - $ref: "#/components/schemas/FileRevision"
 
     # --- Response schemas ---
 
@@ -420,7 +459,8 @@ components:
       properties:
         fileKey:
           description: The unique key identifying this file.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         name:
           description: The name of the file.
           type: string
@@ -429,12 +469,14 @@ components:
             The key of the project this file belongs to. Present in single-file responses
             (get, create, update) but null in search results; full project resolution
             for search results is not yet supported.
-          type: string
           nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         folderKey:
           description: The key of the parent folder. Null if the file is at project root.
-          type: string
           nullable: true
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
         simplePath:
           description: The human-readable path of the file within its project.
           type: string
@@ -443,8 +485,8 @@ components:
           type: string
         revision:
           description: The current revision number, used for optimistic locking.
-          type: integer
-          format: int32
+          allOf:
+            - $ref: "#/components/schemas/FileRevision"
         type:
           description: The type of the file.
           type: string
@@ -543,6 +585,7 @@ components:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         folderKey:
           description: Filter by parent folder key.
+          x-semantic-type: FolderKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         type:

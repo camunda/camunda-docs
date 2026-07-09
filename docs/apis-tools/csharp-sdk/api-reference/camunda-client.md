@@ -136,6 +136,43 @@ Performs application-defined tasks associated with freeing, releasing, or resett
 
 **Returns:** `ValueTask` — A task that represents the asynchronous dispose operation.
 
+#### ChangeClusterModeAsync(string, bool?, CancellationToken)
+
+```csharp
+public Task<ClusterModeChangeResponse> ChangeClusterModeAsync(string mode, bool? dryRun = null, CancellationToken ct = default)
+```
+
+Change cluster mode
+Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `mode`    | `String`            |             |
+| `dryRun`  | `Nullable<Boolean>` |             |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ClusterModeChangeResponse>`
+
+**Example**
+
+```csharp
+public static async Task ChangeClusterModeExample()
+{
+    using var client = CamundaClient.Create();
+
+    // Pass dryRun: true to validate the request and inspect the resulting plan
+    // without applying it. Omit it (or set it to false) to trigger the transition.
+    var change = await client.ChangeClusterModeAsync("RECOVERING", dryRun: true);
+
+    Console.WriteLine($"Cluster change {change.ChangeId}:");
+    foreach (var operation in change.PlannedChanges)
+    {
+        var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+        Console.WriteLine($"  {operation.Operation}{suffix}");
+    }
+}
+```
+
 #### CreateAdminUserAsync(UserRequest, CancellationToken)
 
 ```csharp
@@ -1662,6 +1699,40 @@ public static async Task GetProcessInstanceStatisticsByErrorExample()
     foreach (var stat in result.Items)
     {
         Console.WriteLine($"Error: {stat.ErrorMessage}");
+    }
+}
+```
+
+#### GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>?, CancellationToken)
+
+```csharp
+public Task<ProcessInstanceWaitStateStatisticsQueryResult> GetProcessInstanceWaitStateStatisticsAsync(ProcessInstanceKey processInstanceKey, ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get wait state statistics
+Get statistics about waiting element instances by the process instance key, grouped by element id.
+
+| Parameter            | Type                                                                | Description |
+| -------------------- | ------------------------------------------------------------------- | ----------- |
+| `processInstanceKey` | `ProcessInstanceKey`                                                |             |
+| `consistency`        | `ConsistencyOptions<ProcessInstanceWaitStateStatisticsQueryResult>` |             |
+| `ct`                 | `CancellationToken`                                                 |             |
+
+**Returns:** `Task<ProcessInstanceWaitStateStatisticsQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task GetProcessInstanceWaitStateStatisticsExample(ProcessInstanceKey processInstanceKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
+        processInstanceKey);
+
+    foreach (var stat in result.Items)
+    {
+        Console.WriteLine($"Element: {stat.ElementId}, waiting: {stat.WaitingCount}");
     }
 }
 ```

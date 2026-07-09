@@ -12,6 +12,8 @@ paths:
       summary: Create a project
       description: Creates a new empty project in the specified workspace.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - projectKey
       tags:
         - Project
       requestBody:
@@ -42,6 +44,12 @@ paths:
       summary: Get a project
       description: Returns the project metadata and its content (child folders and files).
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -67,6 +75,12 @@ paths:
       summary: Update a project
       description: Updates the name and/or workspace of an existing project.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -105,6 +119,12 @@ paths:
         descendants. To permanently and irreversibly remove a project, use
         `DELETE /projects/{projectKey}/permanent` instead.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -194,7 +214,7 @@ components:
       required: true
       description: The unique key identifying the project.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/ProjectKey"
 
   schemas:
     # --- Request schemas ---
@@ -216,7 +236,8 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     ProjectUpdateRequest:
       type: object
@@ -231,7 +252,8 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace to move the project to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     # --- Response schemas ---
 
@@ -339,13 +361,15 @@ components:
       properties:
         projectKey:
           description: The unique key identifying this project.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         name:
           description: The name of the project.
           type: string
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
         created:
           description: The timestamp when the project was created.
           type: string
@@ -407,6 +431,7 @@ components:
       properties:
         workspaceKey:
           description: Filter by workspace key.
+          x-semantic-type: WorkspaceKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
