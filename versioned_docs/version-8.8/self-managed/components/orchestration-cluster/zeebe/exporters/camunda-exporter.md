@@ -172,10 +172,7 @@ indices. The history can be configured as follows:
 
 <TabItem value="tasklist">
 
-Helm property path prefix for this option:
-`camunda.data.secondary-storage.{elasticsearch|opensearch}.`
-
-Tasklist-specific export options:
+Helm property path prefix for this Tasklist-specific export option: `camunda.data.secondary-storage.{elasticsearch|opensearch}.`
 
 | Option                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                   | Default |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
