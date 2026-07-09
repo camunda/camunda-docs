@@ -233,7 +233,7 @@ Camunda 8.10 introduces physical tenant support, enabling infrastructure-level i
 - Authentication is configurable as Basic auth or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual physical tenants.
 - The document store and RDBMS secondary storage provide isolated access per physical tenant.
 
-<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+<p class="link-arrow">[Physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
 #### Select a DMN version with a FEEL expression
 
