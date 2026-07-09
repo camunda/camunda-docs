@@ -331,6 +331,27 @@ Connectors change 1 description.
 </div>
 <div className="release-announcement-content">
 
+#### Elasticsearch and OpenSearch exporter defaults changed for Optimize mode and job records
+
+Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
+
+- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
+- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
+
+**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
+
+<p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
+<p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Default RocksDB memory allocation strategy changed to `FRACTION` {#rocksdb-memory-allocation-strategy}
 
 Starting with Camunda 8.10, the default RocksDB memory allocation strategy changes from `PARTITION` to `FRACTION`. With `FRACTION`, RocksDB memory is allocated as a fraction of total available memory (default `0.1`, or 10%) instead of scaling with the number of partitions per broker. This may result in a different amount of memory being allocated to RocksDB after upgrading.
