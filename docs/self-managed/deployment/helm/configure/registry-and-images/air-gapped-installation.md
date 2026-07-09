@@ -33,7 +33,7 @@ The following images must be available in your air-gapped environment:
 
 **Camunda images:**
 
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/camunda](https://hub.docker.com/r/camunda/camunda)
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
@@ -108,11 +108,11 @@ All required images published on Docker Hub (Camunda and Bitnami organizations) 
 - `registry.camunda.cloud/camunda/<image>`
 - `registry.camunda.cloud/bitnami/<image>`
 
-For example, you can pull the Zeebe and PostgreSQL images from Docker Hub or the Camunda registry:
+For example, you can pull the Camunda and PostgreSQL images from Docker Hub or the Camunda registry:
 
 ```shell
-docker pull camunda/zeebe:latest
-docker pull registry.camunda.cloud/camunda/zeebe:latest
+docker pull camunda/camunda:latest
+docker pull registry.camunda.cloud/camunda/camunda:latest
 
 docker pull bitnamilegacy/postgresql:latest
 docker pull registry.camunda.cloud/bitnami/postgresql:latest
