@@ -634,11 +634,11 @@ In Camunda Hub API v2, the collaborators API has been renamed to `members`. The 
 
 All member API endpoints have a Camunda Hub API v2 equivalent:
 
-| Operation             | Web Modeler API v1                             | Camunda Hub API v2                                     |
-| --------------------- | ---------------------------------------------- | ------------------------------------------------------ |
-| Add a collaborator    | `PUT /v1/collaborators`                        | `POST /v2/workspaces/{workspaceKey}/members`           |
-| Remove a collaborator | `DELETE /v1/collaborators/{projectId}/{email}` | `DELETE /v2/workspaces/{workspaceKey}/members/{email}` |
-| Search collaborators  | `POST /v1/collaborators/search`                | `POST /v2/members/search`                              |
+| Operation             | Web Modeler API v1                                      | Camunda Hub API v2                                     |
+| --------------------- | ------------------------------------------------------- | ------------------------------------------------------ |
+| Add a collaborator    | `PUT /v1/collaborators`                                 | `POST /v2/workspaces/{workspaceKey}/members`           |
+| Remove a collaborator | `DELETE /v1/projects/{projectId}/collaborators/{email}` | `DELETE /v2/workspaces/{workspaceKey}/members/{email}` |
+| Search collaborators  | `POST /v1/collaborators/search`                         | `POST /v2/members/search`                              |
 
 ### Field mapping {#member-api-field-mapping}
 
