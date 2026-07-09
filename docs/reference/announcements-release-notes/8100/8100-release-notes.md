@@ -220,6 +220,19 @@ New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, Maria
 
 <p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
+#### Physical tenant support
+
+<!-- https://github.com/camunda/product-hub/issues/3639 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 introduces physical tenant support, enabling infrastructure-level isolation across all cluster components:
+
+- The REST API and gRPC API are exposed per physical tenant, with `CamundaClient` supporting physical tenant selection in the gRPC API.
+- Web apps (Operate, Tasklist, and Admin) are accessible per physical tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
+- Authentication is configurable as Basic auth or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual physical tenants.
+- The document store and RDBMS secondary storage provide isolated access per physical tenant.
+
 #### Select a DMN version with a FEEL expression
 
 <!-- https://github.com/camunda/product-hub/issues/3501 -->
@@ -229,22 +242,6 @@ New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, Maria
 You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
 
 <p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
-
-#### Physical tenant support
-
-<!-- https://github.com/camunda/product-hub/issues/3639 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-Camunda 8.10 introduces physical tenant support, enabling infrastructure-level isolation across all cluster components:
-
-- The REST API is exposed per physical tenant at `/physical-tenants/<physicalTenantId>/v2/`.
-- gRPC API routing to physical tenants is specified in the request header; `CamundaClient` supports specifying the physical tenant in the gRPC API.
-- Web apps (Operate, Tasklist, and Admin) are accessible per physical tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
-- Authentication is configurable as Basic auth or OIDC at the cluster level. Multiple OIDC providers can be configured in a cluster and assigned to individual physical tenants.
-- The document store provides isolated access across physical tenants.
-- RDBMS secondary storage supports physical tenants, with options for separate databases, same database with separate schemas, or same database with separate table prefixes.
-- Most metrics are labeled with the physical tenant ID, and the Zeebe dashboard is updated accordingly.
 
 ### Helm chart deployment
 
