@@ -73,6 +73,23 @@ async function getProcessInstanceStatisticsExample(processInstanceKey: ProcessIn
 }
 //#endregion GetProcessInstanceStatistics
 
+//#region GetProcessInstanceWaitStateStatistics
+async function getProcessInstanceWaitStateStatisticsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceWaitStateStatistics(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Element ${stat.elementId}: waiting=${stat.waitingCount}`);
+  }
+}
+//#endregion GetProcessInstanceWaitStateStatistics
+
 //#region GetProcessInstanceSequenceFlows
 async function getProcessInstanceSequenceFlowsExample(processInstanceKey: ProcessInstanceKey) {
   const camunda = createCamundaClient();
@@ -424,6 +441,7 @@ void deleteProcessInstanceExample;
 void migrateProcessInstanceExample;
 void modifyProcessInstanceExample;
 void getProcessInstanceStatisticsExample;
+void getProcessInstanceWaitStateStatisticsExample;
 void getProcessInstanceSequenceFlowsExample;
 void getProcessInstanceCallHierarchyExample;
 void searchProcessInstanceIncidentsExample;

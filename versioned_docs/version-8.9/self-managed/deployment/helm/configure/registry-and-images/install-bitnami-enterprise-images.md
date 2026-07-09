@@ -7,6 +7,10 @@ description: Configure the Camunda Helm chart to use Bitnami Premium enterprise 
 
 import MigrationTip from '../../operational-tasks/migration-from-bitnami/\_partials/\_migration-tip.md'
 
+:::warning Bitnami subcharts deprecated in Camunda 8.9 — migrate before upgrading to 8.10
+Bitnami subcharts (`identityPostgresql`, `identityKeycloak`, `webModelerPostgresql`, `elasticsearch`) are deprecated in this release and will be **removed in Camunda 8.10** (Helm chart `15.x`). This page documents a transitional configuration. Migrate to externally managed infrastructure or managed cloud services before upgrading. See [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for step-by-step instructions.
+:::
+
 This guide explains how to configure the Camunda Helm chart to use Bitnami Premium images designed for production environments. These images are referred to as Enterprise images, indicating that they are intended for Camunda Enterprise customers. The guide also covers configuration steps, security considerations, CVE reporting, and best practices.
 
 ## Overview
@@ -26,7 +30,7 @@ Bitnami Premium images do not change Camunda's support policy for infrastructure
 Previously, some users deployed Bitnami subcharts in production. Starting with Camunda 8.8, Bitnami subcharts are primarily intended for development and testing unless your teams have specific expertise running Bitnami charts in production.
 
 For existing users:
-You can continue using Bitnami subcharts in your environments. If you have production deployments using these subcharts prior to 8.8, review the implications for your setup. See [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for details.
+Bitnami subcharts remain functional in Camunda 8.9 to support your migration. Plan and complete your migration to externally managed services or Kubernetes operators before upgrading to Camunda 8.10. See [Changes to Camunda Helm Sub-Charts](https://camunda.com/blog/2025/08/changes-to-camunda-helm-sub-charts-what-you-need-to-know/) for background and [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for step-by-step instructions.
 
 ### Alternative for production deployments
 
@@ -54,10 +58,10 @@ Each Camunda Helm chart version lists its chart dependencies in the `Chart.yaml`
 
 ### Available image types
 
-| Image Type      | Registry Path                                                            | Base OS | Maintenance Level    | Intended Use            |
-| --------------- | ------------------------------------------------------------------------ | ------- | -------------------- | ----------------------- |
-| **Open-source** | `bitnamilegacy/*`                                                        | Debian  | Community-maintained | Development and testing |
-| **Premium**     | `bitnamipremium/*` <br/>(Camunda proxied through `vendor-ee` repository) | Debian  | Vendor-maintained    | Production              |
+| Image Type      | Registry Path                                                            | Base OS | Maintenance Level    | Intended Use                                    |
+| --------------- | ------------------------------------------------------------------------ | ------- | -------------------- | ----------------------------------------------- |
+| **Open-source** | `bitnamilegacy/*`                                                        | Debian  | Community-maintained | Development and testing                         |
+| **Premium**     | `bitnamipremium/*` <br/>(Camunda proxied through `vendor-ee` repository) | Debian  | Vendor-maintained    | Transitional production use (deprecated in 8.9) |
 
 ### Why Camunda uses Bitnami Premium images
 
@@ -76,6 +80,18 @@ Bitnami Premium images offer key advantages over open-source variants:
 | **Security**     | <ul><li>Timely CVE patches</li><li>Security hardening</li><li>Regular vulnerability assessments</li></ul>                                                                          |
 | **Maintenance**  | <ul><li>Regular image updates by Bitnami (Broadcom)</li><li>Patched builds for critical vulnerabilities</li></ul>                                                                  |
 | **Enterprise**   | <ul><li>Access via private registry (`registry.camunda.cloud`)</li><li>Customer-exclusive availability</li><li>Redistributed by Camunda for Camunda Enterprise customers</li></ul> |
+
+## Dependency and supply-chain considerations
+
+The Bitnami subcharts bundled in the Camunda Helm chart depend on Debian-based container images maintained and distributed by Bitnami (Broadcom). Camunda does not build or control these upstream images.
+
+Key points to be aware of:
+
+- **Image availability:** The Bitnami open-source images were moved to a legacy repository in August 2025 and no longer receive updates. Camunda provides access to Bitnami Premium images for Enterprise customers as a transitional measure.
+- **Base OS dependency:** The current Bitnami images are built on Debian 12 ("Bookworm"). The subcharts and their Helm chart templates are designed around this Debian-based image structure. Changes to the upstream base OS or image format by Bitnami could require Helm chart adjustments that may not align with Camunda's release cycle.
+- **Third-party control:** Decisions about image availability, base OS selection, and update cadence are made by Bitnami (Broadcom). Camunda facilitates access to these images but does not control the upstream roadmap.
+
+These dependencies are a key reason Camunda is moving to a deployment model where infrastructure services are managed independently. By migrating to Kubernetes operators or managed cloud services, you remove the dependency on third-party image supply chains and gain direct control over your infrastructure components.
 
 ## Environment-specific recommendations
 
@@ -210,6 +226,17 @@ When using Bitnami images, consider these constraints:
 - **CVE persistence:** OS-level CVEs may remain visible in scans
 - **Compliance requirements:** Near-zero CVE policies may not be achievable with these images
 - **Alternatives:** For strict security, consider managed services or custom minimal images
+
+## Migration timeline
+
+| Camunda version | Bitnami subchart status                                               |
+| --------------- | --------------------------------------------------------------------- |
+| 8.7 and earlier | Fully supported                                                       |
+| 8.8             | Functional; production use discouraged for new deployments            |
+| 8.9             | **Current version** — Deprecated; disabled by default in new installs |
+| 8.10            | **Removed** — subcharts are not available in Helm chart `15.x`        |
+
+Migrate to [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed cloud services before upgrading to 8.10. See [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for the full guide.
 
 ## Compatibility note
 
