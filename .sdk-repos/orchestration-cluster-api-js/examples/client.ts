@@ -66,6 +66,25 @@ async function getTopologyExample() {
 }
 //#endregion GetTopology
 
+//#region ChangeClusterMode
+async function changeClusterModeExample() {
+  const camunda = createCamundaClient();
+
+  // Transition the cluster into recovery mode. Pass `dryRun: true` to validate
+  // the request and inspect the resulting plan without applying it. Omit it (or
+  // set it to false) to actually trigger the transition.
+  const change = await camunda.changeClusterMode({
+    mode: 'RECOVERING',
+    dryRun: true,
+  });
+
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const op of change.plannedChanges) {
+    console.log(`  ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
+  }
+}
+//#endregion ChangeClusterMode
+
 //#region ResultClient
 async function resultClientExample() {
   const camunda = createCamundaResultClient({
@@ -182,6 +201,7 @@ void createClientExample;
 void createClientWithConfigExample;
 void createClientOAuthExample;
 void getTopologyExample;
+void changeClusterModeExample;
 void resultClientExample;
 void customFetchExample;
 void configExample;
