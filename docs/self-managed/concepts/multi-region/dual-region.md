@@ -193,6 +193,8 @@ Zeebe creates partitions in a [round-robin fashion](/components/zeebe/technical-
 
 This numbering and the round-robin partition distribution assures the even replication across the two regions.
 
+This parity-based numbering applies to dual-region setups only. For new deployments that need three or more zones, or finer control over where partition leaders run, see [zone-aware clusters](./zone-aware-clusters.md), which identify brokers by named zones instead.
+
 #### Scaling Zeebe cluster
 
 Follow the [Cluster Scaling steps](../../components/orchestration-cluster/zeebe/operations/cluster-scaling.md) respecting the [Zeebe cluster configuration](#zeebe-cluster-configuration).
