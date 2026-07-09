@@ -208,28 +208,6 @@ Upgrading from a trial to a paid plan automatically enables Optimize, with no ma
 
 ### Orchestration Cluster
 
-#### New RDBMS version support
-
-<!-- https://github.com/camunda/product-hub/issues/3589 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-Camunda 8.10 adds support for new relational database versions. Operators running self-managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
-
-New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, MariaDB 12.3, and Microsoft SQL Server 2025.
-
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
-
-#### Zone-aware partition placement
-
-<!-- https://github.com/camunda/product-hub/issues/3618 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-Camunda 8.10 introduces region awareness to the Orchestration Cluster. Operators declare which region each broker belongs to using a topology label, and the engine uses those declarations to distribute partition replicas across regions — ensuring no single region holds a quorum for any partition. Leader election priorities respect region boundaries, preferring region-local leaders under normal conditions and adjusting automatically when a region becomes unavailable. The same mechanism extends to availability zone or datacenter isolation using the same configuration.
-
-<p class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</p>
-
 #### Async replication support for RDBMS secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/3585 -->
@@ -249,6 +227,18 @@ Camunda 8.10 adds first-class support for asynchronously replicated relational d
 Camunda 8.10 adds an official dual-region reference architecture for running the Orchestration Cluster and Connectors on AWS ECS with an RDBMS secondary storage such as Aurora Global Database. The documentation covers the recommended topology, exporter configuration, and RDBMS replication setup, and includes step-by-step failover and failback procedures for active-active and active-passive two-region ECS environments.
 
 <p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
+
+#### New RDBMS version support
+
+<!-- https://github.com/camunda/product-hub/issues/3589 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 adds support for new relational database versions. Operators running self-managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
+
+New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, MariaDB 12.3, and Microsoft SQL Server 2025.
+
+<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
 #### Physical tenant support
 
@@ -274,6 +264,16 @@ Camunda 8.10 introduces physical tenant support, enabling infrastructure-level i
 You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
 
 <p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
+
+#### Zone-aware partition placement
+
+<!-- https://github.com/camunda/product-hub/issues/3618 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 introduces region awareness to the Orchestration Cluster. Operators declare which region each broker belongs to using a topology label, and the engine uses those declarations to distribute partition replicas across regions — ensuring no single region holds a quorum for any partition. Leader election priorities respect region boundaries, preferring region-local leaders under normal conditions and adjusting automatically when a region becomes unavailable. The same mechanism extends to availability zone or datacenter isolation using the same configuration.
+
+<p class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</p>
 
 ### Helm chart deployment
 
