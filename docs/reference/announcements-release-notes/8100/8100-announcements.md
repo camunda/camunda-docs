@@ -143,11 +143,11 @@ Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
 </div>
 <div className="release-announcement-content">
 
-#### Elasticsearch 9.3 no longer supported
+#### Elasticsearch 9.2 and 9.3 no longer supported
 
 Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.4. Supported Elasticsearch versions are now 8.19+ and 9.4+.
 
-- Upgrade Elasticsearch 9.3 clusters to 9.4 or later before moving to Camunda 8.10.
+- Upgrade Elasticsearch 9.2 or 9.3 clusters to 9.4 or later before moving to Camunda 8.10.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
