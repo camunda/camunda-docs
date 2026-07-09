@@ -190,7 +190,7 @@ Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-saas/authe
 
 <TabItem value='self-managed'>
 
-In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance. There is no `audience`, and the Camunda Hub API is served from your own installation. The example URLs below use the local defaults (`http://localhost:8088` for the API). In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation:
+In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance, and the Camunda Hub API is served from your own installation. The example URLs below use the local defaults (`http://localhost:8088` for the API). In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation:
 
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
@@ -199,7 +199,7 @@ export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/pr
 export CAMUNDA_HUB_REST_URL="http://localhost:8088"
 ```
 
-Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions.
+Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions. Authorizing the application for the Camunda Hub API also adds the `web-modeler-public-api` audience the token needs, so no `audience` parameter is required in the token request.
 
 </TabItem>
 </Tabs>
