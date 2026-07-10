@@ -164,7 +164,7 @@ csap setup [options]
 | `--btpRoute`     | string | (For `btp-plugin` or `all`) Specifies the BTP route to reach the plugin. This is SAP/BTP specific.    | `camunda-btp-plugin.cfapps.eu10-004.hana.ondemand.com` |
 | `--btpPluginBranch` | string | (Optional, for `btp-plugin` or `all`) Specifies the Git branch to clone the BTP plugin from. Useful for testing and PR development scenarios. | `main`                                                 |
 | `--clusterId`    | string | Specifies the Camunda cluster ID.                                                                     | (Prompted if not provided)                             |
-| `--region`       | string | Specifies the Camunda cluster Region.                                                                 | `bru-2`                                                |
+| `--region`       | string | Specifies the Camunda cluster region.                                                                 | `bru-2`                                                |
 | `--clientId`     | string | Specifies the Camunda API client OAuth2 client ID.                                                    | (Prompted if not provided)                             |
 | `--clientSecret` | string | Specifies the Camunda API client OAuth2 client secret.                                                | (Prompted if not provided)                             |
 | `--to`           | string | Target directory for setup artifacts                                                                  | os-dependent `tmp` directory                           |
