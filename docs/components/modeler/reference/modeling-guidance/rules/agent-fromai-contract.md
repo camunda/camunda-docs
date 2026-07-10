@@ -46,6 +46,10 @@ To set it, select the ad-hoc sub-process, open the **Extension properties** sect
 </bpmn:adHocSubProcess>
 ```
 
+If this tool isn't meant to be agent-driven, the other fix is to remove the `fromAi()` call instead of marking the sub-process.
+
+Clicking this report in the Problems panel selects the tool task, not the ad-hoc sub-process. The property to add is on the sub-process, so select it yourself in the diagram; the Problems panel does not navigate there for you.
+
 ## References
 
 - [AI Agent tool definitions](../../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
