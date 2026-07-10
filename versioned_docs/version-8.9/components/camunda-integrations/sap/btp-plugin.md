@@ -239,8 +239,9 @@ Create a Camunda User Task for the completion step and configure it as follows:
 1. Create a user task to represent the completion step.
 2. Set **Implementation type** to `Camunda user task`.
 3. Add a task listener with:
-  - **Event type**: `Creating`
-  - **Listener type**: `sap-tl-completing-success`
+
+- **Event type**: `Creating`
+- **Listener type**: `sap-tl-completing-success`
 
 The `sap-tl-completing-success` listener tells the BTP plugin that the form flow has completed successfully and allows the process to move forward.
 
