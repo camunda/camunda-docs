@@ -77,6 +77,10 @@ Verify partition distribution after scaling by calling the endpoints in [dry run
 
 #### 2.a Scale brokers only
 
+:::note
+Clusters configured with the `FIXED` partitioning scheme (`zeebe.broker.experimental.partitioning.scheme: FIXED`) do not support broker scaling. Scaling requests are rejected for these clusters. To scale a cluster using fixed partitioning, first switch to a supported partitioning scheme.
+:::
+
 Run the following to send the request to the Zeebe Gateway:
 
 ```
@@ -646,7 +650,7 @@ OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda
 This API lets you reconfigure a cluster by adding or removing brokers, adding partitions, or changing the `replicationFactor`. You can use this instead of the Scale API.
 
 :::note
-This endpoint does not respect the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. When used, partitions are redistributed using the `ROUND_ROBIN` strategy.
+This endpoint does not support clusters using the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. Scaling requests are rejected for clusters with fixed partition distribution. To scale such a cluster, switch to a supported partitioning scheme first.
 :::
 
 #### Request
@@ -733,7 +737,7 @@ See also the [Reconfiguration API](#reconfiguration-api).
 Use this endpoint to scale a cluster up or down by changing the cluster size and redistributing partitions.
 
 :::note
-This endpoint does not respect the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. When used, partitions are redistributed using the `ROUND_ROBIN` strategy.
+This endpoint does not support clusters using the fixed partitioning scheme configured with `zeebe.broker.experimental.partitioning`. Scaling requests are rejected for clusters with fixed partition distribution. To scale such a cluster, switch to a supported partitioning scheme first.
 :::
 
 #### Request
