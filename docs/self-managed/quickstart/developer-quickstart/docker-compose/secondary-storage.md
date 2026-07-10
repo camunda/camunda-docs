@@ -11,34 +11,48 @@ import TabItem from "@theme/TabItem";
 
 Use this page to configure secondary storage for the Orchestration Cluster in the Docker Compose quickstart.
 
-## Configure secondary storage for the Orchestration Cluster
+## Choose a database configuration path
 
-The lightweight `docker-compose.yaml` starts the Orchestration Cluster with Elasticsearch as secondary storage. To test another backend, add a `docker-compose.override.yaml` file next to the extracted Compose files and override the `camunda` service there.
+Camunda 8.10 uses different application configuration files for the lightweight and full Docker Compose setups.
 
-The full `docker-compose-full.yaml` configuration already includes PostgreSQL for Management Identity and Web Modeler. That database is separate from the Orchestration Cluster secondary storage. If you want the Orchestration Cluster itself to use RDBMS, configure the `camunda` service as shown in the examples below.
+| Setup                             | Default secondary storage | Select another backend                                                                                                                                                                 |
+| :-------------------------------- | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lightweight `docker-compose.yaml` | File-based H2             | Set `ORCHESTRATION_CONFIG_FILE` to a file from `configuration/`, then edit that file for your database connection.                                                                     |
+| Full `docker-compose-full.yaml`   | File-based H2             | Replace the `camunda.data.secondary-storage` settings in `.orchestration/application.yaml` with the matching block from the file in `configuration/`, then edit the connection values. |
 
-Use this workflow for each example:
+The full setup also requires an external Elasticsearch instance for Optimize. The PostgreSQL containers in the full setup store Management Identity and Web Modeler data; they do not store Orchestration Cluster data.
 
-1. Create `docker-compose.override.yaml` in the extracted distribution directory.
-1. Copy the backend-specific example into that file.
-1. If the backend requires an external JDBC driver, place the driver JAR directly in `./driver-lib` and keep the `./driver-lib:/driver-lib` volume mount from the example.
-1. Start the updated stack with the command shown below the example.
+:::warning
+Do not replace `.orchestration/application.yaml` in the full setup with a file from `configuration/`. The files in `configuration/` use the lightweight setup's Basic authentication settings. Replacing the full file removes its OpenID Connect (OIDC) and component configuration.
+:::
+
+Use this workflow for each backend:
+
+1. Select the matching application file and database service from the table below.
+1. For the lightweight setup, edit the selected `configuration/application-<database>.yaml` file and set `ORCHESTRATION_CONFIG_FILE` to its filename.
+1. For the full setup, replace the `camunda.data.secondary-storage` block in `.orchestration/application.yaml` with the block from the selected file and edit the copied values there.
+1. Create `docker-compose.override.yaml` in the extracted distribution directory and copy the matching database service example into it.
+1. If the backend requires an external JDBC driver, place the driver JAR directly in `driver-lib/`.
+1. Start the setup with the command shown for that backend.
+
+| Backend              | Application file              | Hostname from the override | JDBC driver                                        |
+| :------------------- | :---------------------------- | :------------------------- | :------------------------------------------------- |
+| H2                   | `application-h2.yaml`         | Not applicable             | Included                                           |
+| PostgreSQL           | `application-postgresql.yaml` | `postgres-secondary`       | Included                                           |
+| MariaDB              | `application-mariadb.yaml`    | `mariadb-secondary`        | Add the MariaDB Connector/J JAR to `driver-lib/`   |
+| MySQL                | `application-mysql.yaml`      | `mysql-secondary`          | Add the MySQL Connector/J JAR to `driver-lib/`     |
+| Oracle               | `application-oracle.yaml`     | `oracle-secondary`         | Add the Oracle JDBC driver JAR to `driver-lib/`    |
+| Microsoft SQL Server | `application-mssql.yaml`      | `mssql-secondary`          | Add the Microsoft JDBC Driver JAR to `driver-lib/` |
+
+When the database runs from `docker-compose.override.yaml`, replace `localhost` in the selected JDBC URL with the hostname shown in the table. The MySQL file uses host port `3307` by default; container-to-container traffic uses MySQL port `3306` instead.
 
 :::note
 Camunda configures the built-in exporter automatically from `camunda.data.secondary-storage.*`. You do not need to add a separate exporter class for the standard Docker Compose quickstart.
 :::
 
-:::note
-Some existing pages still use the legacy environment variable prefix `CAMUNDA_DATA_SECONDARYSTORAGE_*`. The examples on this page use `CAMUNDA_DATA_SECONDARY_STORAGE_*` consistently.
-:::
+### Run with RDBMS secondary storage
 
-### Use RDBMS secondary storage
-
-These examples switch the Orchestration Cluster from Elasticsearch to RDBMS. They are suitable for local development and evaluation. PostgreSQL and H2 are the simplest starting points. MariaDB and SQL Server are also bundled in the image. MySQL and Oracle require you to provide the JDBC driver.
-
-:::note
-The Orchestration Cluster supports RDBMS as secondary storage. Operate support on RDBMS is still limited in 8.9-alpha3. Before you use these examples beyond local development, review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms).
-:::
+The following examples run each supported RDBMS backend as a separate Docker Compose service. Use them for local development and evaluation. Review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#scope-and-applicability) before you plan another deployment type.
 
 <Tabs groupId="docker-compose-rdbms" defaultValue="postgresql" values={[
 {label: 'PostgreSQL', value: 'postgresql'},
@@ -50,206 +64,231 @@ The Orchestration Cluster supports RDBMS as secondary storage. Operate support o
 ]}>
 <TabItem value="postgresql">
 
+Set the JDBC URL in the application configuration to `jdbc:postgresql://postgres-secondary:5432/camunda_secondary`.
+
 ```yaml
 services:
-  camunda:
-    environment:
-      CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_DATABASEVENDORID: postgresql
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:postgresql://postgres:5432/camunda_secondary
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: camunda
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: camunda
+  orchestration:
     depends_on:
-      - postgres
+      - postgres-secondary
+    networks:
+      - secondary-storage
 
-  postgres:
+  postgres-secondary:
     image: postgres:16
     environment:
       POSTGRES_DB: camunda_secondary
       POSTGRES_USER: camunda
       POSTGRES_PASSWORD: camunda
-    ports:
-      - "5432:5432"
     volumes:
       - postgres-secondary-data:/var/lib/postgresql/data
+    networks:
+      - secondary-storage
 
 volumes:
   postgres-secondary-data:
+
+networks:
+  secondary-storage:
 ```
 
 ```shell
-docker compose up -d camunda postgres
+# Lightweight setup
+ORCHESTRATION_CONFIG_FILE=application-postgresql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full setup
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
 
 </TabItem>
 <TabItem value="mariadb">
 
+Set the JDBC URL in the application configuration to `jdbc:mariadb://mariadb-secondary:3306/camunda_secondary?serverTimezone=UTC`.
+
 ```yaml
 services:
-  camunda:
-    environment:
-      CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_DATABASEVENDORID: mariadb
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:mariadb://mariadb:3306/camunda_secondary?serverTimezone=UTC
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: camunda
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: camunda
+  orchestration:
     depends_on:
-      - mariadb
+      - mariadb-secondary
+    volumes:
+      - ./driver-lib:/driver-lib:ro
+    networks:
+      - secondary-storage
 
-  mariadb:
+  mariadb-secondary:
     image: mariadb:11.4
     environment:
       MARIADB_DATABASE: camunda_secondary
       MARIADB_USER: camunda
       MARIADB_PASSWORD: camunda
       MARIADB_ROOT_PASSWORD: rootcamunda
-    ports:
-      - "3306:3306"
     volumes:
       - mariadb-secondary-data:/var/lib/mysql
+    networks:
+      - secondary-storage
 
 volumes:
   mariadb-secondary-data:
+
+networks:
+  secondary-storage:
 ```
 
 ```shell
-docker compose up -d camunda mariadb
+# Lightweight setup
+ORCHESTRATION_CONFIG_FILE=application-mariadb.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full setup
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
+
+Place the MariaDB Connector/J JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="mysql">
 
+Set the JDBC URL in the application configuration to `jdbc:mysql://mysql-secondary:3306/camunda_secondary?serverTimezone=UTC`.
+
 ```yaml
 services:
-  camunda:
-    environment:
-      CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_DATABASEVENDORID: mysql
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:mysql://mysql:3306/camunda_secondary?serverTimezone=UTC
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: camunda
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: camunda
+  orchestration:
     depends_on:
-      - mysql
+      - mysql-secondary
     volumes:
-      - ./driver-lib:/driver-lib
+      - ./driver-lib:/driver-lib:ro
+    networks:
+      - secondary-storage
 
-  mysql:
+  mysql-secondary:
     image: mysql:9.7
     environment:
       MYSQL_DATABASE: camunda_secondary
       MYSQL_USER: camunda
       MYSQL_PASSWORD: camunda
       MYSQL_ROOT_PASSWORD: rootcamunda
-    ports:
-      - "3306:3306"
     volumes:
       - mysql-secondary-data:/var/lib/mysql
+    networks:
+      - secondary-storage
 
 volumes:
   mysql-secondary-data:
+
+networks:
+  secondary-storage:
 ```
 
 ```shell
-docker compose up -d camunda mysql
+# Lightweight setup
+ORCHESTRATION_CONFIG_FILE=application-mysql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full setup
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
 
-Place the MySQL Connector/J JAR directly in `./driver-lib` before you start the stack.
+Place the MySQL Connector/J JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="oracle">
 
+Set the JDBC URL in the application configuration to `jdbc:oracle:thin:@//oracle-secondary:1521/FREEPDB1`.
+
 ```yaml
 services:
-  camunda:
-    environment:
-      CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_DATABASEVENDORID: oracle
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:oracle:thin:@oracle:1521/FREEPDB1
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: camunda
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: camunda
+  orchestration:
     depends_on:
-      - oracle
+      - oracle-secondary
     volumes:
-      - ./driver-lib:/driver-lib
+      - ./driver-lib:/driver-lib:ro
+    networks:
+      - secondary-storage
 
-  oracle:
+  oracle-secondary:
     image: gvenzl/oracle-free:23-slim
     environment:
       ORACLE_PASSWORD: oracle
       APP_USER: camunda
       APP_USER_PASSWORD: camunda
-    ports:
-      - "1521:1521"
     volumes:
       - oracle-secondary-data:/opt/oracle/oradata
+    networks:
+      - secondary-storage
 
 volumes:
   oracle-secondary-data:
+
+networks:
+  secondary-storage:
 ```
 
 ```shell
-docker compose up -d camunda oracle
+# Lightweight setup
+ORCHESTRATION_CONFIG_FILE=application-oracle.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full setup
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
 
-Place the Oracle JDBC driver JAR directly in `./driver-lib` before you start the stack.
+Place the Oracle JDBC driver JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="mssql">
 
+Set the JDBC URL in the application configuration to `jdbc:sqlserver://mssql-secondary:1433;databaseName=camunda_secondary;encrypt=false`.
+
 ```yaml
 services:
-  camunda:
-    environment:
-      CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_DATABASEVENDORID: mssql
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:sqlserver://mssql:1433;databaseName=camunda_secondary;encrypt=false
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: sa
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: Camunda123!
+  orchestration:
     depends_on:
-      - mssql
+      - mssql-secondary
+    volumes:
+      - ./driver-lib:/driver-lib:ro
+    networks:
+      - secondary-storage
 
-  mssql:
+  mssql-secondary:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: Camunda123!
       MSSQL_PID: Developer
-    ports:
-      - "1433:1433"
     volumes:
       - mssql-secondary-data:/var/opt/mssql
+    networks:
+      - secondary-storage
 
 volumes:
   mssql-secondary-data:
+
+networks:
+  secondary-storage:
 ```
 
 ```shell
-docker compose up -d mssql
-docker compose exec mssql /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
-docker compose up -d camunda
+# Lightweight setup
+docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d mssql-secondary
+docker compose -f docker-compose.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
+ORCHESTRATION_CONFIG_FILE=application-mssql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full setup
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d mssql-secondary
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
+
+Place the Microsoft JDBC Driver JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="h2">
 
-```yaml
-services:
-  camunda:
-    environment:
-      CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: rdbms
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_DATABASEVENDORID: h2
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL: jdbc:h2:file:./camunda-data/h2db
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME: sa
-      CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD: ""
-    volumes:
-      - h2-secondary-data:/usr/local/camunda/camunda-data
-
-volumes:
-  h2-secondary-data:
-```
+H2 is the default secondary storage backend in both application configuration files. You don't need a `docker-compose.override.yaml` file.
 
 ```shell
-docker compose up -d camunda
+# Lightweight setup
+docker compose up -d
+
+# Full setup
+docker compose -f docker-compose-full.yaml up -d
 ```
 
 Use H2 only for development, testing, and evaluation. It is not a production backend.
@@ -259,7 +298,11 @@ Use H2 only for development, testing, and evaluation. It is not a production bac
 
 ### Switch between RDBMS, Elasticsearch, and OpenSearch
 
-To switch back from RDBMS to a document-store backend, change the `CAMUNDA_DATA_SECONDARY_STORAGE_TYPE` value and keep only the backend-specific connection settings you need.
+For a document-store backend, add the backend settings to `docker-compose.override.yaml`. The environment variables override the secondary storage settings in either application configuration file.
+
+:::note
+These examples change the Orchestration Cluster secondary storage only. In the full setup, Optimize always requires Elasticsearch. The Elasticsearch example can serve both Orchestration and Optimize. If Orchestration uses OpenSearch, configure a separate Elasticsearch endpoint for Optimize in `.env`.
+:::
 
 <Tabs groupId="docker-compose-docstore" defaultValue="elasticsearch" values={[
 {label: 'Elasticsearch', value: 'elasticsearch'},
@@ -269,69 +312,99 @@ To switch back from RDBMS to a document-store backend, change the `CAMUNDA_DATA_
 
 ```yaml
 services:
-  camunda:
+  orchestration:
     environment:
       CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: elasticsearch
-      CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_URL: http://elasticsearch:9200
+      CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_URL: http://elasticsearch-secondary:9200
       CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_USERNAME: ""
       CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_PASSWORD: ""
+    depends_on:
+      - elasticsearch-secondary
+    networks:
+      - secondary-storage
+
+  elasticsearch-secondary:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.19.11
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-secondary-data:/usr/share/elasticsearch/data
+    networks:
+      - secondary-storage
+
+volumes:
+  elasticsearch-secondary-data:
+
+networks:
+  secondary-storage:
 ```
 
 ```shell
-docker compose up -d camunda elasticsearch
-```
+# Lightweight setup
+docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
 
-This matches the default lightweight quickstart backend.
+# Full setup
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
+```
 
 </TabItem>
 <TabItem value="opensearch">
 
 ```yaml
 services:
-  camunda:
+  orchestration:
     environment:
       CAMUNDA_DATA_SECONDARY_STORAGE_TYPE: opensearch
-      CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL: http://opensearch:9200
+      CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL: http://opensearch-secondary:9200
     depends_on:
-      - opensearch
+      - opensearch-secondary
+    networks:
+      - secondary-storage
 
-  opensearch:
+  opensearch-secondary:
     image: opensearchproject/opensearch:2.19.3
     environment:
       discovery.type: single-node
       OPENSEARCH_JAVA_OPTS: -Xms512m -Xmx512m
       DISABLE_SECURITY_PLUGIN: "true"
-    ports:
-      - "9200:9200"
-      - "9600:9600"
     volumes:
       - opensearch-secondary-data:/usr/share/opensearch/data
+    networks:
+      - secondary-storage
 
 volumes:
   opensearch-secondary-data:
+
+networks:
+  secondary-storage:
 ```
 
 ```shell
-docker compose up -d camunda opensearch
+# Lightweight setup
+docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
+
+# Full setup, with a separate Elasticsearch endpoint configured in .env
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
 
 </TabItem>
 </Tabs>
 
-### Secondary storage environment variables
+### Document-store environment variables
 
-Use these variables when you adapt the examples to your own local setup:
+Use these variables when you adapt the Elasticsearch and OpenSearch examples:
 
-| Variable                                                | Use                                                                                                                                    |
-| :------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_TYPE`                   | Selects the backend family: `rdbms`, `elasticsearch`, or `opensearch`.                                                                 |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL`              | JDBC connection string for the relational database used as secondary storage.                                                          |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME`         | Database username for RDBMS secondary storage.                                                                                         |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD`         | Database password for RDBMS secondary storage.                                                                                         |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_DATABASEVENDORID` | Optional vendor override. Use `postgresql`, `mariadb`, `mysql`, `oracle`, `mssql`, or `h2` when you want to make the backend explicit. |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_AUTO_DDL`         | Controls whether Camunda creates and updates the schema automatically. The default is `true`.                                          |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_URL`      | Endpoint for Elasticsearch when `type=elasticsearch`.                                                                                  |
-| `CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL`         | Endpoint for OpenSearch when `type=opensearch`.                                                                                        |
+| Variable                                                | Use                                                        |
+| :------------------------------------------------------ | :--------------------------------------------------------- |
+| `CAMUNDA_DATA_SECONDARY_STORAGE_TYPE`                   | Selects `elasticsearch` or `opensearch`.                   |
+| `CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_URL`      | Endpoint for Elasticsearch.                                |
+| `CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_USERNAME` | Username for Elasticsearch when authentication is enabled. |
+| `CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_PASSWORD` | Password for Elasticsearch when authentication is enabled. |
+| `CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL`         | Endpoint for OpenSearch.                                   |
 
 For additional secondary storage settings, see [Configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) and [Configure RDBMS for manual installations](/self-managed/deployment/manual/rdbms/configuration.md).
 
