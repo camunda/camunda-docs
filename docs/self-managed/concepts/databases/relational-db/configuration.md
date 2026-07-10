@@ -20,21 +20,11 @@ For a unified setup guide covering provisioning, topology decisions, driver mana
 
 ## Enable RDBMS as secondary storage
 
-To activate an RDBMS backend, configure two components:
-
-1. **Enable the RDBMS exporter in Zeebe**, which streams workflow data to the database.
-2. **Configure the application layer** (Operate, Tasklist, Identity, REST API) to use RDBMS for secondary storage.
+Set the `camunda.data.secondary-storage.type` property to `rdbms` to activate the full RDBMS backend in a single step. This automatically enables the RDBMS exporter, which streams workflow data to the database, and configures the application layer (Operate, Tasklist, Identity, REST API) to use RDBMS for secondary storage.
 
 Example configuration:
 
 ```yaml
-# Enable the RDBMS exporter in Zeebe
-zeebe:
-  broker:
-    exporters:
-      rdbms:
-        className: camunda.data.exporters.rdbms.className
-
 # Configure secondary storage for Camunda applications
 camunda:
   data:

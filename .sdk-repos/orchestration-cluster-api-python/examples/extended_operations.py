@@ -114,6 +114,23 @@ def get_process_instance_statistics_example(
 # endregion GetProcessInstanceStatistics
 
 
+# region GetProcessInstanceWaitStateStatistics
+def get_process_instance_wait_state_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_wait_state_statistics(
+        process_instance_key=process_instance_key,
+    )
+
+    for stat in result.items:
+        print(f"Element: {stat.element_id}, Waiting: {stat.waiting_count}")
+
+
+# endregion GetProcessInstanceWaitStateStatistics
+
+
 # region GetProcessInstanceSequenceFlows
 def get_process_instance_sequence_flows_example(
     process_instance_key: ProcessInstanceKey,

@@ -2230,7 +2230,10 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+          "Multi-region": [
+            "self-managed/concepts/multi-region/dual-region",
+            "self-managed/concepts/multi-region/zone-aware-clusters",
+          ],
         },
         "self-managed/operational-guides/data-purge",
         "self-managed/operational-guides/troubleshooting",
@@ -2424,6 +2427,7 @@ module.exports = {
                 "self-managed/components/optimize/configuration/history-cleanup",
                 "self-managed/components/optimize/configuration/localization",
                 "self-managed/components/optimize/configuration/object-variables",
+                "self-managed/components/optimize/configuration/optimize-export-filtering",
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy",
               ],

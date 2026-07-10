@@ -69,6 +69,7 @@ tags:
   - name: Message subscription
   - name: Process definition
   - name: Process instance
+  - name: Recovery
   - name: Resource
   - name: Role
   - name: Setup
@@ -303,6 +304,8 @@ paths:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1sequence-flows"
   /process-instances/{processInstanceKey}/statistics/element-instances:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1statistics~1element-instances"
+  /process-instances/{processInstanceKey}/statistics/wait-states:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1statistics~1wait-states"
   /resources/search:
     $ref: "deployments.yaml#/paths/~1resources~1search"
   /resources/{resourceKey}:
@@ -373,6 +376,10 @@ paths:
     $ref: "tenants.yaml#/paths/~1tenants~1{tenantId}~1users~1{username}"
   /topology:
     $ref: "cluster.yaml#/paths/~1topology"
+  /mode:
+    $ref: "cluster.yaml#/paths/~1mode"
+  /restore:
+    $ref: "cluster.yaml#/paths/~1restore"
   /users:
     $ref: "users.yaml#/paths/~1users"
   /users/search:

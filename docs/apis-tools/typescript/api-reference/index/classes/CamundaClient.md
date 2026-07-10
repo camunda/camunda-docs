@@ -5986,6 +5986,72 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### getProcessInstanceWaitStateStatistics()
+
+```ts
+getProcessInstanceWaitStateStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessInstanceWaitStateStatisticsQueryResult>;
+```
+
+Get wait state statistics
+
+Get statistics about waiting element instances by the process instance key, grouped by element id. *
+
+#### Parameters
+
+##### input
+
+[`getProcessInstanceWaitStateStatisticsInput`](../type-aliases/getProcessInstanceWaitStateStatisticsInput.md)
+
+##### consistencyManagement
+
+[`getProcessInstanceWaitStateStatisticsConsistency`](../type-aliases/getProcessInstanceWaitStateStatisticsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceWaitStateStatisticsQueryResult`](../type-aliases/ProcessInstanceWaitStateStatisticsQueryResult.md)\>
+
+#### Example
+
+**Get process instance wait state statistics**
+
+```ts
+async function getProcessInstanceWaitStateStatisticsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceWaitStateStatistics(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Element ${stat.elementId}: waiting=${stat.waitingCount}`);
+  }
+}
+```
+
+#### Operation Id
+
+getProcessInstanceWaitStateStatistics
+
+#### Tags
+
+Process instance
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### getResource()
 
 ```ts
