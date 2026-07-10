@@ -228,7 +228,7 @@ After failover, a reconciliation path replays missing events from the Zeebe log 
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 adds a dual-region reference architecture for running the Orchestration Cluster and Connectors on AWS ECS with an RDBMS secondary storage such as Aurora Global Database.
+Camunda 8.10 adds a dual-region reference architecture for running the Orchestration Cluster and Connectors on AWS ECS with AWS Aurora as RDBMS secondary storage.
 
 The documentation covers the recommended topology, exporter configuration, and RDBMS replication setup, and includes step-by-step failover and failback procedures for active-active and active-passive two-region ECS environments.
 
@@ -257,7 +257,7 @@ Camunda 8.10 introduces physical tenant support, enabling strong isolation acros
 - The REST API and gRPC API are exposed per physical tenant, with `CamundaClient` supporting physical tenant selection in the gRPC API.
 - Web apps (Operate, Tasklist, and Admin) are accessible per physical tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
 - Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual physical tenants.
-- The document store and RDBMS secondary storage provide isolated access per physical tenant.
+- RDBMS secondary storage provides isolated access per physical tenant. Elasticsearch and OpenSearch support is planned for 8.10.
 
 <p class="link-arrow">[Physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
