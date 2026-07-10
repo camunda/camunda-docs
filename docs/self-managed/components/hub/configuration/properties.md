@@ -671,7 +671,7 @@ Camunda Hub supports syncing files via [Git Sync](/components/hub/workspace/mana
 ```yaml
 camunda.modeler:
   gitsync:
-    max-files: 50 # default
+    max-files: 100 # default
     max-in-memory-size: 4MB # default
     github:
       base-url: https://api.github.com # default
@@ -691,7 +691,7 @@ camunda.modeler:
 
 | Provider      | Environment variable                                | Description                                                                                                                   | Default value                                 |
 | ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                          |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `100`                                         |
 | All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
 | GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
 | GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |
