@@ -214,7 +214,7 @@ Upgrading from a trial to a paid plan automatically enables Optimize, with no ma
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 adds first-class support for asynchronously replicated relational databases as secondary storage:
+Camunda 8.10 adds first-class support for asynchronously replicated relational databases as secondary storage, including AWS Aurora and PostgreSQL.
 
 The exporter layer detects when the active RDBMS endpoint is unreachable, including during a standby promotion or cross-region failover, and pauses export operations automatically rather than entering an error state. Export position is preserved in the Zeebe log and replayed on reconnection.
 
@@ -252,12 +252,11 @@ New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, Maria
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 introduces physical tenant support, enabling strong isolation across tenants.
+Camunda 8.10 introduces physical tenant support for RDBMS, enabling strong isolation across tenants. Elasticsearch and OpenSearch support is planned for 8.10.
 
 - The REST API and gRPC API are exposed per physical tenant, with `CamundaClient` supporting physical tenant selection in the gRPC API.
 - Web apps (Operate, Tasklist, and Admin) are accessible per physical tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
 - Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual physical tenants.
-- The document store and RDBMS secondary storage provide isolated access per physical tenant.
 
 <p class="link-arrow">[Physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
