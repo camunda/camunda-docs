@@ -165,8 +165,6 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 }
 ```
 
-The advantage over Orchestration Cluster REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.
-
 ## Process design in Camunda
 
 When modeling a process for the BTP plugin, choose one of the following variants.
