@@ -62,7 +62,7 @@ To permanently remove an asset from the catalog, use the Camunda Hub API delete 
 DELETE <camunda-hub-api-base-url>/api/v2/catalog/assets/{assetKey}
 ```
 
-For the full request and response schema, see the **Delete a catalog asset** reference for [SaaS](/apis-tools/hub-api-saas/specifications/delete-catalog-asset.api.mdx) or [Self-Managed](/apis-tools/hub-api-sm/specifications/delete-catalog-asset.api.mdx). Your API token must have the `delete` permission.
+For the full request and response schema, see the **Delete a catalog asset** reference for [SaaS](/apis-tools/hub-api-saas/specifications/delete-catalog-asset.api.mdx) or [Self-Managed](/apis-tools/hub-api-sm/specifications/delete-catalog-asset.api.mdx). Your API token must have the Web Modeler API `delete` permission.
 
 Deleting an asset removes it and all of its versions entirely:
 
