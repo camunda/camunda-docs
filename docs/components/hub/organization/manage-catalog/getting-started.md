@@ -33,7 +33,7 @@ This guide assumes you store your catalog assets in a single repository. If you 
 
 ## Use the example repository
 
-To get started, use the [example catalog repository](https://github.com/camunda/catalog-template). It contains:
+To get started, clone the [example catalog repository](https://github.com/camunda/catalog-template). It contains:
 
 - Placeholder element templates.
 - A ready-to-use [sync script](https://github.com/camunda/catalog-template/blob/main/scripts/sync-catalog.sh).
@@ -139,7 +139,7 @@ Always increment the `version` when you change an element template's content. Th
 
 ### Enforce version increments in CI
 
-Rather than relying on reviewers to catch a missing version bump, validate it automatically before the submission ever reaches the catalog. Add a check to your CI pipeline that compares each changed element template against its previous state and fails the pull request when the content changed but the `version` field did not increase.
+Instead of relying of reviewers to ensure the version is incremented for all modified assets, validate the version automatically before the submission ever reaches the catalog. Add a check to your CI pipeline that compares each changed element template against its previous state and fails the pull request when the content changed but the `version` field did not increase.
 
 The example repository includes a [version-check GitHub Actions workflow](https://github.com/camunda/catalog-template/blob/main/.github/workflows/check-versions.yml) that runs on every pull request, so a template change with a stale `version` is caught before it is merged and synced. You can bypass the check for intentional exceptions by adding the `skip-version-check` label to the pull request.
 

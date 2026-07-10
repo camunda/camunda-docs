@@ -52,7 +52,7 @@ To republish an unpublished asset:
 - Add the asset's directory back to the repository.
 - [Increment the element template's version](./getting-started.md#version-your-element-templates).
 
-If you forget to version the element template, you'll receive a `400` response.
+If you don't increment the element template's version, you'll receive a `400` response.
 
 ## Delete an asset
 
