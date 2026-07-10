@@ -252,7 +252,7 @@ New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, Maria
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 introduces physical tenant support, enabling infrastructure-level isolation across all cluster components:
+Camunda 8.10 introduces physical tenant support, enabling strong isolation across tenants.
 
 - The REST API and gRPC API are exposed per physical tenant, with `CamundaClient` supporting physical tenant selection in the gRPC API.
 - Web apps (Operate, Tasklist, and Admin) are accessible per physical tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
