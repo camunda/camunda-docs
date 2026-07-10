@@ -85,7 +85,7 @@ Operate and Tasklist store some data in the active region, as they write directl
 
 Two Kubernetes clusters are required for the Helm chart installation.
 
-Amazon OpenSearch is **not supported** in dual-region configurations.
+Amazon OpenSearch is supported in dual-region configurations. However, IRSA (IAM Roles for Service Accounts) authentication is not supported across two separate clusters — use Basic authentication instead.
 
 #### Network requirements
 

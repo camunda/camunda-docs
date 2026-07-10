@@ -138,7 +138,7 @@ The currently supported Camunda 8 Self-Managed components are:
 Two Kubernetes clusters are required for the Helm chart installation.
 
 :::note
-OpenSearch is **not supported** in dual-region configurations.
+OpenSearch is supported in dual-region configurations. However, IRSA (IAM Roles for Service Accounts) authentication is not supported across two separate clusters — use Basic authentication instead.
 :::
 
 :::note
