@@ -672,7 +672,7 @@ desired={<img src={Eight} alt="Desired state diagram" style={{border: 'none', tr
 
 This step involves redeploying the recreated region using the same values files from the initial deployment.
 
-The Helm command also disables Operate and Tasklist. These components will be re-enabled only after region recovery is complete. Keeping them disabled in the newly created region helps prevent data loss, as Operate and Tasklist may still rely on v1 APIs and functionality that are isolated to a single region. Disabling them also prevents user confusion, since no visible updates will appear for their actions while the exporters remain disabled in the following steps.
+The Helm command also disables Operate and Tasklist. These components will be re-enabled only after region recovery is complete. Disabling them prevents user confusion, since no visible updates will appear for their actions while the exporters remain disabled in the following steps.
 
 <Tabs groupId="clusters-types">
   <TabItem value="EKS" label="EKS">

@@ -14,6 +14,17 @@ paths:
         Adds a member to the workspace, or updates the role of an existing
         member. The member is identified by their email address.
       x-added-in-version: "0.1.0"
+      x-semantic-establishes:
+        kind: WorkspaceMemberMembership
+        shape: edge
+        identifiedBy:
+          - in: path
+            name: workspaceKey
+            semanticType: WorkspaceKey
+          - in: body
+            name: email
+            acceptsExternal: true
+            semanticType: MemberEmail
       tags:
         - Member
       parameters:
@@ -48,6 +59,15 @@ paths:
       summary: Remove a member
       description: Removes a member from the workspace.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: WorkspaceMemberMembership
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
+          email:
+            from: path
+            name: email
       tags:
         - Member
       parameters:
@@ -73,6 +93,12 @@ paths:
         Returns members matching the given search criteria. A workspace key
         filter is required — members cannot be searched across workspaces.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: body
+            name: filter.workspaceKey
       tags:
         - Member
       requestBody:
@@ -105,10 +131,19 @@ components:
       required: true
       description: The email address of the member.
       schema:
-        type: string
-        format: email
+        $ref: "#/components/schemas/MemberEmail"
 
   schemas:
+    # --- Identifier schemas ---
+
+    MemberEmail:
+      description: The email address identifying a member.
+      type: string
+      format: email
+      x-semantic-type: MemberEmail
+      x-semantic-client-minted: true
+      example: alice@example.com
+
     # --- Request schemas ---
 
     MemberCreateRequest:
@@ -123,8 +158,8 @@ components:
       properties:
         email:
           description: The email address of the member to add or update.
-          type: string
-          format: email
+          allOf:
+            - $ref: "#/components/schemas/MemberEmail"
         role:
           description: The role to assign to the member.
           allOf:
@@ -147,11 +182,12 @@ components:
       properties:
         workspaceKey:
           description: The unique key of the workspace the member belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
         email:
           description: The email address of the member.
-          type: string
-          format: email
+          allOf:
+            - $ref: "#/components/schemas/MemberEmail"
         name:
           description: The display name of the member, if known.
           type: string
@@ -220,6 +256,7 @@ components:
           description: >
             Filter by workspace key. Only the `$eq` operator is supported —
             members cannot be searched across workspaces.
+          x-semantic-type: WorkspaceKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         email:

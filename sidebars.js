@@ -2239,6 +2239,7 @@ module.exports = {
           items: [
             "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
+            "self-managed/concepts/multi-region/zone-aware-clusters",
           ],
         },
         "self-managed/operational-guides/data-purge",

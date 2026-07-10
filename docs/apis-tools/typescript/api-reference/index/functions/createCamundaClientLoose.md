@@ -4282,6 +4282,26 @@ getProcessInstanceStatisticsByError(...a): CancelablePromise<{
 \};
 \}\>
 
+### getProcessInstanceWaitStateStatistics()
+
+```ts
+getProcessInstanceWaitStateStatistics(...a): CancelablePromise<{
+  items: object[];
+}>;
+```
+
+#### Parameters
+
+##### a
+
+...\[`object`, `object`, `object`\]
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<\{
+`items`: `object`[];
+\}\>
+
 ### getResource()
 
 ```ts
