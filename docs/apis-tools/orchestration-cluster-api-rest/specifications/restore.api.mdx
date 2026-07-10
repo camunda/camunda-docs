@@ -1,0 +1,299 @@
+---
+id: restore
+title: "Restore from a backup"
+sidebar_label: "Restore from a backup"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Restore from a backup"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/restore"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (`from`/`to`) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "Describes a restore request. Provide either a list of backup IDs or a time range (`from`/`to`) that selects the backups to restore; the two are mutually exclusive.",
+          type: "object",
+          properties: {
+            from: {
+              description:
+                "The start of the time range to restore from, as an ISO 8601 timestamp.",
+              type: "string",
+              format: "date-time",
+              nullable: true,
+              example: "2024-01-01T10:00:00Z",
+            },
+            to: {
+              description:
+                "The end of the time range to restore from, as an ISO 8601 timestamp.",
+              type: "string",
+              format: "date-time",
+              nullable: true,
+              example: "2024-01-01T12:00:00Z",
+            },
+            backupIds: {
+              description:
+                "The IDs of the backups to restore from, one per partition.",
+              type: "array",
+              nullable: true,
+              items: { type: "integer", format: "int64" },
+              example: [100, 101],
+            },
+          },
+          title: "RestoreRequest",
+        },
+      },
+    },
+    required: true,
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description:
+        "The restore request was accepted; returns the planned cluster changes.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The planned changes resulting from a cluster mode transition request.",
+            type: "object",
+            required: ["changeId", "plannedChanges"],
+            properties: {
+              changeId: {
+                description:
+                  "The ID of the cluster change that was triggered by the request.",
+                type: "string",
+                example: "7",
+              },
+              plannedChanges: {
+                description:
+                  "The ordered list of operations that will be applied to complete the change.",
+                type: "array",
+                items: {
+                  description:
+                    "A single operation that is part of a cluster mode change.",
+                  type: "object",
+                  required: ["operation", "mode"],
+                  properties: {
+                    operation: {
+                      description: "The type of the operation.",
+                      type: "string",
+                      example: "ModeChangeOperation",
+                    },
+                    mode: {
+                      description:
+                        "The target mode of the operation, if applicable.",
+                      type: "string",
+                      nullable: true,
+                      example: "RECOVERING",
+                    },
+                  },
+                  title: "ClusterModeChangeOperation",
+                },
+              },
+            },
+            title: "ClusterModeChangeResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The cluster is not in recovery mode, so the restore cannot be accepted.",
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

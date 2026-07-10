@@ -44,7 +44,7 @@ The field to sort by.
 | ---------------- | ----------- |
 | `ProducedAt`     |             |
 | `HistoryItemKey` |             |
-| `Iteration`      |             |
+| `LoopIteration`  |             |
 
 ## AgentInstanceMessageContentTypeEnum
 
@@ -791,6 +791,7 @@ The state of the job.
 | `MIGRATED`        |             |
 | `PRIORITYUPDATED` |             |
 | `RETRIESUPDATED`  |             |
+| `TIMEOUTUPDATED`  |             |
 | `TIMEDOUT`        |             |
 
 ## MappingRuleSearchQuerySortRequestField

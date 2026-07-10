@@ -106,6 +106,21 @@ Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MySQL 9.7 now supported
+
+Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 9.7.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -313,6 +328,27 @@ Connectors change 1 description.
 </div> -->
 
 ## Data
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch and OpenSearch exporter defaults changed for Optimize mode and job records
+
+Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
+
+- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
+- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
+
+**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
+
+<p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
+<p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
