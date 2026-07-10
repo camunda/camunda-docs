@@ -69,6 +69,7 @@ tags:
   - name: Message subscription
   - name: Process definition
   - name: Process instance
+  - name: Recovery
   - name: Resource
   - name: Role
   - name: Setup
@@ -375,6 +376,10 @@ paths:
     $ref: "tenants.yaml#/paths/~1tenants~1{tenantId}~1users~1{username}"
   /topology:
     $ref: "cluster.yaml#/paths/~1topology"
+  /mode:
+    $ref: "cluster.yaml#/paths/~1mode"
+  /restore:
+    $ref: "cluster.yaml#/paths/~1restore"
   /users:
     $ref: "users.yaml#/paths/~1users"
   /users/search:

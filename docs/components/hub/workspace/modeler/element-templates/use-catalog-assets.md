@@ -16,7 +16,7 @@ You can narrow the list to find the right asset:
 - **Free-text search** matches against the asset name, short description, category name, and tag names (case-insensitive).
 - **Filter by category** to scope the list to a single area (for example, **Connectors** or **Human Tasks**).
 - **Filter by tags** to combine related assets across categories.
-- **Sort** by name, creation date, or last updated date.
+- **Sort** by **Newest** or by **Name (A–Z)**.
 
 Assets that were recently added or updated are highlighted so you can spot new templates at a glance. Only published assets appear in the catalog — unpublished assets aren't visible to you.
 

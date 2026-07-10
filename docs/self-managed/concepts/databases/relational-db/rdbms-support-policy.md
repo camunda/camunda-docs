@@ -30,7 +30,7 @@ The following relational databases are officially supported when used as an RDBM
 | PostgreSQL               | 15, 16, 17, 18          |
 | Amazon Aurora PostgreSQL | 15, 16, 17, 18          |
 | MariaDB                  | 10.11, 11.4, 11.8, 12.3 |
-| MySQL                    | 8.4                     |
+| MySQL                    | 8.4, 9.7                |
 | Microsoft SQL Server     | 2022, 2025              |
 | Oracle                   | 19c, 26ai               |
 | H2                       | 2.4                     |
@@ -135,7 +135,7 @@ The following databases require you to provide a compatible JDBC driver at runti
 | Database | Driver artifact                   | Tested version | Notes                                                                   |
 | :------- | :-------------------------------- | :------------- | :---------------------------------------------------------------------- |
 | Oracle   | `com.oracle.database.jdbc:ojdbc*` | 23.7.0.25.01   | Must be provided by you. May be OS/architecture-specific (amd64/arm64). |
-| MySQL    | `com.mysql:mysql-connector-j`     | 9.5.0          | Must be provided by you.                                                |
+| MySQL    | `com.mysql:mysql-connector-j`     | 9.7.0          | Must be provided by you.                                                |
 
 :::info
 Camunda validates driver compatibility in CI by testing against the oldest and newest supported database versions. A single driver version is expected to work across the supported database versions listed on this page.

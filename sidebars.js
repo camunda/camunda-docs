@@ -2230,7 +2230,10 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+          "Multi-region": [
+            "self-managed/concepts/multi-region/dual-region",
+            "self-managed/concepts/multi-region/zone-aware-clusters",
+          ],
         },
         "self-managed/operational-guides/data-purge",
         "self-managed/operational-guides/troubleshooting",
