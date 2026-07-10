@@ -81,14 +81,14 @@ kubectl -n "$NAMESPACE" create secret generic camunda-ca-bundle \
 Download the overlay (ships in the chart repo, not in the `helm repo` cache):
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.10/values-tls.yaml
+curl -fsSLO https://raw.githubusercontent.com/camunda/camunda-platform-helm/main/charts/camunda-platform-8.8/values-tls.yaml
 ```
 
 Install or upgrade with the overlay:
 
 ```bash
 helm upgrade --install camunda camunda/camunda-platform \
-  --version 15.x \
+  --version 13.x \
   --namespace "$NAMESPACE" \
   -f values-tls.yaml \
   -f your-values.yaml
@@ -289,9 +289,9 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 :::
 
-## Legacy: per-component JKS truststore (deprecated)
+## Legacy: per-component JKS truststore
 
-Deprecated as of chart 15.x. Affected fields:
+The per-component JKS truststore fields below remain fully supported in chart 13.x. `global.tls.caBundle` is the recommended alternative, since it configures CA trust for all components from a single PEM bundle. Fields:
 
 - `global.elasticsearch.tls.secret.existingSecret` / `existingSecretKey`
 - `global.opensearch.tls.secret.existingSecret` / `existingSecretKey`
@@ -302,7 +302,7 @@ Deprecated as of chart 15.x. Affected fields:
 - `optimize.database.elasticsearch.tls.secret.*`
 - `optimize.database.opensearch.tls.secret.*`
 
-If a legacy JKS field and `global.tls.caBundle` are both set, the legacy field takes precedence. To migrate:
+If a per-component JKS field and `global.tls.caBundle` are both set, the JKS field takes precedence. To switch to the single-bundle approach:
 
 1. Convert JKS to PEM:
    ```bash
@@ -347,4 +347,4 @@ for the full connection inventory.
 ## Related
 
 - [Helm chart TLS coverage matrix](https://github.com/camunda/camunda-platform-helm/blob/main/docs/tls-coverage-810.md) — per-connection support level
-- [Helm chart `values-tls.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.10/values-tls.yaml) — the overlay this guide describes
+- [Helm chart `values-tls.yaml`](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.8/values-tls.yaml) — the overlay this guide describes
