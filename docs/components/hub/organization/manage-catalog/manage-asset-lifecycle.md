@@ -45,6 +45,15 @@ Unpublishing is a catalog-level state that indicates the asset is no longer part
 Because unpublishing automatically deprecates the underlying element template, you don't need to manually set the `deprecated` property in the template to flag it as outdated; removing the asset from the submission is enough.
 :::
 
+## Republishing an unpublished asset
+
+To republish an unpublished asset:
+
+- Add the asset's directory back to the repository.
+- [Increment the element template's version](./getting-started.md#version-your-element-templates).
+
+If you forget to version the element template, you'll receive a `400` response.
+
 ## Delete an asset
 
 To permanently remove an asset from the catalog, use the Camunda Hub API delete endpoint:

@@ -106,6 +106,21 @@ Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MySQL 9.7 now supported
+
+Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 9.7.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -128,11 +143,11 @@ Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
 </div>
 <div className="release-announcement-content">
 
-#### Elasticsearch 9.2 no longer supported
+#### Elasticsearch 9.2 and 9.3 no longer supported
 
-Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.3. Supported Elasticsearch versions are now 8.19+ and 9.3+.
+Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.4. Supported Elasticsearch versions are now 8.19+ and 9.4+.
 
-- Upgrade Elasticsearch 9.2 clusters to 9.3 or later before moving to Camunda 8.10.
+- Upgrade Elasticsearch 9.2 or 9.3 clusters to 9.4 or later before moving to Camunda 8.10.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 

@@ -467,7 +467,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/AgentInstanceDefinition"
         metrics:
-          description: Aggregated metrics across all iterations of this agent instance.
+          description: Aggregated metrics across all loopIterations of this agent instance.
           allOf:
             - $ref: "#/components/schemas/AgentInstanceMetrics"
         limits:
@@ -783,11 +783,14 @@ components:
         jobLease:
           description: Opaque lease token received from the job activation response.
           type: string
-        iteration:
-          description: Sequential iteration number this item belongs to. Omit if not grouping items into iterations.
+        loopIteration:
+          description: |
+            The loopIteration this item belongs to. A loopIteration is one pass through the agent
+            feedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping
+            items by loopIteration.
           nullable: true
           allOf:
-            - $ref: "identifiers.yaml#/components/schemas/IterationId"
+            - $ref: "identifiers.yaml#/components/schemas/LoopIterationId"
         role:
           description: The role of this history item in the conversation.
           allOf:
@@ -837,7 +840,7 @@ components:
           enum:
             - producedAt
             - historyItemKey
-            - iteration
+            - loopIteration
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
     AgentInstanceHistorySearchQuery:
@@ -875,8 +878,8 @@ components:
           description: The key of the job activation that produced the history item.
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKeyFilterProperty"
-        iteration:
-          description: The iteration number.
+        loopIteration:
+          description: Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).
           allOf:
             - $ref: "filters.yaml#/components/schemas/IntegerFilterProperty"
         commitStatus:
@@ -911,7 +914,7 @@ components:
         - elementInstanceKey
         - jobKey
         - jobLease
-        - iteration
+        - loopIteration
         - role
         - content
         - toolCalls
@@ -938,11 +941,14 @@ components:
         jobLease:
           description: The lease token of the activation that produced this item.
           type: string
-        iteration:
-          description: The sequential iteration number this item belongs to. Null if not provided by the connector.
+        loopIteration:
+          description: |
+            The loopIteration this item belongs to. A loopIteration is one pass through the agent
+            feedback loop: one LLM call, its tool dispatches, and their results. Null if not provided
+            by the connector.
           nullable: true
           allOf:
-            - $ref: "identifiers.yaml#/components/schemas/IterationId"
+            - $ref: "identifiers.yaml#/components/schemas/LoopIterationId"
         role:
           description: The role of this history item in the conversation.
           allOf:
@@ -1036,7 +1042,11 @@ components:
     AgentInstanceObjectContent:
       type: object
       title: Object content
-      description: An arbitrary structured content block.
+      description: |
+        An arbitrary structured content block. Accepts any valid JSON value:
+        objects, arrays, numbers, booleans, or strings.
+        Use TEXT content for human-readable natural language;
+        use OBJECT content for machine-readable structured data.
       required:
         - contentType
         - object
@@ -1046,9 +1056,7 @@ components:
           type: string
           example: OBJECT
         object:
-          description: Arbitrary structured content.
-          type: object
-          additionalProperties: true
+          description: Arbitrary structured content — any valid JSON value (object, array, number, boolean, or string).
     AgentInstanceMessageContentTypeEnum:
       description: The content type discriminator for a history item content block.
       type: string
