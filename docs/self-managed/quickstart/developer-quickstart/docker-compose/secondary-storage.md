@@ -134,7 +134,7 @@ services:
       - ./driver-lib:/driver-lib
 
   mysql:
-    image: mysql:8.4
+    image: mysql:9.7
     environment:
       MYSQL_DATABASE: camunda_secondary
       MYSQL_USER: camunda
