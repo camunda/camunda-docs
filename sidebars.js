@@ -2230,7 +2230,14 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": [
+          type: "category",
+          label: "Multi-region",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-region/resilience-tiers",
+          },
+          items: [
+            "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
             "self-managed/concepts/multi-region/zone-aware-clusters",
           ],
@@ -2427,7 +2434,6 @@ module.exports = {
                 "self-managed/components/optimize/configuration/history-cleanup",
                 "self-managed/components/optimize/configuration/localization",
                 "self-managed/components/optimize/configuration/object-variables",
-                "self-managed/components/optimize/configuration/optimize-export-filtering",
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy",
               ],
