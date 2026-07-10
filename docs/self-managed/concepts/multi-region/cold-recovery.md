@@ -71,7 +71,7 @@ Cross-region replication of the backup storage is the **necessary requirement** 
 - If backups exist only in the primary region, there is no disaster recovery when that region is lost, as the backups are lost with it.
 - As such, **replication is mandatory**, and not optional or just best practice. It is a prerequisite for Cold Recovery to work.
 
-The primary backup bucket must replicate objects to a bucket in a **separate region** so that backup data remains accessible if the primary region becomes unavailable. For S3-compatible object storage, this is typically configured as continuous cross-region replication on the bucket itself.
+The primary backup bucket must replicate objects to a bucket in a **separate region** so that backup data remains accessible if the primary region becomes unavailable. For S3-compatible object storage, this is typically configured as continuous cross-region replication on the bucket itself. For RDBMS secondary storage, use the database's native cross-region backup replication instead of S3 bucket replication.
 
 This means:
 
