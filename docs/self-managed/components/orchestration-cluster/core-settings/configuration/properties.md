@@ -66,21 +66,3 @@ import Security from './partials/\_security.md'
 import System from './partials/\_system.md'
 
 <System />
-
-## Physical tenant support metadata
-
-Use this table to identify properties with explicit Physical Tenant semantics.
-
-| Property path                                                                      | Tenant overridable | Mandatory at tenant level | Notes                                                                                    |
-| ---------------------------------------------------------------------------------- | ------------------ | ------------------------- | ---------------------------------------------------------------------------------------- |
-| `camunda.physical-tenants.<tenant-key>.cluster.partitions-count`                   | Yes                | No                        | Required only when a tenant overrides default cluster sizing.                            |
-| `camunda.physical-tenants.<tenant-key>.security.authentication.providers.assigned` | Yes                | Yes                       | Each configured tenant entry must assign one or more cluster-defined identity providers. |
-| `camunda.physical-tenants.<tenant-key>.data.secondary-storage.rdbms.url`           | Yes                | No                        | Optional per-tenant override for RDBMS secondary storage.                                |
-| `camunda.security.authentication.method`                                           | No                 | No                        | Cluster-scoped property.                                                                 |
-| `camunda.security.cluster-admin`                                                   | No                 | No                        | Cluster-scoped property.                                                                 |
-| `camunda.security.csrf`                                                            | No                 | No                        | Cluster-scoped property.                                                                 |
-| `camunda.security.multi-tenancy`                                                   | No                 | No                        | Cluster-scoped property.                                                                 |
-| `camunda.security.http-headers`                                                    | No                 | No                        | Cluster-scoped property.                                                                 |
-| `camunda.security.authentication.authentication-refresh-interval`                  | No                 | No                        | Cluster-scoped property.                                                                 |
-
-This metadata supplements the existing property definitions and is specific to Physical Tenants behavior.

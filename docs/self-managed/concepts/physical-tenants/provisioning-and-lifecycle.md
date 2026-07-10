@@ -9,13 +9,13 @@ This page describes how to provision and operate Physical Tenants in Camunda 8.1
 
 ## Provisioning model in 8.10
 
-Physical Tenants are provisioned through static startup configuration.
+Physical Tenants are provisioned through static application configuration.
 
-- Add or change tenant configuration in startup config.
+- Add or change tenant configuration in application config.
 - Apply the change with a rolling restart.
 - Validate startup status for every affected component.
 
-Dynamic runtime tenant creation and runtime tenant updates are out of scope for 8.10.
+Dynamic runtime tenant creation and runtime tenant updates are not available in 8.10.
 
 ## Add a new Physical Tenant
 

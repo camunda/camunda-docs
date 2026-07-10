@@ -7,7 +7,7 @@ description: "Configure Physical Tenants with root defaults, per-tenant override
 
 This page explains how to configure Physical Tenants in Camunda 8.10 for Self-Managed deployments.
 
-In 8.10, configuration is static. You define Physical Tenants in startup configuration, then apply changes with a rolling restart.
+In 8.10, configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
 
 ## Configuration model
 
@@ -70,15 +70,11 @@ camunda:
 
 ## Required and optional properties per tenant
 
-For a configured tenant entry under `camunda.physical-tenants.<tenant-key>`:
+Each configured tenant under `camunda.physical-tenants.<tenant-key>` must assign at least one cluster-defined identity provider through `security.authentication.providers.assigned`. All other tenant-level properties are optional overrides of the root-level defaults.
 
-- Required when present:
-  - `cluster.partitions-count`, if the tenant overrides default cluster sizing.
-  - `security.authentication.providers.assigned` to assign one or more cluster-defined identity providers.
-- Optional:
-  - Any tenant-overridable `camunda.*` properties that support per-tenant override behavior.
+Identity providers are defined at the cluster level, then assigned per tenant. Physical Tenants do not define tenant-local provider objects.
 
-Identity providers are defined at cluster level, then assigned per tenant. Physical Tenants do not define tenant-local provider objects.
+For the full list of available properties, see the [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) reference.
 
 ## Cluster-wide defaults and per-tenant overrides
 
@@ -86,16 +82,7 @@ Use root-level `camunda.*` for shared defaults across all tenants.
 
 Use `camunda.physical-tenants.<tenant-key>.*` only for tenant-specific differences.
 
-### Cluster-only properties
-
-The following properties are cluster-scoped and cannot be overridden per tenant:
-
-- `camunda.security.authentication.method`
-- `camunda.security.cluster-admin`
-- `camunda.security.csrf`
-- `camunda.security.multi-tenancy`
-- `camunda.security.http-headers`
-- `camunda.security.authentication.authentication-refresh-interval`
+Some properties are cluster-scoped and cannot be overridden per tenant. Per-tenant override behavior is indicated in the [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) reference.
 
 ## Default tenant behavior and compatibility
 
@@ -192,71 +179,14 @@ camunda:
 
 ### Environment variables
 
-Spring environment variable mapping follows canonical property conversion:
+Spring environment variable mapping follows canonical property conversion. For example, a root-level property and its per-tenant override:
 
 ```bash
 CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql://db/default
-CAMUNDA_SECURITY_AUTHENTICATION_METHOD=oidc
-CAMUNDA_SECURITY_AUTHENTICATION_PROVIDERS_CORP_IDP_TYPE=oidc
-CAMUNDA_DOCUMENT_DEFAULTSTOREID=shared-s3
-CAMUNDA_DOCUMENT_AWS_SHAREDS3_BUCKETNAME=company-docs-bucket
-CAMUNDA_DOCUMENT_AWS_SHAREDS3_BUCKETPATH=default/
-
-CAMUNDA_PHYSICALTENANTS_DEFAULT_CLUSTER_PARTITIONSCOUNT=3
-CAMUNDA_PHYSICALTENANTS_DEFAULT_DOCUMENT_DEFAULTSTOREID=shared-s3
-CAMUNDA_PHYSICALTENANTS_DEFAULT_DOCUMENT_ASSIGNED_0=shared-s3
-CAMUNDA_PHYSICALTENANTS_DEFAULT_SECURITY_AUTHENTICATION_PROVIDERS_ASSIGNED_0=corp-idp
-
-CAMUNDA_PHYSICALTENANTS_RISKPROD_CLUSTER_PARTITIONSCOUNT=3
 CAMUNDA_PHYSICALTENANTS_RISKPROD_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql://db/riskprod
-CAMUNDA_PHYSICALTENANTS_RISKPROD_DOCUMENT_DEFAULTSTOREID=shared-s3
-CAMUNDA_PHYSICALTENANTS_RISKPROD_DOCUMENT_ASSIGNED_0=shared-s3
-CAMUNDA_PHYSICALTENANTS_RISKPROD_DOCUMENT_AWS_SHAREDS3_BUCKETPATH=riskprod/
-CAMUNDA_PHYSICALTENANTS_RISKPROD_SECURITY_AUTHENTICATION_PROVIDERS_ASSIGNED_0=corp-idp
 ```
 
 If YAML and environment variables are used together, use the same normalized tenant key in both forms.
-
-### Helm values
-
-If you deploy with Helm, provide equivalent values in your `values.yaml` for the same underlying Camunda properties. Helm customers use the same application-level properties directly without chart-specific tenant keys.
-
-```yaml
-# Example shape only. Map these values to your chart's current Camunda property injection mechanism.
-camunda:
-  data:
-    secondary-storage:
-      rdbms:
-        url: jdbc:postgresql://db/default
-  document:
-    default-store-id: shared-s3
-    aws:
-      shared-s3:
-        bucket-name: company-docs-bucket
-        bucket-path: default/
-  physical-tenants:
-    default:
-      cluster:
-        partitions-count: 3
-      document:
-        default-store-id: shared-s3
-        assigned:
-          - shared-s3
-    riskprod:
-      cluster:
-        partitions-count: 3
-      data:
-        secondary-storage:
-          rdbms:
-            url: jdbc:postgresql://db/riskprod
-      document:
-        default-store-id: shared-s3
-        assigned:
-          - shared-s3
-        aws:
-          shared-s3:
-            bucket-path: riskprod/
-```
 
 ## Related pages
 
