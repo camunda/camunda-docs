@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
-
         [[ADDED_IN_VERSION:8.5]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -40,9 +40,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
-
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[CONSISTENCY:STRONG]]
 

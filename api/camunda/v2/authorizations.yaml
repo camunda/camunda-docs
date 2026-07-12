@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -60,9 +60,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -107,9 +107,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
-
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -152,9 +152,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
-
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -190,9 +190,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
-
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[CONSISTENCY:EVENTUAL]]
 

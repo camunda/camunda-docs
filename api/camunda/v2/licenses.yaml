@@ -9,9 +9,9 @@ paths:
       description: |-
 
 
-        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
-
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[CONSISTENCY:STRONG]]
 
