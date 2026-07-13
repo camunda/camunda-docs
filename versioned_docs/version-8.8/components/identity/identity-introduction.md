@@ -29,7 +29,7 @@ Depending on your setup, Identity allows you to manage Orchestration Cluster acc
 | [Groups](group.md)                 | Simplify access management by granting permissions collectively to groups of users.                                                 | All deployments |
 | [Roles](role.md)                   | Sets of permissions to define what actions can be performed on specific resources. Roles can be assigned to users and groups.       | All deployments |
 | [Authorizations](authorization.md) | The specific permissions that connect users, groups, or roles with resources and actions (for example, `READ`, `UPDATE`, `DELETE`). | All deployments |
-| [Tenants](tenant.md)               | Isolate data within a single cluster. This is useful for multi-tenancy applications.                                                | All deployments |
+| [Tenants](tenant.md)               | Logically isolate data within a single cluster. This is useful for multi-tenancy applications.                                      | All deployments |
 
 :::info Identity in Self-Managed
 For documentation on deploying Identity as part of Camunda 8 Self-Managed, see [Identity in Self-Managed](/self-managed/components/orchestration-cluster/identity/overview.md).

@@ -42,8 +42,6 @@ This setting is disabled by default. Only organization admins can change it, and
 
 For details on creating tenants and managing assignments, see [tenant management](/components/admin/tenant.md).
 
-<!-- TODO: Confirm the exact minimum cluster generation and the final in-UI toggle label ("Multi-tenancy" vs "Multi-Tenancy") with eng. The Console toggle is shown on clusters that ship MultiTenancyConfiguration (Zeebe 8.8.0-alpha7+)... -->
-
 :::warning
 Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
 :::

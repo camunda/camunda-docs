@@ -2,7 +2,7 @@
 id: multi-tenancy
 title: "Multi-tenancy"
 sidebar_label: "Multi-tenancy"
-description: "Multi-tenancy lets you host multiple isolated tenants within a single Camunda 8 installation, on both SaaS and Self-Managed."
+description: "Multi-tenancy lets you host multiple logically isolated tenants within a single Camunda 8 installation, on both SaaS and Self-Managed."
 ---
 
 [Multi-tenancy](/reference/glossary.md#multi-tenancy) in Camunda 8 enables a single installation to serve multiple [tenants](/reference/glossary.md#tenant) such as departments, teams, or external clients, while keeping each tenant's data and processes logically isolated.
@@ -74,8 +74,6 @@ On SaaS, enable multi-tenancy checks per cluster using the **Multi-tenancy** tog
 3. Enable the **Multi-tenancy** setting.
 
 For details on the toggle, its default state, and who can change it, see [cluster settings](/components/hub/organization/manage-clusters/settings.md#multi-tenancy).
-
-<!-- TODO: Confirm the exact minimum cluster generation with eng. The Console toggle is shown on clusters that ship MultiTenancyConfiguration (Zeebe 8.8.0-alpha7+)... the docs issue states "generation 8.8+". Confirm the customer-facing wording? -->
 
 The **Multi-tenancy** toggle is available for clusters running generation 8.8 and later. It is disabled by default, and only organization admins can change it. Disabling the toggle restores the implicit `<default>`-tenant behavior.
 

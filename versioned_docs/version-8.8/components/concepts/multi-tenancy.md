@@ -2,7 +2,7 @@
 id: multi-tenancy
 title: "Multi-tenancy"
 sidebar_label: "Multi-tenancy"
-description: "Multi-tenancy lets you host multiple isolated tenants within a single Camunda 8 installation, on both SaaS and Self-Managed."
+description: "Multi-tenancy lets you host multiple logically isolated tenants within a single Camunda 8 installation, on both SaaS and Self-Managed."
 ---
 
 Multi-tenancy in Camunda 8 enables a single installation to serve multiple tenants—such as departments, teams, or external clients—while keeping each tenant's data and processes logically isolated.

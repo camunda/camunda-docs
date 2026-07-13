@@ -8,7 +8,7 @@ description: "Manage tenants within the Orchestration Cluster Identity to logica
 Use Identity to manage Orchestration Cluster tenants and isolate data within a single cluster. Tenant management is available on both Camunda 8 SaaS and Self-Managed.
 
 :::note
-On SaaS, the **Tenants** tab is visible to organization admins on clusters running generation 8.8 and later, even before multi-tenancy checks are enabled. This allows admins to set up tenants and assignments before enforcing checks.
+On SaaS, the **Tenants** tab is visible to organization admins on clusters running generation 8.8 and later, even before multi-tenancy checks are enabled. This allows admins to set up tenants and assignments before enforcing checks. Before enabling checks, confirm your tenant assignments so users retain the access they need.
 :::
 
 ## About tenants
