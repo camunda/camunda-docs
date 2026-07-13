@@ -29,6 +29,64 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 58
+
+### Publication date
+
+July 14, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the
+HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
+memory exhaustion by sending messages with an excessive number of headers or excessively long headers.
+
+Note: The vulnerable library is only used in outgoing HTTP requests from Web Modeler to the Camunda 8 Orchestration
+Cluster API. To exploit the vulnerability, an attacker would need to be able to control or intercept the API responses
+through a prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code
+path is not reachable from external, untrusted client traffic.
+
+### How to determine if the installation is affected
+
+- You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24
+
+## Notice 57
+
+### Publication date
+
+July 14, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-54291](https://nvd.nist.gov/vuln/detail/CVE-2026-54291), where database
+connections configured with `channelBinding=require` can be silently downgraded from SCRAM-SHA-256-PLUS with channel
+binding to plain SCRAM-SHA-256 without it, losing the man-in-the-middle protection the setting is meant to guarantee.
+
+### How to determine if the installation is affected
+
+- You are using Web Modeler Self-Managed ≤ 8.9.5, ≤ 8.8.16, or ≤ 8.7.23.
+- _And_: You are using PostgreSQL with SCRAM authentication over SSL/TLS and `channelBinding=require`.
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24
+
 ## Notice 56
 
 ### Publication date
