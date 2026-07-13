@@ -194,7 +194,7 @@ export CAMUNDA_HUB_BASE_URL="https://hub.cloud.camunda.io"
 
 In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance, and the Camunda Hub API is served from your own installation.
 
-1. [Create new client credentials](/apis-tools/hub-api-saas/authentication.md#create-new-client-credentials) with the Web Modeler API `create` and `update` permissions.
+1. [Create new client credentials](/apis-tools/hub-api-sm/authentication.md#create-a-new-application) with the Web Modeler API `create` and `update` permissions.
 2. Securely store the application's `Client ID` and `Client Secret`.
 3. Expose the following environment variables in your pipeline:
 
