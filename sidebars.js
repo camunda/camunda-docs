@@ -2207,7 +2207,12 @@ module.exports = {
                 type: "doc",
                 id: "self-managed/concepts/multi-tenancy/physical-tenants",
               },
-              items: ["self-managed/concepts/physical-tenants/index"],
+              items: [
+                "self-managed/concepts/physical-tenants/index",
+                "self-managed/concepts/physical-tenants/configuration-reference",
+                "self-managed/concepts/physical-tenants/storage-isolation",
+                "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+              ],
             },
           ],
         },
