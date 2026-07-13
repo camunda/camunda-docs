@@ -766,7 +766,7 @@ In this mode, you:
 You can still define new clusters in your configuration, though it's not required. When you do, Camunda Hub automatically registers them with all [available settings](#clusters) and full management functionality in the interface.
 
 :::note
-With dynamic cluster management enabled, don't call the create endpoint manually—only let your cluster configuration do it. The endpoint doesn't yet support creating clusters with all configurable settings.
+With dynamic cluster management enabled, don't call the create or update cluster registration endpoint manually—only let your cluster configuration do it. The endpoint doesn't yet support creating clusters with all configurable settings.
 :::
 
 ### Unstable configuration options
