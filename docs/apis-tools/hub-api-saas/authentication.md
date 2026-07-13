@@ -39,38 +39,40 @@ Create an API client with Web Modeler API permissions.
 
 ## Generate a token
 
-Use the environment variables captured in the previous step to generate an access token.
+After [creating new client credentials](#create-a-new-application), generate an access token:
 
-1. Execute an authentication request to the token issuer:
-   ```bash
-   curl --request POST ${CAMUNDA_OAUTH_URL} \
-       --header 'Content-Type: application/x-www-form-urlencoded' \
-       --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
-       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
-       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
-   ```
-   A successful response looks like this:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-2. Use the `access_token` in the next step.
+```bash
+curl --request POST ${CAMUNDA_OAUTH_URL} \
+   --header 'Content-Type: application/x-www-form-urlencoded' \
+   --data-urlencode 'grant_type=client_credentials' \
+   --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+   --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+   --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
+```
+
+A successful response looks like this:
+
+```json
+{
+  "access_token": "<TOKEN>",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0
+}
+```
+
+With this `access_token`, you're ready to [authenticate with the Camunda Hub API](#authenticate-with-your-token).
 
 ## Authenticate with your token
 
-Include the previously-captured token as an authorization header in every request: `Authorization: Bearer <TOKEN>`.
+Once you have [generated a token](#generate-a-token), use it in the authorization header in every Camunda Hub API request: `Authorization: Bearer <TOKEN>`.
 
-For example, send a request to the Camunda Hub API's `/files/search` endpoint:
+For example, send a request to the Camunda Hub API's `/info` endpoint:
 
 ```shell
 curl --header "Authorization: Bearer ${TOKEN}" \
-     https://hub.cloud.camunda.io/api/v2/files/search
+     https://hub.cloud.camunda.io/api/v2/info
 ```
 
 ## Token expiration

@@ -23,31 +23,33 @@ Create an application with Web Modeler API permissions.
 
 ## Generate a token
 
-Use the values captured in the previous step to generate an access token.
+After [creating a new application](#create-a-new-application), use its client ID and secret to [generate an access token](/self-managed/components/management-identity/authentication.md#generate-a-token):
 
-1. [Generate a token](/self-managed/components/management-identity/authentication.md#generate-a-token), providing the previously-captured values as the `client_id` and `client_secret`:
-   ```shell
-   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
-   --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode "client_id=${CLIENT_ID}" \
-   --data-urlencode "client_secret=${CLIENT_SECRET}" \
-   --data-urlencode 'grant_type=client_credentials'
-   ```
-   A successful authentication response looks like this:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-2. Use the `access_token` in the next step.
+```shell
+curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode "client_id=${CLIENT_ID}" \
+  --data-urlencode "client_secret=${CLIENT_SECRET}" \
+  --data-urlencode 'grant_type=client_credentials'
+```
+
+A successful authentication response looks like this:
+
+```json
+{
+  "access_token": "<TOKEN>",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0
+}
+```
+
+With this `access_token`, you're ready to [authenticate with the Camunda Hub API](#authenticate-with-your-token).
 
 ## Authenticate with your token
 
-Include the previously-captured token as an authorization header in every request: `Authorization: Bearer <TOKEN>`.
+Once you have [generated a token](#generate-a-token), use it in the authorization header in every Camunda Hub API request: `Authorization: Bearer <TOKEN>`.
 
 For example, send a request to the Camunda Hub API's `/info` endpoint:
 
