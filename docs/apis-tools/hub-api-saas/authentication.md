@@ -17,7 +17,9 @@ Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it 
 
 Before you begin, make sure you have the **Admin** user role.
 
-## Generate a token
+## Create new client credentials
+
+Create an API client with Web Modeler API permissions.
 
 1. In Camunda Hub, under **Organization overview**, click **Admin APIs**.
 2. From the **Administration API** management page, click **Create new credentials**.
@@ -34,7 +36,12 @@ Before you begin, make sure you have the **Admin** user role.
    :::caution
    When you create client credentials, the client secret is only shown once. Save the client secret somewhere safe.
    :::
-5. Execute an authentication request to the token issuer:
+
+## Generate a token
+
+Use the environment variables captured in the previous step to generate an access token.
+
+1. Execute an authentication request to the token issuer:
    ```bash
    curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
@@ -53,7 +60,7 @@ Before you begin, make sure you have the **Admin** user role.
      "not-before-policy": 0
    }
    ```
-6. Use the `access_token` in the next step.
+2. Use the `access_token` in the next step.
 
 ## Authenticate with your token
 

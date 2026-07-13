@@ -176,34 +176,40 @@ Create and store client credentials securely—for example, as CI/CD secrets—a
 
 <TabItem value='saas'>
 
+1. [Create new client credentials](/apis-tools/hub-api-saas/authentication.md#create-new-client-credentials) with the Web Modeler API `create` and `update` permissions.
+2. Securely store the `Client ID` and `Client Secret`.
+3. Expose the following environment variables in your pipeline:
+
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
 export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="https://login.cloud.camunda.io/oauth/token"
 export CAMUNDA_CONSOLE_OAUTH_AUDIENCE="api.cloud.camunda.io"
-export CAMUNDA_HUB_REST_URL="https://hub.cloud.camunda.io"
+export CAMUNDA_HUB_BASE_URL="https://hub.cloud.camunda.io"
 ```
-
-Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-saas/authentication.md) to create credentials with the required `create` and `update` permissions.
 
 </TabItem>
 
 <TabItem value='self-managed'>
 
-In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance, and the Camunda Hub API is served from your own installation:
+In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance, and the Camunda Hub API is served from your own installation.
+
+1. [Create new client credentials](/apis-tools/hub-api-saas/authentication.md#create-new-client-credentials) with the Web Modeler API `create` and `update` permissions.
+2. Securely store the application's `Client ID` and `Client Secret`.
+3. Expose the following environment variables in your pipeline:
 
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
 export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
-export CAMUNDA_HUB_REST_URL="http://localhost:8088"
+export CAMUNDA_HUB_BASE_URL="http://localhost:8088"
 ```
 
-:::note
 The URLs used in this example are local defaults, for example, `http://localhost:8088` for the API. In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation.
-:::
 
-Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions. In doing this, Management Identity automatically adds the `web-modeler-public-api` audience to tokens issued for your application. Therefore, unlike Camunda 8 SaaS, an `audience` parameter is not required for the token request during sync.
+:::note
+This authorization also adds the required `web-modeler-public-api` audience to tokens issued for this application, so no `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` is needed to request a token during the sync.
+:::
 
 </TabItem>
 </Tabs>
