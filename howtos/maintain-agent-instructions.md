@@ -38,7 +38,7 @@ The docs team performs a recurrent audit as part of the docs housekeeping tasks:
 
 #### Run AI-ready benchmarks
 
-1. Run the AI-ready benchmark plus the AI-search readiness benchmark to audit, optimize, and track whether AI agents can crawl, understand, and cite the site:
+1. Run this AI-ready benchmark to assess how well the site's structure, metadata, and content serve AI agents:
 
 ```bash
 npx afdocs check https://docs.camunda.io --format scorecard
@@ -46,16 +46,18 @@ npx afdocs check https://docs.camunda.io --format scorecard
 
 You can also use this benchmark: https://buildwithfern.com/agent-score. See [AI-ready documentation research](https://github.com/camunda/documentation-team/issues/507) for more context.
 
+2. Run this AI-search readiness benchmark to audit, optimize, and track whether AI agents can crawl, understand, and cite the site:
+
 ```bash
 uvx --from geo-optimizer-skill geo audit --url https://docs.camunda.io
 ```
 
 This runs the [geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) GEO audit, which scores the site against 8 AI-readiness categories (requires [`uv`](https://docs.astral.sh/uv/getting-started/installation/)).
 
-Address or file potential improvements based on the benchmark results.
+3. Address or file potential improvements based on the benchmark results.
 
-2. Audit llms.txt files:
+#### Audit llms.txt files
 
-- **`llms-full.txt`**: Check the file size. If it grows above 10 MB, agents may truncate it. Consider splitting large sections with additional `customLLMFiles` entries in `docusaurus.config.js`.
-- **`docusaurus-plugin-llms` config** in `docusaurus.config.js`: Check it reflects the current documentation structure: `customLLMFiles` patterns are accurate, `ignoreFiles` is still relevant.
-- **`static/llms.txt`**: Verify the section index links match the current documentation structure. Update this file when major sections are added or removed.
+1. **`llms-full.txt`**: Check the file size. If it grows above 10 MB, agents may truncate it. Consider splitting large sections with additional `customLLMFiles` entries in `docusaurus.config.js`.
+2. **`docusaurus-plugin-llms` config** in `docusaurus.config.js`: Check it reflects the current documentation structure: `customLLMFiles` patterns are accurate, `ignoreFiles` is still relevant.
+3. **`static/llms.txt`**: Verify the section index links match the current documentation structure. Update this file when major sections are added or removed.
