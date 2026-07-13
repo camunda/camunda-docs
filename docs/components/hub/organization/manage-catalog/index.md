@@ -14,7 +14,7 @@ In this section, you learn how to:
 - [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md), including unpublishing and deleting assets.
 - [Consolidate templates](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) from multiple repositories before syncing.
 
-Delivery teams [discover published assets and apply them](../../workspace/modeler/element-templates/use-catalog-assets.md) when modeling business processes.
+Delivery teams [discover published assets and apply them](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md) when modeling business processes.
 
 :::note
 To perform these tasks, you must have an **Admin** or **Owner** role in your organization.
