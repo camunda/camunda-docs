@@ -22,4 +22,24 @@ To view a deployed process, take the following steps:
 
 Running process instances appear in the **Process Instances** table below the process model. To inspect a specific instance, click the **Process Instance Key**.
 
-Here, observe details about the process instance, including the instance history and the variables attached to the instance. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
+The process instance page has three parts:
+
+- A header showing the process instance's key, version, and state.
+- A process diagram showing the instance's current progress.
+- A bottom panel with tabs, including **Details**, **Incidents** (shown only when the instance has an incident), and **Variables**.
+
+Click an element in the diagram to select it, then use the tabs in the bottom panel to inspect its details, incidents, and variables. In earlier versions, an element's details and incidents appeared in a metadata popover when you clicked it; the popover is now replaced by the **Details** and **Incidents** tabs. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
+
+## Navigate to a called process instance
+
+When a call activity in the diagram calls another process, double-click the call activity element to jump directly to the called process instance.
+
+Double-click navigation only works when the process instance has called exactly one process instance in total. If it has called more than one — for example, through multiple call activities, or a call activity that ran more than once — double-clicking does nothing.
+
+For a reliable way to find a called process instance, take the following steps:
+
+1. Click the call activity element to select it.
+2. Open the **Details** tab.
+3. Click the **Called Process Instance** link to navigate to that instance.
+
+If the call activity has called more than one process instance, the **Details** tab shows a **View all** link to the filtered **Processes** page instead of a single link.
