@@ -208,6 +208,16 @@ Upgrading from a trial to a paid plan automatically enables Optimize, with no ma
 
 ### Orchestration Cluster
 
+#### Archive by ID for Elasticsearch and OpenSearch
+
+<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default (`archiveByIdEnabled: true`). Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving. The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
+
+<p class="link-arrow">[Data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)</p>
+
 #### Async replication support for RDBMS secondary storage
 
 <!-- https://github.com/camunda/product-hub/issues/3585 -->
