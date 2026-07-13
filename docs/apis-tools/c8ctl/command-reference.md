@@ -947,8 +947,8 @@ Add a profile
 | `--oAuthUrl`        | string  |          | OAuth token URL                   |
 | `--scope`           | string  |          | OAuth scope (space-separated)     |
 | `--defaultTenantId` | string  |          | Default tenant ID                 |
-| `--username`        | string  |          | Basic auth username               |
-| `--password`        | string  |          | Basic auth password               |
+| `--username`        | string  |          | Basic authentication username     |
+| `--password`        | string  |          | Basic authentication password     |
 | `--from-file`       | string  |          | Import from .env file             |
 | `--from-env`        | boolean |          | Import from environment variables |
 
