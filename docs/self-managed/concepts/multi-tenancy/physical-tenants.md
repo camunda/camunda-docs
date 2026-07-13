@@ -39,13 +39,10 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 
 **Tenant-scoped APIs** are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
 
-- REST API: `POST /physical-tenants/my-tenant/v2/process-definitions`
-- Webapps: `https://your-cluster/physical-tenants/my-tenant/operate`
+- REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
+- Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-**Cluster-wide APIs** are accessible at `/cluster/v2/`:
-
-- Cluster operations: `POST /cluster/v2/backup`
-- Cluster health: `GET /cluster/v2/health`
+**Cluster-wide APIs** are not available yet. When added, they will be exposed under a dedicated `/cluster/v2/...` path prefix. Endpoints at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
 
 **gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
@@ -73,3 +70,11 @@ For detailed technical information about isolation model, architecture, and stor
 For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
 
 For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
+
+For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
+
+For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
+
+For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
+
+For how Physical Tenant storage isolation works across primary storage, secondary storage, and document stores, see [storage isolation](/self-managed/concepts/physical-tenants/storage-isolation.md).

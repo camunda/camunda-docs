@@ -2209,8 +2209,11 @@ module.exports = {
               },
               items: [
                 "self-managed/concepts/physical-tenants/index",
-                "self-managed/concepts/physical-tenants/configuration-reference",
                 "self-managed/concepts/physical-tenants/storage-isolation",
+                "self-managed/concepts/physical-tenants/api-routing",
+                "self-managed/concepts/physical-tenants/authentication-authorization",
+                "self-managed/concepts/physical-tenants/authorization-model",
+                "self-managed/concepts/physical-tenants/configuration-reference",
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
               ],
             },
