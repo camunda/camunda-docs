@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for process definitions based on given criteria.
@@ -51,6 +53,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XX0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -102,6 +106,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XX0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -161,6 +167,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XX0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get the start form of a process.
@@ -213,6 +221,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get statistics about elements in currently running process instances by process definition key and search filter.
@@ -262,6 +272,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get message subscription statistics, grouped by process definition.
@@ -301,6 +313,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get statistics about process instances, grouped by process definition and tenant.
@@ -339,6 +353,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 

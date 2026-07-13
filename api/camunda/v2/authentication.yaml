@@ -10,6 +10,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
         [[CONSISTENCY:STRONG]]
 
         Retrieves the current authenticated user.

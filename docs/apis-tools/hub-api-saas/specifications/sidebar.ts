@@ -30,14 +30,14 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/get-clusters",
-          label: "Get all clusters",
+          id: "apis-tools/hub-api-saas/specifications/get-cluster-registrations",
+          label: "Get all cluster registrations",
           className: "api-method get",
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/create-cluster",
-          label: "Create or update a cluster",
+          id: "apis-tools/hub-api-saas/specifications/create-cluster-registration",
+          label: "Create or update a cluster registration",
           className: "api-method post",
         },
         {
@@ -48,8 +48,8 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-saas/specifications/delete-cluster",
-          label: "Delete a cluster",
+          id: "apis-tools/hub-api-saas/specifications/remove-cluster-registration",
+          label: "Remove a cluster registration",
           className: "api-method delete",
         },
       ],

@@ -208,18 +208,22 @@ Use `CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS` to set up components in the cluster:
 
 Available component types and requirements:
 
-| Configuration value     | Component             | Requirements                                   |
-| :---------------------- | :-------------------- | :--------------------------------------------- |
-| `connectors`            | Connectors            | REST URL                                       |
-| `identity`              | Management Identity   | -                                              |
-| `webModelerWebApp`      | Camunda Hub           | -                                              |
-| `operate`               | Operate               | -                                              |
-| `optimize`              | Optimize              | -                                              |
-| `orchestration`         | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
-| `orchestrationIdentity` | Admin                 | -                                              |
-| `tasklist`              | Tasklist              | -                                              |
-| `zeebe`                 | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
-| `zeebeGateway`          | Zeebe Gateway         | Cluster version < 8.8                          |
+| Configuration value | Component             | Requirements                                   |
+| :------------------ | :-------------------- | :--------------------------------------------- |
+| `connectors`        | Connectors            | REST URL                                       |
+| `identity`          | Management Identity   | -                                              |
+| `hub`               | Camunda Hub           | -                                              |
+| `operate`           | Operate               | -                                              |
+| `optimize`          | Optimize              | -                                              |
+| `orchestration`     | Orchestration Cluster | Cluster version >= 8.8, gRPC URL, and REST URL |
+| `admin`             | Admin                 | -                                              |
+| `tasklist`          | Tasklist              | -                                              |
+| `zeebe`             | Zeebe Broker          | Cluster version < 8.8, gRPC URL, and REST URL  |
+| `zeebeGateway`      | Zeebe Gateway         | Cluster version < 8.8                          |
+
+:::note Backward compatibility
+The old values `webModelerWebApp` (replaced by `hub`) and `orchestrationIdentity` (replaced by `admin`) are still accepted for backward compatibility.
+:::
 
 Example configuration:
 
@@ -241,7 +245,7 @@ camunda:
               rest: "https://camunda.example.com"
               readiness: "https://camunda.example.com:9600/core/actuator/health/readiness"
           - name: "Orchestration Admin"
-            type: "orchestrationIdentity"
+            type: "admin"
             version: "8.10-SNAPSHOT"
             urls:
               webapp: "https://camunda.example.com"
@@ -260,7 +264,7 @@ CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_REST=https://camunda.example.com
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_0_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness
 
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_NAME='Orchestration Admin'
-CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_TYPE=orchestrationIdentity
+CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_TYPE=admin
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_VERSION=8.10-SNAPSHOT
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_WEBAPP=https://camunda.example.com
 CAMUNDA_MODELER_CLUSTERS_0_COMPONENTS_1_URLS_READINESS=https://camunda.example.com:9600/core/actuator/health/readiness
@@ -667,7 +671,7 @@ Camunda Hub supports syncing files via [Git Sync](/components/hub/workspace/mana
 ```yaml
 camunda.modeler:
   gitsync:
-    max-files: 50 # default
+    max-files: 100 # default
     max-in-memory-size: 4MB # default
     github:
       base-url: https://api.github.com # default
@@ -687,7 +691,7 @@ camunda.modeler:
 
 | Provider      | Environment variable                                | Description                                                                                                                   | Default value                                 |
 | ------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `50`                                          |
+| All providers | `CAMUNDA_MODELER_GITSYNC_MAXFILES`                  | Maximum number of allowed files for sync operations.                                                                          | `100`                                         |
 | All providers | `CAMUNDA_MODELER_GITSYNC_MAXINMEMORYSIZE`           | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
 | GitHub        | `CAMUNDA_MODELER_GITSYNC_GITHUB_BASEURL`            | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
 | GitLab        | `CAMUNDA_MODELER_GITSYNC_GITLAB_BASEURL`            | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |

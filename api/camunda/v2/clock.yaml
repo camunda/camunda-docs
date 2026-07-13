@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Set a precise, static time for the Zeebe engine's internal clock.
@@ -52,6 +54,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 

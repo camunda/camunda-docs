@@ -106,6 +106,21 @@ Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--new">New</span>
+</div>
+<div className="release-announcement-content">
+
+#### MySQL 9.7 now supported
+
+Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 9.7.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -128,11 +143,11 @@ Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
 </div>
 <div className="release-announcement-content">
 
-#### Elasticsearch 9.2 no longer supported
+#### Elasticsearch 9.2 and 9.3 no longer supported
 
-Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.3. Supported Elasticsearch versions are now 8.19+ and 9.3+.
+Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.4. Supported Elasticsearch versions are now 8.19+ and 9.4+.
 
-- Upgrade Elasticsearch 9.2 clusters to 9.3 or later before moving to Camunda 8.10.
+- Upgrade Elasticsearch 9.2 or 9.3 clusters to 9.4 or later before moving to Camunda 8.10.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
@@ -276,6 +291,21 @@ Starting with 8.10, the `JobIntent.COMPLETED` follow-up event is emitted without
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
+
+Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
+
+**Action:** Migrate your application to Spring Boot 4.1.x. See the [version compatibility table](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) for details.
+
+</div>
+</div>
+
 ## Connectors
 
 :::note
@@ -298,6 +328,27 @@ Connectors change 1 description.
 </div> -->
 
 ## Data
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch and OpenSearch exporter defaults changed for Optimize mode and job records
+
+Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
+
+- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
+- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
+
+**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
+
+<p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
+<p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -329,6 +380,25 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
 
 **Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Individual component Docker images no longer produced
+
+Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
 
 </div>
 </div>

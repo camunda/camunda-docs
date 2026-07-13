@@ -392,7 +392,7 @@ assignMappingRuleToGroup(input, options?): CancelablePromise<void>;
 
 Assign a mapping rule to a group
 
-Assigns a mapping rule to a group. *
+Assigns a mapping rule to a group. \*
 
 #### Parameters
 
@@ -444,7 +444,7 @@ assignMappingRuleToTenant(input, options?): CancelablePromise<void>;
 
 Assign a mapping rule to a tenant
 
-Assign a single mapping rule to a specified tenant. *
+Assign a single mapping rule to a specified tenant. \*
 
 #### Parameters
 
@@ -496,7 +496,7 @@ assignRoleToClient(input, options?): CancelablePromise<void>;
 
 Assign a role to a client
 
-Assigns the specified role to the client. The client will inherit the authorizations associated with this role. *
+Assigns the specified role to the client. The client will inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -545,7 +545,7 @@ assignRoleToGroup(input, options?): CancelablePromise<void>;
 
 Assign a role to a group
 
-Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role. *
+Assigns the specified role to the group. Every member of the group (user or client) will inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -594,7 +594,7 @@ assignRoleToMappingRule(input, options?): CancelablePromise<void>;
 
 Assign a role to a mapping rule
 
-Assigns a role to a mapping rule. *
+Assigns a role to a mapping rule. \*
 
 #### Parameters
 
@@ -698,7 +698,7 @@ assignRoleToUser(input, options?): CancelablePromise<void>;
 
 Assign a role to a user
 
-Assigns the specified role to the user. The user will inherit the authorizations associated with this role. *
+Assigns the specified role to the user. The user will inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -851,7 +851,7 @@ assignUserToTenant(input, options?): CancelablePromise<void>;
 
 Assign a user to a tenant
 
-Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions. *
+Assign a single user to a specified tenant. The user can then access tenant data and perform authorized actions. \*
 
 #### Parameters
 
@@ -903,7 +903,7 @@ broadcastSignal(input, options?): CancelablePromise<SignalBroadcastResult>;
 
 Broadcast signal
 
-Broadcasts a signal. *
+Broadcasts a signal. \*
 
 #### Parameters
 
@@ -1336,7 +1336,7 @@ createAdminUser(input, options?): CancelablePromise<UserCreateResult>;
 
 Create admin user
 
-Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role. *
+Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role. \*
 
 #### Parameters
 
@@ -1515,7 +1515,7 @@ createAuthorization(input, options?): CancelablePromise<AuthorizationCreateResul
 
 Create authorization
 
-Create the authorization. *
+Create the authorization. \*
 
 #### Parameters
 
@@ -1870,7 +1870,7 @@ createGlobalClusterVariable(input, options?): CancelablePromise<ClusterVariableR
 
 Create a global-scoped cluster variable
 
-Create a global-scoped cluster variable. *
+Create a global-scoped cluster variable. \*
 
 #### Parameters
 
@@ -1921,7 +1921,7 @@ createGlobalTaskListener(input, options?): CancelablePromise<GlobalTaskListenerR
 
 Create global user task listener
 
-Create a new global user task listener. *
+Create a new global user task listener. \*
 
 #### Parameters
 
@@ -2273,7 +2273,7 @@ createRole(input, options?): CancelablePromise<RoleCreateResult>;
 
 Create role
 
-Create a new role. *
+Create a new role. \*
 
 #### Parameters
 
@@ -2324,7 +2324,7 @@ createTenant(input, options?): CancelablePromise<TenantCreateResult>;
 
 Create tenant
 
-Creates a new tenant. *
+Creates a new tenant. \*
 
 #### Parameters
 
@@ -2375,7 +2375,7 @@ createTenantClusterVariable(input, options?): CancelablePromise<ClusterVariableR
 
 Create a tenant-scoped cluster variable
 
-Create a new cluster variable for the given tenant. *
+Create a new cluster variable for the given tenant. \*
 
 #### Parameters
 
@@ -2489,7 +2489,7 @@ createUser(input, options?): CancelablePromise<UserCreateResult>;
 
 Create user
 
-Create a new user. *
+Create a new user. \*
 
 #### Parameters
 
@@ -2542,7 +2542,7 @@ deleteAuthorization(input, options?): CancelablePromise<void>;
 
 Delete authorization
 
-Deletes the authorization with the given key. *
+Deletes the authorization with the given key. \*
 
 #### Parameters
 
@@ -2588,7 +2588,7 @@ deleteDecisionInstance(input, options?): CancelablePromise<void>;
 
 Delete decision instance
 
-Delete all associated decision evaluations based on provided key. *
+Delete all associated decision evaluations based on provided key. \*
 
 #### Parameters
 
@@ -2739,7 +2739,7 @@ deleteGlobalClusterVariable(input, options?): CancelablePromise<void>;
 
 Delete a global-scoped cluster variable
 
-Delete a global-scoped cluster variable. *
+Delete a global-scoped cluster variable. \*
 
 #### Parameters
 
@@ -2785,7 +2785,7 @@ deleteGlobalTaskListener(input, options?): CancelablePromise<void>;
 
 Delete global user task listener
 
-Deletes a global user task listener. *
+Deletes a global user task listener. \*
 
 #### Parameters
 
@@ -2833,7 +2833,7 @@ deleteGroup(input, options?): CancelablePromise<void>;
 
 Delete group
 
-Deletes the group with the given ID. *
+Deletes the group with the given ID. \*
 
 #### Parameters
 
@@ -2927,7 +2927,7 @@ deleteProcessInstance(input, options?): CancelablePromise<void>;
 
 Delete process instance
 
-Deletes a process instance. Only instances that are completed or terminated can be deleted. *
+Deletes a process instance. Only instances that are completed or terminated can be deleted. \*
 
 #### Parameters
 
@@ -3045,7 +3045,7 @@ historic data associated with a resource, set the `deleteHistory` flag in the re
 to `true`. The historic data is deleted asynchronously via a batch operation. The details of
 the created batch operation are included in the response. Note that history deletion is only
 supported for process resources; for other resource types this flag is ignored and no history
-will be deleted. *
+will be deleted. \*
 
 #### Parameters
 
@@ -3094,7 +3094,7 @@ deleteRole(input, options?): CancelablePromise<void>;
 
 Delete role
 
-Deletes the role with the given ID. *
+Deletes the role with the given ID. \*
 
 #### Parameters
 
@@ -3140,7 +3140,7 @@ deleteTenant(input, options?): CancelablePromise<void>;
 
 Delete tenant
 
-Deletes an existing tenant. *
+Deletes an existing tenant. \*
 
 #### Parameters
 
@@ -3186,7 +3186,7 @@ deleteTenantClusterVariable(input, options?): CancelablePromise<void>;
 
 Delete a tenant-scoped cluster variable
 
-Delete a tenant-scoped cluster variable. *
+Delete a tenant-scoped cluster variable. \*
 
 #### Parameters
 
@@ -3238,7 +3238,7 @@ deleteUser(input, options?): CancelablePromise<void>;
 
 Delete user
 
-Deletes a user. *
+Deletes a user. \*
 
 #### Parameters
 
@@ -3594,7 +3594,7 @@ options?): CancelablePromise<AgentInstanceResult>;
 
 Get agent instance
 
-Returns agent instance as JSON. *
+Returns agent instance as JSON. \*
 
 #### Parameters
 
@@ -3657,7 +3657,7 @@ options?): CancelablePromise<AuditLogResult>;
 
 Get audit log
 
-Get an audit log entry by auditLogKey. *
+Get an audit log entry by auditLogKey. \*
 
 #### Parameters
 
@@ -3716,7 +3716,7 @@ getAuthentication(options?): CancelablePromise<CamundaUserResult>;
 
 Get current user
 
-Retrieves the current authenticated user. *
+Retrieves the current authenticated user. \*
 
 #### Parameters
 
@@ -3775,7 +3775,7 @@ options?): CancelablePromise<AuthorizationResult>;
 
 Get authorization
 
-Get authorization by the given key. *
+Get authorization by the given key. \*
 
 #### Parameters
 
@@ -3880,7 +3880,7 @@ options?): CancelablePromise<BatchOperationResponse>;
 
 Get batch operation
 
-Get batch operation by key. *
+Get batch operation by key. \*
 
 #### Parameters
 
@@ -3957,7 +3957,7 @@ options?): CancelablePromise<DecisionDefinitionResult>;
 
 Get decision definition
 
-Returns a decision definition by key. *
+Returns a decision definition by key. \*
 
 #### Parameters
 
@@ -4022,7 +4022,7 @@ options?): CancelablePromise<string>;
 
 Get decision definition XML
 
-Returns decision definition as XML. *
+Returns decision definition as XML. \*
 
 #### Parameters
 
@@ -4086,7 +4086,7 @@ options?): CancelablePromise<DecisionInstanceGetQueryResult>;
 
 Get decision instance
 
-Returns a decision instance. *
+Returns a decision instance. \*
 
 #### Parameters
 
@@ -4150,7 +4150,7 @@ options?): CancelablePromise<DecisionRequirementsResult>;
 
 Get decision requirements
 
-Returns Decision Requirements as JSON. *
+Returns Decision Requirements as JSON. \*
 
 #### Parameters
 
@@ -4214,7 +4214,7 @@ options?): CancelablePromise<string>;
 
 Get decision requirements XML
 
-Returns decision requirements as XML. *
+Returns decision requirements as XML. \*
 
 #### Parameters
 
@@ -4330,7 +4330,7 @@ options?): CancelablePromise<ElementInstanceResult>;
 
 Get element instance
 
-Returns element instance as JSON. *
+Returns element instance as JSON. \*
 
 #### Parameters
 
@@ -4474,7 +4474,7 @@ options?): CancelablePromise<ClusterVariableResult>;
 
 Get a global-scoped cluster variable
 
-Get a global-scoped cluster variable. *
+Get a global-scoped cluster variable. \*
 
 #### Parameters
 
@@ -4603,7 +4603,7 @@ options?): CancelablePromise<GlobalTaskListenerResult>;
 
 Get global user task listener
 
-Get a global user task listener by its id. *
+Get a global user task listener by its id. \*
 
 #### Parameters
 
@@ -4665,7 +4665,7 @@ options?): CancelablePromise<GroupResult>;
 
 Get group
 
-Get a group by its ID. *
+Get a group by its ID. \*
 
 #### Parameters
 
@@ -5074,7 +5074,7 @@ getLicense(options?): CancelablePromise<LicenseResponse>;
 
 Get license status
 
-Obtains the status of the current Camunda license. *
+Obtains the status of the current Camunda license. \*
 
 #### Parameters
 
@@ -5185,7 +5185,7 @@ options?): CancelablePromise<ProcessDefinitionResult>;
 
 Get process definition
 
-Returns process definition as JSON. *
+Returns process definition as JSON. \*
 
 #### Parameters
 
@@ -5463,7 +5463,7 @@ options?): CancelablePromise<ProcessDefinitionElementStatisticsQueryResult>;
 
 Get process definition statistics
 
-Get statistics about elements in currently running process instances by process definition key and search filter. *
+Get statistics about elements in currently running process instances by process definition key and search filter. \*
 
 #### Parameters
 
@@ -5529,7 +5529,7 @@ options?): CancelablePromise<string>;
 
 Get process definition XML
 
-Returns process definition as XML. *
+Returns process definition as XML. \*
 
 #### Parameters
 
@@ -5593,7 +5593,7 @@ options?): CancelablePromise<ProcessInstanceResult>;
 
 Get process instance
 
-Get the process instance by the process instance key. *
+Get the process instance by the process instance key. \*
 
 #### Parameters
 
@@ -5658,7 +5658,7 @@ options?): CancelablePromise<ProcessInstanceCallHierarchyEntry[]>;
 
 Get call hierarchy
 
-Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance. *
+Returns the call hierarchy for a given process instance, showing its ancestry up to the root instance. \*
 
 #### Parameters
 
@@ -5722,7 +5722,7 @@ options?): CancelablePromise<ProcessInstanceSequenceFlowsQueryResult>;
 
 Get sequence flows
 
-Get sequence flows taken by the process instance. *
+Get sequence flows taken by the process instance. \*
 
 #### Parameters
 
@@ -5788,7 +5788,7 @@ options?): CancelablePromise<ProcessInstanceElementStatisticsQueryResult>;
 
 Get element instance statistics
 
-Get statistics about elements by the process instance key. *
+Get statistics about elements by the process instance key. \*
 
 #### Parameters
 
@@ -5979,6 +5979,72 @@ getProcessInstanceStatisticsByError
 #### Tags
 
 Incident
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getProcessInstanceWaitStateStatistics()
+
+```ts
+getProcessInstanceWaitStateStatistics(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessInstanceWaitStateStatisticsQueryResult>;
+```
+
+Get wait state statistics
+
+Get statistics about waiting element instances by the process instance key, grouped by element id. \*
+
+#### Parameters
+
+##### input
+
+[`getProcessInstanceWaitStateStatisticsInput`](../type-aliases/getProcessInstanceWaitStateStatisticsInput.md)
+
+##### consistencyManagement
+
+[`getProcessInstanceWaitStateStatisticsConsistency`](../type-aliases/getProcessInstanceWaitStateStatisticsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessInstanceWaitStateStatisticsQueryResult`](../type-aliases/ProcessInstanceWaitStateStatisticsQueryResult.md)\>
+
+#### Example
+
+**Get process instance wait state statistics**
+
+```ts
+async function getProcessInstanceWaitStateStatisticsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceWaitStateStatistics(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Element ${stat.elementId}: waiting=${stat.waitingCount}`);
+  }
+}
+```
+
+#### Operation Id
+
+getProcessInstanceWaitStateStatistics
+
+#### Tags
+
+Process instance
 
 #### Consistency
 
@@ -6220,7 +6286,7 @@ options?): CancelablePromise<RoleResult>;
 
 Get role
 
-Get a role by its ID. *
+Get a role by its ID. \*
 
 #### Parameters
 
@@ -6348,7 +6414,7 @@ getStatus(options?): CancelablePromise<void>;
 
 Get cluster status
 
-Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader. *
+Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader. \*
 
 #### Parameters
 
@@ -6445,7 +6511,7 @@ options?): CancelablePromise<TenantResult>;
 
 Get tenant
 
-Retrieves a single tenant by tenant ID. *
+Retrieves a single tenant by tenant ID. \*
 
 #### Parameters
 
@@ -6507,7 +6573,7 @@ options?): CancelablePromise<ClusterVariableResult>;
 
 Get a tenant-scoped cluster variable
 
-Get a tenant-scoped cluster variable. *
+Get a tenant-scoped cluster variable. \*
 
 #### Parameters
 
@@ -6572,7 +6638,7 @@ getTopology(options?): CancelablePromise<TopologyResponse>;
 
 Get cluster topology
 
-Obtains the current topology of the cluster the gateway is part of. *
+Obtains the current topology of the cluster the gateway is part of. \*
 
 #### Parameters
 
@@ -6623,7 +6689,7 @@ options?): CancelablePromise<UsageMetricsResponse>;
 
 Get usage metrics
 
-Retrieve the usage metrics based on given criteria. *
+Retrieve the usage metrics based on given criteria. \*
 
 #### Parameters
 
@@ -6688,7 +6754,7 @@ options?): CancelablePromise<UserResult>;
 
 Get user
 
-Get a user by its username. *
+Get a user by its username. \*
 
 #### Parameters
 
@@ -6750,7 +6816,7 @@ options?): CancelablePromise<UserTaskResult>;
 
 Get user task
 
-Get the user task by the user task key. *
+Get the user task by the user task key. \*
 
 #### Parameters
 
@@ -6883,7 +6949,7 @@ Get a variable by its key.
 
 This endpoint returns both process-level and local (element-scoped) variables.
 The variable's scopeKey indicates whether it's a process-level variable or scoped to a
-specific element instance. *
+specific element instance. \*
 
 #### Parameters
 
@@ -7540,7 +7606,7 @@ resolveProcessInstanceIncidents(input, options?): CancelablePromise<BatchOperati
 
 Resolve related incidents
 
-Creates a batch operation to resolve multiple incidents of a process instance. *
+Creates a batch operation to resolve multiple incidents of a process instance. \*
 
 #### Parameters
 
@@ -7723,7 +7789,7 @@ options?): CancelablePromise<AgentInstanceSearchQueryResult>;
 
 Search agent instances
 
-Search for agent instances based on given criteria. *
+Search for agent instances based on given criteria. \*
 
 #### Parameters
 
@@ -7792,7 +7858,7 @@ options?): CancelablePromise<AuditLogSearchQueryResult>;
 
 Search audit logs
 
-Search for audit logs based on given criteria. *
+Search for audit logs based on given criteria. \*
 
 #### Parameters
 
@@ -7858,7 +7924,7 @@ options?): CancelablePromise<AuthorizationSearchResult>;
 
 Search authorizations
 
-Search for authorizations based on given criteria. *
+Search for authorizations based on given criteria. \*
 
 #### Parameters
 
@@ -7927,7 +7993,7 @@ options?): CancelablePromise<BatchOperationItemSearchQueryResult>;
 
 Search batch operation items
 
-Search for batch operation items based on given criteria. *
+Search for batch operation items based on given criteria. \*
 
 #### Parameters
 
@@ -7993,7 +8059,7 @@ options?): CancelablePromise<BatchOperationSearchQueryResult>;
 
 Search batch operations
 
-Search for batch operations based on given criteria. *
+Search for batch operations based on given criteria. \*
 
 #### Parameters
 
@@ -8061,7 +8127,7 @@ options?): CancelablePromise<GroupClientSearchResult>;
 
 Search group clients
 
-Search clients assigned to a group. *
+Search clients assigned to a group. \*
 
 #### Parameters
 
@@ -8125,7 +8191,7 @@ options?): CancelablePromise<RoleClientSearchResult>;
 
 Search role clients
 
-Search clients with assigned role. *
+Search clients with assigned role. \*
 
 #### Parameters
 
@@ -8189,7 +8255,7 @@ options?): CancelablePromise<TenantClientSearchResult>;
 
 Search clients for tenant
 
-Retrieves a filtered and sorted list of clients for a specified tenant. *
+Retrieves a filtered and sorted list of clients for a specified tenant. \*
 
 #### Parameters
 
@@ -8251,7 +8317,7 @@ searchClusterVariables(
 options?): CancelablePromise<ClusterVariableSearchQueryResult>;
 ```
 
-Search for cluster variables based on given criteria. By default, long variable values in the response are truncated. *
+Search for cluster variables based on given criteria. By default, long variable values in the response are truncated. \*
 
 #### Parameters
 
@@ -8317,7 +8383,7 @@ options?): CancelablePromise<CorrelatedMessageSubscriptionSearchQueryResult>;
 
 Search correlated message subscriptions
 
-Search correlated message subscriptions based on given criteria. *
+Search correlated message subscriptions based on given criteria. \*
 
 #### Parameters
 
@@ -8383,7 +8449,7 @@ options?): CancelablePromise<DecisionDefinitionSearchQueryResult>;
 
 Search decision definitions
 
-Search for decision definitions based on given criteria. *
+Search for decision definitions based on given criteria. \*
 
 #### Parameters
 
@@ -8451,7 +8517,7 @@ options?): CancelablePromise<DecisionInstanceSearchQueryResult>;
 
 Search decision instances
 
-Search for decision instances based on given criteria. *
+Search for decision instances based on given criteria. \*
 
 #### Parameters
 
@@ -8519,7 +8585,7 @@ options?): CancelablePromise<DecisionRequirementsSearchQueryResult>;
 
 Search decision requirements
 
-Search for decision requirements based on given criteria. *
+Search for decision requirements based on given criteria. \*
 
 #### Parameters
 
@@ -8661,7 +8727,7 @@ options?): CancelablePromise<ElementInstanceSearchQueryResult>;
 
 Search element instances
 
-Search for element instances based on given criteria. *
+Search for element instances based on given criteria. \*
 
 #### Parameters
 
@@ -8814,7 +8880,7 @@ options?): CancelablePromise<GlobalTaskListenerSearchQueryResult>;
 
 Search global user task listeners
 
-Search for global user task listeners based on given criteria. *
+Search for global user task listeners based on given criteria. \*
 
 #### Parameters
 
@@ -8880,7 +8946,7 @@ options?): CancelablePromise<TenantGroupSearchResult>;
 
 Search groups for tenant
 
-Retrieves a filtered and sorted list of groups for a specified tenant. *
+Retrieves a filtered and sorted list of groups for a specified tenant. \*
 
 #### Parameters
 
@@ -8944,7 +9010,7 @@ options?): CancelablePromise<GroupSearchQueryResult>;
 
 Search groups
 
-Search for groups based on given criteria. *
+Search for groups based on given criteria. \*
 
 #### Parameters
 
@@ -9010,7 +9076,7 @@ options?): CancelablePromise<RoleGroupSearchResult>;
 
 Search role groups
 
-Search groups with assigned role. *
+Search groups with assigned role. \*
 
 #### Parameters
 
@@ -9147,7 +9213,7 @@ options?): CancelablePromise<JobSearchQueryResult>;
 
 Search jobs
 
-Search for jobs based on given criteria. *
+Search for jobs based on given criteria. \*
 
 #### Parameters
 
@@ -9282,7 +9348,7 @@ options?): CancelablePromise<GroupMappingRuleSearchResult>;
 
 Search group mapping rules
 
-Search mapping rules assigned to a group. *
+Search mapping rules assigned to a group. \*
 
 #### Parameters
 
@@ -9346,7 +9412,7 @@ options?): CancelablePromise<RoleMappingRuleSearchResult>;
 
 Search role mapping rules
 
-Search mapping rules with assigned role. *
+Search mapping rules with assigned role. \*
 
 #### Parameters
 
@@ -9410,7 +9476,7 @@ options?): CancelablePromise<TenantMappingRuleSearchResult>;
 
 Search mapping rules for tenant
 
-Retrieves a filtered and sorted list of MappingRules for a specified tenant. *
+Retrieves a filtered and sorted list of MappingRules for a specified tenant. \*
 
 #### Parameters
 
@@ -9555,7 +9621,7 @@ options?): CancelablePromise<ProcessDefinitionSearchQueryResult>;
 
 Search process definitions
 
-Search for process definitions based on given criteria. *
+Search for process definitions based on given criteria. \*
 
 #### Parameters
 
@@ -9698,7 +9764,7 @@ options?): CancelablePromise<ProcessInstanceSearchQueryResult>;
 
 Search process instances
 
-Search for process instances based on given criteria. *
+Search for process instances based on given criteria. \*
 
 #### Parameters
 
@@ -9840,7 +9906,7 @@ options?): CancelablePromise<RoleSearchQueryResult>;
 
 Search roles
 
-Search for roles based on given criteria. *
+Search for roles based on given criteria. \*
 
 #### Parameters
 
@@ -9906,7 +9972,7 @@ options?): CancelablePromise<GroupRoleSearchResult>;
 
 Search group roles
 
-Search roles assigned to a group. *
+Search roles assigned to a group. \*
 
 #### Parameters
 
@@ -9970,7 +10036,7 @@ options?): CancelablePromise<TenantRoleSearchResult>;
 
 Search roles for tenant
 
-Retrieves a filtered and sorted list of roles for a specified tenant. *
+Retrieves a filtered and sorted list of roles for a specified tenant. \*
 
 #### Parameters
 
@@ -10034,7 +10100,7 @@ options?): CancelablePromise<TenantSearchQueryResult>;
 
 Search tenants
 
-Retrieves a filtered and sorted list of tenants. *
+Retrieves a filtered and sorted list of tenants. \*
 
 #### Parameters
 
@@ -10100,7 +10166,7 @@ options?): CancelablePromise<UserSearchResult>;
 
 Search users
 
-Search for users based on given criteria. *
+Search for users based on given criteria. \*
 
 #### Parameters
 
@@ -10167,7 +10233,7 @@ options?): CancelablePromise<GroupUserSearchResult>;
 
 Search group users
 
-Search users assigned to a group. *
+Search users assigned to a group. \*
 
 #### Parameters
 
@@ -10231,7 +10297,7 @@ options?): CancelablePromise<RoleUserSearchResult>;
 
 Search role users
 
-Search users with assigned role. *
+Search users with assigned role. \*
 
 #### Parameters
 
@@ -10295,7 +10361,7 @@ options?): CancelablePromise<TenantUserSearchResult>;
 
 Search users for tenant
 
-Retrieves a filtered and sorted list of users for a specified tenant. *
+Retrieves a filtered and sorted list of users for a specified tenant. \*
 
 #### Parameters
 
@@ -10359,7 +10425,7 @@ options?): CancelablePromise<AuditLogSearchQueryResult>;
 
 Search user task audit logs
 
-Search for user task audit logs based on given criteria. *
+Search for user task audit logs based on given criteria. \*
 
 #### Parameters
 
@@ -10496,7 +10562,7 @@ options?): CancelablePromise<UserTaskSearchQueryResult>;
 
 Search user tasks
 
-Search for user tasks based on given criteria. *
+Search for user tasks based on given criteria. \*
 
 #### Parameters
 
@@ -10644,7 +10710,7 @@ include variables from parent scopes that would be visible through the scope hie
 Variables can be process-level (scoped to the process instance) or local (scoped to specific
 BPMN elements like tasks, subprocesses, etc.).
 
-By default, long variable values in the response are truncated. *
+By default, long variable values in the response are truncated. \*
 
 #### Parameters
 
@@ -11095,7 +11161,7 @@ unassignMappingRuleFromGroup(input, options?): CancelablePromise<void>;
 
 Unassign a mapping rule from a group
 
-Unassigns a mapping rule from a group. *
+Unassigns a mapping rule from a group. \*
 
 #### Parameters
 
@@ -11147,7 +11213,7 @@ unassignMappingRuleFromTenant(input, options?): CancelablePromise<void>;
 
 Unassign a mapping rule from a tenant
 
-Unassigns a single mapping rule from a specified tenant without deleting the rule. *
+Unassigns a single mapping rule from a specified tenant without deleting the rule. \*
 
 #### Parameters
 
@@ -11199,7 +11265,7 @@ unassignRoleFromClient(input, options?): CancelablePromise<void>;
 
 Unassign a role from a client
 
-Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role. *
+Unassigns the specified role from the client. The client will no longer inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -11251,7 +11317,7 @@ unassignRoleFromGroup(input, options?): CancelablePromise<void>;
 
 Unassign a role from a group
 
-Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role. *
+Unassigns the specified role from the group. All group members (user or client) no longer inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -11300,7 +11366,7 @@ unassignRoleFromMappingRule(input, options?): CancelablePromise<void>;
 
 Unassign a role from a mapping rule
 
-Unassigns a role from a mapping rule. *
+Unassigns a role from a mapping rule. \*
 
 #### Parameters
 
@@ -11408,7 +11474,7 @@ unassignRoleFromUser(input, options?): CancelablePromise<void>;
 
 Unassign a role from a user
 
-Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role. *
+Unassigns a role from a user. The user will no longer inherit the authorizations associated with this role. \*
 
 #### Parameters
 
@@ -11679,7 +11745,7 @@ updateAuthorization(input, options?): CancelablePromise<void>;
 
 Update authorization
 
-Update the authorization with the given key. *
+Update the authorization with the given key. \*
 
 #### Parameters
 
@@ -11788,7 +11854,7 @@ updateGlobalTaskListener(input, options?): CancelablePromise<GlobalTaskListenerR
 
 Update global user task listener
 
-Updates a global user task listener. *
+Updates a global user task listener. \*
 
 #### Parameters
 
@@ -11838,7 +11904,7 @@ updateGroup(input, options?): CancelablePromise<GroupUpdateResult>;
 
 Update group
 
-Update a group with the given ID. *
+Update a group with the given ID. \*
 
 #### Parameters
 
@@ -11887,7 +11953,7 @@ updateJob(input, options?): CancelablePromise<void>;
 
 Update job
 
-Update a job with the given key. *
+Update a job with the given key. \*
 
 #### Parameters
 
@@ -12047,7 +12113,7 @@ updateRole(input, options?): CancelablePromise<RoleUpdateResult>;
 
 Update role
 
-Update a role with the given ID. *
+Update a role with the given ID. \*
 
 #### Parameters
 
@@ -12096,7 +12162,7 @@ updateTenant(input, options?): CancelablePromise<TenantUpdateResult>;
 
 Update tenant
 
-Updates an existing tenant. *
+Updates an existing tenant. \*
 
 #### Parameters
 
@@ -12201,7 +12267,7 @@ updateUser(input, options?): CancelablePromise<UserUpdateResult>;
 
 Update user
 
-Updates a user. *
+Updates a user. \*
 
 #### Parameters
 

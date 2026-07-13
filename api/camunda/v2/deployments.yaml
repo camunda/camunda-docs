@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources, and generic files.
@@ -62,6 +64,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.7]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Returns a deployed resource.
@@ -107,6 +111,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.7]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -162,6 +168,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.10]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Returns the content of a deployed resource in binary format (octet-stream).
@@ -208,6 +216,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.10]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUkVTT1VSQ0UiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for deployed resources based on given criteria.
@@ -251,6 +261,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siZHluYW1pYyI6dHJ1ZSwibm90ZSI6IlJlc29sdmVkIGZyb20gdGhlIGRlcGxveWVkIHJlc291cmNlIHR5cGUg4oCUIERFTEVURV9QUk9DRVNTLCBERUxFVEVfRFJELCBERUxFVEVfRk9STSBvciBERUxFVEVfUkVTT1VSQ0Ugb24gUkVTT1VSQ0UuIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 

@@ -956,6 +956,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Recovery",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode",
+          label: "Change cluster mode",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/restore",
+          label: "Restore from a backup",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Resource",
       items: [
         {
