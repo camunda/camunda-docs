@@ -11,32 +11,37 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## The process
 
-Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it in every request.
+Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it in every request. If you already have a client or token for Web Modeler API v1, you can reuse it for this API.
+
+## Prerequisites
+
+Before you begin, make sure you have the **Admin** user role.
 
 ## Generate a token
 
-1. In Camunda Hub, click **Organization > Administration API > Create API Client**.
-2. Grant this client access to the **Camunda Hub API** with the necessary permissions.
-3. Once you've created the client, capture the following values required to generate a token:
+1. In Camunda Hub, under **Organization overview**, click **Admin APIs**.
+2. From the **Administration API** management page, click **Create new credentials**.
+3. Name the client, and grant it access to the **Web Modeler API** with the necessary permissions.
+4. Click **Create**, and capture the following values required to generate a token:
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
-   | Name                     | Environment variable name    | Default value                                |
-   | ------------------------ | ---------------------------- | -------------------------------------------- |
-   | Client ID                | `CAMUNDA_HUB_CLIENT_ID`      | -                                            |
-   | Client Secret            | `CAMUNDA_HUB_CLIENT_SECRET`  | -                                            |
-   | Authorization Server URL | `CAMUNDA_OAUTH_URL`          | `https://login.cloud.camunda.io/oauth/token` |
-   | Audience                 | `CAMUNDA_HUB_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
+   | Name                     | Environment variable name        | Default value                                |
+   | ------------------------ | -------------------------------- | -------------------------------------------- |
+   | Client ID                | `CAMUNDA_CONSOLE_CLIENT_ID`      | -                                            |
+   | Client Secret            | `CAMUNDA_CONSOLE_CLIENT_SECRET`  | -                                            |
+   | Authorization Server URL | `CAMUNDA_OAUTH_URL`              | `https://login.cloud.camunda.io/oauth/token` |
+   | Audience                 | `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` | `api.cloud.camunda.io`                       |
    <!-- this comment convinces the markdown processor to still treat the table as a table, but without adding surrounding paragraphs. 🤷 -->
    :::caution
    When you create client credentials, the client secret is only shown once. Save the client secret somewhere safe.
    :::
-4. Execute an authentication request to the token issuer:
+5. Execute an authentication request to the token issuer:
    ```bash
    curl --request POST ${CAMUNDA_OAUTH_URL} \
        --header 'Content-Type: application/x-www-form-urlencoded' \
        --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=${CAMUNDA_HUB_OAUTH_AUDIENCE}" \
-       --data-urlencode "client_id=${CAMUNDA_HUB_CLIENT_ID}" \
-       --data-urlencode "client_secret=${CAMUNDA_HUB_CLIENT_SECRET}"
+       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
    ```
    A successful response looks like this:
    ```json
@@ -48,7 +53,7 @@ Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it 
      "not-before-policy": 0
    }
    ```
-5. Use the `access_token` in the next step.
+6. Use the `access_token` in the next step.
 
 ## Authenticate with your token
 

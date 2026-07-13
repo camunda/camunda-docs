@@ -104,7 +104,7 @@ module.exports = {
         "components/agentic-orchestration/ao-design",
         {
           type: "category",
-          label: "Evaluate your AI agents",
+          label: "Evaluate AI agents",
           link: {
             type: "doc",
             id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
@@ -365,6 +365,7 @@ module.exports = {
             "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
+        "components/wait-states/overview",
         {
           type: "category",
           label: "Camunda integrations",
@@ -622,6 +623,7 @@ module.exports = {
               ],
             },
             "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/filter-process-instances",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/monitor-batch-operations",
@@ -636,6 +638,7 @@ module.exports = {
             },
             "components/operate/userguide/process-instance-migration",
             "components/operate/userguide/audit-operations",
+            "components/operate/userguide/view-wait-states",
           ],
         },
         {
@@ -729,8 +732,17 @@ module.exports = {
               ],
             },
             {
-              type: "doc",
-              id: "components/hub/organization/manage-catalog/manage-catalog",
+              type: "category",
+              label: "Manage the catalog",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-catalog/manage-catalog",
+              },
+              items: [
+                "components/hub/organization/manage-catalog/getting-started-catalog",
+                "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/sync-multiple-repositories",
+              ],
             },
             {
               type: "category",
@@ -876,6 +888,7 @@ module.exports = {
                       items: [
                         "components/hub/workspace/modeler/element-templates/element-template-generator",
                         "components/hub/workspace/modeler/element-templates/using-templates-in-modeler",
+                        "components/hub/workspace/modeler/element-templates/use-catalog-assets",
                         "components/hub/workspace/modeler/element-templates/save-as-element-templates",
                         "components/hub/workspace/modeler/element-templates/best-practices",
                       ],
@@ -1309,7 +1322,6 @@ module.exports = {
         require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
         require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
-        require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
         require("./docs/apis-tools/hub-api-saas/sidebar-schema"),
         require("./docs/apis-tools/hub-api-sm/sidebar-schema"),
         {
@@ -1546,8 +1558,11 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
+      link: {
+        type: "doc",
+        id: "apis-tools/migration-manuals/migrate-to-810",
+      },
       items: [
-        "apis-tools/migration-manuals/migrate-to-810",
         "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
       ],
     },
@@ -1886,6 +1901,7 @@ module.exports = {
                   ],
                 },
                 "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/tls",
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
@@ -2184,7 +2200,15 @@ module.exports = {
           },
           items: [
             "self-managed/concepts/multi-tenancy/logical-tenants",
-            "self-managed/concepts/multi-tenancy/physical-tenants",
+            {
+              type: "category",
+              label: "Physical Tenants",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-tenancy/physical-tenants",
+              },
+              items: ["self-managed/concepts/physical-tenants/index"],
+            },
           ],
         },
         {
@@ -2196,6 +2220,7 @@ module.exports = {
           },
           items: ["self-managed/concepts/audit-log/configure-audit-log"],
         },
+        "self-managed/concepts/wait-states/configure-wait-states",
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         {
@@ -2205,7 +2230,17 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+          type: "category",
+          label: "Multi-region",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-region/resilience-tiers",
+          },
+          items: [
+            "self-managed/concepts/multi-region/cold-recovery",
+            "self-managed/concepts/multi-region/dual-region",
+            "self-managed/concepts/multi-region/zone-aware-clusters",
+          ],
         },
         "self-managed/operational-guides/data-purge",
         "self-managed/operational-guides/troubleshooting",
@@ -2343,22 +2378,15 @@ module.exports = {
           },
           items: [
             "self-managed/components/hub/usage-metrics",
-            "self-managed/components/hub/telemetry",
             "self-managed/components/hub/monitoring",
             {
-              type: "category",
-              label: "Configuration",
-              link: {
-                type: "doc",
-                id: "self-managed/components/hub/configuration/configuration",
-              },
-              items: [
-                "self-managed/components/hub/configuration/ssl",
-                "self-managed/components/hub/configuration/modeler-configuration",
+              Configuration: [
+                "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
                 "self-managed/components/hub/configuration/logging",
-                "self-managed/components/hub/configuration/modeler-ssl",
+                "self-managed/components/hub/configuration/ssl",
                 "self-managed/components/hub/configuration/copilot",
               ],
             },
@@ -2486,7 +2514,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.9",
+      label: "Upgrade to Camunda 8.10",
       className: "sidebar-cta",
       link: {
         type: "doc",
@@ -2503,7 +2531,6 @@ module.exports = {
           },
           items: ["self-managed/upgrade/helm/880-to-890"],
         },
-        "self-managed/upgrade/manual/index",
         {
           type: "category",
           label: "Component upgrade",
@@ -2511,15 +2538,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/components/index",
           },
-          items: [
-            "self-managed/upgrade/components/880-to-890",
-            {
-              Database: [
-                "self-managed/upgrade/components/database/changes-in-elasticsearch-8",
-              ],
-            },
-            "self-managed/upgrade/components/keycloak/keycloak-compatibility",
-          ],
+          items: ["self-managed/upgrade/components/890-to-8100"],
         },
       ],
     },

@@ -27,7 +27,7 @@ jobs:
 
       - name: Restore lychee cache
         id: cache-restore
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
@@ -35,7 +35,7 @@ jobs:
             cache-lychee-
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v2.8.0
+        uses: lycheeverse/lychee-action@v2.9.0
         id: link-checker
         with:
           fail: false
@@ -45,7 +45,7 @@ jobs:
 
       - name: Save lychee cache
         if: always()
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}

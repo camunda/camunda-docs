@@ -31,7 +31,7 @@ import PageDescription from '@site/src/components/PageDescription';
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
+<ul><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -121,6 +121,10 @@ Camunda Process Test now adds dedicated support for AI agent testing, making it 
 Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can query the latest official Camunda documentation directly. This gives developers a lightweight way to bring product documentation into coding and support workflows without leaving their editor.
 
 <p class="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
+
+### Camunda Spring Boot Starter - Spring Boot 4.1 support
+
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.9.12` patch onward. Spring Boot 4.0.x remains the default bundled version.
 
 ## Camunda 8 Run
 
@@ -519,7 +523,7 @@ Camunda 8.9 expands Web Modeler with broader event template support, email-based
 <ul>
   <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
   <li><span class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
-  <li><span class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
+  <li><span class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
 </ul>
 
 ## 8.9.0-alpha5
@@ -1628,7 +1632,7 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
 
-<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
+<p class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 #### Web Modeler: IP egress monitoring (SaaS)
 

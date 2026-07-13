@@ -48,6 +48,13 @@
       "label": "Get cluster topology"
     }
   ],
+  "change_cluster_mode": [
+    {
+      "file": "admin_operations.py",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
+    }
+  ],
   "get_status": [
     {
       "file": "admin_operations.py",
@@ -797,6 +804,13 @@
       "label": "Delete decision instances in batch"
     }
   ],
+  "update_jobs_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
+    }
+  ],
   "delete_process_instance": [
     {
       "file": "extended_operations.py",
@@ -830,6 +844,13 @@
       "file": "extended_operations.py",
       "region": "GetProcessInstanceStatistics",
       "label": "Get process instance statistics"
+    }
+  ],
+  "get_process_instance_wait_state_statistics": [
+    {
+      "file": "extended_operations.py",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
     }
   ],
   "get_process_instance_sequence_flows": [

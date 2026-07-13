@@ -11,6 +11,8 @@ from camunda_orchestration_sdk import (
     ElementInstanceSearchQuery,
     ElementInstanceWaitStateQuery,
     IncidentSearchQuery,
+    JobWaitStateDetails,
+    MessageWaitStateDetails,
     MigrateProcessInstanceMappingInstruction,
     ProcessDefinitionId,
     ProcessDefinitionInstanceStatisticsQuery,
@@ -110,6 +112,23 @@ def get_process_instance_statistics_example(
 
 
 # endregion GetProcessInstanceStatistics
+
+
+# region GetProcessInstanceWaitStateStatistics
+def get_process_instance_wait_state_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_wait_state_statistics(
+        process_instance_key=process_instance_key,
+    )
+
+    for stat in result.items:
+        print(f"Element: {stat.element_id}, Waiting: {stat.waiting_count}")
+
+
+# endregion GetProcessInstanceWaitStateStatistics
 
 
 # region GetProcessInstanceSequenceFlows
@@ -433,10 +452,16 @@ def search_element_instance_wait_states_example() -> None:
     )
 
     for wait_state in result.items:
+        details = wait_state.details
+        if isinstance(details, JobWaitStateDetails):
+            info = f"waiting on job '{details.job_type}'"
+        elif isinstance(details, MessageWaitStateDetails):
+            info = f"waiting for message '{details.message_name}'"
+        else:
+            info = f"waiting ({details.wait_state_type})"
         print(
             f"Element {wait_state.element_id} "
-            f"(instance {wait_state.element_instance_key}) "
-            f"waiting in state: {wait_state.wait_state_type}"
+            f"(instance {wait_state.element_instance_key}) {info}"
         )
 
 

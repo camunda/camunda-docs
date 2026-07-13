@@ -666,6 +666,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-jobs-batch-operation",
+          label: "Update jobs (batch)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
           label: "Global job statistics",
           className: "api-method get",
@@ -939,6 +945,30 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics",
           label: "Get element instance statistics",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-wait-state-statistics",
+          label: "Get wait state statistics",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Recovery",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode",
+          label: "Change cluster mode",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/restore",
+          label: "Restore from a backup",
+          className: "api-method post",
         },
       ],
     },

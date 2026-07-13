@@ -7,7 +7,7 @@ description: "Learn how to configure Web Modeler to connect securely to supporte
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes advanced database connection configuration for Web Modeler. For a general setup guide, visit the [configuration overview](modeler-configuration.md#database).
+This page describes advanced database connection configuration for Web Modeler. For a general setup guide, visit the [configuration overview](properties.md#database).
 
 :::tip Need end-to-end guidance?
 For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
@@ -370,7 +370,7 @@ webModeler:
           [
             "sh",
             "-c",
-            "wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.5.0.tar.gz -O /driver-lib/mysql.tar.gz && tar -xzf /driver-lib/mysql.tar.gz -C /driver-lib --strip-components=1",
+            "wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.7.0.tar.gz -O /driver-lib/mysql.tar.gz && tar -xzf /driver-lib/mysql.tar.gz -C /driver-lib --strip-components=1",
           ]
         volumeMounts:
           - name: mysql-driver

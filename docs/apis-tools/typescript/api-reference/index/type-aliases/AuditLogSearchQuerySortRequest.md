@@ -36,6 +36,8 @@ field:
   | "processDefinitionId"
   | "processDefinitionKey"
   | "processInstanceKey"
+  | "inboundChannelType"
+  | "inboundChannelToolName"
   | "result"
   | "tenantId"
   | "timestamp"

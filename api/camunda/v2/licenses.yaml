@@ -11,6 +11,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
         [[CONSISTENCY:STRONG]]
 
         Obtains the status of the current Camunda license.

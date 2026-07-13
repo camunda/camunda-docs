@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9JTlNUQU5DRSJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for decision instances based on given criteria.
@@ -51,6 +53,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -98,6 +102,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFX0RFQ0lTSU9OX0lOU1RBTkNFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -150,6 +156,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX0RFTEVURV9ERUNJU0lPTl9JTlNUQU5DRSJ9XX1dfQ]]
+
         [[CONSISTENCY:STRONG]]
 
         Delete multiple decision instances. This will delete the historic data from secondary storage.
@@ -190,6 +198,7 @@ components:
           description: The field to sort by.
           type: string
           enum:
+            - businessId
             - decisionDefinitionId
             - decisionDefinitionKey
             - decisionDefinitionName
@@ -272,6 +281,11 @@ components:
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
           description: The key of the process instance.
+        businessId:
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+          description: |
+            The business ID of the owning process instance the decision instance belongs to. This only works for decision instances created with 8.10 and onwards. Decision instances from prior versions and standalone evaluations don't contain this data and cannot be found.
         decisionDefinitionKey:
           description: The key of the decision.
           allOf:
@@ -321,6 +335,8 @@ components:
           addedInVersion: "8.9"
         - propertyName: decisionRequirementsKey
           addedInVersion: "8.9"
+        - propertyName: businessId
+          addedInVersion: "8.10"
     DeleteDecisionInstanceRequest:
       type: object
       nullable: true
@@ -342,6 +358,7 @@ components:
     DecisionInstanceResult:
       type: object
       required:
+        - businessId
         - decisionDefinitionId
         - decisionDefinitionKey
         - decisionDefinitionName
@@ -360,6 +377,15 @@ components:
         - state
         - tenantId
       properties:
+        businessId:
+          description: |
+            The business ID of the owning process instance, inherited when the decision instance was
+            evaluated. This is `null` for decision instances created before version 8.10, for
+            standalone decision evaluations, and for decision instances whose owning process instance
+            has no business ID.
+          nullable: true
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
         decisionDefinitionId:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/DecisionDefinitionId"
@@ -428,6 +454,8 @@ components:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
       x-properties-added-in-version:
+        - propertyName: businessId
+          addedInVersion: "8.10"
         - propertyName: decisionDefinitionId
           addedInVersion: "8.6"
         - propertyName: decisionDefinitionKey

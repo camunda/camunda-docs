@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Creates and starts an instance of the specified process.
@@ -87,6 +89,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get the process instance by the process instance key.
@@ -136,6 +140,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get sequence flows taken by the process instance.
@@ -179,6 +185,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get statistics about elements by the process instance key.
@@ -208,6 +216,51 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
       x-added-in-version: "8.8"
+  /process-instances/{processInstanceKey}/statistics/wait-states:
+    get:
+      tags:
+        - Process instance
+      operationId: getProcessInstanceWaitStateStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Get wait state statistics
+      description: |-
+
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get statistics about waiting element instances by the process instance key, grouped by element id.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+            format: string<ProcessInstanceKey>
+            example: "2251799813690746"
+            description: System-generated key for a process instance.
+      responses:
+        "200":
+          description: The process instance wait state statistics result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceWaitStateStatisticsQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
   /process-instances/search:
     post:
       tags:
@@ -221,6 +274,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -260,6 +315,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -321,6 +378,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Creates a batch operation to resolve multiple incidents of a process instance.
@@ -369,6 +428,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDQU5DRUxfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -421,6 +482,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX0NBTkNFTF9QUk9DRVNTX0lOU1RBTkNFIn1dfV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Cancels multiple running process instances.
@@ -467,6 +530,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX1JFU09MVkVfSU5DSURFTlQifV19XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -515,6 +580,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX01JR1JBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX1dfQ]]
+
         [[CONSISTENCY:STRONG]]
 
         Migrate multiple process instances.
@@ -561,6 +628,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX01PRElGWV9QUk9DRVNTX0lOU1RBTkNFIn1dfV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -610,6 +679,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -668,6 +739,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX0RFTEVURV9QUk9DRVNTX0lOU1RBTkNFIn1dfV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Delete multiple process instances. This will delete the historic data from secondary storage.
@@ -713,6 +786,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -776,6 +851,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJNT0RJRllfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Modifies a running process instance.
@@ -829,6 +906,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -1650,6 +1729,32 @@ components:
           type: array
           items:
             $ref: "process-definitions.yaml#/components/schemas/ProcessElementStatisticsResult"
+    ProcessInstanceWaitStateStatisticsQueryResult:
+      description: Process instance wait state statistics query response.
+      required:
+        - items
+      type: object
+      properties:
+        items:
+          description: The wait state statistics.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceWaitStateStatisticsResult"
+    ProcessInstanceWaitStateStatisticsResult:
+      description: Process instance wait state statistics response item.
+      type: object
+      required:
+        - elementId
+        - waitingCount
+      properties:
+        elementId:
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/ElementId"
+          description: The element id for which the wait states are aggregated.
+        waitingCount:
+          description: The total number of waiting instances of the element.
+          type: integer
+          format: int64
     ProcessInstanceMigrationInstruction:
       type: object
       description: |

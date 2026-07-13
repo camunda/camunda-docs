@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for element instances based on given criteria.
@@ -52,6 +54,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.10]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Returns the wait states for element instances matching the given filter.
@@ -90,6 +94,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -141,6 +147,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -194,6 +202,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -255,6 +265,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -855,12 +867,14 @@ components:
           USER_TASK: "#/components/schemas/UserTaskWaitStateDetails"
           TIMER: "#/components/schemas/TimerWaitStateDetails"
           SIGNAL: "#/components/schemas/SignalWaitStateDetails"
+          CONDITION: "#/components/schemas/ConditionWaitStateDetails"
       oneOf:
         - $ref: "#/components/schemas/JobWaitStateDetails"
         - $ref: "#/components/schemas/MessageWaitStateDetails"
         - $ref: "#/components/schemas/UserTaskWaitStateDetails"
         - $ref: "#/components/schemas/TimerWaitStateDetails"
         - $ref: "#/components/schemas/SignalWaitStateDetails"
+        - $ref: "#/components/schemas/ConditionWaitStateDetails"
     WaitStateTypeEnum:
       description: The type of waiting state an element instance is in.
       type: string
@@ -870,6 +884,7 @@ components:
         - USER_TASK
         - TIMER
         - SIGNAL
+        - CONDITION
     BaseWaitStateDetails:
       description: Common fields shared by all wait-state details variants.
       type: object
@@ -977,6 +992,26 @@ components:
           description: The name of the signal being awaited.
           type: string
       x-added-in-version: "8.10"
+    ConditionWaitStateDetails:
+      type: object
+      required:
+        - waitStateType
+        - expression
+        - events
+      allOf:
+        - $ref: "#/components/schemas/BaseWaitStateDetails"
+      properties:
+        expression:
+          description: The condition expression that must evaluate to true to proceed.
+          type: string
+        events:
+          description: The variable events that trigger condition re-evaluation. Empty means all events.
+          type: array
+          items:
+            type: string
+            enum:
+              - create
+              - update
     AdHocSubProcessActivateActivityReference:
       type: object
       properties:

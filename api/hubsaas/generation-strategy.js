@@ -6,9 +6,7 @@ function preGenerateDocs(config) {
 }
 
 function postGenerateDocs(config) {
-  removeDuplicateVersionBadge(
-    `${config.outputDir}/hub-public-api-v-2.info.mdx`
-  );
+  removeDuplicateVersionBadge(`${config.outputDir}/hub-api.info.mdx`);
 }
 
 module.exports = {

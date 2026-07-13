@@ -186,4 +186,26 @@ public static class BatchOperationExamples
     }
     // </DeleteDecisionInstancesBatchOperation>
     #endregion DeleteDecisionInstancesBatchOperation
+
+    #region UpdateJobsBatchOperation
+
+    // <UpdateJobsBatchOperation>
+    public static async Task UpdateJobsBatchOperationExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.UpdateJobsBatchOperationAsync(
+            new JobBatchUpdateRequest
+            {
+                Filter = new JobFilter
+                {
+                    Type = new StringFilterProperty { Eq = "my-job-type" },
+                },
+                Changeset = new JobChangeset { Retries = 3 },
+            });
+
+        Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+    }
+    // </UpdateJobsBatchOperation>
+    #endregion UpdateJobsBatchOperation
 }

@@ -144,7 +144,6 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -198,7 +197,6 @@ The client can then access tenant data and perform authorized actions.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -377,7 +375,6 @@ this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -909,6 +906,57 @@ def cancel_process_instances_batch_operation_example() -> None:
     print(f"Batch operation key: {result.batch_operation_key}")
 ```
 
+### change_cluster_mode()
+
+```python
+def change_cluster_mode(*, mode, dry_run=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+```
+
+Change cluster mode
+
+> Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the
+
+request is acknowledged once the change has been accepted, before the transition itself has
+completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-
+only operations remains available; exiting recovery mode returns the cluster to normal processing.
+Returns the planned cluster change so its progress can be monitored via the topology.
+
+- **Parameters:**
+  - **mode** (_ChangeClusterModeMode_)
+  - **dry_run** (_bool_ _|_ _Unset_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ClusterModeChangeResponse
+- **Return type:**
+  ClusterModeChangeResponse
+
+#### Examples
+
+**Change cluster mode:**
+
+```python
+def change_cluster_mode_example() -> None:
+    client = CamundaClient()
+
+    # Pass dry_run=True to validate the request and inspect the resulting plan
+    # without applying it. Omit it (or set it to False) to trigger the transition.
+    result = client.change_cluster_mode(
+        mode=ChangeClusterModeMode.RECOVERING,
+        dry_run=True,
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for operation in result.planned_changes:
+        suffix = f" -> {operation.mode}" if operation.mode else ""
+        print(f"  {operation.operation}{suffix}")
+```
+
 ### client
 
 ```python
@@ -1305,8 +1353,11 @@ def create_deployment(, data, **kwargs)
 
 Deploy resources
 
-> Deploys one or more resources (e.g. processes, decision models, or forms).
+> Deploys one or more resources, including BPMN processes, DMN decision models, forms, RPA resources,
 
+and generic files.
+A deployment can contain any file type. Files that are not interpreted as BPMN, DMN, form, or RPA
+resources are stored as deployable generic resources in the engine.
 This is an atomic call, i.e. either all resources are deployed or none of them are.
 
 - **Parameters:**
@@ -2670,7 +2721,7 @@ This is a convenience wrapper around [`create_deployment()`](#create_deployment)
   convenience lists (`processes`, `decisions`, `decision_requirements`, `forms`).
 
 * **Parameters:**
-  - **files** (_list_ _[\*\*str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
+  - **files** (_list_ _[__str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
   - **tenant_id** (_str_ _|_ _None_) – Optional tenant identifier. If not provided, the default tenant is used.
 * **Returns:**
   The deployment result with extracted resource lists.
@@ -3191,7 +3242,6 @@ Get decision instance
 
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3486,7 +3536,7 @@ optionally by jobType.
   - **from** (_datetime.datetime_)
   - **to** (_datetime.datetime_)
   - **job_type** (_str_ _|_ _Unset_)
-  - **from\_** (_datetime.datetime_)
+  - **from_** (_datetime.datetime_)
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
@@ -4461,6 +4511,50 @@ def get_process_instance_statistics_by_error_example() -> None:
     if not isinstance(result.items, Unset):
         for stat in result.items:
             print(f"Error: {stat.error_message}")
+```
+
+### get_process_instance_wait_state_statistics()
+
+```python
+def get_process_instance_wait_state_statistics(process_instance_key, , consistency=None, **kwargs)
+```
+
+Get wait state statistics
+
+> Get statistics about waiting element instances by the process instance key, grouped by element id.
+
+- **Parameters:**
+  - **process_instance_key** (_str_) – System-generated key for a process instance. Example: 2251799813690746.
+  - **consistency** (_ConsistencyOptions_ _|_ _None_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  ProcessInstanceWaitStateStatisticsQueryResult
+- **Return type:**
+  ProcessInstanceWaitStateStatisticsQueryResult
+
+#### Examples
+
+**Get process instance wait state statistics:**
+
+```python
+def get_process_instance_wait_state_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_wait_state_statistics(
+        process_instance_key=process_instance_key,
+    )
+
+    for stat in result.items:
+        print(f"Element: {stat.element_id}, Waiting: {stat.waiting_count}")
 ```
 
 ### get_resource()
@@ -6354,10 +6448,16 @@ def search_element_instance_wait_states_example() -> None:
     )
 
     for wait_state in result.items:
+        details = wait_state.details
+        if isinstance(details, JobWaitStateDetails):
+            info = f"waiting on job '{details.job_type}'"
+        elif isinstance(details, MessageWaitStateDetails):
+            info = f"waiting for message '{details.message_name}'"
+        else:
+            info = f"waiting ({details.wait_state_type})"
         print(
             f"Element {wait_state.element_id} "
-            f"(instance {wait_state.element_instance_key}) "
-            f"waiting in state: {wait_state.wait_state_type}"
+            f"(instance {wait_state.element_instance_key}) {info}"
         )
 ```
 
@@ -7870,7 +7970,6 @@ assignments no longer applied.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -7923,7 +8022,6 @@ The client can no longer access tenant data.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -8102,7 +8200,6 @@ associated with this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
-
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -8716,6 +8813,60 @@ def update_job_example(job_key: JobKey) -> None:
             ),
         ),
     )
+```
+
+### update_jobs_batch_operation()
+
+```python
+def update_jobs_batch_operation(, data, **kwargs)
+```
+
+Update jobs (batch)
+
+> Creates a batch operation to update jobs matching the given filter. At least one changeset field
+
+must be non-null. This is done asynchronously; the progress can be tracked using the
+batchOperationKey from the response and the batch operation status endpoint (/batch-
+operations/{batchOperationKey}).
+
+- **Parameters:**
+  - **body** (_JobBatchUpdateRequest_) – The filter and changeset for a batch job update operation.
+    The filter defines which jobs are updated; the changeset defines what to update. At least
+    one changeset field must be non-null.
+  - **data** (_JobBatchUpdateRequest_)
+  - **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The job batch update operation failed. More details are provided in the response body.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  BatchOperationCreatedResult
+- **Return type:**
+  BatchOperationCreatedResult
+
+#### Examples
+
+**Update jobs in batch:**
+
+```python
+def update_jobs_batch_operation_example() -> None:
+    client = CamundaClient()
+
+    result = client.update_jobs_batch_operation(
+        data=JobBatchUpdateRequest(
+            filter_=JobBatchUpdateRequestFilter(
+                type_="my-job-type",
+            ),
+            changeset=JobBatchUpdateRequestChangeset(
+                retries=3,
+            ),
+        ),
+    )
+
+    print(f"Batch operation key: {result.batch_operation_key}")
 ```
 
 ### update_mapping_rule()

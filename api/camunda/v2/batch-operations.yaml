@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get batch operation by key.
@@ -59,6 +61,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for batch operations based on given criteria.
@@ -97,6 +101,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -143,6 +149,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -192,6 +200,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Resumes a suspended batch operation.
@@ -239,6 +249,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -746,6 +758,7 @@ components:
         - MIGRATE_PROCESS_INSTANCE
         - MODIFY_PROCESS_INSTANCE
         - RESOLVE_INCIDENT
+        - UPDATE_JOB
         - UPDATE_VARIABLE
     BatchOperationTypeFilterProperty:
       description: BatchOperationTypeEnum property with full advanced search capabilities.

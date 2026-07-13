@@ -64,7 +64,7 @@ Click **Create GitHub App** to finish.
    - **GitHub API Base URL:** The base URL of your [GitHub installation's REST API](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls). This is optional and only required for GitHub Enterprise instances. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
 
      :::note
-     If you're using a self-hosted GitHub instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/modeler-configuration.md#git-sync) for configuration details.
+     If you're using a self-hosted GitHub instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
 
      Refer to [GitHub documentation](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls) for more information.
      :::
@@ -119,7 +119,7 @@ To generate a project access token, follow the [GitLab documentation](https://do
    - **GitLab API base URL:** The base URL of your [GitLab installation's REST API](https://docs.gitlab.com/api/rest/#make-a-rest-api-request), for example, `https://gitlab.example.com/api/v4`. This is optional and only required for self-hosted GitLab instances. If left empty, Web Modeler uses the default GitLab Cloud REST API URL (`https://gitlab.com/api/v4`).
 
      :::note
-     If you're using a self-hosted GitLab instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/modeler-configuration.md#git-sync) for configuration details.
+     If you're using a self-hosted GitLab instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
      :::
 
    - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
@@ -162,7 +162,7 @@ Ensure the following:
 <h3> Configure Azure in Web Modeler </h3>
 
 :::note
-If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/modeler-configuration.md#git-sync) for configuration details.
+If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
 :::
 
 1. Within Web Modeler, navigate to the project you would like to connect to Azure, and select **Connect repository**.
@@ -211,7 +211,7 @@ openssl x509 -req -days 365 -in cert.csr -signkey private_key.pem -out cert.crt
 
 This generates a self-signed certificate named `cert.crt` valid for 365 days.
 
-You can now use it with the private key to register an app in Microsoft Entra, and configure your Azure git sync configuration.
+You can now use it with the private key to register an app in Microsoft Entra, and configure your Azure Git sync configuration.
 
 </TabItem>
 <TabItem value='bitbucket'>
@@ -284,7 +284,7 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
    - **Bitbucket API Base URL:** The base URL of your [Bitbucket installation's REST API](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris), for example `https://bitbucket.example.com/rest/api/latest`. This is required for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
 
      :::note
-     If you're using a self-hosted Bitbucket Data Center instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/modeler-configuration.md#git-sync) for configuration details.
+     If you're using a self-hosted Bitbucket Data Center instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
 
      Refer to [Bitbucket documentation](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris) for more information.
      :::
@@ -357,7 +357,7 @@ Creating multiple copies of a project can complicate navigation and deployment i
 
 ## Self-Managed environment variables
 
-Refer to [Configuration of the restapi component](/self-managed/components/hub/configuration/modeler-configuration.md#git-sync) for details on configuring environment variables.
+Refer to [Configuration of the restapi component](/self-managed/components/hub/configuration/properties.md#git-sync) for details on configuring environment variables.
 
 ## Troubleshooting
 

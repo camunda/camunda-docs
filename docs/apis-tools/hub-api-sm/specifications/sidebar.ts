@@ -4,7 +4,7 @@ const sidebar: SidebarsConfig = {
   apisidebar: [
     {
       type: "doc",
-      id: "apis-tools/hub-api-sm/specifications/hub-public-api-v-2",
+      id: "apis-tools/hub-api-sm/specifications/hub-api",
     },
     {
       type: "category",
@@ -20,6 +20,36 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-sm/specifications/delete-catalog-asset",
           label: "Delete a catalog asset",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Cluster",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-cluster-registrations",
+          label: "Get all cluster registrations",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/create-cluster-registration",
+          label: "Create or update a cluster registration",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/get-cluster-usage-metrics",
+          label: "Get cluster usage metrics",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/remove-cluster-registration",
+          label: "Remove a cluster registration",
           className: "api-method delete",
         },
       ],
@@ -54,9 +84,33 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/permanently-delete-file",
+          label: "Permanently delete a file",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "apis-tools/hub-api-sm/specifications/search-files",
           label: "Search files",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-recently-deleted-files",
+          label: "Search recently deleted files",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/restore-file",
+          label: "Restore a recently deleted file",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/purge-file",
+          label: "Purge a file from all version history",
+          className: "api-method delete",
         },
       ],
     },
@@ -86,6 +140,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-sm/specifications/delete-folder",
           label: "Delete a folder",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/permanently-delete-folder",
+          label: "Permanently delete a folder",
           className: "api-method delete",
         },
       ],
@@ -128,6 +188,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/hub-api-sm/specifications/delete-project",
           label: "Delete a project",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/permanently-delete-project",
+          label: "Permanently delete a project",
           className: "api-method delete",
         },
         {
@@ -218,24 +284,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Collaborator",
+      label: "Member",
       items: [
         {
           type: "doc",
-          id: "apis-tools/hub-api-sm/specifications/add-collaborator",
-          label: "Add or update a collaborator",
+          id: "apis-tools/hub-api-sm/specifications/add-member",
+          label: "Add or update a member",
           className: "api-method post",
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-sm/specifications/remove-collaborator",
-          label: "Remove a collaborator",
+          id: "apis-tools/hub-api-sm/specifications/remove-member",
+          label: "Remove a member",
           className: "api-method delete",
         },
         {
           type: "doc",
-          id: "apis-tools/hub-api-sm/specifications/search-collaborators",
-          label: "Search collaborators",
+          id: "apis-tools/hub-api-sm/specifications/search-members",
+          label: "Search members",
           className: "api-method post",
         },
       ],

@@ -44,7 +44,7 @@ The field to sort by.
 | ---------------- | ----------- |
 | `ProducedAt`     |             |
 | `HistoryItemKey` |             |
-| `Iteration`      |             |
+| `LoopIteration`  |             |
 
 ## AgentInstanceMessageContentTypeEnum
 
@@ -196,6 +196,8 @@ The field to sort by.
 | `ProcessDefinitionId`     |             |
 | `ProcessDefinitionKey`    |             |
 | `ProcessInstanceKey`      |             |
+| `InboundChannelType`      |             |
+| `InboundChannelToolName`  |             |
 | `Result`                  |             |
 | `TenantId`                |             |
 | `Timestamp`               |             |
@@ -300,6 +302,7 @@ The type of the batch operation.
 | `MIGRATEPROCESSINSTANCE`   |             |
 | `MODIFYPROCESSINSTANCE`    |             |
 | `RESOLVEINCIDENT`          |             |
+| `UPDATEJOB`                |             |
 | `UPDATEVARIABLE`           |             |
 
 ## CamundaAuthErrorCode
@@ -350,6 +353,7 @@ The field to sort by.
 
 | Value                  | Description |
 | ---------------------- | ----------- |
+| `BusinessId`           |             |
 | `CorrelationKey`       |             |
 | `CorrelationTime`      |             |
 | `ElementId`            |             |
@@ -396,6 +400,7 @@ The field to sort by.
 
 | Value                           | Description |
 | ------------------------------- | ----------- |
+| `BusinessId`                    |             |
 | `DecisionDefinitionId`          |             |
 | `DecisionDefinitionKey`         |             |
 | `DecisionDefinitionName`        |             |
@@ -776,16 +781,18 @@ The field to sort by.
 
 The state of the job.
 
-| Value            | Description |
-| ---------------- | ----------- |
-| `CANCELED`       |             |
-| `COMPLETED`      |             |
-| `CREATED`        |             |
-| `ERRORTHROWN`    |             |
-| `FAILED`         |             |
-| `MIGRATED`       |             |
-| `RETRIESUPDATED` |             |
-| `TIMEDOUT`       |             |
+| Value             | Description |
+| ----------------- | ----------- |
+| `CANCELED`        |             |
+| `COMPLETED`       |             |
+| `CREATED`         |             |
+| `ERRORTHROWN`     |             |
+| `FAILED`          |             |
+| `MIGRATED`        |             |
+| `PRIORITYUPDATED` |             |
+| `RETRIESUPDATED`  |             |
+| `TIMEOUTUPDATED`  |             |
+| `TIMEDOUT`        |             |
 
 ## MappingRuleSearchQuerySortRequestField
 
@@ -823,6 +830,10 @@ The field to sort by.
 ## MessageSubscriptionStateEnum
 
 The state of message subscription.
+
+**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not
+tracked for these subscriptions. To query correlation history for process start events,
+use the `/correlated-message-subscriptions/search` endpoint.
 
 | Value        | Description |
 | ------------ | ----------- |
@@ -898,6 +909,7 @@ Specifies the type of permissions.
 | `CREATEBATCHOPERATIONMIGRATEPROCESSINSTANCE`   |             |
 | `CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE`    |             |
 | `CREATEBATCHOPERATIONRESOLVEINCIDENT`          |             |
+| `CREATEBATCHOPERATIONUPDATEJOB`                |             |
 | `CREATEDECISIONINSTANCE`                       |             |
 | `CREATEPROCESSINSTANCE`                        |             |
 | `CREATETASKLISTENER`                           |             |
@@ -1141,6 +1153,7 @@ The field to sort by.
 | `DueDate`        |             |
 | `Priority`       |             |
 | `Name`           |             |
+| `BusinessId`     |             |
 
 ## UserTaskStateEnum
 
@@ -1223,10 +1236,14 @@ The BPMN element type of a waiting element instance.
 
 The type of waiting state an element instance is in.
 
-| Value     | Description |
-| --------- | ----------- |
-| `JOB`     |             |
-| `MESSAGE` |             |
+| Value       | Description |
+| ----------- | ----------- |
+| `JOB`       |             |
+| `MESSAGE`   |             |
+| `USERTASK`  |             |
+| `TIMER`     |             |
+| `SIGNAL`    |             |
+| `CONDITION` |             |
 
 ## WebappComponent
 

@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
         [[CONSISTENCY:STRONG]]
 
         Create a global-scoped cluster variable.
@@ -57,6 +59,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -115,6 +119,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for cluster variables based on given criteria. By default, long variable values in the response are truncated.
@@ -161,6 +167,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get a global-scoped cluster variable.
@@ -205,6 +213,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -258,6 +268,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
+
         [[CONSISTENCY:STRONG]]
 
         Delete a global-scoped cluster variable.
@@ -299,6 +311,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -350,6 +364,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -408,6 +424,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 

@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[CONSISTENCY:STRONG]]
 
         Iterate through all known partitions and activate jobs up to the requested maximum.
@@ -52,6 +54,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for jobs based on given criteria.
@@ -90,6 +94,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -148,6 +154,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Reports a business error (i.e. non-technical) that occurs while processing a job.
@@ -205,6 +213,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Complete a job with the given payload, which allows completing the associated service task.
@@ -261,6 +271,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Update a job with the given key.
@@ -303,6 +315,52 @@ paths:
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
       x-added-in-version: "8.6"
+  /jobs/batch-update:
+    post:
+      tags:
+        - Job
+      operationId: updateJobsBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Update jobs (batch)
+      description: |-
+
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX1VQREFURV9KT0IifV19XX0]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Creates a batch operation to update jobs matching the given filter. At least one changeset field must be non-null. This is done asynchronously; the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobBatchUpdateRequest"
+      responses:
+        "200":
+          description: The batch operation was created.
+          content:
+            application/json:
+              schema:
+                $ref: "batch-operations.yaml#/components/schemas/BatchOperationCreatedResult"
+        "400":
+          description: |
+            The job batch update operation failed. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
 components:
   schemas:
     JobActivationRequest:
@@ -353,6 +411,11 @@ components:
           description: |
             The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.
           default: PROVIDED
+        withLease:
+          description: |
+            Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.
+          type: boolean
+          nullable: true
       required:
         - type
         - maxJobsToActivate
@@ -360,6 +423,8 @@ components:
       x-properties-added-in-version:
         - propertyName: tenantFilter
           addedInVersion: "8.9"
+        - propertyName: withLease
+          addedInVersion: "8.10"
     JobActivationResult:
       description: The list of activated jobs
       type: object
@@ -391,9 +456,12 @@ components:
         - kind
         - listenerEventType
         - rootProcessInstanceKey
+        - businessId
         - tags
         - userTask
         - priority
+        - leaseToken
+        - physicalTenantId
       properties:
         type:
           description: The type of the job (should match what was requested).
@@ -439,6 +507,11 @@ components:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
           description: The ID of the tenant that owns the job.
+        physicalTenantId:
+          type: string
+          description: |
+            The ID of the physical tenant that the job-activation request was routed to;
+            the default physical tenant when the request did not specify one.
         jobKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKey"
@@ -476,11 +549,25 @@ components:
           nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+        businessId:
+          description: |
+            The business ID of the owning process instance, inherited when the job was created.
+            This is `null` for jobs created before version 8.10 and for jobs whose owning process
+            instance has no business ID.
+          nullable: true
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
         priority:
           description: |
             The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.
           type: integer
           format: int32
+        leaseToken:
+          description: |
+            The lease token identifying this activation. This is `null` when the job was
+            activated without a lease.
+          nullable: true
+          type: string
       x-properties-added-in-version:
         - propertyName: kind
           addedInVersion: "8.8"
@@ -493,6 +580,12 @@ components:
         - propertyName: rootProcessInstanceKey
           addedInVersion: "8.9"
         - propertyName: priority
+          addedInVersion: "8.10"
+        - propertyName: businessId
+          addedInVersion: "8.10"
+        - propertyName: leaseToken
+          addedInVersion: "8.10"
+        - propertyName: physicalTenantId
           addedInVersion: "8.10"
     UserTaskProperties:
       required:
@@ -701,6 +794,46 @@ components:
           allOf:
             - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
       x-properties-added-in-version:
+        - propertyName: deadline
+          addedInVersion: "8.8"
+        - propertyName: deniedReason
+          addedInVersion: "8.8"
+        - propertyName: elementId
+          addedInVersion: "8.8"
+        - propertyName: elementInstanceKey
+          addedInVersion: "8.8"
+        - propertyName: endTime
+          addedInVersion: "8.8"
+        - propertyName: errorCode
+          addedInVersion: "8.8"
+        - propertyName: errorMessage
+          addedInVersion: "8.8"
+        - propertyName: hasFailedWithRetriesLeft
+          addedInVersion: "8.8"
+        - propertyName: isDenied
+          addedInVersion: "8.8"
+        - propertyName: jobKey
+          addedInVersion: "8.8"
+        - propertyName: kind
+          addedInVersion: "8.8"
+        - propertyName: listenerEventType
+          addedInVersion: "8.8"
+        - propertyName: processDefinitionId
+          addedInVersion: "8.8"
+        - propertyName: processDefinitionKey
+          addedInVersion: "8.8"
+        - propertyName: processInstanceKey
+          addedInVersion: "8.8"
+        - propertyName: retries
+          addedInVersion: "8.8"
+        - propertyName: state
+          addedInVersion: "8.8"
+        - propertyName: tenantId
+          addedInVersion: "8.8"
+        - propertyName: type
+          addedInVersion: "8.8"
+        - propertyName: worker
+          addedInVersion: "8.8"
         - propertyName: creationTime
           addedInVersion: "8.9"
         - propertyName: lastUpdateTime
@@ -740,6 +873,7 @@ components:
         - type
         - worker
         - rootProcessInstanceKey
+        - businessId
         - creationTime
         - deadline
         - deniedReason
@@ -822,6 +956,14 @@ components:
           nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+        businessId:
+          description: |
+            The business ID of the owning process instance, inherited when the job was created.
+            This is `null` for jobs created before version 8.10 and for jobs whose owning process
+            instance has no business ID.
+          nullable: true
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
         retries:
           description: The amount of retries left to this job.
           type: integer
@@ -859,6 +1001,8 @@ components:
         - propertyName: lastUpdateTime
           addedInVersion: "8.9"
         - propertyName: priority
+          addedInVersion: "8.10"
+        - propertyName: businessId
           addedInVersion: "8.10"
     JobFailRequest:
       type: object
@@ -1061,6 +1205,37 @@ components:
           format: int64
           description: The new timeout for the job in milliseconds.
           nullable: true
+        priority:
+          type: integer
+          format: int32
+          description: The new priority for the job. Higher values indicate higher priority.
+          nullable: true
+      x-properties-added-in-version:
+        - propertyName: retries
+          addedInVersion: "8.6"
+        - propertyName: timeout
+          addedInVersion: "8.6"
+        - propertyName: priority
+          addedInVersion: "8.10"
+    JobBatchUpdateRequest:
+      type: object
+      description: |
+        The filter and changeset for a batch job update operation. The filter defines which jobs are updated; the changeset defines what to update. At least one changeset field must be non-null.
+      properties:
+        filter:
+          allOf:
+            - $ref: "#/components/schemas/JobFilter"
+          description: The job filter. At least one dimension must be set.
+        changeset:
+          allOf:
+            - $ref: "#/components/schemas/JobChangeset"
+          description: The fields to update. At least one field must be non-null.
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+      required:
+        - filter
+        - changeset
+      x-added-in-version: "8.10"
     TenantFilterEnum:
       description: |
         The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.
@@ -1080,6 +1255,7 @@ components:
         - MIGRATED
         - PRIORITY_UPDATED
         - RETRIES_UPDATED
+        - TIMEOUT_UPDATED
         - TIMED_OUT
     JobKindEnum:
       description: The job kind.

@@ -48,6 +48,13 @@
       "label": "Get cluster topology"
     }
   ],
+  "changeClusterMode": [
+    {
+      "file": "Client.cs",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "ProcessInstance.cs",
@@ -107,6 +114,13 @@
       "file": "ProcessInstance.cs",
       "region": "GetProcessInstanceStatistics",
       "label": "Get process instance statistics"
+    }
+  ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
     }
   ],
   "getProcessInstanceSequenceFlows": [
@@ -1043,6 +1057,13 @@
       "file": "BatchOperation.cs",
       "region": "DeleteDecisionInstancesBatchOperation",
       "label": "Delete decision instances in batch"
+    }
+  ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs in batch"
     }
   ],
   "getVariable": [
