@@ -30,14 +30,15 @@ This approach adds no overhead when nothing relevant changes.
 
 The docs team performs a recurrent audit as part of the docs housekeeping tasks:
 
-- [ ] Check `.github/instructions/repo.instructions.md` is consistent with repo workflows and guidelines in the `howtos/` guides.
-- [ ] Check rules in `.github/instructions/content.instructions.md` are consistent with `howtos/technical-writing-styleguide.md`.
-- [ ] Check for contradictions across agent instruction files. If two files say different things about the same behavior, reconcile them so agents receive consistent guidance.
-- [ ] [Review llms.txt files](#review-llmstxt-files).
+#### Check instruction files are consistent
 
-#### Review llms.txt files
+1. Check `.github/instructions/repo.instructions.md` is consistent with repo workflows and guidelines in the `howtos/` guides.
+2. Check rules in `.github/instructions/content.instructions.md` are consistent with `howtos/technical-writing-styleguide.md`.
+3. Check for contradictions across agent instruction files. If two files say different things about the same behavior, reconcile them so agents receive consistent guidance.
 
-1. Run this AI-ready docs benchmark to assess the current state:
+#### Run AI-ready benchmarks
+
+1. Run the AI-ready benchmark plus the AI-search readiness benchmark to audit, optimize, and track whether AI agents can crawl, understand, and cite the site:
 
 ```bash
 npx afdocs check https://docs.camunda.io --format scorecard
@@ -45,11 +46,11 @@ npx afdocs check https://docs.camunda.io --format scorecard
 
 You can also use this benchmark: https://buildwithfern.com/agent-score. See [AI-ready documentation research](https://github.com/camunda/documentation-team/issues/507) for more context.
 
-Alternatively, run the [geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) GEO audit, which scores the site against 8 AI-readiness categories (requires [`uv`](https://docs.astral.sh/uv/getting-started/installation/)):
-
 ```bash
 uvx --from geo-optimizer-skill geo audit --url https://docs.camunda.io
 ```
+
+This runs the [geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) GEO audit, which scores the site against 8 AI-readiness categories (requires [`uv`](https://docs.astral.sh/uv/getting-started/installation/)).
 
 Address or file potential improvements based on the benchmark results.
 
