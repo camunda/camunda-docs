@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.5]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDT01QTEVURV9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn0seyJyZXNvdXJjZVR5cGUiOiJVU0VSX1RBU0siLCJwZXJtaXNzaW9uVHlwZSI6IkNPTVBMRVRFIn1dfV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Completes a user task with the given key. Completion waits for blocking task listeners on this lifecycle transition. If listener processing is delayed beyond the request timeout, this endpoint can return 504. Other gateway timeout causes are also possible. Retry with backoff and inspect listener worker availability and logs when this repeats.
@@ -69,6 +71,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.5]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiVVNFUl9UQVNLIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -127,6 +131,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dfQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get the user task by the user task key.
@@ -173,6 +179,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.5]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiVVNFUl9UQVNLIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -231,6 +239,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dfQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get the form of a user task.
@@ -281,6 +291,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.5]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiVVNFUl9UQVNLIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -333,6 +345,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for user tasks based on given criteria.
@@ -371,6 +385,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -428,6 +444,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for the effective variables of a user task. This endpoint returns deduplicated
@@ -482,6 +500,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dfQ]]
 
         [[CONSISTENCY:EVENTUAL]]
 

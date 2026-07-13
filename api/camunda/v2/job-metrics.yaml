@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Returns global aggregated counts for jobs. Filter by the creation time window (required) and optionally by jobType.
@@ -72,6 +74,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get statistics about jobs, grouped by job type.
@@ -111,6 +115,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.9]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Get statistics about jobs, grouped by worker, for a given job type.
@@ -149,6 +155,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX0pPQl9NRVRSSUMifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -190,6 +198,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.9]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 

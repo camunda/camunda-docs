@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
         [[CONSISTENCY:STRONG]]
 
         Create a new user.
@@ -60,6 +62,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for users based on given criteria.
@@ -97,6 +101,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -140,6 +146,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -191,6 +199,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 
