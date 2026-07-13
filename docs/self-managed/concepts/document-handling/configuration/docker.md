@@ -51,16 +51,16 @@ camunda:
         bucket-ttl: 30 # optional, days
 ```
 
-| Property                                             | Required | Description                                                                                                                                                                                                                                        |
-| ----------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `camunda.document.aws.<id>.bucket-name`              | Yes      | Name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                             |
-| `camunda.document.aws.<id>.bucket-path`              | No       | Folder-like path within the S3 bucket. Defaults to `""`.                                                                                                                                                                                          |
-| `camunda.document.aws.<id>.bucket-ttl`               | No       | Time-to-live for documents in the bucket, in days.                                                                                                                                                                                                |
-| `camunda.document.aws.<id>.endpoint`                 | No       | Custom endpoint URL for an [S3-compatible object store](#s3-compatible-object-stores) such as MinIO, Cloudian, or Garage. When unset, the AWS SDK default endpoint is used.                                                                       |
-| `camunda.document.aws.<id>.force-path-style`         | No       | Forces path-style addressing on the S3 client. Most S3-compatible backends require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                              |
+| Property                                             | Required | Description                                                                                                                                                                                                                                              |
+| ---------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.aws.<id>.bucket-name`              | Yes      | Name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                                    |
+| `camunda.document.aws.<id>.bucket-path`              | No       | Folder-like path within the S3 bucket. Defaults to `""`.                                                                                                                                                                                                 |
+| `camunda.document.aws.<id>.bucket-ttl`               | No       | Time-to-live for documents in the bucket, in days.                                                                                                                                                                                                       |
+| `camunda.document.aws.<id>.endpoint`                 | No       | Custom endpoint URL for an [S3-compatible object store](#s3-compatible-object-stores) such as MinIO, Cloudian, or Garage. When unset, the AWS SDK default endpoint is used.                                                                              |
+| `camunda.document.aws.<id>.force-path-style`         | No       | Forces path-style addressing on the S3 client. Most S3-compatible backends require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                                       |
 | `camunda.document.aws.<id>.chunked-encoding-enabled` | No       | Controls AWS chunked transfer encoding. Set to `false` for S3-compatible backends that do not support `aws-chunked` streaming-signed uploads (for example, Garage). When unset, the SDK default (`true`) is used, which is correct for AWS S3 and MinIO. |
-| `camunda.document.default-store-id`                  | Yes      | Instance ID of the store to use as the default.                                                                                                                                                                                                   |
-| `camunda.document.thread-pool-size`                  | No       | Number of threads in the document store thread pool.                                                                                                                                                                                              |
+| `camunda.document.default-store-id`                  | Yes      | Instance ID of the store to use as the default.                                                                                                                                                                                                          |
+| `camunda.document.thread-pool-size`                  | No       | Number of threads in the document store thread pool.                                                                                                                                                                                                     |
 
 <details>
 <summary>Deprecated: legacy environment variable equivalents</summary>
@@ -109,7 +109,6 @@ If you're still encountering issues with MD5 checksums required by your provider
 ```
 DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5=true
 ```
-
 
 AWS SDK credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`) are resolved by the AWS SDK directly and are not part of `camunda.document.*`. Set them as environment variables as before.
 
@@ -342,14 +341,14 @@ Use this table to migrate from legacy `DOCUMENT_*` environment variables to the 
 
 ### AWS S3
 
-| Legacy environment variable                             | Unified property                        |
-| ------------------------------------------------------- | --------------------------------------- |
-| `DOCUMENT_STORE_<id>_CLASS=...AwsDocumentStoreProvider` | Implicit — use the `aws` namespace      |
-| `DOCUMENT_STORE_<id>_BUCKET`                            | `camunda.document.aws.<id>.bucket-name` |
-| `DOCUMENT_STORE_<id>_BUCKET_PATH`                       | `camunda.document.aws.<id>.bucket-path` |
-| `DOCUMENT_STORE_<id>_BUCKET_TTL`                        | `camunda.document.aws.<id>.bucket-ttl`  |
-| `DOCUMENT_STORE_<id>_ENDPOINT`                          | `camunda.document.aws.<id>.endpoint`    |
-| `DOCUMENT_STORE_<id>_FORCE_PATH_STYLE`                  | `camunda.document.aws.<id>.force-path-style` |
+| Legacy environment variable                             | Unified property                                     |
+| ------------------------------------------------------- | ---------------------------------------------------- |
+| `DOCUMENT_STORE_<id>_CLASS=...AwsDocumentStoreProvider` | Implicit — use the `aws` namespace                   |
+| `DOCUMENT_STORE_<id>_BUCKET`                            | `camunda.document.aws.<id>.bucket-name`              |
+| `DOCUMENT_STORE_<id>_BUCKET_PATH`                       | `camunda.document.aws.<id>.bucket-path`              |
+| `DOCUMENT_STORE_<id>_BUCKET_TTL`                        | `camunda.document.aws.<id>.bucket-ttl`               |
+| `DOCUMENT_STORE_<id>_ENDPOINT`                          | `camunda.document.aws.<id>.endpoint`                 |
+| `DOCUMENT_STORE_<id>_FORCE_PATH_STYLE`                  | `camunda.document.aws.<id>.force-path-style`         |
 | `DOCUMENT_STORE_<id>_CHUNKED_ENCODING_ENABLED`          | `camunda.document.aws.<id>.chunked-encoding-enabled` |
 
 ### GCP
