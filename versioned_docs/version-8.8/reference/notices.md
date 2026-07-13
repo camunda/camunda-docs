@@ -31,6 +31,32 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 56
+
+### Publication date
+
+July 14, 2026
+
+### Products affected
+
+- Camunda Optimize
+
+### Impact
+
+The application was vulnerable to [CVE-2026-13006](https://nvd.nist.gov/vuln/detail/CVE-2026-13006), an arbitrary code execution vulnerability in the `logback-core` library used by Camunda Optimize. An attacker who already has write access to the Logback configuration file, or the ability to inject an environment variable evaluated at startup, could execute arbitrary code in the Optimize process. Exploitation also requires the Janino library on the classpath and a Logback configuration that uses conditional (`<if>`) processing, both of which are present in Camunda Optimize. This vulnerability is not remotely exploitable; it requires an attacker to already hold privileged local access to the deployment.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Optimize ≤ 8.7.24
+
+### Solution
+
+Camunda has provided the following release which contains the fix:
+
+- Camunda Optimize 8.7.25
+
 ## Notice 55
 
 ### Publication date
