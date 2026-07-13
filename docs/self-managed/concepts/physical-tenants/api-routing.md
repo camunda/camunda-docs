@@ -42,9 +42,11 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 ## Cluster-wide endpoints
 
-Cluster-wide endpoints — endpoints that apply to the whole cluster rather than a single Physical Tenant — are not available yet. When they are added in a future release, they will be exposed under a dedicated `/cluster/v2/...` path prefix.
+Cluster-wide endpoints — endpoints that apply to the whole cluster rather than a single Physical Tenant — are exposed under a dedicated `/cluster/v2/...` path prefix. For example, cluster-wide topology is available at `/cluster/v2/topology`.
 
 Endpoints served at the standard `/v2/...` paths are scoped to a Physical Tenant, not the cluster. For example, `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view.
+
+<!-- TODO(tenant-follow-up): Confirm with Ana/Meggle — (1) whether /cluster/v2/topology is available in 8.10 now or in a future release, and (2) that license is unprotected (UNPROTECTED_API_PATHS) and available both per Physical Tenant (/v2/license) and cluster-wide. Adjust availability wording and add license once confirmed. -->
 
 ## HTTP status codes
 
