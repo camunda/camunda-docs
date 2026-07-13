@@ -45,6 +45,12 @@ npx afdocs check https://docs.camunda.io --format scorecard
 
 You can also use this benchmark: https://buildwithfern.com/agent-score. See [AI-ready documentation research](https://github.com/camunda/documentation-team/issues/507) for more context.
 
+Alternatively, run the [geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) GEO audit, which scores the site against 8 AI-readiness categories (requires [`uv`](https://docs.astral.sh/uv/getting-started/installation/)):
+
+```bash
+uvx --from geo-optimizer-skill geo audit --url https://docs.camunda.io
+```
+
 Address or file potential improvements based on the benchmark results.
 
 2. Audit llms.txt files:
