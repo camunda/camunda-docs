@@ -586,6 +586,14 @@ A record represents a command or an event. For example, a command to create a ne
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
+### Recovery Point Objective (RPO)
+
+Multi-region resilience: Maximum tolerable amount of data loss, measured as the time between the last persisted consistent backup and the moment of failure.
+
+### Recovery Time Objective (RTO)
+
+Multi-region resilience: Maximum tolerable time from failure detection to service restoration in a functional state.
+
 ### Reference architecture
 
 Reference architectures provide comprehensive blueprints for designing and implementing scalable, robust, and adaptable Camunda 8 self-managed installations. Reference architectures serve as starting points that should be adapted to fit the specific needs and constraints of your organization and infrastructure.

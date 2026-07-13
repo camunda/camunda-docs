@@ -150,6 +150,11 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 
 - PostgreSQL 14 reached the end of its standard support window.
 - Upgrade your PostgreSQL instance to a supported version before moving to Camunda 8.10.
+#### Elasticsearch 9.2 and 9.3 no longer supported
+
+Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.4. Supported Elasticsearch versions are now 8.19+ and 9.4+.
+
+- Upgrade Elasticsearch 9.2 or 9.3 clusters to 9.4 or later before moving to Camunda 8.10.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 

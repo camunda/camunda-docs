@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Creates a new tenant.
@@ -64,6 +66,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of tenants.
@@ -109,6 +113,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a single tenant by tenant ID.
@@ -153,6 +159,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -205,6 +213,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Deletes an existing tenant.
@@ -246,6 +256,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -293,6 +305,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -343,6 +357,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of users for a specified tenant.
@@ -380,6 +396,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -428,6 +446,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -478,6 +498,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of clients for a specified tenant.
@@ -515,6 +537,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -563,6 +587,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -613,6 +639,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of groups for a specified tenant.
@@ -651,6 +679,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Retrieves a filtered and sorted list of roles for a specified tenant.
@@ -688,6 +718,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -736,6 +768,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -787,6 +821,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Assign a single mapping rule to a specified tenant.
@@ -833,6 +869,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -881,6 +919,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
