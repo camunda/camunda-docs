@@ -62,6 +62,8 @@ Camunda has provided the following releases which contain the fix:
 
 - Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24
 
+The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.
+
 ## Notice 57
 
 ### Publication date
@@ -88,6 +90,8 @@ binding to plain SCRAM-SHA-256 without it, losing the man-in-the-middle protecti
 Camunda has provided the following releases which contain the fix:
 
 - Web Modeler Self-Managed 8.9.6, 8.8.17, 8.7.24
+
+The fix was deployed to Web Modeler SaaS on July 8, 2026, 08:12 CET.
 
 ## Notice 56
 
