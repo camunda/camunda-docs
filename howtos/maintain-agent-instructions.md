@@ -28,7 +28,7 @@ This approach adds no overhead when nothing relevant changes.
 
 ### Layer 2: Recurrent audit
 
-The docs team performs a recurrent audit as part of the docs housekeeping tasks:
+The docs team performs a recurrent audit as part of the docs housekeeping tasks.
 
 #### Check instruction files are consistent
 
@@ -46,13 +46,11 @@ npx afdocs check https://docs.camunda.io --format scorecard
 
 You can also use this benchmark: https://buildwithfern.com/agent-score. See [AI-ready documentation research](https://github.com/camunda/documentation-team/issues/507) for more context.
 
-2. Run this AI-search readiness benchmark to audit, optimize, and track whether AI agents can crawl, understand, and cite the site:
+2. Run this [AI-search readiness benchmark](https://github.com/Auriti-Labs/geo-optimizer-skill) to audit, optimize, and track whether AI agents can crawl, understand, and cite the site:
 
 ```bash
 uvx --from geo-optimizer-skill geo audit --url https://docs.camunda.io
 ```
-
-This runs the [geo-optimizer-skill](https://github.com/Auriti-Labs/geo-optimizer-skill) GEO audit, which scores the site against 8 AI-readiness categories (requires [`uv`](https://docs.astral.sh/uv/getting-started/installation/)).
 
 3. Address or file potential improvements based on the benchmark results.
 
