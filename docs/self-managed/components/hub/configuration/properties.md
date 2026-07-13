@@ -760,8 +760,8 @@ Dynamic cluster management changes this to a hybrid model. Camunda Hub uses your
 
 In this mode, you:
 
-1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the create cluster registration endpoint. If you didn't define the clusters in your configuration, this call registers them with minimal information and no management functionality in the Camunda Hub interface.
-2. Remove stale cluster registrations from Camunda Hub using the remove registration API.
+1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the [create or update a cluster registration](/apis-tools/hub-api-saas/specifications/create-cluster-registration.api.mdx) endpoint. If you didn't define the clusters in your configuration, this call registers them with minimal information and no management functionality in the Camunda Hub interface.
+2. Remove stale cluster registrations from Camunda Hub using the [remove a cluster registration](/apis-tools/hub-api-saas/specifications/remove-cluster-registration.api.mdx) endpoint.
 
 You can still define new clusters in your configuration, though it's not required. When you do, Camunda Hub automatically registers them with all [available settings](#clusters) and full management functionality in the interface.
 
