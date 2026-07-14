@@ -252,25 +252,25 @@ The documentation covers the recommended topology, exporter configuration, and R
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 adds support for new relational database versions. Operators running self-managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
+Camunda 8.10 adds support for new relational database versions. Operators running Self-managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
 
-New supported versions include PostgreSQL 18, Amazon Aurora PostgreSQL 18, MariaDB 12.3, and Microsoft SQL Server 2025.
+New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
 
 <p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
-#### Physical tenant support
+#### Physical Tenant support
 
 <!-- https://github.com/camunda/product-hub/issues/3639 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 introduces physical tenant support for RDBMS, enabling strong isolation across tenants. Elasticsearch and OpenSearch support is planned for 8.10.
+Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isolation across tenants.
 
-- The REST API and gRPC API are exposed per physical tenant, with `CamundaClient` supporting physical tenant selection in the gRPC API.
-- Web apps (Operate, Tasklist, and Admin) are accessible per physical tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
-- Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual physical tenants.
+- The REST API and gRPC API are exposed per Physical Tenant, with `CamundaClient` supporting Physical Tenant selection in the gRPC API.
+- Web apps (Operate, Tasklist, and Admin) are accessible per Physical Tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
+- Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
 
-<p class="link-arrow">[Physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
 #### Select a DMN version with a FEEL expression
 
@@ -282,7 +282,7 @@ You can now call a dynamically calculated version of a DMN decision from a BPMN 
 
 <p class="link-arrow">[Business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md#defining-a-task)</p>
 
-#### Zone-aware partition placement
+#### Region-aware partition placement
 
 <!-- https://github.com/camunda/product-hub/issues/3618 -->
 
