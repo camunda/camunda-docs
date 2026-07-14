@@ -97,7 +97,10 @@ jobs:
         id: check_changes
         working-directory: docs
         run: |
-          if git diff-index --quiet HEAD; then
+          # Use `git status --porcelain` rather than `git diff-index`: the latter
+          # ignores untracked files, so a newly added synced page (not yet tracked
+          # in camunda-docs) would not be detected and the sync PR would be skipped.
+          if [ -z "$(git status --porcelain .)" ]; then
             echo "No changes to commit."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
