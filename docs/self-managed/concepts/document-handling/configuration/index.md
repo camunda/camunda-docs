@@ -22,7 +22,7 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 
 ## Supported storage options
 
-- By using **external cloud file bucket storages**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
+- By using **external cloud file bucket storages**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
@@ -34,6 +34,12 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost.
   - It can be used with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/deployment/helm/install/quick-install.md).
   - In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
+
+## Physical Tenant isolation
+
+When running Physical Tenants, each tenant must be assigned a distinct document store location. Camunda validates uniqueness at startup and fails if two tenants resolve to the same `provider, bucket/container, path` tuple.
+
+For the per-tenant configuration model, including the root catalog, `assigned` restriction, field-level overrides, and startup collision examples, see [document store isolation](/self-managed/concepts/physical-tenants/configuration-reference.md#document-store-isolation).
 
 ## Storage policies
 

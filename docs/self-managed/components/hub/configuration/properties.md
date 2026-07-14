@@ -747,31 +747,26 @@ camunda:
 
 #### Dynamic cluster management
 
-Use dynamic cluster management to automatically create records for your clusters within Camunda Hub.
+Use dynamic cluster management to automatically register your clusters with Camunda Hub.
 
-By default, clusters shown in Camunda Hub are strictly managed by your [configuration](#clusters). Cluster records are created, updated, and deleted when you change your cluster configuration values.
+By default, clusters shown in Camunda Hub are strictly managed by your [configuration](#clusters). Cluster registrations are created, updated, and deleted when you change your cluster configuration values.
 
-Dynamic cluster management changes this behavior to a hybrid model that makes use of both your cluster configuration—if provided—and the following cluster management API endpoints that are only exposed when dynamic cluster management is enabled:
+Dynamic cluster management changes this to a hybrid model. Camunda Hub uses your cluster configuration—if you provide one—alongside the following API endpoints, which are only exposed when dynamic cluster management is enabled:
 
-| Name                           | Path                                  |
-| :----------------------------- | :------------------------------------ |
-| **Create cluster (discovery)** | `POST /api/v1/clusters`               |
-| **Delete cluster**             | `DELETE /api/v1/clusters/{clusterId}` |
+| Name                                                                                                                       | Path                                  |
+| :------------------------------------------------------------------------------------------------------------------------- | :------------------------------------ |
+| [**Create or update a cluster registration**](/apis-tools/hub-api-saas/specifications/create-cluster-registration.api.mdx) | `POST /api/v2/clusters`               |
+| [**Remove a cluster registration**](/apis-tools/hub-api-saas/specifications/remove-cluster-registration.api.mdx)           | `DELETE /api/v2/clusters/{clusterId}` |
 
 In this mode, you:
 
-1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
-2. Delete stale cluster records from Camunda Hub with the delete cluster endpoint.
+1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the [create or update a cluster registration](/apis-tools/hub-api-saas/specifications/create-cluster-registration.api.mdx) endpoint. If you didn't define the clusters in your configuration, this call registers them with minimal information and no management functionality in the Camunda Hub interface.
+2. Remove stale cluster registrations from Camunda Hub using the [remove a cluster registration](/apis-tools/hub-api-saas/specifications/remove-cluster-registration.api.mdx) endpoint.
 
-While not required, you can still define new clusters in your configuration. Newly defined clusters are automatically registered in Camunda Hub with all [available settings](#clusters) and management functionality in the Camunda Hub interface.
-
-If you remove a cluster configuration, you need to manually delete the cluster record with the delete cluster endpoint. With dynamic cluster management, you can't update cluster records. Instead, delete the record and either:
-
-- Allow the cluster to ping Camunda Hub with new information.
-- Update your configuration, and let the cluster record be recreated.
+You can still define new clusters in your configuration, though it's not required. When you do, Camunda Hub automatically registers them with all [available settings](#clusters) and full management functionality in the interface.
 
 :::note
-If you use dynamic cluster management, do not manually call the create cluster endpoint—only configure your clusters to do so. This endpoint doesn't currently support creating clusters with all configurable settings.
+With dynamic cluster management enabled, don't call the create or update cluster registration endpoint manually—only let your cluster configuration do it. The endpoint doesn't yet support creating clusters with all configurable settings.
 :::
 
 ### Unstable configuration options
