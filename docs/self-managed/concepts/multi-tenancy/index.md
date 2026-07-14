@@ -21,7 +21,7 @@ Choose the model that best fits your isolation requirements and operational cons
 | **Operational complexity** | Low                              | Medium                                  | High                                      |
 | **Use case**               | Small teams, low-risk separation | Multiple teams, strong isolation needed | Separate organizations, maximum isolation |
 
-<!-- @christinaausley — review availability row with @felix-mueller; SaaS multi-tenancy (logical) is available in SaaS per saas-multitenancy work -->
+<!-- @christinaausley — review availability row; SaaS multi-tenancy (logical) is available in SaaS per saas-multitenancy work -->
 
 ## Logical Tenants
 

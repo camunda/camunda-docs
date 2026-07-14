@@ -52,8 +52,6 @@ The `/v2/status` endpoint is a deliberate exception to the general routing rule.
 
 For per-tenant health information, use the `/v2/topology` endpoint, which includes partition health state per tenant.
 
-<!-- @christinaausley — confirmed with @lenaschoenburg and @deepthidevaki (option 3 decision) -->
-
 ## HTTP status codes
 
 | Scenario                                                           | HTTP status        |
@@ -103,8 +101,6 @@ There is no cluster-wide MCP endpoint planned for 8.10.
 ## Tenant discovery
 
 There is no cross-tenant discovery endpoint. A client cannot request a list of Physical Tenants it has access to in a single call. If you need to enumerate accessible tenants, probe each tenant's endpoint individually.
-
-<!-- @christinaausley — review with @meggle (Sebastian B.) before publishing client/Java docs (Issues 9, 10) -->
 
 ## gRPC routing
 
