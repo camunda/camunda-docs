@@ -80,6 +80,11 @@ jobs:
             if [ -f "c8ctl/docs/$f" ]; then
               cp "c8ctl/docs/$f" "$TARGET/$f"
               echo "Copied $f → $TARGET/"
+            elif [ -f "$TARGET/$f" ]; then
+              # The page is no longer present on the selected c8ctl ref — remove the
+              # stale copy so removed pages don't linger in camunda-docs.
+              rm "$TARGET/$f"
+              echo "Removed stale $f (no longer present on this c8ctl ref)"
             else
               echo "Skipped $f (not present on this c8ctl ref)"
             fi
