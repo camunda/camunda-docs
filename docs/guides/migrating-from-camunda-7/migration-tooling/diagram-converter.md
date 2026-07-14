@@ -15,7 +15,7 @@ In a second step, it can also convert these files from the Camunda 7 format to t
 All BPMN elements supported by Camunda 8 can be transformed. For the full list see the [BPMN coverage page](../../../components/modeler/bpmn/bpmn-coverage.md).
 
 :::tip Automate diagram conversion with AI
-The [Camunda migration agent skill](./index.md#agentic-migration) runs the Diagram Converter CLI for you as part of an end-to-end migration workflow, and uses AI to resolve conversion findings. You focus on reviewing the results.
+Use the [Camunda migration agent skill](./index.md#agentic-migration) to run the Diagram Converter CLI as part of an end-to-end migration workflow, resolve conversion findings with AI, and focus on reviewing migration-ready results.
 :::
 
 You can use the Diagram Converter in the following ways:

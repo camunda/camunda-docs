@@ -8,7 +8,7 @@ description: "Understand patterns to convert your code written for Camunda 7 to 
 As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Orchestration Cluster REST API.
 
 :::tip Easiest path: agentic migration
-The [Camunda migration agent skill](./index.md#agentic-migration) orchestrates the Diagram Converter CLI and OpenRewrite recipes for you, then uses AI to resolve what the tools flag — covering code and BPMN/DMN diagrams in a single session. You focus on reviewing changes and rearchitecting your solution.
+The [Camunda migration agent skill](./index.md#agentic-migration) orchestrates the Diagram Converter CLI and OpenRewrite recipes for you, then uses AI to resolve what the tools flag, covering code and BPMN/DMN diagrams in a single session. You focus on reviewing changes and rearchitecting your solution.
 :::
 
 ## Overview
