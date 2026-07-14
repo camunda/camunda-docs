@@ -38,7 +38,7 @@ The skill follows the open [Agent Skills](https://agentskills.io/) format and wo
 
 Run from your Camunda 7 project directory:
 
-```
+```text
 /camunda-migration:migrate-c7-to-c8-code
 ```
 
@@ -53,7 +53,7 @@ The skill asks for your migration scope:
 
 ### What the agent does
 
-```
+```text
 Step 1: Assess   →  Inventories BPMN/DMN diagrams and Java code files, estimates effort
 Step 2: Convert  →  Runs Diagram Converter CLI; AI resolves REVIEW/WARNING/TASK findings
 Step 3: Migrate  →  Runs OpenRewrite recipes; AI handles TODOs, edge cases, tests, and config
