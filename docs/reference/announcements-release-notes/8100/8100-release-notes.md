@@ -46,10 +46,10 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span></div>
 
-You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions. This helps you validate agent behavior and output quality with clearer, more reliable test outcomes.
+You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions. With this, you can validate agent behavior and output quality with clearer, more reliable test outcomes.
 
 - Define conditional behavior in tests with a `when(condition).then(action)` API for activation-based flow control.
-- Assert output quality with LLM-as-Judge expectations when exact matching is not enough.
+- Assert output quality with LLM-as-a-judge expectations when exact matching is not enough.
 - Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
 - Configure remote or local models through code and properties for both local development and CI/CD pipelines.
 
