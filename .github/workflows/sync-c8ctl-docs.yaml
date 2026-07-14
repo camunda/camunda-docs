@@ -83,6 +83,9 @@ jobs:
             elif [ -f "$TARGET/$f" ]; then
               # The page is no longer present on the selected c8ctl ref — remove the
               # stale copy so removed pages don't linger in camunda-docs.
+              # NOTE: removing a published page also needs a redirect in
+              # static/.htaccess. The workflow cannot generate that reliably, so
+              # whoever reviews the resulting sync PR must add the redirect manually.
               rm "$TARGET/$f"
               echo "Removed stale $f (no longer present on this c8ctl ref)"
             else
