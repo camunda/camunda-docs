@@ -90,6 +90,22 @@ Camunda Hub introduces an organization-level catalog for reusable, Center of Exc
 
 CoE teams can submit assets through the API from their SCM workflows, and delivery teams can browse catalog entries in Hub and inspect asset details. This release also adds in-diagram notifications for updated shared assets and pre-deployment dependency checks that surface missing DMNs, forms, connectors, and other dependencies on the target cluster before deployment.
 
+#### Multi-tenancy support in SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/3244 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8 SaaS now supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
+
+- Owners and Admins can create, update, and delete tenants in Console, and assign users, groups, and client credentials to them.
+- Web Modeler and Desktop Modeler support tenant-scoped deployments to multi-tenant clusters by specifying a tenant ID.
+- Tenant usage is reflected in Console reporting so org owners can monitor tenant consumption across a cluster.
+
+Multi-tenancy is enabled at the cluster level. Process definitions, instances, and decisions are scoped to the tenant they were deployed to, keeping data isolated across teams and applications sharing a single cluster.
+
+<p class="link-arrow">[Multi-tenancy](/components/concepts/multi-tenancy.md)</p>
+
 #### Select a target version when upgrading a cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3741 -->
