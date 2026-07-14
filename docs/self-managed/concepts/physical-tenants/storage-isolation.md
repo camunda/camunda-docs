@@ -55,6 +55,16 @@ tenanta:
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
 
+:::caution Table prefix must be uppercase
+RDBMS table prefixes must use uppercase characters. A lowercase prefix causes Liquibase migration to fail at startup. For example, use `TENANTA_` not `tenanta_`. See [camunda/camunda#56093](https://github.com/camunda/camunda/issues/56093).
+:::
+
+:::note Oracle limitation in 8.10 alpha
+In the 8.10 alpha release, Oracle supports isolation by table prefix only. Using separate schemas from the same Oracle instance for multiple Physical Tenants is not supported in alpha and will be fixed in a later release.
+:::
+
+<!-- @christinaausley — review with @houssain-barouni and @EuroLew before final release -->
+
 <!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. @christinaausley --->
 
 ## Elasticsearch/OpenSearch storage
@@ -242,6 +252,18 @@ Risks to avoid:
 | **Add tenant**   | Create storage backend → Validate connectivity → Add config → Rolling restart |
 | **Consolidate**  | Backup source → Create new backend → Update config → Restore → Verify         |
 | **Split tenant** | Plan data distribution → Backup → Create stores → Restore to each → Restart   |
+
+## Known limitations in 8.10
+
+:::note
+**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type — either all RDBMS or all Elasticsearch/OpenSearch. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported in 8.10. This constraint exists in the Query API stack, not the exporter layer.
+:::
+
+:::caution Custom exporter configuration merge (alpha3)
+In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not merged. If you have a custom exporter (for example, a Kafka exporter) and want each tenant to publish to a different topic, you must declare the full exporter configuration separately under each Physical Tenant's section — you cannot declare it once at root level and override only the topic per tenant. This will be addressed in a later alpha. See [camunda/camunda#55155](https://github.com/camunda/camunda/issues/55155).
+:::
+
+<!-- @christinaausley — review with @deepthidevaki and @houssain-barouni; remove custom exporter note once #55155 is resolved -->
 
 ## Storage configuration matrix
 

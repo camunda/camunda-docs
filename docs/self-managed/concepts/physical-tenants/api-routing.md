@@ -46,6 +46,14 @@ Cluster-wide endpoints — endpoints that apply to the whole cluster rather than
 
 Endpoints served at the standard `/v2/...` paths are scoped to a Physical Tenant, not the cluster. For example, `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view.
 
+### Exception: /v2/status
+
+The `/v2/status` endpoint is a deliberate exception to the general routing rule. It remains cluster-wide and unauthenticated for backward compatibility, so operators and load balancers can check overall cluster health without credentials. It is **not** exposed under the Physical Tenant prefix (`/physical-tenants/{id}/v2/status` is not a valid path).
+
+For per-tenant health information, use the `/v2/topology` endpoint, which includes partition health state per tenant.
+
+<!-- @christinaausley — confirmed with @lenaschoenburg and @deepthidevaki (option 3 decision) -->
+
 ## HTTP status codes
 
 | Scenario                                                           | HTTP status        |
@@ -81,6 +89,22 @@ For example:
 ```
 https://your-cluster/physical-tenants/riskproduction/operate
 ```
+
+## MCP routing
+
+MCP server endpoints follow the same path convention as the REST API and webapps:
+
+```
+/physical-tenants/{physicalTenantId}/mcp/...
+```
+
+There is no cluster-wide MCP endpoint planned for 8.10.
+
+## Tenant discovery
+
+There is no cross-tenant discovery endpoint. A client cannot request a list of Physical Tenants it has access to in a single call. If you need to enumerate accessible tenants, probe each tenant's endpoint individually.
+
+<!-- @christinaausley — review with @meggle (Sebastian B.) before publishing client/Java docs (Issues 9, 10) -->
 
 ## gRPC routing
 
