@@ -5,7 +5,7 @@ sidebar_label: "Authentication and authorization"
 description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config and property names for the per-tenant identity overlay. -->
+<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config and property names for the per-tenant identity overlay. @christinaausley -->
 
 This page explains how authentication and authorization work for Physical Tenants in Camunda 8.10 Self-Managed deployments.
 
@@ -88,7 +88,7 @@ Role definitions within a tenant cover:
 
 Because each tenant manages its own authorization, the same user can have different permissions in different Physical Tenants.
 
-<!-- TODO (camunda/camunda#55259): Add the YAML shape for per-tenant role definitions and token claim mappings once the typed config is confirmed. -->
+<!-- TODO (camunda/camunda#55259): Add the YAML shape for per-tenant role definitions and token claim mappings once the typed config is confirmed. @christinaausley -->
 
 ## Token claim mappings
 

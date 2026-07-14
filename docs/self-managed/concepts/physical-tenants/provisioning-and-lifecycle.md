@@ -85,7 +85,7 @@ After rollout:
 - Verify authentication behavior for assigned providers.
 
 <!--
-TODO(physical-tenants): Add a detailed runbook with command examples and expected health/readiness transitions once Day-2 operations behavior is finalized.
+TODO(physical-tenants): Add a detailed runbook with command examples and expected health/readiness transitions once Day-2 operations behavior is finalized. @christinaausley
 -->
 
 ## Related pages

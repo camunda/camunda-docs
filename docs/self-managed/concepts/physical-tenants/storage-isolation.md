@@ -55,7 +55,7 @@ tenanta:
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
 
-<!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. --->
+<!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. @christinaausley --->
 
 ## Elasticsearch/OpenSearch storage
 
@@ -109,7 +109,7 @@ camunda:
 - **Collision prevention**: Use the full tenant ID; avoid overlapping prefixes (for example, `eu` and `eu-west`)
 - **Validation**: Cluster fails at startup if two tenants have overlapping index names
 
-<!-- TODO: Confirm whether collision detection catches overlapping prefixes (for example, `eu` vs `eu-west`) or only identical prefixes. Pending eng verification. -->
+<!-- TODO: Confirm whether collision detection catches overlapping prefixes (for example, `eu` vs `eu-west`) or only identical prefixes. Pending eng verification. @christinaausley -->
 
 ## Document Store storage
 

@@ -5,7 +5,7 @@ sidebar_label: "Configuration reference"
 description: "Configure Physical Tenants with root defaults, per-tenant overrides, and startup validation rules."
 ---
 
-<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config, validation rules, and error messages for Physical Tenants. -->
+<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config, validation rules, and error messages for Physical Tenants. @christinaausley -->
 
 This page explains how to configure Physical Tenants in Camunda 8.10 for Self-Managed deployments.
 
@@ -100,7 +100,7 @@ For backward compatibility:
 
 At startup, configuration validation enforces tenant-level constraints.
 
-<!-- TODO: Confirm the exact startup error message format (log level, error code, message text) for each validation failure case listed below. Specifically, confirm error messages for: missing `providers.assigned`, conflicting RDBMS URL+prefix, and conflicting document store location. Source: camunda/camunda#55259. -->
+<!-- TODO: Confirm the exact startup error message format (log level, error code, message text) for each validation failure case listed below. Specifically, confirm error messages for: missing `providers.assigned`, conflicting RDBMS URL+prefix, and conflicting document store location. Source: camunda/camunda#55259. @christinaausley -->
 
 Known constraints and behavior for 8.10:
 
