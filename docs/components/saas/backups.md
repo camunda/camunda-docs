@@ -38,7 +38,7 @@ Manual backups refer to the user-initiated process of creating a consistent snap
 To ensure system stability, backup operations are subject to rate limits. Specifically, you can perform a backup operation every 15 minutes.
 However, users can delete an existing backup to create a new one before the rate limit period ends.
 
-The system retains the five most recent completed backups per cluster category. Failed backup attempts do not count toward the retention count. When a new backup is successful and the retention count is reached, the oldest backup is automatically deleted.
+The system retains the five most recent completed manual backups per cluster. Manual and scheduled backups are counted separately, so manual backups do not evict scheduled ones. See [scheduled backups](#scheduled-backups) for scheduled backup retention. Failed backup attempts do not count toward the retention count. When a new backup is successful and the retention count is reached, the oldest backup is automatically deleted.
 
 ## Scheduled backups
 
