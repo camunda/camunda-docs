@@ -14,14 +14,7 @@ All tools are available as **ready-to-use builds** from the [GitHub releases pag
 
 ## Agentic migration
 
-The **Camunda migration agent skill** is an AI-driven orchestrator that configures and runs the migration tools on your behalf:
-
-- Runs the [Diagram Converter](./diagram-converter.md) CLI on your BPMN and DMN files to convert diagram syntax and produce a findings report.
-- Runs [OpenRewrite recipes](./code-conversion.md#refactoring-recipes-using-openrewrite) to bulk-convert your Java code.
-- Uses AI to resolve what the deterministic tools cannot fix automatically, such as review, warning or task findings in diagrams, TODOs in code, custom delegates, test code, and configuration.
-- Validates the result and offers to fix remaining issues, waiting for your review before each change.
-
-You focus on the actual rearchitecture of your solution, while the agent handles the tool calls.
+The **Camunda migration agent skill** is an AI-driven orchestrator that runs the migration tools on your behalf. It handles the tool calls so you can focus on rearchitecting your solution. The [agent workflow](#agent-workflow) section shows the sequence in detail.
 
 ### Install and run
 
