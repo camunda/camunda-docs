@@ -45,14 +45,11 @@ July 14, 2026
 
 ### Impact
 
-The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the
-HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
+The application was vulnerable to [CVE-2026-54399](https://nvd.nist.gov/vuln/detail/CVE-2026-54399), where a flaw in the HTTP/1.1 message parser in Apache HttpComponents Core allows a remote attacker to cause a denial of service through
 memory exhaustion by sending messages with an excessive number of headers or excessively long headers.
 
-Note: The vulnerable library is only used in outgoing HTTP requests from Web Modeler to the Camunda 8 Orchestration
-Cluster API. To exploit the vulnerability, an attacker would need to be able to control or intercept the API responses
-through a prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code
-path is not reachable from external, untrusted client traffic.
+The vulnerable library is only used in outgoing HTTP requests from Web Modeler to the Camunda 8 Orchestration
+Cluster API. To exploit the vulnerability, an attacker would need to be able to control or intercept the API responses through a prior attack. Web Modeler's inbound HTTP requests are handled by a different library, so the vulnerable code path is not reachable from external, untrusted client traffic.
 
 ### How to determine if the installation is affected
 
