@@ -81,13 +81,13 @@ jobs:
               cp "c8ctl/docs/$f" "$TARGET/$f"
               echo "Copied $f → $TARGET/"
             elif [ -f "$TARGET/$f" ]; then
-              # The page is no longer present on the selected c8ctl ref — remove the
-              # stale copy so removed pages don't linger in camunda-docs.
-              # NOTE: removing a published page also needs a redirect in
-              # static/.htaccess. The workflow cannot generate that reliably, so
-              # whoever reviews the resulting sync PR must add the redirect manually.
-              rm "$TARGET/$f"
-              echo "Removed stale $f (no longer present on this c8ctl ref)"
+              # The page is missing on this c8ctl ref but still exists here. Do NOT
+              # delete it automatically: a wrong ref, a failed checkout, or a
+              # transiently absent file would otherwise silently remove a published
+              # page. Removing a page also requires a manual static/.htaccess
+              # redirect, so a human must prune it deliberately. Surface a warning
+              # instead of failing or deleting silently.
+              echo "::warning::Stale c8ctl page '$f' exists in camunda-docs but is missing on this c8ctl ref. If it was intentionally removed upstream, delete $TARGET/$f and add a static/.htaccess redirect in a manual PR."
             else
               echo "Skipped $f (not present on this c8ctl ref)"
             fi
