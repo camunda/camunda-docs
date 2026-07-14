@@ -42,11 +42,14 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 ## Cluster-wide endpoints
 
-Cluster-wide endpoints — endpoints that apply to the whole cluster rather than a single Physical Tenant — are exposed under a dedicated `/cluster/v2/...` path prefix. For example, cluster-wide topology is available at `/cluster/v2/topology`.
+A cluster-wide endpoint applies to the whole cluster rather than a single Physical Tenant. The cluster-wide topology is exposed under a dedicated `/cluster/v2/...` path prefix, at `/cluster/v2/topology`.
 
-Endpoints served at the standard `/v2/...` paths are scoped to a Physical Tenant, not the cluster. For example, `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view.
+Most other endpoints are scoped to a Physical Tenant, even when they are not tenant-specific in nature. A plain `/v2/...` request targets the `default` tenant. For example:
 
-<!-- TODO(tenant-follow-up): Confirm with Ana/Meggle — (1) whether /cluster/v2/topology is available in 8.10 now or in a future release, and (2) that license is unprotected (UNPROTECTED_API_PATHS) and available both per Physical Tenant (/v2/license) and cluster-wide. Adjust availability wording and add license once confirmed. -->
+- `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view. For the cluster-wide topology, use `/cluster/v2/topology`.
+- `/v2/license` returns the license status and is available per Physical Tenant, including on the default path (`/v2/license`). It is not a separate cluster-wide endpoint.
+
+<!-- TODO(tenant-follow-up): Ana confirmed the license behavior (per-tenant/default, not cluster-wide) and the cluster-wide topology path (/cluster/v2/topology). Still pending Meggle's confirmation: whether /cluster/v2/topology is available in 8.10 or a later release. Adjust wording if it is not yet available. -->
 
 ## HTTP status codes
 
