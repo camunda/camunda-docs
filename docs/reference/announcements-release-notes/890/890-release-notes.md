@@ -430,6 +430,16 @@ Orchestration Cluster enhancements in 8.9 include scheduled backups, Elasticsear
   <li><span class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</span></li>
 </ul>
 
+### Archive by ID for Elasticsearch and OpenSearch
+
+<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
+
+Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default.
+
+Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving. The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
+
+<p class="link-arrow">[Data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)</p>
+
 ### Process and data management improvements
 
 Camunda 8.9 adds support for deleting process and decision data, retaining hierarchy data until root-instance deletion, modifying elements inside multi-instance ad-hoc subprocesses, and updating cluster variables directly in the UI. The release also introduces a centralized user operations audit log and expands audit log access across platform APIs and applications.
