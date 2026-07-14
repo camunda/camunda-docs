@@ -144,6 +144,24 @@ public static class ProcessInstanceExamples
     // </GetProcessInstanceStatistics>
     #endregion GetProcessInstanceStatistics
 
+    #region GetProcessInstanceWaitStateStatistics
+
+    // <GetProcessInstanceWaitStateStatistics>
+    public static async Task GetProcessInstanceWaitStateStatisticsExample(ProcessInstanceKey processInstanceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.GetProcessInstanceWaitStateStatisticsAsync(
+            processInstanceKey);
+
+        foreach (var stat in result.Items)
+        {
+            Console.WriteLine($"Element: {stat.ElementId}, waiting: {stat.WaitingCount}");
+        }
+    }
+    // </GetProcessInstanceWaitStateStatistics>
+    #endregion GetProcessInstanceWaitStateStatistics
+
     #region GetProcessInstanceSequenceFlows
 
     // <GetProcessInstanceSequenceFlows>

@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Create a new group.
@@ -74,6 +76,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for groups based on given criteria.
@@ -112,6 +116,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -155,6 +161,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -207,6 +215,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IkRFTEVURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Deletes the group with the given ID.
@@ -246,6 +256,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -301,6 +313,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Unassigns a user from a group.
@@ -349,6 +363,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -401,6 +417,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -456,6 +474,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Unassigns a client from a group.
@@ -504,6 +524,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -556,6 +578,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -610,6 +634,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiR1JPVVAiLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Unassigns a mapping rule from a group.
@@ -657,6 +683,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -709,6 +737,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[CONSISTENCY:EVENTUAL]]
 

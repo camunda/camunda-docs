@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[CONSISTENCY:STRONG]]
 
         Iterate through all known partitions and activate jobs up to the requested maximum.
@@ -52,6 +54,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for jobs based on given criteria.
@@ -90,6 +94,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -148,6 +154,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Reports a business error (i.e. non-technical) that occurs while processing a job.
@@ -205,6 +213,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Complete a job with the given payload, which allows completing the associated service task.
@@ -261,6 +271,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Update a job with the given key.
@@ -316,6 +328,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.10]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX1VQREFURV9KT0IifV19XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -397,6 +411,11 @@ components:
           description: |
             The tenant filtering strategy - determines whether to use provided tenant IDs or assigned tenant IDs from the authenticated principal's authorized tenants.
           default: PROVIDED
+        withLease:
+          description: |
+            Whether to activate the jobs with a lease. When true, each activated job is assigned a distinct, opaque lease token, returned as ActivatedJobResult.leaseToken. The lease fences the complete, fail, and throw-error commands against a superseded activation of the same job (for example, after the job timed out or failed and was re-activated by another worker): a command carrying a stale lease token is rejected rather than racing with the newer activation. Once a job has been activated with a lease, it is served only to leasing workers of that job type; a homogeneous fleet per job type is recommended. Omit or set to false to activate jobs without a lease.
+          type: boolean
+          nullable: true
       required:
         - type
         - maxJobsToActivate
@@ -404,6 +423,8 @@ components:
       x-properties-added-in-version:
         - propertyName: tenantFilter
           addedInVersion: "8.9"
+        - propertyName: withLease
+          addedInVersion: "8.10"
     JobActivationResult:
       description: The list of activated jobs
       type: object
@@ -439,6 +460,8 @@ components:
         - tags
         - userTask
         - priority
+        - leaseToken
+        - physicalTenantId
       properties:
         type:
           description: The type of the job (should match what was requested).
@@ -484,6 +507,11 @@ components:
           allOf:
             - $ref: "identifiers.yaml#/components/schemas/TenantId"
           description: The ID of the tenant that owns the job.
+        physicalTenantId:
+          type: string
+          description: |
+            The ID of the physical tenant that the job-activation request was routed to;
+            the default physical tenant when the request did not specify one.
         jobKey:
           allOf:
             - $ref: "keys.yaml#/components/schemas/JobKey"
@@ -534,6 +562,12 @@ components:
             The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; the API returns 0 for such jobs.
           type: integer
           format: int32
+        leaseToken:
+          description: |
+            The lease token identifying this activation. This is `null` when the job was
+            activated without a lease.
+          nullable: true
+          type: string
       x-properties-added-in-version:
         - propertyName: kind
           addedInVersion: "8.8"
@@ -548,6 +582,10 @@ components:
         - propertyName: priority
           addedInVersion: "8.10"
         - propertyName: businessId
+          addedInVersion: "8.10"
+        - propertyName: leaseToken
+          addedInVersion: "8.10"
+        - propertyName: physicalTenantId
           addedInVersion: "8.10"
     UserTaskProperties:
       required:
@@ -1217,6 +1255,7 @@ components:
         - MIGRATED
         - PRIORITY_UPDATED
         - RETRIES_UPDATED
+        - TIMEOUT_UPDATED
         - TIMED_OUT
     JobKindEnum:
       description: The job kind.
