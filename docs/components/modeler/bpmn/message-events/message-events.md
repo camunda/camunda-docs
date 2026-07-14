@@ -57,6 +57,12 @@ An activity can have one or more message boundary events. Each of the message ev
 
 When the activity is entered, it creates a corresponding message subscription for each boundary message event. If a non-interrupting boundary event is triggered, the activity is not terminated and multiple messages can be correlated.
 
+The `correlationKey` expression of a message boundary event is evaluated in the activity's own (element instance) scope, consistent with the timer duration, message name, and signal name expressions of boundary events. This means the expression can access variables introduced by input mappings on the activity the boundary event is attached to. If the expression fails to evaluate, the resulting incident is raised on the activity itself, not on its flow scope. This behavior is controlled by the `camunda.processing.evaluate-boundary-event-correlation-key-in-activity-scope` property, which defaults to `true` and requires a broker restart to take effect.
+
+:::note
+Set `camunda.processing.evaluate-boundary-event-correlation-key-in-activity-scope` to `false` to restore the previous behavior, where the expression is evaluated in the flow scope instead. The legacy `zeebe.broker.experimental.features.evaluateBoundaryEventCorrelationKeyInActivityScope` property (or its environment variable equivalents `CAMUNDA_PROCESSING_EVALUATEBOUNDARYEVENTCORRELATIONKEYINACTIVITYSCOPE` and `ZEEBE_BROKER_EXPERIMENTAL_FEATURES_EVALUATEBOUNDARYEVENTCORRELATIONKEYINACTIVITYSCOPE`) has the same effect.
+:::
+
 ## Message throw events
 
 A process can contain intermediate message throw events or message end events to model the

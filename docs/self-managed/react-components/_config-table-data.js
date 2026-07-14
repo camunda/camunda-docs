@@ -1866,6 +1866,14 @@ export const configs = [
     area: ["Processing"],
   },
   {
+    name: "camunda.processing.evaluate-boundary-event-correlation-key-in-activity-scope",
+    legacy: [
+      "zeebe.broker.experimental.features.evaluateBoundaryEventCorrelationKeyInActivityScope",
+    ],
+    types: ["Direct mapping"],
+    area: ["Processing"],
+  },
+  {
     name: "camunda.processing.flow-control.request.enabled",
     legacy: [
       "zeebe.broker.flowControl.request.enabled",
