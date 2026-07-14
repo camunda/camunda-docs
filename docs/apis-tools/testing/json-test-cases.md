@@ -2065,25 +2065,6 @@ Example:
 }
 ```
 
-Example with `createLocalVariables`:
-
-```json
-{
-  "type": "UPDATE_VARIABLES",
-  "processInstanceSelector": {
-    "processDefinitionId": "MoonExplorationProcess"
-  },
-  "elementSelector": {
-    "elementId": "landing-sub-process"
-  },
-  "variables": {
-    "currentPhase": "landing",
-    "fuelRemaining": 75
-  },
-  "createLocalVariables": true
-}
-```
-
 ## Reference: Selectors
 
 Selectors are used to identify specific resources in your process tests. Each selector must contain at least one of the specified properties.

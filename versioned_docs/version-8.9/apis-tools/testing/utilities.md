@@ -553,7 +553,7 @@ void shouldCompleteUserTask() {
 You can update the variables of a process instance, or local variables of a BPMN element, for example, to trigger a BPMN
 conditional event.
 
-To update or create local variables of a BPMN element, you need to identify the element using
+To update the local variables of a BPMN element, you need to identify the element using
 an [ElementSelector](#element-selector).
 
 ```java
@@ -573,13 +573,6 @@ void shouldTriggerConditionalEvent() {
 
     // 2) Update local variables of the element with ID "sub-process"
     processTestContext.updateLocalVariables(
-        ProcessInstanceSelectors.byKey(processInstanceKey),
-        ElementSelectors.byId("sub-process"),
-        variables);
-
-    // 3) Create local variables in the scope of the element with ID "sub-process"
-    //    Variables are created in the element's local scope and are not propagated to parent scopes.
-    processTestContext.createLocalVariables(
         ProcessInstanceSelectors.byKey(processInstanceKey),
         ElementSelectors.byId("sub-process"),
         variables);
