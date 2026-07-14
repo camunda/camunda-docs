@@ -106,7 +106,7 @@ The recommended version (the longest upgrade path) is pre-selected and labeled *
 
 <!-- https://github.com/camunda/product-hub/issues/3568 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 Deleting an item in Web Modeler no longer removes it immediately. Deleted projects, files, folders, process applications, and IDP applications are moved to **Recently deleted** for 30 days. During that time, users with the appropriate permissions can see who deleted an item and when, and restore it. After 30 days, items are permanently deleted.
 
@@ -118,7 +118,7 @@ Deletion no longer corrupts process application version history, as existing sna
 
 <!-- https://github.com/camunda/product-hub/issues/2896 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
 
@@ -146,7 +146,7 @@ FEEL expressions in the variable outline now use the same syntax highlighting as
 
 <!-- https://github.com/camunda/product-hub/issues/3459 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 In Operate, you can now combine multiple variable filters with `AND` logic to find exactly the process instances you need.
 
@@ -264,7 +264,7 @@ Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isola
 
 <!-- https://github.com/camunda/product-hub/issues/3501 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 You can now call a dynamically calculated version of a DMN decision from a BPMN business rule task by specifying the version with a FEEL expression.
 
