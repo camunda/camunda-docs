@@ -61,13 +61,14 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda Hub now provides a public REST API under `/v2/` for programmatic access to Hub resources. The OpenAPI specification is published on docs.camunda.io, and the Hub API is included in the official Camunda Postman collection. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+Camunda Hub now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
-:::note
-The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
-:::
+The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
+
+<p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
 
 ### Camunda Hub
 
@@ -83,26 +84,11 @@ Organizations can now access exclusive Camunda 8 generation versions tailored sp
 
 <!-- https://github.com/camunda/product-hub/issues/3402 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 Camunda Hub introduces an organization-level catalog for reusable, Center of Excellence (CoE)-approved assets, such as element templates, connectors, forms, and DMNs, backed by source control management (SCM).
 
 CoE teams can submit assets through the API from their SCM workflows, and delivery teams can browse catalog entries in Hub and inspect asset details. This release also adds in-diagram notifications for updated shared assets and pre-deployment dependency checks that surface missing DMNs, forms, connectors, and other dependencies on the target cluster before deployment.
-
-#### Outdated catalog assets visibility
-
-<!-- https://github.com/camunda/product-hub/issues/3490 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-You can now see at a glance which catalog assets are outdated and where they are used across your organization.
-
-- The **Manage assets** table shows outdated and up-to-date indicators for each asset.
-- Select an outdated asset to see the workspaces, projects, and files where it is in use, so you can assess impact and reach the right owners.
-- The **Workspace assets** tab (**Manage > Assets**) surfaces outdated status at the workspace level.
-- Query which files, projects, and owners use a specific outdated asset through the API, for automated governance workflows.
-
-All views are permission-aware.
 
 #### Select a target version when upgrading a cluster
 
@@ -110,25 +96,11 @@ All views are permission-aware.
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-When you upgrade an orchestration cluster that has more than one valid upgrade target, Console now shows a version selection step in the upgrade wizard. Each option displays the generation name and the Zeebe patch version.
+When you upgrade an Orchestration Cluster that has more than one valid upgrade target, Console now shows a version selection step in the upgrade wizard. Each option displays the generation name and the Zeebe patch version.
 
 The recommended version (the longest upgrade path) is pre-selected and labeled **latest**, and you can choose a different option before proceeding. Clusters with only one upgrade target keep the existing flow.
 
 ### Modeler
-
-#### Process application versioning redesign
-
-<!-- https://github.com/camunda/product-hub/issues/3175 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-Web Modeler now offers a unified versioning model for process applications:
-
-- Continuous change history on every file, where every save is recoverable with no user action required.
-- File versions you can name, compare (any two, including non-adjacent), and restore individually without affecting the rest of the process application.
-- Process application versions, a deliberate and named capture of the entire project, with comparison that highlights only changed files.
-- A two-step deployment form to configure resources and cluster, then review with a version banner, binding overview, and a non-blocking warning for empty `versionTag` references.
-- Deployment records that link modeler state, binding configuration, and the Zeebe `deploymentKey` per cluster, for traceability from Operate back to the exact files deployed.
 
 #### Safe deletion with a 30-day recovery window
 
@@ -252,7 +224,7 @@ The documentation covers the recommended topology, exporter configuration, and R
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 adds support for new relational database versions. Operators running Self-managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
+Camunda 8.10 adds support for new relational database versions. Operators running Self-Managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
 
 New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
 
@@ -517,7 +489,7 @@ Camunda Hub and Accounts now support the 2025 enterprise license model.
 - For enterprise (`salesplantype = enterprise`) organizations, the licensing model is shown in the organization details. Admins can edit this by selecting either **legacy** or **2025** via a modal action.
 - The enterprise onboarding wizard now includes a license selection step (defaults to **2025**). The `ExternalOnboardingRouter` accepts an optional licensing model parameter (defaulting to **2025** if not provided).
 
-#### Cluster version selection for SaaS orchestration clusters
+#### Cluster version selection for SaaS Orchestration Clusters
 
 <!-- https://github.com/camunda/product-hub/issues/3582 -->
 
@@ -634,11 +606,11 @@ Switching CLIs does not require a release-state migration; Helm is client-side o
   <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
 </ul>
 
-#### Host network support for orchestration cluster pods
+#### Host network support for Orchestration Cluster pods
 
 <!-- https://github.com/camunda/camunda-platform-helm/pull/6210 -->
 
-The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
+The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets Orchestration Cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
 
 When `orchestration.hostNetwork` is set to `true` and `orchestration.dnsPolicy` is not set, the chart automatically uses `dnsPolicy: ClusterFirstWithHostNet` to preserve in-cluster DNS resolution. You can override this by setting `orchestration.dnsPolicy` explicitly.
 
