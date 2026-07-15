@@ -5,6 +5,10 @@ sidebar_label: "Plugins"
 description: "Scaffold, install, and manage c8ctl plugins to add custom commands to the Camunda 8 CLI."
 ---
 
+<!-- This page is maintained in the c8ctl repository (https://github.com/camunda/c8ctl, in docs/) and
+     is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
+     overwritten. Edit the source in the c8ctl repo instead. -->
+
 :::warning Alpha feature
 `c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
 :::
@@ -100,6 +104,20 @@ Synchronize all plugins from the registry. Rebuilds installed plugins and reinst
 ```bash
 c8 sync plugins
 ```
+
+### Diagnose plugin issues
+
+Use `doctor plugin` to inspect the plugin loading state and surface any command collisions (for example, when two plugins register the same command). The report always exits `0` — it describes state rather than failing.
+
+```bash
+# Human-readable summary of loaded plugins and any collisions
+c8 doctor plugin
+
+# Machine-readable output for scripts and agents
+c8 doctor plugin --json
+```
+
+Built-in commands always take precedence over plugin commands, and the first plugin to register a given command wins. `doctor plugin` shows which registrations were kept and which were shadowed.
 
 ## Plugin structure
 
