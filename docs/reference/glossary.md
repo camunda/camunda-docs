@@ -88,7 +88,7 @@ Camunda supports two types of agents: [Camunda AI agent](#camunda-ai-agent) (nat
 For example, build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
-- [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
 
 ### Audit log
 
