@@ -20,6 +20,10 @@ The time between a process instance finishing and being moved to a dated index c
 
 ## Archive by ID
 
+:::warning
+Enable `archiveByIdEnabled` only on Camunda 8.9.10 or later. Earlier 8.9 patch releases contain a bug that causes archiving to behave incorrectly when Elasticsearch or OpenSearch use more than one shard for the Operate and Tasklist indices.
+:::
+
 When `archiveByIdEnabled` is `true` (the default), archiving moves documents in small, targeted batches instead of all matching records at once. Archiving continues incrementally until every document for the selected process instances reaches the relevant dated indices.
 
 The core archiving concept is unchanged: data still moves to the same dated destination indices (for example, `operate-variable_2020-01-01`). Archiving by ID uses fewer resources, which improves stability.
