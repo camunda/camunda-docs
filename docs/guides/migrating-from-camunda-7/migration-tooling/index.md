@@ -14,7 +14,7 @@ All tools are available as **ready-to-use builds** from the [GitHub releases pag
 
 ## Agentic migration
 
-The **Camunda migration agent skill** is an AI-driven orchestrator that runs the migration tools on your behalf. It handles the tool calls so you can focus on rearchitecting your solution. The [agent workflow](#agent-workflow) section shows the sequence in detail.
+The **Camunda migration agent skill** is an AI-driven orchestrator that runs the migration tools on your behalf. It handles the tool calls so you can focus on rearchitecting your solution.
 
 ### Install and run
 
@@ -52,7 +52,7 @@ The skill asks for your migration scope:
 4. **Validate migration results**: Compiles, runs tests, and searches for remaining C7 references.
 5. **Fix remaining issues**: Offers to fix remaining issues, and waits for your review before each change.
 
-## Migration tools
+## Manual migration
 
 Camunda provides the following tools for manual migration:
 
