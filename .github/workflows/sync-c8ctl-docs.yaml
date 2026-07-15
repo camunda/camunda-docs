@@ -1,4 +1,4 @@
-name: Sync c8ctl CLI Command Reference
+name: Sync c8ctl CLI documentation
 
 on:
   schedule:
@@ -69,18 +69,38 @@ jobs:
         working-directory: c8ctl
         run: npm run sync:docs
 
-      - name: Copy command reference into camunda-docs
+      - name: Copy c8ctl docs into camunda-docs
         run: |
           TARGET="docs/${{ steps.resolve.outputs.docs_root }}/apis-tools/c8ctl"
           mkdir -p "$TARGET"
-          cp c8ctl/docs/command-reference.md "$TARGET/command-reference.md"
-          echo "Copied command-reference.md → $TARGET/"
+          # Explicit allowlist of pages synced from the c8ctl repo (source of truth).
+          # Repo-only docs in c8ctl/docs (e.g. plugin-collisions.md) are intentionally NOT listed.
+          SYNCED_FILES="getting-started.md cluster-inspection.md identity-management.md development-workflows.md plugins.md command-reference.md sidebar-schema.js"
+          for f in $SYNCED_FILES; do
+            if [ -f "c8ctl/docs/$f" ]; then
+              cp "c8ctl/docs/$f" "$TARGET/$f"
+              echo "Copied $f → $TARGET/"
+            elif [ -f "$TARGET/$f" ]; then
+              # The page is missing on this c8ctl ref but still exists here. Do NOT
+              # delete it automatically: a wrong ref, a failed checkout, or a
+              # transiently absent file would otherwise silently remove a published
+              # page. Removing a page also requires a manual static/.htaccess
+              # redirect, so a human must prune it deliberately. Surface a warning
+              # instead of failing or deleting silently.
+              echo "::warning::Stale c8ctl page '$f' exists in camunda-docs but is missing on this c8ctl ref. If it was intentionally removed upstream, delete $TARGET/$f and add a static/.htaccess redirect in a manual PR."
+            else
+              echo "Skipped $f (not present on this c8ctl ref)"
+            fi
+          done
 
       - name: Check for changes
         id: check_changes
         working-directory: docs
         run: |
-          if git diff-index --quiet HEAD; then
+          # Use `git status --porcelain` rather than `git diff-index`: the latter
+          # ignores untracked files, so a newly added synced page (not yet tracked
+          # in camunda-docs) would not be detected and the sync PR would be skipped.
+          if [ -z "$(git status --porcelain .)" ]; then
             echo "No changes to commit."
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
           else
@@ -115,15 +135,17 @@ jobs:
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs
-          title: "docs: update c8ctl CLI command reference (${{ steps.resolve.outputs.version_label }})"
+          title: "docs: sync c8ctl CLI documentation (${{ steps.resolve.outputs.version_label }})"
           body: |
             ## Description
 
             Auto-generated PR from the [sync c8ctl docs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-c8ctl-docs.yaml).
 
-            Updates the c8ctl CLI command reference from [`c8ctl@${{ steps.resolve.outputs.c8ctl_ref }}`](https://github.com/camunda/c8ctl/tree/${{ steps.resolve.outputs.c8ctl_ref }}).
+            Syncs the c8ctl CLI documentation from [`c8ctl@${{ steps.resolve.outputs.c8ctl_ref }}`](https://github.com/camunda/c8ctl/tree/${{ steps.resolve.outputs.c8ctl_ref }}), which is the single source of truth for these pages.
 
-            **Target:** `${{ steps.resolve.outputs.docs_root }}/apis-tools/c8ctl/command-reference.md`
+            **Target:** `${{ steps.resolve.outputs.docs_root }}/apis-tools/c8ctl/`
+
+            > These pages are maintained in the c8ctl repo. Do not edit them here — edit the source in c8ctl and let this workflow sync the changes.
 
             ## When should this change go live?
 
@@ -132,7 +154,7 @@ jobs:
             ## PR Checklist
 
             - My changes are in `/${{ steps.resolve.outputs.docs_root }}`.
-          commit-message: "docs: update c8ctl CLI command reference (${{ steps.resolve.outputs.version_label }})"
+          commit-message: "docs: sync c8ctl CLI documentation (${{ steps.resolve.outputs.version_label }})"
           branch: ${{ steps.resolve.outputs.pr_branch }}
           delete-branch: true
           base: main
