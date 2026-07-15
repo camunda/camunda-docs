@@ -409,7 +409,7 @@ const GETTING_STARTED = {
 
 const DESKTOP_MODELER = {
   version: "5.49.0",
-  date: "Jul 8, 2026",
+  date: "Jul 14, 2026",
   nightlyLabel: "Nightly",
   links: {
     mac: {
