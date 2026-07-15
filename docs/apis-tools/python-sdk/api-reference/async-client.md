@@ -158,6 +158,7 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -211,6 +212,7 @@ The client can then access tenant data and perform authorized actions.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -389,6 +391,7 @@ this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -1781,7 +1784,7 @@ def create_group_example(group_id: GroupId) -> None:
 
 - **Parameters:**
   - **config** ([_WorkerConfig_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.WorkerConfig))
-  - **callback** (_Callable_ _[_ _[_[_ConnectedJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext) _]_ _,_ _Coroutine_ _[__Any_ _,_ _Any_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_SyncJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.SyncJobContext) _]_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _Coroutine_ _[__Any_ _,_ _Any_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _dict_ _[__str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_)
+  - **callback** (_Callable_ _[_ _[_[_ConnectedJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.ConnectedJobContext) _]_ _,_ _Coroutine_ _[\_\_Any_ _,_ _Any_ _,_ _dict_ _[\_\_str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_SyncJobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.SyncJobContext) _]_ _,_ _dict_ _[\_\_str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _Coroutine_ _[\_\_Any_ _,_ _Any_ _,_ _dict_ _[\_\_str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_ _]_ _|_ _Callable_ _[_ _[_[_JobContext_](runtime.md#camunda_orchestration_sdk.runtime.job_worker.JobContext) _]_ _,_ _dict_ _[\_\_str_ _,_ _Any_ _]_ _|_ _JobCompletionRequest_ _|_ _None_ _]_)
   - **auto_start** (_bool_)
   - **execution_strategy** (_Literal_ _[_ _'auto'_ _,_ _'async'_ _,_ _'thread'_ _,_ _'process'_ _]_)
   - **startup_jitter_max_seconds** (_float_ _|_ _None_)
@@ -2733,7 +2736,7 @@ Note: file reads are currently performed using blocking I/O (`open(...).read()`)
 need fully non-blocking file access, load the bytes yourself and call [`create_deployment()`](#create_deployment).
 
 - **Parameters:**
-  - **files** (_list_ _[__str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
+  - **files** (_list_ _[\_\_str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
   - **tenant_id** (_str_ _|_ _None_) – Optional tenant identifier. If not provided, the default tenant is used.
 - **Returns:**
   The deployment result with extracted resource lists.
@@ -3254,6 +3257,7 @@ Get decision instance
 
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3548,7 +3552,7 @@ optionally by jobType.
   - **from** (_datetime.datetime_)
   - **to** (_datetime.datetime_)
   - **job_type** (_str_ _|_ _Unset_)
-  - **from_** (_datetime.datetime_)
+  - **from\_** (_datetime.datetime_)
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
@@ -7969,6 +7973,7 @@ assignments no longer applied.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -8021,6 +8026,7 @@ The client can no longer access tenant data.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -8199,6 +8205,7 @@ associated with this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.

@@ -50,7 +50,7 @@ public static IServiceCollection AddCamundaClient(this IServiceCollection servic
 Registers a singleton using an section.
 
 Typically called as services.AddCamundaClient(configuration.GetSection("Camunda")).
-PascalCase keys in the section are mapped to canonical CAMUNDA_* env-var names internally.
+PascalCase keys in the section are mapped to canonical CAMUNDA\_\* env-var names internally.
 Environment variables still apply as a base layer; section values override them.
 
 | Parameter              | Type                 | Description |

@@ -228,7 +228,6 @@ For the final task:
 
 This final task marks the end of the form flow for the BTP plugin and determines whether the flow completed successfully or failed.
 
-
 #### Completing the form flow
 
 Each form flow in your process must end with a completion task. This task signals to the BTP plugin that the form sequence is finished, and the process should proceed to the next phase.

@@ -144,6 +144,7 @@ Members of the group inherit the group authorizations, roles, and tenant assignm
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -197,6 +198,7 @@ The client can then access tenant data and perform authorized actions.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -375,6 +377,7 @@ this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -2721,7 +2724,7 @@ This is a convenience wrapper around [`create_deployment()`](#create_deployment)
   convenience lists (`processes`, `decisions`, `decision_requirements`, `forms`).
 
 * **Parameters:**
-  - **files** (_list_ _[__str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
+  - **files** (_list_ _[\_\_str_ _|_ _Path_ _]_) – File paths (`str` or `Path`) to deploy.
   - **tenant_id** (_str_ _|_ _None_) – Optional tenant identifier. If not provided, the default tenant is used.
 * **Returns:**
   The deployment result with extracted resource lists.
@@ -3242,6 +3245,7 @@ Get decision instance
 
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
@@ -3536,7 +3540,7 @@ optionally by jobType.
   - **from** (_datetime.datetime_)
   - **to** (_datetime.datetime_)
   - **job_type** (_str_ _|_ _Unset_)
-  - **from_** (_datetime.datetime_)
+  - **from\_** (_datetime.datetime_)
   - **consistency** (_ConsistencyOptions_ _|_ _None_)
   - **kwargs** (_Any_)
 - **Raises:**
@@ -7970,6 +7974,7 @@ assignments no longer applied.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -8022,6 +8027,7 @@ The client can no longer access tenant data.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
@@ -8200,6 +8206,7 @@ associated with this role.
     > Example: my-application.
 
   - **kwargs** (_Any_)
+
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
