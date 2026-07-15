@@ -124,7 +124,7 @@ See [tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagen
 </tr>
 <tr>
     <td><span className="callout">5</span></td>
-    <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
+    <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions. This agent-to-agent pattern runs inside Camunda's [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), as one of the tools available to an agent - it is not the same as agentic orchestration itself, which is Camunda's overall model for orchestrating agents, people, and systems.</td>
 </tr>
 </table>
 

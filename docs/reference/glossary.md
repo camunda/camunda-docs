@@ -61,11 +61,17 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 - [Admin overview](/components/admin/admin-introduction.md)
 
+### Agent orchestration
+
+A different architectural pattern from [agentic orchestration](#agentic-orchestration), where a primary AI agent coordinates multiple specialized worker agents — an LLM routing tasks to sub-agents, an LLM-to-LLM coordination pattern. Agent orchestration can run inside a Camunda agentic process as one of its agents, but it is not what Camunda's platform provides. Not to be confused with agentic orchestration.
+
 ### Agentic orchestration
 
-The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
+A hybrid orchestration model combining the power of deterministic logic with LLM-driven flexibility, allowing AI to evaluate the prompt, decide on what tools to execute, and decide when the goal is achieved, all with governance and auditability.
 
 For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
+
+Not to be confused with [agent orchestration](#agent-orchestration), a different pattern describing LLM-to-LLM coordination between agents.
 
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 
@@ -75,8 +81,11 @@ A broad field of computer science focused on creating machines that can perform 
 
 ### AI agent
 
-An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
-For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad-hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop — the loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection (for example, a single connector call that returns output along a fixed execution path) is not an agent.
+
+Camunda supports two types of agents: [Camunda AI agent](#camunda-ai-agent) (native) and [External agent](#external-agent) (non-native).
+
+For example, build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
@@ -135,6 +144,15 @@ A cluster [variable](../../components/concepts/variables/) is a centrally manage
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
 
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
+### Camunda AI agent
+
+The native [AI agent](#ai-agent) type: tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. Implemented via one of two BPMN templates:
+
+- [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) — a single BPMN task running the LLM-driven loop, with tools called via an ad-hoc sub-process. Use for simple agents or single-purpose tasks.
+- [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) — a BPMN ad-hoc sub-process; the primary native pattern for complex agents with multiple tools.
+
+Not to be confused with [External agent](#external-agent), the non-native AI agent type.
 
 ### Camunda 8
 
@@ -254,6 +272,14 @@ An execution listener is a mechanism that allows users to execute custom logic a
 ### Exporter
 
 See [Zeebe Exporter](#zeebe-exporter).
+
+### External agent
+
+The non-native [AI agent](#ai-agent) type: tool orchestration runs in an external runtime (for example, LangGraph, Amazon Bedrock, or custom code) instead of Camunda's engine — the loop itself lives outside Camunda. Camunda orchestrates when and how it acts within the broader process and observes its execution through the Agent Instance API. The process record, governance, and audit trail live in Camunda; the loop does not.
+
+External agents are not [Camunda AI agents](#camunda-ai-agent). Both are AI agents; "Camunda AI agent" refers specifically to the native type, where Camunda's engine executes the loop.
+
+- [External agents](/components/agentic-orchestration/ai-agents.md#external-agents)
 
 ## F
 

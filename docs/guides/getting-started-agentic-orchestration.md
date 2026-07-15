@@ -20,9 +20,9 @@ Get started with Camunda [agentic orchestration](/components/agentic-orchestrati
 
 ## About
 
-AI agents represent the practical implementation of agentic process orchestration within Camunda, combining the flexibility of AI with the reliability of traditional process automation.
+An [AI agent](/components/agentic-orchestration/ai-agents.md) is an addressable execution of an LLM-driven loop with shared memory context across iterations — combining the flexibility of AI with the reliability of traditional process orchestration.
 
-In Camunda, an AI agent refers to an automation solution that uses [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
+In this guide, you build a Camunda AI agent: the native agent type, whose tool orchestration runs in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by Camunda's engine.
 
 In this guide, you will:
 
