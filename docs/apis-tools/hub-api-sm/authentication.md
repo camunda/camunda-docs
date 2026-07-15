@@ -13,34 +13,43 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it in every request. If you already have a Web Modeler API v1 token, you can use the same token for this API.
 
-## Generate a token
+## Create a new application
 
-1. [Add an M2M application in Management Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md).
+Create an application with Web Modeler API permissions.
+
+1. [Add an M2M application in Management Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md#add-an-application).
 2. [Grant this application access](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the **Web Modeler API** with the necessary permissions. This authorization also adds the required `web-modeler-public-api` audience to tokens issued for this application, so no `audience` parameter is needed in the token request.
 3. Capture the `Client ID` and `Client Secret` from the application in Management Identity.
-4. [Generate a token](/self-managed/components/management-identity/authentication.md#generate-a-token), providing the previously-captured values as the `client_id` and `client_secret`:
-   ```shell
-   curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
-   --header 'Content-Type: application/x-www-form-urlencoded' \
-   --data-urlencode "client_id=${CLIENT_ID}" \
-   --data-urlencode "client_secret=${CLIENT_SECRET}" \
-   --data-urlencode 'grant_type=client_credentials'
-   ```
-   A successful authentication response looks like this:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-5. Use the `access_token` in the next step.
+
+## Generate a token
+
+After [creating a new application](#create-a-new-application), use its client ID and secret to [generate an access token](/self-managed/components/management-identity/authentication.md#generate-a-token):
+
+```shell
+curl --location --request POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode "client_id=${CLIENT_ID}" \
+  --data-urlencode "client_secret=${CLIENT_SECRET}" \
+  --data-urlencode 'grant_type=client_credentials'
+```
+
+A successful authentication response looks like this:
+
+```json
+{
+  "access_token": "<TOKEN>",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0
+}
+```
+
+With this `access_token`, you're ready to [authenticate with the Camunda Hub API](#authenticate-with-your-token).
 
 ## Authenticate with your token
 
-Include the previously-captured token as an authorization header in every request: `Authorization: Bearer <TOKEN>`.
+Once you have [generated a token](#generate-a-token), use it in the authorization header in every Camunda Hub API request: `Authorization: Bearer <TOKEN>`.
 
 For example, send a request to the Camunda Hub API's `/info` endpoint:
 
