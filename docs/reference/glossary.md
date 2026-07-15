@@ -63,7 +63,7 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 ### Agent orchestration
 
-A different architectural pattern from [agentic orchestration](#agentic-orchestration), where a primary AI agent coordinates multiple specialized worker agents — an LLM routing tasks to sub-agents, an LLM-to-LLM coordination pattern. Agent orchestration can run inside a Camunda agentic process as one of its agents, but it is not what Camunda's platform provides. Not to be confused with agentic orchestration.
+A different architectural pattern from [agentic orchestration](#agentic-orchestration), where a primary AI agent coordinates multiple specialized worker agents — an LLM routing tasks to sub-agents, an LLM-to-LLM coordination pattern. Agent orchestration can run inside a Camunda agentic process as one of its agents. Not to be confused with agentic orchestration.
 
 ### Agentic orchestration
 
