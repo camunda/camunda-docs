@@ -31,7 +31,7 @@ Static definition set once at creation.
 elementInstanceKey: ElementInstanceKey;
 ```
 
-The key of the AI Agent Sub-process or AI Agent Task element instance.
+The key of the AHSP or AI Agent Task element instance.
 The engine uses this key to infer processInstanceKey, elementId,
 processDefinitionKey, and tenantId.
 

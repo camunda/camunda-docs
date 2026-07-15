@@ -1578,11 +1578,11 @@ Request to create a new agent instance.
 public sealed class AgentInstanceCreationRequest
 ```
 
-| Property             | Type                      | Description                                                                                                                                                                 |
-| -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ElementInstanceKey` | `ElementInstanceKey`      | The key of the AI Agent Sub-process or AI Agent Task element instance. The engine uses this key to infer processInstanceKey, elementId, processDefinitionKey, and tenantId. |
-| `Definition`         | `AgentInstanceDefinition` | Static definition set once at creation.                                                                                                                                     |
-| `Limits`             | `AgentInstanceLimits`     | Limits for the agent execution. When omitted, all limits default to -1 (no limit).                                                                                          |
+| Property             | Type                      | Description                                                                                                                                                 |
+| -------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ElementInstanceKey` | `ElementInstanceKey`      | The key of the AHSP or AI Agent Task element instance. The engine uses this key to infer processInstanceKey, elementId, processDefinitionKey, and tenantId. |
+| `Definition`         | `AgentInstanceDefinition` | Static definition set once at creation.                                                                                                                     |
+| `Limits`             | `AgentInstanceLimits`     | Limits for the agent execution. When omitted, all limits default to -1 (no limit).                                                                          |
 
 ## AgentInstanceCreationResult
 
