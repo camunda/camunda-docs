@@ -380,7 +380,7 @@ function OSTabs({ activeOS, onSelect }) {
 
 const GETTING_STARTED = {
   version: "8.10.0-alpha3",
-  date: "Jul 6, 2026",
+  date: "Jul 17, 2026",
   links: {
     mac: [
       {
