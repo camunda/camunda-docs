@@ -29,8 +29,9 @@ Do not replace `.orchestration/application.yaml` in the full setup with a file f
 Use this workflow for each backend:
 
 1. Select the matching application file and database service from the table below.
-1. For the lightweight setup, edit the selected `configuration/application-<database>.yaml` file and set `ORCHESTRATION_CONFIG_FILE` to its filename.
-1. For the full setup, replace the `camunda.data.secondary-storage` block in `.orchestration/application.yaml` with the block from the selected file and edit the copied values there.
+1. Configure the application file for your setup:
+   - **Lightweight setup:** Edit the selected `configuration/application-<database>.yaml` file and set `ORCHESTRATION_CONFIG_FILE` to its filename.
+   - **Full setup:** Replace the `camunda.data.secondary-storage` block in `.orchestration/application.yaml` with the block from the selected file, then edit the copied values there.
 1. Create `docker-compose.override.yaml` in the extracted distribution directory and copy the matching database service example into it.
 1. If the backend requires an external JDBC driver, place the driver JAR directly in `driver-lib/`.
 1. Start the setup with the command shown for that backend.
