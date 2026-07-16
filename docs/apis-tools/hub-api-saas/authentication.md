@@ -17,7 +17,9 @@ Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it 
 
 Before you begin, make sure you have the **Admin** user role.
 
-## Generate a token
+## Create new client credentials
+
+Create an API client with Web Modeler API permissions.
 
 1. In Camunda Hub, under **Organization overview**, click **Admin APIs**.
 2. From the **Administration API** management page, click **Create new credentials**.
@@ -34,37 +36,48 @@ Before you begin, make sure you have the **Admin** user role.
    :::caution
    When you create client credentials, the client secret is only shown once. Save the client secret somewhere safe.
    :::
-5. Execute an authentication request to the token issuer:
-   ```bash
-   curl --request POST ${CAMUNDA_OAUTH_URL} \
-       --header 'Content-Type: application/x-www-form-urlencoded' \
-       --data-urlencode 'grant_type=client_credentials' \
-       --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
-       --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
-       --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
-   ```
-   A successful response looks like this:
-   ```json
-   {
-     "access_token": "<TOKEN>",
-     "expires_in": 300,
-     "refresh_expires_in": 0,
-     "token_type": "Bearer",
-     "not-before-policy": 0
-   }
-   ```
-6. Use the `access_token` in the next step.
+
+## Generate a token
+
+After [creating new client credentials](#create-a-new-application), generate an access token:
+
+```bash
+curl --request POST ${CAMUNDA_OAUTH_URL} \
+   --header 'Content-Type: application/x-www-form-urlencoded' \
+   --data-urlencode 'grant_type=client_credentials' \
+   --data-urlencode "audience=${CAMUNDA_CONSOLE_OAUTH_AUDIENCE}" \
+   --data-urlencode "client_id=${CAMUNDA_CONSOLE_CLIENT_ID}" \
+   --data-urlencode "client_secret=${CAMUNDA_CONSOLE_CLIENT_SECRET}"
+```
+
+A successful response looks like this:
+
+```json
+{
+  "access_token": "<TOKEN>",
+  "expires_in": 300,
+  "refresh_expires_in": 0,
+  "token_type": "Bearer",
+  "not-before-policy": 0
+}
+```
+
+With this `access_token`, you're ready to [authenticate with the Camunda Hub API](#authenticate-with-your-token).
 
 ## Authenticate with your token
 
-Include the previously-captured token as an authorization header in every request: `Authorization: Bearer <TOKEN>`.
+Once you have [generated a token](#generate-a-token), use it in the authorization header in every Camunda Hub API request: `Authorization: Bearer <TOKEN>`.
 
-For example, send a request to the Camunda Hub API's `/files/search` endpoint:
+For example, send a request to the Camunda Hub API's `/info` endpoint:
 
 ```shell
 curl --header "Authorization: Bearer ${TOKEN}" \
-     https://hub.cloud.camunda.io/api/v2/files/search
+     https://hub.cloud.camunda.io/api/v2/info
 ```
+
+## Organization-level access
+
+API tokens are granted to organization-level _clients_ rather than individual _users_. With an API token, you can read, edit, and delete all workspaces and workspace resources in the organization, as long as the application has the required permissions for the Camunda Hub API. This is true even if you aren't a member of the workspace and you can't see it in the Camunda Hub user interface.
 
 ## Token expiration
 

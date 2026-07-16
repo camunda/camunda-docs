@@ -1303,7 +1303,20 @@ module.exports = {
           ],
         },
 
-        "components/saas/backups",
+        {
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "components/saas/backup-restore-overview",
+          },
+          items: [
+            "components/saas/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting",
+          ],
+        },
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
@@ -2207,7 +2220,15 @@ module.exports = {
                 type: "doc",
                 id: "self-managed/concepts/multi-tenancy/physical-tenants",
               },
-              items: ["self-managed/concepts/physical-tenants/index"],
+              items: [
+                "self-managed/concepts/physical-tenants/index",
+                "self-managed/concepts/physical-tenants/storage-isolation",
+                "self-managed/concepts/physical-tenants/api-routing",
+                "self-managed/concepts/physical-tenants/authentication-authorization",
+                "self-managed/concepts/physical-tenants/authorization-model",
+                "self-managed/concepts/physical-tenants/configuration-reference",
+                "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+              ],
             },
           ],
         },
@@ -2230,7 +2251,14 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": [
+          type: "category",
+          label: "Multi-region",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-region/resilience-tiers",
+          },
+          items: [
+            "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
             "self-managed/concepts/multi-region/zone-aware-clusters",
           ],
@@ -2427,7 +2455,6 @@ module.exports = {
                 "self-managed/components/optimize/configuration/history-cleanup",
                 "self-managed/components/optimize/configuration/localization",
                 "self-managed/components/optimize/configuration/object-variables",
-                "self-managed/components/optimize/configuration/optimize-export-filtering",
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy",
               ],

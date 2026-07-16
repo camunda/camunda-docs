@@ -11,6 +11,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.8]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siZHluYW1pYyI6dHJ1ZSwibm90ZSI6IkZpcnN0LWFkbWluIGJvb3RzdHJhcCDigJQgYWxsb3dlZCBhbm9ueW1vdXNseSB1bnRpbCBhbiBpbml0aWFsIGFkbWluIGV4aXN0czsgb3RoZXJ3aXNlIHJlcXVpcmVzIFVTRVIgQ1JFQVRFIGFuZCBST0xFIFVQREFURS4ifV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Creates a new user and assigns the admin role to it. This endpoint is only usable when users are managed in the Orchestration Cluster and while no user is assigned to the admin role.

@@ -2,6 +2,10 @@ name: Notify Failure
 
 on:
   workflow_call:
+    inputs:
+      dependency_status:
+        required: true
+        type: string
     secrets:
       VAULT_ADDR:
         required: true
@@ -38,5 +42,6 @@ jobs:
               "github_repo": "${{ github.repository }}",
               "github_run_id": "${{ github.run_id }}",
               "github_ref_name": "${{ github.ref_name }}",
-              "github_workflow": "${{ github.workflow }}"
+              "github_workflow": "${{ github.workflow }}",
+              "dependency_status": "${{ inputs.dependency_status }}"
             }

@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Search for decision definitions based on given criteria.
@@ -51,6 +53,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.8]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dfQ]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -102,6 +106,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dfQ]]
+
         [[CONSISTENCY:EVENTUAL]]
 
         Returns decision definition as XML.
@@ -151,6 +157,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.6]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFX0RFQ0lTSU9OX0lOU1RBTkNFIn1dfQ]]
 
         [[CONSISTENCY:STRONG]]
 

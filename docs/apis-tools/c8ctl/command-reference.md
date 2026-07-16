@@ -5,7 +5,8 @@ sidebar_label: "Command reference"
 description: "Complete reference of all c8ctl CLI commands, flags, resources, and aliases — auto-generated from the command registry."
 ---
 
-<!-- Auto-generated from COMMAND_REGISTRY. Do not edit manually.
+<!-- Auto-generated from COMMAND_REGISTRY in the c8ctl repo. Do not edit manually or in camunda-docs.
+     This page is the source of truth in c8ctl and is synced to camunda-docs automatically.
      Run: node --experimental-strip-types scripts/sync-readme-commands.ts --docs -->
 
 :::warning Alpha feature
@@ -691,6 +692,7 @@ Activate jobs of a specific type for processing
 | `--timeout` | string |  | Job timeout in milliseconds |
 | `--worker` | string |  | Worker name |
 | `--customHeaders` | boolean |  | Include custom headers in output |
+| `--fetchVariable` | string |  | Comma-separated variable names to fetch from the server and include in output |
 
 ---
 

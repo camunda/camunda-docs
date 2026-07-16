@@ -13,6 +13,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Upload a document to the Camunda 8 cluster.
@@ -74,6 +76,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.7]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -163,6 +167,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
         [[CONSISTENCY:STRONG]]
 
         Download a document from the Camunda 8 cluster.
@@ -218,6 +224,8 @@ paths:
 
         [[ADDED_IN_VERSION:8.6]]
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkRFTEVURSJ9XX0]]
+
         [[CONSISTENCY:STRONG]]
 
         Delete a document from the Camunda 8 cluster.
@@ -261,6 +269,8 @@ paths:
 
 
         [[ADDED_IN_VERSION:8.7]]
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
 
         [[CONSISTENCY:STRONG]]
 
