@@ -288,6 +288,36 @@ The Docker Compose setup includes [Mailpit](https://github.com/axllent/mailpit) 
 
 You can access emails in Mailpit's web UI at [http://localhost:8075](http://localhost:8075).
 
+## Enable multi-tenancy
+
+[Multi-tenancy](/components/concepts/multi-tenancy.md) requires an authenticated API. To enable it in the lightweight configuration, create a `docker-compose.override.yaml` next to the compose file that protects the API and switches on the tenancy checks:
+
+```yaml
+services:
+  orchestration:
+    environment:
+      - CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI=false
+      - CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED=true
+      - CAMUNDA_SECURITY_MULTITENANCY_APIENABLED=true
+  connectors:
+    environment:
+      - CAMUNDA_CLIENT_AUTH_METHOD=basic
+      - CAMUNDA_CLIENT_AUTH_USERNAME=demo
+      - CAMUNDA_CLIENT_AUTH_PASSWORD=demo
+```
+
+Start the stack with `docker compose up -d` and manage tenants through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the Identity UI at [http://localhost:8088/identity](http://localhost:8088/identity):
+
+```bash
+# Create a tenant
+curl -u demo:demo -X POST http://localhost:8088/v2/tenants \
+  -H 'Content-Type: application/json' -d '{"tenantId": "tenant-a", "name": "Tenant A"}'
+# Assign the demo user to it
+curl -u demo:demo -X PUT http://localhost:8088/v2/tenants/tenant-a/users/demo
+```
+
+With the API protected, clients must authenticate with Basic authentication (`camunda.client.auth.method=basic` plus username and password in the Camunda client SDKs).
+
 ## Next steps
 
 Now that you have Camunda 8 running locally, explore these resources:
