@@ -126,6 +126,17 @@ Using your throughput and retention settings, you can now calculate the required
 | Disk space                 |     \* 21 kib      |      72.10 GiB |                                                                                                    |
 | **Sum**                    |                    | **113.87 GiB** |                                                                                                    |
 
+### Optimize variable storage
+
+Variables can significantly increase Optimize's storage and CPU usage. Optimize stores variables in its analytics indices so reports can filter, group, and display variable values. Object variables can be especially expensive, because Optimize [flattens each object variable](/self-managed/optimize-deployment/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable.
+
+If you don't need variables in Optimize reports, you can reduce this cost in two ways:
+
+- **Stop exporting variables entirely.** Set the `variable` option to `false` in the [Elasticsearch](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#index) or [OpenSearch](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md#index) exporter configuration.
+- **Disable variable import in Optimize.** Set `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPORT_ENABLED=false`. This reduces Optimize storage and indexing work, but the records are still written by the exporter.
+
+If you need scalar variables but don't rely on flattened object-variable filtering, grouping, or raw-data columns, disable object variable flattening by setting `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false` or `zeebe.includeObjectVariableValue: false`. This is enabled by default in Self-Managed; Camunda SaaS disables it.
+
 ### Zeebe record ILM retention
 
 When the [Elasticsearch exporter retention policy](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#retention) is enabled, Zeebe record indices are deleted after the configured `minimum-age`. Optimize reads from these same indices, so the retention window must be long enough to cover Optimize's worst-case import lag. If the exporter deletes records before Optimize imports them, process instance completion events are permanently lost: Optimize records the instance as `ACTIVE` with no `endDate`, and history cleanup can never remove it.

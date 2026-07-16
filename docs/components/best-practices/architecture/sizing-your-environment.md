@@ -105,8 +105,8 @@ By default, Optimize [flattens each object variable](/self-managed/components/op
 
 If you don't rely on flattened object-variable filtering, grouping, or raw-data columns in Optimize reports, disable it by setting:
 
-* The environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false`
-* Or the property `zeebe.includeObjectVariableValue: false`.
+- The environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false`.
+- The property `zeebe.includeObjectVariableValue: false`.
 
 This is enabled by default in Self-Managed; Camunda SaaS disables it.
 

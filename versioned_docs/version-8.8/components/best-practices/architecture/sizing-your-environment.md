@@ -100,7 +100,14 @@ Variables dominate Optimize's storage and CPU costs on secondary storage. In ben
 
 ##### Disable object variable flattening (high impact for object-heavy processes)
 
-By default, Optimize [flattens each object variable](/self-managed/components/optimize/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable. Each of these is a separate stored variable and pays the storage cost described above independently, so a single object variable with several properties can cost several times more than a single scalar variable. If you don't rely on flattened object-variable filtering, grouping, or raw-data columns in Optimize reports, disable it with `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false` (or `zeebe.includeObjectVariableValue: false`). This is enabled by default in Self-Managed; Camunda SaaS disables it.
+By default, Optimize [flattens each object variable](/self-managed/components/optimize/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable. Each of these is a separate stored variable and pays the storage cost described above independently, so a single object variable with several properties can cost several times more than a single scalar variable.
+
+If you don't rely on flattened object-variable filtering, grouping, or raw-data columns in Optimize reports, disable it by setting:
+
+- The environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false`.
+- The property `zeebe.includeObjectVariableValue: false`.
+
+This is enabled by default in Self-Managed; Camunda SaaS disables it.
 
 In an isolated benchmark toggling only this flag, Optimize's share of total Elasticsearch disk usage dropped from 62.8% to 7.6% (an 8.3x reduction), and total secondary storage per created process instance dropped from 6.34 MB to 2.97 MB (a 2.13x reduction, smaller because it also nets out the Zeebe and Camunda Exporter storage this flag doesn't touch) for the same workload. See [Confirming Optimize's Object Variable Flattening Cost With a Controlled A/B Test](https://camunda.github.io/zeebe-chaos/2026/07/09/Optimize-Object-Variable-Flattening/) for the full methodology and additional measurements.
 
