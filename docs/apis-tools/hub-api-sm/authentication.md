@@ -67,7 +67,7 @@ The Camunda Hub API validates both the token's audience and the application's pe
 
 ## Organization-level access
 
-API tokens are granted to organization-level _applications_ rather than individual _users_. A user with an API token can read, edit, and delete all workspaces and workspace resources in the organization if the token has the required Web Modeler API scopes. This is true even if the user is not a member of the workspace and can't see the workspace in the Camunda Hub user interface.
+API tokens are granted to organization-level _applications_ rather than individual _users_. With an API token, you can read, edit, and delete all workspaces and workspace resources in the organization, as long as the application has the required permissions for the Camunda Hub API. This is true even if you aren't a member of the workspace and you can't see it in the Camunda Hub user interface.
 
 ## Token expiration
 
