@@ -61,6 +61,22 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 - [Admin overview](/components/admin/admin-introduction.md)
 
+### Agent definition
+
+A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (ad-hoc sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a DMN deployment creates decision definitions.
+
+An agent definition is a structural descriptor (type, name, process definition key, and tenant), not a store of runtime configuration. The system prompt and model are FEEL expressions evaluated at instance creation time and are not stored in the definition.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
+### Agent instance
+
+A specific runtime execution of an [agent definition](#agent-definition), created when a process instance first activates the agent element. An agent instance is identified by an agent instance key and keeps its state, including the conversation and tool calls, in an agent context.
+
+An agent instance can be reused across several element instances within the same process instance, which is what allows an agent to continue a multi-turn conversation when the process returns to the agent element.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
 ### Agent orchestration
 
 Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.

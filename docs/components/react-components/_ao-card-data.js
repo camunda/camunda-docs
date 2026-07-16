@@ -29,6 +29,13 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
+    link: "../agent-definitions-and-instances/",
+    title: "Definitions and instances",
+    image: IconAoAgentImg,
+    description:
+      "Understand agent definitions and agent instances at deploy time and runtime.",
+  },
+  {
     link: "../camunda-provided-llm/",
     title: "Camunda-provided LLM",
     image: IconAoLlmImg,
