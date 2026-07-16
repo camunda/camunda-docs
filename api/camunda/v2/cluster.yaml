@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.5]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[ADDED_IN_VERSION:8.5]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -40,9 +40,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -64,6 +64,8 @@ paths:
       summary: Change cluster mode
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[ADDED_IN_VERSION:8.10]]
 
@@ -112,6 +114,8 @@ paths:
       summary: Restore from a backup
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
 
         [[ADDED_IN_VERSION:8.10]]
 

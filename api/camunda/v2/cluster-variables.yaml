@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -58,9 +58,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -117,9 +117,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -165,9 +165,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -212,9 +212,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -266,9 +266,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -310,9 +310,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -363,9 +363,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -423,9 +423,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.9]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQ0xVU1RFUl9WQVJJQUJMRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -482,6 +482,17 @@ components:
         value:
           type: object
           description: The value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
+        metadata:
+          description: "A generic key-value metadata bag attached to the cluster variable. Values must be strings or numbers. Limited to 100 entries and a configurable maximum serialized size (default: 100 entries at max key length of a cluster variable name (256 chars) plus the maximum value length, 8192 characters)."
+          type: object
+          maxProperties: 100
+          additionalProperties:
+            oneOf:
+              - type: string
+              - type: number
+      x-properties-added-in-version:
+        - propertyName: metadata
+          addedInVersion: "8.10"
     UpdateClusterVariableRequest:
       type: object
       required:
@@ -490,6 +501,17 @@ components:
         value:
           type: object
           description: The new value of the cluster variable. Can be any JSON object or primitive value. Will be serialized as a JSON string in responses.
+        metadata:
+          description: "A generic key-value metadata bag attached to the cluster variable. Values must be strings or numbers. Limited to 100 entries and a configurable maximum serialized size (default: 100 entries at max key length of a cluster variable name (256 chars) plus the maximum value length, 8192 characters)."
+          type: object
+          maxProperties: 100
+          additionalProperties:
+            oneOf:
+              - type: string
+              - type: number
+      x-properties-added-in-version:
+        - propertyName: metadata
+          addedInVersion: "8.10"
     ClusterVariableResult:
       type: object
       required:
@@ -522,6 +544,7 @@ components:
         - name
         - scope
         - tenantId
+        - metadata
       properties:
         name:
           description: The name of the cluster variable. Unique within its scope (global or tenant-specific).
@@ -533,6 +556,17 @@ components:
           type: string
           nullable: true
           description: Only provided if the cluster variable scope is TENANT. Null for global scope variables.
+        metadata:
+          description: A generic key-value metadata bag attached to the cluster variable. Values are strings or numbers.
+          type: object
+          maxProperties: 100
+          additionalProperties:
+            oneOf:
+              - type: string
+              - type: number
+      x-properties-added-in-version:
+        - propertyName: metadata
+          addedInVersion: "8.10"
     ClusterVariableSearchQueryRequest:
       description: Cluster variable search query request.
       type: object
