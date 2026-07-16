@@ -145,6 +145,10 @@ You are responsible for creating all resources that expose Camunda's services.
 | `global.gateway.labels`                | map     | `{}`    | Labels added to the Gateway and all Route resources.                                                                                                                                                                                                                                   |
 | `global.gateway.annotations`           | map     | `{}`    | Annotations added to the Gateway and all Route resources.                                                                                                                                                                                                                              |
 | `global.gateway.tls.enabled`           | boolean | `false` | Enable TLS on the Gateway listener. Requires `global.gateway.tls.secretName` to be set.                                                                                                                                                                                                |
+| `global.gateway.port`                  | integer | `80`    | The port of the plaintext (HTTP) Gateway listener. Change this when your Gateway controller exposes HTTP on a non-standard port.                                                                                                                                                       |
+| `global.gateway.tls.port`              | integer | `443`   | The port of the HTTPS Gateway listener. Change this when your Gateway controller exposes HTTPS on a non-standard port (for example, Traefik's `8443` `websecure` entrypoint).                                                                                                          |
+| `global.gateway.httpSectionName`       | string  | `""`    | Override the `parentRefs.sectionName` on the HTTPRoutes. Must match a listener name on the target Gateway. Only set this for an externally-managed Gateway (see the warning below).                                                                                                    |
+| `global.gateway.grpcSectionName`       | string  | `""`    | Override the `parentRefs.sectionName` on the GRPCRoute. Must match a listener name on the target Gateway. Only set this for an externally-managed Gateway (see the warning below).                                                                                                     |
 | `global.gateway.tls.secretName`        | string  | `""`    | Name of the Kubernetes `Secret` containing the TLS certificate and private key.                                                                                                                                                                                                        |
 | `global.gateway.name`                  | string  | `""`    | The name of the Gateway resource that Routes attach to. Defaults to the Helm release fullname when unset. Set this when the shared Gateway has a different name than your release (Scenario B).                                                                                        |
 | `global.gateway.namespace`             | string  | `""`    | The namespace where the Gateway resource lives. Set this only when using a shared Gateway in a different namespace than your Camunda components (see [Scenario B](#scenario-b-shared-gateway-in-a-different-namespace)). When unset, Kubernetes defaults to the Route's own namespace. |
@@ -169,6 +173,44 @@ global:
 ```
 
 When TLS is enabled, the chart configures the Gateway listener on port 443 with `protocol: HTTPS` and sets `sectionName: https` on all HTTPRoutes, and sets `sectionName: grpcs` on the GRPCRoute (used by Zeebe).
+
+### Custom listener ports
+
+By default the Gateway listens on port `80` for HTTP and port `443` for HTTPS. Set `global.gateway.port` and `global.gateway.tls.port` when your Gateway controller exposes these on non-standard ports, for example Traefik's `websecure` entrypoint on `8443`:
+
+```yaml
+global:
+  host: "camunda.example.com"
+  gateway:
+    enabled: true
+    createGatewayResource: true
+    className: nginx
+    port: 8080
+    tls:
+      enabled: true
+      secretName: camunda-platform
+      port: 8443
+```
+
+### Externally-managed Gateway with custom listener names
+
+When attaching Routes to a Gateway you do not manage (for example, one owned by a Cluster Operator), its listener names may not match the chart defaults (`http`, `https`, `grpc`, `grpcs`). Use `global.gateway.httpSectionName` and `global.gateway.grpcSectionName` to point the Routes' `parentRefs.sectionName` at the listener names the target Gateway actually defines:
+
+```yaml
+global:
+  host: "camunda.example.com"
+  gateway:
+    enabled: true
+    createGatewayResource: false
+    name: shared-gateway
+    namespace: shared-infra
+    httpSectionName: web
+    grpcSectionName: grpc-web
+```
+
+:::warning
+The `sectionName` overrides act only on the Route resources and must match a listener name on the target Gateway. When the chart manages the Gateway (`createGatewayResource: true`), the listener names are fixed to `http`, `https`, `grpc`, and `grpcs`, so setting an override there detaches the Route from the Gateway silently.
+:::
 
 ### NGINX Gateway Fabric: ProxySettingsPolicy
 
