@@ -3,7 +3,19 @@ id: getting-started-example
 title: "Run your first Spring Boot, Node.js, Python, or C# project with Camunda 8"
 sidebar_label: Run your first Spring Boot, Node.js, Python, or C# project
 description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot, Node.js, Python, or C#."
-keywords: [java, spring, spring camunda, python, c#, csharp, .net, getting started, user guide, tutorial]
+keywords:
+  [
+    java,
+    spring,
+    spring camunda,
+    python,
+    c#,
+    csharp,
+    .net,
+    getting started,
+    user guide,
+    tutorial,
+  ]
 ---
 
 import Tabs from "@theme/Tabs";
