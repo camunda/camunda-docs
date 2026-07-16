@@ -3,7 +3,7 @@ id: getting-started-example
 title: "Run your first Spring Boot or Node.js project with Camunda 8"
 sidebar_label: Run your first Spring Boot or Node.js project
 description: "For developers using Camunda 8 Self-Managed, step through an example project with Spring Boot or Node.js."
-keywords: [java, spring, spring camunda, getting started, user guide, tutorial]
+keywords: [java, spring, spring camunda, python, c#, csharp, .net, getting started, user guide, tutorial]
 ---
 
 import Tabs from "@theme/Tabs";
@@ -12,7 +12,11 @@ import TabItem from "@theme/TabItem";
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">1 hour</span>
 
-This guide is tailored for developers who want to implement process automation solutions using Java (Spring) or JavaScript (Node.js). You'll work with a local, self-managed, lightweight Camunda 8 environment.
+This guide is tailored for developers who want to implement process automation solutions using Java (Spring), JavaScript (Node.js), Python, or C#. You'll work with a local, self-managed, lightweight Camunda 8 environment.
+
+:::caution Technical Preview
+The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10.
+:::
 
 ## Get started with an example project
 
@@ -20,9 +24,11 @@ You will:
 
 - Run Camunda 8 in a local development environment using **Camunda 8 Run**.
 - Use the **Camunda Modeler** to deploy and start a business process.
-- Run workers written in either:
-  - The **Spring (Java) SDK**, or
-  - The **Node.js (JavaScript) SDK**  
+- Run workers written in one of:
+  - The **Spring (Java) SDK**,
+  - The **Node.js (JavaScript) SDK**,
+  - The **Python SDK**, or
+  - The **C# SDK** (technical preview)  
     to handle tasks in the process.
 
 ## Prerequisites
@@ -31,6 +37,8 @@ You will:
 [
 { label: 'Java + Spring', value: 'javaspring', },
 { label: 'Node.js', value: 'nodejs', },
+{ label: 'Python', value: 'python', },
+{ label: 'C# (Technical Preview)', value: 'csharp', },
 ] }>
 <TabItem value="javaspring">
 
@@ -46,6 +54,17 @@ You will:
     <li>NPM 11+</li>
 </ul>
   </TabItem>
+  <TabItem value="python">
+<ul>
+    <li>[Python](https://www.python.org/downloads/) 3.10+</li>
+    <li>pip</li>
+</ul>
+  </TabItem>
+  <TabItem value="csharp">
+<ul>
+    <li>[.NET SDK](https://dotnet.microsoft.com/download) 8 or later</li>
+</ul>
+  </TabItem>
   </Tabs>
 
 ## Download the Getting Started Package
@@ -56,7 +75,7 @@ The starter package includes the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
-- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java or JavaScript.
+- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C# (technical preview).
 
 All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
 
@@ -66,7 +85,7 @@ The example project, located in the `camunda-8-get-started/2-order-process-with-
 
 ![Example business process](./img/getting-started-guide-example-process.png)
 
-The service tasks in the process are executed by [job workers](/reference/glossary.md#job-worker). The `java` and `nodejs` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
+The service tasks in the process are executed by [job workers](/reference/glossary.md#job-worker). The `java`, `nodejs`, `python`, and `csharp` directories inside `2-order-process-with-service-workers` contain code for job workers that correspond to this process model.
 
 ## Instructions
 
@@ -151,6 +170,8 @@ Next, start the job workers to allow them to perform the work for the service ta
 [
 { label: 'Java + Spring', value: 'javaspring', },
 { label: 'Node.js', value: 'nodejs', },
+{ label: 'Python', value: 'python', },
+{ label: 'C# (Technical Preview)', value: 'csharp', },
 ] }>
 <TabItem value="javaspring">
 
@@ -203,6 +224,54 @@ npm start
       </li>
     </ol>
   </TabItem>
+
+  <TabItem value="python">
+    <ol>
+      <li>
+        Change into the Python SDK directory:
+```bash
+cd camunda-8-get-started/2-order-process-with-service-workers/python
+```
+      </li>
+      <li>
+        Create a virtual environment and install dependencies:
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+      </li>
+      <li>
+        Start the workers with the command:
+```bash
+python main.py
+```
+      </li>
+      <li>
+        You can stop the application via Ctrl+C.
+      </li>
+    </ol>
+  </TabItem>
+
+  <TabItem value="csharp">
+    <ol>
+      <li>
+        Change into the C# SDK directory:
+```bash
+cd camunda-8-get-started/2-order-process-with-service-workers/csharp
+```
+      </li>
+      <li>
+        Start the workers with the command:
+```bash
+dotnet run
+```
+      </li>
+      <li>
+        You can stop the application via Ctrl+C.
+      </li>
+    </ol>
+  </TabItem>
    </Tabs>
 
 The workers start, connect to the engine, and request work. You will see the workers processing the jobs for the process instance.
@@ -240,6 +309,10 @@ You have completed your first process instance by:
 ## Next steps
 
 For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
+
+For further information about the Python SDK, refer to [the Python SDK documentation](/apis-tools/python-sdk.md).
+
+For further information about the C# SDK, refer to [the C# SDK documentation](/apis-tools/csharp-sdk.md).
 
 Find more examples on the [Developer Portal](https://camunda.com/developers/).
 
