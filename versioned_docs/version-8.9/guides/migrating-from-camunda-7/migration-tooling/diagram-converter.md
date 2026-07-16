@@ -33,6 +33,8 @@ In the following sections, you'll learn how to:
 - [Analyze your diagrams using the web interface](#analyze-your-diagrams-using-the-web-interface)
 - [Use the CLI](#use-the-cli)
 - [Convert your diagrams](#convert-your-diagrams)
+- [Extend the conversion logic](#extend-the-conversion-logic)
+- [Convert expressions](#convert-expressions)
 
 ## Install the Diagram Converter
 
@@ -97,25 +99,33 @@ Open the Diagram Converter:
 - For a local installation, open [http://localhost:8080/](http://localhost:8080/).
 - For the hosted SaaS version, open [https://diagram-converter.camunda.io/](https://diagram-converter.camunda.io/).
 
-Upload one or more diagrams:
+Upload one or more diagrams, then configure the conversion target:
 
 ![Upload your diagrams](../../img/analyzer-screenshot-1.png)
 
-Click **Analyze and convert**:
+In **Configure conversion**, select the target Camunda 8 version. The default is the latest stable version, and you can select other supported versions to estimate migration impact for that target runtime.
+
+If needed, expand **Advanced options** to fine-tune conversion behavior before starting the run.
+
+Click **Analyze and convert to Camunda 8.x**.
+
+Review the results:
 
 ![See results](../../img/analyzer-screenshot-2.png)
 
 On this screen you can:
 
+- See the total number of findings for the selected target version
+- Review findings per model, and open a per-model preview
+- Download converted models individually, or download all converted models as a ZIP
 - Download the analyzer results as a Microsoft Excel file (XLSX)
 - Download the analyzer results as a CSV file
-- Download the converted diagrams (individually or as ZIP)
 
-Analysis results contain a list of items where each row represents an action item required for migrating your solution to Camunda 8. These items are grouped by severity:
+Analysis results contain a list of items where each row represents an action item required for migrating your solution to Camunda 8. Findings are calculated for the selected target Camunda 8 version and grouped by severity:
 
 - **INFO**: No action needed. Diagram conversion can successfully map attributes to the Camunda 8 implementation.
 - **REVIEW**: The conversion will modify some expressions or attributes. Please verify that the intended functionality remains unchanged.
-- **WARNING**: A Camunda 7 concept can not be directly mapped to a Camunda 8 equivalent. Consider reviewing the Camunda 8 roadmap or exploring possible workarounds.
+- **WARNING**: A Camunda 7 concept cannot be directly mapped to a Camunda 8 equivalent. Consider reviewing the Camunda 8 roadmap or exploring possible workarounds.
 - **TASK**: Manual changes are required to make the diagram work in Camunda 8.
 
 This allows you to focus on the most important findings. Tasks can also be grouped by type. For example, changing a `JavaDelegate` to a `JobWorker` might appear 100 times in your codebase, but still represents just one recurring pattern.
