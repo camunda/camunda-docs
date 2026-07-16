@@ -114,7 +114,7 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ### Catalog
 
-A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization-level in Camunda Hub, and used by delivery teams across workspaces and projects.
+A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization level in Camunda Hub, and used by delivery teams across workspaces and projects.
 
 - [Catalog](/components/hub/organization/manage-catalog/index.md)
 

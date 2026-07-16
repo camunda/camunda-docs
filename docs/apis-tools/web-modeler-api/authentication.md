@@ -141,6 +141,12 @@ A successful response includes [information about the environment](https://model
 }
 ```
 
+## Organization-level access
+
+API tokens are granted to organization-level _applications_ (Self-Managed) or _clients_ (SaaS) rather than individual _users_, which means a user with an API token can read, edit, and delete all workspaces ([called the "projects" in Web Modeler API v1 and before Camunda 8.10](../migration-manuals/migrate-from-web-modeler-to-hub-api.md) and workspace resources in the organization if the token has the respective Web Modeler API scopes. This is true even if the user is not a member of the workspace and can't see the workspace in the Camunda Hub user interface.
+
+Granular workspace-level permissions are planned to release with Camunda 8.11.
+
 ## Token expiration
 
 Access tokens expire according to the `expires_in` property of a successful authentication response. After this duration, in seconds, you must request a new access token.

@@ -75,6 +75,12 @@ curl --header "Authorization: Bearer ${TOKEN}" \
      https://hub.cloud.camunda.io/api/v2/info
 ```
 
+## Organization-level access
+
+API tokens are granted to organization-level _clients_ rather than individual _users_, which means a user with an API token can read, edit, and delete all workspaces and workspace resources in the organization if the token has the respective Web Modeler API scopes. This is true even if the user is not a member of the workspace and can't see the workspace in the Camunda Hub user interface.
+
+Granular workspace-level permissions are planned to release with Camunda 8.11.
+
 ## Token expiration
 
 Access tokens expire according to the `expires_in` property of an authenticated response. After this duration, in seconds, you must request a new access token.
