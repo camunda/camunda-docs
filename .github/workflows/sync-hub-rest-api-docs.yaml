@@ -273,8 +273,10 @@ jobs:
       - sync-sm
       - sync-saas
       - create-pr
-    if: failure()
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
     uses: ./.github/workflows/notify-failure.yml
+    with:
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
     secrets:
       VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}

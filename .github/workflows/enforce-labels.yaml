@@ -1,6 +1,9 @@
 name: Enforce PR labels
 
 on:
+  push:
+    branches:
+      - "update-notify-docs"
   pull_request:
     types: [labeled, unlabeled, opened, edited, synchronize]
 jobs:
@@ -10,3 +13,16 @@ jobs:
       - uses: yogevbd/enforce-label-action@2.2.2
         with:
           BANNED_LABELS: "hold"
+  notify-failure:
+    needs:
+      - enforce-label
+    if: failure() || success() && fromJSON(github.run_attempt) > 1
+    uses: ./.github/workflows/notify-failure.yml
+    with:
+      # If any dependent job fails, set the dependency_status to 'failure',
+      # otherwise set it to 'success'.
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
