@@ -77,9 +77,7 @@ curl --header "Authorization: Bearer ${TOKEN}" \
 
 ## Organization-level access
 
-API tokens are granted to organization-level _clients_ rather than individual _users_, which means a user with an API token can read, edit, and delete all workspaces and workspace resources in the organization if the token has the respective Web Modeler API scopes. This is true even if the user is not a member of the workspace and can't see the workspace in the Camunda Hub user interface.
-
-Granular workspace-level permissions are planned to release with Camunda 8.11.
+API tokens are granted to organization-level _clients_ rather than individual _users_. A user with an API token can read, edit, and delete all workspaces and workspace resources in the organization if the token has the required Web Modeler API scopes. This is true even if the user is not a member of the workspace and can't see the workspace in the Camunda Hub user interface.
 
 ## Token expiration
 
