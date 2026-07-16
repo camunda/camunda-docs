@@ -31,9 +31,8 @@ export const fundamentalCards = [
   {
     link: "../agent-definitions-and-instances/",
     title: "Definitions and instances",
-    image: IconAoAgentImg,
-    description:
-      "Understand agent definitions and agent instances at deploy time and runtime.",
+    image: IconAoDesignImg,
+    description: "Understand how Camunda models AI agents.",
   },
   {
     link: "../camunda-provided-llm/",
