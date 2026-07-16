@@ -16,13 +16,11 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
 
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent).
 
 ## About
 
-An [AI agent](/components/agentic-orchestration/ai-agents.md) is an addressable execution of an LLM-driven loop with shared memory context across iterations — combining the flexibility of AI with the reliability of traditional process orchestration.
-
-In this guide, you build a Camunda AI agent: the native agent type, whose tool orchestration runs in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by Camunda's engine.
+In this guide, you will build a Camunda [AI agent](/components/agentic-orchestration/ai-agents.md): the native agent type, whose tool orchestration runs in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by Camunda's engine.
 
 In this guide, you will:
 

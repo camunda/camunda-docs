@@ -11,20 +11,16 @@ Build and integrate AI agents into your end-to-end processes.
 
 ## About AI agents
 
-An AI agent is an addressable execution of an LLM-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop — the loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
+An AI agent is an addressable execution of an LLM-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop. The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
 
 AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 
 Camunda supports two types of agents:
 
-- **Camunda AI agents** are native: tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. The rest of this page describes how to build a Camunda AI agent using the AI Agent connector.
-- **External agents** run their loop in an external runtime (for example, LangGraph, Amazon Bedrock, or custom code) instead of Camunda's engine. See [External agents](#external-agents) below.
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
+- **[External agents](/reference/glossary.md#external-agent)** run their loop in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
 
-### External agents
-
-An external agent's tool orchestration runs outside Camunda — the loop lives in the external runtime, not in Camunda's engine. Camunda orchestrates when and how the agent acts within the broader process, and observes its execution through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), even though it does not execute the agent's reasoning loop itself. The process record, governance, and audit trail for that participation live in Camunda.
-
-External agents are not Camunda AI agents. Both are AI agents, but "Camunda AI agent" refers specifically to the native type described in this guide.
+The rest of this page describes how to build a Camunda AI agent using the AI Agent connector.
 
 ## The AI Agent connector
 

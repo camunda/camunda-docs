@@ -63,7 +63,13 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 ### Agent orchestration
 
-A different architectural pattern from [agentic orchestration](#agentic-orchestration), where a primary AI agent coordinates multiple specialized worker agents — an LLM routing tasks to sub-agents, an LLM-to-LLM coordination pattern. Agent orchestration can run inside a Camunda agentic process as one of its agents. Not to be confused with agentic orchestration.
+Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
+
+Agent orchestration can run inside a Camunda agentic process as one of its agents.
+
+:::note
+This is different from [agentic orchestration](#agentic-orchestration), which describes how Camunda orchestrates agents, tools, systems, and people as part of an end-to-end process.
+:::
 
 ### Agentic orchestration
 
@@ -71,7 +77,9 @@ A hybrid orchestration model combining the power of deterministic logic with LLM
 
 For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
 
-Not to be confused with [agent orchestration](#agent-orchestration), a different pattern describing LLM-to-LLM coordination between agents.
+:::note
+This is different from [agent orchestration](#agent-orchestration), which describes LLM-to-LLM coordination between agents.
+:::
 
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 
@@ -81,11 +89,13 @@ A broad field of computer science focused on creating machines that can perform 
 
 ### AI agent
 
-An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop — the loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection (for example, a single connector call that returns output along a fixed execution path) is not an agent.
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop.
 
-Camunda supports two types of agents: [Camunda AI agent](#camunda-ai-agent) (native) and [External agent](#external-agent) (non-native).
+The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
 
-For example, build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
+Camunda supports two types of agents: a [Camunda AI agent](#camunda-ai-agent) (native) and an [external agent](#external-agent) (non-native).
+
+For example, you can build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
@@ -147,12 +157,13 @@ An operation that affects the entire [Orchestration Cluster](#orchestration-clus
 
 ### Camunda AI agent
 
-The native [AI agent](#ai-agent) type: tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. Implemented via one of two BPMN templates:
+The native [AI agent](#ai-agent) type. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
 
-- [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md) — a single BPMN task running the LLM-driven loop, with tools called via an ad-hoc sub-process. Use for simple agents or single-purpose tasks.
-- [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) — a BPMN ad-hoc sub-process; the primary native pattern for complex agents with multiple tools.
+It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
-Not to be confused with [External agent](#external-agent), the non-native AI agent type.
+:::note
+This is different from an [external agent](#external-agent), which is the non-native AI agent type.
+:::
 
 ### Camunda 8
 
@@ -275,11 +286,13 @@ See [Zeebe Exporter](#zeebe-exporter).
 
 ### External agent
 
-The non-native [AI agent](#ai-agent) type: tool orchestration runs in an external runtime (for example, LangGraph, Amazon Bedrock, or custom code) instead of Camunda's engine — the loop itself lives outside Camunda. Camunda orchestrates when and how it acts within the broader process and observes its execution through the Agent Instance API. The process record, governance, and audit trail live in Camunda; the loop does not.
+The non-native [AI agent](#ai-agent) type. Tool orchestration runs in an external runtime, such as LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine, where the loop itself lives outside Camunda.
 
-External agents are not [Camunda AI agents](#camunda-ai-agent). Both are AI agents; "Camunda AI agent" refers specifically to the native type, where Camunda's engine executes the loop.
+Camunda orchestrates when and how the agent acts within the broader process, and observes its execution through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), even though it does not execute the agent's reasoning loop itself. The process record, governance, and audit trail for that participation live in Camunda.
 
-- [External agents](/components/agentic-orchestration/ai-agents.md#external-agents)
+:::note
+This is different from a [Camunda AI agent](#camunda-ai-agent), which is Camunda's native AI agent type.
+:::
 
 ## F
 
