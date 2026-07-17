@@ -61,10 +61,11 @@ For example, to use your Microsoft Entra unique account ID, set `IDENTITY_INITIA
 Once set, you cannot update your initial claim name and value using environment or Helm values. You must change these values directly in the database.
 :::
 
-| Environment variable           | Description                                                                                                                                     | Default value |
-| :----------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
-| `IDENTITY_INITIAL_CLAIM_NAME`  | The type of claim to use for the initial user. Examples can include `oid`, `name` or `email`.                                                   | `oid`         |
-| `IDENTITY_INITIAL_CLAIM_VALUE` | The value of the claim to use for the initial user. For the default `oid`, the value usually corresponds to the unique ID of your user account. |               |
+| Environment variable             | Description                                                                                                                                                                                                                                                              | Default value |
+| :------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------ |
+| `IDENTITY_INITIAL_CLAIM_NAME`    | The type of claim to use for the initial user. Examples can include `oid`, `name` or `email`.                                                                                                                                                                            | `oid`         |
+| `IDENTITY_INITIAL_CLAIM_VALUE`   | The value of the claim to use for the initial user. For the default `oid`, the value usually corresponds to the unique ID of your user account.                                                                                                                          |               |
+| `OC_CLUSTER_ENDPOINT_CLAIM_NAME` | The type of claim used to identify the identity that calls the [clusters endpoint](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) (also known as ping) to register the Orchestration Cluster with Console. | `client_id`   |
 
 ## Component configuration
 
