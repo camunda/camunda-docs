@@ -170,7 +170,7 @@ components:
     MemberResult:
       type: object
       example:
-        workspaceKey: "wks-abc-123"
+        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
         email: "alice@example.com"
         name: "Alice Smith"
         role: "editor"
