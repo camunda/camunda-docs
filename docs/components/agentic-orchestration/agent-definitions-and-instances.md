@@ -48,11 +48,11 @@ The system prompt and model are FEEL expressions evaluated when an instance is c
 
 Camunda creates an agent definition for each of the following agent types:
 
-| Agent type         | How it is defined                                                                                                                          |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Agent type           | How it is defined                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | AI agent sub-process | An [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) using the AI Agent connector. |
-| AI Agent Task      | An [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) service task using the AI Agent connector.      |
-| External agent     | An [external agent](/reference/glossary.md#external-agent) that runs its loop in an external runtime, such as LangGraph or CrewAI.         |
+| AI Agent Task        | An [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) service task using the AI Agent connector.      |
+| External agent       | An [external agent](/reference/glossary.md#external-agent) that runs its loop in an external runtime, such as LangGraph or CrewAI.         |
 
 For an element to be recognized as an agent, it must be marked in the BPMN model with the `zeebe:agentDefinition` extension element. Camunda's own AI Agent connector templates add this marker for you. An external agent must add the marker explicitly so that Camunda registers it as an agent when the process is deployed.
 
