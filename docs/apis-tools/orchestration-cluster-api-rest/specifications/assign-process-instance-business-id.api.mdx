@@ -1,0 +1,370 @@
+---
+id: assign-process-instance-business-id
+title: "Assign business id to process instance"
+sidebar_label: "Assign business id to process instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Assign business id to process instance"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/process-instances/{processInstanceKey}/business-id-assignment"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Assigns a business id to an already-running process instance that currently has none.
+
+The assignment is single and irreversible: only artifacts created after the assignment
+(for example future jobs, user tasks, decision instances, and message subscriptions) carry
+the business id, while existing artifacts are not retroactively enriched. Re-sending the
+same business id succeeds as a no-op. This endpoint is only useful while business id
+uniqueness enforcement is disabled; when it is enabled, the request is rejected with a 409
+response.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "UPDATE_PROCESS_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "processInstanceKey",
+      in: "path",
+      required: true,
+      description:
+        "The key of the process instance to assign the business id to.",
+      schema: {
+        type: "string",
+        format: "string<ProcessInstanceKey>",
+        example: "2251799813690746",
+        description: "System-generated key for a process instance.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          description:
+            "The instruction describing the business id to assign to a running process instance.\n",
+          properties: {
+            businessId: {
+              description:
+                "An optional, user-defined string identifier that identifies the process instance\nwithin the scope of a process definition (scoped by tenant). If provided and uniqueness\nenforcement is enabled, the engine will reject creation if another root process instance\nwith the same business id is already active for the same process definition.\nNote that any active child process instances with the same business id are not taken into account.\n",
+              format: "BusinessId",
+              type: "string",
+              example: "order-12345",
+              title: "BusinessId",
+            },
+          },
+          required: ["businessId"],
+          title: "ProcessInstanceBusinessIdAssignmentInstruction",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": {
+      description: "The business id is assigned to the process instance.",
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The process instance is not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The business id assignment failed because the process instance is not eligible, for example it already has a different business id, it is a call-activity child, or business id uniqueness enforcement is enabled. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server's compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains `RESOURCE_EXHAUSTED`. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: https://docs.camunda.io/docs/components/zeebe/technical-concepts/internal-processing/#handling-backpressure .\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

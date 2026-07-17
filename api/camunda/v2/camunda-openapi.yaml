@@ -266,6 +266,8 @@ paths:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1{processDefinitionKey}~1form"
   /process-definitions/{processDefinitionKey}/statistics/element-instances:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1{processDefinitionKey}~1statistics~1element-instances"
+  /process-definitions/{processDefinitionKey}/variable-names/search:
+    $ref: "process-definitions.yaml#/paths/~1process-definitions~1{processDefinitionKey}~1variable-names~1search"
   /process-definitions/{processDefinitionKey}/xml:
     $ref: "process-definitions.yaml#/paths/~1process-definitions~1{processDefinitionKey}~1xml"
   /process-definitions/statistics/process-instances-by-version:
@@ -282,10 +284,16 @@ paths:
     $ref: "process-instances.yaml#/paths/~1process-instances~1migration"
   /process-instances/modification:
     $ref: "process-instances.yaml#/paths/~1process-instances~1modification"
+  /process-instances/resumption:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1resumption"
   /process-instances/search:
     $ref: "process-instances.yaml#/paths/~1process-instances~1search"
+  /process-instances/suspension:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1suspension"
   /process-instances/{processInstanceKey}:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}"
+  /process-instances/{processInstanceKey}/business-id-assignment:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1business-id-assignment"
   /process-instances/{processInstanceKey}/call-hierarchy:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1call-hierarchy"
   /process-instances/{processInstanceKey}/cancellation:
@@ -300,12 +308,16 @@ paths:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1migration"
   /process-instances/{processInstanceKey}/modification:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1modification"
+  /process-instances/{processInstanceKey}/resumption:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1resumption"
   /process-instances/{processInstanceKey}/sequence-flows:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1sequence-flows"
   /process-instances/{processInstanceKey}/statistics/element-instances:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1statistics~1element-instances"
   /process-instances/{processInstanceKey}/statistics/wait-states:
     $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1statistics~1wait-states"
+  /process-instances/{processInstanceKey}/suspension:
+    $ref: "process-instances.yaml#/paths/~1process-instances~1{processInstanceKey}~1suspension"
   /resources/search:
     $ref: "deployments.yaml#/paths/~1resources~1search"
   /resources/{resourceKey}:

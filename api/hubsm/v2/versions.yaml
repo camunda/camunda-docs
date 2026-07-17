@@ -239,7 +239,7 @@ components:
         - fileKey
         - name
       example:
-        fileKey: "file-789-xyz"
+        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
         name: "Release 1.0"
         description: "First stable release of the order process."
         organizationPublic: false
@@ -307,10 +307,10 @@ components:
     VersionResult:
       type: object
       example:
-        versionKey: "ver-345-jkl"
+        versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7"
         name: "Release 1.0"
         description: "First stable release of the order process."
-        fileKey: "file-789-xyz"
+        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
         organizationPublic: false
         created: "2025-03-15T10:30:00.000Z"
         createdBy:
@@ -372,10 +372,10 @@ components:
       type: object
       description: A version with its full metadata and file content.
       example:
-        versionKey: "ver-345-jkl"
+        versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7"
         name: "Release 1.0"
         description: "First stable release of the order process."
-        fileKey: "file-789-xyz"
+        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
         organizationPublic: false
         created: "2025-03-15T10:30:00.000Z"
         createdBy:
