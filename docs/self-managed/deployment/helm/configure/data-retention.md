@@ -73,19 +73,21 @@ For Optimize and other data-analysis use cases, coordinate exporter-side filters
 
 **History archiving and retention parameters:**
 
-| Key                                                      | Type    | Default                                  | Description                                                                                                    |
-| -------------------------------------------------------- | ------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `orchestration.history.waitPeriodBeforeArchiving`        | string  | `1h`                                     | Grace period before archiving completed processes. Processes finished within this window are not yet archived. |
-| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (for example, `1d` creates daily indices).                               |
-| `orchestration.history.rolloverBatchSize`                | integer | `100`                                    | Maximum number of process instances per archiving batch                                                        |
-| `orchestration.history.elsRolloverDateFormat`            | string  | `date`                                   | Date format for historical indices in Java DateTimeFormatter syntax                                            |
-| `orchestration.history.delayBetweenRuns`                 | integer | `2000`                                   | Millisecond interval between archiver runs                                                                     |
-| `orchestration.history.maxDelayBetweenRuns`              | integer | `60000`                                  | Maximum millisecond interval between archiver runs due to failure backoffs                                     |
-| `orchestration.history.retention.enabled`                | boolean | `false`                                  | If `true`, applies ILM/ISM policy to archived orchestration indices (Operate, Tasklist, Camunda)               |
-| `orchestration.history.retention.minimumAge`             | string  | `30d`                                    | How old archived data must be before deletion                                                                  |
-| `orchestration.history.retention.policyName`             | string  | `camunda-history-retention-policy`       | Name of the ILM/ISM policy for historical data                                                                 |
-| `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                |
-| `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                   |
+| Key                                                      | Type    | Default                                  | Description                                                                                                                                    |
+| -------------------------------------------------------- | ------- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orchestration.history.waitPeriodBeforeArchiving`        | string  | `1h`                                     | Grace period before archiving completed processes. Processes finished within this window are not yet archived.                                 |
+| `orchestration.history.rolloverInterval`                 | string  | `1d`                                     | Time range for creating dated indices (for example, `1d` creates daily indices).                                                               |
+| `orchestration.history.rolloverBatchSize`                | integer | `500`                                    | Maximum number of process instances selected for archiving per run. Defaults to 500 when `archiveByIdEnabled` is `true`, and 100 when `false`. |
+| `orchestration.history.archiveByIdEnabled`               | boolean | `true`                                   | When `true`, archiving moves documents in small, targeted batches.                                                                             |
+| `orchestration.history.reindexBatchSize`                 | integer | `2500`                                   | Number of individual Elasticsearch/OpenSearch documents archived in each targeted batch when `archiveByIdEnabled` is `true`.                   |
+| `orchestration.history.elsRolloverDateFormat`            | string  | `date`                                   | Date format for historical indices in Java DateTimeFormatter syntax                                                                            |
+| `orchestration.history.delayBetweenRuns`                 | integer | `2000`                                   | Millisecond interval between archiver runs                                                                                                     |
+| `orchestration.history.maxDelayBetweenRuns`              | integer | `60000`                                  | Maximum millisecond interval between archiver runs due to failure backoffs                                                                     |
+| `orchestration.history.retention.enabled`                | boolean | `false`                                  | If `true`, applies ILM/ISM policy to archived orchestration indices (Operate, Tasklist, Camunda)                                               |
+| `orchestration.history.retention.minimumAge`             | string  | `30d`                                    | How old archived data must be before deletion                                                                                                  |
+| `orchestration.history.retention.policyName`             | string  | `camunda-history-retention-policy`       | Name of the ILM/ISM policy for historical data                                                                                                 |
+| `orchestration.history.retention.usageMetricsMinimumAge` | string  | `730d`                                   | Retention period for usage metrics indices (2 years by default)                                                                                |
+| `orchestration.history.retention.usageMetricsPolicyName` | string  | `camunda-usage-metrics-retention-policy` | Name of the ILM/ISM policy for usage metrics                                                                                                   |
 
 ### Example usage
 
@@ -100,7 +102,9 @@ orchestration:
   history:
     waitPeriodBeforeArchiving: 1h
     rolloverInterval: 1d
-    rolloverBatchSize: 100
+    rolloverBatchSize: 500
+    archiveByIdEnabled: true
+    reindexBatchSize: 2500
     elsRolloverDateFormat: date
     delayBetweenRuns: 2000
     maxDelayBetweenRuns: 60000
@@ -153,7 +157,7 @@ orchestration:
   history:
     waitPeriodBeforeArchiving: 1h
     rolloverInterval: 1d
-    rolloverBatchSize: 100
+    rolloverBatchSize: 500
     elsRolloverDateFormat: date
     delayBetweenRuns: 2000
     maxDelayBetweenRuns: 60000

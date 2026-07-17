@@ -6,11 +6,22 @@ description: "Learn more about storage configuration options for Helm setups."
 keywords: ["document handling", "document storage configuration"]
 ---
 
+This page covers two configuration approaches:
+
+- **Legacy approach (deprecated)**: `global.documentStore.*` in `values.yaml` — generates `DOCUMENT_*` environment variables. Still works via a backward compatibility bridge but will be removed in a future release.
+- **New approach (recommended)**: `extraConfiguration` with `camunda.document.*` Spring properties — the unified configuration model. See [using the unified configuration format](#using-the-unified-configuration-format).
+
+:::warning Deprecated: `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables
+
+The `global.documentStore.*` Helm values generate legacy `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables (for example, `DOCUMENT_STORE_AWS_BUCKET`, `DOCUMENT_DEFAULT_STORE_ID`). These are deprecated. They continue to work for at least one release cycle via a backward compatibility bridge, but will be removed in a future release. When both `camunda.document.*` properties and legacy environment variables are set, `camunda.document.*` takes precedence.
+
+:::
+
 Helm offers external cloud file bucket storage options (recommended for production use when deploying with Helm) and in-memory storage (not suitable for production use):
 
-- By using **external cloud file bucket storage options**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
+- By using **external cloud file bucket storage options**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
-  - [**AWS S3**](https://aws.amazon.com/s3/)
+  - [**AWS S3**](https://aws.amazon.com/s3/) — including [S3-compatible object stores](#s3-compatible-object-storage) such as MinIO, Cloudian, or Garage (configured through the AWS S3 store with a custom endpoint)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
 
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost. In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
@@ -19,7 +30,9 @@ If no storage configuration is provided, the default document storage is in-memo
 
 To change the storage to **Google Cloud Platform**, **AWS S3**, or **Azure Blob Storage**, update the `values.yaml` file with the storage configuration parameters.
 
-Below is an example of storage configuration. While this example mixes GCP, AWS, and in-memory, this example represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml). This example demonstrates the current default values and what they would need to change to enable the storage type of their preference.
+The following `values.yaml` example shows the legacy configuration format. It generates deprecated `DOCUMENT_*` environment variables that are bridged to `camunda.document.*` properties at runtime. This approach still works but is deprecated. To use the new unified format instead, see [using the unified configuration format](#using-the-unified-configuration-format).
+
+The example below represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml) and shows the fields you need to change to enable the storage type of your preference.
 
 :::note
 Azure Blob Storage configuration differs from AWS and GCP. Only the connection string secret is managed in `values.yaml` under `global.documentStore.type.azure`. All other Azure configuration (container name, class, endpoint, etc.) must be provided via [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md). See the [Azure Blob Storage configuration](#azure-blob-storage-configuration) section below for details.
@@ -49,6 +62,12 @@ global:
                 bucketPath: ""
                 ## @param global.documentStore.type.aws.bucketTtl [int, nullable] (Optional) Time-to-live for documents in the S3 bucket (number in days).
                 bucketTtl: 0
+                ## @param global.documentStore.type.aws.endpoint (Optional) Endpoint URL for an S3-compatible object store (for example, http://minio.minio.svc.cluster.local:9000). When unset, the AWS SDK default endpoint is used.
+                endpoint: ""
+                ## @param global.documentStore.type.aws.forcePathStyle [nullable] (Optional) Force path-style addressing on the S3 client. When unset, path-style is auto-enabled if an endpoint is configured, otherwise the SDK default is used.
+                forcePathStyle:
+                ## @param global.documentStore.type.aws.chunkedEncodingEnabled [nullable] (Optional) Enable AWS chunked transfer encoding. Set to false for S3-compatible backends that do not support it (for example, Garage). When unset, the SDK default (true) is used.
+                chunkedEncodingEnabled:
                 ## @param global.documentStore.type.aws.class Fully qualified class name for the AWS document store provider.
                 class: "io.camunda.document.store.aws.AwsDocumentStoreProvider"
                 ## @extra global.documentStore.type.aws.accessKeyId configuration to provide the AWS access key ID.
@@ -91,6 +110,172 @@ global:
                 class: "io.camunda.document.store.inmemory.InMemoryDocumentStoreProvider"
 ```
 
+## Using the unified configuration format
+
+To adopt the new `camunda.document.*` model for any provider, disable the corresponding `global.documentStore.type.<provider>.enabled` flag and configure the store via `extraConfiguration`. This also enables advanced scenarios such as multiple named store instances.
+
+### AWS S3
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "aws1" # must match the store instance ID in extraConfiguration
+    type:
+      aws:
+        enabled: false # disable legacy env var generation
+        existingSecret: "aws-credentials"
+        accessKeyIdKey: "awsAccessKeyId"
+        secretAccessKeyKey: "awsSecretAccessKey"
+
+orchestration:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1: # store instance ID — must match activeStoreId
+                bucket-name: my-bucket
+                bucket-path: documents/ # optional
+                bucket-ttl: 30 # optional, days
+
+connectors:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1: # store instance ID — must match activeStoreId
+                bucket-name: my-bucket
+```
+
+#### S3-compatible object storage
+
+Camunda's AWS S3 store can also target self-hosted S3-compatible object stores such as [MinIO](https://min.io/), [Cloudian](https://cloudian.com/), or [Garage](https://garagehq.deuxfleurs.fr/). Set these additional properties on the store instance in `extraConfiguration`:
+
+| Property                                             | Description                                                                                                                                                                                                                                                                |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.aws.<id>.endpoint`                 | URL of the S3-compatible server. Setting this switches the store into S3-compatible mode. Example: `http://minio.minio.svc.cluster.local:9000`.                                                                                                                            |
+| `camunda.document.aws.<id>.force-path-style`         | Forces path-style bucket addressing on the S3 client. Most S3-compatible servers (MinIO, Garage) require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                                   |
+| `camunda.document.aws.<id>.chunked-encoding-enabled` | Controls AWS chunked transfer encoding. Some S3-compatible backends (notably Garage) do not implement the `aws-chunked` streaming-signed upload mode and require this to be `false`. When unset, the SDK default (`true`) is used, which is correct for MinIO and similar. |
+
+Credentials are configured the same way as AWS S3, via `existingSecret`/`accessKeyIdKey`/`secretAccessKeyKey` under `global.documentStore.type.aws`. The bucket must exist on the backend before Camunda starts — the chart does not create it.
+
+##### Example: in-cluster MinIO
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "aws1"
+    type:
+      aws:
+        enabled: false
+        existingSecret: "minio-credentials"
+        accessKeyIdKey: "access-key-id"
+        secretAccessKeyKey: "secret-access-key"
+
+orchestration:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1:
+                bucket-name: camunda-docs
+                endpoint: http://minio.minio.svc.cluster.local:9000
+
+connectors:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1:
+                bucket-name: camunda-docs
+                endpoint: http://minio.minio.svc.cluster.local:9000
+```
+
+MinIO accepts the AWS SDK's default streaming-signed uploads, so `chunked-encoding-enabled` is not set. For Garage, add `chunked-encoding-enabled: false` to the same block.
+
+### GCP
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "gcp1" # must match the store instance ID in extraConfiguration
+    type:
+      gcp:
+        enabled: false # disable legacy env var generation
+        existingSecret: "gcp-credentials"
+        credentialsKey: "service-account.json"
+        mountPath: "/var/secrets/gcp"
+        fileName: "service-account.json"
+
+orchestration:
+  extraConfiguration:
+    - file: gcp-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            gcp:
+              gcp1: # store instance ID — must match activeStoreId
+                bucket-name: my-gcp-bucket
+                prefix: documents/ # optional
+
+connectors:
+  extraConfiguration:
+    - file: gcp-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            gcp:
+              gcp1: # store instance ID — must match activeStoreId
+                bucket-name: my-gcp-bucket
+```
+
+### Azure Blob Storage
+
+See [Azure Blob Storage configuration](#azure-blob-storage-configuration) below for Azure-specific setup, including connection string and Managed Identity options.
+
+### Troubleshooting checksum issues
+
+Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+If checksum-related errors appear, disable automated checksum creation by adding these environment variables under `orchestration.env` and `connectors.env`:
+
+```yaml
+orchestration:
+  env:
+    - name: AWS_REQUEST_CHECKSUM_CALCULATION
+      value: WHEN_REQUIRED
+    - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+      value: WHEN_REQUIRED
+
+connectors:
+  env:
+    - name: AWS_REQUEST_CHECKSUM_CALCULATION
+      value: WHEN_REQUIRED
+    - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+      value: WHEN_REQUIRED
+```
+
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by adding to the same `env` lists:
+
+```yaml
+orchestration:
+  env:
+    - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
+      value: "true"
+
+connectors:
+  env:
+    - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
+      value: "true"
+```
+
 ## Azure Blob Storage configuration
 
 Azure Blob Storage uses a different configuration pattern than AWS and GCP. Only the connection string secret is managed via `values.yaml` under `global.documentStore.type.azure`. All other configuration (container name, class, endpoint, etc.) must be provided by the user via `orchestration.extraConfiguration` and `connectors.extraConfiguration`.
@@ -117,7 +302,7 @@ This example uses a connection string stored in a Kubernetes secret.
 ```yaml
 global:
   documentStore:
-    activeStoreId: "azure"
+    activeStoreId: "az1" # must match the store instance ID in extraConfiguration
     type:
       azure:
         connectionString:
@@ -131,10 +316,9 @@ orchestration:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
 
 connectors:
   extraConfiguration:
@@ -142,10 +326,9 @@ connectors:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
 ```
 
 ### Managed Identity/DefaultAzureCredential
@@ -155,7 +338,7 @@ When using AKS Workload Identity or Managed Identity, omit the connection string
 ```yaml
 global:
   documentStore:
-    activeStoreId: "azure"
+    activeStoreId: "az1" # must match the store instance ID in extraConfiguration
     # No connectionString secret needed — DefaultAzureCredential handles auth
 
 orchestration:
@@ -164,10 +347,9 @@ orchestration:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
                 endpoint: https://myaccount.blob.core.windows.net
 
 connectors:
@@ -176,9 +358,16 @@ connectors:
       content: |
         camunda:
           document:
-            store:
-              azure:
-                class: io.camunda.document.store.azure.AzureBlobDocumentStoreProvider
-                container: my-container
+            azure:
+              az1: # store instance ID — must match activeStoreId
+                container-name: my-container
                 endpoint: https://myaccount.blob.core.windows.net
 ```
+
+## Startup validation
+
+The application validates the Document Store configuration at startup and fails with a clear error message in the following cases:
+
+- **Duplicate store IDs across namespaces**: Each store instance ID must be unique across all provider namespaces (`aws`, `gcp`, `azure`, `local`, `in-memory`).
+- **Missing required fields**: Required properties (for example, `bucket-name` for AWS or `container-name` for Azure) must be set.
+- **Unknown `default-store-id`**: The value of `camunda.document.default-store-id` (or `activeStoreId` in Helm values) must match a configured store instance ID.

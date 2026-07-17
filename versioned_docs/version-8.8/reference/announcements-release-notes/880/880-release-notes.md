@@ -510,6 +510,16 @@ This impacts how Camunda 8 is deployed, managed, and scaled.
 
 <p><a href="../../../../reference/announcements-release-notes/880/whats-new-in-88/#orchestration-cluster" class="link-arrow">What's new in Camunda 8.8</a></p>
 
+### Archive by ID for Elasticsearch and OpenSearch
+
+<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
+
+Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default.
+
+Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving. The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
+
+<p><a href="../../../../self-managed/components/orchestration-cluster/core-settings/concepts/data-retention" class="link-arrow">Data retention</a></p>
+
 ### Reference architecture: General updates
 
 The 8.8 release cycle includes updates across multiple Self-Managed reference architecture guides and infrastructure baselines.
