@@ -227,7 +227,7 @@ c8ctl list users                                            # List users
 
 Search resources with filters (wildcards, date ranges, case-insensitive)
 
-**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule), wait-state
+**Resources:** pi (process-instance), pd (process-definition), ut (user-task), inc (incident), jobs, vars (variable), users (user), roles (role), groups (group), tenants (tenant), auth (authorization), mapping-rules (mapping-rule), ws (wait-state)
 
 **Resource-specific flags:**
 

@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -60,9 +60,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -107,9 +107,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -152,9 +152,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -190,9 +190,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQVVUSE9SSVpBVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -425,6 +425,7 @@ components:
         - CREATE_BATCH_OPERATION_MIGRATE_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_MODIFY_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_RESOLVE_INCIDENT
+        - CREATE_BATCH_OPERATION_SUSPEND_PROCESS_INSTANCE
         - CREATE_BATCH_OPERATION_UPDATE_JOB
         - CREATE_DECISION_INSTANCE
         - CREATE_PROCESS_INSTANCE
@@ -448,6 +449,7 @@ components:
         - READ_USAGE_METRIC
         - READ_USER_TASK
         - READ_TASK_LISTENER
+        - SUSPEND_PROCESS_INSTANCE
         - UPDATE
         - UPDATE_PROCESS_INSTANCE
         - UPDATE_USER_TASK
