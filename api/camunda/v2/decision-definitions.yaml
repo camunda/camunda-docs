@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -49,6 +51,8 @@ paths:
       summary: Get decision definition
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -100,6 +104,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9ERUNJU0lPTl9ERUZJTklUSU9OIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -149,6 +155,8 @@ paths:
       summary: Evaluate decision
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiREVDSVNJT05fREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFX0RFQ0lTSU9OX0lOU1RBTkNFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.6]]
 

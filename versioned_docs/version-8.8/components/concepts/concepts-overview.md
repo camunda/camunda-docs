@@ -64,7 +64,7 @@ Connectors communicate with any system or technology, reducing the time it takes
 
 #### AI agents
 
-Build [enterprise-grade AI agents](/components/agentic-orchestration/ai-agents.md) with guardrails so they can solve complex problems with autonomy. Camunda implements agentic BPMN that enables teams to model deterministic process logic and dynamic agentic behavior, such as reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries, in one unified, executable model.
+Build [enterprise-grade AI agents](/components/agentic-orchestration/ai-agents.md) (addressable executions of an LLM-driven loop with shared memory across iterations) with guardrails so they can solve complex problems with autonomy. Camunda implements agentic BPMN that enables teams to model deterministic process logic and dynamic agentic behavior, such as reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries, in one unified, executable model.
 
 #### Forms
 

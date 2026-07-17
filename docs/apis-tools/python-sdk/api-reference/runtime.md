@@ -491,7 +491,7 @@ alias of [`ConnectedJobContext`](#connectedjobcontext)
 ## ConnectedJobContext
 
 ```python
-class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, log=NOTHING, , client)
+class ConnectedJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -517,6 +517,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
   - **deadline** (_int_)
   - **variables** (_ActivatedJobResultVariables_)
   - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **physical_tenant_id** (_str_)
   - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
   - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
@@ -528,6 +529,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
   - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **business_id** (_None_ _|_ [_BusinessId_](types.md#camunda_orchestration_sdk.semantic_types.BusinessId))
   - **priority** (_int_)
+  - **lease_token** (_None_ _|_ _str_)
   - **log** ([_SdkLogger_](#sdklogger))
   - **client** ([_CamundaAsyncClient_](async-client.md#camunda_orchestration_sdk.CamundaAsyncClient))
 
@@ -549,7 +551,7 @@ client: [CamundaAsyncClient](async-client.md#camunda_orchestration_sdk.CamundaAs
 ## JobContext
 
 ```python
-class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, log=NOTHING)
+class JobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING)
 ```
 
 Bases: `ActivatedJobResult`
@@ -567,6 +569,7 @@ Read-only context for a job execution.
   - **deadline** (_int_)
   - **variables** (_ActivatedJobResultVariables_)
   - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **physical_tenant_id** (_str_)
   - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
   - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
@@ -578,6 +581,7 @@ Read-only context for a job execution.
   - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **business_id** (_None_ _|_ [_BusinessId_](types.md#camunda_orchestration_sdk.semantic_types.BusinessId))
   - **priority** (_int_)
+  - **lease_token** (_None_ _|_ _str_)
   - **log** ([_SdkLogger_](#sdklogger))
 
 ### log
@@ -718,7 +722,7 @@ def stop()
 ## SyncJobContext
 
 ```python
-class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, log=NOTHING, , client)
+class SyncJobContext(type_, process_definition_id, process_definition_version, element_id, custom_headers, worker, retries, deadline, variables, tenant_id, physical_tenant_id, job_key, process_instance_key, process_definition_key, element_instance_key, kind, listener_event_type, user_task, tags, root_process_instance_key, business_id, priority, lease_token, log=NOTHING, , client)
 ```
 
 Bases: [`JobContext`](#jobcontext)
@@ -744,6 +748,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
   - **deadline** (_int_)
   - **variables** (_ActivatedJobResultVariables_)
   - **tenant_id** ([_TenantId_](types.md#camunda_orchestration_sdk.semantic_types.TenantId))
+  - **physical_tenant_id** (_str_)
   - **job_key** ([_JobKey_](types.md#camunda_orchestration_sdk.semantic_types.JobKey))
   - **process_instance_key** ([_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **process_definition_key** ([_ProcessDefinitionKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessDefinitionKey))
@@ -755,6 +760,7 @@ For `"process"` handlers, see [`JobContext`](#jobcontext).
   - **root_process_instance_key** (_None_ _|_ [_ProcessInstanceKey_](types.md#camunda_orchestration_sdk.semantic_types.ProcessInstanceKey))
   - **business_id** (_None_ _|_ [_BusinessId_](types.md#camunda_orchestration_sdk.semantic_types.BusinessId))
   - **priority** (_int_)
+  - **lease_token** (_None_ _|_ _str_)
   - **log** ([_SdkLogger_](#sdklogger))
   - **client** ([_CamundaClient_](client.md#camunda_orchestration_sdk.CamundaClient))
 
