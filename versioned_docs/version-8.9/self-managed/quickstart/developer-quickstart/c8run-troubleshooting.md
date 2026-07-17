@@ -5,7 +5,7 @@ sidebar_label: "Troubleshooting"
 description: Identify and resolve common issues when starting, configuring, or using Camunda 8 Run.
 ---
 
-Camunda 8 Run provides log files in the `c8run/logs` directory that can help diagnose most issues. Check these logs first when troubleshooting:
+Camunda 8 Run provides log files in the `c8run/log` directory that can help diagnose most issues. Check these logs first when troubleshooting:
 
 - `camunda.log` – main log for Camunda 8 Run
 - `connectors.log` – Connectors component
