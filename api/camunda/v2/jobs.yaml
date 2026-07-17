@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -52,9 +52,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -93,9 +93,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -152,9 +152,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -211,9 +211,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -269,9 +269,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -327,9 +327,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.10]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX1VQREFURV9KT0IifV19XX0]]
+
+        [[ADDED_IN_VERSION:8.10]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -564,8 +564,7 @@ components:
           format: int32
         leaseToken:
           description: |
-            The lease token identifying this activation. This is `null` when the job was
-            activated without a lease.
+            The lease token identifying this activation. This is `null` when the job was activated without a lease.
           nullable: true
           type: string
       x-properties-added-in-version:
@@ -1025,6 +1024,16 @@ components:
             JSON object that will instantiate the variables at the local scope of the job's associated task.
           type: object
           additionalProperties: true
+        leaseToken:
+          description: |
+            The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.
+            For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+            A job that was activated without a lease requires no token.
+          type: string
+          nullable: true
+      x-properties-added-in-version:
+        - propertyName: leaseToken
+          addedInVersion: "8.10"
     JobErrorRequest:
       type: object
       properties:
@@ -1043,8 +1052,18 @@ components:
             JSON object that will instantiate the variables at the local scope of the error catch event that catches the thrown error.
           type: object
           nullable: true
+        leaseToken:
+          description: |
+            The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.
+            For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+            A job that was activated without a lease requires no token.
+          type: string
+          nullable: true
       required:
         - errorCode
+      x-properties-added-in-version:
+        - propertyName: leaseToken
+          addedInVersion: "8.10"
     JobCompletionRequest:
       type: object
       properties:
@@ -1055,9 +1074,18 @@ components:
           nullable: true
         result:
           $ref: "#/components/schemas/JobResult"
+        leaseToken:
+          description: |
+            The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.
+            For a leased job, the matching token must be supplied to prove the command comes from the worker that holds the current lease; a command with no token is rejected. A command carrying a stale token is likewise rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+            A job that was activated without a lease requires no token.
+          type: string
+          nullable: true
       x-properties-added-in-version:
         - propertyName: result
           addedInVersion: "8.8"
+        - propertyName: leaseToken
+          addedInVersion: "8.10"
     JobResult:
       description: |
         The result of the completed job as determined by the worker.
@@ -1186,11 +1214,21 @@ components:
           $ref: "#/components/schemas/JobChangeset"
         operationReference:
           $ref: "keys.yaml#/components/schemas/OperationReference"
+        leaseToken:
+          description: |
+            The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.
+            For a leased job, a supplied token is validated to prove the command comes from the worker that holds the current lease; a command carrying a stale token is rejected, fencing the job against a superseded activation (for example, after the job timed out or failed and was re-activated by another worker).
+            An update without a token always applies to support operator and bulk updates of leased jobs. Note that this is different from lifecycle requests like complete, fail, and throw-error that always require a token for leased jobs.
+            A job that was activated without a lease requires no token.
+          type: string
+          nullable: true
       required:
         - changeset
       x-properties-added-in-version:
         - propertyName: operationReference
           addedInVersion: "8.8"
+        - propertyName: leaseToken
+          addedInVersion: "8.10"
     JobChangeset:
       description: JSON object with changed job attribute values. The job cannot be completed or failed with this endpoint, use the complete job or fail job endpoints instead.
       type: object
