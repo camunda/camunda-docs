@@ -36,7 +36,7 @@ This section includes reference deployment architectures:
 
 - [Microsoft AKS single-region](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): Standard production setup.
 
-For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
+For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/troubleshooting/index.md).
 
 ## Architecture
 

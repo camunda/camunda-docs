@@ -596,7 +596,7 @@ aws ecs execute-command \
   --interactive
 ```
 
-For general troubleshooting, see the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
+For general troubleshooting, see the [operational guides troubleshooting documentation](/self-managed/troubleshooting/index.md).
 
 ## Known limitations
 

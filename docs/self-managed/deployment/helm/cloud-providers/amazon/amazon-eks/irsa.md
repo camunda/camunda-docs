@@ -20,7 +20,7 @@ Use only one mechanism per Kubernetes service account. If a service account is a
 
 ## IRSA configuration validation of a Camunda 8 helm deployment
 
-The [c8-sm-checks](self-managed/operational-guides/troubleshooting.md#anomaly-detection-scripts) utility is designed to validate IAM Roles for Service Accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) configuration in EKS Kubernetes clusters on AWS. It ensures that key components in a Camunda 8 deployment, such as PostgreSQL and OpenSearch, are properly configured to securely interact with AWS resources via the appropriate IAM roles.
+The [c8-sm-checks](self-managed/troubleshooting/index.md#anomaly-detection-scripts) utility is designed to validate IAM Roles for Service Accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) configuration in EKS Kubernetes clusters on AWS. It ensures that key components in a Camunda 8 deployment, such as PostgreSQL and OpenSearch, are properly configured to securely interact with AWS resources via the appropriate IAM roles.
 
 ### IRSA check script
 

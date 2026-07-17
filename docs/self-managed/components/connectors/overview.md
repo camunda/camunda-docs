@@ -9,7 +9,7 @@ The concept of a [Connector](/components/connectors/introduction.md) consists of
 - The business logic is implemented by a connector function and executed by a [Connector runtime environment](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments).
 - The user interface during modeling is provided using a [Connector template](/components/connectors/custom-built-connectors/connector-templates.md).
 
-In a [Self-Managed](/self-managed/about-self-managed.md) environment, you manage the execution environment for connectors yourself.
+In a [Self-Managed](/self-managed/index.md) environment, you manage the execution environment for connectors yourself.
 Using our [Connector runtime environments](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments), you can consume any set of connectors,
 including the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) and custom connectors developed using the **[Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md)** and [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md).
 

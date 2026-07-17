@@ -186,6 +186,11 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+
+# 8.10 SM restructure (Phase 1, batch 1) — Troubleshooting promoted to top-level; about-self-managed becomes the Introduction at the Self-Managed section root
+RewriteRule ^docs/next/self-managed/operational-guides/troubleshooting/?$ /docs/next/self-managed/troubleshooting/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/diagnostics/?$ /docs/next/self-managed/troubleshooting/diagnostics/ [R=301,L]
+RewriteRule ^docs/next/self-managed/about-self-managed/?$ /docs/next/self-managed/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
 # Console telemetry page removed; monitoring is the closest replacement

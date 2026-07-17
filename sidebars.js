@@ -1662,7 +1662,7 @@ module.exports = {
     "reference/legal",
   ],
   "Self-Managed": [
-    "self-managed/about-self-managed",
+    { type: "doc", id: "self-managed/index", label: "Introduction" },
     {
       type: "category",
       label: "Quickstart",
@@ -1930,7 +1930,6 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
-                "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
@@ -2264,8 +2263,16 @@ module.exports = {
           ],
         },
         "self-managed/operational-guides/data-purge",
-        "self-managed/operational-guides/troubleshooting",
       ],
+    },
+    {
+      type: "category",
+      label: "Troubleshooting",
+      link: {
+        type: "doc",
+        id: "self-managed/troubleshooting/index",
+      },
+      items: ["self-managed/troubleshooting/diagnostics"],
     },
     {
       Components: [

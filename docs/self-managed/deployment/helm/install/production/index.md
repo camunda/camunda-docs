@@ -338,7 +338,7 @@ oc get storageclass
 Alternative configurations that preserve the underlying volume and allow it to be reattached to a recreated PVC are also acceptable — for example, patching the `persistentVolumeReclaimPolicy` of individual PVs to `Retain`, or admission policies (Kyverno, Gatekeeper) enforcing `Retain` on dynamically provisioned PVs. Reattaching a retained PV to a new PVC may require manual steps, such as clearing the `claimRef` on the released PV, depending on your provisioner. Snapshot- or backup-based strategies are not equivalent, because they do not preserve the original volume binding required for a Zeebe broker to resume from its existing partition data without manual recovery. If you rely on an alternative mechanism, you are responsible for validating it against your upgrade and disaster recovery scenarios in a non-production environment.
 :::
 
-For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
+For more details, see [troubleshooting](/self-managed/troubleshooting/index.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
 
 #### Node affinity and tolerations
 
@@ -463,7 +463,9 @@ The following resources and configuration options are important to keep in mind 
   :::
 
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
+
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
+
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information, see the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/).
