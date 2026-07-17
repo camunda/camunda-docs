@@ -828,6 +828,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-definition-variable-names",
+          label: "Search process definition variable names",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-xml",
           label: "Get process definition XML",
           className: "api-method get",
@@ -882,8 +888,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation",
+          label: "Resume process instances (batch)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances",
           label: "Search process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation",
+          label: "Suspend process instances (batch)",
           className: "api-method post",
         },
         {
@@ -891,6 +909,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance",
           label: "Get process instance",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-process-instance-business-id",
+          label: "Assign business id to process instance",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -936,6 +960,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instance",
+          label: "Resume process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows",
           label: "Get sequence flows",
           className: "api-method get",
@@ -951,6 +981,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-wait-state-statistics",
           label: "Get wait state statistics",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instance",
+          label: "Suspend process instance",
+          className: "api-method post",
         },
       ],
     },
