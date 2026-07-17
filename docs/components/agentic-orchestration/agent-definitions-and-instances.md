@@ -18,7 +18,7 @@ An **agent definition** describes a deployed agent, while an **agent instance** 
 
 An agent is not the same as the BPMN element that hosts it, and it does not have the same lifecycle as an element instance.
 
-- A single [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
+- A single [AI agent sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
 - Each time the process activates that element, Camunda creates an element instance.
 - The agent instance can be **reused across several element instances** within the same process instance.
 
@@ -50,7 +50,7 @@ Camunda creates an agent definition for each of the following agent types:
 
 | Agent type         | How it is defined                                                                                                                          |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Ad-hoc sub-process | An [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) using the AI Agent connector. |
+| AI agent sub-process | An [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) using the AI Agent connector. |
 | AI Agent Task      | An [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) service task using the AI Agent connector.      |
 | External agent     | An [external agent](/reference/glossary.md#external-agent) that runs its loop in an external runtime, such as LangGraph or CrewAI.         |
 
