@@ -128,14 +128,18 @@ Using your throughput and retention settings, you can now calculate the required
 
 ### Optimize variable storage
 
-Variables can significantly increase Optimize's storage and CPU usage. Optimize stores variables in its analytics indices so reports can filter, group, and display variable values. Object variables can be especially expensive, because Optimize [flattens each object variable](/self-managed/optimize-deployment/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable.
+Variables can significantly increase Optimize's storage and CPU usage. Optimize stores variables in its indices so reports can filter, group, and display variable values. Object variables can be especially expensive, because Optimize [flattens each object variable](/self-managed/optimize-deployment/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable.
 
 If you don't need variables in Optimize reports, you can reduce this cost in two ways:
 
 - **Stop exporting variables entirely.** Set the `variable` option to `false` in the [Elasticsearch](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#index) or [OpenSearch](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md#index) exporter configuration.
 - **Disable variable import in Optimize.** Set `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPORT_ENABLED=false`. This reduces Optimize storage and indexing work, but the records are still written by the exporter.
 
-If you need scalar variables but don't rely on flattened object-variable filtering, grouping, or raw-data columns, disable object variable flattening by setting `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false` or `zeebe.includeObjectVariableValue: false`. This is enabled by default in Self-Managed; Camunda SaaS disables it.
+If you need scalar variables but don't rely on flattened object-variable filtering, grouping, or raw-data columns, disable object variable flattening by setting `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false` or `zeebe.includeObjectVariableValue: false`.
+
+:::note
+This behavior is enabled by default in Self-Managed and disabled in Camunda 8 SaaS.
+:::
 
 ### Zeebe record ILM retention
 

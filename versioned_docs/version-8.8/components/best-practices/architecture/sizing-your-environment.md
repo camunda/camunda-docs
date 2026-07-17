@@ -100,19 +100,26 @@ Variables dominate Optimize's storage and CPU costs on secondary storage. In ben
 
 ##### Disable object variable flattening (high impact for object-heavy processes)
 
-By default, Optimize [flattens each object variable](/self-managed/components/optimize/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable. Each of these is a separate stored variable and pays the storage cost described above independently, so a single object variable with several properties can cost several times more than a single scalar variable.
+By default, Optimize [flattens each object variable](/self-managed/components/optimize/configuration/object-variables.md) into a separate variable for each property and stores the full raw object as another variable. Each generated variable incurs its own storage cost, so an object variable with several properties can require several times more storage than a single scalar variable.
 
 If you don't rely on flattened object-variable filtering, grouping, or raw-data columns in Optimize reports, disable it by setting:
 
-- The environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false`.
-- The property `zeebe.includeObjectVariableValue: false`.
+- Environment variable: `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false`
+- Configuration property: `zeebe.includeObjectVariableValue: false`
 
-This is enabled by default in Self-Managed; Camunda SaaS disables it.
+:::note
+This behavior is enabled by default in Self-Managed and disabled in Camunda 8 SaaS.
+:::
 
-In an isolated benchmark toggling only this flag, Optimize's share of total Elasticsearch disk usage dropped from 62.8% to 7.6% (an 8.3x reduction), and total secondary storage per created process instance dropped from 6.34 MB to 2.97 MB (a 2.13x reduction, smaller because it also nets out the Zeebe and Camunda Exporter storage this flag doesn't touch) for the same workload. See [Confirming Optimize's Object Variable Flattening Cost With a Controlled A/B Test](https://camunda.github.io/zeebe-chaos/2026/07/09/Optimize-Object-Variable-Flattening/) for the full methodology and additional measurements.
+In an isolated benchmark that changed only this setting for the same workload:
+
+- Optimize's share of total Elasticsearch disk usage dropped from 62.8% to 7.6%, a reduction by a factor of 8.3.
+- Total secondary storage per created process instance dropped from 6.34 MB to 2.97 MB, a reduction by a factor of 2.13. This reduction was smaller because the setting does not affect Zeebe or Camunda Exporter storage.
+
+See [Confirming Optimize's object variable flattening cost with a controlled A/B test](https://camunda.github.io/zeebe-chaos/2026/07/09/Optimize-Object-Variable-Flattening/) for the complete methodology and additional measurements.
 
 :::warning
-These ratios are specific to this benchmark's payload and process models, not universal constants. Object variable flattening recurses through nested JSON with no depth limit, so a payload with deeper nesting or more object fields can cost considerably more than measured here. Measure against your own workload before relying on these numbers for capacity planning.
+These ratios are specific to the benchmark's payload and process models; they are not universal constants. Object variable flattening processes nested JSON recursively without a depth limit, so payloads with deeper nesting or more object fields can require considerably more storage than measured here. Measure your workload before using these numbers for capacity planning.
 :::
 
 ##### Other mitigations

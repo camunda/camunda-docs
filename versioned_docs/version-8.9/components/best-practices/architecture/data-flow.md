@@ -93,7 +93,7 @@ Optimize sits on top of the export pipeline as a second-tier consumer. See it in
 
 This means Optimize has an additional hop in the data flow compared to Operate and Tasklist, and it writes to secondary storage twice: once for the raw events and once for the analytics indices. As a result, data availability latency for Optimize is higher than for Operate and Tasklist, and the overall write load on Elasticsearch/OpenSearch is significantly higher when Optimize is enabled.
 
-Optimize's analytics indices also store variables differently than the raw export. Each variable is stored inside its owning process instance document, and its value is indexed in several forms at once so that Optimize's variable filters and reports can support all of these query types without a separate reindex:
+Optimize's indices store variables differently from the raw export. Each variable is stored in its owning process instance document, and its value is indexed in several forms simultaneously. This allows Optimize's variable filters and reports to support the following query types without requiring separate reindexing:
 
 - An exact-match form.
 - A case-insensitive form.
@@ -101,10 +101,10 @@ Optimize's analytics indices also store variables differently than the raw expor
 - A best-effort date form.
 - Best-effort numeric forms for long and double values.
 
-This is why Optimize's storage cost per variable is significantly higher than the raw exported record, and why the effect grows further for high-cardinality string variables, as the substring-search form scales with the number of distinct values:
+As a result, Optimize's storage cost per variable is significantly higher than the cost of the raw exported record. The storage cost increases further for high-cardinality string variables because the substring-searchable form scales with the number of distinct values:
 
-- It compresses well for variables with a handful of repeated values (such as a status field).
-- It compresses poorly for variables that differ on almost every instance (such as a customer or order ID).
+- Variables with a small number of repeated values, such as a status field, compress efficiently.
+- Variables with a different value for almost every process instance, such as a customer or order ID, compress poorly.
 
 See [Impact of Optimize](./sizing-your-environment.md#impact-of-optimize) for measured examples, including how object variable flattening compounds this by multiplying variable count rather than variable value size.
 
