@@ -26,12 +26,12 @@ import PageDescription from '@site/src/components/PageDescription';
 </div>
 <div className="release-announcement-content">
 
-#### PostgreSQL 14 no longer supported
+#### Amazon Aurora PostgreSQL 14 removed, 18 added
 
-Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16, 17, and 18.
+Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14 and adds support for version 18. Supported versions are now 15, 16, 17, and 18.
 
-- PostgreSQL 14 reached the end of its standard support window.
-- Upgrade your PostgreSQL instance to a supported version before moving to Camunda 8.10.
+- Aurora PostgreSQL 14 has reached the end of standard support on AWS.
+- Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
@@ -44,12 +44,29 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 </div>
 <div className="release-announcement-content">
 
-#### Amazon Aurora PostgreSQL 14 removed, 18 added
+#### Elasticsearch 9.2 and 9.3 no longer supported
 
-Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14 and adds support for version 18. Supported versions are now 15, 16, 17, and 18.
+Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.4. Supported Elasticsearch versions are now 8.19+ and 9.4+.
 
-- Aurora PostgreSQL 14 has reached the end of standard support on AWS.
-- Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.
+- Upgrade Elasticsearch 9.2 or 9.3 clusters to 9.4 or later before moving to Camunda 8.10.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### H2 2.3 no longer supported
+
+Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
+
+- The bundled H2 driver in Camunda images is on the 2.4 line.
+- H2 remains supported for development, testing, and evaluation only. Production use is not recommended.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
@@ -80,9 +97,44 @@ Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are
 </div>
 <div className="release-announcement-content">
 
+#### OpenSearch 3.4 no longer supported
+
+Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Supported OpenSearch versions are now 2.19+ and 3.5+.
+
+- Upgrade OpenSearch 3.4 clusters to 3.5 or later before moving to Camunda 8.10.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Oracle 23ai rebranded as Oracle 26ai
 
 Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective with the October 2025 Release Update (RU 23.26). The internal version continues to use the 23.x code line; the transition requires no database upgrade or application recertification. Camunda 8.10's supported Oracle versions are 19c and 26ai.
+
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### PostgreSQL 14 no longer supported
+
+Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16, 17, and 18.
+
+- PostgreSQL 14 reached the end of its standard support window.
+- Upgrade your PostgreSQL instance to a supported version before moving to Camunda 8.10.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
@@ -106,52 +158,15 @@ Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### H2 2.3 no longer supported
+#### MySQL 9.7 now supported
 
-Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
-
-- The bundled H2 driver in Camunda images is on the 2.4 line.
-- H2 remains supported for development, testing, and evaluation only. Production use is not recommended.
+Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 9.7.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Elasticsearch 9.2 no longer supported
-
-Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.3. Supported Elasticsearch versions are now 8.19+ and 9.3+.
-
-- Upgrade Elasticsearch 9.2 clusters to 9.3 or later before moving to Camunda 8.10.
-
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
-</div>
-<div className="release-announcement-content">
-
-#### OpenSearch 3.4 no longer supported
-
-Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Supported OpenSearch versions are now 2.19+ and 3.5+.
-
-- Upgrade OpenSearch 3.4 clusters to 3.5 or later before moving to Camunda 8.10.
-
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
 </div>
 </div>
@@ -174,10 +189,6 @@ Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Support
 </div>
 
 ## APIs & tools
-
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -203,9 +214,9 @@ The following items are removed:
 - Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
 - Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
 
-<p className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
-<p className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
-<p className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</p>
+<p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
+<p><span className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</span></p>
+<p><span className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</span></p>
 
 </div>
 </div>
@@ -291,6 +302,21 @@ Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tool
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Console SM and Web Modeler APIs deprecated
+
+With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Hub REST API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-hub-rest-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
+
+**Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Hub REST API before 8.12.
+
+</div>
+</div>
+
 ## Connectors
 
 :::note
@@ -313,6 +339,27 @@ Connectors change 1 description.
 </div> -->
 
 ## Data
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Elasticsearch and OpenSearch exporter defaults changed for Optimize mode and job records
+
+Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
+
+- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
+- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
+
+**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
+
+<p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
+<p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

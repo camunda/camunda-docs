@@ -117,18 +117,20 @@ The syntax for the parameter uses Elasticsearch date math. See the table below f
 
 ## Rollover interval
 
-The size of the historical indices from which process instances are archived into. By default this value is set to `1d` (1 day), as an example a
-value of `1w` would archive based on weekly intervals so a process instance which completed on the 10th of a month would fall into the 7th-14th bucket
-therefore it would be archived into a historical index with a suffix of `yyyy-mm-07`
+The size of the historical indices into which process instances are archived, based on a **calendar interval**, a fixed calendar boundary (start of a day or start of an ISO week).
+
+Only single-unit values are supported, using the same units as [archive period](#archive-period), for example `1d` (the default) or `1w`. Multi-quantity values such as `2d` or `2w` are not supported.
 
 | Configuration parameter                    | Description                            | Default value |
 | ------------------------------------------ | -------------------------------------- | ------------- |
 | camunda.tasklist.archiver.rolloverInterval | Interval for size of archived indices. | 1d            |
 
-Refer to [Elasticsearch calendar intervals](https://www.elastic.co/docs/reference/aggregations/search-aggregations-bucket-datehistogram-aggregation#calendar_intervals)
-or [OpenSearch Auto-interval date histogram](https://docs.opensearch.org/latest/aggregations/bucket/auto-interval-date-histogram/)
-for more information on possible values and their effects.
+With `1w`, indices are split into weekly buckets aligned to **ISO week boundaries (Monday to Sunday)**. Each bucket's index suffix is the date of the Monday that starts that ISO week. For example, a process instance that completes on Wednesday, 10 June 2026 falls into the ISO week starting Monday, 8 June 2026, so it is archived into a historical index with the suffix `2026-06-08`.
+
+Camunda supports the same set of rollover interval values on both Elasticsearch and OpenSearch.
+
+See [data retention](data-retention.md#rollover-interval) for how the rollover interval affects effective retention.
 
 :::note
-This feature is officially supported from version >= 8.7.15.
+This feature is officially supported from version 8.7.15 onward. On OpenSearch, versions before 8.7.15 require the value `Week` (capitalized) instead of `1w` for weekly rollover to take effect; from 8.7.15 onward, use `1w`.
 :::

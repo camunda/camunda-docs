@@ -22,9 +22,9 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
 
 ## Supported storage options
 
-- By using **external cloud file bucket storages**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storages are supported:
+- By using **external cloud file bucket storage**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
-  - [**AWS S3**](https://aws.amazon.com/s3/)
+  - [**AWS S3**](https://aws.amazon.com/s3/) — including [S3-compatible object stores](/self-managed/concepts/document-handling/configuration/helm.md#s3-compatible-object-storage) such as MinIO, Cloudian, or Garage (configured through the AWS S3 store with a custom endpoint)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
   - Configuring these storages is supported in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), and [Helm](/self-managed/deployment/helm/install/quick-install.md).
 - **Local storage** can be configured for a cluster to store documents in a local folder.
@@ -35,7 +35,13 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
   - It can be used with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/deployment/helm/install/quick-install.md).
   - In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
+## Physical Tenant isolation
+
+When running Physical Tenants, each tenant must be assigned a distinct document store location. Camunda validates uniqueness at startup and fails if two tenants resolve to the same `provider, bucket/container, path` tuple.
+
+For the per-tenant configuration model, including the root catalog, `assigned` restriction, field-level overrides, and startup collision examples, see [document store isolation](/self-managed/concepts/physical-tenants/configuration-reference.md#document-store-isolation).
+
 ## Storage policies
 
 - **Maximum upload size for one or multiple files**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: With Self-Managed, users may define their own lifecycle policies. A custom expiration date can be specified via metadata for each document. The [document upload API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) allows this. For forms, this defaults to the cluster configuration as there is no set custom TTL for forms.
+- **File expiration time/time-to-live (TTL) policy**: With Self-Managed, users may define their own lifecycle policies. A custom expiration date can be specified via metadata for each document. The [document upload API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) allows this. You can only set a custom expiration date earlier than the bucket's TTL; requesting a later date results in it being capped to the bucket's TTL. For forms, this defaults to the cluster configuration as there is no set custom TTL for forms.
