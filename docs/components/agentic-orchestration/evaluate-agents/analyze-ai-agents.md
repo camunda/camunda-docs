@@ -14,6 +14,10 @@ import Dashboard from '../img/dashboard-optimize.png';
 
 Analyze and improve the performance of your AI agent executions using Optimize.
 
+:::tip
+For an out-of-the-box view across all your AI-agent-powered processes, see the [Agentic Control Plane](/components/optimize/userguide/agentic-control-plane.md). Use this guide instead when you need custom reports or metrics it doesn't cover.
+:::
+
 ## About
 
 In this guide, you will:

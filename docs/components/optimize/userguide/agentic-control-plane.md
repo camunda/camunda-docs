@@ -4,7 +4,7 @@ title: Agentic Control Plane
 description: "Monitor adoption, cost, reliability, and performance of your AI-agent-powered processes from a single Optimize page."
 ---
 
-The **Agentic Control Plane** is a dedicated page in Camunda Optimize that helps you monitor how AI agents behave across your processes. It brings adoption, cost (token usage), reliability, and performance into a single view, so you can spot problems early and understand where your agents spend time and money.
+The **Agentic Control Plane** is a dedicated page in [Camunda Optimize](/components/optimize/what-is-optimize.md) that helps you monitor how [AI agents](/components/agentic-orchestration/ai-agents.md) behave across your processes. It brings adoption, cost (token usage), reliability, and performance into a single view, so you can spot problems early and understand where your agents spend time and money.
 
 :::note Who is this for?
 Operators, process owners, and engineering leads who run AI-agent-powered processes and need to keep them healthy and cost-effective.
@@ -23,7 +23,7 @@ Every number on the page is based only on **completed** process instances that u
 The page works at two levels, controlled by the **Process** filter at the top:
 
 - **L0 — fleet view (default):** no process is selected. You see every agentic process together — the "how is my whole agent fleet doing?" view. This view is best for spotting which process to look at next.
-- **L1 — process view:** select one process (and optionally a **Version**). Every tile now describes just that process, and extra process-specific tiles appear (failure by version, and the two flow-node heatmaps) that aren't meaningful across the whole fleet.
+- **L1 — process view:** select one process (and optionally a **Version**). Every tile now describes just that process, and extra process-specific tiles appear (**Failure rate by process version**, **Tool calls per flow node**, and **Duration per flow node**) that aren't meaningful across the whole fleet.
 
 To switch between levels, choose a process in the filter, or clear it to return to the fleet view.
 
@@ -65,7 +65,7 @@ The top row gives you an at-a-glance health check, and each number carries a cha
 
 **Average execution duration** shows the average end-to-end time of an agentic execution. If it trends upward, the experience is getting slower, and it's worth digging into the duration tiles or a specific process to find out why.
 
-**Incident rate** is the share of completed executions that hit and resolved an incident — a quick reliability pulse. When it starts climbing, that's your cue to investigate. In L1, **Failure rate by process version** helps you narrow down the cause.
+**Incident rate** is the share of completed executions that hit and resolved an [incident](/components/concepts/incidents.md) — a quick reliability pulse. When it starts climbing, that's your cue to investigate. In L1, **Failure rate by process version** helps you narrow down the cause.
 
 ### Token usage
 
@@ -115,3 +115,5 @@ With these tiles in mind, a few common tasks map neatly onto the page:
 ## Good to know
 
 Keep a few things in mind as you read the page. It counts only **completed** executions, so very recent in-progress runs won't appear until they finish. If a tile looks empty, there's usually no agentic data yet for the selected process or period. And the L1-only tiles — the heatmaps and failure by version — appear only after you select a single process.
+
+If you need metrics or breakdowns beyond what this page offers, you can also [build your own AI agent reports and dashboards](/components/agentic-orchestration/evaluate-agents/analyze-ai-agents.md) in Optimize.
