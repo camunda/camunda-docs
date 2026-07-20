@@ -36,7 +36,7 @@ The page has two views, controlled by the **Process** filter at the top:
 To switch views, choose a process in the filter, or clear it to return to the overview.
 
 :::note
-A process instance counts as agentic, and appears on this page, once it includes at least one native Camunda AI agent execution, for example through the AI Agent connector or the MCP start event. Processes that only call agents running outside Camunda's engine, such as external agents built on LangGraph or Amazon Bedrock, aren't tracked here, since the engine has no visibility into their execution.
+A process instance counts as agentic, and appears on this page, once it includes at least one execution of a native [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), for example through the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) or the MCP start event. Processes that only call [external agents](/reference/glossary.md#external-agent), such as ones built on LangGraph or Amazon Bedrock, aren't tracked here, since Camunda's engine has no visibility into their execution.
 :::
 
 ### Filters
