@@ -49,8 +49,6 @@ Most other endpoints are scoped to a Physical Tenant, even when they are not ten
 - `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view. For the cluster-wide topology, use `/cluster/v2/topology`.
 - `/v2/license` returns the license status and is available per Physical Tenant, including on the default path (`/v2/license`). It is not a separate cluster-wide endpoint.
 
-<!-- TODO(tenant-follow-up): Ana confirmed the license behavior (per-tenant/default, not cluster-wide) and the cluster-wide topology path (/cluster/v2/topology). Still pending Meggle's confirmation: whether /cluster/v2/topology is available in 8.10 or a later release. Adjust wording if it is not yet available. -->
-
 ## HTTP status codes
 
 | Scenario                                                           | HTTP status        |
