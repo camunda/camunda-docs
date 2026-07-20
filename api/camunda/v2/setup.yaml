@@ -9,9 +9,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siZHluYW1pYyI6dHJ1ZSwibm90ZSI6IkZpcnN0LWFkbWluIGJvb3RzdHJhcCDigJQgYWxsb3dlZCBhbm9ueW1vdXNseSB1bnRpbCBhbiBpbml0aWFsIGFkbWluIGV4aXN0czsgb3RoZXJ3aXNlIHJlcXVpcmVzIFVTRVIgQ1JFQVRFIGFuZCBST0xFIFVQREFURS4ifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 

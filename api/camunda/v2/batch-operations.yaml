@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -59,9 +59,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -100,9 +100,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -148,9 +148,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -198,9 +198,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlVQREFURSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -248,9 +248,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiQkFUQ0giLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -726,6 +726,30 @@ components:
       required:
         - sourceElementId
         - targetElementId
+    ProcessInstanceSuspensionBatchOperationRequest:
+      type: object
+      description: The process instance filter that defines which process instances should be suspended.
+      properties:
+        filter:
+          allOf:
+            - $ref: "process-instances.yaml#/components/schemas/ProcessInstanceFilter"
+          description: The process instance filter.
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+      required:
+        - filter
+    ProcessInstanceResumptionBatchOperationRequest:
+      type: object
+      description: The process instance filter that defines which process instances should be resumed.
+      properties:
+        filter:
+          allOf:
+            - $ref: "process-instances.yaml#/components/schemas/ProcessInstanceFilter"
+          description: The process instance filter.
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+      required:
+        - filter
     BatchOperationItemStateEnum:
       description: The batch operation item state.
       type: string
@@ -758,6 +782,8 @@ components:
         - MIGRATE_PROCESS_INSTANCE
         - MODIFY_PROCESS_INSTANCE
         - RESOLVE_INCIDENT
+        - RESUME_PROCESS_INSTANCE
+        - SUSPEND_PROCESS_INSTANCE
         - UPDATE_JOB
         - UPDATE_VARIABLE
     BatchOperationTypeFilterProperty:
