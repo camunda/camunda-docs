@@ -1,16 +1,20 @@
 ---
 id: agentic-control-plane
-title: Agentic Control Plane
-description: "Monitor adoption, cost, reliability, and performance of your AI-agent-powered processes from a single Optimize page."
+title: Agentic control plane
+description: "Monitor AI agent adoption, token costs, reliability, and performance across your processes with the agentic control plane in Optimize."
 ---
 
-As [AI agents](/components/agentic-orchestration/ai-agents.md) spread across more of your processes, it gets harder to tell which ones are burning through tokens, turning unreliable, or slowing down, without building a custom report for each one. The **Agentic Control Plane** is a dedicated page in [Camunda Optimize](/components/optimize/what-is-optimize.md) that answers those questions for every AI-agent-powered process in one place: adoption, cost (token usage), reliability, and performance, so you can spot problems early and understand where your agents spend time and money.
+Monitor AI agent adoption, token costs, reliability, and performance across your processes with the agentic control plane in Optimize.
 
-:::note Who is this for?
-Operators, process owners, and engineering leads who run AI-agent-powered processes and need to keep them healthy and cost-effective.
+## About
+
+With the **agentic control plane** in Optimize, you can monitor [AI agents](/reference/glossary.md#ai-agent) adoption, token usage, reliability, and performance across your processes in one place.
+
+This is primarily intended for operators, process owners, and engineering leads who manage AI-agent-powered processes and need to keep them reliable and cost-effective.
+
+:::important
+The numbers shown are based only on completed process instances that used at least one AI agent. Processes that did not use an AI agent are excluded.
 :::
-
-Every number on the page is based only on **completed** process instances that used at least one AI agent. Non-agent processes are ignored.
 
 ## Open the Agentic Control Plane
 
