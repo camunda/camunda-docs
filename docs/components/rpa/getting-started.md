@@ -20,6 +20,7 @@ The RPA worker is available on all major platforms (Windows, Linux, and macOS). 
 ## Create your first script
 
 Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts.
+
 You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](../../modeler/desktop-modeler/), or use the [Web Modeler](../../modeler/web-modeler/) if you already have a Camunda instance available.
 
 ### Using Desktop Modeler
@@ -94,7 +95,7 @@ Once you are happy with your script and have tested it locally, you can start au
    1. Deploy the BPMN model with the configured RPA task by clicking on the rocket (🚀) icon in Desktop Modeler, or use the **Deploy** button in Web Modeler.
    2. Start an instance of your process.
 
-Once your RPA script and model are deployed, you can also use the **Play** functionality in the Web Modeler.
+Once your RPA script and model are deployed, you can also use the **Play** functionality in Web Modeler.
 
 ### Connect worker to Zeebe
 
