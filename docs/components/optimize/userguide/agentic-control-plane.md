@@ -75,7 +75,7 @@ The available metrics are grouped into four themes: key numbers, token usage, re
 
 ### Key numbers
 
-The top row gives you an at-a-glance health check, and each number carries a change badge comparing the current period to the previous one.
+The top row gives you an at-a-glance health check, and each number carries a change badge comparing the current period to the previous one. The color reflects whether that direction is good or bad for the specific metric, not just whether it moved up or down: a rising incident rate is red, but a rising execution count is green.
 
 - **Total executions** counts the completed agentic executions in the period. It's your adoption and volume signal: a steady climb means agents are being used more, while an unexpected drop can mean a process has stalled. It also sets the scale for reading every other metric.
 - **Average execution duration** shows the average end-to-end time of an agentic execution. If it trends upward, the experience is getting slower, and it's worth digging into the duration metrics or a specific process to find out why.
@@ -103,14 +103,6 @@ Tokens are the units of AI model usage, so this group is effectively about cost.
 - **P95 execution duration** exposes the slow tail: 95% of executions finish within this time. It surfaces worst-case slowness that averages tend to hide. When P95 sits far above P50, a meaningful minority of runs are slow, and those are the cases worth investigating.
 - **Execution duration stability (P50 / P95)** plots both the median and 95th-percentile duration over time on a single chart. It shows whether performance is steady or drifting, helping you catch gradual degradation, or a widening gap between typical and worst-case runs, before users start to complain.
 - **Duration per flow node** overlays a heatmap on the process diagram, coloring each step by its average duration. It shows which steps consume the most time so you can focus performance work on the true bottlenecks. Like the other heatmap, it's only available in the process view.
-
-## Interpret badges, rankings, and footnotes
-
-A few page conventions do some of the interpretation for you, so you don't have to build your own judgment from scratch every time:
-
-- **Change badges** on the top-row numbers tell you not just that something moved, but whether that direction is good or bad for that specific metric: a rising incident rate is red, a rising execution count is green, even though both are "up."
-- **Top X of Y** on ranked charts is a reminder that you're looking at the leaders, not the full list. That's useful context before concluding "only 10 processes use agents" when the real number is higher.
-- **Footnotes** under some charts translate an unusual pattern into a plain-language next step, so you don't have to reverse-engineer what a widening P5 / P95 band or a token spike actually implies.
 
 ## Typical workflows
 
