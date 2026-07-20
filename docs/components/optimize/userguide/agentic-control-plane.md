@@ -26,16 +26,18 @@ The numbers shown are based only on completed process instances that used at lea
 Optimize is disabled by default on new trial clusters. If **Agentic Control Plane** doesn't appear in the navigation, an admin needs to enable Optimize first using the **Enable Optimize** prompt on the cluster overview. Upgrading from a trial to a paid plan enables Optimize automatically.
 :::
 
-## Overview and process view
+## Overview and process views
 
 The page has two views, controlled by the **Process** filter at the top:
 
-- **Overview (default):** No process is selected, so you see every agentic process together. This is the best view for spotting which process to look at next. It covers every agentic process in this Optimize instance (this cluster), not an organization-wide view across multiple clusters.
+- **Overview (default):** No process is selected, so you see every agentic process together. This is the best view for spotting which process to look at next. It covers every agentic process in this Optimize instance (current cluster), not an organization-wide view across multiple clusters.
 - **Process view:** Select one process (and optionally a **Version**). Every tile now describes just that process, and extra process-specific tiles appear (**Failure rate by process version**, **Tool calls per flow node**, and **Duration per flow node**) that aren't meaningful across all processes.
 
 To switch views, choose a process in the filter, or clear it to return to the overview.
 
-A process instance counts as agentic, and appears on this page, once it includes at least one native Camunda AI agent execution, for example through the AI Agent connector (as a task or sub-process) or the MCP start event. Processes that only call agents running outside Camunda's engine, such as external agents built on LangGraph or Amazon Bedrock, aren't tracked here, since the engine has no visibility into their execution.
+:::note
+A process instance counts as agentic, and appears on this page, once it includes at least one native Camunda AI agent execution, for example through the AI Agent connector or the MCP start event. Processes that only call agents running outside Camunda's engine, such as external agents built on LangGraph or Amazon Bedrock, aren't tracked here, since the engine has no visibility into their execution.
+:::
 
 ### Filters
 
