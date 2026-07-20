@@ -4,7 +4,7 @@ title: Agentic Control Plane
 description: "Monitor adoption, cost, reliability, and performance of your AI-agent-powered processes from a single Optimize page."
 ---
 
-The **Agentic Control Plane** is a dedicated page in [Camunda Optimize](/components/optimize/what-is-optimize.md) that helps you monitor how [AI agents](/components/agentic-orchestration/ai-agents.md) behave across your processes. It brings adoption, cost (token usage), reliability, and performance into a single view, so you can spot problems early and understand where your agents spend time and money.
+As [AI agents](/components/agentic-orchestration/ai-agents.md) spread across more of your processes, it gets harder to tell which ones are burning through tokens, turning unreliable, or slowing down, without building a custom report for each one. The **Agentic Control Plane** is a dedicated page in [Camunda Optimize](/components/optimize/what-is-optimize.md) that answers those questions for every AI-agent-powered process in one place: adoption, cost (token usage), reliability, and performance, so you can spot problems early and understand where your agents spend time and money.
 
 :::note Who is this for?
 Operators, process owners, and engineering leads who run AI-agent-powered processes and need to keep them healthy and cost-effective.
@@ -18,14 +18,20 @@ Every number on the page is based only on **completed** process instances that u
 2. In the navigation, select **Agentic Control Plane**.
 3. The page loads showing all your agentic processes for the **last 30 days**.
 
+:::note SaaS trial clusters
+Optimize is disabled by default on new trial clusters. If **Agentic Control Plane** doesn't appear in the navigation, an admin needs to enable Optimize first using the **Enable Optimize** prompt on the cluster overview. Upgrading from a trial to a paid plan enables Optimize automatically.
+:::
+
 ## Fleet and process levels
 
 The page works at two levels, controlled by the **Process** filter at the top:
 
-- **L0 — fleet view (default):** no process is selected. You see every agentic process together — the "how is my whole agent fleet doing?" view. This view is best for spotting which process to look at next.
+- **L0 — fleet view (default):** no process is selected. You see every agentic process together — the "how is my whole agent fleet doing?" view. This view is best for spotting which process to look at next. "Fleet" here means every agentic process in this Optimize instance (this cluster), not an organization-wide view across multiple clusters.
 - **L1 — process view:** select one process (and optionally a **Version**). Every tile now describes just that process, and extra process-specific tiles appear (**Failure rate by process version**, **Tool calls per flow node**, and **Duration per flow node**) that aren't meaningful across the whole fleet.
 
 To switch between levels, choose a process in the filter, or clear it to return to the fleet view.
+
+A process instance counts as agentic, and appears on this page, once it includes at least one native Camunda AI agent execution — for example, through the AI Agent connector (as a task or sub-process) or the MCP start event. Processes that only call agents running outside Camunda's engine, such as external agents built on LangGraph or Amazon Bedrock, aren't tracked here, since the engine has no visibility into their execution.
 
 ### Filters
 
@@ -99,9 +105,13 @@ Tokens are the units of AI model usage, so this group is effectively about cost.
 
 **Duration per flow node** overlays a heatmap on the process diagram, coloring each step by its average duration. It shows which steps consume the most time so you can focus performance work on the true bottlenecks. Like the other heatmap, it's only available in L1.
 
-## Read the extras
+## Read the signals, not just the numbers
 
-A few smaller cues round out the page. **Change badges** on the top-row numbers compare the current period to the previous one, with green indicating a good move and the arrow reflecting whether higher or lower is better for that metric. A **Top X of Y** note appears on ranked charts when there are more items than shown, so you know you're seeing the leaders rather than the full list. **Footnotes** under some charts offer a plain-language hint on what an unusual pattern might mean and what to do about it.
+A few page conventions do some of the interpretation for you, so you don't have to build your own judgment from scratch every time:
+
+- **Change badges** on the top-row numbers tell you not just that something moved, but whether that direction is good or bad for that specific metric — a rising incident rate is red, a rising execution count is green, even though both are "up."
+- **Top X of Y** on ranked charts is a reminder that you're looking at the leaders, not the full list — useful context before concluding "only 10 processes use agents" when the real number is higher.
+- **Footnotes** under some charts translate an unusual pattern into a plain-language next step, so you don't have to reverse-engineer what a widening P5 / P95 band or a token spike actually implies.
 
 ## Typical workflows
 
