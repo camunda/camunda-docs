@@ -14,16 +14,6 @@ Camunda models AI agents using the same definition-and-instance relationship as 
 
 An **agent definition** describes a deployed agent, while an **agent instance** represents a specific running execution of that agent.
 
-### Why definitions and instances are separate
-
-An agent is not the same as the BPMN element that hosts it, and it does not have the same lifecycle as an element instance.
-
-- A single [AI agent sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
-- Each time the process activates that element, Camunda creates an element instance.
-- The agent instance can be **reused across several element instances** within the same process instance.
-
-For example, in a process where the flow returns to the agent element after a user reply, the agent element is activated more than once. Each activation is a separate element instance, but they share the same agent instance so the agent keeps its memory and continues the same conversation. This reuse is what allows an agent to hold a multi-turn conversation across a loop in the process.
-
 ## Agent definitions
 
 An agent definition is a first-class, queryable resource that Camunda creates when you deploy a process containing one or more agents.
@@ -34,15 +24,15 @@ An agent definition identifies an agent across process versions through a stable
 
 ### What an agent definition contains
 
-| Field                  | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| Agent definition key   | Stable identifier for the agent across process definition versions. |
-| Agent type             | One of ad-hoc sub-process, AI Agent Task, or external agent.        |
-| Name                   | Human-readable name of the agent element.                           |
-| Process definition key | The process definition the agent belongs to.                        |
-| Tenant                 | The tenant the agent definition belongs to.                         |
+An agent definition contains the following data:
 
-The system prompt and model are FEEL expressions evaluated when an instance is created. They are not stored in the agent definition, because they can resolve to different values for each instance.
+- **Agent definition key**: Stable identifier for the agent across process definition versions.
+- **Agent type**: One of ad-hoc sub-process, AI Agent Task, or external agent.
+- **Name**: Human-readable name of the agent element.
+- **Process definition key**: The process definition the agent belongs to.
+- **Tenant**: The tenant the agent definition belongs to.
+
+The system prompt and model are [FEEL expressions](/components/modeler/feel/what-is-feel.md) evaluated when an instance is created. They are not stored in the agent definition, because they can resolve to different values for each instance.
 
 ### Agent types
 
@@ -54,7 +44,10 @@ Camunda creates an agent definition for each of the following agent types:
 | AI Agent Task        | An [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) service task using the AI Agent connector.      |
 | External agent       | An [external agent](/reference/glossary.md#external-agent) that runs its loop in an external runtime, such as LangGraph or CrewAI.         |
 
-For an element to be recognized as an agent, it must be marked in the BPMN model with the `zeebe:agentDefinition` extension element. Camunda's own AI Agent connector templates add this marker for you. An external agent must add the marker explicitly so that Camunda registers it as an agent when the process is deployed.
+For an element to be recognized as an agent, it must be marked in the BPMN model with the `zeebe:agentDefinition` extension element. This works differently depending on your agent type:
+
+1. **Native agents** (ad-hoc sub-process, AI Agent Task): Camunda's own AI Agent connector templates add this marker for you.
+2. **External agents**: You must add the marker explicitly so that Camunda registers the element as an agent when the process is deployed.
 
 ### Reuse an agent across processes
 
@@ -85,7 +78,7 @@ Where the context is stored depends on the memory storage type. With **In Proces
 
 Operate surfaces agent instance data so you can monitor an agent as part of its process instance, without reading raw JSON from process variables.
 
-The following data is available for an agent instance in Operate.
+The following data is available for an agent instance in Operate. See [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md) for a hands-on guide to inspecting this data.
 
 | Data                 | Description                                                                                                                                                                 |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -116,3 +109,13 @@ Grouping the history by loop makes it easier to reference a specific point in an
 #### Visibility for external agents
 
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.
+
+## Why definitions and instances are separate
+
+An agent is not the same as the BPMN element that hosts it, and it does not have the same lifecycle as an element instance.
+
+- A single [AI agent sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
+- Each time the process activates that element, Camunda creates an element instance.
+- The agent instance can be **reused across several element instances** within the same process instance.
+
+For example, in a process where the flow returns to the agent element after a user reply, the agent element is activated more than once. Each activation is a separate element instance, but they share the same agent instance so the agent keeps its memory and continues the same conversation. This reuse is what allows an agent to hold a multi-turn conversation across a loop in the process.
