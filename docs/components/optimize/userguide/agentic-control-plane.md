@@ -20,36 +20,38 @@ The numbers shown are based only on completed process instances that used at lea
 
 1. Open **Optimize**.
 2. In the navigation, select **Agentic Control Plane**.
-3. The page loads showing all your agentic processes for the **last 30 days**.
+3. The **Agentic Control Plane** page loads, showing metrics for all your agentic processes from the **last 30 days**.
 
 :::note SaaS trial clusters
-Optimize is disabled by default on new trial clusters. If **Agentic Control Plane** doesn't appear in the navigation, an admin needs to enable Optimize first using the **Enable Optimize** prompt on the cluster overview. Upgrading from a trial to a paid plan enables Optimize automatically.
+Optimize is disabled by default on new trial clusters. If the **Agentic Control Plane** tab doesn't appear in the navigation, an admin needs to enable Optimize first using the **Enable Optimize** prompt on the cluster overview. Upgrading from a trial to a paid plan enables Optimize automatically.
 :::
 
 ## Overview and process views
 
-The page has two views, controlled by the **Process** filter at the top:
+The **Agentic Control Plane** page has two views, controlled by the **Process** filter at the top:
 
-- **Overview (default):** No process is selected, so you see every agentic process together. This is the best view for spotting which process to look at next. It covers every agentic process in this Optimize instance (current cluster), not an organization-wide view across multiple clusters.
-- **Process view:** Select one process (and optionally a **Version**). Every tile now describes just that process, and extra process-specific tiles appear (**Failure rate by process version**, **Tool calls per flow node**, and **Duration per flow node**) that aren't meaningful across all processes.
+- **Overview (default):** No process is selected, so you see every agentic process together. It covers every agentic process in the current Optimize instance (current cluster), not an organization-wide view across multiple clusters.
+- **Process view:** Select one process (and optionally a **Version**). Every metric now describes just that process, including extra process-specific metrics.
 
 To switch views, choose a process in the filter, or clear it to return to the overview.
 
 :::note
-A process instance counts as agentic, and appears on this page, once it includes at least one execution of a native [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), for example through the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) or the [MCP start event](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md). Processes that only call [external agents](/reference/glossary.md#external-agent), such as ones built on LangGraph or Amazon Bedrock, aren't tracked here, since Camunda's engine has no visibility into their execution.
+A process instance counts as agentic and is included in the metrics if it contains at least one execution of a native [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), for example through the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+Processes that call only [external agents](/reference/glossary.md#external-agent) aren't tracked because the Camunda engine has no visibility into their execution.
 :::
 
 ### Filters
 
-Use these filters to narrow the page down to the time window, process, or version you want to inspect:
+Use these filters to narrow the metrics down to the time window, process, or version you want to inspect:
 
 - **Date range**: **Last 7 days**, **Last 30 days** (default), **Last 3 months**, **Last 6 months**, or **Last 12 months**. Dates are based on when each execution **completed**. Chart time buckets adjust automatically (for example, daily for a week, monthly for a year).
 - **Process**: switches between the overview and the process view.
 - **Version**: appears only in the process view. Focus on a specific process version, the latest, or all versions.
 
-### Tiles available in each view
+### Metrics available in each view
 
-| Tile                                 | Overview | Process view |
+| Metric                               | Overview | Process view |
 | ------------------------------------ | :------: | :----------: |
 | Total executions                     |    ✅    |      ✅      |
 | Average execution duration           |    ✅    |      ✅      |
@@ -67,16 +69,16 @@ Use these filters to narrow the page down to the time window, process, or versio
 | Execution duration stability         |    ✅    |      ✅      |
 | Duration per flow node (heatmap)     |    —     |      ✅      |
 
-## Understand what each metric means
+## Understand the metrics
 
-The tiles are grouped into four themes: key numbers, token usage, reliability and tool calls, and duration. Each one is described below, along with what it tells you and how to act on it. Unless noted otherwise, a tile reflects all processes in the overview and the selected process in the process view.
+The available metrics are grouped into four themes: key numbers, token usage, reliability and tool calls, and duration. Each one is described below, along with what it tells you and how to act on it.
 
 ### Key numbers
 
 The top row gives you an at-a-glance health check, and each number carries a change badge comparing the current period to the previous one.
 
-- **Total executions** counts the completed agentic executions in the period. It's your adoption and volume signal: a steady climb means agents are being used more, while an unexpected drop can mean a process has stalled. It also sets the scale for reading every other tile.
-- **Average execution duration** shows the average end-to-end time of an agentic execution. If it trends upward, the experience is getting slower, and it's worth digging into the duration tiles or a specific process to find out why.
+- **Total executions** counts the completed agentic executions in the period. It's your adoption and volume signal: a steady climb means agents are being used more, while an unexpected drop can mean a process has stalled. It also sets the scale for reading every other metric.
+- **Average execution duration** shows the average end-to-end time of an agentic execution. If it trends upward, the experience is getting slower, and it's worth digging into the duration metrics or a specific process to find out why.
 - **Incident rate** is the share of completed executions that hit and resolved an [incident](/components/concepts/incidents.md), a quick reliability pulse. When it starts climbing, that's your cue to investigate. In the process view, **Failure rate by process version** helps you narrow down the cause.
 
 ### Token usage
@@ -87,13 +89,13 @@ Tokens are the units of AI model usage, so this group is effectively about cost.
 - **Median tokens per execution** is the midpoint: half of executions use less, half use more. Because it ignores extreme outliers, it represents the typical run. Compare it against the average: a large gap means a handful of very expensive runs are inflating your costs, so it's worth hunting down those outliers.
 - **Token trend** plots input tokens against output tokens over time. It reveals where cost growth comes from: bigger prompts push up the input line, longer responses push up the output line. If tokens rise without more executions, your prompts may be growing, or the model may be producing longer answers, which is worth raising with engineering.
 - **Token outlier bands (P5 / P50 / P95)** show the spread of per-execution token usage over time, from low to typical to high. A widening gap between the P5 and P95 bands means executions are behaving inconsistently, often a sign of prompt variability or non-determinism.
-- **Top token consumers by process** ranks your processes by total token spend, showing the top 10 as a bar chart. This is where you see where the money goes across all processes: cutting the top consumer has the biggest impact on overall spend, and you can select that process to drill into it in the process view. A **Top X of Y** note appears when more processes exist beyond those shown. This tile is only available in the overview, since ranking processes against each other stops being meaningful once you're inside a single process.
+- **Top token consumers by process** ranks your processes by total token spend, showing the top 10 as a bar chart. This is where you see where the money goes across all processes: cutting the top consumer has the biggest impact on overall spend, and you can select that process to drill into it in the process view. A **Top X of Y** note appears when more processes exist beyond those shown.
 
 ### Reliability and tool calls
 
 - **Total tool calls** is the total number of tool or action calls your agents made, a gauge of how much work they delegate to tools. Sudden changes can point to a behavior shift or a looping agent, so it's useful to read alongside token usage and duration.
-- **Failure rate by process version** breaks the failure percentage down by process definition version. It answers whether a specific version is more or less reliable, so you can confirm whether a new release improved or regressed things and decide whether to roll it back or promote it. This tile is only available in the process view, since comparing versions only makes sense within one process.
-- **Tool calls per flow node** overlays a heatmap on the process diagram, coloring each step by how many tool calls it triggers. It pinpoints where in the process your agents do the most work, so you can target the hottest steps for review, such as a tool an agent calls far more often than expected. Because it draws on one specific diagram, this tile is only available in the process view.
+- **Failure rate by process version** breaks the failure percentage down by process definition version. It answers whether a specific version is more or less reliable, so you can confirm whether a new release improved or regressed things and decide whether to roll it back or promote it.
+- **Tool calls per flow node** overlays a heatmap on the process diagram, coloring each step by how many tool calls it triggers. It pinpoints where in the process your agents do the most work, so you can target the hottest steps for review, such as a tool an agent calls far more often than expected.
 
 ### Duration
 
@@ -112,7 +114,7 @@ A few page conventions do some of the interpretation for you, so you don't have 
 
 ## Typical workflows
 
-With these tiles in mind, a few common tasks map neatly onto the page:
+With these metrics in mind, a few common tasks map neatly onto the page:
 
 - **Watch adoption:** keep the overview on **Last 30 days** and track **Total executions**.
 - **Control cost:** check **Average tokens per execution**, **Median tokens per execution**, and **Token trend**. If they're rising, open **Top token consumers by process**, select the top process, and investigate it in the process view.
