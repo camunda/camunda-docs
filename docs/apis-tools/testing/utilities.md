@@ -215,21 +215,27 @@ When to use it:
 ```java
 @Test
 void shouldMockChildProcess() {
-    // given: mock child process with the process ID "payment-process"
+    // given: mock child process with the process ID "lunar-lander"
     // 1) Complete the child process without variables
-    processTestContext.mockChildProcess("payment-process");
+    processTestContext.mockChildProcess("lunar-lander");
 
     // 2) Complete the child process with variables
-    final Map<String, Object> variables = Map.of(
-        "paymentStatus", "completed",
-        "transactionId", "TXN-12345"
-    );
-    processTestContext.mockChildProcess("payment-process", variables);
+    final Map<String, Object> variables = Map.of("landingStatus", "nominal");
+    processTestContext.mockChildProcess("lunar-lander", variables);
+
+    // 3) Complete the child process with a version tag
+    // Use when the call activity has bindingType="versionTag"
+    processTestContext.mockChildProcess()
+        .withProcessId("lunar-lander")
+        .withVersionTag("1.7.1")
+        .thenComplete(Map.of("landingStatus", "nominal"));
 
     // when: create a process instance
     // then: verify that the process instance completed the call activity
 }
 ```
+
+Use the builder API to specify a version tag. This is required when the call activity uses `bindingType="versionTag"` to resolve the child process by a specific version.
 
 ### Child process with dynamic variables
 
@@ -243,6 +249,19 @@ void shouldMockChildProcess() {
     processTestContext.mockChildProcess(
         "AstronautTrainingProcess",
         parentVariables -> {
+            final String astronautName = (String) parentVariables.get("astronautName");
+            final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
+
+            return Map.of(
+                "trainingCompleted", true,
+                "grade", grade);
+        });
+
+    // Use the builder API to specify a version tag with a dynamic handler
+    processTestContext.mockChildProcess()
+        .withProcessId("AstronautTrainingProcess")
+        .withVersionTag("1.7.1")
+        .thenComplete(parentVariables -> {
             final String astronautName = (String) parentVariables.get("astronautName");
             final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
 

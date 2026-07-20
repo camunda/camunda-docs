@@ -1611,6 +1611,13 @@ An instruction to mock a child process. See the [utilities documentation](utilit
     <td>No</td>
     <td></td>
   </tr>
+  <tr>
+    <td>versionTag</td>
+    <td>The version tag for the deployed stub process. Required when the call activity uses <code>bindingType="versionTag"</code>.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
 </tbody></table>
 
 Example:
