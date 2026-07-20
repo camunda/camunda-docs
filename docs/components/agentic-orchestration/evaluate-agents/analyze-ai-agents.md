@@ -14,8 +14,6 @@ import Dashboard from '../img/dashboard-optimize.png';
 
 Analyze and improve the performance of your AI agent executions using Optimize.
 
-The [Agentic Control Plane](/components/optimize/userguide/agentic-control-plane.md) already gives you token usage, tool calls, duration, and incident metrics for every AI-agent-powered process, with no setup required. Use this guide instead when you need something it doesn't cover, such as a per-tool breakdown, a custom target threshold, or a report grouped by your own process variables.
-
 ## About
 
 In this guide, you will:
@@ -25,6 +23,10 @@ In this guide, you will:
 - Build a dashboard to track AI agent behavior over time.
 
 After completing this guide, you will be able to analyze AI agent executions in Optimize and build dashboards that track usage and performance trends.
+
+:::important Agentic control plane in Optimize
+The [agentic control plane](/components/optimize/userguide/agentic-control-plane.md) already provides standard metrics for AI-agent-powered processes without additional setup. Use this guide to learn how to create custom metrics, thresholds, breakdowns, or reports grouped by process variables.
+:::
 
 ## Prerequisites
 

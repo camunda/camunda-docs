@@ -12,7 +12,7 @@ With the **agentic control plane** in Optimize, you can monitor [AI agents](/ref
 
 This is primarily intended for operators, process owners, and engineering leads who manage AI-agent-powered processes and need to keep them reliable and cost-effective.
 
-If you need metrics or breakdowns beyond what this page offers, you can also [build your own AI agent reports and dashboards](/components/agentic-orchestration/evaluate-agents/analyze-ai-agents.md) in Optimize.
+If you need customized metrics beyond those available in this feature, you can also [build your own AI agent reports and dashboards](/components/agentic-orchestration/evaluate-agents/analyze-ai-agents.md) in Optimize.
 
 ## Open the agentic control plane
 
@@ -34,7 +34,7 @@ The **Agentic Control Plane** page has two views, controlled by the **Process** 
 To switch views, choose a process in the filter, or clear it to return to the overview.
 
 :::note
-A process instance counts as agentic and is included in the metrics if it contains at least one execution of a native [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), for example through the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+A process instance counts as agentic and is included in the metrics if it contains at least one execution of a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), for example through the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
 Processes that call only [external agents](/reference/glossary.md#external-agent) aren't tracked because the Camunda engine has no visibility into their execution.
 :::
@@ -71,7 +71,10 @@ Use these filters to narrow the metrics down to the time window, process, or ver
 
 The available metrics are grouped into four themes: key numbers, token usage, reliability and tool calls, and duration. Each one is described below, along with what it tells you and how to act on it.
 
-The metrics only reflect completed process instances that used at least one AI agent; processes that didn't use an agent, and instances still in progress, are excluded until they finish. If a metric looks empty, there's usually no agentic data yet for the selected process or period.
+:::info Metric data scope
+The metrics only reflect completed process instances that used at least one [Camunda AI agent](/reference/glossary.md#camunda-ai-agent).
+If a metric looks empty, there's usually no agentic data yet for the selected process or period.
+:::
 
 ### Key numbers
 
