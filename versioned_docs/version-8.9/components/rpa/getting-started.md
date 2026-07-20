@@ -20,11 +20,11 @@ The RPA worker is available on all major platforms (Windows, Linux, and macOS). 
 ## Create your first script
 
 Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts.
-You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](../../modeler/desktop-modeler/), or use the [Web Modeler](../../modeler/web-modeler/) if you already have a Camunda instance available. 
+You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](../../modeler/desktop-modeler/), or use the [Web Modeler](../../modeler/web-modeler/) if you already have a Camunda instance available.
 
 ### Using Desktop Modeler
 
-1. **Download Camunda Modeler**: [Download the latest version of Camunda Modeler](https://camunda.com/download/modeler/). 
+1. **Download Camunda Modeler**: [Download the latest version of Camunda Modeler](https://camunda.com/download/modeler/).
 2. **Open the RPA script editor**: Open Desktop Modeler and navigate to the RPA script editor under **Testing**.
    <img src={RpaEditorInitial} alt="RPA editor interface showing the initial script view in Desktop Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
@@ -49,10 +49,10 @@ Once you have written your script, you can test it on a local RPA worker.
 
 ### Using Web Modeler
 
-1. In a Project or Process Application use the **Create new** menu and select **RPA script**.
+1. In a project or process application, use the **Create new** menu and select **RPA script**.
 2. **Write your RPA script using Robot Framework**: Use the editor to create your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
    <img src={RpaEditorWebInitial} alt="RPA editor interface showing the initial script view in Web Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
-3. In a BPMN diagram you will now find your new RPA script in the **Append element** menu.
+3. In a BPMN diagram, you'll now find your new RPA script in the **Append element** menu.
 
 #### Test your script
 
@@ -61,11 +61,11 @@ Once you have written your script, you can test it on a local RPA worker.
 1. **Start the RPA worker**:
    1. Download the latest version of the [RPA worker](https://github.com/camunda/rpa-worker/releases).
    2. Unpack the `rpa-worker_*.zip` file. The zip archive contains the worker executable and an example configuration file.
-   3. Configure the RPA Worker to connect to your Camunda instance
+   3. Configure the RPA worker to connect to your Camunda instance.
    4. Start the worker by running the executable.
 
 2. **Test the script**:
-   1. Select the **Test** tab in the Details pane. Add any variables required by the process in JSON format. Once you start the execution, the Results will show results and output variables.
+   1. Select the **Test** tab in the **Details** pane. Add any variables required by the process in JSON format. Once you start the execution, the **Results** section shows the execution output and variables.
    2. Review the execution log and the variables created during the script execution within Modeler.
 
       <img src={RpaEditorWebResults} alt="RPA testing panel in Web Modeler showing execution results" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
@@ -91,10 +91,10 @@ Once you are happy with your script and have tested it locally, you can start au
       <img src={RpaTaskConfig} alt="Configuring an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
 3. **Deploy and run the process**:
-   1. Deploy the BPMN model with the configured RPA task by clicking on the rocket (🚀) icon in Desktop Modeler, or use the **Deploy** in Web Modeler.
+   1. Deploy the BPMN model with the configured RPA task by clicking on the rocket (🚀) icon in Desktop Modeler, or use the **Deploy** button in Web Modeler.
    2. Start an instance of your process.
 
-Once your RPA script and model are deployed, you can also use the **Play** functionality in the Web Modeler. 
+Once your RPA script and model are deployed, you can also use the **Play** functionality in the Web Modeler.
 
 ### Connect worker to Zeebe
 
