@@ -336,6 +336,12 @@ A new migration tooling set is available to move existing Self-Managed deploymen
 
 Camunda 8.9 adds IDP document classification templates and lets you choose a text extraction engine per template. This gives teams more control over how different document types are categorized and processed, whether they need lightweight parsing, OCR, or multimodal LLM interpretation.
 
+### Azure Blob Storage support for document handling
+
+Camunda 8.9 adds Azure Blob Storage as a supported document store for Self-Managed environments, alongside the existing Google Cloud Platform (GCP) and AWS S3 options. Configure it via Camunda 8 Run, Docker Compose, or Helm.
+
+<p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md#supported-storage-options)</p>
+
 ## Integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
