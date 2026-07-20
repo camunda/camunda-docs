@@ -212,16 +212,18 @@ When to use it:
 - Simulate different outcomes of a child process
 - Mock a non-existing child process
 
+You can optionally add a version tag. This is required when the call activity uses `bindingType="versionTag"` to resolve the child process by a specific version.
+
 ```java
 @Test
 void shouldMockChildProcess() {
     // given: mock child process with the process ID "lunar-lander"
     // 1) Complete the child process without variables
-    processTestContext.mockChildProcess("lunar-lander");
+    processTestContext.mockChildProcess().withProcessId("lunar-lander").thenComplete();
 
     // 2) Complete the child process with variables
     final Map<String, Object> variables = Map.of("landingStatus", "nominal");
-    processTestContext.mockChildProcess("lunar-lander", variables);
+    processTestContext.mockChildProcess().withProcessId("lunar-lander").thenComplete(variables);
 
     // 3) Complete the child process with a version tag
     // Use when the call activity has bindingType="versionTag"
@@ -235,8 +237,6 @@ void shouldMockChildProcess() {
 }
 ```
 
-Use the builder API to specify a version tag. This is required when the call activity uses `bindingType="versionTag"` to resolve the child process by a specific version.
-
 ### Child process with dynamic variables
 
 You can mock a child process with dynamic behavior whose output variables are derived from the parent process instance.
@@ -246,29 +246,12 @@ The handler receives the parent variables and returns the child process variable
 @Test
 void shouldMockChildProcess() {
     // given: mock dynamic child process with the process ID "AstronautTrainingProcess"
-    processTestContext.mockChildProcess(
-        "AstronautTrainingProcess",
-        parentVariables -> {
-            final String astronautName = (String) parentVariables.get("astronautName");
-            final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
-
-            return Map.of(
-                "trainingCompleted", true,
-                "grade", grade);
-        });
-
-    // Use the builder API to specify a version tag with a dynamic handler
-    processTestContext.mockChildProcess()
-        .withProcessId("AstronautTrainingProcess")
-        .withVersionTag("1.7.1")
-        .thenComplete(parentVariables -> {
-            final String astronautName = (String) parentVariables.get("astronautName");
-            final String grade = "Zee".equals(astronautName) ? "excellent" : "good";
-
-            return Map.of(
-                "trainingCompleted", true,
-                "grade", grade);
-        });
+    processTestContext
+      .mockChildProcess()
+      .withProcessId("AstronautTrainingProcess")
+      .thenComplete(parentVariables -> {
+        // ...
+      });
 
     // when: create a process instance
     // then: verify that the process instance completed the call activity
