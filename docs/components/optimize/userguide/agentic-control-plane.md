@@ -12,9 +12,7 @@ With the **agentic control plane** in Optimize, you can monitor [AI agents](/ref
 
 This is primarily intended for operators, process owners, and engineering leads who manage AI-agent-powered processes and need to keep them reliable and cost-effective.
 
-:::important
-The numbers shown are based only on completed process instances that used at least one AI agent. Processes that did not use an AI agent are excluded.
-:::
+If you need metrics or breakdowns beyond what this page offers, you can also [build your own AI agent reports and dashboards](/components/agentic-orchestration/evaluate-agents/analyze-ai-agents.md) in Optimize.
 
 ## Open the agentic control plane
 
@@ -73,9 +71,11 @@ Use these filters to narrow the metrics down to the time window, process, or ver
 
 The available metrics are grouped into four themes: key numbers, token usage, reliability and tool calls, and duration. Each one is described below, along with what it tells you and how to act on it.
 
+The metrics only reflect completed process instances that used at least one AI agent; processes that didn't use an agent, and instances still in progress, are excluded until they finish. If a metric looks empty, there's usually no agentic data yet for the selected process or period.
+
 ### Key numbers
 
-The top row gives you an at-a-glance health check, and each number carries a change badge comparing the current period to the previous one. The color reflects whether that direction is good or bad for the specific metric, not just whether it moved up or down: a rising incident rate is red, but a rising execution count is green.
+The top row gives you an at-a-glance health check, and each number carries a change badge comparing the current period to the previous one.
 
 - **Total executions** counts the completed agentic executions in the period. It's your adoption and volume signal: a steady climb means agents are being used more, while an unexpected drop can mean a process has stalled. It also sets the scale for reading every other metric.
 - **Average execution duration** shows the average end-to-end time of an agentic execution. If it trends upward, the experience is getting slower, and it's worth digging into the duration metrics or a specific process to find out why.
@@ -112,9 +112,3 @@ With these metrics in mind, a few common tasks map neatly onto the page:
 - **Control cost:** check **Average tokens per execution**, **Median tokens per execution**, and **Token trend**. If they're rising, open **Top token consumers by process**, select the top process, and investigate it in the process view.
 - **Investigate reliability:** when **Incident rate** climbs, switch to the affected process and use **Failure rate by process version** to see whether a release caused it.
 - **Find slow or busy steps:** in the process view, use **Duration per flow node** to pinpoint bottlenecks and **Tool calls per flow node** to see where agents do the most work.
-
-## Good to know
-
-Keep a few things in mind as you read the page. It counts only **completed** executions, so very recent in-progress runs won't appear until they finish. If a tile looks empty, there's usually no agentic data yet for the selected process or period. And the tiles only available in the process view (the heatmaps and failure by version) appear only after you select a single process.
-
-If you need metrics or breakdowns beyond what this page offers, you can also [build your own AI agent reports and dashboards](/components/agentic-orchestration/evaluate-agents/analyze-ai-agents.md) in Optimize.
