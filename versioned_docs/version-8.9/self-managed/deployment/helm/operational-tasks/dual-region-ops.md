@@ -1564,7 +1564,7 @@ desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none',
     <TabItem value="redistribute-to-even" label="Add the uneven brokers" default>
 
          ```bash
-         curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+         curl -XPATCH 'http://localhost:9600/actuator/cluster' \
            -H 'Content-Type: application/json' \
            -d '{
              "brokers": {
@@ -1580,7 +1580,7 @@ desired={<img src={Fourteen} alt="Desired state diagram" style={{border: 'none',
          <TabItem value="redistribute-to-odd" label="Add the even brokers">
 
          ```bash
-         curl -XPATCH 'http://localhost:9600/actuator/cluster?force=true' \
+         curl -XPATCH 'http://localhost:9600/actuator/cluster' \
            -H 'Content-Type: application/json' \
            -d '{
              "brokers": {
