@@ -287,23 +287,6 @@ dotnet run
 
 The workers start, connect to the engine, and request work. You will see the workers processing the jobs for the process instance.
 
-<Tabs groupId="language" defaultValue="javaspring" values={
-[
-{ label: 'Java + Spring', value: 'javaspring', },
-{ label: 'Node.js', value: 'nodejs', },
-] }>
-<TabItem value="javaspring">
-
-    ![Worker output](./img/get-started-example-output-java.png)
-
-   </TabItem>
-   <TabItem value="nodejs">
-
-    ![Worker output](./img/getting-started-example-output.png)
-
-   </TabItem>
-</Tabs>
-
 ## Complete!
 
 Navigate back to Operate and verify that your active process instance in Operate has transitioned to completed.

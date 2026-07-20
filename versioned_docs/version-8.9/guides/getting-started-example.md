@@ -61,7 +61,6 @@ You will:
   </TabItem>
   <TabItem value="nodejs">
 <ul>
-    <li>[JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Node.js](https://nodejs.org/en) 20+</li>
     <li>NPM 11+</li>
 </ul>
@@ -287,23 +286,6 @@ dotnet run
    </Tabs>
 
 The workers start, connect to the engine, and request work. You will see the workers processing the jobs for the process instance.
-
-<Tabs groupId="language" defaultValue="javaspring" values={
-[
-{ label: 'Java + Spring', value: 'javaspring', },
-{ label: 'Node.js', value: 'nodejs', },
-] }>
-<TabItem value="javaspring">
-
-    ![Worker output](./img/get-started-example-output-java.png)
-
-   </TabItem>
-   <TabItem value="nodejs">
-
-    ![Worker output](./img/getting-started-example-output.png)
-
-   </TabItem>
-</Tabs>
 
 ## Complete!
 
