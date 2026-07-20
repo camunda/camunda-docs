@@ -104,7 +104,7 @@ Tokens are the units of AI model usage, so this group is effectively about cost.
 - **Execution duration stability (P50 / P95)** plots both the median and 95th-percentile duration over time on a single chart. It shows whether performance is steady or drifting, helping you catch gradual degradation, or a widening gap between typical and worst-case runs, before users start to complain.
 - **Duration per flow node** overlays a heatmap on the process diagram, coloring each step by its average duration. It shows which steps consume the most time so you can focus performance work on the true bottlenecks. Like the other heatmap, it's only available in the process view.
 
-## Read the signals, not just the numbers
+## Interpret badges, rankings, and footnotes
 
 A few page conventions do some of the interpretation for you, so you don't have to build your own judgment from scratch every time:
 
