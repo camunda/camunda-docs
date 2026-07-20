@@ -196,7 +196,7 @@ components:
         - projectKey
       example:
         name: "processes"
-        projectKey: "prj-def-456"
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
       properties:
         name:
           description: The name of the folder.
@@ -219,7 +219,7 @@ components:
       additionalProperties: false
       example:
         name: "archived-processes"
-        parentFolderKey: "fld-parent-999"
+        parentFolderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee"
       properties:
         name:
           description: The updated name of the folder.
@@ -243,10 +243,10 @@ components:
     FolderResult:
       type: object
       example:
-        folderKey: "fld-012-ghi"
+        folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
         name: "processes"
-        projectKey: "prj-def-456"
-        parentFolderKey: "fld-parent-001"
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+        parentFolderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee"
         created: "2025-03-15T10:30:00.000Z"
         createdBy:
           name: "Jane Doe"
@@ -303,10 +303,10 @@ components:
       description: A folder with its metadata and content (child folders and files).
       example:
         folder:
-          folderKey: "fld-012-ghi"
+          folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
           name: "processes"
-          projectKey: "prj-def-456"
-          parentFolderKey: "fld-parent-001"
+          projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+          parentFolderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee"
           created: "2025-03-15T10:30:00.000Z"
           createdBy:
             name: "Jane Doe"
@@ -317,10 +317,10 @@ components:
             email: "jane.doe@example.com"
         content:
           folders:
-            - folderKey: "fld-child-001"
+            - folderKey: "eee21adc-05ff-4e2f-b0b4-08864dceae21"
               name: "sub-processes"
-              projectKey: "prj-def-456"
-              parentFolderKey: "fld-012-ghi"
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+              parentFolderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
               created: "2025-04-01T08:00:00.000Z"
               createdBy:
                 name: "Jane Doe"
@@ -330,12 +330,12 @@ components:
                 name: "Jane Doe"
                 email: "jane.doe@example.com"
           files:
-            - fileKey: "file-789-xyz"
-              name: "order-process.bpmn"
-              projectKey: "prj-def-456"
-              folderKey: "fld-012-ghi"
-              simplePath: "/processes/order-process.bpmn"
-              canonicalPath: "/fld-012-ghi/file-789-xyz"
+            - fileKey: "c53a4d9d-b997-4633-a681-d28149e9dae1"
+              name: "order-process"
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+              folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
+              simplePath: "orders/processes/order-process.bpmn"
+              canonicalPath: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee/bccb5014-10a7-48df-bb56-81cb286594cc"
               revision: 3
               type: "bpmn"
               content: "<?xml version='1.0' encoding='UTF-8'?>..."
