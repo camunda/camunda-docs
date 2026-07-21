@@ -51,10 +51,17 @@ export const apiCards = [
     type: "REST",
   },
   {
-    link: "../web-modeler-api/overview/",
-    title: "Web Modeler API",
+    link: "../hub-api-saas/overview/",
+    title: "Camunda Hub API (SaaS)",
     image: IconModelerImg,
-    description: "Integrate with Web Modeler for modeling automation.",
+    description: "Manage Camunda Hub resources in SaaS.",
+    type: "REST",
+  },
+  {
+    link: "../hub-api-sm/overview/",
+    title: "Camunda Hub API (Self-Managed)",
+    image: IconModelerImg,
+    description: "Manage Camunda Hub resources in Self-Managed.",
     type: "REST",
   },
   {
