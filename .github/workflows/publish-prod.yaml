@@ -27,7 +27,7 @@ jobs:
     container: node:24
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
       - name: Install Dependencies
