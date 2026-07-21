@@ -14,10 +14,6 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
-:::
-
 ## About
 
 `c8ctl` is a minimal-dependency CLI for Camunda 8. It is built on top of the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) TypeScript SDK and provides two equivalent bin aliases: `c8ctl` and `c8`.

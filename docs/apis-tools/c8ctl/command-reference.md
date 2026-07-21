@@ -9,10 +9,6 @@ description: "Complete reference of all c8ctl CLI commands, flags, resources, an
      This page is the source of truth in c8ctl and is synced to camunda-docs automatically.
      Run: node --experimental-strip-types scripts/sync-readme-commands.ts --docs -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. Commands and flags may change without notice between releases. See [Getting started](getting-started.md) for details.
-:::
-
 ## Global Flags
 
 These flags are accepted by every command.
