@@ -24,6 +24,8 @@ If you need customized metrics beyond those available in this feature, you can a
 Optimize is disabled by default on new trial clusters. If the **Agentic Control Plane** tab doesn't appear in the navigation, an admin needs to enable Optimize first using the **Enable Optimize** prompt on the cluster overview. Upgrading from a trial to a paid plan enables Optimize automatically.
 :::
 
+![Agentic control plane overview page in Optimize](../assets/agentic-control-plane-overview.png)
+
 ## Overview and process views
 
 The **Agentic Control Plane** page has two views, controlled by the **Process** filter at the top:
