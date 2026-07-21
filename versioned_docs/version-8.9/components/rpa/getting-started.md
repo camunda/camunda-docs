@@ -21,7 +21,7 @@ The RPA worker is available on all major platforms (Windows, Linux, and macOS). 
 
 Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts.
 
-You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](../../modeler/desktop-modeler/), or use the [Web Modeler](../../modeler/web-modeler/) if you already have a Camunda instance available.
+You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](../modeler/desktop-modeler/index.md), or use the [Web Modeler](../modeler/web-modeler/index.md) if you already have a Camunda instance available.
 
 ### Using Desktop Modeler
 
@@ -84,11 +84,13 @@ Once you are happy with your script and have tested it locally, you can start au
    4. For Desktop Modeler, note the ID of your RPA script. You will need this in the next step.
 
 2. **Add RPA to your process**:
-   1. In Camunda Modeler, create a new BPMN file or open an existing one.
-   2. For Web Modeler, you can add your script by name as above. For Desktop Modeler add a new task and change the type to an RPA connector.
+   1. Open an existing BPMN file or create a new one.
+   2. Add the RPA script to your process:
+      - **Web Modeler**: Search for the RPA script by name directly in the **Append element** menu — no script ID required.
+      - **Desktop Modeler**: Add a new task and change the type to an RPA connector.
       <img src={RpaTaskAppend} alt="Appending an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
-   3. Configure the task with the script ID from the previous step. Add any input mappings required for your script to work.
+   3. **Desktop Modeler only**: Configure the task with the script ID from the previous step. Add any input mappings required for your script to work.
       <img src={RpaTaskConfig} alt="Configuring an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
 3. **Deploy and run the process**:
