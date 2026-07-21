@@ -55,7 +55,7 @@ You will:
 <TabItem value="javaspring">
 
 <ul>
-    <li>[JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/)</li>
+    <li>[JDK 21-26](https://www.oracle.com/de/java/technologies/downloads/)</li>
     <li>[Maven 3](https://maven.apache.org/index.html)</li>
     </ul>
   </TabItem>
