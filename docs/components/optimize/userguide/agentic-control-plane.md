@@ -4,6 +4,8 @@ title: Agentic control plane
 description: "Monitor AI agent adoption, token costs, reliability, and performance across your processes with the agentic control plane in Optimize."
 ---
 
+import overviewImg from '../assets/agentic-control-plane-overview.png';
+
 Monitor AI agent adoption, token costs, reliability, and performance across your processes with the agentic control plane in Optimize.
 
 ## About
@@ -24,7 +26,7 @@ If you need customized metrics beyond those available in this feature, you can a
 Optimize is disabled by default on new trial clusters. If the **Agentic Control Plane** tab doesn't appear in the navigation, an admin needs to enable Optimize first using the **Enable Optimize** prompt on the cluster overview. Upgrading from a trial to a paid plan enables Optimize automatically.
 :::
 
-![Agentic control plane overview page in Optimize](../assets/agentic-control-plane-overview.png)
+<img src={overviewImg} alt="Agentic control plane overview"/>
 
 ## Overview and process views
 
