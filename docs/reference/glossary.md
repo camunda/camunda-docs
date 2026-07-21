@@ -71,7 +71,7 @@ An agent definition is a structural descriptor (type, name, process definition k
 
 ### Agent instance
 
-A specific runtime execution of an [agent definition](#agent-definition), created when a process instance first activates the agent element. An agent instance is identified by an agent instance key and keeps its state, including the conversation and tool calls, in an agent context.
+A specific runtime execution of an [agent definition](#agent-definition), created for an active agent element. Native agents get their instance automatically from the AI Agent connector; external agents create theirs directly through the Agent Instance API. An agent instance is identified by an agent instance key and keeps its state, including the conversation and tool calls, in an agent context.
 
 An agent instance can be reused across several element instances within the same process instance, which is what allows an agent to continue a multi-turn conversation when the process returns to the agent element.
 
