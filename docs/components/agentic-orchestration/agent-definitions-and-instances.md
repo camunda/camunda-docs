@@ -60,9 +60,11 @@ Duplicating the same element template directly across several process definition
 
 ## Agent instances
 
-An agent instance is a specific runtime execution of an agent, identified by an agent instance key.
+An agent instance is a specific runtime execution of an agent definition, created when an agent element is activated. It is identified by an agent instance key and stores its state, including the conversation, tool calls, and reasoning, in an agent context.
 
-For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent) — both the AI agent sub-process and AI Agent Task types — the AI Agent connector automatically creates the agent instance through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) as the first step in handling the job for an active agent element. For [external agents](/reference/glossary.md#external-agent), the external runtime creates the instance itself by calling the same API, which can happen at any point while the element is active.
+You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
+
+For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI agent sub-process and AI Agent Task types, the AI Agent connector automatically creates the agent instance through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) as the first step in handling the job for an active agent element. For [external agents](/reference/glossary.md#external-agent), the external runtime creates the instance itself by calling the same API, which can happen at any point while the element is active.
 
 ### Agent context and memory
 
