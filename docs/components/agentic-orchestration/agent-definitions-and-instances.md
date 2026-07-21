@@ -38,16 +38,19 @@ An agent definition identifies an agent across process versions through a stable
 An agent definition contains the following data:
 
 - **Agent definition key**: Stable identifier for the agent across process definition versions.
-- **Agent type**: One of ad-hoc sub-process, AI Agent Task, or external agent.
+- [**Agent type**](/components/agentic-orchestration/ai-agents.md#agent-types): One of ad-hoc sub-process, AI Agent Task, or external agent.
 - **Name**: Human-readable name of the agent element.
 - **Process definition key**: The process definition the agent belongs to.
 - **Tenant**: The tenant the agent definition belongs to.
 
 The system prompt and model are [FEEL expressions](/components/modeler/feel/what-is-feel.md) evaluated when an instance is created. They are not stored in the agent definition, because they can resolve to different values for each instance.
 
-### Agent types
+### Mark an element as an agent
 
-An element must be marked in the BPMN model with the `zeebe:agentDefinition` extension element to be recognized as an agent. See [agent types](/components/agentic-orchestration/ai-agents.md#agent-types) for the three agent types Camunda supports and how each one adds this marker.
+To ensure an element is recognized as an agent, you **must mark it** in the BPMN model with the `zeebe:agentDefinition` extension element. How you do this depends on your agent type:
+
+1. **Native agents**: Camunda's own AI Agent connector templates add this marker for you.
+2. **External agents**: You must add the marker explicitly so that Camunda registers it as an agent.
 
 ### Reuse an agent across processes
 

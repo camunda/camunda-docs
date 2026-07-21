@@ -15,31 +15,16 @@ An AI agent is an addressable execution of an LLM-driven loop with shared memory
 
 AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 
+### Agent types
+
 Camunda supports two types of agents:
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are usually implemented using the [AI Agent connector](#the-ai-agent-connector).
 - **[External agents](/reference/glossary.md#external-agent)** run their loop in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
 
 :::note
 Camunda represents every agent with an [agent definition and agent instances](/components/agentic-orchestration/agent-definitions-and-instances.md).
 :::
-
-### Agent types
-
-Camunda creates an agent definition for each of the following agent types:
-
-| Agent type           | How it is defined                                                                                                                          |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| AI agent sub-process | An [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) using the AI Agent connector. |
-| AI Agent Task        | An [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) service task using the AI Agent connector.      |
-| External agent       | An [external agent](/reference/glossary.md#external-agent) that runs its loop in an external runtime, such as LangGraph or CrewAI.         |
-
-For an element to be recognized as an agent, it **must be marked** in the BPMN model with the `zeebe:agentDefinition` extension element. This works differently depending on your agent type:
-
-1. **Native agents**: Camunda's own AI Agent connector templates add this marker for you.
-2. **External agents**: You must add the marker explicitly so that Camunda registers it as an agent.
-
-The rest of this page describes how to build a Camunda AI agent using the AI Agent connector.
 
 ## The AI Agent connector
 
