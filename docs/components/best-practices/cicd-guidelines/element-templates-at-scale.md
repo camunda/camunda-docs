@@ -1,13 +1,15 @@
 ---
 id: element-templates-at-scale
 title: "Element templates at scale"
-description: "Learn how to provision element templates at runtime and make them available at design time across your Web Modeler organization and Desktop Modeler."
+description: "Learn how to provision element templates at runtime and make them available at design time across your Camunda Hub organization and Desktop Modeler."
 ---
 
 To effectively manage large libraries of reusable building blocks ([element templates](/components/concepts/element-templates.md)), you can create a pipeline that:
 
 - Provisions the [dependencies of element templates](/components/modeler/element-templates/element-template-with-dependencies.md) to required clusters.
 - Makes templates available at design time to multiple [workspaces](/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration.md) within an organization.
+
+<!--- source: https://www.figma.com/design/VyyoV0hNbazXV8DKcMMEU9/Camunda-Documentation-Assets?node-id=2078-301&t=YNT70ktAMXBBupbJ-1 --->
 
 ![Pipeline goal](./img/pipeline-goal.png)
 
@@ -17,12 +19,12 @@ This guide covers conceptually what your pipeline needs to do, from obtaining cr
 
 Before building your pipeline, ensure you have the following:
 
-| Prerequisite                                                                                                                    | Purpose                                                                                                                                                                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Git Repository](https://en.wikipedia.org/wiki/Git)                                                                             | Store all element templates                                                                                                                                                                                                                                     |
-| Template state management                                                                                                       | Maintain an authoritative inventory (for example, via Git or an IaC tool like Terraform) that defines which templates are applied to each cluster and which workspaces depend on them. This source acts as the single source of truth for template deployments. |
-| [Web Modeler API token](/apis-tools/web-modeler-api/authentication.md)                                                          | Access Web Modeler programmatically                                                                                                                                                                                                                             |
-| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) | Provision dependencies to clusters                                                                                                                                                                                                                              |
+| Prerequisite                                                                                                                           | Purpose                                                                                                                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Git Repository](https://en.wikipedia.org/wiki/Git)                                                                                    | Store all element templates                                                                                                                                                                                                                                     |
+| Template state management                                                                                                              | Maintain an authoritative inventory (for example, via Git or an IaC tool like Terraform) that defines which templates are applied to each cluster and which workspaces depend on them. This source acts as the single source of truth for template deployments. |
+| Camunda Hub API token ([SaaS](/apis-tools/hub-api-saas/authentication.md) or [Self-Managed](/apis-tools/hub-api-sm/authentication.md)) | Access Camunda Hub programmatically                                                                                                                                                                                                                             |
+| [Orchestration Cluster API client](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md)        | Provision dependencies to clusters                                                                                                                                                                                                                              |
 
 For simplicity, this guide assumes:
 
@@ -62,11 +64,7 @@ The following dependency types are provisioned at runtime using the [Orchestrati
 | [BPMN processes](/components/modeler/bpmn/bpmn.md)                    | Used in call activities     |
 | [DMN decisions](/components/modeler/dmn/dmn.md)                       | Used in business rule tasks |
 
-:::note
-RPA scripts are not supported in Web Modeler
-:::
-
-To deploy dependencies, send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the files. This works for SaaS, self-managed, and local development.
+To deploy dependencies, send a [POST request](/apis-tools/orchestration-cluster-api-rest/specifications/create-deployment.api.mdx) with the files. This works for SaaS, Self-Managed, and local development.
 
 For example:
 
@@ -98,38 +96,60 @@ You will get a response containing the details of the deployed elements:
 
 When referencing a dependency such as a form, Camunda recommends using a `versionTag` as your [binding type](/components/best-practices/modeling/choosing-the-resource-binding-type.md#supported-binding-types). This option ensures the right version of the target resource is always used.
 
-## Making templates available in Web Modeler
+## Make templates available in Camunda Hub
 
-The pipeline can make templates available in Web Modeler using the [Web Modeler API](/apis-tools/web-modeler-api/index.md):
+Make templates available in Camunda Hub with the Camunda Hub API ([SaaS](/apis-tools/hub-api-saas/overview.md) or [Self-Managed](/apis-tools/hub-api-sm/overview.md)).
 
-1. **Get project metadata**: Retrieve the project ID to know which content is available. This allows the pipeline to translate repository changes into CRUD operations.
+### Get the workspace key
 
-```json title="POST /api/v1/projects/search"
+Search for your workspace to get the `workspaceKey`:
+
+```bash
+POST /api/v2/workspaces/search
 {
-  "filter": {
-    "name": "(PROJECT NAME)"
-  },
-  "page": 0,
-  "size": 50
+    "filter": {
+        "name": "(WORKSPACE NAME)"
+    }
 }
 ```
 
-Pagination is enforced for all `search` endpoints. Ensure you retrieve all relevant pages. Alternatively, a separate system of record can maintain project IDs.
+You'll use the `workspaceKey` to filter projects to the target workspace.
 
-2. **Get file metadata**: With the project ID, retrieve a list of files and metadata to check which repository files need to be created or updated.
+### Get projects
 
-```json
-{
-  "filter": {
-    "projectId": "(PROJECT ID)"
-  },
-  "page": 0,
-  "size": 50
-}
+With the `workspaceKey`, retrieve the projects that belong to the workspace:
+
+```bash
+GET /api/v2/workspaces/(WORKSPACE KEY)
 ```
 
-3. **Create or update files**: For each repository file, execute the appropriate request based on whether it needs to be [created](https://modeler.camunda.io/swagger-ui/index.html#/Files/createFile) or [updated](https://modeler.camunda.io/swagger-ui/index.html#/Files/patchFile).
-4. **Publish versions**: For each file, determine if a new version is needed and publish it to the project using the [Versions](https://modeler.camunda.io/swagger-ui/index.html#/Versions) resource. This makes the templates available to BPMN diagrams inside the project.
+Under `content`, get the `projectKey` for the project you want to update.
+
+### Get file metadata
+
+With the `projectKey`, retrieve a list of files and metadata:
+
+```bash
+GET /api/v2/projects/(PROJECT KEY)
+```
+
+Using `content`, compare the files in Camunda Hub to the files in your repository.
+
+### Create or update files
+
+For each file in your repository that doesn't match the content in Camunda Hub, [create](/apis-tools/hub-api-saas/specifications/create-file.api.mdx) or [update](/apis-tools/hub-api-saas/specifications/update-file.api.mdx) the appropriate file resource.
+
+### Create new file versions
+
+If desired, [create a new file version](https://modeler.camunda.io/swagger-ui/index.html#/Versions) for each of the affected files:
+
+```bash
+POST /api/v2/versions
+{
+  "fileKey": "(FILE KEY)",
+  "name": "(VERSION NAME)"
+}
+```
 
 ## Making templates available in Desktop Modeler
 
@@ -144,4 +164,4 @@ If you are the template creator/maintainer, include a `README` file in your repo
 
 ## Next steps
 
-Refer to [Integrate Web Modeler in CI/CD](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md) for additional CI/CD-related guidance.
+Refer to [integrate Camunda Hub in CI/CD](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md) for additional CI/CD-related guidance.
