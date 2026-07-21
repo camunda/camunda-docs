@@ -875,8 +875,11 @@ function BuildWithCamunda() {
                 <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
               </svg>
               <span>
-                By downloading our self-managed packages, you agree to our
-                Privacy Policy and{" "}
+                By downloading our self-managed packages, you agree to our{" "}
+                <Link to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
                 <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
                   Terms of Use
                 </Link>
