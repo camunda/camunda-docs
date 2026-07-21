@@ -21,7 +21,7 @@ The RPA worker is available on all major platforms (Windows, Linux, and macOS). 
 
 Get started with RPA by creating your first RPA script. [Camunda Modeler](/components/modeler/about-modeler.md) offers an interface for editing and testing your scripts.
 
-You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](../modeler/desktop-modeler/index.md), or use the [Web Modeler](../../components/modeler/web-modeler/index.md) if you already have a Camunda instance available.
+You can get started developing and testing your scripts locally without a Camunda connection using [Desktop Modeler](../modeler/desktop-modeler/index.md), or use the [Web Modeler](../modeler/web-modeler/index.md) if you already have a Camunda instance available.
 
 ### Using Desktop Modeler
 
