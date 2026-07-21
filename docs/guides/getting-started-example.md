@@ -302,13 +302,13 @@ You have completed your first process instance by:
 
 ## Next steps
 
-For further information about the Node.js SDK, refer to [the Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/).
+To learn more about our SDKs, visit their respective documentation pages:
 
-For further information about the Python SDK, refer to [the Python SDK documentation](/apis-tools/python-sdk.md).
-
-For further information about the C# SDK, refer to [the C# SDK documentation](/apis-tools/csharp-sdk.md).
-
-Find more examples on the [Developer Portal](https://camunda.com/developers/).
+- Java SDK - [Camunda Java client documentation](/apis-tools/java-client/getting-started.md)
+- Spring Boot starter - [Camunda Spring Boot Starter documentation](/apis-tools/camunda-spring-boot-starter/getting-started.md)
+- Node.js SDK - [Camunda 8 JavaScript SDK API documentation](https://camunda.github.io/camunda-8-js-sdk/)
+- Python SDK - [Python SDK documentation](/apis-tools/python-sdk.md)
+- C# SDK - [C# SDK documentation](/apis-tools/csharp-sdk.md)
 
 ## Teardown
 
