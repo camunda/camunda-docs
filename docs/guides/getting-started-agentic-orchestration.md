@@ -24,7 +24,7 @@ In this guide, you will build a Camunda [AI agent](/components/agentic-orchestra
 
 In this guide, you will:
 
-- Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/index.md).
+- Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
 - Integrate a [Large Language Model (LLM)](/reference/glossary.md#large-language-model-llm) into your AI agent.
@@ -43,7 +43,7 @@ To build your first AI agent, see the prerequisites below depending on:
 To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using either:
 
 - [Camunda 8 SaaS](/components/saas/saas.md). For example, [sign up for a free SaaS trial account](https://accounts.cloud.camunda.io/signup).
-- [Camunda 8 Self-Managed](/self-managed/index.md). For example, follow [Run your first local project](../getting-started-example).
+- [Camunda 8 Self-Managed](/self-managed/about-self-managed.md). For example, follow [Run your first local project](../getting-started-example).
 
 ### Supported models
 

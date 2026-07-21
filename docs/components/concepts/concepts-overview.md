@@ -38,7 +38,7 @@ Camunda 8 supports multiple secondary storage backends, depending on the deploym
 
 For deployment and configuration guidance, see the Self-Managed documentation:
 
-- [About Self-Managed](/self-managed/index.md)
+- [About Self-Managed](/self-managed/about-self-managed.md)
 - [Helm quick install](/self-managed/deployment/helm/install/quick-install.md)
 
 :::
@@ -46,7 +46,7 @@ For deployment and configuration guidance, see the Self-Managed documentation:
 :::info
 
 - Want to migrate your Camunda 7 process solutions to run on Camunda 8? See our [Camunda 7 migration guide](/guides/migrating-from-camunda-7/index.md).
-- Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/index.md).
+- Deployment guides for Camunda 8 components are available in the [Self-Managed section](/self-managed/about-self-managed.md).
 
 :::
 

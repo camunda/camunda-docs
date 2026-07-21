@@ -13,7 +13,7 @@ This documentation is a work in progress and may contain incomplete, placeholder
 :::
 
 :::tip
-Use [Camunda 8 Self-Managed](/self-managed/index.md) if you want to deploy and manage Camunda on your own infrastructure, with responsibility for updates, security, and scaling.
+Use [Camunda 8 Self-Managed](/self-managed/about-self-managed.md) if you want to deploy and manage Camunda on your own infrastructure, with responsibility for updates, security, and scaling.
 :::
 
 ## Sign up

@@ -25,7 +25,7 @@ This guide covers steps one and two of this workflow.
 
 You need these prerequisites before following the steps in this guide:
 
-- A Camunda 8 [SaaS](https://signup.camunda.com/) or [Self-Managed](/self-managed/index.md) account with an active organization.
+- A Camunda 8 [SaaS](https://signup.camunda.com/) or [Self-Managed](/self-managed/about-self-managed.md) account with an active organization.
 - A Git repository where you'll store your element templates.
 - CI/CD infrastructure for that repository.
 

@@ -1662,7 +1662,11 @@ module.exports = {
     "reference/legal",
   ],
   "Self-Managed": [
-    { type: "doc", id: "self-managed/index", label: "Introduction" },
+    {
+      type: "doc",
+      id: "self-managed/about-self-managed",
+      label: "Introduction",
+    },
     {
       type: "category",
       label: "Quickstart",
