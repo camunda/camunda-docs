@@ -15,7 +15,7 @@ This policy applies to:
 It covers relational databases used for:
 
 - [Secondary storage for the Orchestration Cluster](/self-managed/concepts/secondary-storage/index.md)
-- [Web Modeler](/self-managed/components/hub/configuration/database.md)
+- [Hub](/self-managed/components/hub/configuration/database.md)
 
 :::info
 Camunda follows an **"all LTS versions"** rule for database support. All listed database versions are official **LTS releases still supported by the vendor**. Camunda tests against both the **oldest** and **newest** supported version of each database in CI.
@@ -153,15 +153,15 @@ For deployment instructions, see [loading JDBC drivers into pods](/self-managed/
 
 This table shows RDBMS support status by component (including RDBMS as secondary storage where applicable):
 
-| Component                 | Support status     | Notes                                                                                             |
-| :------------------------ | :----------------- | :------------------------------------------------------------------------------------------------ |
-| **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                              |
-| Tasklist UI               | ✅ Fully supported | All functionality available.                                                                      |
-| Operate UI                | ✅ Fully supported | All functionality available.                                                                      |
-| Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                                   |
-| Web Modeler               | ✅ Fully supported | See [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md). |
-| Identity                  | ✅ Fully supported | All functionality available.                                                                      |
-| Management API (REST API) | ✅ Fully supported | All functionality available.                                                                      |
+| Component                 | Support status     | Notes                                                                                     |
+|:--------------------------| :----------------- |:------------------------------------------------------------------------------------------|
+| **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                      |
+| Tasklist UI               | ✅ Fully supported | All functionality available.                                                              |
+| Operate UI                | ✅ Fully supported | All functionality available.                                                              |
+| Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                           |
+| Hub                       | ✅ Fully supported | See [Hub database configuration](/self-managed/components/hub/configuration/database.md). |
+| Identity                  | ✅ Fully supported | All functionality available.                                                              |
+| Management API (REST API) | ✅ Fully supported | All functionality available.                                                              |
 
 :::note
 "Orchestration Cluster" refers to the secondary storage of the Orchestration Cluster. UI products are listed separately because their support status can differ by component.
