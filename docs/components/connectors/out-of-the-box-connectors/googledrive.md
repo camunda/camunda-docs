@@ -61,7 +61,7 @@ To upload a file, take the following steps:
 :::note
 Use **inline content** to build a file directly from process variables without first storing it in the Camunda document store. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
 
-To upload a **Camunda document**, it must exist first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example. The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Document** field.
+To upload a **Camunda document**, it must exist first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example. The result of the endpoint must then be assigned to a variable in **Start Process instance** so you can use the variable in the **Document** field.
 :::
 
 ### Download file

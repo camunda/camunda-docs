@@ -111,7 +111,7 @@ Ensure the model is available in your region, that your model can invoke the `Co
 - `Documents` is a list of documents to include as part of your **new message**.
   - Each document uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
   - See [Amazon Bedrock supported document formats](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html) for currently supported file formats.
-  - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process Instance** so you can reference it in the **Documents** field.
+  - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process instance** so you can reference it in the **Documents** field.
 - `Message History` is the history of the conversation that should always be passed. If not set, this will be a new conversation.
 
 1. Use **Result Variable** to store the response in a process variable. For example, `myResultVariable`.

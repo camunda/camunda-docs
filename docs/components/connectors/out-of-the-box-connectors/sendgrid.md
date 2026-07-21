@@ -40,7 +40,7 @@ To make the **SendGrid Email connector** executable, you need to fill out all th
 8. Provide a text (or HTML) **Body** for your email.
 9. **Attachments** is a list of documents to include as part of your **new email**.
    - Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
-   - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process Instance** so you can reference it in the **Attachments** field.
+   - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process instance** so you can reference it in the **Attachments** field.
 
 :::note
 Starting from version 8.7.0, the SendGrid connector provides attachment support. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
@@ -107,7 +107,7 @@ To make the **SendGrid Email Template connector** executable, fill out all the m
 8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
 9. **Attachments** is a list of documents to include as part of your **new email**.
    - Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
-   - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process Instance** so you can reference it in the **Attachments** field.
+   - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process instance** so you can reference it in the **Attachments** field.
 
 ```text
 = {

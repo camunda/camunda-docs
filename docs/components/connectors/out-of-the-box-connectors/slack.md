@@ -106,7 +106,7 @@ To post a message, take the following steps:
 :::note
 Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
 
-To use a **Camunda document**, upload it first — using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process Instance** so you can reference it in the **Attachments** field.
+To use a **Camunda document**, upload it first — using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process instance** so you can reference it in the **Attachments** field.
 :::
 
 :::note
