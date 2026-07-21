@@ -115,7 +115,7 @@ The agent state tells you whether an agent is actively working or stuck. Camunda
 
 The conversation history captures the full reasoning chain of an agent execution, grouped by loop. A loop is one pass of the agent's feedback cycle: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop.
 
-Grouping the history by loop makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a loop by its iteration, for example "on loop iteration 5 the agent called this tool."
+Grouping the history by loop makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a loop by its iteration, for example "on loop iteration five the agent called this tool."
 
 #### Visibility for external agents
 
