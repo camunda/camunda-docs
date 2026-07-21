@@ -100,12 +100,13 @@ To post a message, take the following steps:
 4. Select a **Message type**.
    1. When **Plain text** is selected, set **Message** to the message string you would like to send (for example, `Hello World!`).
    2. When **Message block** is selected, set **Message block** to a formatted rich text block format. Learn more about rich text message block format in the [official Slack documentation](https://api.slack.com/reference/surfaces/formatting#stack_of_blocks).
-5. (Optional) **Attachments** are an array of variables to which **Camunda documents** are assigned. To work with attachments
+5. (Optional) **Attachments** are the documents to include with the message. To work with attachments
    you must add `files:read` and `files:write` permissions for your **Bot Token Scopes** in your Slack app.
 
 :::note
-To work with documents you must upload them first, using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
-The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the variable in the **Attachments** field.
+Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
+
+To use a **Camunda document**, upload it first — using the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process Instance** so you can reference it in the **Attachments** field.
 :::
 
 :::note

@@ -38,9 +38,9 @@ To make the **SendGrid Email connector** executable, you need to fill out all th
 6. Set **Email Content Subject**.
 7. Leave **Content Type** to **text/plain** (or alternatively to **text/html** if you intend to provide an HTML body to your email).
 8. Provide a text (or HTML) **Body** for your email.
-9. **Attachments** is a list of camunda documents to include as part of your **new email**.
-   - To work with documents you must upload them first, [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
-   - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Attachments** field.
+9. **Attachments** is a list of documents to include as part of your **new email**.
+   - Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
+   - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process Instance** so you can reference it in the **Attachments** field.
 
 :::note
 Starting from version 8.7.0, the SendGrid connector provides attachment support. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
@@ -105,9 +105,9 @@ To make the **SendGrid Email Template connector** executable, fill out all the m
 6. Log in to your SendGrid account and navigate to [the Dynamic Template you created](#configure-a-dynamic-template).
 7. Copy the ID of the template and paste it in the **Template ID field**.
 8. Provide the test data in the **Template Data** field as a [FEEL context expression](/components/modeler/feel/language-guide/feel-context-expressions.md):
-9. **Attachments** is a list of camunda documents to include as part of your **new email**.
-   - To work with documents you must upload them first, [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example.
-   - The result of the endpoint must then be assigned to a variable in **Start Process Instance** so you can use the list of these variables in the **Attachments** field.
+9. **Attachments** is a list of documents to include as part of your **new email**.
+   - Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
+   - To use a **Camunda document**, upload it first — [using the Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) for example — and assign the result to a variable in **Start Process Instance** so you can reference it in the **Attachments** field.
 
 ```text
 = {
