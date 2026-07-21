@@ -910,6 +910,46 @@ function Downloads() {
             </p>
           )}
 
+          <p
+            className={clsx(
+              bwcStyles.cliInfoNote,
+              bwcStyles.cliInfoNoteCentered
+            )}
+            style={{ marginTop: "-1rem", marginBottom: "2rem" }}
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="8"
+                cy="8"
+                r="7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                fill="none"
+              />
+              <path
+                d="M8 7v4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+            </svg>
+            <span>
+              By downloading our self-managed packages, you agree to our Privacy
+              Policy and{" "}
+              <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
+                Terms of Use
+              </Link>
+              .
+            </span>
+          </p>
+
           <div
             className={clsx(bwcStyles.downloadsGrid, styles.downloadsGridTwo)}
           >
