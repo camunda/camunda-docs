@@ -15,7 +15,7 @@ This policy applies to:
 It covers relational databases used for:
 
 - [Secondary storage for the Orchestration Cluster](/self-managed/concepts/secondary-storage/index.md)
-- [Hub](/self-managed/components/hub/configuration/database.md)
+- [Camunda Hub](/self-managed/components/hub/configuration/database.md)
 
 :::info
 Camunda follows an **"all LTS versions"** rule for database support. All listed database versions are official **LTS releases still supported by the vendor**. Camunda tests against both the **oldest** and **newest** supported version of each database in CI.
@@ -154,12 +154,12 @@ For deployment instructions, see [loading JDBC drivers into pods](/self-managed/
 This table shows RDBMS support status by component (including RDBMS as secondary storage where applicable):
 
 | Component                 | Support status     | Notes                                                                                     |
-|:--------------------------| :----------------- |:------------------------------------------------------------------------------------------|
-| **Orchestration Cluster** | ✅ Fully supported | Supports RDBMS as secondary storage.                                                      |
+| :------------------------ | :----------------- | :---------------------------------------------------------------------------------------- |
+| Orchestration Cluster     | ✅ Fully supported | Supports RDBMS as secondary storage.                                                      |
 | Tasklist UI               | ✅ Fully supported | All functionality available.                                                              |
 | Operate UI                | ✅ Fully supported | All functionality available.                                                              |
 | Optimize                  | ❌ Not supported   | Out of scope for RDBMS support.                                                           |
-| Hub                       | ✅ Fully supported | See [Hub database configuration](/self-managed/components/hub/configuration/database.md). |
+| Camunda Hub               | ✅ Fully supported | See [Hub database configuration](/self-managed/components/hub/configuration/database.md). |
 | Identity                  | ✅ Fully supported | All functionality available.                                                              |
 | Management API (REST API) | ✅ Fully supported | All functionality available.                                                              |
 
