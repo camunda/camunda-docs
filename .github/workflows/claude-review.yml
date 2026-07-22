@@ -22,31 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Determine requested action
-        id: intent
-        env:
-          COMMENT_BODY: ${{ github.event.comment.body }}
-        run: |
-          # If the comment is just the "@claude" mention (optionally with a plain
-          # "review this"-style ask), keep the existing fixed review behavior.
-          # Anything else after the mention is treated as a custom request.
-          request=$(printf '%s' "$COMMENT_BODY" | sed -E 's/@claude//gI' | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')
-          normalized=$(printf '%s' "$request" | tr '[:upper:]' '[:lower:]' | sed -E 's/[.!]+$//')
-
-          case "$normalized" in
-            "" | "review" | "review this" | "review this pr" | "please review" | "please review this")
-              echo "custom=false" >> "$GITHUB_OUTPUT"
-              ;;
-            *)
-              echo "custom=true" >> "$GITHUB_OUTPUT"
-              {
-                echo "request<<CLAUDE_REQUEST_EOF"
-                echo "$request"
-                echo "CLAUDE_REQUEST_EOF"
-              } >> "$GITHUB_OUTPUT"
-              ;;
-          esac
-
       - name: Import secrets from Vault
         id: secrets
         uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
@@ -58,16 +33,16 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/claude-reviewer ANTHROPIC_API_KEY;
 
-      - name: Review PR
-        if: steps.intent.outputs.custom != 'true'
-        uses: anthropics/claude-code-action@v1
+      - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ steps.secrets.outputs.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: |
-            Review this pull request against the Camunda docs contribution standards referenced from AGENTS.md.
+            A commenter left this message on this pull request:
 
-            Post inline review comments on the specific lines where issues are found. For each issue, include a concrete fix using GitHub's suggestion block format so the author can apply it directly:
+            "${{ github.event.comment.body }}"
+
+            If the message is just the "@claude" mention on its own, or a generic ask like "review this" or "please review", perform a full review of this pull request against the Camunda docs contribution standards referenced from AGENTS.md. Post inline review comments on the specific lines where issues are found. For each issue, include a concrete fix using GitHub's suggestion block format so the author can apply it directly:
 
             ```suggestion
             <replacement text here>
@@ -75,18 +50,7 @@ jobs:
 
             Use suggestion blocks whenever a fix can be expressed as a direct text replacement on the commented line(s).
 
-      - name: Act on requested change
-        if: steps.intent.outputs.custom == 'true'
-        uses: anthropics/claude-code-action@v1
-        with:
-          anthropic_api_key: ${{ steps.secrets.outputs.ANTHROPIC_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          prompt: |
-            A commenter on this pull request asked:
-
-            "${{ steps.intent.outputs.request }}"
-
-            Address this request directly instead of doing a general review. Depending on what is being asked, this may mean:
+            Otherwise, address the specific request directly instead of doing a general review. Depending on what is being asked, this may mean:
             - Answering a question about the code or documentation in a reply comment.
             - Making the requested changes and pushing them as a new commit to this PR's branch.
             - Opening a new pull request if the request is out of scope for this PR.
