@@ -77,17 +77,7 @@ Refer to the example array below:
 
 ## Upload a document when using any connector
 
-Documents available for download from an unprotected URL can be added to a process in any connector by specifying them. For example:
-
-```json
-{
-  "camunda.document.type": "external",
-  "url": "https://www.example.com/file.pdf",
-  "name": "my-test-file.pdf"
-}
-```
-
-The `name` field is optional. If not provided, the filename is taken from `content-type` and `content-dispotition` http headers, and a random UUID will be used as a fallback.
+Documents available for download from an unprotected URL can be added to a process in any connector as an **external document**. The full JSON structure and field reference — alongside the `camunda` and `inline` document types — is documented in [document sources](/components/document-handling/send-document-to-external-system.md#external-documents).
 
 ## Upload a document via inbound webhook connector
 

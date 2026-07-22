@@ -20,26 +20,43 @@ The unified document source and return format described on this page are availab
 
 ## Document sources
 
-Connectors that take a `Document` input expose a **document source** dropdown in the properties panel. Each option reveals only the relevant fields:
+Every document handed to a connector is one of three **document reference types**, distinguished by the `camunda.document.type` field. Connectors that take a `Document` input expose a **document source** dropdown in the properties panel, with one option per type. Each option reveals only the relevant fields:
 
-| Source                | Fields revealed                                   | Use when                                                                                                                |
-| --------------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| **Camunda document**  | Document reference (FEEL)                         | You already have a document in the [Camunda document store](/components/document-handling/getting-started.md) (Path 1). |
-| **Inline content**    | Content, optional filename, optional content type | You want to build the file from process data (Path 2, write side). See [inline documents](#inline-documents).           |
-| **External document** | URL, optional filename                            | The file lives at a reachable URL and should be streamed from there.                                                    |
+| Source                | Reference type | Fields revealed                                   | Use when                                                                                                      |
+| --------------------- | -------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **Camunda document**  | `camunda`      | Document reference (FEEL)                         | You already have a document in the [Camunda document store](#camunda-documents) (Path 1).                     |
+| **Inline content**    | `inline`       | Content, optional filename, optional content type | You want to build the file from process data (Path 2, write side). See [inline documents](#inline-documents). |
+| **External document** | `external`     | URL, optional filename                            | The file lives at a reachable URL. See [external documents](#external-documents).                             |
 
 ![example REST configuration](./img/rest-outbound-document.png)
 
-### List of documents
+The three subsections below define the JSON structure of each type. You can also select a type from the source dropdown without writing the JSON by hand.
 
-Connectors that accept a list of documents (for example, email, Slack, or SendGrid attachments) add a **Single/Multiple** toggle above the source dropdown:
+### Camunda documents
 
-- **Single** shows the same document source dropdown for one document.
-- **Multiple** switches to a FEEL expression field where you construct an array of document references.
+A Camunda document is a reference to a file held in the [Camunda document store](/components/document-handling/getting-started.md). This is the document store path (Path 1): the file is routed as an opaque blob.
 
-## Inline documents
+Such references are produced for you — by a [form Filepicker, inbound webhook, or the Orchestration Cluster REST API](/components/document-handling/upload-document-to-bpmn-process.md), or as the output of another connector — and stored in a process variable. A reference has the following structure:
 
-An inline document embeds content directly in a process variable, with no document store upload required. This is useful when you want to generate a document on-the-fly from process data — for example, an error report — and pass it immediately to a connector.
+```json
+{
+  "camunda.document.type": "camunda",
+  "storeId": "gcp",
+  "documentId": "example-document-id",
+  "contentHash": "fwkhkj34843rfhfwho3297ufdsj0df09",
+  "metadata": {
+    "contentType": "application/pdf",
+    "size": 70266,
+    "fileName": "file.pdf"
+  }
+}
+```
+
+You normally reference the variable directly rather than constructing this object by hand.
+
+### Inline documents
+
+An inline document embeds content directly in a process variable, with no document store upload required. This is the inline path (Path 2, write side): useful when you want to generate a document on-the-fly from process data — for example, an error report — and pass it immediately to a connector.
 
 To create an inline document, set a process variable to the following structure:
 
@@ -73,8 +90,6 @@ The `content` field is polymorphic: a string is stored as its UTF-8 bytes, while
 }
 ```
 
-### Fields
-
 | Field                   | Required | Description                                                                                                                                                                                        |
 | ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `camunda.document.type` | Yes      | Must be `"inline"`.                                                                                                                                                                                |
@@ -87,6 +102,33 @@ Inline documents are held in process variables, so their size is bounded by the 
 
 There is no base64 field for binary content. To inline binary data, encode it with FEEL's built-in [`to base64` function](/components/modeler/feel/builtin-functions/feel-built-in-functions-string.md#to-base64value).
 :::
+
+### External documents
+
+An external document points to a file available for download from an unprotected URL. Any connector can consume it directly, without first uploading it to the document store (Path 1: the file is routed, not inspected).
+
+To use an external document, set a process variable to the following structure:
+
+```json
+{
+  "camunda.document.type": "external",
+  "url": "https://www.example.com/file.pdf",
+  "name": "my-test-file.pdf"
+}
+```
+
+| Field                   | Required | Description                                                                                                                                                   |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.type` | Yes      | Must be `"external"`.                                                                                                                                         |
+| `url`                   | Yes      | The URL the file is downloaded from.                                                                                                                          |
+| `name`                  | No       | The filename. If omitted, the name is taken from the `content-type` and `content-disposition` HTTP response headers, with a random UUID used as the fallback. |
+
+### List of documents
+
+Connectors that accept a list of documents (for example, email, Slack, or SendGrid attachments) add a **Single/Multiple** toggle above the source dropdown:
+
+- **Single** shows the same document source dropdown for one document.
+- **Multiple** switches to a FEEL expression field where you construct an array of document references.
 
 ## Return formats
 
