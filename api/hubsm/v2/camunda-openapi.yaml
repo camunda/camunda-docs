@@ -65,7 +65,7 @@ servers:
         default: localhost
         description: The hostname of the Hub API server.
       port:
-        default: "8088"
+        default: "8070"
         description: The port of the Hub API server.
       schema:
         default: http
