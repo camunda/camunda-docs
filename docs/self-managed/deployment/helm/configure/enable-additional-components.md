@@ -16,15 +16,20 @@ Starting with Camunda 8.8, the Helm chart reflects a new architecture where Zeeb
 
 ### Additional components (must be explicitly enabled)
 
-- Console
+- Camunda Hub (Web Modeler + Console; one consolidated component as of 8.10)
 - Management Identity
-- Web Modeler
 - Optimize
-- Elasticsearch
-- OpenSearch
-- RDBMS
-- PostgreSQL (Bitnami subchart) - only if needed for Web Modeler or Identity
-- Keycloak (Bitnami subchart) - only if using internal authentication
+- OpenSearch (when using OpenSearch as the secondary store)
+
+External infrastructure dependencies (provision and connect externally — they are no longer bundled as Helm subcharts):
+
+- PostgreSQL (required for Camunda Hub / Web Modeler and for Management Identity)
+- Keycloak (required when using internal authentication for Identity)
+- Elasticsearch (when using Elasticsearch as the secondary store)
+
+:::note 8.10 removed the bundled Bitnami subcharts
+The `identityKeycloak`, `identityPostgresql`, `webModelerPostgresql`, and `elasticsearch` Bitnami subcharts that shipped with the Camunda 8 Helm chart through 8.9 are removed in 8.10. The chart rejects these keys with a hard constraint error. Connect to externally managed services instead — see [Bundled Bitnami subcharts removed](/self-managed/upgrade/helm/890-to-8100.md#bundled-bitnami-subcharts-removed) for replacement guidance.
+:::
 
 :::note Upgrading from 8.7?
 In Camunda 8.7, more components were enabled by default. If you're upgrading from 8.7 and used any of the components listed above, you must explicitly enable them in your 8.8 `values.yaml`.
@@ -51,86 +56,59 @@ Check the [authentication and authorization](./authentication-and-authorization/
 If you enable Web Modeler, Console, or Optimize without enabling Management Identity, these components will not function properly as they require authentication. The Orchestration Cluster (Zeebe, Operate, Tasklist, and Orchestration Cluster Admin) does not depend on Management Identity.
 :::
 
-## Web Modeler
+## Web Modeler and Console (Camunda Hub)
 
-To enable Web Modeler, configure the required values in the Helm chart. For the full list of options, see the [Web Modeler Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
+:::note Camunda 8.10+
+Starting with Camunda 8.10, Web Modeler and Console ship as a single component called **Camunda Hub**. Enabling Camunda Hub turns on both the Web Modeler editor and the Console UI; Console is no longer a separate deployment. Set `camundaHub.enabled: true` to enable them together.
 
-- Set `webModeler.enabled: true` (disabled by default).
-- **Enable Management Identity** (required for authentication) - see [authentication and authorization](./authentication-and-authorization/index.md).
-- Configure your SMTP server under `webModeler.restapi.mail`. Web Modeler requires an SMTP server to send notification emails to users.
-- Configure the database connection. Web Modeler requires a PostgreSQL database for persistent storage. Other databases are not supported.
-  - **Option 1:** Set `webModelerPostgresql.enabled: true` to install a new PostgreSQL instance using the [Bitnami PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/main/bitnami/postgresql).
-  - **Option 2:** Set `webModelerPostgresql.enabled: false` and connect to an external PostgreSQL instance.
+The legacy 8.9 keys `webModeler.enabled: true` and `console.enabled: true` still work as a backward-compatibility shim — each toggles the corresponding feature inside the Camunda Hub component — but they emit deprecation warnings during `helm upgrade`. See the [8.9 to 8.10 upgrade guide](/self-managed/upgrade/helm/890-to-8100.md#camunda-hub-consolidation) for the migration path.
+:::
+
+To enable Camunda Hub:
+
+- Set `camundaHub.enabled: true` (disabled by default).
+- **Enable Management Identity** (required for authentication) — see [authentication and authorization](./authentication-and-authorization/index.md).
+- Configure your SMTP server under `camundaHub.webModeler.restapi.mail`. Web Modeler requires an SMTP server to send notification emails.
+- Configure an external PostgreSQL connection under `camundaHub.webModeler.restapi.externalDatabase`. The bundled `webModelerPostgresql` Bitnami subchart is no longer available — provision PostgreSQL externally (managed RDS, CloudSQL, Azure Database, or self-hosted via the [CloudNativePG operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md)).
 
 We recommend specifying values in a YAML file and passing it to the `helm install` command.
 
 Minimal configuration file:
 
 ```yaml
-webModeler:
+camundaHub:
   enabled: true
-  restapi:
-    mail:
-      # Email address to be displayed as sender of emails from Web Modeler.
-      fromAddress: no-reply@example.com
-      smtpHost: smtp.example.com
-      smtpPort: 587
-      smtpUser: user
-      smtpPassword: secret
-      # Also, the key "webModeler.restapi.mail.smtpPassword" could be used,
-      # but it's not secure to save sensitive data in the values file.
-      secret:
-        existingSecret: "camunda-credentials-webmodeler"
-        existingSecretKey: "webmodeler-smtp-user-password"
-
-webModelerPostgresql:
-  enabled: true
+  webModeler:
+    restapi:
+      mail:
+        # Email address to be displayed as sender of emails from Web Modeler.
+        fromAddress: no-reply@example.com
+        smtpHost: smtp.example.com
+        smtpPort: 587
+        smtpUser: user
+        # Prefer existingSecret over inline smtpPassword in values.yaml.
+        secret:
+          existingSecret: "camunda-credentials-webmodeler"
+          existingSecretKey: "webmodeler-smtp-user-password"
+      externalDatabase:
+        url: jdbc:postgresql://postgres.example.com:5432/modeler-db
+        username: modeler-user
+        # Prefer existingSecret over inline password in values.yaml.
+        secret:
+          existingSecret: "camunda-credentials-webmodeler"
+          existingSecretKey: "webmodeler-postgresql-user-password"
 ```
 
-To connect Web Modeler to an external database, set `webModelerPostgresql.enabled: false` and provide values under `webModeler.restapi.externalDatabase`:
+For the full list of options, see the [Camunda Hub Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#camundahub-parameters).
 
-```yaml
-webModeler:
-  restapi:
-    externalDatabase:
-      url: jdbc:postgresql://postgres.example.com:5432/modeler-db
-      user: modeler-user
-      # Also, the key "webModeler.restapi.externalDatabase.password" could be used,
-      # but it's not secure to save sensitive data in the values file.
-      secret:
-        existingSecret: "camunda-credentials-webmodeler"
-        existingSecretKey: "webmodeler-postgresql-user-password"
+:::note Ingress access for Console
+The Console UI is served by the Camunda Hub component under the Web Modeler ingress route. When using `kubectl port-forward` with [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), you must also port-forward the Keycloak service so the OIDC redirect works:
 
-webModelerPostgresql:
-  # Disables the PostgreSQL chart dependency.
-  enabled: false
-```
-
-For more details, see the [Web Modeler Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
-
-## Console
-
-Console Self-Managed is disabled by default in the Camunda 8 Helm chart. To enable it:
-
-- Set `console.enabled: true` in the values file.
-- **Enable Management Identity** (required for authentication) - see [authentication and authorization](./authentication-and-authorization/index.md).
-
-```yaml
-console:
-  enabled: true
-```
-
-For a full list of options, see the [Console Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#console-parameters).
-
-:::note
-Console requires the Identity component for authentication. The Camunda Helm chart installs Identity by default. If you log in to Console using port-forward and use [Keycloak deployed via the Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md), you must also port-forward the Keycloak service:
-
-```
+```bash
 kubectl port-forward svc/keycloak-service 18080:18080
 ```
 
 Alternatively, configure Identity with Ingress. See the [Ingress setup guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md).
-
 :::
 
 ## Optimize
