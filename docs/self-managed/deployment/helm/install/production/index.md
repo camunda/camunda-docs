@@ -52,7 +52,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 ![Architecture Diagram](./img/architecture.jpg)
 
-For more information refer to the Camunda 8 [Kubernetes reference architectures](/docs/self-managed/reference-architecture/kubernetes/#kubernetes).
+For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
 ## Installation and configuration
 
@@ -463,7 +463,9 @@ The following resources and configuration options are important to keep in mind 
   :::
 
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
+
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
+
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information, see the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/).

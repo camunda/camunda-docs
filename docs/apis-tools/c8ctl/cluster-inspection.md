@@ -9,10 +9,6 @@ description: "Use c8ctl to list, search, and manage process instances, user task
      is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
      overwritten. Edit the source in the c8ctl repo instead. -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
-:::
-
 `c8ctl` follows a `<verb> <resource>` command structure. Most resources have short aliases to reduce typing:
 
 | Resource                | Alias         |

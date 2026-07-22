@@ -59,7 +59,7 @@ Camunda 8 supports the following binding types:
           <li><p>It is ideal for self-contained projects without external or shared dependencies.</p></li>
           <li>
             <p>
-              To use the <code>deployment</code> binding option, create and deploy a <a href="../../../hub/workspace/manage-projects/#deploy-and-run-a-project">process application in Web Modeler</a>,
+              To use the <code>deployment</code> binding option, create and deploy a <a href="../../../hub/workspace/manage-projects/#deploy-and-run-a-project">project in Camunda Hub</a>,
               or deploy multiple resources together via the <a href="../../../../apis-tools/zeebe-api/gateway-service/#deployresource-rpc"> Zeebe API</a>.
             </p>
           </li>
