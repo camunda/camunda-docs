@@ -22,11 +22,11 @@ The unified document source and return format described on this page are availab
 
 Every document handed to a connector is one of three **document reference types**, distinguished by the `camunda.document.type` field. Connectors that take a `Document` input expose a **document source** dropdown in the properties panel, with one option per type. Each option reveals only the relevant fields:
 
-| Source                | Reference type | Fields revealed                                   | Use when                                                                                                      |
-| --------------------- | -------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **Camunda document**  | `camunda`      | Document reference (FEEL)                         | You already have a document in the [Camunda document store](#camunda-documents) (Path 1).                     |
-| **Inline content**    | `inline`       | Content, optional filename, optional content type | You want to build the file from process data (Path 2, write side). See [inline documents](#inline-documents). |
-| **External document** | `external`     | URL, optional filename                            | The file lives at a reachable URL. See [external documents](#external-documents).                             |
+| Source                | Reference type | Fields revealed                                   | Use when                                                                                                                                                                     |
+| --------------------- | -------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Camunda document**  | `camunda`      | Document reference (FEEL)                         | You already have a document in the [Camunda document store](#camunda-documents) (Path 1).                                                                                    |
+| **Inline content**    | `inline`       | Content, optional filename, optional content type | You want to work with small text files (for example, `.json` or `.txt`) that are written from or read into process data (Path 2). See [inline documents](#inline-documents). |
+| **External document** | `external`     | URL, optional filename                            | The file lives at a reachable URL. See [external documents](#external-documents).                                                                                            |
 
 ![example REST configuration](./img/rest-outbound-document.png)
 
