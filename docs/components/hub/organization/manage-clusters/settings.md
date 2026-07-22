@@ -46,6 +46,41 @@ For details on creating tenants and managing assignments, see [tenant management
 Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
 :::
 
+## Data filters
+
+<!-- TODO: Confirm with Console team (camunda-cloud-management-apps#8885) which exact docs anchor the Console UI tooltip links to. Update the #data-filters anchor below if different. -->
+
+<!-- TODO: Confirm whether data filters are available on trial plans or restricted to paid plans (Q6 - tied to Optimize re-enable on trial)? -->
+
+You can configure data filters on a per-cluster basis to control which process definitions and variables the Optimize exporter processes.
+
+:::note
+This setting applies to Camunda 8 SaaS. On Self-Managed, configure export filters using [Helm values or configuration properties](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
+:::
+
+Enable the **Enable data filters** toggle to activate filtering. When enabled, the Optimize exporter only processes data matching the configured filters.
+
+Enter one pattern per line, or separate values with spaces, in any of the four fields:
+
+- **Include process definitions**: process definitions to include, matched by exact `bpmnProcessId`. Leave empty to include all process definitions.
+- **Exclude process definitions**: process definitions to exclude, matched by exact `bpmnProcessId`. Exclusion takes precedence over inclusion.
+- **Include variable names**: variable names to include, matched by prefix. For example, entering `business_` includes all variables whose names start with `business_`. Leave empty to include all variables.
+- **Exclude variable names**: variable names to exclude, matched by prefix. Exclusion takes precedence over inclusion.
+
+:::note
+<!-- TODO: Confirm  whether the business_ default applies to new SM installations or is SaaS only. Update the note below if SM is also affected. -->
+
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+:::
+
+:::warning
+Filtered records are permanently excluded from Optimize. Optimize cannot import data that was never exported, and dropped records cannot be recovered even if you change the filters later. For details, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
+:::
+
+Clicking **Save filters** restarts the cluster. Your cluster is briefly unavailable while it restarts.
+
+For sizing guidance on variable filtering and its impact on Optimize, see [impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize).
+
 ## Automatic cluster updates
 
 You can set the cluster to automatically update to newer versions of Camunda 8 when they are released.
