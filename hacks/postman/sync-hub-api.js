@@ -38,9 +38,8 @@ const API_NAME_OVERRIDE = {
   hubsaas: "Camunda Hub API (SaaS)",
 };
 
-// Configuration methods: export DRY_RUN=true or node sync-hub-api.js <target> --dry-run
-const DRY_RUN =
-  process.env.DRY_RUN === "true" || process.argv.includes("--dry-run");
+// Usage: node sync-hub-api.js <target> --dry-run
+const DRY_RUN = process.argv.includes("--dry-run");
 
 if (!fs.existsSync(HUB_API_SPEC_ENTRY)) {
   console.error(
