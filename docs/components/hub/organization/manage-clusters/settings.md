@@ -68,9 +68,7 @@ Enter one pattern per line, or separate values with spaces, in any of the four f
 - **Exclude variable names**: variable names to exclude, matched by prefix. Exclusion takes precedence over inclusion.
 
 :::note
-<!-- TODO: Confirm  whether the business_ default applies to new SM installations or is SaaS only. Update the note below if SM is also affected. -->
-
-New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs. On Self-Managed, no default filter is applied; configure filters manually using [Helm values or configuration properties](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
 :::
 
 :::warning
