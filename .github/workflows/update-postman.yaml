@@ -11,6 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
       - name: Import Secrets
         id: secrets
         uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
@@ -23,8 +26,8 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/postman API_KEY;
             secret/data/products/camunda-docs/ci/postman WORKSPACE_ID;
-      - name: Install OpenAPI spec converter
-        run: npm install -g openapi-to-postmanv2
+      - name: Install dependencies
+        run: npm ci
       - name: Sync Hub API SM
         env:
           POSTMAN_API_KEY: ${{ steps.secrets.outputs.API_KEY }}
