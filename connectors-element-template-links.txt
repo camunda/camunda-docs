@@ -64,7 +64,6 @@ https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connecto
 https://docs.camunda.io/docs/components/camunda-integrations/servicenow/connectors/outbound-connector
 https://docs.camunda.io/docs/components/concepts/messages/#message-correlation-overview
 https://docs.camunda.io/docs/components/concepts/messages/#message-subscriptions
-https://docs.camunda.io/docs/components/connectors/connectors/protocol/http-webhook/#use-the-correlation-object
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-bedrock/#authentication
@@ -78,7 +77,6 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/ama
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=inbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-sqs/?amazonsqs=outbound
-https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-textract/#execution-types
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/amazon-textract/#operations
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/asana
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/automation-anywhere
@@ -125,7 +123,6 @@ https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/kaf
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/kafka/?kafka=outbound
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound
-https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/#configuration
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-o365-mail-inbound/#configure-the-microsoft-365-outlook-connector
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/microsoft-teams
 https://docs.camunda.io/docs/components/connectors/out-of-the-box-connectors/openai
