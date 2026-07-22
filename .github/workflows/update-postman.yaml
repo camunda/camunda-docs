@@ -1,0 +1,35 @@
+name: update-postman
+
+on:
+  push:
+    branches:
+      - "postman"
+
+jobs:
+  update-postman:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/ci/postman API_KEY;
+            secret/data/products/camunda-docs/ci/postman WORKSPACE_ID;
+      - name: Sync Hub API SM
+        env:
+          POSTMAN_API_KEY: ${{ steps.secrets.outputs.API_KEY }}
+          WORKSPACE_ID: ${{ steps.secrets.outputs.WORKSPACE_ID }}
+        run: node ./hacks/postman/sync-hub-api.js hubsm
+      - name: Sync Hub API SaaS
+        env:
+          POSTMAN_API_KEY: ${{ steps.secrets.outputs.API_KEY }}
+          WORKSPACE_ID: ${{ steps.secrets.outputs.WORKSPACE_ID }}
+        run: node ./hacks/postman/sync-hub-api.js hubsaas
