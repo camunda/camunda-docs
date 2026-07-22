@@ -517,7 +517,7 @@ The following uses the [OpenSearch CAT API](https://docs.opensearch.org/docs/lat
 
 ```bash
 for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" \
-   | grep -E 'operate|tasklist|optimize|zeebe'); do
+   | grep -E 'camunda|operate|tasklist|optimize|zeebe'); do
       echo "Deleting index: $index"
       curl -X DELETE "$OPENSEARCH_ENDPOINT/$index"
 done
