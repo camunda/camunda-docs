@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -72,6 +74,8 @@ paths:
       summary: Upload multiple documents
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.7]]
 
@@ -161,6 +165,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -216,6 +222,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkRFTEVURSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -259,6 +267,8 @@ paths:
       summary: Create document link
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.7]]
 

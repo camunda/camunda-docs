@@ -12,6 +12,8 @@ paths:
       summary: Create a workspace
       description: Creates a new workspace in the caller's organization.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - workspaceKey
       tags:
         - Workspace
       requestBody:
@@ -42,6 +44,12 @@ paths:
       summary: Get a workspace
       description: Returns the workspace metadata and its contained projects.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
       tags:
         - Workspace
       parameters:
@@ -58,11 +66,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The workspace was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -71,6 +75,12 @@ paths:
       summary: Update a workspace
       description: Updates an existing workspace.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
       tags:
         - Workspace
       parameters:
@@ -95,11 +105,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The workspace was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -110,6 +116,12 @@ paths:
         Deletes the workspace with the given key. The workspace must be empty,
         meaning it contains no files, no projects, and no IDP applications.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Workspace
+        bind:
+          workspaceKey:
+            from: path
+            name: workspaceKey
       tags:
         - Workspace
       parameters:
@@ -124,11 +136,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The workspace was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -170,7 +178,7 @@ components:
       required: true
       description: The unique key identifying the workspace.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
   schemas:
     # --- Request schemas ---
@@ -180,30 +188,61 @@ components:
       additionalProperties: false
       required:
         - name
+      example:
+        name: "My Workspace"
+        description: "Processes related to payment flows"
       properties:
         name:
           description: The name of the workspace.
           type: string
           minLength: 1
           maxLength: 255
+        description:
+          description: The description of the workspace.
+          type: string
+          minLength: 1
+          maxLength: 500
 
     WorkspaceUpdateRequest:
       type: object
       additionalProperties: false
+      example:
+        name: "Renamed Workspace"
       properties:
         name:
           description: The updated name of the workspace.
           type: string
           minLength: 1
           maxLength: 255
+        description:
+          description: >-
+            The updated description of the workspace. Set to null to clear the
+            description; omit to leave it unchanged.
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 500
 
     # --- Response schemas ---
 
     WorkspaceResult:
       type: object
+      example:
+        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
+        name: "My Workspace"
+        description: "Processes related to payment flows"
+        created: "2025-01-20T09:00:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
       required:
         - workspaceKey
         - name
+        - description
         - created
         - createdBy
         - updated
@@ -211,10 +250,17 @@ components:
       properties:
         workspaceKey:
           description: The unique key identifying this workspace.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
         name:
           description: The name of the workspace.
           type: string
+        description:
+          description: The description of the workspace.
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 500
         created:
           description: The timestamp when the workspace was created.
           type: string
@@ -234,6 +280,33 @@ components:
 
     WorkspaceDetailResult:
       type: object
+      description: A workspace with its metadata and content (projects).
+      example:
+        workspace:
+          workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
+          name: "My Workspace"
+          description: "Processes related to payment flows"
+          created: "2025-01-20T09:00:00.000Z"
+          createdBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          updated: "2025-06-10T14:22:00.000Z"
+          updatedBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+        content:
+          projects:
+            - projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+              name: "Payment Flow"
+              workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
+              created: "2025-02-01T08:00:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-06-10T14:22:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
       required:
         - workspace
         - content
@@ -292,7 +365,9 @@ components:
             - created
             - updated
         order:
-          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     WorkspaceFilter:
       type: object
@@ -331,4 +406,6 @@ components:
           items:
             $ref: "#/components/schemas/WorkspaceResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

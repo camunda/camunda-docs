@@ -59,7 +59,7 @@ jobs:
           path: ts-sdk
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "24"
 
@@ -155,9 +155,9 @@ jobs:
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
         with:
-          app-id: ${{ steps.secrets.outputs.APP_ID }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
           private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
@@ -188,3 +188,16 @@ jobs:
           delete-branch: true
           base: main
           labels: deploy
+  notify-failure:
+    needs:
+      - sync-ts-sdk-docs
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    uses: ./.github/workflows/notify-failure.yml
+    with:
+      # If any dependent job fails, set the dependency_status to 'failure',
+      # otherwise set it to 'success'.
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

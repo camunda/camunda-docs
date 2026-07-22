@@ -1,0 +1,445 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Cluster resource paths and schemas
+paths:
+  /clusters:
+    get:
+      operationId: getClusterRegistrations
+      summary: Get all cluster registrations
+      description: Returns all cluster registrations.
+      x-added-in-version: "0.4.0"
+      tags:
+        - Cluster
+      responses:
+        "200":
+          description: The cluster registrations were retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterListResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+    post:
+      operationId: createClusterRegistration
+      summary: Create or update a cluster registration
+      description: >-
+        Creates or updates a cluster registration in Camunda Hub via discovery. This does not
+        provision infrastructure — it only creates or updates the cluster registration in Hub. This endpoint requires
+        dynamic cluster management to be enabled. If a cluster with the resolved ID already exists, its
+        registration will be updated.
+      x-added-in-version: "0.4.0"
+      tags:
+        - Cluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateClusterRequest"
+      responses:
+        "204":
+          description: The cluster registration was created or updated successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /clusters/usage-metrics:
+    get:
+      operationId: getClusterUsageMetrics
+      summary: Get cluster usage metrics
+      description: >-
+        Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration
+        Cluster API of the target cluster, so it must additionally include the read:* permission for the
+        orchestration-api audience.
+      x-added-in-version: "0.4.0"
+      tags:
+        - Cluster
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the cluster.
+          schema:
+            type: string
+        - name: start
+          in: query
+          required: true
+          description: The start of the time range (epoch milliseconds).
+          schema:
+            type: integer
+            format: int64
+        - name: end
+          in: query
+          required: true
+          description: The end of the time range (epoch milliseconds).
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: The usage metrics were retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsageMetricsResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /clusters/{clusterId}:
+    delete:
+      operationId: removeClusterRegistration
+      summary: Remove a cluster registration
+      description: >-
+        Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual
+        cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic
+        cluster management to be enabled.
+      x-added-in-version: "0.4.0"
+      tags:
+        - Cluster
+      parameters:
+        - $ref: "#/components/parameters/ClusterIdPathParam"
+      responses:
+        "204":
+          description: The cluster registration was removed successfully.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+components:
+  parameters:
+    ClusterIdPathParam:
+      name: clusterId
+      in: path
+      required: true
+      description: The unique ID identifying the cluster.
+      schema:
+        type: string
+
+  schemas:
+    # --- Response schemas ---
+
+    ClusterListResult:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          description: The list of clusters.
+          type: array
+          items:
+            $ref: "#/components/schemas/ClusterResult"
+
+    ClusterResult:
+      type: object
+      required:
+        - uuid
+        - name
+        - tags
+        - customProperties
+        - namespace
+        - status
+        - generation
+        - type
+        - apps
+        - discoveredClusterProperties
+        - license
+      properties:
+        uuid:
+          description: The unique identifier of the cluster.
+          type: string
+        name:
+          description: The name of the cluster.
+          type: string
+        tags:
+          description: The tags associated with the cluster.
+          type: array
+          items:
+            type: string
+        customProperties:
+          description: The custom properties of the cluster.
+          type: array
+          items:
+            $ref: "#/components/schemas/ClusterCustomProperty"
+        namespace:
+          description: The namespace of the cluster.
+          type: string
+          nullable: true
+        status:
+          description: The status of the cluster.
+          type: string
+        generation:
+          description: The version of the cluster.
+          type: string
+        type:
+          description: The type of the cluster.
+          type: string
+        apps:
+          description: The applications running in the cluster.
+          type: array
+          items:
+            $ref: "#/components/schemas/ClusterApp"
+        discoveredClusterProperties:
+          description: The discovered properties of the cluster.
+          type: object
+          additionalProperties:
+            type: string
+        license:
+          description: The license information of the cluster.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ClusterLicense"
+
+    ClusterCustomProperty:
+      type: object
+      required:
+        - description
+        - links
+      properties:
+        description:
+          description: The description of the custom property.
+          type: string
+        links:
+          description: The links associated with the custom property.
+          type: array
+          items:
+            $ref: "#/components/schemas/ClusterCustomPropertyLink"
+
+    ClusterCustomPropertyLink:
+      type: object
+      required:
+        - name
+        - url
+      properties:
+        name:
+          description: The name of the link.
+          type: string
+        url:
+          description: The URL of the link.
+          type: string
+
+    ClusterApp:
+      type: object
+      required:
+        - type
+        - id
+        - status
+        - url
+        - urls
+        - generation
+        - readiness
+      properties:
+        type:
+          description: The type of the application.
+          type: string
+        id:
+          description: The unique identifier of the application.
+          type: string
+        status:
+          description: The status of the application.
+          type: string
+        url:
+          description: The web application URL.
+          type: string
+          nullable: true
+        urls:
+          description: The additional URLs of the application.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ClusterAppUrls"
+        generation:
+          description: The version of the application.
+          type: string
+          nullable: true
+        readiness:
+          description: The readiness URL of the application.
+          type: string
+          nullable: true
+
+    ClusterAppUrls:
+      type: object
+      required:
+        - grpc
+        - http
+      properties:
+        grpc:
+          description: The gRPC URL.
+          type: string
+          nullable: true
+        http:
+          description: The HTTP/REST URL.
+          type: string
+          nullable: true
+
+    ClusterLicense:
+      type: object
+      required:
+        - validLicense
+        - licenseType
+        - isCommercial
+        - expiresAt
+      properties:
+        validLicense:
+          description: Whether the license is valid.
+          type: boolean
+        licenseType:
+          description: The type of the license.
+          type: string
+        isCommercial:
+          description: Whether the license is commercial.
+          type: boolean
+          nullable: true
+        expiresAt:
+          description: The expiry date of the license.
+          type: string
+          format: date-time
+          nullable: true
+
+    UsageMetricsResult:
+      type: object
+      required:
+        - id
+        - processInstances
+        - decisionInstances
+        - taskUsers
+        - activeTenants
+      properties:
+        id:
+          description: The cluster ID.
+          type: string
+        processInstances:
+          description: Process instance metrics.
+          allOf:
+            - $ref: "#/components/schemas/MetricTotal"
+        decisionInstances:
+          description: Decision instance metrics.
+          allOf:
+            - $ref: "#/components/schemas/MetricTotal"
+        taskUsers:
+          description: Task user metrics.
+          allOf:
+            - $ref: "#/components/schemas/TaskUsersMetric"
+        activeTenants:
+          description: Active tenant metrics.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/MetricTotal"
+
+    MetricTotal:
+      type: object
+      required:
+        - total
+      properties:
+        total:
+          description: The total count.
+          type: integer
+          format: int64
+
+    TaskUsersMetric:
+      type: object
+      required:
+        - total
+        - assignees
+      properties:
+        total:
+          description: The total count.
+          type: integer
+          format: int64
+        assignees:
+          description: The list of assignee identifiers.
+          type: array
+          items:
+            type: string
+
+    # --- Request schemas ---
+
+    CreateClusterRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - clusterName
+        - version
+        - license
+      properties:
+        clusterId:
+          description: The unique identifier of the cluster. If omitted, resolved from X-Forwarded-For or remote address.
+          type: string
+          nullable: true
+          minLength: 1
+          maxLength: 255
+        clusterName:
+          description: The name of the cluster.
+          type: string
+          minLength: 1
+          maxLength: 255
+        version:
+          description: The version of the cluster.
+          type: string
+          minLength: 1
+          maxLength: 255
+        license:
+          description: The license information of the cluster.
+          allOf:
+            - $ref: "#/components/schemas/CreateClusterLicense"
+        profiles:
+          description: The active component profiles of the cluster (e.g. broker, gateway, operate, tasklist).
+          type: array
+          nullable: true
+          items:
+            type: string
+            minLength: 1
+            maxLength: 255
+        properties:
+          description: The discovered properties of the cluster.
+          type: object
+          nullable: true
+          additionalProperties:
+            type: string
+
+    CreateClusterLicense:
+      type: object
+      additionalProperties: false
+      required:
+        - validLicense
+        - licenseType
+      properties:
+        validLicense:
+          description: Whether the license is valid.
+          type: boolean
+        licenseType:
+          description: The type of the license.
+          type: string
+          minLength: 1
+          maxLength: 255
+        isCommercial:
+          description: Whether the license is commercial.
+          type: boolean
+          nullable: true
+        expiresAt:
+          description: The expiry date of the license.
+          type: string
+          format: date-time
+          nullable: true

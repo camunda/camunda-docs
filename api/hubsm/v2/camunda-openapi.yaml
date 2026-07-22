@@ -6,12 +6,57 @@
 
 openapi: 3.0.3
 info:
-  title: Hub Public API V2
-  description: API for communicating with Camunda Hub.
-  version: 0.1.0
+  title: Hub API
+  description: |
+    The Hub API lets you manage workspaces, projects, files, folders,
+    versions, and members in Camunda Hub programmatically.
+
+    ## Authentication
+
+    All endpoints require a valid JWT bearer token. Obtain a token from your
+    identity provider:
+
+    - **SaaS** — create API client credentials in the Camunda Console and
+      exchange them for a token via the OAuth 2.0 client-credentials flow.
+    - **Self-Managed** — authenticate against your configured OIDC provider
+      (Keycloak, Entra ID, or another OpenID Connect-compatible IdP).
+
+    Include the token in every request:
+    ```
+    Authorization: Bearer <your-token>
+    ```
+
+    ## Errors
+
+    Error responses use the RFC 9457 Problem Detail format with
+    `Content-Type: application/problem+json`. See the `ProblemDetail` schema
+    for the standard fields.
+
+    ## Pagination
+
+    Search endpoints accept a `page` object with `from` (offset) and `limit`
+    to control result windowing. Responses include a `page` object with
+    `totalItems`.
+
+    ## Rate limits
+
+    The Hub API does not currently enforce per-client rate limits. Clients
+    should implement reasonable back-off and retry strategies to handle
+    transient errors (HTTP 429 or 503).
+
+    ## V1 deprecation
+
+    The V1 API (`/api/v1/`) is deprecated as of 8.10 and will be removed in
+    8.12. Migrate to V2 at your earliest convenience — see the
+    [migration guide](https://docs.camunda.io/docs/next/apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api/)
+    for details.
+  version: 2.0.0
   contact:
     name: Camunda
-    url: https://camunda.com
+    url: https://docs.camunda.io
+  license:
+    name: Camunda License 1.0
+    url: https://legal.camunda.com/licensing-and-other-legal-terms#702a69c4-3932-47b3-ac74-3b557feeda58
 
 servers:
   - url: "{schema}://{host}:{port}/api/v2"
@@ -32,6 +77,8 @@ security:
 tags:
   - name: Catalog
     description: Catalog asset management operations.
+  - name: Cluster
+    description: Cluster registration operations.
   - name: File
     description: File management operations.
   - name: Folder
@@ -44,10 +91,16 @@ tags:
     description: Version management operations.
   - name: Workspace
     description: Workspace management operations.
-  - name: Collaborator
-    description: Collaborator management operations.
+  - name: Member
+    description: Member management operations.
 
 paths:
+  /clusters:
+    $ref: "clusters.yaml#/paths/~1clusters"
+  /clusters/usage-metrics:
+    $ref: "clusters.yaml#/paths/~1clusters~1usage-metrics"
+  /clusters/{clusterId}:
+    $ref: "clusters.yaml#/paths/~1clusters~1{clusterId}"
   /catalog/assets/ingestion:
     $ref: "catalog.yaml#/paths/~1catalog~1assets~1ingestion"
   /catalog/assets/{assetKey}:
@@ -56,18 +109,30 @@ paths:
     $ref: "files.yaml#/paths/~1files"
   /files/{fileKey}:
     $ref: "files.yaml#/paths/~1files~1{fileKey}"
+  /files/{fileKey}/permanent:
+    $ref: "files.yaml#/paths/~1files~1{fileKey}~1permanent"
   /files/search:
     $ref: "files.yaml#/paths/~1files~1search"
+  /files/recently-deleted/search:
+    $ref: "files.yaml#/paths/~1files~1recently-deleted~1search"
+  /files/{fileKey}/restoration:
+    $ref: "files.yaml#/paths/~1files~1{fileKey}~1restoration"
+  /files/{fileKey}/purge:
+    $ref: "files.yaml#/paths/~1files~1{fileKey}~1purge"
   /folders:
     $ref: "folders.yaml#/paths/~1folders"
   /folders/{folderKey}:
     $ref: "folders.yaml#/paths/~1folders~1{folderKey}"
+  /folders/{folderKey}/permanent:
+    $ref: "folders.yaml#/paths/~1folders~1{folderKey}~1permanent"
   /info:
     $ref: "info.yaml#/paths/~1info"
   /projects:
     $ref: "projects.yaml#/paths/~1projects"
   /projects/{projectKey}:
     $ref: "projects.yaml#/paths/~1projects~1{projectKey}"
+  /projects/{projectKey}/permanent:
+    $ref: "projects.yaml#/paths/~1projects~1{projectKey}~1permanent"
   /projects/search:
     $ref: "projects.yaml#/paths/~1projects~1search"
   /versions:
@@ -84,12 +149,12 @@ paths:
     $ref: "workspaces.yaml#/paths/~1workspaces~1{workspaceKey}"
   /workspaces/search:
     $ref: "workspaces.yaml#/paths/~1workspaces~1search"
-  /workspaces/{workspaceKey}/collaborators:
-    $ref: "collaborators.yaml#/paths/~1workspaces~1{workspaceKey}~1collaborators"
-  /workspaces/{workspaceKey}/collaborators/{email}:
-    $ref: "collaborators.yaml#/paths/~1workspaces~1{workspaceKey}~1collaborators~1{email}"
-  /collaborators/search:
-    $ref: "collaborators.yaml#/paths/~1collaborators~1search"
+  /workspaces/{workspaceKey}/members:
+    $ref: "members.yaml#/paths/~1workspaces~1{workspaceKey}~1members"
+  /workspaces/{workspaceKey}/members/{email}:
+    $ref: "members.yaml#/paths/~1workspaces~1{workspaceKey}~1members~1{email}"
+  /members/search:
+    $ref: "members.yaml#/paths/~1members~1search"
 
 components:
   securitySchemes:
@@ -97,4 +162,9 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: JWT token obtained from the authorization server.
+      description: >
+        A JWT access token obtained from your identity provider.
+        For SaaS, use the OAuth 2.0 client-credentials flow with the
+        client ID and secret created in Camunda Console.
+        For Self-Managed, authenticate via your configured OIDC provider
+        (e.g., Keycloak, Entra ID).

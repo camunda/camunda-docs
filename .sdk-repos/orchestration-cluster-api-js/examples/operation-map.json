@@ -48,6 +48,20 @@
       "label": "Get cluster topology"
     }
   ],
+  "changeClusterMode": [
+    {
+      "file": "client.ts",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
+    }
+  ],
+  "restore": [
+    {
+      "file": "client.ts",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "process-instance.ts",
@@ -807,6 +821,13 @@
       "label": "Get process instance statistics"
     }
   ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "extended-operations.ts",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get process instance wait state statistics"
+    }
+  ],
   "getProcessInstanceSequenceFlows": [
     {
       "file": "extended-operations.ts",
@@ -854,6 +875,13 @@
       "file": "extended-operations.ts",
       "region": "SearchProcessDefinitions",
       "label": "Search process definitions"
+    }
+  ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "extended-operations.ts",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
     }
   ],
   "getProcessDefinitionStatistics": [

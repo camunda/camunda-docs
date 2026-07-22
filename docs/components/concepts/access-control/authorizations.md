@@ -30,7 +30,7 @@ This system only applies to the following Orchestration Cluster components:
 - [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 :::note
-These authorizations do not apply to other Camunda services, such as Web Modeler or Optimize.
+These authorizations do not apply to other Camunda services, such as Camunda Hub or Optimize.
 :::
 
 ## How authorization works
@@ -101,6 +101,7 @@ The following table lists all resources that support authorization in the Orches
 | `PROCESS_DEFINITION`               | `*`, `order_process`                                                                              | All processes / BPMN Process ID                                                                                | `CANCEL_PROCESS_INSTANCE`, `CLAIM_USER_TASK`, `COMPLETE_USER_TASK`, `CREATE_PROCESS_INSTANCE`, `DELETE_PROCESS_INSTANCE`, `MODIFY_PROCESS_INSTANCE`, `READ_PROCESS_DEFINITION`, `READ_PROCESS_INSTANCE`, `READ_USER_TASK`, `UPDATE_PROCESS_INSTANCE`, `UPDATE_USER_TASK`                                                                                                                                                                   |
 | `RESOURCE`                         | `*`, `my_form`, `order_process`                                                                   | All resources / Form ID / Process ID                                                                           | `CREATE` (\* resource ID only), `READ`, `DELETE_DRD`, `DELETE_FORM`, `DELETE_PROCESS`, `DELETE_RESOURCE`                                                                                                                                                                                                                                                                                                                                   |
 | `ROLE`                             | `*`, `myrole`                                                                                     | All roles / Role ID                                                                                            | `CREATE`, `DELETE`, `READ`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `SECRET`                           | `*`, `camunda.secrets.MY_KEY`                                                                     | All secrets / Secret reference                                                                                 | `READ`, `REVEAL`                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `SYSTEM`                           | `*`                                                                                               | All system operations                                                                                          | `READ`, `READ_JOB_METRIC`, `READ_USAGE_METRIC`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                   |
 | `TENANT`                           | `*`, `tenantA`                                                                                    | All tenants / Tenant ID                                                                                        | `CREATE`, `DELETE`, `READ`, `UPDATE`                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `USER_TASK`                        | `assignee` (example)                                                                              | Task property name used with `PROPERTY` matcher (for example, `assignee`, `candidateUsers`, `candidateGroups`) | `READ`, `UPDATE`, `CLAIM`, `COMPLETE`                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -232,18 +233,13 @@ Users need specific permissions to access Orchestration Cluster web components:
   - `*` for access to all components
 - Without these permissions, users cannot access the components.
 
-#### Tasklist V1 and Tasklist V2
+#### Tasklist authorization model
 
-Tasklist uses different mechanisms to control user task visibility, depending on the API version:
+Tasklist uses the Orchestration Cluster authorization model, including process-level permissions on `Process Definition` and task-level authorizations on `USER_TASK` (with property-based access control). For Tasklist-specific behavior and recommended patterns, see [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
 
-- Tasklist V1: Uses user task access restrictions based on BPMN assignee, candidate users, and candidate groups.
-  These restrictions are configured separately and apply only to Tasklist V1.
-- Tasklist V2 and the Orchestration Cluster REST API: Use the Orchestration Cluster authorization model,
-  including process-level permissions on `Process Definition` and task-level authorizations on `USER_TASK`
-  (with property-based access control). For Tasklist-specific behavior and recommended patterns, see
-  [User task authorization in Tasklist](../../tasklist/user-task-authorization.md).
-
-After switching from Tasklist V1 to Tasklist V2, user task access restrictions no longer apply. Instead, configure the appropriate `Process Definition` and `USER_TASK` authorizations to control who can see, claim, and complete tasks.
+:::note
+Tasklist V1 and its user task access restrictions (based on BPMN assignee, candidate users, and candidate groups) were removed in Camunda 8.10. If you're migrating from an earlier version, configure the appropriate `Process Definition` and `USER_TASK` authorizations to control who can see, claim, and complete tasks.
+:::
 
 ### Resource-level access
 

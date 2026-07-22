@@ -810,7 +810,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start 8.10.0-alpha2`}
+              {`$ c8ctl cluster start 8.10.0-alpha3`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -878,25 +878,25 @@ function BuildWithCamunda() {
               <div className={styles.downloadButtons}>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-aarch64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-aarch64.zip"
                 >
                   <DownloadBtnIcon /> macOS (Apple Silicon)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-x86_64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-x86_64.zip"
                 >
                   <DownloadBtnIcon /> macOS (Intel)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-windows-x86_64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-windows-x86_64.zip"
                 >
                   <DownloadBtnIcon /> Windows
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-linux-x86_64.tar.gz"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-linux-x86_64.tar.gz"
                 >
                   <DownloadBtnIcon /> Linux
                 </a>

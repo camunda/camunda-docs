@@ -1,13 +1,13 @@
 ---
-id: remove-collaborator
-title: "Remove a collaborator"
-description: "Removes a collaborator from the workspace."
-sidebar_label: "Remove a collaborator"
+id: purge-file
+title: "Purge a file from all version history"
+description: "Permanently and irrecoverably removes the file and all references to it across every process application version snapshot. Works on live and soft-deleted files. If the file row has already been permanently deleted, purge still removes any orphaned process application snapshot milestone references that point to the file by ID. Idempotent for files that never existed or have already been fully purged within the caller's organization."
+sidebar_label: "Purge a file from all version history"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/SsYnJIpJSqO06a8ufmYJO3B4yr1QdVhCSwtxCDAAKBkRcP/3lmQlKgPJ3XOOngkEYvdt4vdR/htuK3QQVDWfJQ84w5Lu8Q3VmvIrYNgHU+4RC+cqsiIZ/wmmngGTAzMWOFsycIC2cq6e1+BwDFP+MMIpEQ5Uma0ROdbD5Pxi/GEJzzAnefZjO+Fmye8AgclBnS0uuEGSuQZ3/r9E9c84Yo8VRAWPOEOv9bKoeRZcDUeAp4ukNVGfa2R3eOaKYkmqGKtzN0xXi8WWALPNjysK4rqg1PmjjdNsgWCJSj9ZARxFwMpHXrPbBFjDyv4vfAJL6wrIWyjN82cgvrKGo+eNlxMLunjOPDeKa3As/aMJfO1EOh9UWu9HvMm4ZeTF6ddUHboA9Mg7j1bglaSQR0WVEgRm4cJh7GuoD0lskCQ8fw2/Pb2dnS1M0Z69niZm4QLawKaQKtQVbqLkFbO5hrLX754wjX0sQ/4il23lkxioJrb/AuKwMCz1jBHyZRhs5v3b9jvl69+mz9bhFD5LE1Xq9XYFWKEUtGBWHeXukLQH9k9H7PpAh2yEtYsRzpLRTFBs8rRGAWFnvkKhSqUYMHGI+5gM0p0/K+htm9TbmHt9c6sXUt4UEHTpw8Qah9HMPRN5wMYgXFOtlF3lfxO59ROHQ3zFft88/FoJPYwxz0F1Jp8QG7rkOUazD1POD5AWWmK1ldQWuHHAsraSBgrm0Kl0uXFeNKf3ohc+jQHOeqaihqvTfcE9kOwvi5LcOt+fA5x7vD8AZLd7AJ0ddxFUCbgHbpheZQJLy+OYlL7f5hOr1nrggkrkRXWsbBQvgewF/tyMkl4qYwq67L/BQ/tr18nk2Z7mD/O1zB8qDSYdsQOklaGldZh1+X76Xep9325ZrMSHj7Z3E/tlQhqCQH9nAkwxgZq5QqcR0mV2vbXDzpp5LBAh2R5uqeIGI8ayzp1pw4z2YeeLi/SLzb3KbRAyWez6xHeDffbtoZNZIzLyctjHnhvXa6kRBPHdsthyjNKGrS2K5QU+8w3Z745882Zb57CN4/ctbZ3SWbd8cWLki9sbc6sc2adM+ucWeeJrPNqMjnBA4bRKTuaT3TOOmaFqJ1DyVYLpWN4+i+vx9b145mBzgx0ZqAzAz2FgRraHtCQitcqc/e45tkpjS/hS9A1brU+UqtKDAtLGqNEjYHSidpZxtPtrcmnm6HK16TDK5RPN1H7amhe0S17ebB2mmd809JUk6XpZmF9aLJNZV1ousmIiJyCXLdDTCYtpfUTp60AHR+fak1aIPmvL+mHOmdX1x9ZCySqZxRu3+XryevXJ72R6Xc8DRm390WDf9JXa/yotygUehS1U2Ed65UjOHSkyPFsNh8u/02u2voMjbYN2mGIEel3a8ST7sv7vm0/3U6PoH66nbJg79EwmwdQBuVOMSYp0Tr1rR2/HXSaksJGAF1TUnrXda6ViFn+c8wj9LiIl++yrE18p5k7tlJhwd60dEk1olE41qPphQgiHmIn9XZbeNJ1WU+/PfMKW0aclfWhBDPY2arkByL5IdrN7h38NFm9O5CADyGtNChDbRMhbrqpmu30cnqvZQfq+d5g0XorK8+TbjJmfLPJweNnp5uGHn+t0VH/zHeDFLtJKk/fJc8K0P5Q+R4m+Oyme/8+Z09R5E+m2j0Esx5QDU86QtrLlYT7nwb5v0T7n0DYifjzplfKB3R6JQRWYbDr0cvZHqu+fffXu+k73jT/AUqG7+A=
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-saas/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -24,16 +24,16 @@ import Translate from "@docusaurus/Translate";
 <Heading
   as={"h1"}
   className={"openapi__heading"}
-  children={"Remove a collaborator"}
+  children={"Purge a file from all version history"}
 ></Heading>
 
 <MethodEndpoint
   method={"delete"}
-  path={"/workspaces/{workspaceKey}/collaborators/{email}"}
+  path={"/files/{fileKey}/purge"}
   context={"endpoint"}
 ></MethodEndpoint>
 
-Removes a collaborator from the workspace.
+Permanently and irrecoverably removes the file and all references to it across every process application version snapshot. Works on live and soft-deleted files. If the file row has already been permanently deleted, purge still removes any orphaned process application snapshot milestone references that point to the file by ID. Idempotent for files that never existed or have already been fully purged within the caller's organization.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -42,18 +42,18 @@ Removes a collaborator from the workspace.
 <ParamsDetails
   parameters={[
     {
-      name: "workspaceKey",
+      name: "fileKey",
       in: "path",
       required: true,
-      description: "The unique key identifying the workspace.",
-      schema: { type: "string" },
-    },
-    {
-      name: "email",
-      in: "path",
-      required: true,
-      description: "The email address of the collaborator.",
-      schema: { type: "string", format: "email" },
+      description: "The unique key identifying the file.",
+      schema: {
+        description: "System-generated key for a file.",
+        type: "string",
+        format: "FileKey",
+        "x-semantic-type": "FileKey",
+        example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+        title: "FileKey",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -64,7 +64,10 @@ Removes a collaborator from the workspace.
   id={undefined}
   label={undefined}
   responses={{
-    "204": { description: "The collaborator was removed successfully." },
+    "204": {
+      description:
+        "The file was purged, or was already absent. Once a file has been purged its ID is removed from all storage, so callers cannot distinguish between a file that was just purged, one that was purged in a previous call, and one that never existed — all three cases return 204.\n",
+    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },
@@ -112,6 +115,14 @@ Removes a collaborator from the workspace.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
           },
         },
       },
@@ -163,11 +174,20 @@ Removes a collaborator from the workspace.
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
         },
       },
     },
     "404": {
-      description: "The workspace or collaborator was not found.",
+      description:
+        "The file belongs to a different organization and cannot be accessed.",
       content: {
         "application/problem+json": {
           schema: {
@@ -262,6 +282,14 @@ Removes a collaborator from the workspace.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },

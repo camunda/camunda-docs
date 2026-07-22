@@ -5,9 +5,9 @@ sidebar_label: "Development workflows"
 description: "Use c8ctl to deploy resources, auto-redeploy on file changes, manage profiles, and bridge MCP connections for AI assistants."
 ---
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. Commands and flags may change between releases. For more information, see [Getting started](getting-started.md).
-:::
+<!-- This page is maintained in the c8ctl repository (https://github.com/camunda/c8ctl, in docs/) and
+     is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
+     overwritten. Edit the source in the c8ctl repo instead. -->
 
 `c8ctl` includes commands that support local development and deployment workflows. You can deploy resources, run processes, watch for changes, manage profiles and sessions, and bridge MCP connections for AI assistants.
 
@@ -25,6 +25,10 @@ c8 watch --profile=local
 ## Deploy
 
 Deploy resources to the active cluster.
+
+:::note
+When more than one profile is configured and you don't pass `--profile`, `c8ctl` prompts you to confirm which cluster to deploy to — a safety check against deploying to the wrong environment. Pass `--yes` (or `-y`) to skip the prompt in scripts and CI.
+:::
 
 ### Deploy a single file
 
@@ -52,12 +56,30 @@ c8 deploy ./my-project
 
 When scanning directories, `c8ctl` includes files with the following extensions by default:
 
-`.bpmn`, `.dmn`, `.form`, `.md`, `.txt`, `.xml`, `.rpa`, `.json`, `.config`, `.yml`, `.yaml`
+`.bpmn`, `.dmn`, `.form`
 
-Use `--force` to deploy files with any extension:
+Use `--extensions` to add more types to the directory scan (merged with the defaults):
 
 ```bash
-c8 deploy ./custom-resource.unsupported --force
+c8 deploy ./my-project --extensions=.md,.txt
+```
+
+Use `--all-extensions` to include every server-supported type (`.md`, `.txt`, `.xml`, `.rpa`, `.json`, `.config`, `.yml`, `.yaml`) without naming each one:
+
+```bash
+c8 deploy ./my-project --all-extensions
+```
+
+Explicitly named files are always deployed regardless of extension — the extension filter only applies when scanning directories:
+
+```bash
+c8 deploy ./custom-resource.unsupported
+```
+
+Use `--force` to disable extension filtering during directory discovery, deploying every file found regardless of extension:
+
+```bash
+c8 deploy ./my-project --force
 ```
 
 ### Building blocks and process applications
@@ -161,6 +183,12 @@ c8 watch --force
 ```
 
 By default, `c8ctl` monitors the same extensions used by `deploy`. Use `--extensions` to override. Use `--force` to continue watching after deployment errors.
+
+When watching inside a process application (a folder tree containing a `.process-application` marker file), use `--process-application` (or its alias `--pa`) to watch and redeploy the entire application on each change:
+
+```bash
+c8 watch ./my-app --pa
+```
 
 ### Continue watching after deployment errors
 
@@ -409,6 +437,70 @@ Use `--profile` to open an application for a specific cluster:
 
 ```bash
 c8 open operate --profile=prod
+```
+
+## AI agents and scripting
+
+c8ctl includes flags and output modes designed for AI agents and scripts. These also appear in their own labeled section in `c8ctl help`.
+
+### Filter output with `--fields`
+
+`--fields` limits output to the named fields (comma-separated). It applies to all `list`, `search`, and `get` commands, and matching is case-insensitive. This is useful for reducing the amount of output passed into an agent's context window.
+
+```bash
+# Only return the Key and State columns
+c8 list pi --fields Key,State
+c8 search pd --fields Key,processDefinitionId,name
+
+# Works in both text and JSON output modes
+c8 output json
+c8 list pi --fields Key,State,processDefinitionId | jq .
+```
+
+### Preview requests with `--dry-run`
+
+`--dry-run` prints the API request that would be sent without executing it. It works on every command — queries (`list`, `search`, `get`) and mutations (`create`, `cancel`, `deploy`, `complete`, `fail`, `activate`, `resolve`, `publish`, `correlate`). The command prints a JSON object to stdout and exits `0`:
+
+```json
+{
+  "dryRun": true,
+  "command": "create process-instance",
+  "method": "POST",
+  "url": "http://localhost:8080/v2/process-instances",
+  "body": { "processDefinitionId": "my-process", "tenantId": "<default>" }
+}
+```
+
+:::tip Recommended workflow for mutations
+
+1. Run the command with `--dry-run` and show the would-be API call.
+2. Wait for confirmation.
+3. Re-run without `--dry-run` to execute.
+
+:::
+
+```bash
+# Preview creating a process instance
+c8 create pi --id=my-process --dry-run
+
+# Preview a deployment
+c8 deploy ./my-process.bpmn --dry-run
+
+# Preview cancelling a process instance
+c8 cancel pi 2251799813685249 --dry-run
+
+# Inspect the filter body a search would send
+c8 search pi --state ACTIVE --between 2024-01-01..2024-12-31 --dry-run
+```
+
+### Machine-readable help
+
+In JSON output mode, `c8ctl help` emits structured JSON describing the full command tree, flags (with types), and agent flags:
+
+```bash
+c8 output json
+c8 help          # JSON with commands[], globalFlags[], agentFlags[], and resourceAliases
+c8 help list     # JSON for a specific command
 ```
 
 ## Verbose mode

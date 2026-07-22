@@ -109,7 +109,7 @@ Application "sap-odata-connector" started and available at "some.url.hana.ondema
 
 ### Deployment in Camunda 8 SaaS
 
-- If you are using Web Modeler, [import the SAP OData connector element](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) you downloaded in the earlier step to use it in your process design.
+- If you are using Camunda Hub, [import the SAP OData connector element](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#importing-an-existing-element-template) you downloaded in the earlier step to use it in your process design.
 
 ![sample BPMN diagram with SAP OData connector](./img/sap-odata-connector-task-in-model.png)
 

@@ -144,6 +144,10 @@ Setting either of the feature flags to `true` requires a database connection. To
 connection, see [database configuration](#database-configuration).
 :::
 
+:::note
+When using the Camunda Helm chart, setting `MULTITENANCY_ENABLED: true` alone does not enable the Tenants tab in Management Identity. You must also set `global.multitenancy.enabled: true` in your Helm values. Without the global flag, the Tenants tab does not appear in Management Identity even when `MULTITENANCY_ENABLED` is set to `true`.
+:::
+
 ## Logging
 
 ### Google Stackdriver (JSON) logging
