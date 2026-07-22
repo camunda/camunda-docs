@@ -30,7 +30,7 @@ This system only applies to the following Orchestration Cluster components:
 - [Orchestration Cluster APIs](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md)
 
 :::note
-These authorizations do not apply to other Camunda services, such as Web Modeler or Optimize.
+These authorizations do not apply to other Camunda services, such as Camunda Hub or Optimize.
 :::
 
 ## How authorization works

@@ -36,8 +36,14 @@ camunda:
       method: oidc
       providers:
         # Cluster-level provider definitions
-        my-idp:
-          type: oidc
+        oidc:
+          my-idp:
+            issuer-uri: https://my-idp.example.com/realms/camunda
+            client-id: camunda-client
+            client-secret: ${MY_IDP_CLIENT_SECRET}
+            audiences:
+              - camunda-api
+            username-claim: preferred_username
 
   physical-tenants:
     # Optional overrides for the always-present default tenant
@@ -140,8 +146,14 @@ camunda:
     authentication:
       method: oidc
       providers:
-        corp-idp:
-          type: oidc
+        oidc:
+          corp-idp:
+            issuer-uri: https://corp-idp.example.com/realms/camunda
+            client-id: camunda-client
+            client-secret: ${CORP_IDP_CLIENT_SECRET}
+            audiences:
+              - camunda-api
+            username-claim: preferred_username
 
   physical-tenants:
     default:
