@@ -255,7 +255,11 @@ The documentation covers the recommended topology, exporter configuration, and R
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-Camunda 8 SaaS now supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
+Camunda 8 SaaS now officially supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
+
+:::note
+Multi-tenancy is available on SaaS clusters running generation **8.8 and later** — including existing 8.8 and 8.9 clusters. You do not need to upgrade to 8.10 to use this feature.
+:::
 
 - Owners and Admins can create, update, and delete tenants in Console, and assign users, groups, and client credentials to them.
 - Web Modeler and Desktop Modeler support tenant-scoped deployments to multi-tenant clusters by specifying a tenant ID.
