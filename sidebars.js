@@ -100,6 +100,7 @@ module.exports = {
       },
       items: [
         "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/agent-health-and-guardrails",
         "components/agentic-orchestration/camunda-provided-llm",
         "components/agentic-orchestration/ao-design",
         {
@@ -111,6 +112,7 @@ module.exports = {
           },
           items: [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
             "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
             "components/agentic-orchestration/evaluate-agents/test-ai-agents",
           ],
