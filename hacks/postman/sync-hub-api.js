@@ -58,7 +58,15 @@ async function getAllCollections(name) {
   const res = await fetch(`${BASE_URL}${endpoint}?${params}`, {
     headers: HEADERS,
   });
-  return res.json();
+  const body = await res.json();
+  if (!res.ok) {
+    throw new Error(
+      `Failed to list collections (${res.status}): ${
+        body.error?.message || JSON.stringify(body)
+      }`
+    );
+  }
+  return body;
 }
 
 async function findCollectionByName(name) {
