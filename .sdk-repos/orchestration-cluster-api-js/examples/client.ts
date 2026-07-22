@@ -85,6 +85,24 @@ async function changeClusterModeExample() {
 }
 //#endregion ChangeClusterMode
 
+//#region Restore
+async function restoreExample() {
+  const camunda = createCamundaClient();
+
+  // The cluster must be in recovery mode before a restore is accepted. Provide
+  // either a list of backup IDs (one per partition) or a time range (`from`/`to`)
+  // that selects the backups to restore, but not both.
+  const change = await camunda.restore({
+    backupIds: [100, 101],
+  });
+
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const op of change.plannedChanges) {
+    console.log(`  ${op.operation}${op.mode ? ` -> ${op.mode}` : ""}`);
+  }
+}
+//#endregion Restore
+
 //#region ResultClient
 async function resultClientExample() {
   const camunda = createCamundaResultClient({
