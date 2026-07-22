@@ -23,6 +23,8 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/postman API_KEY;
             secret/data/products/camunda-docs/ci/postman WORKSPACE_ID;
+      - name: Install OpenAPI spec converter
+        run: npm install -g openapi-to-postmanv2
       - name: Sync Hub API SM
         env:
           POSTMAN_API_KEY: ${{ steps.secrets.outputs.API_KEY }}
