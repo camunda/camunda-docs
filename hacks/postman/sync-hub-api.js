@@ -120,7 +120,16 @@ async function sendCollectionRequest(method, endpoint, collection, dryRun) {
     headers: HEADERS,
     body,
   });
-  return res.json();
+
+  const res_body = await res.json();
+  if (!res.ok) {
+    throw new Error(
+      `Failed to create/update collection (${res.status}): ${
+        res_body.error?.message || JSON.stringify(res_body)
+      }`
+    );
+  }
+  return res_body;
 }
 
 async function createCollection(collection, dryRun = false) {
