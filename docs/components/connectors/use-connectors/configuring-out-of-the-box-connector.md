@@ -36,13 +36,18 @@ import CreateCluster from '../../../components/react-components/create-cluster.m
 
 ## Import a diagram
 
-1. Download [`submit-expense.bpmn`](/bpmn/connectors/submit-expense.bpmn).
+1. Download the following files:
+   - <a href="/bpmn/connectors/submit-expense.bpmn" download>`submit-expense.bpmn`</a>: A process for submitting expenses for approval.
+   - <a href="/bpmn/connectors/upload-receipt.form" download>`upload-receipt.form`</a>: A form for uploading receipts.
+   - <a href="/bpmn/connectors/approve-receipt.form" download>`approve-receipt.form`</a>: A form for approving receipts.
 2. Log in to your Camunda 8 account.
 3. In your Camunda Hub workspace, click **New project**, and name your project `Expense process`.
-4. In your project, click **Create new > Upload files**.
-5. Upload `submit-expense.bpmn`.
+4. In your project, delete the default diagram, and click **Create new > Upload files**.
+5. Upload `submit-expense.bpmn`, `upload-receipt.form`, and `approve-receipt.form`.
 
-This diagram is your starting point for this tutorial.
+Open **submit-expense** to see the process you'll be working with throughout this tutorial:
+
+<div bpmn="connectors/submit-expense.bpmn" />
 
 :::note
 To learn more about building your own BPMN diagram from scratch, visit our guide on [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md).
@@ -54,15 +59,14 @@ At the beginning of the process, a receipt is ready and uploaded for review. The
 
 To accomplish this, you'll use SendGrid to send an email:
 
-1. Open the **submit-expense** diagram.
-2. Make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).
-3. Click the **Notify manager of receipt** task.
-4. Click **Change element**.
-5. Search for **SendGrid Outbound Connector**.
-6. Open the **Details** panel on the right side of the modeling interface.
-7. Under **Properties**, configure the following sections:
+1. With the **submit-expense** diagram open, make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).
+2. Click the **Notify manager of receipt** task.
+3. Click **Change element**.
+4. Search for **SendGrid Outbound Connector**. If you're using Self-Managed, you may need to download it from the connector marketplace.
+5. Open the **Details** panel on the right side of the modeling interface.
+6. Under **Properties**, configure the following sections:
    - **Authentication:** [Full Access API Key](https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys#creating-an-api-key)
-   - **Sender:** Name and email address
+   - **Sender:** Name and email address. Make sure [this email is verified by Sendgrid](https://www.twilio.com/docs/sendgrid/ui/sending-email/sender-verification).
    - **Receiver:** Name and email address
    - **Compose email:** Email contents
 
