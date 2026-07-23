@@ -59,8 +59,8 @@ The following are tested and supported deployment options for Kubernetes, Docker
 
 - [Stock Kubernetes](/self-managed/deploy-to-production/kubernetes/install/index.md)
 - [Cloud service providers](/self-managed/deploy-to-production/kubernetes/install/index.md) [recommended]
-  - [Amazon EKS](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/microsoft-aks.md)
+  - [Amazon EKS](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/index.md)
+  - [Microsoft AKS](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/index.md)
   - [Google GKE](/self-managed/deploy-to-production/kubernetes/clusters/google-gke.md)
 - [Red Hat OpenShift](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift.md)
 - [Docker](/self-managed/deploy-to-production/containers/docker.md) (`linux/amd64`, `linux/arm64`)

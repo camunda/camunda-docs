@@ -1,5 +1,4 @@
 ---
-id: microsoft-aks
 title: "Microsoft AKS"
 description: "Deploy Camunda 8 Self-Managed on Microsoft AKS"
 ---

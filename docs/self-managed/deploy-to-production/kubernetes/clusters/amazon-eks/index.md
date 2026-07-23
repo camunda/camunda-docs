@@ -1,5 +1,4 @@
 ---
-id: amazon-eks
 title: "Amazon EKS"
 description: "Deploy Camunda 8 Self-Managed on Amazon EKS"
 ---

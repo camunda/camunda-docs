@@ -1776,7 +1776,7 @@ module.exports = {
                       label: "Amazon EKS",
                       link: {
                         type: "doc",
-                        id: "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/amazon-eks",
+                        id: "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/index",
                       },
                       items: [
                         "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/eksctl",
@@ -1792,7 +1792,7 @@ module.exports = {
                       label: "Microsoft AKS",
                       link: {
                         type: "doc",
-                        id: "self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/microsoft-aks",
+                        id: "self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/index",
                       },
                       items: [
                         "self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/terraform",

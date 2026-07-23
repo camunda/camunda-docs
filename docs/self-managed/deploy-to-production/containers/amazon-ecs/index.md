@@ -44,14 +44,14 @@ If you're already invested in Kubernetes tooling and patterns and you want to re
 - **Performance:** The Amazon ECS with Fargate deployment uses Amazon EFS as primary storage. This may result in higher costs and lower performance than a Kubernetes setup with block storage.
 - **Scaling:** The autoscaling feature of ECS is not currently supported.
 
-Check out our [Amazon EKS deployment guide](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/amazon-eks.md) if a Kubernetes environment better suits your needs.
+Check out our [Amazon EKS deployment guide](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/index.md) if a Kubernetes environment better suits your needs.
 
 ## Explore further resources
 
 <AoGrid ao={
 [
 {
-link: "../../../../components/orchestration-cluster/core-settings/configuration/properties#camundaclusternode-id-provider",
+link: "../../../components/orchestration-cluster/core-settings/configuration/properties#camundaclusternode-id-provider",
 title: "Configure the Node ID provider",
 image: ConfigIcon,
 description: "Configuration reference for the Node ID provider.",

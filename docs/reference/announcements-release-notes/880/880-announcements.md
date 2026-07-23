@@ -970,7 +970,7 @@ New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. In
 #### Reference architecture: Azure AKS
 
 New Azure AKS architecture with a zonal AKS baseline, managed or operator-based data services, unified Ingress and Identity patterns, private networking, and a modular Terraform and Helm workflow.  
-See [Microsoft AKS](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/microsoft-aks.md).
+See [Microsoft AKS](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/index.md).
 
 </div>
 </div>
