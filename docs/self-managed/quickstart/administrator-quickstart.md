@@ -12,13 +12,13 @@ With this guide, you'll learn how to deploy Camunda 8 Self-Managed as an adminis
 <DocCardList items={[
 {
 type: "link",
-href: "../../deployment/helm/cloud-providers/kind/",
+href: "../kind/",
 label: "Local development (kind)",
 description: "Deploy to a local Kubernetes-in-Docker cluster. Ideal for testing and evaluation.",
 },
 {
 type: "link",
-href: "../../deployment/helm/cloud-providers/",
+href: "../../deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/",
 label: "Production deployment",
 description: "Deploy to cloud providers like Amazon, Azure, and others for production workloads.",
 }

@@ -407,7 +407,7 @@ Use these variables when you adapt the Elasticsearch and OpenSearch examples:
 | `CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_PASSWORD` | Password for Elasticsearch when authentication is enabled. |
 | `CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL`         | Endpoint for OpenSearch.                                   |
 
-For additional secondary storage settings, see [Configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) and [Configure RDBMS for manual installations](/self-managed/deployment/manual/rdbms/configuration.md).
+For additional secondary storage settings, see [Configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) and [Configure RDBMS for manual installations](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/configuration.md).
 
 ## Next steps
 

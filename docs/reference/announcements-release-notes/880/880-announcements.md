@@ -756,9 +756,9 @@ The existing data schema in the secondary storage has been harmonized, to be use
 
 The separated Ingress Helm configuration for Camunda 8 Self-Managed was deprecated in Camunda 8.6 and is removed from the Helm chart in Camunda 8.8.
 
-Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
+Only the combined Ingress configuration is officially supported. See the [Ingress guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/ingress-setup.md) for more information on configuring a combined Ingress setup.
 
-- If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/deployment/helm/install/quick-install.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
+- If you are using the recommended Camunda 8 deployment option ([Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md)), the upgrade path from version 8.7 to 8.8 will be straightforward by changing the values file to the new syntax.
 - New migration guides are also provided to support you when migrating from a previous Camunda version.
 
 :::caution
@@ -778,7 +778,7 @@ Additional upgrade considerations are necessary for deployments that use custom 
 
 You can now configure custom users and OAuth2 clients for Management Identity during Helm installation.
 
-See [adding users and clients](/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients.md) for details on configuring custom users and clients on Management Identity during initial Helm install.
+See [adding users and clients](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/custom-users-and-clients.md) for details on configuring custom users and clients on Management Identity during initial Helm install.
 
 :::caution
 Additional upgrade considerations are required for deployments that use custom environment variables, such as `KEYCLOAK_CLIENTS_2_PERMISSIONS_0_RESOURCE_SERVER_ID`. For these deployments, remove the environment variables that reference users or clients and use the configuration method described in the guide linked above.
@@ -840,7 +840,7 @@ As a result, the following Docker images are deprecated as of Camunda 8.8:
 With the Camunda 8.8 release, a consistent secret pattern for Helm charts is introduced. The legacy secret configuration is deprecated and will be removed with 8.9, but remains functional during the transition period.
 
 :::info
-See the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md) for migration instructions and examples.
+See the [secret management guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/secret-management.md) for migration instructions and examples.
 :::
 
 </div>
@@ -914,7 +914,7 @@ With the Camunda 8.8 release, alternative container images to the previously use
 - To adopt these images, update your Helm deployment to reference the `values-images-ee.yml` file.
 
 :::info
-Full setup instructions are available in the [installation guide](/self-managed/deployment/helm/install/quick-install.md).
+Full setup instructions are available in the [installation guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md).
 :::
 
 </div>
@@ -928,7 +928,7 @@ Full setup instructions are available in the [installation guide](/self-managed/
 
 #### Helm chart: Alternative infrastructure methods
 
-For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use.
+For production environments, use managed or external services first. If not available, prefer [Kubernetes operators](/self-managed/deploy-to-production/plan-your-deployment/kubernetes-operators.md) for PostgreSQL, Elasticsearch/OpenSearch, and Keycloak over Bitnami subcharts. Bitnami subcharts remain available for evaluation or proof-of-concept use.
 
 </div>
 </div>
@@ -956,7 +956,7 @@ This change reduces the risk of unexpected breaking changes from upstream Bitnam
 
 #### Reference architecture: EC2
 
-New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. Includes managed OpenSearch, optional Aurora PostgreSQL, dual load balancer pattern, VPN/bastion access, and modular Terraform setup. See [Amazon EC2](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md).
+New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. Includes managed OpenSearch, optional Aurora PostgreSQL, dual load balancer pattern, VPN/bastion access, and modular Terraform setup. See [Amazon EC2](/self-managed/deploy-to-production/deploy-your-baseline/manual/aws-ec2.md).
 
 </div>
 </div>
@@ -970,7 +970,7 @@ New EC2 manual and VM blueprint for high availability (HA) multi-AZ clusters. In
 #### Reference architecture: Azure AKS
 
 New Azure AKS architecture with a zonal AKS baseline, managed or operator-based data services, unified Ingress and Identity patterns, private networking, and a modular Terraform and Helm workflow.  
-See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md).
+See [Microsoft AKS](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/microsoft-aks/microsoft-aks.md).
 
 </div>
 </div>
@@ -985,13 +985,13 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 
 - Managed search (EKS single-region & EC2): OpenSearch upgraded 2.15 → 2.19 (aligns with [supported environments](/reference/supported-environments.md)).
 - Database layer (EKS & EC2): Aurora PostgreSQL baseline raised 15 → 17 (aligns with [supported environments](/reference/supported-environments.md)).
-- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md)).
-- Private access (OpenShift ROSA, EKS, EC2): Added optional VPN pattern (see [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture)).
-- OpenShift (single & dual region): Validated against OpenShift 4.19 (see [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)).
-- EKS networking: Added alternative NAT gateway strategies (see [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md)).
-- High availability: Refreshed dual region deployment material (see [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)).
+- Identity / global reference architecture: Keycloak now uses Bitnami Premium 26 image (see [OIDC configuration](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/index.md)).
+- Private access (OpenShift ROSA, EKS, EC2): Added optional VPN pattern (see [EC2 architecture](/self-managed/deploy-to-production/deploy-your-baseline/manual/aws-ec2.md#architecture)).
+- OpenShift (single & dual region): Validated against OpenShift 4.19 (see [dual region guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/self-hosted/dual-region.md)).
+- EKS networking: Added alternative NAT gateway strategies (see [EKS Helm guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/eks-helm.md)).
+- High availability: Refreshed dual region deployment material (see [EKS dual region](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/dual-region.md)).
 - Core diagrams: Updated generic reference architecture visuals for 8.8 Orchestration Cluster changes (see [reference architectures](/self-managed/reference-architecture/reference-architecture.md)).
-- Terraform module upgrade: AWS EKS module v5 → v6 (review [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading).
+- Terraform module upgrade: AWS EKS module v5 → v6 (review [Terraform EKS setup](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/terraform-setup.md) before upgrading).
 
 </div>
 </div>

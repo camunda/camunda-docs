@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 This guide describes how to connect Management Identity to your existing Keycloak instance.
 
 :::info Deploying with Helm?
-If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart guide for connecting to an external Keycloak instance](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md) instead.
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart guide for connecting to an external Keycloak instance](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/external-keycloak.md) instead.
 :::
 
 ## Prerequisites
@@ -90,7 +90,7 @@ See [starting configuration](/self-managed/components/management-identity/miscel
 
 :::tip Helm chart setup
 To run a full Camunda cluster with an existing Keycloak instance, see  
-[Helm chart setup for existing Keycloak](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md#create-a-secret).
+[Helm chart setup for existing Keycloak](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/external-keycloak.md#create-a-secret).
 :::
 
 ## Considerations

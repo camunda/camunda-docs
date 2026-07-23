@@ -10,7 +10,7 @@ Get started with Docker Compose to run Camunda 8 Self-Managed locally. The defau
 Docker Compose also supports [document handling](/self-managed/concepts/document-handling/overview.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Web Modeler.
 
 :::note
-The [Docker images](/self-managed/deployment/docker/docker.md) are supported for production usage. The Docker Compose files are intended for local development and evaluation, and are not designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deployment/helm/install/index.md).
+The [Docker images](/self-managed/deploy-to-production/deploy-your-baseline/containers/docker.md) are supported for production usage. The Docker Compose files are intended for local development and evaluation, and are not designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md).
 :::
 
 Camunda 8 with Docker Compose includes the following:
@@ -56,4 +56,4 @@ For shutdown commands and volume cleanup guidance, see [install and start with D
 
 - Follow the [getting started guide](/guides/getting-started-example.md) to create a Java project and connect to your local cluster.
 - Explore the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [client libraries](/apis-tools/working-with-apis-tools.md).
-- When you are ready for production, deploy with [Kubernetes and Helm](/self-managed/deployment/helm/install/index.md).
+- When you are ready for production, deploy with [Kubernetes and Helm](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md).

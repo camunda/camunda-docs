@@ -136,6 +136,6 @@ The Admin UI uses the Orchestration Cluster API to manage global user task liste
 ## See also
 
 - [Global listener configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundaclusterglobal-listeners).
-- [Configure properties through Helm charts](/self-managed/deployment/helm/configure/application-configs.md).
+- [Configure properties through Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs.md).
 - [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 - [Access control for global user task listeners](./access-control.md).

@@ -85,7 +85,7 @@ Camunda 8 supports multiple authentication methods depending on the environment:
 | --------------------------------------------------------------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------- |
 | [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)           | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
 | [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) | None / Basic authentication / OIDC | No auth or Basic authentication only for local development. OIDC optional if configured. |
-| [Helm Self-Managed](/self-managed/deployment/helm/install/index.md)               | Basic authentication / OIDC        | Basic authentication default, OIDC optional if configured.                               |
+| [Helm Self-Managed](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md)               | Basic authentication / OIDC        | Basic authentication default, OIDC optional if configured.                               |
 | SaaS                                                                              | OIDC                               | OIDC required for all requests.                                                          |
 
 - No authentication: only for local development (Run, Docker Compose).

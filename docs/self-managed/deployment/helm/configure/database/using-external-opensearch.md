@@ -11,7 +11,7 @@ Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by 
 
 This page applies to the Orchestration Cluster only. If you also deploy Optimize, configure Optimize separately using [use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md).
 
-Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms). For the [quick-install](/self-managed/deployment/helm/install/quick-install.md) scenario, RDBMS with embedded H2 is used instead.
+Secondary storage is configurable. For supported components, you can use an RDBMS-based secondary store instead. See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) or the glossary entry [RDBMS](/reference/glossary.md#rdbms). For the [quick-install](/self-managed/quickstart/quick-install.md) scenario, RDBMS with embedded H2 is used instead.
 
 :::info OpenSearch support
 Camunda 8 supports both the open-source [OpenSearch](https://opensearch.org/) distribution and [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service).
@@ -24,7 +24,7 @@ Amazon OpenSearch requires two layers of permissions:
 - AWS IAM permissions
 - OpenSearch internal authentication
 
-To connect to OpenSearch using AWS IAM roles for service accounts (IRSA), see the [IAM roles for service accounts documentation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup).
+To connect to OpenSearch using AWS IAM roles for service accounts (IRSA), see the [IAM roles for service accounts documentation](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/terraform-setup.md#opensearch-module-setup).
 
 To connect to OpenSearch using Basic authentication, follow the configuration below.
 
@@ -68,7 +68,7 @@ orchestration:
 This configuration connects the Orchestration Cluster to an external Amazon OpenSearch Service instance as its secondary storage backend.
 
 To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret.
-For details and examples, see [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
+For details and examples, see [Helm charts secret management](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/secret-management.md).
 
 ### Connect to external OpenSearch with custom index prefixes
 
@@ -110,8 +110,8 @@ For full parameter details, see:
 
 ## References
 
-- [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
-- [IAM roles for service accounts](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
+- [Helm charts secret management](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/secret-management.md)
+- [IAM roles for service accounts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/terraform-setup.md#opensearch-module-setup)
 - [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
 - [Use external OpenSearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-opensearch.md)
 - [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md)

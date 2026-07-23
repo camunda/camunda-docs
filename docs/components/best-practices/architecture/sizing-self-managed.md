@@ -13,7 +13,7 @@ description: "Provision Camunda 8 on your Self-Managed cluster with Kubernetes a
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Provisioning Camunda 8 on your Self-Managed cluster depends on several factors. Use [Kubernetes with Helm](/self-managed/deployment/helm/index.md) to deploy and manage your Self-Managed cluster.
+Provisioning Camunda 8 on your Self-Managed cluster depends on several factors. Use [Kubernetes with Helm](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/index.md) to deploy and manage your Self-Managed cluster.
 
 Use the configurations and guidance below as a baseline, then adjust based on your workload. For background on the factors that drive provisioning requirements, see [Size your environment](sizing-your-environment.md).
 

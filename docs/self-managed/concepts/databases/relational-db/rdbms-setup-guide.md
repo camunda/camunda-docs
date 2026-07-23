@@ -14,7 +14,7 @@ This guide provides a unified approach to configuring relational databases for C
 - For **Orchestration Cluster configuration reference**, see [RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md).
 - For **Web Modeler configuration reference**, see [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md).
 - For **supported vendors and versions**, see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
-- For **deployment-specific setup**, see [Helm RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md) or [manual RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md).
+- For **deployment-specific setup**, see [Helm RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md) or [manual RDBMS configuration](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/configuration.md).
   :::
 
 ## Step 1: Decide on topology
@@ -134,7 +134,7 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_USERNAME="camunda_oc"
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_PASSWORD="your-secure-password"
 ```
 
-For full manual setup, see [RDBMS configuration for manual installations](/self-managed/deployment/manual/rdbms/configuration.md).
+For full manual setup, see [RDBMS configuration for manual installations](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/configuration.md).
 
 </TabItem>
 
@@ -246,7 +246,7 @@ Camunda bundles JDBC drivers for PostgreSQL, MariaDB, SQL Server, and H2. **You 
 For detailed driver provisioning strategies (init containers, custom images, volume mounts), see:
 
 - **Helm**: [JDBC driver management in Helm](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
-- **Manual**: [Manual installation driver setup](/self-managed/deployment/manual/rdbms/configuration.md#jdbc-driver-management)
+- **Manual**: [Manual installation driver setup](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/configuration.md#jdbc-driver-management)
 - **Web Modeler**: [Web Modeler database configuration](/self-managed/components/hub/configuration/database.md)
 
 ## Step 5: Schema management
@@ -304,5 +304,5 @@ Test restore procedures in non-production environments regularly.
 ## Related guides
 
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
-- [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)
-- [Operations and maintenance](/self-managed/deployment/manual/rdbms/operations.md)
+- [RDBMS example deployment](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-with-rdbms.md)
+- [Operations and maintenance](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/operations.md)

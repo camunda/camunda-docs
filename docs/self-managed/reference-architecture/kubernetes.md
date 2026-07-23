@@ -24,17 +24,17 @@ This section includes reference deployment architectures:
 
 ### Amazon EKS
 
-- [Amazon EKS single-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): Standard production setup.
-- [Amazon EKS dual-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md): Advanced multi-region setup.
+- [Amazon EKS single-region](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/terraform-setup.md): Standard production setup.
+- [Amazon EKS dual-region](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/dual-region.md): Advanced multi-region setup.
 
 ### Red Hat OpenShift on AWS (ROSA)
 
-- [ROSA single-region](/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup.md): Standard production setup.
-- [ROSA dual-region](/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): Advanced multi-region setup.
+- [ROSA single-region](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/on-aws-rosa/terraform-setup.md): Standard production setup.
+- [ROSA dual-region](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/on-aws-rosa/terraform-setup-dual-region.md): Advanced multi-region setup.
 
 ### Microsoft Azure
 
-- [Microsoft AKS single-region](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): Standard production setup.
+- [Microsoft AKS single-region](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/microsoft-aks/terraform-setup.md): Standard production setup.
 
 For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/troubleshooting/index.md).
 
@@ -61,9 +61,9 @@ The database is not shown in the diagram. It should be hosted outside the Kubern
 
 ### Kubernetes
 
-A production deployment is recommended. For more information, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md) and the [components](#components) section.
+A production deployment is recommended. For more information, see the [production deployment guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/production/index.md) and the [components](#components) section.
 
-The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
+The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
 #### Orchestration Cluster
 
@@ -87,7 +87,7 @@ The Orchestration Cluster exposes two services:
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
-Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/production/index.md).
 
 ### High availability (HA)
 
@@ -148,7 +148,7 @@ As shown in the [architecture diagram](#web-modeler-and-console), this namespace
 - Console — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
-This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
+This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deploy-to-production/plan-your-deployment/kubernetes-operators.md#keycloak-deployment) or Microsoft Entra ID).
 
 :::tip Why isn't an IdP included by default?
 The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you. This approach gives you full control over your authentication stack and avoids unnecessary complexity for teams that already have an IdP in place.
@@ -175,7 +175,7 @@ For details on multi-region configurations, especially dual-region setups, refer
 
 We recommend using a [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deployment/helm/install/quick-install.md). For supported Kubernetes versions, see [supported environments](/reference/supported-environments.md#deployment-options).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md). For supported Kubernetes versions, see [supported environments](/reference/supported-environments.md#deployment-options).
 
 #### Minimum cluster requirements
 

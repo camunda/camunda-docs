@@ -247,7 +247,7 @@ Camunda 8.10 adds a dual-region reference architecture for running the Orchestra
 
 The documentation covers the recommended topology, exporter configuration, and RDBMS replication setup, and includes step-by-step failover and failback procedures for active-active and active-passive two-region ECS environments.
 
-<p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
+<p class="link-arrow">[Dual-region ECS reference architecture](/self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs-dual-region.md)</p>
 
 #### Multi-tenancy support in SaaS
 
@@ -654,7 +654,7 @@ Switching CLIs does not require a release-state migration; Helm is client-side o
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm 4](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md)</span></li>
 </ul>
 
 #### Host network support for Orchestration Cluster pods
@@ -670,4 +670,4 @@ orchestration:
   hostNetwork: true
 ```
 
-For details, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
+For details, see [configure pod networking](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/pod-networking.md).

@@ -32,7 +32,7 @@ If you're an administrator exploring how Camunda 8 runs in a Kubernetes-like env
 - Using **Kind** to simulate a Kubernetes cluster locally.
 - Deploying the full Camunda 8 stack using Helm charts.
 
-[Get started with the administrator quickstart](/self-managed/deployment/helm/cloud-providers/kind.md)
+[Get started with the administrator quickstart](/self-managed/quickstart/local-with-kind.md)
 
 ## What you’ll learn
 

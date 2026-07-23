@@ -54,7 +54,7 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    <TabItem value='oauth'>
 
-   For **OAuth**, enter the credentials for your OAuth provider. These credentials are configured during the default [Helm installation](/self-managed/deployment/helm/install/quick-install.md). You can find them in [Orchestration Cluster Admin](/self-managed/components/orchestration-cluster/admin/overview.md) or set them using Zeebe [environment variables](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md#environment-variables).
+   For **OAuth**, enter the credentials for your OAuth provider. These credentials are configured during the default [Helm installation](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md). You can find them in [Orchestration Cluster Admin](/self-managed/components/orchestration-cluster/admin/overview.md) or set them using Zeebe [environment variables](/self-managed/components/orchestration-cluster/zeebe/security/client-authorization.md#environment-variables).
 
    :::note
    When using Modeler to deploy a process model or start a process instance, you may run into issues with [resource authorizations](/components/concepts/access-control/authorizations.md). Make sure your [client](/components/admin/client.md) has the right authorizations assigned to it.

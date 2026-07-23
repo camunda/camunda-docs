@@ -227,8 +227,8 @@ Camunda 8.9 continues to move away from bundled Bitnami infrastructure in Self-M
 This update describes infrastructure deployment patterns in reference architectures, not customer data migration.
 
 <ul>
-  <li><span class="link-arrow">[EKS dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)</span></li>
-  <li><span class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</span></li>
+  <li><span class="link-arrow">[EKS dual-region reference architecture](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/dual-region.md)</span></li>
+  <li><span class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/self-hosted/dual-region.md)</span></li>
   <li><span class="link-arrow">[Dual-region operational tasks](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)</span></li>
 </ul>
 
@@ -248,9 +248,9 @@ Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deplo
 The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated values in `values.yaml`, and includes guidance for Helm 4 adoption. These updates make it easier to modernize Ingress, reuse dynamic values across environments, and prepare for Helm 3 end of life.
 
 <ul>
-  <li><span class="link-arrow">[Gateway API setup](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</span></li>
+  <li><span class="link-arrow">[Gateway API setup](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/gateway-api-setup.md)</span></li>
   <li><span class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm 4](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md)</span></li>
 </ul>
 
 ### Secondary storage and authorization defaults
@@ -276,8 +276,8 @@ All reference architectures now use Kubernetes operators instead of embedded Bit
 This applies to AKS, EKS, OpenShift, and Kind reference architectures.
 
 <ul>
-  <li><span class="link-arrow">[AKS reference architecture](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/aks-helm.md)</span></li>
-  <li><span class="link-arrow">[OpenShift reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)</span></li>
+  <li><span class="link-arrow">[AKS reference architecture](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/microsoft-aks/aks-helm.md)</span></li>
+  <li><span class="link-arrow">[OpenShift reference architecture](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/self-hosted/redhat-openshift.md)</span></li>
 </ul>
 
 ### Migration from Bitnami to operators
@@ -293,7 +293,7 @@ A new migration tooling set is available to move existing Self-Managed deploymen
 - **Kind local development**: A local Kubernetes-in-Docker reference architecture for development and testing, with Makefile-based commands and support for both PostgreSQL and Elasticsearch secondary storage variants.
 
 <ul>
-  <li><span class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</span></li>
+  <li><span class="link-arrow">[Deploy to Amazon ECS](/self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs.md)</span></li>
 </ul>
 
 ### Dual-region improvements
@@ -303,8 +303,8 @@ A new migration tooling set is available to move existing Self-Managed deploymen
 - OpenShift dual-region with ECK is now available.
 
 <ul>
-  <li><span class="link-arrow">[EKS dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md)</span></li>
-  <li><span class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md)</span></li>
+  <li><span class="link-arrow">[EKS dual-region reference architecture](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/dual-region.md)</span></li>
+  <li><span class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/self-hosted/dual-region.md)</span></li>
 </ul>
 
 ### Additional improvements
@@ -424,7 +424,7 @@ The Orchestration Cluster continues its 8.9 consolidation work with completed un
 
 <ul>
   <li><span class="link-arrow">[Property changes in Camunda 8.9](/self-managed/components/orchestration-cluster/core-settings/configuration/configuration-mapping.md)</span></li>
-  <li><span class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</span></li>
+  <li><span class="link-arrow">[Deploy to Amazon ECS](/self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs.md)</span></li>
 </ul>
 
 ### Storage, backup, and runtime improvements
@@ -479,8 +479,8 @@ Camunda 8.9 adds end-to-end deployment guidance for RDBMS-backed environments, i
 
 <ul>
   <li><span class="link-arrow">[RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</span></li>
-  <li><span class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md)</span></li>
-  <li><span class="link-arrow">[RDBMS Helm deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)</span></li>
+  <li><span class="link-arrow">[Manual installation with RDBMS](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/index.md)</span></li>
+  <li><span class="link-arrow">[RDBMS Helm deployment](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-with-rdbms.md)</span></li>
 </ul>
 
 ### Backup, restore, and analytics patterns
@@ -642,7 +642,7 @@ You can now safely combine frequent scheduled backups with additional on‑deman
 
 You can now use the `linux/arm64` image for Docker production environments.
 
-<p class="link-arrow">[Camunda Docker images](/self-managed/deployment/docker/docker.md)</p>
+<p class="link-arrow">[Camunda Docker images](/self-managed/deploy-to-production/deploy-your-baseline/containers/docker.md)</p>
 
 #### Connect to Elastic/OpenSearch with multi-host names
 
@@ -674,7 +674,7 @@ The Kubernetes Gateway API is now supported in the official Helm chart, allowing
 
 You can use new Helm values to choose between Ingress and Gateway per deployment, with documented step-by-step examples and migration guidance so you can move away from ingress-nginx before it is retired in March 2026.
 
-<p class="link-arrow">[Configure the Helm chart with Gateway API](/self-managed/deployment/helm/configure/ingress/gateway-api-setup.md)</p>
+<p class="link-arrow">[Configure the Helm chart with Gateway API](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/gateway-api-setup.md)</p>
 
 #### Helm chart values templating
 
@@ -693,7 +693,7 @@ The Helm chart now documents all values supporting Go template expressions, incl
 
 As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
 
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+<p class="link-arrow">[Helm 4](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md)</p>
 
 :::note
 Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
@@ -800,7 +800,7 @@ Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic C
 - Build-in storage safety guardrails, such as checks and guidance to prevent unsafe configurations (for example, multiple brokers writing to the same EFS volume).
 - Cluster membership handling offers improved handling of broker restarts and Amazon ECS task scheduling to ensure stable cluster operation.
 
-<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs.md)</p>
 
 #### Configure RocksDB memory per-broker
 
@@ -981,7 +981,7 @@ A new installation guide covers how you can configure Camunda 8 with relational 
 
 Camunda 8 Orchestration Clusters can now be installed manually (VM/bare metal/Java application) with full support for RDBMS (H2, PostgreSQL, Oracle, MariaDB) as secondary storage.
 
-<p class="link-arrow">[Manual installation with RDBMS](/self-managed/deployment/manual/rdbms/index.md)</p>
+<p class="link-arrow">[Manual installation with RDBMS](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/index.md)</p>
 
 #### Production installation guides
 
@@ -993,7 +993,7 @@ New RDBMS production installation guides for Camunda 8 are available:
 - Helm: Kubernetes-based orchestration cluster deployment via Helm, using RDBMS secondary storage.
 - Manual: Deploy and manage Camunda 8 using relational databases in production environments.
 
-<p class="link-arrow">[RDBMS Helm deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)</p>
+<p class="link-arrow">[RDBMS Helm deployment](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-with-rdbms.md)</p>
 
 #### Run Optimize with Orchestration Cluster RDBMS
 

@@ -11,7 +11,7 @@ Camunda 8.9 is the last version that ships Bitnami subcharts. Starting with Camu
 
 If you run Camunda 8.9 (or earlier) with Bitnami subcharts and want to migrate to Kubernetes operators or managed services, follow the [migration guide in the 8.9 documentation](https://docs.camunda.io/docs/8.9/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/).
 
-New Camunda 8.10 installations should provision [operator-based infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) or managed services directly, without Bitnami subcharts.
+New Camunda 8.10 installations should provision [operator-based infrastructure](/self-managed/deploy-to-production/plan-your-deployment/kubernetes-operators.md) or managed services directly, without Bitnami subcharts.
 
 ## Why is this guide only available for 8.9?
 

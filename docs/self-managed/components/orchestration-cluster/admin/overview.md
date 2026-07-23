@@ -56,7 +56,7 @@ The UI and Setup API options are useful for manual bootstrap, but they are not t
 Typical production next steps are:
 
 - Define initial users with the [configuration examples](#option-3-configuration) and assign them to roles with the [role assignment examples](#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration).
-- If you deploy with Helm, provide these settings through [application configs](/self-managed/deployment/helm/configure/application-configs.md) and the [Helm authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
+- If you deploy with Helm, provide these settings through [application configs](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs.md) and the [Helm authentication and authorization guides](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/index.md).
   :::
 
 :::warning
@@ -196,7 +196,7 @@ Replace `<role>` with the ID of the role you want to configure.
 
 :::note Helm deployments
 
-When you deploy with Helm, configure these properties via an `application.yaml` file using [application configs](/self-managed/deployment/helm/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
+When you deploy with Helm, configure these properties via an `application.yaml` file using [application configs](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
 
 :::
 

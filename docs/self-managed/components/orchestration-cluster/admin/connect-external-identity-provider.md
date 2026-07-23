@@ -10,7 +10,7 @@ import TabItem from "@theme/TabItem";
 Configure Admin to use an external identity provider (IdP) via OpenID Connect (OIDC) at the application level, including claims and mapping rules.
 
 :::info Deploying with Helm?
-If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md) to configure OIDC and Admin.
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/index.md) to configure OIDC and Admin.
 :::
 
 ## About Authentication and authorization
@@ -681,4 +681,4 @@ To resolve this:
 - [OIDC configuration reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)
 - [OpenID Connect (OIDC) overview](https://openid.net/connect/)
 - [Camunda authentication and authorization](../../../../components/concepts/access-control/authorizations.md)
-- [Helm chart authentication and authorization configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md)
+- [Helm chart authentication and authorization configuration](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/index.md)

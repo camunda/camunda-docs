@@ -196,7 +196,7 @@ You should update any hardcoded port references in network policies, Ingress rul
 
 As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
 
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+<p class="link-arrow">[Helm 4](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md)</p>
 
 :::note
 Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
@@ -350,7 +350,7 @@ Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic C
 
 This makes it easier and safer for teams that rely on Amazon ECS (including Fargate) to run Camunda 8 in production without needing to adopt Kubernetes (EKS). This feature relies on AWS S3.
 
-<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs.md)</p>
 
 ### Cluster variables for shared configuration
 

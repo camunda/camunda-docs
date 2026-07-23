@@ -23,8 +23,8 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 
 The connector runtime environment can be installed using the supported [deployment options](/self-managed/setup/overview.md#deployment-options).
 
-Currently, we support an installation of connectors with [Docker](/self-managed/deployment/docker/docker.md#connectors),
-[Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/setup/overview.md), and the [manual setup](/self-managed/deployment/manual/install.md#connectors-1).
+Currently, we support an installation of connectors with [Docker](/self-managed/deploy-to-production/deploy-your-baseline/containers/docker.md#connectors),
+[Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/setup/overview.md), and the [manual setup](/self-managed/deploy-to-production/deploy-your-baseline/manual/install.md#connectors-1).
 
 ## Connector templates
 

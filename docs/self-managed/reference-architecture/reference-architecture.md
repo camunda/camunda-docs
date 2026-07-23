@@ -89,7 +89,7 @@ The following table outlines the key differences between Admin and Management Id
 | Keycloak integration      | Treated as a standard external identity provider integrated via OIDC, making it easier to use other providers without special integration.                                                                                                                                                                                                                                                                                                     | Default Keycloak integration, with OIDC available for other providers.                                                                                                                       |
 | Tenant management         | Tenants are directly managed within the Orchestration Cluster, allowing per-cluster tenant management.                                                                                                                                                                                                                                                                                                                                         | No longer manages tenants for Orchestration Cluster components. Tenants apply only to Optimize.                                                                                              |
 
-For production environments, use an external [identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) to connect both environments.
+For production environments, use an external [identity provider](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/external-oidc-provider.md) to connect both environments.
 
 ### Databases
 
@@ -193,7 +193,7 @@ Containers, such as Docker, provide a portable and consistent runtime environmen
 - Each container runs in its own isolated environment, which helps prevent conflicts between applications and improves security.
 - Containers can be easily scaled up or down to handle varying workloads, providing flexibility in resource management.
 
-See [Camunda Docker images](/self-managed/deployment/docker/docker.md).
+See [Camunda Docker images](/self-managed/deploy-to-production/deploy-your-baseline/containers/docker.md).
 
 ### Manual (bare metal/virtual machines)
 

@@ -15,7 +15,7 @@ Use the RPA worker and Camunda Modeler to create, test, and automate RPA scripts
 
 ## About the RPA worker
 
-The RPA worker is available on all major platforms (Windows, Linux, and macOS). This lets you automate applications on their native platforms, which is typically Windows. For console applications or browser automation, you can use a lightweight distribution such as this [Docker image](../../../self-managed/deployment/docker/).
+The RPA worker is available on all major platforms (Windows, Linux, and macOS). This lets you automate applications on their native platforms, which is typically Windows. For console applications or browser automation, you can use a lightweight distribution such as this [Docker image](/self-managed/deploy-to-production/deploy-your-baseline/containers/docker.md).
 
 ## Create your first script
 

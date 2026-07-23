@@ -36,7 +36,7 @@ The MCP server is **enabled by default** in the Docker Compose distribution. No 
 
 <TabItem value="helm">
 
-Set the following [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#configuration-options) value in your Helm chart values:
+Set the following [`extraConfiguration`](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs.md#configuration-options) value in your Helm chart values:
 
 ```yaml
 orchestration:

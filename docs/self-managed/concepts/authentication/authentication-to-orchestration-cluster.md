@@ -33,7 +33,7 @@ Additionally, an [Unprotected API mode](#unprotected-api-mode) is available for 
 With Basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Admin service.
 
 :::note
-This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deployment/helm/index.md), and [Manual installation](/self-managed/deployment/manual/install.md).
+This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/index.md), and [Manual installation](/self-managed/deploy-to-production/deploy-your-baseline/manual/install.md).
 :::
 
 ### Example configuration

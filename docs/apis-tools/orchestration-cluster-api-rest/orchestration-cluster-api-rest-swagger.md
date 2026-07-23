@@ -48,7 +48,7 @@ For Self-Managed deployments, Swagger UI is available at your configured [Zeebe 
 `http://localhost:8080/swagger`
 
 **Custom configuration:**
-Use the host and path defined for your Zeebe Gateway in the [configuration guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md), then append `/swagger`.
+Use the host and path defined for your Zeebe Gateway in the [configuration guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/ingress-setup.md), then append `/swagger`.
 
 **Example with custom domain:**
 `https://your-zeebe-gateway.company.com/swagger`
