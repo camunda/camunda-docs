@@ -2229,6 +2229,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/authorization-model",
                 "self-managed/concepts/physical-tenants/configuration-reference",
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+                "self-managed/concepts/physical-tenants/web-apps",
               ],
             },
           ],
