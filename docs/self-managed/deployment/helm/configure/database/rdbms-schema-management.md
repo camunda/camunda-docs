@@ -203,6 +203,13 @@ After Liquibase completes, scale the orchestration deployment back to your desir
 kubectl scale deployment camunda-orchestration --replicas=3 -n camunda
 ```
 
+:::note
+The RDBMS upgrade is a rolling upgrade and does not require downtime of the orchestration cluster. Some schema
+operations might take longer to complete when the cluster and database is under load. If you experience long-running
+migrations, consider reducing the client-side load of the orchestration cluster or scale down the cluster to 0 nodes
+before the upgrade.
+:::
+
 ### Step 2b: Migrate the schema manually with SQL scripts
 
 If `autoDDL: false`, apply the SQL migration scripts before or during the Camunda version upgrade. The SQL scripts are
