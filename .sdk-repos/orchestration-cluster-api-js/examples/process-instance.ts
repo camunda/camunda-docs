@@ -2,6 +2,7 @@
 // These examples are type-checked during build to guard against API regressions.
 
 import {
+  type BusinessId,
   createCamundaClient,
   type ProcessDefinitionId,
   type ProcessDefinitionKey,
@@ -91,9 +92,42 @@ async function searchProcessInstancesExample(processDefinitionId: ProcessDefinit
 }
 //#endregion SearchProcessInstances
 
+//#region SuspendProcessInstance
+async function suspendProcessInstanceExample(processInstanceKey: ProcessInstanceKey) {
+  const camunda = createCamundaClient();
+
+  await camunda.suspendProcessInstance({ processInstanceKey });
+}
+//#endregion SuspendProcessInstance
+
+//#region ResumeProcessInstance
+async function resumeProcessInstanceExample(processInstanceKey: ProcessInstanceKey) {
+  const camunda = createCamundaClient();
+
+  await camunda.resumeProcessInstance({ processInstanceKey });
+}
+//#endregion ResumeProcessInstance
+
+//#region AssignProcessInstanceBusinessId
+async function assignProcessInstanceBusinessIdExample(
+  processInstanceKey: ProcessInstanceKey,
+  businessId: BusinessId
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignProcessInstanceBusinessId({
+    processInstanceKey,
+    businessId,
+  });
+}
+//#endregion AssignProcessInstanceBusinessId
+
 // Suppress "declared but never read"
 void createProcessInstanceByIdExample;
 void createProcessInstanceByKeyExample;
 void cancelProcessInstanceExample;
 void getProcessInstanceExample;
 void searchProcessInstancesExample;
+void suspendProcessInstanceExample;
+void resumeProcessInstanceExample;
+void assignProcessInstanceBusinessIdExample;
