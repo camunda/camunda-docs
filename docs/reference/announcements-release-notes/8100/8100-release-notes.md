@@ -80,16 +80,6 @@ See the [release announcement](/reference/announcements-release-notes/8100/8100-
 
 Organizations can now access exclusive Camunda 8 generation versions tailored specifically for their organization, available for both new cluster creation and upgrades. These generations are not visible to other organizations.
 
-#### Git-based catalog
-
-<!-- https://github.com/camunda/product-hub/issues/3402 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-Camunda Hub introduces an organization-level catalog for reusable, Center of Excellence (CoE)-approved assets, such as element templates, connectors, forms, and DMNs, backed by source control management (SCM).
-
-CoE teams can submit assets through the API from their SCM workflows, and delivery teams can browse catalog entries in Hub and inspect asset details. This release also adds in-diagram notifications for updated shared assets and pre-deployment dependency checks that surface missing DMNs, forms, connectors, and other dependencies on the target cluster before deployment.
-
 #### Select a target version when upgrading a cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3741 -->
