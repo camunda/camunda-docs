@@ -416,7 +416,7 @@ When using AWS, you can utilize [S3](https://aws.amazon.com/s3/) for backing up 
 
 ## Troubleshooting
 
-For troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
+For troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/troubleshooting/index.md).
 
 ## Next steps
 
