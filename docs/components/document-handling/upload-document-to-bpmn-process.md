@@ -13,7 +13,7 @@ When [building a form](/components/modeler/forms/utilizing-forms.md) for a proce
 
 In the Filepicker configuration, you can specify whether users can upload a single file or [multiple files](/components/modeler/forms/form-element-library/forms-element-library-filepicker.md#configurable-properties) and define the list of [supported file formats](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#unique_file_type_specifiers).
 
-Although this example focuses on [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md), you can also build a form for document upload in [Desktop Modeler](/components/modeler/desktop-modeler/index.md). The Filepicker form component is available in both environments.
+Although this example focuses on [Camunda Hub](/components/hub/workspace/modeler/launch-modeler.md), you can also build a form for document upload in [Desktop Modeler](/components/modeler/desktop-modeler/index.md). The Filepicker form component is available in both environments.
 
 ![Form with Filepicker](./img/form-with-file-picker.png)
 

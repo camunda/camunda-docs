@@ -257,11 +257,12 @@ The following example `values.yaml` configures Web Modeler with an external Amaz
 
 ```yaml
 webModeler:
-  externalDatabase:
-    url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-    user: web_modeler_user
-    existingSecret: webm-odeler-db-secret
-    existingSecretPasswordKey: database-password
+  restapi:
+    externalDatabase:
+      url: jdbc:postgresql://external-postgres-host:5432/camunda_db
+      user: web_modeler_user
+      existingSecret: web-modeler-db-secret
+      existingSecretPasswordKey: database-password
 ```
 
 Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret containing the password. This approach allows the Camunda Helm chart to reference credentials stored securely in your cluster, rather than hardcoding sensitive data in values files or templates.

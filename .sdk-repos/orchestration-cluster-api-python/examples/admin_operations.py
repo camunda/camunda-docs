@@ -8,6 +8,7 @@ from camunda_orchestration_sdk import (
     AuditLogKey,
     AuditLogSearchQueryRequest,
     CamundaClient,
+    ChangeClusterModeMode,
     ClockPinRequest,
     ClusterVariableName,
     ClusterVariableSearchQueryRequest,
@@ -34,6 +35,7 @@ from camunda_orchestration_sdk import (
     JobWorkerStatisticsQuery,
     MessageSubscriptionSearchQuery,
     ResourceSearchQuery,
+    RestoreRequest,
     TenantId,
     Unset,
     UpdateClusterVariableRequest,
@@ -262,6 +264,42 @@ def get_topology_example() -> None:
 
     print(f"Topology: {result}")
 # endregion GetTopology
+
+
+# region ChangeClusterMode
+def change_cluster_mode_example() -> None:
+    client = CamundaClient()
+
+    # Pass dry_run=True to validate the request and inspect the resulting plan
+    # without applying it. Omit it (or set it to False) to trigger the transition.
+    result = client.change_cluster_mode(
+        mode=ChangeClusterModeMode.RECOVERING,
+        dry_run=True,
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for operation in result.planned_changes:
+        suffix = f" -> {operation.mode}" if operation.mode else ""
+        print(f"  {operation.operation}{suffix}")
+# endregion ChangeClusterMode
+
+
+# region Restore
+def restore_example() -> None:
+    client = CamundaClient()
+
+    # The cluster must be in recovery mode before a restore is accepted. Provide
+    # either a list of backup IDs (one per partition) or a time range (from/to)
+    # that selects the backups to restore, but not both.
+    result = client.restore(
+        data=RestoreRequest(backup_ids=[100, 101]),
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for operation in result.planned_changes:
+        suffix = f" -> {operation.mode}" if operation.mode else ""
+        print(f"  {operation.operation}{suffix}")
+# endregion Restore
 
 
 # region GetStatus

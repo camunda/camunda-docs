@@ -27,7 +27,7 @@ If your AI agent and the target process run on the **same** Orchestration Cluste
 
 ## Prerequisites
 
-- Access to [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) or [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
+- A [Camunda Hub project](/components/hub/workspace/manage-projects/create-a-project.md) or access to [Desktop Modeler](/components/modeler/desktop-modeler/install-the-modeler.md).
 - An [Orchestration Cluster](/components/orchestration-cluster.md) running Camunda 8.10 or later.
 
 ## Step 1: Add an MCP start event to your process
@@ -38,7 +38,7 @@ The [MCP start event element template](/components/connectors/out-of-the-box-con
 2. Select the start event (or add a new one).
 3. In the properties panel, click the element template picker and select **MCP start event** from the **AI Tools** category.
 
-![A BPMN message start event in Web Modeler with the MCP start event element template applied, showing the properties panel](img/mcp-start-event-modeler.png)
+![A BPMN message start event in the Camunda Hub modeler with the MCP start event element template applied, showing the properties panel](img/mcp-start-event-modeler.png)
 
 ## Step 2: Configure the MCP tool metadata
 

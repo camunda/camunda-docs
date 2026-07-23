@@ -21,6 +21,7 @@ from camunda_orchestration_sdk import (
     ProcessDefinitionKey,
     ProcessDefinitionMessageSubscriptionStatisticsQuery,
     ProcessDefinitionSearchQuery,
+    ProcessDefinitionVariableNameSearchQuery,
     ProcessInstanceKey,
     ProcessInstanceMigrationInstruction,
     ProcessInstanceModificationInstruction,
@@ -112,6 +113,23 @@ def get_process_instance_statistics_example(
 
 
 # endregion GetProcessInstanceStatistics
+
+
+# region GetProcessInstanceWaitStateStatistics
+def get_process_instance_wait_state_statistics_example(
+    process_instance_key: ProcessInstanceKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.get_process_instance_wait_state_statistics(
+        process_instance_key=process_instance_key,
+    )
+
+    for stat in result.items:
+        print(f"Element: {stat.element_id}, Waiting: {stat.waiting_count}")
+
+
+# endregion GetProcessInstanceWaitStateStatistics
 
 
 # region GetProcessInstanceSequenceFlows
@@ -230,6 +248,25 @@ def search_process_definitions_example() -> None:
 
 
 # endregion SearchProcessDefinitions
+
+
+# region SearchProcessDefinitionVariableNames
+def search_process_definition_variable_names_example(
+    process_definition_key: ProcessDefinitionKey,
+) -> None:
+    client = CamundaClient()
+
+    result = client.search_process_definition_variable_names(
+        process_definition_key=process_definition_key,
+        data=ProcessDefinitionVariableNameSearchQuery(),
+    )
+
+    if not isinstance(result.items, Unset):
+        for variable in result.items:
+            print(f"Variable name: {variable.name}")
+
+
+# endregion SearchProcessDefinitionVariableNames
 
 
 # region GetProcessDefinitionStatistics

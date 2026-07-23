@@ -2041,6 +2041,13 @@ An instruction to create or update process instance variables. See the [utilitie
     <td>No</td>
     <td></td>
   </tr>
+  <tr>
+    <td>createLocalVariables</td>
+    <td>Whether to create variables locally in the scope of the element (requires <code>elementSelector</code>). When <code>true</code>, variables are created in the element's local scope and are not propagated to parent scopes.</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
 </tbody></table>
 
 Example:

@@ -146,3 +146,7 @@ optimize:
 ```
 
 For a full list of options, see the [Optimize Helm values](https://artifacthub.io/packages/helm/camunda/camunda-platform#optimize-parameters).
+
+:::note
+Disabling Optimize removes the legacy Elasticsearch/OpenSearch exporter from the broker's static configuration. However, it does not remove the exporter from the dynamic configuration, which prevents log compaction and increases disk usage. See [Disable an exporter](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#disable-an-exporter) for the additional step required to fully disable it.
+:::

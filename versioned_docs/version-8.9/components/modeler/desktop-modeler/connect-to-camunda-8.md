@@ -20,9 +20,13 @@ To deploy diagrams, start process instances, or test tasks, you must first conne
 
    ![Connection manager showing add button](./img/connection-manager-add.png)
 
-4. Enter a name, the cluster URL, and the credentials (client ID and client secret) for your [API client](../../console/manage-clusters/manage-api-clients.md).
+4. Enter a name, the cluster URL, and the credentials (client ID and client secret) for your [API client](../../console/manage-clusters/manage-api-clients.md). Optionally enter the tenant ID.
 
    ![Connection manager with new connection information filled in](./img/connection-manager-new-connection-loading.png)
+
+   :::caution
+   When connecting to a tenant, the API client must be assigned to it through [Orchestration Cluster Admin](../../admin/admin-introduction.md).
+   :::
 
    Desktop Modeler automatically validates the connection.
    If you have issues connecting to the cluster, see the [troubleshooting page](./troubleshooting.md#debug-zeebe-connection-issues).
