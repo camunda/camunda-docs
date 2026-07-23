@@ -87,6 +87,8 @@ For example:
 https://your-cluster/physical-tenants/riskproduction/operate
 ```
 
+For how data scoping, session behavior, and tenant navigation work within each web app, see [web apps](./web-apps.md).
+
 ## gRPC routing
 
 gRPC clients specify the target Physical Tenant using the `Camunda-Physical-Tenant` request header (metadata in gRPC terms). Requests that omit the header route to the `default` Physical Tenant.
