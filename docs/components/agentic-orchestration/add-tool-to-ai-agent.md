@@ -35,9 +35,14 @@ You can model a sub-flow inside the ad-hoc sub-process. Only the first element i
 
 ## Write a tool name and description
 
-The LLM selects tools based on the element name and its **Documentation** field. Clear, specific descriptions significantly improve the reliability of tool selection.
+The LLM selects tools based on the element's **ID** and its **Documentation** field. Clear, specific descriptions significantly improve the reliability of tool selection.
 
-1. Give the element a descriptive **name**. The element ID (derived from the name) is what the LLM receives as the tool name.
+- The element's **ID** is always used as the tool name.
+- The element's **Documentation** field is used as the tool description. If **Documentation** is empty, the element's **Name** is used as a fallback description. If both are empty, the tool has no description.
+
+See [Tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions) for the complete resolution rules.
+
+1. Give the element a descriptive **ID**, since this is what the LLM receives as the tool name.
 1. Open the **Documentation** field in the properties panel and write a description that explains:
    - What the tool does.
    - When the LLM should use it.
