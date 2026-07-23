@@ -26,7 +26,7 @@ You can use any BPMN activity type as a tool:
 
 | Tool type            | When to use                                                                                                                                          |
 | :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| REST connector       | Call an external HTTP API.                                                                                                                           |
+| Connectors           | Call an external system, for example the [REST connector](/components/connectors/protocol/rest.md) to call an HTTP API.                              |
 | Script task          | Execute inline logic or data transformation.                                                                                                         |
 | User task            | Route to a human for input or approval as part of the agent's decision path.                                                                         |
 | Call activity        | Invoke another BPMN process as a tool when the target process is on the same cluster.                                                                |
