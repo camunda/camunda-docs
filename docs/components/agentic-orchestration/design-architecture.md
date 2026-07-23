@@ -72,11 +72,11 @@ This is a typical execution timeline:
 
 ### Define your agent tools
 
-In the AI agent model, each BPMN activity inside an ad-hoc sub-process is a tool exposed to the LLM. The activity's **ID** is used as the tool name, and its **Documentation** field is used as the tool description (falling back to the activity's **Name** if Documentation is empty). The LLM uses this tool definition to decide which tool to call, in what order, and with which parameters.
+In the AI agent model, each BPMN element inside an ad-hoc sub-process is a tool exposed to the LLM. The element's **ID** is used as the tool name, and its **Documentation** field is used as the tool description (falling back to the element's **Name** if **Documentation** is empty). The LLM uses this tool definition to decide which tool to call, in what order, and with which parameters.
 
 Clear, behavior-oriented tool names and descriptions directly improve agent reliability. Vague or missing documentation increases the risk of incorrect tool selection, repeated calls, and hallucinated behavior.
 
-For a step-by-step guide on naming tools, writing descriptions, declaring `fromAi()` parameters, and mapping `toolCallResult` outputs, see [Add tools to an AI agent](./add-tool-to-ai-agent.md).
+For a how-to guide on adding tools, see [add tools to an AI agent](./add-tool-to-ai-agent.md).
 
 ### Mix agents with workflow patterns
 
