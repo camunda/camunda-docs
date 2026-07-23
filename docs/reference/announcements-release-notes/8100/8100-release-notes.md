@@ -61,7 +61,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-Camunda Hub now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+Camunda now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
 The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
@@ -519,7 +519,7 @@ Camunda Process Test now exposes **judge-based evaluation** and **semantic simil
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 
-Camunda Hub and Accounts now support the 2025 enterprise license model.
+Console and Accounts now support the 2025 enterprise license model.
 
 - A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
 - If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
