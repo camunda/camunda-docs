@@ -13,7 +13,9 @@ Add BPMN elements as callable tools to your AI agents.
 
 ## About
 
-A tool is a BPMN element inside an ad-hoc sub-process that the LLM can choose to invoke to complete a goal. For the full explanation of tool properties and how tools are resolved, see [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
+A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal.
+
+You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
 
 ## Add an element inside the ad-hoc sub-process
 
