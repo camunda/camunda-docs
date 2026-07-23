@@ -30,7 +30,3 @@ orchestration:
     appProtocols:
       grpc: kubernetes.io/h2c
 ```
-
-:::note
-Setting a port name that isn't in the accepted list for a component fails the Helm render with an error naming the invalid key and listing the accepted port names for that component. This catches typos before they reach the cluster.
-:::
