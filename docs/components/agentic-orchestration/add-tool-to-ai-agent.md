@@ -60,43 +60,18 @@ A precise description makes the expected behavior explicit and reduces the risk 
 
 ## Declare AI-generated parameters with `fromAi()`
 
-If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
+If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the `fromAi()` FEEL function in the activity's input mappings or connector input fields.
 
-The `fromAi()` function marks a value as LLM-provided and generates a JSON Schema parameter definition that is passed to the LLM as part of the tool definition. Always provide a description for every parameter, as this significantly reduces hallucinated values. The `type` argument is optional and defaults to `string` if omitted, so only add it when the parameter is not a string. This keeps `fromAi()` expressions smaller and easier to manage.
+1. Open the input field or **Input Mappings** section where the value is configured.
+1. Wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context, and add a description so the LLM knows what to provide:
 
-**Basic usage**: declare a string parameter. The `type` argument can be omitted here since it defaults to `string`:
+   ```feel
+   fromAi(toolCall.url, "The URL to fetch. Must be a valid HTTP(s) URL.")
+   ```
 
-```feel
-fromAi(toolCall.url, "The URL to fetch. Must be a valid HTTP(s) URL.")
-```
+1. Repeat for each value the LLM should supply.
 
-**With type**: declare a number parameter:
-
-```feel
-fromAi(toolCall.latitude, "Latitude of the location", "number")
-```
-
-**Optional parameter**: mark a parameter as not required:
-
-```feel
-fromAi(
-  value: toolCall.filterStatus,
-  description: "Optional status filter. Pass null to return all results.",
-  options: { required: false }
-)
-```
-
-**Combined in one expression**: use multiple `fromAi()` calls in a single field:
-
-```feel
-fromAi(toolCall.firstName, "Customer first name", "string") + " " + fromAi(toolCall.lastName, "Customer last name", "string")
-```
-
-:::important
-The first argument to `fromAi()` must be a reference to a field within the `toolCall` context, for example `toolCall.myParameter`. This is automatically populated by the AI Agent connector when the LLM calls the tool.
-:::
-
-For more examples and the full function signature, see [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue).
+For the full `fromAi()` syntax, including optional parameters, non-string types, JSON Schema definitions, and combining multiple `fromAi()` calls, see [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai).
 
 ## Return the result as `toolCallResult`
 
