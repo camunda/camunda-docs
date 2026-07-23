@@ -20,7 +20,7 @@ Another use case is local development, where a cluster might be recreated regula
 After Admin creates an entity, changing its configuration does not update the existing entity.
 Admin checks only the ID to decide whether an entity already exists.
 
-When you deploy with Helm, the most reliable approach is to provide Identity as Code settings through [application configs](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs.md) using `orchestration.extraConfiguration`. The Helm examples below use this pattern so you can apply the same approach consistently across all entity types.
+When you deploy with Helm, the most reliable approach is to provide Identity as Code settings through [application configs](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md) using `orchestration.extraConfiguration`. The Helm examples below use this pattern so you can apply the same approach consistently across all entity types.
 
 ## Configure authorizations
 

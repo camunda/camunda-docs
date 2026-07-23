@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
-import { activeVersionURLPath as linkBase } from "../Versions";
+import { activeVersionURLPath as linkBase, isActiveVersionAtLeast } from "../Versions";
+import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 import K8sIcon from "./icons/kubernetes.svg";
 import DockerIcon from "./icons/docker.svg";
 import JarIcon from "./icons/jar.svg";
@@ -18,25 +19,34 @@ const InstallationCard = ({ link, title, icon: Icon, description }) => {
 };
 
 const Installation = () => {
+  const docsVersion = useActiveVersion();
+  const isNewIA = isActiveVersionAtLeast(docsVersion, 8, 10);
+
   const InstallationItems = [
     {
       title: "Kubernetes with Helm",
       icon: K8sIcon,
       description:
         "Deploy Camunda on Kubernetes using Helm charts for easy management.",
-      link: "/self-managed/deployment/helm/",
+      link: isNewIA
+        ? "/self-managed/deploy-to-production/kubernetes/"
+        : "/self-managed/deployment/helm/",
     },
     {
       title: "Docker",
       icon: DockerIcon,
       description: "Run individual Camunda components in Docker containers.",
-      link: "/self-managed/deployment/docker/",
+      link: isNewIA
+        ? "/self-managed/deploy-to-production/containers/docker/"
+        : "/self-managed/deployment/docker/",
     },
     {
       title: "Manual",
       icon: JarIcon,
       description: "Direct installation and configuration using JAR files.",
-      link: "/self-managed/deployment/manual/install/",
+      link: isNewIA
+        ? "/self-managed/deploy-to-production/manual/install/"
+        : "/self-managed/deployment/manual/install/",
     },
   ];
 

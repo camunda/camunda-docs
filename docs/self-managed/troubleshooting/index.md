@@ -24,7 +24,7 @@ The security warning does not indicate a security vulnerability. This warning ca
 
 In both cases, the security warning is a precautionary measure from Bitnami's detection system and does not indicate a genuine security risk.
 
-For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
+For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
 
 ### Suppress the warning
 
@@ -162,11 +162,11 @@ However, according to the official Kubernetes documentation about [Ingress TLS](
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md).
+Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deploy-to-production/kubernetes/install/index.md).
 
 ## Identity `contextPath`
 
-Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
+Camunda 8 Self-Managed can be accessed externally via the [combined Ingress setup](/self-managed/deploy-to-production/kubernetes/configure/ingress/ingress-setup.md#combined-ingress-setup). In that configuration, Camunda Identity is accessed using a specific path, configured by setting the `contextPath` variable, for example `https://camunda.example.com/identity`.
 
 For security reasons, Camunda Identity requires secure access (HTTPS) when a `contextPath` is configured.
 
@@ -189,7 +189,7 @@ If you encounter errors during Helm chart installation, such as type mismatches 
 - For Camunda 8.9 and earlier (chart 14.x and earlier), use Helm CLI v3.13 or higher.
 - For Camunda 8.10+ (chart 15.x+), Helm CLI v4.x is required.
 
-For chart-to-CLI compatibility across versions, see [Helm 4](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md).
+For chart-to-CLI compatibility across versions, see [Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md).
 
 ## DNS disruption issue for Zeebe in Kubernetes clusters (1.29-1.31)
 
@@ -283,7 +283,7 @@ Find more information on [how to register your application on Identity](https://
 
 The AWS EKS IRSA configuration scripts are focused on verifying the correct setup of IAM Roles for Service Accounts (IRSA) within your Kubernetes deployment on AWS. These scripts ensure that your Kubernetes service accounts are correctly associated with IAM roles, allowing components like PostgreSQL, OpenSearch, and others in your deployment to securely interact with AWS resources.
 
-For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/irsa.md#irsa-check-script).
+For detailed usage instructions and setup information, please refer to the [IRSA guide](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/irsa.md#irsa-check-script).
 
 ### Interpretation of the results
 
@@ -338,7 +338,7 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 :::note Bitnami Premium (`vendor-ee/*`) images
 Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete. Do not rely on it.
 
-Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
+Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
 :::
 
 ## Incorrect authorizations when deploying resources from Modeler

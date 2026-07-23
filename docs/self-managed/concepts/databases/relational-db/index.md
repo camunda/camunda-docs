@@ -39,7 +39,7 @@ graph LR
 ## Deployment guides
 
 - Helm deployments: [Configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
-- Manual deployments: [Configure RDBMS for manual installation](/self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/configuration.md)
+- Manual deployments: [Configure RDBMS for manual installation](/self-managed/deploy-to-production/manual/rdbms/configuration.md)
 
 ## Related concepts
 

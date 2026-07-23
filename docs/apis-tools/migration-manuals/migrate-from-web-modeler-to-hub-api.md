@@ -90,7 +90,7 @@ The base URL has changed for both SaaS and Self-Managed deployments. Update any 
 | SaaS         | `https://modeler.cloud.camunda.io/api/v1` | `https://hub.cloud.camunda.io/api/v2` |
 | Self-Managed | `http://localhost:8070/api/v1`            | `http://localhost:8088/api/v2`        |
 
-In Camunda 8 Self-Managed, the URLs depend on your configuration. The URLs and ports provided in this table are examples based on a [no-domain Helm deployment to a local kind cluster](/self-managed/quickstart/local-with-kind.md#no-domain-mode-deployment).
+In Camunda 8 Self-Managed, the URLs depend on your configuration. The URLs and ports provided in this table are examples based on a [no-domain Helm deployment to a local kind cluster](/self-managed/quickstart/administrator/kind.md#no-domain-mode-deployment).
 
 ### Authentication
 

@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
-import { activeVersionURLPath as linkBase } from "../Versions";
+import { activeVersionURLPath as linkBase, isActiveVersionAtLeast } from "../Versions";
+import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
 import AWSIcon from "./icons/aws.svg";
 import AzureIcon from "./icons/azure.svg";
 import GCPIcon from "./icons/gcp.svg";
@@ -19,33 +20,44 @@ const InfrastructureCard = ({ link, title, icon: Icon, description }) => {
 };
 
 const Infrastructure = () => {
+  const docsVersion = useActiveVersion();
+  const isNewIA = isActiveVersionAtLeast(docsVersion, 8, 10);
+
   const infrastructureItems = [
     {
       title: "Amazon",
       icon: AWSIcon,
       description:
         "Deploy Camunda on AWS with EKS, RDS, and other AWS services.",
-      link: "/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/",
+      link: isNewIA
+        ? "/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/"
+        : "/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/",
     },
     {
       title: "Microsoft",
       icon: AzureIcon,
       description:
         "Set up Camunda on Azure with AKS and Azure Database services.",
-      link: "/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/",
+      link: isNewIA
+        ? "/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/"
+        : "/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/",
     },
     {
       title: "Google",
       icon: GCPIcon,
       description:
         "Deploy on Google Cloud Platform with GKE and other GCP services.",
-      link: "/self-managed/deployment/helm/cloud-providers/gcp/google-gke/",
+      link: isNewIA
+        ? "/self-managed/deploy-to-production/kubernetes/clusters/google-gke/"
+        : "/self-managed/deployment/helm/cloud-providers/gcp/google-gke/",
     },
     {
       title: "Red Hat OpenShift",
       icon: OpenShiftIcon,
       description: "Run Camunda on OpenShift container platform.",
-      link: "/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift/",
+      link: isNewIA
+        ? "/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift/"
+        : "/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift/",
     },
   ];
 

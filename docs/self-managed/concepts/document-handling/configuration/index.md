@@ -26,13 +26,13 @@ Camunda 8 Run is a fast way for users to test the capabilities of the platform, 
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/) — including [S3-compatible object stores](/self-managed/concepts/document-handling/configuration/helm.md#s3-compatible-object-storage) such as MinIO, Cloudian, or Garage (configured through the AWS S3 store with a custom endpoint)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
-  - Configuring these storages is supported in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), and [Helm](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md).
+  - Configuring these storages is supported in [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md), [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md), and [Helm](/self-managed/deploy-to-production/kubernetes/install/index.md).
 - **Local storage** can be configured for a cluster to store documents in a local folder.
-  - It can be used only for local development with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+  - It can be used only for local development with [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md).
   - Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
   - If you're using a container image and a mounted volume for your storage, you can use the path `/usr/local/camunda/documents` as the mount path, as it will already have the right permissions for the Camunda process to read and write to it.
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost.
-  - It can be used with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md).
+  - It can be used with [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md), [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md) and [Helm](/self-managed/deploy-to-production/kubernetes/install/index.md).
   - In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
 
 ## Physical Tenant isolation

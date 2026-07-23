@@ -158,7 +158,7 @@ These changes reduce friction when setting up Camunda 8 Run for the first time, 
 The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run. Docker Compose is now a standalone distribution artifact. See [release announcements](/reference/announcements-release-notes/890/890-announcements.md#camunda-8-run-docker-compose-support-removed) for migration details.
 :::
 
-<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md)</p>
 
 ### Secondary storage
 
@@ -170,7 +170,7 @@ Camunda 8 Run now uses H2 as the default secondary data store.
 
 You can also configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2 (for example, PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
-<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
+<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer/c8run/secondary-storage.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
 
 ## Global user task listeners {#listeners}
 
@@ -196,7 +196,7 @@ You should update any hardcoded port references in network policies, Ingress rul
 
 As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
 
-<p class="link-arrow">[Helm 4](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md)</p>
+<p class="link-arrow">[Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md)</p>
 
 :::note
 Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
@@ -350,7 +350,7 @@ Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic C
 
 This makes it easier and safer for teams that rely on Amazon ECS (including Fargate) to run Camunda 8 in production without needing to adopt Kubernetes (EKS). This feature relies on AWS S3.
 
-<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs.md)</p>
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deploy-to-production/containers/amazon-ecs/aws-ecs.md)</p>
 
 ### Cluster variables for shared configuration
 

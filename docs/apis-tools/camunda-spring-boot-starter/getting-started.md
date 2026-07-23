@@ -171,7 +171,7 @@ camunda:
 </TabItem>
 <TabItem value="oidc">
 
-If you set up a [Self-Managed cluster with OIDC](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/index.md), you must configure the accompanying client credentials:
+If you set up a [Self-Managed cluster with OIDC](/self-managed/deploy-to-production/kubernetes/authentication/index.md), you must configure the accompanying client credentials:
 
 ```yaml
 camunda:

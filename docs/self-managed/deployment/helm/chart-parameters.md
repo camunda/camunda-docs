@@ -24,7 +24,7 @@ The following tables show the **top-level configuration sections** in `values.ya
 | `global`        | Configures shared settings that apply across components |
 | `orchestration` | Configures orchestration cluster settings               |
 
-For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestration.hostNetwork`, see [configure pod networking](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/pod-networking.md).
+For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestration.hostNetwork`, see [configure pod networking](/self-managed/deploy-to-production/kubernetes/configure/pod-networking.md).
 
 ### Other Camunda applications
 
@@ -38,7 +38,7 @@ For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestr
 
 ### Bitnami subcharts
 
-Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production. For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deploy-to-production/plan-your-deployment/kubernetes-operators.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
+Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production. For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deploy-to-production/plan/kubernetes-operators.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
 
 - `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [document-store backends (Elasticsearch/OpenSearch)](/reference/glossary.md#elasticsearchopensearch).
 - `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart).
@@ -64,7 +64,7 @@ See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configu
 - Manage infrastructure lifecycle independently of Camunda applications
 - Implement your organization's security, backup, and monitoring standards
 
-If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
+If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
 
 ### Observability
 

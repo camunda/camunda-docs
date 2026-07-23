@@ -1672,15 +1672,15 @@ module.exports = {
       label: "Quickstart",
       link: {
         type: "doc",
-        id: "self-managed/quickstart/overview",
+        id: "self-managed/quickstart/index",
       },
       items: [
         {
           type: "category",
-          label: "For Developers",
+          label: "Developers",
           link: {
             type: "doc",
-            id: "self-managed/quickstart/developer-quickstart",
+            id: "self-managed/quickstart/developer/index",
           },
           items: [
             {
@@ -1688,13 +1688,13 @@ module.exports = {
               label: "Camunda 8 Run",
               link: {
                 type: "doc",
-                id: "self-managed/quickstart/developer-quickstart/c8run",
+                id: "self-managed/quickstart/developer/c8run/index",
               },
               items: [
-                "self-managed/quickstart/developer-quickstart/c8run/install-start",
-                "self-managed/quickstart/developer-quickstart/c8run/configuration",
-                "self-managed/quickstart/developer-quickstart/c8run/secondary-storage",
-                "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
+                "self-managed/quickstart/developer/c8run/install-start",
+                "self-managed/quickstart/developer/c8run/configuration",
+                "self-managed/quickstart/developer/c8run/secondary-storage",
+                "self-managed/quickstart/developer/c8run/troubleshooting",
               ],
             },
             {
@@ -1702,27 +1702,27 @@ module.exports = {
               label: "Docker Compose",
               link: {
                 type: "doc",
-                id: "self-managed/quickstart/developer-quickstart/docker-compose",
+                id: "self-managed/quickstart/developer/docker-compose/index",
               },
               items: [
-                "self-managed/quickstart/developer-quickstart/docker-compose/install-start",
-                "self-managed/quickstart/developer-quickstart/docker-compose/configuration",
-                "self-managed/quickstart/developer-quickstart/docker-compose/secondary-storage",
-                "self-managed/quickstart/developer-quickstart/docker-compose/connectors-and-modeling",
+                "self-managed/quickstart/developer/docker-compose/install-start",
+                "self-managed/quickstart/developer/docker-compose/configuration",
+                "self-managed/quickstart/developer/docker-compose/secondary-storage",
+                "self-managed/quickstart/developer/docker-compose/connectors-and-modeling",
               ],
             },
           ],
         },
         {
           type: "category",
-          label: "For Administrators",
+          label: "Administrators",
           link: {
             type: "doc",
-            id: "self-managed/quickstart/administrator-quickstart",
+            id: "self-managed/quickstart/administrator/index",
           },
           items: [
-            "self-managed/quickstart/kind",
-            "self-managed/quickstart/quick-install",
+            "self-managed/quickstart/administrator/kind",
+            "self-managed/quickstart/administrator/helm",
           ],
         },
       ],
@@ -1748,7 +1748,7 @@ module.exports = {
           type: "category",
           label: "Plan your deployment",
           items: [
-            "self-managed/deploy-to-production/plan-your-deployment/operator-based-infrastructure",
+            "self-managed/deploy-to-production/plan/kubernetes-operators",
           ],
         },
         {
@@ -1757,18 +1757,18 @@ module.exports = {
           items: [
             {
               type: "category",
-              label: "Kubernetes (with Helm)",
+              label: "Kubernetes",
               link: {
                 type: "doc",
-                id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/index",
+                id: "self-managed/deploy-to-production/kubernetes/index",
               },
               items: [
                 {
                   type: "category",
-                  label: "Provision your cluster",
+                  label: "Provision clusters",
                   link: {
                     type: "doc",
-                    id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/index",
+                    id: "self-managed/deploy-to-production/kubernetes/clusters/index",
                   },
                   items: [
                     {
@@ -1776,27 +1776,27 @@ module.exports = {
                       label: "Amazon EKS",
                       link: {
                         type: "doc",
-                        id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/amazon-eks",
+                        id: "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/amazon-eks",
                       },
                       items: [
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/eks-eksctl",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/eks-terraform",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/eks-helm",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/dual-region",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/amazon-eks/irsa",
+                        "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/eksctl",
+                        "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform",
+                        "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/helm",
+                        "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/dual-region",
+                        "self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/irsa",
                       ],
                     },
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/google-gke",
+                    "self-managed/deploy-to-production/kubernetes/clusters/google-gke",
                     {
                       type: "category",
                       label: "Microsoft AKS",
                       link: {
                         type: "doc",
-                        id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/microsoft-aks/microsoft-aks",
+                        id: "self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/microsoft-aks",
                       },
                       items: [
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/microsoft-aks/aks-terraform",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/microsoft-aks/aks-helm",
+                        "self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/terraform",
+                        "self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/helm",
                       ],
                     },
                     {
@@ -1805,13 +1805,13 @@ module.exports = {
                       items: [
                         {
                           type: "category",
-                          label: "On AWS (ROSA)",
+                          label: "AWS (ROSA)",
                           link: {
                             type: "doc",
-                            id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/on-aws-rosa/terraform-setup",
+                            id: "self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/aws-rosa/terraform",
                           },
                           items: [
-                            "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/on-aws-rosa/terraform-setup-dual-region",
+                            "self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/aws-rosa/terraform-dual-region",
                           ],
                         },
                         {
@@ -1819,10 +1819,10 @@ module.exports = {
                           label: "Self-hosted",
                           link: {
                             type: "doc",
-                            id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/self-hosted/redhat-openshift",
+                            id: "self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift",
                           },
                           items: [
-                            "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/self-hosted/redhat-openshift-dual-region",
+                            "self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift-dual-region",
                           ],
                         },
                       ],
@@ -1834,12 +1834,12 @@ module.exports = {
                   label: "Install Camunda",
                   link: {
                     type: "doc",
-                    id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index",
+                    id: "self-managed/deploy-to-production/kubernetes/install/index",
                   },
                   items: [
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/production/index",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-with-rdbms",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4",
+                    "self-managed/deploy-to-production/kubernetes/install/production/index",
+                    "self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms",
+                    "self-managed/deploy-to-production/kubernetes/install/helm-v4",
                   ],
                 },
                 {
@@ -1847,22 +1847,22 @@ module.exports = {
                   label: "Configure",
                   link: {
                     type: "doc",
-                    id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/index",
+                    id: "self-managed/deploy-to-production/kubernetes/configure/index",
                   },
                   items: [
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/pod-networking",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/enable-additional-components",
+                    "self-managed/deploy-to-production/kubernetes/configure/application-configs",
+                    "self-managed/deploy-to-production/kubernetes/configure/pod-networking",
+                    "self-managed/deploy-to-production/kubernetes/configure/enable-additional-components",
                     {
                       type: "category",
                       label: "Registry and images",
                       link: {
                         type: "doc",
-                        id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/registry-and-images/index",
+                        id: "self-managed/deploy-to-production/kubernetes/configure/registry-and-images/index",
                       },
                       items: [
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/registry-and-images/air-gapped-installation",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images",
+                        "self-managed/deploy-to-production/kubernetes/configure/registry-and-images/air-gapped-installation",
+                        "self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images",
                       ],
                     },
                     {
@@ -1870,46 +1870,46 @@ module.exports = {
                       label: "Ingress",
                       link: {
                         type: "doc",
-                        id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/index",
+                        id: "self-managed/deploy-to-production/kubernetes/configure/ingress/index",
                       },
                       items: [
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/ingress-setup",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/accessing-components-without-ingress",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/gateway-api-setup",
+                        "self-managed/deploy-to-production/kubernetes/configure/ingress/ingress-setup",
+                        "self-managed/deploy-to-production/kubernetes/configure/ingress/accessing-components-without-ingress",
+                        "self-managed/deploy-to-production/kubernetes/configure/ingress/gateway-api-setup",
                       ],
                     },
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/secret-management",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/running-custom-connectors",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/add-extra-manifests",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/license-key",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/guides",
+                    "self-managed/deploy-to-production/kubernetes/configure/secret-management",
+                    "self-managed/deploy-to-production/kubernetes/configure/running-custom-connectors",
+                    "self-managed/deploy-to-production/kubernetes/configure/add-extra-manifests",
+                    "self-managed/deploy-to-production/kubernetes/configure/license-key",
+                    "self-managed/deploy-to-production/kubernetes/configure/guides",
                   ],
                 },
                 {
                   type: "category",
-                  label: "Set up authentication",
+                  label: "Authentication",
                   link: {
                     type: "doc",
-                    id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/index",
+                    id: "self-managed/deploy-to-production/kubernetes/authentication/index",
                   },
                   items: [
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/basic-authentication",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/custom-users-and-clients",
-                    "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/internal-keycloak",
+                    "self-managed/deploy-to-production/kubernetes/authentication/basic-authentication",
+                    "self-managed/deploy-to-production/kubernetes/authentication/custom-users-and-clients",
+                    "self-managed/deploy-to-production/kubernetes/authentication/internal-keycloak",
                     {
                       type: "category",
                       label: "External OIDC provider",
                       link: {
                         type: "doc",
-                        id: "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/external-oidc-provider",
+                        id: "self-managed/deploy-to-production/kubernetes/authentication/external-oidc-provider",
                       },
                       items: [
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/microsoft-entra",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/generic-oidc-provider",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/external-keycloak",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/external-idp-via-internal-keycloak",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/troubleshooting-oidc",
-                        "self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/jwt-token-claims",
+                        "self-managed/deploy-to-production/kubernetes/authentication/microsoft-entra",
+                        "self-managed/deploy-to-production/kubernetes/authentication/generic-oidc-provider",
+                        "self-managed/deploy-to-production/kubernetes/authentication/external-keycloak",
+                        "self-managed/deploy-to-production/kubernetes/authentication/external-idp-via-internal-keycloak",
+                        "self-managed/deploy-to-production/kubernetes/authentication/troubleshooting-oidc",
+                        "self-managed/deploy-to-production/kubernetes/authentication/jwt-token-claims",
                       ],
                     },
                   ],
@@ -1920,40 +1920,40 @@ module.exports = {
               type: "category",
               label: "Containers",
               items: [
-                "self-managed/deploy-to-production/deploy-your-baseline/containers/docker",
+                "self-managed/deploy-to-production/containers/docker",
                 {
                   type: "category",
                   label: "Amazon ECS",
                   link: {
                     type: "doc",
-                    id: "self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/index",
+                    id: "self-managed/deploy-to-production/containers/amazon-ecs/index",
                   },
                   items: [
-                    "self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs",
-                    "self-managed/deploy-to-production/deploy-your-baseline/containers/amazon-ecs/aws-ecs-dual-region",
+                    "self-managed/deploy-to-production/containers/amazon-ecs/aws-ecs",
+                    "self-managed/deploy-to-production/containers/amazon-ecs/aws-ecs-dual-region",
                   ],
                 },
               ],
             },
             {
               type: "category",
-              label: "Manual or virtual machines",
+              label: "Manual",
               items: [
-                "self-managed/deploy-to-production/deploy-your-baseline/manual/install",
+                "self-managed/deploy-to-production/manual/install",
                 {
                   type: "category",
                   label: "Manual installation with a relational database",
                   link: {
                     type: "doc",
-                    id: "self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/index",
+                    id: "self-managed/deploy-to-production/manual/rdbms/index",
                   },
                   items: [
-                    "self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/rdbms-production-architecture",
-                    "self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/configuration",
-                    "self-managed/deploy-to-production/deploy-your-baseline/manual/rdbms/operations",
+                    "self-managed/deploy-to-production/manual/rdbms/rdbms-production-architecture",
+                    "self-managed/deploy-to-production/manual/rdbms/configuration",
+                    "self-managed/deploy-to-production/manual/rdbms/operations",
                   ],
                 },
-                "self-managed/deploy-to-production/deploy-your-baseline/manual/aws-ec2",
+                "self-managed/deploy-to-production/manual/aws-ec2",
               ],
             },
           ],

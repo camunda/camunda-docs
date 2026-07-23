@@ -20,7 +20,7 @@ Configure Management Identity for your Camunda 8 Self-Managed deployment. This g
 :::
 
 :::info Deploying with Helm?
-If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/index.md) to configure OIDC and Management Identity.
+If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authentication and authorization guides](/self-managed/deploy-to-production/kubernetes/authentication/index.md) to configure OIDC and Management Identity.
 :::
 
 ## Prerequisites

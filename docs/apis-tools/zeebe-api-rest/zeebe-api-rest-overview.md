@@ -26,7 +26,7 @@ Example path: `https://${REGION}.api.camunda.io:443/${CLUSTER_ID}/v1/`
 
 ### Self-Managed
 
-Use the host and path defined for your [Zeebe Gateway](/reference/glossary.md#zeebe-gateway). For Ingress and routing details, see the [configuration guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/ingress-setup.md). The path used here is the default.
+Use the host and path defined for your [Zeebe Gateway](/reference/glossary.md#zeebe-gateway). For Ingress and routing details, see the [configuration guide](/self-managed/deploy-to-production/kubernetes/configure/ingress/ingress-setup.md). The path used here is the default.
 
 Example path: `http://localhost:8080/v1/`
 

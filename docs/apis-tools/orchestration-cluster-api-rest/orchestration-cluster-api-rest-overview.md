@@ -50,8 +50,8 @@ This section helps you get up and running in minutes.
 ### Prerequisites
 
 - **A Camunda 8 Orchestration Cluster**
-  - For local development, use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), which expose the API without requiring credentials or tokens by default.
-  - For production or advanced development, use [Helm/Kubernetes](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md) or [manual installation](/self-managed/deploy-to-production/deploy-your-baseline/manual/install.md).
+  - For local development, use [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) or [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md), which expose the API without requiring credentials or tokens by default.
+  - For production or advanced development, use [Helm/Kubernetes](/self-managed/deploy-to-production/kubernetes/install/index.md) or [manual installation](/self-managed/deploy-to-production/manual/install.md).
   - Alternatively, sign up for a free [Camunda 8 SaaS trial](https://accounts.camunda.io/signup) to get a managed cluster with the API enabled.
 
 - **A client to send API requests**
@@ -145,7 +145,7 @@ In the Camunda Console, go to your cluster, and in the Cluster Details, find you
 
 #### Self-Managed
 
-Use the host and path defined for your [Zeebe Gateway](/reference/glossary.md#zeebe-gateway). For Ingress and routing details, see the [configuration guide](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/ingress-setup.md). If you're using the default setup, the `${BASE_URL}` is `http://localhost:8080/v2/`.
+Use the host and path defined for your [Zeebe Gateway](/reference/glossary.md#zeebe-gateway). For Ingress and routing details, see the [configuration guide](/self-managed/deploy-to-production/kubernetes/configure/ingress/ingress-setup.md). If you're using the default setup, the `${BASE_URL}` is `http://localhost:8080/v2/`.
 
 ### Versioning
 

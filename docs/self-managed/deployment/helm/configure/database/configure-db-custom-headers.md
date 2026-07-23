@@ -97,7 +97,7 @@ To use your new plugin, add it to your Camunda 8 Self-Managed installation.
 
 - **Mount the plugin**: For each container, mount your plugin JAR file inside the container's file system. For more information, see the [Docker](https://docs.docker.com/engine/storage/volumes/) or [Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/) documentation.
 
-- **Configure components**: Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs.md).
+- **Configure components**: Include the plugin parameters in each component's `application.yaml`, or pass them to the component as environment variables. For more information, see how to [configure components using Helm charts](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md).
 
 ### Example usage
 
@@ -207,5 +207,5 @@ jar xf <file-name>.jar
 
 ## References
 
-- [Configure components using Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/application-configs.md)
+- [Configure components using Helm charts](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md)
 - [Plugin examples](https://github.com/camunda/camunda-search-client-plugins-example)

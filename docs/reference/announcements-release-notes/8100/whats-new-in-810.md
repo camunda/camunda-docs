@@ -66,14 +66,14 @@ Switching CLIs does not require a release-state migration; Helm is client-side o
 
 <ul>
   <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
-  <li><span class="link-arrow">[Helm 4](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md)</span></li>
+  <li><span class="link-arrow">[Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md)</span></li>
 </ul>
 
 ### Host network support for orchestration cluster pods
 
 The 8.10 Helm chart adds `orchestration.hostNetwork` (default: `false`), which lets orchestration cluster pods share the host node's network namespace. This is useful in bare-metal or restricted network environments where pods must be reachable directly via the node IP rather than a cluster overlay network.
 
-<p class="link-arrow">[Configure pod networking](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/pod-networking.md)</p>
+<p class="link-arrow">[Configure pod networking](/self-managed/deploy-to-production/kubernetes/configure/pod-networking.md)</p>
 
 ## Upgrade guides {#upgrade-guides}
 

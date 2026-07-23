@@ -79,13 +79,13 @@ We have extended Camunda's [document handling](/components/document-handling/get
 
 ### Dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/self-hosted/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md).
+We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2501  --->
 
 ### Dual-region ROSA HCP cluster with Terraform <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/provision-your-cluster/red-hat-openshift/on-aws-rosa/terraform-setup-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
+Step through [a detailed tutorial for deploying two Red Hat OpenShift on AWS (ROSA) cluster with Hosted Control Plane (HCP) in two different regions](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/aws-rosa/terraform-dual-region.md). It is specifically tailored for deploying Camunda 8 using Terraform, a widely-used Infrastructure as Code (IaC) tool.
 
 <!--- https://github.com/camunda/product-hub/issues/2585 --->
 
@@ -99,7 +99,7 @@ Automation leaders can visualize all automation projects through a single, hiera
 
 The Camunda 8 Helm chart now allows custom Kubernetes manifests to be injected into your `values.yaml`. This enables you to add additional Kubernetes resources such as ConfigMaps, Deployments, or Services into your deployment without modifying the Helm chart itself.
 
-For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/add-extra-manifests.md).
+For more information, visit the [documentation on injecting Kubernetes manifests](/self-managed/deploy-to-production/kubernetes/configure/add-extra-manifests.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2464 --->
 
@@ -194,7 +194,7 @@ The Camunda 8 Run startup script now supports additional configuration parameter
 
 This release also introduces a new `--docker` option, which starts C8Run with the `docker-compose up` command, and deploys Camunda 8 in containers instead of starting with a Java engine.
 
-For more information, see the [Camunda 8 Run documentation](/self-managed/quickstart/developer-quickstart/c8run.md).
+For more information, see the [Camunda 8 Run documentation](/self-managed/quickstart/developer/c8run/index.md).
 
 <!-- https://github.com/camunda/product-hub/issues/2459 -->
 
@@ -602,7 +602,7 @@ The deployment experience is further simplified for Enterprise customers running
 - You no longer need to enter a client ID and secret in the deploy modal. Instead, simply choose a cluster (or stage for process applications) and deploy.
 
 :::note
-The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/set-up-authentication/microsoft-entra.md).
+The simplified deployment experience is not supported when [Microsoft Entra ID is used as OIDC provider](/self-managed/deploy-to-production/kubernetes/authentication/microsoft-entra.md).
 You still need to enter a client ID and secret in this case.
 Support is targeted for [Camunda 8.8](../870-announcements/#deprecated-web-modeler-cluster-authentication-oauth-and-client_credentials-self-managed).
 :::

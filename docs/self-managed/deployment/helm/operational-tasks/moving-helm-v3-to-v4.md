@@ -42,7 +42,7 @@ This means:
 
 Helm 4 enables server-side apply by default and removes some Helm 3 plugin behaviors. Review these changes before your first install or upgrade with the v4 CLI:
 
-- [Helm 4 server-side apply and post-renderer changes](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/helm-v4.md)
+- [Helm 4 server-side apply and post-renderer changes](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md)
 
 ## Helm v3 support
 

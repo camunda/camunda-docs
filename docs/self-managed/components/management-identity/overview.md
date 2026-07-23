@@ -11,7 +11,7 @@ Management Identity controls who can sign in to Console, Modeler, and Optimize, 
 
 ## About Management Identity
 
-Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
+Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md) and [Helm charts](/self-managed/deploy-to-production/kubernetes/install/index.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
 
 - Administrators can use Management Identity to manage Camunda 8 users, groups, roles, permissions, and applications.
 - Users (interacting via Camunda web components) and applications (interacting via Camunda APIs, such as job workers) are supported, using secure authorization based on OAuth 2.0 standards.

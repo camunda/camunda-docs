@@ -39,7 +39,7 @@ Camunda 8 supports multiple secondary storage backends, depending on the deploym
 For deployment and configuration guidance, see the Self-Managed documentation:
 
 - [About Self-Managed](/self-managed/about-self-managed.md)
-- [Helm quick install](/self-managed/quickstart/quick-install.md)
+- [Helm quick install](/self-managed/quickstart/administrator/helm.md)
 
 :::
 

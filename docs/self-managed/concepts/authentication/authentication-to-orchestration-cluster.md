@@ -33,7 +33,7 @@ Additionally, an [Unprotected API mode](#unprotected-api-mode) is available for 
 With Basic authentication, Orchestration Cluster components are protected with a username and password. User management is handled within the built-in Admin service.
 
 :::note
-This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md), [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/index.md), and [Manual installation](/self-managed/deploy-to-production/deploy-your-baseline/manual/install.md).
+This is the default authentication method for all installation options: [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md), [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md), [Helm charts](/self-managed/deploy-to-production/kubernetes/index.md), and [Manual installation](/self-managed/deploy-to-production/manual/install.md).
 :::
 
 ### Example configuration
@@ -115,7 +115,7 @@ If OIDC authentication is enabled, additional configuration values must be set. 
 
 In this mode, API access is unprotected with no authentication required for APIs. This mode can be enabled with both Basic authentication and OIDC.
 
-By default, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) are configured in unprotected API mode for local development quick start.
+By default, [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) and [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md) are configured in unprotected API mode for local development quick start.
 
 :::caution
 This mode should never be used in production environments.

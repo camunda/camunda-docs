@@ -5,7 +5,7 @@ sidebar_label: External PostgreSQL
 description: "Learn how to use an external PostgresQL instance in Camunda 8 Self-Managed deployment."
 ---
 
-The [Helm chart deployment](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md) can optionally install an internal PostgreSQL using [Bitnami subcharts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying PostgreSQL separately from the Camunda Helm charts. This guide steps through using an external PostgreSQL instance.
+The [Helm chart deployment](/self-managed/deploy-to-production/kubernetes/install/index.md) can optionally install an internal PostgreSQL using [Bitnami subcharts](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md). For production environments, we advise deploying PostgreSQL separately from the Camunda Helm charts. This guide steps through using an external PostgreSQL instance.
 
 This page applies to Management Identity, Keycloak, and Web Modeler. It does not apply to the Orchestration Cluster or Optimize.
 

@@ -10,7 +10,7 @@ import IdentityLoginImg from './img/identity-login-page.png';
 Get started with Management Identity in Self-Managed by learning how to open and log in to the Management Identity interface.
 
 :::note
-Management Identity is included in the [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md) deployments of Camunda 8 Self-Managed. With the default configuration, Management Identity uses an included Keycloak container/pod.
+Management Identity is included in the [Docker-Compose](/self-managed/quickstart/developer/docker-compose/index.md) and [Helm charts](/self-managed/deploy-to-production/kubernetes/install/index.md) deployments of Camunda 8 Self-Managed. With the default configuration, Management Identity uses an included Keycloak container/pod.
 :::
 
 ## Log in to Management Identity
@@ -21,9 +21,9 @@ Once Management Identity has successfully started, you can open the **Log in** p
 
 If you are running the default configuration, you can access the Management Identity interface via the following URLs:
 
-- [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md): `http://localhost:8084/`
-- [Helm](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/install/index.md): Follow your [`port-forward` or Ingress configuration](/self-managed/deploy-to-production/deploy-your-baseline/kubernetes/configure/ingress/accessing-components-without-ingress.md)
-- [Manual](/self-managed/deploy-to-production/deploy-your-baseline/manual/install.md): `http://localhost:8080/`
+- [Docker-Compose](/self-managed/quickstart/developer/docker-compose/index.md): `http://localhost:8084/`
+- [Helm](/self-managed/deploy-to-production/kubernetes/install/index.md): Follow your [`port-forward` or Ingress configuration](/self-managed/deploy-to-production/kubernetes/configure/ingress/accessing-components-without-ingress.md)
+- [Manual](/self-managed/deploy-to-production/manual/install.md): `http://localhost:8080/`
 
 ## Default user
 
