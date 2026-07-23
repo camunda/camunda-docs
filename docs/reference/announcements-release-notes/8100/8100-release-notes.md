@@ -90,6 +90,35 @@ When you upgrade an Orchestration Cluster that has more than one valid upgrade t
 
 The recommended version (the longest upgrade path) is pre-selected and labeled **latest**, and you can choose a different option before proceeding. Clusters with only one upgrade target keep the existing flow.
 
+#### Self-service restore for SaaS orchestration clusters from backups
+
+<!-- https://github.com/camunda/product-hub/issues/2135 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Organization admins can now restore a SaaS orchestration cluster directly from a completed backup in Console and through the Administration API.
+
+Key benefits:
+
+- Reduced time to recovery for operational incidents.
+- Operational control without opening a support ticket for standard same-cluster restores.
+- Clear restore status visibility during execution.
+
+This release supports in-place restore for the same cluster only. During restore, the cluster is unavailable until completion.
+
+Known limitations:
+
+- Same-cluster restore only.
+- Partition count must match between backup and target cluster.
+- Cross-region and cross-cluster restore are not supported in this release.
+
+Learn more:
+
+- [Backup and restore overview](/components/saas/backup-restore-overview.md)
+- [Restore a cluster from backup](/components/saas/how-to-restore.md)
+- [Restore scenarios](/components/saas/restore-scenarios.md)
+- [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
+
 ### Modeler
 
 #### Safe deletion with a 30-day recovery window
@@ -155,37 +184,6 @@ Operate now shows what an active process instance is waiting for. When you inspe
 Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
-
-### Camunda Hub
-
-#### Self-service restore for SaaS orchestration clusters from backups
-
-<!-- https://github.com/camunda/product-hub/issues/2135 -->
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-Organization admins can now restore a SaaS orchestration cluster directly from a completed backup in Console and through the Administration API.
-
-Key benefits:
-
-- Reduced time to recovery for operational incidents.
-- Operational control without opening a support ticket for standard same-cluster restores.
-- Clear restore status visibility during execution.
-
-This release supports in-place restore for the same cluster only. During restore, the cluster is unavailable until completion.
-
-Known limitations:
-
-- Same-cluster restore only.
-- Partition count must match between backup and target cluster.
-- Cross-region and cross-cluster restore are not supported in this release.
-
-Learn more:
-
-- [Backup and restore overview](/components/saas/backup-restore-overview.md)
-- [Restore a cluster from backup](/components/saas/how-to-restore.md)
-- [Restore scenarios](/components/saas/restore-scenarios.md)
-- [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
 
 ### Optimize
 
