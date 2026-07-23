@@ -1,13 +1,13 @@
 ---
 id: delete-file
 title: "Delete a file"
-description: "Deletes the file with the given file key."
+description: "Soft-deletes the file with the given file key. The file is moved to the recently deleted state and can be recovered until the retention period expires and the scheduled cleanup job runs. To permanently and irreversibly remove a file, use `DELETE /files/{fileKey}/permanent` instead."
 sidebar_label: "Delete a file"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWE1z2zYQ/SsYnJIpJSqO06a8uUk8SdqDx1Xqg6rDElhKiEGAAUDZqob/vbMAqQ9Laeq7Dh6b+Nh9u3h4pN+G2wYdBGXNJ8kLLlFjwGulkWdcohdONTTJC/4+TnkWlsgqpZE9qLCMTwu1QpPG7nE95hl/HIGUKEfKjFbofAowGb8aT3jGAyw8L2Y8ZplnvAEHNQZ0NLrhBmrkBadwv+OaZ1zR5gbCkmfc4bdWOZS8CK7FpxCnS2StUd/aCIQpiSaoaq3MYoua0HmxxBp4seFh3VAuH5wyC951c8rgG2s8epq/mFzSr+MsqQHgWWqYZL4VAr2vWq3XY95l/HLy6vRWKgF9YBrEvWcr0EoyaMOSsIp4Ekw4jNBBe8K7RJCxOxt+d3c3utotRhr7fjldxoU1AU2gWWga3WfIG2dLjfVPXz3h2o9xCPiK3aSVTGIApZktv6IILFZOC0uUTBk2u71+x369fPPL/MUyhMYXef7w8DB2lRihVMG6sXWL3FWCfmjdyzGbLtEhq2HNSmQgpaKcoFnjiJNBoWe+QaEqJViw8QR72IwKHf9tiEyp5ATrgCCzNJfxoEKksw8QWh95TaVEZvkARiQWbrPuOvm0oxmvrKsh8IK3Th3dkCv25fbTEesOMMc9FbSaYkBp21CUGsw9zzg+Qt1oyjZ0UFrhxwLq1kgYK5tDo/LVxXgynN6IQvq8BDnqSUXES+WewP4UrG/rGtya2eokzh2e30Cy212Cvo+7DMoEXKDbb48y4fXFUU6i/8fp9IalEExYiayyjoWl8gOAg9yXk0nGa2VU3dbDEzymp58nk257mD+u1zB8bDSYdMWeFK0Mq63DnuWH5felD7xcs1kNj59t6af2SgS1goB+zgQYYwNRuQHnUVKntvz6AZNGDit0SCtPc4rU74hY1qmFelrJIfR8dZF/taXPIQGlmN2OI7y/3O9TD7uoGJeT18c6cG1dqaREE6/tVsOUZ1Q0aG0fUFLus96c9easN2e9eY7e/Ogbi+qsbGvOAnMWmLPAnAXmmQLzZjI5oQOG0Sk7up/onHXMCtE6h5I9LEl4GmfpH7oBW8/HswKdFeisQGcFeo4CdbQ9oCEbLFlc97jmxSmTLOMr0C1uzTIypGoMS7vz5niWvLCC5/SB5PNN75R1dB/RrQYfrXWaF3yTZKgr8nyztD50xaaxLnQ982NGp6DU6ZLSkiRZw43SVoCOw6eoRxNk2A0t+9iW7OrmE0tAohFG6Q5Dvp28fXsyGi39j0j7ijrEoot9MlZa/N1o0evzKFqnwjr2q0Rw6Mhc48Vsvj/9J4VK/dlftCVgjyFmpOe0iGf9H9cDLT/fTY+gfr6bsmDv0TBbBlAGJaucrSNocgWtU/+k67WDTregshFATzoq76YttRKxyr+OdYKGSRaErevWxHeWWSQL912SQ+oRUf3YsKUXHoh4iL0522/hWc+yQV4HZRW2jjgb60MNZm9ncpEZxK/7pyg3u3frs+zm/hwCPoa80aAMsSUi2/SXZRb9ZHpTFYOxPM96ts/4ZlOCxy9Odx0Nf2vRESfmu8sRGSKVp78lLyrQ/qn7vA/+xW3/znzJ/qcnfbKEfhDMek8ZeNbrx1BIN+8Gj3hPXa6EwCbs7fvut8qByLz/8MeH6Qfedf8CcuhO8A==
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-saas/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Deletes the file with the given file key.
+Soft-deletes the file with the given file key. The file is moved to the recently deleted state and can be recovered until the retention period expires and the scheduled cleanup job runs. To permanently and irreversibly remove a file, use `DELETE /files/{fileKey}/permanent` instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -46,7 +46,14 @@ Deletes the file with the given file key.
       in: "path",
       required: true,
       description: "The unique key identifying the file.",
-      schema: { type: "string" },
+      schema: {
+        description: "System-generated key for a file.",
+        type: "string",
+        format: "FileKey",
+        "x-semantic-type": "FileKey",
+        example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+        title: "FileKey",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -106,6 +113,14 @@ Deletes the file with the given file key.
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -156,11 +171,19 @@ Deletes the file with the given file key.
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
         },
       },
     },
     "404": {
-      description: "The file was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -205,6 +228,13 @@ Deletes the file with the given file key.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
           },
         },
       },
@@ -255,6 +285,14 @@ Deletes the file with the given file key.
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },

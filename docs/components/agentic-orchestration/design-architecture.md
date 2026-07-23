@@ -101,7 +101,7 @@ For a step-by-step guide on naming tools, writing descriptions, declaring `fromA
 </tr>
 <tr>
     <td><span className="callout">5</span></td>
-    <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
+    <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions. This agent-to-agent pattern runs inside Camunda's [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), as one of the tools available to an agent. It is not the same as agentic orchestration itself, which is Camunda's overall model for orchestrating agents, people, and systems.</td>
 </tr>
 </table>
 

@@ -99,7 +99,7 @@ and process values).
 | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                    | zeebe-record |
 | create-template                  | If `true` missing indexes will be created automatically.                                                                                                                                                   | `true`       |
-| number-of-shards                 | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | 3            |
+| number-of-shards                 | The number of [shards](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#static-index-level-index-settings) used for each new record index created.          | varies       |
 | number-of-replicas               | The number of shard [replicas](https://opensearch.org/docs/latest/install-and-configure/configuring-opensearch/index-settings/#dynamic-index-level-index-settings) used for each new record index created. | 0            |
 | command                          | If `true` command records will be exported                                                                                                                                                                 | `false`      |
 | event                            | If `true` event records will be exported                                                                                                                                                                   | `true`       |
@@ -136,6 +136,16 @@ and process values).
 | user-task                        | If `true` records related to user tasks will be exported                                                                                                                                                   | `true`       |
 | variable                         | If `true` records related to variables will be exported                                                                                                                                                    | `true`       |
 | variable-document                | If `true` records related to variable documents will be exported                                                                                                                                           | `true`       |
+
+:::note
+The number of shards varies by index template. Most indices use `1` shard by default. The following high-volume index templates default to `3` shards:
+
+- `zeebe-record-job`
+- `zeebe-record-process-instance`
+- `zeebe-record-user-task`
+
+If you set `number-of-shards`, it overrides the template defaults for all indices, including the three listed above.
+:::
 
 </TabItem>
 

@@ -28,4 +28,25 @@ public static class ClientExamples
     }
     // </GetTopology>
     #endregion GetTopology
+
+    #region ChangeClusterMode
+
+    // <ChangeClusterMode>
+    public static async Task ChangeClusterModeExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // Pass dryRun: true to validate the request and inspect the resulting plan
+        // without applying it. Omit it (or set it to false) to trigger the transition.
+        var change = await client.ChangeClusterModeAsync("RECOVERING", dryRun: true);
+
+        Console.WriteLine($"Cluster change {change.ChangeId}:");
+        foreach (var operation in change.PlannedChanges)
+        {
+            var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+            Console.WriteLine($"  {operation.Operation}{suffix}");
+        }
+    }
+    // </ChangeClusterMode>
+    #endregion ChangeClusterMode
 }

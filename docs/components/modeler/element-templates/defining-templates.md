@@ -26,11 +26,12 @@ The element template object is divided into required and optional key-value pair
 - [`engines : Object`](./template-metadata.md#engine-compatibility-engines): Dictionary of environments compatible with the template. The environment version is specified using a semantic version range.
 - [`elementType : Object`](./template-metadata.md#supported-bpmn-types-appliesto-and-elementtype): Sets the type of the element. The element is replaced with the specified type when a user applies the template.
 - [`groups : Object`](./template-metadata.md#grouping-properties-groups): Defines groups of property input fields. Groups are sections in the properties panel. Properties can be assigned a group.
+- [`presets : Array<Object>`](./template-metadata.md#predefined-configurations-steps-and-presets): Defines reusable sets of property values. A preset is applied when a user selects its associated step.
+- [`steps : Array<Object>`](./template-metadata.md#predefined-configurations-steps-and-presets): Defines a hierarchical menu of predefined configurations shown when the template is applied. Each final step applies a preset.
 
-Some keys and values require other keys to be set. If your editor supports the [JSON schema](https://json-schema.org/), it will flag missing keys as errors.
-The Web Modeler's editor will also show these errors in the template editor problems panel.
+Some keys and values require other keys to be set. If your editor supports the [JSON schema](https://json-schema.org/), it will flag missing keys as errors. Camunda Hub's editor also shows these errors in the template editor problems panel.
 
-Below you find a simple example of an element template with the most commonly used keys:
+Here is an example element template with the most commonly used keys:
 
 ```json
 {
@@ -66,7 +67,7 @@ Below you find a simple example of an element template with the most commonly us
 You can define multiple templates in one JSON file by wrapping them in an array.
 
 :::warning
-This is a Desktop Modeler-specific feature. Web Modeler requires each template to be in a separate file.
+This is a Desktop Modeler-specific feature. Camunda Hub requires each template to be in a separate file.
 :::
 
 ```json
@@ -94,7 +95,7 @@ You can create and edit element templates in the text editor of your choice.
 Connector templates are a specific type of element template, so the same applies to them.
 If your editor supports the [JSON schema](https://json-schema.org/), it will recognize the structure of the template and provide additional editing support, such as formatting, code completion, and error highlighting.
 
-The [Web Modeler](/components/connectors/manage-connector-templates.md) offers a built-in template editor with validation and error highlighting, as well as a live preview of the properties panel with the applied template.
+[Camunda Hub](/components/connectors/manage-connector-templates.md) offers a built-in template editor with validation and error highlighting, as well as a live preview of the properties panel with the applied template.
 
 ## Further reading
 

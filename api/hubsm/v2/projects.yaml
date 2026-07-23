@@ -12,6 +12,8 @@ paths:
       summary: Create a project
       description: Creates a new empty project in the specified workspace.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - projectKey
       tags:
         - Project
       requestBody:
@@ -42,6 +44,12 @@ paths:
       summary: Get a project
       description: Returns the project metadata and its content (child folders and files).
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -58,11 +66,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -71,6 +75,12 @@ paths:
       summary: Update a project
       description: Updates the name and/or workspace of an existing project.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -95,11 +105,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The project was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -107,10 +113,18 @@ paths:
       operationId: deleteProject
       summary: Delete a project
       description: >
-        Deletes the project with the given project key. The project must have no
-        files in the project or any of its descendants. Empty folders and version
-        history are removed as part of the deletion.
+        Soft-deletes the project with the given project key. The project is moved
+        to the recently deleted state and can be recovered during the retention
+        window. The project must have no files in the project or any of its
+        descendants. To permanently and irreversibly remove a project, use
+        `DELETE /projects/{projectKey}/permanent` instead.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Project
+        bind:
+          projectKey:
+            from: path
+            name: projectKey
       tags:
         - Project
       parameters:
@@ -118,6 +132,35 @@ paths:
       responses:
         "204":
           description: The project was deleted successfully.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          $ref: "common-responses.yaml#/components/responses/NotFound"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /projects/{projectKey}/permanent:
+    delete:
+      operationId: permanentlyDeleteProject
+      summary: Permanently delete a project
+      description: >
+        Permanently and irreversibly removes the project with the given project
+        key. The project cannot be recovered afterwards. The project must have no
+        files in the project or any of its descendants. Empty folders and version
+        history are removed as part of the deletion. This works in one step and
+        does not require the project to be soft-deleted first.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Project
+      parameters:
+        - $ref: "#/components/parameters/ProjectKeyPathParam"
+      responses:
+        "204":
+          description: The project was permanently deleted successfully.
         "400":
           $ref: "common-responses.yaml#/components/responses/InvalidData"
         "401":
@@ -171,7 +214,7 @@ components:
       required: true
       description: The unique key identifying the project.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/ProjectKey"
 
   schemas:
     # --- Request schemas ---
@@ -182,6 +225,9 @@ components:
       required:
         - name
         - workspaceKey
+      example:
+        name: "Payment Flow"
+        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
       properties:
         name:
           description: The name of the project.
@@ -190,11 +236,14 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     ProjectUpdateRequest:
       type: object
       additionalProperties: false
+      example:
+        name: "Payment Flow v2"
       properties:
         name:
           description: The updated name of the project.
@@ -203,13 +252,59 @@ components:
           maxLength: 255
         workspaceKey:
           description: The key of the workspace to move the project to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
 
     # --- Response schemas ---
 
     ProjectDetailResult:
       type: object
       description: A project with its metadata and content (child folders and files).
+      example:
+        project:
+          projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+          name: "Payment Flow"
+          workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
+          created: "2025-02-01T08:00:00.000Z"
+          createdBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+          updated: "2025-06-10T14:22:00.000Z"
+          updatedBy:
+            name: "Jane Doe"
+            email: "jane.doe@example.com"
+        content:
+          folders:
+            - folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
+              name: "processes"
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+              parentFolderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee"
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-03-15T10:30:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+          files:
+            - fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+              name: "order-process"
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+              folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
+              simplePath: "orders/processes/order-process.bpmn"
+              canonicalPath: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee/bccb5014-10a7-48df-bb56-81cb286594cc"
+              revision: 1
+              type: "bpmn"
+              content: "<?xml version='1.0' encoding='UTF-8'?>..."
+              created: "2025-03-15T10:30:00.000Z"
+              createdBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
+              updated: "2025-06-10T14:22:00.000Z"
+              updatedBy:
+                name: "Jane Doe"
+                email: "jane.doe@example.com"
       required:
         - project
         - content
@@ -243,6 +338,18 @@ components:
 
     ProjectResult:
       type: object
+      example:
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+        name: "Payment Flow"
+        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
+        created: "2025-02-01T08:00:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-06-10T14:22:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
       required:
         - projectKey
         - name
@@ -254,13 +361,15 @@ components:
       properties:
         projectKey:
           description: The unique key identifying this project.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         name:
           description: The name of the project.
           type: string
         workspaceKey:
           description: The key of the workspace this project belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
         created:
           description: The timestamp when the project was created.
           type: string
@@ -312,7 +421,9 @@ components:
             - created
             - updated
         order:
-          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     ProjectFilter:
       type: object
@@ -320,6 +431,7 @@ components:
       properties:
         workspaceKey:
           description: Filter by workspace key.
+          x-semantic-type: WorkspaceKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         name:
@@ -355,4 +467,6 @@ components:
           items:
             $ref: "#/components/schemas/ProjectResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

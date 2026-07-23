@@ -14,6 +14,8 @@ paths:
         Creates a new version by taking a snapshot of the current content of the
         specified file.
       x-added-in-version: "0.1.0"
+      x-semantic-provider:
+        - versionKey
       tags:
         - Version
       requestBody:
@@ -36,13 +38,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "409":
-          description: >
-            A version for a connector template with the same template ID has
-            already been published in the same project.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/Conflict"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -53,6 +49,12 @@ paths:
       description: >
         Returns the version metadata and the file content at that version.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -69,11 +71,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The version was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -82,6 +80,12 @@ paths:
       summary: Update a version
       description: Updates the name of an existing version.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -106,19 +110,9 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The version was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "409":
-          description: >
-            A conflict occurred, e.g. when publishing a connector template version
-            and a conflicting template ID already exists in the same project.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/Conflict"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -127,6 +121,12 @@ paths:
       summary: Delete a version
       description: Deletes the specified version.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -139,11 +139,7 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The version was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -187,6 +183,12 @@ paths:
         version is created representing the restored state. For element template
         files, the request body must include the target version number.
       x-added-in-version: "0.1.0"
+      x-semantic-requires:
+        kind: Version
+        bind:
+          versionKey:
+            from: path
+            name: versionKey
       tags:
         - Version
       parameters:
@@ -211,17 +213,9 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The version was not found.
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/NotFound"
         "409":
-          description: A conflict occurred (e.g. connector template version conflict).
-          content:
-            application/problem+json:
-              schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+          $ref: "common-responses.yaml#/components/responses/Conflict"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
@@ -233,7 +227,7 @@ components:
       required: true
       description: The unique key of the version.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/VersionKey"
 
   schemas:
     # --- Request schemas ---
@@ -244,10 +238,16 @@ components:
       required:
         - fileKey
         - name
+      example:
+        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+        name: "Release 1.0"
+        description: "First stable release of the order process."
+        organizationPublic: false
       properties:
         fileKey:
           description: The key of the file to create a version for.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         name:
           description: The name for the version.
           type: string
@@ -270,6 +270,9 @@ components:
       additionalProperties: false
       required:
         - name
+      example:
+        name: "Release 1.1"
+        description: "Updated with error-handling improvements."
       properties:
         name:
           description: The new name for the version.
@@ -303,6 +306,20 @@ components:
 
     VersionResult:
       type: object
+      example:
+        versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7"
+        name: "Release 1.0"
+        description: "First stable release of the order process."
+        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+        organizationPublic: false
+        created: "2025-03-15T10:30:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-03-15T10:30:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
       required:
         - versionKey
         - name
@@ -316,7 +333,8 @@ components:
       properties:
         versionKey:
           description: The unique key of the version.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/VersionKey"
         name:
           description: The name of the version.
           type: string
@@ -326,7 +344,8 @@ components:
           nullable: true
         fileKey:
           description: The key of the file this version belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         organizationPublic:
           description: Whether the version is published to shared resources.
           type: boolean
@@ -351,6 +370,22 @@ components:
 
     VersionDetailResult:
       type: object
+      description: A version with its full metadata and file content.
+      example:
+        versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7"
+        name: "Release 1.0"
+        description: "First stable release of the order process."
+        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+        organizationPublic: false
+        created: "2025-03-15T10:30:00.000Z"
+        createdBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        updated: "2025-03-15T10:30:00.000Z"
+        updatedBy:
+          name: "Jane Doe"
+          email: "jane.doe@example.com"
+        content: "<?xml version='1.0' encoding='UTF-8'?>..."
       required:
         - versionKey
         - name
@@ -365,7 +400,8 @@ components:
       properties:
         versionKey:
           description: The unique key of the version.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/VersionKey"
         name:
           description: The name of the version.
           type: string
@@ -375,7 +411,8 @@ components:
           nullable: true
         fileKey:
           description: The key of the file this version belongs to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         organizationPublic:
           description: Whether the version is published to shared resources.
           type: boolean
@@ -437,7 +474,9 @@ components:
             - name
             - created
         order:
-          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
 
     VersionFilter:
       type: object
@@ -449,6 +488,7 @@ components:
           description: >
             Filter by file key. This is a required filter — versions
             cannot be searched across files.
+          x-semantic-type: FileKey
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
         name:
@@ -476,4 +516,6 @@ components:
           items:
             $ref: "#/components/schemas/VersionResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"

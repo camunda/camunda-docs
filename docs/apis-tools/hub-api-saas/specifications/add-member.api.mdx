@@ -1,0 +1,464 @@
+---
+id: add-member
+title: "Add or update a member"
+description: "Adds a member to the workspace, or updates the role of an existing member. The member is identified by their email address."
+sidebar_label: "Add or update a member"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Add or update a member"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/workspaces/{workspaceKey}/members"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Adds a member to the workspace, or updates the role of an existing member. The member is identified by their email address.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "workspaceKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the workspace.",
+      schema: {
+        description: "System-generated key for a workspace.",
+        type: "string",
+        format: "WorkspaceKey",
+        "x-semantic-type": "WorkspaceKey",
+        example: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+        title: "WorkspaceKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["email", "role"],
+          example: { email: "alice@example.com", role: "editor" },
+          properties: {
+            email: {
+              description: "The email address of the member to add or update.",
+              allOf: [
+                {
+                  description: "The email address identifying a member.",
+                  type: "string",
+                  format: "email",
+                  "x-semantic-type": "MemberEmail",
+                  "x-semantic-client-minted": true,
+                  example: "alice@example.com",
+                  title: "MemberEmail",
+                },
+              ],
+            },
+            role: {
+              description: "The role to assign to the member.",
+              allOf: [
+                {
+                  type: "string",
+                  description: "The role a member can have in a workspace.",
+                  enum: ["workspace_admin", "editor", "commenter", "viewer"],
+                  title: "MemberRole",
+                },
+              ],
+            },
+          },
+          title: "MemberCreateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The member was added or updated successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+              email: "alice@example.com",
+              name: "Alice Smith",
+              role: "editor",
+            },
+            required: ["workspaceKey", "email", "name", "role"],
+            properties: {
+              workspaceKey: {
+                description:
+                  "The unique key of the workspace the member belongs to.",
+                allOf: [
+                  {
+                    description: "System-generated key for a workspace.",
+                    type: "string",
+                    format: "WorkspaceKey",
+                    "x-semantic-type": "WorkspaceKey",
+                    example: "0108f0ef-5c76-4a75-a602-45a9f04554fd",
+                    title: "WorkspaceKey",
+                  },
+                ],
+              },
+              email: {
+                description: "The email address of the member.",
+                allOf: [
+                  {
+                    description: "The email address identifying a member.",
+                    type: "string",
+                    format: "email",
+                    "x-semantic-type": "MemberEmail",
+                    "x-semantic-client-minted": true,
+                    example: "alice@example.com",
+                    title: "MemberEmail",
+                  },
+                ],
+              },
+              name: {
+                description: "The display name of the member, if known.",
+                type: "string",
+              },
+              role: {
+                description: "The role of the member in the workspace.",
+                allOf: [
+                  {
+                    type: "string",
+                    description: "The role a member can have in a workspace.",
+                    enum: ["workspace_admin", "editor", "commenter", "viewer"],
+                    title: "MemberRole",
+                  },
+                ],
+              },
+            },
+            title: "MemberResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "The requested resource was not found.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

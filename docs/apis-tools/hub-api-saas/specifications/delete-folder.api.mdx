@@ -1,13 +1,13 @@
 ---
 id: delete-folder
 title: "Delete a folder"
-description: "Deletes the folder with the given folder key. The folder must have no files in the folder or any of its descendants."
+description: "Soft-deletes the folder with the given folder key. The folder is moved to the recently deleted state and can be recovered during the retention window. The folder must have no files in the folder or any of its descendants. To permanently and irreversibly remove a folder, use `DELETE /folders/{folderKey}/permanent` instead."
 sidebar_label: "Delete a folder"
 hide_title: true
 hide_table_of_contents: true
-api: eJztWU1z2zYQ/SsYnJopJSqO06a8uUk8SdqDx3Xqg6vDElhKiEGAAUDZqob/vbMAaX2mqU+98KCRSAK7bxdvH6HFhtsGHQRlzUfJCy5RY8BLqyU6nnGJXjjV0GNe8HfxoWdhiayKQ9iDCst4vVArNMPde1xP2c12VN36wJawQmYsq5RGz5TZNWMdA7NmtmIqeEZe0UgwwU95xh8nICXKiTKTFTqfsMymL6cznvEAC8+LO95Dnme8AQc1BnR0f8MN1MgLnhz9hmuecUUGGghLnnGHX1vlUPIiuBYPI6YYWqO+tkgxMSXRBFWtlVnsoCeMXiyxBl5seFg35M8Hp8yCd92cfPjGGo+enp/Nzunr2M+QUaAEUKIl860Q6H3Var2e8i7j57PZ6cmNsyslUTIJAZjyzNjAVqCVJHTCmoAm0FRoGq1EXPC8cbbUWP/4xZOdzU4Q+w4u2FUaySQGUJrZ8guKwCAtlVMlSlrQu+vLt+yX89c/z39YhtD4Is8fHh6mrhITlCpYN7VukbtK0IfGvYgscchqWLMSGUipyCdoCqhBFxR65hsUqlKCBRuz3sNmlOnpX4ZIkHKeYO0t6l16lvGggqZvHyC0PlKbQols8AGMwMidJ6/bpTxc0oxX1tUQeMFbp46K5IJ9vv54xJQ9zHFOBa0mG1DaNhSlBnPPM46PUDeavA0ZlFb4qYC6NRKmyubQqHx1Np0Nqzchkz4vQU4obPSBiJLCPYH9EKxv6xpcLL1TOLd4fgXJrrcO+jxuPSgTcBFF4yk9yoRXZ0c+ia4fbm6uWDLBhJVEfsfCUvkBwJ7v89ks47Uyqm7r4Qoe09VPs1n3tJjfj9cwfGw0mFgAh0Erw2rrsGf5fvh96AMv1+yuhsdPtvQ39kIEtYKAfs4EGCq8ElkDzqOkTD3x6ztMmjis0CGNPM0pUqwjYlmnFuowkn3o+eos/2JLn0MCSja7LUd4X9zvUg67rotC8/K00PQcYxrEvU8Kw6ANS0KVZIUJhxEk6CjfSwQZxXjDb29vJxfbwbgvOofK2Y3CNQrXKFyjcD1PuF4d68CldaWSEk3alQ4a1m+TQGv7gONGadSbUW9GvXm23nz/7xxFWtnWjBIzSswoMaPEPFNiXp9q+lwYRqvsqD7ROeuYFaJ1DiV7WCod3VPvaMDW83FUoFGBRgUaFeg5CtTR9ICGOu+pp36Pa16c6stnfAW6xaf+PHW/awxLuz1b4FlqvRc8T1skn2+emvMd1SS61dC8b53mBd8kKeqKPN8srQ9dsWmsC13P/ujVKSh1KlQakmRrqCptBeh4+xT96AGdEgxp+9CW7OLqI0tAYt+d3O2bfDN78+akNRr6L5Z2VXWwRcV90lYa/E1r8XDBo2idCuuYrxLBoaMWGy/u5ruP/yBTKT+7g55I2GOIHuk6DeJZ/+NyoOan25sjqJ9ub1iw92iYLQMog5JVztYRNPUGrVN/pxLbQqdKqGwE0BOPwrtqS61EjPLPY62g2yQNwtZ1a+J7yyzSEdTbJImUI6L78TkRvfRAxEXsT4T6KTzrWTZI7KCuwtYRZ2N9qMHszEznYAz6Pf4hzs32Dft/HZn1ixrwMeSNBmWIejHMTV99d/2JGL38iu3h2Dzry+eObzYlePzsdNfR7a8tOiLZfFttkXJSefoteVGB9ocnaLu5+OG6fxG/YP/5XO1kIP1NMOsdweFZL0vbYLp5N7Sfd2TrQghsws7Mb26C9tTr3fvf39+85133DxtzFo8=
+api: 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
 sidebar_class_name: "delete api-method"
-info_path: docs/apis-tools/hub-api-saas/specifications/hub-public-api-v-2
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Deletes the folder with the given folder key. The folder must have no files in the folder or any of its descendants.
+Soft-deletes the folder with the given folder key. The folder is moved to the recently deleted state and can be recovered during the retention window. The folder must have no files in the folder or any of its descendants. To permanently and irreversibly remove a folder, use `DELETE /folders/{folderKey}/permanent` instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -46,7 +46,14 @@ Deletes the folder with the given folder key. The folder must have no files in t
       in: "path",
       required: true,
       description: "The unique key identifying the folder.",
-      schema: { type: "string" },
+      schema: {
+        description: "System-generated key for a folder.",
+        type: "string",
+        format: "FolderKey",
+        "x-semantic-type": "FolderKey",
+        example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+        title: "FolderKey",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -105,6 +112,14 @@ Deletes the folder with the given folder key. The folder must have no files in t
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -156,6 +171,14 @@ Deletes the folder with the given folder key. The folder must have no files in t
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
         },
       },
     },
@@ -206,11 +229,19 @@ Deletes the folder with the given folder key. The folder must have no files in t
             },
             title: "ProblemDetail",
           },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
         },
       },
     },
     "404": {
-      description: "The folder was not found.",
+      description: "The requested resource was not found.",
       content: {
         "application/problem+json": {
           schema: {
@@ -255,6 +286,13 @@ Deletes the folder with the given folder key. The folder must have no files in t
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Not Found",
+            status: 404,
+            detail: "The requested resource was not found.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
           },
         },
       },
@@ -305,6 +343,14 @@ Deletes the folder with the given folder key. The folder must have no files in t
               },
             },
             title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
           },
         },
       },

@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -85,6 +87,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -134,6 +138,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -177,6 +183,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -208,6 +216,51 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
       x-added-in-version: "8.8"
+  /process-instances/{processInstanceKey}/statistics/wait-states:
+    get:
+      tags:
+        - Process instance
+      operationId: getProcessInstanceWaitStateStatistics
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Get wait state statistics
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Get statistics about waiting element instances by the process instance key, grouped by element id.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The assigned key of the process instance, which acts as a unique identifier for this process instance.
+          schema:
+            type: string
+            format: string<ProcessInstanceKey>
+            example: "2251799813690746"
+            description: System-generated key for a process instance.
+      responses:
+        "200":
+          description: The process instance wait state statistics result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessInstanceWaitStateStatisticsQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
   /process-instances/search:
     post:
       tags:
@@ -219,6 +272,8 @@ paths:
       summary: Search process instances
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -258,6 +313,8 @@ paths:
       summary: Search related incidents
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -319,6 +376,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
@@ -367,6 +426,8 @@ paths:
       summary: Cancel process instance
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDQU5DRUxfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -419,6 +480,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX0NBTkNFTF9QUk9DRVNTX0lOU1RBTkNFIn1dfV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -465,6 +528,8 @@ paths:
       summary: Resolve related incidents (batch)
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX1JFU09MVkVfSU5DSURFTlQifV19XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -513,6 +578,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX01JR1JBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -560,6 +627,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX01PRElGWV9QUk9DRVNTX0lOU1RBTkNFIn1dfV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -597,6 +666,104 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
       x-added-in-version: "8.8"
+  /process-instances/suspension:
+    post:
+      tags:
+        - Process instance
+      operationId: suspendProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Suspend process instances (batch)
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX1NVU1BFTkRfUFJPQ0VTU19JTlNUQU5DRSJ9XX1dfQ]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Suspends multiple running process instances.
+        Since only ACTIVE root instances can be suspended, any given filters for state and
+        parentProcessInstanceKey are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "batch-operations.yaml#/components/schemas/ProcessInstanceSuspensionBatchOperationRequest"
+      responses:
+        "200":
+          description: The batch operation request was created.
+          content:
+            application/json:
+              schema:
+                $ref: "batch-operations.yaml#/components/schemas/BatchOperationCreatedResult"
+        "400":
+          description: |
+            The process instance batch operation failed. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
+  /process-instances/resumption:
+    post:
+      tags:
+        - Process instance
+      operationId: resumeProcessInstancesBatchOperation
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Resume process instances (batch)
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX1NVU1BFTkRfUFJPQ0VTU19JTlNUQU5DRSJ9XX1dfQ]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Resumes multiple suspended process instances.
+        Since only SUSPENDED root instances can be resumed, any given filters for state and
+        parentProcessInstanceKey are ignored and overridden during this batch operation.
+        This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "batch-operations.yaml#/components/schemas/ProcessInstanceResumptionBatchOperationRequest"
+      responses:
+        "200":
+          description: The batch operation request was created.
+          content:
+            application/json:
+              schema:
+                $ref: "batch-operations.yaml#/components/schemas/BatchOperationCreatedResult"
+        "400":
+          description: |
+            The process instance batch operation failed. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
   /process-instances/{processInstanceKey}/deletion:
     post:
       tags:
@@ -608,6 +775,8 @@ paths:
       summary: Delete process instance
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -666,6 +835,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifSx7InJlc291cmNlVHlwZSI6IkJBVENIIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfQkFUQ0hfT1BFUkFUSU9OX0RFTEVURV9QUk9DRVNTX0lOU1RBTkNFIn1dfV19]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
@@ -711,6 +882,8 @@ paths:
       summary: Migrate process instance
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -762,6 +935,71 @@ paths:
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
       x-added-in-version: "8.6"
+  /process-instances/{processInstanceKey}/business-id-assignment:
+    post:
+      tags:
+        - Process instance
+      operationId: assignProcessInstanceBusinessId
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Assign business id to process instance
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Assigns a business id to an already-running process instance that currently has none.
+
+        The assignment is single and irreversible: only artifacts created after the assignment
+        (for example future jobs, user tasks, decision instances, and message subscriptions) carry
+        the business id, while existing artifacts are not retroactively enriched. Re-sending the
+        same business id succeeds as a no-op. This endpoint is only useful while business id
+        uniqueness enforcement is disabled; when it is enabled, the request is rejected with a 409
+        response.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The key of the process instance to assign the business id to.
+          schema:
+            type: string
+            format: string<ProcessInstanceKey>
+            example: "2251799813690746"
+            description: System-generated key for a process instance.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessInstanceBusinessIdAssignmentInstruction"
+      responses:
+        "204":
+          description: The business id is assigned to the process instance.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "404":
+          description: The process instance is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: |
+            The business id assignment failed because the process instance is not eligible, for example it already has a different business id, it is a call-activity child, or business id uniqueness enforcement is enabled. More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+        "503":
+          $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.10"
   /process-instances/{processInstanceKey}/modification:
     post:
       tags:
@@ -773,6 +1011,8 @@ paths:
       summary: Modify process instance
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJNT0RJRllfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -816,6 +1056,126 @@ paths:
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
       x-added-in-version: "8.6"
+  /process-instances/{processInstanceKey}/suspension:
+    post:
+      tags:
+        - Process instance
+      operationId: suspendProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Suspend process instance
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJTVVNQRU5EX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Suspends a running process instance, pausing further processing until it is resumed.
+        Only process instances in the ACTIVE state can be suspended.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The key of the process instance to suspend.
+          schema:
+            type: string
+            format: string<ProcessInstanceKey>
+            example: "2251799813690746"
+            description: System-generated key for a process instance.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SuspendProcessInstanceRequest"
+      responses:
+        "204":
+          description: The process instance is suspended.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "404":
+          description: The process instance is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: |
+            The process instance is not in the ACTIVE state and cannot be suspended.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+        "503":
+          $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.10"
+  /process-instances/{processInstanceKey}/resumption:
+    post:
+      tags:
+        - Process instance
+      operationId: resumeProcessInstance
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Resume process instance
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJTVVNQRU5EX1BST0NFU1NfSU5TVEFOQ0UifV19]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.
+        Only process instances in the SUSPENDED state can be resumed.
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          description: The key of the process instance to resume.
+          schema:
+            type: string
+            format: string<ProcessInstanceKey>
+            example: "2251799813690746"
+            description: System-generated key for a process instance.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResumeProcessInstanceRequest"
+      responses:
+        "204":
+          description: The process instance is resumed.
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "404":
+          description: The process instance is not found.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: |
+            The process instance is not in the SUSPENDED state and cannot be resumed.
+            More details are provided in the response body.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+        "503":
+          $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.10"
   /process-instances/{processInstanceKey}/call-hierarchy:
     get:
       tags:
@@ -827,6 +1187,8 @@ paths:
       summary: Get call hierarchy
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -1566,6 +1928,18 @@ components:
       properties:
         operationReference:
           $ref: "keys.yaml#/components/schemas/OperationReference"
+    SuspendProcessInstanceRequest:
+      type: object
+      nullable: true
+      properties:
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
+    ResumeProcessInstanceRequest:
+      type: object
+      nullable: true
+      properties:
+        operationReference:
+          $ref: "keys.yaml#/components/schemas/OperationReference"
     ProcessInstanceCallHierarchyEntry:
       type: object
       required:
@@ -1650,6 +2024,32 @@ components:
           type: array
           items:
             $ref: "process-definitions.yaml#/components/schemas/ProcessElementStatisticsResult"
+    ProcessInstanceWaitStateStatisticsQueryResult:
+      description: Process instance wait state statistics query response.
+      required:
+        - items
+      type: object
+      properties:
+        items:
+          description: The wait state statistics.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessInstanceWaitStateStatisticsResult"
+    ProcessInstanceWaitStateStatisticsResult:
+      description: Process instance wait state statistics response item.
+      type: object
+      required:
+        - elementId
+        - waitingCount
+      properties:
+        elementId:
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/ElementId"
+          description: The element id for which the wait states are aggregated.
+        waitingCount:
+          description: The total number of waiting instances of the element.
+          type: integer
+          format: int64
     ProcessInstanceMigrationInstruction:
       type: object
       description: |
@@ -1690,6 +2090,15 @@ components:
           addedInVersion: "8.6"
         - propertyName: targetElementId
           addedInVersion: "8.6"
+    ProcessInstanceBusinessIdAssignmentInstruction:
+      type: object
+      description: |
+        The instruction describing the business id to assign to a running process instance.
+      properties:
+        businessId:
+          $ref: "identifiers.yaml#/components/schemas/BusinessId"
+      required:
+        - businessId
     ProcessInstanceModificationInstruction:
       type: object
       properties:

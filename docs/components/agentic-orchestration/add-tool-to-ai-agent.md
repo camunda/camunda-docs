@@ -155,6 +155,18 @@ You can also map a nested field:
 | :----------------------- | :---------------------- |
 | `= response.body.status` | `toolCallResult.status` |
 
+:::tip Avoid accidental overwrites with multiple outputs
+When your tool task has several output parameters that each contribute a field to `toolCallResult`, prefer nested targets like `toolCallResult.status` over mapping everything directly to `toolCallResult`. Mapping to `toolCallResult` directly replaces the entire variable.
+
+For script tasks and output mappings on regular tasks, the FEEL `put` function adds a single key to an existing context without replacing it:
+
+```feel
+put(toolCallResult, "Complete", sendEmail)
+```
+
+This accumulation pattern only works for elements that run in the workflow engine. Connector result expressions cannot use it: connectors don't have access to process variables, so they can't read the current value of `toolCallResult`. A connector tool must build its full result in one result expression, for example `= { toolCallResult: { status: response.status, body: response.body } }`.
+:::
+
 </TabItem>
 
 <TabItem value="script-task">
