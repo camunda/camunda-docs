@@ -46,6 +46,12 @@ paths:
             application/problem+json:
               schema:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: An agent instance already exists for the given element instance.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
@@ -979,7 +985,8 @@ components:
           items:
             $ref: "#/components/schemas/AgentInstanceToolCall"
         metrics:
-          description: Per-call token and latency metrics. Zero-valued when not available.
+          description: Per-call token and latency metrics. Null when metrics were not provided at creation time.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/AgentInstanceHistoryItemMetrics"
         commitStatus:
@@ -1111,15 +1118,18 @@ components:
         - durationMs
       properties:
         inputTokens:
-          description: Input tokens consumed by this LLM call.
+          description: Input tokens consumed by this LLM call. Null when not provided.
+          nullable: true
           type: integer
           format: int64
         outputTokens:
-          description: Output tokens produced by this LLM call.
+          description: Output tokens produced by this LLM call. Null when not provided.
+          nullable: true
           type: integer
           format: int64
         durationMs:
-          description: Wall-clock duration of the LLM call in milliseconds.
+          description: Wall-clock duration of the LLM call in milliseconds. Null when not provided.
+          nullable: true
           type: integer
           format: int64
     AgentInstanceHistoryRoleFilterProperty:
