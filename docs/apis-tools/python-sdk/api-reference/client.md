@@ -1328,6 +1328,7 @@ Create agent instance
   - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
   - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
   - **errors.NotFoundError** – If the response status code is 404. The elementInstanceKey does not correspond to an active element instance. More details are provided in the response body.
+  - **errors.ConflictError** – If the response status code is 409. An agent instance already exists for the given element instance.
   - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
   - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
   - **errors.UnexpectedStatus** – If the response status code is not documented.
@@ -6105,6 +6106,81 @@ def resolve_process_instance_incidents_example(
     )
 
     print(f"Batch operation key: {result.batch_operation_key}")
+```
+
+### resolve_secrets()
+
+```python
+def resolve_secrets(*, data, **kwargs)
+```
+
+Resolve secrets (alpha)
+
+> Resolve a deduplicated batch of camunda.secrets.\* references for the caller’s
+> physical tenant in a single round-trip.
+>
+> Each reference is authorized and resolved independently. For valid requests, the endpoint
+> always responds with HTTP 200: successfully resolved references are returned in resolved,
+> while references that could not be resolved (for example not found, malformed or over-long,
+> or the caller lacks SECRET:REVEAL on that reference) are returned in errors. A failure of
+> one reference never fails the others. Only structurally invalid requests are rejected with
+> HTTP 400: a missing or non-array references field, more than 20 references, or a null entry.
+>
+> This endpoint is an alpha feature and may be subject to change in future releases.
+>
+> Phase 1: the secret backend is mocked. Only a fixed allow-list of references resolves;
+> every other authorized, valid reference returns NOT_FOUND.
+
+**Parameters:**
+
+| Parameter | Type                   | Description |
+| --------- | ---------------------- | ----------- |
+| `data`    | `SecretResolveRequest` |             |
+| `kwargs`  | `Any`                  |             |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  SecretResolveResult
+- **Return type:**
+  SecretResolveResult
+
+#### Examples
+
+**Resolve secrets:**
+
+```python
+def resolve_secrets_example() -> None:
+    client = CamundaClient()
+
+    # Hands the resolved secret to whatever needs it (an HTTP client, a DB
+    # driver, ...) without logging it.
+    def use_secret(value: str) -> None: ...
+
+    result = client.resolve_secrets(
+        data=SecretResolveRequest(
+            references=[
+                "camunda.secrets.my_api_token",
+                "camunda.secrets.db_password",
+            ],
+        )
+    )
+
+    # Successfully resolved references are returned in `resolved`; references that
+    # could not be resolved are returned in `errors`, each with a typed error code.
+    # Never log a resolved value -- it holds secret material. Pass it straight to
+    # the consumer that needs it instead.
+    for resolved in result.resolved:
+        print(f"Resolved {resolved.reference} (value redacted)")
+        use_secret(resolved.value)
+
+    for error in result.errors:
+        print(f"Failed to resolve {error.reference}: {error.code.value} - {error.message}")
 ```
 
 ### restore()
