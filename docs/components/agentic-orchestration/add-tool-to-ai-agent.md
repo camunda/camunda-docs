@@ -9,7 +9,7 @@ keywords: ["agentic ai", "AI agents", "tools", "fromAi", "toolCallResult"]
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Add BPMN activities as callable tools to your AI agents.
+Add BPMN elements as callable tools to your AI agents.
 
 ## What is a tool
 
