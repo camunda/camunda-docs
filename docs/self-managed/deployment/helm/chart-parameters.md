@@ -26,6 +26,8 @@ The following tables show the **top-level configuration sections** in `values.ya
 
 For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestration.hostNetwork`, see [configure pod networking](/self-managed/deployment/helm/configure/pod-networking.md).
 
+For Service-level options such as the `appProtocol` hint per port, see [configure Kubernetes Service ports](/self-managed/deployment/helm/configure/service-configuration.md).
+
 ### Other Camunda applications
 
 | Section      | Purpose                                             |
