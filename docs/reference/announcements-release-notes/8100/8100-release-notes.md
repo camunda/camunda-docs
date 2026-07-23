@@ -61,8 +61,6 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
 Camunda Hub now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
 The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
@@ -241,7 +239,7 @@ The documentation covers the recommended topology, exporter configuration, and R
 
 <!-- https://github.com/camunda/product-hub/issues/3244 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 Camunda 8 SaaS now officially supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
 
