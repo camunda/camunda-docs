@@ -208,4 +208,40 @@ public static class BatchOperationExamples
     }
     // </UpdateJobsBatchOperation>
     #endregion UpdateJobsBatchOperation
+
+    #region SuspendProcessInstancesBatchOperation
+
+    // <SuspendProcessInstancesBatchOperation>
+    public static async Task SuspendProcessInstancesBatchOperationExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SuspendProcessInstancesBatchOperationAsync(
+            new ProcessInstanceSuspensionBatchOperationRequest
+            {
+                Filter = new ProcessInstanceFilter(),
+            });
+
+        Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+    }
+    // </SuspendProcessInstancesBatchOperation>
+    #endregion SuspendProcessInstancesBatchOperation
+
+    #region ResumeProcessInstancesBatchOperation
+
+    // <ResumeProcessInstancesBatchOperation>
+    public static async Task ResumeProcessInstancesBatchOperationExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.ResumeProcessInstancesBatchOperationAsync(
+            new ProcessInstanceResumptionBatchOperationRequest
+            {
+                Filter = new ProcessInstanceFilter(),
+            });
+
+        Console.WriteLine($"Batch operation key: {result.BatchOperationKey}");
+    }
+    // </ResumeProcessInstancesBatchOperation>
+    #endregion ResumeProcessInstancesBatchOperation
 }
