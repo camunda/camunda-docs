@@ -2,7 +2,7 @@
 id: add-tool-to-ai-agent
 title: Add tools to an AI agent
 sidebar_label: Add tools to an AI agent
-description: "Add BPMN activities as callable tools to your AI agents."
+description: "Add BPMN elements as callable tools to your AI agents."
 keywords: ["agentic ai", "AI agents", "tools", "fromAi", "toolCallResult"]
 ---
 
@@ -13,16 +13,16 @@ Add BPMN elements as callable tools to your AI agents.
 
 ## What is a tool
 
-A tool is a BPMN activity inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
+A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
 
 - A **name**: the element ID, used by the LLM to identify the tool.
 - A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.
 - **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
 - A **result**: the tool's output, returned to the LLM as `toolCallResult`.
 
-The AI Agent connector gathers all root-level activities in the ad-hoc sub-process (those with no incoming flows), builds a tool definition for each, and passes them to the LLM as part of the prompt. The LLM then decides which tool to call, in what order, and with which parameters.
+The AI Agent connector gathers all root-level elements in the ad-hoc sub-process (those with no incoming flows), builds a tool definition for each, and passes them to the LLM as part of the prompt. The LLM then decides which tool to call, in what order, and with which parameters.
 
-You can use any BPMN activity type as a tool:
+You can use any BPMN element as a tool:
 
 | Tool type            | When to use                                                                                                                                          |
 | :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -37,27 +37,27 @@ You can use any BPMN activity type as a tool:
 For the full technical reference on how tool definitions are resolved and the complete `fromAi()` function syntax, see [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
 :::
 
-## Add an activity inside the ad-hoc sub-process
+## Add an element inside the ad-hoc sub-process
 
 Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 
 1. Click inside the ad-hoc sub-process to enter it.
-1. Add a new task element. You can use any BPMN activity type as a tool, including service tasks, script tasks, user tasks, and sub-processes.
+1. Add a new task element. You can use any BPMN element as a tool, including service tasks, script tasks, user tasks, and sub-processes.
 1. Apply the appropriate connector or task type. For example:
    - Use the [REST Outbound connector](/components/connectors/protocol/rest.md) to call an external API.
    - Use a [script task](/components/modeler/bpmn/script-tasks/script-tasks.md) to execute inline logic.
    - Use a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) to route to a human reviewer.
-1. Make sure the activity has **no incoming sequence flow**, as the AI Agent connector only resolves root-level activities as tools.
+1. Make sure the element has **no incoming sequence flow**, as the AI Agent connector only resolves root-level elements as tools.
 
 :::tip
-You can model a sub-flow inside the ad-hoc sub-process. Only the first activity in the sub-flow (the root node) is exposed to the LLM as a tool; the rest of the flow executes automatically once the LLM selects it.
+You can model a sub-flow inside the ad-hoc sub-process. Only the first element in the sub-flow (the root node) is exposed to the LLM as a tool; the rest of the flow executes automatically once the LLM selects it.
 :::
 
 ## Write a tool name and description
 
-The LLM selects tools based on the activity name and its **Documentation** field. Clear, specific descriptions significantly improve the reliability of tool selection.
+The LLM selects tools based on the element name and its **Documentation** field. Clear, specific descriptions significantly improve the reliability of tool selection.
 
-1. Give the activity a descriptive **name**. The element ID (derived from the name) is what the LLM receives as the tool name.
+1. Give the element a descriptive **name**. The element ID (derived from the name) is what the LLM receives as the tool name.
 1. Open the **Documentation** field in the properties panel and write a description that explains:
    - What the tool does.
    - When the LLM should use it.
