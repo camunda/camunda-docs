@@ -11,30 +11,8 @@ import TabItem from "@theme/TabItem";
 
 Add BPMN elements as callable tools to your AI agents.
 
-## What is a tool
-
-A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
-
-- A **name**: the element ID, used by the LLM to identify the tool.
-- A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.
-- **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
-- A **result**: the tool's output, returned to the LLM as `toolCallResult`.
-
-The AI Agent connector gathers all root-level elements in the ad-hoc sub-process (those with no incoming flows), builds a tool definition for each, and passes them to the LLM as part of the prompt. The LLM then decides which tool to call, in what order, and with which parameters.
-
-You can use any BPMN element as a tool:
-
-| Tool type            | When to use                                                                                                                                          |
-| :------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Connectors           | Call an external system, for example the [REST connector](/components/connectors/protocol/rest.md) to call an HTTP API.                              |
-| Script task          | Execute inline logic or data transformation.                                                                                                         |
-| User task            | Route to a human for input or approval as part of the agent's decision path.                                                                         |
-| Call activity        | Invoke another BPMN process as a tool when the target process is on the same cluster.                                                                |
-| MCP client connector | Expose tools from an external [MCP server](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) as gateway tools to the agent. |
-| Sub-process          | Model a multi-step sub-flow that the LLM triggers as a single tool.                                                                                  |
-
 :::tip
-For the full technical reference on how tool definitions are resolved and the complete `fromAi()` function syntax, see [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
+For background on what a tool is and how tool definitions are resolved, see [What is a tool](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#what-is-a-tool).
 :::
 
 ## Add an element inside the ad-hoc sub-process
