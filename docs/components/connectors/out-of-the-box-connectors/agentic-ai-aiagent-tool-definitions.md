@@ -8,6 +8,8 @@ description: Tool definitions for AI agents using the fromAi() function syntax
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+Define AI Agent tools from BPMN elements and resolve their names, descriptions, and parameters for the LLM.
+
 ## What is a tool
 
 A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
@@ -31,6 +33,8 @@ You can use any BPMN element as a tool:
 :::tip
 For a step-by-step guide on adding a tool to an AI agent, see [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
+
+## Which elements are resolved as tools
 
 When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
 

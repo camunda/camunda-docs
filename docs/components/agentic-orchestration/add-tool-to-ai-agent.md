@@ -11,9 +11,9 @@ import TabItem from "@theme/TabItem";
 
 Add BPMN elements as callable tools to your AI agents.
 
-:::tip
-For background on what a tool is and how tool definitions are resolved, see [What is a tool](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#what-is-a-tool).
-:::
+## About
+
+A tool is a BPMN element inside an ad-hoc sub-process that the LLM can choose to invoke to complete a goal. For the full explanation of tool properties and how tools are resolved, see [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
 
 ## Add an element inside the ad-hoc sub-process
 
