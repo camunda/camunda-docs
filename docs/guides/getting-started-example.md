@@ -84,7 +84,7 @@ Download the Getting Started Package from [Camunda Downloads](/downloads).
 
 The starter package includes the following components:
 
-- [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
+- [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
 - [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C# (technical preview).
 

@@ -1,6 +1,10 @@
 import React from "react";
 import "./styles.css";
-import { activeVersionURLPath as linkBase } from "../Versions";
+import { useActiveVersion } from "@docusaurus/plugin-content-docs/client";
+import {
+  activeVersionURLPath as linkBase,
+  isActiveVersionAtLeast,
+} from "../Versions";
 import UserDevIcon from "./icons/user-developer.svg";
 import UserOpsIcon from "./icons/user-administrator.svg";
 
@@ -17,20 +21,26 @@ const QuickStartCard = ({ link, title, icon: Icon, description }) => {
 };
 
 const QuickStart = () => {
+  const docsVersion = useActiveVersion();
+  const isNewIA = isActiveVersionAtLeast(docsVersion, 8, 10);
   const quickStartItems = [
     {
       title: "Developers",
       icon: UserDevIcon,
       description:
         "Get started quickly with local development setup and basic configuration.",
-      link: "/self-managed/quickstart/developer-quickstart/",
+      link: isNewIA
+        ? "/self-managed/quickstart/developer/"
+        : "/self-managed/quickstart/developer-quickstart/",
     },
     {
       title: "Administrators",
       icon: UserOpsIcon,
       description:
         "Learn how to deploy and manage Camunda in production environments.",
-      link: "/self-managed/quickstart/administrator-quickstart/",
+      link: isNewIA
+        ? "/self-managed/quickstart/administrator/"
+        : "/self-managed/quickstart/administrator-quickstart/",
     },
   ];
 

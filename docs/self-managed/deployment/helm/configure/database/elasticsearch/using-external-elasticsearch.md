@@ -7,12 +7,12 @@ description: "Configure the Orchestration Cluster in Camunda 8 Self-Managed to u
 
 Configure the Orchestration Cluster in Camunda 8 Self-Managed to connect to an external Elasticsearch instance as a secondary storage backend. Elasticsearch is used for indexing and querying operational data consumed by Orchestration Cluster applications and APIs. For a canonical definition, see [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
-Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. To use Elasticsearch as secondary storage for the Orchestration Cluster, explicitly configure it in your Helm values under `orchestration.data.secondaryStorage.elasticsearch`. You can either deploy Elasticsearch using the [ECK operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) (recommended) or connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
+Starting with Camunda 8.9, the Helm chart no longer provisions Elasticsearch by default. To use Elasticsearch as secondary storage for the Orchestration Cluster, explicitly configure it in your Helm values under `orchestration.data.secondaryStorage.elasticsearch`. You can either deploy Elasticsearch using the [ECK operator](/self-managed/deploy-to-production/plan/kubernetes-operators.md#elasticsearch-deployment) (recommended) or connect Camunda to an existing external Elasticsearch instance, either running inside the same Kubernetes cluster or outside it.
 
 This page applies to the Orchestration Cluster only. If you also deploy Optimize, configure Optimize separately using [use external Elasticsearch for Optimize with Helm](/self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch.md).
 
 :::note
-The bundled Elasticsearch Bitnami subchart (`elasticsearch.enabled: true`) is deprecated and will be removed in a future release. For production deployments, use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for details.
+The bundled Elasticsearch Bitnami subchart (`elasticsearch.enabled: true`) is deprecated and will be removed in a future release. For production deployments, use the [ECK (Elastic Cloud on Kubernetes) operator](/self-managed/deploy-to-production/plan/kubernetes-operators.md#elasticsearch-deployment) or a managed Elasticsearch service instead. See [deploy required dependencies with Kubernetes operators](/self-managed/deploy-to-production/plan/kubernetes-operators.md) for details.
 :::
 
 ## Prerequisites

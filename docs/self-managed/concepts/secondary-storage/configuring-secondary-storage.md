@@ -124,7 +124,7 @@ environment:
   - CAMUNDA_DATA_SECONDARY_STORAGE_TYPE=none
 ```
 
-For end-to-end backend-specific examples, including PostgreSQL, MariaDB, MySQL, Oracle, SQL Server, H2, Elasticsearch, and OpenSearch, see the [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md).
+For end-to-end backend-specific examples, including PostgreSQL, MariaDB, MySQL, Oracle, SQL Server, H2, Elasticsearch, and OpenSearch, see the [Docker Compose developer quickstart](/self-managed/quickstart/developer/docker-compose/index.md).
 
 </TabItem>
 

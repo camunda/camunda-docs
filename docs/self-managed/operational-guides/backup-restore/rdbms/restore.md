@@ -307,7 +307,7 @@ When using backup ID restore, the RDBMS exporter position is not consulted. You 
 
 ### Kubernetes-specific behavior
 
-When restoring in Kubernetes using the official [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md), there are specific behaviors to be aware of.
+When restoring in Kubernetes using the official [Camunda Helm chart](/self-managed/deploy-to-production/kubernetes/install/index.md), there are specific behaviors to be aware of.
 
 :::note Alternative startup override
 

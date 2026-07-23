@@ -20,7 +20,7 @@ The following guides cover Admin configuration in Self-Managed environments. For
 
 ## Initial setup
 
-Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) will result in a cluster with:
+Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) will result in a cluster with:
 
 1. Web components login enabled
 2. API authentication disabled
@@ -28,7 +28,7 @@ Using the default setup for [Camunda 8 Run](/self-managed/quickstart/developer-q
 4. An initial user with username/password: `demo` / `demo`
 5. An `admin` role with full permissions, applied to the `demo` user
 
-To modify the [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#enable-authentication-and-authorization) for details.
+To modify the [initial configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md), define your custom values in `application.yaml`, and pass this file at startup using the `--config` flag. See [this section](/self-managed/quickstart/developer/c8run/configuration.md#enable-authentication-and-authorization) for details.
 
 :::note
 
@@ -56,7 +56,7 @@ The UI and Setup API options are useful for manual bootstrap, but they are not t
 Typical production next steps are:
 
 - Define initial users with the [configuration examples](#option-3-configuration) and assign them to roles with the [role assignment examples](#assign-users-clients-groups-or-mapping-rules-to-roles-via-configuration).
-- If you deploy with Helm, provide these settings through [application configs](/self-managed/deployment/helm/configure/application-configs.md) and the [Helm authentication and authorization guides](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
+- If you deploy with Helm, provide these settings through [application configs](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md) and the [Helm authentication and authorization guides](/self-managed/deploy-to-production/kubernetes/authentication/index.md).
   :::
 
 :::warning
@@ -196,7 +196,7 @@ Replace `<role>` with the ID of the role you want to configure.
 
 :::note Helm deployments
 
-When you deploy with Helm, configure these properties via an `application.yaml` file using [application configs](/self-managed/deployment/helm/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
+When you deploy with Helm, configure these properties via an `application.yaml` file using [application configs](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md) (for example with `orchestration.extraConfiguration`), rather than as dedicated Helm values.
 
 :::
 

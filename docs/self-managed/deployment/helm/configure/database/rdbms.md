@@ -17,7 +17,7 @@ Related guides:
 
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
-- [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md)
+- [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md)
 - [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
 
 ## Prerequisites
@@ -56,7 +56,7 @@ Store the database password in a Kubernetes secret and reference it. For testing
 
 ### Connection pool and performance tuning
 
-Most tuning options are configured as application properties via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md) (embedded `application.yml`).
+Most tuning options are configured as application properties via [extraConfiguration](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md) (embedded `application.yml`).
 
 | Parameter                                                                 | Type              | Default | Description                                   |
 | ------------------------------------------------------------------------- | ----------------- | ------- | --------------------------------------------- |
@@ -103,7 +103,7 @@ Most tuning options are configured as application properties via [extraConfigura
 
 ### Other parameters
 
-RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deployment/helm/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/configuration.md).
+RDBMS supports other configuration options that can be configured in the helm chart `values.yaml` via [extraConfiguration](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md). See [RDBMS options](/self-managed/concepts/databases/relational-db/configuration.md).
 
 For Liquibase lock recovery behavior, configure `camunda.data.secondary-storage.rdbms.ddl-lock-wait-timeout` (default: `PT15M`) via `extraConfiguration` if you need a longer wait time for heavy schema migrations.
 

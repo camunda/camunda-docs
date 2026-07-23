@@ -17,7 +17,7 @@ import PageDescription from '@site/src/components/PageDescription';
 CPT provides different runtimes to execute your process tests:
 
 - [Testcontainers runtime](configuration.md#testcontainers-runtime) (default) - A managed runtime based on [Testcontainers](https://java.testcontainers.org/) and Docker.
-- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
+- [Remote runtime](configuration.md#remote-runtime) - Your own runtime, such as, [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md)
 
 :::info Public API
 CPT is part of the Camunda 8 [public API](/reference/public-api.md) and is covered by our SemVer stability guarantees (except for alpha features). Breaking changes will not be introduced in minor or patch releases.

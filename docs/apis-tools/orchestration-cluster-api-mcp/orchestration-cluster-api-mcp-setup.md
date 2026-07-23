@@ -12,7 +12,7 @@ Enable the Orchestration Cluster MCP Server and configure MCP clients to connect
 
 ## Enable the Orchestration Cluster MCP Server
 
-The MCP server is enabled by default in [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md). For other deployment types, it must be explicitly enabled before MCP clients can connect.
+The MCP server is enabled by default in [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) and [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md). For other deployment types, it must be explicitly enabled before MCP clients can connect.
 Depending on your deployment, enable it as follows:
 
 <Tabs groupId="deployment" defaultValue="c8run" queryString values={[
@@ -36,7 +36,7 @@ The MCP server is **enabled by default** in the Docker Compose distribution. No 
 
 <TabItem value="helm">
 
-Set the following [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md#configuration-options) value in your Helm chart values:
+Set the following [`extraConfiguration`](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md#configuration-options) value in your Helm chart values:
 
 ```yaml
 orchestration:
@@ -88,7 +88,7 @@ For SaaS, find your **Region Id** and **Cluster Id** in the Camunda Console unde
 
 ### Direct HTTP connection
 
-If your Orchestration Cluster does not require authentication, for example, when running locally with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), you can connect directly to the MCP server endpoint without any additional tooling.
+If your Orchestration Cluster does not require authentication, for example, when running locally with [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) or [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md), you can connect directly to the MCP server endpoint without any additional tooling.
 
 Any MCP client that supports [Streamable HTTP](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#streamable-http) can be used. For authenticated environments, [use c8ctl `mcp-proxy`](#use-c8ctl-mcp-proxy) instead.
 
