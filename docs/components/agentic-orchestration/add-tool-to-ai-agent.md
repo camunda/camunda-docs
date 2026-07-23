@@ -62,12 +62,12 @@ A precise description makes the expected behavior explicit and reduces the risk 
 
 If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
 
-The `fromAi()` function marks a value as LLM-provided and generates a JSON Schema parameter definition that is passed to the LLM as part of the tool definition. Always provide a description and type for every parameter, as this significantly reduces hallucinated values.
+The `fromAi()` function marks a value as LLM-provided and generates a JSON Schema parameter definition that is passed to the LLM as part of the tool definition. Always provide a description for every parameter, as this significantly reduces hallucinated values. The `type` argument is optional and defaults to `string` if omitted, so only add it when the parameter is not a string. This keeps `fromAi()` expressions smaller and easier to manage.
 
-**Basic usage**: declare a string parameter:
+**Basic usage**: declare a string parameter. The `type` argument can be omitted here since it defaults to `string`:
 
 ```feel
-fromAi(toolCall.url, "The URL to fetch. Must be a valid HTTP(s) URL.", "string")
+fromAi(toolCall.url, "The URL to fetch. Must be a valid HTTP(s) URL.")
 ```
 
 **With type**: declare a number parameter:
@@ -134,20 +134,14 @@ In the **Output Mappings** section, add an output mapping with `toolCallResult` 
 | :---------------- | :--------------- |
 | `= response.body` | `toolCallResult` |
 
-You can also map a nested field:
-
-| Source                   | Target                  |
-| :----------------------- | :---------------------- |
-| `= response.body.status` | `toolCallResult.status` |
-
 :::tip Avoid accidental overwrites with multiple outputs
-When your tool task has several output parameters that each contribute a field to `toolCallResult`, prefer nested targets like `toolCallResult.status` over mapping everything directly to `toolCallResult`. Mapping to `toolCallResult` directly replaces the entire variable.
+When your tool task has several output parameters that each contribute a field to `toolCallResult`, avoid an output mapping per field targeting `toolCallResult.<field>` — output mappings and result variables containing a period are discouraged (see [output mappings](/components/concepts/variables.md#output-mappings)). Mapping to `toolCallResult` directly also replaces the entire variable, so multiple mappings targeting it would overwrite each other.
 
-For script tasks and output mappings on regular tasks, the FEEL `put` function adds a single key to an existing context without replacing it:
+For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it:
 
-```feel
-put(toolCallResult, "Complete", sendEmail)
-```
+| Source                                                         | Target           |
+| :------------------------------------------------------------- | :--------------- |
+| `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult` |
 
 This accumulation pattern only works for elements that run in the workflow engine. Connector result expressions cannot use it: connectors don't have access to process variables, so they can't read the current value of `toolCallResult`. A connector tool must build its full result in one result expression, for example `= { toolCallResult: { status: response.status, body: response.body } }`.
 :::
@@ -156,10 +150,10 @@ This accumulation pattern only works for elements that run in the workflow engin
 
 <TabItem value="script-task">
 
-In a script task, set the variable directly in the script:
+Set the script task's **Result variable** to `toolCallResult`. The FEEL expression provides the value that is assigned to it:
 
-```groovy
-toolCallResult = [status: "completed", id: customerId]
+```feel
+{ status: "completed", id: customerId }
 ```
 
 </TabItem>
@@ -174,7 +168,7 @@ The `toolCallResult` value can be a primitive string, a number, or a complex FEE
 
 This example adds a tool that fetches current weather conditions using the [Open-Meteo API](https://open-meteo.com/).
 
-1. Inside the ad-hoc sub-process, add a new task, apply the [REST Outbound connector](/components/connectors/protocol/rest.md) using the **Change element** menu, and name the task `Get current weather`.
+1. Inside the ad-hoc sub-process, add a new task, apply the [REST Outbound connector](/components/connectors/protocol/rest.md) using the **Change element** menu, and set the element **ID** to `Get_Current_Weather`. The ID is what the LLM receives as the tool name.
 
 1. In the **Documentation** field, enter a description so the LLM knows when to select this tool:
 
