@@ -66,7 +66,7 @@ Camunda now provides a public REST API under `/v2/` for programmatic access to H
 The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
-<p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
+<p class="link-arrow">[Public REST API](/apis-tools/hub-api-saas/overview.md)</p>
 
 ### Console
 
