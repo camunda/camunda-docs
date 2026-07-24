@@ -78,7 +78,7 @@ To provision new tenants and understand lifecycle behavior in 8.10, including ro
 
 ## Storage validation
 
-Configuration validation should fail fast when two tenants point to the same backend location or another unsupported path. For document store, the final naming convention depends on the provider, so validate uniqueness at startup rather than relying on a hard-coded path format.
+Camunda validates storage configuration at startup. If two tenants resolve to the same backend location, startup fails and the error names the conflicting tenants. For document stores, uniqueness is validated against the resolved provider, bucket or container, and path tuple.
 
 ## Readiness
 

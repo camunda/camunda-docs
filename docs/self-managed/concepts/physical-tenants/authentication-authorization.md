@@ -5,7 +5,7 @@ sidebar_label: "Authentication and authorization"
 description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config and property names for the per-tenant identity overlay. -->
+<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config and property names for the per-tenant identity overlay. @christinaausley -->
 
 This page explains how authentication and authorization work for Physical Tenants in Camunda 8.10 Self-Managed deployments.
 
@@ -88,7 +88,7 @@ Role definitions within a tenant cover:
 
 Because each tenant manages its own authorization, the same user can have different permissions in different Physical Tenants.
 
-<!-- TODO (camunda/camunda#55259): Add the YAML shape for per-tenant role definitions and token claim mappings once the typed config is confirmed. -->
+<!-- TODO (camunda/camunda#55259): Add the YAML shape for per-tenant role definitions and token claim mappings once the typed config is confirmed. @christinaausley -->
 
 ## Token claim mappings
 
@@ -128,6 +128,16 @@ camunda:
 
 For complete configuration examples, see [configuration reference](./configuration-reference.md).
 
+## IdP redirect URI registration
+
+When users log in to a non-default Physical Tenant via a browser (for example, `https://your-cluster/physical-tenants/tenanta/operate`), the OAuth redirect URI includes the tenant path prefix, such as `/physical-tenants/tenanta/sso-callback`. Your IdP must be configured to allow this URI.
+
+Register the redirect URI for each Physical Tenant you add. For example, in Keycloak, add `/physical-tenants/{tenantId}/sso-callback` to the allowed redirect URIs for the relevant client. Some IdPs support wildcard matching for redirect URIs, which simplifies configuration when adding many tenants.
+
+This is standard procedure for registering a new application with an IdP. The exact configuration depends on your IdP and how you expose the tenant URL (path prefix, subdomain, or other pattern).
+
+<!-- @christinaausley — review with @meggle (Sebastian B.) and @ana-vinogradova-camunda; add IdP-specific examples once confirmed -->
+
 ## Session isolation
 
 Each Physical Tenant has its own path-scoped session cookie. The browser only sends the session cookie for that tenant's URL prefix (`/physical-tenants/<id>`), so sessions from different tenants do not interfere.
@@ -142,6 +152,10 @@ For example:
 :::note
 Cluster-admin role support and cluster-wide operations are not available in 8.10. They are planned for a future release.
 :::
+
+Broker startup does not fail if the cluster-admin role is not configured. However, configuring the cluster-admin role is strongly recommended so that cluster-wide operations (backup, restore, topology management) can be restricted to authorized operators once cluster-wide endpoints become available.
+
+<!-- @christinaausley — review with @deepthidevaki; update when cluster-admin becomes available -->
 
 In a future release, the cluster-admin role will be resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service will be required. Multiple mechanisms will be supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for basic auth.
 
