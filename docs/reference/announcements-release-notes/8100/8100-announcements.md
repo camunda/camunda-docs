@@ -310,9 +310,9 @@ Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tool
 
 #### Console SM and Web Modeler APIs deprecated
 
-With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Hub REST API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-hub-rest-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
+With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public REST API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-rest-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
 
-**Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Hub REST API before 8.12.
+**Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public REST API before 8.12.
 
 </div>
 </div>

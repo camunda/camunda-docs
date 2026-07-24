@@ -57,13 +57,13 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 ### APIs & tools
 
-#### Public Hub REST API
+#### Public REST API
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-Camunda now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+Camunda now provides a public REST API under `/v2/` for programmatic access to Console Self-Managed and Web Modeler resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
-The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
+The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public REST API.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
 <p class="link-arrow">[Public REST API](/apis-tools/hub-api-saas/overview.md)</p>
