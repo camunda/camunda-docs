@@ -847,6 +847,45 @@ function BuildWithCamunda() {
                 requires Node.js 18+.
               </span>
             </p>
+            <p
+              className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+              style={{ marginTop: "0.5rem" }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <span>
+                By downloading our self-managed packages, you agree to our{" "}
+                <Link to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
+                  Terms of Use
+                </Link>
+                .
+              </span>
+            </p>
           </div>
 
           {/* ─── Fallback: Download bundle ─── */}
