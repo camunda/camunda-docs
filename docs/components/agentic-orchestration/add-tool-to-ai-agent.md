@@ -8,6 +8,9 @@ keywords: ["agentic ai", "AI agents", "tools", "fromAi", "toolCallResult"]
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import AddElement from './img/add-element.png';
+import InputMapping from './img/input-mapping.png';
+import ToolDescription from './img/tool-description.png';
 
 Add BPMN elements as callable tools to your AI agents.
 
@@ -36,9 +39,11 @@ For a complete, step-by-step walkthrough that applies all the steps below, see [
 You can model a sub-flow inside the ad-hoc sub-process. Only the first element in the sub-flow (the root node) is exposed to the LLM as a tool; the rest of the flow executes automatically once the LLM selects it.
 :::
 
+<img src={AddElement} alt="Changing a task element to the REST Outbound Connector inside the AI agent ad-hoc sub-process" width="75%"/>
+
 ## Write a tool name and description
 
-An LLM selects tools based on the tool element's **ID** and its **Documentation** fields. Clear, specific descriptions significantly improve the reliability of tool selection.
+The LLM selects tools based on the tool element's **ID** and its **Documentation** fields. Clear, specific descriptions significantly improve the reliability of tool selection.
 
 - The element's **ID** field is always used as the tool name.
 - The element's **Documentation** field is used as the tool description. If **Documentation** is empty, the element's **Name** field is used as a fallback description. If both are empty, the tool has no description.
@@ -63,11 +68,16 @@ See the following comparison:
 | Weak   | `Lookup`                           | `Find customer data`                                                                                                                                                    |
 | Strong | `Resolve customer by company name` | `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
 
+<img src={ToolDescription} alt="Properties panel showing the Name, ID, and Documentation fields for the Resolve customer by company name tool" width="75%"/>
+
 ## Declare AI-generated parameters with `fromAi()`
 
 If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the `fromAi()` FEEL function in the activity's input mappings or connector input fields.
 
-1. Open the input field or **Input Mappings** section where the value is configured.
+How you configure this also depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, each bound to an input mapping under the hood, while a script, service, or user task exposes a generic **Input Mappings** section instead.
+
+1. Open the input field (for a connector task) or the **Input Mappings** section (for a script, service, or user task) where the value is configured.
+1. If you're using the **Input Mappings** section, add a new entry and set its **Local variable name**. This is the name you'll reference elsewhere in the activity, for example in a script task's FEEL expression.
 1. Wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context, and add a description so the LLM knows what to provide:
 
    ```feel
@@ -75,6 +85,8 @@ If the tool requires values that the LLM should supply at runtime, such as a sea
    ```
 
 1. Repeat for each value the LLM should supply.
+
+<img src={InputMapping} alt="Input mapping with local variable name url and a fromAi() FEEL expression as the variable assignment value" width="75%"/>
 
 See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) for more details.
 
