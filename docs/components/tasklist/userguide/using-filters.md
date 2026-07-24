@@ -35,6 +35,7 @@ In the dialog, you can define various rules based on task attributes. The suppor
 - Processes tasks belong to
 - Dates (due date and follow up date)
 - Task ID
+- Business ID
 - Task variables
 
 ![tasklist-filter-dialog-with-advanced-options](img/task-filters/tasklist-filter-dialog-with-advanced-options.jpg "Available filter attributes")

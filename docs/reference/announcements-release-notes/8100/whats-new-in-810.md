@@ -52,6 +52,20 @@ Wait state tracking is enabled by default and writes records to secondary storag
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
+## Business ID
+
+Business ID is now a first-class, searchable attribute across the Orchestration Cluster. Introduced in 8.9 as an immutable domain-specific identifier, Business ID in 8.10 can be searched and filtered across process instances, decision instances, user tasks, messages, and message subscriptions. Jobs expose the Business ID in the activation response (visible, not searchable).
+
+**What's new in 8.10:**
+
+- **Search and filter** across entity types using advanced operators (`$eq`, `$neq`, `$exists`, `$like` with `*`/`?` wildcards, `$in`). Operate and Tasklist expose Equals, Contains, and Is one of in their filter UI.
+- **Message correlation** — include a Business ID in published or correlated messages as an additional filter constraint. If both a correlation key and Business ID are supplied, both must match.
+- **Call Activity propagation** — child instances inherit the parent's Business ID by default. Configure a literal value or FEEL expression on the call activity to override it. Use `camunda.processInstance.businessId` in FEEL expressions to reference the parent's ID.
+- **Start with a Business ID** from Camunda Hub or Desktop Modeler.
+- **Late assignment** — assign a Business ID to a running instance that has none, when uniqueness is disabled. Assignment is forward-only: only artifacts created after the assignment carry it.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
 ## Helm chart deployment
 
 Important changes to Helm chart deployment in 8.10 are as follows:
