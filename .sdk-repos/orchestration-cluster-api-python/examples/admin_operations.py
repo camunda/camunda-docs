@@ -35,6 +35,7 @@ from camunda_orchestration_sdk import (
     JobWorkerStatisticsQuery,
     MessageSubscriptionSearchQuery,
     ResourceSearchQuery,
+    RestoreRequest,
     TenantId,
     Unset,
     UpdateClusterVariableRequest,
@@ -281,6 +282,24 @@ def change_cluster_mode_example() -> None:
         suffix = f" -> {operation.mode}" if operation.mode else ""
         print(f"  {operation.operation}{suffix}")
 # endregion ChangeClusterMode
+
+
+# region Restore
+def restore_example() -> None:
+    client = CamundaClient()
+
+    # The cluster must be in recovery mode before a restore is accepted. Provide
+    # either a list of backup IDs (one per partition) or a time range (from/to)
+    # that selects the backups to restore, but not both.
+    result = client.restore(
+        data=RestoreRequest(backup_ids=[100, 101]),
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for operation in result.planned_changes:
+        suffix = f" -> {operation.mode}" if operation.mode else ""
+        print(f"  {operation.operation}{suffix}")
+# endregion Restore
 
 
 # region GetStatus

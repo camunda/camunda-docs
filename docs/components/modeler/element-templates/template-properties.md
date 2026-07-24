@@ -57,7 +57,7 @@ Some keys or values require other keys to be set to a certain value, even if the
 For more information, see the documentation below.
 
 If your editor (e.g. VS Code) offers validation based on JSON schema, these incompatibilities or missing key-value pairs are highlighted as you edit your template.
-The Web Modeler's element template editor offers an additional problems panel that shows these errors with additional descriptions to help you better understand what needs to be fixed.
+Camunda Hub's element template editor offers an additional problems panel that shows these errors with additional descriptions to help you better understand what needs to be fixed.
 The Desktop Modeler shows these errors with additional descriptions in the output tab, when it tries to load an invalid template.
 
 For most purposes, `binding`, `label`, `type`, and `value` are sufficient to define a property.

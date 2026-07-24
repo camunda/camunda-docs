@@ -43,6 +43,7 @@
     "update-release-links": "node hacks/update-release-links.js"
   },
   "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "15.5.0",
     "@auth0/auth0-react": "^2.3.0",
     "@bpmn-io/form-js": "^1.15.2",
     "@camunda8/docusaurus-plugin-openapi-docs": "4.6.7",
@@ -58,6 +59,7 @@
     "clsx": "^2.1.1",
     "mixpanel-browser": "^2.64.0",
     "mustache": "^4.2.0",
+    "openapi-to-postmanv2": "6.3.1",
     "pushfeedback-react": "^0.1.63",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

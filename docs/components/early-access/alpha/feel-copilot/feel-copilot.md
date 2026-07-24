@@ -2,13 +2,13 @@
 id: feel-copilot
 title: FEEL Copilot
 sidebar_label: FEEL Copilot
-description: "Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Web Modeler."
+description: "Chat with the AI FEEL Copilot for help generating FEEL (Friendly Enough Expression Language) expressions in Camunda Hub."
 ---
 
 import OpenFeelCopilot from './img/open-feel-copilot.png';
 import FeelCopilotPanel from './img/feel-copilot-panel.png'
 
-Chat with the AI FEEL Copilot for help generating [FEEL (Friendly Enough Expression Language)](/components/modeler/feel/what-is-feel.md) expressions in [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md).
+Chat with the AI FEEL Copilot for help generating [FEEL (Friendly Enough Expression Language)](/components/modeler/feel/what-is-feel.md) expressions in [Camunda Hub](/components/hub/workspace/modeler/launch-modeler.md).
 
 :::note Terms of use
 By using this tool, you agree to Camunda's use of the anonymized input and output data and anonymized feedback to improve it.
@@ -25,11 +25,13 @@ Camunda does not save your prompts and the resulting FEEL expressions to your ac
 
 :::
 
-To use the FEEL Copilot in Web Modeler, take the following steps:
+To use the FEEL Copilot in Camunda Hub, take the following steps:
 
+1. Log in to Camunda Hub.
 1. If you have not already done so, [opt in](/components/hub/organization/manage-organization-settings/enable-alpha-features.md#enable-ai-powered-features) to use this feature.
-1. Log in to [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md).
-1. Click **New project > Create new > BPMN diagram**.
+1. Open a [workspace](/components/hub/organization/manage-workspaces/index.md), or create a new one.
+1. In your workspace, create a new project.
+1. In your project, click **Create new > BPMN diagram**.
 1. Open any FEEL Popup.
 
    :::note
