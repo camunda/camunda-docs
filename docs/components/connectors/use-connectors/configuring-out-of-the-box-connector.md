@@ -66,7 +66,7 @@ To accomplish this, you'll use SendGrid to send an email:
 5. Open the **Details** panel on the right side of the modeling interface.
 6. Under **Properties**, configure the following sections:
    - **Authentication:** [Full Access API Key](https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys#creating-an-api-key)
-   - **Sender:** Name and email address. Make sure [this email is verified by Sendgrid](https://www.twilio.com/docs/sendgrid/ui/sending-email/sender-verification).
+   - **Sender:** Name and email address. Make sure [this email is verified by SendGrid](https://www.twilio.com/docs/sendgrid/ui/sending-email/sender-verification).
    - **Receiver:** Name and email address
    - **Compose email:** Email contents
 
