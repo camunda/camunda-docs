@@ -98,7 +98,7 @@ async function restoreExample() {
 
   console.log(`Cluster change ${change.changeId}:`);
   for (const op of change.plannedChanges) {
-    console.log(`  ${op.operation}${op.mode ? ` -> ${op.mode}` : ""}`);
+    console.log(`  ${op.operation}${op.mode ? ` -> ${op.mode}` : ''}`);
   }
 }
 //#endregion Restore
