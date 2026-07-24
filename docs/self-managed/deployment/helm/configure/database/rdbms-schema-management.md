@@ -134,11 +134,15 @@ INFO  org.springframework.web.servlet.DispatcherServlet - Completed initializati
 
 ## Upgrading the schema
 
-When upgrading Camunda versions:
+When upgrading Camunda versions, choose the schema migration path that matches your `autoDDL` configuration.
 
-### Step 1: Backup your database
+### Step 1: Prepare for the upgrade
 
-Backup your database before upgrading. Use your database vendor's native tools:
+Before upgrading the production cluster, perform the following steps:
+
+#### Back up your database
+
+Back up your database before upgrading. Use your database vendor's native tools:
 
 - **PostgreSQL**: [pg_dump documentation](https://www.postgresql.org/docs/current/app-pgdump.html)
 - **Oracle**: [EXPDP documentation](https://docs.oracle.com/en/database/oracle/oracle-database/sutil/oracle-data-pump-export-utility.html)
@@ -146,27 +150,88 @@ Backup your database before upgrading. Use your database vendor's native tools:
 - **MariaDB**: [mariadb-dump documentation](https://mariadb.com/kb/en/mariadb-dump/)
 - **SQL Server**: [SQL Server backup documentation](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases)
 
-### Step 2: Test the upgrade in staging
+#### Test the upgrade in staging
 
 Deploy the new Camunda version in a staging environment first to validate schema migrations.
 
-### Step 3: Scale down deployment (optional but recommended)
+### Step 2a: Automatic schema management
 
-For large production clusters, scale down to avoid connection pool exhaustion during migration:
+If `autoDDL: true`, Liquibase applies schema migrations automatically when an upgraded Camunda orchestration pod starts.
+
+Camunda supports rolling upgrades for RDBMS deployments. During the upgrade, the first upgraded cluster node applies the
+schema changes. Liquibase holds a lock on the database schema while the migration runs, and other cluster nodes wait for
+the lock to be released before they start.
+
+(Optional) For large production clusters, reduce the orchestration deployment to one replica before the upgrade so only
+one upgraded pod starts the Liquibase migration:
 
 ```bash
-kubectl scale deployment camunda-orchestration --replicas=0 -n camunda
+kubectl scale deployment camunda-orchestration --replicas=1 -n camunda
 ```
 
-### Step 4: Deploy the new Camunda version
+:::note
+This reduces processing capacity during the upgrade because only one orchestration replica remains. The schema
+migration is performed when the first upgraded cluster node starts.
+:::
+
+Keep the effective replica count at `1` until Liquibase completes. If your Helm values manage the replica count, make
+sure the upgrade does not restore the larger replica count before the migration finishes.
+
+Deploy the new Camunda version:
 
 ```bash
 helm upgrade camunda camunda/camunda-platform --version X.Y.Z -f values.yaml -n camunda
 ```
 
-Liquibase will automatically apply new migrations if `autoDDL: true`.
+For large databases and long-running schema migrations, review [Liquibase lock issues](#liquibase-lock-issues) before
+upgrading. You might need to increase the DDL lock wait timeout so a long-running migration is not treated as stale.
 
-### Step 5: Scale back up
+The Helm chart defines a default `readinessProbe`. Longer-running migrations may cause the pod to be marked as not ready. If this happens, you can increase the `readinessProbe` timeout in your Helm values:
+
+```yaml
+orchestration:
+  readinessProbe:
+    # Wait 300 + 30 * 20 = 900 seconds (15m) until the pod is marked as not ready
+    initialDelaySeconds: 300
+    periodSeconds: 30
+    failureThreshold: 20
+```
+
+After Liquibase completes, scale the orchestration deployment back to your desired replica count:
+
+```bash
+kubectl scale deployment camunda-orchestration --replicas=3 -n camunda
+```
+
+:::note
+The RDBMS upgrade is a rolling upgrade and does not require downtime of the orchestration cluster. Some schema
+operations might take longer to complete when the cluster and database is under load. If you experience long-running
+migrations, consider reducing the client-side load of the orchestration cluster or scale down the cluster to 0 nodes
+before the upgrade.
+:::
+
+### Step 2b: Migrate the schema manually with SQL scripts
+
+If `autoDDL: false`, apply the SQL migration scripts before or during the Camunda version upgrade. The SQL scripts are
+forward compatible with the previous Camunda version, so you can apply them while the existing cluster is running.
+
+(Optional) Scale the orchestration deployment to zero replicas if your maintenance process requires the application to
+stop before schema changes are applied:
+
+```bash
+kubectl scale deployment camunda-orchestration --replicas=0 -n camunda
+```
+
+Apply the SQL scripts from the Camunda release bundle or from
+the [Liquibase scripts page](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md), then
+deploy the new Camunda version:
+
+```bash
+helm upgrade camunda camunda/camunda-platform --version X.Y.Z -f values.yaml -n camunda
+```
+
+If you scaled the deployment to zero replicas, scale the orchestration deployment back to your desired replica count
+after the upgrade:
 
 ```bash
 kubectl scale deployment camunda-orchestration --replicas=3 -n camunda
@@ -178,7 +243,7 @@ Monitor the rollout:
 kubectl rollout status deployment/camunda-orchestration -n camunda
 ```
 
-### Step 6: Verify schema initialization
+### Step 3: Verify schema initialization
 
 Verify that Liquibase completed the schema migration successfully by checking logs:
 
@@ -186,18 +251,32 @@ Verify that Liquibase completed the schema migration successfully by checking lo
 kubectl logs <pod-name> | grep -i liquibase
 ```
 
-Look for "Liquibase: Update successful" or similar completion messages. If the migration fails, Liquibase will log the specific error.
+Look for "Liquibase: Update successful" or similar completion messages. If the migration fails, Liquibase will log the
+specific error.
 
 You can also verify schema initialization by checking the `databasechangelog` table:
 
 ```sql
 -- Verify Liquibase changelog table exists and contains entries
-SELECT COUNT(*) FROM databasechangelog;
+SELECT COUNT(*)
+FROM databasechangelog;
 ```
 
-This table should exist and contain entries for a fresh Camunda 8.9 installation. On upgrades, this number increases as new changesets are applied.
+This table should exist and contain entries for a fresh Camunda installation. On upgrades, this number increases as
+new changesets are applied.
 
 For troubleshooting, see [schema troubleshooting](#schema-troubleshooting).
+
+## Rolling upgrades
+
+Rolling upgrades are available for RDBMS deployments that use Liquibase schema migration. For upgrade steps and optional
+scaling guidance, see [automatic schema management](#step-2a-automatic-schema-management).
+
+### Rollback
+
+Camunda schema migrations are compatible with the previous version. This means that if you need to stop an upgrade and
+rollback to a previous version, you can do so without any issues. The previous version will be able to read the schema
+and continue processing.
 
 ## Schema troubleshooting
 
