@@ -31,8 +31,8 @@ For a complete, step-by-step walkthrough that applies all the steps below, see [
 1. Add a new task element. You can use any BPMN element as a tool, including service tasks, script tasks, user tasks, and sub-processes.
 1. Apply the appropriate connector or task type. For example:
    - Use the [REST Outbound connector](/components/connectors/protocol/rest.md) to call an external API.
-   - Use a [script task](/components/modeler/bpmn/script-tasks/script-tasks.md) to execute inline logic.
    - Use a [user task](/components/modeler/bpmn/user-tasks/user-tasks.md) to route to a human reviewer.
+   - Use a [script task](/components/modeler/bpmn/script-tasks/script-tasks.md) to execute inline logic.
 1. Make sure the element has **no incoming sequence flow**, as the AI Agent connector only resolves root-level elements as tools.
 
 :::tip
@@ -78,10 +78,10 @@ See the following comparison:
 
 If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the `fromAi()` FEEL function in the activity's input mappings or connector input fields.
 
-How you configure this depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, such as **URL** or **Query parameters** in the REST outbound connector's **HTTP Endpoint** section, while a script, service, or user task exposes an [**Input Mappings**](/components/concepts/variables.md#input-mappings) section instead.
+How you configure this depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, such as **URL** or **Query parameters** in the REST outbound connector's **HTTP Endpoint** section, while a script, service, or user task exposes an [**Input Mapping**](/components/concepts/variables.md#input-mappings) section instead.
 
-1. Open the input field (for a connector task) or the **Input Mappings** section (for a script, service, or user task) where the value is configured.
-1. If you're using the **Input Mappings** section, add a new entry and set its **Local variable name**. This is the name you'll reference the variable elsewhere in the element.
+1. Open the input field (for a connector task) or the **Input Mapping** section (for a script, service, or user task) where the value is configured.
+1. If you're using the **Input Mapping** section, add a new entry and set its **Local variable name**. This is the name you'll reference the variable elsewhere in the element.
 1. Wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context, and add a description so the LLM knows what to provide:
 
    ```feel
@@ -98,11 +98,11 @@ See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box
 
 After the tool executes, its output must be returned in a [process variable](/reference/glossary.md#process-variable) named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
 
-How you set `toolCallResult` depends on the BPMN element type that implements your tool. For example, a connector task exposes a dedicated [result expression](/components/connectors/use-connectors/index.md#result-expression) field, a user task uses regular [output mappings](/components/concepts/variables.md#output-mappings), and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:
+How you set `toolCallResult` depends on the BPMN element type that implements your tool. For example, a connector task exposes a dedicated [result expression](/components/connectors/use-connectors/index.md#result-expression) field, a regular task uses [output mappings](/components/concepts/variables.md#output-mappings), and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:
 
 <Tabs groupId="tool-result-mapping" defaultValue="connector-task" values={[
 { label: "Connector task", value: "connector-task" },
-{ label: "User task", value: "user-task" },
+{ label: "Regular task", value: "regular-task" },
 { label: "Script task", value: "script-task" },
 ]}>
 
@@ -122,9 +122,9 @@ In the **Output Mapping** section of a connector, set **Result Expression** to m
 
 </TabItem>
 
-<TabItem value="user-task">
+<TabItem value="regular-task">
 
-In the **Output Mappings** section, add an output mapping with `toolCallResult` as the target variable:
+In the **Output Mapping** section, add an output mapping with `toolCallResult` as the target variable:
 
 | Source            | Target           |
 | :---------------- | :--------------- |
@@ -156,17 +156,17 @@ Mapping to `toolCallResult` directly also replaces the entire variable, so multi
 
 For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it. Where you write the call depends on the element type:
 
-- **Script task**: write it directly in the script task's FEEL expression, the same field whose result is assigned to **Result variable**:
-
-  ```feel
-  context put(toolCallResult, "status", response.body.status)
-  ```
-
 - **Regular task with output mappings** (for example, a user task): add it as the **Source** of a mapping targeting `toolCallResult`:
 
   | Source                                                         | Target           |
   | :------------------------------------------------------------- | :--------------- |
   | `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult` |
+
+- **Script task**: write it directly in the script task's FEEL expression in the **Script** section:
+
+  ```feel
+  context put(toolCallResult, "status", response.body.status)
+  ```
 
 Connector result expressions cannot use this accumulation pattern because they don't have access to process variables, so they can't read the current value of `toolCallResult`. A connector tool must build its full result in one result expression. For example:
 
