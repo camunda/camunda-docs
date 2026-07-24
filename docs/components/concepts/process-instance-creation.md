@@ -200,9 +200,7 @@ For example, consider a process that ships book orders where each order already 
 
 You set the business ID at process instance creation time via the `businessId` field in the creation request. The business ID is **immutable**; once set, it cannot be changed or removed for the lifetime of the process instance. The maximum length for a business ID is **256 characters**.
 
-:::note
-The business ID feature is currently only available through the API (REST and gRPC) and the official clients. You can't set a business ID when creating process instances from other tools, such as the modeler in Camunda Hub.
-:::
+Starting in 8.10, you can also set a business ID when starting a process instance from **Camunda Hub** or **Desktop Modeler**.
 
 <details>
    <summary>Create a process instance with a business ID via Orchestration Cluster REST API</summary>
@@ -226,16 +224,88 @@ See the [API reference for process instance creation](/apis-tools/orchestration-
 
 ### Propagation to child instances
 
-When a process instance with a business ID creates a child process instance via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), the business ID is automatically propagated to the child.
+When a process instance with a business ID creates a child process instance via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), the business ID is automatically propagated to the child by default.
 
-Each child instance inherits the same business ID as its parent. As a result, the entire process hierarchy ultimately shares the root instance's business ID, and child instances cannot override it. This lets you trace an entire process hierarchy using a single domain identifier.
+Each child instance inherits the same business ID as its parent, letting you trace an entire process hierarchy using a single domain identifier.
 
-### Retrieving process instances by business ID
+Starting in 8.10, a call activity can override the inherited business ID by setting a literal value or [FEEL expression](/components/concepts/expressions.md) on the call activity. The value is resolved once at child creation and is then immutable. See [Business ID propagation](/components/modeler/bpmn/call-activities/call-activities.md#business-id-propagation) for configuration details.
 
-The business ID is available as a property on the process instance. You can use it to look up or filter process instances through the API:
+### Searching and filtering by business ID
 
-- [Get process instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx) — retrieve a single process instance and inspect its `businessId` field.
-- [Search process instances](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) — filter process instances using the `businessId` field to find all instances linked to a specific business case.
+Starting in 8.10, `businessId` is available across multiple entity types. Searchability varies by entity:
+
+| Entity                | Searchable | Visible | Notes                                                                               |
+| :-------------------- | :--------- | :------ | :---------------------------------------------------------------------------------- |
+| Process instances     | Yes        | Yes     | Available since 8.9.                                                                |
+| Decision instances    | Yes        | Yes     | Available since 8.10.                                                               |
+| User tasks            | Yes        | Yes     | Available since 8.10.                                                               |
+| Messages              | Yes        | Yes     | API only. Not shown in the Operate process instance details view.                   |
+| Message subscriptions | Yes        | Yes     | API only.                                                                           |
+| Jobs                  | No         | Yes     | Visible in job activation response. Not searchable, filterable, or shown in the UI. |
+
+#### Advanced filter operators
+
+The API supports the following operators for `businessId`. Operate and Tasklist expose a subset in their filter UI.
+
+| Operator  | Description                 | Wildcards                           | UI label  |
+| :-------- | :-------------------------- | :---------------------------------- | :-------- |
+| `$eq`     | Exact match                 | —                                   | Equals    |
+| `$neq`    | Does not match              | —                                   | API only  |
+| `$exists` | Field is set or absent      | —                                   | API only  |
+| `$like`   | Pattern match               | `*` (multi-char), `?` (single-char) | Contains  |
+| `$in`     | Matches any value in a list | —                                   | Is one of |
+
+#### API reference
+
+| Entity                | Endpoints                                                                                                                                                                                              |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Process instances     | [Get](/apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance.api.mdx) · [Search](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx)   |
+| Decision instances    | [Get](/apis-tools/orchestration-cluster-api-rest/specifications/get-decision-instance.api.mdx) · [Search](/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx) |
+| User tasks            | [Get](/apis-tools/orchestration-cluster-api-rest/specifications/get-user-task.api.mdx) · [Search](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx)                 |
+| Message subscriptions | [Search](/apis-tools/orchestration-cluster-api-rest/specifications/search-correlated-message-subscriptions.api.mdx)                                                                                    |
+| Jobs (visible only)   | [Search](/apis-tools/orchestration-cluster-api-rest/specifications/search-jobs.api.mdx) · [Activate](/apis-tools/orchestration-cluster-api-rest/specifications/activate-jobs.api.mdx)                  |
+
+#### Retroactive visibility
+
+Business IDs assigned to process instances in 8.9 remain traceable because the business ID is stored on the process instance record. However, related artifacts — user tasks, decision instances, jobs, and message subscriptions — snapshot the business ID at their own creation time. Artifacts created before business ID visibility shipped for that entity type are not retroactively enriched and carry no `businessId` value.
+
+### Late Business ID assignment
+
+You can assign a business ID to a running process instance that has none. This is useful when the domain identifier (for example, an order number or case reference) is not available at instance creation time.
+
+:::note
+Late assignment requires business ID uniqueness to be **disabled**. See [Uniqueness control](#uniqueness-control) for details.
+:::
+
+| Constraint              | Detail                                                                                                                                |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| Single and irreversible | Once set, the business ID cannot be changed or removed.                                                                               |
+| Root instances only     | Call-activity children are always rejected.                                                                                           |
+| No re-assignment        | Any attempt to assign to an instance that already has a business ID — whether the value matches or differs — returns `INVALID_STATE`. |
+| Max length              | 256 characters.                                                                                                                       |
+
+**Propagation is forward-only.** Only artifacts created after the assignment carry the business ID: future jobs, user tasks, decision instances, message subscriptions, and call-activity children. Pre-existing artifacts retain an empty `businessId`. An instance in this state shows a mixed view — older artifacts have no business ID, newer ones do.
+
+**API surfaces:**
+
+| Surface        | Details                                                                                                                                 |
+| :------------- | :-------------------------------------------------------------------------------------------------------------------------------------- |
+| REST           | `POST /process-instances/{processInstanceKey}/business-id-assignment`                                                                   |
+| gRPC           | `AssignProcessInstanceBusinessId`                                                                                                       |
+| Job completion | Include `businessId` in the `CompleteJob` request. If assignment fails, the entire complete is rejected — the job is **not** completed. |
+
+**Rejection contract:**
+
+| Failure                                                      | Rejection                    |
+| :----------------------------------------------------------- | :--------------------------- |
+| Instance not found or wrong tenant                           | `NOT_FOUND`                  |
+| Target is a call-activity child                              | `INVALID_STATE`              |
+| Business ID uniqueness is enabled                            | `INVALID_STATE`              |
+| Instance already has a business ID (same or different value) | `INVALID_STATE`              |
+| Value fails validation (for example, exceeds 256 characters) | `INVALID_ARGUMENT`           |
+| Not authorized                                               | `UNAUTHORIZED` / `FORBIDDEN` |
+
+Required permission: `UPDATE_PROCESS_INSTANCE` on the process definition.
 
 ### Uniqueness control
 
@@ -274,7 +344,7 @@ Migration intentionally **bypasses uniqueness control checks**, because migratio
 
 ### Limitations
 
-- You cannot currently search related entities (for example, jobs, user tasks, or incidents) **directly by business ID**.
+- **Jobs** carry the business ID in the job activation response but cannot be searched or filtered by business ID. No UI surface exposes job-level business ID visibility.
 - When using [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) to increase the number of partitions, new process instances created with a business ID are only distributed across the original set of partitions, not to any newly added partitions.
 
 ## Tags

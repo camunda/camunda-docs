@@ -30,6 +30,7 @@ The **Filter** panel appears on the left side of the **Processes** page. Open it
 
 - **Batch Process Instance Key** — Filter by batch operation ID
 - **Process Instance Key** — Filter by exact instance ID
+- **Business ID** — Filter by domain-specific identifier (order number, case reference, etc.); see [Business ID filter](#business-id-filter)
 
 **Variable filters** (new in 8.10):
 
@@ -185,6 +186,20 @@ Enter the value as you would compare it (for example, `42` for numbers, `2024-01
 :::note
 Numeric comparison operators are not supported. Use **equals** or **contains** as alternatives.
 :::
+
+## Business ID filter
+
+A [business ID](/components/concepts/process-instance-creation.md#business-id) is a domain-specific identifier assigned to a process instance at creation — for example, an order number, case reference, or ticket ID. Starting in 8.10, you can filter process instances by business ID directly in the Operate UI.
+
+To filter by business ID, open the **Filter** panel and use the **Business ID** field.
+
+| UI operator   | Behavior                                           | Wildcards                                                   |
+| :------------ | :------------------------------------------------- | :---------------------------------------------------------- |
+| **Equals**    | Exact match on the business ID value.              | —                                                           |
+| **Contains**  | Pattern match.                                     | `*` matches multiple characters, `?` matches one character. |
+| **Is one of** | Matches any business ID in a comma-separated list. | —                                                           |
+
+For additional operators (`$neq`, `$exists`), use the [Search process instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) with the `businessId` filter field.
 
 ## Known limitations
 
