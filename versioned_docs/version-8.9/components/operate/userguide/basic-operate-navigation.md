@@ -40,6 +40,6 @@ For a reliable way to find a called process instance, take the following steps:
 
 1. Click the call activity element to select it.
 2. Open the **Details** tab.
-3. Click the **Called Process Instance** link to navigate to that instance.
+3. In the row labeled **Called Process Instance**, click the link — shown as the called process's name and instance key — to navigate to that instance.
 
-If the call activity has called more than one process instance, the **Details** tab shows a **View all** link to the filtered **Processes** page instead of a single link.
+If the call activity has called more than one process instance, the **Details** tab shows a **View all** link instead of a single link. This link filters the **Processes** page by the whole process instance, so it shows every instance it has called, including from other call activities — not only the one you selected.
