@@ -59,5 +59,6 @@ You can also create subfolders to organize files within the project.
 <p><img src={FileListImg} alt="Project file list" /></p>
 
 :::note
-Process IDs, decision IDs, and form IDs must be unique across all files within a project. This avoids ambiguity and conflicts when you link resources and deploy the project.
+Keep process IDs, decision IDs, form IDs and RPA script IDs unique across all files within a project. A project with duplicate IDs will fail to deploy.
+Web Modeler flags the conflicting resources IDs in the resource's problems panel to help you fix them.
 :::
