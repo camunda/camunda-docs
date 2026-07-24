@@ -5,23 +5,28 @@ description: "Ready to use out of the box, connectors help automate complex busi
 keywords: [connector, modeling, connectors, low-code, no-code]
 ---
 
-The launch of [Camunda 8](/components/components-overview.md) also introduced an integration framework with a key goal: integrate faster to reduce the time it takes to automate and orchestrate business processes across systems.
+Integrate a [built-in connector](/components/connectors/introduction.md) to reduce the time it takes to automate and orchestrate business processes across systems.
 
-:::note
-New to connectors? Review our [introduction to connectors](/components/connectors/introduction.md) to get familiar with their capabilities.
-:::
+## About
 
-[Connectors](/components/connectors/introduction.md) achieve this goal. Ready to use out of the box, connectors help automate complex [business processes](/components/concepts/processes.md) by inserting them into [BPMN diagrams](/components/modeler/bpmn/automating-a-process-using-bpmn.md) within [Web Modeler](/components/modeler/about-modeler.md), and configuring them via the properties panel on the right side of the screen.
+With built-in connectors, you can automate complex [business processes](/components/concepts/processes.md) by inserting them into [BPMN diagrams](/components/modeler/bpmn/automating-a-process-using-bpmn.md) within your [Camunda Hub](/components/modeler/about-modeler.md) projects and configuring them with the properties panel.
 
 You can also orchestrate APIs, for example by working with a [REST connector](/guides/getting-started-orchestrate-apis.md). Learn more about [types of connectors](/components/connectors/connector-types.md).
 
-Connectors technically consist of two parts: the business logic is implemented as a [job worker](/components/concepts/job-workers.md), and the user interface during modeling is provided using an element template. In this guide, we'll walk step-by-step through the implementation of a sample connector.
+Connectors technically consist of two parts:
 
-## Set up
+- The business logic is implemented as a [job worker](/components/concepts/job-workers.md)
+- The user interface during modeling is provided using an element template.
 
-We'll implement our connector with [Modeler](/components/modeler/about-modeler.md). To get started, ensure you’ve [created a Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md).
+In this tutorial, you'll walk step-by-step through the implementation of a sample connector.
 
-You'll also need to [create a SendGrid account](https://signup.sendgrid.com/) if you don't have one already, as we'll use SendGrid in our example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
+## Prerequisites
+
+Before you begin, ensure you have:
+
+- [A Camunda 8 account](/components/hub/organization/manage-organization-settings/manage-plan/create-account.md).
+- [A SendGrid account](https://signup.sendgrid.com/). You'll use SendGrid in the example connector. Once you've created your account, you will immediately be prompted to create a [sender](https://docs.sendgrid.com/ui/sending-email/senders).
+- [A Camunda Hub workspace](/components/hub/organization/manage-workspaces/index.md). This is typically provisioned by a center of excellence team.
 
 ### Create a cluster
 
@@ -29,22 +34,20 @@ import CreateCluster from '../../../components/react-components/create-cluster.m
 
 <CreateCluster/>
 
-## Getting started
+## Import a diagram
 
-Once logged in to your Camunda 8 account, take the following steps:
+1. Download the following files:
+   - <a href="/bpmn/connectors/submit-expense.bpmn" download>`submit-expense.bpmn`</a>: A process for submitting expenses for approval.
+   - <a href="/bpmn/connectors/upload-receipt.form" download>`upload-receipt.form`</a>: A form for uploading receipts.
+   - <a href="/bpmn/connectors/approve-receipt.form" download>`approve-receipt.form`</a>: A form for approving receipts.
+2. Log in to your Camunda 8 account.
+3. In your Camunda Hub workspace, click **New project**, and name your project `Expense process`.
+4. In your project, delete the default diagram, and click **Create new > Upload files**.
+5. Upload `submit-expense.bpmn`, `upload-receipt.form`, and `approve-receipt.form`.
 
-1. From Modeler, click **New project > Create new > BPMN diagram**.
-2. Name your project by replacing the **New Project** text at the top of the page. In this example, we'll name ours `Expense process`.
-3. Select **Create new > BPMN diagram**.
-4. Give your model a descriptive name by replacing the **New BPMN Diagram** text at the top of the page. Then, give your model a descriptive ID within the **General** tab inside the properties panel on the right side of the screen. In this case, we've named our model `Submit expense` with an ID of `submitting-expense`.
+Open **submit-expense** to see the process you'll be working with throughout this tutorial:
 
-## Build a BPMN diagram
-
-Use Web Modeler to design a BPMN flow with the appropriate tasks. To get started, create a task by dragging the rectangular task icon from the palette, or click the existing start event and the displayed task icon.
-
-In this example, we've designed the following BPMN diagram:
-
-![bpmn example diagram](./img/bpmn-expense-sample.png)
+<div bpmn="connectors/submit-expense.bpmn" />
 
 :::note
 To learn more about building your own BPMN diagram from scratch, visit our guide on [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md).
@@ -52,37 +55,35 @@ To learn more about building your own BPMN diagram from scratch, visit our guide
 
 ## Add a connector
 
-Here, a receipt is initially uploaded for review. The first task we need to complete is notifying the manager of the uploaded receipt. If we want to leverage our email service to notify the manager, we can utilize a productivity applications connector to replace this task.
+At the beginning of the process, a receipt is ready and uploaded for review. The next task is to notify the manager of the uploaded receipt.
+
+To accomplish this, you'll use SendGrid to send an email:
+
+1. With the **submit-expense** diagram open, make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).
+2. Click the **Notify manager of receipt** task.
+3. Click **Change element**.
+4. Search for **SendGrid Outbound Connector**. If you're using Self-Managed, you may need to download it from the connector marketplace.
+5. Open the **Details** panel on the right side of the modeling interface.
+6. Under **Properties**, configure the following sections:
+   - **Authentication:** [Full Access API Key](https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys#creating-an-api-key)
+   - **Sender:** Name and email address. Make sure [this email is verified by SendGrid](https://www.twilio.com/docs/sendgrid/ui/sending-email/sender-verification).
+   - **Receiver:** Name and email address
+   - **Compose email:** Email contents
+
+The connector is ready to use.
 
 :::note
 Camunda offers a variety of available connectors. For example, utilize cloud connectors to communicate with cloud-native applications and conform to REST, GraphQL, or SOAP protocols. Or, employ service connectors to integrate with technology enablers like RPA, AI or IOT services. Learn more about our [available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) to find out which may best suit your business needs.
 :::
 
-To add our productivity applications connector, take the following steps:
-
-1. Click the start event. A context pad to the right of the start event will appear.
-2. Click the **Append connector** item in the panel.
-3. To send an email via SendGrid, for example, select the **SendGrid Email connector** option. Name this newly-created task `Notify manger of receipt`. This now replaces our original task.
-   ![adding a connector](./img/adding-connector.png)
-4. You need to fill out the required information in the properties panel of this task on the right side of the screen. Here, we'll add an example API key obtained from our [SendGrid account](https://app.sendgrid.com/settings/api_keys), a sender and receiver name and email address, and the email message content.
-
-![filling out connector properties panel](./img/connector-properties-panel.png)
-
-Our connector is now attached and ready to use. Your completed diagram should look like the following:
-
-![completed connectors and BPMN diagram](./img/connectors-bpmn-diagram.png)
-
 ## Execute your process diagram
 
-:::note
-If you change a diagram and it is auto-saved, this has no effect on your cluster(s).
+If you change a diagram and it is auto-saved, this has no effect on your cluster(s). When you deploy the diagram, it becomes available on the selected cluster, and new instances can start.
 
-When you deploy the diagram, it becomes available on the selected cluster and new instances can start.
-:::
+To execute your completed process with the diagram open:
 
-To execute your completed process diagram, click **Deploy**.
-
-You can now start a new process instance to initiate your process diagram. Click **Run**.
+1. Make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).
+2. Click **Deploy and run**.
 
 You can now monitor your instances in [Operate](/components/operate/operate-introduction.md).
 
@@ -92,13 +93,9 @@ Variables are part of a process instance and represent the data of the instance.
 
 ## Observe your running process
 
-After the [user task](/guides/getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), an email is automatically sent to the address as specified in the connectors properties panel we configured earlier.
-
-![email via SendGrid](./img/sendgrid-email.png)
+After the [user task](/guides/getting-started-orchestrate-human-tasks.md) **Upload receipt** is completed in [Tasklist](/components/tasklist/introduction-to-tasklist.md), an email is automatically sent to the address you specified in the SendGrid connector's properties panel.
 
 In [Operate](/components/operate/operate-introduction.md), you will now see the process move forward to **Review receipt**.
-
-![operate example](./img/operate-example.png)
 
 ## Additional resources and next steps
 
