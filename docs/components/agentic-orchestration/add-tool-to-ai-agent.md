@@ -20,7 +20,7 @@ A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn
 
 You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
 
-:::tip See a full example
+:::note See a full example
 For a complete, step-by-step walkthrough that applies all the steps below, see [add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool).
 :::
 
@@ -43,13 +43,15 @@ You can model a sub-flow inside the ad-hoc sub-process. Only the first element i
 
 ## Write a tool name and description
 
-The LLM selects tools based on the tool element's **ID** and its **Documentation** fields. Clear, specific descriptions significantly improve the reliability of tool selection.
+The LLM selects tools based on the tool element's **ID** and its **Documentation** fields:
 
 - The element's **ID** field is always used as the tool name.
 - The element's **Name** field is a human-readable label shown on the diagram.
 - The element's **Documentation** field is used as the tool description.
 
 See [tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions) for more details.
+
+Clear, specific descriptions significantly improve the reliability of tool selection.
 
 1. Give the element a descriptive **ID**, since this is what the LLM receives as the tool name.
 1. Give the element a descriptive **Name**. Since this is used as a fallback description when **Documentation** is empty, keep it meaningful even though it's primarily a diagram label.
@@ -152,11 +154,19 @@ Output mappings and result variables containing a period are discouraged. See [o
 
 Mapping to `toolCallResult` directly also replaces the entire variable, so multiple mappings targeting it would overwrite each other.
 
-For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it:
+For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it. Where you write the call depends on the element type:
 
-| Source                                                         | Target           |
-| :------------------------------------------------------------- | :--------------- |
-| `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult` |
+- **Script task**: write it directly in the script task's FEEL expression, the same field whose result is assigned to **Result variable**:
+
+  ```feel
+  context put(toolCallResult, "status", response.body.status)
+  ```
+
+- **Regular task with output mappings** (for example, a user task): add it as the **Source** of a mapping targeting `toolCallResult`:
+
+  | Source                                                         | Target           |
+  | :------------------------------------------------------------- | :--------------- |
+  | `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult` |
 
 Connector result expressions cannot use this accumulation pattern because they don't have access to process variables, so they can't read the current value of `toolCallResult`. A connector tool must build its full result in one result expression. For example:
 
