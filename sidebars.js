@@ -100,6 +100,7 @@ module.exports = {
       },
       items: [
         "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/agent-definitions-and-instances",
         "components/agentic-orchestration/camunda-provided-llm",
         "components/agentic-orchestration/ao-design",
         {

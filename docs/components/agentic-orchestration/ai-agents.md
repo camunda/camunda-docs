@@ -15,12 +15,16 @@ An AI agent is an addressable execution of an LLM-driven loop with shared memory
 
 AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 
+### Agent types
+
 Camunda supports two types of agents:
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are usually implemented using the [AI Agent connector](#the-ai-agent-connector).
 - **[External agents](/reference/glossary.md#external-agent)** run their loop in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
 
-The rest of this page describes how to build a Camunda AI agent using the AI Agent connector.
+:::note
+Camunda represents every agent with an [agent definition and agent instances](/components/agentic-orchestration/agent-definitions-and-instances.md).
+:::
 
 ## The AI Agent connector
 
