@@ -82,7 +82,7 @@ See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box
 
 After the tool executes, its output must be returned in a [process variable](/reference/glossary.md#process-variable) named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
 
-How you set `toolCallResult` depends on the BPMN element type that implements your tool. For example, a connector task exposes a dedicated result expression field, a user task uses regular [output mappings](/components/concepts/variables.md#output-mappings), and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:
+How you set `toolCallResult` depends on the BPMN element type that implements your tool. For example, a connector task exposes a dedicated [result expression](/components/connectors/use-connectors/index.md#result-expression) field, a user task uses regular [output mappings](/components/concepts/variables.md#output-mappings), and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:
 
 <Tabs groupId="tool-result-mapping" defaultValue="connector-task" values={[
 { label: "Connector task", value: "connector-task" },
