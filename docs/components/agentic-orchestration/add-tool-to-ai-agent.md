@@ -78,10 +78,10 @@ See the following comparison:
 
 If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the `fromAi()` FEEL function in the activity's input mappings or connector input fields.
 
-How you configure this depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, such as **URL** or **Query parameters** in the REST outbound connector's **HTTP Endpoint** section, while a script, service, or user task exposes an [**Input Mapping**](/components/concepts/variables.md#input-mappings) section instead.
+How you configure this depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, such as **URL** or **Query parameters** in the REST outbound connector's **HTTP Endpoint** section, while a script, service, or user task exposes an [**Input mapping**](/components/concepts/variables.md#input-mappings) section instead.
 
-1. Open the input field (for a connector task) or the **Input Mapping** section (for a script, service, or user task) where the value is configured.
-1. If you're using the **Input Mapping** section, add a new entry and set its **Local variable name**. This is the name you'll reference the variable elsewhere in the element.
+1. Open the input field (for a connector task) or the **Input mapping** section (for a script, service, or user task) where the value is configured.
+1. If you're using the **Input mapping** section, add a new entry and set its **Local variable name**. This is the name you'll reference the variable elsewhere in the element.
 1. Wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context, and add a description so the LLM knows what to provide:
 
    ```feel
@@ -108,7 +108,7 @@ How you set `toolCallResult` depends on the BPMN element type that implements yo
 
 <TabItem value="connector-task">
 
-In the **Output Mapping** section of a connector, set **Result Expression** to map relevant response fields into `toolCallResult`:
+In the **Output mapping** section of a connector, set **Result Expression** to map relevant response fields into `toolCallResult`:
 
 ```feel
 {
@@ -124,11 +124,11 @@ In the **Output Mapping** section of a connector, set **Result Expression** to m
 
 <TabItem value="regular-task">
 
-In the **Output Mapping** section, add an output mapping with `toolCallResult` as the target variable:
+In the **Output mapping** section, add an output mapping with `toolCallResult` as the process variable name:
 
-| Source            | Target           |
-| :---------------- | :--------------- |
-| `= response.body` | `toolCallResult` |
+| Variable assignment value | Process variable name |
+| :------------------------ | :-------------------- |
+| `= response.body`         | `toolCallResult`      |
 
 </TabItem>
 
@@ -156,11 +156,11 @@ Mapping to `toolCallResult` directly also replaces the entire variable, so multi
 
 For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it. Where you write the call depends on the element type:
 
-- **Regular task with output mappings** (for example, a user task): add it as the **Source** of a mapping targeting `toolCallResult`:
+- **Regular task with output mappings** (for example, a user task): add it as the **Variable assignment value** of a mapping whose **Process variable name** is `toolCallResult`:
 
-  | Source                                                         | Target           |
-  | :------------------------------------------------------------- | :--------------- |
-  | `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult` |
+  | Variable assignment value                                      | Process variable name |
+  | :------------------------------------------------------------- | :-------------------- |
+  | `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult`      |
 
 - **Script task**: write it directly in the script task's FEEL expression in the **Script** section:
 
