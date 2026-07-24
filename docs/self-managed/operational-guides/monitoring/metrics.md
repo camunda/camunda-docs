@@ -295,6 +295,20 @@ The following image shows an example of the Zeebe Grafana dashboard after import
 
 ![Example Zeebe Grafana dashboard](assets/grafana-preview.png)
 
+#### Physical Tenant filtering
+
+All Zeebe metrics include a `physicalTenant` label. The Zeebe dashboard supports filtering and aggregating metrics by `physicalTenant` and `partition`, and exposes `physicalTenant` as a variable selector, so you can monitor throughput, latency, and resource usage for each Physical Tenant independently.
+
+To compare across tenants in Prometheus queries, use the `physicalTenant` label directly. For example:
+
+```promql
+sum by (physicalTenant) (zeebe_broker_processing_latency_seconds_count)
+```
+
+:::note
+Other Grafana dashboards (API panels, gateway panels) are being updated to include `physicalTenant` filtering, tracked in [camunda/camunda#56250](https://github.com/camunda/camunda/issues/56250).
+:::
+
 ### Data layer
 
 A pre-built Grafana dashboard is available for the data layer in the repository:
