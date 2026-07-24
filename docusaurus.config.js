@@ -1,5 +1,6 @@
 const { unmaintainedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
+const { tsApiSidebarItemsGenerator } = require("./src/tsApiSidebar");
 
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
@@ -731,6 +732,10 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
+          // Split the ~1,900-entry TypeScript SDK "Type Aliases" sidebar
+          // category into alphabetical buckets to avoid an N×N HTML blow-up.
+          // See src/tsApiSidebar.js.
+          sidebarItemsGenerator: tsApiSidebarItemsGenerator,
           // Please change this to your repo.
           editUrl: "https://github.com/camunda/camunda-docs/edit/main/",
           remarkPlugins: [
