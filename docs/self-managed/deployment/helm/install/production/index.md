@@ -338,7 +338,7 @@ oc get storageclass
 Alternative configurations that preserve the underlying volume and allow it to be reattached to a recreated PVC are also acceptable — for example, patching the `persistentVolumeReclaimPolicy` of individual PVs to `Retain`, or admission policies (Kyverno, Gatekeeper) enforcing `Retain` on dynamically provisioned PVs. Reattaching a retained PV to a new PVC may require manual steps, such as clearing the `claimRef` on the released PV, depending on your provisioner. Snapshot- or backup-based strategies are not equivalent, because they do not preserve the original volume binding required for a Zeebe broker to resume from its existing partition data without manual recovery. If you rely on an alternative mechanism, you are responsible for validating it against your upgrade and disaster recovery scenarios in a non-production environment.
 :::
 
-For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
+For more details, see [troubleshooting](/self-managed/troubleshooting/index.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
 
 #### Node affinity and tolerations
 

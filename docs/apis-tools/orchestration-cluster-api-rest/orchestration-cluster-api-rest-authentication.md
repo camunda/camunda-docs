@@ -53,7 +53,7 @@ curl --user username:password \
 
 :::note
 Basic Authentication checks the password with every request, limiting the number of requests per second. It may not be suitable for production.  
-See [Camunda components troubleshooting](/self-managed/operational-guides/troubleshooting.md)
+See [Camunda components troubleshooting](/self-managed/troubleshooting/index.md)
 :::
 
 ## Using a token (OIDC/JWT)

@@ -568,7 +568,7 @@ aws ecs execute-command \
 
 You can find more information about `AWS ECS Exec` within the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec-run.html).
 
-For general troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/operational-guides/troubleshooting.md).
+For general troubleshooting assistance, consult the [operational guides troubleshooting documentation](/self-managed/troubleshooting/index.md).
 
 ## Operations
 
