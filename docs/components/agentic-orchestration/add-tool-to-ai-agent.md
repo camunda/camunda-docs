@@ -39,7 +39,7 @@ For a complete, step-by-step walkthrough that applies all the steps below, see [
 You can model a sub-flow inside the ad-hoc sub-process. Only the first element in the sub-flow (the root node) is exposed to the LLM as a tool; the rest of the flow executes automatically once the LLM selects it.
 :::
 
-<img src={AddElement} alt="Changing a task element to the REST Outbound Connector inside the AI agent ad-hoc sub-process" width="75%"/>
+<img src={AddElement} alt="Add a task element to the AI agent ad-hoc sub-process" width="75%"/>
 
 ## Write a tool name and description
 
@@ -68,16 +68,16 @@ See the following comparison:
 | Weak   | `Lookup`                           | `Find customer data`                                                                                                                                                    |
 | Strong | `Resolve customer by company name` | `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
 
-<img src={ToolDescription} alt="Properties panel showing the Name, ID, and Documentation fields for the Resolve customer by company name tool" width="75%"/>
+<img src={ToolDescription} alt="Write a tool name and description" width="75%"/>
 
 ## Declare AI-generated parameters with `fromAi()`
 
 If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the `fromAi()` FEEL function in the activity's input mappings or connector input fields.
 
-How you configure this also depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, each bound to an input mapping under the hood, while a script, service, or user task exposes a generic **Input Mappings** section instead.
+How you configure this depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, such as **URL** or **Query parameters** in the REST outbound connector's **HTTP Endpoint** section, while a script, service, or user task exposes an [**Input Mappings**](/components/concepts/variables.md#input-mappings) section instead.
 
 1. Open the input field (for a connector task) or the **Input Mappings** section (for a script, service, or user task) where the value is configured.
-1. If you're using the **Input Mappings** section, add a new entry and set its **Local variable name**. This is the name you'll reference elsewhere in the activity, for example in a script task's FEEL expression.
+1. If you're using the **Input Mappings** section, add a new entry and set its **Local variable name**. This is the name you'll reference elsewhere in the element.
 1. Wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context, and add a description so the LLM knows what to provide:
 
    ```feel
