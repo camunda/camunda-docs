@@ -160,6 +160,9 @@ c8 run ./order-process.bpmn
 # With variables
 c8 run ./order-process.bpmn --variables='{"orderId":"12345","amount":100}'
 
+# With a Business ID
+c8 run ./order-process.bpmn --businessId=order-123
+
 # Deploy a file with an unsupported extension
 c8 run ./process.xml --force
 ```

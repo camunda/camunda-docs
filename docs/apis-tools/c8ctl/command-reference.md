@@ -88,6 +88,7 @@ List resources
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
+| `--businessId` | string |  | Filter by Business ID (Camunda 8.9+) |
 | `--bpmnProcessId` | string |  | Filter by BPMN process ID |
 | `--id` | string |  | Filter by BPMN process ID (alias) |
 | `--processDefinitionId` | string |  | Filter by process definition ID |
@@ -247,6 +248,7 @@ Search resources with filters (wildcards, date ranges, case-insensitive)
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
+| `--businessId` | string |  | Filter by Business ID (Camunda 8.9+) |
 | `--bpmnProcessId` | string |  | Filter by BPMN process ID |
 | `--id` | string |  | Filter by BPMN process ID (alias) |
 | `--processDefinitionId` | string |  | Filter by process definition ID |
@@ -490,29 +492,77 @@ Create a resource (process instance, identity)
 
 **Resources:** pi (process-instance), user, role, group, tenant, auth (authorization), mapping-rule
 
-**Verb-level flags:**
+**Resource-specific flags:**
+
+<details>
+<summary><code>process-instance</code> (<code>pi</code>)</summary>
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
 | `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
 | `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
 | `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
 | `--variables` | string |  | JSON variables |
 | `--awaitCompletion` | boolean |  | Wait for process to complete |
 | `--fetchVariables` | boolean |  | Fetch result variables on completion |
 | `--requestTimeout` | string |  | Await timeout in milliseconds |
+
+</details>
+
+<details>
+<summary><code>user</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--username` | string |  | Username |
 | `--name` | string |  | Display name |
 | `--email` | string |  | Email address |
 | `--password` | string |  | Password |
+
+</details>
+
+<details>
+<summary><code>role</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--roleId` | string |  | Role ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>group</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--groupId` | string |  | Group ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>tenant</code></summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--tenantId` | string |  | Tenant ID |
+| `--name` | string |  | Display name |
+
+</details>
+
+<details>
+<summary><code>mapping-rule</code> (<code>mr</code>)</summary>
+
+| Flag | Type | Required | Description |
+|------|------|----------|-------------|
 | `--mappingRuleId` | string |  | Mapping rule ID |
+| `--name` | string |  | Display name |
 | `--claimName` | string |  | Claim name |
 | `--claimValue` | string |  | Claim value |
 
-**Resource-specific flags:**
+</details>
 
 <details>
 <summary><code>authorization</code> (<code>auth</code>)</summary>
@@ -530,7 +580,7 @@ Create a resource (process instance, identity)
 **Examples:**
 
 ```bash
-c8ctl create pi --id=myProcess                              # Create a process instance
+c8ctl create pi --id=myProcess --businessId=order-123       # Create a process instance with a Business ID
 c8ctl create pi --id=myProcess --awaitCompletion            # Create and await completion
 c8ctl create user --username=john --name='John Doe' --email=john@example.com --password=secret  # Create a user
 ```
@@ -591,6 +641,7 @@ Create and await process instance completion (server-side waiting)
 | `--processDefinitionId` | string |  | Process definition ID (BPMN process ID) |
 | `--id` | string |  | Process definition ID (alias for --processDefinitionId) |
 | `--bpmnProcessId` | string |  | BPMN process ID (alias for --processDefinitionId) |
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
 | `--variables` | string |  | JSON variables |
 | `--fetchVariables` | boolean |  | Fetch result variables on completion |
 | `--requestTimeout` | string |  | Await timeout in milliseconds |
@@ -598,7 +649,7 @@ Create and await process instance completion (server-side waiting)
 **Examples:**
 
 ```bash
-c8ctl await pi --id=myProcess                               # Create and wait for completion
+c8ctl await pi --id=myProcess --businessId=claim-456        # Create with a Business ID and wait for completion
 ```
 
 ---
@@ -805,13 +856,14 @@ Deploy and start a process instance from a BPMN file
 
 | Flag | Type | Required | Description |
 |------|------|----------|-------------|
+| `--businessId` | string |  | Business ID for the process instance (Camunda 8.9+) |
 | `--variables` | string |  | JSON variables |
 | `--force` | boolean |  | Deploy any file type, ignoring the default extension allow-list |
 
 **Examples:**
 
 ```bash
-c8ctl run ./my-process.bpmn                                 # Deploy and start process
+c8ctl run ./my-process.bpmn --businessId=order-123          # Deploy and start a process with a Business ID
 ```
 
 ---

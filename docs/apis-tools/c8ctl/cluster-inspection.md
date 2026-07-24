@@ -44,6 +44,8 @@ c8 get topology
 
 ## Process instances
 
+Business IDs require Camunda 8.9 or newer.
+
 ### List process instances
 
 ```bash
@@ -55,6 +57,9 @@ c8 list pi --id=order-process
 
 # Filter by state
 c8 list pi --state=ACTIVE
+
+# Filter by Business ID
+c8 list pi --businessId=order-123
 ```
 
 ### Get a process instance
@@ -77,6 +82,9 @@ c8 create pi --id=order-process --version=2
 # With variables
 c8 create pi --id=order-process --variables='{"orderId":"12345","amount":100}'
 
+# With a Business ID for business-level correlation
+c8 create pi --id=order-process --businessId=order-123
+
 # Create and wait for completion
 c8 create pi --id=order-process --awaitCompletion
 
@@ -91,6 +99,7 @@ The `await` command is a shorthand for `create` with `--awaitCompletion`. It use
 ```bash
 c8 await pi --id=order-process
 c8 await pi --id=order-process --variables='{"orderId":"12345"}'
+c8 await pi --id=order-process --businessId=claim-456
 c8 await pi --id=order-process --requestTimeout=60000
 ```
 
@@ -345,6 +354,7 @@ c8 search pd --id=order-process --profile=prod
 ```bash
 c8 search pi --state=ACTIVE
 c8 search pi --id=order-process
+c8 search pi --businessId=order-123
 c8 search pi --processDefinitionKey=2251799813685249
 c8 search pi --parentProcessInstanceKey=2251799813685250
 c8 search pi --id=order-process --state=ACTIVE
