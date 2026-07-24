@@ -319,24 +319,22 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 
 ## Connectors
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Connectors change 1
+#### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
 
-Connectors change 1 description.
+Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
 
-**Action:** Description.
+The connector runtime reports the connector as **DOWN** with a clear error message visible in the Manage & Run UI.
+
+**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. The `responseExpression` property supports returning a full HTTP response object (for example, `={body: ..., statusCode: 200, headers: {...}}`).
 
 </div>
-</div> -->
+</div>
 
 ## Data
 
