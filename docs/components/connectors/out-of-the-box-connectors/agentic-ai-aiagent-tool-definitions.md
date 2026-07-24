@@ -12,7 +12,7 @@ Understand what an AI agent tool is, how tools are defined, and how their names,
 
 ## What is a tool
 
-A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
+A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that an [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
 
 - A **name**: the element ID, used by the LLM to identify the tool.
 - A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.

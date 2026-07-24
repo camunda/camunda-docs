@@ -13,14 +13,13 @@ Add BPMN elements as callable tools to your AI agents.
 
 ## About
 
-A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that the [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal.
+A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that an [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal.
 
 You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
 
 ## Add an element inside the ad-hoc sub-process
 
-Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-
+1. Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 1. Click inside the ad-hoc sub-process to enter it.
 1. Add a new task element. You can use any BPMN element as a tool, including service tasks, script tasks, user tasks, and sub-processes.
 1. Apply the appropriate connector or task type. For example:
@@ -35,12 +34,12 @@ You can model a sub-flow inside the ad-hoc sub-process. Only the first element i
 
 ## Write a tool name and description
 
-The LLM selects tools based on the element's **ID** and its **Documentation** field. Clear, specific descriptions significantly improve the reliability of tool selection.
+An LLM selects tools based on the tool element's **ID** and its **Documentation** fields. Clear, specific descriptions significantly improve the reliability of tool selection.
 
-- The element's **ID** is always used as the tool name.
-- The element's **Documentation** field is used as the tool description. If **Documentation** is empty, the element's **Name** is used as a fallback description. If both are empty, the tool has no description.
+- The element's **ID** field is always used as the tool name.
+- The element's **Documentation** field is used as the tool description. If **Documentation** is empty, the element's **Name** field is used as a fallback description. If both are empty, the tool has no description.
 
-See [tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions) for the complete resolution rules.
+See [tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions) for more details.
 
 1. Give the element a descriptive **ID**, since this is what the LLM receives as the tool name.
 1. Open the **Documentation** field in the properties panel and write a description that explains:
@@ -49,14 +48,16 @@ See [tool definitions](/components/connectors/out-of-the-box-connectors/agentic-
    - When it should not, especially if two tools have overlapping purposes.
    - Any constraints or expected inputs.
 
-**Example: weak vs. strong description**
+### Example: weak vs. strong description
+
+A precise description makes the expected behavior explicit and reduces the risk of incorrect tool selection, repeated calls, or hallucinated behavior. Vague descriptions are the most common cause of unreliable agent behavior.
+
+See the following comparison:
 
 | &nbsp; | Tool name                          | Documentation                                                                                                                                                           |
 | :----- | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Weak   | `Lookup`                           | `Find customer data`                                                                                                                                                    |
 | Strong | `Resolve customer by company name` | `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
-
-A precise description makes the expected behavior explicit and reduces the risk of incorrect tool selection, repeated calls, or hallucinated behavior. Vague descriptions are the most common cause of unreliable agent behavior.
 
 ## Declare AI-generated parameters with `fromAi()`
 
@@ -71,13 +72,13 @@ If the tool requires values that the LLM should supply at runtime, such as a sea
 
 1. Repeat for each value the LLM should supply.
 
-For the full `fromAi()` syntax, including optional parameters, non-string types, JSON Schema definitions, and combining multiple `fromAi()` calls, see [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai).
+See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) for more details.
 
 ## Return the result as `toolCallResult`
 
 After the tool executes, its output must be returned in a [process variable](/reference/glossary.md#process-variable) named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
 
-Use any of the following approaches depending on your task type:
+Use any of the following approaches depending on your tool type:
 
 <Tabs groupId="tool-result-mapping" defaultValue="result-expression" values={[
 { label: "Result expression (connector)", value: "result-expression" },
