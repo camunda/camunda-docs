@@ -39,7 +39,7 @@ For a complete, step-by-step walkthrough that applies all the steps below, see [
 You can model a sub-flow inside the ad-hoc sub-process. Only the first element in the sub-flow (the root node) is exposed to the LLM as a tool; the rest of the flow executes automatically once the LLM selects it.
 :::
 
-<img src={AddElement} alt="Add a task element to the AI agent ad-hoc sub-process" width="75%"/>
+<img src={AddElement} alt="Add a task element to the AI agent ad-hoc sub-process" width="60%"/>
 
 ## Write a tool name and description
 
@@ -72,7 +72,7 @@ See the following comparison:
 | Weak   | `Lookup`                           | `Find customer data`                                                                                                                                                    |
 | Strong | `Resolve customer by company name` | `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
 
-<img src={ToolDescription} alt="Write a tool name and description" width="75%"/>
+<img src={ToolDescription} alt="Write a tool name and description" width="60%"/>
 
 ## Declare AI-generated parameters with `fromAi()`
 
