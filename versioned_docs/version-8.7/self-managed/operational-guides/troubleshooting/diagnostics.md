@@ -7,7 +7,7 @@ description: "Get diagnostics and logs from a Helm chart deployment."
 
 ## Diagnostics collection script
 
-This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, and resource details) into a single directory, and outputs it in a .zip file to make it easier to share this information with the Camunda Support team.
+This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, resource details, and Elasticsearch/OpenSearch index data) into a single directory, and outputs it in a .zip file to make it easier to share this information with the Camunda Support team.
 
 :::caution Data privacy notice
 Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs and configuration data. This includes the collected actuator outputs: the `configprops` endpoint masks credential-like values, but connection URLs, hostnames, and bucket names are not redacted.
@@ -24,7 +24,13 @@ The script outputs the following data from your namespace and creates a zip file
 - **Network Resources**: Services, endpoints, and ingresses.
 - **Configuration**: Config map information.
 - **Actuator endpoints**: Read-only Zeebe and Spring Boot actuator outputs from Camunda pods (partition status, cluster topology, exporters, flow control, job streams, backup state, Prometheus metrics, and configuration properties).
-- **Database indices**: The Elasticsearch/OpenSearch index list (`_cat/indices`), when the datastore is deployed in the same namespace and reachable without TLS/authentication.
+- **Elasticsearch/OpenSearch Data** (when an Elasticsearch or OpenSearch pod is deployed in the same namespace):
+  - Cluster health, node stats, and allocation details.
+  - Index list sorted by name, aliases, shards, and segments.
+  - Index templates, component templates, and lifecycle policies (ILM for Elasticsearch, ISM for OpenSearch).
+  - Camunda import position documents for Operate, Tasklist, and Optimize.
+  - Operate post-importer queue document count and a sample of recent entries.
+  - Zeebe exporter index statistics: document counts and min/max sequence numbers per value type and partition.
 
 ### Usage
 
@@ -41,9 +47,20 @@ chmod +x camunda-collect-diagnostics.sh
 ./camunda-collect-diagnostics.sh --namespace <namespace>
 ```
 
-4. **Review the generated `.zip` archive** and remove any sensitive or personally identifiable information (PII) before sharing.
+4. Review the generated `.zip` archive and remove any sensitive or personally identifiable information (PII) before sharing.
 
 5. Share the reviewed `.zip` archive with Camunda Support.
+
+#### Required/Optional flags
+
+| Flag                       | Description                                                       |
+| -------------------------- | ----------------------------------------------------------------- |
+| `--namespace <namespace>`  | **(Required)** Kubernetes namespace of your Camunda deployment.   |
+| `--skip-es-os`             | Skip Elasticsearch/OpenSearch diagnostics entirely.               |
+| `--skip-data`              | Skip exporting data from indexes (post-importer queue documents). |
+| `--es-user <user>`         | Username for Elasticsearch/OpenSearch Basic authentication.       |
+| `--es-password <password>` | Password for Elasticsearch/OpenSearch Basic authentication.       |
+| `--es-port <port>`         | Elasticsearch/OpenSearch port (default: `9200`).                  |
 
 ### Diagnostic collection script
 
@@ -51,9 +68,20 @@ chmod +x camunda-collect-diagnostics.sh
 #!/bin/bash
 
 # Parse arguments
+skip_es_os=false
+skip_data=false
+es_user=""
+es_password=""
+es_port=9200
+
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     --namespace) namespace="$2"; shift ;;
+    --skip-es-os) skip_es_os=true ;;
+    --skip-data) skip_data=true ;;
+    --es-user) es_user="$2"; shift ;;
+    --es-password) es_password="$2"; shift ;;
+    --es-port) es_port="$2"; shift ;;
     *) echo "Unknown parameter passed: $1"; exit 1 ;;
   esac
   shift
@@ -263,41 +291,146 @@ else
     fi
   done
 
-  # Collect the Elasticsearch/OpenSearch index list. It is cluster-wide, so the first reachable
-  # node is enough. Secured datastores (TLS/auth) are skipped here and must be collected manually.
-  es_port=9200
-  es_pods=$(kubectl get pod -n "$namespace" --no-headers -o custom-columns=":metadata.name" 2>/dev/null | grep -iE 'elasticsearch|opensearch' || true)
-  for pod in $es_pods; do
-    local_port=""
-    attempt=0
-    while [[ -z "$local_port" && "$attempt" -lt 3 ]]; do
-      attempt=$((attempt + 1))
-      pf_log=$(mktemp 2>/dev/null || mktemp -t camunda-diag 2>/dev/null || echo "./.es-pf.$$.${attempt}")
-      kubectl port-forward -n "$namespace" "$pod" ":${es_port}" > "$pf_log" 2>&1 &
-      pf_pid=$!
-      for _ in $(seq 1 10); do
-        local_port=$(sed -n 's/.*Forwarding from 127.0.0.1:\([0-9]*\) ->.*/\1/p' "$pf_log" | head -1)
-        [[ -n "$local_port" ]] && break
-        kill -0 "$pf_pid" 2>/dev/null || break
-        sleep 1
-      done
-      [[ -z "$local_port" ]] && cleanup_port_forward
-    done
-
-    if [[ -n "$local_port" ]]; then
-      if curl -sf -m 10 "http://localhost:${local_port}/_cat/indices?v" -o "${pod}-cat-indices.txt" 2>/dev/null; then
-        echo "    - Collected _cat/indices from pod ${pod}"
-        cleanup_port_forward
-        break
-      fi
-      cleanup_port_forward
-    fi
-  done
-
   trap - EXIT INT TERM
 fi
 
-echo "All logs and descriptions collected."
+# ==============================================
+# Collect Elasticsearch / OpenSearch diagnostics
+# ==============================================
+
+if [[ "$skip_es_os" == "true" ]]; then
+  echo "Skipping Elasticsearch/OpenSearch diagnostics (--skip-es-os)."
+else
+  echo "========================================"
+  echo "Elasticsearch/OpenSearch Diagnostics"
+  echo "========================================"
+
+  search_pod=""
+  search_backend=""
+  search_container=""
+
+  es_pod=$(kubectl get pod -n "$namespace" -l "app.kubernetes.io/name=elasticsearch" \
+    --no-headers -o custom-columns=":metadata.name" 2>/dev/null | grep -v "^$" | head -1)
+  os_pod=$(kubectl get pod -n "$namespace" -l "app.kubernetes.io/name=opensearch" \
+    --no-headers -o custom-columns=":metadata.name" 2>/dev/null | grep -v "^$" | head -1)
+
+  if [[ -n "$es_pod" ]]; then
+    search_pod="$es_pod"
+    search_backend="Elasticsearch"
+    search_container="elasticsearch"
+    echo "Detected Elasticsearch pod: $search_pod"
+  elif [[ -n "$os_pod" ]]; then
+    search_pod="$os_pod"
+    search_backend="OpenSearch"
+    search_container="opensearch"
+    echo "Detected OpenSearch pod: $search_pod"
+  else
+    echo "INFO: No Elasticsearch or OpenSearch pod detected in namespace '$namespace' — skipping search diagnostics."
+    echo "  If you use an externally-managed cluster, collect and attach those diagnostics separately."
+  fi
+
+  if [[ -n "$search_pod" ]]; then
+    search_dir="$search_container"
+    mkdir -p "$search_dir"
+
+    es_base="http://localhost:$es_port"
+
+    auth_args=()
+    if [[ -n "$es_user" ]]; then
+      auth_args=(-u "$es_user:$es_password")
+    fi
+
+    run_es_curl() {
+      kubectl exec -n "$namespace" "$search_pod" -c "$search_container" -- \
+        curl -s --connect-timeout 10 "${auth_args[@]}" "$@" 2>/dev/null
+    }
+
+    echo "  - Testing connectivity to $search_backend..."
+    if ! run_es_curl "$es_base/_cat/health" > /dev/null 2>&1; then
+      echo "  WARNING: Cannot reach $search_backend at localhost:$es_port inside pod $search_pod."
+      echo "           Skipping search diagnostics. Check that the pod is Running and healthy."
+    else
+      echo "  Connected to $search_backend. Collecting diagnostics..."
+
+      echo "  - Collecting cluster health."
+      run_es_curl "$es_base/_cluster/health?pretty" \
+        > "$search_dir/cluster-health.json"
+      run_es_curl "$es_base/_cluster/health?level=shards&pretty" \
+        > "$search_dir/cluster-health-shards.txt"
+
+      echo "  - Collecting cluster stats."
+      run_es_curl "$es_base/_cluster/stats?pretty" \
+        > "$search_dir/cluster-stats.json"
+
+      echo "  - Collecting index information."
+      run_es_curl "$es_base/_cat/aliases?v=true&format=json" \
+        > "$search_dir/all-aliases.json"
+      run_es_curl "$es_base/_cat/indices?v=true&s=index&h=health,status,index,id,pri,rep,docs.count,docs.deleted,store.size,creation.date.string&pretty" \
+        > "$search_dir/all-indices.txt"
+      run_es_curl "$es_base/_cat/shards?v" \
+        > "$search_dir/shards.txt"
+      run_es_curl "$es_base/_cat/segments?v&h=index,shard,segment,size,docs.count" \
+        > "$search_dir/segments.txt"
+
+      echo "  - Collecting node information."
+      run_es_curl "$es_base/_cat/nodes?v&h=name,ip,heap.percent,heap.current,heap.max,ram.percent,cpu,load_1m,load_5m,load_15m,node.role,master" \
+        > "$search_dir/nodes.txt"
+      run_es_curl "$es_base/_nodes/stats/jvm,os,fs,indices,process,breaker?pretty" \
+        > "$search_dir/nodes-stats.json"
+      run_es_curl "$es_base/_cat/allocation?v=true&h=node,shards,disk.*" \
+        > "$search_dir/nodes-allocation.txt"
+      run_es_curl "$es_base/_nodes/hot_threads" \
+        > "$search_dir/hot-threads.txt"
+
+      echo "  - Collecting performance diagnostics."
+      run_es_curl "$es_base/_tasks?pretty&detailed=true" \
+        > "$search_dir/tasks.json"
+      run_es_curl "$es_base/_cat/thread_pool?v" \
+        > "$search_dir/thread-pool.txt"
+      run_es_curl "$es_base/_stats/indexing,search?pretty" \
+        > "$search_dir/stats-indexing-search.json"
+
+      echo "  - Collecting index templates and lifecycle policies."
+      run_es_curl "$es_base/_index_template?pretty" \
+        > "$search_dir/index-templates.json"
+      run_es_curl "$es_base/_component_template?pretty" \
+        > "$search_dir/component-templates.json"
+      if [[ "$search_backend" == "Elasticsearch" ]]; then
+        run_es_curl "$es_base/_ilm/policy?pretty" \
+          > "$search_dir/ilm-policies.json"
+      else
+        run_es_curl "$es_base/_plugins/_ism/policies?pretty" \
+          > "$search_dir/ism-policies.json"
+      fi
+
+      echo "  - Collecting Camunda import position documents."
+      run_es_curl "$es_base/operate-import-position*/_search?size=10000&pretty" \
+        > "$search_dir/operate-import-position.json"
+      run_es_curl "$es_base/tasklist-import-position*/_search?size=10000&pretty" \
+        > "$search_dir/tasklist-import-position.json"
+      run_es_curl "$es_base/optimize-position-based-import-index*/_search?size=10000&pretty" \
+        > "$search_dir/optimize-import-position.json"
+
+      echo "  - Collecting Operate post-importer queue."
+      run_es_curl "$es_base/operate-post-importer-queue*/_count?pretty" \
+        > "$search_dir/operate-post-importer-queue-count.json"
+      if [[ "$skip_data" != "true" ]]; then
+        run_es_curl "$es_base/operate-post-importer-queue*/_search?size=1000&pretty" \
+          > "$search_dir/operate-post-importer-queue.json"
+      fi
+
+      echo "  - Collecting Zeebe exporter index statistics."
+      run_es_curl -X POST "$es_base/zeebe-record*/_search?pretty" \
+        -H "Content-Type: application/json" \
+        -d '{"size":0,"aggs":{"value_types":{"terms":{"field":"valueType","size":100},"aggs":{"partitions":{"terms":{"field":"partitionId"},"aggs":{"min_sequence":{"min":{"field":"sequence"}},"max_sequence":{"max":{"field":"sequence"}}}}}}}}' \
+        > "$search_dir/zeebe-record-stats.json"
+
+      echo "$search_backend diagnostics collected into $search_dir/."
+    fi
+  fi
+fi
+
+echo "All logs, descriptions, and diagnostic data collected."
 
 # Compress the output directory
 echo "Compressing collected diagnostics into ${output_dir}.zip..."
