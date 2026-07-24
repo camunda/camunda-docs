@@ -17,10 +17,6 @@ A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn
 
 You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
 
-:::tip See a worked example
-For a complete walkthrough of adding a weather lookup tool to an AI agent, see [Step 4: Add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool) in the getting started guide.
-:::
-
 ## Add an element inside the ad-hoc sub-process
 
 1. Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
@@ -82,7 +78,7 @@ See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box
 
 After the tool executes, its output must be returned in a [process variable](/reference/glossary.md#process-variable) named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
 
-Use any of the following approaches depending on your tool type:
+Use any of the following approaches, depending on the task type of your tool:
 
 <Tabs groupId="tool-result-mapping" defaultValue="result-expression" values={[
 { label: "Result expression (connector)", value: "result-expression" },
@@ -143,3 +139,7 @@ Set the script task's **Result variable** to `toolCallResult`. The FEEL expressi
 :::note
 The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. Prefer returning a structured FEEL context over a raw string when the result has multiple fields, as this gives the LLM more to work with when summarizing the outcome. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
 :::
+
+## See a full example
+
+For a complete, step-by-step walkthrough that applies all the steps above, including adding a REST connector tool, writing its description, declaring `fromAi()` parameters, and mapping its response to `toolCallResult`, see [Step 4: Add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool) in the getting started guide.
