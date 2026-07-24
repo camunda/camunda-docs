@@ -82,7 +82,7 @@ See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box
 
 After the tool executes, its output must be returned in a [process variable](/reference/glossary.md#process-variable) named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
 
-How you set `toolCallResult` depends on the BPMN element type that implements your tool. A connector task exposes a dedicated result expression field, a user task (or other task type without a connector-specific result field) uses regular output mappings, and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:
+How you set `toolCallResult` depends on the BPMN element type that implements your tool. For example, a connector task exposes a dedicated result expression field, a user task uses regular [output mappings](/components/concepts/variables.md#output-mappings), and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:
 
 <Tabs groupId="tool-result-mapping" defaultValue="connector-task" values={[
 { label: "Connector task", value: "connector-task" },
@@ -114,18 +114,6 @@ In the **Output Mappings** section, add an output mapping with `toolCallResult` 
 | :---------------- | :--------------- |
 | `= response.body` | `toolCallResult` |
 
-:::tip Avoid accidental overwrites with multiple outputs
-When your tool task has several output parameters that each contribute a field to `toolCallResult`, avoid an output mapping per field targeting `toolCallResult.<field>` — output mappings and result variables containing a period are discouraged (see [output mappings](/components/concepts/variables.md#output-mappings)). Mapping to `toolCallResult` directly also replaces the entire variable, so multiple mappings targeting it would overwrite each other.
-
-For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it:
-
-| Source                                                         | Target           |
-| :------------------------------------------------------------- | :--------------- |
-| `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult` |
-
-This accumulation pattern only works for elements that run in the workflow engine. Connector result expressions cannot use it: connectors don't have access to process variables, so they can't read the current value of `toolCallResult`. A connector tool must build its full result in one result expression, for example `= { toolCallResult: { status: response.status, body: response.body } }`.
-:::
-
 </TabItem>
 
 <TabItem value="script-task">
@@ -139,6 +127,18 @@ Set the script task's **Result variable** to `toolCallResult`. The FEEL expressi
 </TabItem>
 
 </Tabs>
+
+### Avoid accidental overwrites with multiple outputs
+
+When your tool task has several output parameters that each contribute a field to `toolCallResult`, avoid an output mapping per field targeting `toolCallResult.<field>` — output mappings and result variables containing a period are discouraged (see [output mappings](/components/concepts/variables.md#output-mappings)). Mapping to `toolCallResult` directly also replaces the entire variable, so multiple mappings targeting it would overwrite each other.
+
+For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it:
+
+| Source                                                         | Target           |
+| :------------------------------------------------------------- | :--------------- |
+| `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult` |
+
+This accumulation pattern only works for elements that run in the workflow engine. Connector result expressions cannot use it: connectors don't have access to process variables, so they can't read the current value of `toolCallResult`. A connector tool must build its full result in one result expression, for example `= { toolCallResult: { status: response.status, body: response.body } }`.
 
 :::note
 The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. Prefer returning a structured FEEL context over a raw string when the result has multiple fields, as this gives the LLM more to work with when summarizing the outcome. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
