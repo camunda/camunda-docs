@@ -1,20 +1,46 @@
 ---
 id: agentic-ai-aiagent-tool-definitions
 sidebar_label: Tool definitions
-title: AI Agent tool definitions
-description: Tool definitions for AI agents using the fromAi() function syntax
+title: AI agent tool definitions
+description: Understand what an AI agent tool is, how tools are defined, and how their names, descriptions, and parameters are resolved for the LLM.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
+Understand what an AI agent tool is, how tools are defined, and how their names, descriptions, and parameters are resolved for the LLM.
+
+## What is a tool
+
+A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that an [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
+
+- A **name**: the element ID, used by the LLM to identify the tool.
+- A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.
+- **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
+- A **result**: the tool's output, returned to the LLM as `toolCallResult`.
+
+### Which elements are resolved as tools
+
+When resolving the available tools within an ad-hoc sub-process, the AI agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
 
 For example, in the following image the activities marked in green are the ones that will be considered as tools:
 
 ![AI Agent tool resolution](../img/ai-agent-tool-resolution.png)
 
-You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
+You can use any BPMN element or connector as a tool:
+
+| Tool type            | When to use                                                                                           |
+| :------------------- | :---------------------------------------------------------------------------------------------------- |
+| Connectors           | Call an external system, for example the [REST connector](../protocol/rest.md) to call an HTTP API.   |
+| Script task          | Execute inline logic or data transformation.                                                          |
+| User task            | Route to a human for input or approval as part of the agent's decision path.                          |
+| Call activity        | Invoke another BPMN process as a tool when the target process is on the same cluster.                 |
+| MCP client connector | Expose tools from an external [MCP server](./agentic-ai-mcp-client.md) as gateway tools to the agent. |
+| Sub-process          | Model a multi-step sub-flow that the LLM triggers as a single tool.                                   |
+
+:::note
+For instructions on adding tools to an AI agent, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
+:::
 
 ## Tool resolution
 

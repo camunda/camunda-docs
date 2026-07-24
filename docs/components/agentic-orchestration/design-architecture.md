@@ -53,12 +53,12 @@ Follow these principles when designing your agentic orchestration solution:
 In Camunda agentic orchestration, decision-making and orchestration are intentionally split:
 
 - **LLM responsibility**: Interprets the system prompt, current user prompt, and available tool descriptions. It decides which tool to call, in what order, and with which parameters.
-- **Camunda responsibility**: Executes the selected BPMN activities, stores process state, applies retries and incident handling, and coordinates user tasks and other deterministic workflow logic.
+- **Camunda responsibility**: Executes the selected BPMN elements, stores process state, applies retries and incident handling, and coordinates user tasks and other deterministic workflow logic.
 
 Think of the ad-hoc sub-process as a governed toolbox:
 
-- Each activity can be selected by the LLM as a tool.
-- Activities can be executed multiple times, in different orders, in parallel, or skipped.
+- Each element can be selected by the LLM as a tool.
+- Slements can be executed multiple times, in different orders, in parallel, or skipped.
 - The LLM chooses a path from the allowed options, while Camunda enforces process boundaries and execution reliability.
 
 This is a typical execution timeline:
@@ -66,40 +66,17 @@ This is a typical execution timeline:
 1. A user submits a prompt.
 1. The LLM evaluates the prompt together with the configured system prompt and available tool definitions.
 1. The LLM chooses one or more tool calls.
-1. Camunda activates and executes the corresponding BPMN activities.
+1. Camunda activates and executes the corresponding BPMN elements.
 1. Results are written to process variables and returned to the LLM context.
 1. The loop repeats until the LLM returns a final response or the process routes to deterministic follow-up steps.
 
 ### Define your agent tools
 
-In the AI agent model, each BPMN activity inside an ad-hoc sub-process is a tool exposed to the LLM. The activity name and its documentation are used by the LLM to decide what to do next.
+In the AI agent model, each BPMN element inside an ad-hoc sub-process is a tool exposed to the LLM. The element's **ID** is used as the tool name, and its **Documentation** field is used as the tool description (falling back to the element's **Name** if **Documentation** is empty). The LLM uses this tool definition to decide which tool to call, in what order, and with which parameters.
 
-Clear, behavior-oriented descriptions help the LLM:
+Clear, behavior-oriented tool names and descriptions directly improve agent reliability. Vague or missing documentation increases the risk of incorrect tool selection, repeated calls, and hallucinated behavior.
 
-- Select the right tool for the current goal.
-- Pass the right parameters in the expected format.
-- Avoid unsafe, redundant, or nonsensical actions.
-
-Poor or missing documentation increases the risk of:
-
-- Incorrect or ambiguous tool selection.
-- Repeated tool calls or skipped required steps.
-- Hallucinated behavior and responses that do not match process intent.
-
-#### Example: weak vs strong tool definition
-
-| Tool definition | Example                                                                                                                                                                                                                                           |
-| :-------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Weak            | **Name**: `Lookup`<br/>**Documentation**: `Find customer data`                                                                                                                                                                                    |
-| Strong          | **Name**: `Resolve customer by legal company name`<br/>**Documentation**: `Use this tool when a document mentions a company and you need its internal customer ID. If multiple matches are returned, request human validation before continuing.` |
-
-A clear tool name and precise documentation make the expected behavior explicit, improving reliability during tool selection and execution.
-
-#### Tool parameters
-
-Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
-
-See [tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
+For a how-to guide on adding tools, see [add tools to an AI agent](./add-tool-to-ai-agent.md).
 
 ### Mix agents with workflow patterns
 
