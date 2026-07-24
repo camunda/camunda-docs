@@ -347,6 +347,15 @@ module.exports = {
         maxItems: 50,
       },
     ],
+    [
+      // RSS feed for release versions
+      "./static/plugins/release-versions-feed",
+      {
+        url: docsSiteUrl,
+        contextPath: docsSitebaseUrl,
+        maxItems: 50,
+      },
+    ],
     // Docusaurus plugin for LLM training and AI agent consumption.
     // The plugin generates both a full markdown file and a metadata-only .llms.txt file for each doc,
     // excluding the content of code blocks and optionally excluding content from imports.

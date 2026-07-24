@@ -5,11 +5,15 @@ description: "Let's take a closer look at security notices, reporting vulnerabil
 toc_max_heading_level: 2
 ---
 
+import RssTip from '@site/src/components/ReleaseVersions/RssTip';
+
 Camunda publishes security notices after fixes are available.
 
-:::tip Subscribe to security notices
-Stay informed about security updates by subscribing to our [RSS feed](pathname:///rss/security/notices.xml). Get automatic notifications when new security notices are published.
-:::
+<RssTip
+  feedUrl="pathname:///rss/security/notices.xml"
+  title="Subscribe to security notices"
+  description="security updates and get automatic notifications when new security notices are published"
+/>
 
 ## Report a security issue or vulnerability
 
