@@ -10,14 +10,17 @@ jobs:
   claude-review:
     if: |
       (github.event_name == 'pull_request_review_comment' &&
-       contains(github.event.comment.body, '@claude')) ||
+       contains(github.event.comment.body, '@claude') &&
+       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)) ||
       (github.event_name == 'issue_comment' &&
        github.event.issue.pull_request != null &&
-       contains(github.event.comment.body, '@claude'))
+       contains(github.event.comment.body, '@claude') &&
+       contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association))
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v7
 
@@ -36,13 +39,22 @@ jobs:
         with:
           anthropic_api_key: ${{ steps.secrets.outputs.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          direct_prompt: |
-            Review this pull request against the Camunda docs contribution standards referenced from AGENTS.md.
+          prompt: |
+            A commenter left this message on this pull request:
 
-            Post inline review comments on the specific lines where issues are found. For each issue, include a concrete fix using GitHub's suggestion block format so the author can apply it directly:
+            "${{ github.event.comment.body }}"
+
+            If the message is just the "@claude" mention on its own, or a generic ask like "review this" or "please review", perform a full review of this pull request against the Camunda docs contribution standards referenced from AGENTS.md. Post inline review comments on the specific lines where issues are found. For each issue, include a concrete fix using GitHub's suggestion block format so the author can apply it directly:
 
             ```suggestion
             <replacement text here>
             ```
 
             Use suggestion blocks whenever a fix can be expressed as a direct text replacement on the commented line(s).
+
+            Otherwise, address the specific request directly instead of doing a general review. Depending on what is being asked, this may mean:
+            - Answering a question about the code or documentation in a reply comment.
+            - Making the requested changes and pushing them as a new commit to this PR's branch.
+            - Opening a new pull request if the request is out of scope for this PR.
+
+            Follow the Camunda docs contribution standards referenced from AGENTS.md for any content changes.
