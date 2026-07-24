@@ -1071,6 +1071,7 @@ module.exports = {
             {
               "Amazon AWS": [
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock",
+                "components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-harness",
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-long-term-memory",
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-agentcore-runtime",
                 "components/connectors/out-of-the-box-connectors/amazon-bedrock-codeinterpreter",
