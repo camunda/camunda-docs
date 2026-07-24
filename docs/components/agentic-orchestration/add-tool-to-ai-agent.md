@@ -128,7 +128,7 @@ Set the script task's **Result variable** to `toolCallResult`. The FEEL expressi
 
 </Tabs>
 
-### Avoid accidental overwrites with multiple outputs
+### Combine multiple outputs into a single `toolCallResult`
 
 When your tool task has several output parameters that each contribute a field to `toolCallResult`, avoid an output mapping per field targeting `toolCallResult.<field>`.
 
