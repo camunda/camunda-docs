@@ -537,6 +537,31 @@ You can now create new SaaS Orchestration Clusters on specific supported Camunda
 - The latest recommended versions (latest patch of each active minor)
 - Other still-supported versions that you already run on existing clusters in the same organization.
 
+#### Optimize data filters in Console
+
+<!-- https://github.com/camunda/product-hub/issues/3679 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+You can now configure Optimize data filters directly in Console cluster settings, without editing Helm values or configuration files.
+
+The **Data filters** section in cluster settings lets you:
+
+- Enable or disable Optimize export filtering per cluster.
+- Include or exclude process definitions by exact `bpmnProcessId`.
+- Include or exclude variable names by prefix — for example, `business_` includes all variables whose names start with `business_`.
+- Exclusion takes precedence over inclusion when both are configured.
+
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables starting with `business_` to reduce Elasticsearch storage and shard usage. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+
+Saving filter changes triggers a rolling restart of the Orchestration Cluster; the cluster is briefly unavailable while it restarts.
+
+:::warning
+Filtered records are permanently excluded from Optimize and cannot be recovered even if you relax the filters later.
+:::
+
+<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
 ### Intelligent document processing (IDP)
 
 #### Support for ABBYY as an IDP Provider
