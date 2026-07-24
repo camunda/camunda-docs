@@ -1188,6 +1188,7 @@ module.exports = {
           "Dashboards maintained by Camunda": [
             "components/optimize/userguide/process-dashboards",
             "components/optimize/userguide/instant-process-dashboards",
+            "components/optimize/userguide/agentic-control-plane",
           ],
         },
         "components/optimize/userguide/creating-reports",
@@ -1303,7 +1304,20 @@ module.exports = {
           ],
         },
 
-        "components/saas/backups",
+        {
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "components/saas/backup-restore-overview",
+          },
+          items: [
+            "components/saas/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting",
+          ],
+        },
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
@@ -2537,7 +2551,10 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: ["self-managed/upgrade/helm/880-to-890"],
+          items: [
+            "self-managed/upgrade/helm/890-to-8100",
+            "self-managed/upgrade/helm/880-to-890",
+          ],
         },
         {
           type: "category",

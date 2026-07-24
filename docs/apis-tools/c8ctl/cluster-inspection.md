@@ -5,9 +5,9 @@ sidebar_label: "Cluster inspection"
 description: "Use c8ctl to list, search, and manage process instances, user tasks, incidents, jobs, messages, and forms in a Camunda 8 cluster."
 ---
 
-:::warning Alpha feature
-`c8ctl` is in alpha and not intended for production use. Commands and flags may change between releases. See [Getting started](getting-started.md) for details.
-:::
+<!-- This page is maintained in the c8ctl repository (https://github.com/camunda/c8ctl, in docs/) and
+     is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
+     overwritten. Edit the source in the c8ctl repo instead. -->
 
 `c8ctl` follows a `<verb> <resource>` command structure. Most resources have short aliases to reduce typing:
 
@@ -22,7 +22,7 @@ description: "Use c8ctl to list, search, and manage process instances, user task
 | `authorization(s)`      | `auth`        |
 | `mapping-rule(s)`       | `mr`          |
 
-Available verbs: `list`, `search`, `get`, `create`, `delete`, `set`, `cancel`, `complete`, `fail`, `activate`, `resolve`, `publish`, `correlate`, `assign`, `unassign`.
+Available verbs: `list`, `search`, `get`, `create`, `await`, `delete`, `set`, `cancel`, `complete`, `fail`, `activate`, `update`, `resolve`, `publish`, `correlate`, `assign`, `unassign`.
 
 :::tip
 All commands respect the active profile and tenant. Pass `--profile` to override the profile for a single command:
@@ -174,7 +174,12 @@ c8 activate jobs email-service
 
 # With options
 c8 activate jobs email-service --maxJobsToActivate=20 --timeout=120000 --worker=my-worker
+
+# Include custom headers and fetch specific variables in the output
+c8 activate jobs email-service --customHeaders --fetchVariable=orderId,amount
 ```
+
+Use `--customHeaders` to include each job's custom headers in the output, and `--fetchVariable` to fetch a comma-separated list of variable names from the server and include them.
 
 ### Complete a job
 
@@ -192,6 +197,18 @@ c8 fail job 2251799813685252
 
 # With retries and error message
 c8 fail job 2251799813685252 --retries=3 --errorMessage="Email service unavailable"
+```
+
+### Update a job
+
+Update a job's retries or timeout. At least one of `--retries` or `--timeout` is required:
+
+```bash
+# Reset the retry count (for example, to make a failed job activatable again)
+c8 update job 2251799813685252 --retries=3
+
+# Extend the job timeout to 60 seconds
+c8 update job 2251799813685252 --timeout=60000
 ```
 
 ## Search
@@ -391,6 +408,22 @@ c8 search variables --name=orderPayload --fullValue
 
 By default, long variable values are truncated. Truncated values show a `✓` in the "Truncated" column. Use `--fullValue` to see complete values.
 
+### Search wait states
+
+Wait states are the points where a process instance is waiting — an open job, a message subscription, a timer, a condition, a user task, or a signal. Use `search wait-state` (alias `ws`) to find them:
+
+```bash
+# All wait states for a process instance
+c8 search ws --processInstanceKey=2251799813685249
+
+# Filter by wait state type (JOB, MESSAGE, TIMER, CONDITION, USER_TASK, SIGNAL)
+c8 search ws --waitStateType=JOB
+
+# Filter by BPMN element type, or by element ID (supports wildcards)
+c8 search ws --elementType=SERVICE_TASK
+c8 search ws --elementId='*Approve*'
+```
+
 ## Variables
 
 ### Set variables
@@ -513,7 +546,7 @@ c8 publish msg order-placed --correlationKey=order-12345 --timeToLive=3600000
 
 ### Correlate a message
 
-`correlate` is an alias for `publish`:
+Use `correlate` to correlate a message to waiting process instances. It is a separate command from `publish` and, like `publish`, accepts a `--correlationKey` and optional `--variables`:
 
 ```bash
 c8 correlate msg payment-received --correlationKey=order-12345 --variables='{"amount":250.00}'

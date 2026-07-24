@@ -61,44 +61,61 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-Camunda Hub now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+Camunda now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
 The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
-<p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
+<p class="link-arrow">[Public REST API](/apis-tools/hub-api-saas/overview.md)</p>
 
-### Camunda Hub
+### Console
 
 #### Bespoke cluster generations for SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/3704 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 
 Organizations can now access exclusive Camunda 8 generation versions tailored specifically for their organization, available for both new cluster creation and upgrades. These generations are not visible to other organizations.
-
-#### Git-based catalog
-
-<!-- https://github.com/camunda/product-hub/issues/3402 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-Camunda Hub introduces an organization-level catalog for reusable, Center of Excellence (CoE)-approved assets, such as element templates, connectors, forms, and DMNs, backed by source control management (SCM).
-
-CoE teams can submit assets through the API from their SCM workflows, and delivery teams can browse catalog entries in Hub and inspect asset details. This release also adds in-diagram notifications for updated shared assets and pre-deployment dependency checks that surface missing DMNs, forms, connectors, and other dependencies on the target cluster before deployment.
 
 #### Select a target version when upgrading a cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3741 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 When you upgrade an Orchestration Cluster that has more than one valid upgrade target, Console now shows a version selection step in the upgrade wizard. Each option displays the generation name and the Zeebe patch version.
 
 The recommended version (the longest upgrade path) is pre-selected and labeled **latest**, and you can choose a different option before proceeding. Clusters with only one upgrade target keep the existing flow.
+
+#### Self-service restore for SaaS orchestration clusters from backups
+
+<!-- https://github.com/camunda/product-hub/issues/2135 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Organization admins can now restore a SaaS orchestration cluster directly from a completed backup in Console and through the Administration API.
+
+Key benefits:
+
+- Reduced time to recovery for operational incidents.
+- Operational control without opening a support ticket for standard same-cluster restores.
+- Clear restore status visibility during execution.
+
+This release supports in-place restore for the same cluster only. During restore, the cluster is unavailable until completion.
+
+Known limitations:
+
+- Same-cluster restore only.
+- Partition count must match between backup and target cluster.
+- Cross-region and cross-cluster restore are not supported in this release.
+
+Learn more:
+
+- [Backup and restore overview](/components/saas/backup-restore-overview.md)
+- [Restore a cluster from backup](/components/saas/how-to-restore.md)
+- [Restore scenarios](/components/saas/restore-scenarios.md)
+- [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
 
 ### Modeler
 
@@ -222,9 +239,13 @@ The documentation covers the recommended topology, exporter configuration, and R
 
 <!-- https://github.com/camunda/product-hub/issues/3244 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8 SaaS now supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
+Camunda 8 SaaS now officially supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
+
+:::note
+Multi-tenancy is available on SaaS clusters running generation **8.8 and later** — including existing 8.8 and 8.9 clusters. You do not need to upgrade to 8.10 to use this feature.
+:::
 
 - Owners and Admins can create, update, and delete tenants in Console, and assign users, groups, and client credentials to them.
 - Web Modeler and Desktop Modeler support tenant-scoped deployments to multi-tenant clusters by specifying a tenant ID.
@@ -490,15 +511,15 @@ https://github.com/camunda/camunda/issues/49548 -->
 
 Camunda Process Test now exposes **judge-based evaluation** and **semantic similarity evaluation** as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
-### Camunda Hub
+### Console
 
 #### Usage & billing metrics for 2025 enterprise license model
 
 <!-- https://github.com/camunda/product-hub/issues/3571 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 
-Camunda Hub and Accounts now support the 2025 enterprise license model.
+Console and Accounts now support the 2025 enterprise license model.
 
 - A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
 - If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
@@ -509,7 +530,7 @@ Camunda Hub and Accounts now support the 2025 enterprise license model.
 
 <!-- https://github.com/camunda/product-hub/issues/3582 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 You can now create new SaaS Orchestration Clusters on specific supported Camunda 8 minor and patch versions, including:
 

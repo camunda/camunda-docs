@@ -59,7 +59,7 @@ jobs:
           path: ts-sdk
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: "24"
 
@@ -191,8 +191,12 @@ jobs:
   notify-failure:
     needs:
       - sync-ts-sdk-docs
-    if: failure()
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
     uses: ./.github/workflows/notify-failure.yml
+    with:
+      # If any dependent job fails, set the dependency_status to 'failure',
+      # otherwise set it to 'success'.
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
     secrets:
       VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
       VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}

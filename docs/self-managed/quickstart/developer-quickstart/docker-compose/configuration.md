@@ -10,11 +10,11 @@ Use this page to choose the Docker Compose file that matches your local setup, f
 
 Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
 
-| Configuration file                | Description                                                                                                                                                                                                                                       |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster, Connectors, and Elasticsearch. Use this for most local development scenarios.                                                                                              |
-| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Use this when you need management components, process optimization, or browser-based modeling. |
-| `docker-compose-web-modeler.yaml` | Standalone Web Modeler configuration. Runs only Web Modeler and its dependencies. For deployment details, see [deploy with Web Modeler](./connectors-and-modeling.md#deploy-with-web-modeler).                                                    |
+| Configuration file                | Description                                                                                                                                                                                                                                                                          |
+| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses H2 secondary storage by default. Use this for most local development scenarios.                                                                                                       |
+| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Requires an external Elasticsearch instance for Optimize. Use this when you need management components or browser-based modeling. |
+| `docker-compose-web-modeler.yaml` | Standalone Web Modeler configuration. Runs only Web Modeler and its dependencies. For deployment details, see [deploy with Web Modeler](./connectors-and-modeling.md#deploy-with-web-modeler).                                                                                       |
 
 To start a specific configuration, run one of the following commands:
 
@@ -37,9 +37,9 @@ To start a specific configuration, run one of the following commands:
   ```
 
 :::note
-In these quickstart configurations, the Orchestration Cluster uses Elasticsearch as secondary storage by default. The PostgreSQL container in the full configuration is used by management components such as Management Identity and Web Modeler, not as Orchestration Cluster secondary storage.
+The Orchestration Cluster uses file-based H2 secondary storage by default. The PostgreSQL containers in the full configuration store Management Identity and Web Modeler data, not Orchestration Cluster data. The full configuration still requires Elasticsearch for Optimize.
 
-If you want to run the Orchestration Cluster with RDBMS secondary storage, see [configure secondary storage with Docker Compose](./secondary-storage.md).
+To select another Orchestration Cluster backend, see [configure secondary storage with Docker Compose](./secondary-storage.md).
 :::
 
 ## Access components
@@ -76,11 +76,11 @@ The following components are available in the full configuration only:
 
 ### External dependencies
 
-| Component     | Configuration        | URL                                                          | Description                                                                                                                                                          |
-| :------------ | :------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage, and by Optimize in the full configuration.                                                                   |
-| Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`.  |
-| PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity and Web Modeler. In these quickstart configurations, the Orchestration Cluster continues to use Elasticsearch as secondary storage. |
+| Component     | Configuration | URL                                                          | Description                                                                                                                                                         |
+| :------------ | :------------ | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Elasticsearch | Full          | Configured in `.env`                                         | External instance required by Optimize. Camunda 8.10 Docker Compose does not start Elasticsearch.                                                                   |
+| Keycloak      | Full          | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`. |
+| PostgreSQL    | Full          | `localhost:5432`                                             | Database for Management Identity and Web Modeler. This database is separate from Orchestration Cluster secondary storage.                                           |
 
 ## Authentication
 
@@ -103,6 +103,61 @@ By default, the lightweight configuration uses [Basic authentication for the Orc
   - **Audience:** `orchestration-api`
 
 For details, see [Orchestration Cluster REST API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+
+## Enable multi-tenancy
+
+[Multi-tenancy](/components/concepts/multi-tenancy.md) requires an authenticated API. How you enable it depends on the configuration you run.
+
+### Lightweight configuration
+
+Create a `docker-compose.override.yaml` next to the compose file that protects the API and switches on the tenancy checks:
+
+```yaml
+services:
+  orchestration:
+    environment:
+      CAMUNDA_SECURITY_AUTHENTICATION_UNPROTECTEDAPI: "false"
+      CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED: "true"
+      CAMUNDA_SECURITY_MULTITENANCY_APIENABLED: "true"
+  connectors:
+    environment:
+      CAMUNDA_CLIENT_AUTH_METHOD: basic
+      CAMUNDA_CLIENT_AUTH_USERNAME: demo
+      CAMUNDA_CLIENT_AUTH_PASSWORD: demo
+```
+
+Start the stack with `docker compose up -d` and manage tenants through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) or the Orchestration Cluster Admin UI at [http://localhost:8080/admin](http://localhost:8080/admin):
+
+```bash
+# Create a tenant
+curl -u demo:demo -X POST http://localhost:8080/v2/tenants \
+  -H 'Content-Type: application/json' -d '{"tenantId": "tenant-a", "name": "Tenant A"}'
+# Assign the demo user to it
+curl -u demo:demo -X PUT http://localhost:8080/v2/tenants/tenant-a/users/demo
+```
+
+With the API protected, clients must authenticate with Basic authentication (`camunda.client.auth.method=basic` plus username and password in the Camunda client SDKs).
+
+### Full configuration
+
+The full configuration already protects the API through Keycloak, so only the tenancy checks need to be switched on. Add the following to `.env`:
+
+```bash
+CAMUNDA_SECURITY_MULTITENANCY_CHECKSENABLED=true
+CAMUNDA_SECURITY_MULTITENANCY_APIENABLED=true
+```
+
+Start the stack with `docker compose -f docker-compose-full.yaml up -d` and manage tenants through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant.api.mdx) with an OAuth token, or the Orchestration Cluster Admin UI at [http://localhost:8080/admin](http://localhost:8080/admin):
+
+```bash
+TOKEN=$(curl -s -X POST 'http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token' \
+  -d 'grant_type=client_credentials' -d 'client_id=orchestration' -d 'client_secret=secret' | jq -r .access_token)
+# Create a tenant
+curl -X POST http://localhost:8080/v2/tenants -H "Authorization: Bearer $TOKEN" \
+  -H 'Content-Type: application/json' -d '{"tenantId": "tenant-a", "name": "Tenant A"}'
+# Assign the demo user to it
+curl -X PUT http://localhost:8080/v2/tenants/tenant-a/users/demo -H "Authorization: Bearer $TOKEN"
+```
 
 ## Next steps
 

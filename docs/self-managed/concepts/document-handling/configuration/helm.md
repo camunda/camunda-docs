@@ -21,7 +21,7 @@ Helm offers external cloud file bucket storage options (recommended for producti
 
 - By using **external cloud file bucket storage options**, documents can be stored in a secure and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
-  - [**AWS S3**](https://aws.amazon.com/s3/)
+  - [**AWS S3**](https://aws.amazon.com/s3/) — including [S3-compatible object stores](#s3-compatible-object-storage) such as MinIO, Cloudian, or Garage (configured through the AWS S3 store with a custom endpoint)
   - [**Azure Blob Storage**](https://azure.microsoft.com/en-us/products/storage/blobs)
 
 - **In-memory** storage can be used to store documents during the application's runtime. When the application is stopped, documents are lost. In-memory storage is not suitable for production use, as pods and memory are not shared across components. Files stored in memory are not persisted and will be lost on application restart.
@@ -62,6 +62,12 @@ global:
                 bucketPath: ""
                 ## @param global.documentStore.type.aws.bucketTtl [int, nullable] (Optional) Time-to-live for documents in the S3 bucket (number in days).
                 bucketTtl: 0
+                ## @param global.documentStore.type.aws.endpoint (Optional) Endpoint URL for an S3-compatible object store (for example, http://minio.minio.svc.cluster.local:9000). When unset, the AWS SDK default endpoint is used.
+                endpoint: ""
+                ## @param global.documentStore.type.aws.forcePathStyle [nullable] (Optional) Force path-style addressing on the S3 client. When unset, path-style is auto-enabled if an endpoint is configured, otherwise the SDK default is used.
+                forcePathStyle:
+                ## @param global.documentStore.type.aws.chunkedEncodingEnabled [nullable] (Optional) Enable AWS chunked transfer encoding. Set to false for S3-compatible backends that do not support it (for example, Garage). When unset, the SDK default (true) is used.
+                chunkedEncodingEnabled:
                 ## @param global.documentStore.type.aws.class Fully qualified class name for the AWS document store provider.
                 class: "io.camunda.document.store.aws.AwsDocumentStoreProvider"
                 ## @extra global.documentStore.type.aws.accessKeyId configuration to provide the AWS access key ID.
@@ -144,6 +150,56 @@ connectors:
                 bucket-name: my-bucket
 ```
 
+#### S3-compatible object storage
+
+Camunda's AWS S3 store can also target self-hosted S3-compatible object stores such as [MinIO](https://min.io/), [Cloudian](https://cloudian.com/), or [Garage](https://garagehq.deuxfleurs.fr/). Set these additional properties on the store instance in `extraConfiguration`:
+
+| Property                                             | Description                                                                                                                                                                                                                                                                |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.aws.<id>.endpoint`                 | URL of the S3-compatible server. Setting this switches the store into S3-compatible mode. Example: `http://minio.minio.svc.cluster.local:9000`.                                                                                                                            |
+| `camunda.document.aws.<id>.force-path-style`         | Forces path-style bucket addressing on the S3 client. Most S3-compatible servers (MinIO, Garage) require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                                   |
+| `camunda.document.aws.<id>.chunked-encoding-enabled` | Controls AWS chunked transfer encoding. Some S3-compatible backends (notably Garage) do not implement the `aws-chunked` streaming-signed upload mode and require this to be `false`. When unset, the SDK default (`true`) is used, which is correct for MinIO and similar. |
+
+Credentials are configured the same way as AWS S3, via `existingSecret`/`accessKeyIdKey`/`secretAccessKeyKey` under `global.documentStore.type.aws`. The bucket must exist on the backend before Camunda starts — the chart does not create it.
+
+##### Example: in-cluster MinIO
+
+```yaml
+global:
+  documentStore:
+    activeStoreId: "aws1"
+    type:
+      aws:
+        enabled: false
+        existingSecret: "minio-credentials"
+        accessKeyIdKey: "access-key-id"
+        secretAccessKeyKey: "secret-access-key"
+
+orchestration:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1:
+                bucket-name: camunda-docs
+                endpoint: http://minio.minio.svc.cluster.local:9000
+
+connectors:
+  extraConfiguration:
+    - file: aws-documentstore.yaml
+      content: |
+        camunda:
+          document:
+            aws:
+              aws1:
+                bucket-name: camunda-docs
+                endpoint: http://minio.minio.svc.cluster.local:9000
+```
+
+MinIO accepts the AWS SDK's default streaming-signed uploads, so `chunked-encoding-enabled` is not set. For Garage, add `chunked-encoding-enabled: false` to the same block.
+
 ### GCP
 
 ```yaml
@@ -183,6 +239,42 @@ connectors:
 ### Azure Blob Storage
 
 See [Azure Blob Storage configuration](#azure-blob-storage-configuration) below for Azure-specific setup, including connection string and Managed Identity options.
+
+### Troubleshooting checksum issues
+
+Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+If checksum-related errors appear, disable automated checksum creation by adding these environment variables under `orchestration.env` and `connectors.env`:
+
+```yaml
+orchestration:
+  env:
+    - name: AWS_REQUEST_CHECKSUM_CALCULATION
+      value: WHEN_REQUIRED
+    - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+      value: WHEN_REQUIRED
+
+connectors:
+  env:
+    - name: AWS_REQUEST_CHECKSUM_CALCULATION
+      value: WHEN_REQUIRED
+    - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+      value: WHEN_REQUIRED
+```
+
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by adding to the same `env` lists:
+
+```yaml
+orchestration:
+  env:
+    - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
+      value: "true"
+
+connectors:
+  env:
+    - name: DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5
+      value: "true"
+```
 
 ## Azure Blob Storage configuration
 
