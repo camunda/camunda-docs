@@ -203,9 +203,9 @@ To avoid this, set the `skipEncoding` value to `"true"` in the XML. This disable
 The following variables are available in the context of the response expression:
 
 - **status**: Response status.
-- **body**: Response body of your request.
+- **body**: Response body of your request. Populated when the **Response format** is **As text** or **As JSON**.
 - **headers**: Response headers.
-- **document**: If the `Store response` checkbox is selected, this field represents the stored document:
+- **document**: Populated when the **Response format** is **Document reference**; represents the stored document:
   - **documentId**: The ID of the stored document.
   - **contentHash**: The hash of the stored document.
   - **storeId**: The store ID.
@@ -216,8 +216,18 @@ The following variables are available in the context of the response expression:
     - **customProperties**: Custom properties of the stored document.
     - **contentType**: Content type of the stored document.
 
+### Response format
+
+Choose how the response body is returned with the **Response format** dropdown, a [return format](/components/document-handling/send-document-to-external-system.md#return-formats):
+
+- **As JSON** (default): the body is parsed as JSON and returned in `body`.
+- **As text**: the body is decoded as a string (with an optional encoding, default UTF-8) and returned in `body`.
+- **Document reference**: the body is streamed to the Camunda document store and a reference is returned in `document`.
+
 :::note
-Starting from version 8.7.0, the REST connector supports storing the response as a document. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
+The **As JSON** default fails the job when the response body is not valid JSON. Use **As text** for non-JSON responses.
+
+**As text** and **As JSON** are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large responses.
 :::
 
 ## Output mapping

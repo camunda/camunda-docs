@@ -139,6 +139,10 @@ The **members** property must contain a list of members:
 |       Message ID        |                                                                                  List message replies                                                                                  |   Yes    |      string       |                                           Microsoft Teams channel message ID                                           |
 |        Documents        |                                                                        List of documents to attach to a message                                                                        |    No    | List of documents |                                           Microsoft Teams channel message ID                                           |
 
+:::note
+Each document in the **Documents** field uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents.
+:::
+
 #### Channel methods
 
 |         Method          | Use [protected APIs](https://learn.microsoft.com/en-us/graph/api/resources/teams-api-overview#teams-apis-that-require-rscs-permissions) | Available for [client credentials type authentication](#client-credentials-type-authentication) | Link to method documentation with required permissions and return value                                                                                                    |
