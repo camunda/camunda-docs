@@ -1995,7 +1995,17 @@ module.exports = {
                     },
                   ],
                 },
-                "self-managed/deployment/helm/cloud-providers/gcp/google-gke",
+                {
+                  type: "category",
+                  label: "Google",
+                  link: {
+                    type: "doc",
+                    id: "self-managed/deployment/helm/cloud-providers/gcp/google-gke",
+                  },
+                  items: [
+                    "self-managed/deployment/helm/cloud-providers/gcp/google-gke-gateway-api",
+                  ],
+                },
                 {
                   type: "category",
                   label: "Microsoft",
