@@ -77,7 +77,7 @@ If the tool requires values that the LLM should supply at runtime, such as a sea
 How you configure this depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, such as **URL** or **Query parameters** in the REST outbound connector's **HTTP Endpoint** section, while a script, service, or user task exposes an [**Input Mappings**](/components/concepts/variables.md#input-mappings) section instead.
 
 1. Open the input field (for a connector task) or the **Input Mappings** section (for a script, service, or user task) where the value is configured.
-1. If you're using the **Input Mappings** section, add a new entry and set its **Local variable name**. This is the name you'll reference elsewhere in the element.
+1. If you're using the **Input Mappings** section, add a new entry and set its **Local variable name**. This is the name you'll reference the variable elsewhere in the element.
 1. Wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context, and add a description so the LLM knows what to provide:
 
    ```feel
