@@ -47,7 +47,7 @@ The LLM selects tools based on the tool element's **ID** and its **Documentation
 
 - The element's **ID** field is always used as the tool name.
 - The element's **Name** field is a human-readable label shown on the diagram.
-- The element's **Documentation** field is used as the tool description. If **Documentation** is empty, the element's **Name** field is used as a fallback description. If both are empty, the tool has no description.
+- The element's **Documentation** field is used as the tool description.
 
 See [tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions) for more details.
 
