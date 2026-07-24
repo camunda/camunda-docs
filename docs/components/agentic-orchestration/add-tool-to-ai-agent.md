@@ -18,7 +18,7 @@ A tool is a BPMN element inside an [ad-hoc sub-process](/components/modeler/bpmn
 You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
 
 :::tip See a full example
-For a complete, step-by-step walkthrough that applies all the steps below, see [Step 4: Add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool) in the getting started guide.
+For a complete, step-by-step walkthrough that applies all the steps below, see [add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool).
 :::
 
 ## Add an element inside the ad-hoc sub-process
