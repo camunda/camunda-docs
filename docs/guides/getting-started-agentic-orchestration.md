@@ -367,7 +367,7 @@ The LLM will recognize these as weather requests, select the **Get current weath
 
 ### Add your own tools
 
-To add more tools to your agent, follow the same pattern used above. For full guidance on naming tools, writing descriptions, declaring `fromAi()` parameters, and mapping results, see [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
+To add more tools to your agent, follow the same pattern used above. For full guidance, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 
 ## Next steps
 
