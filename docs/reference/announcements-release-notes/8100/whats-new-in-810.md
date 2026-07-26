@@ -73,7 +73,7 @@ Payments (Project)
 
 This is what the data looks like in 8.10:
 
-```
+```txt title="Camunda 8.10"
 Payments (Project)
 ├─ Payments - General (Process application - TEMPORARY PLACEMENT)
 │   ├─ main.bpmn
@@ -95,7 +95,7 @@ With a strict **Project > Process application > File/folder** hierarchy, resourc
 
 ### Migration
 
-For Self-Managed, your data will be migrated to the new organizational structure when you upgrade to Camunda 8.10. For Saas, this happens automatically during a scheduled maintenance window.
+For Self-Managed, your data will be migrated to the new organizational structure when you upgrade to Camunda 8.10. For SaaS, this happens automatically during a scheduled maintenance window.
 
 In the migration:
 
