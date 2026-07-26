@@ -40,6 +40,100 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 :::
 
+## Web Modeler data migration
+
+Camunda 8.10 alpha 5 introduces three changes related to your Web Modeler data:
+
+- **[Organizational structure](#organizational-structure):** Enforces a stricter, more scalable file resource hierarchy.
+- **[Data migration](#migration):** Aligns your existing data with the new structure.
+- **[Process application versioning model](#process-application-versioning):** Provides more granular control.
+
+### Organizational structure
+
+In Camunda 8.9, a project can contain process applications, folders, and loose files. Camunda 8.10 enforces a new file resource hierarchy in which projects only contain process applications. Everything else, including files, folders, and IDP application content, lives inside a process application.
+
+For example, if this is what your data looks like in 8.9:
+
+```txt title="Camunda 8.9"
+Payments (Project)
+├─ main.bpmn
+├─ eligibility.dmn
+├─ readme.md
+├─ Forms (Folder)
+│   ├── details.form
+│   └── review.form
+├─ Archive (Folder)
+│   └── Refunds (Process application)
+│       ├── refunds.bpmn
+│       └── refund-request.form
+└─ Onboarding (Process application)
+    ├── onboarding.bpmn
+    └── kyc-checks.dmn
+```
+
+This is what the data looks like in 8.10:
+
+```
+Payments (Project)
+├─ Payments - General (Process application - TEMPORARY PLACEMENT)
+│   ├─ main.bpmn
+│   ├─ eligibility.dmn
+│   ├─ readme.md
+│   ├─ Forms (Folder)
+│   │   ├── details.form
+│   │   └── review.form
+│   └─ Archive (Folder)
+├── Refunds (Process application - MOVED)
+│   ├── refunds.bpmn
+│   └── refund-request.form
+└─ Onboarding (Process application)
+    ├── onboarding.bpmn
+    └── kyc-checks.dmn
+```
+
+With a strict **Project > Process application > File/folder** hierarchy, resources are more discoverable and projects more scalable.
+
+### Migration
+
+For Self-Managed, your data will be migrated to the new organizational structure when you upgrade to Camunda 8.10. For Saas, this happens automatically during a scheduled maintenance window.
+
+In the migration:
+
+- Any process application nested inside a folder moves to the top level of its project.
+- Any files or folders sitting directly in a project, not inside a process application, are automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. When the migration is complete, you can rename this application, move content out of it, or otherwise reorganize it like any other process application.
+- Git sync and cluster settings on existing process applications migrate along with your data. They carry over untouched.
+
+During the migration, Web Modeler is briefly unavailable. Clusters and running processes are unaffected and keep executing normally.
+
+:::note
+Even though the migration process is tested extensively ahead of release, a backup is still taken before the migration to ensure your data is recoverable in its original state, should anything go wrong. If you notice anything unexpected after the migration, contact support.
+:::
+
+The migration does not affect the following resources:
+
+| Area                                | Impact                                                                                                                                                                                    |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Running process instances           | Orchestration Clusters, engines, and running process instances continue unaffected. Web Modeler and Camunda Hub form a modeling-and-management plane independent of the runtime path.     |
+| Redeployment                        | Deployments live on your clusters, not in the project structure being reorganized. Everything already deployed keeps running; this change doesn't require redeployment.                   |
+| Clusters and configuration          | Cluster and deployment settings attached to existing process applications migrate along with the data and carry over unchanged.                                                           |
+| Files, folders, and version history | All files, folders, versions, and history are preserved; only their location within the project changes.                                                                                  |
+| Git-synced projects                 | The migration doesn't modify process applications or their contents, so anything connected through Git sync is unaffected: the same files, in the same repository, with the same history. |
+| Desktop Modeler                     | Desktop Modeler has no direct connection to Web Modeler that this change touches, and content shared via Git sync is unaffected.                                                          |
+
+If you automate against the Web Modeler API, content moving to a new location affects you directly: the V1 API returns files and folders from their new place, and requests that create an item at a project's root are redirected into the new `YOUR PROJECT NAME - General` application, with the response reflecting the new location.
+
+Review any automation that depends on where files or folders sit before the migration runs. A small number of folder API integrations are affected more directly; if you rely on the folder API to work with process applications, contact support to confirm whether your integration needs updates.
+
+### Process application versioning
+
+In addition to the Web Modeler data migration, 8.10 alpha 5 also brings an improved versioning model for process applications:
+
+- File-level versions — process applications can be versioned as a bundle, as before, but now also at the single-file level.
+- Auto-save for all files, plus file-level version history for every file.
+- Decoupled versioning — process application versions and element template versions are now created independently of each other.
+
+A process application is no longer a rigid bundle. You can use it as a bundle of assets deployed together and Git-synced, or as a plain container for loose files and folders--whichever fits the work. This flexibility is why everything now lives inside a process application: being in one doesn't lock you into bundle behavior.
+
 ## Camunda 8 Run no longer requires Java
 
 Camunda 8 Run now ships with a bundled Java runtime. You no longer need to install OpenJDK or set `JAVA_HOME` before starting it.
