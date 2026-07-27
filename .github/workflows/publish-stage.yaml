@@ -16,6 +16,9 @@ jobs:
     runs-on: gcp-core-8-default
     container: node:24
     steps:
+      - name: Get runner IP
+        id: ip
+        uses: haythem/public-ip@v1.3
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
@@ -32,12 +35,6 @@ jobs:
           NODE_OPTIONS: --max_old_space_size=8192
           DOCS_SITE_URL: https://stage.docs.camunda.io
           DOCS_SITE_BASE_URL: /
-      - name: Get runner IP
-        id: ip
-        uses: haythem/public-ip@v1.3
-      - name: Print runner IP
-        run: |
-          echo "Runner IP: ${{ steps.ip.outputs.ipv4 }}"
       - name: Import Secrets
         id: secrets
         uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
