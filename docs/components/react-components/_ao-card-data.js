@@ -31,7 +31,7 @@ export const fundamentalCards = [
   {
     link: "../agent-states-and-metrics/",
     title: "Agent states and metrics",
-    image: IconOperate,
+    image: IconAoDesignImg,
     description: "Understand agent states, usage metrics, and limits.",
   },
   {
