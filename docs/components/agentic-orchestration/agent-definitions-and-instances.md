@@ -60,7 +60,7 @@ Duplicating the same element template directly across several process definition
 
 ## Agent instances
 
-An agent instance is a specific runtime execution of an agent definition that can be created for an active agent element. It is identified by an agent instance key, and keeps its state, including conversation, tool calls, reasoning, in an agent context.
+An agent instance is a specific runtime execution of an agent definition that can be created for an active agent element. It is identified by an agent instance key, which the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) uses to represent the agent's state — conversation, tool calls, and reasoning — for visibility and explainability in tools like Operate. This representation is not the source of truth for the agent's runtime execution; how an agent's actual state is stored depends on its type, as described in [Agent context and memory](#agent-context-and-memory).
 
 You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
@@ -68,7 +68,9 @@ For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI ag
 
 ### Agent context and memory
 
-An agent instance keeps its state in an agent context object. The context holds the conversation, tool calls and their results, reasoning traces, and metadata such as token usage. It also records the agent instance key, which links the context back to its agent instance.
+For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), the AI Agent connector keeps the agent's runtime state in an agent context object. The context holds the conversation, tool calls and their results, reasoning traces, and metadata such as token usage. It also records the agent instance key, which links the context back to its agent instance.
+
+[External agents](/reference/glossary.md#external-agent) don't use this agent context. Their runtime manages the agent's actual state independently of Camunda, and reports only what it chooses through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) for visibility.
 
 By default, the agent context is stored as a process variable, typically named `agent`, and is available both on the agent element and on the process instance. When the process returns to the agent element, the agent evaluates a FEEL expression (for example, `agent.context`) to load the existing context and continue the conversation with the same agent instance.
 
