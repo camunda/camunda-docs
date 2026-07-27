@@ -297,12 +297,12 @@ The following image shows an example of the Zeebe Grafana dashboard after import
 
 #### Physical Tenant filtering
 
-All Zeebe metrics include a `physicalTenant` label. The Zeebe dashboard supports filtering and aggregating metrics by `physicalTenant` and `partition`, and exposes `physicalTenant` as a variable selector, so you can monitor throughput, latency, and resource usage for each Physical Tenant independently.
+Partition-scoped Zeebe metrics include a `physicalTenant` label. Node-level metrics that are not partition-scoped do not carry this label. The Zeebe dashboard supports filtering and aggregating metrics by `physicalTenant` and `partition`, and exposes `physicalTenant` as a variable selector, so you can monitor throughput, latency, and resource usage for each Physical Tenant independently.
 
 To compare across tenants in Prometheus queries, use the `physicalTenant` label directly. For example:
 
 ```promql
-sum by (physicalTenant) (zeebe_broker_processing_latency_seconds_count)
+sum by (physicalTenant) (zeebe_stream_processor_latency_seconds_count)
 ```
 
 :::note
