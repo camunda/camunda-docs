@@ -12,7 +12,7 @@ Use agent health indicators and limit proximity warnings to identify a stuck or 
 
 An agent can go off-rail without failing outright, for example, by getting stuck repeating a tool call or reasoning in circles. Left unnoticed, it keeps consuming tokens and model calls until it hits its configured limit.
 
-In this guide, you will learn how to read an agent instance's [state and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) to catch this early, and how to interpret limit proximity warnings.
+In this guide, you will learn how to read an agent instance's [state and usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md) to catch this early, and how to interpret limit proximity warnings.
 
 ## Identify a stuck or looping agent
 
@@ -29,7 +29,7 @@ An agent that calls the same tool many times can still be legitimately working t
 
 ## Interpret limit proximity warnings
 
-Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-health-and-limits.md#model-call-limit) limit, so you can see how close an agent instance is to it before it's reached.
+Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-states-and-metrics.md#model-call-limit) limit, so you can see how close an agent instance is to it before it's reached.
 
 A proximity warning means the agent instance is nearing its configured limit and could reach it on a subsequent loop, at which point the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error and stops the agent.
 

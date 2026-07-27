@@ -1,8 +1,8 @@
 ---
-id: agent-health-and-limits
-title: Agent health and limits
+id: agent-states-and-metrics
+title: Agent states and metrics
 description: "Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance."
-keywords: ["agentic ai", "AI agents", "agent health", "limits", "agent state"]
+keywords: ["agentic ai", "AI agents", "agent state", "usage metrics", "limits"]
 ---
 
 Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance.

@@ -29,8 +29,8 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
-    link: "../agent-health-and-limits/",
-    title: "Agent health and limits",
+    link: "../agent-states-and-metrics/",
+    title: "Agent states and metrics",
     image: IconOperate,
     description: "Understand agent states, usage metrics, and limits.",
   },
