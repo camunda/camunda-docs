@@ -57,9 +57,11 @@ Rising token consumption without a final response is a signal that the conversat
 
 Camunda counts the number of tool calls the agent instance has made across all loops. A climbing tool call count generally reflects active work, but a count that climbs while the agent calls the same tool repeatedly with similar or identical inputs can indicate the agent is stuck rather than progressing.
 
-### Execution duration
+### Model call duration
 
-Camunda tracks how long the agent instance has been active, both across its full run and in its current state. A model or tool call that takes far longer than comparable calls, without a change in state, is a sign the agent isn't progressing normally.
+Camunda records the duration of each model call in the agent's conversation history. A model call that takes far longer than comparable ones is a sign the agent isn't progressing normally. This duration is surfaced per model call, not for tool results.
+
+Tool execution duration is not part of the conversation history metrics. When a tool is a BPMN element, you can see how long its execution took from the usual element instance details in the details tab for that tool activation.
 
 ### Model call limit
 
