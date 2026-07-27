@@ -355,11 +355,11 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
               - key: app.kubernetes.io/component
                 operator: In
                 values:
-                  - zeebe
+                  - zeebe-broker
           topologyKey: kubernetes.io/hostname
   ```
 
-  This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe` are not scheduled on the same node. The primary benefits include:
+  This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe-broker` are not scheduled on the same node. The primary benefits include:
   - High availability: If one node fails, other nodes running the same component remain unaffected.
   - Load distribution: Balances the workload across nodes.
   - Fault tolerance: Reduces the impact of a node-level failure.
@@ -373,6 +373,32 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
       minAvailable: 0
       maxUnavailable: 1
   ```
+
+#### Topology spread constraints
+
+Topology spread constraints control how pods are distributed across failure domains such as availability zones. The default `podAntiAffinity` configuration ensures Zeebe broker pods run on distinct nodes, but does not ensure those nodes are in different zones: if the cluster has more nodes than brokers, all brokers can still be scheduled into a single availability zone. Because broker persistent volumes are bound to a single zone on most cloud providers, a zonal outage can then take down the whole Orchestration Cluster.
+
+With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones:
+
+```yaml
+orchestration:
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/component: zeebe-broker
+```
+
+Keep the following in mind when configuring topology spread constraints:
+
+- Set a `topologyKey` that your nodes carry. `topology.kubernetes.io/zone` is standard on managed cloud clusters, but bare-metal and local clusters often have no zone label. With `whenUnsatisfiable: DoNotSchedule` and no matching node label, no broker can be scheduled at all.
+- Prefer `whenUnsatisfiable: ScheduleAnyway`. It provides best-effort spreading: Kubernetes does not guarantee an even distribution and does not rebalance existing brokers. A hard constraint (`DoNotSchedule`) combined with the default hard `podAntiAffinity` can leave broker pods permanently `Pending` when zones have uneven node counts, or stall a rolling update — use it only when every zone has enough spare capacity.
+- Broker volumes pin pods to a zone. With topology-constrained storage, `volumeBindingMode: WaitForFirstConsumer` delays volume binding or provisioning until the scheduler picks a node, so the volume matches that node's topology; `Immediate` binds or provisions the volume without considering pod scheduling constraints. Once a broker's claim is bound to a single-zone volume, every replacement pod must run in that zone: a hard zone constraint that conflicts with the volume's zone leaves the pod `Pending`, and enabling spreading on an existing cluster does not relocate existing volumes.
+- The `labelSelector` counts pods across the whole namespace. Pods with matching labels from all Helm releases in the namespace are counted together, not only the release you are configuring. To scope spreading to a single release, also match `app.kubernetes.io/instance: <release-name>`.
+
+For an overview of all pod scheduling values, see [configure pod scheduling](/self-managed/deployment/helm/configure/pod-scheduling.md).
 
 #### Secondary storage index replicas
 
