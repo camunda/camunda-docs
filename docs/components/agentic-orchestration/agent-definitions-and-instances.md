@@ -16,20 +16,20 @@ An **agent definition** describes a deployed agent, while an **agent instance** 
 
 ### Why definitions and instances are separate
 
-An agent is not the same as the BPMN element that hosts it, and it does not have the same lifecycle as an element instance.
+An AI agent is not the same as the BPMN element that defines it, and it does not have the same lifecycle as an element instance.
 
 - A single [AI agent sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
 - Each time the process activates that element, Camunda creates an element instance.
 - The agent instance can be **reused across several element instances** within the same process instance.
 
-For example, in a process where the flow returns to the agent element after a user reply, the agent element is activated more than once. Each activation is a separate element instance, but they share the same agent instance so the agent keeps its memory and continues the same conversation.
+For example, in a process where the execution returns to the agent element after a user reply, the agent element is activated more than once. Each activation is a separate element instance, but they share the same agent instance so the agent keeps its memory and continues the same conversation.
 This reuse is what allows an agent to hold a multi-turn conversation across a loop in the process.
 
 ## Agent definitions
 
-An agent definition is a first-class, queryable resource that Camunda creates when you deploy a process containing one or more agents.
+An AI agent definition is a first-class, queryable resource that Camunda creates when you deploy a process containing one or more agents.
 
-Camunda creates one agent definition per agent element in a deployed process, analogous to how a DMN deployment creates one decision definition per decision. An agent definition is a **structural descriptor** of the agent, not a store of its runtime configuration.
+Camunda creates one agent definition per agent element in a deployed process, analogous to how a DRD deployment creates one decision definition per decision. An agent definition is a **structural descriptor** of the agent, not a store of its runtime configuration.
 
 An agent definition identifies an agent across process versions through a stable agent definition key. With this key, you can inventory deployed agents, aggregate per-agent metrics in Optimize, and confirm that an agent exists before starting one of its instances.
 
@@ -38,7 +38,7 @@ An agent definition identifies an agent across process versions through a stable
 An agent definition contains the following data:
 
 - **Agent definition key**: Stable identifier for the agent across process definition versions.
-- [**Agent type**](/components/agentic-orchestration/ai-agents.md#agent-types): One of ad-hoc sub-process, AI Agent Task, or external agent.
+- [**Agent type**](/components/agentic-orchestration/ai-agents.md#agent-types): One of AI Agent sub-process, AI Agent Task, or external agent.
 - **Name**: Human-readable name of the agent element.
 - **Process definition key**: The process definition the agent belongs to.
 - **Tenant**: The tenant the agent definition belongs to.
@@ -60,7 +60,8 @@ Duplicating the same element template directly across several process definition
 
 ## Agent instances
 
-An agent instance is a specific runtime execution of an agent definition, created when an agent element is activated. It is identified by an agent instance key and stores its state, including the conversation, tool calls, and reasoning, in an agent context.
+An agent instance is a specific runtime execution of an agent definition that can be created for an active agent element. It is identified by an agent instance key, and keeps its state -
+conversation, tool calls, reasoning - in an agent context.
 
 You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
@@ -89,7 +90,7 @@ The following data is available for an agent instance in Operate:
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Agent instance key   | The unique identifier of the agent instance. Use it to look up or interact with the agent through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx). |
 | Agent state          | The current execution state of the agent, such as initializing, tool discovery, thinking, tool calling, or idle. The state is also highlighted on the BPMN diagram.                                                  |
-| Usage metrics        | Token consumption, tool call count, and model call count. Model calls are shown against the configured limit, so you can see how close the agent is to its guardrail.                                                |
+| Usage metrics        | Token consumption, tool call count, and model call count. Model calls are shown against the configured limit, so you can see how close the agent is to its limit.                                                |
 | Model                | The LLM the agent is running against.                                                                                                                                                                                |
 | System prompt        | The system prompt the agent was configured with.                                                                                                                                                                     |
 | Conversation history | The decision trail of the agent execution: user prompts, assistant messages, the tools the agent selected with its reasoning, and tool calls with their inputs and results.                                          |

@@ -63,7 +63,7 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 ### Agent definition
 
-A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (ad-hoc sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a DMN deployment creates decision definitions.
+A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (Ai Agent sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a DRD deployment creates decision definitions.
 
 An agent definition is a structural descriptor (type, name, process definition key, and tenant), not a store of runtime configuration. The system prompt and model are FEEL expressions evaluated at instance creation time and are not stored in the definition.
 
