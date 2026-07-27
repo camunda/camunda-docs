@@ -55,6 +55,13 @@
       "label": "Change cluster mode"
     }
   ],
+  "restore": [
+    {
+      "file": "admin_operations.py",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
   "get_status": [
     {
       "file": "admin_operations.py",
@@ -110,6 +117,27 @@
       "file": "process_instance.py",
       "region": "SearchProcessInstances",
       "label": "Search process instances"
+    }
+  ],
+  "suspend_process_instance": [
+    {
+      "file": "process_instance.py",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend a process instance"
+    }
+  ],
+  "resume_process_instance": [
+    {
+      "file": "process_instance.py",
+      "region": "ResumeProcessInstance",
+      "label": "Resume a process instance"
+    }
+  ],
+  "assign_process_instance_business_id": [
+    {
+      "file": "process_instance.py",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign a business id to a process instance"
     }
   ],
   "activate_jobs": [
@@ -811,6 +839,20 @@
       "label": "Update jobs in batch"
     }
   ],
+  "suspend_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances in batch"
+    }
+  ],
+  "resume_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances in batch"
+    }
+  ],
   "delete_process_instance": [
     {
       "file": "extended_operations.py",
@@ -900,6 +942,13 @@
       "file": "extended_operations.py",
       "region": "SearchProcessDefinitions",
       "label": "Search process definitions"
+    }
+  ],
+  "search_process_definition_variable_names": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
     }
   ],
   "get_process_definition_statistics": [

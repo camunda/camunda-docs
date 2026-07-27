@@ -55,6 +55,13 @@
       "label": "Change cluster mode"
     }
   ],
+  "restore": [
+    {
+      "file": "client.ts",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "process-instance.ts",
@@ -868,6 +875,13 @@
       "file": "extended-operations.ts",
       "region": "SearchProcessDefinitions",
       "label": "Search process definitions"
+    }
+  ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "extended-operations.ts",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
     }
   ],
   "getProcessDefinitionStatistics": [

@@ -1,0 +1,33 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.10.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "c72e043"
+  },
+  "schemaVersion": 19,
+  "id": "approve_receipt",
+  "components": [
+    {
+      "label": "Document preview",
+      "type": "documentPreview",
+      "layout": {
+        "row": "Row_18hemde",
+        "columns": null
+      },
+      "id": "Field_0r5gevh",
+      "dataSource": "=receipts"
+    },
+    {
+      "label": "Approve receipt",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_0hf1agg",
+        "columns": null
+      },
+      "id": "Field_0uszagh",
+      "key": "approve_receipt"
+    }
+  ],
+  "type": "default"
+}

@@ -18,6 +18,13 @@ export const overviewCards = [
 
 export const helmIndexCards = [
   {
+    link: "./890-to-8100",
+    title: "Upgrade Camunda 8.9 to 8.10 using Helm",
+    image: IconArrow,
+    description:
+      "Switch to the Helm v4 CLI and migrate the deprecated app-config Helm keys to extraConfiguration before running the Helm upgrade.",
+  },
+  {
     link: "./880-to-890",
     title: "Upgrade Camunda 8.8 to 8.9 using Helm",
     image: IconArrow,

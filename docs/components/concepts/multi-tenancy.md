@@ -7,7 +7,12 @@ description: "Multi-tenancy lets you host multiple logically isolated tenants wi
 
 [Multi-tenancy](/reference/glossary.md#multi-tenancy) in Camunda 8 enables a single installation to serve multiple [tenants](/reference/glossary.md#tenant) such as departments, teams, or external clients, while keeping each tenant's data and processes logically isolated.
 
-This page describes **logical multi-tenancy**: tenant-ID based isolation within a single cluster. Logical multi-tenancy is available on both **Camunda 8 SaaS** and **Camunda 8 Self-Managed**.
+This page describes **logical multi-tenancy**: tenant-ID based isolation within a single cluster.
+
+| Deployment   | Availability                                           |
+| :----------- | :----------------------------------------------------- |
+| SaaS         | Available on clusters running generation 8.8 and later |
+| Self-Managed | Available                                              |
 
 :::note
 Self-Managed also supports stronger isolation models. For a comparison of logical tenants, Physical Tenants, and multi-cluster deployments, see the [Self-Managed multi-tenancy overview](/self-managed/concepts/multi-tenancy/index.md).
