@@ -14,10 +14,7 @@ An agent can go off-rail without failing outright, for example, by getting stuck
 
 In this guide, you will learn how to read an agent instance's [state and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) to catch this early, and how to interpret limit proximity warnings.
 
-## Prerequisites
-
-- You have access to [Operate](/components/operate/operate-introduction.md) to inspect running agent process instances. See [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md).
-- You understand the [agent state model and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) Camunda tracks for an agent instance.
+You can inspect running agent process instances in [Operate](/components/operate/operate-introduction.md); see [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md). For more context and understanding, see the [agent state model and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) guide.
 
 ## Identify a stuck or looping agent
 
