@@ -77,9 +77,11 @@ You control this behavior through the agent's memory configuration:
 - **Reuse the context** to continue an existing conversation. The process passes the stored context back to the agent element, and the same agent instance handles each activation.
 - **Start with a fresh context** on each activation. The agent element receives an empty context, so Camunda creates a new agent instance every time the element is entered, and no memory carries over.
 
-Where the context is stored depends on the memory storage type. With **In Process** storage, the full context lives in process variables. With **Camunda Document Storage**, the context is stored as a document and the process variable holds only a reference and metadata. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for configuration details.
+Where the context is stored depends on the memory storage type. With **In Process** storage, the full context lives in process variables. With **Camunda Document Storage**, the context is stored as a document and the process variable holds only a reference and metadata.
 
-For production use cases, use **Camunda Document Storage**: it avoids the [variable size limitations](/components/concepts/variables.md) that long conversations can hit with in-process storage. Use **In Process** storage for testing and debugging, since it keeps the full context directly visible in Operate.
+:::tip
+For production use cases, use **Camunda Document Storage**: it avoids the [variable size limitations](/components/concepts/variables.md) that long conversations can hit with in-process storage. Use **In Process** storage for testing and debugging, since it keeps the full context directly visible in Operate. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
+:::
 
 ### Data available in Operate
 
