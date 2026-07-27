@@ -67,7 +67,7 @@ export const fundamentalCards_monitoring = [
   {
     link: "../detect-off-rail-agents/",
     title: "Detect off-rail agents",
-    image: IconOperate,
+    image: IconAoAgentImg,
     description: "Identify a stuck or looping AI agent before it fails.",
   },
   {
