@@ -24,6 +24,10 @@ In this guide, you will:
 
 After completing this guide, you will be able to analyze AI agent executions in Optimize and build dashboards that track usage and performance trends.
 
+:::important Agentic control plane in Optimize
+The [agentic control plane](/components/optimize/userguide/agentic-control-plane.md) already provides standard metrics for AI-agent-powered processes without additional setup. Use this guide to learn how to create custom metrics, thresholds, breakdowns, or reports grouped by process variables.
+:::
+
 ## Prerequisites
 
 - You have access to [Optimize](/components/optimize/what-is-optimize.md).
@@ -35,7 +39,7 @@ This guide is a follow-up to [build your first AI agent](/guides/getting-started
 
 ## Step 1: Make your data available
 
-To make data available to Optimize, make sure it's scoped at the process level. If it's scoped to a lower level, for example, within a connector or tool-execution scope, extract it into process variables.
+Optimize's report builder can only aggregate over process variables, so any custom report you build yourself needs its data available as one. To make data available to Optimize, make sure it's scoped at the process level. If it's scoped to a lower level, for example, within a connector or tool-execution scope, extract it into process variables.
 
 :::important
 Optimize can only use variable data at the **process level**.
