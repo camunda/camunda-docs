@@ -57,6 +57,65 @@ tenanta:
 
 <!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. --->
 
+## Amazon OpenSearch Service storage
+
+When secondary storage runs on Amazon OpenSearch Service, each physical tenant can authenticate with its own credentials. The connection settings `url`, `username`, `password`, and `index-prefix` are all overridable per physical tenant, supporting both a shared domain and dedicated domains per tenant.
+
+### Basic authentication with fine-grained access control
+
+Enable [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html) (FGAC) with the internal user database on the domain, then create one internal user per tenant and map it to an OpenSearch security role whose index permissions are restricted to that tenant's index pattern. All permission administration happens on the AWS side; Camunda only supplies the per-tenant credentials:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: opensearch
+      opensearch:
+        url: https://my-domain.eu-central-1.es.amazonaws.com
+        username: camunda-default
+        password: default-secret
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          opensearch:
+            username: tenant-a-user
+            password: tenant-a-secret
+            index-prefix: tenant-a
+```
+
+A tenant can also point at a dedicated domain (including one in a different AWS account) by overriding `url` as well:
+
+```yaml
+camunda:
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          opensearch:
+            url: https://tenant-a-domain.eu-central-1.es.amazonaws.com
+            username: tenant-a-user
+            password: tenant-a-secret
+            index-prefix: tenant-a
+```
+
+### IAM authentication (request signing)
+
+Alternatively, set `aws-enabled: true` to sign requests with AWS Signature Version 4 instead of basic authentication. Credentials are resolved from the AWS SDK default provider chain — on EKS this is the pod's IAM role via IRSA, and the region is taken from the environment (for example `AWS_REGION`):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: opensearch
+      opensearch:
+        url: https://my-domain.eu-central-1.es.amazonaws.com
+        aws-enabled: true
+```
+
+With request signing, the AWS identity is also the principal that OpenSearch authorizes: all physical tenants share the pod's single IAM role, and tenant separation is provided by per-tenant index prefixes together with the domain's access policy or FGAC role mapping for that role. Per-tenant IAM identities are not supported; if tenants require authentication isolation from each other, use fine-grained access control with per-tenant internal users as described above.
+
 ## Document Store storage
 
 Store documents globally with per-tenant subpaths, or use dedicated stores per tenant.
