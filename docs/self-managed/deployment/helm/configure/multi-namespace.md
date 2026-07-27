@@ -9,11 +9,19 @@ A multi-namespace deployment runs Camunda Hub and Management Identity in a Hub n
 
 This configuration supports Camunda 8.10. Camunda Hub contains Web Modeler and Console. Console isn't a separate deployment in 8.10.
 
+The chart models this as a deployment topology instead of treating namespace placement as component configuration:
+
+- `combined` is the default and preserves the existing single-release, single-namespace behavior.
+- `hub` deploys the Hub plane and describes one or more remote Orchestration Clusters.
+- `orchestration` deploys one workload plane and consumes a Hub-plane connection.
+
+This contract separates the relationship between releases from the umbrella chart packaging. The design is intended to remain usable if Hub and orchestration are published as separate charts in the future.
+
 ## Before you begin
 
 Prepare the following resources:
 
-- An external Keycloak instance that both namespaces can reach. The example uses Management Identity to register clients in Keycloak.
+- An OpenID Connect (OIDC) provider that both namespaces can reach. The example uses an external Keycloak instance and Management Identity-managed client registration.
 - Separate public hostnames and TLS certificates for the Hub and orchestration namespaces.
 - External PostgreSQL databases for Management Identity and Camunda Hub.
 - A supported secondary storage backend for the Orchestration Cluster and Optimize.
@@ -45,7 +53,7 @@ Restrict policies to the listed workloads and namespaces instead of allowing unr
 
 ## Manage secrets across namespaces
 
-Kubernetes Secrets are namespace-scoped. Create the client secrets used by both central Management Identity and a remote workload in both namespaces with identical values.
+Kubernetes Secrets are namespace-scoped. When Management Identity administers an external Keycloak, create each workload client secret in both namespaces with identical values. With another OIDC provider, Management Identity doesn't consume the workload client secrets, so project them only into the orchestration namespace.
 
 The following example uses these Secrets:
 
@@ -67,7 +75,7 @@ Use an external secret manager to synchronize the values. Don't store production
 
 ## Configure the Hub namespace
 
-Create `hub-values.yaml`. The `alwaysRegister` values instruct central Management Identity to register clients for workloads deployed by another Helm release. The `clusters` entry connects Camunda Hub to the remote Orchestration Cluster.
+Create `hub-values.yaml`. The cluster record is the source for both Management Identity presets and Camunda Hub inventory. Hub mode suppresses the umbrella chart's default Orchestration, Optimize, and Connectors workloads, so you don't configure disabled components in this release.
 
 ```yaml
 global:
@@ -81,6 +89,39 @@ global:
   security:
     authentication:
       method: oidc
+  topology:
+    mode: hub
+    clusters:
+      - id: orchestration
+        name: Orchestration
+        namespace: orchestration
+        releaseName: camunda
+        host: orchestration.example.com
+        # Match this to the Camunda version deployed by your selected chart.
+        version: "8.10.x"
+        components:
+          orchestration:
+            enabled: true
+            clientId: orchestration
+            audience: orchestration-api
+            redirectUrl: https://orchestration.example.com/orchestration
+            secret:
+              existingSecret: orchestration-oidc
+              existingSecretKey: client-secret
+          optimize:
+            enabled: true
+            clientId: optimize
+            audience: optimize-api
+            redirectUrl: https://orchestration.example.com/optimize
+            secret:
+              existingSecret: optimize-oidc
+              existingSecretKey: client-secret
+          connectors:
+            enabled: true
+            clientId: connectors
+            secret:
+              existingSecret: connectors-oidc
+              existingSecretKey: client-secret
   identity:
     keycloak:
       url:
@@ -104,16 +145,6 @@ global:
       jwksUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/certs
       camundaHub:
         redirectUrl: https://hub.example.com/modeler
-      optimize:
-        alwaysRegister: true
-        redirectUrl: https://orchestration.example.com/optimize
-        secret:
-          existingSecret: optimize-oidc
-          existingSecretKey: client-secret
-      orchestration:
-        alwaysRegister: true
-      connectors:
-        alwaysRegister: true
 
 identity:
   enabled: true
@@ -152,79 +183,15 @@ camundaHub:
       secret:
         existingSecret: hub-pusher
         existingSecretKey: app-secret
-    clusters:
-      - id: orchestration
-        name: Orchestration
-        # Match this to the Camunda version deployed by your selected chart.
-        version: "8.10.x"
-        authentication: BEARER_TOKEN
-        url:
-          grpc: grpc://camunda-zeebe-gateway.orchestration.svc.cluster.local:26500
-          rest: http://camunda-zeebe-gateway.orchestration.svc.cluster.local:8080
-          web-app: https://orchestration.example.com/orchestration
-        components:
-          - name: Optimize
-            type: optimize
-            version: "8.10.x"
-            urls:
-              webapp: https://orchestration.example.com/optimize
-              readiness: http://camunda-optimize.orchestration.svc.cluster.local:80/optimize/api/readyz
-          - name: Connectors
-            type: connectors
-            version: "8.10.x"
-            urls:
-              rest: http://camunda-connectors.orchestration.svc.cluster.local:8080/connectors
-              readiness: http://camunda-connectors.orchestration.svc.cluster.local:8080/connectors/actuator/health/readiness
-          - name: Operate
-            type: operate
-            version: "8.10.x"
-            urls:
-              webapp: https://orchestration.example.com/orchestration/operate
-              readiness: http://camunda-zeebe.orchestration.svc.cluster.local:9600/orchestration/actuator/health/readiness
-          - name: Tasklist
-            type: tasklist
-            version: "8.10.x"
-            urls:
-              webapp: https://orchestration.example.com/orchestration/tasklist
-              readiness: http://camunda-zeebe.orchestration.svc.cluster.local:9600/orchestration/actuator/health/readiness
-          - name: Orchestration Admin
-            type: admin
-            version: "8.10.x"
-            urls:
-              webapp: https://orchestration.example.com/orchestration/admin
-              readiness: http://camunda-zeebe.orchestration.svc.cluster.local:9600/orchestration/actuator/health/readiness
-          - name: Orchestration Cluster
-            type: orchestration
-            version: "8.10.x"
-            urls:
-              grpc: grpc://camunda-zeebe-gateway.orchestration.svc.cluster.local:26500
-              rest: http://camunda-zeebe-gateway.orchestration.svc.cluster.local:8080
-              readiness: http://camunda-zeebe.orchestration.svc.cluster.local:9600/orchestration/actuator/health/readiness
-
-orchestration:
-  enabled: false
-  security:
-    authentication:
-      oidc:
-        redirectUrl: https://orchestration.example.com/orchestration
-        secret:
-          existingSecret: orchestration-oidc
-          existingSecretKey: client-secret
-
-connectors:
-  enabled: false
-  security:
-    authentication:
-      oidc:
-        secret:
-          existingSecret: connectors-oidc
-          existingSecretKey: client-secret
-
-optimize:
-  enabled: false
 ```
 
-Adapt the Keycloak endpoints and client configuration for your environment. See [external Keycloak](./authentication-and-authorization/external-keycloak.md). If you use another OIDC provider, create and manage the clients in that provider instead of using `alwaysRegister`; see [external OIDC provider](./authentication-and-authorization/external-oidc-provider.md).
+Adapt the Keycloak endpoints and client configuration for your environment. See [external Keycloak](./authentication-and-authorization/external-keycloak.md).
+
+Management Identity can administer clients only in an external Keycloak instance when you provide Keycloak administrator credentials. For Microsoft Entra ID or a generic OIDC provider, first complete the provider setup, including Management Identity's confidential client, initial administrator claims, Hub clients, mapping rules, and each workload client. Then add the matching client IDs and audiences to the topology records. Management Identity initializes only its permission and role model from those records. See [external OIDC provider](./authentication-and-authorization/external-oidc-provider.md).
+
+Identity preset initialization is additive. Removing or renaming a topology entry doesn't delete the corresponding clients, resource servers, permissions, or roles from Keycloak or Management Identity. Remove obsolete resources explicitly after the related workload is retired. Existing Keycloak users also don't automatically receive roles added by a later topology update; assign the canonical roles or configured per-cluster roles through your normal access-management process.
+
+By default, every cluster contributes permissions to the canonical `Orchestration` and `Optimize` roles. Assigning either role grants access to every declared cluster of that component type. Set `components.<component>.roleName` to a unique value in each Hub topology entry when users must be authorized per cluster.
 
 Install the Hub release:
 
@@ -252,6 +219,36 @@ global:
   security:
     authentication:
       method: oidc
+  topology:
+    mode: orchestration
+    hub:
+      namespace: hub
+      releaseName: camunda
+    cluster:
+      id: orchestration
+      components:
+        orchestration:
+          enabled: true
+          clientId: orchestration
+          audience: orchestration-api
+          redirectUrl: https://orchestration.example.com/orchestration
+          secret:
+            existingSecret: orchestration-oidc
+            existingSecretKey: client-secret
+        optimize:
+          enabled: true
+          clientId: optimize
+          audience: optimize-api
+          redirectUrl: https://orchestration.example.com/optimize
+          secret:
+            existingSecret: optimize-oidc
+            existingSecretKey: client-secret
+        connectors:
+          enabled: true
+          clientId: connectors
+          secret:
+            existingSecret: connectors-oidc
+            existingSecretKey: client-secret
   identity:
     service:
       url: http://camunda-identity.hub.svc.cluster.local:80/identity
@@ -263,17 +260,6 @@ global:
       authUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/auth
       tokenUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/token
       jwksUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/certs
-      optimize:
-        redirectUrl: https://orchestration.example.com/optimize
-        secret:
-          existingSecret: optimize-oidc
-          existingSecretKey: client-secret
-
-identity:
-  enabled: false
-
-camundaHub:
-  enabled: false
 
 orchestration:
   enabled: true
@@ -286,25 +272,11 @@ orchestration:
       tls:
         enabled: true
         secretName: orchestration-grpc-tls
-  security:
-    authentication:
-      oidc:
-        redirectUrl: https://orchestration.example.com/orchestration
-        secret:
-          existingSecret: orchestration-oidc
-          existingSecretKey: client-secret
 
 connectors:
-  enabled: true
-  security:
-    authentication:
-      oidc:
-        secret:
-          existingSecret: connectors-oidc
-          existingSecretKey: client-secret
+  contextPath: /connectors
 
 optimize:
-  enabled: true
   contextPath: /optimize
 ```
 
@@ -322,6 +294,42 @@ helm install camunda camunda/camunda-platform \
 
 ## Add another Orchestration Cluster
 
-The `alwaysRegister` values register one set of Orchestration Cluster, Connectors, and Optimize clients. They don't create a separate client set for every orchestration namespace.
+Add another entry to `global.topology.clusters` in the management release and install another orchestration release with the matching entry under `global.topology.cluster`. Use unique client IDs, audiences, and secrets for isolation.
 
-To add another Orchestration Cluster, provision its clients and redirect URLs directly in your OIDC provider. Configure the additional Helm release with those client IDs and secrets, then add its endpoint to `camundaHub.restapi.clusters`. Use unique credentials when you need security isolation between clusters.
+For Keycloak, Management Identity creates every declared client. For another OIDC provider, provision the clients before applying the Helm releases.
+
+Generated internal service URLs use Kubernetes service DNS, so this pattern supports multiple namespaces in the same Kubernetes cluster. For workloads in another Kubernetes cluster, provide equivalent cross-cluster DNS and routing or configure explicit `grpcUrl`, `restUrl`, `readinessUrl`, `operateUrl`, `tasklistUrl`, `adminUrl`, and component web application URL overrides. Set `global.topology.management.identityServiceUrl` in an orchestration release when the derived Management Identity service URL isn't reachable.
+
+## Deploy with GitOps
+
+The topology values are deterministic and don't require cluster discovery or imperative deployment tooling. Store the management and orchestration values with their respective Helm release definitions.
+
+Apply resources in this order:
+
+1. Namespace-local Secret projections and TLS certificates.
+2. The management release.
+3. One or more orchestration releases.
+
+For Flux, make each orchestration `HelmRelease` depend on the management release:
+
+```yaml
+spec:
+  dependsOn:
+    # This is the Flux HelmRelease metadata.name, not Helm's releaseName.
+    - name: <management-helmrelease-name>
+      namespace: management-and-modeling
+```
+
+For Argo CD, use sync waves or separate Applications so the management release becomes healthy before orchestration releases are synchronized.
+
+For Keycloak-managed registration, client Secret names can be identical across namespaces, but Kubernetes Secrets remain namespace-scoped. Project both copies from the same external secret source to prevent drift.
+
+## Existing configurations
+
+The default `global.topology.mode: combined` preserves the existing single-release and single-namespace behavior.
+
+Existing multi-namespace configurations that use `global.identity.auth.*.alwaysRegister`, component authentication values under disabled components, or manual `camundaHub.restapi.clusters` remain supported. This release doesn't deprecate or remove those values.
+
+In management mode, topology values replace the legacy Identity registration presets. An explicitly configured `camundaHub.restapi.clusters` or legacy `webModeler.restapi.clusters` list still takes precedence over generated Hub inventory.
+
+Any future removal must retain compatibility for at least one minor release, emit GitOps-visible deprecation warnings with migration guidance, and occur only in the next major chart release according to the Helm chart deprecation policy.
