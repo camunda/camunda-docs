@@ -14,8 +14,6 @@ An agent can go off-rail without failing outright, for example, by getting stuck
 
 In this guide, you will learn how to read an agent instance's [state and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) to catch this early, and how to interpret limit proximity warnings.
 
-You can inspect running agent process instances in [Operate](/components/operate/operate-introduction.md); see [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md). For more context and understanding, see the [agent state model and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) guide.
-
 ## Identify a stuck or looping agent
 
 No single health indicator proves that an agent is stuck. Look at the combination of state, usage metrics, and duration for the agent instance:
@@ -25,7 +23,9 @@ No single health indicator proves that an agent is stuck. Look at the combinatio
 - **Token consumption grows steadily loop after loop.** Since each loop appends the previous reasoning and tool results to the conversation, a steadily rising token count with no final response is a sign the agent is accumulating context without converging.
 - **Execution duration is disproportionate to the task.** The total time the agent instance has been active is much longer than comparable runs of the same agent, even though its state keeps changing, which suggests the agent is caught in a longer-than-expected cycle of loops rather than a single stuck call.
 
+:::note
 An agent that calls the same tool many times can still be legitimately working through a multi-step task. Treat these indicators together, not individually: an agent instance with a stalled state, a climbing tool call count, and a duration that keeps growing without settling is the strongest signal that it's going off-rail.
+:::
 
 ## Interpret limit proximity warnings
 

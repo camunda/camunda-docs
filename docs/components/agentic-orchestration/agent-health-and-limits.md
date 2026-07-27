@@ -9,7 +9,9 @@ Understand the agent state model, state transitions, and the usage metrics Camun
 
 ## About
 
-Every [agent instance](/components/agentic-orchestration/ai-agents.md) exposes a defined execution state and a set of usage metrics as it runs. Together, they show whether the agent is progressing normally and how close it is to the limits you configured. This page describes the state model, what triggers each transition, and the usage metrics that back the agent's limits.
+Every [agent instance](/components/agentic-orchestration/ai-agents.md) exposes a defined execution state and a set of usage metrics as it runs. Together, they show whether the agent is progressing normally and how close it is to the limits you configured.
+
+In this guide, you will understand the state model, what triggers each transition, and the usage metrics that back the agent's limits.
 
 For guidance on using these signals to catch an agent going off-rail, see [detect off-rail agents](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md).
 
