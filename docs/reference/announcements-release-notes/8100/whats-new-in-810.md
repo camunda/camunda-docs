@@ -40,9 +40,9 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 :::
 
-## Web Modeler data migration
+## Web Modeler data
 
-Camunda 8.10 alpha 5 introduces three changes related to your Web Modeler data:
+At the end of August 2026, Camunda 8.10 is introducing three changes related to your Web Modeler data:
 
 - **[Organizational structure](#organizational-structure):** Enforces a stricter, more scalable file resource hierarchy.
 - **[Data migration](#migration):** Aligns your existing data with the new structure.
@@ -126,7 +126,7 @@ Review any automation that depends on where files or folders sit before the migr
 
 ### Process application versioning
 
-In addition to the Web Modeler data migration, 8.10 alpha 5 also brings an improved versioning model for process applications:
+In addition to the Web Modeler data migration, 8.10 brings an improved versioning model for process applications:
 
 - File-level versions — process applications can be versioned as a bundle, as before, but now also at the single-file level.
 - Auto-save for all files, plus file-level version history for every file.
