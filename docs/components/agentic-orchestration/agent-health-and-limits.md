@@ -63,8 +63,8 @@ Camunda tracks how long the agent instance has been active, both across its full
 
 ### Model call limit
 
-The **Maximum model calls** setting is the primary limit against runaway loops and unexpected cost. It limits how many times an agent instance can call the model, and defaults to `10` if you don't configure it. Camunda tracks model calls made against this configured limit, so you can see how close an agent instance is to it before it's reached. For guidance on acting on this, see [interpret limit proximity warnings](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md#interpret-limit-proximity-warnings).
+The **Maximum model calls** setting is the primary limit against runaway loops and unexpected cost. It limits how many times an agent instance can call the model, and defaults to 10 if you don't configure it.
 
-When an agent instance reaches its configured limit, the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error. You can catch this error with an error boundary event and an [error expression](/components/connectors/use-connectors/index.md#error-expression) to handle it explicitly, for example by routing to a human reviewer instead of failing the process instance.
+Camunda tracks model calls made against this configured limit, so you can see how close an agent instance is to it before it's reached. When an agent instance reaches its configured limit, the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error.
 
-See the **Limits** section of the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#limits) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md#limits) connector documentation to configure this setting, and [error handling](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling) for the full list of error codes.
+For guidance on interpreting proximity to this limit, handling the error, and configuring the setting, see [interpret limit proximity warnings](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md#interpret-limit-proximity-warnings).
