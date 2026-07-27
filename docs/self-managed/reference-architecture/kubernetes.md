@@ -160,6 +160,7 @@ Console, Optimize, and Web Modeler rely on Management Identity (formerly Identit
 
 For configuration details, see:
 
+- [Configure a multi-namespace Helm deployment](/self-managed/deployment/helm/configure/multi-namespace.md)
 - [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
 - [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
 
