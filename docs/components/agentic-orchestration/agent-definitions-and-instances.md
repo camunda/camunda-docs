@@ -79,6 +79,8 @@ You control this behavior through the agent's memory configuration:
 
 Where the context is stored depends on the memory storage type. With **In Process** storage, the full context lives in process variables. With **Camunda Document Storage**, the context is stored as a document and the process variable holds only a reference and metadata. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for configuration details.
 
+For production use cases, use **Camunda Document Storage**: it avoids the [variable size limitations](/components/concepts/variables.md) that long conversations can hit with in-process storage. Use **In Process** storage for testing and debugging, since it keeps the full context directly visible in Operate.
+
 ### Data available in Operate
 
 Operate surfaces agent instance data so you can monitor an agent as part of its process instance. See [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md) for a hands-on guide to inspecting this data.
@@ -92,6 +94,7 @@ The following data is available for an agent instance in Operate:
 | Usage metrics        | Token consumption, tool call count, and model call count. Model calls are shown against the configured limit, so you can see how close the agent is to its limit.                                                    |
 | Model                | The LLM the agent is running against.                                                                                                                                                                                |
 | System prompt        | The system prompt the agent was configured with.                                                                                                                                                                     |
+| Tool definitions     | The [tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) available to the agent, resolved from the agent's ad-hoc sub-process.                                           |
 | Conversation history | The decision trail of the agent execution: user prompts, assistant messages, the tools the agent selected with its reasoning, and tool calls with their inputs and results.                                          |
 
 #### Agent states

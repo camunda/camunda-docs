@@ -175,7 +175,7 @@ An operation that affects the entire [Orchestration Cluster](#orchestration-clus
 
 The native [AI agent](#ai-agent) type. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
 
-It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), which offers two implementations: the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) and the [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
 
 :::note
 This is different from an [external agent](#external-agent), which is the non-native AI agent type.
