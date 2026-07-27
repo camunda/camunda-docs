@@ -60,7 +60,9 @@ Duplicating the same element template directly across several process definition
 
 ## Agent instances
 
-An agent instance is a specific runtime execution of an agent definition that can be created for an active agent element. It is identified by an agent instance key, which the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) uses to represent the agent's state — conversation, tool calls, and reasoning — for visibility and explainability in tools like Operate. This representation is not the source of truth for the agent's runtime execution; how an agent's actual state is stored depends on its type, as described in [Agent context and memory](#agent-context-and-memory).
+An agent instance is a specific runtime execution of an agent definition that can be created for an active agent element. It is identified by an agent instance key, which the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) uses to represent the agent's state, including conversation, tool calls, and reasoning, for visibility and explainability in tools like Operate.
+
+This representation is not the source of truth for the agent's runtime execution; how an agent's actual state is stored depends on its type, as described in [Agent context and memory](#agent-context-and-memory).
 
 You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
