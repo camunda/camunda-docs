@@ -102,7 +102,7 @@ camunda:
 
 ### IAM authentication (request signing)
 
-Alternatively, set `aws-enabled: true` to sign requests with AWS Signature Version 4 instead of basic authentication. Credentials are resolved from the AWS SDK default provider chain — on EKS this is the pod's IAM role via IRSA, and the region is taken from the environment (for example `AWS_REGION`):
+Alternatively, set `aws-enabled: true` to sign requests with AWS Signature Version 4 instead of Basic authentication. Credentials are resolved from the AWS SDK default provider chain — on EKS this is the pod's IAM role via IRSA, and the region is taken from the environment (for example `AWS_REGION`):
 
 ```yaml
 camunda:
@@ -145,7 +145,9 @@ camunda:
 For this to authenticate correctly, two conditions must hold:
 
 - **Every instance must authorize the pod's IAM role**: attach an IAM policy to the role allowing `es:ESHttp*` on each instance's ARN, and allow the role in each instance's access policy (or map the role ARN in its fine-grained access control configuration). This also works for an instance in a different AWS account, granted through that instance's resource-based access policy — the signing identity is still the single pod role.
-- **All instances must be in the same AWS region as the pod**: the request signature is scoped to the region resolved from the pod's environment (for example `AWS_REGION`), not derived from each endpoint. An instance in a different region rejects the signature.
+  :::warning
+  **All instances must be in the same AWS region as the pod.** The request signature is scoped to the region resolved from the pod's environment (for example `AWS_REGION`), not derived from each endpoint. An instance in a different region rejects the signature with an authentication error.
+  :::
 
 ## Document Store storage
 
