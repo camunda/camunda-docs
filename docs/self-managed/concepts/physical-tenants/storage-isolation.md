@@ -114,7 +114,38 @@ camunda:
         aws-enabled: true
 ```
 
-With request signing, the AWS identity is also the principal that OpenSearch authorizes: all physical tenants share the pod's single IAM role, and tenant separation is provided by per-tenant index prefixes together with the domain's access policy or FGAC role mapping for that role. Per-tenant IAM identities are not supported; if tenants require authentication isolation from each other, use fine-grained access control with per-tenant internal users as described above.
+With request signing, the AWS identity is also the principal that OpenSearch authorizes: all physical tenants share the pod's single IAM role, and tenant separation is provided by per-tenant index prefixes together with the instance's access policy or FGAC role mapping for that role. Per-tenant IAM identities are not supported; if tenants require authentication isolation from each other, use fine-grained access control with per-tenant internal users as described above.
+
+IAM authentication also works with a dedicated OpenSearch instance per tenant. Camunda creates a separate client per tenant, each signing requests against its own endpoint with the same pod identity — `aws-enabled` is inherited from the root configuration, so tenants only override their `url`:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: opensearch
+      opensearch:
+        url: https://default-instance.eu-central-1.es.amazonaws.com
+        aws-enabled: true
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          opensearch:
+            url: https://tenant-a-instance.eu-central-1.es.amazonaws.com
+            index-prefix: tenant-a
+    tenantb:
+      data:
+        secondary-storage:
+          opensearch:
+            url: https://tenant-b-instance.eu-central-1.es.amazonaws.com
+            index-prefix: tenant-b
+```
+
+For this to authenticate correctly, two conditions must hold:
+
+- **Every instance must authorize the pod's IAM role**: attach an IAM policy to the role allowing `es:ESHttp*` on each instance's ARN, and allow the role in each instance's access policy (or map the role ARN in its fine-grained access control configuration). This also works for an instance in a different AWS account, granted through that instance's resource-based access policy — the signing identity is still the single pod role.
+- **All instances must be in the same AWS region as the pod**: the request signature is scoped to the region resolved from the pod's environment (for example `AWS_REGION`), not derived from each endpoint. An instance in a different region rejects the signature.
 
 ## Document Store storage
 
