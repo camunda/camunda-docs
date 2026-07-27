@@ -33,7 +33,7 @@ Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14 and adds support for 
 - Aurora PostgreSQL 14 has reached the end of standard support on AWS.
 - Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.
 
-<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -68,7 +68,7 @@ Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
 - The bundled H2 driver in Camunda images is on the 2.4 line.
 - H2 remains supported for development, testing, and evaluation only. Production use is not recommended.
 
-<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -86,7 +86,7 @@ Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are
 - SQL Server 2019 has reached the end of mainstream support from Microsoft.
 - Upgrade your SQL Server instance to a supported version before moving to Camunda 8.10.
 
-<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -118,7 +118,7 @@ Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Support
 
 Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective with the October 2025 Release Update (RU 23.26). The internal version continues to use the 23.x code line; the transition requires no database upgrade or application recertification. Camunda 8.10's supported Oracle versions are 19c and 26ai.
 
-<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -136,7 +136,7 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 - PostgreSQL 14 reached the end of its standard support window.
 - Upgrade your PostgreSQL instance to a supported version before moving to Camunda 8.10.
 
-<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -151,7 +151,7 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 
 Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11, 11.4, 11.8, and 12.3.
 
-<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -166,7 +166,7 @@ Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11
 
 Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 9.7.
 
-<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -390,7 +390,7 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 
 Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
 
-**Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md).
+**Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/manage/upgrade/helm-v3-to-v4.md) and [Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md).
 
 </div>
 </div>

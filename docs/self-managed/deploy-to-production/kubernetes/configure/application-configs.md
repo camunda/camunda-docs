@@ -119,7 +119,7 @@ The `helm template` command can show you the application's default configuration
 - Use this output as a **reference** to discover the right keys and defaults.
 - Only copy the full content into `<componentName>.configuration` if you intentionally want to **replace** the default config (advanced).
 
-Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](self-managed/deployment/helm/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
+Keep the original `values.yaml` unchanged and maintain a separate file with your custom settings. For details, see [Creating your own values files](/self-managed/deploy-to-production/kubernetes/configure/chart-parameters.md#creating-your-own-values-files). To generate the default configuration, replace `<your-release-name>` with your release name and run:
 
 ```bash
 helm template <your-release-name> \
@@ -701,7 +701,7 @@ For every component where you use `extraConfiguration`, convert each map entry t
      --show-only templates/orchestration/configmap.yaml
    ```
 
-5. **Proceed with the upgrade** using the updated values file. See the [8.8 to 8.9 upgrade guide](/self-managed/upgrade/helm/880-to-890.md) for additional steps.
+5. **Proceed with the upgrade** using the updated values file. See the [Helm upgrade guide](/self-managed/manage/upgrade/helm/index.md) for additional steps.
 
 :::caution
 The old map format is **not supported** in Camunda 8.9. If you upgrade without converting to the list format, Helm will fail during template rendering.

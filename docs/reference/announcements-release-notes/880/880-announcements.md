@@ -658,7 +658,7 @@ Do not reuse the same prefix for:
 
 If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), ILM/ISM policies and wildcard patterns such as `custom*` can target more indices than intended, which may lead to unexpected data loss.
 
-For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](../../../self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md).
 
 </div>
 </div>
@@ -889,7 +889,7 @@ With the Camunda 8.8 release, the default ID token claim that Web Modeler uses t
 With the Camunda 8.8 release, the Camunda Helm charts are updated to use the new Bitnami Docker repository.
 
 :::info
-See [Bitnami Docker repository migration](/self-managed/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
+See [Bitnami Docker repository migration](/self-managed/manage/upgrade/helm/index.md#bitnami-docker-repository-migration) for migration details.
 :::
 
 </div>
@@ -1089,7 +1089,7 @@ It is superseded by built-in [tenant management](/versioned_docs/version-8.8/com
 
 With the Camunda 8.8 release, user storage in Elasticsearch/OpenSearch for Operate or Tasklist is no longer supported.
 
-You must transition to using [Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
+You must transition to using [Basic authentication](/self-managed/manage/identity-and-access/authentication-to-orchestration-cluster.md#basic-authentication) and recreate users in Orchestration Cluster Identity.
 
 </div>
 </div>
@@ -1104,7 +1104,7 @@ You must transition to using [Basic authentication](/self-managed/concepts/authe
 
 With the Camunda 8.8 release, LDAP authentication for Operate or Tasklist is no longer supported.
 
-You must transition to use [OIDC or Basic authentication](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md).
+You must transition to use [OIDC or Basic authentication](/self-managed/manage/identity-and-access/authentication-to-orchestration-cluster.md).
 
 </div>
 </div>

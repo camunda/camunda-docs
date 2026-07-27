@@ -112,5 +112,5 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS configuration](/self-managed/deploy-to-production/manual/rdbms/configuration.md)
-- [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
-- [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
+- [RDBMS Helm configuration](/self-managed/manage/databases/relational-database/rdbms.md)

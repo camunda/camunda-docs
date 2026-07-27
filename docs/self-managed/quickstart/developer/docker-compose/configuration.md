@@ -85,7 +85,7 @@ The following components are available in the full configuration only:
 ## Authentication
 
 :::note
-By default, the lightweight configuration uses [Basic authentication for the Orchestration Cluster](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/concepts/authentication/authentication-to-management-components.md).
+By default, the lightweight configuration uses [Basic authentication for the Orchestration Cluster](/self-managed/manage/identity-and-access/authentication-to-orchestration-cluster.md#basic-authentication). The full configuration uses Keycloak for [Management Identity authentication](/self-managed/manage/identity-and-access/authentication-to-management-components.md).
 :::
 
 ### Lightweight configuration

@@ -30,7 +30,7 @@ Before proceeding with the setup, ensure the following requirements are met:
   - **PostgreSQL-compatible database**: Required for Web Modeler persistence. This guide uses Amazon Aurora PostgreSQL as an example. For AWS-specific steps, see [Aurora PostgreSQL module setup](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md#postgresql-module-setup).
   - **Secondary storage backend for the Orchestration Cluster**: Choose one option:
     - **Non-SQL**: Elasticsearch/OpenSearch (this guide uses Amazon OpenSearch as the example). For AWS-specific steps, see [OpenSearch](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/eksctl.md#4-opensearch-domain).
-    - **RDBMS**: See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and the [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md).
+    - **RDBMS**: See [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md) and the [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md).
   - **Identity Provider (IdP)**: An OIDC-compatible identity provider for authentication. See [Authentication and authorization](/self-managed/deploy-to-production/kubernetes/authentication/index.md) for supported options.
 
   :::tip No managed services available?
@@ -162,7 +162,7 @@ To allow for easier testing, the Camunda Helm chart provides databases as an ext
 This guide keeps database configuration in one flow and provides two options:
 
 - **Option A (Non-SQL secondary storage):** Use Elasticsearch or OpenSearch for the Orchestration Cluster secondary storage backend. This path is also required when deploying Optimize.
-- **Option B (RDBMS secondary storage):** Use a relational database as secondary storage for supported components. For this path, follow [Configure RDBMS in Helm chart](/self-managed/deployment/helm/configure/database/rdbms.md) and use the [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md) as a focused walkthrough.
+- **Option B (RDBMS secondary storage):** Use a relational database as secondary storage for supported components. For this path, follow [Configure RDBMS in Helm chart](/self-managed/manage/databases/relational-database/rdbms.md) and use the [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md) as a focused walkthrough.
 
 The examples below use Option A with Amazon OpenSearch for secondary storage, and Amazon Aurora PostgreSQL for Management Identity and Web Modeler.
 
@@ -232,11 +232,11 @@ Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret c
 
 For more information on connecting to external databases, the following guides are available for the Camunda Helm chart:
 
-- [Helm chart database configuration](/self-managed/deployment/helm/configure/database/index.md)
-- [Non-SQL database configuration](/self-managed/deployment/helm/configure/database/non-sql.md)
-- Using an [existing Elasticsearch instance](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md)
-- Using [Amazon OpenSearch service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)
-- [RDBMS configuration](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [Helm chart database configuration](/self-managed/manage/databases/index.md)
+- [Non-SQL database configuration](/self-managed/manage/databases/elasticsearch-opensearch/index.md)
+- Using an [existing Elasticsearch instance](/self-managed/manage/databases/elasticsearch-opensearch/using-external-elasticsearch.md)
+- Using [Amazon OpenSearch service](/self-managed/manage/databases/elasticsearch-opensearch/using-external-opensearch.md)
+- [RDBMS configuration](/self-managed/manage/databases/relational-database/rdbms.md)
 - Using Amazon OpenSearch service [through IRSA](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md#opensearch-module-setup) (only applicable if you are using EKS)
 - Running Web Modeler on [Amazon Aurora PostgreSQL](/self-managed/components/hub/configuration/database.md#running-web-modeler-on-amazon-aurora-postgresql)
 
@@ -266,7 +266,7 @@ For more information on configuring ILM policy, refer to the configuration guide
 
 ### Configure backups
 
-In order to configure backups, refer to the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md) for Self-Managed installations.
+In order to configure backups, refer to the [backup guide](/self-managed/manage/back-up-and-restore/index.md) for Self-Managed installations.
 
 ## Operational configuration options
 
@@ -394,7 +394,7 @@ camunda:
       numberOfReplicas: 1
 ```
 
-Each replica stores a full copy of the primary shard data, approximately doubling disk usage for those indices. Account for this when sizing your cluster. See [Managing secondary storage: Replicas](/self-managed/concepts/secondary-storage/managing-secondary-storage.md#replicas) for full guidance.
+Each replica stores a full copy of the primary shard data, approximately doubling disk usage for those indices. Account for this when sizing your cluster. See [Managing secondary storage: Replicas](/self-managed/manage/databases/secondary-storage/managing-secondary-storage.md#replicas) for full guidance.
 
 #### Version management
 
@@ -410,7 +410,7 @@ It is best to store secrets in an external secret manager such as [Vault by Hash
 
 #### Upgrades
 
-When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/upgrade/components/index.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
+When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/manage/upgrade/components/index.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
 
 The following is an example configuration for the Orchestration Cluster to create persistent storage:
 
@@ -725,7 +725,7 @@ elasticsearch:
 
 ### Upgrade and maintenance
 
-- Make sure to follow our [upgrade guide](/self-managed/upgrade/helm/index.md) when performing the upgrade on your Helm chart.
+- Make sure to follow our [upgrade guide](/self-managed/manage/upgrade/helm/index.md) when performing the upgrade on your Helm chart.
 - Ensure your Kubernetes secrets are created before installing or upgrading the Helm chart. For details, see the [secret management guide](/self-managed/deploy-to-production/kubernetes/configure/secret-management.md).
 
 ### Adding more orchestration clusters

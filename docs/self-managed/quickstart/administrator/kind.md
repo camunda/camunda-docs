@@ -45,7 +45,7 @@ mkcert requires [NSS](https://github.com/FiloSottile/mkcert#supported-root-store
 
 ## Secondary storage options
 
-In addition to the deployment mode, you must choose a [secondary storage](/self-managed/concepts/secondary-storage/index.md) backend. The `SECONDARY_STORAGE` environment variable controls which backend the deployment scripts use. You must set it explicitly before running any deployment command — there is no default.
+In addition to the deployment mode, you must choose a [secondary storage](/self-managed/manage/databases/secondary-storage/index.md) backend. The `SECONDARY_STORAGE` environment variable controls which backend the deployment scripts use. You must set it explicitly before running any deployment command — there is no default.
 
 For production backend trade-offs between Elasticsearch/OpenSearch and RDBMS, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). This kind guide is for local development and testing only.
 
@@ -54,7 +54,7 @@ For production backend trade-offs between Elasticsearch/OpenSearch and RDBMS, se
 | `elasticsearch` | ECK, CloudNativePG, Keycloak Operator | Full platform including Optimize                            |
 | `postgres`      | CloudNativePG, Keycloak Operator      | All components except Optimize (uses PostgreSQL RDBMS mode) |
 
-The `postgres` option uses [RDBMS secondary storage](/self-managed/concepts/secondary-storage/index.md) (available since 8.9), which replaces Elasticsearch with PostgreSQL for Operate, Tasklist, and the Orchestration Cluster REST API. This results in a lighter deployment with fewer operators and lower resource consumption. Optimize is not available in this mode because it depends on Elasticsearch's aggregation API for analytics — this is an architectural constraint, not a temporary gap.
+The `postgres` option uses [RDBMS secondary storage](/self-managed/manage/databases/secondary-storage/index.md) (available since 8.9), which replaces Elasticsearch with PostgreSQL for Operate, Tasklist, and the Orchestration Cluster REST API. This results in a lighter deployment with fewer operators and lower resource consumption. Optimize is not available in this mode because it depends on Elasticsearch's aggregation API for analytics — this is an architectural constraint, not a temporary gap.
 
 Once you've chosen your backend, export the variable so all subsequent commands pick it up automatically:
 
@@ -89,7 +89,7 @@ By the end of this tutorial, you'll have:
 - A Contour Ingress controller deployed for routing traffic (domain mode only).
 - TLS certificates configured with mkcert (domain mode only).
 - Prerequisite services deployed via Kubernetes operators:
-  - Elasticsearch via ECK (used as secondary storage in this guide; RDBMS is a supported alternative — see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md))
+  - Elasticsearch via ECK (used as secondary storage in this guide; RDBMS is a supported alternative — see [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md))
   - PostgreSQL (CloudNativePG)
   - Keycloak (Keycloak Operator)
 - Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
@@ -261,7 +261,7 @@ Before deploying Camunda, you need to deploy the external services it depends on
 - Keycloak via the [Keycloak Operator](https://www.keycloak.org/operator/installation)
 
 :::note Secondary storage alternatives
-This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+This guide uses Elasticsearch (via ECK) as the secondary storage backend. RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) is a supported alternative for the Orchestration Cluster. To use RDBMS instead, skip the Elasticsearch operator deployment and see [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md).
 :::
 
 Run the operator deployment script, specifying the domain deployment mode:
@@ -294,7 +294,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 </details>
 
 :::note Using RDBMS instead of Elasticsearch
-If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md) guide to configure the Orchestration Cluster components.
 :::
 
 This uses the following Helm values:
@@ -388,7 +388,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/local/kuberne
 </details>
 
 :::note Using RDBMS instead of Elasticsearch
-If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) guide to configure the Orchestration Cluster components.
+If you chose RDBMS as your secondary storage backend, skip the Elasticsearch overlay merge below and follow the [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md) guide to configure the Orchestration Cluster components.
 :::
 
 This uses the following Helm values:

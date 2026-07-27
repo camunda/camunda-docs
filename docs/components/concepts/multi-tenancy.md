@@ -15,7 +15,7 @@ This page describes **logical multi-tenancy**: tenant-ID based isolation within 
 | Self-Managed | Available                                              |
 
 :::note
-Self-Managed also supports stronger isolation models. For a comparison of logical tenants, Physical Tenants, and multi-cluster deployments, see the [Self-Managed multi-tenancy overview](/self-managed/concepts/multi-tenancy/index.md).
+Self-Managed also supports stronger isolation models. For a comparison of logical tenants, Physical Tenants, and multi-cluster deployments, see the [Self-Managed multi-tenancy overview](/self-managed/extend/tenancy/index.md).
 :::
 
 ## How multi-tenancy works

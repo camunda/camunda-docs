@@ -79,7 +79,7 @@ We have extended Camunda's [document handling](/components/document-handling/get
 
 ### Dual-region reference architecture for OpenShift <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md).
+We are excited to announce the addition of the [dual-region reference architecture for Red Hat OpenShift](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/dual-region.md). This new architecture leverages Submariner, a cloud-native technology based on IPSec, to enable inter-cluster communication and service discovery across regions. Learn more about [dual-region operational procedures](/self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure.md).
 
 <!--- https://github.com/camunda/product-hub/issues/2501  --->
 

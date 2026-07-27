@@ -18,5 +18,5 @@ It is enabled when secondary storage is configured as `rdbms`.
 
 Configure the exporter through secondary storage settings:
 
-- [RDBMS secondary storage configuration](/self-managed/concepts/databases/relational-db/configuration.md)
+- [RDBMS secondary storage configuration](/self-managed/manage/databases/relational-database/configuration.md)
 - [Secondary storage properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage)

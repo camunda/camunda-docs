@@ -12,7 +12,7 @@ Zeebe versions can be upgraded:
 Since Zeebe 8.5, upgrades to a newer version can be rolling or offline. Zeebe 8.4 and older don't contain necessary safety checks that make rolling upgrades safe, and we recommend offline upgrades instead to ensure processing behaves correctly.
 
 :::info
-Review the [upgrade guide](/self-managed/upgrade/components/index.md) for general upgrade procedures you must follow and to check for known issues relating to the specific upgrade you are planning.
+Review the [upgrade guide](/self-managed/manage/upgrade/components/index.md) for general upgrade procedures you must follow and to check for known issues relating to the specific upgrade you are planning.
 :::
 
 ## Rolling update
@@ -39,7 +39,7 @@ Gateways are upgraded with the same procedure, upgrading each replica one by one
 
 Clients can be upgraded according to your requirements and environment, for example by simply deploying a new version of your worker applications.
 
-For disaster recovery, you may want to take [backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md) before the upgrade.
+For disaster recovery, you may want to take [backups](/self-managed/manage/back-up-and-restore/index.md) before the upgrade.
 
 If you plan to immediately upgrade again, wait to give all brokers a chance to take new snapshots.
 The snapshot period is five minutes by default but is [configurable via `snapshotPeriod`](../configuration/broker.md#zeebebrokerdata).
@@ -80,7 +80,7 @@ $ curl localhost:8080/v2/topology | jq .brokers[].version && kill %1
 
 To start the rolling update, upgrade the Helm deployment to use a new version of Zeebe.
 Set `$NEW_ZEEBE_VERSION` to the version you want to upgrade to, for example `8.5.2`.
-Remember to read the [upgrade guide](/self-managed/upgrade/components/index.md) to check for known issues.
+Remember to read the [upgrade guide](/self-managed/manage/upgrade/components/index.md) to check for known issues.
 Then, start the rolling update with `helm upgrade`.
 
 ```
@@ -200,7 +200,7 @@ If this persists, you can [force the upgrade](#rolling-update-is-not-completing)
 
 ## Offline upgrade
 
-See the [upgrade guide](/self-managed/upgrade/components/index.md) for specific instructions per Zeebe version.
+See the [upgrade guide](/self-managed/manage/upgrade/components/index.md) for specific instructions per Zeebe version.
 
 To upgrade a Zeebe cluster, take the following steps:
 

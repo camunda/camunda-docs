@@ -130,7 +130,7 @@ Both backend families are supported for production in the right scenarios. Choos
 | Operational model                  | Adds a document-store technology to your stack                                        | Reuses standard relational database tooling and operational practices                                                        |
 | Migration between backend families | Not supported as an in-place production migration                                     | Not supported as an in-place production migration                                                                            |
 
-Use benchmarking and workload validation before choosing a backend for production. For current published PostgreSQL results and caveats, see [RDBMS benchmark results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md). For general capacity planning, see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
+Use benchmarking and workload validation before choosing a backend for production. For current published PostgreSQL results and caveats, see [RDBMS benchmark results](/self-managed/manage/databases/relational-database/rdbms-benchmark-results.md). For general capacity planning, see [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md).
 
 #### Backend-specific guidance
 
@@ -150,9 +150,9 @@ If you deploy Optimize with RDBMS-based secondary storage, plan for both backend
 
 For supported versions and configuration details, see:
 
-- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
-- [Configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)
-- [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
+- [Secondary storage overview](/self-managed/manage/databases/secondary-storage/index.md)
+- [Configure secondary storage](/self-managed/manage/databases/secondary-storage/configuring-secondary-storage.md)
+- [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
 - [Supported environments](/reference/supported-environments.md)
 
 ### High availability (HA)
@@ -163,7 +163,7 @@ Consider regional and zonal placement of workloads. Use at least three zones in 
 
 For more information on how Zeebe handles fault tolerance, see the [Raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 
-If running a single instance, implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md), as resilience will be limited.
+If running a single instance, implement [regular backups](/self-managed/manage/back-up-and-restore/index.md), as resilience will be limited.
 
 ## Available reference architectures
 

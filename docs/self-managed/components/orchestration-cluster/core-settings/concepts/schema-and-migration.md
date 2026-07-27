@@ -6,7 +6,7 @@ description: "The orchestration cluster stores data with secondary storage and p
 
 The orchestration cluster persists runtime and task data in secondary storage.
 
-This page describes schema and migration behavior for document-store secondary storage (Elasticsearch/OpenSearch), where indices and templates are created automatically on first startup. For RDBMS secondary storage guidance, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md).
+This page describes schema and migration behavior for document-store secondary storage (Elasticsearch/OpenSearch), where indices and templates are created automatically on first startup. For RDBMS secondary storage guidance, see [RDBMS configuration](/self-managed/manage/databases/relational-database/configuration.md).
 
 ## Schema
 

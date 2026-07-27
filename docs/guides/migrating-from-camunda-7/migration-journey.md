@@ -146,7 +146,7 @@ There are multiple ways to set up Camunda 8:
   - You cannot [migrate historical audit data from Camunda 7](./migration-tooling/index.md).
   - [Multi-tenancy](/components/concepts/multi-tenancy.md) is not currently supported.
 
-- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/quickstart/developer/c8run/index.md). RDBMS support is available since Camunda 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to [installation guides](/self-managed/deployment/index.md) for details.
+- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/quickstart/developer/c8run/index.md). RDBMS support is available since Camunda 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to [installation guides](/self-managed/deploy-to-production/kubernetes/index.md) for details.
 
 While setting up Camunda 8 is not part of the core migration journey, it is a prerequisite and should be tackled early in the migration journey to avoid blockers.
 
@@ -358,7 +358,7 @@ Process instances left traces, often referred to as "history data". These are au
 
 It is important to note, that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
-If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](./migration-tooling/index.md). Migrating audit **data comes with limitations** (most prominently that you need to run [Camunda 8 with **RDBMS**](/self-managed/concepts/secondary-storage/index.md), a feature introduced with 8.9).
+If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](./migration-tooling/index.md). Migrating audit **data comes with limitations** (most prominently that you need to run [Camunda 8 with **RDBMS**](/self-managed/manage/databases/secondary-storage/index.md), a feature introduced with 8.9).
 
 <!-- TODO use a deep link here as well -->
 

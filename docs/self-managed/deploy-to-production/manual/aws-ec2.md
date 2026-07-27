@@ -237,7 +237,7 @@ The OpenSearch module provisions an OpenSearch domain for use with Camunda. Open
 
 :::note Migration to OpenSearch is not supported
 
-Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from earlier Camunda versions using Elasticsearch is not currently supported. Switching between Elasticsearch and OpenSearch in either direction is also unsupported.
+Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/deploy-to-production/kubernetes/index.md). Migration from earlier Camunda versions using Elasticsearch is not currently supported. Switching between Elasticsearch and OpenSearch in either direction is also unsupported.
 
 :::
 
@@ -404,13 +404,13 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 
 ### Monitoring
 
-Camunda exposes metrics in Prometheus format by default. For details on scraping Camunda 8 metrics, see [metrics](/self-managed/operational-guides/monitoring/metrics.md).
+Camunda exposes metrics in Prometheus format by default. For details on scraping Camunda 8 metrics, see [metrics](/self-managed/manage/monitoring/metrics.md).
 
 In AWS environments, you can leverage CloudWatch for log collection and for gathering [Prometheus metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContainerInsights-Prometheus-metrics.html). While Camunda natively integrates with Prometheus and Grafana, using CloudWatch for metrics visualization requires additional configuration.
 
 ### Backups
 
-Refer to the general backup and restore documentation in [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+Refer to the general backup and restore documentation in [backup and restore](/self-managed/manage/back-up-and-restore/index.md).
 
 When using AWS, you can utilize [S3](https://aws.amazon.com/s3/) for backing up both Zeebe and Elasticsearch / OpenSearch data.
 

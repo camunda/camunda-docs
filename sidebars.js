@@ -1882,6 +1882,7 @@ module.exports = {
                     "self-managed/deploy-to-production/kubernetes/configure/running-custom-connectors",
                     "self-managed/deploy-to-production/kubernetes/configure/add-extra-manifests",
                     "self-managed/deploy-to-production/kubernetes/configure/license-key",
+                    "self-managed/deploy-to-production/kubernetes/configure/chart-parameters",
                     "self-managed/deploy-to-production/kubernetes/configure/guides",
                   ],
                 },
@@ -1961,174 +1962,93 @@ module.exports = {
       ],
     },
     {
-      // PROVISIONAL holding category: these pages have not moved yet. They will be
-      // placed under Manage / Extend / Reference in the next step of the restructure.
       type: "category",
-      label: "Manage (pending restructure)",
-      link: {
-        type: "doc",
-        id: "self-managed/deployment/index",
-      },
+      label: "Manage",
       items: [
-        "self-managed/deployment/helm/chart-parameters",
-        "self-managed/deployment/helm/configure/data-retention",
-        "self-managed/deployment/helm/configure/tls",
-        "self-managed/deployment/helm/configure/configure-multi-tenancy",
         {
           type: "category",
-          label: "Database",
-          link: {
-            type: "doc",
-            id: "self-managed/deployment/helm/configure/database/index",
-          },
+          label: "Network and security",
+          items: ["self-managed/manage/network-and-security/tls"],
+        },
+        {
+          type: "category",
+          label: "Identity and access",
           items: [
-            {
-              type: "category",
-              label: "Orchestration Cluster",
-              items: [
-                {
-                  type: "category",
-                  label: "RDBMS",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/deployment/helm/configure/database/rdbms",
-                  },
-                  items: [
-                    "self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers",
-                    "self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits",
-                    "self-managed/deployment/helm/configure/database/rdbms-schema-management",
-                    "self-managed/deployment/helm/configure/database/rdbms-troubleshooting",
-                    "self-managed/deployment/helm/configure/database/validate-rdbms",
-                    "self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts",
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "Elasticsearch / OpenSearch",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/deployment/helm/configure/database/non-sql",
-                  },
-                  items: [
-                    "self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch",
-                    "self-managed/deployment/helm/configure/database/using-external-opensearch",
-                    {
-                      type: "category",
-                      label: "Shared Elasticsearch/OpenSearch tasks",
-                      items: [
-                        "self-managed/deployment/helm/configure/database/configure-db-custom-headers",
-                        "self-managed/deployment/helm/configure/database/elasticsearch/prefix-elasticsearch-indices",
-                      ],
-                    },
-                    "self-managed/deployment/helm/configure/database/all-shards-failed",
-                  ],
-                },
-              ],
-            },
-            {
-              type: "category",
-              label: "Management Identity and Web Modeler",
-              items: [
-                "self-managed/deployment/helm/configure/database/using-existing-postgres",
-              ],
-            },
-            {
-              type: "category",
-              label: "Optimize",
-              link: {
-                type: "doc",
-                id: "self-managed/deployment/helm/configure/database/optimize/index",
-              },
-              items: [
-                "self-managed/deployment/helm/configure/database/optimize/using-external-elasticsearch",
-                "self-managed/deployment/helm/configure/database/optimize/using-external-opensearch",
-              ],
-            },
+            "self-managed/manage/identity-and-access/authentication-to-orchestration-cluster",
+            "self-managed/manage/identity-and-access/authentication-to-management-components",
+            "self-managed/manage/identity-and-access/m2m-tokens",
           ],
         },
         {
           type: "category",
-          label: "Operational tasks",
-          link: {
-            type: "doc",
-            id: "self-managed/deployment/helm/operational-tasks/index",
-          },
-          items: [
-            "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
-            "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
-            "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
-          ],
-        },
-      ],
-    },
-    {
-      Concepts: [
-        {
-          Authentication: [
-            "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
-            "self-managed/concepts/authentication/authentication-to-management-components",
-          ],
-        },
-        {
-          type: "category",
-          label: "Secondary storage",
-          link: {
-            type: "doc",
-            id: "self-managed/concepts/secondary-storage/index",
-          },
+          label: "Databases",
+          link: { type: "doc", id: "self-managed/manage/databases/index" },
           items: [
             {
               type: "category",
-              label: "Configure",
+              label: "Secondary storage",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/secondary-storage/configuring-secondary-storage",
+                id: "self-managed/manage/databases/secondary-storage/index",
               },
               items: [
-                "self-managed/concepts/secondary-storage/no-secondary-storage",
+                "self-managed/manage/databases/secondary-storage/configuring-secondary-storage",
+                "self-managed/manage/databases/secondary-storage/managing-secondary-storage",
+                "self-managed/manage/databases/secondary-storage/no-secondary-storage",
               ],
             },
-            "self-managed/concepts/secondary-storage/managing-secondary-storage",
             {
               type: "category",
-              label: "Databases",
+              label: "Relational database",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/databases/overview",
+                id: "self-managed/manage/databases/relational-database/index",
               },
               items: [
-                {
-                  type: "category",
-                  label: "Document store databases",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
-                  },
-                  items: [
-                    {
-                      Privileges: [
-                        "self-managed/concepts/databases/elasticsearch/elasticsearch-privileges",
-                        "self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges",
-                        "self-managed/concepts/databases/elasticsearch/opensearch-privileges",
-                        "self-managed/concepts/databases/elasticsearch/opensearch-without-cluster-privileges",
-                      ],
-                    },
-                  ],
-                },
-                {
-                  type: "category",
-                  label: "Relational databases",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/concepts/databases/relational-db/index",
-                  },
-                  items: [
-                    "self-managed/concepts/databases/relational-db/rdbms-setup-guide",
-                    "self-managed/concepts/databases/relational-db/database-configuration",
-                    "self-managed/concepts/databases/relational-db/rdbms-support-policy",
-                    "self-managed/concepts/secondary-storage/rdbms-benchmark-results",
-                  ],
-                },
+                "self-managed/manage/databases/relational-database/rdbms-setup-guide",
+                "self-managed/manage/databases/relational-database/rdbms",
+                "self-managed/manage/databases/relational-database/configuration",
+                "self-managed/manage/databases/relational-database/rdbms-jdbc-drivers",
+                "self-managed/manage/databases/relational-database/rdbms-schema-management",
+                "self-managed/manage/databases/relational-database/access-sql-liquibase-scripts",
+                "self-managed/manage/databases/relational-database/rdbms-search-and-result-limits",
+                "self-managed/manage/databases/relational-database/validate-rdbms",
+                "self-managed/manage/databases/relational-database/rdbms-troubleshooting",
+                "self-managed/manage/databases/relational-database/rdbms-support-policy",
+                "self-managed/manage/databases/relational-database/rdbms-benchmark-results",
+              ],
+            },
+            {
+              type: "category",
+              label: "Elasticsearch and OpenSearch",
+              link: {
+                type: "doc",
+                id: "self-managed/manage/databases/elasticsearch-opensearch/index",
+              },
+              items: [
+                "self-managed/manage/databases/elasticsearch-opensearch/using-external-elasticsearch",
+                "self-managed/manage/databases/elasticsearch-opensearch/using-external-opensearch",
+                "self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices",
+                "self-managed/manage/databases/elasticsearch-opensearch/configure-db-custom-headers",
+                "self-managed/manage/databases/elasticsearch-opensearch/elasticsearch-privileges",
+                "self-managed/manage/databases/elasticsearch-opensearch/elasticsearch-without-cluster-privileges",
+                "self-managed/manage/databases/elasticsearch-opensearch/opensearch-privileges",
+                "self-managed/manage/databases/elasticsearch-opensearch/opensearch-without-cluster-privileges",
+                "self-managed/manage/databases/elasticsearch-opensearch/all-shards-failed",
+              ],
+            },
+            "self-managed/manage/databases/external-postgresql",
+            "self-managed/manage/databases/exporters",
+            {
+              type: "category",
+              label: "Optimize databases",
+              link: {
+                type: "doc",
+                id: "self-managed/manage/databases/optimize/index",
+              },
+              items: [
+                "self-managed/manage/databases/optimize/using-external-elasticsearch",
+                "self-managed/manage/databases/optimize/using-external-opensearch",
               ],
             },
           ],
@@ -2138,112 +2058,157 @@ module.exports = {
           label: "Back up and restore",
           link: {
             type: "doc",
-            id: "self-managed/operational-guides/backup-restore/backup-and-restore",
+            id: "self-managed/manage/back-up-and-restore/index",
           },
           items: [
             {
               Elasticsearch: [
-                "self-managed/operational-guides/backup-restore/elasticsearch/es-backup",
-                "self-managed/operational-guides/backup-restore/elasticsearch/es-restore",
+                "self-managed/manage/back-up-and-restore/elasticsearch/backup",
+                "self-managed/manage/back-up-and-restore/elasticsearch/restore",
               ],
               "Relational databases": [
-                "self-managed/operational-guides/backup-restore/rdbms/rdbms-backup",
-                "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
+                "self-managed/manage/back-up-and-restore/rdbms/backup",
+                "self-managed/manage/back-up-and-restore/rdbms/restore",
               ],
             },
             {
               "Backup Management API": [
-                "self-managed/operational-guides/backup-restore/optimize-backup",
-                "self-managed/operational-guides/backup-restore/webapps-backup",
-                "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
+                "self-managed/manage/back-up-and-restore/optimize-backup",
+                "self-managed/manage/back-up-and-restore/webapps-backup",
+                "self-managed/manage/back-up-and-restore/zeebe-backup-and-restore",
               ],
             },
-            "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
+            "self-managed/manage/back-up-and-restore/optimize-backup-and-restore",
           ],
+        },
+        {
+          Monitoring: [
+            "self-managed/manage/monitoring/log-levels",
+            "self-managed/manage/monitoring/metrics",
+          ],
+        },
+        "self-managed/manage/flow-control/index",
+        "self-managed/manage/data-purge",
+        "self-managed/manage/data-retention",
+        {
+          type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "self-managed/manage/audit-log/index",
+          },
+          items: ["self-managed/manage/audit-log/configure"],
         },
         {
           type: "category",
           label: "Document handling",
           link: {
             type: "doc",
-            id: "self-managed/concepts/document-handling/getting-started",
+            id: "self-managed/manage/document-handling/index",
           },
           items: [
             {
               type: "category",
-              label: "Configuration",
+              label: "Storage configuration",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/document-handling/configuration/index",
+                id: "self-managed/manage/document-handling/configuration/index",
               },
               items: [
-                "self-managed/concepts/document-handling/configuration/camunda-8-run",
-                "self-managed/concepts/document-handling/configuration/docker",
-                "self-managed/concepts/document-handling/configuration/helm",
+                "self-managed/manage/document-handling/configuration/camunda-8-run",
+                "self-managed/manage/document-handling/configuration/docker",
+                "self-managed/manage/document-handling/configuration/helm",
               ],
             },
           ],
         },
         {
           type: "category",
-          label: "Multi-tenancy",
+          label: "Upgrade",
+          className: "sidebar-cta",
           link: {
             type: "doc",
-            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+            id: "self-managed/manage/upgrade/index",
           },
           items: [
-            "self-managed/concepts/multi-tenancy/logical-tenants",
+            "self-managed/manage/upgrade/prepare-for-upgrade",
+            {
+              type: "category",
+              label: "Helm upgrade",
+              link: {
+                type: "doc",
+                id: "self-managed/manage/upgrade/helm/index",
+              },
+              items: ["self-managed/manage/upgrade/helm/890-to-8100"],
+            },
+            {
+              type: "category",
+              label: "Component upgrade",
+              link: {
+                type: "doc",
+                id: "self-managed/manage/upgrade/components/index",
+              },
+              items: ["self-managed/manage/upgrade/components/890-to-8100"],
+            },
+            "self-managed/manage/upgrade/migration-from-bitnami/index",
+            "self-managed/manage/upgrade/helm-v3-to-v4",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Extend",
+      items: [
+        {
+          type: "category",
+          label: "Tenancy and isolation",
+          link: { type: "doc", id: "self-managed/extend/tenancy/index" },
+          items: [
+            {
+              type: "category",
+              label: "Logical tenants",
+              link: {
+                type: "doc",
+                id: "self-managed/extend/tenancy/logical-tenants",
+              },
+              items: [
+                "self-managed/extend/tenancy/configure-logical-multi-tenancy",
+              ],
+            },
             {
               type: "category",
               label: "Physical Tenants",
               link: {
                 type: "doc",
-                id: "self-managed/concepts/multi-tenancy/physical-tenants",
+                id: "self-managed/extend/tenancy/physical-tenants/index",
               },
               items: [
-                "self-managed/concepts/physical-tenants/index",
-                "self-managed/concepts/physical-tenants/storage-isolation",
-                "self-managed/concepts/physical-tenants/api-routing",
-                "self-managed/concepts/physical-tenants/authentication-authorization",
-                "self-managed/concepts/physical-tenants/authorization-model",
-                "self-managed/concepts/physical-tenants/configuration-reference",
-                "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+                "self-managed/extend/tenancy/physical-tenants/isolation-model",
+                "self-managed/extend/tenancy/physical-tenants/storage-isolation",
+                "self-managed/extend/tenancy/physical-tenants/api-routing",
+                "self-managed/extend/tenancy/physical-tenants/authentication-authorization",
+                "self-managed/extend/tenancy/physical-tenants/authorization-model",
+                "self-managed/extend/tenancy/physical-tenants/configuration-reference",
+                "self-managed/extend/tenancy/physical-tenants/provisioning-and-lifecycle",
               ],
             },
           ],
         },
         {
           type: "category",
-          label: "Audit log",
+          label: "Availability and disaster recovery",
           link: {
             type: "doc",
-            id: "self-managed/concepts/audit-log/index",
-          },
-          items: ["self-managed/concepts/audit-log/configure-audit-log"],
-        },
-        "self-managed/concepts/wait-states/configure-wait-states",
-        "self-managed/concepts/exporters",
-        "self-managed/operational-guides/configure-flow-control/configure-flow-control",
-        {
-          Monitoring: [
-            "self-managed/operational-guides/monitoring/log-levels",
-            "self-managed/operational-guides/monitoring/metrics",
-          ],
-        },
-        {
-          type: "category",
-          label: "Multi-region",
-          link: {
-            type: "doc",
-            id: "self-managed/concepts/multi-region/resilience-tiers",
+            id: "self-managed/extend/availability-and-disaster-recovery/index",
           },
           items: [
-            "self-managed/concepts/multi-region/cold-recovery",
-            "self-managed/concepts/multi-region/dual-region",
-            "self-managed/concepts/multi-region/zone-aware-clusters",
+            "self-managed/extend/availability-and-disaster-recovery/cold-recovery",
+            "self-managed/extend/availability-and-disaster-recovery/dual-region",
+            "self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure",
+            "self-managed/extend/availability-and-disaster-recovery/zone-aware-clusters",
           ],
         },
-        "self-managed/operational-guides/data-purge",
       ],
     },
     {
@@ -2281,6 +2246,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/core-settings/configuration/licensing",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/webserver",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/logging",
+                    "self-managed/components/orchestration-cluster/core-settings/configuration/wait-states",
                     "self-managed/components/orchestration-cluster/core-settings/configuration/admin-identity-as-code",
                   ],
                 },
@@ -2518,39 +2484,6 @@ module.exports = {
               ],
             },
           ],
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.10",
-      className: "sidebar-cta",
-      link: {
-        type: "doc",
-        id: "self-managed/upgrade/index",
-      },
-      items: [
-        "self-managed/upgrade/prepare-for-upgrade",
-        {
-          type: "category",
-          label: "Helm upgrade",
-          link: {
-            type: "doc",
-            id: "self-managed/upgrade/helm/index",
-          },
-          items: [
-            "self-managed/upgrade/helm/890-to-8100",
-            "self-managed/upgrade/helm/880-to-890",
-          ],
-        },
-        {
-          type: "category",
-          label: "Component upgrade",
-          link: {
-            type: "doc",
-            id: "self-managed/upgrade/components/index",
-          },
-          items: ["self-managed/upgrade/components/890-to-8100"],
         },
       ],
     },

@@ -55,7 +55,7 @@ Release announcements include:
 
 :::info
 
-- See [upgrade to Camunda 8.9](/self-managed/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
+- See [upgrade to Camunda 8.9](/self-managed/manage/upgrade/index.md) for guidance on upgrading your Self-Managed Camunda 8 application or server installation.
 - See [supported environments](/reference/supported-environments.md) for environments and technologies supported by Camunda 8.
 
 :::

@@ -56,12 +56,12 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 ### Secondary storage
 
-This guide supports two [secondary storage](/self-managed/concepts/secondary-storage/index.md) backends. If you have not chosen a variant yet, refer to the [Terraform setup guide](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/terraform.md#variants) for details.
+This guide supports two [secondary storage](/self-managed/manage/databases/secondary-storage/index.md) backends. If you have not chosen a variant yet, refer to the [Terraform setup guide](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/terraform.md#variants) for details.
 
 | Variant           | Secondary storage                                                                                             | Optimize      | Reference architecture    |
 | ----------------- | ------------------------------------------------------------------------------------------------------------- | ------------- | ------------------------- |
 | **Elasticsearch** | [Elasticsearch via ECK](/self-managed/deploy-to-production/plan/kubernetes-operators.md#deploy-elasticsearch) | Supported     | `aks-single-region`       |
-| **RDBMS**         | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md)                    | Not available | `aks-single-region-rdbms` |
+| **RDBMS**         | [Azure Database for PostgreSQL](/self-managed/manage/databases/relational-database/rdbms.md)                  | Not available | `aks-single-region-rdbms` |
 
 :::note
 Select a variant using the **Elasticsearch**/**RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.
@@ -380,7 +380,7 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deploy-to-production/plan/kubernetes-operators.md).
 
 - **Elasticsearch** (this guide): Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- **RDBMS** (alternative): Use a managed Azure Database for PostgreSQL or another supported RDBMS engine — see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
+- **RDBMS** (alternative): Use a managed Azure Database for PostgreSQL or another supported RDBMS engine — see the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -393,7 +393,7 @@ All commands in this guide assume you are at the **repository root** (the direct
 If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. In this guide, we default to the ECK Operator deployment of Elasticsearch.
 
 :::note RDBMS alternative
-For those who prefer a relational database, RDBMS (for example, [Azure Database for PostgreSQL](https://azure.microsoft.com/products/postgresql)) is a supported alternative to Elasticsearch for the Orchestration Cluster's secondary storage. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines. To use RDBMS instead, skip this section and see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+For those who prefer a relational database, RDBMS (for example, [Azure Database for PostgreSQL](https://azure.microsoft.com/products/postgresql)) is a supported alternative to Elasticsearch for the Orchestration Cluster's secondary storage. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md) for supported engines. To use RDBMS instead, skip this section and see [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md).
 :::
 
 :::warning Production Elasticsearch recommendation
@@ -470,8 +470,8 @@ The following are some advanced configuration topics to consider for your cluste
 
 - [Camunda production installation guide with Kubernetes and Helm](/self-managed/deploy-to-production/kubernetes/install/production/index.md)
 - [Cluster autoscaling](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/azure/README.md)
-- [Configure RDBMS secondary storage](/self-managed/deployment/helm/configure/database/rdbms.md)
-- [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
+- [Configure RDBMS secondary storage](/self-managed/manage/databases/relational-database/rdbms.md)
+- [Secondary storage concepts](/self-managed/manage/databases/secondary-storage/index.md)
 
 To get more familiar with our product stack, visit the following topics:
 

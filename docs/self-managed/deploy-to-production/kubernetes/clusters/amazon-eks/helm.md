@@ -29,7 +29,7 @@ This guide gets Camunda 8 running on EKS. For deeper production hardening — sc
 :::note Using Amazon Aurora PostgreSQL as secondary storage
 Use this page for the EKS cluster, networking, Ingress, and AWS-managed services.
 
-Then continue with [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
+Then continue with [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md).
 
 If you use Amazon OpenSearch Service for secondary storage, continue with the default path in this guide.
 :::
@@ -54,7 +54,7 @@ Multi-tenancy is disabled by default and is not covered further in this guide. I
 
 :::caution Optimize compatibility with OpenSearch
 
-**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
+**Migration:** The migration step will be disabled during the installation. For more information, refer to [using Amazon OpenSearch Service](/self-managed/manage/databases/elasticsearch-opensearch/using-external-opensearch.md).
 
 :::
 
@@ -338,7 +338,7 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
 
 - **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/eksctl.md) or [Terraform](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md) setup.
-- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, Ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for the values reference.
+- **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, Ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md) for the values reference.
 
 RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearch or OpenSearch alongside it.
 

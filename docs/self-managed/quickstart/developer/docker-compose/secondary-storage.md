@@ -53,7 +53,7 @@ Camunda configures the built-in exporter automatically from `camunda.data.second
 
 ### Run with RDBMS secondary storage
 
-The following examples run each supported RDBMS backend as a separate Docker Compose service. Use them for local development and evaluation. Review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#scope-and-applicability) before you plan another deployment type.
+The following examples run each supported RDBMS backend as a separate Docker Compose service. Use them for local development and evaluation. Review the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md#scope-and-applicability) before you plan another deployment type.
 
 <Tabs groupId="docker-compose-rdbms" defaultValue="postgresql" values={[
 {label: 'PostgreSQL', value: 'postgresql'},
@@ -407,7 +407,7 @@ Use these variables when you adapt the Elasticsearch and OpenSearch examples:
 | `CAMUNDA_DATA_SECONDARY_STORAGE_ELASTICSEARCH_PASSWORD` | Password for Elasticsearch when authentication is enabled. |
 | `CAMUNDA_DATA_SECONDARY_STORAGE_OPENSEARCH_URL`         | Endpoint for OpenSearch.                                   |
 
-For additional secondary storage settings, see [Configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md) and [Configure RDBMS for manual installations](/self-managed/deploy-to-production/manual/rdbms/configuration.md).
+For additional secondary storage settings, see [Configure secondary storage](/self-managed/manage/databases/secondary-storage/configuring-secondary-storage.md) and [Configure RDBMS for manual installations](/self-managed/deploy-to-production/manual/rdbms/configuration.md).
 
 ## Next steps
 

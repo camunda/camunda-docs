@@ -9,7 +9,7 @@ When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices
 The exporter prefix is configured via `camunda.data.exporters.elasticsearch.args.index-prefix` (or `CAMUNDA_DATA_EXPORTERS_{ELASTICSEARCH|OPENSEARCH}_ARGS_INDEX_PREFIX`).
 
 For detailed requirements, configuration examples, and common mistakes, see
-[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+[index prefix configuration](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
 :::
 
 <Tabs>

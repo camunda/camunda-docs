@@ -18,7 +18,7 @@ Additionally, depending on whether your OpenShift clusters are managed on a clou
 
 :::caution Dual-region limits and constraints
 
-Please review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) to understand the limitations and constraints of this blueprint before proceeding.
+Please review our [dual-region concept documentation](/self-managed/extend/availability-and-disaster-recovery/dual-region.md) to understand the limitations and constraints of this blueprint before proceeding.
 
 :::
 
@@ -43,7 +43,7 @@ This High-Level Design describes how the following critical components interact 
 ## Requirements
 
 - You need access to the [Advanced Cluster Management operator](https://www.redhat.com/en/technologies/management/advanced-cluster-management) and the [Submariner operator](https://catalog.redhat.com/software/container-stacks/detail/5f0c67b7ce85fb9e399f3a12).
-- The clusters must be separated by a reasonable latency as outlined in the [installation environment guidelines](/self-managed/concepts/multi-region/dual-region.md#installation-environment).
+- The clusters must be separated by a reasonable latency as outlined in the [installation environment guidelines](/self-managed/extend/availability-and-disaster-recovery/dual-region.md#installation-environment).
 - Each of your OpenShift clusters must meet at least the minimum capacity requirements for a cluster. Refer to the [cluster specification guide](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift.md#cluster-specification) for details on resource allocation and infrastructure needs.
 - Administrative privileges are required for both clusters to perform configurations and operator deployments.
 - A reliable means of communication between the two clusters is necessary. Ensure that each cluster can establish network connections with the other.
@@ -340,7 +340,7 @@ Troubleshooting requires examining all the underlying mechanisms of Submariner. 
 
 :::info Migration from Bitnami Elasticsearch to ECK in dual-region
 
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure (documented for Camunda 8.9)](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) and apply it individually to each region.
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure (documented for Camunda 8.9)](/self-managed/manage/upgrade/migration-from-bitnami/index.md) and apply it individually to each region.
 
 :::
 
@@ -574,7 +574,7 @@ This command:
 
 :::note
 
-This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/upgrade/helm/index.md) or any other component upgrades.
+This guide uses `helm upgrade --install` as it runs install on initial deployment and upgrades future usage. This may make it easier for future [Camunda 8 Helm upgrades](/self-managed/manage/upgrade/helm/index.md) or any other component upgrades.
 
 :::
 
@@ -653,7 +653,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 ## Failover
 
-Consult the generic [dual-region failover procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md).
+Consult the generic [dual-region failover procedure](/self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure.md).
 
 ## Pitfalls to avoid
 

@@ -48,7 +48,7 @@ Camunda 8 Run now ships with a bundled Java runtime. You no longer need to insta
 
 Operate now shows what an active process instance is waiting for, so you can tell expected waiting from a stalled instance. When you inspect an active element, you can see the wait state and its details — a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
 
-Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/components/orchestration-cluster/core-settings/configuration/wait-states.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
@@ -65,7 +65,7 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda version
 Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
 
 <ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
+  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/manage/upgrade/helm-v3-to-v4.md)</span></li>
   <li><span class="link-arrow">[Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md)</span></li>
 </ul>
 
@@ -86,7 +86,7 @@ The following guides offer detailed information on how to upgrade to Camunda 8.1
     <td>**Who is this guide for?**</td>
 </tr>
 <tr>
-    <td>[Self-Managed upgrade guide](/self-managed/upgrade/index.md)</td>
+    <td>[Self-Managed upgrade guide](/self-managed/manage/upgrade/index.md)</td>
     <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
