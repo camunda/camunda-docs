@@ -330,6 +330,17 @@ For Argo CD, use sync waves or separate Applications so the management release b
 
 For Keycloak-managed registration, client Secret names can be identical across namespaces, but Kubernetes Secrets remain namespace-scoped. Project both copies from the same external secret source to prevent drift.
 
+## Move an existing combined release to split releases
+
+Create the orchestration release before changing the existing combined release to management mode. Changing the mode suppresses the existing Orchestration, Optimize, and Connectors workloads, so reversing this order causes an outage.
+
+1. Back up persistent data and verify your rollback procedure.
+2. Create the namespace-local Secrets required by the new orchestration release.
+3. Install and verify the orchestration release with component authentication values that match the planned management inventory.
+4. Add the orchestration cluster to `global.topology.clusters` in the existing release.
+5. Change the existing release to `global.topology.mode: management` only after the new orchestration workloads are ready.
+6. Verify authentication, Camunda Hub inventory, process deployment, and workload health before removing obsolete resources.
+
 ## Existing configurations
 
 The default `global.topology.mode: combined` preserves the existing single-release and single-namespace behavior.
