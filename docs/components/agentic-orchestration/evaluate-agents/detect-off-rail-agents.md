@@ -29,7 +29,9 @@ An agent that calls the same tool many times can still be legitimately working t
 
 ## Interpret limit proximity warnings
 
-Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-health-and-limits.md#model-call-limit) limit, so you can see how close an agent instance is to it before it's reached. A proximity warning means the agent instance is nearing its configured limit and could reach it on a subsequent loop, at which point the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error and stops the agent.
+Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-health-and-limits.md#model-call-limit) limit, so you can see how close an agent instance is to it before it's reached.
+
+A proximity warning means the agent instance is nearing its configured limit and could reach it on a subsequent loop, at which point the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error and stops the agent.
 
 Apply the following best practices when you see a proximity warning:
 
@@ -38,4 +40,4 @@ Apply the following best practices when you see a proximity warning:
 - **Size the limit to the task, not the default.** A **Maximum model calls** value that's frequently near-exhausted by agents completing their task normally is probably too low for that task's typical loop count. Raise it deliberately rather than repeatedly dismissing the warning.
 - **Don't treat a higher limit as the fix for a stuck agent.** If an agent instance reaches its limit while stuck, for example, repeating the same tool call, raising the limit only lets it consume more tokens and tool calls before failing. Address the underlying cause, such as the tool's input, output, or description, instead.
 
-To configure this setting, see the **Limits** section of the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#limits) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md#limits) connector documentation, and [error handling](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling) for the full list of error codes.
+To configure this limit, see the **Limits** section in the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#limits) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task.md#limits) connector documentation, depending on your Camunda AI agent implementation.
