@@ -18,7 +18,7 @@ An **agent definition** describes a deployed agent, while an **agent instance** 
 
 An AI agent is not the same as the BPMN element that defines it, and it does not have the same lifecycle as an element instance.
 
-- A single [AI agent sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
+- A single [AI Agent sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
 - Each time the process activates that element, Camunda creates an element instance.
 - The agent instance can be **reused across several element instances** within the same process instance.
 
@@ -29,7 +29,7 @@ This reuse is what allows an agent to hold a multi-turn conversation across a lo
 
 An AI agent definition is a first-class, queryable resource that Camunda creates when you deploy a process containing one or more agents.
 
-Camunda creates one agent definition per agent element in a deployed process, analogous to how a DRD deployment creates one decision definition per decision. An agent definition is a **structural descriptor** of the agent, not a store of its runtime configuration.
+Camunda creates one agent definition per agent element in a deployed process, analogous to how a [DRD](/reference/glossary.md#drd-decision-requirements-diagram) deployment creates one decision definition per decision. An agent definition is a **structural descriptor** of the agent, not a store of its runtime configuration.
 
 An agent definition identifies an agent across process versions through a stable agent definition key. With this key, you can inventory deployed agents, aggregate per-agent metrics in Optimize, and confirm that an agent exists before starting one of its instances.
 
@@ -90,7 +90,7 @@ The following data is available for an agent instance in Operate:
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Agent instance key   | The unique identifier of the agent instance. Use it to look up or interact with the agent through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx). |
 | Agent state          | The current execution state of the agent, such as initializing, tool discovery, thinking, tool calling, or idle. The state is also highlighted on the BPMN diagram.                                                  |
-| Usage metrics        | Token consumption, tool call count, and model call count. Model calls are shown against the configured limit, so you can see how close the agent is to its limit.                                                |
+| Usage metrics        | Token consumption, tool call count, and model call count. Model calls are shown against the configured limit, so you can see how close the agent is to its limit.                                                    |
 | Model                | The LLM the agent is running against.                                                                                                                                                                                |
 | System prompt        | The system prompt the agent was configured with.                                                                                                                                                                     |
 | Conversation history | The decision trail of the agent execution: user prompts, assistant messages, the tools the agent selected with its reasoning, and tool calls with their inputs and results.                                          |

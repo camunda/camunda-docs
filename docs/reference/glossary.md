@@ -63,7 +63,7 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 ### Agent definition
 
-A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (Ai Agent sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a DRD deployment creates decision definitions.
+A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (AI Agent sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a [DRD](#drd-decision-requirements-diagram) deployment creates decision definitions.
 
 An agent definition is a structural descriptor (type, name, process definition key, and tenant), not a store of runtime configuration. The system prompt and model are FEEL expressions evaluated at instance creation time and are not stored in the definition.
 
@@ -249,6 +249,12 @@ Camunda uses `csap` to automate setup steps: it interactively or via scripted fl
 A process cannot execute unless it is known by the [broker](#zeebe-broker). Deployment is the process of pushing or deploying processes to the [broker](#zeebe-broker).
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
+
+### DRD (Decision Requirements Diagram)
+
+The visual representation of a decision requirements graph (DRG), which models a domain of decision-making, showing the decisions involved and the dependencies between them, such as required decisions, input data, and knowledge sources. Deploying a DRD creates one decision definition per decision it contains.
+
+- [Decision requirements graph](/components/modeler/dmn/decision-requirements-graph.md)
 
 ## E
 
