@@ -59,7 +59,7 @@ tenanta:
 
 ## Amazon OpenSearch Service storage
 
-When secondary storage runs on Amazon OpenSearch Service, each physical tenant can authenticate with its own credentials. The connection settings `url`, `username`, `password`, and `index-prefix` are all overridable per physical tenant, supporting both a shared domain and dedicated domains per tenant.
+When secondary storage runs on Amazon OpenSearch Service, each physical tenant can authenticate with its own credentials. The connection settings `url`, `username`, `password`, and `index-prefix` are all overridable per physical tenant, supporting either a shared OpenSearch instance or a dedicated OpenSearch instance per tenant.
 
 ### Basic authentication with fine-grained access control
 
@@ -85,7 +85,7 @@ camunda:
             index-prefix: tenant-a
 ```
 
-A tenant can also point at a dedicated domain (including one in a different AWS account) by overriding `url` as well:
+A tenant can also point at a dedicated OpenSearch instance (including one in a different AWS account) by overriding `url` as well:
 
 ```yaml
 camunda:
