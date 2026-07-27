@@ -210,7 +210,9 @@ helm install camunda camunda/camunda-platform \
 
 ## Configure the orchestration namespace
 
-Create `orchestration-values.yaml`. The Management Identity URL uses the Hub release's internal Kubernetes service. The OIDC client IDs and secrets must match the clients registered by Management Identity.
+Create `orchestration-values.yaml`. An orchestration release is self-contained and uses the existing component values for its enabled state and authentication configuration. `global.topology.mode` selects the release role but doesn't duplicate component configuration.
+
+Set `identity.enabled: false` because Management Identity runs only in the Hub release. Keep `global.identity.auth.enabled: true` to enable OIDC authentication for the orchestration workloads, and set `global.identity.service.url` to the Hub release's Identity service. The component client IDs, audiences, redirects, and secrets must match the clients declared in the Hub release's cluster inventory.
 
 ```yaml
 global:
@@ -226,34 +228,6 @@ global:
       method: oidc
   topology:
     mode: orchestration
-    hub:
-      namespace: hub
-      releaseName: camunda
-    cluster:
-      id: orchestration
-      components:
-        orchestration:
-          enabled: true
-          clientId: orchestration
-          audience: orchestration-api
-          redirectUrl: https://orchestration.example.com/orchestration
-          secret:
-            existingSecret: orchestration-oidc
-            existingSecretKey: client-secret
-        optimize:
-          enabled: true
-          clientId: optimize
-          audience: optimize-api
-          redirectUrl: https://orchestration.example.com/optimize
-          secret:
-            existingSecret: optimize-oidc
-            existingSecretKey: client-secret
-        connectors:
-          enabled: true
-          clientId: connectors
-          secret:
-            existingSecret: connectors-oidc
-            existingSecretKey: client-secret
   identity:
     service:
       url: http://camunda-identity.hub.svc.cluster.local:80/identity
@@ -265,10 +239,29 @@ global:
       authUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/auth
       tokenUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/token
       jwksUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/certs
+      optimize:
+        clientId: optimize
+        audience: optimize-api
+        redirectUrl: https://orchestration.example.com/optimize
+        secret:
+          existingSecret: optimize-oidc
+          existingSecretKey: client-secret
+
+identity:
+  enabled: false
 
 orchestration:
   enabled: true
   contextPath: /orchestration
+  security:
+    authentication:
+      oidc:
+        clientId: orchestration
+        audience: orchestration-api
+        redirectUrl: https://orchestration.example.com/orchestration
+        secret:
+          existingSecret: orchestration-oidc
+          existingSecretKey: client-secret
   data:
     secondaryStorage:
       type: elasticsearch
@@ -289,9 +282,18 @@ orchestration:
         secretName: orchestration-grpc-tls
 
 connectors:
+  enabled: true
   contextPath: /connectors
+  security:
+    authentication:
+      oidc:
+        clientId: connectors
+        secret:
+          existingSecret: connectors-oidc
+          existingSecretKey: client-secret
 
 optimize:
+  enabled: true
   contextPath: /optimize
   database:
     elasticsearch:
@@ -324,11 +326,11 @@ helm install camunda camunda/camunda-platform \
 
 ## Add another Orchestration Cluster
 
-Add another entry to `global.topology.clusters` in the management release and install another orchestration release with the matching entry under `global.topology.cluster`. Use unique client IDs, audiences, and secrets for isolation.
+Add another entry to `global.topology.clusters` in the management release and install another orchestration release. Configure that release's existing component authentication values to match the new management inventory entry. Use unique client IDs, audiences, and secrets for isolation.
 
 For Keycloak, Management Identity creates every declared client. For another OIDC provider, provision the clients before applying the Helm releases.
 
-Generated internal service URLs use Kubernetes service DNS, so this pattern supports multiple namespaces in the same Kubernetes cluster. For workloads in another Kubernetes cluster, provide equivalent cross-cluster DNS and routing or configure explicit `grpcUrl`, `restUrl`, `readinessUrl`, `operateUrl`, `tasklistUrl`, `adminUrl`, and component web application URL overrides. Set `global.topology.management.identityServiceUrl` in an orchestration release when the derived Management Identity service URL isn't reachable.
+Generated internal service URLs in the management inventory use Kubernetes service DNS, so this pattern supports multiple namespaces in the same Kubernetes cluster. For workloads in another Kubernetes cluster, provide equivalent cross-cluster DNS and routing or configure explicit `grpcUrl`, `restUrl`, `readinessUrl`, `operateUrl`, `tasklistUrl`, `adminUrl`, and component web application URL overrides. Set each orchestration release's `global.identity.service.url` to an address from which it can reach Management Identity.
 
 ## Deploy with GitOps
 
