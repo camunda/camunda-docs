@@ -15,12 +15,12 @@ Monitor cluster health, track job and process execution, and measure business va
 link: "./job-dashboard",
 title: "Monitor the job dashboard",
 image: DocsIcon,
-description: "Use the job dashboard to see which job types are active, how many jobs are created, completed, and failed, and which job workers are involved.",
+description: "Track active job types, job outcomes, and job worker activity.",
 },
 {
 link: "../../../optimize/userguide/agentic-control-plane/",
 title: "Monitor the agentic control plane",
 image: OptimizeIcon,
-description: "Use the agentic control plane in Optimize to monitor AI agent adoption, token costs, reliability, and performance across your processes.",
+description: "Monitor AI agent adoption, token costs, reliability, and performance in Optimize.",
 },
 ]} columns={2}/>
