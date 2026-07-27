@@ -18,7 +18,7 @@ An **agent definition** describes a deployed agent, while an **agent instance** 
 
 An AI agent is not the same as the BPMN element that defines it, and it does not have the same lifecycle as an element instance.
 
-- A single [AI Agent sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
+- A single [AI Agent Sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
 - Each time the process activates that element, Camunda creates an element instance.
 - The agent instance can be **reused across several element instances** within the same process instance.
 
@@ -38,7 +38,7 @@ An agent definition identifies an agent across process versions through a stable
 An agent definition contains the following data:
 
 - **Agent definition key**: Stable identifier for the agent across process definition versions.
-- [**Agent type**](/components/agentic-orchestration/ai-agents.md#agent-types): One of AI Agent sub-process, AI Agent Task, or external agent.
+- [**Agent type**](/components/agentic-orchestration/ai-agents.md#agent-types): One of AI Agent Sub-process, AI Agent Task, or external agent.
 - **Name**: Human-readable name of the agent element.
 - **Process definition key**: The process definition the agent belongs to.
 - **Tenant**: The tenant the agent definition belongs to.
@@ -66,7 +66,7 @@ This representation is not the source of truth for the agent's runtime execution
 
 You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
-For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI agent sub-process and AI Agent Task types, the AI Agent connector automatically creates the agent instance through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) as the first step in handling the job for an active agent element. For [external agents](/reference/glossary.md#external-agent), the external runtime creates the instance itself by calling the same API, which can happen at any point while the element is active.
+For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI agent Sub-process and AI Agent Task types, the AI Agent connector automatically creates the agent instance through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) as the first step in handling the job for an active agent element. For [external agents](/reference/glossary.md#external-agent), the external runtime creates the instance itself by calling the same API, which can happen at any point while the element is active.
 
 ### Agent context and memory
 
