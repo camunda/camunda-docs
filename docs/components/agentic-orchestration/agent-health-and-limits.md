@@ -1,16 +1,15 @@
 ---
-id: agent-health-and-guardrails
-title: Agent health and guardrails
+id: agent-health-and-limits
+title: Agent health and limits
 description: "Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance."
-keywords:
-  ["agentic ai", "AI agents", "agent health", "guardrails", "agent state"]
+keywords: ["agentic ai", "AI agents", "agent health", "limits", "agent state"]
 ---
 
 Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance.
 
 ## About
 
-Every [agent instance](/components/agentic-orchestration/ai-agents.md) exposes a defined execution state and a set of usage metrics as it runs. Together, they show whether the agent is progressing normally and how close it is to the limits you configured. This page describes the state model, what triggers each transition, and the usage metrics that back the agent's guardrails.
+Every [agent instance](/components/agentic-orchestration/ai-agents.md) exposes a defined execution state and a set of usage metrics as it runs. Together, they show whether the agent is progressing normally and how close it is to the limits you configured. This page describes the state model, what triggers each transition, and the usage metrics that back the agent's limits.
 
 For guidance on using these signals to catch an agent going off-rail, see [detect off-rail agents](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md).
 
@@ -42,9 +41,9 @@ An agent instance follows a predictable path through these states. The following
 
 The cycle from Thinking to Tool calling and back to Thinking is one **loop**: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop. An agent instance can run through many loops before reaching a final response.
 
-## Usage metrics and guardrails
+## Usage metrics and limits
 
-Alongside its state, Camunda tracks usage metrics for every agent instance so you can measure cost and activity, and enforces a configurable guardrail on how many times an agent can call the model.
+Alongside its state, Camunda tracks usage metrics for every agent instance so you can measure cost and activity, and enforces a configurable limit on how many times an agent can call the model.
 
 ### Token consumption
 
@@ -62,7 +61,7 @@ Camunda tracks how long the agent instance has been active, both across its full
 
 ### Model call limit
 
-The **Maximum model calls** setting is the primary guardrail against runaway loops and unexpected cost. It limits how many times an agent instance can call the model, and defaults to `10` if you don't configure it. Camunda tracks model calls made against this configured limit, so you can see how close an agent instance is to its guardrail.
+The **Maximum model calls** setting is the primary limit against runaway loops and unexpected cost. It limits how many times an agent instance can call the model, and defaults to `10` if you don't configure it. Camunda tracks model calls made against this configured limit, so you can see how close an agent instance is to it.
 
 When an agent instance reaches its configured limit, the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error. You can catch this error with an error boundary event and an [error expression](/components/connectors/use-connectors/index.md#error-expression) to handle it explicitly, for example by routing to a human reviewer instead of failing the process instance.
 

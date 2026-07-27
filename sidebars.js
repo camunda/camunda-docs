@@ -100,7 +100,7 @@ module.exports = {
       },
       items: [
         "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/agent-health-and-guardrails",
+        "components/agentic-orchestration/agent-health-and-limits",
         "components/agentic-orchestration/camunda-provided-llm",
         "components/agentic-orchestration/ao-design",
         {

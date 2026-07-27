@@ -29,10 +29,10 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
-    link: "../agent-health-and-guardrails/",
-    title: "Agent health and guardrails",
+    link: "../agent-health-and-limits/",
+    title: "Agent health and limits",
     image: IconOperate,
-    description: "Understand agent states, usage metrics, and guardrails.",
+    description: "Understand agent states, usage metrics, and limits.",
   },
   {
     link: "../camunda-provided-llm/",

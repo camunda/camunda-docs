@@ -2,22 +2,22 @@
 id: detect-off-rail-agents
 title: Detect off-rail agents
 sidebar_label: Detect off-rail agents
-description: "Use agent health indicators and guardrail proximity warnings to identify a stuck or looping AI agent before it fails."
-keywords: ["agentic ai", "AI agents", "troubleshooting", "guardrails"]
+description: "Use agent health indicators and limit proximity warnings to identify a stuck or looping AI agent before it fails."
+keywords: ["agentic ai", "AI agents", "troubleshooting", "limits"]
 ---
 
-Use agent health indicators and guardrail proximity warnings to identify a stuck or looping AI agent before it fails.
+Use agent health indicators and limit proximity warnings to identify a stuck or looping AI agent before it fails.
 
 ## About
 
 An agent can go off-rail without failing outright, for example, by getting stuck repeating a tool call or reasoning in circles. Left unnoticed, it keeps consuming tokens and model calls until it hits its configured limit.
 
-In this guide, you will learn how to read an agent instance's [state and usage metrics](/components/agentic-orchestration/agent-health-and-guardrails.md) to catch this early, and how to interpret guardrail proximity warnings.
+In this guide, you will learn how to read an agent instance's [state and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) to catch this early, and how to interpret limit proximity warnings.
 
 ## Prerequisites
 
 - You have access to [Operate](/components/operate/operate-introduction.md) to inspect running agent process instances. See [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md).
-- You understand the [agent state model and usage metrics](/components/agentic-orchestration/agent-health-and-guardrails.md) Camunda tracks for an agent instance.
+- You understand the [agent state model and usage metrics](/components/agentic-orchestration/agent-health-and-limits.md) Camunda tracks for an agent instance.
 
 ## Identify a stuck or looping agent
 
@@ -30,9 +30,9 @@ No single health indicator proves that an agent is stuck. Look at the combinatio
 
 An agent that calls the same tool many times can still be legitimately working through a multi-step task. Treat these indicators together, not individually: an agent instance with a stalled state, a climbing tool call count, and a duration that keeps growing without settling is the strongest signal that it's going off-rail.
 
-## Interpret guardrail proximity warnings
+## Interpret limit proximity warnings
 
-Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-health-and-guardrails.md#model-call-limit) limit, so you can see how close an agent instance is to that guardrail before it's reached. A proximity warning means the agent instance is nearing its configured limit and could reach it on a subsequent loop, at which point the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error and stops the agent.
+Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-health-and-limits.md#model-call-limit) limit, so you can see how close an agent instance is to it before it's reached. A proximity warning means the agent instance is nearing its configured limit and could reach it on a subsequent loop, at which point the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error and stops the agent.
 
 Apply the following best practices when you see a proximity warning:
 
