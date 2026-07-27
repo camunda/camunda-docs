@@ -60,8 +60,7 @@ Duplicating the same element template directly across several process definition
 
 ## Agent instances
 
-An agent instance is a specific runtime execution of an agent definition that can be created for an active agent element. It is identified by an agent instance key, and keeps its state -
-conversation, tool calls, reasoning - in an agent context.
+An agent instance is a specific runtime execution of an agent definition that can be created for an active agent element. It is identified by an agent instance key, and keeps its state, including conversation, tool calls, reasoning, in an agent context.
 
 You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
