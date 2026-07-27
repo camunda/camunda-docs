@@ -100,6 +100,10 @@ global:
         host: orchestration.example.com
         # Match this to the Camunda version deployed by your selected chart.
         version: "8.10.x"
+        contextPaths:
+          orchestration: /orchestration
+          optimize: /optimize
+          connectors: /connectors
         components:
           orchestration:
             enabled: true
