@@ -328,7 +328,15 @@ helm install camunda camunda/camunda-platform \
 
 Add another entry to `global.topology.clusters` in the management release and install another orchestration release. Configure that release's existing component authentication values to match the new management inventory entry. Use unique client IDs, audiences, and secrets for isolation.
 
-If orchestration releases share Elasticsearch or OpenSearch, configure a unique `orchestration.index.prefix` for every release. Configure a unique Optimize record prefix with `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, and configure a unique Optimize application index prefix with `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX`. Reusing any of these prefixes can mix one cluster's records with another cluster's Operate, Tasklist, or Optimize data. See [configure Elasticsearch and OpenSearch index prefixes](./database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+If orchestration releases share Elasticsearch or OpenSearch, configure unique prefixes for every release:
+
+- Set `orchestration.index.prefix` for Orchestration Cluster indices.
+- Set `global.elasticsearch.prefix` or `global.opensearch.prefix` for Legacy Zeebe Exporter records.
+- Set `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix` to the same Legacy Zeebe Exporter prefix.
+- Set `CAMUNDA_OPTIMIZE_ZEEBE_NAME` to the same Legacy Zeebe Exporter prefix.
+- Set `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or `CAMUNDA_OPTIMIZE_OPENSEARCH_SETTINGS_INDEX_PREFIX` for Optimize's own indices.
+
+Reusing any of these prefixes can mix one cluster's records with another cluster's Operate, Tasklist, or Optimize data. Mismatched Legacy Zeebe Exporter and Optimize record prefixes can also start Optimize without displaying process data. See [configure Elasticsearch and OpenSearch index prefixes](./database/elasticsearch/configure-elasticsearch-prefix-indices.md).
 
 For Keycloak, Management Identity creates every declared client. For another OIDC provider, provision the clients before applying the Helm releases.
 
