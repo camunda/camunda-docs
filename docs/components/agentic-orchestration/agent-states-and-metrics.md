@@ -65,6 +65,4 @@ Tool execution duration is not part of the conversation history metrics. When a 
 
 ### Model call limit
 
-Camunda provides a configurable limit on how many times an agent instance can call the model as the primary guardrail against runaway loops and unexpected cost.
-
-With the AI Agent connector, you can configure this limit using the **Maximum model calls** field. See [respond to limit proximity warnings](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md#respond-to-limit-proximity-warnings) for more details.
+Camunda provides a configurable limit on how many times an agent instance can call the model as the primary guardrail against runaway loops and unexpected cost. See [respond to limit proximity warnings](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md#respond-to-limit-proximity-warnings) for more details.
