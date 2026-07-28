@@ -223,6 +223,18 @@ After failover, a reconciliation path replays missing events from the Zeebe log 
 
 <p class="link-arrow">[RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md)</p>
 
+#### Cluster variable metadata bag
+
+<!-- https://github.com/camunda/camunda/issues/54797 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Cluster variables can now carry a `metadata` bag: a map of string keys to scalar values (strings or numbers) attached to a variable and kept separate from its value.
+
+Metadata lets consumers discover and filter variables by semantic attributes without inspecting the variable's value. The search endpoint accepts a `metadata` filter supporting equality, numeric range, existence, `in`, and `like` operators per key. Metadata is never exposed in the FEEL-accessible runtime value.
+
+<p class="link-arrow">[Cluster variable metadata](/components/modeler/feel/cluster-variable/metadata.md)</p>
+
 #### Dual-region ECS reference architecture
 
 <!-- https://github.com/camunda/product-hub/issues/3552 -->
