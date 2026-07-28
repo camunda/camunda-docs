@@ -64,9 +64,9 @@ An agent instance is a specific runtime execution of an agent definition that ca
 
 This representation is not the source of truth for the agent's runtime execution; how an agent's actual state is stored depends on its type, as described in [Agent context and memory](#agent-context-and-memory).
 
-You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
-
 For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI agent Sub-process and AI Agent Task types, the AI Agent connector automatically creates the agent instance through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) as the first step in handling the job for an active agent element. For [external agents](/reference/glossary.md#external-agent), the external runtime creates the instance itself by calling the same API, which can happen at any point while the element is active.
+
+You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
 ### Agent context and memory
 
