@@ -220,7 +220,7 @@ RewriteRule ^docs/next/self-managed/upgrade/components/890-to-8100/?$ /docs/next
 RewriteRule ^docs/next/self-managed/upgrade/components/?$ /docs/next/self-managed/manage/upgrade/components/ [R=301,L]
 RewriteRule ^docs/next/self-managed/upgrade/?$ /docs/next/self-managed/manage/upgrade/ [R=301,L]
 
-# 8.10 SM restructure (Phase 1, finish) — Extend, Manage completion, chart-parameters, wait-states, exporters
+# 8.10 SM restructure (Phase 1) — Extend, Manage completion, chart-parameters, wait-states, exporters
 RewriteRule ^docs/next/self-managed/concepts/wait-states/configure/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/wait-states/ [R=301,L]
 RewriteRule ^docs/next/self-managed/concepts/wait-states/configure-wait-states/?$ /docs/next/self-managed/components/orchestration-cluster/core-settings/configuration/wait-states/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/chart-parameters/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/chart-parameters/ [R=301,L]
