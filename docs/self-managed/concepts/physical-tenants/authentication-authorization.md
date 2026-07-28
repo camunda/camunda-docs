@@ -129,8 +129,6 @@ Register the redirect URI for each Physical Tenant you add. For example, in Keyc
 
 This is standard procedure for registering a new application with an IdP. The exact configuration depends on your IdP and how you expose the tenant URL (path prefix, subdomain, or other pattern).
 
-<!-- @christinaausley — review with @meggle (Sebastian B.) and @ana-vinogradova-camunda; add IdP-specific examples once confirmed -->
-
 ## Session isolation
 
 Each Physical Tenant has its own path-scoped session cookie. The browser only sends the session cookie for that tenant's URL prefix (`/physical-tenants/<id>`), so sessions from different tenants do not interfere.
@@ -147,8 +145,6 @@ Cluster-admin role support and cluster-wide operations are not available in 8.10
 :::
 
 Broker startup does not fail if the cluster-admin role is not configured. However, configuring the cluster-admin role is strongly recommended so that cluster-wide operations (backup, restore, topology management) can be restricted to authorized operators once cluster-wide endpoints become available.
-
-<!-- @christinaausley — review with @deepthidevaki; update when cluster-admin becomes available -->
 
 In a future release, the cluster-admin role will be resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service will be required. Multiple mechanisms will be supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for basic auth.
 

@@ -5,8 +5,6 @@ sidebar_label: "Configuration reference"
 description: "Configure Physical Tenants with root defaults, per-tenant overrides, and startup validation rules."
 ---
 
-<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config, validation rules, and error messages for Physical Tenants. @christinaausley -->
-
 This page explains how to configure Physical Tenants in Camunda 8.10 for Self-Managed deployments.
 
 In 8.10, configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.

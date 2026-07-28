@@ -21,8 +21,6 @@ Choose the model that best fits your isolation requirements and operational cons
 | **Operational complexity** | Low                              | Medium                                  | High                                      |
 | **Use case**               | Small teams, low-risk separation | Multiple teams, strong isolation needed | Separate organizations, maximum isolation |
 
-<!-- @christinaausley — review availability row; SaaS multi-tenancy (logical) is available in SaaS per saas-multitenancy work -->
-
 ## Logical Tenants
 
 **Lightweight tenant-ID based multi-tenancy** for cost-efficient subdivision within a single cluster. Logical Tenants share infrastructure but have logically isolated data, configurations, and access controls.

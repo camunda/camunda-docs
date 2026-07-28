@@ -63,10 +63,6 @@ RDBMS table prefixes must use uppercase characters. A lowercase prefix causes Li
 In the 8.10 alpha release, Oracle supports isolation by table prefix only. Using separate schemas from the same Oracle instance for multiple Physical Tenants is not supported in alpha and will be fixed in a later release.
 :::
 
-<!-- @christinaausley — review with @houssain-barouni and @EuroLew before final release -->
-
-<!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. @christinaausley --->
-
 ## Elasticsearch/OpenSearch storage
 
 :::note
@@ -116,10 +112,8 @@ camunda:
 ### Naming and collision prevention
 
 - **Prefix format**: `{tenantId}` (dash automatically appended by the application)
-- **Collision prevention**: Use the full tenant ID; avoid overlapping prefixes (for example, `eu` and `eu-west`)
-- **Validation**: Cluster fails at startup if two tenants have overlapping index names
-
-<!-- TODO: Confirm whether collision detection catches overlapping prefixes (for example, `eu` vs `eu-west`) or only identical prefixes. Pending eng verification. @christinaausley -->
+- **Collision prevention**: Use the full tenant ID; avoid prefixes that are identical to another tenant's prefix. Overlapping prefixes (for example, `eu` and `eu-west`) are not caught by startup validation — only exact duplicates fail at startup.
+- **Validation**: Cluster fails at startup if two tenants have identical index prefixes
 
 ## Document Store storage
 
@@ -263,7 +257,7 @@ Risks to avoid:
 In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not merged. If you have a custom exporter (for example, a Kafka exporter) and want each tenant to publish to a different topic, you must declare the full exporter configuration separately under each Physical Tenant's section — you cannot declare it once at root level and override only the topic per tenant. This will be addressed in a later alpha. See [camunda/camunda#55155](https://github.com/camunda/camunda/issues/55155).
 :::
 
-<!-- @christinaausley — review with @deepthidevaki and @houssain-barouni; remove custom exporter note once #55155 is resolved -->
+<!-- Remove custom exporter caution once camunda/camunda#55155 is resolved. -->
 
 ## Storage configuration matrix
 
