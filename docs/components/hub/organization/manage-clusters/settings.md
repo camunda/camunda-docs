@@ -50,8 +50,6 @@ Before you enable multi-tenancy checks, assign all users, groups, and roles that
 
 <!-- TODO: Confirm with Console team (camunda-cloud-management-apps#8885) which exact docs anchor the Console UI tooltip links to. Update the #data-filters anchor below if different. -->
 
-<!-- TODO: Confirm whether data filters are available on trial plans or restricted to paid plans (Q6 - tied to Optimize re-enable on trial)? -->
-
 You can configure data filters on a per-cluster basis to control which process definitions and variables the Optimize exporter processes.
 
 :::note
