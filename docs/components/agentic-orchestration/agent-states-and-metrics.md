@@ -17,7 +17,7 @@ For guidance on using these signals to catch an agent going off-rail, see [detec
 
 ## Agent states
 
-Camunda updates an agent instance's state as it progresses through its loop, fed by status updates from the connector handling the agent.
+Camunda updates an agent instance's state as it progresses through its agent loop, fed by status updates from the connector handling the agent.
 
 | State            | Meaning                                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -39,7 +39,7 @@ An agent instance follows a predictable path through these states. The following
 | `Thinking`       | The agent instance is reasoning over the current conversation.                                           | `Tool calling`, if the model selects one or more tools. `Idle` or `Completed`, if the model returns a final response.                                      |
 | `Tool calling`   | The model selected one or more tools in the previous `Thinking` state.                                   | `Thinking`, once tool results are available. This starts the next loop.                                                                                    |
 | `Idle`           | The process instance moves away from the agent element, for example, to wait for a user task or message. | `Thinking`, when the process instance re-activates the same agent element and reuses this agent instance. `Completed`, if the process instance ends first. |
-| `Completed`      | The parent process instance for the agent completes or terminates.                                      | Terminal state; the agent instance stops updating.                                                                                                         |
+| `Completed`      | The parent process instance for the agent completes or terminates.                                       | Terminal state; the agent instance stops updating.                                                                                                         |
 
 The cycle from `Thinking` to `Tool calling` and back to `Thinking` is one **loop iteration**: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration. An agent instance can run through many loop iterations before reaching a final response.
 
