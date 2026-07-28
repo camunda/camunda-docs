@@ -17,5 +17,5 @@ You can only manage a workspace's settings at the workspace level if you're a **
 :::
 
 :::note
-In Self-Managed environments, an organization admin can hide the **Invite member** button on the workspace **Members** page for all other users. See the [`workspace-member-invite-hidden-enabled` feature flag](/self-managed/components/hub/configuration/properties.md#feature-flags) for details.
+In Self-Managed environments, an **Organization admin** can hide the **Invite member** button on the workspace **Members** page for all other users. See the [`workspace-member-invite-hidden-enabled` feature flag](/self-managed/components/hub/configuration/properties.md#feature-flags) for details.
 :::
