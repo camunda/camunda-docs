@@ -68,6 +68,16 @@ See the [release announcement](/reference/announcements-release-notes/8100/8100-
 
 <p class="link-arrow">[Public REST API](/apis-tools/hub-api-saas/overview.md)</p>
 
+#### Invite collaborators through the public API who haven't logged in yet
+
+<!-- https://github.com/camunda/camunda-hub/pull/26666 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Adding a project collaborator through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Web Modeler at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Web Modeler UI. The invitee gains project access once they accept the invitation.
+
+<p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
+
 ### Console
 
 #### Bespoke cluster generations for SaaS
