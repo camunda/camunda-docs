@@ -43,8 +43,6 @@ An agent definition contains the following data:
 - **Process definition key**: The process definition the agent belongs to.
 - **Tenant**: The tenant the agent definition belongs to.
 
-The system prompt and model are [FEEL expressions](/components/modeler/feel/what-is-feel.md) evaluated when an instance is created. They are not stored in the agent definition, because they can resolve to different values for each instance.
-
 ### Mark an element as an agent
 
 To ensure an element is recognized as an agent, you **must mark it** in the BPMN model with the `zeebe:agentDefinition` extension element. How you do this depends on your agent type:
@@ -56,7 +54,7 @@ To ensure an element is recognized as an agent, you **must mark it** in the BPMN
 
 To reuse the same agent across multiple process definitions, use a [call activity](/components/modeler/bpmn/call-activities/call-activities.md). Place the agent in one process definition and call it from the parent processes. This produces a single agent definition for the reused agent, so its metrics aggregate into one registry entry.
 
-Duplicating the same element template directly across several process definitions creates a separate agent definition for each copy, with no cross-definition aggregation.
+Duplicating the same BPMN element directly across several process definitions creates a separate agent definition for each copy, with no cross-definition aggregation.
 
 ## Agent instances
 
@@ -82,10 +80,6 @@ You control this behavior through the agent's memory configuration:
 - **Start with a fresh context** on each activation. The agent element receives an empty context, so Camunda creates a new agent instance every time the element is entered, and no memory carries over.
 
 Where the context is stored depends on the memory storage type. With **In Process** storage, the full context lives in process variables. With **Camunda Document Storage**, the context is stored as a document and the process variable holds only a reference and metadata.
-
-:::tip
-For production use cases, use **Camunda Document Storage**: it avoids the [variable size limitations](/components/concepts/variables.md) that long conversations can hit with in-process storage. Use **In Process** storage for testing and debugging, since it keeps the full context directly visible in Operate. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
-:::
 
 ### Data available in Operate
 
