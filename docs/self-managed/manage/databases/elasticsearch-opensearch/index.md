@@ -1,5 +1,5 @@
 ---
-sidebar_label: Non-SQL
+sidebar_label: Elasticsearch and OpenSearch
 title: Configure Elasticsearch and OpenSearch for Orchestration Cluster in Helm
 description: Configure Elasticsearch and OpenSearch as secondary storage for the Orchestration Cluster in Camunda 8 Self-Managed Helm deployments.
 ---
@@ -19,8 +19,8 @@ Use the following pages based on your backend:
 
 Use the following pages when you need settings that can apply to both the Orchestration Cluster and Optimize:
 
-- [Configure custom HTTP headers for database clients](/self-managed/manage/databases/elasticsearch-opensearch/configure-db-custom-headers.md)
-- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md)
+- [Configure custom HTTP headers for database clients](/self-managed/manage/databases/elasticsearch-opensearch/custom-http-headers.md)
+- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md)
 
 ## Troubleshooting
 

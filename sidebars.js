@@ -1823,7 +1823,7 @@ module.exports = {
                             id: "self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift",
                           },
                           items: [
-                            "self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift-dual-region",
+                            "self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/dual-region",
                           ],
                         },
                       ],
@@ -1875,12 +1875,12 @@ module.exports = {
                       },
                       items: [
                         "self-managed/deploy-to-production/kubernetes/configure/ingress/ingress-setup",
-                        "self-managed/deploy-to-production/kubernetes/configure/ingress/accessing-components-without-ingress",
+                        "self-managed/deploy-to-production/kubernetes/configure/ingress/without-ingress",
                         "self-managed/deploy-to-production/kubernetes/configure/ingress/gateway-api-setup",
                       ],
                     },
                     "self-managed/deploy-to-production/kubernetes/configure/secret-management",
-                    "self-managed/deploy-to-production/kubernetes/configure/running-custom-connectors",
+                    "self-managed/deploy-to-production/kubernetes/configure/custom-connectors",
                     "self-managed/deploy-to-production/kubernetes/configure/add-extra-manifests",
                     "self-managed/deploy-to-production/kubernetes/configure/license-key",
                     "self-managed/deploy-to-production/kubernetes/configure/chart-parameters",
@@ -1944,7 +1944,7 @@ module.exports = {
                 "self-managed/deploy-to-production/manual/install",
                 {
                   type: "category",
-                  label: "Manual installation with a relational database",
+                  label: "Relational database (RDBMS)",
                   link: {
                     type: "doc",
                     id: "self-managed/deploy-to-production/manual/rdbms/index",
@@ -1993,9 +1993,9 @@ module.exports = {
                 id: "self-managed/manage/databases/secondary-storage/index",
               },
               items: [
-                "self-managed/manage/databases/secondary-storage/configuring-secondary-storage",
-                "self-managed/manage/databases/secondary-storage/managing-secondary-storage",
-                "self-managed/manage/databases/secondary-storage/no-secondary-storage",
+                "self-managed/manage/databases/secondary-storage/configure",
+                "self-managed/manage/databases/secondary-storage/manage",
+                "self-managed/manage/databases/secondary-storage/without-secondary-storage",
               ],
             },
             {
@@ -2006,17 +2006,17 @@ module.exports = {
                 id: "self-managed/manage/databases/relational-database/index",
               },
               items: [
-                "self-managed/manage/databases/relational-database/rdbms-setup-guide",
+                "self-managed/manage/databases/relational-database/setup-guide",
                 "self-managed/manage/databases/relational-database/rdbms",
                 "self-managed/manage/databases/relational-database/configuration",
-                "self-managed/manage/databases/relational-database/rdbms-jdbc-drivers",
-                "self-managed/manage/databases/relational-database/rdbms-schema-management",
+                "self-managed/manage/databases/relational-database/jdbc-drivers",
+                "self-managed/manage/databases/relational-database/schema-management",
                 "self-managed/manage/databases/relational-database/access-sql-liquibase-scripts",
-                "self-managed/manage/databases/relational-database/rdbms-search-and-result-limits",
+                "self-managed/manage/databases/relational-database/search-and-result-limits",
                 "self-managed/manage/databases/relational-database/validate-rdbms",
-                "self-managed/manage/databases/relational-database/rdbms-troubleshooting",
-                "self-managed/manage/databases/relational-database/rdbms-support-policy",
-                "self-managed/manage/databases/relational-database/rdbms-benchmark-results",
+                "self-managed/manage/databases/relational-database/troubleshooting",
+                "self-managed/manage/databases/relational-database/support-policy",
+                "self-managed/manage/databases/relational-database/benchmark-results",
               ],
             },
             {
@@ -2029,8 +2029,8 @@ module.exports = {
               items: [
                 "self-managed/manage/databases/elasticsearch-opensearch/using-external-elasticsearch",
                 "self-managed/manage/databases/elasticsearch-opensearch/using-external-opensearch",
-                "self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices",
-                "self-managed/manage/databases/elasticsearch-opensearch/configure-db-custom-headers",
+                "self-managed/manage/databases/elasticsearch-opensearch/prefix-indices",
+                "self-managed/manage/databases/elasticsearch-opensearch/custom-http-headers",
                 "self-managed/manage/databases/elasticsearch-opensearch/elasticsearch-privileges",
                 "self-managed/manage/databases/elasticsearch-opensearch/elasticsearch-without-cluster-privileges",
                 "self-managed/manage/databases/elasticsearch-opensearch/opensearch-privileges",
@@ -2073,13 +2073,14 @@ module.exports = {
               ],
             },
             {
-              "Backup Management API": [
+              "Backup management API": [
                 "self-managed/manage/back-up-and-restore/optimize-backup",
                 "self-managed/manage/back-up-and-restore/webapps-backup",
                 "self-managed/manage/back-up-and-restore/zeebe-backup-and-restore",
               ],
             },
             "self-managed/manage/back-up-and-restore/optimize-backup-and-restore",
+            "self-managed/manage/back-up-and-restore/modeler-backup-and-restore",
           ],
         },
         {
@@ -2172,9 +2173,7 @@ module.exports = {
                 type: "doc",
                 id: "self-managed/extend/tenancy/logical-tenants",
               },
-              items: [
-                "self-managed/extend/tenancy/configure-logical-multi-tenancy",
-              ],
+              items: ["self-managed/extend/tenancy/logical-multi-tenancy"],
             },
             {
               type: "category",

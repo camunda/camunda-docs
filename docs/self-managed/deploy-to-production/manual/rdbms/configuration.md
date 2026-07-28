@@ -1,5 +1,4 @@
 ---
-id: configuration
 sidebar_label: Configuration
 title: Configure RDBMS for manual installations
 description: Configure drivers, connection parameters, and schema initialization for manual RDBMS installations.
@@ -9,7 +8,7 @@ Configure RDBMS secondary storage drivers, connections, and initial schema for *
 
 ## Prerequisites
 
-- **Supported RDBMS**: See the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+- **Supported RDBMS**: See the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 - **JDBC drivers**: PostgreSQL, MariaDB, SQL Server, and H2 are bundled. Oracle and MySQL must be user-supplied.
 - **Java 21+**: Required for Orchestration Cluster components (Zeebe, Operate, Tasklist, Identity). Management Identity remains Java 17+. See [supported environments](/reference/supported-environments.md).
 - **Database user**: Needs DDL permissions (CREATE TABLE, ALTER TABLE, DROP TABLE) for schema initialization.
@@ -136,5 +135,5 @@ Download scripts: [Access SQL and Liquibase scripts](/self-managed/manage/databa
 - [Operations and maintenance](/self-managed/deploy-to-production/manual/rdbms/operations.md)
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS production architecture](/self-managed/deploy-to-production/manual/rdbms/rdbms-production-architecture.md)
-- [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
+- [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)
 - [Access SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md)

@@ -199,7 +199,7 @@ Because collation behavior varies across database vendors, results sorted by str
 
 For hands-on instructions to deploy Camunda with RDBMS, start with:
 
-- [End-to-end RDBMS setup guide](/self-managed/manage/databases/relational-database/rdbms-setup-guide.md) - Unified guide for provisioning, topology decisions, driver management, and backup strategies.
+- [End-to-end RDBMS setup guide](/self-managed/manage/databases/relational-database/setup-guide.md) - Unified guide for provisioning, topology decisions, driver management, and backup strategies.
 
 Then choose your deployment pattern:
 

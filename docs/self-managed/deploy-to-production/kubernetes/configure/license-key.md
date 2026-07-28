@@ -1,5 +1,4 @@
 ---
-id: license-key
 sidebar_label: License key
 title: Configure license key
 description: Configure an enterprise license key for Camunda components using Helm.

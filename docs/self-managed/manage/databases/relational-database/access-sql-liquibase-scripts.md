@@ -8,8 +8,8 @@ Access and safely use the SQL and Liquibase scripts provided with Camunda 8 for 
 :::note Related pages
 
 - **[Configure RDBMS](/self-managed/manage/databases/relational-database/rdbms.md)** - Configuration reference and Helm values.
-- **[Schema management](/self-managed/manage/databases/relational-database/rdbms-schema-management.md)** - Schema creation, permissions, and auto-DDL configuration.
-- **[JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md)** - Managing custom database drivers.
+- **[Schema management](/self-managed/manage/databases/relational-database/schema-management.md)** - Schema creation, permissions, and auto-DDL configuration.
+- **[JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md)** - Managing custom database drivers.
   :::
 
 ## Where the scripts are published

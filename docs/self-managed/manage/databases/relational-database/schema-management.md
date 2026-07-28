@@ -10,7 +10,7 @@ This page covers schema creation, upgrades, and management for RDBMS deployments
 
 - **[Access SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md)** - Where to find and download schema scripts.
 - **[Validate RDBMS connectivity](/self-managed/manage/databases/relational-database/validate-rdbms.md)** - Verify schema and exporter after deployment.
-- **[JDBC drivers](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md)** - Managing database drivers.
+- **[JDBC drivers](/self-managed/manage/databases/relational-database/jdbc-drivers.md)** - Managing database drivers.
   :::
 
 ## Automatic schema creation (autoDDL)

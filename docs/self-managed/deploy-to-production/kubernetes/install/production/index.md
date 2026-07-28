@@ -1,5 +1,4 @@
 ---
-id: index
 title: Install Camunda for production with Helm
 sidebar_label: Production install
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
@@ -394,7 +393,7 @@ camunda:
       numberOfReplicas: 1
 ```
 
-Each replica stores a full copy of the primary shard data, approximately doubling disk usage for those indices. Account for this when sizing your cluster. See [Managing secondary storage: Replicas](/self-managed/manage/databases/secondary-storage/managing-secondary-storage.md#replicas) for full guidance.
+Each replica stores a full copy of the primary shard data, approximately doubling disk usage for those indices. Account for this when sizing your cluster. See [Managing secondary storage: Replicas](/self-managed/manage/databases/secondary-storage/manage.md#replicas) for full guidance.
 
 #### Version management
 

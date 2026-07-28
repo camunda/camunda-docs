@@ -1,6 +1,5 @@
 ---
-id: application-configs
-sidebar_label: Configure component configuration
+sidebar_label: Component configuration
 title: Configure component configuration
 description: "Learn how to configure individual Camunda components in Helm charts."
 ---

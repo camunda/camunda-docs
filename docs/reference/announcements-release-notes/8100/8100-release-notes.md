@@ -265,7 +265,7 @@ Camunda 8.10 adds support for new relational database versions. Operators runnin
 
 New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 #### Physical Tenant support
 

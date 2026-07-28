@@ -1,5 +1,4 @@
 ---
-id: helm-v4
 title: "Helm 4"
 sidebar_label: "Helm 4"
 description: "Learn how Helm 4 behavior affects Camunda Helm chart installs and upgrades."

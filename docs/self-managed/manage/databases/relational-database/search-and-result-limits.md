@@ -150,5 +150,5 @@ Database-specific tuning for MariaDB and Oracle will be documented in future upd
 ## Related guides
 
 - [Configure RDBMS in Helm charts](/self-managed/manage/databases/relational-database/rdbms.md)
-- [JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md)
-- [RDBMS troubleshooting and operations](/self-managed/manage/databases/relational-database/rdbms-troubleshooting.md)
+- [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md)
+- [RDBMS troubleshooting and operations](/self-managed/manage/databases/relational-database/troubleshooting.md)

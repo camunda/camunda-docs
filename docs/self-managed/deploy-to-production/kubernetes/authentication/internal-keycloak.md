@@ -1,5 +1,4 @@
 ---
-id: internal-keycloak
 sidebar_label: Internal Keycloak
 title: Set up the Helm chart with the internal Keycloak instance
 description: Learn how to configure and enable the internal Keycloak instance for Camunda 8 Self-Managed deployments using the Helm chart.

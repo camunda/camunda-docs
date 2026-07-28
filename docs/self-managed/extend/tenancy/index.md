@@ -47,6 +47,6 @@ Best for: Separate organizations with maximum isolation requirements or strict d
 
 ## Next steps
 
-- Configure [Logical Tenants](/self-managed/extend/tenancy/configure-logical-multi-tenancy.md) for lightweight subdivision.
+- Configure [Logical Tenants](/self-managed/extend/tenancy/logical-multi-tenancy.md) for lightweight subdivision.
 - Explore [Physical Tenants](/self-managed/extend/tenancy/physical-tenants/index.md) for strong isolation.
 - Manage [tenants in Identity](/self-managed/components/management-identity/manage-tenants.md).

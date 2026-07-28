@@ -1,5 +1,4 @@
 ---
-id: air-gapped-installation
 sidebar_label: Air-gapped environment
 title: Install Helm chart in air-gapped environments
 description: Install Camunda 8 Self-Managed in an air-gapped environment.
@@ -174,7 +173,7 @@ Install the Helm chart by either making it available in a [private repository](h
 helm install camunda --version $HELM_CHART_VERSION ./camunda-platform-11.1.0.tgz
 ```
 
-For supported versions, see [supported environments](/reference/supported-environments.md#camunda-8-self-managed) and the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+For supported versions, see [supported environments](/reference/supported-environments.md#camunda-8-self-managed) and the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 
 ### Dependency overview
 

@@ -19,7 +19,7 @@ Camunda uses the `data.secondary-storage` configuration to define which secondar
 
 :::note
 For the latest list of supported relational databases and versions, see the  
-[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 :::
 
 <Tabs groupId="configuration" defaultValue="helm" queryString values={[
@@ -184,7 +184,7 @@ If you currently run an invalid H2 topology, use one of these paths:
 :::note
 Starting in 8.9, H2 is the default secondary storage for lightweight Camunda 8 Run setups and quickstarts. H2 remains suitable for local testing, demos, and file-based setups, but it is not recommended for production workloads where persistence, scaling, and full analytics are required.
 
-For production use, Orchestration Cluster applications and APIs (including Operate, Tasklist, Identity, and search endpoints) should run against a persistent secondary storage backend such as a supported RDBMS or a document-store backend (Elasticsearch/OpenSearch). Both are valid production choices when supported for your deployment. Consult the [RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md) when choosing a relational database, and [supported environments](/reference/supported-environments.md) for Elasticsearch/OpenSearch versions.
+For production use, Orchestration Cluster applications and APIs (including Operate, Tasklist, Identity, and search endpoints) should run against a persistent secondary storage backend such as a supported RDBMS or a document-store backend (Elasticsearch/OpenSearch). Both are valid production choices when supported for your deployment. Consult the [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md) when choosing a relational database, and [supported environments](/reference/supported-environments.md) for Elasticsearch/OpenSearch versions.
 :::
 
 :::note
@@ -201,4 +201,4 @@ In this mode:
 - The Zeebe engine and primary storage remain active for process execution.
 - This configuration is best suited for local development or minimal-resource environments.
 
-See [run without secondary storage](/self-managed/manage/databases/secondary-storage/no-secondary-storage.md) for configuration examples and limitations.
+See [run without secondary storage](/self-managed/manage/databases/secondary-storage/without-secondary-storage.md) for configuration examples and limitations.

@@ -31,7 +31,7 @@ Retention policy types:
 1. **Elasticsearch/OpenSearch Exporter indices (Zeebe records)** (`orchestration.retention`) – Retention for Zeebe record indices written by the legacy Elasticsearch/OpenSearch Exporter (for example, `zeebe-record-*`). These are _not_ Orchestration Cluster indices.
 1. **Orchestration Cluster indices (historical data)** (`orchestration.history.retention`) – Retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage.
 
-For index prefix requirements and examples when both index families share the same Elasticsearch/OpenSearch cluster, see [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md).
+For index prefix requirements and examples when both index families share the same Elasticsearch/OpenSearch cluster, see [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md).
 
 :::warning
 

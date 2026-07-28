@@ -1,5 +1,4 @@
 ---
-id: accessing-components-without-ingress
 sidebar_label: Without Ingress
 title: Helm chart without Ingress setup
 description: "Accessing Camunda 8 components externally without Ingress"

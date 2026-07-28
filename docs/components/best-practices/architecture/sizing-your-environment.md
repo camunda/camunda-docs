@@ -244,7 +244,7 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 
 #### RDBMS
 
-- A different storage paradigm: a relational database instead of a document store. See the full list of [supported databases](/self-managed/manage/databases/relational-database/rdbms-support-policy.md#supported-rdbms).
+- A different storage paradigm: a relational database instead of a document store. See the full list of [supported databases](/self-managed/manage/databases/relational-database/support-policy.md#supported-rdbms).
 - A different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
 - Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
 - **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
@@ -300,4 +300,4 @@ Now that you understand the factors that influence sizing:
 - **Self-Managed admins:** Provision your Kubernetes cluster using these [baseline resource settings](sizing-self-managed.md).
 - **Validate sizing:** [Run your own benchmarks](sizing-benchmarks.md) to test your specific workload.
 
-For current secondary storage benchmarks, see [RDBMS benchmark results](/self-managed/manage/databases/relational-database/rdbms-benchmark-results.md).
+For current secondary storage benchmarks, see [RDBMS benchmark results](/self-managed/manage/databases/relational-database/benchmark-results.md).

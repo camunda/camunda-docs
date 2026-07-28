@@ -380,7 +380,7 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 Before deploying Camunda, you need to deploy the infrastructure services it depends on. The core infrastructure (Elasticsearch) can be deployed using Kubernetes operators as described in [Deploy infrastructure with Kubernetes operators](/self-managed/deploy-to-production/plan/kubernetes-operators.md).
 
 - **Elasticsearch** (this guide): Deployed via [ECK (Elastic Cloud on Kubernetes)](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- **RDBMS** (alternative): Use a managed Azure Database for PostgreSQL or another supported RDBMS engine — see the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
+- **RDBMS** (alternative): Use a managed Azure Database for PostgreSQL or another supported RDBMS engine — see the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)
 
 All deploy scripts are located in `generic/kubernetes/operator-based/`. Review each script before executing to understand the deployment steps, and adapt the operator Custom Resource configurations for your specific requirements (resource limits, storage, replicas, etc.).
 
@@ -393,7 +393,7 @@ All commands in this guide assume you are at the **repository root** (the direct
 If your organization does not want to use a managed Elasticsearch service, ECK Operator is an option. In this guide, we default to the ECK Operator deployment of Elasticsearch.
 
 :::note RDBMS alternative
-For those who prefer a relational database, RDBMS (for example, [Azure Database for PostgreSQL](https://azure.microsoft.com/products/postgresql)) is a supported alternative to Elasticsearch for the Orchestration Cluster's secondary storage. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md) for supported engines. To use RDBMS instead, skip this section and see [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md).
+For those who prefer a relational database, RDBMS (for example, [Azure Database for PostgreSQL](https://azure.microsoft.com/products/postgresql)) is a supported alternative to Elasticsearch for the Orchestration Cluster's secondary storage. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md) for supported engines. To use RDBMS instead, skip this section and see [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md).
 :::
 
 :::warning Production Elasticsearch recommendation

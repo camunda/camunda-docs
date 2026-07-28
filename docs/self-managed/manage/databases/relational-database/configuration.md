@@ -1,5 +1,6 @@
 ---
 title: "RDBMS configuration overview"
+sidebar_label: Configuration
 description: Learn how to configure Camunda to use a relational database as secondary storage, including exporter setup, schema management, privileges, and connection settings.
 ---
 
@@ -11,10 +12,10 @@ This page explains how RDBMS configuration works at the application level. If yo
 - [Access native SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md)
 
 For supported database vendors and versions, see the  
-[RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+[RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 
 :::tip Need end-to-end guidance?
-For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/manage/databases/relational-database/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/manage/databases/relational-database/setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
 :::
 
 ## Enable RDBMS as secondary storage

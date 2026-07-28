@@ -601,7 +601,7 @@ To restrict the Connector Runtime inbound connector feature to a single tenant o
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/extend/tenancy/configure-logical-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Admin.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/extend/tenancy/logical-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Admin.
 
 Find more information (including links to component-specific configuration pages) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 

@@ -1,5 +1,4 @@
 ---
-id: index
 title: "Amazon ECS"
 description: "Run the Camunda 8 Orchestration Cluster and Connectors in Amazon Elastic Container Service."
 ---

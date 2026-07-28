@@ -78,7 +78,7 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 
 ### Deployment configuration
 
-- [Configure multi-tenancy in Helm chart](/self-managed/extend/tenancy/configure-logical-multi-tenancy.md) — Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
+- [Configure multi-tenancy in Helm chart](/self-managed/extend/tenancy/logical-multi-tenancy.md) — Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
 
 ### Tenant initialization
 

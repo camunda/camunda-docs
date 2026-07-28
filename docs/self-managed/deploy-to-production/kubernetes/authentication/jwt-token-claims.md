@@ -1,6 +1,5 @@
 ---
-id: jwt-token-claims
-sidebar_label: JWT token claims reference
+sidebar_label: JWT token claims
 title: JWT token claims reference
 description: Reference for identifying and decoding JWT token claims when configuring OIDC authentication for Camunda 8 Self-Managed.
 ---

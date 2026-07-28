@@ -150,7 +150,7 @@ elasticsearch:
   enabled: false
 ```
 
-For more details on index prefix configuration, including Optimize-specific settings when Optimize is enabled, see [prefix Elasticsearch/OpenSearch indices](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md).
+For more details on index prefix configuration, including Optimize-specific settings when Optimize is enabled, see [prefix Elasticsearch/OpenSearch indices](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md).
 
 ## Troubleshooting
 
@@ -166,7 +166,7 @@ If Zeebe pods fail, check for the following error:
 
 - [Camunda production installation guide with Kubernetes and Helm](versioned_docs/version-8.7/self-managed/operational-guides/production-guide/helm-chart-production-guide.md) (8.8 version not yet available)
 - [Use external Elasticsearch for Optimize with Helm](/self-managed/manage/databases/optimize/using-external-elasticsearch.md)
-- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md)
+- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md)
 
 ## Next steps
 

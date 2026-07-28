@@ -1,5 +1,4 @@
 ---
-id: gateway-api-setup
 sidebar_label: With Gateway API
 title: Configure the Helm chart with Gateway API
 description: Set up and configure the Kubernetes Gateway API for Camunda 8 Self-Managed Helm deployments.

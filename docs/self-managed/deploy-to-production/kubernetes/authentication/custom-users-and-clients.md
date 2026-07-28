@@ -1,5 +1,4 @@
 ---
-id: custom-users-and-clients
 sidebar_label: Adding users and clients
 title: Helm chart user and client setup for Management Identity
 description: Configure users and OAuth2 clients for Management Identity in Camunda 8 Self-Managed deployments using the Helm chart.

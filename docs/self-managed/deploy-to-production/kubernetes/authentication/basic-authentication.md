@@ -1,5 +1,4 @@
 ---
-id: basic-authentication
 sidebar_label: Basic authentication
 title: Set up the Helm chart with basic authentication
 description: Learn how to configure and manage Basic authentication for Camunda 8 Self-Managed deployments using Helm chart.
@@ -43,7 +42,7 @@ In Helm, arrays must be overwritten in full. If you change these configuration s
 
 ### Connect to the cluster
 
-To access the Orchestration Cluster and Connectors from your local machine using `kubectl port-forward`, refer to [Accessing components without Ingress](/self-managed/deploy-to-production/kubernetes/configure/ingress/accessing-components-without-ingress.md).
+To access the Orchestration Cluster and Connectors from your local machine using `kubectl port-forward`, refer to [Accessing components without Ingress](/self-managed/deploy-to-production/kubernetes/configure/ingress/without-ingress.md).
 
 Log in with the default credentials:
 

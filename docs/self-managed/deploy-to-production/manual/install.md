@@ -1,5 +1,4 @@
 ---
-id: install
 title: "Camunda manual installation"
 sidebar_label: "Install"
 ---

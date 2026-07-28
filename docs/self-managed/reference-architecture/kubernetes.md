@@ -1,5 +1,4 @@
 ---
-id: kubernetes
 title: "Kubernetes deployment overview"
 sidebar_label: "Kubernetes"
 description: "Camunda 8 Kubernetes deployment reference architecture home."

@@ -1,5 +1,4 @@
 ---
-id: index
 title: Install Camunda with Helm
 sidebar_label: Install
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm charts for development, evaluation, or production environments.

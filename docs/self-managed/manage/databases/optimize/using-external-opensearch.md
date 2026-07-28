@@ -1,5 +1,5 @@
 ---
-sidebar_label: Amazon OpenSearch Service
+sidebar_label: External OpenSearch
 title: Use external OpenSearch for Optimize with Helm
 description: Learn how to connect Optimize in a Camunda 8 Self-Managed Helm deployment to an external OpenSearch instance.
 ---
@@ -29,21 +29,21 @@ To connect to OpenSearch using Basic authentication, follow the configuration be
 
 ### Parameters
 
-| Parameter                                                    | Type    | Default          | Description                                                                                                                                                                                              |
-| ------------------------------------------------------------ | ------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `optimize.database.opensearch.enabled`                       | boolean | `false`          | Enable external OpenSearch.                                                                                                                                                                              |
-| `optimize.database.opensearch.aws.enabled`                   | boolean | `false`          | Enable AWS IRSA integration.                                                                                                                                                                             |
-| `optimize.database.opensearch.auth.username`                 | string  | `""`             | Username for external OpenSearch authentication.                                                                                                                                                         |
-| `optimize.database.opensearch.auth.secret.inlineSecret`      | string  | `""`             | OpenSearch password as a plain-text value (non-production only).                                                                                                                                         |
-| `optimize.database.opensearch.auth.secret.existingSecret`    | string  | `""`             | Reference to an existing Kubernetes Secret containing the password.                                                                                                                                      |
-| `optimize.database.opensearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing Kubernetes Secret containing the password.                                                                                                                                       |
-| `optimize.database.opensearch.prefix`                        | string  | `zeebe-record`   | Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md). |
-| `optimize.database.opensearch.tls.enabled`                   | boolean | `false`          | Enable TLS for external OpenSearch.                                                                                                                                                                      |
-| `optimize.database.opensearch.tls.secret.existingSecret`     | string  | `""`             | Name of the Kubernetes Secret containing a TLS certificate.                                                                                                                                              |
-| `optimize.database.opensearch.tls.secret.existingSecretKey`  | string  | `externaldb.jks` | Key within the secret containing the TLS certificate.                                                                                                                                                    |
-| `optimize.database.opensearch.url.protocol`                  | string  | `""`             | Access protocol for OpenSearch. Possible values are `http` and `https`.                                                                                                                                  |
-| `optimize.database.opensearch.url.host`                      | string  | `""`             | OpenSearch host, ideally the service name within the namespace.                                                                                                                                          |
-| `optimize.database.opensearch.url.port`                      | integer | `0`              | Port used to access OpenSearch.                                                                                                                                                                          |
+| Parameter                                                    | Type    | Default          | Description                                                                                                                                                                      |
+| ------------------------------------------------------------ | ------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `optimize.database.opensearch.enabled`                       | boolean | `false`          | Enable external OpenSearch.                                                                                                                                                      |
+| `optimize.database.opensearch.aws.enabled`                   | boolean | `false`          | Enable AWS IRSA integration.                                                                                                                                                     |
+| `optimize.database.opensearch.auth.username`                 | string  | `""`             | Username for external OpenSearch authentication.                                                                                                                                 |
+| `optimize.database.opensearch.auth.secret.inlineSecret`      | string  | `""`             | OpenSearch password as a plain-text value (non-production only).                                                                                                                 |
+| `optimize.database.opensearch.auth.secret.existingSecret`    | string  | `""`             | Reference to an existing Kubernetes Secret containing the password.                                                                                                              |
+| `optimize.database.opensearch.auth.secret.existingSecretKey` | string  | `""`             | Key within the existing Kubernetes Secret containing the password.                                                                                                               |
+| `optimize.database.opensearch.prefix`                        | string  | `zeebe-record`   | Index prefix for `zeebe-record` indices. See [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md). |
+| `optimize.database.opensearch.tls.enabled`                   | boolean | `false`          | Enable TLS for external OpenSearch.                                                                                                                                              |
+| `optimize.database.opensearch.tls.secret.existingSecret`     | string  | `""`             | Name of the Kubernetes Secret containing a TLS certificate.                                                                                                                      |
+| `optimize.database.opensearch.tls.secret.existingSecretKey`  | string  | `externaldb.jks` | Key within the secret containing the TLS certificate.                                                                                                                            |
+| `optimize.database.opensearch.url.protocol`                  | string  | `""`             | Access protocol for OpenSearch. Possible values are `http` and `https`.                                                                                                          |
+| `optimize.database.opensearch.url.host`                      | string  | `""`             | OpenSearch host, ideally the service name within the namespace.                                                                                                                  |
+| `optimize.database.opensearch.url.port`                      | integer | `0`              | Port used to access OpenSearch.                                                                                                                                                  |
 
 ### Example usage
 
@@ -90,11 +90,11 @@ optimize:
         port: 443
 ```
 
-For more details about index prefix configuration and matching exporter settings, see [configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md).
+For more details about index prefix configuration and matching exporter settings, see [configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md).
 
 ## References
 
 - [Helm charts secret management](/self-managed/deploy-to-production/kubernetes/configure/secret-management.md)
 - [IAM roles for service accounts](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md#opensearch-module-setup)
-- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md)
+- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md)
 - [Use Amazon OpenSearch Service for Orchestration Cluster with Helm](/self-managed/manage/databases/elasticsearch-opensearch/using-external-opensearch.md)

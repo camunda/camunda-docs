@@ -1,5 +1,4 @@
 ---
-id: aws-ec2
 title: "Amazon EC2"
 description: "Learn how to install Camunda 8 on AWS EC2 instances."
 ---

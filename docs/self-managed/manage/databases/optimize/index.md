@@ -17,7 +17,7 @@ Use the following pages based on your backend:
 
 Shared Elasticsearch and OpenSearch tasks:
 
-- [Configure custom HTTP headers for database clients](/self-managed/manage/databases/elasticsearch-opensearch/configure-db-custom-headers.md)
-- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md)
+- [Configure custom HTTP headers for database clients](/self-managed/manage/databases/elasticsearch-opensearch/custom-http-headers.md)
+- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md)
 
 For background on secondary storage choices and exporter behavior, see [secondary storage overview](/self-managed/manage/databases/secondary-storage/index.md).

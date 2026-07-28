@@ -1,5 +1,4 @@
 ---
-id: helm-with-rdbms
 sidebar_label: RDBMS example deployment
 title: RDBMS example deployment for Camunda with Helm
 description: "Focused walkthrough for teams choosing an external RDBMS as secondary storage within the Helm production installation flow."
@@ -17,7 +16,7 @@ Related guides:
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [Secondary storage overview](/self-managed/manage/databases/secondary-storage/index.md)
 - [Configure RDBMS in Helm charts](/self-managed/manage/databases/relational-database/rdbms.md)
-- [JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md)
+- [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md)
 
 ## What changes when using RDBMS?
 
@@ -39,7 +38,7 @@ Before you begin:
 
 1. **Kubernetes cluster**: 1.24+ with sufficient resources for Camunda pods.
 2. **Helm CLI v4**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/). Helm v3 is not supported for Camunda 8.10 and later.
-3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md) for the complete list of supported databases and versions.
+3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md) for the complete list of supported databases and versions.
 4. **Database credentials**: Username and password for a database user with DDL permissions (if using auto-schema creation).
 5. **Document-store backend (Elasticsearch/OpenSearch)** (for Optimize): Required if you deploy Optimize alongside Camunda.
 
@@ -158,7 +157,7 @@ kubectl create secret generic camunda-db-secret \
 If you're using Oracle, MySQL, or a database version not covered by bundled drivers, you must provide the JDBC driver.
 
 :::note
-For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md).
+For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md).
 :::
 
 #### Option A: Init container (recommended for production)

@@ -690,7 +690,7 @@ Examples of secondary storage backends include:
 - [RDBMS](#rdbms)
 
 - [Secondary storage concepts](/self-managed/manage/databases/secondary-storage/index.md)
-- [Managing secondary storage](/self-managed/manage/databases/secondary-storage/managing-secondary-storage.md)
+- [Managing secondary storage](/self-managed/manage/databases/secondary-storage/manage.md)
 
 ### Segment
 

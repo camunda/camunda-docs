@@ -1,5 +1,4 @@
 ---
-id: microsoft-entra
 sidebar_label: Microsoft Entra
 title: Set up the Helm chart with an external Microsoft Entra tenant
 description: Learn how to connect the Camunda Helm chart to a Microsoft Entra tenant.

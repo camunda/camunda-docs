@@ -293,6 +293,6 @@ Camunda 8 Run uses v2 APIs by default, so no additional configuration is require
 
 ## Next steps
 
-- Review [RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+- Review [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 - Review [backup and restore for RDBMS](/self-managed/manage/back-up-and-restore/rdbms/backup.md).
 - Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer/c8run/troubleshooting.md).

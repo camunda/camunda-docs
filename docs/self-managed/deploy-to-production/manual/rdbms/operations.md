@@ -1,5 +1,4 @@
 ---
-id: operations
 sidebar_label: Operations and maintenance
 title: Operations and maintenance for RDBMS manual installations
 description: Backup, restore, upgrade, troubleshoot, tune, and secure RDBMS for manual Camunda installations.
@@ -165,5 +164,5 @@ Before deploying to production, review [secondary storage architecture](/self-ma
 - [RDBMS configuration](/self-managed/deploy-to-production/manual/rdbms/configuration.md)
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS production architecture](/self-managed/deploy-to-production/manual/rdbms/rdbms-production-architecture.md)
-- [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
+- [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)
 - [Access SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md)

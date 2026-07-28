@@ -1,5 +1,4 @@
 ---
-id: dual-region
 title: "Dual-region setup (EKS)"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---

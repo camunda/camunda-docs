@@ -9,8 +9,8 @@ This page covers troubleshooting common issues, TLS configuration, and post-depl
 :::note Related pages
 
 - **[Validate RDBMS connectivity](/self-managed/manage/databases/relational-database/validate-rdbms.md)** - Quick validation checklist with database client examples.
-- **[Schema management](/self-managed/manage/databases/relational-database/rdbms-schema-management.md)** - Schema creation and lifecycle.
-- **[JDBC drivers](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md)** - Managing database drivers.
+- **[Schema management](/self-managed/manage/databases/relational-database/schema-management.md)** - Schema creation and lifecycle.
+- **[JDBC drivers](/self-managed/manage/databases/relational-database/jdbc-drivers.md)** - Managing database drivers.
   :::
 
 ## Connection failures
@@ -73,7 +73,7 @@ kubectl logs <pod-name> -c fetch-jdbc-drivers
 
 3. Verify the JDBC URL matches the driver type (e.g., Oracle URL with Oracle driver).
 
-**Fix:** Provide the driver using `extraVolumes`/`extraVolumeMounts`, an init container, or a custom image. Re-apply the init container configuration or verify the custom image includes the driver. See [JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md).
+**Fix:** Provide the driver using `extraVolumes`/`extraVolumeMounts`, an init container, or a custom image. Re-apply the init container configuration or verify the custom image includes the driver. See [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md).
 
 ## Schema creation failure
 
@@ -101,9 +101,9 @@ orchestration:
                 auto-ddl: false # Confirm this is set
 ```
 
-3. Test database user permissions (see [Schema management](/self-managed/manage/databases/relational-database/rdbms-schema-management.md#database-user-permissions)).
+3. Test database user permissions (see [Schema management](/self-managed/manage/databases/relational-database/schema-management.md#database-user-permissions)).
 
-**Fix:** Ensure database user has DDL permissions or disable autoDDL and apply schema manually. See [Schema management](/self-managed/manage/databases/relational-database/rdbms-schema-management.md).
+**Fix:** Ensure database user has DDL permissions or disable autoDDL and apply schema manually. See [Schema management](/self-managed/manage/databases/relational-database/schema-management.md).
 
 ## Liquibase lock after pod crash or restart
 
@@ -238,7 +238,7 @@ Updating bundled drivers or replacing custom drivers:
 helm upgrade camunda camunda/camunda-platform -f values.yaml -n camunda
 ```
 
-See [JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md#jdbc-driver-updates).
+See [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md#jdbc-driver-updates).
 
 ### Schema validation
 

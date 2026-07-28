@@ -1,5 +1,4 @@
 ---
-id: install-bitnami-enterprise-images
 sidebar_label: Bitnami enterprise images
 title: Install Bitnami enterprise images
 description: Configure the Camunda Helm chart to use Bitnami Premium enterprise images, understand CVE reporting, support boundaries, and set expectations on vulnerabilities.

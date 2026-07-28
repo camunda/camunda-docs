@@ -1,5 +1,4 @@
 ---
-id: kubernetes-operators
 sidebar_label: Deploy required dependencies
 title: Deploy required dependencies with Kubernetes operators
 description: "Deploy the databases (PostgreSQL, Elasticsearch) and OIDC provider (Keycloak) required by Camunda 8 using official Kubernetes operators."
@@ -766,5 +765,5 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 - [Configure Ingress and TLS](/self-managed/deploy-to-production/kubernetes/configure/ingress/index.md)
 - [Set up monitoring and observability](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md)
-- [Configure multi-tenancy](/self-managed/extend/tenancy/configure-logical-multi-tenancy.md)
+- [Configure multi-tenancy](/self-managed/extend/tenancy/logical-multi-tenancy.md)
 - [Production deployment guide](/self-managed/deploy-to-production/kubernetes/install/production/index.md)

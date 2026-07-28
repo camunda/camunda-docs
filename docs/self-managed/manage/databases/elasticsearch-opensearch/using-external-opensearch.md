@@ -1,5 +1,5 @@
 ---
-sidebar_label: Amazon OpenSearch Service
+sidebar_label: External OpenSearch
 title: Use Amazon OpenSearch Service for Orchestration Cluster with Helm
 description: Learn how to connect the Orchestration Cluster in a Camunda 8 Self-Managed Helm deployment to an external Amazon OpenSearch Service instance.
 ---
@@ -88,7 +88,7 @@ orchestration:
     prefix: my-env-camunda # Prefix for Orchestration Cluster indices
 ```
 
-For more details about index prefix configuration and Optimize-specific settings, see [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md).
+For more details about index prefix configuration and Optimize-specific settings, see [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md).
 
 ### Component configuration
 
@@ -113,5 +113,5 @@ For full parameter details, see:
 - [IAM roles for service accounts](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md#opensearch-module-setup)
 - [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md)
 - [Use external OpenSearch for Optimize with Helm](/self-managed/manage/databases/optimize/using-external-opensearch.md)
-- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md)
+- [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md)
 - [Deploy Camunda 8](/self-managed/deploy-to-production/kubernetes/index.md)

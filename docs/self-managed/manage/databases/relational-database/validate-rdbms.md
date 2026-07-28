@@ -3,14 +3,14 @@ title: Validate RDBMS connectivity
 description: Verify that an Orchestration Cluster deployed via Helm can connect to an external RDBMS, initialize schema, and export data.
 ---
 
-Verify RDBMS connectivity, schema initialization, and exporter activity for Helm deployments. If validation fails, see [Troubleshoot RDBMS](rdbms-troubleshooting.md) for diagnostics and fixes.
+Verify RDBMS connectivity, schema initialization, and exporter activity for Helm deployments. If validation fails, see [Troubleshoot RDBMS](troubleshooting.md) for diagnostics and fixes.
 
 :::note Related pages
 
 - **[Configure RDBMS](/self-managed/manage/databases/relational-database/rdbms.md)** - Configuration reference and Helm values.
-- **[JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md)** - Managing custom database drivers.
-- **[Schema management](/self-managed/manage/databases/relational-database/rdbms-schema-management.md)** - Schema creation and lifecycle.
-- **[Troubleshooting](/self-managed/manage/databases/relational-database/rdbms-troubleshooting.md)** - Common issues and diagnostic steps.
+- **[JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md)** - Managing custom database drivers.
+- **[Schema management](/self-managed/manage/databases/relational-database/schema-management.md)** - Schema creation and lifecycle.
+- **[Troubleshooting](/self-managed/manage/databases/relational-database/troubleshooting.md)** - Common issues and diagnostic steps.
   :::
 
 Supported databases include PostgreSQL, MySQL/MariaDB, and Oracle (examples below). Use your database vendor’s CLI tools for direct verification.
@@ -167,7 +167,7 @@ Exporter progress is the most reliable “is it working” signal. If `last_expo
 
 ### Failure patterns
 
-For failure log patterns and their fixes (missing driver, connection/DNS errors, invalid credentials, and `autoDDL=false` on an empty database), see [Troubleshoot RDBMS](rdbms-troubleshooting.md).
+For failure log patterns and their fixes (missing driver, connection/DNS errors, invalid credentials, and `autoDDL=false` on an empty database), see [Troubleshoot RDBMS](troubleshooting.md).
 
 Fetch logs:
 
@@ -201,7 +201,7 @@ Look for an overall `UP` status and a healthy database component. Always confirm
 
 ## Troubleshooting
 
-If any verification step fails, see [Troubleshoot RDBMS](rdbms-troubleshooting.md) for common issues and fixes, including [connection failures](rdbms-troubleshooting.md#connection-failures), [authentication errors](rdbms-troubleshooting.md#authentication-errors), [JDBC driver not found](rdbms-troubleshooting.md#jdbc-driver-not-found), [schema creation failure](rdbms-troubleshooting.md#schema-creation-failure), and [exporter position not advancing](rdbms-troubleshooting.md#exporter-position-not-advancing).
+If any verification step fails, see [Troubleshoot RDBMS](troubleshooting.md) for common issues and fixes, including [connection failures](troubleshooting.md#connection-failures), [authentication errors](troubleshooting.md#authentication-errors), [JDBC driver not found](troubleshooting.md#jdbc-driver-not-found), [schema creation failure](troubleshooting.md#schema-creation-failure), and [exporter position not advancing](troubleshooting.md#exporter-position-not-advancing).
 
 ## Vendor-specific query examples
 

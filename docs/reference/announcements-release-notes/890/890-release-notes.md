@@ -257,7 +257,7 @@ The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated valu
 
 Helm deployments in 8.9 now support fully integrated RDBMS secondary storage, expose the Orchestration Cluster REST port on 8080 by default, and allow authorization rules to be initialized directly from `values.yaml`. This reduces post-install manual setup and makes Helm-based deployments align more closely with current platform defaults.
 
-<p class="link-arrow">[Configuring secondary storage](/self-managed/manage/databases/secondary-storage/configuring-secondary-storage.md)</p>
+<p class="link-arrow">[Configuring secondary storage](/self-managed/manage/databases/secondary-storage/configure.md)</p>
 
 ## Reference architectures
 
@@ -471,14 +471,14 @@ Tasklist V1 is planned for removal in version 8.10, so we strongly recommend mig
 
 Across the 8.9 release cycle, RDBMS secondary storage expands from early support for H2, PostgreSQL, Oracle, and MariaDB to include MySQL, Microsoft SQL Server, and Amazon Aurora. Camunda 8.9 also introduces standardized JDBC driver handling for manual installations so teams can separate bundled and customer-supplied drivers more cleanly.
 
-<p class="link-arrow">[RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 ### Helm, manual, and production deployment guidance
 
 Camunda 8.9 adds end-to-end deployment guidance for RDBMS-backed environments, including Helm configuration, manual installation, production installation guides, SQL and Liquibase scripts, and a dedicated setup guide spanning the Orchestration Cluster and Web Modeler. Web Modeler also gains relational database support that aligns with the broader Orchestration Cluster options.
 
 <ul>
-  <li><span class="link-arrow">[RDBMS setup guide](/self-managed/manage/databases/relational-database/rdbms-setup-guide.md)</span></li>
+  <li><span class="link-arrow">[RDBMS setup guide](/self-managed/manage/databases/relational-database/setup-guide.md)</span></li>
   <li><span class="link-arrow">[Manual installation with RDBMS](/self-managed/deploy-to-production/manual/rdbms/index.md)</span></li>
   <li><span class="link-arrow">[RDBMS Helm deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md)</span></li>
 </ul>
@@ -973,7 +973,7 @@ This lets you standardize on the Orchestration Cluster APIs and the recommended 
 
 A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
 
-<p class="link-arrow">[RDBMS setup guide](/self-managed/manage/databases/relational-database/rdbms-setup-guide.md)</p>
+<p class="link-arrow">[RDBMS setup guide](/self-managed/manage/databases/relational-database/setup-guide.md)</p>
 
 #### Manual installation supports RDBMS secondary storage
 
@@ -1442,7 +1442,7 @@ This allows enterprises to run Camunda 8 on familiar, enterprise-managed RDBMS i
 
 With RDBMS support, the Helm chart no longer defaults to Elasticsearch as secondary storage. You must now explicitly set `orchestration.data.secondaryStorage.type` to `elasticsearch`, `opensearch`, or `rdbms`. This also introduces `global.noSecondaryStorage` for engine-only deployments without any secondary storage.
 
-<p class="link-arrow">[Configuring secondary storage](/self-managed/manage/databases/secondary-storage/configuring-secondary-storage.md)</p>
+<p class="link-arrow">[Configuring secondary storage](/self-managed/manage/databases/secondary-storage/configure.md)</p>
 
 ## 8.9.0-alpha2
 
@@ -1615,7 +1615,7 @@ A new Camunda 8 Relational Database Management System RDBMS support policy provi
 - The process for adopting new database versions.
 - Timelines for phasing out older database versions.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 #### SQL and Liquibase database scripts
 

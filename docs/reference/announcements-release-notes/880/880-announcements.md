@@ -658,7 +658,7 @@ Do not reuse the same prefix for:
 
 If these prefixes are identical, or if one prefix includes the other (for example, `custom` and `custom-zeebe`), ILM/ISM policies and wildcard patterns such as `custom*` can target more indices than intended, which may lead to unexpected data loss.
 
-For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](/self-managed/manage/databases/elasticsearch-opensearch/configure-elasticsearch-prefix-indices.md).
+For configuration examples and details, see [Helm chart Elasticsearch/OpenSearch indices prefix](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md).
 
 </div>
 </div>

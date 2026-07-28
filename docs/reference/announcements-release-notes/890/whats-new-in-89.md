@@ -454,7 +454,7 @@ To clarify long‑term support, Camunda 8.9 introduces:
 
 This helps DBAs and operations teams validate that existing database versions are supported, plan upgrades based on a predictable policy and script set, and standardize roll‑outs and migrations across environments.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 ### Standardized JDBC driver management
 

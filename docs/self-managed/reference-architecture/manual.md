@@ -1,5 +1,4 @@
 ---
-id: manual
 title: "Manual deployment overview"
 sidebar_label: Manual
 description: "Camunda 8 Manual (Java) deployment Reference architecture home "

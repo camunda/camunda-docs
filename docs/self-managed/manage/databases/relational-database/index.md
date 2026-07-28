@@ -15,7 +15,7 @@ In this context:
 - [Primary storage](/reference/glossary.md#primary-storage) is the broker-managed store for workflow execution state management.
 - [Secondary storage](/reference/glossary.md#secondary-storage) is an external store used for indexing, querying, analytics, and retention.
 
-For a deeper conceptual comparison, see [understanding primary vs secondary storage](/self-managed/manage/databases/secondary-storage/no-secondary-storage.md#about-this-mode).
+For a deeper conceptual comparison, see [understanding primary vs secondary storage](/self-managed/manage/databases/secondary-storage/without-secondary-storage.md#about-this-mode).
 
 ```mermaid
 graph LR
@@ -31,8 +31,8 @@ graph LR
 
 ## Start here
 
-- New to RDBMS in Camunda: [End-to-end RDBMS setup guide](/self-managed/manage/databases/relational-database/rdbms-setup-guide.md)
-- Need supported versions and compatibility details: [RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
+- New to RDBMS in Camunda: [End-to-end RDBMS setup guide](/self-managed/manage/databases/relational-database/setup-guide.md)
+- Need supported versions and compatibility details: [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)
 - Need application-level settings and behavior: [RDBMS configuration overview](/self-managed/manage/databases/relational-database/configuration.md)
 
 ## Deployment guides

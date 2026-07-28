@@ -1,6 +1,6 @@
 ---
 title: Management and modeling component authentication in Self-Managed
-sidebar_label: "Management and modeling component authentication"
+sidebar_label: Management component authentication
 description: "Learn about authentication methods for management and modeling components in Self-Managed and how to choose the right one for your environment."
 ---
 

@@ -40,7 +40,7 @@ Camunda also supports several relational databases for secondary storage, enabli
 
 RDBMS and document-store backends are both valid secondary storage options. Select based on your workload, operational model, and platform standards.
 
-A full list of supported vendors and versions, JDBC driver information, and component compatibility is published in the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+A full list of supported vendors and versions, JDBC driver information, and component compatibility is published in the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 
 For configuration details in Helm deployments, see the [RDBMS configuration guide](/self-managed/manage/databases/relational-database/rdbms.md).
 
@@ -96,8 +96,8 @@ This ensures consistent performance on large datasets. For details, see the [get
 
 These pages provide deeper detail for operators, DBAs, and administrators:
 
-- [RDBMS benchmark results](/self-managed/manage/databases/relational-database/rdbms-benchmark-results.md)
-- [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
+- [RDBMS benchmark results](/self-managed/manage/databases/relational-database/benchmark-results.md)
+- [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)
 - [Configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md)
 - [Elasticsearch privileges](/self-managed/manage/databases/elasticsearch-opensearch/elasticsearch-privileges.md)
 - [OpenSearch privileges](/self-managed/manage/databases/elasticsearch-opensearch/opensearch-privileges.md)

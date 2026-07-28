@@ -24,14 +24,14 @@ Secondary storage is not a duplicate of primary data. It represents exported wor
 
 Camunda supports multiple secondary storage backends.  
 For the latest list of supported database versions, see the  
-[RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 
 Both document-store and RDBMS backends are valid secondary storage choices in Self-Managed deployments. Support maturity can vary by product area and version (for example, the Orchestration Cluster API, Operate, Tasklist, Admin, or Optimize), so confirm current compatibility details before choosing a backend.
 
-| Database type          | Availability         | Use case                                                                                                                                                                                              |
-| :--------------------- | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Document-store (ES/OS) | General availability | Secondary storage for indexing, search, and analytics.                                                                                                                                                |
-| RDBMS                  | 8.9+                 | Secondary storage for relational database deployments. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md) for supported vendors and versions. |
+| Database type          | Availability         | Use case                                                                                                                                                                                        |
+| :--------------------- | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Document-store (ES/OS) | General availability | Secondary storage for indexing, search, and analytics.                                                                                                                                          |
+| RDBMS                  | 8.9+                 | Secondary storage for relational database deployments. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md) for supported vendors and versions. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
@@ -88,10 +88,10 @@ Camunda supports multiple secondary storage backends, and the right choice depen
 
 For guidance on supported vendors, versions, and configuration, see:
 
-- [Secondary storage configuration](/self-managed/manage/databases/secondary-storage/configuring-secondary-storage.md)
+- [Secondary storage configuration](/self-managed/manage/databases/secondary-storage/configure.md)
 - [RDBMS configuration](/self-managed/manage/databases/relational-database/rdbms.md)
-- [RDBMS version support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
-- [RDBMS benchmark results](/self-managed/manage/databases/relational-database/rdbms-benchmark-results.md)
+- [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)
+- [RDBMS benchmark results](/self-managed/manage/databases/relational-database/benchmark-results.md)
 
 :::note
 The documentation is intentionally descriptive rather than prescriptive. Use benchmarking and sizing based on your own workload to choose the secondary storage backend that best meets your requirements.
@@ -99,10 +99,10 @@ The documentation is intentionally descriptive rather than prescriptive. Use ben
 
 Learn how to configure secondary storage in Self-Managed environments using Helm, Docker, or manual deployment.
 
-<p><a href="./configuring-secondary-storage" class="link-arrow">Configure secondary storage</a></p>
+<p><a href="./configure" class="link-arrow">Configure secondary storage</a></p>
 
 :::note
-Although you should use secondary storage in nearly all production environments, you can choose to disable secondary storage in limited scenarios, such as lightweight development environments, specialized technical use cases, or resource-constrained deployments. See [run without secondary storage](/self-managed/manage/databases/secondary-storage/no-secondary-storage.md).
+Although you should use secondary storage in nearly all production environments, you can choose to disable secondary storage in limited scenarios, such as lightweight development environments, specialized technical use cases, or resource-constrained deployments. See [run without secondary storage](/self-managed/manage/databases/secondary-storage/without-secondary-storage.md).
 :::
 
 ## Manage secondary storage
@@ -111,7 +111,7 @@ Learn about best practices for data management, backups, and monitoring to ensur
 
 Effective secondary storage management ensures stability, scalability, and data integrity across your Camunda environment. By following Camunda best practices, you can avoid data corruption, maintain compliance, and ensure your orchestration environment remains performant and reliable.
 
-<p><a href="./managing-secondary-storage" class="link-arrow">Manage secondary storage</a></p>
+<p><a href="./manage" class="link-arrow">Manage secondary storage</a></p>
 
 ## Benchmark results
 

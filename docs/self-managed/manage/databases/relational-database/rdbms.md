@@ -17,13 +17,13 @@ Related guides:
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [Secondary storage overview](/self-managed/manage/databases/secondary-storage/index.md)
 - [RDBMS example deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md)
-- [JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md)
+- [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md)
 
 ## Prerequisites
 
 Provide a supported relational database that is reachable by the Camunda components.
 
-See the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md) for the complete list of supported databases and versions.
+See the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md) for the complete list of supported databases and versions.
 
 Ensure that:
 
@@ -68,9 +68,9 @@ Most tuning options are configured as application properties via [extraConfigura
 
 ### Search APIs and result limits
 
-| Parameter                                                      | Type    | Default | Description                                                                                                                                                                                                                                                    |
-| -------------------------------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [Search APIs and result limits](/self-managed/manage/databases/relational-database/rdbms-search-and-result-limits.md) for details and performance implications. |
+| Parameter                                                      | Type    | Default | Description                                                                                                                                                                                                                                              |
+| -------------------------------------------------------------- | ------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [Search APIs and result limits](/self-managed/manage/databases/relational-database/search-and-result-limits.md) for details and performance implications. |
 
 ### Schema and table management
 
@@ -109,7 +109,7 @@ For Liquibase lock recovery behavior, including the `camunda.data.secondary-stor
 ### Example usage
 
 :::note
-RDBMS is fully supported as secondary storage. For production planning, review the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+RDBMS is fully supported as secondary storage. For production planning, review the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 :::
 
 ```yaml
@@ -132,9 +132,9 @@ orchestration:
 
 ## Bundled vs. custom JDBC drivers
 
-Camunda bundles JDBC drivers for some databases. For others, you must supply a custom driver. See [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md) for the complete list of supported databases.
+Camunda bundles JDBC drivers for some databases. For others, you must supply a custom driver. See [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md) for the complete list of supported databases.
 
-**See:** [JDBC driver management](/self-managed/manage/databases/relational-database/rdbms-jdbc-drivers.md) for:
+**See:** [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md) for:
 
 - Which drivers are bundled
 - When to supply custom drivers
@@ -151,13 +151,13 @@ Key concepts:
 - **Query optimization**: Apply selective filtering and pagination for better performance.
 - **Database tuning**: Configure PostgreSQL for write-heavy workloads.
 
-**See:** [Search APIs and result limits](/self-managed/manage/databases/relational-database/rdbms-search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
+**See:** [Search APIs and result limits](/self-managed/manage/databases/relational-database/search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
 
 ## Schema creation and management
 
 Camunda automatically creates your database schema using Liquibase (when `autoDDL: true`). You can also manage the schema manually if required.
 
-**See:** [Schema management](/self-managed/manage/databases/relational-database/rdbms-schema-management.md) for:
+**See:** [Schema management](/self-managed/manage/databases/relational-database/schema-management.md) for:
 
 - Automatic schema creation with autoDDL
 - Database user permissions for each RDBMS type
@@ -166,7 +166,7 @@ Camunda automatically creates your database schema using Liquibase (when `autoDD
 
 ## Troubleshooting and operations
 
-For detailed troubleshooting of common issues and post-deployment operations, see [RDBMS troubleshooting and operations](/self-managed/manage/databases/relational-database/rdbms-troubleshooting.md), which covers:
+For detailed troubleshooting of common issues and post-deployment operations, see [RDBMS troubleshooting and operations](/self-managed/manage/databases/relational-database/troubleshooting.md), which covers:
 
 - Connection failures and authentication errors
 - JDBC driver loading issues

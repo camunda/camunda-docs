@@ -1,5 +1,4 @@
 ---
-id: index
 sidebar_label: Manual installation with RDBMS
 title: Manual installation with RDBMS
 description: Install Camunda 8 manually on VMs or bare metal with RDBMS as secondary storage.
@@ -67,7 +66,7 @@ graph LR
 
 ## Prerequisites
 
-- **Supported RDBMS**: See [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md).
+- **Supported RDBMS**: See [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 - **JDBC drivers**: See [RDBMS configuration](/self-managed/deploy-to-production/manual/rdbms/configuration.md).
 - **Schemas and scripts**: Use the bundled SQL or Liquibase scripts for schema creation and upgrades. See [Access SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md).
 
@@ -90,5 +89,5 @@ The Orchestration Cluster is fully supported with RDBMS secondary storage for wo
 ## Related documentation
 
 - [Secondary storage architecture](/self-managed/manage/databases/secondary-storage/index.md)
-- [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md)
+- [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)
 - [Manual installation overview](/self-managed/deploy-to-production/manual/install.md)

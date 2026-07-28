@@ -1,5 +1,4 @@
 ---
-id: running-custom-connectors
 sidebar_label: Custom connectors
 title: Run custom connectors in Helm charts
 description: "Deploy and run custom connectors in a Camunda Helm Kubernetes cluster."

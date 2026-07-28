@@ -1161,7 +1161,7 @@ Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orc
 
 When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentication is supported using OIDC (recommended) or Basic authentication with unprotected API mode for development environments.
 
-<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/manage/databases/secondary-storage/no-secondary-storage.md#authentication)</p>
+<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/manage/databases/secondary-storage/without-secondary-storage.md#authentication)</p>
 
 </div>
 </div>
@@ -1177,7 +1177,7 @@ When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentic
 Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch.
 
 - Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL and authentication.
-- Supports all databases in the [RDBMS support policy](/self-managed/manage/databases/relational-database/rdbms-support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
+- Supports all databases in the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
 - Advanced authentication and custom JDBC drivers can be configured via init containers or mounted volumes.
 
 <p className="link-arrow">[Configure RDBMS in Helm charts](/self-managed/manage/databases/relational-database/rdbms.md)</p>
