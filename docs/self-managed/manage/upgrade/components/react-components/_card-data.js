@@ -11,18 +11,18 @@ import IconArrow from "../../assets/icon-arrow.png";
 
 export const mainUpgradeCard = [
   {
-    link: "../880-to-890",
-    title: "Upgrade Camunda components from 8.8 to 8.9",
+    link: "890-to-8100",
+    title: "Upgrade Camunda components from 8.9 to 8.10",
     image: K8sIcon,
     description:
-      "Review component-level changes introduced in Camunda 8.9, including identity migration, data and exporter changes, API updates, and web application behavior.",
+      "Review component-level changes introduced in Camunda 8.10, including identity migration, data and exporter changes, API updates, and web application behavior.",
   },
 ];
 
 export const helmIndexCards = [
   {
-    link: "../helm/880-to-890",
-    title: "Upgrade Camunda 8.8 to 8.9 using Helm",
+    link: "../helm/890-to-8100",
+    title: "Upgrade Camunda 8.9 to 8.10 using Helm",
     image: IconArrow,
     description:
       "Follow the main Helm upgrade guide to perform the required configuration changes and run the Helm upgrade.",

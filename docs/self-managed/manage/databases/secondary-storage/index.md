@@ -117,4 +117,4 @@ Effective secondary storage management ensures stability, scalability, and data 
 
 Review current benchmark results and caveats for PostgreSQL-based secondary storage.
 
-<p><a href="./rdbms-benchmark-results" class="link-arrow">RDBMS benchmark results</a></p>
+<p><a href="../relational-database/rdbms-benchmark-results" class="link-arrow">RDBMS benchmark results</a></p>

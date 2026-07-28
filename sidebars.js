@@ -2125,7 +2125,6 @@ module.exports = {
         {
           type: "category",
           label: "Upgrade",
-          className: "sidebar-cta",
           link: {
             type: "doc",
             id: "self-managed/manage/upgrade/index",
@@ -2486,6 +2485,12 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: "ref",
+      id: "self-managed/manage/upgrade/index",
+      label: "Upgrade to Camunda 8.10",
+      className: "sidebar-cta",
     },
   ],
 };
