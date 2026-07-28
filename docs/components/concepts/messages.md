@@ -170,14 +170,13 @@ Message name is always required. The following additional fields are supported p
 
 For non-start events, a business ID can only be used together with an existing correlation key. Business ID alone is not sufficient to correlate to a non-start subscription.
 
-When both a correlation key and a business ID are provided, **both must match** for the message to correlate.
+When both a correlation key and a business ID are provided, the message correlates only if both fields match the corresponding values stored on the subscription.
 
 ### Matching semantics
 
-A message subscription **snapshots** the process instance's business ID at the time the subscription is opened. Matching is asymmetric at evaluation time:
+A business ID on a message is an optional narrowing filter. A message with no business ID correlates on name and correlation key alone, regardless of the subscription's business ID. A message that carries a business ID correlates only to a subscription whose business ID matches exactly; a subscription with no business ID does not match a message that carries one. A business ID never replaces the correlation key.
 
-- A message published **without** a business ID correlates to any matching subscription, regardless of whether the subscription's instance has a business ID.
-- A message published **with** a business ID correlates only to subscriptions whose stored business ID matches exactly.
+A message subscription snapshots the process instance's business ID at the time the subscription is opened.
 
 If a [late business ID assignment](/components/concepts/process-instance-creation.md#late-business-id-assignment) updates a process instance after a subscription is already open, the existing subscription is not updated. Only subscriptions opened after the assignment carry the new business ID.
 
