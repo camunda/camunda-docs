@@ -26,7 +26,7 @@ Camunda updates an agent instance's state as it progresses through its agent loo
 | `Thinking`       | The agent sends the conversation, system prompt, and tool definitions to the model and waits for a response. |
 | `Tool calling`   | Camunda executes the BPMN activities the model selected as tools.                                            |
 | `Idle`           | The process instance has moved away from the agent element, so the agent isn't currently working.            |
-| `Completed`      | The process instance that hosted the agent completed or terminated.                                          |
+| `Completed`      | The parent process instance for the agent completed or terminated.                                           |
 
 ### State transitions
 
