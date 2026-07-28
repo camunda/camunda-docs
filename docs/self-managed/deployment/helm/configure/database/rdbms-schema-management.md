@@ -41,7 +41,7 @@ Additional database-specific requirements:
 CREATE ROLE camunda WITH LOGIN PASSWORD 'password';
 GRANT CONNECT ON DATABASE camunda TO camunda;
 GRANT USAGE ON SCHEMA public TO camunda;
-GRANT CREATE ON DATABASE camunda TO camunda;
+GRANT CREATE ON SCHEMA public TO camunda;
 ```
 
 ### Oracle
@@ -85,10 +85,7 @@ orchestration:
                 auto-ddl: false
 ```
 
-With `autoDDL: false`, you must:
-
-1. Apply SQL scripts to the database before deploying Camunda.
-2. SQL scripts are available in the Camunda release bundle or from the [Liquibase scripts page](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
+With `autoDDL: false`, you must apply SQL scripts to the database before deploying Camunda. Scripts are available in the Camunda release bundle or from the [Liquibase scripts page](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
 ### When to use manual schema management
 
@@ -158,9 +155,7 @@ Deploy the new Camunda version in a staging environment first to validate schema
 
 If `autoDDL: true`, Liquibase applies schema migrations automatically when an upgraded Camunda orchestration pod starts.
 
-Camunda supports rolling upgrades for RDBMS deployments. During the upgrade, the first upgraded cluster node applies the
-schema changes. Liquibase holds a lock on the database schema while the migration runs, and other cluster nodes wait for
-the lock to be released before they start.
+Camunda supports rolling upgrades for RDBMS deployments. During the upgrade, the first upgraded cluster node applies the schema changes. Liquibase holds a lock on the database schema while the migration runs, and other cluster nodes wait for the lock to be released before they start.
 
 (Optional) For large production clusters, reduce the orchestration deployment to one replica before the upgrade so only
 one upgraded pod starts the Liquibase migration:
@@ -191,7 +186,7 @@ The Helm chart defines a default `readinessProbe`. Longer-running migrations may
 ```yaml
 orchestration:
   readinessProbe:
-    # Wait 300 + 30 * 20 = 900 seconds (15m) until the pod is marked as not ready
+    # Allows up to 900 seconds (15m) for Liquibase to complete before the pod is marked not ready
     initialDelaySeconds: 300
     periodSeconds: 30
     failureThreshold: 20
@@ -206,7 +201,7 @@ kubectl scale deployment camunda-orchestration --replicas=3 -n camunda
 :::note
 The RDBMS upgrade is a rolling upgrade and does not require downtime of the orchestration cluster. Some schema
 operations might take longer to complete when the cluster and database is under load. If you experience long-running
-migrations, consider reducing the client-side load of the orchestration cluster or scale down the cluster to 0 nodes
+migrations, consider reducing the client-side load of the orchestration cluster or scale down the cluster to 0 replicas
 before the upgrade.
 :::
 
@@ -275,7 +270,7 @@ scaling guidance, see [automatic schema management](#step-2a-automatic-schema-ma
 ### Rollback
 
 Camunda schema migrations are compatible with the previous version. This means that if you need to stop an upgrade and
-rollback to a previous version, you can do so without any issues. The previous version will be able to read the schema
+roll back to a previous version, you can do so without any issues. The previous version will be able to read the schema
 and continue processing.
 
 ## Schema troubleshooting
