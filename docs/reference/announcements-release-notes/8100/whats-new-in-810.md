@@ -42,7 +42,7 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 ## Web Modeler data
 
-At the end of August 2026, Camunda 8.10 is introducing three changes related to your Web Modeler data:
+On 29 August 2026, your Web Modeler data will receive three updates:
 
 - **[Organizational structure](#organizational-structure):** Enforces a stricter, more scalable file resource hierarchy.
 - **[Data migration](#migration):** Aligns your existing data with the new structure.
