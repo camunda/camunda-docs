@@ -55,6 +55,13 @@
       "label": "Change cluster mode"
     }
   ],
+  "restore": [
+    {
+      "file": "Client.cs",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "ProcessInstance.cs",
@@ -151,6 +158,27 @@
       "label": "Resolve process instance incidents"
     }
   ],
+  "suspendProcessInstance": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend a process instance"
+    }
+  ],
+  "resumeProcessInstance": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "ResumeProcessInstance",
+      "label": "Resume a process instance"
+    }
+  ],
+  "assignProcessInstanceBusinessId": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign a business ID to a process instance"
+    }
+  ],
   "getProcessDefinition": [
     {
       "file": "ProcessDefinition.cs",
@@ -170,6 +198,13 @@
       "file": "ProcessDefinition.cs",
       "region": "SearchProcessDefinitions",
       "label": "Search process definitions"
+    }
+  ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "ProcessDefinition.cs",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
     }
   ],
   "getProcessDefinitionStatistics": [
@@ -1066,6 +1101,20 @@
       "label": "Update jobs in batch"
     }
   ],
+  "suspendProcessInstancesBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances in batch"
+    }
+  ],
+  "resumeProcessInstancesBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances in batch"
+    }
+  ],
   "getVariable": [
     {
       "file": "VariableElement.cs",
@@ -1379,6 +1428,13 @@
       "file": "UserTask.cs",
       "region": "SearchUserTaskEffectiveVariables",
       "label": "Search user task effective variables"
+    }
+  ],
+  "resolveSecrets": [
+    {
+      "file": "Secret.cs",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets"
     }
   ]
 }
