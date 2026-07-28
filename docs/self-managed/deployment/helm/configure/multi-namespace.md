@@ -328,6 +328,8 @@ helm install camunda camunda/camunda-platform \
 
 Add another entry to `global.topology.clusters` in the management release and install another orchestration release. Configure that release's existing component authentication values to match the new management inventory entry. Use unique client IDs, audiences, and secrets for isolation.
 
+If orchestration releases share Elasticsearch or OpenSearch, configure a unique `orchestration.index.prefix` for every release. Configure a unique Optimize record prefix with `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`, and configure a unique Optimize application index prefix with `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX`. Reusing any of these prefixes can mix one cluster's records with another cluster's Operate, Tasklist, or Optimize data. See [configure Elasticsearch and OpenSearch index prefixes](./database/elasticsearch/configure-elasticsearch-prefix-indices.md).
+
 For Keycloak, Management Identity creates every declared client. For another OIDC provider, provision the clients before applying the Helm releases.
 
 Generated internal service URLs in the management inventory use Kubernetes service DNS, so this pattern supports multiple namespaces in the same Kubernetes cluster. For workloads in another Kubernetes cluster, provide equivalent cross-cluster DNS and routing or configure explicit `grpcUrl`, `restUrl`, `readinessUrl`, `operateUrl`, `tasklistUrl`, `adminUrl`, and component web application URL overrides. Set each orchestration release's `global.identity.service.url` to an address from which it can reach Management Identity.
@@ -356,7 +358,9 @@ For Argo CD, use sync waves or separate Applications so the management release b
 
 For Keycloak-managed registration, client Secret names can be identical across namespaces, but Kubernetes Secrets remain namespace-scoped. Project both copies from the same external secret source to prevent drift.
 
-Chart-managed persistent volume claims (PVCs) render when the corresponding component's `persistence.enabled` value is `true`, even when the release topology suppresses that component's workload. This behavior keeps PVC ownership declarative and produces the same desired resources with Helm, Argo CD, and Flux. Set `persistence.enabled` to `false` only after you no longer need the chart to manage that claim.
+The standalone chart-managed PVCs for Management Identity, Optimize, and Connectors render when the corresponding component's `persistence.enabled` value is `true`, even when the release topology suppresses that component's workload. This behavior keeps PVC ownership declarative and produces the same desired resources with Helm, Argo CD, and Flux. Set `persistence.enabled` to `false` only after you no longer need the chart to manage that claim and have verified your GitOps pruning and storage reclaim policies.
+
+Orchestration Cluster broker PVCs are StatefulSet volume claim templates and don't follow this standalone PVC behavior. Changing a release to management mode suppresses the Orchestration Cluster StatefulSet. Preserve and migrate broker storage separately when you move an existing cluster between releases or namespaces.
 
 ## Upgrade and topology migration scope
 
