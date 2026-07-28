@@ -1188,6 +1188,7 @@ module.exports = {
           "Dashboards maintained by Camunda": [
             "components/optimize/userguide/process-dashboards",
             "components/optimize/userguide/instant-process-dashboards",
+            "components/optimize/userguide/agentic-control-plane",
           ],
         },
         "components/optimize/userguide/creating-reports",
