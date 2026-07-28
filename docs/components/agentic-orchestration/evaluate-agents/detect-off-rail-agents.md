@@ -20,7 +20,7 @@ No single health indicator proves that an agent is stuck. Look at the combinatio
 
 - **State doesn't change over an extended period.** An agent instance stuck in Thinking far longer than a typical model call, or in Tool calling far longer than the tool normally takes to respond, is not progressing through its loop.
 - **Tool call count climbs without resolution.** The agent keeps calling the same tool, or a small set of tools, with similar or identical inputs across multiple loops, without the conversation moving toward a final response.
-- **Token consumption grows steadily loop after loop.** Since each loop appends the previous reasoning and tool results to the conversation, a steadily rising token count with no final response is a sign the agent is accumulating context without converging.
+- **Token consumption grows steadily over loop iterations.** Since each loop iteration appends the previous reasoning and tool results to the conversation, a steadily rising token count with no final response is a sign the agent is accumulating context without converging.
 - **Execution duration is disproportionate to the task.** The total time the agent instance has been active is much longer than comparable runs of the same agent, even though its state keeps changing, which suggests the agent is caught in a longer-than-expected cycle of loops rather than a single stuck call.
 
 :::note

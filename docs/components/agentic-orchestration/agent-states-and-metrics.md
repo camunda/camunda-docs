@@ -17,7 +17,7 @@ For guidance on using these signals to catch an agent going off-rail, see [detec
 
 ## Agent states
 
-Camunda updates an agent instance's state as it progresses through its feedback loop, fed by status updates from the connector handling the agent.
+Camunda updates an agent instance's state as it progresses through its loop, fed by status updates from the connector handling the agent.
 
 | State            | Meaning                                                                                                      |
 | ---------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -39,9 +39,9 @@ An agent instance follows a predictable path through these states. The following
 | `Thinking`       | The agent instance is reasoning over the current conversation.                                           | `Tool calling`, if the model selects one or more tools. `Idle` or `Completed`, if the model returns a final response.                                      |
 | `Tool calling`   | The model selected one or more tools in the previous `Thinking` state.                                   | `Thinking`, once tool results are available. This starts the next loop.                                                                                    |
 | `Idle`           | The process instance moves away from the agent element, for example, to wait for a user task or message. | `Thinking`, when the process instance re-activates the same agent element and reuses this agent instance. `Completed`, if the process instance ends first. |
-| `Completed`      | The process instance that hosted the agent completes or terminates.                                      | Terminal state; the agent instance stops updating.                                                                                                         |
+| `Completed`      | The parent process instance for the agent completes or terminates.                                      | Terminal state; the agent instance stops updating.                                                                                                         |
 
-The cycle from `Thinking` to `Tool calling` and back to `Thinking` is one **loop**: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop. An agent instance can run through many loops before reaching a final response.
+The cycle from `Thinking` to `Tool calling` and back to `Thinking` is one **loop iteration**: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration. An agent instance can run through many loop iterations before reaching a final response.
 
 ## Usage metrics and limits
 
@@ -49,13 +49,13 @@ Alongside its state, Camunda tracks usage metrics for every agent instance so yo
 
 ### Token consumption
 
-Camunda tracks the number of tokens consumed by the agent's model calls. Token consumption accumulates as the conversation grows: every loop adds the previous tool results and the model's reasoning to the context that's sent with the next model call, so token usage tends to climb with each additional loop.
+Camunda tracks the number of tokens consumed by the agent's model calls. Token consumption accumulates as the conversation grows: every loop iteration adds the previous tool results and the model's reasoning to the context that's sent with the next model call, so token usage tends to climb with each additional loop iteration.
 
 Rising token consumption without a final response is a signal that the conversation is growing without converging on an outcome. Token usage is also a direct driver of the LLM provider cost for the agent's execution. See [context window size](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for how conversation length is capped independently of token count.
 
 ### Tool call count
 
-Camunda counts the number of tool calls the agent instance has made across all loops. A climbing tool call count generally reflects active work, but a count that climbs while the agent calls the same tool repeatedly with similar or identical inputs can indicate the agent is stuck rather than progressing.
+Camunda counts the number of tool calls the agent instance has made across all loop iterations. A climbing tool call count generally reflects active work, but a count that climbs while the agent calls the same tool repeatedly with similar or identical inputs can indicate the agent is stuck rather than progressing.
 
 ### Model call duration
 
