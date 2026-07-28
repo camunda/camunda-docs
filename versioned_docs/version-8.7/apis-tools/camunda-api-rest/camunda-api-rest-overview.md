@@ -54,6 +54,15 @@ response, not HTTP 413.
 Multipart requests include metadata and boundary overhead in addition to the uploaded file content.
 Set these limits slightly above the largest file you expect users or Connectors to upload.
 
+#### Consequences of increasing maxMessageSize
+
+Raising `maxMessageSize` can have the following consequences, especially with large, frequent payloads:
+
+- **Broker memory**: In-flight log entries consume broker memory, so larger entries increase memory usage.
+- **Raft timeouts**: An entry too large to replicate in time can trigger unexpected leader changes or broken replication.
+- **Latency**: Large entries can slow down overall processing.
+- **Network limits**: Load balancers, ingresses, and firewalls often cap request and response sizes lower than Zeebe does, and may reject larger messages.
+
 If you do change this value, it is recommended that you also configure the [Deploy resources](./specifications/deploy-resources.api.mdx) REST endpoint appropriately. By default, this endpoint allows single file upload and overall data up to 4MB.
 
 You can adjust this configuration via the following properties:
