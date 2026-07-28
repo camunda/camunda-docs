@@ -110,11 +110,11 @@ The agent state tells you whether an agent is actively working or stuck. Camunda
 | Idle           | The process instance has moved away from the agent element, so the agent isn't currently working. It resumes when the process instance activates the element again. |
 | Completed      | The agent instance is completed, because the process instance completed or terminated.                                                                              |
 
-#### Conversation history and loops
+#### Conversation history and loop iterations
 
-The conversation history captures the full reasoning chain of an agent execution, grouped by loop. A loop is one pass of the agent's feedback cycle: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop.
+The conversation history captures the full reasoning chain of an agent execution, grouped by loop iteration. A loop iteration is one pass of the agent's loop: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next iteration.
 
-Grouping the history by loop makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a loop by its iteration, for example "on loop iteration five the agent called this tool."
+Grouping the history by iteration makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a specific iteration, for example "on loop iteration five the agent called this tool."
 
 #### Visibility for external agents
 
