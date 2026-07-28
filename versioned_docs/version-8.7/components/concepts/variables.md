@@ -86,6 +86,38 @@ If no scope contains this variable, it's created as a new variable in the root s
 
 The job of **Task B** is completed with the variables `b`, `c`, and `d`. The variables `b` and `c` are already defined in higher scopes and are updated with the new values. Variable `d` doesn't exist before and is created in the root scope.
 
+### Variable propagation by BPMN element
+
+What an element propagates to its parent scope when it completes depends on its type:
+
+| BPMN element                                                  | What propagates on completion                                                                                                                                                                                    |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Service, send, user, receive, script, and business rule tasks | The task result: the job result, correlated message payload, or evaluated expression. With an output mapping, only the mapped variables propagate; without one, the whole result propagates.                     |
+| Embedded and event subprocesses                               | Nothing by default. Local variables are discarded when the subprocess completes unless an output mapping propagates them.                                                                                        |
+| Call activity                                                 | Only the variables returned by the child variable propagation settings or an output mapping. With the defaults (no output mapping and child propagation disabled), the child process variables are discarded.    |
+| Ad-hoc subprocess                                             | Its output collection, if configured, plus any variables an output mapping propagates. Variables written by its activated activities stay local to each activation.                                              |
+| Multi-instance activity                                       | Its output collection, if configured, pushed to the parent scope when the loop finishes. The loop counter and per-instance input element stay local to each instance.                                            |
+| Start, intermediate catch, and boundary events                | The correlated event payload (message, signal, timer, or conditional), or the mapped variables if an output mapping is defined.                                                                                  |
+| Throw and end events                                          | Only mapped variables, or, for message and signal variants backed by a job or connector, the job result. The none, link, escalation, compensation, error, and terminate variants propagate nothing on their own. |
+
+:::warning
+A call activity with the default settings and no output mapping silently discards everything the child process produced. To return child process variables to the caller, configure the child variable propagation settings or an output mapping on the call activity.
+:::
+
+:::note
+An error end event does not propagate variables through output mappings. Any payload it carries travels to the catching boundary event or event subprocess instead.
+:::
+
+### Internal engine variables
+
+Some variables are created and managed by the engine to control execution. They are scoped locally to the element instance that uses them and are not intended as process data:
+
+- `loopCounter` — the current iteration index inside a multi-instance activity. Read it within an iteration, but do not propagate it to higher scopes.
+- The multi-instance input element — the item assigned to the current iteration from the input collection. It stays local to that iteration.
+- `toolCall` and `toolCallResults` — used by the AI Agent ad-hoc subprocess to track the current tool call and its result. They are local to a single activation and must not be relied on outside it.
+
+Avoid referencing these variables in output mappings. Propagating them beyond their intended scope can produce incorrect results.
+
 ### Local variables
 
 In some cases, variables should be set in a given scope, even if they don't exist in this scope before.
@@ -123,7 +155,7 @@ Variable mappings are evaluated in the defined order. Therefore, a `source` expr
 
 ### Input mappings
 
-Input mappings can be used to create new variables. They can be defined on [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), [script tasks](/components/modeler/bpmn/script-tasks/script-tasks.md), [business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md), [call activities](/components/modeler/bpmn/call-activities/call-activities.md), [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md), [send tasks](/components/modeler/bpmn/send-tasks/send-tasks.md), and [subprocesses](/components/modeler/bpmn/subprocesses.md).
+Input mappings can be used to create new variables. They can be defined on [service tasks](/components/modeler/bpmn/service-tasks/service-tasks.md), [script tasks](/components/modeler/bpmn/script-tasks/script-tasks.md), [business rule tasks](/components/modeler/bpmn/business-rule-tasks/business-rule-tasks.md), [call activities](/components/modeler/bpmn/call-activities/call-activities.md), [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md), [send tasks](/components/modeler/bpmn/send-tasks/send-tasks.md), [subprocesses](/components/modeler/bpmn/subprocesses.md), event subprocesses, and ad-hoc subprocesses. Support depends on the element type — see the element's own page for details.
 
 When an input mapping is applied, it creates a new [**local variable**](#local-variables) in the scope where the mapping is defined.
 
@@ -145,8 +177,8 @@ Examples:
 Output mappings can be used for several purposes:
 
 - To customize how variables are merged into the process instance.
-- They can be defined on service tasks, receive tasks, message catch events, and subprocesses.
-- They can be used in script and user tasks.
+- They can be defined on most tasks (service, send, user, receive, script, and business rule tasks), embedded and event subprocesses, call activities, and ad-hoc subprocesses.
+- They can also be defined on many events, including message, signal, timer, and conditional catch events, boundary events, and start events.
 
 If **one or more** output mappings are defined, the results variables are set as **local variables** in the scope where the mapping is defined. Then, the output mappings are applied to the variables and create new variables in this scope. The new variables are merged into the parent scope. If there is no mapping for a job/message variable, the variable is not merged.
 
@@ -154,7 +186,7 @@ If **one or more** output mappings are defined, the results variables are set as
 This can lead to a case where some variables with an output mapping are merged into the parent scope, and others without an output mapping are not merged.
 :::
 
-If **no** output mappings are defined, all results variables are merged into the process instance.
+If **no** output mapping is defined, the behavior depends on the element. Tasks and events that produce a result (a job result, or a correlated message or signal payload) merge that whole result into the parent scope. Subprocesses and events that produce no result, such as none, link, escalation, and compensation events, propagate nothing; their local variables are discarded when the scope is left. For an overview across all element types, see [variable propagation by BPMN element](#variable-propagation-by-bpmn-element).
 
 In the case of a subprocess, the behavior is different. There are no results variables to be merged. However, output mappings can be used to propagate **local variables** of the subprocess to higher scopes. By default, all **local variables** are removed when the scope is left.
 
@@ -165,6 +197,15 @@ Examples:
 | `status: "Ok"`                                       | **source:** `=status`<br/>**target:** `paymentStatus`                                                                                | `paymentStatus: "OK"`                              |
 | `result: {"status": "Ok", "transactionId": "t-789"}` | **source:** `=result.status`<br/>**target:** `paymentStatus`<br/>**source:** `=result.transactionId`<br/>**target:** `transactionId` | `paymentStatus: "Ok"`<br/>`transactionId: "t-789"` |
 | `status: "Ok"`<br/>`transactionId: "t-789"`          | **source:** `=transactionId`<br/>**target:** `order.transactionId`                                                                   | `order: {"transactionId": "t-789"}`                |
+
+### Nested variables in mappings
+
+Input and output mappings build nested `target` paths in opposite ways:
+
+- **Input mappings** treat the `target` as a full path and write the entire nested object at that path, replacing any value already there.
+- **Output mappings** write only the final property (the leaf) of the `target` path and merge it into the existing structure, preserving sibling properties that are already present.
+
+For example, an input mapping with target `order` replaces the whole `order` variable, while an output mapping with target `order.status` sets only `status` inside an existing `order` variable and leaves its other properties unchanged.
 
 ### Context variable
 
