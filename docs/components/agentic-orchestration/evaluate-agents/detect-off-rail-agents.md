@@ -29,9 +29,9 @@ An agent that calls the same tool many times can still be legitimately working t
 
 ## Interpret limit proximity warnings
 
-Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-states-and-metrics.md#model-call-limit) limit, so you can see how close an agent instance is to it before it's reached.
+Camunda tracks model calls made against the agent's configured [**Maximum model calls**](/components/agentic-orchestration/agent-states-and-metrics.md#model-call-limit) limit, so you can see how close an agent instance is to it before it's reached. A proximity warning means the agent instance is nearing its configured limit and could reach it on a subsequent loop iteration.
 
-A proximity warning means the agent instance is nearing its configured limit and could reach it on a subsequent loop, at which point the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error and stops the agent. See [error handling](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling) for the full list of connector errors.
+With the AI Agent connector, reaching this limit throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error and stops the agent. See [error handling](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling) for the full list of connector errors.
 
 Apply the following best practices when you see a proximity warning:
 
