@@ -65,8 +65,8 @@ Tool execution duration is not part of the conversation history metrics. When a 
 
 ### Model call limit
 
-The **Maximum model calls** setting is the primary limit against runaway loops and unexpected cost. It limits how many times an agent instance can call the model, and defaults to 10 if you don't configure it.
+Camunda enforces a configurable limit on how many times an agent instance can call the model — the primary guardrail against runaway loops and unexpected cost. Camunda tracks model calls made against this configured limit, so you can see how close an agent instance is to it before it's reached.
 
-Camunda tracks model calls made against this configured limit, so you can see how close an agent instance is to it before it's reached. When an agent instance reaches its configured limit, the AI Agent connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error.
+With the AI Agent connector, this limit is configured through the **Maximum model calls** setting, which defaults to 10 if you don't configure it. When an agent instance reaches its configured limit, the connector throws a `MAXIMUM_NUMBER_OF_MODEL_CALLS_REACHED` error. See [error handling](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling) for the full list of connector errors.
 
 For guidance on interpreting proximity to this limit, and configuring it, see [interpret limit proximity warnings](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md#interpret-limit-proximity-warnings).
