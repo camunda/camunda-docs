@@ -11,30 +11,8 @@ import TabItem from '@theme/TabItem';
 
 <PageDescription />
 
-:::note
-The Camunda Hub API is not exposed, by default, in Camunda 8 Self-Managed.
-
-Enable it with the public API v2 feature flag, and restart the service:
-
-<Tabs groupId="configType" defaultValue="application.yaml">
-<TabItem value="application.yaml" label="Application properties">
-
-```yaml
-camunda:
-  modeler:
-    feature:
-      public-api-v2-enabled: true
-```
-
-</TabItem>
-<TabItem value="env" label="Environment variables">
-
-```bash
-CAMUNDA_MODELER_FEATURE_PUBLIC_API_V2_ENABLED=true
-```
-
-</TabItem>
-</Tabs>
+:::note WORK IN PROGRESS
+The Camunda Hub API is not yet exposed in Camunda 8 Self-Managed.
 :::
 
 ## Authentication
