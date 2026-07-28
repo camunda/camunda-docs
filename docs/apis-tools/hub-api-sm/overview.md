@@ -6,15 +6,12 @@ description: "Manage Camunda Hub resources with the Camunda Hub API v2."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <PageDescription />
 
 :::note WORK IN PROGRESS
 The Camunda Hub API is not yet exposed in Camunda 8 Self-Managed.
 :::
-
 ## Authentication
 
 See the [authentication guide](/apis-tools/hub-api-sm/authentication.md) for setup instructions.
