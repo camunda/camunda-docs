@@ -1,5 +1,4 @@
 ---
-id: kubernetes
 title: "Kubernetes deployment overview"
 sidebar_label: "Kubernetes"
 description: "Camunda 8 Kubernetes deployment reference architecture home."
@@ -160,7 +159,7 @@ Console, Optimize, and Web Modeler rely on Management Identity (formerly Identit
 
 For configuration details, see:
 
-- [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
+- [Connect Orchestration Cluster to an OIDC provider](/self-managed/manage/identity-and-access/authentication-to-orchestration-cluster.md#oidc)
 - [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
 
 The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
@@ -169,7 +168,7 @@ The Orchestration Cluster can be configured to authenticate with OIDC by connect
 
 This guide focuses on a single-region application, but can be adapted for a multi-region setup once you understand the basics of a single region.
 
-For details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/concepts/multi-region/dual-region.md).
+For details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/extend/availability-and-disaster-recovery/dual-region.md).
 
 ### Infrastructure
 
@@ -275,7 +274,7 @@ Sizing is use case dependent. It is crucial to conduct thorough load testing and
 Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
 :::
 
-Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
+Once deployed, the included [Grafana dashboard](/self-managed/manage/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
 
 ## Distributions
 

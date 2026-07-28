@@ -57,14 +57,14 @@ Following this guide will incur costs on your Azure account, including charges f
 
 This guide supports two secondary storage variants for the Orchestration Cluster. Choose the one that fits your requirements:
 
-| Aspect                 | Elasticsearch                                                                                                          | RDBMS (PostgreSQL)                                                                         |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Secondary storage      | [Elasticsearch via ECK Operator](/self-managed/deploy-to-production/plan/kubernetes-operators.md#deploy-elasticsearch) | [Azure Database for PostgreSQL](/self-managed/deployment/helm/configure/database/rdbms.md) |
-| Optimize               | Supported                                                                                                              | Not available (requires Elasticsearch)                                                     |
-| Infrastructure         | AKS + PostgreSQL + Elasticsearch cluster                                                                               | AKS + PostgreSQL only (lighter footprint)                                                  |
-| Orchestration database | Not required                                                                                                           | Additional `camunda_orchestration` database                                                |
+| Aspect                 | Elasticsearch                                                                                                          | RDBMS (PostgreSQL)                                                                           |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Secondary storage      | [Elasticsearch via ECK Operator](/self-managed/deploy-to-production/plan/kubernetes-operators.md#deploy-elasticsearch) | [Azure Database for PostgreSQL](/self-managed/manage/databases/relational-database/rdbms.md) |
+| Optimize               | Supported                                                                                                              | Not available (requires Elasticsearch)                                                       |
+| Infrastructure         | AKS + PostgreSQL + Elasticsearch cluster                                                                               | AKS + PostgreSQL only (lighter footprint)                                                    |
+| Orchestration database | Not required                                                                                                           | Additional `camunda_orchestration` database                                                  |
 
-For more details on secondary storage, see [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md).
+For more details on secondary storage, see [Secondary storage concepts](/self-managed/manage/databases/secondary-storage/index.md).
 
 :::note
 Select a variant using the **Elasticsearch**/**RDBMS** tabs throughout this guide. All tabbed sections will switch together automatically.

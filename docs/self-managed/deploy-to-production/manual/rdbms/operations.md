@@ -1,5 +1,4 @@
 ---
-id: operations
 sidebar_label: Operations and maintenance
 title: Operations and maintenance for RDBMS manual installations
 description: Backup, restore, upgrade, troubleshoot, tune, and secure RDBMS for manual Camunda installations.
@@ -27,7 +26,7 @@ Operate and maintain RDBMS secondary storage for manual Camunda 8 installations 
 ### Schema upgrades
 
 1. Backup your database.
-2. Download scripts for target version: [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
+2. Download scripts for target version: [Access SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md).
 3. **If using autoDDL (default)**: Liquibase runs on Zeebe startup.
 4. **If using manual schema management**: Apply scripts manually, then start new Camunda version.
 
@@ -131,7 +130,7 @@ All RDBMS connections must use TLS in production:
 # PostgreSQL
 export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:5432/camunda?sslmode=require"
 
-# See [RDBMS Helm configuration](/self-managed/deployment/helm/configure/database/rdbms.md) for other databases
+# See [RDBMS Helm configuration](/self-managed/manage/databases/relational-database/rdbms.md) for other databases
 ```
 
 ### Secrets
@@ -165,5 +164,5 @@ Before deploying to production, review [secondary storage architecture](/self-ma
 - [RDBMS configuration](/self-managed/deploy-to-production/manual/rdbms/configuration.md)
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
 - [RDBMS production architecture](/self-managed/deploy-to-production/manual/rdbms/rdbms-production-architecture.md)
-- [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)
-- [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
+- [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)
+- [Access SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md)

@@ -280,7 +280,7 @@ Camunda 8 uses two layers of storage:
 - **[Primary storage](/reference/glossary.md#primary-storage)** is handled by the Zeebe Broker to store workflow execution data.
 - **[Secondary storage](/reference/glossary.md#secondary-storage)** is used by applications like Operate, Tasklist, and Admin to read and present that data.
 
-For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).
+For more details on how these layers interact, see [secondary storage architecture](/self-managed/manage/databases/secondary-storage/index.md).
 
 Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when H2 becomes the default in a future release.
 
@@ -293,6 +293,6 @@ Camunda 8 Run uses v2 APIs by default, so no additional configuration is require
 
 ## Next steps
 
-- Review [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
-- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/rdbms/backup.md).
+- Review [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md).
+- Review [backup and restore for RDBMS](/self-managed/manage/back-up-and-restore/rdbms/backup.md).
 - Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer/c8run/troubleshooting.md).

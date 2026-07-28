@@ -6,7 +6,7 @@ description: "A quickstart guide for developers to deploy and run Camunda 8 Self
 
 Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL, and requires an external Elasticsearch instance for Optimize.
 
-Docker Compose also supports [document handling](/self-managed/concepts/document-handling/overview.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Web Modeler.
+Docker Compose also supports [document handling](/self-managed/manage/document-handling/index.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Web Modeler.
 
 :::note
 The [Docker images](/self-managed/deploy-to-production/containers/docker.md) are supported for production usage. The Docker Compose files are intended for local development and evaluation, and are not designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deploy-to-production/kubernetes/install/index.md).

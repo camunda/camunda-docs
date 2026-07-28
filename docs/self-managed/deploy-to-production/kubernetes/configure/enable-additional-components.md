@@ -1,5 +1,4 @@
 ---
-id: enable-additional-components
 sidebar_label: Enable additional components
 title: Enable additional Camunda components
 description: Enable optional components like Management Identity, Web Modeler, Console, and Optimize in the Camunda Helm chart.

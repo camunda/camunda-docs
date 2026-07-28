@@ -84,7 +84,7 @@ Secondary storage memory is not a meaningful differentiator for improving perfor
 - **Optimize's analytics indices grow.** Optimize keeps one document per process instance and can only apply retention-based cleanup once its importer has processed the instance's completion. While the importer lags, completions are recorded late, cleanup is deferred, and Optimize's own indices grow beyond their steady-state size.
 - **Data can be missed.** The raw exporter indices are cleaned up on the Elasticsearch/OpenSearch retention schedule. If the importer falls far enough behind, those records are deleted before Optimize imports them, and that data never reaches Optimize. This Exporter-Importer hazard is exactly what the 8.8 Camunda Exporter architecture removed for Operate and Tasklist.
 
-Track import progress with the [Optimize metrics and bundled Grafana dashboards](/self-managed/operational-guides/monitoring/metrics.md). If you see persistent import lag, raise the import throughput (see [mitigations](#mitigations) for details).
+Track import progress with the [Optimize metrics and bundled Grafana dashboards](/self-managed/manage/monitoring/metrics.md). If you see persistent import lag, raise the import throughput (see [mitigations](#mitigations) for details).
 :::
 
 #### Mitigations
@@ -244,7 +244,7 @@ Sizing data provided throughout this guide assumes Elasticsearch unless stated o
 
 #### RDBMS
 
-- A different storage paradigm: a relational database instead of a document store. See the full list of [supported databases](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#supported-rdbms).
+- A different storage paradigm: a relational database instead of a document store. See the full list of [supported databases](/self-managed/manage/databases/relational-database/support-policy.md#supported-rdbms).
 - A different resource profile: CPU/memory-oriented rather than disk/IOPS-oriented.
 - Write throughput is approximately **70% of Elasticsearch** on equivalent hardware.
 - **No Optimize support**: If you need Optimize, you must run Elasticsearch alongside RDBMS.
@@ -300,4 +300,4 @@ Now that you understand the factors that influence sizing:
 - **Self-Managed admins:** Provision your Kubernetes cluster using these [baseline resource settings](sizing-self-managed.md).
 - **Validate sizing:** [Run your own benchmarks](sizing-benchmarks.md) to test your specific workload.
 
-For current secondary storage benchmarks, see [RDBMS benchmark results](/self-managed/concepts/secondary-storage/rdbms-benchmark-results.md).
+For current secondary storage benchmarks, see [RDBMS benchmark results](/self-managed/manage/databases/relational-database/benchmark-results.md).

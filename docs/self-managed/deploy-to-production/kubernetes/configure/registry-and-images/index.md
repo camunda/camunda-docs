@@ -1,5 +1,4 @@
 ---
-id: index
 sidebar_label: Registry and images
 title: Configure registry and images
 description: Configure registry and image settings for the Camunda Helm chart.

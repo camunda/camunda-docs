@@ -1,5 +1,4 @@
 ---
-id: helm-v4
 title: "Helm 4"
 sidebar_label: "Helm 4"
 description: "Learn how Helm 4 behavior affects Camunda Helm chart installs and upgrades."
@@ -8,7 +7,7 @@ description: "Learn how Helm 4 behavior affects Camunda Helm chart installs and 
 Since Camunda 8.10 (chart 15.x), Helm CLI v4 is required. Use this page to understand Helm 4 behavior changes that affect the Camunda Helm chart and to apply the relevant workarounds.
 
 :::note Switching from Helm v3
-Switching CLIs does not require a release-state migration; Helm is client-side only. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md).
+Switching CLIs does not require a release-state migration; Helm is client-side only. See [Move from the Helm v3 CLI to v4](/self-managed/manage/upgrade/helm-v3-to-v4.md).
 :::
 
 :::info

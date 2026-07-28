@@ -229,7 +229,7 @@ This update describes infrastructure deployment patterns in reference architectu
 <ul>
   <li><span class="link-arrow">[EKS dual-region reference architecture](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/dual-region.md)</span></li>
   <li><span class="link-arrow">[OpenShift dual-region reference architecture](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/dual-region.md)</span></li>
-  <li><span class="link-arrow">[Dual-region operational tasks](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md)</span></li>
+  <li><span class="link-arrow">[Dual-region operational tasks](/self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure.md)</span></li>
 </ul>
 
 ### Migration from Bitnami subcharts
@@ -241,7 +241,7 @@ Camunda 8.9 adds migration guidance for customers moving Self-Managed Helm deplo
 - Use the migration guides to move PostgreSQL, Elasticsearch, and Keycloak from Bitnami subcharts to independent infrastructure services.
 - Follow the documented migration phases to plan backup, cutover, validation, and cleanup with minimal disruption.
 
-<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
+<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/manage/upgrade/migration-from-bitnami/index.md)</p>
 
 ### Gateway API, templating, and Helm 4 support
 
@@ -249,7 +249,7 @@ The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated valu
 
 <ul>
   <li><span class="link-arrow">[Gateway API setup](/self-managed/deploy-to-production/kubernetes/configure/ingress/gateway-api-setup.md)</span></li>
-  <li><span class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</span></li>
+  <li><span class="link-arrow">[Helm chart parameters](/self-managed/deploy-to-production/kubernetes/configure/chart-parameters.md)</span></li>
   <li><span class="link-arrow">[Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md)</span></li>
 </ul>
 
@@ -257,7 +257,7 @@ The 8.9 Helm chart adds Kubernetes Gateway API support, documents templated valu
 
 Helm deployments in 8.9 now support fully integrated RDBMS secondary storage, expose the Orchestration Cluster REST port on 8080 by default, and allow authorization rules to be initialized directly from `values.yaml`. This reduces post-install manual setup and makes Helm-based deployments align more closely with current platform defaults.
 
-<p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
+<p class="link-arrow">[Configuring secondary storage](/self-managed/manage/databases/secondary-storage/configure.md)</p>
 
 ## Reference architectures
 
@@ -284,7 +284,7 @@ This applies to AKS, EKS, OpenShift, and Kind reference architectures.
 
 A new migration tooling set is available to move existing Self-Managed deployments from Bitnami-managed infrastructure to operator-managed infrastructure. The migration follows a 5-phase process (deploy targets, backup, cutover, validation, cleanup) with typical downtime of 5–40 minutes during the cutover phase.
 
-<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md)</p>
+<p class="link-arrow">[Migrate from Bitnami subcharts](/self-managed/manage/upgrade/migration-from-bitnami/index.md)</p>
 
 ### New reference architectures
 
@@ -328,7 +328,7 @@ Camunda 8.9 adds IDP document classification templates and lets you choose a tex
 
 Camunda 8.9 adds Azure Blob Storage as a supported document store for Self-Managed environments, alongside the existing Google Cloud Platform (GCP) and AWS S3 options. Configure it via Camunda 8 Run, Docker Compose, or Helm.
 
-<p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md#supported-storage-options)</p>
+<p class="link-arrow">[Document handling configuration](/self-managed/manage/document-handling/configuration/index.md#supported-storage-options)</p>
 
 ## Integrations
 
@@ -432,7 +432,7 @@ The Orchestration Cluster continues its 8.9 consolidation work with completed un
 Orchestration Cluster enhancements in 8.9 include scheduled backups, Elasticsearch 9 support, Amazon Aurora as secondary storage, per-broker RocksDB memory sizing, and the unified RocksDB cache model introduced in the first alpha. Together, these changes improve backup automation, storage flexibility, and operational tuning for Self-Managed deployments.
 
 <ul>
-  <li><span class="link-arrow">[Scheduled backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</span></li>
+  <li><span class="link-arrow">[Scheduled backup](/self-managed/manage/back-up-and-restore/rdbms/backup.md#scheduled-backup)</span></li>
   <li><span class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</span></li>
 </ul>
 
@@ -471,14 +471,14 @@ Tasklist V1 is planned for removal in version 8.10, so we strongly recommend mig
 
 Across the 8.9 release cycle, RDBMS secondary storage expands from early support for H2, PostgreSQL, Oracle, and MariaDB to include MySQL, Microsoft SQL Server, and Amazon Aurora. Camunda 8.9 also introduces standardized JDBC driver handling for manual installations so teams can separate bundled and customer-supplied drivers more cleanly.
 
-<p class="link-arrow">[RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 ### Helm, manual, and production deployment guidance
 
 Camunda 8.9 adds end-to-end deployment guidance for RDBMS-backed environments, including Helm configuration, manual installation, production installation guides, SQL and Liquibase scripts, and a dedicated setup guide spanning the Orchestration Cluster and Web Modeler. Web Modeler also gains relational database support that aligns with the broader Orchestration Cluster options.
 
 <ul>
-  <li><span class="link-arrow">[RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</span></li>
+  <li><span class="link-arrow">[RDBMS setup guide](/self-managed/manage/databases/relational-database/setup-guide.md)</span></li>
   <li><span class="link-arrow">[Manual installation with RDBMS](/self-managed/deploy-to-production/manual/rdbms/index.md)</span></li>
   <li><span class="link-arrow">[RDBMS Helm deployment](/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms.md)</span></li>
 </ul>
@@ -487,7 +487,7 @@ Camunda 8.9 adds end-to-end deployment guidance for RDBMS-backed environments, i
 
 When using RDBMS secondary storage, Camunda 8.9 adds continuous backup and restore support and documents how to combine an RDBMS-backed Orchestration Cluster with Optimize when analytics require Elasticsearch or OpenSearch. This gives teams a clearer path for disaster recovery and mixed operational versus analytics storage strategies.
 
-<p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
+<p class="link-arrow">[Back up and restore](/self-managed/manage/back-up-and-restore/index.md)</p>
 
 ## Robotic Process Automation (RPA)
 
@@ -685,7 +685,7 @@ The Helm chart now documents all values supporting Go template expressions, incl
 - `podLabels`, `podAnnotations` (all components), and `global.ingress.host` now support templating via `{{ "{{" }} }}` expressions (for example, `{{ "{{" }} .Release.Name }}`).
 - This feature enables dynamic configuration for multi-environment deployments and integrations, such as Datadog APM.
 
-<p class="link-arrow">[Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md)</p>
+<p class="link-arrow">[Helm chart parameters](/self-managed/deploy-to-production/kubernetes/configure/chart-parameters.md)</p>
 
 #### Helm 4 support
 
@@ -928,7 +928,7 @@ You can now configure scheduled backup intervals and retention directly in the O
 - Supports setting duration schedules, manual ad‑hoc backups, API‑based updates, metrics, and audit logs.
 - Backwards compatible with existing backup commands.
 
-<p class="link-arrow">[Scheduled backup (RDBMS)](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</p>
+<p class="link-arrow">[Scheduled backup (RDBMS)](/self-managed/manage/back-up-and-restore/rdbms/backup.md#scheduled-backup)</p>
 
 #### Update cluster variables
 
@@ -973,7 +973,7 @@ This lets you standardize on the Orchestration Cluster APIs and the recommended 
 
 A new installation guide covers how you can configure Camunda 8 with relational databases across the Orchestration Cluster and Web Modeler. The guide covers database provisioning, connections and authentication including Aurora IAM, JDBC driver handling, optional schema management with SQL or Liquibase, and backup and restore considerations so teams can deploy faster with fewer errors and aligned best practices.
 
-<p class="link-arrow">[RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md)</p>
+<p class="link-arrow">[RDBMS setup guide](/self-managed/manage/databases/relational-database/setup-guide.md)</p>
 
 #### Manual installation supports RDBMS secondary storage
 
@@ -1215,7 +1215,7 @@ Additionally, the new restore API syntax now supports `--from` and `--to` timest
 - Ensures version compatibility across backups and offers an override via `--allow-version-mismatch`.
 - Reduces manual restore effort and enhances confidence in backup integrity, with reduced Recovery Time Objective (RTO).
 
-<p class="link-arrow">[Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)</p>
+<p class="link-arrow">[Back up and restore](/self-managed/manage/back-up-and-restore/index.md)</p>
 
 ### Helm chart deployment
 
@@ -1442,7 +1442,7 @@ This allows enterprises to run Camunda 8 on familiar, enterprise-managed RDBMS i
 
 With RDBMS support, the Helm chart no longer defaults to Elasticsearch as secondary storage. You must now explicitly set `orchestration.data.secondaryStorage.type` to `elasticsearch`, `opensearch`, or `rdbms`. This also introduces `global.noSecondaryStorage` for engine-only deployments without any secondary storage.
 
-<p class="link-arrow">[Configuring secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md)</p>
+<p class="link-arrow">[Configuring secondary storage](/self-managed/manage/databases/secondary-storage/configure.md)</p>
 
 ## 8.9.0-alpha2
 
@@ -1592,7 +1592,7 @@ Configure an external relational database (RDBMS) as secondary storage for the O
 - Describes how to load JDBC drivers via init containers, custom images, or mounted volumes.
 - Provides steps to verify database connectivity.
 
-<p class="link-arrow">[Configure RDBMS in Helm chart](/self-managed/deployment/helm/configure/database/rdbms.md)</p>
+<p class="link-arrow">[Configure RDBMS in Helm chart](/self-managed/manage/databases/relational-database/rdbms.md)</p>
 
 #### Open-source OpenSearch support
 
@@ -1603,7 +1603,7 @@ You can now use the [open-source OpenSearch](https://opensearch.org/) project fo
 - This allows you to run a fully open source observability stack without using Elasticsearch or the Amazon OpenSearch Service.
 - For configuration instructions, see the updated Helm chart values and compatibility matrix.
 
-<p class="link-arrow">[Secondary storage](/self-managed/concepts/secondary-storage/index.md)</p>
+<p class="link-arrow">[Secondary storage](/self-managed/manage/databases/secondary-storage/index.md)</p>
 
 #### RDBMS version support policy
 
@@ -1615,7 +1615,7 @@ A new Camunda 8 Relational Database Management System RDBMS support policy provi
 - The process for adopting new database versions.
 - Timelines for phasing out older database versions.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 #### SQL and Liquibase database scripts
 
@@ -1625,7 +1625,7 @@ SQL and Liquibase scripts are provided for all Camunda-supported databases.
 - Scripts follow best practices for each supported database type and version.
 - The full script package is distributed as part of the official Camunda distribution, available via GitHub or Artifactory.
 
-<p class="link-arrow">[SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)</p>
+<p class="link-arrow">[SQL and Liquibase scripts](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md)</p>
 
 ### Modeler
 

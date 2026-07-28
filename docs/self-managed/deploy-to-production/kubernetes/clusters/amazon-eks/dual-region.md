@@ -1,5 +1,4 @@
 ---
-id: dual-region
 title: "Dual-region setup (EKS)"
 description: "Deploy two Amazon Kubernetes (EKS) clusters with Terraform for a peered setup allowing dual-region communication."
 ---
@@ -13,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::caution
-Review our [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
+Review our [dual-region concept documentation](/self-managed/extend/availability-and-disaster-recovery/dual-region.md) before continuing to understand the current limitations and restrictions of this blueprint setup.
 :::
 
 This guide explains how to deploy two [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) clusters](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) in a dual-region setup using Terraform, a widely used Infrastructure as Code (IaC) tool.
@@ -510,7 +509,7 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 :::warning Migration from Bitnami Elasticsearch to ECK in dual-region
 
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure (documented for Camunda 8.9)](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) and apply it individually to each region.
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure (documented for Camunda 8.9)](/self-managed/manage/upgrade/migration-from-bitnami/index.md) and apply it individually to each region.
 
 :::
 
@@ -634,7 +633,7 @@ Key changes of the dual-region setup:
 - `global.security.authentication.method: basic`
   - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
-  - Management Identity is not currently supported. For more details, see the [limitations section](/self-managed/concepts/multi-region/dual-region.md#limitations) on the dual-region concept page.
+  - Management Identity is not currently supported. For more details, see the [limitations section](/self-managed/extend/availability-and-disaster-recovery/dual-region.md#limitations) on the dual-region concept page.
 - `identity.enabled: false`
   - Management Identity is currently not supported.
 - `optimize.enabled: false`
@@ -783,4 +782,4 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 After successfully deploying Camunda 8 in a dual-region setup, consider the following next steps:
 
-- [Dual-region operational procedures](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) - Learn how to perform failover and failback operations.
+- [Dual-region operational procedures](/self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure.md) - Learn how to perform failover and failback operations.

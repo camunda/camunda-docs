@@ -1,5 +1,4 @@
 ---
-id: manual
 title: "Manual deployment overview"
 sidebar_label: Manual
 description: "Camunda 8 Manual (Java) deployment Reference architecture home "
@@ -66,7 +65,7 @@ Connectors expose additional HTTP(s) endpoints for handling incoming webhooks, w
 The Orchestration Cluster relies on a configured [secondary storage](/reference/glossary.md#secondary-storage) backend for indexing and search. Depending on your deployment and configuration, this backend can use a document-store backend ([Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch)) or an [RDBMS](/reference/glossary.md#rdbms) for supported scenarios.
 
 :::note
-Secondary storage is configurable. For backend trade-offs and production guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). For RDBMS configuration details, see [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
+Secondary storage is configurable. For backend trade-offs and production guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). For RDBMS configuration details, see [RDBMS configuration](/self-managed/manage/databases/relational-database/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
 :::
 
 Components within the Orchestration Cluster communicate seamlessly, particularly:

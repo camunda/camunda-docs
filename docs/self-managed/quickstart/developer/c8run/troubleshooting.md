@@ -198,7 +198,7 @@ On Windows, open this page directly: [http://localhost:9200/\_cluster/health](ht
 
 **Solution:**
 
-1. Ensure the Elasticsearch user has permission to create, read, and write the required Camunda indices. For restricted setups, see [Configure Elasticsearch without cluster privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-without-cluster-privileges.md).
+1. Ensure the Elasticsearch user has permission to create, read, and write the required Camunda indices. For restricted setups, see [Configure Elasticsearch without cluster privileges](/self-managed/manage/databases/elasticsearch-opensearch/elasticsearch-without-cluster-privileges.md).
 2. Verify the Elasticsearch cluster is healthy and has sufficient free disk space.
 3. For local development, if you need to recreate the secondary store, stop Camunda 8 Run, delete the Camunda indices from your external Elasticsearch instance using your Elasticsearch tooling, and start Camunda 8 Run again. This rebuilds the secondary store from scratch.
 

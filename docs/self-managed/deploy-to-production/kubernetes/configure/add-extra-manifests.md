@@ -1,5 +1,4 @@
 ---
-id: add-extra-manifests
 sidebar_label: Custom manifests
 title: Add custom Kubernetes manifests in Helm charts
 description: Learn how to add extra Kubernetes manifests to Helm deployments by defining them in the values.yaml file.

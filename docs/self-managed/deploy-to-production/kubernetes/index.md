@@ -1,5 +1,4 @@
 ---
-id: index
 sidebar_label: Kubernetes with Helm
 title: Camunda Helm chart
 description: Learn how to install Camunda 8 Self-Managed using Kubernetes with Helm.

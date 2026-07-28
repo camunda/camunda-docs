@@ -341,20 +341,20 @@ If you don't want to use this module, you can skip this section. However, you ma
 If you choose not to use this module, you can either:
 
 - Provide a managed Elasticsearch or OpenSearch service, or deploy Elasticsearch in your cluster via ECK.
-- Use RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+- Use RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md) for details.
 
 Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
-The OpenSearch module creates an OpenSearch domain intended for Camunda. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
+The OpenSearch module creates an OpenSearch domain intended for Camunda. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/manage/databases/elasticsearch-opensearch/using-external-opensearch.md).
 
 :::note
-Secondary storage is configurable. Depending on the components you run and your requirements, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
+Secondary storage is configurable. Depending on the components you run and your requirements, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/manage/databases/relational-database/rdbms.md) for configuration guidance and limitations.
 :::
 
 :::note Migration to OpenSearch is not supported
 
-Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/setup/overview.md). Migration from previous Camunda versions using Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
+Using Amazon OpenSearch Service requires [setting up a new Camunda installation](/self-managed/deploy-to-production/kubernetes/index.md). Migration from previous Camunda versions using Elasticsearch environments is currently not supported. Switching between Elasticsearch and OpenSearch, in either direction, is also not supported.
 
 :::
 

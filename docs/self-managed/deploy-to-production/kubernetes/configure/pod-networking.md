@@ -1,5 +1,4 @@
 ---
-id: pod-networking
 sidebar_label: Pod networking
 title: Configure pod networking
 description: Configure DNS policy, custom DNS resolution, and host network access for Camunda component pods in Self-Managed Helm deployments.

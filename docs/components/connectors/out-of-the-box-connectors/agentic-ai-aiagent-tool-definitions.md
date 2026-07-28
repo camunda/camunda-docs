@@ -203,7 +203,7 @@ the tool.
 
 ### Document support
 
-Tool call responses can contain [Camunda document references](/self-managed/concepts/document-handling/overview.md)
+Tool call responses can contain [Camunda document references](/self-managed/manage/document-handling/index.md)
 nested anywhere within the result structure. The agent extracts these documents and passes them to the LLM as native
 content blocks.
 
@@ -221,4 +221,5 @@ Instead, each discovered tool's input schema is provided by the external source 
 For more details, see the available gateway tool implementations:
 
 - [MCP Client connectors](./agentic-ai-mcp-client.md)
+
 <!-- TODO add A2A -->

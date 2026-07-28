@@ -1,5 +1,4 @@
 ---
-id: containers
 title: "Container deployment overview"
 sidebar_label: "Containers"
 description: "Overview of the Camunda 8 container deployment reference architecture."

@@ -1,5 +1,4 @@
 ---
-id: docker
 sidebar_label: Docker
 title: Camunda Docker images
 keywords: ["camunda docker"]

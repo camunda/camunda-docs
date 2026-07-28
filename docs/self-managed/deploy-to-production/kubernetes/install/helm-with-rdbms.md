@@ -1,5 +1,4 @@
 ---
-id: helm-with-rdbms
 sidebar_label: RDBMS example deployment
 title: RDBMS example deployment for Camunda with Helm
 description: "Focused walkthrough for teams choosing an external RDBMS as secondary storage within the Helm production installation flow."
@@ -15,9 +14,9 @@ Related guides:
 
 - [Production install](/self-managed/deploy-to-production/kubernetes/install/production/index.md)
 - [Secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture)
-- [Secondary storage overview](/self-managed/concepts/secondary-storage/index.md)
-- [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)
-- [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md)
+- [Secondary storage overview](/self-managed/manage/databases/secondary-storage/index.md)
+- [Configure RDBMS in Helm charts](/self-managed/manage/databases/relational-database/rdbms.md)
+- [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md)
 
 ## What changes when using RDBMS?
 
@@ -39,7 +38,7 @@ Before you begin:
 
 1. **Kubernetes cluster**: 1.24+ with sufficient resources for Camunda pods.
 2. **Helm CLI v4**: Install or upgrade [Helm](https://helm.sh/docs/intro/install/). Helm v3 is not supported for Camunda 8.10 and later.
-3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for the complete list of supported databases and versions.
+3. **External RDBMS**: A supported database reachable from your cluster. See the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md) for the complete list of supported databases and versions.
 4. **Database credentials**: Username and password for a database user with DDL permissions (if using auto-schema creation).
 5. **Document-store backend (Elasticsearch/OpenSearch)** (for Optimize): Required if you deploy Optimize alongside Camunda.
 
@@ -158,7 +157,7 @@ kubectl create secret generic camunda-db-secret \
 If you're using Oracle, MySQL, or a database version not covered by bundled drivers, you must provide the JDBC driver.
 
 :::note
-For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
+For detailed information about JDBC driver strategies, security configurations, and validation, see [JDBC driver management](/self-managed/manage/databases/relational-database/jdbc-drivers.md).
 :::
 
 #### Option A: Init container (recommended for production)
@@ -215,7 +214,7 @@ orchestration:
         name: jdbc-drivers
 ```
 
-See [JDBC driver loading](/self-managed/deployment/helm/configure/database/rdbms.md#bundled-vs-custom-jdbc-drivers) for more strategies.
+See [JDBC driver loading](/self-managed/manage/databases/relational-database/rdbms.md#bundled-vs-custom-jdbc-drivers) for more strategies.
 
 ### Step 7: Install Camunda
 
@@ -250,7 +249,7 @@ Deploy a test process using Web Modeler and verify it appears in the database:
 SELECT COUNT(*) FROM process_instances;
 ```
 
-For a full post-deployment checklist, see [validate RDBMS connectivity](/self-managed/deployment/helm/configure/database/validate-rdbms.md).
+For a full post-deployment checklist, see [validate RDBMS connectivity](/self-managed/manage/databases/relational-database/validate-rdbms.md).
 
 ## Common deployment scenarios
 
@@ -266,7 +265,7 @@ orchestration:
         url: jdbc:postgresql://my-aurora-cluster.xxxxxxx.us-east-1.rds.amazonaws.com:5432/camunda
 ```
 
-Aurora supports automatic failover. For advanced failover features, consider the [AWS JDBC wrapper driver](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql).
+Aurora supports automatic failover. For advanced failover features, consider the [AWS JDBC wrapper driver](/self-managed/manage/databases/relational-database/configuration.md#usage-with-aws-aurora-postgresql).
 
 ### Oracle with Kubernetes init container
 
@@ -361,9 +360,9 @@ opensearch:
 
 For detailed configuration options, see:
 
-- [Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md): All Helm values, bundled vs. custom drivers, schema management, and troubleshooting.
+- [Configure RDBMS in Helm charts](/self-managed/manage/databases/relational-database/rdbms.md): All Helm values, bundled vs. custom drivers, schema management, and troubleshooting.
 - [Production installation best practices](/self-managed/deploy-to-production/kubernetes/install/production/index.md): Network policies, TLS, OIDC, and multi-namespace setup.
-- [Helm chart parameters](/self-managed/deployment/helm/chart-parameters.md): Full Helm chart reference.
+- [Helm chart parameters](/self-managed/deploy-to-production/kubernetes/configure/chart-parameters.md): Full Helm chart reference.
 
 ## Important: Component storage requirements
 
@@ -402,7 +401,7 @@ kubectl logs -n camunda <pod-name>
 - Authentication failed: Confirm secret and credentials.
 - Driver not found (Oracle/MySQL): Verify init container or custom image has loaded the driver.
 
-See [troubleshooting RDBMS connectivity](/self-managed/deployment/helm/configure/database/rdbms.md#troubleshooting-and-operations) for detailed diagnostics.
+See [troubleshooting RDBMS connectivity](/self-managed/manage/databases/relational-database/rdbms.md#troubleshooting-and-operations) for detailed diagnostics.
 
 ### Data not appearing in database
 
@@ -420,7 +419,7 @@ kubectl logs -n camunda <pod-name> | grep -i exporter
 
 **Symptom:** "ClassNotFoundException" or driver-related errors.
 
-**Fix:** Ensure the driver version matches your database. See [Bundled vs. custom drivers](/self-managed/deployment/helm/configure/database/rdbms.md#bundled-vs-custom-jdbc-drivers).
+**Fix:** Ensure the driver version matches your database. See [Bundled vs. custom drivers](/self-managed/manage/databases/relational-database/rdbms.md#bundled-vs-custom-jdbc-drivers).
 
 ## Known limitations and unsupported scenarios
 
@@ -440,5 +439,5 @@ Camunda does not manage database HA. Use cloud-managed databases (AWS Aurora, Az
 
 - **[Production guide](/self-managed/deploy-to-production/kubernetes/install/production/index.md)**: Network security, TLS, OIDC, and high-availability configurations.
 - **[Helm quick install](/self-managed/quickstart/administrator/helm.md)**: Get started with default settings for evaluation.
-- **[Operational tasks](/self-managed/deployment/helm/operational-tasks/index.md)**: Scaling, upgrades, and maintenance.
-- **[Backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)**: Data protection strategies.
+- **[Operational tasks](/self-managed/manage/upgrade/index.md)**: Scaling, upgrades, and maintenance.
+- **[Backup and restore](/self-managed/manage/back-up-and-restore/index.md)**: Data protection strategies.

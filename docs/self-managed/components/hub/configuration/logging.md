@@ -195,7 +195,7 @@ LOG_LEVEL_CLIENT=DEBUG
 ```
 
 :::info
-For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
+For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/manage/monitoring/log-levels.md#understanding-log-levels).
 :::
 
 ## Logging configuration for the `websocket` component

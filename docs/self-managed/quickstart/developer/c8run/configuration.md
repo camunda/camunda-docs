@@ -157,7 +157,7 @@ For details, see [HTTP proxy configuration](/self-managed/components/connectors/
 
 Metrics are enabled in Camunda 8 Run by default and can be accessed at [http://localhost:9600/actuator/prometheus](http://localhost:9600/actuator/prometheus).
 
-For more information, see the [metrics](/self-managed/operational-guides/monitoring/metrics.md) documentation.
+For more information, see the [metrics](/self-managed/manage/monitoring/metrics.md) documentation.
 
 ## Environment variables
 

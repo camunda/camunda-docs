@@ -5,7 +5,7 @@ title: AI Agent document support
 description: How the AI Agent connector passes documents and images to the LLM.
 ---
 
-The AI Agent connector can pass [Camunda documents](/self-managed/concepts/document-handling/overview.md) to the LLM
+The AI Agent connector can pass [Camunda documents](/self-managed/manage/document-handling/index.md) to the LLM
 from two sources:
 
 - The [user prompt](./agentic-ai-aiagent-subprocess.md#user-prompt) **Documents** field.

@@ -17,7 +17,7 @@ To ensure recovery is possible, Camunda recommends regularly backing up the data
 
 #### Helm deployment
 
-If you deployed Camunda 8 using Camunda [Helm charts](/self-managed/setup/overview.md), by default there will be a Postgres database deployed with it. In this case, Camunda recommends reading the [Postgres documentation](https://www.postgresql.org/docs/current/backup.html) for guidance on backing up.
+If you deployed Camunda 8 using Camunda [Helm charts](/self-managed/deploy-to-production/kubernetes/index.md), by default there will be a Postgres database deployed with it. In this case, Camunda recommends reading the [Postgres documentation](https://www.postgresql.org/docs/current/backup.html) for guidance on backing up.
 
 #### Alternative deployment
 

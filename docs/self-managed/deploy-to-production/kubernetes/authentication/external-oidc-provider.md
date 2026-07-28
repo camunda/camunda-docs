@@ -1,5 +1,4 @@
 ---
-id: external-oidc-provider
 sidebar_label: External OIDC provider
 title: Set up the Helm chart with an external OIDC provider
 description: "Learn how to connect the Helm Chart to an external OIDC provider (such as Microsoft Entra or an external Keycloak instance)."

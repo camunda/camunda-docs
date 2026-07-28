@@ -26,7 +26,7 @@ See the [core settings documentation](/self-managed/components/orchestration-clu
 
 ## Secondary storage
 
-Review the [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage) and [secondary storage configuration](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md).
+Review the [secondary storage documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secondary-storage) and [secondary storage configuration](/self-managed/manage/databases/secondary-storage/configure.md).
 
 ## Intra-cluster secure connection
 

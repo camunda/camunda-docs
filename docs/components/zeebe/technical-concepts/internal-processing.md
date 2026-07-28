@@ -76,7 +76,7 @@ Commands related to canceling a banned process instance are not skipped.
 
 When a broker receives a client request, it is written to the **event stream** first, and processed later by the stream processor. If the processing is slow or if there are many client requests in the stream, it might take too long for the processor to start processing the command. If the broker keeps accepting new requests from the client, the backlog increases and the processing latency can grow beyond an acceptable time.
 
-To avoid such problems, Zeebe employs [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) strategies that apply write rate limits and [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md) to user requests.
+To avoid such problems, Zeebe employs [flow control](/self-managed/manage/flow-control/index.md) strategies that apply write rate limits and [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md) to user requests.
 
 In the case of backpressure when the broker receives more requests than it can process with an acceptable latency, it rejects some requests. For flow control, it can be used with static write rate limits or throttling which prevents the
 partition from building an excessive backlog of records not exported.
@@ -87,7 +87,7 @@ The maximum rate of requests that can be processed by a broker depends on the pr
 
 The in-flight request count is incremented when a request is accepted, and decremented when a response is sent back to the client. The broker rejects requests when the in-flight request count reaches the limit.
 
-This is not a single static threshold for the whole broker. Zeebe calculates the in-flight count and the limit per partition, and the current limit changes over time based on the configured backpressure algorithm. To observe the current limit, monitor the `zeebe_backpressure_requests_limit` metric. For more details, see [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md) and [metrics](/self-managed/operational-guides/monitoring/metrics.md#performance-metrics).
+This is not a single static threshold for the whole broker. Zeebe calculates the in-flight count and the limit per partition, and the current limit changes over time based on the configured backpressure algorithm. To observe the current limit, monitor the `zeebe_backpressure_requests_limit` metric. For more details, see [backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md) and [metrics](/self-managed/manage/monitoring/metrics.md#performance-metrics).
 
 import BackpressureWarning from '../../../components/react-components/backpressure-warning.md'
 

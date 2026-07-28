@@ -1,5 +1,4 @@
 ---
-id: external-keycloak
 sidebar_label: External Keycloak
 title: Set up the Helm chart with an external Keycloak instance
 description: Learn how to connect the Camunda Helm chart to an external Keycloak instance.

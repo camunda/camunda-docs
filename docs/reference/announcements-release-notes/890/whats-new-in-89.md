@@ -249,7 +249,7 @@ Camunda 8.9 introduces major changes to the [deployment references](https://gith
 
 All reference architectures (AKS, EKS, OpenShift, Kind) now use Kubernetes operators — CloudNativePG, ECK, and Keycloak operator — instead of embedded Bitnami subcharts for infrastructure services.
 
-If you follow a reference architecture, your next deployment will use operator-managed PostgreSQL, Elasticsearch, and Keycloak. Existing deployments can migrate using the new [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+If you follow a reference architecture, your next deployment will use operator-managed PostgreSQL, Elasticsearch, and Keycloak. Existing deployments can migrate using the new [migration tooling](/self-managed/manage/upgrade/migration-from-bitnami/index.md).
 
 #### Are you affected?
 
@@ -431,7 +431,7 @@ Supported options include H2 (for development and test scenarios), PostgreSQL, O
 
 This is particularly useful if you already standardize on one of the supported RDBMS platforms, want to avoid operating and scaling additional search clusters where they are not required, or prefer existing RDBMS tooling for backup, monitoring, and compliance.
 
-<p class="link-arrow">[Secondary storage](/self-managed/concepts/secondary-storage/index.md)</p>
+<p class="link-arrow">[Secondary storage](/self-managed/manage/databases/secondary-storage/index.md)</p>
 
 ### Amazon Aurora as managed secondary storage
 
@@ -443,7 +443,7 @@ Camunda 8.9 adds support for Amazon Aurora PostgreSQL as secondary storage, enab
 
 Aurora is a good fit if you run Camunda on AWS and want managed RDBMS operations instead of self‑managing PostgreSQL, and integration with existing AWS security and reliability practices.
 
-<p class="link-arrow">[Using AWS Aurora PostgreSQL with Camunda](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql)</p>
+<p class="link-arrow">[Using AWS Aurora PostgreSQL with Camunda](/self-managed/manage/databases/relational-database/configuration.md#usage-with-aws-aurora-postgresql)</p>
 
 ### RDBMS version support policy and database scripts
 
@@ -454,7 +454,7 @@ To clarify long‑term support, Camunda 8.9 introduces:
 
 This helps DBAs and operations teams validate that existing database versions are supported, plan upgrades based on a predictable policy and script set, and standardize roll‑outs and migrations across environments.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 ### Standardized JDBC driver management
 
@@ -465,7 +465,7 @@ For manual installations, Camunda 8.9 introduces a standardized directory and co
 
 This structure simplifies license‑compliant driver distribution, multi‑database support in regulated environments, and provides a clear separation between Camunda-managed and customer-managed artifacts.
 
-<p class="link-arrow">[Loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods)</p>
+<p class="link-arrow">[Loading JDBC drivers into pods](/self-managed/manage/databases/relational-database/rdbms.md#loading-jdbc-drivers-into-pods)</p>
 
 ## Supported environments {#environments}
 
@@ -494,7 +494,7 @@ The following guides offer detailed information on how to upgrade to Camunda 8.9
     <td>**Who is this guide for?**</td>
 </tr>
 <tr>
-    <td>[Self-Managed upgrade guide](/self-managed/upgrade/index.md)</td>
+    <td>[Self-Managed upgrade guide](/self-managed/manage/upgrade/index.md)</td>
     <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>

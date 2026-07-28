@@ -1,5 +1,4 @@
 ---
-id: generic-oidc-provider
 sidebar_label: Generic OIDC provider
 title: Connect Camunda to any OIDC provider
 description: "Learn how to configure Camunda 8 Self-Managed to use any OIDC-compliant identity provider for authentication."

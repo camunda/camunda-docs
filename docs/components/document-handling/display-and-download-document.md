@@ -59,7 +59,7 @@ To inspect the underlying document reference metadata (such as document ID), exp
 You can also download a document from your Camunda 8 cluster using the Orchestration Cluster REST API.
 
 :::note
-This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/concepts/document-handling/configuration/index.md).
+This is currently supported for document stores of type: [AWS, GCP, in-memory (non-production), local (non-production)](/self-managed/manage/document-handling/configuration/index.md).
 :::
 
 Learn more about this request in the [Orchestration Cluster REST API docs](/apis-tools/orchestration-cluster-api-rest/specifications/get-document.api.mdx).

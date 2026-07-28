@@ -13,4 +13,4 @@ The Orchestration Cluster comes packaged with built-in exporters:
 
 This section of the docs explains how these exporters can be [installed](install-zeebe-exporters.md) and configured.
 
-For a general overview on the exporters concept, refer to our [exporters concept](../../../../concepts/exporters.md) page.
+For a general overview on the exporters concept, refer to our [exporters concept](/self-managed/manage/databases/exporters.md) page.

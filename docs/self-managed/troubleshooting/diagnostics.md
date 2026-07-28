@@ -1,5 +1,4 @@
 ---
-id: diagnostics
 sidebar_label: Collecting diagnostics
 title: Helm chart diagnostics
 description: "Get diagnostics and logs from a Helm chart deployment."

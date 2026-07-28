@@ -784,7 +784,7 @@ You can control the retention behavior via the process instance retention mode c
 
 Camunda 8.9 introduces Amazon Aurora as a secondary data store for Orchestration Clusters.
 
-<p className="link-arrow">[Secondary storage](/self-managed/concepts/secondary-storage/index.md)</p>
+<p className="link-arrow">[Secondary storage](/self-managed/manage/databases/secondary-storage/index.md)</p>
 
 </div>
 </div>
@@ -1161,7 +1161,7 @@ Camunda 8.9 introduces `global.noSecondaryStorage` mode to allow running the Orc
 
 When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentication is supported using OIDC (recommended) or Basic authentication with unprotected API mode for development environments.
 
-<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/concepts/secondary-storage/no-secondary-storage.md#authentication)</p>
+<p className="link-arrow">[Learn about authentication with no secondary storage](/self-managed/manage/databases/secondary-storage/without-secondary-storage.md#authentication)</p>
 
 </div>
 </div>
@@ -1177,10 +1177,10 @@ When enabled, Elasticsearch and OpenSearch subcharts must be disabled. Authentic
 Camunda 8.9 adds RDBMS configuration options to the Helm chart's `values.yaml` file, providing a first-class alternative to Elasticsearch and OpenSearch.
 
 - Configure database connections directly under `orchestration.data.secondaryStorage.rdbms`, including JDBC URL and authentication.
-- Supports all databases in the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
+- Supports all databases in the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md): PostgreSQL, Oracle, MariaDB, MySQL, Microsoft SQL Server, H2, and Amazon Aurora.
 - Advanced authentication and custom JDBC drivers can be configured via init containers or mounted volumes.
 
-<p className="link-arrow">[Configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md)</p>
+<p className="link-arrow">[Configure RDBMS in Helm charts](/self-managed/manage/databases/relational-database/rdbms.md)</p>
 
 </div>
 </div>
@@ -1342,7 +1342,7 @@ Camunda 8.9 adds a standardized JDBC driver management system for manual install
 
 All Self-Managed [reference architectures](https://github.com/camunda/camunda-deployment-references) now use Kubernetes operators (CloudNativePG, ECK, Keycloak operator) instead of embedded Bitnami subcharts for infrastructure services. This applies to AKS, EKS, OpenShift, and Kind deployments.
 
-**Action:** If you follow a reference architecture and currently use Bitnami-managed infrastructure, use the [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) to transition to operator-managed services.
+**Action:** If you follow a reference architecture and currently use Bitnami-managed infrastructure, use the [migration tooling](/self-managed/manage/upgrade/migration-from-bitnami/index.md) to transition to operator-managed services.
 
 </div>
 </div>

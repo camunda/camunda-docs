@@ -1,5 +1,4 @@
 ---
-id: kubernetes-operators
 sidebar_label: Deploy required dependencies
 title: Deploy required dependencies with Kubernetes operators
 description: "Deploy the databases (PostgreSQL, Elasticsearch) and OIDC provider (Keycloak) required by Camunda 8 using official Kubernetes operators."
@@ -280,7 +279,7 @@ This topology is an opinionated minimal baseline. Adjust node count/roles (e.g.,
 
 Elasticsearch serves as the secondary storage for Camunda 8 orchestration cluster components, providing persistent storage and search capabilities.
 
-[Learn more about the secondary storage](/self-managed/concepts/secondary-storage/index.md) and how it supports advanced features like web applications, search APIs, process monitoring, task management, and analytics.
+[Learn more about the secondary storage](/self-managed/manage/databases/secondary-storage/index.md) and how it supports advanced features like web applications, search APIs, process monitoring, task management, and analytics.
 
 ### Installation
 
@@ -727,7 +726,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 ### Backup and disaster recovery
 
-- **Elasticsearch**: Perform backups using Camunda for Elastic (see [Camunda backup guide](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md)).
+- **Elasticsearch**: Perform backups using Camunda for Elastic (see [Camunda backup guide](/self-managed/manage/back-up-and-restore/elasticsearch/backup.md)).
 - **PostgreSQL**: Configure automated backups using [CloudNativePG's backup capabilities](https://cloudnative-pg.io/docs/1.28/recovery)
 - **Keycloak**: Configure regular [exports of realm and user data](https://www.keycloak.org/server/importExport)
 - **Configuration**: Store all configuration files in version control
@@ -766,5 +765,5 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 - [Configure Ingress and TLS](/self-managed/deploy-to-production/kubernetes/configure/ingress/index.md)
 - [Set up monitoring and observability](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md)
-- [Configure multi-tenancy](/self-managed/deployment/helm/configure/configure-multi-tenancy.md)
+- [Configure multi-tenancy](/self-managed/extend/tenancy/logical-multi-tenancy.md)
 - [Production deployment guide](/self-managed/deploy-to-production/kubernetes/install/production/index.md)

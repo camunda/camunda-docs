@@ -21,11 +21,11 @@ Camunda 8 Run includes the following:
 - [Connectors](/reference/glossary.md#connector)
 - H2 (default [secondary storage](/reference/glossary.md#secondary-storage) for Camunda 8 Run)
 
-Camunda 8 Run also supports document storage and management with [document handling](/self-managed/concepts/document-handling/overview.md).
+Camunda 8 Run also supports document storage and management with [document handling](/self-managed/manage/document-handling/index.md).
 
 :::note
 For the latest list of supported relational databases and versions, see the
-[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 :::
 
 ## Pages in this section
@@ -80,5 +80,5 @@ For local shutdown commands, see [shut down Camunda 8 Run](/self-managed/quickst
 
 ## Next steps
 
-- Review [backup and restore for RDBMS](/self-managed/operational-guides/backup-restore/rdbms/backup.md).
+- Review [backup and restore for RDBMS](/self-managed/manage/back-up-and-restore/rdbms/backup.md).
 - Identify and resolve [common issues when starting, configuring, or using Camunda 8 Run](/self-managed/quickstart/developer/c8run/troubleshooting.md).

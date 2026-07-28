@@ -179,7 +179,7 @@ Filter by variable name, value, and comparison operators, such as `equals`, `con
 
 Operate now shows what an active process instance is waiting for. When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
 
-Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/components/orchestration-cluster/core-settings/configuration/wait-states.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
@@ -221,7 +221,7 @@ The exporter layer detects when the active RDBMS endpoint is unreachable, includ
 
 After failover, a reconciliation path replays missing events from the Zeebe log to close any replication lag gap, restoring a consistent secondary storage state without manual data repair. A single-exporter configuration is now supported for deployments where the RDBMS handles cross-region replication natively.
 
-<p class="link-arrow">[RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md)</p>
+<p class="link-arrow">[RDBMS configuration overview](/self-managed/manage/databases/relational-database/configuration.md)</p>
 
 #### Dual-region ECS reference architecture
 
@@ -265,7 +265,7 @@ Camunda 8.10 adds support for new relational database versions. Operators runnin
 
 New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 #### Physical Tenant support
 
@@ -279,7 +279,7 @@ Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isola
 - Web apps (Operate, Tasklist, and Admin) are accessible per Physical Tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
 - Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
 
-<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/extend/tenancy/physical-tenants/isolation-model.md)</p>
 
 #### Select a DMN version with a FEEL expression
 
@@ -639,7 +639,7 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Earlier Camunda version
 Switching CLIs does not require a release-state migration; Helm is client-side only. Before you run `helm upgrade` to 8.10, install the Helm v4 CLI.
 
 <ul>
-  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md)</span></li>
+  <li><span class="link-arrow">[Move from the Helm v3 CLI to v4](/self-managed/manage/upgrade/helm-v3-to-v4.md)</span></li>
   <li><span class="link-arrow">[Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md)</span></li>
 </ul>
 

@@ -1,5 +1,4 @@
 ---
-id: redhat-openshift
 title: "Red Hat OpenShift"
 description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 ---

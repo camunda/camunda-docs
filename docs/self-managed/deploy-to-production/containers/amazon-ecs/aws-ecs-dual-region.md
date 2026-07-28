@@ -1,5 +1,4 @@
 ---
-id: aws-ecs-dual-region
 title: "Dual-region setup (ECS Fargate)"
 description: "Reference architecture for Camunda 8 Self-Managed on AWS ECS Fargate in an active-active dual-region configuration backed by Aurora Global Database."
 sidebar_position: 2
@@ -526,10 +525,10 @@ open http://localhost:8080
 
 ### Backup and restore
 
-The general [backup and restore procedure](/self-managed/operational-guides/backup-restore/backup-and-restore.md) applies, with two dual-region specifics to keep in mind:
+The general [backup and restore procedure](/self-managed/manage/back-up-and-restore/index.md) applies, with two dual-region specifics to keep in mind:
 
 - **Backups are per region.** Each orchestration cluster writes to its local S3 backup bucket via `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`. The infra layer exposes both bucket names as outputs: `backup_bucket_region_0_name` and `backup_bucket_region_1_name`. Trigger backups against either region's API; ensure your backup tooling reads the correct bucket for that region.
-- **Restore is not exposed by the dual-region app layer.** The underlying orchestration-cluster module supports an init-container restore (`restore_enabled`, `restore_backup_id` — see [restore options when using RDBMS](/self-managed/operational-guides/backup-restore/rdbms/restore.md#restore-options)), but these variables are not surfaced in `terraform/app/camunda.tf` in this reference. Enabling restore for a dual-region deployment requires customizing the app layer to pass the restore variables to both regional module invocations and to coordinate broker IDs that span both regions. Treat dual-region restore as an advanced scenario; validate it against your specific topology before relying on it.
+- **Restore is not exposed by the dual-region app layer.** The underlying orchestration-cluster module supports an init-container restore (`restore_enabled`, `restore_backup_id` — see [restore options when using RDBMS](/self-managed/manage/back-up-and-restore/rdbms/restore.md#restore-options)), but these variables are not surfaced in `terraform/app/camunda.tf` in this reference. Enabling restore for a dual-region deployment requires customizing the app layer to pass the restore variables to both regional module invocations and to coordinate broker IDs that span both regions. Treat dual-region restore as an advanced scenario; validate it against your specific topology before relying on it.
 
 :::note
 Camunda recommends restoring to a fresh cluster rather than reusing an existing one. A newly created cluster has empty S3 backup buckets and EFS volumes, so no additional cleanup is needed. If you restore into an existing cluster, manually empty the S3 bucket configured for the node ID provider and fully clear the EFS volumes in both regions before starting the restore.
@@ -609,5 +608,5 @@ After you have a working dual-region deployment, consider the following:
 
 - [Connect to an identity provider](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md) to integrate with an external identity system.
 - Add TLS by attaching an [AWS Certificate Manager (ACM) certificate](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) to the Application Load Balancers.
-- Review the [dual-region concept documentation](/self-managed/concepts/multi-region/dual-region.md) for current limitations and operational considerations.
+- Review the [dual-region concept documentation](/self-managed/extend/availability-and-disaster-recovery/dual-region.md) for current limitations and operational considerations.
 - Browse the [single-region ECS Fargate guide](/self-managed/deploy-to-production/containers/amazon-ecs/aws-ecs.md) for a comparison with the simpler single-region pattern.
