@@ -330,16 +330,15 @@ For Argo CD, use sync waves or separate Applications so the management release b
 
 For Keycloak-managed registration, client Secret names can be identical across namespaces, but Kubernetes Secrets remain namespace-scoped. Project both copies from the same external secret source to prevent drift.
 
-## Move an existing combined release to split releases
+Chart-managed persistent volume claims (PVCs) render when the corresponding component's `persistence.enabled` value is `true`, even when the release topology suppresses that component's workload. This behavior keeps PVC ownership declarative and produces the same desired resources with Helm, Argo CD, and Flux. Set `persistence.enabled` to `false` only after you no longer need the chart to manage that claim.
 
-Create the orchestration release before changing the existing combined release to management mode. Changing the mode suppresses the existing Orchestration, Optimize, and Connectors workloads, so reversing this order causes an outage.
+## Upgrade and topology migration scope
 
-1. Back up persistent data and verify your rollback procedure.
-2. Create the namespace-local Secrets required by the new orchestration release.
-3. Install and verify the orchestration release with component authentication values that match the planned management inventory.
-4. Add the orchestration cluster to `global.topology.clusters` in the existing release.
-5. Change the existing release to `global.topology.mode: management` only after the new orchestration workloads are ready.
-6. Verify authentication, Camunda Hub inventory, process deployment, and workload health before removing obsolete resources.
+This guide covers fresh management and orchestration releases. It doesn't define a data migration procedure for converting an existing combined release into split releases.
+
+Before you adopt this topology during a version upgrade, complete the supported in-place version upgrade while preserving the existing release name, namespace, Orchestration Cluster primary storage, and external data services. For Camunda 8.9 to 8.10 requirements, see [upgrade from 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md).
+
+Moving an existing Orchestration Cluster to another release or namespace requires a separate migration plan for its broker persistent volumes, cluster identity, and secondary-storage indices. Installing a fresh orchestration release creates a new, empty Orchestration Cluster; secondary storage doesn't replace the broker logs and snapshots that contain active process state.
 
 ## Existing configurations
 
