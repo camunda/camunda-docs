@@ -45,7 +45,7 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
 - **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x, 4.1.x
-- **Helm CLI**: v4.x is required for Camunda 8.10 (chart 15.x) and later. See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md) for details, and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
+- **Helm CLI**: v4.x is required for Camunda 8.10 (chart 15.x) and later. See [Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md) for details, and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
 
 ## Camunda 8 Self-Managed
 
@@ -57,14 +57,14 @@ With the correct configuration, Camunda 8 Self-Managed can be deployed on any [C
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/deployment/helm/install/quick-install.md)
-- [Cloud service providers](/self-managed/deployment/helm/install/quick-install.md) [recommended]
-  - [Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
-  - [Google GKE](/self-managed/deployment/helm/cloud-providers/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)
-- [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`, `linux/arm64`)
-- [Manual](/self-managed/deployment/manual/install.md)
+- [Stock Kubernetes](/self-managed/deploy-to-production/kubernetes/install/index.md)
+- [Cloud service providers](/self-managed/deploy-to-production/kubernetes/install/index.md) [recommended]
+  - [Amazon EKS](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/index.md)
+  - [Microsoft AKS](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/index.md)
+  - [Google GKE](/self-managed/deploy-to-production/kubernetes/clusters/google-gke.md)
+- [Red Hat OpenShift](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift.md)
+- [Docker](/self-managed/deploy-to-production/containers/docker.md) (`linux/amd64`, `linux/arm64`)
+- [Manual](/self-managed/deploy-to-production/manual/install.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).

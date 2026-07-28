@@ -35,7 +35,7 @@ The following `values.yaml` example shows the legacy configuration format. It ge
 The example below represents part of the [default Helm chart values](https://github.com/camunda/camunda-platform-helm/blob/main/charts/camunda-platform-8.7/values.yaml) and shows the fields you need to change to enable the storage type of your preference.
 
 :::note
-Azure Blob Storage configuration differs from AWS and GCP. Only the connection string secret is managed in `values.yaml` under `global.documentStore.type.azure`. All other Azure configuration (container name, class, endpoint, etc.) must be provided via [`extraConfiguration`](/self-managed/deployment/helm/configure/application-configs.md). See the [Azure Blob Storage configuration](#azure-blob-storage-configuration) section below for details.
+Azure Blob Storage configuration differs from AWS and GCP. Only the connection string secret is managed in `values.yaml` under `global.documentStore.type.azure`. All other Azure configuration (container name, class, endpoint, etc.) must be provided via [`extraConfiguration`](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md). See the [Azure Blob Storage configuration](#azure-blob-storage-configuration) section below for details.
 :::
 
 ```
@@ -280,7 +280,7 @@ connectors:
 
 Azure Blob Storage uses a different configuration pattern than AWS and GCP. Only the connection string secret is managed via `values.yaml` under `global.documentStore.type.azure`. All other configuration (container name, class, endpoint, etc.) must be provided by the user via `orchestration.extraConfiguration` and `connectors.extraConfiguration`.
 
-This follows the same [`extraConfiguration` pattern](/self-managed/deployment/helm/configure/application-configs.md) used by other application-level settings in the 8.9+ chart.
+This follows the same [`extraConfiguration` pattern](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md) used by other application-level settings in the 8.9+ chart.
 
 ### Prerequisites
 

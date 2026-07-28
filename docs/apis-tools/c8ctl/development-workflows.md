@@ -332,7 +332,7 @@ This reads credentials from the named profile, including Modeler profiles (for e
 
 ### Local development without authentication
 
-If your local cluster does not require authentication (for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)), you can connect MCP clients directly without the proxy:
+If your local cluster does not require authentication (for example, [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md)), you can connect MCP clients directly without the proxy:
 
 ```json
 {

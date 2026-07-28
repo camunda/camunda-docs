@@ -22,7 +22,7 @@ Amazon OpenSearch requires two layers of permissions:
 - AWS IAM permissions
 - OpenSearch internal authentication
 
-To connect to OpenSearch using AWS IAM roles for service accounts (IRSA), see the [IAM roles for service accounts documentation](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup).
+To connect to OpenSearch using AWS IAM roles for service accounts (IRSA), see the [IAM roles for service accounts documentation](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md#opensearch-module-setup).
 
 To connect to OpenSearch using Basic authentication, follow the configuration below.
 
@@ -68,7 +68,7 @@ optimize:
         port: 443
 ```
 
-To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret. For details and examples, see [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md).
+To avoid storing the username and password in plaintext in your `values.yaml`, reference a Kubernetes secret. For details and examples, see [Helm charts secret management](/self-managed/deploy-to-production/kubernetes/configure/secret-management.md).
 
 ### Connect Optimize to external OpenSearch with custom index prefixes
 
@@ -95,7 +95,7 @@ For more details about index prefix configuration and matching exporter settings
 
 ## References
 
-- [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
-- [IAM roles for service accounts](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#opensearch-module-setup)
+- [Helm charts secret management](/self-managed/deploy-to-production/kubernetes/configure/secret-management.md)
+- [IAM roles for service accounts](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md#opensearch-module-setup)
 - [Configure Elasticsearch and OpenSearch index prefixes](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md)
 - [Use Amazon OpenSearch Service for Orchestration Cluster with Helm](/self-managed/deployment/helm/configure/database/using-external-opensearch.md)

@@ -68,7 +68,7 @@ The Processes MCP Server is only available from Camunda 8.10 onwards.
 
 To expose a BPMN process as an MCP tool, see [Expose a process as an MCP tool](/components/agentic-orchestration/expose-process-as-mcp-tool.md).
 
-If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) or [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), the Processes MCP Server is enabled by default. Connect any MCP client using this configuration:
+If you have a local Orchestration Cluster running with [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) or [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md), the Processes MCP Server is enabled by default. Connect any MCP client using this configuration:
 
 ```json
 {

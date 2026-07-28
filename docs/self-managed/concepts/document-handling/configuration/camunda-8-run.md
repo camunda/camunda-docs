@@ -10,7 +10,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) can be used for local development only, and none of the storage options below are suitable for production.
+[Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) can be used for local development only, and none of the storage options below are suitable for production.
 :::
 
 Document Store configuration uses the unified `camunda.document.*` Spring property model. The sections below show the new configuration format. If you're migrating from legacy `DOCUMENT_*` environment variables, see [property mapping reference](#property-mapping-reference).
@@ -265,7 +265,7 @@ DOCUMENT_DEFAULT_STORE_ID=inmemory
 
 <TabItem value='local'>
 
-**Local storage** can be configured for a cluster to store documents in a local folder. It can be used only for local development with [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md).
+**Local storage** can be configured for a cluster to store documents in a local folder. It can be used only for local development with [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md).
 
 Local storage is not suitable for production use, as pods and file paths are not shared across components. This prevents components like Tasklist and Zeebe from accessing the same data. Files are stored locally, and their retention must be managed manually.
 

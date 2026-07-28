@@ -23,7 +23,7 @@ If you are using the Camunda 8 Helm chart, read more about the different configu
 You can pass environment variables to each component via `webModeler.restapi.env` and `webModeler.websocket.env` in your `values.yaml`.
 :::
 
-For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/quickstart/developer-quickstart/docker-compose.md).
+For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/quickstart/developer/docker-compose/index.md).
 
 ## Licensing
 

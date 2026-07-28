@@ -1,0 +1,58 @@
+---
+title: "Developer quickstart with Docker Compose"
+sidebar_label: "Docker Compose"
+description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Docker Compose, including setup, configuration, secondary storage, connectors, and modeling."
+---
+
+Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL, and requires an external Elasticsearch instance for Optimize.
+
+Docker Compose also supports [document handling](/self-managed/concepts/document-handling/overview.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Web Modeler.
+
+:::note
+The [Docker images](/self-managed/deploy-to-production/containers/docker.md) are supported for production usage. The Docker Compose files are intended for local development and evaluation, and are not designed for production. For production deployments, use [Kubernetes with Helm](/self-managed/deploy-to-production/kubernetes/install/index.md).
+:::
+
+Camunda 8 with Docker Compose includes the following:
+
+- Orchestration Cluster
+- Connectors
+- File-based H2 as the default secondary storage in the lightweight configuration
+
+## Pages in this section
+
+Step through the Docker Compose guide with the following topics:
+
+- [Install and start](/self-managed/quickstart/developer/docker-compose/install-start.md)
+- [Configuration](/self-managed/quickstart/developer/docker-compose/configuration.md)
+- [Secondary storage](/self-managed/quickstart/developer/docker-compose/secondary-storage.md)
+- [Connectors and modeling](/self-managed/quickstart/developer/docker-compose/connectors-and-modeling.md)
+
+## Common tasks
+
+If you are looking for a specific task from the previous single-page guide, use the links below.
+
+## Install and start Camunda 8 with Docker Compose {#install-and-start-camunda-8-with-docker-compose}
+
+For prerequisites, startup commands, and shutdown commands, see [install and start with Docker Compose](/self-managed/quickstart/developer/docker-compose/install-start.md).
+
+### Choose a Docker Compose configuration {#choose-a-docker-compose-configuration}
+
+For lightweight, full, and standalone Web Modeler configurations, plus component URLs and authentication defaults, see [configure Docker Compose environments](/self-managed/quickstart/developer/docker-compose/configuration.md#choose-a-docker-compose-configuration).
+
+### Configure secondary storage {#configure-secondary-storage}
+
+For Elasticsearch, OpenSearch, PostgreSQL, MariaDB, MySQL, Oracle, Microsoft SQL Server, and H2 examples, see [configure secondary storage with Docker Compose](/self-managed/quickstart/developer/docker-compose/secondary-storage.md#choose-a-database-configuration-path).
+
+### Use connectors and deploy processes {#use-connectors-and-deploy-processes}
+
+For connector secrets, custom connectors, Desktop Modeler, and Web Modeler, see [use connectors and deploy processes with Docker Compose](/self-managed/quickstart/developer/docker-compose/connectors-and-modeling.md#use-connectors).
+
+## Stop Camunda 8 with Docker Compose {#stop-camunda-8-with-docker-compose}
+
+For shutdown commands and volume cleanup guidance, see [install and start with Docker Compose](/self-managed/quickstart/developer/docker-compose/install-start.md#stop-camunda-8-with-docker-compose).
+
+## Next steps
+
+- Follow the [getting started guide](/guides/getting-started-example.md) to create a Java project and connect to your local cluster.
+- Explore the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and [client libraries](/apis-tools/working-with-apis-tools.md).
+- When you are ready for production, deploy with [Kubernetes and Helm](/self-managed/deploy-to-production/kubernetes/install/index.md).

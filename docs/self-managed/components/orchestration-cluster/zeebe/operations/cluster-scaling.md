@@ -44,7 +44,7 @@ This example assumes the cluster was deployed with the following configurations,
 
 ### 1. Start new brokers
 
-If you have deployed Zeebe using [Helm](/self-managed/deployment/helm/install/quick-install.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
+If you have deployed Zeebe using [Helm](/self-managed/deploy-to-production/kubernetes/install/index.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
 
 ```
 kubectl scale statefulset camunda --replicas=6

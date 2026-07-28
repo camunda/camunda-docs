@@ -346,6 +346,78 @@ RewriteRule ^docs/self-managed/deployment/manual/upgrade/?$ /docs/self-managed/u
 # Agentic orchestration base path redirect
 RewriteRule ^docs/components/agentic-orchestration/?$ /docs/components/agentic-orchestration/agentic-orchestration-overview/ [R=301,L]
 
+# 8.10 SM restructure (Phase 1, batch 2) — Deploy to production platform-first move
+RewriteRule ^docs/next/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region/?$ /docs/next/self-managed/deploy-to-production/containers/amazon-ecs/aws-ecs-dual-region/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs/?$ /docs/next/self-managed/deploy-to-production/containers/amazon-ecs/aws-ecs/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/containers/cloud-providers/amazon/?$ /docs/next/self-managed/deploy-to-production/containers/amazon-ecs/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/docker/docker/?$ /docs/next/self-managed/deploy-to-production/containers/docker/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/dual-region/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/helm/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/eksctl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/irsa/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/irsa/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/aws-rosa/terraform-dual-region/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/aws-rosa/terraform/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/aks-helm/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/helm/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/terraform/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/terraform/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/gcp/google-gke/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/google-gke/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/kind/?$ /docs/next/self-managed/quickstart/administrator/kind/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift-dual-region/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift-dual-region/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift/?$ /docs/next/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/add-extra-manifests/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/add-extra-manifests/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/application-configs/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/application-configs/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/basic-authentication/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/basic-authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/custom-users-and-clients/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/custom-users-and-clients/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/external-idp-via-internal-keycloak/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/external-keycloak/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/external-oidc-provider/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/generic-oidc-provider/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/internal-keycloak/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/internal-keycloak/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/jwt-token-claims/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/microsoft-entra/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc/?$ /docs/next/self-managed/deploy-to-production/kubernetes/authentication/troubleshooting-oidc/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/enable-additional-components/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/enable-additional-components/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/guides/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/guides/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/ingress/accessing-components-without-ingress/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/ingress/gateway-api-setup/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/ingress/gateway-api-setup/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/ingress/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/ingress/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/ingress/ingress-setup/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/ingress/ingress-setup/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/license-key/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/license-key/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/kubernetes-operators/?$ /docs/next/self-managed/deploy-to-production/plan/kubernetes-operators/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/pod-networking/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/pod-networking/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/air-gapped-installation/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/running-custom-connectors/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/running-custom-connectors/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/secret-management/?$ /docs/next/self-managed/deploy-to-production/kubernetes/configure/secret-management/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/?$ /docs/next/self-managed/deploy-to-production/kubernetes/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/install/helm-with-rdbms/?$ /docs/next/self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/install/?$ /docs/next/self-managed/deploy-to-production/kubernetes/install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/install/production/?$ /docs/next/self-managed/deploy-to-production/kubernetes/install/production/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/install/quick-install/?$ /docs/next/self-managed/quickstart/administrator/helm/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/helm-v4/?$ /docs/next/self-managed/deploy-to-production/kubernetes/install/helm-v4/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2/?$ /docs/next/self-managed/deploy-to-production/manual/aws-ec2/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/manual/install/?$ /docs/next/self-managed/deploy-to-production/manual/install/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/manual/rdbms/configuration/?$ /docs/next/self-managed/deploy-to-production/manual/rdbms/configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/manual/rdbms/?$ /docs/next/self-managed/deploy-to-production/manual/rdbms/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/manual/rdbms/operations/?$ /docs/next/self-managed/deploy-to-production/manual/rdbms/operations/ [R=301,L]
+RewriteRule ^docs/next/self-managed/deployment/manual/rdbms/rdbms-production-architecture/?$ /docs/next/self-managed/deploy-to-production/manual/rdbms/rdbms-production-architecture/ [R=301,L]
+
+# 8.10 SM restructure (consolidation) — quick-install relocated from Deploy>Install to Quickstart (dev/eval)
+RewriteRule ^docs/next/self-managed/deploy-to-production/kubernetes/install/quick-install/?$ /docs/next/self-managed/quickstart/administrator/helm/ [R=301,L]
+
+# 8.10 SM restructure (consolidation) — Quickstart folders match URLs (developer/, administrator/)
+RewriteRule ^docs/next/self-managed/quickstart/overview/?$ /docs/next/self-managed/quickstart/ [R=301,L]
+RewriteRule ^docs/next/self-managed/quickstart/administrator-quickstart/?$ /docs/next/self-managed/quickstart/administrator/ [R=301,L]
+RewriteRule ^docs/next/self-managed/quickstart/developer-quickstart/?$ /docs/next/self-managed/quickstart/developer/ [R=301,L]
+RewriteRule ^docs/next/self-managed/quickstart/developer-quickstart/c8run-troubleshooting/?$ /docs/next/self-managed/quickstart/developer/c8run/troubleshooting/ [R=301,L]
+RewriteRule ^docs/next/self-managed/quickstart/developer-quickstart/(.*)$ /docs/next/self-managed/quickstart/developer/$1 [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.9: content moves introduced prior to the release of version 8.9.
 #---------------------------------------------------------------------------------
@@ -506,10 +578,10 @@ RewriteRule ^docs/components/modeler/web-modeler/modeling/context-pad/?$ /docs/c
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------
 
-# Rename vendor-supported-infrastructure to operator-based-infrastructure (8.8)
-RewriteRule ^docs/next/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/next/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
-RewriteRule ^docs/8.8/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/8.8/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
-RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/self-managed/deployment/helm/configure/operator-based-infrastructure/ [R=301,L]
+# Rename vendor-supported-infrastructure to kubernetes-operators (8.8)
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/next/self-managed/deployment/helm/configure/kubernetes-operators/ [R=301,L]
+RewriteRule ^docs/8.8/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/8.8/self-managed/deployment/helm/configure/kubernetes-operators/ [R=301,L]
+RewriteRule ^docs/self-managed/deployment/helm/configure/vendor-supported-infrastructure/?$ /docs/self-managed/deployment/helm/configure/kubernetes-operators/ [R=301,L]
 
 # Restructure Web Modeler Docs (8.8)
 ## Current Web Modeler folder restructure

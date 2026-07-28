@@ -23,8 +23,8 @@ Some out-of-the-box connectors are licensed under the [Camunda Self-Managed Free
 
 The connector runtime environment can be installed using the supported [deployment options](/self-managed/setup/overview.md#deployment-options).
 
-Currently, we support an installation of connectors with [Docker](/self-managed/deployment/docker/docker.md#connectors),
-[Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), [Helm charts](/self-managed/setup/overview.md), and the [manual setup](/self-managed/deployment/manual/install.md#connectors-1).
+Currently, we support an installation of connectors with [Docker](/self-managed/deploy-to-production/containers/docker.md#connectors),
+[Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md), [Helm charts](/self-managed/setup/overview.md), and the [manual setup](/self-managed/deploy-to-production/manual/install.md#connectors-1).
 
 ## Connector templates
 
@@ -32,7 +32,7 @@ For using connectors in the Web or Desktop Modeler, you need to [provide connect
 
 For the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) provided by Camunda,
 the Connectors release provides a set of all connector templates related to one [release version](https://github.com/camunda/connectors/releases).
-If you use the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) installation, you can thus fetch all connector templates that match the versions of the connectors used in the backend.
+If you use the [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md) installation, you can thus fetch all connector templates that match the versions of the connectors used in the backend.
 
 Alternatively, you can fetch the JSON templates from the respective connector's releases in the respective connectors folder in the [repository](https://github.com/camunda/connectors)
 at `connectors/{connector name}/element-templates`.
