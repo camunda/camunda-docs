@@ -6,8 +6,6 @@ description: "Manage Camunda Hub resources with the Camunda Hub API v2."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <PageDescription />
 

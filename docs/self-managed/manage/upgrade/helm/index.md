@@ -20,7 +20,7 @@ Camunda 8.10 (chart 15.x) requires the Helm CLI v4. Switch to the Helm v4 CLI be
 
 ## Upgrade guides
 
-Use the following guides to upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts.
+Use the Helm upgrade guide to upgrade a Camunda 8 Self-Managed deployment installation using the official Camunda Helm charts:
 
 <ZeebeGrid zeebe={helmIndexCards} />
 
