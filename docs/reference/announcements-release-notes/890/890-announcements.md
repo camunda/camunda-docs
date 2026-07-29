@@ -902,7 +902,7 @@ identity:
 
 **Action:** For every component where you use extraConfiguration, convert each map entry to a list entry.
 
-<p className="link-arrow">[Migrate extraConfiguration from 8.8 to 8.9](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md#migrate-extraconfiguration-from-88-to-89)</p>
+<p className="link-arrow">[extraConfiguration reference](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md)</p>
 
 </div>
 </div>
