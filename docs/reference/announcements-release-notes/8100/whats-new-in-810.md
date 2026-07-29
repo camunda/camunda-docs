@@ -50,7 +50,7 @@ On 29 August 2026, your Web Modeler data will receive three updates:
 
 ### Organizational structure
 
-In Camunda 8.9, a project can contain process applications, folders, and loose files. Camunda 8.10 enforces a new file resource hierarchy in which projects only contain process applications. Everything else, including files, folders, and IDP application content, lives inside a process application.
+In Camunda 8.9, a project can contain process applications, folders, and files. Camunda 8.10 introduces a new file resource hierarchy in which projects only contain process applications. Everything else, including files, folders, and IDP application content, is stored inside a process application.
 
 For example, if this is what your data looks like in 8.9:
 
