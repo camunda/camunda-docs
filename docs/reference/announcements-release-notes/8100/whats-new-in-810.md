@@ -101,7 +101,7 @@ During the migration:
 
 - Any process application nested inside a folder moves to the top level of its project.
 - Any files or folders located directly in a project, not inside a process application, are automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. Once the migration is complete, you can rename this application, move content out of it, or otherwise reorganize it as with any other process application.
-- Git sync and cluster settings on existing process applications migrate along with your data. They carry over untouched.
+- Git sync and cluster settings on existing process applications migrate unchanged along with your data.
 
 During the migration, Web Modeler is briefly unavailable. Clusters and running processes are unaffected and keep executing normally.
 
