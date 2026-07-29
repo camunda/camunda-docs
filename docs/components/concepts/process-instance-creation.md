@@ -194,7 +194,7 @@ A process can also have one or more [timer start events](/components/modeler/bpm
 
 A business ID is a domain-specific identifier you can assign to a process instance. Unlike the system-generated process instance key, it represents a domain concept such as an order number, case reference, or customer ticket ID.
 
-A business ID does **not need to be unique** unless uniqueness control is enabled. See [Uniqueness control](#uniqueness-control) for details.
+A business ID does **not need to be unique** unless uniqueness control is enabled. See [uniqueness control](#uniqueness-control) for details.
 
 For example, consider a process that ships book orders where each order already has an identifier in your order management system. When you start the process to ship an order, you can use the order ID as the business ID. This lets you easily find all process instances related to a particular order.
 
@@ -228,7 +228,7 @@ When a process instance with a business ID creates a child process instance via 
 
 Each child instance inherits the same business ID as its parent, letting you trace an entire process hierarchy using a single domain identifier.
 
-Starting in 8.10, a call activity can override the inherited business ID by setting a literal value or [FEEL expression](/components/concepts/expressions.md) on the call activity. The value is resolved once at child creation and is then immutable. See [Business ID propagation](/components/modeler/bpmn/call-activities/call-activities.md#business-id-propagation) for configuration details.
+Starting in 8.10, a call activity can override the inherited business ID by setting a literal value or [FEEL expression](/components/concepts/expressions.md) on the call activity. The value is resolved once at child creation and is then immutable. See [business ID propagation](/components/modeler/bpmn/call-activities/call-activities.md#business-id-propagation) for configuration details.
 
 ### Searching and filtering by business ID
 
@@ -274,7 +274,7 @@ Business IDs assigned to process instances in 8.9 remain traceable because the b
 You can assign a business ID to a running process instance that has none. This is useful when the domain identifier (for example, an order number or case reference) is not available at instance creation time.
 
 :::note
-Late assignment requires business ID uniqueness to be **disabled**. See [Uniqueness control](#uniqueness-control) for details.
+Late assignment requires business ID uniqueness to be **disabled**. See [uniqueness control](#uniqueness-control) for details.
 :::
 
 | Constraint              | Detail                                                                                                                                |

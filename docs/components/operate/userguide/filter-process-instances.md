@@ -30,7 +30,7 @@ The **Filter** panel appears on the left side of the **Processes** page. Open it
 
 - **Batch Process Instance Key** — Filter by batch operation ID
 - **Process Instance Key** — Filter by exact instance ID
-- **Business ID** — Filter by domain-specific identifier (order number, case reference, etc.); see [Business ID filter](#business-id-filter)
+- **Business ID** — Filter by domain-specific identifier (order number, case reference, etc.); see [business ID filter](#business-id-filter)
 
 **Variable filters** (new in 8.10):
 
@@ -199,7 +199,7 @@ To filter by business ID, open the **Filter** panel and use the **Business ID** 
 | **Contains**  | Pattern match.                                     | `*` matches multiple characters, `?` matches one character. |
 | **Is one of** | Matches any business ID in a comma-separated list. | —                                                           |
 
-For additional operators (`$neq`, `$exists`), use the [Search process instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) with the `businessId` filter field.
+For additional operators (`$neq`, `$exists`), use the [search process instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) with the `businessId` filter field.
 
 ## Known limitations
 

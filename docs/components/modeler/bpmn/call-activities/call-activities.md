@@ -64,7 +64,18 @@ If no `businessId` configuration is set on the call activity, the child instance
 
 To set a different business ID on the child instance, configure the `businessId` attribute on the `zeebe:calledElement` extension element. The value is resolved once at child creation and is then immutable.
 
-<!-- TODO: Add the exact XML attribute shape once ADR camunda/camunda#56154 and Modeler UI #51694 are finalized. -->
+```xml
+<bpmn:callActivity id="Call_Activity" name="Call Process A">
+  <bpmn:extensionElements>
+    <zeebe:calledElement processId="child-process"
+                         businessId="= camunda.processInstance.businessId" />
+  </bpmn:extensionElements>
+</bpmn:callActivity>
+```
+
+:::note
+Modeler UI support for configuring the `businessId` attribute in the properties panel is not yet available. Configure it directly in the XML until UI support ships.
+:::
 
 You can use the FEEL expression context variable `camunda.processInstance.businessId` to reference the parent instance's business ID in the expression.
 

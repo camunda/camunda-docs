@@ -491,7 +491,7 @@ To keep the previous behavior, explicitly set the strategy to `PARTITION`. See t
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view. You can filter the process instance list by business ID using an exact-match filter.
+Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
 
 <p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
 
