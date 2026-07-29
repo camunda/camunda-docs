@@ -118,7 +118,7 @@ The migration does not affect the following resources:
 | Clusters and configuration          | Cluster and deployment settings attached to existing process applications migrate along with the data and carry over unchanged.                                                           |
 | Files, folders, and version history | All files, folders, versions, and history are preserved; only their location within the project changes.                                                                                  |
 | Git-synced projects                 | The migration doesn't modify process applications or their contents, so anything connected through Git sync is unaffected: the same files, in the same repository, with the same history. |
-| Desktop Modeler                     | Desktop Modeler has no direct connection to Web Modeler that this change touches, and content shared via Git sync is unaffected.                                                          |
+| Desktop Modeler                     | Desktop Modeler has no direct connection to Web Modeler affected by this change. Content shared via Git sync is also unaffected.                                                          |
 
 If you automate against the Web Modeler API, content moving to a new location affects you directly. Web Modeler API v1 returns files and folders from their new place, and requests that create an item at a project's root are redirected into the new `YOUR PROJECT NAME - General` application, with the response reflecting the new location.
 
