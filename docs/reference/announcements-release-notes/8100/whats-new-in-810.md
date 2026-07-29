@@ -45,8 +45,8 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 On 29 August 2026, your Web Modeler data will receive three updates:
 
 - **[Organizational structure](#organizational-structure):** Enforces a stricter, more scalable file resource hierarchy.
-- **[Data migration](#migration):** Aligns your existing data with the new structure.
-- **[Process application versioning model](#process-application-versioning):** Provides more granular control.
+- **[Data migration](#data-migration):** Aligns your existing data with the new structure.
+- **[Process application versioning model](#process-application-versioning-model):** Provides more granular control.
 
 ### Organizational structure
 
@@ -93,7 +93,7 @@ Payments (Project)
 
 This strict new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
 
-### Migration
+### Data migration
 
 For Self-Managed, your data will be migrated to the new organizational structure when you upgrade to Camunda 8.10. For SaaS, this happens automatically during a scheduled maintenance window.
 
@@ -124,7 +124,7 @@ If you automate against the Web Modeler API, content moving to a new location af
 
 Review any automation that depends on where files or folders sit before the migration runs. A small number of folder API integrations are affected more directly; if you rely on the folder API to work with process applications, contact support to confirm whether your integration needs updates.
 
-### Process application versioning
+### Process application versioning model
 
 In addition to the Web Modeler data migration, 8.10 brings an improved versioning model for process applications:
 
