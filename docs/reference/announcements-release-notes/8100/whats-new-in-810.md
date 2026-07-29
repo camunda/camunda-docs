@@ -95,7 +95,7 @@ This strict new **Project > Process application > File/folder** hierarchy makes 
 
 ### Data migration
 
-For Self-Managed, your data will be migrated to the new organizational structure when you upgrade to Camunda 8.10. For SaaS, this happens automatically during a scheduled maintenance window.
+For Self-Managed, your data will be migrated to the new organizational structure during the upgrade to Camunda 8.10. For SaaS, this happens automatically during a scheduled maintenance window.
 
 In the migration:
 
