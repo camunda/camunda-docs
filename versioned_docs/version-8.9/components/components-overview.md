@@ -31,7 +31,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Orchestrate and automate complex business processes for people, systems, and devices. Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
+Orchestrate and automate complex business processes for people, systems, devices, and [AI agents](/reference/glossary.md#ai-agent). Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
 <a class="button button--outline button--secondary button--md button--hero--topic" title="Introduction to Camunda 8" href="concepts/concepts-overview" style={{marginBottom: '30px', marginTop: '20px'}}>Introduction to Camunda 8</a>
 
