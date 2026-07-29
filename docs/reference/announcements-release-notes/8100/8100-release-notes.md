@@ -32,6 +32,56 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha4
+
+| Release date   | Changelog(s)                                                                                        | Blog |
+| :------------- | :-------------------------------------------------------------------------------------------------- | :--- |
+| 11 August 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha4)</li></ul> | -    |
+
+### Web apps
+
+#### Frontend application unification
+
+<!-- https://github.com/camunda/product-hub/issues/3456 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Admin">Admin</span></div>
+
+Operate, Tasklist, and Admin are now served from a single frontend application with shared navigation, consistent design patterns, and unified deployment. User preferences (dark/light mode) persist across all views, and navigation patterns are consistent throughout.
+
+<p class="link-arrow">[Operate overview](/components/operate/operate-introduction.md)</p>
+
+### Orchestration Cluster
+
+#### Elasticsearch 9.4 and OpenSearch 3.6 support
+
+<!-- https://github.com/camunda/product-hub/issues/3588 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 now supports Elasticsearch 9.4 and OpenSearch 3.6. The minimum supported Elasticsearch 9.x version is raised to 9.4; Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+ remain supported. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+#### Physical Tenant identity support
+
+<!-- https://github.com/camunda/product-hub/issues/3600 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Physical Tenants now support independent per-tenant authorization. Each Physical Tenant enforces its own roles, mapping rules, and permissions. Users can hold different roles on different Physical Tenants — developer on one, viewer on another. Cluster-wide operations (topology, backups, restore) are protected by a claim-based cluster admin role, with no new infrastructure required. Identity providers are defined at the cluster level; each Physical Tenant chooses which IdPs it accepts.
+
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+
+#### Rolling upgrades
+
+<!-- https://github.com/camunda/product-hub/issues/2702 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now perform rolling upgrades of self-managed Camunda 8 between patch and minor versions with zero downtime across all supported secondary storage backends, including Elasticsearch, OpenSearch, and relational databases. The cluster stays operational throughout: workflows continue executing, and Operate remains accessible for monitoring and incident response. Schema changes between versions are strictly backwards-compatible and applied transparently.
+
+<p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
+
 ## 8.10.0-alpha3
 
 | Release date | Changelog(s)                                                                                        | Blog |
