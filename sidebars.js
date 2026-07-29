@@ -708,6 +708,8 @@ module.exports = {
                 id: "components/hub/organization/manage-workspaces/manage-workspaces",
               },
               items: [
+                "components/hub/organization/manage-workspaces/manage-workspaces",
+                "components/hub/organization/manage-workspaces/manage-workspace-members",
                 "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
               ],
             },
