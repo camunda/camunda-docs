@@ -40,7 +40,7 @@ Results written from arbitrary FEEL expressions elsewhere (e.g. a variable set b
 
 ### The result variable name
 
-This rule always checks for `toolCallResult`, the AI Agent connector's default. An AI Agent Task with an attached ad hoc sub-process can rename it via `tool_call_result_variable`; if you do, ignore the warning for that tool.
+This rule always checks for `toolCallResult`, the AI Agent connector's default. An AI Agent Task's multi-instance ad-hoc sub-process can rename it by changing the multi-instance **Output element** value; if you do, ignore the warning for that tool.
 
 ## <MarkerGuideline.Invalid /> Result never reaches the agent
 

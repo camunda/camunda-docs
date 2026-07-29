@@ -22,7 +22,7 @@
       <bpmn:serviceTask id="Activity_17e5isv" name="Task 1">
         <bpmn:extensionElements>
           <zeebe:ioMapping>
-            <zeebe:output source="=&#34;first&#34;" target="toolCallresult" />
+            <zeebe:output source="=&#34;first&#34;" target="toolCallResult" />
           </zeebe:ioMapping>
           <zeebe:taskDefinition type="someJob" />
         </bpmn:extensionElements>

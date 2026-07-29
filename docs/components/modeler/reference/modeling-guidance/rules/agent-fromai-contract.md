@@ -31,7 +31,7 @@ A single-segment `toolCall` path with a description:
 = fromAi(toolCall.url, "The URL to fetch. Must be an absolute URL including scheme.")
 ```
 
-A `fromAi()` call in an ad hoc sub-process that isn't recognized as a tool container is itself reported. If the tool isn't meant to be agent-driven, remove the `fromAi()` call instead.
+A `fromAi()` call in an ad-hoc sub-process that isn't recognized as a tool container is itself reported. If the tool isn't meant to be agent-driven, remove the `fromAi()` call instead.
 
 <DeclaringAgenticSubprocess />
 
