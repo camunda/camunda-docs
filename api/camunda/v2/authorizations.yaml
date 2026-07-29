@@ -440,6 +440,7 @@ components:
         - DELETE_TASK_LISTENER
         - EVALUATE
         - MODIFY_PROCESS_INSTANCE
+        - PAUSE
         - READ
         - READ_DECISION_DEFINITION
         - READ_DECISION_INSTANCE
@@ -449,6 +450,8 @@ components:
         - READ_USAGE_METRIC
         - READ_USER_TASK
         - READ_TASK_LISTENER
+        - RESTORE
+        - REVEAL
         - SUSPEND_PROCESS_INSTANCE
         - UPDATE
         - UPDATE_PROCESS_INSTANCE
@@ -460,12 +463,14 @@ components:
       enum:
         - AUDIT_LOG
         - AUTHORIZATION
+        - BACKUP
         - BATCH
         - CLUSTER_VARIABLE
         - COMPONENT
         - DECISION_DEFINITION
         - DECISION_REQUIREMENTS_DEFINITION
         - DOCUMENT
+        - EXPORTER
         - EXPRESSION
         - GLOBAL_LISTENER
         - GROUP
@@ -474,6 +479,7 @@ components:
         - PROCESS_DEFINITION
         - RESOURCE
         - ROLE
+        - SECRET
         - SYSTEM
         - TENANT
         - USER

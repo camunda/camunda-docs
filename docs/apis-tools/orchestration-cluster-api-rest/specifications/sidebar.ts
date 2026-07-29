@@ -1160,6 +1160,18 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Secret",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets",
+          label: "Resolve secrets (alpha)",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Setup",
       items: [
         {
