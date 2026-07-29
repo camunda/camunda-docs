@@ -126,7 +126,7 @@ You should review any automation that relies on where files or folders are locat
 
 ### Process application versioning model
 
-In addition to the Web Modeler data migration, Camunda is introducing an improved versioning model for process applications:
+In addition to the Web Modeler data migration, Camunda is introducing an improved process application versioning model:
 
 - File-level versions — process applications can be versioned as a bundle, as before, but now also at the single-file level.
 - Autosave for all files, plus file-level version history for every file.
