@@ -95,6 +95,27 @@
       "label": "Search process instances"
     }
   ],
+  "suspendProcessInstance": [
+    {
+      "file": "process-instance.ts",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend a process instance"
+    }
+  ],
+  "resumeProcessInstance": [
+    {
+      "file": "process-instance.ts",
+      "region": "ResumeProcessInstance",
+      "label": "Resume a process instance"
+    }
+  ],
+  "assignProcessInstanceBusinessId": [
+    {
+      "file": "process-instance.ts",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign a business ID to a process instance"
+    }
+  ],
   "createDeployment": [
     {
       "file": "deployment.ts",
@@ -793,6 +814,20 @@
       "label": "Update jobs in batch"
     }
   ],
+  "suspendProcessInstancesBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances in batch"
+    }
+  ],
+  "resumeProcessInstancesBatchOperation": [
+    {
+      "file": "batch-operation.ts",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances in batch"
+    }
+  ],
   "deleteProcessInstance": [
     {
       "file": "extended-operations.ts",
@@ -1393,6 +1428,13 @@
       "file": "additional-operations.ts",
       "region": "SearchUserTaskEffectiveVariables",
       "label": "Search user task effective variables"
+    }
+  ],
+  "resolveSecrets": [
+    {
+      "file": "secret.ts",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets"
     }
   ]
 }
