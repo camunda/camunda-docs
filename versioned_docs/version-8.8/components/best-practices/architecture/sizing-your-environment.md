@@ -91,12 +91,36 @@ Track import progress with the [Optimize metrics and bundled Grafana dashboards]
 
 ##### Keep variables out of Optimize (highest impact, lowest risk)
 
-Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are two levers:
+Variables dominate Optimize's storage and CPU costs on secondary storage. In benchmarks, disabling Optimize's variable storage entirely cut its disk usage roughly **14x** relative to the raw export. Isolating a customer-related variable group showed an even larger **~29x** difference, driven mostly by object variable flattening (below) rather than the variables' values themselves. See [why](./data-flow.md#optimize-data-flow) for the underlying storage mechanism. Almost the entire cost lives in Optimize's analytics indices. There are two levers:
 
 - **Stop exporting variables entirely.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) to drop all variable records at the exporter. This is the only lever that also recovers throughput, because the exporter write path is the bottleneck at maximum load. See the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration) exporter configuration.
 - **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** This achieves the same storage savings but does not recover throughput, because the records are still written by the exporter.
 
 **Trade-off:** variables are then unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns. Both levers affect **Optimize only**; Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
+
+##### Disable object variable flattening (high impact for object-heavy processes)
+
+By default, Optimize [flattens each object variable](/self-managed/components/optimize/configuration/object-variables.md) into a separate variable for each property and stores the full raw object as another variable. Each generated variable incurs its own storage cost, so an object variable with several properties can require several times more storage than a single scalar variable.
+
+If you don't rely on flattened object-variable filtering, grouping, or raw-data columns in Optimize reports, disable it by setting:
+
+- Environment variable: `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false`
+- Configuration property: `zeebe.includeObjectVariableValue: false`
+
+:::note
+This behavior is enabled by default in Self-Managed and disabled in Camunda 8 SaaS.
+:::
+
+In an isolated benchmark that changed only this setting for the same workload:
+
+- Optimize's share of total Elasticsearch disk usage dropped from 62.8% to 7.6%, a reduction by a factor of 8.3.
+- Total secondary storage per created process instance dropped from 6.34 MB to 2.97 MB, a reduction by a factor of 2.13. This reduction was smaller because the setting does not affect Zeebe or Camunda Exporter storage.
+
+See [Confirming Optimize's object variable flattening cost with a controlled A/B test](https://camunda.github.io/zeebe-chaos/2026/07/09/Optimize-Object-Variable-Flattening/) for the complete methodology and additional measurements.
+
+:::warning
+These ratios are specific to the benchmark's payload and process models; they are not universal constants. Object variable flattening processes nested JSON recursively without a depth limit, so payloads with deeper nesting or more object fields can require considerably more storage than measured here. Measure your workload before using these numbers for capacity planning.
+:::
 
 ##### Other mitigations
 
@@ -111,6 +135,23 @@ Optimize creates a dedicated index per deployed process definition, each using a
 
 Account for shard budget when sizing the Elasticsearch/OpenSearch cluster, not just CPU, memory, and disk. See [impact of high process deployments on Elasticsearch](https://camunda.github.io/zeebe-chaos/2026/05/28/Impact-of-High-Process-Deployments-on-Elasticsearch).
 :::
+
+#### Zeebe record ILM retention
+
+When the [Elasticsearch exporter retention policy](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#retention) is enabled, Zeebe record indices are deleted after the configured `minimum-age`. Optimize reads from these same indices, so the retention window must be long enough to cover Optimize's worst-case import lag. If the exporter deletes records before Optimize imports them, process instance completion events are permanently lost: Optimize records the instance as `ACTIVE` with no `endDate`, and history cleanup can never remove it.
+
+**Minimum recommended retention:** Set `minimum-age` to at least **3 days** when running Optimize; **7 or more days** is recommended. This provides headroom for:
+
+- Import lag that grows as the Optimize process instance index grows larger.
+- Recovery time after Elasticsearch cluster events such as node restarts, rolling upgrades, and shard rebalancing.
+
+The default `minimum-age` of `30d` provides sufficient headroom. If you reduced it to limit disk usage, verify that the new value still exceeds your observed Optimize import lag before applying it to production.
+
+**Disk sizing:** A longer ILM retention window means Zeebe record indices are kept on disk longer before deletion. Factor the additional raw exporter index volume into your Elasticsearch disk budget when increasing `minimum-age` beyond the default.
+
+**Self-reinforcing failure mode:** As Optimize's process instance index grows, Elasticsearch write latency increases, which raises per-batch import lag. Higher import lag increases the probability of an ILM race on the next cluster event. This cycle compounds on long-lived clusters running at sustained load. To break it, increase ILM retention and reduce the Optimize index size through history cleanup or variable filtering.
+
+**Symptom:** If Optimize history cleanup runs on schedule but consistently completes in zero seconds against a large dataset, orphaned `ACTIVE` documents are likely accumulating. See [diagnosing stalled cleanup](/self-managed/components/optimize/configuration/history-cleanup.md#diagnosing-stalled-cleanup).
 
 The sizing guidance for [Self-Managed](./sizing-self-managed.md#baseline-resource-configuration) provides configurations with and without Optimize to help you plan accordingly.
 

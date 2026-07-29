@@ -33,25 +33,23 @@ The following images must be available in your air-gapped environment:
 
 **Camunda images:**
 
-- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/camunda](https://hub.docker.com/r/camunda/camunda)
 - [camunda/optimize](https://hub.docker.com/r/camunda/optimize)
 - [camunda/connectors-bundle](https://hub.docker.com/r/camunda/connectors-bundle)
 - [camunda/identity](https://hub.docker.com/r/camunda/identity)
 
 **Optional components:**
 
-- [Web Modeler images](/self-managed/deployment/docker/docker.md#component-images):
-  - [camunda/web-modeler-restapi](https://hub.docker.com/r/camunda/web-modeler-restapi)
-  - [camunda/web-modeler-websockets](https://hub.docker.com/r/camunda/web-modeler-websockets)
-- [Console images](/self-managed/deployment/docker/docker.md#component-images):
-  - `console/console-sm`
+- [Camunda Hub images](/self-managed/deployment/docker/docker.md#docker-images-and-configuration-references):
+  - [camunda/hub](https://hub.docker.com/r/camunda/hub)
+  - [camunda/hub-websockets](https://hub.docker.com/r/camunda/hub-websockets)
 
 **Infrastructure images:**
 
 :::info When are infrastructure images needed?
-For air-gapped deployments, you must mirror Bitnami infrastructure images only if you use the embedded subcharts. These include PostgreSQL (for Identity and Web Modeler), Elasticsearch (for data storage), and Keycloak (for authentication).
+For air-gapped deployments, mirror the infrastructure images used by your externally managed PostgreSQL, Elasticsearch or OpenSearch, and Keycloak services.
 
-Skip this section if you're using external managed services or separately deployed infrastructure.
+Skip this section if your managed infrastructure services don't require images in your private registry.
 :::
 
 Choose one of the following image options:
@@ -108,11 +106,11 @@ All required images published on Docker Hub (Camunda and Bitnami organizations) 
 - `registry.camunda.cloud/camunda/<image>`
 - `registry.camunda.cloud/bitnami/<image>`
 
-For example, you can pull the Zeebe and PostgreSQL images from Docker Hub or the Camunda registry:
+For example, you can pull the Camunda and PostgreSQL images from Docker Hub or the Camunda registry:
 
 ```shell
-docker pull camunda/zeebe:latest
-docker pull registry.camunda.cloud/camunda/zeebe:latest
+docker pull camunda/camunda:latest
+docker pull registry.camunda.cloud/camunda/camunda:latest
 
 docker pull bitnamilegacy/postgresql:latest
 docker pull registry.camunda.cloud/bitnami/postgresql:latest
@@ -249,55 +247,27 @@ global:
     registry: example.jfrog.io
 orchestration:
   image:
-    repository: camunda/zeebe
-    # e.g. work with the latest versions in development
+    repository: camunda/camunda
     tag: latest
-elasticsearch:
-  image:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/elasticsearch
-  sysctlImage:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/os-shell
 identity:
   image:
     repository: camunda/identity
-    ...
-identityKeycloak:
-  image:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/keycloak
-    ...
-  postgresql:
-    image:
-      registry: example.jfrog.io
-      repository: bitnamilegacy/postgresql
-
-      ...
 optimize:
   image:
     repository: camunda/optimize
-    ...
 connectors:
   image:
     repository: camunda/connectors-bundle
-    ...
-webModeler:
+camundaHub:
   image:
-    # registry and tag will be used for both Web Modeler images
+    # registry and tag will be used for both Camunda Hub images
     tag: latest
   restapi:
     image:
-      repository: camunda/web-modeler-restapi
+      repository: camunda/hub
   websockets:
     image:
-      repository: camunda/web-modeler-websockets
-  ...
-postgresql:
-  image:
-    registry: example.jfrog.io
-    repository: bitnamilegacy/postgresql
-  ...
+      repository: camunda/hub-websockets
 ```
 
 #### Deploy Camunda with custom values

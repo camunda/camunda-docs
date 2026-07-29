@@ -370,7 +370,7 @@ webModeler:
           [
             "sh",
             "-c",
-            "wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.5.0.tar.gz -O /driver-lib/mysql.tar.gz && tar -xzf /driver-lib/mysql.tar.gz -C /driver-lib --strip-components=1",
+            "wget https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-9.7.0.tar.gz -O /driver-lib/mysql.tar.gz && tar -xzf /driver-lib/mysql.tar.gz -C /driver-lib --strip-components=1",
           ]
         volumeMounts:
           - name: mysql-driver

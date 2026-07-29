@@ -58,12 +58,16 @@ The diagram shows one orchestration cluster boundary with shared control-plane c
 Use tenant-scoped routes for tenant-specific requests:
 
 - REST: `/physical-tenants/{physicalTenantId}/v2/...`
-- gRPC: `Camunda-Physical-Tenant`
-- Default tenant compatibility: if the gRPC header is omitted, the request routes to the default Physical Tenant
+- gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
+- Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Use cluster-scoped routes for operations that apply to the whole cluster:
+Cluster-wide endpoints are not available yet. When added, they will be exposed under a dedicated `/cluster/v2/...` path prefix. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
 
-- Cluster-wide REST: `/cluster/v2/...`
+## Configure and provision Physical Tenants
+
+To configure tenant defaults, per-tenant overrides, validation expectations, and property examples, see [configuration reference](./configuration-reference.md).
+
+To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
 ## What is not isolated in 8.10
 
@@ -76,14 +80,28 @@ Use cluster-scoped routes for operations that apply to the whole cluster:
 
 Configuration validation should fail fast when two tenants point to the same backend location or another unsupported path. For document store, the final naming convention depends on the provider, so validate uniqueness at startup rather than relying on a hard-coded path format.
 
+## Health and status endpoints
+
+Physical Tenants expose three distinct endpoints for health and status:
+
+| Endpoint                             | Scope   | Use when                                                                                                                                                                                                                                                      |
+| :----------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/actuator/health`                   | Node    | Checking whether the individual broker or gateway node is healthy, ready, or live (for example, Kubernetes probes). Exposed on port 9600 by default (brokers and gateways); the other endpoints below are exposed on the Gateway REST port (8080 by default). |
+| `/cluster/v2/status`                 | Cluster | Determining whether the cluster as a whole is operational.                                                                                                                                                                                                    |
+| `/physical-tenants/{id}/v2/topology` | Tenant  | Checking whether a specific Physical Tenant can accept work and which of its partitions are available.                                                                                                                                                        |
+
+The legacy `/v2/status` endpoint is deprecated. It remains available for the default Physical Tenant only to preserve backward compatibility. Switch to `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
+
 ## Readiness
 
-The intended model is that readiness remains broker-scoped, not tenant-scoped. If one physical tenant loses access to its secondary storage, that should not fail readiness for the entire cluster.
+When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
-<!--
-### Document store details
+## Document store details
 
-Add the provider-specific naming or subpath convention here once the implementation is finalized. Confirm whether validation happens at startup, runtime, or both, and document the exact failure behavior for collisions.
--->
+Document stores are declared once in the root `camunda.document.*` catalog. Each Physical Tenant inherits the catalog and overrides only the fields it needs — typically the bucket path or prefix — to ensure its data is written to a distinct location.
+
+Isolation is enforced by validating the resolved `provider, bucket/container, path` tuple at startup. If two tenants resolve to the same tuple, Camunda fails startup and names the conflicting tenants in the error.
+
+For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store isolation](./configuration-reference.md#document-store-isolation) in the configuration reference.
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).

@@ -469,6 +469,13 @@
       "defaultValue": true
     },
     {
+      "name": "camunda.client.prefix-physical-tenant-path",
+      "type": "java.lang.Boolean",
+      "description": "If true, prefixes the REST base path with the physical tenant path when a physical tenant ID is set. Set to false to use the configured REST address as is, for example behind a reverse proxy that already routes to the physical tenant.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "defaultValue": true
+    },
+    {
       "name": "camunda.client.request-timeout",
       "type": "java.time.Duration",
       "description": "The request timeout to use when not overridden by a specific command.",

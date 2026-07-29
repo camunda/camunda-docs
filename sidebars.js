@@ -1188,6 +1188,7 @@ module.exports = {
           "Dashboards maintained by Camunda": [
             "components/optimize/userguide/process-dashboards",
             "components/optimize/userguide/instant-process-dashboards",
+            "components/optimize/userguide/agentic-control-plane",
           ],
         },
         "components/optimize/userguide/creating-reports",
@@ -1303,7 +1304,20 @@ module.exports = {
           ],
         },
 
-        "components/saas/backups",
+        {
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "components/saas/backup-restore-overview",
+          },
+          items: [
+            "components/saas/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting",
+          ],
+        },
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
@@ -1839,7 +1853,7 @@ module.exports = {
                     },
                     {
                       type: "category",
-                      label: "Management Identity and Web Modeler",
+                      label: "Management Identity and Camunda Hub",
                       items: [
                         "self-managed/deployment/helm/configure/database/using-existing-postgres",
                       ],
@@ -2207,7 +2221,15 @@ module.exports = {
                 type: "doc",
                 id: "self-managed/concepts/multi-tenancy/physical-tenants",
               },
-              items: ["self-managed/concepts/physical-tenants/index"],
+              items: [
+                "self-managed/concepts/physical-tenants/index",
+                "self-managed/concepts/physical-tenants/storage-isolation",
+                "self-managed/concepts/physical-tenants/api-routing",
+                "self-managed/concepts/physical-tenants/authentication-authorization",
+                "self-managed/concepts/physical-tenants/authorization-model",
+                "self-managed/concepts/physical-tenants/configuration-reference",
+                "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+              ],
             },
           ],
         },
@@ -2230,7 +2252,17 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+          type: "category",
+          label: "Multi-region",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-region/resilience-tiers",
+          },
+          items: [
+            "self-managed/concepts/multi-region/cold-recovery",
+            "self-managed/concepts/multi-region/dual-region",
+            "self-managed/concepts/multi-region/zone-aware-clusters",
+          ],
         },
         "self-managed/operational-guides/data-purge",
         "self-managed/operational-guides/troubleshooting",
@@ -2519,7 +2551,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: ["self-managed/upgrade/helm/880-to-890"],
+          items: ["self-managed/upgrade/helm/890-to-8100"],
         },
         {
           type: "category",

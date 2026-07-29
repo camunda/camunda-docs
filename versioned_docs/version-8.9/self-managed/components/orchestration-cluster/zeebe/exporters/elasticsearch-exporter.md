@@ -104,6 +104,8 @@ cluster, but rather only a subset of them. This can also be configured to limit 
 being exported (e.g. only events, no commands), and the value type of these records (e.g. only job
 and process values).
 
+For Optimize-specific filtering, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
+
 | Option                           | Description                                                                                                                                                                                                                                                                                                                                                        | Default         |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------- |
 | bpmnProcessIdExclusion           | Excludes all records with these BPMN process IDs. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                   | `[]`            |
@@ -130,7 +132,7 @@ and process values).
 | message-start-event-subscription | If `true` records related to message start event subscriptions will be exported.                                                                                                                                                                                                                                                                                   | `true`          |
 | message-subscription             | If `true` records related to message subscriptions will be exported.                                                                                                                                                                                                                                                                                               | `true`          |
 | number-of-replicas               | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.                                                                                                                                                                                  | 0               |
-| number-of-shards                 | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                          | 3               |
+| number-of-shards                 | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                          | varies          |
 | optimizeModeEnabled              | If `true`, restricts exported record types to those consumed by Optimize. Other value types are dropped. Use only when these indices are dedicated to Optimize.                                                                                                                                                                                                    | `false`         |
 | prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                                                                                                                                                                            | zeebe-record    |
 | process                          | If `true` records related to processes will be exported.                                                                                                                                                                                                                                                                                                           | `true`          |
@@ -157,6 +159,16 @@ and process values).
 | variableNameInclusionStartWith   | Includes variables whose names start with these prefixes. If empty, no name inclusion filter applies.                                                                                                                                                                                                                                                              | `[]`            |
 | variableValueTypeExclusion       | Excludes variables of these inferred JSON types. Exclusion wins over inclusion.                                                                                                                                                                                                                                                                                    | `[]`            |
 | variableValueTypeInclusion       | Restricts exported variables to these inferred JSON types (`String`, `Number`, `Boolean`, `Object`, `Null`). If empty, all types are included. Use to drop large object or array payloads at export time.                                                                                                                                                          | `[]`            |
+
+:::note
+The number of shards varies by index template. Most indices use `1` shard by default. The following high-volume index templates default to `3` shards:
+
+- `zeebe-record-job`
+- `zeebe-record-process-instance`
+- `zeebe-record-user-task`
+
+If you set `number-of-shards`, it overrides the template defaults for all indices, including the three listed above.
+:::
 
 </TabItem>
 

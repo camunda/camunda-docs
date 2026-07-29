@@ -11,14 +11,13 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Enumeration types (86 enums).
+Enumeration types (89 enums).
 
 ## AgentInstanceHistoryCommitStatusEnum
 
 The commit status of a history item.
-COMMITTED: the producing job completed successfully.
-PENDING: the producing job is still active (in-flight).
-DISCARDED: the producing job failed; this item was superseded by a later activation.
+
+COMMITTED: the producing job completed successfully. PENDING: the producing job is still active (in-flight). DISCARDED: the producing job failed; this item was superseded by a later activation.
 
 | Value       | Description |
 | ----------- | ----------- |
@@ -44,7 +43,7 @@ The field to sort by.
 | ---------------- | ----------- |
 | `ProducedAt`     |             |
 | `HistoryItemKey` |             |
-| `Iteration`      |             |
+| `LoopIteration`  |             |
 
 ## AgentInstanceMessageContentTypeEnum
 
@@ -302,6 +301,8 @@ The type of the batch operation.
 | `MIGRATEPROCESSINSTANCE`   |             |
 | `MODIFYPROCESSINSTANCE`    |             |
 | `RESOLVEINCIDENT`          |             |
+| `RESUMEPROCESSINSTANCE`    |             |
+| `SUSPENDPROCESSINSTANCE`   |             |
 | `UPDATEJOB`                |             |
 | `UPDATEVARIABLE`           |             |
 
@@ -326,6 +327,15 @@ The cloud deployment stage.
 | `Dev`  |             |
 | `Int`  |             |
 | `Prod` |             |
+
+## ClusterVariableKindEnum
+
+The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.
+
+| Value             | Description |
+| ----------------- | ----------- |
+| `JSON`            |             |
+| `SECRETREFERENCE` |             |
 
 ## ClusterVariableScopeEnum
 
@@ -791,6 +801,7 @@ The state of the job.
 | `MIGRATED`        |             |
 | `PRIORITYUPDATED` |             |
 | `RETRIESUPDATED`  |             |
+| `TIMEOUTUPDATED`  |             |
 | `TIMEDOUT`        |             |
 
 ## MappingRuleSearchQuerySortRequestField
@@ -830,9 +841,7 @@ The field to sort by.
 
 The state of message subscription.
 
-**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not
-tracked for these subscriptions. To query correlation history for process start events,
-use the `/correlated-message-subscriptions/search` endpoint.
+**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not tracked for these subscriptions. To query correlation history for process start events, use the `/correlated-message-subscriptions/search` endpoint.
 
 | Value        | Description |
 | ------------ | ----------- |
@@ -844,10 +853,8 @@ use the `/correlated-message-subscriptions/search` endpoint.
 ## MessageSubscriptionTypeEnum
 
 The type of message subscription.
-`START_EVENT` is definition-scoped (process start events). Always has a value; only
-captured from Camunda 8.10 onwards.
-`PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have
-no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
+
+`START_EVENT` is definition-scoped (process start events). Always has a value; only captured from Camunda 8.10 onwards. `PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
 
 | Value          | Description |
 | -------------- | ----------- |
@@ -887,6 +894,18 @@ Describes the Raft role of the broker for a given partition.
 | `Follower` |             |
 | `Inactive` |             |
 
+## PartitionState
+
+Describes the current operational state of the partition within the cluster configuration.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `Unknown`    |             |
+| `Joining`    |             |
+| `Active`     |             |
+| `Leaving`    |             |
+| `Recovering` |             |
+
 ## PermissionTypeEnum
 
 Specifies the type of permissions.
@@ -908,6 +927,7 @@ Specifies the type of permissions.
 | `CREATEBATCHOPERATIONMIGRATEPROCESSINSTANCE`   |             |
 | `CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE`    |             |
 | `CREATEBATCHOPERATIONRESOLVEINCIDENT`          |             |
+| `CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE`   |             |
 | `CREATEBATCHOPERATIONUPDATEJOB`                |             |
 | `CREATEDECISIONINSTANCE`                       |             |
 | `CREATEPROCESSINSTANCE`                        |             |
@@ -922,6 +942,7 @@ Specifies the type of permissions.
 | `DELETETASKLISTENER`                           |             |
 | `EVALUATE`                                     |             |
 | `MODIFYPROCESSINSTANCE`                        |             |
+| `PAUSE`                                        |             |
 | `READ`                                         |             |
 | `READDECISIONDEFINITION`                       |             |
 | `READDECISIONINSTANCE`                         |             |
@@ -931,6 +952,9 @@ Specifies the type of permissions.
 | `READUSAGEMETRIC`                              |             |
 | `READUSERTASK`                                 |             |
 | `READTASKLISTENER`                             |             |
+| `RESTORE`                                      |             |
+| `REVEAL`                                       |             |
+| `SUSPENDPROCESSINSTANCE`                       |             |
 | `UPDATE`                                       |             |
 | `UPDATEPROCESSINSTANCE`                        |             |
 | `UPDATEUSERTASK`                               |             |
@@ -1026,12 +1050,14 @@ The type of resource to add/remove permissions to/from.
 | -------------------------------- | ----------- |
 | `AUDITLOG`                       |             |
 | `AUTHORIZATION`                  |             |
+| `BACKUP`                         |             |
 | `BATCH`                          |             |
 | `CLUSTERVARIABLE`                |             |
 | `COMPONENT`                      |             |
 | `DECISIONDEFINITION`             |             |
 | `DECISIONREQUIREMENTSDEFINITION` |             |
 | `DOCUMENT`                       |             |
+| `EXPORTER`                       |             |
 | `EXPRESSION`                     |             |
 | `GLOBALLISTENER`                 |             |
 | `GROUP`                          |             |
@@ -1040,6 +1066,7 @@ The type of resource to add/remove permissions to/from.
 | `PROCESSDEFINITION`              |             |
 | `RESOURCE`                       |             |
 | `ROLE`                           |             |
+| `SECRET`                         |             |
 | `SYSTEM`                         |             |
 | `TENANT`                         |             |
 | `USER`                           |             |
@@ -1077,6 +1104,20 @@ The field to sort by.
 | Value      | Description |
 | ---------- | ----------- |
 | `Username` |             |
+
+## SecretErrorCode
+
+The typed reason a reference could not be resolved.
+
+- `NOT_FOUND`: no secret exists for the reference.
+- `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.
+- `INVALID_REFERENCE`: the reference is malformed.
+
+| Value              | Description |
+| ------------------ | ----------- |
+| `NOTFOUND`         |             |
+| `ACCESSDENIED`     |             |
+| `INVALIDREFERENCE` |             |
 
 ## SortOrderEnum
 
@@ -1157,6 +1198,7 @@ The field to sort by.
 ## UserTaskStateEnum
 
 The state of the user task.
+
 Note: FAILED state is only for legacy job-worker-based tasks.
 
 | Value        | Description |

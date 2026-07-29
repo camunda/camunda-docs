@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -49,6 +51,8 @@ paths:
       summary: Get process definition
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -100,6 +104,8 @@ paths:
       summary: Get process definition XML
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -159,6 +165,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfREVGSU5JVElPTiJ9XX0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -211,6 +219,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -248,6 +258,57 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
       x-added-in-version: "8.8"
+  /process-definitions/{processDefinitionKey}/variable-names/search:
+    post:
+      tags:
+        - Process definition
+      operationId: searchProcessDefinitionVariableNames
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Search process definition variable names
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:EVENTUAL]]
+
+        Search for distinct variable names defined on a process definition, optionally narrowed by the name filter.
+      parameters:
+        - name: processDefinitionKey
+          in: path
+          required: true
+          description: The assigned key of the process definition, which acts as a unique identifier for this process definition.
+          schema:
+            type: string
+            format: string<ProcessDefinitionKey>
+            example: "2251799813686749"
+            description: System-generated key for a deployed process definition.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProcessDefinitionVariableNameSearchQuery"
+      responses:
+        "200":
+          description: The process definition variable name search result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProcessDefinitionVariableNameSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.10"
   /process-definitions/statistics/message-subscriptions:
     post:
       tags:
@@ -259,6 +320,8 @@ paths:
       summary: Get message subscription statistics
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -299,6 +362,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -337,6 +402,8 @@ paths:
       summary: Get process instance statistics by version
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -440,6 +507,16 @@ components:
         hasStartForm:
           description: Indicates whether the start event of the process has an associated Form Key.
           type: boolean
+        isDeleted:
+          description: |
+            Filter by whether the process definition has been deleted.
+            When not set, both deleted and non-deleted process definitions are returned.
+            Set to `false` to exclude deleted definitions (recommended for most use cases).
+            Set to `true` to return only deleted definitions that are still retained in secondary storage.
+          type: boolean
+      x-properties-added-in-version:
+        - propertyName: isDeleted
+          addedInVersion: "8.10"
     ProcessDefinitionSearchQueryResult:
       type: object
       required:
@@ -463,6 +540,7 @@ components:
         - processDefinitionId
         - tenantId
         - hasStartForm
+        - isDeleted
       properties:
         name:
           description: Name of this process definition.
@@ -494,6 +572,12 @@ components:
         hasStartForm:
           description: Indicates whether the start event of the process has an associated Form Key.
           type: boolean
+        isDeleted:
+          description: Whether this process definition has been deleted but is still retained in secondary storage.
+          type: boolean
+      x-properties-added-in-version:
+        - propertyName: isDeleted
+          addedInVersion: "8.10"
     ProcessDefinitionElementStatisticsQuery:
       description: Process definition element statistics request.
       type: object
@@ -543,6 +627,46 @@ components:
           description: The total number of completed instances of the element.
           type: integer
           format: int64
+    ProcessDefinitionVariableNameSearchQuery:
+      description: Process definition variable name search query request.
+      type: object
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
+      properties:
+        filter:
+          description: The process definition variable name search filters.
+          allOf:
+            - $ref: "#/components/schemas/ProcessDefinitionVariableNameFilter"
+    ProcessDefinitionVariableNameFilter:
+      description: Process definition variable name filter request.
+      type: object
+      properties:
+        name:
+          description: The variable name search filter.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+    ProcessDefinitionVariableNameSearchQueryResult:
+      description: Process definition variable name search query response.
+      type: object
+      required:
+        - items
+      allOf:
+        - $ref: "search-models.yaml#/components/schemas/SearchQueryResponse"
+      properties:
+        items:
+          description: The matching variable names.
+          type: array
+          items:
+            $ref: "#/components/schemas/ProcessDefinitionVariableNameSearchResult"
+    ProcessDefinitionVariableNameSearchResult:
+      description: Process definition variable name search response item.
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          description: The variable name.
+          type: string
     ProcessDefinitionMessageSubscriptionStatisticsQuery:
       type: object
       properties:

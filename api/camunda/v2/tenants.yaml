@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -62,6 +64,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -107,6 +111,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -151,6 +157,8 @@ paths:
       summary: Update tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -203,6 +211,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -244,6 +254,8 @@ paths:
       summary: Assign a user to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -291,6 +303,8 @@ paths:
       summary: Unassign a user from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -341,6 +355,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -378,6 +394,8 @@ paths:
       summary: Assign a client to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -426,6 +444,8 @@ paths:
       summary: Unassign a client from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -476,6 +496,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -513,6 +535,8 @@ paths:
       summary: Assign a group to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -561,6 +585,8 @@ paths:
       summary: Unassign a group from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -611,6 +637,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -649,6 +677,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
@@ -686,6 +716,8 @@ paths:
       summary: Assign a role to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -734,6 +766,8 @@ paths:
       summary: Unassign a role from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -785,6 +819,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
         [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
@@ -831,6 +867,8 @@ paths:
       summary: Unassign a mapping rule from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -879,6 +917,8 @@ paths:
       summary: Search mapping rules for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 

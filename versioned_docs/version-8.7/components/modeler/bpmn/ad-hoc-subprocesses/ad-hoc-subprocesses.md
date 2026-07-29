@@ -4,7 +4,7 @@ title: "Ad-hoc sub-processes"
 description: "The ad-hoc sub-processes allow flexibility while executing inner elements."
 ---
 
-Ad-hoc sub-processes are a special kind of [embedded subprocesses](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
+Ad-hoc sub-processes are a special kind of [embedded subprocess](../embedded-subprocesses/embedded-subprocesses.md) with an **ad-hoc marker** (represented
 by a **~** tilde character). Compared to regular subprocesses, ad-hoc sub-processes allow more flexibility
 for executing inner elements.
 

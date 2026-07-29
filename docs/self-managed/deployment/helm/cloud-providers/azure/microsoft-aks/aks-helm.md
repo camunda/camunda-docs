@@ -44,7 +44,7 @@ To demonstrate how to deploy with a custom domain, the following stack is also i
 
 - **cert-manager**: Automates TLS certificate management with [Let's Encrypt](https://letsencrypt.org/)
 - **external-dns**: Manages DNS records in Azure DNS for domain ownership confirmation
-- **ingress-nginx**: Provides HTTP/HTTPS load balancing and routing to Kubernetes services
+- **Contour**: Ingress controller backed by the Envoy proxy, providing HTTP/HTTPS load balancing and routing to Kubernetes services
 
 <SingleNamespaceDeployment />
 
@@ -124,7 +124,7 @@ Throughout the rest of this guide, we refer to configurations as **"With domain"
 
 In this section, we provide an optional setup guide for configuring an Ingress with TLS and DNS management, allowing you to access your application through a specified domain. If you haven't set up an Ingress, refer to the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress/) for more details. In Kubernetes, an Ingress is an API object that manages external access to services in a cluster, typically over HTTP, and can also handle TLS encryption for secure connections.
 
-To monitor your Ingress setup using Azure Monitor, you may find the official guide on [monitoring ingress controllers with Azure Monitor and Prometheus](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-prometheus-integration) helpful. Additionally, for detailed steps on exposing Kubernetes applications with the nginx ingress controller on Azure, refer to the [official Azure tutorial](https://learn.microsoft.com/en-us/azure/aks/ingress-basic).
+To monitor your Ingress setup using Azure Monitor, you may find the official guide on [monitoring Ingress controllers with Azure Monitor and Prometheus](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-prometheus-integration) helpful. For more details on the Ingress controller used in this guide and its configuration options, refer to the [Contour documentation](https://projectcontour.io/docs/).
 
 ### Export Values
 
@@ -142,17 +142,17 @@ https://github.com/camunda/camunda-deployment-references/blob/main/azure/kuberne
 
 These variables will be referenced in later steps, so make sure they are set in your current shell session before continuing.
 
-### ingress-nginx
+### Contour
 
-[Ingress-nginx](https://github.com/kubernetes/ingress-nginx) is an open-source Kubernetes Ingress controller that provides a way to manage external access to services within a Kubernetes cluster. It acts as a reverse proxy and load balancer, routing incoming traffic to the appropriate services based on rules defined in the Ingress resource.
+[Contour](https://projectcontour.io/) is a CNCF Incubating, open-source Kubernetes Ingress controller that uses the [Envoy proxy](https://www.envoyproxy.io/) as its data plane. It manages external access to services within a Kubernetes cluster, acting as a reverse proxy and load balancer that routes incoming traffic to the appropriate services based on rules defined in the Ingress resource.
 
-The following installs `ingress-nginx` in the `ingress-nginx` namespace via Helm. For more configuration options, consult the [Helm chart](https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx).
+The following installs `contour` in the `projectcontour` namespace via Helm. For more configuration options, consult the [Contour Helm chart](https://projectcontour.github.io/helm-charts/).
 
 ```shell reference
-https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-ingress-nginx.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/azure/kubernetes/aks-single-region/procedure/install-contour.sh
 ```
 
-For a step-by-step walkthrough (and the full list of Azure-specific annotations) see the Microsoft Learn article [“Create an unmanaged NGINX ingress controller in AKS.”](https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/load-bal-ingress-c/create-unmanaged-ingress-controller)
+The installation script applies AKS-specific settings, such as the Azure load balancer health-probe path and `externalTrafficPolicy: Local`, so that the Azure load balancer health probe targets the Kubernetes `healthCheckNodePort` and the client source IP is preserved.
 
 ### external-dns
 

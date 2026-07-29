@@ -1,6 +1,6 @@
 ---
 id: integrate-modeler-in-ci-cd
-title: Integrate Web Modeler into CI/CD
+title: Integrate Camunda Hub into CI/CD
 description: Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of projects.
 keywords: [CI/CD, devops, modeler, processops, projects, integration guide]
 ---

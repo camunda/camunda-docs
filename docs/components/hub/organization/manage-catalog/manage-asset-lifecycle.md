@@ -45,6 +45,15 @@ Unpublishing is a catalog-level state that indicates the asset is no longer part
 Because unpublishing automatically deprecates the underlying element template, you don't need to manually set the `deprecated` property in the template to flag it as outdated; removing the asset from the submission is enough.
 :::
 
+## Republishing an unpublished asset
+
+To republish an unpublished asset:
+
+- Add the asset's directory back to the repository.
+- [Increment the element template's version](./getting-started.md#version-your-element-templates).
+
+If you don't increment the element template's version, you'll receive a `400` response.
+
 ## Delete an asset
 
 To permanently remove an asset from the catalog, use the Camunda Hub API delete endpoint:
@@ -53,7 +62,7 @@ To permanently remove an asset from the catalog, use the Camunda Hub API delete 
 DELETE <camunda-hub-api-base-url>/api/v2/catalog/assets/{assetKey}
 ```
 
-For the full request and response schema, see the **Delete a catalog asset** reference for [SaaS](/apis-tools/hub-api-saas/specifications/delete-catalog-asset.api.mdx) or [Self-Managed](/apis-tools/hub-api-sm/specifications/delete-catalog-asset.api.mdx). Your API token must have the `delete` permission.
+For the full request and response schema, see the **Delete a catalog asset** reference for [SaaS](/apis-tools/hub-api-saas/specifications/delete-catalog-asset.api.mdx) or [Self-Managed](/apis-tools/hub-api-sm/specifications/delete-catalog-asset.api.mdx). Your API token must have the Web Modeler API `delete` permission.
 
 Deleting an asset removes it and all of its versions entirely:
 

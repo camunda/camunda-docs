@@ -810,7 +810,7 @@ function BuildWithCamunda() {
               ></span>
             </p>
             <TerminalWindow copyable>
-              {`$ c8ctl cluster start 8.10.0-alpha2`}
+              {`$ c8ctl cluster start 8.10.0-alpha3`}
             </TerminalWindow>
 
             <p className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}>
@@ -847,6 +847,45 @@ function BuildWithCamunda() {
                 requires Node.js 18+.
               </span>
             </p>
+            <p
+              className={clsx(styles.cliInfoNote, styles.cliInfoNoteCentered)}
+              style={{ marginTop: "0.5rem" }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+                <path
+                  d="M8 7v4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+                <circle cx="8" cy="4.75" r="0.85" fill="currentColor" />
+              </svg>
+              <span>
+                By downloading our self-managed packages, you agree to our{" "}
+                <Link to="https://legal.camunda.com/privacy-and-data-protection#product-privacy-policy">
+                  Privacy Policy
+                </Link>{" "}
+                and{" "}
+                <Link to="https://legal.camunda.com/licensing-and-other-legal-terms#self-managed-non-production-terms">
+                  Terms of Use
+                </Link>
+                .
+              </span>
+            </p>
           </div>
 
           {/* ─── Fallback: Download bundle ─── */}
@@ -878,25 +917,25 @@ function BuildWithCamunda() {
               <div className={styles.downloadButtons}>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-aarch64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-aarch64.zip"
                 >
                   <DownloadBtnIcon /> macOS (Apple Silicon)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-darwin-x86_64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-darwin-x86_64.zip"
                 >
                   <DownloadBtnIcon /> macOS (Intel)
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-windows-x86_64.zip"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-windows-x86_64.zip"
                 >
                   <DownloadBtnIcon /> Windows
                 </a>
                 <a
                   className={styles.downloadButton}
-                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha2/camunda8-getting-started-bundle-8.10.0-alpha2-linux-x86_64.tar.gz"
+                  href="https://github.com/camunda/camunda/releases/download/8.10.0-alpha3/camunda8-getting-started-bundle-8.10.0-alpha3-linux-x86_64.tar.gz"
                 >
                   <DownloadBtnIcon /> Linux
                 </a>

@@ -7,8 +7,8 @@ sidebar_position: 2
 
 This reference architecture deploys Camunda 8 Self-Managed across two AWS regions on ECS Fargate in an active-active configuration, with Aurora Global Database as secondary storage and Camunda 8.10 unified `/v2/*` REST API.
 
-:::warning Experimental — reference only
-This reference architecture is experimental. RDBMS-based dual-region for Camunda 8 is uncharted territory and known limitations apply (see [Known limitations](#known-limitations)). Use it for learning, evaluation, and validation. Do not run production workloads through it without your own hardening, monitoring, and operational testing.
+:::note Reference architecture
+This guide covers the **Orchestration Cluster** and Connectors.
 :::
 
 ## What you get
@@ -66,8 +66,8 @@ architecture-beta
     tasks1:L -- R:peer1
 ```
 
-:::warning
-Reference architectures provided in this guide are not turnkey modules. Camunda recommends cloning the repository and modifying it locally. You're responsible for operating and maintaining the infrastructure. Camunda updates the reference architecture over time, and changes may not be backward compatible.
+:::note
+This reference architecture is not a turnkey module. Clone the repository and adapt it to your environment — you are responsible for operating and maintaining the resulting infrastructure.
 :::
 
 ## Prerequisites
@@ -169,19 +169,7 @@ Wall-clock time for a greenfield deploy to a first healthy `/v2/topology` respon
 
 `terraform destroy` is faster: about 15–20 minutes end-to-end, with Aurora teardown again the bottleneck.
 
-Rough running cost for the default sizing (four brokers per region, one Connectors task per region, Aurora `db.r6g.large` × 2 instances per region, one NAT gateway per region, two ALBs, four NLBs):
-
-| Component                                               | Approximate cost per day |
-| ------------------------------------------------------- | ------------------------ |
-| Fargate orchestration cluster (4 vCPU / 8 GB × 8 tasks) | ~$38                     |
-| Fargate Connectors (2 vCPU / 4 GB × 2 tasks)            | ~$5                      |
-| Aurora Global (`db.r6g.large` × 4 instances)            | ~$28                     |
-| 2 × ALB + 4 × NLB                                       | ~$5                      |
-| 2 × NAT Gateway (data transfer extra)                   | ~$2                      |
-| EFS, S3, Secrets Manager, KMS                           | ~$1                      |
-| **Total**                                               | **~$80 per day**         |
-
-These are list-price ballparks for `us-east-1`. Commit discounts, region, idle time, and cross-region data egress all shift the number. Always run `terraform destroy` when you're done with a demo.
+Actual costs depend on region, instance sizing, commit discounts, and cross-region data egress. Use the [AWS Pricing Calculator](https://calculator.aws/#/) to estimate for your configuration.
 
 ## Architecture decisions
 
@@ -418,7 +406,6 @@ Without these additions, traffic is transmitted in cleartext and is therefore in
    ```
 
    Both ALBs expose the Orchestration Cluster and Connectors through the same port and use listener rules to determine the path they're on:
-
    - ALB:80
      - `/*` routes to the Orchestration Cluster UI and REST API.
      - `/connectors*` routes to the Connectors.
@@ -613,9 +600,6 @@ For general troubleshooting, see the [operational guides troubleshooting documen
 
 ## Known limitations
 
-- **No Identity / Keycloak.** Authentication is Basic authentication only. There is no Single Sign-On integration in this reference.
-- **No Optimize.** RDBMS secondary storage does not yet support Optimize.
-- **No Web Modeler or Console.** Neither is included in the reference architecture.
 - **Node ID assignment.** Even/odd broker ID assignment per region is pending follow-up work.
 - **Manual failover only.** No automated health-check-driven failover is included.
 

@@ -232,10 +232,6 @@ Cross-region RDBMS deployments are **not yet tested or supported** in Camunda 8.
 
 Camunda assumes your RDBMS handles its own HA (replication, failover). Use cloud-managed databases or vendor-specific HA solutions for production.
 
-### v1 API not supported
-
-❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
-
 ### Custom JDBC driver libraries
 
 Only JDBC drivers from official vendor sources are supported. Custom or modified drivers may cause unexpected behavior.

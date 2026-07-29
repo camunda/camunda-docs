@@ -242,6 +242,22 @@ Type: <code>boolean</code>
 </tr>
 <tr>
 <td>
+  <Property defaultValue="property" groupId="property-format" property="camunda.client.prefix-physical-tenant-path" env="CAMUNDA_CLIENT_PREFIXPHYSICALTENANTPATH"/><a href="#camundaclientprefixphysicaltenantpath" id="camundaclientprefixphysicaltenantpath" class="hash-link"/>
+</td>
+
+<td>
+
+If true, prefixes the REST base path with the physical tenant path when a physical tenant ID is set. Set to false to use the configured REST address as is, for example behind a reverse proxy that already routes to the physical tenant.
+
+Type: <code>boolean</code>
+
+</td>
+<td>
+  <code>true</code>
+</td>
+</tr>
+<tr>
+<td>
   <Property defaultValue="property" groupId="property-format" property="camunda.client.request-timeout" env="CAMUNDA_CLIENT_REQUESTTIMEOUT"/><a href="#camundaclientrequesttimeout" id="camundaclientrequesttimeout" class="hash-link"/>
 </td>
 

@@ -16,7 +16,7 @@ You can narrow the list to find the right asset:
 - **Free-text search** matches against the asset name, short description, category name, and tag names (case-insensitive).
 - **Filter by category** to scope the list to a single area (for example, **Connectors** or **Human Tasks**).
 - **Filter by tags** to combine related assets across categories.
-- **Sort** by name, creation date, or last updated date.
+- **Sort** by **Newest** or by **Name (A–Z)**.
 
 Assets that were recently added or updated are highlighted so you can spot new templates at a glance. Only published assets appear in the catalog — unpublished assets aren't visible to you.
 
@@ -25,7 +25,7 @@ Assets that were recently added or updated are highlighted so you can spot new t
 To use a catalog asset while modeling:
 
 1. Open a BPMN diagram in the Hub modeler.
-2. Select an element and apply a published element template from the catalog.
+2. Select an element and [apply a published element template](./using-templates.md#applying-templates) from the catalog.
 3. Configure the element through the properties panel as defined by the template.
 
 When the CoE publishes a newer version of a template you already use, Hub offers an **update** path on elements that reference the older version, so you can move to the latest version when you're ready.

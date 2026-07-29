@@ -18,7 +18,7 @@ When accessing a variable in an expression, keep in mind the variable name is ca
 
 Restrictions of a variable name:
 
-- It may not start with a **number** (e.g. `1stChoice` is not allowed; you can use `firstChoice`instead).
+- It may not start with a **number** (e.g. `1stChoice` is not allowed; you can use `firstChoice` instead).
 - It may not contain **whitespaces** (e.g. `order number` is not allowed; you can use `orderNumber` instead).
 - It may not contain an **operator** (e.g. `+`, `-`, `*`, `/`, `=`, `>`, `?`, `.`).
 - It may not be a **literal** (e.g. `null`, `true`, `false`) or a **keyword** (e.g. `function`, `if`, `then`, `else`, `for`, `between`, `instance`, `of`, `not`).

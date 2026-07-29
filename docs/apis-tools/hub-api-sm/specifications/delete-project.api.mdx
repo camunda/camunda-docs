@@ -1,11 +1,11 @@
 ---
 id: delete-project
 title: "Delete a project"
-description: "Deletes the project with the given project key. The project must have no files in the project or any of its descendants. Empty folders and version history are removed as part of the deletion."
+description: "Soft-deletes the project with the given project key. The project is moved to the recently deleted state and can be recovered during the retention window. The project must have no files in the project or any of its descendants. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead."
 sidebar_label: "Delete a project"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
 custom_edit_url: null
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Deletes the project with the given project key. The project must have no files in the project or any of its descendants. Empty folders and version history are removed as part of the deletion.
+Soft-deletes the project with the given project key. The project is moved to the recently deleted state and can be recovered during the retention window. The project must have no files in the project or any of its descendants. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -46,7 +46,14 @@ Deletes the project with the given project key. The project must have no files i
       in: "path",
       required: true,
       description: "The unique key identifying the project.",
-      schema: { type: "string" },
+      schema: {
+        description: "System-generated key for a project.",
+        type: "string",
+        format: "ProjectKey",
+        "x-semantic-type": "ProjectKey",
+        example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+        title: "ProjectKey",
+      },
     },
   ]}
 ></ParamsDetails>
@@ -228,7 +235,7 @@ Deletes the project with the given project key. The project must have no files i
             status: 403,
             detail:
               "Operation not allowed. Ensure your API credentials have the required permissions.",
-            instance: "/api/v2/files/file-789-xyz",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
           },
         },
       },
@@ -285,7 +292,7 @@ Deletes the project with the given project key. The project must have no files i
             title: "Not Found",
             status: 404,
             detail: "The requested resource was not found.",
-            instance: "/api/v2/files/file-789-xyz",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
           },
         },
       },
