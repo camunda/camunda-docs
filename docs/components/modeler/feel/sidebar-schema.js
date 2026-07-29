@@ -46,6 +46,7 @@ module.exports = {
         "components/modeler/feel/cluster-variable/cluster-variable-scope-priority",
         "components/modeler/feel/cluster-variable/cluster-variable-namespace-collisions",
         "components/modeler/feel/cluster-variable/cluster-variable-data-types",
+        "components/modeler/feel/cluster-variable/cluster-variable-metadata",
         "components/modeler/feel/cluster-variable/cluster-variable-examples",
       ],
     },
