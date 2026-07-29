@@ -654,10 +654,10 @@ The following example `orchestration-values.yaml` is provided to the `orchestrat
 
 ```yaml
 global:
+  host: orchestration-host.com
   ingress:
     enabled: true
     className: nginx
-    host: orchestration-host.com
     tls:
       enabled: true
       secretName: camunda-platform
@@ -690,7 +690,7 @@ orchestration:
     grpc:
       enabled: true
       className: nginx
-      host: grpc-{{ .Values.global.ingress.host }}
+      host: grpc-{{ .Values.global.host }}
       tls:
         enabled: true
         secretName: camunda-platform-zeebe-grpc
