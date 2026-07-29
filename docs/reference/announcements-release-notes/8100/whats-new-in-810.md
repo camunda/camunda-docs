@@ -103,7 +103,7 @@ During the migration:
 - Any files or folders located directly in a project, not inside a process application, are automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. Once the migration is complete, you can rename this application, move content out of it, or otherwise reorganize it as with any other process application.
 - Git sync and cluster settings on existing process applications migrate unchanged along with your data.
 
-During the migration, Web Modeler is briefly unavailable. Clusters and running processes are unaffected and keep executing normally.
+During the migration, Web Modeler is briefly unavailable. Clusters and running processes are unaffected and continue executing normally.
 
 :::note
 Even though the migration process is tested extensively ahead of release, a backup is still taken before the migration to ensure your data is recoverable in its original state, should anything go wrong. If you notice anything unexpected after the migration, contact support.
@@ -120,7 +120,7 @@ The migration does not affect the following resources:
 | Git-synced projects                 | The migration doesn't modify process applications or their contents, so anything connected through Git sync is unaffected: the same files, in the same repository, with the same history. |
 | Desktop Modeler                     | Desktop Modeler has no direct connection to Web Modeler that this change touches, and content shared via Git sync is unaffected.                                                          |
 
-If you automate against the Web Modeler API, content moving to a new location affects you directly: the V1 API returns files and folders from their new place, and requests that create an item at a project's root are redirected into the new `YOUR PROJECT NAME - General` application, with the response reflecting the new location.
+If you automate against the Web Modeler API, content moving to a new location affects you directly. Web Modeler API v1 returns files and folders from their new place, and requests that create an item at a project's root are redirected into the new `YOUR PROJECT NAME - General` application, with the response reflecting the new location.
 
 Review any automation that depends on where files or folders sit before the migration runs. A small number of folder API integrations are affected more directly; if you rely on the folder API to work with process applications, contact support to confirm whether your integration needs updates.
 
