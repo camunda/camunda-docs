@@ -9,16 +9,6 @@ import IconGear from "../../assets/icon-prereqs.png";
 import IconCloud from "../../assets/icon-backup.png";
 import IconArrow from "../../assets/icon-arrow.png";
 
-export const mainUpgradeCard = [
-  {
-    link: "../880-to-890",
-    title: "Upgrade Camunda components from 8.8 to 8.9",
-    image: K8sIcon,
-    description:
-      "Review component-level changes introduced in Camunda 8.9, including identity migration, data and exporter changes, API updates, and web application behavior.",
-  },
-];
-
 export const helmIndexCards = [
   {
     link: "../helm/880-to-890",
