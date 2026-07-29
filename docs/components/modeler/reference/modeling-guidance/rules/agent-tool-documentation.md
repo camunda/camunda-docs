@@ -7,13 +7,13 @@ description: Reference for the `agent-tool-documentation` rule.
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
 
-Tools inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) need a documentation entry. The AI agent reads the tool's documentation to decide which tool to call and what it does. Without documentation, the agent falls back to the element's name, which is usually too vague to select the tool reliably. Missing documentation degrades tool selection rather than breaking anything outright, so this rule reports a warning, not an error.
-
-This is a production-readiness concern: an undocumented tool can test well in development, where you exercise it deliberately, and then fail in production because the LLM never selects it (or selects it for the wrong request).
+Tools inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) need a documentation entry. The AI agent reads it to decide which tool to call; without it, the agent falls back to the element's name, usually too vague to select the tool reliably. Missing documentation degrades tool selection rather than breaking anything outright, so this rule reports a warning, not an error. An undocumented tool can test well in development and then fail in production because the LLM never selects it.
 
 To fix this problem, select the tool's entry element, open the **Documentation** section in the properties panel, and describe what the tool does and when the agent should use it.
 
-The rule checks the tool's entry element: the activity with no incoming sequence flows inside the agent sub-process. Activities reached through sequence flows belong to a tool's internal flow and don't need their own tool documentation. Event sub-processes are triggered by events, not called by the agent, and are also skipped.
+The rule checks the tool's entry element: the activity with no incoming sequence flow. Activities reached through a sequence flow are part of the tool's internal flow and don't need their own documentation; event sub-processes are skipped too, since they're triggered by events, not called by the agent:
+
+![Two activities in a tool's sub-flow: the first has no incoming sequence flow and is the tool's entry element, the second is reached by a sequence flow and is not](./img/agent-tool-documentation/entry-element.png)
 
 ## <MarkerGuideline.Invalid /> No documentation
 

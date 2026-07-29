@@ -1,11 +1,9 @@
 ## Declaring a sub-process as agentic
 
-This rule only applies inside an ad hoc sub-process recognized as a tool container. A sub-process is recognized one of two ways:
+This rule only applies inside an ad hoc sub-process recognized as a tool container. Camunda's provided AI Agent element templates are already compatible, at any template version. A sub-process is recognized one of two ways:
 
-- It carries a `zeebe:property` named `io.camunda.agenticai.toolContainer` with value `true`, whether its tools are driven by an AI Agent task in the same process or a separate one.
-- It has the AI Agent job-worker element template applied, at any template version, even a version older than the property above. This keeps existing diagrams working: you don't need to update the template just to get lint coverage.
-
-If you're using an out-of-the-box AI Agent element template, update it to the current version anyway: since [connectors#7882](https://github.com/camunda/connectors/issues/7882), the template writes the `toolContainer` property for you, and newer templates are the supported long-term path.
+- Its `zeebe:modelerTemplate` attribute equals `io.camunda.connectors.agenticai.aiagent.jobworker.v1`, the AI Agent job-worker template, matched at any template version.
+- It carries a `zeebe:property` named `io.camunda.agenticai.toolContainer` with value `true`, whether its tools are driven by an AI Agent task in the same process or a separate one. Starting with Camunda `8.10.0-alpha4`, out-of-the-box AI Agent element templates write this property for you; it's the supported long-term path.
 
 If you're not using an out-of-the-box template, or your template version predates that change, add the property yourself. Select the ad hoc sub-process, open the **Extension properties** section in the properties panel, and add a property with name `io.camunda.agenticai.toolContainer` and value `true`. It appears there as a plain extension property, not a dedicated control:
 
