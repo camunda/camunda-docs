@@ -90,7 +90,7 @@ For Operate, Optimize, and Tasklist, which include an importer and an archiver m
 
 While high availability is one part of the increased fault tolerance and resilience, you should also consider regional or zonal placement of your workloads.
 
-If you run infrastructure on cloud providers, you are often met with different regions and zones. For ideal high availability you should consider a minimum setup of 3 zones within a region as this will guarantee that in case of a zonal failure that the remaining two workloads can still process data. On Kubernetes, see [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha) for how to enforce that placement. For more information on how Zeebe handles fault tolerance, have a look at the [raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
+If you run infrastructure on cloud providers, you are often met with different regions and zones. For ideal high availability you should consider a minimum setup of 3 zones within a region as this will guarantee that in case of a zonal failure that the remaining two workloads can still process data. For more information on how Zeebe handles fault tolerance, have a look at the [raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 
 If running a single instance is preferred, make sure to implement [regular backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md) since resilience will be limited.
 

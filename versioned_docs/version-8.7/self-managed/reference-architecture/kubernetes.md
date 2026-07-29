@@ -88,7 +88,7 @@ In Kubernetes, Deployments and StatefulSets can be scaled independently of physi
 
 The default node affinity settings prevent Zeebe brokers from being scheduled on the same node, requiring a minimum three-node setup. For more details on Kubernetes affinity rules, see the [official documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
-To further enhance fault tolerance, it is recommended to distribute Zeebe brokers and other scaled applications across multiple availability zones. The default anti-affinity rules ensure broker pods run on distinct nodes, but do not ensure those nodes are in different zones — use the `zeebe.topologySpreadConstraints` Helm value to spread them across zones. For configuration details and caveats, see the [Helm chart production guide](/self-managed/operational-guides/production-guide/helm-chart-production-guide.md#reliability).
+To further enhance fault tolerance, it is recommended to distribute Zeebe brokers and other scaled applications across multiple availability zones using additional affinity rules, ensuring resilience in case of a zone failure.
 
 ### Components
 

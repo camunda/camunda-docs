@@ -26,7 +26,7 @@ By default, the chart configures a hard `podAntiAffinity` rule for the Orchestra
 
 The default `podAntiAffinity` rule ensures broker pods run on distinct nodes, but does not ensure those nodes are in different zones: if the cluster has more nodes than brokers, all brokers can still be scheduled into a single availability zone. Because broker persistent volumes are bound to a single zone on most cloud providers, a zonal outage can then take down the whole Orchestration Cluster.
 
-With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones. The value is a list of [Kubernetes topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) applied to the Orchestration Cluster pods, and it is empty by default:
+With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones. The value is a list of [Kubernetes topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) applied to the broker pods, and it is empty by default:
 
 ```yaml
 orchestration:
