@@ -91,7 +91,7 @@ Payments (Project)
     └── kyc-checks.dmn
 ```
 
-With a strict **Project > Process application > File/folder** hierarchy, resources are more discoverable and projects more scalable.
+This strict new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
 
 ### Migration
 
@@ -129,10 +129,10 @@ Review any automation that depends on where files or folders sit before the migr
 In addition to the Web Modeler data migration, 8.10 brings an improved versioning model for process applications:
 
 - File-level versions — process applications can be versioned as a bundle, as before, but now also at the single-file level.
-- Auto-save for all files, plus file-level version history for every file.
+- Autosave for all files, plus file-level version history for every file.
 - Decoupled versioning — process application versions and element template versions are now created independently of each other.
 
-A process application is no longer a rigid bundle. You can use it as a bundle of assets deployed together and Git-synced, or as a plain container for loose files and folders--whichever fits the work. This flexibility is why everything now lives inside a process application: being in one doesn't lock you into bundle behavior.
+A process application is no longer a rigid bundle. You can use it as a bundle of assets deployed together and Git-synced, or as a plain container for loose files and folders—whichever fits the work. This flexibility is why everything now lives inside a process application: being in one doesn't lock you into bundle behavior.
 
 ## Camunda 8 Run no longer requires Java
 
