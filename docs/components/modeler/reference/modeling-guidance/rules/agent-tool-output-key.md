@@ -5,6 +5,7 @@ description: Reference for the `agent-tool-output-key` rule.
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
+import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
 
 Tools inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) return their result to the agent through the `toolCallResult` variable. The AI Agent connector reads this variable from the tool's scope when the tool flow completes and passes the value back to the LLM.
 
@@ -24,7 +25,11 @@ The result can be set at any point in the tool's flow, not only on the entry ele
 
 ### Avoid overwrites when several elements contribute
 
-Assigning `toolCallResult` twice overwrites the first value. When several elements contribute parts of the result, append instead of assigning, using the FEEL `context put()` function in an output mapping:
+Assigning `toolCallResult` twice overwrites the first value:
+
+![Two activities in a tool's sub-flow, connected by a sequence flow, both mapping an output to toolCallResult: the second activity's value silently replaces the first's](./img/agent-tool-output-key/overwrite.png)
+
+When several elements contribute parts of the result, append instead of assigning, using the FEEL `context put()` function in an output mapping:
 
 ```feel
 = context put(toolCallResult, "confirmation", sendResult)
@@ -48,21 +53,7 @@ The tool maps its output to `result` instead of `toolCallResult`, or no element 
 
 An output mapping targets `toolCallResult` (or a part like `toolCallResult.statusCode`), a connector result expression contains a `toolCallResult` key, or a script task's result variable is `toolCallResult`.
 
-## Declaring a sub-process as agentic
-
-This rule only applies inside an ad-hoc sub-process recognized as a tool container: one that carries a `zeebe:property` named `io.camunda.agenticai.role` with value `toolContainer`, whether its tools are driven by an AI Agent task in the same process or a separate one.
-
-To set it, select the ad-hoc sub-process, open the **Extension properties** section in the properties panel, and add a property with name `io.camunda.agenticai.role` and value `toolContainer`. In the XML:
-
-```xml
-<bpmn:adHocSubProcess id="Tools">
-  <bpmn:extensionElements>
-    <zeebe:properties>
-      <zeebe:property name="io.camunda.agenticai.role" value="toolContainer" />
-    </zeebe:properties>
-  </bpmn:extensionElements>
-</bpmn:adHocSubProcess>
-```
+<DeclaringAgenticSubprocess />
 
 ## References
 

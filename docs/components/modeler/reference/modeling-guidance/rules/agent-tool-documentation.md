@@ -5,8 +5,9 @@ description: Reference for the `agent-tool-documentation` rule.
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
+import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
 
-Tools inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) need a documentation entry. The AI agent reads the tool's documentation to decide which tool to call and what it does. Without documentation, the agent falls back to the element's name, which is usually too vague to select the tool reliably.
+Tools inside an [AI agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) need a documentation entry. The AI agent reads the tool's documentation to decide which tool to call and what it does. Without documentation, the agent falls back to the element's name, which is usually too vague to select the tool reliably. Missing documentation degrades tool selection rather than breaking anything outright, so this rule reports a warning, not an error.
 
 This is a production-readiness concern: an undocumented tool can test well in development, where you exercise it deliberately, and then fail in production because the LLM never selects it (or selects it for the wrong request).
 
@@ -26,21 +27,7 @@ The tool's entry activity carries a documentation entry such as:
 
 A good tool description covers three things: what the tool does, when the agent should use it, and what it returns.
 
-## Declaring a sub-process as agentic
-
-This rule only applies inside an ad-hoc sub-process recognized as a tool container: one that carries a `zeebe:property` named `io.camunda.agenticai.role` with value `toolContainer`, whether its tools are driven by an AI Agent task in the same process or a separate one.
-
-To set it, select the ad-hoc sub-process, open the **Extension properties** section in the properties panel, and add a property with name `io.camunda.agenticai.role` and value `toolContainer`. In the XML:
-
-```xml
-<bpmn:adHocSubProcess id="Tools">
-  <bpmn:extensionElements>
-    <zeebe:properties>
-      <zeebe:property name="io.camunda.agenticai.role" value="toolContainer" />
-    </zeebe:properties>
-  </bpmn:extensionElements>
-</bpmn:adHocSubProcess>
-```
+<DeclaringAgenticSubprocess />
 
 ## References
 
