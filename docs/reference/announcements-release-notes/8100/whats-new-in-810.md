@@ -97,7 +97,7 @@ This strict new **Project > Process application > File/folder** hierarchy makes 
 
 For Self-Managed, your data will be migrated to the new organizational structure during the upgrade to Camunda 8.10. For SaaS, this happens automatically during a scheduled maintenance window.
 
-In the migration:
+During the migration:
 
 - Any process application nested inside a folder moves to the top level of its project.
 - Any files or folders sitting directly in a project, not inside a process application, are automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. When the migration is complete, you can rename this application, move content out of it, or otherwise reorganize it like any other process application.
