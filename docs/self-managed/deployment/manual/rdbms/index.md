@@ -71,7 +71,7 @@ graph LR
 
 - **Supported RDBMS**: See [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 - **JDBC drivers**: See [RDBMS configuration](/self-managed/deployment/manual/rdbms/configuration.md).
-- **Schemas and scripts**: Use the bundled SQL or Liquibase scripts for schema creation and upgrades. See [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
+- **Schemas and scripts**: Use the bundled SQL or Liquibase scripts for schema creation and upgrades. See [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
 ## When to choose manual installation
 

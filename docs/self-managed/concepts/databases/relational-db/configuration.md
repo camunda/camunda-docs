@@ -49,7 +49,7 @@ Liquibase creates two internal management tables:
 
 These tables must not be modified or deleted.
 
-For Helm deployments requiring manual schema control or access to vendor-specific SQL, see [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
+For Helm deployments requiring manual schema control or access to vendor-specific SQL, see [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
 ### Configure table prefix
 

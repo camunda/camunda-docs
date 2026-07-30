@@ -314,7 +314,7 @@ Then redeploy.
 
 **Symptom:** Logs show "permission denied" or "cannot create table."
 
-**Fix:** Verify database user has DDL permissions (see [Database user permissions](#database-user-permissions) above).
+**Fix:** Verify database user has DDL permissions (see [database user permissions](#database-user-permissions) above).
 
 ### Out-of-sync schema
 

@@ -1,6 +1,7 @@
 ---
 id: database-configuration
 title: "RDBMS configuration overview"
+sidebar_label: "Configuration overview"
 description: Learn how to configure Camunda to use a relational database as secondary storage, including exporter setup, schema management, privileges, and connection settings.
 ---
 
@@ -11,8 +12,7 @@ This page explains how RDBMS configuration works at the application level. If yo
 - [RDBMS configuration in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Access native SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
 
-For supported database vendors and versions, see the  
-[RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+For supported database vendors and versions, see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
 :::tip Need end-to-end guidance?
 For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
@@ -49,8 +49,7 @@ Liquibase creates two internal management tables:
 
 These tables must not be modified or deleted.
 
-For Helm deployments requiring manual schema control or access to vendor-specific SQL, see:  
-**[Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)**.
+For Helm deployments requiring manual schema control or access to vendor-specific SQL, see [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
 ### Configure table prefix
 
@@ -93,20 +92,6 @@ If using the RDBMS purge feature, the following privilege is required:
 
 - TRUNCATE
 
-## History cleanup
-
-The RDBMS exporter performs automatic history cleanup using two mechanisms:
-
-1. **TTL-based marking**  
-   Finished process instances and related data are marked for deletion after their configured history TTL expires.
-
-2. **Periodic cleanup job**  
-   A scheduled cleanup process deletes marked data in batches, adjusting its interval dynamically:
-
-- If no data is deleted → interval doubles (up to `max-history-cleanup-interval`)
-- If the batch limit is reached → interval halves (down to `min-history-cleanup-interval`)
-- Otherwise → the interval remains unchanged
-
 ## Database driver
 
 Camunda images include JDBC drivers for all supported databases except Oracle and MySQL.
@@ -129,9 +114,7 @@ Place the driver JAR directly inside the mounted directory (not in subfolders).
 
 ### Helm
 
-If you are using the Helm charts, refer to the database configuration guide for the supported driver configuration options:
-
-- [Helm database configuration](../../../../self-managed/deployment/helm/configure/database/index.md)
+When deploying with Helm, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
 
 ## Database configuration
 
@@ -233,16 +216,11 @@ camunda.data.secondary-storage.rdbms.history.*
 
 ## Multi-region support
 
-The RDBMS Exporter currently has no multi-region support. Only one RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster.
-
-:::note
-Multi-region support for the RDBMS Exporter is not planned at this time. For multi-region setups, multi-region replication must be handled within the RDBMS itself, for example using a managed database service such as AWS Aurora.
-:::
+One RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster. Multi-region support is not planned. For multi-region setups, handle replication within the RDBMS itself, for example using AWS Aurora.
 
 ## Usage with AWS Aurora PostgreSQL
 
-Camunda supports **PostgreSQL** as a secondary storage backend.  
-AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and is expected to work when configured like a standard PostgreSQL database.
+Camunda supports **PostgreSQL** as a secondary storage backend. AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and works when configured like a standard PostgreSQL database.
 
 In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
 
@@ -273,5 +251,4 @@ camunda:
         username: camunda
 ```
 
-The AWS JDBC wrapper JAR is shipped with the Camunda distribution, alongside most of the other JDBC drivers. There is
-no need to provide it separately.
+The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.

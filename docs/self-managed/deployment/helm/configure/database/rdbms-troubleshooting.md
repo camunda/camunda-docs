@@ -105,9 +105,9 @@ orchestration:
                 auto-ddl: false # Confirm this is set
 ```
 
-3. Test database user permissions (see [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#database-user-permissions)).
+3. Test database user permissions (see [schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#database-user-permissions)).
 
-**Fix:** Ensure database user has DDL permissions or disable autoDDL and apply schema manually. See [Schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md).
+**Fix:** Ensure database user has DDL permissions or disable autoDDL and apply schema manually. See [schema management](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md).
 
 ## Liquibase lock after pod crash or restart
 
