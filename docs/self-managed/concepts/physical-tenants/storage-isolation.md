@@ -12,6 +12,12 @@ Each Physical Tenant can use isolated secondary storage, ensuring complete struc
 - **[Provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md)** — Tenant operations
   :::
 
+:::caution Alpha limitation: Elasticsearch and OpenSearch not supported for multi-Physical-Tenant setups
+
+Elasticsearch and OpenSearch as secondary storage are not supported for multi-Physical-Tenant deployments in 8.10 alpha releases. Multi-Physical-Tenant setups require RDBMS (for example, PostgreSQL or Aurora) as secondary storage during the alpha. All tenants in a cluster must use the same secondary storage type; mixed backends across tenants are not supported.
+
+:::
+
 ## RDBMS storage
 
 Each Physical Tenant can have its own schema or database instance.
