@@ -57,7 +57,7 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 ### APIs & tools
 
-#### Public REST API
+#### Public Camunda Hub API
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
