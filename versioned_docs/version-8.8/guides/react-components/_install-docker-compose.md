@@ -9,4 +9,4 @@ If you haven't already, follow [this guide](/self-managed/quickstart/developer-q
 1. From the extracted directory, run `docker compose up -d`.
 1. Run `docker compose ps` and wait for the `orchestration`, `connectors`, and `elasticsearch` services to become healthy.
 
-To confirm Camunda 8 Self-Managed is running, open [Operate](http://localhost:8088/operate) and log in with username `demo` and password `demo`.
+To confirm Camunda 8 Self-Managed is running, open [Operate](http://localhost:8080/operate) and log in with username `demo` and password `demo`.

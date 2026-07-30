@@ -46,7 +46,7 @@ To start a specific configuration, run one of the following commands:
   ```
 
 :::note
-The Orchestration Cluster uses file-based H2 secondary storage by default. The PostgreSQL containers in the full configuration store Management Identity and Web Modeler data, not Orchestration Cluster data. The full configuration still requires Elasticsearch for Optimize.
+The Orchestration Cluster uses file-based H2 secondary storage by default. The PostgreSQL containers in the full configuration store Management Identity and Camunda Hub data, not Orchestration Cluster data. The full configuration still requires Elasticsearch for Optimize.
 
 To select another Orchestration Cluster backend, see [configure secondary storage with Docker Compose](./secondary-storage.md).
 :::

@@ -20,7 +20,7 @@ Camunda 8.10 uses different application configuration files for the lightweight 
 | Lightweight `docker-compose.yaml` | File-based H2             | Set `ORCHESTRATION_CONFIG_FILE` to a file from `configuration/`, then edit that file for your database connection.                                                                     |
 | Full `docker-compose-full.yaml`   | File-based H2             | Replace the `camunda.data.secondary-storage` settings in `.orchestration/application.yaml` with the matching block from the file in `configuration/`, then edit the connection values. |
 
-The full setup also requires an external Elasticsearch instance for Optimize. The PostgreSQL containers in the full setup store Management Identity and Web Modeler data; they do not store Orchestration Cluster data.
+The full setup also requires an external Elasticsearch instance for Optimize. The PostgreSQL containers in the full setup store Management Identity and Camunda Hub data; they do not store Orchestration Cluster data.
 
 :::warning
 Do not replace `.orchestration/application.yaml` in the full setup with a file from `configuration/`. The files in `configuration/` use the lightweight setup's Basic authentication settings. Replacing the full file removes its OpenID Connect (OIDC) and component configuration.
