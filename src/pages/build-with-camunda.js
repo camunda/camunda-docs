@@ -1325,8 +1325,8 @@ Available skills:
                 <DockerIcon />
                 <h3>Docker Compose</h3>
                 <p>
-                  Run the full Camunda stack locally with a single{" "}
-                  <CodeBlock>docker compose up</CodeBlock>.
+                  Run Camunda 8 locally for development and evaluation with{" "}
+                  <CodeBlock>docker compose</CodeBlock>.
                 </p>
               </Link>
               <Link

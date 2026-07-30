@@ -4,8 +4,9 @@ import { camundaReleaseVersion } from "../Versions";
 const DockerComposeBaseURL =
   "https://github.com/camunda/camunda-distributions/releases/download";
 
-const DockerCompose = () => {
-  const version = camundaReleaseVersion();
+const DockerCompose = ({ version: requestedVersion }) => {
+  const activeVersion = camundaReleaseVersion();
+  const version = requestedVersion ?? activeVersion;
   return (
     <a
       title={`${DockerComposeBaseURL}/docker-compose-${version}/docker-compose-${version}.zip`}

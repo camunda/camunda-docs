@@ -10,11 +10,11 @@ Use this page to choose the Docker Compose file that matches your local setup, f
 
 Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
 
-| Configuration file                | Description                                                                                                                                                                                                                                       |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster, Connectors, and Elasticsearch. Use this for most local development scenarios.                                                                                              |
-| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Use this when you need management components, process optimization, or browser-based modeling. |
-| `docker-compose-web-modeler.yaml` | Standalone Web Modeler configuration. Runs only Web Modeler and its dependencies. For deployment details, see [deploy with Web Modeler](./connectors-and-modeling.md#deploy-with-web-modeler).                                                    |
+| Configuration file                | Description                                                                                                                                                                                                                                                      |
+| :-------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. Use this for most local development scenarios.                                                                                   |
+| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, Web Modeler, and Elasticsearch. Use this when you need management components, process optimization, or browser-based modeling. |
+| `docker-compose-web-modeler.yaml` | Standalone Web Modeler configuration. Runs only Web Modeler and its dependencies. For deployment details, see [deploy with Web Modeler](./connectors-and-modeling.md#deploy-with-web-modeler).                                                                   |
 
 To start a specific configuration, run one of the following commands:
 
@@ -37,7 +37,7 @@ To start a specific configuration, run one of the following commands:
   ```
 
 :::note
-In these quickstart configurations, the Orchestration Cluster uses Elasticsearch as secondary storage by default. The PostgreSQL container in the full configuration is used by management components such as Management Identity and Web Modeler, not as Orchestration Cluster secondary storage.
+The Orchestration Cluster uses file-based H2 secondary storage by default in both the lightweight and full configurations. The PostgreSQL containers in the full configuration store Management Identity and Web Modeler data. The bundled Elasticsearch service supports Optimize and legacy exporters; it is not the Orchestration Cluster's configured secondary-storage backend.
 
 If you want to run the Orchestration Cluster with RDBMS secondary storage, see [configure secondary storage with Docker Compose](./secondary-storage.md).
 :::
@@ -76,11 +76,11 @@ The following components are available in the full configuration only:
 
 ### External dependencies
 
-| Component     | Configuration        | URL                                                          | Description                                                                                                                                                          |
-| :------------ | :------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage, and by Optimize in the full configuration.                                                                   |
-| Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`.  |
-| PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity and Web Modeler. In these quickstart configurations, the Orchestration Cluster continues to use Elasticsearch as secondary storage. |
+| Component     | Configuration | URL                                                          | Description                                                                                                                                                         |
+| :------------ | :------------ | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Elasticsearch | Full          | [http://localhost:9200](http://localhost:9200)               | Used by Optimize and legacy exporters. The Orchestration Cluster uses H2 secondary storage by default.                                                              |
+| Keycloak      | Full          | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`. |
+| PostgreSQL    | Full          | Internal only                                                | Database for Management Identity and Web Modeler. This database is separate from Orchestration Cluster secondary storage.                                           |
 
 ## Authentication
 

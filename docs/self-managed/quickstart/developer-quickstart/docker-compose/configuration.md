@@ -10,11 +10,11 @@ Use this page to choose the Docker Compose file that matches your local setup, f
 
 Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
 
-| Configuration file                | Description                                                                                                                                                                                                                                                                          |
-| :-------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses H2 secondary storage by default. Use this for most local development scenarios.                                                                                                       |
-| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Console, Management Identity, Keycloak, PostgreSQL, and Web Modeler. Requires an external Elasticsearch instance for Optimize. Use this when you need management components or browser-based modeling. |
-| `docker-compose-web-modeler.yaml` | Standalone Web Modeler configuration. Runs only Web Modeler and its dependencies. For deployment details, see [deploy with Web Modeler](./connectors-and-modeling.md#deploy-with-web-modeler).                                                                                       |
+| Configuration file                | Description                                                                                                                                                                                                                                                                           |
+| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses H2 secondary storage by default. Use this for most local development scenarios.                                                                                                        |
+| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Camunda Hub, Management Identity, Keycloak, and PostgreSQL. Requires an external Elasticsearch instance. Use this when you need management components, process optimization, or browser-based modeling. |
+| `docker-compose-web-modeler.yaml` | Standalone Camunda Hub configuration. Runs Camunda Hub and its dependencies without an Orchestration Cluster. For deployment details, see [deploy with Camunda Hub](./connectors-and-modeling.md#deploy-with-camunda-hub).                                                            |
 
 To start a specific configuration, run one of the following commands:
 
@@ -30,7 +30,7 @@ To start a specific configuration, run one of the following commands:
   docker compose -f docker-compose-full.yaml up -d
   ```
 
-- Standalone Web Modeler:
+- Standalone Camunda Hub:
 
   ```shell
   docker compose -f docker-compose-web-modeler.yaml up -d
@@ -67,12 +67,11 @@ The Orchestration Cluster is the core of Camunda 8 and provides process automati
 
 The following components are available in the full configuration only:
 
-| Component           | URL                                            | Description                                                                                                                                                                   |
-| :------------------ | :--------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Console             | [http://localhost:8087](http://localhost:8087) | [Manage clusters](/components/hub/organization/manage-clusters/manage-cluster.md) and component configurations.                                                               |
-| Optimize            | [http://localhost:8083](http://localhost:8083) | [Analyze and improve](/components/optimize/what-is-optimize.md) process performance.                                                                                          |
-| Management Identity | [http://localhost:8084](http://localhost:8084) | [Manage users](/self-managed/components/management-identity/overview.md) for Console, Optimize, and Web Modeler.                                                              |
-| Web Modeler         | [http://localhost:8070](http://localhost:8070) | Model [BPMN](/components/modeler/bpmn/bpmn.md) processes, [DMN](/components/modeler/dmn/dmn.md) decisions, and [forms](/components/modeler/forms/camunda-forms-reference.md). |
+| Component           | URL                                            | Description                                                                                                                                                                                       |
+| :------------------ | :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Optimize            | [http://localhost:8083](http://localhost:8083) | [Analyze and improve](/components/optimize/what-is-optimize.md) process performance.                                                                                                              |
+| Management Identity | [http://localhost:8084](http://localhost:8084) | [Manage users](/self-managed/components/management-identity/overview.md) for Camunda Hub and Optimize.                                                                                            |
+| Camunda Hub         | [http://localhost:8070](http://localhost:8070) | Manage clusters and model [BPMN](/components/modeler/bpmn/bpmn.md) processes, [DMN](/components/modeler/dmn/dmn.md) decisions, and [forms](/components/modeler/forms/camunda-forms-reference.md). |
 
 ### External dependencies
 
@@ -80,7 +79,7 @@ The following components are available in the full configuration only:
 | :------------ | :------------ | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Elasticsearch | Full          | Configured in `.env`                                         | External instance required by Optimize. Camunda 8.10 Docker Compose does not start Elasticsearch.                                                                   |
 | Keycloak      | Full          | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`. |
-| PostgreSQL    | Full          | `localhost:5432`                                             | Database for Management Identity and Web Modeler. This database is separate from Orchestration Cluster secondary storage.                                           |
+| PostgreSQL    | Full          | Internal only                                                | Database for Management Identity and Camunda Hub. This database is separate from Orchestration Cluster secondary storage.                                           |
 
 ## Authentication
 
@@ -95,7 +94,7 @@ By default, the lightweight configuration uses [Basic authentication for the Orc
 
 ### Full configuration
 
-- **Web UI:** Log in to Operate, Tasklist, Console, Optimize, and Web Modeler with `demo` / `demo`.
+- **Web UI:** Log in to Operate, Tasklist, Optimize, and Camunda Hub with `demo` / `demo`.
 - **APIs:** REST and gRPC APIs require OAuth with the following settings:
   - **Client ID:** `orchestration`
   - **Client secret:** `secret`

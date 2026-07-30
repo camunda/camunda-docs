@@ -19,15 +19,15 @@ The [Docker images](/self-managed/deployment/docker/docker.md) are supported for
 
 The following prerequisites are required to run Camunda Self-Managed via Docker Compose:
 
-| Prerequisite   | Description                                                                                                           |
-| :------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| Docker Compose | Version 1.27.0 or later (supports the [latest Compose specification](https://docs.docker.com/compose/compose-file/)). |
-| Docker         | Version 20.10.16 or later.                                                                                            |
+| Prerequisite   | Description                                                                              |
+| :------------- | :--------------------------------------------------------------------------------------- |
+| Docker Compose | Version 2.24.0 or later, which supports the Compose attributes used by the distribution. |
+| Docker         | Version 20.10.16 or later.                                                               |
 
 :::tip Troubleshooting unsupported attributes
 If Docker Compose reports errors such as "unsupported attribute" when loading the Camunda Compose files:
 
-- Confirm you are using the Docker Compose v2 plugin:
+- Confirm you are using Docker Compose version 2.24.0 or later:
 
   ```shell
   docker compose version
@@ -39,16 +39,18 @@ If Docker Compose reports errors such as "unsupported attribute" when loading th
 
 ## Run Camunda 8 with Docker Compose
 
-To start a complete Camunda 8 Self-Managed environment locally:
+To start the default lightweight Camunda 8 Self-Managed environment locally:
 
-1. Download the artifact for Camunda 8 <DockerCompose/>, then extract it.
+1. Download the Camunda 8 <DockerCompose/> archive, then extract it. Keep the complete directory, including `.env` and the hidden component configuration directories.
 1. In the extracted directory, run:
 
    ```shell
    docker compose up -d
    ```
 
-1. Wait for the environment to initialize (this can take several minutes). Monitor the logs (especially the Keycloak container log) to ensure all components start.
+1. Wait for the environment to initialize. This can take several minutes. Run `docker compose ps` to check service health, or `docker compose logs -f orchestration connectors` to follow the lightweight startup.
+
+Run Compose commands from the extracted directory. If Compose reports that image-version variables are unset or `.env` is missing, download and extract the complete distribution archive again instead of downloading an individual Compose file.
 
 ### Docker Compose configurations
 
@@ -100,7 +102,7 @@ By default, the Orchestration Cluster uses [Basic authentication](/self-managed/
 | :------------ | :------------------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Elasticsearch | Lightweight and full | [http://localhost:9200](http://localhost:9200)               | Used by the Orchestration Cluster as secondary storage (and Optimize in the full configuration).                                                              |
 | Keycloak      | Full                 | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Identity instead. Access with `admin` / `admin`. |
-| PostgreSQL    | Full                 | `localhost:5432`                                             | Database for Management Identity.                                                                                                                             |
+| PostgreSQL    | Full                 | Internal only                                                | Database for Management Identity and Web Modeler.                                                                                                             |
 
 #### Configuration files and options
 
@@ -151,6 +153,9 @@ docker compose down -v
 
 # or for the full configuration:
 docker compose -f docker-compose-full.yaml down -v
+
+# or for standalone Web Modeler:
+docker compose -f docker-compose-web-modeler.yaml down -v
 ```
 
 :::caution
