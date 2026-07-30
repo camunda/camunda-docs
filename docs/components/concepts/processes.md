@@ -4,7 +4,7 @@ title: "Processes"
 description: "Processes are flowchart-like blueprints that define the orchestration of tasks."
 ---
 
-A [process](/reference/glossary.md#process) is a defined sequence of distinct steps or tasks representing your business logic. Examples of a process include an e-commerce shopping experience or onboarding a new employee.
+A [process](/reference/glossary.md#process) is a defined sequence of distinct steps or tasks representing your business logic. For example, an e-commerce shopping experience or onboarding a new employee.
 
 Process orchestration is the technology that coordinates the various moving parts, or endpoints, of a business process, and sometimes ties multiple processes together. It helps you work with the people, systems, and devices you already have, while achieving goals around end-to-end process automation.
 
