@@ -8,9 +8,9 @@ A [process](/reference/glossary.md#process) is a defined sequence of distinct st
 
 Other examples of a process include an e-commerce shopping experience or onboarding a new employee.
 
-At large, process orchestration is a technology that coordinates the various moving parts (or endpoints) of a business process, and sometimes even ties multiple processes together. Process orchestration helps you work with the people, systems, and devices you already have—while achieving goals around end-to-end process automation.
+At large, process orchestration is a technology that coordinates the various moving parts (or endpoints) of a business process, and sometimes even ties multiple processes together. Process orchestration helps you work with the people, systems, and devices you already have, while achieving goals around end-to-end process automation.
 
-For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-example.md), and [APIs](/guides/getting-started-orchestrate-apis.md).
+For example, with Camunda you can [orchestrate human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-example.md), [APIs](/guides/getting-started-orchestrate-apis.md), and [AI agents](/guides/getting-started-agentic-orchestration.md).
 
 A **[job worker](./job-workers.md)** implements the business logic required to complete a task. You can choose to write a worker as a microservice, or also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 
