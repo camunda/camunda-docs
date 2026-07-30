@@ -232,9 +232,20 @@ Camunda supports different strategies to handle this situation and preventing lo
 prematurely.
 The following strategies are supported:
 
+- **LSN replication monitoring:** dynamic monitoring of the replication lag based on the database LSN. This is the most
+  preferred strategy and should be used whenever possible with the used database vendor.
+- **Delay backoff replication monitoring:** Adds a static delay to the acknowledgement of records to the broker.
+
+:::note
+Deferring the logstream compaction with either strategy may drastically increase the disk space usage of the logstream.
+It is recommended to monitor the disk space usage and adjust the disk size or delay limit accordingly.
+:::
+
 ### LSN replication monitoring
 
-The exporter monitors the replication lag to the secondary databases based on the Log Sequence Number (LSN) of the last exported record. Only when a log segment is replicated to a minimum quorum of secondary databases, the exporter will acknowledge the records in the logstream.
+The exporter monitors the replication lag to the secondary databases based on the Log Sequence Number (LSN) of the last
+exported record. Only when a log segment is replicated to a minimum quorum of secondary databases, the exporter will
+acknowledge the records in the logstream.
 
 ```yaml
 camunda.data.secondary-storage.rdbms.async-replication.enabled: true
@@ -267,9 +278,24 @@ To use the LSN replication monitoring with PostgreSQL, the database user must ha
 GRANT PG_MONITOR TO <user>;
 ```
 
+To use the LSN replication monitoring with MSSQL, the database user must have the following additional privileges:
+
+- `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
+- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 202 and newer versions
+
+```sql
+GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
+```
+
 ### Delay backoff replication monitoring
 
 The exporter always waits for a configured amount of time until an exported record is acknowledged to the broker as exported. This is supported for all databases.
+
+This is a fallback strategy for databases that do not support any other direct replication monitoring. It does not
+directly monitor any replication state, but instead adds a static delay to the acknowledgement of records to the broker.
+This can be used as a safety net to ensure that the logstream segments are not compacted too early, even if the database
+replication is not fully in sync. This strategy requires external monitoring of the actual replication lag to ensure
+that the configured delay is sufficient for the database replication to catch up in case of a failover.
 
 ```yaml
 camunda.data.secondary-storage.rdbms.async-replication.enabled: true
