@@ -7,11 +7,9 @@ description: Backup, restore, upgrade, troubleshoot, tune, and secure RDBMS for 
 
 Operate and maintain RDBMS secondary storage for manual Camunda 8 installations (VM, bare metal, or standalone Java).
 
-## Operations
+## Backup and restore
 
-### Backup and restore
-
-**DBA owns backups** using native RDBMS tools (pg_dump, mysqldump, RMAN, etc.). Camunda handles consistency.
+**DBA owns backups** using native RDBMS tools (pg_dump, mysqldump, RMAN, and similar). Camunda handles consistency.
 
 - Use vendor-recommended backup procedures.
 - Backup frequency depends on your RPO (Recovery Point Objective).
@@ -24,14 +22,14 @@ Operate and maintain RDBMS secondary storage for manual Camunda 8 installations 
 2. Start Camunda pointing to restored database.
 3. Check logs for Liquibase completion and RdbmsExporter success.
 
-### Schema upgrades
+## Schema upgrades
 
 1. Backup your database.
 2. Download scripts for target version: [Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 3. **If using autoDDL (default)**: Liquibase runs on Zeebe startup.
 4. **If using manual schema management**: Apply scripts manually, then start new Camunda version.
 
-### Disabling automatic schema updates
+## Disabling automatic schema updates
 
 For strict change control environments:
 
@@ -151,7 +149,7 @@ Create user with minimum required privileges:
 CREATE ROLE camunda LOGIN PASSWORD 'secure-password';
 GRANT CONNECT ON DATABASE camunda TO camunda;
 GRANT USAGE ON SCHEMA public TO camunda;
-GRANT CREATE ON DATABASE camunda TO camunda;
+GRANT CREATE ON SCHEMA public TO camunda;
 ```
 
 Avoid DROP, TRUNCATE, SUPERUSER, or other unnecessary privileges.

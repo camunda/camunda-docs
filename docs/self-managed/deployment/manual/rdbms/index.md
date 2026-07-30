@@ -5,6 +5,8 @@ title: Manual installation with RDBMS
 description: Install Camunda 8 manually on VMs or bare metal with RDBMS as secondary storage.
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 Install Camunda 8 Self-Managed manually on a VM, bare-metal server, or standalone Java runtime while using a relational database (RDBMS) as **secondary storage**.
 
 :::caution
@@ -83,9 +85,7 @@ The Orchestration Cluster is fully supported with RDBMS secondary storage for wo
 
 ## Get started
 
-1. [Configure drivers and connections](/self-managed/deployment/manual/rdbms/configuration.md).
-2. Review [operations and maintenance](/self-managed/deployment/manual/rdbms/operations.md) for backup, upgrades, troubleshooting, and tuning.
-3. Review [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture) for backend trade-offs and [manual production architecture](/self-managed/deployment/manual/rdbms/rdbms-production-architecture.md) for manual deployment topology guidance.
+<DocCardList />
 
 ## Related documentation
 
