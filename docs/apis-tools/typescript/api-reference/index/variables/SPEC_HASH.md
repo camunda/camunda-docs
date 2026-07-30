@@ -8,5 +8,5 @@ mdx:
 # Variable: SPEC\_HASH
 
 ```ts
-const SPEC_HASH: "sha256:73ad42fb782f5c72dd84bdc40ef81313976c3f4083436c18c7019e7e0a3295cc";
+const SPEC_HASH: "sha256:a7939e6269dd779f0b706ea2869d62646eeec0b54b8f35cb0f8185da92e84a9d";
 ```

@@ -8,8 +8,7 @@ mdx:
 # Type Alias: JobResult
 
 ```ts
-type JobResult =
-  (object & JobResultUserTask) | (object & JobResultAdHocSubProcess);
+type JobResult = JobResultUserTask | JobResultAdHocSubProcess;
 ```
 
 The result of the completed job as determined by the worker.

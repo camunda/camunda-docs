@@ -8,14 +8,6 @@ mdx:
 # Type Alias: ProcessInstanceCreationRuntimeInstruction
 
 ```ts
-type ProcessInstanceCreationRuntimeInstruction = object &
+type ProcessInstanceCreationRuntimeInstruction =
   ProcessInstanceCreationTerminateInstruction;
-```
-
-## Type Declaration
-
-### type
-
-```ts
-type: "TERMINATE_PROCESS_INSTANCE";
 ```

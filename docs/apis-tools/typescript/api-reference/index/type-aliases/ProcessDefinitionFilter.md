@@ -78,6 +78,20 @@ Resource name of this process definition.
 
 ---
 
+### state?
+
+```ts
+optional state?: "ACTIVE" | "DELETED";
+```
+
+Filter by the process definition's state.
+When not set, process definitions in any state are returned.
+Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases).
+Set to `DELETED` to return only definitions that have been deleted but are still
+retained in secondary storage.
+
+---
+
 ### tenantId?
 
 ```ts
