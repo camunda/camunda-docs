@@ -73,10 +73,6 @@ To set a different business ID on the child instance, configure the `businessId`
 </bpmn:callActivity>
 ```
 
-:::note
-Modeler UI support for configuring the `businessId` attribute in the properties panel is not yet available. Configure it directly in the XML until UI support ships.
-:::
-
 You can use the FEEL expression context variable `camunda.processInstance.businessId` to reference the parent instance's business ID in the expression.
 
 | Configuration                           | Effect                                                                                             |
