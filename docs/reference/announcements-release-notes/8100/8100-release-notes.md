@@ -38,6 +38,18 @@ import PageDescription from '@site/src/components/PageDescription';
 | :------------- | :-------------------------------------------------------------------------------------------------- | :--- |
 | 11 August 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha4)</li></ul> | -    |
 
+### Modeler
+
+#### Improved BPMN element menus
+
+<!-- https://github.com/camunda/product-hub/issues/3480 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+The create, append, and change menus now group BPMN elements into categories — tasks, gateways, events, and so on — each with a short description, so you find the right element at a glance. Search still spans all categories. When appending, elements that can continue a flow show a subtle indicator pointing to where the flow continues next, and selecting one brings up the append pad with a prominent Append action.
+
+<p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
+
 ### Web apps
 
 #### Frontend application unification
@@ -52,15 +64,25 @@ Operate, Tasklist, and Admin are now served from a single frontend application w
 
 ### Orchestration Cluster
 
-#### Elasticsearch 9.4 and OpenSearch 3.6 support
+#### Elasticsearch 9.x and OpenSearch 3.x support
 
 <!-- https://github.com/camunda/product-hub/issues/3588 -->
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 now supports Elasticsearch 9.4 and OpenSearch 3.6. The minimum supported Elasticsearch 9.x version is raised to 9.4; Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+ remain supported. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+Camunda 8.10 supports Elasticsearch 9.3+, Elasticsearch 8.19+, OpenSearch 3.5–3.7, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
 
 <p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+#### S3-compatible object stores for Document Handling
+
+<!-- https://github.com/camunda/product-hub/issues/3507 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Document Handling now supports any S3-compatible object store — such as MinIO, Cloudian, or Garage — alongside Amazon S3, Google Cloud Storage, and Azure Blob Storage. Configure an S3-compatible backend by pointing the existing AWS S3 document store at a custom endpoint. No migration is required for existing AWS S3 deployments.
+
+<p class="link-arrow">[Document store configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
 
 #### Physical Tenant identity support
 
