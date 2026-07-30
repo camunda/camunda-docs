@@ -1,15 +1,15 @@
-## Declaring a sub-process as agentic
+## Declare a sub-process as agentic
 
-This rule only applies inside an ad-hoc sub-process recognized as a tool container. Camunda's provided AI Agent element templates are already compatible, at any template version. A sub-process is recognized in one of two ways:
+This rule applies only within an ad-hoc sub-process recognized as a tool container. Camunda’s provided AI Agent element templates are compatible with this rule, regardless of the template version. An ad-hoc sub-process is recognized as a tool container in either of the following ways:
 
-- Its `zeebe:modelerTemplate` attribute equals `io.camunda.connectors.agenticai.aiagent.jobworker.v1`, the AI Agent job-worker template, matched at any template version.
-- It carries a `zeebe:property` named `io.camunda.agenticai.toolContainer` with value `true`, whether its tools are driven by an AI Agent task in the same process or a separate one. Starting with Camunda `8.10.0-alpha4`, out-of-the-box AI Agent element templates write this property for you; it's the supported long-term path.
+- Its `zeebe:modelerTemplate` attribute is set to `io.camunda.connectors.agenticai.aiagent.jobworker.v1`, which identifies the AI Agent job worker template. Any version of this template is supported.
+- It has a `zeebe:property` named `io.camunda.agenticai.toolContainer` with the value `true`, regardless of whether its tools are invoked by an AI Agent task in the same process or in a separate process. Starting with Camunda `8.10.0-alpha4`, the out-of-the-box AI Agent element templates add this property automatically. This property is the supported long-term approach.
 
-If you're not using an out-of-the-box template, or your template version predates that change, add the property yourself. Select the ad-hoc sub-process, open the **Extension properties** section in the properties panel, and add a property with name `io.camunda.agenticai.toolContainer` and value `true`. It appears there as a plain extension property, not a dedicated control:
+If you are not using an out-of-the-box template, or if your template version predates this change, add the property manually. Select the ad-hoc sub-process, open the **Extension properties** section in the properties panel, and add a property named `io.camunda.agenticai.toolContainer` with the value `true`. The property appears as a standard extension property rather than as a dedicated control:
 
 ![Extension properties section showing the toolContainer property on an ad-hoc sub-process with no element template applied](./img/agentic-subprocess/extension-properties.png)
 
-In the XML:
+In the XML, the property appears as follows:
 
 ```xml
 <bpmn:adHocSubProcess id="Tools">
