@@ -36,14 +36,14 @@ Use this workflow for each backend:
 1. If the backend requires an external JDBC driver, place the driver JAR directly in `driver-lib/`.
 1. Start the setup with the command shown for that backend.
 
-| Backend              | Application file              | Hostname from the override | JDBC driver                                        |
-| :------------------- | :---------------------------- | :------------------------- | :------------------------------------------------- |
-| H2                   | `application-h2.yaml`         | Not applicable             | Included                                           |
-| PostgreSQL           | `application-postgresql.yaml` | `postgres-secondary`       | Included                                           |
-| MariaDB              | `application-mariadb.yaml`    | `mariadb-secondary`        | Add the MariaDB Connector/J JAR to `driver-lib/`   |
-| MySQL                | `application-mysql.yaml`      | `mysql-secondary`          | Add the MySQL Connector/J JAR to `driver-lib/`     |
-| Oracle               | `application-oracle.yaml`     | `oracle-secondary`         | Add the Oracle JDBC driver JAR to `driver-lib/`    |
-| Microsoft SQL Server | `application-mssql.yaml`      | `mssql-secondary`          | Add the Microsoft JDBC Driver JAR to `driver-lib/` |
+| Backend              | Application file              | Hostname from the override | JDBC driver                                     |
+| :------------------- | :---------------------------- | :------------------------- | :---------------------------------------------- |
+| H2                   | `application-h2.yaml`         | Not applicable             | Included                                        |
+| PostgreSQL           | `application-postgresql.yaml` | `postgres-secondary`       | Included                                        |
+| MariaDB              | `application-mariadb.yaml`    | `mariadb-secondary`        | Included                                        |
+| MySQL                | `application-mysql.yaml`      | `mysql-secondary`          | Add the MySQL Connector/J JAR to `driver-lib/`  |
+| Oracle               | `application-oracle.yaml`     | `oracle-secondary`         | Add the Oracle JDBC driver JAR to `driver-lib/` |
+| Microsoft SQL Server | `application-mssql.yaml`      | `mssql-secondary`          | Included                                        |
 
 When the database runs from `docker-compose.override.yaml`, replace `localhost` in the selected JDBC URL with the hostname shown in the table. The MySQL file uses host port `3307` by default; container-to-container traffic uses MySQL port `3306` instead.
 
@@ -111,8 +111,6 @@ services:
   orchestration:
     depends_on:
       - mariadb-secondary
-    volumes:
-      - ./driver-lib:/driver-lib:ro
     networks:
       - secondary-storage
 
@@ -142,8 +140,6 @@ ORCHESTRATION_CONFIG_FILE=application-mariadb.yaml docker compose -f docker-comp
 # Full setup
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
-
-Place the MariaDB Connector/J JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="mysql">
@@ -242,8 +238,6 @@ services:
   orchestration:
     depends_on:
       - mssql-secondary
-    volumes:
-      - ./driver-lib:/driver-lib:ro
     networks:
       - secondary-storage
 
@@ -276,8 +270,6 @@ docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
-
-Place the Microsoft JDBC Driver JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="h2">

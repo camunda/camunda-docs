@@ -126,6 +126,32 @@ To start specific configurations:
   docker compose -f docker-compose-web-modeler.yaml up -d
   ```
 
+#### Customize application configuration
+
+The lightweight setup keeps Orchestration Cluster and Connectors application YAML inline under `configs` in `docker-compose.yaml`. The full and standalone setups mount component-owned files from the extracted distribution:
+
+| Setup and component                     | Application configuration source                                                                                             |
+| :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                            |
+| Full Connectors                         | `.connectors/application.yaml`                                                                                               |
+| Full Optimize                           | Files under `.optimize/`                                                                                                     |
+| Full Console                            | Files under `.console/`                                                                                                      |
+| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-web-modeler.yaml`         |
+| Full and standalone Web Modeler         | `.web-modeler/application.yaml`; the full setup also imports cluster registrations from `.web-modeler/application-full.yaml` |
+
+Choose the configuration mechanism based on the value you need to change:
+
+| Goal                                      | Configuration method                                                                                                                                                  |
+| :---------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Change lightweight application defaults   | Edit the inline `configs.content` YAML in `docker-compose.yaml`.                                                                                                      |
+| Change full or standalone defaults        | Edit the component-owned YAML file. Keep the existing authentication and component wiring when you change a subsection.                                               |
+| Change a provided runtime value or secret | Edit `.env`. The mounted YAML resolves placeholders such as `${VARIABLE:default}` from the container environment.                                                     |
+| Maintain a separate environment set       | Copy the complete `.env` file, update the copy, and run `docker compose --env-file <file> ...`. The custom file must retain image versions and other required values. |
+| Override an additional Spring property    | Add the environment variable to the relevant service in `docker-compose.override.yaml`. Spring environment variables override values from mounted application YAML.   |
+| Provide connector secrets                 | Add local development secrets to `connector-secrets.txt`. Do not put connector credentials in application YAML.                                                       |
+
+PostgreSQL, Keycloak, Elasticsearch, Web Modeler WebSockets, the separate Web Modeler webapp, Console, and other non-Spring services continue to use the environment settings defined by their Compose services. Keep the distribution's example credentials for local development only.
+
 ### Authentication
 
 #### Lightweight configuration (default)

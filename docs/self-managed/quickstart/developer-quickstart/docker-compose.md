@@ -40,6 +40,10 @@ For prerequisites, startup commands, and shutdown commands, see [install and sta
 
 For lightweight, full, and standalone Camunda Hub configurations, plus component URLs and authentication defaults, see [configure Docker Compose environments](./docker-compose/configuration.md#choose-a-docker-compose-configuration).
 
+### Customize application settings
+
+For mounted application files, `.env`, Spring environment overrides, and connector secrets, see [customize application configuration](./docker-compose/configuration.md#customize-application-configuration).
+
 ### Configure secondary storage {#configure-secondary-storage}
 
 For Elasticsearch, OpenSearch, PostgreSQL, MariaDB, MySQL, Oracle, Microsoft SQL Server, and H2 examples, see [configure secondary storage with Docker Compose](./docker-compose/secondary-storage.md#choose-a-database-configuration-path).
