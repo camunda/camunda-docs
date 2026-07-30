@@ -60,7 +60,7 @@ Camunda provides a process orchestration layer that coordinates these endpoints 
 
 Many processes also require human input, either as a normal step (for example, review or approval) or as a fallback when automation can't proceed. With Camunda, you can model human tasks alongside automated steps, then assign, track, and escalate work so the process keeps moving. For example, if customer onboarding is blocked waiting for a verification task, the process can route to the right person, enforce due dates, and make the delay visible in operations tooling.
 
-Camunda also supports agentic orchestration. You can treat AI agents as process endpoints, just like a microservice or API call, and orchestrate them together with deterministic steps and human checkpoints. You can also build agents in Camunda by modeling agent behavior such as planning loops, tool use, and reflection, including short-term and long-term memory and retrieval-augmented generation (RAG). This makes agent actions observable and auditable, and it helps you combine dynamic agent decisions with the guardrails and policies your process requires, such as role-based access control, compliance boundaries, incident recovery capabilities, and audit trails.
+Not every step in a process can be fully predetermined. When the right action depends on judgment, such as interpreting a document, deciding which check to run next, or triaging an exception, you can hand that step to an AI agent, then return to the fixed steps that follow. Camunda treats agents as process endpoints, just like a microservice or API call, and orchestrates them together with deterministic steps and human checkpoints. You can also build agents directly in Camunda by modeling agent behavior such as planning loops, tool use, and reflection, including short-term and long-term memory and retrieval-augmented generation (RAG). Because agents run inside the same governed process, their actions are observable and auditable by default, and the guardrails and policies your process requires, such as role-based access control, compliance boundaries, incident recovery capabilities, and audit trails, apply to agent-driven steps as well.
 
 Common use cases include orchestrating microservices across complex integrations, modernizing long-running processes that cross legacy systems, coordinating human work with automation, and running AI-assisted steps (for example, document interpretation or decision support) inside governed, end-to-end processes.
 
@@ -69,8 +69,8 @@ Common use cases include orchestrating microservices across complex integrations
 Camunda 8 is designed to operate on a very large scale. To achieve this, it provides:
 
 - **Horizontal scalability** and no dependence on an external database; [Zeebe](/components/zeebe/zeebe-overview.md) (the workflow engine inside Camunda 8) writes data directly to the file system on the same servers where it is deployed. Zeebe enables distribution processing across a cluster of machines to deliver high throughput.
-- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime. This ensures the system as a whole remains available without requiring manual action, which is particularly critical for AI-assisted processes, where every agent decision and action must be traceable end-to-end.
-- **Audit trail** as all process-relevant events are written to an append-only log, providing an audit trail and a history of the state of a process.
+- **High availability and fault tolerance** via a pre-configured replication mechanism, ensuring Camunda 8 can recover from machine or software failure with no data loss and minimal downtime, including AI agents, which resume with their conversation state and progress intact. This ensures the system as a whole remains available without requiring manual action.
+- **Audit trail** as all process-relevant events, including every AI agent decision and tool call, are written to an append-only log, providing an audit trail and a history of the state of a process.
 - **Reactive publish-subscribe interaction model** which enables microservices that connect to Camunda 8 to maintain a high degree of control and autonomy, including control over processing rates. These properties make Camunda 8 resilient, scalable, and reactive.
 - **Visual processes modeled in ISO-standard BPMN 2.0** so technical and business stakeholders can collaborate on process design in a widely-used modeling language.
 - **Language-agnostic client model** makes it possible to build a client in nearly any programming language an organization uses to automate work.
@@ -88,7 +88,7 @@ Connectors communicate with any system or technology, reducing the time it takes
 
 #### AI agents
 
-Build [governed AI agents](/components/agentic-orchestration/ai-agents.md) (addressable executions of an LLM-driven loop with shared memory across iterations) with guardrails so they can solve complex problems with autonomy. Camunda implements agentic BPMN that enables teams to model deterministic process logic and dynamic agentic behavior, such as reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries, in one unified, executable model.
+Build governed [AI agents](/reference/glossary.md#ai-agent) with guardrails so they can solve complex problems with autonomy. Camunda's [agentic BPMN](/components/agentic-orchestration/ai-agents.md) lets teams model deterministic process logic and dynamic agentic behavior, such as reasoning loops, memory, prompts, RAG, and human‑in‑the‑loop boundaries, in one unified, executable model.
 
 #### Forms
 
@@ -134,7 +134,7 @@ Event streaming avoids database bottlenecks and can scale process throughput in 
 
 ### Intelligence
 
-Camunda enables teams to embed AI agents into governed business processes, combining autonomous agent reasoning with the auditability and compliance controls that enterprise operations require.
+Rather than relying on prompt instructions alone to keep agents in bounds, Camunda enforces guardrails structurally, as explicit steps in the process, so agent behavior stays governed as autonomy increases. Camunda is model- and framework-agnostic: bring your own LLM, and orchestrate agents built with other frameworks alongside agents modeled natively in BPMN, all within the same auditable process.
 
 ## Next steps
 

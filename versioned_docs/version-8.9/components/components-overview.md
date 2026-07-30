@@ -65,7 +65,13 @@ Get started with selected key features and integrations.
 
 <UsingGrid using={featuresCards} />
 
-## Using Camunda
+## Build with AI
+
+Build AI agents and connect AI tooling to your processes, with the same governance and reliability as any other Camunda component.
+
+<p><a href="../guides/build-with-ai/overview/" class="link-arrow">Build with AI</a></p>
+
+## Camunda components
 
 Explore and learn about Camunda components and BPMN, DMN, and FEEL expressions.
 

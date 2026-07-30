@@ -4,9 +4,9 @@ title: "Processes"
 description: "Processes are flowchart-like blueprints that define the orchestration of tasks."
 ---
 
-A [process](/reference/glossary.md#process) is a defined sequence of distinct steps or tasks representing your business logic. Examples of a process could be an e-commerce shopping experience, or onboarding a new employee.
+A [process](/reference/glossary.md#process) is a defined sequence of distinct steps or tasks representing your business logic. For example, an order fulfillment process could run a fixed sequence of steps, then hand off a step to an [AI agent](/reference/glossary.md#ai-agent) that decides which tools to call to resolve a customer's request, before returning control to the next fixed step. Camunda runs these ad-hoc, agent-driven steps on the same engine as fixed ones, with the same variables, error handling, and monitoring. See [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) for how Camunda governs this blend of deterministic and AI-driven orchestration.
 
-A process can also combine that predefined sequence with ad-hoc steps whose order is decided at runtime, such as an [AI agent](/reference/glossary.md#ai-agent) selecting and running tools to reach a goal. Camunda runs these dynamic steps on the same engine as fixed ones, with the same variables, error handling, and monitoring. See [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) for how Camunda governs this blend of deterministic and AI-driven orchestration.
+Other examples of a process include an e-commerce shopping experience or onboarding a new employee.
 
 At large, process orchestration is a technology that coordinates the various moving parts (or endpoints) of a business process, and sometimes even ties multiple processes together. Process orchestration helps you work with the people, systems, and devices you already have—while achieving goals around end-to-end process automation.
 
