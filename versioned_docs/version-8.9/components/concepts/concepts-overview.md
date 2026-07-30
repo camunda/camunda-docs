@@ -25,16 +25,16 @@ Camunda 8 separates runtime execution data from analytical and operational data 
 
 In the diagram above, storage systems appear in two distinct roles:
 
-- **Primary storage** — The authoritative store for runtime execution state used by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
-- **Secondary storage** — Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
+- **Primary storage**: The authoritative store for runtime execution state used by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
+- **Secondary storage**: Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
 
 ### Secondary storage implementations
 
 Camunda 8 supports multiple secondary storage backends, depending on the deployment model and configuration:
 
-- **Embedded H2** — A bundled secondary storage option for local development and lightweight setups. See [H2](/reference/glossary.md#h2).
-- **External RDBMS** — A user-managed relational database used as secondary storage in Self-Managed deployments. See [RDBMS](/reference/glossary.md#rdbms).
-- **Elasticsearch / OpenSearch** — Search-optimized backends commonly used for analytics and operational visibility. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
+- **Embedded H2**: A bundled secondary storage option for local development and lightweight setups. See [H2](/reference/glossary.md#h2).
+- **External RDBMS**: A user-managed relational database used as secondary storage in Self-Managed deployments. See [RDBMS](/reference/glossary.md#rdbms).
+- **Elasticsearch / OpenSearch**: Search-optimized backends commonly used for analytics and operational visibility. See [Elasticsearch/OpenSearch](/reference/glossary.md#elasticsearchopensearch).
 
 For deployment and configuration guidance, see the Self-Managed documentation:
 

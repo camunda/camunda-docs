@@ -33,7 +33,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 
 Orchestrate and automate complex business processes for people, systems, devices, and [AI agents](/reference/glossary.md#ai-agent). Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Build with AI" href="../guides/build-with-ai/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Build with AI</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Build with AI" href="../guides/build-with-ai/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Learn how to build agentic solutions</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
