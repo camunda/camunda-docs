@@ -88,7 +88,7 @@ You can now perform rolling upgrades of self-managed Camunda 8 between patch and
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-In Web Modeler, you can now hide the **Add user** button on the project's **Collaborators** page. When this feature is enabled, users who are not organization admins can only add collaborators with the Web Modeler API's [modify collaborator endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator).
+In Self-Managed, you can now hide the **Add user** button on Web Modeler's **Collaborators** page, preventing non-organization admins from adding collaborators in the UI. They can still add collaborators via the [modify collaborator API endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
 
 <p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
 
