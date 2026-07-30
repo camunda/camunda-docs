@@ -43,12 +43,6 @@ Orchestrate and automate complex business processes for people, systems, devices
 </div>
 </div>
 
-:::info Camunda 8.8
-
-- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
-
-:::
-
 ## Introduction to Camunda 8
 
 Learn how Camunda 8 components work together to orchestrate and automate business processes, including people, systems, devices, and AI agents.
