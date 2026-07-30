@@ -17,7 +17,7 @@ Camunda 8 with Docker Compose includes the following:
 
 - Orchestration Cluster
 - Connectors
-- Elasticsearch as the default secondary storage in the lightweight configuration
+- File-based H2 as the default secondary storage in the lightweight configuration
 
 ## Pages in this section
 

@@ -46,26 +46,26 @@ If you want to run the Orchestration Cluster with RDBMS secondary storage, see [
 
 The extracted distribution mounts component-owned application YAML into the Camunda containers. Use the file that belongs to your Compose setup and component.
 
-| Setup and component                     | Application configuration source                                                                                             |
-| :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                |
-| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                          |
-| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                            |
-| Full Connectors                         | `.connectors/application.yaml`                                                                                               |
-| Full Optimize                           | Files under `.optimize/`                                                                                                     |
-| Full Console                            | Files under `.console/`                                                                                                      |
-| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-web-modeler.yaml`         |
-| Full and standalone Web Modeler         | `.web-modeler/application.yaml`; the full setup also imports cluster registrations from `.web-modeler/application-full.yaml` |
+| Setup and component                     | Application configuration source                                                                                                                                                  |
+| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                                                                     |
+| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                                                                               |
+| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                                                                                 |
+| Full Connectors                         | `.connectors/application.yaml`                                                                                                                                                    |
+| Full Optimize                           | Files under `.optimize/`                                                                                                                                                          |
+| Full Console                            | Files under `.console/`                                                                                                                                                           |
+| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-web-modeler.yaml`                                                              |
+| Full and standalone Web Modeler         | `.web-modeler/application.yaml`; the full setup mounts `.web-modeler/application-full.yaml` as the primary file, which adds the cluster registrations and imports the shared file |
 
 Choose the configuration mechanism based on the value you need to change:
 
-| Goal                                      | Configuration method                                                                                                                                                  |
-| :---------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Change a component's application defaults | Edit the component-owned YAML file. Keep the existing authentication and component wiring when you change a subsection.                                               |
-| Change a provided runtime value or secret | Edit `.env`. The mounted YAML resolves placeholders such as `${VARIABLE:default}` from the container environment.                                                     |
-| Maintain a separate environment set       | Copy the complete `.env` file, update the copy, and run `docker compose --env-file <file> ...`. The custom file must retain image versions and other required values. |
-| Override an additional Spring property    | Add the environment variable to the relevant service in `docker-compose.override.yaml`. Spring environment variables override values from mounted application YAML.   |
-| Provide connector secrets                 | Add local development secrets to `connector-secrets.txt`. Do not put connector credentials in application YAML.                                                       |
+| Goal                                      | Configuration method                                                                                                                                                                                                                                                                                                                  |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Change a component's application defaults | Edit the component-owned YAML file. Keep the existing authentication and component wiring when you change a subsection.                                                                                                                                                                                                               |
+| Change a provided runtime value or secret | Edit `.env`. The mounted YAML resolves placeholders such as `${VARIABLE:default}` from the container environment.                                                                                                                                                                                                                     |
+| Maintain a separate environment set       | Copy the complete `.env` file, update the copy, and run `docker compose --env-file <file> ...`. The custom file must retain image versions and other required values. `--env-file` only replaces the variable interpolation source, and the Camunda services still load `.env` itself through `env_file`, so keep both files in sync. |
+| Override an additional Spring property    | Add the environment variable to the relevant service in `docker-compose.override.yaml`. Spring environment variables override values from mounted application YAML.                                                                                                                                                                   |
+| Provide connector secrets                 | Add local development secrets to `connector-secrets.txt`. Do not put connector credentials in application YAML.                                                                                                                                                                                                                       |
 
 PostgreSQL, Keycloak, Elasticsearch, Web Modeler WebSockets, Console, and other non-Spring services continue to use the environment settings defined by their Compose services. Keep the distribution's example credentials for local development only.
 

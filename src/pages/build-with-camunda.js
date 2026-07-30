@@ -1326,7 +1326,7 @@ Available skills:
                 <h3>Docker Compose</h3>
                 <p>
                   Run Camunda 8 locally for development and evaluation with{" "}
-                  <CodeBlock>docker compose</CodeBlock>.
+                  <CodeBlock>docker compose up -d</CodeBlock>.
                 </p>
               </Link>
               <Link

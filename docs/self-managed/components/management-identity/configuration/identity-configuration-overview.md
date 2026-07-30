@@ -13,7 +13,7 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authenticati
 
 ## Configure Management Identity IdP
 
-Management Identity uses built-in Keycloak as its identity provider (IdP) by default when the selected deployment includes both components.
+When a deployment includes Management Identity, it uses the packaged Keycloak as its identity provider (IdP) by default.
 
 You can configure your Management Identity IdP using the following options:
 

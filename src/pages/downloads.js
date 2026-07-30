@@ -1089,7 +1089,7 @@ function Downloads() {
                 <h3>Docker Compose</h3>
                 <p>
                   Run Camunda 8 locally for development and evaluation with{" "}
-                  <code>docker compose</code>.
+                  <code>docker compose up -d</code>.
                 </p>
               </Link>
               <Link

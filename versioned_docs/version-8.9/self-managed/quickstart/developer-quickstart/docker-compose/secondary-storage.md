@@ -292,6 +292,10 @@ Use H2 only for development, testing, and evaluation. It is not a production bac
 
 To switch from RDBMS to a document-store backend, override the backend type and connection settings. The full setup continues to use its bundled Elasticsearch service for Optimize even when the Orchestration Cluster uses a separate Elasticsearch or OpenSearch service.
 
+:::note
+In the full setup, `.orchestration/application.yaml` also pins the webapp database keys `camunda.database.type`, `camunda.operate.database`, and `camunda.tasklist.database` to `rdbms`. Update those keys in that file to match the backend you select, otherwise Operate and Tasklist keep their RDBMS wiring after you switch. The lightweight `configuration/` files do not set these keys, so the environment overrides below are sufficient there.
+:::
+
 <Tabs groupId="docker-compose-docstore" defaultValue="elasticsearch" values={[
 {label: 'Elasticsearch', value: 'elasticsearch'},
 {label: 'OpenSearch', value: 'opensearch'},

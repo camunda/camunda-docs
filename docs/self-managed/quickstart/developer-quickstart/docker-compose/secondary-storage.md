@@ -263,11 +263,13 @@ networks:
 # Lightweight setup
 docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d mssql-secondary
 docker compose -f docker-compose.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
+docker compose -f docker-compose.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF SUSER_ID('camunda') IS NULL CREATE LOGIN camunda WITH PASSWORD='Camunda123!', CHECK_POLICY=OFF; USE camunda_secondary; IF USER_ID('camunda') IS NULL CREATE USER camunda FOR LOGIN camunda; ALTER ROLE db_owner ADD MEMBER camunda"
 ORCHESTRATION_CONFIG_FILE=application-mssql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
 
 # Full setup
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d mssql-secondary
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF SUSER_ID('camunda') IS NULL CREATE LOGIN camunda WITH PASSWORD='Camunda123!', CHECK_POLICY=OFF; USE camunda_secondary; IF USER_ID('camunda') IS NULL CREATE USER camunda FOR LOGIN camunda; ALTER ROLE db_owner ADD MEMBER camunda"
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
 
@@ -295,6 +297,10 @@ For a document-store backend, add the backend settings to `docker-compose.overri
 
 :::note
 These examples change the Orchestration Cluster secondary storage only. In the full setup, Optimize always requires Elasticsearch. The Elasticsearch example can serve both Orchestration and Optimize. If Orchestration uses OpenSearch, configure a separate Elasticsearch endpoint for Optimize in `.env`.
+:::
+
+:::note
+In the full setup, `.orchestration/application.yaml` also pins the webapp database keys `camunda.database.type`, `camunda.operate.database`, and `camunda.tasklist.database` to `rdbms`. Update those keys in that file to match the backend you select, otherwise Operate and Tasklist keep their RDBMS wiring after you switch. The lightweight `configuration/` files do not set these keys, so the environment overrides below are sufficient there.
 :::
 
 <Tabs groupId="docker-compose-docstore" defaultValue="elasticsearch" values={[

@@ -24,11 +24,20 @@ To start a specific configuration, run one of the following commands:
   docker compose up -d
   ```
 
-- Full configuration:
+- Full configuration. Camunda 8.10 Docker Compose does not start Elasticsearch, so start an external instance first and leave it running:
 
   ```shell
+  docker run -d --name camunda-elasticsearch -p 9200:9200 \
+    -e discovery.type=single-node \
+    -e xpack.security.enabled=false \
+    -e cluster.routing.allocation.disk.threshold_enabled=false \
+    -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
+    docker.elastic.co/elasticsearch/elasticsearch:8.19.11
+
   docker compose -f docker-compose-full.yaml up -d
   ```
+
+  The `ELASTICSEARCH_*` values in `.env` point at `host.docker.internal:9200` by default, which resolves to this container. Set them to your own endpoint if you already run Elasticsearch elsewhere.
 
 - Standalone Camunda Hub:
 
@@ -46,25 +55,25 @@ To select another Orchestration Cluster backend, see [configure secondary storag
 
 The extracted distribution mounts component-owned application YAML into the Camunda containers. Use the file that belongs to your Compose setup and component.
 
-| Setup and component                     | Application configuration source                                                                                             |
-| :-------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------- |
-| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                |
-| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                          |
-| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                            |
-| Full Connectors                         | `.connectors/application.yaml`                                                                                               |
-| Full Optimize                           | `.optimize/environment-config.yaml` and `.optimize/application-ccsm.yaml`                                                    |
-| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-web-modeler.yaml`         |
-| Full and standalone Camunda Hub         | `.web-modeler/application.yaml`; the full setup also imports cluster registrations from `.web-modeler/application-full.yaml` |
+| Setup and component                     | Application configuration source                                                                                                                                                  |
+| :-------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lightweight Orchestration Cluster       | `configuration/${ORCHESTRATION_CONFIG_FILE}`; defaults to `configuration/application-h2.yaml`                                                                                     |
+| Lightweight Connectors                  | Inline `connectors-config` under `configs` in `docker-compose.yaml`                                                                                                               |
+| Full Orchestration Cluster              | `.orchestration/application.yaml`                                                                                                                                                 |
+| Full Connectors                         | `.connectors/application.yaml`                                                                                                                                                    |
+| Full Optimize                           | `.optimize/environment-config.yaml` and `.optimize/application-ccsm.yaml`                                                                                                         |
+| Full and standalone Management Identity | `.identity/application.yaml`; the standalone-only client overlay remains inline in `docker-compose-web-modeler.yaml`                                                              |
+| Full and standalone Camunda Hub         | `.web-modeler/application.yaml`; the full setup mounts `.web-modeler/application-full.yaml` as the primary file, which adds the cluster registrations and imports the shared file |
 
 Choose the configuration mechanism based on the value you need to change:
 
-| Goal                                      | Configuration method                                                                                                                                                  |
-| :---------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Change a component's application defaults | Edit the component-owned YAML file. Keep the existing authentication and component wiring when you change a subsection.                                               |
-| Change a provided runtime value or secret | Edit `.env`. The mounted YAML resolves placeholders such as `${VARIABLE:default}` from the container environment.                                                     |
-| Maintain a separate environment set       | Copy the complete `.env` file, update the copy, and run `docker compose --env-file <file> ...`. The custom file must retain image versions and other required values. |
-| Override an additional Spring property    | Add the environment variable to the relevant service in `docker-compose.override.yaml`. Spring environment variables override values from mounted application YAML.   |
-| Provide connector secrets                 | Add local development secrets to `connector-secrets.txt`. Do not put connector credentials in application YAML.                                                       |
+| Goal                                      | Configuration method                                                                                                                                                                                                                                                                                                                  |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Change a component's application defaults | Edit the component-owned YAML file. Keep the existing authentication and component wiring when you change a subsection.                                                                                                                                                                                                               |
+| Change a provided runtime value or secret | Edit `.env`. The mounted YAML resolves placeholders such as `${VARIABLE:default}` from the container environment.                                                                                                                                                                                                                     |
+| Maintain a separate environment set       | Copy the complete `.env` file, update the copy, and run `docker compose --env-file <file> ...`. The custom file must retain image versions and other required values. `--env-file` only replaces the variable interpolation source, and the Camunda services still load `.env` itself through `env_file`, so keep both files in sync. |
+| Override an additional Spring property    | Add the environment variable to the relevant service in `docker-compose.override.yaml`. Spring environment variables override values from mounted application YAML.                                                                                                                                                                   |
+| Provide connector secrets                 | Add local development secrets to `connector-secrets.txt`. Do not put connector credentials in application YAML.                                                                                                                                                                                                                       |
 
 PostgreSQL, Keycloak, Camunda Hub WebSockets, and other non-Spring services continue to use the environment settings defined by their Compose services. Keep the distribution's example credentials for local development only.
 
@@ -103,7 +112,7 @@ The following components are available in the full configuration only:
 
 | Component     | Configuration | URL                                                          | Description                                                                                                                                                         |
 | :------------ | :------------ | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch | Full          | Configured in `.env`                                         | External instance required by Optimize. Camunda 8.10 Docker Compose does not start Elasticsearch.                                                                   |
+| Elasticsearch | Full          | Configured in `.env`                                         | External instance required by Optimize and by the Orchestration Cluster's `elasticsearch` exporter. Camunda 8.10 Docker Compose does not start Elasticsearch.       |
 | Keycloak      | Full          | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`. |
 | PostgreSQL    | Full          | Internal only                                                | Database for Management Identity and Camunda Hub. This database is separate from Orchestration Cluster secondary storage.                                           |
 

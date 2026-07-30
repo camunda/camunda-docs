@@ -98,7 +98,7 @@ Non-production installations of Web Modeler are limited to five collaborators pe
 
 #### Standalone setup
 
-To start Web Modeler, Management Identity, Keycloak, PostgreSQL, and Mailpit independently, run:
+To start Web Modeler, its WebSockets service, Management Identity, Keycloak, PostgreSQL, and Mailpit independently, run:
 
 ```shell
 docker compose -f docker-compose-web-modeler.yaml up -d
