@@ -217,7 +217,7 @@ kubectl scale deployment camunda-orchestration --replicas=0 -n camunda
 ```
 
 Apply the SQL scripts from the Camunda release bundle or from
-the [Liquibase scripts page](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md), then
+the [Liquibase scripts page](/self-managed/manage/databases/relational-database/access-sql-liquibase-scripts.md), then
 deploy the new Camunda version:
 
 ```bash
