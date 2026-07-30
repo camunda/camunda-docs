@@ -24,7 +24,7 @@ The security warning does not indicate a security vulnerability. This warning ca
 
 In both cases, the security warning is a precautionary measure from Bitnami's detection system and does not indicate a genuine security risk.
 
-For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
+For detailed information about CVE management and why Bitnami images show security warnings, see [Understanding CVEs in Bitnami images](/self-managed/deploy-to-production/kubernetes/configure/bitnami-enterprise-images.md#understanding-cves-in-bitnami-images).
 
 ### Suppress the warning
 
@@ -338,7 +338,7 @@ skopeo --override-os linux inspect docker://registry.camunda.cloud/camunda/zeebe
 :::note Bitnami Premium (`vendor-ee/*`) images
 Since the November 30, 2025 vendor migration, `skopeo` and the Harbor UI return only the `vendor-ee/*` tags cached since the migration, so registry tag listing is incomplete. Do not rely on it.
 
-Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
+Use the published per-image feed instead, which is generated from the upstream catalog and is always complete: see [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/bitnami-enterprise-images.md#browse-available-images-and-tags). For supported images and tags, see the [Camunda Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/). To obtain a specific tag, pull or mirror it by its exact tag.
 :::
 
 ## Incorrect authorizations when deploying resources from Modeler

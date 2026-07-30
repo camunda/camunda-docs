@@ -28,7 +28,7 @@ PostgreSQL, Elasticsearch, and Keycloak are **external dependencies** — they a
   :::
 
 :::note Alternative: Bitnami Enterprise Images
-If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md) for detailed instructions.
+If you prefer to continue using Bitnami subcharts, you can enable them by using Bitnami Enterprise images. See [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/bitnami-enterprise-images.md) for detailed instructions.
 :::
 
 <MigrationTip />

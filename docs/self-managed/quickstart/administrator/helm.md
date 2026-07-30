@@ -210,7 +210,7 @@ This command lists all available chart versions and their corresponding applicat
 - **Zeebe** supports Kubernetes startup and liveness probes. See [Gateway health probes](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway-health-probes.md).
 - **Zeebe** must be deployed as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) to preserve cluster node identities. StatefulSets require persistent storage, which you must provision in advance. The type of storage depends on your cloud provider.
 - **Docker pull limits** apply when downloading Camunda 8 images from Docker Hub. To avoid disruptions, authenticate with Docker Hub or use a mirror registry.
-- **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/air-gapped-installation.md).
+- **Air-gapped environments** require additional configuration. See [Helm chart air-gapped environment installation](/self-managed/deploy-to-production/kubernetes/install/air-gapped-installation.md).
 - **Full deployment**: To deploy all Camunda 8 components with OIDC authentication and Kubernetes operators, follow our [kind tutorial](/self-managed/quickstart/administrator/kind.md) or the [cloud provider guides](/self-managed/deploy-to-production/kubernetes/clusters/index.md).
 
 ## Next steps

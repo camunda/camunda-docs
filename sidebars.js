@@ -1841,6 +1841,7 @@ module.exports = {
                     "self-managed/deploy-to-production/kubernetes/install/production/index",
                     "self-managed/deploy-to-production/kubernetes/install/helm-with-rdbms",
                     "self-managed/deploy-to-production/kubernetes/install/helm-v4",
+                    "self-managed/deploy-to-production/kubernetes/install/air-gapped-installation",
                   ],
                 },
                 {
@@ -1854,18 +1855,7 @@ module.exports = {
                     "self-managed/deploy-to-production/kubernetes/configure/application-configs",
                     "self-managed/deploy-to-production/kubernetes/configure/pod-networking",
                     "self-managed/deploy-to-production/kubernetes/configure/enable-additional-components",
-                    {
-                      type: "category",
-                      label: "Registry and images",
-                      link: {
-                        type: "doc",
-                        id: "self-managed/deploy-to-production/kubernetes/configure/registry-and-images/index",
-                      },
-                      items: [
-                        "self-managed/deploy-to-production/kubernetes/configure/registry-and-images/air-gapped-installation",
-                        "self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images",
-                      ],
-                    },
+                    "self-managed/deploy-to-production/kubernetes/configure/bitnami-enterprise-images",
                     {
                       type: "category",
                       label: "Ingress",

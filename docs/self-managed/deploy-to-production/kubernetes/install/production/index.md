@@ -491,7 +491,7 @@ The following resources and configuration options are important to keep in mind 
 
 - It is recommended to pull images exclusively from a private registry, such as [Amazon ECR](https://aws.amazon.com/ecr/), rather than directly from Docker Hub. Doing so enhances control over the images, avoids rate limits, and improves performance and reliability. Additionally, you can configure your cluster to pull images only from trusted registries. Tools like [Open Policy Agent](https://blog.openpolicyagent.org/securing-the-kubernetes-api-with-open-policy-agent-ce93af0552c3#3c6e) can be used to enforce this restriction.
 
-- Please refer to our [installing in an air-gapped environment guide](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/air-gapped-installation.md) when deploying Camunda in Air-gapped environments
+- Please refer to our [installing in an air-gapped environment guide](/self-managed/deploy-to-production/kubernetes/install/air-gapped-installation.md) when deploying Camunda in Air-gapped environments
 
 - Open Policy Agent can also be used to [allowlist Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
 

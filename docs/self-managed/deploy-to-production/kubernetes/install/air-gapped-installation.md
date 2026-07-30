@@ -74,7 +74,7 @@ These open-source images are the community default but are not recommended for p
 :::tip Enterprise benefits
 The `vendor-ee` registry provides proxied access to Bitnami Premium images from Broadcom, offering enhanced security patches, enterprise support, and compliance features.
 
-For detailed configuration and installation instructions, see [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md).
+For detailed configuration and installation instructions, see [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/bitnami-enterprise-images.md).
 :::
 
 #### Camunda Keycloak images
@@ -145,7 +145,7 @@ skopeo copy --src-creds=<your-username>:<your-password> \
 - Replace `<your-username>` and `<your-password>` with your Camunda Enterprise LDAP credentials.
 - Replace `your-private-registry.com` with your actual private registry URL.
 - Use the image tags that match your Helm chart version requirements.
-- For a complete list of available enterprise images and their tags, see [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md).
+- For a complete list of available enterprise images and their tags, see [Install Bitnami enterprise images](/self-managed/deploy-to-production/kubernetes/configure/bitnami-enterprise-images.md).
 
 ### Required Helm charts
 

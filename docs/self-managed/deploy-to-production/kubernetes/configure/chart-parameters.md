@@ -57,7 +57,7 @@ See [RDBMS configuration](/self-managed/manage/databases/relational-database/con
 - Manage infrastructure lifecycle independently of Camunda applications
 - Implement your organization's security, backup, and monitoring standards
 
-If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deploy-to-production/kubernetes/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
+If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deploy-to-production/kubernetes/configure/bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
 
 ### Observability
 
