@@ -795,7 +795,7 @@ CAMUNDA_MODELER_FEATURE_WORKSPACE_MEMBER_INVITE_HIDDEN_ENABLED=true
 </TabItem>
 </Tabs>
 
-Organization admins always see the button, regardless of this setting. All other users will not see With this enabled, you must add members with the [Camunda Hub API](/apis-tools/hub-api-sm/overview.md).
+Organization admins always see the button, regardless of this setting. Other users will not see the button. Instead, they must add members with the [Camunda Hub API](/apis-tools/hub-api-sm/overview.md).
 
 ### Unstable configuration options
 
