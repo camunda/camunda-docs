@@ -62,6 +62,69 @@
       "label": "Restore from a backup"
     }
   ],
+  "take_runtime_backup": [
+    {
+      "file": "backup.py",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "list_runtime_backups": [
+    {
+      "file": "backup.py",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "get_runtime_backup": [
+    {
+      "file": "backup.py",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "delete_runtime_backup": [
+    {
+      "file": "backup.py",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "get_runtime_backup_state": [
+    {
+      "file": "backup.py",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
+    }
+  ],
+  "sync_runtime_backup_state": [
+    {
+      "file": "backup.py",
+      "region": "SyncRuntimeBackupState",
+      "label": "Force-write the runtime backup state"
+    }
+  ],
+  "delete_runtime_backup_state": [
+    {
+      "file": "backup.py",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
+  "pause_exporting": [
+    {
+      "file": "exporting.py",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "resume_exporting": [
+    {
+      "file": "exporting.py",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
   "get_status": [
     {
       "file": "admin_operations.py",
@@ -1446,6 +1509,13 @@
       "file": "secret.py",
       "region": "ResolveSecrets",
       "label": "Resolve secrets"
+    }
+  ],
+  "list_secrets": [
+    {
+      "file": "secret.py",
+      "region": "ListSecrets",
+      "label": "List secrets"
     }
   ]
 }
