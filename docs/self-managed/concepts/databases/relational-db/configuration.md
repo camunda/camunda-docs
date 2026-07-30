@@ -224,12 +224,12 @@ provides additional features to enhance automatic recovery in the event of a fai
 
 Asynchronous replicated databases are synchronised with a delay, meaning that after a failover, the new primary database
 may not contain all the data written to the old primary database. This can lead to data loss in secondary storage. While
-this data can be reproduced by replaying past records from the log stream, the relevant segments and records must still
-be present on all brokers. Logstream segments are usually compacted as soon as all exporters have acknowledged the
+this data can be reproduced by replaying past records from the Zeebe log stream, the relevant segments and records must still
+be present on all brokers. Zeebes lgstream segments are usually compacted as soon as all exporters have acknowledged the
 records.
 
-Camunda supports different strategies to handle this situation and preventing log stream segments from being compacted
-prematurely.
+Camunda supports different strategies to handle this situation and preventing Zeebe log stream segments from being
+compacted prematurely.
 The following strategies are supported:
 
 - **LSN replication monitoring:** dynamic monitoring of the replication lag based on the database LSN. This is the most
@@ -244,8 +244,8 @@ It is recommended to monitor the disk space usage and adjust the disk size or de
 ### LSN replication monitoring
 
 The exporter monitors the replication lag to the secondary databases based on the Log Sequence Number (LSN) of the last
-exported record. Only when a log segment is replicated to a minimum quorum of secondary databases, the exporter will
-acknowledge the records in the logstream.
+exported record. Only when an RDBMS redo log segment is replicated to a minimum quorum of secondary databases, the
+exporter will acknowledge the records in the logstream.
 
 ```yaml
 camunda.data.secondary-storage.rdbms.async-replication.enabled: true
@@ -293,7 +293,7 @@ The exporter always waits for a configured amount of time until an exported reco
 
 This is a fallback strategy for databases that do not support any other direct replication monitoring. It does not
 directly monitor any replication state, but instead adds a static delay to the acknowledgement of records to the broker.
-This can be used as a safety net to ensure that the logstream segments are not compacted too early, even if the database
+This can be used as a safety net to ensure that the Zeebe logstream segments are not compacted too early, even if the database
 replication is not fully in sync. This strategy requires external monitoring of the actual replication lag to ensure
 that the configured delay is sufficient for the database replication to catch up in case of a failover.
 
