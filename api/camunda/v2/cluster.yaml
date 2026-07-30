@@ -36,7 +36,7 @@ paths:
         - Cluster
       operationId: getStatus
       security: []
-      summary: Get cluster status
+      summary: Get physical tenant status
       description: |-
 
 
@@ -46,13 +46,56 @@ paths:
 
         [[CONSISTENCY:STRONG]]
 
-        Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader.
+        Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). On a cluster with only the default physical tenant this endpoint answers the same question as `/cluster/v2/status`, though not with the same response: `/cluster/v2/status` reports its status in a body and so also distinguishes a degraded tenant from a healthy one. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant's partitions.
       responses:
         "204":
-          description: The cluster is UP and has at least one partition with a healthy leader.
+          description: The default physical tenant is UP and has at least one partition with a healthy leader.
         "503":
-          description: The cluster is DOWN and does not have any partition with a healthy leader.
+          description: The default physical tenant is DOWN and does not have any partition with a healthy leader.
       x-added-in-version: "8.8"
+  /cluster/v2/status:
+    servers:
+      - url: "{schema}://{host}:{port}"
+        variables:
+          host:
+            default: localhost
+            description: The hostname of the Orchestration Cluster REST Gateway.
+          port:
+            default: "8080"
+            description: The port of the Orchestration Cluster REST API server.
+          schema:
+            default: http
+            description: The schema of the Orchestration Cluster REST API server.
+    get:
+      tags:
+        - Cluster
+      operationId: getClusterStatus
+      security: []
+      summary: Get the status of the whole cluster
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W119]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
+      responses:
+        "200":
+          description: The cluster can process work; the body reports whether it is fully healthy or degraded.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterStatusResponse"
+        "503":
+          description: The cluster is DOWN because no physical tenant can process work.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClusterStatusResponse"
+      x-added-in-version: "8.10"
   /mode:
     patch:
       tags:
@@ -73,22 +116,8 @@ paths:
 
         Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology.
       parameters:
-        - name: mode
-          in: query
-          required: true
-          description: The target cluster mode.
-          schema:
-            type: string
-            enum:
-              - PROCESSING
-              - RECOVERING
-        - name: dryRun
-          in: query
-          required: false
-          description: If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.
-          schema:
-            type: boolean
-            default: false
+        - $ref: "#/components/parameters/ModeParameter"
+        - $ref: "#/components/parameters/DryRunParameter"
       responses:
         "200":
           description: The mode change request was accepted; returns the planned cluster changes.
@@ -145,7 +174,43 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
       x-added-in-version: "8.10"
 components:
+  parameters:
+    ModeParameter:
+      name: mode
+      in: query
+      required: true
+      description: The target cluster mode.
+      schema:
+        $ref: "#/components/schemas/Mode"
+    DryRunParameter:
+      name: dryRun
+      in: query
+      required: false
+      description: If true, the requested change is only validated and the resulting plan is returned, without applying it to the cluster.
+      schema:
+        type: boolean
+        default: false
   schemas:
+    ClusterStatusResponse:
+      description: The aggregated status of the whole cluster.
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          description: "`HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case."
+          type: string
+          example: HEALTHY
+          enum:
+            - HEALTHY
+            - DEGRADED
+            - DOWN
+    Mode:
+      description: The operating mode of a cluster's partitions.
+      type: string
+      enum:
+        - PROCESSING
+        - RECOVERING
     TopologyResponse:
       description: The response of a topology request.
       type: object

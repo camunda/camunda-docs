@@ -128,6 +128,54 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Backup",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup",
+          label: "Take a runtime backup",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups",
+          label: "List runtime backups",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup-state",
+          label: "Get runtime backup state",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup-state",
+          label: "Delete runtime backup state",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/sync-runtime-backup-state",
+          label: "Force-write runtime backup state",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup",
+          label: "Get runtime backup",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup",
+          label: "Delete runtime backup",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Batch operation",
       items: [
         {
@@ -193,7 +241,13 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-status",
-          label: "Get cluster status",
+          label: "Get physical tenant status",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-status",
+          label: "Get the status of the whole cluster",
           className: "api-method get",
         },
         {
@@ -429,6 +483,24 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables",
           label: "Update element instance variables",
           className: "api-method put",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Exporting",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting",
+          label: "Pause exporting",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting",
+          label: "Resume exporting",
+          className: "api-method post",
         },
       ],
     },
@@ -1166,6 +1238,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets",
           label: "Resolve secrets (alpha)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/list-secrets",
+          label: "List secrets (alpha)",
           className: "api-method post",
         },
       ],

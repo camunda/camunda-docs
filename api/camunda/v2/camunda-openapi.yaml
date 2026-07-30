@@ -46,6 +46,7 @@ tags:
   - name: Audit Log
   - name: Authentication
   - name: Authorization
+  - name: Backup
   - name: Batch operation
   - name: Clock
   - name: Cluster
@@ -56,6 +57,7 @@ tags:
   - name: Decision requirements
   - name: Document
   - name: Element instance
+  - name: Exporting
   - name: Expression
   - name: Form
   - name: Global listener
@@ -103,6 +105,14 @@ paths:
     $ref: "authorizations.yaml#/paths/~1authorizations~1search"
   /authorizations/{authorizationKey}:
     $ref: "authorizations.yaml#/paths/~1authorizations~1{authorizationKey}"
+  /backups/runtime:
+    $ref: "backups.yaml#/paths/~1backups~1runtime"
+  /backups/runtime/state:
+    $ref: "backups.yaml#/paths/~1backups~1runtime~1state"
+  /backups/runtime/state/sync:
+    $ref: "backups.yaml#/paths/~1backups~1runtime~1state~1sync"
+  /backups/runtime/{backupId}:
+    $ref: "backups.yaml#/paths/~1backups~1runtime~1{backupId}"
   /batch-operation-items/search:
     $ref: "batch-operations.yaml#/paths/~1batch-operation-items~1search"
   /batch-operations/search:
@@ -177,6 +187,10 @@ paths:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1incidents~1search"
   /element-instances/{elementInstanceKey}/variables:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1variables"
+  /exporting/pause:
+    $ref: "exporting.yaml#/paths/~1exporting~1pause"
+  /exporting/resume:
+    $ref: "exporting.yaml#/paths/~1exporting~1resume"
   /expression/evaluation:
     $ref: "expression.yaml#/paths/~1expression~1evaluation"
   /forms/{formKey}:
@@ -353,12 +367,16 @@ paths:
     $ref: "roles.yaml#/paths/~1roles~1{roleId}~1users~1{username}"
   /secrets/resolve:
     $ref: "secrets.yaml#/paths/~1secrets~1resolve"
+  /secrets/list:
+    $ref: "secrets.yaml#/paths/~1secrets~1list"
   /setup/user:
     $ref: "setup.yaml#/paths/~1setup~1user"
   /signals/broadcast:
     $ref: "signals.yaml#/paths/~1signals~1broadcast"
   /status:
     $ref: "cluster.yaml#/paths/~1status"
+  /cluster/v2/status:
+    $ref: "cluster.yaml#/paths/~1cluster~1v2~1status"
   /system/usage-metrics:
     $ref: "system.yaml#/paths/~1system~1usage-metrics"
   /system/configuration:
