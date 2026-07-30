@@ -2,6 +2,7 @@
 id: concepts-overview
 title: "Introduction to Camunda 8"
 description: "Learn how Camunda 8 components work together to orchestrate and automate business processes, including the platform architecture and storage roles."
+toc_max_heading_level: 2
 ---
 
 import ArchDiagramImg from '../assets/c8-architecture-diagram.png';
