@@ -15,6 +15,13 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 - When scaling up the number of partitions, consider the resulting RocksDB size per partition. Allocate **at least 32 MB of RocksDB memory per partition** after scaling. For details, see the [resource planning guide](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md).
   :::
 
+## Broker id naming scheme
+
+How brokers are identified and scaled depends on whether the cluster is [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters). By default a cluster is **not zone-aware**.
+
+- **Non-zone-aware** clusters use **integer** broker ids: (`0`, `1`, `2`, ...). They are used as examples in this page.
+- **Zone-aware** clusters use **string** broker ids: `${zone}_${n}` (for example, `"zone-a_0"` with double quotes).
+
 ## Considerations
 
 - Scaling operations occur while the cluster remains online. During scaling, data is redistributed and new leaders are elected for affected partitions.
@@ -61,6 +68,11 @@ camunda-zeebe-4                                        0/1     Init:0/1   0     
 camunda-zeebe-5                                        0/1     Init:0/1   0          11s
 ```
 
+:::info Starting brokers in a zone-aware cluster
+On a [zone-aware cluster](#broker-id-schemes), each zone is a separate StatefulSet, so you need to scale brokers in each zone.
+
+:::
+
 ### 2. Send scale request to the Zeebe Gateway
 
 Send a POST request to the Zeebe Gateway's management endpoint to add new brokers to the cluster or redistribute partitions. See the [API reference](#api-reference) for details.
@@ -93,6 +105,12 @@ curl -X 'PATCH' \
 
 Here `3`, `4`, and `5` are the newly-added brokers.
 
+:::note Zone aware clusters
+Make sure to use the correct [broker ids](#broker-id-naming-scheme), e.g. `["zone-a_3", "zone-a_4", "zone-a_5"]`
+
+Brokers from different zones can be added with a single request. Make sure to scale each zone's statefulsets with the required replica count beforehand.
+:::
+
 #### 2.b Scaling brokers and partitions
 
 Run the following to send the request to the Zeebe Gateway to add 3 new brokers to the cluster and set the number of partition to 6.
@@ -112,6 +130,12 @@ curl -X 'PATCH' \
         }
       }'
 ```
+
+For [zone-aware cluster](#broker-id-schemes) you need to change the broker ids accordingly as outlined in the [above section](#scale_brokers_in_a_zone_aware_cluster)
+
+:::info Changing replication factor in a zone aware cluster
+You cannot change replication factor in a zone aware cluster with this API. You need to use `PUT /actuator/cluster/partition-distribution/` instead.
+:::
 
 #### 2.c Scaling only partitions
 
@@ -429,6 +453,10 @@ curl -X 'PATCH' \
 
 Similar to scaling up, the response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology.
 
+:::info scaling down a zone aware cluster
+For a zone ware cluster, the same [changes](#scale-brokers-in-a-zone-aware-cluster) as for scaling up are required.
+:::
+
 ### 2. Query the Zeebe Gateway to monitor progress of scaling
 
 ```
@@ -637,6 +665,14 @@ camunda-zeebe-2                                        1/1     Running     0    
 After scaling down the statefulset, you may have to delete the PVCs manually.
 :::
 
+#### Shut down brokers in a zone-aware cluster
+
+On a zone-aware cluster, scale down the StatefulSet of the zone you scaled, once its scaling operation has completed:
+
+```
+kubectl scale statefulset <zone-a-statefulset> --replicas=3
+```
+
 ## API reference
 
 OpenAPI spec for this API can be found [here](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
@@ -658,6 +694,7 @@ PATCH actuator/cluster
     add: [<brokerIds>]
     remove: [<brokerIds>]
     count: <integer>
+    zone: <string>
   }
   {
     partitions: {
@@ -668,6 +705,8 @@ PATCH actuator/cluster
 }
 
 ```
+
+`zone` is only used on zone-aware clusters, together with `count`, to select which zone's broker count is changed. It must be omitted on non-zone-aware clusters. Broker ids in `add` and `remove` follow the [broker id naming scheme](#broker-id-naming-scheme).
 
 <details>
   <summary>Example request</summary>
@@ -745,7 +784,9 @@ POST actuator/cluster/brokers/
 ]
 ```
 
-The input is a list of _all_ broker ids that will be in the final cluster after scaling:
+The input is a list of _all_ broker ids that will be in the final cluster after scaling.
+
+On zone-aware clusters, broker ids follow the [broker id naming scheme](#broker-id-naming-scheme).
 
 <details>
   <summary>Example request</summary>
