@@ -1982,6 +1982,15 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Audit log",
+          link: {
+            type: "doc",
+            id: "self-managed/manage/audit-log/index",
+          },
+          items: ["self-managed/manage/audit-log/configure"],
+        },
+        {
+          type: "category",
           label: "Databases",
           link: { type: "doc", id: "self-managed/manage/databases/index" },
           items: [
@@ -2092,15 +2101,6 @@ module.exports = {
         "self-managed/manage/flow-control/index",
         "self-managed/manage/data-purge",
         "self-managed/manage/data-retention",
-        {
-          type: "category",
-          label: "Audit log",
-          link: {
-            type: "doc",
-            id: "self-managed/manage/audit-log/index",
-          },
-          items: ["self-managed/manage/audit-log/configure"],
-        },
         {
           type: "category",
           label: "Document handling",
@@ -2485,12 +2485,6 @@ module.exports = {
           ],
         },
       ],
-    },
-    {
-      type: "ref",
-      id: "self-managed/manage/upgrade/index",
-      label: "Upgrade to Camunda 8.10",
-      className: "sidebar-cta",
     },
   ],
 };
