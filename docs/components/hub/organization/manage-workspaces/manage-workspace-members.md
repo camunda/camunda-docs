@@ -4,20 +4,17 @@ title: Manage workspace members
 description: "Manage members within your workspace."
 ---
 
-Manage a workspace.
+Manage workspace members.
 
-## About this guide
+## About
 
 A workspace has members who manage the workspace or work on workspace resources. The workspace can be managed at the organization or workspace level.
 
-## Prerequisites
+<!-- TODO: reference workspace management roles -->
 
-You can manage workspaces at the organization level if you have one of the following roles:
-
-- **Organization admin**
-- **Organization owner**
-- **Workspace admin**
-- **Workspace owner**
+:::tip
+You can also [manage workspace members from within the workspace](../../workspace/manage-workspace/index.md) itself.
+:::
 
 ## Add members
 
@@ -32,7 +29,7 @@ Add members to grant access to workspace resources:
 
 There is no limit to the amount of members you add at one time.
 
-:::note
+:::tip
 In Self-Managed, you can [hide the **Add members** button](/self-managed/components/hub/configuration/properties.md#feature-flags) for non-organization admins.
 :::
 
@@ -57,3 +54,7 @@ Remove members to deny access to workspace resources:
 2. Find the workspace, and click **Manage**:
 3. Under **Members**, find the member.
 4. In the menu on the right side of the row, click **Remove**.
+
+## Further reading
+
+- [Camunda Hub Member API](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)

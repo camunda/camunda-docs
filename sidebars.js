@@ -708,9 +708,8 @@ module.exports = {
                 id: "components/hub/organization/manage-workspaces/manage-workspaces",
               },
               items: [
-                "components/hub/organization/manage-workspaces/manage-workspaces",
+                "components/hub/organization/manage-workspaces/manage",
                 "components/hub/organization/manage-workspaces/manage-workspace-members",
-                "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
               ],
             },
             {
@@ -812,15 +811,11 @@ module.exports = {
                 id: "components/hub/workspace/manage-projects/manage-projects",
               },
               items: [
+                "components/hub/workspace/manage-projects/create-a-project",
                 {
                   type: "doc",
                   label: "Lifecycle",
                   id: "components/hub/workspace/manage-projects/project-pipeline",
-                },
-                {
-                  type: "doc",
-                  label: "Creation",
-                  id: "components/hub/workspace/manage-projects/create-a-project",
                 },
                 {
                   type: "doc",
@@ -918,6 +913,7 @@ module.exports = {
                     id: "components/hub/workspace/modeler/collaboration/collaboration",
                   },
                   items: [
+                    "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
                     "components/hub/workspace/modeler/collaboration/collaborate-with-modes",
                     "components/hub/workspace/modeler/collaboration/design-your-process",
                     "components/hub/workspace/modeler/collaboration/implement-your-process",
