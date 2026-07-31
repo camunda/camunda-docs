@@ -278,3 +278,49 @@ camunda:
 
 The AWS JDBC wrapper JAR is shipped with the Camunda distribution, alongside most of the other JDBC drivers. There is
 no need to provide it separately.
+
+### Per-physical-tenant credentials on Aurora
+
+When using [physical tenants](/self-managed/concepts/physical-tenants/index.md), each tenant can connect to Aurora with its own database user. Database-level permissions (schema grants, row-level security) are administered entirely in PostgreSQL, so tenant isolation is enforced by the database rather than by the application.
+
+For standard username/password authentication, override the connection settings per tenant:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=default_schema
+        username: camunda
+        password: camunda
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=tenant_a_schema
+            username: tenant_a_user
+            password: tenant-a-secret
+```
+
+For IAM authentication, the same pattern applies with the `iam` wrapper plugin and passwordless database users:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam&currentSchema=default_schema
+        username: camunda
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=iam&currentSchema=tenant_a_schema
+            username: tenant_a_user
+```
+
+With IAM authentication, the wrapper driver generates short-lived authentication tokens using the application's AWS identity (for example, the pod's IAM role when running on EKS with IRSA). The IAM permission `rds-db:connect` is granted **per database user**, so the single application identity is granted access to exactly the tenant database users it should reach — one AWS identity, many tenant-scoped database users.
