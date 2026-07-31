@@ -36,9 +36,9 @@ Boundary events, event-based gateways, and parallel merging gateways are not tra
 
 ## Impact on secondary storage
 
-When wait state tracking is active, Camunda writes a record to [secondary storage](/self-managed/concepts/secondary-storage/index.md) for every applicable element instance.
+When wait state tracking is active, Camunda writes a record to [secondary storage](/self-managed/manage/databases/secondary-storage/index.md) for every applicable element instance.
 
-Wait state tracking does not measurably increase secondary storage usage. You can [configure wait state tracking](/self-managed/concepts/wait-states/configure.md) in Camunda 8 Self-Managed to disable it.
+Wait state tracking does not measurably increase secondary storage usage. You can [configure wait state tracking](/self-managed/components/orchestration-cluster/core-settings/configuration/wait-states.md) in Camunda 8 Self-Managed to disable it.
 
 ## Access control
 
@@ -48,7 +48,7 @@ To view wait states, you must have the relevant authorization:
 | :----------------------------------------------------- | :------------------- | :---------------------------------------------------------- | :---------------------- |
 | View wait states for instances of a process definition | `PROCESS_DEFINITION` | A process definition ID or `*` for all process definitions. | `READ_PROCESS_INSTANCE` |
 
-Wait state data is isolated by tenant. You can only view wait states for [tenants](/self-managed/concepts/multi-tenancy/index.md) you are authorized to access.
+Wait state data is isolated by tenant. You can only view wait states for [tenants](/self-managed/extend/tenancy/index.md) you are authorized to access.
 
 ## Get started
 

@@ -11,7 +11,7 @@ Management Identity controls who can sign in to Console, Modeler, and Optimize, 
 
 ## About Management Identity
 
-Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/deployment/helm/install/quick-install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
+Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md) and [Helm charts](/self-managed/deploy-to-production/kubernetes/install/index.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
 
 - Administrators can use Management Identity to manage Camunda 8 users, groups, roles, permissions, and applications.
 - Users (interacting via Camunda web components) and applications (interacting via Camunda APIs, such as job workers) are supported, using secure authorization based on OAuth 2.0 standards.
@@ -54,7 +54,7 @@ Control who can access what by assigning permissions through roles.
 ### Multi-tenancy
 
 :::note
-This section describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+This section describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/extend/tenancy/physical-tenants/index.md).
 :::
 
 Isolate data and access in Optimize between different customers or business units by organizing resources into tenants. This is effective only if you have [multi-tenancy checks enabled for your Orchestration Cluster](/components/admin/tenant.md).

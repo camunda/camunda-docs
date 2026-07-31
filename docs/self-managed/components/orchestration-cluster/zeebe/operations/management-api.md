@@ -31,7 +31,7 @@ This API currently supports the following operations:
 Use the Exporting API for the followings:
 
 - As a debugging tool.
-- When taking a backup of Camunda 8 (see [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)).
+- When taking a backup of Camunda 8 (see [backup and restore](/self-managed/manage/back-up-and-restore/index.md)).
 
 :::warning
 This endpoint always returns HTTP `200`. Check the `status` field in the response body to determine whether the operation succeeded: `204` indicates success and `500` indicates failure.
@@ -85,7 +85,7 @@ When all partitions have resumed exporting, the response contains `"status": 204
 
 ### Soft pause exports
 
-The soft pause feature can be used when you want to continue exporting records, but don't want to delete those records (log compaction) from Zeebe. This is particularly useful during hot backups. Learn more about [using this feature for hot backups](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+The soft pause feature can be used when you want to continue exporting records, but don't want to delete those records (log compaction) from Zeebe. This is particularly useful during hot backups. Learn more about [using this feature for hot backups](/self-managed/manage/back-up-and-restore/index.md).
 
 ```
 POST actuator/exporting/pause?soft=true
@@ -105,7 +105,7 @@ For a real-world example of disk growth and recovery, see the [full-disk chaos d
 
 The Exporters API allows for enabling, disabling or deleting configured exporters. By default, all configured exporters are enabled.
 
-The enable and disable functionality is specifically useful for [dual region deployment](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md) operations.
+The enable and disable functionality is specifically useful for [dual region deployment](/self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure.md) operations.
 
 - **Enabled**: Records are exported to the exporter. The log is compacted only after the records are exported.
 - **Disabled**: Records are _not_ exported to the exporter, and the log is compacted.

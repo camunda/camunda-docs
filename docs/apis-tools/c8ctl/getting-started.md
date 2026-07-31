@@ -43,7 +43,7 @@ After installation, both `c8ctl` and `c8` are available as commands in your term
 
 ## Quick start with a local cluster
 
-`c8ctl` includes a built-in `cluster` command that downloads and manages a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) instance. This is the fastest way to get a cluster running for development.
+`c8ctl` includes a built-in `cluster` command that downloads and manages a local [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) instance. This is the fastest way to get a cluster running for development.
 
 ### Start a cluster
 
@@ -399,15 +399,15 @@ c8 output text    # back to formatted tables (default)
 
 ## Environment variables
 
-| Variable                    | Description          |
-| :-------------------------- | :------------------- |
-| `CAMUNDA_BASE_URL`          | Cluster base URL     |
-| `CAMUNDA_CLIENT_ID`         | OAuth client ID      |
-| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
-| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
-| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
+| Variable                    | Description                   |
+| :-------------------------- | :---------------------------- |
+| `CAMUNDA_BASE_URL`          | Cluster base URL              |
+| `CAMUNDA_CLIENT_ID`         | OAuth client ID               |
+| `CAMUNDA_CLIENT_SECRET`     | OAuth client secret           |
+| `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience          |
+| `CAMUNDA_OAUTH_URL`         | OAuth token endpoint          |
 | `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
-| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
+| `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID             |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.
 

@@ -44,7 +44,7 @@ This example assumes the cluster was deployed with the following configurations,
 
 ### 1. Start new brokers
 
-If you have deployed Zeebe using [Helm](/self-managed/deployment/helm/install/quick-install.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
+If you have deployed Zeebe using [Helm](/self-managed/deploy-to-production/kubernetes/install/index.md), you can start new brokers by using the `kubectl scale` command. Otherwise, refer to the corresponding installation methods on how to start a new broker.
 
 ```
 kubectl scale statefulset camunda --replicas=6
@@ -702,7 +702,7 @@ This is a dangerous operation and must be used with caution. Incorrect use may r
 
 Usually, changes can only be made when all brokers are up. If some brokers are unreachable, you can remove them from the cluster by setting the `force` request parameter to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md). For details, see the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Deviations from the process may make the cluster unusable.
+This operation is mainly useful for [dual-region setups](/self-managed/extend/availability-and-disaster-recovery/dual-region.md). For details, see the [dual-region operational procedure](/self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure.md). Deviations from the process may make the cluster unusable.
 
 :::note
 Don’t send more than one `force` request at a time.
@@ -788,7 +788,7 @@ This is a dangerous operation and must be used with caution. When not used corre
 
 Usually, changes can only be made to a cluster when all brokers are up. When some brokers are unreachable, you may want to remove them from the cluster. You can force remove a set of brokers by setting the request parameter `force` to `true`.
 
-This operation is mainly useful for [dual-region setups](/self-managed//concepts/multi-region/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/deployment/helm/operational-tasks/dual-region-ops.md). Any deviations from the described process can result in the cluster being unusable.
+This operation is mainly useful for [dual-region setups](/self-managed/extend/availability-and-disaster-recovery/dual-region.md), and additional information can be found in the [dual-region operational procedure](/self-managed/extend/availability-and-disaster-recovery/dual-region-operational-procedure.md). Any deviations from the described process can result in the cluster being unusable.
 
 :::note
 Do not send more than one force request at a time.

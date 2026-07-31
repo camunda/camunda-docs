@@ -1,5 +1,4 @@
 ---
-id: kubernetes
 title: "Kubernetes deployment overview"
 sidebar_label: "Kubernetes"
 description: "Camunda 8 Kubernetes deployment reference architecture home."
@@ -24,19 +23,19 @@ This section includes reference deployment architectures:
 
 ### Amazon EKS
 
-- [Amazon EKS single-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): Standard production setup.
-- [Amazon EKS dual-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md): Advanced multi-region setup.
+- [Amazon EKS single-region](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md): Standard production setup.
+- [Amazon EKS dual-region](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/dual-region.md): Advanced multi-region setup.
 
 ### Red Hat OpenShift on AWS (ROSA)
 
-- [ROSA single-region](/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup.md): Standard production setup.
-- [ROSA dual-region](/self-managed/deployment/helm/cloud-providers/amazon/openshift/terraform-setup-dual-region.md): Advanced multi-region setup.
+- [ROSA single-region](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/aws-rosa/terraform.md): Standard production setup.
+- [ROSA dual-region](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/aws-rosa/terraform-dual-region.md): Advanced multi-region setup.
 
 ### Microsoft Azure
 
-- [Microsoft AKS single-region](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/terraform-setup.md): Standard production setup.
+- [Microsoft AKS single-region](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/terraform.md): Standard production setup.
 
-For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
+For common issues and mitigation strategies, refer to the [deployment troubleshooting guide](/self-managed/troubleshooting/index.md).
 
 ## Architecture
 
@@ -61,9 +60,9 @@ The database is not shown in the diagram. It should be hosted outside the Kubern
 
 ### Kubernetes
 
-A production deployment is recommended. For more information, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md) and the [components](#components) section.
+A production deployment is recommended. For more information, see the [production deployment guide](/self-managed/deploy-to-production/kubernetes/install/production/index.md) and the [components](#components) section.
 
-The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deployment/helm/install/quick-install.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
+The following visuals provide a simplified view of the deployed namespaces using the [Camunda 8 Helm chart](/self-managed/deploy-to-production/kubernetes/install/index.md). For clarity, ConfigMaps, Secrets, RBAC, and ReplicaSets are omitted.
 
 #### Orchestration Cluster
 
@@ -87,7 +86,7 @@ The Orchestration Cluster exposes two services:
 
 Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
-Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
+Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deploy-to-production/kubernetes/install/production/index.md).
 
 ### High availability (HA)
 
@@ -148,7 +147,7 @@ As shown in the [architecture diagram](#web-modeler-and-console), this namespace
 - Console — administrative interface
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
-This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
+This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deploy-to-production/plan/kubernetes-operators.md#keycloak-deployment) or Microsoft Entra ID).
 
 :::tip Why isn't an IdP included by default?
 The choice of identity provider is highly specific to each organization's security requirements, existing infrastructure, and compliance needs. Rather than bundling a default IdP that may not match your setup, the reference architecture leaves this choice to you. This approach gives you full control over your authentication stack and avoids unnecessary complexity for teams that already have an IdP in place.
@@ -160,7 +159,7 @@ Console, Optimize, and Web Modeler rely on Management Identity (formerly Identit
 
 For configuration details, see:
 
-- [Connect Orchestration Cluster to an OIDC provider](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc)
+- [Connect Orchestration Cluster to an OIDC provider](/self-managed/manage/identity-and-access/authentication-to-orchestration-cluster.md#oidc)
 - [Connect Management Identity to an OIDC provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md)
 
 The Orchestration Cluster can be configured to authenticate with OIDC by connecting to the Management Identity service deployed in this namespace.
@@ -169,13 +168,13 @@ The Orchestration Cluster can be configured to authenticate with OIDC by connect
 
 This guide focuses on a single-region application, but can be adapted for a multi-region setup once you understand the basics of a single region.
 
-For details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/concepts/multi-region/dual-region.md).
+For details on multi-region configurations, especially dual-region setups, refer to the [dedicated guide](/self-managed/extend/availability-and-disaster-recovery/dual-region.md).
 
 ### Infrastructure
 
 We recommend using a [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deployment/helm/install/quick-install.md). For supported Kubernetes versions, see [supported environments](/reference/supported-environments.md#deployment-options).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deploy-to-production/kubernetes/install/index.md). For supported Kubernetes versions, see [supported environments](/reference/supported-environments.md#deployment-options).
 
 #### Minimum cluster requirements
 
@@ -275,7 +274,7 @@ Sizing is use case dependent. It is crucial to conduct thorough load testing and
 Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
 :::
 
-Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
+Once deployed, the included [Grafana dashboard](/self-managed/manage/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
 
 ## Distributions
 

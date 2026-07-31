@@ -10,13 +10,13 @@ import TabItem from "@theme/TabItem";
 :::note DEPRECATED
 This method of configuring clusters is deprecated and will be removed in a later version of Camunda Hub Self-Managed.
 
-See the [migration guide](/self-managed/upgrade/components/890-to-8100.md#camunda-hub) for more details.
+See the [migration guide](/self-managed/manage/upgrade/components/890-to-8100.md#camunda-hub) for more details.
 
 :::
 
 Clusters must be configured using the following options to access the cluster from within Camunda Hub. If no clusters are configured, you will not be able to perform any actions that require a cluster (for example, deploy, start an instance, or Play a process).
 
-The Camunda 8 [Helm](/self-managed/deployment/helm/install/quick-install.md) and [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) distributions provide a local Zeebe cluster configured by default.
+The Camunda 8 [Helm](/self-managed/deploy-to-production/kubernetes/install/index.md) and [Docker Compose](/self-managed/quickstart/developer/docker-compose/index.md) distributions provide a local Zeebe cluster configured by default.
 
 To add additional clusters, increment the `0` value for each entry (for example `clusters[1]` or `CAMUNDA_MODELER_CLUSTERS_1_NAME`).
 

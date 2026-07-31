@@ -614,7 +614,7 @@ public class MyProcessTest {
 ## Remote runtime
 
 Instead of using the managed [Testcontainers runtime](#testcontainers-runtime), you can configure CPT to connect to a
-remote runtime, for example, to a local [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running
+remote runtime, for example, to a local [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md) running
 on your machine.
 
 When to use it:
@@ -629,11 +629,11 @@ tests. Keep in mind that CPT automatically deletes all data between test runs to
 
 ### Prerequisites
 
-- Install a Camunda 8 runtime, for example, [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)
+- Install a Camunda 8 runtime, for example, [Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md)
 - Expose the management API port (`9600`) to delete the data between test runs (by default for a local Camunda 8 Run)
 - Enable the management clock endpoint to allow clock manipulations
 
-You can [configure Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#configuration-options) by
+You can [configure Camunda 8 Run](/self-managed/quickstart/developer/c8run/configuration.md#configuration-options) by
 defining a `application.yaml` file with:
 
 ```yaml

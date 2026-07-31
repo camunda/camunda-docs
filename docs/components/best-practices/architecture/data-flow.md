@@ -62,7 +62,7 @@ The Camunda Exporter and RDBMS Exporter are mutually exclusive, only one can be 
 Read events are applied to the registered exporters one by one, in the same order as they appear on the log. Each event is applied to ALL exporters before the next event is processed.
 :::
 
-The exporters track their position in the Exporter state (backed by RocksDB). If the exporting backlog grows over a certain threshold, Camunda reduces the record write rate via a corresponding [flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md) mechanics to keep the exporting backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism.
+The exporters track their position in the Exporter state (backed by RocksDB). If the exporting backlog grows over a certain threshold, Camunda reduces the record write rate via a corresponding [flow control](/self-managed/manage/flow-control/index.md) mechanics to keep the exporting backlog manageable. In extreme cases, client commands are rejected via the standard backpressure mechanism.
 
 Exporter behavior and performance is important for the system, because:
 

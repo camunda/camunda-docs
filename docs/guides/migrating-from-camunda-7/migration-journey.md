@@ -146,7 +146,7 @@ There are multiple ways to set up Camunda 8:
   - You cannot [migrate historical audit data from Camunda 7](./migration-tooling/index.md).
   - [Multi-tenancy](/components/concepts/multi-tenancy.md) is not currently supported.
 
-- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/quickstart/developer-quickstart/c8run.md). RDBMS support is available since Camunda 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to [installation guides](/self-managed/deployment/index.md) for details.
+- Run the platform **Self-Managed**. You might want to look at the [Camunda 8 Run distribution](/self-managed/quickstart/developer/c8run/index.md). RDBMS support is available since Camunda 8.9, removing the need for Elastic Search and allowing a relatively simple setup that Camunda 7 users often like. Still, you can go for more scalable options (see also the [architecture streamlining blog post](https://camunda.com/blog/2024/04/simplified-deployment-options-accelerated-getting-started-experience/)). Refer to [installation guides](/self-managed/deploy-to-production/kubernetes/index.md) for details.
 
 While setting up Camunda 8 is not part of the core migration journey, it is a prerequisite and should be tackled early in the migration journey to avoid blockers.
 
@@ -276,6 +276,7 @@ Typical preparation steps include:
 - **Remove the usage of internal APIs** or calls that depend on the transactionally integrated architecture of Camunda 7 (for example, querying the HistoryService within a JavaDelgate and expect it to know current changes already).
 
 - **Increase test coverage** of the solution to increase confidence that code conversions during migration do not break anything. This is especially important if your C7-based solutions lack good test coverage. To avoid migration effort on test cases, ideally **abstract the test cases from the Camunda version** used, either by using a small own abstraction layer, or by using a test framework such as [Cucumber](https://cucumber.io/) or [Sentinel](https://developer.hashicorp.com/sentinel/docs/intro).
+
 <!-- TODO: Mention Scenario Tests -->
 
 - **Structural changes in your BPMN model** to make them runnable on Camunda 8. One trigger could be that you are using constructs that are not supported in Camunda 8 (for example, execution listeners on sequence flows). Or you want to get your models into a state that allows runtime data migration (see [data migration](#migrate-data-optional)), for example by adding artificial wait states before multi-instance tasks (as multiple instance is not supported for runtime data migration).
@@ -357,7 +358,7 @@ Process instances left traces, often referred to as "history data". These are au
 
 It is important to note, that audit data can exist for ended processes from the past, but is also available for currently still running process instances, as those process instances also left traces up to the current wait state.
 
-If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](./migration-tooling/index.md). Migrating audit **data comes with limitations** (most prominently that you need to run [Camunda 8 with **RDBMS**](/self-managed/concepts/secondary-storage/index.md), a feature introduced with 8.9).
+If you need to preserve audit data and want to transfer it to Camunda 8, you can also use the [Data Migrator](./migration-tooling/index.md). Migrating audit **data comes with limitations** (most prominently that you need to run [Camunda 8 with **RDBMS**](/self-managed/manage/databases/secondary-storage/index.md), a feature introduced with 8.9).
 
 <!-- TODO use a deep link here as well -->
 

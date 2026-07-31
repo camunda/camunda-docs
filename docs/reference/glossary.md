@@ -111,7 +111,7 @@ The [audit log](../components/audit-log/overview.md) is a record of operations, 
 Backpressure is a protection mechanism that prevents [Zeebe brokers](#zeebe-broker) from being overloaded when they receive more [client](#zeebe-client) requests than they can process with acceptable latency. Zeebe brokers determine backpressure by using dynamic backpressure algorithms or - if enabled - flow control limits, which measure the rate of records written by the [exporter](#zeebe-exporter). When backpressure is activated, client requests are rejected to maintain system stability.
 
 - [Backpressure](/self-managed/components/orchestration-cluster/zeebe/operations/backpressure.md)
-- [Flow control](/self-managed/operational-guides/configure-flow-control/configure-flow-control.md)
+- [Flow control](/self-managed/manage/flow-control/index.md)
 
 ### Broker
 
@@ -153,7 +153,7 @@ A cluster [variable](../../components/concepts/variables/) is a centrally manage
 
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+- [Physical Tenants](/self-managed/extend/tenancy/physical-tenants/index.md)
 
 ### Camunda AI agent
 
@@ -355,7 +355,7 @@ H2 can run in two modes:
 
 H2 is not intended for production usage. For Camunda secondary storage, H2 is a single-broker option and is not a valid backend for multi-broker clusters.
 
-- [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
+- [Secondary storage](/self-managed/manage/databases/secondary-storage/index.md)
 
 See also: [Secondary storage](#secondary-storage)
 
@@ -398,7 +398,7 @@ An incident represents an error condition which prevents [Zeebe](#zeebe) from ad
 
 An Ingress is a Kubernetes object that manages external access to the services within a Kubernetes cluster. An **Ingress controller** is required to route traffic to your services according to the rules defined on the Ingress.
 
-- [Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)
+- [Ingress setup](/self-managed/deploy-to-production/kubernetes/configure/ingress/ingress-setup.md)
 
 ## J
 
@@ -453,7 +453,7 @@ The log is comprised of an ordered sequence of records written to persistent sto
 A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single [Physical Tenant](#physical-tenant).
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+- [Physical Tenants](/self-managed/extend/tenancy/physical-tenants/index.md)
 
 ## M
 
@@ -583,7 +583,7 @@ A process variable represents the execution state (i.e data) of a process instan
 
 An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+- [Physical Tenants](/self-managed/extend/tenancy/physical-tenants/index.md)
 - [Logical Tenant](#logical-tenant)
 - [Multi-tenancy](#multi-tenancy)
 
@@ -615,7 +615,7 @@ The public API represents the official set of interfaces in Camunda 8 that are c
 
 RDBMS (Relational Database Management System) refers to a user-managed relational database used as a secondary storage backend in Camunda 8 Self-Managed deployments, depending on the component and configuration. An external RDBMS is used for query and retention use cases, not for core workflow execution state.
 
-- [Helm database configuration (RDBMS)](/self-managed/deployment/helm/configure/database/rdbms.md)
+- [Helm database configuration (RDBMS)](/self-managed/manage/databases/relational-database/rdbms.md)
 
 See also: [Secondary storage](#secondary-storage)
 
@@ -689,8 +689,8 @@ Examples of secondary storage backends include:
 - [Document store (Elasticsearch/OpenSearch)](#elasticsearchopensearch)
 - [RDBMS](#rdbms)
 
-- [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
-- [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
+- [Secondary storage concepts](/self-managed/manage/databases/secondary-storage/index.md)
+- [Managing secondary storage](/self-managed/manage/databases/secondary-storage/manage.md)
 
 ### Segment
 
@@ -709,7 +709,7 @@ The state of all active [process instances](#process-instance), (these are also 
 Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
 
 - [Exporting API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md)
-- [Backup and restore](/self-managed/operational-guides/backup-restore/zeebe-backup-and-restore.md)
+- [Backup and restore](/self-managed/manage/back-up-and-restore/zeebe-backup-and-restore.md)
 
 ### Subscription inbound connector
 
@@ -732,7 +732,7 @@ A [Logical Tenant](#logical-tenant) is a logically isolated space within a share
 
 An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
 
-- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+- [Physical Tenants](/self-managed/extend/tenancy/physical-tenants/index.md)
 
 ### Temperature
 

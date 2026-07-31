@@ -22,7 +22,7 @@ Camunda Exporter is enabled by default if secondary storage is configured to use
 
 To connect to an external Elasticsearch or OpenSearch cluster, configure the secondary storage endpoint with `camunda.data.secondary-storage.elasticsearch.url` or `camunda.data.secondary-storage.elasticsearch.urls`. If you're using OpenSearch, use `camunda.data.secondary-storage.opensearch.url` or `camunda.data.secondary-storage.opensearch.urls` instead. The Camunda Exporter reuses that secondary storage connection automatically.
 
-If you're deploying with Helm, configure the external cluster in your Elasticsearch or OpenSearch values, then set the secondary storage type for Orchestration Cluster. For a complete Helm example, see [configure secondary storage](/self-managed/concepts/secondary-storage/configuring-secondary-storage.md#configuration-options) and [using external Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
+If you're deploying with Helm, configure the external cluster in your Elasticsearch or OpenSearch values, then set the secondary storage type for Orchestration Cluster. For a complete Helm example, see [configure secondary storage](/self-managed/manage/databases/secondary-storage/configure.md#configuration-options) and [using external Elasticsearch](/self-managed/manage/databases/elasticsearch-opensearch/using-external-elasticsearch.md).
 
 :::info Helm values mapping
 The option names in the tabs below (for example, `rolloverInterval`) are exporter option names, not top-level Helm values keys.

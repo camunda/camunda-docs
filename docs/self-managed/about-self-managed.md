@@ -2,6 +2,7 @@
 id: about-self-managed
 title: "Camunda 8 Self-Managed"
 sidebar_label: "Camunda 8 Self-Managed"
+slug: /self-managed/
 description: "Step through everything you need to download, configure, and work with components of Camunda 8 Self-Managed, a self-hosted alternative to using Camunda 8 SaaS."
 keywords:
   - Camunda 8 Self-Managed
@@ -33,7 +34,7 @@ import OverviewImg from './assets/hero-self-managed.png';
 
 Deploy and manage Camunda in your own infrastructure. Quickstart guides and infrastructure and deployment options help you build a robust process automation platform for your organization.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Developer and administrator quickstart" href="../quickstart/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Developer and administrator quickstart</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Developer and administrator quickstart" href="quickstart/" style={{marginBottom: '30px', marginTop: '20px'}}>Developer and administrator quickstart</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -45,7 +46,7 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 
 :::info Upgrade to Camunda 8.9
 
-- Existing customer? Upgrade your Self-Managed deployment to 8.9 using the [upgrade to 8.9 guide](/self-managed/upgrade/index.md).
+- Existing customer? Upgrade your Self-Managed deployment to 8.9 using the [upgrade to 8.9 guide](/self-managed/manage/upgrade/index.md).
 - See [what's new in Camunda 8.9](/reference/announcements-release-notes/890/whats-new-in-89.md), [release announcements](/reference/announcements-release-notes/890/890-announcements.md), and [release notes](/reference/announcements-release-notes/890/890-release-notes.md).
 
 :::

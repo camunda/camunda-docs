@@ -13,7 +13,7 @@ import {C8Run} from "@site/src/components/CamundaDistributions";
 When successful, a new Operate window automatically opens.
 
 :::note
-If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/quickstart/developer-quickstart/c8run/install-start.md#shut-down-camunda-8-run) to end the current processes, then run the start script again.
+If Camunda 8 Run fails to start, run the [shutdown script](/self-managed/quickstart/developer/c8run/install-start.md#shut-down-camunda-8-run) to end the current processes, then run the start script again.
 :::
 
 :::note
@@ -21,4 +21,4 @@ Starting with 8.10.0-alpha2, Camunda 8 Run no longer requires Java to start.
 Camunda 8 Run starts with H2 as the default secondary storage. Elasticsearch is still supported but must be explicitly enabled in `c8run/configuration/application.yaml`.
 :::
 
-For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/quickstart/developer-quickstart/c8run/install-start.md).
+For more information and local configuration options, see the [Camunda 8 Run installation guide](/self-managed/quickstart/developer/c8run/install-start.md).

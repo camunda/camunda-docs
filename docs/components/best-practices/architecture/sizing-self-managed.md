@@ -13,7 +13,7 @@ description: "Provision Camunda 8 on your Self-Managed cluster with Kubernetes a
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Provisioning Camunda 8 on your Self-Managed cluster depends on several factors. Use [Kubernetes with Helm](/self-managed/deployment/helm/index.md) to deploy and manage your Self-Managed cluster.
+Provisioning Camunda 8 on your Self-Managed cluster depends on several factors. Use [Kubernetes with Helm](/self-managed/deploy-to-production/kubernetes/index.md) to deploy and manage your Self-Managed cluster.
 
 Use the configurations and guidance below as a baseline, then adjust based on your workload. For background on the factors that drive provisioning requirements, see [Size your environment](sizing-your-environment.md).
 
@@ -147,7 +147,7 @@ Increase CPU and memory per broker. Note that there are **diminishing returns** 
 - **Nodes:** Add Elasticsearch statefulset replicas for more IOPS and query throughput.
 - **Disk size:** Increase disk size based on your data retention requirements. With Optimize enabled and a realistic payload (~11 KB), Elasticsearch disk can fill rapidly (for example, 128 Gi in under 12 hours at 1 PI/s with 30-day retention).
 - **Disk type:** Use SSDs for Elasticsearch storage. Disk latency, not throughput, is the critical factor. HDD-backed Elasticsearch has been observed to cause 8–10s flush durations, a growing export backlog, increased broker memory from in-flight records, and up to ~70% throughput degradation versus an equivalent SSD setup. See the [slow disk chaos day experiment](https://camunda.github.io/zeebe-chaos/2026/06/19/Using-slow-disk-with-Camunda) for details, and [Export pipeline](data-flow.md#export-pipeline) for background on how slow secondary storage affects overall throughput.
-- **Index replicas:** The disk estimates in the baseline tables above do not account for index-level replicas. In multi-node clusters, configure at least one replica per index for fault tolerance — each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [managing replicas](/self-managed/concepts/secondary-storage/managing-secondary-storage.md#replicas).
+- **Index replicas:** The disk estimates in the baseline tables above do not account for index-level replicas. In multi-node clusters, configure at least one replica per index for fault tolerance — each replica stores a full copy of the primary shard data, approximately doubling total disk usage. See [managing replicas](/self-managed/manage/databases/secondary-storage/manage.md#replicas).
 
 ## Primary storage considerations
 

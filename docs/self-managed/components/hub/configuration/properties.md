@@ -23,7 +23,7 @@ If you are using the Camunda 8 Helm chart, read more about the different configu
 You can pass environment variables to each component via `camundaHub.restapi.env` and `camundaHub.websocket.env` in your `values.yaml`.
 :::
 
-For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/quickstart/developer-quickstart/docker-compose.md).
+For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/quickstart/developer/docker-compose/index.md).
 
 ## Licensing
 
@@ -73,7 +73,7 @@ server:
 
 ### Clusters
 
-To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
+To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](/self-managed/manage/upgrade/components/890-to-8100.md#camunda-hub).
 
 :::note
 Only Web Modeler admins (users with the [`admin:*` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) can access the cluster pages in Camunda Hub.
@@ -523,7 +523,7 @@ Refer to the [advanced logging configuration guide](./logging.md#logging-configu
 
 :::info
 
-- For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/operational-guides/monitoring/log-levels.md#understanding-log-levels).
+- For `LOG_LEVEL_*` options, see [understanding log levels](/self-managed/manage/monitoring/log-levels.md#understanding-log-levels).
 
 :::
 

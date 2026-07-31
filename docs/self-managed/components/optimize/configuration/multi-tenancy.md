@@ -7,7 +7,7 @@ description: "Learn about the supported multi-tenancy scenarios."
 <span class="badge badge--platform">Camunda 8 Self-Managed only</span>
 
 :::note
-This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/extend/tenancy/physical-tenants/index.md).
 :::
 
 Multi-tenancy is the ability of Camunda 8 to serve multiple distinct [tenants](/self-managed/components/management-identity/manage-tenants.md) or
@@ -47,4 +47,4 @@ If required, the tenant authorization cache in Optimize can also be configured v
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](/self-managed/extend/tenancy/logical-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Identity.

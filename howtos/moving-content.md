@@ -2,6 +2,8 @@
 
 Our docs are always changing, and sometimes we move content to be better organized. When we move content, we must intentionally preserve the connection between a document's old location and its new location. We do this in two ways:
 
+> **Note:** The 8.10 restructure moved most Self-Managed pages to new paths. If you're looking for where an 8.9 page moved, see the [8.9 to 8.10 Self-Managed page mapping](./self-managed-8.10-restructure-mapping.md) instead of assuming the old path still applies across versions.
+
 1. Specify [redirect rules](#redirect-rules) to map old URLs to new URLs. This ensures that users who have bookmarked or shared a link to the old page can still find their content.
 
 2. Specify [canonical references](#canonical-references) from previous versions to the moved location. This ensures that search engine crawlers can identify the canonical version of a document, and serve the most accurate results to users' search queries.

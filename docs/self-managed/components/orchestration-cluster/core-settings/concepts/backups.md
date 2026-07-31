@@ -12,14 +12,14 @@ When running an orchestration cluster with [secondary storage](/self-managed/com
 The Orchestration Cluster is configured with the snapshot repository name to trigger database snapshots. This ensures coherent backups.
 
 :::info
-Learn more about the backup procedure and why it must be triggered in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md). For disaster recovery using these backups, see [Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md).
+Learn more about the backup procedure and why it must be triggered in the [backup guide](/self-managed/manage/back-up-and-restore/index.md). For disaster recovery using these backups, see [Cold Recovery](/self-managed/extend/availability-and-disaster-recovery/cold-recovery.md).
 :::
 
 ## Configure this in Kubernetes with Helm
 
 When you deploy Camunda 8 Self-Managed on Kubernetes, set the backup repository name as an application configuration value.
 
-See [application configurations](/self-managed/deployment/helm/configure/application-configs.md) for how to provide configuration keys using Helm (for example, via values files or environment variable mappings).
+See [application configurations](/self-managed/deploy-to-production/kubernetes/configure/application-configs.md) for how to provide configuration keys using Helm (for example, via values files or environment variable mappings).
 
 ## Configuration parameters
 

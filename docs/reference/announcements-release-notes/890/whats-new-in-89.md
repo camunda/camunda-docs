@@ -158,7 +158,7 @@ These changes reduce friction when setting up Camunda 8 Run for the first time, 
 The `--docker` flag and bundled Docker Compose files have been removed from Camunda 8 Run. Docker Compose is now a standalone distribution artifact. See [release announcements](/reference/announcements-release-notes/890/890-announcements.md#camunda-8-run-docker-compose-support-removed) for migration details.
 :::
 
-<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer/c8run/index.md)</p>
 
 ### Secondary storage
 
@@ -170,7 +170,7 @@ Camunda 8 Run now uses H2 as the default secondary data store.
 
 You can also configure Camunda 8 Run to use any of the supported secondary storage relational databases instead of the default H2 (for example, PostgreSQL, MariaDB, MySQL, Oracle, or Microsoft SQL Server).
 
-<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer-quickstart/c8run/secondary-storage.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
+<p class="link-arrow">[Configure Camunda 8 Run secondary storage](/self-managed/quickstart/developer/c8run/secondary-storage.md#configure-or-switch-secondary-storage-h2-or-elasticsearch)</p>
 
 ## Global user task listeners {#listeners}
 
@@ -196,7 +196,7 @@ You should update any hardcoded port references in network policies, Ingress rul
 
 As Helm 3 reaches end of life in 2026, Camunda continues to support your migration to Helm 4 with documentation covering how you can deploy Camunda 8.7, 8.8, and 8.9 with Helm 4.
 
-<p class="link-arrow">[Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md)</p>
+<p class="link-arrow">[Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md)</p>
 
 :::note
 Camunda 8.10 and beyond will only support Helm 4 to ensure we provide secure solutions for customers.
@@ -249,7 +249,7 @@ Camunda 8.9 introduces major changes to the [deployment references](https://gith
 
 All reference architectures (AKS, EKS, OpenShift, Kind) now use Kubernetes operators — CloudNativePG, ECK, and Keycloak operator — instead of embedded Bitnami subcharts for infrastructure services.
 
-If you follow a reference architecture, your next deployment will use operator-managed PostgreSQL, Elasticsearch, and Keycloak. Existing deployments can migrate using the new [migration tooling](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md).
+If you follow a reference architecture, your next deployment will use operator-managed PostgreSQL, Elasticsearch, and Keycloak. Existing deployments can migrate using the new [migration tooling](/self-managed/manage/upgrade/migration-from-bitnami/index.md).
 
 #### Are you affected?
 
@@ -350,7 +350,7 @@ Camunda 8 officially supports running Orchestration Clusters on Amazon Elastic C
 
 This makes it easier and safer for teams that rely on Amazon ECS (including Fargate) to run Camunda 8 in production without needing to adopt Kubernetes (EKS). This feature relies on AWS S3.
 
-<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deploy-to-production/containers/amazon-ecs/aws-ecs.md)</p>
 
 ### Cluster variables for shared configuration
 
@@ -431,7 +431,7 @@ Supported options include H2 (for development and test scenarios), PostgreSQL, O
 
 This is particularly useful if you already standardize on one of the supported RDBMS platforms, want to avoid operating and scaling additional search clusters where they are not required, or prefer existing RDBMS tooling for backup, monitoring, and compliance.
 
-<p class="link-arrow">[Secondary storage](/self-managed/concepts/secondary-storage/index.md)</p>
+<p class="link-arrow">[Secondary storage](/self-managed/manage/databases/secondary-storage/index.md)</p>
 
 ### Amazon Aurora as managed secondary storage
 
@@ -443,7 +443,7 @@ Camunda 8.9 adds support for Amazon Aurora PostgreSQL as secondary storage, enab
 
 Aurora is a good fit if you run Camunda on AWS and want managed RDBMS operations instead of self‑managing PostgreSQL, and integration with existing AWS security and reliability practices.
 
-<p class="link-arrow">[Using AWS Aurora PostgreSQL with Camunda](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql)</p>
+<p class="link-arrow">[Using AWS Aurora PostgreSQL with Camunda](/self-managed/manage/databases/relational-database/configuration.md#usage-with-aws-aurora-postgresql)</p>
 
 ### RDBMS version support policy and database scripts
 
@@ -454,7 +454,7 @@ To clarify long‑term support, Camunda 8.9 introduces:
 
 This helps DBAs and operations teams validate that existing database versions are supported, plan upgrades based on a predictable policy and script set, and standardize roll‑outs and migrations across environments.
 
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+<p class="link-arrow">[RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</p>
 
 ### Standardized JDBC driver management
 
@@ -465,7 +465,7 @@ For manual installations, Camunda 8.9 introduces a standardized directory and co
 
 This structure simplifies license‑compliant driver distribution, multi‑database support in regulated environments, and provides a clear separation between Camunda-managed and customer-managed artifacts.
 
-<p class="link-arrow">[Loading JDBC drivers into pods](/self-managed/deployment/helm/configure/database/rdbms.md#loading-jdbc-drivers-into-pods)</p>
+<p class="link-arrow">[Loading JDBC drivers into pods](/self-managed/manage/databases/relational-database/rdbms.md#loading-jdbc-drivers-into-pods)</p>
 
 ## Supported environments {#environments}
 
@@ -494,7 +494,7 @@ The following guides offer detailed information on how to upgrade to Camunda 8.9
     <td>**Who is this guide for?**</td>
 </tr>
 <tr>
-    <td>[Self-Managed upgrade guide](/self-managed/upgrade/index.md)</td>
+    <td>[Self-Managed upgrade guide](/self-managed/manage/upgrade/index.md)</td>
     <td>Evaluate your infrastructure, understand operational changes, and choose the best update strategy for your environment.</td>
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>

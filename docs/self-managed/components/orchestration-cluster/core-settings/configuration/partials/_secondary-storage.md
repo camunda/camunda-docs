@@ -3,7 +3,7 @@ import TabItem from '@theme/TabItem';
 
 ## Data - secondary storage
 
-Review [secondary storage management](/self-managed/concepts/secondary-storage/managing-secondary-storage.md) for guidance on best practices, ensuring data integrity and performance optimization.
+Review [secondary storage management](/self-managed/manage/databases/secondary-storage/manage.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
 :::warning
 When Elasticsearch/OpenSearch Exporter indices and Orchestration Cluster indices share the same Elasticsearch or OpenSearch cluster, they must use different index prefixes. One prefix must not be the beginning of the other (for example, avoid `custom` and `custom-zeebe` together because `custom*` matches both). Do not use `operate`, `tasklist`, or `camunda` as the full exporter prefix, and do not use `zeebe-record` as the Orchestration Cluster index prefix, as `zeebe-record` is the default prefix for Elasticsearch/OpenSearch Exporter indices.
@@ -13,7 +13,7 @@ The Orchestration Cluster prefix is configured via
 (or `CAMUNDA_DATA_SECONDARYSTORAGE_{ELASTICSEARCH|OPENSEARCH}_INDEXPREFIX`).
 
 For detailed requirements, configuration examples, and common mistakes, see
-[index prefix configuration](/self-managed/deployment/helm/configure/database/elasticsearch/configure-elasticsearch-prefix-indices.md#index-prefix-configuration).
+[index prefix configuration](/self-managed/manage/databases/elasticsearch-opensearch/prefix-indices.md#index-prefix-configuration).
 :::
 
 <Tabs groupId="configType" defaultValue="application.yaml">
@@ -429,7 +429,7 @@ camunda.data.secondary-storage.elasticsearch.number-of-shards-per-index:
 
 <!-- ## Secondary storage
 
-Review [secondary storage management](/self-managed/concepts/secondary-storage/managing-secondary-storage.md) for guidance on best practices, ensuring data integrity and performance optimization.
+Review [secondary storage management](/self-managed/manage/databases/secondary-storage/manage.md) for guidance on best practices, ensuring data integrity and performance optimization.
 
 ### Connection
 

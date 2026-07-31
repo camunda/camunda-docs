@@ -202,7 +202,7 @@ The history migration has the following limitations.
 - Migrated data has partition ID 4095 encoded in their keys to avoid key collisions with Zeebe produced data.
   - Due to this, migrated process instances cannot be deleted via C8 API or in Operate since Zeebe cannot delegate the operation to a partition.
     - See https://github.com/camunda/camunda/issues/47927
-  - Please use [RDBMS History Cleanup](/self-managed/concepts/databases/relational-db/configuration.md#history-cleanup-1) to delete the migrated data.
+  - Please use [RDBMS History Cleanup](/self-managed/manage/databases/relational-database/configuration.md#history-cleanup-1) to delete the migrated data.
 - The minimum required history level in Camunda 7 is `FULL` to ensure that sufficient data is available for migration.
 - To avoid collisions with native Camunda 8 definitions, the Data Migrator prefixes each migrated Camunda 7 history definition ID (process, decision, and form definitions) with `c7-legacy-` by default.
   - (Optional) You can configure a different prefix with the `camunda.migrator.history.legacy-id-prefix` property. For configuration details and validation rules, see the [property reference](config-properties.md#camundamigrator).

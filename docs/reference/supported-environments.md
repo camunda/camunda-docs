@@ -45,11 +45,11 @@ For example, 1.2+ means support for the minor version 2, and any higher minors (
 - **Zeebe Java Client**: OpenJDK 8+
 - **Connector SDK**: OpenJDK 17+
 - **Camunda Spring Boot Starter**: OpenJDK 17+, Spring Boot 3.5.x, 4.1.x
-- **Helm CLI**: v4.x is required for Camunda 8.10 (chart 15.x) and later. See [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md) for details, and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
+- **Helm CLI**: v4.x is required for Camunda 8.10 (chart 15.x) and later. See [Helm 4](/self-managed/deploy-to-production/kubernetes/install/helm-v4.md) for details, and the [version matrix](https://helm.camunda.io/camunda-platform/version-matrix/) for minimum patch versions.
 
 ## Camunda 8 Self-Managed
 
-We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm charts](/self-managed/setup/overview.md) for this. See the [installation guide](/self-managed/setup/overview.md) to learn more about the available installation options.
+We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We provide officially supported [Helm charts](/self-managed/deploy-to-production/kubernetes/index.md) for this. See the [installation guide](/self-managed/deploy-to-production/kubernetes/index.md) to learn more about the available installation options.
 
 ### Deployment options
 
@@ -57,14 +57,14 @@ With the correct configuration, Camunda 8 Self-Managed can be deployed on any [C
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
-- [Stock Kubernetes](/self-managed/deployment/helm/install/quick-install.md)
-- [Cloud service providers](/self-managed/deployment/helm/install/quick-install.md) [recommended]
-  - [Amazon EKS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/amazon-eks.md)
-  - [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsoft-aks/microsoft-aks.md)
-  - [Google GKE](/self-managed/deployment/helm/cloud-providers/gcp/google-gke.md)
-- [Red Hat OpenShift](/self-managed/deployment/helm/cloud-providers/openshift/redhat-openshift.md)
-- [Docker](/self-managed/deployment/docker/docker.md) (`linux/amd64`, `linux/arm64`)
-- [Manual](/self-managed/deployment/manual/install.md)
+- [Stock Kubernetes](/self-managed/deploy-to-production/kubernetes/install/index.md)
+- [Cloud service providers](/self-managed/deploy-to-production/kubernetes/install/index.md) [recommended]
+  - [Amazon EKS](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/index.md)
+  - [Microsoft AKS](/self-managed/deploy-to-production/kubernetes/clusters/microsoft-aks/index.md)
+  - [Google GKE](/self-managed/deploy-to-production/kubernetes/clusters/google-gke.md)
+- [Red Hat OpenShift](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/redhat-openshift.md)
+- [Docker](/self-managed/deploy-to-production/containers/docker.md) (`linux/amd64`, `linux/arm64`)
+- [Manual](/self-managed/deploy-to-production/manual/install.md)
 
 :::note Helm chart compatibility
 Ensure the Camunda component versions are compatible with the Helm chart version as defined in the [matrix](https://helm.camunda.io/camunda-platform/version-matrix/).
@@ -113,29 +113,29 @@ Camunda Helm chart version `15.x.x` works with Camunda version `8.10.x` and requ
 
 Requirements for components are as follows:
 
-| Component                                                  | Java version  | Other requirements                                                                                                                                                                                                                                                                                                                                                                |
-| :--------------------------------------------------------- | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21–25 | <ul><li>Elasticsearch 9.4+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.5+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                 |
-| Optimize                                                   | OpenJDK 21–25 | <ul><li>Elasticsearch 9.4+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.5+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                                 |
-| Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                                                 |
-| Management Identity                                        | OpenJDK 17+   | <ul><li>Keycloak 26.x</li><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li><li>PostgreSQL is required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)</li></ul> |
-| Web Modeler                                                | –             | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</li></ul>                                                                                                                                                                                           |
-| Self-Managed Console                                       | –             | –                                                                                                                                                                                                                                                                                                                                                                                 |
+| Component                                                  | Java version  | Other requirements                                                                                                                                                                                                                                                                                                                                                              |
+| :--------------------------------------------------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Orchestration Cluster (Zeebe, Operate, Tasklist, Identity) | OpenJDK 21–25 | <ul><li>Elasticsearch 9.4+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.5+</li><li>OpenSearch 2.19+</li><li>For supported relational databases and versions when using an RDBMS (for example, as secondary storage), see the [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</li></ul>                                 |
+| Optimize                                                   | OpenJDK 21–25 | <ul><li>Elasticsearch 9.4+</li><li>Elasticsearch 8.19+</li><li>OpenSearch 3.5+</li><li>OpenSearch 2.19+</li></ul>                                                                                                                                                                                                                                                               |
+| Connectors                                                 | OpenJDK 21–25 | –                                                                                                                                                                                                                                                                                                                                                                               |
+| Management Identity                                        | OpenJDK 17+   | <ul><li>Keycloak 26.x</li><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</li><li>PostgreSQL is required for [certain features](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration)</li></ul> |
+| Web Modeler                                                | –             | <ul><li>Supported relational databases and versions are defined in the [RDBMS version support policy](/self-managed/manage/databases/relational-database/support-policy.md)</li></ul>                                                                                                                                                                                           |
+| Self-Managed Console                                       | –             | –                                                                                                                                                                                                                                                                                                                                                                               |
 
 :::info Optimize compatibility
 When running Optimize, make sure you use an [Elasticsearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) or [OpenSearch exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md) version that is compatible with your Optimize version.
 :::
 
 :::info RDBMS support
-For a complete list of supported RDBMS versions, JDBC driver information (bundled vs. user-supplied), and component compatibility when using relational databases as secondary storage, see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+For a complete list of supported RDBMS versions, JDBC driver information (bundled vs. user-supplied), and component compatibility when using relational databases as secondary storage, see the [RDBMS support policy](/self-managed/manage/databases/relational-database/support-policy.md).
 :::
 
 ### OpenSearch and Elasticsearch support
 
 - Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
 - Due to a [limitation](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html#or1-considerations)
-  for the index refresh interval, [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html) are not supported with Amazon OpenSearch. See [use Amazon OpenSearch Service with the Helm chart](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
-- When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/concepts/databases/elasticsearch/elasticsearch-privileges.md).
+  for the index refresh interval, [OR1 instances](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/or1.html) are not supported with Amazon OpenSearch. See [use Amazon OpenSearch Service with the Helm chart](/self-managed/manage/databases/elasticsearch-opensearch/using-external-opensearch.md).
+- When running Elasticsearch, you must have the [appropriate Elasticsearch privileges](/self-managed/manage/databases/elasticsearch-opensearch/elasticsearch-privileges.md).
 - Camunda 8 works with the Elasticsearch [default distribution](https://www.elastic.co/downloads/elasticsearch) available with the [Free or Gold+ Elastic license](https://www.elastic.co/pricing/faq/licensing#summary).
 
 ### Component version matrix

@@ -269,7 +269,7 @@ Connector manage and run in Console now supports management of multiple connecto
 
 Console is now available as a Self-Managed Docker distribution. Deploy Camunda Console using a Docker image, run Console outside Kubernetes using Docker Compose or other container services, and use Console with Camunda 8 clusters deployed via Docker.
 
-<p><a href="../../../../self-managed/quickstart/developer-quickstart/docker-compose" class="link-arrow">Docker Compose developer quickstart</a></p>
+<p><a href="../../../../self-managed/quickstart/developer/docker-compose" class="link-arrow">Docker Compose developer quickstart</a></p>
 
 ### Regions
 
@@ -320,7 +320,7 @@ Camunda provides alternative container images to the previous Bitnami images, of
 - These images are hosted on `registry.camunda.cloud`.
 - To use them, update your Helm deployment to reference the `values-images-ee.yml` file.
 
-<p><a href="../../../../self-managed/deployment/helm/install" class="link-arrow">Install Camunda with Helm</a></p>
+<p><a href="../../../../self-managed/deploy-to-production/kubernetes/install" class="link-arrow">Install Camunda with Helm</a></p>
 
 ### Configurable volumes
 
@@ -526,13 +526,13 @@ The 8.8 release cycle includes updates across multiple Self-Managed reference ar
 
 - **Managed search (EKS single-region and EC2)**: Upgraded OpenSearch from 2.15 to 2.19 to align with the latest [supported environments](/reference/supported-environments.md).
 - **Database layer (EKS and EC2)**: Raised the Aurora PostgreSQL baseline from version 15 to 17. See the updated versions in [supported environments](/reference/supported-environments.md).
-- **Identity and global architecture**: Standardized Keycloak on the Bitnami Premium 26 image. See [OIDC configuration](/self-managed/deployment/helm/configure/authentication-and-authorization/index.md).
-- **Private access (OpenShift ROSA, EKS, EC2)**: Documented an optional VPN pattern. See [EC2 architecture](/self-managed/deployment/manual/cloud-providers/amazon/aws-ec2.md#architecture).
-- **OpenShift (single and dual region)**: Updated validation and guidance for OpenShift 4.19. See [dual region guide](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
-- **EKS networking**: Added alternative NAT gateway strategies. See [EKS Helm guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
-- **High availability**: Refreshed dual-region operational guides. See [EKS dual region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md).
+- **Identity and global architecture**: Standardized Keycloak on the Bitnami Premium 26 image. See [OIDC configuration](/self-managed/deploy-to-production/kubernetes/authentication/index.md).
+- **Private access (OpenShift ROSA, EKS, EC2)**: Documented an optional VPN pattern. See [EC2 architecture](/self-managed/deploy-to-production/manual/aws-ec2.md#architecture).
+- **OpenShift (single and dual region)**: Updated validation and guidance for OpenShift 4.19. See [dual region guide](/self-managed/deploy-to-production/kubernetes/clusters/red-hat-openshift/self-hosted/dual-region.md).
+- **EKS networking**: Added alternative NAT gateway strategies. See [EKS Helm guide](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/helm.md).
+- **High availability**: Refreshed dual-region operational guides. See [EKS dual region](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/dual-region.md).
 - **Core diagrams**: Updated generic reference architecture visuals for the unified Orchestration Cluster. See [reference architectures](/self-managed/reference-architecture/reference-architecture.md).
-- **Terraform module upgrade**: Upgraded the AWS EKS Terraform module from v5 to v6. Review changes in [Terraform EKS setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md) before upgrading.
+- **Terraform module upgrade**: Upgraded the AWS EKS Terraform module from v5 to v6. Review changes in [Terraform EKS setup](/self-managed/deploy-to-production/kubernetes/clusters/amazon-eks/terraform.md) before upgrading.
 
 ### Dynamic activation of ad-hoc sub-processes using job workers
 
@@ -836,7 +836,7 @@ Console is now available as a Self-Managed Docker distribution:
 - Run Console outside Kubernetes using Docker Compose or other container services
 - Use Console with Camunda 8 clusters deployed via Docker
 
-See [Docker Compose developer quickstart](/self-managed/quickstart/developer-quickstart/docker-compose.md) for setup instructions.
+See [Docker Compose developer quickstart](/self-managed/quickstart/developer/docker-compose/index.md) for setup instructions.
 
 #### Usage metrics for licence model and tenant
 
@@ -1191,7 +1191,7 @@ This feature is not yet fully compatible with backup/restore.
 Camunda now provides alternative container images to the previously used Bitnami images. These images are hosted on `registry.camunda.cloud`.
 
 - From version **8.8**, these are the default supported images, offering better security and faster patch delivery.
-- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/deployment/helm/install/quick-install.md) for details.
+- To use them, update your Helm deployment to reference the `values-images-ee.yml` file. See the [installation guide](/self-managed/deploy-to-production/kubernetes/install/index.md) for details.
 
 #### Configurable volumes
 
@@ -1355,7 +1355,7 @@ The following known limitations apply for this alpha version release:
 
 #### Identity management for Helm Chart setups <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span>
 
-[Orchestration Cluster Identity](/versioned_docs/version-8.8/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deployment/helm/install/quick-install.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
+[Orchestration Cluster Identity](/versioned_docs/version-8.8/self-managed/components/orchestration-cluster/identity/overview.md) is now available for OIDC setups in [Helm chart deployments](/self-managed/deploy-to-production/kubernetes/install/index.md). Starting with this alpha version, you can configure the Orchestration Cluster components to use the identity provider (IdP) of your choice and enable single sign-on (SSO).
 
 The following known limitations apply for this alpha version release:
 
@@ -1540,7 +1540,7 @@ To learn more about this feature, see the [Camunda Spring Boot Starter](/apis-to
 
 Camunda 8 Run no longer requires authentication when working with APIs. Authentication and authorizations can be optionally enabled to allow requests using Basic authentication, and to test authorizations and permissions.
 
-To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer-quickstart/c8run/configuration.md#use-camunda-apis) for Camunda 8 Run.
+To learn more about this feature, see the [API documentation](/self-managed/quickstart/developer/c8run/configuration.md#use-camunda-apis) for Camunda 8 Run.
 
 <!-- https://github.com/camunda/camunda-docs/pull/5145 -->
 

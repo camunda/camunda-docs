@@ -199,13 +199,13 @@ This distributed, asynchronous approach allows parallel processing of many proce
 #### Partition independence
 
 Each partition fetches and processes matching instances independently.  
- At the start of very large batches, the total number of known items may vary until all partitions finish fetching.  
- This is due to multiple paged queries to the secondary database.
+At the start of very large batches, the total number of known items may vary until all partitions finish fetching.  
+This is due to multiple paged queries to the secondary database.
 
 #### Leader-follower coordination
 
 The leader partition coordinates the overall operation status while follower partitions focus on execution.  
- Inter-partition communication ensures consistent final status reporting.
+Inter-partition communication ensures consistent final status reporting.
 
 ## How to create and monitor batch operations
 
@@ -225,7 +225,7 @@ Lifecycle management (suspend, resume, cancel) is only available via the REST AP
 
 ### Technical monitoring
 
-Batch operation performance can be tracked via [Grafana dashboards](/self-managed/operational-guides/monitoring/metrics.md#grafana).
+Batch operation performance can be tracked via [Grafana dashboards](/self-managed/manage/monitoring/metrics.md#grafana).
 
 **Key metrics to monitor:**
 
