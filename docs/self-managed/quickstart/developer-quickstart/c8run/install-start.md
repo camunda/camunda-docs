@@ -18,7 +18,7 @@ Use this page to install Camunda 8 Run locally, start it on macOS, Linux, or Win
 - **If using Ubuntu**: Ubuntu 22.04 or newer
 
 :::note
-Starting with 8.10.0-alpha2, Camunda 8 Run does not require a separate Java installation.
+Camunda 8 Run does not require a separate Java installation.
 :::
 
 ## Install and start Camunda 8 Run
