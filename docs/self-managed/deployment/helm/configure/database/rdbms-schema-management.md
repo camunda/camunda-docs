@@ -5,6 +5,9 @@ title: Schema creation and management
 description: "Manage database schemas for RDBMS deployments using Liquibase or SQL scripts."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 This page covers schema creation, upgrades, and management for RDBMS deployments. For configuration reference and troubleshooting, see [configure RDBMS in Helm charts](/self-managed/deployment/helm/configure/database/rdbms.md).
 
 :::note Related pages
@@ -35,7 +38,14 @@ Additional database-specific requirements:
 
 ## Database user permissions
 
-### PostgreSQL
+<Tabs groupId="rdbms-permissions" defaultValue="postgresql" values={[
+{label: "PostgreSQL", value: "postgresql"},
+{label: "Oracle", value: "oracle"},
+{label: "MariaDB / MySQL", value: "mariadb"},
+{label: "SQL Server", value: "mssql"},
+]}>
+
+<TabItem value="postgresql">
 
 ```sql
 CREATE ROLE camunda WITH LOGIN PASSWORD 'password';
@@ -44,7 +54,8 @@ GRANT USAGE ON SCHEMA public TO camunda;
 GRANT CREATE ON SCHEMA public TO camunda;
 ```
 
-### Oracle
+</TabItem>
+<TabItem value="oracle">
 
 ```sql
 CREATE USER camunda IDENTIFIED BY password;
@@ -52,7 +63,8 @@ GRANT CREATE TABLE TO camunda;
 GRANT UNLIMITED TABLESPACE TO camunda;
 ```
 
-### MariaDB/MySQL
+</TabItem>
+<TabItem value="mariadb">
 
 ```sql
 CREATE USER camunda@'%' IDENTIFIED BY 'password';
@@ -60,7 +72,8 @@ GRANT ALL PRIVILEGES ON camunda.* TO camunda@'%';
 FLUSH PRIVILEGES;
 ```
 
-### SQL Server
+</TabItem>
+<TabItem value="mssql">
 
 ```sql
 CREATE LOGIN camunda WITH PASSWORD = 'password';
@@ -68,6 +81,9 @@ CREATE USER camunda FOR LOGIN camunda;
 GRANT CREATE TABLE TO camunda;
 GRANT ALTER ON SCHEMA::dbo TO camunda;
 ```
+
+</TabItem>
+</Tabs>
 
 ## Manual schema management
 
@@ -298,7 +314,7 @@ Then redeploy.
 
 **Symptom:** Logs show "permission denied" or "cannot create table."
 
-**Fix:** Verify database user has DDL permissions (see [Database user permissions](#database-user-permissions) above).
+**Fix:** Verify database user has DDL permissions (see [database user permissions](#database-user-permissions) above).
 
 ### Out-of-sync schema
 
