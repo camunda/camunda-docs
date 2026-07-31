@@ -357,7 +357,7 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
 
 Topology spread constraints control how pods are distributed across failure domains such as availability zones. The default `podAntiAffinity` configuration ensures Zeebe broker pods run on distinct nodes, but does not ensure those nodes are in different zones: if the cluster has more nodes than brokers, all brokers can still be scheduled into a single availability zone. Because broker persistent volumes are bound to a single zone on most cloud providers, a zonal outage can then take down the whole Orchestration Cluster.
 
-With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones:
+With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones. This value applies to the broker StatefulSet only and does not affect other Orchestration Cluster components such as the gateway.
 
 ```yaml
 orchestration:
