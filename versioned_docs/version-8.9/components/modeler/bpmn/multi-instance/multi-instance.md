@@ -82,6 +82,10 @@ The input mappings can access the local variables of the instance (e.g. `inputEl
 
 The output mappings can be used to update the `outputElement` variable; for example, to extract a part of the job variables.
 
+The `loopCounter` variable and the input element are managed by the engine and stay local to a single instance. Do not reference them in output mappings, because propagating them to a higher scope produces a value that reflects only one iteration. See [internal engine variables](/components/concepts/variables.md#internal-engine-variables).
+
+When the loop finishes, the output collection is propagated to the parent scope. For how a multi-instance activity compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
+
 **Example:** We have a call activity marked as a parallel multi-instance. When the called process instance completes, its variables are [merged](/components/concepts/variables.md#variable-propagation) into the call activity's process instance. Its result is collected in the output collection variable, but this has become a race condition where each completed child instance again overwrites this same variable. We end up with a corrupted output collection. An output mapping can be used to overcome this, because it restricts which variables are merged. In the case of:
 
 - Parallel multi-instance call activity
