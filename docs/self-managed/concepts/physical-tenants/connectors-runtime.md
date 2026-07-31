@@ -114,9 +114,11 @@ Secret references:
 
 Resolved values are never written to the variable store, Operate, Tasklist, logs, or the command log. Only the reference name appears in exports — the reference is a pointer, not the value.
 
-Secret resolution requires `SECRETS:REVEAL` on the `SECRET` resource type, scoped per Physical Tenant.
+Secret resolution requires `SECRETS:REVEAL` on the `SECRET` resource type, scoped per Physical Tenant. The runtime calls `POST /v2/secrets/resolve` scoped to the correct Physical Tenant for each job.
 
-<!-- TODO: Confirm connector-specific behavior with Berkay Canbolat before publishing: does the runtime call POST /v2/secrets/resolve per PT, and is transparent resolution available in the connector context in alpha5? (#3040) -->
+:::note
+Transparent secret resolution (automatic resolution of `{{secrets.MY_SECRET}}` references in the connector context) is subject to Connector team capacity for 8.10. If unavailable at release, secret references must be resolved explicitly via the API. Check the 8.10 release notes for final availability.
+:::
 
 ## Inbound connectors
 
@@ -124,15 +126,21 @@ Each Physical Tenant gets its own `ImportSchedulers` instance with a dedicated `
 
 ### Webhook path routing
 
-Enable the `APPEND_ENGINE_AND_TENANT_TO_WEBHOOK_PATH` flag to activate namespaced paths:
+Set `camunda.connector.webhook.append-physical-tenant-and-tenant-to-path: true` to activate namespaced paths:
 
 ```
 /inbound/<physicalTenantId>/<tenantId>/<path>
 ```
 
-Without this flag, the first registered inbound connector matching a path claims the request regardless of Physical Tenant — enable namespaced paths in any multi-tenant deployment.
+Equivalent environment variable: `CAMUNDA_CONNECTOR_WEBHOOK_APPEND_PHYSICAL_TENANT_AND_TENANT_TO_PATH`.
 
-<!-- TODO: Confirm with Nic Puppa: exact mechanism to enable this flag (env var, Spring property, or Helm value), whether per-tenant webhook authentication is enforced at the routing layer, and whether the inbound routing strategy is final for alpha5. -->
+If unset, the property is inferred automatically: multi-client configurations default to `true`, single-client configurations default to `false`. An explicit value always overrides inference.
+
+Without namespaced paths, the first registered inbound connector matching a path claims the request regardless of Physical Tenant — enable namespaced paths in any multi-tenant deployment.
+
+:::warning Isolation relies on path uniqueness, not tenant-scoped credentials
+The routing layer performs pure path-segment matching on `physicalTenantId/tenantId/path` — no credential or signature check happens at the routing layer. HMAC and signature verification is handled per-connector downstream, inside each webhook element's own logic, and has no awareness of `physicalTenantId`. Tenant isolation depends entirely on each tenant's webhook paths being distinct and unguessable.
+:::
 
 ### Known limitations
 
