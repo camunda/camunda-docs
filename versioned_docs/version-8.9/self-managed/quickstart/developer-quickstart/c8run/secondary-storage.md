@@ -265,14 +265,6 @@ Start Camunda 8 Run with `--config <file>` and point the configuration to your e
 
 Choose **H2** for quick local development and **Elasticsearch** for production-like scenarios where advanced search and analytics are required.
 
-## H2 limitations for Operate
-
-Operate can run against H2, but some user-facing features are limited:
-
-- Operate does not provide complete analytics, advanced search, or long-running query features when backed by H2.
-- Performance and scaling behavior when using H2 differs from Elasticsearch.
-- For full Operate feature parity, use an external Elasticsearch instance.
-
 ## Primary vs. secondary storage
 
 Camunda 8 uses two layers of storage:
@@ -286,7 +278,7 @@ Camunda 8 Run uses v2 APIs by default, so no additional configuration is require
 
 ## Known limitations
 
-- H2 is intended for testing and local development only. For full Operate functionality, use Elasticsearch.
+- H2 is intended for testing and local development only.
 - H2 data persists to the configured file path by default. Keep the path stable to avoid accidental data loss.
 - Performance and memory use may vary depending on the local environment.
 
