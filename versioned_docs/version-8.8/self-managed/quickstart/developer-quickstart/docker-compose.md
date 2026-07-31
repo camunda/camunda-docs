@@ -54,7 +54,7 @@ Run Compose commands from the extracted directory. If Compose reports that image
 
 ### Docker Compose configurations
 
-Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
+Camunda provides three Docker Compose configurations in the [Camunda Distributions releases](https://github.com/camunda/camunda-distributions/releases):
 
 | Configuration File              | Description                                                                                                                                                                                                                                                                       |
 | :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

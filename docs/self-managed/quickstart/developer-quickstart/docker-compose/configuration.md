@@ -8,7 +8,7 @@ Use this page to choose the Docker Compose file that matches your local setup, f
 
 ## Choose a Docker Compose configuration
 
-Camunda provides three Docker Compose configurations in the [Camunda Distributions repository](https://github.com/camunda/camunda-distributions):
+Camunda provides three Docker Compose configurations in the [Camunda Distributions releases](https://github.com/camunda/camunda-distributions/releases):
 
 | Configuration file                | Description                                                                                                                                                                                                                                                                           |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
