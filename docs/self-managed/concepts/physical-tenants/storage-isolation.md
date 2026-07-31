@@ -57,6 +57,90 @@ tenanta:
 
 <!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. --->
 
+## Elasticsearch and OpenSearch storage
+
+Each Physical Tenant can use a shared search cluster with isolated index prefixes, or a dedicated cluster per tenant.
+
+### Configuration models
+
+**Shared cluster with index prefix isolation** (recommended for cost-efficiency):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch # or opensearch
+      elasticsearch:
+        url: https://es.example.com:9200
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          elasticsearch:
+            index-prefix: tenanta # must be unique per tenant
+    tenantb:
+      data:
+        secondary-storage:
+          elasticsearch:
+            index-prefix: tenantb
+```
+
+**Separate cluster per tenant** (maximum isolation):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch
+      elasticsearch:
+        url: https://es-default.example.com:9200
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          elasticsearch:
+            url: https://es-tenanta.example.com:9200
+            index-prefix: tenanta
+```
+
+**OpenSearch with AWS credentials** (shared credentials at root, override per tenant):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: opensearch
+      opensearch:
+        url: https://os.example.com:9200
+        aws-enabled: true
+        aws-region: eu-west-1
+  provider-auth:
+    aws:
+      role-arn: arn:aws:iam::111111111111:role/default-role
+      web-identity-token-file: /var/run/secrets/default-token
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          opensearch:
+            index-prefix: tenanta
+      provider-auth:
+        aws:
+          role-arn: arn:aws:iam::222222222222:role/tenant-a-role
+          # web-identity-token-file inherited from root if not set here
+```
+
+Static AWS credentials (`access-key` + `secret-key`) and web identity (IRSA via `role-arn` + `web-identity-token-file`) are mutually exclusive. When no credentials are configured, the AWS SDK default provider chain is used.
+
+### Validation and operations
+
+- **Configuration**: Duplicate index prefixes across tenants cause a startup error.
+- **Pre-startup**: Ensure each tenant's index prefix is unique and the cluster is reachable before deploying.
+- **Backup**: ES/OS backups operate at the cluster level via the web applications backup endpoint. Per-tenant ES/OS backup is not yet available and is planned as part of the management API.
+- **Resource scaling**: Each tenant's search client is independent; monitor index size per prefix and set retention policies independently per tenant.
+
 ## Document Store storage
 
 Store documents globally with per-tenant subpaths, or use dedicated stores per tenant.
