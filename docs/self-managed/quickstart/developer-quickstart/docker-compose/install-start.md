@@ -42,7 +42,7 @@ To start the default lightweight Camunda 8 Self-Managed environment locally:
 
 Run Compose commands from the extracted directory. If Compose reports that image-version variables are unset or `.env` is missing, download and extract the complete distribution archive again instead of downloading an individual Compose file.
 
-For available Compose files, component URLs, and authentication defaults, see [configure Docker Compose environments](./configuration.md). The full configuration needs an external Elasticsearch instance running before you start it; see [choose a Docker Compose configuration](./configuration.md#choose-a-docker-compose-configuration).
+For available Compose files, component URLs, and authentication defaults, see [configure Docker Compose environments](./configuration.md).
 
 ## Stop Camunda 8 with Docker Compose
 

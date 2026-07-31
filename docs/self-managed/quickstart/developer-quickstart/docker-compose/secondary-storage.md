@@ -20,7 +20,7 @@ Camunda 8.10 uses different application configuration files for the lightweight 
 | Lightweight `docker-compose.yaml` | File-based H2             | Set `ORCHESTRATION_CONFIG_FILE` to a file from `configuration/`, then edit that file for your database connection.                                                                     |
 | Full `docker-compose-full.yaml`   | File-based H2             | Replace the `camunda.data.secondary-storage` settings in `.orchestration/application.yaml` with the matching block from the file in `configuration/`, then edit the connection values. |
 
-The full setup also requires an external Elasticsearch instance for Optimize. The PostgreSQL containers in the full setup store Management Identity and Camunda Hub data; they do not store Orchestration Cluster data.
+The full setup also starts Elasticsearch for Optimize. The PostgreSQL containers in the full setup store Management Identity and Camunda Hub data; they do not store Orchestration Cluster data.
 
 :::warning
 Do not replace `.orchestration/application.yaml` in the full setup with a file from `configuration/`. The files in `configuration/` use the lightweight setup's Basic authentication settings. Replacing the full file removes its OpenID Connect (OIDC) and component configuration.
@@ -296,7 +296,7 @@ Use H2 only for development, testing, and evaluation. It is not a production bac
 For a document-store backend, add the backend settings to `docker-compose.override.yaml`. The environment variables override the secondary storage settings in either application configuration file.
 
 :::note
-These examples change the Orchestration Cluster secondary storage only. In the full setup, Optimize always requires Elasticsearch. The Elasticsearch example can serve both Orchestration and Optimize. If Orchestration uses OpenSearch, configure a separate Elasticsearch endpoint for Optimize in `.env`.
+These examples change the Orchestration Cluster secondary storage only. In the full setup, Optimize always requires Elasticsearch. The Elasticsearch example can serve both Orchestration and Optimize. If Orchestration uses OpenSearch, Optimize continues to use the Elasticsearch service that the full configuration starts.
 :::
 
 :::note
@@ -328,8 +328,6 @@ services:
       discovery.type: single-node
       xpack.security.enabled: "false"
       ES_JAVA_OPTS: -Xms512m -Xmx512m
-    ports:
-      - "9200:9200"
     volumes:
       - elasticsearch-secondary-data:/usr/share/elasticsearch/data
     networks:

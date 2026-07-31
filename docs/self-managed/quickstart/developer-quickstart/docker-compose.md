@@ -5,7 +5,7 @@ sidebar_label: "Docker Compose"
 description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Docker Compose, including setup, configuration, secondary storage, connectors, and modeling."
 ---
 
-Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. The full configuration additionally includes Optimize, Camunda Hub, Management Identity, Keycloak, and PostgreSQL, and requires an external Elasticsearch instance.
+Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. The full configuration additionally includes Optimize, Camunda Hub, Management Identity, Keycloak, PostgreSQL, and Elasticsearch.
 
 Docker Compose also supports [document handling](/self-managed/concepts/document-handling/overview.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Web Modeler.
 

@@ -10,11 +10,11 @@ Use this page to choose the Docker Compose file that matches your local setup, f
 
 Camunda provides three Docker Compose configurations in the [Camunda Distributions releases](https://github.com/camunda/camunda-distributions/releases):
 
-| Configuration file                | Description                                                                                                                                                                                                                                                                           |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses H2 secondary storage by default. Use this for most local development scenarios.                                                                                                        |
-| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Camunda Hub, Management Identity, Keycloak, and PostgreSQL. Requires an external Elasticsearch instance. Use this when you need management components, process optimization, or browser-based modeling. |
-| `docker-compose-web-modeler.yaml` | Standalone Camunda Hub configuration. Runs Camunda Hub and its dependencies without an Orchestration Cluster. For deployment details, see [deploy with Camunda Hub](./connectors-and-modeling.md#deploy-with-camunda-hub).                                                            |
+| Configuration file                | Description                                                                                                                                                                                                                                             |
+| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `docker-compose.yaml`             | Default lightweight configuration. Includes the Orchestration Cluster and Connectors, and uses H2 secondary storage by default. Use this for most local development scenarios.                                                                          |
+| `docker-compose-full.yaml`        | Full configuration. Includes the Orchestration Cluster, Connectors, Optimize, Camunda Hub, Management Identity, Keycloak, PostgreSQL, and Elasticsearch. Use this when you need management components, process optimization, or browser-based modeling. |
+| `docker-compose-web-modeler.yaml` | Standalone Camunda Hub configuration. Runs Camunda Hub and its dependencies without an Orchestration Cluster. For deployment details, see [deploy with Camunda Hub](./connectors-and-modeling.md#deploy-with-camunda-hub).                              |
 
 To start a specific configuration, run one of the following commands:
 
@@ -24,20 +24,11 @@ To start a specific configuration, run one of the following commands:
   docker compose up -d
   ```
 
-- Full configuration. Camunda 8.10 Docker Compose does not start Elasticsearch, so start an external instance first and leave it running:
+- Full configuration:
 
   ```shell
-  docker run -d --name camunda-elasticsearch -p 9200:9200 \
-    -e discovery.type=single-node \
-    -e xpack.security.enabled=false \
-    -e cluster.routing.allocation.disk.threshold_enabled=false \
-    -e "ES_JAVA_OPTS=-Xms512m -Xmx512m" \
-    docker.elastic.co/elasticsearch/elasticsearch:8.19.11
-
   docker compose -f docker-compose-full.yaml up -d
   ```
-
-  The `ELASTICSEARCH_*` values in `.env` point at `host.docker.internal:9200` by default, which resolves to this container. Set them to your own endpoint if you already run Elasticsearch elsewhere.
 
 - Standalone Camunda Hub:
 
@@ -46,7 +37,7 @@ To start a specific configuration, run one of the following commands:
   ```
 
 :::note
-The Orchestration Cluster uses file-based H2 secondary storage by default. The PostgreSQL containers in the full configuration store Management Identity and Camunda Hub data, not Orchestration Cluster data. The full configuration still requires Elasticsearch for Optimize.
+The Orchestration Cluster uses file-based H2 secondary storage by default. The PostgreSQL containers in the full configuration store Management Identity and Camunda Hub data, not Orchestration Cluster data. The full configuration starts Elasticsearch for Optimize.
 
 To select another Orchestration Cluster backend, see [configure secondary storage with Docker Compose](./secondary-storage.md).
 :::
@@ -110,11 +101,11 @@ The following components are available in the full configuration only:
 
 ### External dependencies
 
-| Component     | Configuration | URL                                                          | Description                                                                                                                                                         |
-| :------------ | :------------ | :----------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch | Full          | Configured in `.env`                                         | External instance required by Optimize and by the Orchestration Cluster's `elasticsearch` exporter. Camunda 8.10 Docker Compose does not start Elasticsearch.       |
-| Keycloak      | Full          | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`. |
-| PostgreSQL    | Full          | Internal only                                                | Database for Management Identity and Camunda Hub. This database is separate from Orchestration Cluster secondary storage.                                           |
+| Component     | Configuration | URL                                                          | Description                                                                                                                                                                                                           |
+| :------------ | :------------ | :----------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch | Full          | [http://localhost:9200](http://localhost:9200)               | Started by the full configuration. Used by Optimize and the Orchestration Cluster's `elasticsearch` exporter. Point the `ELASTICSEARCH_*` values in `.env` at another endpoint to use an externally managed instance. |
+| Keycloak      | Full          | [http://localhost:18080/auth/](http://localhost:18080/auth/) | OIDC provider for Management Identity. The lightweight configuration uses the embedded Orchestration Cluster Admin instead. Access Keycloak with `admin` / `admin`.                                                   |
+| PostgreSQL    | Full          | Internal only                                                | Database for Management Identity and Camunda Hub. This database is separate from Orchestration Cluster secondary storage.                                                                                             |
 
 ## Authentication
 
