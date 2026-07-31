@@ -1,14 +1,12 @@
 ---
 id: process-documentation-with-readme-files
 title: Process documentation with README files
-description: "The README feature brings project documentation directly into the modeling workspace to help capture important context in a way that’s versioned, visible, and easy to maintain."
+description: "The README feature brings project documentation directly into modeling projects to help capture important context in a way that’s versioned, visible, and easy to maintain."
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-The README feature brings project documentation directly into the modeling workspaces of business users, developers, and project owners to help capture important context in a way that’s versioned, visible, and maintainable.
-
-![project with readme](img/project-with-readme.png)
+The README feature brings project documentation directly into modeling projects of business users, developers, and project owners to help capture important context in a way that’s versioned, visible, and maintainable.
 
 ## Why use READMEs
 
@@ -23,16 +21,14 @@ With README support in Web Modeler, you can:
 
 - Workspace goals, scope, and stakeholders
 - Links to related assets
-- Go-live dates, status updates, and workspace health
+- Go-live dates and status updates
 - Requirements, process owners, and change logs
 
 ## Where READMEs appear
 
-- In every workspace, project, and folder (each can have its own README)
-  ![project with readme](img/project-with-readme.png)
+- Every project and folder can have its own README
   > Git-connected projects sync README content just like any other file
 - In the [process landscape view](../../process-landscape-visualization.md) as context for a node or the entire app
-  ![process landscape with readme](img/process-landscape-with-readme.png)
 
 :::note
 Each README is unique to its folder and can’t be moved through the UI. However, you can download or delete associated README files.
@@ -40,7 +36,7 @@ Each README is unique to its folder and can’t be moved through the UI. However
 
 ## Writing a README
 
-README files use standard [Markdown](https://www.markdownguide.org/), a lightweight markup language. A README should provide a snapshot of what your workspace, project, or folder is about. Consider including:
+README files use standard [Markdown](https://www.markdownguide.org/), a lightweight markup language. A README should provide a snapshot of what your project or folder is about. Consider including:
 
 - What this project, application, or folder is for
 - Who owns or maintains it
@@ -53,17 +49,11 @@ Refer to [GitHub’s README guide](https://docs.github.com/en/repositories/manag
 
 ## README interaction
 
-README file changes are fully versioned, you can see previous versions and recent changes by selecting the **Show versions** icon:
+README file changes are fully versioned, you can see previous versions and recent changes by selecting the **Show versions** icon.
 
-![view readme versions ](img/view-readme-versions.png)
+README files can be downloaded by selecting the **Download** icon.
 
-README files can be downloaded by selecting the **Download** icon:
-
-![download readme](img/download-readme.png)
-
-To see the final result of a README file, select the **Preview** tab:
-
-![readme preview](img/readme-preview.png)
+To see the final result of a README file, select the **Preview** tab.
 
 ## Related resources
 
