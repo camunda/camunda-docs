@@ -166,6 +166,8 @@ When a secret is rotated, the gateway cache expires within the configured TTL (d
 
 A failure in one tenant's job workers does not affect workers registered for other tenants.
 
-<!-- TODO (Igor Dultsev): MS Teams App Integration has a Physical Tenant support PR with investigation of multiple Keycloak per tenant. Request current status and add a section once finalized. -->
+:::note App integrations (MS Teams and similar)
+App integrations with Physical Tenant support are implemented and will be documented in a follow-up section once the configuration details are finalized. Multiple Keycloak (separate IdP per tenant in the connector context) is not supported in 8.10.
+:::
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
