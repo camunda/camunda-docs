@@ -8,7 +8,7 @@ A [process](/reference/glossary.md#process) is a defined sequence of distinct st
 
 Process orchestration is the technology that coordinates the various moving parts, or endpoints, of a business process, and sometimes ties multiple processes together. It helps you work with the people, systems, and devices you already have, while achieving goals around end-to-end process automation.
 
-With Camunda, you can orchestrate [human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-example.md), [APIs](/guides/getting-started-orchestrate-apis.md), and [AI agents](/guides/getting-started-agentic-orchestration.md) as endpoints in the same process. For example, an order fulfillment process could run a fixed sequence of steps, then hand off a step to an [AI agent](/reference/glossary.md#ai-agent) that decides which tools to call to resolve a customer's request, before returning control to the next fixed step. Camunda runs these ad-hoc, agent-driven steps on the same engine as fixed ones, with the same variables, error handling, and monitoring, blending deterministic and AI-driven orchestration in a single process. See [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) for how Camunda governs this blend.
+With Camunda, you can orchestrate [human tasks](../../guides/getting-started-orchestrate-human-tasks.md), [microservices](/guides/getting-started-example.md), [APIs](/guides/getting-started-orchestrate-apis.md), and [AI agents](/guides/getting-started-agentic-orchestration.md) as endpoints in the same process. For example, an order fulfillment process could run a fixed sequence of steps, then hand off a step to an [AI agent](/reference/glossary.md#ai-agent) that decides which tools to call, before returning control to the next fixed step.
 
 A **[job worker](./job-workers.md)** implements the business logic required to complete a task. You can choose to write a worker as a microservice, or also as part of a classical 3-tier application, as a \(lambda\) function, via command line tools, etc.
 
@@ -61,3 +61,22 @@ As Zeebe progresses from one task to the next in a process, it can move custom d
 ![data-flow](assets/process-data-flow.png)
 
 Any job worker can read the variables and modify them when completing a job so data can be shared between different tasks in a process.
+
+### Agent-driven steps
+
+Not every step has to follow a deterministic path you model in advance. Where a decision can't be fixed up front, you can hand part of the process to an [AI agent](/reference/glossary.md#ai-agent).
+
+In the following order process, **Fetch items** is an AI agent rather than a fixed task.
+
+![order process with an ai agent](assets/order-process-agent.png)
+
+Execution works as described above, with one difference: the AI agent chooses which activity runs next.
+
+1. The process instance reaches the AI agent, which sends the prompt and the available tool definitions to a large language model (LLM).
+2. If the LLM selects a tool, Camunda activates the matching activity inside the sub-process. **Check inventory**, **Reserve stock**, **Order from supplier**, and **Ask warehouse team** are service and user tasks, completed by the same job workers and users as any other task.
+3. The tool result is passed back to the LLM, which decides whether more tool calls are needed.
+4. Once the LLM returns a final response, the flow continues to **Ship parcel**.
+
+The LLM decides which tools to call and in what order. Camunda runs them, moves the same [variables](/components/concepts/variables.md), and applies the same retries, incident handling, and audit trail as the fixed steps around them.
+
+To learn more, see [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md).
