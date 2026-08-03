@@ -260,10 +260,10 @@ Start Camunda 8 Run with `--config <file>` and point the configuration to your e
 
 ## Switching between storage types and migration notes
 
-- Switching the secondary storage type, for example H2 to Elasticsearch, currently does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
+- Switching the secondary storage type, for example H2 to Elasticsearch, does **not** preserve existing secondary-store data. The system starts with a fresh secondary store.
 - To switch storage, update `data.secondary-storage` in `application.yaml` and restart Camunda 8 Run.
 
-Choose **H2** for quick local development and **Elasticsearch** for production-like scenarios where advanced search and analytics are required.
+Choose **H2** for quick local development and other supported **RDBMS** or **Elasticsearch** for production-like scenarios.
 
 ## Primary vs. secondary storage
 
@@ -274,7 +274,7 @@ Camunda 8 uses two layers of storage:
 
 For more details on how these layers interact, see [secondary storage architecture](/self-managed/concepts/secondary-storage/index.md).
 
-Camunda 8 Run uses v2 APIs by default, so no additional configuration is required when switching between secondary storage backends.
+Camunda 8 Run uses v2 APIs by default, so you don't need to reconfigure the APIs when switching between secondary storage backends.
 
 ## Known limitations
 
