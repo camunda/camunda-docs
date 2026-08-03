@@ -622,7 +622,7 @@ module.exports = {
               to: "/downloads",
             },
             {
-              label: "Camunda Hub",
+              label: "Web Modeler",
               href: "https://camunda.io",
             },
             {
