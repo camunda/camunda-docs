@@ -80,23 +80,72 @@ See the following comparison:
 
 ## Declare AI-generated parameters with `fromAi()`
 
-If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, declare those parameters using the `fromAi()` FEEL function in the activity's input mappings or connector input fields.
+If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, wrap those values in the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function. The function returns the value unchanged at runtime, but it registers the parameter in the tool's input schema so the LLM knows it must generate a value.
 
-How you configure this depends on the BPMN element type that implements your tool. A connector task exposes its own input fields, such as **URL** or **Query parameters** in the REST outbound connector's **HTTP Endpoint** section, while a script, service, or user task exposes an [**Input mapping**](/components/concepts/variables.md#input-mappings) section instead.
+Where you write the `fromAi()` call depends on whether the tool element has an element template applied:
 
-1. Open the input field (for a connector task) or the **Input mapping** section (for a script, service, or user task) where the value is configured.
-1. If you're using the **Input mapping** section, add a new entry and set its **Local variable name**. This is the name you'll reference the variable elsewhere in the element.
-1. Wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context, and add a description so the LLM knows what to provide:
+- An element with an element template applied, such as a connector task, exposes the template's own input fields. Write `fromAi()` directly in those fields.
+- An element without an element template, such as a plain service, script, or user task, exposes an [**Input mapping**](/components/concepts/variables.md#input-mappings) section instead. Write `fromAi()` in an input mapping entry.
+
+Both approaches produce the same tool input schema, because the AI Agent connector treats element template fields as input mappings.
+
+<Tabs groupId="tool-input-declaration" defaultValue="element-template" values={[
+{ label: "Element template fields", value: "element-template" },
+{ label: "Input mappings", value: "input-mappings" },
+]}>
+
+<TabItem value="element-template">
+
+Use this approach for an element with an element template applied, such as a [connector](/components/connectors/use-connectors/index.md) task.
+
+1. Select the tool element and find the template field whose value the LLM should supply. For example, the [REST outbound connector](/components/connectors/protocol/rest.md) exposes a **URL** field in its **HTTP Endpoint** section, plus **Query parameters** and **Request body** fields.
+1. Set the field to a FEEL expression and wrap the value in `fromAi()`, referencing the parameter as a field of the `toolCall` context. For example, in the **URL** field:
 
    ```feel
    fromAi(toolCall.url, "The URL to fetch. Must be a valid HTTP(s) URL.")
    ```
 
+1. Repeat for each field the LLM should supply. A single field can also declare several parameters. For example, in the **Query parameters** field:
+
+   ```feel
+   {
+     latitude: fromAi(toolCall.latitude, "The latitude of the location.", "number"),
+     longitude: fromAi(toolCall.longitude, "The longitude of the location.", "number")
+   }
+   ```
+
+You don't need an additional input mapping entry for these fields. The AI Agent connector handles element template fields as input mappings, so it picks up the `fromAi()` calls written directly in them.
+
+</TabItem>
+
+<TabItem value="input-mappings">
+
+Use this approach for an element without an element template, such as a plain service, script, or user task.
+
+1. Select the tool element and open the **Input mapping** section in the properties panel.
+1. Add a new entry and set its **Local variable name**. This is the name you use to reference the value elsewhere in the element, for example in a script task's FEEL expression.
+1. Set the **Variable assignment value** to a `fromAi()` call, referencing the parameter as a field of the `toolCall` context.
 1. Repeat for each value the LLM should supply.
+
+For example, to let the LLM supply the URL a task should call:
+
+| Local variable name | Variable assignment value                                                 |
+| :------------------ | :------------------------------------------------------------------------ |
+| `url`               | `=fromAi(toolCall.url, "The URL to fetch. Must be a valid HTTP(s) URL.")` |
 
 <img src={InputMapping} alt="Input mapping with local variable name url and a fromAi() FEEL expression as the variable assignment value" width="75%"/>
 
-See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) for more details.
+</TabItem>
+
+</Tabs>
+
+Whichever approach you use, the following applies:
+
+- The first argument must be a reference to a field of the `toolCall` context, such as `toolCall.url`. The AI Agent connector populates this context with the LLM-generated values.
+- The parameter name the LLM sees is the last segment of that reference, `url` in the previous examples, not the **Local variable name** or the template field name.
+- The AI Agent connector collects every `fromAi()` call in the element and combines them into one input schema for the tool.
+
+See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) for more details, including parameter types, optional parameters, and JSON Schema constraints.
 
 ## Return the result as `toolCallResult`
 
