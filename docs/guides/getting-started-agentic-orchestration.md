@@ -295,7 +295,7 @@ You can customize your AI agent by adding tools. In this section, you will add a
 ### Add a REST connector task
 
 1. Inside the AI agent sub-process, add a new task element.
-1. Change the task type to [**REST Outbound Connector**](/components/connectors/protocol/rest.md) using the **Change element** menu.
+1. Change the task type to [**Send REST Request**](/components/connectors/protocol/rest.md) using the **Change element** menu.
 1. Name the task. For example, `Get current weather`. This name is visible to the LLM as the tool name.
 
 ### Write a tool description

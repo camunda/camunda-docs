@@ -319,9 +319,53 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 
 ## Connectors
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connectors with a single operation are renamed after the operation
+
+Connectors that provide a single operation are renamed in Modeler so their name describes the action they perform instead of the product they connect to. For example, the **REST Outbound Connector** is now named **Send REST Request**. Connectors with several operations keep their names and expose their operations as searchable entries instead.
+
+Only the name shown in Modeler changed. Template IDs, versions, connector types, and runtime behavior are unchanged, so existing process models continue to run and do not need to be remodeled or redeployed.
+
+**Action:** Search for the new name when you add one of these connectors to a process, and update your own documentation, templates, and training material that refer to the previous names.
+
+<details>
+<summary>Renamed connectors</summary>
+
+| Previous name                                   | New name                                           |
+| :---------------------------------------------- | :------------------------------------------------- |
+| Amazon EventBridge Outbound Connector           | Send Event to AWS EventBridge                      |
+| Amazon SNS Outbound connector                   | Publish Message to AWS SNS                         |
+| Amazon SQS Outbound Connector                   | Send Message to AWS SQS                            |
+| AWS Bedrock AgentCore Runtime                   | Invoke Agent in AWS Bedrock AgentCore Runtime      |
+| AWS Bedrock Code Interpreter Outbound Connector | Run Code with AWS Bedrock Code Interpreter         |
+| AWS Bedrock Knowledge Base Outbound Connector   | Retrieve Documents from AWS Bedrock Knowledge Base |
+| AWS Lambda Outbound Connector                   | Invoke AWS Lambda Function                         |
+| AWS SageMaker Outbound Connector                | Run Inference with AWS SageMaker                   |
+| AWS Textract Outbound Connector                 | Extract Text from Document with AWS Textract       |
+| Google Gemini Outbound Connector                | Generate Content with Google Gemini                |
+| GraphQL Outbound Connector                      | Send GraphQL Request                               |
+| Hugging Face Outbound Connector                 | Run Inference on Hugging Face                      |
+| Kafka Outbound Connector                        | Publish Message to Kafka                           |
+| RabbitMQ Outbound Connector                     | Publish Message to RabbitMQ                        |
+| REST Outbound Connector                         | Send REST Request                                  |
+| RPA Connector                                   | Run RPA Script                                     |
+| SendGrid Outbound Connector                     | Send Email with SendGrid                           |
+| SOAP Connector                                  | Send SOAP Request                                  |
+| SQL Database Connector                          | Execute SQL Statement on Database                  |
+
+Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound connector is renamed.
+
+</details>
+
+<p className="link-arrow">[Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)</p>
+
+</div>
+</div>
 
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
