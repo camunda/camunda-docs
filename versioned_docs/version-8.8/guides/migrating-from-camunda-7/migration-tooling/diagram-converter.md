@@ -176,11 +176,11 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local --help
 ```
 
 <details>
-<summary>All local mode parameters (reference)</summary>
+<summary>Local mode parameter reference</summary>
 
 | Parameter                                              | Description                                                                     |
 | ------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| `<file>`                                               | File to convert, or directory to scan for diagrams                              |
+| `<file>`                                               | File to convert or directory to scan for diagrams                               |
 | `--add-data-migration-execution-listener`              | Add an execution listener on blank start events for the Camunda 7 Data Migrator |
 | `--always-use-default-job-type`                        | Always use the configured default job type                                      |
 | `--check`                                              | Analyze only, without exporting converted diagrams                              |
@@ -227,7 +227,7 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine --help
 ```
 
 <details>
-<summary>All engine mode parameters (reference)</summary>
+<summary>Engine mode parameter reference</summary>
 
 | Parameter                                              | Description                                                                           |
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------- |
