@@ -244,7 +244,7 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar engine --help
 | `--keep-job-type-blank`                                | Keep job types blank so you can set them manually after conversion                    |
 | `--md, --markdown`                                     | Create a Markdown results file                                                        |
 | `-o, --override`                                       | Override existing files                                                               |
-| `-p, --password=<password>`                            | Password for Basic authentication                                                     |
+| `-p, --password`                                       | Password for Basic authentication                                                     |
 | `--platform-version=<platformVersion>`                 | Set target Camunda 8 semantic version                                                 |
 | `--prefix=<prefix>`                                    | Prefix for generated file names (default: `converted-c8-`)                            |
 | `-t, --target-directory=<targetDirectory>`             | Directory to save converted `.bpmn` files                                             |
