@@ -16,9 +16,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first AI agent, and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
-
-Every guide uses the same engine and the same process model, whether a step follows a fixed rule, waits for a person, calls an API, or hands work to an [AI agent](/reference/glossary.md#ai-agent).
+Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
 <a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
 
