@@ -199,33 +199,61 @@ Set the script task's **Result variable** to `toolCallResult`. The FEEL expressi
 
 ### Combine multiple outputs into a single `toolCallResult`
 
-When your tool task has several output parameters that each contribute a field to `toolCallResult`, avoid an output mapping per field targeting `toolCallResult.<field>`.
+When your tool produces several values that each contribute a field to `toolCallResult`, do not add one output mapping per field targeting `toolCallResult.<field>`:
 
-:::note
-Output mappings and result variables containing a period are discouraged. See [output mappings](/components/concepts/variables.md#output-mappings).
-:::
+- Output mappings and result variables containing a period are discouraged. See [output mappings](/components/concepts/variables.md#output-mappings).
+- Mapping to `toolCallResult` directly replaces the entire variable, so several mappings targeting it overwrite each other.
 
-Mapping to `toolCallResult` directly also replaces the entire variable, so multiple mappings targeting it would overwrite each other.
+Whether you can add fields to `toolCallResult` one at a time depends on the element type. Use the approach that matches your tool's element type:
 
-For script tasks and output mappings on regular tasks, use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it. Where you write the call depends on the element type:
+<Tabs groupId="tool-result-mapping" defaultValue="connector-task" values={[
+{ label: "Connector task", value: "connector-task" },
+{ label: "Regular task", value: "regular-task" },
+{ label: "Script task", value: "script-task" },
+]}>
 
-- **Regular task with output mappings** (for example, a user task): add it as the **Variable assignment value** of a mapping whose **Process variable name** is `toolCallResult`:
+<TabItem value="connector-task">
 
-  | Variable assignment value                                      | Process variable name |
-  | :------------------------------------------------------------- | :-------------------- |
-  | `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult`      |
+A connector task cannot add fields one at a time. A connector **Result Expression** has no access to process variables, so it cannot read the current value of `toolCallResult`.
 
-- **Script task**: write it directly in the script task's FEEL expression in the **Script** section:
-
-  ```feel
-  context put(toolCallResult, "status", response.body.status)
-  ```
-
-Connector result expressions cannot use this accumulation pattern because they don't have access to process variables, so they can't read the current value of `toolCallResult`. A connector tool must build its full result in one result expression. For example:
+Build the complete result in a single **Result Expression** instead:
 
 ```feel
- `= { toolCallResult: { status: response.status, body: response.body } }`
+{
+  toolCallResult: {
+    status: response.status,
+    body: response.body
+  }
+}
 ```
+
+</TabItem>
+
+<TabItem value="regular-task">
+
+A regular task, such as a user task, can add fields one at a time. Use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it.
+
+Write the call as the **Variable assignment value** of a mapping whose **Process variable name** is `toolCallResult`:
+
+| Variable assignment value                                      | Process variable name |
+| :------------------------------------------------------------- | :-------------------- |
+| `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult`      |
+
+</TabItem>
+
+<TabItem value="script-task">
+
+A script task can add fields one at a time. Use the [`context put()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-context.md#context-putcontext-key-value) FEEL function to add a single key to the existing `toolCallResult` context without replacing it.
+
+Write the call directly in the script task's FEEL expression in the **Script** section:
+
+```feel
+context put(toolCallResult, "status", response.body.status)
+```
+
+</TabItem>
+
+</Tabs>
 
 :::note
 The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. Prefer returning a structured FEEL context over a raw string when the result has multiple fields, as this gives the LLM more to work with when summarizing the outcome. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
