@@ -201,10 +201,6 @@ java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local --help
 
 </details>
 
-:::note
-Known limitation: `--not-recursive` currently still processes diagrams in nested subdirectories.
-:::
-
 ### Engine mode
 
 Use engine mode to process diagrams directly from a running Camunda 7 engine via its REST API:
