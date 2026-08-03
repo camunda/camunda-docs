@@ -49,7 +49,9 @@ The LLM selects tools based on the tool element's **ID** and its **Documentation
 - The element's **Name** field is a human-readable label shown on the diagram.
 - The element's **Documentation** field is used as the tool description.
 
+:::note
 The **ID** is used as the tool name instead of the **Name** field because element IDs are unique within a process, which gives the LLM an unambiguous identifier to reference when it calls the tool. The **Name** field is free-form text for readers of the diagram and can repeat across elements, so it only acts as a fallback description when **Documentation** is empty.
+:::
 
 See [tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-definitions) for more details.
 
