@@ -5,7 +5,7 @@ sidebar_label: "Docker Compose"
 description: "A quickstart guide for developers to deploy and run Camunda 8 Self-Managed locally with Docker Compose, including setup, configuration, secondary storage, connectors, and modeling."
 ---
 
-Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. The full configuration additionally includes Optimize, Console, Management Identity, Web Modeler, Keycloak, and PostgreSQL, and requires an external Elasticsearch instance for Optimize.
+Get started with Docker Compose to run Camunda 8 Self-Managed locally. The default lightweight configuration includes the Orchestration Cluster and Connectors, and uses file-based H2 secondary storage. The full configuration additionally includes Optimize, Camunda Hub, Management Identity, Keycloak, PostgreSQL, and Elasticsearch.
 
 Docker Compose also supports [document handling](/self-managed/concepts/document-handling/overview.md), configurable secondary storage, built-in connectors, custom connectors, and local modeling workflows with Desktop Modeler and Web Modeler.
 
@@ -38,7 +38,11 @@ For prerequisites, startup commands, and shutdown commands, see [install and sta
 
 ### Choose a Docker Compose configuration {#choose-a-docker-compose-configuration}
 
-For lightweight, full, and standalone Web Modeler configurations, plus component URLs and authentication defaults, see [configure Docker Compose environments](./docker-compose/configuration.md#choose-a-docker-compose-configuration).
+For lightweight, full, and standalone Camunda Hub configurations, plus component URLs and authentication defaults, see [configure Docker Compose environments](./docker-compose/configuration.md#choose-a-docker-compose-configuration).
+
+### Customize application settings
+
+For mounted application files, `.env`, Spring environment overrides, and connector secrets, see [customize application configuration](./docker-compose/configuration.md#customize-application-configuration).
 
 ### Configure secondary storage {#configure-secondary-storage}
 
