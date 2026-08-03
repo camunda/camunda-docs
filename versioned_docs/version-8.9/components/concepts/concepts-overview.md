@@ -22,14 +22,14 @@ Camunda 8 separates runtime execution data from analytical and operational data 
 
 <img src={ArchDiagramImg} alt="Camunda 8 architecture diagram" class="img-noborder"/>
 
-:::note Storage architecture
+### Storage architecture
 
 In the diagram above, storage systems appear in two distinct roles:
 
 - **Primary storage**: The authoritative store for runtime execution state used by the [Orchestration Cluster](/reference/glossary.md#orchestration-cluster) to execute, recover, and replicate workflows. This includes partition logs and snapshots and is tightly coupled to process execution. See [primary storage](/reference/glossary.md#primary-storage).
 - **Secondary storage**: Systems used for indexing, search, analytics, operational views, and long-term retention. Data is populated from primary storage and optimized for querying rather than execution. See [secondary storage](/reference/glossary.md#secondary-storage).
 
-### Secondary storage implementations
+#### Secondary storage implementations
 
 Camunda 8 supports multiple secondary storage backends, depending on the deployment model and configuration:
 
@@ -41,8 +41,6 @@ For deployment and configuration guidance, see the Self-Managed documentation:
 
 - [About Self-Managed](/self-managed/about-self-managed.md)
 - [Helm quick install](/self-managed/deployment/helm/install/quick-install.md)
-
-:::
 
 :::info
 
@@ -65,11 +63,15 @@ Define process and decision logic using BPMN and DMN, then run it on a stateful,
 - Handle retries and compensation when a step fails.
 - Troubleshoot incidents across the full business process, not just within a single service.
 
+<p class="link-arrow">[Learn about processes](/components/concepts/processes.md)</p>
+
 ### Coordinate human work
 
 Many processes also require human input, either as a normal step (for example, review or approval) or as a fallback when automation can't proceed. With Camunda, you can model human tasks alongside automated steps, then assign, track, and escalate work so the process keeps moving.
 
 For example, if customer onboarding is blocked waiting for a verification task, the process can route to the right person, enforce due dates, and make the delay visible in operations tooling.
+
+<p class="link-arrow">[Learn about Tasklist](/components/tasklist/introduction-to-tasklist.md)</p>
 
 ### Orchestrate AI agents
 
@@ -80,6 +82,8 @@ Not every step in a process can be fully predetermined. When the right action de
 - Apply the same guardrails your process requires, such as role-based access control, compliance boundaries, incident recovery, and audit trails, to agent-driven steps.
 
 Because agents run inside the same governed process, their actions are observable and auditable by default.
+
+<p class="link-arrow">[Learn about agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)</p>
 
 ### Common use cases
 
