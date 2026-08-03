@@ -69,7 +69,7 @@ camunda-zeebe-5                                        0/1     Init:0/1   0     
 ```
 
 :::info Starting brokers in a zone-aware cluster
-On a [zone-aware cluster](#broker-id-schemes), each zone is a separate StatefulSet, so you need to scale brokers in each zone.
+On a [zone-aware cluster](#broker-id-naming-scheme), each zone is a separate StatefulSet, so you need to scale brokers in each zone.
 
 :::
 
@@ -106,7 +106,7 @@ curl -X 'PATCH' \
 Here `3`, `4`, and `5` are the newly-added brokers.
 
 :::note Zone aware clusters
-Make sure to use the correct [broker ids](#broker-id-naming-scheme), e.g. `["zone-a_3", "zone-a_4", "zone-a_5"]`
+Make sure to use the correct [broker ids](#broker-id-naming-scheme), for example `["zone-a_3", "zone-a_4", "zone-a_5"]`
 
 Brokers from different zones can be added with a single request. Make sure to scale each zone's statefulsets with the required replica count beforehand.
 :::
@@ -131,10 +131,10 @@ curl -X 'PATCH' \
       }'
 ```
 
-For [zone-aware cluster](#broker-id-schemes) you need to change the broker ids accordingly as outlined in the [above section](#scale_brokers_in_a_zone_aware_cluster)
+For [zone-aware cluster](#broker-id-naming-scheme) you need to change the broker ids accordingly as outlined in [section 2.a](#2a-scale-brokers-only)
 
-:::info Changing replication factor in a zone aware cluster
-You cannot change replication factor in a zone aware cluster with this API. You need to use `PUT /actuator/cluster/partition-distribution/` instead.
+:::warning Changing replication factor in a zone-aware cluster
+You cannot change replication factor in a zone-aware cluster with this API. You need to use `PUT /actuator/cluster/partition-distribution/` instead.
 :::
 
 #### 2.c Scaling only partitions
@@ -453,8 +453,8 @@ curl -X 'PATCH' \
 
 Similar to scaling up, the response to this request would contain a `changeId`, `currentTopology`, planned changes, and expected topology.
 
-:::info scaling down a zone aware cluster
-For a zone ware cluster, the same [changes](#scale-brokers-in-a-zone-aware-cluster) as for scaling up are required.
+:::warning scaling down a zone-aware cluster
+For a zone-aware cluster, the same [changes](#2a-scale-brokers-only) as for scaling up are required.
 :::
 
 ### 2. Query the Zeebe Gateway to monitor progress of scaling
