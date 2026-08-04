@@ -326,7 +326,7 @@ helm install camunda camunda/camunda-platform \
 
 ## Add another Orchestration Cluster
 
-Add another entry to `global.topology.clusters` in the management release and install another orchestration release. Configure that release's existing component authentication values to match the new management inventory entry. Use unique client IDs, audiences, and secrets for isolation.
+Add another entry to `global.topology.clusters` in the Hub release and install another orchestration release. Configure that release's existing component authentication values to match the new Hub inventory entry. Use unique client IDs, audiences, and secrets for isolation.
 
 If orchestration releases share Elasticsearch or OpenSearch, configure unique prefixes for every release:
 
@@ -340,39 +340,39 @@ Reusing any of these prefixes can mix one cluster's records with another cluster
 
 For Keycloak, Management Identity creates every declared client. For another OIDC provider, provision the clients before applying the Helm releases.
 
-Generated internal service URLs in the management inventory use Kubernetes service DNS, so this pattern supports multiple namespaces in the same Kubernetes cluster. For workloads in another Kubernetes cluster, provide equivalent cross-cluster DNS and routing or configure explicit `grpcUrl`, `restUrl`, `readinessUrl`, `operateUrl`, `tasklistUrl`, `adminUrl`, and component web application URL overrides. Set each orchestration release's `global.identity.service.url` to an address from which it can reach Management Identity.
+Generated internal service URLs in the Hub inventory use Kubernetes service DNS, so this pattern supports multiple namespaces in the same Kubernetes cluster. For workloads in another Kubernetes cluster, provide equivalent cross-cluster DNS and routing or configure explicit `grpcUrl`, `restUrl`, `readinessUrl`, `operateUrl`, `tasklistUrl`, `adminUrl`, and component web application URL overrides. Set each orchestration release's `global.identity.service.url` to an address from which it can reach Management Identity.
 
 ## Deploy with GitOps
 
-The topology values are deterministic and don't require cluster discovery or imperative deployment tooling. Store the management and orchestration values with their respective Helm release definitions.
+The topology values are deterministic and don't require cluster discovery or imperative deployment tooling. Store the Hub and orchestration values with their respective Helm release definitions.
 
 Apply resources in this order:
 
 1. Namespace-local Secret projections and TLS certificates.
-2. The management release.
+2. The Hub release.
 3. One or more orchestration releases.
 
-For Flux, make each orchestration `HelmRelease` depend on the management release:
+For Flux, make each orchestration `HelmRelease` depend on the Hub release:
 
 ```yaml
 spec:
   dependsOn:
     # This is the Flux HelmRelease metadata.name, not Helm's releaseName.
-    - name: <management-helmrelease-name>
-      namespace: management-and-modeling
+    - name: <hub-helmrelease-name>
+      namespace: hub
 ```
 
-For Argo CD, use sync waves or separate Applications so the management release becomes healthy before orchestration releases are synchronized.
+For Argo CD, use sync waves or separate Applications so the Hub release becomes healthy before orchestration releases are synchronized.
 
 For Keycloak-managed registration, client Secret names can be identical across namespaces, but Kubernetes Secrets remain namespace-scoped. Project both copies from the same external secret source to prevent drift.
 
 The standalone chart-managed PVCs for Management Identity, Optimize, and Connectors render when the corresponding component's `persistence.enabled` value is `true`, even when the release topology suppresses that component's workload. This behavior keeps PVC ownership declarative and produces the same desired resources with Helm, Argo CD, and Flux. Set `persistence.enabled` to `false` only after you no longer need the chart to manage that claim and have verified your GitOps pruning and storage reclaim policies.
 
-Orchestration Cluster broker PVCs are StatefulSet volume claim templates and don't follow this standalone PVC behavior. Changing a release to management mode suppresses the Orchestration Cluster StatefulSet. Preserve and migrate broker storage separately when you move an existing cluster between releases or namespaces.
+Orchestration Cluster broker PVCs are StatefulSet volume claim templates and don't follow this standalone PVC behavior. Changing a release to Hub mode suppresses the Orchestration Cluster StatefulSet. Preserve and migrate broker storage separately when you move an existing cluster between releases or namespaces.
 
 ## Upgrade and topology migration scope
 
-This guide covers fresh management and orchestration releases. It doesn't define a data migration procedure for converting an existing combined release into split releases.
+This guide covers fresh Hub and orchestration releases. It doesn't define a data migration procedure for converting an existing combined release into split releases.
 
 Before you adopt this topology during a version upgrade, complete the supported in-place version upgrade while preserving the existing release name, namespace, Orchestration Cluster primary storage, and external data services. For Camunda 8.9 to 8.10 requirements, see [upgrade from 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md).
 
@@ -384,6 +384,6 @@ The default `global.topology.mode: combined` preserves the existing single-relea
 
 Existing multi-namespace configurations that use `global.identity.auth.*.alwaysRegister`, component authentication values under disabled components, or manual `camundaHub.restapi.clusters` remain supported. This release doesn't deprecate or remove those values.
 
-In management mode, topology values replace the legacy Identity registration presets. An explicitly configured `camundaHub.restapi.clusters` or legacy `webModeler.restapi.clusters` list still takes precedence over generated Hub inventory.
+In Hub mode, topology values replace the legacy Identity registration presets. An explicitly configured `camundaHub.restapi.clusters` or legacy `webModeler.restapi.clusters` list still takes precedence over generated Hub inventory.
 
 Any future removal must retain compatibility for at least one minor release, emit GitOps-visible deprecation warnings with migration guidance, and occur only in the next major chart release according to the Helm chart deprecation policy.
