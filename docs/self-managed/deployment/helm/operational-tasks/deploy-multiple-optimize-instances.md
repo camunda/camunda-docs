@@ -41,7 +41,7 @@ Before you install the releases, prepare the following:
 - A namespace with enough capacity for the platform and a second Optimize Deployment.
 - An external Elasticsearch or OpenSearch cluster configured for the platform release. Follow the [Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md) or [OpenSearch](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) guide.
 - An external Keycloak or supported OIDC provider and a Management Identity configuration. The reference files use the [external Keycloak setup](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
-- An ingress-nginx controller, one DNS host, and a TLS Secret for the host. The example relies on ingress-nginx merging paths from two Ingress objects with the same host and ingress class.
+- An `ingress-nginx` controller, one DNS host, and a TLS Secret for the host. The example relies on `ingress-nginx` merging paths from two Ingress objects with the same host and Ingress class.
 - A production values file for the full platform, including external PostgreSQL, datastore authentication and TLS, image pull credentials, and component resources. Follow the [production installation guide](/self-managed/deployment/helm/install/production/index.md).
 - Existing Kubernetes Secrets for every credential referenced by the values files. Follow the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md#method-2-external-kubernetes-secrets-recommended-for-all-versions).
 
@@ -72,7 +72,7 @@ Update these values in both files before installation:
 | Value                                                    | Required change                                                     |
 | -------------------------------------------------------- | ------------------------------------------------------------------- |
 | `global.host`                                            | Set the shared browser-facing host.                                 |
-| `global.ingress.className`                               | Set the ingress-nginx class used by both releases.                  |
+| `global.ingress.className`                               | Set the `ingress-nginx` class used by both releases.                |
 | `global.ingress.tls.secretName`                          | Set the existing TLS Secret for the shared host.                    |
 | `global.identity.keycloak.*`                             | Set the in-cluster Keycloak service, port, context path, and realm. |
 | `global.identity.auth.publicIssuerUrl`                   | Set the issuer URL reachable from a user's browser.                 |
@@ -220,9 +220,9 @@ kubectl get deployments,statefulsets --namespace "$NAMESPACE" \
 
 The output must contain only the `optimize-team-b` Deployment and no StatefulSet.
 
-## Verify ingress and authentication
+## Verify Ingress and authentication
 
-The two releases create separate Ingress objects with the same host and different paths. ingress-nginx merges these rules into one virtual host:
+The two releases create separate Ingress objects with the same host and different paths. `ingress-nginx` merges these rules into one virtual host:
 
 | Release           | Path               | Callback URL                                                 |
 | ----------------- | ------------------ | ------------------------------------------------------------ |
@@ -256,7 +256,7 @@ curl --silent --show-error --dump-header - --output /dev/null \
 
 Both commands must print a redirect to the configured OIDC provider with the intended `client_id`. Complete a browser login to both URLs with a user assigned the `Optimize` role.
 
-Using the same host for multiple Ingress objects is controller-specific. This guide supports ingress-nginx. If your controller doesn't merge same-host rules, use separate hosts and update `global.host`, each Optimize `redirectUrl`, the custom client's `rootUrl`, and the Keycloak callback URI.
+Using the same host for multiple Ingress objects is controller-specific. This guide supports `ingress-nginx`. If your controller doesn't merge same-host rules, use separate hosts and update `global.host`, each Optimize `redirectUrl`, the custom client's `rootUrl`, and the Keycloak callback URI.
 
 ## Verify process data and index isolation
 
@@ -313,7 +313,7 @@ kubectl logs --namespace "$NAMESPACE" deployment/optimize-team-b
 | The second Optimize pod can't reach Management Identity | Confirm `global.identity.service.url` resolves to `http://platform-identity:80/identity` and the platform Identity endpoints are ready.            |
 | Login returns an invalid redirect URI                   | Compare `optimize.contextPath`, `global.identity.auth.optimize.redirectUrl`, the custom client's `rootUrl`, and the Keycloak callback URI.         |
 | Both URLs use the same client ID                        | Confirm each release received the intended values file and inspect `application-ccsm.yaml` in its Optimize ConfigMap.                              |
-| One path returns 404                                    | Confirm both Ingress objects use the same host and ingress class, have distinct paths, and are reconciled by ingress-nginx.                        |
+| One path returns 404                                    | Confirm both Ingress objects use the same host and Ingress class, have distinct paths, and are reconciled by `ingress-nginx`.                      |
 | The second release creates unrelated workloads          | Confirm `values-optimize-only.yaml` is the final values layer and that no later file enables components.                                           |
 | Optimize starts but doesn't show process data           | Confirm both releases use the same datastore and `zeebe-record` prefix, and check the legacy exporter and Optimize importer logs.                  |
 | Optimize-owned indices overlap                          | Confirm the two `CAMUNDA_OPTIMIZE_ELASTICSEARCH_SETTINGS_INDEX_PREFIX` or OpenSearch prefix values are distinct and weren't changed after startup. |
