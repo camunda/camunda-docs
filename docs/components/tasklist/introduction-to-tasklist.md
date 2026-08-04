@@ -10,6 +10,8 @@ With Tasklist you can orchestrate human workflows critical to your business and 
 
 As you model and run business processes using BPMN, users are notified in Tasklist when they're assigned a task, and run the work that's required for the specific task.
 
+The same task shows up in Tasklist whether the preceding step ran automatically or an [AI agent](/reference/glossary.md#ai-agent) produced the result a person now acts on.
+
 You are not limited to use the [Tasklist user interface](/components/tasklist/userguide/using-tasklist.md). You can extend your case or build a fully custom application using the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 Learn more in the [frontend developer documentation](/apis-tools/frontend-development/01-task-applications/01-introduction-to-task-applications.md).
