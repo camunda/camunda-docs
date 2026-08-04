@@ -1,6 +1,14 @@
 The script polls the namespace until every pod is `Running` with all of its containers ready. If the deployment stalls, it reports the containers that are not ready, with their restart count, waiting reason, last termination reason, and exit code, together with recent warning events, so you can see what is blocking it.
 
-Configure it with the following environment variables:
+If you don't have a local copy of the reference architecture, download the script and run it:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/camunda/camunda-deployment-references/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh -o check-deployment-ready.sh
+chmod +x check-deployment-ready.sh
+./check-deployment-ready.sh
+```
+
+Review the script before you run it. Configure it with the following environment variables:
 
 | Variable                            | Default   | Purpose                                                          |
 | ----------------------------------- | --------- | ---------------------------------------------------------------- |
