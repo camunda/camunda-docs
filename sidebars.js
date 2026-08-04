@@ -2356,6 +2356,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/zeebe/operations/management-api",
                     "self-managed/components/orchestration-cluster/zeebe/operations/backups",
                     "self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/modes",
                   ],
                 },
                 {
