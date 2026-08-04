@@ -5,7 +5,7 @@ title: Configure a multi-namespace deployment
 description: Configure Camunda Hub and Management Identity separately from an Orchestration Cluster with the Camunda 8.10 Helm chart.
 ---
 
-A multi-namespace deployment runs Camunda Hub and Management Identity in a management namespace and runs the Orchestration Cluster in another namespace.
+A multi-namespace deployment runs Camunda Hub and Management Identity in a Hub namespace and runs the Orchestration Cluster in another namespace.
 
 This configuration supports Camunda 8.10. Camunda Hub contains Web Modeler and Console. Console isn't a separate deployment in 8.10.
 
@@ -14,12 +14,12 @@ This configuration supports Camunda 8.10. Camunda Hub contains Web Modeler and C
 Prepare the following resources:
 
 - An external Keycloak instance that both namespaces can reach. The example uses Management Identity to register clients in Keycloak.
-- Separate public hostnames and TLS certificates for the management and orchestration namespaces.
+- Separate public hostnames and TLS certificates for the Hub and orchestration namespaces.
 - External PostgreSQL databases for Management Identity and Camunda Hub.
 - A supported secondary storage backend for the Orchestration Cluster and Optimize.
 - Network policies that permit Domain Name System (DNS) traffic and required cross-namespace service traffic.
 
-The examples use release name `camunda`, management namespace `management-and-modeling`, and orchestration namespace `orchestration`. If you change the release name or namespaces, update every Kubernetes service name.
+The examples use `camunda` as the release name in both namespaces, `hub` as the Hub namespace, and `orchestration` as the orchestration namespace. If you change the release name or namespaces, update every Kubernetes service name.
 
 Use Helm 4 and a chart 15.x version that supports Camunda 8.10. Select a supported version from the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), then set it before installation:
 
@@ -31,15 +31,15 @@ export HELM_CHART_VERSION=<15.x-chart-version>
 
 If you enforce NetworkPolicies, allow the following traffic in addition to your database and secondary-storage connections:
 
-| Source                  | Destination                                                  | Ports                   | Purpose                                                 |
-| ----------------------- | ------------------------------------------------------------ | ----------------------- | ------------------------------------------------------- |
-| Both namespaces         | Cluster DNS                                                  | `53/TCP`, `53/UDP`      | Resolve cross-namespace service names                   |
-| Camunda Hub             | `camunda-zeebe-gateway.orchestration.svc.cluster.local`      | `26500/TCP`, `8080/TCP` | Deploy processes and call the Orchestration Cluster API |
-| Camunda Hub             | `camunda-zeebe.orchestration.svc.cluster.local`              | `9600/TCP`              | Check Orchestration Cluster application readiness       |
-| Camunda Hub             | `camunda-optimize.orchestration.svc.cluster.local`           | `80/TCP`                | Check Optimize readiness                                |
-| Camunda Hub             | `camunda-connectors.orchestration.svc.cluster.local`         | `8080/TCP`              | Check Connectors readiness                              |
-| Orchestration namespace | `camunda-identity.management-and-modeling.svc.cluster.local` | `80/TCP`                | Use central Management Identity                         |
-| Both namespaces         | Your OIDC provider                                           | Provider HTTPS port     | Authenticate users and clients                          |
+| Source                  | Destination                                             | Ports                   | Purpose                                                 |
+| ----------------------- | ------------------------------------------------------- | ----------------------- | ------------------------------------------------------- |
+| Both namespaces         | Cluster DNS                                             | `53/TCP`, `53/UDP`      | Resolve cross-namespace service names                   |
+| Camunda Hub             | `camunda-zeebe-gateway.orchestration.svc.cluster.local` | `26500/TCP`, `8080/TCP` | Deploy processes and call the Orchestration Cluster API |
+| Camunda Hub             | `camunda-zeebe.orchestration.svc.cluster.local`         | `9600/TCP`              | Check Orchestration Cluster application readiness       |
+| Camunda Hub             | `camunda-optimize.orchestration.svc.cluster.local`      | `80/TCP`                | Check Optimize readiness                                |
+| Camunda Hub             | `camunda-connectors.orchestration.svc.cluster.local`    | `8080/TCP`              | Check Connectors readiness                              |
+| Orchestration namespace | `camunda-identity.hub.svc.cluster.local`                | `80/TCP`                | Use central Management Identity                         |
+| Both namespaces         | Your OIDC provider                                      | Provider HTTPS port     | Authenticate users and clients                          |
 
 Restrict policies to the listed workloads and namespaces instead of allowing unrestricted cross-namespace traffic.
 
@@ -49,35 +49,35 @@ Kubernetes Secrets are namespace-scoped. Create the client secrets used by both 
 
 The following example uses these Secrets:
 
-| Secret                   | Key                     | Required namespaces                        | Purpose                                                  |
-| ------------------------ | ----------------------- | ------------------------------------------ | -------------------------------------------------------- |
-| `keycloak-admin`         | `password`              | `management-and-modeling`                  | Keycloak administration for Management Identity          |
-| `identity-first-user`    | `password`              | `management-and-modeling`                  | Initial Management Identity user                         |
-| `identity-database`      | `password`              | `management-and-modeling`                  | Management Identity database                             |
-| `hub-database`           | `password`              | `management-and-modeling`                  | Camunda Hub database                                     |
-| `hub-pusher`             | `app-key`, `app-secret` | `management-and-modeling`                  | Stable Camunda Hub WebSocket credentials across upgrades |
-| `orchestration-oidc`     | `client-secret`         | `management-and-modeling`, `orchestration` | Orchestration OIDC client                                |
-| `connectors-oidc`        | `client-secret`         | `management-and-modeling`, `orchestration` | Connectors OIDC client                                   |
-| `optimize-oidc`          | `client-secret`         | `management-and-modeling`, `orchestration` | Optimize OIDC client                                     |
-| `management-tls`         | `tls.crt`, `tls.key`    | `management-and-modeling`                  | Management Ingress TLS                                   |
-| `orchestration-tls`      | `tls.crt`, `tls.key`    | `orchestration`                            | Orchestration HTTP Ingress TLS                           |
-| `orchestration-grpc-tls` | `tls.crt`, `tls.key`    | `orchestration`                            | Orchestration gRPC Ingress TLS                           |
+| Secret                   | Key                     | Required namespaces    | Purpose                                                  |
+| ------------------------ | ----------------------- | ---------------------- | -------------------------------------------------------- |
+| `keycloak-admin`         | `password`              | `hub`                  | Keycloak administration for Management Identity          |
+| `identity-first-user`    | `password`              | `hub`                  | Initial Management Identity user                         |
+| `identity-database`      | `password`              | `hub`                  | Management Identity database                             |
+| `hub-database`           | `password`              | `hub`                  | Camunda Hub database                                     |
+| `hub-pusher`             | `app-key`, `app-secret` | `hub`                  | Stable Camunda Hub WebSocket credentials across upgrades |
+| `orchestration-oidc`     | `client-secret`         | `hub`, `orchestration` | Orchestration OIDC client                                |
+| `connectors-oidc`        | `client-secret`         | `hub`, `orchestration` | Connectors OIDC client                                   |
+| `optimize-oidc`          | `client-secret`         | `hub`, `orchestration` | Optimize OIDC client                                     |
+| `hub-tls`                | `tls.crt`, `tls.key`    | `hub`                  | Hub ingress TLS                                          |
+| `orchestration-tls`      | `tls.crt`, `tls.key`    | `orchestration`        | Orchestration HTTP Ingress TLS                           |
+| `orchestration-grpc-tls` | `tls.crt`, `tls.key`    | `orchestration`        | Orchestration gRPC Ingress TLS                           |
 
 Use an external secret manager to synchronize the values. Don't store production credentials directly in a Helm values file.
 
-## Configure the management namespace
+## Configure the Hub namespace
 
-Create `management-and-modeling-values.yaml`. The `alwaysRegister` values instruct central Management Identity to register clients for workloads deployed by another Helm release. The `clusters` entry connects Camunda Hub to the remote Orchestration Cluster.
+Create `hub-values.yaml`. The `alwaysRegister` values instruct central Management Identity to register clients for workloads deployed by another Helm release. The `clusters` entry connects Camunda Hub to the remote Orchestration Cluster.
 
 ```yaml
 global:
-  host: management.example.com
+  host: hub.example.com
   ingress:
     enabled: true
     className: nginx
     tls:
       enabled: true
-      secretName: management-tls
+      secretName: hub-tls
   security:
     authentication:
       method: oidc
@@ -103,7 +103,7 @@ global:
       tokenUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/token
       jwksUrl: https://login.example.com/realms/camunda-platform/protocol/openid-connect/certs
       camundaHub:
-        redirectUrl: https://management.example.com/modeler
+        redirectUrl: https://hub.example.com/modeler
       optimize:
         alwaysRegister: true
         redirectUrl: https://orchestration.example.com/optimize
@@ -226,19 +226,19 @@ optimize:
 
 Adapt the Keycloak endpoints and client configuration for your environment. See [external Keycloak](./authentication-and-authorization/external-keycloak.md). If you use another OIDC provider, create and manage the clients in that provider instead of using `alwaysRegister`; see [external OIDC provider](./authentication-and-authorization/external-oidc-provider.md).
 
-Install the management release:
+Install the Hub release:
 
 ```sh
 helm install camunda camunda/camunda-platform \
   --version "$HELM_CHART_VERSION" \
-  --namespace management-and-modeling \
+  --namespace hub \
   --create-namespace \
-  --values management-and-modeling-values.yaml
+  --values hub-values.yaml
 ```
 
 ## Configure the orchestration namespace
 
-Create `orchestration-values.yaml`. The Management Identity URL uses the management release's internal Kubernetes service. The OIDC client IDs and secrets must match the clients registered by Management Identity.
+Create `orchestration-values.yaml`. The Management Identity URL uses the Hub release's internal Kubernetes service. The OIDC client IDs and secrets must match the clients registered by Management Identity.
 
 ```yaml
 global:
@@ -254,7 +254,7 @@ global:
       method: oidc
   identity:
     service:
-      url: http://camunda-identity.management-and-modeling.svc.cluster.local:80/identity
+      url: http://camunda-identity.hub.svc.cluster.local:80/identity
     auth:
       enabled: true
       type: KEYCLOAK
@@ -310,7 +310,7 @@ optimize:
 
 Add the values for your secondary storage backend before installation. See [database configuration](./database/index.md).
 
-Install the orchestration release after the management release is ready:
+Install the orchestration release after the Hub release is ready:
 
 ```sh
 helm install camunda camunda/camunda-platform \

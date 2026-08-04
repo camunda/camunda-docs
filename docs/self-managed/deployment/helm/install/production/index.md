@@ -63,11 +63,11 @@ After following the [prerequisites](#prerequisites), you should have a Kubernete
 To get started, create two namespaces:
 
 ```bash
-kubectl create namespace management-and-modeling
+kubectl create namespace hub
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), Console, and the Web Modeler components.
+- **Namespace `hub`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), Console, and the Web Modeler components.
 
 - **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), [Connectors](/self-managed/components/connectors/overview.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
@@ -79,7 +79,7 @@ For more information on the difference between the Orchestration Cluster and the
 
 ### Install the Helm chart
 
-As there will be a Helm deployment in each namespace, create your own `management-and-modeling-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
+As there will be a Helm deployment in each namespace, create your own `hub-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
 
 The Camunda Helm chart can be installed in each namespace using the following command:
 
@@ -88,9 +88,9 @@ The Camunda Helm chart can be installed in each namespace using the following co
 helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
-# This will install the latest Camunda Helm chart in the management-and-modeling namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management-and-modeling \
-    --values management-and-modeling-values.yaml
+# This will install the latest Camunda Helm chart in the Hub namespace with the latest applications/dependencies.
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n hub \
+    --values hub-values.yaml
 # This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
     --values orchestration-values.yaml
@@ -246,7 +246,7 @@ For more information on connecting to external databases, the following guides a
 At this point, you should be able to connect to your platform through HTTPS, correctly authenticate users using your configured identity provider, and have connected to external databases such as Amazon OpenSearch and Amazon Aurora PostgreSQL.
 :::
 
-The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `management-and-modeling-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
+The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `hub-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
 
 ### Elasticsearch/OpenSearch index retention
 
@@ -511,7 +511,7 @@ The following resources and configuration options are important to keep in mind 
 
 ## Create a production `values.yaml`
 
-Use separate Helm values files and releases when you deploy Camunda components across namespaces. The management release contains Camunda Hub and Management Identity, while the orchestration release contains the Orchestration Cluster, Connectors, and Optimize.
+Use separate Helm values files and releases when you deploy Camunda components across namespaces. The Hub release contains Camunda Hub and Management Identity, while the orchestration release contains the Orchestration Cluster, Connectors, and Optimize.
 
 The [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace.md) provides complete 8.10 examples for both releases. It also explains how to:
 
