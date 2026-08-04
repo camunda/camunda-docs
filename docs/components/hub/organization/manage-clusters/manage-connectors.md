@@ -1,7 +1,7 @@
 ---
 id: cluster-connectors
 title: Manage your connectors
-description: "In Camunda Hub you can monitor and manage the connectors you have running on your cluster on the Connector Management page."
+description: "In Camunda Hub you can monitor and manage the connectors running on your cluster on the Connector Management page."
 ---
 
 import ManageImg from './img/cluster-manage-connectors.png';
@@ -10,61 +10,71 @@ import ConnectorDetailsImg from './img/cluster-connector-instance-details.png';
 import ConnectorProcessDetailsImg from './img/cluster-connector-process-details.png';
 import ConnectorProcessErrorImg from './img/cluster-connector-instance-error.png';
 
-Monitor and manage inbound connectors running on your cluster.
+Monitor and manage connectors running on your cluster.
 
 ## About connector management
 
-Cluster connector management allows you to monitor and manage your running inbound connector [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector).
+Cluster connector management allows you to monitor and manage running connectors on your cluster. This includes inbound connectors, such as [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector), and outbound connectors.
 
 - Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
 - For example, you can see if a connector instance is unhealthy, and use the [activity log](#activity-log) to troubleshoot and resolve issues.
 
-## Connector Management
+## Connector management
 
 To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile.
 
-<img src={ManageImg} alt="Manage connectors on the Connectors component tile" />
+The **Connector Management** page provides an overview of the connectors running on a cluster.
 
-The **Connector Management** page provides an overview of the inbound connectors running on a cluster:
-
-<img src={ConnectorManagementImg} alt="Connector management page" />
-
-- Each inbound connector running on the cluster is shown on a separate row.
-- **Name**: The name of the connector. Click to view details of the connector instances for this connector.
-- **Active instances**: How many process instances are running for the connector. The icon indicates if the running connector instances are healthy or require attention.
+- Each connector is shown on a separate row.
+- Use this page to review connector status, inspect details, and troubleshoot issues.
+- Available details depend on the connector type.
 
 :::note
 [Webhook connector](/components/connectors/protocol/http-webhook.md) names also include the names of any connector based on the webhook. For example, "_Webhook (aws:eventbridge, GitHubWebhook)_".
 :::
 
-## View connector instances
+Select a connector instance to view additional details and troubleshoot issues.
 
-Select an individual connector to view the running instances for the connector.
+## View inbound connector instances
+
+Select an inbound connector to view its running instances.
 
 <img src={ConnectorDetailsImg} alt="Connector management page" />
 
-- Each connector process instance is shown on a separate row.
-- **Connectors instance ID**: The ID of the connector instance. Click to view further details for an individual connector instance.
-- **Elements**: The element that the process instance is active for. This helps you locate the element in your BPMN diagram.
-- **Process** The process instance ID and version.
-- **Activation date**: The date and time when the instance was activated.
-- **Status**: The health of the connector instance.
-  - **Healthy**: The connector is running without problems in the process.
-  - **Unhealthy**: There are unresolved issues with the connector instance. View the details of the instance to troubleshoot the problem, for example by using the activity log to determine what the issue is and how to resolve it.
+- Each inbound connector instance is shown on a separate row.
+- **Connector instance ID**: The ID of the connector instance. Select it to open the instance details.
+- **Elements**: The BPMN element where the connector is active. Use this to locate the connector in your diagram.
+- **Process**: The process ID and version associated with the connector instance.
+- **Activation date**: When the connector instance was activated.
+- **Status**: The current health of the connector instance.
+  - **Healthy**: The connector is running without issues.
+  - **Unhealthy**: The connector requires attention. Open the instance details to review health details and recent activity log entries.
+- **Reset**: If a connector instance is stuck in an unhealthy state, such as a failed activation, select **Reset** to clear the error state and let the connector attempt to reconnect.
 
-## View connectors instance details
+## View outbound connectors
 
-Select an individual connector running instance to view additional details and troubleshoot issues.
+Select an outbound connector to view its details.
 
-<img src={ConnectorProcessDetailsImg} alt="Connector management page." />
+- Each outbound connector is shown on a separate row.
+- **Name**: The name of the connector.
+- **Type**: The connector type.
+- **Input variables**: The input variables used by the connector.
+- **Timeout**: The configured timeout for the connector.
+- **Enabled**: Whether the connector is enabled.
+- **Runtime ID**: The runtime instance reporting the connector.
+- When available, outbound connector details also include gateway connectivity, broker connectivity, and stream IDs.
 
 ### Activity log
 
-Shows details of the last ten activities recorded for the connector, such as an API method (GET, POST, PUT, and DELETE) or message subscription. You can use these logs to troubleshoot unhealthy connector instances.
+Shows recent activities recorded for the connector. You can use these logs to troubleshoot unhealthy connector instances.
+
+Depending on the connector type, the activity log can include health changes, request details, and runtime events. Sensitive values are redacted where needed.
 
 For example, the following activity log shows that there is an exception caused by an invalid URL in a Kafka connector.
 
 <img src={ConnectorProcessErrorImg} alt="Connector management page" class="img-600"/>
+
+Activity logs are available for active connectors and recent troubleshooting. When a connector is permanently removed, its activity log entries are also removed.
 
 ### Properties
 
@@ -94,6 +104,8 @@ For example:
 [
   {
     "bpmnProcessId": "Process_0wjo4ez",
+    "processName": "Order intake",
+    "messageName": "order.received",
     "version": 1,
     "processDefinitionKey": 2251799813686169,
     "elementId": "StartEvent_1",
@@ -124,3 +136,13 @@ For example:
 :::note
 If you are using deduplication, each connector occurrence in the BPMN diagram is shown in the array.
 :::
+
+### Metrics
+
+Connector metrics are available for inbound and outbound connectors.
+
+For metric definitions, response fields, and endpoint details, use the connector observability reference.
+
+### Access
+
+Access to connector management depends on your cluster and organization permissions. If you cannot open connector management or view connector details, contact your administrator.
