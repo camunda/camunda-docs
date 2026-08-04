@@ -17,7 +17,7 @@ Zeebe provides a REST API to manage the cluster scaling. The cluster management 
 
 ## Broker id naming scheme
 
-How brokers are identified and scaled depends on whether the cluster is [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters). By default a cluster is **not zone-aware**.
+How brokers are identified and scaled depends on whether the cluster is [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). By default a cluster is **not zone-aware**.
 
 - **Non-zone-aware** clusters use **integer** broker ids: (`0`, `1`, `2`, ...). They are used as examples in this page.
 - **Zone-aware** clusters use **string** broker ids: `${zone}_${n}` (for example, `"zone-a_0"` with double quotes).
