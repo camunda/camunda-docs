@@ -37,7 +37,7 @@ Both releases must use the same Camunda 8.10 chart and application version. Inst
 Before you install the releases, prepare the following:
 
 - A production-ready Kubernetes cluster and a Helm CLI version supported by the Camunda 8.10 chart.
-- A single-region Camunda deployment. For a multi-region deployment, explicitly enable `orchestration.exporters.zeebe.enabled` and validate the exporter topology before using this pattern.
+- A single-region Camunda deployment. This pattern relies on Management Identity, which [dual-region deployments don't support](/self-managed/concepts/multi-region/dual-region.md#limitations) — Optimize itself isn't supported there either.
 - A namespace with enough capacity for the platform and a second Optimize Deployment.
 - An external Elasticsearch or OpenSearch cluster configured for the platform release. Follow the [Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md) or [OpenSearch](/self-managed/deployment/helm/configure/database/using-external-opensearch.md) guide.
 - An external Keycloak or supported OIDC provider and a Management Identity configuration. The reference files use the [external Keycloak setup](/self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak.md).
@@ -260,7 +260,7 @@ Using the same host for multiple Ingress objects is controller-specific. This gu
 
 ## Verify process data and index isolation
 
-Both Optimize instances read the same `zeebe-record` indices produced by the Orchestration Cluster. In this single-region reference topology, the 8.10 chart automatically enables the legacy Zeebe exporter when Optimize and its Elasticsearch or OpenSearch connection are enabled. Deployments with two or more regions must explicitly set `orchestration.exporters.zeebe.enabled: true`.
+Both Optimize instances read the same `zeebe-record` indices produced by the Orchestration Cluster. The 8.10 chart automatically enables the legacy Zeebe exporter when Optimize and its Elasticsearch or OpenSearch connection are enabled. This pattern applies to single-region deployments only — [dual-region deployments don't support Optimize](/self-managed/concepts/multi-region/dual-region.md#limitations).
 
 1. Deploy a test process to the shared Orchestration Cluster.
 1. Start and complete at least one process instance.
