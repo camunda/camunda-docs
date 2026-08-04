@@ -275,7 +275,7 @@ function EditThisPageButton({ editUrl }) {
 
 function PageActions() {
   const { metadata } = useDoc();
-  const { version: versionName, label, isLast } = useDocsVersion();
+  const { name: versionName, label, isLast } = useDocsVersion();
   const {
     siteConfig: { customFields = {} },
   } = useDocusaurusContext();
