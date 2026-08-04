@@ -25,6 +25,8 @@ This API currently supports the following operations:
 - [Rebalancing](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md)
 - [Pause and resume exporting](#exporting-api)
 - [Enable and disable exporter](#exporters-api)
+- [Update partition distribution](#partition-distribution-api)
+- [Force-remove, re-add, and migrate a zone](#zones-api)
 
 ## Exporting API
 
@@ -188,3 +190,272 @@ The response is a JSON object that lists all configured exporters with their sta
   }
 ]
 ```
+
+## Cluster API
+
+You can find the OpenAPI spec for this API in the [GitHub repository](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml).
+
+### Monitoring API
+
+Use the Monitoring API to retrieve the current cluster topology and monitor ongoing scaling operations.
+
+#### Request
+
+```
+GET actuator/cluster
+```
+
+#### Response
+
+The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml) for details:
+
+```
+{
+  "version": <version>,
+  "brokers": [
+    {
+      "id": <brokerId>,
+      "state": "ACTIVE",
+      "version": <brokerVersion>,
+      "lastUpdatedAt": "<timestamp>",
+      "partitions": [
+        {
+          "id": <partitionId>,
+          "state": "ACTIVE",
+          "priority": <priority>
+        }
+      ]
+    }
+  ],
+  "lastChange": {
+    "id": <changeId>,
+    "status": "COMPLETED",
+    "startedAt": "<timestamp>",
+    "completedAt": "<timestamp>"
+  },
+  "pendingChange": {
+    "id": <changeId>,
+    "status": "IN_PROGRESS",
+    "completed": [],
+    "pending": [
+      {
+        "operation": "BROKER_ADD",
+        "brokerId": <brokerId>
+      }
+    ]
+  },
+  "partitionDistribution": {
+    ...
+  },
+  "routingState": {
+    ...
+  }
+}
+```
+
+- `version`: The version of the current cluster topology. The version is updated when the cluster is scaled up or down.
+- `brokers`: A list of current brokers. Each broker includes its ID, state, version, last update timestamp, and partition distribution.
+- `partitions`: A list of partitions assigned to a broker, including each partition's ID, state, and priority.
+- `lastChange`: Details about the last completed scaling operation, including its ID, status, and start and completion timestamps.
+- `pendingChange`: Details about the ongoing scaling operation, including completed and pending operations. Pending operations can include broker additions, partition joins, partition leaves, and partition priority reconfigurations.
+- `partitionDistribution`: The cluster's partition distribution configuration.
+- `routingState`: The current routing state of the cluster.
+
+### Partition distribution API
+
+Use this endpoint to update the [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) partition distribution configuration. Exactly one of `config` or `zonePriorities` must be set in the request body.
+
+- Setting `config` persists a new partition distribution configuration and applies it immediately, computing the necessary partition join, leave, and priority-reconfiguration operations. When migrating a bare or partially zoned cluster to zone-aware, list zones in `config.zones` in the order they should receive the existing (bare) nodes: the first zone receives node `0`, the second node `1`, and so on, wrapping around by zone count. This order only matters for that one-time migration; once all zones are migrated, every other operation addresses zones by name.
+- Setting `zonePriorities` re-orders the zones' priorities on a fully zone-aware cluster. The existing priority values are reused and reassigned to a different zone based on the order of the zones in the request: the first zone gets the highest existing priority value, the second zone the next highest, and so on. No new priority values are introduced. This only updates the priorities; it does not itself move partition leaders — leaders move to the newly-preferred zone on the next election (for example, one triggered by a separate rebalance). The request must list exactly the currently configured zones, and is idempotent.
+
+#### Request
+
+```
+PUT actuator/cluster/partition-distribution
+```
+
+<details>
+  <summary>Example request: set partition distribution config</summary>
+
+```
+curl -X 'PUT' \
+   'http://localhost:9600/actuator/cluster/partition-distribution' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "config": {
+          "type": "ZONE_AWARE",
+          "zones": [
+            {
+              "name": "zone-a",
+              "numberOfReplicas": 2,
+              "priority": 1000
+            },
+            {
+              "name": "zone-b",
+              "numberOfReplicas": 1,
+              "priority": 500
+            }
+          ]
+        }
+      }'
+```
+
+</details>
+
+<details>
+  <summary>Example request: reorder zone priorities</summary>
+
+```
+curl -X 'PUT' \
+   'http://localhost:9600/actuator/cluster/partition-distribution' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "zonePriorities": ["zone-b", "zone-a"]
+      }'
+```
+
+</details>
+
+##### Dry run
+
+You can do a dry run without executing the change by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
+
+#### Response
+
+The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda/camunda/blob/main/dist/src/main/resources/api/cluster/cluster-api.yaml) for details:
+
+```
+{
+  changeId: <changeId>
+  currentTopology: [...]
+  plannedChanges: [...]
+  expectedTopology: [...]
+}
+```
+
+- `changeId`: The ID of the changes initiated by this request. This can be used to monitor the progress of the operation.
+- `currentTopology`: A list of current brokers and the partition distribution.
+- `plannedChanges`: A sequence of operations that must be executed to reach the new configuration.
+- `expectedTopology`: The expected list of brokers and the partition distribution once the change has completed.
+
+### Zones API
+
+Use this endpoint to force-remove a zone from a [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) cluster, to add back a previously force-removed zone, or to migrate a zone of a bare or partially zoned cluster to a zone-aware topology.
+
+#### Force-remove a zone
+
+:::caution
+This is a dangerous operation and must be used with caution. Use it only when a zone is down and its brokers are unreachable.
+:::
+
+Force-evicts the given zone's brokers from the cluster and drops the zone from the persisted partition distribution configuration, in one atomic change.
+
+##### Request
+
+```
+DELETE actuator/cluster/zones/{zoneId}
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl -X 'DELETE' \
+   'http://localhost:9600/actuator/cluster/zones/zone-b' \
+   -H 'accept: application/json'
+```
+
+</details>
+
+###### Dry run
+
+You can do a dry run without executing the change by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
+
+##### Response
+
+The response is a JSON object with the same shape as the [partition distribution response](#response).
+
+#### Add back a previously force-removed zone
+
+Re-adds the operator-supplied brokers and re-includes the given zone in the persisted partition distribution configuration, with the supplied replica count and priority, in one atomic change.
+
+##### Request
+
+```
+POST actuator/cluster/zones/{zoneId}
+{
+  "numberOfReplicas": <integer>,
+  "priority": <integer>,
+  "brokers": [<brokerId1>, <brokerId2>, ...]
+}
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl -X 'POST' \
+   'http://localhost:9600/actuator/cluster/zones/zone-b' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "numberOfReplicas": 2,
+        "priority": 500,
+        "brokers": ["zone-b_0", "zone-b_1", "zone-b_2"]
+      }'
+```
+
+Note that the brokerIds must be zone-aware ids (i.e. contain the zone in the name).
+</details>
+
+###### Dry run
+
+You can do a dry run without executing the change by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
+
+##### Response
+
+The response is a JSON object with the same shape as the [partition distribution response](#response).
+
+#### Migrate a zone to a zone-aware topology
+
+Migrates one zone of a bare or partially zoned cluster to a zone-aware topology. The request contains only the zone name. Before migrating a zone, update the persisted partition distribution with [`PUT /cluster/partition-distribution`](#partition-distribution-api), using a zone-aware partition distribution.
+
+:::note
+For dual-region clusters, migrate the secondary zone first (odd-numbered nodes), then migrate the primary zone.
+:::
+
+The zone must already exist in the persisted partition-distribution configuration. When all configured zones have been migrated, the cluster becomes fully zoned and subsequent operations address zones by name.
+
+##### Request
+
+```
+PUT actuator/cluster/zones
+{
+  "zone": <string>
+}
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl -X 'PUT' \
+   'http://localhost:9600/actuator/cluster/zones' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{
+        "zone": "zone-b"
+      }'
+```
+
+</details>
+
+###### Dry run
+
+You can do a dry run without executing the change by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
+
+##### Response
+
+The response is a JSON object with the same shape as the [partition distribution response](#response).
