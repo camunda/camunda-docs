@@ -112,7 +112,6 @@ Some variables are created and managed by the engine to control execution. They 
 
 - `loopCounter`: the current iteration index inside a multi-instance activity. Read it within an iteration, but do not propagate it to higher scopes.
 - The multi-instance input element variable: the item assigned to the current iteration from the input collection. Its name is set by the `inputElement` attribute, and it stays local to that iteration.
-- `toolCall` and `toolCallResults`: used by the AI Agent ad-hoc subprocess to track the current tool call and its result. They are local to a single activation and must not be relied on outside it.
 
 Avoid referencing these variables in output mappings. Propagating them beyond their intended scope can produce incorrect results.
 
