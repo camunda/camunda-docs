@@ -35,7 +35,7 @@ A `fromAi()` call within an ad-hoc sub-process that is not recognized as a tool 
 
 <DeclaringAgenticSubprocess />
 
-Clicking this report in the Problems panel selects the tool task rather than the ad-hoc sub-process. To add the property, select the sub-process directly in the diagram. The Problems panel does not navigate to it for you.
+Clicking a tool container report in the Problems panel selects the tool task rather than the ad-hoc sub-process, and the Problems panel does not navigate to the sub-process for you. Select the sub-process directly in the diagram to apply either fix.
 
 ## References
 
