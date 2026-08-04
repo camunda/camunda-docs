@@ -10,6 +10,8 @@ import IconMcpImg from "../img/icon-mcp.png";
 import IconCliImg from "../img/icon-cli.png";
 import IconPythonImg from "../img/icon-python.png";
 import IconCsharpImg from "../img/icon-csharp.png";
+// TODO: replace with a dedicated icon-rust.png once the asset is available.
+import IconRustImg from "../img/icon-earlyaccess.png";
 
 export const apiCards = [
   {
@@ -119,6 +121,14 @@ export const clientCards = [
     image: IconCsharpImg,
     description:
       "Technical preview of the C# client SDK for the Camunda 8 Orchestration Cluster REST API.",
+    type: "",
+  },
+  {
+    link: "../rust-sdk/",
+    title: "Rust SDK",
+    image: IconRustImg,
+    description:
+      "Technical preview of the Rust client SDK for the Camunda 8 Orchestration Cluster REST API.",
     type: "",
   },
 ];
