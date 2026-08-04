@@ -22,6 +22,7 @@ module.exports = {
     {
       "Built-in functions": [
         "components/modeler/feel/builtin-functions/feel-built-in-functions-introduction",
+        "components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent",
         "components/modeler/feel/builtin-functions/feel-built-in-functions-boolean",
         "components/modeler/feel/builtin-functions/feel-built-in-functions-context",
         "components/modeler/feel/builtin-functions/feel-built-in-functions-conversion",
@@ -30,7 +31,6 @@ module.exports = {
         "components/modeler/feel/builtin-functions/feel-built-in-functions-range",
         "components/modeler/feel/builtin-functions/feel-built-in-functions-string",
         "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal",
-        "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous",
       ],
     },
   ],

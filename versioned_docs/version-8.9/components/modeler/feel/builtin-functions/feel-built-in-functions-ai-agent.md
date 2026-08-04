@@ -1,7 +1,7 @@
 ---
-id: feel-built-in-functions-miscellaneous
-title: Miscellaneous functions
-description: "Miscellaneous Camunda extension built-in FEEL functions including examples."
+id: feel-built-in-functions-ai-agent
+title: AI Agent functions
+description: "Camunda extension built-in FEEL functions for AI Agent tool definitions, including examples."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";
