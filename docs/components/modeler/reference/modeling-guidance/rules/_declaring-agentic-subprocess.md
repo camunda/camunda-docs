@@ -5,7 +5,8 @@ This rule applies only within an ad-hoc sub-process recognized as a tool contain
 - Its `zeebe:modelerTemplate` attribute is set to `io.camunda.connectors.agenticai.aiagent.jobworker.v1`, which identifies the AI Agent job worker template. Any version of this template is supported.
 - It has a `zeebe:property` named `io.camunda.agenticai.toolContainer` with the value `true`, regardless of whether its tools are invoked by an AI Agent task in the same process or in a separate process. This property is the supported long-term approach.
 
-Every Camunda-provided AI Agent element template sets the `io.camunda.agenticai.toolContainer` property. The property was added to all template versions retroactively, so it isn't tied to a particular Camunda release. Templates declare it as a hidden property, so it never appears as a control in the properties panel.
+Every Camunda-provided AI Agent element template sets the `io.camunda.agenticai.toolContainer` property.
+The property is available across all template versions. Templates declare it as a hidden property, so it never appears as a control in the properties panel.
 
 An element template writes its properties into the diagram only when you apply it, so an ad-hoc sub-process you modeled before the property was added keeps its original XML. Existing processes need to be updated.
 
