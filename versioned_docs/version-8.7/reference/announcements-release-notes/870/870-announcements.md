@@ -55,6 +55,7 @@ The following key changes were also released as part of an 8.7.x patch release.
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
@@ -109,6 +110,14 @@ Replace is the intended long-term behavior. The merge behavior in the affected p
 
 - **Running 8.7.28–8.7.32:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
 - **Upgrading to 8.7.33+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
+
+### Message TTL cleanup batch size pacing change {#message-ttl-cleanup-batch-size-pacing-change}
+
+Starting in Camunda 8.7.27, expired-message cleanup `MessageBatchExpireProcessor` no longer resumes its RocksDB scan from a continuation cursor across batches. Each cleanup batch now re-scans from the start of the message deadline index and skips over the tombstones of messages already expired earlier in the same drain sequence. This makes cleanup cost per batch sensitive to `ttlCheckerBatchLimit`: a low value (for example, `10`) requires many more restart-scans to drain a backlog of expired messages, which can cause backpressure on normal process and message processing.
+
+`zeebe.broker.experimental.engine.messages.ttlCheckerBatchLimit` defaults to `100`.
+
+**Action:** If you previously tuned `ttlCheckerBatchLimit` down (for example, to `10`) on an earlier patch to avoid latency peaks, revalidate it after upgrading to 8.7.27 or later. Increasing it (for example, to `500`) reduces the number of restart-scans needed to drain a backlog and restores expected throughput.
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 

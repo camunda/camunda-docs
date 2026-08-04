@@ -17,10 +17,6 @@ Zone awareness is also useful in a single-region setup. By mapping zones to avai
 
 Zone awareness is the recommended approach for new deployments, whether single-region (to skew leaders to a preferred AZ), dual-region, or three or more zones.
 
-:::note
-Converting an existing, non-zone-aware cluster into a zoned cluster is not yet supported. Existing [dual-region](./dual-region.md) deployments continue to use the legacy numbering scheme. Camunda will add a supported way to zone an existing cluster in a future release.
-:::
-
 ## What is a zone?
 
 A zone is a failure domain, typically a cloud region or availability zone, into which brokers are grouped. Each broker declares which zone it belongs to, and the cluster uses that information to:
@@ -56,7 +52,7 @@ The `ZONE_AWARE` partitioning scheme drives partition distribution and leadershi
 
 ### Comparison to legacy dual-region numbering
 
-In the legacy [dual-region](./dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which is what makes three or more zones possible.
+In the legacy [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which is what makes three or more zones possible.
 
 ## Example configuration
 
@@ -89,9 +85,9 @@ camunda:
 
 Each broker sets its own `camunda.cluster.zone`, while the `zone-aware.zones` list is the same across all brokers in the cluster.
 
-For the full list of properties and their environment-variable equivalents, see the [cluster configuration reference](../../components/orchestration-cluster/core-settings/configuration/properties.md).
+For the full list of properties and their environment-variable equivalents, see the [cluster configuration reference](../../core-settings/configuration/properties.md).
 
 ## Related resources
 
-- [Dual-region](./dual-region.md): synchronous two-region setup.
+- [Dual-region](../../../../concepts/multi-region/dual-region.md): synchronous two-region setup.
 - [Zeebe clustering](/components/zeebe/technical-concepts/clustering.md): how brokers, partitions, and replication work.

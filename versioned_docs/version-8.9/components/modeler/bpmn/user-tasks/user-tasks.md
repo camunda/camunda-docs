@@ -105,10 +105,11 @@ To set the priority of a user task, specify the priority in the `priority` attri
 
 ### Variable mappings
 
-By default, all Camunda user task variables are merged into the process instance. This
-behavior can be customized by defining an output mapping at the user task.
+By default, all variables submitted when the user task is completed are merged into the process instance. To propagate only selected variables, define an output mapping on the user task. If one or more output mappings are defined, only the mapped variables are propagated.
 
-Input mappings can be used to transform the variables into a different format.
+Use input mappings to create [local variables](/components/concepts/variables.md#local-variables) in the scope of the user task, for example to reshape process variables into the format a form expects. These local variables stay in the user task scope unless an output mapping propagates them.
+
+For the mapping syntax, see [input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings). For how a user task compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
 ### User task forms
 
