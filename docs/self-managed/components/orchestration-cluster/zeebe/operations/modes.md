@@ -1,12 +1,12 @@
 ---
 id: modes
 title: "Cluster mode"
-description: "Switch an orchestration cluster between processing and recovery mode."
+description: "Switch an Orchestration Cluster between processing and recovery mode."
 ---
 
-A cluster mode change transitions every broker of an orchestration cluster between processing mode and recovery mode. The mode determines whether the cluster's partitions process data or are deactivated so the cluster can be restored from a backup.
+A cluster mode change transitions every broker in an Orchestration Cluster between processing and recovery mode. The selected mode determines whether the partitions process data or remain inactive while you restore the cluster from a backup.
 
-A mode change is a cluster configuration change, like [cluster scaling](cluster-scaling.md). The request is acknowledged as soon as the change is accepted, and the transition itself is applied asynchronously on each broker.
+A mode change is a cluster configuration change, similar to [cluster scaling](cluster-scaling.md). The API acknowledges the request when it accepts the change, and each broker applies the transition asynchronously.
 
 ## Cluster modes
 
@@ -17,20 +17,20 @@ A mode change is a cluster configuration change, like [cluster scaling](cluster-
 
 ## What happens on a broker in recovery mode
 
-In recovery mode there is no processing at all, and only a partial set of services is registered on the broker.
+In recovery mode, the broker stops processing and registers only a limited set of services.
 
-- **Partitions are deactivated.** Each local partition is registered as `inactive` and does not join its Raft group. No leader is elected, and no records are processed, replicated, or exported.
-- **Only a partial set of services is registered.** Instead of the full partition installation, each broker starts a reduced set of services.
+- **Partitions are deactivated.** Each local partition is registered as `inactive` and does not join its Raft group. The cluster does not elect a leader or process, replicate, or export records.
+- **Only a partial set of services is registered.** Each broker starts a reduced set of services instead of the full partition installation.
 
-### What can be done in recovery mode
+### Operations available in recovery mode
 
-- Cluster state querying, topology requests
-- Primary storage backup store querying
-- Primary storage restore from a backup
+- Query the cluster state and topology.
+- Query the primary storage backup store.
+- Restore primary storage from a backup.
 
 ## Change the cluster mode
 
-Send a `PATCH` request to the `/mode` endpoint of the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx), available on the REST API port of the Orchestration Cluster (`8080` by default).
+Send a `PATCH` request to the `/mode` endpoint of the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx). The endpoint uses the Orchestration Cluster REST API port, which is `8080` by default.
 
 To enter recovery mode:
 
@@ -48,16 +48,16 @@ curl -X PATCH 'http://localhost:8080/v2/mode?mode=PROCESSING' \
 
 ### Request parameters
 
-| Parameter | Required | Description                                                                                                           |
-| --------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
-| `mode`    | Yes      | The target mode, either `RECOVERING` or `PROCESSING`.                                                                 |
-| `dryRun`  | No       | If `true`, the request is only validated and the resulting plan is returned without applying it. Defaults to `false`. |
+| Parameter | Required | Description                                                                                                       |
+| --------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| `mode`    | Yes      | The target mode, either `RECOVERING` or `PROCESSING`.                                                             |
+| `dryRun`  | No       | If `true`, validates the request and returns the resulting plan without applying the change. Defaults to `false`. |
 
 ### Response
 
 A successful request returns `200` with the ID of the triggered cluster change and the ordered list of operations that will be applied.
 
-Use `dryRun=true` to review this plan before applying it:
+Use `dryRun=true` to review the change plan before applying it:
 
 ```bash
 curl -X PATCH 'http://localhost:8080/v2/mode?mode=RECOVERING&dryRun=true' \
@@ -66,7 +66,7 @@ curl -X PATCH 'http://localhost:8080/v2/mode?mode=RECOVERING&dryRun=true' \
 
 ## Monitor the transition
 
-The mode change request returns before the transition has completed, so track its progress after sending it.
+The mode change request returns before the transition completes. Track the transition after you send the request.
 
 Query the [cluster topology](/apis-tools/orchestration-cluster-api-rest/specifications/get-topology.api.mdx) to see the state of each broker's partitions:
 
@@ -74,7 +74,7 @@ Query the [cluster topology](/apis-tools/orchestration-cluster-api-rest/specific
 curl 'http://localhost:8080/v2/topology'
 ```
 
-While a broker is in recovery mode, its partitions report `role: inactive` and `state: recovering`. After the cluster returns to processing mode, partitions report `role: leader/follower` and `state: active`.
+While a broker is in recovery mode, its partitions report `role: inactive` and `state: recovering`. After the cluster returns to processing mode, each partition reports `role: leader` or `role: follower` and `state: active`.
 
 You can also query the cluster management API on the management port (`9600` by default) to follow the change by its ID:
 
@@ -82,8 +82,8 @@ You can also query the cluster management API on the management port (`9600` by 
 curl 'http://localhost:9600/orchestration/actuator/cluster'
 ```
 
-## Considerations
+## Cluster mode change considerations
 
 - Entering recovery mode stops all processing in the cluster. Plan the change as a maintenance operation, and expect client requests to fail while the cluster is recovering.
-- Brokers that are already in the target mode are not included in the plan, so repeating a request that has already been applied results in an empty plan.
-- Mode change is considered a cluster configuration change, meaning that only one operation can be in-flight. You can always cancel a cluster configuration change
+- Brokers already in the target mode are not included in the plan. Repeating the same request after the change completes results in an empty plan.
+- A mode change is a cluster configuration change, so only one cluster configuration operation can be in progress at a time. You can cancel an active cluster configuration change.
