@@ -16,7 +16,7 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
 
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent).
 
 ## About
 
@@ -29,7 +29,7 @@ In this guide, you will:
 - Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
 - Use an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to define the tools the AI agent should use.
-- Integrate a Large Language Model (LLM) into your AI agent.
+- Integrate a [Large Language Model (LLM)](/reference/glossary.md#large-language-model-llm) into your AI agent.
 
 After completing it, you will have an example AI agent running in Camunda 8.
 
@@ -49,7 +49,11 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 ### Supported models
 
-The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API. See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
+With the AI Agent connector, you can integrate frontier models from providers like Anthropic and Amazon Bedrock, or connect to open-weight models you host yourself on any OpenAI-compatible platform. See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for all options.
+
+:::tip Choose the right model setup
+Frontier models are billed per token. That works well for complex reasoning, but costs scale with volume. Self-hosted open-weight models use a fixed infrastructure cost instead, so routine decisions stay affordable as volume grows. Use a frontier model where nuanced judgment matters, and use a self-hosted model where decisions are simple and high-volume.
+:::
 
 In this guide, you can try the following use cases:
 
@@ -112,7 +116,7 @@ The example includes a form linked to the start event, allowing you to submit re
 <img src={AiAgentStartFormImg} alt="Example AI agent start form" className="img-800"/>
 
 :::tip Understand the decision model behind this example
-To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [AI agents: Why tool documentation in ad-hoc sub-processes matters](/components/agentic-orchestration/ai-agents.md#why-tool-documentation-in-ad-hoc-sub-processes-matters).
+To make this agent reliable, treat each activity in the ad-hoc sub-process as a documented tool. Learn why this matters in [Design and architecture: Define your agent tools](/components/agentic-orchestration/design-architecture.md#define-your-agent-tools).
 
 For a runtime view of what the LLM decides vs. what Camunda orchestrates, see [Design and architecture: How execution works in an AI agent](/components/agentic-orchestration/design-architecture.md#how-execution-works-in-an-ai-agent).
 
@@ -189,7 +193,7 @@ You can keep the default configuration or adjust it to test other setups. To do 
 <img src={AiAgentPropertiesPanelImg} alt="AI agent properties panel" width="50%"/>
 
 :::tip
-When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference process variables and create dynamic prompts based on runtime data.
+When configuring connectors, use [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md), by clicking the `fx` icon, to reference [process variables](/reference/glossary.md#process-variable) and create dynamic prompts based on runtime data.
 :::
 
 </TabItem>
@@ -389,6 +393,6 @@ For example:
 
 Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
 
-:::info Camunda Academy
-Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to model, deploy, and manage AI agents in your end-to-end processes.
+:::tip
+Register for the free [Camunda 8 - Agentic Orchestration](https://academy.camunda.com/path/c8-lp-agentic) course to learn how to design and integrate AI agents in your end-to-end processes. For more insights and examples, explore our [Camunda AI agents blog posts](https://camunda.com/blog/tag/ai-agent/).
 :::

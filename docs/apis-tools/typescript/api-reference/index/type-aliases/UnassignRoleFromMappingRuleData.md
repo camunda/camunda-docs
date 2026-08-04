@@ -30,7 +30,7 @@ path: object;
 #### mappingRuleId
 
 ```ts
-mappingRuleId: string;
+mappingRuleId: MappingRuleId;
 ```
 
 The mapping rule ID.
@@ -38,7 +38,7 @@ The mapping rule ID.
 #### roleId
 
 ```ts
-roleId: string;
+roleId: RoleId;
 ```
 
 The role ID.

@@ -61,6 +61,10 @@ Define shard count according to your data size and expected growth.
 
 - **Multi-node clusters:** Configure at least **one replica per index**. Replicas ensure fault tolerance by keeping data available if one node fails.
 
+:::note
+Each replica stores a full copy of the primary shard data, so one replica per index approximately doubles the total disk required for those indices. Account for replica storage when [sizing your Elasticsearch/OpenSearch cluster](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling).
+:::
+
 ## Backups
 
 Regular backups of your secondary storage are critical for disaster recovery and business continuity.

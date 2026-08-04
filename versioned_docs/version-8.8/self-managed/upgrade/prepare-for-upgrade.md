@@ -155,11 +155,12 @@ For more information about Identity 8.8 changes, see [Identity, authentication, 
 
 Review your infrastructure to confirm compatibility with Camunda 8.8.
 
-| Area                     | 8.8 requirement                               | Action                                                                                                                                                  |
-| :----------------------- | :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Elasticsearch/OpenSearch | Elasticsearch 8.16+, OpenSearch 2.17+.        | Upgrade the cluster to the new version. Check the [supported environments](/reference/supported-environments.md) matrix to confirm the minimum version. |
-| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage. Test with a load generator.                                                                                                      |
-| Storage                  | Same or higher IOPS as 8.7.                   | Check there is required space for temporary migration file.                                                                                             |
+| Area                     | 8.8 requirement                               | Action                                                                                                                                                                                                                   |
+| :----------------------- | :-------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch/OpenSearch | Elasticsearch 8.16+, OpenSearch 2.17+.        | Upgrade the cluster to the new version. Check the [supported environments](/reference/supported-environments.md) matrix to confirm the minimum version.                                                                  |
+| CPU/Memory               | Consolidated Zeebe StatefulSet shares limits. | Measure current usage. Test with a load generator.                                                                                                                                                                       |
+| Storage                  | Same or higher IOPS as 8.7.                   | Check there is required space for temporary migration file.                                                                                                                                                              |
+| Bitnami subcharts        | Deprecated in 8.9, removed in 8.10.           | Begin planning migration to externally managed services or Kubernetes operators. See [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md). |
 
 :::caution Plan a performance test
 Component consolidation in 8.8 changes resource consumption patterns. Before upgrading production, run a load test that simulates real traffic and validate CPU, memory, and storage behavior.

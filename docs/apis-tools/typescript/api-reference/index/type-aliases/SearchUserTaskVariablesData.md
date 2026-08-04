@@ -16,28 +16,8 @@ type SearchUserTaskVariablesData = object;
 ### body?
 
 ```ts
-optional body?: SearchQueryRequest & object;
+optional body?: UserTaskVariableSearchQueryRequest;
 ```
-
-User task search query request.
-
-#### Type Declaration
-
-##### filter?
-
-```ts
-optional filter?: UserTaskVariableFilter;
-```
-
-The user task variable search filters.
-
-##### sort?
-
-```ts
-optional sort?: object[];
-```
-
-Sort field criteria.
 
 ---
 

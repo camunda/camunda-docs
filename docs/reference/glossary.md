@@ -20,7 +20,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#h">H</a></div>
     <div class="letter-link"><a href="#i">I</a></div>
     <div class="letter-link"><a href="#j">J</a></div>
-    <div class="letter-link">K</div>
+    <div class="letter-link"><a href="#k">K</a></div>
     <div class="letter-link"><a href="#l">L</a></div>
     <div class="letter-link"><a href="#m">M</a></div>
   </div>
@@ -33,7 +33,7 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
     <div class="letter-link"><a href="#s">S</a></div>
     <div class="letter-link"><a href="#t">T</a></div>
     <div class="letter-link"><a href="#u">U</a></div>
-    <div class="letter-link">V</div>
+    <div class="letter-link"><a href="#v">V</a></div>
     <div class="letter-link"><a href="#w">W</a></div>
     <div class="letter-link">X</div>
     <div class="letter-link">Y</div>
@@ -42,6 +42,14 @@ Explore and understand definitions for key Camunda 8 terms and abbreviations.
 </div>
 
 ## A
+
+### Ad-hoc sub-process
+
+A special type of BPMN subprocess that allows activities to be executed in any order, skipped, or repeated, without a predefined sequence. Activities are activated dynamically at runtime, either by a human or a system, rather than following a fixed flow.
+
+In Camunda, ad-hoc sub-processes are the foundation for AI agent tool execution: each activity inside the sub-process acts as a tool the LLM can select and invoke during a feedback loop.
+
+- [Ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)
 
 ### Admin
 
@@ -53,11 +61,25 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 - [Admin overview](/components/admin/admin-introduction.md)
 
+### Agent orchestration
+
+Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
+
+Agent orchestration can run inside a Camunda agentic process as one of its agents.
+
+:::note
+This is different from [agentic orchestration](#agentic-orchestration), which describes how Camunda orchestrates agents, tools, systems, and people as part of an end-to-end process.
+:::
+
 ### Agentic orchestration
 
-The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
+A hybrid orchestration model combining the power of deterministic logic with LLM-driven flexibility, allowing AI to evaluate the prompt, decide on what tools to execute, and decide when the goal is achieved, all with governance and auditability.
 
 For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
+
+:::note
+This is different from [agent orchestration](#agent-orchestration), which describes LLM-to-LLM coordination between agents.
+:::
 
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 
@@ -67,11 +89,16 @@ A broad field of computer science focused on creating machines that can perform 
 
 ### AI agent
 
-An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
-For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad-hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop.
+
+The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
+
+Camunda supports two types of agents: a [Camunda AI agent](#camunda-ai-agent) (native) and an [external agent](#external-agent) (non-native).
+
+For example, you can build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
-- [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
 
 ### Audit log
 
@@ -106,7 +133,7 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ### Catalog
 
-A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization-level in Camunda Hub, and used by delivery teams across workspaces and projects.
+A collection of reusable automation assets, such as element templates. The catalog is synced with your external Git repositories, governed at the organization level in Camunda Hub, and used by delivery teams across workspaces and projects.
 
 - [Catalog](/components/hub/organization/manage-catalog/index.md)
 
@@ -121,6 +148,22 @@ See [Zeebe cluster](#zeebe-cluster).
 ### Cluster variable
 
 A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
+
+### Cluster-wide operation
+
+An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
+### Camunda AI agent
+
+The native [AI agent](#ai-agent) type. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
+
+It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+
+:::note
+This is different from an [external agent](#external-agent), which is the non-native AI agent type.
+:::
 
 ### Camunda 8
 
@@ -223,6 +266,14 @@ An event represents a state change associated with an aspect of an executing [pr
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
 
+### Execution platform version
+
+In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
+
+The execution platform version is not a deployed process definition version, a Web Modeler version, or a SaaS cluster generation.
+
+- [Desktop Modeler flags](/components/modeler/desktop-modeler/flags/flags.md#default-execution-platform-version)
+
 ### Execution listener
 
 An execution listener is a mechanism that allows users to execute custom logic at specific points during [workflow](#workflow) execution. Execution listeners can be attached to [BPMN elements](#element) to react to lifecycle events, such as when an element starts or ends. This feature facilitates pre-processing and post-processing tasks without cluttering the BPMN model, functioning similarly to [job workers](#job-worker) by leveraging the same infrastructure.
@@ -232,6 +283,16 @@ An execution listener is a mechanism that allows users to execute custom logic a
 ### Exporter
 
 See [Zeebe Exporter](#zeebe-exporter).
+
+### External agent
+
+The non-native [AI agent](#ai-agent) type. Tool orchestration runs in an external runtime, such as LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine, where the loop itself lives outside Camunda.
+
+Camunda orchestrates when and how the agent acts within the broader process, and observes its execution through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), even though it does not execute the agent's reasoning loop itself. The process record, governance, and audit trail for that participation live in Camunda.
+
+:::note
+This is different from a [Camunda AI agent](#camunda-ai-agent), which is Camunda's native AI agent type.
+:::
 
 ## F
 
@@ -253,11 +314,29 @@ In a clustered environment, a [broker](#zeebe-broker) which is not a [leader](#l
 
 ### Gateway
 
-See [Zeebe Gateway](#zeebe-gateway).
+Gateway can refer to different concepts in Camunda docs, depending on the context:
+
+- In BPMN, a gateway controls how a process flow branches, merges, or synchronizes.
+- In runtime and API contexts, the [Zeebe Gateway](#zeebe-gateway) is the component that exposes APIs and routes requests to Zeebe brokers.
+- In Kubernetes deployment docs, Gateway can also refer to Kubernetes Gateway API resources.
 
 ### Generative AI
 
 Any AI system that can produce new content, such as text, images, or audio, in response to prompts. Generative AI doesn’t just analyze existing data; it creates original output that is often contextually relevant to the input.
+
+### Generation
+
+In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Console uses generations instead of a single engine version because the underlying component versions can change independently.
+
+A generation is not a process definition version, a version tag, or a Web Modeler version.
+
+- [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
+
+### GPAI model
+
+A general-purpose AI model trained on large amounts of data using self-supervision at scale, capable of performing a wide range of tasks. Used in the EU AI Act to classify foundation models.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#the-ai-models-behind-these-features)
 
 ## H
 
@@ -279,6 +358,10 @@ H2 is not intended for production usage. For Camunda secondary storage, H2 is a 
 - [Secondary storage](/self-managed/concepts/secondary-storage/index.md)
 
 See also: [Secondary storage](#secondary-storage)
+
+### Human-in-the-Loop (HITL)
+
+A human review and approval step before AI-generated outputs with legal, financial, or safety-relevant effects are acted upon.
 
 ### Human task
 
@@ -339,6 +422,14 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 
 - [Job workers](/components/concepts/job-workers.md)
 
+## K
+
+### Kill switch
+
+A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
+
+- [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+
 ## L
 
 ### Large language model (LLM)
@@ -357,6 +448,13 @@ The log is comprised of an ordered sequence of records written to persistent sto
 
 - [Partitions](/components/zeebe/technical-concepts/partitions.md#partition-data-layout)
 
+### Logical Tenant
+
+A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based multi-tenancy model in Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single [Physical Tenant](#physical-tenant).
+
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
 ## M
 
 ### Management Identity
@@ -370,6 +468,14 @@ A manual task defines a task that requires human interaction but no external too
 Manual tasks are part of [human task orchestration](/guides/getting-started-orchestrate-human-tasks.md), but differ from [user tasks](#user-task) which define an actionable task assisted by a workflow engine or software application.
 
 - [Manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md)
+
+### Multi-tenancy
+
+Multi-tenancy allows a single Camunda 8 installation to serve multiple [Logical Tenants](#logical-tenant) while keeping each tenant's data, configurations, and access logically isolated. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenant](#physical-tenant).
+
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Logical Tenant](#logical-tenant)
+- [Physical Tenant](#physical-tenant)
 
 ### Message
 
@@ -433,6 +539,15 @@ Identified by:
 
 The engine uses process definitions to start [process instances](#process-instance).
 
+### Process definition version
+
+A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
+
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a Web Modeler version, which is a saved file or project snapshot.
+
+- [Process definition](#process-definition)
+- [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
+
 ### Process instance
 
 A [process instance](/components/concepts/process-instance-creation.md) is an execution of a [process definition](#process-definition), uniquely identified by its **processInstanceKey**.  
@@ -463,6 +578,14 @@ A process variable represents the execution state (i.e data) of a process instan
 
 - [Variables](/components/concepts/variables.md)
 - [Data flow](/components/modeler/bpmn/data-flow.md)
+
+### Physical Tenant
+
+An isolated execution unit within an [Orchestration Cluster](#orchestration-cluster). Each Physical Tenant has separate data storage, independent lifecycle management, and API access scoped to that tenant. Multiple [logical tenants](#logical-tenant) can coexist within a single Physical Tenant.
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+- [Logical Tenant](#logical-tenant)
+- [Multi-tenancy](#multi-tenancy)
 
 ### Project
 
@@ -501,6 +624,14 @@ See also: [Secondary storage](#secondary-storage)
 A record represents a command or an event. For example, a command to create a new [process instance](#process-instance), or a state transition of an executing [process instance](#process-instance) representing an [event](#event) at a given point in time would result to generation of a record. During the execution lifecycle of a process instance, numerous records are generated to capture various commands and events generated. Records are stored in the log.
 
 - [Internal processing](/components/zeebe/technical-concepts/internal-processing.md#events-and-commands)
+
+### Recovery Point Objective (RPO)
+
+Multi-region resilience: Maximum tolerable amount of data loss, measured as the time between the last persisted consistent backup and the moment of failure.
+
+### Recovery Time Objective (RTO)
+
+Multi-region resilience: Maximum tolerable time from failure detection to service restoration in a functional state.
 
 ### Reference architecture
 
@@ -588,6 +719,21 @@ This way, a [Camunda workflow](#workflow) can receive messages from an external 
 
 ## T
 
+### Tenant
+
+A [Logical Tenant](#logical-tenant) is a logically isolated space within a shared Camunda 8 installation, with its own data, configurations, and user permissions. For strong physical isolation, see [Physical Tenant](#physical-tenant).
+
+- [Tenant management](/components/admin/tenant.md)
+- [Multi-tenancy](/components/concepts/multi-tenancy.md)
+- [Logical Tenant](#logical-tenant)
+- [Physical Tenant](#physical-tenant)
+
+### Tenant-scoped operation
+
+An operation that targets a specific [Physical Tenant](#physical-tenant), such as deploying a process to a tenant, backing up a tenant's data, or querying a tenant's process instances.
+
+- [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
 ### Temperature
 
 A parameter that regulates the randomness or creativity of AI-generated text. Lower values result in more focused and predictable responses, while higher values lead to more creative and varied outputs.
@@ -620,6 +766,38 @@ Camunda recommends using Camunda user tasks in your process definitions. With 8.
 A user task listener allows users to execute custom logic in response to specific user task lifecycle events, such as assigning or completing a task. User task listeners are attached to BPMN user tasks and facilitate validation, custom task assignment, and other operations during user task execution. They operate similarly to [job workers](#job-worker), leveraging the same infrastructure for processing external logic.
 
 - [User task listeners](/components/concepts/user-task-listeners.md)
+
+## V
+
+### Variable
+
+A variable stores data for a [process instance](#process-instance) or a local scope within a process. Variables can hold JSON values and are used to pass business data between tasks, expressions, and events.
+
+- [Variables](/components/concepts/variables.md)
+
+### Version
+
+In Camunda 8, version is an overloaded term. Depending on context, it can refer to a [process definition version](#process-definition-version), a [version tag](#version-tag), a [Web Modeler version](#web-modeler-version), an [execution platform version](#execution-platform-version), or a SaaS [generation](#generation).
+
+### Version tag
+
+A version tag is a user-defined string label for a specific resource or snapshot.
+
+For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Web Modeler project versioning, a version tag labels a saved project snapshot.
+
+A version tag is not generated automatically and does not replace the numeric process definition version.
+
+- [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
+- [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
+
+### Web Modeler version
+
+A Web Modeler version is a saved snapshot of a BPMN or DMN file, or of an entire project. Diagram versions were previously called milestones.
+
+Web Modeler versions help you compare, restore, review, and deploy snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
+- [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
 
 ## W
 
@@ -700,4 +878,4 @@ The Zeebe Exporter system provides an event stream of state changes within Zeebe
 
 The Zeebe Gateway is a component of the [Zeebe cluster](#zeebe-cluster); it can be considered the contact point for the Zeebe cluster that allows [Zeebe clients](#zeebe-client) to communicate with [Zeebe brokers](#zeebe-broker) inside a Zeebe cluster.
 
-- [Zeebe Gateway](self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)
+- [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/zeebe-gateway/zeebe-gateway-overview.md)

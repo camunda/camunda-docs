@@ -16,18 +16,8 @@ type SearchClientsForGroupData = object;
 ### body?
 
 ```ts
-optional body?: SearchQueryRequest & object;
+optional body?: GroupClientSearchQueryRequest;
 ```
-
-#### Type Declaration
-
-##### sort?
-
-```ts
-optional sort?: object[];
-```
-
-Sort field criteria.
 
 ---
 
@@ -40,7 +30,7 @@ path: object;
 #### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
 The group ID.

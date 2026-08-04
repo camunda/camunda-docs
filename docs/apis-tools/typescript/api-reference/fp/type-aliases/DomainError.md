@@ -13,8 +13,5 @@ The Functional Programming API is a **technical preview**. Its surface may chang
 
 ```ts
 type DomainError =
-  | CamundaValidationError
-  | EventualConsistencyTimeoutError
-  | HttpError
-  | Error;
+  CamundaValidationError | EventualConsistencyTimeoutError | HttpError | Error;
 ```

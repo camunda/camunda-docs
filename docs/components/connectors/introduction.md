@@ -15,7 +15,7 @@ import ConnectorsGrid from './react-components/\_connectors-card';
 import ConnectorsGridSml from './react-components/\_connectors-card-sml';
 import { gettingStartedCards, customConnectorCards, latestConnectorCards, latestConnectorCardsSml, popularConnectorCards, popularConnectorCardsSml } from './react-components/\_connectors-card-data';
 
-<p><a title="Find a built-in connector" href="../out-of-the-box-connectors/available-connectors-overview"><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}} className="fade-in-top-image"/></a>Built-in connectors are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
+<p><a title="Find a built-in connector" href="../out-of-the-box-connectors/available-connectors-overview"><img src={OverviewImg} alt="Get started" style={{border:0,padding:0,paddingLeft:20,margin:0,float: 'right', width: '40%'}} className="fade-in-top-image"/></a>[Built-in connectors](/reference/glossary.md#connector) are reusable building blocks you can use to easily connect processes to external systems, applications, and data.</p>
 
 - Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
 - In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) connector to add real-time messaging to your automated processes.
@@ -36,7 +36,7 @@ Get started by learning how to [integrate a Camunda 8 connector](/components/con
 
 ## Custom connectors
 
-Build and deploy your own [custom connectors](../custom-built-connectors/build-connector) using connector templates and the connector SDK.
+Build and deploy your own [custom connectors](../custom-built-connectors/build-connector) using [connector templates](/reference/glossary.md#connector-template) and the connector SDK.
 
 <ConnectorsGrid connectors={customConnectorCards} />
 

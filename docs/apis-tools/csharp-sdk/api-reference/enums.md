@@ -11,7 +11,91 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Enumeration types (28 enums).
+Enumeration types (89 enums).
+
+## AgentInstanceHistoryCommitStatusEnum
+
+The commit status of a history item.
+
+COMMITTED: the producing job completed successfully. PENDING: the producing job is still active (in-flight). DISCARDED: the producing job failed; this item was superseded by a later activation.
+
+| Value       | Description |
+| ----------- | ----------- |
+| `COMMITTED` |             |
+| `PENDING`   |             |
+| `DISCARDED` |             |
+
+## AgentInstanceHistoryRoleEnum
+
+The role of a history item in the agent conversation.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `USER`       |             |
+| `ASSISTANT`  |             |
+| `TOOLRESULT` |             |
+
+## AgentInstanceHistorySearchQuerySortRequestField
+
+The field to sort by.
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `ProducedAt`     |             |
+| `HistoryItemKey` |             |
+| `LoopIteration`  |             |
+
+## AgentInstanceMessageContentTypeEnum
+
+The content type discriminator for a history item content block.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `TEXT`     |             |
+| `DOCUMENT` |             |
+| `OBJECT`   |             |
+
+## AgentInstanceSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                    | Description |
+| ------------------------ | ----------- |
+| `AgentInstanceKey`       |             |
+| `Status`                 |             |
+| `ElementId`              |             |
+| `ProcessInstanceKey`     |             |
+| `RootProcessInstanceKey` |             |
+| `ProcessDefinitionKey`   |             |
+| `TenantId`               |             |
+| `CreationDate`           |             |
+| `LastUpdatedDate`        |             |
+| `CompletionDate`         |             |
+
+## AgentInstanceStatusEnum
+
+The current status of an agent instance.
+
+| Value           | Description |
+| --------------- | ----------- |
+| `UNKNOWN`       |             |
+| `COMPLETED`     |             |
+| `IDLE`          |             |
+| `INITIALIZING`  |             |
+| `THINKING`      |             |
+| `TOOLCALLING`   |             |
+| `TOOLDISCOVERY` |             |
+
+## AgentInstanceUpdateStatusEnum
+
+The status values that can be set on an agent instance via an update request.
+
+| Value           | Description |
+| --------------- | ----------- |
+| `IDLE`          |             |
+| `THINKING`      |             |
+| `TOOLCALLING`   |             |
+| `TOOLDISCOVERY` |             |
 
 ## AuditLogActorTypeEnum
 
@@ -86,6 +170,83 @@ The result status of the operation.
 | `FAIL`    |             |
 | `SUCCESS` |             |
 
+## AuditLogSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                     | Description |
+| ------------------------- | ----------- |
+| `ActorId`                 |             |
+| `ActorType`               |             |
+| `AuditLogKey`             |             |
+| `BatchOperationKey`       |             |
+| `BatchOperationType`      |             |
+| `Category`                |             |
+| `DecisionDefinitionId`    |             |
+| `DecisionDefinitionKey`   |             |
+| `DecisionEvaluationKey`   |             |
+| `DecisionRequirementsId`  |             |
+| `DecisionRequirementsKey` |             |
+| `ElementInstanceKey`      |             |
+| `EntityKey`               |             |
+| `EntityType`              |             |
+| `JobKey`                  |             |
+| `OperationType`           |             |
+| `ProcessDefinitionId`     |             |
+| `ProcessDefinitionKey`    |             |
+| `ProcessInstanceKey`      |             |
+| `InboundChannelType`      |             |
+| `InboundChannelToolName`  |             |
+| `Result`                  |             |
+| `TenantId`                |             |
+| `Timestamp`               |             |
+| `UserTaskKey`             |             |
+
+## AuthorizationSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                  | Description |
+| ---------------------- | ----------- |
+| `OwnerId`              |             |
+| `OwnerType`            |             |
+| `ResourceId`           |             |
+| `ResourcePropertyName` |             |
+| `ResourceType`         |             |
+
+## BatchOperationErrorType
+
+The type of the error that occurred during the batch operation.
+
+| Value                      | Description |
+| -------------------------- | ----------- |
+| `QUERYFAILED`              |             |
+| `RESULTBUFFERSIZEEXCEEDED` |             |
+
+## BatchOperationItemResponseState
+
+State of the item.
+
+| Value       | Description |
+| ----------- | ----------- |
+| `ACTIVE`    |             |
+| `COMPLETED` |             |
+| `SKIPPED`   |             |
+| `CANCELED`  |             |
+| `FAILED`    |             |
+
+## BatchOperationItemSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                | Description |
+| -------------------- | ----------- |
+| `BatchOperationKey`  |             |
+| `ItemKey`            |             |
+| `ProcessInstanceKey` |             |
+| `ProcessedDate`      |             |
+| `State`              |             |
+
 ## BatchOperationItemStateEnum
 
 The batch operation item state.
@@ -96,6 +257,20 @@ The batch operation item state.
 | `COMPLETED` |             |
 | `CANCELED`  |             |
 | `FAILED`    |             |
+
+## BatchOperationSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value               | Description |
+| ------------------- | ----------- |
+| `BatchOperationKey` |             |
+| `OperationType`     |             |
+| `State`             |             |
+| `StartDate`         |             |
+| `EndDate`           |             |
+| `ActorType`         |             |
+| `ActorId`           |             |
 
 ## BatchOperationStateEnum
 
@@ -126,6 +301,9 @@ The type of the batch operation.
 | `MIGRATEPROCESSINSTANCE`   |             |
 | `MODIFYPROCESSINSTANCE`    |             |
 | `RESOLVEINCIDENT`          |             |
+| `RESUMEPROCESSINSTANCE`    |             |
+| `SUSPENDPROCESSINSTANCE`   |             |
+| `UPDATEJOB`                |             |
 | `UPDATEVARIABLE`           |             |
 
 ## CamundaAuthErrorCode
@@ -140,6 +318,25 @@ Auth error codes matching the JS SDK.
 | `OAuthConfigMissing`      |             |
 | `BasicCredentialsMissing` |             |
 
+## CloudStage
+
+The cloud deployment stage.
+
+| Value  | Description |
+| ------ | ----------- |
+| `Dev`  |             |
+| `Int`  |             |
+| `Prod` |             |
+
+## ClusterVariableKindEnum
+
+The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.
+
+| Value             | Description |
+| ----------------- | ----------- |
+| `JSON`            |             |
+| `SECRETREFERENCE` |             |
+
 ## ClusterVariableScopeEnum
 
 The scope of a cluster variable.
@@ -148,6 +345,53 @@ The scope of a cluster variable.
 | -------- | ----------- |
 | `GLOBAL` |             |
 | `TENANT` |             |
+
+## ClusterVariableSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Name`     |             |
+| `Value`    |             |
+| `TenantId` |             |
+| `Scope`    |             |
+
+## CorrelatedMessageSubscriptionSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                  | Description |
+| ---------------------- | ----------- |
+| `BusinessId`           |             |
+| `CorrelationKey`       |             |
+| `CorrelationTime`      |             |
+| `ElementId`            |             |
+| `ElementInstanceKey`   |             |
+| `MessageKey`           |             |
+| `MessageName`          |             |
+| `PartitionId`          |             |
+| `ProcessDefinitionId`  |             |
+| `ProcessDefinitionKey` |             |
+| `ProcessInstanceKey`   |             |
+| `SubscriptionKey`      |             |
+| `TenantId`             |             |
+
+## DecisionDefinitionSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                         | Description |
+| ----------------------------- | ----------- |
+| `DecisionDefinitionKey`       |             |
+| `DecisionDefinitionId`        |             |
+| `Name`                        |             |
+| `Version`                     |             |
+| `DecisionRequirementsId`      |             |
+| `DecisionRequirementsKey`     |             |
+| `DecisionRequirementsName`    |             |
+| `DecisionRequirementsVersion` |             |
+| `TenantId`                    |             |
 
 ## DecisionDefinitionTypeEnum
 
@@ -160,6 +404,29 @@ The type of the decision. UNSPECIFIED is deprecated and should not be used anymo
 | `UNSPECIFIED`       |             |
 | `UNKNOWN`           |             |
 
+## DecisionInstanceSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                           | Description |
+| ------------------------------- | ----------- |
+| `BusinessId`                    |             |
+| `DecisionDefinitionId`          |             |
+| `DecisionDefinitionKey`         |             |
+| `DecisionDefinitionName`        |             |
+| `DecisionDefinitionType`        |             |
+| `DecisionDefinitionVersion`     |             |
+| `DecisionEvaluationInstanceKey` |             |
+| `DecisionEvaluationKey`         |             |
+| `ElementInstanceKey`            |             |
+| `EvaluationDate`                |             |
+| `EvaluationFailure`             |             |
+| `ProcessDefinitionKey`          |             |
+| `ProcessInstanceKey`            |             |
+| `RootDecisionDefinitionKey`     |             |
+| `State`                         |             |
+| `TenantId`                      |             |
+
 ## DecisionInstanceStateEnum
 
 The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and should not be used anymore, for removal in 8.10
@@ -171,6 +438,147 @@ The state of the decision instance. UNSPECIFIED and UNKNOWN are deprecated and s
 | `UNSPECIFIED` |             |
 | `UNKNOWN`     |             |
 
+## DecisionRequirementsSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                      | Description |
+| -------------------------- | ----------- |
+| `DecisionRequirementsKey`  |             |
+| `DecisionRequirementsName` |             |
+| `Version`                  |             |
+| `DecisionRequirementsId`   |             |
+| `TenantId`                 |             |
+
+## DocumentReferenceCamundaDocumentType
+
+Document discriminator. Always set to "camunda".
+
+| Value     | Description |
+| --------- | ----------- |
+| `Camunda` |             |
+
+## ElementInstanceFilterFieldsType
+
+Type of element as defined set of values.
+
+| Value                          | Description |
+| ------------------------------ | ----------- |
+| `UNSPECIFIED`                  |             |
+| `PROCESS`                      |             |
+| `SUBPROCESS`                   |             |
+| `EVENTSUBPROCESS`              |             |
+| `ADHOCSUBPROCESS`              |             |
+| `ADHOCSUBPROCESSINNERINSTANCE` |             |
+| `STARTEVENT`                   |             |
+| `INTERMEDIATECATCHEVENT`       |             |
+| `INTERMEDIATETHROWEVENT`       |             |
+| `BOUNDARYEVENT`                |             |
+| `ENDEVENT`                     |             |
+| `SERVICETASK`                  |             |
+| `RECEIVETASK`                  |             |
+| `USERTASK`                     |             |
+| `MANUALTASK`                   |             |
+| `TASK`                         |             |
+| `EXCLUSIVEGATEWAY`             |             |
+| `INCLUSIVEGATEWAY`             |             |
+| `PARALLELGATEWAY`              |             |
+| `EVENTBASEDGATEWAY`            |             |
+| `SEQUENCEFLOW`                 |             |
+| `MULTIINSTANCEBODY`            |             |
+| `CALLACTIVITY`                 |             |
+| `BUSINESSRULETASK`             |             |
+| `SCRIPTTASK`                   |             |
+| `SENDTASK`                     |             |
+| `UNKNOWN`                      |             |
+
+## ElementInstanceFilterType
+
+Type of element as defined set of values.
+
+| Value                          | Description |
+| ------------------------------ | ----------- |
+| `UNSPECIFIED`                  |             |
+| `PROCESS`                      |             |
+| `SUBPROCESS`                   |             |
+| `EVENTSUBPROCESS`              |             |
+| `ADHOCSUBPROCESS`              |             |
+| `ADHOCSUBPROCESSINNERINSTANCE` |             |
+| `STARTEVENT`                   |             |
+| `INTERMEDIATECATCHEVENT`       |             |
+| `INTERMEDIATETHROWEVENT`       |             |
+| `BOUNDARYEVENT`                |             |
+| `ENDEVENT`                     |             |
+| `SERVICETASK`                  |             |
+| `RECEIVETASK`                  |             |
+| `USERTASK`                     |             |
+| `MANUALTASK`                   |             |
+| `TASK`                         |             |
+| `EXCLUSIVEGATEWAY`             |             |
+| `INCLUSIVEGATEWAY`             |             |
+| `PARALLELGATEWAY`              |             |
+| `EVENTBASEDGATEWAY`            |             |
+| `SEQUENCEFLOW`                 |             |
+| `MULTIINSTANCEBODY`            |             |
+| `CALLACTIVITY`                 |             |
+| `BUSINESSRULETASK`             |             |
+| `SCRIPTTASK`                   |             |
+| `SENDTASK`                     |             |
+| `UNKNOWN`                      |             |
+
+## ElementInstanceResultType
+
+Type of element as defined set of values.
+
+| Value                          | Description |
+| ------------------------------ | ----------- |
+| `UNSPECIFIED`                  |             |
+| `PROCESS`                      |             |
+| `SUBPROCESS`                   |             |
+| `EVENTSUBPROCESS`              |             |
+| `ADHOCSUBPROCESS`              |             |
+| `ADHOCSUBPROCESSINNERINSTANCE` |             |
+| `STARTEVENT`                   |             |
+| `INTERMEDIATECATCHEVENT`       |             |
+| `INTERMEDIATETHROWEVENT`       |             |
+| `BOUNDARYEVENT`                |             |
+| `ENDEVENT`                     |             |
+| `SERVICETASK`                  |             |
+| `RECEIVETASK`                  |             |
+| `USERTASK`                     |             |
+| `MANUALTASK`                   |             |
+| `TASK`                         |             |
+| `EXCLUSIVEGATEWAY`             |             |
+| `INCLUSIVEGATEWAY`             |             |
+| `PARALLELGATEWAY`              |             |
+| `EVENTBASEDGATEWAY`            |             |
+| `SEQUENCEFLOW`                 |             |
+| `MULTIINSTANCEBODY`            |             |
+| `CALLACTIVITY`                 |             |
+| `BUSINESSRULETASK`             |             |
+| `SCRIPTTASK`                   |             |
+| `SENDTASK`                     |             |
+| `UNKNOWN`                      |             |
+
+## ElementInstanceSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                  | Description |
+| ---------------------- | ----------- |
+| `ElementInstanceKey`   |             |
+| `ProcessInstanceKey`   |             |
+| `ProcessDefinitionKey` |             |
+| `ProcessDefinitionId`  |             |
+| `StartDate`            |             |
+| `EndDate`              |             |
+| `ElementId`            |             |
+| `ElementName`          |             |
+| `Type`                 |             |
+| `State`                |             |
+| `IncidentKey`          |             |
+| `TenantId`             |             |
+
 ## ElementInstanceStateEnum
 
 Element states
@@ -180,6 +588,17 @@ Element states
 | `ACTIVE`     |             |
 | `COMPLETED`  |             |
 | `TERMINATED` |             |
+
+## ElementInstanceWaitStateQuerySortRequestField
+
+The field to sort by.
+
+| Value                    | Description |
+| ------------------------ | ----------- |
+| `ElementInstanceKey`     |             |
+| `ProcessInstanceKey`     |             |
+| `RootProcessInstanceKey` |             |
+| `ElementId`              |             |
 
 ## GlobalListenerSourceEnum
 
@@ -203,6 +622,43 @@ The event type that triggers the user task listener.
 | `Completing` |             |
 | `Canceling`  |             |
 
+## GlobalTaskListenerSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `Id`             |             |
+| `Type`           |             |
+| `AfterNonGlobal` |             |
+| `Priority`       |             |
+| `Source`         |             |
+
+## GroupClientSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `ClientId` |             |
+
+## GroupSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value     | Description |
+| --------- | ----------- |
+| `Name`    |             |
+| `GroupId` |             |
+
+## GroupUserSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Username` |             |
+
 ## IncidentErrorTypeEnum
 
 Incident error type with a defined set of values.
@@ -225,6 +681,43 @@ Incident error type with a defined set of values.
 | `UNHANDLEDERROREVENT`        |             |
 | `UNKNOWN`                    |             |
 | `UNSPECIFIED`                |             |
+
+## IncidentProcessInstanceStatisticsByDefinitionQuerySortRequestField
+
+The aggregated field by which the process instance statistics are sorted.
+
+| Value                           | Description |
+| ------------------------------- | ----------- |
+| `ActiveInstancesWithErrorCount` |             |
+| `ProcessDefinitionKey`          |             |
+| `TenantId`                      |             |
+
+## IncidentProcessInstanceStatisticsByErrorQuerySortRequestField
+
+The field to sort the incident error statistics by.
+
+| Value                           | Description |
+| ------------------------------- | ----------- |
+| `ErrorMessage`                  |             |
+| `ActiveInstancesWithErrorCount` |             |
+
+## IncidentSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                  | Description |
+| ---------------------- | ----------- |
+| `IncidentKey`          |             |
+| `ProcessDefinitionKey` |             |
+| `ProcessDefinitionId`  |             |
+| `ProcessInstanceKey`   |             |
+| `ErrorType`            |             |
+| `ElementId`            |             |
+| `ElementInstanceKey`   |             |
+| `CreationTime`         |             |
+| `State`                |             |
+| `JobKey`               |             |
+| `TenantId`             |             |
 
 ## IncidentStateEnum
 
@@ -256,6 +749,8 @@ The listener event type of the job.
 | Value         | Description |
 | ------------- | ----------- |
 | `ASSIGNING`   |             |
+| `BEFOREALL`   |             |
+| `CANCEL`      |             |
 | `CANCELING`   |             |
 | `COMPLETING`  |             |
 | `CREATING`    |             |
@@ -264,24 +759,89 @@ The listener event type of the job.
 | `UNSPECIFIED` |             |
 | `UPDATING`    |             |
 
+## JobSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                      | Description |
+| -------------------------- | ----------- |
+| `Deadline`                 |             |
+| `DeniedReason`             |             |
+| `ElementId`                |             |
+| `ElementInstanceKey`       |             |
+| `EndTime`                  |             |
+| `ErrorCode`                |             |
+| `ErrorMessage`             |             |
+| `HasFailedWithRetriesLeft` |             |
+| `IsDenied`                 |             |
+| `JobKey`                   |             |
+| `Kind`                     |             |
+| `ListenerEventType`        |             |
+| `Priority`                 |             |
+| `ProcessDefinitionId`      |             |
+| `ProcessDefinitionKey`     |             |
+| `ProcessInstanceKey`       |             |
+| `Retries`                  |             |
+| `State`                    |             |
+| `TenantId`                 |             |
+| `Type`                     |             |
+| `Worker`                   |             |
+
 ## JobStateEnum
 
 The state of the job.
 
-| Value            | Description |
-| ---------------- | ----------- |
-| `CANCELED`       |             |
-| `COMPLETED`      |             |
-| `CREATED`        |             |
-| `ERRORTHROWN`    |             |
-| `FAILED`         |             |
-| `MIGRATED`       |             |
-| `RETRIESUPDATED` |             |
-| `TIMEDOUT`       |             |
+| Value             | Description |
+| ----------------- | ----------- |
+| `CANCELED`        |             |
+| `COMPLETED`       |             |
+| `CREATED`         |             |
+| `ERRORTHROWN`     |             |
+| `FAILED`          |             |
+| `MIGRATED`        |             |
+| `PRIORITYUPDATED` |             |
+| `RETRIESUPDATED`  |             |
+| `TIMEOUTUPDATED`  |             |
+| `TIMEDOUT`        |             |
+
+## MappingRuleSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value           | Description |
+| --------------- | ----------- |
+| `MappingRuleId` |             |
+| `ClaimName`     |             |
+| `ClaimValue`    |             |
+| `Name`          |             |
+
+## MessageSubscriptionSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                      | Description |
+| -------------------------- | ----------- |
+| `MessageSubscriptionKey`   |             |
+| `ProcessDefinitionId`      |             |
+| `ProcessDefinitionName`    |             |
+| `ProcessDefinitionVersion` |             |
+| `ProcessInstanceKey`       |             |
+| `ElementId`                |             |
+| `ElementInstanceKey`       |             |
+| `MessageSubscriptionState` |             |
+| `MessageSubscriptionType`  |             |
+| `LastUpdatedDate`          |             |
+| `MessageName`              |             |
+| `CorrelationKey`           |             |
+| `TenantId`                 |             |
+| `ToolName`                 |             |
+| `InboundConnectorType`     |             |
 
 ## MessageSubscriptionStateEnum
 
 The state of message subscription.
+
+**Note for `START_EVENT` subscriptions:** The `CORRELATED` and `MIGRATED` states are not tracked for these subscriptions. To query correlation history for process start events, use the `/correlated-message-subscriptions/search` endpoint.
 
 | Value        | Description |
 | ------------ | ----------- |
@@ -289,6 +849,17 @@ The state of message subscription.
 | `CREATED`    |             |
 | `DELETED`    |             |
 | `MIGRATED`   |             |
+
+## MessageSubscriptionTypeEnum
+
+The type of message subscription.
+
+`START_EVENT` is definition-scoped (process start events). Always has a value; only captured from Camunda 8.10 onwards. `PROCESS_EVENT` is instance-scoped (intermediate catch events). Pre-8.10 entries have no value stored; the API returns `PROCESS_EVENT` as a default for those entries.
+
+| Value          | Description |
+| -------------- | ----------- |
+| `STARTEVENT`   |             |
+| `PROCESSEVENT` |             |
 
 ## OwnerTypeEnum
 
@@ -302,6 +873,38 @@ The type of the owner of permissions.
 | `GROUP`       |             |
 | `MAPPINGRULE` |             |
 | `UNSPECIFIED` |             |
+
+## PartitionHealth
+
+Describes the current health of the partition.
+
+| Value       | Description |
+| ----------- | ----------- |
+| `Healthy`   |             |
+| `Unhealthy` |             |
+| `Dead`      |             |
+
+## PartitionRole
+
+Describes the Raft role of the broker for a given partition.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Leader`   |             |
+| `Follower` |             |
+| `Inactive` |             |
+
+## PartitionState
+
+Describes the current operational state of the partition within the cluster configuration.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `Unknown`    |             |
+| `Joining`    |             |
+| `Active`     |             |
+| `Leaving`    |             |
+| `Recovering` |             |
 
 ## PermissionTypeEnum
 
@@ -324,6 +927,8 @@ Specifies the type of permissions.
 | `CREATEBATCHOPERATIONMIGRATEPROCESSINSTANCE`   |             |
 | `CREATEBATCHOPERATIONMODIFYPROCESSINSTANCE`    |             |
 | `CREATEBATCHOPERATIONRESOLVEINCIDENT`          |             |
+| `CREATEBATCHOPERATIONSUSPENDPROCESSINSTANCE`   |             |
+| `CREATEBATCHOPERATIONUPDATEJOB`                |             |
 | `CREATEDECISIONINSTANCE`                       |             |
 | `CREATEPROCESSINSTANCE`                        |             |
 | `CREATETASKLISTENER`                           |             |
@@ -337,6 +942,7 @@ Specifies the type of permissions.
 | `DELETETASKLISTENER`                           |             |
 | `EVALUATE`                                     |             |
 | `MODIFYPROCESSINSTANCE`                        |             |
+| `PAUSE`                                        |             |
 | `READ`                                         |             |
 | `READDECISIONDEFINITION`                       |             |
 | `READDECISIONINSTANCE`                         |             |
@@ -346,10 +952,71 @@ Specifies the type of permissions.
 | `READUSAGEMETRIC`                              |             |
 | `READUSERTASK`                                 |             |
 | `READTASKLISTENER`                             |             |
+| `RESTORE`                                      |             |
+| `REVEAL`                                       |             |
+| `SUSPENDPROCESSINSTANCE`                       |             |
 | `UPDATE`                                       |             |
 | `UPDATEPROCESSINSTANCE`                        |             |
 | `UPDATEUSERTASK`                               |             |
 | `UPDATETASKLISTENER`                           |             |
+
+## ProcessDefinitionInstanceStatisticsQuerySortRequestField
+
+The field to sort by.
+
+| Value                                 | Description |
+| ------------------------------------- | ----------- |
+| `ProcessDefinitionId`                 |             |
+| `ActiveInstancesWithIncidentCount`    |             |
+| `ActiveInstancesWithoutIncidentCount` |             |
+
+## ProcessDefinitionInstanceVersionStatisticsQuerySortRequestField
+
+The field to sort by.
+
+| Value                                 | Description |
+| ------------------------------------- | ----------- |
+| `ProcessDefinitionId`                 |             |
+| `ProcessDefinitionKey`                |             |
+| `ProcessDefinitionName`               |             |
+| `ProcessDefinitionVersion`            |             |
+| `ActiveInstancesWithIncidentCount`    |             |
+| `ActiveInstancesWithoutIncidentCount` |             |
+
+## ProcessDefinitionSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                  | Description |
+| ---------------------- | ----------- |
+| `ProcessDefinitionKey` |             |
+| `Name`                 |             |
+| `ResourceName`         |             |
+| `Version`              |             |
+| `VersionTag`           |             |
+| `ProcessDefinitionId`  |             |
+| `TenantId`             |             |
+
+## ProcessInstanceSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                         | Description |
+| ----------------------------- | ----------- |
+| `ProcessInstanceKey`          |             |
+| `ProcessDefinitionId`         |             |
+| `ProcessDefinitionName`       |             |
+| `ProcessDefinitionVersion`    |             |
+| `ProcessDefinitionVersionTag` |             |
+| `ProcessDefinitionKey`        |             |
+| `ParentProcessInstanceKey`    |             |
+| `ParentElementInstanceKey`    |             |
+| `StartDate`                   |             |
+| `EndDate`                     |             |
+| `State`                       |             |
+| `HasIncident`                 |             |
+| `TenantId`                    |             |
+| `BusinessId`                  |             |
 
 ## ProcessInstanceStateEnum
 
@@ -361,6 +1028,20 @@ Process instance states
 | `COMPLETED`  |             |
 | `TERMINATED` |             |
 
+## ResourceSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value           | Description |
+| --------------- | ----------- |
+| `ResourceKey`   |             |
+| `ResourceName`  |             |
+| `ResourceId`    |             |
+| `Version`       |             |
+| `VersionTag`    |             |
+| `DeploymentKey` |             |
+| `TenantId`      |             |
+
 ## ResourceTypeEnum
 
 The type of resource to add/remove permissions to/from.
@@ -369,12 +1050,14 @@ The type of resource to add/remove permissions to/from.
 | -------------------------------- | ----------- |
 | `AUDITLOG`                       |             |
 | `AUTHORIZATION`                  |             |
+| `BACKUP`                         |             |
 | `BATCH`                          |             |
 | `CLUSTERVARIABLE`                |             |
 | `COMPONENT`                      |             |
 | `DECISIONDEFINITION`             |             |
 | `DECISIONREQUIREMENTSDEFINITION` |             |
 | `DOCUMENT`                       |             |
+| `EXPORTER`                       |             |
 | `EXPRESSION`                     |             |
 | `GLOBALLISTENER`                 |             |
 | `GROUP`                          |             |
@@ -383,10 +1066,58 @@ The type of resource to add/remove permissions to/from.
 | `PROCESSDEFINITION`              |             |
 | `RESOURCE`                       |             |
 | `ROLE`                           |             |
+| `SECRET`                         |             |
 | `SYSTEM`                         |             |
 | `TENANT`                         |             |
 | `USER`                           |             |
 | `USERTASK`                       |             |
+
+## RoleClientSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `ClientId` |             |
+
+## RoleGroupSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value     | Description |
+| --------- | ----------- |
+| `GroupId` |             |
+
+## RoleSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value    | Description |
+| -------- | ----------- |
+| `Name`   |             |
+| `RoleId` |             |
+
+## RoleUserSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Username` |             |
+
+## SecretErrorCode
+
+The typed reason a reference could not be resolved.
+
+- `NOT_FOUND`: no secret exists for the reference.
+- `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.
+- `INVALID_REFERENCE`: the reference is malformed.
+
+| Value              | Description |
+| ------------------ | ----------- |
+| `NOTFOUND`         |             |
+| `ACCESSDENIED`     |             |
+| `INVALIDREFERENCE` |             |
 
 ## SortOrderEnum
 
@@ -397,6 +1128,14 @@ The order in which to sort the related field.
 | `ASC`  |             |
 | `DESC` |             |
 
+## TenantClientSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `ClientId` |             |
+
 ## TenantFilterEnum
 
 The tenant filtering strategy for job activation. Determines whether to use tenant IDs provided in the request or tenant IDs assigned to the authenticated principal.
@@ -406,9 +1145,60 @@ The tenant filtering strategy for job activation. Determines whether to use tena
 | `PROVIDED` |             |
 | `ASSIGNED` |             |
 
+## TenantGroupSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value     | Description |
+| --------- | ----------- |
+| `GroupId` |             |
+
+## TenantSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Key`      |             |
+| `Name`     |             |
+| `TenantId` |             |
+
+## TenantUserSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Username` |             |
+
+## UserSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Username` |             |
+| `Name`     |             |
+| `Email`    |             |
+
+## UserTaskSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value            | Description |
+| ---------------- | ----------- |
+| `CreationDate`   |             |
+| `CompletionDate` |             |
+| `FollowUpDate`   |             |
+| `DueDate`        |             |
+| `Priority`       |             |
+| `Name`           |             |
+| `BusinessId`     |             |
+
 ## UserTaskStateEnum
 
 The state of the user task.
+
 Note: FAILED state is only for legacy job-worker-based tasks.
 
 | Value        | Description |
@@ -422,3 +1212,86 @@ Note: FAILED state is only for legacy job-worker-based tasks.
 | `CANCELING`  |             |
 | `CANCELED`   |             |
 | `FAILED`     |             |
+
+## UserTaskVariableSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                | Description |
+| -------------------- | ----------- |
+| `Value`              |             |
+| `Name`               |             |
+| `TenantId`           |             |
+| `VariableKey`        |             |
+| `ScopeKey`           |             |
+| `ProcessInstanceKey` |             |
+
+## VariableSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                | Description |
+| -------------------- | ----------- |
+| `Value`              |             |
+| `Name`               |             |
+| `TenantId`           |             |
+| `VariableKey`        |             |
+| `ScopeKey`           |             |
+| `ProcessInstanceKey` |             |
+
+## WaitStateElementTypeEnum
+
+The BPMN element type of a waiting element instance.
+
+| Value                          | Description |
+| ------------------------------ | ----------- |
+| `ADHOCSUBPROCESS`              |             |
+| `ADHOCSUBPROCESSINNERINSTANCE` |             |
+| `BOUNDARYEVENT`                |             |
+| `BUSINESSRULETASK`             |             |
+| `CALLACTIVITY`                 |             |
+| `ENDEVENT`                     |             |
+| `EVENTBASEDGATEWAY`            |             |
+| `EVENTSUBPROCESS`              |             |
+| `EXCLUSIVEGATEWAY`             |             |
+| `INCLUSIVEGATEWAY`             |             |
+| `INTERMEDIATECATCHEVENT`       |             |
+| `INTERMEDIATETHROWEVENT`       |             |
+| `MANUALTASK`                   |             |
+| `MULTIINSTANCEBODY`            |             |
+| `PARALLELGATEWAY`              |             |
+| `PROCESS`                      |             |
+| `RECEIVETASK`                  |             |
+| `SCRIPTTASK`                   |             |
+| `SENDTASK`                     |             |
+| `SEQUENCEFLOW`                 |             |
+| `SERVICETASK`                  |             |
+| `STARTEVENT`                   |             |
+| `SUBPROCESS`                   |             |
+| `TASK`                         |             |
+| `UNKNOWN`                      |             |
+| `UNSPECIFIED`                  |             |
+| `USERTASK`                     |             |
+
+## WaitStateTypeEnum
+
+The type of waiting state an element instance is in.
+
+| Value       | Description |
+| ----------- | ----------- |
+| `JOB`       |             |
+| `MESSAGE`   |             |
+| `USERTASK`  |             |
+| `TIMER`     |             |
+| `SIGNAL`    |             |
+| `CONDITION` |             |
+
+## WebappComponent
+
+A Camunda webapp component name.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `Operate`  |             |
+| `Tasklist` |             |
+| `Admin`    |             |

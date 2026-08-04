@@ -2,7 +2,7 @@
 id: deploying-resources
 title: Deploying Resources
 sidebar_label: Deploying Resources
-sidebar_position: 9
+sidebar_position: 10
 mdx:
   format: md
 ---

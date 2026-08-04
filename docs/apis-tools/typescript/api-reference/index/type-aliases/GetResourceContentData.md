@@ -33,7 +33,7 @@ path: object;
 resourceKey: ResourceKey;
 ```
 
-The unique key identifying the resource.
+The unique key identifying the RPA resource.
 
 ---
 

@@ -38,9 +38,18 @@ You can use this to define which user the task can be assigned to. You can speci
 - `candidateGroups`: Specifies the groups of users that the task can be assigned to.
 
 :::info
+Starting with Camunda 8.8, user task candidate groups should reference group IDs instead of group names. The Zeebe engine will attempt to resolve a candidate group value in the following way:
+
+1. Confirm a group ID exists for the value.
+2. If no ID is found, find a group name for the value, and resolve its ID.
+
+This behavior can be disabled by setting the `ZEEBE_BROKER_EXPERIMENTAL_ENGINE_CACHES_CANDIDATEGROUPNAMERESOLUTION=false` configuration property, so user task candidate group values are not checked by the Zeebe engine. See [zeebe.broker.experimental.engine.caches](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#zeebebrokerexperimentalenginecaches) for all related configuration properties.
+:::
+
+:::info
 Usernames and group IDs in the Orchestration Cluster are case-sensitive. When you set `assignee`, `candidateUsers`, or `candidateGroups`, always use the exact value from your identity provider or Identity user record, including case. For example, `abc@example.com` and `Abc@example.com` are treated as different users.
 
-You can also use assignment resources to configure [user task access restrictions in Tasklist](/components/tasklist/user-task-access-restrictions.md) when using Tasklist V1, so that only the assignee, candidate users, and members of candidate groups can see and work on a task. In Tasklist V2, candidate users and candidate groups are not evaluated by Tasklist for task visibility or assignment. Tasklist V2 relies on authorization-based access control at the process-definition level only.
+Candidate users and candidate groups are not used by current Tasklist releases for task visibility or assignment. Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) to control who can see and work on a task.
 :::
 
 Typically, the assignee, candidate users, and candidate groups are defined as [static values](/components/concepts/expressions.md#expressions-vs-static-values) (e.g. `some_username`, `some_username, another_username` and
@@ -96,10 +105,11 @@ To set the priority of a user task, specify the priority in the `priority` attri
 
 ### Variable mappings
 
-By default, all Camunda user task variables are merged into the process instance. This
-behavior can be customized by defining an output mapping at the user task.
+By default, all variables submitted when the user task is completed are merged into the process instance. To propagate only selected variables, define an output mapping on the user task. If one or more output mappings are defined, only the mapped variables are propagated.
 
-Input mappings can be used to transform the variables into a different format.
+Use input mappings to create [local variables](/components/concepts/variables.md#local-variables) in the scope of the user task, for example to reshape process variables into the format a form expects. These local variables stay in the user task scope unless an output mapping propagates them.
+
+For the mapping syntax, see [input/output variable mappings](/components/concepts/variables.md#inputoutput-variable-mappings). For how a user task compares to other elements, see [variable propagation by BPMN element](/components/concepts/variables.md#variable-propagation-by-bpmn-element).
 
 ### User task forms
 

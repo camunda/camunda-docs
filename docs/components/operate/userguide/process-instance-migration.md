@@ -12,7 +12,7 @@ Before you try to migrate process instances, learn about the [limitations](/comp
 
 ## Select process instances
 
-1. From the **Processes** page, select a specific process and version from the **Filter** panel. This will be the source process version where instances are migrated from.
+1. From the **Processes** page, select a specific process and version from the **Filter** panel. For detailed guidance on filtering, see [filter process instances](./filter-process-instances.md). This will be the source process version where instances are migrated from.
 2. Select all instances from the **Process Instances** table that should be migrated to another process version.
 3. Click **Migrate** to enter the migration view.
 4. In the modal, click **Continue**.

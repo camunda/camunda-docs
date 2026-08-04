@@ -4,7 +4,11 @@ title: "Secondary storage"
 description: "Learn how secondary storage works in Camunda Self-Managed environments, how it interacts with the Zeebe engine, and how to configure or manage it effectively."
 ---
 
+import DocCardList from '@theme/DocCardList';
+
 Camunda uses a layered storage model that separates workflow execution data from data used by web applications and APIs.
+
+If you are designing Physical Tenant isolation, see [Physical Tenant isolation model](../physical-tenants/index.md) for the tenant-level execution and routing boundaries that sit on top of secondary storage.
 
 ## About secondary storage
 
@@ -21,11 +25,7 @@ Secondary storage is not a duplicate of primary data. It represents exported wor
 
 ### Supported storage options
 
-Camunda supports multiple secondary storage backends.  
-For the latest list of supported database versions, see the  
-[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
-
-Both document-store and RDBMS backends are valid secondary storage choices in Self-Managed deployments. Support maturity can vary by product area and version (for example, the Orchestration Cluster API, Operate, Tasklist, Admin, or Optimize), so confirm current compatibility details before choosing a backend.
+Camunda supports multiple secondary storage backends. Both document-store and RDBMS backends are valid choices in Self-Managed deployments. Support maturity can vary by product area and version (for example, the Orchestration Cluster API, Operate, Tasklist, Admin, or Optimize), so confirm current compatibility details before choosing a backend. For supported database versions, see the [RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
 | Database type          | Availability         | Use case                                                                                                                                                                                          |
 | :--------------------- | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -77,9 +77,9 @@ Starting in 8.9, Camunda 8 Run and default lightweight installs use H2 as the de
 H2 is a convenience default for local development, testing, and evaluation. It is not a production reference architecture and is not a valid backend for multi-broker Helm clusters.
 :::
 
-1. The Zeebe broker executes workflow instances and stores state in primary storage.
-1. Exporters, running as part of Zeebe, write orchestration data to the configured secondary storage backend and can write to multiple targets when needed.
-1. Operate, Tasklist, and Admin use the Orchestration Cluster API, which reads data from the configured secondary storage backend.
+### How secondary storage works
+
+The Zeebe Broker executes workflow instances and stores state in primary storage. Exporters running as part of Zeebe write orchestration data to the configured secondary storage backend and can write to multiple targets when needed. Operate, Tasklist, and Admin use the Orchestration Cluster API, which reads from the configured secondary storage backend.
 
 ## Choosing a secondary storage backend
 
@@ -96,24 +96,8 @@ For guidance on supported vendors, versions, and configuration, see:
 The documentation is intentionally descriptive rather than prescriptive. Use benchmarking and sizing based on your own workload to choose the secondary storage backend that best meets your requirements.
 :::
 
-Learn how to configure secondary storage in Self-Managed environments using Helm, Docker, or manual deployment.
-
-<p><a href="./configuring-secondary-storage" class="link-arrow">Configure secondary storage</a></p>
-
 :::note
 Although you should use secondary storage in nearly all production environments, you can choose to disable secondary storage in limited scenarios, such as lightweight development environments, specialized technical use cases, or resource-constrained deployments. See [run without secondary storage](no-secondary-storage.md).
 :::
 
-## Manage secondary storage
-
-Learn about best practices for data management, backups, and monitoring to ensure data integrity and performance.
-
-Effective secondary storage management ensures stability, scalability, and data integrity across your Camunda environment. By following Camunda best practices, you can avoid data corruption, maintain compliance, and ensure your orchestration environment remains performant and reliable.
-
-<p><a href="./managing-secondary-storage" class="link-arrow">Manage secondary storage</a></p>
-
-## Benchmark results
-
-Review current benchmark results and caveats for PostgreSQL-based secondary storage.
-
-<p><a href="./rdbms-benchmark-results" class="link-arrow">RDBMS benchmark results</a></p>
+<DocCardList />

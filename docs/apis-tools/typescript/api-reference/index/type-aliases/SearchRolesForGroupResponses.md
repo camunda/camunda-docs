@@ -16,17 +16,7 @@ type SearchRolesForGroupResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: GroupRoleSearchResult;
 ```
 
 The roles assigned to the group.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: RoleResult[];
-```
-
-The matching roles.

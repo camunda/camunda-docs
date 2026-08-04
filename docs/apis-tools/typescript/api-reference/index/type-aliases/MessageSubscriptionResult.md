@@ -40,6 +40,18 @@ elementInstanceKey: ElementInstanceKey | null;
 ```
 
 The element instance key associated with this message subscription.
+Only populated for intermediate event entities.
+
+---
+
+### inboundConnectorType
+
+```ts
+inboundConnectorType: string | null;
+```
+
+Inbound connector type extracted from the `inbound.type` zeebe:property.
+Null when the property is absent.
 
 ---
 
@@ -81,6 +93,14 @@ messageSubscriptionState: MessageSubscriptionStateEnum;
 
 ---
 
+### messageSubscriptionType
+
+```ts
+messageSubscriptionType: MessageSubscriptionTypeEnum;
+```
+
+---
+
 ### processDefinitionId
 
 ```ts
@@ -101,6 +121,26 @@ The process definition key associated with this message subscription.
 
 ---
 
+### processDefinitionName
+
+```ts
+processDefinitionName: string | null;
+```
+
+The name of the process definition associated with this message subscription.
+
+---
+
+### processDefinitionVersion
+
+```ts
+processDefinitionVersion: number | null;
+```
+
+The version of the process definition associated with this message subscription.
+
+---
+
 ### processInstanceKey
 
 ```ts
@@ -108,6 +148,7 @@ processInstanceKey: ProcessInstanceKey | null;
 ```
 
 The process instance key associated with this message subscription.
+Only populated for intermediate event entities.
 
 ---
 
@@ -127,4 +168,33 @@ belonging to process instance hierarchies created in version 8.9 or later.
 
 ```ts
 tenantId: TenantId;
+```
+
+---
+
+### toolName
+
+```ts
+toolName: string | null;
+```
+
+Tool name extracted from the `io.camunda.tool:name` zeebe:property.
+Null when the property is absent.
+
+---
+
+### toolProperties
+
+```ts
+toolProperties: object;
+```
+
+The subset of `zeebe:properties` extension properties whose keys start with the
+`io.camunda.tool:` prefix, extracted from the BPMN element associated with this
+subscription. Empty object when no matching properties are defined.
+
+#### Index Signature
+
+```ts
+[key: string]: string
 ```

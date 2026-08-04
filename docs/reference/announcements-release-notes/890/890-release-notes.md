@@ -31,7 +31,7 @@ import PageDescription from '@site/src/components/PageDescription';
   <summary>Overview of all patch releases and their Changelogs in GitHub</summary>
 
 <!-- RELEASE_LINKS_PLACEHOLDER -->
-<ul><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
+<ul><li>[Camunda 8.9.14 (03.08.2026)](https://github.com/camunda/camunda/releases/tag/8.9.14)</li><li>[Camunda 8.9.13 (15.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.13)</li><li>[Camunda 8.9.12 (07.07.2026)](https://github.com/camunda/camunda/releases/tag/8.9.12)</li><li>[Camunda 8.9.11 (26.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.11)</li><li>[Camunda 8.9.10 (25.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.10)</li><li>[Camunda 8.9.9 (16.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.9)</li><li>[Camunda 8.9.8 (10.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.8)</li><li>[Camunda 8.9.7 (09.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.7)</li><li>[Camunda 8.9.6 (02.06.2026)](https://github.com/camunda/camunda/releases/tag/8.9.6)</li><li>[Camunda 8.9.5 (08.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.5)</li><li>[Camunda 8.9.4 (06.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.4)</li><li>[Camunda 8.9.3 (05.05.2026)](https://github.com/camunda/camunda/releases/tag/8.9.3)</li><li>[Camunda 8.9.2 (28.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.2)</li><li>[Camunda 8.9.1 (21.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.1)</li><li>[Camunda 8.9.0 (07.04.2026)](https://github.com/camunda/camunda/releases/tag/8.9.0)</li><li>[Connectors 8.9.6 (26.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.6)</li><li>[Connectors 8.9.5 (01.06.2026)](https://github.com/camunda/connectors/releases/tag/8.9.5)</li><li>[Connectors 8.9.4 (20.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.4)</li><li>[Connectors 8.9.3 (06.05.2026)](https://github.com/camunda/connectors/releases/tag/8.9.3)</li><li>[Connectors 8.9.2 (30.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.2)</li><li>[Connectors 8.9.1 (22.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.1)</li><li>[Connectors 8.9.0 (08.04.2026)](https://github.com/camunda/connectors/releases/tag/8.9.0)</li></ul>
 <!-- RELEASE_LINKS_PLACEHOLDER -->
 
 </details>
@@ -114,13 +114,17 @@ Camunda Process Test now adds dedicated support for AI agent testing, making it 
 - Judge assertions use a configured LLM to assess whether AI-generated output satisfies a natural-language expectation, so you can verify response quality and intent.
 - Conditional behavior helps you model reactive test behavior for agent-driven flows by watching process state changes and completing tasks as they appear, without blocking the test on a predefined path.
 
-<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/test-ai-agents.md)</p>
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
 
 ### Camunda Docs MCP server
 
 Camunda 8.9 adds a documentation-focused MCP server so IDEs and AI tools can query the latest official Camunda documentation directly. This gives developers a lightweight way to bring product documentation into coding and support workflows without leaving their editor.
 
 <p class="link-arrow">[Camunda Docs MCP server](/reference/mcp-docs/mcp-docs.md)</p>
+
+### Camunda Spring Boot Starter - Spring Boot 4.1 support
+
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) is verified from the `8.9.12` patch onward. Spring Boot 4.0.x remains the default bundled version.
 
 ## Camunda 8 Run
 
@@ -320,6 +324,12 @@ A new migration tooling set is available to move existing Self-Managed deploymen
 
 Camunda 8.9 adds IDP document classification templates and lets you choose a text extraction engine per template. This gives teams more control over how different document types are categorized and processed, whether they need lightweight parsing, OCR, or multimodal LLM interpretation.
 
+### Azure Blob Storage support for document handling
+
+Camunda 8.9 adds Azure Blob Storage as a supported document store for Self-Managed environments, alongside the existing Google Cloud Platform (GCP) and AWS S3 options. Configure it via Camunda 8 Run, Docker Compose, or Helm.
+
+<p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md#supported-storage-options)</p>
+
 ## Integrations
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda integrations">Integrations</span></div>
@@ -426,6 +436,16 @@ Orchestration Cluster enhancements in 8.9 include scheduled backups, Elasticsear
   <li><span class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</span></li>
 </ul>
 
+### Archive by ID for Elasticsearch and OpenSearch
+
+<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
+
+Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default.
+
+Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving. The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
+
+<p class="link-arrow">[Data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)</p>
+
 ### Process and data management improvements
 
 Camunda 8.9 adds support for deleting process and decision data, retaining hierarchy data until root-instance deletion, modifying elements inside multi-instance ad-hoc subprocesses, and updating cluster variables directly in the UI. The release also introduces a centralized user operations audit log and expands audit log access across platform APIs and applications.
@@ -434,6 +454,14 @@ Camunda 8.9 adds support for deleting process and decision data, retaining hiera
   <li><span class="link-arrow">[Process instance modification](/components/concepts/process-instance-modification.md)</span></li>
   <li><span class="link-arrow">[Audit log](/components/audit-log/overview.md)</span></li>
 </ul>
+
+### Tasklist V1 OpenSearch compatibility
+
+OpenSearch 3.6.0 is not supported when Tasklist V1 is enabled. Please use OpenSearch 2.19+ or versions 3.4.x–3.5.x, or migrate to Tasklist V2.
+
+:::note
+Tasklist V1 is planned for removal in version 8.10, so we strongly recommend migrating to Tasklist V2 to avoid future compatibility issues.
+:::
 
 ## RDBMS secondary storage
 
@@ -511,7 +539,7 @@ Camunda 8.9 expands Web Modeler with broader event template support, email-based
 <ul>
   <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
   <li><span class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
-  <li><span class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
+  <li><span class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
 </ul>
 
 ## 8.9.0-alpha5
@@ -761,7 +789,7 @@ A [critical bug in 8.9-alpha5](https://github.com/camunda/camunda/issues/47955) 
 
 The Operate, Tasklist, and Identity application profiles are now merged into the existing gateway profile to provide a simplified but flexible deployment model.
 
-- These components are now treated as UIs served by the gateway.
+- These components are now treated as UIs served by the Zeebe Gateway.
 - Control their inclusion via configuration properties (for example, `camunda.webapps.enabled=operate,identity`).
 
 #### Amazon ECS (EC2+Fargate) support
@@ -1620,7 +1648,7 @@ Element templates now support reusable [BPMN signals](/components/modeler/bpmn/s
 
 Web Modeler now uses [Apache Tomcat](https://tomcat.apache.org/) as an embedded web server instead of Undertow. Aligning Web Modeler logging with the Orchestration Cluster makes it easier for administrators to configure and maintain Self-Managed deployments.
 
-<p class="link-arrow">[Embedded web server](/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
+<p class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</p>
 
 #### Web Modeler: IP egress monitoring (SaaS)
 

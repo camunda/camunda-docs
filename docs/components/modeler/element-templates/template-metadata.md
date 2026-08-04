@@ -232,6 +232,101 @@ A property can be assigned to a group by setting the [`group` key](./template-pr
 }
 ```
 
+## Predefined configurations: `steps` and `presets`
+
+- `steps` is an optional key.
+- `presets` is an optional key.
+
+Use `steps` and `presets` to offer several predefined configurations within a single template. A preset is a named set of property values, and `steps` define the menu users navigate to choose one. This is useful for templates that bundle multiple operations, such as a connector that can create an issue, list issues, or create a branch.
+
+When a template defines `steps`, applying the template opens a nested menu built from those steps instead of applying the template directly. Choosing a final step applies the template together with the property values of its referenced preset. While searching, the final steps surface directly so users can pick an operation without navigating the menu.
+
+### Defining presets with `presets`
+
+A preset is a reusable set of property values applied on top of the template's defaults. Leaf steps reference presets through `presetId`.
+
+- `presets : Array<Object>` defines the available presets. Each preset has the following attributes:
+  - `id : String` is a required key that uniquely identifies the preset. It is referenced by a step's `presetId`.
+  - `properties : Object` is a required key that maps template property names to the values applied when the preset is selected. These values are applied on top of the template's default property values.
+
+### Defining the menu with `steps`
+
+`steps` define a hierarchical menu shown when the template is applied. A step is either a category or a final choice:
+
+- A category step has nested `steps` and groups other steps. Selecting it navigates into its child steps.
+- A leaf step references a preset through `presetId` and applies that preset when selected.
+
+A step must define either `steps` or `presetId`, but not both.
+
+- `steps : Array<Object>` defines the menu. Each step has the following attributes:
+  - `name : String` is a required key that defines the step's label in the menu.
+  - `description : String` is an optional key shown alongside the name.
+  - `keywords : Array<String>` is an optional key listing extra terms used to match the step in search.
+  - `steps : Array<Object>` is the list of nested child steps. Defining this key marks the step as a category.
+  - `presetId : String` references a preset by its `id`. Defining this key marks the step as a leaf.
+
+The following example defines a connector template with two categories, each containing two operations that map to a preset:
+
+```json
+{
+  ...,
+  "steps": [
+    {
+      "name": "Issues",
+      "description": "Manage GitHub issues",
+      "steps": [
+        {
+          "name": "Create Issue",
+          "description": "Create a new issue",
+          "keywords": ["create issue", "open ticket"],
+          "presetId": "createIssue"
+        },
+        {
+          "name": "List Issues",
+          "description": "List issues in a repository",
+          "keywords": ["list issues", "get issues"],
+          "presetId": "listIssues"
+        }
+      ]
+    },
+    {
+      "name": "Branches",
+      "description": "Manage GitHub branches",
+      "steps": [
+        {
+          "name": "List Branches",
+          "keywords": ["list branches", "get branches"],
+          "presetId": "listBranches"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "id": "createIssue",
+      "properties": {
+        "operationGroup": "issues",
+        "issueOperationType": "createIssue"
+      }
+    },
+    {
+      "id": "listIssues",
+      "properties": {
+        "operationGroup": "issues",
+        "issueOperationType": "listIssues"
+      }
+    },
+    {
+      "id": "listBranches",
+      "properties": {
+        "operationGroup": "branches",
+        "branchOperationType": "listBranches"
+      }
+    }
+  ]
+}
+```
+
 ## Deprecating a template: `deprecated`
 
 - `deprecated` is an optional key.

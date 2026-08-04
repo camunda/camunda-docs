@@ -9,8 +9,8 @@ module.exports = {
       },
       items: [
         "guides/getting-started-hello-world",
-        "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
+        "guides/getting-started-example",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
@@ -79,6 +79,86 @@ module.exports = {
         "guides/migrating-from-camunda-7/migration-readiness",
       ],
     },
+  ],
+  BuildWithAI: [
+    {
+      type: "category",
+      label: "Build with AI",
+      link: {
+        type: "doc",
+        id: "guides/build-with-ai/overview",
+      },
+      items: [],
+    },
+    "guides/build-with-ai/ai-usage-guidelines",
+    {
+      type: "category",
+      label: "Agentic orchestration",
+      link: {
+        type: "doc",
+        id: "components/agentic-orchestration/agentic-orchestration-overview",
+      },
+      items: [
+        "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/ao-design",
+        {
+          type: "category",
+          label: "Evaluate AI agents",
+          link: {
+            type: "doc",
+            id: "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview",
+          },
+          items: [
+            "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/test-ai-agents",
+          ],
+        },
+        "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/expose-process-as-mcp-tool",
+        "components/agentic-orchestration/choose-right-model-agentic",
+        "components/agentic-orchestration/model-recommendations-agentic",
+      ],
+    },
+    {
+      type: "category",
+      label: "Intelligent document processing (IDP)",
+      link: {
+        type: "doc",
+        id: "components/hub/workspace/modeler/idp",
+      },
+      items: [
+        "components/hub/workspace/modeler/idp/idp-configuration",
+        "components/hub/workspace/modeler/idp/idp-applications",
+        "components/hub/workspace/modeler/idp/idp-document-classification",
+        {
+          type: "category",
+          label: "Document extraction",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-document-extraction",
+          },
+          items: [
+            "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
+            "components/hub/workspace/modeler/idp/idp-structured-extraction",
+          ],
+        },
+        // "components/hub/workspace/modeler/idp/idp-document-automation",
+        {
+          type: "category",
+          label: "Integrate IDP into your processes",
+          link: {
+            type: "doc",
+            id: "components/hub/workspace/modeler/idp/idp-integrate",
+          },
+          items: ["components/hub/workspace/modeler/idp/idp-example"],
+        },
+        "components/hub/workspace/modeler/idp/idp-key-concepts",
+        "components/hub/workspace/modeler/idp/idp-reference",
+      ],
+    },
+    "reference/mcp-docs/docs-mcp",
   ],
   Components: [
     "components/components-overview",
@@ -199,6 +279,7 @@ module.exports = {
             "components/best-practices/management/doing-a-proper-poc",
           ],
           Architecture: [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               type: "category",
@@ -255,62 +336,6 @@ module.exports = {
       items: [
         {
           type: "category",
-          label: "Agentic orchestration",
-          link: {
-            type: "doc",
-            id: "components/agentic-orchestration/agentic-orchestration-overview",
-          },
-          items: [
-            "components/agentic-orchestration/ai-agents",
-            "components/agentic-orchestration/camunda-provided-llm",
-            "components/agentic-orchestration/ao-design",
-            "components/agentic-orchestration/monitor-ai-agents",
-            "components/agentic-orchestration/analyze-ai-agents",
-            "components/agentic-orchestration/test-ai-agents",
-            "components/agentic-orchestration/rag-ai-agents",
-            "components/agentic-orchestration/choose-right-model-agentic",
-            "components/agentic-orchestration/model-recommendations-agentic",
-          ],
-        },
-        {
-          type: "category",
-          label: "Intelligent document processing (IDP)",
-          link: {
-            type: "doc",
-            id: "components/hub/workspace/modeler/idp",
-          },
-          items: [
-            "components/hub/workspace/modeler/idp/idp-configuration",
-            "components/hub/workspace/modeler/idp/idp-applications",
-            "components/hub/workspace/modeler/idp/idp-document-classification",
-            {
-              type: "category",
-              label: "Document extraction",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-document-extraction",
-              },
-              items: [
-                "components/hub/workspace/modeler/idp/idp-unstructured-extraction",
-                "components/hub/workspace/modeler/idp/idp-structured-extraction",
-              ],
-            },
-            // "components/hub/workspace/modeler/idp/idp-document-automation",
-            {
-              type: "category",
-              label: "Integrate IDP into your processes",
-              link: {
-                type: "doc",
-                id: "components/hub/workspace/modeler/idp/idp-integrate",
-              },
-              items: ["components/hub/workspace/modeler/idp/idp-example"],
-            },
-            "components/hub/workspace/modeler/idp/idp-key-concepts",
-            "components/hub/workspace/modeler/idp/idp-reference",
-          ],
-        },
-        {
-          type: "category",
           label: "Robotic Process Automation (RPA)",
           link: {
             type: "doc",
@@ -340,6 +365,7 @@ module.exports = {
             "components/document-handling/send-document-to-external-system-via-connector",
           ],
         },
+        "components/wait-states/overview",
         {
           type: "category",
           label: "Camunda integrations",
@@ -597,6 +623,7 @@ module.exports = {
               ],
             },
             "components/operate/userguide/basic-operate-navigation",
+            "components/operate/userguide/filter-process-instances",
             "components/operate/userguide/resolve-incidents-update-variables",
             "components/operate/userguide/selections-operations",
             "components/operate/userguide/monitor-batch-operations",
@@ -611,6 +638,7 @@ module.exports = {
             },
             "components/operate/userguide/process-instance-migration",
             "components/operate/userguide/audit-operations",
+            "components/operate/userguide/view-wait-states",
           ],
         },
         {
@@ -629,7 +657,6 @@ module.exports = {
             "components/tasklist/userguide/using-filters",
             "components/tasklist/userguide/defining-task-priorities",
             "components/tasklist/userguide/starting-processes",
-            "components/tasklist/user-task-access-restrictions",
             "components/tasklist/userguide/tasklist-localization",
             "components/tasklist/userguide/audit-task-history",
           ],
@@ -705,8 +732,17 @@ module.exports = {
               ],
             },
             {
-              type: "doc",
-              id: "components/hub/organization/manage-catalog/manage-catalog",
+              type: "category",
+              label: "Manage the catalog",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/manage-catalog/manage-catalog",
+              },
+              items: [
+                "components/hub/organization/manage-catalog/getting-started-catalog",
+                "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/sync-multiple-repositories",
+              ],
             },
             {
               type: "category",
@@ -799,6 +835,11 @@ module.exports = {
                   label: "Git Sync",
                   id: "components/hub/workspace/manage-projects/git-sync",
                 },
+                {
+                  type: "doc",
+                  label: "Recover deleted resources",
+                  id: "components/hub/workspace/manage-projects/recently-deleted",
+                },
               ],
             },
             {
@@ -847,6 +888,7 @@ module.exports = {
                       items: [
                         "components/hub/workspace/modeler/element-templates/element-template-generator",
                         "components/hub/workspace/modeler/element-templates/using-templates-in-modeler",
+                        "components/hub/workspace/modeler/element-templates/use-catalog-assets",
                         "components/hub/workspace/modeler/element-templates/save-as-element-templates",
                         "components/hub/workspace/modeler/element-templates/best-practices",
                       ],
@@ -861,7 +903,6 @@ module.exports = {
                         "components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/call-activity-linking",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/form-linking",
-                        "components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes",
                         "components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files",
                       ],
                     },
@@ -1004,6 +1045,7 @@ module.exports = {
                       ],
                     },
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
                   ],
                 },
@@ -1022,6 +1064,7 @@ module.exports = {
                     "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client-human-in-the-loop",
                   ],
                 },
+                "components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event",
                 "components/connectors/out-of-the-box-connectors/agentic-ai-ad-hoc-tools-schema-resolver",
               ],
             },
@@ -1145,6 +1188,7 @@ module.exports = {
           "Dashboards maintained by Camunda": [
             "components/optimize/userguide/process-dashboards",
             "components/optimize/userguide/instant-process-dashboards",
+            "components/optimize/userguide/agentic-control-plane",
           ],
         },
         "components/optimize/userguide/creating-reports",
@@ -1260,7 +1304,20 @@ module.exports = {
           ],
         },
 
-        "components/saas/backups",
+        {
+          type: "category",
+          label: "Backup and restore",
+          link: {
+            type: "doc",
+            id: "components/saas/backup-restore-overview",
+          },
+          items: [
+            "components/saas/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting",
+          ],
+        },
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
@@ -1277,8 +1334,10 @@ module.exports = {
       APIs: [
         require("./docs/apis-tools/orchestration-cluster-api-rest/sidebar-schema"),
         require("./docs/apis-tools/orchestration-cluster-api-mcp/sidebar-schema"),
+        require("./docs/apis-tools/processes-mcp/sidebar-schema"),
         require("./docs/apis-tools/administration-api/sidebar-schema"),
-        require("./docs/apis-tools/administration-sm-api/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-saas/sidebar-schema"),
+        require("./docs/apis-tools/hub-api-sm/sidebar-schema"),
         {
           type: "category",
           label: "Optimize API",
@@ -1318,12 +1377,10 @@ module.exports = {
             "apis-tools/optimize-api/variable-labeling",
           ],
         },
-        require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
         {
           Deprecated: [
-            require("./docs/apis-tools/operate-api/sidebar-schema"),
-            require("./docs/apis-tools/tasklist-api-rest/sidebar-schema"),
+            require("./docs/apis-tools/web-modeler-api/sidebar-schema"),
             {
               "Zeebe API (REST)": [
                 "apis-tools/zeebe-api-rest/zeebe-api-rest-overview",
@@ -1491,9 +1548,6 @@ module.exports = {
             "apis-tools/testing/json-test-cases",
           ],
         },
-        {
-          Deprecated: ["apis-tools/testing/zeebe-process-test"],
-        },
       ],
     },
     {
@@ -1518,7 +1572,13 @@ module.exports = {
     {
       type: "category",
       label: "Upgrade to Camunda 8.10",
-      items: ["apis-tools/migration-manuals/migrate-to-810"],
+      link: {
+        type: "doc",
+        id: "apis-tools/migration-manuals/migrate-to-810",
+      },
+      items: [
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+      ],
     },
   ],
   Reference: [
@@ -1600,7 +1660,6 @@ module.exports = {
       items: ["reference/data-collection/usage-metrics"],
     },
     "reference/contact",
-    "reference/mcp-docs/docs-mcp",
     "reference/legal",
   ],
   "Self-Managed": [
@@ -1635,7 +1694,20 @@ module.exports = {
                 "self-managed/quickstart/developer-quickstart/c8run-troubleshooting",
               ],
             },
-            "self-managed/quickstart/developer-quickstart/docker-compose",
+            {
+              type: "category",
+              label: "Docker Compose",
+              link: {
+                type: "doc",
+                id: "self-managed/quickstart/developer-quickstart/docker-compose",
+              },
+              items: [
+                "self-managed/quickstart/developer-quickstart/docker-compose/install-start",
+                "self-managed/quickstart/developer-quickstart/docker-compose/configuration",
+                "self-managed/quickstart/developer-quickstart/docker-compose/secondary-storage",
+                "self-managed/quickstart/developer-quickstart/docker-compose/connectors-and-modeling",
+              ],
+            },
           ],
         },
         "self-managed/quickstart/administrator-quickstart",
@@ -1707,6 +1779,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -1780,7 +1853,7 @@ module.exports = {
                     },
                     {
                       type: "category",
-                      label: "Management Identity and Web Modeler",
+                      label: "Management Identity and Camunda Hub",
                       items: [
                         "self-managed/deployment/helm/configure/database/using-existing-postgres",
                       ],
@@ -1842,6 +1915,7 @@ module.exports = {
                   ],
                 },
                 "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/tls",
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
@@ -1856,23 +1930,11 @@ module.exports = {
                 id: "self-managed/deployment/helm/operational-tasks/index",
               },
               items: [
-                {
-                  type: "category",
-                  label: "Migration from Bitnami",
-                  link: {
-                    type: "doc",
-                    id: "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
-                  },
-                  items: [
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives",
-                    "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime",
-                  ],
-                },
+                "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
+                "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
               ],
             },
             {
@@ -1980,6 +2042,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs",
+                "self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region",
               ],
             },
           ],
@@ -2116,6 +2179,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
         {
@@ -2143,6 +2207,34 @@ module.exports = {
         },
         {
           type: "category",
+          label: "Multi-tenancy",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-tenancy/multi-tenancy-overview",
+          },
+          items: [
+            "self-managed/concepts/multi-tenancy/logical-tenants",
+            {
+              type: "category",
+              label: "Physical Tenants",
+              link: {
+                type: "doc",
+                id: "self-managed/concepts/multi-tenancy/physical-tenants",
+              },
+              items: [
+                "self-managed/concepts/physical-tenants/index",
+                "self-managed/concepts/physical-tenants/storage-isolation",
+                "self-managed/concepts/physical-tenants/api-routing",
+                "self-managed/concepts/physical-tenants/authentication-authorization",
+                "self-managed/concepts/physical-tenants/authorization-model",
+                "self-managed/concepts/physical-tenants/configuration-reference",
+                "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+              ],
+            },
+          ],
+        },
+        {
+          type: "category",
           label: "Audit log",
           link: {
             type: "doc",
@@ -2150,6 +2242,7 @@ module.exports = {
           },
           items: ["self-managed/concepts/audit-log/configure-audit-log"],
         },
+        "self-managed/concepts/wait-states/configure-wait-states",
         "self-managed/concepts/exporters",
         "self-managed/operational-guides/configure-flow-control/configure-flow-control",
         {
@@ -2159,12 +2252,19 @@ module.exports = {
           ],
         },
         {
-          "Multi-region": ["self-managed/concepts/multi-region/dual-region"],
+          type: "category",
+          label: "Multi-region",
+          link: {
+            type: "doc",
+            id: "self-managed/concepts/multi-region/resilience-tiers",
+          },
+          items: [
+            "self-managed/concepts/multi-region/cold-recovery",
+            "self-managed/concepts/multi-region/dual-region",
+          ],
         },
         "self-managed/operational-guides/data-purge",
-        {
-          Troubleshooting: ["self-managed/operational-guides/troubleshooting"],
-        },
+        "self-managed/operational-guides/troubleshooting",
       ],
     },
     {
@@ -2228,6 +2328,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/zeebe/configuration/priority-election",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/broker-config",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-config",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters",
                   ],
                 },
                 {
@@ -2275,7 +2376,6 @@ module.exports = {
               Tasklist: [
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-configuration",
                 "self-managed/components/orchestration-cluster/tasklist/tasklist-custom-styling",
-                "self-managed/components/orchestration-cluster/tasklist/user-task-access-restrictions",
               ],
             },
             {
@@ -2285,6 +2385,7 @@ module.exports = {
                 "self-managed/components/orchestration-cluster/admin/connect-multiple-identity-providers",
                 "self-managed/components/orchestration-cluster/admin/bring-your-groups",
                 "self-managed/components/orchestration-cluster/admin/debugging-authentication",
+                "self-managed/components/orchestration-cluster/admin/mcp-processes",
                 "self-managed/components/orchestration-cluster/admin/special-oidc-cases",
               ],
             },
@@ -2299,22 +2400,15 @@ module.exports = {
           },
           items: [
             "self-managed/components/hub/usage-metrics",
-            "self-managed/components/hub/telemetry",
             "self-managed/components/hub/monitoring",
             {
-              type: "category",
-              label: "Configuration",
-              link: {
-                type: "doc",
-                id: "self-managed/components/hub/configuration/configuration",
-              },
-              items: [
-                "self-managed/components/hub/configuration/ssl",
-                "self-managed/components/hub/configuration/modeler-configuration",
+              Configuration: [
+                "self-managed/components/hub/configuration/properties",
+                "self-managed/components/hub/configuration/legacy-cluster-config",
                 "self-managed/components/hub/configuration/database",
                 "self-managed/components/hub/configuration/identity",
                 "self-managed/components/hub/configuration/logging",
-                "self-managed/components/hub/configuration/modeler-ssl",
+                "self-managed/components/hub/configuration/ssl",
                 "self-managed/components/hub/configuration/copilot",
               ],
             },
@@ -2442,7 +2536,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.9",
+      label: "Upgrade to Camunda 8.10",
       className: "sidebar-cta",
       link: {
         type: "doc",
@@ -2457,9 +2551,8 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: ["self-managed/upgrade/helm/880-to-890"],
+          items: ["self-managed/upgrade/helm/890-to-8100"],
         },
-        "self-managed/upgrade/manual/index",
         {
           type: "category",
           label: "Component upgrade",
@@ -2467,15 +2560,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/components/index",
           },
-          items: [
-            "self-managed/upgrade/components/880-to-890",
-            {
-              Database: [
-                "self-managed/upgrade/components/database/changes-in-elasticsearch-8",
-              ],
-            },
-            "self-managed/upgrade/components/keycloak/keycloak-compatibility",
-          ],
+          items: ["self-managed/upgrade/components/890-to-8100"],
         },
       ],
     },

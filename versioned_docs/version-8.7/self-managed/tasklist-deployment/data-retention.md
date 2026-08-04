@@ -27,13 +27,17 @@ All Tasklist data present in Elasticsearch (from both **main** and **dated** ind
 
 The default time between a process instance finishing and being moved to a dated index is one hour. This can be modified by setting the [waitPeriodBeforeArchiving](importer-and-archiver.md#archive-period) configuration parameter.
 
-## Rollover Interval
+## Rollover interval
 
-Process instances are archived into historical indices based on some rollover interval, by default this value is `1d` therefore a process instance which completed
-at yyyy-mm-dd would be archived into an index which that date as a suffix, meaning there would be one historical index per day. By increasing this interval, the number
-of historical indices will reduce which will reduce shard consumption.
+Process instances are archived into historical indices based on a rollover interval. By default, this value is `1d`, so a process instance that completed on `yyyy-mm-dd` is archived into an index with that date as a suffix, meaning there is one historical index per day. Increasing this interval reduces the number of historical indices, which reduces shard consumption.
 
-This value can be modified by setting the [rolloverInterval](importer-and-archiver.md#rollover-interval) configuration parameter
+This value can be modified by setting the [rolloverInterval](importer-and-archiver.md#rollover-interval) configuration parameter.
+
+:::warning
+With a `1w` or `1M` rollover interval, effective retention can be shorter than the configured retention value. Retention is applied per index, counted from the start of that index's calendar bucket (the Monday of the ISO week for `1w`, or the 1st of the month for `1M`) — not from the date the process instance actually finished.
+
+For example, with `rolloverInterval: 1w` and a retention period of `30d`: a process instance that finishes on Sunday, 14 June 2026 is archived into the weekly index starting Monday, 8 June 2026 (suffix `2026-06-08`). Retention counts from 8 June, so the index becomes eligible for deletion after 8 July 2026 — only 24 days after the instance actually finished, instead of the full 30 days.
+:::
 
 ## Data cleanup
 
@@ -55,6 +59,36 @@ camunda.tasklist:
 `ilmMinAgeForDeleteArchivedIndices` defines the duration for which archived data will be stored before deletion. The values use [Elasticsearch TimeUnit format](https://www.elastic.co/guide/en/elasticsearch/reference/current/api-conventions.html#time-units).
 
 This ILM Policy works on Elasticsearch 7 as well, and can function as a replacement for the Elasticsearch Curator.
+
+### Externally managed ILM/ISM policies
+
+By default Tasklist creates and updates the ILM/ISM policy resource itself when `ilmEnabled` is `true`, and removes the policy from existing indices when `ilmEnabled` is `false`. When the policy is managed externally (for example by a separate provisioning step that runs before Tasklist starts), set `ilmManagePolicy` to `false`:
+
+```yaml
+camunda.tasklist:
+  archiver:
+    ilmEnabled: true
+    ilmManagePolicy: false
+    ilmMinAgeForDeleteArchivedIndices: 30d
+```
+
+With `ilmManagePolicy: false`, Tasklist:
+
+- Does not create or update the ILM/ISM policy resource on startup (it assumes the policy already exists under the expected name).
+- Does not detach the policy from existing indices when `ilmEnabled` is `false`.
+
+The default is `true`, which preserves the historical behavior.
+
+:::caution Policy name is hardcoded
+
+Tasklist attaches the policy named `tasklist_delete_archived_indices` to archived indices. This name is **not configurable**. When `ilmManagePolicy: false`, the external policy must already exist in your cluster under exactly that name.
+
+If the policy does not exist when `ilmEnabled: true`:
+
+- **Elasticsearch**: Tasklist starts successfully, but ILM logs `policy_not_found` warnings on each cycle and skips retention actions on the affected indices. Once the policy is created externally under the configured name, ILM picks it up retroactively on its next cycle.
+- **OpenSearch**: Tasklist logs an error for each index it cannot attach the policy to and continues. The affected indices remain unmanaged until the policy is provisioned and Tasklist runs the attach step again.
+
+:::
 
 :::note
 Only indices containing dates in their suffix may be deleted.

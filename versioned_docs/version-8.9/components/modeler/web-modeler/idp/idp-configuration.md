@@ -204,7 +204,7 @@ To use [Docker](/self-managed/deployment/docker/docker.md) to deploy and run Cam
    1. Save and close the file.
 
 1. Configure [document handling environment variables](/components/document-handling/getting-started.md) for the Tasklist and Zeebe components.
-1. [Run Camunda 8 with Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md#run-camunda-8-with-docker-compose). For example, run the full configuration in the extracted directory:
+1. [Configure Docker Compose environments](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration). For example, run the full configuration in the extracted directory:
 
    ```
    docker compose -f docker-compose-full.yaml up -d

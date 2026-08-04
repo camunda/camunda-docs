@@ -12,15 +12,15 @@ import PageDescription from '@site/src/components/PageDescription';
 <PageDescription />
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide is retained to help customers migrate before upgrading from 8.9 to 8.10. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
 :::
 
 ## About
 
-This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), and what to consider when migrating. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
+This guide covers how to migrate to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) before upgrading to Camunda 8.10, where the V1 component REST APIs are removed. It covers all public endpoints in the component REST APIs and their Orchestration Cluster API counterparts or required migration changes.
 
 - Camunda is streamlining the developer experience by creating a unified REST API for Zeebe, Operate, Tasklist, and the Identity components with endpoint parity. This is the single Orchestration Cluster REST API.
-- Individual component APIs (starting with the former Operate and Tasklist APIs) are being deprecated over time. These will continue to be in the product in the short-term, but Camunda recommends you begin the adoption of the new API.
+- Individual component APIs (starting with the former Operate and Tasklist APIs) were deprecated before their removal in 8.10. Use this guide to complete the migration before upgrading.
 
 :::info
 To learn more about the unified REST API, see [the official blog announcement](https://camunda.com/blog/2024/12/api-changes-in-camunda-8-a-unified-and-streamlined-experience/).
@@ -118,7 +118,7 @@ The following table shows key attribute name changes from V1 to V2:
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/forms/{formId}`](../tasklist-api-rest/specifications/get-form.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/forms/{formId}`
 
 </td>
 <td>
@@ -174,7 +174,7 @@ Embedded forms are no longer returned as Camunda user tasks don't support them.
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/tasks/{taskId}/variables`](../tasklist-api-rest/specifications/save-draft-task-variables.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/tasks/{taskId}/variables`
 
 </td>
 <td>
@@ -199,7 +199,7 @@ This feature is not supported in V2 anymore. Use [setting variables][] as `local
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/tasks/{taskId}/variables/search`](../tasklist-api-rest/specifications/search-task-variables.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/tasks/{taskId}/variables/search`
 
 </td>
 <td>
@@ -258,7 +258,7 @@ For completed tasks, the V1 API returned snapshot variable values as they existe
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/tasks/search`](../tasklist-api-rest/specifications/search-tasks.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/tasks/search`
 
 </td>
 <td>
@@ -338,7 +338,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/unassign`](../tasklist-api-rest/specifications/unassign-task.api.mdx)
+<span class="badge badge--patch">PATCH</span> `/v1/tasks/{taskId}/unassign`
 
 </td>
 <td>
@@ -383,7 +383,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/complete`](../tasklist-api-rest/specifications/complete-task.api.mdx)
+<span class="badge badge--patch">PATCH</span> `/v1/tasks/{taskId}/complete`
 
 </td>
 <td>
@@ -429,7 +429,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--patch">PATCH</span> [`/v1/tasks/{taskId}/assign`](../tasklist-api-rest/specifications/assign-task.api.mdx)
+<span class="badge badge--patch">PATCH</span> `/v1/tasks/{taskId}/assign`
 
 </td>
 <td>
@@ -475,7 +475,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/tasks/{taskId}`](../tasklist-api-rest/specifications/get-task-by-id.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/tasks/{taskId}`
 
 </td>
 <td>
@@ -522,7 +522,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/variables/{variableId}`](../tasklist-api-rest/specifications/get-variable-by-id.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/variables/{variableId}`
 
 </td>
 <td>
@@ -574,7 +574,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/decision-definitions/search`](../operate-api/specifications/search-7.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/decision-definitions/search`
 
 </td>
 <td>
@@ -641,7 +641,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/decision-definitions/{key}`](../operate-api/specifications/by-key-6.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/decision-definitions/{key}`
 
 </td>
 <td>
@@ -686,7 +686,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/decision-instances/search`](../operate-api/specifications/search-6.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/decision-instances/search`
 
 </td>
 <td>
@@ -762,7 +762,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/decision-instances/{id}`](../operate-api/specifications/by-id.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/decision-instances/{id}`
 
 </td>
 <td>
@@ -820,7 +820,7 @@ The adjustments from [search decision instances](#search-decision-instances) app
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/drd/search`](../operate-api/specifications/search-5.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/drd/search`
 
 </td>
 <td>
@@ -881,7 +881,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/drd/{key}`](../operate-api/specifications/by-key-5.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/drd/{key}`
 
 </td>
 <td>
@@ -926,7 +926,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/drd/{key}/xml`](../operate-api/specifications/xml-by-key-1.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/drd/{key}/xml`
 
 </td>
 <td>
@@ -973,7 +973,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/variables/search`](../operate-api/specifications/search.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/variables/search`
 
 </td>
 <td>
@@ -1036,7 +1036,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/variables/{key}`](../operate-api/specifications/by-key.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/variables/{key}`
 
 </td>
 <td>
@@ -1093,7 +1093,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/process-definitions/search`](../operate-api/specifications/search-2.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/process-definitions/search`
 
 </td>
 <td>
@@ -1152,7 +1152,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/process-definitions/{key}`](../operate-api/specifications/by-key-2.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/process-definitions/{key}`
 
 </td>
 <td>
@@ -1197,7 +1197,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/process-definitions/{key}/xml`](../operate-api/specifications/xml-by-key.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/process-definitions/{key}/xml`
 
 </td>
 <td>
@@ -1244,7 +1244,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/process-instances/search`](../operate-api/specifications/search-1.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/process-instances/search`
 
 </td>
 <td>
@@ -1319,7 +1319,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}`](../operate-api/specifications/by-key-1.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/process-instances/{key}`
 
 </td>
 <td>
@@ -1364,7 +1364,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--delete">DELETE</span> [`/v1/process-instances/{key}`](../operate-api/specifications/delete.api.mdx)
+<span class="badge badge--delete">DELETE</span> `/v1/process-instances/{key}`
 
 </td>
 <td>
@@ -1389,7 +1389,7 @@ This feature is not yet available in V2. It will be added in a future version.
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}/statistics`](../operate-api/specifications/get-statistics.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/process-instances/{key}/statistics`
 
 </td>
 <td>
@@ -1439,7 +1439,7 @@ Response structure changes.
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/process-instances/{key}/sequence-flows`](../operate-api/specifications/sequence-flows-by-key.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/process-instances/{key}/sequence-flows`
 
 </td>
 <td>
@@ -1492,7 +1492,7 @@ Response structure changes.
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/flownode-instances/search`](../operate-api/specifications/search-4.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/flownode-instances/search`
 
 </td>
 <td>
@@ -1563,7 +1563,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/flownode-instances/{key}`](../operate-api/specifications/by-key-4.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/flownode-instances/{key}`
 
 </td>
 <td>
@@ -1610,7 +1610,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--post">POST</span> [`/v1/incidents/search`](../operate-api/specifications/search-3.api.mdx)
+<span class="badge badge--post">POST</span> `/v1/incidents/search`
 
 </td>
 <td>
@@ -1677,7 +1677,7 @@ Response structure changes as outlined in [general changes][].
 <tr>
 <td>
 
-<span class="badge badge--get">GET</span> [`/v1/incidents/{key}`](../operate-api/specifications/by-key-3.api.mdx)
+<span class="badge badge--get">GET</span> `/v1/incidents/{key}`
 
 </td>
 <td>

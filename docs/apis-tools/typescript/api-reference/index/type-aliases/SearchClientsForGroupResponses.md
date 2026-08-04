@@ -16,17 +16,7 @@ type SearchClientsForGroupResponses = object;
 ### 200
 
 ```ts
-200: SearchQueryResponse & object;
+200: GroupClientSearchResult;
 ```
 
 The clients assigned to the group.
-
-#### Type Declaration
-
-##### items
-
-```ts
-items: object[];
-```
-
-The matching client IDs.

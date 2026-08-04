@@ -35,7 +35,7 @@ Once validation is complete, deploy your project to cluster stages in your [deve
 1. Open the [project homepage](create-a-project.md#project-homepage).
 1. Select the **Deploy latest changes** option from the **Deploy & run** combo button to open the **Deploy & run** modal.
    <p><img src={DeployImg} alt="Deploy a project" /></p>
-1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) is provided.
+1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/hub/configuration/properties.md#clusters) is provided.
 1. Perform any other actions as required, such as:
    - Unpausing the chosen cluster if it has been auto-paused. Select **Resume cluster** within the **Cluster Details**.
    - Managing the cluster. Select **Manage**.
@@ -43,7 +43,7 @@ Once validation is complete, deploy your project to cluster stages in your [deve
 
 When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle.
 
-In Self-Managed, you can deploy your project to the cluster defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters).
+In Self-Managed, you can deploy your project to the cluster defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a project cannot be deployed incompletely or in an inconsistent state.

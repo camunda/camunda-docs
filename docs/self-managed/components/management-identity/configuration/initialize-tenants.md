@@ -8,6 +8,10 @@ description: "Learn how to configure Management Identity with initial tenants fo
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
+:::note
+This page describes **logical tenants** for Optimize. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+:::
+
 Configure initial [tenants](/components/concepts/multi-tenancy.md) for Optimize in Camunda 8 Self-Managed.
 
 ## About Optimize tenants

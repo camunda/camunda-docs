@@ -1,63 +1,151 @@
 ---
 id: ssl
-title: "Console SSL configuration"
-sidebar_label: "SSL"
-description: "Read details on additional SSL configuration for Console."
+title: SSL
+description: "Read details on additional SSL configuration for Web Modeler."
 ---
 
-By default, communication between Console, Identity, and other components is not encrypted, as it usually occurs backend-to-backend within the same [Docker](/self-managed/deployment/docker/docker.md) network or [Kubernetes](/self-managed/deployment/helm/install/quick-install.md) cluster.
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-TLS-encrypted communication can be enabled by following the steps below (for example, if backend-to-backend communication is not possible in a custom Camunda 8 installation setup).
+By default, communication between Web Modeler and Identity and the Web Modeler components is not encrypted, as it usually happens backend-to-backend within the same [Docker](/self-managed/deployment/docker/docker.md) network or [Kubernetes](/self-managed/deployment/helm/install/quick-install.md) cluster.
+However, you can enable TLS-encrypted communication by following the steps below (for example, if backend-to-backend communication is not possible in a custom Camunda 8 installation setup).
 
-## Configure Console for secure connections
-
-Console can be configured using [environment variables](/self-managed/components/hub/configuration/configuration.md#environment-variables) to enable secure connections to both Console and Identity.
+## Configuring secure connections to Identity
 
 ### Configure the Identity base URL
 
-Set the base URL (starting with `https://`) of your Identity instance using the following properties:
+For the `modeler-restapi` container, provide a URL that starts with `https://` (for example `https://identity.example.com`) as the base URL of the Identity instance.
 
-| Environment variable         | Example value                  |
-| ---------------------------- | ------------------------------ |
-| `KEYCLOAK_BASE_URL`          | `https://identity.example.com` |
-| `KEYCLOAK_INTERNAL_BASE_URL` | `https://identity.example.com` |
+<Tabs groupId="ssl-identity" defaultValue="envVars" queryString values={[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'application.yml', value: 'applicationYaml' },
+]}>
 
-### Configure SSL certificate
+<TabItem value="envVars">
 
-Enable and configure SSL by setting the following properties:
+```
+CAMUNDA_IDENTITY_BASEURL=https://identity.example.com
+```
 
-| Environment variable                 | Description                                                                                                                                                        | Example value                        |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------ |
-| `SERVER_SSL_ENABLED`                 | To enable SSL, set to `true`.                                                                                                                                      | `true`                               |
-| `SERVER_SSL_CERTIFICATE`             | The path to a PEM-encoded SSL certificate file. Ensure the provided path is accessible from the container (for example, via a mounted volume).                     | `file:/full/path/to/certificate.pem` |
-| `SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | The path to a PEM-encoded private key file for the SSL certificate. Ensure the provided path is accessible from the container (for example, via a mounted volume). | `file:/full/path/to/key.pem`         |
-| `SERVER_SSL_PASSPHRASE`              | _Optional_ A passphrase for the private key.                                                                                                                       | `passphrase`                         |
+</TabItem>
 
-SSL can be configured separately for the management routes using the `MANAGEMENT_` properties:
+<TabItem value="applicationYaml">
 
-| Environment variable                            | Description                                                                                                                                                        | Example value                        |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------ |
-| `MANAGEMENT_SERVER_SSL_ENABLED`                 | To enable SSL, set to `true`.                                                                                                                                      | `true`                               |
-| `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | The path to a PEM-encoded SSL certificate file. Ensure the provided path is accessible from the container (for example, via a mounted volume).                     | `file:/full/path/to/certificate.pem` |
-| `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | The path to a PEM-encoded private key file for the SSL certificate. Ensure the provided path is accessible from the container (for example, via a mounted volume). | `file:/full/path/to/key.pem`         |
-| `MANAGEMENT_SERVER_SSL_PASSPHRASE`              | _Optional_ A passphrase for the private key.                                                                                                                       | `passphrase`                         |
+```yaml
+camunda.identity.base-url: https://identity.example.com
+```
+
+</TabItem>
+
+</Tabs>
+
+## Configuring secure connections for Web Modeler components
+
+### Configure `restapi` SSL certificate
+
+SSL can be configured declaratively by setting the respective properties offered by Spring Boot (make sure that the provided certificate path is accessible from the container, for example via a mounted volume):
+
+<Tabs groupId="ssl-restapi" defaultValue="envVars" queryString values={[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'application.yml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+
+```
+RESTAPI_SERVER_URL=https://web-modeler.example.com
+
+SERVER_SSL_ENABLED=true
+SERVER_SSL_CERTIFICATE=file:/full/path/to/certificate.pem
+SERVER_SSL_CERTIFICATE_PRIVATE_KEY=file:/full/path/to/key.pem
+```
+
+Additionally, you can configure SSL separately for the management routes of the `restapi` component:
+
+```
+MANAGEMENT_SERVER_SSL_ENABLED=true
+MANAGEMENT_SERVER_SSL_CERTIFICATE=file:/full/path/to/certificate.pem
+MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY=file:/full/path/to/key.pem
+```
+
+</TabItem>
+
+<TabItem value="applicationYaml">
+
+```yaml
+camunda.modeler.server.url: https://web-modeler.example.com
+
+server:
+  ssl:
+    enabled: true
+    certificate: file:/full/path/to/certificate.pem
+    certificate-private-key: file:/full/path/to/key.pem
+```
+
+Additionally, you can configure SSL separately for the management routes of the `restapi` component:
+
+```yaml
+management:
+  server:
+    ssl:
+      enabled: true
+      certificate: file:/full/path/to/certificate.pem
+      certificate-private-key: file:/full/path/to/key.pem
+```
+
+</TabItem>
+
+</Tabs>
+
+Refer to the [Spring Boot documentation](https://docs.spring.io/spring-boot/how-to/webserver.html#howto.webserver.configure-ssl) for more information on configuration options.
+
+#### Use secure connections between the `restapi` and `websocket` components
+
+To use secure connections between the `restapi` and `websocket` components:
+
+<Tabs groupId="ssl-pusher" defaultValue="envVars" queryString values={[
+{label: 'Environment variables', value: 'envVars' },
+{label: 'application.yml', value: 'applicationYaml' },
+]}>
+
+<TabItem value="envVars">
+
+```
+RESTAPI_PUSHER_SSL_ENABLED=true
+```
+
+</TabItem>
+
+<TabItem value="applicationYaml">
+
+```yaml
+camunda.modeler.pusher.ssl-enabled: true
+```
+
+</TabItem>
+
+</Tabs>
+
+### Configure `websocket` SSL certificate
+
+SSL can be configured by setting the following environment variables (make sure that the provided certificate path is accessible from the container, e.g. via a mounted volume):
+
+```
+PUSHER_SSL_CERT=/full/path/to/certificate.pem
+PUSHER_SSL_KEY=/full/path/to/key.pem
+PUSHER_SSL_PASSPHRASE=your-passphrase
+```
+
+:::info
+
+Currently, there is no option to configure SSL for the `websocket` management routes separately from the application routes.
+
+:::
 
 ## (Optional) Provide a custom certificate
 
-If you are using a custom (self-signed) TLS certificate in Console or Identity, configure Console to accept the certificate.
+If you are using a custom (self-signed) TLS certificate for either the `restapi` or Identity, you need to make Web Modeler accept the certificate.
+For the `modeler-restapi` container:
 
-Create a secret with the value of the key being the filename:
-
-```bash
-kubectl create secret generic consoletls --from-file=console.crt=console.crt
-```
-
-Once the secret is created, it can be used in the values.yaml:
-
-```yaml
-console:
-  tls:
-    enabled: true
-    existingSecret: consoletls
-    certKeyFilename: console.crt
-```
+- Add the certificate to a custom Java trust store (using the [`keytool`](https://docs.oracle.com/en/java/javase/21/docs/specs/man/keytool.html) utility).
+- Configure the trust store as described in the [Zeebe connection troubleshooting guide](../troubleshooting/troubleshoot-zeebe-connection.md#provide-the-certificate-to-the-jvm-trust-store).

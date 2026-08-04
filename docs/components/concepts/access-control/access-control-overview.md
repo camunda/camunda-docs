@@ -126,7 +126,7 @@ Example request using a token:
 
 ```shell
 curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
-     ${BASE_URL}/v1/process-instances/search
+     ${BASE_URL}/v2/process-instances/search
 ```
 
 ### Token expiration
@@ -140,11 +140,6 @@ Tokens expire according to the `expires_in` field returned by the IdP. After exp
 - [Set up OIDC-based authentication](/self-managed/components/orchestration-cluster/admin/connect-external-identity-provider.md)
 - [Orchestration Cluster authorization](./authorizations.md)
 
-### Legacy API authentication (deprecated)
-
-- [Authentication for Operate API](/apis-tools/operate-api/authentication.md)
-- [Authentication for Tasklist API](/apis-tools/tasklist-api-rest/tasklist-api-rest-authentication.md)
-
 ### Task access control
 
-- [User task access restrictions](../../../tasklist/user-task-access-restrictions/)
+- [User task authorization](../../tasklist/user-task-authorization.md)

@@ -8,11 +8,11 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 import PageDescription from '@site/src/components/PageDescription';
 
-<PageDescription />
+<!-- This page is maintained in the c8ctl repository (https://github.com/camunda/c8ctl, in docs/) and
+     is synced to camunda-docs automatically. Do not edit it in camunda-docs — changes will be
+     overwritten. Edit the source in the c8ctl repo instead. -->
 
-:::warning Alpha feature
-`c8ctl` is in alpha and is not intended for production use. APIs, commands, and flags may change without notice between releases. See [alpha features](/components/early-access/alpha/alpha-features.md) for more information. Report issues and request features in the [`c8ctl` GitHub repository](https://github.com/camunda/c8ctl).
-:::
+<PageDescription />
 
 ## About
 
@@ -100,6 +100,12 @@ c8 cluster install 8.8
 
 # Remove a locally cached version
 c8 cluster delete 8.8
+
+# Delete a version's runtime data but keep the binary (the next start is fresh)
+c8 cluster purge 8.8
+
+# Or stop the running cluster and purge its runtime data in one step
+c8 cluster stop --purge
 ```
 
 ### Version aliases
@@ -221,13 +227,14 @@ c8 add profile prod \
   --clientId=your-client-id \
   --clientSecret=your-client-secret
 
-# With explicit OAuth endpoint and audience
+# With explicit OAuth endpoint, audience, and scope
 c8 add profile prod \
   --baseUrl=https://camunda.example.com \
   --clientId=your-client-id \
   --clientSecret=your-client-secret \
   --audience=camunda-api \
-  --oAuthUrl=https://auth.example.com/oauth/token
+  --oAuthUrl=https://auth.example.com/oauth/token \
+  --scope="my-oauth-scope"
 
 # With a default tenant
 c8 add profile dev \
@@ -235,6 +242,13 @@ c8 add profile dev \
   --clientId=dev-client \
   --clientSecret=dev-secret \
   --defaultTenantId=dev-tenant
+
+# Import settings from a .env file
+c8 add profile staging --from-file .env.staging
+
+# Import settings from the current CAMUNDA_* environment variables
+source .env.prod
+c8 add profile prod --from-env
 ```
 
 ### List profiles
@@ -392,6 +406,7 @@ c8 output text    # back to formatted tables (default)
 | `CAMUNDA_CLIENT_SECRET`     | OAuth client secret  |
 | `CAMUNDA_TOKEN_AUDIENCE`    | OAuth token audience |
 | `CAMUNDA_OAUTH_URL`         | OAuth token endpoint |
+| `CAMUNDA_OAUTH_SCOPE`       | OAuth scope (space-separated) |
 | `CAMUNDA_DEFAULT_TENANT_ID` | Default tenant ID    |
 
 Environment variable conventions follow the [`@camunda8/orchestration-cluster-api`](https://www.npmjs.com/package/@camunda8/orchestration-cluster-api) module.

@@ -32,10 +32,9 @@ After completing this guide, you will have a BPMN process running locally in Cam
 
 - [JDK 21-25](https://www.oracle.com/de/java/technologies/downloads/): Required by Camunda 8 Run to start the engine locally.
 
-## Step 1: Download the Camunda 8 starter package
+## Step 1: Download the Getting Started Package
 
-Download the Camunda 8 starter package from the following website:
-[https://developers.camunda.com/install-camunda-8/](https://developers.camunda.com/install-camunda-8/)
+Download the Getting Started Package from [Camunda Downloads](/downloads).
 
 The starter package includes the following components:
 
@@ -74,7 +73,7 @@ The starter package includes the following components:
 3. Open Camunda Modeler from the starter package.
 4. Click **File**, then **Open File** to open the process model `camunda-8-get-started/1-rocket-launch/rocket-launch.bpmn`.
 5. Deploy your model by clicking the rocket icon in the bottom toolbar. You can use the pre-configured **c8run (local)** connection and click **Deploy**. This automatically deploys all resources in the project, including the DMN decision table.
-6. Click **Play** in the bottom toolbar to start a new process instance.
+6. Click **Play** in the bottom toolbar to start a new [process instance](/reference/glossary.md#process-instance).
 7. Run your first model instance by setting the input mission variables. For example:
 
 ```json
@@ -130,6 +129,8 @@ The process uses no external code. All logic is expressed using [FEEL expression
 | Run experiments  | `if fuelLevel > 75 then 5 else 3`                                                                                                      | `experimentsRun` |
 | Mission report   | `"Crew " + missionName + " reached " + destination + "! Fuel: " + string(fuelAfterBurn) + "%. Experiments: " + string(experimentsRun)` | `missionResult`  |
 
+Fixed rules work when you know the decision in advance, as in this launch sequence. When a step needs judgment you can't express as a deterministic rule, you can hand that step to an [AI agent](/reference/glossary.md#ai-agent) instead. The engine runs, retries, and records the agent step in the same way as the script tasks and DMN decision in this process.
+
 ## Step 6: Clean up
 
 Navigate back to Operate and verify that your process instances have completed successfully (or were canceled, depending on the fuel level).
@@ -161,6 +162,6 @@ You can now stop your Camunda 8 Run local environment by executing the following
 
 Now that you've run your first BPMN process in Camunda 8, explore more of the platform:
 
-- [Build your first AI agent](./getting-started-agentic-orchestration.md).
+- [Build your first AI agent](./getting-started-agentic-orchestration.md) and add AI-driven steps to your process.
 - [Run your first Spring Boot or Node.js project with service workers](./getting-started-example.md).
 - [Learn more about the BPMN, DMN, and FEEL elements supported in Camunda](/components/concepts/bpmn-dmn-feel.md).

@@ -19,14 +19,19 @@ type MessageSubscriptionSearchQuerySortRequest = object;
 field:
   | "messageSubscriptionKey"
   | "processDefinitionId"
+  | "processDefinitionName"
+  | "processDefinitionVersion"
   | "processInstanceKey"
   | "elementId"
   | "elementInstanceKey"
   | "messageSubscriptionState"
+  | "messageSubscriptionType"
   | "lastUpdatedDate"
   | "messageName"
   | "correlationKey"
-  | "tenantId";
+  | "tenantId"
+  | "toolName"
+  | "inboundConnectorType";
 ```
 
 The field to sort by.

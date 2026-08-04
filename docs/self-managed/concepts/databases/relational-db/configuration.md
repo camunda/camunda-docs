@@ -1,6 +1,7 @@
 ---
 id: database-configuration
 title: "RDBMS configuration overview"
+sidebar_label: "Configuration overview"
 description: Learn how to configure Camunda to use a relational database as secondary storage, including exporter setup, schema management, privileges, and connection settings.
 ---
 
@@ -11,30 +12,19 @@ This page explains how RDBMS configuration works at the application level. If yo
 - [RDBMS configuration in Helm](/self-managed/deployment/helm/configure/database/rdbms.md)
 - [Access native SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)
 
-For supported database vendors and versions, see the  
-[RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
+For supported database vendors and versions, see the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 
 :::tip Need end-to-end guidance?
-For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Camunda Hub, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
 :::
 
 ## Enable RDBMS as secondary storage
 
-To activate an RDBMS backend, configure two components:
-
-1. **Enable the RDBMS exporter in Zeebe**, which streams workflow data to the database.
-2. **Configure the application layer** (Operate, Tasklist, Identity, REST API) to use RDBMS for secondary storage.
+Set the `camunda.data.secondary-storage.type` property to `rdbms` to activate the full RDBMS backend in a single step. This automatically enables the RDBMS exporter, which streams workflow data to the database, and configures the application layer (Operate, Tasklist, Identity, REST API) to use RDBMS for secondary storage.
 
 Example configuration:
 
 ```yaml
-# Enable the RDBMS exporter in Zeebe
-zeebe:
-  broker:
-    exporters:
-      rdbms:
-        className: camunda.data.exporters.rdbms.className
-
 # Configure secondary storage for Camunda applications
 camunda:
   data:
@@ -59,8 +49,7 @@ Liquibase creates two internal management tables:
 
 These tables must not be modified or deleted.
 
-For Helm deployments requiring manual schema control or access to vendor-specific SQL, see:  
-**[Access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md)**.
+For Helm deployments requiring manual schema control or access to vendor-specific SQL, see [access SQL and Liquibase scripts](/self-managed/deployment/helm/configure/database/access-sql-liquibase-scripts.md).
 
 ### Configure table prefix
 
@@ -103,20 +92,6 @@ If using the RDBMS purge feature, the following privilege is required:
 
 - TRUNCATE
 
-## History cleanup
-
-The RDBMS exporter performs automatic history cleanup using two mechanisms:
-
-1. **TTL-based marking**  
-   Finished process instances and related data are marked for deletion after their configured history TTL expires.
-
-2. **Periodic cleanup job**  
-   A scheduled cleanup process deletes marked data in batches, adjusting its interval dynamically:
-
-- If no data is deleted → interval doubles (up to `max-history-cleanup-interval`)
-- If the batch limit is reached → interval halves (down to `min-history-cleanup-interval`)
-- Otherwise → the interval remains unchanged
-
 ## Database driver
 
 Camunda images include JDBC drivers for all supported databases except Oracle and MySQL.
@@ -139,9 +114,7 @@ Place the driver JAR directly inside the mounted directory (not in subfolders).
 
 ### Helm
 
-If you are using the Helm charts, refer to the database configuration guide for the supported driver configuration options:
-
-- [Helm database configuration](../../../../self-managed/deployment/helm/configure/database/index.md)
+When deploying with Helm, see [JDBC driver management](/self-managed/deployment/helm/configure/database/rdbms-jdbc-drivers.md).
 
 ## Database configuration
 
@@ -206,9 +179,10 @@ The RDBMS exporter provides automatic history cleanup, which works in two stages
 2. **Periodic cleanup job**  
    A scheduled cleanup job deletes marked records in batches and adjusts future intervals dynamically:
 
-- If no records are deleted → interval doubles (up to `maxHistoryCleanupInterval`)
-- If the batch size is fully used → interval halves (down to `minHistoryCleanupInterval`)
+- If no records are deleted → interval doubles (up to `max-history-cleanup-interval`)
+- If the batch size is fully used → interval halves (down to `min-history-cleanup-interval`)
 - Otherwise → interval remains unchanged
+- Additionally, cleanup execution is capped by `max-history-cleanup-usage`. The current cleanup run is not interrupted, but the next interval is adjusted.
 
 ### History cleanup configuration
 
@@ -218,21 +192,22 @@ RDBMS history configuration properties are defined under:
 camunda.data.secondary-storage.rdbms.history.*
 ```
 
-| Property name                                  | Description                                                             | Default |
-| ---------------------------------------------- | ----------------------------------------------------------------------- | ------- |
-| `default-history-ttl`                          | TTL for finished process instances and related data (ISO-8601 duration) | P30D    |
-| `default-batch-operation-ttl`                  | TTL for batch operation history                                         | P5D     |
-| `batch-operation-cancel-process-instance-ttl`  | TTL for cancel-process-instance batch operations                        | P5D     |
-| `batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                       | P5D     |
-| `batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                        | P5D     |
-| `batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                               | P5D     |
-| `historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                       | 1000    |
-| `minHistoryCleanupInterval`                    | Minimum duration between cleanup runs (ISO-8601 duration)               | PT1M    |
-| `maxHistoryCleanupInterval`                    | Maximum duration between cleanup runs (ISO-8601 duration)               | PT60M   |
-| `history-cleanup-process-instance-batch-size`  | Number of process instances to be cleaned per cleanup run               | 500     |
-| `history-cleanup-batch-size`                   | Number of rows to be cleaned per cleanup run in each table              | 10000   |
-| `usage-metrics-ttl`                            | TTL for usage metrics                                                   | P730D   |
-| `usage-metrics-cleanup`                        | Interval between usage metrics cleanup runs (ISO-8601 duration)         | PT24H   |
+| Property name                                  | Description                                                                                     | Default    |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------- |
+| `default-history-ttl`                          | TTL for finished process instances and related data (ISO-8601 duration)                         | P30D       |
+| `default-batch-operation-ttl`                  | TTL for batch operation history                                                                 | P5D        |
+| `batch-operation-cancel-process-instance-ttl`  | TTL for cancel-process-instance batch operations                                                | P5D        |
+| `batch-operation-migrate-process-instance-ttl` | TTL for migrate-process-instance batch operations                                               | P5D        |
+| `batch-operation-modify-process-instance-ttl`  | TTL for modify-process-instance batch operations                                                | P5D        |
+| `batch-operation-resolve-incident-ttl`         | TTL for resolve-incident batch operations                                                       | P5D        |
+| `historyCleanupBatchSize`                      | Maximum number of entries deleted per cleanup run                                               | 1000       |
+| `min-history-cleanup-interval`                 | Minimum duration between cleanup runs (ISO-8601 duration)                                       | PT1M       |
+| `max-history-cleanup-interval`                 | Maximum duration between cleanup runs (ISO-8601 duration)                                       | PT60M      |
+| `max-history-cleanup-usage`                    | Maximum percentage of usage time the history cleanup is allowed to use (values between 0 and 1) | 0.25 (25%) |
+| `history-cleanup-process-instance-batch-size`  | Number of process instances to be cleaned per cleanup run                                       | 500        |
+| `history-cleanup-batch-size`                   | Number of rows to be cleaned per cleanup run in each table                                      | 10000      |
+| `usage-metrics-ttl`                            | TTL for usage metrics                                                                           | P730D      |
+| `usage-metrics-cleanup`                        | Interval between usage metrics cleanup runs (ISO-8601 duration)                                 | PT24H      |
 
 ## Exporter cache configuration
 
@@ -243,16 +218,11 @@ camunda.data.secondary-storage.rdbms.history.*
 
 ## Multi-region support
 
-The RDBMS Exporter currently has no multi-region support. Only one RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster.
-
-:::note
-Multi-region support for the RDBMS Exporter is not planned at this time. For multi-region setups, multi-region replication must be handled within the RDBMS itself, for example using a managed database service such as AWS Aurora.
-:::
+One RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster. Multi-region support is not planned. For multi-region setups, handle replication within the RDBMS itself, for example using AWS Aurora.
 
 ## Usage with AWS Aurora PostgreSQL
 
-Camunda supports **PostgreSQL** as a secondary storage backend.  
-AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and is expected to work when configured like a standard PostgreSQL database.
+Camunda supports **PostgreSQL** as a secondary storage backend. AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and works when configured like a standard PostgreSQL database.
 
 In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
 
@@ -283,5 +253,4 @@ camunda:
         username: camunda
 ```
 
-The AWS JDBC wrapper JAR is shipped with the Camunda distribution, alongside most of the other JDBC drivers. There is
-no need to provide it separately.
+The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.

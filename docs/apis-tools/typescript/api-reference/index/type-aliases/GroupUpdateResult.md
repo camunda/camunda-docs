@@ -26,10 +26,10 @@ The description of the group.
 ### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
-The unique external group ID.
+The unique group ID.
 
 ---
 

@@ -29,17 +29,18 @@ export const apiCards = [
     type: "MCP",
   },
   {
+    link: "../processes-mcp/processes-mcp-overview/",
+    title: "Processes MCP Server",
+    image: IconMcpImg,
+    description:
+      "Expose deployed BPMN processes as callable MCP tools for AI agents.",
+    type: "MCP",
+  },
+  {
     link: "../administration-api/administration-api-reference/",
     title: "Administration API (SaaS)",
     image: IconAdminImg,
     description: "Manage Camunda clusters and API clients in SaaS.",
-    type: "REST",
-  },
-  {
-    link: "../administration-sm-api/administration-sm-api-overview/",
-    title: "Administration API (Self-Managed)",
-    image: IconAdminImg,
-    description: "Get cluster data including installed apps and usage metrics.",
     type: "REST",
   },
   {
@@ -50,10 +51,17 @@ export const apiCards = [
     type: "REST",
   },
   {
-    link: "../web-modeler-api/overview/",
-    title: "Web Modeler API",
+    link: "../hub-api-saas/overview/",
+    title: "Camunda Hub API (SaaS)",
     image: IconModelerImg,
-    description: "Integrate with Web Modeler for modeling automation.",
+    description: "Manage Camunda Hub resources in SaaS.",
+    type: "REST",
+  },
+  {
+    link: "../hub-api-sm/overview/",
+    title: "Camunda Hub API (Self-Managed)",
+    image: IconModelerImg,
+    description: "Manage Camunda Hub resources in Self-Managed.",
     type: "REST",
   },
   {
@@ -95,7 +103,7 @@ export const clientCards = [
     title: "c8ctl CLI",
     image: IconCliImg,
     description:
-      "Inspect clusters, deploy resources, and manage processes from the terminal. (Alpha)",
+      "Inspect clusters, deploy resources, and manage processes from the terminal.",
     type: "",
   },
   {

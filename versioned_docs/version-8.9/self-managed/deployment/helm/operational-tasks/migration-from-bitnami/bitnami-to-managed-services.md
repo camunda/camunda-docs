@@ -18,7 +18,7 @@ Migrate a Camunda 8 Helm installation from Bitnami-managed infrastructure to **c
 
 - **PostgreSQL**: AWS RDS, Azure Database for PostgreSQL, Google Cloud SQL, or any managed PostgreSQL service
 - **Elasticsearch**: Elastic Cloud or any managed Elasticsearch service
-- **Keycloak**: This guide does not assume a managed Keycloak service. Keep Keycloak on the [Keycloak Operator](https://www.keycloak.org/operator/installation), or replace it with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) if that better fits your environment.
+- **Keycloak**: Keep Keycloak on the [Keycloak Operator](https://www.keycloak.org/operator/installation), replace it with an [external OIDC provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md), or migrate the bundled realm to an external, standalone, or Helm-managed Keycloak with `KEYCLOAK_TARGET_MODE=external` (see [Migrate Keycloak to an external instance](#migrate-keycloak-to-an-external-instance)).
 
 ## When to use this guide
 
@@ -173,6 +173,66 @@ export EXTERNAL_ES_SECRET="external-es"
 
 You can use the same managed PostgreSQL host for all components—each database is separate. This is common when using a single RDS instance with multiple databases.
 
+### Migrate Keycloak to an external instance {#migrate-keycloak-to-an-external-instance}
+
+By default, the scripts deploy the Keycloak Operator and a `Keycloak` custom resource. To instead point Camunda at a pre-existing external, standalone, or Helm-managed Keycloak, set `KEYCLOAK_TARGET_MODE=external`. The scripts migrate the realm into the external Keycloak database, but they do not deploy or manage the Keycloak instance itself, and they do not repoint Camunda. Your upgrade pipeline performs that cutover.
+
+Setting `KEYCLOAK_TARGET_MODE=external` is a data-only migration. When you source `env.sh`, it automatically derives `PG_TARGET_MODE=external` and `SKIP_HELM_UPGRADE=true`. You do not set these yourself. The external Keycloak serves the migrated realm from the Keycloak database configured with `EXTERNAL_PG_KEYCLOAK_*`. The scripts migrate the realm database and exit. Camunda remains frozen on the old backends until your upgrade pipeline runs the `helm upgrade` that switches Camunda to the external Keycloak and configures its authentication settings.
+
+In this mode, phase behavior changes as follows:
+
+- Phase 1: Skips the Keycloak Operator deployment.
+- Phase 3: Runs the realm data migration and exits before the final `helm upgrade`. Your pipeline owns the cutover.
+- Phase 4: Skips the Keycloak Custom Resource health check.
+
+The PostgreSQL and Elasticsearch phases are unchanged.
+
+Configure the external Keycloak connection variables in `env.sh`:
+
+| Variable                         | Default                    | Description                                                                              |
+| -------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------- |
+| `KEYCLOAK_TARGET_MODE`           | `operator`                 | Set to `external` to skip the operator and migrate the realm to a pre-existing Keycloak. |
+| `EXTERNAL_KEYCLOAK_PROTOCOL`     | `http`                     | Protocol of the external Keycloak.                                                       |
+| `EXTERNAL_KEYCLOAK_HOST`         | (empty)                    | Host of the external Keycloak.                                                           |
+| `EXTERNAL_KEYCLOAK_PORT`         | `80`                       | Port of the external Keycloak.                                                           |
+| `EXTERNAL_KEYCLOAK_CONTEXT_PATH` | `/auth`                    | Context path of the external Keycloak.                                                   |
+| `EXTERNAL_KEYCLOAK_REALM`        | `/realms/camunda-platform` | Realm path served by the external Keycloak.                                              |
+
+<details>
+<summary>Show details: external Keycloak configuration example</summary>
+
+```bash
+# Migrate the Keycloak realm onto an external Keycloak (data-only cutover).
+# Set this one flag plus the EXTERNAL_KEYCLOAK_* connection variables — sourcing
+# env.sh then auto-derives PG_TARGET_MODE=external and SKIP_HELM_UPGRADE=true.
+export KEYCLOAK_TARGET_MODE="external"
+
+export EXTERNAL_KEYCLOAK_PROTOCOL="http"
+export EXTERNAL_KEYCLOAK_HOST="keycloak"
+export EXTERNAL_KEYCLOAK_PORT="80"
+export EXTERNAL_KEYCLOAK_CONTEXT_PATH="/auth"
+export EXTERNAL_KEYCLOAK_REALM="/realms/camunda-platform"
+```
+
+</details>
+
+#### Source database names that differ from the target
+
+The bundled Bitnami Keycloak subchart defaults to database `bitnami_keycloak` and user `bn_keycloak`, which differ from the migration target names. When the source names differ, set the `*_SOURCE_DB_NAME` and `*_SOURCE_DB_USER` overrides. They default to the target names, so you only set them when the source differs:
+
+```bash
+export KEYCLOAK_SOURCE_DB_NAME="bitnami_keycloak"
+export KEYCLOAK_SOURCE_DB_USER="bn_keycloak"
+export KEYCLOAK_DB_NAME="keycloak"
+export KEYCLOAK_DB_USER="keycloak"
+```
+
+The same pattern applies to the Identity and Web Modeler source database variables: `IDENTITY_SOURCE_DB_NAME`, `IDENTITY_SOURCE_DB_USER`, `WEBMODELER_SOURCE_DB_NAME`, and `WEBMODELER_SOURCE_DB_USER`. They default to the corresponding target names.
+
+#### Transient Keycloak cluster data is excluded automatically
+
+When the realm database is backed up, the scripts automatically exclude the data in Keycloak's `JGROUPS_PING` table,  the transient JDBC_PING cluster-discovery table whose rows hold the source cluster's node addresses. Restoring those rows into the target Keycloak would make it fail on startup with a duplicate-key violation on `constraint_jgroups_ping`, leaving the migrated Keycloak in `CrashLoopBackOff`. The table schema is preserved and restored empty, so the external Keycloak re-registers its own cluster membership on startup.
+
 ### Create custom Helm values
 
 When using external targets, you need a custom Helm values file that configures Camunda to connect to the managed services. Set `CUSTOM_HELM_VALUES_FILE` to point to this file:
@@ -278,7 +338,7 @@ What happens:
 
 - When `PG_TARGET_MODE=external`, the CloudNativePG (CNPG) operator is not installed; your managed PostgreSQL is used directly.
 - When `ES_TARGET_MODE=external`, the Elastic Cloud on Kubernetes (ECK) operator is not installed; your managed Elasticsearch target is used directly.
-- The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL.
+- The Keycloak Operator is still deployed with a Custom Resource pointing to your managed PostgreSQL. If you set `KEYCLOAK_TARGET_MODE=external`, the operator is not deployed. Your pipeline repoints Camunda to the external Keycloak when it runs the `helm upgrade`. See [Migrate Keycloak to an external instance](#migrate-keycloak-to-an-external-instance).
 - The script validates connectivity to each external endpoint before proceeding.
 
 ### Phase 2: Initial backup (no downtime)
@@ -379,7 +439,7 @@ If you cannot configure `reindex.remote.whitelist` on the managed target, or pre
 bash 4-validate.sh
 ```
 
-The validation script checks that all Camunda deployments and StatefulSets are ready, and that the Keycloak Custom Resource is healthy. For external PostgreSQL and Elasticsearch targets, it verifies connectivity to the managed service endpoints rather than checking CNPG/ECK cluster status. A migration report is generated at `.state/migration-report.md`.
+The validation script checks that all Camunda deployments and StatefulSets are ready, and that the Keycloak Custom Resource is healthy. This check is skipped when `KEYCLOAK_TARGET_MODE=external` is set, because there is no operator-managed Custom Resource in that mode. For external PostgreSQL and Elasticsearch targets, it verifies connectivity to the managed service endpoints rather than checking CNPG/ECK cluster status. A migration report is generated at `.state/migration-report.md`.
 
 :::warning Wait before cleanup
 Do not move on to the next phase immediately after validation. Operate with the new infrastructure through at least one full business cycle (for example, a complete weekday with peak traffic) before cleanup. Once Bitnami resources are deleted, rollback is no longer possible without restoring from backup. If you need to fail back, run `bash rollback.sh` **before** this phase (see [rollback](#rollback)).

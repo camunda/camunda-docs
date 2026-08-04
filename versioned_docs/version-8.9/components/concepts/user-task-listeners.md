@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 description: "User task listeners allow users to react to specific user task lifecycle events."
 ---
 
-A user task listener allows users to react to specific user task lifecycle events.
+A [user task listener](/reference/glossary.md#user-task-listener) allows users to react to specific user task lifecycle events.
 
 :::tip
 Try out our [getting started with user task listeners guide](/components/concepts/user-task-listeners-guide.md).
@@ -80,6 +80,10 @@ The supported user task listener events can be triggered in the following ways.
 | `updating`   | <ul><li>When the [update user task API](/apis-tools/orchestration-cluster-api-rest/specifications/update-user-task.api.mdx) is called. </li><li>When the [update element instance variables API](/apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx) is called on a user task instance.</li><li>When the [set variables RPC](/apis-tools/zeebe-api/gateway-service.md#setvariables-rpc) is called on a user task instance.</li><li>When variables are set at a user task scope using the [Operate interface](/components/operate/userguide/resolve-incidents-update-variables.md).</li></ul> |
 | `completing` | <ul><li>When a user task is completed using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md#complete-a-task).</li><li>When the [complete user task API](/apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx) is called.</li></ul>                                                                                                                                                                                                                                                                                                                                                  |
 | `canceling`  | <ul><li>When a canceling process instance terminates a user task.</li><li>When a [catch event](/components/modeler/bpmn/events.md) interrupts a user task.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+
+:::note
+[Process instance modification](/components/concepts/process-instance-modification.md) does not trigger the `canceling` event. User task listeners are intentionally skipped when a user task is terminated via modification to prevent a failing listener job from blocking the operation.
+:::
 
 Once triggered, the workflow engine creates a job that you can process using a job worker.
 

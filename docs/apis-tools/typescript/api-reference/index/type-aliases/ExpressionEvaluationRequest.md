@@ -23,6 +23,20 @@ The expression to evaluate (e.g., "=x + y")
 
 ---
 
+### scopeKey?
+
+```ts
+optional scopeKey?: ScopeKey;
+```
+
+Key of the process instance or element instance whose variables should be made visible
+to the expression. Use a process instance key to evaluate against the process instance
+scope, or an element instance key to evaluate against that element instance scope. If
+omitted, the expression is evaluated unscoped, using only cluster variables
+and request-body variables.
+
+---
+
 ### tenantId?
 
 ```ts

@@ -4,9 +4,14 @@ paths:
       tags:
         - Conditional
       operationId: evaluateConditionals
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Evaluate root level conditional start events
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -68,6 +73,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.9"
 components:
   schemas:
     ConditionalEvaluationInstruction:

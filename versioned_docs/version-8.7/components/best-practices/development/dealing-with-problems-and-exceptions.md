@@ -167,7 +167,7 @@ jobClient.newThrowErrorCommand(job)
 
 ### Thinking about unhandled BPMN exceptions
 
-It is crucial to understand that according to the BPMN spec, a BPMN error is either handled via the process or **terminates the process instance**. It does not lead to an incident being raised. Therefore, you can and normally should always handle the BPMN error. You can, of course, also handle it in a parent process scope like in the example below:
+It is crucial to understand that if a BPMN error is not handled anywhere in the process, Camunda 8 raises an [incident](/components/concepts/incidents.md) (for example, `Unhandled error event`) instead of silently terminating the process instance. Therefore, you can and normally should always handle the BPMN error. You can, of course, also handle it in a parent process scope like in the example below:
 
 <div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/handling-a-bpmn-error.bpmn" callouts="boundary_event_good_unavailable" />
 

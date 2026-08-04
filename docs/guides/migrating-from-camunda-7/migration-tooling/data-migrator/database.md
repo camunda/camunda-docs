@@ -12,7 +12,7 @@ Database configuration is required for both Camunda 7 and Camunda 8 (RDBMS histo
 
 ## Setup
 
-1. Include the appropriate JDBC driver in the classpath by dropping the JAR into `configuration/userlib`.
+1. Download the JDBC driver JAR for your database and place it in `configuration/userlib`. The H2 driver is bundled for development and testing. All other database drivers must be provided by you.
 2. Configure connection details in `configuration/application.yml`.
 3. Set table prefixes if your installation uses them.
 4. Verify connectivity before starting migration.
@@ -37,12 +37,14 @@ The migrator supports the following SQL databases:
 
 | Database                 | Version        | JDBC Driver                                    | Notes                      |
 | ------------------------ | -------------- | ---------------------------------------------- | -------------------------- |
-| **H2**                   | 2.3.232        | `org.h2.Driver`                                | Default, good for testing  |
 | **PostgreSQL**           | 15, 16, 17, 18 | `org.postgresql.Driver`                        | Recommended for production |
 | **Oracle**               | 19c, 23ai      | `oracle.jdbc.OracleDriver`                     | Recommended for production |
 | **Microsoft SQL Server** | 2022           | `com.microsoft.sqlserver.jdbc.SQLServerDriver` | Recommended for production |
-| **MySQL**                | 8.0            | `com.mysql.cj.jdbc.Driver`                     | Recommended for production |
-| **MariaDB**              | 10.6, 11.8     | `org.mariadb.jdbc.Driver`                      | Recommended for production |
+| **MariaDB**              | 11.8           | `org.mariadb.jdbc.Driver`                      | Recommended for production |
+
+:::note
+JDBC drivers are not bundled with the Data Migrator distribution, except for H2, which is included for development and testing. Download the driver JAR for your database vendor and place it in `configuration/userlib` before starting the migrator.
+:::
 
 The migrator supports migration only within the same database vendor:
 

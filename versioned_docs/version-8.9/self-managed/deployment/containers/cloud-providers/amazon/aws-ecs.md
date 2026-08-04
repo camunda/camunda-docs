@@ -33,7 +33,7 @@ If you want a simpler setup, consider using [Camunda 8 SaaS](https://accounts.ca
   - Cost and performance may differ from a related Kubernetes setup with block storage.
   - The EFS volume is shared among all brokers to support the native ECS Service capabilities.
 - AWS does not support block storage options in combination with ECS Services and Fargate. For a detailed overview, have a look at the [AWS documentation](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
-- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a [Zeebe broker](../../../../../components/zeebe/technical-concepts/architecture.md#brokers). Autoscaling may not have effects as the brokers have to be explicitly joined into the [Zeebe cluster](../../../../../components/zeebe/technical-concepts/clustering.md) or when removed result in partitions or data becoming inaccessible.
+- Scaling is a manual process as it requires invoking the [cluster scaling API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md) for joining and removing a [Zeebe Broker](../../../../../components/zeebe/technical-concepts/architecture.md#brokers). Autoscaling may not have effects as the brokers have to be explicitly joined into the [Zeebe cluster](../../../../../components/zeebe/technical-concepts/clustering.md) or when removed result in partitions or data becoming inaccessible.
 - A node-id provider is integrated into Zeebe that assigns an available node-id based on Zeebe cluster information, instead of relying on a statically-configured node-id.
 - This guide focuses on Aurora PostgreSQL for the secondary datastorage as it is a newly supported offering by Camunda 8 and potentially more familiar for customers.
   - You may still use Elasticsearch or OpenSearch but need to adjust the required configuration. More information about the configuration can be found in [our documentation](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#data---secondary-storage).
@@ -216,7 +216,7 @@ If not otherwise indicated, the `.tf` file is corresponding to the [root workspa
 - ECS Service and task definition
   - Defines the base setup for the Orchestration Cluster, including the node ID provider, EFS configuration, and initial cluster endpoints.
   - Automatically sets the Zeebe cluster size based on the task count.
-  - Resolves initial contact points using DNS with multiple A records instead of requiring explicit Zeebe broker addresses.
+  - Resolves initial contact points using DNS with multiple A records instead of requiring explicit Zeebe Broker addresses.
 
 - Task-specific IAM role
   - Grants access to AWS services required by this component, such as the S3 bucket and Aurora PostgreSQL.

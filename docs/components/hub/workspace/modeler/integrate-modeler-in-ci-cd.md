@@ -1,6 +1,6 @@
 ---
 id: integrate-modeler-in-ci-cd
-title: Integrate Web Modeler into CI/CD
+title: Integrate Camunda Hub into CI/CD
 description: Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of projects.
 keywords: [CI/CD, devops, modeler, processops, projects, integration guide]
 ---
@@ -62,7 +62,7 @@ To enforce pipeline-driven deployments to your environments, consider disabling 
 <Tabs groupId="disableDeployments" defaultValue="sm" values={[{label: 'Self-Managed', value: 'sm', }, {label: 'SaaS', value: 'saas', },]} >
 <TabItem value="sm">
 
-Disable manual deployments for any user by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/components/hub/configuration/modeler-configuration.md#general).
+Disable manual deployments for any user by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/components/hub/configuration/properties.md#general).
 
 </TabItem>
 <TabItem value="saas">
@@ -299,7 +299,7 @@ Yes, you can use the `bpmnlint` and `dmnlint` libraries to automatically verify 
 
 #### How can I perform unit and integration tests on my processes?
 
-You can use the `zeebe-process-test` library for Java-based unit tests or community-built clients for other programming languages. These libraries allow you to execute your BPMN and DMN diagrams with assertions in your development or preview environments.
+You can use [Camunda Process Test](/apis-tools/testing/getting-started.md) for Java-based unit and integration tests, or community-built clients for other programming languages. These libraries allow you to execute your BPMN and DMN diagrams with assertions in your development or preview environments.
 
 #### How do I provide environment variables to connectors in preview environments?
 

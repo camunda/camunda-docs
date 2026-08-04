@@ -16,11 +16,7 @@ type DeleteDecisionInstanceData = object;
 ### body?
 
 ```ts
-optional body?:
-  | {
-  operationReference?: OperationReference;
-}
-  | null;
+optional body?: DeleteDecisionInstanceRequest;
 ```
 
 ---

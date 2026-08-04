@@ -220,10 +220,6 @@ camunda:
       level: INFO
 ```
 
-:::note
-`console.overrideConfiguration` is the old way of overriding the default application configuration for Console. It has been deprecated. Please convert to using `console.extraConfiguration`.
-:::
-
 #### Custom configuration loading
 
 **Applies to:** Optimize
@@ -562,11 +558,11 @@ connectors:
 
 ### Polling authentication mode
 
-Connectors use the [Operate API](/apis-tools/operate-api/overview.md) to fetch process definitions that contain inbound connectors. Depending on your Camunda architecture, choose one of the following values for the `inbound.mode` parameter:
+Connectors use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to fetch process definitions that contain inbound connectors. Depending on your Camunda architecture, choose one of the following values for the `inbound.mode` parameter:
 
-- `disabled` — Polling from Operate is disabled. The connector runtime supports only outbound interactions, such as HTTP REST calls.
-- `credentials` — The connector runtime authenticates to the Operate API with basic HTTP authentication.
-- `oauth` — _(Recommended, and enabled by default)_ The connector runtime authenticates to the Operate API with OAuth 2.0. Camunda uses Keycloak as the default OAuth provider.
+- `disabled` — Polling from the Orchestration Cluster is disabled. The connector runtime supports only outbound interactions, such as HTTP REST calls.
+- `credentials` — The connector runtime authenticates to the Orchestration Cluster REST API with basic HTTP authentication.
+- `oauth` — _(Recommended, and enabled by default)_ The connector runtime authenticates to the Orchestration Cluster REST API with OAuth 2.0. Camunda uses Keycloak as the default OAuth provider.
 
 ## Troubleshooting
 
@@ -603,114 +599,6 @@ Setting the `configuration` option replaces the entire contents of the applicati
 - Forgetting to wrap multiline values with (`|`) in Helm can cause parse errors.
 - Mixing `env` and `configuration` for the same property without realizing precedence can lead to unexpected results.
 
-## Migrate extraConfiguration from 8.8 to 8.9
-
-In Camunda 8.8 and earlier, `<componentName>.extraConfiguration` was a **map** where each key was a filename and each value was the file content:
-
-```yaml
-# 8.8 format (map)
-identity:
-  extraConfiguration:
-    custom-logging.yaml: |
-      logging:
-        level:
-          ROOT: DEBUG
-          io.camunda.identity: DEBUG
-    custom-cache.yaml: |
-      spring:
-        cache:
-          type: caffeine
-```
-
-Starting with Camunda 8.9, `<componentName>.extraConfiguration` is an **ordered list** of entries, where each entry has a `file` (filename) and `content` (file contents):
-
-```yaml
-# 8.9 format (ordered list)
-identity:
-  extraConfiguration:
-    - file: custom-logging.yaml
-      content: |
-        logging:
-          level:
-            ROOT: DEBUG
-            io.camunda.identity: DEBUG
-    - file: custom-cache.yaml
-      content: |
-        spring:
-          cache:
-            type: caffeine
-```
-
-### Why this changed
-
-Maps in Go templates (used by Helm) do not guarantee iteration order. Since configuration layering is order-dependent — later entries override earlier ones for the same keys — the map format could produce unpredictable results. The ordered list format ensures entries are always applied in the sequence you define them.
-
-### Migration steps
-
-For every component where you use `extraConfiguration`, convert each map entry to a list entry:
-
-1. **Identify all components** in your `values.yaml` that use `extraConfiguration` (for example, `identity`, `orchestration`, `connectors`, `optimize`, `console`, `webModeler`).
-
-2. **Convert each map entry to a list entry.** For every key-value pair in the old map, create a list item with `file:` set to the former key and `content:` set to the former value.
-
-   **Before (8.8):**
-
-   ```yaml
-   orchestration:
-     extraConfiguration:
-       backup-s3.yaml: |
-         zeebe:
-           broker:
-             data:
-               backup:
-                 store: "S3"
-                 s3:
-                   bucketName: "my-bucket"
-       custom-threads.yaml: |
-         zeebe:
-           broker:
-             threads:
-               cpuThreadCount: "4"
-   ```
-
-   **After (8.9):**
-
-   ```yaml
-   orchestration:
-     extraConfiguration:
-       - file: backup-s3.yaml
-         content: |
-           zeebe:
-             broker:
-               data:
-                 backup:
-                   store: "S3"
-                   s3:
-                     bucketName: "my-bucket"
-       - file: custom-threads.yaml
-         content: |
-           zeebe:
-             broker:
-               threads:
-                 cpuThreadCount: "4"
-   ```
-
-3. **Order entries intentionally.** If two entries set the same configuration key, the **last entry in the list wins**. Arrange entries so that your highest-priority overrides appear last.
-
-4. **Validate your configuration** before upgrading by running `helm template` with your updated values file and verifying the rendered ConfigMaps:
-
-   ```bash
-   helm template my-release camunda/camunda-platform \
-     -f values-8.9.yaml \
-     --show-only templates/orchestration/configmap.yaml
-   ```
-
-5. **Proceed with the upgrade** using the updated values file. See the [8.8 to 8.9 upgrade guide](/self-managed/upgrade/helm/880-to-890.md) for additional steps.
-
-:::caution
-The old map format is **not supported** in Camunda 8.9. If you upgrade without converting to the list format, Helm will fail during template rendering.
-:::
-
 ## References
 
 For more details on where to find configuration options for specific components, see the following pages:
@@ -720,8 +608,7 @@ For more details on where to find configuration options for specific components,
 - [Zeebe Gateway](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md)
 - [Operate](/self-managed/components/orchestration-cluster/operate/operate-configuration.md)
 - [Tasklist](/self-managed/components/orchestration-cluster/tasklist/tasklist-configuration.md)
-- [Web Modeler](/self-managed/components/hub/configuration/modeler-configuration.md)
-- [Console](/self-managed/components/hub/configuration/configuration.md)
+- [Camunda Hub](/self-managed/components/hub/configuration/properties.md)
 - [Connectors](/self-managed/components/connectors/connectors-configuration.md)
 - [Identity](/self-managed/components/management-identity/miscellaneous/configuration-variables.md)
 - [Optimize](/self-managed/components/optimize/configuration/system-configuration.md)

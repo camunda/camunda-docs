@@ -20,6 +20,48 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Agent instance",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance",
+          label: "Create agent instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-agent-instance",
+          label: "Get agent instance",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-agent-instance",
+          label: "Update agent instance",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instances",
+          label: "Search agent instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item",
+          label: "Create agent instance history item",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instance-history",
+          label: "Search agent instance history",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Audit Log",
       items: [
         {
@@ -360,6 +402,12 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instance-wait-states",
+          label: "Search element instance wait states",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-element-instances",
           label: "Search element instances",
           className: "api-method post",
@@ -393,6 +441,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/evaluate-expression",
           label: "Evaluate an expression",
           className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Form",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-form-by-key",
+          label: "Get form by key",
+          className: "api-method get",
         },
       ],
     },
@@ -606,6 +666,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/update-jobs-batch-operation",
+          label: "Update jobs (batch)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-global-job-statistics",
           label: "Global job statistics",
           className: "api-method get",
@@ -762,6 +828,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-definition-variable-names",
+          label: "Search process definition variable names",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-xml",
           label: "Get process definition XML",
           className: "api-method get",
@@ -816,8 +888,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation",
+          label: "Resume process instances (batch)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances",
           label: "Search process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation",
+          label: "Suspend process instances (batch)",
           className: "api-method post",
         },
         {
@@ -825,6 +909,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance",
           label: "Get process instance",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-process-instance-business-id",
+          label: "Assign business id to process instance",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -870,6 +960,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instance",
+          label: "Resume process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows",
           label: "Get sequence flows",
           className: "api-method get",
@@ -879,6 +975,36 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-statistics",
           label: "Get element instance statistics",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-wait-state-statistics",
+          label: "Get wait state statistics",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instance",
+          label: "Suspend process instance",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Recovery",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode",
+          label: "Change cluster mode",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/restore",
+          label: "Restore from a backup",
+          className: "api-method post",
         },
       ],
     },
@@ -907,7 +1033,13 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource-content",
-          label: "Get resource content",
+          label: "Get RPA resource content (deprecated)",
+          className: "menu__list-item--deprecated api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-resource-content-binary",
+          label: "Get resource content as binary",
           className: "api-method get",
         },
         {
@@ -1023,6 +1155,18 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-user",
           label: "Unassign a role from a user",
           className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Secret",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets",
+          label: "Resolve secrets (alpha)",
+          className: "api-method post",
         },
       ],
     },

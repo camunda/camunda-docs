@@ -71,7 +71,7 @@ Most tuning options are configured as application properties via [extraConfigura
 
 | Parameter                                                      | Type    | Default | Description                                                                                                                                                                                                                                                  |
 | -------------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for details and performance implications. |
+| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for details and performance implications. |
 
 ### Schema and table management
 
@@ -110,7 +110,7 @@ For Liquibase lock recovery behavior, configure `camunda.data.secondary-storage.
 ### Example usage
 
 :::note
-Operate has limited functionality when using RDBMS as secondary storage in Camunda 8.9-alpha3. See [Operate limitations](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md#operate-with-rdbms) for details.
+RDBMS is fully supported as secondary storage. For production planning, review the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md).
 :::
 
 ```yaml
@@ -143,16 +143,9 @@ Camunda bundles JDBC drivers for some databases. For others, you must supply a c
 
 ## Search APIs and result limits
 
-RDBMS search APIs return a `totalResults` field capped at **10,000** to improve performance. However, actual query performance depends on filter selectivity and database optimization.
+RDBMS search APIs return a `totalResults` field capped at **10,000** by default (configurable via `maxTotalHits`). Actual query performance depends on filter selectivity and database optimization.
 
-Key concepts:
-
-- **Total count cap**: `totalResults` is capped at 10,000 by default (configurable via `maxTotalHits`).
-- **hasMoreTotalItems flag**: Indicates if results exist beyond the cap.
-- **Query optimization**: Apply selective filtering and pagination for better performance.
-- **Database tuning**: Configure PostgreSQL for write-heavy workloads.
-
-**See:** [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
+See [search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
 
 ## Schema creation and management
 
@@ -188,7 +181,7 @@ SELECT table_name FROM information_schema.tables
 WHERE table_schema = 'public';
 ```
 
-2. Deploy a process and start an instance using Web Modeler.
+2. Deploy a process and start an instance using Camunda Hub or the REST API.
 
 3. Query the database to confirm the instance was recorded:
 
@@ -219,7 +212,7 @@ For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../.
 
 - **Orchestration Cluster**: ✅ Full RDBMS support for secondary storage (includes Zeebe, Operate, Tasklist, Orchestration Identity).
 - **Connectors**: ✅ Supports RDBMS for process definitions and state.
-- **Web Modeler**: ✅ RDBMS support available in 8.9.
+- **Camunda Hub**: ✅ RDBMS support available in 8.9.
 - **Optimize**: ❌ **Requires Elasticsearch or OpenSearch only.** Optimize cannot use RDBMS.
 
 If you deploy Optimize, you must still provision Elasticsearch or OpenSearch.

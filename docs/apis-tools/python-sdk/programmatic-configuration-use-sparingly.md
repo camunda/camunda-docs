@@ -2,7 +2,7 @@
 id: programmatic-configuration-use-sparingly
 title: Programmatic configuration (use sparingly)
 sidebar_label: Programmatic configuration (use sparingly)
-sidebar_position: 6
+sidebar_position: 7
 mdx:
   format: md
 ---

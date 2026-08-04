@@ -6,13 +6,13 @@ public static class UserExamples
 {
     #region CreateUser
     // <CreateUser>
-    public static async Task CreateUserExample()
+    public static async Task CreateUserExample(Username username)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateUserAsync(new UserRequest
         {
-            Username = "jdoe",
+            Username = username,
             Name = "Jane Doe",
             Email = "jdoe@example.com",
             Password = "secure-password",
@@ -26,13 +26,13 @@ public static class UserExamples
     #region CreateAdminUser
 
     // <CreateAdminUser>
-    public static async Task CreateAdminUserExample()
+    public static async Task CreateAdminUserExample(Username username)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateAdminUserAsync(new UserRequest
         {
-            Username = "admin",
+            Username = username,
             Name = "Admin User",
             Email = "admin@example.com",
             Password = "admin-password",

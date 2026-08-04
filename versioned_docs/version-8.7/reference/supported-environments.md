@@ -47,7 +47,7 @@ We recommend running Camunda 8 Self-Managed in a Kubernetes environment. We prov
 
 ### Deployment options
 
-With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises). However, we officially test and support a specific list of platforms.
+With the right configuration, Camunda 8 Self-Managed can be deployed on any [Certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution (cloud or on-premises), and is not tied to a specific Kubernetes version. The Helm chart supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
 
 The following are tested and supported deployment options for Kubernetes, Docker, and manual installation:
 
@@ -96,6 +96,7 @@ Regardless of the type, the network storage volumes you use must meet these requ
 - They must be capable of **at least 1,000 IOPS**.
 - The latency of write/msync operations must be in the **low single digit milliseconds** under normal conditions. Ideally, it's in the order of microseconds.
 - The p99 latency must be **lower than 300 milliseconds**.
+- They must be SSD-backed. HDD-backed volumes typically sustain only tens to a few hundred IOPS with multi-millisecond seek latency, well below the 1,000 IOPS minimum and single-digit-millisecond latency required for Zeebe, so they are not supported.
 
 ### Helm charts version matrix
 
@@ -132,7 +133,7 @@ Camunda 8 works with the [default distribution](https://www.elastic.co/downloads
 
 The following matrix shows which component versions work together.
 
-From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on on the exact same `minor` and `patch` level to ensure compatibility.
+From version `8.6.0` forward, Zeebe, Operate, and Tasklist must run on the exact same `minor` and `patch` level to ensure compatibility.
 
 | Design                                        | Automate                                                                                                | Improve        |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------- |

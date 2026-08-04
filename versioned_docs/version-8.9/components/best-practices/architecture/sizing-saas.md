@@ -24,7 +24,7 @@ To do so, follow these steps:
 2. Use the [sizing tables](#sizing-tables) to find the cluster size that meets your needs.
 
 :::note
-Contact your Customer Success Manager to increase the cluster size beyond 4x. This requires custom sizing and pricing.
+To increase the cluster size beyond 4x, [reach out to Camunda](https://camunda.com/contact-us/). This requires custom sizing and pricing.
 :::
 
 ### Sizing tables

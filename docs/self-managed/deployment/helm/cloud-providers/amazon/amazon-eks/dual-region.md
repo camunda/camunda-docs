@@ -510,7 +510,7 @@ You must apply the custom `StorageClass` before installing the Camunda Helm char
 
 :::warning Migration from Bitnami Elasticsearch to ECK in dual-region
 
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md) and apply it individually to each region.
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure (documented for Camunda 8.9)](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) and apply it individually to each region.
 
 :::
 
@@ -684,7 +684,7 @@ The base `camunda-values.yml` in `aws/kubernetes/eks-dual-region/helm-values` re
 - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION0_ARGS_CONNECT_URL`
 - `CAMUNDA_DATA_EXPORTERS_CAMUNDAREGION1_ARGS_CONNECT_URL`
 
-1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It uses the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions. The script derives the Zeebe broker count from your Helm values. For a dual-region setup, the default is `8` (four brokers per region).
+1. The bash script [generate_zeebe_helm_values.sh](https://github.com/camunda/camunda-deployment-references/tree/main/aws/kubernetes/eks-dual-region/procedure/generate_zeebe_helm_values.sh) in the repository folder `aws/kubernetes/eks-dual-region/procedure/` helps generate those values. You only have to copy and replace them within the base `camunda-values.yml`. It uses the exported environment variables of the [export environment variables](#export-environment-variables) section for namespaces and regions. The script derives the number of Zeebe Brokers from your Helm values. For a dual-region setup, the default is `8` (four brokers per region).
 
 ```bash
 ./generate_zeebe_helm_values.sh

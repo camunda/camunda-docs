@@ -2,7 +2,7 @@
 id: error-handling
 title: Error Handling
 sidebar_label: Error Handling
-sidebar_position: 12
+sidebar_position: 13
 mdx:
   format: md
 ---

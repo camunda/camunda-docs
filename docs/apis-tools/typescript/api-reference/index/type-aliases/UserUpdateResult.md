@@ -38,3 +38,5 @@ The name of the user.
 ```ts
 username: Username;
 ```
+
+The username of the updated user.

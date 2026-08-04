@@ -42,13 +42,13 @@ If your Region ID is `bru-2` and Cluster ID is `abc123-def456-ghi789`, your Swag
 
 ### Self-Managed
 
-For Self-Managed deployments, Swagger UI is available at your configured Zeebe Gateway endpoint.
+For Self-Managed deployments, Swagger UI is available at your configured [Zeebe Gateway](/reference/glossary.md#zeebe-gateway) endpoint.
 
 **Default setup:**
 `http://localhost:8080/swagger`
 
 **Custom configuration:**
-Use the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress/ingress-setup.md), then append `/swagger`.
+Use the host and path defined for your Zeebe Gateway in the [configuration guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md), then append `/swagger`.
 
 **Example with custom domain:**
 `https://your-zeebe-gateway.company.com/swagger`

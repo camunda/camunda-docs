@@ -15,7 +15,7 @@ As file type support varies by LLM provider/model, you must test your document u
 | :---------------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Text              | Yes       | Text files (MIME types matching `text/*`, `application/xml`, `application/json`, or `application/yaml`) are passed as plain text content blocks.                                   |
 | PDF               | Yes       | PDF files (MIME types matching `application/pdf`) are passed as base64 encoded content blocks.                                                                                     |
-| Image             | Yes       | Image files (MIME types matching `image/jpg`, `image/png`, `image/gif`, or `image/webp`) are passed as base64 encoded content blocks.                                              |
+| Image             | Yes       | Image files (MIME types matching `image/jpeg`, `image/png`, `image/gif`, or `image/webp`) are passed as base64 encoded content blocks.                                             |
 | Audio/video/other | No        | Audio and video files are not currently supported, and will result in an error if passed. All other unsupported file types not listed here will also result in an error if passed. |
 
 :::info

@@ -5,8 +5,8 @@ mdx:
   format: md
 ---
 
-# Variable: SPEC_HASH
+# Variable: SPEC\_HASH
 
 ```ts
-const SPEC_HASH: "sha256:5de81e6b2d3f152265e6f6f042a776f0bc2ca73572e9f5a8c54eee460f5c6161";
+const SPEC_HASH: "sha256:73ad42fb782f5c72dd84bdc40ef81313976c3f4083436c18c7019e7e0a3295cc";
 ```

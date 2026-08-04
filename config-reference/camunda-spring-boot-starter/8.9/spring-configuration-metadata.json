@@ -28,6 +28,13 @@
       "sourceMethod": "getCloud()"
     },
     {
+      "name": "camunda.client.cluster-variables",
+      "type": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "description": "Properties for setting cluster variables at startup.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientProperties",
+      "sourceMethod": "getClusterVariables()"
+    },
+    {
       "name": "camunda.client.deployment",
       "type": "io.camunda.client.spring.properties.CamundaClientDeploymentProperties",
       "description": "Properties for automatic deployment at startup.",
@@ -228,6 +235,12 @@
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
+      "name": "camunda.client.auth.proactive-token-refresh-threshold",
+      "type": "java.time.Duration",
+      "description": "The lead time before actual token expiry at which a background refresh is triggered. The token is still considered valid inside this window; this is a policy knob for how early refresh kicks in so callers don't have to block on a synchronous refresh at the cliff edge. Must be strictly larger than the internal expiry grace period.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
       "name": "camunda.client.auth.read-timeout",
       "type": "java.time.Duration",
       "description": "The data read timeout for requests to the OAuth credentials provider.",
@@ -244,6 +257,36 @@
       "name": "camunda.client.auth.scope",
       "type": "java.lang.String",
       "description": "The scopes of the access token.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-backoff-multiplier",
+      "type": "java.lang.Double",
+      "description": "The multiplier applied to the backoff duration between successive token fetch retry attempts. Must be greater than or equal to 1.0.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-initial-backoff",
+      "type": "java.time.Duration",
+      "description": "The initial backoff duration applied between token fetch retry attempts. Subsequent delays grow geometrically by {@link #tokenFetchBackoffMultiplier}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-max-retries",
+      "type": "java.lang.Integer",
+      "description": "The maximum number of attempts (including the initial one) when fetching a token from the OAuth authorization server. Retries are only attempted on IOException or HTTP status codes configured via {@code tokenFetchRetryableStatusCodes}.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-non-retryable-cooldown",
+      "type": "java.time.Duration",
+      "description": "Duration for which token fetches fail fast after the token endpoint returns a non-retryable response. After the cooldown elapses, the next call retries; if it fails again non-retryably, the latch re-arms with a new cooldown. Set to Duration.ZERO to disable the cooldown entirely.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
+    },
+    {
+      "name": "camunda.client.auth.token-fetch-retryable-status-codes",
+      "type": "java.util.Set<java.lang.Integer>",
+      "description": "The set of HTTP status codes from the token endpoint that should be retried with backoff. Any non-200 status code outside this set trips a non-retryable failure latch that fails fast for the duration of tokenFetchNonRetryableCooldown.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientAuthProperties"
     },
     {
@@ -305,6 +348,25 @@
       "type": "java.lang.String",
       "description": "The region the Camunda client connects to.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientCloudProperties"
+    },
+    {
+      "name": "camunda.client.cluster-variables.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Indicates if cluster variable processing is enabled. When {@code true}, variables configured via <code>@ClusterVariables<\/code> annotations and via the {@code global}\/{@code tenant} properties are applied at startup. When {@code false}, all cluster variable processing is skipped.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "camunda.client.cluster-variables.global",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "description": "Globally-scoped cluster variables to set at startup as key-value pairs.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
+    },
+    {
+      "name": "camunda.client.cluster-variables.tenant",
+      "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
+      "description": "Tenant-scoped cluster variables to set at startup, keyed by tenant ID.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
     },
     {
       "name": "camunda.client.deployment.enabled",
@@ -535,7 +597,7 @@
     {
       "name": "camunda.client.worker.override",
       "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
-      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type.",
+      "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientWorkerProperties"
     },
     {

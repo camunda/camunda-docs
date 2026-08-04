@@ -29,6 +29,7 @@ field:
   | "jobKey"
   | "kind"
   | "listenerEventType"
+  | "priority"
   | "processDefinitionId"
   | "processDefinitionKey"
   | "processInstanceKey"

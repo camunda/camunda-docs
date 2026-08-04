@@ -4,9 +4,14 @@ paths:
       tags:
         - Role
       operationId: createRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -31,18 +36,30 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Unauthorized"
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "409":
+          description: Role with this id already exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /roles/search:
     post:
       tags:
         - Role
       operationId: searchRoles
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search roles
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -70,14 +87,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /roles/{roleId}:
     get:
       tags:
         - Role
       operationId: getRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -90,7 +113,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       responses:
         "200":
           description: The role is successfully returned.
@@ -110,13 +133,19 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
     put:
       tags:
         - Role
       operationId: updateRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -129,7 +158,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       requestBody:
         required: true
         content:
@@ -157,13 +186,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Role
       operationId: deleteRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -176,7 +211,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       responses:
         "204":
           description: The role was deleted successfully.
@@ -192,14 +227,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /roles/{roleId}/users/{username}:
     put:
       tags:
         - Role
       operationId: assignRoleToUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -212,7 +253,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: username
           in: path
           required: true
@@ -242,13 +283,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Role
       operationId: unassignRoleFromUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -261,7 +308,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: username
           in: path
           required: true
@@ -285,14 +332,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /roles/{roleId}/users/search:
     post:
       tags:
         - Role
       operationId: searchUsersForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role users
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -305,7 +358,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       requestBody:
         required: false
         content:
@@ -333,14 +386,20 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /roles/{roleId}/clients/{clientId}:
     put:
       tags:
         - Role
       operationId: assignRoleToClient
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a client
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -353,13 +412,13 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: clientId
           in: path
           required: true
           description: The client ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/ClientId"
       responses:
         "204":
           description: The role was assigned successfully to the client.
@@ -383,13 +442,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Role
       operationId: unassignRoleFromClient
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a client
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -402,13 +467,13 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: clientId
           in: path
           required: true
           description: The client ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/ClientId"
       responses:
         "204":
           description: The role was unassigned successfully from the client.
@@ -426,14 +491,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /roles/{roleId}/clients/search:
     post:
       tags:
         - Role
       operationId: searchClientsForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role clients
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -446,7 +517,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       requestBody:
         required: false
         content:
@@ -474,14 +545,20 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /roles/{roleId}/groups/{groupId}:
     put:
       tags:
         - Role
       operationId: assignRoleToGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -494,13 +571,13 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: groupId
           in: path
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       responses:
         "204":
           description: The role was assigned successfully to the group.
@@ -524,13 +601,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Role
       operationId: unassignRoleFromGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -543,13 +626,13 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: groupId
           in: path
           required: true
           description: The group ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       responses:
         "204":
           description: The role was unassigned successfully from the group.
@@ -567,14 +650,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /roles/{roleId}/groups/search:
     post:
       tags:
         - Role
       operationId: searchGroupsForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role groups
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -587,7 +676,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       requestBody:
         required: false
         content:
@@ -615,14 +704,20 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /roles/{roleId}/mapping-rules/{mappingRuleId}:
     put:
       tags:
         - Role
       operationId: assignRoleToMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -635,13 +730,13 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: mappingRuleId
           in: path
           required: true
           description: The mapping rule ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/MappingRuleId"
       responses:
         "204":
           description: The role was assigned successfully to the mapping rule.
@@ -665,13 +760,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Role
       operationId: unassignRoleFromMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -684,13 +785,13 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
         - name: mappingRuleId
           in: path
           required: true
           description: The mapping rule ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/MappingRuleId"
       responses:
         "204":
           description: The role was unassigned successfully from the mapping rule.
@@ -708,14 +809,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /roles/{roleId}/mapping-rules/search:
     post:
       tags:
         - Role
       operationId: searchMappingRulesForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role mapping rules
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -728,7 +835,7 @@ paths:
           required: true
           description: The role ID.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       requestBody:
         required: false
         content:
@@ -756,14 +863,16 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
 components:
   schemas:
     RoleCreateRequest:
       type: object
       properties:
         roleId:
-          type: string
           description: The ID of the new role.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/RoleId"
         name:
           type: string
           description: The display name of the new role.
@@ -778,7 +887,8 @@ components:
       properties:
         roleId:
           description: The ID of the created role.
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/RoleId"
         name:
           description: The display name of the created role.
           type: string
@@ -812,8 +922,9 @@ components:
           nullable: true
           description: The description of the updated role.
         roleId:
-          type: string
           description: The ID of the updated role.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/RoleId"
       required:
         - roleId
         - name
@@ -826,8 +937,9 @@ components:
           type: string
           description: The role name.
         roleId:
-          type: string
           description: The role id.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/RoleId"
         description:
           type: string
           nullable: true
@@ -870,7 +982,8 @@ components:
       properties:
         roleId:
           description: The role ID search filters.
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/RoleId"
         name:
           description: The role name search filters.
           type: string
@@ -933,7 +1046,8 @@ components:
       properties:
         clientId:
           description: The ID of the client.
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/ClientId"
       required:
         - clientId
     RoleClientSearchResult:
@@ -975,7 +1089,8 @@ components:
       properties:
         groupId:
           description: The id of the group.
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/GroupId"
       required:
         - groupId
     RoleGroupSearchResult:

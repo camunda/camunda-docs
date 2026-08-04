@@ -53,26 +53,11 @@ To update an existing authorization, click on the **pencil icon** of the relevan
 
 ## User task access restrictions
 
-:::caution Tasklist V1 only
-User task access restrictions are supported only by the Tasklist V1 API and are not supported
-in Tasklist V2. From Camunda 8.8, Tasklist runs in V2 mode by default.
+:::note
+User task access restrictions were removed in Camunda 8.10 together with Tasklist V1.
 
-To continue using user task access restrictions, see [switching between V1 and V2 modes](components/tasklist/api-versions.md#switching-between-v1-and-v2-modes)
-to enable Tasklist V1 mode.
-
-In Tasklist V2, task visibility is controlled by authorization-based access control rather than
-user task access restrictions. For a conceptual overview of how authorizations control access to
-user tasks, see [authorization-based access control](../../../concepts/access-control/authorizations.md).
+Use [authorization-based access control](../../../concepts/access-control/authorizations.md) and [user task authorization](/components/tasklist/user-task-authorization.md) to control user access to tasks in the current version.
 :::
-
-You can [restrict user access](components/tasklist/user-task-access-restrictions.md) to user tasks in Tasklist V1.
-
-For example, if a task has a candidate group named `Team A` and a candidate user named `example`,
-only users who belong to `Team A` and the user `example` can access the task.
-
-You can control user access to user tasks in Tasklist via [user task access restrictions](components/tasklist/user-task-access-restrictions.md).
-
-For example, if a task has a candidate group named `Team A` and a candidate user named `example`, only the users that belong to `Team A` and the user `example` will have access to the task.
 
 ## Limitations
 
@@ -80,4 +65,4 @@ Depending on the plan to be used, the number of users that can be part of an org
 
 ## Restrictions
 
-In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. Contact your Customer Success Manager to get this configured according to your needs.
+In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. [Contact Camunda support](https://camunda.com/services/support/) to get this configured according to your needs.

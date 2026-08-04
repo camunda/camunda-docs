@@ -14,10 +14,6 @@ Verify RDBMS connectivity, schema initialization, and exporter activity for Helm
 - **[Troubleshooting](rdbms-troubleshooting.md)** - Common issues and diagnostic steps.
   :::
 
-:::note
-8.9-alpha3 stabilizes application-side RDBMS behavior. Log lines and behavior may change in later alphas. This page documents current alpha3 patterns.
-:::
-
 Supported databases include PostgreSQL, MySQL/MariaDB, and Oracle (examples below). Use your database vendor’s CLI tools for direct verification.
 
 ## Prerequisites
@@ -27,7 +23,7 @@ Supported databases include PostgreSQL, MySQL/MariaDB, and Oracle (examples belo
 - For databases that require external JDBC drivers (for example Oracle), the driver JAR is available to the Orchestration Cluster at runtime.
 
 :::note
-In alpha3, the pod should only become `Ready` when the application can connect to the database. Success of Liquibase and a running exporter are best confirmed via logs and direct database inspection.
+The pod should only become `Ready` when the application can connect to the database. Success of Liquibase and a running exporter are best confirmed via logs and direct database inspection.
 :::
 
 ## How to verify connectivity
@@ -202,7 +198,7 @@ If logs contain connection, driver, or authentication stack traces, the applicat
 
 ## Health and readiness verification
 
-In 8.9-alpha3, pod readiness reflects database connectivity through a database health indicator. However, readiness alone does not confirm schema creation or exporter progress.
+Pod readiness reflects database connectivity through a database health indicator. However, readiness alone does not confirm schema creation or exporter progress.
 
 Use the following checks together:
 
@@ -276,7 +272,7 @@ SELECT partition_id, exporter, last_exported_position FROM exporter_position;
 
 ## Notes and caveats
 
-- **Timing:** In 8.9-alpha3, schema creation and exporter startup occur during application startup. Exported data visibility depends on the exporter `flushInterval` and workload.
+- **Timing:** Schema creation and exporter startup occur during application startup. Exported data visibility depends on the exporter `flushInterval` and workload.
 - If observed behavior or log lines differ from this documentation, open an issue and include:
   - Relevant log excerpts
   - Helm values used for RDBMS configuration

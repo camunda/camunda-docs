@@ -1,0 +1,95 @@
+# Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
+# one or more contributor license agreements. See the NOTICE file distributed
+# with this work for additional information regarding copyright ownership.
+# Licensed under the Camunda License 1.0. You may not use this file
+# except in compliance with the Camunda License 1.0.
+
+# Common search-related schemas
+components:
+  schemas:
+    SearchQueryRequest:
+      type: object
+      properties:
+        page:
+          description: Pagination criteria.
+          allOf:
+            - $ref: "#/components/schemas/SearchQueryPageRequest"
+
+    SearchQueryPage:
+      oneOf:
+        - $ref: "#/components/schemas/LimitPagination"
+        - $ref: "#/components/schemas/OffsetPagination"
+
+    SearchQueryPageRequest:
+      x-polymorphic-schema: true
+      description: >
+        Pagination criteria. Uses offset-based pagination (from/limit).
+      oneOf:
+        - $ref: "#/components/schemas/LimitPagination"
+        - $ref: "#/components/schemas/OffsetPagination"
+
+    LimitPagination:
+      type: object
+      title: Limit-based pagination
+      properties:
+        limit:
+          description: The maximum number of items to return in one request.
+          type: integer
+          format: int32
+          default: 100
+          minimum: 1
+          maximum: 10000
+
+    OffsetPagination:
+      type: object
+      title: Offset-based pagination
+      required:
+        - from
+      properties:
+        from:
+          description: The index of items to start searching from.
+          type: integer
+          format: int32
+          minimum: 0
+        limit:
+          description: The maximum number of items to return in one request.
+          type: integer
+          format: int32
+          default: 100
+          minimum: 1
+
+    SearchQueryResponse:
+      type: object
+      required:
+        - page
+      properties:
+        page:
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "#/components/schemas/SearchQueryPageResponse"
+
+    SortOrderEnum:
+      description: The order in which to sort the related field.
+      type: string
+      enum:
+        - ASC
+        - DESC
+      default: ASC
+
+    SearchQueryPageResponse:
+      description: Pagination information about the search results.
+      type: object
+      required:
+        - totalItems
+        - hasMoreTotalItems
+      properties:
+        totalItems:
+          description: Total items matching the criteria.
+          type: integer
+          format: int64
+        hasMoreTotalItems:
+          description: |
+            Indicates whether the `totalItems` value has been capped due to system limits.
+            When true, `totalItems` is a lower bound and the actual number of matching
+            items is greater than the reported value.
+          type: boolean

@@ -13,6 +13,18 @@ type JobSearchResult = object;
 
 ## Properties
 
+### businessId
+
+```ts
+businessId: BusinessId | null;
+```
+
+The business ID of the owning process instance, inherited when the job was created.
+This is `null` for jobs created before version 8.10 and for jobs whose owning process
+instance has no business ID.
+
+---
+
 ### creationTime
 
 ```ts
@@ -163,6 +175,16 @@ When the job was last updated. Field is present for jobs created after 8.9.
 ```ts
 listenerEventType: JobListenerEventTypeEnum;
 ```
+
+---
+
+### priority
+
+```ts
+priority: number;
+```
+
+The priority of the job. Higher values indicate higher priority. Jobs created before 8.10 have no stored priority; they appear last when sorting by this field and are excluded when filtering by this field. The API returns 0 for such jobs.
 
 ---
 

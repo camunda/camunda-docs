@@ -1,0 +1,545 @@
+---
+id: create-file
+title: "Create a file"
+description: "Creates a new file in the specified project and folder."
+sidebar_label: "Create a file"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Create a file"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/files"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Creates a new file in the specified project and folder.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          additionalProperties: false,
+          required: ["name", "projectKey", "type", "content"],
+          example: {
+            name: "order-process",
+            projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+            folderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+            type: "bpmn",
+            content: "<?xml version='1.0' encoding='UTF-8'?>...",
+          },
+          properties: {
+            name: {
+              description: "The name of the file.",
+              type: "string",
+              minLength: 1,
+              maxLength: 255,
+            },
+            projectKey: {
+              description: "The key of the project this file belongs to.",
+              allOf: [
+                {
+                  description: "System-generated key for a project.",
+                  type: "string",
+                  format: "ProjectKey",
+                  "x-semantic-type": "ProjectKey",
+                  example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                  title: "ProjectKey",
+                },
+              ],
+            },
+            folderKey: {
+              description:
+                "The key of the parent folder. If omitted or null, the file is created at project root.",
+              nullable: true,
+              allOf: [
+                {
+                  description: "System-generated key for a folder.",
+                  type: "string",
+                  format: "FolderKey",
+                  "x-semantic-type": "FolderKey",
+                  example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+                  title: "FolderKey",
+                },
+              ],
+            },
+            type: {
+              description: "The type of the file.",
+              type: "string",
+              enum: [
+                "bpmn",
+                "dmn",
+                "form",
+                "element-template",
+                "rpa",
+                "markdown",
+                "tests",
+              ],
+            },
+            content: {
+              description: "The content of the file.",
+              type: "string",
+              minLength: 1,
+            },
+          },
+          title: "FileCreateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The file was created successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              fileKey: "0d9410a3-3524-4039-8174-7dd345f61bc5",
+              name: "order-process",
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+              folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc",
+              simplePath: "orders/processes/order-process.bpmn",
+              canonicalPath:
+                "3e98d77b-799b-4f31-bfc4-4c5829fc7dee/bccb5014-10a7-48df-bb56-81cb286594cc",
+              revision: 3,
+              type: "bpmn",
+              content: "<?xml version='1.0' encoding='UTF-8'?>...",
+              created: "2025-03-15T10:30:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              updated: "2025-06-10T14:22:00.000Z",
+              updatedBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+            },
+            required: [
+              "fileKey",
+              "name",
+              "projectKey",
+              "folderKey",
+              "simplePath",
+              "canonicalPath",
+              "revision",
+              "type",
+              "content",
+              "created",
+              "createdBy",
+              "updated",
+              "updatedBy",
+            ],
+            properties: {
+              fileKey: {
+                description: "The unique key identifying this file.",
+                allOf: [
+                  {
+                    description: "System-generated key for a file.",
+                    type: "string",
+                    format: "FileKey",
+                    "x-semantic-type": "FileKey",
+                    example: "1eadb755-662f-43bd-81d1-cf36f39a0a03",
+                    title: "FileKey",
+                  },
+                ],
+              },
+              name: { description: "The name of the file.", type: "string" },
+              projectKey: {
+                description:
+                  "The key of the project this file belongs to. Present in single-file responses (get, create, update) but null in search results; full project resolution for search results is not yet supported.\n",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "System-generated key for a project.",
+                    type: "string",
+                    format: "ProjectKey",
+                    "x-semantic-type": "ProjectKey",
+                    example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                    title: "ProjectKey",
+                  },
+                ],
+              },
+              folderKey: {
+                description:
+                  "The key of the parent folder. Null if the file is at project root.",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "System-generated key for a folder.",
+                    type: "string",
+                    format: "FolderKey",
+                    "x-semantic-type": "FolderKey",
+                    example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+                    title: "FolderKey",
+                  },
+                ],
+              },
+              simplePath: {
+                description:
+                  "The human-readable path of the file within its project.",
+                type: "string",
+              },
+              canonicalPath: {
+                description:
+                  "The canonical (ID-based) path of the file within its project.",
+                type: "string",
+              },
+              revision: {
+                description:
+                  "The current revision number, used for optimistic locking.",
+                allOf: [
+                  {
+                    description:
+                      "The current revision number of a file, used for optimistic locking.",
+                    type: "integer",
+                    format: "int32",
+                    "x-semantic-type": "FileRevision",
+                    title: "FileRevision",
+                  },
+                ],
+              },
+              type: {
+                description: "The type of the file.",
+                type: "string",
+                enum: [
+                  "bpmn",
+                  "dmn",
+                  "form",
+                  "element-template",
+                  "rpa",
+                  "markdown",
+                  "tests",
+                ],
+              },
+              content: {
+                description:
+                  "The content of the file. Present in single-file responses (get, create, update) but null in search results for performance reasons.\n",
+                type: "string",
+                nullable: true,
+              },
+              created: {
+                description: "The timestamp when the file was created.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description: "The user who created the file.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              updated: {
+                description: "The timestamp when the file was last updated.",
+                type: "string",
+                format: "date-time",
+              },
+              updatedBy: {
+                description: "The user who last updated the file.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "FileResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Bad Request",
+            status: 400,
+            detail:
+              "Validation failed for request body: 'name' must not be blank.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

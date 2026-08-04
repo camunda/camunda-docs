@@ -32,7 +32,7 @@ import Install from './react-components/\_install-c8run.md'
 
 This guide is designed for users who prefer a low-code approach to process automation. You can follow this tutorial using either a local, Self-Managed lightweight setup, or Camunda 8 SaaS.
 
-Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing user tasks, you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
+Camunda 8 allows you to orchestrate processes with human tasks of any complexity. Utilizing [user tasks](/reference/glossary.md#user-task), you can create and assign tasks to users. Then, users can perform their work and enter the necessary data to drive the business process.
 
 :::note
 If you prefer a video-based learning experience or a more complex example, visit [this Camunda Academy course](https://bit.ly/3PJJocB).
@@ -319,7 +319,9 @@ In this case, the token will move through the gateway and (according to the cond
 
 At this point, you've successfully crafted a human-centered process that routes the process flow based on a decision made by a user.
 
-A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+A core value of Camunda 8 lies in the combination of automation and human interaction. The same pattern applies when an [AI agent](/reference/glossary.md#ai-agent) produces the result a person acts on: the user task, form, and gateway you built here work the same way, whichever kind of step supplied the data.
+
+Continue with the [following resources](#additional-resources-and-next-steps) to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
 
 Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
 
@@ -348,4 +350,4 @@ Don't want to build the process yourself? Click this button to create it from a 
 - Learn how to write powerful [expressions](/components/concepts/expressions.md) and utilize [variables](/components/concepts/variables.md) to route complex process flows.
 - Get an [introduction to Operate](/components/operate/operate-introduction.md).
 - Learn how to [set up Tasklist](/components/tasklist/introduction-to-tasklist.md) for efficient task management.
-- Explore [start forms](/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes.md) and attach the form directly to the start event.
+- Explore start forms and attach the form directly to the start event for authenticated starts in Tasklist.

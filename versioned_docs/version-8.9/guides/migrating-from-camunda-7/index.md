@@ -24,7 +24,7 @@ It is not sufficient to exchange a library; you might have to adjust your BPMN m
 
 This guide covers the following main aspects involved in migrating from Camunda 7 to Camunda 8.
 
-<MigrationsGrid migrations={gettingStartedCards} />
+<MigrationsGrid migrations={gettingStartedCards} columns={2} />
 
 <!-- TODO: However, the [migration tooling roadmap](https://roadmap.camunda.com/) can inform your time planning. -->
 
@@ -42,5 +42,5 @@ Get help with your migration journey from the following additional resources.
 - [Camunda Academy: Migration Overview](https://academy.camunda.com/c8-migration-overview/)
 
 :::info
-Still need more help? Contact your customer success manager or [reach out to Camunda](https://camunda.com/contact-us/).
+Still need more help? [Reach out to Camunda](https://camunda.com/contact-us/).
 :::

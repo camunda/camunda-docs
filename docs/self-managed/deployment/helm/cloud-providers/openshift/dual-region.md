@@ -340,7 +340,7 @@ Troubleshooting requires examining all the underlying mechanisms of Submariner. 
 
 :::info Migration from Bitnami Elasticsearch to ECK in dual-region
 
-There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators.md) and apply it individually to each region.
+There is currently no dedicated migration procedure for moving from the Bitnami Elasticsearch subchart to the ECK operator in a dual-region setup. If you need to perform this migration, follow the [single-region migration procedure (documented for Camunda 8.9)](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) and apply it individually to each region.
 
 :::
 
@@ -483,7 +483,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/opens
 
 </details>
 
-Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. The script derives the Zeebe broker count from your Helm values. For a dual-region setup, the default is `8` (four brokers per region):
+Then, source the output of the script. By doing so, we can reuse the values later for substitution, instead of manually adjusting the values files. The script derives the number of Zeebe Brokers from your Helm values. For a dual-region setup, the default is `8` (four brokers per region):
 
 ```
 chmod +x generate-zeebe-helm-values.sh

@@ -29,7 +29,7 @@ New to connectors? Review our [introduction to connectors](/components/connector
    <SaasPrereqs/>
 </details>
 
-The concept of a connector consists of two parts: the business logic is implemented as a job worker, and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/components/hub/workspace/modeler/collaboration/design-your-process.md).
+The concept of a [connector](/reference/glossary.md#connector) consists of two parts: the business logic is implemented as a [job worker](/reference/glossary.md#job-worker), and the user interface during modeling is provided using an element template. In this guide, you will create a REST connector task in your process, handle the HTTP response, and deploy your process. New to creating a process? Get started by [modeling your first diagram](/components/hub/workspace/modeler/collaboration/design-your-process.md).
 
 ## Step 1: Create a REST connector task
 
@@ -65,14 +65,16 @@ To deploy your process, take the following steps:
    :::note
    If you have not yet created a cluster, clicking **Deploy** will take you to the console to create a cluster. Once you make your cluster creation request, you will automatically be redirected back to Modeler. The creation of a cluster can take 1 to 5 minutes. To read more about creating clusters, visit our documentation on [creating a cluster](create-cluster.md).
    :::
-3. Start a new process instance by clicking on the blue **Run** button.
+3. Start a new [process instance](/reference/glossary.md#process-instance) by clicking on the blue **Run** button.
 4. In the top left corner of the screen, click the square-shaped **Camunda components** button. Navigate to Operate to see your process instance with a token waiting at the service task by clicking **View process instances**.
 
 ## Wrap up
 
 Congratulations! You successfully built your first API orchestration solution with Camunda 8.
 
-Camunda 8 empowers users to automate processes faster. connectors are reusable components that allow you to access APIs without writing code.
+Camunda 8 empowers users to automate processes faster. With connectors, you can access APIs without writing code.
+
+Connector tasks are also how you give an [AI agent](/reference/glossary.md#ai-agent) something to do. An agent can call the same connectors you used here as its tools, and the process still defines which tools the agent is allowed to use.
 
 Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
 
@@ -96,6 +98,7 @@ Don't want to build the process yourself? Click this button to create it from a 
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
+- [Build your first AI agent](./getting-started-agentic-orchestration.md)
 - [Learn about types of connectors](/components/connectors/connector-types.md)
 - [Use connectors in your BPMN process](/components/connectors/use-connectors/index.md)
 - [Camunda Academy: Generate a Connector Template from an API Specification](https://academy.camunda.com/c8-h2-generate-connector-from-api/)

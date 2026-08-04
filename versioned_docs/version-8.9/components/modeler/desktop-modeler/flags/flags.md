@@ -74,7 +74,7 @@ Flags passed as command line arguments take precedence over those configured via
 | "disable-platform"                                            | false                               |
 | "disable-zeebe"                                               | false                               |
 | "disable-remote-interaction"                                  | false                               |
-| "single-instance"                                             | false                               |
+| ["single-instance"](#single-instance)                         | false                               |
 | "user-data-dir"                                               | [Electron default](../search-paths) |
 | ["display-version"](#custom-display-version-label)            | `undefined`                         |
 | ["zeebe-ssl-certificate"](#zeebe-ssl-certificate)             | `undefined`                         |
@@ -88,6 +88,10 @@ Flags passed as command line arguments take precedence over those configured via
 ### Disable plug-ins
 
 Start the modeler without activating installed plug-ins. This is useful to debug modeler errors.
+
+### Single instance
+
+By default, Desktop Modeler enforces single-instance mode, preventing more than one instance from running at a time. To run multiple instances simultaneously, pass `--no-single-instance` when starting the application.
 
 ### BPMN-only mode
 
@@ -161,6 +165,8 @@ Additional information adapted from the [upstream documentation](https://nodejs.
 > The peer (Camunda 8) certificate must be chainable to a CA trusted by the app for the connection to be authenticated. When using certificates that are not chainable to a well-known CA, the certificate's CA must be explicitly specified as trusted or the connection will fail to authenticate. If the peer uses a certificate that doesn't match or chain to one of the default CAs, provide a CA certificate that the peer's certificate can match or chain to. For self-signed certificates, the certificate is its own CA, and must be provided.
 
 ### Default execution platform version
+
+This setting controls the [execution platform version](/reference/glossary.md#execution-platform-version) used by Desktop Modeler. It does not change the version of a deployed cluster or process definition.
 
 To change default execution platform version, configure your `flags.json` as follows:
 

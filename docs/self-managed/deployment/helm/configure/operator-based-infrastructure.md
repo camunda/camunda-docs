@@ -691,6 +691,30 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 **Reference:** [Keycloak Operator Documentation](https://www.keycloak.org/operator/basic-deployment)
 
+#### Keycloak pod crashes on HTTP/2 cleartext (h2c) requests
+
+**Symptoms:** The Keycloak pod exits or enters `CrashLoopBackOff` when it receives an HTTP/2 cleartext (h2c) request, such as a client sending an `Upgrade: h2c` header over a plain-HTTP port-forward. Clients receive an empty reply, and the Keycloak logs show a `java.lang.NoSuchMethodError` originating from Vert.x and Netty.
+
+**Cause:** `camunda/keycloak:quay-optimized-*` image tags older than `quay-optimized-26.6.4` bundle a conflicting Netty HTTP/2 codec under `/opt/keycloak/providers`, pulled in transitively by the AWS Advanced JDBC Wrapper. It shadows the Netty version shipped with Keycloak and breaks h2c handling.
+
+**Solutions:**
+
+- Upgrade the Keycloak image to `camunda/keycloak:quay-optimized-26.6.4` or later, where the conflicting Netty libraries are removed. Update the `image` field in your Keycloak custom resource (`keycloak-instance-*.yml`). This is the recommended fix.
+- If you cannot upgrade, disable HTTP/2 so Keycloak falls back to HTTP/1.1. Set the `QUARKUS_HTTP_HTTP2` environment variable to `false` in the Keycloak custom resource:
+
+  ```yaml
+  spec:
+    unsupported:
+      podTemplate:
+        spec:
+          containers:
+            - env:
+                - name: QUARKUS_HTTP_HTTP2
+                  value: "false"
+  ```
+
+**Reference:** [camunda/keycloak HTTP/2 cleartext crash issue](https://github.com/camunda/camunda-deployment-references/issues/2809)
+
 ## Production considerations
 
 ### Security

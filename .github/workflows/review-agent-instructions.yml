@@ -1,0 +1,68 @@
+name: Review agent instructions
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "howtos/**"
+
+jobs:
+  label:
+    if: |
+      github.event.pull_request.draft == false &&
+      startsWith(github.actor, 'renovate') == false &&
+      startsWith(github.actor, 'dependabot') == false &&
+      startsWith(github.actor, 'camunda-docs-pr-automation') == false
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+      PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+      REPO: ${{ github.repository }}
+      DOC_URL: ${{ github.server_url }}/${{ github.repository }}/blob/main/howtos/maintain-agent-instructions.md
+    steps:
+      - name: Skip if label was previously removed
+        id: check
+        run: |
+          has_label=$(gh pr view "$PR_NUMBER" --repo "$REPO" --json labels \
+            --jq 'any(.labels[]; .name == "review-agent-instructions")')
+          if [ "$has_label" = "true" ]; then
+            echo "Label currently present; proceeding."
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          was_added=$(gh api "repos/$REPO/issues/$PR_NUMBER/events?per_page=100" \
+            --jq '[.[] | select(.event == "labeled" and .label.name == "review-agent-instructions")] | length')
+          if [ "$was_added" -gt 0 ]; then
+            echo "Label was previously removed by a user; skipping label + comment."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Label has never been applied; proceeding."
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Add label
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          gh pr edit "$PR_NUMBER" --repo "$REPO" --add-label "review-agent-instructions"
+
+      - name: Post reminder comment
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          body=$(cat <<EOF
+          @$PR_AUTHOR this PR updates a file under \`howtos/\`. Please check whether any of the following AI agent instruction files needs updating to match this change:
+
+          - \`AGENTS.md\`
+          - \`CLAUDE.md\`
+          - \`.github/copilot-instructions.md\`
+          - \`.github/instructions/content.instructions.md\`
+          - \`.github/instructions/repo.instructions.md\`
+
+          If nothing applies, remove the \`review-agent-instructions\` label. See [maintain AI instruction files]($DOC_URL) for more details.
+          EOF
+          )
+
+          gh pr comment "$PR_NUMBER" --repo "$REPO" --body "$body"

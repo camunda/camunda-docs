@@ -82,6 +82,11 @@
   width: 90px;
 }
 
+img.featuresImage[alt="Build with AI"] {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 .featuresTitle {
   line-height: 1.4;
   font-size: 24px;

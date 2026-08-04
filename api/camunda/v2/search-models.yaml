@@ -7,6 +7,9 @@ components:
           description: Pagination criteria.
           allOf:
             - $ref: "#/components/schemas/SearchQueryPageRequest"
+      x-properties-added-in-version:
+        - propertyName: page
+          addedInVersion: "8.6"
     SearchQueryPageRequest:
       description: Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.
       oneOf:
@@ -40,11 +43,14 @@ components:
           format: int32
           default: 100
           minimum: 1
+      x-properties-added-in-version:
+        - propertyName: from
+          addedInVersion: "8.6"
+        - propertyName: limit
+          addedInVersion: "8.6"
     CursorForwardPagination:
       type: object
       title: Cursor-based forward pagination
-      required:
-        - after
       properties:
         after:
           description: Use the `endCursor` value from the previous response to fetch the next page of results.
@@ -57,11 +63,14 @@ components:
           default: 100
           minimum: 1
           maximum: 10000
+      x-properties-added-in-version:
+        - propertyName: after
+          addedInVersion: "8.8"
+        - propertyName: limit
+          addedInVersion: "8.6"
     CursorBackwardPagination:
       type: object
       title: Cursor-based backward pagination
-      required:
-        - before
       properties:
         before:
           description: Use the `startCursor` value from the previous response to fetch the previous page of results.
@@ -74,6 +83,9 @@ components:
           default: 100
           minimum: 1
           maximum: 10000
+      x-properties-added-in-version:
+        - propertyName: before
+          addedInVersion: "8.8"
     SearchQueryResponse:
       type: object
       required:
@@ -81,6 +93,9 @@ components:
       properties:
         page:
           $ref: "#/components/schemas/SearchQueryPageResponse"
+      x-properties-added-in-version:
+        - propertyName: page
+          addedInVersion: "8.6"
     SortOrderEnum:
       description: The order in which to sort the related field.
       type: string
@@ -115,3 +130,10 @@ components:
           nullable: true
           allOf:
             - $ref: "cursors.yaml#/components/schemas/EndCursor"
+      x-properties-added-in-version:
+        - propertyName: hasMoreTotalItems
+          addedInVersion: "8.8"
+        - propertyName: startCursor
+          addedInVersion: "8.8"
+        - propertyName: endCursor
+          addedInVersion: "8.8"

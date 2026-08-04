@@ -30,7 +30,7 @@ path: object;
 #### groupId
 
 ```ts
-groupId: string;
+groupId: GroupId;
 ```
 
 The unique identifier of the group.

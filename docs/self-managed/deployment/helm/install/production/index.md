@@ -5,6 +5,8 @@ sidebar_label: Production install
 description: Install Camunda 8 Self-Managed on Kubernetes using Helm chart with production-ready configuration.
 ---
 
+import HelmV4Required from '../../\_partials/\_helm-v4-required.md'
+
 This is a **scenario-based, production-focused, step-by-step guide** for setting up the [Camunda Helm chart](https://artifacthub.io/packages/helm/camunda/camunda-platform). It provides a resilient baseline for most production use cases.
 
 This is a single production install guide with database options in one flow:
@@ -14,12 +16,14 @@ This is a single production install guide with database options in one flow:
 
 AWS examples are used where helpful, but the flow applies to other [supported Kubernetes distributions](/reference/supported-environments.md#deployment-options) with equivalent services.
 
+<HelmV4Required />
+
 ## Prerequisites
 
 Before proceeding with the setup, ensure the following requirements are met:
 
 - **Kubernetes Cluster**: A functioning Kubernetes cluster with kubectl access and block storage persistent volumes for stateful components. This guide will use an AWS EKS cluster for reference. Step-by-step documentation is available to deploy an EKS cluster with [Terraform](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md), and [install Camunda 8](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eks-helm.md).
-- **Helm**: Make sure the [Helm CLI](/reference/supported-environments.md#clients) is installed.
+- **Helm**: Make sure the [Helm CLI v4](/reference/supported-environments.md#clients) is installed. Helm v3 is not supported for Camunda 8.10 and later.
 - **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
@@ -48,7 +52,7 @@ This is the high-level architecture diagram for our production setup, as illustr
 
 ![Architecture Diagram](./img/architecture.jpg)
 
-For more information refer to the Camunda 8 [Kubernetes reference architectures](/docs/self-managed/reference-architecture/kubernetes/#kubernetes).
+For more information refer to the Camunda 8 [Kubernetes reference architectures](/self-managed/reference-architecture/kubernetes.md#kubernetes).
 
 ## Installation and configuration
 
@@ -215,12 +219,13 @@ The following example `values.yaml` configures Web Modeler with an external Amaz
 
 ```yaml
 webModeler:
-  externalDatabase:
-    url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-    user: web_modeler_user
-    secret:
-      existingSecret: web-modeler-db-secret
-      existingSecretKey: database-password
+  restapi:
+    externalDatabase:
+      url: jdbc:postgresql://external-postgres-host:5432/camunda_db
+      user: web_modeler_user
+      secret:
+        existingSecret: web-modeler-db-secret
+        existingSecretKey: database-password
 ```
 
 Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret containing the password. This approach allows the Camunda Helm chart to reference credentials stored securely in your cluster, rather than hardcoding sensitive data in values files or templates.
@@ -329,6 +334,10 @@ oc get storageclass
 # RECLAIMPOLICY should show "Retain", not "Delete"
 ```
 
+:::note Equivalent mechanisms
+Alternative configurations that preserve the underlying volume and allow it to be reattached to a recreated PVC are also acceptable — for example, patching the `persistentVolumeReclaimPolicy` of individual PVs to `Retain`, or admission policies (Kyverno, Gatekeeper) enforcing `Retain` on dynamically provisioned PVs. Reattaching a retained PV to a new PVC may require manual steps, such as clearing the `claimRef` on the released PV, depending on your provisioner. Snapshot- or backup-based strategies are not equivalent, because they do not preserve the original volume binding required for a Zeebe broker to resume from its existing partition data without manual recovery. If you rely on an alternative mechanism, you are responsible for validating it against your upgrade and disaster recovery scenarios in a non-production environment.
+:::
+
 For more details, see [troubleshooting](/self-managed/operational-guides/troubleshooting.md#zeebe-data-loss-after-pvc-deletion) and the [Kubernetes documentation on reclaim policies](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming).
 
 #### Node affinity and tolerations
@@ -365,31 +374,62 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
       maxUnavailable: 1
   ```
 
-- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
-- Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets. Create your secrets explicitly using `kubectl` or an external secret manager, then reference them in your Helm values files. For details, see the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md).
+#### Secondary storage index replicas
 
-  :::note
-  It is best to store secrets in an external secret manager such as [Vault by HashiCorp](https://www.vaultproject.io/) in case of a total outage.
-  :::
+:::warning Single point of failure without replicas
+The Elasticsearch/OpenSearch Exporter defaults to zero index replicas for the Zeebe record indices it creates. Without replicas, a single node restart moves its shards to UNASSIGNED state and puts the cluster into RED health. Two consequences follow:
 
-- When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/upgrade/components/index.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
+- **Exporter backpressure builds up**: the Orchestration Cluster pauses exports when ES/OS cannot accept writes, which eventually throttles process execution throughput.
+- **Optimize analytics data goes stale**: the Optimize importer reads from these Zeebe record indices. While shards are UNASSIGNED, Optimize cannot read newly exported records, so its analytics data lags behind until the node rejoins.
 
-  The following is an example configuration for the Orchestration Cluster to create persistent storage:
+The cluster recovers once the node rejoins and shards are reassigned.
+:::
 
-  ```yaml
-  orchestration:
-    extraVolumes:
-      - name: persistent-state
-        emptyDir: {}
-    extraVolumeMounts:
-      - name: persistent-state
-        mountPath: /mount
-  ```
+In multi-node Elasticsearch/OpenSearch clusters, configure at least one index replica:
+
+```yaml
+camunda:
+  database:
+    index:
+      numberOfReplicas: 1
+```
+
+Each replica stores a full copy of the primary shard data, approximately doubling disk usage for those indices. Account for this when sizing your cluster. See [Managing secondary storage: Replicas](/self-managed/concepts/secondary-storage/managing-secondary-storage.md#replicas) for full guidance.
+
+#### Version management
+
+Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
+
+#### Secret management
+
+Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets. Create your secrets explicitly using `kubectl` or an external secret manager, then reference them in your Helm values files. For details, see the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md).
+
+:::note
+It is best to store secrets in an external secret manager such as [Vault by HashiCorp](https://www.vaultproject.io/) in case of a total outage.
+:::
+
+#### Upgrades
+
+When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/upgrade/components/index.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
+
+The following is an example configuration for the Orchestration Cluster to create persistent storage:
+
+```yaml
+orchestration:
+  extraVolumes:
+    - name: persistent-state
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: persistent-state
+      mountPath: /mount
+```
 
 <!-- This seems very specific to the application. I might remove this: -->
 <!-- - Mount Secrets as volumes, not environment variables -->
 
-- It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
+#### Resource quotas
+
+It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-level quotas apply limits to all workloads within a namespace and ensure aggregate resource consumption by all pods in the namespace does not exceed your desired resource limits.
 
 ### Security
 
@@ -423,7 +463,9 @@ The following resources and configuration options are important to keep in mind 
   :::
 
 - [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
+
 <!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
+
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information, see the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/).
@@ -516,12 +558,12 @@ webModeler:
     mail:
       # This value is required, otherwise the restapi pod wouldn't start.
       fromAddress: noreply@example.com
-  externalDatabase:
-    url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-    user: camunda_user
-    secret:
-      existingSecret: camunda-db-secret
-      existingSecretKey: database-password
+    externalDatabase:
+      url: jdbc:postgresql://external-postgres-host:5432/camunda_db
+      user: camunda_user
+      secret:
+        existingSecret: camunda-db-secret
+        existingSecretKey: database-password
 
 prometheusServiceMonitor:
   enabled: true
@@ -612,10 +654,10 @@ The following example `orchestration-values.yaml` is provided to the `orchestrat
 
 ```yaml
 global:
+  host: orchestration-host.com
   ingress:
     enabled: true
     className: nginx
-    host: orchestration-host.com
     tls:
       enabled: true
       secretName: camunda-platform
@@ -648,7 +690,7 @@ orchestration:
     grpc:
       enabled: true
       className: nginx
-      host: grpc-{{ .Values.global.ingress.host }}
+      host: grpc-{{ .Values.global.host }}
       tls:
         enabled: true
         secretName: camunda-platform-zeebe-grpc

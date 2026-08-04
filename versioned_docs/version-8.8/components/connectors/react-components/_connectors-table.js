@@ -62,7 +62,7 @@ const SearchableTable = () => {
       image: AiagentImg,
     },
     {
-      name: "Ad-Hoc Tools Schema Resolver",
+      name: "Ad-hoc Tools Schema Resolver",
       description: "Implement tool resolution of the AI Agent connector.",
       type: "Outbound",
       link: "../agentic-ai-ad-hoc-tools-schema-resolver",

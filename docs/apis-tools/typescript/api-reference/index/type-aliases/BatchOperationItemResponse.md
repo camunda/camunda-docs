@@ -65,10 +65,12 @@ This is `null` if the item has not yet been processed.
 ### processInstanceKey
 
 ```ts
-processInstanceKey: ProcessInstanceKey;
+processInstanceKey: ProcessInstanceKey | null;
 ```
 
-the process instance key of the processed item.
+The process instance key of the processed item. Null for batch-op types whose targets
+are not process instances (e.g. DELETE_DECISION_INSTANCE, DELETE_DECISION_DEFINITION,
+DELETE_PROCESS_DEFINITION).
 
 ---
 

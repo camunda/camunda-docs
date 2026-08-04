@@ -6,13 +6,13 @@ public static class TenantExamples
 {
     #region CreateTenant
     // <CreateTenant>
-    public static async Task CreateTenantExample()
+    public static async Task CreateTenantExample(TenantId tenantId)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateTenantAsync(new TenantCreateRequest
         {
-            TenantId = "acme-corp",
+            TenantId = tenantId,
             Name = "Acme Corporation",
         });
 
@@ -111,13 +111,13 @@ public static class TenantExamples
     #region AssignGroupToTenant
 
     // <AssignGroupToTenant>
-    public static async Task AssignGroupToTenantExample(TenantId tenantId)
+    public static async Task AssignGroupToTenantExample(TenantId tenantId, GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
         await client.AssignGroupToTenantAsync(
             tenantId,
-            "engineering");
+            groupId);
     }
     // </AssignGroupToTenant>
     #endregion AssignGroupToTenant
@@ -125,13 +125,13 @@ public static class TenantExamples
     #region UnassignGroupFromTenant
 
     // <UnassignGroupFromTenant>
-    public static async Task UnassignGroupFromTenantExample(TenantId tenantId)
+    public static async Task UnassignGroupFromTenantExample(TenantId tenantId, GroupId groupId)
     {
         using var client = CamundaClient.Create();
 
         await client.UnassignGroupFromTenantAsync(
             tenantId,
-            "engineering");
+            groupId);
     }
     // </UnassignGroupFromTenant>
     #endregion UnassignGroupFromTenant
@@ -139,13 +139,13 @@ public static class TenantExamples
     #region AssignRoleToTenant
 
     // <AssignRoleToTenant>
-    public static async Task AssignRoleToTenantExample(TenantId tenantId)
+    public static async Task AssignRoleToTenantExample(TenantId tenantId, RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
         await client.AssignRoleToTenantAsync(
             tenantId,
-            "developer");
+            roleId);
     }
     // </AssignRoleToTenant>
     #endregion AssignRoleToTenant
@@ -153,13 +153,13 @@ public static class TenantExamples
     #region UnassignRoleFromTenant
 
     // <UnassignRoleFromTenant>
-    public static async Task UnassignRoleFromTenantExample(TenantId tenantId)
+    public static async Task UnassignRoleFromTenantExample(TenantId tenantId, RoleId roleId)
     {
         using var client = CamundaClient.Create();
 
         await client.UnassignRoleFromTenantAsync(
             tenantId,
-            "developer");
+            roleId);
     }
     // </UnassignRoleFromTenant>
     #endregion UnassignRoleFromTenant
@@ -167,13 +167,13 @@ public static class TenantExamples
     #region AssignClientToTenant
 
     // <AssignClientToTenant>
-    public static async Task AssignClientToTenantExample(TenantId tenantId)
+    public static async Task AssignClientToTenantExample(TenantId tenantId, ClientId clientId)
     {
         using var client = CamundaClient.Create();
 
         await client.AssignClientToTenantAsync(
             tenantId,
-            "my-service-account");
+            clientId);
     }
     // </AssignClientToTenant>
     #endregion AssignClientToTenant
@@ -181,13 +181,13 @@ public static class TenantExamples
     #region UnassignClientFromTenant
 
     // <UnassignClientFromTenant>
-    public static async Task UnassignClientFromTenantExample(TenantId tenantId)
+    public static async Task UnassignClientFromTenantExample(TenantId tenantId, ClientId clientId)
     {
         using var client = CamundaClient.Create();
 
         await client.UnassignClientFromTenantAsync(
             tenantId,
-            "my-service-account");
+            clientId);
     }
     // </UnassignClientFromTenant>
     #endregion UnassignClientFromTenant
@@ -195,13 +195,13 @@ public static class TenantExamples
     #region AssignMappingRuleToTenant
 
     // <AssignMappingRuleToTenant>
-    public static async Task AssignMappingRuleToTenantExample(TenantId tenantId)
+    public static async Task AssignMappingRuleToTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
         await client.AssignMappingRuleToTenantAsync(
             tenantId,
-            "rule-123");
+            mappingRuleId);
     }
     // </AssignMappingRuleToTenant>
     #endregion AssignMappingRuleToTenant
@@ -209,13 +209,13 @@ public static class TenantExamples
     #region UnassignMappingRuleFromTenant
 
     // <UnassignMappingRuleFromTenant>
-    public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId)
+    public static async Task UnassignMappingRuleFromTenantExample(TenantId tenantId, MappingRuleId mappingRuleId)
     {
         using var client = CamundaClient.Create();
 
         await client.UnassignMappingRuleFromTenantAsync(
             tenantId,
-            "rule-123");
+            mappingRuleId);
     }
     // </UnassignMappingRuleFromTenant>
     #endregion UnassignMappingRuleFromTenant
@@ -229,7 +229,7 @@ public static class TenantExamples
 
         var result = await client.SearchUsersForTenantAsync(
             tenantId,
-            new SearchUsersForTenantRequest());
+            new TenantUserSearchQueryRequest());
 
         foreach (var user in result.Items)
         {
@@ -248,7 +248,7 @@ public static class TenantExamples
 
         var result = await client.SearchClientsForTenantAsync(
             tenantId,
-            new SearchClientsForTenantRequest());
+            new TenantClientSearchQueryRequest());
 
         foreach (var c in result.Items)
         {

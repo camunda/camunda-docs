@@ -196,11 +196,47 @@ This will add the necessary annotation to [enable HTTP/2 for Ingress in your Ope
 
 </details>
 
+<details>
+   <summary>ROSA HCP — additional steps for ALPN h2</summary>
+
+These steps are required only on **Red Hat OpenShift Service on AWS – Hosted Control Planes (ROSA HCP)** managed clusters. Self-managed OpenShift clusters where the cluster-wide `ingress.operator.openshift.io/default-enable-http2=true` annotation is honored do **not** need this workaround.
+
+On ROSA HCP, the `ingress-config-validation.managed.openshift.io` admission webhook denies the cluster-wide annotation, and the per-`IngressController` annotation alone does not make HAProxy advertise ALPN `h2` on the default certificate path. As a result, gRPC clients (Zeebe) fail with `No ALPN negotiated`.
+
+The OpenShift router advertises ALPN `h2` on a per-SNI basis through a `crt-list` entry that HAProxy generates only for Routes that carry an explicit `spec.tls.certificate`. In other words, the gRPC Route must reference a TLS Secret in the Camunda namespace; the default `secretName: '-'` (Ingress-Operator-managed) is not enough on ROSA HCP.
+
+To fix this, copy the router default wildcard TLS Secret from `openshift-ingress` into the Camunda namespace, then point the gRPC Ingress to it:
+
+1. Copy the router wildcard certificate Secret into the Camunda namespace:
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   ```
+
+   ```bash
+   export CAMUNDA_NAMESPACE="camunda"
+   export CAMUNDA_PLATFORM_ROUTER_TLS_SECRET="camunda-platform-router-tls"
+   ./generic/openshift/single-region/procedure/copy-router-tls-secret.sh
+   ```
+
+2. After you have merged the OpenShift overlay into your local `values.yml` (see the _Configure Route TLS_ section below), override `orchestration.ingress.grpc.tls.secretName` in that `values.yml`. The default value `'-'` lets the Ingress Operator manage the certificate automatically; on ROSA HCP, replace it with the Secret you just created:
+
+   ```bash
+   yq -i ".orchestration.ingress.grpc.tls.secretName = \"$CAMUNDA_PLATFORM_ROUTER_TLS_SECRET\"" \
+       values.yml
+   ```
+
+   This keeps the upstream `orchestration-route.yml` overlay file untouched so future updates can be pulled cleanly.
+
+After applying both steps, the auto-generated Route for the Zeebe gRPC Ingress will carry an inlined `spec.tls.certificate`, HAProxy will emit a per-SNI `[alpn h2,http/1.1]` `crt-list` entry, and gRPC clients will negotiate `h2` successfully.
+
+</details>
+
 #### Configure Route TLS
 
-Additionally, the Zeebe Gateway should be configured to use an encrypted connection with TLS. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encryption or pass-through routes, and not for edge-terminated or insecure routes.
+Configure the Zeebe Gateway to use an encrypted TLS connection. In OpenShift, the connection from HAProxy to the Zeebe Gateway service can use HTTP/2 only for re-encrypt or pass-through routes, not for edge-terminated or insecure routes.
 
-1. **Zeebe cluster:** two [TLS secrets](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) for the Zeebe Gateway are required, one for the **service** and the other one for the **route**:
+1. **Zeebe cluster:** at least one [TLS secret](https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets) is required for the Zeebe Gateway **service**; a second TLS secret for the **route** is optional and depends on your OpenShift flavor:
 
 - The first TLS secret is issued to the Zeebe Gateway Service Name. This must use the [PKCS #8 syntax](https://en.wikipedia.org/wiki/PKCS_8) or [PKCS #1 syntax](https://en.wikipedia.org/wiki/PKCS_1) as Zeebe only supports these, referenced as `camunda-platform-internal-service-certificate`. This certificate is also used in the other components such as Operate, Tasklist.
 
@@ -219,7 +255,7 @@ PKCS #8 private key encoding. PKCS #8 produces a PEM block with a static header 
 
 </details>
 
-- The second TLS secret is used on the exposed route, referenced as `camunda-platform-external-certificate`. For example, this would be the same TLS secret used for Ingress. We also configure the Zeebe Gateway Ingress to create a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration).
+- The second TLS secret is optional and applies only to the exposed Route. By default, `orchestration-route.yml` ships with `orchestration.ingress.grpc.tls.secretName: '-'`, which lets the OpenShift Ingress Operator manage the Route TLS certificate automatically by using the cluster's default wildcard. This is the recommended setup on self-managed OpenShift. If you want to terminate the Route with your own custom certificate, for example, the same TLS secret used for Ingress, set `orchestration.ingress.grpc.tls.secretName` to the name of a TLS secret in the Camunda namespace. The Zeebe Gateway Ingress is configured as a [Re-encrypt Route](https://docs.openshift.com/container-platform/latest/networking/routes/route-configuration.html#nw-ingress-creating-a-route-via-an-ingress_route-configuration) in either case. On ROSA HCP, an explicit per-Route certificate is required for ALPN `h2` to work. See the _ROSA HCP — additional steps for ALPN h2_ section above.
 
 To configure the orchestration cluster securely, it's essential to set up a secure communication configuration between pods:
 
@@ -862,7 +898,7 @@ The following values are required for OAuth authentication:
 
 ## Pitfalls to avoid
 
-For general deployment pitfalls, visit the [deployment troubleshooting guide](self-managed/operational-guides/troubleshooting.md).
+For general deployment pitfalls, visit the [deployment troubleshooting guide](/self-managed/operational-guides/troubleshooting.md).
 
 ### Persistent volume reclaim policy
 
@@ -875,7 +911,7 @@ oc get storageclass
 # RECLAIMPOLICY should show "Retain", not "Delete"
 ```
 
-For more details, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
+For more details, including accepted alternatives to a cluster-wide `Retain` policy, see the [production install guide](/self-managed/deployment/helm/install/production/index.md#persistent-volume-reclaim-policy).
 
 ### Security Context Constraints (SCCs)
 

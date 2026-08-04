@@ -44,6 +44,16 @@ The request to create a mapping rule was denied.
 
 ---
 
+### 409
+
+```ts
+409: ProblemDetail;
+```
+
+Mapping rule with this id already exists.
+
+---
+
 ### 500
 
 ```ts

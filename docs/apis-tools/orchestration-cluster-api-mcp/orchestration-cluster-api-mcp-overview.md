@@ -21,8 +21,11 @@ The Orchestration Cluster MCP Server is not part of the [Camunda 8 public API](/
 :::
 
 :::note
-This is the Orchestration Cluster MCP Server documentation. If you want to connect an AI agent running in a BPMN process to an external MCP server, see [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
-:::
+This is the Orchestration Cluster MCP Server documentation. If you are looking to:
+
+- Expose your own BPMN processes as callable MCP tools for AI agents, see the [Processes MCP Server](../processes-mcp/processes-mcp-overview.md).
+- Connect an AI agent running in a BPMN process to an external MCP server, see the [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md).
+  :::
 
 ### Key features
 
@@ -76,13 +79,13 @@ For production environments and other deployment types, the MCP server must be e
 
 The MCP server exposes tools across the following domains:
 
-| Domain              | Capabilities                                                    |
-| :------------------ | :-------------------------------------------------------------- |
-| Cluster             | Check cluster health and retrieve topology information.         |
-| Incidents           | Search, retrieve, and resolve incidents.                        |
-| Process definitions | Search process definitions and retrieve BPMN XML.               |
-| Process instances   | Search, retrieve, and create process instances.                 |
-| User tasks          | Search, retrieve, and assign user tasks. Search task variables. |
-| Variables           | Search and retrieve variables.                                  |
+| Domain              | Capabilities                                                              |
+| :------------------ | :------------------------------------------------------------------------ |
+| Cluster             | Check cluster health and retrieve topology information.                   |
+| Incidents           | Search, retrieve, and resolve incidents.                                  |
+| Process definitions | Search process definitions and retrieve BPMN XML.                         |
+| Process instances   | Search, retrieve, and create process instances.                           |
+| User tasks          | Search, retrieve, assign, and complete user tasks. Search task variables. |
+| Variables           | Search and retrieve variables.                                            |
 
 For the full list of available tools, see [Available tools](./orchestration-cluster-api-mcp-tools.md).

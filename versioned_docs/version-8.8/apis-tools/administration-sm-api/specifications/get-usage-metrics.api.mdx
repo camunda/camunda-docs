@@ -7,7 +7,7 @@ hide_title: true
 hide_table_of_contents: true
 api: eJzlV01v2zgQ/SvEnFqAsb1fQKFbUGyKLDa7RZNgFzB8GJNjm41EKiSVNBD034uhJFuxZW93kWAPvSSWPHx8fDPzhq7BleQxGmcvNWSwpngbcE1XFL1RASR4CqWzgQJkNfw4m/E/TUF5U/IqyODPO5CgnI1kI3+LZZkblTCnnwOH1BDUhgrkT6XnHaNpAY3mv/GpJMggRG/sGuQe/s2GhNFko1kZ8sKtRNyQUHkVIvkJNJIxFYVwaUNEq1rkQ4yKDyaK9mRi5bwIEX0kLbr1wvQAE5B7RKOLmA+42qpYkgcJK+cLjJCBdtUyp1H2bTAzP+SAIpSkzMoowdATaBoW/b4ynjRk827nhex3dsvPpCJIQK0Nb4L5xwHVFeaBJEQTc45+72xwOV1fnevC2PPSTIb53SnWMG9lAhfCv5WRvpCqWMce4TsXMmK4uw3kv1lADMGsLWnBK0XFS/9X4SR0jLomjVSEwz5ttkqi9/g0um86i4gbjOlsQWzwgcSSyA4O7Y7lasjjdfJ2s03VPgOjYcRYxrpkmPDXYXnh/PvW7qBpmOjPs58Oa+vC+aXRmixn5pcxp74m/0D+LBhNgrx3Pp36ecwnipW34XSddObbvV6bB7IimoKER7umiTgsc/QkcL32tEZ2CvdAPtn4bpVAq4WxKq/0sF6PerQ85TsyoR3pq4jrwClOEot+1C0kBFKVN/EJsnkNS0JPHrL5ollIKNFjQTE19Xy0q625r04MKpBgOPa+Is+9YrHgxKcy29Vd9BXJwbTc67hGjm2dJEpKhohF2W88lDaI2z8u/x7EGCsKk+cmkHJWhyPsEvJJgofm89yejlAmq1+FMNnTev4z3YWEguLGdbchNgGMG8hgityaZ1iaaSrts2J7Rwqpr9rKqHwOGdTtlk02ndYbF2KT1aXzsQEJD+gNLvPWWvm7tk9XWOVMLHcK8/R6zE/5Cz5qL9n5x0vR7t5ehJzfg3s3ezcbReLQIyg7uXY4mxjLUZw2eBQpidn31DXHtYfuO2tb3h14guLnLkB2Hy76pP32101yLGNXLi3v3DOZpgmxvcgmEm+uKV+dXaHFNem3B8zPVTITpoyHi91KdIYshjDsHZznFuKHyWwy626+qJLsbe75NCGbTh8fHycKi8pqnChXsLK5UWQDcWxXsL93b+TeYu1U2K42Lj1PPa3Ik1U07YDCNOlRuhALtAPYDxRHHLyzorAvR727vn8X/t9WXaQvcVrmaNLATPLXXbPPYdvsnJln7b6QXdfOoa6XGOjW503Dr1svSuPBBG5xvZ3zR+V+86nzqrfiG6fIKPs7euqHyQPmFQdAct7/SuRlZsoJrv1oeRm6LzFPTpBtx8qO6mJn4+mCIGFDqNNtoe6WsMOUwwMe/Cx+Nmo+/HrDd8WKq2/ri3s+mND7K7d9GmDXdRtx4+7INjxlWhKRn6FZNE3zFavQk7I=
 sidebar_class_name: "get api-method"
-info_path: docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed
+info_path: versioned_docs/version-8.8/apis-tools/administration-sm-api/specifications/administration-api-self-managed
 custom_edit_url: null
 hide_send_button: true
 ---
@@ -19,6 +19,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -34,12 +35,9 @@ import Heading from "@theme/Heading";
 
 Returns usage metrics for a specific cluster for a given time range. The usage metrics are aggregated over the time range and include number of started process instances, executed decision instances, and assigned task users.
 
-<Heading
-  id={"request"}
-  as={"h2"}
-  className={"openapi-tabs__heading"}
-  children={"Request"}
-></Heading>
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
 
 <ParamsDetails
   parameters={[

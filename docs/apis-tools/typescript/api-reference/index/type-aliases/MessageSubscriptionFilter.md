@@ -45,6 +45,16 @@ The element instance key associated with this message subscription.
 
 ---
 
+### inboundConnectorType?
+
+```ts
+optional inboundConnectorType?: StringFilterProperty;
+```
+
+Filter by inbound connector type extracted from the `inbound.type` zeebe:property.
+
+---
+
 ### lastUpdatedDate?
 
 ```ts
@@ -85,6 +95,18 @@ The message subscription state.
 
 ---
 
+### messageSubscriptionType?
+
+```ts
+optional messageSubscriptionType?: MessageSubscriptionTypeFilterProperty;
+```
+
+The type of message subscription to filter by. When omitted, both
+`START_EVENT` and `PROCESS_EVENT` are returned. Only available for data
+created with Camunda 8.10 or later.
+
+---
+
 ### processDefinitionId?
 
 ```ts
@@ -105,6 +127,26 @@ The process definition key associated with this correlated message subscription.
 
 ---
 
+### processDefinitionName?
+
+```ts
+optional processDefinitionName?: StringFilterProperty;
+```
+
+The name of the process definition associated with this message subscription.
+
+---
+
+### processDefinitionVersion?
+
+```ts
+optional processDefinitionVersion?: IntegerFilterProperty;
+```
+
+The version of the process definition associated with this message subscription.
+
+---
+
 ### processInstanceKey?
 
 ```ts
@@ -122,3 +164,13 @@ optional tenantId?: StringFilterProperty;
 ```
 
 The unique external tenant ID.
+
+---
+
+### toolName?
+
+```ts
+optional toolName?: StringFilterProperty;
+```
+
+Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property.

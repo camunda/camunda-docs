@@ -12,6 +12,8 @@ Learn how to access variables, follow valid variable naming rules, and safely us
 
 Access the value of a variable by its [variable name](#variable-names).
 
+FEEL doesn't use a separate assignment operator to create or update process variables. Instead, FEEL evaluates variables that are already available in the current context, or you can define local values with [context entries](/components/modeler/feel/language-guide/feel-context-expressions.md).
+
 ```feel
 a + b
 ```

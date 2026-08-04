@@ -56,18 +56,26 @@ being returned by the server and ensure you configure Web Modeler for [custom SS
 If intermediate signing authorities sign the server certificate, ensure the remote endpoint [serves both server and
 intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to Web Modeler.
 
-### Make the OAuth token cache location writeable for the `modeler-restapi` process
+### OAuth token cache for the `modeler-restapi` process
 
-When using the `OAuth` authentication method for deploying to Zeebe, Web Modeler caches OAuth tokens in a file-based
-cache.
-By default, the cache location is writeable by the `modeler-restapi` process.
-If you run `modeler-restapi` as a non-root user (e.g. via Kubernetes' `securityContext.runAsUser` option),
-you must ensure to provide a writeable cache file location to `modeler-restapi` via the `ZEEBE_CLIENT_CONFIG_PATH`
-environment variable:
+When using the `OAuth` authentication method for deploying to Zeebe, Web Modeler caches OAuth tokens in memory by
+default. No filesystem access is required, so running `modeler-restapi` as a non-root user (for example, via Kubernetes'
+`securityContext.runAsUser` option) or on a read-only container filesystem works out of the box.
+
+If you want to persist tokens across restarts of `modeler-restapi`, opt in to a file-based cache by setting the
+`CAMUNDA_CLIENT_CONFIG_PATH` environment variable to a writeable file location. If you are using legacy Zeebe client environment variables, you can also use `ZEEBE_CLIENT_CONFIG_PATH`. Ensure the directory exists and is
+writeable by the process user:
 
 ```shell
-ZEEBE_CLIENT_CONFIG_PATH=/path/to/credentials/cache.txt
+CAMUNDA_CLIENT_CONFIG_PATH=/path/to/credentials/cache.txt
 ```
+
+:::note
+Before Camunda 8.10, the file-based cache was enabled by default and pointed at `$HOME/.camunda/credentials`. Running
+as a non-root user without overriding this path caused `IOException`s on first cache write. If you previously set
+`CAMUNDA_CLIENT_CONFIG_PATH` or `ZEEBE_CLIENT_CONFIG_PATH` (legacy) solely to work around that error, you can now remove the variable and rely on the in-memory
+default.
+:::
 
 ## How can I provide a custom Zeebe SSL certificate?
 

@@ -4,9 +4,12 @@ from __future__ import annotations
 
 from camunda_orchestration_sdk import (
     CamundaClient,
+    ClientId,
     GroupCreateRequest,
+    GroupId,
     GroupSearchQueryRequest,
     GroupUpdateRequest,
+    MappingRuleId,
     MappingRuleSearchQueryRequest,
     RoleSearchQueryRequest,
     Unset,
@@ -15,11 +18,11 @@ from camunda_orchestration_sdk import (
 
 
 # region CreateGroup
-def create_group_example() -> None:
+def create_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.create_group(
-        data=GroupCreateRequest(group_id="engineering", name="Engineering"),
+        data=GroupCreateRequest(group_id=group_id, name="Engineering"),
     )
 
     print(f"Group: {result.group_id}")
@@ -27,10 +30,10 @@ def create_group_example() -> None:
 
 
 # region GetGroup
-def get_group_example() -> None:
+def get_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
-    result = client.get_group(group_id="engineering")
+    result = client.get_group(group_id=group_id)
 
     print(f"Group: {result.name}")
 # endregion GetGroup
@@ -51,96 +54,96 @@ def search_groups_example() -> None:
 
 
 # region UpdateGroup
-def update_group_example() -> None:
+def update_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.update_group(
-        group_id="engineering",
+        group_id=group_id,
         data=GroupUpdateRequest(name="engineering-team"),
     )
 # endregion UpdateGroup
 
 
 # region DeleteGroup
-def delete_group_example() -> None:
+def delete_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
-    client.delete_group(group_id="engineering")
+    client.delete_group(group_id=group_id)
 # endregion DeleteGroup
 
 
 # region AssignUserToGroup
-def assign_user_to_group_example(username: Username) -> None:
+def assign_user_to_group_example(group_id: GroupId, username: Username) -> None:
     client = CamundaClient()
 
     client.assign_user_to_group(
-        group_id="engineering",
+        group_id=group_id,
         username=username,
     )
 # endregion AssignUserToGroup
 
 
 # region UnassignUserFromGroup
-def unassign_user_from_group_example(username: Username) -> None:
+def unassign_user_from_group_example(group_id: GroupId, username: Username) -> None:
     client = CamundaClient()
 
     client.unassign_user_from_group(
-        group_id="engineering",
+        group_id=group_id,
         username=username,
     )
 # endregion UnassignUserFromGroup
 
 
 # region AssignClientToGroup
-def assign_client_to_group_example() -> None:
+def assign_client_to_group_example(group_id: GroupId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.assign_client_to_group(
-        group_id="engineering",
-        client_id="my-service-account",
+        group_id=group_id,
+        client_id=client_id,
     )
 # endregion AssignClientToGroup
 
 
 # region UnassignClientFromGroup
-def unassign_client_from_group_example() -> None:
+def unassign_client_from_group_example(group_id: GroupId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.unassign_client_from_group(
-        group_id="engineering",
-        client_id="my-service-account",
+        group_id=group_id,
+        client_id=client_id,
     )
 # endregion UnassignClientFromGroup
 
 
 # region AssignMappingRuleToGroup
-def assign_mapping_rule_to_group_example() -> None:
+def assign_mapping_rule_to_group_example(group_id: GroupId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.assign_mapping_rule_to_group(
-        group_id="engineering",
-        mapping_rule_id="rule-123",
+        group_id=group_id,
+        mapping_rule_id=mapping_rule_id,
     )
 # endregion AssignMappingRuleToGroup
 
 
 # region UnassignMappingRuleFromGroup
-def unassign_mapping_rule_from_group_example() -> None:
+def unassign_mapping_rule_from_group_example(group_id: GroupId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.unassign_mapping_rule_from_group(
-        group_id="engineering",
-        mapping_rule_id="rule-123",
+        group_id=group_id,
+        mapping_rule_id=mapping_rule_id,
     )
 # endregion UnassignMappingRuleFromGroup
 
 
 # region SearchUsersForGroup
-def search_users_for_group_example() -> None:
+def search_users_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_users_for_group(
-        group_id="engineering",
+        group_id=group_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -150,11 +153,11 @@ def search_users_for_group_example() -> None:
 
 
 # region SearchClientsForGroup
-def search_clients_for_group_example() -> None:
+def search_clients_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_clients_for_group(
-        group_id="engineering",
+        group_id=group_id,
     )
 
     if not isinstance(result.items, Unset):
@@ -164,11 +167,11 @@ def search_clients_for_group_example() -> None:
 
 
 # region SearchRolesForGroup
-def search_roles_for_group_example() -> None:
+def search_roles_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_roles_for_group(
-        group_id="engineering",
+        group_id=group_id,
         data=RoleSearchQueryRequest(),
     )
 
@@ -179,11 +182,11 @@ def search_roles_for_group_example() -> None:
 
 
 # region SearchMappingRulesForGroup
-def search_mapping_rules_for_group_example() -> None:
+def search_mapping_rules_for_group_example(group_id: GroupId) -> None:
     client = CamundaClient()
 
     result = client.search_mapping_rules_for_group(
-        group_id="engineering",
+        group_id=group_id,
         data=MappingRuleSearchQueryRequest(),
     )
 

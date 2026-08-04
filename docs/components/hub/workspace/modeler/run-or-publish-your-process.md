@@ -37,7 +37,7 @@ To deploy, click **Deploy** in the upper right corner of the modeling screen:
 
 ![The deploy dialog of a BPMN diagram](img/web-modeler-deploy.png)
 
-In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters).
+In Self-Managed, you can deploy your diagram to the cluster defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 ### Before deploying a process
 
@@ -223,9 +223,7 @@ You can access the URL in the **Publication** tab of the **properties panel**, a
 
 <img src={PublicLinkImg} style={{width: 400}} alt="Sharing a public link" />
 
-When an external user accesses the public form URL, they can fill in the form fields and submit the data. Upon submission, a new process instance is automatically started in Camunda 8, using the submitted data as input.
-
-For further configuration and how to unpublish a process again, refer to the [full documentation](modeling/advanced-modeling/publish-public-processes.md).
+Public form links were removed in Camunda 8.10. For current start options, use authenticated Tasklist starts or build a custom application with the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
 ### Listen to message or signal events
 

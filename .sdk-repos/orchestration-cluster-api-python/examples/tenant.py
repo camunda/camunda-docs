@@ -4,7 +4,11 @@ from __future__ import annotations
 
 from camunda_orchestration_sdk import (
     CamundaClient,
+    ClientId,
+    GroupId,
+    MappingRuleId,
     MappingRuleSearchQueryRequest,
+    RoleId,
     RoleSearchQueryRequest,
     TenantCreateRequest,
     TenantGroupSearchQueryRequest,
@@ -97,89 +101,89 @@ def unassign_user_from_tenant_example(tenant_id: TenantId, username: Username) -
 
 
 # region AssignGroupToTenant
-def assign_group_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_group_to_tenant_example(tenant_id: TenantId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.assign_group_to_tenant(
         tenant_id=tenant_id,
-        group_id="engineering",
+        group_id=group_id,
     )
 # endregion AssignGroupToTenant
 
 
 # region UnassignGroupFromTenant
-def unassign_group_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_group_from_tenant_example(tenant_id: TenantId, group_id: GroupId) -> None:
     client = CamundaClient()
 
     client.unassign_group_from_tenant(
         tenant_id=tenant_id,
-        group_id="engineering",
+        group_id=group_id,
     )
 # endregion UnassignGroupFromTenant
 
 
 # region AssignRoleToTenant
-def assign_role_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_role_to_tenant_example(tenant_id: TenantId, role_id: RoleId) -> None:
     client = CamundaClient()
 
     client.assign_role_to_tenant(
         tenant_id=tenant_id,
-        role_id="developer",
+        role_id=role_id,
     )
 # endregion AssignRoleToTenant
 
 
 # region UnassignRoleFromTenant
-def unassign_role_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_role_from_tenant_example(tenant_id: TenantId, role_id: RoleId) -> None:
     client = CamundaClient()
 
     client.unassign_role_from_tenant(
         tenant_id=tenant_id,
-        role_id="developer",
+        role_id=role_id,
     )
 # endregion UnassignRoleFromTenant
 
 
 # region AssignClientToTenant
-def assign_client_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_client_to_tenant_example(tenant_id: TenantId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.assign_client_to_tenant(
         tenant_id=tenant_id,
-        client_id="my-service-account",
+        client_id=client_id,
     )
 # endregion AssignClientToTenant
 
 
 # region UnassignClientFromTenant
-def unassign_client_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_client_from_tenant_example(tenant_id: TenantId, client_id: ClientId) -> None:
     client = CamundaClient()
 
     client.unassign_client_from_tenant(
         tenant_id=tenant_id,
-        client_id="my-service-account",
+        client_id=client_id,
     )
 # endregion UnassignClientFromTenant
 
 
 # region AssignMappingRuleToTenant
-def assign_mapping_rule_to_tenant_example(tenant_id: TenantId) -> None:
+def assign_mapping_rule_to_tenant_example(tenant_id: TenantId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.assign_mapping_rule_to_tenant(
         tenant_id=tenant_id,
-        mapping_rule_id="rule-123",
+        mapping_rule_id=mapping_rule_id,
     )
 # endregion AssignMappingRuleToTenant
 
 
 # region UnassignMappingRuleFromTenant
-def unassign_mapping_rule_from_tenant_example(tenant_id: TenantId) -> None:
+def unassign_mapping_rule_from_tenant_example(tenant_id: TenantId, mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.unassign_mapping_rule_from_tenant(
         tenant_id=tenant_id,
-        mapping_rule_id="rule-123",
+        mapping_rule_id=mapping_rule_id,
     )
 # endregion UnassignMappingRuleFromTenant
 

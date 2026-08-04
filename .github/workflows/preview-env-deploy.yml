@@ -25,7 +25,7 @@ jobs:
 
     name: build-docs
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Import secrets from Vault
         id: secrets
@@ -118,7 +118,7 @@ jobs:
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         run: |
-          gsutil -m rsync -d -r build gs://$BUCKET_NAME/pr-${{ github.event.number }}
+          gcloud storage rsync --gzip-in-flight-all --delete-unmatched-destination-objects --recursive build gs://$BUCKET_NAME/pr-${{ github.event.number }}
 
       - uses: bobheadxi/deployments@v1
         with:

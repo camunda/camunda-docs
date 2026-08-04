@@ -36,7 +36,7 @@ The display name of the updated role.
 ### roleId
 
 ```ts
-roleId: string;
+roleId: RoleId;
 ```
 
 The ID of the updated role.

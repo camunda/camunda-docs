@@ -25,6 +25,10 @@ import TabItem from '@theme/TabItem';
 
 Restore a previous backup of your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
 
+:::tip
+This procedure is the recovery step of [Cold Recovery](../../../concepts/multi-region/cold-recovery.md) when restoring into a secondary region after primary-region loss.
+:::
+
 ## How RDBMS restore works
 
 As described in the [architecture overview](./backup.md#architecture-overview), backups involve two independent systems: **primary storage backups** (Zeebe's log stream and snapshots in a blob store) and the **secondary storage backup** (the RDBMS).
@@ -56,7 +60,7 @@ It is critical that no Camunda components are running during the restore. Runnin
 
 ## Step 1: Restore Zeebe from its primary storage backup
 
-Camunda provides a standalone restore application that must be run on each node where a Zeebe broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
+Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::warning
 Persistent volumes or disks must not contain any pre-existing data before restoring Zeebe. If data exists from a previous deployment, it must be cleared first.
@@ -103,7 +107,7 @@ orchestration:
       value: "restore"
     - name: ZEEBE_RESTORE
       value: "true"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3" # or GCS, AZURE, FILESYSTEM
     # Rest of the backup store configuration (bucket, region, etc.)
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -126,7 +130,7 @@ export CAMUNDA_DATA_SECONDARY_STORAGE_RDBMS_URL="jdbc:postgresql://localhost:543
 # ... other RDBMS config
 
 # Ensure backup store is configured
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE=S3
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE=S3
 # ... other store config
 
 mkdir -p camunda
@@ -158,7 +162,7 @@ orchestration:
       value: "true"
     - name: ZEEBE_RESTORE_TO_TIMESTAMP
       value: "2026-01-10T14:00:00Z"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -212,7 +216,7 @@ orchestration:
       value: "2026-01-10T13:00:00Z"
     - name: ZEEBE_RESTORE_TO_TIMESTAMP
       value: "2026-01-10T14:00:00Z"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -261,7 +265,7 @@ orchestration:
       value: "restore"
     - name: ZEEBE_RESTORE
       value: "true"
-    - name: CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE
+    - name: CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE
       value: "S3"
     # Rest of the backup store configuration
     - name: CAMUNDA_DATA_SECONDARY_STORAGE_TYPE
@@ -327,7 +331,7 @@ The application exits after restore and Kubernetes restarts the pod, which appea
 After removing the temporary restore command or unsetting `ZEEBE_RESTORE` to restore Zeebe's default behavior, you may optionally restart the StatefulSet to ensure the changes take effect immediately. This can be done by [scaling](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_scale/) the StatefulSet down and back up, or by [deleting](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/) the pods so they are recreated with the newly deployed revision.
 
 :::tip
-In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe broker logs during restore. If a pod has already restarted, use `--previous` to view logs from the completed restore run:
+In Kubernetes, Zeebe runs as a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), which is intended for long-running, persistent applications. Because StatefulSet pods are restarted automatically, restore-mode pods can appear in `CrashLoopBackOff` after a successful restore. Observe Zeebe Broker logs during restore. If a pod has already restarted, use `--previous` to view logs from the completed restore run:
 
 ```bash
 kubectl logs <zeebe-pod-name> --previous

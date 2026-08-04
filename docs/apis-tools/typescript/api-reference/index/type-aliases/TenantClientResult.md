@@ -16,7 +16,7 @@ type TenantClientResult = object;
 ### clientId
 
 ```ts
-clientId: string;
+clientId: ClientId;
 ```
 
 The ID of the client.

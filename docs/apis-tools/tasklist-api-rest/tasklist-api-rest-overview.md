@@ -1,46 +1,16 @@
 ---
 id: tasklist-api-rest-overview
-title: "Overview"
+title: "Migrate from the removed Tasklist API"
 sidebar_position: 1
-description: "Build applications for human-centered processes by querying user tasks, assigning users, and completing tasks with the Tasklist API."
+description: "The Tasklist API was removed in Camunda 8.10. Use the Orchestration Cluster REST API instead."
 ---
 
-:::note
-To migrate from Camunda's V1 component REST APIs to the V2 [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), review [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+:::warning
+The Tasklist API was removed in Camunda 8.10 and is no longer part of the current documentation set.
 :::
 
-The Tasklist API is a REST API designed to build task applications for human-centered processes. The API allows you to query user tasks, assign users to these tasks, and complete these tasks.
+For the release-level summary of this removal, see the [8.10 release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test).
 
-:::note
-Ensure you [authenticate](./tasklist-api-rest-authentication.md) before accessing the Tasklist API.
-:::
+Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to build current task applications, and review [migrating to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) if you still have clients that call the removed Tasklist API.
 
-## Context paths
-
-For SaaS: `https://${REGION}.api.camunda.io:443/${CLUSTER_ID}/v1/`, and for Self-Managed installations: `http://localhost:8080/v1/`.
-
-:::note
-Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
-
-For Self-Managed, the host and port depend on your configuration. The context path mentioned here is the default for the Tasklist component.
-:::
-
-## API Explorer
-
-See [the interactive Tasklist REST API Explorer][tasklist-api-explorer] for specifications, example requests and responses, and code samples of interacting with the Tasklist REST API.
-
-### Swagger UI
-
-A detailed API description is also available as a Swagger UI at `https://${base-url}/swagger-ui/index.html`.
-
-For SaaS: `https://${REGION}.api.camunda.io:443/${CLUSTER_ID}/swagger-ui/index.html`, and for Self-Managed installations: [`http://localhost:8080/swagger-ui/index.html`](http://localhost:8080/swagger-ui/index.html).
-
-:::note
-Find your **region Id** and **cluster Id** under **Connection information** in your client credentials (revealed when you click on your client under the **API** tab within your cluster).
-:::
-
-## API in Postman
-
-Work with this API in our [Postman collection](https://www.postman.com/camundateam/workspace/camunda-8-postman/collection/26079299-f0db0193-0557-4acd-8e94-ecdaeffbaa5d?action=share&creator=11465105), and check it out in [GitHub](https://github.com/camunda-community-hub/camunda-8-api-postman-collection).
-
-[tasklist-api-explorer]: ./specifications/tasklist-rest-api.info.mdx
+For current Tasklist behavior, see [Tasklist API changes](/components/tasklist/api-versions.md) and [user task authorization](/components/tasklist/user-task-authorization.md).

@@ -5,7 +5,7 @@ sidebar_label: "Overview"
 description: "User task listeners allow users to react to specific user task lifecycle events."
 ---
 
-A user task listener allows users to react to specific user task lifecycle events.
+A [user task listener](/reference/glossary.md#user-task-listener) allows users to react to specific user task lifecycle events.
 
 :::tip
 Try out our [getting started with user task listeners guide](/components/concepts/user-task-listeners-guide.md).
@@ -80,6 +80,10 @@ The supported user task listener events can be triggered in the following ways.
 | `updating`   | <ul><li>When the [update user task API](/apis-tools/orchestration-cluster-api-rest/specifications/update-user-task.api.mdx) is called. </li><li>When the [update element instance variables API](/apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables.api.mdx) is called on a user task instance.</li><li>When the [set variables RPC](/apis-tools/zeebe-api/gateway-service.md#setvariables-rpc) is called on a user task instance.</li><li>When variables are set at a user task scope using the [Operate interface](/components/operate/userguide/resolve-incidents-update-variables.md).</li></ul> |
 | `completing` | <ul><li>When a user task is completed using the [Tasklist interface](/components/tasklist/userguide/managing-tasks.md#complete-a-task).</li><li>When the [complete user task API](/apis-tools/orchestration-cluster-api-rest/specifications/complete-user-task.api.mdx) is called.</li></ul>                                                                                                                                                                                                                                                                                                                                                  |
 | `canceling`  | <ul><li>When a canceling process instance terminates a user task.</li><li>When a [catch event](/components/modeler/bpmn/events.md) interrupts a user task.</li></ul>                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+
+:::note
+[Process instance modification](/components/concepts/process-instance-modification.md) does not trigger the `canceling` event. User task listeners are intentionally skipped when a user task is terminated via modification to prevent a failing listener job from blocking the operation.
+:::
 
 Once triggered, the workflow engine creates a job that you can process using a job worker.
 
@@ -257,11 +261,11 @@ User task listeners have the following limitations:
 - **No variable handling**: User task listener jobs cannot be completed if variables are provided.
 - **No BPMN error throwing**: Throwing BPMN errors from user task listener jobs is not supported.
 
-### Limitations for Tasklist v1
+### Legacy behavior before 8.10
 
-User task listeners are designed for use with [Tasklist v2](components/tasklist/api-versions.md) and the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
+User task listeners are designed for use with the [Orchestration Cluster API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-While you can use [Tasklist v1](components/tasklist/api-versions.md) or the deprecated [Tasklist API](../../apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) in combination with user task listeners, there are some limitations. For the best experience, use Tasklist v2 and the Orchestration Cluster API.
+Before Camunda 8.10, Tasklist V1 and the deprecated Tasklist API had the following limitations when used with user task listeners:
 
 - **Tasklist v1 does not list tasks with pending task listeners**: If a task's lifecycle transition is blocked by a pending task listener, Tasklist v1 does not display the task in the task queue. However, Tasklist v1 can still show the details of such a task.
 - **Tasklist v1 incorrectly lists creating tasks when filtering for the "all" status (open and completed)**: If a task's creation is blocked by a pending task listener, Tasklist v1 includes it in the task queue when filtering for the "all" status, even though the task has not yet been created.

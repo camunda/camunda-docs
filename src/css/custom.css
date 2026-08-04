@@ -682,16 +682,29 @@ body {
 
 .sign-up {
   color: #fff !important;
-  border-color: #fff;
+  background-color: #fc5d0d;
+  border-color: #fc5d0d;
   margin: 1em;
   transition: all 0.3s;
 }
 
 .sign-up:hover {
-  color: #000 !important;
-  background-color: #fff;
+  color: #fff !important;
+  background-color: #171c29;
+  border-color: #171c29;
   transform: translateY(-4px);
   transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .sign-up {
+  background-color: transparent;
+  border-color: #fff;
+}
+
+[data-theme="dark"] .sign-up:hover {
+  color: #000 !important;
+  background-color: #fff;
+  border-color: #fff;
 }
 
 .hero--secondary {
@@ -1059,6 +1072,23 @@ h3 .badge:nth-of-type(1) {
   background-color: #00539a;
   color: #d0e2ff;
   border: 1px solid #4589ff;
+}
+
+/* Required permissions (RBAC) section */
+.required-permissions__table {
+  display: table;
+  width: auto;
+  min-width: 50%;
+}
+
+.required-permissions__table th,
+.required-permissions__table td {
+  text-align: left;
+}
+
+.required-permissions__or {
+  font-style: italic;
+  color: var(--ifm-color-emphasis-700);
 }
 
 /* HTTP Method badges */
@@ -1473,12 +1503,28 @@ h2.openapi__method-endpoint-path {
 h2.openapi-tabs__response-header {
   border-bottom: none;
 }
+/* Required permissions renders as its own section between the description and the
+   Request section. Give it a top divider and spacing matching the Request and
+   Responses sections for consistency. */
+h2#required-permissions {
+  border-bottom: none;
+  border-top: 1px solid var(--ifm-toc-border-color);
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+/* Separate the Request section with a top divider, mirroring the Responses
+   section's .openapi-tabs__response-header-section border-top. */
 h2#request {
   border-bottom: none;
+  border-top: 1px solid var(--ifm-toc-border-color);
+  margin-top: 2rem;
+  /* Match the Responses gap between the divider and the heading text, which
+     comes from the .openapi-tabs__response-header-section wrapper padding-top (1rem). */
+  padding-top: 1rem;
 }
 .anchorWithStickyNavbar_node_modules-\@docusaurus-theme-classic-lib-theme-Heading-styles-module#request {
   border-bottom: none;
-  padding-top: 10px;
+  padding-top: 1rem;
   font-size: 28px;
   padding-bottom: 0;
 }
@@ -1878,6 +1924,8 @@ ul ul .table-of-contents__link--active {
   display: inline;
   position: relative;
   --glossary-term-accent: var(--ifm-color-primary);
+  --glossary-term-arrow-size: 0.75rem;
+  --glossary-term-arrow-overlap: 0.375rem;
 }
 
 .glossary-term__link {
@@ -1916,10 +1964,10 @@ ul ul .table-of-contents__link--active {
 .glossary-term__tooltip::after {
   content: "";
   position: absolute;
-  top: 100%;
+  top: calc(100% - var(--glossary-term-arrow-overlap));
   left: 50%;
-  width: 0.75rem;
-  height: 0.75rem;
+  width: var(--glossary-term-arrow-size);
+  height: var(--glossary-term-arrow-size);
   border-right: 1px solid var(--glossary-term-accent);
   border-bottom: 1px solid var(--glossary-term-accent);
   background: var(--ifm-background-surface-color);
@@ -1939,8 +1987,9 @@ ul ul .table-of-contents__link--active {
 
 [data-theme="dark"] .glossary-term__link {
   font-weight: 600;
-  text-decoration-thickness: auto;
-  text-underline-offset: auto;
+  text-decoration: underline dotted currentColor;
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.12em;
 }
 
 .glossary-term:focus-within .glossary-term__tooltip {
@@ -2075,6 +2124,16 @@ h3.subheading {
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: 1px solid white;
+}
+
+.button--hero--topic-orange {
+  background-color: #fc5d0d;
+  border-color: #fc5d0d;
+}
+
+.button--hero--topic-orange:hover {
+  background-color: #171c29;
+  border-color: #171c29;
 }
 
 [data-theme="dark"] .button--hero--topic:hover {

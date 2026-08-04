@@ -131,7 +131,7 @@ function getDocsRoot(sourceFilePath) {
 
 function normalizeGlossaryRoute(targetPath) {
   return targetPath
-    .replace(/^\/docs\/(?:next|\d+\.\d+)\//, "/")
+    .replace(/^\/docs\/(?:next\/|\d+\.\d+\/)?/, "/")
     .replace(/\/$/, "");
 }
 

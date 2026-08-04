@@ -4,6 +4,10 @@ title: "Overview"
 description: "Interact with Zeebe clusters. Run user task state operations for Zeebe user tasks."
 ---
 
+:::warning
+The Zeebe REST API is **deprecated**. While it continues to function, new development should use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). See the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for details.
+:::
+
 ## Introduction
 
 The Zeebe REST API is a REST API designed to interact with the Zeebe workflow engine.
@@ -22,7 +26,7 @@ Example path: `https://${REGION}.api.camunda.io:443/${CLUSTER_ID}/v1/`
 
 ### Self-Managed
 
-The context path should match the host and path defined in your Zeebe Gateway [configuration](/self-managed/deployment/helm/configure/ingress/ingress-setup.md). The path used here is the default.
+Use the host and path defined for your [Zeebe Gateway](/reference/glossary.md#zeebe-gateway). For Ingress and routing details, see the [configuration guide](/self-managed/deployment/helm/configure/ingress/ingress-setup.md). The path used here is the default.
 
 Example path: `http://localhost:8080/v1/`
 

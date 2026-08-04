@@ -36,7 +36,9 @@ The name of the tenant.
 ### tenantId
 
 ```ts
-tenantId: string;
+tenantId: TenantId;
 ```
 
-The unique ID for the tenant. Must be 255 characters or less. Can contain letters, numbers, [`_`, `-`, `+`, `.`, `@`].
+The unique ID for the tenant. Must be 31 characters or less and match
+`^[\w.-]{1,31}$` (word characters, `.`, `-`). The literal
+`<default>` is also accepted as the default-tenant alias.

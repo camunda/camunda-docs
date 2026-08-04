@@ -105,6 +105,12 @@ docs: document deterministic build flag
 refactor(auth): simplify token refresh jitter logic
 ```
 
+### Breaking change commits
+
+Breaking change markers (`BREAKING CHANGE:` in the body/footer) trigger a major version bump and a CHANGELOG entry. **Never** use these markers for intra-branch corrections on a feature branch — they pollute the release history and cause unnecessary major version increments.
+
+PR CI includes a breaking change guard that fails when it detects these markers. If the breaking change is intentional, add the `breaking-change-approved` label to the PR. Otherwise, rewrite the commit history to remove the markers before merging.
+
 ## Branching & Releases
 
 Releases are performed by GitHub Actions using semantic-release:

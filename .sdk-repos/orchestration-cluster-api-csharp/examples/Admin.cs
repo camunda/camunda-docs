@@ -6,11 +6,11 @@ public static class AdminExamples
 {
     #region GetGlobalClusterVariable
     // <GetGlobalClusterVariable>
-    public static async Task GetGlobalClusterVariableExample()
+    public static async Task GetGlobalClusterVariableExample(ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
-        var result = await client.GetGlobalClusterVariableAsync("my-variable");
+        var result = await client.GetGlobalClusterVariableAsync(name);
         Console.WriteLine($"Variable: {result.Name} = {result.Value}");
     }
     // </GetGlobalClusterVariable>
@@ -19,14 +19,14 @@ public static class AdminExamples
     #region CreateGlobalClusterVariable
 
     // <CreateGlobalClusterVariable>
-    public static async Task CreateGlobalClusterVariableExample()
+    public static async Task CreateGlobalClusterVariableExample(ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.CreateGlobalClusterVariableAsync(
             new CreateClusterVariableRequest
             {
-                Name = "my-variable",
+                Name = name,
                 Value = "my-value",
             });
 
@@ -38,12 +38,12 @@ public static class AdminExamples
     #region UpdateGlobalClusterVariable
 
     // <UpdateGlobalClusterVariable>
-    public static async Task UpdateGlobalClusterVariableExample()
+    public static async Task UpdateGlobalClusterVariableExample(ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.UpdateGlobalClusterVariableAsync(
-            "my-variable",
+            name,
             new UpdateClusterVariableRequest
             {
                 Value = "updated-value",
@@ -57,11 +57,11 @@ public static class AdminExamples
     #region DeleteGlobalClusterVariable
 
     // <DeleteGlobalClusterVariable>
-    public static async Task DeleteGlobalClusterVariableExample()
+    public static async Task DeleteGlobalClusterVariableExample(ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
-        await client.DeleteGlobalClusterVariableAsync("my-variable");
+        await client.DeleteGlobalClusterVariableAsync(name);
     }
     // </DeleteGlobalClusterVariable>
     #endregion DeleteGlobalClusterVariable
@@ -69,13 +69,13 @@ public static class AdminExamples
     #region GetTenantClusterVariable
 
     // <GetTenantClusterVariable>
-    public static async Task GetTenantClusterVariableExample(TenantId tenantId)
+    public static async Task GetTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.GetTenantClusterVariableAsync(
             tenantId,
-            "my-variable");
+            name);
 
         Console.WriteLine($"Variable: {result.Name} = {result.Value}");
     }
@@ -85,7 +85,7 @@ public static class AdminExamples
     #region CreateTenantClusterVariable
 
     // <CreateTenantClusterVariable>
-    public static async Task CreateTenantClusterVariableExample(TenantId tenantId)
+    public static async Task CreateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
@@ -93,7 +93,7 @@ public static class AdminExamples
             tenantId,
             new CreateClusterVariableRequest
             {
-                Name = "my-variable",
+                Name = name,
                 Value = "tenant-value",
             });
 
@@ -105,13 +105,13 @@ public static class AdminExamples
     #region UpdateTenantClusterVariable
 
     // <UpdateTenantClusterVariable>
-    public static async Task UpdateTenantClusterVariableExample(TenantId tenantId)
+    public static async Task UpdateTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
         var result = await client.UpdateTenantClusterVariableAsync(
             tenantId,
-            "my-variable",
+            name,
             new UpdateClusterVariableRequest
             {
                 Value = "updated-tenant-value",
@@ -125,13 +125,13 @@ public static class AdminExamples
     #region DeleteTenantClusterVariable
 
     // <DeleteTenantClusterVariable>
-    public static async Task DeleteTenantClusterVariableExample(TenantId tenantId)
+    public static async Task DeleteTenantClusterVariableExample(TenantId tenantId, ClusterVariableName name)
     {
         using var client = CamundaClient.Create();
 
         await client.DeleteTenantClusterVariableAsync(
             tenantId,
-            "my-variable");
+            name);
     }
     // </DeleteTenantClusterVariable>
     #endregion DeleteTenantClusterVariable
@@ -338,6 +338,19 @@ public static class AdminExamples
     // </EvaluateExpression>
     #endregion EvaluateExpression
 
+    #region GetFormByKey
+
+    // <GetFormByKey>
+    public static async Task GetFormByKeyExample(FormKey formKey)
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.GetFormByKeyAsync(formKey);
+        Console.WriteLine($"Form: {result.FormId}, version: {result.Version}");
+    }
+    // </GetFormByKey>
+    #endregion GetFormByKey
+
     #region GetResource
 
     // <GetResource>
@@ -363,6 +376,35 @@ public static class AdminExamples
     }
     // </GetResourceContent>
     #endregion GetResourceContent
+
+    #region GetResourceContentBinary
+
+    // <GetResourceContentBinary>
+    public static async Task GetResourceContentBinaryExample(ResourceKey resourceKey)
+    {
+        using var client = CamundaClient.Create();
+
+        byte[] content = await client.GetResourceContentBinaryAsync(resourceKey);
+        Console.WriteLine($"Binary content length: {content.Length} bytes");
+    }
+    // </GetResourceContentBinary>
+    #endregion GetResourceContentBinary
+
+    #region SearchResources
+
+    // <SearchResources>
+    public static async Task SearchResourcesExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchResourcesAsync(new ResourceSearchQuery());
+        foreach (var resource in result.Items!)
+        {
+            Console.WriteLine($"Resource: {resource.ResourceName}");
+        }
+    }
+    // </SearchResources>
+    #endregion SearchResources
 
     #region GetUsageMetrics
 

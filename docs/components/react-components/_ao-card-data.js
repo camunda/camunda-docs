@@ -7,6 +7,7 @@ import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
 import IconTest from "../hub/workspace/modeler/idp/img/icon-prereqs.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
+import IconMCP from "../assets/icon-mcp.png";
 
 // Get started cards on introduction page
 export const getStartedCards = [
@@ -40,25 +41,32 @@ export const fundamentalCards = [
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
   },
+  {
+    link: "../evaluate-agents/evaluate-agents-overview/",
+    title: "Evaluate AI agents",
+    image: IconTest,
+    description:
+      "Evaluate the performance and effectiveness of your AI agents.",
+  },
 ];
 
 // Fundamentals cards on introduction page
 export const fundamentalCards_monitoring = [
   {
     link: "../monitor-ai-agents/",
-    title: "Monitor your AI agents",
+    title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
   },
   {
     link: "../analyze-ai-agents/",
-    title: "Analyze your AI agents",
+    title: "Analyze with Optimize",
     image: IconOptimize,
     description: "Analyze your AI agents with Optimize.",
   },
   {
     link: "../test-ai-agents/",
-    title: "Test your AI agents",
+    title: "Test with CPT",
     image: IconTest,
     description: "Test your AI agents with Camunda Process Test.",
   },
@@ -71,6 +79,13 @@ export const recommendationCards = [
     title: "Add long-term memory",
     image: IconRAG,
     description: "Add long-term memory to your AI agents.",
+  },
+  {
+    link: "../expose-process-as-mcp-tool/",
+    title: "Expose a process as an MCP tool",
+    image: IconMCP,
+    description:
+      "Configure a BPMN process as a callable MCP tool for AI agents.",
   },
   {
     link: "../choose-right-model-agentic/",

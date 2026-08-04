@@ -4,9 +4,14 @@ paths:
       tags:
         - Tenant
       operationId: createTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -38,18 +43,28 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "409":
           description: Tenant with this id already exists.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /tenants/search:
     post:
       tags:
         - Tenant
       operationId: searchTenants
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search tenants
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -83,14 +98,20 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}:
     get:
       tags:
         - Tenant
       operationId: getTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -125,13 +146,19 @@ paths:
                 $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.8"
     put:
       tags:
         - Tenant
       operationId: updateTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -172,13 +199,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Tenant
       operationId: deleteTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -209,14 +242,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/users/{username}:
     put:
       tags:
         - Tenant
       operationId: assignUserToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a user to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -253,13 +292,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Tenant
       operationId: unassignUserFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a user from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -297,14 +342,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/users/search:
     post:
       tags:
         - Tenant
       operationId: searchUsersForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search users for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -331,14 +382,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantUserSearchResult"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/clients/{clientId}:
     put:
       tags:
         - Tenant
       operationId: assignClientToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a client to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -358,7 +415,7 @@ paths:
           required: true
           description: The unique identifier of the application.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/ClientId"
       responses:
         "204":
           description: The client was successfully assigned to the tenant.
@@ -376,13 +433,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Tenant
       operationId: unassignClientFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a client from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -402,7 +465,7 @@ paths:
           required: true
           description: The unique identifier of the application.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/ClientId"
       responses:
         "204":
           description: The client was successfully unassigned from the tenant.
@@ -420,14 +483,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/clients/search:
     post:
       tags:
         - Tenant
       operationId: searchClientsForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search clients for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -454,14 +523,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantClientSearchResult"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/groups/{groupId}:
     put:
       tags:
         - Tenant
       operationId: assignGroupToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a group to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -481,7 +556,7 @@ paths:
           required: true
           description: The unique identifier of the group.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       responses:
         "204":
           description: The group was successfully assigned to the tenant.
@@ -499,13 +574,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Tenant
       operationId: unassignGroupFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a group from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -525,7 +606,7 @@ paths:
           required: true
           description: The unique identifier of the group.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/GroupId"
       responses:
         "204":
           description: The group was successfully unassigned from the tenant.
@@ -543,14 +624,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/groups/search:
     post:
       tags:
         - Tenant
       operationId: searchGroupIdsForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search groups for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -577,14 +664,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantGroupSearchResult"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/roles/search:
     post:
       tags:
         - Tenant
       operationId: searchRolesForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search roles for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -611,14 +704,20 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantRoleSearchResult"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/roles/{roleId}:
     put:
       tags:
         - Tenant
       operationId: assignRoleToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -638,7 +737,7 @@ paths:
           required: true
           description: The unique identifier of the role.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       responses:
         "204":
           description: The role was successfully assigned to the tenant.
@@ -656,13 +755,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Tenant
       operationId: unassignRoleFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -683,7 +788,7 @@ paths:
           required: true
           description: The unique identifier of the role.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/RoleId"
       responses:
         "204":
           description: The role was successfully unassigned from the tenant.
@@ -701,14 +806,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/mapping-rules/{mappingRuleId}:
     put:
       tags:
         - Tenant
       operationId: assignMappingRuleToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a mapping rule to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -727,7 +838,7 @@ paths:
           required: true
           description: The unique identifier of the mapping rule.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/MappingRuleId"
       responses:
         "204":
           description: The mapping rule was successfully assigned to the tenant.
@@ -745,13 +856,19 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
     delete:
       tags:
         - Tenant
       operationId: unassignMappingRuleFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a mapping rule from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -770,7 +887,7 @@ paths:
           required: true
           description: The unique identifier of the mapping rule.
           schema:
-            type: string
+            $ref: "identifiers.yaml#/components/schemas/MappingRuleId"
       responses:
         "204":
           description: The mapping rule was successfully unassigned from the tenant.
@@ -788,14 +905,20 @@ paths:
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
         "503":
           $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.8"
   /tenants/{tenantId}/mapping-rules/search:
     post:
       tags:
         - Tenant
       operationId: searchMappingRulesForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search mapping rules for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -822,17 +945,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TenantMappingRuleSearchResult"
+      x-added-in-version: "8.8"
 components:
   schemas:
     TenantCreateRequest:
       type: object
       properties:
         tenantId:
-          type: string
-          description: The unique ID for the tenant. Must be 255 characters or less. Can contain letters, numbers, [`_`, `-`, `+`, `.`, `@`].
-          minLength: 1
-          maxLength: 256
-          pattern: ^[A-Za-z0-9_@.+-]+$
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/TenantId"
+          description: |
+            The unique ID for the tenant. Must be 31 characters or less and match
+            `^[\w.-]{1,31} (word characters, `.`, `-`). The literal
+            `<default>` is also accepted as the default-tenant alias.
         name:
           type: string
           description: The name of the tenant.
@@ -846,7 +971,9 @@ components:
       type: object
       properties:
         tenantId:
-          $ref: "identifiers.yaml#/components/schemas/TenantId"
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/TenantId"
+          description: The unique identifier of the created tenant.
         name:
           type: string
           description: The name of the tenant.
@@ -875,7 +1002,9 @@ components:
       type: object
       properties:
         tenantId:
-          $ref: "identifiers.yaml#/components/schemas/TenantId"
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/TenantId"
+          description: The unique identifier of the updated tenant.
         name:
           type: string
           description: The name of the tenant.
@@ -896,7 +1025,9 @@ components:
           description: The tenant name.
           example: Customer Service department
         tenantId:
-          $ref: "identifiers.yaml#/components/schemas/TenantId"
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/TenantId"
+          description: The unique identifier of the tenant.
         description:
           type: string
           description: The tenant description.
@@ -940,7 +1071,9 @@ components:
       type: object
       properties:
         tenantId:
-          $ref: "identifiers.yaml#/components/schemas/TenantId"
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/TenantId"
+          description: The unique identifier of the tenant.
         name:
           type: string
           description: The name of the tenant.
@@ -1003,7 +1136,8 @@ components:
       properties:
         clientId:
           description: The ID of the client.
-          type: string
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/ClientId"
       required:
         - clientId
     TenantClientSearchResult:
@@ -1044,8 +1178,9 @@ components:
       type: object
       properties:
         groupId:
-          description: The groupId of the group.
-          type: string
+          description: The group ID.
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/GroupId"
       required:
         - groupId
     TenantGroupSearchResult:

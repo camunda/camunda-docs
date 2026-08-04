@@ -2,17 +2,25 @@ paths:
   /expression/evaluation:
     post:
       operationId: evaluateExpression
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       tags:
         - Expression
       summary: Evaluate an expression
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRVhQUkVTU0lPTiIsInBlcm1pc3Npb25UeXBlIjoiRVZBTFVBVEUifSx7ImR5bmFtaWMiOnRydWUsIm5vdGUiOiJXaGVuIHRoZSBleHByZXNzaW9uIGlzIGV2YWx1YXRlZCBpbiB0aGUgc2NvcGUgb2YgYSBwcm9jZXNzIGluc3RhbmNlIChzY29wZUtleSByZXNvbHZlcyB0byBhbiBpbnN0YW5jZSksIGFkZGl0aW9uYWxseSByZXF1aXJlcyBSRUFEX1BST0NFU1NfSU5TVEFOQ0Ugb24gUFJPQ0VTU19ERUZJTklUSU9OIGZvciB0aGF0IHByb2Nlc3MuIFNraXBwZWQgd2hlbiB1bnNjb3BlZC4ifV19]]
+
         [[ADDED_IN_VERSION:8.9]]
 
         [[CONSISTENCY:STRONG]]
 
-        Evaluates a FEEL expression and returns the result. Supports references to tenant scoped cluster variables when a tenant ID is provided.
+        Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+        cluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the
+        variables of a specific process instance or element instance visible while evaluating the
+        expression.
       requestBody:
         required: true
         content:
@@ -34,6 +42,7 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
+      x-added-in-version: "8.9"
 components:
   schemas:
     ExpressionEvaluationRequest:
@@ -49,6 +58,15 @@ components:
           type: string
           description: Required when the expression references tenant-scoped cluster variables
           example: tenant_123
+        scopeKey:
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ScopeKey"
+          description: |
+            Key of the process instance or element instance whose variables should be made visible
+            to the expression. Use a process instance key to evaluate against the process instance
+            scope, or an element instance key to evaluate against that element instance scope. If
+            omitted, the expression is evaluated unscoped, using only cluster variables
+            and request-body variables.
         variables:
           type: object
           description: Optional variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.
@@ -57,6 +75,9 @@ components:
             "y": 20
           additionalProperties: true
           nullable: true
+      x-properties-added-in-version:
+        - propertyName: scopeKey
+          addedInVersion: "8.10"
     ExpressionEvaluationResult:
       type: object
       required:

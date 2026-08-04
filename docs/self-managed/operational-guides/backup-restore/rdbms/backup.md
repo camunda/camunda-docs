@@ -22,7 +22,17 @@ description: "Learn how to back up your Camunda 8 Self-Managed components when a
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
+Back up your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, Tasklist, and Admin) when using a relational database management system (RDBMS) as secondary storage.
+
+:::tip
+For cross-region recovery using these RDBMS backups, see [Cold Recovery](../../../concepts/multi-region/cold-recovery.md).
+:::
+
+:::note
+This procedure is part of the **first phase of Decoupled Continuous Backups** and covers **Zeebe**, **Operate**, **Tasklist**, and **Admin**. It does **not** cover **Management Identity** or **Optimize**.
+
+Optimize always stores its data in Elasticsearch or OpenSearch, independently of the Orchestration Cluster's secondary storage. If you deploy Optimize alongside an RDBMS-backed Orchestration Cluster, back up Optimize independently using the [standalone Optimize backup procedure](../optimize-backup-and-restore.md). You do not need to switch the Orchestration Cluster backup to the Elasticsearch / OpenSearch path.
+:::
 
 ## Prerequisites
 
@@ -40,7 +50,7 @@ The following prerequisites are required before you can create a backup.
 When Camunda uses an RDBMS as **secondary storage**, backups involve **two independent systems**:
 
 - **Zeebe (primary storage)**: Backs up its internal state (log stream, snapshots) to an external blob store (S3, GCS, Azure, or filesystem). These are called **primary storage backups**.
-- **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, etc.). This is the **secondary storage backup**.
+- **The external RDBMS**: Backed up using your database vendor's native tools (pg_dump, mysqldump, RMAN, and similar). This is the **secondary storage backup**.
 
 During restore, Zeebe uses the exporter position stored in the RDBMS to find the correct primary storage backup, or backups, that match the RDBMS state. This ensures consistency between the two systems without requiring synchronized backup timing.
 
@@ -86,8 +96,8 @@ camunda:
   <TabItem value="env" label="Environment variables">
 
 ```bash
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_STORE=S3
-export CAMUNDA_DATA_PRIMARY_STORAGE_BACKUP_CONTINUOUS=true
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_STORE=S3
+export CAMUNDA_DATA_PRIMARYSTORAGE_BACKUP_CONTINUOUS=true
 ```
 
   </TabItem>
@@ -183,6 +193,12 @@ If the response is empty or missing partitions, check your backup store configur
 Back up the RDBMS as described in the [prerequisites](#prerequisites). While exact synchronization with Zeebe backups is not required, as the restore process handles alignment automatically, keeping backup intervals similar minimizes the time Zeebe needs to re-export events after a restore.
 
 During restore, Zeebe reads the **exporter position** from the `EXPORTER_POSITION` table — which records the last Zeebe log stream position exported to the RDBMS — to determine which primary storage backup to restore from.
+
+## (Optional) Back up Optimize data {#back-up-optimize-data}
+
+If you are using Optimize alongside an RDBMS-backed Orchestration Cluster, Optimize must be backed up independently. Optimize always stores its data in Elasticsearch or OpenSearch, regardless of what the Orchestration Cluster uses as secondary storage.
+
+See [back up and restore Optimize independently](../optimize-backup-and-restore.md) for the complete procedure.
 
 ## (Optional) Back up Web Modeler data {#back-up-web-modeler-data}
 

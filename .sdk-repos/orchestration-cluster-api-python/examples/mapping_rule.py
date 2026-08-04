@@ -5,6 +5,7 @@ from __future__ import annotations
 from camunda_orchestration_sdk import (
     CamundaClient,
     MappingRuleCreateRequest,
+    MappingRuleId,
     MappingRuleSearchQueryRequest,
     MappingRuleUpdateRequest,
     Unset,
@@ -12,12 +13,12 @@ from camunda_orchestration_sdk import (
 
 
 # region CreateMappingRule
-def create_mapping_rule_example() -> None:
+def create_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     result = client.create_mapping_rule(
         data=MappingRuleCreateRequest(
-            mapping_rule_id="engineering-group-mapping",
+            mapping_rule_id=mapping_rule_id,
             claim_name="groups",
             claim_value="engineering",
             name="Engineering Group Mapping",
@@ -29,10 +30,10 @@ def create_mapping_rule_example() -> None:
 
 
 # region GetMappingRule
-def get_mapping_rule_example() -> None:
+def get_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
-    result = client.get_mapping_rule(mapping_rule_id="rule-123")
+    result = client.get_mapping_rule(mapping_rule_id=mapping_rule_id)
 
     print(f"Mapping rule: {result.name}")
 # endregion GetMappingRule
@@ -53,11 +54,11 @@ def search_mapping_rule_example() -> None:
 
 
 # region UpdateMappingRule
-def update_mapping_rule_example() -> None:
+def update_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
     client.update_mapping_rule(
-        mapping_rule_id="rule-123",
+        mapping_rule_id=mapping_rule_id,
         data=MappingRuleUpdateRequest(
             claim_name="groups",
             claim_value="senior-engineering",
@@ -68,8 +69,8 @@ def update_mapping_rule_example() -> None:
 
 
 # region DeleteMappingRule
-def delete_mapping_rule_example() -> None:
+def delete_mapping_rule_example(mapping_rule_id: MappingRuleId) -> None:
     client = CamundaClient()
 
-    client.delete_mapping_rule(mapping_rule_id="rule-123")
+    client.delete_mapping_rule(mapping_rule_id=mapping_rule_id)
 # endregion DeleteMappingRule
