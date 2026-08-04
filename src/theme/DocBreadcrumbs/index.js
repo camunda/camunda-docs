@@ -239,7 +239,7 @@ function CopyDropdown({ versionedUrl, rollingUrl, rollingLabel }) {
 
 function MetadataRow() {
   const { metadata } = useDoc();
-  const { version: versionName, label, isLast } = useDocsVersion();
+  const { name: versionName, label, isLast } = useDocsVersion();
   const {
     siteConfig: { customFields = {} },
   } = useDocusaurusContext();
