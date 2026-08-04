@@ -2174,6 +2174,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/in-process-restore",
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
