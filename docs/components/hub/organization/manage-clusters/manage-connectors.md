@@ -16,8 +16,8 @@ Monitor and manage connectors running on your cluster.
 
 Cluster connector management allows you to monitor and manage running connectors on your cluster. This includes inbound connectors, such as [webhooks, message queue subscriptions, and polling subscriptions](/reference/glossary.md#inbound-connector), and outbound connectors.
 
-- Use this feature to check your inbound connectors are healthy and running, and troubleshoot unhealthy connectors.
-- For example, you can see if a connector instance is unhealthy, and use the [activity log](#activity-log) to troubleshoot and resolve issues.
+- Use this feature to review connector status and troubleshoot issues.
+- For example, you can inspect connector details and use the [activity log](#activity-log) to investigate failures.
 
 ## Connector management
 
@@ -33,40 +33,46 @@ The **Connector Management** page provides an overview of the connectors running
 [Webhook connector](/components/connectors/protocol/http-webhook.md) names also include the names of any connector based on the webhook. For example, "_Webhook (aws:eventbridge, GitHubWebhook)_".
 :::
 
-Select a connector instance to view additional details and troubleshoot issues.
-
 ## View inbound connector instances
 
 Select an inbound connector to view its running instances.
 
 <img src={ConnectorDetailsImg} alt="Connector management page" />
 
-- Each inbound connector instance is shown on a separate row.
-- **Connector instance ID**: The ID of the connector instance. Select it to open the instance details.
-- **Elements**: The BPMN element where the connector is active. Use this to locate the connector in your diagram.
-- **Process**: The process ID and version associated with the connector instance.
-- **Activation date**: When the connector instance was activated.
-- **Status**: The current health of the connector instance.
-  - **Healthy**: The connector is running without issues.
-  - **Unhealthy**: The connector requires attention. Open the instance details to review health details and recent activity log entries.
-- **Reset**: If a connector instance is stuck in an unhealthy state, such as a failed activation, select **Reset** to clear the error state and let the connector attempt to reconnect.
+Each inbound connector instance is shown on a separate row.
+
+| Field                 | Description                                                                                                                                                                                                                                    |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Connector instance ID | The ID of the connector instance. Select it to open the instance details.                                                                                                                                                                      |
+| Elements              | The BPMN element where the connector is active. Use this to locate the connector in your diagram.                                                                                                                                              |
+| Process               | The process ID and version associated with the connector instance.                                                                                                                                                                             |
+| Activation date       | When the connector instance was activated.                                                                                                                                                                                                     |
+| Status                | The current health of the connector instance. `Healthy` means the connector is running without issues. `Unhealthy` means the connector requires attention. Open the instance details to review health details and recent activity log entries. |
+| Reset                 | If a connector instance fails to activate or is stuck in an unhealthy state, select **Reset** after you resolve the underlying issue to retry activation.                                                                                      |
 
 ## View outbound connectors
 
 Select an outbound connector to view its details.
 
-- Each outbound connector is shown on a separate row.
-- **Name**: The name of the connector.
-- **Type**: The connector type.
-- **Input variables**: The input variables used by the connector.
-- **Timeout**: The configured timeout for the connector.
-- **Enabled**: Whether the connector is enabled.
-- **Runtime ID**: The runtime instance reporting the connector.
-- When available, outbound connector details also include gateway connectivity, broker connectivity, and stream IDs.
+Each outbound connector is shown on a separate row.
+
+| Field           | Description                                                                         |
+| --------------- | ----------------------------------------------------------------------------------- |
+| Name            | The name of the connector.                                                          |
+| Type            | The connector type.                                                                 |
+| Input variables | The input variables used by the connector.                                          |
+| Timeout         | The configured timeout for the connector.                                           |
+| Enabled         | Whether the connector is enabled.                                                   |
+| Runtime ID      | The runtime instance reporting the connector.                                       |
+| Connectivity    | When available, includes gateway connectivity, broker connectivity, and stream IDs. |
+
+## View connector details
+
+Select a connector instance to view additional details and troubleshoot issues.
 
 ### Activity log
 
-Shows recent activities recorded for the connector. You can use these logs to troubleshoot unhealthy connector instances.
+Shows recent activities recorded for the connector. Use these logs to troubleshoot connector issues.
 
 Depending on the connector type, the activity log can include health changes, request details, and runtime events. Sensitive values are redacted where needed.
 
@@ -94,9 +100,10 @@ For example:
 }
 ```
 
-### Process info
+### Inbound process info
 
-Shows more detailed information of the BPMN process instance and its associated connector as a JSON object. You can view additional metadata about the process, the connector template, and the connector's configuration properties.
+For inbound connectors, shows detailed information about the BPMN process instance and its associated connector as a JSON object.
+Use this information to review process metadata, the connector template, and connector configuration properties.
 
 For example:
 
