@@ -5,7 +5,7 @@ sidebar_label: "Authorization model"
 description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-<!-- TODO: Update this page once camunda/camunda#55259 finalizes permission names and the per-tenant authorization config. @christinaausley -->
+<!-- TODO: Confirm with @deepthidevaki whether any new permissions were introduced for physical-tenant-scoped API calls (camunda/camunda#55259). Sebastian isn't aware of any as of 2026-08, but flagged it as Deepthi's area to confirm. @christinaausley -->
 
 This page describes the authorization model for Physical Tenants in Camunda 8.10 Self-Managed deployments. Authorization is divided into two scopes: **cluster-wide operations**, which affect the entire orchestration cluster, and **tenant-local operations**, which are scoped to a single Physical Tenant. In 8.10, only tenant-local operations are available; cluster-wide operations are a planned future capability.
 

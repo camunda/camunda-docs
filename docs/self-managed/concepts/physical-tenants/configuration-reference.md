@@ -102,9 +102,9 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints.
+At startup, configuration validation enforces tenant-level constraints. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
-<!-- TODO: Confirm the exact startup error message format (log level, error code, message text) for each validation failure case listed below. Specifically, confirm error messages for: missing `providers.assigned`, conflicting RDBMS URL+prefix, and conflicting document store location. Source: camunda/camunda#55259. @christinaausley -->
+<!-- TODO: Confirm the exact startup error message format (log level, error code, message text) for conflicting RDBMS URL+prefix and conflicting document store location. Check the sibling `*Validation` classes alongside io.camunda.configuration.physicaltenants.PhysicalTenantAssignedProvidersValidation in camunda/camunda. @christinaausley -->
 
 Known constraints and behavior for 8.10:
 

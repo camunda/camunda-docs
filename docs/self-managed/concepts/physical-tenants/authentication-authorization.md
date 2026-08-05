@@ -5,8 +5,6 @@ sidebar_label: "Authentication and authorization"
 description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-<!-- TODO: Update this page once camunda/camunda#55259 finalizes typed config and property names for the per-tenant identity overlay. @christinaausley -->
-
 This page explains how authentication and authorization work for Physical Tenants in Camunda 8.10 Self-Managed deployments.
 
 For the configuration properties used to assign identity providers to tenants, see [configuration reference](./configuration-reference.md).
@@ -88,7 +86,36 @@ Role definitions within a tenant cover:
 
 Because each tenant manages its own authorization, the same user can have different permissions in different Physical Tenants.
 
-<!-- TODO (camunda/camunda#55259): Add the YAML shape for per-tenant role definitions and token claim mappings once the typed config is confirmed. @christinaausley -->
+### Per-tenant initialization configuration
+
+Per-tenant roles, mapping rules, and authorizations use the same configuration shape as the cluster-wide [`camunda.security.initialization`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityinitializationauthorizations) properties, declared under `camunda.physical-tenants.<tenantId>.security.initialization` instead:
+
+```yaml
+camunda:
+  physical-tenants:
+    tenanta:
+      security:
+        initialization:
+          roles:
+            - roleId: tenant-a-admin
+              name: Tenant A Admin
+              mappingRules:
+                - team-a-admins-mapping
+          mappingrules:
+            - mapping-rule-id: team-a-admins-mapping
+              claim-name: groups
+              claim-value: team-a-admins
+          authorizations:
+            - ownerType: ROLE
+              ownerId: tenant-a-admin
+              resourceType: PROCESS_DEFINITION
+              resourceId: "*"
+              permissions:
+                - READ
+                - UPDATE
+```
+
+Every explicitly configured Physical Tenant must declare its own `security.initialization` block — it is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. The **default** Physical Tenant is exempt: it keeps the top-level `camunda.security.initialization`, whether synthesized from the root or declared explicitly.
 
 ## Token claim mappings
 
@@ -98,7 +125,13 @@ For example, a token claim `groups: ["team-a-admins"]` might map to an admin rol
 
 ## IdP provider assignment
 
-Every explicitly configured Physical Tenant must declare which identity providers it accepts using `providers.assigned`. If no providers are assigned to a configured tenant, the cluster fails to start with a configuration validation error.
+Every explicitly configured Physical Tenant must declare which identity providers it accepts using `providers.assigned`. If no providers are assigned to a configured tenant, the cluster fails to start with a configuration validation error:
+
+```text
+Invalid physical-tenant provider selection: non-default physical tenant '<tenantId>' must declare a
+non-empty 'camunda.physical-tenants.<tenantId>.security.authentication.providers.assigned' selecting
+which cluster OIDC providers apply to it
+```
 
 The one exception is the **implicit default tenant**: when no `camunda.physical-tenants.*` configuration is present, the default tenant falls back to the full cluster provider set. Once the default tenant is explicitly configured under `camunda.physical-tenants.default`, it must also declare its assigned providers.
 
