@@ -24,6 +24,7 @@ jobs:
     container: node:24
 
     steps:
+      # SHA ref is main
       - uses: camunda/infra-global-github-actions/start-build-monitor@02b3f0e49b00b98fffc76af690ebc83c28f24dae
       - uses: actions/checkout@v7
       - name: Install Dependencies
@@ -62,6 +63,7 @@ jobs:
     env:
       temporary_link_path: .github/workflows/validate-links
     steps:
+      # SHA ref is main
       - uses: camunda/infra-global-github-actions/start-build-monitor@02b3f0e49b00b98fffc76af690ebc83c28f24dae
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
