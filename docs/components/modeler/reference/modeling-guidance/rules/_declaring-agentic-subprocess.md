@@ -12,7 +12,11 @@ An element template writes its properties into the diagram only when you apply i
 
 ### Update an existing process
 
-While an element template is applied, the properties panel shows only the sections the template defines, and the **Extension properties** section isn't available. Instead of adding the property by hand, unlink and reapply the template:
+While an element template is applied, the properties panel shows only the sections the template defines, and the **Extension properties** section isn't available.
+
+If a newer version of the template is available, [update](../../../../hub/workspace/modeler/element-templates/using-templates.md#updating-templates) the ad-hoc sub-process to that version. Updating writes `io.camunda.agenticai.toolContainer` into the diagram.
+
+If no newer version is available, unlink and reapply the template instead:
 
 1. Select the ad-hoc sub-process and [unlink](../../../../hub/workspace/modeler/element-templates/using-templates.md#removing-templates) the element template. Unlinking keeps the properties you already configured.
 1. Apply the same element template again. Reapplying writes `io.camunda.agenticai.toolContainer` into the diagram.
