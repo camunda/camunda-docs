@@ -55,15 +55,13 @@ The diagram shows one orchestration cluster boundary with shared control-plane c
 
 ## API routing
 
-<!-- TODO: Re-confirm the `/cluster/v2/...` prefix used on this page -->
-
 Use tenant-scoped routes for tenant-specific requests:
 
 - REST: `/physical-tenants/{physicalTenantId}/v2/...`
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide endpoints are not available yet. When added, they will be exposed under a dedicated `/cluster/v2/...` path prefix. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
+Cluster-wide endpoints are exposed under a dedicated `/cluster/v2/...` path prefix, protected by the cluster-admin role available starting in 8.10 alpha4. Full wiring of cluster-wide operations behind this prefix is still in progress. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
 
 ## Configure and provision Physical Tenants
 

@@ -194,12 +194,12 @@ For example:
 ## Cluster-admin role
 
 :::note
-Cluster-admin role support and cluster-wide operations are not available in 8.10. They are planned for a future release.
+Cluster-admin role support is available starting in 8.10 alpha4. The cluster-wide operations it protects (backup, restore, topology management) are still being wired behind it and are not all complete yet.
 :::
 
-Broker startup does not fail if the cluster-admin role is not configured. However, configuring the cluster-admin role is strongly recommended so that cluster-wide operations (backup, restore, topology management) can be restricted to authorized operators once cluster-wide endpoints become available.
+Broker startup does not fail if the cluster-admin role is not configured. However, configuring the cluster-admin role is strongly recommended so that cluster-wide operations (backup, restore, topology management) can be restricted to authorized operators as cluster-wide endpoints become available.
 
-In a future release, the cluster-admin role will be resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service will be required. Multiple mechanisms will be supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for basic auth.
+The cluster-admin role is resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service is required. Multiple mechanisms are supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for basic auth.
 
 ## gRPC authentication
 
