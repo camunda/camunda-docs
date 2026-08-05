@@ -73,4 +73,4 @@ Enterprise customers on AWS can use their own AWS KMS key.
 - Camunda never stores the key; access occurs via standard AWS KMS integrations
 - Zero downtime rotation supported
 
-See [BYOK setup guide](/components/saas/byok/index.md) for configuration.
+See [BYOK setup guide](/components/concepts/byok/index.md) for configuration.

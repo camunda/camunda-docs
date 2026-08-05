@@ -71,7 +71,7 @@ If an update is available, a **Review Update** button is shown.
 
 ### Automated cluster updates
 
-You can decide if you want to have [automated updates](/components/saas/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
+You can decide if you want to have [automated updates](/reference/auto-updates.md) to new versions of Camunda 8 activated. You can also toggle this feature anytime later in the **Settings** tab of your cluster.
 
 ## Resize a cluster
 

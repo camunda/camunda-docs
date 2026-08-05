@@ -8,7 +8,7 @@ keywords:
 
 Learn how Camunda 8 SaaS responds when your external Amazon KMS encryption key (BYOK) becomes unavailable during cluster startup or runtime.
 
-This page applies only to **external customer-managed keys** (AWS KMS). For encryption fundamentals, see the [encryption overview](/components/saas/byok/index.md).
+This page applies only to **external customer-managed keys** (AWS KMS). For encryption fundamentals, see the [encryption overview](/components/concepts/byok/index.md).
 
 :::warning
 If your external encryption key is disabled, deleted, or its permissions are revoked, your cluster becomes inaccessible and may enter a frozen state. Camunda cannot recover encrypted data if the key is permanently deleted.
@@ -129,7 +129,7 @@ Activate:
 
 ## Related documentation
 
-- [Encryption overview](/components/saas/byok/index.md)
-- [External encryption setup guide](/components/saas/byok/aws-kms-setup.md)
-- [FAQ & troubleshooting](/components/saas/byok/faq-and-troubleshooting.md)
-- [Key rotation and audit logging](/components/saas/byok/key-rotation-audit-logging.md)
+- [Encryption overview](/components/concepts/byok/index.md)
+- [External encryption setup guide](/components/concepts/byok/aws-kms-setup.md)
+- [FAQ & troubleshooting](/components/concepts/byok/faq-and-troubleshooting.md)
+- [Key rotation and audit logging](/components/concepts/byok/key-rotation-audit-logging.md)

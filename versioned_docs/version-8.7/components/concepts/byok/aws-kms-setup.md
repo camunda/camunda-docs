@@ -17,7 +17,7 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS cluster using 
 
 :::warning Important
 
-- Deleting or disabling your AWS KMS key will make your cluster and data inaccessible. To understand how Camunda behaves if a key is disabled, deleted, or its policy is changed, see [key state behavior](/components/saas/byok/key-state-behavior.md).
+- Deleting or disabling your AWS KMS key will make your cluster and data inaccessible. To understand how Camunda behaves if a key is disabled, deleted, or its policy is changed, see [key state behavior](/components/concepts/byok/key-state-behavior.md).
 - Key management is fully customer-side in AWS KMS. Camunda cannot rotate keys.
   :::
 
@@ -60,7 +60,7 @@ Use this script to create a single AWS KMS key in the same Region as the cluster
 
 **Instructions:**
 
-1. Download [create-byok-kms-key-single-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.7/components/saas/byok/downloads/create-byok-kms-key-single-region.sh).
+1. Download [create-byok-kms-key-single-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.7/components/concepts/byok/downloads/create-byok-kms-key-single-region.sh).
 2. Modify the following values at the top of the script:
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
@@ -82,7 +82,7 @@ Use this script to create a multi-Region primary key in the cluster’s Region a
 
 **Instructions:**
 
-1. Download [create-byok-kms-key-multi-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.7/components/saas/byok/downloads/create-byok-kms-key-multi-region.sh).
+1. Download [create-byok-kms-key-multi-region.sh](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.7/components/concepts/byok/downloads/create-byok-kms-key-multi-region.sh).
 2. Modify the same variables as above.
 3. Make the script executable and run it.
 4. Copy the two outputted key ARNs and provide them to Camunda.
@@ -110,7 +110,7 @@ For dual-region setups, you can also run the single-region script twice—once i
 5. **Define key usage permissions**
    - Skip this step; permissions are configured in the next step.
 6. **Edit key policy**
-   - Switch to policy view and replace the existing policy with the [provided key policy](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.7/components/saas/byok/downloads/aws-kms-key-policy.json).
+   - Switch to policy view and replace the existing policy with the [provided key policy](https://raw.githubusercontent.com/camunda/camunda-docs/refs/heads/main/versioned_docs/version-8.7/components/concepts/byok/downloads/aws-kms-key-policy.json).
    - Replace `<YOUR_AWS_ACCOUNT_ID>` and `<TENANT_ROLE_ARN>` with your values.
 7. **Finish and copy the ARN**
    - Click **Finish** and copy the key ARN to use in the Camunda Console.
@@ -231,8 +231,8 @@ You are responsible for monitoring key usage and access logs within your AWS acc
 ## Additional considerations
 
 - **Key rotation**: Enable [automatic rotation](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) or rotate manually in AWS KMS.
-- **Cost**: Using AWS KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](/components/saas/byok/index.md#cost-implications).
-- **Failure scenarios**: Deleting keys or revoking permissions makes cluster data inaccessible. See [troubleshooting steps](/components/saas/byok/faq-and-troubleshooting.md#troubleshooting-external-encryption-keys).
+- **Cost**: Using AWS KMS keys incurs storage and management charges in your Amazon account. See the [Camunda pricing model](/components/concepts/byok/index.md#cost-implications).
+- **Failure scenarios**: Deleting keys or revoking permissions makes cluster data inaccessible. See [troubleshooting steps](/components/concepts/byok/faq-and-troubleshooting.md#troubleshooting-external-encryption-keys).
 
 :::note Reference
 For more information, see the [AWS KMS documentation](https://docs.aws.amazon.com/kms/latest/developerguide/overview.html).
