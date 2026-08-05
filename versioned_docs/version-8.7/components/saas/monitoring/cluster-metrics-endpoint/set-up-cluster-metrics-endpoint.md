@@ -111,5 +111,5 @@ To use the endpoint again, you must reactivate it and create new credentials. Di
 
 ## Next steps
 
-- To configure Prometheus to scrape metrics from the Cluster Metrics endpoint, see [Configure monitoring systems to scrape metrics](/components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md).
-- If your monitoring system does not support Prometheus scraping, see [Integrate non-Prometheus monitoring systems](/components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md#integrate-non-prometheus-monitoring-systems).
+- To configure Prometheus to scrape metrics from the Cluster Metrics endpoint, see [Configure monitoring systems to scrape metrics](/components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md).
+- If your monitoring system does not support Prometheus scraping, see [Integrate non-Prometheus monitoring systems](/components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics.md#integrate-non-prometheus-monitoring-systems).

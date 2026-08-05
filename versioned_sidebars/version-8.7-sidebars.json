@@ -137,24 +137,7 @@
         "components/concepts/workflow-patterns",
         "components/concepts/process-instance-modification",
         "components/concepts/process-instance-migration",
-        "components/concepts/data-retention",
-        {
-          "type": "category",
-          "label": "Encryption",
-          "link": {
-            "type": "doc",
-            "id": "components/concepts/byok/overview"
-          },
-          "items": [
-            "components/concepts/encryption-at-rest",
-            "components/concepts/byok/aws-external-encryption-setup",
-            "components/concepts/byok/key-rotation-audit-logging",
-            "components/concepts/byok/key-state-behavior",
-            "components/concepts/byok/faq-and-troubleshooting"
-          ]
-        },
         "components/concepts/outbound-connectors-job-workers",
-        "components/concepts/backups",
         "components/concepts/resource-deletion",
         "components/concepts/resource-authorizations",
         {
@@ -195,28 +178,6 @@
             "components/console/manage-clusters/manage-api-clients",
             "components/console/manage-clusters/manage-secrets",
             "components/console/manage-clusters/manage-alerts",
-            {
-              "type": "category",
-              "label": "Monitoring",
-              "link": {
-                "type": "doc",
-                "id": "components/console/manage-clusters/monitoring/overview"
-              },
-              "items": [
-                {
-                  "type": "category",
-                  "label": "Cluster Metrics endpoint",
-                  "link": {
-                    "type": "doc",
-                    "id": "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/overview"
-                  },
-                  "items": [
-                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
-                    "components/console/manage-clusters/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics"
-                  ]
-                }
-              ]
-            },
             "components/console/manage-clusters/manage-ip-allowlists",
             "components/console/manage-clusters/create-backups",
             "components/console/manage-clusters/settings",
@@ -235,6 +196,62 @@
             "components/console/console-troubleshooting/common-pitfalls"
           ]
         }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Camunda 8 SaaS",
+      "link": {
+        "type": "doc",
+        "id": "components/saas/saas"
+      },
+      "items": [
+        "components/concepts/clusters",
+        "components/saas/regions",
+        "components/saas/data-locations",
+        {
+          "type": "category",
+          "label": "Monitoring",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/monitoring/overview"
+          },
+          "items": [
+            {
+              "type": "category",
+              "label": "Cluster Metrics endpoint",
+              "link": {
+                "type": "doc",
+                "id": "components/saas/monitoring/cluster-metrics-endpoint/overview"
+              },
+              "items": [
+                "components/saas/monitoring/cluster-metrics-endpoint/set-up-cluster-metrics-endpoint",
+                "components/saas/monitoring/cluster-metrics-endpoint/configure-monitoring-systems-to-scrape-metrics"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Encryption",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/byok/overview"
+          },
+          "items": [
+            "components/saas/encryption-at-rest",
+            "components/saas/byok/aws-external-encryption-setup",
+            "components/saas/byok/key-rotation-audit-logging",
+            "components/saas/byok/key-state-behavior",
+            "components/saas/byok/faq-and-troubleshooting"
+          ]
+        },
+        "components/saas/backups",
+        "components/saas/auto-updates",
+        "components/saas/data-retention",
+        "components/saas/camunda-help-center",
+        "components/saas/status",
+        "components/saas/saas-ip-addresses"
       ]
     },
     {
@@ -1812,14 +1829,8 @@
     "reference/supported-environments",
     "reference/contact",
     "reference/dependencies",
-    "reference/camunda-help-center",
-    "reference/auto-updates",
-    "reference/status",
     "reference/licenses",
     "reference/notices",
-    "reference/regions",
-    "reference/data-locations",
-    "reference/saas-ip-addresses",
     {
       "type": "category",
       "label": "Data collection",

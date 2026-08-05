@@ -14,7 +14,7 @@ Before configuring metric scraping, ensure that:
 - You have the metrics endpoint URL and authentication credentials.
 - Your monitoring system can reach the endpoint from an allowlisted IP address.
 
-For information about the Cluster Metrics endpoint monitoring model and limitations, see [Cluster Metrics endpoint](/components/console/manage-clusters/monitoring/cluster-metrics-endpoint/index.md).
+For information about the Cluster Metrics endpoint monitoring model and limitations, see [Cluster Metrics endpoint](/components/saas/monitoring/cluster-metrics-endpoint/index.md).
 
 ## Metrics endpoint details
 

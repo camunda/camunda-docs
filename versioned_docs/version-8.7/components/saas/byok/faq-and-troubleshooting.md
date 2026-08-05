@@ -34,7 +34,7 @@ Applies to both orchestration clusters and Web Modeler in Camunda 8 SaaS.
 - Camunda-managed hardware key: Uses Google KMS HSM (FIPS 140-2 Level 3).
 - External key: Customer-supplied AWS KMS key (AWS only currently).
 
-Full comparison: [encryption at rest](/components/concepts/encryption-at-rest.md)
+Full comparison: [encryption at rest](/components/saas/encryption-at-rest.md)
 
 ### When can I choose the encryption type?
 
@@ -56,14 +56,14 @@ Yes. All clusters use provider-managed encryption by default.
 - Revoking access immediately blocks cluster access; a new key or restored access is required.
 - Camunda does not store your key.
 
-Setup instructions: [external encryption setup guide](/components/concepts/byok/aws-kms-setup.md)
+Setup instructions: [external encryption setup guide](/components/saas/byok/aws-kms-setup.md)
 
 ## Other questions
 
 - Performance: Minimal impact; handled by AWS KMS.
 - Per-cluster keys: Supported.
 - Encryption in transit: TLS enforced.
-- Cost: Charges apply in your AWS account. See [cost implications](/components/concepts/byok/index.md#cost-implications).
+- Cost: Charges apply in your AWS account. See [cost implications](/components/saas/byok/index.md#cost-implications).
 
 ## Troubleshooting external encryption keys
 
@@ -75,7 +75,7 @@ Setup instructions: [external encryption setup guide](/components/concepts/byok/
 | Key rotation issues               | Cluster encryption update not supported                       | Create a new key and associate it with a new cluster. Verify encryption settings before use.                                                                                                |
 
 :::note
-For details on how Camunda responds when an external KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/concepts/byok/key-state-behavior.md).
+For details on how Camunda responds when an external KMS key becomes disabled, deleted, or misconfigured, see [key state behavior](/components/saas/byok/key-state-behavior.md).
 :::
 
 :::note Support
