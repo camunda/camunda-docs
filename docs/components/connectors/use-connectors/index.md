@@ -184,17 +184,18 @@ In that case, you could declare **Result Expression** as follows:
 }
 ```
 
-### Function createDocument
+### `createDocument` function
 
-Starting from version 8.10.0, `createDocument` is available in the **Result expression** and **Error expression** fields.
-It converts part of a connector's response into a real [document](/components/document-handling/getting-started.md)
-reference, so you can store only the relevant part of a response as a document instead of the entire response.
+Starting with 8.10.0, you can use `createDocument` in the **Result expression** and **Error expression** fields.
 
-- Parameters:
-  - `value`: string or context (see fields below)
-- Result: context, resolved into a document reference
+The function converts part of a Connector response into a [document reference](/components/document-handling/getting-started.md), so you can store the relevant content without storing the entire response.
 
-If `value` is a string, it's treated as base64-encoded content with no metadata:
+| Item | Type | Description |
+| --- | --- | --- |
+| `value` | String or context | Content and optional metadata used to create the document reference. |
+| Result | Context | The generated document reference. |
+
+If `value` is a string, `createDocument` treats it as base64-encoded content without metadata:
 
 ```feel
 createDocument(response.body.file[1].document.data)
@@ -205,8 +206,8 @@ If `value` is a context, it can contain the following fields:
 | Field                | Required | Description                                                                                                                                                                |
 | -------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `content` or `data`  | Yes      | The base64-encoded document content. Either key name is accepted.                                                                                                          |
-| `name` or `fileName` | No       | The filename. If omitted, a UUID is generated automatically.                                                                                                               |
-| `contentType`        | No       | The MIME type of the content. If omitted, it's inferred from the file extension of `name`/`fileName`; defaults to `application/octet-stream` if no extension is available. |
+| `name` or `fileName` | No       | The filename. If you omit this field, `createDocument` automatically generates a UUID.                                                                                                               |
+| `contentType`        | No       | The MIME type of the content. If you omit this field, `createDocument` infers the type from the file extension in `name` or `fileName`. If neither field contains an extension, the value defaults to `application/octet-stream`. |
 
 ```feel
 createDocument({
@@ -215,16 +216,13 @@ createDocument({
 })
 ```
 
-There is no plural `createDocuments` function. Use FEEL's native iteration to extract multiple documents:
+The Connector runtime does not provide a `createDocuments` function. To extract multiple documents, use a FEEL iteration:
 
 ```feel
 = { documents: for f in response.body.file return createDocument(f.document) }
 ```
 
-:::note
-`createDocument` requires the runtime to have access to a configured document store. See
-[document handling](/components/document-handling/getting-started.md).
-:::
+Before using `createDocument`, configure a document store for the Connector runtime. For configuration details, see [Document handling](/components/document-handling/getting-started.md).
 
 ## Activation
 
