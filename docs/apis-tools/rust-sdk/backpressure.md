@@ -27,4 +27,4 @@ signals (HTTP `429` / `503` / `RESOURCE_EXHAUSTED`):
   in-flight work always drains, even while new load is being shed.
 
 Set `CAMUNDA_SDK_BACKPRESSURE_PROFILE=LEGACY` to observe signals without gating. Inspect the
-live state via [`CamundaClient::backpressure_state`].
+live state via `CamundaClient::backpressure_state`.

@@ -16,7 +16,7 @@ The Rust SDK is a **technical preview**. Its API surface may still evolve and ch
 The ergonomic facade is **flat and complete**: every REST operation has a method directly
 on `CamundaClient` (mirroring the JavaScript, Python, and C# SDKs). Each method builds an
 authenticated request, runs under the adaptive backpressure gate and transient-retry
-policy, and maps failures to a typed [`CamundaError`]. Parameter types are re-exported
+policy, and maps failures to a typed `CamundaError`. Parameter types are re-exported
 under `camunda_orchestration_sdk::apis::<area>_api`, so everything imports from one crate:
 
 ```rust

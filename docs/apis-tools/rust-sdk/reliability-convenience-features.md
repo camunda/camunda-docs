@@ -33,5 +33,5 @@ predicate)` retry `404` reads (the symptom of replication lag) until consistent 
   `search_variables` / `search_variables_as::<T>()`.
 - **Worker lifecycle** — `client.spawn_worker(..)` registers managed workers;
   `running_workers()` lists them and `stop_all_workers().await` drains and stops them all
-  gracefully. Per-worker control via the [`JobWorkerHandle`] returned from
-  [`JobWorker::spawn`].
+  gracefully. Per-worker control via the `JobWorkerHandle` returned from
+  `JobWorker::spawn`.
