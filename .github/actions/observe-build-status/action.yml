@@ -15,10 +15,6 @@ inputs:
   job_name:
     description: "Optional string, the job whose status is being observed; defaults to $GITHUB_JOB when omitted"
     required: false
-  detailed_junit_tests:
-    description: "Optional boolean, if true search for TEST-*.xml files and submit their details to dedicated analytics endpoint"
-    required: false
-    default: "false"
   secret_vault_address:
     description: "Vault server URL"
     required: false
