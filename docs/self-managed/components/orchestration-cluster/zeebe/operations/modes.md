@@ -10,17 +10,10 @@ A mode change is a cluster configuration change, similar to [cluster scaling](cl
 
 ## Cluster modes
 
-| Mode         | Behavior                                                                                                                        |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| `PROCESSING` | The default broker operational mode.                                                                                            |
-| `RECOVERING` | All partitions are deactivated. No processing takes place, and only a restricted set of read-only operations remains available. |
-
-## What happens on a broker in recovery mode
-
-In recovery mode, the broker stops processing and registers only a limited set of services.
-
-- **Partitions are deactivated.** Each local partition is registered as `inactive` and does not join its Raft group. The cluster does not elect a leader or process, replicate, or export records.
-- **Only a partial set of services is registered.** Each broker starts a reduced set of services instead of the full partition installation.
+| Mode         | Behavior                                                                                                                                                                                                        |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PROCESSING` | The default broker operational mode. Each broker installs the full set of partition services.                                                                                                                   |
+| `RECOVERING` | Each local partition is registered as `inactive` and does not join its Raft group, so the cluster does not elect a leader, process, replicate, or export records. Each broker starts a reduced set of services. |
 
 ### Operations available in recovery mode
 
