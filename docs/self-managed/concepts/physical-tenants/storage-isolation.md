@@ -4,6 +4,9 @@ title: Storage isolation for Physical Tenants
 description: Configure separate storage backends per Physical Tenant for RDBMS, Elasticsearch/OpenSearch, and Document Store.
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 Each Physical Tenant can use isolated secondary storage, ensuring complete structural separation of process data. This page covers configuration options per backend type.
 
 :::note Related pages
@@ -59,9 +62,24 @@ tenanta:
 
 ## Document Store storage
 
-Store documents globally with per-tenant subpaths, or use dedicated stores per tenant.
+Store documents globally with per-tenant subpaths, or use dedicated stores per tenant. Camunda validates the resulting layout at startup and refuses to start if two tenants would read and write into the same storage.
 
 ### Configuration models
+
+<Tabs groupId="storage" defaultValue="aws" queryString values={
+[
+{label: 'AWS', value: 'aws' },
+{label: 'GCP', value: 'gcp' },
+{label: 'Azure', value: 'azure' },
+{label: 'In-memory', value: 'in-memory' },
+{label: 'Local', value: 'local' },
+]}>
+
+<TabItem value='aws'>
+
+**What Camunda compares.** Three properties. `bucket-name` and `endpoint` form the namespace, and `bucket-path` becomes the key prefix. Bucket names are compared case-insensitively, endpoints by scheme, host, port, and path only, and bucket paths case-sensitively after being coerced to end in `/`.
+
+Every other AWS property is ignored: `region`, because S3 bucket names are globally unique across regions, and `bucket-ttl`, `force-path-style`, `chunked-encoding-enabled`, and `support-legacy-md5`, because none of them change which objects a store reads and writes.
 
 **Global store with per-tenant subpaths** (recommended):
 
@@ -89,7 +107,7 @@ camunda:
             bucket-path: "tenant-a"
 ```
 
-**Dedicated store per tenant**:
+**Dedicated store per tenant.** Distinct buckets are distinct namespaces, so `bucket-path` is optional here:
 
 ```yaml
 camunda:
@@ -110,7 +128,231 @@ camunda:
             bucket-name: "camunda-documents-tenant-a"
 ```
 
-**Hybrid** (global default + per-tenant overrides):
+**Startup outcomes.**
+
+| Tenant A                    | Tenant B                                          | Outcome                                                                  |
+| --------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------ |
+| `bucket-path: tenant-a`     | `bucket-path: tenant-b`                           | Accepted. Sibling prefixes.                                              |
+| `bucket-path` unset         | `bucket-path: tenant-b`                           | Rejected. The bucket root is a prefix of every key in the bucket.        |
+| `bucket-path: tenant-a`     | `bucket-path: tenant-a/nested`                    | Rejected. One prefix is nested inside the other.                         |
+| `bucket-path: tenant`       | `bucket-path: tenant-b-`                          | Accepted. Both are coerced to end in `/`, so neither encloses the other. |
+| `bucket-path: Tenant-A/`    | `bucket-path: tenant-a/`                          | Accepted. S3 keys are case-sensitive.                                    |
+| `region: us-east-1`         | `region: eu-west-1`, rest identical               | Rejected. Region isn't part of the location.                             |
+| `endpoint: https://minio-a` | `endpoint: https://minio-b`, same bucket and path | Accepted. Different endpoints are different namespaces.                  |
+| `endpoint: https://MINIO/`  | `endpoint: https://minio`, same bucket and path   | Rejected. Host case and trailing slashes are ignored.                    |
+
+</TabItem>
+
+<TabItem value='gcp'>
+
+**What Camunda compares.** `bucket-name` forms the namespace, and `prefix` becomes the key prefix. Bucket names are compared case-insensitively, prefixes case-sensitively.
+
+Unlike AWS and Azure, the GCP prefix is used exactly as written — no trailing separator is appended — so a prefix isn't necessarily a folder. An unset `prefix` resolves to `temp/`.
+
+**Global store with per-tenant subpaths** (recommended):
+
+```yaml
+camunda:
+  document:
+    default-store-id: shared-gcs
+    gcp:
+      shared-gcs:
+        bucket-name: "camunda-documents"
+  physical-tenants:
+    default:
+      document:
+        assigned: [shared-gcs]
+        gcp:
+          shared-gcs:
+            prefix: "default/"
+    tenanta:
+      document:
+        assigned: [shared-gcs]
+        gcp:
+          shared-gcs:
+            # Sibling prefixes. Because no separator is appended, end each prefix in '/'
+            # yourself so one tenant's prefix can't run into another's.
+            prefix: "tenant-a/"
+```
+
+**Dedicated store per tenant.** Distinct buckets are distinct namespaces, so `prefix` is optional here:
+
+```yaml
+camunda:
+  physical-tenants:
+    default:
+      document:
+        assigned: [default-gcs]
+        default-store-id: default-gcs
+        gcp:
+          default-gcs:
+            bucket-name: "camunda-documents-default"
+    tenanta:
+      document:
+        assigned: [tenant-a-gcs]
+        default-store-id: tenant-a-gcs
+        gcp:
+          tenant-a-gcs:
+            bucket-name: "camunda-documents-tenant-a"
+```
+
+**Startup outcomes.**
+
+| Tenant A           | Tenant B                      | Outcome                                                                     |
+| ------------------ | ----------------------------- | --------------------------------------------------------------------------- |
+| `prefix: a/`       | `prefix: b/`                  | Accepted. Sibling prefixes.                                                 |
+| `prefix: docs/`    | `prefix: docs/archive/`       | Rejected. One prefix is nested inside the other.                            |
+| `prefix: tenant`   | `prefix: tenant-b-`           | Rejected. No separator is appended, so `tenant` is a prefix of `tenant-b-`. |
+| `prefix` unset     | `prefix: temp/`               | Rejected. An unset prefix resolves to `temp/`.                              |
+| `prefix` unset     | `prefix: temp`                | Rejected. Both address keys under `temp`.                                   |
+| `prefix: ""`       | `prefix: tenant-b-`           | Rejected. The bucket root is a prefix of every object name in it.           |
+| `prefix: TenantA/` | `prefix: tenanta/`            | Accepted. GCS object names are case-sensitive.                              |
+| `bucket-name: a`   | `bucket-name: b`, same prefix | Accepted. Different buckets are different namespaces.                       |
+
+</TabItem>
+
+<TabItem value='azure'>
+
+**What Camunda compares.** `container-name` and the blob endpoint the store resolves to form the namespace, and `container-path` becomes the key prefix. Container names are compared case-insensitively, container paths case-sensitively after being coerced to end in `/`.
+
+A `connection-string` is resolved to the endpoint the store actually uses and reduced to scheme, host, port, and path. A query, fragment, or user info is dropped, so a shared access signature (SAS) token is neither part of the location nor printed in the error message.
+
+**Global store with per-tenant subpaths** (recommended):
+
+```yaml
+camunda:
+  document:
+    default-store-id: shared-blob
+    azure:
+      shared-blob:
+        container-name: "camunda-documents"
+  physical-tenants:
+    default:
+      document:
+        assigned: [shared-blob]
+        azure:
+          shared-blob:
+            container-path: "default"
+    tenanta:
+      document:
+        assigned: [shared-blob]
+        azure:
+          shared-blob:
+            # Sibling paths. Neither tenant may leave the path unset to use the
+            # container root, which encloses every blob name in the container.
+            container-path: "tenant-a"
+```
+
+**Dedicated store per tenant.** Distinct containers are distinct namespaces, so `container-path` is optional here:
+
+```yaml
+camunda:
+  physical-tenants:
+    default:
+      document:
+        assigned: [default-blob]
+        default-store-id: default-blob
+        azure:
+          default-blob:
+            container-name: "camunda-documents-default"
+    tenanta:
+      document:
+        assigned: [tenant-a-blob]
+        default-store-id: tenant-a-blob
+        azure:
+          tenant-a-blob:
+            container-name: "camunda-documents-tenant-a"
+```
+
+**Startup outcomes.**
+
+| Tenant A                        | Tenant B                                                 | Outcome                                                              |
+| ------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------- |
+| `container-name: docs-a`        | `container-name: docs-b`                                 | Accepted. Different containers are different namespaces.             |
+| `container-path: a`             | `container-path: a/nested`                               | Rejected. One prefix is nested inside the other.                     |
+| Container root                  | `container-path: tenant-c`, same container               | Rejected. The container root is a prefix of every other key.         |
+| `connection-string` for `accta` | `connection-string` for `acctb`, same container and path | Accepted. The two connection strings resolve to different endpoints. |
+| `connection-string` for `acct`  | `endpoint: https://acct.blob.core.windows.net`           | Rejected. One account reached two ways.                              |
+| `UseDevelopmentStorage=true`    | `endpoint: http://127.0.0.1:10000/devstoreaccount1`      | Rejected. The emulator shorthand resolves to that endpoint.          |
+| `endpoint: …?sig=A`             | `endpoint: …?sig=B`, same account                        | Rejected. A SAS token is a credential, not a location.               |
+| `container-path: Tenant-A/`     | `container-path: tenant-a/`                              | Accepted. Blob names are case-sensitive.                             |
+
+</TabItem>
+
+<TabItem value='in-memory'>
+
+**What Camunda compares.** Nothing. In-memory stores are ephemeral and process-local, so they can't collide in backing storage and are excluded from the check.
+
+Declare one store per tenant if you want documents kept apart within the process, or share one store ID across tenants if you don't. Either way there's no cross-tenant validation to satisfy.
+
+```yaml
+camunda:
+  physical-tenants:
+    default:
+      document:
+        assigned: [scratch]
+        default-store-id: scratch
+        in-memory:
+          scratch: {}
+    tenanta:
+      document:
+        assigned: [scratch]
+        default-store-id: scratch
+        in-memory:
+          scratch: {}
+```
+
+:::warning
+In-memory stores provide no isolation guarantee and lose every document when the process stops. Use them for local development only, never to separate tenants in production.
+:::
+
+</TabItem>
+
+<TabItem value='local'>
+
+**What Camunda compares.** The configured `path` forms the namespace, with separators resolved per platform, and the key prefix is always empty — the directory alone decides. Paths are compared case-insensitively on every platform, because a case-insensitive filesystem makes `/var/Docs` and `/var/docs` one directory.
+
+Local stores have no subpath field, so each tenant needs its own directory:
+
+```yaml
+camunda:
+  physical-tenants:
+    default:
+      document:
+        assigned: [shared-local]
+        default-store-id: shared-local
+        local:
+          shared-local:
+            path: "/var/camunda/documents/default"
+    tenanta:
+      document:
+        assigned: [shared-local]
+        default-store-id: shared-local
+        local:
+          shared-local:
+            # Use a sibling directory rather than one nested under another tenant's path.
+            path: "/var/camunda/documents/tenant-a"
+```
+
+**Startup outcomes.**
+
+| Tenant A          | Tenant B                   | Outcome                                                                                               |
+| ----------------- | -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `path: /var/docs` | `path: /var/other`         | Accepted. Different directories.                                                                      |
+| `path: /var/docs` | `path: /var/docs/`         | Rejected. Trailing separators aren't part of the location.                                            |
+| `path: /var/Docs` | `path: /var/docs`          | Rejected. Paths are compared case-insensitively on every platform.                                    |
+| `path: \var\docs` | `path: /var/docs`          | Rejected on Windows, accepted on Linux. Separators are resolved per platform.                         |
+| `path: /var/docs` | `path: /var/docs/tenant-b` | Accepted, though not recommended. Nesting isn't compared for local stores. See the limitations below. |
+
+</TabItem>
+
+</Tabs>
+
+### Combine providers and per-tenant overrides
+
+A tenant's `assigned` stores don't have to share a provider, and a global store can be combined with a tenant-specific one. Every store still has to satisfy the comparison rules for its own provider.
+
+**Hybrid** — a global default store plus a tenant-specific store:
 
 ```yaml
 camunda:
@@ -139,6 +381,36 @@ camunda:
             bucket-path: "tenant-a"
 ```
 
+**Mixed providers** — a shared GCP store for both tenants, plus an Azure store for one of them:
+
+```yaml
+camunda:
+  document:
+    gcp:
+      default-gcs:
+        bucket-name: "camunda-documents-default"
+  physical-tenants:
+    default:
+      document:
+        assigned: [default-gcs]
+        default-store-id: default-gcs
+        gcp:
+          default-gcs:
+            prefix: "default/"
+    tenanta:
+      document:
+        assigned: [default-gcs, tenant-a-blob]
+        default-store-id: tenant-a-blob
+        gcp:
+          default-gcs:
+            prefix: "tenant-a/"
+        azure:
+          tenant-a-blob:
+            container-name: "camunda-documents-tenant-a"
+```
+
+Overlap is only ever reported between two different tenants. One tenant may spread its documents across several stores whose prefixes overlap, because reaching its own documents isn't a leak.
+
 ### Availability and validation
 
 - **At startup**: Warning if bucket is missing or credentials are invalid; cluster continues
@@ -148,28 +420,28 @@ camunda:
 
 ### Compare document store locations across tenants
 
-Camunda resolves a location for every configured document store at startup, then rejects the configuration if two Physical Tenants would read and write into the same storage. A location is the provider, a namespace, and a key prefix. Two tenants overlap when their namespaces match and one key prefix is a prefix of the other.
+Camunda resolves a location for every configured document store at startup, then compares the locations of all tenants. A location is the provider, a namespace, and a key prefix:
 
-| Provider           | Namespace                                                    | Key prefix                                                     |
-| ------------------ | ------------------------------------------------------------ | -------------------------------------------------------------- |
-| AWS S3             | `bucket-name` and `endpoint`                                 | `bucket-path`, coerced to end in `/`, case preserved           |
-| GCP Cloud Storage  | `bucket-name`                                                | `prefix` as written, defaulting to `temp/` when unset          |
-| Azure Blob Storage | `container-name` and the resolved blob endpoint              | `container-path`, coerced to end in `/`, case preserved        |
-| Local filesystem   | The configured `path`, with separators resolved per platform | Always empty, so the directory alone decides                   |
-| In-memory          | Not compared                                                 | Not compared. In-memory stores are ephemeral and can't collide |
+- The **namespace** is the container no key can escape — a bucket, a blob container, or a directory.
+- The **key prefix** is the string every key inside that namespace starts with.
 
-Overlap is broader than equality because a document ID is caller-supplied and appended to the key prefix as given. With the prefixes `tenant` and `tenant-b-` in one bucket, a request against the first store for the document ID `-b-invoice` resolves to the second store's `tenant-b-invoice`. A separator changes nothing: `docs/` reaches `docs/archive/` through the ID `archive/invoice`, because no object storage service treats `/` in a key as a path boundary. Any prefix nested inside another tenant's prefix is therefore rejected, including a bucket or container root paired with a path inside it.
+Two tenants overlap when the provider and namespace match and one key prefix is a prefix of the other. Overlap is broader than equality because a document ID is caller-supplied and appended to the key prefix as given. With the prefixes `tenant` and `tenant-b-` in one bucket, a request against the first store for the document ID `-b-invoice` resolves to the second store's `tenant-b-invoice`.
+
+A separator changes nothing: `docs/` reaches `docs/archive/` through the document ID `archive/invoice`, because no object storage service treats `/` in a key as a path boundary. Any prefix nested inside another tenant's prefix is therefore rejected, including a bucket or container root paired with a path inside it.
 
 Give every tenant that shares a bucket or container its own sibling prefix. No layout lets one tenant own the root while another owns a path within it, and isolation is enforced by this check at startup rather than by inspecting document IDs at runtime.
 
-#### Provider-specific comparison rules
+When the check fails, the cluster doesn't start, and the error names each conflict:
 
-- **AWS S3**: Three properties are compared. `bucket-name` and `endpoint` form the namespace, and `bucket-path` becomes the key prefix. Bucket names are compared case-insensitively, endpoints by scheme, host, port, and path only, and bucket paths case-sensitively after being coerced to end in `/`. Every other AWS property is ignored: `region`, because S3 bucket names are globally unique across regions, so two tenants that differ only in `region` are rejected, and `bucket-ttl`, `force-path-style`, `chunked-encoding-enabled`, and `support-legacy-md5`, because none of them change which objects a store reads and writes.
-- **GCP Cloud Storage**: An unset `prefix` resolves to `temp/`, so leaving `prefix` unset for one tenant and setting `temp/` or `temp` for another is rejected.
-- **Azure Blob Storage**: A `connection-string` is resolved to the endpoint the store actually uses, reduced to scheme, host, port, and path. Two tenants using connection strings for different storage accounts are accepted. A connection string and an explicit `endpoint` that address the same account are rejected, as is `UseDevelopmentStorage=true` alongside the emulator endpoint it resolves to. A query, fragment, or user info is dropped, so a shared access signature (SAS) token is neither part of the location nor printed in the error message.
-- **Local filesystem**: Path separators are resolved per platform, so on Windows `\var\docs` and `/var/docs` are one directory. Paths are compared case-insensitively on every platform, because a case-insensitive filesystem makes `/var/Docs` and `/var/docs` one directory.
-
-Key prefixes are compared case-sensitively, because object storage key names are case-sensitive. The prefixes `Tenant-A/` and `tenant-a/` are two distinct locations. Bucket and container names are compared case-insensitively, because every provider restricts them to lowercase. Endpoint hosts are also compared case-insensitively, and trailing slashes are ignored.
+```
+Physical tenants must not share a document store location, or they would read and write
+into the same backing storage. Use a distinct bucket, container, or path per tenant, and
+never nest one tenant's path inside another's — a nested path is reachable through a
+caller-supplied document id, which no object store bounds at '/'. Conflicts: tenant
+default's document store location [provider=aws, namespace=[camunda-documents, ],
+keyPrefix=''] encloses tenant tenanta's [provider=aws, namespace=[camunda-documents, ],
+keyPrefix='tenant-a/']
+```
 
 #### Limitations of location comparison
 
