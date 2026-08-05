@@ -25,6 +25,19 @@ A mode change is a cluster configuration change, similar to [cluster scaling](cl
 
 Send a `PATCH` request to the `/mode` endpoint of the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx). The endpoint uses the Orchestration Cluster REST API port, which is `8080` by default.
 
+### Required authorizations
+
+When authorization is enabled, changing the cluster mode requires one of the following permissions:
+
+| Resource type | Permission |
+| ------------- | ---------- |
+| `SYSTEM`      | `UPDATE`   |
+| `BACKUP`      | `RESTORE`  |
+
+For how permissions are granted to users, clients, groups, and roles, see [available resources](/components/concepts/access-control/authorizations.md#available-resources).
+
+### Send the mode change request
+
 To enter recovery mode:
 
 ```bash
