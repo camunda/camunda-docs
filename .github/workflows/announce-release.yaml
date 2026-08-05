@@ -21,7 +21,7 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/slack DOCS_RELEASE_BOT_WEBHOOK;
       - id: slack
-        uses: slackapi/slack-github-action@v3.0.5
+        uses: slackapi/slack-github-action@v4.0.0
         with:
           webhook: ${{ steps.secrets.outputs.DOCS_RELEASE_BOT_WEBHOOK }}
           webhook-type: webhook-trigger

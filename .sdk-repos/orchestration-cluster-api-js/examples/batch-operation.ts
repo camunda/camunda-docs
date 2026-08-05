@@ -207,6 +207,38 @@ async function updateJobsBatchOperationExample() {
 }
 //#endregion UpdateJobsBatchOperation
 
+//#region SuspendProcessInstancesBatchOperation
+async function suspendProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.suspendProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+//#endregion SuspendProcessInstancesBatchOperation
+
+//#region ResumeProcessInstancesBatchOperation
+async function resumeProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.resumeProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+//#endregion ResumeProcessInstancesBatchOperation
+
 // Suppress "declared but never read"
 void getBatchOperationExample;
 void searchBatchOperationsExample;
@@ -221,3 +253,5 @@ void modifyProcessInstancesBatchOperationExample;
 void resolveIncidentsBatchOperationExample;
 void deleteDecisionInstancesBatchOperationExample;
 void updateJobsBatchOperationExample;
+void suspendProcessInstancesBatchOperationExample;
+void resumeProcessInstancesBatchOperationExample;

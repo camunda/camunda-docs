@@ -1,16 +1,16 @@
 ---
 id: agentic-ai-ad-hoc-tools-schema-resolver
-sidebar_label: Ad-Hoc Tools Schema Resolver
-title: Ad-Hoc Tools Schema Resolver connector
+sidebar_label: Ad-hoc Tools Schema Resolver
+title: Ad-hoc Tools Schema Resolver connector
 description: Resolve an input schema used in combination with LLMs for activities defined within an ad-hoc sub-process.
 ---
 
-The **Ad-Hoc Tools Schema connector** is an outbound connector that implements the tool resolution part of
+The **Ad-hoc Tools Schema connector** is an outbound connector that implements the tool resolution part of
 the [**AI Agent connector**](./agentic-ai-aiagent.md).
 
 ## About this connector
 
-Although its function is also embedded in the AI Agent connector, the Ad-Hoc Tools Schema connector can be used independently in combination with other AI connectors.
+Although its function is also embedded in the AI Agent connector, the Ad-hoc Tools Schema connector can be used independently in combination with other AI connectors.
 
 This can be useful for:
 
@@ -28,10 +28,10 @@ The following prerequisites are required to use this connector:
 | :----------------- | :-------------------------------------------------------------------------- |
 | Ad-hoc sub-process | Your process must contain an ad-hoc sub-process whose ID you can reference. |
 
-## Create an Ad-Hoc Tools Schema connector task
+## Create an Ad-hoc Tools Schema connector task
 
 1. Create a service task.
-2. [Apply](../use-connectors/outbound.md) the **Ad-Hoc Tools Schema** element template.
+2. [Apply](../use-connectors/outbound.md) the **Ad-hoc Tools Schema** element template.
 3. Configure the **Ad-hoc sub-process ID** to reference the element ID of the ad-hoc sub-process.
 4. Configure [a result variable or a result expression](../use-connectors/index.md#variableresponse-mapping) to map the
    connector results to process variables.

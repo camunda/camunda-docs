@@ -65,6 +65,10 @@ The Camunda Hub API validates both the token's audience and the application's pe
 - A `401 Unauthorized` response means the token is missing the `web-modeler-public-api` audience. This audience is added when the application is authorized for the **Camunda Hub API** (see step 2), so confirm that authorization is in place.
 - A `403 Forbidden` response means the application is missing the permissions required for the operation on the **Camunda Hub API** (for example, `create`, `update`, or `delete`).
 
+## Organization-level access
+
+API tokens are granted to organization-level _applications_ rather than individual _users_. With an API token, you can read, edit, and delete all workspaces and workspace resources in the organization, as long as the application has the required permissions for the Camunda Hub API. This is true even if you aren't a member of the workspace and you can't see it in the Camunda Hub user interface.
+
 ## Token expiration
 
 Access tokens expire according to the `expires_in` property of an authenticated response. After this duration, in seconds, you must request a new access token.

@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -64,9 +64,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -111,9 +111,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -158,9 +158,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -211,9 +211,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -255,9 +255,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -304,9 +304,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -355,9 +355,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -395,9 +395,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -445,9 +445,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -496,9 +496,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -536,9 +536,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -586,9 +586,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -637,9 +637,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -677,9 +677,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 
@@ -717,9 +717,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -767,9 +767,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -819,9 +819,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -868,9 +868,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -918,9 +918,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.8]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
+
+        [[ADDED_IN_VERSION:8.8]]
 
         [[CONSISTENCY:EVENTUAL]]
 

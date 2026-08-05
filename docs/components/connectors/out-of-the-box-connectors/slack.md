@@ -315,7 +315,7 @@ If you make changes to your **Slack Inbound connector** configuration, you need 
 When you click on the event with **Slack inbound connector** applied to it, a new **Webhooks** tab will appear in the properties panel. This tab displays the URL of the **Slack inbound connector** for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use Slack inbound connectors in Desktop Modeler, or with your Camunda 8 Self-Managed.
 In that case, Slack inbound connector deployments and URLs will not be displayed in Modeler.
 :::

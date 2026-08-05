@@ -15,7 +15,12 @@ None of the storage options below with Docker Compose are suitable for productio
 
 Document Store configuration uses the unified `camunda.document.*` Spring property model. The sections below show the new configuration format. If you're migrating from legacy `DOCUMENT_*` environment variables, see [property mapping reference](#property-mapping-reference).
 
-For Docker Compose, mount an `application.yaml` file and set `SPRING_CONFIG_ADDITIONAL_LOCATION` to its directory. For example, set `camunda.document.default-store-id` to specify the active store.
+For Docker Compose, add the `camunda.document.*` properties to the Orchestration Cluster application file that is already mounted by the distribution:
+
+- For the lightweight configuration, edit the selected file under `configuration/`.
+- For the full configuration, edit `.orchestration/application.yaml`.
+
+For example, set `camunda.document.default-store-id` in that file to specify the active store. You do not need to mount a second application file.
 
 If no storage configuration is provided, the default document storage is **in-memory**. Documents are lost when the application is stopped.
 
@@ -25,7 +30,7 @@ The legacy `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables (for exampl
 
 :::
 
-When using [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), Tasklist and Zeebe run in separate containers and do not share memory or volumes, which introduces certain limitations. While the document handling feature will still work, the configuration below must be set for all components that use it (Zeebe and Tasklist). In this topology, using in-memory or local storage means components cannot access the same data, so documents uploaded by Zeebe may not be visible to Tasklist. This limitation does not apply when using cloud storage options like AWS or GCP, where documents are always stored in a shared, centralized location.
+In the [Docker Compose distribution](/self-managed/quickstart/developer-quickstart/docker-compose.md), Zeebe and Tasklist run in the consolidated `orchestration` service and share one application configuration. Configure the document store once for that service. In-memory documents are still lost when the service restarts; use persistent or external storage when documents must survive restarts.
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [
@@ -51,13 +56,16 @@ camunda:
         bucket-ttl: 30 # optional, days
 ```
 
-| Property                                | Required | Description                                              |
-| --------------------------------------- | -------- | -------------------------------------------------------- |
-| `camunda.document.aws.<id>.bucket-name` | Yes      | Name of the AWS S3 bucket where documents are stored.    |
-| `camunda.document.aws.<id>.bucket-path` | No       | Folder-like path within the S3 bucket. Defaults to `""`. |
-| `camunda.document.aws.<id>.bucket-ttl`  | No       | Time-to-live for documents in the bucket, in days.       |
-| `camunda.document.default-store-id`     | Yes      | Instance ID of the store to use as the default.          |
-| `camunda.document.thread-pool-size`     | No       | Number of threads in the document store thread pool.     |
+| Property                                             | Required | Description                                                                                                                                                                                                                                              |
+| ---------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.aws.<id>.bucket-name`              | Yes      | Name of the AWS S3 bucket where documents are stored.                                                                                                                                                                                                    |
+| `camunda.document.aws.<id>.bucket-path`              | No       | Folder-like path within the S3 bucket. Defaults to `""`.                                                                                                                                                                                                 |
+| `camunda.document.aws.<id>.bucket-ttl`               | No       | Time-to-live for documents in the bucket, in days.                                                                                                                                                                                                       |
+| `camunda.document.aws.<id>.endpoint`                 | No       | Custom endpoint URL for an [S3-compatible object store](#s3-compatible-object-stores) such as MinIO, Cloudian, or Garage. When unset, the AWS SDK default endpoint is used.                                                                              |
+| `camunda.document.aws.<id>.force-path-style`         | No       | Forces path-style addressing on the S3 client. Most S3-compatible backends require this. Automatically enabled when `endpoint` is set, so explicit configuration is rarely needed.                                                                       |
+| `camunda.document.aws.<id>.chunked-encoding-enabled` | No       | Controls AWS chunked transfer encoding. Set to `false` for S3-compatible backends that do not support `aws-chunked` streaming-signed uploads (for example, Garage). When unset, the SDK default (`true`) is used, which is correct for AWS S3 and MinIO. |
+| `camunda.document.default-store-id`                  | Yes      | Instance ID of the store to use as the default.                                                                                                                                                                                                          |
+| `camunda.document.thread-pool-size`                  | No       | Number of threads in the document store thread pool.                                                                                                                                                                                                     |
 
 <details>
 <summary>Deprecated: legacy environment variable equivalents</summary>
@@ -71,6 +79,41 @@ DOCUMENT_DEFAULT_STORE_ID=aws
 ```
 
 </details>
+
+### S3-compatible object stores
+
+To use an S3-compatible object store (MinIO, Cloudian, Garage, etc.), set `endpoint` on the store instance, in addition to the standard properties above. The bucket must already exist on the backend — Camunda does not create it.
+
+**Example (MinIO running alongside Camunda in the same Compose network):**
+
+```yaml
+camunda:
+  document:
+    default-store-id: aws1
+    aws:
+      aws1:
+        bucket-name: camunda-docs
+        endpoint: http://minio:9000
+```
+
+For Garage, add `chunked-encoding-enabled: false` to the same block.
+
+### Troubleshooting checksum issues
+
+Some S3-compatible implementations cannot properly handle the checksum feature of the S3 client introduced with version 2.30.0. For more details, refer to [the AWS documentation](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/s3-checksums.html).
+
+If checksum-related errors appear, disable automated checksum creation by setting these environment variables on your orchestration and connectors containers:
+
+```
+AWS_REQUEST_CHECKSUM_CALCULATION=WHEN_REQUIRED
+AWS_RESPONSE_CHECKSUM_VALIDATION=WHEN_REQUIRED
+```
+
+If you're still encountering issues with MD5 checksums required by your provider, enable legacy MD5 support by setting:
+
+```
+DOCUMENT_STORE_AWS_SUPPORT_LEGACY_MD5=true
+```
 
 AWS SDK credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`) are resolved by the AWS SDK directly and are not part of `camunda.document.*`. Set them as environment variables as before.
 
@@ -303,12 +346,15 @@ Use this table to migrate from legacy `DOCUMENT_*` environment variables to the 
 
 ### AWS S3
 
-| Legacy environment variable                             | Unified property                        |
-| ------------------------------------------------------- | --------------------------------------- |
-| `DOCUMENT_STORE_<id>_CLASS=...AwsDocumentStoreProvider` | Implicit — use the `aws` namespace      |
-| `DOCUMENT_STORE_<id>_BUCKET`                            | `camunda.document.aws.<id>.bucket-name` |
-| `DOCUMENT_STORE_<id>_BUCKET_PATH`                       | `camunda.document.aws.<id>.bucket-path` |
-| `DOCUMENT_STORE_<id>_BUCKET_TTL`                        | `camunda.document.aws.<id>.bucket-ttl`  |
+| Legacy environment variable                             | Unified property                                     |
+| ------------------------------------------------------- | ---------------------------------------------------- |
+| `DOCUMENT_STORE_<id>_CLASS=...AwsDocumentStoreProvider` | Implicit — use the `aws` namespace                   |
+| `DOCUMENT_STORE_<id>_BUCKET`                            | `camunda.document.aws.<id>.bucket-name`              |
+| `DOCUMENT_STORE_<id>_BUCKET_PATH`                       | `camunda.document.aws.<id>.bucket-path`              |
+| `DOCUMENT_STORE_<id>_BUCKET_TTL`                        | `camunda.document.aws.<id>.bucket-ttl`               |
+| `DOCUMENT_STORE_<id>_ENDPOINT`                          | `camunda.document.aws.<id>.endpoint`                 |
+| `DOCUMENT_STORE_<id>_FORCE_PATH_STYLE`                  | `camunda.document.aws.<id>.force-path-style`         |
+| `DOCUMENT_STORE_<id>_CHUNKED_ENCODING_ENABLED`          | `camunda.document.aws.<id>.chunked-encoding-enabled` |
 
 ### GCP
 

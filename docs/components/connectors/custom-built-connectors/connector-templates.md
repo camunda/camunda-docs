@@ -1177,7 +1177,7 @@ You can develop connector templates using the [`element template` feature](/comp
 
 ## Providing and using connector templates
 
-When using [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md), you can create **Connector templates** [directly within the application](/components/connectors/manage-connector-templates.md) and share them with your respective organization.
+When using [Camunda Hub](/components/hub/workspace/modeler/launch-modeler.md), you can create **Connector templates** [directly within the application](/components/hub/workspace/modeler/element-templates/element-template-generator.md) and share them with your respective organization.
 
 When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so Modeler will pick them up.
 

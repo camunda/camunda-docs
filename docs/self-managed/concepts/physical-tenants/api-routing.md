@@ -42,9 +42,14 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 ## Cluster-wide endpoints
 
-Cluster-wide endpoints — endpoints that apply to the whole cluster rather than a single Physical Tenant — are not available yet. When they are added in a future release, they will be exposed under a dedicated `/cluster/v2/...` path prefix.
+A cluster-wide endpoint applies to the whole cluster rather than a single Physical Tenant. The cluster-wide topology is exposed under a dedicated `/cluster/v2/...` path prefix, at `/cluster/v2/topology`.
 
-Endpoints served at the standard `/v2/...` paths are scoped to a Physical Tenant, not the cluster. For example, `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view.
+The legacy `/v2/status` endpoint is deprecated. It continues to serve the default Physical Tenant only for backward compatibility. Use `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
+
+Most other endpoints are scoped to a Physical Tenant, even when they are not tenant-specific in nature. A plain `/v2/...` request targets the `default` tenant. For example:
+
+- `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view. For the cluster-wide topology, use `/cluster/v2/topology`.
+- `/v2/license` returns the license status and is available per Physical Tenant, including on the default path (`/v2/license`). It is not a separate cluster-wide endpoint.
 
 ### Exception: /v2/status
 
@@ -87,6 +92,8 @@ For example:
 ```
 https://your-cluster/physical-tenants/riskproduction/operate
 ```
+
+For how data scoping, session behavior, and tenant navigation work within each web app, see [web apps](./web-apps.md).
 
 ## MCP routing
 

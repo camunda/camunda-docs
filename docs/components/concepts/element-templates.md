@@ -25,5 +25,5 @@ The example below shows how a generic service task can be transformed into a cus
 Read more about element templates and how to use them:
 
 - [Element templates in Modeler](/components/modeler/element-templates/about-templates.md)
-- [Using element templates in Web Modeler](/components/hub/workspace/modeler/element-templates/using-templates.md)
+- [Using element templates in Camunda Hub](/components/hub/workspace/modeler/element-templates/using-templates.md)
 - [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)

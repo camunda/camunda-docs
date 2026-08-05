@@ -36,15 +36,18 @@ The following are accepted as keyword arguments and will be used to construct ht
 
 > `httpx_args`: A dictionary of additional arguments to be passed to the `httpx.Client` and `httpx.AsyncClient` constructor.
 
-- **Parameters:**
-  - **base_url** (_str_)
-  - **raise_on_unexpected_status** (_bool_)
-  - **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
-  - **headers** (_dict_ _[__str_ _,_ _str_ _]_)
-  - **timeout** (_httpx.Timeout_ _|_ _None_)
-  - **verify_ssl** (_str_ _|_ _bool_ _|_ _ssl.SSLContext_)
-  - **follow_redirects** (_bool_)
-  - **httpx_args** (_dict_ _[__str_ _,_ _Any_ _]_)
+**Parameters:**
+
+| Parameter                    | Type                                | Description |
+| ---------------------------- | ----------------------------------- | ----------- |
+| `base_url`                   | `str`                               |             |
+| `raise_on_unexpected_status` | `bool`                              |             |
+| `cookies`                    | dict [str , str ]                   |             |
+| `headers`                    | dict [str , str ]                   |             |
+| `timeout`                    | `httpx.Timeout` \| `None`           |             |
+| `verify_ssl`                 | `str` \| `bool` \| `ssl.SSLContext` |             |
+| `follow_redirects`           | `bool`                              |             |
+| `httpx_args`                 | dict [str , Any ]                   |             |
 
 ### raise_on_unexpected_status
 
@@ -180,18 +183,21 @@ The following are accepted as keyword arguments and will be used to construct ht
 
 > `httpx_args`: A dictionary of additional arguments to be passed to the `httpx.Client` and `httpx.AsyncClient` constructor.
 
-- **Parameters:**
-  - **base_url** (_str_)
-  - **token** (_str_)
-  - **prefix** (_str_)
-  - **auth_header_name** (_str_)
-  - **raise_on_unexpected_status** (_bool_)
-  - **cookies** (_dict_ _[__str_ _,_ _str_ _]_)
-  - **headers** (_dict_ _[__str_ _,_ _str_ _]_)
-  - **timeout** (_httpx.Timeout_ _|_ _None_)
-  - **verify_ssl** (_str_ _|_ _bool_ _|_ _ssl.SSLContext_)
-  - **follow_redirects** (_bool_)
-  - **httpx_args** (_dict_ _[__str_ _,_ _Any_ _]_)
+**Parameters:**
+
+| Parameter                    | Type                                | Description |
+| ---------------------------- | ----------------------------------- | ----------- |
+| `base_url`                   | `str`                               |             |
+| `token`                      | `str`                               |             |
+| `prefix`                     | `str`                               |             |
+| `auth_header_name`           | `str`                               |             |
+| `raise_on_unexpected_status` | `bool`                              |             |
+| `cookies`                    | dict [str , str ]                   |             |
+| `headers`                    | dict [str , str ]                   |             |
+| `timeout`                    | `httpx.Timeout` \| `None`           |             |
+| `verify_ssl`                 | `str` \| `bool` \| `ssl.SSLContext` |             |
+| `follow_redirects`           | `bool`                              |             |
+| `httpx_args`                 | dict [str , Any ]                   |             |
 
 ### raise_on_unexpected_status
 

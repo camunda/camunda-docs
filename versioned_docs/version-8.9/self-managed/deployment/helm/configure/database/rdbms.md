@@ -71,7 +71,7 @@ Most tuning options are configured as application properties via [extraConfigura
 
 | Parameter                                                      | Type    | Default | Description                                                                                                                                                                                                                                                  |
 | -------------------------------------------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for details and performance implications. |
+| `orchestration.data.secondaryStorage.rdbms.query.maxTotalHits` | integer | `10000` | Maximum result count cap for search APIs. Limits COUNT(\*) queries to improve performance. See [search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for details and performance implications. |
 
 ### Schema and table management
 
@@ -145,14 +145,7 @@ Camunda bundles JDBC drivers for some databases. For others, you must supply a c
 
 RDBMS search APIs return a `totalResults` field capped at **10,000** to improve performance. However, actual query performance depends on filter selectivity and database optimization.
 
-Key concepts:
-
-- **Total count cap**: `totalResults` is capped at 10,000 by default (configurable via `maxTotalHits`).
-- **hasMoreTotalItems flag**: Indicates if results exist beyond the cap.
-- **Query optimization**: Apply selective filtering and pagination for better performance.
-- **Database tuning**: Configure PostgreSQL for write-heavy workloads.
-
-**See:** [Search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
+See [search APIs and result limits](/self-managed/deployment/helm/configure/database/rdbms-search-and-result-limits.md) for configuration options, performance trade-offs, optimization best practices, and database-specific tuning.
 
 ## Schema creation and management
 

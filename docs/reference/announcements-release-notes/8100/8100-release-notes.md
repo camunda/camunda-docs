@@ -57,48 +57,79 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 ### APIs & tools
 
-#### Public Hub REST API
+#### Public Camunda Hub API
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+A new Camunda Hub API is provided under `/v2/` for programmatic access to Console and Web Modeler resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
-Camunda Hub now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
-
-The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
+The Console Self-Managed and Web Modeler APIs are deprecated in favor of the Camunda Hub API.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
 <p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
 
-### Camunda Hub
+:::note
+The Camunda Hub API is not yet exposed in Camunda 8. To access it, please reach out to [Camunda success](https://camunda.com/services/camunda-success/).
+:::
+
+#### Invite collaborators through the public API who haven't logged in yet
+
+<!-- https://github.com/camunda/camunda-hub/pull/26666 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Adding a project collaborator through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Web Modeler at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Web Modeler UI. The invitee gains project access once they accept the invitation.
+
+<p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
+
+### Console
 
 #### Bespoke cluster generations for SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/3704 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 
 Organizations can now access exclusive Camunda 8 generation versions tailored specifically for their organization, available for both new cluster creation and upgrades. These generations are not visible to other organizations.
-
-#### Git-based catalog
-
-<!-- https://github.com/camunda/product-hub/issues/3402 -->
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-Camunda Hub introduces an organization-level catalog for reusable, Center of Excellence (CoE)-approved assets, such as element templates, connectors, forms, and DMNs, backed by source control management (SCM).
-
-CoE teams can submit assets through the API from their SCM workflows, and delivery teams can browse catalog entries in Hub and inspect asset details. This release also adds in-diagram notifications for updated shared assets and pre-deployment dependency checks that surface missing DMNs, forms, connectors, and other dependencies on the target cluster before deployment.
 
 #### Select a target version when upgrading a cluster
 
 <!-- https://github.com/camunda/product-hub/issues/3741 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 When you upgrade an Orchestration Cluster that has more than one valid upgrade target, Console now shows a version selection step in the upgrade wizard. Each option displays the generation name and the Zeebe patch version.
 
 The recommended version (the longest upgrade path) is pre-selected and labeled **latest**, and you can choose a different option before proceeding. Clusters with only one upgrade target keep the existing flow.
+
+#### Self-service restore for SaaS orchestration clusters from backups
+
+<!-- https://github.com/camunda/product-hub/issues/2135 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Organization admins can now restore a SaaS orchestration cluster directly from a completed backup in Console and through the Administration API.
+
+Key benefits:
+
+- Reduced time to recovery for operational incidents.
+- Operational control without opening a support ticket for standard same-cluster restores.
+- Clear restore status visibility during execution.
+
+This release supports in-place restore for the same cluster only. During restore, the cluster is unavailable until completion.
+
+Known limitations:
+
+- Same-cluster restore only.
+- Partition count must match between backup and target cluster.
+- Cross-region and cross-cluster restore are not supported in this release.
+
+Learn more:
+
+- [Backup and restore overview](/components/saas/backup-restore-overview.md)
+- [Restore a cluster from backup](/components/saas/how-to-restore.md)
+- [Restore scenarios](/components/saas/restore-scenarios.md)
+- [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
 
 ### Modeler
 
@@ -140,6 +171,16 @@ FEEL expressions in the variable outline now use the same syntax highlighting as
 
 <p class="link-arrow">[Inspect variables](/components/modeler/data-handling.md#inspecting-variables)</p>
 
+#### Start a process instance with a business ID
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
 ### Operate
 
 #### Multi-variable filtering
@@ -166,36 +207,15 @@ Wait state tracking is enabled by default and writes records to secondary storag
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
-### Camunda Hub
+#### Business ID filtering in Operate
 
-#### Self-service restore for SaaS orchestration clusters from backups
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
 
-<!-- https://github.com/camunda/product-hub/issues/2135 -->
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`) via the API.
 
-Organization admins can now restore a SaaS orchestration cluster directly from a completed backup in Console and through the Administration API.
-
-Key benefits:
-
-- Reduced time to recovery for operational incidents.
-- Operational control without opening a support ticket for standard same-cluster restores.
-- Clear restore status visibility during execution.
-
-This release supports in-place restore for the same cluster only. During restore, the cluster is unavailable until completion.
-
-Known limitations:
-
-- Same-cluster restore only.
-- Partition count must match between backup and target cluster.
-- Cross-region and cross-cluster restore are not supported in this release.
-
-Learn more:
-
-- [Backup and restore overview](/components/saas/backup-restore-overview.md)
-- [Restore a cluster from backup](/components/saas/how-to-restore.md)
-- [Restore scenarios](/components/saas/restore-scenarios.md)
-- [Restore troubleshooting](/components/saas/restore-troubleshooting.md)
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
 
 ### Optimize
 
@@ -237,6 +257,18 @@ After failover, a reconciliation path replays missing events from the Zeebe log 
 
 <p class="link-arrow">[RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md)</p>
 
+#### Cluster variable metadata
+
+<!-- https://github.com/camunda/camunda/issues/54797 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now add metadata to cluster variables as a map of string keys to scalar values (strings or numbers). Camunda stores the metadata alongside the variable but keeps it separate from its value.
+
+Use metadata to discover and filter variables by semantic attributes without inspecting their values. The search endpoint supports metadata filters with equality, numeric range, existence, `in`, and `like` operators for each key. Metadata is not exposed as part of the FEEL-accessible runtime value.
+
+<p class="link-arrow">[Cluster variable metadata](/components/modeler/feel/cluster-variable/metadata.md)</p>
+
 #### Dual-region ECS reference architecture
 
 <!-- https://github.com/camunda/product-hub/issues/3552 -->
@@ -253,9 +285,13 @@ The documentation covers the recommended topology, exporter configuration, and R
 
 <!-- https://github.com/camunda/product-hub/issues/3244 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8 SaaS now supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
+Camunda 8 SaaS now officially supports multi-tenancy via tenant identifiers, bringing the same logical tenant isolation model available in Self-Managed to SaaS clusters.
+
+:::note
+Multi-tenancy is available on SaaS clusters running generation **8.8 and later** — including existing 8.8 and 8.9 clusters. You do not need to upgrade to 8.10 to use this feature.
+:::
 
 - Owners and Admins can create, update, and delete tenants in Console, and assign users, groups, and client credentials to them.
 - Web Modeler and Desktop Modeler support tenant-scoped deployments to multi-tenant clusters by specifying a tenant ID.
@@ -312,6 +348,32 @@ Camunda 8.10 introduces region awareness to the Orchestration Cluster. Operators
 Leader election priorities respect region boundaries, preferring region-local leaders under normal conditions and adjusting automatically when a region becomes unavailable. The same mechanism extends to availability zone or datacenter isolation using the same configuration.
 
 <p class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</p>
+
+#### Business ID in message correlation
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+You can now include a business ID when publishing or correlating a message. Business ID acts as an additional filter alongside the message name and correlation key.
+
+Supported combinations for start events: message name alone; name + business ID; name + correlation key; name + correlation key + business ID. For non-start events, business ID is usable alongside name + correlation key. When both a correlation key and business ID are provided, both fields must match the corresponding values stored on the subscription.
+
+If business ID uniqueness is enabled, a blocked message-start waits in the buffer until the active instance releases the business ID or the TTL expires — it is not dropped immediately.
+
+<p class="link-arrow">[Business ID in message correlation](/components/concepts/messages.md#business-id-in-message-correlation)</p>
+
+#### Business ID propagation in call activities
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Call activities now support configuring the business ID assigned to the child process instance. Child instances inherit the parent's business ID by default (unchanged from 8.9). You can override this per call activity with a literal value or FEEL expression. The FEEL context variable `camunda.processInstance.businessId` provides access to the parent's ID within the expression.
+
+The resolved value is set once at child creation and is immutable.
+
+<p class="link-arrow">[Business ID propagation](/components/modeler/bpmn/call-activities/call-activities.md#business-id-propagation)</p>
 
 ### Helm chart deployment
 
@@ -447,6 +509,18 @@ To keep the previous behavior, explicitly set the strategy to `PARTITION`. See t
 
 <p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
 
+### Operate
+
+#### Business ID visibility in Operate
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
 ### Optimize
 
 #### Scope-aware variable export configuration for Optimize
@@ -521,15 +595,15 @@ https://github.com/camunda/camunda/issues/49548 -->
 
 Camunda Process Test now exposes **judge-based evaluation** and **semantic similarity evaluation** as standalone AssertJ assertions for arbitrary string values, without requiring process-variable assertions. Semantic similarity checks support configurable embedding models and thresholds, and both assertion types reuse the existing CamundaAssert configuration with optional local overrides.
 
-### Camunda Hub
+### Console
 
 #### Usage & billing metrics for 2025 enterprise license model
 
 <!-- https://github.com/camunda/product-hub/issues/3571 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span></div>
 
-Camunda Hub and Accounts now support the 2025 enterprise license model.
+Console and Accounts now support the 2025 enterprise license model.
 
 - A new `licensing_model` attribute on `OrganizationMetaData` identifies if an enterprise organization is using the **2025** or **legacy** license model. If unset, it is treated as **legacy**.
 - If you are an organization with `licensing_model = 2025`, your Usage and Billing views only show **Process Instance (PI)** metrics. **Decision Instance (DI)** and **Unique Task User (TU)** information is no longer shown. Legacy organizations continue to see the existing metric set.
@@ -540,7 +614,7 @@ Camunda Hub and Accounts now support the 2025 enterprise license model.
 
 <!-- https://github.com/camunda/product-hub/issues/3582 -->
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 You can now create new SaaS Orchestration Clusters on specific supported Camunda 8 minor and patch versions, including:
 

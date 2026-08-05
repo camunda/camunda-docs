@@ -11,9 +11,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -75,9 +75,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.7]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -165,9 +165,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IlJFQUQifV19]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -222,9 +222,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.6]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkRFTEVURSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
 
@@ -268,9 +268,9 @@ paths:
       description: |-
 
 
-        [[ADDED_IN_VERSION:8.7]]
-
         [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiRE9DVU1FTlQiLCJwZXJtaXNzaW9uVHlwZSI6IkNSRUFURSJ9XX0]]
+
+        [[ADDED_IN_VERSION:8.7]]
 
         [[CONSISTENCY:STRONG]]
 

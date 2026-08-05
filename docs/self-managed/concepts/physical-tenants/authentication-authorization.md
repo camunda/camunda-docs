@@ -106,9 +106,16 @@ The one exception is the **implicit default tenant**: when no `camunda.physical-
 camunda:
   security:
     authentication:
+      method: oidc
       providers:
-        corp-idp:
-          type: oidc
+        oidc:
+          corp-idp:
+            issuer-uri: https://corp-idp.example.com/realms/camunda
+            client-id: camunda-client
+            client-secret: ${CORP_IDP_CLIENT_SECRET}
+            audiences:
+              - camunda-api
+            username-claim: preferred_username
 
   physical-tenants:
     tenanta:

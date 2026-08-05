@@ -69,6 +69,8 @@ To configure tenant defaults, per-tenant overrides, validation expectations, and
 
 To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
+To understand how Operate, Tasklist, and Optimize behave per Physical Tenant — including URL navigation, data scoping, and session behavior — see [web apps](./web-apps.md).
+
 ## What is not isolated in 8.10
 
 - Gateways are shared between tenants, so a saturated gateway can still affect multiple tenants.
@@ -80,9 +82,21 @@ To provision new tenants and understand lifecycle behavior in 8.10, including ro
 
 Camunda validates storage configuration at startup. If two tenants resolve to the same backend location, startup fails and the error names the conflicting tenants. For document stores, uniqueness is validated against the resolved provider, bucket or container, and path tuple.
 
+## Health and status endpoints
+
+Physical Tenants expose three distinct endpoints for health and status:
+
+| Endpoint                             | Scope   | Use when                                                                                                                                                                                                                                                      |
+| :----------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `/actuator/health`                   | Node    | Checking whether the individual broker or gateway node is healthy, ready, or live (for example, Kubernetes probes). Exposed on port 9600 by default (brokers and gateways); the other endpoints below are exposed on the Gateway REST port (8080 by default). |
+| `/cluster/v2/status`                 | Cluster | Determining whether the cluster as a whole is operational.                                                                                                                                                                                                    |
+| `/physical-tenants/{id}/v2/topology` | Tenant  | Checking whether a specific Physical Tenant can accept work and which of its partitions are available.                                                                                                                                                        |
+
+The legacy `/v2/status` endpoint is deprecated. It remains available for the default Physical Tenant only to preserve backward compatibility. Switch to `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
+
 ## Readiness
 
-The intended model is that readiness remains broker-scoped, not tenant-scoped. If one physical tenant loses access to its secondary storage, that should not fail readiness for the entire cluster.
+When configuring Kubernetes readiness probes, point the probe at `/actuator/health/readiness` for node-level readiness. To check whether a specific Physical Tenant can accept work independently of the node probe, poll `/physical-tenants/{id}/v2/topology` from your own health-check logic.
 
 ## Document store details
 
