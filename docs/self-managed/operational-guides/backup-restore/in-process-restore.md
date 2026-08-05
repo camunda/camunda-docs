@@ -11,22 +11,19 @@ keywords:
     "recovery mode",
     "in-process restore",
   ]
-description: "Restore Zeebe partition data on running brokers by switching the cluster into recovery mode and triggering a restore over the Orchestration Cluster REST API."
+description: "Restore Zeebe partition data in-process without requiring the restart of the brokers themselves."
 ---
 
-In-process restore restores Zeebe partition data on the brokers that are already running. In Camunda 8.10 and later, you switch the cluster into recovery mode, trigger a restore over the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), and track its progress per broker and partition.
-
-Compared to the [standalone restore application](./elasticsearch/restore.md#restore-zeebe-cluster), in-process restore requires no deployment changes. The brokers keep running, so you don't override the broker start command, set restore-only environment variables, or clear broker data directories yourself.
-
-The procedure uses two endpoints: [change cluster mode](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx) and [restore from a backup](/apis-tools/orchestration-cluster-api-rest/specifications/restore.api.mdx).
+With Camunda 8.10 and later, you can restore Zeebe partition data in-process without requiring the restart of the brokers themselves. In-process restore is a downtime operation that runs while the cluster is in recovery mode, but it does not require any deployment changes or broker restarts, in contrast to the old [standalone restore application](./elasticsearch/restore.md#restore-zeebe-cluster). The brokers keep running, so you don't override the broker start command, set restore-only environment variables, or clear broker data directories yourself.
 
 ## How in-process restore works
 
 A restore runs in three phases, driven by two API requests:
 
 1. **Entering recovery mode**: every broker deactivates its partitions and switches to a restricted partition manager. While the cluster is in recovery mode it processes no work, and only read-only operations and restore remain available.
-2. **Restoring the partitions**: the cluster plans a single change that, for every broker and partition, first drops the local partition data and then restores that partition from the selected backups. The steps of that plan run one at a time across the cluster.
-3. **Returning to processing**: once every partition is restored, the same change switches all brokers back to `PROCESSING` and the partitions become active again. You don't send a second mode change request for this.
+2. **Restoring secondary storage**: while the cluster is in recovery mode, restore the secondary storage to the intended point that the primary storage backup aligns to.
+3. **Restoring the partitions**: the cluster plans a single change that, for every broker and partition, first drops the local partition data and then restores that partition from the selected backups. The steps of that plan run one at a time across the cluster.
+4. **Returning to processing**: once every partition is restored, the same change switches all brokers back to `PROCESSING` and the partitions become active again.
 
 Both requests are non-blocking. Each is acknowledged as soon as the cluster accepts the change and returns the `changeId` of the cluster configuration change that carries it out.
 
@@ -40,16 +37,7 @@ Both requests are non-blocking. Each is acknowledged as soon as the cluster acce
 | Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.                                                                |
 | API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                             |
 
-## Step 1: Restore secondary storage
-
-Restore your secondary storage to the point in time you intend to restore Zeebe's primary storage to, before you touch the cluster's mode. In-process restore only restores Zeebe's primary storage; secondary storage is restored independently, using the procedure for your deployment:
-
-- [Elasticsearch and OpenSearch](./elasticsearch/restore.md#restore-elasticsearch-opensearch): restore the snapshots of all components using the same backup ID you'll use for the Zeebe restore in [step 2](#step-2-restore-a-cluster-in-place). A mismatched backup ID produces an inconsistent restore point.
-- [Relational databases (RDBMS)](./rdbms/restore.md): restore the database with its native tooling. Camunda aligns the Zeebe and RDBMS restore points automatically.
-
-For the components and coordination rules of each path, see [Camunda back up and restore](./backup-and-restore.md).
-
-## Step 2: Restore a cluster in place
+## Restoring a cluster
 
 The examples below use the following variables:
 
@@ -62,7 +50,7 @@ Before you start, be aware of the following. Entering recovery mode stops all pr
 
 ### 1. Switch the cluster into recovery mode
 
-Change the cluster mode to `RECOVERING`:
+[Change the cluster mode](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode.api.mdx) to `RECOVERING`:
 
 ```bash
 curl -X PATCH "${ORCHESTRATION_CLUSTER_API}/mode?mode=RECOVERING"
@@ -88,9 +76,22 @@ curl "${ORCHESTRATION_CLUSTER_MANAGEMENT_API}/actuator/cluster"
 
 A restore is only accepted while every broker of the cluster is in recovery mode. Requests sent earlier are rejected with `409`.
 
-### 2. Trigger the restore
+### 2. Restore secondary storage
 
-Post the backup to restore from. Camunda validates the request, resolves the backups for every partition, and acknowledges the request with `202` before the restore itself runs:
+With the cluster in recovery mode, nothing is exported to secondary storage, so restore it now. Skip this step if secondary storage was already restored another way, for example as part of a wider disaster recovery procedure.
+
+In-process restore only restores Zeebe's primary storage. Restore secondary storage to the point in time you intend to restore the primary storage to, using the procedure for your deployment:
+
+- [Elasticsearch and OpenSearch](./elasticsearch/restore.md#restore-elasticsearch-opensearch): restore the snapshots of all components using the same backup ID you pass to the Zeebe restore in [step 3](#3-trigger-the-restore). A mismatched backup ID produces an inconsistent restore point.
+- [Relational databases (RDBMS)](./rdbms/restore.md): restore the database with its native tooling. Camunda aligns the Zeebe and RDBMS restore points automatically.
+
+For the components and coordination rules of each path, see [Camunda back up and restore](./backup-and-restore.md).
+
+Complete this step before you trigger the Zeebe restore. The restore switches the brokers back to `PROCESSING` as soon as the last partition is restored, and processing then resumes against whatever secondary storage is in place.
+
+### 3. Trigger the restore
+
+[Provide the restore parameters](/apis-tools/orchestration-cluster-api-rest/specifications/restore.api.mdx). Camunda validates the request, resolves the backups for every partition, and acknowledges the request with `202` before the restore itself runs:
 
 ```bash
 curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore" \
@@ -98,7 +99,7 @@ curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore" \
   -d '{ "backupIds": [1748937221] }'
 ```
 
-The response returns the `changeId` of the restore, along with the planned operations. The plan ends with the mode change back to `PROCESSING`:
+The response returns the `changeId` of the restore, along with the planned operations. The plan drops and restores every partition of every broker, switches all brokers back to `PROCESSING`, and ends with an incarnation number update:
 
 ```json
 {
@@ -107,10 +108,13 @@ The response returns the `changeId` of the restore, along with the planned opera
     { "operation": "PartitionPreRestoreOperation", "mode": null },
     { "operation": "PartitionRestoreOperation", "mode": null },
     { "operation": "ModeChangeOperation", "mode": "PROCESSING" },
-    { "operation": "AwaitModeChangeOperation", "mode": "PROCESSING" }
+    { "operation": "AwaitModeChangeOperation", "mode": "PROCESSING" },
+    { "operation": "UpdateIncarnationNumberOperation", "mode": null }
   ]
 }
 ```
+
+The partition operations repeat once per broker and partition, and the plan does not name the broker, the partition, or the resolved backup. Use the [restore status](#4-track-the-restore) to see which backups a partition is restored from.
 
 How you select the data to restore depends on your secondary storage:
 
@@ -135,7 +139,7 @@ curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore"
 
 Requests that combine `backupIds` with `from` or `to`, that specify a time range without continuous backups enabled, or that reference a backup with no completed state in the store, are rejected with `400`.
 
-### 3. Track the restore
+### 4. Track the restore
 
 While a restore is in flight, the restore status reports progress per broker and per partition:
 
@@ -191,7 +195,7 @@ Each partition entry reports the progress of a single broker's copy of that part
 
 At most one restore is in flight at any time. Once the restore has finished, this endpoint returns `404` and the per-partition detail is no longer retained, so use the [cluster monitoring API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#monitoring-api) to confirm that the restore's `changeId` completed.
 
-### 4. Confirm the cluster processes work again
+### 5. Confirm the cluster state after restore
 
 Check that every partition is active and healthy again:
 
@@ -199,7 +203,7 @@ Check that every partition is active and healthy again:
 curl "${ORCHESTRATION_CLUSTER_API}/topology"
 ```
 
-The cluster leaves recovery mode as part of the restore, so no further mode change is required.
+The cluster leaves recovery mode as part of the restore, so no further action is required.
 
 ## Validate a restore without applying it
 
@@ -211,18 +215,32 @@ curl -X POST "${ORCHESTRATION_CLUSTER_API}/restore?dryRun=true" \
   -d '{ "backupIds": [1748937221] }'
 ```
 
+A dry run of a restore covers the same validation as the real request. It rejects invalid parameter combinations, checks that a completed backup exists for every partition, and, for an RDBMS time range or an empty request body, resolves the restore point from the backup metadata. A request that passes the dry run is accepted as a real request as long as the cluster and the backup store do not change in between.
+
+The dry run does not report which backups it resolved. The response only contains the `changeId` and the planned operations, in the same shape as a real request, so the concrete backup ID per partition is not part of it. To confirm the selection, list the available backups with the [Zeebe backup management API](./zeebe-backup-and-restore.md#list-backups-api) before the restore, or pass explicit `backupIds` instead of relying on automatic resolution.
+
 ## Handle a failed restore
 
 If a single partition fails to restore — for example because its backup is corrupted or the backup store is temporarily unreachable — the partial data of that partition is dropped and the failed step is retried automatically with a backoff. The restore change stays pending, and the restore status keeps reporting the partition as `RESTORING`.
 
-Because the retry is automatic, fix the root cause instead of sending a new restore request. Once the cause is resolved, the pending change continues on its own and completes.
+Because the retry is automatic, first try to fix the root cause instead of sending a new restore request. Once the cause is resolved, the pending change continues on its own and completes.
+
+### Retry a restore externally
+
+Automatic retries can't help if the problem is the backup itself, for example if the selected backup is corrupted or turns out to be the wrong restore point. In that case, retry from the outside:
+
+1. Cancel the pending restore change on the management API, using the `changeId` the restore returned:
+
+   ```bash
+   curl -X DELETE "${ORCHESTRATION_CLUSTER_MANAGEMENT_API}/actuator/cluster/changes/8"
+   ```
+
+   The restore status reports the change as `CANCELLED`, and the cluster stays in recovery mode.
+
+2. Send a new [restore request](#3-trigger-the-restore). Because each restore drops the local partition data before it writes the backup data, the new attempt does not build on the partial result of the cancelled one, and you can select a different backup target.
+
+Repeat this as often as needed. A restore stays acceptable while every broker is in recovery mode, so cancelling and retrying does not require another mode change.
 
 :::warning
-Don't abandon a restore that has partially failed. If you cancel a pending restore change or otherwise stop retrying before every partition reaches `RESTORED`, Zeebe's internal data is left in a mix of restored and pre-restore state and can no longer be trusted. Resolve the failure so the pending change completes, or, if you must abandon it, treat the cluster as unrecoverable and restore again from a clean state.
+Don't leave a partially failed restore unfinished. Between cancelling a restore and completing a new one, Zeebe's internal data is a mix of restored and pre-restore state and cannot be trusted. Keep the cluster in recovery mode and retry until every partition reaches `RESTORED`. If you switch the cluster back to `PROCESSING` in that state, treat it as unrecoverable and restore again from a clean state.
 :::
-
-To leave recovery mode without restoring, for example if the cluster was switched into recovery mode by mistake before a restore was ever triggered, change the mode back:
-
-```bash
-curl -X PATCH "${ORCHESTRATION_CLUSTER_API}/mode?mode=PROCESSING"
-```
