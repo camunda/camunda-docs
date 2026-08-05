@@ -36,6 +36,7 @@ Both requests are non-blocking. Each is acknowledged as soon as the cluster acce
 | Completed backup | A completed backup exists for every partition. List the available backups with the [Zeebe backup management API](./zeebe-backup-and-restore.md#list-backups-api).                                                                          |
 | Partition count  | The partition count of the cluster matches the partition count of the backup. Brokers can be scaled between backup and restore as long as the partition count is unchanged.                                                                |
 | API access       | Authenticated access to the Orchestration Cluster REST API. See [authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).                                                             |
+| Authorizations   | If [authorizations](/components/concepts/access-control/authorizations.md) are enabled, the caller needs the `RESTORE` permission on the `BACKUP` resource.                                                                                |
 
 ## Restoring a cluster
 
