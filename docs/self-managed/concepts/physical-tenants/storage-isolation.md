@@ -57,6 +57,56 @@ tenanta:
 
 <!--- **Pending benchmarks**: Specific resource consumption per tenant will be provided once performance benchmarks complete. --->
 
+## Elasticsearch and OpenSearch storage
+
+Each Physical Tenant can use a shared Elasticsearch or OpenSearch cluster with isolated index prefixes, or a dedicated cluster per tenant.
+
+### Configuration models
+
+**Shared cluster with index prefix isolation** (recommended for cost-efficiency):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch # or opensearch
+      elasticsearch:
+        url: https://es.example.com:9200
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          elasticsearch:
+            index-prefix: tenanta # must be unique per tenant
+    tenantb:
+      data:
+        secondary-storage:
+          elasticsearch:
+            index-prefix: tenantb
+```
+
+**Separate cluster per tenant** (maximum isolation):
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: elasticsearch
+      elasticsearch:
+        url: https://es-default.example.com:9200
+        index-prefix: default
+  physical-tenants:
+    tenanta:
+      data:
+        secondary-storage:
+          elasticsearch:
+            url: https://es-tenanta.example.com:9200
+            index-prefix: tenanta
+```
+
+For AWS-hosted OpenSearch Service, including authentication with AWS credentials, see [Amazon OpenSearch Service storage](#amazon-opensearch-service-storage) below.
+
 ## Amazon OpenSearch Service storage
 
 When secondary storage runs on Amazon OpenSearch Service, each physical tenant can authenticate with its own credentials. The connection settings `url`, `username`, `password`, and `index-prefix` are all overridable per physical tenant, supporting either a shared OpenSearch instance or a dedicated OpenSearch instance per tenant.
