@@ -98,5 +98,5 @@ Errors returned by the Camunda SDK.
 Convenience alias used throughout the SDK.
 
 ```rust
-pub type Result = Result<T, CamundaError>;
+pub type Result<T> = std::result::Result<T, CamundaError>;
 ```

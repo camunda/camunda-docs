@@ -57,7 +57,7 @@ Boxed, shareable job handler. You normally pass a closure to `JobWorker::run`
 rather than constructing this directly.
 
 ```rust
-pub type JobHandler = Arc<dyn Fn(Job) -> Pin<Box<dyn Future<Output> + Send>> + Send + Sync>;
+pub type JobHandler = Arc<dyn Fn(Job) -> Pin<Box<dyn Future<Output = JobAction> + Send>> + Send + Sync>;
 ```
 
 ## JobWorker
