@@ -184,6 +184,48 @@ In that case, you could declare **Result Expression** as follows:
 }
 ```
 
+### Function createDocument
+
+Starting from version 8.10.0, `createDocument` is available in the **Result expression** and **Error expression** fields.
+It converts part of a connector's response into a real [document](/components/document-handling/getting-started.md)
+reference, so you can store only the relevant part of a response as a document instead of the entire response.
+
+- Parameters:
+  - `value`: string or context (see fields below)
+- Result: context, resolved into a document reference
+
+If `value` is a string, it's treated as base64-encoded content with no metadata:
+
+```feel
+createDocument(response.body.file[1].document.data)
+```
+
+If `value` is a context, it can contain the following fields:
+
+| Field                | Required | Description                                                                                                                                                                |
+| -------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `content` or `data`  | Yes      | The base64-encoded document content. Either key name is accepted.                                                                                                          |
+| `name` or `fileName` | No       | The filename. If omitted, a UUID is generated automatically.                                                                                                               |
+| `contentType`        | No       | The MIME type of the content. If omitted, it's inferred from the file extension of `name`/`fileName`; defaults to `application/octet-stream` if no extension is available. |
+
+```feel
+createDocument({
+  data: response.body.file[1].document.data,
+  name: response.body.file[1].filename
+})
+```
+
+There is no plural `createDocuments` function. Use FEEL's native iteration to extract multiple documents:
+
+```feel
+= { documents: for f in response.body.file return createDocument(f.document) }
+```
+
+:::note
+`createDocument` requires the runtime to have access to a configured document store. See
+[document handling](/components/document-handling/getting-started.md).
+:::
+
 ## Activation
 
 The **Activation** section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).
