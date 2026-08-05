@@ -212,7 +212,7 @@ For details and examples, see [using AWS Aurora PostgreSQL with Camunda](../../.
 
 - **Orchestration Cluster**: ✅ Full RDBMS support for secondary storage (includes Zeebe, Operate, Tasklist, Orchestration Identity).
 - **Connectors**: ✅ Supports RDBMS for process definitions and state.
-- **Camunda Hub**: ✅ RDBMS support available in 8.9.
+- **Camunda Hub**: ✅ Supports RDBMS.
 - **Optimize**: ❌ **Requires Elasticsearch or OpenSearch only.** Optimize cannot use RDBMS.
 
 If you deploy Optimize, you must still provision Elasticsearch or OpenSearch.
