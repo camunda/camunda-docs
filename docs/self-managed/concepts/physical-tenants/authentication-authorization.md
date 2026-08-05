@@ -115,7 +115,20 @@ camunda:
                 - UPDATE
 ```
 
-Every explicitly configured Physical Tenant must declare its own `security.initialization` block — it is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. The **default** Physical Tenant is exempt: it keeps the top-level `camunda.security.initialization`, whether synthesized from the root or declared explicitly.
+Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant — it is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:
+
+- The **default** Physical Tenant, which keeps the top-level `camunda.security.initialization`, whether synthesized from the root or declared explicitly.
+- Any tenant with `security.authorization.enabled: false` (per-tenant override, or inherited from the root), since the initialization block only takes effect when authorization is enabled.
+
+If a non-default tenant with authorization enabled omits the block, startup fails:
+
+```text
+Each explicitly-configured physical tenant must declare its own initialization block under
+'camunda.physical-tenants.<id>.security.initialization.*' when authorization is enabled for that
+tenant; it may not be inherited from the root (the 'default' tenant keeps the top-level
+'camunda.security.initialization'). Physical tenants missing a required initialization block:
+[tenanta, tenantb]
+```
 
 ## Token claim mappings
 

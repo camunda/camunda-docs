@@ -102,9 +102,7 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
-
-<!-- TODO: Confirm the exact startup error message format (log level, error code, message text) for conflicting RDBMS URL+prefix and conflicting document store location. Check the sibling `*Validation` classes alongside io.camunda.configuration.physicaltenants.PhysicalTenantAssignedProvidersValidation in camunda/camunda. @christinaausley -->
+At startup, configuration validation enforces tenant-level constraints. All validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting — there is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
 Known constraints and behavior for 8.10:
 
@@ -119,6 +117,31 @@ Known constraints and behavior for 8.10:
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
+
+### Startup error message formats
+
+**Secondary storage (RDBMS, Elasticsearch, or OpenSearch) location conflict:**
+
+```text
+Physical tenants must not share a secondary-storage location, or they would write into the same
+database. Use a distinct connection, or a distinct index/table prefix per tenant. Conflicts: tenants
+[tenanta, tenantb] share the same secondary-storage location [type=rdbms,
+connection=jdbc:postgresql://db/shared, namespace='']
+```
+
+For Oracle, a colliding RDBMS location additionally appends a hint to isolate by schema-per-user instead: `To isolate Oracle physical tenants by schema-per-user (distinct DB users on a shared jdbc url), set data.secondary-storage.rdbms.database-vendor-id: oracle on each tenant.`
+
+**Document store location conflict:**
+
+```text
+Physical tenants must not share a document store location, or they would read and write into the
+same backing storage. Use a distinct bucket, container, or path per tenant, and never nest one
+tenant's path inside another's — a nested path is reachable through a caller-supplied document id,
+which no object store bounds at '/'. Conflicts: tenants [tenanta, tenantb] share the same document
+store location [provider=aws, namespace=[company-docs-bucket], keyPrefix='tenant-a']
+```
+
+If one tenant's path is nested inside another's rather than identical, the message instead reads: `tenant <enclosing> 's document store location [...] encloses tenant <enclosed> 's [...]`.
 
 ## Configuration examples
 

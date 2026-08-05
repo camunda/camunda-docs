@@ -42,6 +42,8 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 ## Cluster-wide endpoints
 
+<!-- TODO: Re-confirm the `/cluster/v2/...` prefix used throughout this section with @deepthidevaki or meggle -->
+
 A cluster-wide endpoint applies to the whole cluster rather than a single Physical Tenant. The cluster-wide topology is exposed under a dedicated `/cluster/v2/...` path prefix, at `/cluster/v2/topology`.
 
 The legacy `/v2/status` endpoint is deprecated. It continues to serve the default Physical Tenant only for backward compatibility. Use `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.

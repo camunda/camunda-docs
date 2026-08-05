@@ -55,6 +55,8 @@ The diagram shows one orchestration cluster boundary with shared control-plane c
 
 ## API routing
 
+<!-- TODO: Re-confirm the `/cluster/v2/...` prefix used on this page -->
+
 Use tenant-scoped routes for tenant-specific requests:
 
 - REST: `/physical-tenants/{physicalTenantId}/v2/...`

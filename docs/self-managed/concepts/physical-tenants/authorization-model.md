@@ -5,7 +5,7 @@ sidebar_label: "Authorization model"
 description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-<!-- TODO: Confirm with @deepthidevaki whether any new permissions were introduced for physical-tenant-scoped API calls (camunda/camunda#55259). Sebastian isn't aware of any as of 2026-08, but flagged it as Deepthi's area to confirm. @christinaausley -->
+<!-- TODO: Confirm with @deepthidevaki whether any new permissions were introduced for physical-tenant-scoped API calls (camunda/camunda#55259).  -->
 
 This page describes the authorization model for Physical Tenants in Camunda 8.10 Self-Managed deployments. Authorization is divided into two scopes: **cluster-wide operations**, which affect the entire orchestration cluster, and **tenant-local operations**, which are scoped to a single Physical Tenant. In 8.10, only tenant-local operations are available; cluster-wide operations are a planned future capability.
 
@@ -24,6 +24,10 @@ Cluster-wide operations affect the entire orchestration cluster rather than a si
 :::note
 Cluster-wide operations and the cluster-admin role are not available in 8.10 and are planned for a future release. When added, cluster-wide endpoints will be exposed under a dedicated `/cluster/v2/...` path prefix. Check the [8.10 announcements](../../../reference/announcements-release-notes/8100/8100-announcements.md) for updates.
 :::
+
+<!-- TODO: Re-confirm "not available in 8.10" for cluster-admin against the epic's alpha4 status update (Identity Slice-4 Cluster Admin support was marked "on track/completed" for alpha4 -->
+
+<!-- TODO: Re-confirm the `/cluster/v2/...` prefix with @deepthidevaki -->
 
 Endpoints served at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
 
