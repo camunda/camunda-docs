@@ -71,44 +71,6 @@ Elasticsearch/OpenSearch storage isolation is not yet available in the current a
 
 Use separate clusters or a shared cluster with per-tenant index prefixes.
 
-### Configuration models
-
-**Separate cluster (maximum isolation)**:
-
-```yaml
-camunda:
-  physical-tenants:
-    default:
-      data:
-        secondary-storage:
-          elasticsearch:
-            url: https://es-default.example.com:9200
-    tenanta:
-      data:
-        secondary-storage:
-          elasticsearch:
-            url: https://es-tenant-a.example.com:9200
-```
-
-**Shared cluster with index prefix (cost-effective)**:
-
-```yaml
-camunda:
-  physical-tenants:
-    default:
-      data:
-        secondary-storage:
-          elasticsearch:
-            url: https://es.example.com:9200
-    tenanta:
-      data:
-        secondary-storage:
-          elasticsearch:
-            url: https://es.example.com:9200
-            index-prefix: "tenant-a"
-            # Indices: tenant-a-process-instances, tenant-a-incidents, etc.
-```
-
 ### Naming and collision prevention
 
 - **Prefix format**: `{tenantId}` (dash automatically appended by the application)
