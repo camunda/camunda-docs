@@ -119,8 +119,7 @@ export const clientCards = [
     link: "../csharp-sdk/",
     title: "C# SDK",
     image: IconCsharpImg,
-    description:
-      "Technical preview of the C# client SDK for the Camunda 8 Orchestration Cluster REST API.",
+    description: "Build Camunda 8 applications using the Camunda C# SDK.",
     type: "",
   },
   {

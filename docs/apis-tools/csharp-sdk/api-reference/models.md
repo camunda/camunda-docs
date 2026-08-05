@@ -7,10 +7,6 @@ mdx:
 
 # Models
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 Request and response model classes (630 types).
 
 ## Quick Reference

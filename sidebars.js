@@ -1510,7 +1510,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "C# SDK (Technical Preview)",
+          label: "C# SDK",
           link: {
             type: "doc",
             id: "apis-tools/csharp-sdk",
