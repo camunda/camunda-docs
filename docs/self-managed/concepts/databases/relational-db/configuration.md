@@ -222,10 +222,10 @@ Multi-region support for RDBMS uses the asynchronous replication feature of the 
 dependent on the database vendor. While most multi-region replication is performed by the database itself, Camunda
 provides additional features to enhance automatic recovery in the event of a failure.
 
-Asynchronous replicated databases are synchronised with a delay, meaning that after a failover, the new primary database
+Asynchronous replicated databases are synchronized with a delay, meaning that after a failover, the new primary database
 may not contain all the data written to the old primary database. This can lead to data loss in secondary storage. While
 this data can be reproduced by replaying past records from the Zeebe log stream, the relevant segments and records must still
-be present on all brokers. Zeebes lgstream segments are usually compacted as soon as all exporters have acknowledged the
+be present on all brokers. Zeebe's logstream segments are usually compacted as soon as all exporters have acknowledged the
 records.
 
 Camunda supports different strategies to handle this situation and preventing Zeebe log stream segments from being
@@ -256,7 +256,7 @@ camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
 | Property name                                 | Description                                                                   | Default |
 | --------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
 | `async-replication.enabled`                   | If the async replication monitoring should be enabled                         | false   |
-| `async-replication.min-sync-replicas`         | The minimal number of replicas in sync                                        | 1       |
+| `async-replication.min-sync-replicas`         | The minimum number of replicas in sync                                        | 1       |
 | `async-replication.polling-interval`          | The interval in which to check the replicas                                   | PT15S   |
 | `async-replication.max-lag`                   | The max tolerated lag of a replication (ISO-8601 duration)                    | PT15M   |
 | `async-replication.pause-on-max-lag-exceeded` | If the exporter should pause exporting when the maximum lag limit is exceeded | false   |
@@ -265,8 +265,8 @@ camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
 
 The following databases are supported for LSN replication monitoring:
 
-- Aurora Global DB with PostgreSQL
-- Aurora Global DB with MySQL
+- Aurora Global Database with PostgreSQL
+- Aurora Global Database with MySQL
 - MSSQL
 - PostgreSQL
 
@@ -281,21 +281,30 @@ GRANT PG_MONITOR TO <user>;
 To use the LSN replication monitoring with MSSQL, the database user must have the following additional privileges:
 
 - `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
-- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 202 and newer versions
 
-```sql
-GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
-```
+  ```sql
+  GRANT VIEW SERVER STATE TO <user>;
+  ```
+
+- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 2022 and newer versions
+
+  ```sql
+  GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
+  ```
 
 ### Delay backoff replication monitoring
 
 The exporter always waits for a configured amount of time until an exported record is acknowledged to the broker as exported. This is supported for all databases.
 
-This is a fallback strategy for databases that do not support any other direct replication monitoring. It does not
+This is a fallback strategy for databases that do not support any other direct replication monitoring — prefer [LSN replication monitoring](#lsn-replication-monitoring) whenever your database vendor supports it. Delay backoff does not
 directly monitor any replication state, but instead adds a static delay to the acknowledgement of records to the broker.
 This can be used as a safety net to ensure that the Zeebe logstream segments are not compacted too early, even if the database
 replication is not fully in sync. This strategy requires external monitoring of the actual replication lag to ensure
 that the configured delay is sufficient for the database replication to catch up in case of a failover.
+
+:::warning
+The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. Size the persistent volume to hold all records produced during that interval. If the volume is too small, Zeebe runs out of disk space and stops processing.
+:::
 
 ```yaml
 camunda.data.secondary-storage.rdbms.async-replication.enabled: true
