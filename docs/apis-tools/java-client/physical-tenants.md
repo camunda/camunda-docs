@@ -4,6 +4,9 @@ title: "Physical Tenants"
 description: "Target Physical Tenants from the Camunda Java client, and understand how this differs from logical tenant targeting."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 **Physical Tenants are strongly isolated execution units within a single Orchestration Cluster**, distinct from the [logical tenant](./job-worker.md#multi-tenancy) mechanism. This page covers how the Java client targets a Physical Tenant, and how to work with multiple Physical Tenants from a single application.
 
 For the server-side isolation model, see [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md). For API routing details, see [API routing for Physical Tenants](/self-managed/concepts/physical-tenants/api-routing.md).
@@ -54,7 +57,23 @@ CamundaClient client = CamundaClient.newClientBuilder()
 
 ## Targeting multiple Physical Tenants
 
-A single `CamundaClient` instance targets exactly one Physical Tenant. To interact with multiple Physical Tenants from one application, create one client instance per tenant:
+A single `CamundaClient` instance targets exactly one Physical Tenant. Multiplicity lives at the application layer, not inside the client — to interact with multiple Physical Tenants, create one client instance per tenant:
+
+```mermaid
+graph LR
+    app["Your application"]
+
+    app --> clientA["CamundaClient\nphysicalTenantId: teamA"]
+    app --> clientB["CamundaClient\nphysicalTenantId: teamB"]
+
+    subgraph cluster["Single orchestration cluster"]
+        teamA["Physical Tenant teamA"]
+        teamB["Physical Tenant teamB"]
+    end
+
+    clientA -->|"gRPC header +\nREST path prefix"| teamA
+    clientB -->|"gRPC header +\nREST path prefix"| teamB
+```
 
 ```java
 CamundaClient teamAClient = CamundaClient.newClientBuilder()
@@ -82,7 +101,10 @@ teamAClient.newCreateInstanceCommand()
 
 The process instance is created within Physical Tenant `teamA`. No additional API parameter is needed — the client's `physicalTenantId` determines the target.
 
-### Register a job worker for one Physical Tenant
+### Register a job worker
+
+<Tabs groupId="tenant-scope" queryString>
+<TabItem value="single" label="One Physical Tenant">
 
 ```java
 teamAClient.newWorker()
@@ -93,7 +115,8 @@ teamAClient.newWorker()
 
 This worker only polls Physical Tenant `teamA` — it uses the gRPC channel configured with the `teamA` header.
 
-### Register a job worker across multiple Physical Tenants
+</TabItem>
+<TabItem value="multi" label="Multiple Physical Tenants">
 
 There's no single worker registration that spans Physical Tenants. Open the same job type on each client instance:
 
@@ -116,6 +139,9 @@ public class ShipOrderHandler implements JobHandler {
   }
 }
 ```
+
+</TabItem>
+</Tabs>
 
 ### Update a variable scoped to a Physical Tenant
 
