@@ -81,6 +81,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 | [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
 | [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
+| [8.8.17](https://github.com/camunda/connectors/releases/tag/8.8.17) | Breaking change | [Default secret provider prefix change](#default-secret-provider-prefix-change)                                                                       |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
 
@@ -551,7 +552,7 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 
 #### Default secret provider prefix change
 
-Starting with a Connectors 8.8.x patch release, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
+Starting with Connectors 8.8.17, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
 
 Previously, when no prefix was configured, all environment variables available to the connector runtime process could be resolved as connector secrets. This allowed a BPMN process author with deploy access to potentially extract sensitive environment variables — such as credentials for other components sharing the same runtime environment — through connector secret references.
 
