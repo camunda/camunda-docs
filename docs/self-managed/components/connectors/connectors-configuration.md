@@ -302,7 +302,7 @@ export SUPER_SECRETS_MY_SECRET='foo'   # Resolved via {{ secrets.MY_SECRET }}
 To restore the previous behavior where all environment variables can be used as connector secrets, set the prefix to an empty value:
 
 ```
-camunda.connector.secret-provider.environment.prefix=
+camunda.connector.secretprovider.environment.prefix=
 ```
 
 :::warning
