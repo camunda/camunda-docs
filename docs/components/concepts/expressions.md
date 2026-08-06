@@ -6,7 +6,7 @@ description: "Expressions can be used to access variables and calculate values d
 
 Expressions can be used to access variables and calculate values dynamically.
 
-This is particularly useful when [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) and [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md).
+This is particularly useful when [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md), [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), or implementing [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md).
 
 Some attributes of BPMN elements _require_ an expression, for example, a [sequence flow condition](/components/modeler/bpmn/exclusive-gateways/exclusive-gateways.md#conditions) on an exclusive
 gateway. Other attributes can define an expression _optionally_ as an alternative to a static value, for example, a
@@ -58,5 +58,6 @@ Read more about FEEL expressions and how to use them on the following pages:
 - [Data types](/components/modeler/feel/language-guide/feel-data-types.md)
 - [Expressions and operators](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
 - [Available built-in functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-introduction.md)
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 - [FEEL](/components/modeler/feel/what-is-feel.md)
 - [DMN specification](https://www.omg.org/spec/DMN/About-DMN/)
