@@ -184,7 +184,7 @@ The overall `status` reports the state of the cluster change that performs the r
 | `IN_PROGRESS` | The restore is running.                                              |
 | `COMPLETED`   | Every partition was restored and the brokers returned to processing. |
 | `FAILED`      | The restore change failed and did not complete.                      |
-| `CANCELLED`   | The restore change was cancelled.                                    |
+| `CANCELLED`   | The restore change was canceled.                                     |
 
 Each partition entry reports the progress of a single broker's copy of that partition:
 
@@ -238,10 +238,8 @@ Automatic retries can't help if the problem is the backup itself, for example if
 
    The restore status reports the change as `CANCELLED`, and the cluster stays in recovery mode.
 
-2. Send a new [restore request](#3-trigger-the-restore). Because each restore drops the local partition data before it writes the backup data, the new attempt does not build on the partial result of the cancelled one, and you can select a different backup target.
-
-Repeat this as often as needed. A restore stays acceptable while every broker is in recovery mode, so cancelling and retrying does not require another mode change.
+2. Send a new [restore request](#3-trigger-the-restore). Because each restore drops the local partition data before it writes the backup data, the new attempt does not build on the partial result of the canceled one, and you can select a different backup target.
 
 :::warning
-Don't leave a partially failed restore unfinished. Between cancelling a restore and completing a new one, Zeebe's internal data is a mix of restored and pre-restore state and cannot be trusted. Keep the cluster in recovery mode and retry until every partition reaches `RESTORED`. If you switch the cluster back to `PROCESSING` in that state, treat it as unrecoverable and restore again from a clean state.
+Don't leave a partially failed restore unfinished. Between canceling a restore and completing a new one, Zeebe's internal data is a mix of restored and pre-restore state and cannot be trusted. Keep the cluster in recovery mode and retry until every partition reaches `RESTORED`. If you switch the cluster back to `PROCESSING` in that state, treat it as unrecoverable and restore again from a clean state.
 :::
