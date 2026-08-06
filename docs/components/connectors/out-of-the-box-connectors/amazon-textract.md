@@ -72,6 +72,9 @@ Configure the AWS region for this connector.
 
 Analyze documents using Textract. Different input parameters are available depending on the **Execution type** you select.
 
+<!-- Legacy anchor: already-distributed element templates link to #execution-types. Do not remove. -->
+<span id="execution-types" />
+
 #### Input parameters
 
 | Property          | Type     | Required               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example           |
