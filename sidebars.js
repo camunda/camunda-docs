@@ -1453,6 +1453,7 @@ module.exports = {
           },
           items: [
             "apis-tools/java-client/job-worker",
+            "apis-tools/java-client/physical-tenants",
             "apis-tools/java-client/logging",
           ],
         },

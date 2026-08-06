@@ -162,6 +162,42 @@ camunda:
 
 This does also affect the default tenant being used by all job workers, however there are [more possibilities](#control-tenant-usage) to configure them.
 
+### Multi-client configuration (Physical Tenants)
+
+A single `camunda.client.*` configuration targets exactly one [Physical Tenant](/self-managed/concepts/physical-tenants/index.md) (the default tenant, unless `physical-tenant-id` is set). To target multiple Physical Tenants from one Spring application, configure multiple named clients under `camunda.clients.<name>.*`:
+
+```yaml
+camunda:
+  clients:
+    teamA:
+      physical-tenant-id: teamA
+      primary: true
+    teamB:
+      physical-tenant-id: teamB
+```
+
+Each named client is a sparse overlay on top of the base `camunda.client.*` configuration — any property you don't set per client (address, auth, and so on) falls back to the shared `camunda.client.*` value. Exactly one client should be marked `primary: true`; if you configure only one client, it's implicitly primary.
+
+All clients must share the same `camunda.client.auth.method` — mixing authentication methods across clients in one application throws an `IllegalArgumentException` at startup. Credentials themselves (client ID, secret, and so on) can still differ per client.
+
+If you don't configure any `camunda.clients.*` entries, your application has a single, implicitly-named `default` client — existing single-client configuration is unaffected.
+
+#### Access a named client
+
+Each named client is also available as a Spring bean, named `<name>CamundaClient` (for example, `teamACamundaClient`). To look up clients by name at runtime, inject `CamundaClientRegistry`:
+
+```java
+@Autowired
+private CamundaClientRegistry clientRegistry;
+
+public void useTeamAClient() {
+  CamundaClient teamAClient = clientRegistry.get("teamA");
+  // ...
+}
+```
+
+`CamundaClientRegistry` also provides `find(String)` (returns an `Optional`), `getPrimary()`, `clientNames()`, and `all()` (a `Map` of every configured client, keyed by name).
+
 ## Authentication
 
 The authentication method is determined by `camunda.client.auth.method`. If omitted, the client will try to detect the authentication method based on the provided properties.
@@ -932,6 +968,14 @@ camunda:
             - foo
 ```
 
+##### Physical Tenant fan-out for multi-client applications
+
+The `@JobWorker` annotation has no attribute to bind a worker to one named client. In a [multi-client](#multi-client-configuration-physical-tenants) application, every `@JobWorker` method registers against **all** configured clients — it fans out across the whole `CamundaClientRegistry`, not just the primary or default one. A worker is never silently dropped for the clients it isn't explicitly bound to, since no such binding exists.
+
+In an application with only one client, this has no visible effect — there's only one client to fan out to.
+
+If you need a worker to run against only some of your configured Physical Tenants, filter inside the handler using the tenant identifier available to you at runtime, rather than relying on annotation-level scoping.
+
 #### Define the job timeout
 
 To define the job timeout, you can set the annotation (`long` in milliseconds):
@@ -1191,6 +1235,8 @@ public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
   }
 }
 ```
+
+In a [multi-client](#multi-client-configuration-physical-tenants) application, one `CamundaClientCreatedSpringEvent`/`CamundaClientClosingSpringEvent` fires per configured client, each carrying that client's name — listen for these instead if you need to tell clients apart.
 
 ### Post deployment event
 
