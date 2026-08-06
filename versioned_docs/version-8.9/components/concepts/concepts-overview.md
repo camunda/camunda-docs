@@ -124,7 +124,7 @@ Some automated processes require human contribution and interaction. [Create and
 
 ### Tasklist
 
-[Tasklist](/components/tasklist/introduction-to-tasklist.md) offers a lightweight, user-friendly interface for human work, tightly integrated with custom forms. It provides an out-of-the-box user interface for tasks so teams can rapidly iterate on process development without having to build a custom frontend application.
+[Tasklist](/components/tasklist/introduction-to-tasklist.md) offers a lightweight, user-friendly interface for human work, tightly integrated with custom forms. It provides an out-of-the-box user interface for tasks so teams can rapidly iterate on process development without having to build a custom frontend application. Tasklist surfaces tasks the same way whether the previous step ran automatically or an AI agent produced the result a person now needs to act on.
 
 ### Workflow and decision engine
 
