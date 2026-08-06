@@ -1,12 +1,5 @@
 ---
 title: Understanding human task management
-tags:
-  - Human Task
-  - Delegation
-  - Escalation
-  - E-Mail Notification
-  - 4-Eyes-Principle
-  - Overdue Task
 description: "Use Camunda task management features or implement your requirements in a generic way for readable models."
 ---
 

@@ -2,7 +2,6 @@
 id: message-aggregation
 title: Message aggregation
 description: "Learn how to collect and process multiple related messages in a single workflow instance using message correlation in Camunda 8."
-tags: [messages, correlation, aggregation, orchestration, zeebe, patterns]
 ---
 
 Use message aggregation to collect multiple related messages into a single process instance before proceeding to the next step of your workflow.
