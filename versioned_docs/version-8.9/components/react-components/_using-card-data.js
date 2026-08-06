@@ -13,19 +13,6 @@ import IconConsoleImg from "../assets/icon-console.png";
 
 export const featuresCards = [
   {
-    link: "./agentic-orchestration/agentic-orchestration-overview",
-    title: "Agentic orchestration",
-    image: IconAgenticImg,
-    description:
-      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
-  },
-  {
-    link: "./modeler/web-modeler/idp/",
-    title: "Intelligent document processing (IDP)",
-    image: IconIdpImg,
-    description: "Integrate automated document processing into your processes.",
-  },
-  {
     link: "./rpa/overview/",
     title: "Robotic process automation (RPA)",
     image: IconRpaImg,

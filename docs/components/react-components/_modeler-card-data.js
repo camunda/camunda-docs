@@ -31,6 +31,12 @@ export const fundamentalCards = [
     image: IconPlayImg,
     description: "Understand data types supported by cluster variables.",
   },
+  {
+    link: "../cluster-variable-metadata/",
+    title: "Metadata",
+    image: IconPlayImg,
+    description: "Attach and filter searchable metadata on cluster variables.",
+  },
 ];
 
 // Further resources cards on cluster variables page

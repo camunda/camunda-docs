@@ -69,6 +69,7 @@ jobs:
           error-messages: |
             The runner has received a shutdown signal.
             The operation was canceled.
+            some files vanished before they could be transferred
           run-id: ${{ github.run_id }}
           repository: ${{ github.repository }}
           vault-addr: ${{ secrets.VAULT_ADDR }}

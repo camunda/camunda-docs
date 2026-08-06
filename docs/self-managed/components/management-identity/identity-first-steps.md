@@ -10,7 +10,7 @@ import IdentityLoginImg from './img/identity-login-page.png';
 Get started with Management Identity in Self-Managed by learning how to open and log in to the Management Identity interface.
 
 :::note
-Management Identity is included in the [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/deployment/helm/install/quick-install.md) deployments of Camunda 8 Self-Managed. With the default configuration, Management Identity uses an included Keycloak container/pod.
+Management Identity is included in the full and standalone Camunda Hub [Docker Compose configurations](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration) and in the default [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md). These configurations include Keycloak. The lightweight Docker Compose configuration does not start Management Identity or Keycloak.
 :::
 
 ## Log in to Management Identity
@@ -21,7 +21,7 @@ Once Management Identity has successfully started, you can open the **Log in** p
 
 If you are running the default configuration, you can access the Management Identity interface via the following URLs:
 
-- [Docker-Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md): `http://localhost:8084/`
+- [Docker Compose full or standalone configuration](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration): `http://localhost:8084/`
 - [Helm](/self-managed/deployment/helm/install/quick-install.md): Follow your [`port-forward` or Ingress configuration](/self-managed/deployment/helm/configure/ingress/accessing-components-without-ingress.md)
 - [Manual](/self-managed/deployment/manual/install.md): `http://localhost:8080/`
 
@@ -48,7 +48,7 @@ You are directed to the home page once you have successfully logged in.
 
 ## Next steps
 
-Once you log in to Management Identity, you can start managing authentication, access and permissions to Web Modeler, Console and Optimize.
+Once you log in to Management Identity, you can start managing authentication, access, and permissions for Camunda Hub and Optimize.
 
 - [Manage users, groups, roles, and applications](application-user-group-role-management/identity-application-user-group-role-management-overview.md)
 - [Manage access and permissions](access-management/access-management-overview.md)
