@@ -63,7 +63,7 @@ To deploy from Desktop Modeler to the lightweight configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint:** `http://localhost:8088/v2`
+   - **Cluster endpoint:** `http://localhost:8080/v2`
    - **Authentication:** **None**
 1. Click **Deploy**.
 
@@ -76,7 +76,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint:** `http://localhost:8088/v2`
+   - **Cluster endpoint:** `http://localhost:8080/v2`
    - **Authentication:** **OAuth**
    - **OAuth URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
    - **Client ID:** `orchestration`
@@ -85,7 +85,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Click **Deploy**.
 
 :::tip
-The full configuration uses Keycloak for OIDC authentication. The client credentials are preconfigured in the `.env` file and admin configuration.
+The full configuration uses Keycloak for OIDC authentication. The client credentials are preconfigured in the `.env` file and Management Identity configuration.
 :::
 
 ### Deploy with Web Modeler
@@ -98,7 +98,7 @@ Non-production installations of Web Modeler are limited to five collaborators pe
 
 #### Standalone setup
 
-To start Web Modeler and its dependencies independently, run:
+To start Web Modeler, its WebSockets service, Management Identity, Keycloak, PostgreSQL, and Mailpit independently, run:
 
 ```shell
 docker compose -f docker-compose-web-modeler.yaml up -d

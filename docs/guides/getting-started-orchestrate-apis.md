@@ -72,7 +72,9 @@ To deploy your process, take the following steps:
 
 Congratulations! You successfully built your first API orchestration solution with Camunda 8.
 
-Camunda 8 empowers users to automate processes faster. connectors are reusable components that allow you to access APIs without writing code.
+Camunda 8 empowers users to automate processes faster. With connectors, you can access APIs without writing code.
+
+Connector tasks are also how you give an [AI agent](/reference/glossary.md#ai-agent) something to do. An agent can call the same connectors you used here as its tools, and the process still defines which tools the agent is allowed to use.
 
 Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
 
@@ -96,6 +98,7 @@ Don't want to build the process yourself? Click this button to create it from a 
 ## Additional resources and next steps
 
 - Learn more about Camunda 8 and what it can do by reading [What is Camunda 8](/components/components-overview.md) or watching our [Overview video](https://bit.ly/3TjNEm7) in Camunda Academy.
+- [Build your first AI agent](./getting-started-agentic-orchestration.md)
 - [Learn about types of connectors](/components/connectors/connector-types.md)
 - [Use connectors in your BPMN process](/components/connectors/use-connectors/index.md)
 - [Camunda Academy: Generate a Connector Template from an API Specification](https://academy.camunda.com/c8-h2-generate-connector-from-api/)

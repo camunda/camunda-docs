@@ -1440,5 +1440,12 @@
       "region": "GetGlobalJobStatistics",
       "label": "Get global job statistics"
     }
+  ],
+  "resolve_secrets": [
+    {
+      "file": "secret.py",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets"
+    }
   ]
 }

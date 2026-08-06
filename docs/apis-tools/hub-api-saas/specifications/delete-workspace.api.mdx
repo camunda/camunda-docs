@@ -1,11 +1,11 @@
 ---
 id: delete-workspace
 title: "Delete a workspace"
-description: "Deletes the workspace with the given key. The workspace must be empty, meaning it contains no files, no projects, and no IDP applications."
+description: "Soft-deletes the workspace with the given key, cascading to all of its projects, folders, files, and IDP applications. The workspace is moved to the recently deleted state and can be recovered during the retention window. To permanently and irreversibly remove a workspace, use `DELETE /workspaces/{workspaceKey}/permanent` instead."
 sidebar_label: "Delete a workspace"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: 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
 sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Deletes the workspace with the given key. The workspace must be empty, meaning it contains no files, no projects, and no IDP applications.
+Soft-deletes the workspace with the given key, cascading to all of its projects, folders, files, and IDP applications. The workspace is moved to the recently deleted state and can be recovered during the retention window. To permanently and irreversibly remove a workspace, use `DELETE /workspaces/{workspaceKey}/permanent` instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -65,64 +65,6 @@ Deletes the workspace with the given key. The workspace must be empty, meaning i
   label={undefined}
   responses={{
     "204": { description: "The workspace was deleted successfully." },
-    "400": {
-      description: "The provided data is not valid.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            required: ["type", "title", "status", "detail", "instance"],
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-                example:
-                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-                example: "Bad Request",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                example: 400,
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-                example:
-                  "Request property [maxJobsToActivates] cannot be parsed",
-              },
-              instance: {
-                type: "string",
-                format: "uri-reference",
-                description:
-                  "A URI path identifying the origin of the problem.",
-                example: "/v2/jobs/activation",
-              },
-            },
-            title: "ProblemDetail",
-          },
-          example: {
-            type: "about:blank",
-            title: "Bad Request",
-            status: 400,
-            detail:
-              "Validation failed for request body: 'name' must not be blank.",
-            instance: "/api/v2/files",
-          },
-        },
-      },
-    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },

@@ -2,16 +2,16 @@
 id: overview
 title: "Management Identity"
 sidebar_label: "Overview"
-description: "Management Identity is the component within Camunda 8 Self-Managed responsible for authentication and authorization for Web Modeler, Console and Optimize."
+description: "Management Identity is the component within Camunda 8 Self-Managed responsible for authentication and authorization for Camunda Hub and Optimize."
 ---
 
 The Management Identity component in Camunda 8 Self-Managed is used to manage authentication, access, and authorization for components outside the [Orchestration Cluster](/self-managed/components/orchestration-cluster/overview.md): [Camunda Hub](../hub/index.md) and [Optimize](../optimize/overview.md).
 
-Management Identity controls who can sign in to Console, Modeler, and Optimize, which is separate from the cluster identity stack provided by [Admin (formerly Orchestration Cluster Identity)](/self-managed/components/orchestration-cluster/admin/overview.md). Admin controls access to Zeebe, Operate, Tasklist, and the Orchestration Cluster API within each cluster.
+Management Identity controls who can sign in to Camunda Hub and Optimize, which is separate from the cluster identity stack provided by [Admin (formerly Orchestration Cluster Identity)](/self-managed/components/orchestration-cluster/admin/overview.md). Admin controls access to Zeebe, Operate, Tasklist, and the Orchestration Cluster API within each cluster.
 
 ## About Management Identity
 
-Management Identity is included by default in the [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md) and [Helm charts](/self-managed/deployment/helm/install/quick-install.md) deployments of Camunda 8 Self-Managed, and is configured by default to use a packaged Keycloak instance as an identity provider (IdP).
+Management Identity is included in the full and standalone Camunda Hub [Docker Compose configurations](/self-managed/quickstart/developer-quickstart/docker-compose/configuration.md#choose-a-docker-compose-configuration) and in the default [Helm chart deployment](/self-managed/deployment/helm/install/quick-install.md). These configurations use the packaged Keycloak instance as an identity provider (IdP). The lightweight Docker Compose configuration uses Orchestration Cluster Admin and does not start Management Identity or Keycloak.
 
 - Administrators can use Management Identity to manage Camunda 8 users, groups, roles, permissions, and applications.
 - Users (interacting via Camunda web components) and applications (interacting via Camunda APIs, such as job workers) are supported, using secure authorization based on OAuth 2.0 standards.
