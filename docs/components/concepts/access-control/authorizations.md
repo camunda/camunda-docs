@@ -212,8 +212,6 @@ Camunda provides predefined roles to simplify access management:
 | **rpa**              | Role for RPA workers.                                                 | `READ` on Resource (`*`), `UPDATE_PROCESS_INSTANCE` on Process Definition (`*`)                                                                                                                                                                                                                   |
 | **task-worker**      | Default role for task workers to handle their own user tasks.         | Property-based `User Task` authorizations on properties `assignee`, `candidateUsers`, `candidateGroups` with permissions `READ`, `CLAIM`, `COMPLETE` (one authorization per property).                                                                                                            |
 
-The `connectors` role also authorizes the tool calls an [AI agent](/reference/glossary.md#ai-agent) makes when a tool is implemented as a connector, so the same permission model governs agent-driven and fixed process steps alike.
-
 ### Role assignment in SaaS
 
 - **admin**: Automatically assigned to organization owner and admin.

@@ -17,7 +17,7 @@ The example below shows how a generic service task can be transformed into a cus
 | <img src={propertiesNoTemplate} alt="Properties panel without an element template" />              | <img src={propertiesWithTemplate} alt="Properties panel with an element template" />              |
 
 :::tip
-[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific type of element template. The [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) template configures an AI agent's ad-hoc sub-process using this same mechanism.
+[Connector templates](../connectors/custom-built-connectors/connector-templates.md) are a specific type of element template. For example, the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) template configures an AI agent's ad-hoc sub-process using this same mechanism.
 :::
 
 ## Next steps
