@@ -497,6 +497,11 @@ RewriteRule ^docs/8.9/components/modeler/web-modeler/modeling/context-pad/?$ /do
 RewriteRule ^docs/8.8/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.8/components/modeler/web-modeler/model-your-first-diagram/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/modeling/context-pad/?$ /docs/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
 
+# Move fromAi() FEEL function docs from the miscellaneous category to a dedicated AI Agent category (8.9, backported to 8.8)
+RewriteRule ^docs/next/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/next/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+RewriteRule ^docs/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------

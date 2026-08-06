@@ -620,3 +620,5 @@ If the `documents` list is not empty, document items are returned in the followi
 :::note
 Request parts are automatically stored in the configured document store when sending a multipart request.
 :::
+
+To extract a document from a base64-encoded field in a non-multipart request body, use the [`createDocument` FEEL function](/components/connectors/use-connectors/index.md#function-createdocument) in the **Result expression** field.
