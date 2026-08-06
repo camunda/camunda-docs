@@ -220,6 +220,8 @@ The following variables are available in the context of the response expression:
 Starting from version 8.7.0, the REST connector supports storing the response as a document. See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
 
+To store part of the response as a document, use the [`createDocument` FEEL function](/components/connectors/use-connectors/index.md#function-createdocument) in the **Result expression** field.
+
 ## Output mapping
 
 ### Result variable

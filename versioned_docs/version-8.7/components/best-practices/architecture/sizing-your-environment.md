@@ -1,11 +1,6 @@
 ---
 id: sizing-your-environment
 title: Sizing your environment
-tags:
-  - Database
-  - Performance
-  - Hardware
-  - Sizing
 description: "Define and size your environment for Camunda 8 appropriately by understanding the factors that influence hardware requirements."
 ---
 
