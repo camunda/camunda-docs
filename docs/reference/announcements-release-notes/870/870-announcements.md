@@ -56,6 +56,20 @@ The following key changes were also released as part of an 8.7.x patch release.
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 
+### Default secret provider prefix change {#default-secret-provider-prefix-change}
+
+Starting with a Connectors 8.7.x patch release, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
+
+Previously, when no prefix was configured, all environment variables available to the connector runtime process could be resolved as connector secrets. This allowed a BPMN process author with deploy access to potentially extract sensitive environment variables — such as credentials for other components sharing the same runtime environment — through connector secret references.
+
+**Action:** Choose one of the following options before or during your upgrade:
+
+- Update your secret environment variables to use the `SECRET_` prefix.
+- Configure a custom prefix via `camunda.connector.secretprovider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`.
+- Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
+
+For more information, see the [connector secrets configuration](/versioned_docs/version-8.7/self-managed/connectors-deployment/connectors-configuration.md#secrets).
+
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
 Camunda 8.7.27 unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.7.27 or any later 8.7.x patch. The built-in Elasticsearch and OpenSearch exporters are unaffected.

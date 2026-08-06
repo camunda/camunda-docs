@@ -296,24 +296,38 @@ Providing secrets to the runtime environment can be achieved in different ways, 
 
 <TabItem value='default'>
 
-:::caution
-By default, all environment variables can be used as connector secrets.
-:::
+Starting with a Connectors 8.7.x patch release, the environment-based secret provider applies the prefix `SECRET_` by default when resolving secrets. Only environment variables that start with this prefix are available as connector secrets.
 
-To limit the environment that can be accessed by the default secret provider, configure a prefix. For example:
+This improves security by preventing all environment variables from being exposed as connector secrets. Existing secrets that do not use the configured prefix will no longer resolve until you update either the environment variables or the prefix configuration.
+
+#### Configure a custom prefix
+
+To use a custom prefix, configure it via the Java property or environment variable and name your secrets accordingly:
 
 ```bash
 export CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX='SUPER_SECRETS_'
 export SUPER_SECRETS_MY_SECRET='foo' # This will be resolved by using {{ secrets.MY_SECRET }}
 ```
 
+#### Restore the previous behavior (unsafe)
+
+To restore the previous behavior where all environment variables can be used as connector secrets, set the prefix to an empty value:
+
+```
+camunda.connector.secretprovider.environment.prefix=
+```
+
+:::warning
+When no prefix is configured, the connector runtime logs a warning that this mode is unsafe because all environment variables are exposed as connector secrets. Camunda does not recommend this mode for production environments.
+:::
+
 The following environment variables can be used to configure the default secret provider:
 
-| Name                                                       | Description                                                              | Default value |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`     | Whether the default secret provider is enabled.                          | `true`        |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`      | The prefix applied to the secret name before looking up the environment. | `""`          |
-| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                      | `false`       |
+| Name                                                       | Description                                                                                                                                                       | Default value |
+| ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_ENABLED`     | Whether the default secret provider is enabled.                                                                                                                   | `true`        |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`      | Prefix applied to the secret name before lookup. Only environment variables starting with this prefix are available as secrets. Set to empty to disable (unsafe). | `SECRET_`     |
+| `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_TENANTAWARE` | Whether the secret provider should be tenant-aware.                                                                                                               | `false`       |
 
 If the secret provider is set to be tenant-aware, the secret format will change to `${prefix}${tenantId}_${secretName}`:
 

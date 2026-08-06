@@ -545,6 +545,29 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Default secret provider prefix change
+
+Starting with a Connectors 8.8.x patch release, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
+
+Previously, when no prefix was configured, all environment variables available to the connector runtime process could be resolved as connector secrets. This allowed a BPMN process author with deploy access to potentially extract sensitive environment variables — such as credentials for other components sharing the same runtime environment — through connector secret references.
+
+**Action:** Choose one of the following options before or during your upgrade:
+
+- Update your secret environment variables to use the `SECRET_` prefix.
+- Configure a custom prefix via `camunda.connector.secretprovider.environment.prefix` or `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PREFIX`.
+- Restore the previous behavior by setting an empty prefix, knowing that Camunda does not recommend this mode for production environments.
+
+<p className="link-arrow">[connector secrets configuration](/versioned_docs/version-8.8/self-managed/components/connectors/connectors-configuration.md#secrets)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
