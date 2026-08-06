@@ -9,6 +9,8 @@ import ConnectorManagementImg from './img/cluster-connector-management-page.png'
 import ConnectorDetailsImg from './img/cluster-connector-instance-details.png';
 import ConnectorProcessDetailsImg from './img/cluster-connector-process-details.png';
 import ConnectorProcessErrorImg from './img/cluster-connector-instance-error.png';
+import OutboundConnectorManagementImg from './img/cluster-connector-outbound-management.png';
+import OutboundConnectorDetailsImg from './img/cluster-connector-outbound-details.png';
 
 Monitor and manage connectors running on your cluster.
 
@@ -33,74 +35,106 @@ The **Connector Management** page provides an overview of the connectors running
 [Webhook connector](/components/connectors/protocol/http-webhook.md) names also include the names of any connector based on the webhook. For example, "_Webhook (aws:eventbridge, GitHubWebhook)_".
 :::
 
+## View inbound connectors
+
+On the **Inbound connectors** tab, active inbound connector types are shown on separate rows.
+
+<img src={ConnectorManagementImg} alt="Connector management page" />
+
+The page header shows counts across all inbound connector instances:
+
+| Field               | Description                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| Unhealthy instances | The total number of unhealthy inbound connector instances across all connector types. |
+| Unknown instances   | The total number of inbound connector instances with an unknown status.               |
+| Total instances     | The total number of inbound connector instances running.                              |
+| Connector types     | The number of distinct inbound connector types with active instances.                 |
+
+Use the search box and status filter to narrow the list of active inbound connectors. Each connector type shows aggregated counts for its instances:
+
+| Field              | Description                                                                             |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| Name               | The name and type ID of the inbound connector. Select it to view its running instances. |
+| Unhealthy          | The number of instances currently unhealthy.                                            |
+| Unknown            | The number of instances with an unknown status.                                         |
+| Healthy            | The number of instances currently healthy.                                              |
+| Triggers           | The total number of triggers recorded for this connector type.                          |
+| Correlation failed | The total number of correlation failures recorded for this connector type.              |
+
 ## View inbound connector instances
 
 Select an inbound connector to view its running instances.
 
 <img src={ConnectorDetailsImg} alt="Connector management page" />
 
-Each inbound connector instance is shown on a separate row.
+The page header shows counts for the selected connector:
 
-| Field                 | Description                                                                                                                                                                                                                                    |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Connector instance ID | The ID of the connector instance. Select it to open the instance details.                                                                                                                                                                      |
-| Elements              | The BPMN element where the connector is active. Use this to locate the connector in your diagram.                                                                                                                                              |
-| Process               | The process ID and version associated with the connector instance.                                                                                                                                                                             |
-| Activation date       | When the connector instance was activated.                                                                                                                                                                                                     |
-| Status                | The current health of the connector instance. `Healthy` means the connector is running without issues. `Unhealthy` means the connector requires attention. Open the instance details to review health details and recent activity log entries. |
-| Reset                 | If a connector instance fails to activate or is stuck in an unhealthy state, select **Reset** after you resolve the underlying issue to retry activation.                                                                                      |
+| Field                        | Description                                                                     |
+| ---------------------------- | ------------------------------------------------------------------------------- |
+| Active inbound executables   | The number of active instances for this connector.                              |
+| Triggers (total)             | The total number of triggers recorded since the last runtime start.             |
+| Correlation failures (total) | The total number of correlation failures recorded since the last runtime start. |
 
-## View outbound connectors
+By default, each inbound connector instance is shown on a separate row below the header counts.
 
-Select an outbound connector to view its details.
+| Field     | Description                                                                                                                                                                                                                                    |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Process   | The process ID and version associated with the connector instance. Select it to open the process in Operate.                                                                                                                                   |
+| Elements  | The BPMN element where the connector is active. Use this to locate the connector in your diagram.                                                                                                                                              |
+| Activated | When the connector instance was activated.                                                                                                                                                                                                     |
+| Status    | The current health of the connector instance. `Healthy` means the connector is running without issues. `Unhealthy` means the connector requires attention. Open the instance details to review health details and recent activity log entries. |
+| Restart   | If a connector instance fails to activate or is stuck in an unhealthy state, select **Restart** after you resolve the underlying issue to retry activation.                                                                                    |
 
-Each outbound connector is shown on a separate row.
+Select **Show runtime breakdown** to open a breakdown of the header counts by runtime. Each runtime is shown in its own column, alongside a total:
 
-| Field           | Description                                                                         |
-| --------------- | ----------------------------------------------------------------------------------- |
-| Name            | The name of the connector.                                                          |
-| Type            | The connector type.                                                                 |
-| Input variables | The input variables used by the connector.                                          |
-| Timeout         | The configured timeout for the connector.                                           |
-| Enabled         | Whether the connector is enabled.                                                   |
-| Runtime ID      | The runtime instance reporting the connector.                                       |
-| Connectivity    | When available, includes gateway connectivity, broker connectivity, and stream IDs. |
+| Field   | Description                                                                                                                 |
+| ------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Event   | The type of event recorded, for example `Triggered`, `Correlated`, `Correlation failed`, or `Activation condition not met`. |
+| Runtime | The count of this event recorded by a specific runtime deployment, identified by its deployment ID.                         |
+| Total   | The sum of this event's count across all runtimes.                                                                          |
 
-## View connector details
+## View inbound connector instance details
 
-Select a connector instance to view additional details and troubleshoot issues.
+Select a row to view additional details and troubleshoot issues.
+
+The page header shows the process name and version, and the BPMN element, where the connector instance is active, for example **Process2 v1 › Event_0sb4klr**. If the instance fails to activate or is stuck in an unhealthy state, select **Restart** after you resolve the underlying issue to retry activation.
+
+The following details are also shown:
+
+| Field       | Description                                                                                                 |
+| ----------- | ----------------------------------------------------------------------------------------------------------- |
+| Instance ID | The ID of the connector instance.                                                                           |
+| Connector   | The connector type ID.                                                                                      |
+| Webhook URL | For webhook-based inbound connectors, the URL that triggers the connector. Select the copy icon to copy it. |
+
+### Inbound connector runtimes
+
+Each runtime reporting this connector instance is shown on a separate row.
+
+| Field        | Description                                                |
+| ------------ | ---------------------------------------------------------- |
+| Runtime      | The runtime deployment reporting the connector instance.   |
+| Status       | The health of the connector instance on this runtime.      |
+| Last updated | When this runtime last reported a status for the instance. |
 
 ### Activity log
 
-Shows recent activities recorded for the connector. Use these logs to troubleshoot connector issues.
+Shows recent activities recorded for the connector instance. Use these logs to troubleshoot connector issues.
 
 Depending on the connector type, the activity log can include health changes, request details, and runtime events. Sensitive values are redacted where needed.
 
-For example, the following activity log shows that there is an exception caused by an invalid URL in a Kafka connector.
+Use the filters to narrow the entries shown, and toggle the sort order between latest and oldest first:
 
-<img src={ConnectorProcessErrorImg} alt="Connector management page" class="img-600"/>
+| Field       | Description                                                                            |
+| ----------- | -------------------------------------------------------------------------------------- |
+| Tags        | Filter entries by tag, for example `Health`.                                           |
+| Instance    | Filter entries by a specific instance, when deduplication groups multiple occurrences. |
+| Severity    | Filter entries by severity.                                                            |
+| Time window | Filter entries recorded within a specific time range.                                  |
 
 Activity logs are available for active connectors and recent troubleshooting. When a connector is permanently removed, its activity log entries are also removed.
 
-### Properties
-
-Shows general properties for the connector template as a JSON object.
-
-For example:
-
-```json
-{
-  "deduplicationModeManualFlag": "false",
-  "schemaStrategy.type": "noSchema",
-  "topic.topicName": "rereer",
-  "authenticationType": "credentials",
-  "correlationRequired": "notRequired",
-  "topic.bootstrapServers": "eererreer",
-  "autoOffsetReset": "latest"
-}
-```
-
-### Inbound process info
+### Process info
 
 For inbound connectors, shows detailed information about the BPMN process instance and its associated connector as a JSON object.
 Use this information to review process metadata, the connector template, and connector configuration properties.
@@ -144,12 +178,80 @@ For example:
 If you are using deduplication, each connector occurrence in the BPMN diagram is shown in the array.
 :::
 
-### Metrics
+## View outbound connectors
+
+On the **Outbound connectors** tab, active outbound connector types are shown on separate rows.
+
+<img src={OutboundConnectorManagementImg} alt="Connector management page" />
+
+The page header shows counts across all outbound connector invocations:
+
+| Field               | Description                                                            |
+| ------------------- | ---------------------------------------------------------------------- |
+| Connector types     | The number of distinct outbound connector types available.             |
+| Invocations (total) | The total number of invocations recorded since the last runtime start. |
+| Max execution time  | The longest execution time recorded across all invocations.            |
+| Failure rate        | The percentage of invocations that failed.                             |
+
+Use the search box, status filter, and **With invocations** checkbox to narrow the list of outbound connectors. Each connector type shows aggregated counts:
+
+| Field       | Description                                                                    |
+| ----------- | ------------------------------------------------------------------------------ |
+| Name        | The name and type ID of the outbound connector. Select it to view its details. |
+| Invocations | The total number of invocations recorded for this connector.                   |
+| Max time    | The longest execution time recorded for this connector.                        |
+| Failed      | The number of failed invocations recorded for this connector.                  |
+| Status      | The connectivity status of the connector, for example `All connected`.         |
+
+## View outbound connector details
+
+Select an outbound connector to view its details.
+
+<img src={OutboundConnectorDetailsImg} alt="Connector management page" />
+
+The connector name is shown with badges indicating its direction (`Outbound`), whether it's enabled, and its connectivity status.
+
+The page header shows counts for the selected connector:
+
+| Field        | Description                                                     |
+| ------------ | --------------------------------------------------------------- |
+| Calls        | The sum of all invocations, across runtimes.                    |
+| Total time   | The sum of execution time for all invocations, across runtimes. |
+| Slowest call | The highest execution time recorded, across runtimes.           |
+| Average time | The total time divided by the number of calls.                  |
+
+The **Configuration** section shows the connector's setup:
+
+| Field           | Description                                                                            |
+| --------------- | -------------------------------------------------------------------------------------- |
+| Input variables | The input variables used by the connector.                                             |
+| Timeout         | The configured timeout for the connector. If none is set, this shows `Not configured`. |
+
+### Outbound connector runtimes
+
+The **Connector runtimes** section shows each runtime deployment reporting the connector, with its connectivity details and invocation metrics.
+
+| Field             | Description                                                                                                                 |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Connector runtime | The runtime deployment reporting the connector, and its overall connectivity status, for example `All connected`.           |
+| Connectivity type | The connectivity reported for this runtime, for example `Broker` or `Gateway`, along with its status and number of streams. |
+| Stream IDs        | The stream IDs registered for this connectivity type. Select the copy icon to copy an ID.                                   |
+
+Each runtime also shows its own invocation metrics:
+
+| Field           | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| Completed       | The number of invocations completed on this runtime. |
+| Cumulative time | The total execution time recorded on this runtime.   |
+| Slowest         | The highest execution time recorded on this runtime. |
+| Mean time       | The average execution time recorded on this runtime. |
+
+## Connector metrics
 
 Connector metrics are available for inbound and outbound connectors.
 
 For metric definitions, response fields, and endpoint details, use the connector observability reference.
 
-### Access
+## Connector management access
 
 Access to connector management depends on your cluster and organization permissions. If you cannot open connector management or view connector details, contact your administrator.
