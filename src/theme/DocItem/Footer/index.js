@@ -129,11 +129,11 @@ function CopySingleButton({ url, label }) {
       type="button"
       className="doc-page-action"
       onClick={() => copy(url)}
-      title={`Copy a link pinned to version ${label}: ${url}`}
+      title={`Pins to this version. Page content won't change when newer versions are released.\n${url}`}
       aria-label={`Copy stable link for version ${label}`}
     >
       {linkIcon}
-      <span>{copied ? "Copied!" : "Copy page link"}</span>
+      <span>{copied ? "Copied!" : `Copy page link (${label})`}</span>
     </button>
   );
 }
@@ -143,12 +143,13 @@ const DROPDOWN_COPY = {
     versioned:
       "Pins to this version. Page content won't change when newer versions are released.",
     rolling:
-      "Always shows the latest page version. Changes with each minor release.",
+      "Always shows the latest release page version. Page content changes with each minor release.",
   },
   next: {
     versioned:
-      "Pins to the next version once released. Stable across future docs.",
-    rolling: "Always shows the in-development version of this page.",
+      "Pins to this version. Page content won't change when newer versions are released.",
+    rolling:
+      "Always shows the next (unreleased) page version. Page content changes with each minor release.",
   },
 };
 
