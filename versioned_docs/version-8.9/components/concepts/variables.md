@@ -4,11 +4,11 @@ title: "Variables"
 description: "Variables are part of process instances and represent their data. Leverage the scope of variables and customize how they are merged into process instances."
 ---
 
-[Variables](/reference/glossary.md#variable) are part of a [process instance](/reference/glossary.md#process-instance) and represent the data of the instance. This includes the inputs an [AI agent](/reference/glossary.md#ai-agent) step receives and the outputs it returns, since agent-driven steps read and write process data through the same variables as any other element.
+[Variables](/reference/glossary.md#variable) are part of a [process instance](/reference/glossary.md#process-instance) and represent the data of the instance.
 
 A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
-When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
+When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md), [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), or implementing [agentic tasks](/components/agentic-orchestration/agentic-orchestration-overview.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
 
 ## Variable names
 
