@@ -1,19 +1,5 @@
 ---
 title: Routing events to processes
-tags:
-  - Event Handling
-  - Process Instantiation
-  - Message Handling
-  - Correlation
-  - SOAP
-  - JMS
-  - REST
-  - Camel
-  - ESB
-  - API
-  - BPMN Message Event
-  - BPMN Signal Event
-  - BPMN Timer Event
 description: "To start a new process instance or to route a message to a running instance, choose the appropriate technology option to do so."
 ---
 

@@ -1,12 +1,6 @@
 ---
 id: sizing-self-managed
 title: Self-Managed resource planning
-tags:
-  - Performance
-  - Hardware
-  - Sizing
-  - Self-Managed
-  - Kubernetes
 description: "Provision Camunda 8 on your Self-Managed cluster with Kubernetes and Helm using these baseline configurations, then adjust sizing based on your workload."
 ---
 
