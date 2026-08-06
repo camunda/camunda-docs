@@ -55,10 +55,11 @@ The following key changes were also released as part of an 8.7.x patch release.
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| [8.7.24](https://github.com/camunda/connectors/releases/tag/8.7.24) | Breaking change | [Default secret provider prefix change](#default-secret-provider-prefix-change)                                  |
 
 ### Default secret provider prefix change {#default-secret-provider-prefix-change}
 
-Starting with a Connectors 8.7.x patch release, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
+Starting with Connectors 8.7.24, the environment-based connector secret provider uses `SECRET_` as the default prefix. Unprefixed environment variables are no longer resolved as connector secrets unless you explicitly configure an empty prefix or a different custom prefix.
 
 Previously, when no prefix was configured, all environment variables available to the connector runtime process could be resolved as connector secrets. This allowed a BPMN process author with deploy access to potentially extract sensitive environment variables — such as credentials for other components sharing the same runtime environment — through connector secret references.
 

@@ -296,7 +296,7 @@ Providing secrets to the runtime environment can be achieved in different ways, 
 
 <TabItem value='default'>
 
-Starting with a Connectors 8.7.x patch release, the environment-based secret provider applies the prefix `SECRET_` by default when resolving secrets. Only environment variables that start with this prefix are available as connector secrets.
+Starting with Connectors 8.7.24, the environment-based secret provider applies the prefix `SECRET_` by default when resolving secrets. Only environment variables that start with this prefix are available as connector secrets.
 
 This improves security by preventing all environment variables from being exposed as connector secrets. Existing secrets that do not use the configured prefix will no longer resolve until you update either the environment variables or the prefix configuration.
 
