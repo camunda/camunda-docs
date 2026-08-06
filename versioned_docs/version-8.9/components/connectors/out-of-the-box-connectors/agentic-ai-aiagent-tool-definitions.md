@@ -38,7 +38,7 @@ When using the **AI Agent Task** implementation, the connector reads the BPMN mo
 
 1. It reads the BPMN model and looks up the ad-hoc sub-process using the configured ID. If not found, the connector throws an error.
 2. Iterates over all activities within the ad-hoc sub-process and checks that they are root nodes (no incoming flows) and not boundary events.
-3. For each activity found, analyzes the input mappings and looks for the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls that define the parameters that need to be provided by the LLM.
+3. For each activity found, analyzes the input mappings and looks for the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) function calls that define the parameters that need to be provided by the LLM.
 4. Creates a tool definition for each activity found, and passes these tool definitions to the LLM as part of the prompt.
 
 </TabItem>
@@ -56,11 +56,11 @@ The AI Agent connector only considers the **root node** of the sub-flow when res
 
 A tool definition consists of the following properties which will be passed to the LLM. The tool definition is closely modeled after the [list tools response](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools) as defined in the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
 
-| Property    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name        | The name of the tool. This is the **ID of the activity** in the ad-hoc sub-process.                                                                                                                                                                                                                                                                                                                                                          |
-| description | The description of the tool, used to inform the LLM of the tool purpose. If the **documentation** of the activity is set, this is used as the description, otherwise the **name** of the activity is used. Make sure you provide a meaningful description to help the LLM understand the purpose of the tool.                                                                                                                                |
-| inputSchema | The input schema of the tool, describing the input parameters of the tool. The connector will analyze all input mappings of the activity and create a [JSON Schema](https://json-schema.org/) based on the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls defined in these mappings. If no `fromAi` function calls are found, an empty JSON Schema object is returned. |
+| Property    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name        | The name of the tool. This is the **ID of the activity** in the ad-hoc sub-process.                                                                                                                                                                                                                                                                                                                                                     |
+| description | The description of the tool, used to inform the LLM of the tool purpose. If the **documentation** of the activity is set, this is used as the description, otherwise the **name** of the activity is used. Make sure you provide a meaningful description to help the LLM understand the purpose of the tool.                                                                                                                           |
+| inputSchema | The input schema of the tool, describing the input parameters of the tool. The connector will analyze all input mappings of the activity and create a [JSON Schema](https://json-schema.org/) based on the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) function calls defined in these mappings. If no `fromAi` function calls are found, an empty JSON Schema object is returned. |
 
 :::note
 Provide as much context and guidance in tool definitions and input parameter definitions as you can to ensure the LLM
@@ -72,7 +72,7 @@ Refer to the [Anthropic documentation](https://docs.anthropic.com/en/docs/build-
 ### AI-generated parameters via `fromAi`
 
 Within an activity, you can define parameters which should be AI-generated by tagging them with the
-[`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
+[`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) [AI agent function](/reference/glossary.md#ai-agent-function) in input mappings.
 
 The function itself does not implement any logic (it simply returns the first argument it receives), but provides a way
 to configure all the necessary metadata (for example, description, type) to generate an input schema definition. The tools
@@ -100,7 +100,7 @@ For example, the following image shows an example of `fromAi` function usage on 
 
 #### `fromAi` examples
 
-The [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function
+The [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function
 can be called with a varying number of parameters to define simple or complex inputs. The simplest form is to just pass
 a value.
 
@@ -165,7 +165,7 @@ You can combine multiple parameters within the same FEEL expression, for example
 fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.secondNumber, "The second number.", "number")
 ```
 
-For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
+For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) documentation.
 
 ## Message catch events as tools
 
@@ -221,4 +221,5 @@ Instead, each discovered tool's input schema is provided by the external source 
 For more details, see the available gateway tool implementations:
 
 - [MCP Client connectors](./agentic-ai-mcp-client.md)
+
 <!-- TODO add A2A -->
