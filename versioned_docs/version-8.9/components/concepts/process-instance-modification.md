@@ -8,6 +8,8 @@ Process instance modification is a powerful feature to repair a running process 
 stuck on an element, waiting for an event, or taking an unintended path because an external system is not
 available or doesn't respond as expected, for example.
 
+This applies equally when the stuck element is an [AI agent](/reference/glossary.md#ai-agent) step: modification can activate or terminate it just like any other BPMN element.
+
 Use the [modification command](/apis-tools/zeebe-api/gateway-service.md#modifyprocessinstance-rpc) to skip or repeat a step in the
 process. Consider the following example:
 

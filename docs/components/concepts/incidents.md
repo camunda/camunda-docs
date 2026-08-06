@@ -8,7 +8,7 @@ In Camunda 8, an [incident](/reference/glossary.md#incident) represents a proble
 
 Incidents are created in different situations, including the following:
 
-- A job is failed and it has no retries left.
+- A job is failed and it has no retries left, including a failed tool call made by an [AI agent](/reference/glossary.md#ai-agent).
 - A condition doesn't return `true` or `false`.
 - A timer expression doesn't return the expected type.
 - A decision can't be evaluated.
