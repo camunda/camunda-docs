@@ -70,7 +70,7 @@ Operate, Tasklist, and Admin are now served from a single frontend application w
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 supports Elasticsearch 9.3+, Elasticsearch 8.19+, OpenSearch 3.5–3.7, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
 
 <p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
