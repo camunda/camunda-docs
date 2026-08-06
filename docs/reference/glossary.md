@@ -477,6 +477,14 @@ A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
+### Loop iteration
+
+One pass through an [AI agent](#ai-agent)'s feedback loop: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration.
+
+Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution, for example "on loop iteration five the agent called this tool."
+
+- [Conversation history and loop iterations](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations)
+
 ## M
 
 ### Management Identity
