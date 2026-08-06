@@ -66,7 +66,7 @@ Use the following new features to build and integrate AI agents into your proces
     <td>Allows embedding, storing, and retrieving LLM embeddings. Use this connector to build AI-based solutions such as context document search, long-term memory for LLMs, and agentic AI interaction.</td>
 </tr>
 <tr>
-    <td>[fromAi() FEEl function](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md)</td>
+    <td>[fromAi() FEEl function](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)</td>
     <td>Use in combination with the AI Agent connector. See [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).</td>
 </tr>
 </table>
