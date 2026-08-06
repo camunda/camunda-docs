@@ -101,7 +101,7 @@ A clear tool name and precise documentation make the expected behavior explicit,
 
 #### Tool parameters
 
-Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) [AI Agent function](/reference/glossary.md#ai-agent-function) in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
+Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) [AI agent function](/reference/glossary.md#ai-agent-function) in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
 
 For a full reference on tool names, documentation, and parameters, see [Tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
 

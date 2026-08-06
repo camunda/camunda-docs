@@ -1,7 +1,7 @@
 ---
 id: feel-built-in-functions-ai-agent
-title: AI Agent functions
-description: "Camunda extension built-in FEEL functions for AI Agent tool definitions, including examples."
+title: AI agent functions
+description: "Camunda extension built-in FEEL functions for AI agent tool definitions, including examples."
 ---
 
 import MarkerCamundaExtension from "@site/src/mdx/MarkerCamundaExtension";

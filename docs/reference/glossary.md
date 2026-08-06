@@ -100,11 +100,11 @@ For example, you can build an invoice-processing AI agent in Camunda with BPMN, 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
 
-### AI Agent function
+### AI agent function
 
 The category of built-in [FEEL](#feel-expression) functions used to declare LLM-provided tool parameters for an [AI agent](#ai-agent). The primary function is [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue), which marks a value as supplied by the LLM at runtime, with an optional description, type, and JSON schema to guide the model.
 
-- [AI Agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 
 ### Audit log
 
