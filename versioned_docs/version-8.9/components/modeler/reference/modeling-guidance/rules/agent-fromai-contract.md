@@ -5,7 +5,7 @@ description: Reference for the `agent-fromai-contract` rule.
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
-import DeclaringAgenticSubprocess from "./\_declaring-agentic-subprocess.md";
+import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
 
 The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md) FEEL function declares a tool's LLM-supplied inputs within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). A malformed call resolves to nothing at runtime without producing an error, so malformed calls are reported as errors. A call without a description is valid and is not reported.
 
