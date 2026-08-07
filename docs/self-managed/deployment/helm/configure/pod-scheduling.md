@@ -26,7 +26,7 @@ By default, the chart configures a hard `podAntiAffinity` rule for the Orchestra
 
 The default `podAntiAffinity` rule ensures broker pods run on distinct nodes, but does not ensure those nodes are in different zones: if the cluster has more nodes than brokers, all brokers can still be scheduled into a single availability zone. Because broker persistent volumes are bound to a single zone on most cloud providers, a zonal outage can then take down the whole Orchestration Cluster.
 
-With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones. The value is a list of [Kubernetes topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) applied to the broker StatefulSet pods, and it is empty by default. This value does not affect other Orchestration Cluster components such as the gateway; there is no equivalent topology spread value for those components in the current chart version.
+With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones. The value is a list of [Kubernetes topology spread constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/) applied to the Orchestration Cluster StatefulSet pods, and it is empty by default. Those pods run the Zeebe broker and gateway in the same process, so this value covers both. It does not affect separately deployed components such as Identity, Optimize, Connectors, or Web Modeler, which have no equivalent topology spread value in the current chart version — use their `affinity` values instead.
 
 ```yaml
 orchestration:
