@@ -167,6 +167,8 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) documentation.
 
+In Web Modeler, you can [autofill a starter `fromAi()` call](#autofill-a-fromai-input) into a blank input.
+
 ## Message catch events as tools
 
 You can use an intermediate message catch event inside an ad-hoc sub-process as a tool. For example, to model a "wait for reply" step where the agent sends a message to an external system and waits for a response before continuing.
@@ -201,6 +203,8 @@ As most LLMs expect _some_ form of response to a tool call, the AI Agent will re
 was executed successfully without returning a result to the LLM if the `toolCallResult` variable is not set or empty after executing
 the tool.
 
+In Web Modeler, you can [autofill the `toolCallResult` output](#autofill-a-toolcallresult-output).
+
 ### Document support
 
 Tool call responses can contain [Camunda document references](/self-managed/concepts/document-handling/overview.md)
@@ -215,7 +219,7 @@ Web Modeler helps you fill in the tool contract, the [`fromAi()`](#ai-generated-
 
 ### Autofill a `fromAi()` input
 
-On a tool's entry element (the root activity of the tool flow), a blank input mapping or a blank FEEL-capable element-template field shows an autofill icon. Select it to seed a correctly structured call:
+On a tool's root node (the activity with no incoming flows), a blank input mapping or a blank FEEL-capable element-template field shows an autofill icon. Select it to seed a correctly structured call:
 
 ```feel
 =fromAi(toolCall.parameterName, "Description of the parameter")
@@ -239,7 +243,7 @@ For a multi-instance tool, the autofill also sets the output collection and outp
 
 When a `fromAi()` key or an output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click. Corrections are span-scoped: correcting an invalid `fromAi()` key rewrites only the key and preserves any description and type arguments you authored.
 
-If a `fromAi()` call sits on an element other than the tool's entry element, where the AI Agent connector does not resolve it, Web Modeler offers to move the call to the entry element.
+If a `fromAi()` call sits on an element other than the tool's root node, where the AI Agent connector does not resolve it, Web Modeler offers to move the call to the root node.
 
 :::note
 These affordances complement the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong; the assisted configuration offers to fix it.
