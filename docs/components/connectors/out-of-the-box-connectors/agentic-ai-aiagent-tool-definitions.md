@@ -167,6 +167,8 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) documentation.
 
+In Web Modeler, you can [autofill a starter `fromAi()` call](#autofill-a-fromai-input) into a blank input.
+
 ## Message catch events as tools
 
 You can use an intermediate message catch event inside an ad-hoc sub-process as a tool. For example, to model a "wait for reply" step where the agent sends a message to an external system and waits for a response before continuing.
@@ -201,6 +203,8 @@ As most LLMs expect _some_ form of response to a tool call, the AI Agent will re
 was executed successfully without returning a result to the LLM if the `toolCallResult` variable is not set or empty after executing
 the tool.
 
+In Web Modeler, you can [autofill the `toolCallResult` output](#autofill-a-toolcallresult-output).
+
 ### Document support
 
 Tool call responses can contain [Camunda document references](/self-managed/concepts/document-handling/overview.md)
@@ -208,6 +212,42 @@ nested anywhere within the result structure. The agent extracts these documents 
 content blocks.
 
 For supported file types and details on how documents are resolved, see [document support](./agentic-ai-aiagent-documents.md).
+
+## Assisted tool configuration in Web Modeler
+
+Web Modeler helps you fill in the tool contract directly from the properties panel, both the [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process that is marked as agentic, either through the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It never appears in a plain sub-process, and it only ever fills a blank field, never overwriting a value you already entered.
+
+### Autofill a `fromAi()` input
+
+On a tool's root node (the activity with no incoming flows), a blank input mapping or a blank FEEL-capable element-template field shows an autofill icon. Select it to seed a correctly structured call:
+
+```feel
+=fromAi(toolCall.parameterName, "Description of the parameter")
+```
+
+Replace the placeholder key and description with values for your tool. Because the field was blank, nothing you wrote is discarded.
+
+### Autofill a `toolCallResult` output
+
+A tool-flow element that does not yet produce a contract-readable result offers a one-click autofill that writes `toolCallResult` into the element's native result field:
+
+| Element type | Field written                                                |
+| :----------- | :----------------------------------------------------------- |
+| Connector    | The connector result expression, as `={toolCallResult: ...}` |
+| Script task  | The script result variable                                   |
+| Other tasks  | An output mapping targeting `toolCallResult`                 |
+
+For a multi-instance tool, the autofill also sets the output collection and output element, so the agent collects a result for every iteration instead of `null`.
+
+### Accept a correction
+
+When a `fromAi()` key or an output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click. A correction changes only the part that is wrong: correcting an invalid `fromAi()` key rewrites the key and keeps any description and type arguments you wrote.
+
+If a `fromAi()` call sits on an element other than the tool's root node, where the AI Agent connector does not resolve it, Web Modeler offers to move the call to the root node.
+
+:::note
+This assistance complements the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong; the assisted configuration offers to fix it.
+:::
 
 ## Gateway tool definitions
 
