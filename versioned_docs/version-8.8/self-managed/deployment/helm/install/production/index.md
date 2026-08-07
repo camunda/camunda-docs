@@ -377,6 +377,8 @@ Keep the following in mind when configuring topology spread constraints:
 - Broker volumes pin pods to a zone. With topology-constrained storage, `volumeBindingMode: WaitForFirstConsumer` delays volume binding or provisioning until the scheduler picks a node, so the volume matches that node's topology; `Immediate` binds or provisions the volume without considering pod scheduling constraints. Once a broker's claim is bound to a single-zone volume, every replacement pod must run in that zone: a hard zone constraint that conflicts with the volume's zone leaves the pod `Pending`, and enabling spreading on an existing cluster does not relocate existing volumes.
 - The `labelSelector` counts pods across the whole namespace. Pods with matching labels from all Helm releases in the namespace are counted together, not only the release you are configuring. To scope spreading to a single release, also match `app.kubernetes.io/instance: <release-name>`.
 
+For an overview of all pod scheduling values, see [configure pod scheduling](/self-managed/deployment/helm/configure/pod-scheduling.md).
+
 #### Secondary storage index replicas
 
 :::warning Single point of failure without replicas
