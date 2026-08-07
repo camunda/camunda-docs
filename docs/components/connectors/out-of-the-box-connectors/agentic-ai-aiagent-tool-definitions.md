@@ -209,6 +209,42 @@ content blocks.
 
 For supported file types and details on how documents are resolved, see [document support](./agentic-ai-aiagent-documents.md).
 
+## Assisted tool configuration in Web Modeler
+
+Web Modeler helps you fill in the tool contract, the [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output, directly from the properties panel. These affordances appear only inside an ad-hoc sub-process that is marked as agentic, either through the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. They never appear on a plain sub-process, and they only ever fill a blank field, never overwriting a value you already entered.
+
+### Autofill a `fromAi()` input
+
+On a tool's entry element (the root activity of the tool flow), a blank input mapping or a blank FEEL-capable element-template field shows an autofill icon. Select it to seed a correctly structured call:
+
+```feel
+=fromAi(toolCall.parameterName, "Description of the parameter")
+```
+
+Replace the placeholder key and description with values for your tool. Because the field was blank, nothing you wrote is discarded.
+
+### Autofill a `toolCallResult` output
+
+A tool-flow element that does not yet produce a contract-readable result offers a one-click autofill that writes `toolCallResult` into the element's native result field:
+
+| Element type | Field written                                                |
+| :----------- | :---------------------------------------------------------- |
+| Connector    | The connector result expression, as `={toolCallResult: ...}` |
+| Script task  | The script result variable                                  |
+| Other tasks  | An output mapping targeting `toolCallResult`                |
+
+For a multi-instance tool, the autofill also sets the output collection and output element, so the agent collects a result for every iteration instead of `null`.
+
+### Accept a correction
+
+When a `fromAi()` key or an output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click. Corrections are span-scoped: correcting an invalid `fromAi()` key rewrites only the key and preserves any description and type arguments you authored.
+
+If a `fromAi()` call sits on an element other than the tool's entry element, where the AI Agent connector does not resolve it, Web Modeler offers to move the call to the entry element.
+
+:::note
+These affordances complement the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong; the assisted configuration offers to fix it.
+:::
+
 ## Gateway tool definitions
 
 Gateway tools are activities that expose multiple tools from an external source, such as an MCP server or an A2A agent. Unlike static tool definitions, gateway tools discover their available tools dynamically during agent initialization by calling the external source.
