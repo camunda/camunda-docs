@@ -9,10 +9,6 @@ mdx:
 
 # Strongly-Typed Domain Keys
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 All domain identifiers (process definition keys, job keys, user task keys, etc.) are `readonly record struct` types rather than plain strings. This prevents accidentally mixing different key types at compile time — the same pattern as the JS SDK's branded types.
 
 <!-- snippet-source: docs/examples/ReadmeExamples.cs | regions: UsingDirective+DomainKeys -->
