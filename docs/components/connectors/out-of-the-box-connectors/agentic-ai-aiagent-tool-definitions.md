@@ -215,7 +215,7 @@ For supported file types and details on how documents are resolved, see [documen
 
 ## Assisted tool configuration in Web Modeler
 
-Web Modeler helps you fill in the tool contract, the [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output, directly from the properties panel. These affordances appear only inside an ad-hoc sub-process that is marked as agentic, either through the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. They never appear on a plain sub-process, and they only ever fill a blank field, never overwriting a value you already entered.
+Web Modeler helps you fill in the tool contract, the [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output, directly from the properties panel. This assistance appears only inside an ad-hoc sub-process that is marked as agentic, either through the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It never appears on a plain sub-process, and it only ever fills a blank field, never overwriting a value you already entered.
 
 ### Autofill a `fromAi()` input
 
@@ -241,12 +241,12 @@ For a multi-instance tool, the autofill also sets the output collection and outp
 
 ### Accept a correction
 
-When a `fromAi()` key or an output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click. Corrections are span-scoped: correcting an invalid `fromAi()` key rewrites only the key and preserves any description and type arguments you authored.
+When a `fromAi()` key or an output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click. A correction changes only the part that is wrong: correcting an invalid `fromAi()` key rewrites the key and keeps any description and type arguments you wrote.
 
 If a `fromAi()` call sits on an element other than the tool's root node, where the AI Agent connector does not resolve it, Web Modeler offers to move the call to the root node.
 
 :::note
-These affordances complement the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong; the assisted configuration offers to fix it.
+This assistance complements the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong; the assisted configuration offers to fix it.
 :::
 
 ## Gateway tool definitions
