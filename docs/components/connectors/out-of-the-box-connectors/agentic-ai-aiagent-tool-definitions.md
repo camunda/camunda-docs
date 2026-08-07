@@ -232,10 +232,10 @@ Replace the placeholder key and description with values for your tool. Because t
 A tool-flow element that does not yet produce a contract-readable result offers a one-click autofill that writes `toolCallResult` into the element's native result field:
 
 | Element type | Field written                                                |
-| :----------- | :---------------------------------------------------------- |
+| :----------- | :----------------------------------------------------------- |
 | Connector    | The connector result expression, as `={toolCallResult: ...}` |
-| Script task  | The script result variable                                  |
-| Other tasks  | An output mapping targeting `toolCallResult`                |
+| Script task  | The script result variable                                   |
+| Other tasks  | An output mapping targeting `toolCallResult`                 |
 
 For a multi-instance tool, the autofill also sets the output collection and output element, so the agent collects a result for every iteration instead of `null`.
 
