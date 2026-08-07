@@ -38,6 +38,8 @@ This works only for elements that run in the workflow engine. Connector result e
 
 Results written by arbitrary FEEL expressions elsewhere, such as a variable set by a called process, cannot be detected statically. Ignore the warning or make the result wiring explicit with an output mapping.
 
+Overwrite detection is also skipped for any tool flow that branches, for example a gateway split, a join, or a boundary event, even when the branches are guaranteed to converge before the next write. Review these flows manually for overwrites.
+
 ### The result variable name
 
 This rule always checks for `toolCallResult`, the default used by the AI Agent connector. An AI Agent Task's multi-instance ad-hoc sub-process can rename this variable by changing the multi-instance **Output element** value. If you rename it, ignore the warning for that tool.
