@@ -48,4 +48,4 @@ If the call activity has called more than one process instance, the **Details** 
 
 Starting in 8.10, a [business ID](/components/concepts/process-instance-creation.md#business-id) is shown for decision instances in Operate, both in the decision instance list and in the decision instance details view. Filter decision instances by business ID the same way as [process instances](./filter-process-instances.md#business-id-filter) — using **Equals**, **Contains**, and **Is one of** in the filter UI, or the `$eq`/`$neq`/`$exists`/`$like`/`$in` operators via the [search decision instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx).
 
-Decision instances evaluated before 8.10 do not carry a business ID, since the value is snapshotted from the owning process instance at the decision instance's own creation time.
+Decision instances evaluated before 8.10 do not carry a business ID, since the value is snapshotted from the owning process instance at the decision instance's own creation time. Standalone decision evaluations, which are not tied to a process instance, never carry a business ID.
