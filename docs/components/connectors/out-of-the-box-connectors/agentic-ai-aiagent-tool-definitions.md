@@ -215,7 +215,7 @@ For supported file types and details on how documents are resolved, see [documen
 
 ## Assisted tool configuration in Web Modeler
 
-Web Modeler helps you fill in the tool contract, the [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output, directly from the properties panel. This assistance appears only inside an ad-hoc sub-process that is marked as agentic, either through the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It never appears on a plain sub-process, and it only ever fills a blank field, never overwriting a value you already entered.
+Web Modeler helps you fill in the tool contract directly from the properties panel, both the [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process that is marked as agentic, either through the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It never appears in a plain sub-process, and it only ever fills a blank field, never overwriting a value you already entered.
 
 ### Autofill a `fromAi()` input
 
