@@ -61,7 +61,7 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide endpoints are not available yet. When added, they will be exposed under a dedicated `/cluster/v2/...` path prefix. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
+Cluster-wide endpoints are exposed under a dedicated `/cluster/v2/...` path prefix, protected by the cluster-admin role available starting in 8.10 alpha4. Full wiring of cluster-wide operations behind this prefix is still in progress. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
 
 ## Configure and provision Physical Tenants
 
@@ -80,7 +80,7 @@ To understand how Operate, Tasklist, and Optimize behave per Physical Tenant —
 
 ## Storage validation
 
-Configuration validation should fail fast when two tenants point to the same backend location or another unsupported path. For document store, the final naming convention depends on the provider, so validate uniqueness at startup rather than relying on a hard-coded path format.
+Camunda validates storage configuration at startup. If two tenants resolve to the same backend location, startup fails and the error names the conflicting tenants. For document stores, uniqueness is validated against the resolved provider, bucket or container, and path tuple.
 
 ## Health and status endpoints
 
