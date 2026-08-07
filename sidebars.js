@@ -2270,6 +2270,7 @@ module.exports = {
     },
     {
       Components: [
+        "self-managed/components/identity/how-identity-works",
         {
           type: "category",
           label: "Orchestration Cluster",
