@@ -188,6 +188,15 @@ For each new message a new instance is created.
 
 A process can also have one or more [timer start events](/components/modeler/bpmn/timer-events/timer-events.md#timer-start-events). An instance of the process is created when the associated timer is triggered. Timers can also trigger periodically.
 
+## FEEL context variables
+
+Starting in 8.10, the process instance is accessible in [FEEL expressions](/components/concepts/expressions.md) via the `camunda.processInstance` context, resolvable anywhere in the process — not only in call activity expressions:
+
+- `camunda.processInstance.key` — the process instance's system-generated key.
+- `camunda.processInstance.businessId` — the process instance's [business ID](#business-id), or `null` if none is set.
+
+These are the only `camunda.processInstance.*` context variables available in 8.10.
+
 ## Business ID
 
 ### What is a business ID?
