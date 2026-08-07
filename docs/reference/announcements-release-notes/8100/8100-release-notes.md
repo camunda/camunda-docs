@@ -32,6 +32,88 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha4
+
+| Release date   | Changelog(s)                                                                                        | Blog |
+| :------------- | :-------------------------------------------------------------------------------------------------- | :--- |
+| 11 August 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha4)</li></ul> | -    |
+
+### Modeler
+
+#### Improved BPMN element menus
+
+<!-- https://github.com/camunda/product-hub/issues/3480 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+The create, append, and change menus now group BPMN elements into categories — tasks, gateways, events, and so on — each with a short description, so you find the right element at a glance. Search still spans all categories. When appending, elements that can continue a flow show a subtle indicator pointing to where the flow continues next, and selecting one brings up the append pad with a prominent Append action.
+
+<p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
+
+### Web apps
+
+#### Frontend application unification
+
+<!-- https://github.com/camunda/product-hub/issues/3456 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Admin">Admin</span></div>
+
+Operate, Tasklist, and Admin are now served from a single frontend application with shared navigation, consistent design patterns, and unified deployment. User preferences (dark/light mode) persist across all views, and navigation patterns are consistent throughout.
+
+<p class="link-arrow">[Operate overview](/components/operate/operate-introduction.md)</p>
+
+### Orchestration Cluster
+
+#### Elasticsearch 9.x and OpenSearch 3.x support
+
+<!-- https://github.com/camunda/product-hub/issues/3588 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+#### S3-compatible object stores for Document Handling
+
+<!-- https://github.com/camunda/product-hub/issues/3507 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Document Handling now supports any S3-compatible object store — such as MinIO, Cloudian, or Garage — alongside Amazon S3, Google Cloud Storage, and Azure Blob Storage. Configure an S3-compatible backend by pointing the existing AWS S3 document store at a custom endpoint. No migration is required for existing AWS S3 deployments.
+
+<p class="link-arrow">[Document store configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
+
+#### Physical Tenant identity support
+
+<!-- https://github.com/camunda/product-hub/issues/3600 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Physical Tenants now support independent per-tenant authorization. Each Physical Tenant enforces its own roles, mapping rules, and permissions. Users can hold different roles on different Physical Tenants — developer on one, viewer on another. Cluster-wide operations (topology, backups, restore) are protected by a claim-based cluster admin role, with no new infrastructure required. Identity providers are defined at the cluster level; each Physical Tenant chooses which IdPs it accepts.
+
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+
+#### Rolling upgrades
+
+<!-- https://github.com/camunda/product-hub/issues/2702 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now perform rolling upgrades of self-managed Camunda 8 between patch and minor versions with zero downtime across all supported secondary storage backends, including Elasticsearch, OpenSearch, and relational databases. The cluster stays operational throughout: workflows continue executing, and Operate remains accessible for monitoring and incident response. Schema changes between versions are strictly backwards-compatible and applied transparently.
+
+<p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
+
+### Modeler
+
+<!-- https://github.com/camunda/camunda-hub/issues/25824 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+In Self-Managed, you can now hide the **Add user** button on Web Modeler's **Collaborators** page, preventing non-organization admins from adding collaborators in the UI. They can still add collaborators via the [modify collaborator API endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+
+<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
+
 ## 8.10.0-alpha3
 
 | Release date | Changelog(s)                                                                                        | Blog |
