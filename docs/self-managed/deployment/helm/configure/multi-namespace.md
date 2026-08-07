@@ -59,7 +59,8 @@ The following example uses these Secrets:
 | `orchestration-oidc`     | `client-secret`         | `hub`, `orchestration` | Orchestration OIDC client                                |
 | `connectors-oidc`        | `client-secret`         | `hub`, `orchestration` | Connectors OIDC client                                   |
 | `optimize-oidc`          | `client-secret`         | `hub`, `orchestration` | Optimize OIDC client                                     |
-| `hub-tls`                | `tls.crt`, `tls.key`    | `hub`                  | Hub ingress TLS                                          |
+| `secondary-storage`      | `password`              | `orchestration`        | Elasticsearch password for Orchestration and Optimize    |
+| `hub-tls`                | `tls.crt`, `tls.key`    | `hub`                  | Hub Ingress TLS                                          |
 | `orchestration-tls`      | `tls.crt`, `tls.key`    | `orchestration`        | Orchestration HTTP Ingress TLS                           |
 | `orchestration-grpc-tls` | `tls.crt`, `tls.key`    | `orchestration`        | Orchestration gRPC Ingress TLS                           |
 
@@ -278,6 +279,16 @@ camundaHub:
 orchestration:
   enabled: true
   contextPath: /orchestration
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: https://elasticsearch.example.com:9200
+        auth:
+          username: camunda
+          secret:
+            existingSecret: secondary-storage
+            existingSecretKey: password
   ingress:
     grpc:
       enabled: true
@@ -306,9 +317,24 @@ connectors:
 optimize:
   enabled: true
   contextPath: /optimize
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: elasticsearch.example.com
+        port: 9200
+      auth:
+        username: camunda
+        secret:
+          existingSecret: secondary-storage
+          existingSecretKey: password
 ```
 
-Add the values for your secondary storage backend before installation. See [database configuration](./database/index.md).
+This example uses Elasticsearch as shared secondary storage. Enabling Optimize automatically enables the Legacy Zeebe Exporter, which writes the records Optimize reads. The Orchestration Cluster and Optimize settings must point to the same backend, and the `secondary-storage` Secret must exist in the orchestration namespace.
+
+For OpenSearch, relational database, TLS, and custom index-prefix configuration, see [database configuration](./database/index.md). If you customize the Legacy Zeebe Exporter prefix, configure Optimize to read the same prefix as described in [configure Elasticsearch and OpenSearch index prefixes](./database/elasticsearch/configure-elasticsearch-prefix-indices.md#optimize-specific-configuration).
 
 Install the orchestration release after the Hub release is ready:
 
