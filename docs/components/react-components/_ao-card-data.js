@@ -29,6 +29,12 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
+    link: "../agent-states-and-metrics/",
+    title: "Agent states and metrics",
+    image: IconAoDesignImg,
+    description: "Understand agent states, usage metrics, and limits.",
+  },
+  {
     link: "../camunda-provided-llm/",
     title: "Camunda-provided LLM",
     image: IconAoLlmImg,
@@ -57,6 +63,12 @@ export const fundamentalCards_monitoring = [
     title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
+  },
+  {
+    link: "../detect-off-rail-agents/",
+    title: "Detect off-rail agents",
+    image: IconAoAgentImg,
+    description: "Identify a stuck or looping AI agent before it fails.",
   },
   {
     link: "../analyze-ai-agents/",
