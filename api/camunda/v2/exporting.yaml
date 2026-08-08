@@ -1,0 +1,77 @@
+paths:
+  /exporting/pause:
+    post:
+      tags:
+        - Exporting
+      operationId: pauseExporting
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Pause exporting
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Pauses exporting on all partitions of the physical tenant. While paused, exported records
+        are not committed, so the log is not compacted for the affected partitions.
+
+        With `soft=true`, exporting continues to run but its position is not committed, so the
+        state after resuming is identical to a hard pause; use this variant when exporting must
+        keep progressing (e.g. to avoid falling behind) while still preventing log compaction,
+        such as during a backup.
+      parameters:
+        - name: soft
+          in: query
+          required: false
+          schema:
+            type: boolean
+            default: false
+          description: If true, soft-pauses exporting instead of a hard pause.
+      responses:
+        "204":
+          description: Exporting was successfully paused.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+        "503":
+          $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.10"
+  /exporting/resume:
+    post:
+      tags:
+        - Exporting
+      operationId: resumeExporting
+      security:
+        - bearerAuth: []
+        - basicAuth: []
+      summary: Resume exporting
+      description: |-
+
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
+
+        [[ADDED_IN_VERSION:8.10]]
+
+        [[CONSISTENCY:STRONG]]
+
+        Resumes exporting on all partitions of the physical tenant after a pause or soft pause.
+      responses:
+        "204":
+          description: Exporting was successfully resumed.
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+        "503":
+          $ref: "common-responses.yaml#/components/responses/ServiceUnavailable"
+      x-added-in-version: "8.10"

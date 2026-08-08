@@ -1,0 +1,101 @@
+---
+id: get-cluster-status
+title: "Get the status of the whole cluster"
+sidebar_label: "Get the status of the whole cluster"
+hide_title: true
+hide_table_of_contents: true
+api: eJztV21v2zYQ/isH9ssWyC/psCFVPxm2mrprnc52m3ZxUNPU2WIrkSpJ2dEMAfsR+4X7JcNRUuI0QV8+DNiAfpJEHu+5l4d3pz1zfGNZeMGGaWEdGnYZMJ2j4U5qNY5ZyDbomr2Z466wLGAWRWGkK1l4cRmwGK0wMqcDLGQLtVAXF9Pot1fjaTR69zKavhjPZuOzySzE8tnu9zfPHH8z+YOfPypEOf7l/Pj40eVlfWgwGkWjd+PJu9fRlE6EJ93jfrs5PJvMxrN5NBm+DWfz6dnktN4ZJig+WHAJQoI8dQlYbybotV/cJTpFELUHAfDNxuCGO4xBb9EAT1PIk9JKwVNwqLhytgtTdIVRFpZPo8Hz+dO3S9glqAC3aMpPxUHaBrkMYDk6O5800krfERVcQW60QGthp82HALiKYTmKTqeDUTRagmxBtEvQgOAWuzDRkKPpNDpidFymhGow18Zh/BgKi7A8jebQaxztbR/2nM51qjflEtbagEu467KAGbS5VhYtC/fsYb9Pj9sZnCfX8bpj8GMf05WOywbdkq/eVukjsS7StGzjAdpAjBvDY4wJW2jlUDmC5HmeSuFZ1ntvCXfPrEgw4/cbdJC3z+SXQFyZIwuZXr1H4bzDHwtpMCaS10eJ47khljtZx6FZv4P87+f/C7m/8cc6I9WGBQyveJantNQYR2uqyMi/m5VWLb2enU/YZVUFzEnnD966z9OGEKyqSObn/k+fp4S0QBphhYIT777Cze+5/z/kvgrYVYfHMcYdqTpbNLYOBFVhj+1Q0RK1iz37gCUL7zsQsC1PC2wPVpcBy9AluuklLGA5dwkL2WGtsjetxZAiD1GYlIVsX1OjCnu9faKtq8I9FZ7KAxnJV2mdR9qrs7jmRepYyFIteOqXP21SxCraUDzDlkxnRiRoXd35oAkTTKPZHE65wx0vu6wKGGHfhjnpn/TvRSDRr9A+eDmG2m0PcHgTWojEufxeiFr4W0EqSkrbxGekog7hCrlBMygoPfuWfA22R6LvWogFzcsTbTJONj47n5P5K26l+JIKkmFEOKnW2gs27Lzfg8HLMWX7mpH97nFTUbjwyaA8Erd5VqiYQ6Q2UiE2l6amEdlgw15vI11SrLpCZz1Ri18/pbUFWnLidqApdtRChc6yQvnKpTawky4BDi3myXUdoqnkwQMYarVFRSpsvfIAIlVk4G8H3XCpNrQx81npWBljAHSZOxS1GKh2oXWwlpjGFrgQmDvgqmzOUtL5QsVaFBkqKo615h/I1KZQwHIwnI9fR8sAllw4ucVlM3IM6i/gBheKhqBaP41FCqTKC/cjjUHNrAA83fHS+jmDiCa40soXt9YPm+gdHQSXSAs2RyHXTY33AZnTco4mk9bKLV57t8KEb6X2bYU3DPWxAOHjJ1EJJJMXSlo4OlLaHR1Bzg9uVo6KMkSho0POcOHg7z//gtnoVwsbVDTNYgxro7OFumsfrEqgCitcK6yNhYzTiEN9BJRWnWuPF6oNv6pDkUpUDsjkLjzRxt96vpKpdCVwYbS13pCgieFCWVTxvVGE20FsM9tdUFFNpUCq1HfZ/rzegdf1/YDjbv9bWL9K9aqXcal6DYTtDQcvXk1Gg87z8TCazKLOcbffdVfO39hcW5dxdWDHKTrvzmd686e1a38zDnz/YfiP/zA0NdzhlevlKZeKCqRn177p5BfsJs3bh1Tor0etuilfsP1+xS2+MmlV0fLHAk3z99j2cPqqApYgj9EcTBgDX5cOpoo70+OtCeM0mrOq+gfezyq2
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get the status of the whole cluster"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/cluster/v2/status"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The cluster can process work; the body reports whether it is fully healthy or degraded.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The aggregated status of the whole cluster.",
+            type: "object",
+            required: ["status"],
+            properties: {
+              status: {
+                description:
+                  "`HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case.",
+                type: "string",
+                example: "HEALTHY",
+                enum: ["HEALTHY", "DEGRADED", "DOWN"],
+              },
+            },
+            title: "ClusterStatusResponse",
+          },
+        },
+      },
+    },
+    "503": {
+      description:
+        "The cluster is DOWN because no physical tenant can process work.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "The aggregated status of the whole cluster.",
+            type: "object",
+            required: ["status"],
+            properties: {
+              status: {
+                description:
+                  "`HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case.",
+                type: "string",
+                example: "HEALTHY",
+                enum: ["HEALTHY", "DEGRADED", "DOWN"],
+              },
+            },
+            title: "ClusterStatusResponse",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
