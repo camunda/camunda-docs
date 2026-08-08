@@ -29,7 +29,7 @@ The following changes are specific to dual-region setups and should be reviewed 
 | **Exporter keys**              | Replace `global.elasticsearch.disableExporter: false` | Use `orchestration.exporters.camunda.enabled: false` and `orchestration.exporters.zeebe.enabled: false`                                                                       |
 | **New Camunda Exporter**       | Define for both regions                               | Configure [Camunda Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md)                                                        |
 | **Legacy Exporter**            | Keep enabled during migration                         | Keep the old [Elasticsearch / OpenSearch Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md) definitions                      |
-| **Environment variables**      | Rename gateway prefixes                               | Change `ZEEBE_GATEWAY_*` to `ZEEBE_BROKER_GATEWAY_*` (embedded gateway architecture)                                                                                          |
+| **Environment variables**      | Rename gateway prefixes                               | Change `ZEEBE_GATEWAY_*` to `ZEEBE_BROKER_GATEWAY_*` for the embedded gateway, and keep standalone gateway TLS settings for migration pods.                                   |
 | **Message compression**        | Add to orchestration configuration                    | Required for migration jobs to communicate with the Zeebe cluster                                                                                                             |
 | **Basic authentication users** | Migrate manually                                      | Users defined in `camunda.operate` or `camunda.tasklist` require manual migration to [embedded Identity](/self-managed/components/orchestration-cluster/identity/overview.md) |
 | **API security**               | Review defaults                                       | gRPC and REST APIs are secured by default in 8.8                                                                                                                              |
@@ -71,7 +71,7 @@ orchestration:
 
 ## Update gateway environment variables
 
-In 8.8, the Zeebe Gateway is embedded in the Orchestration Cluster. As a result, gateway-related environment variables use a new prefix.
+In 8.8, the Zeebe Gateway is embedded in the Orchestration Cluster. As a result, gateway-related environment variables use a new prefix for the broker and embedded gateway.
 
 - **Before:** `ZEEBE_GATEWAY_*`
 - **After:** `ZEEBE_BROKER_GATEWAY_*`
@@ -80,6 +80,70 @@ In 8.8, the Zeebe Gateway is embedded in the Orchestration Cluster. As a result,
 `ZEEBE_GATEWAY_CLUSTER_MESSAGECOMPRESSION` → `ZEEBE_BROKER_GATEWAY_CLUSTER_MESSAGECOMPRESSION`
 
 If your dual-region setup uses cluster message compression (which is typical), ensure this variable is also defined under `orchestration.env`. Migration jobs use a standalone gateway and require this setting to communicate with the Zeebe cluster.
+
+### Configure migration pods for Zeebe TLS
+
+During the 8.7 to 8.8 migration, the data migration uses a separate migration importer deployment. The migration importer runs with the standalone gateway configuration, even though the 8.8 orchestration cluster uses the embedded gateway.
+
+If your Zeebe cluster uses TLS for internal communication, configure both sets of TLS environment variables in `orchestration.env`:
+
+- `ZEEBE_BROKER_NETWORK_SECURITY_*` for broker-to-broker communication.
+- `ZEEBE_BROKER_GATEWAY_CLUSTER_SECURITY_*` for the embedded gateway in the orchestration pod.
+- `ZEEBE_GATEWAY_CLUSTER_SECURITY_*` for the standalone migration importer gateway.
+
+Mount the same certificate Secret in the orchestration pod, migration importer deployment, and data migration job. These pods use separate Helm values for additional volumes and volume mounts.
+
+```yaml
+orchestration:
+  extraVolumes:
+    - name: zeebe-tls
+      secret:
+        secretName: camunda-zeebe-tls
+  extraVolumeMounts:
+    - name: zeebe-tls
+      readOnly: true
+      mountPath: /etc/tls/
+  importer:
+    extraVolumes:
+      - name: zeebe-tls
+        secret:
+          secretName: camunda-zeebe-tls
+    extraVolumeMounts:
+      - name: zeebe-tls
+        readOnly: true
+        mountPath: /etc/tls/
+  migration:
+    data:
+      extraVolumes:
+        - name: zeebe-tls
+          secret:
+            secretName: camunda-zeebe-tls
+      extraVolumeMounts:
+        - name: zeebe-tls
+          readOnly: true
+          mountPath: /etc/tls/
+  env:
+    - name: ZEEBE_BROKER_NETWORK_SECURITY_ENABLED
+      value: "true"
+    - name: ZEEBE_BROKER_NETWORK_SECURITY_CERTIFICATECHAINPATH
+      value: /etc/tls/chainZeebeCluster.pem
+    - name: ZEEBE_BROKER_NETWORK_SECURITY_PRIVATEKEYPATH
+      value: /etc/tls/zeebeCluster.key
+    - name: ZEEBE_BROKER_GATEWAY_CLUSTER_SECURITY_ENABLED
+      value: "true"
+    - name: ZEEBE_BROKER_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH
+      value: /etc/tls/chainZeebeCluster.pem
+    - name: ZEEBE_BROKER_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH
+      value: /etc/tls/zeebeCluster.key
+    - name: ZEEBE_GATEWAY_CLUSTER_SECURITY_ENABLED
+      value: "true"
+    - name: ZEEBE_GATEWAY_CLUSTER_SECURITY_CERTIFICATECHAINPATH
+      value: /etc/tls/chainZeebeCluster.pem
+    - name: ZEEBE_GATEWAY_CLUSTER_SECURITY_PRIVATEKEYPATH
+      value: /etc/tls/zeebeCluster.key
+```
+
+If you omit the `ZEEBE_GATEWAY_CLUSTER_SECURITY_*` variables or don't mount the TLS certificate in `orchestration.importer`, the migration importer starts its gateway cluster transport without TLS and can't connect to TLS-enabled brokers.
 
 ## Handle authentication changes
 
