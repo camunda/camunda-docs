@@ -63,6 +63,16 @@ Resource name for this process definition.
 
 ---
 
+### state
+
+```ts
+state: "ACTIVE" | "DELETED";
+```
+
+The state of this process definition.
+
+---
+
 ### tenantId
 
 ```ts

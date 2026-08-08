@@ -35,16 +35,6 @@ The key of the currently-active element instance.
 
 ---
 
-### iteration?
-
-```ts
-optional iteration?: IterationId | null;
-```
-
-Sequential iteration number this item belongs to. Omit if not grouping items into iterations.
-
----
-
 ### jobKey
 
 ```ts
@@ -62,6 +52,18 @@ jobLease: string;
 ```
 
 Opaque lease token received from the job activation response.
+
+---
+
+### loopIteration?
+
+```ts
+optional loopIteration?: LoopIterationId | null;
+```
+
+The loopIteration this item belongs to. A loopIteration is one pass through the agent
+feedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping
+items by loopIteration.
 
 ---
 

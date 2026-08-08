@@ -65,16 +65,6 @@ The unique key for this history item. Stable and sortable by creation order.
 
 ---
 
-### iteration
-
-```ts
-iteration: IterationId | null;
-```
-
-The sequential iteration number this item belongs to. Null if not provided by the connector.
-
----
-
 ### jobKey
 
 ```ts
@@ -95,13 +85,27 @@ The lease token of the activation that produced this item.
 
 ---
 
+### loopIteration
+
+```ts
+loopIteration: LoopIterationId | null;
+```
+
+The loopIteration this item belongs to. A loopIteration is one pass through the agent
+feedback loop: one LLM call, its tool dispatches, and their results. Null if not provided
+by the connector.
+
+---
+
 ### metrics
 
 ```ts
-metrics: AgentInstanceHistoryItemMetrics;
+metrics:
+  | AgentInstanceHistoryItemMetrics
+  | null;
 ```
 
-Per-call token and latency metrics. Zero-valued when not available.
+Per-call token and latency metrics. Null when metrics were not provided at creation time.
 
 ---
 

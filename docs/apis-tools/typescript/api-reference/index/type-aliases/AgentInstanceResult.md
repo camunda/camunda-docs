@@ -99,7 +99,7 @@ The configured limits for this agent instance, set once at creation.
 metrics: AgentInstanceMetrics;
 ```
 
-Aggregated metrics across all iterations of this agent instance.
+Aggregated metrics across all loopIterations of this agent instance.
 
 ---
 

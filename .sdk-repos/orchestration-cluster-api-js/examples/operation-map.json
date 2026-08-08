@@ -1436,5 +1436,75 @@
       "region": "ResolveSecrets",
       "label": "Resolve secrets"
     }
+  ],
+  "listSecrets": [
+    {
+      "file": "secret.ts",
+      "region": "ListSecrets",
+      "label": "List secret references"
+    }
+  ],
+  "takeRuntimeBackup": [
+    {
+      "file": "backup.ts",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "listRuntimeBackups": [
+    {
+      "file": "backup.ts",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "getRuntimeBackup": [
+    {
+      "file": "backup.ts",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "deleteRuntimeBackup": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "getRuntimeBackupState": [
+    {
+      "file": "backup.ts",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
+    }
+  ],
+  "syncRuntimeBackupState": [
+    {
+      "file": "backup.ts",
+      "region": "SyncRuntimeBackupState",
+      "label": "Force-write the runtime backup state"
+    }
+  ],
+  "deleteRuntimeBackupState": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
+  "pauseExporting": [
+    {
+      "file": "exporting.ts",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "resumeExporting": [
+    {
+      "file": "exporting.ts",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
   ]
 }

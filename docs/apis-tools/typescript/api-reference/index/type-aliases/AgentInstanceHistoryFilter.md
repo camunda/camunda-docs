@@ -46,16 +46,6 @@ The unique key of the history item.
 
 ---
 
-### iteration?
-
-```ts
-optional iteration?: IntegerFilterProperty;
-```
-
-The iteration number.
-
----
-
 ### jobKey?
 
 ```ts
@@ -63,6 +53,16 @@ optional jobKey?: JobKeyFilterProperty;
 ```
 
 The key of the job activation that produced the history item.
+
+---
+
+### loopIteration?
+
+```ts
+optional loopIteration?: IntegerFilterProperty;
+```
+
+Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).
 
 ---
 
