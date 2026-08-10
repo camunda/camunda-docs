@@ -123,7 +123,7 @@ The variable contains a list of activatable elements. Each element includes:
 - `elementName`: The name of the element.
 - `documentation`: The documentation of the element.
 - `properties`: The properties defined on the element.
-- `parameters`: Parameters defined using the [`fromAi`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function.
+- `parameters`: Parameters defined using the [`fromAi`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function.
 
 :::info
 Do not update the `adHocSubProcessElements` variable. Changing its value can cause unexpected behavior.

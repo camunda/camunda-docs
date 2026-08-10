@@ -7,7 +7,7 @@ description: Reference for the `agent-fromai-contract` rule.
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 import DeclaringAgenticSubprocess from "./\_declaring-agentic-subprocess.md";
 
-The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md) FEEL function declares a tool's LLM-supplied inputs within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). A malformed call resolves to nothing at runtime without producing an error, so malformed calls are reported as errors. A call without a description is valid and is not reported.
+The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md) FEEL function declares a tool's LLM-supplied inputs within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). A malformed call resolves to nothing at runtime without producing an error, so malformed calls are reported as errors. A call without a description is valid and is not reported.
 
 ## <MarkerGuideline.Invalid /> Contract breaks
 
@@ -40,5 +40,5 @@ Clicking a tool container report in the Problems panel selects the tool task rat
 ## References
 
 - [AI Agent tool definitions](../../../../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md)
-- [`fromAi()` FEEL function](../../../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md)
+- [`fromAi()` FEEL function](../../../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 - [Rule source](https://github.com/camunda/bpmnlint-plugin-camunda-compat/blob/main/rules/camunda-cloud/agent-fromai-contract.js)
