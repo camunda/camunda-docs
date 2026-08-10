@@ -2460,6 +2460,7 @@ module.exports = {
                 "self-managed/components/optimize/configuration/object-variables",
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy",
+                "self-managed/components/optimize/configuration/optimize-export-filtering",
               ],
             },
           ],
