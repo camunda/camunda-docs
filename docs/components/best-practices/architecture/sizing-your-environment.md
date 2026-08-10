@@ -272,6 +272,18 @@ The number of tasks per process allows you to calculate the number of tasks per 
 
 In most cases, Camunda defines throughput per day, as this time frame is easier to understand. However, in high-performance use cases, you might need to define the throughput per second.
 
+### Job worker capacity
+
+Job worker capacity is a sizing factor separate from cluster throughput, because the two aren't necessarily correlated.
+
+Zeebe delivers jobs to workers through two paths that share a worker's capacity but behave differently: [job streaming pushes a job the moment it's activate-able](/components/concepts/job-workers.md#push-jobs-bypass-the-activatable-backlog), while polling is the only path that drains jobs already queued in the backlog. This means a healthy throughput number doesn't tell you whether that backlog is draining — the two are independent signals. Backlog can keep growing after workers recover from an outage, even while throughput already looks fully recovered.
+
+:::note
+There is currently no built-in metric that reports this backlog's size directly ([tracked in issue #59759](https://github.com/camunda/camunda/issues/59759)). Until one exists, the closest available signal is a derived Prometheus rate that should stay close to zero: `rate(zeebe_job_events_total{action="created"}[5m]) - rate(zeebe_job_events_total{action="activated"}[5m])`.
+:::
+
+Beyond monitoring, also size the worker's own capacity against its execution threads and job timeout. See [sizing maxJobsActive against execution threads](/components/best-practices/development/writing-good-workers.md#sizing-maxjobsactive-against-execution-threads) for the Java client's formula. Other client SDKs implement worker capacity differently and aren't covered by that formula.
+
 ## Plan non-production environments
 
 All clusters can be used for development, testing, integration, Q&A, and production.
