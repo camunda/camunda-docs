@@ -408,19 +408,19 @@ const GETTING_STARTED = {
 };
 
 const DESKTOP_MODELER = {
-  version: "5.49.0",
-  date: "Jul 14, 2026",
+  version: "5.50.1",
+  date: "Aug 11, 2026",
   nightlyLabel: "Nightly",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon (.dmg)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.49.0/camunda-modeler-5.49.0-mac-arm64.dmg",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.50.1/camunda-modeler-5.50.1-mac-arm64.dmg",
         },
         {
           label: "Intel (.dmg)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.49.0/camunda-modeler-5.49.0-mac-x64.dmg",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.50.1/camunda-modeler-5.50.1-mac-x64.dmg",
         },
       ],
       experimental: [
@@ -438,7 +438,7 @@ const DESKTOP_MODELER = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.49.0/camunda-modeler-5.49.0-win-x64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.50.1/camunda-modeler-5.50.1-win-x64.zip",
         },
       ],
       experimental: [
@@ -452,7 +452,7 @@ const DESKTOP_MODELER = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.49.0/camunda-modeler-5.49.0-linux-x64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda-modeler/5.50.1/camunda-modeler-5.50.1-linux-x64.tar.gz",
         },
       ],
       experimental: [
