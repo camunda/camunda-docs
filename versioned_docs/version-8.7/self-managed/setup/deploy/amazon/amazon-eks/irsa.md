@@ -299,15 +299,17 @@ zeebe:
       eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/<iam-role-arn>
 ```
 
+Annotate the service accounts for enabled document-store consumers: Zeebe, Zeebe Gateway, Operate, Tasklist, execution Identity, and Web Modeler REST API.
+
 :::note
-With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token. Annotate the service accounts for enabled document-store consumers: Zeebe, Zeebe Gateway, Operate, Tasklist, execution Identity, and Web Modeler REST API. Connectors doesn't access S3 directly and doesn't need the document-store role.
+With `irsa.enabled: true`, no AWS credentials secret is required. The AWS SDK resolves credentials through its [default provider chain](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html), which picks up the IRSA web identity token.
 :::
 
 ### Configure connector task credentials separately
 
-Connectors accesses documents through the Zeebe REST API and doesn't access the document store directly. Don't grant the document-store IAM role to the Connectors service account.
+Connectors accesses documents through the Zeebe REST API, not the document store directly. Don't grant the document-store IAM role to the Connectors service account.
 
-Document-store credentials are no longer propagated to the Connectors pod. If a connector task uses cloud credentials from the pod environment, configure those credentials under `connectors`:
+Camunda no longer propagates document-store credentials to the Connectors pod. If a connector task uses cloud credentials from the pod environment, configure those credentials under `connectors`:
 
 | Connector task credential source     | Configuration                                                                                                                                                            |
 | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
