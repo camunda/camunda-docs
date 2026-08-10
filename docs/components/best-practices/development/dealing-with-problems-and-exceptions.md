@@ -1,13 +1,5 @@
 ---
 title: Dealing with problems and exceptions
-tags:
-  - Transaction
-  - ACID Transaction
-  - Compensation
-  - Exception Handling
-  - BPMN Error Event
-  - Incident
-  - Save Point
 description: "Take a closer look at understanding workers, handling exceptions on a technical level, leveraging retries, using incidents, and more."
 ---
 

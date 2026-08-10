@@ -1,12 +1,5 @@
 ---
 title: Deciding about your stack
-tags:
-  - Architecture
-  - Stack
-  - Database
-  - Application Server
-  - Spring Boot
-  - Maven
 ---
 
 Our greenfield stack recommendation is a result of extensive discussions and evaluations. While not the only option, it is a solid choice if there are no specific reasons to choose an alternative.

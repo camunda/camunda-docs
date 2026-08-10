@@ -1,7 +1,5 @@
 ---
 title: Modeling with situation patterns
-tags:
-  - BPMN
 description: "Document patterns that share common characteristics and find a satisfying solution for modeling them."
 ---
 
