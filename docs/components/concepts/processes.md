@@ -87,6 +87,6 @@ A process can call another process using a [call activity](/components/modeler/b
 
 - The **parent process instance** is the process instance that contains the call activity.
 - The **child process instance** is the process instance created by that call activity.
-- The **root process instance** is the process instance at the top of the hierarchy — the one that was started directly, not created by a call activity.
+- The **root process instance** is the process instance at the top of the hierarchy that was not created by a call activity.
 
 A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
