@@ -215,21 +215,21 @@ For supported file types and details on how documents are resolved, see [documen
 
 ## Assisted tool configuration in Web Modeler
 
-Web Modeler helps you fill in the tool contract directly from the properties panel, both the [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process that is marked as agentic, either through the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It never appears in a plain sub-process, and it only ever fills a blank field, never overwriting a value you already entered.
+In the properties panel, Web Modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process and only fills blank fields, so it does not overwrite values you already entered.
 
 ### Autofill a `fromAi()` input
 
-On a tool's root node (the activity with no incoming flows), a blank input mapping or a blank FEEL-capable element-template field shows an autofill icon. Select it to seed a correctly structured call:
+On a tool's root node (the activity with no incoming flows), an autofill icon appears for a blank input mapping or blank FEEL-capable element-template field. Select the icon to add a correctly structured call:
 
 ```feel
 =fromAi(toolCall.parameterName, "Description of the parameter")
 ```
 
-Replace the placeholder key and description with values for your tool. Because the field was blank, nothing you wrote is discarded.
+Replace the placeholder key and description with values for your tool. Autofill does not overwrite existing field values.
 
 ### Autofill a `toolCallResult` output
 
-A tool-flow element that does not yet produce a contract-readable result offers a one-click autofill that writes `toolCallResult` into the element's native result field:
+If a tool-flow element does not yet produce a contract-readable result, you can use autofill to write `toolCallResult` to the element's native result field:
 
 | Element type | Field written                                                |
 | :----------- | :----------------------------------------------------------- |
@@ -237,17 +237,15 @@ A tool-flow element that does not yet produce a contract-readable result offers 
 | Script task  | The script result variable                                   |
 | Other tasks  | An output mapping targeting `toolCallResult`                 |
 
-For a multi-instance tool, the autofill also sets the output collection and output element, so the agent collects a result for every iteration instead of `null`.
+For a multi-instance tool, autofill also sets the output collection and output element so the agent collects a result for every iteration instead of returning `null`.
 
 ### Accept a correction
 
-When a `fromAi()` key or an output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click. A correction changes only the part that is wrong: correcting an invalid `fromAi()` key rewrites the key and keeps any description and type arguments you wrote.
+When a `fromAi()` key or output key is a near-miss—for example, a value close to `toolCallResult` but not exact—Web Modeler detects it locally and offers a correction you can accept in one click. A correction changes only the invalid part. For example, correcting an invalid `fromAi()` key rewrites the key but preserves any description and type arguments you entered.
 
-If a `fromAi()` call sits on an element other than the tool's root node, where the AI Agent connector does not resolve it, Web Modeler offers to move the call to the root node.
+If a `fromAi()` call is on an element other than the tool's root node, the AI Agent connector cannot resolve it. Web Modeler offers to move the call to the root node.
 
-:::note
-This assistance complements the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong; the assisted configuration offers to fix it.
-:::
+This assistance complements the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong, assisted configuration offers to fix it.
 
 ## Gateway tool definitions
 
