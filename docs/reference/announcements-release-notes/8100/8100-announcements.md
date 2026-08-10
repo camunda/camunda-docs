@@ -417,7 +417,7 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 
 **Action:** Review your broker memory sizing before upgrading. To keep the previous behavior, explicitly set `camunda.data.primary-storage.rocksdb.memory-allocation-strategy` to `PARTITION` (environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY=PARTITION`). To adopt the new default, test the `FRACTION` strategy first to find the right `memory-fraction` value for your deployment.
 
-<p className="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p className="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 </div>
 </div>
