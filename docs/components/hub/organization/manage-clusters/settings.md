@@ -65,9 +65,7 @@ Enter one pattern per line, or separate values with spaces, in any of the four f
 - **Include variable names**: variable names to include, matched by prefix. For example, entering `business_` includes all variables whose names start with `business_`. Leave empty to include all variables.
 - **Exclude variable names**: variable names to exclude, matched by prefix. Exclusion takes precedence over inclusion.
 
-:::note
-New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs. On Self-Managed, no default filter is applied; configure filters manually using [Helm values or configuration properties](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
-:::
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. For existing clusters, data filters are disabled by default and can be enabled with one click. No automatic migration occurs. On Self-Managed, no default filter is applied; configure filters manually using [Helm values or configuration properties](/self-managed/components/optimize/configuration/optimize-export-filtering.md).
 
 :::warning
 Filtered records are permanently excluded from Optimize. Optimize cannot import data that was never exported, and dropped records cannot be recovered even if you change the filters later. For details, see [Optimize export filtering](/self-managed/components/optimize/configuration/optimize-export-filtering.md).

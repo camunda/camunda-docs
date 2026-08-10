@@ -42,7 +42,7 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 ## Optimize data filters in Console
 
-On SaaS, you can now configure Optimize export filters directly in Console cluster settings — no Helm values or configuration files required. Use the **Data filters** section in cluster settings to control which process definitions (by `bpmnProcessId`) and variable names reach Optimize.
+On SaaS, you can now configure Optimize export filters directly in Console cluster settings. No Helm values or configuration files required. Use the **Data filters** section in cluster settings to control which process definitions (by `bpmnProcessId`) and variable names reach Optimize.
 
 New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
