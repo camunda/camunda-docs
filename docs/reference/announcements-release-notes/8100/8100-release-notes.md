@@ -44,7 +44,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <!-- https://github.com/camunda/product-hub/issues/3621 -->
 
-Use the Optimize agentic control plane dashboard to monitor monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
 
 The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
 
@@ -121,9 +123,12 @@ You can now perform rolling upgrades of self-managed Camunda 8 between patch and
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
-Document Handling now supports any S3-compatible object store such as MinIO, Cloudian, or Garage alongside Amazon S3, Google Cloud Storage, and Azure Blob Storage. Configure an S3-compatible backend by pointing the existing AWS S3 document store at a custom endpoint. No migration is required for existing AWS S3 deployments.
+Document Handling now supports any S3-compatible object store such as MinIO, Cloudian, or Garage alongside Amazon S3, Google Cloud Storage, and Azure Blob Storage.
 
-<p class="link-arrow">[Document store configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
+- Configure an S3-compatible backend by pointing the existing AWS S3 document store to your custom provider endpoint.
+- No migration is required for existing AWS S3 deployments.
+
+<p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
 
 #### Unified frontend application for Admin, Operate, and Tasklist
 
