@@ -5,7 +5,7 @@ description: Reference for the `agent-tool-output-key` rule.
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
-import DeclaringAgenticSubprocess from "./\_declaring-agentic-subprocess.md";
+import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
 
 Tools within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) return their results to the agent through the `toolCallResult` variable. The rule reports one warning per tool in either of the following situations:
 
@@ -38,7 +38,7 @@ This works only for elements that run in the workflow engine. Connector result e
 
 Results written by arbitrary FEEL expressions elsewhere, such as a variable set by a called process, cannot be detected statically. Ignore the warning or make the result wiring explicit with an output mapping.
 
-Overwrite detection is also skipped for any tool flow that branches, such as at a gateway split, join, or boundary event. This applies even when the branches are guaranteed to converge before the next write. Review these flows manually for potential overwrites.
+Overwrite detection is also skipped for any tool flow that branches, for example a gateway split, a join, or a boundary event, even when the branches are guaranteed to converge before the next write. Review these flows manually for overwrites.
 
 ### The result variable name
 
