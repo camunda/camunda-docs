@@ -1,7 +1,5 @@
 ---
 title: "Performance tuning Camunda 7"
-tags:
-  - Performance
 description: "Understand influencing aspects on performance and apply tuning strategies. For example, by configuring the job executor or applying external tasks."
 ---
 

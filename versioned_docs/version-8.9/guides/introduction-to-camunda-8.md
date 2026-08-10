@@ -16,7 +16,7 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 <div class="double-column-container">
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first AI agent, and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
+Get hands-on with [Camunda 8](https://camunda.io) with our getting started guides. Start by running your first BPMN process, building your first [AI agent](/reference/glossary.md#ai-agent), and orchestrating human tasks and APIs using [connectors](/reference/glossary.md#connector).
 
 <a class="button button--outline button--secondary button--md button--hero--topic" title="Run your first BPMN process with Camunda 8" href="getting-started-hello-world" style={{marginBottom: '30px', marginTop: '20px'}}>Run your first BPMN process with Camunda 8</a>
 
@@ -34,17 +34,17 @@ Launch a fully-automated Rocket Launch process on your local machine with no cod
 
 <p><a href="./getting-started-hello-world/" class="link-arrow">Run your first BPMN process</a></p>
 
+## Build your first AI agent
+
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent). The agent runs as a step inside a BPMN process, so the engine executes, retries, and records it in the same way as the fixed steps around it.
+
+<p><a href="./getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
+
 ## Run your first Spring Boot or Node.js project with Camunda 8
 
 This guide is for developers who want to implement process automation solutions using Spring Boot or Node.js. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
 <p><a href="./getting-started-example/" class="link-arrow">Run your first local project</a></p>
-
-## Build your first AI agent
-
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
-
-<p><a href="./getting-started-agentic-orchestration/" class="link-arrow">Build your first AI agent</a></p>
 
 ## Orchestrate human tasks
 

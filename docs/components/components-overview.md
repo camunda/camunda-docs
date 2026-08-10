@@ -31,9 +31,9 @@ import AskAi from './react-components/\_banner-ask-ai.md'
 <div class="double-column-container" style={{marginBottom: '50px'}}>
 <div class="double-column-left"  style={{marginRight: '50px', flex: '1.35'}}>
 
-Orchestrate and automate complex business processes for people, systems, and devices. Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
+Orchestrate and automate complex business processes for people, systems, devices, and [AI agents](/reference/glossary.md#ai-agent). Build BPMN processes and DMN decisions using powerful tools offering collaborative modeling, operations, and analytics.
 
-<a class="button button--outline button--secondary button--md button--hero--topic" title="Introduction to Camunda 8" href="concepts/concepts-overview" style={{marginBottom: '30px', marginTop: '20px'}}>Introduction to Camunda 8</a>
+<a class="button button--outline button--secondary button--md button--hero--topic" title="Build with AI" href="../guides/build-with-ai/overview/" style={{marginBottom: '30px', marginTop: '20px'}}>Learn how to build agentic solutions</a>
 
 </div>
 <div class="double-column-right" style={{flex: '1'}}>
@@ -43,11 +43,11 @@ Orchestrate and automate complex business processes for people, systems, and dev
 </div>
 </div>
 
-:::info Camunda 8.8
+## Introduction to Camunda 8
 
-- See [what's new in Camunda 8.8](/reference/announcements-release-notes/880/whats-new-in-88.md), [release announcements](/reference/announcements-release-notes/880/880-announcements.md), and [release notes](/reference/announcements-release-notes/880/880-release-notes.md).
+Learn how Camunda 8 components work together to orchestrate and automate business processes, including people, systems, devices, and AI agents.
 
-:::
+<p><a href="./concepts/concepts-overview/" class="link-arrow">Introduction to Camunda 8</a></p>
 
 ## Best Practices
 
@@ -63,9 +63,9 @@ Learn about [deciding your stack](/components/best-practices/architecture/decidi
 
 Get started with selected key features and integrations.
 
-<UsingGrid using={featuresCards} />
+<UsingGrid using={featuresCards} columns={2} />
 
-## Using Camunda
+## Camunda components
 
 Explore and learn about Camunda components and BPMN, DMN, and FEEL expressions.
 

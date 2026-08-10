@@ -97,11 +97,11 @@ Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are
 </div>
 <div className="release-announcement-content">
 
-#### OpenSearch 3.4 no longer supported
+#### OpenSearch 3.4 and 3.5 no longer supported
 
-Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Supported OpenSearch versions are now 2.19+ and 3.5+.
+Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.6. Supported OpenSearch versions are now 2.19+ and 3.6+.
 
-- Upgrade OpenSearch 3.4 clusters to 3.5 or later before moving to Camunda 8.10.
+- Upgrade OpenSearch 3.4 or 3.5 clusters to 3.6 or later before moving to Camunda 8.10.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
@@ -310,9 +310,9 @@ Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tool
 
 #### Console SM and Web Modeler APIs deprecated
 
-With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Hub REST API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-hub-rest-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
+With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Camunda Hub API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-camunda-hub-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
 
-**Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Hub REST API before 8.12.
+**Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Camunda Hub API before 8.12.
 
 </div>
 </div>

@@ -1088,8 +1088,8 @@ function Downloads() {
                 <DockerSvgIcon width="72" height="72" />
                 <h3>Docker Compose</h3>
                 <p>
-                  Run the full Camunda stack locally with a single{" "}
-                  <code>docker compose up</code>.
+                  Run Camunda 8 locally for development and evaluation with{" "}
+                  <code>docker compose up -d</code>.
                 </p>
               </Link>
               <Link

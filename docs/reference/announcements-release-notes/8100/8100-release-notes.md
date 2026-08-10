@@ -165,16 +165,30 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test (CP
 
 ### APIs & tools
 
-#### Public Hub REST API
+#### Public Camunda Hub API
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-Camunda now provides a public REST API under `/v2/` for programmatic access to Hub resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+A new Camunda Hub API is provided under `/v2/` for programmatic access to Console and Web Modeler resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
 
-The Console Self-Managed and Web Modeler APIs are deprecated in favor of the public Hub REST API.
+The Console Self-Managed and Web Modeler APIs are deprecated in favor of the Camunda Hub API.
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
-<p class="link-arrow">[Public REST API](/apis-tools/hub-api-saas/overview.md)</p>
+<p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
+
+:::note
+The Camunda Hub API is not yet exposed in Camunda 8. To access it, please reach out to [Camunda success](https://camunda.com/services/camunda-success/).
+:::
+
+#### Invite collaborators through the public API who haven't logged in yet
+
+<!-- https://github.com/camunda/camunda-hub/pull/26666 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Adding a project collaborator through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Web Modeler at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Web Modeler UI. The invitee gains project access once they accept the invitation.
+
+<p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
 
 ### Console
 
@@ -265,6 +279,16 @@ FEEL expressions in the variable outline now use the same syntax highlighting as
 
 <p class="link-arrow">[Inspect variables](/components/modeler/data-handling.md#inspecting-variables)</p>
 
+#### Start a process instance with a business ID
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+You can now set a business ID when starting a process instance directly from Camunda Hub or Desktop Modeler. The business ID field is available in the start process instance dialog alongside variables.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
 ### Operate
 
 #### Multi-variable filtering
@@ -290,6 +314,16 @@ Operate now shows what an active process instance is waiting for. When you inspe
 Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
+
+#### Business ID filtering in Operate
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`) via the API.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
 
 ### Optimize
 
@@ -422,6 +456,32 @@ Camunda 8.10 introduces region awareness to the Orchestration Cluster. Operators
 Leader election priorities respect region boundaries, preferring region-local leaders under normal conditions and adjusting automatically when a region becomes unavailable. The same mechanism extends to availability zone or datacenter isolation using the same configuration.
 
 <p class="link-arrow">[Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md)</p>
+
+#### Business ID in message correlation
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
+
+You can now include a business ID when publishing or correlating a message. Business ID acts as an additional filter alongside the message name and correlation key.
+
+Supported combinations for start events: message name alone; name + business ID; name + correlation key; name + correlation key + business ID. For non-start events, business ID is usable alongside name + correlation key. When both a correlation key and business ID are provided, both fields must match the corresponding values stored on the subscription.
+
+If business ID uniqueness is enabled, a blocked message-start waits in the buffer until the active instance releases the business ID or the TTL expires — it is not dropped immediately.
+
+<p class="link-arrow">[Business ID in message correlation](/components/concepts/messages.md#business-id-in-message-correlation)</p>
+
+#### Business ID propagation in call activities
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Call activities now support configuring the business ID assigned to the child process instance. Child instances inherit the parent's business ID by default (unchanged from 8.9). You can override this per call activity with a literal value or FEEL expression. The FEEL context variable `camunda.processInstance.businessId` provides access to the parent's ID within the expression.
+
+The resolved value is set once at child creation and is immutable.
+
+<p class="link-arrow">[Business ID propagation](/components/modeler/bpmn/call-activities/call-activities.md#business-id-propagation)</p>
 
 ### Helm chart deployment
 
@@ -556,6 +616,18 @@ The default RocksDB memory allocation strategy changes from `PARTITION` to `FRAC
 To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#rocksdb-memory-allocation-strategy) for more details.
 
 <p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+
+### Operate
+
+#### Business ID visibility in Operate
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
 
 ### Optimize
 
