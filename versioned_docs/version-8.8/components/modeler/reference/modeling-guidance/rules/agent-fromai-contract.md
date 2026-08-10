@@ -5,7 +5,7 @@ description: Reference for the `agent-fromai-contract` rule.
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
-import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
+import DeclaringAgenticSubprocess from "./\_declaring-agentic-subprocess.md";
 
 The [`fromAi()`](../../../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md) FEEL function declares a tool's LLM-supplied inputs within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md). A malformed call resolves to nothing at runtime without producing an error, so malformed calls are reported as errors. A call without a description is valid and is not reported.
 
@@ -35,7 +35,7 @@ A `fromAi()` call within an ad-hoc sub-process that is not recognized as a tool 
 
 <DeclaringAgenticSubprocess />
 
-Clicking this report in the Problems panel selects the tool task rather than the ad-hoc sub-process. To add the property, select the sub-process directly in the diagram. The Problems panel does not navigate to it for you.
+Clicking a tool container report in the Problems panel selects the tool task rather than the ad-hoc sub-process, and the Problems panel does not navigate to the sub-process for you. Select the sub-process directly in the diagram to apply either fix.
 
 ## References
 
