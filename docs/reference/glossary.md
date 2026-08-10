@@ -557,17 +557,7 @@ A process instance can be active (currently running), completed, or terminated.
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
-### Process instance hierarchy
-
-A [call activity](/components/modeler/bpmn/call-activities/call-activities.md) creates a new process instance to run a called process, forming a hierarchy of related process instances:
-
-- The **parent process instance** is the process instance that contains the call activity.
-- The **child process instance** is the process instance created by that call activity.
-- The **root process instance** is the process instance at the top of the hierarchy — the one that was started directly, not created by a call activity.
-
-A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
-
-- [Call activities](/components/modeler/bpmn/call-activities/call-activities.md)
+A process can call another process via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances. See [process instance hierarchy](/components/concepts/processes.md#process-instance-hierarchy) for the parent, child, and root process instance terminology.
 
 ### Process instance tag
 

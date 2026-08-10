@@ -80,3 +80,13 @@ Execution works as described above, with one difference: the AI agent chooses wh
 The LLM decides which tools to call and in what order. Camunda runs them, moves the same [variables](/components/concepts/variables.md), and applies the same retries, incident handling, and audit trail as the fixed steps around them.
 
 To learn more, see [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md).
+
+## Process instance hierarchy
+
+A process can call another process using a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances:
+
+- The **parent process instance** is the process instance that contains the call activity.
+- The **child process instance** is the process instance created by that call activity.
+- The **root process instance** is the process instance at the top of the hierarchy — the one that was started directly, not created by a call activity.
+
+A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
