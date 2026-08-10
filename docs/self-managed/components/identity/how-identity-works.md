@@ -42,8 +42,8 @@ In most deployments, both subsystems share the same IdP — you create a separat
 
 Before Camunda 8.8, [Management Identity](/self-managed/components/management-identity/overview.md) (then called just "Identity") managed access for every component, including Zeebe, Operate, and Tasklist. That release split it in two: the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) began managing its own authentication and authorization internally, through [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) (formerly called Orchestration Cluster Identity). See [Identity, authentication, and authorization](/reference/announcements-release-notes/880/whats-new-in-88.md#identity) for the full migration details.
 
-:::note Console role changes stop working after upgrade
-This split is the root cause behind one of the most common sources of post-upgrade confusion: role and authorization changes made in Console no longer affect an already-migrated cluster. Existing roles and authorizations are migrated automatically during the upgrade, but from that point on, the cluster's authorizations live in Admin — not in Management Identity or Console. If you change a role in Console expecting it to affect Operate or Tasklist access, it won't. Make that change in Admin instead.
+:::note Manage roles in Admin after upgrading
+Admin becomes the single source of truth for the migrated cluster's roles and authorizations. Existing roles and authorizations carry over automatically during the upgrade, so nothing needs to be re-created. From that point on, manage access to Operate and Tasklist in Admin — role or authorization changes made in Console or Management Identity no longer apply to the migrated cluster.
 :::
 
 ## What you need to configure
