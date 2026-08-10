@@ -83,3 +83,21 @@ a.using-card {
     grid-template-columns: 1fr;
   }
 }
+
+/* default (3 cols) */
+.using-grid.using-grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* two-column option */
+.using-grid.using-grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* responsive fallback */
+@media (max-width: 700px) {
+  .using-grid.using-grid-cols-3,
+  .using-grid.using-grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}

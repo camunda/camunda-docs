@@ -9,8 +9,8 @@
       },
       "items": [
         "guides/getting-started-hello-world",
-        "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
+        "guides/getting-started-example",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis"
       ]
@@ -709,6 +709,9 @@
                 "id": "components/modeler/reference/modeling-guidance/index"
               },
               "items": [
+                "components/modeler/reference/modeling-guidance/rules/agent-fromai-contract",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-documentation",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-output-key",
                 "components/modeler/reference/modeling-guidance/rules/called-element",
                 "components/modeler/reference/modeling-guidance/rules/element-type",
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
@@ -841,7 +844,7 @@
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-range",
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-string",
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal",
-                "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous"
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent"
               ]
             },
             {

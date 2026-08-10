@@ -1,12 +1,5 @@
 ---
 title: Deciding about your Camunda 7 stack
-tags:
-  - Architecture
-  - Stack
-  - Database
-  - Application Server
-  - Spring Boot
-  - Maven
 description: "Camunda 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make."
 ---
 
