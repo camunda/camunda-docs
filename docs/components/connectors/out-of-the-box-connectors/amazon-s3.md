@@ -69,15 +69,19 @@ The Amazon S3 connector supports the following actions:
 
 ### Upload Document
 
-Upload a document. The incoming document must be a reference from the previous process.
+Upload a document to S3.
 
 #### Parameters
 
-| Parameter    | Description                                                                                                                                      |
-| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `AWS bucket` | The targeted AWS S3 bucket where the document should be uploaded.                                                                                |
-| `AWS key`    | (Optional) The key of the document that uniquely identifies the object in an Amazon S3 bucket. Will fallback to the document filename if not set |
-| `Document`   | The document that should be uploaded to S3, provided as a FEEL expression with the document reference.                                           |
+| Parameter    | Description                                                                                                                                                                                                                                            |
+| :----------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AWS bucket` | The targeted AWS S3 bucket where the document should be uploaded.                                                                                                                                                                                      |
+| `AWS key`    | (Optional) The key of the document that uniquely identifies the object in an Amazon S3 bucket. Will fallback to the document filename if not set                                                                                                       |
+| `Document`   | The document to upload. Select a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL. |
+
+:::note
+Use **inline content** to build a file (for example, a `.json` error report) directly from process variables without first storing it in the Camunda document store. See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
+:::
 
 :::info
 To learn more about Friendly Enough Expression Language (FEEL) expressions,
@@ -114,11 +118,11 @@ Download the document from AWS S3.
 
 #### Parameters
 
-| Parameter         | Description                                                                                                                 |
-| :---------------- | :-------------------------------------------------------------------------------------------------------------------------- |
-| `AWS bucket`      | The targeted AWS S3 bucket that the document should be downloaded from.                                                     |
-| `AWS key`         | The key of the document that uniquely identifies the object in an Amazon S3 bucket.                                         |
-| `Create document` | Either `false` or `true`. If `false`, no document is created and the output is inserted as JSON, text, or base64 raw bytes. |
+| Parameter       | Description                                                                                                                                                                                                                                         |
+| :-------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AWS bucket`    | The targeted AWS S3 bucket that the document should be downloaded from.                                                                                                                                                                             |
+| `AWS key`       | The key of the document that uniquely identifies the object in an Amazon S3 bucket.                                                                                                                                                                 |
+| `Return format` | How the downloaded content is returned. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats): **Document reference**, **As text** (with an optional encoding, default UTF-8), or **As JSON**. |
 
 :::info
 To learn more about Friendly Enough Expression Language (FEEL) expressions,
@@ -129,25 +133,28 @@ see [what is FEEL?](/components/modeler/feel/what-is-feel.md).
 
 The following JSON response is returned after a successful document download operation:
 
-- `bucket`: Echoes back the bucket of the uploaded document.
-- `key`: Echoes back the unique key of the uploaded document.
-- `element`: Represents the document in the workflow. The behavior changes based on the `Create document` setting:
-  - If `Create document` is set to `false`:
-    - For `String` content type: `element` will contain the string content of the document.
-    - For `Json` content type: `element` will contain the JSON content of the document.
-    - For other content types: `element` will contain the raw bytes of the document, encoded in base64.
-  - If `Create document` is set to `true`:
-    - `element` will contain a document reference, rather than the document content itself.
+- `bucket`: Echoes back the bucket of the downloaded document.
+- `key`: Echoes back the unique key of the downloaded document.
+- `element`: Represents the downloaded content. Its value depends on the selected **Return format**:
+  - **Document reference**: `element` contains a reference to the document created in the Camunda document store.
+  - **As text**: `element` contains the content decoded as a string.
+  - **As JSON**: `element` contains the content parsed as JSON.
+
+:::note
+**As text** and **As JSON** return the content directly in a process variable and are subject to a size guard (approximately 1.5 MiB). A larger object fails the job with an incident. Use **Document reference** for large files. **As JSON** fails the job when the content is not valid JSON.
+:::
 
 #### Example Response
 
-The following examples show a successful download operation response:
+The following examples show a successful download operation response.
+
+With **Document reference**:
 
 ```json
 {
   "bucket": "Example Subject",
-  "key": true,
-  "document": {
+  "key": "report.json",
+  "element": {
     "storeId": "in-memory",
     "documentId": "20f1fd6a-d8ea-403b-813c-e281c1193495",
     "metadata": {
@@ -156,22 +163,18 @@ The following examples show a successful download operation response:
       "fileName": "305a4816-b3df-4724-acd3-010478a54add.webp"
     },
     "camunda.document.type": "camunda"
-  },
-  "content": null
+  }
 }
 ```
 
-or
+With **As JSON**:
 
 ```json
 {
   "bucket": "Example Subject",
-  "key": true,
-  "document": null,
-  "content": {
-    "json": {
-      "testKey": "testValue"
-    }
+  "key": "report.json",
+  "element": {
+    "testKey": "testValue"
   }
 }
 ```
