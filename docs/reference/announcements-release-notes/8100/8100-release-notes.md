@@ -38,6 +38,18 @@ import PageDescription from '@site/src/components/PageDescription';
 | :------------- | :-------------------------------------------------------------------------------------------------- | :--- |
 | 11 August 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha4)</li></ul> | -    |
 
+### Agentic orchestration
+
+#### Agentic control plane
+
+<!-- https://github.com/camunda/product-hub/issues/3621 -->
+
+Use the Optimize agentic control plane dashboard to monitor monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
+
+The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
+
+<p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
+
 ### Modeler
 
 #### BPMN element menu improvements
