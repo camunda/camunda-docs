@@ -19,14 +19,14 @@ For guidance on using these signals to catch an agent going off-rail, see [detec
 
 Camunda updates an agent instance's state as it progresses through its agent loop, fed by status updates from the connector handling the agent.
 
-| State            | Meaning                                                                                                      |
-| ---------------- | ------------------------------------------------------------------------------------------------------------ |
-| `Initializing`   | The agent instance is being created and set up for a newly activated agent element.                          |
-| `Tool discovery` | The agent resolves which BPMN activities and other tool sources are available to it as tools.                |
-| `Thinking`       | The agent sends the conversation, system prompt, and tool definitions to the model and waits for a response. |
-| `Tool calling`   | Camunda executes the BPMN activities the model selected as tools.                                            |
-| `Idle`           | The process instance has moved away from the agent element, so the agent isn't currently working.            |
-| `Completed`      | The process instance for the agent completed or terminated.                                           |
+| State            | Meaning                                                                                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Initializing`   | The agent instance is being set up.                                                                                                                                 |
+| `Tool discovery` | The agent is resolving which tools are available to it.                                                                                                             |
+| `Thinking`       | The agent is reasoning with the model to decide its next step.                                                                                                      |
+| `Tool calling`   | The agent is calling one or more tools.                                                                                                                             |
+| `Idle`           | The process instance has moved away from the agent element, so the agent isn't currently working. It resumes when the process instance activates the element again. |
+| `Completed`      | The agent instance is completed, because the process instance completed or terminated.                                                                              |
 
 ### State transitions
 
@@ -34,12 +34,12 @@ An agent instance follows a predictable path through these states. The following
 
 | State            | Entered when                                                                                             | Moves to                                                                                                                                                   |
 | ---------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Initializing`   | An agent element is activated and an agent instance is created.        | `Tool discovery`, once the agent instance is set up.                                                                                                       |
+| `Initializing`   | An agent element is activated and an agent instance is created.                                          | `Tool discovery`, once the agent instance is set up.                                                                                                       |
 | `Tool discovery` | The agent instance resolves the tools available to it.                                                   | `Thinking`, once tool definitions are resolved.                                                                                                            |
 | `Thinking`       | The agent instance is reasoning over the current conversation.                                           | `Tool calling`, if the model selects one or more tools. `Idle` or `Completed`, if the model returns a final response.                                      |
 | `Tool calling`   | The model selected one or more tools in the previous `Thinking` state.                                   | `Thinking`, once tool results are available. This starts the next loop iteration.                                                                          |
 | `Idle`           | The process instance moves away from the agent element, for example, to wait for a user task or message. | `Thinking`, when the process instance re-activates the same agent element and reuses this agent instance. `Completed`, if the process instance ends first. |
-| `Completed`      | The parent process instance for the agent completes or terminates.                                       | Terminal state; the agent instance stops updating.                                                                                                         |
+| `Completed`      | The process instance for the agent completes or terminates.                                              | Terminal state; the agent instance stops updating.                                                                                                         |
 
 The cycle from `Thinking` to `Tool calling` and back to `Thinking` is one **loop iteration**: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration. An agent instance can run through many loop iterations before reaching a final response.
 
