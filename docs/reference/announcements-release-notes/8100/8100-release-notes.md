@@ -79,6 +79,20 @@ Filtered records are permanently excluded from Optimize and cannot be recovered 
 
 <p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
+### Connectors
+
+#### Find a connector by the operation you want to perform
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Built-in connector templates now describe their operations, so you can model by the action you want to take instead of the product that provides it. Searching in the create, append, or change element menu for `upload object` or `send email` returns the matching operations of every connector as their own entries, and selecting one applies the connector with that operation preselected. Connectors with several operations show their operations as a nested menu, and the operation selection is now the first group in the properties panel.
+
+Connectors that provide a single operation are also renamed to describe their action — for example, **REST Outbound Connector** is now **Send REST Request**. Existing process models are unaffected.
+
+<p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
+
 ### Modeler
 
 #### BPMN element menu improvements
@@ -93,6 +107,16 @@ The create, append, and change menus now group BPMN elements by category, such a
 - When appending, elements that continue a flow subtly indicate where the flow continues next. Select this to open the append pad with a prominent **Append** action.
 
 <p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
+
+#### Define operations in your own element templates
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
+
+<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
 
 #### Hide the Add user button
 

@@ -171,6 +171,17 @@ Business ID is now a first-class, searchable attribute across the Orchestration 
 
 <p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
 
+## Connector operations
+
+Connectors are now discoverable by the operation you want to perform, not only by the product they connect to. When you search in the create, append, or change element menu, the operations of every built-in connector appear as their own entries, so searching for `upload object` or `send email` takes you straight to the connectors that can do it. Selecting an operation applies the connector with that operation preselected, and connectors with several operations present them as a nested menu.
+
+Two changes come with this:
+
+- Connectors that provide a single operation are [renamed after the operation they perform](/reference/announcements-release-notes/8100/8100-announcements.md#connectors-with-a-single-operation-are-renamed-after-the-operation). Existing process models keep running unchanged.
+- Element templates support the `steps` and `presets` keys, so your own templates can offer the same guided operation selection.
+
+<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
+
 ## Helm chart deployment
 
 Important changes to Helm chart deployment in 8.10 are as follows:
