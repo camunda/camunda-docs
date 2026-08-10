@@ -1,10 +1,12 @@
 ---
 id: job-workers
 title: "Job workers"
-description: "Learn more about job workers, a service that can perform a particular task in a process. When this task needs to be performed, this is represented by a job."
+description: "Learn more about job workers, a service that can perform a particular task in a process. Each time that task needs to be performed, it is represented by a job."
 ---
 
-A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time such a task needs to be performed, this is represented by a [job](/reference/glossary.md#job).
+A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time that task needs to be performed, it is represented by a [job](/reference/glossary.md#job).
+
+For example, [AI agent](/reference/glossary.md#ai-agent) tool calls use this mechanism. Each activity inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) acts as a tool and is executed as a job, like any other task in the process.
 
 A job has the following properties:
 
