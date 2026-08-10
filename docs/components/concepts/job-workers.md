@@ -187,6 +187,41 @@ To help visualize the process in general, here is a sequence diagram which shows
 
 ![Sample Sequence Diagram](assets/job-push-sequence.png)
 
+### Push jobs bypass the activatable backlog
+
+Job streaming and polling are two separate delivery paths, not two ways of draining the same queue.
+
+Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and polling (the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. A pushed job never enters the backlog at all: the moment a job becomes activate-able and a stream exists for its type, Zeebe pushes it directly to that stream instead.
+
+The following diagram shows both paths from the broker through the gateway to a worker's job capacity:
+
+```mermaid
+flowchart TB
+    created["Job becomes activate-able"]
+
+    subgraph broker["Broker"]
+        created
+        backlog[["ACTIVATABLE backlog"]]
+    end
+
+    subgraph gateway["Gateway"]
+        pushFwd["Push forwarding"]
+        pollFwd["Poll forwarding<br/>(ActivateJobs)"]
+    end
+
+    subgraph worker["Worker"]
+        capacity(("Job capacity<br/>(maxJobsActive)"))
+    end
+
+    created -- "no stream registered" --> backlog
+    created -- "stream registered: pushed immediately" --> pushFwd
+    pushFwd --> capacity
+    backlog -- "drained only by polling" --> pollFwd
+    pollFwd --> capacity
+```
+
+One consequence follows directly from this: once a stream reconnects after being unavailable, newly created jobs go out through push right away, but push does not drain jobs already waiting in the backlog. Only polling drains the backlog, so if it built up while no stream was registered (for example, during a job worker outage), draining it still depends on polling getting its turn, even after workers reconnect and push resumes.
+
 ### Backpressure
 
 To avoid workers overloaded with too many jobs, e.g. running out of memory:
