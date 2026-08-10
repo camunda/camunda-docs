@@ -38,7 +38,7 @@ This works only for elements that run in the workflow engine. Connector result e
 
 Results written by arbitrary FEEL expressions elsewhere, such as a variable set by a called process, cannot be detected statically. Ignore the warning or make the result wiring explicit with an output mapping.
 
-Overwrite detection is also skipped for any tool flow that branches, for example a gateway split, a join, or a boundary event, even when the branches are guaranteed to converge before the next write. Review these flows manually for overwrites.
+Overwrite detection is also skipped for any tool flow that branches, such as at a gateway split, join, or boundary event. This applies even when the branches are guaranteed to converge before the next write. Review these flows manually for potential overwrites.
 
 ### The result variable name
 
