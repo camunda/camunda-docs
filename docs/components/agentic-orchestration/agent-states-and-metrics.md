@@ -26,7 +26,7 @@ Camunda updates an agent instance's state as it progresses through its agent loo
 | `Thinking`       | The agent sends the conversation, system prompt, and tool definitions to the model and waits for a response. |
 | `Tool calling`   | Camunda executes the BPMN activities the model selected as tools.                                            |
 | `Idle`           | The process instance has moved away from the agent element, so the agent isn't currently working.            |
-| `Completed`      | The parent process instance for the agent completed or terminated.                                           |
+| `Completed`      | The process instance for the agent completed or terminated.                                           |
 
 ### State transitions
 
@@ -34,7 +34,7 @@ An agent instance follows a predictable path through these states. The following
 
 | State            | Entered when                                                                                             | Moves to                                                                                                                                                   |
 | ---------------- | -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Initializing`   | An agent element is activated and no reusable agent instance exists yet, or a new one is created.        | `Tool discovery`, once the agent instance is set up.                                                                                                       |
+| `Initializing`   | An agent element is activated and an agent instance is created.        | `Tool discovery`, once the agent instance is set up.                                                                                                       |
 | `Tool discovery` | The agent instance resolves the tools available to it.                                                   | `Thinking`, once tool definitions are resolved.                                                                                                            |
 | `Thinking`       | The agent instance is reasoning over the current conversation.                                           | `Tool calling`, if the model selects one or more tools. `Idle` or `Completed`, if the model returns a final response.                                      |
 | `Tool calling`   | The model selected one or more tools in the previous `Thinking` state.                                   | `Thinking`, once tool results are available. This starts the next loop iteration.                                                                          |
