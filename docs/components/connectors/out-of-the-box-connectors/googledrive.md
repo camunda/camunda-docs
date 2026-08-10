@@ -71,7 +71,7 @@ To download a file, take the following steps:
 1. Set the required credentials in the **Authentication** section. Refer to the [relevant appendix entry](#how-can-i-authenticate-my-connector) to find out more.
 2. In the **Select Operation** section, set the field value **Operation Type** to **Download File**.
 3. In the **Operation Details** section, set the field _File ID_ to the google drive file that will be downloaded. For more information, refer to the [file id appendix](#Where-do-I-get-File-ID).
-4. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats) for the downloaded content: **Document reference**, **As text** (with an optional encoding, default UTF-8), or **As JSON**.
+4. Select a [return format](/components/document-handling/send-document-to-external-system.md#return-formats) for the downloaded content: **Document reference** (default), **As text** (with an optional encoding, default UTF-8), or **As JSON**.
 
 ## Google Drive connector response
 
@@ -106,8 +106,7 @@ You can use an output mapping to map the response:
 
 The response depends on the selected [return format](/components/document-handling/send-document-to-external-system.md#return-formats):
 
-- **As text** returns the content decoded as a string, and **As JSON** returns it parsed as JSON. Both are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large files.
-- **Document reference** returns a document created in the Camunda document store, identical to the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx). For example:
+- **Document reference** (default) returns a document created in the Camunda document store, identical to the [REST API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx). For example:
 
 ```
 {
@@ -122,6 +121,8 @@ The response depends on the selected [return format](/components/document-handli
     }
 }
 ```
+
+- **As text** returns the content decoded as a string, and **As JSON** returns it parsed as JSON. Both are subject to a size guard (approximately 1.5 MiB); use **Document reference** for large files.
 
 ## Appendix & FAQ
 
