@@ -397,7 +397,7 @@ For example, you can validate your process by creating and rerunning scenarios f
 - As you save completed instances as scenarios, Play calculates the percent of elements covered by the scenario suite.
 - This is the first step towards bringing automated testing into Web Modeler, and enabling business and IT to collaborate on automated tests.
 
-To learn more about this feature, see [Play scenarios](/components/hub/workspace/modeler/validation/play-your-process.md#scenarios).
+To learn more about this feature, see [Play scenarios](/components/hub/workspace/modeler/validation/test-your-process.md#test-cases).
 
 <!-- https://github.com/camunda/product-hub/issues/2073 -->
 

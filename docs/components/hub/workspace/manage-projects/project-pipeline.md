@@ -58,11 +58,11 @@ To define your deployment pipeline stages:
 
 When your project is ready for validation you can deploy it to your development cluster.
 
-- Use [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md) to quickly validate the process behavior and play different scenarios.
+- Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to quickly validate the process behavior and test different paths.
 - Validate that all files and resources are correctly deployed.
 
 :::note
-Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/components/hub/workspace/modeler/validation/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
+Test mode is being rebuilt and progressively rolled out to more users. See [Test limitations and availability](/components/hub/workspace/modeler/validation/test-your-process.md#limitations-and-availability) for limitations and why you might not see the **Test** tab.
 :::
 
 ## Review

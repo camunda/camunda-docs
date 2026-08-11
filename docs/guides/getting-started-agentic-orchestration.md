@@ -249,15 +249,15 @@ Depending on your working environment, test your agent by following the correspo
 <TabItem value="saas">
 
 1. Open [Web Modeler](/components/hub/workspace/modeler/index.md).
-1. Select the [**Play**](/components/hub/workspace/modeler/validation/play-your-process.md) tab.
-1. Select the cluster you want to deploy and play the process on.
+1. Select the [**Test**](/components/hub/workspace/modeler/validation/test-your-process.md) tab.
+1. Select the cluster you want to deploy and test the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
 1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
 :::tip
-Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
+Instead of using **Test mode**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
 :::
 </TabItem>
 

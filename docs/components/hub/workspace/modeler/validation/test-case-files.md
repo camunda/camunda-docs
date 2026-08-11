@@ -1,26 +1,26 @@
 ---
-id: test-scenario-files
-title: Test scenario files
+id: test-case-files
+title: Test case files
 description: Define shareable, low-code tests for your BPMN processes
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Test scenario files let you define shareable, low-code tests for your BPMN processes.
+Test files let you define shareable, low-code tests for your BPMN processes.
 
-They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json), so you can use the same files in Play and in an automated CPT test suite. You can create, edit, and manage them directly in Web Modeler. You can also download these files or synchronize them with your Git repository using Git Sync.
+They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json), so you can use the same files in Test mode and in an automated CPT test suite. You can create, edit, and manage them directly in Web Modeler. You can also download these files or synchronize them with your Git repository using Git Sync.
 
-## Create a test scenario file
+## Create a test file
 
-You can create a new test scenario file by [saving a scenario in Play](play-your-process.md#save-scenario).
+You can create a new test file by [saving a test case in Test mode](test-your-process.md#save-a-test-case).
 
-You can also manage scenarios and update failing scenarios from Play.
+You can also manage tests and update failing tests in Test mode.
 
 ## Manual editing
 
 ### Test case structure
 
-Test scenario files follow the [CPT JSON test cases schema](/apis-tools/testing/json-test-cases.md). Play adds two optional fields to that schema, `processId` and `metadata`, to link the file to a BPMN process and track scenario coverage.
+Test files follow the [CPT JSON test cases schema](/apis-tools/testing/json-test-cases.md). Test mode adds two optional fields to that schema, `processId` and `metadata`, to link the file to a BPMN process and track test coverage.
 
 ```json
 {
@@ -34,7 +34,7 @@ Test scenario files follow the [CPT JSON test cases schema](/apis-tools/testing/
         // Array of instruction objects
       ],
       "metadata": {
-        // Optional - for use in Play only
+        // Optional - for use in Test mode only
         "processInstanceId": 12345,
         "coveredFlowNodes": [
           { "flowNodeId": "startEvent", "elementType": "START_EVENT" },
@@ -44,7 +44,7 @@ Test scenario files follow the [CPT JSON test cases schema](/apis-tools/testing/
       }
     },
     {
-      "name": "Error handling scenario",
+      "name": "Error handling tests",
       "instructions": [
         // Array of instruction objects for error case
       ]
@@ -55,23 +55,23 @@ Test scenario files follow the [CPT JSON test cases schema](/apis-tools/testing/
 
 **Top-level fields**
 
-| Field       | Required | Description                                                                                              |
-| ----------- | -------- | -------------------------------------------------------------------------------------------------------- |
-| `processId` | Yes      | Play-specific field. The ID of the BPMN process definition the test cases run against. Required by Play. |
-| `testCases` | Yes      | An array of test case objects.                                                                           |
+| Field       | Required | Description                                                                                                        |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| `processId` | Yes      | Test-mode-specific field. The ID of the BPMN process definition the test cases run against. Required by Test mode. |
+| `testCases` | Yes      | An array of test case objects.                                                                                     |
 
 **Test case fields**
 
-| Field          | Required | Description                                                                                                |
-| -------------- | -------- | ---------------------------------------------------------------------------------------------------------- |
-| `name`         | Yes      | A descriptive name for the test case scenario.                                                             |
-| `description`  | No       | A human-readable description of the test case.                                                             |
-| `instructions` | Yes      | An array of instruction objects that define the test steps.                                                |
-| `metadata`     | No       | Used by Play to show coverage and process instance details. Camunda does not recommend editing this field. |
+| Field          | Required | Description                                                                                                     |
+| -------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| `name`         | Yes      | A descriptive name for the test case.                                                                           |
+| `description`  | No       | A human-readable description of the test case.                                                                  |
+| `instructions` | Yes      | An array of instruction objects that define the test steps.                                                     |
+| `metadata`     | No       | Used by Test mode to show coverage and process instance details. Camunda does not recommend editing this field. |
 
 ### Link a process (`processId`)
 
-To display the file's scenarios in Play, you must first link the file to a process.
+To display the file's tests in Test mode, you must first link the file to a process.
 
 Add a `processId` field with the process ID of the BPMN process you want to test:
 
@@ -88,13 +88,13 @@ You can find the BPMN process ID in the properties panel, or in the first `<bpmn
 The `processId` should stay within the supported identifier-length limits of the target environment and must not contain whitespace.
 
 :::note
-`processId` is a Play-specific extension to the CPT schema. It is preserved when running the file with CPT, but only Play uses it to link the file to a process.
+`processId` is a Test mode specific extension to the CPT schema. It is preserved when running the file with CPT, but only Test mode uses it to link the file to a process.
 
-Play runs only the first executable process within the BPMN diagram. Make sure the process ID you link is the first executable process.
+Test mode runs only the first executable process within the BPMN diagram. Make sure the process ID you link is the first executable process.
 :::
 
 :::caution
-If the BPMN diagram's process ID changes, or if another process ID is added earlier in the BPMN file, the file's scenarios won't appear in the process's Play scenarios tab.
+If the BPMN diagram's process ID changes, or if another process ID is added earlier in the BPMN file, the file's test cases won't appear in the process's Test cases tab.
 :::
 
 ### Unlink a process
@@ -102,7 +102,7 @@ If the BPMN diagram's process ID changes, or if another process ID is added earl
 To unlink the file from a process, remove the `processId` field or set it to `null`.
 
 :::caution
-Unlinking a file means its scenarios will not be shown in the Play scenarios tab for that process.
+Unlinking a file means its test cases will not be shown in the Test cases tab for that process.
 
 To fix this, re-link the file by restoring the `processId` field.
 :::
@@ -111,7 +111,7 @@ To fix this, re-link the file by restoring the `processId` field.
 
 Each instruction has a `type` property that identifies the action or assertion, plus additional properties depending on the type. Resources such as process instances, elements, user tasks, jobs, and messages are referenced through **selectors**.
 
-The sections below show the instructions most commonly used in Play scenarios. For the complete list of instructions, selectors, and the full schema reference, see [JSON test cases](/apis-tools/testing/json-test-cases.md).
+The sections below show the instructions most commonly used in Test cases. For the complete list of instructions, selectors, and the full schema reference, see [JSON test cases](/apis-tools/testing/json-test-cases.md).
 
 ### Create process instance
 
@@ -247,8 +247,8 @@ Resolves an incident that was created due to a job failure or another process is
 ## Usage tips
 
 - Always use meaningful selector values, such as `elementId` or `processDefinitionId`, that match your BPMN diagram.
-- Give test cases descriptive names to clearly indicate the scenario being tested.
-- Include error scenarios along with happy path tests.
+- Give test cases descriptive names to clearly indicate the test case being tested.
+- Include error test cases along with happy path tests.
 - Use optional `variables` fields to test different data conditions.
 - Ensure correlation keys uniquely identify process instances when publishing messages.
 - Specify `timeToLive` values in milliseconds (for example, `60000` for one minute, `300000` for five minutes).

@@ -147,8 +147,6 @@ Deletion no longer corrupts process application version history, as existing sna
 
 #### Test process segments in Play
 
-<!-- https://github.com/camunda/product-hub/issues/2896 -->
-
 <div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
@@ -157,7 +155,7 @@ When testing your process with Play in Web Modeler, you can now capture and reru
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
 - Reuse saved segment tests during iterative model changes to catch regressions earlier.
 
-<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/play-your-process.md)</p>
+<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
 
 #### Variables panel improvements
 

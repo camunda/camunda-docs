@@ -924,8 +924,8 @@ module.exports = {
                 },
                 {
                   Validate: [
-                    "components/hub/workspace/modeler/validation/play-your-process",
-                    "components/hub/workspace/modeler/validation/test-scenario-files",
+                    "components/hub/workspace/modeler/validation/test-your-process",
+                    "components/hub/workspace/modeler/validation/test-case-files",
                     "components/hub/workspace/modeler/validation/token-simulation",
                     "components/hub/workspace/modeler/validation/task-testing",
                   ],
