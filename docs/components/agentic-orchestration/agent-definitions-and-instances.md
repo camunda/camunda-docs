@@ -18,7 +18,7 @@ An **agent definition** describes a deployed agent, while an **agent instance** 
 
 An AI agent is not the same as the BPMN element that defines it, and it does not have the same lifecycle as an element instance.
 
-- A single [AI Agent Sub-process](/reference/glossary.md#ad-hoc-sub-process) or [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) element defines one agent.
+- A single agent element defines one agent, whether it is an [AI Agent Sub-process](/reference/glossary.md#ad-hoc-sub-process), an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), or an [external agent](/reference/glossary.md#external-agent).
 - Each time the process activates that element, Camunda creates an element instance.
 - The agent instance can be **reused across several element instances** within the same process instance.
 
@@ -31,13 +31,13 @@ An AI agent definition is a first-class, queryable resource that Camunda creates
 
 Camunda creates one agent definition per agent element in a deployed process, analogous to how a [DRD](/reference/glossary.md#drd-decision-requirements-diagram) deployment creates one decision definition per decision. An agent definition is a **structural descriptor** of the agent, not a store of its runtime configuration.
 
-An agent definition identifies an agent across process versions through a stable agent definition key. With this key, you can inventory deployed agents, aggregate per-agent metrics in Optimize, and confirm that an agent exists before starting one of its instances.
+An agent definition is bound to a specific process definition version. Deploying a new version of a process creates a new agent definition for each of its agent elements, in the same way that each process version has its own process definition. With agent definitions, you can inventory the agents deployed to your cluster, aggregate per-agent metrics in Optimize, and confirm that an agent exists before starting one of its instances.
 
 ### What an agent definition contains
 
 An agent definition contains the following data:
 
-- **Agent definition key**: Stable identifier for the agent across process definition versions.
+- **Agent definition key**: Unique identifier of the agent definition, assigned per process definition version.
 - [**Agent type**](/components/agentic-orchestration/ai-agents.md#agent-types): One of AI Agent Sub-process, AI Agent Task, or external agent.
 - **Name**: Human-readable name of the agent element.
 - **Process definition key**: The process definition the agent belongs to.
@@ -45,10 +45,36 @@ An agent definition contains the following data:
 
 ### Mark an element as an agent
 
-To ensure an element is recognized as an agent, you **must mark it** in the BPMN model with the `zeebe:agentDefinition` extension element. How you do this depends on your agent type:
+For Camunda to recognize an element as an agent, the element **must be marked** in the BPMN model with the `zeebe:agentDefinition` extension element. If you model in Camunda Modeler, the element templates add the marker for you:
 
-1. **Native agents**: Camunda's own AI Agent connector templates add this marker for you.
-2. **External agents**: You must add the marker explicitly so that Camunda registers it as an agent.
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)**: The AI Agent Sub-process and AI Agent Task templates add the marker.
+- **[External agents](/reference/glossary.md#external-agent)**: The External Agent template adds the marker.
+
+If you model outside Camunda Modeler, add the marker to the BPMN XML yourself.
+
+#### XML representation
+
+The marker is an extension element on the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) or [service task](/components/modeler/bpmn/service-tasks/service-tasks.md) that hosts the agent. Its `agentType` attribute declares the [agent type](#what-an-agent-definition-contains), and accepts `aiAgentSubProcess`, `aiAgentTask`, or `external`.
+
+An AI Agent Sub-process marked as an agent:
+
+```xml
+<bpmn:adHocSubProcess id="research-agent" name="Research agent">
+  <bpmn:extensionElements>
+    <zeebe:agentDefinition agentType="aiAgentSubProcess" />
+  </bpmn:extensionElements>
+</bpmn:adHocSubProcess>
+```
+
+An external agent marked as an agent:
+
+```xml
+<bpmn:serviceTask id="research-agent" name="Research agent">
+  <bpmn:extensionElements>
+    <zeebe:agentDefinition agentType="external" />
+  </bpmn:extensionElements>
+</bpmn:serviceTask>
+```
 
 ### Reuse an agent across processes
 

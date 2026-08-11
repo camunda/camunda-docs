@@ -77,6 +77,14 @@ An agent instance can be reused across several element instances within the same
 
 - [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
 
+### Agent loop
+
+The feedback loop an [AI agent](#ai-agent) runs to reach its goal: the model reasons over the current context, decides whether to call tools, receives the tool results, and repeats until it returns a final response or reaches a configured limit. The loop is what makes an agent an agent, and it consists of one or more [loop iterations](#loop-iteration).
+
+A [Camunda AI agent](#camunda-ai-agent) runs its loop in Camunda's engine, which activates each tool call as a BPMN activity. An [external agent](#external-agent) runs its loop in an external runtime.
+
+- [How the feedback loop works](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works)
+
 ### Agent orchestration
 
 Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
@@ -105,7 +113,7 @@ A broad field of computer science focused on creating machines that can perform 
 
 ### AI agent
 
-An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop.
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs an [agent loop](#agent-loop) where the model decides what to do next, which tools to invoke, and when to stop.
 
 The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
 
@@ -479,7 +487,7 @@ A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based 
 
 ### Loop iteration
 
-A loop iteration is one pass through an [AI agent](#ai-agent)’s loop, during which the model reasons, selects tools, evaluates the result, and decides whether to continue. An AI agent run consists of one loop with one or more loop iterations.
+A loop iteration is one pass through an [AI agent](#ai-agent)’s [agent loop](#agent-loop), during which the model reasons, selects tools, evaluates the result, and decides whether to continue. An AI agent run consists of one loop with one or more loop iterations.
 
 Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution.
 
