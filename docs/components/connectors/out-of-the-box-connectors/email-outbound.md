@@ -137,9 +137,9 @@ As of the 8.8 release, angle brackets (`<` and `>`) are no longer removed from t
 :::
 
 :::note
-Starting from version 8.7.0, the outbound email connector supports sending Camunda documents as attachments.
+The outbound email connector supports sending documents as attachments. Each attachment uses a [document source](/components/document-handling/send-document-to-external-system.md#document-sources): a **Camunda document** reference, **inline content** built from process data, or an **external document** URL.
 
-For example, the **Attachment** field in the properties panel may look as `=[ document1, document2]`.
+Use the **Single/Multiple** toggle to provide one document or a FEEL array of documents (for example, `=[document1, document2]`).
 
 See additional details and limitations in [document handling](/components/document-handling/getting-started.md).
 :::
@@ -333,7 +333,7 @@ Allow users to send an email from the connected email account.
 | `Content Type`       | The content type of the email.                                                                                                                                                                                                                                                                |
 | `Email Text Content` | The text content of the email. This must only be provided if the `Content Type` is `PLAIN` or `HTML & PlainText`.                                                                                                                                                                             |
 | `Html Text Content`  | The HTML content of the email. This must only be provided if the `Content Type` is `HTML` or `HTML & PlainText`.                                                                                                                                                                              |
-| `Attachment`         | The document reference, either for a single document or as a list for multiple documents.                                                                                                                                                                                                     |
+| `Attachment`         | The document(s) to attach. Select a [document source](/components/document-handling/send-document-to-external-system.md#document-sources) (Camunda document, inline content, or external document); use the **Single/Multiple** toggle for one document or a FEEL array of documents.         |
 
 :::info
 To learn more about Friendly Enough Expression Language (FEEL) expression,

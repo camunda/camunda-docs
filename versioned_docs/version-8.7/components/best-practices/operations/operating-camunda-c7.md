@@ -1,12 +1,5 @@
 ---
 title: "Operating Camunda 7"
-tags:
-  - Save Point
-  - Retry
-  - Incident
-  - Monitoring
-  - Alarming
-  - Backup
 description: "To successfully operate Camunda 7.x, you need to take into account operation requirements when modeling business processes."
 ---
 

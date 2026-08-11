@@ -12,15 +12,6 @@ keywords:
   - Docker
   - Infrastructure
   - Reference Architecture
-tags:
-  - Camunda 8 Self-Managed
-  - Camunda Self-Managed
-  - Self-Managed Components
-  - Kubernetes
-  - Helm
-  - Docker
-  - Infrastructure
-  - Reference Architecture
 ---
 
 import { CamundaSelfManaged } from "@site/src/components/CamundaSelfManaged";

@@ -218,7 +218,105 @@ camunda.data.secondary-storage.rdbms.history.*
 
 ## Multi-region support
 
-One RDBMS Exporter instance and one JDBC database connection can be configured per Orchestration Cluster. Multi-region support is not planned. For multi-region setups, handle replication within the RDBMS itself, for example using AWS Aurora.
+Multi-region support for RDBMS uses the asynchronous replication feature of the underlying database and is highly
+dependent on the database vendor. While most multi-region replication is performed by the database itself, Camunda
+provides additional features to enhance automatic recovery in the event of a failure.
+
+Asynchronous replicated databases are synchronized with a delay, meaning that after a failover, the new primary database
+may not contain all the data written to the old primary database. This can lead to data loss in secondary storage. While
+this data can be reproduced by replaying past records from the Zeebe log stream, the relevant segments and records must still
+be present on all brokers. Zeebe's logstream segments are usually compacted as soon as all exporters have acknowledged the
+records.
+
+Camunda supports different strategies to handle this situation and preventing Zeebe log stream segments from being
+compacted prematurely.
+The following strategies are supported:
+
+- **LSN replication monitoring:** dynamic monitoring of the replication lag based on the database LSN. This is the most
+  preferred strategy and should be used whenever possible with the used database vendor.
+- **Delay backoff replication monitoring:** Adds a static delay to the acknowledgement of records to the broker.
+
+:::note
+Deferring the logstream compaction with either strategy may drastically increase the disk space usage of the logstream.
+It is recommended to monitor the disk space usage and adjust the disk size or delay limit accordingly.
+:::
+
+### LSN replication monitoring
+
+The exporter monitors the replication lag to the secondary databases based on the Log Sequence Number (LSN) of the last
+exported record. Only when an RDBMS redo log segment is replicated to a minimum quorum of secondary databases, the
+exporter will acknowledge the records in the logstream.
+
+```yaml
+camunda.data.secondary-storage.rdbms.async-replication.enabled: true
+camunda.data.secondary-storage.rdbms.async-replication.type: LOG_SEQ
+camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
+```
+
+| Property name                                 | Description                                                                   | Default |
+| --------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
+| `async-replication.enabled`                   | If the async replication monitoring should be enabled                         | false   |
+| `async-replication.min-sync-replicas`         | The minimum number of replicas in sync                                        | 1       |
+| `async-replication.polling-interval`          | The interval in which to check the replicas                                   | PT15S   |
+| `async-replication.max-lag`                   | The max tolerated lag of a replication (ISO-8601 duration)                    | PT15M   |
+| `async-replication.pause-on-max-lag-exceeded` | If the exporter should pause exporting when the maximum lag limit is exceeded | false   |
+
+#### Vendor support
+
+The following databases are supported for LSN replication monitoring:
+
+- Aurora Global Database with PostgreSQL
+- Aurora Global Database with MySQL
+- MSSQL
+- PostgreSQL
+
+To use the LSN replication monitoring with PostgreSQL, the database user must have the following additional privileges:
+
+- `PG_MONITOR` role
+
+```sql
+GRANT PG_MONITOR TO <user>;
+```
+
+To use the LSN replication monitoring with MSSQL, the database user must have the following additional privileges:
+
+- `VIEW SERVER STATE` role on SQL Server 2019 and earlier versions
+
+  ```sql
+  GRANT VIEW SERVER STATE TO <user>;
+  ```
+
+- `VIEW SERVER PERFORMANCE STATE` role on SQL Server 2022 and newer versions
+
+  ```sql
+  GRANT VIEW SERVER PERFORMANCE STATE TO <user>;
+  ```
+
+### Delay backoff replication monitoring
+
+The exporter always waits for a configured amount of time until an exported record is acknowledged to the broker as exported. This is supported for all databases.
+
+This is a fallback strategy for databases that do not support any other direct replication monitoring — prefer [LSN replication monitoring](#lsn-replication-monitoring) whenever your database vendor supports it. Delay backoff does not
+directly monitor any replication state, but instead adds a static delay to the acknowledgement of records to the broker.
+This can be used as a safety net to ensure that the Zeebe logstream segments are not compacted too early, even if the database
+replication is not fully in sync. This strategy requires external monitoring of the actual replication lag to ensure
+that the configured delay is sufficient for the database replication to catch up in case of a failover.
+
+:::warning
+The disk space used by the logstream is heavily influenced by the `delay` parameter: records accumulate on disk for the entire delay interval before they can be compacted. Size the persistent volume to hold all records produced during that interval. If the volume is too small, Zeebe runs out of disk space and stops processing.
+:::
+
+```yaml
+camunda.data.secondary-storage.rdbms.async-replication.enabled: true
+camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
+```
+
+| Property name                           | Description                                                                       | Default |
+| --------------------------------------- | --------------------------------------------------------------------------------- | ------- |
+| `async-replication.enabled`             | If the async replication monitoring should be enabled                             | false   |
+| `async-replication.delay`               | The delay to wait until a flushed record is acknowledged to the broker            | --      |
+| `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
+| `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
 
 ## Usage with AWS Aurora PostgreSQL
 
