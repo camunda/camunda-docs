@@ -19,7 +19,7 @@ AI agents can perform a variety of functions, including making decisions, solvin
 
 Camunda supports two types of agents:
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are usually implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
 - **[External agents](/reference/glossary.md#external-agent)** run their loop in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
 
 :::note
