@@ -428,7 +428,7 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 </div>
 <div className="release-announcement-content">
 
-#### New SaaS clusters default to business\_ variable include filter for Optimize
+#### New SaaS clusters default to `business_` variable include filter for Optimize
 
 Starting with Camunda 8.10, new SaaS clusters include a default `business_` variable include filter in Optimize data filter settings. Only variables whose names start with `business_` are exported to Optimize. Variables not matching this prefix are permanently excluded from Optimize.
 
