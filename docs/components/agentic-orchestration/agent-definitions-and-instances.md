@@ -37,17 +37,17 @@ An agent definition is bound to a specific process definition version. Deploying
 
 An agent definition contains the following data:
 
-| Property                      | Description                                                                                                                                            |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `agentDefinitionKey`          | The unique key for this agent definition. A new key is assigned for the same process element on every process definition version.                      |
-| `agentType`                   | The [agent type](/components/agentic-orchestration/ai-agents.md#agent-types): `AI_AGENT_SUB_PROCESS`, `AI_AGENT_TASK`, or `EXTERNAL_AGENT`.            |
-| `name`                        | The human-readable name of the process element that owns the agent definition. Falls back to `elementId` when the element has no BPMN name configured. |
-| `elementId`                   | The BPMN element ID of the process element that owns the agent definition.                                                                             |
-| `processDefinitionId`         | The BPMN process ID of the process definition that owns the agent definition.                                                                          |
-| `processDefinitionKey`        | The key of the process definition that owns the agent definition.                                                                                      |
-| `processDefinitionVersion`    | The version of the process definition that owns the agent definition.                                                                                  |
-| `processDefinitionVersionTag` | The version tag of the process definition that owns the agent definition.                                                                              |
-| `tenantId`                    | The tenant ID of this agent definition.                                                                                                                |
+| Property                      | Description                                                                                                                                                                                  |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agentDefinitionKey`          | The unique key for this agent definition. A new key is assigned for the same process element on every process definition version.                                                            |
+| `agentType`                   | The [agent type](/components/agentic-orchestration/ai-agents.md#agent-types): either a Camunda AI agent (`AI_AGENT_SUB_PROCESS` or `AI_AGENT_TASK`) or an external agent (`EXTERNAL_AGENT`). |
+| `name`                        | The human-readable name of the process element that owns the agent definition. Falls back to `elementId` when the element has no BPMN name configured.                                       |
+| `elementId`                   | The BPMN element ID of the process element that owns the agent definition.                                                                                                                   |
+| `processDefinitionId`         | The BPMN process ID of the process definition that owns the agent definition.                                                                                                                |
+| `processDefinitionKey`        | The key of the process definition that owns the agent definition.                                                                                                                            |
+| `processDefinitionVersion`    | The version of the process definition that owns the agent definition.                                                                                                                        |
+| `processDefinitionVersionTag` | The version tag of the process definition that owns the agent definition.                                                                                                                    |
+| `tenantId`                    | The tenant ID of this agent definition.                                                                                                                                                      |
 
 ### Mark an element as an agent
 
