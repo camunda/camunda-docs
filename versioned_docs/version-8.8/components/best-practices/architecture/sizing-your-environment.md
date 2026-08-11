@@ -224,7 +224,7 @@ The workflow engine delivers jobs to workers through two paths that share a work
 There is currently no built-in metric that directly reports the size of this backlog ([tracked in issue #59759](https://github.com/camunda/camunda/issues/59759)).
 :::
 
-Size the worker's own capacity against its execution threads and job timeout. See [sizing maxJobsActive against execution threads](/components/best-practices/development/writing-good-workers.md#sizing-maxjobsactive-against-execution-threads) for the Java client's formula. Other client SDKs implement worker capacity differently and aren't covered by that formula.
+Size the worker's own capacity against its concurrency model and job timeout. For the Java client's fixed-thread-pool model, see [sizing maxJobsActive against execution threads](/components/best-practices/development/writing-good-workers.md#sizing-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and aren't covered by that formula.
 
 ### Secondary storage
 
