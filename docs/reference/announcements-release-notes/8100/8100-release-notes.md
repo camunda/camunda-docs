@@ -32,6 +32,165 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha4
+
+| Release date   | Changelog(s)                                                                                        | Blog |
+| :------------- | :-------------------------------------------------------------------------------------------------- | :--- |
+| 11 August 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha4)</li></ul> | -    |
+
+### Agentic orchestration
+
+#### Agentic control plane
+
+<!-- https://github.com/camunda/product-hub/issues/3621 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
+
+The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
+
+<p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
+
+### Camunda Hub
+
+#### Optimize data filters in Console
+
+<!-- https://github.com/camunda/product-hub/issues/3679 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+You can now configure Optimize data filters directly in Console cluster settings, without editing Helm values or configuration files.
+
+The **Data filters** section in cluster settings lets you:
+
+- Enable or disable Optimize export filtering per cluster.
+- Include or exclude process definitions by exact `bpmnProcessId`.
+- Include or exclude variable names by prefix — for example, `business_` includes all variables whose names start with `business_`.
+- Exclusion takes precedence over inclusion when both are configured.
+
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables starting with `business_` to reduce Elasticsearch storage and shard usage. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+
+Saving filter changes triggers a rolling restart of the Orchestration Cluster; the cluster is briefly unavailable while it restarts.
+
+:::warning
+Filtered records are permanently excluded from Optimize and cannot be recovered even if you relax the filters later.
+:::
+
+<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
+### Connectors
+
+#### Find a connector by the operation you want to perform
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Built-in connector templates now describe their operations, so you can model by the action you want to take instead of the product that provides it. Searching in the create, append, or change element menu for `upload object` or `send email` returns the matching operations of every connector as their own entries, and selecting one applies the connector with that operation preselected. Connectors with several operations show their operations as a nested menu, and the operation selection is now the first group in the properties panel.
+
+Connectors that provide a single operation are also renamed to describe their action — for example, **REST Outbound Connector** is now **Send REST Request**. Existing process models are unaffected.
+
+<p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
+
+### Modeler
+
+#### BPMN element menu improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3480 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+The create, append, and change menus now group BPMN elements by category, such as tasks, gateways, events, and so on. Each category includes a short description so you can quickly find the right element.
+
+- Search still searches across all categories.
+- When appending, elements that continue a flow subtly indicate where the flow continues next. Select this to open the append pad with a prominent **Append** action.
+
+<p class="link-arrow">[Model a process](/components/modeler/bpmn/bpmn.md)</p>
+
+#### Define operations in your own element templates
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+Element templates support the `steps` and `presets` keys to offer several predefined configurations within a single template. Use `steps` to define the menu users navigate when they apply the template, and `presets` to define the property values each operation applies. Operation names, descriptions, and keywords are matched by search, so your operations are as discoverable as the templates themselves.
+
+<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
+
+#### Hide the Add user button
+
+<!-- https://github.com/camunda/camunda-hub/issues/25824 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+In Self-Managed, you can now hide the **Add user** button on the Web Modeler **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+
+<p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
+
+### Orchestration Cluster
+
+#### Elasticsearch 9.x and OpenSearch 3.x support
+
+<!-- https://github.com/camunda/product-hub/issues/3588 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+#### Physical Tenant identity support
+
+<!-- https://github.com/camunda/product-hub/issues/3600 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+Physical Tenants now support independent per-tenant authorization.
+
+- Each Physical Tenant enforces its own roles, mapping rules, and permissions.
+- Users can have different roles on different Physical Tenants, such as a developer role on one, and a viewer role on another.
+- Cluster-wide operations (topology, backups, restore) are protected by a claim-based cluster admin role, with no new infrastructure required.
+- Identity providers are defined at the cluster level. Each Physical Tenant chooses which IdPs it can accept.
+
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+
+#### Rolling upgrades
+
+<!-- https://github.com/camunda/product-hub/issues/2702 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now perform rolling upgrades of self-managed Camunda 8 between patch and minor versions with zero downtime across all supported secondary storage backends, including Elasticsearch, OpenSearch, and relational databases.
+
+- The cluster stays operational during a rolling upgrade: workflows continue executing, and Operate remains accessible for monitoring and incident response.
+- Schema changes between versions are strictly backwards-compatible and applied transparently.
+
+<p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
+
+#### S3-compatible object stores for Document Handling
+
+<!-- https://github.com/camunda/product-hub/issues/3507 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+
+Document Handling now supports any S3-compatible object store such as MinIO, Cloudian, or Garage alongside Amazon S3, Google Cloud Storage, and Azure Blob Storage.
+
+- Configure an S3-compatible backend by pointing the existing AWS S3 document store to your custom provider endpoint.
+- No migration is required for existing AWS S3 deployments.
+
+<p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
+
+#### Unified frontend application for Admin, Operate, and Tasklist
+
+<!-- https://github.com/camunda/product-hub/issues/3456 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Admin">Admin</span></div>
+
+Operate, Tasklist, and Admin are now accessed from a single frontend application with shared navigation, consistent design patterns, and unified deployment. Your user preferences (such as dark/light mode) are applied across all views, with consistent navigation patterns throughout the interface.
+
+<p class="link-arrow">[Operate overview](/components/operate/operate-introduction.md)</p>
+
 ## 8.10.0-alpha3
 
 | Release date | Changelog(s)                                                                                        | Blog |
