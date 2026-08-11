@@ -156,24 +156,6 @@ ZeebeClient client = ZeebeClient.newClientBuilder()
 
 In the Camunda Spring Boot Starter, you can do this using a [configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#execution-threads).
 
-#### Sizing `maxJobsActive` against execution threads
-
-`maxJobsActive` bounds how many jobs a worker holds at once, but it isn't a throughput knob: throughput is `numJobWorkerExecutionThreads / handlerDuration`. Raising `maxJobsActive` beyond what your execution threads and job timeout can support only makes jobs queue longer inside the worker; it doesn't make them complete faster.
-
-Size `maxJobsActive` so your worker can still meet its job deadlines:
-
-```
-maxJobsActive < numJobWorkerExecutionThreads × (jobTimeout / averageHandlerDuration)
-```
-
-For example, with 30 execution threads, a 1800 ms job timeout, and a 300 ms average handler duration, `maxJobsActive` should stay under 180 (`30 × (1800 / 300)`). Going higher lets more jobs queue behind your busy threads than can finish before their deadline, which causes jobs to time out and get redelivered instead of completing.
-
-Size the job timeout against your worst-case handler duration, not the average. The timeout serves two purposes at once: it's the broker's deadline for redelivering a job to another worker, and, if [job streaming](/components/concepts/job-workers.md#job-streaming) is enabled, it's also how long a pushed job can wait for a free capacity slot before it's dropped and retried. A handler that occasionally runs long will blow through a timeout sized only for the average case.
-
-:::note
-This formula and the `maxJobsActive` capacity model it describes are specific to the Java client's worker implementation (a shared semaphore bounding both push and poll). Other client SDKs implement worker capacity differently — check your client's own documentation for its equivalent tuning parameters.
-:::
-
 Now, you can **leverage blocking code** for your REST call, for example, the `RestTemplate` inside Spring:
 
 ```java
@@ -275,6 +257,27 @@ These observations yield the following recommendations for Java:
 | Parallelism  | Some parallelism is possible with a thread pool, which is used by the client library. The default thread pool size is one, which needs to be adjusted in the config in order to scale. | Many blocked operations can run concurrently without tying each blocked operation to a platform thread.               | A processing loop combined with an internal thread pool, both are details of the framework and runtime platform.                           |
 | **Use when** | You don't have requirements to process jobs in parallel.                                                                                                                               | You use Java 21 or later, need to process I/O-bound jobs in parallel, and want to keep straightforward blocking code. | Your client stack already uses reactive programming, or you need extremely high throughput or low latency and have measured the tradeoffs. |
 |              | You intentionally want to limit parallelism with a small worker thread pool.                                                                                                           | This should be the default for Java workers that need parallel I/O and don't otherwise require reactive programming.  | Your developers are familiar with reactive programming and the added complexity is acceptable.                                             |
+
+
+
+#### Sizing `maxJobsActive` against execution threads
+
+`maxJobsActive` defines the queue length and bounds the number of jobs a worker holds at once, but it isn't a throughput knob: throughput is `numJobWorkerExecutionThreads / handlerDuration`. Raising `maxJobsActive` beyond what your execution threads and job timeouts can support only makes the job queue longer within the worker; it doesn't make jobs complete faster.
+
+Size `maxJobsActive` so your worker can still meet its job deadlines:
+
+```
+maxJobsActive < numJobWorkerExecutionThreads × (jobTimeout / averageHandlerDuration)
+```
+
+For example, with 30 execution threads, a 1800 ms job timeout, and a 300 ms average handler duration, `maxJobsActive` should stay under 180 (`30 × (1800 / 300)`). Going higher lets more jobs queue behind your busy threads than can finish before their deadlines, causing jobs to time out and be redelivered to other workers instead of completing.
+
+Size the job timeout against your worst-case handler duration, not the average. The timeout serves two purposes at once: it's the broker's deadline for redelivering a job to another worker, and, if [job streaming](/components/concepts/job-workers.md#job-streaming) is enabled, it's also how long a pushed job can wait for a free capacity slot before it's dropped and retried. A handler that occasionally runs long will blow through a timeout sized only for the average case.
+
+:::note
+This formula and the `maxJobsActive` capacity model it describes are specific to the Java client's worker implementation (a shared semaphore bounding both push and poll). Other client SDKs implement worker capacity differently; check your client's own documentation for its equivalent tuning parameters.
+:::
+
 
 ### Node.js client
 
