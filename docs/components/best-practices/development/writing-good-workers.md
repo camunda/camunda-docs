@@ -260,11 +260,11 @@ These observations yield the following recommendations for Java:
 
 #### Sizing `maxJobsActive` against execution threads
 
-`maxJobsActive` defines the queue length and bounds the number of jobs a worker holds at once, but it isn't a throughput knob: throughput is `numJobWorkerExecutionThreads / handlerDuration`. Raising `maxJobsActive` beyond what your execution threads and job timeouts can support only makes the job queue longer within the worker; it doesn't make jobs complete faster.
+For workers backed by a fixed execution thread pool (blocking or virtual threads), `maxJobsActive` defines the queue length and bounds the number of jobs a worker holds at once, but it isn't a throughput knob: throughput is `numJobWorkerExecutionThreads / handlerDuration`. Raising `maxJobsActive` beyond what your execution threads and job timeouts can support only makes the job queue longer within the worker; it doesn't make jobs complete faster.
 
-Size `maxJobsActive` so your worker can still meet its job deadlines:
+Size `maxJobsActive` so your worker's queue stays within its job deadlines, with some margin:
 
-```
+```text
 maxJobsActive < numJobWorkerExecutionThreads × (jobTimeout / averageHandlerDuration)
 ```
 

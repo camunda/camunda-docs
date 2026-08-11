@@ -191,7 +191,7 @@ To help visualize the process in general, here is a sequence diagram which shows
 
 Job streaming and polling are two separate delivery paths, not two ways of draining the same queue.
 
-Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and long polling (via the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. A pushed job never enters the backlog at all: the moment a job becomes activate-able and a stream exists for its type, Zeebe pushes it directly to that stream instead.
+Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and long polling (via the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. On its first activation, a pushed job skips the backlog entirely: the moment a job becomes activate-able and a stream exists for its type, Zeebe pushes it directly to that stream instead. If that push fails or the job times out before completion, the job returns to the `ACTIVATABLE` backlog like any other job, and is served again by whichever path picks it up next.
 
 The following diagram shows both paths from the broker through the gateway to a worker's job capacity:
 
@@ -210,7 +210,7 @@ flowchart TB
     end
 
     subgraph worker["Worker"]
-        capacity(("Job capacity<br/>(maxJobsActive)"))
+        capacity(("Job capacity<br/>(worker-defined limit)"))
     end
 
     created -- "no stream registered" --> backlog
