@@ -37,28 +37,30 @@ An agent definition is bound to a specific process definition version. Deploying
 
 An agent definition contains the following data:
 
-| Property                      | Description                                                                                                                                                                                  |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `agentDefinitionKey`          | The unique key for this agent definition. A new key is assigned for the same process element on every process definition version.                                                            |
-| `agentType`                   | The [agent type](/components/agentic-orchestration/ai-agents.md#agent-types): either a Camunda AI agent (`AI_AGENT_SUB_PROCESS` or `AI_AGENT_TASK`) or an external agent (`EXTERNAL_AGENT`). |
-| `name`                        | The human-readable name of the process element that owns the agent definition. Falls back to `elementId` when the element has no BPMN name configured.                                       |
-| `elementId`                   | The BPMN element ID of the process element that owns the agent definition.                                                                                                                   |
-| `processDefinitionId`         | The BPMN process ID of the process definition that owns the agent definition.                                                                                                                |
-| `processDefinitionKey`        | The key of the process definition that owns the agent definition.                                                                                                                            |
-| `processDefinitionVersion`    | The version of the process definition that owns the agent definition.                                                                                                                        |
-| `processDefinitionVersionTag` | The version tag of the process definition that owns the agent definition.                                                                                                                    |
-| `tenantId`                    | The tenant ID of this agent definition.                                                                                                                                                      |
+| Property                      | Description                                                                                                                                                                                                       |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `agentDefinitionKey`          | The unique key for this agent definition. A new key is assigned for the same process element on every process definition version.                                                                                 |
+| `agentType`                   | The [agent type](/components/agentic-orchestration/ai-agents.md#agent-types): either a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent) or an [external agent](/reference/glossary.md#external-agent). |
+| `name`                        | The human-readable name of the process element that owns the agent definition. Falls back to `elementId` when the element has no BPMN name configured.                                                            |
+| `elementId`                   | The BPMN element ID of the process element that owns the agent definition.                                                                                                                                        |
+| `processDefinitionId`         | The BPMN process ID of the process definition that owns the agent definition.                                                                                                                                     |
+| `processDefinitionKey`        | The key of the process definition that owns the agent definition.                                                                                                                                                 |
+| `processDefinitionVersion`    | The version of the process definition that owns the agent definition.                                                                                                                                             |
+| `processDefinitionVersionTag` | The version tag of the process definition that owns the agent definition.                                                                                                                                         |
+| `tenantId`                    | The tenant ID of this agent definition.                                                                                                                                                                           |
 
 ### Mark an element as an agent
 
-For Camunda to recognize an element as an agent, the element **must be marked** in the BPMN model with the `zeebe:agentDefinition` extension element. If you model in Camunda Modeler, the element templates add the marker for you:
+For Camunda to recognize an element as an agent, the element **must be marked** in the BPMN model with the `zeebe:agentDefinition` extension element.
+
+If you model in Camunda Modeler, the element templates add the marker for you:
 
 - **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)**: The AI Agent Sub-process and AI Agent Task templates add the marker.
 - **[External agents](/reference/glossary.md#external-agent)**: The External Agent template adds the marker.
 
 If you model outside Camunda Modeler, add the marker to the BPMN XML yourself.
 
-#### XML representation
+#### Mark an element as an agent in XML
 
 The marker is an extension element on the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) or [service task](/components/modeler/bpmn/service-tasks/service-tasks.md) that hosts the agent. Its `agentType` attribute declares the [agent type](#what-an-agent-definition-contains), and accepts `aiAgentSubProcess`, `aiAgentTask`, or `external`.
 
