@@ -129,7 +129,7 @@ The following data is available for an agent instance in Operate:
 | Model                | The LLM the agent is running against.                                                                                                                                                                                |
 | System prompt        | The system prompt the agent was configured with.                                                                                                                                                                     |
 | Tool definitions     | The [tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) available to the agent, resolved from the agent's ad-hoc sub-process.                                           |
-| Conversation history | The decision trail of the agent execution: user prompts, assistant messages, the tools the agent selected with its reasoning, and tool calls with their inputs and results.                                          |
+| Conversation history | The decision trail of the agent execution: initial configuration, user prompts, assistant messages, the tools the agent selected with its reasoning, and tool calls with their inputs and results.                                          |
 
 #### Agent states
 
