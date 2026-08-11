@@ -18,7 +18,8 @@ import PageDescription from '@site/src/components/PageDescription';
 
 - See [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
-  :::
+
+:::
 
 ## Supported environments
 
