@@ -49,7 +49,9 @@ Alongside its state, you can track usage metrics for each agent instance to moni
 
 Camunda tracks the number of tokens consumed by the agent's model calls. Token consumption accumulates as the conversation grows: every loop iteration adds the previous tool results and the model's reasoning to the context that's sent with the next model call, so token usage tends to climb with each additional loop iteration.
 
-Rising token consumption without a final response is a signal that the conversation is growing without converging on an outcome. Token usage is also a direct driver of the LLM provider cost for the agent's execution. See [context window size](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for how conversation length is capped independently of token count.
+Rising token consumption without a final response is a signal that the conversation is growing without converging on an outcome. Token usage is also a direct driver of the LLM provider cost for the agent's execution.
+
+When using the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), see [context window size](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for how conversation length is capped independently of token count.
 
 ### Tool call count
 
