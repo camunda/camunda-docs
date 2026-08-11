@@ -58,7 +58,7 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 
 <QuickStart hideHeading/>
 
-## Installation Methods
+## Installation methods
 
 <Installation hideHeading/>
 
@@ -66,7 +66,7 @@ Deploy and manage Camunda in your own infrastructure. Quickstart guides and infr
 
 <Infrastructure hideHeading/>
 
-## Reference Architecture
+## Reference architecture
 
 <ReferenceArchitecture hideHeading/>
 
