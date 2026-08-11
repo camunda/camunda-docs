@@ -83,8 +83,6 @@ The feedback loop an [AI agent](#ai-agent) runs to reach its goal: the model rea
 
 A [Camunda AI agent](#camunda-ai-agent) runs its loop in Camunda's engine, which activates each tool call as a BPMN activity. An [external agent](#external-agent) runs its loop in an external runtime.
 
-- [How the feedback loop works](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works)
-
 ### Agent orchestration
 
 Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
