@@ -41,11 +41,9 @@ An agent instance follows a predictable path through these states. The following
 | `Idle`           | The process instance moves away from the agent element, for example, to wait for a user task or message. | `Thinking`, when the process instance re-activates the same agent element and reuses this agent instance. `Completed`, if the process instance ends first. |
 | `Completed`      | The process instance for the agent completes or terminates.                                              | Terminal state; the agent instance stops updating.                                                                                                         |
 
-The cycle from `Thinking` to `Tool calling` and back to `Thinking` is one **loop iteration**: the model reasons over the current messages, optionally calls tools, and receives the tool results that become the input for the next loop iteration. An agent instance can run through many loop iterations before reaching a final response.
-
 ## Usage metrics and limits
 
-Alongside its state, Camunda tracks usage metrics for every agent instance so you can measure cost and activity, and enforces a configurable limit on how many times an agent can call the model.
+Alongside its state, you can track usage metrics for each agent instance to monitor cost and activity.
 
 ### Token consumption
 
