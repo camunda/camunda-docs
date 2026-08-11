@@ -8,7 +8,7 @@ description: "Variables are part of process instances and represent their data. 
 
 A variable has a name and a JSON value. The visibility of a variable is defined by its variable scope.
 
-When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md) or [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
+When [automating a process using BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md), [orchestrating human tasks](../../guides/getting-started-orchestrate-human-tasks.md), or implementing [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), you can leverage the scope of these variables and customize how variables are merged into the process instance.
 
 ## Variable names
 

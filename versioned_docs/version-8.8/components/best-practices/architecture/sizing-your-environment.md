@@ -1,11 +1,6 @@
 ---
 id: sizing-your-environment
 title: Size your environment
-tags:
-  - Database
-  - Performance
-  - Hardware
-  - Sizing
 description: "Understand the aspects relevant to Camunda 8 sizing. Once you do, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration."
 ---
 

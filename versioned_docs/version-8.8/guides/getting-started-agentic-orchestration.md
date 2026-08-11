@@ -333,7 +333,7 @@ Set up the HTTP request in the properties panel:
    }
    ```
 
-The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
+The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
 
 ### Map the response to `toolCallResult`
 
@@ -371,7 +371,7 @@ To add more tools to your agent, follow the same pattern:
 
 1. Add a task inside the ad-hoc sub-process and apply a [connector](/components/connectors/introduction.md) or configure a [job worker](/components/concepts/job-workers.md).
 1. Write a clear tool name and **Documentation** description so the LLM knows when to use it.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
+1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
 1. Return `toolCallResult` in the result expression or output mapping.
 
 At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.

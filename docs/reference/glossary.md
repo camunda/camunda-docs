@@ -122,6 +122,12 @@ For example, you can build an invoice-processing AI agent in Camunda with BPMN, 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
 
+### AI agent function
+
+The category of built-in [FEEL](#feel-expression) functions used to declare LLM-provided tool parameters for an [AI agent](#ai-agent). The primary function is [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue), which marks a value as supplied by the LLM at runtime, with an optional description, type, and JSON schema to guide the model.
+
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
+
 ### Audit log
 
 The [audit log](../components/audit-log/overview.md) is a record of operations, including who performed them, when, and on which entities. Use the audit log to prove compliance, meet governance and regulatory requirements, maintain operational integrity and transparency, and troubleshoot issues.
@@ -323,6 +329,12 @@ This is different from a [Camunda AI agent](#camunda-ai-agent), which is Camunda
 :::
 
 ## F
+
+### FEEL expression
+
+FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
+
+- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
 
 ### Fine-tuning
 

@@ -1,10 +1,16 @@
 ---
 id: release-policy
 title: "Release policy"
-description: "Learn more about Camunda releases, including alpha features and alpha releases."
+description: "Learn more about how Camunda releases, including alpha features, alpha releases, and general availability."
 ---
 
-Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the following specific clarifications.
+import PageDescription from '@site/src/components/PageDescription';
+
+<PageDescription />
+
+## About
+
+Camunda 8 follows the [Camunda release policy](https://camunda.com/release-policy/) with the specific clarifications detailed on this page.
 
 :::info
 You can find deprecation and support announcements on the [announcements](/reference/announcements-release-notes/overview.md#announcements) page.
