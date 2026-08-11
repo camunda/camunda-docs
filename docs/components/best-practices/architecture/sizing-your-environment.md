@@ -219,9 +219,9 @@ In addition, sizing for peaks may mean you shouldn’t assume a full 24-hour day
 
 ### Job worker capacity
 
-Job worker capacity is a sizing factor that should be considered separately from cluster sizing, as it also affects overall throughput.
+Even when your cluster has spare throughput capacity, an undersized job worker can still leave jobs backlogged. Worker capacity needs its own sizing pass, separate from cluster sizing.
 
-Camunda engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [job streaming pushes a job the moment it's activate-able](/components/concepts/job-workers.md#push-jobs-bypass-the-activatable-backlog), while polling is the only path that drains jobs already queued in the backlog. This means a healthy throughput number doesn't tell you whether that backlog is draining; the two are independent signals. Backlog can keep growing even after workers recover from an outage, even when throughput already appears fully recovered (see this [blog post](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details around this topic.
+The workflow engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [job streaming pushes a job the moment it's activate-able](/components/concepts/job-workers.md#push-jobs-bypass-the-activate-able-backlog), while polling is the only path that drains jobs already queued in the backlog. This means a healthy throughput number doesn't tell you whether that backlog is draining; the two are independent signals. Backlog can keep growing after workers recover from an outage, even while throughput already looks fully recovered (see this [blog post](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details).
 
 :::note
 There is currently no built-in metric that directly reports the size of this backlog ([tracked in issue #59759](https://github.com/camunda/camunda/issues/59759)).

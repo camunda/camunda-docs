@@ -258,8 +258,6 @@ These observations yield the following recommendations for Java:
 | **Use when** | You don't have requirements to process jobs in parallel.                                                                                                                               | You use Java 21 or later, need to process I/O-bound jobs in parallel, and want to keep straightforward blocking code. | Your client stack already uses reactive programming, or you need extremely high throughput or low latency and have measured the tradeoffs. |
 |              | You intentionally want to limit parallelism with a small worker thread pool.                                                                                                           | This should be the default for Java workers that need parallel I/O and don't otherwise require reactive programming.  | Your developers are familiar with reactive programming and the added complexity is acceptable.                                             |
 
-
-
 #### Sizing `maxJobsActive` against execution threads
 
 `maxJobsActive` defines the queue length and bounds the number of jobs a worker holds at once, but it isn't a throughput knob: throughput is `numJobWorkerExecutionThreads / handlerDuration`. Raising `maxJobsActive` beyond what your execution threads and job timeouts can support only makes the job queue longer within the worker; it doesn't make jobs complete faster.
@@ -277,7 +275,6 @@ Size the job timeout against your worst-case handler duration, not the average. 
 :::note
 This formula and the `maxJobsActive` capacity model it describes are specific to the Java client's worker implementation (a shared semaphore bounding both push and poll). Other client SDKs implement worker capacity differently; check your client's own documentation for its equivalent tuning parameters.
 :::
-
 
 ### Node.js client
 
