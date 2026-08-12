@@ -51,15 +51,17 @@ Sometimes, looking at peaks might also mean, that you are not looking at all 24 
 
 ### Job worker capacity
 
-Even when your cluster has spare throughput capacity, an undersized job worker can still leave jobs backlogged. Worker capacity needs its own sizing pass, separate from cluster sizing.
+Even when your cluster has spare throughput capacity, an undersized job worker can still allow jobs to accumulate in the backlog. Worker capacity requires its own sizing exercise, separate from cluster sizing.
 
-The workflow engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [job streaming pushes a job the moment it's activate-able](/components/concepts/job-workers.md#push-jobs-bypass-the-activate-able-backlog), while polling is the only path that drains jobs already queued in the backlog. This means a healthy throughput number doesn't tell you whether that backlog is draining; the two are independent signals. Backlog can keep growing after workers recover from an outage, even while throughput already looks fully recovered (see this [blog post](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details).
+The workflow engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [Job streaming pushes a job as soon as it becomes available for activation](/components/concepts/job-workers.md#push-jobs-bypass-the-activate-able-backlog), while polling is the only path that drains jobs already queued in the backlog.
+
+Therefore, healthy throughput does not indicate whether the backlog is draining; they are independent signals. The backlog can continue to grow after workers recover from an outage, even when throughput appears to have fully recovered. See [impact of worker downtime on a realistic load test](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details.
 
 :::note
 There is currently no built-in metric that directly reports the size of this backlog ([tracked in issue #59759](https://github.com/camunda/camunda/issues/59759)).
 :::
 
-Size the worker's own capacity against its concurrency model and job timeout. For the Java client's fixed-thread-pool model, see [sizing maxJobsActive against execution threads](/components/best-practices/development/writing-good-workers.md#sizing-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and aren't covered by that formula.
+Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#sizing-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
 
 ### Latency and cycle time
 
