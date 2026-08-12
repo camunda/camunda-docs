@@ -223,7 +223,7 @@ The workflow engine delivers jobs to workers through two paths that share a work
 Therefore, healthy throughput does not indicate whether the backlog is draining; they are independent signals. The backlog can continue to grow after workers recover from an outage, even when throughput appears to have fully recovered. See [impact of worker downtime on a realistic load test](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details.
 
 :::note
-There is currently no built-in metric that directly reports the size of this backlog ([tracked in issue #59759](https://github.com/camunda/camunda/issues/59759)).
+There is currently no built-in metric that directly reports the size of this backlog.
 :::
 
 Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
