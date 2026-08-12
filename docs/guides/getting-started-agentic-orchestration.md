@@ -20,9 +20,9 @@ Get started with Camunda [agentic orchestration](/components/agentic-orchestrati
 
 ## About
 
-In this guide, you will build a Camunda [AI agent](/components/agentic-orchestration/ai-agents.md): the native agent type, whose tool orchestration runs in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by Camunda's engine.
+In this guide, you will build a Camunda [AI agent](/components/agentic-orchestration/ai-agents.md): the native agent type that orchestrates tools in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by the Camunda engine.
 
-In this guide, you will:
+Specifically, you will:
 
 - Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
@@ -295,7 +295,7 @@ You can customize your AI agent by adding tools. In this section, you will add a
 ### Add a REST connector task
 
 1. Inside the AI agent sub-process, add a new task element.
-1. Change the task type to [**REST Outbound Connector**](/components/connectors/protocol/rest.md) using the **Change element** menu.
+1. Change the task type to [**Send REST Request**](/components/connectors/protocol/rest.md) using the **Change element** menu.
 1. Name the task. For example, `Get current weather`. This name is visible to the LLM as the tool name.
 
 ### Write a tool description

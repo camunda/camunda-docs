@@ -19,6 +19,8 @@ Document handling can be beneficial for different process use cases, such as upl
 
 Step through all of these capabilities in the [use cases](/components/document-handling/overview.md) section.
 
+A document can either be routed through the document store as an opaque file, or flow inline as process data the process reads and writes directly. Learn more in [two paths for document handling](/components/document-handling/overview.md#two-paths-for-document-handling).
+
 ## Storage options
 
 ### SaaS
