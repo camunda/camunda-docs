@@ -253,10 +253,10 @@ When a `fromAi()` key or output key is a near-miss, for example a value close to
 
 Two buttons appear, and they make different promises:
 
-| Button       | What it does                                                                | What happens to your text                       |
-| :----------- | :-------------------------------------------------------------------------- | :---------------------------------------------- |
-| **Fix**      | Corrects a part that is wrong and has exactly one valid form                | Kept. Only the invalid part is rewritten        |
-| **Autofill** | Fills in what is missing, or resets a call that cannot be parsed at all     | Kept where readable, replaced by defaults where not |
+| Button       | What it does                                                            | What happens to your text                           |
+| :----------- | :---------------------------------------------------------------------- | :-------------------------------------------------- |
+| **Fix**      | Corrects a part that is wrong and has exactly one valid form            | Kept. Only the invalid part is rewritten            |
+| **Autofill** | Fills in what is missing, or resets a call that cannot be parsed at all | Kept where readable, replaced by defaults where not |
 
 Correcting an invalid `fromAi()` key rewrites the key and preserves any description and type arguments you entered. If the call cannot be parsed at all, for example because an argument is half-written, Autofill resets the whole call to a working default and you re-enter the rest. Hover the button to see which of the two will happen, and use undo if the result is not what you wanted.
 
