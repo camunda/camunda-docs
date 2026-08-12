@@ -177,7 +177,7 @@ Two streams are considered logically equivalent if they would both activate the 
 
 :::
 
-On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job times out, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and pushed to it. As the job makes it way back to the gateway which owns this stream, a random client associated with it is picked, and the job is forwarded to it.
+On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and pushed to it. As the job makes its way back to the gateway that owns this stream, a random client associated with it is picked, and the job is forwarded to it.
 
 :::note
 The RNG used to randomly pick streams and clients provides a good uniform distribution for the same underlying set, which is a cheap way of evenly distributing the load _as long as the stream set remains stable_.
@@ -186,6 +186,39 @@ The RNG used to randomly pick streams and clients provides a good uniform distri
 To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo" against a cluster consisting of a single gateway and a single broker. It receives some jobs, and when it closes, one job that was pushed asynchronously is returned to the broker:
 
 ![Sample Sequence Diagram](assets/job-push-sequence.png)
+
+### How job streaming and polling deliver jobs
+
+Job streaming and polling are separate delivery paths, not two ways of draining the same queue.
+
+Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and long polling (via the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. A pushed job bypasses the backlog only on its first delivery attempt: as soon as the job becomes `ACTIVATABLE`, Zeebe pushes it directly to a registered stream for its type, if one exists. If the push fails or the job times out before completion, the job returns to the `ACTIVATABLE` backlog like any other job.
+
+The following diagram shows both delivery paths, from the broker through the gateway to the worker’s job capacity:
+
+```mermaid
+flowchart TB
+    created["Job becomes activate-able"]
+
+    subgraph broker["Broker"]
+        created
+        backlog[["ACTIVATABLE backlog"]]
+    end
+
+    subgraph gateway["Gateway"]
+        pushFwd["Push forwarding"]
+        pollFwd["Poll forwarding<br/>(ActivateJobs)"]
+    end
+
+    subgraph worker["Worker"]
+        capacity(("Job capacity<br/>(worker-defined limit)"))
+    end
+
+    created -- "no stream registered" --> backlog
+    created -- "stream registered: pushed immediately" --> pushFwd
+    pushFwd --> capacity
+    backlog -- "drained only by polling" --> pollFwd
+    pollFwd --> capacity
+```
 
 ### Backpressure
 
