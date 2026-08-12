@@ -69,7 +69,7 @@ To configure tenant defaults, per-tenant overrides, validation expectations, and
 
 To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
-To understand how Operate, Tasklist, and Optimize behave per Physical Tenant — including URL navigation, data scoping, and session behavior — see [web apps](./web-apps.md).
+To understand how Operate, Tasklist, and Optimize behave per Physical Tenant — including URL navigation, data scoping, and session behavior — see [webapp routing](./api-routing.md#webapp-routing).
 
 ## What is not isolated in 8.10
 

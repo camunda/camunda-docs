@@ -5,7 +5,9 @@ sidebar_label: "Authorization model"
 description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-This page describes the authorization model for Physical Tenants in Camunda 8.10 Self-Managed deployments. Authorization is divided into two scopes: **cluster-wide operations**, which affect the entire orchestration cluster, and **tenant-local operations**, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in 8.10. The cluster-admin role and its authentication mechanism became available in 8.10 alpha4, but the cluster-wide operations it protects (topology, backup, restore) are still being wired behind it and are not yet complete.
+This page describes the authorization model for Physical Tenants in Camunda 8.10 Self-Managed deployments: what can be authorized, at which scope, and how access decisions are made. For how identity providers are connected and tokens are routed to the correct tenant, see [authentication and authorization](./authentication-authorization.md).
+
+Authorization is divided into two scopes: **cluster-wide operations**, which affect the entire orchestration cluster, and **tenant-local operations**, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in 8.10. The cluster-admin role and its authentication mechanism became available in 8.10 alpha4, but the cluster-wide operations it protects (topology, backup, restore) are still being wired behind it and are not yet complete.
 
 Two new authorization resource types were added for the per-tenant management APIs introduced alongside Physical Tenants:
 
@@ -22,15 +24,11 @@ In Camunda 8.10, the Physical Tenant authorization model is designed around per-
 
 - **Per-tenant authorization is independently managed.** Each Physical Tenant defines its own roles, permissions, and mapping rules. A change in one tenant's authorization configuration does not affect other tenants.
 - **Cluster-wide governance via Camunda Hub is a future capability.** Cross-tenant administration using Camunda Hub is not available in 8.10. A dedicated cluster-admin role exists starting in 8.10 alpha4, though the cluster-wide operations it will protect are still being wired behind it.
-- **Per-engine IdP fragmentation is not recommended.** Using a different identity provider for each Zeebe/Operate/Tasklist engine (as opposed to a single cluster-level IdP) is explicitly discouraged. See [authentication and authorization](./authentication-authorization.md) for the supported identity deployment models.
+- **Identity provider setup is covered separately.** See [authentication and authorization](./authentication-authorization.md) for the supported identity deployment models and why per-engine IdP fragmentation is discouraged.
 
 ## Cluster-wide operations
 
-Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster topology, triggering cluster backups, and modifying Physical Tenant configuration at runtime.
-
-:::note
-The cluster-admin role and its dedicated security chain are available starting in 8.10 alpha4, exposed under the `/cluster/v2/...` path prefix. However, the cluster-wide operations this role is meant to protect (topology, backup, restore) are still being wired behind that chain and are not yet complete. Check the [8.10 announcements](../../../reference/announcements-release-notes/8100/8100-announcements.md) for updates.
-:::
+Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster topology, triggering cluster backups, and modifying Physical Tenant configuration at runtime. They are protected by the [cluster-admin role](#cluster-admin-role), exposed under the `/cluster/v2/...` path prefix.
 
 Endpoints served at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
 

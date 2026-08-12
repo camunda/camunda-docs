@@ -5,11 +5,9 @@ sidebar_label: "Authentication and authorization"
 description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-This page explains how authentication and authorization work for Physical Tenants in Camunda 8.10 Self-Managed deployments.
+This page explains how identity providers connect to Physical Tenants and how tokens are routed to the correct tenant: identity deployment models, token routing, mapping rules, and session isolation. For what can be authorized once a token is routed — the resource/permission model, cluster-wide vs. tenant-local scope, and access decision outcomes (401/403/404) — see [authorization model](./authorization-model.md).
 
 For the configuration properties used to assign identity providers to tenants, see [configuration reference](./configuration-reference.md).
-
-For how operations are authorized at the cluster and tenant level, see [authorization model](./authorization-model.md).
 
 ## Centralized identity model
 
