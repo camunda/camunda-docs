@@ -8,7 +8,6 @@ from camunda_orchestration_sdk import (
     AuditLogKey,
     AuditLogSearchQueryRequest,
     CamundaClient,
-    ChangeClusterModeMode,
     ClockPinRequest,
     ClusterVariableName,
     ClusterVariableSearchQueryRequest,
@@ -34,6 +33,7 @@ from camunda_orchestration_sdk import (
     JobWorkerStatisticsFilter,
     JobWorkerStatisticsQuery,
     MessageSubscriptionSearchQuery,
+    Mode,
     ResourceSearchQuery,
     RestoreRequest,
     TenantId,
@@ -273,7 +273,7 @@ def change_cluster_mode_example() -> None:
     # Pass dry_run=True to validate the request and inspect the resulting plan
     # without applying it. Omit it (or set it to False) to trigger the transition.
     result = client.change_cluster_mode(
-        mode=ChangeClusterModeMode.RECOVERING,
+        mode=Mode.RECOVERING,
         dry_run=True,
     )
 
