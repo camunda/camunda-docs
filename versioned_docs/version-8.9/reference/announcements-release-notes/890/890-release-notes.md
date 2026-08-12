@@ -13,9 +13,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
-| :----------------- | :--------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2027              | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Changelog(s)                                                                | Upgrade guides                                                                                     |
+| :----------------- | :-------------------------- | :-------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 13 October 2027             | [Patch Releases and Changelogs](#technical-changelogs-for-all-89x-releases) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
