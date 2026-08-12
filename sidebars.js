@@ -1906,6 +1906,7 @@ module.exports = {
                       },
                       items: [
                         "self-managed/deployment/helm/configure/authentication-and-authorization/microsoft-entra",
+                        "self-managed/deployment/helm/configure/authentication-and-authorization/ping-identity",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/generic-oidc-provider",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-keycloak",
                         "self-managed/deployment/helm/configure/authentication-and-authorization/external-idp-via-internal-keycloak",

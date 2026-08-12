@@ -142,8 +142,9 @@ global:
       realm: /realms/<realm>
       auth:
         adminUser: <keycloak_admin>
-        existingSecret: "camunda-credentials"
-        existingSecretKey: "identity-keycloak-admin-password"
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-keycloak-admin-password"
     auth:
       identity:
         clientId: <identity_client_id>
@@ -157,11 +158,15 @@ identity:
   env:
     - name: KEYCLOAK_REALM
       value: <realm>
-    - name: IDENTITY_CLIENTID
+    - name: IDENTITY_CLIENT_ID
       value: <identity_client_id>
 ```
 
 Add the section under `global.identity` to the `global` configuration you created in the previous step.
+
+:::note
+Older chart versions used a flat `global.identity.keycloak.auth.existingSecret` / `auth.existingSecretKey` form instead of the nested `auth.secret.*` shown above. The flat form still works but logs a deprecation warning — use the nested form for new deployments.
+:::
 
 The `identity.firstUser` field defines the initial user that Management Identity creates in Keycloak with full access to all Camunda components.
 By default, this user is named `demo`. To use a different name, set `identity.firstUser.username`.
@@ -201,8 +206,9 @@ global:
       realm: /realms/<realm>
       auth:
         adminUser: <keycloak_admin>
-        existingSecret: "camunda-credentials"
-        existingSecretKey: "identity-keycloak-admin-password"
+        secret:
+          existingSecret: "camunda-credentials"
+          existingSecretKey: "identity-keycloak-admin-password"
   security:
     authentication:
       method: oidc
@@ -216,7 +222,7 @@ identity:
   env:
     - name: KEYCLOAK_REALM
       value: <realm>
-    - name: IDENTITY_CLIENTID
+    - name: IDENTITY_CLIENT_ID
       value: <identity_client_id>
 
 optimize:
@@ -295,3 +301,26 @@ For example:
 - Management Identity: `http://localhost:8084`
 
 Log in with the username `demo` and the password stored in the secret key `identity-firstuser-password`.
+
+## Troubleshooting
+
+For issues common to any OIDC provider, see [Troubleshoot OIDC authentication](./troubleshooting-oidc.md). The following are specific to external Keycloak:
+
+**Management Identity pod restarts once during first startup**
+A single restart during the very first deployment is expected: Management Identity can briefly hit `403 Forbidden` while disabling Keycloak's default system clients, immediately after creating the realm — a timing issue between realm creation and Keycloak's own permission propagation, not a misconfiguration. Kubernetes' automatic pod restart resolves it. Only investigate further if the pod keeps crash-looping past the first retry.
+
+**Management Identity fails to connect to the Keycloak admin API**
+The `global.identity.keycloak.*` settings configure the admin API connection used for provisioning — a separate concern from the OIDC login flow. Verify `url.protocol`, `url.host`, `url.port`, and `contextPath` together form a URL reachable from inside the cluster:
+
+```bash
+kubectl run -it --rm curl --image=curlimages/curl --restart=Never -- \
+  curl https://<keycloak-internal-url>/realms/<realm>/.well-known/openid-configuration
+```
+
+A valid response confirms the realm is reachable at that URL. If this fails, double check `issuerBackendUrl` from the global configuration step, since it should resolve to the same host.
+
+**Realm already exists, but clients aren't created**
+If the realm already existed when Management Identity started, it won't re-create it — but it still attempts to create any missing clients. If clients are still missing after startup, check the Management Identity logs for provisioning errors. The most common cause is that the admin credentials don't have sufficient permission to create clients in the existing realm.
+
+**Demo user can't log in**
+The `identity-firstuser-password` secret value is only applied when the demo user is first created. If this user already exists from a previous deployment with a different password, changing the secret has no effect on it. Reset the user's password directly in the Keycloak admin console.

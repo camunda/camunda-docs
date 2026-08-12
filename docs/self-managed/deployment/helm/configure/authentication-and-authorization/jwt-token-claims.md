@@ -68,12 +68,13 @@ Specifies the intended audience of the token.
 
 ## Common claim patterns by provider
 
-| Provider        | User claim                      | Client claim         | Audience default          |
-| --------------- | ------------------------------- | -------------------- | ------------------------- |
-| Microsoft Entra | `preferred_username`            | `azp`                | Client ID                 |
-| Keycloak        | `email` or `preferred_username` | `azp` or `client_id` | May require configuration |
-| Auth0           | `email`                         | `client_id`          | Client ID                 |
-| Okta            | `email`                         | `client_id`          | Client ID                 |
+| Provider                    | User claim                      | Client claim         | Audience default                                       |
+| --------------------------- | ------------------------------- | -------------------- | ------------------------------------------------------ |
+| Microsoft Entra             | `preferred_username`            | `azp`                | Client ID                                              |
+| Keycloak                    | `email` or `preferred_username` | `azp` or `client_id` | May require configuration                              |
+| Auth0                       | `email`                         | `client_id`          | Client ID                                              |
+| Okta                        | `email`                         | `client_id`          | Client ID                                              |
+| Ping (PingFederate/PingOne) | `sub`                           | `client_id`          | Requires an Access Token Manager configured per client |
 
 ## Verify audience configuration
 
