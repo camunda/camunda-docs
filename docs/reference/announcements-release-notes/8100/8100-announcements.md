@@ -18,7 +18,10 @@ import PageDescription from '@site/src/components/PageDescription';
 
 - See [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
-  :::
+
+:::
+
+## Supported environments
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -333,8 +336,7 @@ Only the name shown in Modeler changed. Template IDs, versions, connector types,
 
 **Action:** Search for the new name when you add one of these connectors to a process, and update your own documentation, templates, and training material that refer to the previous names.
 
-<details>
-<summary>Renamed connectors</summary>
+**Renamed connectors:**
 
 | Previous name                                   | New name                                           |
 | :---------------------------------------------- | :------------------------------------------------- |
@@ -359,8 +361,6 @@ Only the name shown in Modeler changed. Template IDs, versions, connector types,
 | SQL Database Connector                          | Execute SQL Statement on Database                  |
 
 Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound connector is renamed.
-
-</details>
 
 <p className="link-arrow">[Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)</p>
 
@@ -428,7 +428,7 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 </div>
 <div className="release-announcement-content">
 
-#### New SaaS clusters default to business_ variable include filter for Optimize
+#### New SaaS clusters default to `business_` variable include filter for Optimize
 
 Starting with Camunda 8.10, new SaaS clusters include a default `business_` variable include filter in Optimize data filter settings. Only variables whose names start with `business_` are exported to Optimize. Variables not matching this prefix are permanently excluded from Optimize.
 

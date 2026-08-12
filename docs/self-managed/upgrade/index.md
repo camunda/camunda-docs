@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 import ZeebeGrid from '../../components/zeebe/react-components/\_zeebe-card';
 import { overviewCards } from './react-components/\_card-data';
 
-import OverviewImg from '../assets/hero-upgrade-89.png';
+import OverviewImg from '../assets/hero-upgrade-810.png';
 
 <h3 class="subheading">Upgrade your Camunda 8 Self-Managed deployment from version 8.9 to 8.10.</h3>
 
