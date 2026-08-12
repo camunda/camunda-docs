@@ -14,6 +14,8 @@ This is due to the fact that a dedicated cluster provides the highest reliabilit
 
 The following illustration demonstrates this use case with two Optimize instances that connect to the same Elasticsearch/OpenSearch cluster but are configured with different `*.settings.index.prefix` values. This results in different indexes and aliases created on the cluster, strictly isolating the data of both Optimize instances, so no instance accesses the data of the other instance.
 
+To deploy two Optimize instances against one Camunda 8.10 orchestration cluster with Helm, follow [deploy multiple Optimize instances with Helm](/self-managed/deployment/helm/operational-tasks/deploy-multiple-optimize-instances.md).
+
 :::note Warning
 Changing the value of `*.settings.index.prefix` after an instance was already running results in new indexes being created with the new prefix value. There is no support in migrating data between indexes based on different prefixes.
 :::

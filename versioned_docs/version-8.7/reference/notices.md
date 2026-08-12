@@ -29,6 +29,36 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 59
+
+### Publication date
+
+July 29, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The version of `undertow-core` used by Camunda Web Modeler was affected by the following vulnerabilities which could potentially allow an attacker to perform request smuggling by exploiting flaws in the HTTP request header parsing:
+
+- [CVE-2026-28367](https://nvd.nist.gov/vuln/detail/CVE-2026-28367)
+- [CVE-2026-28368](https://nvd.nist.gov/vuln/detail/CVE-2026-28368)
+- [CVE-2026-28369](https://nvd.nist.gov/vuln/detail/CVE-2026-28369)
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.8.14, or ≤ 8.7.21
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.8.15, 8.7.22
+
 ## Notice 58
 
 ### Publication date

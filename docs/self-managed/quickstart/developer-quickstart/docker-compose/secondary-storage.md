@@ -20,7 +20,7 @@ Camunda 8.10 uses different application configuration files for the lightweight 
 | Lightweight `docker-compose.yaml` | File-based H2             | Set `ORCHESTRATION_CONFIG_FILE` to a file from `configuration/`, then edit that file for your database connection.                                                                     |
 | Full `docker-compose-full.yaml`   | File-based H2             | Replace the `camunda.data.secondary-storage` settings in `.orchestration/application.yaml` with the matching block from the file in `configuration/`, then edit the connection values. |
 
-The full setup also requires an external Elasticsearch instance for Optimize. The PostgreSQL containers in the full setup store Management Identity and Web Modeler data; they do not store Orchestration Cluster data.
+The full setup also starts Elasticsearch for Optimize. The PostgreSQL containers in the full setup store Management Identity and Camunda Hub data; they do not store Orchestration Cluster data.
 
 :::warning
 Do not replace `.orchestration/application.yaml` in the full setup with a file from `configuration/`. The files in `configuration/` use the lightweight setup's Basic authentication settings. Replacing the full file removes its OpenID Connect (OIDC) and component configuration.
@@ -36,14 +36,14 @@ Use this workflow for each backend:
 1. If the backend requires an external JDBC driver, place the driver JAR directly in `driver-lib/`.
 1. Start the setup with the command shown for that backend.
 
-| Backend              | Application file              | Hostname from the override | JDBC driver                                        |
-| :------------------- | :---------------------------- | :------------------------- | :------------------------------------------------- |
-| H2                   | `application-h2.yaml`         | Not applicable             | Included                                           |
-| PostgreSQL           | `application-postgresql.yaml` | `postgres-secondary`       | Included                                           |
-| MariaDB              | `application-mariadb.yaml`    | `mariadb-secondary`        | Add the MariaDB Connector/J JAR to `driver-lib/`   |
-| MySQL                | `application-mysql.yaml`      | `mysql-secondary`          | Add the MySQL Connector/J JAR to `driver-lib/`     |
-| Oracle               | `application-oracle.yaml`     | `oracle-secondary`         | Add the Oracle JDBC driver JAR to `driver-lib/`    |
-| Microsoft SQL Server | `application-mssql.yaml`      | `mssql-secondary`          | Add the Microsoft JDBC Driver JAR to `driver-lib/` |
+| Backend              | Application file              | Hostname from the override | JDBC driver                                     |
+| :------------------- | :---------------------------- | :------------------------- | :---------------------------------------------- |
+| H2                   | `application-h2.yaml`         | Not applicable             | Included                                        |
+| PostgreSQL           | `application-postgresql.yaml` | `postgres-secondary`       | Included                                        |
+| MariaDB              | `application-mariadb.yaml`    | `mariadb-secondary`        | Included                                        |
+| MySQL                | `application-mysql.yaml`      | `mysql-secondary`          | Add the MySQL Connector/J JAR to `driver-lib/`  |
+| Oracle               | `application-oracle.yaml`     | `oracle-secondary`         | Add the Oracle JDBC driver JAR to `driver-lib/` |
+| Microsoft SQL Server | `application-mssql.yaml`      | `mssql-secondary`          | Included                                        |
 
 When the database runs from `docker-compose.override.yaml`, replace `localhost` in the selected JDBC URL with the hostname shown in the table. The MySQL file uses host port `3307` by default; container-to-container traffic uses MySQL port `3306` instead.
 
@@ -111,8 +111,6 @@ services:
   orchestration:
     depends_on:
       - mariadb-secondary
-    volumes:
-      - ./driver-lib:/driver-lib:ro
     networks:
       - secondary-storage
 
@@ -142,8 +140,6 @@ ORCHESTRATION_CONFIG_FILE=application-mariadb.yaml docker compose -f docker-comp
 # Full setup
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
-
-Place the MariaDB Connector/J JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="mysql">
@@ -242,8 +238,6 @@ services:
   orchestration:
     depends_on:
       - mssql-secondary
-    volumes:
-      - ./driver-lib:/driver-lib:ro
     networks:
       - secondary-storage
 
@@ -269,15 +263,15 @@ networks:
 # Lightweight setup
 docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d mssql-secondary
 docker compose -f docker-compose.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
+docker compose -f docker-compose.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF SUSER_ID('camunda') IS NULL CREATE LOGIN camunda WITH PASSWORD='Camunda123!', CHECK_POLICY=OFF; USE camunda_secondary; IF USER_ID('camunda') IS NULL CREATE USER camunda FOR LOGIN camunda; ALTER ROLE db_owner ADD MEMBER camunda"
 ORCHESTRATION_CONFIG_FILE=application-mssql.yaml docker compose -f docker-compose.yaml -f docker-compose.override.yaml up -d
 
 # Full setup
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d mssql-secondary
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF DB_ID('camunda_secondary') IS NULL CREATE DATABASE camunda_secondary"
+docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml exec mssql-secondary /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Camunda123!' -Q "IF SUSER_ID('camunda') IS NULL CREATE LOGIN camunda WITH PASSWORD='Camunda123!', CHECK_POLICY=OFF; USE camunda_secondary; IF USER_ID('camunda') IS NULL CREATE USER camunda FOR LOGIN camunda; ALTER ROLE db_owner ADD MEMBER camunda"
 docker compose -f docker-compose-full.yaml -f docker-compose.override.yaml up -d
 ```
-
-Place the Microsoft JDBC Driver JAR directly in `driver-lib/` before you start either setup.
 
 </TabItem>
 <TabItem value="h2">
@@ -302,7 +296,11 @@ Use H2 only for development, testing, and evaluation. It is not a production bac
 For a document-store backend, add the backend settings to `docker-compose.override.yaml`. The environment variables override the secondary storage settings in either application configuration file.
 
 :::note
-These examples change the Orchestration Cluster secondary storage only. In the full setup, Optimize always requires Elasticsearch. The Elasticsearch example can serve both Orchestration and Optimize. If Orchestration uses OpenSearch, configure a separate Elasticsearch endpoint for Optimize in `.env`.
+These examples change the Orchestration Cluster secondary storage only. In the full setup, Optimize always requires Elasticsearch. The Elasticsearch example can serve both Orchestration and Optimize. If Orchestration uses OpenSearch, Optimize continues to use the Elasticsearch service that the full configuration starts.
+:::
+
+:::note
+In the full setup, `.orchestration/application.yaml` also pins the webapp database keys `camunda.database.type`, `camunda.operate.database`, and `camunda.tasklist.database` to `rdbms`. Update those keys in that file to match the backend you select, otherwise Operate and Tasklist keep their RDBMS wiring after you switch. The lightweight `configuration/` files do not set these keys, so the environment overrides below are sufficient there.
 :::
 
 <Tabs groupId="docker-compose-docstore" defaultValue="elasticsearch" values={[
@@ -330,8 +328,6 @@ services:
       discovery.type: single-node
       xpack.security.enabled: "false"
       ES_JAVA_OPTS: -Xms512m -Xmx512m
-    ports:
-      - "9200:9200"
     volumes:
       - elasticsearch-secondary-data:/usr/share/elasticsearch/data
     networks:

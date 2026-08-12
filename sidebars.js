@@ -9,8 +9,8 @@ module.exports = {
       },
       items: [
         "guides/getting-started-hello-world",
-        "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
+        "guides/getting-started-example",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis",
       ],
@@ -100,6 +100,7 @@ module.exports = {
       },
       items: [
         "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/agent-definitions-and-instances",
         "components/agentic-orchestration/camunda-provided-llm",
         "components/agentic-orchestration/ao-design",
         {
@@ -1853,7 +1854,7 @@ module.exports = {
                     },
                     {
                       type: "category",
-                      label: "Management Identity and Web Modeler",
+                      label: "Management Identity and Camunda Hub",
                       items: [
                         "self-managed/deployment/helm/configure/database/using-existing-postgres",
                       ],
@@ -1931,6 +1932,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
+                "self-managed/deployment/helm/operational-tasks/deploy-multiple-optimize-instances",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
@@ -2225,6 +2227,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/index",
                 "self-managed/concepts/physical-tenants/storage-isolation",
                 "self-managed/concepts/physical-tenants/api-routing",
+                "self-managed/concepts/physical-tenants/web-apps",
                 "self-managed/concepts/physical-tenants/authentication-authorization",
                 "self-managed/concepts/physical-tenants/authorization-model",
                 "self-managed/concepts/physical-tenants/configuration-reference",
@@ -2261,7 +2264,6 @@ module.exports = {
           items: [
             "self-managed/concepts/multi-region/cold-recovery",
             "self-managed/concepts/multi-region/dual-region",
-            "self-managed/concepts/multi-region/zone-aware-clusters",
           ],
         },
         "self-managed/operational-guides/data-purge",
@@ -2329,6 +2331,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/zeebe/configuration/priority-election",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/broker-config",
                     "self-managed/components/orchestration-cluster/zeebe/configuration/gateway-config",
+                    "self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters",
                   ],
                 },
                 {
@@ -2458,6 +2461,7 @@ module.exports = {
                 "self-managed/components/optimize/configuration/object-variables",
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy",
+                "self-managed/components/optimize/configuration/optimize-export-filtering",
               ],
             },
           ],
@@ -2551,10 +2555,7 @@ module.exports = {
             type: "doc",
             id: "self-managed/upgrade/helm/index",
           },
-          items: [
-            "self-managed/upgrade/helm/890-to-8100",
-            "self-managed/upgrade/helm/880-to-890",
-          ],
+          items: ["self-managed/upgrade/helm/890-to-8100"],
         },
         {
           type: "category",

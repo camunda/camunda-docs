@@ -12,7 +12,7 @@ Helm chart parameters let you configure the components and behavior of your Camu
 In Helm charts, the `values.yaml` file defines configuration for your deployment. To tailor your installation to your needs, you can override parameters in this file or provide your own values file. It's best practice to keep the original `values.yaml` unchanged and maintain a separate file with your custom settings.
 
 :::tip Templating support
-Some values in `values.yaml` support Go template expressions (for example, `{{ .Release.Name }}`). Values that support templating are marked with "Supports templating" in their description in `values.yaml`. This includes `podLabels`, `podAnnotations`, and `global.ingress.host`, among others.
+Some values in `values.yaml` support Go template expressions (for example, `{{ .Release.Name }}`). Values that support templating are marked with "Supports templating" in their description in `values.yaml`. This includes `podLabels`, `podAnnotations`, and `global.host`, among others.
 :::
 
 The following tables show the **top-level configuration sections** in `values.yaml`. Each section controls a specific area of the chart.
@@ -28,25 +28,19 @@ For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestr
 
 ### Other Camunda applications
 
-| Section      | Purpose                                             |
-| ------------ | --------------------------------------------------- |
-| `console`    | Configures the Camunda Self-Managed Console service |
-| `connectors` | Configures the Connector runtime                    |
-| `identity`   | Configures the Management Identity service          |
-| `optimize`   | Configures the Optimize web application             |
-| `webModeler` | Configures the Web Modeler service                  |
+| Section      | Purpose                                    |
+| ------------ | ------------------------------------------ |
+| `camundaHub` | Configures Camunda Hub                     |
+| `connectors` | Configures the Connector runtime           |
+| `identity`   | Configures the Management Identity service |
+| `optimize`   | Configures the Optimize web application    |
 
-### Bitnami subcharts
+### External infrastructure
 
-Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production. For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
-
-- `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [document-store backends (Elasticsearch/OpenSearch)](/reference/glossary.md#elasticsearchopensearch).
-- `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart).
-- `identityPostgresql`: Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).
-- `webModelerPostgresql`: Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart).
+Deploy PostgreSQL, Elasticsearch or OpenSearch, and Keycloak separately from the Camunda Helm chart. This lets you use your preferred deployment methods, leverage managed services, and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
 
 :::note
-The Helm chart supports embedded Elasticsearch for evaluations. For production, configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
+Configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
 
 See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configuration.md) and the glossary entry [RDBMS](/reference/glossary.md#rdbms).
 :::

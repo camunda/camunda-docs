@@ -239,6 +239,23 @@
     },
     {
       "type": "category",
+      "label": "Camunda 8 SaaS",
+      "link": {
+        "type": "doc",
+        "id": "components/saas/saas"
+      },
+      "items": [
+        "components/concepts/clusters",
+        "reference/regions",
+        "reference/data-locations",
+        "components/concepts/encryption-at-rest",
+        "components/concepts/backups",
+        "components/concepts/data-retention",
+        "reference/saas-ip-addresses"
+      ]
+    },
+    {
+      "type": "category",
       "label": "Document handling",
       "link": {
         "type": "doc",

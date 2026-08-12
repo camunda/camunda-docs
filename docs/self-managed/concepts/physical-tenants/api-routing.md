@@ -44,10 +44,18 @@ GET /physical-tenants/default/v2/process-definitions/search
 
 A cluster-wide endpoint applies to the whole cluster rather than a single Physical Tenant. The cluster-wide topology is exposed under a dedicated `/cluster/v2/...` path prefix, at `/cluster/v2/topology`.
 
+The legacy `/v2/status` endpoint is deprecated. It continues to serve the default Physical Tenant only for backward compatibility. Use `/cluster/v2/status` for overall cluster status or `/physical-tenants/{id}/v2/topology` for per-tenant status.
+
 Most other endpoints are scoped to a Physical Tenant, even when they are not tenant-specific in nature. A plain `/v2/...` request targets the `default` tenant. For example:
 
 - `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view. For the cluster-wide topology, use `/cluster/v2/topology`.
 - `/v2/license` returns the license status and is available per Physical Tenant, including on the default path (`/v2/license`). It is not a separate cluster-wide endpoint.
+
+### Exception: /v2/status
+
+The `/v2/status` endpoint is a deliberate exception to the general routing rule. It remains cluster-wide and unauthenticated for backward compatibility, so operators and load balancers can check overall cluster health without credentials. It is **not** exposed under the Physical Tenant prefix (`/physical-tenants/{id}/v2/status` is not a valid path).
+
+For per-tenant health information, use the `/v2/topology` endpoint, which includes partition health state per tenant.
 
 ## HTTP status codes
 
@@ -84,6 +92,22 @@ For example:
 ```
 https://your-cluster/physical-tenants/riskproduction/operate
 ```
+
+For how data scoping, session behavior, and tenant navigation work within each web app, see [web apps](./web-apps.md).
+
+## MCP routing
+
+MCP server endpoints follow the same path convention as the REST API and webapps:
+
+```
+/physical-tenants/{physicalTenantId}/mcp/...
+```
+
+There is no cluster-wide MCP endpoint planned for 8.10.
+
+## Tenant discovery
+
+There is no cross-tenant discovery endpoint. A client cannot request a list of Physical Tenants it has access to in a single call. If you need to enumerate accessible tenants, probe each tenant's endpoint individually.
 
 ## gRPC routing
 
