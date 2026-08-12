@@ -38,7 +38,7 @@ public static class ClientExamples
 
         // Pass dryRun: true to validate the request and inspect the resulting plan
         // without applying it. Omit it (or set it to false) to trigger the transition.
-        var change = await client.ChangeClusterModeAsync("RECOVERING", dryRun: true);
+        var change = await client.ChangeClusterModeAsync(Mode.RECOVERING, dryRun: true);
 
         Console.WriteLine($"Cluster change {change.ChangeId}:");
         foreach (var operation in change.PlannedChanges)
