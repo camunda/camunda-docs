@@ -276,6 +276,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/hub-api-saas/specifications/permanently-delete-workspace",
+          label: "Permanently delete a workspace",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
           id: "apis-tools/hub-api-saas/specifications/search-workspaces",
           label: "Search workspaces",
           className: "api-method post",

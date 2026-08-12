@@ -1,11 +1,6 @@
 ---
 id: sizing-your-environment
 title: Sizing your environment
-tags:
-  - Database
-  - Performance
-  - Hardware
-  - Sizing
 description: "Define and size your environment for Camunda 8 appropriately by understanding the factors that influence hardware requirements."
 ---
 
@@ -125,6 +120,21 @@ Using your throughput and retention settings, you can now calculate the required
 | PI in retention time       |    \* 6 months     |      3,600,000 |                                                                                                    |
 | Disk space                 |     \* 21 kib      |      72.10 GiB |                                                                                                    |
 | **Sum**                    |                    | **113.87 GiB** |                                                                                                    |
+
+### Optimize variable storage
+
+Variables can significantly increase Optimize's storage and CPU usage. Optimize stores variables in its indices so reports can filter, group, and display variable values. Object variables can be especially expensive, because Optimize [flattens each object variable](/self-managed/optimize-deployment/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable.
+
+If you don't need variables in Optimize reports, you can reduce this cost in two ways:
+
+- **Stop exporting variables entirely.** Set the `variable` option to `false` in the [Elasticsearch](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#index) or [OpenSearch](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md#index) exporter configuration.
+- **Disable variable import in Optimize.** Set `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPORT_ENABLED=false`. This reduces Optimize storage and indexing work, but the records are still written by the exporter.
+
+If you need scalar variables but don't rely on flattened object-variable filtering, grouping, or raw-data columns, disable object variable flattening by setting `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false` or `zeebe.includeObjectVariableValue: false`.
+
+:::note
+This behavior is enabled by default in Self-Managed and disabled in Camunda 8 SaaS.
+:::
 
 ### Zeebe record ILM retention
 

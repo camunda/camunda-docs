@@ -19,6 +19,8 @@ Document handling can be beneficial for different process use cases, such as upl
 
 Step through all of these capabilities in the [use cases](/components/document-handling/overview.md) section.
 
+A document can either be routed through the document store as an opaque file, or flow inline as process data the process reads and writes directly. Learn more in [two paths for document handling](/components/document-handling/overview.md#two-paths-for-document-handling).
+
 ## Storage options
 
 ### SaaS
@@ -27,7 +29,7 @@ Camunda SaaS manages storage for you by integrating with [**Google Cloud Platfor
 
 - Each cluster automatically includes one pre-configured storage bucket. Clusters hosted on GCP use a GCP bucket. Clusters hosted on AWS use an AWS S3 bucket.
 - **Maximum upload size per request (whether you're uploading one or multiple files in that request)**: 10 MB
-- **File expiration time/time-to-live (TTL) policy**: 30 days. A custom expiration date can be specified via metadata for each document. The [document upload API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) allows this. For forms, this defaults to the cluster configuration as there is no set custom TTL for forms.
+- **File expiration time/time-to-live (TTL) policy**: 30 days. A custom expiration date can be specified via metadata for each document. The [document upload API](/apis-tools/orchestration-cluster-api-rest/specifications/create-document.api.mdx) allows this. You can only set a custom expiration date earlier than the bucket's default TTL; requesting a later date results in it being capped to the bucket's default TTL. For forms, this defaults to the cluster configuration as there is no set custom TTL for forms.
 
 ### Self-Managed
 

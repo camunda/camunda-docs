@@ -33,7 +33,7 @@ This guide assumes you store your catalog assets in a single repository. If you 
 
 ## Use the example repository
 
-To get started, use the [example catalog repository](https://github.com/camunda/catalog-template). It contains:
+To get started, clone the [example catalog repository](https://github.com/camunda/catalog-template). It contains:
 
 - Placeholder element templates.
 - A ready-to-use [sync script](https://github.com/camunda/catalog-template/blob/main/scripts/sync-catalog.sh).
@@ -139,15 +139,15 @@ Always increment the `version` when you change an element template's content. Th
 
 ### Enforce version increments in CI
 
-Rather than relying on reviewers to catch a missing version bump, validate it automatically before the submission ever reaches the catalog. Add a check to your CI pipeline that compares each changed element template against its previous state and fails the pull request when the content changed but the `version` field did not increase.
+Instead of relying on reviewers to ensure the version is incremented for all modified assets, validate the version automatically before the submission ever reaches the catalog. Add a check to your CI pipeline that compares each changed element template against its previous state and fails the pull request when the content changed but the `version` field did not increase.
 
 The example repository includes a [version-check GitHub Actions workflow](https://github.com/camunda/catalog-template/blob/main/.github/workflows/check-versions.yml) that runs on every pull request, so a template change with a stale `version` is caught before it is merged and synced. You can bypass the check for intentional exceptions by adding the `skip-version-check` label to the pull request.
 
 ## Connect the repository to Hub
 
-Use a CI/CD job in your repository to authenticate with the Camunda Hub API and submit the current set of element templates to the catalog whenever the repository changes.
+Use a CI/CD job, such as the [example Sync Catalog GitHub Actions workflow](https://github.com/camunda/catalog-template/blob/main/.github/workflows/sync-catalog.yml), in your repository to authenticate with the Camunda Hub API and submit the current set of element templates to the catalog whenever the repository changes.
 
-The [job](https://github.com/camunda/catalog-template/blob/main/.github/workflows/sync-catalog.yml) calls a single ingestion endpoint:
+The job calls a single ingestion endpoint:
 
 ```
 PUT <camunda-hub-api-base-url>/api/v2/catalog/assets/ingestion
@@ -164,6 +164,10 @@ For the full request and response schema, see the **Ingest catalog assets** refe
 
 Because the submission represents the full desired state, Camunda Hub [unpublishes](./manage-asset-lifecycle.md#unpublish-an-asset) any asset that exists in the catalog but is absent from the submission.
 
+:::note
+For large submissions, review the [ingestion limits](#ingestion-limits).
+:::
+
 ### Provide credentials and configuration
 
 Create and store client credentials securely—for example, as CI/CD secrets—and expose them with environment-specific URLs as environment variables. The token issuer and the Camunda Hub API base URL differ between SaaS and Self-Managed:
@@ -176,34 +180,40 @@ Create and store client credentials securely—for example, as CI/CD secrets—a
 
 <TabItem value='saas'>
 
+1. [Create new client credentials](/apis-tools/hub-api-saas/authentication.md#create-new-client-credentials) with the Web Modeler API `create` and `update` permissions.
+2. Securely store the `Client ID` and `Client Secret`.
+3. Expose the following environment variables in your pipeline:
+
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
 export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="https://login.cloud.camunda.io/oauth/token"
 export CAMUNDA_CONSOLE_OAUTH_AUDIENCE="api.cloud.camunda.io"
-export CAMUNDA_HUB_REST_URL="https://hub.cloud.camunda.io"
+export CAMUNDA_HUB_BASE_URL="https://hub.cloud.camunda.io"
 ```
-
-Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-saas/authentication.md) to create credentials with the required `create` and `update` permissions.
 
 </TabItem>
 
 <TabItem value='self-managed'>
 
-In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance, and the Camunda Hub API is served from your own installation:
+In Self-Managed, tokens are issued by your [Management Identity](/self-managed/components/management-identity/authentication.md) instance, and the Camunda Hub API is served from your own installation.
+
+1. [Create new client credentials](/apis-tools/hub-api-sm/authentication.md#create-a-new-application) with the Web Modeler API `create` and `update` permissions.
+2. Securely store the application's `Client ID` and `Client Secret`.
+3. Expose the following environment variables in your pipeline:
 
 ```bash
 export CAMUNDA_CONSOLE_CLIENT_ID="<client-id>"
 export CAMUNDA_CONSOLE_CLIENT_SECRET="<client-secret>"
 export CAMUNDA_OAUTH_URL="http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
-export CAMUNDA_HUB_REST_URL="http://localhost:8088"
+export CAMUNDA_HUB_BASE_URL="http://localhost:8088"
 ```
 
-:::note
 The URLs used in this example are local defaults, for example, `http://localhost:8088` for the API. In a Helm/Kubernetes deployment, use the service or Ingress host configured for Camunda Hub instead. Adjust all URLs to match your installation.
-:::
 
-Follow the [Camunda Hub API authentication guide](/apis-tools/hub-api-sm/authentication.md) to create credentials with the required `create` and `update` permissions. In doing this, Management Identity automatically adds the `web-modeler-public-api` audience to tokens issued for your application. Therefore, unlike Camunda 8 SaaS, an `audience` parameter is not required for the token request during sync.
+:::note
+This authorization also adds the required `web-modeler-public-api` audience to tokens issued for this application, so no `CAMUNDA_CONSOLE_OAUTH_AUDIENCE` is needed to request a token during the sync.
+:::
 
 </TabItem>
 </Tabs>
@@ -226,6 +236,21 @@ bash scripts/sync-catalog.sh
 A successful ingestion returns `204 No Content`. If the submission is invalid, the request fails with a `4xx` status, and no changes are applied; the ingestion is validated and applied as a single transaction.
 
 For the full list of status codes and error responses, see the **Ingest catalog assets** reference for [SaaS](/apis-tools/hub-api-saas/specifications/ingest-catalog-assets.api.mdx) or [Self-Managed](/apis-tools/hub-api-sm/specifications/ingest-catalog-assets.api.mdx).
+
+### Ingestion limits
+
+The ingestion endpoint enforces the following limits per request:
+
+| Limit                | Value |
+| -------------------- | ----- |
+| Maximum files        | 5,000 |
+| Maximum payload size | 20 MB |
+
+Each asset consists of two files (a `README.md` and an element template), so a 5,000-file limit supports up to 2,500 assets.
+
+<!--- TODO: add link for configuration properties when it exists --->
+
+In Self-Managed, you can raise these limits using standard Spring configuration properties.
 
 ## Verify the catalog in Hub
 

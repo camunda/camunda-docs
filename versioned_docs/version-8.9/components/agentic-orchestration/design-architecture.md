@@ -101,7 +101,7 @@ A clear tool name and precise documentation make the expected behavior explicit,
 
 #### Tool parameters
 
-Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
+Each tool can also declare input parameters the LLM must supply at runtime. Use the [`fromAi()`](../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) [AI agent function](/reference/glossary.md#ai-agent-function) in input mappings to mark a value as LLM-provided, with an optional description and type to guide the model.
 
 For a full reference on tool names, documentation, and parameters, see [Tool definitions](../connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md).
 
@@ -128,6 +128,6 @@ For a full reference on tool names, documentation, and parameters, see [Tool def
 </tr>
 <tr>
     <td><span className="callout">5</span></td>
-    <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions.</td>
+    <td>**Multi-agent orchestration**: Agents orchestrate other agents for streamlined, scalable solutions. This agent-to-agent pattern runs inside Camunda's [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md), as one of the tools available to an agent. It is not the same as agentic orchestration itself, which is Camunda's overall model for orchestrating agents, people, and systems.</td>
 </tr>
 </table>

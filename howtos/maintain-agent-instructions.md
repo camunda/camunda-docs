@@ -28,16 +28,17 @@ This approach adds no overhead when nothing relevant changes.
 
 ### Layer 2: Recurrent audit
 
-The docs team performs a recurrent audit as part of the docs housekeeping tasks:
+The docs team performs a recurrent audit as part of the docs housekeeping tasks.
 
-- [ ] Check `.github/instructions/repo.instructions.md` is consistent with repo workflows and guidelines in the `howtos/` guides.
-- [ ] Check rules in `.github/instructions/content.instructions.md` are consistent with `howtos/technical-writing-styleguide.md`.
-- [ ] Check for contradictions across agent instruction files. If two files say different things about the same behavior, reconcile them so agents receive consistent guidance.
-- [ ] [Review llms.txt files](#review-llmstxt-files).
+#### Check instruction files are consistent
 
-#### Review llms.txt files
+1. Check `.github/instructions/repo.instructions.md` is consistent with repo workflows and guidelines in the `howtos/` guides.
+2. Check rules in `.github/instructions/content.instructions.md` are consistent with `howtos/technical-writing-styleguide.md`.
+3. Check for contradictions across agent instruction files. If two files say different things about the same behavior, reconcile them so agents receive consistent guidance.
 
-1. Run this AI-ready docs benchmark to assess the current state:
+#### Run AI-ready benchmarks
+
+1. Run this AI-ready benchmark to assess how well the site's structure, metadata, and content serve AI agents:
 
 ```bash
 npx afdocs check https://docs.camunda.io --format scorecard
@@ -45,10 +46,16 @@ npx afdocs check https://docs.camunda.io --format scorecard
 
 You can also use this benchmark: https://buildwithfern.com/agent-score. See [AI-ready documentation research](https://github.com/camunda/documentation-team/issues/507) for more context.
 
-Address or file potential improvements based on the benchmark results.
+2. Run this [AI-search readiness benchmark](https://github.com/Auriti-Labs/geo-optimizer-skill) to audit, optimize, and track whether AI agents can crawl, understand, and cite the site:
 
-2. Audit llms.txt files:
+```bash
+uvx --from geo-optimizer-skill geo audit --url https://docs.camunda.io
+```
 
-- **`llms-full.txt`**: Check the file size. If it grows above 10 MB, agents may truncate it. Consider splitting large sections with additional `customLLMFiles` entries in `docusaurus.config.js`.
-- **`docusaurus-plugin-llms` config** in `docusaurus.config.js`: Check it reflects the current documentation structure: `customLLMFiles` patterns are accurate, `ignoreFiles` is still relevant.
-- **`static/llms.txt`**: Verify the section index links match the current documentation structure. Update this file when major sections are added or removed.
+3. Address or file potential improvements based on the benchmark results.
+
+#### Audit llms.txt files
+
+1. **`llms-full.txt`**: Check the file size. If it grows above 10 MB, agents may truncate it. Consider splitting large sections with additional `customLLMFiles` entries in `docusaurus.config.js`.
+2. **`docusaurus-plugin-llms` config** in `docusaurus.config.js`: Check it reflects the current documentation structure: `customLLMFiles` patterns are accurate, `ignoreFiles` is still relevant.
+3. **`static/llms.txt`**: Verify the section index links match the current documentation structure. Update this file when major sections are added or removed.

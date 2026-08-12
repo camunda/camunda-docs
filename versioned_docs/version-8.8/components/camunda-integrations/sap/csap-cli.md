@@ -24,7 +24,7 @@ The CLI supports the following SAP integration modules:
 3. **BTP plugin**: Enables rendering task forms in Fiori and provides BTP integration.
 4. **All modules**: Configures all available modules.
 
-As of version 1.2.3 `csap` downloads the OData and RFC connectors from the separate [sap-connectors](https://github.com/camunda/sap-connectors) repository. To support this change, the underlying Git repository reference and several placeholders used for these modules were updated in `csap`. The CSAP CLI source code is available in the [sap-csap-cli](https://github.com/camunda/sap-csap-cli) repository.
+As of version 1.2.3, `csap` downloads the OData and RFC connectors from the separate [sap-connectors](https://github.com/camunda/sap-connectors) repository. To support this change, the underlying Git repository reference and several placeholders used for these modules were updated in `csap`. The CSAP CLI source code is available in the [sap-csap-cli](https://github.com/camunda/sap-csap-cli) repository.
 
 ## Installation
 
@@ -117,7 +117,7 @@ If you are using Apple Silicon, you may also need to add `--container-architectu
 
 #### CI/CD use
 
-If your CI/CD environment isn't GitHub, like [local use](#local-use) an access token from GitHub must be obtained to authenticate requests to the GitHub API from `csap`.
+If your CI/CD environment isn't GitHub, you must obtain a GitHub access token — as with [local use](#local-use) — to authenticate `csap`'s requests to the GitHub API.
 
 For GitHub actions/pipelines, all runs are provided a `GITHUB_TOKEN` automatically. Declare this to the respective run of `csap` via the `env` YAML declaration:
 

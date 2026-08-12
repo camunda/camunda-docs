@@ -20,7 +20,7 @@ For the `restapi` component, environment variables can be used as an alternative
 For example, the property `camunda.modeler.clusters[0].name` is represented by the environment variable `CAMUNDA_MODELER_CLUSTERS_0_NAME`.
 
 If you are using the Camunda 8 Helm chart, read more about the different configuration options in the chart's [Helm chart values documentation](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters).
-You can pass environment variables to each component via `webModeler.restapi.env` and `webModeler.websocket.env` in your `values.yaml`.
+You can pass environment variables to each component via `camundaHub.restapi.env` and `camundaHub.websocket.env` in your `values.yaml`.
 :::
 
 For a working example configuration showing how the components are correctly wired together, see the [Docker Compose file for Web Modeler](/self-managed/quickstart/developer-quickstart/docker-compose.md).
@@ -709,13 +709,14 @@ camunda.modeler:
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
-| Property                                                     | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
-| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `camunda.modeler.feature.play-enabled`                       | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `camunda.modeler.feature.bpmn-deployment-enabled`            | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `camunda.modeler.feature.dmn-deployment-enabled`             | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `camunda.modeler.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
-| `camunda.marketplace.enabled`                                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
+| Property                                                         | Description                                                                                                                                                                                                                                                                                          | Example value | Default value |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `camunda.modeler.feature.play-enabled`                           | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `true`        | `true`        |
+| `camunda.modeler.feature.bpmn-deployment-enabled`                | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                                     | `false`       | `true`        |
+| `camunda.modeler.feature.dmn-deployment-enabled`                 | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                                             | `false`       | `true`        |
+| `camunda.modeler.feature.dynamic-cluster-management-enabled`     | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                        | `true`        | `false`       |
+| `camunda.modeler.feature.workspace-member-invite-hidden-enabled` | [optional]<br/>Hides the **Invite member** button on the workspace **Members** page for users who aren't **Organization admins**. **Organization admins** always see the button, regardless of this setting. Adding members through the [Hub API](/apis-tools/hub-api-sm/overview.md) is unaffected. | `true`        | `false`       |
+| `camunda.marketplace.enabled`                                    | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.               | `false`       | `true`        |
 
 Example configuration:
 
@@ -726,6 +727,7 @@ camunda:
     bpmn-deployment-enabled: true
     dmn-deployment-enabled: true
     dynamic-cluster-management-enabled: false
+    workspace-member-invite-hidden-enabled: true
 
   marketplace:
     enabled: true
@@ -734,45 +736,66 @@ camunda:
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                 | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                       | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`      | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`       | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
-| `MARKETPLACE_ENABLED`                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
+| Environment variable                                             | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `PLAY_ENABLED`                                                   | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`                                  | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
+| `ZEEBE_DMN_DEPLOYMENT_ENABLED`                                   | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
+| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED`                             | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
+| `CAMUNDA_MODELER_FEATURE_WORKSPACE_MEMBER_INVITE_HIDDEN_ENABLED` | [optional]<br/>[Hides the button](#hide-invite-member-button) for inviting members to a workspace.                                                                                                                                                                                     | `true`        | `false`       |
+| `MARKETPLACE_ENABLED`                                            | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
 
 </TabItem>
 </Tabs>
 
 #### Dynamic cluster management
 
-Use dynamic cluster management to automatically create records for your clusters within Camunda Hub.
+Use dynamic cluster management to automatically register your clusters with Camunda Hub.
 
-By default, clusters shown in Camunda Hub are strictly managed by your [configuration](#clusters). Cluster records are created, updated, and deleted when you change your cluster configuration values.
+By default, clusters shown in Camunda Hub are strictly managed by your [configuration](#clusters). Cluster registrations are created, updated, and deleted when you change your cluster configuration values.
 
-Dynamic cluster management changes this behavior to a hybrid model that makes use of both your cluster configuration—if provided—and the following cluster management API endpoints that are only exposed when dynamic cluster management is enabled:
+Dynamic cluster management changes this to a hybrid model. Camunda Hub uses your cluster configuration—if you provide one—alongside the following API endpoints, which are only exposed when dynamic cluster management is enabled:
 
-| Name                           | Path                                  |
-| :----------------------------- | :------------------------------------ |
-| **Create cluster (discovery)** | `POST /api/v1/clusters`               |
-| **Delete cluster**             | `DELETE /api/v1/clusters/{clusterId}` |
+| Name                                                                                                                       | Path                                  |
+| :------------------------------------------------------------------------------------------------------------------------- | :------------------------------------ |
+| [**Create or update a cluster registration**](/apis-tools/hub-api-saas/specifications/create-cluster-registration.api.mdx) | `POST /api/v2/clusters`               |
+| [**Remove a cluster registration**](/apis-tools/hub-api-saas/specifications/remove-cluster-registration.api.mdx)           | `DELETE /api/v2/clusters/{clusterId}` |
 
 In this mode, you:
 
-1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the create cluster endpoint. If you didn't define the clusters in your configuration, new cluster records with minimal information and no management functionality in the user interface will be created by a request to this endpoint.
-2. Delete stale cluster records from Camunda Hub with the delete cluster endpoint.
+1. [Configure your Orchestration Clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration) to send license information directly to the [create or update a cluster registration](/apis-tools/hub-api-saas/specifications/create-cluster-registration.api.mdx) endpoint. If you didn't define the clusters in your configuration, this call registers them with minimal information and no management functionality in the Camunda Hub interface.
+2. Remove stale cluster registrations from Camunda Hub using the [remove a cluster registration](/apis-tools/hub-api-saas/specifications/remove-cluster-registration.api.mdx) endpoint.
 
-While not required, you can still define new clusters in your configuration. Newly defined clusters are automatically registered in Camunda Hub with all [available settings](#clusters) and management functionality in the Camunda Hub interface.
-
-If you remove a cluster configuration, you need to manually delete the cluster record with the delete cluster endpoint. With dynamic cluster management, you can't update cluster records. Instead, delete the record and either:
-
-- Allow the cluster to ping Camunda Hub with new information.
-- Update your configuration, and let the cluster record be recreated.
+You can still define new clusters in your configuration, though it's not required. When you do, Camunda Hub automatically registers them with all [available settings](#clusters) and full management functionality in the interface.
 
 :::note
-If you use dynamic cluster management, do not manually call the create cluster endpoint—only configure your clusters to do so. This endpoint doesn't currently support creating clusters with all configurable settings.
+With dynamic cluster management enabled, don't call the create or update cluster registration endpoint manually—only let your cluster configuration do it. The endpoint doesn't yet support creating clusters with all configurable settings.
 :::
+
+#### Hide invite member button
+
+Hide the **Invite member** button on the workspace **Members** page:
+
+<Tabs groupId="configType" defaultValue="application.yaml" queryString>
+<TabItem value="application.yaml" label="Application properties">
+
+```yaml
+camunda:
+  modeler.feature:
+    workspace-member-invite-hidden-enabled: true
+```
+
+</TabItem>
+<TabItem value="env" label="Environment variables">
+
+```shell
+CAMUNDA_MODELER_FEATURE_WORKSPACE_MEMBER_INVITE_HIDDEN_ENABLED=true
+```
+
+</TabItem>
+</Tabs>
+
+Organization admins always see the button, regardless of this setting. Other users will not see the button. Instead, they must add members with the [Camunda Hub API](/apis-tools/hub-api-sm/overview.md).
 
 ### Unstable configuration options
 
@@ -800,7 +823,7 @@ camunda.modeler.resource-import.allow-private-ip-address: true # default: false;
 The [WebSocket](https://en.wikipedia.org/wiki/WebSocket) server shipped with Camunda Hub Self-Managed is based on the [laravel-websockets](https://laravel.com/docs/10.x/broadcasting#open-source-alternatives-php) open source package and implements the [Pusher Channels Protocol](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol/).
 
 The `websocket` component is configured via environment variables.
-When using the Camunda Helm chart, you can pass these variables via `webModeler.websocket.env` in your `values.yaml`.
+When using the Camunda Helm chart, you can pass these variables via `camundaHub.websocket.env` in your `values.yaml`.
 See the [Helm chart values docs](https://artifacthub.io/packages/helm/camunda/camunda-platform#webmodeler-parameters) for all available configuration options.
 
 | Environment variable | Description                                                                                                                                                              | Example value | Default value |

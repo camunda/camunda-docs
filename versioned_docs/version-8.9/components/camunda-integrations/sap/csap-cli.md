@@ -87,7 +87,7 @@ export GH_TOKEN=$(gh auth token)
 
 #### CI/CD use
 
-If your CI/CD environment isn't GitHub, like [local use](#local-use) an access token from GitHub must be obtained to authenticate requests to the GitHub API from `csap`.
+If your CI/CD environment isn't GitHub, you must obtain a GitHub access token — as with [local use](#local-use) — to authenticate `csap`'s requests to the GitHub API.
 
 For GitHub actions/pipelines, all runs are provided a `GITHUB_TOKEN` automatically. Declare this to the respective run of `csap` via the `env` YAML declaration:
 

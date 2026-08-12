@@ -147,6 +147,8 @@ paths:
     $ref: "workspaces.yaml#/paths/~1workspaces"
   /workspaces/{workspaceKey}:
     $ref: "workspaces.yaml#/paths/~1workspaces~1{workspaceKey}"
+  /workspaces/{workspaceKey}/permanent:
+    $ref: "workspaces.yaml#/paths/~1workspaces~1{workspaceKey}~1permanent"
   /workspaces/search:
     $ref: "workspaces.yaml#/paths/~1workspaces~1search"
   /workspaces/{workspaceKey}/members:

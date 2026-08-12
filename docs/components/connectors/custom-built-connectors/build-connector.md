@@ -72,7 +72,7 @@ and how it can be configured by process developers. Connector templates are a sp
     <a href="../../../hub/workspace/modeler/element-templates/element-template-generator" class="connector-card" title="Generate a connector template">
     <img src={IconConnectorGenerateImg} alt="Generate a connector template"/>
     <h3>Generate a connector template</h3>
-    <p>Automatically generate a custom connector template in Web Modeler.</p>
+    <p>Automatically generate a custom connector template in Camunda Hub.</p>
   </a>
     <a href="../../manage-connector-templates/" class="connector-card" title="Manage connector templates">
     <img src={IconConnectorManageImg} alt="Manage connector templates"/>

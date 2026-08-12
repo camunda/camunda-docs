@@ -8,7 +8,7 @@
 #
 # Each key is a system-generated, opaque string identifier. The `x-semantic-type`
 # extension declares the semantic identity of the key so that tooling (e.g. the API
-# test generator) can recognise the same identifier wherever it appears and chain
+# test generator) can recognize the same identifier wherever it appears and chain
 # dependent operations together. These are server-allocated, so none are marked
 # `x-semantic-client-minted`.
 components:
@@ -18,32 +18,32 @@ components:
       type: string
       format: FileKey
       x-semantic-type: FileKey
-      example: file-789-xyz
+      example: 1eadb755-662f-43bd-81d1-cf36f39a0a03
 
     FolderKey:
       description: System-generated key for a folder.
       type: string
       format: FolderKey
       x-semantic-type: FolderKey
-      example: fld-012-ghi
+      example: 3e98d77b-799b-4f31-bfc4-4c5829fc7dee
 
     ProjectKey:
       description: System-generated key for a project.
       type: string
       format: ProjectKey
       x-semantic-type: ProjectKey
-      example: prj-def-456
+      example: 28b47b0a-364c-4dbe-9836-41ab371c15b2
 
     VersionKey:
       description: System-generated key for a version.
       type: string
       format: VersionKey
       x-semantic-type: VersionKey
-      example: ver-345-jkl
+      example: 4afc38ec-ee23-49bb-9a36-92cdba3e75e7
 
     WorkspaceKey:
       description: System-generated key for a workspace.
       type: string
       format: WorkspaceKey
       x-semantic-type: WorkspaceKey
-      example: wks-abc-123
+      example: 0108f0ef-5c76-4a75-a602-45a9f04554fd

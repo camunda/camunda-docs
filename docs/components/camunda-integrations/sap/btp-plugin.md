@@ -169,15 +169,13 @@ Make a `POST` http call to `https://<btpRoute>/backend/inbound` with this define
 
 When modeling a process for the BTP plugin, choose one of the following variants.
 
-### Variant 1: Camunda User Task (recommended)
+### Variant 1: Camunda user task (recommended)
 
 :::note
 User task listeners are available from **Camunda 8.8** onwards. They were briefly included in 8.7.0-alpha2 but were not available in the 8.7.0 GA release. Use Camunda 8.8 or higher for this variant.
 :::
 
-Model the user interaction steps as Camunda User Tasks and link each task to a Camunda Form. The BTP plugin detects these tasks and renders them in the Fiori UI.
-
-In Camunda Modeler, configure every form step in the process as a separate Camunda User Task. This ensures the BTP plugin can recognize the task as a user interaction step and render the linked form in the Fiori UI.
+In Camunda Modeler, model each user interaction step as a separate Camunda user task and link it to a Camunda Form. The BTP plugin detects these tasks and renders the linked forms in the Fiori UI.
 
 For each form step:
 
@@ -200,7 +198,7 @@ If your process contains multiple form steps, repeat the same setup for each tas
 
 :::note
 
-This setup is deprecated and kept for backward compatibility only. Use the Camunda User Task variant for new processes.
+This setup is deprecated and kept for backward compatibility only. Use the Camunda user task variant for new processes.
 
 :::
 
@@ -216,11 +214,11 @@ For each form step:
    - Use **Form type** `Camunda Form (linked)` and provide the form ID.
    - Use **Form type** `Camunda Form (embedded)` and paste the form JSON directly into the task configuration.
 
-To end the form flow, add a final Camunda User Task that represents the outcome of the flow.
+To end the form flow, add a final Camunda user task that represents the outcome of the flow.
 
 For the final task:
 
-1. Create a Camunda User Task.
+1. Create a Camunda user task.
 2. Set **Implementation type** to `Camunda user task`.
 3. Add a header with the key `final-user-task`.
 4. Set the header value to `success` for the successful end of the form flow, or to `fail` for the failed end of the form flow.
@@ -231,7 +229,7 @@ This final task marks the end of the form flow for the BTP plugin and determines
 
 Each form flow in your process must end with a completion task. This task signals to the BTP plugin that the form sequence is finished, and the process should proceed to the next phase.
 
-Create a Camunda User Task for the completion step and configure it as follows:
+Create a Camunda user task for the completion step and configure it as follows:
 
 1. Create a user task to represent the completion step.
 2. Set **Implementation type** to `Camunda user task`.
@@ -245,4 +243,4 @@ If your process distinguishes between successful and failed form flows, you can 
 
 Including both completion variants (success and failure) keeps your process model explicit and allows the BTP plugin to handle different outcomes appropriately.
 
-The advantage over Orchestration Cluster REST API: use the authentication realm between BTP and S/4 / ECC, there is no need for administrating additional credentials.
+Compared to the Orchestration Cluster REST API, you can use the authentication realm between BTP and S/4 or ECC, so you don't need to manage additional credentials.

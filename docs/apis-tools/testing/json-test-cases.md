@@ -1611,6 +1611,13 @@ An instruction to mock a child process. See the [utilities documentation](utilit
     <td>No</td>
     <td></td>
   </tr>
+  <tr>
+    <td>versionTag</td>
+    <td>The version tag for the deployed stub process. Required when the call activity uses <code>bindingType="versionTag"</code>.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
 </tbody></table>
 
 Example:
@@ -2040,6 +2047,13 @@ An instruction to create or update process instance variables. See the [utilitie
     <td><a href="#element-selector">ElementSelector</a></td>
     <td>No</td>
     <td></td>
+  </tr>
+  <tr>
+    <td>createLocalVariables</td>
+    <td>Whether to create variables locally in the scope of the element (requires <code>elementSelector</code>). When <code>true</code>, variables are created in the element's local scope and are not propagated to parent scopes.</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>false</td>
   </tr>
 </tbody></table>
 

@@ -99,7 +99,7 @@ and process values).
 | prefix                           | This prefix will be appended to every index created by the exporter; must not contain `_` (underscore).                                                                                                                                                                                                                                                           | zeebe-record    |
 | create-template                  | If `true` missing indexes will be created automatically.                                                                                                                                                                                                                                                                                                          | `true`          |
 | index-suffix-date-pattern        | This suffix will be appended to every index created by the exporter; The pattern is based on the Java [DateTimeFormater](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/time/format/DateTimeFormatter.html) and supports the same syntax. This is useful when indexes should be created in a different interval, like hourly instead of daily. | `"yyyy-MM-dd'"` |
-| number-of-shards                 | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                         | 3               |
+| number-of-shards                 | The number of [shards](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#_static_index_settings) used for each new record index created.                                                                                                                                                                                         | varies          |
 | number-of-replicas               | The number of shard [replicas](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-modules.html#dynamic-index-settings) used for each new record index created.                                                                                                                                                                                 | 0               |
 | command                          | If `true` command records will be exported                                                                                                                                                                                                                                                                                                                        | `false`         |
 | event                            | If `true` event records will be exported                                                                                                                                                                                                                                                                                                                          | `true`          |
@@ -136,6 +136,16 @@ and process values).
 | user-task                        | If `true` records related to user tasks will be exported                                                                                                                                                                                                                                                                                                          | `true`          |
 | variable                         | If `true` records related to variables will be exported                                                                                                                                                                                                                                                                                                           | `true`          |
 | variable-document                | If `true` records related to variable documents will be exported                                                                                                                                                                                                                                                                                                  | `true`          |
+
+:::note
+The number of shards varies by index template. Most indices use `1` shard by default. The following high-volume index templates default to `3` shards:
+
+- `zeebe-record-job`
+- `zeebe-record-process-instance`
+- `zeebe-record-user-task`
+
+If you set `number-of-shards`, it overrides the template defaults for all indices, including the three listed above.
+:::
 
 </TabItem>
 

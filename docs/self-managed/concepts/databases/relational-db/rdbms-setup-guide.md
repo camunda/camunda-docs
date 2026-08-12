@@ -1,7 +1,8 @@
 ---
 id: rdbms-setup-guide
 title: End-to-end RDBMS setup guide
-description: Configure relational databases for the Orchestration Cluster and Web Modeler with unified provisioning, authentication, and driver management strategies.
+sidebar_label: "End-to-end setup guide"
+description: Configure relational databases for the Orchestration Cluster and Camunda Hub with unified provisioning, authentication, and driver management strategies.
 ---
 
 import Tabs from "@theme/Tabs";

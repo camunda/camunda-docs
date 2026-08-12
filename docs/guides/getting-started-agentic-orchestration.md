@@ -16,15 +16,13 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
 
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent).
 
 ## About
 
-AI agents represent the practical implementation of agentic process orchestration within Camunda, combining the flexibility of AI with the reliability of traditional process automation.
+In this guide, you will build a Camunda [AI agent](/components/agentic-orchestration/ai-agents.md): the native agent type that orchestrates tools in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by the Camunda engine.
 
-In Camunda, an AI agent refers to an automation solution that uses [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
-
-In this guide, you will:
+Specifically, you will:
 
 - Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
@@ -297,7 +295,7 @@ You can customize your AI agent by adding tools. In this section, you will add a
 ### Add a REST connector task
 
 1. Inside the AI agent sub-process, add a new task element.
-1. Change the task type to [**REST Outbound Connector**](/components/connectors/protocol/rest.md) using the **Change element** menu.
+1. Change the task type to [**Send REST Request**](/components/connectors/protocol/rest.md) using the **Change element** menu.
 1. Name the task. For example, `Get current weather`. This name is visible to the LLM as the tool name.
 
 ### Write a tool description
@@ -335,7 +333,7 @@ Set up the HTTP request in the properties panel:
    }
    ```
 
-The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
+The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
 
 ### Map the response to `toolCallResult`
 
@@ -373,7 +371,7 @@ To add more tools to your agent, follow the same pattern:
 
 1. Add a task inside the ad-hoc sub-process and apply a [connector](/components/connectors/introduction.md) or configure a [job worker](/components/concepts/job-workers.md).
 1. Write a clear tool name and **Documentation** description so the LLM knows when to use it.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
+1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
 1. Return `toolCallResult` in the result expression or output mapping.
 
 At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
