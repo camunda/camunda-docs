@@ -3,7 +3,6 @@ import IconAoDesignImg from "../assets/icon-docs.png";
 import IconAoAgentImg from "../assets/icon-agentic.png";
 import IconAoLlmImg from "../assets/icon-llm.png";
 import IconOptimize from "../assets/icon-optimize.png";
-import IconConnectorImg from "../connectors/img/icon-connectors.png";
 import IconOperate from "../assets/icon-operate.png";
 import IconRAG from "../assets/icon-long-term-memory.png";
 import IconTest from "../assets/icon-prereqs.png";
@@ -26,13 +25,6 @@ export const fundamentalCards = [
     image: IconAoAgentImg,
     description:
       "Build and integrate AI agents into your end-to-end processes.",
-  },
-  {
-    link: "../../connectors/out-of-the-box-connectors/agentic-ai-aiagent/",
-    title: "AI Agent connector",
-    image: IconConnectorImg,
-    description:
-      "Embed LLM-powered agents in your processes with the AI Agent connector.",
   },
   {
     link: "../camunda-provided-llm/",
