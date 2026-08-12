@@ -100,10 +100,10 @@ module.exports = {
       },
       items: [
         "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/agent-definitions-and-instances",
-        "components/agentic-orchestration/agent-states-and-metrics",
         "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/agent-definitions-and-instances",
         "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/agent-states-and-metrics",
         {
           type: "category",
           label: "Evaluate AI agents",
