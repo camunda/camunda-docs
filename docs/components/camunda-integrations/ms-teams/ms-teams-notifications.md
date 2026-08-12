@@ -9,6 +9,22 @@ Notification rules let you control which user tasks trigger notifications in Mic
 
 Each rule applies to a specific organization and cluster and can filter user task events by process definition, user task elements, candidate users, or candidate groups.
 
+## Enable notification delivery for your cluster
+
+On Camunda 8 SaaS, which notifications a cluster delivers depends on its generation.
+
+Clusters running generation `8.9+gen13` or later require the **Enable App Integrations** setting in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations). Until an organization admin turns it on, you can create and save rules, but no notifications are delivered.
+
+Clusters running earlier generations need no configuration. They deliver a notification when a matching user task is created.
+
+| Notification                                                     | Earlier generations | `8.9+gen13` or later, with App Integrations enabled |
+| :--------------------------------------------------------------- | :------------------ | :-------------------------------------------------- |
+| A matching user task is created                                  | Yes                 | Yes                                                 |
+| A card updates when the task is assigned, completed, or canceled | No                  | Yes                                                 |
+| An existing task is later assigned to you                        | No                  | Yes                                                 |
+
+Clusters running generation `8.9+gen13` and later also receive new notification capabilities as they become available.
+
 ## Channel vs. personal rules
 
 Where you create a rule determines who receives notifications.

@@ -46,6 +46,15 @@ For details on creating tenants and managing assignments, see [tenant management
 Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
 :::
 
+## Enable App Integrations
+
+You can allow a cluster to exchange user task events with App Integrations, such as Camunda for Microsoft Teams, so task notifications can be delivered to your collaboration tool.
+
+- Enable this setting to deliver user task notifications to Microsoft Teams based on your [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md). Notification cards also update as the task is assigned, completed, or canceled.
+- Disable this setting if you do not want the cluster to send user task events. Notifications are not delivered. You can still use Camunda for Microsoft Teams to browse tasks, start processes, and act on tasks.
+
+This setting is disabled by default. It is available for clusters running generation `8.9+gen13` and later, and organization admins can change it.
+
 ## Data filters
 
 <!-- TODO: Confirm with Console team (camunda-cloud-management-apps#8885) which exact docs anchor the Console UI tooltip links to. Update the #data-filters anchor below if different. -->
