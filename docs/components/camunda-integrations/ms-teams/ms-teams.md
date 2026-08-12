@@ -76,11 +76,12 @@ You can use `appContext` in your BPMN processes to implement conditional logic b
 
 <TabItem value="saas">
 
-| Prerequisite                     | Description                                                                                                                                                                |
-| :------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Camunda 8 SaaS account           | You must have a valid working Camunda 8 SaaS account.                                                                                                                      |
-| Microsoft Teams                  | Microsoft Teams with permissions to add apps from the Microsoft Store. Microsoft Teams administrators can manage app permissions and availability across the organization. |
-| Camunda organization and cluster | Access to a Camunda organization and cluster.                                                                                                                              |
+| Prerequisite                     | Description                                                                                                                                                                                                                                         |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda 8 SaaS account           | You must have a valid working Camunda 8 SaaS account.                                                                                                                                                                                               |
+| Microsoft Teams                  | Microsoft Teams with permissions to add apps from the Microsoft Store. Microsoft Teams administrators can manage app permissions and availability across the organization.                                                                          |
+| Camunda organization and cluster | Access to a Camunda organization and cluster.                                                                                                                                                                                                       |
+| App Integrations enabled         | For clusters running generation `8.9+gen13` or later, **Enable App Integrations** must be turned on in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations) to receive user task notifications. |
 
 </TabItem>
 

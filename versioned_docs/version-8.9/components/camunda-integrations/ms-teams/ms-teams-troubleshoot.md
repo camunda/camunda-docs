@@ -67,6 +67,12 @@ Troubleshoot Camunda for Microsoft Teams to fix common setup and connectivity is
 - If notifications are not shown, ensure Microsoft Teams notifications are enabled and verify that the relevant [notification rules](./ms-teams-notifications.md) are configured for the channel or personal chat.
 - This could be due to an expired Camunda session or missing permissions. Sign out and sign in again.
 
+### Notifications are not delivered
+
+- On SaaS clusters running generation `8.9+gen13` or later, check that **Enable App Integrations** is turned on in the [cluster settings](/components/console/manage-clusters/settings.md#enable-app-integrations). Microsoft Teams shows an **App Integrations disabled in Cluster configuration** message when the setting is off.
+- Verify that a [notification rule](./ms-teams-notifications.md) matches the user task, and that the rule is configured for the channel or personal chat you expect.
+- If notifications arrive but cards do not update when a task is assigned, completed, or canceled, check that the cluster runs generation `8.9+gen13` or later.
+
 ## Get help
 
 - Contact [Camunda support](/reference/contact.md) for assistance.
