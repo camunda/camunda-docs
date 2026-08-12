@@ -36,9 +36,9 @@ export const fundamentalCards = [
   },
   {
     link: "../agent-states-and-metrics/",
-    title: "Agent states and metrics",
+    title: "States and usage metrics",
     image: IconAoDesignImg,
-    description: "Understand agent states, usage metrics, and limits.",
+    description: "Understand agent states and usage metrics.",
   },
   {
     link: "../camunda-provided-llm/",

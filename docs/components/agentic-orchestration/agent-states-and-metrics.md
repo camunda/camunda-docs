@@ -1,6 +1,6 @@
 ---
 id: agent-states-and-metrics
-title: Agent states and metrics
+title: States and usage metrics
 description: "Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance."
 keywords: ["agentic ai", "AI agents", "agent state", "usage metrics", "limits"]
 ---
