@@ -187,13 +187,13 @@ To help visualize the process in general, here is a sequence diagram which shows
 
 ![Sample Sequence Diagram](assets/job-push-sequence.png)
 
-### Push jobs bypass the activate-able backlog
+### How job streaming and polling deliver jobs
 
-Job streaming and polling are two separate delivery paths, not two ways of draining the same queue.
+Job streaming and polling are separate delivery paths, not two ways of draining the same queue.
 
-Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and long polling (via the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. A pushed job bypasses the backlog only for its first delivery attempt: the moment it becomes activate-able, if a stream exists for its type, Zeebe pushes it directly to that stream. If that push fails or the job times out before completion, the job returns to the `ACTIVATABLE` backlog like any other job.
+Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and long polling (via the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. A pushed job bypasses the backlog only on its first delivery attempt: as soon as the job becomes `ACTIVATABLE`, Zeebe pushes it directly to a registered stream for its type, if one exists. If the push fails or the job times out before completion, the job returns to the `ACTIVATABLE` backlog like any other job.
 
-The following diagram shows both paths from the broker through the gateway to a worker's job capacity:
+The following diagram shows both delivery paths, from the broker through the gateway to the worker’s job capacity:
 
 ```mermaid
 flowchart TB
