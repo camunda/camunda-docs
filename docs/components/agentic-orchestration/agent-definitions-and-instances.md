@@ -137,6 +137,8 @@ The conversation history captures the full reasoning chain of an agent execution
 
 Grouping the history by loop iteration makes it easier to reference a specific point in an agent's execution. Rather than describing a moment in time, you can refer to a specific loop iteration, for example "on loop iteration five the agent called this tool."
 
+Operate labels each entry in the conversation history simply as `iteration` (for example, `5. iteration`) as shorthand for loop iteration.
+
 #### Visibility for external agents
 
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.

@@ -499,7 +499,7 @@ A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based 
 
 A loop iteration is one pass through an [AI agent](#ai-agent)’s [agent loop](#agent-loop), during which the model reasons, selects tools, evaluates the result, and decides whether to continue. An AI agent run consists of one loop with one or more loop iterations.
 
-Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution.
+Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution. Operate's UI labels each entry simply as `iteration` as shorthand for loop iteration.
 
 - [Conversation history and loop iterations](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations)
 
