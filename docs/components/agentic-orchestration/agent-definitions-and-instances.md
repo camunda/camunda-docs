@@ -121,28 +121,15 @@ Operate surfaces agent instance data so you can monitor an agent as part of its 
 
 The following data is available for an agent instance in Operate:
 
-| Data                 | Description                                                                                                                                                                                                          |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Agent instance key   | The unique identifier of the agent instance. Use it to look up or interact with the agent through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx). |
-| Agent state          | The current execution state of the agent, such as initializing, tool discovery, thinking, tool calling, or idle. The state is also highlighted on the BPMN diagram.                                                  |
-| Usage metrics        | Token consumption, tool call count, and model call count. Model calls are shown against the configured limit, so you can see how close the agent is to its limit.                                                    |
-| Model                | The LLM the agent is running against.                                                                                                                                                                                |
-| System prompt        | The system prompt the agent was configured with.                                                                                                                                                                     |
-| Tool definitions     | The [tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) available to the agent, resolved from the agent's ad-hoc sub-process.                                           |
-| Conversation history | The decision trail of the agent execution: initial configuration, user prompts, assistant messages, the tools the agent selected with its reasoning, and tool calls with their inputs and results.                   |
-
-#### Agent states
-
-The agent state tells you whether an agent is actively working or stuck. Camunda exposes agent state through the agent instance record, fed by status updates as the agent runs.
-
-| State          | Meaning                                                                                                                                                             |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Initializing   | The agent instance is being set up.                                                                                                                                 |
-| Tool discovery | The agent is resolving which tools are available to it.                                                                                                             |
-| Thinking       | The agent is reasoning with the model to decide its next step.                                                                                                      |
-| Tool calling   | The agent is calling one or more tools.                                                                                                                             |
-| Idle           | The process instance has moved away from the agent element, so the agent isn't currently working. It resumes when the process instance activates the element again. |
-| Completed      | The agent instance is completed, because the process instance completed or terminated.                                                                              |
+| Data                 | Description                                                                                                                                                                                                                                                                                                                              |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Agent instance key   | The unique identifier of the agent instance. Use it to look up or interact with the agent through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx).                                                                                                                     |
+| Agent state          | The current execution state of the agent, such as initializing, tool discovery, thinking, tool calling, or idle. The state is also highlighted on the BPMN diagram. See [states and usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) for what each state means and what triggers a transition. |
+| Usage metrics        | Token consumption, tool call count, and model call count. Model calls are shown against the configured limit, so you can see how close the agent is to its limit. See [states and usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics-and-limits) for details.                                    |
+| Model                | The LLM the agent is running against.                                                                                                                                                                                                                                                                                                    |
+| System prompt        | The system prompt the agent was configured with.                                                                                                                                                                                                                                                                                         |
+| Tool definitions     | The [tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) available to the agent, resolved from the agent's ad-hoc sub-process.                                                                                                                                                               |
+| Conversation history | The decision trail of the agent execution: initial configuration, user prompts, assistant messages, the tools the agent selected with its reasoning, and tool calls with their inputs and results.                                                                                                                                       |
 
 #### Conversation history and loop iterations
 
