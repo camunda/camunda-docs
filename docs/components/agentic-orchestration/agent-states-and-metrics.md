@@ -2,16 +2,16 @@
 id: agent-states-and-metrics
 title: States and usage metrics
 description: "Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance."
-keywords: ["agentic ai", "AI agents", "agent state", "usage metrics", "limits"]
+keywords: ["agentic ai", "AI agents", "agent state", "usage metrics"]
 ---
 
 Understand the agent state model, state transitions, and the usage metrics Camunda tracks for every agent instance.
 
 ## About
 
-Every [agent instance](/components/agentic-orchestration/ai-agents.md) exposes a defined execution state and a set of usage metrics as it runs. Together, they show whether the agent is progressing normally and how close it is to the limits you configured.
+Every [agent instance](/components/agentic-orchestration/ai-agents.md) exposes a defined execution state and a set of usage metrics as it runs. Together, they show whether the agent is progressing normally.
 
-In this guide, you will understand the state model, what triggers each transition, and the usage metrics that back the agent's limits.
+In this guide, you will understand the state model, what triggers each transition, and the usage metrics available for every agent instance.
 
 For guidance on using these signals to catch an agent going off-rail, see [detect off-rail agents](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md).
 
@@ -41,9 +41,9 @@ An agent instance follows a predictable path through these states. The following
 | `Idle`           | The process instance moves away from the agent element, for example, to wait for a user task or message. | `Thinking`, when the process instance re-activates the same agent element and reuses this agent instance. `Completed`, if the process instance ends first. |
 | `Completed`      | The process instance for the agent completes or terminates.                                              | Terminal state; the agent instance stops updating.                                                                                                         |
 
-## Usage metrics and limits
+## Usage metrics
 
-Alongside its state, you can track usage metrics for each agent instance to monitor cost and activity.
+Track usage metrics for each agent instance to monitor cost and activity.
 
 ### Token consumption
 
@@ -62,7 +62,3 @@ Camunda counts the number of tool calls the agent instance has made across all l
 Camunda records the duration of each model call in the agent's conversation history. A model call that takes far longer than comparable ones is a sign the agent isn't progressing normally. This duration is surfaced per model call, not for tool results.
 
 Tool execution duration is not part of the conversation history metrics. When a tool is a BPMN element, you can see how long its execution took from the usual element instance details in the details tab for that tool activation.
-
-### Model call limit
-
-Camunda provides a configurable limit on how many times an agent instance can call the model as the primary guardrail against runaway loops and unexpected cost. See [respond to limit proximity warnings](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md#respond-to-limit-proximity-warnings) for more details.
