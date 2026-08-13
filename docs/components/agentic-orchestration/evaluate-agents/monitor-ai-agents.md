@@ -166,7 +166,7 @@ In Modeler, within the AI Agent sub-process, you can define how the conversation
 By default, agent memory uses the **In Process** type, which stores it as part of the agent context.
 With this option, you can view it in Operate within the agent context, as you did in the previous step, [Analyze the agent context](#step-5-analyze-the-agent-context).
 
-Other available options include **Camunda Document Storage**, **AWS AgentCore Memory**, and a custom implementation. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for configuration details, and [choosing a storage backend](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#choosing-a-storage-backend) for the trade-offs between the available storage types.
+Other available options include **Camunda Document Storage**, **AWS AgentCore Memory**, and a custom implementation. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
 
 ## Step 7: Review the results
 
