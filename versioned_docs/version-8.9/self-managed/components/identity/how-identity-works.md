@@ -18,21 +18,23 @@ graph LR
     IdP["Your identity provider"]
     MI["Management Identity"]
     Admin["Admin"]
-    Hub["Camunda Hub<br/>(Console, Web Modeler)"]
+    Console["Console"]
+    WM["Web Modeler"]
     Opt["Optimize"]
     OC["Operate, Tasklist, Zeebe,<br/>Orchestration Cluster API"]
 
     IdP -->|"OIDC app registration 1"| MI
     IdP -->|"OIDC app registration 2"| Admin
-    MI --> Hub
+    MI --> Console
+    MI --> WM
     MI --> Opt
     Admin --> OC
 ```
 
-| Subsystem                                                                           | Governs                                                                                                                                | Controls                                                                                                                                                                                      |
-| :---------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[Management Identity](/self-managed/components/management-identity/overview.md)** | [Camunda Hub](/self-managed/components/hub/index.md) (Console, Web Modeler), [Optimize](/self-managed/components/optimize/overview.md) | Who can log in, organization/project membership, role assignments                                                                                                                             |
-| **[Admin](/self-managed/components/orchestration-cluster/admin/overview.md)**       | Operate, Tasklist, Zeebe, Orchestration Cluster API (per cluster)                                                                      | Who can log in, role assignments, machine-to-machine (M2M) credentials, fine-grained resource-level authorizations (for example, access to specific process definitions, decisions, or tasks) |
+| Subsystem                                                                           | Governs                                                                                                                                                                                     | Controls                                                                                                                                                                                      |
+| :---------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **[Management Identity](/self-managed/components/management-identity/overview.md)** | [Console](/self-managed/components/console/overview.md), [Web Modeler](/self-managed/components/modeler/web-modeler/overview.md), [Optimize](/self-managed/components/optimize/overview.md) | Who can log in, organization/project membership, role assignments                                                                                                                             |
+| **[Admin](/self-managed/components/orchestration-cluster/admin/overview.md)**       | Operate, Tasklist, Zeebe, Orchestration Cluster API (per cluster)                                                                                                                           | Who can log in, role assignments, machine-to-machine (M2M) credentials, fine-grained resource-level authorizations (for example, access to specific process definitions, decisions, or tasks) |
 
 For the full breakdown, see [Admin vs Management Identity](/self-managed/reference-architecture/reference-architecture.md#admin-vs-management-identity).
 
@@ -48,14 +50,14 @@ Admin becomes the single source of truth for the migrated cluster's roles and au
 
 If you are deploying the full Camunda Self-Managed stack, you configure both subsystems, in this order:
 
-1. **Management Identity first** — configure your IdP connection and verify users can log in to Camunda Hub.
+1. **Management Identity first** — configure your IdP connection and verify users can log in to Console.
 2. **Admin second** — configure a separate IdP application registration and verify users can log in to Operate and Tasklist.
 
 If you are deploying only the Orchestration Cluster (Operate, Tasklist, Zeebe) without the management plane, you only need to configure Admin.
 
 ```mermaid
 flowchart TD
-    Q1{"Deploying Camunda Hub<br/>or Optimize?"}
+    Q1{"Deploying Console,<br/>Web Modeler, or Optimize?"}
     Q2{"Deploying Operate, Tasklist,<br/>or using the Zeebe API?"}
     A["Configure Management Identity"]
     B["Skip Management Identity"]
@@ -89,7 +91,7 @@ For most full deployments, configure both Management Identity and Admin.
 type: "link",
 href: "../../management-identity/configuration/connect-to-an-oidc-provider",
 label: "Connect Management Identity to an identity provider",
-description: "Configure OIDC for Camunda Hub and Optimize.",
+description: "Configure OIDC for Console, Web Modeler, and Optimize.",
 },
 {
 type: "link",
