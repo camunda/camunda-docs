@@ -171,14 +171,7 @@ With the **Camunda Document Storage** option instead:
 - You can't view the full conversation and chain-of-thought traces in Operate. Operate only shows a **document reference** and metadata.
 - Use this option for long conversations, where Operate variable limits might be exceeded.
 
-See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
-
-:::note Agent memory storage
-
-- Use **In Process** for testing and debugging scenarios: Better visibility in Operate.
-- Use **Camunda Document Storage** for production scenarios: Better scalability and runtime behavior for long contexts.
-
-:::
+See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details, and [choosing a storage backend](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#choosing-a-storage-backend) for the trade-offs between the available storage types.
 
 ## Step 7: Review the results
 
