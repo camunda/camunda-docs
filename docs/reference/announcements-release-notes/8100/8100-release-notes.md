@@ -314,7 +314,7 @@ When testing your process with Play in Web Modeler, you can now capture and reru
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
 - Reuse saved segment tests during iterative model changes to catch regressions earlier.
 
-<p class="link-arrow">[Play your process](pathname:///components/hub/workspace/modeler/validation/play-your-process.md)</p>
+<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
 
 #### Variables panel improvements
 
