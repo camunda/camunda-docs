@@ -630,6 +630,8 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 
 ### Restore Zeebe Cluster
 
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
+
 :::note
 During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe Broker in case of a manual deployment.
 
