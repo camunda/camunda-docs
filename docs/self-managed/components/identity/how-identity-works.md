@@ -32,21 +32,21 @@ graph LR
 | Subsystem                                                                           | Governs                                                                                                                                | Controls                                                                                                                                                                 |
 | :---------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[Management Identity](/self-managed/components/management-identity/overview.md)** | [Camunda Hub](/self-managed/components/hub/index.md) (Console, Web Modeler), [Optimize](/self-managed/components/optimize/overview.md) | Who can log in, organization/project membership, role assignments                                                                                                        |
-| **[Admin](/self-managed/components/orchestration-cluster/admin/overview.md)**       | Operate, Tasklist, Zeebe, Orchestration Cluster API (per cluster)                                                                      | Who can log in, role assignments, M2M credentials, fine-grained resource-level authorizations (for example, access to specific process definitions, decisions, or tasks) |
+| **[Admin](/self-managed/components/orchestration-cluster/admin/overview.md)**       | Operate, Tasklist, Zeebe, Orchestration Cluster API (per cluster)                                                                      | Who can log in, role assignments, machine-to-machine (M2M) credentials, fine-grained resource-level authorizations (for example, access to specific process definitions, decisions, or tasks) |
 
 For the full breakdown, see [Admin vs Management Identity](/self-managed/reference-architecture/reference-architecture.md#admin-vs-management-identity).
 
-In most deployments, both subsystems share the same IdP — you create a separate OIDC application registration for each subsystem, but manage users in one place at the IdP level.
+In most deployments, both subsystems share the same IdP — you create a separate OIDC application registration for each subsystem but manage users in one place at the IdP level.
 
-## Background: the 8.8 identity split
+## How identity changed in Camunda 8.8
 
-Before Camunda 8.8, [Management Identity](/self-managed/components/management-identity/overview.md) (then called just "Identity") managed access for every component, including Zeebe, Operate, and Tasklist. That release split it in two: the [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) began managing its own authentication and authorization internally, through [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) (formerly called Orchestration Cluster Identity). See [Identity, authentication, and authorization](/reference/announcements-release-notes/880/whats-new-in-88.md#identity) for the full migration details.
+Before Camunda 8.8, [Management Identity](/self-managed/components/management-identity/overview.md) (then called just Identity) managed access for every component, including Zeebe, Operate, and Tasklist.Camunda 8.8 split identity management into two subsystems. The [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) began managing its own authentication and authorization through [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) (formerly called Orchestration Cluster Identity). See [Identity, authentication, and authorization](/reference/announcements-release-notes/880/whats-new-in-88.md#identity) for the full migration details.
 
 :::note Manage roles in Admin after upgrading
 Admin becomes the single source of truth for the migrated cluster's roles and authorizations. Existing roles and authorizations carry over automatically during the upgrade, so nothing needs to be re-created. From that point on, manage access to Operate and Tasklist in Admin — role or authorization changes made in Console or Management Identity no longer apply to the migrated cluster.
 :::
 
-## What you need to configure
+## Configure the identity subsystems
 
 If you are deploying the full Camunda Self-Managed stack, you configure both subsystems, in this order:
 
@@ -70,7 +70,7 @@ flowchart TD
     Q2 -->|No| D
 ```
 
-Most full deployments configure both.
+For most full deployments, configure both Management Identity and Admin.
 
 ## Key terms
 
@@ -81,7 +81,7 @@ Most full deployments configure both.
 | Issuer URL    | The base URL of your IdP's OIDC authorization server. Camunda uses this to discover token and JWKS endpoints.                             |
 | Redirect URI  | The URL Camunda registers with your IdP so the IdP knows where to send users after authentication.                                        |
 | Scopes        | The OIDC permission sets Camunda requests from your IdP (typically `openid profile email`).                                               |
-| Claims        | The fields in the ID token your IdP returns. Camunda reads specific claims (like `sub`, `email`, `preferred_username`) to identify users. |
+| Claims        | The fields in the ID token your IdP returns. Camunda reads specific claims (such as `sub`, `email`, `preferred_username`) to identify users. |
 | JWKS endpoint | The URL your IdP exposes to publish its public signing keys. Camunda uses this to validate token signatures.                              |
 
 ## Next steps
