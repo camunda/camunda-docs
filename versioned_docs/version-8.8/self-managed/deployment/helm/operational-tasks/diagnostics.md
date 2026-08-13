@@ -7,10 +7,10 @@ description: "Get diagnostics and logs from a Helm chart deployment."
 
 ## Diagnostics collection script
 
-This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, resource details, and Elasticsearch/OpenSearch index data) into a single directory, and outputs it in a .zip file to make it easier to share this information with the Camunda Support team.
+This script automates the process of gathering logs and diagnostics from a Camunda Helm chart deployment running in a Kubernetes cluster. The script collects all relevant information (including pod logs, events, resource details, and Elasticsearch/OpenSearch diagnostics) into a single directory, and outputs it in a `.zip` file to make it easier to share this information with the Camunda Support team.
 
 :::caution Data privacy notice
-Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs, configuration data and Elasticsearch/OpenSearch data. This includes the collected actuator outputs: the `configprops` endpoint masks credential-like values, but connection URLs, hostnames, and bucket names are not redacted. The Elasticsearch/OpenSearch data can also include index documents that may contain business data or personal data (pass `--skip-es-os` flag to skip Elasticsearch/OpenSearch exporting data entirely).
+Before sharing the generated diagnostics file with Camunda Support, review and remove any sensitive information such as passwords, API keys, personal data, or business-sensitive data from the collected logs, configuration data, and Elasticsearch/OpenSearch data. This includes the collected actuator outputs: the `configprops` endpoint masks credential-like values, but connection URLs, hostnames, and bucket names are not redacted. The Elasticsearch/OpenSearch data can also include index documents that may contain business or personal data — pass the `--skip-es-os` flag to skip exporting Elasticsearch/OpenSearch data entirely.
 :::
 
 ### What the script collects
@@ -28,7 +28,7 @@ The script outputs the following data from your namespace and creates a zip file
   - Cluster health, node stats, and allocation details.
   - Index list (sorted by name), aliases, shards, and segments.
   - Index templates, component templates, and lifecycle policies (ILM for Elasticsearch, ISM for OpenSearch).
-  - Camunda import position documents for Optimize.
+  - Camunda import position documents for Operate, Tasklist, and Optimize.
   - Operate post-importer queue document count (and a sample of entries when `--export-post-importer-queue` is set).
   - Zeebe exporter index statistics: document counts and min/max sequence numbers per value type and partition.
 
@@ -404,6 +404,10 @@ else
       fi
 
       echo "  - Collecting Camunda import position documents."
+      run_es_curl "$es_base/operate-import-position*/_search?size=10000&pretty" \
+        > "$search_dir/operate-import-position.json"
+      run_es_curl "$es_base/tasklist-import-position*/_search?size=10000&pretty" \
+        > "$search_dir/tasklist-import-position.json"
       run_es_curl "$es_base/optimize-position-based-import-index*/_search?size=10000&pretty" \
         > "$search_dir/optimize-import-position.json"
 
