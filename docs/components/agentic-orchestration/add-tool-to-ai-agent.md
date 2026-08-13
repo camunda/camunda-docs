@@ -80,7 +80,7 @@ See the following comparison:
 
 ## Declare AI-generated parameters with `fromAi()`
 
-If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, wrap those values in the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function. The function returns the value unchanged at runtime, but it registers the parameter in the tool's input schema so the LLM knows it must generate a value.
+If the tool requires values that the LLM should supply at runtime, such as a search query, a location, or an identifier, wrap those values in the [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function. The function returns the value unchanged at runtime, but it registers the parameter in the tool's input schema so the LLM knows it must generate a value.
 
 Where you write the `fromAi()` call depends on whether the tool element has an element template applied:
 

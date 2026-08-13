@@ -61,6 +61,28 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 - [Admin overview](/components/admin/admin-introduction.md)
 
+### Agent definition
+
+A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (AI Agent sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a [DRD](#drd-decision-requirements-diagram) deployment creates decision definitions.
+
+An agent definition is a structural descriptor (type, name, the element and process definition version it belongs to, and tenant), not a store of runtime configuration.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
+### Agent instance
+
+A specific runtime execution of an [agent definition](#agent-definition) that can be created for an active agent element. It is identified by an agent instance key, which the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) uses to represent the agent's state, including conversation, tool calls, and reasoning, for visibility and explainability in tools like Operate.
+
+An agent instance can be reused across several element instances within the same process instance, which is what allows an agent to continue a multi-turn conversation when the process returns to the agent element.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
+### Agent loop
+
+The feedback loop an [AI agent](#ai-agent) runs to reach its goal: the model reasons over the current context, decides whether to call tools, receives the tool results, and repeats until it returns a final response or reaches a configured limit. The loop is what makes an agent an agent, and it consists of one or more [loop iterations](#loop-iteration).
+
+A [Camunda AI agent](#camunda-ai-agent) runs its loop in Camunda's engine, which activates each tool call as a BPMN activity. An [external agent](#external-agent) runs its loop in an external runtime.
+
 ### Agent orchestration
 
 Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
@@ -89,7 +111,7 @@ A broad field of computer science focused on creating machines that can perform 
 
 ### AI agent
 
-An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop.
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs an [agent loop](#agent-loop) where the model decides what to do next, which tools to invoke, and when to stop.
 
 The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
 
@@ -99,6 +121,12 @@ For example, you can build an invoice-processing AI agent in Camunda with BPMN, 
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
+
+### AI agent function
+
+The category of built-in [FEEL](#feel-expression) functions used to declare LLM-provided tool parameters for an [AI agent](#ai-agent). The primary function is [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue), which marks a value as supplied by the LLM at runtime, with an optional description, type, and JSON schema to guide the model.
+
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 
 ### Audit log
 
@@ -159,7 +187,7 @@ An operation that affects the entire [Orchestration Cluster](#orchestration-clus
 
 The native [AI agent](#ai-agent) type. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
 
-It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), which offers two implementations: the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) and the [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
 
 :::note
 This is different from an [external agent](#external-agent), which is the non-native AI agent type.
@@ -234,6 +262,12 @@ A process cannot execute unless it is known by the [broker](#zeebe-broker). Depl
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
 
+### DRD (Decision Requirements Diagram)
+
+The visual representation of a decision requirements graph (DRG), which models a domain of decision-making, showing the decisions involved and the dependencies between them, such as required decisions, input data, and knowledge sources. Deploying a DRD creates one decision definition per decision it contains.
+
+- [Decision requirements graph](/components/modeler/dmn/decision-requirements-graph.md)
+
 ## E
 
 ### Elasticsearch/OpenSearch
@@ -295,6 +329,12 @@ This is different from a [Camunda AI agent](#camunda-ai-agent), which is Camunda
 :::
 
 ## F
+
+### FEEL expression
+
+FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
+
+- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
 
 ### Fine-tuning
 
@@ -454,6 +494,14 @@ A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based 
 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
+
+### Loop iteration
+
+A loop iteration is one pass through an [AI agent](#ai-agent)’s [agent loop](#agent-loop), during which the model reasons, selects tools, evaluates the result, and decides whether to continue. An AI agent run consists of one loop with one or more loop iterations.
+
+Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution.
+
+- [Conversation history and loop iterations](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations)
 
 ## M
 
