@@ -1,12 +1,12 @@
 ---
-id: test-case-files
-title: Test case files
-description: Define shareable, low-code tests for your BPMN processes
+id: test-files
+title: Test files
+description: Define shareable, low-code test cases for your BPMN processes
 ---
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Test files let you define shareable, low-code tests for your BPMN processes.
+Test files let you define shareable, low-code test cases for your BPMN processes.
 
 They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON schema](https://camunda.com/json-schema/cpt-test-cases/8.9/schema.json), so you can use the same files in Test mode and in an automated CPT test suite. You can create, edit, and manage them directly in Web Modeler. You can also download these files or synchronize them with your Git repository using Git Sync.
 
@@ -14,7 +14,7 @@ They are stored in JSON format and follow the [Camunda Process Test (CPT) JSON s
 
 You can create a new test file by [saving a test case in Test mode](test-your-process.md#save-a-test-case).
 
-You can also manage tests and update failing tests in Test mode.
+You can also manage test cases and update failing test cases in Test mode.
 
 ## Manual editing
 
@@ -71,7 +71,7 @@ Test files follow the [CPT JSON test cases schema](/apis-tools/testing/json-test
 
 ### Link a process (`processId`)
 
-To display the file's tests in Test mode, you must first link the file to a process.
+To display the file's test cases in Test mode, you must first link the file to a process.
 
 Add a `processId` field with the process ID of the BPMN process you want to test:
 

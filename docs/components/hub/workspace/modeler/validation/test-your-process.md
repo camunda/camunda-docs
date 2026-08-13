@@ -7,7 +7,7 @@ keywords: ["test", "test mode", "test case", "test studio", "validation"]
 
 <span class="badge badge--cloud">Camunda 8 only</span>
 
-Test mode is a Zeebe-powered testing environment within Web Modeler for validating a process at any stage of development. Select any environment configured for your project — development, test, stage, or production — and choose which version to test against, without triggering an implicit deployment. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders — all within Test mode.
+Test mode is a Zeebe-powered testing environment within Web Modeler for validating a process at any stage of development. Select any environment configured for your project — development, test, stage, or production — and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders — all within Test mode.
 
 ## Opening the Test tab
 
@@ -17,7 +17,7 @@ To use Test mode, open a BPMN diagram and click the **Test** tab. Read the [limi
 
 Select any environment configured for your project as your test target. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
-Opening the **Test** tab no longer deploys your process automatically. Deployment happens when you start a test run: the current version of the active process and all its dependencies, like called processes or DMN files, are deployed to the selected cluster.
+Opening the **Test** tab no longer deploys your process automatically. Click **Deploy** to deploy the current version of the active process and all its dependencies, like called processes or DMN files, to the selected cluster. Once deployed, you can run or create test cases.
 
 The selected cluster name is shown in the Test action bar. Click it to switch clusters without leaving Test mode; the newly selected cluster becomes the deployment and execution target.
 
@@ -48,7 +48,7 @@ If [authorizations](/components/admin/authorization.md) are enabled on the clust
 
 - Fine-grained authorizations are not supported. If the **Resource ID** is not \* when defining authorizations, the user will not have access to any resources.
 
-## Get started with Test
+## Get started with Test mode
 
 ![Test mode process definition view showing the Configure test case overlay](../img/test-definition.png)
 
@@ -59,7 +59,7 @@ When you open the **Test** tab for the first time in a process a **Setup environ
 In the **Configure test case** panel, select the start and end elements that define the segment of the process you want to test. Click the selected start event to configure how the process should start — the panel shows various options depending on its Start event type:
 
 - **None start event**: A JSON editor pre-filled with example data from the BPMN definition. Click **Start** to begin the process with the current variables, or **Start with Form** if the start event has a linked form.
-- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. THe **Start** button is disabled when the message name is empty.
+- **Message start event**: A **Message name** field pre-filled from the BPMN definition. Click the icon next to the field to open a **Configure Message** modal where you can set the correlation key, TTL, and message ID. The **Start** button is disabled when the message name is empty.
 - **Signal start event**: A **Signal name** dropdown pre-filled with the signal from the BPMN definition.
 
 **Start** is also disabled when the variables field contains invalid JSON.
@@ -143,7 +143,7 @@ You can also return to the definition view by clicking **View all** on the top b
 
 ### Rewind a process
 
-After completing part of your process, you can **rewind** to a previous element to test a different path. Test mode will start a new instance and replay your actions up to, but not including, the selected previous task.
+After completing part of your process, you can **rewind** to a previous element to test a different path. Test mode will start a new instance and retest your actions up to, but not including, the selected previous task.
 
 ![Rewinding a process in Test mode](../img/test-rewind.png)
 
@@ -168,20 +168,17 @@ For example, you can validate your process by creating and rerunning test cases 
 Although test cases are valuable for rapid validation during development, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline for comprehensive testing.
 :::
 
-Test cases are stored in [test case files](test-case-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+Test cases are stored in [test files](test-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
 
-Test mode will use the test case file [linked to the first executable process ID](test-case-files.md#link-a-process-processid) of the BPMN diagram.
+Test mode will use the test file [linked to the first executable process ID](test-files.md#link-a-process-processid) of the BPMN diagram.
 
-If multiple test case files are linked to the same process ID, Test mode will use:
-
-- The test case file with the earliest name alphabetically
-- If multiple test case files have the same name, the one that was most recently updated
+If multiple test files are linked to the same process ID, Test mode uses the one with the earliest name alphabetically. If more than one shares that name, Test mode uses the one most recently updated.
 
 ### Save a test case
 
 To save a test case:
 
-1. Execute a test in your process.
+1. Execute a path in your process.
 1. In the **Test cases** panel enter the following details:
 
    | Field                      | Description                                                                                           |
@@ -191,7 +188,7 @@ To save a test case:
 
 1. Review the **Steps** the test case will re-run, such as **Start instance**. (Optional) Click **Add assertion** to add an assertion to a step.
 1. Click **Save test case**.
-1. A new [test case file](test-case-files.md) will be saved in the same Web Modeler folder as the process.
+1. A new [test file](test-files.md) will be saved in the same Web Modeler folder as the process.
 
 ![Saving a test case](../img/test-save-test-case.png)
 
@@ -205,7 +202,7 @@ Test coverage is calculated as the percentage of flow nodes in your process that
 ![Test coverage indicator](../img/test-coverage.png)
 
 :::warning
-Test coverage will not display as expected if you edit or remove the "metadata" field in the [test case file](test-case-files.md).
+Test coverage will not display as expected if you edit or remove the "metadata" field in the [test file](test-files.md).
 :::
 
 ### Run a test case

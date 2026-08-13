@@ -62,7 +62,7 @@ When your project is ready for validation you can deploy it to your development 
 - Validate that all files and resources are correctly deployed.
 
 :::note
-Test mode is being rebuilt and progressively rolled out to more users. See [Test limitations and availability](/components/hub/workspace/modeler/validation/test-your-process.md#limitations-and-availability) for limitations and why you might not see the **Test** tab.
+Test mode is being rebuilt and progressively rolled out to more users. See [Test mode limitations and availability](/components/hub/workspace/modeler/validation/test-your-process.md#limitations-and-availability) for limitations and why you might not see the **Test** tab.
 :::
 
 ## Review

@@ -251,7 +251,7 @@ RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactor
 RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-case-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
@@ -263,7 +263,8 @@ RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/component
 
 # Play-to-Test Transition (product-hub#3169): Play mode renamed to Test mode
 RewriteRule ^docs/next/components/hub/workspace/modeler/validation/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-case-files/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-case-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 
 # Move Console and Web Modeler docs to Camunda Hub (next version)
 RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
