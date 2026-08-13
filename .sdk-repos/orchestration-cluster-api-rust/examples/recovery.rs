@@ -6,6 +6,7 @@
 
 use camunda_orchestration_sdk::apis::recovery_api::ChangeClusterModeParams;
 use camunda_orchestration_sdk::apis::recovery_api::RestoreParams;
+use camunda_orchestration_sdk::models::Mode;
 use camunda_orchestration_sdk::models::RestoreRequest;
 use camunda_orchestration_sdk::CamundaClient;
 
@@ -15,7 +16,7 @@ async fn change_cluster_mode() -> Result<(), Box<dyn std::error::Error>> {
 
     let result = client
         .change_cluster_mode(ChangeClusterModeParams {
-            mode: "my-mode".to_string(),
+            mode: Mode::Recovering,
             dry_run: None,
         })
         .await?;
@@ -39,6 +40,17 @@ async fn restore() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 // endregion Restore
+
+// region GetRestoreStatus
+async fn get_restore_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let status = client.get_restore_status().await?;
+    println!("{status:#?}");
+
+    Ok(())
+}
+// endregion GetRestoreStatus
 
 fn main() {
     // Examples above are compiled, not executed.

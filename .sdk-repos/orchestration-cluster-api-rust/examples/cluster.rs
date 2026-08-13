@@ -39,6 +39,17 @@ async fn get_topology() -> Result<(), Box<dyn std::error::Error>> {
 }
 // endregion GetTopology
 
+// region GetClusterStatus
+async fn get_cluster_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let status = client.get_cluster_status().await?;
+    println!("{status:#?}");
+
+    Ok(())
+}
+// endregion GetClusterStatus
+
 fn main() {
     // Examples above are compiled, not executed.
 }

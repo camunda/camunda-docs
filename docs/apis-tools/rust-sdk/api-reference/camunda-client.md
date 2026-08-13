@@ -12,7 +12,7 @@ The primary entry point of the SDK.
 A `CamundaClient` is cheap to clone — clones share the same configuration,
 HTTP client, OAuth token cache, and worker registry.
 
-`CamundaClient` exposes **220** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **236** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ## Methods
 
@@ -77,6 +77,8 @@ HTTP client, OAuth token cache, and worker registry.
 | [`delete_process_instances_batch_operation`](#delete_process_instances_batch_operation)                             | Delete process instances (batch) (`POST /process-instances/deletion`).                                                                                                                                                                                                                       |
 | [`delete_resource`](#delete_resource)                                                                               | Delete resource (`POST /resources/{resourceKey}/deletion`).                                                                                                                                                                                                                                  |
 | [`delete_role`](#delete_role)                                                                                       | Delete role (`DELETE /roles/{roleId}`).                                                                                                                                                                                                                                                      |
+| [`delete_runtime_backup`](#delete_runtime_backup)                                                                   | Delete runtime backup (`DELETE /backups/runtime/{backupId}`).                                                                                                                                                                                                                                |
+| [`delete_runtime_backup_state`](#delete_runtime_backup_state)                                                       | Delete runtime backup state (`DELETE /backups/runtime/state`).                                                                                                                                                                                                                               |
 | [`delete_tenant`](#delete_tenant)                                                                                   | Delete tenant (`DELETE /tenants/{tenantId}`).                                                                                                                                                                                                                                                |
 | [`delete_tenant_cluster_variable`](#delete_tenant_cluster_variable)                                                 | Delete a tenant-scoped cluster variable (`DELETE /cluster-variables/tenants/{tenantId}/{name}`).                                                                                                                                                                                             |
 | [`delete_user`](#delete_user)                                                                                       | Delete user (`DELETE /users/{username}`).                                                                                                                                                                                                                                                    |
@@ -88,11 +90,13 @@ HTTP client, OAuth token cache, and worker registry.
 | [`eventual_until`](#eventual_until)                                                                                 | Poll a read operation until `predicate` is satisfied by its result, retrying `404` and ignoring consistent-but-not-yet-matching reads, until the eventual-consistency window elapses.                                                                                                        |
 | [`fail_job`](#fail_job)                                                                                             | Fail a job, decrementing retries.                                                                                                                                                                                                                                                            |
 | [`from_env`](#from_env)                                                                                             | Construct a client from environment variables only.                                                                                                                                                                                                                                          |
+| [`get_agent_definition`](#get_agent_definition)                                                                     | Get agent definition (`GET /agent-definitions/{agentDefinitionKey}`).                                                                                                                                                                                                                        |
 | [`get_agent_instance`](#get_agent_instance)                                                                         | Get agent instance (`GET /agent-instances/{agentInstanceKey}`).                                                                                                                                                                                                                              |
 | [`get_audit_log`](#get_audit_log)                                                                                   | Get audit log (`GET /audit-logs/{auditLogKey}`).                                                                                                                                                                                                                                             |
 | [`get_authentication`](#get_authentication)                                                                         | Get current user (`GET /authentication/me`).                                                                                                                                                                                                                                                 |
 | [`get_authorization`](#get_authorization)                                                                           | Get authorization (`GET /authorizations/{authorizationKey}`).                                                                                                                                                                                                                                |
 | [`get_batch_operation`](#get_batch_operation)                                                                       | Get batch operation (`GET /batch-operations/{batchOperationKey}`).                                                                                                                                                                                                                           |
+| [`get_cluster_status`](#get_cluster_status)                                                                         | Get the status of the whole cluster (`GET /cluster/v2/status`).                                                                                                                                                                                                                              |
 | [`get_decision_definition`](#get_decision_definition)                                                               | Get decision definition (`GET /decision-definitions/{decisionDefinitionKey}`).                                                                                                                                                                                                               |
 | [`get_decision_definition_xml`](#get_decision_definition_xml)                                                       | Get decision definition XML (`GET /decision-definitions/{decisionDefinitionKey}/xml`).                                                                                                                                                                                                       |
 | [`get_decision_instance`](#get_decision_instance)                                                                   | Get decision instance (`GET /decision-instances/{decisionEvaluationInstanceKey}`).                                                                                                                                                                                                           |
@@ -100,6 +104,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_decision_requirements_xml`](#get_decision_requirements_xml)                                                   | Get decision requirements XML (`GET /decision-requirements/{decisionRequirementsKey}/xml`).                                                                                                                                                                                                  |
 | [`get_document`](#get_document)                                                                                     | Download document (`GET /documents/{documentId}`).                                                                                                                                                                                                                                           |
 | [`get_element_instance`](#get_element_instance)                                                                     | Get element instance (`GET /element-instances/{elementInstanceKey}`).                                                                                                                                                                                                                        |
+| [`get_exporting_status`](#get_exporting_status)                                                                     | Get exporting status (`GET /exporting`).                                                                                                                                                                                                                                                     |
 | [`get_form_by_key`](#get_form_by_key)                                                                               | Get form by key (`GET /forms/{formKey}`).                                                                                                                                                                                                                                                    |
 | [`get_global_cluster_variable`](#get_global_cluster_variable)                                                       | Get a global-scoped cluster variable (`GET /cluster-variables/global/{name}`).                                                                                                                                                                                                               |
 | [`get_global_job_statistics`](#get_global_job_statistics)                                                           | Global job statistics (`GET /jobs/statistics/global`).                                                                                                                                                                                                                                       |
@@ -128,9 +133,12 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_resource`](#get_resource)                                                                                     | Get resource (`GET /resources/{resourceKey}`).                                                                                                                                                                                                                                               |
 | [`get_resource_content`](#get_resource_content)                                                                     | Get RPA resource content (deprecated) (`GET /resources/{resourceKey}/content`).                                                                                                                                                                                                              |
 | [`get_resource_content_binary`](#get_resource_content_binary)                                                       | Get resource content as binary (`GET /resources/{resourceKey}/content/binary`).                                                                                                                                                                                                              |
+| [`get_restore_status`](#get_restore_status)                                                                         | Get the status of the restore that is currently in progress (`GET /restore`).                                                                                                                                                                                                                |
 | [`get_role`](#get_role)                                                                                             | Get role (`GET /roles/{roleId}`).                                                                                                                                                                                                                                                            |
+| [`get_runtime_backup`](#get_runtime_backup)                                                                         | Get runtime backup (`GET /backups/runtime/{backupId}`).                                                                                                                                                                                                                                      |
+| [`get_runtime_backup_state`](#get_runtime_backup_state)                                                             | Get runtime backup state (`GET /backups/runtime/state`).                                                                                                                                                                                                                                     |
 | [`get_start_process_form`](#get_start_process_form)                                                                 | Get process start form (`GET /process-definitions/{processDefinitionKey}/form`).                                                                                                                                                                                                             |
-| [`get_status`](#get_status)                                                                                         | Get cluster status (`GET /status`).                                                                                                                                                                                                                                                          |
+| [`get_status`](#get_status)                                                                                         | Get physical tenant status (`GET /status`).                                                                                                                                                                                                                                                  |
 | [`get_system_configuration`](#get_system_configuration)                                                             | System configuration (alpha) (`GET /system/configuration`).                                                                                                                                                                                                                                  |
 | [`get_tenant`](#get_tenant)                                                                                         | Get tenant (`GET /tenants/{tenantId}`).                                                                                                                                                                                                                                                      |
 | [`get_tenant_cluster_variable`](#get_tenant_cluster_variable)                                                       | Get a tenant-scoped cluster variable (`GET /cluster-variables/tenants/{tenantId}/{name}`).                                                                                                                                                                                                   |
@@ -140,11 +148,14 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_user_task_form`](#get_user_task_form)                                                                         | Get user task form (`GET /user-tasks/{userTaskKey}/form`).                                                                                                                                                                                                                                   |
 | [`get_variable`](#get_variable)                                                                                     | Get variable (`GET /variables/{variableKey}`).                                                                                                                                                                                                                                               |
 | [`init_logging`](#init_logging)                                                                                     | Install a formatting `tracing` subscriber filtered to the configured `CAMUNDA_SDK_LOG_LEVEL`. No-op if a global subscriber is already set or logging is off. Returns `true` if this call installed the subscriber.                                                                           |
+| [`list_runtime_backups`](#list_runtime_backups)                                                                     | List runtime backups (`GET /backups/runtime`).                                                                                                                                                                                                                                               |
+| [`list_secrets`](#list_secrets)                                                                                     | List secrets (alpha) (`POST /secrets/list`).                                                                                                                                                                                                                                                 |
 | [`migrate_process_instance`](#migrate_process_instance)                                                             | Migrate process instance (`POST /process-instances/{processInstanceKey}/migration`).                                                                                                                                                                                                         |
 | [`migrate_process_instances_batch_operation`](#migrate_process_instances_batch_operation)                           | Migrate process instances (batch) (`POST /process-instances/migration`).                                                                                                                                                                                                                     |
 | [`modify_process_instance`](#modify_process_instance)                                                               | Modify process instance (`POST /process-instances/{processInstanceKey}/modification`).                                                                                                                                                                                                       |
 | [`modify_process_instances_batch_operation`](#modify_process_instances_batch_operation)                             | Modify process instances (batch) (`POST /process-instances/modification`).                                                                                                                                                                                                                   |
 | [`new`](#new)                                                                                                       | Construct a client from `CamundaOptions` (environment + overrides).                                                                                                                                                                                                                          |
+| [`pause_exporting`](#pause_exporting)                                                                               | Pause exporting (`POST /exporting/pause`).                                                                                                                                                                                                                                                   |
 | [`pin_clock`](#pin_clock)                                                                                           | Pin internal clock (alpha) (`PUT /clock`).                                                                                                                                                                                                                                                   |
 | [`publish_message`](#publish_message)                                                                               | Publish a message (no correlation key matching against active subscriptions only — buffered). The configured default tenant id is applied when unset.                                                                                                                                        |
 | [`reset_clock`](#reset_clock)                                                                                       | Reset internal clock (alpha) (`POST /clock/reset`).                                                                                                                                                                                                                                          |
@@ -154,9 +165,11 @@ HTTP client, OAuth token cache, and worker registry.
 | [`resolve_secrets`](#resolve_secrets)                                                                               | Resolve secrets (alpha) (`POST /secrets/resolve`).                                                                                                                                                                                                                                           |
 | [`restore`](#restore)                                                                                               | Restore from a backup (`POST /restore`).                                                                                                                                                                                                                                                     |
 | [`resume_batch_operation`](#resume_batch_operation)                                                                 | Resume Batch operation (`POST /batch-operations/{batchOperationKey}/resumption`).                                                                                                                                                                                                            |
+| [`resume_exporting`](#resume_exporting)                                                                             | Resume exporting (`POST /exporting/resume`).                                                                                                                                                                                                                                                 |
 | [`resume_process_instance`](#resume_process_instance)                                                               | Resume process instance (`POST /process-instances/{processInstanceKey}/resumption`).                                                                                                                                                                                                         |
 | [`resume_process_instances_batch_operation`](#resume_process_instances_batch_operation)                             | Resume process instances (batch) (`POST /process-instances/resumption`).                                                                                                                                                                                                                     |
 | [`running_workers`](#running_workers)                                                                               | The job types of all currently-registered workers that are still running.                                                                                                                                                                                                                    |
+| [`search_agent_definitions`](#search_agent_definitions)                                                             | Search agent definitions (`POST /agent-definitions/search`).                                                                                                                                                                                                                                 |
 | [`search_agent_instance_history`](#search_agent_instance_history)                                                   | Search agent instance history (`POST /agent-instances/{agentInstanceKey}/history/search`).                                                                                                                                                                                                   |
 | [`search_agent_instances`](#search_agent_instances)                                                                 | Search agent instances (`POST /agent-instances/search`).                                                                                                                                                                                                                                     |
 | [`search_audit_logs`](#search_audit_logs)                                                                           | Search audit logs (`POST /audit-logs/search`).                                                                                                                                                                                                                                               |
@@ -185,6 +198,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`search_mapping_rules_for_role`](#search_mapping_rules_for_role)                                                   | Search role mapping rules (`POST /roles/{roleId}/mapping-rules/search`).                                                                                                                                                                                                                     |
 | [`search_mapping_rules_for_tenant`](#search_mapping_rules_for_tenant)                                               | Search mapping rules for tenant (`POST /tenants/{tenantId}/mapping-rules/search`).                                                                                                                                                                                                           |
 | [`search_message_subscriptions`](#search_message_subscriptions)                                                     | Search message subscriptions (`POST /message-subscriptions/search`).                                                                                                                                                                                                                         |
+| [`search_own_authorizations`](#search_own_authorizations)                                                           | Search own authorizations (`POST /authentication/me/authorizations/search`).                                                                                                                                                                                                                 |
 | [`search_process_definition_variable_names`](#search_process_definition_variable_names)                             | Search process definition variable names (`POST /process-definitions/{processDefinitionKey}/variable-names/search`).                                                                                                                                                                         |
 | [`search_process_definitions`](#search_process_definitions)                                                         | Search process definitions (`POST /process-definitions/search`).                                                                                                                                                                                                                             |
 | [`search_process_instance_incidents`](#search_process_instance_incidents)                                           | Search related incidents (`POST /process-instances/{processInstanceKey}/incidents/search`).                                                                                                                                                                                                  |
@@ -209,6 +223,8 @@ HTTP client, OAuth token cache, and worker registry.
 | [`suspend_batch_operation`](#suspend_batch_operation)                                                               | Suspend Batch operation (`POST /batch-operations/{batchOperationKey}/suspension`).                                                                                                                                                                                                           |
 | [`suspend_process_instance`](#suspend_process_instance)                                                             | Suspend process instance (`POST /process-instances/{processInstanceKey}/suspension`).                                                                                                                                                                                                        |
 | [`suspend_process_instances_batch_operation`](#suspend_process_instances_batch_operation)                           | Suspend process instances (batch) (`POST /process-instances/suspension`).                                                                                                                                                                                                                    |
+| [`sync_runtime_backup_state`](#sync_runtime_backup_state)                                                           | Force-write runtime backup state (`POST /backups/runtime/state/sync`).                                                                                                                                                                                                                       |
+| [`take_runtime_backup`](#take_runtime_backup)                                                                       | Take a runtime backup (`POST /backups/runtime`).                                                                                                                                                                                                                                             |
 | [`throw_job_error`](#throw_job_error)                                                                               | Throw a BPMN error from a job.                                                                                                                                                                                                                                                               |
 | [`topology`](#topology)                                                                                             | Fetch the cluster topology.                                                                                                                                                                                                                                                                  |
 | [`unassign_client_from_group`](#unassign_client_from_group)                                                         | Unassign a client from a group (`DELETE /groups/{groupId}/clients/{clientId}`).                                                                                                                                                                                                              |
@@ -848,7 +864,7 @@ async fn change_cluster_mode() -> Result<(), Box<dyn std::error::Error>> {
 
     let result = client
         .change_cluster_mode(ChangeClusterModeParams {
-            mode: "my-mode".to_string(),
+            mode: Mode::Recovering,
             dry_run: None,
         })
         .await?;
@@ -1863,6 +1879,50 @@ async fn delete_role(role_id: String) -> Result<(), Box<dyn std::error::Error>> 
 }
 ```
 
+### delete_runtime_backup
+
+```rust
+pub async fn delete_runtime_backup(&self, params: DeleteRuntimeBackupParams) -> Result<()>
+```
+
+Delete runtime backup (`DELETE /backups/runtime/{backupId}`).
+
+**Example**
+
+```rust
+async fn delete_runtime_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .delete_runtime_backup(DeleteRuntimeBackupParams { backup_id: 1 })
+        .await?;
+    println!("Delete runtime backup: done");
+
+    Ok(())
+}
+```
+
+### delete_runtime_backup_state
+
+```rust
+pub async fn delete_runtime_backup_state(&self) -> Result<()>
+```
+
+Delete runtime backup state (`DELETE /backups/runtime/state`).
+
+**Example**
+
+```rust
+async fn delete_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client.delete_runtime_backup_state().await?;
+    println!("Delete runtime backup state: done");
+
+    Ok(())
+}
+```
+
 ### delete_tenant
 
 ```rust
@@ -2096,6 +2156,31 @@ pub fn from_env() -> Result<Self>
 
 Construct a client from environment variables only.
 
+### get_agent_definition
+
+```rust
+pub async fn get_agent_definition(&self, params: GetAgentDefinitionParams) -> Result<models::AgentDefinitionResult>
+```
+
+Get agent definition (`GET /agent-definitions/{agentDefinitionKey}`).
+
+**Example**
+
+```rust
+async fn get_agent_definition() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .get_agent_definition(GetAgentDefinitionParams {
+            agent_definition_key: "2251799813691958".to_string(),
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### get_agent_instance
 
 ```rust
@@ -2208,6 +2293,27 @@ async fn get_batch_operation(
         })
         .await?;
     println!("{}", result.batch_operation_key);
+
+    Ok(())
+}
+```
+
+### get_cluster_status
+
+```rust
+pub async fn get_cluster_status(&self) -> Result<models::ClusterStatusResponse>
+```
+
+Get the status of the whole cluster (`GET /cluster/v2/status`).
+
+**Example**
+
+```rust
+async fn get_cluster_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let status = client.get_cluster_status().await?;
+    println!("{status:#?}");
 
     Ok(())
 }
@@ -2399,6 +2505,27 @@ async fn get_element_instance(
         })
         .await?;
     println!("{}", result.element_id);
+
+    Ok(())
+}
+```
+
+### get_exporting_status
+
+```rust
+pub async fn get_exporting_status(&self) -> Result<models::ExportingStatusResponse>
+```
+
+Get exporting status (`GET /exporting`).
+
+**Example**
+
+```rust
+async fn get_exporting_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let status = client.get_exporting_status().await?;
+    println!("{status:#?}");
 
     Ok(())
 }
@@ -3155,6 +3282,27 @@ async fn get_resource_content_binary(
 }
 ```
 
+### get_restore_status
+
+```rust
+pub async fn get_restore_status(&self) -> Result<models::RestoreStatusResponse>
+```
+
+Get the status of the restore that is currently in progress (`GET /restore`).
+
+**Example**
+
+```rust
+async fn get_restore_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let status = client.get_restore_status().await?;
+    println!("{status:#?}");
+
+    Ok(())
+}
+```
+
 ### get_role
 
 ```rust
@@ -3171,6 +3319,50 @@ async fn get_role(role_id: String) -> Result<(), Box<dyn std::error::Error>> {
 
     let result = client.get_role(GetRoleParams { role_id }).await?;
     println!("{}", result.role_id);
+
+    Ok(())
+}
+```
+
+### get_runtime_backup
+
+```rust
+pub async fn get_runtime_backup(&self, params: GetRuntimeBackupParams) -> Result<models::BackupInfo>
+```
+
+Get runtime backup (`GET /backups/runtime/{backupId}`).
+
+**Example**
+
+```rust
+async fn get_runtime_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .get_runtime_backup(GetRuntimeBackupParams { backup_id: 1 })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
+### get_runtime_backup_state
+
+```rust
+pub async fn get_runtime_backup_state(&self) -> Result<models::RuntimeBackupState>
+```
+
+Get runtime backup state (`GET /backups/runtime/state`).
+
+**Example**
+
+```rust
+async fn get_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let state = client.get_runtime_backup_state().await?;
+    println!("{state:#?}");
 
     Ok(())
 }
@@ -3209,7 +3401,7 @@ async fn get_start_process_form(
 pub async fn get_status(&self) -> Result<()>
 ```
 
-Get cluster status (`GET /status`).
+Get physical tenant status (`GET /status`).
 
 **Example**
 
@@ -3420,6 +3612,54 @@ Install a formatting `tracing` subscriber filtered to the configured
 `CAMUNDA_SDK_LOG_LEVEL`. No-op if a global subscriber is already set or logging is
 off. Returns `true` if this call installed the subscriber.
 
+### list_runtime_backups
+
+```rust
+pub async fn list_runtime_backups(&self, params: ListRuntimeBackupsParams) -> Result<Vec<models::BackupInfo>>
+```
+
+List runtime backups (`GET /backups/runtime`).
+
+**Example**
+
+```rust
+async fn list_runtime_backups() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let backups = client
+        .list_runtime_backups(ListRuntimeBackupsParams { prefix: None })
+        .await?;
+    for backup in backups {
+        println!("{backup:#?}");
+    }
+
+    Ok(())
+}
+```
+
+### list_secrets
+
+```rust
+pub async fn list_secrets(&self, params: ListSecretsParams) -> Result<models::SecretListResult>
+```
+
+List secrets (alpha) (`POST /secrets/list`).
+
+**Example**
+
+```rust
+async fn list_secrets() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .list_secrets(ListSecretsParams { body: None })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### migrate_process_instance
 
 ```rust
@@ -3563,6 +3803,29 @@ pub fn new(options: CamundaOptions) -> Result<Self>
 ```
 
 Construct a client from `CamundaOptions` (environment + overrides).
+
+### pause_exporting
+
+```rust
+pub async fn pause_exporting(&self, params: PauseExportingParams) -> Result<()>
+```
+
+Pause exporting (`POST /exporting/pause`).
+
+**Example**
+
+```rust
+async fn pause_exporting() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .pause_exporting(PauseExportingParams { soft: Some(true) })
+        .await?;
+    println!("Pause exporting: done");
+
+    Ok(())
+}
+```
 
 ### pin_clock
 
@@ -3745,7 +4008,7 @@ async fn resolve_secrets() -> Result<(), Box<dyn std::error::Error>> {
     let result = client
         .resolve_secrets(ResolveSecretsParams {
             secret_resolve_request: SecretResolveRequest {
-                references: vec!["my-references".to_string()],
+                references: vec!["camunda.secrets.my-secret".to_string()],
             },
         })
         .await?;
@@ -3802,6 +4065,27 @@ async fn resume_batch_operation(
         })
         .await?;
     println!("Resume Batch operation: done");
+
+    Ok(())
+}
+```
+
+### resume_exporting
+
+```rust
+pub async fn resume_exporting(&self) -> Result<()>
+```
+
+Resume exporting (`POST /exporting/resume`).
+
+**Example**
+
+```rust
+async fn resume_exporting() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client.resume_exporting().await?;
+    println!("Resume exporting: done");
 
     Ok(())
 }
@@ -3871,6 +4155,31 @@ pub fn running_workers(&self) -> Vec<String>
 ```
 
 The job types of all currently-registered workers that are still running.
+
+### search_agent_definitions
+
+```rust
+pub async fn search_agent_definitions(&self, params: SearchAgentDefinitionsParams) -> Result<models::AgentDefinitionSearchQueryResult>
+```
+
+Search agent definitions (`POST /agent-definitions/search`).
+
+**Example**
+
+```rust
+async fn search_agent_definitions() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .search_agent_definitions(SearchAgentDefinitionsParams {
+            agent_definition_search_query: Some(AgentDefinitionSearchQuery::default()),
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
 
 ### search_agent_instance_history
 
@@ -4633,6 +4942,31 @@ async fn search_message_subscriptions() -> Result<(), Box<dyn std::error::Error>
 }
 ```
 
+### search_own_authorizations
+
+```rust
+pub async fn search_own_authorizations(&self, params: SearchOwnAuthorizationsParams) -> Result<models::AuthorizationSearchResult>
+```
+
+Search own authorizations (`POST /authentication/me/authorizations/search`).
+
+**Example**
+
+```rust
+async fn search_own_authorizations() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .search_own_authorizations(SearchOwnAuthorizationsParams {
+            authorization_search_query: Some(AuthorizationSearchQuery::default()),
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### search_process_definition_variable_names
 
 ```rust
@@ -5253,6 +5587,54 @@ async fn suspend_process_instances_batch_operation() -> Result<(), Box<dyn std::
 }
 ```
 
+### sync_runtime_backup_state
+
+```rust
+pub async fn sync_runtime_backup_state(&self) -> Result<models::RuntimeBackupState>
+```
+
+Force-write runtime backup state (`POST /backups/runtime/state/sync`).
+
+**Example**
+
+```rust
+async fn sync_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let state = client.sync_runtime_backup_state().await?;
+    println!("{state:#?}");
+
+    Ok(())
+}
+```
+
+### take_runtime_backup
+
+```rust
+pub async fn take_runtime_backup(&self, params: TakeRuntimeBackupParams) -> Result<models::TakeRuntimeBackupResponse>
+```
+
+Take a runtime backup (`POST /backups/runtime`).
+
+**Example**
+
+```rust
+async fn take_runtime_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .take_runtime_backup(TakeRuntimeBackupParams {
+            take_runtime_backup_request: Some(TakeRuntimeBackupRequest {
+                backup_id: Some(Some(1)),
+            }),
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### throw_job_error
 
 ```rust
@@ -5677,7 +6059,7 @@ async fn unassign_user_task(user_task_key: String) -> Result<(), Box<dyn std::er
 ### update_agent_instance
 
 ```rust
-pub async fn update_agent_instance(&self, params: UpdateAgentInstanceParams) -> Result<()>
+pub async fn update_agent_instance(&self, params: UpdateAgentInstanceParams) -> Result<models::AgentInstanceUpdateResult>
 ```
 
 Update agent instance (`PATCH /agent-instances/{agentInstanceKey}`).
