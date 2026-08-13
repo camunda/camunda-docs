@@ -58,7 +58,7 @@ In Camunda agentic orchestration, decision-making and orchestration are intentio
 Think of the ad-hoc sub-process as a governed toolbox:
 
 - Each element can be selected by the LLM as a tool.
-- Slements can be executed multiple times, in different orders, in parallel, or skipped.
+- Elements can be executed multiple times, in different orders, in parallel, or skipped.
 - The LLM chooses a path from the allowed options, while Camunda enforces process boundaries and execution reliability.
 
 This is a typical execution timeline:

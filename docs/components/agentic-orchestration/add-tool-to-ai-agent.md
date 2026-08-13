@@ -21,7 +21,7 @@ A tool is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc s
 You can use any BPMN element or connector as a tool. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for more details.
 
 :::note See a full example
-For a complete, step-by-step walkthrough that applies all the steps below, see [add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool).
+For this in the context of a running AI agent, see [add your first tool](/guides/getting-started-agentic-orchestration.md#step-4-add-your-first-tool).
 :::
 
 ## Add an element inside the ad-hoc sub-process
@@ -64,6 +64,10 @@ Clear, specific descriptions significantly improve the reliability of tool selec
    - When the LLM should use it.
    - When it should not, especially if two tools have overlapping purposes.
    - Any constraints or expected inputs.
+
+:::note
+Modeler provides [modeling guidance](/components/modeler/reference/modeling-guidance/rules/agent-tool-documentation.md) that flags tools with missing or empty documentation as you model.
+:::
 
 ### Example: weak vs. strong description
 
@@ -147,9 +151,20 @@ Whichever approach you use, the following applies:
 
 See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) for more details, including parameter types, optional parameters, and JSON Schema constraints.
 
+:::note
+Modeler provides [modeling guidance](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md) that flags malformed `fromAi()` calls as you model. In Web Modeler, you can also [autofill a starter `fromAi()` call](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#autofill-a-fromai-input) into a blank input.
+:::
+
 ## Return the result as `toolCallResult`
 
 After the tool executes, its output must be returned in a [process variable](/reference/glossary.md#process-variable) named `toolCallResult` so the AI Agent connector can pass it back to the LLM.
+
+At runtime, each tool call produces one `toolCallResult`. The ad-hoc sub-process's multi-instance output collection aggregates these into `toolCallResults`, which the AI Agent connector reads to build the LLM's response.
+
+:::note
+Modeler provides [modeling guidance](/components/modeler/reference/modeling-guidance/rules/agent-tool-output-key.md) that flags tools that do not set a result or set it under the wrong variable name.
+In Web Modeler, you can also [autofill the `toolCallResult` output](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#autofill-a-toolcallresult-output).
+:::
 
 How you set `toolCallResult` depends on the BPMN element type that implements your tool. For example, a connector task exposes a dedicated [result expression](/components/connectors/use-connectors/index.md#result-expression) field, a regular task uses [output mappings](/components/concepts/variables.md#output-mappings), and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:
 

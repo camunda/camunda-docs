@@ -19,11 +19,13 @@ A tool is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc s
 - **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function in input mappings.
 - A **result**: the tool's output, returned to the LLM as `toolCallResult`.
 
+Web Modeler can help you fill in both the input parameters and the result. See [assisted tool configuration in Web Modeler](#assisted-tool-configuration-in-web-modeler) for more details.
+
 ### Which elements are resolved as tools
 
-When resolving the available tools within an ad-hoc sub-process, the AI agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
+When resolving the available tools within an ad-hoc sub-process, the AI agent will take all elements into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
 
-For example, in the following image the activities marked in green are the ones that will be considered as tools:
+For example, in the following image the elements marked in green are the ones that will be considered as tools:
 
 ![AI Agent tool resolution](../img/ai-agent-tool-resolution.png)
 
