@@ -100,6 +100,7 @@ module.exports = {
       },
       items: [
         "components/agentic-orchestration/ai-agents",
+        "components/agentic-orchestration/agent-definitions-and-instances",
         "components/agentic-orchestration/camunda-provided-llm",
         "components/agentic-orchestration/ao-design",
         {
@@ -1945,6 +1946,7 @@ module.exports = {
               },
               items: [
                 "self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index",
+                "self-managed/deployment/helm/operational-tasks/deploy-multiple-optimize-instances",
                 "self-managed/deployment/helm/operational-tasks/diagnostics",
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
@@ -2186,6 +2188,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/rdbms/rdbms-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/in-process-restore",
             {
               "Backup Management API": [
                 "self-managed/operational-guides/backup-restore/optimize-backup",
@@ -2368,6 +2371,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/zeebe/operations/management-api",
                     "self-managed/components/orchestration-cluster/zeebe/operations/backups",
                     "self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/modes",
                   ],
                 },
                 {
@@ -2473,6 +2477,7 @@ module.exports = {
                 "self-managed/components/optimize/configuration/object-variables",
                 "self-managed/components/optimize/configuration/variable-import",
                 "self-managed/components/optimize/configuration/multi-tenancy",
+                "self-managed/components/optimize/configuration/optimize-export-filtering",
               ],
             },
           ],

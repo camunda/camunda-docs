@@ -40,6 +40,14 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 :::
 
+## Optimize data filters in Console
+
+On SaaS, you can now configure Optimize export filters directly in Console cluster settings. No Helm values or configuration files required. Use the **Data filters** section in cluster settings to control which process definitions (by `bpmnProcessId`) and variable names reach Optimize.
+
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
+
+<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
 ## Web Modeler data
 
 On 29 August 2026, your Web Modeler data will receive three updates:
@@ -162,6 +170,17 @@ Business ID is now a first-class, searchable attribute across the Orchestration 
 - **Late assignment** — assign a Business ID to a running instance that has none, when uniqueness is disabled. Assignment is forward-only: only artifacts created after the assignment carry it.
 
 <p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
+## Connector operations
+
+Connectors are now discoverable by the operation you want to perform, not only by the product they connect to. When you search in the create, append, or change element menu, the operations of every built-in connector appear as their own entries, so searching for `upload object` or `send email` takes you straight to the connectors that can do it. Selecting an operation applies the connector with that operation preselected, and connectors with several operations present them as a nested menu.
+
+Two changes come with this:
+
+- Connectors that provide a single operation are [renamed after the operation they perform](/reference/announcements-release-notes/8100/8100-announcements.md#connectors-with-a-single-operation-are-renamed-after-the-operation). Existing process models keep running unchanged.
+- Element templates support the `steps` and `presets` keys, so your own templates can offer the same guided operation selection.
+
+<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
 
 ## Helm chart deployment
 

@@ -49,10 +49,10 @@ You can test the following BPMN elements:
 - **Task elements** — service tasks, script tasks, user tasks, business rule tasks, and send tasks.
 - **Sub-processes** — embedded sub-processes can be tested directly, executing all contained elements.
 - **Tasks inside sub-processes** — individual tasks within a sub-process can also be tested.
+- **Call activities** — call activities can be tested directly, executing the deployed called process.
 
 The following elements are not supported:
 
-- Call activities
 - Events (start, end, boundary)
 - Gateways
 

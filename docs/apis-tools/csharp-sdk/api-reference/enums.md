@@ -7,7 +7,7 @@ mdx:
 
 # Enums
 
-Enumeration types (89 enums).
+Enumeration types (95 enums).
 
 ## AgentInstanceHistoryCommitStatusEnum
 
@@ -210,6 +210,15 @@ The field to sort by.
 | `ResourcePropertyName` |             |
 | `ResourceType`         |             |
 
+## BackupType
+
+The type of the backup.
+
+| Value             | Description |
+| ----------------- | ----------- |
+| `MANUALBACKUP`    |             |
+| `SCHEDULEDBACKUP` |             |
+
 ## BatchOperationErrorType
 
 The type of the error that occurred during the batch operation.
@@ -313,6 +322,16 @@ Auth error codes matching the JS SDK.
 | `TokenExpired`            |             |
 | `OAuthConfigMissing`      |             |
 | `BasicCredentialsMissing` |             |
+
+## CheckpointType
+
+The type of the checkpoint.
+
+| Value             | Description |
+| ----------------- | ----------- |
+| `MARKER`          |             |
+| `SCHEDULEDBACKUP` |             |
+| `MANUALBACKUP`    |             |
 
 ## CloudStage
 
@@ -673,6 +692,7 @@ Incident error type with a defined set of values.
 | `JOBNORETRIES`               |             |
 | `MESSAGESIZEEXCEEDED`        |             |
 | `RESOURCENOTFOUND`           |             |
+| `SECRETRESOLUTIONERROR`      |             |
 | `TASKLISTENERNORETRIES`      |             |
 | `UNHANDLEDERROREVENT`        |             |
 | `UNKNOWN`                    |             |
@@ -857,6 +877,15 @@ The type of message subscription.
 | `STARTEVENT`   |             |
 | `PROCESSEVENT` |             |
 
+## Mode
+
+The operating mode of a cluster's partitions.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `PROCESSING` |             |
+| `RECOVERING` |             |
+
 ## OwnerTypeEnum
 
 The type of the owner of permissions.
@@ -956,6 +985,17 @@ Specifies the type of permissions.
 | `UPDATEUSERTASK`                               |             |
 | `UPDATETASKLISTENER`                           |             |
 
+## ProcessDefinitionFilterState
+
+Filter by the process definition's state.
+
+When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases). Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage.
+
+| Value     | Description |
+| --------- | ----------- |
+| `ACTIVE`  |             |
+| `DELETED` |             |
+
 ## ProcessDefinitionInstanceStatisticsQuerySortRequestField
 
 The field to sort by.
@@ -978,6 +1018,15 @@ The field to sort by.
 | `ProcessDefinitionVersion`            |             |
 | `ActiveInstancesWithIncidentCount`    |             |
 | `ActiveInstancesWithoutIncidentCount` |             |
+
+## ProcessDefinitionResultState
+
+The state of this process definition.
+
+| Value     | Description |
+| --------- | ----------- |
+| `ACTIVE`  |             |
+| `DELETED` |             |
 
 ## ProcessDefinitionSearchQuerySortRequestField
 
@@ -1009,6 +1058,7 @@ The field to sort by.
 | `ParentElementInstanceKey`    |             |
 | `StartDate`                   |             |
 | `EndDate`                     |             |
+| `SuspendedDate`               |             |
 | `State`                       |             |
 | `HasIncident`                 |             |
 | `TenantId`                    |             |
@@ -1022,6 +1072,7 @@ Process instance states
 | ------------ | ----------- |
 | `ACTIVE`     |             |
 | `COMPLETED`  |             |
+| `SUSPENDED`  |             |
 | `TERMINATED` |             |
 
 ## ResourceSearchQuerySortRequestField
@@ -1123,6 +1174,19 @@ The order in which to sort the related field.
 | ------ | ----------- |
 | `ASC`  |             |
 | `DESC` |             |
+
+## StateCode
+
+The aggregated state of the backup, computed from the state of each partition.
+
+| Value          | Description |
+| -------------- | ----------- |
+| `DOESNOTEXIST` |             |
+| `INPROGRESS`   |             |
+| `COMPLETED`    |             |
+| `FAILED`       |             |
+| `INCOMPLETE`   |             |
+| `DELETED`      |             |
 
 ## TenantClientSearchQuerySortRequestField
 
