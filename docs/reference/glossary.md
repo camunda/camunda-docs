@@ -165,6 +165,12 @@ A collection of reusable automation assets, such as element templates. The catal
 
 - [Catalog](/components/hub/organization/manage-catalog/index.md)
 
+### Child process instance
+
+A [process instance](#process-instance) created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) in another process instance, the [parent process instance](#parent-process-instance).
+
+See also: [Parent process instance](#parent-process-instance), [Root process instance](#root-process-instance)
+
 ### Client
 
 See [Zeebe Client](#zeebe-client).
@@ -605,7 +611,15 @@ A process instance can be active (currently running), completed, or terminated.
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
 
-A process can call another process via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances. See [process instance hierarchy](/components/concepts/processes.md#process-instance-hierarchy) for the parent, child, and root process instance terminology.
+A process can call another process via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances: a [parent process instance](#parent-process-instance) that contains the call activity, the [child process instance](#child-process-instance) it creates, and the [root process instance](#root-process-instance) at the top of the hierarchy.
+
+### Parent process instance
+
+The process instance that contains the [call activity](/components/modeler/bpmn/call-activities/call-activities.md) that created a [child process instance](#child-process-instance).
+
+A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
+
+See also: [Child process instance](#child-process-instance), [Root process instance](#root-process-instance)
 
 ### Process instance tag
 
@@ -721,6 +735,12 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 ### Robotic process automation (RPA)
 
 The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
+
+### Root process instance
+
+The [process instance](#process-instance) at the top of a hierarchy of related process instances. It was started directly, not created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md).
+
+See also: [Parent process instance](#parent-process-instance), [Child process instance](#child-process-instance)
 
 ## S
 
