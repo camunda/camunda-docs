@@ -60,6 +60,8 @@ It is critical that no Camunda components are running during the restore. Runnin
 
 ## Step 1: Restore Zeebe from its primary storage backup
 
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
+
 Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
 :::warning

@@ -11,7 +11,7 @@ mdx:
 The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
 :::
 
-Request and response model classes (630 types).
+Request and response model classes (644 types).
 
 ## Quick Reference
 
@@ -132,6 +132,9 @@ Request and response model classes (630 types).
 - [AuthorizationSearchQuerySortRequest](#authorizationsearchquerysortrequest) — AuthorizationSearchQuerySortRequest
 - [AuthorizationSearchResult](#authorizationsearchresult) — AuthorizationSearchResult
 - [BackpressureState](#backpressurestate)
+- [BackupId](#backupid) — The id of the backup
+- [BackupIdPrefix](#backupidprefix) — A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id starting with the given prefix
+- [BackupInfo](#backupinfo) — Detailed status of a runtime backup
 - [BaseProcessInstanceFilterFields](#baseprocessinstancefilterfields) — Base process instance search filter
 - [BasicStringFilter](#basicstringfilter) — Basic advanced string filter
 - [BasicStringFilterProperty](#basicstringfilterproperty) — String property with basic advanced search capabilities
@@ -168,6 +171,7 @@ Request and response model classes (630 types).
 - [CategoryExactMatch](#categoryexactmatch) — Matches the value exactly
 - [CategoryFilterProperty](#categoryfilterproperty) — AuditLogCategoryEnum property with full advanced search capabilities
 - [Changeset](#changeset) — JSON object with changed task attribute values
+- [CheckpointId](#checkpointid) — The id of the checkpoint
 - [ClientId](#clientid) — The unique identifier of an OAuth client
 - [ClockPinRequest](#clockpinrequest) — ClockPinRequest
 - [CloudConfigurationResponse](#cloudconfigurationresponse) — Configuration for SaaS/cloud-specific settings
@@ -435,6 +439,11 @@ Request and response model classes (630 types).
 - [OperationTypeExactMatch](#operationtypeexactmatch) — Matches the value exactly
 - [OperationTypeFilterProperty](#operationtypefilterproperty) — AuditLogOperationTypeEnum property with full advanced search capabilities
 - [Partition](#partition) — Provides information on a partition within a broker node
+- [PartitionBackupInfo](#partitionbackupinfo) — Detailed info of the backup for a given partition
+- [PartitionBackupRange](#partitionbackuprange) — Information about one backup range for a partition
+- [PartitionBackupState](#partitionbackupstate) — Detailed information about the backup state for a given partition
+- [PartitionCheckpointState](#partitioncheckpointstate) — Detailed information about the checkpoint state for a given partition
+- [PartitionId](#partitionid) — The id of a partition
 - [ProblemDetail](#problemdetail) — A Problem detail object as described in [RFC 9457](https://www
 - [ProcessDefinitionElementStatisticsQuery](#processdefinitionelementstatisticsquery) — Process definition element statistics request
 - [ProcessDefinitionElementStatisticsQueryResult](#processdefinitionelementstatisticsqueryresult) — Process definition element statistics query response
@@ -540,12 +549,15 @@ Request and response model classes (630 types).
 - [RoleUserSearchQueryRequest](#roleusersearchqueryrequest) — RoleUserSearchQueryRequest
 - [RoleUserSearchQuerySortRequest](#roleusersearchquerysortrequest) — RoleUserSearchQuerySortRequest
 - [RoleUserSearchResult](#roleusersearchresult) — RoleUserSearchResult
+- [RuntimeBackupState](#runtimebackupstate) — Information about the checkpoint and backup state of the physical tenant
 - [ScopeKeyExactMatch](#scopekeyexactmatch) — Matches the value exactly
 - [ScopeKeyFilterProperty](#scopekeyfilterproperty) — ScopeKey property with full advanced search capabilities
 - [SearchQueryPageRequest](#searchquerypagerequest) — Pagination criteria
 - [SearchQueryPageResponse](#searchquerypageresponse) — Pagination information about the search results
 - [SearchQueryRequest](#searchqueryrequest) — SearchQueryRequest
 - [SearchQueryResponse](#searchqueryresponse) — SearchQueryResponse
+- [SecretListRequest](#secretlistrequest) — Reserved for future filtering options
+- [SecretListResult](#secretlistresult) — The secret references the caller is authorized to see
 - [SecretResolutionError](#secretresolutionerror) — SecretResolutionError
 - [SecretResolveRequest](#secretresolverequest) — SecretResolveRequest
 - [SecretResolveResult](#secretresolveresult) — The per-reference outcome of a resolve request
@@ -563,6 +575,8 @@ Request and response model classes (630 types).
 - [SuspendProcessInstanceRequest](#suspendprocessinstancerequest) — SuspendProcessInstanceRequest
 - [SystemConfigurationResponse](#systemconfigurationresponse) — Envelope for all system configuration sections
 - [Tag](#tag) — A tag
+- [TakeRuntimeBackupRequest](#takeruntimebackuprequest) — Request body for taking a runtime backup
+- [TakeRuntimeBackupResponse](#takeruntimebackupresponse) — Response body for taking a runtime backup
 - [TenantClientResult](#tenantclientresult) — TenantClientResult
 - [TenantClientSearchQueryRequest](#tenantclientsearchqueryrequest) — TenantClientSearchQueryRequest
 - [TenantClientSearchQuerySortRequest](#tenantclientsearchquerysortrequest) — TenantClientSearchQuerySortRequest
@@ -2522,6 +2536,50 @@ public sealed class BackpressureState
 | `PermitsMax`  | `Nullable<Int32>` |             |
 | `Consecutive` | `Int32`           |             |
 
+## BackupId
+
+The id of the backup. Must be a positive numerical value. As backups are logically ordered by their ids (ascending), each successive backup must use a higher id than the previous one.
+
+```csharp
+public readonly record struct BackupId : ICamundaLongKey, IEquatable<BackupId>
+```
+
+| Property | Type    | Description                |
+| -------- | ------- | -------------------------- |
+| `Value`  | `Int64` | The underlying long value. |
+
+## BackupIdPrefix
+
+A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id starting with the given prefix.
+
+```csharp
+public readonly record struct BackupIdPrefix : ICamundaKey, IEquatable<BackupIdPrefix>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## BackupInfo
+
+Detailed status of a runtime backup. The aggregated state is computed from the backup state of each partition as:
+
+- If the backup of all partitions is 'COMPLETED', the overall state is 'COMPLETED'.
+- If one partition is 'FAILED', the overall state is 'FAILED'.
+- Otherwise, if one partition is 'DOES_NOT_EXIST', the overall state is 'INCOMPLETE'.
+- Otherwise, if one partition is 'IN_PROGRESS', the overall state is 'IN_PROGRESS'.
+
+```csharp
+public sealed class BackupInfo
+```
+
+| Property        | Type                        | Description                                                                                          |
+| --------------- | --------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `BackupId`      | `BackupId`                  | The id of the backup.                                                                                |
+| `State`         | `StateCode`                 | The aggregated state of the backup.                                                                  |
+| `FailureReason` | `String`                    | Reason for failure if the state is 'FAILED'.                                                         |
+| `Details`       | `List<PartitionBackupInfo>` | Detailed status of the backup per partition. Always contains every partition of the physical tenant. |
+
 ## BaseProcessInstanceFilterFields
 
 Base process instance search filter.
@@ -2536,6 +2594,7 @@ public sealed class BaseProcessInstanceFilterFields
 | `EndDate`                    | `DateTimeFilterProperty`             | The end date.                                                                                                                                                                                                                            |
 | `State`                      | `ProcessInstanceStateFilterProperty` | The process instance state.                                                                                                                                                                                                              |
 | `HasIncident`                | `Nullable<Boolean>`                  | Whether this process instance has a related incident or not.                                                                                                                                                                             |
+| `SuspendedDate`              | `DateTimeFilterProperty`             | The time this process instance most recently entered the SUSPENDED state. This is cleared (null) again once the process instance is resumed.                                                                                             |
 | `TenantId`                   | `StringFilterProperty`               | The tenant id.                                                                                                                                                                                                                           |
 | `Variables`                  | `List<VariableValueFilterProperty>`  | The process instance variables.                                                                                                                                                                                                          |
 | `ProcessInstanceKey`         | `ProcessInstanceKeyFilterProperty`   | The key of this process instance.                                                                                                                                                                                                        |
@@ -3053,6 +3112,18 @@ public sealed class Changeset
 | `CandidateUsers`  | `List<String>`             | The list of candidate users of the task. Reset by providing an empty list.  |
 | `CandidateGroups` | `List<String>`             | The list of candidate groups of the task. Reset by providing an empty list. |
 | `Priority`        | `Nullable<Int32>`          | The priority of the task.                                                   |
+
+## CheckpointId
+
+The id of the checkpoint. Must be a non-negative numerical value. As checkpoints are logically ordered by their ids (ascending), each successive checkpoint must use a higher id than the previous one.
+
+```csharp
+public readonly record struct CheckpointId : ICamundaLongKey, IEquatable<CheckpointId>
+```
+
+| Property | Type    | Description                |
+| -------- | ------- | -------------------------- |
+| `Value`  | `Int64` | The underlying long value. |
 
 ## ClientId
 
@@ -7050,6 +7121,86 @@ public sealed class Partition
 | `Health`      | `PartitionHealth` | Describes the current health of the partition.                                             |
 | `State`       | `PartitionState`  | Describes the current operational state of the partition within the cluster configuration. |
 
+## PartitionBackupInfo
+
+Detailed info of the backup for a given partition.
+
+```csharp
+public sealed class PartitionBackupInfo
+```
+
+| Property             | Type                       | Description                                                                                                                 |
+| -------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `PartitionId`        | `PartitionId`              | The id of the partition.                                                                                                    |
+| `State`              | `StateCode`                | The state of the backup on this partition.                                                                                  |
+| `FailureReason`      | `String`                   | Failure reason if the state is 'FAILED'.                                                                                    |
+| `CreatedAt`          | `Nullable<DateTimeOffset>` | The timestamp at which the backup was started on this partition.                                                            |
+| `LastUpdatedAt`      | `Nullable<DateTimeOffset>` | The timestamp at which the backup was last updated on this partition, e.g. changed state from 'IN_PROGRESS' to 'COMPLETED'. |
+| `SnapshotId`         | `String`                   | The id of the snapshot which is included in this backup.                                                                    |
+| `FirstLogPosition`   | `Nullable<Int64>`          | The first log position included in this backup.                                                                             |
+| `CheckpointPosition` | `Nullable<Int64>`          | The position of the checkpoint for this backup.                                                                             |
+| `BrokerId`           | `Nullable<Int32>`          | The id of the broker from which the backup was taken for this partition.                                                    |
+| `BrokerVersion`      | `String`                   | The version of the broker from which the backup was taken for this partition.                                               |
+
+## PartitionBackupRange
+
+Information about one backup range for a partition.
+
+```csharp
+public sealed class PartitionBackupRange
+```
+
+| Property      | Type                   | Description                     |
+| ------------- | ---------------------- | ------------------------------- |
+| `PartitionId` | `PartitionId`          | The id of the partition.        |
+| `Start`       | `PartitionBackupState` | The oldest backup in the range. |
+| `End`         | `PartitionBackupState` | The newest backup in the range. |
+
+## PartitionBackupState
+
+Detailed information about the backup state for a given partition.
+
+```csharp
+public sealed class PartitionBackupState
+```
+
+| Property              | Type                    | Description                                                                                                                                           |
+| --------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CheckpointId`        | `CheckpointId`          | The id of the checkpoint this backup is based on.                                                                                                     |
+| `CheckpointType`      | `BackupType`            | The type of the backup.                                                                                                                               |
+| `PartitionId`         | `Nullable<PartitionId>` | The id of the partition. Omitted when nested inside a backup range's `start`/`end`, where the partition is already identified by the enclosing range. |
+| `CheckpointPosition`  | `Int64`                 | The log position of the checkpoint this backup is based on.                                                                                           |
+| `FirstLogPosition`    | `Int64`                 | The first log position included in this backup.                                                                                                       |
+| `CheckpointTimestamp` | `DateTimeOffset`        | The timestamp at which the checkpoint was created.                                                                                                    |
+
+## PartitionCheckpointState
+
+Detailed information about the checkpoint state for a given partition.
+
+```csharp
+public sealed class PartitionCheckpointState
+```
+
+| Property              | Type             | Description                                        |
+| --------------------- | ---------------- | -------------------------------------------------- |
+| `CheckpointId`        | `CheckpointId`   | The id of the checkpoint.                          |
+| `CheckpointType`      | `CheckpointType` | The type of the checkpoint.                        |
+| `PartitionId`         | `PartitionId`    | The id of the partition.                           |
+| `CheckpointPosition`  | `Int64`          | The log position of the checkpoint.                |
+| `CheckpointTimestamp` | `DateTimeOffset` | The timestamp at which the checkpoint was created. |
+
+## PartitionId
+
+The id of a partition. Always a positive number greater than or equal to 1.
+
+```csharp
+public readonly record struct PartitionId : ICamundaLongKey, IEquatable<PartitionId>
+```
+
+| Property | Type    | Description                |
+| -------- | ------- | -------------------------- |
+| `Value`  | `Int64` | The underlying long value. |
+
 ## ProblemDetail
 
 A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.
@@ -7098,18 +7249,18 @@ Process definition search filter.
 public sealed class ProcessDefinitionFilter
 ```
 
-| Property               | Type                             | Description                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Name`                 | `StringFilterProperty`           | Name of this process definition.                                                                                                                                                                                                                                                                                                                                                                             |
-| `IsLatestVersion`      | `Nullable<Boolean>`              | Whether to only return the latest version of each process definition. When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`. The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`. When using this filter, sorting is limited to `processDefinitionId` and `tenantId` fields only. |
-| `ResourceName`         | `String`                         | Resource name of this process definition.                                                                                                                                                                                                                                                                                                                                                                    |
-| `Version`              | `Nullable<Int32>`                | Version of this process definition.                                                                                                                                                                                                                                                                                                                                                                          |
-| `VersionTag`           | `String`                         | Version tag of this process definition.                                                                                                                                                                                                                                                                                                                                                                      |
-| `ProcessDefinitionId`  | `StringFilterProperty`           | Process definition ID of this process definition.                                                                                                                                                                                                                                                                                                                                                            |
-| `TenantId`             | `Nullable<TenantId>`             | Tenant ID of this process definition.                                                                                                                                                                                                                                                                                                                                                                        |
-| `ProcessDefinitionKey` | `Nullable<ProcessDefinitionKey>` | The key for this process definition.                                                                                                                                                                                                                                                                                                                                                                         |
-| `HasStartForm`         | `Nullable<Boolean>`              | Indicates whether the start event of the process has an associated Form Key.                                                                                                                                                                                                                                                                                                                                 |
-| `IsDeleted`            | `Nullable<Boolean>`              | Filter by whether the process definition has been deleted. When not set, both deleted and non-deleted process definitions are returned. Set to `false` to exclude deleted definitions (recommended for most use cases). Set to `true` to return only deleted definitions that are still retained in secondary storage.                                                                                       |
+| Property               | Type                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Name`                 | `StringFilterProperty`                   | Name of this process definition.                                                                                                                                                                                                                                                                                                                                                                             |
+| `IsLatestVersion`      | `Nullable<Boolean>`                      | Whether to only return the latest version of each process definition. When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`. The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`. When using this filter, sorting is limited to `processDefinitionId` and `tenantId` fields only. |
+| `ResourceName`         | `String`                                 | Resource name of this process definition.                                                                                                                                                                                                                                                                                                                                                                    |
+| `Version`              | `Nullable<Int32>`                        | Version of this process definition.                                                                                                                                                                                                                                                                                                                                                                          |
+| `VersionTag`           | `String`                                 | Version tag of this process definition.                                                                                                                                                                                                                                                                                                                                                                      |
+| `ProcessDefinitionId`  | `StringFilterProperty`                   | Process definition ID of this process definition.                                                                                                                                                                                                                                                                                                                                                            |
+| `TenantId`             | `Nullable<TenantId>`                     | Tenant ID of this process definition.                                                                                                                                                                                                                                                                                                                                                                        |
+| `ProcessDefinitionKey` | `Nullable<ProcessDefinitionKey>`         | The key for this process definition.                                                                                                                                                                                                                                                                                                                                                                         |
+| `HasStartForm`         | `Nullable<Boolean>`                      | Indicates whether the start event of the process has an associated Form Key.                                                                                                                                                                                                                                                                                                                                 |
+| `State`                | `Nullable<ProcessDefinitionFilterState>` | Filter by the process definition's state. When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases). Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage.                                                                                                      |
 
 ## ProcessDefinitionId
 
@@ -7359,17 +7510,17 @@ ProcessDefinitionResult
 public sealed class ProcessDefinitionResult
 ```
 
-| Property               | Type                   | Description                                                                                  |
-| ---------------------- | ---------------------- | -------------------------------------------------------------------------------------------- |
-| `Name`                 | `String`               | Name of this process definition.                                                             |
-| `ResourceName`         | `String`               | Resource name for this process definition.                                                   |
-| `Version`              | `Int32`                | Version of this process definition.                                                          |
-| `VersionTag`           | `String`               | Version tag of this process definition.                                                      |
-| `ProcessDefinitionId`  | `ProcessDefinitionId`  | Process definition ID of this process definition.                                            |
-| `TenantId`             | `TenantId`             | Tenant ID of this process definition.                                                        |
-| `ProcessDefinitionKey` | `ProcessDefinitionKey` | The key for this process definition.                                                         |
-| `HasStartForm`         | `Boolean`              | Indicates whether the start event of the process has an associated Form Key.                 |
-| `IsDeleted`            | `Boolean`              | Whether this process definition has been deleted but is still retained in secondary storage. |
+| Property               | Type                           | Description                                                                  |
+| ---------------------- | ------------------------------ | ---------------------------------------------------------------------------- |
+| `Name`                 | `String`                       | Name of this process definition.                                             |
+| `ResourceName`         | `String`                       | Resource name for this process definition.                                   |
+| `Version`              | `Int32`                        | Version of this process definition.                                          |
+| `VersionTag`           | `String`                       | Version tag of this process definition.                                      |
+| `ProcessDefinitionId`  | `ProcessDefinitionId`          | Process definition ID of this process definition.                            |
+| `TenantId`             | `TenantId`                     | Tenant ID of this process definition.                                        |
+| `ProcessDefinitionKey` | `ProcessDefinitionKey`         | The key for this process definition.                                         |
+| `HasStartForm`         | `Boolean`                      | Indicates whether the start event of the process has an associated Form Key. |
+| `State`                | `ProcessDefinitionResultState` | The state of this process definition.                                        |
 
 ## ProcessDefinitionSearchQuery
 
@@ -7425,6 +7576,7 @@ public sealed class ProcessDefinitionStatisticsFilter
 | `EndDate`                    | `DateTimeFilterProperty`                | The end date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `State`                      | `ProcessInstanceStateFilterProperty`    | The process instance state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `HasIncident`                | `Nullable<Boolean>`                     | Whether this process instance has a related incident or not.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `SuspendedDate`              | `DateTimeFilterProperty`                | The time this process instance most recently entered the SUSPENDED state. This is cleared (null) again once the process instance is resumed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `TenantId`                   | `StringFilterProperty`                  | The tenant id.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `Variables`                  | `List<VariableValueFilterProperty>`     | The process instance variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `ProcessInstanceKey`         | `ProcessInstanceKeyFilterProperty`      | The key of this process instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -7677,6 +7829,7 @@ public sealed class ProcessInstanceFilter
 | `EndDate`                     | `DateTimeFilterProperty`             | The end date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `State`                       | `ProcessInstanceStateFilterProperty` | The process instance state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | `HasIncident`                 | `Nullable<Boolean>`                  | Whether this process instance has a related incident or not.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `SuspendedDate`               | `DateTimeFilterProperty`             | The time this process instance most recently entered the SUSPENDED state. This is cleared (null) again once the process instance is resumed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `TenantId`                    | `StringFilterProperty`               | The tenant id.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | `Variables`                   | `List<VariableValueFilterProperty>`  | The process instance variables.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `ProcessInstanceKey`          | `ProcessInstanceKeyFilterProperty`   | The key of this process instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -7713,6 +7866,7 @@ public sealed class ProcessInstanceFilterFields
 | `EndDate`                     | `DateTimeFilterProperty`             | The end date.                                                                                                                                                                                                                            |
 | `State`                       | `ProcessInstanceStateFilterProperty` | The process instance state.                                                                                                                                                                                                              |
 | `HasIncident`                 | `Nullable<Boolean>`                  | Whether this process instance has a related incident or not.                                                                                                                                                                             |
+| `SuspendedDate`               | `DateTimeFilterProperty`             | The time this process instance most recently entered the SUSPENDED state. This is cleared (null) again once the process instance is resumed.                                                                                             |
 | `TenantId`                    | `StringFilterProperty`               | The tenant id.                                                                                                                                                                                                                           |
 | `Variables`                   | `List<VariableValueFilterProperty>`  | The process instance variables.                                                                                                                                                                                                          |
 | `ProcessInstanceKey`          | `ProcessInstanceKeyFilterProperty`   | The key of this process instance.                                                                                                                                                                                                        |
@@ -7945,6 +8099,7 @@ public sealed class ProcessInstanceResult
 | `StartDate`                   | `DateTimeOffset`               | The start time of the process instance.                                                                                                                                                                                                     |
 | `EndDate`                     | `Nullable<DateTimeOffset>`     | The completion or termination time of the process instance.                                                                                                                                                                                 |
 | `State`                       | `ProcessInstanceStateEnum`     | Process instance states                                                                                                                                                                                                                     |
+| `SuspendedDate`               | `Nullable<DateTimeOffset>`     | The time this process instance most recently entered the `SUSPENDED` state. This is `null` if the process instance is not currently suspended.                                                                                              |
 | `HasIncident`                 | `Boolean`                      | Whether this process instance has a related incident or not.                                                                                                                                                                                |
 | `TenantId`                    | `TenantId`                     | The unique identifier of the tenant.                                                                                                                                                                                                        |
 | `ProcessInstanceKey`          | `ProcessInstanceKey`           | The key of this process instance.                                                                                                                                                                                                           |
@@ -8559,6 +8714,20 @@ public sealed class RoleUserSearchResult
 | `Items`  | `List<RoleUserResult>`    | The matching users.                              |
 | `Page`   | `SearchQueryPageResponse` | Pagination information about the search results. |
 
+## RuntimeBackupState
+
+Information about the checkpoint and backup state of the physical tenant.
+
+```csharp
+public sealed class RuntimeBackupState
+```
+
+| Property           | Type                             | Description                          |
+| ------------------ | -------------------------------- | ------------------------------------ |
+| `CheckpointStates` | `List<PartitionCheckpointState>` | List of partition checkpoint states. |
+| `BackupStates`     | `List<PartitionBackupState>`     | List of partition backup states.     |
+| `Ranges`           | `List<PartitionBackupRange>`     | List of partition backup ranges.     |
+
 ## ScopeKeyExactMatch
 
 Matches the value exactly.
@@ -8634,6 +8803,28 @@ public sealed class SearchQueryResponse
 | Property | Type                      | Description                                      |
 | -------- | ------------------------- | ------------------------------------------------ |
 | `Page`   | `SearchQueryPageResponse` | Pagination information about the search results. |
+
+## SecretListRequest
+
+Reserved for future filtering options. Currently takes no properties. The request body is optional: omitting it (or sending an empty object) applies no filters.
+
+```csharp
+public sealed class SecretListRequest
+```
+
+## SecretListResult
+
+The secret references the caller is authorized to see.
+
+Unbounded for now: Phase 1's backend is mocked with at most 3 references. Pagination is expected to land here before GA, once a real secret store can return a tenant's full enumeration in one response. This is an alpha endpoint, so that is not yet a breaking-contract concern.
+
+```csharp
+public sealed class SecretListResult
+```
+
+| Property     | Type           | Description                                                 |
+| ------------ | -------------- | ----------------------------------------------------------- |
+| `References` | `List<String>` | The secret references, each of the form `camunda.secrets.`. |
 
 ## SecretResolutionError
 
@@ -8854,6 +9045,30 @@ public readonly record struct Tag : ICamundaKey, IEquatable<Tag>
 | Property | Type     | Description                  |
 | -------- | -------- | ---------------------------- |
 | `Value`  | `String` | The underlying string value. |
+
+## TakeRuntimeBackupRequest
+
+Request body for taking a runtime backup.
+
+```csharp
+public sealed class TakeRuntimeBackupRequest
+```
+
+| Property   | Type                 | Description                                                                                                                                    |
+| ---------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BackupId` | `Nullable<BackupId>` | The id of the backup to take. Must be omitted if continuous backups and/or a backup or checkpoint schedule is enabled for the physical tenant. |
+
+## TakeRuntimeBackupResponse
+
+Response body for taking a runtime backup.
+
+```csharp
+public sealed class TakeRuntimeBackupResponse
+```
+
+| Property   | Type       | Description                                   |
+| ---------- | ---------- | --------------------------------------------- |
+| `BackupId` | `BackupId` | The id of the backup that has been scheduled. |
 
 ## TenantClientResult
 
