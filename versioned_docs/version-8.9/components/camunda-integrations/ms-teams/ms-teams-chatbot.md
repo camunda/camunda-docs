@@ -110,7 +110,7 @@ To configure notifications, see [notification rules](./ms-teams-notifications.md
 
 Notification cards are interactive. You can assign, complete, or manage tasks directly from the card.
 
-Cards update automatically to reflect the latest task state. For example, when someone else completes or assigns the task. On SaaS, automatic updates require a cluster running generation `8.9 gen13` or later with [App Integrations enabled](./ms-teams-notifications.md#enable-notification-delivery-for-your-cluster).
+Cards update automatically to reflect the latest task state. For example, when someone else completes or assigns the task. On SaaS, automatic updates require a cluster running generation `8.9 gen13` or later with [app integrations extensions enabled](./ms-teams-notifications.md#enable-notification-delivery-for-your-cluster).
 
 ## Error handling
 
