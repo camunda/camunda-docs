@@ -298,7 +298,7 @@ In your deployment, mount the secrets as environment variables on the container 
 
 Replace the placeholder values with your actual settings.
 
-- Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-app-cli).
+- Use the credentials from [Step 1](#step-1-create-applications-in-camunda-identity) and the Teams configuration from [Step 2](#step-2-set-up-the-microsoft-teams-camunda-app-using-cli).
 - The `exporter.apiKey` must match the API key configured in the Orchestration Cluster Helm chart in [Step 3](#step-3-configure-the-app-integrations-exporter).
 - For production deployments, replace sensitive values with environment variable references as described in [Secret management](#secret-management).
 - See [Auth configuration](#auth-configuration) for the full `auth` block reference.
