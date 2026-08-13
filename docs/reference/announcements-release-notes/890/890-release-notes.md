@@ -340,6 +340,15 @@ The Camunda for Microsoft Teams app is now available for Self-Managed environmen
 
 <p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
 
+### Live task updates and assignment notifications in Microsoft Teams
+
+Camunda for Microsoft Teams now updates a notification card as its task is assigned, completed, or canceled, and notifies you when an existing task is later assigned to you. On SaaS, these capabilities require a cluster running generation `8.9 gen13` or later with **Enable App Integrations** turned on in the cluster settings.
+
+<ul>
+  <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/ms-teams/ms-teams-notifications.md#enable-notification-delivery-for-your-cluster)</span></li>
+  <li><span class="link-arrow">[Enable App Integrations](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations)</span></li>
+</ul>
+
 ## Migration from Camunda 7 to Camunda 8
 
 ### Conditional events support in Migration Analyzer and Diagram Converter

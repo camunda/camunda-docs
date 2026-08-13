@@ -131,17 +131,18 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 ### 8.9.x patch releases
 
-The following key changes were also released as part of an 8.9.x patch release.
+The following key changes were also released as part of an 8.9.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Type            | Key change                                                                                                       |
-| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                   |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)  |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                     |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
+| Patch release                                                    | Type            | Key change                                                                                                             |
+| :--------------------------------------------------------------- | :-------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                        |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)       |
+| SaaS `8.9 gen13`                                                 | Change          | [Microsoft Teams notifications require App Integrations to be enabled](#teams-notifications-require-app-integrations) |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                          |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)      |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)               |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                         |
 
 ## Agentic orchestration
 
@@ -1566,6 +1567,27 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 - Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
 
 <p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Microsoft Teams notifications require App Integrations to be enabled {#teams-notifications-require-app-integrations}
+
+Camunda 8 SaaS clusters running generation `8.9 gen13` or later deliver user task notifications to Microsoft Teams only when **Enable App Integrations** is turned on in the cluster settings. The setting is disabled by default, and only organization admins can change it.
+
+Clusters running earlier generations are unaffected and continue to deliver notifications without additional configuration.
+
+**Action:** After a cluster updates to generation `8.9 gen13` or later, an organization admin must turn on **Enable App Integrations** for existing [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md) to keep delivering. Enabling the setting also delivers notifications when an existing task is later assigned to you, and updates notification cards as a task is assigned, completed, or canceled.
+
+<p className="link-arrow">[Enable App Integrations](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations)</p>
 
 </div>
 </div>
