@@ -2,7 +2,7 @@
 id: connectors-runtime
 title: "Connectors runtime: Physical Tenant support"
 sidebar_label: "Connectors runtime"
-description: "Configure one Connectors runtime instance to serve multiple Physical Tenants, with per-tenant job workers, secret isolation, and inbound webhook routing."
+description: "Configure one Connectors runtime instance to serve multiple Physical Tenants, with per-tenant job workers, opt-in secret scoping, and inbound webhook routing."
 ---
 
 One Connectors runtime instance can register job workers and serve inbound connectors for multiple Physical Tenants. No separate runtime deployment per tenant is required.
@@ -46,12 +46,11 @@ graph TD
 
 ## How the runtime identifies the Physical Tenant
 
-The activated job record carries the `physicalTenantId` propagated through the broker request. The runtime uses this value to determine which Physical Tenant a job belongs to.
+The activated job record carries the `physicalTenantId`, propagated through the broker request. The runtime uses this value to determine which Physical Tenant a job belongs to.
 
-- `@JobWorker`-annotated methods fan out to **all configured clients** automatically — there is no `client` attribute to bind a worker to one tenant.
-- Workers are keyed by `(client, type)`, so each Physical Tenant gets its own registered worker per job type.
-- Fan-out is over **statically configured** `camunda.clients.*` entries only. A Physical Tenant only gets a job worker if it is explicitly configured as a client.
-- gRPC requests use the `Camunda-Physical-Tenant` header to target the correct tenant.
+- The runtime registers one job worker per configured client per connector type, so each Physical Tenant gets its own worker for each job type.
+- Registration covers **statically configured** `camunda.clients.*` entries only. A Physical Tenant only gets a job worker if it is explicitly configured as a client.
+- Always set `physical-tenant-id` explicitly on each client entry. If it is omitted, the runtime falls back to a derived value and per-tenant attribution in metrics and the connector instance listing becomes unreliable.
 
 ## Configuration
 
@@ -65,17 +64,20 @@ camunda:
     rest-address: https://your-cluster.example.com
   clients:
     default:
+      mode: self-managed
       physical-tenant-id: default
       auth:
         client-id: connector-default
         client-secret: ${SECRET_DEFAULT}
-      primary: true # resolves @Autowired CamundaClient and the default @JobWorker target
+      primary: true # resolves the default @Autowired CamundaClient
     tenanta:
+      mode: self-managed
       physical-tenant-id: tenanta
       auth:
         client-id: connector-tenanta
         client-secret: ${SECRET_TENANTA}
     tenantb:
+      mode: self-managed
       physical-tenant-id: tenantb
       auth:
         client-id: connector-tenantb
@@ -91,38 +93,37 @@ camunda:
 
 ### Tenant context propagation
 
-The `physicalTenantId` is available in the activated job context. Use it to route requests to tenant-specific endpoints or apply tenant-specific configuration.
+The runtime resolves each job's Physical Tenant from the activated job record and uses it to select the per-tenant secret provider, document store, and metrics attribution for that job.
 
-**Example — HTTP connector with per-tenant routing:**
-
-Set the HTTP connector URL as a FEEL expression referencing the `physicalTenantId` process variable:
-
-```
-= "https://api.example.com/" + physicalTenantId + "/orders"
-```
-
-Tenant A's jobs call `.../tenanta/orders`; tenant B's jobs call `.../tenantb/orders`. The URL resolves dynamically — no per-tenant connector configuration needed.
+The `physicalTenantId` is not exposed as a process variable, so it cannot be referenced directly from a FEEL expression in a connector's element template. To route a connector to a tenant-specific endpoint, set a variable at process start and reference that variable instead.
 
 ### Per-tenant secret access
 
-Secrets are scoped per Physical Tenant. The `SecretContext` includes the `physicalTenantId`, so the gateway resolves secrets against the correct tenant's store. One tenant's secrets cannot be accessed from another tenant's job context.
+Per-tenant secret isolation is **opt-in and disabled by default**. Enable it explicitly in any multi-tenant deployment:
 
-Secret references:
+```yaml
+camunda:
+  connector:
+    secretprovider:
+      environment:
+        physicaltenantaware: true
+```
 
-- **Canonical:** `camunda.secrets.MY_SECRET` — FEEL expression form
-- **Legacy:** `{{secrets.MY_SECRET}}` — string template, supported indefinitely
+Equivalent environment variable: `CAMUNDA_CONNECTOR_SECRETPROVIDER_ENVIRONMENT_PHYSICALTENANTAWARE`.
 
-Resolved values are never written to the variable store, Operate, Tasklist, logs, or the command log. Only the reference name appears in exports — the reference is a pointer, not the value.
+With this enabled, the runtime resolves each secret against a name scoped to the job's Physical Tenant: `${prefix}${physicalTenantId}_${name}`. With the default secret prefix `SECRET_`, a reference to `MY_SECRET` from a job on `tenanta` resolves the environment variable `SECRET_tenanta_MY_SECRET`.
 
-Secret resolution requires `SECRETS:REVEAL` on the `SECRET` resource type, scoped per Physical Tenant. The runtime calls `POST /v2/secrets/resolve` scoped to the correct Physical Tenant for each job.
-
-:::note
-Transparent secret resolution (automatic resolution of `{{secrets.MY_SECRET}}` references in the connector context) is subject to Connector team capacity for 8.10. If unavailable at release, secret references must be resolved explicitly via the API. Check the 8.10 release notes for final availability.
+:::warning Secrets are shared across tenants by default
+With `physicaltenantaware` left at its default of `false`, all configured clients resolve secrets from a single flat namespace. A reference to `{{secrets.MY_SECRET}}` resolves the same `SECRET_MY_SECRET` value regardless of which Physical Tenant the job belongs to. Enable `physicaltenantaware` in any deployment where tenants must not share secret values.
 :::
+
+Reference secrets in connector properties using `{{secrets.MY_SECRET}}`. The runtime replaces references when it binds the job's variables, and does not write resolved values back to the variable store, Operate, Tasklist, or logs.
+
+Independently of tenant scoping, `camunda.connector.secret-resolver.secret-filter.mode` controls whether a connector element may reference secret keys it has not declared. It defaults to `DISABLED`, meaning no key-level restriction is enforced. Set it to `LAX` or `STRICT` to restrict each element to the secret keys declared in its process definition.
 
 ## Inbound connectors
 
-Each Physical Tenant gets its own `ImportSchedulers` instance with a dedicated `CamundaClient`, so inbound connector events and state are isolated per tenant.
+The runtime polls each configured Physical Tenant for process definitions using that tenant's own client, and tracks inbound connector state per tenant, so inbound executables and their state stay isolated across tenants.
 
 ### Webhook path routing
 
@@ -149,12 +150,9 @@ The routing layer performs pure path-segment matching on `physicalTenantId/tenan
 
 ## Authorization
 
-| Permission                      | Resource            | Required for                   |
-| ------------------------------- | ------------------- | ------------------------------ |
-| `SECRETS:REVEAL`                | `SECRET`            | Resolving secret references    |
-| Standard job worker permissions | Process definitions | Activating and completing jobs |
+Each `camunda.clients.*` entry authenticates independently using its own `auth.*` credentials, so grant permissions per Physical Tenant to the identity configured for that client.
 
-Permissions are scoped per Physical Tenant. Grant `SECRETS:REVEAL:*` (wildcard) to the Connectors runtime service account to preserve the pre-8.10 implicit-trust scope while keeping authorization explicit.
+Each client's identity needs the standard permissions to activate, complete, and fail jobs for the process definitions it serves, plus read access to process definitions for inbound connector polling. See [Authorization model](/self-managed/concepts/physical-tenants/authorization-model.md) for how permissions are scoped per Physical Tenant.
 
 ## Operational considerations
 
@@ -164,15 +162,21 @@ One runtime instance per cluster is standard. Deploy multiple instances only whe
 
 ### Monitoring
 
-Per-tenant job execution metrics are not available in 8.10. Micrometer metrics are tagged by job type and action only — no `physicalTenantId` or client dimension. Per-tenant filtering is a planned follow-up.
+Every connector metric is tagged with `physicalTenantId`, so outbound and inbound activity can be filtered and grouped per Physical Tenant. Two tenants running the same connector type report separately rather than collapsing into one series.
+
+Tagged metrics include outbound invocation counts and execution times, the last-completed and last-failed timestamps, and inbound activation and trigger counts. Jobs handled by a single-client deployment that configures no `physical-tenant-id` are reported under the tag value `default`.
 
 ### Secret rotation
 
-When a secret is rotated, the gateway cache expires within the configured TTL (default 20 seconds). No restart required. New job activations after the TTL receive the updated value.
+Secrets resolved through the environment secret provider are read from the runtime's environment, so rotating a value requires updating the environment variable and restarting the runtime.
+
+Because a single runtime instance serves all configured Physical Tenants, rotating one tenant's secret restarts the shared runtime and therefore briefly interrupts every configured tenant. Plan rotations accordingly.
 
 ### Failure handling
 
 A failure in one tenant's job workers does not affect workers registered for other tenants.
+
+On the inbound side, a polling failure for one Physical Tenant is logged and does not stop the other tenants from completing their imports in the same cycle. The runtime's readiness signal is shared across tenants, however, so a persistent polling failure for a single tenant marks the whole runtime instance as not ready.
 
 :::note App integrations (MS Teams and similar)
 App integrations with Physical Tenant support are implemented and will be documented in a follow-up section once the configuration details are finalized. Multiple Keycloak (separate IdP per tenant in the connector context) is not supported in 8.10.
