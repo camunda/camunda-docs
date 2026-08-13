@@ -98,6 +98,8 @@ description: "Add tenants, apply configuration changes, and manage tenant availa
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web apps](./web-apps.md).
 
+To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
+
 ## What is not isolated in 8.10
 
 - Gateways are shared between tenants, so a saturated gateway can still affect multiple tenants.

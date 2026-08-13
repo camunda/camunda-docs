@@ -373,6 +373,10 @@ The `urls.tasklist` field supports two formats:
 
 :::
 
+:::note
+On Camunda 8.10, a cluster can host several [Physical Tenants](/self-managed/concepts/physical-tenants/index.md). To serve them from one App Integrations deployment, add a `physicalTenants` array to the cluster. See [App Integrations and Physical Tenants](/self-managed/concepts/physical-tenants/app-integrations.md).
+:::
+
 ### Stage values
 
 The `stage` field controls the environment label.
@@ -427,54 +431,58 @@ docker run -d \
 
 Below is a reference of each section in the `config.yaml` file.
 
-| Section           | Field                               | Description                                                                                                                                         |
-| :---------------- | :---------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `serverPort`      | —                                   | The port the backend server listens on inside the container (default: `8080`).                                                                      |
-| `stage`           | —                                   | Environment stage: `local`, `dev`, `int`, or `prod`.                                                                                                |
-| **auth**          |                                     | Authentication configuration for connecting to your Camunda platform. See [Auth configuration](#auth-configuration).                                |
-|                   | `kind`                              | Identity provider variant: `keycloak` (default) or `entra`. Determines how OIDC endpoints are resolved.                                             |
-|                   | `m2m.clientId` / `m2m.clientSecret` | Machine-to-machine OAuth2 credentials for backend services.                                                                                         |
-|                   | `spa.clientId` / `spa.clientSecret` | Single Page Application OAuth2 credentials for frontend.                                                                                            |
-|                   | `issuer`                            | The OAuth2/OIDC issuer URL. Required for Keycloak; auto-derived for Entra.                                                                          |
-|                   | `audiences.zeebe`                   | _(Required)_ The audience of the Orchestration Cluster API. Typically `camunda-platform` on Keycloak.                                               |
-|                   | `audiences.app_integrations`        | _(Optional)_ The audience App Integrations accepts on its own inbound API, used when the exporter authenticates with OAuth instead of an API key.   |
-|                   | `entra.tenantId`                    | _(Entra only, required)_ The Entra tenant ID.                                                                                                       |
-|                   | `entra.tokenUrl`                    | _(Entra only, optional)_ Token endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token`.                              |
-|                   | `entra.jwksUrl`                     | _(Entra only, optional)_ JWKS endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/discovery/v2.0/keys`.                             |
-|                   | `entra.scope`                       | _(Entra only, optional)_ OAuth2 scope. Defaults to `openid profile offline_access <auth.audiences.zeebe>/.default`.                                 |
-|                   | `entra.usernameClaim`               | _(Entra only, optional)_ ID token claim for the user's email. Default: `preferred_username`.                                                        |
-| **db**            |                                     | PostgreSQL database connection settings.                                                                                                            |
-|                   | `username`                          | Database username.                                                                                                                                  |
-|                   | `password`                          | Database password.                                                                                                                                  |
-|                   | `database`                          | Database name.                                                                                                                                      |
-|                   | `host`                              | Database hostname (as reachable from the container).                                                                                                |
-|                   | `loginType`                         | Authentication type (`password` for username/password auth).                                                                                        |
-|                   | `encryptionKey`                     | 32-character key used for encrypting sensitive data.                                                                                                |
-| **teams**         |                                     | Microsoft Teams integration settings.                                                                                                               |
-|                   | `clientId`                          | Azure AD app client ID.                                                                                                                             |
-|                   | `appId`                             | Teams app ID.                                                                                                                                       |
-|                   | `appPassword`                       | Azure AD app password (client secret).                                                                                                              |
-|                   | `tenantId`                          | Azure AD tenant ID.                                                                                                                                 |
-|                   | `tabEndpoint`                       | Public URL endpoint for the Teams tab.                                                                                                              |
-|                   | `multitenant`                       | Enable multi-tenant mode (default: `true`). See [note on multitenant](#notes).                                                                      |
-|                   | `serviceUrl`                        | Bot Framework service URL (default: `https://smba.trafficmanager.net/teams`). See [note on serviceUrl](#notes).                                     |
-| **session**       |                                     | Session management configuration.                                                                                                                   |
-|                   | `secure`                            | Set to `true` for HTTPS environments.                                                                                                               |
-|                   | `secret`                            | A random secret string for signing session cookies.                                                                                                 |
-| **frontendUrl**   | —                                   | Public URL where the frontend is accessible.                                                                                                        |
-| **backendUrl**    | —                                   | Public URL where the backend is accessible.                                                                                                         |
-| **flavor**        | —                                   | Deployment flavor (must be `self-managed`).                                                                                                         |
-| **organisation**  | `name`                              | Display name for your organization.                                                                                                                 |
-| **clusters**      | —                                   | Array of Camunda cluster configurations.                                                                                                            |
-|                   | `uuid`                              | Unique identifier for the cluster.                                                                                                                  |
-|                   | `name`                              | Display name for the cluster.                                                                                                                       |
-|                   | `urls.orchestration`                | Zeebe/Orchestration API URL.                                                                                                                        |
-|                   | `urls.tasklist`                     | Tasklist URL (string) or object with `base` and `task`. See note below.                                                                             |
-|                   | `urls.tasklist.base`                | _(Object format only)_ Root Tasklist URL.                                                                                                           |
-|                   | `urls.tasklist.task`                | _(Object format only)_ URL template for deep-linking to a specific task. Must contain `:userTaskKey` placeholder.                                   |
-|                   | `urls.operate`                      | Operate URL.                                                                                                                                        |
-|                   | `exporter.apiKey`                   | API key for the exporter. Must match the key configured in the [orchestration cluster Helm chart](#step-3-configure-the-app-integrations-exporter). |
-| **subscriptions** | —                                   | Subscription configuration (empty object `{}` for Self-Managed).                                                                                    |
+| Section           | Field                               | Description                                                                                                                                                     |
+| :---------------- | :---------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `serverPort`      | —                                   | The port the backend server listens on inside the container (default: `8080`).                                                                                  |
+| `stage`           | —                                   | Environment stage: `local`, `dev`, `int`, or `prod`.                                                                                                            |
+| **auth**          |                                     | Authentication configuration for connecting to your Camunda platform. See [Auth configuration](#auth-configuration).                                            |
+|                   | `kind`                              | Identity provider variant: `keycloak` (default) or `entra`. Determines how OIDC endpoints are resolved.                                                         |
+|                   | `m2m.clientId` / `m2m.clientSecret` | Machine-to-machine OAuth2 credentials for backend services.                                                                                                     |
+|                   | `spa.clientId` / `spa.clientSecret` | Single Page Application OAuth2 credentials for frontend.                                                                                                        |
+|                   | `issuer`                            | The OAuth2/OIDC issuer URL. Required for Keycloak; auto-derived for Entra.                                                                                      |
+|                   | `audiences.zeebe`                   | _(Required)_ The audience of the Orchestration Cluster API. Typically `camunda-platform` on Keycloak.                                                           |
+|                   | `audiences.app_integrations`        | _(Optional)_ The audience App Integrations accepts on its own inbound API, used when the exporter authenticates with OAuth instead of an API key.               |
+|                   | `entra.tenantId`                    | _(Entra only, required)_ The Entra tenant ID.                                                                                                                   |
+|                   | `entra.tokenUrl`                    | _(Entra only, optional)_ Token endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/oauth2/v2.0/token`.                                          |
+|                   | `entra.jwksUrl`                     | _(Entra only, optional)_ JWKS endpoint. Defaults to `https://login.microsoftonline.com/<tenantId>/discovery/v2.0/keys`.                                         |
+|                   | `entra.scope`                       | _(Entra only, optional)_ OAuth2 scope. Defaults to `openid profile offline_access <auth.audiences.zeebe>/.default`.                                             |
+|                   | `entra.usernameClaim`               | _(Entra only, optional)_ ID token claim for the user's email. Default: `preferred_username`.                                                                    |
+| **db**            |                                     | PostgreSQL database connection settings.                                                                                                                        |
+|                   | `username`                          | Database username.                                                                                                                                              |
+|                   | `password`                          | Database password.                                                                                                                                              |
+|                   | `database`                          | Database name.                                                                                                                                                  |
+|                   | `host`                              | Database hostname (as reachable from the container).                                                                                                            |
+|                   | `loginType`                         | Authentication type (`password` for username/password auth).                                                                                                    |
+|                   | `encryptionKey`                     | 32-character key used for encrypting sensitive data.                                                                                                            |
+| **teams**         |                                     | Microsoft Teams integration settings.                                                                                                                           |
+|                   | `clientId`                          | Azure AD app client ID.                                                                                                                                         |
+|                   | `appId`                             | Teams app ID.                                                                                                                                                   |
+|                   | `appPassword`                       | Azure AD app password (client secret).                                                                                                                          |
+|                   | `tenantId`                          | Azure AD tenant ID.                                                                                                                                             |
+|                   | `tabEndpoint`                       | Public URL endpoint for the Teams tab.                                                                                                                          |
+|                   | `multitenant`                       | Enable multi-tenant mode (default: `true`). See [note on multitenant](#notes).                                                                                  |
+|                   | `serviceUrl`                        | Bot Framework service URL (default: `https://smba.trafficmanager.net/teams`). See [note on serviceUrl](#notes).                                                 |
+| **session**       |                                     | Session management configuration.                                                                                                                               |
+|                   | `secure`                            | Set to `true` for HTTPS environments.                                                                                                                           |
+|                   | `secret`                            | A random secret string for signing session cookies.                                                                                                             |
+| **frontendUrl**   | —                                   | Public URL where the frontend is accessible.                                                                                                                    |
+| **backendUrl**    | —                                   | Public URL where the backend is accessible.                                                                                                                     |
+| **flavor**        | —                                   | Deployment flavor (must be `self-managed`).                                                                                                                     |
+| **organisation**  | `name`                              | Display name for your organization.                                                                                                                             |
+| **clusters**      | —                                   | Array of Camunda cluster configurations.                                                                                                                        |
+|                   | `uuid`                              | Unique identifier for the cluster.                                                                                                                              |
+|                   | `name`                              | Display name for the cluster.                                                                                                                                   |
+|                   | `urls.orchestration`                | Zeebe/Orchestration API URL.                                                                                                                                    |
+|                   | `urls.tasklist`                     | Tasklist URL (string) or object with `base` and `task`. See note below.                                                                                         |
+|                   | `urls.tasklist.base`                | _(Object format only)_ Root Tasklist URL.                                                                                                                       |
+|                   | `urls.tasklist.task`                | _(Object format only)_ URL template for deep-linking to a specific task. Must contain `:userTaskKey` placeholder.                                               |
+|                   | `urls.operate`                      | Operate URL.                                                                                                                                                    |
+|                   | `exporter.apiKey`                   | API key for the exporter. Must match the key configured in the [orchestration cluster Helm chart](#step-3-configure-the-app-integrations-exporter).             |
+|                   | `connector.apiKey`                  | _(Optional)_ Separate API key for the App Integrations connector endpoints. Rotates independently of `exporter.apiKey`.                                         |
+|                   | `auth.audiences.zeebe`              | _(Optional)_ Overrides the deployment-wide `auth.audiences.zeebe` for this cluster.                                                                             |
+|                   | `physicalTenants`                   | _(Optional)_ Physical Tenants hosted on this cluster. See [App Integrations and Physical Tenants](/self-managed/concepts/physical-tenants/app-integrations.md). |
+|                   | `exposeDefaultTenant`               | _(Optional)_ Offer the `default` tenant alongside the configured Physical Tenants (default: `false`). No effect unless `physicalTenants` is set.                |
+| **subscriptions** | —                                   | Subscription configuration (empty object `{}` for Self-Managed).                                                                                                |
 
 ### Notes
 
