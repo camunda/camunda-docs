@@ -5,7 +5,7 @@ description: Reference for the `agent-tool-documentation` rule.
 ---
 
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
-import DeclaringAgenticSubprocess from "./_declaring-agentic-subprocess.md";
+import DeclaringAgenticSubprocess from "./\_declaring-agentic-subprocess.md";
 
 Tools within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) require a documentation entry. The AI Agent reads this documentation to decide which tool to call. Without it, the agent falls back to the element's name, which is usually too vague to select the tool reliably. Missing documentation degrades tool selection rather than causing an outright failure, so this rule reports a warning rather than an error. An undocumented tool might work well during development but fail in production because the LLM does not select it.
 
