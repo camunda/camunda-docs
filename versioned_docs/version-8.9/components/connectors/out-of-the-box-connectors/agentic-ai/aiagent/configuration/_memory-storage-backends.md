@@ -2,9 +2,9 @@
 
 These are the available storage backend options:
 
-- **[In-process storage](#in-process-storage)** is the default option and stores conversation messages as part of the agent context process variable. It keeps the conversation directly visible in Operate, which is useful when inspecting agent behavior, but is subject to [variable size limitations](../../../../../concepts/variables.md).
+- **[In-process storage](#in-process-storage)** is the default option and stores conversation messages as part of the agent context process variable. It keeps the conversation directly visible in Operate, which is useful when inspecting agent behavior, but is subject to [variable size limitations](../../../../../concepts/variables.md#variable-size-limitation).
 - **[Camunda document storage](#camunda-document-storage)** stores conversation messages as a JSON document in [document storage](../../../../../document-handling/getting-started.md). This avoids the process variable size limitation, but the conversation isn't directly visible in Operate, and you must configure a time-to-live (TTL) that matches your process's expected lifetime to avoid losing history.
-- **[Custom implementation](#custom-implementation)** uses a custom storage implementation through a customized connector runtime, available only in Self-Managed or hybrid setups. This gives you full control over how messages are stored, at the cost of building and maintaining the implementation yourself.
+- Custom implementation uses a custom storage implementation through a customized connector runtime, available only in Self-Managed or hybrid setups. This gives you full control over how messages are stored, at the cost of building and maintaining the implementation yourself.
 
 Evaluate these trade-offs against your process's expected lifetime, conversation size, and observability needs to choose the backend that fits your use case.
 
@@ -24,15 +24,3 @@ As documents are subject to expiration, to avoid losing the conversation history
 | :------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Document TTL               | No       | <p>Time-to-live (TTL) for documents containing the conversation history. Use this field to set a custom TTL matching your expected process lifetime.</p><p>The [default cluster TTL](../../../../../document-handling/getting-started.md#saas) is used if this value is not configured.</p> |
 | Custom document properties | No       | <p>Optional map of properties to store with the document.</p><p>Use this option to reference custom metadata you might want to use when further processing conversation documents.</p>                                                                                                      |
-
-#### Custom implementation
-
-:::info
-This option is only supported if you are using a customized AI Agent connector in a Self-Managed or hybrid setup.
-See [customization](../../../agentic-ai-aiagent-customization.md) for more details.
-:::
-
-| Field               | Required | Description                                                                                                                                                                         |
-| :------------------ | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Implementation type | Yes      | <p>The **type** identifier of your custom storage implementation. See [customization](../../../agentic-ai-aiagent-customization.md#custom-conversation-storage) for an example.</p> |
-| Parameters          | No       | <p>Optional map of parameters to be passed to the storage implementation.</p>                                                                                                       |
