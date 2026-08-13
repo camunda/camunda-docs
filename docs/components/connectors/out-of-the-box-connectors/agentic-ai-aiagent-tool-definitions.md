@@ -16,7 +16,7 @@ A tool is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc s
 
 - A **name**: the element ID, used by the LLM to identify the tool.
 - A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.
-- **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
+- **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function in input mappings.
 - A **result**: the tool's output, returned to the LLM as `toolCallResult`.
 
 ### Which elements are resolved as tools
