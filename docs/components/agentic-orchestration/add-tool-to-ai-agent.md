@@ -11,6 +11,9 @@ import TabItem from "@theme/TabItem";
 import AddElement from './img/add-element.png';
 import InputMapping from './img/input-mapping.png';
 import ToolDescription from './img/tool-description.png';
+import ConnectorTaskResult from './img/connector-task-toolCallResult.png';
+import RegularTaskResult from './img/regular-task-toolCallResult.png';
+import ScriptTaskResult from './img/script-task-toolCallResult.png';
 
 Add BPMN elements as callable tools to your AI agents.
 
@@ -231,7 +234,7 @@ Whether you can add fields to `toolCallResult` one at a time depends on the elem
 
 A connector task cannot add fields one at a time. A connector **Result Expression** has no access to process variables, so it cannot read the current value of `toolCallResult`.
 
-Build the complete result in a single **Result Expression** instead:
+Build the complete result in a single **Result expression** instead:
 
 ```feel
 {
@@ -241,6 +244,8 @@ Build the complete result in a single **Result Expression** instead:
   }
 }
 ```
+
+<img src={ConnectorTaskResult} alt="Add `toolCallResult` to a connector task" width="70%"/>
 
 </TabItem>
 
@@ -254,6 +259,8 @@ Write the call as the **Variable assignment value** of a mapping whose **Process
 | :------------------------------------------------------------- | :-------------------- |
 | `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult`      |
 
+<img src={RegularTaskResult} alt="Add `toolCallResult` to a regular task" width="70%"/>
+
 </TabItem>
 
 <TabItem value="script-task">
@@ -265,6 +272,8 @@ Write the call directly in the script task's FEEL expression in the **Script** s
 ```feel
 context put(toolCallResult, "status", response.body.status)
 ```
+
+<img src={ScriptTaskResult} alt="Add `toolCallResult` to a script task" width="70%"/>
 
 </TabItem>
 
