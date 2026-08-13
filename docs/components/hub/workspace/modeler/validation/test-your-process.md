@@ -100,7 +100,7 @@ Once both boundaries are set, clicking the canvas resets the start boundary and 
 Test mode will only consider the first executable process ID in the BPMN file.
 :::
 
-## Run a test
+## Run a test case
 
 ![Process instance view during a test run](../img/test-instance.png)
 
@@ -162,7 +162,7 @@ Test mode's rewind operation currently does not support the following elements:
 
 Use test cases to quickly rerun processes while tracking test coverage.
 
-For example, you can validate your process by creating and rerunning test cases for different paths to check the process works as expected after any diagram changes are made. Test cases allow you to replay and confirm that a process completes correctly with the predefined actions and variables.
+For example, you can validate your process by creating and rerunning test cases for different paths to check the process works as expected after any diagram changes are made. Test cases allow you to retest and confirm that a process completes correctly with the predefined actions and variables.
 
 :::note
 Although test cases are valuable for rapid validation during development, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline for comprehensive testing.
