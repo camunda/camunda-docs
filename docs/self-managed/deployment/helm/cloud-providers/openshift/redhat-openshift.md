@@ -709,7 +709,7 @@ This command:
 
 You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
-<DeploymentReadinessCheck />
+<DeploymentReadinessCheck download />
 
 ## Verify connectivity to Camunda 8
 
