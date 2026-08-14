@@ -1454,6 +1454,7 @@ module.exports = {
           },
           items: [
             "apis-tools/java-client/job-worker",
+            "apis-tools/java-client/physical-tenants",
             "apis-tools/java-client/logging",
           ],
         },
@@ -2248,6 +2249,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/authorization-model",
                 "self-managed/concepts/physical-tenants/configuration-reference",
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
+                "self-managed/concepts/physical-tenants/connectors-runtime",
               ],
             },
           ],
