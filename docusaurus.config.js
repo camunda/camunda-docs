@@ -213,6 +213,14 @@ module.exports = {
                 autoImports: true,
                 defaultImports: "using Camunda.Orchestration.Sdk;",
               },
+              {
+                lang: "Rust",
+                highlight: "rust",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-rust/examples/operation-map.json",
+                autoImports: true,
+                defaultImports: "use camunda_orchestration_sdk::CamundaClient;",
+              },
             ],
             version: "1",
             label: "Unused but required field",
@@ -457,7 +465,7 @@ module.exports = {
     },
 
     prism: {
-      additionalLanguages: ["java", "protobuf", "csharp", "bash"],
+      additionalLanguages: ["java", "protobuf", "csharp", "bash", "rust"],
       theme: themes.palenight,
       darkTheme: themes.dracula,
     },
