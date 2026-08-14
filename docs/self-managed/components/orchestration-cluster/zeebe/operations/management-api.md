@@ -408,7 +408,6 @@ curl -X 'POST' \
 ```
 
 Note that the IDs in `brokers` must be zone-aware, meaning they contain the zone in the name.
-
 </details>
 
 ###### Dry run
