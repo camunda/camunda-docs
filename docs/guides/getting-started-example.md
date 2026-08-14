@@ -26,10 +26,6 @@ import TabItem from "@theme/TabItem";
 
 This guide is tailored for developers who want to implement process automation solutions using Java (Spring), JavaScript (Node.js), Python, or C#. You'll work with a local, self-managed, lightweight Camunda 8 environment.
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10.
-:::
-
 ## Get started with an example project
 
 You will:
@@ -40,7 +36,7 @@ You will:
   - The **Spring (Java) SDK**,
   - The **Node.js (JavaScript) SDK**,
   - The **Python SDK**, or
-  - The **C# SDK** (technical preview)  
+  - The **C# SDK**  
     to handle tasks in the process.
 
 ## Prerequisites
@@ -50,7 +46,7 @@ You will:
 { label: 'Java + Spring', value: 'javaspring', },
 { label: 'Node.js', value: 'nodejs', },
 { label: 'Python', value: 'python', },
-{ label: 'C# (Technical Preview)', value: 'csharp', },
+{ label: 'C#', value: 'csharp', },
 ] }>
 <TabItem value="javaspring">
 
@@ -86,7 +82,7 @@ The starter package includes the following components:
 
 - [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) – A simplified, single-application Camunda configuration for a local development environment.
 - [Camunda Modeler](/components/modeler/about-modeler.md) – An application for modeling BPMN, DMN, and Forms.
-- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C# (technical preview).
+- [Getting started project](https://github.com/camunda/camunda-8-get-started) – An example project with a simple BPMN process and workers in Java, JavaScript, Python, or C#.
 
 All of these components are included in the starter package. You do not need to download them separately. The links above are provided for additional information.
 
@@ -182,7 +178,7 @@ Next, start the job workers to allow them to perform the work for the service ta
 { label: 'Java + Spring', value: 'javaspring', },
 { label: 'Node.js', value: 'nodejs', },
 { label: 'Python', value: 'python', },
-{ label: 'C# (Technical Preview)', value: 'csharp', },
+{ label: 'C#', value: 'csharp', },
 ] }>
 <TabItem value="javaspring">
 

@@ -20,9 +20,9 @@ Get started with Camunda [agentic orchestration](/components/agentic-orchestrati
 
 ## About
 
-In this guide, you will build a Camunda [AI agent](/components/agentic-orchestration/ai-agents.md): the native agent type, whose tool orchestration runs in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by Camunda's engine.
+In this guide, you will build a Camunda [AI agent](/components/agentic-orchestration/ai-agents.md): the native agent type that orchestrates tools in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by the Camunda engine.
 
-In this guide, you will:
+Specifically, you will:
 
 - Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
@@ -248,16 +248,16 @@ Depending on your working environment, test your agent by following the correspo
 
 <TabItem value="saas">
 
-1. Open [Web Modeler](/components/hub/workspace/modeler/index.md).
-1. Select the [**Play**](/components/hub/workspace/modeler/validation/play-your-process.md) tab.
-1. Select the cluster you want to deploy and play the process on.
-1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
-1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
+1. Open [Web Modeler](/components/hub/workspace/modeler/index.md) and select the **Implement** tab.
+1. Click **Deploy and run**, and select a cluster running version 8.8 or higher.
+1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Deploy and run**.
+1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
+1. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md) and select the **Tasks** tab. When the AI agent finishes processing, you should see a `User Feedback` task waiting for you to complete.
 1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
-:::tip
-Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
+:::important Play not supported
+Because the AI agent in this example is an ad-hoc sub-process, you can't use Play to run it (doing so fails with `Ad-hoc subprocesses are not supported in Play`). Instead, deploy the process and test it with Tasklist, as described above.
 :::
 </TabItem>
 
@@ -295,7 +295,7 @@ You can customize your AI agent by adding tools. In this section, you will add a
 ### Add a REST connector task
 
 1. Inside the AI agent sub-process, add a new task element.
-1. Change the task type to [**REST Outbound Connector**](/components/connectors/protocol/rest.md) using the **Change element** menu.
+1. Change the task type to [**Send REST Request**](/components/connectors/protocol/rest.md) using the **Change element** menu.
 1. Name the task. For example, `Get current weather`. This name is visible to the LLM as the tool name.
 
 ### Write a tool description

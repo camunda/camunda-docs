@@ -15,7 +15,3 @@ You can manage a workspace's members, clusters, and general information at the w
 :::info
 You can only manage a workspace's settings at the workspace level if you're a **Workspace admin**, **Organization admin**, or **Organization owner**.
 :::
-
-:::note
-In Self-Managed environments, an **Organization admin** can hide the **Invite member** button on the workspace **Members** page for all other users. See the [`workspace-member-invite-hidden-enabled` feature flag](/self-managed/components/hub/configuration/properties.md#feature-flags) for details.
-:::
