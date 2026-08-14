@@ -11,9 +11,9 @@ page_rank: 90
 
 These release notes identify the main new features included in the 8.8 minor release, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
-| Minor release date | Scheduled end of maintenance | Changelog(s)                                                                | Release blog | Upgrade guides                                                                                 |
-| ------------------ | ---------------------------- | --------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------- |
-| 14 October 2025    | 13 April 2027                | [Patch Releases and Changelogs](#technical-changelogs-for-all-88x-releases) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Changelog(s)                                                                | Release blog | Upgrade guides                                                                                 |
+| ------------------ | --------------------------- | --------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027               | [Patch Releases and Changelogs](#technical-changelogs-for-all-88x-releases) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 

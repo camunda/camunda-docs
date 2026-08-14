@@ -11,9 +11,9 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 This release focuses primarily on consolidation and deprecation work to simplify APIs, align clients and SDKs, and prepare for upcoming features in 8.8 and later releases. While there are fewer net-new features in this release, these changes reduce long-term maintenance and improve consistency across Camunda components.
 
-| Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                            |
-| :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
+| Minor release date | End of standard maintenance | Release notes                                                                        | Blog                                                                            |
+| :----------------- | :-------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| 8 April 2025       | 13 October 2026             | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
 
 :::tip Release notes and quality board
 
