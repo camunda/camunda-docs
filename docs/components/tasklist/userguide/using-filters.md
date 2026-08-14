@@ -44,7 +44,7 @@ After defining the rules, click **Apply** to apply the filter. The system will t
 
 ## Business ID filter
 
-A [business ID](/components/concepts/process-instance-creation.md#business-id) is a domain-specific identifier assigned to a process instance at creation — for example, an order number, case reference, or ticket ID. Starting in 8.10, you can filter tasks by business ID directly in the Tasklist filter dialog.
+A [business ID](/components/concepts/process-instance-creation.md#business-id) is a domain-specific process instance identifier, such as an order number, case reference, or ticket ID. Starting in 8.10, you can filter tasks by business ID directly in the Tasklist filter dialog.
 
 To filter by business ID, open the filter dialog and use the **Business ID** field.
 
@@ -54,7 +54,7 @@ To filter by business ID, open the filter dialog and use the **Business ID** fie
 | **Contains**  | Pattern match.                                     | `*` matches multiple characters, `?` matches one character. |
 | **Is one of** | Matches any business ID in a comma-separated list. | —                                                           |
 
-For additional operators (`$neq`, `$exists`), use the [search user tasks API](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) with the `businessId` filter field.
+For additional operators (`$neq`, `$exists`, `$notIn`), use the [search user tasks API](/apis-tools/orchestration-cluster-api-rest/specifications/search-user-tasks.api.mdx) with the `businessId` filter field.
 
 ## Save filter for future use
 

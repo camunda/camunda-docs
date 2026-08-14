@@ -34,7 +34,7 @@ The queue shows the preview of available tasks with the following information:
 - Task name
 - Name of the process the task belongs to
 - Task context description ([it can be optionally configured](/components/concepts/variables.md#context-variable))
-- [Business ID](/components/concepts/process-instance-creation.md#business-id) of the process instance, if one is set
+- [Business ID](/components/concepts/process-instance-creation.md#business-id) carried by the task, if one was captured from the process instance when the task was created
 - Assignee
 - Priority
 - Creation date
@@ -55,7 +55,7 @@ If the task doesn’t have a form, it will display task variables.
 
 ![tasklist-with-variables-claimed-by-me](img/tasklist-with-variables-claimed-by-me_light.png "Task variables")
 
-If the task's process instance has a [business ID](/components/concepts/process-instance-creation.md#business-id), it's also shown in the task details. A task whose process instance has no business ID displays without one.
+If the task captured a [business ID](/components/concepts/process-instance-creation.md#business-id) from its process instance when it was created, it's also shown in the task details. A task created before its process instance had a business ID displays without one, even if the process instance is later assigned one.
 
 ### View process diagram
 
