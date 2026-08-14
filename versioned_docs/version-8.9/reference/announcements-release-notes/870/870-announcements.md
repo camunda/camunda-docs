@@ -52,6 +52,8 @@ The following key changes were also released as part of an 8.7.x patch release.
 
 | Patch release                                                    | Type            | Key change                                                                                                       |
 | :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                   |
+| [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)  |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
@@ -110,6 +112,42 @@ Replace is the intended long-term behavior. The merge behavior in the affected p
 
 - **Running 8.7.28–8.7.32:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
 - **Upgrading to 8.7.33+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
+
+### Nested input mappings can silently drop sibling fields {#nested-input-mapping-sibling-fields}
+
+**Affected versions:** 8.7.36. Reverted in 8.7.37.
+
+Camunda 8.7.36 introduced a regression affecting elements with two or more input mappings that write to different nested fields of the same parent variable. Only one of the mapped fields ends up with the expected value — the other is silently set to `null`, with no warning or incident raised.
+
+For example, given a parent-scope variable `foo: {bar: 1, baz: 2}` and an element with these two input mappings, both writing into a local `foo` variable:
+
+1. Target `foo.bar` ← source `=foo.bar`
+2. Target `foo.baz` ← source `=foo.baz`
+
+the local `foo` becomes `{bar: 1, baz: null}` — `baz`, mapped by the later declaration, can no longer resolve against the parent scope.
+
+**Action:**
+
+- **Running 8.7.36:** combine the mappings into a single mapping that rebuilds the whole object at once — for example, target `foo` with source `={bar: foo.bar, baz: foo.baz}` — instead of mapping `foo.bar` and `foo.baz` separately.
+- **Upgrading to 8.7.37+:** the regression is reverted, so mapping individual fields of the same variable behaves correctly again. The workaround above is no longer required, but is harmless to keep.
+
+### Chained input mappings can silently drop FEEL temporal value types {#chained-input-mapping-temporal-type-loss}
+
+**Affected versions:** 8.7.36. Reverted in 8.7.37.
+
+Camunda 8.7.36 introduced a regression affecting elements with two or more input mappings where one mapping produces a FEEL temporal value (`duration`, `date`, `time`, `date-time`, or their local variants) and a later mapping on the same element reads a property from it. The temporal value loses its type — becoming a plain string due to serialization between mapping evaluations — before the later mapping runs, so the property access silently evaluates to `null` instead of the expected value. Only temporal types are affected — other FEEL types (strings, numbers, booleans, lists, and contexts) behave correctly.
+
+For example, an element with these two input mappings:
+
+1. Target `age` ← source `=@"P1D"` (a duration)
+2. Target `ageDays` ← source `=age.days`
+
+produces `ageDays` as `null`, because `age`'s duration type isn't preserved between the two mappings.
+
+**Action:**
+
+- **Running 8.7.36:** combine the mappings into one, so the duration is created and read in the same expression instead of being written to a variable and read back later — for example, target `ageDays` with source `=@"P1D".days` instead of separate `age` and `ageDays` mappings.
+- **Upgrading to 8.7.37+:** the regression is reverted, so chained mappings on temporal values behave correctly again.
 
 ### Message TTL cleanup batch size pacing change {#message-ttl-cleanup-batch-size-pacing-change}
 
