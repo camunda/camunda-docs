@@ -47,6 +47,6 @@ Best for: Separate organizations with maximum isolation requirements or strict d
 
 ## Next steps
 
-- Configure [Logical Tenants](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) for lightweight subdivision.
+- Configure [Logical Tenants](/self-managed/deployment/helm/configure/configure-logical-tenants.md) for lightweight subdivision.
 - Explore [Physical Tenants](physical-tenants.md) for strong isolation.
 - Manage [tenants in Identity](/self-managed/components/management-identity/manage-tenants.md).

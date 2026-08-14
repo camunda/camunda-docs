@@ -1920,7 +1920,7 @@ module.exports = {
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
-                "self-managed/deployment/helm/configure/configure-multi-tenancy",
+                "self-managed/deployment/helm/configure/configure-logical-tenants",
                 "self-managed/deployment/helm/configure/configure-physical-tenants",
               ],
             },
