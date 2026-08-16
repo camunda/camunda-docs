@@ -13,7 +13,7 @@ Choose the model that best fits your isolation requirements and operational cons
 
 | Aspect                     | Logical Tenant                   | Physical Tenant                         | Multi-Cluster                             |
 | -------------------------- | -------------------------------- | --------------------------------------- | ----------------------------------------- |
-| **Availability**           | Self-Managed and SaaS            | Self-Managed only                       | Self-Managed only                         |
+| **Availability**           | Self-Managed and SaaS            | Self-Managed only                       | Self-Managed and SaaS                     |
 | **Isolation**              | Logical only                     | Strong physical data isolation          | Full physical isolation                   |
 | **Data sharing**           | Single shared database           | Separate data per tenant                | Separate per cluster                      |
 | **Backup/restore**         | Cluster-level only               | Independent per tenant                  | Independent per cluster                   |
@@ -44,6 +44,8 @@ Physical Tenants and Logical Tenants can be used together. Each Physical Tenant 
 **Full isolation through dedicated infrastructure** with separate clusters per tenant. Maximum isolation and operational independence, but highest infrastructure cost and complexity.
 
 Best for: Separate organizations with maximum isolation requirements or strict data residency needs.
+
+On SaaS, this means provisioning a separate cluster per tenant rather than configuring a distinct mode — see [Clusters](/components/concepts/clusters.md).
 
 ## Next steps
 
