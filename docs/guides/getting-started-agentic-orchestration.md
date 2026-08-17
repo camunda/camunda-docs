@@ -256,8 +256,8 @@ Depending on your working environment, test your agent by following the correspo
 1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
-:::tip
-Instead of using **Test mode**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
+:::important Test mode not supported
+Because the AI agent in this example is an ad-hoc sub-process, you can't use **Test mode** to run it (ad-hoc sub-processes are a known [limitation](/components/hub/workspace/modeler/validation/test-your-process.md#test-cases-limitations)). Instead, deploy the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
 :::
 </TabItem>
 
