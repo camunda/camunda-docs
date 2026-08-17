@@ -1,0 +1,1522 @@
+---
+id: search-agent-definitions
+title: "Search agent definitions"
+sidebar_label: "Search agent definitions"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Search agent definitions"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/agent-definitions/search"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Search for agent definitions based on given criteria.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "READ_PROCESS_DEFINITION",
+    },
+  ]}
+  enforcement={"filter"}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description: "Agent definition search request.",
+          type: "object",
+          allOf: [
+            {
+              type: "object",
+              properties: {
+                page: {
+                  description: "Pagination criteria.",
+                  allOf: [
+                    {
+                      description:
+                        "Pagination criteria. Can use offset-based pagination (from/limit) OR cursor-based pagination (after/before + limit), but not both.",
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Limit-based pagination",
+                          properties: {
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Offset-based pagination",
+                          properties: {
+                            from: {
+                              description:
+                                "The index of items to start searching from.",
+                              type: "integer",
+                              format: "int32",
+                              minimum: 0,
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based forward pagination",
+                          properties: {
+                            after: {
+                              description:
+                                "Use the `endCursor` value from the previous response to fetch the next page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The end cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "EndCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Cursor-based backward pagination",
+                          properties: {
+                            before: {
+                              description:
+                                "Use the `startCursor` value from the previous response to fetch the previous page of results.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The start cursor in a search query result set.",
+                                  format: "base64",
+                                  type: "string",
+                                  example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                                  title: "StartCursor",
+                                },
+                              ],
+                            },
+                            limit: {
+                              description:
+                                "The maximum number of items to return in one request.",
+                              type: "integer",
+                              format: "int32",
+                              default: 100,
+                              minimum: 1,
+                              maximum: 10000,
+                            },
+                          },
+                        },
+                      ],
+                      title: "SearchQueryPageRequest",
+                    },
+                  ],
+                },
+              },
+              title: "SearchQueryRequest",
+            },
+          ],
+          properties: {
+            sort: {
+              description: "Sort field criteria.",
+              type: "array",
+              items: {
+                type: "object",
+                required: ["field"],
+                properties: {
+                  field: {
+                    description: "The field to sort by.",
+                    type: "string",
+                    enum: [
+                      "agentDefinitionKey",
+                      "agentType",
+                      "name",
+                      "elementId",
+                      "processDefinitionId",
+                      "processDefinitionKey",
+                      "processDefinitionVersion",
+                      "processDefinitionVersionTag",
+                      "tenantId",
+                    ],
+                  },
+                  order: {
+                    description:
+                      "The order in which to sort the related field.",
+                    type: "string",
+                    enum: ["ASC", "DESC"],
+                    default: "ASC",
+                    title: "SortOrderEnum",
+                  },
+                },
+                title: "AgentDefinitionSearchQuerySortRequest",
+              },
+            },
+            filter: {
+              description: "The agent definition search filters.",
+              allOf: [
+                {
+                  description: "Agent definition search filter.",
+                  type: "object",
+                  properties: {
+                    agentDefinitionKey: {
+                      description: "The unique key of the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "AgentDefinitionKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for an agent definition.",
+                                  format: "AgentDefinitionKey",
+                                  example: "2251799813691958",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "AgentDefinitionKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced AgentDefinitionKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for an agent definition.",
+                                      format: "AgentDefinitionKey",
+                                      example: "2251799813691958",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "AgentDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for an agent definition.",
+                                      format: "AgentDefinitionKey",
+                                      example: "2251799813691958",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "AgentDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for an agent definition.",
+                                    format: "AgentDefinitionKey",
+                                    example: "2251799813691958",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "AgentDefinitionKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for an agent definition.",
+                                    format: "AgentDefinitionKey",
+                                    example: "2251799813691958",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "AgentDefinitionKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "AgentDefinitionKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    agentType: {
+                      description:
+                        "The kind of agent this agent definition describes.",
+                      allOf: [
+                        {
+                          description:
+                            "AgentDefinitionTypeEnum property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The kind of agent an agent definition describes.",
+                                  type: "string",
+                                  enum: [
+                                    "AI_AGENT_SUB_PROCESS",
+                                    "AI_AGENT_TASK",
+                                    "EXTERNAL_AGENT",
+                                  ],
+                                  title: "AgentDefinitionTypeEnum",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced AgentDefinitionTypeEnum filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The kind of agent an agent definition describes.",
+                                      type: "string",
+                                      enum: [
+                                        "AI_AGENT_SUB_PROCESS",
+                                        "AI_AGENT_TASK",
+                                        "EXTERNAL_AGENT",
+                                      ],
+                                      title: "AgentDefinitionTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The kind of agent an agent definition describes.",
+                                      type: "string",
+                                      enum: [
+                                        "AI_AGENT_SUB_PROCESS",
+                                        "AI_AGENT_TASK",
+                                        "EXTERNAL_AGENT",
+                                      ],
+                                      title: "AgentDefinitionTypeEnum",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The kind of agent an agent definition describes.",
+                                    type: "string",
+                                    enum: [
+                                      "AI_AGENT_SUB_PROCESS",
+                                      "AI_AGENT_TASK",
+                                      "EXTERNAL_AGENT",
+                                    ],
+                                    title: "AgentDefinitionTypeEnum",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The kind of agent an agent definition describes.",
+                                    type: "string",
+                                    enum: [
+                                      "AI_AGENT_SUB_PROCESS",
+                                      "AI_AGENT_TASK",
+                                      "EXTERNAL_AGENT",
+                                    ],
+                                    title: "AgentDefinitionTypeEnum",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "AgentDefinitionTypeFilterProperty",
+                        },
+                      ],
+                    },
+                    name: {
+                      description:
+                        "The human-readable name of the process element that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    elementId: {
+                      description:
+                        "The BPMN element ID of the process element that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "ElementId property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "The model-defined id of an element.",
+                                  format: "ElementId",
+                                  type: "string",
+                                  example: "Activity_106kosb",
+                                  title: "ElementId",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced ElementId filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The model-defined id of an element.",
+                                      format: "ElementId",
+                                      type: "string",
+                                      example: "Activity_106kosb",
+                                      title: "ElementId",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "The model-defined id of an element.",
+                                      format: "ElementId",
+                                      type: "string",
+                                      example: "Activity_106kosb",
+                                      title: "ElementId",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The model-defined id of an element.",
+                                    format: "ElementId",
+                                    type: "string",
+                                    example: "Activity_106kosb",
+                                    title: "ElementId",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "The model-defined id of an element.",
+                                    format: "ElementId",
+                                    type: "string",
+                                    example: "Activity_106kosb",
+                                    title: "ElementId",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "ElementIdFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The BPMN process ID of the process definition that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "ProcessDefinitionId property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                  format: "ProcessDefinitionId",
+                                  type: "string",
+                                  example: "new-account-onboarding-workflow",
+                                  title: "ProcessDefinitionId",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessDefinitionId filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                      format: "ProcessDefinitionId",
+                                      type: "string",
+                                      example:
+                                        "new-account-onboarding-workflow",
+                                      title: "ProcessDefinitionId",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                      format: "ProcessDefinitionId",
+                                      type: "string",
+                                      example:
+                                        "new-account-onboarding-workflow",
+                                      title: "ProcessDefinitionId",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                    format: "ProcessDefinitionId",
+                                    type: "string",
+                                    example: "new-account-onboarding-workflow",
+                                    title: "ProcessDefinitionId",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                    format: "ProcessDefinitionId",
+                                    type: "string",
+                                    example: "new-account-onboarding-workflow",
+                                    title: "ProcessDefinitionId",
+                                  },
+                                },
+                                $like: {
+                                  type: "string",
+                                  description:
+                                    "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                  title: "LikeFilter",
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessDefinitionIdFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      description:
+                        "The key of the process definition that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "ProcessDefinitionKey property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                              allOf: [
+                                {
+                                  description:
+                                    "System-generated key for a deployed process definition.",
+                                  format: "ProcessDefinitionKey",
+                                  example: "2251799813686749",
+                                  type: "string",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "Zeebe Engine resource key (Java long serialized as string)",
+                                      type: "string",
+                                      title: "LongKey",
+                                    },
+                                  ],
+                                  title: "ProcessDefinitionKey",
+                                },
+                              ],
+                            },
+                            {
+                              title: "Advanced filter",
+                              description:
+                                "Advanced ProcessDefinitionKey filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  allOf: [
+                                    {
+                                      description:
+                                        "System-generated key for a deployed process definition.",
+                                      format: "ProcessDefinitionKey",
+                                      example: "2251799813686749",
+                                      type: "string",
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Zeebe Engine resource key (Java long serialized as string)",
+                                          type: "string",
+                                          title: "LongKey",
+                                        },
+                                      ],
+                                      title: "ProcessDefinitionKey",
+                                    },
+                                  ],
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                },
+                                $notIn: {
+                                  description:
+                                    "Checks if the property matches none of the provided values.",
+                                  type: "array",
+                                  items: {
+                                    description:
+                                      "System-generated key for a deployed process definition.",
+                                    format: "ProcessDefinitionKey",
+                                    example: "2251799813686749",
+                                    type: "string",
+                                    allOf: [
+                                      {
+                                        description:
+                                          "Zeebe Engine resource key (Java long serialized as string)",
+                                        type: "string",
+                                        title: "LongKey",
+                                      },
+                                    ],
+                                    title: "ProcessDefinitionKey",
+                                  },
+                                },
+                              },
+                            },
+                          ],
+                          title: "ProcessDefinitionKeyFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionVersion: {
+                      description:
+                        "The version of the process definition that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "Integer property with advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "integer",
+                              format: "int32",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced integer (int32) filter.",
+                              type: "object",
+                              properties: {
+                                $eq: {
+                                  description:
+                                    "Checks for equality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $neq: {
+                                  description:
+                                    "Checks for inequality with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $exists: {
+                                  description:
+                                    "Checks if the current property exists.",
+                                  type: "boolean",
+                                },
+                                $gt: {
+                                  description:
+                                    "Greater than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $gte: {
+                                  description:
+                                    "Greater than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lt: {
+                                  description:
+                                    "Lower than comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $lte: {
+                                  description:
+                                    "Lower than or equal comparison with the provided value.",
+                                  type: "integer",
+                                  format: "int32",
+                                },
+                                $in: {
+                                  description:
+                                    "Checks if the property matches any of the provided values.",
+                                  type: "array",
+                                  items: { type: "integer", format: "int32" },
+                                },
+                              },
+                            },
+                          ],
+                          title: "IntegerFilterProperty",
+                        },
+                      ],
+                    },
+                    processDefinitionVersionTag: {
+                      description:
+                        "The version tag of the process definition that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                    tenantId: {
+                      description: "The tenant ID of the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "String property with full advanced search capabilities.",
+                          oneOf: [
+                            {
+                              type: "string",
+                              title: "Exact match",
+                              description: "Matches the value exactly.",
+                            },
+                            {
+                              title: "Advanced filter",
+                              description: "Advanced string filter.",
+                              allOf: [
+                                {
+                                  title: "Advanced filter",
+                                  description: "Basic advanced string filter.",
+                                  type: "object",
+                                  properties: {
+                                    $eq: {
+                                      description:
+                                        "Checks for equality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $neq: {
+                                      description:
+                                        "Checks for inequality with the provided value.",
+                                      type: "string",
+                                    },
+                                    $exists: {
+                                      description:
+                                        "Checks if the current property exists.",
+                                      type: "boolean",
+                                    },
+                                    $in: {
+                                      description:
+                                        "Checks if the property matches any of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                    $notIn: {
+                                      description:
+                                        "Checks if the property matches none of the provided values.",
+                                      type: "array",
+                                      items: { type: "string" },
+                                    },
+                                  },
+                                },
+                                {
+                                  type: "object",
+                                  properties: {
+                                    $like: {
+                                      type: "string",
+                                      description:
+                                        "Checks if the property matches the provided like value.\n\nSupported wildcard characters are:\n\n* `*`: matches zero, one, or multiple characters.\n* `?`: matches one, single character.\n\nWildcard characters can be escaped with backslash, for instance: `\\*`.\n",
+                                      title: "LikeFilter",
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          ],
+                          title: "StringFilterProperty",
+                        },
+                      ],
+                    },
+                  },
+                  title: "AgentDefinitionFilter",
+                },
+              ],
+            },
+          },
+          title: "AgentDefinitionSearchQuery",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The agent definition search result.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Agent definition search response.",
+            type: "object",
+            required: ["items"],
+            allOf: [
+              {
+                type: "object",
+                required: ["page"],
+                properties: {
+                  page: {
+                    description:
+                      "Pagination information about the search results.",
+                    type: "object",
+                    required: [
+                      "totalItems",
+                      "hasMoreTotalItems",
+                      "startCursor",
+                      "endCursor",
+                    ],
+                    properties: {
+                      totalItems: {
+                        description: "Total items matching the criteria.",
+                        type: "integer",
+                        format: "int64",
+                      },
+                      hasMoreTotalItems: {
+                        description:
+                          "Indicates whether the `totalItems` value has been capped due to system limits. When true, `totalItems` is a lower bound and the actual number of matching items is greater than the reported value.\n",
+                        type: "boolean",
+                      },
+                      startCursor: {
+                        description:
+                          "The cursor value for getting the previous page of results. Use this in the `before` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The start cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "StartCursor",
+                          },
+                        ],
+                      },
+                      endCursor: {
+                        description:
+                          "The cursor value for getting the next page of results. Use this in the `after` field of an ensuing request.",
+                        nullable: true,
+                        allOf: [
+                          {
+                            description:
+                              "The end cursor in a search query result set.",
+                            format: "base64",
+                            type: "string",
+                            example: "WzIyNTE3OTk4MTM2ODcxMDJd",
+                            title: "EndCursor",
+                          },
+                        ],
+                      },
+                    },
+                    title: "SearchQueryPageResponse",
+                  },
+                },
+                title: "SearchQueryResponse",
+              },
+            ],
+            properties: {
+              items: {
+                description: "The matching agent definitions.",
+                type: "array",
+                items: {
+                  description:
+                    "An agent definition, created at deploy time for the process element it belongs to.",
+                  type: "object",
+                  required: [
+                    "agentDefinitionKey",
+                    "agentType",
+                    "name",
+                    "elementId",
+                    "processDefinitionId",
+                    "processDefinitionKey",
+                    "processDefinitionVersion",
+                    "processDefinitionVersionTag",
+                    "tenantId",
+                  ],
+                  properties: {
+                    agentDefinitionKey: {
+                      description:
+                        "The unique key for this agent definition. Unique across process definition versions.\n",
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for an agent definition.",
+                          format: "AgentDefinitionKey",
+                          example: "2251799813691958",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "AgentDefinitionKey",
+                        },
+                      ],
+                    },
+                    agentType: {
+                      description:
+                        "The kind of agent an agent definition describes.",
+                      type: "string",
+                      enum: [
+                        "AI_AGENT_SUB_PROCESS",
+                        "AI_AGENT_TASK",
+                        "EXTERNAL_AGENT",
+                      ],
+                      title: "AgentDefinitionTypeEnum",
+                    },
+                    name: {
+                      description:
+                        "The human-readable name of the process element that owns the agent definition. Falls\nback to elementId when the element has no BPMN name configured.\n",
+                      type: "string",
+                    },
+                    elementId: {
+                      description:
+                        "The BPMN element ID of the process element that owns the agent definition.",
+                      allOf: [
+                        {
+                          description: "The model-defined id of an element.",
+                          format: "ElementId",
+                          type: "string",
+                          example: "Activity_106kosb",
+                          title: "ElementId",
+                        },
+                      ],
+                    },
+                    processDefinitionId: {
+                      description:
+                        "The BPMN process ID of the process definition that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                          format: "ProcessDefinitionId",
+                          type: "string",
+                          example: "new-account-onboarding-workflow",
+                          title: "ProcessDefinitionId",
+                        },
+                      ],
+                    },
+                    processDefinitionKey: {
+                      description:
+                        "The key of the process definition that owns the agent definition.",
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for a deployed process definition.",
+                          format: "ProcessDefinitionKey",
+                          example: "2251799813686749",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "ProcessDefinitionKey",
+                        },
+                      ],
+                    },
+                    processDefinitionVersion: {
+                      type: "integer",
+                      format: "int32",
+                      description:
+                        "The version of the process definition that owns the agent definition.",
+                    },
+                    processDefinitionVersionTag: {
+                      type: "string",
+                      nullable: true,
+                      description:
+                        "The version tag of the process definition that owns the agent definition.",
+                    },
+                    tenantId: {
+                      description: "The tenant ID of this agent definition.",
+                      allOf: [
+                        {
+                          example: "customer-service",
+                          description: "The unique identifier of the tenant.",
+                          format: "TenantId",
+                          type: "string",
+                          title: "TenantId",
+                        },
+                      ],
+                    },
+                  },
+                  title: "AgentDefinitionResult",
+                },
+              },
+            },
+            title: "AgentDefinitionSearchQueryResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

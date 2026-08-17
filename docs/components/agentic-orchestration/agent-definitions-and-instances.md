@@ -27,7 +27,7 @@ This reuse is what allows an agent to hold a multi-turn conversation across a lo
 
 ## Agent definitions
 
-An AI agent definition is a first-class, queryable resource that Camunda creates when you deploy a process containing one or more agents.
+An AI agent definition is a first-class, queryable resource that Camunda creates when you deploy a process containing one or more agents. Use the [Agent Definition API](/apis-tools/orchestration-cluster-api-rest/specifications/get-agent-definition.api.mdx) to get an agent definition by key, or the [search endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/search-agent-definitions.api.mdx) to list agent definitions filtered by any of their properties.
 
 Camunda creates one agent definition per agent element in a deployed process, analogous to how a [DRD](/reference/glossary.md#drd-decision-requirements-diagram) deployment creates one decision definition per decision. An agent definition is a **structural descriptor** of the agent, not a store of its runtime configuration.
 

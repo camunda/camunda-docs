@@ -20,6 +20,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Agent definition",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-agent-definition",
+          label: "Get agent definition",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-definitions",
+          label: "Search agent definitions",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Agent instance",
       items: [
         {

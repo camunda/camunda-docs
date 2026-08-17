@@ -792,7 +792,7 @@ async def poll_loop()
 
 Background polling loop - always async
 
-### _property_ process_pool _: ProcessPoolExecutor_
+### _property_ process*pool *: ProcessPoolExecutor\_
 
 ### start()
 
@@ -806,9 +806,9 @@ def start()
 def stop()
 ```
 
-### _property_ thread_pool _: ThreadPoolExecutor_
+### _property_ thread*pool *: ThreadPoolExecutor\_
 
-### _property_ worker_loop _: AbstractEventLoop_
+### _property_ worker*loop *: AbstractEventLoop\_
 
 ## SyncJobContext
 
@@ -1379,7 +1379,7 @@ CAMUNDA_WORKER_TIMEOUT: int | None
 ZEEBE_REST_ADDRESS: str
 ```
 
-### model_config _= {'extra': 'forbid'}_
+### model*config *= {'extra': 'forbid'}\_
 
 Configuration for the model, should be a dictionary conforming to [ConfigDict][pydantic.config.ConfigDict].
 
@@ -1450,6 +1450,6 @@ def read_environment(environ=None)
 ```
 
 - **Parameters:**
-  **environ** (_Mapping_ _[__str_ _,_ _str_ _]_ _|_ _None_)
+  **environ** (_Mapping_ _[\_\_str_ _,_ _str_ _]_ _|_ _None_)
 - **Return type:**
   [_CamundaSdkConfigPartial_](#camundasdkconfigpartial)

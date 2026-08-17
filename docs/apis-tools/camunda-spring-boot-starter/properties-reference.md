@@ -215,7 +215,7 @@ Type: <code>string</code>
 
 <td>
 
-The physical tenant ID sent as the `camunda-physical-tenant` gRPC header on every outgoing call. When `null` the header is omitted.
+The physical tenant ID applied to every outgoing call: sent as the `camunda-physical-tenant` gRPC header, and used to prefix the REST base path for the per-tenant API (see `camunda.client.prefix-physical-tenant-path`) unless disabled — the cluster-scoped REST API (`/cluster/v2/...`) is never prefixed. Leave this unset (`null`) rather than an empty string to target the default physical tenant; the header is then omitted and REST calls target the default physical tenant.
 
 Type: <code>string</code>
 
