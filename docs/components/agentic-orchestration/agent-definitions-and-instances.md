@@ -96,11 +96,11 @@ An agent instance is a specific runtime execution of an agent definition that ca
 
 This representation is not the source of truth for the agent's runtime execution; how an agent's actual state is stored depends on its type, as described in [Agent context and memory](#agent-context-and-memory).
 
-For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI agent Sub-process and AI Agent Task types, the AI Agent connector automatically creates the agent instance through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) as the first step in handling the job for an active agent element. For [external agents](/reference/glossary.md#external-agent), the external runtime creates the instance itself by calling the same API, which can happen at any point while the element is active.
+For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI agent Sub-process and AI Agent Task types, the AI Agent connector automatically creates the agent instance through the Agent Instance API as the first step in handling the job for an active agent element. For [external agents](/reference/glossary.md#external-agent), the external runtime creates the instance itself by calling the same API, which can happen at any point while the element is active.
 
 You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
-Use the [search endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instances.api.mdx) to list agent instances filtered by any of their properties, including their agent definition key. This lets you pivot from a specific agent definition to all of its runtime instances, for example to find every instance created from a given process definition version.
+Use the [search endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instances.api.mdx) to list agent instances filtered by any of their properties, including their agent definition key. For example, you can find every runtime instance created from a specific process definition version.
 
 ### Agent context and memory
 
