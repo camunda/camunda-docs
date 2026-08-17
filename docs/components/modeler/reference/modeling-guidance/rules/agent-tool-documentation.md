@@ -7,11 +7,9 @@ description: Reference for the `agent-tool-documentation` rule.
 import MarkerGuideline from "@site/src/mdx/MarkerGuideline";
 import DeclaringAgenticSubprocess from "./\_declaring-agentic-subprocess.md";
 
-Tools within an [AI Agent sub-process](../../../../agentic-orchestration/agentic-orchestration-overview.md) require a documentation entry. The AI Agent reads this documentation to decide which tool to call. See [Define your agent tools](../../../../agentic-orchestration/design-architecture.md#define-your-agent-tools) for guidance on writing tool names and documentation the agent can act on.
+Tools within an [AI Agent sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) require a documentation entry, which the AI agent uses to select tools.
 
-Missing documentation degrades tool selection rather than causing an outright failure, so this rule reports a warning rather than an error. An undocumented tool might work well during development but fail in production because the LLM does not select it.
-
-To fix this problem, select the tool's entry element, open the **Documentation** section in the properties panel, and describe what the tool does and when the agent should use it.
+Missing documentation does not cause an outright failure, but an undocumented tool might degrade the AI agent's performance. To fix this, select the tool's entry element, open the **Documentation** section in the properties panel, and describe what the tool does and when the agent should use it.
 
 The rule checks the tool's entry element, the activity with no incoming sequence flow. Activities reached through a sequence flow are part of the tool's internal flow and do not require their own documentation. Event sub-processes are also skipped because they are triggered by events rather than called by the agent:
 
