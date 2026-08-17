@@ -279,7 +279,7 @@ The `toolCallResult` value can be a primitive string, a number, or a complex FEE
 
 The following ad-hoc sub-process asks a human to approve sending an email, then sends the email or records the decline depending on the response:
 
-<img src={MultipleToolCallResult} alt="Ad-hoc sub-process with a user task labeled Ask human to send email, an exclusive gateway labeled OK to send email?, and two branches: Send email and Record decline" width="60%"/>
+<img src={MultipleToolCallResult} alt="Combine multiple outputs into a single `toolCallResult`" width="50%"/>
 
 All BPMN elements belong to the same tool flow. Only **Ask human to send email** is exposed to the LLM as the tool, as described in [add an element inside the ad-hoc sub-process](#add-an-element-inside-the-ad-hoc-sub-process).
 
