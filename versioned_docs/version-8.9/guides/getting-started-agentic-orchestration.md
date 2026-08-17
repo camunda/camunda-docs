@@ -264,7 +264,7 @@ Because the AI agent in this example is an ad-hoc sub-process, you can't use Pla
 <TabItem value="self-managed">
 
 1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
-1. Deploy the start event's linked form. Open the form in Desktop Modeler and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/forms/utilizing-forms.md#deploy-a-linked-form) — skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
+1. Deploy the start event's linked form. Open the form in Desktop Modeler and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/forms/utilizing-forms.md#deploy-a-linked-form). Skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
 1. Open Tasklist in your browser at http://localhost:8080/tasklist.
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
