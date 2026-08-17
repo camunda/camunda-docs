@@ -19,7 +19,7 @@ Cross-region cold recovery creates a new Orchestration Cluster in a secondary AW
 
 ## Restored data
 
-The failover flow restores backup buckets only. Document buckets follow the standard [backup and restore](./backup-restore-overview.md) process and are not part of the cross-region failover.
+The failover flow restores backup buckets only. Document buckets follow the standard [backup and restore](../concepts/backups.md) process and are not part of the cross-region failover.
 
 ## Prepare for recovery
 
