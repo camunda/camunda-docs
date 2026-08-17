@@ -21,6 +21,7 @@ Admin includes the following features:
 | Unified access management                                   | Authentication and authorization are handled consistently across all Orchestration Cluster components and APIs.                                               |
 | Flexible authentication                                     | Admin supports multiple authentication modes, including no authentication, Basic authentication, and OpenID Connect (OIDC), depending on the deployment type. |
 | Tenant management                                           | Multi-tenancy is managed directly within the Orchestration Cluster, allowing for clear separation of resources.                                               |
+| [Cluster admin](cluster-admin.md)                           | A separate, coarse-grained role for cluster-wide operations (status, topology, restore) that span all Physical Tenants.                                       |
 | [Cluster variables](cluster-variables.md)                   | Manage configuration values centrally across your cluster, making them available in FEEL expressions.                                                         |
 | [Global user task listeners](global-user-task-listeners.md) | Configure cluster-wide listeners that react to user task lifecycle events across all processes.                                                               |
 
@@ -31,13 +32,14 @@ For details about authorization concepts, resources, and configuration, see
 
 Depending on your setup, Admin allows you to manage Orchestration Cluster access as follows:
 
-| Entity                             | Description                                                                                                                         | Availability    |
-| :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | :-------------- |
-| [Users](user.md)                   | Individuals who can access applications and perform actions based on their permissions.                                             | All deployments |
-| [Groups](group.md)                 | Simplify access management by granting permissions collectively to groups of users.                                                 | All deployments |
-| [Roles](role.md)                   | Sets of permissions to define what actions can be performed on specific resources. Roles can be assigned to users and groups.       | All deployments |
-| [Authorizations](authorization.md) | The specific permissions that connect users, groups, or roles with resources and actions (for example, `READ`, `UPDATE`, `DELETE`). | All deployments |
-| [Tenants](tenant.md)               | Logically isolate data within a single cluster. This is useful for multi-tenancy applications.                                      | All deployments |
+| Entity                             | Description                                                                                                                         | Availability      |
+| :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- | :---------------- |
+| [Users](user.md)                   | Individuals who can access applications and perform actions based on their permissions.                                             | All deployments   |
+| [Groups](group.md)                 | Simplify access management by granting permissions collectively to groups of users.                                                 | All deployments   |
+| [Roles](role.md)                   | Sets of permissions to define what actions can be performed on specific resources. Roles can be assigned to users and groups.       | All deployments   |
+| [Authorizations](authorization.md) | The specific permissions that connect users, groups, or roles with resources and actions (for example, `READ`, `UPDATE`, `DELETE`). | All deployments   |
+| [Tenants](tenant.md)               | Logically isolate data within a single cluster. This is useful for multi-tenancy applications.                                      | All deployments   |
+| [Cluster admin](cluster-admin.md)  | A separate role for cluster-wide operations that span all Physical Tenants, such as status, topology, and restore.                  | Self-Managed only |
 
 :::info Admin in Self-Managed
 For documentation on deploying Admin as part of Camunda 8 Self-Managed, see [Admin in Self-Managed](/self-managed/components/orchestration-cluster/admin/overview.md).
