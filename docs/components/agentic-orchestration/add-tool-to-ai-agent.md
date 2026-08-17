@@ -11,9 +11,7 @@ import TabItem from "@theme/TabItem";
 import AddElement from './img/add-element.png';
 import InputMapping from './img/input-mapping.png';
 import ToolDescription from './img/tool-description.png';
-import ConnectorTaskResult from './img/connector-task-toolCallResult.png';
-import RegularTaskResult from './img/regular-task-toolCallResult.png';
-import ScriptTaskResult from './img/script-task-toolCallResult.png';
+import MultipleToolCallResult from './img/multiple-toolCallResult.png';
 
 Add BPMN elements as callable tools to your AI agents.
 
@@ -245,8 +243,6 @@ Build the complete result in a single **Result expression** instead:
 }
 ```
 
-<img src={ConnectorTaskResult} alt="Add `toolCallResult` to a connector task" width="70%"/>
-
 </TabItem>
 
 <TabItem value="regular-task">
@@ -258,8 +254,6 @@ Write the call as the **Variable assignment value** of a mapping whose **Process
 | Variable assignment value                                      | Process variable name |
 | :------------------------------------------------------------- | :-------------------- |
 | `=context put(toolCallResult, "status", response.body.status)` | `toolCallResult`      |
-
-<img src={RegularTaskResult} alt="Add `toolCallResult` to a regular task" width="70%"/>
 
 </TabItem>
 
@@ -273,8 +267,6 @@ Write the call directly in the script task's FEEL expression in the **Script** s
 context put(toolCallResult, "status", response.body.status)
 ```
 
-<img src={ScriptTaskResult} alt="Add `toolCallResult` to a script task" width="70%"/>
-
 </TabItem>
 
 </Tabs>
@@ -282,3 +274,42 @@ context put(toolCallResult, "status", response.body.status)
 :::note
 The `toolCallResult` value can be a primitive string, a number, or a complex FEEL context object. Complex objects are serialized to JSON before being passed to the LLM. Prefer returning a structured FEEL context over a raw string when the result has multiple fields, as this gives the LLM more to work with when summarizing the outcome. If `toolCallResult` is not set or is empty after the tool executes, the AI Agent connector returns a constant success string to the LLM.
 :::
+
+#### Example
+
+The following ad-hoc sub-process asks a human to approve sending an email, then sends the email or records the decline depending on the response:
+
+<img src={MultipleToolCallResult} alt="Ad-hoc sub-process with a user task labeled Ask human to send email, an exclusive gateway labeled OK to send email?, and two branches: Send email and Record decline" width="60%"/>
+
+All BPMN elements belong to the same tool flow. Only **Ask human to send email** is exposed to the LLM as the tool, as described in [add an element inside the ad-hoc sub-process](#add-an-element-inside-the-ad-hoc-sub-process).
+
+Each element in the flow updates `toolCallResult` as the process instance evolves:
+
+1. **Ask human to send email** is a user task and the first element in the flow, so it assigns `toolCallResult` directly through an output mapping:
+
+   | Variable assignment value | Process variable name |
+   | :------------------------ | :-------------------- |
+   | `= { approved: true }`    | `toolCallResult`      |
+
+   The gateway then routes the process instance based on the `approved` field.
+
+1. **Send email** is a regular task. It adds a `sent` field to the existing `toolCallResult` with an output mapping, instead of overwriting it:
+
+   | Variable assignment value                    | Process variable name |
+   | :------------------------------------------- | :-------------------- |
+   | `=context put(toolCallResult, "sent", true)` | `toolCallResult`      |
+
+1. **Record decline** is a script task. It adds `sent: false` directly in its FEEL expression:
+
+   ```feel
+   context put(toolCallResult, "sent", false)
+   ```
+
+The following table shows how `toolCallResult` accumulates fields as the process instance progresses through each branch:
+
+| Step                                      | If approved                      | If declined                        |
+| :---------------------------------------- | :------------------------------- | :--------------------------------- |
+| After **Ask human to send email**         | `{ approved: true }`             | `{ approved: false }`              |
+| After **Send email** / **Record decline** | `{ approved: true, sent: true }` | `{ approved: false, sent: false }` |
+
+By the time the ad-hoc sub-process completes, `toolCallResult` is a single structured object with the full history of the tool call, which the AI Agent connector passes back to the LLM.
