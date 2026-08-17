@@ -100,6 +100,8 @@ For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), both the AI ag
 
 You can reuse an agent instance across multiple element instances within the same process instance, allowing the agent to maintain a multi-turn conversation when the process loops back to it.
 
+Use the [search endpoint](/apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instances.api.mdx) to list agent instances filtered by any of their properties, including their agent definition key. This lets you pivot from a specific agent definition to all of its runtime instances, for example to find every instance created from a given process definition version.
+
 ### Agent context and memory
 
 For [Camunda AI agents](/reference/glossary.md#camunda-ai-agent), the AI Agent connector keeps the agent's runtime state in an agent context object. The context holds the conversation, tool calls and their results, reasoning traces, and metadata such as token usage. It also records the agent instance key, which links the context back to its agent instance.
