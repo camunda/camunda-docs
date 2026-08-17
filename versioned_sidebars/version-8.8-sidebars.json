@@ -1200,6 +1200,11 @@
           ]
         },
         "components/saas/backups",
+        {
+          "type": "doc",
+          "id": "components/saas/cross-region-cold-recovery",
+          "className": "sidebar-cta-experimental"
+        },
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
