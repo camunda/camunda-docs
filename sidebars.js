@@ -118,6 +118,7 @@ module.exports = {
             "components/agentic-orchestration/evaluate-agents/test-ai-agents",
           ],
         },
+        "components/agentic-orchestration/build-external-agent",
         "components/agentic-orchestration/rag-ai-agents",
         "components/agentic-orchestration/expose-process-as-mcp-tool",
         "components/agentic-orchestration/choose-right-model-agentic",

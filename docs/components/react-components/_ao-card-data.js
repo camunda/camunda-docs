@@ -93,6 +93,13 @@ export const fundamentalCards_monitoring = [
 // Recommendation cards on introduction page
 export const recommendationCards = [
   {
+    link: "../build-external-agent/",
+    title: "Build an external agent",
+    image: IconAoAgentImg,
+    description:
+      "Make an agent built with an external framework visible in Operate.",
+  },
+  {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
     image: IconRAG,
