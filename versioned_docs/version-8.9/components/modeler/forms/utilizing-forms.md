@@ -25,7 +25,7 @@ To start building a form, log in to your [Camunda 8](https://camunda.io) account
 4. In the process application, click **Create new**, and choose **Form**.
 
 :::tip
-When using [Desktop Modeler](/components/modeler/about-modeler.md), under **Create a new file**, click **Form**.
+If using [Desktop Modeler](/components/modeler/about-modeler.md), under **Create a new file**, click **Form**.
 :::
 
 ### Build your form
