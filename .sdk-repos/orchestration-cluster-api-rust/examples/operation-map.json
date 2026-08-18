@@ -377,6 +377,20 @@
       "label": "Delete role"
     }
   ],
+  "deleteRuntimeBackup": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "deleteRuntimeBackupState": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
   "deleteTenant": [
     {
       "file": "tenant.rs",
@@ -426,6 +440,13 @@
       "label": "Fail a job"
     }
   ],
+  "getAgentDefinition": [
+    {
+      "file": "agent_definition.rs",
+      "region": "GetAgentDefinition",
+      "label": "Get an agent definition"
+    }
+  ],
   "getAgentInstance": [
     {
       "file": "agent_instance.rs",
@@ -459,6 +480,13 @@
       "file": "batch_operation.rs",
       "region": "GetBatchOperation",
       "label": "Get batch operation"
+    }
+  ],
+  "getClusterStatus": [
+    {
+      "file": "cluster.rs",
+      "region": "GetClusterStatus",
+      "label": "Get the cluster status"
     }
   ],
   "getDecisionDefinition": [
@@ -508,6 +536,13 @@
       "file": "element_instance.rs",
       "region": "GetElementInstance",
       "label": "Get element instance"
+    }
+  ],
+  "getExportingStatus": [
+    {
+      "file": "exporting.rs",
+      "region": "GetExportingStatus",
+      "label": "Get the exporting status"
     }
   ],
   "getFormByKey": [
@@ -706,11 +741,32 @@
       "label": "Get resource content as binary"
     }
   ],
+  "getRestoreStatus": [
+    {
+      "file": "recovery.rs",
+      "region": "GetRestoreStatus",
+      "label": "Get the restore status"
+    }
+  ],
   "getRole": [
     {
       "file": "role.rs",
       "region": "GetRole",
       "label": "Get role"
+    }
+  ],
+  "getRuntimeBackup": [
+    {
+      "file": "backup.rs",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "getRuntimeBackupState": [
+    {
+      "file": "backup.rs",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
     }
   ],
   "getStartProcessForm": [
@@ -790,6 +846,20 @@
       "label": "Get variable"
     }
   ],
+  "listRuntimeBackups": [
+    {
+      "file": "backup.rs",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "listSecrets": [
+    {
+      "file": "secret.rs",
+      "region": "ListSecrets",
+      "label": "List secrets"
+    }
+  ],
   "migrateProcessInstance": [
     {
       "file": "process_instance.rs",
@@ -816,6 +886,13 @@
       "file": "process_instance.rs",
       "region": "ModifyProcessInstancesBatchOperation",
       "label": "Modify process instances (batch)"
+    }
+  ],
+  "pauseExporting": [
+    {
+      "file": "exporting.rs",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
     }
   ],
   "pinClock": [
@@ -881,6 +958,13 @@
       "label": "Resume Batch operation"
     }
   ],
+  "resumeExporting": [
+    {
+      "file": "exporting.rs",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
   "resumeProcessInstance": [
     {
       "file": "process_instance.rs",
@@ -893,6 +977,13 @@
       "file": "process_instance.rs",
       "region": "ResumeProcessInstancesBatchOperation",
       "label": "Resume process instances (batch)"
+    }
+  ],
+  "searchAgentDefinitions": [
+    {
+      "file": "agent_definition.rs",
+      "region": "SearchAgentDefinitions",
+      "label": "Search agent definitions"
     }
   ],
   "searchAgentInstanceHistory": [
@@ -1091,6 +1182,13 @@
       "label": "Search message subscriptions"
     }
   ],
+  "searchOwnAuthorizations": [
+    {
+      "file": "authentication.rs",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search authorizations of the authenticated user"
+    }
+  ],
   "searchProcessDefinitionVariableNames": [
     {
       "file": "process_definition.rs",
@@ -1236,6 +1334,20 @@
       "file": "process_instance.rs",
       "region": "SuspendProcessInstancesBatchOperation",
       "label": "Suspend process instances (batch)"
+    }
+  ],
+  "syncRuntimeBackupState": [
+    {
+      "file": "backup.rs",
+      "region": "SyncRuntimeBackupState",
+      "label": "Synchronize the runtime backup state"
+    }
+  ],
+  "takeRuntimeBackup": [
+    {
+      "file": "backup.rs",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
     }
   ],
   "throwJobError": [
