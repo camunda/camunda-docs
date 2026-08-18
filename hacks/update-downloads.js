@@ -266,7 +266,8 @@ function parseDirectoryEntries(html, directoryUrl) {
         isDirectory: href.endsWith("/"),
       };
     })
-    .get();
+    .get()
+    .filter(Boolean);
 }
 
 function parseAssets(html, directoryUrl) {
@@ -289,7 +290,8 @@ function parseAssets(html, directoryUrl) {
         date: date || null,
       };
     })
-    .get();
+    .get()
+    .filter(Boolean);
 }
 
 function getLatestVersion(entries, { prerelease }) {
