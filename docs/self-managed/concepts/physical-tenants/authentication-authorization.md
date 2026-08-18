@@ -193,13 +193,14 @@ For example:
 
 ## Cluster-admin role
 
-:::note
-Cluster-admin role support is available starting in 8.10 alpha4. The cluster-wide operations it protects (backup, restore, topology management) are still being wired behind it and are not all complete yet.
-:::
+Cluster-wide endpoints under `/cluster/v2/...` require the cluster-admin role. Broker startup does not fail if the role is not configured, but cluster-wide operations are unavailable to callers until you configure it.
 
-Broker startup does not fail if the cluster-admin role is not configured. However, configuring the cluster-admin role is strongly recommended so that cluster-wide operations (backup, restore, topology management) can be restricted to authorized operators as cluster-wide endpoints become available.
+| Authentication method | Configure cluster-admin access with                                                 |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| OIDC                  | A matching client ID, group, or claim under `camunda.security.cluster-admin.oidc.*` |
+| Basic authentication  | An explicit user under `camunda.security.cluster-admin.basic.users`                 |
 
-The cluster-admin role is resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service is required. Multiple mechanisms are supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for basic auth.
+The cluster-admin role is resolved at request time. No persisted cluster-level role bindings or separate cluster identity service is required.
 
 ## gRPC authentication
 

@@ -5,7 +5,7 @@ sidebar_label: "Physical Tenants"
 description: "Physical Tenants enable strong data isolation and independent management within a single Camunda 8 cluster."
 ---
 
-A **Physical Tenant** is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each acting like a self-contained mini-cluster with fully isolated data, independent lifecycle management, and no runtime interference between tenants.
+A **Physical Tenant** is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each acting like a self-contained mini-cluster with isolated data and independent lifecycle management while sharing cluster infrastructure.
 
 Physical Tenants provide a balanced approach to multi-tenancy—offering strong isolation without the operational complexity and cost of running separate clusters. See [Multi-tenancy overview](index.md) to compare with other isolation models.
 
@@ -13,7 +13,7 @@ Physical Tenants provide a balanced approach to multi-tenancy—offering strong 
 
 **Strong isolation without complexity:** Run multiple teams or organizations on one cluster with complete data separation and independent operations, without the overhead of managing multiple orchestration clusters.
 
-**Independent operations:** Back up, restore, scale, and manage each Physical Tenant independently. Tenant-specific performance issues do not affect other tenants.
+**Independent operations:** Back up, restore, scale, and manage each Physical Tenant independently. Shared gateways and brokers can still introduce noisy-neighbor effects.
 
 **Cost efficiency:** Share infrastructure while maintaining tenant autonomy, reducing operational overhead compared to multi-cluster deployments.
 
@@ -29,7 +29,7 @@ Every Orchestration Cluster automatically includes a default Physical Tenant cre
 
 ### Cluster-wide operation
 
-An operation that affects the entire Orchestration Cluster, such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific Physical Tenant.
+An operation that affects the entire Orchestration Cluster, such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide management operations are protected by the cluster-admin role and are not scoped to a specific Physical Tenant.
 
 ### Tenant-scoped operation
 
@@ -42,7 +42,7 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 - REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-**Cluster-wide APIs** are not available yet. When added, they will be exposed under a dedicated `/cluster/v2/...` path prefix. Endpoints at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
+**Cluster-wide APIs** use the dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require cluster-admin access; `/cluster/v2/status` remains public for health checks. Endpoints at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
 
 **gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
