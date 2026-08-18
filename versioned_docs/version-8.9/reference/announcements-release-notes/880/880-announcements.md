@@ -145,7 +145,7 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--breaking-change">Regression</span>
 </div>
 <div className="release-announcement-content">
 
