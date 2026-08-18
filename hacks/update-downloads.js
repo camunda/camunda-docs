@@ -6,6 +6,7 @@ const cheerio = require("cheerio");
 
 const DOWNLOAD_CENTER_BASE_URL = "https://downloads.camunda.cloud/release/";
 const GITHUB_API_BASE_URL = "https://api.github.com";
+const REQUEST_TIMEOUT_MS = 30_000;
 const OUTPUT_PATH = path.join(__dirname, "..", "src", "data", "downloads.json");
 
 const STATIC_DATA = {
@@ -182,6 +183,29 @@ function parseVersion(value) {
   };
 }
 
+function comparePrereleaseIdentifiers(left, right) {
+  const leftNumericSuffix = left.match(/^(.*?)(\d+)$/);
+  const rightNumericSuffix = right.match(/^(.*?)(\d+)$/);
+
+  if (
+    leftNumericSuffix &&
+    rightNumericSuffix &&
+    leftNumericSuffix[1] === rightNumericSuffix[1]
+  ) {
+    return Number(leftNumericSuffix[2]) - Number(rightNumericSuffix[2]);
+  }
+
+  const leftNumber = /^\d+$/.test(left);
+  const rightNumber = /^\d+$/.test(right);
+  if (leftNumber && rightNumber) {
+    return Number(left) - Number(right);
+  }
+  if (leftNumber !== rightNumber) {
+    return leftNumber ? -1 : 1;
+  }
+  return left.localeCompare(right);
+}
+
 function compareVersions(left, right) {
   for (const key of ["major", "minor", "patch"]) {
     if (left[key] !== right[key]) {
@@ -220,15 +244,7 @@ function compareVersions(left, right) {
       continue;
     }
 
-    const leftNumber = /^\d+$/.test(leftIdentifier);
-    const rightNumber = /^\d+$/.test(rightIdentifier);
-    if (leftNumber && rightNumber) {
-      return Number(leftIdentifier) - Number(rightIdentifier);
-    }
-    if (leftNumber !== rightNumber) {
-      return leftNumber ? -1 : 1;
-    }
-    return leftIdentifier.localeCompare(rightIdentifier);
+    return comparePrereleaseIdentifiers(leftIdentifier, rightIdentifier);
   }
 
   return 0;
@@ -349,8 +365,15 @@ function getEarliestAssetDate(assets) {
   return formatDate(dates[0]);
 }
 
+function fetchWithTimeout(url, options = {}) {
+  return fetch(url, {
+    ...options,
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+  });
+}
+
 async function fetchText(url, { allowNotFound = false } = {}) {
-  const response = await fetch(url);
+  const response = await fetchWithTimeout(url);
   if (allowNotFound && response.status === 404) {
     return null;
   }
@@ -371,7 +394,7 @@ async function fetchJson(url) {
     headers.Authorization = `Bearer ${githubToken}`;
   }
 
-  const response = await fetch(url, { headers });
+  const response = await fetchWithTimeout(url, { headers });
   if (!response.ok) {
     throw new Error(`Request failed for ${url}: ${response.status}`);
   }
@@ -643,7 +666,7 @@ async function buildCatalog() {
         version: orchestrationCluster.tag_name,
         date: formatDate(orchestrationCluster.published_at),
         primaryLink: {
-          label: "View latest release on GitHub",
+          label: "View release on GitHub",
           url: orchestrationCluster.html_url,
         },
         previousVersions:
@@ -653,7 +676,7 @@ async function buildCatalog() {
         version: connectors.tag_name,
         date: formatDate(connectors.published_at),
         primaryLink: {
-          label: "View latest release on GitHub",
+          label: "View release on GitHub",
           url: connectors.html_url,
         },
         previousVersions:
