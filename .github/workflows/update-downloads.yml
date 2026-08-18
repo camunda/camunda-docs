@@ -1,0 +1,122 @@
+name: Update download catalog
+
+on:
+  schedule:
+    # Run nightly at 2 AM UTC.
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-download-catalog
+  cancel-in-progress: false
+
+jobs:
+  update-download-catalog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Update download catalog
+        id: update-catalog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run update-downloads
+
+          if git diff --quiet -- src/data/downloads.json; then
+            echo "No changes detected"
+            echo "changes_detected=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected"
+            echo "changes_detected=true" >> "$GITHUB_OUTPUT"
+            CHANGED_FILES=$(git diff --name-only -- src/data/downloads.json | tr '\n' ' ')
+            echo "changed_files=${CHANGED_FILES}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Import secrets
+        id: secrets
+        if: steps.update-catalog.outputs.changes_detected == 'true'
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      - name: Generate GitHub App token
+        id: generate-token
+        if: steps.update-catalog.outputs.changes_detected == 'true'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1
+        with:
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+
+      - name: Create pull request
+        if: steps.update-catalog.outputs.changes_detected == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          commit-message: "docs: update shared download catalog from release metadata"
+          title: "docs: update shared download catalog from release metadata"
+          body: |
+            This PR was automatically created by the download catalog update workflow.
+
+            ## Changes
+
+            The workflow detected new or changed release metadata and updated:
+            ${{ steps.update-catalog.outputs.changed_files }}
+
+            ## What was updated
+
+            - Download versions and dates
+            - Stable and experimental artifact links
+            - Getting Started, Desktop Modeler, Camunda 8 Run, RPA Worker, Orchestration Cluster, and Connectors metadata
+
+            This workflow only opens or updates a pull request. It does not merge or release changes automatically.
+
+            ---
+
+            🤖 This PR was created automatically. Review the generated catalog before merging.
+          branch: auto/update-download-catalog
+          delete-branch: true
+          labels: "dx,component:documentation,low prio"
+          team-reviewers: camunda/tech-writers
+
+      - name: Log automation result
+        run: |
+          if [ "${{ steps.update-catalog.outputs.changes_detected }}" == "true" ]; then
+            echo "Download catalog update completed. Pull request created or updated."
+          else
+            echo "Download catalog is already up to date."
+          fi
+
+  notify-failure:
+    needs:
+      - update-download-catalog
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    uses: ./.github/workflows/notify-failure.yml
+    with:
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}
