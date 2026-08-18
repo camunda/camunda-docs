@@ -93,6 +93,16 @@ Connectors that provide a single operation are also renamed to describe their ac
 
 <p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
 
+#### Send Microsoft Teams and Slack messages without managing credentials
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The new **App Integrations connector** sends messages to Microsoft Teams and Slack, and creates channels, through Camunda-operated infrastructure. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
+
+Messages can address a Microsoft Teams channel, user, or conversation, a Slack channel or user, or a Camunda recipient — an assignee, candidate users, or candidate groups — which the connector resolves to whichever platforms those people have connected. Alongside plain text you can send an Adaptive Card, a Block Kit payload, or a Camunda form. The result reports every destination reached and every one that failed, so a process can react to a partial delivery.
+
+<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
+
 ### Modeler
 
 #### BPMN element menu improvements
