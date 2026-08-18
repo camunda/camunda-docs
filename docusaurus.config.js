@@ -226,10 +226,7 @@ module.exports = {
                 highlight: "go",
                 operationMapPath:
                   ".sdk-repos/orchestration-cluster-api-go/examples/operation-map.json",
-                // The plugin has no Go import parser yet, so autoImports would
-                // resolve to no imports at all rather than falling back to
-                // defaultImports. Show the two packages every snippet needs.
-                autoImports: false,
+                autoImports: true,
                 defaultImports:
                   'import (\n\tcamunda "github.com/camunda/orchestration-cluster-api-go"\n\topenapi "github.com/camunda/orchestration-cluster-api-go/client"\n)',
               },
