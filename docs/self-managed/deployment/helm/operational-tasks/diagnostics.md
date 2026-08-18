@@ -28,7 +28,7 @@ The script outputs the following data from your namespace and creates a zip file
   - Cluster health, node stats, and allocation details.
   - Index list (sorted by name), aliases, shards, and segments.
   - Index templates, component templates, and lifecycle policies (ILM for Elasticsearch, ISM for OpenSearch).
-  - Camunda import position documents for Operate, Tasklist, and Optimize.
+  - Camunda import position documents for Optimize.
   - Operate post-importer queue document count (and a sample of entries when `--export-post-importer-queue` is set).
   - Zeebe exporter index statistics: document counts and min/max sequence numbers per value type and partition.
 
@@ -404,10 +404,6 @@ else
       fi
 
       echo "  - Collecting Camunda import position documents."
-      run_es_curl "$es_base/operate-import-position*/_search?size=10000&pretty" \
-        > "$search_dir/operate-import-position.json"
-      run_es_curl "$es_base/tasklist-import-position*/_search?size=10000&pretty" \
-        > "$search_dir/tasklist-import-position.json"
       run_es_curl "$es_base/optimize-position-based-import-index*/_search?size=10000&pretty" \
         > "$search_dir/optimize-import-position.json"
 
