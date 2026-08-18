@@ -100,9 +100,10 @@ module.exports = {
       },
       items: [
         "components/agentic-orchestration/ai-agents",
-        "components/agentic-orchestration/agent-definitions-and-instances",
         "components/agentic-orchestration/camunda-provided-llm",
+        "components/agentic-orchestration/agent-definitions-and-instances",
         "components/agentic-orchestration/ao-design",
+        "components/agentic-orchestration/agent-states-and-metrics",
         {
           type: "category",
           label: "Evaluate AI agents",
@@ -112,6 +113,7 @@ module.exports = {
           },
           items: [
             "components/agentic-orchestration/evaluate-agents/monitor-ai-agents",
+            "components/agentic-orchestration/evaluate-agents/detect-off-rail-agents",
             "components/agentic-orchestration/evaluate-agents/analyze-ai-agents",
             "components/agentic-orchestration/evaluate-agents/test-ai-agents",
           ],

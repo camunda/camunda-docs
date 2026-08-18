@@ -15,7 +15,14 @@ export const getStartedCards = [
     link: "../../../guides/getting-started-agentic-orchestration/",
     title: "Build your first AI agent",
     image: IconAoImg,
-    description: "Get started by building and running your first AI agent.",
+    description: "Get started by running your first AI agent.",
+  },
+  {
+    link: "../camunda-provided-llm/",
+    title: "Camunda-provided LLM",
+    image: IconAoLlmImg,
+    description:
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
   },
 ];
 
@@ -35,17 +42,16 @@ export const fundamentalCards = [
     description: "Understand how Camunda models AI agents.",
   },
   {
-    link: "../camunda-provided-llm/",
-    title: "Camunda-provided LLM",
-    image: IconAoLlmImg,
-    description:
-      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
-  },
-  {
     link: "../ao-design/",
     title: "Design and architecture",
     image: IconAoDesignImg,
     description: "Plan and design your agentic orchestration solutions.",
+  },
+  {
+    link: "../agent-states-and-metrics/",
+    title: "States and usage metrics",
+    image: IconAoDesignImg,
+    description: "Understand agent states and usage metrics.",
   },
   {
     link: "../evaluate-agents/evaluate-agents-overview/",
@@ -63,6 +69,12 @@ export const fundamentalCards_monitoring = [
     title: "Monitor with Operate",
     image: IconOperate,
     description: "Monitor your AI agents with Operate.",
+  },
+  {
+    link: "../detect-off-rail-agents/",
+    title: "Detect off-rail agents",
+    image: IconAoAgentImg,
+    description: "Identify a stuck or looping AI agent before it fails.",
   },
   {
     link: "../analyze-ai-agents/",
