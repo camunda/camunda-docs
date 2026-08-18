@@ -22,6 +22,8 @@ Choose the installation commands for your AI coding agent.
 
 #### Claude Code
 
+Install the skill with Claude Code:
+
 ```bash
 claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
 claude plugin install camunda-migration
