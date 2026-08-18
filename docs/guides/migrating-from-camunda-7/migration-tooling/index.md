@@ -16,7 +16,7 @@ All tools are available as **ready-to-use builds** from the [GitHub releases pag
 
 The **Camunda migration agent skill** is an AI-driven orchestrator that runs the migration tools on your behalf. It handles the tool calls so you can focus on rearchitecting your solution.
 
-### Install and run
+### Install
 
 Choose the installation commands for your AI coding agent.
 
@@ -44,7 +44,9 @@ gh skill install camunda/camunda-7-to-8-migration-tooling migrate-c7-to-c8-code 
 
 Replace `<tool-name>` with the name of your agent. See the [agent-specific installation commands](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#install-commands-for-other-agents) for supported values. For manual installation paths, see the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#manual-installation).
 
-Run from your Camunda 7 project directory:
+### Run
+
+From your Camunda 7 project directory, run the migration skill:
 
 ```text
 /camunda-migration:migrate-c7-to-c8-code
