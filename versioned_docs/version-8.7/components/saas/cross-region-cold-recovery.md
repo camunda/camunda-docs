@@ -5,15 +5,12 @@ sidebar_label: Cross-region cold recovery
 description: Recover an LPL AWS-hosted Orchestration Cluster in a secondary region from replicated backups.
 ---
 
-:::warning Experimental, LPL and AWS only
+:::warning Experimental feature
 This recovery flow is currently:
 
 - Not generally available and not part of any alpha release
-- Limited to LPL customers on AWS
 - Subject to change before becoming generally available
-
-This does not constitute a Camunda SaaS disaster recovery guarantee for other customers.
-:::
+  :::
 
 Cross-region cold recovery creates a new Orchestration Cluster in a secondary AWS region and restores selected backup data after a primary-region outage. A warm standby cluster is not running before the outage.
 
@@ -26,32 +23,32 @@ The failover flow restores backup buckets only. Document buckets follow the stan
 Before you can use cross-region cold recovery, ensure the following prerequisites are met:
 
 - Dual-region backup is enabled when you create the cluster.
-- The backup schedule is running and healthy. A 15-minute cadence is recommended.
-- Backup replication is complete. Verify `BackupStorageReady=True` on the cluster.
-- VPC infrastructure in the secondary region is pre-provisioned. This setup is recommended but not required.
+- The backup schedule is running and healthy. Backup interval will determine your expected RPO.
+- Before starting failback, wait until Console indicates that backup synchronization is complete and failback is ready.
+- Prepare the VPC infrastructure required to connect to a cluster in the recovery AWS region. Pre-provisioning the required endpoints and security groups can reduce recovery time.
+- After failover, re-establish private connectivity to the recovered cluster by creating or switching the regional VPC endpoint. This is the customer's responsibility.
 
 ## Fail over
 
-1. Confirm that the primary region is unavailable and initiate failover in Console.
-2. Select one or more backups to copy to the secondary region, and select the backup you want to restore.
-3. Console creates the target cluster and submits the required restore resources.
-4. Camunda copies and verifies the selected backup data before restore proceeds.
-5. You don't need to manually suspend or resume the target cluster during the restore process.
-6. Verify the recovered cluster and redirect traffic to it.
-
-You are responsible for re-establishing private connectivity to the recovered cluster. Traffic is not considered restored until the required customer-managed network configuration is working.
+1. Confirm that the primary region is unavailable and start failover in Console.
+2. Select one or more backups that are already replicated to the recovery region. Console copies them to the replacement cluster's backup storage.
+3. Select one of those backups to restore.
+4. Console creates the target cluster and submits the required restore resources.
+5. Camunda copies and verifies the selected backup data before restore proceeds.
+6. You don't need to manually suspend or resume the target cluster during the restore process.
+7. Re-establish private connectivity to the recovered cluster. Use the endpoint service name shown in Console to create or switch your VPC endpoint.
+8. Update your customer-managed DNS or routing configuration to direct client traffic to the recovered cluster.
+9. Verify that your applications can connect to the recovered cluster and that requests are reaching it.
 
 ## Handle the original region
 
-When the original region becomes available again:
+After failover to the recovery region is complete, the original region may become available again. Do not resume the original cluster or route traffic to it.
 
-1. The Camunda Operator automatically attempts to suspend the old cluster. This is best effort and works only if the region is reachable.
-2. Console deletes the old cluster after the 30-day retention period.
+1. Camunda SaaS attempts to suspend the original cluster on a best-effort basis if the region is reachable.
+2. Camunda SaaS deletes the original cluster after the 30-day retention period.
 
 :::warning Split-brain risk
-If the original region recovers while the secondary is serving traffic, do not resume the old cluster. The old cluster doesn't contain data written to the secondary cluster after failover and therefore contains stale data.
-
-The old cluster is deleted automatically by Console. If automatic deletion fails, contact Camunda support to ensure the cluster is removed.
+Do not run both clusters at the same time. The original cluster may contain stale data and does not include changes made in the recovered region. If you have questions about the process, contact Camunda support.
 :::
 
 ## Restore private connectivity
@@ -89,8 +86,7 @@ You can configure a 15-minute backup schedule for the organization, but this sch
 
 ## Limitations
 
-- This flow is currently limited to LPL and AWS-hosted clusters.
-- It restores backup buckets only. Document buckets are excluded.
+- This flow restores backup buckets only. Document buckets are excluded.
 - Private connectivity must be re-established by the customer.
 - Recovery is cold and creates a new cluster. It is not an active-active or warm-standby configuration.
 - Failover and failback depend on backup replication and may be affected by replication lag.
