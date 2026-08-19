@@ -93,13 +93,6 @@ export const fundamentalCards_monitoring = [
 // Recommendation cards on introduction page
 export const recommendationCards = [
   {
-    link: "../connect-external-agent/",
-    title: "Connect an external agent",
-    image: IconAoAgentImg,
-    description:
-      "Make an agent built with an external framework visible in Operate.",
-  },
-  {
     link: "../add-tool-to-ai-agent/",
     title: "Add tools to an AI agent",
     image: IconAoAgentImg,
@@ -110,6 +103,12 @@ export const recommendationCards = [
     title: "Add long-term memory",
     image: IconRAG,
     description: "Add long-term memory to your AI agents.",
+  },
+  {
+    link: "../connect-external-agent/",
+    title: "Connect an external agent",
+    image: IconAoAgentImg,
+    description: "Connect an external agent to Camunda.",
   },
   {
     link: "../expose-process-as-mcp-tool/",
