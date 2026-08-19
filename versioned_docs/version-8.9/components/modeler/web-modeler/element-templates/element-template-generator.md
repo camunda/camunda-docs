@@ -21,7 +21,7 @@ When creating custom-built element templates, consider the [recommended best pra
 ## Generate a BPMN element template
 
 1. Select the Web Modeler project where you want to create the template.
-2. If using SaaS, create a process application to hold your template. If using Self-Managed, a process application is recommended but not strictly required.
+2. Create a process application to hold your template. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 3. Click **Create new**, then select **Element template** to open the **Create new element template** screen.  
    ![Create the new element template](./img/element-template-generator/configure-element-template-details.png)
 
@@ -45,7 +45,7 @@ You can start from a blank template or import an existing API definition such as
 To generate a connector template:
 
 1. Select the Web Modeler project where you want to create the template.
-2. If using SaaS, create a process application to hold your template. If using Self-Managed, a process application is recommended but not strictly required.
+2. Create a process application to hold your template. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 3. Click **Create new**, select **Element template**, and then choose the **Connector** tab.  
    ![Create the new element template](../../../connectors/custom-built-connectors/img/configure-connector-template-details.png)
 
