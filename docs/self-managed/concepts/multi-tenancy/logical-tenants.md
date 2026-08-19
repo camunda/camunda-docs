@@ -7,7 +7,7 @@ description: "Logical Tenants provide lightweight tenant-ID based isolation with
 
 **Logical Tenants** are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
 
-Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [Multi-tenancy overview](index.md) to compare with other isolation models.
+Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [multi-tenancy overview](index.md) to compare with other isolation models.
 
 ## How Logical Tenants work
 
@@ -79,19 +79,19 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 
 ### Deployment configuration
 
-- [Configure Logical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-logical-tenants.md) — Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
+- [Configure Logical Tenants in Helm chart](/self-managed/deployment/helm/configure/configure-logical-tenants.md). Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
 
 ### Tenant initialization
 
-- [Initialize tenants for Optimize](/self-managed/components/management-identity/configuration/initialize-tenants.md) — Programmatically create tenants at startup using configuration files or environment variables.
+- [Initialize tenants for Optimize](/self-managed/components/management-identity/configuration/initialize-tenants.md). Programmatically create tenants at startup using configuration files or environment variables.
 
 ### Runtime management
 
-- [Manage tenants in Identity](/self-managed/components/management-identity/manage-tenants.md) — Create, view, and manage tenants through the Identity UI; assign users, groups, and applications.
+- [Manage tenants in Identity](/self-managed/components/management-identity/manage-tenants.md). Create, view, and manage tenants through the Identity UI. Assign users, groups, and applications.
 
 ### Component-specific setup
 
-- [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md) — Enable and configure multi-tenancy features specific to Optimize.
+- [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md). Enable and configure multi-tenancy features specific to Optimize.
 
 ## Next steps
 

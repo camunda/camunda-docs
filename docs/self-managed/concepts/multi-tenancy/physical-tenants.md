@@ -7,7 +7,7 @@ description: "Physical Tenants enable strong data isolation and independent mana
 
 A **Physical Tenant** is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each acting like a self-contained mini-cluster with fully isolated data, independent lifecycle management, and no runtime interference between tenants.
 
-Physical Tenants provide a balanced approach to multi-tenancy—offering strong isolation without the operational complexity and cost of running separate clusters. See [Multi-tenancy overview](index.md) to compare with other isolation models.
+Physical Tenants provide a balanced approach to multi-tenancy. They offer strong isolation without the operational complexity and cost of running separate clusters. See [multi-tenancy overview](index.md) to compare isolation models.
 
 ## Why Physical Tenants
 
@@ -42,7 +42,7 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 - REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-**Cluster-wide APIs** are not available yet. When added, they will be exposed under a dedicated `/cluster/v2/...` path prefix. Endpoints at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
+**Cluster-wide APIs** use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
 
 **gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
@@ -65,7 +65,7 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 
 ## Learn more
 
-For detailed technical information about isolation model, architecture, and storage configuration, see [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+For detailed technical information about isolation model, architecture, and storage configuration, see [physical tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
 
 For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
 

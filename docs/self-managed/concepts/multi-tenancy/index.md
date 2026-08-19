@@ -45,7 +45,7 @@ Physical Tenants and Logical Tenants can be used together. Each Physical Tenant 
 
 Best for: Separate organizations with maximum isolation requirements or strict data residency needs.
 
-On SaaS, this means provisioning a separate cluster per tenant rather than configuring a distinct mode — see [Clusters](/components/concepts/clusters.md).
+On SaaS, this means provisioning a separate cluster per tenant rather than configuring a distinct mode. See [Clusters](/components/concepts/clusters.md).
 
 ## Next steps
 

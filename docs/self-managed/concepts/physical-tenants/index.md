@@ -6,7 +6,11 @@ description: "Learn how Physical Tenants isolate execution, storage, and API rou
 ---
 
 :::info
-This is the detailed technical documentation for Physical Tenants. For an overview and key concepts, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+Learn how Physical Tenants isolate execution, storage, and API routing within one orchestration cluster.
+
+:::info
+Use the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models and choose a starting point.
+:::
 :::
 
 Physical Tenants provide strong isolation within a single orchestration cluster. This page assumes one orchestration cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
@@ -61,7 +65,7 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide endpoints are exposed under a dedicated `/cluster/v2/...` path prefix, protected by the cluster-admin role available starting in 8.10 alpha4. Full wiring of cluster-wide operations behind this prefix is still in progress. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
+Cluster-wide endpoints use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
 
 ## Configure and provision Physical Tenants
 
@@ -69,7 +73,7 @@ To configure tenant defaults, per-tenant overrides, validation expectations, and
 
 To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
-To understand how Operate, Tasklist, and Optimize behave per Physical Tenant — including URL navigation, data scoping, and session behavior — see [webapp routing](./api-routing.md#webapp-routing).
+Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [webapp routing](./api-routing.md#webapp-routing).
 
 ## What is not isolated in 8.10
 
@@ -100,7 +104,7 @@ When configuring Kubernetes readiness probes, point the probe at `/actuator/heal
 
 ## Document store details
 
-Document stores are declared once in the root `camunda.document.*` catalog. Each Physical Tenant inherits the catalog and overrides only the fields it needs — typically the bucket path or prefix — to ensure its data is written to a distinct location.
+Document stores are declared once in the root `camunda.document.*` catalog. Each Physical Tenant inherits the catalog and overrides only the fields it needs, typically the bucket path or prefix, to ensure its data is written to a distinct location.
 
 Isolation is enforced by validating the resolved `provider, bucket/container, path` tuple at startup. If two tenants resolve to the same tuple, Camunda fails startup and names the conflicting tenants in the error.
 
