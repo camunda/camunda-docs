@@ -7,6 +7,10 @@ mdx:
 
 # Job workers
 
+:::caution Technical Preview
+The Go SDK is a **technical preview**. Its API surface may still evolve and changes may not follow semantic versioning. Pin an exact version if you need stability.
+:::
+
 Job workers obtain jobs of a given type — by polling the REST activation endpoint or over the gRPC job stream — run a handler, and report the outcome back to the cluster.
 
 ## Job

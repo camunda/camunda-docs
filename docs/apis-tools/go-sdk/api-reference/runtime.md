@@ -7,6 +7,10 @@ mdx:
 
 # Runtime
 
+:::caution Technical Preview
+The Go SDK is a **technical preview**. Its API surface may still evolve and changes may not follow semantic versioning. Pin an exact version if you need stability.
+:::
+
 Error types returned by every SDK call, the helpers that classify them, and the polling helper that absorbs eventual consistency.
 
 ## APIError

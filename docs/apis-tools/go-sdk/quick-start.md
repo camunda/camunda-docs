@@ -2,7 +2,7 @@
 id: quick-start
 title: "Quick start"
 sidebar_label: "Quick start"
-sidebar_position: 4
+sidebar_position: 3
 mdx:
   format: md
 ---

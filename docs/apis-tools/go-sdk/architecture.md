@@ -2,7 +2,7 @@
 id: architecture
 title: "Architecture"
 sidebar_label: "Architecture"
-sidebar_position: 2
+sidebar_position: 4
 mdx:
   format: md
 ---

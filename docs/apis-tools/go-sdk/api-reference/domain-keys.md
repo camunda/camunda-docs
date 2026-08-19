@@ -7,6 +7,10 @@ mdx:
 
 # Domain keys
 
+:::caution Technical Preview
+The Go SDK is a **technical preview**. Its API surface may still evolve and changes may not follow semantic versioning. Pin an exact version if you need stability.
+:::
+
 The Camunda Domain Type System replaces the bare `string` identifiers emitted by the OpenAPI generator with validated named types. Passing a `ProcessInstanceKey` where a `JobKey` is expected is a compile error, so whole classes of identifier mix-ups are caught before the request is sent.
 
 ```go

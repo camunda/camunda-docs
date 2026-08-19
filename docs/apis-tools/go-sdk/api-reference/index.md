@@ -7,6 +7,10 @@ mdx:
 
 # API reference
 
+:::caution Technical Preview
+The Go SDK is a **technical preview**. Its API surface may still evolve and changes may not follow semantic versioning. Pin an exact version if you need stability.
+:::
+
 This reference covers the hand-written ergonomic surface of the Go SDK: the client, its configuration, the job workers, and the error and polling helpers.
 
 | Page                               | Contents                                                             |

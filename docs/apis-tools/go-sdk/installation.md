@@ -2,7 +2,7 @@
 id: installation
 title: "Installation"
 sidebar_label: "Installation"
-sidebar_position: 3
+sidebar_position: 2
 mdx:
   format: md
 ---
@@ -18,4 +18,4 @@ go get github.com/camunda/orchestration-cluster-api-go
 ```
 
 Requires Go 1.25+. During Technical Preview the module path has no version suffix
-(see [versioning](https://github.com/camunda/orchestration-cluster-api-go/blob/main/versioning.md#versioning)).
+(see [versioning](versioning.md#versioning)).

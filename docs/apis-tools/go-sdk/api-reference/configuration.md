@@ -7,6 +7,10 @@ mdx:
 
 # Configuration
 
+:::caution Technical Preview
+The Go SDK is a **technical preview**. Its API surface may still evolve and changes may not follow semantic versioning. Pin an exact version if you need stability.
+:::
+
 Configuration is resolved from explicit options first, then environment variables, then built-in defaults, and validated fail-fast at construction.
 
 ## AuthStrategy
