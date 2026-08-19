@@ -83,13 +83,13 @@ Use these guides to configure tenant defaults and manage the Physical Tenant lif
 
 <AoGrid columns={2} ao={[
 {
-link: "./configuration-reference.md",
+link: "./configuration-reference/",
 title: "Configuration reference",
 image: IconConfigImg,
 description: "Define tenant defaults, overrides, validation rules, and property examples.",
 },
 {
-link: "./provisioning-and-lifecycle.md",
+link: "./provisioning-and-lifecycle/",
 title: "Provisioning and lifecycle",
 image: IconOperateImg,
 description: "Add tenants, apply configuration changes, and manage tenant availability.",

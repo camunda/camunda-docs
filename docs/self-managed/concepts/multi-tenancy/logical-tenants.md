@@ -88,25 +88,25 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 
 <AoGrid columns={2} ao={[
 {
-link: "/self-managed/deployment/helm/configure/configure-multi-tenancy.md",
+link: "../../../deployment/helm/configure/configure-multi-tenancy/",
 title: "Configure multi-tenancy in the Helm chart",
 image: IconConfigImg,
 description: "Set up multi-tenancy flags and prerequisites for the Orchestration Cluster and Management Identity.",
 },
 {
-link: "/self-managed/components/management-identity/configuration/initialize-tenants.md",
+link: "../../../components/management-identity/configuration/initialize-tenants/",
 title: "Initialize tenants for Optimize",
 image: IconConsoleImg,
 description: "Create tenants at startup using configuration files or environment variables.",
 },
 {
-link: "/self-managed/components/management-identity/manage-tenants.md",
+link: "../../../components/management-identity/manage-tenants/",
 title: "Manage tenants in Identity",
 image: IconOperateImg,
 description: "Create, view, and manage tenants through the Identity user interface.",
 },
 {
-link: "/self-managed/components/optimize/configuration/multi-tenancy.md",
+link: "../../../components/optimize/configuration/multi-tenancy/",
 title: "Configure multi-tenancy in Optimize",
 image: IconConsoleImg,
 description: "Enable and configure Optimize-specific multi-tenancy features.",

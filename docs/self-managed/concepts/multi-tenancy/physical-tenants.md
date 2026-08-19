@@ -98,25 +98,25 @@ Use these guides to plan, configure, and operate Physical Tenants.
 
 <AoGrid columns={2} ao={[
 {
-link: "/self-managed/concepts/physical-tenants/index.md",
+link: "../../physical-tenants/",
 title: "Understand the isolation model",
 image: IconOrchClusterImg,
 description: "Review shared infrastructure, storage boundaries, routing, and health checks.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/configuration-reference.md",
+link: "../../physical-tenants/configuration-reference/",
 title: "Configure Physical Tenants",
 image: IconConfigImg,
 description: "Define root defaults, tenant overrides, storage, identity providers, and validation rules.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md",
+link: "../../physical-tenants/provisioning-and-lifecycle/",
 title: "Provision and manage tenants",
 image: IconOperateImg,
 description: "Add tenants, apply configuration changes, and understand disable and re-enable behavior.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/api-routing.md",
+link: "../../physical-tenants/api-routing/",
 title: "Route API requests",
 image: IconReferenceApiImg,
 description: "Target tenants through REST paths, gRPC metadata, web app URLs, and cluster-wide routes.",
@@ -129,25 +129,25 @@ Continue with the pages that cover identity, storage, web apps, authorization, a
 
 <AoGrid columns={2} ao={[
 {
-link: "/self-managed/concepts/physical-tenants/authentication-authorization.md",
+link: "../../physical-tenants/authentication-authorization/",
 title: "Authenticate and authorize tenants",
 image: IconConfigImg,
 description: "Assign identity providers, map token claims, and isolate sessions and permissions.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/authorization-model.md",
+link: "../../physical-tenants/authorization-model/",
 title: "Understand authorization scopes",
 image: IconReferenceApiImg,
 description: "Distinguish tenant-local permissions from cluster-wide management access.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/storage-isolation.md",
+link: "../../physical-tenants/storage-isolation/",
 title: "Isolate tenant storage",
 image: IconOrchClusterImg,
 description: "Configure RDBMS, Elasticsearch/OpenSearch, and document-store boundaries.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/web-apps.md",
+link: "../../physical-tenants/api-routing/#webapp-routing",
 title: "Use tenant-scoped web apps",
 image: IconOperateImg,
 description: "Open Operate, Tasklist, and Admin with tenant-scoped URLs and sessions.",

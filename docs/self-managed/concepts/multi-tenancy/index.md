@@ -53,13 +53,13 @@ Use the model that matches your required isolation, cost, and operating model.
 
 <AoGrid columns={3} ao={[
 {
-link: "./logical-tenants.md",
+link: "./logical-tenants/",
 title: "Logical Tenants",
 image: IconConsoleImg,
 description: "Use tenant IDs to separate departments or teams while sharing the same infrastructure.",
 },
 {
-link: "./physical-tenants.md",
+link: "./physical-tenants/",
 title: "Physical Tenants",
 image: IconOrchClusterImg,
 description: "Isolate execution and storage for teams that need stronger separation within one cluster.",
@@ -98,19 +98,19 @@ Multi-Cluster works well for separate organizations with maximum isolation requi
 
 <AoGrid columns={3} ao={[
 {
-link: "/self-managed/deployment/helm/configure/configure-multi-tenancy.md",
+link: "../../../deployment/helm/configure/configure-multi-tenancy/",
 title: "Configure Logical Tenants",
 image: IconConsoleImg,
 description: "Set up lightweight tenant-ID isolation in a Self-Managed deployment.",
 },
 {
-link: "./physical-tenants.md",
+link: "./physical-tenants/",
 title: "Configure Physical Tenants",
 image: IconOrchClusterImg,
 description: "Plan stronger isolation and continue to the Physical Tenants documentation.",
 },
 {
-link: "/self-managed/components/management-identity/manage-tenants.md",
+link: "../../../components/management-identity/manage-tenants/",
 title: "Manage tenants in Identity",
 image: IconOperateImg,
 description: "Create, view, and manage tenants through the Identity user interface.",

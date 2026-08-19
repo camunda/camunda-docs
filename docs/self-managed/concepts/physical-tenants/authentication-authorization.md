@@ -13,13 +13,13 @@ Learn how Camunda 8.10 authenticates users and authorizes access to Physical Ten
 
 <AoGrid columns={2} ao={[
 {
-link: "./configuration-reference.md",
+link: "./configuration-reference/",
 title: "Configuration reference",
 image: IconConfigImg,
 description: "Assign identity providers and define root defaults and per-tenant overrides.",
 },
 {
-link: "./authorization-model.md",
+link: "./authorization-model/",
 title: "Authorization model",
 image: IconReferenceApiImg,
 description: "Understand tenant-local permissions and cluster-wide management access.",
