@@ -5,9 +5,16 @@ sidebar_label: "Logical Tenants"
 description: "Logical Tenants provide lightweight tenant-ID based isolation within a single Camunda 8 cluster."
 ---
 
-**Logical Tenants** are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
+import AoGrid from "../../../components/react-components/_ao-card";
+import IconConfigImg from "../../../components/assets/icon-config.png";
+import IconConsoleImg from "../../../components/assets/icon-console.png";
+import IconOperateImg from "../../../components/assets/icon-operate.png";
 
-Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [Multi-tenancy overview](index.md) to compare with other isolation models.
+Learn how Logical Tenants use tenant IDs to separate data and access while sharing infrastructure within one Physical Tenant or cluster.
+
+Logical Tenants provide lightweight isolation through tenant identifiers stored in the `tenantId` field. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
+
+Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See the [multi-tenancy overview](index.md) to compare isolation models.
 
 ## How Logical Tenants work
 
@@ -79,21 +86,34 @@ All Logical Tenant configuration and management pages are consolidated here. Eac
 
 ### Deployment configuration
 
-- [Configure multi-tenancy in Helm chart](/self-managed/deployment/helm/configure/configure-multi-tenancy.md) — Set up multi-tenancy flags and prerequisites for Orchestration Cluster and Management Identity.
-
-### Tenant initialization
-
-- [Initialize tenants for Optimize](/self-managed/components/management-identity/configuration/initialize-tenants.md) — Programmatically create tenants at startup using configuration files or environment variables.
-
-### Runtime management
-
-- [Manage tenants in Identity](/self-managed/components/management-identity/manage-tenants.md) — Create, view, and manage tenants through the Identity UI; assign users, groups, and applications.
-
-### Component-specific setup
-
-- [Optimize multi-tenancy](/self-managed/components/optimize/configuration/multi-tenancy.md) — Enable and configure multi-tenancy features specific to Optimize.
+<AoGrid columns={2} ao={[
+{
+link: "/self-managed/deployment/helm/configure/configure-multi-tenancy.md",
+title: "Configure multi-tenancy in the Helm chart",
+image: IconConfigImg,
+description: "Set up multi-tenancy flags and prerequisites for the Orchestration Cluster and Management Identity.",
+},
+{
+link: "/self-managed/components/management-identity/configuration/initialize-tenants.md",
+title: "Initialize tenants for Optimize",
+image: IconConsoleImg,
+description: "Create tenants at startup using configuration files or environment variables.",
+},
+{
+link: "/self-managed/components/management-identity/manage-tenants.md",
+title: "Manage tenants in Identity",
+image: IconOperateImg,
+description: "Create, view, and manage tenants through the Identity user interface.",
+},
+{
+link: "/self-managed/components/optimize/configuration/multi-tenancy.md",
+title: "Configure multi-tenancy in Optimize",
+image: IconConsoleImg,
+description: "Enable and configure Optimize-specific multi-tenancy features.",
+},
+]} />
 
 ## Next steps
 
 - Need stronger isolation? See [Physical Tenants](physical-tenants.md).
-- Compare all models: [Multi-tenancy overview](index.md).
+- To compare all models, see the [Multi-tenancy overview](index.md).

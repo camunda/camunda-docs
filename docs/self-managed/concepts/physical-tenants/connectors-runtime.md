@@ -5,15 +5,33 @@ sidebar_label: "Connectors runtime"
 description: "Configure one Connectors runtime instance to serve multiple Physical Tenants, with per-tenant job workers, opt-in secret scoping, and inbound webhook routing."
 ---
 
-One Connectors runtime instance can register job workers and serve inbound connectors for multiple Physical Tenants. No separate runtime deployment per tenant is required.
+import AoGrid from "../../../components/react-components/_ao-card";
+import IconConfigImg from "../../../components/assets/icon-config.png";
+import IconReferenceApiImg from "../../../components/assets/icon-reference-api.png";
+import IconOrchClusterImg from "../../../components/assets/icon-orchcluster.png";
 
-:::note Related pages
+Learn how one Connectors runtime instance can serve multiple Physical Tenants with tenant-specific clients, workers, secrets, and inbound paths.
 
-- **[Configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md)** — General tenant configuration
-- **[Authorization model](/self-managed/concepts/physical-tenants/authorization-model.md)** — Roles and permissions per tenant
-- **[API routing](/self-managed/concepts/physical-tenants/api-routing.md)** — How requests route to Physical Tenants
-
-:::
+<AoGrid columns={3} ao={[
+{
+link: "/self-managed/concepts/physical-tenants/configuration-reference.md",
+title: "Configuration reference",
+image: IconConfigImg,
+description: "Configure tenant clients and runtime connection details.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/authorization-model.md",
+title: "Authorization model",
+image: IconReferenceApiImg,
+description: "Assign tenant-local permissions to each runtime client.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/api-routing.md",
+title: "API routing",
+image: IconOrchClusterImg,
+description: "Understand tenant-scoped REST paths and gRPC metadata.",
+},
+]} />
 
 ## Architecture
 
@@ -42,6 +60,14 @@ graph TD
     runtime --> inboundA
     runtime --> inboundB
     runtime --> inboundDefault
+
+    classDef runtime fill:#e4eef8,stroke:#2272c9,color:#14082c,stroke-width:2px
+    classDef tenant fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    classDef worker fill:#e8fdf1,stroke:#10c95d,color:#14082c
+
+    class runtime runtime
+    class ptA,ptB,ptDefault tenant
+    class workerA,workerB,workerDefault,inboundA,inboundB,inboundDefault worker
 ```
 
 ## How the runtime identifies the Physical Tenant
@@ -59,7 +85,7 @@ Use the `camunda.clients.*` multi-client configuration to connect the runtime to
 ```yaml
 camunda:
   client:
-    # Shared base — inherited by all client entries
+    # Shared base inherited by all client entries
     grpc-address: https://your-cluster.example.com:26500
     rest-address: https://your-cluster.example.com
   clients:
@@ -87,7 +113,7 @@ camunda:
 - The client name (`tenanta`) is a free-form label and does not have to match the `physical-tenant-id`.
 - `physical-tenant-id` must be lowercase alphanumeric, maximum 64 characters.
 - Mark one entry `primary: true` when configuring multiple clients. With a single client, it is the primary implicitly.
-- Existing single-client deployments using `camunda.client.*` are unaffected — `camunda.client.*` transparently maps to `camunda.clients.default.*` at startup.
+- Existing single-client deployments using `camunda.client.*` are unaffected. At startup, `camunda.client.*` transparently maps to `camunda.clients.default.*`.
 
 ## Outbound connectors
 
@@ -137,10 +163,10 @@ Equivalent environment variable: `CAMUNDA_CONNECTOR_WEBHOOK_APPEND_PHYSICAL_TENA
 
 If unset, the property is inferred automatically: multi-client configurations default to `true`, single-client configurations default to `false`. An explicit value always overrides inference.
 
-Without namespaced paths, the first registered inbound connector matching a path claims the request regardless of Physical Tenant — enable namespaced paths in any multi-tenant deployment.
+Without namespaced paths, the first registered inbound connector matching a path claims the request regardless of Physical Tenant. Enable namespaced paths in any multi-tenant deployment.
 
 :::warning Isolation relies on path uniqueness, not tenant-scoped credentials
-The routing layer performs pure path-segment matching on `physicalTenantId/tenantId/path` — no credential or signature check happens at the routing layer. HMAC and signature verification is handled per-connector downstream, inside each webhook element's own logic, and has no awareness of `physicalTenantId`. Tenant isolation depends entirely on each tenant's webhook paths being distinct and unguessable.
+The routing layer performs pure path-segment matching on `physicalTenantId/tenantId/path`. No credential or signature check happens at the routing layer. HMAC and signature verification is handled per connector downstream, inside each webhook element's own logic, and has no awareness of `physicalTenantId`. Tenant isolation depends entirely on each tenant's webhook paths being distinct and unguessable.
 :::
 
 ### Known limitations
@@ -158,7 +184,7 @@ Each client's identity needs the standard permissions to activate, complete, and
 
 ### Scaling
 
-One runtime instance per cluster is standard. Deploy multiple instances only when you need runtime-layer resource isolation (for example, performance SLA separation) — Physical Tenants already isolate data structurally.
+One runtime instance per cluster is standard. Deploy multiple instances only when you need runtime-layer resource isolation, such as performance SLA separation. Physical Tenants already isolate data structurally.
 
 ### Monitoring
 

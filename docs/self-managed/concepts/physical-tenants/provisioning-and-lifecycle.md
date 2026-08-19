@@ -5,7 +5,7 @@ sidebar_label: "Provisioning and lifecycle"
 description: "Provision and manage Physical Tenants in 8.10, including restart behavior and out-of-scope operations."
 ---
 
-This page describes how to provision and operate Physical Tenants in Camunda 8.10.
+Learn how to provision and operate Physical Tenants in Camunda 8.10.
 
 ## Provisioning model in 8.10
 
@@ -26,7 +26,7 @@ To add a tenant:
 3. Ensure required storage and identity configuration is valid.
 4. Apply the change through a rolling restart.
 
-You can add multiple new Physical Tenants in the same configuration change and rolling restart — there is no requirement to add them one at a time.
+You can add multiple new Physical Tenants in the same configuration change and rolling restart. You do not need to add them one at a time.
 
 ### Rolling restart expectations
 
@@ -52,15 +52,15 @@ If tenant scope is omitted in compatibility paths, requests resolve to the defau
 
 For 8.10:
 
-- Disabling and re-enabling a Physical Tenant is supported, but only through configuration — there is no dedicated API for it.
+- Disabling and re-enabling a Physical Tenant is supported through configuration. There is no dedicated API for this operation.
 - Renaming a Physical Tenant is not supported.
 - Deleting a Physical Tenant is not supported.
 
 A Physical Tenant's enabled state follows its configuration directly:
 
-- **Present in configuration** — the tenant is enabled.
-- **Removed from configuration** — the tenant is disabled. The cluster stops processing requests for that tenant, and the API returns `404 Not Found` for requests scoped to it. No data is deleted.
-- **Re-added to configuration** — the tenant is re-enabled with its existing data. Nothing needs to be re-created.
+- **Present in configuration:** The tenant is enabled.
+- **Removed from configuration:** The tenant is disabled. The cluster stops processing requests for that tenant, and the API returns `404 Not Found` for requests scoped to it. No data is deleted.
+- **Re-added to configuration:** The tenant is re-enabled with its existing data. Nothing needs to be re-created.
 
 Each of these transitions takes effect through the same rolling restart used for any other configuration change.
 
@@ -94,8 +94,10 @@ After rollout:
 - Verify storage isolation and startup health.
 - Verify authentication behavior for assigned providers.
 
-## Related pages
+:::note Related pages
 
 - [Configuration reference](./configuration-reference.md)
 - [Physical Tenant isolation model](./index.md)
 - [Backup and restore](../../operational-guides/backup-restore/zeebe-backup-and-restore.md)
+
+:::

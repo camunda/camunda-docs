@@ -5,7 +5,7 @@ sidebar_label: "Authorization model"
 description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-This page describes the authorization model for Physical Tenants in Camunda 8.10 Self-Managed deployments. Authorization is divided into two scopes: **cluster-wide operations**, which affect the entire orchestration cluster, and **tenant-local operations**, which are scoped to a single Physical Tenant.
+Learn how Camunda 8.10 authorizes cluster-wide and tenant-local operations for Physical Tenants in Self-Managed deployments.
 
 Two new authorization resource types were added for the per-tenant management APIs introduced alongside Physical Tenants:
 
@@ -28,7 +28,7 @@ In Camunda 8.10, the Physical Tenant authorization model is designed around per-
 
 Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster topology, triggering cluster backups, and modifying Physical Tenant configuration at runtime.
 
-Endpoints served at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
+Endpoints served at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
 
 ## Tenant-local operations
 
@@ -94,4 +94,4 @@ The cluster-admin role is intended to cover operations that span all Physical Te
 - Viewing cluster topology
 - Assigning tenants or modifying Physical Tenant configuration at runtime
 
-Cluster-admin is resolved from JWT token claims using configurable mapping rules, a dedicated cluster-admin configuration, or explicit user assignment for Basic auth — there is no separate persisted cluster-level role binding service. Authorization is coarse-grained: cluster-admin grants access to all cluster-level operations, with no fine-grained sub-roles.
+Cluster-admin is resolved from JWT token claims using configurable mapping rules, a dedicated cluster-admin configuration, or explicit user assignment for Basic auth. There is no separate persisted cluster-level role binding service. Authorization is coarse-grained: cluster-admin grants access to all cluster-level operations, with no fine-grained sub-roles.

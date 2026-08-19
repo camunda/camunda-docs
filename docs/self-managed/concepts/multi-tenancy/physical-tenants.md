@@ -5,9 +5,38 @@ sidebar_label: "Physical Tenants"
 description: "Physical Tenants enable strong data isolation and independent management within a single Camunda 8 cluster."
 ---
 
-A **Physical Tenant** is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each acting like a self-contained mini-cluster with isolated data and independent lifecycle management while sharing cluster infrastructure.
+import AoGrid from "../../../components/react-components/_ao-card";
+import IconConfigImg from "../../../components/assets/icon-config.png";
+import IconOrchClusterImg from "../../../components/assets/icon-orchcluster.png";
+import IconReferenceApiImg from "../../../components/assets/icon-reference-api.png";
+import IconOperateImg from "../../../components/assets/icon-operate.png";
 
-Physical Tenants provide a balanced approach to multi-tenancy—offering strong isolation without the operational complexity and cost of running separate clusters. See [Multi-tenancy overview](index.md) to compare with other isolation models.
+Learn how Physical Tenants provide strong data isolation and independent operations within one Orchestration Cluster.
+
+Each Physical Tenant is an isolated execution unit with separate primary and secondary storage, plus independent lifecycle management while sharing cluster infrastructure.
+
+Physical Tenants provide a balanced approach to multi-tenancy. They offer strong isolation without the operational complexity and cost of running separate clusters. See the [multi-tenancy overview](index.md) to compare isolation models.
+
+<p class="link-arrow">[Configure Physical Tenants](/self-managed/concepts/physical-tenants/configuration-reference.md)</p>
+
+```mermaid
+flowchart LR
+	cluster["One orchestration cluster"] --> shared["Shared brokers and gateways"]
+	cluster --> tenantA["Physical Tenant A\nIsolated execution and storage"]
+	cluster --> tenantB["Physical Tenant B\nIsolated execution and storage"]
+	tenantA --> logicalA["Logical Tenants"]
+	tenantB --> logicalB["Logical Tenants"]
+
+	classDef cluster fill:#e4eef8,stroke:#2272c9,color:#14082c,stroke-width:2px
+	classDef shared fill:#f0f5ff,stroke:#2272c9,color:#14082c
+	classDef tenant fill:#fde8da,stroke:#fc5d0d,color:#14082c
+	classDef logical fill:#e8fdf1,stroke:#10c95d,color:#14082c
+
+	class cluster cluster
+	class shared shared
+	class tenantA,tenantB tenant
+	class logicalA,logicalB logical
+```
 
 ## Why Physical Tenants
 
@@ -42,7 +71,7 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 - REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-**Cluster-wide APIs** use the dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require cluster-admin access; `/cluster/v2/status` remains public for health checks. Endpoints at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
+**Cluster-wide APIs** use the dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require cluster-admin access. `/cluster/v2/status` remains public for health checks. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
 
 **gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
@@ -63,17 +92,67 @@ When referencing Physical Tenants and Logical Tenants in documentation and code:
 - Existing API keys remain unchanged.
 - Use **Physical Tenant** and **Logical Tenant** (capitalized) as the canonical terms.
 
-## Learn more
+## Explore Physical Tenants
 
-For detailed technical information about isolation model, architecture, and storage configuration, see [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md).
+Use these guides to plan, configure, and operate Physical Tenants.
 
-For tenant configuration defaults, overrides, validation, and examples, see [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
+<AoGrid columns={2} ao={[
+{
+link: "/self-managed/concepts/physical-tenants/index.md",
+title: "Understand the isolation model",
+image: IconOrchClusterImg,
+description: "Review shared infrastructure, storage boundaries, routing, and health checks.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/configuration-reference.md",
+title: "Configure Physical Tenants",
+image: IconConfigImg,
+description: "Define root defaults, tenant overrides, storage, identity providers, and validation rules.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md",
+title: "Provision and manage tenants",
+image: IconOperateImg,
+description: "Add tenants, apply configuration changes, and understand disable and re-enable behavior.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/api-routing.md",
+title: "Route API requests",
+image: IconReferenceApiImg,
+description: "Target tenants through REST paths, gRPC metadata, web app URLs, and cluster-wide routes.",
+},
+]} />
 
-For adding tenants and lifecycle expectations in 8.10, see [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md).
+## Related capabilities
 
-For how REST API requests are routed to Physical Tenants, including default tenant compatibility and HTTP status codes, see [API routing](/self-managed/concepts/physical-tenants/api-routing.md).
+Continue with the pages that cover identity, storage, web apps, authorization, and connectors.
 
-For identity deployment models, token routing, and per-tenant authorization, see [authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md).
+<AoGrid columns={2} ao={[
+{
+link: "/self-managed/concepts/physical-tenants/authentication-authorization.md",
+title: "Authenticate and authorize tenants",
+image: IconConfigImg,
+description: "Assign identity providers, map token claims, and isolate sessions and permissions.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/authorization-model.md",
+title: "Understand authorization scopes",
+image: IconReferenceApiImg,
+description: "Distinguish tenant-local permissions from cluster-wide management access.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/storage-isolation.md",
+title: "Isolate tenant storage",
+image: IconOrchClusterImg,
+description: "Configure RDBMS, Elasticsearch/OpenSearch, and document-store boundaries.",
+},
+{
+link: "/self-managed/concepts/physical-tenants/web-apps.md",
+title: "Use tenant-scoped web apps",
+image: IconOperateImg,
+description: "Open Operate, Tasklist, and Admin with tenant-scoped URLs and sessions.",
+},
+]} />
 
 For how authorization is divided between cluster-wide and tenant-local operations, see [authorization model](/self-managed/concepts/physical-tenants/authorization-model.md).
 
