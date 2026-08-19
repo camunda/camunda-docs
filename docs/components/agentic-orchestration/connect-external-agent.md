@@ -2,7 +2,7 @@
 id: connect-external-agent
 title: Connect an external agent
 sidebar_label: Connect an external agent
-description: "Mark an agent built with an external framework as an agent in your BPMN model and report its execution through the Agent Instance API."
+description: "Connect an agent built with an external framework, such as LangGraph or CrewAI, to Camunda."
 keywords:
   [
     "agentic ai",
@@ -13,13 +13,13 @@ keywords:
   ]
 ---
 
-Give an agent built with an external framework, such as LangGraph or CrewAI, the same visibility in Operate as a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent).
+Connect an agent built with an external framework, such as LangGraph or CrewAI, to Camunda.
 
 ## About
 
-An [external agent](/reference/glossary.md#external-agent) runs its [agent loop](/reference/glossary.md#agent-loop) in your own runtime instead of Camunda's engine. Camunda orchestrates when the agent runs as part of the process, but it can only surface what the runtime reports back.
+An [external agent](/reference/glossary.md#external-agent) runs its [agent loop](/reference/glossary.md#agent-loop) in its own runtime instead of Camunda's engine. Camunda orchestrates when the agent runs as part of the process, but it can only surface what the runtime reports back.
 
-To make an external agent visible, your integration does two things:
+To make an external agent visible:
 
 - **Mark the agent in the model**: add the `zeebe:agentDefinition` extension element to the BPMN element that hosts the agent, so Camunda creates an [agent definition](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-definitions) when you deploy the process.
 - **Report the execution**: create an [agent instance](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-instances) and report the agent's state, usage metrics, tools, and conversation history through the Agent Instance API while the agent runs.
