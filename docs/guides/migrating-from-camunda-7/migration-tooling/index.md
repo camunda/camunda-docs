@@ -18,7 +18,7 @@ The **Camunda migration agent skill** is an AI-driven orchestrator that runs the
 
 ### Install
 
-Choose the installation commands for your AI coding agent.
+Choose the installation instructions for your AI coding agent.
 
 #### Claude Code
 
@@ -30,6 +30,8 @@ claude plugin install camunda-migration
 ```
 
 #### GitHub Copilot CLI
+
+Install the skill with GitHub Copilot CLI:
 
 ```bash
 copilot plugin marketplace add camunda/camunda-7-to-8-migration-tooling
