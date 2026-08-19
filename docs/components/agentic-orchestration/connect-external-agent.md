@@ -1,7 +1,7 @@
 ---
-id: build-external-agent
-title: Build your own external agent
-sidebar_label: Build an external agent
+id: connect-external-agent
+title: Connect an external agent
+sidebar_label: Connect an external agent
 description: "Mark an agent built with an external framework as an agent in your BPMN model and report its execution through the Agent Instance API."
 keywords:
   [
@@ -304,14 +304,3 @@ If your agent can't finish, [fail the job](/apis-tools/orchestration-cluster-api
 Start a process instance and open it in Operate. Select the agent element on the diagram to see the agent instance data you reported: its state, usage metrics, model, system prompt, tools, and conversation history grouped by loop iteration.
 
 See [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md) for a walkthrough of the agent views.
-
-## Agent Instance API reference
-
-| Operation                                                                                                                                  | Endpoint                                                  | Use it to                                                     |
-| :----------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------- | :------------------------------------------------------------ |
-| [Create agent instance](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx)                           | `POST /agent-instances`                                   | Register a new agent instance for an active element instance. |
-| [Update agent instance](/apis-tools/orchestration-cluster-api-rest/specifications/update-agent-instance.api.mdx)                           | `PATCH /agent-instances/{agentInstanceKey}`               | Report state, metric increments, tools, and history batches.  |
-| [Create agent instance history item](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item.api.mdx) | `POST /agent-instances/{agentInstanceKey}/history`        | Append a single conversation history item.                    |
-| [Get agent instance](/apis-tools/orchestration-cluster-api-rest/specifications/get-agent-instance.api.mdx)                                 | `GET /agent-instances/{agentInstanceKey}`                 | Read the current state, metrics, limits, and tools.           |
-| [Search agent instances](/apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instances.api.mdx)                         | `POST /agent-instances/search`                            | Find agent instances, for example by `elementInstanceKeys`.   |
-| [Search agent instance history](/apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instance-history.api.mdx)           | `POST /agent-instances/{agentInstanceKey}/history/search` | Read back the conversation history of an agent instance.      |

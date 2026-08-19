@@ -55,7 +55,7 @@ For Camunda to recognize an element as an agent, the element **must be marked** 
 
 For a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), the AI Agent Sub-process and AI Agent Task element templates add the marker for you when you model in Camunda Modeler.
 
-For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't ship an element template, so add the marker to the BPMN XML yourself. See [build your own external agent](/components/agentic-orchestration/build-external-agent.md) for the full setup, including how to package your agent as a custom element template.
+For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't ship an element template, so add the marker to the BPMN XML yourself. See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for the full setup, including how to package your agent as a custom element template.
 
 #### Mark an element as an agent in XML
 
@@ -140,4 +140,4 @@ Operate labels each entry in the conversation history simply as `iteration` (for
 
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.
 
-See [build your own external agent](/components/agentic-orchestration/build-external-agent.md) for a step-by-step walkthrough of reporting this data from your own runtime.
+See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for a step-by-step walkthrough of reporting this data from your own runtime.
