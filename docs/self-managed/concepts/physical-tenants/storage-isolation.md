@@ -14,13 +14,13 @@ Learn how to configure isolated secondary storage for Physical Tenants across RD
 
 <AoGrid columns={2} ao={[
 {
-link: "./configuration-reference.md",
+link: "../configuration-reference/",
 title: "Configuration reference",
 image: IconConfigImg,
 description: "Define storage overrides and validate tenant locations at startup.",
 },
 {
-link: "./provisioning-and-lifecycle.md",
+link: "../provisioning-and-lifecycle/",
 title: "Provisioning and lifecycle",
 image: IconOperateImg,
 description: "Apply storage changes and manage tenant availability through configuration.",

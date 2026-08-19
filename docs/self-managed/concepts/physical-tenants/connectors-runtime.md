@@ -14,19 +14,19 @@ Learn how one Connectors runtime instance can serve multiple Physical Tenants wi
 
 <AoGrid columns={3} ao={[
 {
-link: "/self-managed/concepts/physical-tenants/configuration-reference.md",
+link: "../../physical-tenants/configuration-reference/",
 title: "Configuration reference",
 image: IconConfigImg,
 description: "Configure tenant clients and runtime connection details.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/authorization-model.md",
+link: "../../physical-tenants/authorization-model/",
 title: "Authorization model",
 image: IconReferenceApiImg,
 description: "Assign tenant-local permissions to each runtime client.",
 },
 {
-link: "/self-managed/concepts/physical-tenants/api-routing.md",
+link: "../../physical-tenants/api-routing/",
 title: "API routing",
 image: IconOrchClusterImg,
 description: "Understand tenant-scoped REST paths and gRPC metadata.",

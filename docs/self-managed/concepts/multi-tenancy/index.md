@@ -98,7 +98,7 @@ Multi-Cluster works well for separate organizations with maximum isolation requi
 
 <AoGrid columns={3} ao={[
 {
-link: "../../../deployment/helm/configure/configure-multi-tenancy/",
+link: "../../deployment/helm/configure/configure-multi-tenancy/",
 title: "Configure Logical Tenants",
 image: IconConsoleImg,
 description: "Set up lightweight tenant-ID isolation in a Self-Managed deployment.",
@@ -110,7 +110,7 @@ image: IconOrchClusterImg,
 description: "Plan stronger isolation and continue to the Physical Tenants documentation.",
 },
 {
-link: "../../../components/management-identity/manage-tenants/",
+link: "../../components/management-identity/manage-tenants/",
 title: "Manage tenants in Identity",
 image: IconOperateImg,
 description: "Create, view, and manage tenants through the Identity user interface.",
