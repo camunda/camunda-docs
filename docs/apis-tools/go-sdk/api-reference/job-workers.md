@@ -118,7 +118,7 @@ drain operations and bypass the client-side backpressure gate.
 func (w *JobWorker) Run(ctx context.Context) error
 ```
 
-Run polls and dispatches jobs until ctx is cancelled, then waits for in-flight
+Run polls and dispatches jobs until ctx is canceled, then waits for in-flight
 handlers to finish and returns ctx.Err(). Run blocks; call it in a goroutine to
 run alongside other work.
 
@@ -141,7 +141,7 @@ JobWorker it does not poll: the engine pushes jobs as they become available.
 func (w *StreamJobWorker) Run(ctx context.Context) error
 ```
 
-Run opens the job stream and dispatches jobs until ctx is cancelled. The gRPC
+Run opens the job stream and dispatches jobs until ctx is canceled. The gRPC
 connection is held for the worker's lifetime and the stream is reopened (after
 reconnectBackoff) whenever it ends, so in-flight acknowledgements are never cut
 off by a reconnect. Run blocks; call it in a goroutine to run alongside other

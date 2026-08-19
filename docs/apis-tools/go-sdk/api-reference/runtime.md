@@ -120,7 +120,7 @@ func Poll[T any](ctx context.Context, fn func(context.Context) (T, error), opts 
 ```
 
 Poll repeatedly calls fn until it succeeds, the retry predicate returns false,
-the timeout elapses, or ctx is cancelled. It is intended for
+the timeout elapses, or ctx is canceled. It is intended for
 eventually-consistent reads: newly created or modified entities may not be
 immediately visible in the cluster's secondary storage, surfacing as a 404.
 

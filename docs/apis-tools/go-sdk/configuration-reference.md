@@ -36,8 +36,8 @@ precedence over both.
 | `CAMUNDA_TOKEN_AUDIENCE`                               | —        | OAuth token audience.                                                           |
 | `CAMUNDA_TOKEN_SCOPE`                                  | —        | OAuth token scope.                                                              |
 | `CAMUNDA_OAUTH_CACHE_DIR`                              | —        | Directory for the on-disk OAuth token cache.                                    |
-| `CAMUNDA_BASIC_AUTH_USERNAME`                          | —        | HTTP Basic auth username.                                                       |
-| `CAMUNDA_BASIC_AUTH_PASSWORD`                          | —        | HTTP Basic auth password.                                                       |
+| `CAMUNDA_BASIC_AUTH_USERNAME`                          | —        | HTTP Basic authentication username.                                             |
+| `CAMUNDA_BASIC_AUTH_PASSWORD`                          | —        | HTTP Basic authentication password.                                             |
 
 ## Reliability
 

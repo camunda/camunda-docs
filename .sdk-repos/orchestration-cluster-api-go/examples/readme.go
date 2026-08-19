@@ -83,7 +83,7 @@ func jobWorker(client *camunda.CamundaClient) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	// Run blocks until ctx is cancelled, draining in-flight jobs on shutdown.
+	// Run blocks until ctx is canceled, draining in-flight jobs on shutdown.
 	if err := worker.Run(ctx); err != nil {
 		fmt.Println("worker stopped:", err)
 	}
