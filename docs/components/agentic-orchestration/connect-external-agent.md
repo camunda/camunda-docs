@@ -22,7 +22,7 @@ An [external agent](/reference/glossary.md#external-agent) runs its [agent loop]
 To make an external agent visible:
 
 - **Mark the agent in the model**: add the `zeebe:agentDefinition` extension element to the BPMN element that hosts the agent, so Camunda creates an [agent definition](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-definitions) when you deploy the process.
-- **Report the execution**: create an [agent instance](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-instances) and report the agent's state, usage metrics, tools, and conversation history through the Agent Instance API while the agent runs.
+- **Report the execution**: create an [agent instance](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-instances) and report the agent's state, usage metrics, tools, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) while the agent runs.
 
 Camunda tracks an agent instance only for an element that carries an agent definition. Without the marker, the agent still runs, but it stays invisible in Operate and Optimize.
 
