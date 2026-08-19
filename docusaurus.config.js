@@ -221,6 +221,15 @@ module.exports = {
                 autoImports: true,
                 defaultImports: "use camunda_orchestration_sdk::CamundaClient;",
               },
+              {
+                lang: "Go",
+                highlight: "go",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-go/examples/operation-map.json",
+                autoImports: true,
+                defaultImports:
+                  'import (\n\tcamunda "github.com/camunda/orchestration-cluster-api-go"\n\topenapi "github.com/camunda/orchestration-cluster-api-go/client"\n)',
+              },
             ],
             version: "1",
             label: "Unused but required field",

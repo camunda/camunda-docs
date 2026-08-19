@@ -100,6 +100,12 @@ export const recommendationCards = [
       "Make an agent built with an external framework visible in Operate.",
   },
   {
+    link: "../add-tool-to-ai-agent/",
+    title: "Add tools to an AI agent",
+    image: IconAoAgentImg,
+    description: "Add BPMN elements as callable tools to your AI agents.",
+  },
+  {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",
     image: IconRAG,

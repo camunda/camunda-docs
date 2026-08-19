@@ -91,7 +91,7 @@ Data needs to sync to Operate, so your process instance may not be visible immed
 
 ### Watch the timer
 
-Your process instance pauses at the **Countdown T-10** task for 10 seconds. Open the instance in Operate and watch the token move through the countdown in real time.
+Your process instance pauses at the **Countdown T-10** task for 10 seconds. Open the instance in Operate and watch the [token](/reference/glossary.md#token-process-instance) — the marker showing the current point of execution — move through the countdown in real time.
 
 ### Inspect variables
 
