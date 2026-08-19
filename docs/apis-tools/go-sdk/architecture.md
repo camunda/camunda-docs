@@ -46,7 +46,7 @@ generated code stays pure and regenerable.
   reconnect); poll-activated jobs are acknowledged over REST, streamed jobs over
   gRPC. Set `WithStreamPollInterval` to tune or disable it.
 - **FALCON command stream** — an opt-in upgrade for
-  [nanobpmn](https://github.com/jwulf/nano-bpm) gateways (an API/behaviour superset
+  [nanobpmn](https://github.com/jwulf/nano-bpm) gateways (an API/behavior superset
   of Camunda 8). The gateway is probed once via `GET /v2/topology`; when it
   advertises the command stream, `CreateProcessInstance` is routed over a
   credit-metered WebSocket (a flood of creates queues on the submission-credit

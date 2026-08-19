@@ -31,5 +31,5 @@ client, err := camunda.New(
 
 `BALANCED` is the default and is what you want in production. `LEGACY` keeps the
 controller's observability but never gates, which is useful when comparing
-behaviour against an older SDK or when an external system already governs
+behavior against an older SDK or when an external system already governs
 concurrency.

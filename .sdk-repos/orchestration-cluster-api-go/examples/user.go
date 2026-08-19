@@ -11,7 +11,7 @@ import (
 
 func createUserExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateUser
-	req := openapi.NewUserRequest("s3cret!", "alice")
+	req := openapi.NewUserRequest("secure-password-123", "alice")
 	req.SetName("Alice Example")
 	req.SetEmail("alice@example.com")
 

@@ -16,7 +16,7 @@ The Go SDK is a **technical preview**. Its API surface may still evolve and chan
 `CamundaClient` exposes one ergonomic method per operation in the OpenAPI
 specification, generated from the same spec as the low-level client so the two
 can never diverge. Each facade method flattens the generated builder into
-first-class parameters and returns the deserialised result.
+first-class parameters and returns the deserialized result.
 
 When you need something the facade deliberately does not model — multipart
 uploads, unusual query-parameter combinations, or the raw `*http.Response` —
@@ -41,9 +41,3 @@ on the transport rather than facade-level wrappers.
 
 Full API documentation is published on
 [pkg.go.dev](https://pkg.go.dev/github.com/camunda/orchestration-cluster-api-go).
-
-`markers is
-maintainer-only and is excluded from the published pages. Both output
-directories are generated and gitignored; a scheduled workflow in`camunda-docs`runs`make docs-md` and opens the update PR.
-
-<!-- docs:cut:end -->

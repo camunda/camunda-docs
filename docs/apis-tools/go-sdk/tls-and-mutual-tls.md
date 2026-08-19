@@ -26,7 +26,7 @@ PEM values take precedence over the corresponding `*_PATH` file locations.
 | `CAMUNDA_MTLS_CERT_PATH`      | Path to the client certificate PEM.                                                                            |
 | `CAMUNDA_MTLS_KEY_PATH`       | Path to the client private key PEM.                                                                            |
 | `CAMUNDA_MTLS_CA_PATH`        | Path to the CA certificate PEM.                                                                                |
-| `CAMUNDA_MTLS_KEY_PASSPHRASE` | Recognised but **not supported yet** — setting it fails client construction. Supply an unencrypted client key. |
+| `CAMUNDA_MTLS_KEY_PASSPHRASE` | Recognized but **not supported yet** — setting it fails client construction. Supply an unencrypted client key. |
 
 The same material is applied to both the REST transport and the gRPC streaming
 worker, so a single configuration covers every connection the SDK opens.

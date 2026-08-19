@@ -13,7 +13,7 @@ import (
 func createAdminUserExample(ctx context.Context, client *camunda.CamundaClient) error {
 	// region CreateAdminUser
 	// One-time setup: create the initial administrator on a fresh cluster.
-	result, err := client.CreateAdminUser(ctx, *openapi.NewUserRequest("ChangeMe123!", "admin"))
+	result, err := client.CreateAdminUser(ctx, *openapi.NewUserRequest("admin-password-123", "admin"))
 	if err != nil {
 		return err
 	}
