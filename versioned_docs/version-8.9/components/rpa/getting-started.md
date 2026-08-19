@@ -51,18 +51,11 @@ Once you have written your script, you can test it on a local RPA worker.
 ### Using Web Modeler
 
 1. In Web Modeler, open a project.
-2. In the project, open a process application. Using a process application is required for SaaS and recommended for Self-Managed[^1].
+2. In the project, open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
 3. Use the **Create new** menu, and select **RPA script**.
 4. **Write your RPA script using Robot Framework**: Use the editor to create your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
    <img src={RpaEditorWebInitial} alt="RPA editor interface showing the initial script view in Web Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 5. In a BPMN diagram, you'll now find your new RPA script in the **Append element** menu.
-
-[^1]: In SaaS, there is a strict file resource hierarchy:
-
-    - Projects contain process applications.
-    - Process applications contain files and folders.
-
-    This new organizational structure is also coming to Self-Managed deployments in [Camunda 8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure).
 
 #### Test your script
 
