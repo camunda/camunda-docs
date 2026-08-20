@@ -186,6 +186,7 @@ orchestration:
             existingSecretKey: password
 
 optimize:
+  enabled: true
   database:
     opensearch:
       enabled: true
