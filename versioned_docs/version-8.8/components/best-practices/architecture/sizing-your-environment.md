@@ -36,6 +36,8 @@ In addition, it sends data to secondary storage (Elasticsearch, OpenSearch, or a
 
 You can configure retention times for data stored in secondary storage.
 
+For Self-Managed, see [Disk space](sizing-self-managed.md#primary-storage---disk-space) for the formula and mechanics behind Zeebe's primary storage disk usage.
+
 ### Impact of Optimize
 
 Optimize is an optional component that provides process analytics and reporting. When enabled, it has significant implications for sizing.
