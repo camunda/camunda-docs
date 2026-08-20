@@ -156,6 +156,9 @@ When Optimize is enabled, configure:
 
 ```yaml
 orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
   index:
     prefix: custom-camunda # Camunda Exporter prefix
 
@@ -177,6 +180,9 @@ optimize:
 
 ```yaml
 orchestration:
+  data:
+    secondaryStorage:
+      type: opensearch
   index:
     prefix: custom-camunda # Camunda Exporter prefix
 
