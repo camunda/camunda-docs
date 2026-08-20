@@ -121,14 +121,14 @@ The numbers in the tables were measured using a [realistic process](https://gith
 
 </Tabs>
 
-## Disk space
+## Primary Storage - Disk space
 
 All brokers in a partition use disk space to store:
 
 - The event log for each partition they participate in. By default, this is a minimum of 128 MB per partition, incrementing in 128 MB segments. The event log is truncated once its data has been processed and successfully exported by all loaded exporters.
 - One periodic snapshot of the running state (in-flight data) of each partition (unbounded, based on in-flight work).
 
-The leader of a partition also uses disk space to store a projection of the running state of the partition in RocksDB (unbounded, based on in-flight work).
+Every partition instance a broker hosts, whether leader or follower, also uses disk space to store a projection of the running state of that partition in RocksDB (unbounded, based on in-flight work). See [RocksDB](#rocksdb) below for how leaders and followers build this state differently.
 
 Use the following "back of the envelope" formula as a starting point for calculating required disk space:
 
@@ -188,12 +188,12 @@ Other factors are best observed in a production-like system under representative
 
 By default, this data is stored under:
 
-- `segments` — the append-only log, split into segments. Data can be deleted once it becomes part of a new snapshot.
-- `state` — the active state: deployed processes, active process instances, and so on. Completed process instances or jobs are removed.
-- `snapshot` — a state at a certain point in time.
+- `segments`: the append-only log, split into segments. Data can be deleted once it becomes part of a new snapshot.
+- `state`: the active state (deployed processes, active process instances, and so on). Completed process instances or jobs are removed.
+- `snapshot`: a state at a certain point in time.
 
 :::caution Avoid unbounded log growth
-Do not configure an exporter that does not advance its record position, such as the Debug Exporter. If you do configure an exporter, monitor its availability and the health of anything it depends on — an exporter that stops advancing prevents log truncation, so data accumulates on disk until it's resolved. See [effects on disk growth](#effects-on-disk-growth).
+Do not configure an exporter that does not advance its record position, such as the Debug Exporter. If you do configure an exporter, monitor its availability and the health of anything it depends on: an exporter that stops advancing prevents log truncation, so data accumulates on disk until it's resolved. See [effects on disk growth](#effects-on-disk-growth).
 :::
 
 ### Event log
@@ -211,11 +211,11 @@ The following conditions inhibit automatic deletion:
 - The cluster loses quorum. Events are queued but not processed until quorum is reestablished.
 - An exporter does not advance its read position. The event log grows without bound.
 
-Exporting only happens on the partition leader; followers don't delete their replica of a segment until the leader marks it as unneeded by exporters. No segment is deleted until a snapshot including it is taken — a snapshot only deletes the log up to that point.
+Exporting only happens on the partition leader; followers don't delete their replica of a segment until the leader marks it as unneeded by exporters. No segment is deleted until a snapshot including it is taken; a snapshot only deletes the log up to that point.
 
 ### Snapshots
 
-The running state of a partition is captured periodically on the leader, by default every five minutes (`snapshot-period`). A snapshot is a projection of all events representing the current running state — deployed processes, active process instances, and jobs not yet completed. Writing a new snapshot deletes all log data written before it.
+The running state of a partition is captured periodically on the leader, by default every five minutes (`snapshot-period`). A snapshot is a projection of all events representing the current running state (deployed processes, active process instances, and jobs not yet completed). Writing a new snapshot deletes all log data written before it.
 
 :::note
 We tested the snapshot interval via a Zeebe Chaos experiment. Learn more in the [Zeebe Chaos blog](https://camunda.github.io/zeebe-chaos/2022/02/01/High-Snapshot-Frequency/#snapshot-interval).
@@ -223,21 +223,21 @@ We tested the snapshot interval via a Zeebe Chaos experiment. Learn more in the 
 
 ### RocksDB
 
-The leader of a partition keeps its current running state in memory and on disk in RocksDB. In practice, this grows to around 2 GB under heavy load with long-running processes. Snapshots replicated to followers are RocksDB snapshots.
+The leader of a partition processes commands and applies committed events to its RocksDB state as it goes. Followers continuously replay the same committed events into their own local RocksDB state, without processing commands, so they stay warm and ready for a fast failover if the leader changes. In practice, a partition's RocksDB state grows to around 2 GB under heavy load with long-running processes. Snapshot replication is used to bring a new or lagging follower fully up to date; it isn't how followers normally maintain their state.
 
 ### Effects on disk growth
 
-**Exporter or external system failure.** If a system an exporter depends on fails (for example, a lost connection to Elasticsearch), the exporter stops advancing its position and brokers can't truncate their logs. The log grows until the connection is restored — size broker disks with enough headroom to keep operating through an outage.
+**Exporter or external system failure.** If a system an exporter depends on fails (for example, a lost connection to Elasticsearch), the exporter stops advancing its position and brokers can't truncate their logs. The log grows until the connection is restored. Size broker disks with enough headroom to keep operating through an outage.
 
-During a [hot backup (soft-pause window)](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#soft-pause-exports), log compaction is intentionally blocked for the backup's duration. This adds a predictable, temporary disk requirement — roughly `throughput × backup_window_duration` of extra log data per partition, replicated across followers. Size disks with headroom for at least one full backup window on top of steady-state estimates.
+During a [hot backup (soft-pause window)](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#soft-pause-exports), log compaction is intentionally blocked for the backup's duration. This adds a predictable, temporary disk requirement: roughly `throughput × backup_window_duration` of extra log data per partition, replicated across followers. Size disks with headroom for at least one full backup window on top of steady-state estimates.
 
-**Node failure.** Only the leader exports events, and only committed (replicated) events are passed to exporters. An exporter's read position is only captured in snapshots, never in the event log itself — it can't be reconstructed from the log alone. When a partition fails over to a new leader, the new leader reconstructs state by projecting the log from the last snapshot, but the exporter position resets to that snapshot too. This means an exporter can see the same events twice after a failover — assign idempotent IDs in your exporter (the combination of record position and partition ID is a reliable unique key) if this matters for your system.
+**Node failure.** Only the leader exports events, and only committed (replicated) events are passed to exporters. An exporter's read position is only captured in snapshots, never in the event log itself; it can't be reconstructed from the log alone. When a partition fails over to a new leader, the new leader reconstructs state by projecting the log from the last snapshot, but the exporter position resets to that snapshot too. This means an exporter can see the same events twice after a failover. Assign idempotent IDs in your exporter (the combination of record position and partition ID is a reliable unique key) if this matters for your system.
 
-**Quorum loss.** If a partition drops below quorum (for example, two nodes down in a three-node cluster), the leader keeps accepting requests, but they aren't replicated or committed, so they can't be truncated — the event log grows. The disk space needed to ride this out is a function of broker throughput and how long it takes to restore quorum; size nodes with enough headroom to absorb this failure mode.
+**Quorum loss.** If a partition drops below quorum (for example, two nodes down in a three-node cluster), the leader keeps accepting requests, but they aren't replicated or committed, so they can't be truncated, and the event log grows. The disk space needed to ride this out is a function of broker throughput and how long it takes to restore quorum; size nodes with enough headroom to absorb this failure mode.
 
 ## Memory
 
-Memory usage is determined by the Java heap size (by default, [25% of the maximum RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also 25% by default) — the JVM can use up to 50% of available RAM.
+Memory usage is determined by the Java heap size (by default, [25% of the maximum RAM](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html#GUID-DA88B6A6-AF89-4423-95A6-BBCBD9FAE781)) and native memory usage (also 25% by default); the JVM can use up to 50% of available RAM.
 
 Zeebe supports three RocksDB memory allocation strategies, configured via `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY`:
 
@@ -262,13 +262,13 @@ camunda:
 :::
 
 :::caution
-`FRACTION` splits its budget across **all** partitions on a broker, the same way `BROKER` does — unlike `PARTITION`, it does not scale up with partition count. On a broker with many partitions but modest total memory, a flat 10% fraction can allocate less RocksDB memory than a previously-tuned fixed limit would have. An optional minimum-floor setting for `FRACTION` is proposed in [camunda/camunda#57768](https://github.com/camunda/camunda/issues/57768) (open) to address exactly this; until it ships, verify the resulting absolute memory is enough for your partition count, and fall back to an explicit `..._MEMORYLIMIT` if it isn't.
+`FRACTION` splits its budget across **all** partitions on a broker, the same way `BROKER` does. Unlike `PARTITION`, it does not scale up with partition count. On a broker with many partitions but modest total memory, a flat 10% fraction can allocate less RocksDB memory than a previously-tuned fixed limit would have. An optional minimum-floor setting for `FRACTION` is proposed in [camunda/camunda#57768](https://github.com/camunda/camunda/issues/57768) (open) to address exactly this; until it ships, verify the resulting absolute memory is enough for your partition count, and fall back to an explicit `..._MEMORYLIMIT` if it isn't.
 :::
 
 When hardcoding memory values (`PARTITION` or `BROKER`), also consider:
 
 - Zeebe relies heavily on memory-mapped files, so sufficient OS page cache is required. Insufficient page cache degrades I/O performance.
-- Reserve 20–30% of total memory for the OS page cache as a starting point, adjusting based on observed performance. The right amount depends on partition count and system throughput.
+- Reserve 20-30% of total memory for the OS page cache as a starting point, adjusting based on observed performance. The right amount depends on partition count and system throughput.
 
 The minimum memory usage (using the `PARTITION` strategy) is:
 
