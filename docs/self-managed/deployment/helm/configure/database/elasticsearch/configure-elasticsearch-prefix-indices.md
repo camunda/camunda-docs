@@ -117,6 +117,9 @@ If Optimize is not enabled, configure only the Camunda Exporter prefix.
 
 ```yaml
 orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
   index:
     prefix: custom-camunda # Orchestration Cluster indices prefix
 ```

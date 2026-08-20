@@ -609,8 +609,6 @@ optimize:
   enabled: false
 connectors:
   enabled: false
-elasticsearch:
-  enabled: false
 console:
   # Multi-namespace deployments require manual console.configuration to define
   # components across namespaces. The oAuth section must match your global.identity.auth settings.
@@ -695,19 +693,6 @@ global:
     tls:
       enabled: true
       secretName: camunda-platform
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    auth:
-      username: user
-      secret:
-        existingSecret: opensearch-credentials
-        existingSecretKey: password
-    url:
-      protocol: https
-      host: opensearch.example.com
-      port: 443
   identity:
     service:
       url: "http://management-identity.management-and-modeling.svc.cluster.local:80/identity"
@@ -720,6 +705,16 @@ global:
       # Refer to the authentication guide for your chosen provider.
 orchestration:
   contextPath: /orchestration
+  data:
+    secondaryStorage:
+      type: opensearch
+      opensearch:
+        url: https://opensearch.example.com:443
+        auth:
+          username: user
+          secret:
+            existingSecret: opensearch-credentials
+            existingSecretKey: password
   ingress:
     grpc:
       enabled: true
@@ -743,6 +738,18 @@ connectors:
 optimize:
   enabled: true
   contextPath: /optimize
+  database:
+    opensearch:
+      enabled: true
+      url:
+        protocol: https
+        host: opensearch.example.com
+        port: 443
+      auth:
+        username: user
+        secret:
+          existingSecret: opensearch-credentials
+          existingSecretKey: password
 identity:
   enabled: false
 identityKeycloak:
@@ -750,8 +757,6 @@ identityKeycloak:
 webModeler:
   enabled: false
 webModelerPostgresql:
-  enabled: false
-elasticsearch:
   enabled: false
 ```
 
