@@ -3,10 +3,8 @@ title: Best Practices
 description: "Condensed Camunda project experience covering process modeling, development, architecture, operations, and agentic orchestration, as a mix of conceptual and practical implementation guidance."
 ---
 
-import DocCardList from '@theme/DocCardList';
-import { useCurrentSidebarCategory } from '@docusaurus/theme-common';
-
-export const section = (label) => useCurrentSidebarCategory().items.find((item) => item.label === label).items;
+import AoGrid from '../react-components/\_ao-card';
+import { projectManagementCards, architectureCards, developmentCards, modelingCards, operationsCards, cicdCards } from '../react-components/\_best-practices-card-data';
 
 The Camunda Best Practices distill Camunda's experience with BPMN, DMN, and agentic orchestration on the Camunda toolstack, drawing on consulting engagements, community feedback, and customer projects. They offer a blend of conceptual and practical guidance, generalized from current project experience. They are not definitive: learning is ongoing, and how well a practice applies depends on your situation.
 
@@ -14,27 +12,27 @@ Note that Camunda extends the same guarantee to Best Practices as to the core pr
 
 ## Project management
 
-<DocCardList items={section('Project management')}/>
+<AoGrid ao={projectManagementCards} columns={2}/>
 
 ## Architecture
 
-<DocCardList items={section('Architecture')}/>
+<AoGrid ao={architectureCards} columns={2}/>
 
 ## Development
 
-<DocCardList items={section('Development')}/>
+<AoGrid ao={developmentCards} columns={3}/>
 
 ## Modeling
 
-<DocCardList items={section('Modeling')}/>
+<AoGrid ao={modelingCards} columns={3}/>
 
 ## Operations
 
-<DocCardList items={section('Operations')}/>
+<AoGrid ao={operationsCards} columns={2}/>
 
 ## CI/CD guidelines
 
-<DocCardList items={section('CI/CD guidelines')}/>
+<AoGrid ao={cicdCards} columns={2}/>
 
 ## Agentic orchestration
 
