@@ -13,8 +13,6 @@ So every task can be assigned to either a group of people, or a specific individ
 
 As a general rule, you should assign human tasks, like [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md) or [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), in your business process to _groups of people_ instead of specific individuals.
 
-The same rule applies to a user task an [AI agent](/reference/glossary.md#ai-agent) calls as a tool, for example when it [escalates a question it cannot answer](/components/agentic-orchestration/rag-ai-agents.md#gate-memory-writes-with-human-approval). The agent decides when to call the task, but the task is then assigned, claimed, and completed like any other human task.
-
 ```xml
 <bpmn:userTask id="task_approve_vacation">
   <bpmn:extensionElements>
