@@ -81,6 +81,12 @@ As soon as one of our two activities achieves the result, we can cancel the othe
 
 ...and successfully complete the subprocess and normally continue with our follow-up work.
 
+### Ad-hoc sub-processes
+
+The techniques above keep the sequence of activities fixed and use events to deviate from it. An [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) instead leaves the sequence open: its activities carry no sequence flow between them, and which of them run, in which order, and how often is decided at runtime instead of at design time. The engine can decide from an expression you model, or a [job worker](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) can decide, including the AI Agent connector when the sub-process hosts an [AI agent](/reference/glossary.md#ai-agent).
+
+The symbols above still apply around and inside an ad-hoc sub-process. Boundary events and [event sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#event-sub-processes) let you interrupt or redirect it while it is running, so leaving the sequence open does not mean giving up control over it.
+
 ## Examples
 
 ### Allow proactive order status communication

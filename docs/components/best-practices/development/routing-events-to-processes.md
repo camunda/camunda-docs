@@ -83,6 +83,7 @@ Most events actually occur somewhere external to the workflow engine and need to
 
 - Using API: Receive the message by means of your platform-specific activities such as connecting to a AMQP queue or processing a REST request and then route it to the process.
 - Using connectors: Configure a connector to receive messages such as Kafka records and rote it to the process. Note that this possibility works for Camunda 8 only.
+- Using an MCP start event: Apply the [MCP start event element template](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) to a message start event so an AI agent can start the process as one of its tools. See [expose a process as an MCP tool](/components/agentic-orchestration/expose-process-as-mcp-tool.md).
 
 ### Starting process instance by BPMN process ID
 
