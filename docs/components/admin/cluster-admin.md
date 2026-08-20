@@ -42,6 +42,8 @@ Assign cluster admin access using one of two methods. Which one applies is deter
 
 The cluster admin chain is stateless in both modes. An existing web application session cookie can never authenticate a `/cluster/v2/**` request.
 
+Under OIDC, tokens are issued by the cluster's default provider. For the `client_credentials` flow and request examples, see [Orchestration Cluster API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
+
 <Tabs groupId="clusterAdminAuth" defaultValue="basic" queryString values={[{label: 'Basic authentication', value: 'basic' }, {label: 'OIDC', value: 'oidc' }]}>
 
 <TabItem value="basic">

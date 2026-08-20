@@ -38,7 +38,7 @@ For backup and exporting permissions, use these resource permissions where your 
 
 Cluster-admin access is coarse-grained. It is not restricted to a single backup ID or Physical Tenant.
 
-<!-- TODO(physical-tenants-day-2): Add how an operator obtains a cluster-admin token (OIDC client_credentials flow) end to end. Config schema is verified; only token acquisition is outstanding. Owner/reviewers: Ana Vinogradova and Lena Schönburg. -->
+To configure cluster-admin credentials, see [cluster admin](/components/admin/cluster-admin.md). To obtain a token, see [Orchestration Cluster API authentication](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).
 
 ## Back up a Physical Tenant
 
