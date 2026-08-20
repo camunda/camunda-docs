@@ -28,7 +28,7 @@ In Camunda 8.10, the Physical Tenant authorization model is designed around per-
 
 Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster topology, triggering cluster backups, and modifying Physical Tenant configuration at runtime.
 
-Endpoints served at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
+Every operation served under the `/cluster/v2/...` path prefix is cluster-wide. Tenant-scoped endpoints are described in [tenant-local operations](#tenant-local-operations).
 
 ## Tenant-local operations
 
