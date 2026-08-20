@@ -279,7 +279,7 @@ Checks that a specific element reached an expected state. Supports Test mode's [
 
 ### Assert a process instance
 
-Checks the overall state of the process instance. Backs Test mode's [process instance assertions](test-your-process.md#process-instance-assertions).
+Checks the overall state of the process instance. Supports Test mode's [process instance assertions](test-your-process.md#process-instance-assertions).
 
 ```json
 {
