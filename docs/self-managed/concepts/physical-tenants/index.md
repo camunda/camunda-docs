@@ -61,7 +61,7 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide endpoints are exposed under a dedicated `/cluster/v2/...` path prefix, protected by the cluster-admin role available starting in 8.10 alpha4. Full wiring of cluster-wide operations behind this prefix is still in progress. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant.
+Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; unprefixed `/v2/...` endpoints target the default Physical Tenant. See [backup, restore, and scaling](./backup-restore-scaling.md) for post-deployment procedures.
 
 ## Configure and provision Physical Tenants
 
@@ -70,6 +70,8 @@ To configure tenant defaults, per-tenant overrides, validation expectations, and
 To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
 To understand how Operate, Tasklist, and Optimize behave per Physical Tenant — including URL navigation, data scoping, and session behavior — see [web apps](./web-apps.md).
+
+For backup, restore, scaling, and topology operations after deployment, see [backup, restore, and scaling](./backup-restore-scaling.md).
 
 ## What is not isolated in 8.10
 
@@ -104,6 +106,6 @@ Document stores are declared once in the root `camunda.document.*` catalog. Each
 
 Isolation is enforced by validating the resolved `provider, bucket/container, path` tuple at startup. If two tenants resolve to the same tuple, Camunda fails startup and names the conflicting tenants in the error.
 
-For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store isolation](./configuration-reference.md#document-store-isolation) in the configuration reference.
+For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage) in storage isolation.
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).

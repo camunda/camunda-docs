@@ -5,7 +5,7 @@ sidebar_label: "Authorization model"
 description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-This page describes the authorization model for Physical Tenants in Camunda 8.10 Self-Managed deployments. Authorization is divided into two scopes: **cluster-wide operations**, which affect the entire orchestration cluster, and **tenant-local operations**, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in 8.10. The cluster-admin role and its authentication mechanism became available in 8.10 alpha4, but the cluster-wide operations it protects (topology, backup, restore) are still being wired behind it and are not yet complete.
+Learn how Camunda 8.10 authorizes Physical Tenant operations at the cluster-wide and tenant-local scopes. For identity provider connections and token routing, see [authentication and authorization](./authentication-authorization.md). For the cluster-admin role itself, see [cluster admin](/components/admin/cluster-admin.md).
 
 Two new authorization resource types were added for the per-tenant management APIs introduced alongside Physical Tenants:
 
@@ -16,23 +16,21 @@ Two new authorization resource types were added for the per-tenant management AP
 
 The default **admin** role receives all four `BACKUP` permissions and `EXPORTER:PAUSE` automatically. The default **readonly-admin** role receives only `BACKUP:READ` (there is no read-only permission for `EXPORTER`, since `PAUSE` isn't a read operation).
 
+For the operational procedures that use these permissions, see [backup, restore, and scaling](./backup-restore-scaling.md).
+
 ## Scope of the 8.10 authorization model
 
 In Camunda 8.10, the Physical Tenant authorization model is designed around per-engine, per-tenant role and permission management. Key design principles for 8.10:
 
 - **Per-tenant authorization is independently managed.** Each Physical Tenant defines its own roles, permissions, and mapping rules. A change in one tenant's authorization configuration does not affect other tenants.
-- **Cluster-wide governance via Camunda Hub is a future capability.** Cross-tenant administration using Camunda Hub is not available in 8.10. A dedicated cluster-admin role exists starting in 8.10 alpha4, though the cluster-wide operations it will protect are still being wired behind it.
+- **Cluster-wide governance via Camunda Hub is a future capability.** Cross-tenant administration using Camunda Hub is not available in 8.10. Cluster-wide management endpoints use the dedicated cluster-admin role.
 - **Per-engine IdP fragmentation is not recommended.** Using a different identity provider for each Zeebe/Operate/Tasklist engine (as opposed to a single cluster-level IdP) is explicitly discouraged. See [authentication and authorization](./authentication-authorization.md) for the supported identity deployment models.
 
 ## Cluster-wide operations
 
-Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster topology, triggering cluster backups, and modifying Physical Tenant configuration at runtime.
+Cluster-wide operations affect the entire orchestration cluster rather than a single Physical Tenant. Examples include viewing cluster status and topology, triggering a cluster restore, changing cluster mode, and running backups that fan out across every tenant.
 
-:::note
-The cluster-admin role and its dedicated security chain are available starting in 8.10 alpha4, exposed under the `/cluster/v2/...` path prefix. However, the cluster-wide operations this role is meant to protect (topology, backup, restore) are still being wired behind that chain and are not yet complete. Check the [8.10 announcements](../../../reference/announcements-release-notes/8100/8100-announcements.md) for updates.
-:::
-
-Endpoints served at the standard `/v2/...` paths — including `/v2/topology` — are scoped to a Physical Tenant, not the cluster.
+Cluster-wide operations use the `/cluster/v2/...` path prefix and require cluster-admin access. Endpoints served at `/v2/...` without a tenant prefix target the default Physical Tenant. See [cluster admin](/components/admin/cluster-admin.md) for the operations served under this prefix and how to configure access.
 
 ## Tenant-local operations
 
@@ -92,14 +90,12 @@ Because each Physical Tenant is independently authorized, audit logs for tenant-
 
 ## Cluster-admin role
 
-:::note
-The cluster-admin role and its authentication chain are available starting in 8.10 alpha4. The cluster-wide operations listed below are still being wired behind it and are not all complete yet — check the [8.10 announcements](../../../reference/announcements-release-notes/8100/8100-announcements.md) for the current status.
-:::
+The cluster-admin role covers operations that span all Physical Tenants or affect the entire cluster, such as:
 
-The cluster-admin role is intended to cover operations that span all Physical Tenants or affect the entire cluster, such as:
+- Viewing cluster status and topology
+- Triggering a cluster restore or a cluster mode change
+- Running runtime and history backups across every tenant
 
-- Triggering cluster backups and restores
-- Viewing cluster topology
-- Assigning tenants or modifying Physical Tenant configuration at runtime
+Cluster-admin is resolved from JWT token claims using configurable mapping rules, a dedicated cluster-admin configuration, or explicit user assignment for Basic auth. There is no separate persisted cluster-level role binding service. Authorization is coarse-grained. Cluster-admin grants access to all cluster-level operations, with no fine-grained sub-roles.
 
-Cluster-admin is resolved from JWT token claims using configurable mapping rules, a dedicated cluster-admin configuration, or explicit user assignment for Basic auth — there is no separate persisted cluster-level role binding service. Authorization is coarse-grained: cluster-admin grants access to all cluster-level operations, with no fine-grained sub-roles.
+Cluster-admin credentials are verified against an isolated user store bound to `/cluster/v2/**`, so a cluster admin cannot reach tenant-scoped `/physical-tenants/{physicalTenantId}/v2/...` endpoints. See [cluster admin](/components/admin/cluster-admin.md) for configuration examples.
