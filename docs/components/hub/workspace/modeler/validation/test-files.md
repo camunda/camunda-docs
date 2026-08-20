@@ -262,7 +262,7 @@ Checks that one or more process or local variables have expected values. Support
 
 ### Assert an element instance (path)
 
-Checks that a specific element reached an expected state. Backs Test mode's [element (path) assertions](test-your-process.md#element-path-assertions).
+Checks that a specific element reached an expected state. Supports Test mode's [element (path) assertions](test-your-process.md#element-path-assertions).
 
 ```json
 {
