@@ -279,12 +279,8 @@ Set `global.tls.caBundle.autoRollout: true` to stamp a `checksum/ca-bundle` anno
 
 ## Legacy: per-component JKS truststore (deprecated)
 
-Deprecated as of chart 15.x. Affected fields:
+Deprecated as of chart 15.x. The `global.elasticsearch.*` and `global.opensearch.*` trees — including their `tls.secret.*` and `tls.jks.secret.*` password-injection blocks — were removed in chart 15.x; setting them fails the render. Affected (still functional, deprecated) fields:
 
-- `global.elasticsearch.tls.secret.existingSecret` / `existingSecretKey`
-- `global.opensearch.tls.secret.existingSecret` / `existingSecretKey`
-- `global.elasticsearch.tls.jks.secret.*`
-- `global.opensearch.tls.jks.secret.*`
 - `orchestration.data.secondaryStorage.elasticsearch.tls.secret.*`
 - `orchestration.data.secondaryStorage.opensearch.tls.secret.*`
 - `optimize.database.elasticsearch.tls.secret.*`
