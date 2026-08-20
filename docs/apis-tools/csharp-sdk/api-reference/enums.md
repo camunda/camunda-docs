@@ -7,7 +7,33 @@ mdx:
 
 # Enums
 
-Enumeration types (95 enums).
+Enumeration types (102 enums).
+
+## AgentDefinitionSearchQuerySortRequestField
+
+The field to sort by.
+
+| Value                         | Description |
+| ----------------------------- | ----------- |
+| `AgentDefinitionKey`          |             |
+| `AgentType`                   |             |
+| `Name`                        |             |
+| `ElementId`                   |             |
+| `ProcessDefinitionId`         |             |
+| `ProcessDefinitionKey`        |             |
+| `ProcessDefinitionVersion`    |             |
+| `ProcessDefinitionVersionTag` |             |
+| `TenantId`                    |             |
+
+## AgentDefinitionTypeEnum
+
+The kind of agent an agent definition describes.
+
+| Value               | Description |
+| ------------------- | ----------- |
+| `AIAGENTSUBPROCESS` |             |
+| `AIAGENTTASK`       |             |
+| `EXTERNALAGENT`     |             |
 
 ## AgentInstanceHistoryCommitStatusEnum
 
@@ -25,11 +51,12 @@ COMMITTED: the producing job completed successfully. PENDING: the producing job 
 
 The role of a history item in the agent conversation.
 
-| Value        | Description |
-| ------------ | ----------- |
-| `USER`       |             |
-| `ASSISTANT`  |             |
-| `TOOLRESULT` |             |
+| Value           | Description |
+| --------------- | ----------- |
+| `USER`          |             |
+| `ASSISTANT`     |             |
+| `TOOLRESULT`    |             |
+| `CONFIGURATION` |             |
 
 ## AgentInstanceHistorySearchQuerySortRequestField
 
@@ -58,6 +85,7 @@ The field to sort by.
 | Value                    | Description |
 | ------------------------ | ----------- |
 | `AgentInstanceKey`       |             |
+| `AgentDefinitionKey`     |             |
 | `Status`                 |             |
 | `ElementId`              |             |
 | `ProcessInstanceKey`     |             |
@@ -343,6 +371,16 @@ The cloud deployment stage.
 | `Int`  |             |
 | `Prod` |             |
 
+## ClusterStatusResponseStatus
+
+`HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `HEALTHY`  |             |
+| `DEGRADED` |             |
+| `DOWN`     |             |
+
 ## ClusterVariableKindEnum
 
 The kind of a cluster variable. JSON is the default. SECRET_REFERENCE allows the value to contain camunda.secrets.X references that are resolved at job activation time.
@@ -615,6 +653,22 @@ The field to sort by.
 | `RootProcessInstanceKey` |             |
 | `ElementId`              |             |
 
+## ExportingStatusCode
+
+The exporting status of a physical tenant, aggregated over every replica of every one of its partitions:
+
+- `EXPORTING`: all replicas are exporting and committing their position.
+- `PAUSED`: all replicas are paused, nothing is being exported.
+- `SOFT_PAUSED`: all replicas keep exporting but do not commit their position.
+- `MIXED`: replicas report different phases, so the tenant is in no single phase.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `EXPORTING`  |             |
+| `PAUSED`     |             |
+| `SOFTPAUSED` |             |
+| `MIXED`      |             |
+
 ## GlobalListenerSourceEnum
 
 How the global listener was defined.
@@ -673,6 +727,18 @@ The field to sort by.
 | Value      | Description |
 | ---------- | ----------- |
 | `Username` |             |
+
+## HistoryBackupStateCode
+
+The aggregated state of a history backup, computed from the state of each of its snapshots.
+
+| Value          | Description |
+| -------------- | ----------- |
+| `INPROGRESS`   |             |
+| `COMPLETED`    |             |
+| `FAILED`       |             |
+| `INCOMPLETE`   |             |
+| `INCOMPATIBLE` |             |
 
 ## IncidentErrorTypeEnum
 
@@ -781,6 +847,7 @@ The field to sort by.
 
 | Value                      | Description |
 | -------------------------- | ----------- |
+| `CreationTime`             |             |
 | `Deadline`                 |             |
 | `DeniedReason`             |             |
 | `ElementId`                |             |
@@ -989,12 +1056,13 @@ Specifies the type of permissions.
 
 Filter by the process definition's state.
 
-When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases). Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage.
+When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude draining and deleted definitions (recommended for most use cases). Set to `DRAINING` to return only definitions that are being deleted but still have active process instances draining. Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage.
 
-| Value     | Description |
-| --------- | ----------- |
-| `ACTIVE`  |             |
-| `DELETED` |             |
+| Value      | Description |
+| ---------- | ----------- |
+| `ACTIVE`   |             |
+| `DRAINING` |             |
+| `DELETED`  |             |
 
 ## ProcessDefinitionInstanceStatisticsQuerySortRequestField
 
@@ -1023,10 +1091,13 @@ The field to sort by.
 
 The state of this process definition.
 
-| Value     | Description |
-| --------- | ----------- |
-| `ACTIVE`  |             |
-| `DELETED` |             |
+`DRAINING` indicates the definition is being deleted but still has active process instances draining before it is removed.
+
+| Value      | Description |
+| ---------- | ----------- |
+| `ACTIVE`   |             |
+| `DRAINING` |             |
+| `DELETED`  |             |
 
 ## ProcessDefinitionSearchQuerySortRequestField
 
@@ -1119,6 +1190,27 @@ The type of resource to add/remove permissions to/from.
 | `USER`                           |             |
 | `USERTASK`                       |             |
 
+## RestorePartitionStatusState
+
+The restore state of the partition.
+
+| Value       | Description |
+| ----------- | ----------- |
+| `PENDING`   |             |
+| `RESTORING` |             |
+| `RESTORED`  |             |
+
+## RestoreStatusResponseStatus
+
+The overall status of the restore.
+
+| Value        | Description |
+| ------------ | ----------- |
+| `INPROGRESS` |             |
+| `COMPLETED`  |             |
+| `FAILED`     |             |
+| `CANCELLED`  |             |
+
 ## RoleClientSearchQuerySortRequestField
 
 The field to sort by.
@@ -1158,13 +1250,20 @@ The typed reason a reference could not be resolved.
 
 - `NOT_FOUND`: no secret exists for the reference.
 - `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference.
-- `INVALID_REFERENCE`: the reference is malformed.
+- `INVALID_REFERENCE`: the reference is malformed, or the configured store rejected it as
+
+an invalid secret identifier.
+
+- `UNREADABLE`: the configured store could not return a value for the reference, for
+
+example because it rejected the cluster's own store credentials or the stored value could not be read. Whether the secret exists is not implied.
 
 | Value              | Description |
 | ------------------ | ----------- |
 | `NOTFOUND`         |             |
 | `ACCESSDENIED`     |             |
 | `INVALIDREFERENCE` |             |
+| `UNREADABLE`       |             |
 
 ## SortOrderEnum
 

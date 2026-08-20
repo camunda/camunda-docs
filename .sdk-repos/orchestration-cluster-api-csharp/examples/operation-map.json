@@ -55,6 +55,13 @@
       "label": "Change cluster mode"
     }
   ],
+  "changeClusterModeAsClusterAdmin": [
+    {
+      "file": "Client.cs",
+      "region": "ChangeClusterModeAsClusterAdmin",
+      "label": "Change cluster mode as cluster admin"
+    }
+  ],
   "restore": [
     {
       "file": "Client.cs",
@@ -88,6 +95,34 @@
       "file": "Backup.cs",
       "region": "DeleteRuntimeBackup",
       "label": "Delete a runtime backup"
+    }
+  ],
+  "takeHistoryBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeHistoryBackup",
+      "label": "Take a history backup"
+    }
+  ],
+  "listHistoryBackups": [
+    {
+      "file": "Backup.cs",
+      "region": "ListHistoryBackups",
+      "label": "List history backups"
+    }
+  ],
+  "getHistoryBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "GetHistoryBackup",
+      "label": "Get a history backup"
+    }
+  ],
+  "deleteHistoryBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteHistoryBackup",
+      "label": "Delete a history backup"
     }
   ],
   "getRuntimeBackupState": [
@@ -1505,6 +1540,62 @@
       "file": "Secret.cs",
       "region": "ListSecrets",
       "label": "List secret references"
+    }
+  ],
+  "getClusterStatus": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterStatus",
+      "label": "Get cluster status"
+    }
+  ],
+  "getRestoreStatus": [
+    {
+      "file": "Client.cs",
+      "region": "GetRestoreStatus",
+      "label": "Get restore status"
+    }
+  ],
+  "getExportingStatus": [
+    {
+      "file": "Exporting.cs",
+      "region": "GetExportingStatus",
+      "label": "Get exporting status"
+    }
+  ],
+  "searchOwnAuthorizations": [
+    {
+      "file": "Authorization.cs",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search own authorizations"
+    }
+  ],
+  "getAgentDefinition": [
+    {
+      "file": "AgentDefinition.cs",
+      "region": "GetAgentDefinition",
+      "label": "Get an agent definition"
+    }
+  ],
+  "searchAgentDefinitions": [
+    {
+      "file": "AgentDefinition.cs",
+      "region": "SearchAgentDefinitions",
+      "label": "Search agent definitions"
+    }
+  ],
+  "restoreAsClusterAdmin": [
+    {
+      "file": "Client.cs",
+      "region": "RestoreAsClusterAdmin",
+      "label": "Restore physical tenant(s) from a backup as cluster admin"
+    }
+  ],
+  "getClusterTopology": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterTopology",
+      "label": "Get the topology of the whole cluster"
     }
   ]
 }
