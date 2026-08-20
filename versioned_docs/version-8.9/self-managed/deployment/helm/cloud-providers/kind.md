@@ -9,6 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 import IdentitySecret from './\_partials/\_identity-secret.md'
+import DeploymentReadinessCheck from './\_partials/\_deployment-readiness-check.md'
 
 With this guide, you'll deploy Camunda 8 Self-Managed to a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). The setup is optimized for learning, development, and testing, with reduced resource requirements suitable for a personal machine.
 
@@ -430,11 +431,10 @@ You can also use the deployment readiness check script from the root directory o
 
 ```bash
 export CAMUNDA_NAMESPACE=camunda
+./generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck />
 
 Finally, verify the Helm release:
 

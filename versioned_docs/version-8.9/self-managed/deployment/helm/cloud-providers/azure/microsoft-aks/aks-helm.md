@@ -16,6 +16,7 @@ import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../../\_partials/\_deploy-eck-elasticsearch.md'
+import DeploymentReadinessCheck from '../../\_partials/\_deployment-readiness-check.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing Azure Kubernetes Service (AKS) cluster and confirming that it is working as intended.
 
@@ -458,11 +459,9 @@ This script:
 
 <HelmUpgradeNote />
 
-You can track the progress of the installation using the following command:
+You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck download />
 
 ## Verify connectivity to Camunda 8
 
