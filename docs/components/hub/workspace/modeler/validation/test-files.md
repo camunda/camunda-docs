@@ -279,7 +279,7 @@ Checks that a specific element reached an expected state. Backs Test mode's [ele
 
 ### Assert a process instance
 
-Checks the overall state of the process instance, including incidents. Backs Test mode's [process instance assertions](test-your-process.md#process-instance-assertions).
+Checks the overall state of the process instance. Backs Test mode's [process instance assertions](test-your-process.md#process-instance-assertions).
 
 ```json
 {
@@ -290,8 +290,6 @@ Checks the overall state of the process instance, including incidents. Backs Tes
   "state": "IS_COMPLETED"
 }
 ```
-
-For the full assertion schema, including selectors and all supported states, see [JSON test cases](/apis-tools/testing/json-test-cases.md#reference-instructions).
 
 ## Usage tips
 

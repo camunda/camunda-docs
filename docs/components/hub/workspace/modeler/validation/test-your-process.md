@@ -192,13 +192,13 @@ To save a test case:
 
 ![Saving a test case](../img/test-save-test-case.png)
 
-## Assertions {#assertions}
+### Assertions {#assertions}
 
-A test case that only checks whether the process completed without incidents can still pass with wrong output or the wrong path taken. Assertions let a test case verify what actually happened, not just that it finished.
+A test case that only executes its instructions can still pass with wrong output or the wrong path taken. Assertions let a test case verify what actually happened, not just that it finished.
 
 ![Assertion editor](../img/test-assertion-editor.png)
 
-### Variable assertions
+#### Variable assertions
 
 Check that a process or local variable has an expected value.
 
@@ -206,22 +206,22 @@ Check that a process or local variable has an expected value.
 1. Pick a variable name from the dropdown list, populated from the variables observed in the most recent test run.
 1. Enter the expected value for that variable.
 
-### Element assertions
+#### Element assertions
 
 Check that a specific element reached an expected state.
 
 1. Click **Add assertion** > **Element**.
 1. Select the element on the canvas, or search for it by name in the list.
-1. Choose the expected state from the dropdown list(for example: completed, active, or terminated).
+1. Choose the expected state from the dropdown list (for example: completed, active, or terminated).
 
-### Process instance assertions
+#### Process instance assertions
 
-Check the overall state of the process instance, including whether it raised an incident.
+Check the overall state of the process instance.
 
 1. Click **Add assertion** > **Process instance**.
 1. Choose the process instance state from the dropdown list (for example: created, active, completed, or terminated).
 
-### Update or remove an assertion
+#### Update or remove an assertion
 
 Open a saved test case's detail view in the side panel, then edit or delete any existing assertion the same way you added it. Once a test case has been saved for the first time, assertion edits and updates auto-save — no extra save step needed.
 
@@ -229,11 +229,11 @@ Open a saved test case's detail view in the side panel, then edit or delete any 
 Test mode's variable, path, and process instance assertions are backed by the same CPT instructions used in [test files](test-files.md#instructions): `ASSERT_VARIABLES`, `ASSERT_ELEMENT_INSTANCE`, and `ASSERT_PROCESS_INSTANCE`. See the [full instruction reference](/apis-tools/testing/json-test-cases.md#reference-instructions) for the underlying schema.
 :::
 
-## Edit a test case
+### Edit a test case
 
 Open a test case's detail view in the side panel to edit its name, description, and instructions inline.
 
-### Test coverage
+#### Test coverage
 
 Test coverage is calculated as the percentage of flow nodes in your process that are covered, including all elements, events, and gateways. For example, the coverage is 80% if eight out of ten flow nodes are covered.
 
@@ -246,7 +246,7 @@ Test coverage is calculated as the percentage of flow nodes in your process that
 Test coverage will not display as expected if you edit or remove the "metadata" field in the [test file](test-files.md).
 :::
 
-### Run a test case
+#### Run a test case
 
 You can run test from the Test cases panel by clicking **Run all test cases** button or the **Run test case** button for each individual test case.
 
@@ -255,14 +255,14 @@ You can run test from the Test cases panel by clicking **Run all test cases** bu
 
 ![Running a test case on the process definition page](../img/test-case-runs.png)
 
-### Pass/fail results
+#### Pass/fail results
 
 A test case only passes when every step, including its assertions, succeeds — not just when the process completes without an incident.
 
 - The overall test case status is either **Passed** or **Failed**.
 - On failure, the step that caused the failure is highlighted, and the underlying failure message is shown verbatim (for example, an expected-versus-actual value mismatch for a variable assertion).
 
-## Repair a test case {#repair-a-test-case}
+### Repair a test case {#repair-a-test-case}
 
 When a BPMN change removes or renames an element that an instruction or assertion refers to, the test case becomes broken: it may fail unexpectedly, or silently pass because the broken step is skipped.
 
@@ -270,12 +270,11 @@ When a BPMN change removes or renames an element that an instruction or assertio
 
 - Broken test cases are flagged with an indicator in the test case list, and a callout in the test case detail view explains what's broken.
 
-- Use the **graphical repair view** to fix most breakages without touching JSON: re-map an instruction or assertion to a different element, pick a new expected value, edit a step in place, or delete it. The assertion editors described in [Assertions](#assertions) are reused here for editing in place.
+- Use the **graphical repair view** to fix most breakages without touching JSON: re-map an instruction or assertion to a different element, pick a new expected value, edit a step in place, or delete it.
 
 ![Repair view](../img/test-repair-view.png)
 
 - For changes that the graphical repair view doesn't cover, use the link to open the [test file](test-files.md) in Web Modeler's file editor and edit the JSON directly, then return to Test mode to rerun.
-- If you manually complete a process instance and update its test case from that run, existing assertions are preserved, the same as the test case's name and description already are.
 
 ### Limitations {#test-cases-limitations}
 
