@@ -170,26 +170,34 @@ You should have one Amazon OpenSearch instance and one Amazon Aurora PostgreSQL 
 
 #### Connecting to Amazon OpenSearch
 
-The following example `values.yaml` enables OpenSearch with the required configuration. This example also globally disables all internal component configuration for Elasticsearch through `global.elasticsearch.enabled: false`, and disables internal Elasticsearch through `elasticsearch.enabled: false`:
+The following example `values.yaml` configures OpenSearch as the secondary storage for the Orchestration Cluster, and points Optimize at the same cluster:
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    auth:
-      username: user
-      secret:
-        existingSecret: opensearch-credentials
-        existingSecretKey: password
-    url:
-      protocol: https
-      host: opensearch.example.com
-      port: 443
+orchestration:
+  data:
+    secondaryStorage:
+      type: opensearch
+      opensearch:
+        url: https://opensearch.example.com:443
+        auth:
+          username: user
+          secret:
+            existingSecret: opensearch-credentials
+            existingSecretKey: password
 
-elasticsearch:
-  enabled: false
+optimize:
+  database:
+    opensearch:
+      enabled: true
+      url:
+        protocol: https
+        host: opensearch.example.com
+        port: 443
+      auth:
+        username: user
+        secret:
+          existingSecret: opensearch-credentials
+          existingSecretKey: password
 ```
 
 #### Connect to an external database for Management Identity
