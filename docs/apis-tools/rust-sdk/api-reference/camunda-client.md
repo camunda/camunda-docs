@@ -12,7 +12,7 @@ The primary entry point of the SDK.
 A `CamundaClient` is cheap to clone — clones share the same configuration,
 HTTP client, OAuth token cache, and worker registry.
 
-`CamundaClient` exposes **236** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **241** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ## Methods
 
@@ -41,6 +41,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`cancel_process_instance`](#cancel_process_instance)                                                               | Cancel a running process instance by key.                                                                                                                                                                                                                                                    |
 | [`cancel_process_instances_batch_operation`](#cancel_process_instances_batch_operation)                             | Cancel process instances (batch) (`POST /process-instances/cancellation`).                                                                                                                                                                                                                   |
 | [`change_cluster_mode`](#change_cluster_mode)                                                                       | Change cluster mode (`PATCH /mode`).                                                                                                                                                                                                                                                         |
+| [`change_cluster_mode_as_cluster_admin`](#change_cluster_mode_as_cluster_admin)                                     | Change the cluster mode of one or every physical tenant (`PATCH /cluster/v2/mode`).                                                                                                                                                                                                          |
 | [`complete_job`](#complete_job)                                                                                     | Complete a job, optionally with output variables.                                                                                                                                                                                                                                            |
 | [`complete_user_task`](#complete_user_task)                                                                         | Complete user task (`POST /user-tasks/{userTaskKey}/completion`).                                                                                                                                                                                                                            |
 | [`config`](#config)                                                                                                 | The resolved configuration.                                                                                                                                                                                                                                                                  |
@@ -72,6 +73,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`delete_global_cluster_variable`](#delete_global_cluster_variable)                                                 | Delete a global-scoped cluster variable (`DELETE /cluster-variables/global/{name}`).                                                                                                                                                                                                         |
 | [`delete_global_task_listener`](#delete_global_task_listener)                                                       | Delete global user task listener (`DELETE /global-task-listeners/{id}`).                                                                                                                                                                                                                     |
 | [`delete_group`](#delete_group)                                                                                     | Delete group (`DELETE /groups/{groupId}`).                                                                                                                                                                                                                                                   |
+| [`delete_history_backup`](#delete_history_backup)                                                                   | Delete history backup (`DELETE /backups/history/{backupId}`).                                                                                                                                                                                                                                |
 | [`delete_mapping_rule`](#delete_mapping_rule)                                                                       | Delete a mapping rule (`DELETE /mapping-rules/{mappingRuleId}`).                                                                                                                                                                                                                             |
 | [`delete_process_instance`](#delete_process_instance)                                                               | Delete process instance (`POST /process-instances/{processInstanceKey}/deletion`).                                                                                                                                                                                                           |
 | [`delete_process_instances_batch_operation`](#delete_process_instances_batch_operation)                             | Delete process instances (batch) (`POST /process-instances/deletion`).                                                                                                                                                                                                                       |
@@ -110,6 +112,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_global_job_statistics`](#get_global_job_statistics)                                                           | Global job statistics (`GET /jobs/statistics/global`).                                                                                                                                                                                                                                       |
 | [`get_global_task_listener`](#get_global_task_listener)                                                             | Get global user task listener (`GET /global-task-listeners/{id}`).                                                                                                                                                                                                                           |
 | [`get_group`](#get_group)                                                                                           | Get group (`GET /groups/{groupId}`).                                                                                                                                                                                                                                                         |
+| [`get_history_backup`](#get_history_backup)                                                                         | Get history backup (`GET /backups/history/{backupId}`).                                                                                                                                                                                                                                      |
 | [`get_incident`](#get_incident)                                                                                     | Get incident (`GET /incidents/{incidentKey}`).                                                                                                                                                                                                                                               |
 | [`get_job_error_statistics`](#get_job_error_statistics)                                                             | Get error metrics for a job type (`POST /jobs/statistics/errors`).                                                                                                                                                                                                                           |
 | [`get_job_time_series_statistics`](#get_job_time_series_statistics)                                                 | Get time-series metrics for a job type (`POST /jobs/statistics/time-series`).                                                                                                                                                                                                                |
@@ -148,6 +151,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_user_task_form`](#get_user_task_form)                                                                         | Get user task form (`GET /user-tasks/{userTaskKey}/form`).                                                                                                                                                                                                                                   |
 | [`get_variable`](#get_variable)                                                                                     | Get variable (`GET /variables/{variableKey}`).                                                                                                                                                                                                                                               |
 | [`init_logging`](#init_logging)                                                                                     | Install a formatting `tracing` subscriber filtered to the configured `CAMUNDA_SDK_LOG_LEVEL`. No-op if a global subscriber is already set or logging is off. Returns `true` if this call installed the subscriber.                                                                           |
+| [`list_history_backups`](#list_history_backups)                                                                     | List history backups (`GET /backups/history`).                                                                                                                                                                                                                                               |
 | [`list_runtime_backups`](#list_runtime_backups)                                                                     | List runtime backups (`GET /backups/runtime`).                                                                                                                                                                                                                                               |
 | [`list_secrets`](#list_secrets)                                                                                     | List secrets (alpha) (`POST /secrets/list`).                                                                                                                                                                                                                                                 |
 | [`migrate_process_instance`](#migrate_process_instance)                                                             | Migrate process instance (`POST /process-instances/{processInstanceKey}/migration`).                                                                                                                                                                                                         |
@@ -224,6 +228,7 @@ HTTP client, OAuth token cache, and worker registry.
 | [`suspend_process_instance`](#suspend_process_instance)                                                             | Suspend process instance (`POST /process-instances/{processInstanceKey}/suspension`).                                                                                                                                                                                                        |
 | [`suspend_process_instances_batch_operation`](#suspend_process_instances_batch_operation)                           | Suspend process instances (batch) (`POST /process-instances/suspension`).                                                                                                                                                                                                                    |
 | [`sync_runtime_backup_state`](#sync_runtime_backup_state)                                                           | Force-write runtime backup state (`POST /backups/runtime/state/sync`).                                                                                                                                                                                                                       |
+| [`take_history_backup`](#take_history_backup)                                                                       | Take a history backup (`POST /backups/history`).                                                                                                                                                                                                                                             |
 | [`take_runtime_backup`](#take_runtime_backup)                                                                       | Take a runtime backup (`POST /backups/runtime`).                                                                                                                                                                                                                                             |
 | [`throw_job_error`](#throw_job_error)                                                                               | Throw a BPMN error from a job.                                                                                                                                                                                                                                                               |
 | [`topology`](#topology)                                                                                             | Fetch the cluster topology.                                                                                                                                                                                                                                                                  |
@@ -866,6 +871,34 @@ async fn change_cluster_mode() -> Result<(), Box<dyn std::error::Error>> {
         .change_cluster_mode(ChangeClusterModeParams {
             mode: Mode::Recovering,
             dry_run: None,
+        })
+        .await?;
+    println!("{}", result.change_id);
+
+    Ok(())
+}
+```
+
+### change_cluster_mode_as_cluster_admin
+
+```rust
+pub async fn change_cluster_mode_as_cluster_admin(&self, params: ChangeClusterModeAsClusterAdminParams) -> Result<models::ClusterModeChangeResponse>
+```
+
+Change the cluster mode of one or every physical tenant (`PATCH /cluster/v2/mode`).
+
+**Example**
+
+```rust
+async fn change_cluster_mode_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // Omit `physical_tenant_id` to apply the change to every physical tenant.
+    let result = client
+        .change_cluster_mode_as_cluster_admin(ChangeClusterModeAsClusterAdminParams {
+            mode: Mode::Recovering,
+            physical_tenant_id: Some("default".to_string()),
+            dry_run: Some(true),
         })
         .await?;
     println!("{}", result.change_id);
@@ -1747,6 +1780,29 @@ async fn delete_group(group_id: String) -> Result<(), Box<dyn std::error::Error>
 
     client.delete_group(DeleteGroupParams { group_id }).await?;
     println!("Delete group: done");
+
+    Ok(())
+}
+```
+
+### delete_history_backup
+
+```rust
+pub async fn delete_history_backup(&self, params: DeleteHistoryBackupParams) -> Result<()>
+```
+
+Delete history backup (`DELETE /backups/history/{backupId}`).
+
+**Example**
+
+```rust
+async fn delete_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .delete_history_backup(DeleteHistoryBackupParams { backup_id: 1 })
+        .await?;
+    println!("Delete history backup: done");
 
     Ok(())
 }
@@ -2643,6 +2699,29 @@ async fn get_group(group_id: String) -> Result<(), Box<dyn std::error::Error>> {
 
     let result = client.get_group(GetGroupParams { group_id }).await?;
     println!("{}", result.group_id);
+
+    Ok(())
+}
+```
+
+### get_history_backup
+
+```rust
+pub async fn get_history_backup(&self, params: GetHistoryBackupParams) -> Result<models::HistoryBackupInfo>
+```
+
+Get history backup (`GET /backups/history/{backupId}`).
+
+**Example**
+
+```rust
+async fn get_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .get_history_backup(GetHistoryBackupParams { backup_id: 1 })
+        .await?;
+    println!("{result:#?}");
 
     Ok(())
 }
@@ -3612,6 +3691,36 @@ Install a formatting `tracing` subscriber filtered to the configured
 `CAMUNDA_SDK_LOG_LEVEL`. No-op if a global subscriber is already set or logging is
 off. Returns `true` if this call installed the subscriber.
 
+### list_history_backups
+
+```rust
+pub async fn list_history_backups(&self, params: ListHistoryBackupsParams) -> Result<Vec<models::HistoryBackupInfo>>
+```
+
+List history backups (`GET /backups/history`).
+
+**Example**
+
+```rust
+async fn list_history_backups() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // `prefix` must end in a single '*'. Setting `verbose` to false makes the
+    // query cheaper, at the cost of snapshot-level detail.
+    let backups = client
+        .list_history_backups(ListHistoryBackupsParams {
+            prefix: None,
+            verbose: None,
+        })
+        .await?;
+    for backup in backups {
+        println!("{backup:#?}");
+    }
+
+    Ok(())
+}
+```
+
 ### list_runtime_backups
 
 ```rust
@@ -4035,6 +4144,7 @@ async fn restore() -> Result<(), Box<dyn std::error::Error>> {
     let result = client
         .restore(RestoreParams {
             restore_request: RestoreRequest::default(),
+            dry_run: None,
         })
         .await?;
     println!("{}", result.change_id);
@@ -5603,6 +5713,31 @@ async fn sync_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>> {
 
     let state = client.sync_runtime_backup_state().await?;
     println!("{state:#?}");
+
+    Ok(())
+}
+```
+
+### take_history_backup
+
+```rust
+pub async fn take_history_backup(&self, params: TakeHistoryBackupParams) -> Result<models::TakeHistoryBackupResponse>
+```
+
+Take a history backup (`POST /backups/history`).
+
+**Example**
+
+```rust
+async fn take_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .take_history_backup(TakeHistoryBackupParams {
+            take_history_backup_request: TakeHistoryBackupRequest { backup_id: 1 },
+        })
+        .await?;
+    println!("{result:#?}");
 
     Ok(())
 }

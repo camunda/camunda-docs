@@ -146,6 +146,13 @@
       "label": "Change cluster mode"
     }
   ],
+  "changeClusterModeAsClusterAdmin": [
+    {
+      "file": "recovery.rs",
+      "region": "ChangeClusterModeAsClusterAdmin",
+      "label": "Change cluster mode as cluster admin"
+    }
+  ],
   "completeJob": [
     {
       "file": "job.rs",
@@ -340,6 +347,13 @@
       "file": "group.rs",
       "region": "DeleteGroup",
       "label": "Delete group"
+    }
+  ],
+  "deleteHistoryBackup": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteHistoryBackup",
+      "label": "Delete a history backup"
     }
   ],
   "deleteMappingRule": [
@@ -578,6 +592,13 @@
       "file": "group.rs",
       "region": "GetGroup",
       "label": "Get group"
+    }
+  ],
+  "getHistoryBackup": [
+    {
+      "file": "backup.rs",
+      "region": "GetHistoryBackup",
+      "label": "Get a history backup"
     }
   ],
   "getIncident": [
@@ -844,6 +865,13 @@
       "file": "variable.rs",
       "region": "GetVariable",
       "label": "Get variable"
+    }
+  ],
+  "listHistoryBackups": [
+    {
+      "file": "backup.rs",
+      "region": "ListHistoryBackups",
+      "label": "List history backups"
     }
   ],
   "listRuntimeBackups": [
@@ -1341,6 +1369,13 @@
       "file": "backup.rs",
       "region": "SyncRuntimeBackupState",
       "label": "Synchronize the runtime backup state"
+    }
+  ],
+  "takeHistoryBackup": [
+    {
+      "file": "backup.rs",
+      "region": "TakeHistoryBackup",
+      "label": "Take a history backup"
     }
   ],
   "takeRuntimeBackup": [
