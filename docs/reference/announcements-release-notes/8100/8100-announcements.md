@@ -441,6 +441,29 @@ This default does not apply to existing clusters. Existing clusters show data fi
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize Self-Managed no longer flattens object variables by default
+
+Starting with Camunda 8.10, Self-Managed Optimize no longer imports object variable values by default. Object variables are no longer flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage, and aligns Self-Managed with the default Camunda 8 SaaS has used for years.
+
+This change is **Self-Managed only**; SaaS is unaffected, as it already runs with this behavior disabled.
+
+- Object-heavy processes previously measured 5.9-48.8x more Optimize variable storage on Self-Managed than SaaS for identical workloads.
+- If you rely on object variable properties in reports, filters, or Raw Data Reports, opt in by setting `zeebe.includeObjectVariableValue: true` (environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true`).
+- Optimize logs a `WARN` on startup whenever object variable values are not being imported. The message includes the opt-in setting.
+
+**Action:** Decide whether your Self-Managed deployment needs flattened object variables. If it does, set `zeebe.includeObjectVariableValue: true` before upgrading to 8.10.
+
+<p className="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
+
+</div>
+</div>
+
 ## Deployment
 
 <div className="release-announcement-row">
