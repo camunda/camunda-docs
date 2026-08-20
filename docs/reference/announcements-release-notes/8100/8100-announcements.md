@@ -455,7 +455,7 @@ This change is **Self-Managed only**; SaaS is unaffected, as it already runs wit
 
 - Object-heavy processes previously measured 5.9-48.8x more Optimize variable storage on Self-Managed than SaaS for identical workloads.
 - If you rely on object variable properties in reports, filters, or Raw Data Reports, opt in by setting `zeebe.includeObjectVariableValue: true` (environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true`).
-- Optimize logs a `WARN` on startup whenever object variable values are not being imported, whether that's because you left the setting unconfigured or set it explicitly, with the one-line opt-in.
+- Optimize logs a `WARN` on startup whenever object variable values are not being imported. The message includes the opt-in setting.
 
 **Action:** Decide whether your Self-Managed deployment needs flattened object variables. If it does, set `zeebe.includeObjectVariableValue: true` before upgrading to 8.10.
 
