@@ -237,6 +237,7 @@ Reference them in your values:
 orchestration:
   data:
     secondaryStorage:
+      type: elasticsearch
       elasticsearch:
         tls:
           secret:
