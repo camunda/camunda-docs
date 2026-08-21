@@ -24,13 +24,14 @@ Cluster admin was added in 8.10 alongside [Physical Tenants](/self-managed/conce
 
 ## Cluster-wide operations
 
-Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. These cover cluster status and topology, cluster mode changes, restore, exporting control, and runtime and history backups that fan out across every Physical Tenant.
+Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. In 8.10 these cover cluster status and topology, cluster mode changes, and restore.
 
 | Area                | Operations                                                                                                                                                                                                                                   |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Status and topology | [Cluster status](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-status.api.mdx), [cluster topology](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-topology.api.mdx)                           |
 | Recovery            | [Cluster restore](/apis-tools/orchestration-cluster-api-rest/specifications/restore-as-cluster-admin.api.mdx), [cluster mode change](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin.api.mdx) |
-| Backup              | Runtime and history backup, exporting pause and resume. See [backup, restore, and scaling](/self-managed/concepts/physical-tenants/backup-restore-scaling.md).                                                                               |
+
+Backup and exporting control are per Physical Tenant in 8.10 and are not served under `/cluster/v2/...`. See [backup, restore, and scaling](/self-managed/concepts/physical-tenants/backup-restore-scaling.md). Scaling and multi-region failover use the actuator surface rather than this API.
 
 For request and response schemas, see the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference.
 

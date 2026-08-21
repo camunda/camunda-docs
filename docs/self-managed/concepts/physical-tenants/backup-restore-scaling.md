@@ -11,23 +11,23 @@ Learn how to back up, restore, scale, and inspect Physical Tenants after deploym
 
 Use a tenant-scoped endpoint when you need to affect one Physical Tenant. Use a cluster-wide endpoint when you need to affect every Physical Tenant or inspect the complete cluster.
 
-| Operation                         | Tenant-scoped surface                                     | Cluster-wide surface          |
-| --------------------------------- | --------------------------------------------------------- | ----------------------------- |
-| Runtime backup                    | `/physical-tenants/{physicalTenantId}/v2/backups/runtime` | `/cluster/v2/backups/runtime` |
-| History backup                    | `/physical-tenants/{physicalTenantId}/v2/backups/history` | `/cluster/v2/backups/history` |
-| Restore                           | `/physical-tenants/{physicalTenantId}/v2/restore`         | `/cluster/v2/restore`         |
-| Topology                          | `/physical-tenants/{physicalTenantId}/v2/topology`        | `/cluster/v2/topology`        |
-| Exporting control                 | `/physical-tenants/{physicalTenantId}/v2/exporting`       | `/cluster/v2/exporting`       |
-| Cluster mode                      | `/physical-tenants/{physicalTenantId}/v2/mode`            | `/cluster/v2/mode`            |
-| Scaling and configuration changes | `/actuator/cluster?physicalTenant={physicalTenantId}`     | `/actuator/cluster`           |
+| Operation                         | Tenant-scoped surface                                     | Cluster-wide surface   |
+| --------------------------------- | --------------------------------------------------------- | ---------------------- |
+| Runtime backup                    | `/physical-tenants/{physicalTenantId}/v2/backups/runtime` | Per tenant only        |
+| History backup                    | `/physical-tenants/{physicalTenantId}/v2/backups/history` | Per tenant only        |
+| Exporting control                 | `/physical-tenants/{physicalTenantId}/v2/exporting`       | Per tenant only        |
+| Restore                           | `/physical-tenants/{physicalTenantId}/v2/restore`         | `/cluster/v2/restore`  |
+| Topology                          | `/physical-tenants/{physicalTenantId}/v2/topology`        | `/cluster/v2/topology` |
+| Cluster mode                      | `/physical-tenants/{physicalTenantId}/v2/mode`            | `/cluster/v2/mode`     |
+| Scaling and configuration changes | `/actuator/cluster?physicalTenant={physicalTenantId}`     | `/actuator/cluster`    |
 
-Tenant-scoped routes address the selected tenant's partition group and storage. Cluster-wide routes fan out across the configured tenants and require cluster-admin access.
+Tenant-scoped routes address the selected tenant's partition group and storage. In 8.10, backup and exporting control are per tenant only: there is no cluster-wide backup endpoint. Cluster-wide restore, topology, and mode operations use the `/cluster/v2/...` prefix and require cluster-admin access.
 
 ## Authorize operational access
 
 Tenant-scoped backup and restore requests use the addressed tenant's authorization context. Grant the operator the tenant-local permissions required by the operation.
 
-Cluster-wide backup, restore, and topology requests use the cluster-admin security chain. Configure cluster-admin access through the default cluster-level identity provider. A tenant-specific identity provider does not grant access to `/cluster/v2/...` endpoints.
+Cluster-wide restore and topology requests use the cluster-admin security chain. Configure cluster-admin access through the default cluster-level identity provider. A tenant-specific identity provider does not grant access to `/cluster/v2/...` endpoints.
 
 For backup and exporting permissions, use these resource permissions where your authorization setup exposes them:
 
@@ -85,7 +85,7 @@ These endpoints are relative to the base path `/physical-tenants/{physicalTenant
 
 History backup names include the Physical Tenant so that tenants using a shared repository retain separate snapshot namespaces. Configure non-overlapping backup locations and prefixes before starting the cluster.
 
-Use the cluster-wide history endpoints when you need one coordinated operation across all configured Physical Tenants. The cluster-wide operation fans out to each tenant and reports the result for each tenant.
+To protect every tenant, repeat this procedure for each Physical Tenant. Each backup is independent, so the tenants do not share a single coordinated snapshot.
 
 ### Pause exporting for a consistent history backup
 
@@ -105,23 +105,16 @@ Use soft pause when you need Zeebe to continue accepting records while preventin
 
 RDBMS and document-store backups are not triggered by Orchestration Cluster endpoints. Back up these stores with the tools provided by the storage system, using the tenant-specific schema, database, bucket, container, or path documented in [storage isolation](./storage-isolation.md).
 
-## Back up the cluster
+## Back up every Physical Tenant
 
-Use the cluster-wide runtime or history endpoint when you need to protect all configured Physical Tenants in one coordinated operation:
+All backups are per tenant. Backing up a cluster means taking one independent backup for each Physical Tenant, using the tenant-scoped endpoints. There is no cluster-wide backup endpoint in 8.10.
 
-1. Confirm cluster-admin access through the default cluster-level identity provider.
-2. Confirm that every tenant has a valid backup store and compatible storage configuration.
-3. Trigger the cluster-wide runtime or history backup.
-4. Poll the cluster-wide status until every tenant reaches a terminal state.
-5. Review per-tenant results and retain the backup identifiers with the cluster recovery record.
+1. Confirm that every tenant has a valid backup store and compatible storage configuration.
+2. Repeat the tenant-scoped backup procedure for each Physical Tenant.
+3. Poll each tenant's backup status until it reaches a terminal state.
+4. Retain the per-tenant backup identifiers together with the cluster recovery record.
 
-Cluster-wide backup uses the same shared backup infrastructure as tenant-scoped backup. Artifacts remain separated by Physical Tenant key space and tenant-prefixed history snapshot names.
-
-All cluster-wide backup endpoints accept `?physicalTenantId={physicalTenantId}` to narrow the fan-out to a single tenant. Without it, the operation targets every configured tenant. Narrowing is the way to keep working with the remaining tenants when one tenant cannot be observed, because an unobservable tenant fails every unnarrowed cluster-wide call.
-
-:::warning
-Cluster-wide backup is not transactional. A request that fails partway through the fan-out can leave backups running on the tenants it already reached. Delete the backup ID before retrying, and use the response to identify which tenants were affected.
-:::
+Because the backups are independent, they are not a single consistent cluster-wide snapshot. Each tenant reaches its terminal state on its own, and a failure in one tenant leaves the others unaffected.
 
 ## Restore a Physical Tenant
 
@@ -145,7 +138,17 @@ Supply per-tenant restore arguments through the request's `overrides` field. Nam
 
 Both restore endpoints accept `?dryRun=true`, which validates the request and reports the resulting plan without changing any data. Use a dry run before every production restore.
 
-<!-- TODO(physical-tenants-day-2): Confirm and document the server-side validation and error response when a backup from one Physical Tenant is submitted for another tenant. Owner/reviewers: Lena Schönburg and Deepthi Devaki. -->
+### Enter recovery mode first
+
+Restore is only accepted while the cluster is in recovery mode. A restore request sent to a cluster in processing mode is rejected with `409`.
+
+1. Switch the cluster to recovery mode with `PATCH /cluster/v2/mode?mode=RECOVERING`. This deactivates all partitions and leaves only a restricted set of read-only operations available.
+2. Submit the restore request and monitor it with `GET /cluster/v2/restore`, which reports progress per broker and per partition. It returns `404` once no restore is in flight.
+3. Return the cluster to `PROCESSING` with `PATCH /cluster/v2/mode?mode=PROCESSING` after the restore completes.
+
+Mode changes are non-blocking. The request is acknowledged once the change is accepted, before the transition finishes, so verify the transition through topology before continuing. Only one restore runs at a time.
+
+Cross-tenant restore is prevented by configuration rather than by a runtime check: each Physical Tenant must be configured with a different backup store path, so a backup belonging to one tenant is not reachable from another tenant's restore.
 
 Before restoring:
 
