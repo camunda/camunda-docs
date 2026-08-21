@@ -320,6 +320,21 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `key` sort field on the Tenant search endpoint deprecated
+
+The `key` sort field on the [Search tenants](/apis-tools/orchestration-cluster-api-rest/specifications/search-tenants.api.mdx) endpoint (`POST /v2/tenants/search`) is now deprecated. Sorting by this internal numeric identifier is inconsistent with other Identity entities (User, Group, and Mapping Rule), which do not expose key-based sorting, and tenants can no longer be filtered by `key` either.
+
+**Action:** Sort by `name` or `tenantId` instead.
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
