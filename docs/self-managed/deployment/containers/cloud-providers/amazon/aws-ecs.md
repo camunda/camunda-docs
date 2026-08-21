@@ -446,6 +446,151 @@ The Orchestration Cluster is stateful and overprovisioning will not help the dep
 
 For the Connectors task, it's kept at a maximum of `200%` and minimum of `50%` as the application is stateless and can therefore scale above the initial target during upgrades.
 
+## Deploy Management Identity with OIDC authentication
+
+[Management Identity](/self-managed/components/management-identity/overview.md) is the Camunda 8 component responsible for authentication and authorization of the components outside the Orchestration Cluster, such as Camunda Hub. In this reference architecture, Management Identity is deployed as an additional ECS service and is only created when you switch the platform to OpenID Connect (OIDC) authentication.
+
+Authentication is controlled by a single `authentication_mode` input in `terraform/cluster`:
+
+| Mode              | Behavior                                                                                                                                                                                 |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `basic` (default) | The Orchestration Cluster and Connectors use built-in users with generated passwords. No identity provider and no Management Identity are deployed.                                      |
+| `oidc`            | The Orchestration Cluster, Connectors, and Management Identity authenticate through an OIDC provider. Management Identity is deployed, and Camunda Hub becomes available for deployment. |
+
+To enable OIDC, set the following in your `terraform.tfvars` or pass it with `-var`:
+
+```hcl
+authentication_mode = "oidc"
+```
+
+### Choose an OIDC provider
+
+The reference architecture ships a bundled OIDC provider so the stack runs end-to-end without an external dependency. Every Camunda component reads a single provider-agnostic OIDC interface, so the bundled provider and your own provider are wired the same way.
+
+To use your own provider, such as Microsoft Entra ID or Okta, set the `external_oidc` object. The bundled provider is then skipped entirely.
+
+| Field                             | Description                                                                |
+| --------------------------------- | -------------------------------------------------------------------------- |
+| `issuer_uri`                      | Issuer URI of your OIDC provider, used for discovery and token validation. |
+| `token_uri`                       | Token endpoint used for machine-to-machine authentication.                 |
+| `audience`                        | Audience expected in issued access tokens.                                 |
+| `identity_client_id`              | Client ID registered for Management Identity.                              |
+| `identity_client_secret_arn`      | Secrets Manager ARN holding the Management Identity client secret.         |
+| `orchestration_client_id`         | Client ID registered for the Orchestration Cluster.                        |
+| `orchestration_client_secret_arn` | Secrets Manager ARN holding the Orchestration Cluster client secret.       |
+| `connectors_client_id`            | Client ID registered for Connectors.                                       |
+| `connectors_client_secret_arn`    | Secrets Manager ARN holding the Connectors client secret.                  |
+
+Register one client per component in your provider, store each client secret in AWS Secrets Manager, and reference the secrets by ARN. Terraform never accepts raw secret values here. All fields are required once `external_oidc` is set, and `external_oidc` is only valid together with `authentication_mode = "oidc"`. Both rules are enforced by plan-time preconditions.
+
+```hcl
+authentication_mode = "oidc"
+
+external_oidc = {
+  issuer_uri                      = "https://login.example.com/realms/camunda"
+  token_uri                       = "https://login.example.com/realms/camunda/protocol/openid-connect/token"
+  audience                        = "camunda-api"
+  identity_client_id              = "camunda-identity"
+  identity_client_secret_arn      = "arn:aws:secretsmanager:eu-central-1:123456789012:secret:identity-client-secret"
+  orchestration_client_id         = "orchestration"
+  orchestration_client_secret_arn = "arn:aws:secretsmanager:eu-central-1:123456789012:secret:orchestration-client-secret"
+  connectors_client_id            = "connectors"
+  connectors_client_secret_arn    = "arn:aws:secretsmanager:eu-central-1:123456789012:secret:connectors-client-secret"
+}
+```
+
+:::warning
+Browser-based OIDC login does not complete over plain HTTP. Set `alb_certificate_arn` to an AWS Certificate Manager (ACM) certificate ARN before enabling OIDC. The Application Load Balancer then serves an HTTPS listener on port 443, redirects port 80 to it, and forwards the `X-Forwarded-Proto` header so the login redirect succeeds. Use `alb_ssl_policy` to change the negotiated SSL policy.
+:::
+
+### Resources created for Management Identity
+
+`../../modules/ecs/fargate/management-identity` is deployed when `authentication_mode = "oidc"` and contains the definitions for:
+
+- ECS Service and task definition, running Management Identity in generic OIDC mode.
+- Task-specific IAM role, isolated to this component.
+- Load balancer configuration to add a listener rule to the shared Application Load Balancer. Exposure is opt-in and disabled by default through `enable_alb_http_webapp_listener_rule`.
+- Networking configuration that registers Management Identity with ECS Service Connect, reachable inside the VPC as `identity` on port `8084`, with the management endpoint on port `8082`.
+
+Management Identity uses a dedicated `identity` database on the shared Aurora PostgreSQL cluster with **password authentication**, not IAM database authentication. Unlike the Orchestration Cluster image, the Management Identity image does not include the AWS JDBC wrapper. The database name and role are configurable through `identity_db_name` and `identity_db_username`, and the generated password is stored in AWS Secrets Manager.
+
+In generic OIDC mode, Management Identity validates tokens and handles login. The identity provider owns clients and users, and role-to-principal mapping is done on the Camunda side.
+
+The base Terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/management-identity).
+
+### How components authenticate in OIDC mode
+
+| Component             | Flow                                                                                                                                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Orchestration Cluster | Authorization code flow for the web components. The user identifier is taken from the `preferred_username` claim, and `admin` is granted the admin role. |
+| Connectors            | Client credentials (machine-to-machine) against the token endpoint, mapped to the Connectors role.                                                       |
+| Management Identity   | Generic OIDC client against the same issuer, using its own client ID and audience.                                                                       |
+
+For your own scripts and clients, retrieve the machine-to-machine values from the Terraform outputs:
+
+```sh
+terraform output -raw oidc_token_url
+terraform output -raw orchestration_oidc_client_id
+terraform output -raw orchestration_oidc_client_secret
+terraform output -raw connectors_oidc_client_id
+terraform output -raw connectors_oidc_client_secret
+```
+
+These outputs are empty in `basic` mode. The client secret outputs are only populated for the bundled provider, because an external provider issues and stores its own secrets.
+
+## Deploy Camunda Hub
+
+[Camunda Hub](/self-managed/components/hub/index.md) bundles Web Modeler and Console, and is deployed as one additional ECS task running two containers: the REST API with the web interface, and a websockets relay used for real-time collaboration.
+
+Camunda Hub is optional and disabled by default. It authenticates through OIDC and cannot use basic authentication, so it requires `authentication_mode = "oidc"`. If you enable Camunda Hub without OIDC, Terraform fails during `terraform plan` with a precondition error.
+
+```hcl
+authentication_mode = "oidc"
+enable_camunda_hub  = true
+```
+
+The following inputs control the deployment:
+
+| Input                          | Description                                                                                                                                            | Default                                          |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| `enable_camunda_hub`           | Deploy the Camunda Hub ECS task. Requires `authentication_mode = "oidc"`.                                                                              | `false`                                          |
+| `camunda_hub_restapi_image`    | Container image for the Camunda Hub REST API and web interface.                                                                                        | The matching `camunda/hub` 8.10 image            |
+| `camunda_hub_websockets_image` | Container image for the Camunda Hub websockets relay.                                                                                                  | The matching `camunda/hub-websockets` 8.10 image |
+| `camunda_license_key`          | Camunda license key. Leave empty to run Camunda Hub in trial mode. When set, it's stored in AWS Secrets Manager and injected as `CAMUNDA_LICENSE_KEY`. | `""`                                             |
+
+### Resources created for Camunda Hub
+
+`../../modules/ecs/fargate/camunda-hub` is deployed when `enable_camunda_hub = true` and contains the definitions for:
+
+- ECS Service and task definition with both Camunda Hub containers sharing a task.
+- Task-specific IAM role, isolated to this component.
+- Load balancer configuration to add listener rules and target groups for the web interface and the websockets relay.
+
+Alongside the module, the root workspace creates a dedicated `camunda-hub` database on the shared Aurora PostgreSQL cluster using IAM authentication, seeded by a one-time ECS task in the same way as the Orchestration Cluster database. It also generates the Pusher application key and secret shared by both containers, and an optional license secret, storing all of them in AWS Secrets Manager.
+
+Camunda Hub connects to the Orchestration Cluster over ECS Service Connect using the signed-in user's bearer token, so no additional cluster credentials are required.
+
+The base Terraform documentation for this module can be found [alongside the repository](https://github.com/camunda/camunda-deployment-references/tree/main/aws/modules/ecs/fargate/camunda-hub).
+
+### Use the private Camunda registry
+
+The default images pull from public Docker Hub and need no credentials. To use the private enterprise images, point `camunda_hub_restapi_image` and `camunda_hub_websockets_image` at `registry.camunda.cloud` and set `registry_username` and `registry_password`. Registry credentials are attached to the task only when an image targets that private registry.
+
+### Access Camunda Hub
+
+Camunda Hub is served through the shared Application Load Balancer, in addition to the paths documented in [Verify connectivity to Camunda 8](#verify-connectivity-to-camunda-8):
+
+| Path       | Target                                 |
+| ---------- | -------------------------------------- |
+| `/hub*`    | Camunda Hub REST API and web interface |
+| `/hub-ws*` | Camunda Hub websockets relay           |
+
+Open `https://<alb_endpoint>/hub` and sign in with the OIDC administrator user. To troubleshoot a task that doesn't reach a healthy state, use the [Camunda Hub health and metrics endpoints](/self-managed/components/hub/monitoring.md) and the CloudWatch logs of the ECS service.
+
+:::note
+The reference architecture configures a placeholder sender address and leaves the SMTP host unset, so Camunda Hub doesn't send user invitation emails. Configure your own SMTP server if you need email invitations.
+:::
+
 ## Execution
 
 :::note Secret management
