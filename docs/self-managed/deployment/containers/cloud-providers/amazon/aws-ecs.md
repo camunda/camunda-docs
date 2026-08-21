@@ -538,6 +538,26 @@ terraform output -raw connectors_oidc_client_secret
 
 These outputs are empty in `basic` mode. The client secret outputs are only populated for the bundled provider, because an external provider issues and stores its own secrets.
 
+### Retrieve the administrator sign-in credentials
+
+In `oidc` mode, you sign in to Operate, Tasklist, and Camunda Hub as the `admin` user of the identity provider. This is a different account from the built-in `admin` user used in `basic` mode, so `terraform output -raw admin_user_password` does not return its password.
+
+When you use the bundled provider, the password is generated at apply time and stored in AWS Secrets Manager under `<prefix>-oc1-realm-admin-user-password`, where `<prefix>` is the value of the `prefix` input (`camunda` by default). There is no Terraform output for it. Retrieve it with the AWS CLI:
+
+```sh
+aws secretsmanager get-secret-value \
+  --secret-id camunda-oc1-realm-admin-user-password \
+  --query SecretString \
+  --output text
+```
+
+| Component                                   | Username | Password source                                                 |
+| ------------------------------------------- | -------- | --------------------------------------------------------------- |
+| Operate, Tasklist, and Camunda Hub (`oidc`) | `admin`  | Secrets Manager secret `<prefix>-oc1-realm-admin-user-password` |
+| Operate and Tasklist (`basic`)              | `admin`  | `terraform output -raw admin_user_password`                     |
+
+When you use your own OIDC provider through `external_oidc`, this secret isn't created. Sign in with an account from your provider instead, and make sure its `preferred_username` claim matches the administrator identifier configured for the Orchestration Cluster.
+
 ## Deploy Camunda Hub
 
 [Camunda Hub](/self-managed/components/hub/index.md) bundles Web Modeler and Console, and is deployed as one additional ECS task running two containers: the REST API with the web interface, and a websockets relay used for real-time collaboration.
@@ -585,7 +605,7 @@ Camunda Hub is served through the shared Application Load Balancer, in addition 
 | `/hub*`    | Camunda Hub REST API and web interface |
 | `/hub-ws*` | Camunda Hub websockets relay           |
 
-Open `https://<alb_endpoint>/hub` and sign in with the OIDC administrator user. To troubleshoot a task that doesn't reach a healthy state, use the [Camunda Hub health and metrics endpoints](/self-managed/components/hub/monitoring.md) and the CloudWatch logs of the ECS service.
+Open `https://<alb_endpoint>/hub` and sign in with the `admin` user described in [Retrieve the administrator sign-in credentials](#retrieve-the-administrator-sign-in-credentials). To troubleshoot a task that doesn't reach a healthy state, use the [Camunda Hub health and metrics endpoints](/self-managed/components/hub/monitoring.md) and the CloudWatch logs of the ECS service.
 
 :::note
 The reference architecture configures a placeholder sender address and leaves the SMTP host unset, so Camunda Hub doesn't send user invitation emails. Configure your own SMTP server if you need email invitations.
