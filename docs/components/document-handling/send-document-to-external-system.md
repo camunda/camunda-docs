@@ -36,7 +36,7 @@ The three subsections below define the JSON structure of each type. You can also
 
 A Camunda document is a reference to a file held in the [Camunda document store](/components/document-handling/getting-started.md). This is the document store path (Path 1): the file is routed as an opaque blob.
 
-Such references are produced for you by a [form Filepicker, inbound webhook, or the Orchestration Cluster REST API](/components/document-handling/upload-document-to-bpmn-process.md) or as the output of another connector, then stored in a process variable. A reference has the following structure:
+Such references are produced for you by a [form Filepicker, inbound webhook, or the Orchestration Cluster REST API](/components/document-handling/upload-document-to-bpmn-process.md), as the output of another connector, or as an [AI Agent tool call result](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents.md), then stored in a process variable. A reference has the following structure:
 
 ```json
 {

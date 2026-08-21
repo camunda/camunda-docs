@@ -59,3 +59,7 @@ The model requested to call the following MCP tool:
 See the example diagram below:
 
 ![MCP Client connector human-in-the-loop example](agentic-ai/img/mcp-client-hitl.png)
+
+:::tip
+To notify the approver as soon as the confirmation task is created, use [Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md) or a [connector](/components/connectors/connector-types.md) to your own notification channel, instead of relying on the user to check Tasklist.
+:::

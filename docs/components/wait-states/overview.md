@@ -54,3 +54,5 @@ Wait state data is isolated by tenant. You can only view wait states for [tenant
 
 - [View wait states in Operate](../operate/userguide/view-wait-states.md)
 - [Use the Camunda REST API to search wait states](/apis-tools/orchestration-cluster-api-rest/specifications/search-element-instance-wait-states.api.mdx)
+- [Detect a stuck or looping AI agent](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md) using wait states, alongside agent-specific health indicators
+- [Monitor AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)
