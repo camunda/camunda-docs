@@ -562,7 +562,7 @@ When you use your own OIDC provider through `external_oidc`, this secret isn't c
 
 [Camunda Hub](/self-managed/components/hub/index.md) bundles Web Modeler and Console, and is deployed as one additional ECS task running two containers: the REST API with the web interface, and a websockets relay used for real-time collaboration.
 
-Camunda Hub is optional and disabled by default. It authenticates through OIDC and cannot use basic authentication, so it requires `authentication_mode = "oidc"`. If you enable Camunda Hub without OIDC, Terraform fails during `terraform plan` with a precondition error.
+Camunda Hub is optional and disabled by default. It authenticates through OIDC and cannot use Basic authentication, so it requires `authentication_mode = "oidc"`. If you enable Camunda Hub without OIDC, Terraform fails during `terraform plan` with a precondition error.
 
 ```hcl
 authentication_mode = "oidc"
