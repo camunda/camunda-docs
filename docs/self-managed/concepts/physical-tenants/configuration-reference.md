@@ -5,7 +5,7 @@ sidebar_label: "Configuration reference"
 description: "Configure Physical Tenants with root defaults, per-tenant overrides, and startup validation rules."
 ---
 
-This page explains how to configure Physical Tenants in Camunda 8.10 for Self-Managed deployments.
+Learn how to configure Physical Tenants in Camunda 8.10 Self-Managed deployments.
 
 In 8.10, configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
 
@@ -102,7 +102,7 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints. All validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting — there is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
+At startup, configuration validation enforces tenant-level constraints. All validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting. There is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
 Known constraints and behavior for 8.10:
 
@@ -136,7 +136,7 @@ For Oracle, a colliding RDBMS location additionally appends a hint to isolate by
 ```text
 Physical tenants must not share a document store location, or they would read and write into the
 same backing storage. Use a distinct bucket, container, or path per tenant, and never nest one
-tenant's path inside another's — a nested path is reachable through a caller-supplied document id,
+tenant's path inside another's. A nested path is reachable through a caller-supplied document id,
 which no object store bounds at '/'. Conflicts: tenants [tenanta, tenantb] share the same document
 store location [provider=aws, namespace=[company-docs-bucket], keyPrefix='tenant-a']
 ```
@@ -206,7 +206,7 @@ camunda:
           - shared-s3
         aws:
           shared-s3:
-            bucket-path: riskprod/ # distinct path — no collision with default
+            bucket-path: riskprod/ # distinct path, no collision with default
       security:
         authentication:
           providers:
@@ -225,8 +225,10 @@ CAMUNDA_PHYSICALTENANTS_RISKPROD_DATA_SECONDARYSTORAGE_RDBMS_URL=jdbc:postgresql
 
 If YAML and environment variables are used together, use the same normalized tenant key in both forms.
 
-## Related pages
+:::note Related pages
 
 - [Physical Tenant isolation model](./index.md)
 - [Provisioning and lifecycle](./provisioning-and-lifecycle.md)
 - [Multi-tenancy overview](../multi-tenancy/index.md)
+
+:::

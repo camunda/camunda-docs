@@ -1034,11 +1034,11 @@ Change cluster mode
 
 **Parameters:**
 
-| Parameter | Type                    | Description |
-| --------- | ----------------------- | ----------- |
-| `mode`    | `ChangeClusterModeMode` |             |
-| `dry_run` | `bool` \| `Unset`       |             |
-| `kwargs`  | `Any`                   |             |
+| Parameter | Type              | Description                                   |
+| --------- | ----------------- | --------------------------------------------- |
+| `mode`    | `Mode`            | The operating mode of a cluster’s partitions. |
+| `dry_run` | `bool` \| `Unset` |                                               |
+| `kwargs`  | `Any`             |                                               |
 
 - **Raises:**
   - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
@@ -1062,7 +1062,7 @@ def change_cluster_mode_example() -> None:
     # Pass dry_run=True to validate the request and inspect the resulting plan
     # without applying it. Omit it (or set it to False) to trigger the transition.
     result = client.change_cluster_mode(
-        mode=ChangeClusterModeMode.RECOVERING,
+        mode=Mode.RECOVERING,
         dry_run=True,
     )
 
@@ -2795,6 +2795,91 @@ def delete_role_example(role_id: RoleId) -> None:
     client = CamundaClient()
 
     client.delete_role(role_id=role_id)
+```
+
+### delete_runtime_backup()
+
+```python
+def delete_runtime_backup(backup_id, **kwargs)
+```
+
+Delete runtime backup
+
+> Deletes the runtime backup with the given id.
+
+**Parameters:**
+
+| Parameter   | Type   | Description |
+| ----------- | ------ | ----------- |
+| `backup_id` | int) – |             |
+
+    The id of the backup. Must be a positive numerical value. As backups are
+    logically
+    ordered by their ids (ascending), each successive backup must use a higher id than the
+    previous one.
+    > Example: 1.
+
+- **kwargs** (_Any_)
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  None
+- **Return type:**
+  None
+
+#### Examples
+
+**Delete a runtime backup:**
+
+```python
+def delete_runtime_backup_example(backup_id: int) -> None:
+    client = CamundaClient()
+
+    client.delete_runtime_backup(backup_id=backup_id)
+```
+
+### delete_runtime_backup_state()
+
+```python
+def delete_runtime_backup_state(**kwargs)
+```
+
+Delete runtime backup state
+
+> Resets the runtime backup state of every partition of the physical tenant, clearing
+> all checkpoint info, backup info, checkpoint metadata, and backup ranges. Used when
+> switching backup stores.
+
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  None
+- **Parameters:**
+  **kwargs** (_Any_)
+- **Return type:**
+  None
+
+#### Examples
+
+**Delete the runtime backup state:**
+
+```python
+def delete_runtime_backup_state_example() -> None:
+    client = CamundaClient()
+
+    # Clears all checkpoint info, backup info, checkpoint metadata, and backup
+    # ranges of every partition. Used when switching backup stores.
+    client.delete_runtime_backup_state()
 ```
 
 ### delete_tenant()
@@ -5108,6 +5193,108 @@ def get_role_example(role_id: RoleId) -> None:
     print(f"Role: {result.name}")
 ```
 
+### get_runtime_backup()
+
+```python
+def get_runtime_backup(backup_id, **kwargs)
+```
+
+Get runtime backup
+
+> Returns detailed status of the runtime backup with the given id.
+
+**Parameters:**
+
+| Parameter   | Type   | Description |
+| ----------- | ------ | ----------- |
+| `backup_id` | int) – |             |
+
+    The id of the backup. Must be a positive numerical value. As backups are
+    logically
+    ordered by their ids (ascending), each successive backup must use a higher id than the
+    previous one.
+    > Example: 1.
+
+- **kwargs** (_Any_)
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.NotFoundError** – If the response status code is 404. A backup with the given id does not exist.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  BackupInfo
+- **Return type:**
+  BackupInfo
+
+#### Examples
+
+**Get a runtime backup:**
+
+```python
+def get_runtime_backup_example(backup_id: int) -> None:
+    client = CamundaClient()
+
+    result = client.get_runtime_backup(backup_id=backup_id)
+
+    print(f"Backup {result.backup_id} is {result.state.value}")
+
+    for partition in result.details:
+        print(f"  partition {partition.partition_id}: {partition.state.value}")
+```
+
+### get_runtime_backup_state()
+
+```python
+def get_runtime_backup_state(**kwargs)
+```
+
+Get runtime backup state
+
+> Returns the current checkpoint and backup state of every partition of the physical
+> tenant. Unlike the backupRuntime actuator, this fails the whole request if the
+> checkpoint state or the backup ranges cannot be retrieved from any partition, instead
+> of silently returning an empty section.
+
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  RuntimeBackupState
+- **Parameters:**
+  **kwargs** (_Any_)
+- **Return type:**
+  RuntimeBackupState
+
+#### Examples
+
+**Get the runtime backup state:**
+
+```python
+def get_runtime_backup_state_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_runtime_backup_state()
+
+    for checkpoint in result.checkpoint_states:
+        print(
+            f"Partition {checkpoint.partition_id} checkpoint {checkpoint.checkpoint_id}"
+            f" at position {checkpoint.checkpoint_position}"
+        )
+
+    for backup_range in result.ranges:
+        print(
+            f"Partition {backup_range.partition_id} range:"
+            f" {backup_range.start} - {backup_range.end}"
+        )
+```
+
 ### get_start_process_form()
 
 ```python
@@ -5165,7 +5352,7 @@ def get_start_process_form_example(
 def get_status(**kwargs)
 ```
 
-Get cluster status
+Get physical tenant status
 
 - **Raises:**
   - **errors.ServiceUnavailableError** – If the response status code is 503.
@@ -5592,6 +5779,109 @@ def get_variable_example(variable_key: VariableKey) -> None:
     print(f"Variable: {result.name} = {result.value}")
 ```
 
+### list_runtime_backups()
+
+```python
+def list_runtime_backups(*, prefix=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+```
+
+List runtime backups
+
+> Returns a list of all available runtime backups of the physical tenant, with their
+> state and additional info, sorted in descending order of backupId.
+
+**Parameters:**
+
+| Parameter | Type              | Description |
+| --------- | ----------------- | ----------- |
+| `prefix`  | `str` \| Unset) – |             |
+
+    A prefix of a backup id, followed by a single ‘\*’ as a wildcard,
+    matching any backup id
+    starting with the given prefix.
+    > Example: 17567\*.
+
+- **kwargs** (_Any_)
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  list[Any]
+- **Return type:**
+  list[_Any_]
+
+#### Examples
+
+**List runtime backups:**
+
+```python
+def list_runtime_backups_example() -> None:
+    client = CamundaClient()
+
+    # `prefix` is a backup id prefix followed by a single `*` wildcard.
+    result = client.list_runtime_backups(prefix="17567*")
+
+    for backup in result:
+        print(f"Runtime backup: {backup}")
+```
+
+### list_secrets()
+
+```python
+def list_secrets(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+```
+
+List secrets (alpha)
+
+> List the camunda.secrets.\* references known for the caller’s physical tenant.
+>
+> Only references the caller holds SECRET:READ on are returned. This endpoint never
+> returns secret values, only the reference names.
+>
+> This endpoint is an alpha feature and may be subject to change in future releases.
+
+**Parameters:**
+
+| Parameter | Type                           | Description                                                                                                                                                      |
+| --------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data`    | `SecretListRequest` \| `Unset` | Reserved for future filtering options. Currently takes no properties. The request body is optional: omitting it (or sending an empty object) applies no filters. |
+| `kwargs`  | `Any`                          |                                                                                                                                                                  |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  SecretListResult
+- **Return type:**
+  SecretListResult
+
+#### Examples
+
+**List secrets:**
+
+```python
+def list_secrets_example() -> None:
+    client = CamundaClient()
+
+    # Lists the `camunda.secrets.*` references visible to the caller's physical
+    # tenant. Only references the caller holds `SECRET:READ` on are returned, and
+    # the response carries reference names only -- never the secret values.
+    # The request body is optional; an empty one applies no filters.
+    result = client.list_secrets(data=SecretListRequest())
+
+    for reference in result.references:
+        print(f"Known secret reference: {reference}")
+```
+
 ### migrate_process_instance()
 
 ```python
@@ -5825,6 +6115,55 @@ def modify_process_instances_batch_operation_example(source_element_id: ElementI
     )
 
     print(f"Batch operation key: {result.batch_operation_key}")
+```
+
+### pause_exporting()
+
+```python
+def pause_exporting(*, soft=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+```
+
+Pause exporting
+
+> Pauses exporting on all partitions of the physical tenant. While paused, exported records
+> are not committed, so the log is not compacted for the affected partitions.
+>
+> With soft=true, exporting continues to run but its position is not committed, so the
+> state after resuming is identical to a hard pause; use this variant when exporting must
+> keep progressing (e.g. to avoid falling behind) while still preventing log compaction,
+> such as during a backup.
+
+**Parameters:**
+
+| Parameter | Type              | Description |
+| --------- | ----------------- | ----------- |
+| `soft`    | `bool` \| `Unset` |             |
+| `kwargs`  | `Any`             |             |
+
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  None
+- **Return type:**
+  None
+
+#### Examples
+
+**Pause exporting:**
+
+```python
+def pause_exporting_example() -> None:
+    client = CamundaClient()
+
+    # With `soft=True` exporting keeps running but its position is not committed,
+    # so the log is still not compacted. Use it when exporting must keep
+    # progressing -- for example while a backup is taken.
+    client.pause_exporting(soft=True)
 ```
 
 ### pin_clock()
@@ -6283,6 +6622,41 @@ def resume_batch_operation_example(batch_operation_key: BatchOperationKey) -> No
     )
 ```
 
+### resume_exporting()
+
+```python
+def resume_exporting(**kwargs)
+```
+
+Resume exporting
+
+> Resumes exporting on all partitions of the physical tenant after a pause or soft pause.
+
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  None
+- **Parameters:**
+  **kwargs** (_Any_)
+- **Return type:**
+  None
+
+#### Examples
+
+**Resume exporting:**
+
+```python
+def resume_exporting_example() -> None:
+    client = CamundaClient()
+
+    client.resume_exporting()
+```
+
 ### resume_process_instance()
 
 ```python
@@ -6339,8 +6713,9 @@ Resume process instances (batch)
 
 > Resumes multiple suspended process instances.
 >
-> Since only SUSPENDED root instances can be resumed, any given filters for state and
-> parentProcessInstanceKey are ignored and overridden during this batch operation.
+> Since only SUSPENDED root instances can be resumed, any given
+> filters for state and parentProcessInstanceKey are ignored and overridden during this batch
+> operation.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -8785,8 +9160,9 @@ Suspend process instances (batch)
 
 > Suspends multiple running process instances.
 >
-> Since only ACTIVE root instances can be suspended, any given filters for state and
-> parentProcessInstanceKey are ignored and overridden during this batch operation.
+> Since only ACTIVE root instances can be suspended, any given
+> filters for state and parentProcessInstanceKey are ignored and overridden during this batch
+> operation.
 > This is done asynchronously, the progress can be tracked using the batchOperationKey from the
 > response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
 
@@ -8824,6 +9200,104 @@ def suspend_process_instances_batch_operation_example() -> None:
     )
 
     print(f"Batch operation key: {result.batch_operation_key}")
+```
+
+### sync_runtime_backup_state()
+
+```python
+def sync_runtime_backup_state(**kwargs)
+```
+
+Force-write runtime backup state
+
+> Force-writes the checkpoint and backup metadata of every partition of the physical
+> tenant to the backup store, independent of any backup being taken or confirmed, and
+> returns the updated state.
+
+- **Raises:**
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.GatewayTimeoutError** – If the response status code is 504. The request from gateway to broker timed out.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  RuntimeBackupState
+- **Parameters:**
+  **kwargs** (_Any_)
+- **Return type:**
+  RuntimeBackupState
+
+#### Examples
+
+**Force-write the runtime backup state:**
+
+```python
+def sync_runtime_backup_state_example() -> None:
+    client = CamundaClient()
+
+    # Force-writes the checkpoint and backup metadata of every partition to the
+    # backup store, independent of any backup being taken or confirmed.
+    result = client.sync_runtime_backup_state()
+
+    print(f"Synced {len(result.backup_states)} partition backup states")
+```
+
+### take_runtime_backup()
+
+```python
+def take_runtime_backup(*, data=<camunda_orchestration_sdk.types.Unset object>, **kwargs)
+```
+
+Take a runtime backup
+
+> Triggers a backup of runtime data on all partitions of the physical tenant.
+>
+> The backupId must be omitted if continuous backups and/or a backup or checkpoint
+> schedule is enabled for the physical tenant, as the id is generated automatically.
+> Otherwise, backupId is required.
+
+**Parameters:**
+
+| Parameter | Type                                  | Description                               |
+| --------- | ------------------------------------- | ----------------------------------------- |
+| `data`    | `TakeRuntimeBackupRequest` \| `Unset` | Request body for taking a runtime backup. |
+| `kwargs`  | `Any`                                 |                                           |
+
+- **Raises:**
+  - **errors.BadRequestError** – If the response status code is 400. The provided data is not valid.
+  - **errors.UnauthorizedError** – If the response status code is 401. The request lacks valid authentication credentials.
+  - **errors.ForbiddenError** – If the response status code is 403. Forbidden. The request is not allowed.
+  - **errors.ConflictError** – If the response status code is 409. A backup with the same or a higher id already exists.
+  - **errors.InternalServerErrorError** – If the response status code is 500. An internal error occurred while processing the request.
+  - **errors.ServiceUnavailableError** – If the response status code is 503. The service is currently unavailable. This may happen only on some requests where the system creates backpressure to prevent the server’s compute resources from being exhausted, avoiding more severe failures. In this case, the title of the error object contains RESOURCE_EXHAUSTED. Clients are recommended to eventually retry those requests after a backoff period. You can learn more about the backpressure mechanism here: [internal processing](../../../components/zeebe/technical-concepts/internal-processing.md#handling-backpressure) .
+  - **errors.GatewayTimeoutError** – If the response status code is 504. The request from gateway to broker timed out.
+  - **errors.UnexpectedStatus** – If the response status code is not documented.
+  - **httpx.TimeoutException** – If the request takes longer than Client.timeout.
+- **Returns:**
+  TakeRuntimeBackupResponse
+- **Return type:**
+  TakeRuntimeBackupResponse
+
+#### Examples
+
+**Take a runtime backup:**
+
+```python
+def take_runtime_backup_example(backup_id: int) -> None:
+    client = CamundaClient()
+
+    # `backup_id` is optional: leave it unset when continuous backups or a
+    # backup/checkpoint schedule is enabled and an id is generated for you.
+    # Here it is supplied explicitly, which is what a one-off manual backup does.
+    result = client.take_runtime_backup(
+        data=TakeRuntimeBackupRequest(
+            backup_id=backup_id,
+        )
+    )
+
+    print(f"Scheduled backup {result.backup_id}")
 ```
 
 ### throw_job_error()

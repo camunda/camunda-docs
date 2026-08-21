@@ -88,7 +88,7 @@ Once you are happy with your script and have tested it locally, you can start au
    2. Add the RPA script to your process:
       - **Web Modeler**: Search for the RPA script by name directly in the **Append element** menu — no script ID required.
       - **Desktop Modeler**: Add a new task and change the type to **Run RPA Script**.
-      <img src={RpaTaskAppend} alt="Appending an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
+        <img src={RpaTaskAppend} alt="Appending an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
    3. **Desktop Modeler only**: Configure the task with the script ID from the previous step. Add any input mappings required for your script to work.
       <img src={RpaTaskConfig} alt="Configuring an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />

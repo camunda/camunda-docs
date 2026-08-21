@@ -17,6 +17,7 @@ import NoDomainInfo from '../../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
+import DeploymentReadinessCheck from '../../\_partials/\_deployment-readiness-check.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing AWS Kubernetes EKS cluster. It also includes instructions for setting up optional DNS configurations and other optional AWS-managed services, such as OpenSearch and PostgreSQL.
 
@@ -435,11 +436,9 @@ This command:
 
 <HelmUpgradeNote />
 
-You can track the progress of the installation using the following command:
+You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck download />
 
 <details>
 <summary>Understand how each component interacts with IRSA</summary>

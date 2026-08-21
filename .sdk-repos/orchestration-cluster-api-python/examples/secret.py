@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from camunda_orchestration_sdk import (
     CamundaClient,
+    SecretListRequest,
     SecretResolveRequest,
 )
 
@@ -35,3 +36,18 @@ def resolve_secrets_example() -> None:
     for error in result.errors:
         print(f"Failed to resolve {error.reference}: {error.code.value} - {error.message}")
 # endregion ResolveSecrets
+
+
+# region ListSecrets
+def list_secrets_example() -> None:
+    client = CamundaClient()
+
+    # Lists the `camunda.secrets.*` references visible to the caller's physical
+    # tenant. Only references the caller holds `SECRET:READ` on are returned, and
+    # the response carries reference names only -- never the secret values.
+    # The request body is optional; an empty one applies no filters.
+    result = client.list_secrets(data=SecretListRequest())
+
+    for reference in result.references:
+        print(f"Known secret reference: {reference}")
+# endregion ListSecrets
