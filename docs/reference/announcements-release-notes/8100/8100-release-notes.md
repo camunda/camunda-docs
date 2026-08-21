@@ -150,6 +150,20 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 
 <p class="link-arrow">[Business ID](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
 
+### Optimize
+
+#### Optimize authentication moves to the Camunda Security Library
+
+<!-- https://github.com/camunda/camunda/issues/58600 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now authenticates through the Camunda Security Library (CSL), the same session-based OIDC login the Orchestration Cluster uses, replacing its own stateless JWT-cookie stack. A standard session cookie replaces the self-signed JWT cookie, and the login `id_token`'s issuer and audience are now validated.
+
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-authentication-moves-to-the-camunda-security-library) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the full authentication model change.
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
 ### Orchestration Cluster
 
 #### FEEL context variables for the process instance
@@ -210,6 +224,8 @@ Your existing Camunda Hub and Optimize authentication settings continue to work 
 User, group, role, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity. Unified authorization follows in 8.11.
 
 <p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
 #### Rolling upgrades
 
