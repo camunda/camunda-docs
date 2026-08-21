@@ -133,7 +133,7 @@ While a user remains a member of such a role, access in Tasklist and Operate wil
 <tr>
     <td><span className="label-highlight orange">High</span></td>
     <td>Identity via Keycloak</td>
-    <td><p>If you manage Keycloak internally, verify required database schema updates and confirm supported versions in [supported environments](/reference/supported-environments.md).</p></td>
+    <td><p>If you manage Keycloak internally, verify required database schema updates and confirm supported versions in [supported environments](/reference/supported-environments.md).</p><p>Also use upgrade planning to decide whether to move from a Keycloak-centric setup to direct OIDC for Orchestration Cluster and Management Identity. In 8.8, OIDC is the recommended production target.</p></td>
 </tr>
 <tr>
     <td><span className="label-highlight yellow">Medium</span></td>
@@ -150,6 +150,14 @@ While a user remains a member of such a role, access in Tasklist and Operate wil
 :::info
 For more information about Identity 8.8 changes, see [Identity, authentication, and authorization](/reference/announcements-release-notes/880/whats-new-in-88.md#identity).
 :::
+
+#### Recommended authentication target for 8.8
+
+If your 8.7 environment still relies on Keycloak as the primary authentication layer, include authentication architecture in your upgrade plan.
+
+- For the Orchestration Cluster, Camunda recommends [OIDC](/self-managed/concepts/authentication/authentication-to-orchestration-cluster.md#oidc) for production environments.
+- For Management Identity, Camunda recommends connecting directly to the same external OIDC provider when possible, rather than continuing with a separate Keycloak-centric setup. See [management and modeling component authentication](/self-managed/concepts/authentication/authentication-to-management-components.md#connect-to-an-external-oidc-idp).
+- If you keep Keycloak for this upgrade, still verify database schema changes, supported versions, and any follow-up migration work needed after the platform upgrade.
 
 ## Verify infrastructure compatibility
 
