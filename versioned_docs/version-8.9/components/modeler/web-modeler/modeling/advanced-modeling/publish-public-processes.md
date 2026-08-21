@@ -4,7 +4,6 @@ title: Publish processes via a form
 description: "Share executable processes publicly with anyone from Web Modeler on Camunda 8 SaaS."
 ---
 
-import CreateFormImg from '../../img/create-form.png';
 import PublicationSectionImg from '../../img/publication-section.png';
 import LinkStartFormImg from '../../img/link-start-form.png';
 import PreviewStartFormImg from '../../img/start-form-configured.png';
@@ -29,13 +28,12 @@ This documentation provides step-by-step instructions on how to leverage public 
 
 To create a form for public access, follow these steps:
 
-1. Navigate back to your project root or folder.
-2. Click on **New**, and select **Form** in the dropdown menu.
-   <img src={CreateFormImg} style={{width: 300}} alt="Creating a new form" />
-
-3. Name your form.
-4. Design your form using the **component palette**.
-5. [Link form to start event](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#using-the-link-button).
+1. Navigate to your project root.
+2. Create or open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. In the process application, click **Create new > Form**.
+4. Name your form.
+5. Design your form using the **component palette**.
+6. [Link form to start event](/components/modeler/web-modeler/modeling/advanced-modeling/form-linking.md#using-the-link-button).
 
 Once ready, return to your process. You can read more about form creation in the [form guide](/components/modeler/forms/utilizing-forms.md).
 
