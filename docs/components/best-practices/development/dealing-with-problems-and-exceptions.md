@@ -90,6 +90,8 @@ zbc.createWorker("retrieveMoney", (job) => {
 
 Whenever a job fails with a retry count of `0`, an incident is raised. An incident requires human intervention, typically using Operate. Refer to [incidents in the Operate docs](/components/operate/userguide/resolve-incidents-update-variables.md).
 
+For example, this behavior also applies to tools called by an AI agent. Each tool the agent selects runs as an ordinary BPMN activity, so retries and incidents work as described above. See [how the feedback loop works](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works).
+
 ### Writing idempotent workers
 
 Zeebe uses the **at-least-once strategy** for job handlers, which is a typical choice in distributed systems. This means that the process instance only advances in the happy case (the job was completed, the workflow engine received the complete job request and committed it). A typical failure case occurs when the worker who polled the job crashes and cannot complete the job anymore. [In this case, the workflow engine gives the job to another worker after a configured timeout](/components/concepts/job-workers.md#timeouts). This ensures that the job handler is executed at least once.
