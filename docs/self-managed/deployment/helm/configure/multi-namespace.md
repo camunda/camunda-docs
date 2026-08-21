@@ -15,8 +15,6 @@ The chart models this as a deployment topology instead of treating namespace pla
 - `hub` deploys the Hub plane and describes one or more remote Orchestration Clusters.
 - `orchestration` deploys one workload plane and consumes a Hub-plane connection.
 
-This contract separates the relationship between releases from the umbrella chart packaging. The design is intended to remain usable if Hub and orchestration are published as separate charts in the future.
-
 ## Before you begin
 
 Prepare the following resources:
