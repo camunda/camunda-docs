@@ -26,8 +26,8 @@ applyTo: "**/*.md"
 
 - Use the **Oxford comma** in all lists (for example, "GitHub, Google Analytics, and Slack").
 - Default to **American punctuation** rules.
-- Use **em dashes** (—) for parenthetical information; **en dashes** (–) for date and time ranges; **hyphens** (-) only for compound adjectives.
-- Avoid excessive use of em dashes. Use shorter, more concise sentences instead.
+- Use **en dashes** (–) for date and time ranges; **hyphens** (-) only for compound adjectives.
+- Avoid use of em dashes (—). Use shorter, more concise sentences instead.
 - Do **not** use quotation marks for UI elements, button names, or section names. Use **bold** instead.
 - Use double quotation marks only for direct speech or quoted text.
 - Omit hyphens in prefixed words (reactivate, undo, deactivate, unhappy) unless the result looks incorrect.
