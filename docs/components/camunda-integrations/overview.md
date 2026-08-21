@@ -12,8 +12,6 @@ Extend the power of your process orchestration by connecting Camunda with your c
 
 ## Microsoft Teams integration
 
-<UsingGrid using={[msTeamsCard]} />
-
 Camunda for Microsoft Teams brings process management into your collaboration environment, so you can manage processes without leaving Microsoft Teams.
 
 With this integration, you can:
@@ -28,9 +26,9 @@ With this integration, you can:
 This integration is released as an [early access](/components/early-access/overview.md) alpha feature.
 :::
 
-## SAP integration
+<UsingGrid using={[msTeamsCard]} />
 
-<UsingGrid using={[sapCard]} />
+## SAP integration
 
 Camunda’s SAP integration allows you to include SAP S/4HANA, ECC, Advanced Event Mesh (AEM) and Business Technology Platform (BTP) functionality in your orchestrated processes.
 
@@ -49,9 +47,9 @@ With this integration, you can:
 This integration is ideal for organizations standardizing on SAP systems while extending automation to non-SAP applications and services.
 :::
 
-## ServiceNow integration
+<UsingGrid using={[sapCard]} />
 
-<UsingGrid using={[serviceNowCard]} />
+## ServiceNow integration
 
 Camunda’s ServiceNow integration bridges your business processes with IT service management (ITSM) to streamline and automate service delivery.
 
@@ -66,3 +64,5 @@ With this integration, you can:
 :::note
 Use this integration when you need to orchestrate processes that involve ITSM tasks or require seamless collaboration between ServiceNow and other business systems.
 :::
+
+<UsingGrid using={[serviceNowCard]} />
