@@ -250,6 +250,11 @@
         "reference/data-locations",
         "components/concepts/encryption-at-rest",
         "components/concepts/backups",
+        {
+          "type": "doc",
+          "id": "components/saas/cross-region-cold-recovery",
+          "className": "sidebar-cta-experimental"
+        },
         "components/concepts/data-retention",
         "reference/saas-ip-addresses"
       ]

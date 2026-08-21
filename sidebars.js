@@ -1320,6 +1320,11 @@ module.exports = {
             "components/saas/how-to-restore",
             "components/saas/restore-scenarios",
             "components/saas/restore-troubleshooting",
+            {
+              type: "doc",
+              id: "components/saas/cross-region-cold-recovery",
+              className: "sidebar-cta-experimental",
+            },
           ],
         },
         "components/saas/auto-updates",
