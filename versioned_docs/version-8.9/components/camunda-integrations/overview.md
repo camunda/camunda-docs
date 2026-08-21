@@ -4,12 +4,15 @@ title: "Overview"
 description: "Learn more about Camunda integrations, such as Camunda's SAP and ServiceNow integrations."
 ---
 
+import "../react-components/\_using-table.css";
+import UsingGrid from '../react-components/\_using-card';
+import { camundaIntegrationsCards } from '../react-components/\_camunda-integrations-card-data';
+
 Extend the power of your process orchestration by connecting Camunda with your core enterprise systems. Our pre-built integrations simplify communication across platforms and enable true end-to-end automation in your technology landscape.
 
 The following integrations are available out of the box:
 
-- [ServiceNow integration](#servicenow-integration)
-- [SAP integration](#sap-integration)
+<UsingGrid using={camundaIntegrationsCards} />
 
 ## ServiceNow integration
 
