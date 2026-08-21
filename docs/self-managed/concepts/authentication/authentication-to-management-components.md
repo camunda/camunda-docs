@@ -8,7 +8,11 @@ description: "Learn about authentication methods for management and modeling com
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Authentication to the Camunda 8 management and modeling components and their resources is managed by [Management Identity](/self-managed/components/management-identity/overview.md). This includes components such as Web Modeler, Console, and [Optimize](/self-managed/components/optimize/overview.md).
+Authentication to the Camunda 8 management and modeling components and their resources is managed by [Management Identity](/self-managed/components/management-identity/overview.md). This includes components such as Web Modeler and Console.
+
+:::note
+Through Camunda 8.9, [Optimize](/self-managed/components/optimize/overview.md) also authenticated through Management Identity. Starting with Camunda 8.10, Optimize authenticates directly against your OIDC provider through the Camunda Security Library. See [Optimize authentication in Self-Managed](authentication-to-optimize.md).
+:::
 
 ## About Management Identity authentication
 
