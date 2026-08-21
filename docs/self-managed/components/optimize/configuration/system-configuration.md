@@ -83,6 +83,10 @@ security:
 
 These values control mechanisms of Optimize related security, e.g. security headers and authentication.
 
+:::note
+`security.auth.token.secret` and `security.responseHeaders.X-XSS-Protection` apply to Optimize's legacy security stack. In Camunda 8.10, that stack is only active if you set `optimize.security.csl.enabled=false`. With the default (CSL enabled), both have no effect, and `security.responseHeaders.HSTS.max-age` is replaced by `camunda.security.http-headers.hsts.max-age-in-seconds`. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
+:::
+
 | YAML path                                        | Environment variable                                    | Default value   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ------------------------------------------------ | ------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |                                                  |
@@ -112,6 +116,10 @@ This section focuses on common properties related to the External REST API of Op
 mandatory to configure one of the values below if the External REST API is to be used. If neither is
 configured an error will be thrown and all requests to the External API will get rejected. If both are configured then
 the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
+
+:::note
+These properties apply to Optimize's legacy security stack. In Camunda 8.10, that stack is only active if you set `optimize.security.csl.enabled=false`. With the default (CSL enabled), `api.jwtSetUri` and `api.audience` are replaced by `camunda.security.authentication.oidc.jwk-set-uri` and `camunda.security.authentication.oidc.audiences`, and `api.accessToken` has no effect. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
+:::
 
 | YAML path       | Environment variable                                  | Default value | Description                                                                                                                                    |
 | --------------- | ----------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
