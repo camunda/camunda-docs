@@ -1,7 +1,7 @@
 ---
 id: test-your-process
 title: Test your process
-description: "Test mode gives you a dedicated environment to validate your process against any project environment before promoting it."
+description: "Test mode lets you validate your process against a selected project environment before promoting changes."
 keywords: ["test", "test mode", "test case", "test studio", "validation"]
 ---
 
@@ -16,6 +16,10 @@ To use Test mode, open a BPMN diagram and click the **Test** tab. Read the [limi
 ![BPMN diagram top bar showing the Test tab location](../img/test-tab-location.png)
 
 Select any environment configured for your project as your test target. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+
+:::caution
+Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
+:::
 
 Opening the **Test** tab no longer deploys your process automatically. Click **Deploy** to deploy the current version of the active process and all its dependencies, like called processes or DMN files, to the selected cluster. Once deployed, you can run or create test cases.
 
