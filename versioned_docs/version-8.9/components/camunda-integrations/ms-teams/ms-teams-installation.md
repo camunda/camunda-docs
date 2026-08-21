@@ -356,8 +356,8 @@ subscriptions: {}
 :::note
 The `urls.tasklist` field supports two formats:
 
-- **Simple (legacy) format** — a plain URL string (for example, `https://<your-camunda-host>/tasklist`). Deep links to tasks fall back to `{tasklist-url}/tasklist/{userTaskKey}`.
-- **Extended format** — an object with `base` and `task` fields. The `task` field is a URL template containing a `:userTaskKey` placeholder (for example, `https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view`). When the app generates deep links to tasks (for example, in Teams notification cards), it replaces `:userTaskKey` with the actual task key. This allows customization of the task URL pattern for environments where the default path does not match.
+- **Simple (legacy) format**: a plain URL string (for example, `https://<your-camunda-host>/tasklist`). Deep links to tasks fall back to `{tasklist-url}/tasklist/{userTaskKey}`.
+- **Extended format**: an object with `base` and `task` fields. The `task` field is a URL template containing a `:userTaskKey` placeholder (for example, `https://<your-camunda-host>/tasklist/tasks/:userTaskKey/view`). When the app generates deep links to tasks (for example, in Teams notification cards), it replaces `:userTaskKey` with the actual task key. This allows customization of the task URL pattern for environments where the default path does not match.
 
 :::
 

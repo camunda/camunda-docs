@@ -21,18 +21,19 @@ When a document flows through a process, it follows one of two paths. Understand
 
 ### Path 1: Document Store (opaque pass-through)
 
-The document is a blob that moves through the process. You don't need to read or manipulate its content — you just route it. The process never "looks inside" the file.
+The document is a blob that moves through the process. You don't need to read or manipulate its content. You just route it. The process never "looks inside" the file.
 
 Typical examples:
 
 - A webhook receives a PDF, and you upload it to Amazon S3.
 - You download an image from Google Cloud Storage and send it via email.
+- A tool in an [AI Agent Sub-process](/components/agentic-orchestration/agentic-orchestration-overview.md) returns a PDF, and the agent passes it to the LLM as a document reference, the same as any other Path 1 document. See [AI Agent document support](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents.md).
 
 On this path, the document is held in the [Camunda document store](/components/document-handling/getting-started.md) and passed between systems as a reference.
 
 ### Path 2: Inline (data the process works with)
 
-The content _is_ actual process data, and it is not stored in the document store. It flows as regular process variables — strings or JSON objects — that happen to be written to or read from an external system. You either:
+The content _is_ actual process data, and it is not stored in the document store. It flows as regular process variables, such as strings or JSON objects, that happen to be written to or read from an external system. You either:
 
 - **Write it**: construct a `.json`, `.csv`, or `.txt` file from process variables and upload it to storage (for example, an error report built from process data). See [inline documents](/components/document-handling/send-document-to-external-system.md#inline-documents).
 - **Read it**: download content from storage as JSON or text and use the values directly in FEEL expressions downstream. See [return formats](/components/document-handling/send-document-to-external-system.md#return-formats).

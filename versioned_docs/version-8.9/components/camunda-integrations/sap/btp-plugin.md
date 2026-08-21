@@ -27,7 +27,7 @@ The BTP plugin connects to Camunda 8 SaaS to provide:
 
 ## Features
 
-- Model user tasks in your BPMN process—they will be automatically detected and rendered by the BTP plugin at runtime.
+- Model user tasks in your BPMN process. They will be automatically detected and rendered by the BTP plugin at runtime.
 - Design your form in the Form Builder as part of the BPMN process. When you model a user task and link it to the form, the BTP plugin will automatically detect and render the task and its associated form at runtime.
 
 ![Camunda Forms in Fiori](./img/forms-fiori.png)

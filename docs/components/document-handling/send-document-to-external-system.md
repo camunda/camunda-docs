@@ -7,8 +7,8 @@ keywords: ["document handling"]
 
 Outbound connectors that support [document handling](/components/document-handling/getting-started.md) share a consistent experience for both directions:
 
-- When a connector **consumes** a document (upload or send), you choose a **document source** — a Camunda document, inline content, or an external URL.
-- When a connector **produces** a document (download or retrieve), you choose a **return format** — a document reference, text, or JSON.
+- When a connector **consumes** a document (upload or send), you choose a **document source**: a Camunda document, inline content, or an external URL.
+- When a connector **produces** a document (download or retrieve), you choose a **return format**: a document reference, text, or JSON.
 
 This maps onto the [two paths for document handling](/components/document-handling/overview.md#two-paths-for-document-handling): the document store path routes an opaque file, while the inline path lets the process build or read the content directly.
 
@@ -36,7 +36,7 @@ The three subsections below define the JSON structure of each type. You can also
 
 A Camunda document is a reference to a file held in the [Camunda document store](/components/document-handling/getting-started.md). This is the document store path (Path 1): the file is routed as an opaque blob.
 
-Such references are produced for you — by a [form Filepicker, inbound webhook, or the Orchestration Cluster REST API](/components/document-handling/upload-document-to-bpmn-process.md), or as the output of another connector — and stored in a process variable. A reference has the following structure:
+Such references are produced for you by a [form Filepicker, inbound webhook, or the Orchestration Cluster REST API](/components/document-handling/upload-document-to-bpmn-process.md) or as the output of another connector, then stored in a process variable. A reference has the following structure:
 
 ```json
 {
@@ -56,7 +56,7 @@ You normally reference the variable directly rather than constructing this objec
 
 ### Inline documents
 
-An inline document embeds content directly in a process variable, with no document store upload required. This is the inline path (Path 2, write side): useful when you want to generate a document on-the-fly from process data — for example, an error report — and pass it immediately to a connector.
+An inline document embeds content directly in a process variable, with no document store upload required. This is the inline path (Path 2, write side): useful when you want to generate a document on-the-fly from process data, such as an error report, and pass it immediately to a connector.
 
 To create an inline document, set a process variable to the following structure:
 
