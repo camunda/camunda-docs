@@ -75,7 +75,7 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide endpoints use the dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require cluster-admin access; `/cluster/v2/status` remains public for health checks.
+Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; unprefixed `/v2/...` endpoints target the default Physical Tenant. See [backup, restore, and scaling](./backup-restore-scaling.md) for post-deployment procedures.
 
 ## Configure and provision Physical Tenants
 
@@ -97,6 +97,8 @@ description: "Add tenants, apply configuration changes, and manage tenant availa
 ]} />
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web apps](./web-apps.md).
+
+For backup, restore, scaling, and topology operations after deployment, see [backup, restore, and scaling](./backup-restore-scaling.md).
 
 ## What is not isolated in 8.10
 
@@ -131,6 +133,6 @@ Document stores are declared once in the root `camunda.document.*` catalog. Each
 
 Isolation is enforced by validating the resolved `provider, bucket/container, path` tuple at startup. If two tenants resolve to the same tuple, Camunda fails startup and names the conflicting tenants in the error.
 
-For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store isolation](./configuration-reference.md#document-store-isolation) in the configuration reference.
+For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage) in storage isolation.
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).

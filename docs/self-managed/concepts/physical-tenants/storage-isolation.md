@@ -80,10 +80,6 @@ In the 8.10 alpha release, Oracle supports isolation by table prefix only. Using
 
 ## Elasticsearch/OpenSearch storage
 
-:::note
-Elasticsearch/OpenSearch storage isolation is not yet available in the current alpha release. This section documents the planned configuration.
-:::
-
 Use separate clusters or a shared cluster with per-tenant index prefixes.
 
 ### Naming and collision prevention
@@ -490,9 +486,11 @@ keyPrefix='tenant-a/']
 
 ## Operational considerations
 
+For tenant-scoped backup, restore, and scaling procedures, see [backup, restore, and scaling](./backup-restore-scaling.md).
+
 ### Backup and restore
 
-- **Per-tenant**: Back up one tenant's RDBMS schema or document bucket individually. A per-tenant Elasticsearch/OpenSearch backup is not yet available (see the note below).
+- **Per-tenant**: Use the [backup, restore, and scaling](./backup-restore-scaling.md) guide for runtime and history backups. Back up RDBMS schemas and document stores with the storage system's tools.
 - **Full cluster**: Back up all schemas, all index prefixes, all buckets simultaneously
 - **Restore options**: Individual tenant or full cluster from backup
 
@@ -506,9 +504,7 @@ pg_dump -h db.example.com -U user tenant_a_schema > backup.sql
 aws s3 sync s3://camunda-documents/tenant-a/ ./backup/
 ```
 
-:::note
-Elasticsearch and OpenSearch backups are created through the [web applications backup endpoint](/self-managed/operational-guides/backup-restore/elasticsearch/backup.md#2-start-the-web-applications-backup-operate--tasklist), which operates at the cluster level. A per-tenant Elasticsearch/OpenSearch backup endpoint is not yet available and is planned as part of the management API.
-:::
+For tenant-scoped and cluster-wide backup and restore endpoints, see [backup, restore, and scaling](./backup-restore-scaling.md).
 
 ### Cross-tenant isolation
 
