@@ -59,42 +59,49 @@ The architecture outlined below describes a standard Zeebe three-node deployment
 ```mermaid
 
 architecture-beta
+    service users(internet)["Users and API clients"]
+
     group vpc(logos:aws-vpc)["VPC · single region · three availability zones"]
-    group edge(cloud)["Public subnets · ingress"] in vpc
+    group edge(cloud)["Public subnets · load balancers"] in vpc
     group cluster(logos:aws-ecs)["ECS cluster · Fargate services in private subnets"] in vpc
-    group stores(cloud)["Managed data services"] in vpc
+    group data(cloud)["Managed data services"] in vpc
 
     service alb(logos:aws-elb)["ALB · web apps and REST API"] in edge
     service nlb(logos:aws-elb)["NLB · gRPC"] in edge
 
+    service cmap(logos:aws-route53)["Cloud Map · Service Connect"] in cluster
     service hub(logos:aws-fargate)["Camunda Hub"] in cluster
     service identity(logos:aws-fargate)["Management Identity"] in cluster
     service oc(logos:aws-fargate)["Orchestration Cluster"] in cluster
     service connectors(logos:aws-fargate)["Connectors"] in cluster
 
-    service efs(disk)["EFS · Zeebe primary storage"] in stores
-    service s3(logos:aws-s3)["S3 · node IDs and backups"] in stores
-    service aurora(logos:aws-aurora)["Aurora PostgreSQL · secondary storage"] in stores
+    service aurora(logos:aws-aurora)["Aurora PostgreSQL · secondary storage"] in data
+    service efs(disk)["EFS · Zeebe primary storage"] in data
+    service s3(logos:aws-s3)["S3 · node IDs and backups"] in data
+    junction jstore in data
 
-    junction jstore in stores
-
+    users:B --> T:alb{group}
     alb:R -- L:nlb
 
+    cmap:R -- L:hub
     hub:R -- L:identity
     identity:R -- L:oc
     oc:R -- L:connectors
 
-    jstore:L -- R:efs
-    jstore:R -- L:s3
-    jstore:B -- T:aurora
-
     alb{group}:B --> T:oc{group}
-    oc{group}:B --> T:jstore{group}
+
+    oc:B --> T:jstore{group}
+    jstore:R -- L:s3
+    jstore:B -- T:efs
+    jstore:L -- R:aurora
+
+    identity:B --> T:aurora{group}
+    hub:B --> L:aurora{group}
 ```
 
 _Infrastructure diagram for the single-region ECS architecture. Management Identity and Camunda Hub are optional and are only deployed when you enable OIDC authentication._
 
-Arrows between the tiers show the direction of traffic: the load balancers reach the ECS services, and the ECS services reach the managed data services. Horizontal links inside the ECS cluster represent internal [ECS Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) reachability. The Orchestration Cluster uses all three data services, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
+Arrows show the direction of traffic. Users and API clients reach the load balancers, which route to the ECS services, and each service connects to the data services it uses: the Orchestration Cluster uses EFS, S3, and the `camunda` database, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. All four services register with [AWS Cloud Map](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) for internal service-to-service discovery, so they reach each other by name inside the VPC without going through the load balancer. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
 
 After completing this guide, you will have:
 
