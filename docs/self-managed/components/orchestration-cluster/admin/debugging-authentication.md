@@ -43,6 +43,8 @@ To isolate the issue, use:
 - [Reviewing logs](#reviewing-logs)
 - [Reviewing data](#reviewing-data)
 - [Reviewing configuration](#reviewing-configuration)
+- [Inspecting the JWT](#inspecting-the-jwt)
+- [Testing the IdP directly](#testing-the-idp-directly)
 
 ## Reviewing logs
 
@@ -138,3 +140,30 @@ Here is an excerpt from an example installation:
 In the response, review the settings in the `camunda.security` section, compare them against the [configuration reference](../core-settings/configuration/properties.md#authentication), and confirm they match your intended values.
 
 This is especially useful if you are applying the configuration via Helm values or environment variables and want to double-check that your configuration was applied correctly.
+
+## Inspecting the JWT
+
+Most "insufficient permissions" or "empty results" issues at step 2 or 3 of the flow trace back to a mismatch between what's in the access token and what Camunda expects.
+
+Decode the token presented to the Orchestration Cluster and check:
+
+- **The claim configured as `usernameClaim` or `clientIdClaim`** — confirm it's present and has the value you expect. See [JWT token claims reference](/self-managed/deployment/helm/configure/authentication-and-authorization/jwt-token-claims.md) for how to obtain and decode a token.
+- **Any claims your mapping rules match against** — compare the claim name and value in the token to the claim name and value configured on each [mapping rule](/components/admin/mapping-rules.md). A mismatch here (wrong claim name, unexpected casing, or an array claim matched with the wrong operator) is a common reason a user doesn't get the role, group, or tenant a mapping rule is supposed to grant.
+- **The `aud` claim** — must match the `audience` configured for that client. See [Troubleshoot OIDC authentication](/self-managed/deployment/helm/configure/authentication-and-authorization/troubleshooting-oidc.md#invalid-audience).
+
+## Testing the IdP directly
+
+To determine whether a failure originates at your identity provider or within Camunda, request a token directly from the IdP, bypassing Camunda entirely:
+
+```bash
+curl -X POST '<token-endpoint>' \
+  -d 'client_id=<client-id>' \
+  -d 'client_secret=<client-secret>' \
+  -d 'grant_type=client_credentials' \
+  -d 'scope=openid'
+```
+
+- **Request fails or returns an error:** The problem is on the IdP side (client misconfiguration, disabled grant type, network/firewall issue) and isn't specific to Camunda.
+- **Request succeeds:** Decode the returned token as described in [Inspecting the JWT](#inspecting-the-jwt) and confirm it contains the claims Camunda is configured to expect. If it does, and Camunda still rejects the request, the issue is most likely in Camunda's authorization configuration (mapping rules, roles, or authorizations) rather than the IdP connection itself.
+
+For interactive (browser) logins, you can similarly isolate the issue by completing the login flow directly against your IdP's hosted login page (outside of Camunda) to confirm the user can authenticate at all before troubleshooting further on the Camunda side.

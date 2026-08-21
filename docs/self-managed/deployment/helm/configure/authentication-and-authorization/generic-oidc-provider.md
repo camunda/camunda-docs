@@ -28,6 +28,10 @@ Before you begin, ensure you have:
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
 :::
 
+:::tip Private or internal CA
+If your provider presents a certificate signed by a private or internal certificate authority (common with Entra hybrid setups, Okta on-premises, or an internal Keycloak), Camunda components won't trust it by default. Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) to avoid `PKIX path building failed` errors when components connect to the issuer.
+:::
+
 ## Create OIDC clients
 
 Create the following OIDC clients in your provider. The exact process varies by provider; consult your provider's documentation for client creation procedures.
