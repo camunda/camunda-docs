@@ -1,19 +1,31 @@
 ---
 id: storage-isolation
-title: Storage isolation for Physical Tenants
+title: Storage isolation
 description: Configure separate storage backends per Physical Tenant for RDBMS, Elasticsearch/OpenSearch, and Document Store.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
+import AoGrid from "../../../components/react-components/_ao-card";
+import IconConfigImg from "../../../components/assets/icon-config.png";
+import IconOperateImg from "../../../components/assets/icon-operate.png";
 
-Each Physical Tenant can use isolated secondary storage, ensuring complete structural separation of process data. This page covers configuration options per backend type.
+Learn how to configure isolated secondary storage for Physical Tenants across RDBMS, Elasticsearch/OpenSearch, and Document Store backends.
 
-:::note Related pages
-
-- **[Configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md)** — General tenant configuration
-- **[Provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md)** — Tenant operations
-  :::
+<AoGrid columns={2} ao={[
+{
+link: "../configuration-reference/",
+title: "Configuration reference",
+image: IconConfigImg,
+description: "Define storage overrides and validate tenant locations at startup.",
+},
+{
+link: "../provisioning-and-lifecycle/",
+title: "Provisioning and lifecycle",
+image: IconOperateImg,
+description: "Apply storage changes and manage tenant availability through configuration.",
+},
+]} />
 
 ## RDBMS storage
 
@@ -73,12 +85,17 @@ Use separate clusters or a shared cluster with per-tenant index prefixes.
 ### Naming and collision prevention
 
 - **Prefix format**: `{tenantId}` (dash automatically appended by the application)
-- **Collision prevention**: Use the full tenant ID; avoid prefixes that are identical to another tenant's prefix. Overlapping prefixes (for example, `eu` and `eu-west`) are not caught by startup validation — only exact duplicates fail at startup.
+- **Collision prevention**: Use the full tenant ID and avoid prefixes that are identical to another tenant's prefix. Overlapping prefixes (for example, `eu` and `eu-west`) are not caught by startup validation. Only exact duplicates fail at startup.
 - **Validation**: Cluster fails at startup if two tenants have identical index prefixes
 
 ## Document Store storage
 
 Store documents globally with per-tenant subpaths, or use dedicated stores per tenant. Camunda validates the resulting layout at startup and refuses to start if two tenants would read and write into the same storage.
+
+| Layout                          | Use when                                                                   | Tenant configuration                                                                   |
+| ------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Shared store with sibling paths | You want lower operational overhead while preserving structural isolation. | Assign the same store and configure a distinct sibling path or prefix for each tenant. |
+| Dedicated store per tenant      | You need the strongest operational separation.                             | Assign each tenant a separate bucket, container, or directory.                         |
 
 ### Configuration models
 
@@ -163,7 +180,7 @@ camunda:
 
 **What Camunda compares.** `bucket-name` forms the namespace, and `prefix` becomes the key prefix. Bucket names are compared case-insensitively, prefixes case-sensitively.
 
-Unlike AWS and Azure, the GCP prefix is used exactly as written — no trailing separator is appended — so a prefix isn't necessarily a folder. An unset `prefix` resolves to `temp/`.
+Unlike AWS and Azure, the GCP prefix is used exactly as written. No trailing separator is appended, so a prefix is not necessarily a folder. An unset `prefix` resolves to `temp/`.
 
 **Global store with per-tenant subpaths** (recommended):
 
@@ -326,7 +343,7 @@ In-memory stores provide no isolation guarantee and lose every document when the
 
 <TabItem value='local'>
 
-**What Camunda compares.** The configured `path` forms the namespace, with separators resolved per platform, and the key prefix is always empty — the directory alone decides. Paths are compared case-insensitively on every platform, because a case-insensitive filesystem makes `/var/Docs` and `/var/docs` one directory.
+**What Camunda compares.** The configured `path` forms the namespace, with separators resolved per platform. The key prefix is always empty because the directory alone decides. Paths are compared case-insensitively on every platform because a case-insensitive filesystem makes `/var/Docs` and `/var/docs` one directory.
 
 Local stores have no subpath field, so each tenant needs its own directory:
 
@@ -368,7 +385,7 @@ camunda:
 
 A tenant's `assigned` stores don't have to share a provider, and a global store can be combined with a tenant-specific one. Every store still has to satisfy the comparison rules for its own provider.
 
-**Hybrid** — a global default store plus a tenant-specific store:
+**Hybrid:** A global default store plus a tenant-specific store.
 
 ```yaml
 camunda:
@@ -397,7 +414,7 @@ camunda:
             bucket-path: "tenant-a"
 ```
 
-**Mixed providers** — a shared GCP store for both tenants, plus an Azure store for one of them:
+**Mixed providers:** A shared GCP store for both tenants, plus an Azure store for one of them.
 
 ```yaml
 camunda:
@@ -438,7 +455,7 @@ Overlap is only ever reported between two different tenants. One tenant may spre
 
 Camunda resolves a location for every configured document store at startup, then compares the locations of all tenants. A location is the provider, a namespace, and a key prefix:
 
-- The **namespace** is the container no key can escape — a bucket, a blob container, or a directory.
+- The **namespace** is the container no key can escape. It can be a bucket, a blob container, or a directory.
 - The **key prefix** is the string every key inside that namespace starts with.
 
 Two tenants overlap when the provider and namespace match and one key prefix is a prefix of the other. Overlap is broader than equality because a document ID is caller-supplied and appended to the key prefix as given. With the prefixes `tenant` and `tenant-b-` in one bucket, a request against the first store for the document ID `-b-invoice` resolves to the second store's `tenant-b-invoice`.
@@ -452,7 +469,7 @@ When the check fails, the cluster doesn't start, and the error names each confli
 ```
 Physical tenants must not share a document store location, or they would read and write
 into the same backing storage. Use a distinct bucket, container, or path per tenant, and
-never nest one tenant's path inside another's — a nested path is reachable through a
+never nest one tenant's path inside another's. A nested path is reachable through a
 caller-supplied document id, which no object store bounds at '/'. Conflicts: tenant
 default's document store location [provider=aws, namespace=[camunda-documents, ],
 keyPrefix=''] encloses tenant tenanta's [provider=aws, namespace=[camunda-documents, ],
@@ -477,7 +494,7 @@ For tenant-scoped backup, restore, and scaling procedures, see [backup, restore,
 - **Full cluster**: Back up all schemas, all index prefixes, all buckets simultaneously
 - **Restore options**: Individual tenant or full cluster from backup
 
-Example — back up Tenant A only:
+Example: back up Tenant A only.
 
 ```bash
 # RDBMS
@@ -520,11 +537,11 @@ Risks to avoid:
 ## Known limitations in 8.10
 
 :::note
-**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type — either all RDBMS or all Elasticsearch/OpenSearch. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported in 8.10. This constraint exists in the Query API stack, not the exporter layer.
+**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported in 8.10. This constraint exists in the Query API stack, not the exporter layer.
 :::
 
 :::caution Custom exporter configuration merge (alpha3)
-In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not merged. If you have a custom exporter (for example, a Kafka exporter) and want each tenant to publish to a different topic, you must declare the full exporter configuration separately under each Physical Tenant's section — you cannot declare it once at root level and override only the topic per tenant. This will be addressed in a later alpha. See [camunda/camunda#55155](https://github.com/camunda/camunda/issues/55155).
+In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not merged. If you have a custom exporter, such as a Kafka exporter, and want each tenant to publish to a different topic, declare the full exporter configuration separately under each Physical Tenant's section. You cannot declare it once at root level and override only the topic per tenant. This will be addressed in a later alpha. See [camunda/camunda#55155](https://github.com/camunda/camunda/issues/55155).
 :::
 
 <!-- Remove custom exporter caution once camunda/camunda#55155 is resolved. -->

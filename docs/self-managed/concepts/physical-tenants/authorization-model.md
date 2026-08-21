@@ -23,7 +23,7 @@ For the operational procedures that use these permissions, see [backup, restore,
 In Camunda 8.10, the Physical Tenant authorization model is designed around per-engine, per-tenant role and permission management. Key design principles for 8.10:
 
 - **Per-tenant authorization is independently managed.** Each Physical Tenant defines its own roles, permissions, and mapping rules. A change in one tenant's authorization configuration does not affect other tenants.
-- **Cluster-wide governance via Camunda Hub is a future capability.** Cross-tenant administration using Camunda Hub is not available in 8.10. Cluster-wide management endpoints use the dedicated cluster-admin role.
+- **Cluster-wide management operations use cluster-admin access.** The dedicated cluster-admin security chain protects management endpoints under `/cluster/v2/...`; `/cluster/v2/status` remains public for health checks. Cross-tenant administration using Camunda Hub is not available in 8.10.
 - **Per-engine IdP fragmentation is not recommended.** Using a different identity provider for each Zeebe/Operate/Tasklist engine (as opposed to a single cluster-level IdP) is explicitly discouraged. See [authentication and authorization](./authentication-authorization.md) for the supported identity deployment models.
 
 ## Cluster-wide operations

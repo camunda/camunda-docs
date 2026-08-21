@@ -5,15 +5,21 @@ sidebar_label: "Isolation model"
 description: "Learn how Physical Tenants isolate execution, storage, and API routing within a single orchestration cluster."
 ---
 
+import AoGrid from "../../../components/react-components/_ao-card";
+import IconConfigImg from "../../../components/assets/icon-config.png";
+import IconOperateImg from "../../../components/assets/icon-operate.png";
+
+Learn how Physical Tenants isolate execution, storage, and API routing within one Orchestration Cluster.
+
 :::info
-This is the detailed technical documentation for Physical Tenants. For an overview and key concepts, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+Use the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models and choose a starting point.
 :::
 
 Physical Tenants provide strong isolation within a single orchestration cluster. This page assumes one orchestration cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
 
 ## Isolation model
 
-A Physical Tenant is an isolated execution unit inside one orchestration cluster.
+A Physical Tenant is an isolated execution unit inside one orchestration cluster. Its partitions run on shared brokers while tenant data remains isolated.
 
 | Layer             | Isolation model                                                                                          | Shared or isolated    |
 | ----------------- | -------------------------------------------------------------------------------------------------------- | --------------------- |
@@ -49,6 +55,14 @@ graph TD
         cp --> tenantA
         cp --> tenantB
     end
+
+    classDef shared fill:#e4eef8,stroke:#2272c9,color:#14082c
+    classDef tenant fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    classDef storage fill:#e8fdf1,stroke:#10c95d,color:#14082c
+
+    class cp,gw shared
+    class tenantA,tenantB tenant
+    class raftA,raftB,secA,secB,docA,docB storage
 ```
 
 The diagram shows one orchestration cluster boundary with shared control-plane components and tenant-specific execution and storage boundaries.
@@ -65,11 +79,24 @@ Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix 
 
 ## Configure and provision Physical Tenants
 
-To configure tenant defaults, per-tenant overrides, validation expectations, and property examples, see [configuration reference](./configuration-reference.md).
+Use these guides to configure tenant defaults and manage the Physical Tenant lifecycle.
 
-To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
+<AoGrid columns={2} ao={[
+{
+link: "./configuration-reference/",
+title: "Configuration reference",
+image: IconConfigImg,
+description: "Define tenant defaults, overrides, validation rules, and property examples.",
+},
+{
+link: "./provisioning-and-lifecycle/",
+title: "Provisioning and lifecycle",
+image: IconOperateImg,
+description: "Add tenants, apply configuration changes, and manage tenant availability.",
+},
+]} />
 
-To understand how Operate, Tasklist, and Optimize behave per Physical Tenant — including URL navigation, data scoping, and session behavior — see [web apps](./web-apps.md).
+Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web apps](./web-apps.md).
 
 For backup, restore, scaling, and topology operations after deployment, see [backup, restore, and scaling](./backup-restore-scaling.md).
 
@@ -102,7 +129,7 @@ When configuring Kubernetes readiness probes, point the probe at `/actuator/heal
 
 ## Document store details
 
-Document stores are declared once in the root `camunda.document.*` catalog. Each Physical Tenant inherits the catalog and overrides only the fields it needs — typically the bucket path or prefix — to ensure its data is written to a distinct location.
+Document stores are declared once in the root `camunda.document.*` catalog. Each Physical Tenant inherits the catalog and overrides only the fields it needs, typically the bucket path or prefix, to ensure its data is written to a distinct location.
 
 Isolation is enforced by validating the resolved `provider, bucket/container, path` tuple at startup. If two tenants resolve to the same tuple, Camunda fails startup and names the conflicting tenants in the error.
 

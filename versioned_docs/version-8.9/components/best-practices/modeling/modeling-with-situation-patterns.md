@@ -297,6 +297,8 @@ To advance clarity by means of process models, it is absolutely crucial for mode
 
 While there is not necessarily a right way to decide what to consider as a valid result for your step, the business reader will typically have a mental preference to observe certain business issues, either more as undesired outcomes or more as fatal problems. However, for the executable pools, your discretion to decide about a step's result might also be limited when using, for example, service contracts which are already pre-defined.
 
+The same distinction applies to a step carried out by an [AI agent](/reference/glossary.md#ai-agent). The response the agent returns when its loop ends is a valid result you check with a gateway, even when that response is a negative one. An error the agent itself raises, such as reaching its configured maximum number of model calls, is a fatal problem you catch with a boundary [error event](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling).
+
 ## Asking multiple recipients for a single reply
 
 You offer something to or request something from multiple communication partners, but you actually just need the first reply.
