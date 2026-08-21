@@ -87,8 +87,13 @@ For **each** of the components above:
      ...
    }
    ```
-1. (Optional) In **Token configuration**, [add the optional claim](https://learn.microsoft.com/en-us/entra/identity-platform/optional-claims?tabs=appui) `preferred_username`. This lets you map a Camunda user ID to your users’ email addresses.
-   If you do not configure `preferred_username`, update later steps in this guide to use a different claim that uniquely identifies your users.
+1. In **Token configuration**, [add the optional claim](https://learn.microsoft.com/en-us/entra/identity-platform/optional-claims?tabs=appui) `preferred_username` to **both** the access token and the ID token.
+
+   :::danger Required, not optional
+   Management Identity reads user claims directly from the access token, not from a userinfo call. If `preferred_username` is missing from the access token, Management Identity finds no matching claim and grants no roles — the user authenticates successfully but immediately sees a "403 unauthorized" error, and users appear in Operate and Tasklist with an opaque identifier instead of their name.
+
+   If you don't want to use `preferred_username`, you can use a different claim that uniquely identifies your users instead (see [the note on `initialClaimName` below](#configure-management-identity)) — but whichever claim you choose, it must be added as an optional claim on both token types, since Entra doesn't include it by default.
+   :::
 
 #### Redirect URIs per Camunda component
 
@@ -206,10 +211,21 @@ orchestration:
         connectors:
           clients:
             - "<oc-app-id>"
+  env:
+    - name: CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USER_INFO_ENABLED
+      value: "false"
+    - name: SERVER_MAX_HTTP_REQUEST_HEADER_SIZE
+      value: "65536"
 ```
 
 Replace `<OC_URL>` with the base URL of the Orchestration Cluster as it will be reachable from your users’ browsers.
 For local deployment, this is `http://localhost:8080`.
+
+:::caution Two Entra-specific settings required
+By default, the Orchestration Cluster calls the OIDC userinfo endpoint after authentication to augment token claims. Entra's userinfo endpoint is hosted on Microsoft Graph (`graph.microsoft.com/oidc/userinfo`), not on the authorization server, and requires a Graph API access token rather than the OIDC access token Camunda holds — the call fails. Setting `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USER_INFO_ENABLED` to `false` tells the Orchestration Cluster to rely on claims already present in the token instead, which is also Microsoft's own recommendation since the ID token is a superset of what userinfo returns. Neither setting has a dedicated Helm value — both map to Spring Boot properties (`camunda.security.authentication.oidc.user-info-enabled` and `server.max-http-request-header-size`) passed through `orchestration.env`.
+
+Microsoft's authorization codes are longer than those issued by most other providers. Combined with session cookies from an existing session, the total HTTP header size can exceed Tomcat's 8 KB default, causing a raw HTTP 400 (a plain Tomcat error page, not a Camunda error) before Spring Security ever processes the request. `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` raises this to 64 KB. See [Request header is too large](./troubleshooting-oidc.md#request-header-is-too-large) if you hit this after deploying.
+:::
 
 `usernameClaim` defines which claim in the access token identifies the user.
 `clientIdClaim` defines which claim identifies the calling client.
@@ -270,13 +286,15 @@ identityPostgresql:
     existingSecret: "camunda-credentials"
     secretKeys:
       adminPasswordKey: "identity-postgresql-admin-password"
-      userPasswordKey: "identity-postgresql-admin-password"
+      userPasswordKey: "identity-postgresql-user-password"
 ```
 
 Replace `<IDENTITY_URL>` with the base URL of Management Identity as it will be reachable from your users' browser. For local deployment, use `http://localhost:8084`.
 
 - `initialClaimName` defines which claim in the access token identifies the initial administrative user.
 - `initialClaimValue` defines the value of that claim that grants administrative access to Management Identity.
+
+`preferred_username` (the user's UPN) is readable and self-documenting, which makes it easy to work with during initial setup. The alternative, `oid` (the user's Entra Object ID), is always present in tokens without any optional claim configuration and doesn't change if the user's email address changes — which makes it the more stable choice for production, since `initialClaimValue` is set only on first startup and can't be updated via Helm afterward.
 
 :::danger
 Once configured, the initial claim name and value cannot be changed using environment variables or Helm values.
@@ -444,6 +462,11 @@ orchestration:
         connectors:
           clients:
             - "<oc-app-id>"
+  env:
+    - name: CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USER_INFO_ENABLED
+      value: "false"
+    - name: SERVER_MAX_HTTP_REQUEST_HEADER_SIZE
+      value: "65536"
 
 connectors:
   security:
@@ -465,7 +488,7 @@ identityPostgresql:
     existingSecret: "camunda-credentials"
     secretKeys:
       adminPasswordKey: "identity-postgresql-admin-password"
-      userPasswordKey: "identity-postgresql-admin-password"
+      userPasswordKey: "identity-postgresql-user-password"
 
 optimize:
   enabled: true
@@ -523,6 +546,22 @@ For example:
 - Orchestration Cluster: `http://localhost:8080` (redirects you to Entra for login)
 - Management Identity: `http://localhost:8084`
 - Console: `http://localhost:8087`
+
+## Troubleshooting
+
+For issues common to any OIDC provider (invalid redirect URI, audience mismatch, missing claims, pods not starting), see [Troubleshoot OIDC authentication](./troubleshooting-oidc.md). The following are specific to Microsoft Entra:
+
+**`AADSTS700016: Application not found in the directory`**
+The `clientId` in your Helm values doesn't match a registered application in your tenant. Verify each `clientId` exactly matches the **Application (client) ID** on the app registration's **Overview** page, and that the app is registered in the tenant identified by your `<tenant id>`.
+
+**`AADSTS50011: Redirect URI mismatch`**
+The redirect URI Camunda sent doesn't match any URI registered for that app. Verify `redirectUrl` in your Helm config exactly matches the redirect URI configured in Entra, including the path suffix (`/auth/login-callback`, `/sso-callback`, and so on).
+
+**`401` with `jwt issuer invalid` or `"The iss claim is not valid"`**
+The app registration is issuing v1.0 tokens (issuer `https://sts.windows.net/...`) instead of v2.0 tokens (issuer `https://login.microsoftonline.com/.../v2.0`). Confirm `api.requestedAccessTokenVersion` is set to `2` in the app's manifest (see [Create applications in Entra](#create-applications-in-entra)). This applies to all app registrations, including single-page applications.
+
+**Service-to-service `401` with `clientId claim could not be found`**
+If Connectors or another machine-to-machine caller gets this error, verify `clientIdClaim: azp` is set for the Orchestration Cluster. The bare-GUID scope format (`<oc-app-id>/.default`) causes Entra to issue v2.0 tokens, which carry the calling client's ID in `azp` rather than the `appid` claim used by v1.0 tokens.
 
 ## Grant access to components
 
