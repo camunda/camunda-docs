@@ -1,5 +1,6 @@
 import IconRpaImg from "../assets/icon-rpa.png";
 import IconDocsImg from "../assets/icon-docs.png";
+import IconOperateImg from "../assets/icon-operate.png";
 import IconIntegrationImg from "../assets/icon-integration.png";
 import IconEarlyAccessImg from "../assets/icon-earlyaccess.png";
 import IconModelerImg from "../assets/icon-modeler.png";
@@ -92,5 +93,11 @@ export const featuresPageCards = [
     title: "Document handling",
     image: IconDocsImg,
     description: "Store, track, and manage documents.",
+  },
+  {
+    link: "../wait-states/overview/",
+    title: "Wait states",
+    image: IconOperateImg,
+    description: "See what an active process instance is waiting for.",
   },
 ];
