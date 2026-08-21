@@ -81,7 +81,7 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.10:
 **Camunda 8 upgrades must be performed sequentially.**
 
 - You must upgrade sequentially, one minor version at a time. For example, you must upgrade from 8.8 to 8.9 before you can upgrade to 8.10.
-- For best stability and fix coverage, use the latest available patch in each minor before and after each minor upgrade.
+- Upgrading to the latest available patch of each minor is strongly recommended for fix coverage.
 - **Do not skip releases**.
 
 Use the following version-specific upgrade guides to upgrade sequentially until you reach Camunda 8.9 before you proceed with the 8.10 upgrade.
