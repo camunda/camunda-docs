@@ -320,6 +320,23 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize `GET /api/readyz` no longer rejects requests that carry an `Authorization` header
+
+Starting with Camunda 8.10.0-alpha5, the Optimize [health readiness endpoint](/apis-tools/optimize-api/health-readiness.md) (`GET /api/readyz`) ignores an `Authorization` header instead of rejecting the request. Previously, a request that included the header was rejected with a client error status code. It now returns the readiness status (`200` or `503`), as it does for a request without the header.
+
+This aligns the endpoint with the other public endpoints of the Orchestration Cluster, which also accept and ignore a superfluous `Authorization` header.
+
+**Action:** No action is required for Kubernetes readiness and liveness probes, as these do not send an `Authorization` header. If you have a client or monitoring check that relies on the endpoint rejecting requests that carry an `Authorization` header, update it to expect the readiness status instead.
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
