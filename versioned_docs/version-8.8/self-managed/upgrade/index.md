@@ -87,7 +87,7 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.8:
 **Camunda 8 upgrades must be performed sequentially.**
 
 - You must upgrade sequentially, one minor version at a time (for example, 8.6 → 8.7 → 8.8).
-- For best stability and fix coverage, use the latest available patch in each minor before and after each minor upgrade.
+- Upgrading to the latest available patch of each minor is strongly recommended for fix coverage.
 - For example, you must upgrade from 8.6 to 8.7 before you can upgrade to 8.8.
 - **Do not skip releases**.
 
