@@ -11,6 +11,7 @@ import TabItem from "@theme/TabItem";
 
 import TerraformAwsAuth from '../../\_partials/\_terraform-aws-auth.md'
 import TerraformS3Bucket from '../../\_partials/\_terraform-s3-bucket.md'
+import SecondaryStorageOptionsNote from '../../\_partials/\_secondary-storage-options-note.md'
 
 This guide explains how to provision an [Amazon Web Services (AWS) Elastic Kubernetes Service (EKS) cluster](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) using Terraform, a widely used Infrastructure as Code (IaC) tool.  
 The EKS cluster serves as the infrastructure foundation for running Camunda 8.
@@ -40,6 +41,8 @@ New to Terraform or Infrastructure as Code? Start with the [Terraform IaC docume
   - Adequate quotas for **VPCs, EC2 instances, and storage**.
   - Request increases if needed via the AWS console. You pay only for used resources. See [AWS service quotas](https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and [Amazon EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)
 - **Shell** – Examples use GNU Bash.
+
+<SecondaryStorageOptionsNote />
 
 For the tool versions used in testing, see the repository’s [.tool-versions](https://github.com/camunda/camunda-deployment-references/blob/main/.tool-versions) file. It contains an up-to-date list of versions used for testing.
 
@@ -88,18 +91,23 @@ This guide will incur costs on your cloud provider account, specifically for the
 
 ### Variants
 
-We support two variants of this architecture:
+<!-- TODO: eks-single-region-rdbms snippets use the feat/eks-single-region-rdbms branch until it merges; switch to blob/stable/8.9/ (8.9 doc) and blob/main/ (next doc) once it lands (camunda/camunda-deployment-references#2711). -->
+
+We support the following variants of this architecture:
 
 - **Standard installation** - Uses username and password connection for the Camunda components (or relies on network isolation for specific components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
 
 - **IRSA** (IAM Roles for Service Accounts) - Uses service accounts to perform authentication with IAM policies. This approach offers stronger security and better integration with AWS services, as it eliminates the need to manage credentials manually. It is especially beneficial in environments with strict security requirements, where fine-grained access control and dynamic role-based access are essential.
 
+- **RDBMS** - Uses an Amazon Aurora PostgreSQL database as the [secondary storage](/self-managed/concepts/secondary-storage/index.md) for the Orchestration Cluster instead of Amazon OpenSearch. This variant (`eks-single-region-rdbms`) builds on the standard installation, provisions an additional `camunda_orchestration` database, and does not create an OpenSearch domain, which results in a lighter infrastructure footprint. For configuration details, see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and [install Camunda 8 with RDBMS](/self-managed/deployment/helm/install/helm-with-rdbms.md).
+
 #### How to choose
 
 - If you prefer a simpler setup with Basic authentication or network isolation, and your security needs are moderate, the **standard installation** is a suitable choice.
 - If you require enhanced security, dynamic role-based access management, and want to leverage AWS’s identity services for fine-grained control, the **IRSA** variant is the better option.
+- If you want a lighter infrastructure without an OpenSearch domain and do not need Optimize, choose the **RDBMS** variant. Optimize requires Elasticsearch or OpenSearch and is not available with RDBMS secondary storage.
 
-Both can be set up with or without a **Domain** ([Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
+Each variant can be set up with or without a **Domain** ([Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)).
 
 ### Outcome
 
@@ -114,7 +122,7 @@ After completing this guide, you will have:
 - An Amazon EKS Kubernetes cluster running with four nodes ready for Camunda 8 installation.
 - The [EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html), installed and configured. This is used by the Camunda 8 Helm chart to create [persistent volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - (Optional) A managed [Aurora PostgreSQL](https://aws.amazon.com/rds/postgresql/) instance for Camunda.
-- (Optional) A managed [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) domain created and configured for use with Camunda.
+- (Optional) A managed [Amazon OpenSearch Service](https://aws.amazon.com/opensearch-service/) domain created and configured for use with Camunda. The RDBMS variant uses Amazon Aurora PostgreSQL as secondary storage and does not create this domain.
 - (Optional) [IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) configured so Kubernetes workloads can assume IAM roles without stored credentials.
 
 ## 1. Configure AWS and initialize Terraform
@@ -137,6 +145,13 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 
 ```bash reference
 https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/procedure/get-your-copy.sh
+```
+
+   </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/get-your-copy.sh
 ```
 
    </TabItem>
@@ -200,6 +215,15 @@ The module is locally sourced in your clone. Any changes you make to the module 
 
    ```hcl reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/terraform/cluster/cluster.tf
+   ```
+
+   </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+   The RDBMS variant uses the same cluster module as the standard variant, so this `cluster.tf` is identical to the standard one:
+
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/terraform/cluster/cluster.tf
    ```
 
    </TabItem>
@@ -329,6 +353,15 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_aurora_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
 
    </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+   The RDBMS variant extends the Aurora PostgreSQL setup with an additional `camunda_orchestration` database and a dedicated `orchestration_db` user, used as the secondary storage for the Orchestration Cluster:
+
+   ```hcl reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/terraform/cluster/db.tf
+   ```
+
+   </TabItem>
    </Tabs>
 
 1. Customize the Aurora cluster setup through various input options. Refer to the [Aurora module documentation](https://github.com/camunda/camunda-deployment-references/blob/main/aws/modules/aurora/README.md) for more details on other customization options.
@@ -342,16 +375,12 @@ If you don't want to use this module, you can skip this section. However, you ma
 If you choose not to use this module, you can either:
 
 - Provide a managed Elasticsearch or OpenSearch service, or deploy Elasticsearch in your cluster via ECK.
-- Use RDBMS (PostgreSQL, MySQL, MariaDB, Oracle) as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details.
+- Use RDBMS as the secondary storage backend for the Orchestration Cluster. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for details and the [RDBMS support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md) for supported engines.
 
 Additionally, you must delete the `opensearch.tf` file within the `terraform/cluster` directory of your chosen reference as it will otherwise create the resources.
 :::
 
 The OpenSearch module creates an OpenSearch domain intended for Camunda. OpenSearch is a powerful alternative to Elasticsearch. For more information on using OpenSearch with Camunda, refer to the [Camunda documentation](/self-managed/deployment/helm/configure/database/using-external-opensearch.md).
-
-:::note
-Secondary storage is configurable. Depending on the components you run and your requirements, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store for supported components. See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for configuration guidance and limitations.
-:::
 
 :::note Migration to OpenSearch is not supported
 
@@ -415,6 +444,11 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    Once the IRSA configuration is complete, ensure you **record the IAM role name** (from the `iam_opensearch_role_name` configuration), it is required to annotate the Kubernetes service account in the next step.
 
    As the OpenSearch domain has advanced security enabled and [fine-grained access control](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/fgac.html), we will later use your provided master username (`advanced_security_master_user_name`) and password (`advanced_security_master_user_password`) to perform the initial setup of the security component, allowing the created IRSA role to access the domain.
+
+   </TabItem>
+   <TabItem value="rdbms" label="RDBMS">
+
+   The RDBMS variant uses Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster, so it does not provision an OpenSearch domain. The `eks-single-region-rdbms` reference does not include an `opensearch.tf` file, so skip this OpenSearch module setup and do not create the OpenSearch module. For details, see [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 
    </TabItem>
    </Tabs>
@@ -694,6 +728,16 @@ To authenticate and authorize access to PostgreSQL and OpenSearch, **you do not 
 :::
 
   </TabItem>
+
+  <TabItem value="rdbms" label="RDBMS">
+
+The RDBMS variant exports the orchestration database variables.
+
+```bash reference
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/export-helm-values.sh
+```
+
+  </TabItem>
 </Tabs>
 
 Ensure that you use the actual values you passed to the Terraform module during the setup of PostgreSQL and OpenSearch.
@@ -756,6 +800,14 @@ The choice depends on your infrastructure setup and security preferences. In thi
    This should display the secret with the base64 encoded values.
 
    </TabItem>
+
+   <TabItem value="rdbms" label="RDBMS">
+
+   ```bash reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/create-setup-db-secret.sh
+   ```
+
+   </TabItem>
    </Tabs>
 
 3. Save the following manifest to a file, for example, `setup-postgres-create-db.yml`.
@@ -764,6 +816,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    [
    {label: 'Standard', value: 'standard' },
    {label: 'IRSA', value: 'irsa' },
+   {label: 'RDBMS', value: 'rdbms' },
    ]}>
    <TabItem value="standard">
 
@@ -776,6 +829,15 @@ The choice depends on your infrastructure setup and security preferences. In thi
 
    ```yaml reference
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-irsa/setup-postgres-create-db.yml
+   ```
+
+   </TabItem>
+   <TabItem value="rdbms">
+
+   The RDBMS variant also creates the `camunda_orchestration` database used as secondary storage for the Orchestration Cluster.
+
+   ```yaml reference
+   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
    ```
 
    </TabItem>
@@ -892,6 +954,11 @@ The standard installation comes already pre-configured, and no additional steps 
    ```
 
 Running these commands will clean up both the job and the secret, ensuring that no unnecessary resources remain in the cluster.
+
+</TabItem>
+<TabItem value="rdbms" label="RDBMS">
+
+The RDBMS variant uses Amazon Aurora PostgreSQL as secondary storage and does not provision OpenSearch, so this OpenSearch access configuration does not apply. Skip it.
 
 </TabItem>
 </Tabs>
