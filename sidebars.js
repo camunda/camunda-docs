@@ -860,7 +860,6 @@ module.exports = {
               items: [
                 {
                   Model: [
-                    "components/hub/workspace/modeler/launch-modeler",
                     "components/hub/workspace/modeler/modeling/model-your-first-diagram",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
                     "components/hub/workspace/modeler/process-landscape-visualization",
