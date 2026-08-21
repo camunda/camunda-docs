@@ -27,7 +27,6 @@ Typical examples:
 
 - A webhook receives a PDF, and you upload it to Amazon S3.
 - You download an image from Google Cloud Storage and send it via email.
-- A tool in an [AI Agent Sub-process](/components/agentic-orchestration/agentic-orchestration-overview.md) returns a PDF, and the agent passes it to the LLM as a document reference, the same as any other Path 1 document. See [AI Agent document support](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents.md).
 
 On this path, the document is held in the [Camunda document store](/components/document-handling/getting-started.md) and passed between systems as a reference.
 

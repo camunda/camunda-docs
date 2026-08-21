@@ -49,8 +49,6 @@ The integration provides bi-directional orchestration using two main components:
 
 ### ServiceNow connectors in Camunda
 
-Because they're standard outbound connectors, an [AI agent](/reference/glossary.md#ai-agent) can also call these ServiceNow connectors as tools, deciding at runtime when to create an incident or trigger a flow, with the same governance as any other connector task.
-
 | Connector                                                         | Description                                                                                           |
 | :---------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------- |
 | [ServiceNow Outbound Connector](connectors/outbound-connector.md) | Execute CRUD operations on any ServiceNow table.                                                      |

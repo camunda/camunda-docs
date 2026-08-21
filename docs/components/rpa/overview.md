@@ -12,8 +12,6 @@ RPA allows you to automate manual, repetitive tasks by interacting with legacy m
 
 Camunda uses RPA to integrate legacy applications without accessible APIs into your process orchestration.
 
-An [AI Agent Sub-process](/components/agentic-orchestration/agentic-orchestration-overview.md) can call an RPA task as a tool the same way a fixed sequence flow does, with no extra integration required.
-
 ## Get started with RPA
 
 Camunda RPA uses a standalone RPA worker and Robot Framework–based scripts. This setup lets you build and run RPA scripts that integrate with your existing Camunda components.

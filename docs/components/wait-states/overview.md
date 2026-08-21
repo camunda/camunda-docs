@@ -34,8 +34,6 @@ Camunda 8.10 tracks the following wait state types:
 
 Boundary events, event-based gateways, and parallel merging gateways are not tracked in 8.10.
 
-Because an [AI Agent Sub-process](/components/agentic-orchestration/agentic-orchestration-overview.md) calls its tools through the same task types as a fixed sequence flow, an in-progress tool call surfaces as a job wait state like any other task.
-
 ## Impact on secondary storage
 
 When wait state tracking is active, Camunda writes a record to [secondary storage](/self-managed/concepts/secondary-storage/index.md) for every applicable element instance.
