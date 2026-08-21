@@ -128,6 +128,20 @@ In Self-Managed, you can now hide the **Add user** button on the Web Modeler **C
 
 <p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
 
+### Optimize
+
+#### Optimize authentication moves to the Camunda Security Library
+
+<!-- https://github.com/camunda/camunda/issues/58600 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now authenticates through the Camunda Security Library (CSL), the same session-based OIDC login the Orchestration Cluster uses, replacing its own stateless JWT-cookie stack. A standard session cookie replaces the self-signed JWT cookie, and the login `id_token`'s issuer and audience are now validated.
+
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#optimize-authentication-moves-to-the-camunda-security-library) for the upgrade action required, and [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the full authentication model change.
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
 ### Orchestration Cluster
 
 #### Elasticsearch 9.x and OpenSearch 3.x support

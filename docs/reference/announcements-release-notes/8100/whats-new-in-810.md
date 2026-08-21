@@ -40,13 +40,27 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 :::
 
-## Optimize data filters in Console
+## Optimize
+
+### Data filters in Console
 
 On SaaS, you can now configure Optimize export filters directly in Console cluster settings. No Helm values or configuration files required. Use the **Data filters** section in cluster settings to control which process definitions (by `bpmnProcessId`) and variable names reach Optimize.
 
 New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
 <p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
+### Authentication moves to the Camunda Security Library
+
+Optimize now authenticates through the Camunda Security Library (CSL) instead of its own stateless JWT-cookie stack. A standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and Optimize now validates the login `id_token`'s issuer and audience, which it did not in 8.9.
+
+:::warning Check your OIDC configuration before upgrading
+A mismatched issuer or audience that happened to work on 8.9 fails to log in on 8.10. This is the most likely upgrade breakage for OIDC deployments running Optimize.
+:::
+
+The legacy `CAMUNDA_OPTIMIZE_IDENTITY_*` and `CAMUNDA_OPTIMIZE_AUTH0_*` configuration keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback.
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
 ## Web Modeler data
 
