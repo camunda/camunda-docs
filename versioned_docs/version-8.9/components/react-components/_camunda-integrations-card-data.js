@@ -1,7 +1,7 @@
 import IconPlayImg from "../assets/icon-play.png";
 
 export const msTeamsCard = {
-  link: "../ms-teams/ms-teams/",
+  link: "../ms-teams/",
   title: "Microsoft Teams",
   image: IconPlayImg,
   description:
