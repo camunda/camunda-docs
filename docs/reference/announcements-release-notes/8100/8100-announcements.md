@@ -569,3 +569,56 @@ Web Modeler change 1 description.
 
 </div>
 </div> -->
+
+## Optimize
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize authentication moves to the Camunda Security Library
+
+Starting with Camunda 8.10, Optimize authenticates through the Camunda Security Library (CSL) instead of its own stateless JWT-cookie stack: a standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and the login `id_token`'s issuer and audience are now validated (Camunda 8.9 did not validate these).
+
+A deployment with a mismatched issuer or audience that happened to work on 8.9 fails to log in on 8.10. This is the most likely upgrade breakage for OIDC deployments.
+
+**Action:** Before upgrading, confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the full authentication model change and API-consumer behavior changes (CSRF, bearer tokens on the internal API).
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Legacy Optimize security configuration keys deprecated
+
+With the move to CSL, the Optimize security configuration keys used through 8.9 (`CAMUNDA_OPTIMIZE_IDENTITY_*`, `CAMUNDA_OPTIMIZE_AUTH0_*`, and related keys) are deprecated in favor of `camunda.security.*`. A compatibility bridge maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
+
+**Action:** Migrate to the `camunda.security.*` keys before upgrading to 8.11. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules the bridge applies.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `optimize.security.csl.enabled=false` fallback is temporary
+
+If CSL causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+
+**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
+
+</div>
+</div>
