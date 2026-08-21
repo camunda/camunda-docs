@@ -5,7 +5,7 @@ sidebar_label: Features and integrations
 description: "Features and integrations."
 ---
 
-Get started with selected key features and integrations. Many of these are also available as tools an [AI Agent Sub-process](/components/agentic-orchestration/agentic-orchestration-overview.md) can call, the same way a fixed process step would.
+Get started with selected key features and integrations.
 
 import "../react-components/\_using-table.css";
 import UsingGrid from '../react-components/\_using-card';

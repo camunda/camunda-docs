@@ -5,6 +5,8 @@ sidebar_label: Human in the loop
 description: "Learn how to build human-in-the-loop AI workflows by combining MCP with BPMN."
 ---
 
+import HIL_example from './agentic-ai/img/mcp-client-hitl.png';
+
 Learn how to build human-in-the-loop AI workflows in Camunda by combining MCP Client tool discovery with BPMN elements like gateways, intermediate events, and user tasks to control and approve tool execution.
 
 ## About
@@ -58,8 +60,4 @@ The model requested to call the following MCP tool:
 
 See the example diagram below:
 
-![MCP Client connector human-in-the-loop example](agentic-ai/img/mcp-client-hitl.png)
-
-:::tip
-To notify the approver as soon as the confirmation task is created, use [Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md) or a [connector](/components/connectors/connector-types.md) to your own notification channel, instead of relying on the user to check Tasklist.
-:::
+<img src={HIL_example} alt="MCP Client connector human-in-the-loop example" width="65%"/>

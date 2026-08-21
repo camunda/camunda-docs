@@ -214,7 +214,3 @@ fromAi(toolCall.question, "The question the agent needs a human to answer.")
 6. Use the human's output variable as the gateway condition.
 
 <img src={HumanGate} alt="Human approval" width="50%"/>
-
-:::tip
-To notify the human as soon as the escalation task is created, use [Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md) or a [connector](/components/connectors/connector-types.md) to your own notification channel, instead of relying on the human to check Tasklist.
-:::

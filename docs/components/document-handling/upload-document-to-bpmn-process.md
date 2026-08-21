@@ -79,8 +79,6 @@ Refer to the example array below:
 
 Documents available for download from an unprotected URL can be added to a process in any connector as an **external document**. The full JSON structure and field reference is documented in [document sources](/components/document-handling/send-document-to-external-system.md#external-documents).
 
-An AI Agent tool call result can produce a document reference the same way; see [AI agent document support](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents.md).
-
 ## Upload a document via inbound webhook connector
 
 Documents can be added to a process using the [inbound](/components//connectors/connector-types.md#inbound-connectors) [HTTP webhook connector](/components/connectors/protocol/http-webhook.md).
