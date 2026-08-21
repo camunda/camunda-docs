@@ -48,6 +48,8 @@ camundaHub:
 
 Apply the same pattern to `camundaHub.websockets`. If you're upgrading from 8.9, [move existing `webModeler.*` overrides to `camundaHub.*`](/self-managed/upgrade/helm/890-to-8100.md#consolidate-console-and-web-modeler-into-camunda-hub).
 
+The same `podLabels` and `affinity` pairing applies to every component listed in [Configure scheduling values](#configure-scheduling-values). Prefer a label you own over chart-managed labels such as `app.kubernetes.io/component`, whose values can change between chart versions. For the Orchestration Cluster, overriding `orchestration.affinity` replaces the default hard `podAntiAffinity` rule. To spread broker pods across zones, use [`orchestration.topologySpreadConstraints`](#spread-orchestration-cluster-pods-across-availability-zones) instead.
+
 Keep the following in mind when configuring Pod anti-affinity:
 
 - Use a label key with a DNS prefix you control. If multiple Helm releases share a namespace, choose a label value unique to each component and release because Pod affinity selectors use the current namespace by default.

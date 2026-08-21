@@ -441,6 +441,8 @@ webModeler:
 
 Apply the same pattern to `webModeler.webapp` and `webModeler.websockets`.
 
+The same `podLabels` and `affinity` pairing applies to every component that exposes these values, including `zeebe`, `zeebeGateway`, `operate`, `tasklist`, `optimize`, `identity`, `connectors`, and `console`. Prefer a label you own over chart-managed labels such as `app.kubernetes.io/component`, whose values can change between chart versions. For Zeebe, overriding `zeebe.affinity` replaces the default hard `podAntiAffinity` rule that keeps broker pods on distinct nodes.
+
 Keep the following in mind when configuring Pod anti-affinity:
 
 - Use a label key with a DNS prefix you control. If multiple Helm releases share a namespace, choose a label value unique to each component and release because Pod affinity selectors use the current namespace by default.
