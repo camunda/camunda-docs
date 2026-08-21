@@ -60,51 +60,45 @@ The architecture outlined below describes a standard Zeebe three-node deployment
 
 architecture-beta
     group vpc(logos:aws-vpc)["VPC · single region · three availability zones"]
-    group public(cloud)["Public subnets"] in vpc
-    group ecs(logos:aws-ecs)["ECS cluster · Fargate tasks in private subnets"] in vpc
-    group data(cloud)["Managed data services"] in vpc
+    group edge(cloud)["Public subnets · ingress"] in vpc
+    group cluster(logos:aws-ecs)["ECS cluster · Fargate services in private subnets"] in vpc
+    group stores(cloud)["Managed data services"] in vpc
 
-    service alb(logos:aws-elb)["Application Load Balancer"] in public
-    service nlb(logos:aws-elb)["Network Load Balancer · gRPC"] in public
+    service alb(logos:aws-elb)["ALB · web apps and REST API"] in edge
+    service nlb(logos:aws-elb)["NLB · gRPC"] in edge
 
-    service oc(logos:aws-fargate)["Orchestration Cluster"] in ecs
-    service connectors(logos:aws-fargate)["Connectors"] in ecs
-    service identity(logos:aws-fargate)["Management Identity"] in ecs
-    service hub(logos:aws-fargate)["Camunda Hub"] in ecs
+    service hub(logos:aws-fargate)["Camunda Hub"] in cluster
+    service identity(logos:aws-fargate)["Management Identity"] in cluster
+    service oc(logos:aws-fargate)["Orchestration Cluster"] in cluster
+    service connectors(logos:aws-fargate)["Connectors"] in cluster
 
-    service efs(disk)["EFS · Zeebe primary storage"] in data
-    service s3(logos:aws-s3)["S3 · node IDs and backups"] in data
-    service aurora(logos:aws-aurora)["Aurora PostgreSQL · secondary storage"] in data
+    service efs(disk)["EFS · Zeebe primary storage"] in stores
+    service s3(logos:aws-s3)["S3 · node IDs and backups"] in stores
+    service aurora(logos:aws-aurora)["Aurora PostgreSQL · secondary storage"] in stores
 
-    junction jstore in data
-    junction japp in data
+    junction jstore in stores
 
     alb:R -- L:nlb
-    alb:B --> T:oc
-    nlb:B --> T:oc
 
+    hub:R -- L:identity
+    identity:R -- L:oc
     oc:R -- L:connectors
-    connectors:R -- L:identity
-    identity:R -- L:hub
 
-    oc:B -- T:jstore
     jstore:L -- R:efs
     jstore:R -- L:s3
     jstore:B -- T:aurora
 
-    identity:B -- T:japp
-    hub:B -- R:japp
-    japp:L -- R:aurora
+    alb{group}:B --> T:oc{group}
+    oc{group}:B --> T:jstore{group}
 ```
 
 _Infrastructure diagram for the single-region ECS architecture. Management Identity and Camunda Hub are optional and are only deployed when you enable OIDC authentication._
 
-Horizontal links between ECS services represent internal [ECS Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) reachability within the cluster. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
+Arrows between the tiers show the direction of traffic: the load balancers reach the ECS services, and the ECS services reach the managed data services. Horizontal links inside the ECS cluster represent internal [ECS Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) reachability. The Orchestration Cluster uses all three data services, while Management Identity and Camunda Hub each use a dedicated database on the same Aurora cluster. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
 
 After completing this guide, you will have:
 
 - A [Virtual Private Cloud](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) (VPC), which is a logically isolated virtual network.
-  - _For simplification the private and public were not visualized in the diagram above._
   - A [Private Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html), which does not have direct internet access.
   - [Elastic Container Service (ECS) Cluster](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/clusters.html)
     - ECS Services for the Orchestration Cluster and Connectors, and optionally for Management Identity and Camunda Hub
