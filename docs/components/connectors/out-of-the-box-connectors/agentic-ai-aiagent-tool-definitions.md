@@ -243,7 +243,15 @@ For supported file types and details on how documents are resolved, see [documen
 
 ## Assisted tool configuration in Web Modeler
 
-In the properties panel, Web Modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process and only fills blank fields, so it does not overwrite values you already entered.
+In the properties panel, Web Modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
+
+Assisted configuration follows three rules:
+
+1. **Best-effort.** It keeps every decision you made and it can still read. A description or type you wrote is a decision; a key it cannot parse is not.
+2. **Reset when nothing can be salvaged.** A call that will not parse is unusable, so Web Modeler offers a working default and you redo the rest. Undo is always available.
+3. **It says which of the two just happened.** The button shows no preview of the value it writes, so hover it to see what will change before you accept.
+
+Autofill on a blank field never overwrites anything, because there is nothing there to keep.
 
 ### Autofill a `fromAi()` input
 
@@ -253,7 +261,7 @@ On a tool's root node (the activity with no incoming flows), an autofill icon ap
 =fromAi(toolCall.parameterName, "Description of the parameter")
 ```
 
-Replace the placeholder key and description with values for your tool. Autofill does not overwrite existing field values.
+Replace the placeholder key and description with values for your tool. The autofill icon appears only on a blank field, so it never replaces a value you entered.
 
 ### Autofill a `toolCallResult` output
 
@@ -269,7 +277,16 @@ For a multi-instance tool, autofill also sets the output collection and output e
 
 ### Accept a correction
 
-When a `fromAi()` key or output key is a near-miss—for example, a value close to `toolCallResult` but not exact—Web Modeler detects it locally and offers a correction you can accept in one click. A correction changes only the invalid part. For example, correcting an invalid `fromAi()` key rewrites the key but preserves any description and type arguments you entered.
+When a `fromAi()` key or output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click.
+
+Two buttons appear, and they make different promises:
+
+| Button       | What it does                                                            | What happens to your text                           |
+| :----------- | :---------------------------------------------------------------------- | :-------------------------------------------------- |
+| **Fix**      | Corrects a part that is wrong and has exactly one valid form            | Kept. Only the invalid part is rewritten            |
+| **Autofill** | Fills in what is missing, or resets a call that cannot be parsed at all | Kept where readable, replaced by defaults where not |
+
+Correcting an invalid `fromAi()` key rewrites the key and preserves any description and type arguments you entered. If the call cannot be parsed at all, for example because an argument is half-written, Autofill resets the whole call to a working default and you re-enter the rest. Hover the button to see which of the two will happen, and use undo if the result is not what you wanted.
 
 If a `fromAi()` call is on an element other than the tool's root node, the AI Agent connector cannot resolve it. Web Modeler offers to move the call to the root node.
 
