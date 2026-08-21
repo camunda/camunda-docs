@@ -53,12 +53,50 @@ The result is a fully functioning Camunda Orchestration Cluster deployed in a hi
 
 The architecture outlined below describes a standard Zeebe three-node deployment, distributed across three [availability zones](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) within a single AWS region. It includes a managed Aurora PostgreSQL instance deployed under the same conditions. This approach ensures high availability and redundancy in case of a zone failure.
 
-<!-- The following diagram should be exported as an image and as a PDF from the sources https://miro.com/app/board/uXjVL-6SrPc=/ -->
-<!-- To export: click on the frame > "Export Image" > as PDF and as JPG (low res), then save it in the ./assets/ folder -->
+```mermaid
 
-_Infrastructure diagram for the Orchestration Cluster ECS architecture (click the image to view the PDF version)_
+architecture-beta
+    group vpc(logos:aws-vpc)["VPC · single region · three availability zones"]
+    group public(cloud)["Public subnets"] in vpc
+    group ecs(logos:aws-ecs)["ECS cluster · Fargate tasks in private subnets"] in vpc
+    group data(cloud)["Managed data services"] in vpc
 
-[![AWS ECS Architecture](./assets/architecture.jpg)](./assets/architecture.pdf)
+    service alb(logos:aws-elb)["Application Load Balancer"] in public
+    service nlb(logos:aws-elb)["Network Load Balancer · gRPC"] in public
+
+    service oc(logos:aws-fargate)["Orchestration Cluster"] in ecs
+    service connectors(logos:aws-fargate)["Connectors"] in ecs
+    service identity(logos:aws-fargate)["Management Identity"] in ecs
+    service hub(logos:aws-fargate)["Camunda Hub"] in ecs
+
+    service efs(disk)["EFS · Zeebe primary storage"] in data
+    service s3(logos:aws-s3)["S3 · node IDs and backups"] in data
+    service aurora(logos:aws-aurora)["Aurora PostgreSQL · secondary storage"] in data
+
+    junction jstore in data
+    junction japp in data
+
+    alb:R -- L:nlb
+    alb:B --> T:oc
+    nlb:B --> T:oc
+
+    oc:R -- L:connectors
+    connectors:R -- L:identity
+    identity:R -- L:hub
+
+    oc:B -- T:jstore
+    jstore:L -- R:efs
+    jstore:R -- L:s3
+    jstore:B -- T:aurora
+
+    identity:B -- T:japp
+    hub:B -- R:japp
+    japp:L -- R:aurora
+```
+
+_Infrastructure diagram for the single-region ECS architecture. Management Identity and Camunda Hub are optional and are only deployed when you enable OIDC authentication._
+
+Horizontal links between ECS services represent internal [ECS Service Connect](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html) reachability within the cluster. Every component also reads its credentials from AWS Secrets Manager and writes logs to Amazon CloudWatch, which are omitted from the diagram to keep it readable.
 
 After completing this guide, you will have:
 
@@ -66,7 +104,7 @@ After completing this guide, you will have:
   - _For simplification the private and public were not visualized in the diagram above._
   - A [Private Subnet](https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html), which does not have direct internet access.
   - [Elastic Container Service (ECS) Cluster](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/clusters.html)
-    - ECS Services for the Orchestration Cluster and Connectors
+    - ECS Services for the Orchestration Cluster and Connectors, and optionally for Management Identity and Camunda Hub
       - These spawn ECS tasks running on [Fargate](https://aws.amazon.com/fargate/)
     - [Elastic File System (EFS)](https://aws.amazon.com/efs/) as primary datastore for the Zeebe cluster
     - [Aurora PostgreSQL](https://aws.amazon.com/rds/aurora/) as secondary datastore
@@ -684,9 +722,11 @@ terraform output -raw alb_endpoint
 
 The ALB exposes both the Orchestration and Connectors through the same port and uses listener rules with weights to determine the path they're on.
 
-- ALB:80
+- ALB:80 (ALB:443 when you set `alb_certificate_arn`)
   - `/*` routes to the Orchestration Cluster UI/REST API
   - `/connectors*` routes to the Connectors
+  - `/hub*` routes to Camunda Hub and `/hub-ws*` to its websockets relay, when `enable_camunda_hub = true`
+  - `/identity*` routes to Management Identity, when OIDC is enabled and you turn on its ALB exposure
 - ALB:9600 (optional - not recommended to be exposed publicly)
   - `/*` routes to the Orchestration Cluster
   - Connectors has the management port with the web server combined by default
@@ -700,6 +740,8 @@ The ALB exposes both the Orchestration and Connectors through the same port and 
    ```sh
    terraform output -raw admin_user_password
    ```
+
+   This output only applies to `authentication_mode = "basic"`. If you enabled OIDC, this password does not sign you in — use the identity provider account described in [Retrieve the administrator sign-in credentials](#retrieve-the-administrator-sign-in-credentials) instead.
 
 4. Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) to communicate with Camunda:
 
