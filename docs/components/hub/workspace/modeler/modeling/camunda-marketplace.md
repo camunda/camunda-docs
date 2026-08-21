@@ -20,7 +20,7 @@ To navigate to the Camunda Marketplace, take the following steps:
 
 1. Log in to your Camunda account.
 2. Click on an existing project, or create a new project by clicking **New project**.
-3. In the project, create or open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. In the project, create or open a process application.
 4. In the process application, click **Create new > BPMN diagram**.
 5. In your BPMN diagram, select an element.
 6. In the properties panel on the right side of the screen, click **Template > Select**.
