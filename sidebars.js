@@ -1090,6 +1090,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/app-integrations",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/blueprism",
