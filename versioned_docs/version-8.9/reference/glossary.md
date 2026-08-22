@@ -643,13 +643,13 @@ Examples of secondary storage backends include:
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
 ### Soft pause exporting
 
