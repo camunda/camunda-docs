@@ -14,14 +14,14 @@ Validate your project in development before deploying it to testing, staging, or
 
 ## Validate your project
 
-Use [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md) to validate your project in development.
+Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate your project in development.
 
 1. Open the BPMN diagram in the project that you want to validate.
-1. Select the **Play** tab to play the project using your selected development cluster.
+1. Select the **Test** tab to test the project using your selected cluster.
 1. Perform validation as required, for example, debug your process logic and test the project.
 
 :::info
-To learn more about using Play for validation, see [Play mode for rapid validation](/components/hub/workspace/modeler/validation/play-your-process.md)
+To learn more about using Test mode for validation, see [Test your process](/components/hub/workspace/modeler/validation/test-your-process.md)
 :::
 
 ## Deploy your project
@@ -58,7 +58,7 @@ You can also open the deployment modal from the details page of any deployable f
 You can manually [run](/components/hub/workspace/modeler/run-or-publish-your-process.md#run-a-process) your project to test it after it has been deployed to a testing, staging, or production cluster.
 
 :::note
-Use Play to validate your project in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
+Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate and debug your project against any environment. Use Run to execute a full process instance of your already-deployed project, for example to exercise your real job workers and APIs on a testing, staging, or production cluster.
 :::
 
 To run your project:

@@ -745,7 +745,7 @@ You can now save and rerun versioned test scenarios in Web Modeler:
 - Ideal for process developers and CoEs
 - Enables behavior-driven development with Camunda Process Test
 
-<p><a href="../../../../components/hub/workspace/modeler/validation/play-your-process/" class="link-arrow">Scenarios</a></p>
+<p><a href="../../../../components/hub/workspace/modeler/validation/test-your-process/" class="link-arrow">Scenarios</a></p>
 
 ### RDBMS support for Oracle and MS SQL in Self-Managed
 

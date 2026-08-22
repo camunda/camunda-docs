@@ -7,19 +7,19 @@ description: Test and debug a single BPMN task directly in Web Modeler using liv
 You can test a single task directly within Web Modeler to validate its configuration and logic without executing the entire process.  
 Task testing lets you quickly debug mappings, inputs, and outputs without leaving your implementation context.
 
-## Task testing vs. Play
+## Task testing vs. Test mode
 
-While both task testing and Play let you validate your BPMN models, they serve different purposes:
+While both task testing and Test mode let you validate your BPMN models, they serve different purposes:
 
-| Feature / capability | Task testing (Implement mode)     | Play (Play mode)                  |
+| Feature / capability | Task testing (Implement mode)     | Test mode                         |
 | -------------------- | --------------------------------- | --------------------------------- |
 | Test scope           | Single task or sub-process        | Process segment or full diagram   |
 | Best for             | Quick implementation checks       | End-to-end test validation        |
 | Data type            | Live data only                    | Live or mocked data               |
-| Saves test scenarios | No                                | Yes                               |
-| Mode required        | Runs directly in _Implement_ mode | Requires switching to _Play_ mode |
+| Saves test cases     | No                                | Yes                               |
+| Mode required        | Runs directly in _Implement_ mode | Requires switching to _Test_ mode |
 
-Use task testing during implementation for quick feedback, and use Play for structured testing with mock data or reusable scenarios.
+Use task testing during implementation for quick feedback, and use Test mode for structured testing with mock data or reusable test cases.
 
 ## Prerequisites
 
@@ -78,4 +78,4 @@ If the task fails due to an error (for example, a network or configuration issue
 - [Test a task in Desktop Modeler](../../../../modeler/desktop-modeler/task-testing.md)
 - [Learn about task testing concepts](../../../../modeler/task-testing.md)
 - [Working with variables](../../../../concepts/variables.md)
-- [Using Play mode](play-your-process.md)
+- [Using Test mode](test-your-process.md)

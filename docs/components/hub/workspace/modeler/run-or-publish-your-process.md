@@ -64,7 +64,7 @@ To perform any of these actions, make sure to be in **Implement** mode.
 
 Running a process means that you execute the process as a process instance on Camunda 8. It allows you to test and debug your process and observe how it performs in a live environment.
 
-- [Test run using Play mode](#test-run-using-play-mode)
+- [Test run using Test mode](#test-run-using-test-mode)
 - [Run programmatically](#deploy-to-run-programmatically)
 - [Run manually from Modeler](#run-manually-from-modeler)
 - [Schedule via timer](#schedule-via-timer)
@@ -73,9 +73,9 @@ Running a process means that you execute the process as a process instance on Ca
 
 - If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the users running the process are assigned to both the `CREATE_PROCESS_INSTANCE` permission to the `PROCESS_DEFINITION` resource type and `CREATE` permission to the `RESOURCE` resource type.
 
-### Test run using Play mode
+### Test run using Test mode
 
-Before you publish or run a process, you can test it manually using the Play mode. With the Play mode, you can build and test your process iteratively in small steps. To enter the Play mode, click the Play tab in the top left corner of the modeling screen. Refer to the [Play mode documentation](validation/play-your-process.md) for details of how the Play environment works.
+Before you publish or run a process, you can test it manually using the Test mode. With the Test mode, you can build and test your process iteratively in small steps. To enter the Test mode, click the Test tab in the top left corner of the modeling screen. Refer to the [Test mode documentation](validation/test-your-process.md) for details of how the Test mode works.
 
 ### Run manually from Modeler
 
@@ -128,7 +128,7 @@ Read more in the [timers documentation](../../../modeler/bpmn/timer-events/timer
 
 ### Best practices for running a process
 
-- Use the [Play mode](#test-run-using-play-mode) to run a process instance with test data before running it with live data.
+- Use the [Test mode](#test-run-using-test-mode) to run a process instance with test data before running it with live data.
 - Verify that the process is running as expected on a development cluster before running it with live data in your production environment.
 - Use [Operate](../../../operate/operate-introduction.md) to help you diagnose any problems with the process.
 
@@ -146,7 +146,7 @@ You have the following options to publish a process:
   - [Before deploying a process](#before-deploying-a-process)
 - [Run a process](#run-a-process)
   - [Before running a process](#before-running-a-process)
-  - [Test run using Play mode](#test-run-using-play-mode)
+  - [Test run using Test mode](#test-run-using-test-mode)
   - [Run manually from Modeler](#run-manually-from-modeler)
   - [Schedule via timer](#schedule-via-timer)
   - [Best practices for running a process](#best-practices-for-running-a-process)
@@ -239,7 +239,7 @@ As soon as a matching event is received, a process instance will be started. To 
 ### Best practices for publishing a process
 
 - Use the [problems panel](modeling/fix-problems-in-your-diagram.md) to make sure that the process free of errors before publishing it.
-- Ensure the process works by testing it interactively using the [Play mode](validation/play-your-process.md).
+- Ensure the process works by testing it interactively using [Test mode](validation/test-your-process.md).
 - Use meaningful names and descriptions for the process and its elements.
 - Document the process with clear instructions and details on how it should be used.
 - Make sure that the process is accessible to the appropriate users only.
