@@ -11,7 +11,7 @@ This reference covers the hand-written ergonomic surface of the Rust SDK: the cl
 
 | Page                               | Contents                                                     |
 | ---------------------------------- | ------------------------------------------------------------ |
-| [CamundaClient](camunda-client.md) | The client and its 236 API methods.                          |
+| [CamundaClient](camunda-client.md) | The client and its 241 API methods.                          |
 | [Configuration](configuration.md)  | Client configuration, authentication, TLS, and retry policy. |
 | [Job workers](job-workers.md)      | Job worker configuration, handlers, and lifecycle.           |
 | [Runtime](runtime.md)              | Error types and adaptive backpressure.                       |

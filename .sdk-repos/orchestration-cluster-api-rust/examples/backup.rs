@@ -4,10 +4,15 @@
 //! `examples/operation-map.json`, and are type-checked by `cargo build --examples`.
 #![allow(dead_code, unused_variables, unused_imports)]
 
+use camunda_orchestration_sdk::apis::backup_api::DeleteHistoryBackupParams;
 use camunda_orchestration_sdk::apis::backup_api::DeleteRuntimeBackupParams;
+use camunda_orchestration_sdk::apis::backup_api::GetHistoryBackupParams;
 use camunda_orchestration_sdk::apis::backup_api::GetRuntimeBackupParams;
+use camunda_orchestration_sdk::apis::backup_api::ListHistoryBackupsParams;
 use camunda_orchestration_sdk::apis::backup_api::ListRuntimeBackupsParams;
+use camunda_orchestration_sdk::apis::backup_api::TakeHistoryBackupParams;
 use camunda_orchestration_sdk::apis::backup_api::TakeRuntimeBackupParams;
+use camunda_orchestration_sdk::models::TakeHistoryBackupRequest;
 use camunda_orchestration_sdk::models::TakeRuntimeBackupRequest;
 use camunda_orchestration_sdk::CamundaClient;
 
@@ -101,6 +106,67 @@ async fn delete_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>>
     Ok(())
 }
 // endregion DeleteRuntimeBackupState
+
+// region TakeHistoryBackup
+async fn take_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .take_history_backup(TakeHistoryBackupParams {
+            take_history_backup_request: TakeHistoryBackupRequest { backup_id: 1 },
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+// endregion TakeHistoryBackup
+
+// region ListHistoryBackups
+async fn list_history_backups() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // `prefix` must end in a single '*'. Setting `verbose` to false makes the
+    // query cheaper, at the cost of snapshot-level detail.
+    let backups = client
+        .list_history_backups(ListHistoryBackupsParams {
+            prefix: None,
+            verbose: None,
+        })
+        .await?;
+    for backup in backups {
+        println!("{backup:#?}");
+    }
+
+    Ok(())
+}
+// endregion ListHistoryBackups
+
+// region GetHistoryBackup
+async fn get_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .get_history_backup(GetHistoryBackupParams { backup_id: 1 })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+// endregion GetHistoryBackup
+
+// region DeleteHistoryBackup
+async fn delete_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .delete_history_backup(DeleteHistoryBackupParams { backup_id: 1 })
+        .await?;
+    println!("Delete history backup: done");
+
+    Ok(())
+}
+// endregion DeleteHistoryBackup
 
 fn main() {
     // Examples above are compiled, not executed.
