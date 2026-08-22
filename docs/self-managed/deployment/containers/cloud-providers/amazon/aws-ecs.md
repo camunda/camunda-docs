@@ -554,7 +554,7 @@ Browser-based OIDC login does not complete over plain HTTP. Set `alb_certificate
 - Load balancer configuration to add a listener rule to the shared Application Load Balancer. Exposure is opt-in and disabled by default through `enable_alb_http_webapp_listener_rule`.
 - Networking configuration that registers Management Identity with ECS Service Connect, reachable inside the VPC as `identity` on port `8084`, with the management endpoint on port `8082`.
 
-Management Identity uses a dedicated `identity` database on the shared Aurora PostgreSQL cluster with **password authentication**, not IAM database authentication. Unlike the Orchestration Cluster image, the Management Identity image does not include the AWS JDBC wrapper. The database name and role are configurable through `identity_db_name` and `identity_db_username`, and the generated password is stored in AWS Secrets Manager.
+Management Identity uses a dedicated `identity` database on the shared Aurora PostgreSQL cluster with **password authentication**, rather than the IAM database authentication the Orchestration Cluster uses. The database name and role are configurable through `identity_db_name` and `identity_db_username`, and the generated password is stored in AWS Secrets Manager.
 
 In generic OIDC mode, Management Identity validates tokens and handles login. The identity provider owns clients and users, and role-to-principal mapping is done on the Camunda side.
 
