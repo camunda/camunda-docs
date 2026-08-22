@@ -102,4 +102,22 @@ public static class AuthorizationExamples
     }
     // </GetAuthentication>
     #endregion GetAuthentication
+
+    #region SearchOwnAuthorizations
+
+    // <SearchOwnAuthorizations>
+    public static async Task SearchOwnAuthorizationsExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.SearchOwnAuthorizationsAsync(
+            new AuthorizationSearchQuery());
+
+        foreach (var auth in result.Items)
+        {
+            Console.WriteLine($"Authorization: {auth.AuthorizationKey}");
+        }
+    }
+    // </SearchOwnAuthorizations>
+    #endregion SearchOwnAuthorizations
 }

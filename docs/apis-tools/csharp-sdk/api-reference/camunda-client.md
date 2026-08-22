@@ -147,6 +147,55 @@ Transitions the cluster between processing and recovery mode. This is a non-bloc
 
 **Returns:** `Task<ClusterModeChangeResponse>`
 
+#### ChangeClusterModeAsClusterAdminAsync(Mode, string?, bool?, CancellationToken)
+
+```csharp
+public Task<ClusterModeChangeResponse> ChangeClusterModeAsClusterAdminAsync(Mode mode, string? physicalTenantId = null, bool? dryRun = null, CancellationToken ct = default)
+```
+
+Change the cluster mode of one or every physical tenant
+
+Transitions physical tenants between processing and recovery mode.
+
+If the `physicalTenantId` parameter is not provided, all available physical tenants are transitioned individually.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.
+
+| Parameter          | Type                | Description |
+| ------------------ | ------------------- | ----------- |
+| `mode`             | `Mode`              |             |
+| `physicalTenantId` | `String`            |             |
+| `dryRun`           | `Nullable<Boolean>` |             |
+| `ct`               | `CancellationToken` |             |
+
+**Returns:** `Task<ClusterModeChangeResponse>`
+
+**Example**
+
+```csharp
+public static async Task ChangeClusterModeAsClusterAdminExample()
+{
+    using var client = CamundaClient.Create();
+
+    // The cluster-admin variant can target a single physical tenant. Omit
+    // physicalTenantId to apply the change to every physical tenant.
+    var change = await client.ChangeClusterModeAsClusterAdminAsync(
+        Mode.RECOVERING, physicalTenantId: "default", dryRun: true);
+
+    Console.WriteLine($"Cluster change {change.ChangeId}:");
+    foreach (var group in change.PlannedChanges)
+    {
+        var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+        Console.WriteLine($"  {tenant}:");
+        foreach (var operation in group.Operations)
+        {
+            var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
+            Console.WriteLine($"    {operation.Operation}{suffix}");
+        }
+    }
+}
+```
+
 #### CreateAdminUserAsync(UserRequest, CancellationToken)
 
 ```csharp
@@ -370,6 +419,36 @@ public static async Task DeleteGlobalTaskListenerExample(GlobalListenerId global
 }
 ```
 
+#### DeleteHistoryBackupAsync(BackupId, CancellationToken)
+
+```csharp
+public Task DeleteHistoryBackupAsync(BackupId backupId, CancellationToken ct = default)
+```
+
+Delete history backup
+
+Deletes the history backup with the given id, by deleting every snapshot that makes it up.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+| Parameter  | Type                | Description |
+| ---------- | ------------------- | ----------- |
+| `backupId` | `BackupId`          |             |
+| `ct`       | `CancellationToken` |             |
+
+**Returns:** `Task`
+
+**Example**
+
+```csharp
+public static async Task DeleteHistoryBackupExample(BackupId backupId)
+{
+    using var client = CamundaClient.Create();
+
+    await client.DeleteHistoryBackupAsync(backupId);
+}
+```
+
 #### DeleteRuntimeBackupAsync(BackupId, CancellationToken)
 
 ```csharp
@@ -520,6 +599,36 @@ public static async Task EvaluateExpressionExample()
 }
 ```
 
+#### GetAgentDefinitionAsync(AgentDefinitionKey, ConsistencyOptions\<AgentDefinitionResult\>?, CancellationToken)
+
+```csharp
+public Task<AgentDefinitionResult> GetAgentDefinitionAsync(AgentDefinitionKey agentDefinitionKey, ConsistencyOptions<AgentDefinitionResult>? consistency = null, CancellationToken ct = default)
+```
+
+Get agent definition
+
+Returns an agent definition by key.
+
+| Parameter            | Type                                        | Description |
+| -------------------- | ------------------------------------------- | ----------- |
+| `agentDefinitionKey` | `AgentDefinitionKey`                        |             |
+| `consistency`        | `ConsistencyOptions<AgentDefinitionResult>` |             |
+| `ct`                 | `CancellationToken`                         |             |
+
+**Returns:** `Task<AgentDefinitionResult>`
+
+**Example**
+
+```csharp
+public static async Task GetAgentDefinitionExample(AgentDefinitionKey agentDefinitionKey)
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetAgentDefinitionAsync(agentDefinitionKey);
+    Console.WriteLine($"Agent definition: {result.AgentDefinitionKey}, name: {result.Name}, type: {result.AgentType}");
+}
+```
+
 #### GetAgentInstanceAsync(AgentInstanceKey, ConsistencyOptions\<AgentInstanceResult\>?, CancellationToken)
 
 ```csharp
@@ -547,6 +656,67 @@ public static async Task GetAgentInstanceExample(AgentInstanceKey agentInstanceK
 
     var result = await client.GetAgentInstanceAsync(agentInstanceKey);
     Console.WriteLine($"Agent instance: {result.AgentInstanceKey}, status: {result.Status}");
+}
+```
+
+#### GetClusterStatusAsync(CancellationToken)
+
+```csharp
+public Task<ClusterStatusResponse> GetClusterStatusAsync(CancellationToken ct = default)
+```
+
+Get the status of the whole cluster
+
+Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
+
+This endpoint is public and requires no authentication, unlike `PATCH /cluster/v2/mode` below, which needs cluster-admin credentials.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ClusterStatusResponse>`
+
+**Example**
+
+```csharp
+public static async Task GetClusterStatusExample()
+{
+    using var client = CamundaClient.Create();
+
+    var status = await client.GetClusterStatusAsync();
+
+    Console.WriteLine($"Cluster status: {status.Status}");
+}
+```
+
+#### GetExportingStatusAsync(CancellationToken)
+
+```csharp
+public Task<ExportingStatusResponse> GetExportingStatusAsync(CancellationToken ct = default)
+```
+
+Get exporting status
+
+Returns the exporting status of the physical tenant, aggregated over every replica of every one of its partitions.
+
+Because pause and resume are applied to all replicas, the status is only a single phase if every replica reports that phase; otherwise it is `MIXED`, which means a pause or resume is still in flight or was only partially applied. Backup tooling should treat only `PAUSED` and `SOFT_PAUSED` as confirmation that exporting is paused.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ExportingStatusResponse>`
+
+**Example**
+
+```csharp
+public static async Task GetExportingStatusExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.GetExportingStatusAsync();
+    Console.WriteLine($"Status: {result.Status}");
 }
 ```
 
@@ -609,6 +779,69 @@ public static async Task GetGlobalTaskListenerExample(GlobalListenerId globalLis
         globalListenerId);
 
     Console.WriteLine($"Task listener: {result.EventTypes}");
+}
+```
+
+#### GetHistoryBackupAsync(BackupId, CancellationToken)
+
+```csharp
+public Task<HistoryBackupInfo> GetHistoryBackupAsync(BackupId backupId, CancellationToken ct = default)
+```
+
+Get history backup
+
+Returns detailed status of the history backup with the given id.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+| Parameter  | Type                | Description |
+| ---------- | ------------------- | ----------- |
+| `backupId` | `BackupId`          |             |
+| `ct`       | `CancellationToken` |             |
+
+**Returns:** `Task<HistoryBackupInfo>`
+
+**Example**
+
+```csharp
+public static async Task GetHistoryBackupExample(BackupId backupId)
+{
+    using var client = CamundaClient.Create();
+
+    var backup = await client.GetHistoryBackupAsync(backupId);
+
+    // The aggregated state is derived from the state of every expected snapshot.
+    Console.WriteLine($"History backup {backup.BackupId}: {backup.State}");
+}
+```
+
+#### GetRestoreStatusAsync(CancellationToken)
+
+```csharp
+public Task<RestoreStatusResponse> GetRestoreStatusAsync(CancellationToken ct = default)
+```
+
+Get the status of the restore that is currently in progress
+
+Returns the status of the restore that is currently in progress, reported per broker and per partition. There is at most one restore in flight at any time. Once the restore has finished this endpoint returns 404; the per-partition detail is not retained after completion.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<RestoreStatusResponse>`
+
+**Example**
+
+```csharp
+public static async Task GetRestoreStatusExample()
+{
+    using var client = CamundaClient.Create();
+
+    // Poll this endpoint while the cluster is in recovery mode to track progress.
+    var status = await client.GetRestoreStatusAsync();
+
+    Console.WriteLine($"Restore {status.ChangeId}: {status.Status}");
 }
 ```
 
@@ -692,7 +925,7 @@ public Task GetStatusAsync(CancellationToken ct = default)
 
 Get physical tenant status
 
-Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). If the cluster has only a single physical tenant (the default), this endpoint is equivalent to `/cluster/v2/status`. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant's partitions.
+Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). On a cluster with only the default physical tenant this endpoint answers the same question as `/cluster/v2/status`, though not with the same response: `/cluster/v2/status` reports its status in a body and so also distinguishes a degraded tenant from a healthy one. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant's partitions.
 
 | Parameter | Type                | Description |
 | --------- | ------------------- | ----------- |
@@ -760,6 +993,41 @@ Get a user by its username.
 
 **Returns:** `Task<UserResult>`
 
+#### ListHistoryBackupsAsync(BackupIdPrefix?, bool?, CancellationToken)
+
+```csharp
+public Task<object> ListHistoryBackupsAsync(BackupIdPrefix? prefix = null, bool? verbose = null, CancellationToken ct = default)
+```
+
+List history backups
+
+Returns a list of all available history backups of the physical tenant, with their state and additional info, most recent first by snapshot start time.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+| Parameter | Type                       | Description |
+| --------- | -------------------------- | ----------- |
+| `prefix`  | `Nullable<BackupIdPrefix>` |             |
+| `verbose` | `Nullable<Boolean>`        |             |
+| `ct`      | `CancellationToken`        |             |
+
+**Returns:** `Task<Object>`
+
+**Example**
+
+```csharp
+public static async Task ListHistoryBackupsExample()
+{
+    using var client = CamundaClient.Create();
+
+    // `prefix` must end in a single '*'. Omit it to list every history backup.
+    var backups = await client.ListHistoryBackupsAsync(
+        BackupIdPrefix.AssumeExists("10*"));
+
+    Console.WriteLine($"History backups: {backups}");
+}
+```
+
 #### ListRuntimeBackupsAsync(BackupIdPrefix?, CancellationToken)
 
 ```csharp
@@ -803,6 +1071,8 @@ List secrets (alpha)
 List the `camunda.secrets.*` references known for the caller's physical tenant.
 
 Only references the caller holds `SECRET:READ` on are returned. This endpoint never returns secret values, only the reference names.
+
+The references are read from the secret stores configured for the caller's physical tenant. Secret names that cannot form a valid `camunda.secrets.` reference (for example names containing a dot or a dash) are omitted, since they could neither be resolved nor be used in a BPMN expression.
 
 This endpoint is an alpha feature and may be subject to change in future releases.
 
@@ -878,9 +1148,9 @@ Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's 
 
 Each reference is authorized and resolved independently. For valid requests, the endpoint always responds with HTTP 200: successfully resolved references are returned in `resolved`, while references that could not be resolved (for example not found, malformed or over-long, or the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of one reference never fails the others. Only structurally invalid requests are rejected with HTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.
 
-This endpoint is an alpha feature and may be subject to change in future releases.
+References are resolved against the secret stores configured for the caller's physical tenant, served from the gateway's secret cache when the value is already cached and read from the store otherwise.
 
-Phase 1: the secret backend is mocked. Only a fixed allow-list of references resolves; every other authorized, valid reference returns `NOT_FOUND`.
+This endpoint is an alpha feature and may be subject to change in future releases.
 
 | Parameter | Type                   | Description |
 | --------- | ---------------------- | ----------- |
@@ -925,10 +1195,10 @@ public static async Task ResolveSecretsExample()
 private static void UseSecret(string value) { }
 ```
 
-#### RestoreAsync(RestoreRequest, CancellationToken)
+#### RestoreAsync(RestoreRequest, bool?, CancellationToken)
 
 ```csharp
-public Task<ClusterModeChangeResponse> RestoreAsync(RestoreRequest body, CancellationToken ct = default)
+public Task<ClusterRestoreResponse> RestoreAsync(RestoreRequest body, bool? dryRun = null, CancellationToken ct = default)
 ```
 
 Restore from a backup
@@ -938,30 +1208,62 @@ Restores the cluster from a backup. The restore is described either by a single 
 | Parameter | Type                | Description |
 | --------- | ------------------- | ----------- |
 | `body`    | `RestoreRequest`    |             |
+| `dryRun`  | `Nullable<Boolean>` |             |
 | `ct`      | `CancellationToken` |             |
 
-**Returns:** `Task<ClusterModeChangeResponse>`
+**Returns:** `Task<ClusterRestoreResponse>`
+
+#### RestoreAsClusterAdminAsync(ClusterRestoreRequest, string?, bool?, CancellationToken)
+
+```csharp
+public Task<ClusterRestoreResponse> RestoreAsClusterAdminAsync(ClusterRestoreRequest body, string? physicalTenantId = null, bool? dryRun = null, CancellationToken ct = default)
+```
+
+Restore one or every physical tenant from a backup
+
+Restores physical tenants from backups. The restore is described either by a list of backup IDs or by a time range (`from`/`to`) that selects the backups to restore. Restores are only accepted while the targeted physical tenants are in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.
+
+If the `physicalTenantId` parameter is provided, only that physical tenant is restored and `overrides` must be omitted.
+
+If it is not provided, every physical tenant of the cluster is restored: those named in `overrides` with their own backup selection, all others with the selection at the top level of the request body.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.
+
+| Parameter          | Type                    | Description |
+| ------------------ | ----------------------- | ----------- |
+| `body`             | `ClusterRestoreRequest` |             |
+| `physicalTenantId` | `String`                |             |
+| `dryRun`           | `Nullable<Boolean>`     |             |
+| `ct`               | `CancellationToken`     |             |
+
+**Returns:** `Task<ClusterRestoreResponse>`
 
 **Example**
 
 ```csharp
-public static async Task RestoreExample()
+public static async Task RestoreAsClusterAdminExample()
 {
     using var client = CamundaClient.Create();
 
     // The cluster must be in recovery mode before a restore is accepted.
+    // Use physicalTenantId to restore a single physical tenant; omit it to
+    // restore every physical tenant. Pass dryRun: true to validate the
+    // request and inspect the plan without applying it.
     // Provide either a list of backup IDs (one per partition) or a time
-    // range (From/To) that selects the backups to restore, but not both.
-    var change = await client.RestoreAsync(new RestoreRequest
-    {
-        BackupIds = new List<long> { 100, 101 },
-    });
+    // range (From/To), but not both.
+    var change = await client.RestoreAsClusterAdminAsync(
+        new ClusterRestoreRequest
+        {
+            BackupIds = new List<long> { 100, 101 },
+        },
+        physicalTenantId: "default",
+        dryRun: true);
 
     Console.WriteLine($"Cluster change {change.ChangeId}:");
-    foreach (var operation in change.PlannedChanges)
+    foreach (var group in change.PlannedChanges)
     {
-        var suffix = operation.Mode is null ? "" : $" -> {operation.Mode}";
-        Console.WriteLine($"  {operation.Operation}{suffix}");
+        var tenant = group.PhysicalTenantId is null ? "cluster-wide" : group.PhysicalTenantId;
+        Console.WriteLine($"  {tenant}: {group.Operations.Count} operation(s)");
     }
 }
 ```
@@ -990,6 +1292,50 @@ public static async Task ResumeExportingExample()
     using var client = CamundaClient.Create();
 
     await client.ResumeExportingAsync();
+}
+```
+
+#### SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery, ConsistencyOptions\<AgentDefinitionSearchQueryResult\>?, CancellationToken)
+
+```csharp
+public Task<AgentDefinitionSearchQueryResult> SearchAgentDefinitionsAsync(AgentDefinitionSearchQuery body, ConsistencyOptions<AgentDefinitionSearchQueryResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search agent definitions
+
+Search for agent definitions based on given criteria.
+
+| Parameter     | Type                                                   | Description |
+| ------------- | ------------------------------------------------------ | ----------- |
+| `body`        | `AgentDefinitionSearchQuery`                           |             |
+| `consistency` | `ConsistencyOptions<AgentDefinitionSearchQueryResult>` |             |
+| `ct`          | `CancellationToken`                                    |             |
+
+**Returns:** `Task<AgentDefinitionSearchQueryResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchAgentDefinitionsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchAgentDefinitionsAsync(new AgentDefinitionSearchQuery
+    {
+        Filter = new AgentDefinitionFilter
+        {
+            AgentType = AgentDefinitionTypeEnum.AIAGENTTASK,
+        },
+        Page = new LimitPagination
+        {
+            Limit = 50,
+        },
+    });
+
+    foreach (var def in result.Items)
+    {
+        Console.WriteLine($"Agent definition: {def.AgentDefinitionKey}, name: {def.Name}, type: {def.AgentType}");
+    }
 }
 ```
 
@@ -1159,6 +1505,47 @@ public static async Task SyncRuntimeBackupStateExample()
 }
 ```
 
+#### TakeHistoryBackupAsync(TakeHistoryBackupRequest, CancellationToken)
+
+```csharp
+public Task<TakeHistoryBackupResponse> TakeHistoryBackupAsync(TakeHistoryBackupRequest body, CancellationToken ct = default)
+```
+
+Take a history backup
+
+Triggers a backup of the physical tenant's history, by scheduling a snapshot of every secondary storage index it owns.
+
+Unlike runtime backups, history backups have no generated-id mode: `backupId` is always required.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+| Parameter | Type                       | Description |
+| --------- | -------------------------- | ----------- |
+| `body`    | `TakeHistoryBackupRequest` |             |
+| `ct`      | `CancellationToken`        |             |
+
+**Returns:** `Task<TakeHistoryBackupResponse>`
+
+**Example**
+
+```csharp
+public static async Task TakeHistoryBackupExample(BackupId backupId)
+{
+    using var client = CamundaClient.Create();
+
+    // Backups are logically ordered by id, so each successive backup must use a
+    // higher id than the previous one.
+    var backup = await client.TakeHistoryBackupAsync(
+        new TakeHistoryBackupRequest { BackupId = backupId });
+
+    Console.WriteLine($"Scheduled history backup {backup.BackupId}");
+    foreach (var snapshot in backup.ScheduledSnapshots)
+    {
+        Console.WriteLine($"  {snapshot}");
+    }
+}
+```
+
 #### TakeRuntimeBackupAsync(TakeRuntimeBackupRequest, CancellationToken)
 
 ```csharp
@@ -1198,12 +1585,12 @@ public static async Task TakeRuntimeBackupExample(BackupId backupId)
 #### UpdateAgentInstanceAsync(AgentInstanceKey, AgentInstanceUpdateRequest, CancellationToken)
 
 ```csharp
-public Task UpdateAgentInstanceAsync(AgentInstanceKey agentInstanceKey, AgentInstanceUpdateRequest body, CancellationToken ct = default)
+public Task<AgentInstanceUpdateResult> UpdateAgentInstanceAsync(AgentInstanceKey agentInstanceKey, AgentInstanceUpdateRequest body, CancellationToken ct = default)
 ```
 
 Update agent instance
 
-Updates the mutable fields of an agent instance: status, metric counters, and tools. Metric values are treated as deltas and applied immediately to the aggregate counters. Tool updates replace the existing tool list.
+Updates the mutable fields of an agent instance (status, metric counters, and tools) and appends a batch of history items to its conversation history. Metric values are treated as deltas and applied immediately to the aggregate counters. Tool updates replace the existing tool list. Each history item created for this request is echoed back in the response.
 
 | Parameter          | Type                         | Description |
 | ------------------ | ---------------------------- | ----------- |
@@ -1211,7 +1598,7 @@ Updates the mutable fields of an agent instance: status, metric counters, and to
 | `body`             | `AgentInstanceUpdateRequest` |             |
 | `ct`               | `CancellationToken`          |             |
 
-**Returns:** `Task`
+**Returns:** `Task<AgentInstanceUpdateResult>`
 
 **Example**
 
@@ -1359,6 +1746,44 @@ public static async Task GetAuthenticationExample()
 
     var result = await client.GetAuthenticationAsync();
     Console.WriteLine($"Authenticated user: {result.Username}");
+}
+```
+
+#### GetClusterTopologyAsync(CancellationToken)
+
+```csharp
+public Task<ClusterTopologyResponse> GetClusterTopologyAsync(CancellationToken ct = default)
+```
+
+Get the topology of the whole cluster
+
+Obtains the topology of the whole cluster, aggregated over all physical tenants. Cluster-level information is reported once; partition layout, replication and per-partition role, health and state are reported per physical tenant.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/topology` for the topology of a single physical tenant.
+
+| Parameter | Type                | Description |
+| --------- | ------------------- | ----------- |
+| `ct`      | `CancellationToken` |             |
+
+**Returns:** `Task<ClusterTopologyResponse>`
+
+**Example**
+
+```csharp
+public static async Task GetClusterTopologyExample()
+{
+    using var client = CamundaClient.Create();
+
+    // Returns the topology of the whole cluster aggregated over all physical
+    // tenants. Requires cluster-admin credentials, not Orchestration Cluster
+    // user credentials. Use GetTopologyAsync for single-tenant topology.
+    var topology = await client.GetClusterTopologyAsync();
+
+    Console.WriteLine($"Cluster {topology.ClusterId}: {topology.ClusterSize} broker(s), gateway {topology.GatewayVersion}");
+    foreach (var tenant in topology.PhysicalTenants)
+    {
+        Console.WriteLine($"  Tenant {tenant.PhysicalTenantId}: {tenant.PartitionsCount} partition(s), replication {tenant.ReplicationFactor}");
+    }
 }
 ```
 
@@ -1525,7 +1950,9 @@ Deletes a deployed resource. This can be a process definition, decision requirem
 
 Once a resource has been deleted it cannot be recovered. If the resource needs to be available again, a new deployment of the resource is required.
 
-By default, only the resource itself is deleted from the runtime state. To also delete the historic data associated with a resource, set the `deleteHistory` flag in the request body to `true`. The historic data is deleted asynchronously via a batch operation. The details of the created batch operation are included in the response. Note that history deletion is only supported for process resources; for other resource types this flag is ignored and no history will be deleted.
+By default, only the resource itself is deleted from the runtime state. To also delete the historic data associated with a resource, set the `deleteHistory` flag in the request body to `true`. History deletion is supported for process definitions and decision requirements definitions; for other resource types (forms, generic resources) the flag is ignored and no history is deleted.
+
+The two supported types differ in how the history is removed. For a decision requirements definition the history is deleted asynchronously via a batch operation whose details are returned in the `batchOperation` field of the response. For a process definition the definition first drains its running instances and its history is deleted asynchronously once the definition is fully removed cluster-wide; no batch operation is returned in the response.
 
 | Parameter     | Type                    | Description |
 | ------------- | ----------------------- | ----------- |
@@ -5285,6 +5712,41 @@ public static async Task SearchAuthorizationsExample()
     using var client = CamundaClient.Create();
 
     var result = await client.SearchAuthorizationsAsync(
+        new AuthorizationSearchQuery());
+
+    foreach (var auth in result.Items)
+    {
+        Console.WriteLine($"Authorization: {auth.AuthorizationKey}");
+    }
+}
+```
+
+#### SearchOwnAuthorizationsAsync(AuthorizationSearchQuery, ConsistencyOptions\<AuthorizationSearchResult\>?, CancellationToken)
+
+```csharp
+public Task<AuthorizationSearchResult> SearchOwnAuthorizationsAsync(AuthorizationSearchQuery body, ConsistencyOptions<AuthorizationSearchResult>? consistency = null, CancellationToken ct = default)
+```
+
+Search own authorizations
+
+Search for the current authenticated principal's own authorization records — including authorizations granted directly to the user or client, as well as those granted via a group, role, or mapping rule the principal belongs to.
+
+| Parameter     | Type                                            | Description |
+| ------------- | ----------------------------------------------- | ----------- |
+| `body`        | `AuthorizationSearchQuery`                      |             |
+| `consistency` | `ConsistencyOptions<AuthorizationSearchResult>` |             |
+| `ct`          | `CancellationToken`                             |             |
+
+**Returns:** `Task<AuthorizationSearchResult>`
+
+**Example**
+
+```csharp
+public static async Task SearchOwnAuthorizationsExample()
+{
+    using var client = CamundaClient.Create();
+
+    var result = await client.SearchOwnAuthorizationsAsync(
         new AuthorizationSearchQuery());
 
     foreach (var auth in result.Items)

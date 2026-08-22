@@ -29,4 +29,16 @@ public static class ExportingExamples
     }
     // </ResumeExporting>
     #endregion ResumeExporting
+
+    #region GetExportingStatus
+    // <GetExportingStatus>
+    public static async Task GetExportingStatusExample()
+    {
+        using var client = CamundaClient.Create();
+
+        var result = await client.GetExportingStatusAsync();
+        Console.WriteLine($"Status: {result.Status}");
+    }
+    // </GetExportingStatus>
+    #endregion GetExportingStatus
 }

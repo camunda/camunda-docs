@@ -119,4 +119,68 @@ public static class BackupExamples
     }
     // </DeleteRuntimeBackupState>
     #endregion DeleteRuntimeBackupState
+
+    #region TakeHistoryBackup
+
+    // <TakeHistoryBackup>
+    public static async Task TakeHistoryBackupExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        // Backups are logically ordered by id, so each successive backup must use a
+        // higher id than the previous one.
+        var backup = await client.TakeHistoryBackupAsync(
+            new TakeHistoryBackupRequest { BackupId = backupId });
+
+        Console.WriteLine($"Scheduled history backup {backup.BackupId}");
+        foreach (var snapshot in backup.ScheduledSnapshots)
+        {
+            Console.WriteLine($"  {snapshot}");
+        }
+    }
+    // </TakeHistoryBackup>
+    #endregion TakeHistoryBackup
+
+    #region ListHistoryBackups
+
+    // <ListHistoryBackups>
+    public static async Task ListHistoryBackupsExample()
+    {
+        using var client = CamundaClient.Create();
+
+        // `prefix` must end in a single '*'. Omit it to list every history backup.
+        var backups = await client.ListHistoryBackupsAsync(
+            BackupIdPrefix.AssumeExists("10*"));
+
+        Console.WriteLine($"History backups: {backups}");
+    }
+    // </ListHistoryBackups>
+    #endregion ListHistoryBackups
+
+    #region GetHistoryBackup
+
+    // <GetHistoryBackup>
+    public static async Task GetHistoryBackupExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        var backup = await client.GetHistoryBackupAsync(backupId);
+
+        // The aggregated state is derived from the state of every expected snapshot.
+        Console.WriteLine($"History backup {backup.BackupId}: {backup.State}");
+    }
+    // </GetHistoryBackup>
+    #endregion GetHistoryBackup
+
+    #region DeleteHistoryBackup
+
+    // <DeleteHistoryBackup>
+    public static async Task DeleteHistoryBackupExample(BackupId backupId)
+    {
+        using var client = CamundaClient.Create();
+
+        await client.DeleteHistoryBackupAsync(backupId);
+    }
+    // </DeleteHistoryBackup>
+    #endregion DeleteHistoryBackup
 }
