@@ -43,7 +43,7 @@ camunda:
             priority: 10
 ```
 
-Zones are also operable at runtime. There is a new zones API on the management port for the operations you actually need during a regional incident — force-remove an unreachable zone, add it back, migrate an existing bare cluster into a zone-aware topology one zone at a time, or just reorder which zone is preferred:
+Zones are operable at runtime, too. There is a new zones API on the management port for the operations you actually need during a regional incident — force-remove an unreachable zone, add it back, migrate an existing bare cluster into a zone-aware topology one zone at a time, or just reorder which zone is preferred:
 
 ```bash
 # Prefer zone-b for partition leadership from now on
@@ -56,7 +56,7 @@ curl -X PUT 'http://localhost:9600/actuator/cluster/partition-distribution' \
 curl -X DELETE 'http://localhost:9600/actuator/cluster/zones/zone-a'
 ```
 
-Scaling is zone-aware too — the broker count is now scoped to one zone, so you grow a single zone rather than the whole cluster:
+Scaling became zone-aware as well — broker count is now scoped to a zone, so you grow one zone rather than the whole cluster:
 
 ```bash
 curl -X PATCH 'http://localhost:9600/actuator/cluster' \
@@ -65,6 +65,12 @@ curl -X PATCH 'http://localhost:9600/actuator/cluster' \
 ```
 
 Every one of these accepts `dryRun=true` and returns the change plan without touching the cluster.
+
+### Zone awareness on ECS
+
+The dynamic node ID provider — brokers leasing their node ID from an S3 bucket, because ECS tasks have no stable ordinal the way StatefulSet pods do — landed in 8.9. What 8.10 adds is **zone awareness inside it**: leases and member IDs now carry the broker's zone, and the provider recognises zone-aware members when it hands an ID back to a replacement task.
+
+That is what makes **dual-region ECS** a supported topology rather than a single-region one, and there is now a Terraform reference architecture to go with it.
 
 ---
 
@@ -126,57 +132,7 @@ curl -X POST 'http://localhost:8080/v2/restore' \
 
 ---
 
-## 3. Backups became a first-class part of the Orchestration Cluster API
-
-Backup management used to live on the management port as an actuator: convenient for an operator with cluster access, awkward for anything else, and outside the product's authorization model.
-
-In 8.10 backups are proper `/v2` endpoints on the Orchestration Cluster REST API, authenticated like the rest of the API and gated by `BACKUP` resource permissions — `CREATE` to take one, `READ` to list, `DELETE` to remove, `RESTORE` to restore.
-
-```bash
-# Take a runtime backup
-curl -X POST 'http://localhost:8080/v2/backups/runtime' \
-  -H 'Content-Type: application/json' \
-  -d '{ "backupId": 1748937221 }'
-# → 202 { "backupId": 1748937221 }
-
-# List backups, filtered by id prefix, newest first
-curl 'http://localhost:8080/v2/backups/runtime?prefix=17489*'
-```
-
-The listing aggregates per-partition state into one answer — `COMPLETED` only when every partition is complete, `INCOMPLETE` when a partition is missing, `FAILED` with a reason if one failed — and still hands you the per-partition detail underneath. History backups get the same treatment under `/v2/backups/history`.
-
-Underneath the API, backup state moved from marker files to RocksDB column families, which is why 8.10 can also expose the runtime backup state directly, plus escape hatches to force a resync or reset it (`/v2/backups/runtime/state`, `/state/sync`) when the store and the cluster's view of it disagree.
-
----
-
-## 4. Backup stores that hold up under load
-
-The API is only half of it. Backup stores got a round of hardening across all four implementations — S3, GCS, Azure, and filesystem:
-
-- **Connections are verified at startup**, not on the first backup at 3 a.m.
-- **Read and write timeouts** are configurable, so one slow object can't hold a backup hostage.
-- **Batch deletion** on S3, GCS, and Azure — deleting an old backup is now a handful of requests instead of one per object.
-- **Parallel segment and snapshot upload** on Azure, and GCS listing that interleaves listing with downloading and reads object metadata instead of fetching contents.
-- **SSE-C support on S3**: you supply the encryption key, S3 never stores it.
-
-```yaml
-camunda:
-  data:
-    primary-storage:
-      backup:
-        store: S3
-        read-timeout: 30s
-        write-timeout: 60s
-        s3:
-          bucket-name: camunda-backups
-          # base64-encoded 32-byte AES-256 key; the same key must be set
-          # on every broker. S3 cannot decrypt these objects without it.
-          ssec-key: ${BACKUP_SSEC_KEY}
-```
-
----
-
-## 5. Coordinated leadership transfer, and a rebalance API to drive it
+## 3. Coordinated leadership transfer, and a rebalance API to drive it
 
 Rebalancing leadership used to be optimistic: the leader stepped down and an election decided the rest. Usually fine. Occasionally the replica that won was the one furthest behind, and the partition spent the next while catching up instead of serving.
 
@@ -213,90 +169,87 @@ camunda:
         leader-wait-timeout: 1m # wait for a leaderless partition
 ```
 
-There is matching telemetry: `zeebe.raft.replication.lag.bytes` per follower, and `zeebe.cluster.rebalance.elapsed`, `zeebe.cluster.rebalance.partition.duration`, and `zeebe.cluster.rebalance.partition.state` for the rebalance itself.
-
 ---
 
-## 6. Pausing exporting is now a cluster decision
+## 4. Physical tenants: dedicated Raft groups on shared brokers
 
-Pausing exporters is a prerequisite for a consistent backup, and it used to be a per-broker actuator call backed by a local file. Two failure modes followed from that: the pause could be applied unevenly across replicas, and the local state could drift from what the cluster believed after a restart.
+Physical tenants are 8.10's strong-isolation tenancy model — one Orchestration Cluster, several tenants, each with its own execution and storage boundary. It is a cross-team feature; the part we built is the one the isolation actually rests on: **each physical tenant gets its own Raft groups**, running on the same shared brokers.
 
-In 8.10, exporting state lives in the dynamic cluster configuration. Pause and resume are cluster configuration changes applied to every replica of every partition, and the status endpoint is honest about the in-between:
+That sounds like a small statement and was not a small change. Almost every cluster-level concept in Zeebe assumed exactly one of itself:
 
-```bash
-# Soft pause: exporting keeps running, but its position is not committed —
-# so the log is not compacted, and the state after resuming is identical
-# to a hard pause. This is the one you want during a backup.
-curl -X POST 'http://localhost:8080/v2/exporting/pause?soft=true'
+- **Cluster configuration** went from a single partition distribution, routing state, and exporter state to one **partition group per tenant**, each with its own. This is the piece that makes the rest possible.
+- **Transport** subscribes per partition group, and requests carry the group they are destined for, so a request lands on the right tenant's partition rather than the right partition number. Job streams register and route per tenant too.
+- **Backups, exporter state, and metrics** are per tenant — every partition-scoped meter registry now carries the physical tenant ID, so a dashboard can separate them.
+- **Cluster-wide operations fan out.** Adding or removing a broker, changing the replication factor, migrating a zone or force-removing one applies to every tenant as a single change. Partition-count scaling is the exception that scopes to one tenant — and even then placement considers every tenant's partitions at once, so scaling one tenant doesn't pile partitions onto brokers already busy with another.
 
-curl 'http://localhost:8080/v2/exporting'
-# → { "status": "SOFT_PAUSED" }   # or EXPORTING | PAUSED | MIXED
-
-curl -X POST 'http://localhost:8080/v2/exporting/resume'
-```
-
-`MIXED` means a pause or resume is still in flight or only partially applied. Backup tooling should treat only `PAUSED` and `SOFT_PAUSED` as a confirmed pause — which is exactly the guarantee the old file-based state couldn't give you.
-
----
-
-## 7. The cluster configuration model behind physical tenants
-
-Physical tenants — strong isolation between tenants inside a single Orchestration Cluster — is a cross-team feature. Our share of it was rebuilding cluster configuration around **multiple partition groups**.
-
-Before, a cluster had one partition distribution, one routing state, one exporter state. Now each physical tenant is its own partition group with its own distribution, routing state, exporter state, backups, and metrics, and cluster-wide operations fan out across all of them: adding or removing a broker, changing the replication factor, migrating a zone, or force-removing one applies to every physical tenant as a single change. Configuration operations, in turn, can be scoped to one tenant.
-
-This came with a new applier layer, phased change plans that can run as a dependency graph, and concurrent independently-cancellable plans — plus dual-write gossip and a versioned on-disk format, so a cluster running the legacy single-group model rolls forward to the new one without downtime.
-
-```bash
-# Cluster state, now reported per physical tenant
-curl 'http://localhost:9600/actuator/cluster'
-
-# Scale one tenant's partitions. Placement still considers every tenant's
-# partitions at once, so scaling `acme` doesn't overload brokers already
-# busy with someone else's.
-curl -X PATCH 'http://localhost:9600/actuator/cluster?physicalTenant=acme' \
-  -H 'Content-Type: application/json' \
-  -d '{ "partitions": { "count": 6 } }'
-
-# Each tenant's API is addressable under its own prefix
-curl 'http://localhost:8080/physical-tenants/acme/v2/topology'
-```
-
----
-
-## 8. Camunda on Amazon ECS, including dual-region
-
-Kubernetes gives brokers stable ordinal identities for free; a StatefulSet pod is always `broker-2`. ECS tasks aren't like that — they come and go with no stable index — which is why running Zeebe there has been awkward.
-
-8.10 adds a **dynamic node ID provider**. Brokers lease their node ID from an S3 bucket, renewing the lease while they run. If a task dies, its lease expires and the replacement takes the same ID and data directory back. If the lease expired long enough ago that the previous task is certainly gone, the new one skips copying the old data directory entirely — a real startup saving.
+Tenants are configured statically and provisioned by rolling restart, with root-level `camunda.*` as the shared default and per-tenant overrides on top:
 
 ```yaml
 camunda:
-  cluster:
-    zone: eu-west-1
-    node-id-provider:
-      type: s3
-      s3:
-        bucket-name: camunda-node-id-leases
-        lease-duration: 30s
-        # if a lease expired more than this ago, treat the previous node
-        # as gracefully shut down and skip the data directory copy
-        expired-lease-threshold: 2m
-        readiness-check-timeout: 2m
+  physical-tenants:
+    default:
+      cluster:
+        partitions-count: 3
+    tenanta:
+      cluster:
+        partitions-count: 3
+      data:
+        secondary-storage:
+          rdbms:
+            url: jdbc:postgresql://db/tenanta
+      security:
+        authentication:
+          providers:
+            assigned:
+              - my-idp
 ```
 
-The task ID is resolved automatically from the ECS task metadata endpoint. Combined with zone awareness, this makes a **dual-region ECS deployment** a supported topology, with a Terraform reference architecture to go with it.
+At the API, tenant-scoped requests get their own prefix, and cluster-wide operations get theirs:
+
+```bash
+# Is this tenant able to accept work, and which partitions are available?
+curl 'http://localhost:8080/physical-tenants/tenanta/v2/topology'
+
+# Scale one tenant's partitions
+curl -X PATCH 'http://localhost:9600/actuator/cluster?physicalTenant=tenanta' \
+  -H 'Content-Type: application/json' \
+  -d '{ "partitions": { "count": 6 } }'
+```
+
+Existing 8.9 clusters keep working: plain `/v2/...` routes to the `default` tenant, and root-level configuration becomes that tenant's configuration with no migration step. Internally, the cluster gossips both the old single-group model and the new multi-group one during the transition, and the on-disk format is versioned with a v1 → v2 migration — so moving to the new model is a rolling upgrade, not a stop-the-world one.
 
 ---
 
-## 9. Performance and resilience, the unglamorous half
+## 5. Performance, observability, and resilience
 
-A grab bag of work that doesn't get its own headline but shows up in latency graphs and incident counts:
+Not one headline, but the half of the work that shows up in latency graphs and incident counts.
 
-- **Flow control** replaced a `ConcurrentSkipListMap` with a ring buffer sized from the request limiter config, and the sequencer now publishes lock contention metrics and percentiles directly.
-- **Snapshots** flush once per file instead of repeatedly, chunk the first file like every other, avoid a heap copy when reading chunks, and persist total snapshot size in the metadata.
-- **Log stream reads** no longer deserialize `RecordMetadata` just to filter records out.
-- **Recoverable retries** are now configurable and default to 1000 instead of 100 — the old limit turned a long-but-recoverable stall into a partition restart:
+### Seeing inside replication and the write path
+
+Two things we have wanted for a long time and could only estimate before:
+
+- **Per-follower replication lag**, in bytes, as `zeebe.raft.replication.lag.bytes`. It covers pending and in-flight log appends _and_ pending snapshot replication, tracked through a monotonic watermark of bytes sent per follower so unacknowledged appends and stale callbacks both account correctly. This is also what the coordinated leadership transfer in section 3 checks before it commits to a handover.
+- **Sequencer lock contention**, as `zeebe.sequencer.lock.hold.time` (labeled by writer) and `zeebe.sequencer.lock.wait.time` (labeled by the holder that blocked you). When the stream processor, scheduled jobs, and inter-partition commands compete for the log, you can now see _which_ writer is holding things up rather than inferring it. Percentiles are exported directly, and the metrics are recorded outside the critical section so measuring contention doesn't add to it.
+
+### Snapshot replication
+
+Snapshot replication got a round of I/O work:
+
+- Chunks are read into direct `ByteBuffer`s instead of being materialized as `byte[]` and wrapped — no heap copy on the sender path.
+- The receiver **flushes once per file** instead of once per chunk. Small chunks made fsyncs the dominant cost; flushing at the end is enough, since a restart discards a partially received snapshot anyway.
+- The first snapshot file is now **chunked like every other file**. It used to be sent as one big chunk purely as a backwards-compatibility probe; every receiver has supported partial file chunks for a while, so that is gone.
+- Total snapshot size is persisted in the snapshot metadata, which is what makes the snapshot half of the replication-lag metric possible.
+
+### Backpressure that fires when it should
+
+Two fixes in the same area, both of which cost real availability:
+
+- **Spurious backpressure after every leader transition.** `FlowControl` is recreated on each transition and seeded `lastExportedPosition` to `0` rather than the `-1` sentinel. Until the exporter exported its first record, the computed backlog was the partition's _entire_ written position — billions on a long-lived partition — so the throttle clamped the write rate to its minimum and briefly rejected user commands with `RESOURCE_EXHAUSTED` after every failover.
+- **Write retries in a hot loop.** The `ProcessingStateMachine` retried failed log writes by re-inserting the retry job at the head of the actor's queue. Under write backpressure that burned a core and starved everything else on the stream processor actor — health ticks, pause/resume, position queries. Retries now schedule as actor timers with exponential backoff (1 ms doubling to 100 ms), so the actor stays responsive while it waits, and deterministic failures like `INVALID_ARGUMENT` escalate to real error handling instead of being retried forever.
+
+### Failing later, and on purpose
+
+- **Recoverable retries are configurable**, and the default went from 100 to 1000. The old limit turned a long-but-recoverable stall into a partition restart:
 
   ```yaml
   camunda:
@@ -305,23 +258,21 @@ A grab bag of work that doesn't get its own headline but shows up in latency gra
       max-recoverable-retries: 1000
   ```
 
-- **Record skipping is per partition.** When a single record blocks exporting, you can skip it precisely instead of cluster-wide:
+- Retry strategies in general gained a **maximum retry limit** with a dedicated `RetryLimitExceededException`, so an endless retry loop is now a bounded, diagnosable failure rather than a silent hang — and the logs it produces are throttled instead of flooding.
+- **RocksDB memory is validated at startup.** A cache configured larger than the machine's RAM now fails fast with a clear message instead of being discovered by the OOM killer.
 
-  ```yaml
-  camunda:
-    data:
-      export:
-        # partition id → record positions to skip
-        skip-records:
-          3: 4294967296, 4294967300
-  ```
+### Fewer sharp edges
 
-  (Recovery tool, not a config knob. Use it to get unstuck, then remove it.)
+- Broker errors and rejections are no longer wrapped as exceptions before completing the request future. A rejection is a normal broker response, and the future-based broker client now completes with one — exceptional paths are reserved for genuine transport, timeout, and parsing failures.
+- The per-tenant partition distribution is scanned once per placement request instead of twice.
+- Journal appends are guarded, and closing a `SegmentedJournal` no longer unmaps segments out from under an in-progress read.
+- `zeebe/journal`, `zeebe/snapshot`, `zeebe/scheduler`, `zeebe/transport`, and `zeebe/logstreams` are now `@NullMarked` with NullAway enforcing it in the build — a large share of the NPE class of bug is now a compile error in the modules where an NPE is most expensive.
+- Agrona 2.0.
 
 ---
 
 ## Wrapping up
 
-The through-line for 8.10 is that the cluster is now something you operate through an API. Reshape it across zones, move leadership deliberately instead of hoping an election goes your way, pause exporting with a guarantee behind it, and restore it in place without touching the deployment. The clusters that need these operations most are the ones you least want to hand-edit.
+The through-line for 8.10 is that the cluster is now something you operate through an API. Reshape it across zones, move leadership deliberately instead of hoping an election goes your way, isolate tenants down to their own Raft groups, and restore it in place without touching the deployment. The clusters that need these operations most are the ones you least want to hand-edit.
 
-If you want to go deeper, the reference material lives in the Camunda 8.10 docs: [zone-aware clusters](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters/), [cluster mode](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/operations/modes/), and [in-process restore](https://docs.camunda.io/docs/self-managed/operational-guides/backup-restore/in-process-restore/).
+If you want to go deeper, the reference material lives in the Camunda 8.10 docs: [zone-aware clusters](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters/), [cluster mode](https://docs.camunda.io/docs/self-managed/components/orchestration-cluster/zeebe/operations/modes/), [in-process restore](https://docs.camunda.io/docs/self-managed/operational-guides/backup-restore/in-process-restore/), and the [physical tenant isolation model](https://docs.camunda.io/docs/self-managed/concepts/physical-tenants/).
