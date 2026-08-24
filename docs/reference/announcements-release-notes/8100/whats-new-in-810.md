@@ -52,11 +52,7 @@ New SaaS clusters include a default `business_` variable include filter, which l
 
 ### Authentication moves to the Camunda Security Library
 
-Optimize now authenticates through the Camunda Security Library (CSL) instead of its own stateless JWT-cookie stack. A standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and Optimize now validates the login `id_token`'s issuer and audience, which it did not in 8.9.
-
-:::warning Check your OIDC configuration before upgrading
-A mismatched issuer or audience that happened to work on 8.9 fails to log in on 8.10. This is the most likely upgrade breakage for OIDC deployments running Optimize.
-:::
+Optimize now authenticates through the Camunda Security Library (CSL) instead of its own stateless JWT-cookie stack. A standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and Optimize validates the login `id_token`'s issuer and audience against your configuration.
 
 The legacy `CAMUNDA_OPTIMIZE_IDENTITY_*` and `CAMUNDA_OPTIMIZE_AUTH0_*` configuration keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback.
 

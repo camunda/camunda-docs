@@ -580,11 +580,9 @@ Web Modeler change 1 description.
 
 #### Optimize authentication moves to the Camunda Security Library
 
-Starting with Camunda 8.10, Optimize authenticates through the Camunda Security Library (CSL) instead of its own stateless JWT-cookie stack: a standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and the login `id_token`'s issuer and audience are now validated (Camunda 8.9 did not validate these).
+Starting with Camunda 8.10, Optimize authenticates through the Camunda Security Library (CSL) instead of its own stateless JWT-cookie stack: a standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and the login `id_token`'s issuer and audience are validated against your configuration.
 
-A deployment with a mismatched issuer or audience that happened to work on 8.9 fails to log in on 8.10. This is the most likely upgrade breakage for OIDC deployments.
-
-**Action:** Before upgrading, confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the full authentication model change and API-consumer behavior changes (CSRF, bearer tokens on the internal API).
+**Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the full authentication model change and API-consumer behavior changes (CSRF, bearer tokens on the internal API).
 
 <p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
