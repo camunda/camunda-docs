@@ -37,11 +37,11 @@ In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process 
 Example:
 
 ```shell
-PATCH /api/v1/folders/{folderId}  # must be a folder, not a process application
+PATCH /api/v1/folders/f169a3d4-056b-463c-b4c9-6c3600c2213a  # must be a folder, not a process application
 {
-  "name": "string",
-  "projectId": "string",
-  "parentId": "string"  # must be a folder, not a process application
+  "name": "Root folder",
+  "projectId": "58a93bf7-4ea0-4e56-85fa-5c8fccc3877d",
+  "parentId": "1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676"  # must be a folder, not a process application
 }
 ```
 
@@ -60,19 +60,19 @@ Example:
 
 ```json
 {
-  "id": "string",
-  "name": "string",
-  "projectId": "string",
-  "parentId": "string", // null if the parent container is a process application
-  "created": "string",
-  "updated": "string",
+  "id": "f169a3d4-056b-463c-b4c9-6c3600c2213a",
+  "name": "Root folder",
+  "projectId": "58a93bf7-4ea0-4e56-85fa-5c8fccc3877d",
+  "parentId": null, // null if the parent container is a process application
+  "created": "2026-08-24T14:17:33.889317Z",
+  "updated": "2026-08-24T14:23:48.371161659Z",
   "createdBy": {
-    "name": "string",
-    "email": "string"
+    "name": "Jane Doe",
+    "email": "jane.doe@email.com"
   },
   "updatedBy": {
-    "name": "string",
-    "email": "string"
+    "name": "Jane Doe",
+    "email": "jane.doe@email.com"
   }
 }
 ```
@@ -94,11 +94,11 @@ In files API requests, you'll receive a `404 NOT FOUND` if you pass a process ap
 ```shell
 POST /api/v1/files
 {
-  "name": "string",
-  "folderId": "string",  # must be a folder, not a process application
-  "projectId": "string",
-  "content": "string",
-  "fileType": "string"
+  "name": "New BPMN diagram",
+  "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",  # must be a folder, not a process application
+  "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+  "content": "...",
+  "fileType": "BPMN"
 }
 ```
 
@@ -113,32 +113,23 @@ Example:
 
 ```json
 {
-  "metadata": {
-    "id": "string",
-    "name": "string",
-    "projectId": "string",
-    "folderId": "string", // null if the parent container is a process application
-    "simplePath": "string",
-    "canonicalPath": [
-      {
-        "id": "string",
-        "name": "string"
-      }
-    ],
-    "revision": 0,
-    "type": "string",
-    "created": "string",
-    "createdBy": {
-      "name": "string",
-      "email": "string"
-    },
-    "updated": "string",
-    "updatedBy": {
-      "name": "string",
-      "email": "string"
-    }
+  "id": "5cafbf6a-d5d8-4ed2-8dae-b950ce3597c3",
+  "name": "New BPMN diagram",
+  "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+  "folderId": null, // null if the parent container is a process application
+  "simplePath": "New BPMN diagram.bpmn",
+  "canonicalPath": [],
+  "revision": 2,
+  "type": "BPMN",
+  "created": "2026-08-24T14:39:09.203957484Z",
+  "createdBy": {
+    "name": "Jane Doe",
+    "email": "jane.doe@email.com"
   },
-  "content": "string"
+  "updatedBy": {
+    "name": "Jane Doe",
+    "email": "jane.doe@email.com"
+  }
 }
 ```
 
@@ -158,32 +149,32 @@ Example:
 ```json
 {
   "metadata": {
-    "id": "string",
-    "name": "string",
-    "projectId": "string",
-    "folderId": "string",
-    "simplePath": "string", // excludes process applications
+    "id": "ed043868-556f-4a93-97dc-3cba1652363c",
+    "name": "New BPMN diagram",
+    "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+    "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+    "simplePath": "Root folder/New BPMN diagram.bpmn", // excludes process applications
     "canonicalPath": [
       // excludes process applications
       {
-        "id": "string",
-        "name": "string"
+        "id": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "name": "Root folder"
       }
     ],
-    "revision": 0,
-    "type": "string",
-    "created": "string",
+    "revision": 2,
+    "type": "BPMN",
+    "created": "2026-08-24T14:38:16.040437Z",
+    "created": "2026-08-24T14:39:09.203957484Z",
     "createdBy": {
-      "name": "string",
-      "email": "string"
+      "name": "Jane Doe",
+      "email": "jane.doe@email.com"
     },
-    "updated": "string",
     "updatedBy": {
-      "name": "string",
-      "email": "string"
+      "name": "Jane Doe",
+      "email": "jane.doe@email.com"
     }
   },
-  "content": "string"
+  "content": "..."
 }
 ```
 
@@ -207,62 +198,79 @@ Example:
 ```json
 {
   "metadata": {
-    "id": "string",
-    "name": "string",
-    "created": "string",
+    "id": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+    "name": "Project",
+    "created": "2026-08-24T14:17:12.930231Z",
     "createdBy": {
-      "name": "string",
-      "email": "string"
+      "name": "Jane Doe",
+      "email": "jane.doe@email.com"
     },
-    "updated": "string",
     "updatedBy": {
-      "name": "string",
-      "email": "string"
+      "name": "Jane Doe",
+      "email": "jane.doe@email.com"
     }
   },
   "content": {
     "folders": [
       {
-        "id": "string",
-        "name": "string",
-        "projectId": "string",
-        "parentId": "string", // null if the parent container is a process application
-        "created": "string",
-        "updated": "string",
+        "id": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "name": "Root folder",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+        "parentId": null, // null if the parent container is a process application
+        "created": "2026-08-24T14:37:04.36503Z",
+        "updated": "2026-08-24T14:37:07.470563Z",
         "createdBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         },
         "updatedBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         }
       }
     ],
     "files": [
       {
-        "id": "string",
-        "name": "string",
-        "projectId": "string",
-        "folderId": "string", // null if the parent container is a process application
-        "simplePath": "string",
+        "id": "5a6aa24f-844b-4da2-9118-007f5c1a2df7",
+        "name": "Root file",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+        "folderId": null, // null if the parent container is a process application
+        "simplePath": "Root file.bpmn",
+        "canonicalPath": [],
+        "revision": 2,
+        "type": "BPMN",
+        "created": "2026-08-24T14:17:25.875789Z",
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
+      },
+      {
+        "id": "ed043868-556f-4a93-97dc-3cba1652363c",
+        "name": "Nested file",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+        "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "simplePath": "Root folder/Nested file.bpmn",
         "canonicalPath": [
           {
-            "id": "string",
-            "name": "string"
+            "id": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+            "name": "Root folder"
           }
         ],
-        "revision": 0,
-        "type": "string",
-        "created": "string",
+        "revision": 3,
+        "type": "BPMN",
+        "created": "2026-08-24T14:38:16.040437Z",
         "createdBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         },
-        "updated": "string",
         "updatedBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         }
       }
     ]
@@ -279,63 +287,80 @@ Example:
 ```json
 {
   "metadata": {
-    "id": "string",
-    "name": "string",
-    "created": "string",
+    "id": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+    "name": "Project",
+    "created": "2026-08-24T14:17:12.930231Z",
     "createdBy": {
-      "name": "string",
-      "email": "string"
+      "name": "Jane Doe",
+      "email": "jane.doe@email.com"
     },
-    "updated": "string",
     "updatedBy": {
-      "name": "string",
-      "email": "string"
+      "name": "Jane Doe",
+      "email": "jane.doe@email.com"
     }
   },
   "content": {
     "folders": [
       {
-        "id": "string",
-        "name": "string",
-        "projectId": "string",
-        "parentId": "string",
-        "created": "string",
-        "updated": "string",
+        "id": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "name": "Root folder",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+        "parentId": null,
+        "created": "2026-08-24T14:37:04.36503Z",
+        "updated": "2026-08-24T14:37:07.470563Z",
         "createdBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         },
         "updatedBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         }
       }
     ],
     "files": [
       {
-        "id": "string",
-        "name": "string",
-        "projectId": "string",
-        "folderId": "string",
-        "simplePath": "string", // excludes process applications
+        "id": "5a6aa24f-844b-4da2-9118-007f5c1a2df7",
+        "name": "Root file",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+        "folderId": null,
+        "simplePath": "Root file.bpmn", // excludes process applications
+        "canonicalPath": [], // excludes process applications
+        "revision": 2,
+        "type": "BPMN",
+        "created": "2026-08-24T14:17:25.875789Z",
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
+      },
+      {
+        "id": "ed043868-556f-4a93-97dc-3cba1652363c",
+        "name": "Nested file",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+        "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "simplePath": "Root folder/Nested file.bpmn", // excludes process applications
         "canonicalPath": [
           // excludes process applications
           {
-            "id": "string",
-            "name": "string"
+            "id": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+            "name": "Root folder"
           }
         ],
-        "revision": 0,
-        "type": "string",
-        "created": "string",
+        "revision": 3,
+        "type": "BPMN",
+        "created": "2026-08-24T14:38:16.040437Z",
         "createdBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         },
-        "updated": "string",
         "updatedBy": {
-          "name": "string",
-          "email": "string"
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
         }
       }
     ]
