@@ -6,11 +6,11 @@ description: "A user task is used to model work that needs to be done by a human
 
 A user task is used to model work that needs to be done by a human and is assisted by a workflow engine or software application. This differs from [manual tasks](/components/modeler/bpmn/manual-tasks/manual-tasks.md), which are not assisted by external tooling.
 
-Inside an ad-hoc sub-process, a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [designing agent orchestration workflows](/components/agentic-orchestration/design-architecture.md#design-agent-orchestration-workflows) for this pattern.
-
 When the process instance arrives at a user task, a new user task instance is created at Zeebe.
 The process instance stops at this point and waits until the user task instance is completed.
 When the user task instance is completed, the process instance continues.
+
+Inside an ad-hoc sub-process, a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [designing agent orchestration workflows](/components/agentic-orchestration/design-architecture.md#design-agent-orchestration-workflows) for this pattern.
 
 ![user-task](assets/user-task.png)
 

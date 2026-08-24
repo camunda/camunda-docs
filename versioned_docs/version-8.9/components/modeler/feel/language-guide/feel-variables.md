@@ -12,8 +12,6 @@ Learn how to access variables, follow valid variable naming rules, and safely us
 
 Access the value of a variable by its [variable name](#variable-names).
 
-In an [AI agent](/reference/glossary.md#ai-agent) tool definition, the `toolCall` variable holds the parameters an LLM supplies at runtime. Reference them as `toolCall.<parameterName>` inside [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue).
-
 FEEL doesn't use a separate assignment operator to create or update process variables. Instead, FEEL evaluates variables that are already available in the current context, or you can define local values with [context entries](/components/modeler/feel/language-guide/feel-context-expressions.md).
 
 ```feel
@@ -25,6 +23,8 @@ If the value of the variable is a context, a [context entry can be accessed](/co
 ```feel
 a.b
 ```
+
+In an [AI agent](/reference/glossary.md#ai-agent) tool definition, for example, the `toolCall` variable is a context whose entries hold the parameters an LLM supplies at runtime. Reference them the same way, as `toolCall.<parameterName>`, inside [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue).
 
 If no variable exists with the given name, the expression returns `null`.
 
