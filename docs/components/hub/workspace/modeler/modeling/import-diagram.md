@@ -10,7 +10,7 @@ Upload a BPMN diagram, DMN diagram, or any other supported file to a modeling pr
 - In a project, drag one file from your computer and drop it.
 
 :::note
-For the two options below, the content of the file is replaced with the content of the file.
+For the two options below, the content of the existing file is replaced with the content of the uploaded file.
 :::
 
 - Open an existing file in the modeler. In the top navigation next to the filename, open the menu, and choose **Replace via upload**. Then, select a file from your computer.
