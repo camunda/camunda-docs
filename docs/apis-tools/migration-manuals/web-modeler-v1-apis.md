@@ -347,7 +347,7 @@ Example:
 
 ### Version individual process application files
 
-With `POST /api/v1/versions`, you can now publish a new version for process application files. Previously, this endpoint returned a `400 BAD REQUEST` because files were intended to be versioned as part of the process application. See [process application versioning model](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) for a deeper explanation of this change.
+With `POST /api/v1/versions`, you can now publish a new version for process application files. Previously, this endpoint returned a `400 BAD REQUEST` because files were intended to be versioned as part of the process application. See [process application versioning model](/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) for a deeper explanation of this change.
 
 :::note
 When versioning a connector template, you may now receive a `409 CONFLICT` citing a version number you never published.
