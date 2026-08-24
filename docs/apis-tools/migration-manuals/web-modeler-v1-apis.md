@@ -1,7 +1,7 @@
 ---
 id: web-modeler-v1-apis
-title: "Changes to Web Modeler API v1"
-description: "Learn about the changes to Web Modeler v1 for SaaS deployments."
+title: "Process application management in Web Modeler API v1"
+description: "Learn about changes to process application management in Web Modeler API v1."
 ---
 
 import PageDescription from '@site/src/components/PageDescription';
