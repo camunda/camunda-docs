@@ -24,7 +24,7 @@ If the value of the variable is a context, a [context entry can be accessed](/co
 a.b
 ```
 
-In an [AI agent](/reference/glossary.md#ai-agent) tool definition, for example, the `toolCall` variable is a context whose entries hold the parameters an LLM supplies at runtime. Reference them the same way, as `toolCall.<parameterName>`, inside [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue).
+For example, in an [AI agent](/reference/glossary.md#ai-agent) tool definition, the `toolCall` variable is a context holding the parameters an LLM supplies at runtime. See [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) for how tool parameters are declared.
 
 If no variable exists with the given name, the expression returns `null`.
 

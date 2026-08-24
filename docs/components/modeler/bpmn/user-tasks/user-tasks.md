@@ -10,9 +10,9 @@ When the process instance arrives at a user task, a new user task instance is cr
 The process instance stops at this point and waits until the user task instance is completed.
 When the user task instance is completed, the process instance continues.
 
-Inside an ad-hoc sub-process, a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [designing agent orchestration workflows](/components/agentic-orchestration/design-architecture.md#design-agent-orchestration-workflows) for this pattern.
-
 ![user-task](assets/user-task.png)
+
+Inside an ad-hoc sub-process, a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [designing agent orchestration workflows](/components/agentic-orchestration/design-architecture.md#design-agent-orchestration-workflows) for this pattern.
 
 ## User task implementation types
 
