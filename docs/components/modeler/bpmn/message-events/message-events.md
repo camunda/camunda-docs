@@ -47,6 +47,8 @@ You do not specify a `correlationKey` for a message start event in the BPMN mode
 
 When an intermediate message catch event is entered, a corresponding message subscription is created. The process instance stops at this point and waits until the message is correlated. When a message is correlated, the catch event is completed and the process instance continues.
 
+Inside an ad-hoc sub-process, an intermediate message catch event can also serve as an [AI agent](/reference/glossary.md#ai-agent) tool, for example to model a step where the agent sends a message and waits for a reply. See [message catch events as tools](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#message-catch-events-as-tools) for the unique-correlation-key requirement that pattern needs.
+
 :::note
 An alternative to intermediate message catch events is a [receive task](../receive-tasks/receive-tasks.md), which behaves the same but can be used together with boundary events.
 :::
