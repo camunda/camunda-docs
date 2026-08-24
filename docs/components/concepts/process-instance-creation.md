@@ -190,7 +190,7 @@ A process can also have one or more [timer start events](/components/modeler/bpm
 
 ## FEEL context variables
 
-Starting in 8.10, the process instance is accessible in [FEEL expressions](/components/concepts/expressions.md) via the `camunda.processInstance` context, resolvable in any FEEL expression across the process:
+Starting in 8.10, the process instance properties are accessible in [FEEL expressions](/components/concepts/expressions.md) via the `camunda.processInstance` context, resolvable in any FEEL expression across the process:
 
 - `camunda.processInstance.key` — the process instance's system-generated key.
 - `camunda.processInstance.businessId` — the process instance's [business ID](#business-id), or `null` if none is set.

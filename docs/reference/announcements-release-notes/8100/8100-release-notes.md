@@ -148,7 +148,7 @@ Business ID is now visible in Operate for decision instances, in both the decisi
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-The process instance is now accessible in FEEL expressions via the `camunda.processInstance` context, resolvable anywhere in the process — not only in call activity expressions. `camunda.processInstance.key` returns the process instance's system-generated key, and `camunda.processInstance.businessId` returns its business ID (or `null` if none is set).
+The process instance properties are now accessible in FEEL expressions via the `camunda.processInstance` context, resolvable anywhere in the process. `camunda.processInstance.key` returns the process instance's system-generated key, and `camunda.processInstance.businessId` returns its business ID (or `null` if none is set).
 
 <p class="link-arrow">[FEEL context variables](/components/concepts/process-instance-creation.md#feel-context-variables)</p>
 
