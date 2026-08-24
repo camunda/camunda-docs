@@ -13,7 +13,7 @@ Use this guide to confirm upgrade eligibility, understand platform-level changes
 
 All Camunda upgrades must follow the required upgrade procedure: upgrade to the latest patch of your current minor first, then upgrade one minor version at a time without skipping minors. Skipping a minor version fails the schema compatibility check and blocks startup. Upgrading to the latest patch of each minor is strongly recommended for fix coverage, but the check itself compares minor versions.
 
-See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure).
+See [version compatibility checks](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#required-upgrade-procedure) and [supported upgrade paths](../components/orchestration-cluster/core-settings/concepts/version-compatibility.md#supported-upgrade-paths).
 
 ## Evaluate your current environment
 

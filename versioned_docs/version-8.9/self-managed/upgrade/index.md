@@ -76,10 +76,9 @@ Learn about new features, breaking changes, and deprecations in Camunda 8.9:
 
 **Camunda 8 upgrades must be performed sequentially.**
 
-- You must upgrade sequentially, one minor version at a time (for example, 8.7 → 8.8 → 8.9).
+- You must upgrade sequentially, one minor version at a time. For example, you must upgrade from 8.7 to 8.8 before you can upgrade to 8.9.
 - Upgrading to the latest available patch of each minor is strongly recommended for fix coverage.
-- For example, you must upgrade from 8.7 to 8.8 before you can upgrade to 8.9.
-- **Do not skip releases**.
+- **Do not skip releases.** Skipping a minor version fails the schema compatibility check and blocks startup.
 
 Use the following version-specific upgrade guides to upgrade sequentially until you reach Camunda 8.8 before you proceed with the 8.9 upgrade.
 
