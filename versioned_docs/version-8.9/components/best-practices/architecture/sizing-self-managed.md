@@ -178,7 +178,7 @@ camunda:
   data:
     snapshot-period: 5m
     primary-storage:
-      logstream:
+      log-stream:
         log-segment-size: 128MB
 ```
 
@@ -282,7 +282,7 @@ Set it explicitly, since Self-Managed still ships `PARTITION` as its default:
 camunda:
   data:
     primary-storage:
-      rocksdb:
+      rocks-db:
         memory-allocation-strategy: fraction
         memory-fraction: 0.1
 ```
