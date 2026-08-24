@@ -102,6 +102,8 @@ POST /api/v1/files
 }
 ```
 
+Affected endpoints:
+
 - `PATCH /api/v1/files/{fileId}`
 - `POST /api/v1/files`
 
