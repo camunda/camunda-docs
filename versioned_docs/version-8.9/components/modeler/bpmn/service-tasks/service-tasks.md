@@ -12,8 +12,6 @@ When a service task is entered, a corresponding job is created. The process inst
 
 A [job worker](/components/concepts/job-workers.md) can subscribe to the job type, process the jobs, and complete them using one of the Zeebe clients. When the job is complete, the service task is completed and the process instance continues.
 
-A service task is also the most common building block used as a tool inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) hosting an [AI agent](/reference/glossary.md#ai-agent): the agent selects the tool, and Camunda executes it as this same job.
-
 ## Task definition
 
 A service task must have a `taskDefinition`. The `taskDefinition` is used to specify which [job workers](../../../concepts/job-workers.md) handle the service task work.
