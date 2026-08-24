@@ -5,7 +5,11 @@ sidebar_label: "Web apps"
 description: "How Operate, Tasklist, and Optimize behave in a Physical Tenant deployment, including URL navigation, data scoping, and session behavior."
 ---
 
-Operate, Tasklist, and Admin serve data scoped to one Physical Tenant at a time. No cross-tenant data is displayed within a single web app session.
+Learn how Operate, Tasklist, and Admin serve data for one Physical Tenant at a time.
+
+:::note
+No cross-tenant data is displayed within a single web app session. To switch tenants, open the target tenant-scoped URL.
+:::
 
 ## Accessing web apps
 
@@ -28,6 +32,14 @@ flowchart LR
     B -- No --> D[OAuth redirect to\nTenant A IdP]
     D --> E[Login and callback\nto /physical-tenants/tenantA/sso-callback]
     E --> C
+
+    classDef page fill:#e4eef8,stroke:#2272c9,color:#14082c
+    classDef decision fill:#fde8da,stroke:#fc5d0d,color:#14082c
+    classDef action fill:#e8fdf1,stroke:#10c95d,color:#14082c
+
+    class A page
+    class B decision
+    class C,D,E action
 ```
 
 For session isolation details, including path-scoped cookies and simultaneous multi-tenant browser tabs, see [session isolation](/self-managed/concepts/physical-tenants/authentication-authorization.md#session-isolation).
@@ -54,7 +66,7 @@ Logout completes correctly per Physical Tenant. Navigate to the target tenant's 
 
 Changing a user's roles does not invalidate their Operate or Tasklist session, and does not log them out.
 
-The resolved authentication context — including role, group, and tenant membership — is cached in the user's HTTP session and re-resolved after `camunda.security.authentication.authentication-refresh-interval` (default `PT30S`) has elapsed. Membership changes take effect on the first request after that interval.
+The resolved authentication context, including role, group, and tenant membership, is cached in the user's HTTP session and re-resolved after `camunda.security.authentication.authentication-refresh-interval` (default `PT30S`) has elapsed. Membership changes take effect on the first request after that interval.
 
 Permissions granted to or revoked from a role are evaluated per request and take effect as soon as the change reaches secondary storage.
 
