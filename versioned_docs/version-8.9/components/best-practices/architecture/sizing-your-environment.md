@@ -36,6 +36,8 @@ In addition, it sends data to secondary storage (Elasticsearch, OpenSearch, or a
 
 You can configure retention times for data stored in secondary storage.
 
+For Self-Managed, see [Disk space](sizing-self-managed.md#disk-space) for the formula and mechanics behind Zeebe's primary storage disk usage.
+
 ### Impact of Optimize
 
 Optimize is an optional component that provides process analytics and reporting. When enabled, it has significant implications for sizing.
@@ -55,8 +57,8 @@ For how Optimize fits into the export pipeline, see [Optimize data flow](./data-
 
 #### Why Optimize matters for sizing
 
-- Optimize is a second-tier consumer of the export pipeline: the Elasticsearch/OpenSearch exporter writes raw engine events, and Optimize's importer reads them and writes its own analytics indices back to Elasticsearch/OpenSearch. This means data is written to secondary storage twice. See [Optimize data flow](./data-flow.md#optimize-data-flow).
-- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter run in the same thread within the broker, so Optimize data pipeline competes directly with core platform exporting for throughput.
+- Optimize is a second-tier consumer of the export pipeline: the Elasticsearch/OpenSearch exporter writes raw engine events, Optimize's importer reads them and writes its own analytics indices back to Elasticsearch/OpenSearch, so data is written to secondary storage twice. See [Optimize data flow](./data-flow.md#optimize-data-flow).
+- In Camunda 8.8+, the Camunda Exporter and the Elasticsearch exporter run in the same thread within the broker, so Optimize data-pipeline competes directly with core platform exporting for throughput.
 - The overhead is **not proportional to throughput.** It scales with process model complexity (multi-instance and call activities) and variable volume. At a realistic workload where Optimize-enabled and Optimize-disabled clusters reached identical throughput with zero backpressure, the Optimize-enabled cluster still consumed **around 3.4x more Elasticsearch CPU.** Budget for this even at comfortable throughput.
 
 #### What Optimize affects
