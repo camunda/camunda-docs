@@ -165,6 +165,12 @@ A collection of reusable automation assets, such as element templates. The catal
 
 - [Catalog](/components/hub/organization/manage-catalog/index.md)
 
+### Child process instance
+
+A [process instance](#process-instance) created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) in another process instance, the [parent process instance](#parent-process-instance).
+
+See also: [Parent process instance](#parent-process-instance), [Root process instance](#root-process-instance)
+
 ### Client
 
 See [Zeebe Client](#zeebe-client).
@@ -499,7 +505,7 @@ A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based 
 
 A loop iteration is one pass through an [AI agent](#ai-agent)’s [agent loop](#agent-loop), during which the model reasons, selects tools, evaluates the result, and decides whether to continue. An AI agent run consists of one loop with one or more loop iterations.
 
-Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution.
+Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution. Operate's UI labels each entry simply as `iteration` as shorthand for loop iteration.
 
 - [Conversation history and loop iterations](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations)
 
@@ -604,6 +610,16 @@ Each instance represents one run of the process and carries metadata from its or
 A process instance can be active (currently running), completed, or terminated.
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
+
+A process can call another process via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances: a [parent process instance](#parent-process-instance) that contains the call activity, the [child process instance](#child-process-instance) it creates, and the [root process instance](#root-process-instance) at the top of the hierarchy.
+
+### Parent process instance
+
+The process instance that contains the [call activity](/components/modeler/bpmn/call-activities/call-activities.md) that created a [child process instance](#child-process-instance).
+
+A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
+
+See also: [Child process instance](#child-process-instance), [Root process instance](#root-process-instance)
 
 ### Process instance tag
 
@@ -720,6 +736,12 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 
 The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
 
+### Root process instance
+
+The [process instance](#process-instance) at the top of a hierarchy of related process instances. It was started directly, not created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md).
+
+See also: [Parent process instance](#parent-process-instance), [Child process instance](#child-process-instance)
+
 ## S
 
 ### SAP
@@ -744,13 +766,13 @@ Examples of secondary storage backends include:
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
 ### Soft pause exporting
 

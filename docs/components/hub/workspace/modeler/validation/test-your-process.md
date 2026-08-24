@@ -1,7 +1,7 @@
 ---
 id: test-your-process
 title: Test your process
-description: "Test mode gives you a dedicated environment to validate your process against any project environment before promoting it."
+description: "Test mode lets you validate your process against a selected project environment before promoting changes."
 keywords: ["test", "test mode", "test case", "test studio", "validation"]
 ---
 
@@ -16,6 +16,10 @@ To use Test mode, open a BPMN diagram and click the **Test** tab. Read the [limi
 ![BPMN diagram top bar showing the Test tab location](../img/test-tab-location.png)
 
 Select any environment configured for your project as your test target. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+
+:::caution
+Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
+:::
 
 Opening the **Test** tab no longer deploys your process automatically. Click **Deploy** to deploy the current version of the active process and all its dependencies, like called processes or DMN files, to the selected cluster. Once deployed, you can run or create test cases.
 
@@ -186,7 +190,7 @@ To save a test case:
    | **Name**                   | A name for the test case.                                                                             |
    | **Description** (optional) | A description of what the test case validates, for example, "Customer order completes after payment." |
 
-1. Review the **Steps** the test case will re-run, such as **Start instance**. (Optional) Click **Add assertion** to add an assertion to a step. See [Assertions](#assertions).
+1. Review the **Steps** the test case will re-run, such as **Start instance**. (Optional) Click **Add assertion** to add an assertion to a step. See [Add assertions](#assertions).
 1. Click **Save test case**.
 1. A new [test file](test-files.md) will be saved in the same Web Modeler folder as the process.
 
@@ -275,7 +279,6 @@ When a BPMN change removes or renames an element that an instruction or assertio
 ![Repair view](../img/test-repair-view.png)
 
 - For changes the graphical repair view doesn't cover, open the [test file](test-files.md) in Web Modeler's file editor and edit the JSON directly. Then, return to Test mode and rerun the test case.
-
 ### Limitations {#test-cases-limitations}
 
 Test mode displays a warning badge on diagram elements with known limitations. Use the **Show problems**/**Hide problems** toggle near the canvas controls to show or hide these badges.
@@ -371,7 +374,7 @@ Additionally, within their organization, users need to have a [role](/components
 
 <!-- NEEDS VERIFICATION -->
 
-In Self-Managed, Test mode is controlled by the `PLAY_ENABLED` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
+In Self-Managed, Test mode is controlled by the `camunda.modeler.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.10 release, Test mode can be accessed by installing the 8.10.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/blob/camunda-platform-10.4.0/charts/camunda-platform-alpha), or running the 8.10.0-alpha [Docker Compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) configuration.
 

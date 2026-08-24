@@ -507,6 +507,12 @@ RewriteRule ^docs/next/components/modeler/feel/builtin-functions/feel-built-in-f
 RewriteRule ^docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
 RewriteRule ^docs/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
 
+# Merge resource-planning into sizing-self-managed (8.9, backported to 8.8)
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/next/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/8.9/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/8.8/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/8.8/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
 #---------------------------------------------------------------------------------

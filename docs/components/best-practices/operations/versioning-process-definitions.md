@@ -11,6 +11,8 @@ By default, deploying a process or decision definition means that the workflow e
 
 ![Versions](versioning-process-definitions-assets/database-versions.png)
 
+Agents in your process are versioned the same way. Deploying a new version of a process creates a new [agent definition](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-definitions) for each of its agent elements, bound to that process definition version.
+
 ## Selecting the best versioning approach
 
 ### Running versions in parallel

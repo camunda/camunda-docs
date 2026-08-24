@@ -36,6 +36,8 @@ In addition, it sends data to secondary storage (Elasticsearch, OpenSearch, or a
 
 You can configure retention times for data stored in secondary storage.
 
+For Self-Managed, see [Disk space](sizing-self-managed.md#disk-space) for the formula and mechanics behind Zeebe's primary storage disk usage.
+
 ### Impact of Optimize
 
 Optimize is an optional component that provides process analytics and reporting. When enabled, it has significant implications for sizing.
@@ -206,6 +208,7 @@ Consider these general rules for payload size:
 
 - The maximum [variable size per process instance is limited](/components/concepts/variables.md#variable-size-limitation), currently to roughly three MB.
 - Camunda does not recommend storing large amounts of data in your process context. Refer to our [best practices on handling data in processes](/components/best-practices/development/handling-data-in-processes.md) for more details.
+- An AI agent's [agent context](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-context-and-memory) is a process variable that grows with each loop iteration, so it counts toward this limit. Switch the agent's memory to [Camunda document storage](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#choose-a-memory-storage-backend) when a long conversation would outgrow it.
 - Each [partition](/components/zeebe/technical-concepts/partitions.md) of the Zeebe installation can typically handle up to one GB of payload in total. Larger payloads can lead to slower processing. For example,
   one million process instances with four KB each is about 3.9 GB, so you need at least four partitions. In practice, you’d typically use six partitions, since the number of partitions is usually a multiple of the replication factor (three by default).
 
