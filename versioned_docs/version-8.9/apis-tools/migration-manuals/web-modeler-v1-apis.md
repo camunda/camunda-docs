@@ -30,19 +30,14 @@ These changes currently only apply to the Web Modeler API running in Camunda 8 S
 
 You can no longer read or write process application IDs in any folders API context.
 
-### Folder and parent IDs reference folders
+### Folder IDs reference folders
 
-In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId` or `parentId`. Previously, you could pass a process application's ID to read and write its data.
+In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID when deleting, reading, and updating folders.
 
 Example:
 
 ```shell
-PATCH /api/v1/folders/f169a3d4-056b-463c-b4c9-6c3600c2213a  # must be a folder, not a process application
-{
-  "name": "Root folder",
-  "projectId": "58a93bf7-4ea0-4e56-85fa-5c8fccc3877d",
-  "parentId": "1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676"  # must be a folder, not a process application
-}
+GET /api/v1/folders/1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676  # must be a folder, not a process application
 ```
 
 Affected endpoints:
@@ -50,11 +45,43 @@ Affected endpoints:
 - `DELETE /api/v1/folders/{folderId}`
 - `GET /api/v1/folders/{folderId}`
 - `PATCH /api/v1/folders/{folderId}`
+
+Instead of passing the process application ID to the folders endpoints, you can use the new process application endpoints:
+
+- `DELETE /api/v1/processApplications/{processApplicationId}`
+- `GET /api/v1/processApplications/{processApplicationId}`
+- `PATCH /api/v1/processApplications/{processApplicationId}`
+
+Example:
+
+```shell
+GET /api/v1/processApplications/e005e49a-dce8-42ee-b0db-30b1d5555ebd  # must be a process application, not a folder
+```
+
+### Parent IDs reference folders
+
+In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `parentId`. Previously, you could pass a process application's ID when writing data. Instead of passing the process application ID as the `parentId`, you can use the new `processApplicationId` field to place the folder in a process application.
+
+Example:
+
+```shell
+POST /api/v1/folders
+{
+  "name": "Nested folder",
+  "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+  "parentId": "1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676"  # must be a folder, not a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd"  # new process application field
+}
+```
+
+Affected endpoints:
+
+- `PATCH /api/v1/folders/{folderId}`
 - `POST /api/v1/folders`
 
 ### Process applications are never returned as parent folders
 
-In folders API responses, the `parentId` is null for any folder stored at the root of a process application. Previously, `parentId` would return the process application ID.
+In folders API responses, the `parentId` is null for any folder stored at the root of a process application. Previously, `parentId` would return the process application ID. The process application ID is, instead, returned in a new `processApplicationId` field.
 
 Example:
 
@@ -64,6 +91,7 @@ Example:
   "name": "Root folder",
   "projectId": "58a93bf7-4ea0-4e56-85fa-5c8fccc3877d",
   "parentId": null, // null if the parent container is a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
   "created": "2026-08-24T14:17:33.889317Z",
   "createdBy": {
     "name": "Jane Doe",
@@ -89,13 +117,14 @@ You can no longer read or write process application IDs in any files API context
 
 ### Folder ID must reference a folder
 
-In files API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID to place the file in the process application.
+In files API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID to place the file in the process application. Instead of passing the process application ID as the `folderId`, you can use the new `processApplicationId` field to place the file in a process application.
 
 ```shell
 POST /api/v1/files
 {
   "name": "New BPMN diagram",
   "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",  # must be a folder, not a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd"  # new process application field
   "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
   "content": "...",
   "fileType": "BPMN"
@@ -109,7 +138,7 @@ Affected endpoints:
 
 ### Process applications are never returned as folders
 
-In files API responses, the `folderId` is null for any file stored at the root of a process application. Previously, `folderId` would return the process application ID.
+In files API responses, the `folderId` is null for any file stored at the root of a process application. Previously, `folderId` would return the process application ID. The process application ID is, instead, returned in a new `processApplicationId` field.
 
 Example:
 
@@ -119,6 +148,7 @@ Example:
   "name": "New BPMN diagram",
   "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
   "folderId": null, // null if the parent container is a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
   "simplePath": "New BPMN diagram.bpmn",
   "canonicalPath": [],
   "revision": 2,
@@ -156,6 +186,7 @@ Example:
     "name": "New BPMN diagram",
     "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
     "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+    "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
     "simplePath": "Root folder/New BPMN diagram.bpmn", // excludes process applications
     "canonicalPath": [
       // excludes process applications
@@ -187,6 +218,21 @@ Affected endpoints:
 - `PATCH /api/v1/files/{fileId}`
 - `POST /api/v1/files/search` (the process application is excluded from these paths in both the response and the request `filter`)
 - `POST /api/v1/files`
+
+### Search for files in a process application
+
+With `POST /api/v1/files/search`, you can now use a new `processApplicationId` filter.
+
+Example:
+
+```shell
+POST /api/v1/files/search
+{
+  "filter": {
+    "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd"
+  }
+}
+```
 
 ## Projects API
 
@@ -278,6 +324,12 @@ Example:
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         }
+      }
+    ],
+    "processApplications": [
+      {
+        "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
+        "name": "Process application"
       }
     ]
   }
@@ -372,6 +424,12 @@ Example:
           "email": "jane.doe@email.com"
         }
       }
+    ],
+    "processApplications": [
+      {
+        "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
+        "name": "Process application"
+      }
     ]
   }
 }
@@ -379,7 +437,7 @@ Example:
 
 ### Project folders exclude process applications
 
-In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes process applications. Previously, process applications were included in this list.
+In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes process applications. Previously, process applications were included in this list. The process applications are, instead, returned in a new `content.processApplications` field.
 
 ```json
 {
@@ -462,6 +520,13 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         }
+      }
+    ],
+    "processApplications": [
+      // new process applications list
+      {
+        "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
+        "name": "Process application"
       }
     ]
   }
