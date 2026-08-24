@@ -1595,6 +1595,7 @@ module.exports = {
       },
       items: [
         "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+        "apis-tools/migration-manuals/web-modeler-v1-apis",
       ],
     },
   ],
