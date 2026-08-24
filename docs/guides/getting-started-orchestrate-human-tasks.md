@@ -225,7 +225,7 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 2. After you deploy your process, it can be executed on the cluster. There are multiple ways to run a process. This time, click **Run** in Modeler for a test run.
 
 :::tip
-Other options to run a process are to start it via Tasklist, test it in the Play mode, or call it via the API or an inbound trigger. Read more about [run options](/components/hub/workspace/modeler/run-or-publish-your-process.md).
+Other options to run a process are to start it via Tasklist, test it in the Test mode, or call it via the API or an inbound trigger. Read more about [run options](/components/hub/workspace/modeler/run-or-publish-your-process.md).
 :::
 
 </TabItem>
@@ -261,7 +261,7 @@ Ensure your installation of [Camunda 8 Run](/self-managed/quickstart/developer-q
    <img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
 
 :::tip
-In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md).
+In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md).
 :::
 
 </TabItem>
