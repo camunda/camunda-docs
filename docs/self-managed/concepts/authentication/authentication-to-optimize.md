@@ -66,11 +66,9 @@ The internal API is not a supported public contract. Its shape can change betwee
 
 `/api/authentication/**` is unchanged and still serves the login callback.
 
-### Stricter OIDC id_token validation
+### OIDC id_token validation
 
-Camunda 8.10 validates the login `id_token`'s issuer and audience, which Camunda 8.9 did not. This is the most likely source of upgrade breakage for OIDC deployments: a deployment with a mismatched issuer or audience that happened to work on 8.9 fails to log in on 8.10.
-
-Before upgrading, confirm that:
+Optimize validates the login `id_token`'s issuer and audience against your configuration. Confirm that:
 
 - `camunda.security.authentication.oidc.issuer-uri` matches the issuer your IdP puts in the `id_token`.
 - `camunda.security.authentication.oidc.audiences` contains every value your IdP puts in the audience claim for the Optimize application, including whatever the legacy `CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE` and `CAMUNDA_OPTIMIZE_API_AUDIENCE` variables previously covered. The same list validates both the login `id_token` and any bearer token sent to Optimize, so it must also include the audience of any other application that calls Optimize on a user's behalf. For example, if Camunda Hub is enabled, its client API audience must be included, or the requests it forwards to Optimize on the signed-in user's behalf are rejected. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
