@@ -51,7 +51,12 @@ See [mark an element as an agent](/components/agentic-orchestration/agent-defini
 
 ### Package the setup as a custom element template
 
-Camunda doesn't ship an external agent [element template](/components/modeler/element-templates/about-templates.md). Create your own so modelers can add your agent from the properties panel instead of editing XML, and so its configuration stays consistent across processes.
+Camunda doesn't ship an external agent [element template](/components/modeler/element-templates/about-templates.md), but you can create your own.
+
+:::note Create an element template
+This step is optional. The marker and job type added to the BPMN XML in the previous step are enough for Camunda to track the agent.
+However, an element template avoids manual XML editing and keeps the configuration consistent when the same external agent is used across multiple processes.
+:::
 
 The following template applies to a service task, fixes the job type your runtime subscribes to, and exposes the agent's prompt and result variable as configurable fields:
 
@@ -102,7 +107,7 @@ The following template applies to a service task, fixes the job type your runtim
 See [defining templates](/components/modeler/element-templates/defining-templates.md) for the full set of keys, and [template properties](/components/modeler/element-templates/template-properties.md) for the available bindings.
 
 :::note
-No element template binding sets the `zeebe:agentDefinition` marker yet. Add the marker to the BPMN XML as shown in [step 1](#step-1-mark-the-element-as-an-external-agent), in addition to applying your template.
+Element templates configure properties through bindings. If a `zeebe:agentDefinition` binding isn't defined for your template, add the marker to the BPMN XML manually as shown in [step 1](#step-1-mark-the-element-as-an-external-agent), in addition to applying the template.
 :::
 
 ## Step 2: Activate the job with a lease
@@ -126,7 +131,7 @@ A lease is required because the conversation history you report is fenced to a s
 
 ## Step 3: Create the agent instance
 
-Create the agent instance as the first step of handling the job, before your agent makes its first model call. The response returns the `agentInstanceKey` that identifies the agent for every later call.
+Create the agent instance as the first step of handling the job, before your agent makes its first model call. Establish the agent's initial configuration through a `CONFIGURATION` history item included in the same request, and pass the `jobKey` and `jobLease` from the job activation so Camunda can associate the item with this run. The response returns the `agentInstanceKey` that identifies the agent for every later call.
 
 ```
 curl -L 'http://localhost:8080/v2/agent-instances' \
@@ -134,30 +139,45 @@ curl -L 'http://localhost:8080/v2/agent-instances' \
 -H 'Accept: application/json' \
 -d '{
   "elementInstanceKey": "2251799813685254",
-  "definition": {
-    "model": "gpt-4o",
-    "provider": "openai",
-    "systemPrompt": "You are a research assistant. Use the available tools to gather sources before answering."
-  },
-  "limits": {
-    "maxModelCalls": 20,
-    "maxToolCalls": 50,
-    "maxTokens": 200000
-  }
+  "jobKey": "2251799813685260",
+  "jobLease": "eyJhY3RpdmF0aW9uIjoxfQ",
+  "history": [
+    {
+      "historyItemId": "run-7f3a-config",
+      "loopIteration": 1,
+      "role": "CONFIGURATION",
+      "content": [],
+      "model": "gpt-4o",
+      "provider": "openai",
+      "systemPrompt": [
+        {
+          "contentType": "TEXT",
+          "text": "You are a research assistant. Use the available tools to gather sources before answering."
+        }
+      ],
+      "limits": {
+        "maxModelCalls": 20,
+        "maxToolCalls": 50,
+        "maxTokens": 200000
+      },
+      "producedAt": "2026-08-18T09:13:58.000Z"
+    }
+  ]
 }'
 ```
 
-| Field                | Required | Description                                                                                                                                                                |
-| :------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `elementInstanceKey` | Yes      | The key of the agent element instance, taken from the job activation response. Camunda derives the process instance, element ID, process definition, and tenant from it.   |
-| `definition`         | Yes      | The static configuration of the agent: `model`, `provider`, and `systemPrompt`. Operate shows these values as the agent's setup, so report what the agent actually ran on. |
-| `limits`             | No       | The `maxModelCalls`, `maxToolCalls`, and `maxTokens` your runtime enforces. Each limit defaults to `-1`, meaning no limit is configured.                                   |
+| Field                | Required | Description                                                                                                                                                                                                                                            |
+| :------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `elementInstanceKey` | Yes      | The key of the agent element instance, taken from the job activation response. Camunda derives the process instance, element ID, process definition, and tenant from it.                                                                               |
+| `jobKey`             | Yes      | The key of the job activation from [step 2](#step-2-activate-the-job-with-a-lease). Required whenever `history` is provided.                                                                                                                           |
+| `jobLease`           | Yes      | The lease token from the job activation, the same one used in [step 5](#step-5-report-the-conversation-history).                                                                                                                                       |
+| `history`            | Yes      | A batch containing at least one `CONFIGURATION` item that reports `model`, `provider`, and `systemPrompt`; `limits` and `tools` on that item are optional. See [step 5](#step-5-report-the-conversation-history) for the full shape of a history item. |
 
 Report the limits your runtime enforces even though Camunda doesn't enforce them for an external agent. Operate shows model calls against the configured limit, which is what makes limit proximity visible when you [detect off-rail agents](/components/agentic-orchestration/evaluate-agents/detect-off-rail-agents.md).
 
 Only one agent instance can exist per element instance. If the job is retried, the create call returns `409`. Handle a retry by finding the existing agent instance with [search agent instances](/apis-tools/orchestration-cluster-api-rest/specifications/search-agent-instances.api.mdx), filtering on `elementInstanceKeys`, and continuing to report against the key it returns.
 
-## Step 4: Report state, usage metrics, and tools
+## Step 4: Report state transitions
 
 Update the agent instance whenever the agent moves between phases of its loop. Send the update to `PATCH /agent-instances/{agentInstanceKey}`.
 
@@ -167,13 +187,7 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 -H 'Accept: application/json' \
 -d '{
   "elementInstanceKey": "2251799813685254",
-  "status": "TOOL_CALLING",
-  "metrics": {
-    "inputTokens": 1840,
-    "outputTokens": 260,
-    "modelCalls": 1,
-    "toolCalls": 2
-  }
+  "status": "TOOL_CALLING"
 }'
 ```
 
@@ -181,13 +195,11 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 | :------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `elementInstanceKey` | Yes      | The key of the currently active element instance. Camunda validates it against the stored agent instance.                                                                                                     |
 | `status`             | No       | The agent's current state: `TOOL_DISCOVERY`, `THINKING`, `TOOL_CALLING`, or `IDLE`. See [agent states](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) for what each state means. |
-| `metrics`            | No       | Increments to add to the aggregate counters, not absolute totals. Omit a counter to leave it unchanged.                                                                                                       |
-| `tools`              | No       | The complete list of tools available to the agent. Each update replaces the stored list.                                                                                                                      |
-| `history`            | No       | A batch of conversation history items to append. See [step 5](#step-5-report-the-conversation-history).                                                                                                       |
+| `history`            | No       | A batch of conversation history items to append — usage metrics, tool updates, and the conversation itself all flow through this field. See [step 5](#step-5-report-the-conversation-history).                |
 
 Camunda sets the `Initializing` and `Completed` states itself, so your runtime can't set them.
 
-Report the tools once the agent has resolved them, typically while the agent is in `TOOL_DISCOVERY`:
+Report the tools once the agent has resolved them, typically while the agent is in `TOOL_DISCOVERY`, through a `CONFIGURATION` history item rather than a dedicated field:
 
 ```
 curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
@@ -195,29 +207,40 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 -H 'Accept: application/json' \
 -d '{
   "elementInstanceKey": "2251799813685254",
+  "jobKey": "2251799813685260",
+  "jobLease": "eyJhY3RpdmF0aW9uIjoxfQ",
   "status": "THINKING",
-  "tools": [
+  "history": [
     {
-      "name": "search_papers",
-      "description": "Search an academic paper index by topic.",
-      "elementId": null
-    },
-    {
-      "name": "summarize_source",
-      "description": "Summarize a single source into three bullet points.",
-      "elementId": null
+      "historyItemId": "run-7f3a-tools",
+      "loopIteration": 1,
+      "role": "CONFIGURATION",
+      "content": [],
+      "tools": [
+        {
+          "name": "search_papers",
+          "description": "Search an academic paper index by topic.",
+          "elementId": null
+        },
+        {
+          "name": "summarize_source",
+          "description": "Summarize a single source into three bullet points.",
+          "elementId": null
+        }
+      ],
+      "producedAt": "2026-08-18T09:14:01.000Z"
     }
   ]
 }'
 ```
 
-Set `elementId` only for a tool that a BPMN element in your process handles. For a tool that lives entirely in your external runtime, leave it `null` so Operate doesn't try to link it to the diagram.
+Set `elementId` only for a tool that a BPMN element in your process handles. For a tool that lives entirely in your external runtime, leave it `null` so Operate doesn't try to link it to the diagram. Omit `tools` from a later `CONFIGURATION` item to leave the stored list unchanged, or send an empty array to clear it.
 
 ## Step 5: Report the conversation history
 
 The conversation history is the decision trail Operate displays for the agent: the prompts it received, the messages the model returned, the tools it selected, and the results those tools produced. Group the items by `loopIteration` so each pass through the agent loop is legible on its own.
 
-Report history items either as a batch on the update call, or one at a time with [create agent instance history item](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item.api.mdx). Batching is the better default, because it keeps the item count and the metric increments for a loop iteration in a single request.
+Report history items either as a batch on the create or update call, or one at a time with [create agent instance history item](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance-history-item.api.mdx). Batching is the better default, because it keeps every item for a loop iteration in a single request.
 
 ```
 curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
@@ -228,7 +251,6 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
   "jobKey": "2251799813685260",
   "jobLease": "eyJhY3RpdmF0aW9uIjoxfQ",
   "status": "TOOL_CALLING",
-  "metrics": { "inputTokens": 1840, "outputTokens": 260, "modelCalls": 1 },
   "history": [
     {
       "historyItemId": "run-7f3a-iter-1-user",
@@ -267,15 +289,20 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 }'
 ```
 
-| Field           | Required | Description                                                                                                                                                                                    |
-| :-------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `historyItemId` | Yes      | An identifier you assign to the item. Camunda uses it to recognize a resubmitted item as a duplicate rather than rejecting it, so reuse the same ID when a retried activation resends an item. |
-| `loopIteration` | Yes      | The loop iteration the item belongs to, starting at `1`.                                                                                                                                       |
-| `role`          | Yes      | `USER`, `ASSISTANT`, `TOOL_RESULT`, or `CONFIGURATION`.                                                                                                                                        |
-| `content`       | Yes      | The content blocks of the item, each typed as `TEXT`, `DOCUMENT`, or `OBJECT`. Use `TEXT` for natural language and `OBJECT` for structured data.                                               |
-| `toolCalls`     | No       | For an `ASSISTANT` item, the tool calls the model dispatched. For a `TOOL_RESULT` item, a single entry referencing the originating tool call through its `toolCallId`. Omit for a `USER` item. |
-| `metrics`       | No       | The `inputTokens`, `outputTokens`, and `durationMs` of a single model call. Report these on `ASSISTANT` items only.                                                                            |
-| `producedAt`    | Yes      | The timestamp from your runtime for when the message was produced.                                                                                                                             |
+| Field           | Required | Description                                                                                                                                                                                                                                                                                         |
+| :-------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `historyItemId` | Yes      | An identifier you assign to the item. Camunda uses it to recognize a resubmitted item as a duplicate rather than rejecting it, so reuse the same ID when a retried activation resends an item.                                                                                                      |
+| `loopIteration` | Yes      | The loop iteration the item belongs to, starting at `1`.                                                                                                                                                                                                                                            |
+| `role`          | Yes      | `USER`, `ASSISTANT`, `TOOL_RESULT`, or `CONFIGURATION`.                                                                                                                                                                                                                                             |
+| `content`       | Yes      | The content blocks of the item, each typed as `TEXT`, `DOCUMENT`, or `OBJECT`. Use `TEXT` for natural language and `OBJECT` for structured data. An empty array is valid for a `CONFIGURATION` item, whose data lives in the fields below instead.                                                  |
+| `toolCalls`     | No       | For an `ASSISTANT` item, the tool calls the model dispatched. For a `TOOL_RESULT` item, a single entry referencing the originating tool call through its `toolCallId`. Omit for a `USER` item.                                                                                                      |
+| `metrics`       | No       | The `inputTokens`, `outputTokens`, and `durationMs` of a single model call. Report these on `ASSISTANT` items only — Camunda aggregates them into the agent instance's running totals, so there's no separate counter to increment.                                                                 |
+| `model`         | No       | The LLM model identifier. `CONFIGURATION` items only.                                                                                                                                                                                                                                               |
+| `provider`      | No       | The LLM provider. `CONFIGURATION` items only.                                                                                                                                                                                                                                                       |
+| `systemPrompt`  | No       | The system prompt, as content blocks. `CONFIGURATION` items only. Together with `model` and `provider`, at least one of the `CONFIGURATION` items you send must establish all three — see [step 3](#step-3-create-the-agent-instance). Omit any of the three on a later item to leave it unchanged. |
+| `limits`        | No       | The agent's operational limits. `CONFIGURATION` items only; omit to leave the previously reported limits unchanged.                                                                                                                                                                                 |
+| `tools`         | No       | The complete list of tools available to the agent, replacing any previously reported list. `CONFIGURATION` items only; omit to leave the list unchanged, or send an empty array to clear it.                                                                                                        |
+| `producedAt`    | Yes      | The timestamp from your runtime for when the message was produced.                                                                                                                                                                                                                                  |
 
 Whenever you send `history`, also send the `jobKey` and `jobLease` from the job activation. Camunda records each item with a `PENDING` commit status and promotes it to `COMMITTED` when the job completes successfully. If the job fails and a later activation supersedes the lease, the items are marked `DISCARDED` instead.
 
