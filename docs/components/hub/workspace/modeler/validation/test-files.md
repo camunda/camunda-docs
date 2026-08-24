@@ -244,6 +244,53 @@ Resolves an incident that was created due to a job failure or another process is
 }
 ```
 
+### Assert variables
+
+Checks that one or more process or local variables have expected values. Supports Test mode's [variable assertions](test-your-process.md#variable-assertions).
+
+```json
+{
+  "type": "ASSERT_VARIABLES",
+  "processInstanceSelector": {
+    "processDefinitionId": "order-process"
+  },
+  "variables": {
+    "orderStatus": "confirmed"
+  }
+}
+```
+
+### Assert an element instance (path)
+
+Checks that a specific element reached an expected state. Supports Test mode's [element (path) assertions](test-your-process.md#element-path-assertions).
+
+```json
+{
+  "type": "ASSERT_ELEMENT_INSTANCE",
+  "processInstanceSelector": {
+    "processDefinitionId": "order-process"
+  },
+  "elementSelector": {
+    "elementId": "shipOrder"
+  },
+  "state": "IS_COMPLETED"
+}
+```
+
+### Assert a process instance
+
+Checks the overall state of the process instance. Supports Test mode's [process instance assertions](test-your-process.md#process-instance-assertions).
+
+```json
+{
+  "type": "ASSERT_PROCESS_INSTANCE",
+  "processInstanceSelector": {
+    "processDefinitionId": "order-process"
+  },
+  "state": "IS_COMPLETED"
+}
+```
+
 ## Usage tips
 
 - Always use meaningful selector values, such as `elementId` or `processDefinitionId`, that match your BPMN diagram.
