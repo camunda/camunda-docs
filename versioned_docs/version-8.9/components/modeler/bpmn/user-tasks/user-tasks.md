@@ -12,7 +12,7 @@ When the user task instance is completed, the process instance continues.
 
 ![user-task](assets/user-task.png)
 
-Inside an ad-hoc sub-process, a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [design and architecture](/components/agentic-orchestration/design-architecture.md#design-and-architecture) for this pattern.
+Inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md), a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [design and architecture](/components/agentic-orchestration/design-architecture.md#design-and-architecture) for this pattern.
 
 ## User task implementation types
 

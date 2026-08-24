@@ -36,7 +36,7 @@ only trigger a single time once the date is reached.
 
 Non-interrupting timer boundary events are often used to model notifications; for example, contacting support if the processing takes longer than an hour.
 
-Attached to an ad-hoc sub-process hosting an [AI agent](/reference/glossary.md#ai-agent), a timer boundary event lets the process interrupt or redirect a running agent that takes too long, one of the patterns described in [mixing agents with workflow patterns](/components/agentic-orchestration/design-architecture.md#mixing-agents-with-workflow-patterns).
+Attached to an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) hosting an [AI agent](/reference/glossary.md#ai-agent), a timer boundary event lets the process interrupt or redirect a running agent that takes too long, one of the patterns described in [mixing agents with workflow patterns](/components/agentic-orchestration/design-architecture.md#mixing-agents-with-workflow-patterns).
 
 ## Timers
 
