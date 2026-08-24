@@ -357,20 +357,14 @@
     {
       "name": "camunda.client.cluster-variables.enabled",
       "type": "java.lang.Boolean",
-      "description": "Indicates if cluster variable processing is enabled. When {@code true}, variables configured via <code>@ClusterVariables<\/code> annotations and via the {@code global}\/{@code tenant} properties are applied at startup. When {@code false}, all cluster variable processing is skipped.",
+      "description": "Indicates if cluster variable processing is enabled. When {@code true}, variables configured via <code>@ClusterVariables<\/code> annotations and via the {@code variables} property are applied at startup. When {@code false}, all cluster variable processing is skipped.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
       "defaultValue": true
     },
     {
-      "name": "camunda.client.cluster-variables.global",
-      "type": "java.util.Map<java.lang.String,java.lang.Object>",
-      "description": "Globally-scoped cluster variables to set at startup as key-value pairs.",
-      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
-    },
-    {
-      "name": "camunda.client.cluster-variables.tenant",
-      "type": "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>",
-      "description": "Tenant-scoped cluster variables to set at startup, keyed by tenant ID.",
+      "name": "camunda.client.cluster-variables.variables",
+      "type": "java.util.List<io.camunda.client.spring.properties.ClusterVariableEntry>",
+      "description": "Cluster variables to set at startup. Each entry carries a name, a value and optionally metadata, a kind and a tenant ID. Entries without a tenant ID are globally scoped.",
       "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties"
     },
     {
@@ -628,6 +622,12 @@
       "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
     },
     {
+      "name": "camunda.client.worker.defaults.with-lease",
+      "type": "java.lang.Boolean",
+      "description": "Activate the jobs polled by this worker with a lease. When enabled, each activated job is assigned a distinct lease token, fencing the complete, fail, and throw-error commands against a superseded activation of the same job. <p>Only applies to the polling path. If not set, jobs are activated without a lease.",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientJobWorkerProperties"
+    },
+    {
       "name": "camunda.client.worker.override",
       "type": "java.util.Map<java.lang.String,io.camunda.client.spring.properties.CamundaClientJobWorkerProperties>",
       "description": "Properties for overriding settings of individual job workers registered to the Camunda client. The key of the override is the job type or worker name.",
@@ -673,6 +673,26 @@
       "deprecated": true,
       "deprecation": {
         "replacement": "camunda.client.cloud.cluster-id"
+      }
+    },
+    {
+      "name": "camunda.client.cluster-variables.global",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "description": "Deprecated globally-scoped cluster variables to set at startup as key-value pairs.",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "camunda.client.cluster-variables.variables"
+      }
+    },
+    {
+      "name": "camunda.client.cluster-variables.tenant",
+      "type": "java.util.Map<java.lang.String,java.lang.Object>",
+      "sourceType": "io.camunda.client.spring.properties.CamundaClientClusterVariablesProperties",
+      "description": "Deprecated tenant-scoped cluster variables to set at startup, keyed by tenant ID.",
+      "deprecated": true,
+      "deprecation": {
+        "replacement": "camunda.client.cluster-variables.variables"
       }
     },
     {
