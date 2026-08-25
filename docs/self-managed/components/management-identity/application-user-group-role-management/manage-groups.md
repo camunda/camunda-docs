@@ -1,10 +1,10 @@
 ---
 id: manage-groups
 title: "Groups"
-description: "Groups are a way to apply a set of roles and permissions to users for Camunda 8 management and modeling components (Web Modeler, Console, Optimize)."
+description: "Groups are a way to apply a set of roles and permissions to users for Camunda 8 management and modeling components (Hub and Optimize)."
 ---
 
-Use groups to manage and organize user access to Camunda 8 management and modeling components (Web Modeler, Console, and Optimize).
+Use groups to manage and organize user access to Camunda 8 management and modeling components (Hub and Optimize).
 
 ## About groups
 

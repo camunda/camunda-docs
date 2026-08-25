@@ -47,7 +47,7 @@ configuration](#component-specific-configuration) to ensure the components are c
 <h3>Steps</h3>
 
 1. Identify what management and modeling components you need to use in Camunda 8: [Camunda Hub](../../hub/index.md) and [Optimize](../../optimize/overview.md).
-2. In your OIDC provider, **create an application for each of the management and modeling components you want to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
+2. In your OIDC provider, **create an application for each of the management and modeling components you want to connect**. Hub requires two applications: one for the UI, and one for the API. Console's cluster-management pages are part of the Hub UI application — no separate application is needed for Console.
    - The expected redirect URI of the component you are configuring an app for can be found in [component-specific configuration](#component-specific-configuration).
      :::note
      Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
@@ -56,10 +56,9 @@ configuration](#component-specific-configuration) to ensure the components are c
    - Web applications requiring confidential access/a confidential client:
      - **Optimize**
      - **Management Identity**
-     - **Web Modeler API**
+     - **Hub API**
    - Web applications requiring public access/a public client:
-     - **Console**
-     - **Web Modeler UI**
+     - **Hub UI**
 4. Make a note of the following values for each application you create:
    - Client ID
    - Client secret
@@ -145,16 +144,15 @@ Ensure you register a new application for each component.
 :::
 
 1. Identify what management and modeling components you need to use in Camunda 8: [Camunda Hub](../../hub/index.md) and [Optimize](../../optimize/overview.md).
-2. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each component you would like to connect**. Web Modeler requires two applications: one for the UI, and one for the API.
+2. Within the Entra ID admin center, [register a new application](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) for **each component you would like to connect**. Hub requires two applications: one for the UI, and one for the API. Console's cluster-management pages are part of the Hub UI application — no separate application is needed for Console.
 3. Navigate to the new application's **Overview** page, and make note of the **Client ID**. This will also be used as the audience ID.
 4. Within your new application, [configure a platform](https://learn.microsoft.com/en-gb/entra/identity-platform/quickstart-register-app#configure-platform-settings) for the appropriate component:
    - **Web**:
      - Optimize
      - Management Identity
-     - Web Modeler API
+     - Hub API
    - **Single-page application**:
-     - Console
-     - Web Modeler UI
+     - Hub UI
 5. Add your component's **Microsoft Entra ID** redirect URI, found under [Component-specific configuration](#component-specific-configuration).
    :::note
    Redirect URIs serve as an approved list of destinations across identity providers. Only the URLs specified in the redirect URIs configuration will be permitted as valid redirection targets for authentication responses. This security measure ensures that tokens and authorization codes are only sent to pre-approved locations, preventing potential unauthorized access or token theft.
@@ -241,8 +239,7 @@ Follow the [Microsoft Entra instructions](https://learn.microsoft.com/en-us/entr
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Management Identity | **Microsoft Entra ID:** <br/> `https://<IDENTITY_URL>/auth/login-callback` <br/><br/> **Helm:** <br/> `https://<IDENTITY_URL>`         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Optimize            | **Microsoft Entra ID:** <br/> `https://<OPTIMIZE_URL>/api/authentication/callback` <br/><br/> **Helm:** <br/> `https://<OPTIMIZE_URL>` | There is a fallback if you use the existing environment variables to configure your authentication provider. If you use a custom `yaml`, update your properties to match the new values in this guide.<br/><br/>When using an OIDC provider, the following Optimize features are not currently available: <br/>- The **User permissions** tab in collections<br/>- The **Alerts** tab in collections<br/>- Digests<br/>- Accessible usernames for owners of resources (the `sub` claim value is displayed instead).                                                                                    |
-| Web Modeler         | **Microsoft Entra ID:** <br/> `https://<WEB_MODELER_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<WEB_MODELER_URL>`        | Web Modeler requires two clients: one for the UI, and one for the API. <br/><br/> Required configuration variables for the `restapi` component:<br/> `OAUTH2_CLIENT_ID=[ui-client-id]`<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[ui-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=[provider-jwks-url]`. |
-| Console             | **Microsoft Entra ID:** <br/> `https://<CONSOLE_URL>` <br/><br/> **Helm:** <br/> `https://<CONSOLE_URL>`                               |
+| Hub                 | **Microsoft Entra ID:** <br/> `https://<HUB_URL>/login-callback` <br/><br/> **Helm:** <br/> `https://<HUB_URL>`        | Hub requires two clients: one for the UI, and one for the API. Console's cluster-management pages are part of the Hub UI client — no separate client is needed for Console. <br/><br/> Required configuration variables for the `restapi` component:<br/> `OAUTH2_CLIENT_ID=[ui-client-id]`<br/> `CAMUNDA_IDENTITY_BASEURL=[identity-base-url]`<br/> `CAMUNDA_IDENTITY_TYPE=[provider-type]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API=[ui-audience]`<br/> `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API=[api-audience]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=[provider-issuer]`<br/> `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI=[provider-jwks-url]`. |
 
 #### Example component values
 
@@ -250,17 +247,15 @@ The examples below use these public URLs:
 
 - Management Identity: `https://identity.example.com`
 - Optimize: `https://optimize.example.com`
-- Web Modeler: `https://modeler.example.com`
-- Console: `https://console.example.com`
+- Hub: `https://hub.example.com`
 
 With those URLs, configure the following redirect URIs in your OIDC provider:
 
 - Management Identity: `https://identity.example.com/auth/login-callback`
 - Optimize: `https://optimize.example.com/api/authentication/callback`
-- Web Modeler UI: `https://modeler.example.com/login-callback`
-- Console: `https://console.example.com/`
+- Hub UI: `https://hub.example.com/login-callback`
 
-For Web Modeler, the `restapi` component configuration varies by provider. The example below uses Keycloak; for other providers, retrieve the issuer and JWK set URLs from your provider's [OpenID configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) (typically `https://<provider>/.well-known/openid-configuration`):
+For Hub, the `restapi` component configuration varies by provider. The example below uses Keycloak; for other providers, retrieve the issuer and JWK set URLs from your provider's [OpenID configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) (typically `https://<provider>/.well-known/openid-configuration`):
 
 ```shell
 OAUTH2_CLIENT_ID=web-modeler
@@ -288,8 +283,8 @@ When using [Management Identity](/self-managed/components/management-identity/ov
 
 | Feature name                                             | Description                                                                                                                                                                                                                                                                                                                          |                              Availability                               |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------------------------: |
-| Single sign-on (SSO)                                     | Redirects users to the identity provider for authentication, and enables seamless login across applications. <br/><br/> Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors use an identity provider-issued JWT. Web Modeler and Console use PCKE (Proof Key for Code Exchange) to connect to the Camunda Identity service. |  <img src={TickImg} class="table-tick" alt="Available" width="15px"/>   |
-| Authentication flows (Authorization code flow with PKCE) | Securely handles user login using the recommended authorization code flow with PKCE (Proof Key for Code Exchange) for security. <br/><br/> Web Modeler and Console use PCKE, but do not directly connect to the identity provider with OIDC. Web Modeler and Console use PCKE to connect to the Camunda Identity service.            | <img src={CrossImg} class="table-tick" alt="Unavailable" width="15px"/> |
+| Single sign-on (SSO)                                     | Redirects users to the identity provider for authentication, and enables seamless login across applications. <br/><br/> Zeebe, Operate, Tasklist, Optimize, Identity, and Connectors use an identity provider-issued JWT. Hub uses PCKE (Proof Key for Code Exchange) to connect to the Camunda Identity service. |  <img src={TickImg} class="table-tick" alt="Available" width="15px"/>   |
+| Authentication flows (Authorization code flow with PKCE) | Securely handles user login using the recommended authorization code flow with PKCE (Proof Key for Code Exchange) for security. <br/><br/> Hub uses PCKE, but does not directly connect to the identity provider with OIDC. Hub uses PCKE to connect to the Camunda Identity service.            | <img src={CrossImg} class="table-tick" alt="Unavailable" width="15px"/> |
 | ID token handling                                        | Validates and extracts user identity details from the ID token after authentication.                                                                                                                                                                                                                                                 |  <img src={TickImg} class="table-tick" alt="Available" width="15px"/>   |
 | Access token management                                  | Uses access tokens issued by the identity provider to securely access protected APIs.                                                                                                                                                                                                                                                |  <img src={TickImg} class="table-tick" alt="Available" width="15px"/>   |
 | Session management                                       | Ensures users remain logged in across sessions and applications or automatically re-authenticate when needed.                                                                                                                                                                                                                        |  <img src={TickImg} class="table-tick" alt="Available" width="15px"/>   |

@@ -19,18 +19,26 @@ Identity requires a set of base configurations to operate correctly. When Identi
 | Optimize API                     | optimize-api                     | enabled          | Optimize                       |
 | Tasklist                         | tasklist                         | enabled          | Tasklist                       |
 | Tasklist API                     | tasklist-api                     | enabled          | Tasklist                       |
-| Web Modeler                      | web-modeler                      | disabled         | Web Modeler                    |
-| Web Modeler API                  | web-modeler-api                  | enabled          | Web Modeler                    |
+| Hub                               | web-modeler                      | disabled         | Hub                             |
+| Hub API                          | web-modeler-api                  | enabled          | Hub                             |
 
 ## Roles
 
-| Name        | Created/updated with component |
-| :---------- | :----------------------------- |
-| Identity    | All                            |
-| Operate     | Operate                        |
-| Optimize    | Optimize                       |
-| Tasklist    | Tasklist                       |
-| Web Modeler | Web Modeler                    |
+Identity provisions Web Modeler's roles under their legacy names (`Web Modeler`, `Web Modeler Admin`) so existing installations keep working unchanged, and provisions the equivalent Hub-named roles (`Hub`, `Hub Admin`) alongside them. Both name pairs grant identical permissions.
+
+| Name                   | Created/updated with component |
+| :--------------------- | :------------------------------ |
+| Identity               | All                             |
+| Operate                | Operate                         |
+| Optimize               | Optimize                        |
+| Tasklist               | Tasklist                        |
+| Web Modeler            | Hub                             |
+| Web Modeler Admin      | Hub                             |
+| Hub                    | Hub                             |
+| Hub Admin              | Hub                             |
+| Console                | Hub                             |
+| DevOps                 | Hub                             |
+| Hub API - Cluster Ping | Hub                             |
 
 ## Client scopes
 
