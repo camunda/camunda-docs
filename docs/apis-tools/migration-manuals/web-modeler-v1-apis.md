@@ -165,12 +165,12 @@ Example:
     ],
     "revision": 2,
     "type": "BPMN",
-    "created": "2026-08-24T14:38:16.040437Z",
-    "created": "2026-08-24T14:39:09.203957484Z",
+    "created": "2026-08-24T17:35:46.329162Z",
     "createdBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
     },
+    "updated": "2026-08-24T17:35:46.330218Z",
     "updatedBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
