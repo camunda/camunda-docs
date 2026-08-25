@@ -57,10 +57,10 @@ From Camunda 8.10, the Orchestration Cluster can send product telemetry directly
 
 It is grouped into two categories:
 
-| Category        | What it contains                                                                                            | Why Camunda collects it                                                                      |
-| --------------- | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **Contractual** | Root process instances, evaluated decision instances, task users, and tenants.                              | To verify usage against the metrics in your agreement and to bill for overages.              |
-| **Optional**    | Product usage signals: process, decision, and form definitions, incidents, user tasks, and agent instances. | To understand how the product is used, prioritize improvements, and support your deployment. |
+| Category        | What it contains                                                                                                                                                | Why Camunda collects it                                                                      |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Contractual** | Root process instance starts, decision evaluations, user task assignments, and tenant creation and deletion.                                                    | To verify usage against the metrics in your agreement and to bill for overages.              |
+| **Optional**    | Process, decision, and form definition deployments and deletions; incidents raised and resolved; user task creation; and agent instance starts and completions. | To understand how the product is used, prioritize improvements, and support your deployment. |
 
 Alongside both categories, Camunda receives a periodic heartbeat carrying the Camunda version and the exporter version. Camunda uses it to detect data gaps and offline clusters.
 
@@ -141,17 +141,17 @@ Below is an example of user action data collected by the platform:
 
 Camunda distinguishes three states, and applies different handling to each:
 
-| State             | Meaning                                                                                                                                                             |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Anonymous**     | No individual can be distinguished. Aggregate counts, such as the number of distinct task users in a period.                                                        |
-| **Pseudonymised** | Direct identifiers are replaced with a substitute value, but one individual can still be distinguished from others across records. **This is still personal data.** |
-| **Personal data** | Directly identifies an individual, such as a name or email address.                                                                                                 |
+| State             | Meaning                                                                                                                            |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Anonymous**     | No individual can be distinguished. Aggregate counts, such as the number of distinct task users in a period.                       |
+| **Pseudonymised** | Direct identifiers are replaced with a substitute value, but one individual can still be distinguished from others across records. |
+| **Personal data** | Directly identifies an individual, such as a name or email address.                                                                |
 
 ### Assignee identifiers in Orchestration Cluster telemetry
 
 The `camunda.user_task.assigned` signal carries a SHA-256 digest of the task assignee rather than the assignee value itself. Camunda uses it to count distinct task users for the contractual task-user metric.
 
-Camunda states plainly what this identifier is and is not:
+This means:
 
 - The raw assignee value, whether a user name, an email address, or an external identifier, is **never sent**.
 - The digest is **stable**, so it distinguishes one individual consistently across records. It is therefore **pseudonymised data, not anonymous data**, and Camunda treats it as personal data.
@@ -177,12 +177,6 @@ Draft only. The lawful-basis mapping below must be confirmed by Legal, and align
 Camunda does not use telemetry data for automated decision-making producing legal or similarly significant effects on natural persons.
 
 To object to processing of the pseudonymised subset, or to make a data subject request, contact Camunda through the route described in the [Privacy Policy](https://camunda.com/legal/privacy/).
-
-## Retention and deletion
-
-:::danger BLOCKER - not written
-Intentionally empty. A five-year maximum for personal data is set as policy, but the per-category retention schedules and the purge mechanism are not built, and there is no deletion path today. Publishing a retention or deletion commitment against a capability that does not exist would create an enforceable public promise Camunda cannot currently keep. Owners: Legal and Data. Either fill this section or remove the heading before merge.
-:::
 
 ## How to control telemetry
 

@@ -22,7 +22,7 @@ The exporter reads records from the Zeebe log stream, keeps a fixed set of event
 Three properties are worth understanding before you enable it:
 
 - **It cannot slow down your brokers.** The exporter is fire-and-forget. Records are handed to a background thread and the broker acknowledges the log position immediately. If the queue fills or the endpoint is unreachable, records are dropped rather than back-pressuring the engine.
-- **It is analytics-grade, not billing-grade.** Data loss is accepted under failure. Do not use this data for billing, audit, or any workflow requiring completeness. See [Usage metrics](/reference/data-collection/usage-metrics.md) for contractual metric reporting.
+- **Delivery is best effort.** Records can be dropped if the endpoint is unreachable or a broker restarts, so the data is not guaranteed to be complete. Do not use it for billing, audit, or anything that depends on a complete record. For contractual metric reporting, see [Usage metrics](/reference/data-collection/usage-metrics.md).
 - **It runs on the partition leader only.** No additional high-availability setup is required.
 
 ## Enable the exporter
@@ -77,24 +77,29 @@ If the endpoint is unreachable, the exporter fails **silently**. No incident is 
 
 The `categories` option controls which signals are exported:
 
-| Category      | Contents                                                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `contractual` | Metrics underpinning your commercial relationship with Camunda: process instances, decision instances, task users, and tenants. |
-| `optional`    | Product usage signals: definitions, incidents, user tasks, and agent instances.                                                 |
+| Category      | Signals                                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contractual` | `camunda.process.instance.activated`, `camunda.user_task.assigned`, `camunda.tenant.created`, `camunda.tenant.deleted`, `camunda.decision.instance.evaluated`                                                                                                                                                                                                                                      |
+| `optional`    | `user_task_created`, `camunda.process.definition.created`, `camunda.process.definition.deleted`, `camunda.decision.definition.created`, `camunda.decision.definition.deleted`, `camunda.form.definition.created`, `camunda.form.definition.deleted`, `camunda.process.incident.created`, `camunda.process.incident.resolved`, `camunda.agent.instance.created`, `camunda.agent.instance.completed` |
 
-Both categories are active by default. Narrow the set by removing entries:
+`contractual` carries the signals behind the metrics in your agreement. `optional` carries product usage. Each signal is described in [What data is sent](#what-data-is-sent).
+
+Both categories are active by default. Narrow the set by removing entries. For example, to send contractual signals only:
 
 ```yaml
-args:
-  categories:
-    - contractual
+camunda:
+  data:
+    exporters:
+      analytics:
+        class-name: io.camunda.exporter.analytics.AnalyticsExporter
+        args:
+          categories:
+            - contractual
 ```
 
 An omitted or empty `categories` list enables all categories.
 
-:::note
-Removing `optional` does not stop the hashed assignee identifier. `camunda.user_task.assigned` is `contractual`, because it is the source of the task-user count. See [Assignee identifiers](#assignee-identifiers).
-:::
+Removing `optional` does not stop the hashed assignee identifier, because `camunda.user_task.assigned` is `contractual`. See [Assignee identifiers](#assignee-identifiers).
 
 The `heartbeat` event and the `camunda.telemetry.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
 
@@ -116,7 +121,11 @@ All options live under `args`. The defaults suit typical Self-Managed deployment
 
 The exporter authenticates using your Camunda 8 Self-Managed license key.
 
-**The raw license key is never transmitted.** The exporter sends a SHA-256 fingerprint of the key in the `x-camunda-fingerprint` header, and uses the key as an HMAC secret to sign each batch. Camunda maps the fingerprint to your organization server-side.
+There is nothing extra to configure. The exporter derives everything it needs from the license key already set on the cluster, and computes the credentials itself on startup.
+
+**The raw license key is never transmitted.** The exporter sends a SHA-256 fingerprint of the key in the `x-camunda-fingerprint` header, and uses the key as an HMAC secret to sign each batch. Camunda maps the fingerprint to your organization.
+
+If you rotate your license key, the exporter picks up the new key the next time the broker starts.
 
 ## What data is sent
 
@@ -203,7 +212,9 @@ Counts evaluation records rather than the decisions inside them: a decision requ
 | `camunda.process.instance_key`   | long   | Process instance key.   |
 | `camunda.tenant.id`              | string | Tenant ID.              |
 
-Both carry the same attributes, so time to resolution is a join on `camunda.incident.key`. **The incident error message is not exported**, because it can quote expressions and variable values.
+Both carry the same attributes, so time to resolution is a join on `camunda.incident.key`.
+
+**The incident error message is not exported**, because it can quote expressions and variable values.
 
 **`camunda.process.definition.created`** and **`camunda.process.definition.deleted`**
 
@@ -251,7 +262,9 @@ The form resource, resource name, and version tag are not exported.
 | `camunda.process.root_instance_key` | long   | Root process instance key.                                        |
 | `camunda.tenant.id`                 | string | Tenant ID.                                                        |
 
-Both carry the same attributes, so agent run duration is a join on `camunda.agent.instance_key`. The agent definition (model, provider, system prompt), its tools, its token counts and other collected metrics, and its configured limits are **not** exported.
+Both carry the same attributes, so agent run duration is a join on `camunda.agent.instance_key`.
+
+The agent definition (model, provider, system prompt), its tools, its token counts and other collected metrics, and its configured limits are **not** exported.
 
 ### Always-on signals
 
