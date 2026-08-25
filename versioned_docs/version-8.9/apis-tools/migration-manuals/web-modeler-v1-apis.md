@@ -65,11 +65,11 @@ Example:
   "projectId": "58a93bf7-4ea0-4e56-85fa-5c8fccc3877d",
   "parentId": null, // null if the parent container is a process application
   "created": "2026-08-24T14:17:33.889317Z",
-  "updated": "2026-08-24T14:23:48.371161659Z",
   "createdBy": {
     "name": "Jane Doe",
     "email": "jane.doe@email.com"
   },
+  "updated": "2026-08-24T14:23:48.371161659Z",
   "updatedBy": {
     "name": "Jane Doe",
     "email": "jane.doe@email.com"
@@ -123,11 +123,12 @@ Example:
   "canonicalPath": [],
   "revision": 2,
   "type": "BPMN",
-  "created": "2026-08-24T14:39:09.203957484Z",
+  "created": "2026-08-24T14:17:33.889317Z",
   "createdBy": {
     "name": "Jane Doe",
     "email": "jane.doe@email.com"
   },
+  "updated": "2026-08-24T14:23:48.371161659Z",
   "updatedBy": {
     "name": "Jane Doe",
     "email": "jane.doe@email.com"
@@ -202,11 +203,12 @@ Example:
   "metadata": {
     "id": "fb928277-6268-44bb-b3e6-1925fa730ecf",
     "name": "Project",
-    "created": "2026-08-24T14:17:12.930231Z",
+    "created": "2026-08-24T17:35:46.329162Z",
     "createdBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
     },
+    "updated": "2026-08-24T17:35:46.330218Z",
     "updatedBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
@@ -220,11 +222,11 @@ Example:
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null, // null if the parent container is a process application
         "created": "2026-08-24T14:37:04.36503Z",
-        "updated": "2026-08-24T14:37:07.470563Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:37:07.470563Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -241,11 +243,12 @@ Example:
         "canonicalPath": [],
         "revision": 2,
         "type": "BPMN",
-        "created": "2026-08-24T14:17:25.875789Z",
+        "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:23:48.371161659Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -265,11 +268,12 @@ Example:
         ],
         "revision": 3,
         "type": "BPMN",
-        "created": "2026-08-24T14:38:16.040437Z",
+        "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:23:48.371161659Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -291,11 +295,12 @@ Example:
   "metadata": {
     "id": "fb928277-6268-44bb-b3e6-1925fa730ecf",
     "name": "Project",
-    "created": "2026-08-24T14:17:12.930231Z",
+    "created": "2026-08-24T14:17:33.889317Z",
     "createdBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
     },
+    "updated": "2026-08-24T14:23:48.371161659Z",
     "updatedBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
@@ -309,11 +314,11 @@ Example:
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null,
         "created": "2026-08-24T14:37:04.36503Z",
-        "updated": "2026-08-24T14:37:07.470563Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:37:07.470563Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -330,11 +335,12 @@ Example:
         "canonicalPath": [], // excludes process applications
         "revision": 2,
         "type": "BPMN",
-        "created": "2026-08-24T14:17:25.875789Z",
+        "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:23:48.371161659Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -355,11 +361,12 @@ Example:
         ],
         "revision": 3,
         "type": "BPMN",
-        "created": "2026-08-24T14:38:16.040437Z",
+        "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:23:48.371161659Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -379,11 +386,12 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
   "metadata": {
     "id": "fb928277-6268-44bb-b3e6-1925fa730ecf",
     "name": "Project",
-    "created": "2026-08-24T14:17:12.930231Z",
+    "created": "2026-08-24T14:17:33.889317Z",
     "createdBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
     },
+    "updated": "2026-08-24T14:23:48.371161659Z",
     "updatedBy": {
       "name": "Jane Doe",
       "email": "jane.doe@email.com"
@@ -398,11 +406,11 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null,
         "created": "2026-08-24T14:37:04.36503Z",
-        "updated": "2026-08-24T14:37:07.470563Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:37:07.470563Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -419,11 +427,12 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "canonicalPath": [],
         "revision": 2,
         "type": "BPMN",
-        "created": "2026-08-24T14:17:25.875789Z",
+        "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:23:48.371161659Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -443,11 +452,12 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         ],
         "revision": 3,
         "type": "BPMN",
-        "created": "2026-08-24T14:38:16.040437Z",
+        "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
         },
+        "updated": "2026-08-24T14:23:48.371161659Z",
         "updatedBy": {
           "name": "Jane Doe",
           "email": "jane.doe@email.com"
@@ -462,7 +472,7 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
 
 ### Version individual process application files
 
-With `POST /api/v1/versions`, you can now publish a new version for process application files. Previously, this endpoint returned a `400 BAD REQUEST` because files were intended to be versioned as part of the process application. See [process application versioning model](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) for a deeper explanation of this change.
+With `POST /api/v1/versions`, you can now publish a new version for process application files. Previously, this endpoint returned a `400 BAD REQUEST` because files were intended to be versioned as part of the process application. See [process application versioning model](/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) for a deeper explanation of this change.
 
 :::note
 When versioning a connector template, you may now receive a `409 CONFLICT` citing a version number you never published.
