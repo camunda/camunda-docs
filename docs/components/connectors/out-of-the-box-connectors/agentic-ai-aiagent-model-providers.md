@@ -138,6 +138,8 @@ Select this provider to use OpenAI models. Two independent choices apply:
   - [Microsoft Foundry (Azure)](#microsoft-foundry-azure): OpenAI models deployed through Microsoft Foundry/Azure OpenAI.
   - [Custom / compatible endpoint](#openai-custom--compatible-endpoint): any endpoint implementing the OpenAI API.
 
+Use **Responses** by default. It's OpenAI's current API and the one new reasoning models are designed around. Use **Chat Completions** instead if your backend doesn't support Responses, for example most self-hosted OpenAI-compatible endpoints (such as Ollama, or open-weight models like Qwen, Llama, or Mistral), or an older Microsoft Foundry/Azure OpenAI deployment.
+
 #### OpenAI API
 
 | Field               | Required | Description                                                                                                                                                                                |
