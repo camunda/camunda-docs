@@ -46,7 +46,7 @@ Affected endpoints:
 - `GET /api/v1/folders/{folderId}`
 - `PATCH /api/v1/folders/{folderId}`
 
-Instead of passing the process application ID to the folders endpoints, you can use the new process application endpoints:
+Instead of passing the process application ID to the folders endpoints, use the new process application endpoints:
 
 - `DELETE /api/v1/processApplications/{processApplicationId}`
 - `GET /api/v1/processApplications/{processApplicationId}`
@@ -60,7 +60,7 @@ GET /api/v1/processApplications/e005e49a-dce8-42ee-b0db-30b1d5555ebd  # must be 
 
 ### Parent IDs reference folders
 
-In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `parentId`. Previously, you could pass a process application's ID when writing data. Instead of passing the process application ID as the `parentId`, you can use the new `processApplicationId` field to place the folder in a process application.
+In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `parentId`. Previously, you could pass a process application's ID when writing data. Use the new `processApplicationId` field to specify the target process application and, optionally, the `parentId` field to specify a target folder.
 
 Example:
 
@@ -69,7 +69,7 @@ POST /api/v1/folders
 {
   "name": "Nested folder",
   "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
-  "parentId": "1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676"  # must be a folder, not a process application
+  "parentId": "1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676",  # must be a folder, not a process application
   "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd"  # new process application field
 }
 ```
@@ -117,14 +117,14 @@ You can no longer read or write process application IDs in any files API context
 
 ### Folder ID must reference a folder
 
-In files API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID to place the file in the process application. Instead of passing the process application ID as the `folderId`, you can use the new `processApplicationId` field to place the file in a process application.
+In files API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID to place the file in the process application. Use the new `processApplicationId` field to specify the target process application and, optionally, the `folderId` field to specify a target folder.
 
 ```shell
 POST /api/v1/files
 {
   "name": "New BPMN diagram",
   "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",  # must be a folder, not a process application
-  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd"  # new process application field
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",  # new process application field
   "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
   "content": "...",
   "fileType": "BPMN"
