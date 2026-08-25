@@ -9,14 +9,18 @@ Learn how Camunda 8.10 authorizes Physical Tenant operations at the cluster-wide
 
 Two new authorization resource types were added for the per-tenant management APIs introduced alongside Physical Tenants:
 
-| Resource type | Permissions                           | Backs                                                                                       |
-| ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `BACKUP`      | `CREATE`, `READ`, `DELETE`, `RESTORE` | Per-tenant runtime backup endpoints (`/v2/backups/runtime`)                                 |
-| `EXPORTER`    | `PAUSE`                               | Per-tenant exporting pause/resume endpoints (`/v2/exporting/pause`, `/v2/exporting/resume`) |
+| Resource type | Permissions                           | Backs                                                                                                                      |
+| ------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `BACKUP`      | `CREATE`, `READ`, `DELETE`, `RESTORE` | Per-tenant runtime and history backup endpoints (`/v2/backups/runtime`, `/v2/backups/history`) and restore (`/v2/restore`) |
+| `EXPORTER`    | `PAUSE`                               | Per-tenant exporting pause/resume endpoints (`/v2/exporting/pause`, `/v2/exporting/resume`)                                |
 
 The default **admin** role receives all four `BACKUP` permissions and `EXPORTER:PAUSE` automatically. The default **readonly-admin** role receives only `BACKUP:READ` (there is no read-only permission for `EXPORTER`, since `PAUSE` isn't a read operation).
 
-For the operational procedures that use these permissions, see [backup, restore, and scaling](./backup-restore-scaling.md).
+An Elasticsearch or OpenSearch history backup needs both `BACKUP:CREATE` and `EXPORTER:PAUSE`, because exporting must be paused for the duration of the backup. Grant the two together to any role that performs backups.
+
+Permissions apply to the whole resource type. Fine-grained authorization for an individual backup ID or exporter is not available; only the `*` resource ID is supported.
+
+For the operational procedures that use these permissions, see [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants).
 
 ## Scope of the 8.10 authorization model
 

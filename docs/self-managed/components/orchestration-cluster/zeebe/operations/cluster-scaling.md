@@ -28,6 +28,57 @@ How brokers are identified and scaled depends on whether the cluster is [zone-aw
 - Existing partitions continue processing data, but you may notice temporary performance impacts until scaling completes. Plan scaling ahead of anticipated load increases to minimize disruption.
 - When adding new partitions or brokers, partitions are redistributed across both old and new brokers. Depending on the number of brokers and partitions, this may increase the load per broker. Use the API endpoints in [dry run](#dry-run) mode to preview partition distribution.
 - Always take a backup before scaling to ensure you can restore if needed.
+- Scaling is a planned configuration change. The cluster rejects a new configuration change while another one is still running.
+- A dynamic scaling operation does not require a rolling restart. Static configuration changes, such as adding a Physical Tenant, still follow the [provisioning and lifecycle](/self-managed/concepts/physical-tenants/provisioning-and-lifecycle.md) restart procedure.
+- Gateway replicas are scaled separately from brokers and partitions. In Helm deployments, adjust `zeebe-gateway.replicas`. Gateway scaling changes shared request capacity but does not change partition placement.
+
+## Scale a cluster with multiple Physical Tenants
+
+<span class="badge badge--platform">Self-Managed only</span>
+
+In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical-tenants/index.md), each tenant owns its own partition group, while brokers, gateways, and the replication factor are shared. Which scaling dimension you change therefore determines whether the operation is tenant-scoped or cluster-wide.
+
+| Dimension                          | Scope        | How to target it                                                                                    |
+| ---------------------------------- | ------------ | --------------------------------------------------------------------------------------------------- |
+| Partition count                    | Per tenant   | `PATCH /actuator/cluster?physicalTenant={physicalTenantId}`                                         |
+| Broker count                       | Cluster-wide | `PATCH /actuator/cluster` or `POST /actuator/cluster/brokers`, without a `physicalTenant` parameter |
+| Replication factor                 | Cluster-wide | `PATCH /actuator/cluster`, without a `physicalTenant` parameter                                     |
+| Partition join, leave, or priority | Per tenant   | `POST` or `DELETE /actuator/cluster/brokers/{brokerId}/partitions/{partitionId}?physicalTenant=`    |
+| Routing state                      | Per tenant   | `PATCH /actuator/cluster/routing-state?physicalTenant={physicalTenantId}`                           |
+| Purge                              | Both         | `POST /actuator/cluster/purge`, optionally scoped with `?physicalTenant={physicalTenantId}`         |
+
+Partition ids restart at `1` in every Physical Tenant, so a partition is only identified by its id together with its tenant.
+
+### Scale the partitions of a single Physical Tenant
+
+Send the partition count change with the `physicalTenant` query parameter. Only the named tenant's partition group gains partitions, and every other tenant is left untouched:
+
+```
+curl -X 'PATCH' \
+   'http://localhost:9600/orchestration/actuator/cluster?physicalTenant=tenant-a' \
+   -H 'accept: application/json' \
+   -H 'Content-Type: application/json' \
+   -d '{ "partitions": { "count": 6 } }'
+```
+
+Requests that combine `physicalTenant` with a broker change or a replication factor change are rejected with `400`, because neither dimension has a tenant to scope it to. An unknown `physicalTenant` is rejected with `404`.
+
+:::note
+A partition count change sent **without** the `physicalTenant` parameter targets the default Physical Tenant only. Read operations behave differently: `GET /actuator/cluster` without the parameter reports every Physical Tenant. Always pass `physicalTenant` explicitly when you intend to scale a non-default tenant.
+:::
+
+### Verify a tenant-scoped scaling operation
+
+Monitor the change with the [monitoring API](#monitoring-api) or `GET /actuator/cluster/changes`, then confirm the result through topology:
+
+```
+curl "http://localhost:8080/physical-tenants/tenant-a/v2/topology"
+curl "http://localhost:8080/cluster/v2/topology"
+```
+
+Confirm that every expected partition has a leader, that the targeted tenant's partition count matches the requested value, and that the other tenants retain their previous partition counts. Cluster-wide topology requires [cluster admin](/components/admin/cluster-admin.md) access.
+
+Because brokers and gateways are shared, a scaling operation for one tenant changes the capacity available to all of them. Compare tenant-scoped and cluster-wide partition, latency, and storage metrics against your pre-scaling baseline before returning the cluster to normal traffic.
 
 ## Scale up brokers
 
@@ -707,6 +758,8 @@ PATCH actuator/cluster
 ```
 
 `zone` is only used on zone-aware clusters, together with `count`, to select which zone's broker count is changed. It must be omitted on non-zone-aware clusters. Broker ids in `add` and `remove` follow the [broker id naming scheme](#broker-id-naming-scheme).
+
+The `physicalTenant` query parameter scopes `partitions.count` to a single [Physical Tenant](/self-managed/concepts/physical-tenants/index.md). See [scale a cluster with multiple Physical Tenants](#scale-a-cluster-with-multiple-physical-tenants).
 
 <details>
   <summary>Example request</summary>

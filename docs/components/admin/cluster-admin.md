@@ -24,14 +24,19 @@ Cluster admin was added in 8.10 alongside [Physical Tenants](/self-managed/conce
 
 ## Cluster-wide operations
 
-Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. In 8.10 these cover cluster status and topology, cluster mode changes, and restore.
+Cluster admin protects the operations served under the `/cluster/v2/...` path prefix. Every one of these operations fans out across all Physical Tenants in the cluster.
 
-| Area                | Operations                                                                                                                                                                                                                                   |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Status and topology | [Cluster status](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-status.api.mdx), [cluster topology](/apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-topology.api.mdx)                           |
-| Recovery            | [Cluster restore](/apis-tools/orchestration-cluster-api-rest/specifications/restore-as-cluster-admin.api.mdx), [cluster mode change](/apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin.api.mdx) |
+| Area                | Endpoints                                                                                            |
+| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| Status and topology | `GET /cluster/v2/status`, `GET /cluster/v2/topology`                                                 |
+| Backup              | `/cluster/v2/backups/runtime`, `/cluster/v2/backups/runtime/state`, `/cluster/v2/backups/history`    |
+| Exporting           | `GET /cluster/v2/exporting`, `POST /cluster/v2/exporting/pause`, `POST /cluster/v2/exporting/resume` |
+| Recovery            | `POST /cluster/v2/restore`, `PATCH /cluster/v2/mode`                                                 |
+| Partition placement | `POST /cluster/v2/rebalance`                                                                         |
 
-Backup and exporting control are per Physical Tenant in 8.10 and are not served under `/cluster/v2/...`. See [backup, restore, and scaling](/self-managed/concepts/physical-tenants/backup-restore-scaling.md). Scaling and multi-region failover use the actuator surface rather than this API.
+Each cluster-wide endpoint also accepts an optional `physicalTenantId` query parameter, which narrows the same cluster-admin operation to a single Physical Tenant without switching to the tenant-scoped API. Omitting the parameter targets every Physical Tenant.
+
+For the operator procedures that use these endpoints, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants). Scaling and multi-region failover use the actuator surface rather than this API.
 
 For request and response schemas, see the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) reference.
 
@@ -86,8 +91,6 @@ camunda:
 </Tabs>
 
 :::warning
-Cluster admin was introduced in Camunda 8.10. Verify the configuration schema against your version's release notes before relying on it in production.
-
 Under OIDC, configure at least one client, group, or claim. If none are configured, every bearer token is denied on `/cluster/v2/**` and the API becomes unreachable. Matching on `clients` or `groups` also requires the provider's `client-id-claim` and `groups-claim` to be set under `camunda.security.authentication.oidc`, otherwise startup fails.
 
 Under Basic authentication, an empty or absent user list is accepted silently and leaves no cluster admin provisioned. Only a malformed entry, such as a duplicate or blank name or password, fails startup.
@@ -97,5 +100,6 @@ Under Basic authentication, an empty or absent user list is accepted silently an
 
 - [Physical Tenants authorization model](/self-managed/concepts/physical-tenants/authorization-model.md)
 - [Physical Tenants API routing](/self-managed/concepts/physical-tenants/api-routing.md)
-- [Backup, restore, and scaling](/self-managed/concepts/physical-tenants/backup-restore-scaling.md)
+- [Back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md)
+- [Cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md)
 - [Orchestration Cluster authorizations](../concepts/access-control/authorizations.md)

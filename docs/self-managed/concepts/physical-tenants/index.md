@@ -75,7 +75,7 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; unprefixed `/v2/...` endpoints target the default Physical Tenant. See [backup, restore, and scaling](./backup-restore-scaling.md) for post-deployment procedures.
+Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; unprefixed `/v2/...` endpoints target the default Physical Tenant. See [cluster admin](/components/admin/cluster-admin.md) for the operations served under this prefix.
 
 ## Configure and provision Physical Tenants
 
@@ -98,7 +98,7 @@ description: "Add tenants, apply configuration changes, and manage tenant availa
 
 Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web apps](./web-apps.md).
 
-For backup, restore, scaling, and topology operations after deployment, see [backup, restore, and scaling](./backup-restore-scaling.md).
+For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 ## What is not isolated in 8.10
 
