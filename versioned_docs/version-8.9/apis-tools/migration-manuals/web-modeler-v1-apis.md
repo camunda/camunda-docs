@@ -329,7 +329,9 @@ Example:
     "processApplications": [
       {
         "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
-        "name": "Process application"
+        "name": "Process application",
+        "created": "2026-08-24T14:17:33.889317Z",
+        "updated": "2026-08-24T14:23:48.371161659Z"
       }
     ]
   }
@@ -428,7 +430,9 @@ Example:
     "processApplications": [
       {
         "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
-        "name": "Process application"
+        "name": "Process application",
+        "created": "2026-08-24T14:17:33.889317Z",
+        "updated": "2026-08-24T14:23:48.371161659Z"
       }
     ]
   }
@@ -526,7 +530,9 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
       // new process applications list
       {
         "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
-        "name": "Process application"
+        "name": "Process application",
+        "created": "2026-08-24T14:17:33.889317Z",
+        "updated": "2026-08-24T14:23:48.371161659Z"
       }
     ]
   }
