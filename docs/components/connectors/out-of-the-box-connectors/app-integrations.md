@@ -48,6 +48,16 @@ An administrator must install app integrations and configure the connector runti
 
 1. Install and configure app integrations, as described in [Install Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams-installation.md). The same installation serves this connector and the Microsoft Teams app.
 2. Configure the connector runtime with the app integrations connection. See [Connectors configuration](/self-managed/components/connectors/connectors-configuration.md).
+3. Set `APP_INTEGRATIONS_CLUSTER_ID` on the connector runtime. App integrations use it to tell which cluster a call comes from. The value is the cluster's UUID as declared in the app integrations `clusters` configuration, not the cluster name.
+
+Whether step 3 is mandatory depends on how the connector runtime authenticates:
+
+| Runtime authentication       | `APP_INTEGRATIONS_CLUSTER_ID` | If it is not set                                                |
+| :--------------------------- | :---------------------------- | :-------------------------------------------------------------- |
+| OAuth 2.0 client credentials | Required                      | Every job fails with `APP_INTEGRATIONS_NOT_CONFIGURED`.         |
+| API key                      | Optional                      | App integrations identify the cluster from the API key instead. |
+
+SaaS needs no equivalent setting. The SaaS runtime supplies its own cluster ID.
 
 :::note TODO
 Link to the admin-facing reference for the App Integrations runtime settings, once the Helm values are documented.
@@ -242,10 +252,13 @@ This failure is **not retried**. The **Retries** and **Retry backoff** settings 
 
 Resolving it is an administrator task. See [prerequisites](#prerequisites).
 
-| Environment  | Cause                                                              | Fix                                                                                                                                                                    |
-| :----------- | :----------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SaaS         | **Enable app integrations extensions** is off for the cluster.     | Ask an organization administrator to enable it in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions). |
-| Self-Managed | The connector runtime is not configured to reach app integrations. | Complete the [connector runtime configuration](/self-managed/components/connectors/connectors-configuration.md) and redeploy it.                                       |
+| Environment  | Cause                                                                               | Fix                                                                                                                                                                    |
+| :----------- | :---------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SaaS         | **Enable app integrations extensions** is off for the cluster.                      | Ask an organization administrator to enable it in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions). |
+| Self-Managed | The connector runtime is not configured to reach app integrations.                  | Complete the [connector runtime configuration](/self-managed/components/connectors/connectors-configuration.md) and redeploy it.                                       |
+| Self-Managed | The runtime authenticates with OAuth, but `APP_INTEGRATIONS_CLUSTER_ID` is not set. | Set it to the cluster's UUID and redeploy the connector runtime. See [prerequisites](#prerequisites).                                                                  |
+
+The incident message names the missing setting, so read it before changing configuration.
 
 ### Other error codes
 
