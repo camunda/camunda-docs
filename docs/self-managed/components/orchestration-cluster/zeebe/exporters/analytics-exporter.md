@@ -77,12 +77,12 @@ If the endpoint is unreachable, the exporter fails **silently**. No incident is 
 
 The `categories` option controls which signals are exported:
 
-| Category      | Signals                                                                                                                                                                                                                                                                                                                                                                                            |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contractual` | `camunda.process.instance.activated`, `camunda.user_task.assigned`, `camunda.tenant.created`, `camunda.tenant.deleted`, `camunda.decision.instance.evaluated`                                                                                                                                                                                                                                      |
-| `optional`    | `user_task_created`, `camunda.process.definition.created`, `camunda.process.definition.deleted`, `camunda.decision.definition.created`, `camunda.decision.definition.deleted`, `camunda.form.definition.created`, `camunda.form.definition.deleted`, `camunda.process.incident.created`, `camunda.process.incident.resolved`, `camunda.agent.instance.created`, `camunda.agent.instance.completed` |
+| Category      | What it contains                                                                                                                                                | Why Camunda collects it                                                                      |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `contractual` | Root process instance starts, decision evaluations, user task assignments, and tenant creation and deletion.                                                    | To verify usage against the metrics in your agreement and to bill for overages.              |
+| `optional`    | Process, decision, and form definition deployments and deletions; incidents raised and resolved; user task creation; and agent instance starts and completions. | To understand how the product is used, prioritize improvements, and support your deployment. |
 
-`contractual` carries the signals behind the metrics in your agreement. `optional` carries product usage. Each signal is described in [What data is sent](#what-data-is-sent).
+Every signal in each category, with its attributes, is listed in [What data is sent](#what-data-is-sent).
 
 Both categories are active by default. Narrow the set by removing entries. For example, to send contractual signals only:
 
@@ -98,8 +98,6 @@ camunda:
 ```
 
 An omitted or empty `categories` list enables all categories.
-
-Removing `optional` does not stop the hashed assignee identifier, because `camunda.user_task.assigned` is `contractual`. See [Assignee identifiers](#assignee-identifiers).
 
 The `heartbeat` event and the `camunda.telemetry.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
 
@@ -212,8 +210,6 @@ Counts evaluation records rather than the decisions inside them: a decision requ
 | `camunda.process.instance_key`   | long   | Process instance key.   |
 | `camunda.tenant.id`              | string | Tenant ID.              |
 
-Both carry the same attributes, so time to resolution is a join on `camunda.incident.key`.
-
 **The incident error message is not exported**, because it can quote expressions and variable values.
 
 **`camunda.process.definition.created`** and **`camunda.process.definition.deleted`**
@@ -261,8 +257,6 @@ The form resource, resource name, and version tag are not exported.
 | `camunda.process.instance_key`      | long   | Process instance key.                                             |
 | `camunda.process.root_instance_key` | long   | Root process instance key.                                        |
 | `camunda.tenant.id`                 | string | Tenant ID.                                                        |
-
-Both carry the same attributes, so agent run duration is a join on `camunda.agent.instance_key`.
 
 The agent definition (model, provider, system prompt), its tools, its token counts and other collected metrics, and its configured limits are **not** exported.
 
