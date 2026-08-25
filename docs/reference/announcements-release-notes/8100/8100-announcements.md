@@ -182,11 +182,11 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 </div>
 <div className="release-announcement-content">
 
-#### AI Agent connector: Conversation storage SPI redesign
+#### AI Agent connector: new native (v2) element templates, v1 deprecated
 
-[Camunda 8.10.0-alpha1](/reference/announcements-release-notes/8100/8100-release-notes.md#8100-alpha1) redesigns the conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage). Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently; only custom `ConversationStore` implementations are affected.
+Camunda 8.10 introduces new `v2` element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration). The original (`v1`) element templates are deprecated as of Camunda 8.10.
 
-**Action:** If you maintain a custom `ConversationStore`, migrate to the new SPI. See the updated [AI Agent connector customization guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) for the new shape, and the [migration guide on GitHub](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for a step-by-step walkthrough.
+**Action:** Use the `v2` element templates for new AI Agent implementations. See the new [Model Providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing `v1` implementation to `v2`.
 
 </div>
 </div>
@@ -197,11 +197,11 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 </div>
 <div className="release-announcement-content">
 
-#### AI Agent connector: new native (v2) element templates, v1 deprecated
+#### AI Agent connector: Conversation storage SPI redesign
 
-Camunda 8.10 introduces new `v2` element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration). The original (`v1`) element templates are deprecated as of Camunda 8.10.
+[Camunda 8.10.0-alpha1](/reference/announcements-release-notes/8100/8100-release-notes.md#8100-alpha1) redesigns the conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage). Built-in stores (in-process, Camunda Document, AWS AgentCore) are migrated transparently; only custom `ConversationStore` implementations are affected.
 
-**Action:** Use the `v2` element templates for new AI Agent implementations. See the new [Model Providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing `v1` implementation to `v2`.
+**Action:** If you maintain a custom `ConversationStore`, migrate to the new SPI. See the updated [AI Agent connector customization guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) for the new shape, and the [migration guide on GitHub](https://github.com/camunda/connectors/blob/main/connectors/agentic-ai/docs/breaking-changes.md) for a step-by-step walkthrough.
 
 </div>
 </div>
