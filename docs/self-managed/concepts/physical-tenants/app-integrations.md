@@ -30,7 +30,7 @@ Three different concepts on this page use the word "tenant". Keep them apart:
 
 ## How App Integrations resolves the Physical Tenant
 
-App Integrations resolves a tenant independently on each of its three paths.
+App Integrations resolves a tenant independently on each of its four paths.
 
 ```mermaid
 graph TD
@@ -58,6 +58,8 @@ graph TD
 **Outbound API calls** are issued against the tenant's own orchestration URL, derived as `<cluster-url>/physical-tenants/<physicalTenantId>` unless the tenant configures an explicit one. The `default` tenant uses the cluster URL unchanged.
 
 **Inbound exporter events** carry their tenant in the `X-Physical-Tenant-Id` header. When the header is absent, App Integrations falls back to the tenant whose `exporter.apiKey` authenticated the request, and finally to `default`. See [event routing](#event-routing-and-notifications).
+
+**Inbound connector calls** carry the same header. The App Integrations connector reads the tenant from the job it is executing, so a linked form is fetched from that tenant's orchestration endpoint. See [connector calls](#connector-calls).
 
 **User context** is the `(organization, cluster, Physical Tenant)` triple stored per user. It determines which tenant a chat command reads from, and which tenant a new notification rule is scoped to.
 
@@ -151,6 +153,16 @@ A request authenticated with the **cluster-level** `exporter.apiKey` never resol
 
 Notification rules are scoped to the `(organization, cluster, Physical Tenant)` triple, and the tenant is matched on exact equality. Unlike the process and element filters, it has no wildcard: a rule scoped to `default` never receives a named tenant's events.
 
+## Connector calls
+
+The App Integrations connector posts to the same deployment, and its tenant is resolved the same way as an exporter event's: the `X-Physical-Tenant-Id` header first, then the tenant whose `connector.apiKey` authenticated the request, then `default`.
+
+The connector reads the tenant from the job it is executing and sends it on every call, so there is nothing to configure on the connector task or in the process model. What matters is that the connector runtime knows its own tenant. Set `physical-tenant-id` on each client entry, as described in [Connectors runtime](./connectors-runtime.md#how-the-runtime-identifies-the-physical-tenant). A client without it produces jobs that carry no tenant, so the connector omits the header and the call resolves to `default`.
+
+Because the tenant reaches the backend, a form referenced by the connector is fetched from that tenant's own orchestration endpoint using that tenant's audience, and notification rule matching is scoped to the same tenant.
+
+A call naming a tenant that is not configured for the cluster is rejected with `400 Invalid X-Physical-Tenant-Id header` rather than delivered to `default`. Keep the tenant IDs in `physicalTenants` and the runtime's `physical-tenant-id` values in sync.
+
 ## User experience in Microsoft Teams
 
 A Physical Tenant is not a separate selector. The Teams cluster picker lists one row per `(cluster, tenant)` pair, and choosing a row sets both at once:
@@ -178,7 +190,6 @@ To keep the cluster-wide view available during a migration, set `exposeDefaultTe
 - A separate identity provider per Physical Tenant ([Model C](./authentication-authorization.md#model-c-multiple-idps-advanced)) is not supported.
 - Identity linking and sign-in are deployment-wide, not per tenant.
 - Cluster health and version are reported per cluster, not per Physical Tenant.
-- The App Integrations connector's message endpoint is not tenant-scoped: a form referenced by the connector is always fetched from the cluster's `default` tenant, using the cluster-level audience. On a deployment with per-tenant audiences, that lookup can fail, and the connector falls back to the message's plain text.
 - Physical Tenants are a Self-Managed feature; App Integrations on SaaS is single-tenant.
 
 <p class="link-arrow">[Physical Tenant isolation model](./index.md)</p>
