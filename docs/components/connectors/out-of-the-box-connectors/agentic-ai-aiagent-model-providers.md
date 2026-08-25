@@ -8,7 +8,7 @@ description: Configure the LLM model provider used by the AI Agent Task and AI A
 The [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) and [AI Agent Task](./agentic-ai-aiagent-task.md) connectors share the same **Model provider** configuration. This page documents that configuration in detail.
 
 :::info
-This page documents the **native provider configuration** shipped with the `v2` AI Agent element templates (Camunda 8.10+). If you are still using the original (`v1`) AI Agent element templates, see [Upgrading from v1](./agentic-ai-aiagent-model-providers-upgrade.md) to move to the native providers described here.
+This page documents the **native provider configuration** shipped with the `v2` AI Agent element templates (Camunda 8.10+). If you are still using the original (`v1`) AI Agent element templates, see [Upgrading from v1](./agentic-ai-aiagent-upgrade.md) to move to the `v2` element templates and their native providers.
 :::
 
 ## Provider and backend

@@ -1,11 +1,13 @@
 ---
-id: agentic-ai-aiagent-model-providers-upgrade
+id: agentic-ai-aiagent-upgrade
 sidebar_label: Upgrading from v1
-title: Upgrade from v1 to v2 model providers
-description: Migrate AI Agent Task and AI Agent Sub-process model provider configuration from the legacy (v1) element templates to the native v2 provider configuration.
+title: Upgrade AI Agent element templates from v1 to v2
+description: Migrate AI Agent Task and AI Agent Sub-process elements from the legacy (v1) element templates to the native v2 element templates.
 ---
 
-Starting with Camunda 8.10, the AI Agent Task and AI Agent Sub-process connectors are available as new, native (`v2`) element templates with a redesigned [model provider configuration](./agentic-ai-aiagent-model-providers.md). This guide explains why and how to move an existing AI Agent implementation from the original (`v1`) element templates to `v2`.
+Starting with Camunda 8.10, the AI Agent Task and AI Agent Sub-process connectors are available as new, native (`v2`) element templates. This guide explains why and how to move an existing AI Agent implementation from the original (`v1`) element templates to `v2`.
+
+The `v2` element templates restructure the AI Agent connectors as a whole, not just model provider configuration. In practice, most of the hands-on migration work is in re-entering the [model provider configuration](./agentic-ai-aiagent-model-providers.md) covered below. The rest of an element's configuration (tools, memory, limits, response, error handling) carries over conceptually unchanged.
 
 ## Why upgrade
 
@@ -26,15 +28,15 @@ As of Camunda 8.10, `v1` job workers already run internally on the same native p
 
 1. Open the AI Agent Task or AI Agent Sub-process element in Camunda Modeler.
 2. Change the applied element template from **AI Agent Task**/**AI Agent Sub-process** (`v1`) to the `v2` variant of the same name.
-3. Re-enter the model provider configuration using the [mapping tables](#provider-configuration-mapping) below.
-4. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged, but re-check any values lost when the template was swapped.
+3. Re-enter the model provider configuration using the [mapping tables](#model-provider-configuration-mapping) below. This is where the bulk of the migration work is, since the provider fields were restructured the most between `v1` and `v2`.
+4. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged between `v1` and `v2`, but re-check any values lost when the template was swapped.
 5. Redeploy the process definition.
 
 Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the `v1` job worker until you deploy a new version with the `v2` template applied. This isn't a live migration of in-flight instances.
 
-## Provider configuration mapping
+## Model provider configuration mapping
 
-The tables below map each `v1` provider's fields to their `v2` equivalent, by field label. Enter the same values into the new fields unless a note says otherwise.
+Model provider configuration changed the most between `v1` and `v2`, since providers and backends are now decoupled (see [Provider and backend](./agentic-ai-aiagent-model-providers.md#provider-and-backend)). The tables below map each `v1` provider's fields to their `v2` equivalent, by field label. Enter the same values into the new fields unless a note says otherwise.
 
 ### Anthropic
 

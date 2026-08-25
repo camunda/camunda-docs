@@ -1047,17 +1047,8 @@ module.exports = {
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
                       ],
                     },
-                    {
-                      type: "category",
-                      label: "Model Providers",
-                      link: {
-                        type: "doc",
-                        id: "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
-                      },
-                      items: [
-                        "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers-upgrade",
-                      ],
-                    },
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
