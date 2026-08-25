@@ -197,6 +197,20 @@ Physical Tenants now support independent per-tenant authorization.
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
+#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+
+<!-- https://github.com/camunda/product-hub/issues/3607 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through the [Camunda Security Library](https://github.com/camunda/camunda-security-library/blob/main/README.md), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings, so you configure authentication once, in one place. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+
+Your existing Camunda Hub and Optimize authentication settings continue to work in 8.10, and the recognized properties are translated to their new equivalents at startup. Those legacy properties are deprecated for both components and are removed in 8.11.
+
+User, group, role, and permission management for Camunda Hub and Optimize is unchanged in this release, and is still handled by Management Identity. Unified authorization follows in 8.11.
+
+<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+
 #### Rolling upgrades
 
 <!-- https://github.com/camunda/product-hub/issues/2702 -->

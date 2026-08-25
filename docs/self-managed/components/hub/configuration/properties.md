@@ -397,6 +397,12 @@ camunda.modeler:
 
 Camunda Hub uses Keycloak as the default authentication provider (using OAuth 2.0 + OpenID Connect) and integrates with [Management Identity](/self-managed/components/management-identity/overview.md) for user management and authorization (see [Manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md)).
 
+:::note
+In 8.10, Camunda Hub authentication is configured under `camunda.security.authentication.oidc.*`, using the same settings as the Orchestration Cluster. The settings in this section continue to work and are translated to their 8.10 equivalents at startup, but they are deprecated and are removed in 8.11.
+
+See [authentication](./identity.md) for the current settings, and [upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration) for the mapping between them.
+:::
+
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
@@ -456,7 +462,7 @@ The `restapi` component default for `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM`
 In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
 :::
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [authentication guide](./identity.md) for additional details on how Camunda Hub authenticates users, and on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### Camunda client
 
