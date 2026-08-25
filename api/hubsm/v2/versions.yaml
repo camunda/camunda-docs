@@ -312,6 +312,7 @@ components:
         description: "First stable release of the order process."
         fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
         organizationPublic: false
+        linkedToProcessApplication: false
         created: "2025-03-15T10:30:00.000Z"
         createdBy:
           name: "Jane Doe"
@@ -330,6 +331,7 @@ components:
         - updated
         - updatedBy
         - organizationPublic
+        - linkedToProcessApplication
       properties:
         versionKey:
           description: The unique key of the version.
@@ -348,6 +350,10 @@ components:
             - $ref: "keys.yaml#/components/schemas/FileKey"
         organizationPublic:
           description: Whether the version is published to shared resources.
+          type: boolean
+        linkedToProcessApplication:
+          description: >-
+            Whether this version is linked to one or more process application versions.
           type: boolean
         created:
           description: The timestamp when the version was created.
@@ -377,6 +383,7 @@ components:
         description: "First stable release of the order process."
         fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
         organizationPublic: false
+        linkedToProcessApplication: false
         created: "2025-03-15T10:30:00.000Z"
         createdBy:
           name: "Jane Doe"
@@ -396,6 +403,7 @@ components:
         - updated
         - updatedBy
         - organizationPublic
+        - linkedToProcessApplication
         - content
       properties:
         versionKey:
@@ -415,6 +423,10 @@ components:
             - $ref: "keys.yaml#/components/schemas/FileKey"
         organizationPublic:
           description: Whether the version is published to shared resources.
+          type: boolean
+        linkedToProcessApplication:
+          description: >-
+            Whether this version is linked to one or more process application versions.
           type: boolean
         created:
           description: The timestamp when the version was created.
