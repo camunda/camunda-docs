@@ -18,7 +18,7 @@ Roles help you to enforce consistent permission sets, reduce errors, and scale a
 
 Management Identity includes a set of default roles that are available out-of-the-box. These roles are designed to cover common use cases and can be assigned to users and groups to grant them access to different management and modeling components.
 
-The following table lists the default roles and their descriptions. Web Modeler's roles are provisioned under both their legacy names (`Web Modeler`, `Web Modeler Admin`) and the equivalent Hub-named roles (`Hub`, `Hub Admin`), so existing installations keep working unchanged after upgrading to Camunda 8.10. `Console` and `DevOps` grant the same cluster-management access — `DevOps` is the forward-looking name for the same role:
+The following table lists the default roles and their descriptions. Web Modeler's roles are provisioned under both their legacy names (`Web Modeler`, `Web Modeler Admin`) and the equivalent Hub-named roles (`Hub`, `Hub Admin`), so existing installations keep working unchanged after upgrading to Camunda 8.10. `Console` and `DevOps` grant the same cluster-management access. `DevOps` is the forward-looking name for the same role:
 
 | Name                | Description                                                                                                 |
 | :------------------ | :---------------------------------------------------------------------------------------------------------- |
