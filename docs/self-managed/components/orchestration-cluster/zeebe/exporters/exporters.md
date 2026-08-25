@@ -10,6 +10,7 @@ The Orchestration Cluster comes packaged with built-in exporters:
 - [OpenSearch](opensearch-exporter.md)
 - [Camunda Exporter](camunda-exporter.md)
 - [RDBMS Exporter](rdbms-exporter.md)
+- [Analytics exporter](analytics-exporter.md)
 
 This section of the docs explains how these exporters can be [installed](install-zeebe-exporters.md) and configured.
 

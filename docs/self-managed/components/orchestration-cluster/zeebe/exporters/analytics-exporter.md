@@ -63,12 +63,9 @@ Analytics exporter configured: endpoint=<endpoint>, clusterId=<cluster-id>, part
 
 The exporter makes outbound HTTPS requests to the Camunda analytics endpoint:
 
-```
-<!-- BLOCKER: confirm before publishing. `stable/8.10` compiles
-     https://analytics.cloud.camunda.io, which Stephan Epping identified as a
-     placeholder on 2026-08-17. camunda/camunda#60355 sets the default to the
-     Cloud Run URL but is unmerged and not backported to stable/8.10. -->
-```
+:::danger BLOCKER - placeholder, do not publish
+The analytics endpoint hostname is not confirmed. `stable/8.10` compiles `https://analytics.cloud.camunda.io`, identified as a placeholder on 2026-08-17. camunda/camunda#60355 sets the default to the working Cloud Run URL but is unmerged and not backported to `stable/8.10`. Resolve before merge and delete this admonition.
+:::
 
 Allowlist this host in your egress firewall rules on every broker.
 

@@ -158,14 +158,15 @@ Camunda states plainly what this identifier is and is not:
 - The digest is **not salted**, so the same assignee value produces the same digest across clusters.
 - Because this signal belongs to the contractual category, it **cannot be disabled separately** from other contractual telemetry. Customers who must not send it should not enable the analytics exporter.
 
-<!-- BLOCKER: pending Legal review (Farrhah Khan). Confirm this wording satisfies the
-     D6 anonymity position before publishing. -->
+:::danger BLOCKER - pending Legal review
+The wording in this section must be confirmed by Legal before publishing. Delete this admonition once reviewed.
+:::
 
 ## Lawful basis
 
-<!-- BLOCKER: pending Legal review (Farrhah Khan) and confirmation of the final
-     contractual wording (Soline Marie Janvier). Draft reflects the Legal review
-     of 2026-07-21 (D4). -->
+:::danger BLOCKER - pending Legal review
+Draft only. The lawful-basis mapping below must be confirmed by Legal, and aligned with the final contractual wording, before publishing. Delete this admonition once reviewed.
+:::
 
 | Data                                                    | Basis                                                                                                                  |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -179,11 +180,9 @@ To object to processing of the pseudonymised subset, or to make a data subject r
 
 ## Retention and deletion
 
-<!-- BLOCKER: not written. D7 sets a five-year maximum for personal data, but Data
-     has not yet built the per-category retention schedules or the purge mechanism,
-     and there is no deletion path today (D9, Trustworks integration unbuilt).
-     Owners: Legal (Farrhah Khan) and Data (Luke Steer). Do not publish a retention
-     or deletion commitment until the mechanism exists. -->
+:::danger BLOCKER - not written
+Intentionally empty. A five-year maximum for personal data is set as policy, but the per-category retention schedules and the purge mechanism are not built, and there is no deletion path today. Publishing a retention or deletion commitment against a capability that does not exist would create an enforceable public promise Camunda cannot currently keep. Owners: Legal and Data. Either fill this section or remove the heading before merge.
+:::
 
 ## How to control telemetry
 
@@ -194,6 +193,6 @@ To object to processing of the pseudonymised subset, or to make a data subject r
 | **SaaS user actions** | Controlled per user through cookie preferences, shown in [Usage telemetry data](#usage-telemetry-data-saas-and-desktop-modeler-only).                                                                                                             |
 | **Desktop Modeler**   | Controlled per installation. See [Desktop Modeler telemetry](/components/modeler/desktop-modeler/telemetry/telemetry.md).                                                                                                                         |
 
-<!-- BLOCKER: the SaaS cluster-settings control is documented as shipping in 8.10 per
-     the 2026-08-25 scope decision, but has no owner, no design, and no tracking issue
-     as of that date. Confirm it ships before publishing, or rewrite this row. -->
+:::danger BLOCKER - unconfirmed capability
+The SaaS row above describes a cluster-settings control that is documented as shipping in 8.10, but as of 2026-08-25 has no design and no tracking issue. Confirm it ships before publishing, or rewrite that row. Delete this admonition once resolved.
+:::
