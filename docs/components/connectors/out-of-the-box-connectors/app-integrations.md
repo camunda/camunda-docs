@@ -91,11 +91,11 @@ Address people by their Camunda identity, and let app integrations resolve which
 
 Select a **Teams target**, then fill the field it reveals.
 
-| Teams target | Property     | Required | Description                                                                           | Example                                     |
-| :----------- | :----------- | :------- | :------------------------------------------------------------------------------------ | :------------------------------------------ |
-| Channel      | Channel ID   | Yes      | The Microsoft Teams channel to post into.                                             | `19:xxx@thread.tacv2`                       |
-| User         | User ID      | Yes      | Microsoft Entra object ID of the recipient. They must have connected the Camunda app. | `6b1e0f9a-1f3d-4a2b-9d0e-4c1b2a3d4e5f`      |
-| Conversation | Conversation | Yes      | A conversation returned by a previous send. The message is posted as a reply in it.   | `19:abc@thread.tacv2;messageid=17123456789` |
+| Teams target | Property     | Required | Description                                                                                   | Example                                     |
+| :----------- | :----------- | :------- | :-------------------------------------------------------------------------------------------- | :------------------------------------------ |
+| Channel      | Channel ID   | Yes      | The Microsoft Teams channel to post into.                                                     | `19:xxx@thread.tacv2`                       |
+| User         | User ID      | Yes      | Microsoft Entra object ID of the recipient. They must have connected the Camunda app.         | `6b1e0f9a-1f3d-4a2b-9d0e-4c1b2a3d4e5f`      |
+| Conversation | Conversation | Yes      | The `conversation` value returned by a previous send. The message is posted as a reply in it. | `19:abc@thread.tacv2;messageid=17123456789` |
 
 </TabItem>
 
@@ -132,20 +132,22 @@ Select a **Slack target**, then fill the field it reveals.
 
 You can select at most one, so a card and a form are mutually exclusive. You must provide a message, additional content, or both — an empty message with **None** is rejected before any call is made.
 
-| Property         | Type | Required | Description                                                                             |
-| :--------------- | :--- | :------- | :-------------------------------------------------------------------------------------- |
-| Adaptive card    | Text | Yes      | Adaptive Card as JSON. Shown when additional content is **Adaptive card**.              |
-| Block Kit blocks | Text | Yes      | Slack Block Kit `blocks` array as JSON. Shown when additional content is **Block Kit**. |
+| Additional content | Property         | Type | Required | Description                             |
+| :----------------- | :--------------- | :--- | :------- | :-------------------------------------- |
+| Adaptive card      | Adaptive card    | Text | Yes      | Adaptive Card as JSON.                  |
+| Block Kit          | Block Kit blocks | Text | Yes      | Slack Block Kit `blocks` array as JSON. |
 
 Both fields accept pasted JSON as well as a FEEL expression referencing a card built earlier in the process, such as `= approvalCard`. A JSON literal is valid FEEL, so pasting works without further quoting.
 
 When additional content is **Form**, the connector renders a linked Camunda form — as an Adaptive Card in Teams, as Block Kit in Slack. Select the form and its binding in the properties panel:
 
-| Property     | Type     | Required | Description                                                                 |
-| :----------- | :------- | :------- | :-------------------------------------------------------------------------- |
-| Form binding | Dropdown | Yes      | `Latest`, `Deployment`, or `Version tag`. Defaults to `Latest`.             |
-| Form ID      | String   | Yes      | ID of the Camunda form to render alongside the message.                     |
-| Version tag  | String   | Yes      | The version tag to bind to. Shown only when the binding is **Version tag**. |
+| Property     | Type     | Required | Description                                                     |
+| :----------- | :------- | :------- | :-------------------------------------------------------------- |
+| Form binding | Dropdown | Yes      | `Latest`, `Deployment`, or `Version tag`. Defaults to `Latest`. |
+| Form ID      | String   | Yes      | ID of the Camunda form to render alongside the message.         |
+| Version tag  | String   | Yes\*    | The version tag to bind to.                                     |
+
+\* Required when **Form binding** is **Version tag**.
 
 ### Response
 
@@ -173,6 +175,8 @@ The connector reports every destination the message reached, and every one it di
 | `deliveries[].conversation` | The conversation the message landed in. Use it to reply later. |
 | `deliveries[].messageId`    | The message identifier. In Slack, this is the thread anchor.   |
 | `failures`                  | Every destination that could not be reached.                   |
+| `failures[].platform`       | `teams` or `slack`.                                            |
+| `failures[].conversation`   | The conversation that could not be reached.                    |
 | `failures[].reason`         | Why that destination failed.                                   |
 
 A single delivery is a one-element list, so with a result variable of `response` you read it as `= response.deliveries[1].conversation`. FEEL lists are 1-indexed.
