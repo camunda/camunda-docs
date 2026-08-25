@@ -77,7 +77,7 @@ Refer to the example array below:
 
 ## Upload a document when using any connector
 
-Documents available for download from an unprotected URL can be added to a process in any connector as an **external document**. The full JSON structure and field reference — alongside the `camunda` and `inline` document types — is documented in [document sources](/components/document-handling/send-document-to-external-system.md#external-documents).
+Documents available for download from an unprotected URL can be added to a process in any connector as an **external document**. The full JSON structure and field reference is documented in [document sources](/components/document-handling/send-document-to-external-system.md#external-documents).
 
 ## Upload a document via inbound webhook connector
 

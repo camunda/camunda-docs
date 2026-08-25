@@ -88,7 +88,7 @@ Once you are happy with your script and have tested it locally, you can start au
 2. **Add RPA to your process**:
    1. Open an existing BPMN file or create a new one.
    2. Add the RPA script to your process:
-      - **Web Modeler**: Search for the RPA script by name directly in the **Append element** menu — no script ID required.
+      - **Web Modeler**: Search for the RPA script by name directly in the **Append element** menu. No script ID is required.
       - **Desktop Modeler**: Add a new task and change the type to **Run RPA Script**.
         <img src={RpaTaskAppend} alt="Appending an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 

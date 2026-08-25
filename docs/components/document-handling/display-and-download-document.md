@@ -52,6 +52,8 @@ When a process instance variable references a document, you can preview and down
 
 Document variables display the document's file name, type, and size. You can preview supported formats (PDF, JSON, plain text, PNG, JPG) directly in Operate, or download any document to your local machine. Use the **All / Documents** filter to show only document variables in the table.
 
+This works the same whether the document came from a form, a connector, or an [AI Agent tool call](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents.md).
+
 To inspect the underlying document reference metadata (such as document ID), expand the variable row.
 
 ## Download a document using the Orchestration Cluster REST API

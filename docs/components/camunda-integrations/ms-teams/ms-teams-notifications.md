@@ -52,7 +52,7 @@ A rule triggers a notification only when a user task matches all configured filt
 
 ### Match semantics
 
-- Empty filters match all user tasks in the selected cluster. A rule with no filters matches every user task in the selected cluster — the broadest possible subscription.
+- Empty filters match all user tasks in the selected cluster. A rule with no filters matches every user task in the selected cluster: the broadest possible subscription.
 - Adding filters narrows the match. Filters combine with AND across fields and OR within each list. For example, a rule with `candidateGroups = "finance, hr"` and a selected process matches tasks from that process that have either `finance` or `hr` as a candidate group.
 - Multiple matching rules deduplicate. If several rules match the same user task event, the recipient still receives only one notification per event.
 
