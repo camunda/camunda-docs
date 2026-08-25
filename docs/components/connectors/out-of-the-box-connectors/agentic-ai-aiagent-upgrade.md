@@ -45,7 +45,11 @@ Model provider configuration changed the most between `v1` and `v2`, since provi
 
 **Anthropic API key**, **Timeout**, **Model**, **Maximum tokens**, **Temperature**, **top P**, and **top K** carry over unchanged.
 
-If you had a custom `v1` **Endpoint** configured, don't set it on the **Anthropic API** backend's endpoint override: that's an advanced/hidden field meant as an escape hatch for template customization, not the documented configuration path. Instead, select **Backend**: [Custom / compatible endpoint](./agentic-ai-aiagent-model-providers.md#anthropic-custom--compatible-endpoint), and enter it in the visible **API endpoint** field there.
+If you had a custom `v1` **Endpoint** configured:
+
+| `v1` field | What to do in `v2`                                                                                                                                                   |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Endpoint   | Select **Backend**: [Custom / compatible endpoint](./agentic-ai-aiagent-model-providers.md#anthropic-custom--compatible-endpoint), and enter it as **API endpoint**. |
 
 `v2` additionally exposes **Effort**, **Thinking mode**, and **Enable prompt caching**. None of these have a `v1` equivalent.
 
@@ -58,7 +62,12 @@ If you had a custom `v1` **Endpoint** configured, don't set it on the **Anthropi
 
 #### Migrating to Anthropic + AWS Bedrock Mantle
 
-`v1`'s **Region** becomes **AWS region**, and **Endpoint** becomes **Custom endpoint**. **Authentication**, **Timeout**, **Maximum tokens**, **Temperature**, and **top P** carry over unchanged.
+**Authentication**, **Timeout**, **Maximum tokens**, **Temperature**, and **top P** carry over unchanged.
+
+| `v1` field | `v2` field      |
+| :--------- | :-------------- |
+| Region     | AWS region      |
+| Endpoint   | Custom endpoint |
 
 :::important
 **Custom endpoint** expects the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). This is a different shape than the Bedrock Runtime endpoint you may have configured in `v1`.
@@ -68,7 +77,12 @@ If you had a custom `v1` **Endpoint** configured, don't set it on the **Anthropi
 
 #### Migrating to AWS Bedrock Converse
 
-`v1`'s **Region** becomes **AWS region**, and **Endpoint** becomes **Custom endpoint**. **Authentication**, **Timeout**, **Model**, **Maximum tokens**, **Temperature**, and **top P** carry over unchanged.
+**Authentication**, **Timeout**, **Model**, **Maximum tokens**, **Temperature**, and **top P** carry over unchanged.
+
+| `v1` field | `v2` field      |
+| :--------- | :-------------- |
+| Region     | AWS region      |
+| Endpoint   | Custom endpoint |
 
 `v2` additionally exposes **Enable prompt caching** on the AWS Bedrock Converse provider.
 
@@ -99,7 +113,9 @@ A multi-replica connectors runtime setup means each replica acquires and caches 
 
 **OpenAI API key**, **Organization ID**, **Project ID**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged.
 
-**Maximum completion tokens** becomes **Max completion tokens** (if you keep **API**: Chat Completions) or **Max output tokens** (if you switch **API**: Responses).
+| `v1` field                | `v2` field                                                                                                            |
+| :------------------------ | :-------------------------------------------------------------------------------------------------------------------- |
+| Maximum completion tokens | Max completion tokens (if you keep **API**: Chat Completions) or Max output tokens (if you switch **API**: Responses) |
 
 `v1` always used the Chat Completions API. `v2` defaults its **API** field to the newer **Responses** API; select **Chat Completions** instead if you need closer parity with your `v1` behavior. `v2` additionally exposes the **Effort** reasoning parameter on both API families.
 
@@ -109,7 +125,10 @@ A multi-replica connectors runtime setup means each replica acquires and caches 
 
 **API endpoint**, **API key**, **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged, subject to the notes below.
 
-**Maximum completion tokens** becomes **Max completion tokens** (Chat Completions) or **Max output tokens** (Responses). **Custom parameters** becomes **Body properties**.
+| `v1` field                | `v2` field                                                                |
+| :------------------------ | :------------------------------------------------------------------------ |
+| Maximum completion tokens | Max completion tokens (Chat Completions) or Max output tokens (Responses) |
+| Custom parameters         | Body properties                                                           |
 
 :::important
 `v2`'s **API key** field is required, unlike `v1`'s optional **API key**. Resolve your effective credential as follows before entering it:
@@ -130,8 +149,9 @@ The provider itself changes from **Google Vertex AI** to **Google Gemini**. Vert
 
 **Project ID**, **Region**, **Authentication** (**Service account credentials** / **Application default credentials**), **Model**, **Temperature**, **top P**, and **top K** carry over unchanged.
 
-**Maximum output tokens** becomes **Maximum tokens**.
-
-If you had a custom `v1` **Endpoint** configured, note that `v2`'s Google Vertex AI backend only exposes an equivalent override as an advanced/hidden field, meant as an escape hatch for template customization. Unlike Anthropic or OpenAI, there's no separate custom/compatible endpoint backend for Google Gemini to switch to instead.
+| `v1` field            | What to do in `v2`                                                                                                       |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| Maximum output tokens | Enter the same value as **Maximum tokens**.                                                                              |
+| Endpoint              | Not available. There's no custom/compatible endpoint backend for Google Gemini to switch to, unlike Anthropic or OpenAI. |
 
 `v2` additionally exposes **Thinking budget**/**Thinking level** for reasoning configuration.
