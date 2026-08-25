@@ -420,6 +420,12 @@ The **Correlation** section is not applicable for the plain **start event** elem
 - **Correlation key (process)** is a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 - **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
+:::tip
+The **Activation condition** is evaluated before the **Correlation key (payload)** expression. Use the activation condition as a fail-safe filter to confirm the incoming message has the expected shape before correlation runs.
+
+If an unexpected payload reaches the **Correlation key (payload)** expression, FEEL evaluation fails, and the outcome depends on the specific connector. For the Kafka connector, this is treated as an unexpected error, so the offset is not committed and the subscription can stop until the issue is resolved.
+:::
+
 For example, given that your correlation key is defined with `myCorrelationKey` process variable, and the incoming Kafka message contains `value:{correlationKey:myValue}`, your correlation key settings would be as follows:
 
 - **Correlation key (process)**: `=myCorrelationKey`
