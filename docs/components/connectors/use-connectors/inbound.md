@@ -137,12 +137,6 @@ If the Webhook connector is applied to an **intermediate catch event**, you also
 9. **Correlation key (process)** - a FEEL expression that defines the correlation key for the subscription. This corresponds to the **Correlation key** property of a regular **message intermediate catch event**.
 10. **Correlation key (payload)** is a FEEL expression used to extract the correlation key from the incoming message. This expression is evaluated in the connector Runtime and the result is used to correlate the message.
 
-:::tip
-The **Activation condition** is evaluated before the **Correlation key (payload)** expression. Use the activation condition as a fail-safe filter to confirm the incoming message has the expected shape before correlation runs.
-
-If an unexpected payload reaches the **Correlation key (payload)** expression, FEEL evaluation fails, and the outcome depends on the specific connector. For example, for the Kafka connector, the offset is not committed and the subscription can stop until the issue is resolved.
-:::
-
 For example, given that your correlation key is defined with `requestIdValue` process variable, and the request body contains `{"request": {"id": 123}}`, your correlation key settings will look like this:
 
 - **Correlation key (process)**: `=requestIdValue`
