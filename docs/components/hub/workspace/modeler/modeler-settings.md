@@ -37,7 +37,7 @@ You can change this in the **Project deployment** settings. To get there, select
 
 Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
 after a collaborator has reviewed and approved the project version using the
-[project review](/components/hub/workspace/manage-projects/project-pipeline.md#review) feature.
+[project review](/components/hub/workspace/manage-projects/project-pipeline.md#project-versioning-and-review) feature.
 This setting can only be configured by organization admins and applies to all projects in the organization.
 
 </TabItem>
@@ -51,7 +51,7 @@ You can change this in the **Project deployment** settings. To get there, select
 
 Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
 after a collaborator has reviewed and approved the project version using the
-[project review](/components/hub/workspace/manage-projects/project-pipeline.md#review) feature.
+[project review](/components/hub/workspace/manage-projects/project-pipeline.md#project-versioning-and-review) feature.
 This setting can only be configured by users with the **Web Modeler Admin** role and applies to all projects.
 
 If the **Web Modeler Admin** role is not pre-existing, it can be created with the following permissions:

@@ -120,7 +120,7 @@ We have enabled developers to manage and work with multi-file BPMN projects dire
 
 ### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-pipeline.md#review) and approved.
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-pipeline.md#project-versioning-and-review) and approved.
 
 <!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
 

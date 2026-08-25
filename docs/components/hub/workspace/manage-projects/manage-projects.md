@@ -4,12 +4,23 @@ title: Projects
 description: In Camunda Hub, a project is a type of folder that contains a set of related files you can work on and deploy as a single bundle.
 ---
 
-import ProcessApplicationImg from './img/diagram-process-application-get-started.png'
+import DocsIcon from "@site/docs/components/assets/icon-docs.png";
+import AoGrid from '../../../react-components/\_ao-card';
 import FileListImg from './img/file-list.png'
 
-In Camunda Hub, a [project](/components/concepts/process-applications.md) is a type of folder that contains a set of related files you can work on and [deploy](./deploy-project.md) as a single bundle.
+In Camunda Hub, a [project](/components/concepts/process-applications.md) contains a set of related files you work on as a single bundle.
 
-<p><img src={ProcessApplicationImg} alt="Project" /></p>
+## About
+
+A project can contain:
+
+- [BPMN diagrams](/components/modeler/bpmn/bpmn.md)
+- [DMN diagrams](/components/modeler/dmn/dmn.md)
+- [Forms](/components/modeler/forms/utilizing-forms.md)
+- [RPA scripts](/components/rpa/overview.md)
+- [Element templates](../modeler/element-templates/manage-element-templates.md)
+- [READMEs](../modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md)
+- Folders
 
 For example, a project for a consumer loan application might consist of a BPMN diagram as an entry point and a number of additional supporting files, such as DMN diagrams and forms.
 
@@ -17,28 +28,28 @@ For example, a project for a consumer loan application might consist of a BPMN d
 
 ## Project development lifecycle
 
-In Camunda Hub, you can quickly develop project releases through the stages of a typical development lifecycle.
+In Camunda Hub, you can quickly develop project releases through the stages of a typical [project development lifecycle](project-pipeline.md)
 
-- [Project development lifecycle](project-pipeline.md)
-
-## Create a project
-
-Get started by creating a new project.
-
-- When you [create a project](./create-a-project.md), you must select a cluster to use for deployment during development.
-- You can [add files](./create-a-project.md#add-files-to-a-project) to the project as required.
-
-## Validate and deploy your project
-
-Validate your project in development before deploying it to testing, staging, or production.
-
-- [Validate and deploy your project](deploy-project.md)
-
-## Project versioning
-
-Use versioning to save a single snapshot of all the project files in one action.
-
-- [Project versioning](project-versioning.md)
+<AoGrid ao={[
+{
+link: "./create-a-project",
+title: "Set up a new project",
+image: DocsIcon,
+description: "Get started by setting up a new project.",
+},
+{
+link: "./deploy-project",
+title: "Validate and deploy your project",
+image: DocsIcon,
+description: "Validate your project in development before deploying it to testing, staging, or production.",
+},
+{
+link: "./project-versioning",
+title: "Project versioning",
+image: DocsIcon,
+description: "Use versioning to save a single snapshot of all the project files in one action.",
+},
+]} columns={3}/>
 
 ## Known limitations
 

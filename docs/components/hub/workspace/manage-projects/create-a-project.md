@@ -22,7 +22,7 @@ Create a project to work on a set of related files:
 
 Connect clusters to which you'll deploy project files.
 
-There are four deployment stages:
+There are [four deployment stages](./project-pipeline.md#deployment-pipeline-stages):
 
 - Development
 - Testing

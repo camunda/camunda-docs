@@ -811,12 +811,8 @@ module.exports = {
                 id: "components/hub/workspace/manage-projects/manage-projects",
               },
               items: [
+                "components/hub/workspace/manage-projects/project-pipeline",
                 "components/hub/workspace/manage-projects/create-a-project",
-                {
-                  type: "doc",
-                  label: "Lifecycle",
-                  id: "components/hub/workspace/manage-projects/project-pipeline",
-                },
                 {
                   type: "doc",
                   label: "Deployment",

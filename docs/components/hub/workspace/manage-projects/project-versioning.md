@@ -34,7 +34,7 @@ You can perform the following actions on a project version:
 1. View details, which opens the version details page so you can review the contents of all files in the version.
 1. Restore as latest, which is useful for reverting changes, making further edits, [git syncing](git-sync.md), downloading, or using Play.
 1. Edit
-1. Deploy, especially after the version has been [reviewed](./project-pipeline.md#review).
+1. Deploy, especially after the version has been [reviewed](./project-pipeline.md#project-versioning-and-review).
 1. Download
 1. Delete
 1. Copy, which creates a new project with the files from the version.

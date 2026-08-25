@@ -5,11 +5,10 @@ description: You can use Web Modeler to quickly develop project releases through
 ---
 
 import DeployProcessApplicationDiagramImg from './img/diagram-process-application-pipeline.png'
-import DeployStagesImg from './img/define-stages.png'
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-You can use Web Modeler to quickly develop project releases through the stages of a typical development lifecycle.
+With Camunda Hub, you can quickly develop project releases through the stages of a typical development lifecycle.
 
 <p><img src={DeployProcessApplicationDiagramImg} alt="Project file list" /></p>
 
@@ -19,17 +18,16 @@ For business-critical and higher-risk processes that require strict governance a
 
 ## Model
 
-During the modeling stage, you will typically:
+During the modeling stage, you'll typically:
 
-- [Create a project](create-a-project.md) and select a default development cluster to deploy to.
-- Invite other users to collaborate on the project.
-- Define and set up the clusters and deployment stages you will use in your development pipeline.
-- Model your diagrams and associated resources, and fix errors shown in the modeler.
-- Use [token simulation](/components/hub/workspace/modeler/validation/token-simulation.md) to correct and optimize your process flow.
+- [Set up a new project](create-a-project.md), including the clusters and deployment stages you'll use in your development pipeline.
+- [Invite other users](../manage-workspace/index.md#manage-workspace-members) to collaborate on the project.
+- [Model your diagrams](../modeler/index.md) and associated resources, and fix errors shown in the modeler.
+- Correct and optimize your process flow with [token simulation](/components/hub/workspace/modeler/validation/token-simulation.md).
 
 ### Deployment pipeline stages
 
-You can use the provided Web Modeler deployment pipeline to manage your application process deployment. The deployment pipeline has four stages named **Development**, **Testing**, **Staging**, and **Production**.
+You can use the provided Camunda Hub deployment pipeline to manage your project deployment. The deployment pipeline has the following stages:
 
 | Stage       | Description                                                                                                     |
 | :---------- | :-------------------------------------------------------------------------------------------------------------- |
@@ -38,13 +36,7 @@ You can use the provided Web Modeler deployment pipeline to manage your applicat
 | Staging     | Use for controlled testing where changes are validated before deployment to production.                         |
 | Production  | The live system with the latest software. Only administrators and organization owners can deploy to this stage. |
 
-To define your deployment pipeline stages:
-
-1. Open the [project homepage](create-a-project.md#project-homepage).
-1. Select **Configure** in the **Connected clusters** section to open the **Define stages** modal.
-   <p><img src={DeployStagesImg} alt="Define stage for deployment modal" /></p>
-1. Select and assign a cluster to each deployment stage that you want to use in your deployment pipeline.
-1. Select **Save** to save your changes and close the modal.
+To define your deployment pipeline stages, follow the [connect clusters](create-a-project.md#connect-clusters) instructions.
 
 :::note
 
@@ -65,7 +57,7 @@ When your project is ready for validation you can deploy it to your development 
 Play is being rebuilt and progressively rolled out to more users. See [Play limitations and availability](/components/hub/workspace/modeler/validation/play-your-process.md#limitations-and-availability) for Play limitations and why you might not see the **Play** tab.
 :::
 
-## Review
+## Project versioning and review
 
 After validation is complete, you can [create a new version of your project](./project-versioning.md#version-creation) and request a review:
 
@@ -93,16 +85,16 @@ If you want to use your own deployment pipeline after the review is complete, yo
 
 ### Deployment policy
 
-By default, only organization administrators can deploy projects to the `prod` tagged clusters.
+By default, only organization administrators can deploy projects to `prod` clusters.
 Organization administrators can change this policy in the [project deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment).
 
-From these settings, you can enable non-admin users with deployment permissions to deploy projects to prod after a collaborator has approved the process app version using the [project version review](project-pipeline.md#review).
+From these settings, you can enable non-admin users with deployment permissions to deploy projects to prod after a collaborator has approved the process app version using the [project version review](project-pipeline.md#project-versioning-and-review).
 
 ## Process governance
 
-The Web Modeler development lifecycle provides the following process governance:
+The project development lifecycle provides the following process governance:
 
-| Governance         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| :----------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Change control     | Reviews cannot be performed by the user who created the project version unless the user is an organization administrator. Reviews can be edited.                                                                                                                                                                                                                                                                                                                                                    |
-| Deployment control | <p><ul><li><p>Deployments can only be made to the pre-defined set of approved clusters.</p></li><li>Only users with correct privileges can deploy. Depending on the [deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment), organization administrators can deploy to `prod` tagged clusters, or only approved versions can be deployed.</li><li>Each deployment action is logged with information on the user and stage it was deployed to.</li></ul></p> |
+| Governance         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Change control     | Reviews cannot be performed by the user who created the project version unless the user is an organization administrator. Reviews can be edited.                                                                                                                                                                                                                                                                                                                                             |
+| Deployment control | <p><ul><li><p>Deployments can only be made to the pre-defined set of approved clusters.</p></li><li>Only users with correct privileges can deploy. Depending on the [deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment), organization administrators can deploy to `prod` clusters, or only approved versions can be deployed.</li><li>Each deployment action is logged with information on the user and stage it was deployed to.</li></ul></p> |
