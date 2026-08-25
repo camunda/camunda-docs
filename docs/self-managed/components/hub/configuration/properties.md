@@ -398,7 +398,7 @@ camunda.modeler:
 Camunda Hub uses Keycloak as the default authentication provider (using OAuth 2.0 + OpenID Connect) and integrates with [Management Identity](/self-managed/components/management-identity/overview.md) for user management and authorization (see [Manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md)).
 
 :::note
-In 8.10, Camunda Hub authentication is configured under `camunda.security.authentication.oidc.*`, using the same settings as the Orchestration Cluster. The settings in this section continue to work and are translated to their 8.10 equivalents at startup, but they are deprecated and are removed in 8.11.
+In 8.10, Camunda Hub authentication is configured under `camunda.security.authentication.oidc.*`, using the same settings as the Orchestration Cluster. The properties listed in the mapping below continue to work and are translated to their 8.10 equivalents at startup, but they are deprecated and are removed in 8.11.
 
 See [authentication](./identity.md) for the current settings, and [upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration) for the mapping between them.
 :::
