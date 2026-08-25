@@ -2407,6 +2407,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/zeebe/exporters/rdbms-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter",
                     "self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter",
+                    "self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter",
                   ],
                 },
               ],
