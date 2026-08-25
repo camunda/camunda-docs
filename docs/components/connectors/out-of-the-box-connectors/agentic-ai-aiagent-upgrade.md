@@ -26,32 +26,26 @@ As of Camunda 8.10, `v1` job workers already run internally on the same native p
 
 `v1` and `v2` are separate element templates backed by separate connector types (job types), not two versions of the same template. This means upgrading is a manual, per-element operation:
 
-1. Open the AI Agent Task or AI Agent Sub-process element in Camunda Modeler.
-2. Change the applied element template from **AI Agent Task**/**AI Agent Sub-process** (`v1`) to the `v2` variant of the same name.
-3. Re-enter the model provider configuration using the [mapping tables](#model-provider-configuration-mapping) below. This is where the bulk of the migration work is, since the provider fields were restructured the most between `v1` and `v2`.
-4. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged between `v1` and `v2`, but re-check any values lost when the template was swapped.
-5. Redeploy the process definition.
+1. Open the AI Agent Task or AI Agent Sub-process element in Camunda Modeler, and set the process' modeler/execution version to Camunda 8.10 or later, so the `v2` element template is available to select.
+2. In the element's **Template** panel, **Unlink** the applied `v1` template. This clears the template binding but keeps the element's existing field values.
+3. Select the element and choose **+ Select** on the **Template** field to apply the latest `v2` version of the same element template (**AI Agent Task**/**AI Agent Sub-process**). Since `v1` is deprecated, it's no longer selectable from the template picker; only `v2` is offered.
+4. Re-enter the model provider configuration using the [mapping tables](#model-provider-configuration-mapping) below. This is where the bulk of the migration work is, since the provider fields were restructured the most between `v1` and `v2`.
+5. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged between `v1` and `v2`, but re-check any values lost when the template was swapped.
+6. Redeploy the process definition.
 
 Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the `v1` job worker until you deploy a new version with the `v2` template applied. This isn't a live migration of in-flight instances.
 
 ## Model provider configuration mapping
 
-Model provider configuration changed the most between `v1` and `v2`, since providers and backends are now decoupled (see [Provider and backend](./agentic-ai-aiagent-model-providers.md#provider-and-backend)). The tables below map each `v1` provider's fields to their `v2` equivalent, by field label. Enter the same values into the new fields unless a note says otherwise.
+Model provider configuration changed the most between `v1` and `v2`, since providers and backends are now decoupled (see [Provider and backend](./agentic-ai-aiagent-model-providers.md#provider-and-backend)). The sections below only call out fields that actually changed; anything not mentioned carries over unchanged, by the same field label.
 
 ### Anthropic
 
 `v1` **Provider**: Anthropic → `v2` **Provider**: [Anthropic](./agentic-ai-aiagent-model-providers.md#anthropic), **Backend**: Anthropic API.
 
-| `v1` field        | `v2` field                           |
-| :---------------- | :----------------------------------- |
-| Anthropic API key | Anthropic API key                    |
-| Endpoint          | API endpoint (advanced/hidden field) |
-| Timeout           | Timeout                              |
-| Model             | Model                                |
-| Maximum tokens    | Maximum tokens                       |
-| Temperature       | Temperature                          |
-| top P             | top P                                |
-| top K             | top K                                |
+**Anthropic API key**, **Timeout**, **Model**, **Maximum tokens**, **Temperature**, **top P**, and **top K** carry over unchanged.
+
+If you had a custom `v1` **Endpoint** configured, don't set it on the **Anthropic API** backend's endpoint override: that's an advanced/hidden field meant as an escape hatch for template customization, not the documented configuration path. Instead, select **Backend**: [Custom / compatible endpoint](./agentic-ai-aiagent-model-providers.md#anthropic-custom--compatible-endpoint), and enter it in the visible **API endpoint** field there.
 
 `v2` additionally exposes **Effort**, **Thinking mode**, and **Enable prompt caching**. None of these have a `v1` equivalent.
 
@@ -64,35 +58,17 @@ Model provider configuration changed the most between `v1` and `v2`, since provi
 
 #### Migrating to Anthropic + AWS Bedrock Mantle
 
-| `v1` field (AWS Bedrock Converse) | `v2` field (Anthropic → AWS Bedrock Mantle) |
-| :-------------------------------- | :------------------------------------------ |
-| Region                            | AWS region                                  |
-| Endpoint                          | Custom endpoint                             |
-| Authentication                    | Authentication                              |
-| Timeout                           | Timeout                                     |
-| Model                             | Model                                       |
-| Maximum tokens                    | Maximum tokens                              |
-| Temperature                       | Temperature                                 |
-| top P                             | top P                                       |
+`v1`'s **Region** becomes **AWS region**, and **Endpoint** becomes **Custom endpoint**. **Authentication**, **Timeout**, **Maximum tokens**, **Temperature**, and **top P** carry over unchanged.
 
 :::important
 **Custom endpoint** expects the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). This is a different shape than the Bedrock Runtime endpoint you may have configured in `v1`.
 
-**Model** is interpreted by Anthropic's own model ID scheme (as used by the native Anthropic API), not the AWS Bedrock model ID format you used in `v1`. Check the model ID against the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
+**Model** carries over the same field label, but is now interpreted by Anthropic's own model ID scheme (as used by the native Anthropic API), not the AWS Bedrock model ID format you used in `v1`. Check the model ID against the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
 :::
 
 #### Migrating to AWS Bedrock Converse
 
-| `v1` field     | `v2` field      |
-| :------------- | :-------------- |
-| Region         | AWS region      |
-| Endpoint       | Custom endpoint |
-| Authentication | Authentication  |
-| Timeout        | Timeout         |
-| Model          | Model           |
-| Maximum tokens | Maximum tokens  |
-| Temperature    | Temperature     |
-| top P          | top P           |
+`v1`'s **Region** becomes **AWS region**, and **Endpoint** becomes **Custom endpoint**. **Authentication**, **Timeout**, **Model**, **Maximum tokens**, **Temperature**, and **top P** carry over unchanged.
 
 `v2` additionally exposes **Enable prompt caching** on the AWS Bedrock Converse provider.
 
@@ -102,16 +78,14 @@ Model provider configuration changed the most between `v1` and `v2`, since provi
 
 The provider itself changes from **Azure OpenAI** to **OpenAI**. Azure/Microsoft Foundry is now a backend of the general-purpose OpenAI provider rather than its own top-level provider.
 
+**Authentication: API key**, **Timeout**, **Temperature**, and **top P** carry over unchanged.
+
 | `v1` field                                                                               | `v2` field                                                                                         |
 | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
 | Endpoint                                                                                 | API endpoint                                                                                       |
-| Authentication: API key                                                                  | Authentication: API key                                                                            |
 | Authentication: Client credentials (Client ID, Client secret, Tenant ID, Authority host) | Authentication: Entra ID: Client credentials (Client ID, Client secret, Tenant ID, Authority host) |
 | Model deployment name                                                                    | Model                                                                                              |
-| Timeout                                                                                  | Timeout                                                                                            |
 | Maximum tokens                                                                           | Max output tokens (Responses API) or Max completion tokens (Chat Completions API)                  |
-| Temperature                                                                              | Temperature                                                                                        |
-| top P                                                                                    | top P                                                                                              |
 
 `v2` additionally offers an **Entra ID: Managed identity** authentication option (Hybrid/Self-Managed only), an optional **Entra ID scope** override, and the **Effort** reasoning parameter.
 
@@ -123,16 +97,9 @@ A multi-replica connectors runtime setup means each replica acquires and caches 
 
 `v1` **Provider**: OpenAI → `v2` **Provider**: [OpenAI](./agentic-ai-aiagent-model-providers.md#openai), **Backend**: OpenAI API.
 
-| `v1` field                | `v2` field                                                                                                            |
-| :------------------------ | :-------------------------------------------------------------------------------------------------------------------- |
-| OpenAI API key            | OpenAI API key                                                                                                        |
-| Organization ID           | Organization ID                                                                                                       |
-| Project ID                | Project ID                                                                                                            |
-| Timeout                   | Timeout                                                                                                               |
-| Model                     | Model                                                                                                                 |
-| Maximum completion tokens | Max completion tokens (if you keep **API**: Chat Completions) or Max output tokens (if you switch **API**: Responses) |
-| Temperature               | Temperature                                                                                                           |
-| top P                     | top P                                                                                                                 |
+**OpenAI API key**, **Organization ID**, **Project ID**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged.
+
+**Maximum completion tokens** becomes **Max completion tokens** (if you keep **API**: Chat Completions) or **Max output tokens** (if you switch **API**: Responses).
 
 `v1` always used the Chat Completions API. `v2` defaults its **API** field to the newer **Responses** API; select **Chat Completions** instead if you need closer parity with your `v1` behavior. `v2` additionally exposes the **Effort** reasoning parameter on both API families.
 
@@ -140,18 +107,9 @@ A multi-replica connectors runtime setup means each replica acquires and caches 
 
 `v1` **Provider**: OpenAI-compatible → `v2` **Provider**: [OpenAI](./agentic-ai-aiagent-model-providers.md#openai), **Backend**: Custom / compatible endpoint.
 
-| `v1` field                | `v2` field                                                                |
-| :------------------------ | :------------------------------------------------------------------------ |
-| API endpoint              | API endpoint                                                              |
-| API key                   | API key                                                                   |
-| Headers                   | Headers                                                                   |
-| Query Parameters          | Query parameters                                                          |
-| Timeout                   | Timeout                                                                   |
-| Model                     | Model                                                                     |
-| Maximum completion tokens | Max completion tokens (Chat Completions) or Max output tokens (Responses) |
-| Temperature               | Temperature                                                               |
-| top P                     | top P                                                                     |
-| Custom parameters         | Body properties                                                           |
+**API endpoint**, **API key**, **Headers**, **Query parameters**, **Timeout**, **Model**, **Temperature**, and **top P** carry over unchanged, subject to the notes below.
+
+**Maximum completion tokens** becomes **Max completion tokens** (Chat Completions) or **Max output tokens** (Responses). **Custom parameters** becomes **Body properties**.
 
 :::important
 `v2`'s **API key** field is required, unlike `v1`'s optional **API key**. Resolve your effective credential as follows before entering it:
@@ -170,17 +128,10 @@ Also double-check the resulting request path: `v2` appends `/chat/completions` o
 
 The provider itself changes from **Google Vertex AI** to **Google Gemini**. Vertex AI is now a backend of the general-purpose Google Gemini provider. A new [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini-api) backend is also available if you'd rather not manage a Google Cloud project.
 
-| `v1` field                                            | `v2` field                                      |
-| :---------------------------------------------------- | :---------------------------------------------- |
-| Project ID                                            | Project ID                                      |
-| Region                                                | Region                                          |
-| Endpoint                                              | API endpoint (advanced/hidden field)            |
-| Authentication: Service Account Credentials           | Authentication: Service account credentials     |
-| Authentication: Application Default Credentials (ADC) | Authentication: Application default credentials |
-| Model                                                 | Model                                           |
-| Maximum output tokens                                 | Maximum tokens                                  |
-| Temperature                                           | Temperature                                     |
-| top P                                                 | top P                                           |
-| top K                                                 | top K                                           |
+**Project ID**, **Region**, **Authentication** (**Service account credentials** / **Application default credentials**), **Model**, **Temperature**, **top P**, and **top K** carry over unchanged.
+
+**Maximum output tokens** becomes **Maximum tokens**.
+
+If you had a custom `v1` **Endpoint** configured, note that `v2`'s Google Vertex AI backend only exposes an equivalent override as an advanced/hidden field, meant as an escape hatch for template customization. Unlike Anthropic or OpenAI, there's no separate custom/compatible endpoint backend for Google Gemini to switch to instead.
 
 `v2` additionally exposes **Thinking budget**/**Thinking level** for reasoning configuration.
