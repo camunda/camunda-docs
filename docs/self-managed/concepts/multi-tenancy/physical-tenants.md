@@ -5,7 +5,9 @@ sidebar_label: "Physical Tenants"
 description: "Physical Tenants enable strong data isolation and independent management within a single Camunda 8 cluster."
 ---
 
-A **Physical Tenant** is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each acting like a self-contained mini-cluster with fully isolated data, independent lifecycle management, and no runtime interference between tenants.
+A **Physical Tenant** is an isolated execution unit within an Orchestration Cluster. Multiple Physical Tenants can run in a single cluster, each with fully isolated data, its own partition group, and independent lifecycle management.
+
+Isolation covers data and management, not compute. Physical Tenants share the cluster's brokers and gateways, so runtime interference between tenants is reduced but not eliminated. See [what is not isolated](/self-managed/concepts/physical-tenants/index.md#what-is-not-isolated-in-810).
 
 Physical Tenants provide a balanced approach to multi-tenancy. They offer strong isolation without the operational complexity and cost of running separate clusters. See [multi-tenancy overview](index.md) to compare isolation models.
 
@@ -13,7 +15,7 @@ Physical Tenants provide a balanced approach to multi-tenancy. They offer strong
 
 **Strong isolation without complexity:** Run multiple teams or organizations on one cluster with complete data separation and independent operations, without the overhead of managing multiple orchestration clusters.
 
-**Independent operations:** Back up, restore, scale, and manage each Physical Tenant independently. Tenant-specific performance issues do not affect other tenants.
+**Independent operations:** Back up, restore, scale, and manage each Physical Tenant independently, without coordinating a window across every tenant in the cluster.
 
 **Cost efficiency:** Share infrastructure while maintaining tenant autonomy, reducing operational overhead compared to multi-cluster deployments.
 
