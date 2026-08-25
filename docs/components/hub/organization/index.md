@@ -11,7 +11,7 @@ Manage organizational resources, including clusters and workspaces, and govern t
 
 ## About organization-level management
 
-With Camunda Hub, you'll manage your infrastructure, member access, and workspaces, so your delivery teams have the environments and tools they need to ship process solutions at scale. This governance happens at the organization level.
+With Camunda Hub, you'll manage your infrastructure, member access, and workspaces, so your delivery teams have the environments and tools they need to ship process solutions at scale. This governance happens at the organization level, applying equally to the clusters that run fixed-step processes and those running [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md).
 
 ## Manage workspaces
 

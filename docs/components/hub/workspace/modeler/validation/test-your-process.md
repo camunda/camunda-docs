@@ -198,7 +198,7 @@ To save a test case:
 
 ### Add assertions {#assertions}
 
-A test case that only executes its instructions can still pass even if it produces incorrect output or follows the wrong path. Use assertions to verify what actually happened, not just whether the test case finished. 
+A test case that only executes its instructions can still pass even if it produces incorrect output or follows the wrong path. Use assertions to verify what actually happened, not just whether the test case finished.
 
 ![Assertion editor](../img/test-assertion-editor.png)
 
@@ -275,10 +275,11 @@ When a BPMN change removes or renames an element that an instruction or assertio
 - Test mode flags broken test cases with an indicator in the test case list. A callout in the test case detail view explains what's broken.
 
 - Use the graphical repair view to fix most breakages without editing JSON: remap an instruction or assertion to a different element, select a new expected value, edit a step in place, or delete it.
-  
+
 ![Repair view](../img/test-repair-view.png)
 
 - For changes the graphical repair view doesn't cover, open the [test file](test-files.md) in Web Modeler's file editor and edit the JSON directly. Then, return to Test mode and rerun the test case.
+
 ### Limitations {#test-cases-limitations}
 
 Test mode displays a warning badge on diagram elements with known limitations. Use the **Show problems**/**Hide problems** toggle near the canvas controls to show or hide these badges.
@@ -286,7 +287,7 @@ Test mode displays a warning badge on diagram elements with known limitations. U
 ![Warning badges on diagram elements](../img/test-warning-badges.png)
 
 - Call activities are not supported. Test cases containing call activities cannot be executed successfully.
-- Ad-hoc sub-processes are not supported. Test cases containing ad-hoc sub-processes cannot be executed successfully.
+- Ad-hoc sub-processes are not supported. Test cases containing ad-hoc sub-processes cannot be executed successfully. This includes the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), since it's implemented as an ad-hoc sub-process.
 - Timer events can't be manually triggered. When a test case reaches a timer event, execution pauses until the timer fires automatically. To skip a timer, use [process instance modification](#modify-a-process-instance) to move the token to the next element.
 - Test case paths that include process modifications are not supported.
 - Similarly to process instances, test cases do not run in isolation. For example, if two test case paths are defined for a process and both contain the same message event or signal event, running these test cases simultaneously might lead to unintended consequences. Publishing a message or broadcasting a signal could inadvertently impact the other test case, resulting in the failure of both.
