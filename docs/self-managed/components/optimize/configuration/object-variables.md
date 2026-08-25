@@ -13,11 +13,11 @@ Complex object variables can be imported into Optimize and thereafter be used in
 
 For example, an object variable called `user` with the properties `firstName` and `lastName` will result in two flattened variables: `user.firstName` and `user.lastName`. These variables can be used within reports and filters.
 
-Additionally, to the flattened properties, Optimize also imports the entire raw value of the object variable. In the above example, this would result in a variable called `user` with value `{"firstName": "John", "lastName": "Smith"}`. This raw object variable can be inspected in Raw Data Reports but is not supported in other report types or filters.
+In addition to the flattened properties, Optimize also imports the entire raw value of the object variable. In the example above, this creates a variable called `user` with the value `{"firstName": "John", "lastName": "Smith"}`. You can inspect this raw object variable in Raw Data Reports, but other report types and filters do not support it.
 
 ## List variables
 
-Optimize also supports object variables which are JSON serialized lists of primitive types, for example a list of strings or numbers. Note that for Camunda 7 and external variables, the `type` of list variables must still be set to `Object`. During import, Optimize also evaluate how many entries are in a given list and persists this in an additional `_listSize` variable.
+Optimize also supports object variables that are JSON-serialized lists of primitive types, such as a list of strings or numbers. For Camunda 7 and external variables, the `type` of list variables must still be set to `Object`. During import, Optimize evaluates the number of entries in each list and persists it in an additional `_listSize` variable.
 
 For example, a list variable with the name `users` and the values `["John Smith", "Jane Smith"]` will result in two imported variables: one `users` variable with the two given values, and one variable called `users._listSize` with value `2`. Both can be used in reports and filters.
 
@@ -29,7 +29,12 @@ The value of list properties within objects as well as variables which are lists
 
 ## Optimize configuration
 
-The import of object variable values is enabled by default and can be disabled using the `zeebe.includeObjectVariableValue` configuration. Alternatively, this can be set using the `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE` Environment Variable.
+As of Camunda 8.10, the import of object variable values is disabled by default. It can be enabled using the `zeebe.includeObjectVariableValue` configuration. Alternatively, this can be set using the `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE` environment variable.
+
+When enabled, each flattened property and the raw object itself are stored as separate variables. As a result, object-heavy processes can significantly increase Optimize's storage and CPU usage.
+See [Impact of Optimize](/components/best-practices/architecture/sizing-your-environment.md#impact-of-optimize) for sizing guidance.
+
+When disabled (the default), Optimize logs a `WARN` on startup as a reminder, and object variables are neither flattened nor stored.
 
 Depending on where the imported object variables originate, the following configuration is required to ensure that your system produces object variable data that Optimize can import correctly:
 

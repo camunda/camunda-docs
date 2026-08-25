@@ -14,7 +14,7 @@ import PageDescription from '@site/src/components/PageDescription';
 <td>**Release date**</td>
 <td>**Announcements**</td>
 <td>**Release notes**</td>
-<td>**Scheduled End of maintenance**</td>
+<td>**End of standard maintenance**</td>
 </tr>
 <tr>
 <td>8.10</td>

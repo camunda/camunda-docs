@@ -11,6 +11,8 @@ paths:
       description: |-
 
 
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUVTU0FHRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
+
         [[ADDED_IN_VERSION:8.6]]
 
         [[CONSISTENCY:STRONG]]
@@ -51,6 +53,8 @@ paths:
       summary: Correlate message
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siZHluYW1pYyI6dHJ1ZSwibm90ZSI6IlJlc29sdmVkIGZyb20gdGhlIG1hdGNoZWQgc3Vic2NyaXB0aW9uIOKAlCBDUkVBVEVfUFJPQ0VTU19JTlNUQU5DRSAoc3RhcnQtZXZlbnQpIG9yIFVQREFURV9QUk9DRVNTX0lOU1RBTkNFIChpbnRlcm1lZGlhdGUpIG9uIFBST0NFU1NfREVGSU5JVElPTi4ifV19]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -99,6 +103,8 @@ paths:
       summary: Search message subscriptions
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -150,6 +156,8 @@ paths:
       summary: Search correlated message subscriptions
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.8]]
 

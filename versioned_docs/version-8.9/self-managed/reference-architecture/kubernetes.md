@@ -110,7 +110,7 @@ Depending on your specific use case, you may need to scale **horizontally** (mor
 
 By default, node affinity rules prevent all Orchestration Cluster pods from being scheduled on the same node. This requires at least three nodes for proper operation. For details, see the [Kubernetes node affinity documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
-To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. Use affinity and anti-affinity rules to ensure workloads remain available even if a zone fails.
+To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. The default anti-affinity rules ensure Orchestration Cluster pods run on distinct nodes, but do not ensure those nodes are in different zones — use the `orchestration.topologySpreadConstraints` Helm value to spread them across zones. For configuration details and caveats, see [topology spread constraints](/self-managed/deployment/helm/install/production/index.md#topology-spread-constraints).
 
 ### Components
 
@@ -179,7 +179,7 @@ Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, 
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md#disk-space), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores

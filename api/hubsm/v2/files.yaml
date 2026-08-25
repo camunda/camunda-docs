@@ -352,9 +352,9 @@ components:
         - type
         - content
       example:
-        name: "order-process.bpmn"
-        projectKey: "prj-def-456"
-        folderKey: "fld-012-ghi"
+        name: "order-process"
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+        folderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee"
         type: "bpmn"
         content: "<?xml version='1.0' encoding='UTF-8'?>..."
       properties:
@@ -394,7 +394,7 @@ components:
       required:
         - revision
       example:
-        name: "order-process-v2.bpmn"
+        name: "order-process-v2"
         content: "<?xml version='1.0' encoding='UTF-8'?>..."
         revision: 3
       properties:
@@ -425,12 +425,12 @@ components:
     FileResult:
       type: object
       example:
-        fileKey: "file-789-xyz"
-        name: "order-process.bpmn"
-        projectKey: "prj-def-456"
-        folderKey: "fld-012-ghi"
-        simplePath: "/processes/order-process.bpmn"
-        canonicalPath: "/fld-012-ghi/file-789-xyz"
+        fileKey: "0d9410a3-3524-4039-8174-7dd345f61bc5"
+        name: "order-process"
+        projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2"
+        folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc"
+        simplePath: "orders/processes/order-process.bpmn"
+        canonicalPath: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee/bccb5014-10a7-48df-bb56-81cb286594cc"
         revision: 3
         type: "bpmn"
         content: "<?xml version='1.0' encoding='UTF-8'?>..."

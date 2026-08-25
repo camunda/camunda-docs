@@ -12,7 +12,7 @@ When running an orchestration cluster with [secondary storage](/self-managed/com
 The Orchestration Cluster is configured with the snapshot repository name to trigger database snapshots. This ensures coherent backups.
 
 :::info
-Learn more about the backup procedure and why it must be triggered in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md).
+Learn more about the backup procedure and why it must be triggered in the [backup guide](/self-managed/operational-guides/backup-restore/backup-and-restore.md). For disaster recovery using these backups, see [Cold Recovery](/self-managed/concepts/multi-region/cold-recovery.md).
 :::
 
 ## Configure this in Kubernetes with Helm

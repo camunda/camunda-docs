@@ -22,4 +22,30 @@ To view a deployed process, take the following steps:
 
 Running process instances appear in the **Process Instances** table below the process model. To inspect a specific instance, click the **Process Instance Key**.
 
-Here, observe details about the process instance, including the instance history and the variables attached to the instance. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
+The process instance page has three parts:
+
+- A header showing the process instance's key, version, and state.
+- A process diagram showing the instance's current progress.
+- A bottom panel with tabs, including **Details**, **Incidents** (shown only when the instance has an incident), and **Variables**.
+
+Click an element in the diagram to select it, then use the tabs in the bottom panel to inspect its details, incidents, and variables. In earlier versions, an element's details and incidents appeared in a metadata popover when you clicked it; the popover is now replaced by the **Details** and **Incidents** tabs. To visualize process instance performance, use [Optimize](/components/optimize/what-is-optimize.md).
+
+## Navigate to a called process instance
+
+When a call activity in the diagram calls another process, double-click the call activity element to jump directly to the called process instance.
+
+Double-click navigation only works when the process instance has called exactly one process instance in total. If it has called more than one — for example, through multiple call activities, or a call activity that ran more than once — double-clicking does nothing.
+
+For a reliable way to find a called process instance, take the following steps:
+
+1. Click the call activity element to select it.
+2. Open the **Details** tab.
+3. In the row labeled **Called Process Instance**, click the link — shown as the called process's name and instance key — to navigate to that instance.
+
+If the call activity has called more than one process instance, the **Details** tab shows a **View all** link instead of a single link. This link filters the **Processes** page by the whole process instance, so it shows every instance it has called, including from other call activities — not only the one you selected.
+
+## Business ID for decision instances
+
+Starting in 8.10, a [business ID](/components/concepts/process-instance-creation.md#business-id) is shown for decision instances in Operate: as an optional filter field in the **Decisions** list, and in the header of a decision instance's details page, if one is defined for that instance. Filter decision instances by business ID the same way as [process instances](./filter-process-instances.md#business-id-filter) — using **Equals**, **Contains**, and **Is one of** in the filter UI, or the `$eq`/`$neq`/`$exists`/`$like`/`$in`/`$notIn` operators via the [search decision instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-decision-instances.api.mdx).
+
+Decision instances evaluated before 8.10 do not carry a business ID, since the value is snapshotted from the owning process instance at the decision instance's own creation time. Standalone decision evaluations, which are not tied to a process instance, never carry a business ID.

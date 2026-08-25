@@ -1,0 +1,222 @@
+---
+id: authentication-authorization
+title: "Authentication and authorization for Physical Tenants"
+sidebar_label: "Authentication and authorization"
+description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
+---
+
+import AoGrid from "../../../components/react-components/_ao-card";
+import IconConfigImg from "../../../components/assets/icon-config.png";
+import IconReferenceApiImg from "../../../components/assets/icon-reference-api.png";
+
+Learn how Camunda 8.10 authenticates users and authorizes access to Physical Tenants in Self-Managed deployments.
+
+<AoGrid columns={2} ao={[
+{
+link: "../configuration-reference/",
+title: "Configuration reference",
+image: IconConfigImg,
+description: "Assign identity providers and define root defaults and per-tenant overrides.",
+},
+{
+link: "../authorization-model/",
+title: "Authorization model",
+image: IconReferenceApiImg,
+description: "Understand tenant-local permissions and cluster-wide management access.",
+},
+]} />
+
+## Centralized identity model
+
+In Camunda 8.10, identity is **centralized at the cluster boundary**. This means:
+
+- Identity providers (IdPs) are defined once at the cluster level.
+- Each Physical Tenant selects which cluster-defined providers it accepts using `providers.assigned`.
+- Physical Tenants cannot introduce their own IdP definitions outside the cluster-level list.
+
+This design keeps identity management simple and avoids per-engine IdP fragmentation, which is explicitly not recommended for Physical Tenants. Configuring a separate identity provider per engine increases operational complexity without additional security benefit for most use cases.
+
+## Identity deployment models
+
+Camunda 8.10 supports two recommended identity deployment models for Physical Tenants. A third model for advanced or managed-service scenarios is available but not recommended as a baseline.
+
+### Model A: Single IdP, single client
+
+All Physical Tenants use one identity provider and one client registration. Roles and permissions are differentiated within that client by tenant-specific mapping rules.
+
+Use Model A when:
+
+- You have one organization or team using a single IdP.
+- You want simple configuration with a single client.
+- Role differentiation per tenant is handled through token claims or group mappings in Camunda.
+
+### Model B: Single IdP, multiple role-level clients
+
+All Physical Tenants use one identity provider, but each tenant (or role level) has a dedicated client registration. Camunda distinguishes clients by matching both the **issuer** (`iss` claim) to identify the IdP and the **audience** (`aud` claim) to identify the specific role-level client.
+
+Use Model B when:
+
+- You need stricter per-tenant token isolation.
+- Different teams or departments require separate client configurations.
+- You want role-level client separation within one IdP.
+
+Model B is the recommended baseline for most customers deploying Physical Tenants in 8.10.
+
+### Model C: Multiple IdPs (advanced)
+
+Each Physical Tenant uses a separate identity provider. This model is intended for managed services or advanced deployments where tenants are fully autonomous organizations with their own IdPs.
+
+Model C is not a recommended baseline for 8.10. Use it only when:
+
+- Tenants are separate organizations that each manage their own IdP.
+- You are operating a managed service where per-tenant IdP autonomy is required.
+
+## How token routing works
+
+When a request arrives at an authenticated endpoint, Camunda matches the JWT token to the correct identity provider using two steps:
+
+1. **Issuer matching:** The token's `iss` claim identifies which configured IdP issued the token.
+2. **Audience matching (Model B):** For deployments with multiple role-level clients under the same IdP, the token's `aud` claim identifies the specific client registration. Camunda rejects tokens whose audience does not match the tenant's allowed configuration.
+
+Both checks are enforced at the API security filter chain level. A token whose `iss` claim matches no configured provider fails with an authentication error naming the unrecognized issuer. A token with a valid issuer but a non-matching audience is also rejected.
+
+## Per-tenant authorization
+
+Roles, permissions, and mapping rules are local to each Physical Tenant. They are **not** stored or managed in the identity provider.
+
+- Each Physical Tenant has its own roles and permission definitions.
+- Mapping rules translate IdP token claims into Camunda roles independently per tenant.
+- A user can be admin in one tenant and read-only in another, defined independently in each tenant.
+
+The IdP only authenticates users and supplies claims. The tenant's local mapping rules in Camunda determine what a user can do within that tenant.
+
+## Per-tenant role and permission definitions
+
+Each Physical Tenant defines its own roles, permissions, and mapping rules independently. There is no automatic cross-tenant role inheritance from the cluster level.
+
+Role definitions within a tenant cover:
+
+- What operations a role can perform within that tenant (for example, deploy processes, start instances, complete tasks)
+- Which token claims or values map to which Camunda roles within that tenant
+
+Because each tenant manages its own authorization, the same user can have different permissions in different Physical Tenants.
+
+### Per-tenant initialization configuration
+
+Per-tenant roles, mapping rules, and authorizations use the same configuration shape as the cluster-wide [`camunda.security.initialization`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecurityinitializationauthorizations) properties, declared under `camunda.physical-tenants.<tenantId>.security.initialization` instead:
+
+```yaml
+camunda:
+  physical-tenants:
+    tenanta:
+      security:
+        initialization:
+          roles:
+            - roleId: tenant-a-admin
+              name: Tenant A Admin
+              mappingRules:
+                - team-a-admins-mapping
+          mappingrules:
+            - mapping-rule-id: team-a-admins-mapping
+              claim-name: groups
+              claim-value: team-a-admins
+          authorizations:
+            - ownerType: ROLE
+              ownerId: tenant-a-admin
+              resourceType: PROCESS_DEFINITION
+              resourceId: "*"
+              permissions:
+                - READ
+                - UPDATE
+```
+
+Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant. The block is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:
+
+- The **default** Physical Tenant, which keeps the top-level `camunda.security.initialization`, whether synthesized from the root or declared explicitly.
+- Any tenant with `security.authorization.enabled: false` (per-tenant override, or inherited from the root), since the initialization block only takes effect when authorization is enabled.
+
+If a non-default tenant with authorization enabled omits the block, startup fails:
+
+```text
+Each explicitly-configured physical tenant must declare its own initialization block under
+'camunda.physical-tenants.<id>.security.initialization.*' when authorization is enabled for that
+tenant; it may not be inherited from the root (the 'default' tenant keeps the top-level
+'camunda.security.initialization'). Physical tenants missing a required initialization block:
+[tenanta, tenantb]
+```
+
+## Token claim mappings
+
+Mapping rules define how token claims from the IdP translate into Camunda roles within a Physical Tenant. Each tenant applies its own mapping rules independently, enabling different access levels for the same user across tenants.
+
+For example, a token claim `groups: ["team-a-admins"]` might map to an admin role in one Physical Tenant but have no effect in another tenant where that claim is not configured.
+
+## IdP provider assignment
+
+Every explicitly configured Physical Tenant must declare which identity providers it accepts using `providers.assigned`. If no providers are assigned to a configured tenant, the cluster fails to start with a configuration validation error:
+
+```text
+Invalid physical-tenant provider selection: non-default physical tenant '<tenantId>' must declare a
+non-empty 'camunda.physical-tenants.<tenantId>.security.authentication.providers.assigned' selecting
+which cluster OIDC providers apply to it
+```
+
+The one exception is the **implicit default tenant**: when no `camunda.physical-tenants.*` configuration is present, the default tenant falls back to the full cluster provider set. Once the default tenant is explicitly configured under `camunda.physical-tenants.default`, it must also declare its assigned providers.
+
+```yaml
+camunda:
+  security:
+    authentication:
+      method: oidc
+      providers:
+        oidc:
+          corp-idp:
+            issuer-uri: https://corp-idp.example.com/realms/camunda
+            client-id: camunda-client
+            client-secret: ${CORP_IDP_CLIENT_SECRET}
+            audiences:
+              - camunda-api
+            username-claim: preferred_username
+
+  physical-tenants:
+    tenanta:
+      security:
+        authentication:
+          providers:
+            assigned:
+              - corp-idp
+```
+
+For complete configuration examples, see [configuration reference](./configuration-reference.md).
+
+## IdP redirect URI registration
+
+When users log in to a non-default Physical Tenant via a browser (for example, `https://your-cluster/physical-tenants/tenanta/operate`), the OAuth redirect URI includes the tenant path prefix, such as `/physical-tenants/tenanta/sso-callback`. Your IdP must be configured to allow this URI.
+
+Register the redirect URI for each Physical Tenant you add. For example, in Keycloak, add `/physical-tenants/{tenantId}/sso-callback` to the allowed redirect URIs for the relevant client. Some IdPs support wildcard matching for redirect URIs, which simplifies configuration when adding many tenants.
+
+This is standard procedure for registering a new application with an IdP. The exact configuration depends on your IdP and how you expose the tenant URL (path prefix, subdomain, or other pattern).
+
+## Session isolation
+
+Each Physical Tenant has its own path-scoped session cookie. The browser only sends the session cookie for that tenant's URL prefix (`/physical-tenants/<id>`), so sessions from different tenants do not interfere.
+
+For example:
+
+- Tenant A: `camunda-session-tenanta`, scoped to `/physical-tenants/tenanta`
+- Default tenant: `camunda-session-default`, scoped to `/physical-tenants/default`
+
+## Cluster-admin role
+
+Cluster-wide endpoints under `/cluster/v2/...` require the cluster-admin role. Broker startup does not fail if the role is not configured, but cluster-wide operations are unavailable to callers until you configure it.
+
+| Authentication method | Configure cluster-admin access with                                                 |
+| --------------------- | ----------------------------------------------------------------------------------- |
+| OIDC                  | A matching client ID, group, or claim under `camunda.security.cluster-admin.oidc.*` |
+| Basic authentication  | An explicit user under `camunda.security.cluster-admin.basic.users`                 |
+
+The cluster-admin role is resolved at request time. No persisted cluster-level role bindings or separate cluster identity service is required.
+
+## gRPC authentication
+
+gRPC clients specify the target Physical Tenant using the `Camunda-Physical-Tenant` request header (metadata in gRPC terms). Requests that omit the header route to the `default` Physical Tenant.

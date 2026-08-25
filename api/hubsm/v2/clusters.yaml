@@ -404,12 +404,22 @@ components:
           description: The license information of the cluster.
           allOf:
             - $ref: "#/components/schemas/CreateClusterLicense"
+        profiles:
+          description: The active component profiles of the cluster (e.g. broker, gateway, operate, tasklist).
+          type: array
+          nullable: true
+          items:
+            type: string
+            minLength: 1
+            maxLength: 255
         properties:
           description: The discovered properties of the cluster.
           type: object
           nullable: true
           additionalProperties:
             type: string
+            minLength: 1
+            maxLength: 255
 
     CreateClusterLicense:
       type: object

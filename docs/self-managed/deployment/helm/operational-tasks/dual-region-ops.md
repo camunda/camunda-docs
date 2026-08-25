@@ -35,6 +35,10 @@ import Fifteen from './img/15.jpg';
 
 This operational blueprint procedure is a step-by-step guide on how to restore operations in the case of a total region failure. It explains how to temporarily restore functionality in the surviving region and how to ultimately do a full recovery to restore the dual-region setup.
 
+:::tip Resilience tier context
+This procedure is the failover and failback runbook for [Dual-Region](/self-managed/concepts/multi-region/dual-region.md). For an overview of Camunda's multi-region resilience options and how Dual-Region compares to Cold Recovery, see [Multi-region resilience tiers](/self-managed/concepts/multi-region/resilience-tiers.md).
+:::
+
 The operational procedure builds on top of the [dual-region AWS setup guidance](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md), but is generally applicable for any dual-region setup.
 It has been also validated for the [OpenShift dual-region setup guidance](/self-managed/deployment/helm/cloud-providers/openshift/dual-region.md).
 

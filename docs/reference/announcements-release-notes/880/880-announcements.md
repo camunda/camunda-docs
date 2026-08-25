@@ -10,9 +10,9 @@ import DeployDiagramImg from '../../img/deploy-diagram-modal.png';
 
 Supported environment changes and breaking changes or deprecations for the Camunda 8.8 release.
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Release blog | Upgrade guides                                                                                 |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------- |
-| 14 October 2025    | 13 April 2027                | [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                        | Release blog | Upgrade guides                                                                                 |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------------ | ------------ | ---------------------------------------------------------------------------------------------- |
+| 14 October 2025    | 13 April 2027               | [8.8 release notes](/reference/announcements-release-notes/880/880-release-notes.md) | -            | [Upgrade guides](/reference/announcements-release-notes/880/whats-new-in-88.md#upgrade-guides) |
 
 :::info 8.8 resources
 
@@ -75,20 +75,23 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 The following key changes were also released as part of an 8.8.x patch release.
 
-| Patch release                                                    | Type            | Key change                                                                                                                                            |
-| :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
-| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+| Patch release                                                    | Type       | Key change                                                                                                                                            |
+| :--------------------------------------------------------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                                        |
+| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                                       |
+| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
+| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Regression | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
+| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Change     | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Regression | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change     | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
 
 ### APIs & tools
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--breaking-change">Regression</span>
 </div>
 <div className="release-announcement-content">
 
@@ -157,7 +160,7 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--breaking-change">Regression</span>
 </div>
 <div className="release-announcement-content">
 
@@ -1058,6 +1061,79 @@ Replace is the intended long-term behavior. The merge behavior in the affected p
 
 - **Running 8.8.23–8.8.27:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
 - **Upgrading to 8.8.28+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Nested input mappings can silently drop sibling fields {#nested-input-mapping-sibling-fields}
+
+**Affected versions:** 8.8.34. Reverted in 8.8.35.
+
+Camunda 8.8.34 introduced a regression affecting elements with two or more input mappings that write to different nested fields of the same parent variable. Only one of the mapped fields retains its expected value, with the other field silently set to `null` without warning or raised incident.
+
+**Example:** You have a parent-scope variable `foo: {bar: 1, baz: 2}` and an element with these two input mappings that both write into a local `foo` variable:
+
+1. Target `foo.bar` ← (maps from) source `=foo.bar`
+2. Target `foo.baz` ← (maps from) source `=foo.baz`
+
+In this scenario, the local `foo` becomes `{bar: 1, baz: null}`, with `baz` (mapped by the later declaration) no longer able to resolve against the parent scope.
+
+**Action:**
+
+- **Running 8.8.34:** Combine the mappings into a single mapping that rebuilds the whole object at once. For example, target `foo` with source `={bar: foo.bar, baz: foo.baz}` instead of mapping `foo.bar` and `foo.baz` separately.
+
+- **Upgrading to 8.8.34+:** The regression is reverted. Mapping individual fields of the same variable works correctly again. The workaround above is no longer required, but is harmless to keep.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Chained input mappings can silently drop FEEL temporal value types {#chained-input-mapping-temporal-type-loss}
+
+**Affected versions:** 8.8.34. Reverted in 8.8.35.
+
+Camunda 8.8.34 introduced a regression affecting elements with two or more input mappings where one mapping produces a FEEL temporal value (`duration`, `date`, `time`, `date-time`, or their local variants) and a later mapping on the same element reads a property from it. The temporal value loses its type, becoming a plain string due to serialization between mapping evaluations before the later mapping runs, so the property access silently evaluates to `null` instead of the expected value. Only temporal types are affected — other FEEL types (strings, numbers, booleans, lists, and contexts) work correctly.
+
+**Example:** An element with these two input mappings:
+
+1. Target `age` ← (maps from) source `=@"P1D"` (a duration)
+2. Target `ageDays` ← (maps from) source `=age.days`
+
+In this scenario, the mapping results in `ageDays` as `null`, as `age`'s duration type is not preserved between the two mappings.
+
+**Action:**
+
+- **Running 8.8.34:** Combine the mappings into a single mapping, so the duration is created and read in the same expression instead of being written to a variable and read back later. For example, target `ageDays` with source `=@"P1D".days` instead of separate `age` and `ageDays` mappings.
+
+- **Upgrading to 8.8.35+:** The regression is reverted. Chained mappings on temporal values work correctly again.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Message TTL cleanup batch size pacing change {#message-ttl-cleanup-batch-size-pacing-change}
+
+Starting in Camunda 8.8.22, expired-message cleanup `MessageBatchExpireProcessor` no longer resumes its RocksDB scan from a continuation cursor across batches. Each cleanup batch now re-scans from the start of the message deadline index and skips over the tombstones of messages already expired earlier in the same drain sequence. This makes cleanup cost per batch sensitive to `ttlCheckerBatchLimit`: a low value (for example, `10`) requires many more restart-scans to drain a backlog of expired messages, which can cause backpressure on normal process and message processing.
+
+`zeebe.broker.experimental.engine.messages.ttlCheckerBatchLimit` defaults to `100`.
+
+**Action:** If you previously tuned `ttlCheckerBatchLimit` down (for example, to `10`) on an earlier patch to avoid latency peaks, revalidate it after upgrading to 8.8.22 or later. Increasing it (for example, to `500`) reduces the number of restart-scans needed to drain a backlog and restores expected throughput.
 
 </div>
 </div>

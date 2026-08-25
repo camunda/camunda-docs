@@ -1,7 +1,5 @@
 ---
 title: Modeling with situation patterns
-tags:
-  - BPMN
 description: "Document patterns that share common characteristics and find a satisfying solution for modeling them."
 ---
 
@@ -298,6 +296,8 @@ The only valid result for the step "Ensure credit-worthiness" is knowing that th
 To advance clarity by means of process models, it is absolutely crucial for modelers to have a clear mental definition of the _result_ a specific step produces, and as a consequence, to be able to distinguish _undesired results_ from _fatal problems_ hindering us to achieve any result for the step.
 
 While there is not necessarily a right way to decide what to consider as a valid result for your step, the business reader will typically have a mental preference to observe certain business issues, either more as undesired outcomes or more as fatal problems. However, for the executable pools, your discretion to decide about a step's result might also be limited when using, for example, service contracts which are already pre-defined.
+
+The same distinction applies to a step carried out by an [AI agent](/reference/glossary.md#ai-agent). The response the agent returns when its loop ends is a valid result you check with a gateway, even when that response is a negative one. An error the agent itself raises, such as reaching its configured maximum number of model calls, is a fatal problem you catch with a boundary [error event](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling).
 
 ## Asking multiple recipients for a single reply
 

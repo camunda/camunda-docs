@@ -28,7 +28,7 @@ If you have not yet already, [create a Camunda 8 account](/components/hub/organi
 
 To create a workspace as a space for your organization's resources:
 
-1. Open [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) and select **Create new project** (if you do not have any existing workspaces) or **New project** (if you already have existing workspaces).
+1. Open [Web Modeler](/components/hub/workspace/modeler/index.md) and select **Create new project** (if you do not have any existing workspaces) or **New project** (if you already have existing workspaces).
 2. Name your workspace accordingly.
    ![web modeler empty home](../img/web-modeler-new-user-home.png)
 3. On the right side of the page under **Collaborators**, select **Add user**.

@@ -1,13 +1,5 @@
 ---
 title: Dealing with problems and exceptions
-tags:
-  - Transaction
-  - ACID Transaction
-  - Compensation
-  - Exception Handling
-  - BPMN Error Event
-  - Incident
-  - Save Point
 description: "Take a closer look at understanding workers, handling exceptions on a technical level, leveraging retries, using incidents, and more."
 ---
 
@@ -98,6 +90,8 @@ zbc.createWorker("retrieveMoney", (job) => {
 
 Whenever a job fails with a retry count of `0`, an incident is raised. An incident requires human intervention, typically using Operate. Refer to [incidents in the Operate docs](/components/operate/userguide/resolve-incidents-update-variables.md).
 
+For example, this behavior also applies to tools called by an AI agent. Each tool the agent selects runs as an ordinary BPMN activity, so retries and incidents work as described above. See [how the feedback loop works](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works).
+
 ### Writing idempotent workers
 
 Zeebe uses the **at-least-once strategy** for job handlers, which is a typical choice in distributed systems. This means that the process instance only advances in the happy case (the job was completed, the workflow engine received the complete job request and committed it). A typical failure case occurs when the worker who polled the job crashes and cannot complete the job anymore. [In this case, the workflow engine gives the job to another worker after a configured timeout](/components/concepts/job-workers.md#timeouts). This ensures that the job handler is executed at least once.
@@ -163,7 +157,7 @@ jobClient.newThrowErrorCommand(job)
 
 ### Thinking about unhandled BPMN exceptions
 
-It is crucial to understand that according to the BPMN spec, a BPMN error is either handled via the process or **terminates the process instance**. It does not lead to an incident being raised. Therefore, you can and normally should always handle the BPMN error. You can, of course, also handle it in a parent process scope like in the example below:
+It is crucial to understand that if a BPMN error is not handled anywhere in the process, Camunda 8 raises an [incident](/components/concepts/incidents.md) (for example, `Unhandled error event`) instead of silently terminating the process instance. Therefore, you can and normally should always handle the BPMN error. You can, of course, also handle it in a parent process scope like in the example below:
 
 <div bpmn="best-practices/dealing-with-problems-and-exceptions-assets/handling-a-bpmn-error.bpmn" callouts="boundary_event_good_unavailable" />
 

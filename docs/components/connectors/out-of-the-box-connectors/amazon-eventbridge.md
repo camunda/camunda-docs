@@ -256,7 +256,7 @@ When you click on the event with the Amazon EventBridge Webhook connector applie
 This tab displays the URL of the Amazon EventBridge Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use the Amazon EventBridge Webhook connector in Desktop Modeler or with Camunda 8 Self-Managed.
 In that case, Amazon EventBridge Webhook connector deployments and URLs will not be displayed in Modeler.
 :::

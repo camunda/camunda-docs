@@ -55,6 +55,76 @@
       "label": "Change cluster mode"
     }
   ],
+  "restore": [
+    {
+      "file": "admin_operations.py",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
+  "take_runtime_backup": [
+    {
+      "file": "backup.py",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "list_runtime_backups": [
+    {
+      "file": "backup.py",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "get_runtime_backup": [
+    {
+      "file": "backup.py",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "delete_runtime_backup": [
+    {
+      "file": "backup.py",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "get_runtime_backup_state": [
+    {
+      "file": "backup.py",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
+    }
+  ],
+  "sync_runtime_backup_state": [
+    {
+      "file": "backup.py",
+      "region": "SyncRuntimeBackupState",
+      "label": "Force-write the runtime backup state"
+    }
+  ],
+  "delete_runtime_backup_state": [
+    {
+      "file": "backup.py",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
+  "pause_exporting": [
+    {
+      "file": "exporting.py",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "resume_exporting": [
+    {
+      "file": "exporting.py",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
   "get_status": [
     {
       "file": "admin_operations.py",
@@ -110,6 +180,27 @@
       "file": "process_instance.py",
       "region": "SearchProcessInstances",
       "label": "Search process instances"
+    }
+  ],
+  "suspend_process_instance": [
+    {
+      "file": "process_instance.py",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend a process instance"
+    }
+  ],
+  "resume_process_instance": [
+    {
+      "file": "process_instance.py",
+      "region": "ResumeProcessInstance",
+      "label": "Resume a process instance"
+    }
+  ],
+  "assign_process_instance_business_id": [
+    {
+      "file": "process_instance.py",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign a business id to a process instance"
     }
   ],
   "activate_jobs": [
@@ -811,6 +902,20 @@
       "label": "Update jobs in batch"
     }
   ],
+  "suspend_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances in batch"
+    }
+  ],
+  "resume_process_instances_batch_operation": [
+    {
+      "file": "batch_operation.py",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances in batch"
+    }
+  ],
   "delete_process_instance": [
     {
       "file": "extended_operations.py",
@@ -900,6 +1005,13 @@
       "file": "extended_operations.py",
       "region": "SearchProcessDefinitions",
       "label": "Search process definitions"
+    }
+  ],
+  "search_process_definition_variable_names": [
+    {
+      "file": "extended_operations.py",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
     }
   ],
   "get_process_definition_statistics": [
@@ -1390,6 +1502,20 @@
       "file": "admin_operations.py",
       "region": "GetGlobalJobStatistics",
       "label": "Get global job statistics"
+    }
+  ],
+  "resolve_secrets": [
+    {
+      "file": "secret.py",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets"
+    }
+  ],
+  "list_secrets": [
+    {
+      "file": "secret.py",
+      "region": "ListSecrets",
+      "label": "List secrets"
     }
   ]
 }

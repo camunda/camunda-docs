@@ -55,6 +55,76 @@
       "label": "Change cluster mode"
     }
   ],
+  "restore": [
+    {
+      "file": "Client.cs",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
+  "takeRuntimeBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "listRuntimeBackups": [
+    {
+      "file": "Backup.cs",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "getRuntimeBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "deleteRuntimeBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "getRuntimeBackupState": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
+    }
+  ],
+  "syncRuntimeBackupState": [
+    {
+      "file": "Backup.cs",
+      "region": "SyncRuntimeBackupState",
+      "label": "Force-write the runtime backup state"
+    }
+  ],
+  "deleteRuntimeBackupState": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
+  "pauseExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "resumeExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
   "createProcessInstance": [
     {
       "file": "ProcessInstance.cs",
@@ -151,6 +221,27 @@
       "label": "Resolve process instance incidents"
     }
   ],
+  "suspendProcessInstance": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend a process instance"
+    }
+  ],
+  "resumeProcessInstance": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "ResumeProcessInstance",
+      "label": "Resume a process instance"
+    }
+  ],
+  "assignProcessInstanceBusinessId": [
+    {
+      "file": "ProcessInstance.cs",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign a business ID to a process instance"
+    }
+  ],
   "getProcessDefinition": [
     {
       "file": "ProcessDefinition.cs",
@@ -170,6 +261,13 @@
       "file": "ProcessDefinition.cs",
       "region": "SearchProcessDefinitions",
       "label": "Search process definitions"
+    }
+  ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "ProcessDefinition.cs",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
     }
   ],
   "getProcessDefinitionStatistics": [
@@ -1066,6 +1164,20 @@
       "label": "Update jobs in batch"
     }
   ],
+  "suspendProcessInstancesBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances in batch"
+    }
+  ],
+  "resumeProcessInstancesBatchOperation": [
+    {
+      "file": "BatchOperation.cs",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances in batch"
+    }
+  ],
   "getVariable": [
     {
       "file": "VariableElement.cs",
@@ -1379,6 +1491,20 @@
       "file": "UserTask.cs",
       "region": "SearchUserTaskEffectiveVariables",
       "label": "Search user task effective variables"
+    }
+  ],
+  "resolveSecrets": [
+    {
+      "file": "Secret.cs",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets"
+    }
+  ],
+  "listSecrets": [
+    {
+      "file": "Secret.cs",
+      "region": "ListSecrets",
+      "label": "List secret references"
     }
   ]
 }

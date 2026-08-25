@@ -23,7 +23,11 @@ description: "Learn how to restore a Camunda 8 Self-Managed backup using a relat
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Restore a previous backup of your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, and Tasklist) when using a relational database management system (RDBMS) as secondary storage.
+Restore a previous backup of your Camunda 8 Self-Managed Orchestration cluster components (Zeebe, Operate, Tasklist, and Admin) when using a relational database management system (RDBMS) as secondary storage.
+
+:::tip
+This procedure is the recovery step of [Cold Recovery](../../../concepts/multi-region/cold-recovery.md) when restoring into a secondary region after primary-region loss.
+:::
 
 ## How RDBMS restore works
 
@@ -55,6 +59,8 @@ It is critical that no Camunda components are running during the restore. Runnin
 :::
 
 ## Step 1: Restore Zeebe from its primary storage backup
+
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
 
 Camunda provides a standalone restore application that must be run on each node where a Zeebe Broker will be running. This is a Spring Boot application similar to the broker and can run using the binary provided as part of the distribution. The app can be configured the same way a broker is configured — via environment variables or using the configuration file located in `config/application.yaml`.
 
