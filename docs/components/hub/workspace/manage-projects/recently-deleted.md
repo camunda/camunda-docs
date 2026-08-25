@@ -12,15 +12,15 @@ When you delete a resource, it's moved to **Recently deleted**. You have 30 days
 
 - Files
 - Folders
-- Process applications
+- Workspaces
 - Projects
 - IDP applications
 - IDP projects
 
-If the resource is a parent resource, such as a folder or process application, the child resources it contains are also moved to **Recently deleted**.
+If the resource is a parent resource, such as a folder or project, the child resources it contains are also moved to **Recently deleted**.
 
 :::note
-Soft deletion only applies to resources deleted using the Camunda Hub user interface in Camunda 8.10 and later. All items deleted in earlier versions are immediately and permanently deleted, along with their data in process application version history, and can't be recovered.
+Soft deletion only applies to resources deleted using the Camunda Hub user interface in Camunda 8.10 and later. All items deleted in earlier versions are immediately and permanently deleted, along with their data in project version history, and can't be recovered.
 :::
 
 ## Permanent deletion in Camunda Hub
@@ -38,7 +38,7 @@ DELETE /api/v2/files/{fileKey}/permanent
 
 ## Purge a file from versions
 
-If you delete a file within a process application, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from all process application version history, a client with `delete` permissions can call the public purge endpoint:
+If you delete a file within a project, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from all project version history, a client with `delete` permissions can call the public purge endpoint:
 
 ```bash
 DELETE /api/v2/files/{fileKey}/purge
@@ -46,7 +46,7 @@ DELETE /api/v2/files/{fileKey}/purge
 
 ## Restore permissions
 
-Only a **Project Admin** at the time of the restore attempt can restore a recently deleted project. A **Project Admin** or **Editor** can restore all other resource types. The role at the time of the original deletion is not considered.
+Only a **Workspace Admin** at the time of the restore attempt can restore a recently deleted workspace. A **Workspace Admin** or **Editor** can restore all other resource types. The role at the time of the original deletion is not considered.
 
 Read more about [access rights and permissions](../modeler/collaboration/collaboration.md#access-rights-and-permissions).
 
@@ -67,7 +67,7 @@ Each row shows:
 
 By default, the list is sorted with the most recently deleted resources first.
 
-If the recently deleted resource is a parent, such as a folder or process application, you can expand the row to reveal the child resources deleted with it.
+If the recently deleted resource is a parent, such as a folder or project, you can expand the row to reveal the child resources deleted with it.
 
 ## Restore a resource
 
@@ -85,6 +85,6 @@ If you restore a parent resource, the resources deleted with it are also restore
 
 ### Child resources
 
-You can restore a child resource without restoring its parent folder or process application. Since the child can't be restored to its original location, it's placed in a new folder at the project root using the template `${fileName} - restored`. The actual folder name is presented in the confirmation modal when you restore the resource.
+You can restore a child resource without restoring its parent folder or project. Since the child can't be restored to its original location, it's placed in a new folder at the workspace root using the template `${fileName} - restored`. The actual folder name is presented in the confirmation modal when you restore the resource.
 
-If the project has been deleted, you must restore the project before you can restore any of its child resources. Similarly, you must restore an IDP application before you can restore its IDP projects.
+If the workspace has been deleted, you must restore the workspace before you can restore any of its child resources. Similarly, you must restore an IDP application before you can restore its IDP projects.
