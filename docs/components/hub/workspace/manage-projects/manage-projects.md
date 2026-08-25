@@ -28,7 +28,7 @@ For example, a project for a consumer loan application might consist of a BPMN d
 
 ## Project development lifecycle
 
-In Camunda Hub, you can quickly develop project releases through the stages of a typical [project development lifecycle](project-pipeline.md)
+In Camunda Hub, you can quickly develop project releases through the stages of a typical [project development lifecycle](project-pipeline.md):
 
 <AoGrid ao={[
 {
@@ -38,16 +38,22 @@ image: DocsIcon,
 description: "Get started by setting up a new project.",
 },
 {
-link: "./deploy-project",
-title: "Validate and deploy your project",
+link: "./validate-project",
+title: "Validate your project",
 image: DocsIcon,
-description: "Validate your project in development before deploying it to testing, staging, or production.",
+description: "Validate your project in development before deploying it to your target environment.",
+},
+{
+link: "./deploy-project",
+title: "Deploy your project",
+image: DocsIcon,
+description: "Deploy your project to a testing, staging, or production environment.",
 },
 {
 link: "./project-versioning",
-title: "Project versioning",
+title: "Manage project versions",
 image: DocsIcon,
-description: "Use versioning to save a single snapshot of all the project files in one action.",
+description: "Create distinct versions for the entire project.",
 },
 ]} columns={3}/>
 

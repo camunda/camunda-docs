@@ -813,16 +813,9 @@ module.exports = {
               items: [
                 "components/hub/workspace/manage-projects/project-pipeline",
                 "components/hub/workspace/manage-projects/create-a-project",
-                {
-                  type: "doc",
-                  label: "Deployment",
-                  id: "components/hub/workspace/manage-projects/deploy-project",
-                },
-                {
-                  type: "doc",
-                  label: "Versioning",
-                  id: "components/hub/workspace/manage-projects/project-versioning",
-                },
+                "components/hub/workspace/manage-projects/validate-project",
+                "components/hub/workspace/manage-projects/deploy-project",
+                "components/hub/workspace/manage-projects/project-versioning",
                 {
                   type: "doc",
                   label: "Git Sync",

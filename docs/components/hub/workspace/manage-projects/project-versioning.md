@@ -1,42 +1,50 @@
 ---
 id: project-versioning
-title: Project versioning
-description: Projects allow you to create distinct versions for the entire application.
+title: Manage project versions
+description: Create distinct versions for the entire project.
 ---
 
-import CreateVersionMenuImg from './img/web-modeler-versions.png'
-import CreateVersionModalImg from './img/web-modeler-version-create-process-application-version.png'
-import VersionActionsImg from './img/web-modeler-version-actions.png'
-import VersionListImg from './img/web-modeler-version-view-process-application-version.png'
+Create distinct versions for the entire project.
 
-Projects support versioning, allowing you to create distinct versions for the entire project. You can use versioning to save a single snapshot of all the project files in one action. This helps you track a project throughout its development lifecycle and ensures the correct version is referenced.
+## About
 
-In this context, a version is a Web Modeler project snapshot, not a deployed process definition version. See [version](/reference/glossary.md#version).
+Use versioning to save a single snapshot of all the project files in one action. This helps you track a project throughout its development lifecycle and ensures the correct version is referenced.
 
-## Version creation
+In this context, a [version](/reference/glossary.md#version) is a Camunda Hub project snapshot, not a deployed process definition version.
+
+## Create a version
 
 To create a project version:
 
-1. Open the [project homepage](create-a-project.md#project-homepage) and click **Create version** in the **Versions** section.
-   <img src={CreateVersionMenuImg} alt="Create version on the project homepage" style={{maxWidth: '560px', width: '100%'}} />
-2. Enter a **Version tag** in the version creation modal.
-   <img src={CreateVersionModalImg} alt="Create a version modal" style={{maxWidth: '560px', width: '100%'}} />
-3. Select the **Create** button.
+1. In your workspace, open a project.
+2. On the right side of the project view, under **Versions**, click **Create version**.
+3. Enter a **Version tag** in the version creation modal.
+4. Click **Create**.
 
-On the versions page, which you open with **See full list**, you can use the file navigation header buttons to switch between files and view their content. See also [compare versions](/components/hub/workspace/modeler/modeling/versions.md#compare-versions).
+## View all versions
 
-<img src={VersionListImg} alt="Versions list with file navigation header buttons highlighted" style={{maxWidth: '560px', width: '100%'}} />
+To view all versions:
 
-## Version actions
+1. In your workspace, open a project.
+2. On the right side of the project view, under **Versions**, click **Show full list**.
+3. At the top of the modeling view, use the file navigation header buttons to switch between files and view their content.
 
-You can perform the following actions on a project version:
+See [manage file versions](/components/hub/workspace/modeler/modeling/versions.md#compare-versions) for more information.
 
-1. View details, which opens the version details page so you can review the contents of all files in the version.
-1. Restore as latest, which is useful for reverting changes, making further edits, [git syncing](git-sync.md), downloading, or using Play.
-1. Edit
-1. Deploy, especially after the version has been [reviewed](./project-pipeline.md#project-versioning-and-review).
-1. Download
-1. Delete
-1. Copy, which creates a new project with the files from the version.
+## Manage a project version
 
-<img src={VersionActionsImg} alt="Version actions" style={{maxWidth: '560px', width: '100%'}} />
+To manage a project version:
+
+1. In your workspace, open a project.
+2. On the right side of the project view, under **Versions**, open the vertical ellipsis menu.
+
+From here, you can perform the following actions on a project version:
+
+| Action                | Description                                                                                     |
+| :-------------------- | :---------------------------------------------------------------------------------------------- |
+| **View details**      | Open the version details page to review the contents of all files in the version.               |
+| **Restore as latest** | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project. |
+| **Edit**              | Edit the project version.                                                                       |
+| **Download**          | Download the project as a zip file.                                                             |
+| **Copy to**           | Create a new project with the files from the version.                                           |
+| **Delete**            | Delete the project version.                                                                     |

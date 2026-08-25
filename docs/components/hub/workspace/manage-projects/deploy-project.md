@@ -1,7 +1,7 @@
 ---
 id: deploy-project
-title: Validate and deploy your project
-description: Validate your project in development before deploying it to testing, staging, or production.
+title: Deploy your project
+description: Deploy your project to a testing, staging, or production environment.
 ---
 
 import DeployImg from './img/deploy-process-application.png'
@@ -10,27 +10,36 @@ import DeployErrorImg from './img/deploy-error.png'
 import ResourcesToDeployImg from './img/resources-to-deploy.png'
 import RunProcessApplicationImg from './img/run-process-application.png'
 
-Validate your project in development before deploying it to testing, staging, or production.
+Deploy your project to a testing, staging, or production environment.
 
-## Validate your project
+## About
 
-Use [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md) to validate your project in development.
+The deployment pipeline has the following stages:
 
-1. Open the BPMN diagram in the project that you want to validate.
-1. Select the **Play** tab to play the project using your selected development cluster.
-1. Perform validation as required, for example, debug your process logic and test the project.
+| Stage       | Description                                                                                                     |
+| :---------- | :-------------------------------------------------------------------------------------------------------------- |
+| Development | Use to create and test new software features and changes.                                                       |
+| Testing     | Use for quality checks, ensuring software meets defined standards before release.                               |
+| Staging     | Use for controlled testing where changes are validated before deployment to production.                         |
+| Production  | The live system with the latest software. Only administrators and organization owners can deploy to this stage. |
 
-:::info
-To learn more about using Play for validation, see [Play mode for rapid validation](/components/hub/workspace/modeler/validation/play-your-process.md)
+To define your deployment pipeline stages, follow the [connect clusters](./create-a-project.md#connect-clusters) instructions.
+
+:::note
+
+- An administrator must define the cluster to deploy to for each stage.
+- During deployment, the next stage is not automatically selected. You must select the stage you want to promote to.
+- You must select a cluster for at least one stage to be able to deploy. An **Undefined stages** warning is shown if no cluster is selected for at least one stage.
+
 :::
+
+### Prerequisites
+
+Before deploying a project, if the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
 
 ## Deploy your project
 
-### Before deploying a project
-
-- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
-
-Once validation is complete, deploy your project to cluster stages in your [development lifecycle](./project-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
+Once you've [validated your process](./validate-project.md), deploy your project to cluster stages in your [development lifecycle](./project-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
 
 1. Open the [project homepage](create-a-project.md#project-homepage).
 1. Select the **Deploy latest changes** option from the **Deploy & run** combo button to open the **Deploy & run** modal.
