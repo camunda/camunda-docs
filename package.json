@@ -105,7 +105,6 @@
     "postman-code-generators": "2.1.0",
     "@docusaurus/plugin-content-docs": "3.9.2"
   },
-  "packageManager": "npm@11.6.2",
   "engines": {
     "node": ">=18.0"
   }
