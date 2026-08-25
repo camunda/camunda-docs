@@ -797,78 +797,6 @@ the test in debug mode from your IDE.
 When the test execution stops at a breakpoint, you can inspect the process instance state using Operate and the user
 task state using Tasklist. You can also use the Camunda client to interact with the runtime from the debugger console.
 
-## Test cleanup settings {#test-cleanup-settings}
-
-After each test, CPT resets the Camunda runtime clock and deletes all runtime data by default. You can disable either behavior to inspect the process state after a test run.
-
-:::warning
-Disabling clock reset or data deletion means state from one test can affect subsequent tests. Only disable these settings for targeted debugging, and restore the defaults before committing.
-:::
-
-<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
-{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
-{label: 'Java client', value: 'java-client' }
-]}>
-
-<TabItem value='spring-sdk'>
-
-In your `application.yml` (or `application.properties`):
-
-```yaml
-camunda:
-  process-test:
-    # Keep the Camunda runtime clock as-is after each test
-    clock-reset-enabled: false
-    # Skip runtime data deletion after each test
-    data-deletion-mode: none
-```
-
-</TabItem>
-
-<TabItem value='java-client'>
-
-In your `/camunda-container-runtime.properties` file:
-
-```properties
-# Keep the Camunda runtime clock as-is after each test
-clockResetEnabled=false
-# Skip runtime data deletion after each test
-dataDeletionMode=NONE
-```
-
-Alternatively, you can register the JUnit extension manually and use the fluent builder:
-
-```java
-package com.example;
-
-import io.camunda.process.test.api.CamundaProcessTestExtension;
-import io.camunda.process.test.api.DataDeletionMode;
-import org.junit.jupiter.api.extension.RegisterExtension;
-
-// No annotation: @CamundaProcessTest
-public class MyProcessTest {
-
-    @RegisterExtension
-    private static final CamundaProcessTestExtension EXTENSION =
-            new CamundaProcessTestExtension()
-                    // Keep the Camunda runtime clock as-is after each test
-                    .withClockResetEnabled(false)
-                    // Skip runtime data deletion after each test
-                    .withDataDeletionMode(DataDeletionMode.NONE);
-}
-```
-
-</TabItem>
-
-</Tabs>
-
-### Property reference
-
-| Property | Type | Default | Description |
-| -------- | ---- | ------- | ----------- |
-| `clock-reset-enabled` (Spring) / `clockResetEnabled` (Java) | `boolean` | `true` | When `true`, resets the Camunda runtime clock to the system time after each test. Set to `false` to keep the clock at its current value for post-run inspection. |
-| `data-deletion-mode` (Spring) / `dataDeletionMode` (Java) | `string` (`enum`) | `CLUSTER_PURGE` | Controls how CPT deletes runtime data after each test. `CLUSTER_PURGE` (default) purges the full cluster state. `NONE` skips data deletion entirely. |
-
 ## Client configuration
 
 CPT configures the Camunda client automatically based on the runtime mode. You can customize the client
@@ -962,6 +890,56 @@ private static final CamundaProcessTestExtension EXTENSION =
 </TabItem>
 
 </Tabs>
+
+## Test cleanup settings {#test-cleanup-settings}
+
+After each test, CPT resets the Camunda runtime clock and deletes all runtime data by default. You can disable either behavior to inspect the process state after a test run.
+
+:::warning
+Disabling clock reset or data deletion means state from one test can affect subsequent tests. Only disable these settings for targeted debugging, and restore the defaults before committing.
+:::
+
+<Tabs groupId="client" defaultValue="spring-sdk" queryString values={[
+{label: 'Camunda Spring Boot Starter', value: 'spring-sdk' },
+{label: 'Java client', value: 'java-client' }
+]}>
+
+<TabItem value='spring-sdk'>
+
+In your `application.yml` (or `application.properties`):
+
+```yaml
+camunda:
+  process-test:
+    # Keep the Camunda runtime clock as-is after each test
+    clock-reset-enabled: false
+    # Skip runtime data deletion after each test
+    data-deletion-mode: none
+```
+
+</TabItem>
+
+<TabItem value='java-client'>
+
+In your `/camunda-container-runtime.properties` file:
+
+```properties
+# Keep the Camunda runtime clock as-is after each test
+clockResetEnabled=false
+# Skip runtime data deletion after each test
+dataDeletionMode=NONE
+```
+
+</TabItem>
+
+</Tabs>
+
+### Property reference
+
+| Property | Type | Default | Description |
+| -------- | ---- | ------- | ----------- |
+| `clock-reset-enabled` | `boolean` | `true` | When `true`, resets the Camunda runtime clock to the system time after each test. Set to `false` to keep the clock at its current value for post-run inspection. |
+| `data-deletion-mode` | `string` (`enum`) | `CLUSTER_PURGE` | Controls how CPT deletes runtime data after each test. `CLUSTER_PURGE` (default) purges the full cluster state. `NONE` skips data deletion entirely. |
 
 ## Process Test Coverage
 
