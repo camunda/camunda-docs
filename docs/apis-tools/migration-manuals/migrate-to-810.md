@@ -50,6 +50,10 @@ Review the actions required for the following 8.10 changes:
 | <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
 | <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
 
+:::tip Using AI agents?
+If a process uses the AI Agent Sub-process or AI Agent Task connector, update the applied element template on the agent element and redeploy to get [agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md#mark-an-element-as-an-agent) visibility for it in Camunda 8.10.
+:::
+
 ## Breaking changes
 
 Review actions required for the following breaking changes:
