@@ -37,6 +37,27 @@ If you use the [Docker Compose](/self-managed/quickstart/developer-quickstart/do
 Alternatively, you can fetch the JSON templates from the respective connector's releases in the respective connectors folder in the [repository](https://github.com/camunda/connectors)
 at `connectors/{connector name}/element-templates`.
 
+:::note Match the template version to your Camunda version
+
+The [Camunda Marketplace](https://marketplace.camunda.com/en-US/home) only distributes the **latest** version of each connector element template. Because that version targets the newest Camunda release, it may not be compatible with an 8.9 cluster.
+
+Each element template declares the Camunda versions it supports in its [`engines.camunda`](/components/modeler/element-templates/template-metadata.md) field as a semantic version range. A template published for a later release declares a floor your cluster doesn't meet, for example:
+
+```json
+"engines": {
+  "camunda": "^8.10"
+}
+```
+
+To find a compatible template, choose the highest template version whose `engines.camunda` range includes your Camunda version, rather than looking for an exact match. Templates are available from two places:
+
+- The [Connectors release](https://github.com/camunda/connectors/releases) matching your Camunda version publishes a `connectors-bundle-templates-{version}` archive containing the bundled connectors' templates, with versioned files named `{template name}-{version}.json`.
+- Connectors that keep a version history also store superseded templates in `element-templates/versioned/` alongside the current one in the [connectors repository](https://github.com/camunda/connectors). Not every connector has this directory.
+
+Import the version-matched file instead of the Marketplace version.
+
+:::
+
 You can use the connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/custom-built-connectors/connector-templates.md).
 
 Review our [Connectors Awesome List](https://github.com/camunda-community-hub/camunda-8-connectors/tree/main) to find more connectors.
