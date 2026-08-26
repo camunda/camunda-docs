@@ -48,7 +48,7 @@ The 8.7 to 8.8 upgrade spans several guides. Work through them in this order, ra
 | 3    | Create and update your 8.8 values file, then run the upgrade and any required data migration.                                                                                 | [Upgrade Camunda 8.7 to 8.8 using Helm](./helm/870-to-880.md), or [manual upgrade](./manual/index.md) for non-Helm deployments |
 | 4    | Monitor and validate the upgrade before returning the deployment to normal use.                                                                                               | [Validate the upgrade](./helm/870-to-880.md#validate-the-upgrade)                                                              |
 
-Step 2 is easy to miss. The component guide is not only a post-upgrade reference; it contains prerequisites that change what you put in your values file in step 3.
+Complete Step 2 before Step 3. The component guide contains prerequisites that affect what you add to your values file in Step 3.
 
 ## Upgrade guides
 

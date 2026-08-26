@@ -16,7 +16,7 @@ Minor updates (x.**y**.z, where **y** is a minor release) are not eligible for a
 
 ## Update availability
 
-An update path becoming available in Camunda Hub is managed separately from the release itself. A newly released version is therefore not always offered as an update target immediately.
+Camunda Hub manages update path availability separately from the release itself. As a result, a newly released version is not always available as an update target immediately.
 
 Camunda also withholds or disables specific update paths when a known issue affects a version, so that clusters do not reach an affected version. An update you expect to see may be unavailable for this reason.
 
