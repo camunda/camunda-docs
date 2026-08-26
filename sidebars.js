@@ -120,6 +120,7 @@ module.exports = {
         },
         "components/agentic-orchestration/add-tool-to-ai-agent",
         "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/connect-external-agent",
         "components/agentic-orchestration/expose-process-as-mcp-tool",
         "components/agentic-orchestration/choose-right-model-agentic",
         "components/agentic-orchestration/model-recommendations-agentic",
