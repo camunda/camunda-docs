@@ -24,7 +24,7 @@ Identity requires a set of base configurations to operate correctly. When Identi
 
 ## Roles
 
-Identity provisions Web Modeler's roles under their legacy names (`Web Modeler`, `Web Modeler Admin`) so existing installations keep working unchanged, and provisions the equivalent Hub-named roles (`Hub`, `Hub Admin`) alongside them. Both name pairs grant identical permissions.
+Both `Web Modeler`/`Web Modeler Admin` and the equivalent `Hub`/`Hub Admin` roles are provisioned and grant identical permissions. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for details.
 
 | Name                   | Created/updated with component |
 | :--------------------- | :----------------------------- |

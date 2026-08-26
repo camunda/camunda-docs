@@ -2,10 +2,10 @@
 id: manage-roles
 title: Manage roles
 sidebar_label: "Roles"
-description: "Use Management Identity to manage roles for Camunda 8 management and modeling components (Hub and Optimize)"
+description: "Use Management Identity to manage roles for Camunda 8 management and modeling components (Camunda Hub and Optimize)"
 ---
 
-Use Management Identity roles to simplify and standardize access control for Camunda 8 management and modeling components (Hub and Optimize).
+Use Management Identity roles to simplify and standardize access control for Camunda 8 management and modeling components (Camunda Hub and Optimize).
 
 ## About roles
 
@@ -18,7 +18,7 @@ Roles help you to enforce consistent permission sets, reduce errors, and scale a
 
 Management Identity includes a set of default roles that are available out-of-the-box. These roles are designed to cover common use cases and can be assigned to users and groups to grant them access to different management and modeling components.
 
-The following table lists the default roles and their descriptions. Web Modeler's roles are provisioned under both their legacy names (`Web Modeler`, `Web Modeler Admin`) and the equivalent Hub-named roles (`Hub`, `Hub Admin`), so existing installations keep working unchanged after upgrading to Camunda 8.10. `Console` and `DevOps` grant the same cluster-management access. `DevOps` is the forward-looking name for the same role:
+The following table lists the default roles and their descriptions. `Web Modeler`/`Web Modeler Admin` and `Hub`/`Hub Admin` grant identical permissions, as do `Console` and `DevOps`. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for why both names exist:
 
 | Name                | Description                                                                                                 |
 | :------------------ | :---------------------------------------------------------------------------------------------------------- |

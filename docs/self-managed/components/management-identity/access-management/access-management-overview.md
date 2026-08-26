@@ -2,13 +2,13 @@
 id: access-management-overview
 title: "Manage access and permissions"
 sidebar_label: "Access and permissions"
-description: "Learn how to manage access and permissions for Hub and Optimize using Management Identity."
+description: "Learn how to manage access and permissions for Camunda Hub and Optimize using Management Identity."
 ---
 
 With Management Identity, you can manage and control access to management and modeling component REST APIs and custom applications using permissions and roles.
 
 :::note
-This section describes how to manage access to Hub (including its Console cluster-management pages) and Optimize. For access control to Orchestration Cluster components and their resources, refer to the [Orchestration Cluster authorizations](/components/concepts/access-control/authorizations.md) instead.
+This section describes how to manage access to Camunda Hub and Optimize. For access control to Orchestration Cluster components and their resources, refer to the [Orchestration Cluster authorizations](/components/concepts/access-control/authorizations.md) instead.
 :::
 
 ## About permissions

@@ -6,13 +6,13 @@ sidebar_label: "Applications"
 
 import ApplicationImg from '../img/add-application-modal-2.png';
 
-In Management Identity, an application represents an entity that can request Management Identity to authenticate a user or a service for accessing management and modeling components (Hub and Optimize).
+In Management Identity, an application represents an entity that can request Management Identity to authenticate a user or a service for accessing management and modeling components (Camunda Hub and Optimize).
 
 ## About applications
 
 Camunda 8 provides a set of preconfigured applications. The following applications are managed by Management Identity:
 
-- Hub (Console's cluster management pages are part of the Hub application; there is no separate Console application)
+- Hub
 - Optimize
 - Management Identity
 
