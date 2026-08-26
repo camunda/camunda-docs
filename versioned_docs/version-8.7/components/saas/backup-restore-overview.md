@@ -27,7 +27,7 @@ A backup captures a consistent cluster snapshot across Camunda components:
 - Operate data
 - Tasklist data
 - Optimize data
-- Exported Zeebe records stored in Elasticsearch/OpenSearch
+- Exported Zeebe records stored in Elasticsearch
 
 ## Restore model
 
