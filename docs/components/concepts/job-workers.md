@@ -183,6 +183,8 @@ On the broker side, whenever a job is made activate-able (e.g. a service task is
 The RNG used to randomly pick streams and clients provides a good uniform distribution for the same underlying set, which is a cheap way of evenly distributing the load _as long as the stream set remains stable_.
 :::
 
+Job leasing also applies to streaming: a leased job only matches streams opened with a lease request, and streams opened without one only match unleased jobs. See [job leasing](#job-leasing) for details.
+
 To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo" against a cluster consisting of a single gateway and a single broker. It receives some jobs, and when it closes, one job that was pushed asynchronously is returned to the broker:
 
 ![Sample Sequence Diagram](assets/job-push-sequence.png)
@@ -372,3 +374,149 @@ When a BPMN element is activated and creates a job:
 - **Inherited**: Jobs inherit the complete tag set from their process instance.
 
 For detailed information about tag formats, validation rules, limits, and additional use cases, see [process instance creation tags](/components/concepts/process-instance-creation.md#tags).
+
+## Job leasing
+
+A job lease is an opt-in, opaque token that fences a specific activation of a job. It lets a worker prove its activation is still current when it interacts with Camunda.
+
+For example, consider a job worker that performs a credit check on a loan application and completes the job with its decision: approve or reject. Worker A activates the job and is on its way to approving, but a new negative evaluation appears on the applicant before it completes, and the job's deadline passes. Zeebe reassigns the job to worker B, which sees the new evaluation and decides to reject instead. Without a lease, Zeebe only checks that the job is still activated, not which activation the completion came from, so if worker A's stale approval reaches Zeebe first, it wins: funds get disbursed on outdated information, and worker B's correct rejection is discarded.
+
+```mermaid
+sequenceDiagram
+    participant A as Worker A
+    participant Z as Zeebe
+    participant B as Worker B
+
+    A->>Z: Activate job
+    Z-->>A: job
+    Note over A: Deciding: approve
+    Z->>Z: Job times out, reassigned
+    B->>Z: Activate job
+    Z-->>B: job
+    Note over B: Sees new record, decides: reject
+    A->>Z: Complete job (approve)
+    Z-->>A: Accepted
+    B->>Z: Complete job (reject)
+    Z-->>B: Rejected: job already completed
+```
+
+With leasing, worker A's completion carries its own activation's token, which becomes stale the moment worker B's activation supersedes it, so Zeebe rejects it regardless of arrival order. The outcome flips: instead of whichever completion arrives first, the most up-to-date activation's completion wins.
+
+```mermaid
+sequenceDiagram
+    participant A as Worker A
+    participant Z as Zeebe
+    participant B as Worker B
+
+    A->>Z: Activate job (withLease)
+    Z-->>A: Job with leaseToken A
+    Note over A: Deciding: approve
+    Z->>Z: Job times out, reassigned
+    B->>Z: Activate job (withLease)
+    Z-->>B: Job with leaseToken B
+    Note over B: Sees new record, decides: reject
+    A->>Z: Complete job (leaseToken A)
+    Z-->>A: Rejected: INVALID_STATE, stale lease
+    B->>Z: Complete job (leaseToken B)
+    Z-->>B: Accepted
+```
+
+Camunda's own [agentic orchestration](../agentic-orchestration/agentic-orchestration-overview.md) builds on this same guarantee for visibility into [agent instance](../agentic-orchestration/agent-definitions-and-instances.md#agent-instances)'s conversation. Before completing, an agent worker separately reports its reasoning as an [agent instance update](../../apis-tools/orchestration-cluster-api-rest/specifications/update-agent-instance.api.mdx), tied to its lease token. If a later activation supersedes it and completes instead, Zeebe discards the superseded activation's pending update and commits the winning one's, so a retry's contradicting reasoning never gets mixed with the activation that actually gets acted on.
+
+```mermaid
+sequenceDiagram
+    participant A1 as Activation 1
+    participant Z as Zeebe
+    participant A2 as Activation 2
+
+    A1->>Z: Activate job (withLease)
+    Z-->>A1: Job with leaseToken 1
+    A1->>Z: Update agent instance (leaseToken 1)
+    Z-->>A1: Update pending
+    Z->>Z: Job times out, reassigned
+    A2->>Z: Activate job (withLease)
+    Z-->>A2: Job with leaseToken 2
+    A2->>Z: Update agent instance (leaseToken 2)
+    Z-->>A2: Update pending
+    A2->>Z: Complete job (leaseToken 2)
+    Z-->>A2: Accepted
+    Note over Z: Commits activation 2's update,<br/>discards activation 1's pending update
+```
+
+### How job leasing works
+
+To use leasing, request a lease by setting `withLease` to `true` when you activate jobs. Zeebe then returns a `leaseToken` on each activated job. This token identifies that specific activation, not the job itself.
+
+Pass the matching lease token back when you complete, fail, or throw an error on the job. You can also include it when you update the job timeout, retries, or priority, to verify the activation is still current before the update applies.
+
+### Enforcement and rejections
+
+Complete, fail, and throw-error commands on a leased job require the matching lease token. If the token is missing or doesn't match, Zeebe rejects the command with `INVALID_STATE`.
+
+Updating a job's timeout, retries, or priority never requires a lease token, but Zeebe validates one if you supply it. This keeps operator and bulk updates of leased jobs possible without requiring a lease.
+
+A lease-mismatch rejection means another activation of the same job has already superseded yours, for example after the job timed out and was reassigned. Treat this as expected, not as an error: don't retry the command, and log it at debug level rather than as an error.
+
+### Leasing is permanent for a job
+
+Once a job has been leased by any worker, Zeebe never again serves that job to a non-leasing worker of the same type. A non-leasing poll or stream silently skips the job.
+
+The affected process instances may appear stuck with no incident indicating the problem if all leasing workers are stopped. Zeebe exposes a `skipped` action on the `zeebe.job.events.total` metric as the operator signal that a non-leasing worker attempted to activate the leased job.
+
+:::note
+There is currently no operation to remove a lease from a job. To recover, you have two options:
+
+- Redeploy any worker for the job type with `withLease` set to `true`, to drain the leased jobs.
+- Use process instance modification to terminate and reactivate the element, which produces a fresh, unleased job.
+  :::
+
+This also affects rollbacks. If you roll back a leasing worker deployment to a non-leasing version, any jobs leased in the interim stay permanently unavailable to the rolled-back version.
+
+:::tip
+Run a homogeneous fleet per job type: either all workers for a type request a lease, or none do. Mixed fleets work, but treat them as a transitional state, such as during a rollout. Keep an eye on the `skipped` jobs metric mentioned above to ensure the fleet is homonogeous.
+:::
+
+### Example
+
+The following example activates jobs with a lease and completes the job using the matching lease token.
+
+```java
+client
+    .newWorker()
+    .jobType("process-payment")
+    .handler(
+        (jobClient, job) -> {
+            // process the job ...
+
+            jobClient
+                // highlight-start
+                .newCompleteCommand(job.getKey())
+                .withLeaseToken(job.getLeaseToken())
+                // highlight-end
+                .send();
+        })
+    // highlight-start
+    .withLease(true)
+    // highlight-end
+    .open();
+```
+
+When you build a command from the activated job itself, the client carries the job's lease token for you automatically:
+
+```java
+client
+    .newWorker()
+    .jobType("process-payment")
+    .handler(
+        (jobClient, job) -> {
+            // process the job ...
+
+            // highlight-start
+            jobClient.newCompleteCommand(job).send();
+            // highlight-end
+        })
+    // highlight-start
+    .withLease(true)
+    // highlight-end
+    .open();
+```
