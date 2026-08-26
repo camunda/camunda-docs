@@ -71,10 +71,11 @@ In this step, you will design a process that demonstrates how to route the proce
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
-2. Name your project and select **Create new > BPMN diagram**.
-3. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
-4. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
+1. In Camunda Hub, navigate to your workspace. If you don't have a workspace, ask an organization administrator to [create one](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace).
+2. In the workspace, click **New project**.
+3. In your project, select **Create new > BPMN diagram**.
+4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
+5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
 
 </TabItem>
 <TabItem value="sm">

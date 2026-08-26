@@ -1,7 +1,7 @@
 ---
 title: Use connectors and deploy processes with Docker Compose
 sidebar_label: Connectors and modeling
-description: Configure connector secrets, add custom connectors, and deploy processes with Desktop Modeler or Web Modeler in Docker Compose.
+description: Configure connector secrets, add custom connectors, and deploy processes with Desktop Modeler or Camunda Hub in Docker Compose.
 ---
 
 Use this page to work with connectors and local modeling tools in the Docker Compose quickstart.
@@ -50,7 +50,7 @@ Each connector JAR must include all required dependencies inside the JAR.
 
 ## Deploy and execute processes
 
-You can deploy and execute processes with either Desktop Modeler or Web Modeler.
+You can deploy and execute processes with either Desktop Modeler or Camunda Hub.
 
 ### Deploy with Desktop Modeler
 
@@ -88,23 +88,23 @@ To deploy from Desktop Modeler to the full configuration:
 The full configuration uses Keycloak for OIDC authentication. The client credentials are preconfigured in the `.env` file and admin configuration.
 :::
 
-### Deploy with Web Modeler
+### Deploy with Camunda Hub
 
 :::note
-Non-production installations of Web Modeler are limited to five collaborators per project. See [Licensing](/reference/licenses.md).
+Non-production installations of Camunda Hub are limited to five collaborators per workspace. See [Licensing](/reference/licenses.md).
 :::
 
-[Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) provides a browser-based interface for creating and deploying BPMN, DMN, and form diagrams. It is included in the full configuration by default, and can also run as a standalone setup.
+[Camunda Hub](/components/hub/workspace/modeler/launch-modeler.md) provides a browser-based interface for creating and deploying BPMN, DMN, and form diagrams. It is included in the full configuration by default, and can also run as a standalone setup.
 
 #### Standalone setup
 
-To start Web Modeler and its dependencies independently, run:
+To start Camunda Hub and its dependencies independently, run:
 
 ```shell
 docker compose -f docker-compose-web-modeler.yaml up -d
 ```
 
-To stop Web Modeler and remove all data and volumes, run:
+To stop Camunda Hub and remove all data and volumes, run:
 
 ```shell
 docker compose -f docker-compose-web-modeler.yaml down -v
@@ -112,29 +112,30 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 
 #### Deploy or execute a process
 
-When you use the full configuration, Web Modeler connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from the Web Modeler interface.
+When you use the full configuration, Camunda Hub connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from the Camunda Hub interface.
 
-1. Log in to Web Modeler at [http://localhost:8070](http://localhost:8070) with `demo` / `demo`.
-1. [Create a new project](/components/hub/workspace/modeler/launch-modeler.md) or open an existing BPMN diagram.
+1. Log in to Camunda Hub at [http://localhost:8070](http://localhost:8070) with `demo` / `demo`.
+1. In your workspace, create a new project.
+1. In your project, [create a new BPMN diagram](/components/hub/workspace/modeler/launch-modeler.md).
 1. Use the visual modeler to [design your BPMN process](/components/modeler/bpmn/bpmn.md).
 1. Click **Deploy** to deploy the diagram to the preconfigured Orchestration Cluster.
 1. After deployment, you can [create process instances](/components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8080/operate).
 
-Web Modeler uses the `BEARER_TOKEN` authentication method to communicate with the Orchestration Cluster. The user's authentication token from Management Identity is used automatically for deployment.
+Camunda Hub uses the `BEARER_TOKEN` authentication method to communicate with the Orchestration Cluster. The user's authentication token from Management Identity is used automatically for deployment.
 
 :::note
-Web Modeler is not included in the lightweight configuration. To use Web Modeler with the lightweight configuration:
+Camunda Hub is not included in the lightweight configuration. To use Camunda Hub with the lightweight configuration:
 
-1. Run Web Modeler separately with `docker-compose-web-modeler.yaml`.
-1. Manually configure the cluster connection in Web Modeler.
+1. Run Camunda Hub separately with `docker-compose-web-modeler.yaml`.
+1. Manually configure the cluster connection in Camunda Hub.
 1. Use `NONE` or `BASIC` authentication for the lightweight Orchestration Cluster.
 
-For details, see [configure Web Modeler clusters](/self-managed/components/hub/configuration/properties.md#clusters).
+For details, see [configure Camunda Hub clusters](/self-managed/components/hub/configuration/properties.md#clusters).
 :::
 
 #### Emails
 
-The Docker Compose setup includes [Mailpit](https://github.com/axllent/mailpit) as a test SMTP server. Mailpit captures all emails sent by Web Modeler, but does not forward them to actual recipients.
+The Docker Compose setup includes [Mailpit](https://github.com/axllent/mailpit) as a test SMTP server. Mailpit captures all emails sent by Camunda Hub, but does not forward them to actual recipients.
 
 You can access emails in Mailpit at [http://localhost:8075](http://localhost:8075).
 

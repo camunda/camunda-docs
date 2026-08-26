@@ -50,7 +50,7 @@ Once you have written your script, you can test it on a local RPA worker.
 
 ### Using Web Modeler
 
-1. In a project or process application, use the **Create new** menu and select **RPA script**.
+1. In a project, use the **Create new** menu and select **RPA script**.
 2. **Write your RPA script using Robot Framework**: Use the editor to create your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
    <img src={RpaEditorWebInitial} alt="RPA editor interface showing the initial script view in Web Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 3. In a BPMN diagram, you'll now find your new RPA script in the **Append element** menu.
