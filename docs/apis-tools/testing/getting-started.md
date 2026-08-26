@@ -266,8 +266,8 @@ CPT performs the following actions during the JUnit 5 lifecycle when running a t
   - Print the created process instances if the test failed
   - Close the client connections
   - Publish the client closed event for the Spring Boot process application to stop job workers
-  - Reset the Camunda runtime clock (can be disabled with [`clock-reset-enabled: false`](configuration.md#test-cleanup-settings))
-  - Delete all data in the Camunda runtime (can be disabled with [`data-deletion-mode: none`](configuration.md#test-cleanup-settings))
+  - Reset the Camunda runtime clock (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
+  - Delete all data in the Camunda runtime (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
 - `afterAll` (test methods)
   - Generate the coverage report
   - Stop the test runtime
@@ -327,8 +327,8 @@ public class TestProcessApplication {}
   - Collect the data for the coverage report
   - Print the created process instances if the test failed
   - Close the client connections
-  - Reset the Camunda runtime clock (can be disabled with [`clockResetEnabled=false`](configuration.md#test-cleanup-settings))
-  - Delete all data in the Camunda runtime (can be disabled with [`dataDeletionMode=NONE`](configuration.md#test-cleanup-settings))
+  - Reset the Camunda runtime clock (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
+  - Delete all data in the Camunda runtime (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
 - `afterAll` (test methods)
   - Generate the coverage report
   - Stop the test runtime
