@@ -578,9 +578,17 @@ Starting with Camunda 8.10, Camunda Hub replaces Console and Web Modeler. Manage
 </div>
 <div className="release-announcement-content">
 
-#### SaaS Operations Engineer role renamed to DevOps
+#### SaaS organization roles renamed and Catalog access levels introduced
 
-Starting with Camunda 8.10, the SaaS **Operations Engineer** organization role is renamed to **DevOps**. This is a display rename only: permissions are unchanged, and existing Operations Engineer holders keep the same access under the new name with no reassignment required.
+Starting with Camunda 8.10, SaaS organization roles are renamed to align with Camunda Hub, and Catalog access is split into two levels. These are display renames and a new access split; existing role holders keep the same effective access, with no reassignment required:
+
+- `Owner` → `Organization Owner`, `Admin` → `Organization Admin`, `Modeler` → `Member` (Member additionally gains organization and cluster read access), `Analyst` stays `Analyst`.
+- `Operations Engineer` → `DevOps`, with no permission change.
+- Catalog access is now split into **Read** (Member, DevOps) and **Manage** (Analyst, Organization Admin, Organization Owner, who additionally see usage statistics and adoption data).
+
+`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-members/manage-users.md#roles-and-permissions) for their status.
+
+<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-members/manage-users.md#roles-and-permissions)</p>
 
 </div>
 </div>
