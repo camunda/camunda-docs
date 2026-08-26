@@ -1,11 +1,6 @@
 ---
 id: sizing-your-environment
 title: Size your environment
-tags:
-  - Database
-  - Performance
-  - Hardware
-  - Sizing
 description: "Understand the aspects relevant to Camunda 8 sizing. Once you do, use the sizing recommendations for [SaaS](sizing-saas.md) or [Self-Managed](sizing-self-managed.md) to select your appropriate configuration."
 ---
 
@@ -40,6 +35,8 @@ The workflow engine stores data for each process instance, especially to persist
 In addition, it sends data to secondary storage (Elasticsearch, OpenSearch, or an RDBMS) for indexing, search, analytics, and long-term retention.
 
 You can configure retention times for data stored in secondary storage.
+
+For Self-Managed, see [Disk space](sizing-self-managed.md#disk-space) for the formula and mechanics behind Zeebe's primary storage disk usage.
 
 ### Impact of Optimize
 
@@ -91,12 +88,36 @@ Track import progress with the [Optimize metrics and bundled Grafana dashboards]
 
 ##### Keep variables out of Optimize (highest impact, lowest risk)
 
-Variables dominate Optimize's storage and CPU costs on secondary storage: Optimize stores a variable roughly **14x more expensively than the raw export** (around 29x for high-cardinality string variables), so almost the entire cost lives in Optimize's analytics indices. There are two levers:
+Variables dominate Optimize's storage and CPU costs on secondary storage. In benchmarks, disabling Optimize's variable storage entirely cut its disk usage roughly **14x** relative to the raw export. Isolating a customer-related variable group showed an even larger **~29x** difference, driven mostly by object variable flattening (below) rather than the variables' values themselves. See [why](./data-flow.md#optimize-data-flow) for the underlying storage mechanism. Almost the entire cost lives in Optimize's analytics indices. There are two levers:
 
 - **Stop exporting variables entirely.** Set `camunda.data.exporters.elasticsearch.args.index.variable: false` (OpenSearch: `camunda.data.exporters.opensearch.args.index.variable: false`) to drop all variable records at the exporter. This is the only lever that also recovers throughput, because the exporter write path is the bottleneck at maximum load. See the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration) or [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration) exporter configuration.
 - **[Disable variable import](/self-managed/components/optimize/configuration/variable-import.md) in Optimize.** This achieves the same storage savings but does not recover throughput, because the records are still written by the exporter.
 
 **Trade-off:** variables are then unavailable in Optimize reports, including variable filters, variable-based grouping, and raw-data variable columns. Both levers affect **Optimize only**; Operate and Tasklist read through the Camunda Exporter, so their variables stay intact.
+
+##### Disable object variable flattening (high impact for object-heavy processes)
+
+By default, Optimize [flattens each object variable](/self-managed/components/optimize/configuration/object-variables.md) into a separate variable for each property and stores the full raw object as another variable. Each generated variable incurs its own storage cost, so an object variable with several properties can require several times more storage than a single scalar variable.
+
+If you don't rely on flattened object-variable filtering, grouping, or raw-data columns in Optimize reports, disable it by setting:
+
+- Environment variable: `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false`
+- Configuration property: `zeebe.includeObjectVariableValue: false`
+
+:::note
+This behavior is enabled by default in Self-Managed and disabled in Camunda 8 SaaS.
+:::
+
+In an isolated benchmark that changed only this setting for the same workload:
+
+- Optimize's share of total Elasticsearch disk usage dropped from 62.8% to 7.6%, a reduction by a factor of 8.3.
+- Total secondary storage per created process instance dropped from 6.34 MB to 2.97 MB, a reduction by a factor of 2.13. This reduction was smaller because the setting does not affect Zeebe or Camunda Exporter storage.
+
+See [Confirming Optimize's object variable flattening cost with a controlled A/B test](https://camunda.github.io/zeebe-chaos/2026/07/09/Optimize-Object-Variable-Flattening/) for the complete methodology and additional measurements.
+
+:::warning
+These ratios are specific to the benchmark's payload and process models; they are not universal constants. Object variable flattening processes nested JSON recursively without a depth limit, so payloads with deeper nesting or more object fields can require considerably more storage than measured here. Measure your workload before using these numbers for capacity planning.
+:::
 
 ##### Other mitigations
 
@@ -194,6 +215,20 @@ In most scenarios, your load will be volatile rather than constant. For example,
 In this example, that single peak day defines your overall throughput requirements.
 
 In addition, sizing for peaks may mean you shouldn’t assume a full 24-hour day. Instead, you might size for just the eight business hours, or even the busiest two hours—depending on your workload.
+
+### Job worker capacity
+
+Even when your cluster has spare throughput capacity, an undersized job worker can still allow jobs to accumulate in the backlog. Worker capacity requires its own sizing exercise, separate from cluster sizing.
+
+The workflow engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [Job streaming pushes a job as soon as it becomes available for activation](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs), while polling is the only path that drains jobs already queued in the backlog.
+
+Therefore, healthy throughput does not indicate whether the backlog is draining; they are independent signals. The backlog can continue to grow after workers recover from an outage, even when throughput appears to have fully recovered. See [impact of worker downtime on a realistic load test](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details.
+
+:::note
+There is currently no built-in metric that directly reports the size of this backlog.
+:::
+
+Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
 
 ### Secondary storage
 

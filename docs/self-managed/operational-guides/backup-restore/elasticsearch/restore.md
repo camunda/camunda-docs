@@ -517,7 +517,7 @@ The following uses the [OpenSearch CAT API](https://docs.opensearch.org/docs/lat
 
 ```bash
 for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" \
-   | grep -E 'operate|tasklist|optimize|zeebe'); do
+   | grep -E 'camunda|operate|tasklist|optimize|zeebe'); do
       echo "Deleting index: $index"
       curl -X DELETE "$OPENSEARCH_ENDPOINT/$index"
 done
@@ -629,6 +629,8 @@ The following specific prerequisites are required when restoring the Zeebe Clust
 | Components stopped | It’s critical that no Camunda components are running during a Zeebe restore. Restored components may propagate an incorrect cluster configuration, potentially disrupting cluster communication. |
 
 ### Restore Zeebe Cluster
+
+In Camunda 8.10 and later, you can restore Zeebe partitions on the running brokers instead, without deploying the standalone restore application. See [Restore a cluster in place](../in-process-restore.md).
 
 :::note
 During the restoration of the Elasticsearch / OpenSearch state, we had to temporarily deploy Zeebe. This will have resulted in persistent volumes on Kubernetes and a filled data directory on each Zeebe Broker in case of a manual deployment.

@@ -95,7 +95,7 @@ export const clientCards = [
     title: "c8ctl CLI",
     image: IconCliImg,
     description:
-      "Inspect clusters, deploy resources, and manage processes from the terminal. (Alpha)",
+      "Inspect clusters, deploy resources, and manage processes from the terminal.",
     type: "",
   },
   {

@@ -1,11 +1,6 @@
 ---
 id: sizing-your-environment
 title: Sizing your environment
-tags:
-  - Database
-  - Performance
-  - Hardware
-  - Sizing
 description: "Define and size your environment for Camunda 8 appropriately by understanding the factors that influence hardware requirements."
 ---
 
@@ -53,6 +48,20 @@ In most scenarios, your load will be volatile and not constant. For example, you
 In the above example, that one day with the peak load defines your overall throughput requirements.
 
 Sometimes, looking at peaks might also mean, that you are not looking at all 24 hours of a day, but only 8 business hours, or probably the busiest 2 hours of a day, depending on your typical workload.
+
+### Job worker capacity
+
+Even when your cluster has spare throughput capacity, an undersized job worker can still allow jobs to accumulate in the backlog. Worker capacity requires its own sizing exercise, separate from cluster sizing.
+
+The workflow engine delivers jobs to workers through two paths that share a worker's capacity but behave differently: [Job streaming pushes a job as soon as it becomes available for activation](/components/concepts/job-workers.md#how-job-streaming-and-polling-deliver-jobs), while polling is the only path that drains jobs already queued in the backlog.
+
+Therefore, healthy throughput does not indicate whether the backlog is draining; they are independent signals. The backlog can continue to grow after workers recover from an outage, even when throughput appears to have fully recovered. See [impact of worker downtime on a realistic load test](https://camunda.github.io/zeebe-chaos/2026/08/06/worker-downtime-throughput-recovery) for more details.
+
+:::note
+There is currently no built-in metric that directly reports the size of this backlog.
+:::
+
+Size the worker’s capacity according to its concurrency model and the job timeout. For the Java client’s fixed-thread-pool model, see [sizing `maxJobsActive` against execution threads](/components/best-practices/development/writing-good-workers.md#size-maxjobsactive-against-execution-threads). Other client SDKs implement worker capacity differently and are not covered by this formula.
 
 ### Latency and cycle time
 
@@ -125,6 +134,21 @@ Using your throughput and retention settings, you can now calculate the required
 | PI in retention time       |    \* 6 months     |      3,600,000 |                                                                                                    |
 | Disk space                 |     \* 21 kib      |      72.10 GiB |                                                                                                    |
 | **Sum**                    |                    | **113.87 GiB** |                                                                                                    |
+
+### Optimize variable storage
+
+Variables can significantly increase Optimize's storage and CPU usage. Optimize stores variables in its indices so reports can filter, group, and display variable values. Object variables can be especially expensive, because Optimize [flattens each object variable](/self-managed/optimize-deployment/configuration/object-variables.md) into one sub-variable per property, plus the raw serialized object as its own variable.
+
+If you don't need variables in Optimize reports, you can reduce this cost in two ways:
+
+- **Stop exporting variables entirely.** Set the `variable` option to `false` in the [Elasticsearch](/self-managed/zeebe-deployment/exporters/elasticsearch-exporter.md#index) or [OpenSearch](/self-managed/zeebe-deployment/exporters/opensearch-exporter.md#index) exporter configuration.
+- **Disable variable import in Optimize.** Set `CAMUNDA_OPTIMIZE_ZEEBE_VARIABLE_IMPORT_ENABLED=false`. This reduces Optimize storage and indexing work, but the records are still written by the exporter.
+
+If you need scalar variables but don't rely on flattened object-variable filtering, grouping, or raw-data columns, disable object variable flattening by setting `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=false` or `zeebe.includeObjectVariableValue: false`.
+
+:::note
+This behavior is enabled by default in Self-Managed and disabled in Camunda 8 SaaS.
+:::
 
 ### Zeebe record ILM retention
 

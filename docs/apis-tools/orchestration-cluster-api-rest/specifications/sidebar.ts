@@ -20,6 +20,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Agent definition",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-agent-definition",
+          label: "Get agent definition",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-agent-definitions",
+          label: "Search agent definitions",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Agent instance",
       items: [
         {
@@ -88,6 +106,12 @@ const sidebar: SidebarsConfig = {
           label: "Get current user",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-own-authorizations",
+          label: "Search own authorizations",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -122,6 +146,78 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-authorization",
           label: "Delete authorization",
+          className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Backup",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/take-runtime-backup",
+          label: "Take a runtime backup",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/list-runtime-backups",
+          label: "List runtime backups",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup-state",
+          label: "Get runtime backup state",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup-state",
+          label: "Delete runtime backup state",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/sync-runtime-backup-state",
+          label: "Force-write runtime backup state",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-runtime-backup",
+          label: "Get runtime backup",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-runtime-backup",
+          label: "Delete runtime backup",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/take-history-backup",
+          label: "Take a history backup",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/list-history-backups",
+          label: "List history backups",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-history-backup",
+          label: "Get history backup",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/delete-history-backup",
+          label: "Delete history backup",
           className: "api-method delete",
         },
       ],
@@ -193,13 +289,25 @@ const sidebar: SidebarsConfig = {
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-status",
-          label: "Get cluster status",
+          label: "Get physical tenant status",
           className: "api-method get",
         },
         {
           type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-topology",
           label: "Get cluster topology",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-status",
+          label: "Get the status of the whole cluster",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-cluster-topology",
+          label: "Get the topology of the whole cluster",
           className: "api-method get",
         },
       ],
@@ -429,6 +537,30 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/create-element-instance-variables",
           label: "Update element instance variables",
           className: "api-method put",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Exporting",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-exporting-status",
+          label: "Get exporting status",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/pause-exporting",
+          label: "Pause exporting",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-exporting",
+          label: "Resume exporting",
+          className: "api-method post",
         },
       ],
     },
@@ -828,6 +960,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-definition-variable-names",
+          label: "Search process definition variable names",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-definition-xml",
           label: "Get process definition XML",
           className: "api-method get",
@@ -882,8 +1020,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instances-batch-operation",
+          label: "Resume process instances (batch)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances",
           label: "Search process instances",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instances-batch-operation",
+          label: "Suspend process instances (batch)",
           className: "api-method post",
         },
         {
@@ -891,6 +1041,12 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance",
           label: "Get process instance",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/assign-process-instance-business-id",
+          label: "Assign business id to process instance",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -936,6 +1092,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resume-process-instance",
+          label: "Resume process instance",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-sequence-flows",
           label: "Get sequence flows",
           className: "api-method get",
@@ -951,6 +1113,48 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/get-process-instance-wait-state-statistics",
           label: "Get wait state statistics",
           className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/suspend-process-instance",
+          label: "Suspend process instance",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Recovery",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode",
+          label: "Change cluster mode",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/restore",
+          label: "Restore from a backup",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/get-restore-status",
+          label: "Get the status of the restore that is currently in progress",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/change-cluster-mode-as-cluster-admin",
+          label: "Change the cluster mode of one or every physical tenant",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/restore-as-cluster-admin",
+          label: "Restore one or every physical tenant from a backup",
+          className: "api-method post",
         },
       ],
     },
@@ -1101,6 +1305,24 @@ const sidebar: SidebarsConfig = {
           id: "apis-tools/orchestration-cluster-api-rest/specifications/unassign-role-from-user",
           label: "Unassign a role from a user",
           className: "api-method delete",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Secret",
+      items: [
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets",
+          label: "Resolve secrets (alpha)",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "apis-tools/orchestration-cluster-api-rest/specifications/list-secrets",
+          label: "List secrets (alpha)",
+          className: "api-method post",
         },
       ],
     },

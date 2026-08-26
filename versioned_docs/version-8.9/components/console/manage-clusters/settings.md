@@ -21,11 +21,35 @@ To manage your cluster settings:
 You can enable authorizations on a per-cluster basis to control the level of access users and clients have over Orchestration Cluster resources.
 
 - Enable this setting to use [authorizations](/components/concepts/access-control/authorizations.md) in the cluster.
-- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Admin, but they are only applied to cluster when you enable this setting.
+- Disable this setting if you do not want to use authorizations in the cluster. You can still configure authorizations in the Orchestration Cluster Admin, but they are only applied to the cluster when you enable this setting.
 
 :::tip
-For more information, see [authorizations](/components/concepts/access-control/authorizations.md).
+Learn more about [resource-based authorizations](/components/concepts/access-control/authorizations.md).
 :::
+
+## Multi-tenancy
+
+You can enable multi-tenancy checks on a per-cluster basis to enforce tenant-level authorization for Orchestration Cluster resources.
+
+- Enable this setting to enforce tenant-level authorization checks. Users, groups, and roles not assigned to a tenant lose access to any resources scoped to that tenant.
+- Disable this setting to allow tenants to be created and principals assigned without enforcing checks. All data maps to the `<default>` tenant.
+
+This setting is disabled by default. Only organization admins can change it, and it is available for clusters running generation 8.8 and later. The setting is reversible: disabling it restores the implicit `<default>`-tenant behavior.
+
+For details on creating tenants and managing assignments, see [tenant management](/components/admin/tenant.md).
+
+:::warning
+Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
+:::
+
+## Enable app integrations extensions
+
+You can allow a cluster to exchange events with App Integrations, such as Camunda for Microsoft Teams, so App Integrations can deliver task notifications to your collaboration tool.
+
+- Enable this setting to deliver user task notifications to Microsoft Teams based on your [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md). Notification cards also update as the task is assigned, completed, or canceled.
+- Disable this setting if you do not want the cluster to exchange events. App Integrations then work with reduced functionality: the cluster delivers no notifications, but you can still use Camunda for Microsoft Teams to browse tasks, start processes, and act on tasks.
+
+This setting is disabled by default. It is available for clusters running generation `8.9 gen13` or later, and organization admins can change it.
 
 ## Automatic cluster updates
 

@@ -1,10 +1,5 @@
 ---
 title: Understanding Camunda 7 transaction handling
-tags:
-  - Transaction
-  - ACID Transaction
-  - Incident
-  - Save Point
 description: "Carefully study and fully understand the concepts of wait states (save points) acting as transaction boundaries for technical (ACID) transactions."
 ---
 

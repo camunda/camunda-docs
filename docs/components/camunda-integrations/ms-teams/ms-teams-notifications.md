@@ -9,6 +9,22 @@ Notification rules let you control which user tasks trigger notifications in Mic
 
 Each rule applies to a specific organization and cluster and can filter user task events by process definition, user task elements, candidate users, or candidate groups.
 
+## Enable notification delivery for your cluster
+
+On Camunda 8 SaaS, the notifications a cluster delivers depend on its generation.
+
+Clusters running generation `8.9 gen13` or later require the **Enable app integrations extensions** setting in the [cluster settings](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions). Until an organization admin turns it on, you can create and save rules, but the cluster delivers no notifications.
+
+Clusters running earlier generations need no configuration. They deliver a notification when a matching user task is created.
+
+| Notification                                                     | Earlier generations | `8.9 gen13` or later, with app integrations extensions enabled |
+| :--------------------------------------------------------------- | :------------------ | :------------------------------------------------------------- |
+| A matching user task is created                                  | Yes                 | Yes                                                            |
+| A card updates when the task is assigned, completed, or canceled | No                  | Yes                                                            |
+| An existing task is later assigned to you                        | No                  | Yes                                                            |
+
+Clusters running generation `8.9 gen13` or later also receive new notification capabilities as they become available.
+
 ## Channel vs. personal rules
 
 Where you create a rule determines who receives notifications.
@@ -52,7 +68,7 @@ A rule triggers a notification only when a user task matches all configured filt
 
 ### Match semantics
 
-- Empty filters match all user tasks in the selected cluster. A rule with no filters matches every user task in the selected cluster — the broadest possible subscription.
+- Empty filters match all user tasks in the selected cluster. A rule with no filters matches every user task in the selected cluster: the broadest possible subscription.
 - Adding filters narrows the match. Filters combine with AND across fields and OR within each list. For example, a rule with `candidateGroups = "finance, hr"` and a selected process matches tasks from that process that have either `finance` or `hr` as a candidate group.
 - Multiple matching rules deduplicate. If several rules match the same user task event, the recipient still receives only one notification per event.
 

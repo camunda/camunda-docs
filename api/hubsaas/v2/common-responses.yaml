@@ -35,7 +35,7 @@ components:
             title: "Forbidden"
             status: 403
             detail: "Operation not allowed. Ensure your API credentials have the required permissions."
-            instance: "/api/v2/files/file-789-xyz"
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03"
 
     InvalidData:
       description: The provided data is not valid.
@@ -74,7 +74,7 @@ components:
             title: "Not Found"
             status: 404
             detail: "The requested resource was not found."
-            instance: "/api/v2/files/file-789-xyz"
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03"
 
     Conflict:
       description: A conflict occurred while processing the request.
@@ -87,4 +87,4 @@ components:
             title: "Conflict"
             status: 409
             detail: "The request conflicts with the current state of the resource."
-            instance: "/api/v2/files/file-789-xyz"
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03"
