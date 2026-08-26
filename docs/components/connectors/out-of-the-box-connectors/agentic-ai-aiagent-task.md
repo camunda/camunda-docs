@@ -34,13 +34,13 @@ Implement an AI agent using an AI Agent connector applied to a service task, pai
 
 Select and configure the LLM model **Provider** and **Model** you want to use, from the following supported providers:
 
-- Anthropic (directly, or through AWS Bedrock Mantle)
-- AWS Bedrock Converse
-- OpenAI (directly, through Microsoft Foundry/Azure, or through a custom OpenAI-compatible endpoint)
-- Google Gemini (directly, or through Google Vertex AI)
-- Custom implementation (Self-Managed/Hybrid only)
+- Anthropic (directly, or through AWS Bedrock Mantle).
+- AWS Bedrock Converse.
+- OpenAI (directly, through Microsoft Foundry/Azure, or through a custom OpenAI-compatible endpoint).
+- Google Gemini (directly, or through Google Vertex AI).
+- Custom implementation (Self-Managed/Hybrid only).
 
-See [Model Providers](./agentic-ai-aiagent-model-providers.md) for the full configuration fields for each provider.
+See [model providers](./agentic-ai-aiagent-model-providers.md) for the full configuration details for each provider.
 
 <ConfigurationSystemPrompt />
 <ConfigurationUserPrompt />

@@ -1,62 +1,64 @@
 ---
 id: agentic-ai-aiagent-model-providers
-sidebar_label: Model Providers
+sidebar_label: Model providers
 title: AI Agent model providers
 description: Configure the LLM model provider used by the AI Agent Task and AI Agent Sub-process connectors.
 ---
 
-The [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) and [AI Agent Task](./agentic-ai-aiagent-task.md) connectors share the same **Model provider** configuration. This page documents that configuration in detail.
+Configure the LLM model provider used by the AI Agent connectors. Both the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) and [AI Agent Task](./agentic-ai-aiagent-task.md) connectors use the same **Model provider** configuration.
 
 :::info
-This page documents the **native provider configuration** shipped with the `v2` AI Agent element templates (Camunda 8.10+). If you are still using the original (`v1`) AI Agent element templates, see [Upgrading from v1](./agentic-ai-aiagent-upgrade.md) to move to the `v2` element templates and their native providers.
+This page documents the **native provider configuration** shipped with the `v2` AI Agent element templates (Camunda 8.10+). If you are still using the original (`v1`) AI Agent element templates, see [upgrade from v1](./agentic-ai-aiagent-upgrade.md) to move to the `v2` element templates and their native providers.
 :::
 
-## Provider and backend
+## Choose a provider and backend
 
-Model provider configuration is split into two independent choices:
+Model provider configuration consists of two independent choices:
 
 - **Provider** selects the wire format the AI Agent uses to talk to the LLM. For example, the Anthropic Messages API, or the OpenAI Responses/Chat Completions API. This determines which provider-specific capabilities are available, such as Anthropic's extended thinking or Gemini's thinking level.
 - **Backend** (where more than one is available for a provider) selects which infrastructure actually serves that API: the vendor's own hosted API, a hyperscaler platform that exposes a compatible endpoint, or a custom/self-hosted endpoint.
 
-These two choices are independent, so the same model family can be reached through more than one backend. For example:
+These two choices are independent, so the same model family may be available through multiple backends. For example:
 
-- **Anthropic** Claude models can be reached through the native **Anthropic API** backend, or through **AWS Bedrock Mantle** (Anthropic's Claude models hosted on Amazon Bedrock, exposed through Anthropic's own Messages API rather than the Bedrock Converse API). Pick **Anthropic** as the provider either way, and use the **Backend** field to say where it's hosted.
-- **OpenAI** models can be reached through the native **OpenAI API**, through **Microsoft Foundry** (Azure OpenAI), or through any custom OpenAI-compatible endpoint.
-- **Google Gemini** models can be reached through the direct **Google Gemini API**, or through **Google Vertex AI**.
+- **Anthropic** Claude models are available through the native **Anthropic API** backend, or through **AWS Bedrock Mantle** (Anthropic's Claude models hosted on Amazon Bedrock, exposed through Anthropic's own Messages API rather than the Bedrock Converse API). In either case, select **Anthropic** as the provider and use the **Backend** field to specify where it's hosted.
+- **OpenAI** models are available through the native **OpenAI API**, through **Microsoft Foundry** (Azure OpenAI), or through any custom OpenAI-compatible endpoint.
+- **Google Gemini** models are available through the direct **Google Gemini API**, or through **Google Vertex AI**.
 
-Prefer selecting the **Provider** that matches the model's native wire format (for example, Anthropic for Claude models, even when hosted on Bedrock) rather than a generic hyperscaler provider. This gives you access to that provider's own configuration surface, such as Anthropic's reasoning/extended thinking settings and prompt caching, regardless of where the model is actually hosted. See [AWS Bedrock Converse](#aws-bedrock-converse) below for when the generic Bedrock provider is still the right choice.
+Select the provider that matches the model's native wire format (for example, Anthropic for Claude models, even when hosted on Bedrock) rather than a generic hyperscaler provider. This gives you access to that provider's own configuration surface, such as Anthropic's reasoning/extended thinking settings and prompt caching, regardless of where the model is actually hosted. See [AWS Bedrock Converse](#aws-bedrock-converse) below to determine when the generic Bedrock provider is the appropriate choice.
 
-## Providers
+## Supported providers
 
 Select and configure the model **Provider** you want to use from the following supported providers:
 
-- [Anthropic](#anthropic) (Claude models, directly or via AWS Bedrock Mantle)
-- [AWS Bedrock Converse](#aws-bedrock-converse)
-- [OpenAI](#openai) (directly, via Microsoft Foundry/Azure, or via a custom OpenAI-compatible endpoint)
-- [Google Gemini](#google-gemini) (directly, or via Google Vertex AI)
-- [Custom implementation](#custom-implementation) (Self-Managed/Hybrid only)
+- [Anthropic](#anthropic) (Claude models, directly or via AWS Bedrock Mantle).
+- [AWS Bedrock Converse](#aws-bedrock-converse).
+- [OpenAI](#openai) (directly, via Microsoft Foundry/Azure, or via a custom OpenAI-compatible endpoint).
+- [Google Gemini](#google-gemini) (directly, or via Google Vertex AI).
+- [Custom implementation](#custom-implementation) (Self-Managed/Hybrid only).
 
-:::note
+:::tip
 Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly in the process.
 :::
 
 ### Timeout handling
 
-Every provider exposes a **Timeout** field. The default timeout for model API calls is three minutes, set by the runtime. Self-managed Spring connector runtime instances can override this default by setting the `camunda.connector.agenticai.aiagent.chat-model.api.default-timeout` property.
+Every provider exposes a **Timeout** field. The default timeout for model API calls is **three minutes**, set by the runtime. Self-Managed Spring connector runtime instances can override this default by setting the `camunda.connector.agenticai.aiagent.chat-model.api.default-timeout` property.
 
 The **Timeout** field on a provider takes precedence over the default timeout. Values must be provided in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout.
 
 :::important
-The timeout setting must not exceed the job worker timeout; otherwise, the job may be reassigned by the engine while the model call is still in progress.
+The timeout must not exceed the job worker timeout. Otherwise, the job may be reassigned by the engine while the model call is still in progress.
 :::
 
 ### Advanced provider options
 
-Most backends also expose a set of advanced, low-level customization fields: **HTTP headers**, **query parameters**, and **body properties**, letting you add or override values on the outgoing HTTP request. On backends with a well-known REST-style API surface (for example, the native Anthropic API, OpenAI API, and Google Gemini/Vertex AI backends), these fields are reserved for internal/future use and aren't exposed in the properties panel. For backends without a fixed request shape (AWS Bedrock Converse, AWS Bedrock Mantle, and any custom/compatible endpoint), they're exposed as editable [FEEL](/components/modeler/feel/what-is-feel.md) map expressions so you can adapt the request to your specific deployment.
+Most backends also provide advanced, low-level customization fields: **HTTP headers**, **query parameters**, and **body properties**. With these fields, you can add or override values in the outgoing HTTP request.
+
+For backends with a well-known REST-style API surface, such as the native Anthropic API, OpenAI API, and Google Gemini or Vertex AI backends, these fields are reserved for internal or future use and aren't exposed in the properties panel. For backends without a fixed request structure, such as AWS Bedrock Converse, AWS Bedrock Mantle, and custom or compatible endpoints, the fields are exposed as editable [FEEL](/components/modeler/feel/what-is-feel.md) map expressions, which you can use to adapt the request to your deployment.
 
 ## Anthropic
 
-Select this provider to use an Anthropic Claude LLM model. Choose a **Backend** to specify how the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) is reached:
+Select this provider to use an Anthropic Claude LLM model. Choose a **Backend** to specify how to access the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages):
 
 - [Anthropic API](#anthropic-api): the native, hosted Anthropic API.
 - [AWS Bedrock Mantle](#aws-bedrock-mantle): Claude models hosted on Amazon Bedrock, reached through Anthropic's own Messages API.
@@ -78,7 +80,7 @@ Use this backend to run Anthropic Claude models hosted on Amazon Bedrock while k
 | **Custom endpoint** | No       | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Must be the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). It replaces the default `https://bedrock-mantle.<region>.api.aws/anthropic` verbatim. |
 | **Authentication**  | Yes      | Select the authentication method used to authenticate with AWS: **Credentials** (access key/secret key), **API key**, or **Default Credentials Chain** (Hybrid/Self-Managed only). See [Amazon Bedrock connector authentication](./amazon-bedrock.md#authentication) for details on each method.                     |
 
-Model availability depends on the region. You may need to request access to Anthropic models made available through Bedrock; see [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
+Model availability depends on the region. You may need to request access to Anthropic models available through Bedrock. See [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.
 
 #### Anthropic custom / compatible endpoint
 
@@ -106,7 +108,11 @@ Use this backend for any endpoint implementing the Anthropic Messages API, such 
 
 ## AWS Bedrock Converse
 
-Select this provider to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service through the generic [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API. This is the right choice for non-Anthropic model families available on Bedrock (for example Amazon Nova, Meta Llama, or Mistral models). If you're running **Anthropic Claude** models on Bedrock, use the [Anthropic provider's AWS Bedrock Mantle backend](#aws-bedrock-mantle) instead to access Anthropic-specific configuration.
+Select this provider to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service through the generic [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
+
+:::tip
+This is the right choice for non-Anthropic model families available on Bedrock. For example, Amazon Nova, Meta Llama, or Mistral models. If you're running **Anthropic Claude** models on Bedrock, use the [Anthropic provider's AWS Bedrock Mantle backend](#aws-bedrock-mantle) to access Anthropic-specific configuration.
+:::
 
 | Field               | Required | Description                                                                                                                                                                                                                                                                                      |
 | :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -132,13 +138,15 @@ Bedrock Converse doesn't support a **Reasoning**/**Effort** configuration or a *
 
 Select this provider to use OpenAI models. Two independent choices apply:
 
-- **API**: which OpenAI API family to use, **Responses** (default, recommended for new configurations) or **Chat Completions**.
-- **Backend**: how the API is reached.
+- **API**: which OpenAI API family to use. **Responses** (default, recommended for new configurations) or **Chat Completions**.
+- **Backend**: how the API is accessed.
   - [OpenAI API](#openai-api): the native, hosted OpenAI API.
   - [Microsoft Foundry (Azure)](#microsoft-foundry-azure): OpenAI models deployed through Microsoft Foundry/Azure OpenAI.
   - [Custom / compatible endpoint](#openai-custom--compatible-endpoint): any endpoint implementing the OpenAI API.
 
-Use **Responses** by default. It's OpenAI's current API and the one new reasoning models are designed around. Use **Chat Completions** instead if your backend doesn't support Responses, for example most self-hosted OpenAI-compatible endpoints (such as Ollama, or open-weight models like Qwen, Llama, or Mistral), or an older Microsoft Foundry/Azure OpenAI deployment.
+:::tip
+Use **Responses** by default. It's OpenAI's current API and designed for newer reasoning models. Use **Chat Completions** if your backend doesn't support **Responses**, such as an older Microsoft Foundry/Azure OpenAI deployment or a self-hosted OpenAI-compatible backend serving models such as Qwen, Llama, or Mistral through Ollama.
+:::
 
 #### OpenAI API
 
@@ -169,7 +177,7 @@ Authentication fields per method:
   - **Client ID**: (optional) the client ID of a user-assigned managed identity. Leave unset to use the system-assigned managed identity.
 
 :::note
-To use an OpenAI model deployed through Azure, deploy it first in the Azure AI Foundry portal. See [Deploy a model in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model), and enter the deployment name in the **Model** field below.
+To use an OpenAI model deployed through Azure, deploy it first in the Azure AI Foundry portal. See [deploy a model in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model), and enter the deployment name in the **Model** field below.
 
 A multi-replica connectors runtime setup means each replica also acquires and caches its own Entra ID token independently. Expect multiple, parallel credential/token requests against Entra ID under load, rather than a single shared token, and size any Entra ID application throttling limits accordingly.
 :::
@@ -197,7 +205,7 @@ OpenAI doesn't support a **top K** parameter or prompt caching configuration.
 
 ## Google Gemini
 
-Select this provider to use Google's Gemini models. Choose a **Backend** to specify how the API is reached:
+Select this provider to use Google's Gemini models. Choose a **Backend** to specify how to access the API:
 
 - [Google Gemini API](#google-gemini-api): the direct, hosted Gemini API.
 - [Google Vertex AI](#google-vertex-ai): Gemini models through Google Cloud's Vertex AI.
@@ -228,11 +236,13 @@ Select this provider to use Google's Gemini models. Choose a **Backend** to spec
 | **top P**                    | No       | Floating point number between 0 and 1. Recommended for advanced use cases only.                                                                                                                                      |
 | **top K**                    | No       | Integer greater than 0. Recommended for advanced use cases only.                                                                                                                                                     |
 
+:::note
 Google Gemini doesn't support prompt caching configuration.
+:::
 
 ## Custom implementation
 
-:::note
+:::important
 Available in Self-Managed or [hybrid](/reference/glossary.md#hybrid-mode) deployments only.
 :::
 

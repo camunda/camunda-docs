@@ -1,6 +1,6 @@
 ---
 id: agentic-ai-aiagent-upgrade
-sidebar_label: Upgrading from v1
+sidebar_label: Upgrade from v1
 title: Upgrade AI Agent element templates from v1 to v2
 description: Migrate AI Agent Task and AI Agent Sub-process elements from the legacy (v1) element templates to the native v2 element templates.
 ---
