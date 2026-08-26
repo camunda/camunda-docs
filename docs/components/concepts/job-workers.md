@@ -42,6 +42,8 @@ Many workers can request the same job type to scale up processing. In this scena
 
 Such a job is considered activated until the job is completed, failed, or the job activation times out.
 
+If a job's variables contain secret references, the job is handed out only once those references have been resolved. A job that is still waiting is not returned by the request and does not count against **MaxJobsToActivate**, so jobs behind it are still activated, and it becomes available again on its own once resolution completes. See [secret resolution and job activation](secret-resolution-and-job-activation.md).
+
 On requesting jobs, the following properties can be set:
 
 - **Worker**: The identifier of the worker used for auditing purposes.
@@ -183,6 +185,8 @@ The RNG used to randomly pick streams and clients provides a good uniform distri
 :::
 
 Job leasing also applies to streaming: a leased job only matches streams opened with a lease request, and streams opened without one only match unleased jobs. See [job leasing](#job-leasing) for details.
+
+A job whose variables contain secret references that are not yet resolved is not pushed. Its resolution is requested first, and the job is pushed once the references resolve. See [secret resolution and job activation](secret-resolution-and-job-activation.md).
 
 To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo" against a cluster consisting of a single gateway and a single broker. It receives some jobs, and when it closes, one job that was pushed asynchronously is returned to the broker:
 
