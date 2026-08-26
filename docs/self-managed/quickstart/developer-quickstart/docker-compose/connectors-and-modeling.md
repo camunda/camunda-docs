@@ -115,9 +115,9 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 When you use the full configuration, Camunda Hub connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from the Camunda Hub interface.
 
 1. Log in to Camunda Hub at [http://localhost:8070](http://localhost:8070) with `demo` / `demo`.
-1. [Create a workspace](/self-managed/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace).
+1. [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace).
 1. In your workspace, create a new project.
-1. In your project, [create a new BPMN diagram](/components/hub/workspace/modeler/launch-modeler.md).
+1. In your project, [create a new BPMN diagram](/components/hub/workspace/modeler/index.md).
 1. Use the visual modeler to [design your BPMN process](/components/modeler/bpmn/bpmn.md).
 1. Click **Deploy** to deploy the diagram to the preconfigured Orchestration Cluster.
 1. After deployment, you can [create process instances](/components/concepts/process-instance-creation.md) and monitor them in [Operate](http://localhost:8080/operate).
