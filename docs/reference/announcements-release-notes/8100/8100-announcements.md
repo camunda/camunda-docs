@@ -186,7 +186,7 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 Camunda 8.10 introduces new `v2` element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration). The original (`v1`) element templates are deprecated as of Camunda 8.10.
 
-**Action:** Use the `v2` element templates for new AI Agent implementations. See the new [Model Providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing `v1` implementation to `v2`.
+**Action:** Use the `v2` element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing `v1` implementation to `v2`.
 
 </div>
 </div>
