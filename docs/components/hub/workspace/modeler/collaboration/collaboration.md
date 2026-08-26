@@ -52,7 +52,7 @@ The user must be assigned the organization **Organization Owner** or **Organizat
 
 <TabItem value='self-managed'>
 
-The user must be assigned the **Web Modeler Admin** role (also provisioned under the forward-looking name **Hub Admin**).
+The user must be assigned the **Hub Admin** role.
 
 If the role is not pre-existing, it can be created with the following permissions:
 
