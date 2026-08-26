@@ -330,4 +330,4 @@ If your agent can't finish, [fail the job](/apis-tools/orchestration-cluster-api
 
 Start a process instance and open it in Operate. Select the agent element on the diagram to see the agent instance data you reported: its state, usage metrics, model, system prompt, tools, and conversation history grouped by loop iteration.
 
-See [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md) for a walkthrough of the agent views.
+See [monitor your AI agents](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md) to learn how to inspect and debug AI agents in Operate.
