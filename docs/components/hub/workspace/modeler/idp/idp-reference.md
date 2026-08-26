@@ -233,7 +233,7 @@ Access to IDP features is determined by your Web Modeler user role and associate
 
 For example, users with a Viewer or Commenter role only have read-only access to IDP features, and cannot upload documents, manage extraction fields, or publish templates.
 
-| Feature                                    |                             Viewer/Commenter                              |                         Editor/Project Admin                          |                       Organization Admin/Owner                        |
+| Feature                                    |                             Viewer/Commenter                              |                         Editor/Project Admin                          |               Organization Admin or Organization Owner                |
 | :----------------------------------------- | :-----------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
 | View IDP application                       |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | View document extraction                   |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |

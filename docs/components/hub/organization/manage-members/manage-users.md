@@ -4,13 +4,13 @@ title: Manage users in your organization
 description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
 
-When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the Organization Owner of the Camunda organization. This organization owns Hub workspaces, projects, and clusters. The owner and any admins they assign can control access to these resources through managing their organization.
+When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the Organization Owner of the Camunda organization. This organization owns Hub workspaces, projects, and clusters. The Organization Owner and any Organization Admins they assign can control access to these resources by managing their organization.
 
 ## Users
 
-An Organization Owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one owner.
+The Organization Owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one Organization Owner.
 
-To change the owner of the organization, utilize the user administration. The current owner selects another member of the organization, and selects **Assign as owner** from the menu. In the dialog that appears, select which new roles are to be assigned to the current owner.
+To change the Organization Owner, use the user administration. The current owner selects another member of the organization and clicks **Assign as owner** from the menu. In the dialog that appears, select the role to assign to the current owner after the transfer.
 
 ### Roles and permissions
 
