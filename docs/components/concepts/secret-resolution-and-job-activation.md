@@ -11,8 +11,8 @@ feature is listed on components/early-access/alpha/alpha-features.md: the v2 sec
 marked alpha, this page carries no availability marker yet, and one may be required. -->
 
 A job whose variables contain secret references is handed to a worker only once every reference has
-been resolved, and the resolved values reach the worker without being written to any record, to
-runtime state, or to the log.
+been resolved, and the resolved values reach the worker without being written to any record, runtime
+state, or log.
 
 The broker never reads a secret store while it processes a command. Instead, references are
 resolved in the background, ahead of activation, and the resolved values are injected into the job
@@ -48,7 +48,7 @@ Two kinds of failure are treated differently:
 | The store reports a secret as missing, forbidden, or invalid | Treated as permanent. The reference fails immediately, with no retry and no cache write.                                                                                            |
 | The store itself is unavailable                              | Treated as transient. The whole store is retried with exponential backoff. After `retry-max-attempts` consecutive failures, every reference still pending for that store is failed. |
 
-Retry state is tracked per store rather than per secret, is held in memory only, and resets when
+Retry state is tracked per store rather than per secret and held in memory only, so it resets when
 the broker restarts or the partition changes leader. A store that is backing off is skipped while
 it cools down, so its references do not consume the batch limit that a healthy store could use.
 
