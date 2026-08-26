@@ -331,13 +331,9 @@ Using default bucket encryption gives you control over the encryption keys and a
 
 Combined with TLS between Zeebe and the S3 API, backups are fully encrypted in transit and at rest. Other S3 compatible services might have similar features that should work as well.
 
-For server-side encryption with customer-provided keys (SSE-C), where the bucket itself mandates that each request supply the encryption key, configure `ssecKey` (see below). This is only required for SSE-C; SSE-S3 and SSE-KMS are handled transparently through default bucket encryption and need no Zeebe configuration.
-:::
+Set `ssecKey` only if your bucket enforces [server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html), where every request must supply the encryption key. When set, Zeebe attaches the key to every backup object write and read. SSE-S3 and SSE-KMS are handled transparently through default bucket encryption and need no Zeebe configuration.
 
-:::note SSE-C (customer-provided encryption keys)
-Set `ssecKey` only if your bucket enforces [server-side encryption with customer-provided keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html). When set, Zeebe attaches the key to every backup object write and read.
-
-- The value must be a **base64-encoded 32-byte (AES-256) key** (a 44-character base64 string).
+- The value must be a **base64-encoded 32-byte (AES-256) key**, which is a 44-character base64 string.
 - The **same key** must be configured on the brokers and on the restore application. S3 does not store the key and cannot return objects without it, so a lost key means the backup cannot be restored.
 - Source the key from a secret rather than a plaintext value, and rotate it deliberately: objects written with one key can only be read back with that same key.
 
