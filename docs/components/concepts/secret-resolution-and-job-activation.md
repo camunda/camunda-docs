@@ -35,7 +35,7 @@ The scheduler then works through the references that are still pending:
 2. Each store is asked for its group of references in one call. Successfully resolved values are
    held in that store's local cache, which is what makes them available to the next activation.
 3. References beyond the limit stay pending and are collected by a later cycle. When a cycle
-   reaches the limit and made progress, the next cycle starts immediately instead of waiting for
+   reaches the limit and makes progress, the next cycle starts immediately instead of waiting for
    `camunda.processing.engine.secrets.interval`.
 
 Resolution records carry no secret values. Only the store's cache holds a value, and only for as
@@ -139,7 +139,7 @@ saw the real value.
 
 ## When a job is not activated
 
-Two conditions stop a job from being activated even though all of its references resolved.
+Two conditions stop a job from being activated even though all of its references have resolved.
 
 **The resolved values do not fit.** The activation response has to stay within
 `camunda.cluster.network.max-message-size`, which defaults to `4MB`. A resolved value is usually
