@@ -16,7 +16,7 @@ With a POC, you create a prototype application within no more than _three to fiv
 - How can you _model_ a specific business domain problem?
 - Which kind of _know how_ is needed for the business and development teams?
 - Which _effort_ will typically be needed for these kinds of projects?
-- What are the impacts of process applications for _operations_?
+- What are the impacts of projects for _operations_?
 
 Often, it does make sense to implement such a POC together with Camunda, our partners, or specialized consultants to get quick results and focused feedback with respect to your specific challenges. However, you should always at least _co-develop_ the POC yourself to really understand what is going on. A team size of two to four people has proven to be quite optimal.
 

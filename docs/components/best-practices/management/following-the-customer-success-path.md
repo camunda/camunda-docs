@@ -27,7 +27,7 @@ _Proof of Concept_ (PoC): Model the process to a high standard. It should be cle
 
 <span className="callout">4</span>
 
-_Development_: Model the process with the same standard described for a PoC. It should be clear, understandable, and precise. Again, the reason for this is that it will be the most visible part of the project. Develop the process application in an iterative manner to learn fast. Do proper testing to achieve a high quality.
+_Development_: Model the process with the same standard described for a PoC. It should be clear, understandable, and precise. Again, the reason for this is that it will be the most visible part of the project. Develop the project in an iterative manner to learn fast. Do proper testing to achieve a high quality.
 
 <span className="callout">5</span>
 

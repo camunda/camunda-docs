@@ -17,7 +17,7 @@ You do not need to perform this migration again if you already did this when upg
 
 ## About
 
-[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your process applications.
+[Camunda Process Test](/apis-tools/testing/getting-started.md) (CPT) is a library to test your BPMN processes and your projects.
 
 - It is the successor to Zeebe Process Test (ZPT).
 - Starting with version **8.8**, ZPT is deprecated and was removed in version **8.10**. See [release announcement](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/).
