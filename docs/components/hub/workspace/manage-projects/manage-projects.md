@@ -28,7 +28,7 @@ For example, a project for a consumer loan application might consist of a BPMN d
 
 ## Project development lifecycle
 
-In Camunda Hub, you can quickly develop project releases through the stages of a typical [project development lifecycle](project-pipeline.md):
+In Camunda Hub, you can quickly develop project releases through the stages of a typical project development lifecycle:
 
 <AoGrid ao={[
 {
@@ -44,18 +44,20 @@ image: DocsIcon,
 description: "Validate your project in development before deploying it to your target environment.",
 },
 {
+link: "./project-versioning",
+title: "Manage and review project versions",
+image: DocsIcon,
+description: "Create and review distinct versions for the entire project.",
+},
+{
 link: "./deploy-project",
 title: "Deploy your project",
 image: DocsIcon,
 description: "Deploy your project to a testing, staging, or production environment.",
 },
-{
-link: "./project-versioning",
-title: "Manage project versions",
-image: DocsIcon,
-description: "Create distinct versions for the entire project.",
-},
 ]} columns={3}/>
+
+For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md).
 
 ## Known limitations
 
@@ -72,3 +74,7 @@ You should be aware of the following limitations when working with projects.
   - The limit is effectively between 2 and 3 MB, as Zeebe writes more data to the log stream than just the raw deployment.
   - If you exceed the limit, you are shown an [error message](deploy-project.md#deployment-errors):<br/>
     `Command 'CREATE' rejected with code 'EXCEEDED_BATCH_RECORD_SIZE'`.
+
+### Further reading
+
+- [Model your business processes](../modeler/index.md)

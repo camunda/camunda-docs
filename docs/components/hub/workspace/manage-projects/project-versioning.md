@@ -1,6 +1,6 @@
 ---
 id: project-versioning
-title: Manage project versions
+title: Manage and review project versions
 description: Create distinct versions for the entire project.
 ---
 
@@ -29,7 +29,7 @@ To view all versions:
 2. On the right side of the project view, under **Versions**, click **Show full list**.
 3. At the top of the modeling view, use the file navigation header buttons to switch between files and view their content.
 
-See [manage file versions](/components/hub/workspace/modeler/modeling/versions.md#compare-versions) for more information.
+See [manage file versions](/components/hub/workspace/modeler/modeling/versions.md) to learn about more features like comparing and restoring versions.
 
 ## Manage a project version
 
@@ -48,3 +48,24 @@ From here, you can perform the following actions on a project version:
 | **Download**          | Download the project as a zip file.                                                             |
 | **Copy to**           | Create a new project with the files from the version.                                           |
 | **Delete**            | Delete the project version.                                                                     |
+
+## Request a review
+
+2. Request a review for the newest version of the project from the version history page of the project. Collaborators with edit permission in your project will see a notification on the process diagram page once you have requested a review. Reviews cannot be performed by the user who created the project version unless the user is an organization administrator.
+3. Reviewers can view the changes, comment, request changes, or approve the project version.
+4. After a user has submitted their review, the project version is marked as reviewed and the review status is shown in the version history.
+   1. Any user with edit permissions can go back and edit the review at any point in time to update the assessment.
+5. If the reviewer has marked the version with "changes requested", you can address the feedback by performing the requested changes, creating a new version, and requesting a review for the new version.
+
+This review capability is most useful for reviews on a business level.
+For technical reviews, you may instead use [Git Sync](git-sync.md) to put changes into a technical context with related code changes.
+
+:::info
+To ensure proper evaluation, users (except organization administrators) cannot review versions they create.
+:::
+
+After the review is complete, you can promote the versioned project to the next stage(s) of the [deployment pipeline](./deploy-project.md). For example, promote to your testing cluster/stage, then to staging, and finally to production.
+
+:::info
+If you want to use your own deployment pipeline after the review is complete, you can use [Git Sync](git-sync.md) at this point to deploy and promote the project through your own pipeline.
+:::

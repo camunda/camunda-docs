@@ -7,6 +7,8 @@ description: Create a project, and select a development cluster to deploy to.
 import EmptyProjectImg from './img/empty-project.png'
 import FileListImg from './img/file-list.png'
 
+Create a project, and select a development cluster to deploy to.
+
 ## Prerequisites
 
 To set up a new project, you first need a [workspace](../../organization/manage-workspaces/manage-workspace.md).
@@ -22,7 +24,7 @@ Create a project to work on a set of related files:
 
 Connect clusters to which you'll deploy project files.
 
-There are [four deployment stages](./project-pipeline.md#deployment-pipeline-stages):
+There are [four deployment stages](./deploy-project.md#deployment-stages):
 
 - Development
 - Testing
@@ -33,6 +35,7 @@ To deploy project files, you must connect a cluster to at least one stage:
 
 1. In your project, next to **Connected clusters**, click **Configure**.
 2. For each stage, select a cluster.
+3. Click **Save**.
 
 :::tip
 If you don't have an appropriate cluster for a stage, [create one](../../organization/manage-clusters/create-cluster.md).
