@@ -27,12 +27,6 @@ The selected cluster name is shown in the Test action bar. Click it to switch cl
 
 In SaaS, Test mode uses connector secrets from your selected cluster. Connector secrets are not currently supported in Self-Managed.
 
-### Test a specific process version
-
-From the versions view, select a version and choose **Test this version** to open Test mode against that specific version instead of the latest draft. Test mode opens in read-only mode when testing a version this way — you can run tests but can't edit the process.
-
-![Test this version entry point in the process application versions view](../img/test-this-version.png)
-
 ## Authorizations
 
 If [authorizations](/components/admin/authorization.md) are enabled on the cluster where you will run a test, the following permissions are required for each action:
@@ -198,7 +192,7 @@ To save a test case:
 
 ### Add assertions {#assertions}
 
-A test case that only executes its instructions can still pass even if it produces incorrect output or follows the wrong path. Use assertions to verify what actually happened, not just whether the test case finished. 
+A test case that only executes its instructions can still pass even if it produces incorrect output or follows the wrong path. Use assertions to verify what actually happened, not just whether the test case finished.
 
 ![Assertion editor](../img/test-assertion-editor.png)
 
@@ -275,10 +269,11 @@ When a BPMN change removes or renames an element that an instruction or assertio
 - Test mode flags broken test cases with an indicator in the test case list. A callout in the test case detail view explains what's broken.
 
 - Use the graphical repair view to fix most breakages without editing JSON: remap an instruction or assertion to a different element, select a new expected value, edit a step in place, or delete it.
-  
+
 ![Repair view](../img/test-repair-view.png)
 
 - For changes the graphical repair view doesn't cover, open the [test file](test-files.md) in Web Modeler's file editor and edit the JSON directly. Then, return to Test mode and rerun the test case.
+
 ### Limitations {#test-cases-limitations}
 
 Test mode displays a warning badge on diagram elements with known limitations. Use the **Show problems**/**Hide problems** toggle near the canvas controls to show or hide these badges.
@@ -362,8 +357,6 @@ This section explains why you might not see the **Test** tab, and any additional
 For more information about terms, refer to our [licensing and terms page](https://legal.camunda.com/licensing-and-other-legal-terms#c8-saas-trial-edition-and-free-tier-edition-terms).
 
 **Version compatibility:** Test mode is compatible with cluster versions starting from 8.10 and higher.
-
-**Draft versions:** Testing a draft (undeployed, unversioned) process is not currently possible from the versions view. Publish a version or deploy the process to test against.
 
 ### Camunda 8 SaaS
 
