@@ -52,8 +52,6 @@ The dashboard is primarily intended to help operators, process owners, and engin
 
 <p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
 
-<p class="link-arrow">[Coming from Camunda 8.9? Update your AI agent element templates for visibility](/components/agentic-orchestration/agent-definitions-and-instances.md#mark-an-element-as-an-agent)</p>
-
 ### Camunda Hub
 
 #### Optimize data filters in Console
