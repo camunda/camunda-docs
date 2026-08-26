@@ -21,6 +21,8 @@ To review adoption across your organization:
 
 The **Browse assets** tab shows the same catalog your delivery teams see. The **Asset usage** tab is visible to organization administrators and owners only, and adds the governance view described here.
 
+<!--- TODO: screenshot — the Organization catalog page with the "Asset usage" tab selected, showing the tab list, the toolbar (search, Status filter, Sort by), and several rows of the table with a mix of statuses. Suggested alt text: "Asset usage tab of the organization catalog, listing assets with their status, workspace and project counts". Save to `img/` alongside this file. --->
+
 ## Asset status values
 
 Camunda Hub derives a status for every catalog asset from the versions currently referenced in diagrams. The same four values are used in the usage table, the usage drawer, and the project tile.
@@ -64,6 +66,8 @@ No sort is selected on first load, and the table falls back to ordering by name 
 ## Find where an asset is used
 
 Select any row in the **Asset usage** table to open a drawer showing where that asset is used.
+
+<!--- TODO: screenshot — the usage drawer open next to the table, showing the asset name, status badge, the "Used in X projects across Y workspaces." summary, and at least two version groups so both the "Latest" marker and an "Update available" badge are visible. Suggested alt text: "Usage drawer showing an asset's usage grouped by version, with project and workspace entries". Save to `img/` alongside this file. --->
 
 The drawer header repeats the asset name as a link to its catalog detail page, shows the asset status, and summarizes the reach of the asset, for example `Used in 7 projects across 3 workspaces.`
 

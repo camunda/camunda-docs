@@ -41,6 +41,8 @@ When an element references a template version that isn't the latest one, Camunda
 
 Select **Update** to apply the latest version of the template to the element. The hint is reported once per affected element, and an element that already uses the latest version produces no hint.
 
+<!--- TODO: screenshot — a BPMN element selected on the canvas with the properties panel showing the expanded "Update available" dropdown, including the "A new version of the template is available: N" text and the Update and Unlink actions. Include the problems panel hint in the same capture if it fits. Suggested alt text: "Properties panel showing the Update available dropdown for an element using an outdated template". Save to `img/` alongside this file. --->
+
 This signal covers every element template available to your diagram, whether it comes from the catalog or from your project.
 
 ## Review catalog updates for a project
@@ -53,6 +55,8 @@ To review the catalog assets a project uses:
 2. In the right sidebar of the project page, find the **Catalog updates** tile.
 
 The tile lists only the catalog assets that need attention — assets whose status is **Update available** or **Deprecated**. Assets that are up to date aren't listed. For each asset you see its name and status, followed by links to the diagrams in the project that use it. An asset used in more than two diagrams shows a **+N more files** control that expands the full list.
+
+<!--- TODO: screenshot — the "Catalog updates" tile in the project page sidebar, showing the status filter in the header and at least two assets with different status badges and their diagram links. Suggested alt text: "Catalog updates tile on the project page, listing assets with an update available and the diagrams using them". Save to `img/` alongside this file. --->
 
 Use the filter in the tile header to narrow the list to **All**, **Update available**, or **Deprecated**. Assets load five at a time, a **Showing X of Y** counter tracks how many are listed against the total, and **Load N more assets** appends the next batch.
 
