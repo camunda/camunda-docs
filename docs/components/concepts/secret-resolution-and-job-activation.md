@@ -41,7 +41,7 @@ Two kinds of failure are treated differently:
 
 The broker tracks retry state per store rather than per secret and holds it in memory only. The retry state resets when the broker restarts or the partition changes leader. During backoff, the scheduler skips the store, so its references do not consume batch capacity that a healthy store can use.
 
-A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [incidents](incidents.md).
+A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [a secret could not be resolved](secret-resolution-incidents.md#a-secret-could-not-be-resolved) for the incident message, how to tell the causes apart, and what resolving it does.
 
 ## Activate a job that references secrets
 
@@ -110,10 +110,7 @@ The activation response has to stay within `camunda.cluster.network.max-message-
 
 The broker replaces the placeholder at its recorded position in the job variables. If a later variable merge overwrites the expected placeholder, or if the broker cannot read the variables, the broker does not activate the job and raises an incident. The incident also takes the job out of activation until the incident is resolved, so the same failing injection is not retried on every activation.
 
-See [incidents](incidents.md) for more information on how to inspect and resolve either incident.
-
-<!-- The incident messages, the diagnosis steps, and the operator runbook are owned by
-camunda/camunda#60964. Link into that content from here once it lands, instead of restating it. -->
+For how to inspect and resolve either incident, see [troubleshoot secret resolution failures](secret-resolution-incidents.md).
 
 ## Tune the resolution scheduler
 
@@ -142,4 +139,5 @@ owned by camunda/camunda#60963. Name and link them here once they are in the met
 ## Related resources
 
 - [Job workers](job-workers.md) describes long polling, job push, and job queuing in general.
+- [Troubleshoot secret resolution failures](secret-resolution-incidents.md) covers the incidents described here: their messages, how to diagnose them, and what happens after you resolve them.
 - [Incidents](incidents.md) explains what an incident is and how it is resolved, which applies to the incidents described here.
