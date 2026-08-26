@@ -377,9 +377,9 @@ const SearchableTable = () => {
       image: OpenaiImg,
     },
     {
-      name: "Camunda Orchestration Cluster API",
+      name: "Orchestration Cluster API",
       description:
-        "Query process, decision, and audit data from the Orchestration Cluster API.",
+        "Query process, decision, user task, and audit data from the Orchestration Cluster API.",
       type: "Outbound",
       link: "../orchestration-cluster-api/",
       image: CamundaImg,

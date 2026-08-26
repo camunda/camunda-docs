@@ -20,12 +20,10 @@ To use the **Orchestration Cluster API connector**, you need an active Camunda 8
 
 You also need OAuth 2.0 client credentials with permission to call the Orchestration Cluster API. Follow the links below to learn more about API client configuration.
 
-- [API client configuration in Camunda 8 SaaS](/components/hub/organization/manage-clusters/manage-api-clients.md).
-- Authentication with a Self-Managed deployment.
+- [API client configuration in Camunda 8 SaaS](/components/hub/organization/manage-clusters/manage-api-clients.md)
+- [Token-based authentication in Camunda 8 Self-Managed](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md#using-a-token-oidcjwt)
 
-:::note
 Basic authentication (username and password) is not supported. Only OAuth 2.0 client credentials are accepted.
-:::
 
 :::note
 Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
@@ -132,38 +130,38 @@ You can use an output mapping to map the response:
 
 Response example for a **Search** operation on process instances:
 
-```
+```json
 {
-    "status": 200,
-    "headers": {
-      # response headers
-    },
-    "body": {
-        "items": [
-            {
-                "processInstanceKey": "2251799814052469",
-                "processDefinitionId": "order-process",
-                "processDefinitionKey": "2251799814052467",
-                "processDefinitionVersion": 1,
-                "startDate": "2023-03-21T08:25:04.499+0000",
-                "endDate": "2023-03-21T08:25:12.093+0000",
-                "state": "COMPLETED"
-            },
-            {
-                "processInstanceKey": "2251799814052613",
-                "processDefinitionId": "order-process",
-                "processDefinitionKey": "2251799814052610",
-                "processDefinitionVersion": 2,
-                "startDate": "2023-03-21T08:27:49.784+0000",
-                "endDate": "2023-03-21T08:27:58.838+0000",
-                "state": "COMPLETED"
-            }
-        ],
-        "page": {
-            "totalItems": 55,
-            "startCursor": "jfenj8vhekgj98uzfafhu7",
-            "endCursor": "negbkjeh84tzh4gk0kwegj"
-        }
+  "status": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "items": [
+      {
+        "processInstanceKey": "2251799814052469",
+        "processDefinitionId": "order-process",
+        "processDefinitionKey": "2251799814052467",
+        "processDefinitionVersion": 1,
+        "startDate": "2023-03-21T08:25:04.499+0000",
+        "endDate": "2023-03-21T08:25:12.093+0000",
+        "state": "COMPLETED"
+      },
+      {
+        "processInstanceKey": "2251799814052613",
+        "processDefinitionId": "order-process",
+        "processDefinitionKey": "2251799814052610",
+        "processDefinitionVersion": 2,
+        "startDate": "2023-03-21T08:27:49.784+0000",
+        "endDate": "2023-03-21T08:27:58.838+0000",
+        "state": "COMPLETED"
+      }
+    ],
+    "page": {
+      "totalItems": 55,
+      "startCursor": "jfenj8vhekgj98uzfafhu7",
+      "endCursor": "negbkjeh84tzh4gk0kwegj"
     }
+  }
 }
 ```
