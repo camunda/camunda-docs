@@ -28,11 +28,11 @@ There are four roles with different levels of access rights that can be assigned
 - **Commenter**: The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
-Additionally, users with elevated access always have special privileges to do administrative tasks across every project — see **super-user mode** below.
+Additionally, organization admins and owners always have access to every project in the organization — see below.
 
-#### Super-user mode
+#### Organization admin and owner access
 
-Users with elevated access always have **Project Admin** access to every project in the organization, including projects they aren't explicitly a collaborator on. This access is on by default for these users; there is no toggle to enable or disable it.
+Organization admins and owners always have **Project Admin** access to every project in the organization, including projects they aren't explicitly a collaborator on. This access is on by default; there is no toggle to enable or disable it.
 
 The main purpose of this access is to assign collaborators to orphaned projects (which have no collaborators). Ordinarily, these projects would not be accessible or visible to any other users.
 
