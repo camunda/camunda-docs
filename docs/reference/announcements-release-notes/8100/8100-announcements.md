@@ -564,6 +564,8 @@ Starting with Camunda 8.10, Camunda Hub replaces Console and Web Modeler. Manage
 - Existing `Console` role holders gain management access to Hub's cluster pages through a new `admin:clusters` permission. `DevOps` is the forward-looking name for the same access.
 - Existing `Web Modeler Admin` role holders gain full access to Hub's cluster pages too, through their existing `admin:*` permission, which now additionally reaches Hub's cluster pages — a broader grant than the Console role's management-only access. `Hub Admin` is the forward-looking name for the same access.
 
+A new `Analyst` role is also introduced: Hub modeling access, management access to the catalog's usage and adoption data, and full access to Optimize, without modeler-admin or people/org management access — the Self-Managed equivalent of the SaaS Analyst role.
+
 **Action:** If you rely on least-privilege access to cluster management, review who holds the `Console` and `Web Modeler Admin` / `Hub Admin` roles before upgrading.
 
 <p className="link-arrow">[Management Identity roles and permissions in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#management-identity-roles-and-permissions)</p>

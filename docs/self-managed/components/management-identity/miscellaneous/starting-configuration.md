@@ -40,6 +40,7 @@ Both `Web Modeler`/`Web Modeler Admin` and the equivalent `Hub`/`Hub Admin` role
 | Hub Admin              | Hub                            |
 | Console                | Hub                            |
 | DevOps                 | Hub                            |
+| Analyst                | Hub                            |
 | Hub API - Cluster Ping | Hub                            |
 
 ## Client scopes
