@@ -2,16 +2,16 @@
 id: agentic-ai-aiagent-upgrade
 sidebar_label: Upgrade from v1
 title: Upgrade AI Agent element templates from v1 to v2
-description: Migrate AI Agent Task and AI Agent Sub-process elements from the legacy (v1) element templates to the native v2 element templates.
+description: Upgrade AI Agent connectors from legacy v1 to native v2 element templates and migrate their model provider configurations.
 ---
 
-Starting with Camunda 8.10, the AI Agent Task and AI Agent Sub-process connectors are available as new, native (`v2`) element templates. This guide explains why and how to move an existing AI Agent implementation from the original (`v1`) element templates to `v2`.
-
-The `v2` element templates restructure the AI Agent connectors as a whole, not just model provider configuration. In practice, most of the hands-on migration work is in re-entering the [model provider configuration](./agentic-ai-aiagent-model-providers.md) covered below. The rest of an element's configuration (tools, memory, limits, response, error handling) carries over conceptually unchanged.
+Upgrade AI Agent connectors from legacy v1 to native v2 element templates and migrate their model provider configurations.
 
 ## Why upgrade
 
-The `v2` element templates give the AI Agent connector native, first-class access to each LLM provider's own SDK and wire format, instead of going through a common-denominator abstraction. This unlocks capabilities the `v1` element templates don't expose at all, such as:
+Starting with Camunda 8.10, the [AI Agent Task](./agentic-ai-aiagent-task.md) and [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connectors are available as new, native (`v2`) element templates.
+
+The `v2` element templates restructure the AI Agent connectors to provide native, first-class access to each LLM provider’s SDK and wire format instead of relying on a common abstraction. This unlocks capabilities unavailable in `v1` such as:
 
 - Reasoning/extended thinking configuration (Anthropic's **Effort**/**Thinking mode**, OpenAI's **Effort**, Google Gemini's **Thinking budget**/**Thinking level**).
 - Prompt caching configuration (Anthropic, AWS Bedrock Converse).
@@ -20,7 +20,9 @@ The `v2` element templates give the AI Agent connector native, first-class acces
 
 As of Camunda 8.10, `v1` job workers already run internally on the same native provider SDKs that back `v2`. This is a transparent runtime change, so existing `v1` configurations keep working and benefit from it automatically. However, the `v1` element templates' fields don't expose any of the new configuration described above. To use it, apply the `v2` element template.
 
+:::important
 `v1` element templates are deprecated as of Camunda 8.10 and will not receive new provider capabilities going forward. New AI Agent implementations should use the `v2` element templates directly.
+:::
 
 ## How to upgrade
 
@@ -33,11 +35,14 @@ As of Camunda 8.10, `v1` job workers already run internally on the same native p
 5. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged between `v1` and `v2`, but re-check any values lost when the template was swapped.
 6. Redeploy the process definition.
 
-Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the `v1` job worker until you deploy a new version with the `v2` template applied. This isn't a live migration of in-flight instances.
+:::important
+Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the `v1` job worker until you deploy a new version with the `v2` template applied.
+:::
 
 ## Model provider configuration mapping
 
-Model provider configuration changed the most between `v1` and `v2`, since providers and backends are now decoupled (see [Provider and backend](./agentic-ai-aiagent-model-providers.md#provider-and-backend)). The sections below only call out fields that actually changed; anything not mentioned carries over unchanged, by the same field label.
+Model provider configuration changed the most between `v1` and `v2`, since providers and backends are now decoupled (see [choose a provider and backend](./agentic-ai-aiagent-model-providers.md#choose-a-provider-and-backend)).
+The sections below cover only the fields that changed. Any fields not mentioned carry over unchanged under the same field label.
 
 ### Anthropic
 
