@@ -551,22 +551,39 @@ Deployment change 1 description.
 
 ## Identity
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Identity change 1
+#### Console and Web Modeler Admin roles gain new Hub cluster access on Self-Managed
 
-Identity change 1 description.
+Starting with Camunda 8.10, Camunda Hub replaces Console and Web Modeler. Management Identity only adds roles, applications, and permissions on startup and never removes them, so two existing Self-Managed roles automatically gain access they didn't have in 8.9 — with no role reassignment or opt-in required:
+
+- Existing `Console` role holders gain management access to Hub's cluster pages through a new `admin:clusters` permission. `DevOps` is the forward-looking name for the same access.
+- Existing `Web Modeler Admin` role holders gain full access to Hub's cluster pages too, through their existing `admin:*` permission, which now additionally reaches Hub's cluster pages — a broader grant than the Console role's management-only access. `Hub Admin` is the forward-looking name for the same access.
+
+**Action:** If you rely on least-privilege access to cluster management, review who holds the `Console` and `Web Modeler Admin` / `Hub Admin` roles before upgrading.
+
+<p className="link-arrow">[Management Identity roles and permissions in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#management-identity-roles-and-permissions)</p>
+<p className="link-arrow">[Manage roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md)</p>
 
 </div>
-</div> -->
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### SaaS Operations Engineer role renamed to DevOps
+
+Starting with Camunda 8.10, the SaaS **Operations Engineer** organization role is renamed to **DevOps**. This is a display rename only: permissions are unchanged, and existing Operations Engineer holders keep the same access under the new name with no reassignment required.
+
+</div>
+</div>
 
 ## Modeler
 
