@@ -38,6 +38,12 @@ image: DocsIcon,
 description: "Get started by setting up a new project.",
 },
 {
+link: "../modeler/modeling/model-your-first-diagram",
+title: "Model your first diagram",
+image: DocsIcon,
+description: "Design and implement your first diagram using Camunda Hub",
+},
+{
 link: "./validate-project",
 title: "Validate your project",
 image: DocsIcon,
@@ -61,12 +67,6 @@ title: "Sync your Git repository",
 image: DocsIcon,
 description: "Connect Camunda Hub to your Git repositories to keep your projects synced.",
 },
-{
-link: "./manage-project",
-title: "Manage an existing project",
-image: DocsIcon,
-description: "Rename, download, move, or delete your project.",
-},
 ]} columns={3}/>
 
 For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Camunda Hub into your CI/CD pipelines](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md).
@@ -86,7 +86,3 @@ You should be aware of the following limitations when working with projects.
   - The limit is effectively between 2 and 3 MB, as Zeebe writes more data to the log stream than just the raw deployment.
   - If you exceed the limit, you are shown an [error message](deploy-project.md#deployment-errors):<br/>
     `Command 'CREATE' rejected with code 'EXCEEDED_BATCH_RECORD_SIZE'`.
-
-### Further reading
-
-- [Model your business processes](../modeler/index.md)

@@ -8,7 +8,7 @@ Validate your project in development before deploying it to your target environm
 
 ## Prerequisites
 
-Before you begin
+Before you begin:
 
 - Make sure you've [set up a project](./create-a-project.md), including at least one cluster.
 - If the target cluster has [authorizations](/components/admin/authorization.md) enabled, ensure deploying users have [`CREATE` permission to the `RESOURCE` resource type](/components/admin/authorization.md#create-an-authorization-in-admin).

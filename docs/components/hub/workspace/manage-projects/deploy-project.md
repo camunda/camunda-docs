@@ -94,3 +94,4 @@ When you deploy the project, linked resources located outside the project are _n
 ## Next steps
 
 - [Run or publish a process](../modeler/run-or-publish-your-process.md)
+- [Sync your Git repository](./git-sync.md)
