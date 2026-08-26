@@ -25,6 +25,9 @@
 
 const CHUNK_SIZE = 50;
 
+/** Label of the TypeDoc-generated category this splits, from its `_category_.json`. */
+const TARGET_LABEL = "Type Aliases";
+
 /** The doc's file stem (= the type name), used for sorting and bucket labels. */
 function docName(item) {
   return (item.id || item.label || "").split("/").pop();
@@ -55,13 +58,15 @@ function bucketize(items) {
 }
 
 /** Recursively find the "Type Aliases" category and split it into buckets. */
-function splitTypeAliases(items) {
+function splitTypeAliases(items, state) {
   return items.map((item) => {
     if (item.type !== "category") return item;
-    if (item.label === "Type Aliases" && item.items.length > CHUNK_SIZE) {
-      return { ...item, items: bucketize(item.items), collapsed: true };
+    const children = item.items || [];
+    if (item.label === TARGET_LABEL && children.length > CHUNK_SIZE) {
+      state.split = true;
+      return { ...item, items: bucketize(children), collapsed: true };
     }
-    return { ...item, items: splitTypeAliases(item.items || []) };
+    return { ...item, items: splitTypeAliases(children, state) };
   });
 }
 
@@ -77,7 +82,17 @@ async function tsApiSidebarItemsGenerator({
   const items = await defaultSidebarItemsGenerator(args);
   const dirName = args.item && args.item.dirName;
   if (dirName && dirName.includes("apis-tools/typescript/api-reference")) {
-    return splitTypeAliases(items);
+    const state = { split: false };
+    const result = splitTypeAliases(items, state);
+    // Without a match the N×N blow-up silently returns, so fail loudly instead.
+    if (!state.split) {
+      throw new Error(
+        `[tsApiSidebar] No "${TARGET_LABEL}" category with more than ${CHUNK_SIZE} items found ` +
+          `under "${dirName}". The TypeDoc category label likely changed; update TARGET_LABEL in ` +
+          `src/tsApiSidebar.js, or remove this generator if the reference no longer needs bucketing.`
+      );
+    }
+    return result;
   }
   return items;
 }
