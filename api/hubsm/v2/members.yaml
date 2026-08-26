@@ -12,7 +12,10 @@ paths:
       summary: Add or update a member
       description: >
         Adds a member to the workspace, or updates the role of an existing
-        member. The member is identified by their email address.
+        member. The member is identified by their email address. If that
+        user has not logged in yet, a workspace invitation is created and an
+        email is sent instead, and the person becomes an actual member once
+        they log in for the first time.
       x-added-in-version: "0.1.0"
       x-semantic-establishes:
         kind: WorkspaceMemberMembership
@@ -189,8 +192,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/MemberEmail"
         name:
-          description: The display name of the member, if known.
+          description: >
+            The display name of the member, if known. Null when the member has
+            been invited by email but has not logged in yet.
           type: string
+          nullable: true
         role:
           description: The role of the member in the workspace.
           allOf:

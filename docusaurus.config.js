@@ -1,6 +1,10 @@
 const { unmaintainedVersions } = require("./src/versions");
 const { currentVersion } = require("./src/versions");
 
+// Predict next version (e.g. 8.9 -> 8.10) for "next" page permalink hints.
+const [_currentMajor, _currentMinor] = currentVersion.split(".").map(Number);
+const nextVersion = `${_currentMajor}.${_currentMinor + 1}`;
+
 const docsSiteUrl = process.env.DOCS_SITE_URL || "https://docs.camunda.io";
 const docsSitebaseUrl = process.env.DOCS_SITE_BASE_URL || "/";
 const { themes } = require("prism-react-renderer");
@@ -22,6 +26,8 @@ module.exports = {
   baseUrl: docsSitebaseUrl,
   customFields: {
     canonicalUrlRoot: docsSiteUrl,
+    currentVersion,
+    nextVersion,
   },
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -206,6 +212,23 @@ module.exports = {
                   ".sdk-repos/orchestration-cluster-api-csharp/examples/operation-map.json",
                 autoImports: true,
                 defaultImports: "using Camunda.Orchestration.Sdk;",
+              },
+              {
+                lang: "Rust",
+                highlight: "rust",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-rust/examples/operation-map.json",
+                autoImports: true,
+                defaultImports: "use camunda_orchestration_sdk::CamundaClient;",
+              },
+              {
+                lang: "Go",
+                highlight: "go",
+                operationMapPath:
+                  ".sdk-repos/orchestration-cluster-api-go/examples/operation-map.json",
+                autoImports: true,
+                defaultImports:
+                  'import (\n\tcamunda "github.com/camunda/orchestration-cluster-api-go"\n\topenapi "github.com/camunda/orchestration-cluster-api-go/client"\n)',
               },
             ],
             version: "1",
@@ -451,7 +474,7 @@ module.exports = {
     },
 
     prism: {
-      additionalLanguages: ["java", "protobuf", "csharp", "bash"],
+      additionalLanguages: ["java", "protobuf", "csharp", "bash", "rust"],
       theme: themes.palenight,
       darkTheme: themes.dracula,
     },
@@ -622,7 +645,7 @@ module.exports = {
               to: "/downloads",
             },
             {
-              label: "Camunda Hub",
+              label: "Web Modeler",
               href: "https://camunda.io",
             },
             {
@@ -666,7 +689,7 @@ module.exports = {
       // These keys are for our new standalone algolia instance!
       apiKey: "68db7725a8410eace68419c29385ad1e",
       appId: "6KYF3VMCXZ",
-      indexName: "camunda-v2",
+      indexName: "camunda-v3",
       placeholder: "Search Camunda 8 docs",
     },
     languageTabs: [

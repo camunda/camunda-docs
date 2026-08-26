@@ -21,7 +21,7 @@ const ComponentCard = ({ link, title, icon: Icon, description }) => {
   );
 };
 
-const Components = () => {
+const Components = ({ hideHeading = false }) => {
   const docsVersion = useActiveVersion();
   const isNextVersion = docsVersion?.name === "current";
 
@@ -84,7 +84,7 @@ const Components = () => {
 
   return (
     <div className="sm-components">
-      <h2>Components</h2>
+      {!hideHeading && <h2>Components</h2>}
       <p>
         Camunda 8 components reference, including detailed configuration
         guidance and application upgrade instructions.

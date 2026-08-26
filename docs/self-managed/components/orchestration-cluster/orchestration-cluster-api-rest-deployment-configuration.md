@@ -36,6 +36,15 @@ Set these limits slightly above the largest file you expect users or Connectors 
 
 If you are not using Helm and increase this value, you must also adjust the configuration for the deployment REST endpoint to match.
 
+### Consequences of increasing maxMessageSize
+
+Raising `maxMessageSize` can have the following consequences, especially with large, frequent payloads:
+
+- **Broker memory**: In-flight log entries consume broker memory, so larger entries increase memory usage.
+- **Raft timeouts**: An entry too large to replicate in time can trigger unexpected leader changes or broken replication.
+- **Latency**: Large entries can slow down overall processing.
+- **Network limits**: Load balancers, ingresses, and firewalls often cap request and response sizes lower than Zeebe does, and may reject larger messages.
+
 ### REST API server configuration
 
 If you're increasing the `maxMessageSize` and using the REST API for multipart uploads (for example, using `POST /v2/deployments`), you must configure your application to accept the updated request sizes. If you increase the `maxMessageSize` to 10MB, increase these property values to 10MB as well.

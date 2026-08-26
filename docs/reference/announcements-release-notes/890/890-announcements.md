@@ -11,9 +11,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
-| ------------------ | ---------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| 14 April 2026      | 13 October 2027              | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                        | Upgrade guides                                                                                     |
+| ------------------ | --------------------------- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| 14 April 2026      | 13 October 2027             | [8.9 release notes](/reference/announcements-release-notes/890/890-release-notes.md) | [8.9 upgrade guides](/reference/announcements-release-notes/890/whats-new-in-89.md#upgrade-guides) |
 
 :::info 8.9 resources
 
@@ -131,14 +131,18 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 ### 8.9.x patch releases
 
-The following key changes were also released as part of an 8.9.x patch release.
+The following key changes were also released as part of an 8.9.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Type            | Key change                                                                                                       |
-| :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                     |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| Patch release                                                    | Type            | Key change                                                                                                                    |
+| :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                               |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)              |
+| SaaS `8.9 gen13`                                                 | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                 |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)             |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                       |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                      |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                |
 
 ## Agentic orchestration
 
@@ -1470,6 +1474,79 @@ Replace is the intended long-term behavior. The merge behavior in the affected p
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Nested input mappings can silently drop sibling fields {#nested-input-mapping-sibling-fields}
+
+**Affected versions:** 8.9.15. Reverted in 8.9.16.
+
+Camunda 8.9.15 introduced a regression affecting elements with two or more input mappings that write to different nested fields of the same parent variable. Only one of the mapped fields retains its expected value, with the other field silently set to `null` without warning or raised incident.
+
+**Example:** You have a parent-scope variable `foo: {bar: 1, baz: 2}` and an element with these two input mappings that both write into a local `foo` variable:
+
+1. Target `foo.bar` ← (maps from) source `=foo.bar`
+2. Target `foo.baz` ← (maps from) source `=foo.baz`
+
+In this scenario, the local `foo` becomes `{bar: 1, baz: null}`, with `baz` (mapped by the later declaration) no longer able to resolve against the parent scope.
+
+**Action:**
+
+- **Running 8.9.15:** Combine the mappings into a single mapping that rebuilds the whole object at once. For example, target `foo` with source `={bar: foo.bar, baz: foo.baz}` instead of mapping `foo.bar` and `foo.baz` separately.
+
+- **Upgrading to 8.9.16+:** The regression is reverted. Mapping individual fields of the same variable works correctly again. The workaround above is no longer required, but is harmless to keep.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Regression</span>
+</div>
+<div className="release-announcement-content">
+
+#### Chained input mappings can silently drop FEEL temporal value types {#chained-input-mapping-temporal-type-loss}
+
+**Affected versions:** 8.9.15. Reverted in 8.9.16.
+
+Camunda 8.9.15 introduced a regression affecting elements with two or more input mappings where one mapping produces a FEEL temporal value (`duration`, `date`, `time`, `date-time`, or their local variants) and a later mapping on the same element reads a property from it. The temporal value loses its type, becoming a plain string due to serialization between mapping evaluations before the later mapping runs, so the property access silently evaluates to `null` instead of the expected value. Only temporal types are affected — other FEEL types (strings, numbers, booleans, lists, and contexts) work correctly.
+
+**Example:** An element with these two input mappings:
+
+1. Target `age` ← (maps from) source `=@"P1D"` (a duration)
+2. Target `ageDays` ← (maps from) source `=age.days`
+
+In this scenario, the mapping results in `ageDays` as `null`, as `age`'s duration type is not preserved between the two mappings.
+
+**Action:**
+
+- **Running 8.9.15:** Combine the mappings into a single mapping, so the duration is created and read in the same expression instead of being written to a variable and read back later. For example, target `ageDays` with source `=@"P1D".days` instead of separate `age` and `ageDays` mappings.
+
+- **Upgrading to 8.9.16+:** The regression is reverted. Chained mappings on temporal values work correctly again.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Message TTL cleanup batch size pacing change {#message-ttl-cleanup-batch-size-pacing-change}
+
+Starting in Camunda 8.9.1, expired-message cleanup `MessageBatchExpireProcessor` no longer resumes its RocksDB scan from a continuation cursor across batches. Each cleanup batch now re-scans from the start of the message deadline index and skips over the tombstones of messages already expired earlier in the same drain sequence. This makes cleanup cost per batch sensitive to `ttlCheckerBatchLimit`: a low value (for example, `10`) requires many more restart-scans to drain a backlog of expired messages, which can cause backpressure on normal process and message processing.
+
+`zeebe.broker.experimental.engine.messages.ttlCheckerBatchLimit` defaults to `100`.
+
+**Action:** If you previously tuned `ttlCheckerBatchLimit` down (for example, to `10`) on an earlier patch to avoid latency peaks, revalidate it after upgrading to 8.9.1 or later. Increasing it (for example, to `500`) reduces the number of restart-scans needed to drain a backlog and restores expected throughput.
+
+</div>
+</div>
+
 ## Identity
 
 <div className="release-announcement-row">
@@ -1490,6 +1567,27 @@ Admin is the cluster-level admin UI hosting identity management and other admini
 - Documentation paths are updated: `/components/identity/` is now `/components/admin/`.
 
 <p className="link-arrow">[Introduction to Admin](/components/admin/admin-introduction.md)</p>
+
+</div>
+</div>
+
+## Integrations
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Microsoft Teams notifications require app integrations extensions {#teams-notifications-require-app-integrations-extensions}
+
+Camunda 8 SaaS clusters running generation `8.9 gen13` or later deliver user task notifications to Microsoft Teams only when **Enable app integrations extensions** is turned on in the cluster settings. The setting is disabled by default, and only organization admins can change it.
+
+Clusters running earlier generations are unaffected and continue to deliver notifications without additional configuration.
+
+**Action:** After a cluster updates to generation `8.9 gen13` or later, an organization admin must turn on **Enable app integrations extensions** for existing [notification rules](/components/camunda-integrations/ms-teams/ms-teams-notifications.md) to keep delivering. Enabling the setting also delivers notifications when an existing task is later assigned to you, and updates notification cards as a task is assigned, completed, or canceled.
+
+<p className="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</p>
 
 </div>
 </div>

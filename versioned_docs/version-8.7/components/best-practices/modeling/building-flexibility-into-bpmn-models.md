@@ -1,7 +1,5 @@
 ---
 title: Building flexibility into BPMN models
-tags:
-  - BPMN
 description: "Sometimes we need ways to build flexibility into process models to deal with operational problems or to allow for humans to intervene."
 ---
 

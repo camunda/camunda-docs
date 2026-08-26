@@ -27,7 +27,7 @@ Before proceeding with the setup, ensure the following requirements are met:
 - **DNS Configuration**: You must have access to configure DNS for your domain in order to point to the Kubernetes cluster Ingress.
 - **TLS Certificates**: Obtain valid X.509 certificates for your domain from a trusted Certificate Authority.
 - **External Dependencies**: Provision the following external dependencies:
-  - **PostgreSQL-compatible database**: Required for Web Modeler persistence. This guide uses Amazon Aurora PostgreSQL as an example. For AWS-specific steps, see [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup).
+  - **PostgreSQL-compatible database**: Required for Camunda Hub persistence. This guide uses Amazon Aurora PostgreSQL as an example. For AWS-specific steps, see [Aurora PostgreSQL module setup](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md#postgresql-module-setup).
   - **Secondary storage backend for the Orchestration Cluster**: Choose one option:
     - **Non-SQL**: Elasticsearch/OpenSearch (this guide uses Amazon OpenSearch as the example). For AWS-specific steps, see [OpenSearch](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/eksctl.md#4-opensearch-domain).
     - **RDBMS**: See [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) and the [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md).
@@ -63,23 +63,23 @@ After following the [prerequisites](#prerequisites), you should have a Kubernete
 To get started, create two namespaces:
 
 ```bash
-kubectl create namespace management-and-modeling
+kubectl create namespace hub
 kubectl create namespace orchestration
 ```
 
-- **Namespace `management-and-modeling`:** We will install [Management Identity](/self-managed/components/management-identity/overview.md), Console, and the Web Modeler components.
+- **Namespace `hub`:** We will install [Camunda Hub](/components/hub/index.md) and [Management Identity](/self-managed/components/management-identity/overview.md).
 
 - **Namespace `orchestration`**: We will install [Orchestration Cluster](/self-managed/components/orchestration-cluster/zeebe/overview.md), [Connectors](/self-managed/components/connectors/overview.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
 Each component is installed by the Helm chart automatically, and does not need to be installed separately.
 
 :::note
-For more information on the difference between the Orchestration Cluster and the Web Modeler and Console cluster, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
+For more information on the difference between the Orchestration Cluster and Camunda Hub, see the Camunda 8 [reference architecture](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console).
 :::
 
 ### Install the Helm chart
 
-As there will be a Helm deployment in each namespace, create your own `management-and-modeling-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
+As there will be a Helm deployment in each namespace, create your own `hub-values.yaml` and `orchestration-values.yaml`, or modify an existing setup by applying the production recommendations in the next section. Example values files can be found at the [end of this guide](#create-a-production-valuesyaml).
 
 The Camunda Helm chart can be installed in each namespace using the following command:
 
@@ -88,9 +88,9 @@ The Camunda Helm chart can be installed in each namespace using the following co
 helm repo add camunda https://helm.camunda.io
 # This will update the chart repository. Please make sure to run this command before every install or upgrade
 helm repo update
-# This will install the latest Camunda Helm chart in the management-and-modeling namespace with the latest applications/dependencies.
-helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n management-and-modeling \
-    --values management-and-modeling-values.yaml
+# This will install the latest Camunda Helm chart in the Hub namespace with the latest applications/dependencies.
+helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n hub \
+    --values hub-values.yaml
 # This will install the latest Camunda Helm chart in the Orchestration namespace with the latest applications/dependencies.
 helm install camunda camunda/camunda-platform --version $HELM_CHART_VERSION -n orchestration \
     --values orchestration-values.yaml
@@ -246,7 +246,7 @@ For more information on connecting to external databases, the following guides a
 At this point, you should be able to connect to your platform through HTTPS, correctly authenticate users using your configured identity provider, and have connected to external databases such as Amazon OpenSearch and Amazon Aurora PostgreSQL.
 :::
 
-The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `management-and-modeling-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
+The next steps focus on the Camunda application-specific configurations suitable for a production environment. The following sections continue to add to the `hub-values.yaml` and `orchestration-values.yaml` at the Camunda component-level.
 
 ### Elasticsearch/OpenSearch index retention
 
@@ -355,11 +355,11 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
               - key: app.kubernetes.io/component
                 operator: In
                 values:
-                  - zeebe
+                  - zeebe-broker
           topologyKey: kubernetes.io/hostname
   ```
 
-  This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe` are not scheduled on the same node. The primary benefits include:
+  This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe-broker` are not scheduled on the same node. The primary benefits include:
   - High availability: If one node fails, other nodes running the same component remain unaffected.
   - Load distribution: Balances the workload across nodes.
   - Fault tolerance: Reduces the impact of a node-level failure.
@@ -373,6 +373,32 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
       minAvailable: 0
       maxUnavailable: 1
   ```
+
+#### Topology spread constraints
+
+Topology spread constraints control how pods are distributed across failure domains such as availability zones. The default `podAntiAffinity` configuration ensures Zeebe broker pods run on distinct nodes, but does not ensure those nodes are in different zones: if the cluster has more nodes than brokers, all brokers can still be scheduled into a single availability zone. Because broker persistent volumes are bound to a single zone on most cloud providers, a zonal outage can then take down the whole Orchestration Cluster.
+
+With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones. The Orchestration Cluster is deployed as a single StatefulSet, and its pods run the Zeebe broker and gateway in the same process, so this value covers both. It does not affect separately deployed components such as Identity, Optimize, Connectors, or Web Modeler, which have no equivalent topology spread value in the current chart version.
+
+```yaml
+orchestration:
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/component: zeebe-broker
+```
+
+Keep the following in mind when configuring topology spread constraints:
+
+- Set a `topologyKey` that your nodes carry. `topology.kubernetes.io/zone` is standard on managed cloud clusters, but bare-metal and local clusters often have no zone label. With `whenUnsatisfiable: DoNotSchedule` and no matching node label, no broker can be scheduled at all.
+- Prefer `whenUnsatisfiable: ScheduleAnyway`. It provides best-effort spreading: Kubernetes does not guarantee an even distribution and does not rebalance existing brokers. A hard constraint (`DoNotSchedule`) combined with the default hard `podAntiAffinity` can leave broker pods permanently `Pending` when zones have uneven node counts, or stall a rolling update — use it only when every zone has enough spare capacity.
+- Broker volumes pin pods to a zone. With topology-constrained storage, `volumeBindingMode: WaitForFirstConsumer` delays volume binding or provisioning until the scheduler picks a node, so the volume matches that node's topology; `Immediate` binds or provisions the volume without considering pod scheduling constraints. Once a broker's claim is bound to a single-zone volume, every replacement pod must run in that zone: a hard zone constraint that conflicts with the volume's zone leaves the pod `Pending`, and enabling spreading on an existing cluster does not relocate existing volumes.
+- The `labelSelector` counts pods across the whole namespace. Pods with matching labels from all Helm releases in the namespace are counted together, not only the release you are configuring. To scope spreading to a single release, also match `app.kubernetes.io/instance: <release-name>`.
+
+For an overview of all pod scheduling values, see [configure pod scheduling](/self-managed/deployment/helm/configure/pod-scheduling.md).
 
 #### Secondary storage index replicas
 
@@ -511,215 +537,14 @@ The following resources and configuration options are important to keep in mind 
 
 ## Create a production `values.yaml`
 
-The following is a complete configuration example, taking all the above sections into consideration.
+Use separate Helm values files and releases when you deploy Camunda components across namespaces. The Hub release contains Camunda Hub and Management Identity, while the orchestration release contains the Orchestration Cluster, Connectors, and Optimize.
 
-### Example management-and-modeling configuration
+The [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace.md) provides complete 8.10 examples for both releases. It also explains how to:
 
-The following example `management-and-modeling-values.yaml` is provided to the `management-and-modeling` [namespace](#namespace-setup):
-
-```yaml
-global:
-  ingress:
-    enabled: true
-    className: nginx
-    host: management-and-modeling-host.com
-    tls:
-      enabled: true
-      secretName: camunda-platform
-  identity:
-    auth:
-      # Configure authentication based on your identity provider.
-      # Set type to: "KEYCLOAK" (default), "MICROSOFT", or "GENERIC"
-      # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
-      type: "<KEYCLOAK|MICROSOFT|GENERIC>"
-      # ... additional provider-specific configuration
-      # Refer to the authentication guide for your chosen provider.
-identity:
-  enabled: true
-  contextPath: /identity
-  firstUser:
-    secret:
-      existingSecret: camunda-credentials
-      existingSecretKey: identity-user-password
-  externalDatabase:
-    enabled: true
-    host: external-postgres-host
-    port: 5432
-    username: identity_user
-    database: identity_db
-    secret:
-      existingSecret: identity-db-secret
-      existingSecretKey: database-password
-
-webModeler:
-  enabled: true
-  contextPath: /modeler
-  restapi:
-    mail:
-      # This value is required, otherwise the restapi pod wouldn't start.
-      fromAddress: noreply@example.com
-    externalDatabase:
-      url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-      user: camunda_user
-      secret:
-        existingSecret: camunda-db-secret
-        existingSecretKey: database-password
-
-prometheusServiceMonitor:
-  enabled: true
-  labels:
-    release: kube-prometheus-stack
-orchestration:
-  enabled: false
-optimize:
-  enabled: false
-connectors:
-  enabled: false
-elasticsearch:
-  enabled: false
-console:
-  # Multi-namespace deployments require manual console.configuration to define
-  # components across namespaces. The oAuth section must match your global.identity.auth settings.
-  # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
-  configuration: |
-    camunda:
-      console:
-        oAuth:
-          audience: "<console-audience>"
-          clientId: "<console-client-id>"
-          issuer: "<idp-issuer-url>"
-          jwksUri: "<idp-jwks-url>"
-          type: "<KEYCLOAK|MICROSOFT|GENERIC>"
-          wellKnown: "<idp-well-known-url>"
-        managed:
-          method: plain
-          releases:
-            - name: camunda
-              namespace: management-and-modeling
-              version: 14.x.x
-              components:
-                - name: Console
-                  id: console
-                  version: 8.9.x
-                  url: https://management-and-modeling-host.com/
-                  readiness: http://camunda-console.oidc:9100/health/readiness
-                  metrics: http://camunda-console.oidc:9100/prometheus
-                - name: Identity
-                  id: identity
-                  version: 8.9.x
-                  url: https://management-and-modeling-host.com/identity
-                  readiness: http://camunda-identity.oidc:82/actuator/health
-                  metrics: http://camunda-identity.oidc:82/actuator/prometheus
-                - name: WebModeler
-                  id: webModelerWebApp
-                  version: 8.9.x
-                  url: https://management-and-modeling-host.com/modeler
-                  readiness: http://camunda-web-modeler-restapi.oidc:8091/health/readiness
-                  metrics: http://camunda-web-modeler-restapi.oidc:8091/metrics
-            - name: camunda
-              namespace: orchestration
-              version: 14.x
-              components:
-                - name: Operate
-                  id: operate
-                  version: 8.9.x
-                  url: https://orchestration-host.com/orchestration/operate
-                  readiness: http://camunda-zeebe.orchestration:9600/operate/actuator/health/readiness
-                  metrics: http://camunda-zeebe.orchestration:9600/operate/actuator/prometheus
-                - name: Optimize
-                  id: optimize
-                  version: 8.9.x
-                  url: https://orchestration-host.com/optimize
-                  readiness: http://camunda-optimize.orchestration:80/optimize/api/readyz
-                  metrics: http://camunda-optimize.orchestration:8092/actuator/prometheus
-                - name: Tasklist
-                  id: tasklist
-                  version: 8.9.x
-                  url: https://orchestration-host.com/orchestration/tasklist
-                  readiness: http://camunda-zeebe.orchestration:9600/tasklist/actuator/health/readiness
-                  metrics: http://camunda-zeebe.orchestration:9600/tasklist/actuator/prometheus
-                - name: Orchestration Cluster
-                  id: orchestration
-                  version: 8.9.x
-                  urls:
-                    grpc: https://zeebe-orchestration-host.com
-                    http: https://orchestration-host.com/orchestration
-                  readiness: http://camunda-zeebe.orchestration:9600/actuator/health/readiness
-                  metrics: http://camunda-zeebe.orchestration:9600/actuator/prometheus
-```
-
-### Example orchestration configuration
-
-The following example `orchestration-values.yaml` is provided to the `orchestration` [namespace](#namespace-setup):
-
-```yaml
-global:
-  ingress:
-    enabled: true
-    className: nginx
-    host: orchestration-host.com
-    tls:
-      enabled: true
-      secretName: camunda-platform
-  elasticsearch:
-    enabled: false
-  opensearch:
-    enabled: true
-    auth:
-      username: user
-      secret:
-        existingSecret: opensearch-credentials
-        existingSecretKey: password
-    url:
-      protocol: https
-      host: opensearch.example.com
-      port: 443
-  identity:
-    service:
-      url: "http://management-identity.management-and-modeling.svc.cluster.local:80/identity"
-    auth:
-      # Configure authentication based on your identity provider.
-      # Set type to: "KEYCLOAK" (default), "MICROSOFT", or "GENERIC"
-      # See: https://docs.camunda.io/docs/self-managed/deployment/helm/configure/authentication-and-authorization/
-      type: "<KEYCLOAK|MICROSOFT|GENERIC>"
-      # ... additional provider-specific configuration
-      # Refer to the authentication guide for your chosen provider.
-orchestration:
-  contextPath: /orchestration
-  ingress:
-    grpc:
-      enabled: true
-      className: nginx
-      host: grpc-{{ .Values.global.ingress.host }}
-      tls:
-        enabled: true
-        secretName: camunda-platform-zeebe-grpc
-  retention:
-    enabled: true
-    minimumAge: 30d
-    policyName: zeebe-record-retention-policy
-  orchestration:
-    security:
-      authentication:
-        method: oidc
-
-connectors:
-  contextPath: /connectors
-
-optimize:
-  enabled: true
-  contextPath: /optimize
-identity:
-  enabled: false
-identityKeycloak:
-  enabled: false
-webModeler:
-  enabled: false
-webModelerPostgresql:
-  enabled: false
-elasticsearch:
-  enabled: false
-```
+- Register remote Orchestration Cluster, Optimize, and Connectors clients with central Management Identity.
+- Configure Camunda Hub to connect to an Orchestration Cluster in another namespace.
+- Share matching client-secret values across namespace-scoped Kubernetes Secrets.
+- Use the correct cross-namespace Management Identity service URL.
 
 ## Next steps
 
@@ -732,7 +557,7 @@ elasticsearch:
 
 Camunda 8 supports running multiple orchestration clusters in separate namespaces. This setup allows you to isolate environments such as development, staging, and production, while sharing infrastructure resources.
 
-To add another orchestration cluster, install the Helm chart again in a different namespace with unique release names and configuration values.
+To add another orchestration cluster, follow the [multi-namespace deployment guide](/self-managed/deployment/helm/configure/multi-namespace.md#add-another-orchestration-cluster).
 
 ### Running benchmarks
 

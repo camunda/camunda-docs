@@ -42,10 +42,12 @@ servers:
         description: The schema of the Orchestration Cluster REST API server.
 tags:
   - name: Ad-hoc sub-process
+  - name: Agent definition
   - name: Agent instance
   - name: Audit Log
   - name: Authentication
   - name: Authorization
+  - name: Backup
   - name: Batch operation
   - name: Clock
   - name: Cluster
@@ -56,6 +58,7 @@ tags:
   - name: Decision requirements
   - name: Document
   - name: Element instance
+  - name: Exporting
   - name: Expression
   - name: Form
   - name: Global listener
@@ -72,6 +75,7 @@ tags:
   - name: Recovery
   - name: Resource
   - name: Role
+  - name: Secret
   - name: Setup
   - name: Signal
   - name: System
@@ -80,6 +84,10 @@ tags:
   - name: User task
   - name: Variable
 paths:
+  /agent-definitions/{agentDefinitionKey}:
+    $ref: "agent-definitions.yaml#/paths/~1agent-definitions~1{agentDefinitionKey}"
+  /agent-definitions/search:
+    $ref: "agent-definitions.yaml#/paths/~1agent-definitions~1search"
   /agent-instances:
     $ref: "agent-instances.yaml#/paths/~1agent-instances"
   /agent-instances/{agentInstanceKey}:
@@ -96,12 +104,26 @@ paths:
     $ref: "audit-logs.yaml#/paths/~1audit-logs~1{auditLogKey}"
   /authentication/me:
     $ref: "authentication.yaml#/paths/~1authentication~1me"
+  /authentication/me/authorizations/search:
+    $ref: "authentication.yaml#/paths/~1authentication~1me~1authorizations~1search"
   /authorizations:
     $ref: "authorizations.yaml#/paths/~1authorizations"
   /authorizations/search:
     $ref: "authorizations.yaml#/paths/~1authorizations~1search"
   /authorizations/{authorizationKey}:
     $ref: "authorizations.yaml#/paths/~1authorizations~1{authorizationKey}"
+  /backups/runtime:
+    $ref: "backups.yaml#/paths/~1backups~1runtime"
+  /backups/runtime/state:
+    $ref: "backups.yaml#/paths/~1backups~1runtime~1state"
+  /backups/runtime/state/sync:
+    $ref: "backups.yaml#/paths/~1backups~1runtime~1state~1sync"
+  /backups/runtime/{backupId}:
+    $ref: "backups.yaml#/paths/~1backups~1runtime~1{backupId}"
+  /backups/history:
+    $ref: "backups.yaml#/paths/~1backups~1history"
+  /backups/history/{backupId}:
+    $ref: "backups.yaml#/paths/~1backups~1history~1{backupId}"
   /batch-operation-items/search:
     $ref: "batch-operations.yaml#/paths/~1batch-operation-items~1search"
   /batch-operations/search:
@@ -176,6 +198,12 @@ paths:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1incidents~1search"
   /element-instances/{elementInstanceKey}/variables:
     $ref: "element-instances.yaml#/paths/~1element-instances~1{elementInstanceKey}~1variables"
+  /exporting:
+    $ref: "exporting.yaml#/paths/~1exporting"
+  /exporting/pause:
+    $ref: "exporting.yaml#/paths/~1exporting~1pause"
+  /exporting/resume:
+    $ref: "exporting.yaml#/paths/~1exporting~1resume"
   /expression/evaluation:
     $ref: "expression.yaml#/paths/~1expression~1evaluation"
   /forms/{formKey}:
@@ -350,6 +378,10 @@ paths:
     $ref: "roles.yaml#/paths/~1roles~1{roleId}~1users~1search"
   /roles/{roleId}/users/{username}:
     $ref: "roles.yaml#/paths/~1roles~1{roleId}~1users~1{username}"
+  /secrets/resolve:
+    $ref: "secrets.yaml#/paths/~1secrets~1resolve"
+  /secrets/list:
+    $ref: "secrets.yaml#/paths/~1secrets~1list"
   /setup/user:
     $ref: "setup.yaml#/paths/~1setup~1user"
   /signals/broadcast:
@@ -392,6 +424,14 @@ paths:
     $ref: "cluster.yaml#/paths/~1mode"
   /restore:
     $ref: "cluster.yaml#/paths/~1restore"
+  /cluster/v2/mode:
+    $ref: "cluster-admin.yaml#/paths/~1cluster~1v2~1mode"
+  /cluster/v2/restore:
+    $ref: "cluster-admin.yaml#/paths/~1cluster~1v2~1restore"
+  /cluster/v2/status:
+    $ref: "cluster-admin.yaml#/paths/~1cluster~1v2~1status"
+  /cluster/v2/topology:
+    $ref: "cluster-admin.yaml#/paths/~1cluster~1v2~1topology"
   /users:
     $ref: "users.yaml#/paths/~1users"
   /users/search:

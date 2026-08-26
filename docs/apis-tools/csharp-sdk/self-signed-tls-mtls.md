@@ -9,10 +9,6 @@ mdx:
 
 # Self-signed TLS / mTLS
 
-:::caution Technical Preview
-The C# SDK is a **technical preview** available from Camunda 8.9. It will become fully supported in Camunda 8.10. Its API surface may change in future releases without following semver.
-:::
-
 The SDK supports custom TLS certificates via environment variables. This is useful for:
 
 - **Self-signed server certificates** — trust a CA that signed your server's certificate, without presenting a client identity.

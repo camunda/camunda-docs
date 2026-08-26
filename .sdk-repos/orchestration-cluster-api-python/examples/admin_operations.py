@@ -8,8 +8,8 @@ from camunda_orchestration_sdk import (
     AuditLogKey,
     AuditLogSearchQueryRequest,
     CamundaClient,
-    ChangeClusterModeMode,
     ClockPinRequest,
+    ClusterRestoreRequest,
     ClusterVariableName,
     ClusterVariableSearchQueryRequest,
     ConditionalEvaluationInstruction,
@@ -34,6 +34,7 @@ from camunda_orchestration_sdk import (
     JobWorkerStatisticsFilter,
     JobWorkerStatisticsQuery,
     MessageSubscriptionSearchQuery,
+    Mode,
     ResourceSearchQuery,
     RestoreRequest,
     TenantId,
@@ -273,15 +274,42 @@ def change_cluster_mode_example() -> None:
     # Pass dry_run=True to validate the request and inspect the resulting plan
     # without applying it. Omit it (or set it to False) to trigger the transition.
     result = client.change_cluster_mode(
-        mode=ChangeClusterModeMode.RECOVERING,
+        mode=Mode.RECOVERING,
+        dry_run=True,
+    )
+
+    # Operations are grouped by physical tenant; a null tenant means the operation
+    # is not scoped to one, such as a broker lifecycle operation.
+    print(f"Cluster change {result.change_id}:")
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
+# endregion ChangeClusterMode
+
+
+# region ChangeClusterModeAsClusterAdmin
+def change_cluster_mode_as_cluster_admin_example() -> None:
+    client = CamundaClient()
+
+    # The cluster-admin variant can target a single physical tenant. Omit
+    # physical_tenant_id to apply the change to every physical tenant.
+    result = client.change_cluster_mode_as_cluster_admin(
+        mode=Mode.RECOVERING,
+        physical_tenant_id="default",
         dry_run=True,
     )
 
     print(f"Cluster change {result.change_id}:")
-    for operation in result.planned_changes:
-        suffix = f" -> {operation.mode}" if operation.mode else ""
-        print(f"  {operation.operation}{suffix}")
-# endregion ChangeClusterMode
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
+# endregion ChangeClusterModeAsClusterAdmin
 
 
 # region Restore
@@ -296,9 +324,12 @@ def restore_example() -> None:
     )
 
     print(f"Cluster change {result.change_id}:")
-    for operation in result.planned_changes:
-        suffix = f" -> {operation.mode}" if operation.mode else ""
-        print(f"  {operation.operation}{suffix}")
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
 # endregion Restore
 
 
@@ -596,3 +627,67 @@ def get_resource_content_binary_example() -> None:
 
     print(f"Binary content size: {len(content.payload.read())}")
 # endregion GetResourceContentBinary
+
+
+# region GetClusterStatus
+def get_cluster_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_cluster_status()
+
+    print(f"Cluster status: {result.status}")
+# endregion GetClusterStatus
+
+
+# region GetRestoreStatus
+def get_restore_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_restore_status()
+
+    print(f"Restore status: {result.status}")
+# endregion GetRestoreStatus
+
+
+# region GetClusterTopology
+def get_cluster_topology_example() -> None:
+    client = CamundaClient()
+
+    # Returns cluster-wide topology aggregated over all physical tenants.
+    # Use GET /v2/topology for the topology of a single physical tenant.
+    result = client.get_cluster_topology()
+
+    print(f"Cluster {result.cluster_id or 'unknown'}: {result.cluster_size} brokers")
+    print(f"Gateway version: {result.gateway_version}")
+
+    for tenant in result.physical_tenants:
+        print(f"  Physical tenant: {tenant.physical_tenant_id}")
+# endregion GetClusterTopology
+
+
+# region RestoreAsClusterAdmin
+def restore_as_cluster_admin_example() -> None:
+    client = CamundaClient()
+
+    # The targeted physical tenants must be in recovery mode before a restore is
+    # accepted. Provide either backup_ids (one per partition) or a time range
+    # (from_/to), but not both.
+    #
+    # Omit physical_tenant_id to restore every physical tenant. Supply it to
+    # scope the restore to a single tenant (overrides must then be omitted).
+    result = client.restore_as_cluster_admin(
+        data=ClusterRestoreRequest(
+            backup_ids=[100, 101],
+        ),
+        dry_run=True,
+    )
+
+    print(f"Cluster change {result.change_id}:")
+    for group in result.planned_changes:
+        print(f"  {group.physical_tenant_id or 'cluster-wide'}:")
+        for operation in group.operations:
+            mode = getattr(operation, "mode", None)
+            suffix = f" -> {mode}" if mode else ""
+            print(f"    {operation.operation}{suffix}")
+# endregion RestoreAsClusterAdmin
+

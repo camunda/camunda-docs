@@ -11,9 +11,9 @@ Supported environment changes and breaking changes or deprecations for the Camun
 
 This release focuses primarily on consolidation and deprecation work to simplify APIs, align clients and SDKs, and prepare for upcoming features in 8.8 and later releases. While there are fewer net-new features in this release, these changes reduce long-term maintenance and improve consistency across Camunda components.
 
-| Scheduled release date | Scheduled end of maintenance | Release notes                                                                        | Blog                                                                            |
-| :--------------------- | :--------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| 8 April 2025           | 13 October 2026              | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
+| Minor release date | End of standard maintenance | Release notes                                                                        | Blog                                                                            |
+| :----------------- | :-------------------------- | :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| 8 April 2025       | 13 October 2026             | [8.7 release notes](/reference/announcements-release-notes/870/870-release-notes.md) | [Announcing Camunda 8.7](https://camunda.com/blog/2025/04/camunda-8-7-release/) |
 
 :::tip Release notes and quality board
 
@@ -52,9 +52,12 @@ The following key changes were also released as part of an 8.7.x patch release.
 
 | Patch release                                                    | Type            | Key change                                                                                                       |
 | :--------------------------------------------------------------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                   |
+| [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)  |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
@@ -109,6 +112,52 @@ Replace is the intended long-term behavior. The merge behavior in the affected p
 
 - **Running 8.7.28–8.7.32:** your processes use merge behavior. Identify any process where one task writes to a sub-key of a variable and a later task assigns an object literal to the same parent. If found, either switch the later task to path notation `result.b = 2` or include all required keys explicitly in its object literal.
 - **Upgrading to 8.7.33+:** replace behavior is restored. The same processes identified above will behave differently after upgrading. If your process was relying on earlier tasks' values being kept, you need to fix it before upgrading: instead of assigning a whole object `result = {a: 1, b: 2}`, make sure it includes all the keys it needs explicitly — or write each key separately `result.a = 1, result.b = 2`.
+
+### Nested input mappings can silently drop sibling fields {#nested-input-mapping-sibling-fields}
+
+**Affected versions:** 8.7.36. Reverted in 8.7.37.
+
+Camunda 8.7.36 introduced a regression affecting elements with two or more input mappings that write to different nested fields of the same parent variable. Only one of the mapped fields retains its expected value, with the other field silently set to `null` without warning or raised incident.
+
+**Example:** You have a parent-scope variable `foo: {bar: 1, baz: 2}` and an element with these two input mappings that both write into a local `foo` variable:
+
+1. Target `foo.bar` ← (maps from) source `=foo.bar`
+2. Target `foo.baz` ← (maps from) source `=foo.baz`
+
+In this scenario, the local `foo` becomes `{bar: 1, baz: null}`, with `baz` (mapped by the later declaration) no longer able to resolve against the parent scope.
+
+**Action:**
+
+- **Running 8.7.36:** Combine the mappings into a single mapping that rebuilds the whole object at once. For example, target `foo` with source `={bar: foo.bar, baz: foo.baz}` instead of mapping `foo.bar` and `foo.baz` separately.
+
+- **Upgrading to 8.7.37+:** The regression is reverted. Mapping individual fields of the same variable works correctly again. The workaround above is no longer required, but is harmless to keep.
+
+### Chained input mappings can silently drop FEEL temporal value types {#chained-input-mapping-temporal-type-loss}
+
+**Affected versions:** 8.7.36. Reverted in 8.7.37.
+
+Camunda 8.7.36 introduced a regression affecting elements with two or more input mappings where one mapping produces a FEEL temporal value (`duration`, `date`, `time`, `date-time`, or their local variants) and a later mapping on the same element reads a property from it. The temporal value loses its type, becoming a plain string due to serialization between mapping evaluations before the later mapping runs, so the property access silently evaluates to `null` instead of the expected value. Only temporal types are affected — other FEEL types (strings, numbers, booleans, lists, and contexts) work correctly.
+
+**Example:** An element with these two input mappings:
+
+1. Target `age` ← (maps from) source `=@"P1D"` (a duration)
+2. Target `ageDays` ← (maps from) source `=age.days`
+
+In this scenario, the mapping results in `ageDays` as `null`, as `age`'s duration type is not preserved between the two mappings.
+
+**Action:**
+
+- **Running 8.7.36:** Combine the mappings into a single mapping, so the duration is created and read in the same expression instead of being written to a variable and read back later. For example, target `ageDays` with source `=@"P1D".days` instead of separate `age` and `ageDays` mappings.
+
+- **Upgrading to 8.7.37+:** The regression is reverted. Chained mappings on temporal values work correctly again.
+
+### Message TTL cleanup batch size pacing change {#message-ttl-cleanup-batch-size-pacing-change}
+
+Starting in Camunda 8.7.27, expired-message cleanup `MessageBatchExpireProcessor` no longer resumes its RocksDB scan from a continuation cursor across batches. Each cleanup batch now re-scans from the start of the message deadline index and skips over the tombstones of messages already expired earlier in the same drain sequence. This makes cleanup cost per batch sensitive to `ttlCheckerBatchLimit`: a low value (for example, `10`) requires many more restart-scans to drain a backlog of expired messages, which can cause backpressure on normal process and message processing.
+
+`zeebe.broker.experimental.engine.messages.ttlCheckerBatchLimit` defaults to `100`.
+
+**Action:** If you previously tuned `ttlCheckerBatchLimit` down (for example, to `10`) on an earlier patch to avoid latency peaks, revalidate it after upgrading to 8.7.27 or later. Increasing it (for example, to `500`) reduces the number of restart-scans needed to drain a backlog and restores expected throughput.
 
 ### Deploy diagram change <span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span> {#web-modeler-deploy-diagram-change}
 
