@@ -37,11 +37,11 @@ If you use the [Docker Compose](/self-managed/quickstart/developer-quickstart/do
 Alternatively, you can fetch the JSON templates from the respective connector's releases in the respective connectors folder in the [repository](https://github.com/camunda/connectors)
 at `connectors/{connector name}/element-templates`.
 
-:::caution Match the template version to your Camunda version
+:::note Match the template version to your Camunda version
 
-The [Camunda Marketplace](https://marketplace.camunda.com/en-US/home) only distributes the **latest** version of each connector element template. If your Self-Managed cluster runs an older Camunda 8 version, importing the latest template from the Marketplace can result in a template that doesn't match your cluster.
+The [Camunda Marketplace](https://marketplace.camunda.com/en-US/home) only distributes the **latest** version of each connector element template. If your Self-Managed cluster runs an older Camunda 8 version, the latest template may not be compatible with it.
 
-Each element template declares the Camunda version(s) it supports in its `engines.camunda` field, for example:
+Each element template declares the Camunda versions it supports in its [`engines.camunda`](/components/modeler/element-templates/template-metadata.md) field as a semantic version range, for example:
 
 ```json
 "engines": {
@@ -49,7 +49,13 @@ Each element template declares the Camunda version(s) it supports in its `engine
 }
 ```
 
-To find a template matching your cluster's version, browse `connectors/{connector name}/element-templates/versioned/` in the [connectors repository](https://github.com/camunda/connectors) and select the file whose `engines.camunda` value matches your Camunda version, then import that file instead of the Marketplace version.
+To find a compatible template, choose the highest template version whose `engines.camunda` range includes your Camunda version, rather than looking for an exact match. Templates are available from two places:
+
+- The [Connectors release](https://github.com/camunda/connectors/releases) matching your Camunda version publishes a `connectors-bundle-templates-{version}` archive containing the bundled connectors' templates, with versioned files named `{template name}-{version}.json`.
+- Connectors that keep a version history also store superseded templates in `element-templates/versioned/` alongside the current one in the [connectors repository](https://github.com/camunda/connectors). Not every connector has this directory.
+
+Import the version-matched file instead of the Marketplace version.
+
 :::
 
 You can use the connector templates as provided or modify them to your needs as described in our [Connector templates guide](/components/connectors/custom-built-connectors/connector-templates.md).
