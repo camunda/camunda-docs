@@ -394,9 +394,19 @@ Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound co
 
 Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
 
-The connector runtime reports the connector as **DOWN** with a clear error message visible in the Manage & Run UI.
+The connector runtime reports the connector as **DOWN**, and the validation error is included in the connector's status message.
 
-**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. The `responseExpression` property supports returning a full HTTP response object (for example, `={body: ..., statusCode: 200, headers: {...}}`).
+**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. Unlike `responseBodyExpression`, which set only the response body, `responseExpression` returns a full HTTP response:
+
+```json
+={
+  "body": {"myCustomKey": request.body.myDataKey1},
+  "statusCode": 201,
+  "headers": {"Content-Type": "application/json"}
+}
+```
+
+<p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
 
 </div>
 </div>
