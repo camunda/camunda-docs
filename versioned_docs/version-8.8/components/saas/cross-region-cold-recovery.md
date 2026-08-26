@@ -2,7 +2,7 @@
 id: cross-region-cold-recovery
 title: Cross-region cold recovery
 sidebar_label: Cross-region cold recovery
-description: Recover an LPL AWS-hosted Orchestration Cluster in a secondary region from replicated backups.
+description: Recover an Orchestration Cluster in a secondary region from replicated backups.
 ---
 
 :::warning Experimental feature
