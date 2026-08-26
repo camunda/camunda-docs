@@ -154,3 +154,7 @@ Use the **Switch environment** button at the top of the app to change your activ
 ## Explore further resources
 
 <AoGrid ao={msTeamsCards} columns={3}/>
+
+:::tip
+To send messages to Microsoft Teams from a process, use the [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md). The Teams app and the connector complement each other: the app lets users act on Camunda tasks from inside Teams, while the connector lets a process post into Teams.
+:::
