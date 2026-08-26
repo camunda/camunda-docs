@@ -55,9 +55,21 @@ title: "Deploy your project",
 image: DocsIcon,
 description: "Deploy your project to a testing, staging, or production environment.",
 },
+{
+link: "./git-sync",
+title: "Sync your Git repository",
+image: DocsIcon,
+description: "Connect Camunda Hub to your Git repositories to keep your projects synced.",
+},
+{
+link: "./manage-project",
+title: "Manage an existing project",
+image: DocsIcon,
+description: "Rename, download, move, or delete your project.",
+},
 ]} columns={3}/>
 
-For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Web Modeler into your CI/CD pipelines](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md).
+For business-critical and higher-risk processes that require strict governance and/or quality requirements, you can [integrate Camunda Hub into your CI/CD pipelines](/components/hub/workspace/modeler/integrate-modeler-in-ci-cd.md).
 
 ## Known limitations
 

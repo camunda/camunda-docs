@@ -814,14 +814,10 @@ module.exports = {
               items: [
                 "components/hub/workspace/manage-projects/create-a-project",
                 "components/hub/workspace/manage-projects/validate-project",
-                "components/hub/workspace/manage-projects/deploy-project",
                 "components/hub/workspace/manage-projects/project-versioning",
+                "components/hub/workspace/manage-projects/deploy-project",
+                "components/hub/workspace/manage-projects/git-sync",
                 "components/hub/workspace/manage-projects/manage-project",
-                {
-                  type: "doc",
-                  label: "Git Sync",
-                  id: "components/hub/workspace/manage-projects/git-sync",
-                },
               ],
             },
             {
