@@ -63,7 +63,7 @@ To deploy from Desktop Modeler to the lightweight configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint:** `http://localhost:8088/v2`
+   - **Cluster endpoint:** `http://localhost:8080/v2`
    - **Authentication:** **None**
 1. Click **Deploy**.
 
@@ -76,7 +76,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Open Desktop Modeler and click the deployment icon.
 1. Select **Camunda 8 Self-Managed**.
 1. Configure the connection:
-   - **Cluster endpoint:** `http://localhost:8088/v2`
+   - **Cluster endpoint:** `http://localhost:8080/v2`
    - **Authentication:** **OAuth**
    - **OAuth URL:** `http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token`
    - **Client ID:** `orchestration`
@@ -85,7 +85,7 @@ To deploy from Desktop Modeler to the full configuration:
 1. Click **Deploy**.
 
 :::tip
-The full configuration uses Keycloak for OIDC authentication. The client credentials are preconfigured in the `.env` file and admin configuration.
+The full configuration uses Keycloak for OIDC authentication. The client credentials are preconfigured in the `.env` file and Management Identity configuration.
 :::
 
 ### Deploy with Camunda Hub
@@ -94,11 +94,11 @@ The full configuration uses Keycloak for OIDC authentication. The client credent
 Non-production installations of Camunda Hub are limited to five collaborators per workspace. See [Licensing](/reference/licenses.md).
 :::
 
-[Camunda Hub](/components/hub/workspace/modeler/launch-modeler.md) provides a browser-based interface for creating and deploying BPMN, DMN, and form diagrams. It is included in the full configuration by default, and can also run as a standalone setup.
+[Camunda Hub](/components/hub/index.md) includes a browser-based Web Modeler for creating and deploying BPMN, DMN, and form diagrams. Camunda Hub is included in the full configuration and can also run as a standalone setup.
 
 #### Standalone setup
 
-To start Camunda Hub and its dependencies independently, run:
+To start Camunda Hub, its WebSockets service, Management Identity, Keycloak, PostgreSQL, and Mailpit independently, run:
 
 ```shell
 docker compose -f docker-compose-web-modeler.yaml up -d
@@ -115,6 +115,7 @@ docker compose -f docker-compose-web-modeler.yaml down -v
 When you use the full configuration, Camunda Hub connects automatically to the local Orchestration Cluster started by `docker-compose-full.yaml`. You can deploy and run processes directly from the Camunda Hub interface.
 
 1. Log in to Camunda Hub at [http://localhost:8070](http://localhost:8070) with `demo` / `demo`.
+1. [Create a workspace](/self-managed/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace).
 1. In your workspace, create a new project.
 1. In your project, [create a new BPMN diagram](/components/hub/workspace/modeler/launch-modeler.md).
 1. Use the visual modeler to [design your BPMN process](/components/modeler/bpmn/bpmn.md).

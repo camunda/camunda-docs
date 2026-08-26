@@ -1,7 +1,5 @@
 ---
 title: Modeling with situation patterns
-tags:
-  - BPMN
 description: "Document patterns that share common characteristics and find a satisfying solution for modeling them."
 ---
 
@@ -219,7 +217,7 @@ By means of that process model, we can now let Camunda count the applications wh
 
 Furthermore, we will be able to measure the _handling time_ needed for the user task; for example, by measuring the time needed from claiming the task to completing it. The customer will need to wait a _cycle time_ from start to end events, and these statistics, for example, could be limited to the manually assessed applications and will then also include any idle periods in the process.
 
-*By comparing the economic *value* of manually assessed insurance policies to the *effort\* (handling time) we invest into them, we will also be able to learn whether we focus our manual work on the meaningful cases and eventually improve upon the automatically evaluated assessment rules.
+*By comparing the economic _value_ of manually assessed insurance policies to the *effort\* (handling time) we invest into them, we will also be able to learn whether we focus our manual work on the meaningful cases and eventually improve upon the automatically evaluated assessment rules.
 
 ### Option 2: Emphasizing process phases
 

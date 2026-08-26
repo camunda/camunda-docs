@@ -88,6 +88,12 @@ For example, you can build an invoice-processing AI agent in Camunda with BPMN, 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
 - [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
 
+### AI agent function
+
+The category of built-in [FEEL](#feel-expression) functions used to declare LLM-provided tool parameters for an [AI agent](#ai-agent). The primary function is [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue), which marks a value as supplied by the LLM at runtime, with an optional description, type, and JSON schema to guide the model.
+
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
+
 ## B
 
 ### Backpressure
@@ -221,6 +227,12 @@ An execution listener is a mechanism that allows users to execute custom logic a
 See [Zeebe Exporter](#zeebe-exporter).
 
 ## F
+
+### FEEL expression
+
+FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
+
+- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
 
 ### Fine-tuning
 
@@ -525,13 +537,13 @@ SAP stands for Systems, Applications, and Products in Data Processing; it's an e
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
 ### Soft pause exporting
 

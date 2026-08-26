@@ -189,7 +189,7 @@ The first message creates a new process instance. The following messages are dis
 
 ### Request-reply with unique correlation key
 
-**Problem**: An agent or service sends a message to an external system (for example, a chat platform or webhook) and waits for a reply. Multiple process instances may be active concurrently, each waiting for its own reply.
+**Problem**: An [AI agent](/reference/glossary.md#ai-agent) or service sends a message to an external system (for example, a chat platform or webhook) and waits for a reply. Multiple process instances may be active concurrently, each waiting for its own reply.
 
 **Solution**:
 

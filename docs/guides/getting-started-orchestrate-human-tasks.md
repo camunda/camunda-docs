@@ -22,7 +22,6 @@ import RunProcessImg from './img/run-process.png';
 import RunProcessSM from './img/run-process-sm.png';
 import OperateHumanTasks from './img/operate-human-tasks.png';
 import FormEditorImg from './img/form-editor.png';
-import NavigationHistoryImg from './img/modeler-navigation-history.png';
 
 import clsx from "clsx";
 import Tabs from '@theme/Tabs';
@@ -182,8 +181,7 @@ Once the form is designed, you must link it to your process.
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-1. Click on the project name in the navigation history in the top bar to navigate back, and open the process you created in **[Step 1](#step-1-create-a-new-process)**.
-   <img src={NavigationHistoryImg} style={{width: 500}} alt="Navigation history in Web Modeler" />
+1. Navigate to the process you created in [Step 1](#step-1-create-a-new-process).
 2. Select the user task. Click the blue **form link icon** to open the form menu.
 3. Select the form you just created, and click **link** to confirm.
    <img src={FormLinkingImg} style={{width: 400}} alt="Selecting a form from the project" />
@@ -226,7 +224,7 @@ Human-centric processes involving user tasks seamlessly unfold within Tasklist, 
 2. After you deploy your process, it can be executed on the cluster. There are multiple ways to run a process. This time, click **Run** in Modeler for a test run.
 
 :::tip
-Other options to run a process are to start it via Tasklist, test it in the Play mode, or call it via the API or an inbound trigger. Read more about [run options](/components/hub/workspace/modeler/run-or-publish-your-process.md).
+Other options to run a process are to start it via Tasklist, test it in the Test mode, or call it via the API or an inbound trigger. Read more about [run options](/components/hub/workspace/modeler/run-or-publish-your-process.md).
 :::
 
 </TabItem>
@@ -262,7 +260,7 @@ Ensure your installation of [Camunda 8 Run](/self-managed/quickstart/developer-q
    <img src={OperateHumanTasks} alt="Process instance monitoring in Operate" />
 
 :::tip
-In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md).
+In production, Operate is used to monitor both long-running and straight-through, high-throughput processes. In development environments, use Operate to confirm if the process flow works as expected. For faster in-place validation during development, use the [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md).
 :::
 
 </TabItem>
@@ -320,7 +318,9 @@ In this case, the token will move through the gateway and (according to the cond
 
 At this point, you've successfully crafted a human-centered process that routes the process flow based on a decision made by a user.
 
-A core value of Camunda 8 lies in the combination of automation and human interaction. Continue with the following resources to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
+A core value of Camunda 8 lies in the combination of automation and human interaction. The same pattern applies when an [AI agent](/reference/glossary.md#ai-agent) produces the result a person acts on: the user task, form, and gateway you built here work the same way, whichever kind of step supplied the data.
+
+Continue with the [following resources](#additional-resources-and-next-steps) to learn about intelligent task assignments, flexible forms to capture data and decisions, operational insights to refine task efficiency, and pathways to publish your processes to users via Tasklist or even publicly.
 
 Don't want to build the process yourself? Click this button to create it from a template in Camunda 8 SaaS, or sign up first.
 

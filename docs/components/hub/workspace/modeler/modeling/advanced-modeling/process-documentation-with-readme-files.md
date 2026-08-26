@@ -4,8 +4,6 @@ title: Process documentation with README files
 description: "The README feature brings project documentation directly into modeling projects to help capture important context in a way that’s versioned, visible, and easy to maintain."
 ---
 
-<span class="badge badge--cloud">Camunda 8 only</span>
-
 The README feature brings project documentation directly into modeling projects of business users, developers, and project owners to help capture important context in a way that’s versioned, visible, and maintainable.
 
 ## Why use READMEs

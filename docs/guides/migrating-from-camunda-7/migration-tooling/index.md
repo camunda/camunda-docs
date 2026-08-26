@@ -16,20 +16,41 @@ All tools are available as **ready-to-use builds** from the [GitHub releases pag
 
 The **Camunda migration agent skill** is an AI-driven orchestrator that runs the migration tools on your behalf. It handles the tool calls so you can focus on rearchitecting your solution.
 
-### Install and run
+### Install
 
-If you use an [Agent Skills](https://agentskills.io/)-compatible AI coding agent (such as Claude Code), install it as follows:
+Choose the installation instructions for your AI coding agent.
+
+#### Claude Code
+
+Install the skill with Claude Code:
 
 ```bash
 claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
 claude plugin install camunda-migration
 ```
 
-:::note Install with other agents
-The skill follows the open [Agent Skills](https://agentskills.io/) format and works with any compatible agent. See the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/tree/main/agentic-migration-skills) for manual installation.
-:::
+#### GitHub Copilot CLI
 
-Run from your Camunda 7 project directory:
+Install the skill with GitHub Copilot CLI:
+
+```bash
+copilot plugin marketplace add camunda/camunda-7-to-8-migration-tooling
+copilot plugin install camunda-migration@camunda
+```
+
+#### Other compatible agents
+
+Use GitHub CLI 2.90 or later to install the skill for another compatible agent:
+
+```bash
+gh skill install camunda/camunda-7-to-8-migration-tooling migrate-c7-to-c8-code --agent <tool-name>
+```
+
+Replace `<tool-name>` with the name of your agent. See the [agent-specific installation commands](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#install-commands-for-other-agents) for supported values. For manual installation paths, see the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#manual-installation).
+
+### Run
+
+From your Camunda 7 project directory, run the migration skill:
 
 ```text
 /camunda-migration:migrate-c7-to-c8-code

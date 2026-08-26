@@ -1,7 +1,5 @@
 ---
 title: Modeling with situation patterns
-tags:
-  - BPMN
 description: "Document patterns that share common characteristics and find a satisfying solution for modeling them."
 ---
 
@@ -219,7 +217,7 @@ By means of that process model, we can now let Camunda count the applications wh
 
 Furthermore, we will be able to measure the _handling time_ needed for the user task; for example, by measuring the time needed from claiming the task to completing it. The customer will need to wait a _cycle time_ from start to end events, and these statistics, for example, could be limited to the manually assessed applications and will then also include any idle periods in the process.
 
-*By comparing the economic *value* of manually assessed insurance policies to the *effort\* (handling time) we invest into them, we will also be able to learn whether we focus our manual work on the meaningful cases and eventually improve upon the automatically evaluated assessment rules.
+*By comparing the economic _value_ of manually assessed insurance policies to the *effort\* (handling time) we invest into them, we will also be able to learn whether we focus our manual work on the meaningful cases and eventually improve upon the automatically evaluated assessment rules.
 
 ### Option 2: Emphasizing process phases
 
@@ -298,6 +296,8 @@ The only valid result for the step "Ensure credit-worthiness" is knowing that th
 To advance clarity by means of process models, it is absolutely crucial for modelers to have a clear mental definition of the _result_ a specific step produces, and as a consequence, to be able to distinguish _undesired results_ from _fatal problems_ hindering us to achieve any result for the step.
 
 While there is not necessarily a right way to decide what to consider as a valid result for your step, the business reader will typically have a mental preference to observe certain business issues, either more as undesired outcomes or more as fatal problems. However, for the executable pools, your discretion to decide about a step's result might also be limited when using, for example, service contracts which are already pre-defined.
+
+The same distinction applies to a step carried out by an [AI agent](/reference/glossary.md#ai-agent). The response the agent returns when its loop ends is a valid result you check with a gateway, even when that response is a negative one. An error the agent itself raises, such as reaching its configured maximum number of model calls, is a fatal problem you catch with a boundary [error event](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#error-handling).
 
 ## Asking multiple recipients for a single reply
 

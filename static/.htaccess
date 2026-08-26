@@ -230,7 +230,7 @@ RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/com
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
 
 # Web Modeler moved to Hub Workspace Modeler - specific renamed files
-RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/launch-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /docs/next/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
@@ -248,10 +248,10 @@ RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-lin
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-scenario-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
@@ -260,6 +260,11 @@ RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ 
 
 # Web Modeler moved to Hub Workspace Modeler - general redirect
 RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
+
+# Play-to-Test Transition (product-hub#3169): Play mode renamed to Test mode
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-case-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 
 # Move Console and Web Modeler docs to Camunda Hub (next version)
 RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
@@ -496,6 +501,17 @@ RewriteRule ^docs/next/components/modeler/web-modeler/modeling/context-pad/?$ /d
 RewriteRule ^docs/8.9/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.9/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
 RewriteRule ^docs/8.8/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.8/components/modeler/web-modeler/model-your-first-diagram/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/modeling/context-pad/?$ /docs/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+
+# Move fromAi() FEEL function docs from the miscellaneous category to a dedicated AI Agent category (8.9, backported to 8.8)
+RewriteRule ^docs/next/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/next/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+RewriteRule ^docs/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+
+# Merge resource-planning into sizing-self-managed (8.9, backported to 8.8)
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/next/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/8.9/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/8.8/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/8.8/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.

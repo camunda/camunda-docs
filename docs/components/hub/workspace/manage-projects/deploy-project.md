@@ -59,7 +59,7 @@ If any resource fails to deploy, the whole deployment [fails](#deployment-errors
 You can manually [run](/components/hub/workspace/modeler/run-or-publish-your-process.md#run-a-process) your project to test it after it has been deployed to a testing, staging, or production cluster.
 
 :::note
-Use Play to validate your project in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
+Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate and debug your project against any environment. Use Run to execute a full process instance of your already-deployed project, for example to exercise your real job workers and APIs on a testing, staging, or production cluster.
 :::
 
 To run your project:

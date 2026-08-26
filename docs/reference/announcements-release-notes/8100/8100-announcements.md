@@ -10,15 +10,18 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                           | Upgrade guides                                                                                        |
-| ------------------ | ---------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| 13 October 2026    | 11 April 2028                | [8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                           | Upgrade guides                                                                                        |
+| ------------------ | --------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| 13 October 2026    | 11 April 2028               | [8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
 
 :::info 8.10 resources
 
 - See [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
-  :::
+
+:::
+
+## Supported environments
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -97,11 +100,11 @@ Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are
 </div>
 <div className="release-announcement-content">
 
-#### OpenSearch 3.4 no longer supported
+#### OpenSearch 3.4 and 3.5 no longer supported
 
-Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Supported OpenSearch versions are now 2.19+ and 3.5+.
+Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.6. Supported OpenSearch versions are now 2.19+ and 3.6+.
 
-- Upgrade OpenSearch 3.4 clusters to 3.5 or later before moving to Camunda 8.10.
+- Upgrade OpenSearch 3.4 or 3.5 clusters to 3.6 or later before moving to Camunda 8.10.
 
 <p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
@@ -317,11 +320,69 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize `GET /api/readyz` no longer rejects requests that carry an `Authorization` header
+
+Starting with Camunda 8.10.0-alpha5, the Optimize [health readiness endpoint](/apis-tools/optimize-api/health-readiness.md) (`GET /api/readyz`) ignores an `Authorization` header instead of rejecting the request. Previously, a request that included the header was rejected with a client error status code. It now returns the readiness status (`200` or `503`), as it does for a request without the header.
+
+This aligns the endpoint with the other public endpoints of the Orchestration Cluster, which also accept and ignore a superfluous `Authorization` header.
+
+**Action:** No action is required for Kubernetes readiness and liveness probes, as these do not send an `Authorization` header. If you have a client or monitoring check that relies on the endpoint rejecting requests that carry an `Authorization` header, update it to expect the readiness status instead.
+
+</div>
+</div>
+
 ## Connectors
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connectors with a single operation are renamed after the operation
+
+Connectors that provide a single operation are renamed in Modeler so their name describes the action they perform instead of the product they connect to. For example, the **REST Outbound Connector** is now named **Send REST Request**. Connectors with several operations keep their names and expose their operations as searchable entries instead.
+
+Only the name shown in Modeler changed. Template IDs, versions, connector types, and runtime behavior are unchanged, so existing process models continue to run and do not need to be remodeled or redeployed.
+
+**Action:** Search for the new name when you add one of these connectors to a process, and update your own documentation, templates, and training material that refer to the previous names.
+
+**Renamed connectors:**
+
+| Previous name                                   | New name                                           |
+| :---------------------------------------------- | :------------------------------------------------- |
+| Amazon EventBridge Outbound Connector           | Send Event to AWS EventBridge                      |
+| Amazon SNS Outbound connector                   | Publish Message to AWS SNS                         |
+| Amazon SQS Outbound Connector                   | Send Message to AWS SQS                            |
+| AWS Bedrock AgentCore Runtime                   | Invoke Agent in AWS Bedrock AgentCore Runtime      |
+| AWS Bedrock Code Interpreter Outbound Connector | Run Code with AWS Bedrock Code Interpreter         |
+| AWS Bedrock Knowledge Base Outbound Connector   | Retrieve Documents from AWS Bedrock Knowledge Base |
+| AWS Lambda Outbound Connector                   | Invoke AWS Lambda Function                         |
+| AWS SageMaker Outbound Connector                | Run Inference with AWS SageMaker                   |
+| AWS Textract Outbound Connector                 | Extract Text from Document with AWS Textract       |
+| Google Gemini Outbound Connector                | Generate Content with Google Gemini                |
+| GraphQL Outbound Connector                      | Send GraphQL Request                               |
+| Hugging Face Outbound Connector                 | Run Inference on Hugging Face                      |
+| Kafka Outbound Connector                        | Publish Message to Kafka                           |
+| RabbitMQ Outbound Connector                     | Publish Message to RabbitMQ                        |
+| REST Outbound Connector                         | Send REST Request                                  |
+| RPA Connector                                   | Run RPA Script                                     |
+| SendGrid Outbound Connector                     | Send Email with SendGrid                           |
+| SOAP Connector                                  | Send SOAP Request                                  |
+| SQL Database Connector                          | Execute SQL Statement on Database                  |
+
+Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound connector is renamed.
+
+<p className="link-arrow">[Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)</p>
+
+</div>
+</div>
 
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -373,7 +434,49 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 
 **Action:** Review your broker memory sizing before upgrading. To keep the previous behavior, explicitly set `camunda.data.primary-storage.rocksdb.memory-allocation-strategy` to `PARTITION` (environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY=PARTITION`). To adopt the new default, test the `FRACTION` strategy first to find the right `memory-fraction` value for your deployment.
 
-<p className="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p className="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### New SaaS clusters default to `business_` variable include filter for Optimize
+
+Starting with Camunda 8.10, new SaaS clusters include a default `business_` variable include filter in Optimize data filter settings. Only variables whose names start with `business_` are exported to Optimize. Variables not matching this prefix are permanently excluded from Optimize.
+
+This default does not apply to existing clusters. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+
+**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
+
+<p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize Self-Managed no longer flattens object variables by default
+
+Starting with Camunda 8.10, Self-Managed Optimize no longer imports object variable values by default. Object variables are no longer flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage, and aligns Self-Managed with the default Camunda 8 SaaS has used for years.
+
+This change is **Self-Managed only**; SaaS is unaffected, as it already runs with this behavior disabled.
+
+- Object-heavy processes previously measured 5.9-48.8x more Optimize variable storage on Self-Managed than SaaS for identical workloads.
+- If you rely on object variable properties in reports, filters, or Raw Data Reports, opt in by setting `zeebe.includeObjectVariableValue: true` (environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true`).
+- Optimize logs a `WARN` on startup whenever object variable values are not being imported. The message includes the opt-in setting.
+
+**Action:** Decide whether your Self-Managed deployment needs flattened object variables. If it does, set `zeebe.includeObjectVariableValue: true` before upgrading to 8.10.
+
+<p className="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
 
 </div>
 </div>

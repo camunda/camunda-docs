@@ -72,6 +72,9 @@ Configure the AWS region for this connector.
 
 Analyze documents using Textract. Different input parameters are available depending on the **Execution type** you select.
 
+<!-- Legacy anchor: already-distributed element templates link to #execution-types. Do not remove. -->
+<span id="execution-types" />
+
 #### Input parameters
 
 | Property          | Type     | Required               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example           |
@@ -95,13 +98,14 @@ You must select at least one feature type. Combining multiple options can produc
 | Query              | String  | Yes, if analyze queries is true | The query to be applied to the document.                            | What is the IBAN in the invoice? |
 
 Additional optional parameters for advanced configuration:
-| Property | Type | Required | Description | Example |
-|:--------------------|:----------|:---------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|
-| Client Request Token | String | No | The idempotent token that you use to identify the start request. | |
-| Job Tag | String | No | An identifier that you specify that's included in the completion notification published to the Amazon SNS topic. | |
-| KMS Key ID | String | No | The KMS key used to encrypt the inference results. | |
-| Notification Channel Role ARN | String | No | The Amazon SNS topic role ARN that you want Amazon Textract to publish the completion status of the operation to. | |
-| Notification Channel SNS Topic ARN | String | No | The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. | |
+
+| Property                           | Type   | Required | Description                                                                                                       | Example |
+| :--------------------------------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------- | :------ |
+| Client Request Token               | String | No       | The idempotent token that you use to identify the start request.                                                  |         |
+| Job Tag                            | String | No       | An identifier that you specify that's included in the completion notification published to the Amazon SNS topic.  |         |
+| KMS Key ID                         | String | No       | The KMS key used to encrypt the inference results.                                                                |         |
+| Notification Channel Role ARN      | String | No       | The Amazon SNS topic role ARN that you want Amazon Textract to publish the completion status of the operation to. |         |
+| Notification Channel SNS Topic ARN | String | No       | The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to.      |         |
 
 #### Output
 

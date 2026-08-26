@@ -91,6 +91,8 @@ The following table outlines the key differences between Admin and Management Id
 
 For production environments, use an external [identity provider](/self-managed/deployment/helm/configure/authentication-and-authorization/external-oidc-provider.md) to connect both environments.
 
+For a decision tree covering which one to configure for your deployment, see [how identity works in Camunda](/self-managed/components/identity/how-identity-works.md).
+
 ### Databases
 
 Databases can be deployed as part of the Camunda clusters, but using external databases or managed services offers several advantages:
@@ -112,7 +114,7 @@ For production, use an external managed service or an externally operated databa
 
 For a production Orchestration Cluster, use these baseline assumptions regardless of deployment method:
 
-- Run at least three brokers across three availability zones for high availability.
+- Run at least three brokers across three availability zones for high availability. On Kubernetes, the default anti-affinity rule alone does not enforce zonal placement — see [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha).
 - Use one secondary storage backend family for the Orchestration Cluster's web applications and APIs.
 - Keep the secondary storage backend in the same region as the Orchestration Cluster to reduce latency and failure domains.
 - Treat secondary storage as part of your production data layer, with its own backup, monitoring, and scaling plan.
@@ -159,7 +161,7 @@ For supported versions and configuration details, see:
 
 High availability (HA) ensures that a system remains operational even when components fail. All components can run in HA mode, but Optimize requires special consideration: the importer/archiver must run on only one replica at a time. See the [Optimize configuration](/self-managed/components/optimize/configuration/system-configuration-platform-8.md#general-settings) for details.
 
-Consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails.
+Consider regional and zonal placement of workloads. Use at least three zones in a region to maintain availability if a zone fails. On Kubernetes, see [high availability](/self-managed/reference-architecture/kubernetes.md#high-availability-ha) for how to enforce that placement.
 
 For more information on how Zeebe handles fault tolerance, see the [Raft consensus chapter](/components/zeebe/technical-concepts/clustering.md#raft-consensus-and-replication-protocol).
 

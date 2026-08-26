@@ -62,7 +62,7 @@ To accomplish this, you'll use SendGrid to send an email:
 1. With the **submit-expense** diagram open, make sure you're in [**Implement** mode](/components/hub/workspace/modeler/collaboration/implement-your-process.md).
 2. Click the **Notify manager of receipt** task.
 3. Click **Change element**.
-4. Search for **SendGrid Outbound Connector**. If you're using Self-Managed, you may need to download it from the connector marketplace.
+4. Search for **Send Email with SendGrid**. If you're using Self-Managed, you may need to download it from the connector marketplace. You can search for the operation you want to perform, such as `send email`, instead of the connector name.
 5. Open the **Details** panel on the right side of the modeling interface.
 6. Under **Properties**, configure the following sections:
    - **Authentication:** [Full Access API Key](https://www.twilio.com/docs/sendgrid/ui/account-and-settings/api-keys#creating-an-api-key)

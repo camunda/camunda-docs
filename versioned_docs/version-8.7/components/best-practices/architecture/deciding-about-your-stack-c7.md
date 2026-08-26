@@ -1,12 +1,5 @@
 ---
 title: Deciding about your Camunda 7 stack
-tags:
-  - Architecture
-  - Stack
-  - Database
-  - Application Server
-  - Spring Boot
-  - Maven
 description: "Camunda 7 is very flexible and can be hooked into the architecture of your choice, giving you a number of important decisions to make."
 ---
 
@@ -85,7 +78,6 @@ Check the **prerequisites**:
 - Install [OpenJDK JDK 17](https://jdk.java.net/17/).
 - Install [Camunda Modeler](https://camunda.org/download/modeler/).
 - Install an IDE like [Eclipse](https://eclipse.org/downloads/). We recommend the latest "Eclipse IDE for Java Developers".
-
   - Activate workspace file sync [refresh using built-in hooks or polling](http://stackoverflow.com/questions/4343735/avoiding-resource-is-out-of-sync-with-the-filesystem) to improve interaction of Eclipse and Camunda Modeler.
   - [Add Camunda Assert to your Eclipse content assist favorites](https://github.com/camunda/camunda-bpm-platform/blob/master/test-utils/assert/README.md).
 
@@ -158,22 +150,22 @@ The Camunda Spring Boot Starter is a clean way of controlling the embedded engin
 
 When running the engine in embedded mode, you have to control the _lifecycle_ of the engine yourself, basically _starting up_ and _shutting down_ the engine, and providing access to the API whenever a client needs it. You have several options to do that.
 
-|                                 | Spring Boot                                                   | Spring Application Context                                                                  | `processes.xml`                                                                                              | Programmatic                                                                        |
+| | Spring Boot | Spring Application Context | `processes.xml` | Programmatic |
 | ------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------- | --- |
-|                                 | Configure, start, and stop the engine via Spring Boot Starter | Configure, start, and stop the engine via Spring Beans defined in your Application Context. | Configure, start, and stop the engine via Camunda’s processes.xml descriptor and a ProcessApplication class. | Configure, start, and stop the engine yourself programmatically by using Java code. |
-| Use when                        | You target Spring Boot as runtime environment.                | You already use Spring.                                                                     | You do not want to introduce a Spring dependency just for Camunda.                                           | You need full control over the engine or want to do advanced customizations.        |
-| Unlimited Configuration Options | &#10004;                                                      | &#10004;                                                                                    |                                                                                                              | &#10004;                                                                            |
-| Development Effort              | Low                                                           | Medium                                                                                      | Low                                                                                                          | High                                                                                |     |
+| | Configure, start, and stop the engine via Spring Boot Starter | Configure, start, and stop the engine via Spring Beans defined in your Application Context. | Configure, start, and stop the engine via Camunda’s processes.xml descriptor and a ProcessApplication class. | Configure, start, and stop the engine yourself programmatically by using Java code. |
+| Use when | You target Spring Boot as runtime environment. | You already use Spring. | You do not want to introduce a Spring dependency just for Camunda. | You need full control over the engine or want to do advanced customizations. |
+| Unlimited Configuration Options | &#10004; | &#10004; | | &#10004; |
+| Development Effort | Low | Medium | Low | High | |
 
 #### Providing a REST API
 
 When running an embedded engine, it might be harder to deploy the pre-built REST API.
 
-|                              | Use Spring Boot Starter for REST API                                                                  | Embed Camunda’s REST API                                                       | Use Camunda’s Standalone Web App REST API                                                       |
+| | Use Spring Boot Starter for REST API | Embed Camunda’s REST API | Use Camunda’s Standalone Web App REST API |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | --- |
-|                              | The Spring Boot Starter allows to run the Camunda 8 REST API as well as the Camunda web applications. | Provide Camunda’s REST API by embedding its JAX-RS code into your application. | Deploy Camunda’s "Standalone" Web Application (which runs its own engine) and use its REST API. |
-| No Classloading Restrictions | &#10004;                                                                                              | &#10004;                                                                       |                                                                                                 |
-| Development Effort           | Low                                                                                                   | High                                                                           | Low                                                                                             |     |
+| | The Spring Boot Starter allows to run the Camunda 8 REST API as well as the Camunda web applications. | Provide Camunda’s REST API by embedding its JAX-RS code into your application. | Deploy Camunda’s "Standalone" Web Application (which runs its own engine) and use its REST API. |
+| No Classloading Restrictions | &#10004; | &#10004; | |
+| Development Effort | Low | High | Low | |
 
 #### Providing Camunda web applications (Tasklist, Cockpit)
 

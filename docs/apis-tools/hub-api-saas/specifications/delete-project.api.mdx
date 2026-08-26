@@ -1,11 +1,11 @@
 ---
 id: delete-project
 title: "Delete a project"
-description: "Soft-deletes the project with the given project key. The project is moved to the recently deleted state and can be recovered during the retention window. The project must have no files in the project or any of its descendants. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead."
+description: "Soft-deletes the project with the given project key, cascading to all of its descendant folders and files. The project is moved to the recently deleted state and can be recovered during the retention window. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead."
 sidebar_label: "Delete a project"
 hide_title: true
 hide_table_of_contents: true
-api: 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
+api: eJztWttu4zgS/ZWC5iXplXzPpY3FAplONyZz2Q46memHOIApsWRzQpEakrLjNQzsR+wX7pcsipQsO3FPD7Azb34wYFFksS6nDouk1pEu0TAntLrh0TjiKNHhrdG/YuaiOOJoMyNKeh+NozuduyR0seDmCGXoCEvh5r5hJhaots1PuIohYzZjXKgZOA1MStA5CGeBRKPiTDnIteRoLDDFIRcSbQfud6QLC4VeICcBNInBDJWTKwiqcLCOOfSjM6Yg9T30Ag1y4JXxU/thDhVZAkuhuF524F5DiaZgKogjAcIYXKCxIpUrMEjzAms0iaGyCNPr9z++v38P3brVdtf1vx9wteluJU5BKOuQ8c5ERXH0nDDOkSdCJX4C79Fep9/p+ZcWC6acyBKDv1XCoI3G6+hJKIpKG4/UN6yjdkJ6yo0uonFUMjeP4kixAump7bLZbOLIsZmNxg9bYY9xVDLDCnRo6MX6wMA4EqoVXGvGo7EzFb4EB0WsUuK3CinuIDg5O1813q+ldqI4stkcC0aKv4DXyjoskhkqgiRyLyfXpg0AjXarkrS0jgIbxVGuTcFc66Wg945D6wF7r/GZFaWk5sFlOrpIeywZno+yZMRTTN5eDs+TUZ+lw4t+1j9LBzSrcPKFlM3mkXxiS61sCNegN3pt1S6Sl8y2oK2yDK3NKylXnWgTR6Ne//Bo8jtaB5JlTxYWTAoOrHJzcnDmcxcyg97fTFry0RwZ91FdR58/f06u2s5IbW0A9p3pcZJpRXlCb1lZynoGAnsqsfjbr5b0Wn8xiFdwG3oCR8eEBJ1601nIeCNS5CAUPHz68A7ejs4uHk/mzpV23O0ul8uOybMEuXDadLSZdU2e0Y/6nXpSMAgFW1GOM84FzckkubdE4wRasCVmIhdZwxW12kCGhjysTQ5q7aH6Ibxrgh1HxCuV9TRIpvh0sI6pDH32bGdtPfnSozvwrIx4RahX8POnm0Op0ursx+SskiSDpbpy41Qy9bQH4saDXGe2k7GiUpx1hO6yUnQXg06viZ7PBdtNGU9qUBHwamy/1v2lsrYqCmZWxOCH9Gz1+ZZx+NROUPuxnUEohzM0u+4Ryg0Hr+Yk+H93f38LQQRkmqOnBDcXtlFgb+5RrxdHhVCiqIrmiT2Hp/Neb7MN5tftVYDPpWQqpNgLo4WCQhusUb5vfm16g8sVPBTs+Xud2nt9lTmxYA7tI61VSjuCcsmMRU6e2uLrK0hKDOZokHoexhRR9itgaSNm4qUl+6p3F4Purzq1XRYUJZmbzR7/0aDr4MPNztCtwvsgbQb+rIiytBH/Qt6m1njU67cR8eG2FbEOvqI4YYHc1Urx9YTn0IAGg1ZXJvNQbP0Y1UnQ9YUFUZyn2uFr5vqgTSo4RxWqj4Z1m3ml1EvkJPzIkEeGPDLkkSH/ZIbc8s8ePQ536PFjs1fbYyR4r2xlEFa6MnB1e7NbDMKcLbDe/YQk9jseYWn/YX+PKbt9ZDy9ODtLzs8HeTIapjy57PN+kuXD83z4lvVYb7il0y/UvXUKId+Ssy+BSftcV+rIpkc2PbLpkU3/Cjb9p3bwgThmj01HL4rNP0JQfwZDnvV6B6hLAQHTEKWgMdqAzrLKEEkv50J6j1F52x5geWWPpHkkzSNpHknzLyDNm4aO7tAs0MB7YqUdAj2jSG0J9EpBpfC5xIwI9GsM5svThsLgViKzCM6sgM2YUCCZQ/PVrbu3xaHy5as/tH6iI/BDh+txtGCywu0h+yZuO78+bN/2/jMP3emAuEA31+3VShSHEePo8PUBOdv7PlhXGXL0OvD4Ztztrufaus14XWrjNrV/vPJGsFQGlqMugfMbSpI6Y9I3H8pdekH6N5j7rkr9PiIo4s+mabp9kZe9y8uD0qjr70jaXZIaWcSMB2WFzl+U5h1sMauMcCvvrxSZQUPn3dH44XH39R2JCv7Z7bRNiFoHPyM9h04Uff/nQ5PX33++P5DN33++355F6SdUoFPHhEIOBJOA/ZDobkVJsRAcTQc+aAN3jN2FiyWy8SOpBYNODzIpULlkdzOXS71s79pCB7i59hdXFjODjvZ+/upEKHgXlhh4p5XVEuvZUObJT0yxGfJ494gNYSFYUDTTKhezirL44831u62+cIKdWSeGH3CVSc2eYnivnGFwc31Kq/bGU2OuvVNrQqlDdnjJqMMp0VmaGAqvFiy1ebIly9DGzcWJjcO9YNxcFcYTVee5jb35BRYpXSHu2E3yS6NnhhUFIxvpomWiJuqbb+Bq72yRGq+kBFS81EI52+yWgdXXLRTfAIQQ3w589AEGVsd7G+aJehXnMclP4M0bCvWbN/Dff/+njlPYroc47gZaKB/hFxEkQycKAJ+zOVMzD5iiviALWlAI/xCKOrVCO2ioFduDhKdm634fFqTSyWtMxECKKe3maOBjiermmgxRmLkk00XJnEglwg2/PfVRuVGZrHjIgmCNUEB3satm1RhP1HQ6nair+gjYx24M34a4/J2UTPzIf9Qdfaj9Gmbpwf+D7Y3dNueaIndbFIeFE8Ja7hNuoqbvQsmd3K9KHMOXqu5pB+4wiJ3uLcPTmswmKlRGSNWS4szQlTdKbhto3rKZUFtY3iEz2XwHmcQypQMG05LNcNpU7p4VpoTCKZzoPLfoTn1iTKUohJtOlNMUQWe0JBdU0tXX4ELNOvBp6xRRh+HQBBM1ddoxeeOwsNNG4U+EFD+L9/JuanONYTPliwJ/yY5kf4Z0DJXUyDetgA688212ouxcV5KDoMKl8N2QWa1olYOUZU+JznNvoUGqIqwjMTPaXjgNc6a4xAlBUVk/iS9PLJz4QnU0eEvoPOsNTxsrfukDx9JgywhkyC99b8fJNCy1/e70lC4Emp50S2Fpebrs9HtemaWQMnyBED5ZEGqiLjv9QQd+EjNvqNPwywBYnVTIjBRUhmZaLVAJqhZ9HtqAool6KPxAqm5nleDYbsVebiTouavw2ZGyNnFaS9vdjk4Kpiq2bcGEwJIsMU0KTbUJ5U4yr9KELD0NMA2lng17svarhUGn579aIDyxzBcGdf1TM1YU15XLF1SlQkCKDJXF14Phx/AGwqcR+4IkzpjcSsp00Q1yhJolTPHE003ieyUOTWG/uegN2PnbbJQM3w4HyegiHSYsuxglw/Ts7CJH5Ozs0q9dpbauYGpHoWtfsrWfH7xcxtbtPvz4bcz/821MXYM5wm4pmVAEEB/4dV0uPzSlNZXq450y+zGu692HaL1OmcWfjdxsqPm3Cg1VhY9teexrRC4s/efROGfSvvyOZTemJ5/qY4dT+ONftxy0pdl1qdXOviSK6w3J7q7hcdN8vrGzvbnypL8z9IuHPntbjhCMaLP5H4fxLV4=
 sidebar_class_name: "delete api-method"
 info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
 custom_edit_url: null
@@ -33,7 +33,7 @@ import Translate from "@docusaurus/Translate";
   context={"endpoint"}
 ></MethodEndpoint>
 
-Soft-deletes the project with the given project key. The project is moved to the recently deleted state and can be recovered during the retention window. The project must have no files in the project or any of its descendants. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead.
+Soft-deletes the project with the given project key, cascading to all of its descendant folders and files. The project is moved to the recently deleted state and can be recovered during the retention window. To permanently and irreversibly remove a project, use `DELETE /projects/{projectKey}/permanent` instead.
 
 <Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
   <Translate id="theme.openapi.request.title">Request</Translate>
@@ -65,64 +65,6 @@ Soft-deletes the project with the given project key. The project is moved to the
   label={undefined}
   responses={{
     "204": { description: "The project was deleted successfully." },
-    "400": {
-      description: "The provided data is not valid.",
-      content: {
-        "application/problem+json": {
-          schema: {
-            description:
-              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
-            type: "object",
-            required: ["type", "title", "status", "detail", "instance"],
-            properties: {
-              type: {
-                type: "string",
-                format: "uri",
-                description: "A URI identifying the problem type.",
-                default: "about:blank",
-                example:
-                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
-              },
-              title: {
-                type: "string",
-                description: "A summary of the problem type.",
-                example: "Bad Request",
-              },
-              status: {
-                type: "integer",
-                format: "int32",
-                description: "The HTTP status code for this problem.",
-                example: 400,
-                minimum: 400,
-                maximum: 600,
-              },
-              detail: {
-                type: "string",
-                description: "An explanation of the problem in more detail.",
-                example:
-                  "Request property [maxJobsToActivates] cannot be parsed",
-              },
-              instance: {
-                type: "string",
-                format: "uri-reference",
-                description:
-                  "A URI path identifying the origin of the problem.",
-                example: "/v2/jobs/activation",
-              },
-            },
-            title: "ProblemDetail",
-          },
-          example: {
-            type: "about:blank",
-            title: "Bad Request",
-            status: 400,
-            detail:
-              "Validation failed for request body: 'name' must not be blank.",
-            instance: "/api/v2/files",
-          },
-        },
-      },
-    },
     "401": {
       description: "The request lacks valid authentication credentials.",
       headers: { "WWW-Authenticate": { schema: { type: "string" } } },

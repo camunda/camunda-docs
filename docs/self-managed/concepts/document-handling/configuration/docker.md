@@ -15,7 +15,12 @@ None of the storage options below with Docker Compose are suitable for productio
 
 Document Store configuration uses the unified `camunda.document.*` Spring property model. The sections below show the new configuration format. If you're migrating from legacy `DOCUMENT_*` environment variables, see [property mapping reference](#property-mapping-reference).
 
-For Docker Compose, mount an `application.yaml` file and set `SPRING_CONFIG_ADDITIONAL_LOCATION` to its directory. For example, set `camunda.document.default-store-id` to specify the active store.
+For Docker Compose, add the `camunda.document.*` properties to the Orchestration Cluster application file that is already mounted by the distribution:
+
+- For the lightweight configuration, edit the selected file under `configuration/`.
+- For the full configuration, edit `.orchestration/application.yaml`.
+
+For example, set `camunda.document.default-store-id` in that file to specify the active store. You do not need to mount a second application file.
 
 If no storage configuration is provided, the default document storage is **in-memory**. Documents are lost when the application is stopped.
 
@@ -25,7 +30,7 @@ The legacy `DOCUMENT_*` and `DOCUMENT_STORE_*` environment variables (for exampl
 
 :::
 
-When using [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md), Tasklist and Zeebe run in separate containers and do not share memory or volumes, which introduces certain limitations. While the document handling feature will still work, the configuration below must be set for all components that use it (Zeebe and Tasklist). In this topology, using in-memory or local storage means components cannot access the same data, so documents uploaded by Zeebe may not be visible to Tasklist. This limitation does not apply when using cloud storage options like AWS or GCP, where documents are always stored in a shared, centralized location.
+In the [Docker Compose distribution](/self-managed/quickstart/developer-quickstart/docker-compose.md), Zeebe and Tasklist run in the consolidated `orchestration` service and share one application configuration. Configure the document store once for that service. In-memory documents are still lost when the service restarts; use persistent or external storage when documents must survive restarts.
 
 <Tabs groupId="storage" defaultValue="aws" queryString values={
 [
@@ -134,11 +139,11 @@ camunda:
         prefix: documents/ # optional
 ```
 
-| Property                                | Required | Description                                                         |
-| --------------------------------------- | -------- | ------------------------------------------------------------------- |
-| `camunda.document.gcp.<id>.bucket-name` | Yes      | Name of the Google Cloud Storage bucket where documents are stored. |
-| `camunda.document.gcp.<id>.prefix`      | No       | Folder-like prefix within the GCS bucket.                           |
-| `camunda.document.default-store-id`     | Yes      | Instance ID of the store to use as the default.                     |
+| Property                                | Required | Description                                                                                                                                                                 |
+| --------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `camunda.document.gcp.<id>.bucket-name` | Yes      | Name of the Google Cloud Storage bucket where documents are stored.                                                                                                         |
+| `camunda.document.gcp.<id>.prefix`      | No       | Folder-like prefix within the GCS bucket. Defaults to `temp/` when unset. The value is used as written, with no separator appended, so a prefix isn't necessarily a folder. |
+| `camunda.document.default-store-id`     | Yes      | Instance ID of the store to use as the default.                                                                                                                             |
 
 <details>
 <summary>Deprecated: legacy environment variable equivalents</summary>

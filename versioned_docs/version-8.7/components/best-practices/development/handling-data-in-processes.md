@@ -1,9 +1,5 @@
 ---
 title: "Handling data in processes"
-tags:
-  - BPMN Data Object
-  - Variable
-  - Serialization
 description: "When using Camunda, you have access to a dynamic map of process variables, which lets you associate data to every single process instance."
 ---
 

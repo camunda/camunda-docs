@@ -1175,9 +1175,11 @@ You can, for example, allow the user to model and configure the following **REST
 
 You can develop connector templates using the [`element template` feature](/components/modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
 
+If your connector provides several operations, define them with the [`steps` and `presets` keys](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets). Users can then find each operation through search and select it when they apply the template, instead of applying the template first and choosing the operation in a dropdown afterwards.
+
 ## Providing and using connector templates
 
-When using [Camunda Hub](/components/hub/workspace/modeler/launch-modeler.md), you can create **Connector templates** [directly within the application](/components/hub/workspace/modeler/element-templates/element-template-generator.md) and share them with your respective organization.
+When using [Camunda Hub](/components/hub/workspace/modeler/index.md), you can create **Connector templates** [directly within the application](/components/hub/workspace/modeler/element-templates/element-template-generator.md) and share them with your respective organization.
 
 When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so Modeler will pick them up.
 
