@@ -9,7 +9,7 @@ import TabItem from "@theme/TabItem";
 
 You can write your process tests in JSON format instead of coding the test logic in Java. The JSON file describes test cases with instructions that align with CPT's assertions and utilities.
 
-CPT's JSON test cases use the same schema as [test scenario files in Play](/components/hub/workspace/modeler/validation/test-scenario-files.md), so you can edit the same files in Play and execute them with CPT.
+CPT's JSON test cases use the same schema as [test files in Test mode](/components/hub/workspace/modeler/validation/test-files.md), so you can edit the same files in Test mode and execute them with CPT.
 
 ## Write a JSON test case
 
@@ -232,7 +232,7 @@ An instruction to assert the evaluation of a decision. See the [assertions docum
   </tr>
   <tr>
     <td>output</td>
-    <td>Expected output of the decision (any JSON type)</td>
+    <td>Expected output of the decision. Can be any JSON type.</td>
     <td>any</td>
     <td>No</td>
     <td></td>
@@ -643,6 +643,12 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>Yes</td>
   </tr>
   <tr>
+    <td>satisfiesExpression</td>
+    <td>A FEEL expression assertion that must evaluate to <code>true</code> for the given variable.</td>
+    <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
     <td>satisfiesJudge</td>
     <td>An LLM judge assertion that evaluates the variable against a semantic expectation.</td>
     <td><a href="#judge-assertion">JudgeAssertion</a></td>
@@ -655,6 +661,19 @@ An instruction to assert a single variable of a process instance. See the [asser
     <td>No</td>
   </tr>
 </tbody></table>
+
+Example:
+
+```json
+{
+  "type": "ASSERT_VARIABLE",
+  "processInstanceSelector": {
+    "processDefinitionId": "MoonExplorationProcess"
+  },
+  "variableName": "mission",
+  "satisfiesExpression": "mission.status = \"completed\" and list contains(mission.astronauts, \"Zee\")"
+}
+```
 
 #### Judge Assertion
 
@@ -683,6 +702,12 @@ An LLM-as-judge assertion that evaluates a variable against a semantic expectati
     <td>customPrompt</td>
     <td>A custom prompt for the judge evaluation. Overrides the configured custom prompt.</td>
     <td>string</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>attachDocuments</td>
+    <td>When true, resolves Camunda document references in the variable value and attaches their content to the judge. Overrides the configured <code>judge.attach-documents</code> setting. To evaluate attached content, use a multimodal-capable model; otherwise, CPT evaluates only the raw variable JSON.</td>
+    <td>boolean</td>
     <td>No</td>
   </tr>
 </tbody></table>
@@ -1586,6 +1611,13 @@ An instruction to mock a child process. See the [utilities documentation](utilit
     <td>No</td>
     <td></td>
   </tr>
+  <tr>
+    <td>versionTag</td>
+    <td>The version tag for the deployed stub process. Required when the call activity uses <code>bindingType="versionTag"</code>.</td>
+    <td>string</td>
+    <td>No</td>
+    <td></td>
+  </tr>
 </tbody></table>
 
 Example:
@@ -1629,8 +1661,15 @@ An instruction to mock a DMN decision. See the [utilities documentation](utiliti
   </tr>
   <tr>
     <td>variables</td>
-    <td>The variables to set as the decision output.</td>
+    <td>The variables to set as the decision output. Deprecated, use <code>decisionOutput</code>.</td>
     <td>object</td>
+    <td>No</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>decisionOutput</td>
+    <td>The decision output to mock. Can be any JSON type.</td>
+    <td>any</td>
     <td>No</td>
     <td></td>
   </tr>
@@ -1642,9 +1681,7 @@ Example:
 {
   "type": "MOCK_DMN_DECISION",
   "decisionDefinitionId": "ChooseRocket",
-  "variables": {
-    "rocket": "Falcon Heavy"
-  }
+  "decisionOutput": "Falcon Heavy"
 }
 ```
 
@@ -2010,6 +2047,13 @@ An instruction to create or update process instance variables. See the [utilitie
     <td><a href="#element-selector">ElementSelector</a></td>
     <td>No</td>
     <td></td>
+  </tr>
+  <tr>
+    <td>createLocalVariables</td>
+    <td>Whether to create variables locally in the scope of the element (requires <code>elementSelector</code>). When <code>true</code>, variables are created in the element's local scope and are not propagated to parent scopes.</td>
+    <td>boolean</td>
+    <td>No</td>
+    <td>false</td>
   </tr>
 </tbody></table>
 

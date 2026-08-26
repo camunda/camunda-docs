@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type ProcessDefinitionIdFilterProperty =
-  | ProcessDefinitionIdExactMatch
-  | AdvancedProcessDefinitionIdFilter;
+  ProcessDefinitionIdExactMatch | AdvancedProcessDefinitionIdFilter;
 ```
 
 ProcessDefinitionId property with full advanced search capabilities.

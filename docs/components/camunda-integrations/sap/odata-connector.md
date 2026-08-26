@@ -42,7 +42,7 @@ WebIDEUsage: odata_gen
 ```
 
 :::info
-The SAP OData connector currently supports only destination authentication types suitable for straight-through (machine-to-machine) processing — that is, scenarios without user tasks in the execution path.
+The SAP OData connector currently supports only destination authentication types suitable for straight-through (machine-to-machine) processing: scenarios without user tasks in the execution path.
 
 Use `BasicAuthentication` or any `OAuth2`-based mechanism.
 
@@ -84,7 +84,7 @@ Follow these steps:
    - `8.5.1` is the OData connector in version `1` for Camunda 8 SaaS version `8.5`
 
 2. Download the matching `mtad.yaml.example` from [the OData connector's GitHub release page](https://github.com/camunda/sap-odata-connector/releases). Adjust the values for the credentials (`client ID`, client secret, etc.) to match those of the API client of the targeted Camunda 8 SaaS environment and rename it to `mtad.yaml`.
-3. Customize the names of the SAP BTP Destination and Connectivity instances as needed—both will be automatically created during deployment. If instances with the same names already exist in your subaccount, they will be reused.
+3. Customize the names of the SAP BTP Destination and Connectivity instances as needed. Both will be automatically created during deployment. If instances with the same names already exist in your subaccount, they will be reused.
 4. Download the connector template from the [OData connector's GitHub release page](https://github.com/camunda/sap-odata-connector/releases).
 
 ### Deploying to SAP BTP
@@ -109,7 +109,7 @@ Application "sap-odata-connector" started and available at "some.url.hana.ondema
 
 ### Deployment in Camunda 8 SaaS
 
-- If you are using Web Modeler, [import the SAP OData connector element](/components/connectors/manage-connector-templates.md#importing-existing-connector-templates) you downloaded in the earlier step to use it in your process design.
+- If you are using Camunda Hub, [import the SAP OData connector element](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#importing-an-existing-element-template) you downloaded in the earlier step to use it in your process design.
 
 ![sample BPMN diagram with SAP OData connector](./img/sap-odata-connector-task-in-model.png)
 

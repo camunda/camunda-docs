@@ -1,7 +1,7 @@
 ---
 id: desktop-modeler-dmn
 title: DMN in Modeler
-description: "Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models, with modeling starting in the Decision Requirements Diagram (DRD) view."
+description: "Camunda Desktop and Camunda Hub both offer the same Modeling experience for DMN 1.3 models, with modeling starting in the Decision Requirements Diagram (DRD) view."
 ---
 
 Decision Model and Notation (DMN) is a modeling approach owned by an institution called the Object Management Group ([OMG](https://www.omg.org/)), which also operates worldwide standards for [BPMN](/components/modeler/bpmn/automating-a-process-using-bpmn.md).
@@ -12,7 +12,7 @@ In [DMN](/components/modeler/dmn/dmn.md), decisions are modeled and executed usi
 
 ![Start Modeling](assets/desktop-modeler-dmn/main.png)
 
-Camunda Desktop and Web Modeler both offer the same Modeling experience for DMN 1.3 models: Modeling starts in the Decision Requirements Diagram (DRD) view. From there, you can add DMN elements from the palette on the left side by dragging and dropping them onto the diagram canvas.
+Camunda Desktop and Camunda Hub both offer the same Modeling experience for DMN 1.3 models: Modeling starts in the Decision Requirements Diagram (DRD) view. From there, you can add DMN elements from the palette on the left side by dragging and dropping them onto the diagram canvas.
 
 Alternatively, you can add new elements by using the context menu that appears when you select an element in the diagram. To change the type of an element, click on the element and select the **Change element** menu icon. Use the properties panel on the right side to change the name or ID of the DMN diagram.
 

@@ -8,7 +8,6 @@ keywords: ["document handling", "document storage configuration"]
 Helm offers external cloud file bucket storage options (recommended for production use when deploying with Helm) and in-memory storage (not suitable for production use):
 
 - By using **external cloud file bucket storage options**, documents can be stored in a secure, and scalable way. Buckets are integrated per cluster to ensure proper isolation and environment-specific management. The following file bucket storage options are supported:
-
   - [**Google Cloud Platform (GCP)**](https://cloud.google.com/storage)
   - [**AWS S3**](https://aws.amazon.com/s3/).
 
@@ -30,6 +29,10 @@ global:
             aws:
                 ## @param global.documentStore.type.aws.enabled Enable AWS document store configuration.
                 enabled: false
+                ## @extra global.documentStore.type.aws.irsa configuration for AWS IAM role authentication, supporting both IRSA (IAM Roles for Service Accounts) and EKS Pod Identity.
+                irsa:
+                  ## @param global.documentStore.type.aws.irsa.enabled if true, no static AWS credentials are injected into pods, so the AWS SDK resolves credentials through its default provider chain; this supports both IRSA and EKS Pod Identity. If false (default), credentials are required via existingSecret or accessKeyId/secretAccessKey configuration.
+                  enabled: false
                 ## @param global.documentStore.type.aws.storeId Custom prefix for AWS. Default will generate env vars containing 'storeId' such as DOCUMENT_STORE_AWS_CLASS.
                 storeId: "AWS"
                 ## @param global.documentStore.type.aws.region AWS region for the S3 bucket. (example: us-east-1)

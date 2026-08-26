@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type AuditLogActorTypeFilterProperty =
-  | AuditLogActorTypeExactMatch
-  | AdvancedActorTypeFilter;
+  AuditLogActorTypeExactMatch | AdvancedActorTypeFilter;
 ```
 
 AuditLogActorTypeEnum property with full advanced search capabilities.

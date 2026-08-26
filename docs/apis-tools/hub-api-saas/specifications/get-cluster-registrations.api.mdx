@@ -1,0 +1,439 @@
+---
+id: get-cluster-registrations
+title: "Get all cluster registrations"
+description: "Returns all cluster registrations."
+sidebar_label: "Get all cluster registrations"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/hub-api-saas/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Get all cluster registrations"}
+></Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/clusters"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Returns all cluster registrations.
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The cluster registrations were retrieved successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["items"],
+            properties: {
+              items: {
+                description: "The list of clusters.",
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "uuid",
+                    "name",
+                    "tags",
+                    "customProperties",
+                    "namespace",
+                    "status",
+                    "generation",
+                    "type",
+                    "apps",
+                    "discoveredClusterProperties",
+                    "license",
+                  ],
+                  properties: {
+                    uuid: {
+                      description: "The unique identifier of the cluster.",
+                      type: "string",
+                    },
+                    name: {
+                      description: "The name of the cluster.",
+                      type: "string",
+                    },
+                    tags: {
+                      description: "The tags associated with the cluster.",
+                      type: "array",
+                      items: { type: "string" },
+                    },
+                    customProperties: {
+                      description: "The custom properties of the cluster.",
+                      type: "array",
+                      items: {
+                        type: "object",
+                        required: ["description", "links"],
+                        properties: {
+                          description: {
+                            description:
+                              "The description of the custom property.",
+                            type: "string",
+                          },
+                          links: {
+                            description:
+                              "The links associated with the custom property.",
+                            type: "array",
+                            items: {
+                              type: "object",
+                              required: ["name", "url"],
+                              properties: {
+                                name: {
+                                  description: "The name of the link.",
+                                  type: "string",
+                                },
+                                url: {
+                                  description: "The URL of the link.",
+                                  type: "string",
+                                },
+                              },
+                              title: "ClusterCustomPropertyLink",
+                            },
+                          },
+                        },
+                        title: "ClusterCustomProperty",
+                      },
+                    },
+                    namespace: {
+                      description: "The namespace of the cluster.",
+                      type: "string",
+                      nullable: true,
+                    },
+                    status: {
+                      description: "The status of the cluster.",
+                      type: "string",
+                    },
+                    generation: {
+                      description: "The version of the cluster.",
+                      type: "string",
+                    },
+                    type: {
+                      description: "The type of the cluster.",
+                      type: "string",
+                    },
+                    apps: {
+                      description: "The applications running in the cluster.",
+                      type: "array",
+                      items: {
+                        type: "object",
+                        required: [
+                          "type",
+                          "id",
+                          "status",
+                          "url",
+                          "urls",
+                          "generation",
+                          "readiness",
+                        ],
+                        properties: {
+                          type: {
+                            description: "The type of the application.",
+                            type: "string",
+                          },
+                          id: {
+                            description:
+                              "The unique identifier of the application.",
+                            type: "string",
+                          },
+                          status: {
+                            description: "The status of the application.",
+                            type: "string",
+                          },
+                          url: {
+                            description: "The web application URL.",
+                            type: "string",
+                            nullable: true,
+                          },
+                          urls: {
+                            description:
+                              "The additional URLs of the application.",
+                            nullable: true,
+                            allOf: [
+                              {
+                                type: "object",
+                                required: ["grpc", "http"],
+                                properties: {
+                                  grpc: {
+                                    description: "The gRPC URL.",
+                                    type: "string",
+                                    nullable: true,
+                                  },
+                                  http: {
+                                    description: "The HTTP/REST URL.",
+                                    type: "string",
+                                    nullable: true,
+                                  },
+                                },
+                                title: "ClusterAppUrls",
+                              },
+                            ],
+                          },
+                          generation: {
+                            description: "The version of the application.",
+                            type: "string",
+                            nullable: true,
+                          },
+                          readiness: {
+                            description:
+                              "The readiness URL of the application.",
+                            type: "string",
+                            nullable: true,
+                          },
+                        },
+                        title: "ClusterApp",
+                      },
+                    },
+                    discoveredClusterProperties: {
+                      description: "The discovered properties of the cluster.",
+                      type: "object",
+                      additionalProperties: { type: "string" },
+                    },
+                    license: {
+                      description: "The license information of the cluster.",
+                      nullable: true,
+                      allOf: [
+                        {
+                          type: "object",
+                          required: [
+                            "validLicense",
+                            "licenseType",
+                            "isCommercial",
+                            "expiresAt",
+                          ],
+                          properties: {
+                            validLicense: {
+                              description: "Whether the license is valid.",
+                              type: "boolean",
+                            },
+                            licenseType: {
+                              description: "The type of the license.",
+                              type: "string",
+                            },
+                            isCommercial: {
+                              description: "Whether the license is commercial.",
+                              type: "boolean",
+                              nullable: true,
+                            },
+                            expiresAt: {
+                              description: "The expiry date of the license.",
+                              type: "string",
+                              format: "date-time",
+                              nullable: true,
+                            },
+                          },
+                          title: "ClusterLicense",
+                        },
+                      ],
+                    },
+                  },
+                  title: "ClusterResult",
+                },
+              },
+            },
+            title: "ClusterListResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

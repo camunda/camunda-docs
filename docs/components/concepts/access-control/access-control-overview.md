@@ -126,7 +126,7 @@ Example request using a token:
 
 ```shell
 curl --header "Authorization: Bearer ${ACCESS_TOKEN}" \
-     ${BASE_URL}/v1/process-instances/search
+     ${BASE_URL}/v2/process-instances/search
 ```
 
 ### Token expiration

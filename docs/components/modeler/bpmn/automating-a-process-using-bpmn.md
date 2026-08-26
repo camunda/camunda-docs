@@ -14,7 +14,7 @@ Processes are the algorithms that determine how an organization runs based on in
 
 Take the following example where we've outlined a process in a BPMN diagram to send an email. Don't worry too much about the symbols as we'll get to that shortly. For now, recognize the start and end of the process, comprised of entering a message, and sending the email.
 
-![sending email bmmn diagram](./img/simple-bpmn-process.png)
+![sending email bpmn diagram](./img/simple-bpmn-process.png)
 
 BPMN offers control and visibility over your critical business processes in a way that is understandable for both experienced engineers and business stakeholders. The workflow engine orchestrates processes that span across a wide variety of elements, including APIs, microservices, business decisions and rules, human work, IoT devices, RPA bots, and more.
 
@@ -27,8 +27,11 @@ To get started, ensure you’ve [created a Camunda 8 account](/components/hub/or
 
 Once logged in to your Camunda 8 account, take the following steps:
 
-1. Within Modeler, click **Create new > BPMN diagram**.
-2. Right after creating your diagram, you can name it by replacing the **New BPMN Diagram** text with the name of your choice. In this case, we'll name it "Bake a Cake."
+1. Within Camunda Hub, navigate to **Workspaces**, and open your workspace.
+2. In the workspace, click **New project**.
+3. In the project, click **Create new > BPMN diagram**.
+4. In the top navigation, open the menu next to **New BPMN Diagram**, and click **Rename**.
+5. Name the diagram "Bake a Cake".
 
 ### BPMN elements
 
@@ -59,12 +62,12 @@ Take the following steps:
 5. Attach the next gateway once these two tasks have completed to move forward.
 6. Add a user task to bake the cake, and finally a user task to ice the cake.
 7. Add an end event, represented by a bold circle.
-8. No need to save. Web Modeler will autosave every change you make.
+8. No need to save. Camunda Hub will autosave every change you make.
 
 ![completed bpmn diagram](./img/complete-baking-cake-bpmn.png)
 
 :::note
-You can also import a BPMN diagram with Web Modeler. See how to do that [here](/components/hub/workspace/modeler/modeling/import-diagram.md).
+You can also import a BPMN diagram with Camunda Hub. See how to do that [here](/components/hub/workspace/modeler/modeling/import-diagram.md).
 :::
 
 ## Execute your process diagram

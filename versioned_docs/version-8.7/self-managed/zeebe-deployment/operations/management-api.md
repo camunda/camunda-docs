@@ -81,6 +81,14 @@ POST actuator/exporting/pause?soft=true
 
 When all partitions soft pause exporting, the response contains `"status": 204`. If the request fails, some partitions may have soft paused exporting. Therefore, either retry until success or revert the partial soft pause by resuming the export.
 
+:::warning
+Broker disk usage grows throughout the soft-pause window because log compaction is blocked. Keep the window as short as possible and resume exporting promptly once the backup completes.
+
+Avoid restarting brokers while soft pause is active. After a restart, exporters resume from the last persisted position (before soft-pausing started) and re-export all records from the soft-pause window. Recovery time is proportional to how long soft pause was active.
+
+For a real-world example of disk growth and recovery, see the [full-disk chaos day report](https://camunda.github.io/zeebe-chaos/2026/06/18/Full-disk-due-to-soft-pause-exporters).
+:::
+
 ## Exporters API
 
 The Exporters API allows for enabling, disabling or deleting configured exporters. By default, all configured exporters are enabled.

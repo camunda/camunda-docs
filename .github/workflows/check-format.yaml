@@ -6,13 +6,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
       - name: Install Dependencies
         run: npm ci
       - name: Verify format with Vale
-        uses: errata-ai/vale-action@2.1.2
+        uses: errata-ai/vale-action@v3.0.0
         with:
           filter_mode: added
           reporter: github-pr-review

@@ -288,6 +288,8 @@ A single `@OutboundConnector` annotated connector (**(1)**) can declare one or m
 
 Every declared operation (**(3)**) can accept one or multiple inputs as parameters.
 
+Describe each operation with the `name`, `description`, and `keywords` attributes of `@Operation`. The element template generator turns them into the template's [`steps` and `presets`](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets), so users can find the operation by searching for the action it performs and select it directly when they apply the template. Once a connector declares more than one operation, every operation must declare at least one keyword, or template generation fails.
+
 Using the `@Variable` annotation, a primitive type has to specify the variable name for example `input` as shown in (**(4)**). Binding to a complex type will use the property names (`a`, `b`) of the type for variable mapping (**(5)**).
 
 Types can use [Jakarta Validation](https://beanvalidation.org/) annotations. Validation will be applied during binding.

@@ -1,10 +1,12 @@
 ---
 id: job-workers
 title: "Job workers"
-description: "Learn more about job workers, a service that can perform a particular task in a process. When this task needs to be performed, this is represented by a job."
+description: "Learn more about job workers, a service that can perform a particular task in a process. Each time that task needs to be performed, it is represented by a job."
 ---
 
-A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time such a task needs to be performed, this is represented by a [job](/reference/glossary.md#job).
+A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time that task needs to be performed, it is represented by a [job](/reference/glossary.md#job).
+
+For example, [AI agent](/reference/glossary.md#ai-agent) tool calls use this mechanism. Each activity inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) acts as a tool and is executed as a job, like any other task in the process.
 
 A job has the following properties:
 
@@ -175,7 +177,7 @@ Two streams are considered logically equivalent if they would both activate the 
 
 :::
 
-On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job times out, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and pushed to it. As the job makes it way back to the gateway which owns this stream, a random client associated with it is picked, and the job is forwarded to it.
+On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and pushed to it. As the job makes its way back to the gateway that owns this stream, a random client associated with it is picked, and the job is forwarded to it.
 
 :::note
 The RNG used to randomly pick streams and clients provides a good uniform distribution for the same underlying set, which is a cheap way of evenly distributing the load _as long as the stream set remains stable_.
@@ -184,6 +186,39 @@ The RNG used to randomly pick streams and clients provides a good uniform distri
 To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo" against a cluster consisting of a single gateway and a single broker. It receives some jobs, and when it closes, one job that was pushed asynchronously is returned to the broker:
 
 ![Sample Sequence Diagram](assets/job-push-sequence.png)
+
+### How job streaming and polling deliver jobs
+
+Job streaming and polling are separate delivery paths, not two ways of draining the same queue.
+
+Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and long polling (via the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. A pushed job bypasses the backlog only on its first delivery attempt: as soon as the job becomes `ACTIVATABLE`, Zeebe pushes it directly to a registered stream for its type, if one exists. If the push fails or the job times out before completion, the job returns to the `ACTIVATABLE` backlog like any other job.
+
+The following diagram shows both delivery paths, from the broker through the gateway to the worker’s job capacity:
+
+```mermaid
+flowchart TB
+    created["Job becomes activate-able"]
+
+    subgraph broker["Broker"]
+        created
+        backlog[["ACTIVATABLE backlog"]]
+    end
+
+    subgraph gateway["Gateway"]
+        pushFwd["Push forwarding"]
+        pollFwd["Poll forwarding<br/>(ActivateJobs)"]
+    end
+
+    subgraph worker["Worker"]
+        capacity(("Job capacity<br/>(worker-defined limit)"))
+    end
+
+    created -- "no stream registered" --> backlog
+    created -- "stream registered: pushed immediately" --> pushFwd
+    pushFwd --> capacity
+    backlog -- "drained only by polling" --> pollFwd
+    pollFwd --> capacity
+```
 
 ### Backpressure
 
@@ -255,6 +290,67 @@ This returns the current view of the registered job streams, where `client` refe
 For example, if jobs of a given type are not activated, but a worker is opened for this type, you can verify first if it exists in one of the gateways as a client stream. Once you've found it, grab its ID, and verify that you can find it as a consumer of a remote stream on each broker.
 
 If it's not present in the gateway as a client stream, restart your worker. If it's not present as a consumer in one of the brokers, this indicates a bug. As a workaround, restart your gateway, which will cause some interruption in your service, but will force all streams for this gateway to be recreated properly.
+
+## Job prioritization
+
+Use job prioritization when you have mixed-urgency workloads and want time-sensitive jobs to be activated ahead of lower-priority ones.
+
+Camunda supports job prioritization for pull-based job activation. Job priority affects the order in which jobs are activated for workers. It does not change retries, failures, or completion semantics.
+
+Priority ordering is automatic. No worker-level flag or configuration is required — once a job has a priority set, Zeebe activates higher-priority jobs first when a job pull method is used.
+
+You can define job priority:
+
+- On the process as a default.
+- On supported job-creating tasks as an override, including service tasks, send tasks, and script or business rule tasks implemented as job workers.
+
+### Process-level priority
+
+To set a default priority for all jobs created by a process, add `zeebe:jobPriorityDefinition` to the process `extensionElements`:
+
+```xml
+<bpmn:process id="my-process" isExecutable="true">
+  <bpmn:extensionElements>
+    <zeebe:jobPriorityDefinition priority="42" />
+  </bpmn:extensionElements>
+  ...
+</bpmn:process>
+```
+
+A task-level priority definition overrides this process-level default.
+
+### Task-level priority
+
+Job priority is enforced per partition, not globally across the cluster. Within a partition, higher-priority jobs are activated before lower-priority ones. Within the same priority level, jobs activate in FIFO order. If you don't set any priorities, standard FIFO behavior applies throughout.
+
+The default priority is 0.
+
+Be aware that low-priority jobs can starve if workers are consistently occupied by higher-priority work. Camunda doesn't provide starvation mitigation, fairness guarantees, or priority aging. If starvation becomes a problem, increase worker capacity or revise your priority assignments.
+
+Priority values can be static integers or FEEL expressions. FEEL expressions are evaluated when the job is created, and the resulting integer is stored on the job.
+
+Priority accepts any signed 32-bit integer. The engine does not enforce a fixed upper or lower bound such as `0-99`.
+
+Jobs created before version 8.10 do not have a stored priority value. For job execution, Camunda treats them as having the default priority of 0.
+
+:::warning
+If you use job APIs that filter or sort by priority, pre-8.10 jobs are excluded from results because no priority value is stored for them. Review any priority-based queries before upgrading.
+:::
+
+### Validation and runtime failure behavior
+
+Invalid FEEL expressions are handled differently depending on when they fail:
+
+- If the expression is invalid at deployment time, BPMN deployment fails and the process is not deployed.
+- If the expression fails at runtime, for example because a referenced variable is missing, Camunda raises an incident and the job is not created.
+
+To recover, provide the missing variable value and resolve the incident manually in Operate.
+
+### Job streaming limitation
+
+Job streaming activates jobs as they are created and ignores priorities.
+
+If you use job pulling and job streaming together for the same job type, this negates the benefits of job prioritization.
 
 ## Tags
 

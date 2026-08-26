@@ -47,16 +47,16 @@ Finally, the REST server is only serving requests _if, and only if, the embedded
 
 The `server` configuration allows you to configure the main REST server. Below are a few common ones, but you can find a more exhaustive list [in the official Spring documentation](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.server).
 
-| Field | Description                                                                                                               | Example value |
-| ----- | ------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host  | Sets the host the REST server binds to. This setting can also be overridden using the environment variable `SERVER_HOST`. | 0.0.0.0       |
-| port  | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`. | 8080          |
+| Field   | Description                                                                                                                     | Example value |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| address | Sets the address the REST server binds to. This setting can also be overridden using the environment variable `SERVER_ADDRESS`. | 0.0.0.0       |
+| port    | Sets the port the REST server binds to. This setting can also be overridden using the environment variable `SERVER_PORT`.       | 8080          |
 
 #### server.compression
 
-| Field   | Description                                                                                                                                                                       | Example value |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESION_ENABLED`. | false         |
+| Field   | Description                                                                                                                                                                        | Example value |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enabled | If true, enables compression of responses for the Orchestration Cluster REST API. This setting can also be overridden using the environment variable `SERVER_COMPRESSION_ENABLED`. | false         |
 
 #### server.ssl
 
@@ -72,7 +72,7 @@ Allows you to configure the SSL security for the REST server.
 
 ```yaml
 server:
-  host: 0.0.0.0
+  address: 0.0.0.0
   port: 8080
   compression:
     enabled: true
@@ -101,7 +101,7 @@ The `management.server` configuration allows you to configure the management ser
 
 | Field     | Description                                                                                                                                                                                                                                                                           | Example value |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host      | Sets the host the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_HOST`.                                                                                                                                            | 0.0.0.0       |
+| address   | Sets the address the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_ADDRESS`.                                                                                                                                      | 0.0.0.0       |
 | port      | Sets the port the management server binds to. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_PORT`.                                                                                                                                            | 9600          |
 | base-path | The context path prefix for all management endpoints. For example, if you configure `/zeebe`, your actuator endpoints will be at `http://localhost:9600/zeebe/actuator/configprops`. This setting can also be overridden using the environment variable `MANAGEMENT_SERVER_BASEPATH`. | `/`           |
 
@@ -109,7 +109,7 @@ The `management.server` configuration allows you to configure the management ser
 
 ```yaml
 management.server:
-  host: 0.0.0.0
+  address: 0.0.0.0
   port: 9600
   base-path: /
 ```
@@ -130,6 +130,23 @@ broker:
     enable: false
 ```
 
+### camunda.cluster.network
+
+This section contains the unified network host setting introduced in Camunda 8.8.
+
+| Field | Description                                                                                                                                                                                                                                | Example value |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| host  | Controls the default host the broker should bind to. Can be overwritten on a per binding basis for client, management, and replication. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_NETWORK_HOST`. | 0.0.0.0       |
+
+#### YAML snippet
+
+```yaml
+camunda:
+  cluster:
+    network:
+      host: 0.0.0.0
+```
+
 ### zeebe.broker.network
 
 This section contains the network configuration. Particularly, it allows to configure the hosts and ports the broker should bind to. The broker exposes two sockets:
@@ -139,7 +156,6 @@ This section contains the network configuration. Particularly, it allows to conf
 
 | Field               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Example Value |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| host                | Controls the default host the broker should bind to. Can be overwritten on a per binding basis for client, management and replication. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_HOST`.                                                                                                                                                                                                                                      | 0.0.0.0       |
 | advertisedHost      | Controls the advertised host (the contact point advertised to other brokers); if omitted defaults to the host. This is particularly useful if your broker stands behind a proxy. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_ADVERTISEDHOST`.                                                                                                                                                                                  | 0.0.0.0       |
 | portOffset          | If a port offset is set it will be added to all ports specified in the config or the default values. This is a shortcut to not always specifying every port. The offset will be added to the second last position of the port, as Zeebe requires multiple ports. As example a portOffset of 5 will increment all ports by 50, i.e. 26500 will become 26550 and so on. This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_PORTOFFSET`. | 0             |
 | maxMessageSize      | Sets the maximum size of the incoming and outgoing messages (i.e. commands and events). This setting can also be overridden using the environment variable `ZEEBE_BROKER_NETWORK_MAXMESSAGESIZE`.                                                                                                                                                                                                                                                                           | 4MB           |
@@ -150,7 +166,6 @@ This section contains the network configuration. Particularly, it allows to conf
 
 ```yaml
 network:
-  host: 0.0.0.0
   advertisedHost: 0.0.0.0
   portOffset: 0
   maxMessageSize: 4MB
@@ -219,78 +234,85 @@ internalApi:
   advertisedPort: 25602
 ```
 
-### zeebe.broker.data
+### camunda.data
 
-This section allows to configure Zeebe's data storage. Data is stored in "partition folders". A partition folder has the following structure:
-
-```
-partitions
-└── 1              (root partition folder)
-    ├── 1.log
-    ├── 2.log
-    └── snapshots
-        └── <snapshot-id>
-                    └── xx.sst
-    └── runtime
-        └── yy.sst
-```
-
-| Field            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| directory        | Specify the directory in which data is stored. This setting can also be overridden using the environment variable ZEEBE_BROKER_DATA_DIRECTORY.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | data          |
-| runtimeDirectory | Specify the directory in which runtime is stored. By default runtime is stored in `directory` for data. If runtimeDirectory is configured, then the configured directory will be used. It will have a subdirectory for each partition to store its runtime. There is no need to store runtime in a persistent storage. This configuration allows to split runtime to another disk to optimize for performance and disk usage. Note: If runtime is another disk than the data directory, files need to be copied to data directory while taking snapshot. This may impact disk i/o or performance during snapshotting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_RUNTIMEDIRECTORY`. | null          |
-| logSegmentSize   | The size of data log segment files. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_LOGSEGMENTSIZE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 128MB         |
-| snapshotPeriod   | How often we take snapshots of streams (time unit). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_SNAPSHOTPERIOD`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5m            |
+| Field           | Description                                                                                                                                             | Example Value |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| snapshot-period | How often snapshots of streams are taken (time unit). This setting can also be overridden using the environment variable `CAMUNDA_DATA_SNAPSHOTPERIOD`. | 5m            |
 
 #### YAML snippet
 
 ```yaml
-data:
-  directory: data
-  runtimeDirectory: null
-  logSegmentSize: 128MB
-  snapshotPeriod: 5m
+camunda:
+  data:
+    snapshot-period: 5m
 ```
 
-### zeebe.broker.data.disk
+### camunda.data.primary-storage
 
-| Field              | Description                                                                                                                                                                                                                                                                                                                                  | Example Value |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enableMonitoring   | Configure disk monitoring to prevent getting into a non-recoverable state due to out of disk space. When monitoring is enabled, the broker rejects commands and pause replication when the required freeSpace is not available. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_ENABLEMONITORING` | true          |
-| monitoringInterval | Sets the interval at which the disk usage is monitored. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_MONITORINGINTERVAL`                                                                                                                                                                       | 1s            |
+This section allows you to configure Zeebe's primary data storage. Data is stored in partition folders.
+
+| Field                      | Description                                                                                                                                                                                                                                                                                                                                                             | Example Value |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| directory                  | Specify the directory in which data is stored. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_DIRECTORY`.                                                                                                                                                                                                              | data          |
+| runtime-directory          | Specify the directory in which runtime is stored. By default, runtime is stored in `directory` for data. If `runtime-directory` is configured, then the configured directory is used. It has a subdirectory for each partition to store its runtime. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_RUNTIMEDIRECTORY`. | null          |
+| logstream.log-segment-size | The size of data log segment files. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_LOGSTREAM_LOGSEGMENTSIZE`.                                                                                                                                                                                                          | 128MB         |
 
 #### YAML snippet
 
 ```yaml
-disk:
-  enableMonitoring: true
-  monitoringInterval: 1s
+camunda:
+  data:
+    primary-storage:
+      directory: data
+      runtime-directory: null
+      logstream:
+        log-segment-size: 128MB
 ```
 
-### zeebe.broker.data.disk.freeSpace
+### camunda.data.primary-storage.disk
 
-| Field       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Example Value |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| processing  | When the free space available is less than this value, this broker rejects all client commands and pause processing. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_FREESPACE_PROCESSING`                                                                                                                                                                                                                                                                                        | 2GB           |
-| replication | When the free space available is less than this value, broker stops receiving replicated events. This value must be less than freeSpace.processing. It is recommended to configure free space large enough for at least one log segment and one snapshot. This is because a partition needs enough space to take a new snapshot to be able to compact the log segments to make disk space available again. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_DISK_FREESPACE_REPLICATION` | 1GB           |
+| Field               | Description                                                                                                                                                                                                                                                                                                                                                        | Example Value |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| monitoring-enabled  | Configure disk monitoring to prevent getting into a non-recoverable state due to running out of disk space. When monitoring is enabled, the broker rejects commands and pauses replication when the required free space is not available. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_DISK_MONITORINGENABLED`. | true          |
+| monitoring-interval | Sets the interval at which disk usage is monitored. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_DISK_MONITORINGINTERVAL`.                                                                                                                                                                                      | 1s            |
 
 #### YAML snippet
 
 ```yaml
-disk:
-  freeSpace:
-    processing: 2GB
-    replication: 1GB
+camunda:
+  data:
+    primary-storage:
+      disk:
+        monitoring-enabled: true
+        monitoring-interval: 1s
 ```
 
-### zeebe.broker.data.backup
+### camunda.data.primary-storage.disk.free-space
+
+| Field       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Example Value |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| processing  | When the available free space is less than this value, the broker rejects all client commands and pauses processing. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_DISK_FREESPACE_PROCESSING`.                                                                                                                                                                                                                                                                                  | 2GB           |
+| replication | When the available free space is less than this value, the broker stops receiving replicated events. This value must be less than `free-space.processing`. It is recommended to configure enough free space for at least one log segment and one snapshot. This is because a partition needs enough space to take a new snapshot so it can compact log segments and make disk space available again. This setting can also be overridden using the environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_DISK_FREESPACE_REPLICATION`. | 1GB           |
+
+#### YAML snippet
+
+```yaml
+camunda:
+  data:
+    primary-storage:
+      disk:
+        free-space:
+          processing: 2GB
+          replication: 1GB
+```
+
+### camunda.data.backup
 
 Configure backup store.
 
 :::note
-
 Use the same configuration on all brokers of this cluster.
-
 :::
 
 :::caution
@@ -300,29 +322,29 @@ This is especially relevant if you were using GCS through the S3 compatibility m
 Even when the underlying storage bucket is the same, backups from one are not compatible with the other.
 :::
 
-| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Example Value |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE, FILESYSTEM]. Default value is NONE. When NONE, no backup store is configured and no backup will be taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). Use FILESYSTEM to store backups directly via the filesystem to a particular folder. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_STORE`. | NONE          |
+| Field | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Example value |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| store | Set the backup store type. Supported values are [NONE, S3, GCS, AZURE, FILESYSTEM]. Default value is NONE. When NONE, no backup store is configured and no backup is taken. Use S3 to use any S3 compatible storage, including, but not limited to, Amazon S3. Use GCS to use [Google Cloud Storage](https://cloud.google.com/storage/). Use AZURE to employ [Azure Cloud Storage](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction). Use FILESYSTEM to store backups directly via the filesystem to a particular folder. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_STORE`. | NONE          |
 
 #### YAML snippet
 
 ```yaml
-backup:
-  store: NONE
+camunda:
+  data:
+    backup:
+      store: NONE
 ```
 
-### zeebe.broker.data.backup.s3
+### camunda.data.backup.s3
 
-Configure the following if store is set to s3.
+Configure the following if `store` is set to `S3`.
 
 :::note
-
 You can use any S3 compatible storage, including, but not limited to, Amazon S3.
-
 :::
 
 :::note Backup encryption
-Zeebe does not support backup encryption natively, but it _can_ use encrypted S3 buckets. For AWS S3, this means [enabling default bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
+Zeebe does not support backup encryption natively, but it can use encrypted S3 buckets. For AWS S3, this means [enabling default bucket encryption](https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html).
 
 Using default bucket encryption gives you control over the encryption keys and algorithms while being completely transparent with Zeebe.
 
@@ -330,7 +352,6 @@ Combined with TLS between Zeebe and the S3 API, backups are fully encrypted in t
 :::
 
 :::note Backup compression
-
 Backups can be large depending on your usage of Zeebe. To reduce S3 storage costs and upload times, you can enable backup compression.
 
 Zeebe compresses backup data immediately before uploading to S3 and buffers the compressed files in a temporary directory. Compression and buffering of compressed files can have a negative effect if Zeebe is heavily resource constrained.
@@ -338,46 +359,48 @@ Zeebe compresses backup data immediately before uploading to S3 and buffers the 
 You can enable compression by specifying a compression algorithm to use. We recommend using [zstd](https://github.com/facebook/zstd) as it provides a good trade-off between compression ratio and resource usage.
 
 More compression algorithms are available; check [commons-compress](https://commons.apache.org/proper/commons-compress/) for a full list.
-
 :::
 
-| Field                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Example Value |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| bucketName                  | Name of the bucket where the backup will be stored. The bucket must be already created. The bucket must not be shared with other zeebe clusters. bucketName must not be empty. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BUCKETNAME`.                                                                                                                                                                                                                                                           |               |
-| endpoint                    | Configure URL endpoint for the store. If no endpoint is provided, it will be determined based on the configured region. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ENDPOINT`.                                                                                                                                                                                                                                                                                                                    |               |
-| region                      | Configure region. If no region is provided it will be determined as documented by your S3 compatible storage provider. If you use Amazon S3, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/region-selection.html#automatically-determine-the-aws-region-from-the-environment). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_REGION`                                                                                                        |               |
-| accessKey                   | Configure access credentials. If either accessKey or secretKey is not provided, it will be determined as [documented](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html#credentials-chain), not based on your S3 compatible storage provider. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_ACCESSKEY`.                                                                                                                                                              |               |
-| secretKey                   | This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SECRETKEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                           |               |
-| apiCallTimeout              | Configure a maximum duration for all S3 client API calls. Lower values will ensure that failed or slow API calls don't block other backups but may increase the risk that backups can't be stored if uploading parts of the backup takes longer than the configured timeout. Amazon S3 users can refer [here](https://github.com/aws/aws-sdk-java-v2/blob/master/docs/BestPractices.md#utilize-timeout-configurations). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_APICALLTIMEOUT`.              | PT180S        |
-| forcePathStyleAccess        | When enabled, forces the s3 client to use path-style access. By default, the client will automatically choose between path-style and virtual-hosted-style. Should only be enabled if the s3 compatible storage cannot support virtual-hosted-style. Refer to your S3 compatible storage provider or the [Amazon S3 docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html) for more information. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`. | false         |
-| compression                 | When set to an algorithm such as 'zstd', enables compression of backup contents. When not set or set to 'none', backup content is not compressed. Enabling compression reduces the required storage space for backups in S3 but also increases the impact on CPU and disk utilization while taking a backup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_COMPRESSION`                                                                                                                             | none          |
-| basePath                    | When set, all objects in the bucket will use this prefix. Must be non-empty and not start or end with '/'. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_BASEPATH`.                                                                                                                                                                                                                            |
-| maxConcurrentConnections    | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads as to avoid connection timeouts when uploading backups with large/many files. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS`.                                                                                                                                                                                                                |
-| connectionAquisitionTimeout | Timeout for acquiring an already-established connection from a connection pool to a remote service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_CONNECTIONAQUISITIONTIMEOUT`.                                                                                                                                                                                                                                                                                                                     |
-| supportLegacyMd5            | Enables the AWS provided `LegacyMd5Plugin` to extend backwards compatibility of the client. Useful when using an S3-compatible object storage as your backup store that is not up to date with latest AWS SDK guidelines. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_S3_SUPPORTLEGACYMD5`.                                                                                                                                                                                                          | false         |
+| Field                          | Description                                                                                                                                                                                                                                                                                                                                                                            | Example value |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| bucket-name                    | Name of the bucket where the backup is stored. The bucket must already be created. The bucket must not be shared with other Zeebe clusters. `bucket-name` must not be empty. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_BUCKETNAME`.                                                                                                   |               |
+| endpoint                       | Configure URL endpoint for the store. If no endpoint is provided, it is determined based on the configured region. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_ENDPOINT`.                                                                                                                                                               |               |
+| region                         | Configure region. If no region is provided it is determined as documented by your S3 compatible storage provider. If you use Amazon S3, it is determined as documented by AWS. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_REGION`.                                                                                                     |               |
+| access-key                     | Configure access credentials. If either `access-key` or `secret-key` is not provided, it is determined as documented by AWS, not based on your S3 compatible storage provider. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_ACCESSKEY`.                                                                                                  |               |
+| secret-key                     | This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_SECRETKEY`.                                                                                                                                                                                                                                                                                 |               |
+| api-call-timeout               | Configure a maximum duration for all S3 client API calls. Lower values ensure that failed or slow API calls do not block other backups, but may increase the risk that backups cannot be stored if uploading parts of the backup takes longer than the configured timeout. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_APICALLTIMEOUT`. | PT180S        |
+| force-path-style-access        | When enabled, forces the S3 client to use path-style access. By default, the client automatically chooses between path-style and virtual-hosted-style. This should only be enabled if the S3 compatible storage cannot support virtual-hosted-style. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_FORCEPATHSTYLEACCESS`.                 | false         |
+| compression                    | When set to an algorithm such as `zstd`, enables compression of backup contents. When not set or set to `none`, backup content is not compressed. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_COMPRESSION`.                                                                                                                             | none          |
+| base-path                      | When set, all objects in the bucket use this prefix. Must be non-empty and not start or end with `/`. Useful for using the same bucket for multiple Zeebe clusters. In this case, `base-path` must be unique. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_BASEPATH`.                                                                    |               |
+| max-concurrent-connections     | Maximum number of connections allowed in a connection pool. This is used to restrict the maximum number of concurrent uploads and avoid connection timeouts when uploading backups with large or many files. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_MAXCONCURRENTCONNECTIONS`.                                                     |               |
+| connection-acquisition-timeout | Timeout for acquiring an already-established connection from a connection pool to a remote service. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_CONNECTIONACQUISITIONTIMEOUT`.                                                                                                                                                          |               |
+| support-legacy-md5             | Enables the AWS-provided `LegacyMd5Plugin` to extend backwards compatibility of the client. Useful when using an S3-compatible object storage backup store that is not up to date with the latest AWS SDK guidelines. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_S3_SUPPORTLEGACYMD5`.                                                    | false         |
 
 #### YAML snippet
 
 ```yaml
-backup:
-  store: s3
-  s3:
-    bucketName: null
-    endpoint: null
-    region: null
-    secretKey: null
-    apiCallTimeout: PT180S
-    forcePathStyleAccess: false
-    compression: none
-    basePath: null
-    maxConcurrentConnections:
-    connectionAcquisitionTimeout:
-    supportLegacyMd5: false
+camunda:
+  data:
+    backup:
+      store: s3
+      s3:
+        bucket-name: null
+        endpoint: null
+        region: null
+        access-key: null
+        secret-key: null
+        api-call-timeout: PT180S
+        force-path-style-access: false
+        compression: none
+        base-path: null
+        max-concurrent-connections: null
+        connection-acquisition-timeout: null
+        support-legacy-md5: false
 ```
 
-### zeebe.broker.data.backup.gcs
+### camunda.data.backup.gcs
 
-Configure the following if store is set to GCS.
+Configure the following if `store` is set to `GCS`.
 
 :::note
 The GCS backup strategy utilizes the [Google Cloud Storage REST API](https://cloud.google.com/storage/docs/request-endpoints).
@@ -386,162 +409,147 @@ The GCS backup strategy utilizes the [Google Cloud Storage REST API](https://clo
 :::note Backup encryption
 There are multiple [data encryption options](https://cloud.google.com/storage/docs/encryption), some of which are supported by Zeebe:
 
-- [Default server-side encryption](https://cloud.google.com/storage/docs/encryption/default-keys) is fully supported.
-  This is enabled by default for all GCS buckets.
-- [Customer-managed encryption keys](https://cloud.google.com/storage/docs/encryption/customer-managed-keys) are supported if they are [set as
-  the default key](https://cloud.google.com/storage/docs/encryption/using-customer-managed-keys#set-default-key) for your bucket.
+- [Default server-side encryption](https://cloud.google.com/storage/docs/encryption/default-keys) is fully supported. This is enabled by default for all GCS buckets.
+- [Customer-managed encryption keys](https://cloud.google.com/storage/docs/encryption/customer-managed-keys) are supported if they are [set as the default key](https://cloud.google.com/storage/docs/encryption/using-customer-managed-keys#set-default-key) for your bucket.
 - [Customer-supplied encryption keys](https://cloud.google.com/storage/docs/encryption/customer-supplied-keys) are not supported.
 - [Client-side encryption keys](https://cloud.google.com/storage/docs/encryption/client-side-keys) are not supported.
   :::
 
-| Field      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| bucketName | Name of the bucket where the backup will be stored. The bucket **must already exist**. The bucket must not be shared with other Zeebe clusters unless basePath is also set. Zeebe will check at startup that the specified bucket exists and can be accessed, and log at WARN level if the bucket does not exist. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BUCKETNAME`.                                                                                                                                                  |               |
-| basePath   | When set, all blobs in the bucket will use this prefix. Useful for using the same bucket for multiple Zeebe clusters. In this case, basePath must be unique. Should not start or end with '/' character. Must be non-empty and not consist of only '/' characters. See [Google documentation on naming](https://cloud.google.com/storage/docs/objects#naming). This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_BASEPATH`.                                                                                                       |               |
-| host       | When set, this overrides the host that the GCS client connects to. By default, this is not set because the client can automatically discover the correct host to connect to. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_HOST`                                                                                                                                                                                                                                                                                              |               |
-| auth       | Configures which authentication method is used for connecting to GCS. Can be either 'auto' or 'none'. Choosing 'auto' means that the GCS client uses application default credentials which automatically discovers appropriate credentials from the runtime environment: https://cloud.google.com/docs/authentication/application-default-credentials. Choosing 'none' means that no authentication is attempted which is only applicable for testing with emulated GCS. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_GCS_AUTH`. | auto          |
+| Field       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Example value |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| bucket-name | Name of the bucket where the backup is stored. The bucket must already exist. The bucket must not be shared with other Zeebe clusters unless `base-path` is also set. Zeebe checks at startup that the specified bucket exists and can be accessed, and logs at WARN level if the bucket does not exist. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_GCS_BUCKETNAME`.                                                                             |               |
+| base-path   | When set, all blobs in the bucket use this prefix. Useful for using the same bucket for multiple Zeebe clusters. In this case, `base-path` must be unique. It should not start or end with `/`, must be non-empty, and must not consist only of `/` characters. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_GCS_BASEPATH`.                                                                                                                        |               |
+| host        | When set, this overrides the host that the GCS client connects to. By default, this is not set because the client can automatically discover the correct host to connect to. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_GCS_HOST`.                                                                                                                                                                                                               |               |
+| auth        | Configures which authentication method is used for connecting to GCS. Can be either `auto` or `none`. Choosing `auto` means that the GCS client uses application default credentials which automatically discover appropriate credentials from the runtime environment. Choosing `none` means that no authentication is attempted, which is only applicable for testing with emulated GCS. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_GCS_AUTH`. | auto          |
 
 #### YAML snippet
 
 ```yaml
-backup:
-  store: gcs
-  gcs:
-    bucketName: null
-    basePath: null
-    host: null
-    auth: auto
+camunda:
+  data:
+    backup:
+      store: gcs
+      gcs:
+        bucket-name: null
+        base-path: null
+        host: null
+        auth: auto
 ```
 
-### zeebe.broker.data.backup.azure
+### camunda.data.backup.azure
 
-Configure the following if store is set to Azure.
+Configure the following if `store` is set to `AZURE`.
 
 :::note Backup encryption
 
-- [Default server-side encryption](https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json#about-azure-storage-service-side-encryption) is fully supported, is enabled by default, and can't be switched off.
+- [Default server-side encryption](https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption?toc=%2Fazure%2Fstorage%2Fblobs%2Ftoc.json&bc=%2Fazure%2Fstorage%2Fblobs%2Fbreadcrumb%2Ftoc.json#about-azure-storage-service-side-encryption) is fully supported, is enabled by default, and cannot be switched off.
 - [Customer-managed encryption keys](https://learn.microsoft.com/en-us/azure/storage/common/customer-managed-keys-overview?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) are supported if they are configured in the Azure store.
 - [Customer-provided encryption keys](https://learn.microsoft.com/en-us/azure/storage/blobs/encryption-customer-provided-keys) are not supported.
 - [Client-side encryption keys](https://learn.microsoft.com/en-us/azure/storage/blobs/client-side-encryption?tabs=dotnet) are not supported.
   :::
 
-| Field            | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Example Value |
-| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| endpoint         | Name of the endpoint where the backup will be stored. Sets the blob service endpoint. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_ENDPOINT`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |               |
-| accountName      | Account name used to connect to the service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTNAME`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |               |
-| accountKey       | Account key used to connect to the service. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_ACCOUNTKEY`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |               |
-| connectionString | The [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) to connect to the service. If this is defined, it will override the account name, account key, and endpoint. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_CONNECTIONSTRING`.                                                                                                                                                                                                                                                                                                                                          |               |
-| basePath         | Used to define the container name where the blobs will be saved. This value must not be empty. When `basePath` is set, Zeebe will only create and access objects under this path. This can be any string that is a valid [container name](https://learn.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names), for example the name of your cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_BASEPATH`.                                                                                                                                                                                                                                             |               |
-| createContainer  | Defines if the container is created initially or if an existing one should be used (if set to `true` and the container already exists, this is not recreated). This configuration is `true` by default and should be generally not used unless some authentication key is being used that does not have container level permissions. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_CREATECONTAINER`.                                                                                                                                                                                                                                                                                                                     | `true`        |
-| sasToken.type    | This setting defines the [saas token](https://learn.microsoft.com/en-us/rest/api/storageservices/delegate-access-with-shared-access-signature) to use. These can be of user delegation, service or account type. Note that user delegation and service SAS tokens do not support the creation of containers, therefore `createContainer` configuration will be overridden to `false` if `sasToken.type` is configured either as "delegation" or "service". In this case the user must make sure that the container already exists, or it will lead to a runtime error. The SAS token must be of the following types: "delegation", "service" or "account". This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_TYPE`. |               |
-| sasToken.value   | Specifies the key value of the SAS token. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_AZURE_SASTOKEN_VALUE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |               |
+| Field             | Description                                                                                                                                                                                                                                                                                                                                                                                                                      | Example value |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| endpoint          | Name of the endpoint where the backup is stored. Sets the blob service endpoint. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_ENDPOINT`.                                                                                                                                                                                                                                        |               |
+| account-name      | Account name used to connect to the service. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_ACCOUNTNAME`.                                                                                                                                                                                                                                                                         |               |
+| account-key       | Account key used to connect to the service. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_ACCOUNTKEY`.                                                                                                                                                                                                                                                                           |               |
+| connection-string | The [connection string](https://learn.microsoft.com/en-us/azure/storage/common/storage-configure-connection-string?toc=/azure/storage/blobs/toc.json&bc=/azure/storage/blobs/breadcrumb/toc.json) used to connect to the service. If this is defined, it overrides the account name, account key, and endpoint. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_CONNECTIONSTRING`. |               |
+| base-path         | Used to define the container name where blobs are saved. This value must not be empty. When `base-path` is set, Zeebe only creates and accesses objects under this path. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_BASEPATH`.                                                                                                                                                |               |
+| create-container  | Defines if the container is created initially or if an existing one should be used. If set to `true` and the container already exists, it is not recreated. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_CREATECONTAINER`.                                                                                                                                                      | true          |
+| sas-token.type    | Defines the SAS token type to use. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_SASTOKEN_TYPE`.                                                                                                                                                                                                                                                                                 |               |
+| sas-token.value   | Specifies the value of the SAS token. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_AZURE_SASTOKEN_VALUE`.                                                                                                                                                                                                                                                                             |               |
 
 #### YAML snippet
 
 ```yaml
-backup:
-  store: azure
-  azure:
-    endpoint: null
-    accountName: null
-    accountKey: null
-    connectionString: null
-    basePath: null
-    createContainer: true
-    sasToken:
-      type: null
-      value: null
+camunda:
+  data:
+    backup:
+      store: azure
+      azure:
+        endpoint: null
+        account-name: null
+        account-key: null
+        connection-string: null
+        base-path: null
+        create-container: true
+        sas-token:
+          type: null
+          value: null
 ```
 
-### zeebe.broker.data.backup.filesystem
+### camunda.data.backup.filesystem
 
 To store your backups in the local filesystem, choose the `FILESYSTEM` backup store and specify where to store the backups locally.
 
 :::caution
-Since the durability of the backups are largely dependent on the target file system and underlying storage, it is recommended to use known durable solutions in production, such as S3, GCS, or Azure. To ensure that this can be used properly in production, you must use a POSIX-compliant file system, and at a minimum replicated disks (e.g. RAID configured disks).
+Since the durability of the backups depends largely on the target file system and underlying storage, it is recommended to use known durable solutions in production, such as S3, GCS, or Azure. To ensure this can be used properly in production, you must use a POSIX-compliant file system and, at a minimum, replicated disks (for example, RAID-configured disks).
 :::
 
 :::note Backup encryption
-Zeebe does not support backup encryption natively, but it _can_ use filesystem based encryption. This then is a feature of the filesystem and not Zeebe itself.
+Zeebe does not support backup encryption natively, but it can use filesystem-based encryption. This is a feature of the filesystem and not Zeebe itself.
 :::
 
-| Field    | Description                                                                                                                                                                                                                                                                                 | Example Value      |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| basePath | The base path is used to define the parent directory of all create backups and backup-manifest files. **This directory must exist and be writable by the Zeebe broker**. This setting can also be overridden using the environment variable `ZEEBE_BROKER_DATA_BACKUP_FILESYSTEM_BASEPATH`. | /mnt/backups/zeebe |
+| Field     | Description                                                                                                                                                                                                                                                                         | Example value      |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| base-path | The base path is used to define the parent directory of all created backups and backup-manifest files. This directory must exist and be writable by the Zeebe broker. This setting can also be overridden using the environment variable `CAMUNDA_DATA_BACKUP_FILESYSTEM_BASEPATH`. | /mnt/backups/zeebe |
 
 #### YAML snippet
 
 ```yaml
-zeebe:
-  broker:
-    data:
-      backup:
-        store: FILESYSTEM
-        filesystem:
-          basePath:
+camunda:
+  data:
+    backup:
+      store: filesystem
+      filesystem:
+        base-path: /mnt/backups/zeebe
 ```
 
-### zeebe.broker.cluster
+### camunda.cluster
 
-This section contains all cluster related configurations, to setup a zeebe cluster.
+This section contains cluster-related configuration used to set up a Zeebe cluster.
 
-| Field                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | Example Value                              |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| nodeId               | Specifies the unique ID of this broker node in a cluster. The ID should be between 0 and number of nodes in the cluster (exclusive). This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_NODEID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | 0                                          |
-| partitionsCount      | Controls the number of partitions, which should exist in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_PARTITIONSCOUNT`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 1                                          |
-| replicationFactor    | Controls the replication factor, which defines the count of replicas per partition. The replication factor cannot be greater than the number of nodes in the cluster. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_REPLICATIONFACTOR`.                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1                                          |
-| clusterSize          | Specifies the zeebe cluster size. This value is used to determine which broker is responsible for which partition. This can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERSIZE`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                          |
-| initialContactPoints | Allows to specify a list of known other nodes to connect to on startup. The contact points of the internal network configuration must be specified. The format is [HOST:PORT]. To guarantee the cluster can survive network partitions, all nodes must be specified as initial contact points. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_INITIALCONTACTPOINTS` specifying a comma-separated list of contact points. Default is empty list.                                                                                                                                                                                                                               | [ 192.168.1.22:26502, 192.168.1.32:26502 ] |
-| clusterId            | Unique identifier for cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERID`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | zeebe-cluster-123                          |
-| clusterName          | Allows to specify a name for the cluster. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_CLUSTERNAME`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | zeebe-cluster                              |
-| heartbeatInterval    | Configure heartbeatInterval. The leader sends a heartbeat to a follower every heartbeatInterval. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_HEARTBEATINTERVAL`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 250ms                                      |
-| electionTimeout      | Configure electionTimeout. If a follower does not receive a heartbeat from the leader with in an election timeout, it can start a new leader election. electionTimeout should be greater than configured heartbeatInterval. When the electionTimeout is large, there will be delay in detecting a leader failure. When the electionTimeout is small, it can lead to false positives when detecting leader failures and thus leading to unnecessary leader changes. If the network latency between the nodes is high, it is recommended to have a higher election latency. Note: This is an advanced setting. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_ELECTIONTIMEOUT`. | 2500ms                                     |
+| Field              | Description                                                                                                                                                                                                                           | Example Value |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| node-id            | Specifies the unique ID of this broker node in a cluster. The ID should be between 0 and the number of nodes in the cluster (exclusive). This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_NODEID`. | 0             |
+| partition-count    | Controls the number of partitions in the cluster. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_PARTITIONCOUNT`.                                                                                | 1             |
+| replication-factor | Controls the replication factor, which defines the number of replicas per partition. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_REPLICATIONFACTOR`.                                          | 1             |
+| size               | Controls the number of nodes in the cluster. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_SIZE`.                                                                                               | 1             |
 
 #### YAML snippet
 
 ```yaml
-cluster:
-  nodeId: 0
-  partitionsCount: 1
-  replicationFactor: 1
-  clusterSize: 1
-  initialContactPoints: []
-  clusterName: zeebe-cluster
-  heartbeatInterval: 250ms
-  electionTimeout: 2500ms
+camunda:
+  cluster:
+    node-id: 0
+    partition-count: 1
+    replication-factor: 1
+    size: 1
 ```
 
-### zeebe.broker.cluster.raft
+### camunda.cluster.raft
 
-This section contains all properties required to configure raft.
+This section contains properties required to configure Raft.
 
-| Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                            | Example Value |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enablePriorityElection | When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distributed the leaders uniformly across the brokers. Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_ENABLEPRIORITYELECTION`. | true          |
-
-#### YAML snippet
-
-```yaml
-cluster:
-  raft:
-    enablePriorityElection: true
-```
-
-### zeebe.broker.cluster.flush
-
-| Field     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Example Value |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| flush     | Configures how often data is explicitly flushed to disk. By default, for a given partition, data is flushed on every leader commit, and every follower append. This is to ensure consistency across all replicas. Disabling this can cause inconsistencies, and at worst, data corruption or data loss scenarios. The default behavior is optimized for safety, and flushing occurs on every leader commit and follower append in a synchronous fashion. You can introduce a delay to reduce the performance penalty of flushing via `delayTime`. |               |
-| enabled   | If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_FLUSH_ENABLED`.                                                                               | true          |
-| delayTime | If the delay is > 0, then flush requests are delayed by at least the given period. It is recommended that you find the smallest delay here with which you achieve your performance goals. It's also likely that anything above 30s is not useful, as this is the typical default flush interval for the Linux OS. This setting can also be overridden using the environment variable `ZEEBE_BROKER_CLUSTER_RAFT_FLUSH_DELAYTIME`.                                                                                                                 | 0s            |
+| Field                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Example Value |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| priority-election-enabled | When this flag is enabled, the leader election algorithm attempts to elect the leaders based on a pre-defined priority. As a result, it tries to distribute the leaders uniformly across the brokers. Note that it is only a best-effort strategy. It is not guaranteed to be a strictly uniform distribution. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_PRIORITYELECTIONENABLED`.                                                                                                                                                                                | true          |
+| heartbeat-interval        | The leader sends a heartbeat to a follower every `heartbeat-interval`. Note: This is an advanced setting. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_HEARTBEATINTERVAL`.                                                                                                                                                                                                                                                                                                                                                                                           | 250ms         |
+| election-timeout          | If a follower does not receive a heartbeat from the leader within an election timeout, it can start a new leader election. `election-timeout` should be greater than `heartbeat-interval`. When the election timeout is large, there is a delay in detecting a leader failure. When it is small, it can lead to false positives and unnecessary leader changes. If network latency between the nodes is high, it is recommended to have a higher election timeout. Note: This is an advanced setting. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_ELECTIONTIMEOUT`. | 2500ms        |
+| flush-enabled             | If false, explicit flushing of the Raft log is disabled, and flushing only occurs right before a snapshot is taken. You should only disable explicit flushing if you are willing to accept potential data loss at the expense of performance. Before disabling it, try the delayed options, which provide a trade-off between safety and performance. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_FLUSHENABLED`.                                                                                                                                                    | true          |
+| flush-delay               | If the delay is > 0, flush requests are delayed by at least the given period. It is recommended that you find the smallest delay that achieves your performance goals. It is also likely that anything above 30s is not useful, as this is the typical default flush interval for Linux. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_RAFT_FLUSHDELAY`.                                                                                                                                                                                                                   | 0s            |
 
 #### YAML snippet
 
 ```yaml
-cluster:
-  flush:
-    enabled: true
-    delayTime: 0s
+camunda:
+  cluster:
+    raft:
+      priority-election-enabled: true
+      flush-enabled: true
+      flush-delay: 0s
+      heartbeat-interval: 250ms
+      election-timeout: 2500ms
 ```
 
 ### zeebe.broker.cluster.membership
@@ -577,24 +585,25 @@ membership:
   syncInterval: 10s
 ```
 
-### zeebe.broker.cluster.configManager.gossip
+### camunda.cluster.metadata
 
 Configure the parameters used to propagate the dynamic cluster configuration across brokers and gateways.
 
-| Field              | Description                                                                                                                                                                                                    | ExampleValue |
-| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| syncDelay          | Sets the interval between two synchronization requests to other members of the cluster. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCDELAY | 10s          |
-| syncRequestTimeout | Sets the timeout for the synchronization requests. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_SYNCREQUESTTIMEOUT                             | 2s           |
-| gossipFanout       | Sets the number of cluster members the configuration is gossiped to. This setting can also be overridden using the environment variable ZEEBE_BROKER_CLUSTER_CONFIGMANAGER_GOSSIP_GOSSIPFANOUT                 | 2            |
+| Field                | Description                                                                                                                                                                                      | Example Value |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| sync-delay           | Sets the interval between two synchronization requests to other members of the cluster. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_METADATA_SYNCDELAY`. | 10s           |
+| sync-request-timeout | Sets the timeout for the synchronization requests. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_METADATA_SYNCREQUESTTIMEOUT`.                             | 2s            |
+| gossip-fanout        | Sets the number of cluster members the configuration is gossiped to. This setting can also be overridden using the environment variable `CAMUNDA_CLUSTER_METADATA_GOSSIPFANOUT`.                 | 2             |
 
 #### YAML snippet
 
 ```yaml
-configManager:
-  gossip:
-    syncDelay: 10s
-    syncRequestTimeout: 2s
-    gossipFanout: 2
+camunda:
+  cluster:
+    metadata:
+      sync-delay: 10s
+      sync-request-timeout: 2s
+      gossip-fanout: 2
 ```
 
 ### zeebe.broker.cluster.messageCompression
@@ -621,19 +630,20 @@ When this flag is enables, you must also enable compression in standalone broker
 messageCompression: NONE
 ```
 
-### zeebe.broker.threads
+### camunda.system
 
-| Field          | Example Value                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Description |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| cpuThreadCount | Controls the number of non-blocking CPU threads to be used. WARNING: You should never specify a value that is larger than the number of physical cores available. Good practice is to leave 1-2 cores for ioThreads and the operating system (it has to run somewhere). For example, when running Zeebe on a machine which has 4 cores, a good value would be 2. This setting can also be overridden using the environment variable `ZEEBE_BROKER_THREADS_CPUTHREADCOUNT`. | 2           |
-| ioThreadCount  | Controls the number of io threads to be used. These threads are used for workloads that write data to disk. While writing, these threads are blocked which means that they yield the CPU. This setting can also be overridden using the environment variable `ZEEBE_BROKER_THREADS_IOTHREADCOUNT`.                                                                                                                                                                         | 2           |
+| Field            | Example Value | Description                                                                                                                                                                                                                                                                                                                                 |
+| ---------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cpu-thread-count | 2             | Controls the number of non-blocking CPU threads to be used. WARNING: You should never specify a value larger than the number of physical cores available. Good practice is to leave 1–2 cores for I/O threads and the operating system. This setting can also be overridden using the environment variable `CAMUNDA_SYSTEM_CPUTHREADCOUNT`. |
+| io-thread-count  | 2             | Controls the number of I/O threads to be used. These threads are used for workloads that write data to disk. While writing, these threads are blocked, which means that they yield the CPU. This setting can also be overridden using the environment variable `CAMUNDA_SYSTEM_IOTHREADCOUNT`.                                              |
 
 #### YAML snippet
 
 ```yaml
-threads:
-  cpuThreadCount: 2
-  ioThreadCount: 2
+camunda:
+  system:
+    cpu-thread-count: 2
+    io-thread-count: 2
 ```
 
 ### zeebe.broker.flowControl.request

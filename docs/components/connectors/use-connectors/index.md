@@ -1,24 +1,23 @@
 ---
 id: index
 title: How to use connectors
-description: Learn how to use connectors in Web Modeler by creating a connector task, configuring a connector, and reviewing potential errors.
+description: Learn how to use connectors in Camunda Hub by creating a connector task, configuring a connector, and reviewing potential errors.
 ---
 
 Any task can be transformed into a connector task. This guide details the basic functionality all connectors share.
 
-Find available connectors in [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
+Find available connectors in [built-in connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md).
 To add connectors from your BPMN diagram, visit the [Camunda Marketplace](/components/hub/workspace/modeler/modeling/camunda-marketplace.md).
 
 :::note
 Learn how to [install connectors in Self-Managed](/self-managed/components/connectors/overview.md).
 
-New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools.
-[Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to work with Web Modeler.
+New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to model processes in Camunda Hub.
 :::
 
 ## Using secrets
 
-:::danger
+:::warning
 `secrets.*` is a deprecated syntax. Instead, use `{{secrets.*}}`
 :::
 
@@ -185,6 +184,46 @@ In that case, you could declare **Result Expression** as follows:
 }
 ```
 
+### `createDocument` function
+
+Starting with 8.10.0, you can use `createDocument` in the **Result expression** and **Error expression** fields.
+
+The function converts part of a Connector response into a [document reference](/components/document-handling/getting-started.md), so you can store the relevant content without storing the entire response.
+
+| Item    | Type              | Description                                                          |
+| ------- | ----------------- | -------------------------------------------------------------------- |
+| `value` | String or context | Content and optional metadata used to create the document reference. |
+| Result  | Context           | The generated document reference.                                    |
+
+If `value` is a string, `createDocument` treats it as base64-encoded content without metadata:
+
+```feel
+createDocument(response.body.file[1].document.data)
+```
+
+If `value` is a context, it can contain the following fields:
+
+| Field                | Required | Description                                                                                                                                                                                                                       |
+| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `content` or `data`  | Yes      | The base64-encoded document content. Either key name is accepted.                                                                                                                                                                 |
+| `name` or `fileName` | No       | The filename. If you omit this field, `createDocument` automatically generates a UUID.                                                                                                                                            |
+| `contentType`        | No       | The MIME type of the content. If you omit this field, `createDocument` infers the type from the file extension in `name` or `fileName`. If neither field contains an extension, the value defaults to `application/octet-stream`. |
+
+```feel
+createDocument({
+  data: response.body.file[1].document.data,
+  name: response.body.file[1].filename
+})
+```
+
+The Connector runtime does not provide a `createDocuments` function. To extract multiple documents, use a FEEL iteration:
+
+```feel
+= { documents: for f in response.body.file return createDocument(f.document) }
+```
+
+Before using `createDocument`, configure a document store for the Connector runtime. For configuration details, see [Document handling](/components/document-handling/getting-started.md).
+
 ## Activation
 
 The **Activation** section pertains specifically to [inbound connectors](/components/connectors/connector-types.md).
@@ -275,6 +314,10 @@ Within the FEEL expression, you access the following temporary variables:
   the [REST connector](/components/connectors/protocol/rest.md#response), for example).
 - The technical exception that potentially occurred in `error`, containing a `message` and optionally a `code`. The code
   is only available if the connector's runtime behavior provided a code in the exception it threw.
+
+:::info
+If a **Result Variable** or **Result Expression** is configured on the connector task, the raw connector response is **not** available as `response` in the error expression. Instead, `response` contains only the mapped output variables. Reference those variables by name (for example, `myVar.status`) rather than using `response.body`.
+:::
 
 Building on that, you can cover those use cases with BPMN errors that you consider as exceptional. This can build on
 technical exceptions thrown by a connector as well as regular results returned by the external system you integrated.

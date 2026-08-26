@@ -8,6 +8,7 @@ description: "Deploy Camunda 8 Self-Managed on Red Hat OpenShift"
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import DeploymentReadinessCheck from '../\_partials/\_deployment-readiness-check.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -329,11 +330,9 @@ This guide uses `helm upgrade --install` as it runs install on initial deploymen
 
 :::
 
-You can track the progress of the installation using the following command:
+You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.8/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck download />
 
 ## Verify connectivity to Camunda 8
 

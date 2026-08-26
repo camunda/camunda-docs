@@ -14,7 +14,14 @@ export const getStartedCards = [
     link: "../../../guides/getting-started-agentic-orchestration/",
     title: "Build your first AI agent",
     image: IconAoImg,
-    description: "Get started by building and running your first AI agent.",
+    description: "Get started by running your first AI agent.",
+  },
+  {
+    link: "../camunda-provided-llm/",
+    title: "Camunda-provided LLM",
+    image: IconAoLlmImg,
+    description:
+      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
   },
 ];
 
@@ -28,13 +35,6 @@ export const fundamentalCards = [
       "Build and integrate AI agents into your end-to-end processes.",
   },
   {
-    link: "../camunda-provided-llm/",
-    title: "Camunda-provided LLM",
-    image: IconAoLlmImg,
-    description:
-      "Run AI agents quickly in Camunda SaaS with Camunda-provided LLM.",
-  },
-  {
     link: "../ao-design/",
     title: "Design and architecture",
     image: IconAoDesignImg,
@@ -42,7 +42,7 @@ export const fundamentalCards = [
   },
   {
     link: "../evaluate-agents/evaluate-agents-overview/",
-    title: "Evaluate your AI agents",
+    title: "Evaluate AI agents",
     image: IconTest,
     description:
       "Evaluate the performance and effectiveness of your AI agents.",
@@ -73,6 +73,12 @@ export const fundamentalCards_monitoring = [
 
 // Recommendation cards on introduction page
 export const recommendationCards = [
+  {
+    link: "../add-tool-to-ai-agent/",
+    title: "Add tools to an AI agent",
+    image: IconAoAgentImg,
+    description: "Add BPMN elements as callable tools to your AI agents.",
+  },
   {
     link: "../rag-ai-agents/",
     title: "Add long-term memory",

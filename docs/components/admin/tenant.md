@@ -5,9 +5,11 @@ sidebar_label: "Tenants"
 description: "Manage tenants within the Orchestration Cluster Admin to logically separate your infrastructure."
 ---
 
-<span class="badge badge--platform">Self-Managed only</span>
+Use Admin to manage Orchestration Cluster tenants and isolate data within a single cluster. Tenant management is available on both Camunda 8 SaaS and Self-Managed.
 
-Use Admin to manage Orchestration Cluster tenants and isolate data within a single cluster.
+:::note
+On SaaS, the **Tenants** tab is visible to organization admins on clusters running generation 8.8 and later, even before multi-tenancy checks are enabled. This allows admins to set up tenants and assignments before enforcing checks. Before enabling checks, confirm your tenant assignments so users retain the access they need.
+:::
 
 ## About tenants
 
@@ -21,12 +23,19 @@ To learn more about tenants, see [multi-tenancy](../concepts/multi-tenancy.md).
 
 You can manage your Orchestration Cluster tenants directly in [Admin](admin-introduction.md).
 
-- **Tenancy** is enabled by default.
-- **Tenancy checks** are disabled by default. All data maps to the `<default>` tenant.
+- **Multi-tenancy** is enabled by default.
+- **Multi-tenancy checks** are disabled by default. All data maps to the `<default>` tenant.
 
-This allows administrators to set up tenants and assignments before enforcing tenancy checks.
+This allows administrators to set up tenants and assignments before enforcing multi-tenancy checks.
 
-To enable multi-tenancy checks, see [Self-Managed configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#multi-tenancy).
+How you enable multi-tenancy checks depends on your deployment model:
+
+- **SaaS**: Enable the **Multi-tenancy** toggle per cluster in [Camunda Hub cluster settings](/components/hub/organization/manage-clusters/settings.md#multi-tenancy).
+- **Self-Managed**: Configure multi-tenancy through [Orchestration Cluster configuration properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#multi-tenancy).
+
+:::warning
+Before you enable multi-tenancy checks, assign all users, groups, and roles that need access to their tenants and to the `<default>` tenant. Once checks are enforced, any principal not assigned to a tenant loses access to the resources scoped to that tenant.
+:::
 
 ## Create a tenant
 
@@ -50,9 +59,26 @@ The `<default>` tenant is automatically created when Admin starts.
 
    ![tenant-management-tenant-details-users-tab](./img/tenant-management-tenant-details-users-tab.png)
 
-## Update and delete a tenant
+## Update a tenant
 
-Tenants cannot be updated after creation. To change a tenant's details, you must delete the tenant and then create a new tenant with the details you require.
+You can update the name and description of a tenant, but cannot change its ID after creation. To change a tenant's ID, you must delete the tenant and create a new one.
+
+To update a tenant:
+
+1. Log in to Admin in your cluster, and select the **Tenants** tab.
+2. Click the **pencil icon** next to the tenant you want to update.
+3. Update the tenant details:
+   - **Name**: The name of the tenant.
+   - **Description**: An optional description of the tenant.
+4. Click the **Save** button.
+
+The tenant details are updated.
+
+:::note
+The `<default>` tenant is a system entity and cannot be updated.
+:::
+
+## Delete a tenant
 
 To delete a tenant, click on the **Delete** option in the list of tenants, and confirm the deletion.
 
@@ -108,7 +134,7 @@ You can manage these assignments by selecting the relevant tab on the tenant det
 ### Assign mapping rules to a tenant
 
 :::note
-Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication in Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed).
+Assignment of [mapping rules](../concepts/access-control/mapping-rules.md) is only available for [OIDC authentication in Self-Managed](../concepts/access-control/connect-to-identity-provider.md#self-managed). On SaaS, identity is managed by Camunda, so mapping rules cannot map claims from a customer identity provider.
 :::
 
 1. Select the **Mapping rules** tab.

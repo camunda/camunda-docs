@@ -30,7 +30,7 @@ path: object;
 #### jobKey
 
 ```ts
-jobKey: JobKey;
+jobKey: JobKeyWritable;
 ```
 
 The key of the job.

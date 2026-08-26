@@ -10,6 +10,10 @@ import IconMcpImg from "../img/icon-mcp.png";
 import IconCliImg from "../img/icon-cli.png";
 import IconPythonImg from "../img/icon-python.png";
 import IconCsharpImg from "../img/icon-csharp.png";
+// TODO: replace with a dedicated icon-rust.png once the asset is available.
+import IconRustImg from "../img/icon-earlyaccess.png";
+// TODO: replace with a dedicated icon-go.png once the asset is available.
+import IconGoImg from "../img/icon-earlyaccess.png";
 
 export const apiCards = [
   {
@@ -44,13 +48,6 @@ export const apiCards = [
     type: "REST",
   },
   {
-    link: "../administration-sm-api/administration-sm-api-overview/",
-    title: "Administration API (Self-Managed)",
-    image: IconAdminImg,
-    description: "Get cluster data including installed apps and usage metrics.",
-    type: "REST",
-  },
-  {
     link: "../optimize-api/overview/",
     title: "Optimize API",
     image: IconOptimizeImg,
@@ -58,10 +55,17 @@ export const apiCards = [
     type: "REST",
   },
   {
-    link: "../web-modeler-api/overview/",
-    title: "Web Modeler API",
+    link: "../hub-api-saas/overview/",
+    title: "Camunda Hub API (SaaS)",
     image: IconModelerImg,
-    description: "Integrate with Web Modeler for modeling automation.",
+    description: "Manage Camunda Hub resources in SaaS.",
+    type: "REST",
+  },
+  {
+    link: "../hub-api-sm/overview/",
+    title: "Camunda Hub API (Self-Managed)",
+    image: IconModelerImg,
+    description: "Manage Camunda Hub resources in Self-Managed.",
     type: "REST",
   },
   {
@@ -103,7 +107,7 @@ export const clientCards = [
     title: "c8ctl CLI",
     image: IconCliImg,
     description:
-      "Inspect clusters, deploy resources, and manage processes from the terminal. (Alpha)",
+      "Inspect clusters, deploy resources, and manage processes from the terminal.",
     type: "",
   },
   {
@@ -117,8 +121,23 @@ export const clientCards = [
     link: "../csharp-sdk/",
     title: "C# SDK",
     image: IconCsharpImg,
+    description: "Build Camunda 8 applications using the Camunda C# SDK.",
+    type: "",
+  },
+  {
+    link: "../rust-sdk/",
+    title: "Rust SDK",
+    image: IconRustImg,
     description:
-      "Technical preview of the C# client SDK for the Camunda 8 Orchestration Cluster REST API.",
+      "Technical preview of the Rust client SDK for the Camunda 8 Orchestration Cluster REST API.",
+    type: "",
+  },
+  {
+    link: "../go-sdk/",
+    title: "Go SDK",
+    image: IconGoImg,
+    description:
+      "Technical preview of the Go client SDK for the Camunda 8 Orchestration Cluster REST API.",
     type: "",
   },
 ];

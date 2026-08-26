@@ -14,14 +14,14 @@ Validate your project in development before deploying it to testing, staging, or
 
 ## Validate your project
 
-Use [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md) to validate your project in development.
+Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate your project in development.
 
 1. Open the BPMN diagram in the project that you want to validate.
-1. Select the **Play** tab to play the project using your selected development cluster.
+1. Select the **Test** tab to test the project using your selected cluster.
 1. Perform validation as required, for example, debug your process logic and test the project.
 
 :::info
-To learn more about using Play for validation, see [Play mode for rapid validation](/components/hub/workspace/modeler/validation/play-your-process.md)
+To learn more about using Test mode for validation, see [Test your process](/components/hub/workspace/modeler/validation/test-your-process.md)
 :::
 
 ## Deploy your project
@@ -35,7 +35,7 @@ Once validation is complete, deploy your project to cluster stages in your [deve
 1. Open the [project homepage](create-a-project.md#project-homepage).
 1. Select the **Deploy latest changes** option from the **Deploy & run** combo button to open the **Deploy & run** modal.
    <p><img src={DeployImg} alt="Deploy a project" /></p>
-1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters) is provided.
+1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/hub/configuration/properties.md#clusters) is provided.
 1. Perform any other actions as required, such as:
    - Unpausing the chosen cluster if it has been auto-paused. Select **Resume cluster** within the **Cluster Details**.
    - Managing the cluster. Select **Manage**.
@@ -43,7 +43,7 @@ Once validation is complete, deploy your project to cluster stages in your [deve
 
 When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle.
 
-In Self-Managed, you can deploy your project to the cluster defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/modeler-configuration.md#clusters).
+In Self-Managed, you can deploy your project to the cluster defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a project cannot be deployed incompletely or in an inconsistent state.
@@ -58,7 +58,7 @@ You can also open the deployment modal from the details page of any deployable f
 You can manually [run](/components/hub/workspace/modeler/run-or-publish-your-process.md#run-a-process) your project to test it after it has been deployed to a testing, staging, or production cluster.
 
 :::note
-Use Play to validate your project in a development cluster, and only use Run when interacting with other stages such as testing, staging, or production.
+Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate and debug your project against any environment. Use Run to execute a full process instance of your already-deployed project, for example to exercise your real job workers and APIs on a testing, staging, or production cluster.
 :::
 
 To run your project:

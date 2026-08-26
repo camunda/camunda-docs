@@ -10,15 +10,18 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <PageDescription />
 
-| Minor release date | Scheduled end of maintenance | Release notes                                                                           | Upgrade guides                                                                                        |
-| ------------------ | ---------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| 13 October 2026    | 11 April 2028                | [8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
+| Minor release date | End of standard maintenance | Release notes                                                                           | Upgrade guides                                                                                        |
+| ------------------ | --------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| 13 October 2026    | 11 April 2028               | [8.10 release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) | [8.10 upgrade guides](/reference/announcements-release-notes/8100/whats-new-in-810.md#upgrade-guides) |
 
 :::info 8.10 resources
 
 - See [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) to learn more about new features and enhancements.
 - Refer to the [quality board](https://github.com/orgs/camunda/projects/187/views/23) for an overview of known bugs by component and severity.
-  :::
+
+:::
+
+## Supported environments
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -26,12 +29,12 @@ import PageDescription from '@site/src/components/PageDescription';
 </div>
 <div className="release-announcement-content">
 
-#### PostgreSQL 14 no longer supported
+#### Amazon Aurora PostgreSQL 14 removed, 18 added
 
-Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16, 17, and 18.
+Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14 and adds support for version 18. Supported versions are now 15, 16, 17, and 18.
 
-- PostgreSQL 14 reached the end of its standard support window.
-- Upgrade your PostgreSQL instance to a supported version before moving to Camunda 8.10.
+- Aurora PostgreSQL 14 has reached the end of standard support on AWS.
+- Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
@@ -44,12 +47,29 @@ Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16,
 </div>
 <div className="release-announcement-content">
 
-#### Amazon Aurora PostgreSQL 14 no longer supported
+#### Elasticsearch 9.2 and 9.3 no longer supported
 
-Camunda 8.10 drops support for Amazon Aurora PostgreSQL 14. Supported versions are now 15, 16, and 17.
+Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.4. Supported Elasticsearch versions are now 8.19+ and 9.4+.
 
-- Aurora PostgreSQL 14 has reached the end of standard support on AWS.
-- Migrate your Aurora cluster to a supported version before moving to Camunda 8.10.
+- Upgrade Elasticsearch 9.2 or 9.3 clusters to 9.4 or later before moving to Camunda 8.10.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### H2 2.3 no longer supported
+
+Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
+
+- The bundled H2 driver in Camunda images is on the 2.4 line.
+- H2 remains supported for development, testing, and evaluation only. Production use is not recommended.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
@@ -80,6 +100,23 @@ Camunda 8.10 drops support for Microsoft SQL Server 2019. Supported versions are
 </div>
 <div className="release-announcement-content">
 
+#### OpenSearch 3.4 and 3.5 no longer supported
+
+Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.6. Supported OpenSearch versions are now 2.19+ and 3.6+.
+
+- Upgrade OpenSearch 3.4 or 3.5 clusters to 3.6 or later before moving to Camunda 8.10.
+
+<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Oracle 23ai rebranded as Oracle 26ai
 
 Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective with the October 2025 Release Update (RU 23.26). The internal version continues to use the 23.x code line; the transition requires no database upgrade or application recertification. Camunda 8.10's supported Oracle versions are 19c and 26ai.
@@ -95,12 +132,12 @@ Oracle has rebranded Oracle Database 23ai as Oracle AI Database 26ai, effective 
 </div>
 <div className="release-announcement-content">
 
-#### H2 2.3 no longer supported
+#### PostgreSQL 14 no longer supported
 
-Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
+Camunda 8.10 drops support for PostgreSQL 14. Supported versions are now 15, 16, 17, and 18.
 
-- The bundled H2 driver in Camunda images is on the 2.4 line.
-- H2 remains supported for development, testing, and evaluation only. Production use is not recommended.
+- PostgreSQL 14 reached the end of its standard support window.
+- Upgrade your PostgreSQL instance to a supported version before moving to Camunda 8.10.
 
 <p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
@@ -109,34 +146,30 @@ Camunda 8.10 drops support for H2 2.3. Only H2 2.4 is now supported.
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### Elasticsearch 9.2 no longer supported
+#### MariaDB 12.3 now supported
 
-Camunda 8.10 raises the minimum supported Elasticsearch 9.x version to 9.3. Supported Elasticsearch versions are now 8.19+ and 9.3+.
+Camunda 8.10 adds support for MariaDB 12.3 LTS. Supported versions are now 10.11, 11.4, 11.8, and 12.3.
 
-- Upgrade Elasticsearch 9.2 clusters to 9.3 or later before moving to Camunda 8.10.
-
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
 </div>
 </div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<span className="badge badge--new">New</span>
 </div>
 <div className="release-announcement-content">
 
-#### OpenSearch 3.4 no longer supported
+#### MySQL 9.7 now supported
 
-Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Supported OpenSearch versions are now 2.19+ and 3.5+.
+Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 9.7.
 
-- Upgrade OpenSearch 3.4 clusters to 3.5 or later before moving to Camunda 8.10.
-
-<p className="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+<p className="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
 
 </div>
 </div>
@@ -159,10 +192,6 @@ Camunda 8.10 raises the minimum supported OpenSearch 3.x version to 3.5. Support
 </div>
 
 ## APIs & tools
-
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -188,9 +217,9 @@ The following items are removed:
 - Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
 - Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
 
-<p className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
-<p className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
-<p className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</p>
+<p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
+<p><span className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</span></p>
+<p><span className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</span></p>
 
 </div>
 </div>
@@ -261,11 +290,99 @@ Starting with 8.10, the `JobIntent.COMPLETED` follow-up event is emitted without
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
+
+Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
+
+**Action:** Migrate your application to Spring Boot 4.1.x. See the [version compatibility table](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) for details.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Console SM and Web Modeler APIs deprecated
+
+With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are deprecated in favor of the new [public Camunda Hub API](/reference/announcements-release-notes/8100/8100-release-notes.md#public-camunda-hub-api). The legacy endpoints remain available for at least two minor versions and are scheduled for removal in 8.12.
+
+**Action:** Plan to migrate integrations from the Console Self-Managed and Web Modeler APIs to the public Camunda Hub API before 8.12.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize `GET /api/readyz` no longer rejects requests that carry an `Authorization` header
+
+Starting with Camunda 8.10.0-alpha5, the Optimize [health readiness endpoint](/apis-tools/optimize-api/health-readiness.md) (`GET /api/readyz`) ignores an `Authorization` header instead of rejecting the request. Previously, a request that included the header was rejected with a client error status code. It now returns the readiness status (`200` or `503`), as it does for a request without the header.
+
+This aligns the endpoint with the other public endpoints of the Orchestration Cluster, which also accept and ignore a superfluous `Authorization` header.
+
+**Action:** No action is required for Kubernetes readiness and liveness probes, as these do not send an `Authorization` header. If you have a client or monitoring check that relies on the endpoint rejecting requests that carry an `Authorization` header, update it to expect the readiness status instead.
+
+</div>
+</div>
+
 ## Connectors
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connectors with a single operation are renamed after the operation
+
+Connectors that provide a single operation are renamed in Modeler so their name describes the action they perform instead of the product they connect to. For example, the **REST Outbound Connector** is now named **Send REST Request**. Connectors with several operations keep their names and expose their operations as searchable entries instead.
+
+Only the name shown in Modeler changed. Template IDs, versions, connector types, and runtime behavior are unchanged, so existing process models continue to run and do not need to be remodeled or redeployed.
+
+**Action:** Search for the new name when you add one of these connectors to a process, and update your own documentation, templates, and training material that refer to the previous names.
+
+**Renamed connectors:**
+
+| Previous name                                   | New name                                           |
+| :---------------------------------------------- | :------------------------------------------------- |
+| Amazon EventBridge Outbound Connector           | Send Event to AWS EventBridge                      |
+| Amazon SNS Outbound connector                   | Publish Message to AWS SNS                         |
+| Amazon SQS Outbound Connector                   | Send Message to AWS SQS                            |
+| AWS Bedrock AgentCore Runtime                   | Invoke Agent in AWS Bedrock AgentCore Runtime      |
+| AWS Bedrock Code Interpreter Outbound Connector | Run Code with AWS Bedrock Code Interpreter         |
+| AWS Bedrock Knowledge Base Outbound Connector   | Retrieve Documents from AWS Bedrock Knowledge Base |
+| AWS Lambda Outbound Connector                   | Invoke AWS Lambda Function                         |
+| AWS SageMaker Outbound Connector                | Run Inference with AWS SageMaker                   |
+| AWS Textract Outbound Connector                 | Extract Text from Document with AWS Textract       |
+| Google Gemini Outbound Connector                | Generate Content with Google Gemini                |
+| GraphQL Outbound Connector                      | Send GraphQL Request                               |
+| Hugging Face Outbound Connector                 | Run Inference on Hugging Face                      |
+| Kafka Outbound Connector                        | Publish Message to Kafka                           |
+| RabbitMQ Outbound Connector                     | Publish Message to RabbitMQ                        |
+| REST Outbound Connector                         | Send REST Request                                  |
+| RPA Connector                                   | Run RPA Script                                     |
+| SendGrid Outbound Connector                     | Send Email with SendGrid                           |
+| SOAP Connector                                  | Send SOAP Request                                  |
+| SQL Database Connector                          | Execute SQL Statement on Database                  |
+
+Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound connector is renamed.
+
+<p className="link-arrow">[Available connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md)</p>
+
+</div>
+</div>
 
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -284,24 +401,85 @@ Connectors change 1 description.
 
 ## Data
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Data change 1
+#### Elasticsearch and OpenSearch exporter defaults changed for Optimize mode and job records
 
-Data change 1 description.
+Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
 
-**Action:** Description.
+- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
+- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
+
+**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
+
+<p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
+<p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
 
 </div>
-</div> -->
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Default RocksDB memory allocation strategy changed to `FRACTION` {#rocksdb-memory-allocation-strategy}
+
+Starting with Camunda 8.10, the default RocksDB memory allocation strategy changes from `PARTITION` to `FRACTION`. With `FRACTION`, RocksDB memory is allocated as a fraction of total available memory (default `0.1`, or 10%) instead of scaling with the number of partitions per broker. This may result in a different amount of memory being allocated to RocksDB after upgrading.
+
+**Action:** Review your broker memory sizing before upgrading. To keep the previous behavior, explicitly set `camunda.data.primary-storage.rocksdb.memory-allocation-strategy` to `PARTITION` (environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY=PARTITION`). To adopt the new default, test the `FRACTION` strategy first to find the right `memory-fraction` value for your deployment.
+
+<p className="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### New SaaS clusters default to `business_` variable include filter for Optimize
+
+Starting with Camunda 8.10, new SaaS clusters include a default `business_` variable include filter in Optimize data filter settings. Only variables whose names start with `business_` are exported to Optimize. Variables not matching this prefix are permanently excluded from Optimize.
+
+This default does not apply to existing clusters. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+
+**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
+
+<p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize Self-Managed no longer flattens object variables by default
+
+Starting with Camunda 8.10, Self-Managed Optimize no longer imports object variable values by default. Object variables are no longer flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage, and aligns Self-Managed with the default Camunda 8 SaaS has used for years.
+
+This change is **Self-Managed only**; SaaS is unaffected, as it already runs with this behavior disabled.
+
+- Object-heavy processes previously measured 5.9-48.8x more Optimize variable storage on Self-Managed than SaaS for identical workloads.
+- If you rely on object variable properties in reports, filters, or Raw Data Reports, opt in by setting `zeebe.includeObjectVariableValue: true` (environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true`).
+- Optimize logs a `WARN` on startup whenever object variable values are not being imported. The message includes the opt-in setting.
+
+**Action:** Decide whether your Self-Managed deployment needs flattened object variables. If it does, set `zeebe.includeObjectVariableValue: true` before upgrading to 8.10.
+
+<p className="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
+
+</div>
+</div>
 
 ## Deployment
 
@@ -316,6 +494,42 @@ Data change 1 description.
 Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x) is the last minor that supports the Helm v3 CLI. The Helm chart adds a CLI version check and fails fast if Helm v3 is used to install or upgrade chart 15.x.
 
 **Action:** Install the Helm v4 CLI before you upgrade to 8.10. No release-state migration is required; Helm is client-side only and both CLIs read and write the same release-storage format. See [Move from the Helm v3 CLI to v4](/self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4.md) and [Helm 4](/self-managed/deployment/helm/operational-tasks/helm-v4.md).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Individual component Docker images no longer produced
+
+Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
+
+- [camunda/zeebe](https://hub.docker.com/r/camunda/zeebe)
+- [camunda/operate](https://hub.docker.com/r/camunda/operate)
+- [camunda/tasklist](https://hub.docker.com/r/camunda/tasklist)
+
+**Action:** Before upgrading to Camunda 8.10 or updating to Camunda 8.9.12 or later, switch to the unified [camunda/camunda](https://hub.docker.com/r/camunda/camunda) Docker image.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unused PVC in Optimize is unmounted
+
+An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
+
+By default, this mount used an `emptyDir`, so no PVC cleanup is required. However, if you set `optimize.persistence.enabled=true` in `values.yaml`, the PVC may still exist in your Kubernetes cluster even though Optimize no longer mounts it.
+
+**Action:** If you previously enabled `optimize.persistence.enabled=true`, delete the leftover PVC to reclaim storage quota. The claim name is `<releaseName>-camunda-platform-optimize-data`.
 
 </div>
 </div>

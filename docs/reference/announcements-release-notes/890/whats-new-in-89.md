@@ -318,7 +318,7 @@ The separate `webapp` component has been removed, and its functionality is now c
 
 This change might require updates to your application configuration.
 
-<p class="link-arrow">[Migrate configuration](/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
+<p class="link-arrow">[Migrate configuration](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#migrate-webapp-configuration)</p>
 
 ### Log4j2 and Tomcat changes
 
@@ -386,7 +386,7 @@ This helps operations teams consolidate Camunda monitoring into existing observa
 
 You can now configure RocksDB memory on a per-broker basis instead of per-partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
 
-<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 ### Orchestration Cluster Identity renamed to Admin
 

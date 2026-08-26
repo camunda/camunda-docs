@@ -1,6 +1,6 @@
 ---
 id: integrate-modeler-in-ci-cd
-title: Integrate Web Modeler into CI/CD
+title: Integrate Camunda Hub into CI/CD
 description: Empower DevOps with Web Modeler and integrate into CI/CD pipelines to streamline deployments of projects.
 keywords: [CI/CD, devops, modeler, processops, projects, integration guide]
 ---
@@ -62,7 +62,7 @@ To enforce pipeline-driven deployments to your environments, consider disabling 
 <Tabs groupId="disableDeployments" defaultValue="sm" values={[{label: 'Self-Managed', value: 'sm', }, {label: 'SaaS', value: 'saas', },]} >
 <TabItem value="sm">
 
-Disable manual deployments for any user by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/components/hub/configuration/modeler-configuration.md#general).
+Disable manual deployments for any user by configuring environment variables `ZEEBE_BPMN_DEPLOYMENT_ENABLED` and `ZEEBE_DMN_DEPLOYMENT_ENABLED` as documented [here](/self-managed/components/hub/configuration/properties.md#general).
 
 </TabItem>
 <TabItem value="saas">
@@ -248,7 +248,7 @@ The following process diagram demonstrates an example flow of how to run a previ
 
 If deployed in a review environment, processes/applications can be shared with peers for interactive review. For comprehensive review, full clusters inclusive of Operate and Tasklist can be used for process execution. This closely simulates the final experience. To integrate the preview environment with custom applications, leverage the Operate and Tasklist APIs and deploy them within the review environment.
 
-In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Play mode](/components/hub/workspace/modeler/validation/play-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
+In case you use an embedded Zeebe engine, or want to provide a lightweight, focused review experience, you can use [Zeebe Simple Monitor](https://github.com/camunda-community-hub/zeebe-simple-monitor), which is a community-maintained Web App similar to the [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) in Web Modeler. Deploying Zeebe SimpleMonitor allows for thorough process testing and review.
 
 ### Publish stage
 

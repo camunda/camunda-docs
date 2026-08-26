@@ -73,6 +73,23 @@ async function getProcessInstanceStatisticsExample(processInstanceKey: ProcessIn
 }
 //#endregion GetProcessInstanceStatistics
 
+//#region GetProcessInstanceWaitStateStatistics
+async function getProcessInstanceWaitStateStatisticsExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.getProcessInstanceWaitStateStatistics(
+    { processInstanceKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const stat of result.items ?? []) {
+    console.log(`Element ${stat.elementId}: waiting=${stat.waitingCount}`);
+  }
+}
+//#endregion GetProcessInstanceWaitStateStatistics
+
 //#region GetProcessInstanceSequenceFlows
 async function getProcessInstanceSequenceFlowsExample(processInstanceKey: ProcessInstanceKey) {
   const camunda = createCamundaClient();
@@ -170,6 +187,23 @@ async function searchProcessDefinitionsExample() {
   }
 }
 //#endregion SearchProcessDefinitions
+
+//#region SearchProcessDefinitionVariableNames
+async function searchProcessDefinitionVariableNamesExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchProcessDefinitionVariableNames(
+    { processDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const variable of result.items ?? []) {
+    console.log(`Variable name: ${variable.name}`);
+  }
+}
+//#endregion SearchProcessDefinitionVariableNames
 
 //#region GetProcessDefinitionStatistics
 async function getProcessDefinitionStatisticsExample(processDefinitionKey: ProcessDefinitionKey) {
@@ -380,7 +414,16 @@ async function searchElementInstanceWaitStatesExample(processInstanceKey: Proces
   );
 
   for (const waitState of result.items ?? []) {
-    console.log(`${waitState.elementId}: ${waitState.waitStateType}`);
+    const { details } = waitState;
+    let description: string;
+    if (details.waitStateType === 'JOB') {
+      description = `waiting on job '${details.jobType}'`;
+    } else if (details.waitStateType === 'MESSAGE') {
+      description = `waiting for message '${details.messageName}'`;
+    } else {
+      description = `waiting (${details.waitStateType})`;
+    }
+    console.log(`${waitState.elementId}: ${description}`);
   }
 }
 //#endregion SearchElementInstanceWaitStates
@@ -415,6 +458,7 @@ void deleteProcessInstanceExample;
 void migrateProcessInstanceExample;
 void modifyProcessInstanceExample;
 void getProcessInstanceStatisticsExample;
+void getProcessInstanceWaitStateStatisticsExample;
 void getProcessInstanceSequenceFlowsExample;
 void getProcessInstanceCallHierarchyExample;
 void searchProcessInstanceIncidentsExample;
@@ -422,6 +466,7 @@ void resolveProcessInstanceIncidentsExample;
 void getProcessDefinitionExample;
 void getProcessDefinitionXmlExample;
 void searchProcessDefinitionsExample;
+void searchProcessDefinitionVariableNamesExample;
 void getProcessDefinitionStatisticsExample;
 void getProcessDefinitionInstanceStatisticsExample;
 void getProcessDefinitionInstanceVersionStatisticsExample;

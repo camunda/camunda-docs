@@ -38,12 +38,16 @@ For pod-level networking options such as `dnsPolicy`, `dnsConfig`, and `orchestr
 
 ### Bitnami subcharts
 
-Bitnami subcharts are best suited for development and testing environments unless your operations team has experience managing Bitnami chart deployments in production. For production environments, deploy infrastructure services separately from the Camunda Helm charts. This lets you use your preferred deployment methods, leverage managed services (for example, Amazon OpenSearch Service), and manage infrastructure lifecycles independently of Camunda. See [deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions on deploying PostgreSQL, Elasticsearch, and Keycloak using official operators instead of Bitnami subcharts.
+:::warning Bitnami subcharts deprecated in 8.9 — action required before upgrading to 8.10
+Bitnami subcharts are intended for development, testing, and transitional use only. They are deprecated in this release and will be **removed in Camunda 8.10**. Migrate all production deployments to externally managed services or Kubernetes operators before upgrading.
 
-- `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart). This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [document-store backends (Elasticsearch/OpenSearch)](/reference/glossary.md#elasticsearchopensearch).
-- `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart).
-- `identityPostgresql`: Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart).
-- `webModelerPostgresql`: Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart).
+See [Deploy required dependencies with Kubernetes operators](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for the recommended approach, or [Migrate from Bitnami subcharts](/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/index.md) for step-by-step migration instructions.
+:::
+
+- `elasticsearch`: Provides an embedded Elasticsearch backend (Bitnami subchart) — deprecated in this release, removed in 8.10. This can be used as a secondary storage backend for evaluations. See [secondary storage](/reference/glossary.md#secondary-storage) and [document-store backends (Elasticsearch/OpenSearch)](/reference/glossary.md#elasticsearchopensearch).
+- `identityKeycloak`: Provides an embedded Keycloak service for Management Identity (Bitnami subchart) — deprecated in this release, removed in 8.10.
+- `identityPostgresql`: Provides an embedded PostgreSQL database for Management Identity (Bitnami subchart) — deprecated in this release, removed in 8.10.
+- `webModelerPostgresql`: Provides an embedded PostgreSQL database for Web Modeler (Bitnami subchart) — deprecated in this release, removed in 8.10.
 
 :::note
 The Helm chart supports embedded Elasticsearch for evaluations. For production, configure the secondary storage backend that fits your requirements. Depending on the component, topology, and version, you can use a document-store backend (Elasticsearch/OpenSearch) or an RDBMS-based secondary store.
@@ -52,19 +56,6 @@ See [RDBMS configuration](/self-managed/concepts/databases/relational-db/configu
 :::
 
 <MigrationTip />
-
-#### Bitnami subcharts guidance
-
-**Development and testing environments**: Bitnami subcharts provide ready-to-use infrastructure components that you can deploy with Camunda applications using minimal configuration.
-
-**Production environments**: Camunda recommends deploying infrastructure services separately from the Camunda Helm charts. This approach lets you:
-
-- Use your preferred deployment method and operational tooling
-- Leverage managed services such as AWS RDS, Azure Database, or Google Cloud SQL
-- Manage infrastructure lifecycle independently of Camunda applications
-- Implement your organization's security, backup, and monitoring standards
-
-If you use Bitnami subcharts in production, consider [Bitnami Premium images](/self-managed/deployment/helm/configure/registry-and-images/install-bitnami-enterprise-images.md) for enhanced security patches and vendor support. Operational expertise with Bitnami chart production deployments is recommended.
 
 ### Observability
 

@@ -74,6 +74,13 @@ Define [variable mappings](/components/concepts/variables.md#inputoutput-variabl
 the [same way a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
 to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
+## Job priority
+
+This task type supports `zeebe:jobPriorityDefinition` when implemented as a job worker.
+
+You can define job priority on the process as a default and override it on this task.
+For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
+
 ## Additional resources
 
 :::tip Community Extension
@@ -96,6 +103,7 @@ A script task with a custom header:
       <zeebe:header key="language" value="javascript" />
       <zeebe:header key="script" value="a + b" />
     </zeebe:taskHeaders>
+    <zeebe:jobPriorityDefinition priority="90" />
   </bpmn:extensionElements>
 </bpmn:scriptTask>
 ```

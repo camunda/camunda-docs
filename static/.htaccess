@@ -188,6 +188,16 @@ RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
+# Console telemetry page removed; monitoring is the closest replacement
+RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
+
+# Administration SM API removed; replaced by Camunda Hub
+RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-overview/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-authentication/?$ /docs/next/apis-tools/web-modeler-api/authentication/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
@@ -220,7 +230,7 @@ RewriteRule ^docs/next/components/modeler/web-modeler/git-sync/?$ /docs/next/com
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)$ /docs/next/components/hub/workspace/manage-projects/$1 [R=301,L]
 
 # Web Modeler moved to Hub Workspace Modeler - specific renamed files
-RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/launch-modeler/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/launch-web-modeler/?$ /docs/next/components/hub/workspace/modeler/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/web-modeler-settings/?$ /docs/next/components/hub/workspace/modeler/modeler-settings/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/integrate-web-modeler-in-ci-cd/?$ /docs/next/components/hub/workspace/modeler/integrate-modeler-in-ci-cd/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/element-templates/using-templates-in-web-modeler/?$ /docs/next/components/hub/workspace/modeler/element-templates/using-templates-in-modeler/ [R=301,L]
@@ -238,10 +248,10 @@ RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/form-lin
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/process-documentation-with-readme-files/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/publish-public-processes/?$ /docs/next/components/hub/workspace/modeler/modeling/advanced-modeling/publish-public-processes/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/refactoring-suggestions/?$ /docs/next/components/modeler/about-modeler/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/play-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/collaboration/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-scenario-files/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
@@ -251,19 +261,23 @@ RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ 
 # Web Modeler moved to Hub Workspace Modeler - general redirect
 RewriteRule ^docs/next/components/modeler/web-modeler/(.*)$ /docs/next/components/hub/workspace/modeler/$1 [R=301,L]
 
+# Play-to-Test Transition (product-hub#3169): Play mode renamed to Test mode
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/play-your-process/?$ /docs/next/components/hub/workspace/modeler/validation/test-your-process/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
+RewriteRule ^docs/next/components/hub/workspace/modeler/validation/test-case-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
+
 # Move Console and Web Modeler docs to Camunda Hub (next version)
-RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/console/usage-metrics/?$ /docs/next/self-managed/components/hub/usage-metrics/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/telemetry/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/console/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/console/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/modeler-overview/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/overview/?$ /docs/next/self-managed/components/hub/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/monitoring/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/modeler-configuration/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/configuration/?$ /docs/next/self-managed/components/hub/configuration/properties/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/database/?$ /docs/next/self-managed/components/hub/configuration/database/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/identity/?$ /docs/next/self-managed/components/hub/configuration/identity/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/logging/?$ /docs/next/self-managed/components/hub/configuration/logging/ [R=301,L]
-RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/modeler-ssl/ [R=301,L]
+RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/ssl/?$ /docs/next/self-managed/components/hub/configuration/ssl/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/configuration/copilot/?$ /docs/next/self-managed/components/hub/configuration/copilot/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-database-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-database-connection/ [R=301,L]
 RewriteRule ^docs/next/self-managed/components/modeler/web-modeler/troubleshooting/troubleshoot-zeebe-connection/?$ /docs/next/self-managed/components/hub/troubleshooting/troubleshoot-zeebe-connection/ [R=301,L]
@@ -487,6 +501,17 @@ RewriteRule ^docs/next/components/modeler/web-modeler/modeling/context-pad/?$ /d
 RewriteRule ^docs/8.9/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.9/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
 RewriteRule ^docs/8.8/components/modeler/web-modeler/modeling/context-pad/?$ /docs/8.8/components/modeler/web-modeler/model-your-first-diagram/ [R=301,L]
 RewriteRule ^docs/components/modeler/web-modeler/modeling/context-pad/?$ /docs/components/modeler/web-modeler/modeling/model-your-first-diagram/ [R=301,L]
+
+# Move fromAi() FEEL function docs from the miscellaneous category to a dedicated AI Agent category (8.9, backported to 8.8)
+RewriteRule ^docs/next/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/next/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+RewriteRule ^docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/8.8/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+RewriteRule ^docs/components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous/?$ /docs/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent/ [R=301,L]
+
+# Merge resource-planning into sizing-self-managed (8.9, backported to 8.8)
+RewriteRule ^docs/next/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/next/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/8.9/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/8.9/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/8.8/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/8.8/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
+RewriteRule ^docs/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning/?$ /docs/components/best-practices/architecture/sizing-self-managed/ [R=301,L]
 
 #---------------------------------------------------------------------------------
 #   8.8: content moves introduced prior to the release of version 8.8.
@@ -1101,6 +1126,7 @@ RewriteRule ^optimize/self-managed/components/optimize/advanced-features/import-
 RewriteRule ^optimize/self-managed/components/optimize/advanced-features/engine-data-deletion/?$ https://docs.camunda.org/optimize/latest/ [R=301,L]
 
 # Finalize the renaming of Console SM API to Administration API (Self-Managed)
+# This was removed with the introduction of Camunda Hub. When 8.10 becomes the next "current" docs, we should redirect to the Hub API SM.
 RewriteRule ^docs/apis-tools/administration-sm-api/specifications/sm-admin(istration)?-api/?$ /docs/apis-tools/administration-sm-api/specifications/administration-api-self-managed/ [R=301,L]
 
 # Move migrating to Zeebe user tasks

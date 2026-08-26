@@ -1,0 +1,1542 @@
+{
+  "activateAdHocSubProcessActivities": [
+    {
+      "file": "ad_hoc_sub_process.rs",
+      "region": "ActivateAdHocSubProcessActivities",
+      "label": "Activate activities within an ad-hoc sub-process"
+    }
+  ],
+  "activateJobs": [
+    {
+      "file": "job.rs",
+      "region": "ActivateJobs",
+      "label": "Activate jobs"
+    }
+  ],
+  "assignClientToGroup": [
+    {
+      "file": "group.rs",
+      "region": "AssignClientToGroup",
+      "label": "Assign a client to a group"
+    }
+  ],
+  "assignClientToTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "AssignClientToTenant",
+      "label": "Assign a client to a tenant"
+    }
+  ],
+  "assignGroupToTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "AssignGroupToTenant",
+      "label": "Assign a group to a tenant"
+    }
+  ],
+  "assignMappingRuleToGroup": [
+    {
+      "file": "group.rs",
+      "region": "AssignMappingRuleToGroup",
+      "label": "Assign a mapping rule to a group"
+    }
+  ],
+  "assignMappingRuleToTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "AssignMappingRuleToTenant",
+      "label": "Assign a mapping rule to a tenant"
+    }
+  ],
+  "assignProcessInstanceBusinessId": [
+    {
+      "file": "process_instance.rs",
+      "region": "AssignProcessInstanceBusinessId",
+      "label": "Assign business id to process instance"
+    }
+  ],
+  "assignRoleToClient": [
+    {
+      "file": "role.rs",
+      "region": "AssignRoleToClient",
+      "label": "Assign a role to a client"
+    }
+  ],
+  "assignRoleToGroup": [
+    {
+      "file": "role.rs",
+      "region": "AssignRoleToGroup",
+      "label": "Assign a role to a group"
+    }
+  ],
+  "assignRoleToMappingRule": [
+    {
+      "file": "role.rs",
+      "region": "AssignRoleToMappingRule",
+      "label": "Assign a role to a mapping rule"
+    }
+  ],
+  "assignRoleToTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "AssignRoleToTenant",
+      "label": "Assign a role to a tenant"
+    }
+  ],
+  "assignRoleToUser": [
+    {
+      "file": "role.rs",
+      "region": "AssignRoleToUser",
+      "label": "Assign a role to a user"
+    }
+  ],
+  "assignUserTask": [
+    {
+      "file": "user_task.rs",
+      "region": "AssignUserTask",
+      "label": "Assign user task"
+    }
+  ],
+  "assignUserToGroup": [
+    {
+      "file": "group.rs",
+      "region": "AssignUserToGroup",
+      "label": "Assign a user to a group"
+    }
+  ],
+  "assignUserToTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "AssignUserToTenant",
+      "label": "Assign a user to a tenant"
+    }
+  ],
+  "broadcastSignal": [
+    {
+      "file": "signal.rs",
+      "region": "BroadcastSignal",
+      "label": "Broadcast a signal"
+    }
+  ],
+  "cancelBatchOperation": [
+    {
+      "file": "batch_operation.rs",
+      "region": "CancelBatchOperation",
+      "label": "Cancel Batch operation"
+    }
+  ],
+  "cancelProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "CancelProcessInstance",
+      "label": "Cancel a process instance"
+    }
+  ],
+  "cancelProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.rs",
+      "region": "CancelProcessInstancesBatchOperation",
+      "label": "Cancel process instances (batch)"
+    }
+  ],
+  "changeClusterMode": [
+    {
+      "file": "recovery.rs",
+      "region": "ChangeClusterMode",
+      "label": "Change cluster mode"
+    }
+  ],
+  "completeJob": [
+    {
+      "file": "job.rs",
+      "region": "CompleteJob",
+      "label": "Complete a job"
+    }
+  ],
+  "completeUserTask": [
+    {
+      "file": "user_task.rs",
+      "region": "CompleteUserTask",
+      "label": "Complete user task"
+    }
+  ],
+  "correlateMessage": [
+    {
+      "file": "message.rs",
+      "region": "CorrelateMessage",
+      "label": "Correlate a message"
+    }
+  ],
+  "createAdminUser": [
+    {
+      "file": "setup.rs",
+      "region": "CreateAdminUser",
+      "label": "Create admin user"
+    }
+  ],
+  "createAgentInstance": [
+    {
+      "file": "agent_instance.rs",
+      "region": "CreateAgentInstance",
+      "label": "Create agent instance"
+    }
+  ],
+  "createAgentInstanceHistoryItem": [
+    {
+      "file": "agent_instance.rs",
+      "region": "CreateAgentInstanceHistoryItem",
+      "label": "Create agent instance history item"
+    }
+  ],
+  "createAuthorization": [
+    {
+      "file": "authorization.rs",
+      "region": "CreateAuthorization",
+      "label": "Create authorization"
+    }
+  ],
+  "createDeployment": [
+    {
+      "file": "resource.rs",
+      "region": "CreateDeployment",
+      "label": "Deploy resources"
+    }
+  ],
+  "createDocument": [
+    {
+      "file": "document.rs",
+      "region": "CreateDocument",
+      "label": "Upload document"
+    }
+  ],
+  "createDocumentLink": [
+    {
+      "file": "document.rs",
+      "region": "CreateDocumentLink",
+      "label": "Create document link"
+    }
+  ],
+  "createDocuments": [
+    {
+      "file": "document.rs",
+      "region": "CreateDocuments",
+      "label": "Upload multiple documents"
+    }
+  ],
+  "createElementInstanceVariables": [
+    {
+      "file": "element_instance.rs",
+      "region": "CreateElementInstanceVariables",
+      "label": "Update element instance variables"
+    }
+  ],
+  "createGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "CreateGlobalClusterVariable",
+      "label": "Create a global-scoped cluster variable"
+    }
+  ],
+  "createGlobalTaskListener": [
+    {
+      "file": "global_listener.rs",
+      "region": "CreateGlobalTaskListener",
+      "label": "Create global user task listener"
+    }
+  ],
+  "createGroup": [
+    {
+      "file": "group.rs",
+      "region": "CreateGroup",
+      "label": "Create group"
+    }
+  ],
+  "createMappingRule": [
+    {
+      "file": "mapping_rule.rs",
+      "region": "CreateMappingRule",
+      "label": "Create mapping rule"
+    }
+  ],
+  "createProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "CreateProcessInstance",
+      "label": "Create a process instance"
+    }
+  ],
+  "createRole": [
+    {
+      "file": "role.rs",
+      "region": "CreateRole",
+      "label": "Create role"
+    }
+  ],
+  "createTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "CreateTenant",
+      "label": "Create tenant"
+    }
+  ],
+  "createTenantClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "CreateTenantClusterVariable",
+      "label": "Create a tenant-scoped cluster variable"
+    }
+  ],
+  "createUser": [
+    {
+      "file": "user.rs",
+      "region": "CreateUser",
+      "label": "Create user"
+    }
+  ],
+  "deleteAuthorization": [
+    {
+      "file": "authorization.rs",
+      "region": "DeleteAuthorization",
+      "label": "Delete authorization"
+    }
+  ],
+  "deleteDecisionInstance": [
+    {
+      "file": "decision_instance.rs",
+      "region": "DeleteDecisionInstance",
+      "label": "Delete decision instance"
+    }
+  ],
+  "deleteDecisionInstancesBatchOperation": [
+    {
+      "file": "decision_instance.rs",
+      "region": "DeleteDecisionInstancesBatchOperation",
+      "label": "Delete decision instances (batch)"
+    }
+  ],
+  "deleteDocument": [
+    {
+      "file": "document.rs",
+      "region": "DeleteDocument",
+      "label": "Delete document"
+    }
+  ],
+  "deleteGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "DeleteGlobalClusterVariable",
+      "label": "Delete a global-scoped cluster variable"
+    }
+  ],
+  "deleteGlobalTaskListener": [
+    {
+      "file": "global_listener.rs",
+      "region": "DeleteGlobalTaskListener",
+      "label": "Delete global user task listener"
+    }
+  ],
+  "deleteGroup": [
+    {
+      "file": "group.rs",
+      "region": "DeleteGroup",
+      "label": "Delete group"
+    }
+  ],
+  "deleteMappingRule": [
+    {
+      "file": "mapping_rule.rs",
+      "region": "DeleteMappingRule",
+      "label": "Delete a mapping rule"
+    }
+  ],
+  "deleteProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "DeleteProcessInstance",
+      "label": "Delete process instance"
+    }
+  ],
+  "deleteProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.rs",
+      "region": "DeleteProcessInstancesBatchOperation",
+      "label": "Delete process instances (batch)"
+    }
+  ],
+  "deleteResource": [
+    {
+      "file": "resource.rs",
+      "region": "DeleteResource",
+      "label": "Delete resource"
+    }
+  ],
+  "deleteRole": [
+    {
+      "file": "role.rs",
+      "region": "DeleteRole",
+      "label": "Delete role"
+    }
+  ],
+  "deleteRuntimeBackup": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteRuntimeBackup",
+      "label": "Delete a runtime backup"
+    }
+  ],
+  "deleteRuntimeBackupState": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteRuntimeBackupState",
+      "label": "Delete the runtime backup state"
+    }
+  ],
+  "deleteTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "DeleteTenant",
+      "label": "Delete tenant"
+    }
+  ],
+  "deleteTenantClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "DeleteTenantClusterVariable",
+      "label": "Delete a tenant-scoped cluster variable"
+    }
+  ],
+  "deleteUser": [
+    {
+      "file": "user.rs",
+      "region": "DeleteUser",
+      "label": "Delete user"
+    }
+  ],
+  "evaluateConditionals": [
+    {
+      "file": "conditional.rs",
+      "region": "EvaluateConditionals",
+      "label": "Evaluate root level conditional start events"
+    }
+  ],
+  "evaluateDecision": [
+    {
+      "file": "decision_definition.rs",
+      "region": "EvaluateDecision",
+      "label": "Evaluate a decision"
+    }
+  ],
+  "evaluateExpression": [
+    {
+      "file": "expression.rs",
+      "region": "EvaluateExpression",
+      "label": "Evaluate an expression"
+    }
+  ],
+  "failJob": [
+    {
+      "file": "job.rs",
+      "region": "FailJob",
+      "label": "Fail a job"
+    }
+  ],
+  "getAgentDefinition": [
+    {
+      "file": "agent_definition.rs",
+      "region": "GetAgentDefinition",
+      "label": "Get an agent definition"
+    }
+  ],
+  "getAgentInstance": [
+    {
+      "file": "agent_instance.rs",
+      "region": "GetAgentInstance",
+      "label": "Get agent instance"
+    }
+  ],
+  "getAuditLog": [
+    {
+      "file": "audit_log.rs",
+      "region": "GetAuditLog",
+      "label": "Get audit log"
+    }
+  ],
+  "getAuthentication": [
+    {
+      "file": "authentication.rs",
+      "region": "GetAuthentication",
+      "label": "Get current user"
+    }
+  ],
+  "getAuthorization": [
+    {
+      "file": "authorization.rs",
+      "region": "GetAuthorization",
+      "label": "Get authorization"
+    }
+  ],
+  "getBatchOperation": [
+    {
+      "file": "batch_operation.rs",
+      "region": "GetBatchOperation",
+      "label": "Get batch operation"
+    }
+  ],
+  "getClusterStatus": [
+    {
+      "file": "cluster.rs",
+      "region": "GetClusterStatus",
+      "label": "Get the cluster status"
+    }
+  ],
+  "getDecisionDefinition": [
+    {
+      "file": "decision_definition.rs",
+      "region": "GetDecisionDefinition",
+      "label": "Get decision definition"
+    }
+  ],
+  "getDecisionDefinitionXML": [
+    {
+      "file": "decision_definition.rs",
+      "region": "GetDecisionDefinitionXML",
+      "label": "Get decision definition XML"
+    }
+  ],
+  "getDecisionInstance": [
+    {
+      "file": "decision_instance.rs",
+      "region": "GetDecisionInstance",
+      "label": "Get decision instance"
+    }
+  ],
+  "getDecisionRequirements": [
+    {
+      "file": "decision_requirements.rs",
+      "region": "GetDecisionRequirements",
+      "label": "Get decision requirements"
+    }
+  ],
+  "getDecisionRequirementsXML": [
+    {
+      "file": "decision_requirements.rs",
+      "region": "GetDecisionRequirementsXML",
+      "label": "Get decision requirements XML"
+    }
+  ],
+  "getDocument": [
+    {
+      "file": "document.rs",
+      "region": "GetDocument",
+      "label": "Download document"
+    }
+  ],
+  "getElementInstance": [
+    {
+      "file": "element_instance.rs",
+      "region": "GetElementInstance",
+      "label": "Get element instance"
+    }
+  ],
+  "getExportingStatus": [
+    {
+      "file": "exporting.rs",
+      "region": "GetExportingStatus",
+      "label": "Get the exporting status"
+    }
+  ],
+  "getFormByKey": [
+    {
+      "file": "form.rs",
+      "region": "GetFormByKey",
+      "label": "Get form by key"
+    }
+  ],
+  "getGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "GetGlobalClusterVariable",
+      "label": "Get a global-scoped cluster variable"
+    }
+  ],
+  "getGlobalJobStatistics": [
+    {
+      "file": "job.rs",
+      "region": "GetGlobalJobStatistics",
+      "label": "Global job statistics"
+    }
+  ],
+  "getGlobalTaskListener": [
+    {
+      "file": "global_listener.rs",
+      "region": "GetGlobalTaskListener",
+      "label": "Get global user task listener"
+    }
+  ],
+  "getGroup": [
+    {
+      "file": "group.rs",
+      "region": "GetGroup",
+      "label": "Get group"
+    }
+  ],
+  "getIncident": [
+    {
+      "file": "incident.rs",
+      "region": "GetIncident",
+      "label": "Get incident"
+    }
+  ],
+  "getJobErrorStatistics": [
+    {
+      "file": "job.rs",
+      "region": "GetJobErrorStatistics",
+      "label": "Get error metrics for a job type"
+    }
+  ],
+  "getJobTimeSeriesStatistics": [
+    {
+      "file": "job.rs",
+      "region": "GetJobTimeSeriesStatistics",
+      "label": "Get time-series metrics for a job type"
+    }
+  ],
+  "getJobTypeStatistics": [
+    {
+      "file": "job.rs",
+      "region": "GetJobTypeStatistics",
+      "label": "Get job statistics by type"
+    }
+  ],
+  "getJobWorkerStatistics": [
+    {
+      "file": "job.rs",
+      "region": "GetJobWorkerStatistics",
+      "label": "Get job statistics by worker"
+    }
+  ],
+  "getLicense": [
+    {
+      "file": "license.rs",
+      "region": "GetLicense",
+      "label": "Get license status"
+    }
+  ],
+  "getMappingRule": [
+    {
+      "file": "mapping_rule.rs",
+      "region": "GetMappingRule",
+      "label": "Get a mapping rule"
+    }
+  ],
+  "getProcessDefinition": [
+    {
+      "file": "process_definition.rs",
+      "region": "GetProcessDefinition",
+      "label": "Get process definition"
+    }
+  ],
+  "getProcessDefinitionInstanceStatistics": [
+    {
+      "file": "process_definition.rs",
+      "region": "GetProcessDefinitionInstanceStatistics",
+      "label": "Get process instance statistics"
+    }
+  ],
+  "getProcessDefinitionInstanceVersionStatistics": [
+    {
+      "file": "process_definition.rs",
+      "region": "GetProcessDefinitionInstanceVersionStatistics",
+      "label": "Get process instance statistics by version"
+    }
+  ],
+  "getProcessDefinitionMessageSubscriptionStatistics": [
+    {
+      "file": "process_definition.rs",
+      "region": "GetProcessDefinitionMessageSubscriptionStatistics",
+      "label": "Get message subscription statistics"
+    }
+  ],
+  "getProcessDefinitionStatistics": [
+    {
+      "file": "process_definition.rs",
+      "region": "GetProcessDefinitionStatistics",
+      "label": "Get process definition statistics"
+    }
+  ],
+  "getProcessDefinitionXML": [
+    {
+      "file": "process_definition.rs",
+      "region": "GetProcessDefinitionXML",
+      "label": "Get process definition XML"
+    }
+  ],
+  "getProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "GetProcessInstance",
+      "label": "Get a process instance"
+    }
+  ],
+  "getProcessInstanceCallHierarchy": [
+    {
+      "file": "process_instance.rs",
+      "region": "GetProcessInstanceCallHierarchy",
+      "label": "Get call hierarchy"
+    }
+  ],
+  "getProcessInstanceSequenceFlows": [
+    {
+      "file": "process_instance.rs",
+      "region": "GetProcessInstanceSequenceFlows",
+      "label": "Get sequence flows"
+    }
+  ],
+  "getProcessInstanceStatistics": [
+    {
+      "file": "process_instance.rs",
+      "region": "GetProcessInstanceStatistics",
+      "label": "Get element instance statistics"
+    }
+  ],
+  "getProcessInstanceStatisticsByDefinition": [
+    {
+      "file": "incident.rs",
+      "region": "GetProcessInstanceStatisticsByDefinition",
+      "label": "Get process instance statistics by definition"
+    }
+  ],
+  "getProcessInstanceStatisticsByError": [
+    {
+      "file": "incident.rs",
+      "region": "GetProcessInstanceStatisticsByError",
+      "label": "Get process instance statistics by error"
+    }
+  ],
+  "getProcessInstanceWaitStateStatistics": [
+    {
+      "file": "process_instance.rs",
+      "region": "GetProcessInstanceWaitStateStatistics",
+      "label": "Get wait state statistics"
+    }
+  ],
+  "getResource": [
+    {
+      "file": "resource.rs",
+      "region": "GetResource",
+      "label": "Get resource"
+    }
+  ],
+  "getResourceContent": [
+    {
+      "file": "resource.rs",
+      "region": "GetResourceContent",
+      "label": "Get RPA resource content (deprecated)"
+    }
+  ],
+  "getResourceContentBinary": [
+    {
+      "file": "resource.rs",
+      "region": "GetResourceContentBinary",
+      "label": "Get resource content as binary"
+    }
+  ],
+  "getRestoreStatus": [
+    {
+      "file": "recovery.rs",
+      "region": "GetRestoreStatus",
+      "label": "Get the restore status"
+    }
+  ],
+  "getRole": [
+    {
+      "file": "role.rs",
+      "region": "GetRole",
+      "label": "Get role"
+    }
+  ],
+  "getRuntimeBackup": [
+    {
+      "file": "backup.rs",
+      "region": "GetRuntimeBackup",
+      "label": "Get a runtime backup"
+    }
+  ],
+  "getRuntimeBackupState": [
+    {
+      "file": "backup.rs",
+      "region": "GetRuntimeBackupState",
+      "label": "Get the runtime backup state"
+    }
+  ],
+  "getStartProcessForm": [
+    {
+      "file": "process_definition.rs",
+      "region": "GetStartProcessForm",
+      "label": "Get process start form"
+    }
+  ],
+  "getStatus": [
+    {
+      "file": "cluster.rs",
+      "region": "GetStatus",
+      "label": "Get cluster status"
+    }
+  ],
+  "getSystemConfiguration": [
+    {
+      "file": "system.rs",
+      "region": "GetSystemConfiguration",
+      "label": "System configuration (alpha)"
+    }
+  ],
+  "getTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "GetTenant",
+      "label": "Get tenant"
+    }
+  ],
+  "getTenantClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "GetTenantClusterVariable",
+      "label": "Get a tenant-scoped cluster variable"
+    }
+  ],
+  "getTopology": [
+    {
+      "file": "cluster.rs",
+      "region": "GetTopology",
+      "label": "Get cluster topology"
+    }
+  ],
+  "getUsageMetrics": [
+    {
+      "file": "system.rs",
+      "region": "GetUsageMetrics",
+      "label": "Get usage metrics"
+    }
+  ],
+  "getUser": [
+    {
+      "file": "user.rs",
+      "region": "GetUser",
+      "label": "Get user"
+    }
+  ],
+  "getUserTask": [
+    {
+      "file": "user_task.rs",
+      "region": "GetUserTask",
+      "label": "Get user task"
+    }
+  ],
+  "getUserTaskForm": [
+    {
+      "file": "user_task.rs",
+      "region": "GetUserTaskForm",
+      "label": "Get user task form"
+    }
+  ],
+  "getVariable": [
+    {
+      "file": "variable.rs",
+      "region": "GetVariable",
+      "label": "Get variable"
+    }
+  ],
+  "listRuntimeBackups": [
+    {
+      "file": "backup.rs",
+      "region": "ListRuntimeBackups",
+      "label": "List runtime backups"
+    }
+  ],
+  "listSecrets": [
+    {
+      "file": "secret.rs",
+      "region": "ListSecrets",
+      "label": "List secrets"
+    }
+  ],
+  "migrateProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "MigrateProcessInstance",
+      "label": "Migrate process instance"
+    }
+  ],
+  "migrateProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.rs",
+      "region": "MigrateProcessInstancesBatchOperation",
+      "label": "Migrate process instances (batch)"
+    }
+  ],
+  "modifyProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "ModifyProcessInstance",
+      "label": "Modify process instance"
+    }
+  ],
+  "modifyProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.rs",
+      "region": "ModifyProcessInstancesBatchOperation",
+      "label": "Modify process instances (batch)"
+    }
+  ],
+  "pauseExporting": [
+    {
+      "file": "exporting.rs",
+      "region": "PauseExporting",
+      "label": "Pause exporting"
+    }
+  ],
+  "pinClock": [
+    {
+      "file": "clock.rs",
+      "region": "PinClock",
+      "label": "Pin internal clock (alpha)"
+    }
+  ],
+  "publishMessage": [
+    {
+      "file": "message.rs",
+      "region": "PublishMessage",
+      "label": "Publish a message"
+    }
+  ],
+  "resetClock": [
+    {
+      "file": "clock.rs",
+      "region": "ResetClock",
+      "label": "Reset internal clock (alpha)"
+    }
+  ],
+  "resolveIncident": [
+    {
+      "file": "incident.rs",
+      "region": "ResolveIncident",
+      "label": "Resolve incident"
+    }
+  ],
+  "resolveIncidentsBatchOperation": [
+    {
+      "file": "process_instance.rs",
+      "region": "ResolveIncidentsBatchOperation",
+      "label": "Resolve related incidents (batch)"
+    }
+  ],
+  "resolveProcessInstanceIncidents": [
+    {
+      "file": "process_instance.rs",
+      "region": "ResolveProcessInstanceIncidents",
+      "label": "Resolve related incidents"
+    }
+  ],
+  "resolveSecrets": [
+    {
+      "file": "secret.rs",
+      "region": "ResolveSecrets",
+      "label": "Resolve secrets (alpha)"
+    }
+  ],
+  "restore": [
+    {
+      "file": "recovery.rs",
+      "region": "Restore",
+      "label": "Restore from a backup"
+    }
+  ],
+  "resumeBatchOperation": [
+    {
+      "file": "batch_operation.rs",
+      "region": "ResumeBatchOperation",
+      "label": "Resume Batch operation"
+    }
+  ],
+  "resumeExporting": [
+    {
+      "file": "exporting.rs",
+      "region": "ResumeExporting",
+      "label": "Resume exporting"
+    }
+  ],
+  "resumeProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "ResumeProcessInstance",
+      "label": "Resume process instance"
+    }
+  ],
+  "resumeProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.rs",
+      "region": "ResumeProcessInstancesBatchOperation",
+      "label": "Resume process instances (batch)"
+    }
+  ],
+  "searchAgentDefinitions": [
+    {
+      "file": "agent_definition.rs",
+      "region": "SearchAgentDefinitions",
+      "label": "Search agent definitions"
+    }
+  ],
+  "searchAgentInstanceHistory": [
+    {
+      "file": "agent_instance.rs",
+      "region": "SearchAgentInstanceHistory",
+      "label": "Search agent instance history"
+    }
+  ],
+  "searchAgentInstances": [
+    {
+      "file": "agent_instance.rs",
+      "region": "SearchAgentInstances",
+      "label": "Search agent instances"
+    }
+  ],
+  "searchAuditLogs": [
+    {
+      "file": "audit_log.rs",
+      "region": "SearchAuditLogs",
+      "label": "Search audit logs"
+    }
+  ],
+  "searchAuthorizations": [
+    {
+      "file": "authorization.rs",
+      "region": "SearchAuthorizations",
+      "label": "Search authorizations"
+    }
+  ],
+  "searchBatchOperationItems": [
+    {
+      "file": "batch_operation.rs",
+      "region": "SearchBatchOperationItems",
+      "label": "Search batch operation items"
+    }
+  ],
+  "searchBatchOperations": [
+    {
+      "file": "batch_operation.rs",
+      "region": "SearchBatchOperations",
+      "label": "Search batch operations"
+    }
+  ],
+  "searchClientsForGroup": [
+    {
+      "file": "group.rs",
+      "region": "SearchClientsForGroup",
+      "label": "Search group clients"
+    }
+  ],
+  "searchClientsForRole": [
+    {
+      "file": "role.rs",
+      "region": "SearchClientsForRole",
+      "label": "Search role clients"
+    }
+  ],
+  "searchClientsForTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "SearchClientsForTenant",
+      "label": "Search clients for tenant"
+    }
+  ],
+  "searchClusterVariables": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "SearchClusterVariables",
+      "label": "searchClusterVariables"
+    }
+  ],
+  "searchCorrelatedMessageSubscriptions": [
+    {
+      "file": "message_subscription.rs",
+      "region": "SearchCorrelatedMessageSubscriptions",
+      "label": "Search correlated message subscriptions"
+    }
+  ],
+  "searchDecisionDefinitions": [
+    {
+      "file": "decision_definition.rs",
+      "region": "SearchDecisionDefinitions",
+      "label": "Search decision definitions"
+    }
+  ],
+  "searchDecisionInstances": [
+    {
+      "file": "decision_instance.rs",
+      "region": "SearchDecisionInstances",
+      "label": "Search decision instances"
+    }
+  ],
+  "searchDecisionRequirements": [
+    {
+      "file": "decision_requirements.rs",
+      "region": "SearchDecisionRequirements",
+      "label": "Search decision requirements"
+    }
+  ],
+  "searchElementInstanceIncidents": [
+    {
+      "file": "element_instance.rs",
+      "region": "SearchElementInstanceIncidents",
+      "label": "Search for incidents of a specific element instance"
+    }
+  ],
+  "searchElementInstanceWaitStates": [
+    {
+      "file": "element_instance.rs",
+      "region": "SearchElementInstanceWaitStates",
+      "label": "Search element instance wait states"
+    }
+  ],
+  "searchElementInstances": [
+    {
+      "file": "element_instance.rs",
+      "region": "SearchElementInstances",
+      "label": "Search element instances"
+    }
+  ],
+  "searchGlobalTaskListeners": [
+    {
+      "file": "global_listener.rs",
+      "region": "SearchGlobalTaskListeners",
+      "label": "Search global user task listeners"
+    }
+  ],
+  "searchGroupIdsForTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "SearchGroupIdsForTenant",
+      "label": "Search groups for tenant"
+    }
+  ],
+  "searchGroups": [
+    {
+      "file": "group.rs",
+      "region": "SearchGroups",
+      "label": "Search groups"
+    }
+  ],
+  "searchGroupsForRole": [
+    {
+      "file": "role.rs",
+      "region": "SearchGroupsForRole",
+      "label": "Search role groups"
+    }
+  ],
+  "searchIncidents": [
+    {
+      "file": "incident.rs",
+      "region": "SearchIncidents",
+      "label": "Search incidents"
+    }
+  ],
+  "searchJobs": [
+    {
+      "file": "job.rs",
+      "region": "SearchJobs",
+      "label": "Search jobs"
+    }
+  ],
+  "searchMappingRule": [
+    {
+      "file": "mapping_rule.rs",
+      "region": "SearchMappingRule",
+      "label": "Search mapping rules"
+    }
+  ],
+  "searchMappingRulesForGroup": [
+    {
+      "file": "group.rs",
+      "region": "SearchMappingRulesForGroup",
+      "label": "Search group mapping rules"
+    }
+  ],
+  "searchMappingRulesForRole": [
+    {
+      "file": "role.rs",
+      "region": "SearchMappingRulesForRole",
+      "label": "Search role mapping rules"
+    }
+  ],
+  "searchMappingRulesForTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "SearchMappingRulesForTenant",
+      "label": "Search mapping rules for tenant"
+    }
+  ],
+  "searchMessageSubscriptions": [
+    {
+      "file": "message_subscription.rs",
+      "region": "SearchMessageSubscriptions",
+      "label": "Search message subscriptions"
+    }
+  ],
+  "searchOwnAuthorizations": [
+    {
+      "file": "authentication.rs",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search authorizations of the authenticated user"
+    }
+  ],
+  "searchProcessDefinitionVariableNames": [
+    {
+      "file": "process_definition.rs",
+      "region": "SearchProcessDefinitionVariableNames",
+      "label": "Search process definition variable names"
+    }
+  ],
+  "searchProcessDefinitions": [
+    {
+      "file": "process_definition.rs",
+      "region": "SearchProcessDefinitions",
+      "label": "Search process definitions"
+    }
+  ],
+  "searchProcessInstanceIncidents": [
+    {
+      "file": "process_instance.rs",
+      "region": "SearchProcessInstanceIncidents",
+      "label": "Search related incidents"
+    }
+  ],
+  "searchProcessInstances": [
+    {
+      "file": "process_instance.rs",
+      "region": "SearchProcessInstances",
+      "label": "Search process instances"
+    }
+  ],
+  "searchResources": [
+    {
+      "file": "resource.rs",
+      "region": "SearchResources",
+      "label": "Search resources"
+    }
+  ],
+  "searchRoles": [
+    {
+      "file": "role.rs",
+      "region": "SearchRoles",
+      "label": "Search roles"
+    }
+  ],
+  "searchRolesForGroup": [
+    {
+      "file": "group.rs",
+      "region": "SearchRolesForGroup",
+      "label": "Search group roles"
+    }
+  ],
+  "searchRolesForTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "SearchRolesForTenant",
+      "label": "Search roles for tenant"
+    }
+  ],
+  "searchTenants": [
+    {
+      "file": "tenant.rs",
+      "region": "SearchTenants",
+      "label": "Search tenants"
+    }
+  ],
+  "searchUserTaskAuditLogs": [
+    {
+      "file": "user_task.rs",
+      "region": "SearchUserTaskAuditLogs",
+      "label": "Search user task audit logs"
+    }
+  ],
+  "searchUserTaskEffectiveVariables": [
+    {
+      "file": "user_task.rs",
+      "region": "SearchUserTaskEffectiveVariables",
+      "label": "Search user task effective variables"
+    }
+  ],
+  "searchUserTaskVariables": [
+    {
+      "file": "user_task.rs",
+      "region": "SearchUserTaskVariables",
+      "label": "Search user task variables"
+    }
+  ],
+  "searchUserTasks": [
+    {
+      "file": "user_task.rs",
+      "region": "SearchUserTasks",
+      "label": "Search user tasks"
+    }
+  ],
+  "searchUsers": [
+    {
+      "file": "user.rs",
+      "region": "SearchUsers",
+      "label": "Search users"
+    }
+  ],
+  "searchUsersForGroup": [
+    {
+      "file": "group.rs",
+      "region": "SearchUsersForGroup",
+      "label": "Search group users"
+    }
+  ],
+  "searchUsersForRole": [
+    {
+      "file": "role.rs",
+      "region": "SearchUsersForRole",
+      "label": "Search role users"
+    }
+  ],
+  "searchUsersForTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "SearchUsersForTenant",
+      "label": "Search users for tenant"
+    }
+  ],
+  "searchVariables": [
+    {
+      "file": "variable.rs",
+      "region": "SearchVariables",
+      "label": "Search variables"
+    }
+  ],
+  "suspendBatchOperation": [
+    {
+      "file": "batch_operation.rs",
+      "region": "SuspendBatchOperation",
+      "label": "Suspend Batch operation"
+    }
+  ],
+  "suspendProcessInstance": [
+    {
+      "file": "process_instance.rs",
+      "region": "SuspendProcessInstance",
+      "label": "Suspend process instance"
+    }
+  ],
+  "suspendProcessInstancesBatchOperation": [
+    {
+      "file": "process_instance.rs",
+      "region": "SuspendProcessInstancesBatchOperation",
+      "label": "Suspend process instances (batch)"
+    }
+  ],
+  "syncRuntimeBackupState": [
+    {
+      "file": "backup.rs",
+      "region": "SyncRuntimeBackupState",
+      "label": "Synchronize the runtime backup state"
+    }
+  ],
+  "takeRuntimeBackup": [
+    {
+      "file": "backup.rs",
+      "region": "TakeRuntimeBackup",
+      "label": "Take a runtime backup"
+    }
+  ],
+  "throwJobError": [
+    {
+      "file": "job.rs",
+      "region": "ThrowJobError",
+      "label": "Throw a BPMN error for a job"
+    }
+  ],
+  "unassignClientFromGroup": [
+    {
+      "file": "group.rs",
+      "region": "UnassignClientFromGroup",
+      "label": "Unassign a client from a group"
+    }
+  ],
+  "unassignClientFromTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "UnassignClientFromTenant",
+      "label": "Unassign a client from a tenant"
+    }
+  ],
+  "unassignGroupFromTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "UnassignGroupFromTenant",
+      "label": "Unassign a group from a tenant"
+    }
+  ],
+  "unassignMappingRuleFromGroup": [
+    {
+      "file": "group.rs",
+      "region": "UnassignMappingRuleFromGroup",
+      "label": "Unassign a mapping rule from a group"
+    }
+  ],
+  "unassignMappingRuleFromTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "UnassignMappingRuleFromTenant",
+      "label": "Unassign a mapping rule from a tenant"
+    }
+  ],
+  "unassignRoleFromClient": [
+    {
+      "file": "role.rs",
+      "region": "UnassignRoleFromClient",
+      "label": "Unassign a role from a client"
+    }
+  ],
+  "unassignRoleFromGroup": [
+    {
+      "file": "role.rs",
+      "region": "UnassignRoleFromGroup",
+      "label": "Unassign a role from a group"
+    }
+  ],
+  "unassignRoleFromMappingRule": [
+    {
+      "file": "role.rs",
+      "region": "UnassignRoleFromMappingRule",
+      "label": "Unassign a role from a mapping rule"
+    }
+  ],
+  "unassignRoleFromTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "UnassignRoleFromTenant",
+      "label": "Unassign a role from a tenant"
+    }
+  ],
+  "unassignRoleFromUser": [
+    {
+      "file": "role.rs",
+      "region": "UnassignRoleFromUser",
+      "label": "Unassign a role from a user"
+    }
+  ],
+  "unassignUserFromGroup": [
+    {
+      "file": "group.rs",
+      "region": "UnassignUserFromGroup",
+      "label": "Unassign a user from a group"
+    }
+  ],
+  "unassignUserFromTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "UnassignUserFromTenant",
+      "label": "Unassign a user from a tenant"
+    }
+  ],
+  "unassignUserTask": [
+    {
+      "file": "user_task.rs",
+      "region": "UnassignUserTask",
+      "label": "Unassign user task"
+    }
+  ],
+  "updateAgentInstance": [
+    {
+      "file": "agent_instance.rs",
+      "region": "UpdateAgentInstance",
+      "label": "Update agent instance"
+    }
+  ],
+  "updateAuthorization": [
+    {
+      "file": "authorization.rs",
+      "region": "UpdateAuthorization",
+      "label": "Update authorization"
+    }
+  ],
+  "updateGlobalClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "UpdateGlobalClusterVariable",
+      "label": "Update a global-scoped cluster variable"
+    }
+  ],
+  "updateGlobalTaskListener": [
+    {
+      "file": "global_listener.rs",
+      "region": "UpdateGlobalTaskListener",
+      "label": "Update global user task listener"
+    }
+  ],
+  "updateGroup": [
+    {
+      "file": "group.rs",
+      "region": "UpdateGroup",
+      "label": "Update group"
+    }
+  ],
+  "updateJob": [
+    {
+      "file": "job.rs",
+      "region": "UpdateJob",
+      "label": "Update job"
+    }
+  ],
+  "updateJobsBatchOperation": [
+    {
+      "file": "job.rs",
+      "region": "UpdateJobsBatchOperation",
+      "label": "Update jobs (batch)"
+    }
+  ],
+  "updateMappingRule": [
+    {
+      "file": "mapping_rule.rs",
+      "region": "UpdateMappingRule",
+      "label": "Update mapping rule"
+    }
+  ],
+  "updateRole": [
+    {
+      "file": "role.rs",
+      "region": "UpdateRole",
+      "label": "Update role"
+    }
+  ],
+  "updateTenant": [
+    {
+      "file": "tenant.rs",
+      "region": "UpdateTenant",
+      "label": "Update tenant"
+    }
+  ],
+  "updateTenantClusterVariable": [
+    {
+      "file": "cluster_variable.rs",
+      "region": "UpdateTenantClusterVariable",
+      "label": "Update a tenant-scoped cluster variable"
+    }
+  ],
+  "updateUser": [
+    {
+      "file": "user.rs",
+      "region": "UpdateUser",
+      "label": "Update user"
+    }
+  ],
+  "updateUserTask": [
+    {
+      "file": "user_task.rs",
+      "region": "UpdateUserTask",
+      "label": "Update user task"
+    }
+  ]
+}

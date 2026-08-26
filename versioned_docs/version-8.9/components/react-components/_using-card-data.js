@@ -1,6 +1,4 @@
-import IconIdpImg from "../assets/icon-idp.png";
 import IconRpaImg from "../assets/icon-rpa.png";
-import IconAgenticImg from "../assets/icon-agentic.png";
 import IconDocsImg from "../assets/icon-docs.png";
 import IconIntegrationImg from "../assets/icon-integration.png";
 import IconEarlyAccessImg from "../assets/icon-earlyaccess.png";
@@ -12,19 +10,6 @@ import IconOptimizeImg from "../assets/icon-optimize.png";
 import IconConsoleImg from "../assets/icon-console.png";
 
 export const featuresCards = [
-  {
-    link: "./agentic-orchestration/agentic-orchestration-overview",
-    title: "Agentic orchestration",
-    image: IconAgenticImg,
-    description:
-      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
-  },
-  {
-    link: "./modeler/web-modeler/idp/",
-    title: "Intelligent document processing (IDP)",
-    image: IconIdpImg,
-    description: "Integrate automated document processing into your processes.",
-  },
   {
     link: "./rpa/overview/",
     title: "Robotic process automation (RPA)",
@@ -96,19 +81,6 @@ export const usingCamundaCards = [
 ];
 
 export const featuresPageCards = [
-  {
-    link: "../agentic-orchestration/agentic-orchestration-overview",
-    title: "Agentic orchestration",
-    image: IconAgenticImg,
-    description:
-      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
-  },
-  {
-    link: "../modeler/web-modeler/idp/",
-    title: "Intelligent document processing (IDP)",
-    image: IconIdpImg,
-    description: "Integrate automated document processing into your processes.",
-  },
   {
     link: "../rpa/overview/",
     title: "Robotic process automation (RPA)",
