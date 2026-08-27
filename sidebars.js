@@ -973,6 +973,18 @@ module.exports = {
           },
           items: [
             "components/connectors/use-connectors/configuring-out-of-the-box-connectors",
+            {
+              type: "category",
+              label: "Credentials",
+              link: {
+                type: "doc",
+                id: "components/connectors/use-connectors/credentials/credentials",
+              },
+              items: [
+                "components/connectors/use-connectors/credentials/credentials-desktop-modeler",
+                "components/connectors/use-connectors/credentials/credentials-web-modeler",
+              ],
+            },
             "components/connectors/connector-types",
             "components/connectors/use-connectors/inbound",
             "components/connectors/use-connectors/outbound",

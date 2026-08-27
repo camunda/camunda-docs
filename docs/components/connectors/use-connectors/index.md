@@ -15,6 +15,10 @@ Learn how to [install connectors in Self-Managed](/self-managed/components/conne
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to model processes in Camunda Hub.
 :::
 
+## Using credentials
+
+Some connectors support [credentials](./credentials/index.md), which store the authentication information a connector needs to reach an external service. Create a credential once, then select it on any connector task that supports it, instead of configuring the same authentication settings in every diagram.
+
 ## Using secrets
 
 :::warning
