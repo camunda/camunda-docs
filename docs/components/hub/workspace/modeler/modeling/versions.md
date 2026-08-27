@@ -10,7 +10,7 @@ description: View, compare, and restore the version history of a file in Web Mod
 With 8.7, "milestone" has been renamed to "version". To learn more about this change, see [the related release note](/reference/announcements-release-notes/870/870-release-notes.md#web-modeler-milestones-renamed-to-versions).
 :::
 
-Every file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
+Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
 
 A version is a Web Modeler snapshot of a file, not a deployed process definition version. See [version (file)](/reference/glossary.md#version-file).
 

@@ -31,7 +31,7 @@ To view all snapshots:
 
 The side panel has two sub-tabs:
 
-- **Snapshots**: the timeline of all project snapshots.
+- **Versions**: the timeline of all project snapshots.
 - **Compare**: the comparison of the two snapshots you selected.
 
 See [manage file versions](/components/hub/workspace/modeler/modeling/versions.md) to learn about more features like comparing and restoring individual file versions.
@@ -50,17 +50,18 @@ From here, you can perform the following actions on a project snapshot:
 | **View details** | Open the snapshot details page to review the contents of all files in the snapshot.             |
 | **Restore**      | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project. |
 | **Edit details** | Edit the snapshot tag and description.                                                          |
-| **Deploy**       | Deploy the project snapshot, especially after it has been [reviewed](#request-a-review).        |
 | **Download**     | Download the project as a zip file.                                                             |
 | **Copy to**      | Create a new project with the files from the snapshot.                                          |
 | **Edit review**  | Update the [review](#request-a-review) status of the snapshot.                                  |
 | **Delete**       | Delete the project snapshot.                                                                    |
 
+You can also deploy a project snapshot from the project's main deployment flow after it has been [reviewed](#request-a-review). A dedicated **Deploy** action in this menu is planned as a follow-up.
+
 ## Compare snapshots
 
 You can compare any two project snapshots, including snapshots that are not next to each other in the timeline.
 
-1. In the **Snapshots** sub-tab, select the checkbox of the first snapshot you want to compare.
+1. In the **Versions** sub-tab, select the checkbox of the first snapshot you want to compare.
 1. Select the checkbox of the second snapshot you want to compare.
 
 The side panel switches to the **Compare** sub-tab and shows the older snapshot against the newer one, ordered by time regardless of the order you selected them. The selected pair is written to the URL, so you can share or bookmark a specific comparison.
@@ -94,7 +95,7 @@ Restoring a snapshot reverts the entire project to its state at the time the sna
 
 To restore a snapshot:
 
-1. In the **Snapshots** sub-tab, open the actions menu of the snapshot you want to restore.
+1. In the **Versions** sub-tab, open the actions menu of the snapshot you want to restore.
 1. Select **Restore**.
 
 The project state changes to match the snapshot, and the snapshots timeline is refreshed.

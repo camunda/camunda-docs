@@ -310,7 +310,7 @@ An event represents a state change associated with an aspect of an executing [pr
 
 In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
 
-The execution platform version is not a deployed process definition version, a Web Modeler version, or a SaaS cluster generation.
+The execution platform version is not a deployed process definition version, a [file version](#version-file) or [project snapshot](#snapshot-project), or a SaaS cluster generation.
 
 - [Desktop Modeler flags](/components/modeler/desktop-modeler/flags/flags.md#default-execution-platform-version)
 
@@ -374,7 +374,7 @@ Any AI system that can produce new content, such as text, images, or audio, in r
 
 In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Console uses generations instead of a single engine version because the underlying component versions can change independently.
 
-A generation is not a process definition version, a version tag, or a Web Modeler version.
+A generation is not a process definition version, a version tag, or a [file version](#version-file) or [project snapshot](#snapshot-project).
 
 - [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
 
@@ -597,7 +597,7 @@ The engine uses process definitions to start [process instances](#process-instan
 
 A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
 
-Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a Web Modeler version, which is a saved file or project snapshot.
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project), which are saved Web Modeler captures.
 
 - [Process definition](#process-definition)
 - [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
@@ -776,7 +776,7 @@ The state of all active [process instances](#process-instance), (these are also 
 
 ### Snapshot (project)
 
-A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, and review project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
 
 - [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
