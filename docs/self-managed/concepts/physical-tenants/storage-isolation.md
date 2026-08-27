@@ -524,6 +524,50 @@ Risks to avoid:
 - Don't overlap index prefixes
 - Don't point two tenants to the same bucket or container without distinct sibling subpaths. Don't nest one tenant's subpath inside another's, and don't leave one tenant on the bucket or container root
 
+### Secondary storage failures during startup and runtime
+
+Camunda initializes the secondary-storage schema for each Physical Tenant independently. A tenant becomes ready only after its schema initialization succeeds. If one tenant cannot initialize, Camunda marks only that tenant as degraded and keeps other tenants independent.
+
+#### Startup behavior
+
+For multi-tenant initialization, Camunda starts one schema-initialization task per tenant. Retryable failures, such as temporary connectivity problems, are retried according to the schema manager retry settings. With the default settings, schema initialization continues retrying until it succeeds.
+
+On a node with multiple Physical Tenants, startup uses the following rules:
+
+| Node and storage type                               | Startup behavior                                                                                                                                                                                |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Elasticsearch or OpenSearch with an HTTP gateway    | Startup waits until every tenant has produced an initial result. If at least one tenant is serviceable, the node starts serving traffic. A tenant that failed keeps retrying in the background. |
+| Elasticsearch or OpenSearch without an HTTP gateway | The node does not wait for schema initialization. It starts while each tenant retries in the background.                                                                                        |
+| RDBMS, with or without an HTTP gateway              | Every node waits until at least one tenant is serviceable or no tenant can make further progress. One tenant's failure does not abort the node when another tenant is serviceable.              |
+
+On nodes that wait at startup, Camunda retries temporary failures before allowing traffic. If every tenant has a failure that retrying cannot fix, startup aborts and the node exits with a non-zero status.
+
+An RDBMS node with exactly one Physical Tenant keeps the existing synchronous, fail-fast behavior. An unreachable database or an unrepairable schema failure aborts startup instead of being retried in the background.
+
+If you configure a finite retry limit and all attempts stop before any tenant becomes ready, startup can complete but the affected tenant remains degraded. On nodes whose readiness probe includes secondary storage, the node remains not ready. The application logs identify the tenant and report that its retry limit was exhausted.
+
+#### Readiness and health
+
+Readiness and health answer different questions:
+
+| Endpoint or signal                                | Meaning                                                                                                                                                                                                               |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/actuator/health/readiness`                      | Node-level readiness where the secondary-storage readiness check is enabled. It is `UP` when at least one Physical Tenant is ready and `DOWN` when no tenant is ready. It does not mean that every tenant is healthy. |
+| `/actuator/health`                                | Full node health, including live secondary-storage checks. On multi-tenant nodes, inspect the per-tenant `rdbmsStatus` or `searchEngineStatus` contributors.                                                          |
+| `camunda_physical_tenant_secondary_storage_ready` | Prometheus gauge with `physicalTenant` labels. A value of `1` means that the tenant's schema is initialized; `0` means that the tenant is degraded.                                                                   |
+
+The readiness signal is based on schema initialization and does not continuously probe storage connectivity. As a result, a storage outage after startup does not automatically make a ready node fail its readiness probe. The full health endpoint, logs, and operation-specific errors provide the live storage status. The full `/actuator/health` result can be `DOWN` for one failed tenant even when `/actuator/health/readiness` remains `UP` because another tenant is serviceable.
+
+When a tenant is degraded because its schema has not initialized, REST query API requests, that require secondary storage for that tenant, return `HTTP 503 Service Unavailable` and a `Retry-After: 5` header. Other tenants continue to be served. After the storage problem is fixed, a retryable failure recovers in the background without restarting the node.
+
+#### Troubleshoot startup and readiness failures
+
+- **The node stays at startup.** Check the application logs for the Physical Tenant named in the schema-initialization messages. Verify the tenant's storage endpoint, credentials, network access, and schema permissions. For Elasticsearch or OpenSearch, also verify that the cluster is at least yellow when the startup health check is enabled.
+- **Readiness is `DOWN`.** Inspect the `camunda_physical_tenant_secondary_storage_ready` gauge for each tenant. If every tenant reports `0`, no tenant can currently serve secondary-storage-dependent requests.
+- **One tenant returns `503` while another works.** This is expected partial degradation. Fix the affected tenant's storage problem and wait for its background initialization retry. No restart is required for a retryable failure.
+- **An RDBMS tenant fails before schema initialization starts.** If the JDBC URL uses a wrapper or a non-standard format, Camunda might not be able to determine the database vendor without connecting to the database. Set `database-vendor-id` in the tenant's RDBMS configuration. See [RDBMS database configuration](../databases/relational-db/configuration.md).
+- **The logs report a terminal schema failure.** Fix the reported schema or configuration problem, then restart the node. Terminal failures are not retried because retrying cannot repair them.
+
 ### Scaling and capacity planning
 
 - **RDBMS**: Monitor schema size per tenant; high-traffic tenants may need dedicated instances
@@ -552,10 +596,10 @@ In 8.10 alpha3, per-tenant and root-level custom exporter configurations are not
 
 ## Storage configuration matrix
 
-| Aspect                   | RDBMS                    | Elasticsearch/OpenSearch         | Document Store                     |
-| ------------------------ | ------------------------ | -------------------------------- | ---------------------------------- |
-| **Isolation**            | Separate schema/database | Separate cluster OR index prefix | Separate bucket OR sibling subpath |
-| **Per-tenant config**    | JDBC URL                 | `url` + `index-prefix`           | Bucket + prefix                    |
-| **Collision detection**  | Startup error            | Startup error                    | Startup error                      |
-| **Unavailable behavior** | Startup failure          | Startup failure                  | Runtime error (no fallback)        |
-| **Mixed vendors**        | Yes                      | Yes (ES or OpenSearch)           | Yes (different cloud providers)    |
+| Aspect                   | RDBMS                                                                               | Elasticsearch/OpenSearch                                                            | Document Store                     |
+| ------------------------ | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ---------------------------------- |
+| **Isolation**            | Separate schema/database OR table prefix                                            | Separate cluster OR index prefix                                                    | Separate bucket OR sibling subpath |
+| **Per-tenant config**    | JDBC URL                                                                            | `url` + `index-prefix`                                                              | Bucket + prefix                    |
+| **Collision detection**  | Startup error                                                                       | Startup error                                                                       | Startup error                      |
+| **Unavailable behavior** | Tenant degraded ([details](#secondary-storage-failures-during-startup-and-runtime)) | Tenant degraded ([details](#secondary-storage-failures-during-startup-and-runtime)) | Runtime error (no fallback)        |
+| **Mixed vendors**        | Yes                                                                                 | Yes (ES or OpenSearch)                                                              | Yes (different cloud providers)    |
