@@ -1,7 +1,6 @@
-import IconIdpImg from "../assets/icon-idp.png";
 import IconRpaImg from "../assets/icon-rpa.png";
-import IconAgenticImg from "../assets/icon-agentic.png";
 import IconDocsImg from "../assets/icon-docs.png";
+import IconOperateImg from "../assets/icon-operate.png";
 import IconIntegrationImg from "../assets/icon-integration.png";
 import IconEarlyAccessImg from "../assets/icon-earlyaccess.png";
 import IconModelerImg from "../assets/icon-modeler.png";
@@ -84,19 +83,6 @@ export const usingCamundaCards = [
 
 export const featuresPageCards = [
   {
-    link: "../agentic-orchestration/agentic-orchestration-overview",
-    title: "Agentic orchestration",
-    image: IconAgenticImg,
-    description:
-      "Orchestrate and integrate artificial intelligence (AI) agents into your end-to-end processes.",
-  },
-  {
-    link: "../hub/workspace/modeler/idp/",
-    title: "Intelligent document processing (IDP)",
-    image: IconIdpImg,
-    description: "Integrate automated document processing into your processes.",
-  },
-  {
     link: "../rpa/overview/",
     title: "Robotic process automation (RPA)",
     image: IconRpaImg,
@@ -107,5 +93,11 @@ export const featuresPageCards = [
     title: "Document handling",
     image: IconDocsImg,
     description: "Store, track, and manage documents.",
+  },
+  {
+    link: "../wait-states/overview/",
+    title: "Wait states",
+    image: IconOperateImg,
+    description: "See what an active process instance is waiting for.",
   },
 ];

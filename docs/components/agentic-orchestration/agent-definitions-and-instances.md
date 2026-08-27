@@ -53,12 +53,15 @@ An agent definition contains the following data:
 
 For Camunda to recognize an element as an agent, the element **must be marked** in the BPMN model with the `zeebe:agentDefinition` extension element.
 
-If you model in Camunda Modeler, the element templates add the marker for you:
+For a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), the AI Agent Sub-process and AI Agent Task element templates add the marker for you when you model in Camunda Modeler.
 
-- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)**: The AI Agent Sub-process and AI Agent Task templates add the marker.
-- **[External agents](/reference/glossary.md#external-agent)**: The External Agent template adds the marker.
+For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't ship an element template, so add the marker to the BPMN XML yourself. See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for the full setup, including how to package your agent as a custom element template.
 
-If you model outside Camunda Modeler, add the marker to the BPMN XML yourself.
+:::info Update element templates created before Camunda 8.10
+If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template.
+
+Open the process in Web Modeler or Desktop Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+:::
 
 #### Mark an element as an agent in XML
 
@@ -144,3 +147,5 @@ Operate labels each entry in the conversation history simply as `iteration` (for
 #### Visibility for external agents
 
 Agents built with external frameworks get the same visibility in Operate as Camunda AI agents. An external agent reports its system prompt, available tools, tool calls, and conversation history through the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx), and Operate displays that data alongside the process instance.
+
+See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for a step-by-step walkthrough of reporting this data from your own runtime.

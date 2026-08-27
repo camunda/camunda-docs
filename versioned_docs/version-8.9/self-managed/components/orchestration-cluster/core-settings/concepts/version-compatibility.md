@@ -23,7 +23,7 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 
 All minor version upgrades in a Self-Managed Orchestration Cluster must follow this procedure:
 
-1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is required so that schema version metadata is present and the schema compatibility check can succeed.
+1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is strongly recommended for fix coverage. The compatibility check itself compares minor versions, so any patch of the source minor is accepted.
 
 2. **Upgrade to the next minor version.** Do not skip minor versions. For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not.
 
@@ -33,7 +33,6 @@ You can execute this procedure across multiple validation environments (for exam
 
 You must not:
 
-- Skip the latest-patch upgrade of the source minor before a minor upgrade. The schema compatibility check requires the source minor to be at its latest patch.
 - Skip minor versions.
 - Downgrade minor or major versions.
 - Include pre-release (`-alpha*`) versions in an upgrade chain.
@@ -44,15 +43,15 @@ Failure to follow this procedure results in an unsupported upgrade path. The bro
 
 The examples below show representative compatible and incompatible paths. Patch versions can vary as long as minor-version rules are followed.
 
-| Scenario                                           | Example              | Compatibility                                              |
-| -------------------------------------------------- | -------------------- | ---------------------------------------------------------- |
-| Patch upgrade                                      | 8.8.1 → 8.8.3        | Compatible                                                 |
-| Minor upgrade (single step, latest patch required) | 8.7.5 → 8.8.3        | Compatible                                                 |
-| Minor upgrade (skipping a minor)                   | 8.6.9 → 8.8.3        | Incompatible                                               |
-| Patch downgrade                                    | 8.8.3 → 8.8.1        | Incompatible (broker); secondary storage skips (see below) |
-| Minor downgrade                                    | 8.8.3 → 8.7.5        | Incompatible (broker); secondary storage skips (see below) |
-| Major change                                       | 8.x ↔ 9.x            | Incompatible                                               |
-| Alpha build involved                               | 8.8.0-alpha1 ↔ 8.8.0 | Incompatible                                               |
+| Scenario                         | Example              | Compatibility                                              |
+| -------------------------------- | -------------------- | ---------------------------------------------------------- |
+| Patch upgrade                    | 8.8.1 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (single step)      | 8.7.5 → 8.8.3        | Compatible                                                 |
+| Minor upgrade (skipping a minor) | 8.6.9 → 8.8.3        | Incompatible                                               |
+| Patch downgrade                  | 8.8.3 → 8.8.1        | Incompatible (broker); secondary storage skips (see below) |
+| Minor downgrade                  | 8.8.3 → 8.7.5        | Incompatible (broker); secondary storage skips (see below) |
+| Major change                     | 8.x ↔ 9.x            | Incompatible                                               |
+| Alpha build involved             | 8.8.0-alpha1 ↔ 8.8.0 | Incompatible                                               |
 
 ## Broker behavior
 
@@ -83,15 +82,15 @@ If you upgrade from an earlier patch that does **not** store schema version meta
 All minor version upgrades must follow the required upgrade procedure described above and proceed strictly minor-by-minor.
 The schema manager compares the stored schema version (the last successful schema upgrade) with the current application version:
 
-| Case                                               | Action        | Metadata updated?    | Notes                                         |
-| -------------------------------------------------- | ------------- | -------------------- | --------------------------------------------- |
-| Patch upgrade                                      | Update schema | Yes (to new version) |                                               |
-| Minor upgrade (single step, latest patch required) | Update schema | Yes                  |                                               |
-| Minor downgrade                                    | Skip          | No                   | Tolerated for rolling update restarts         |
-| Patch downgrade                                    | Skip          | No                   | Avoids churn; schema stays forward compatible |
-| Skipped minor (multi-step)                         | Fail startup  | No                   | Prevents unsupported jump                     |
-| Alpha build involved                               | Fail startup  | No                   | Must use stable releases for upgrade path     |
-| Major change                                       | Fail startup  | No                   | Not supported                                 |
+| Case                        | Action        | Metadata updated?    | Notes                                         |
+| --------------------------- | ------------- | -------------------- | --------------------------------------------- |
+| Patch upgrade               | Update schema | Yes (to new version) |                                               |
+| Minor upgrade (single step) | Update schema | Yes                  |                                               |
+| Minor downgrade             | Skip          | No                   | Tolerated for rolling update restarts         |
+| Patch downgrade             | Skip          | No                   | Avoids churn; schema stays forward compatible |
+| Skipped minor (multi-step)  | Fail startup  | No                   | Prevents unsupported jump                     |
+| Alpha build involved        | Fail startup  | No                   | Must use stable releases for upgrade path     |
+| Major change                | Fail startup  | No                   | Not supported                                 |
 
 ### Where the schema version is stored
 

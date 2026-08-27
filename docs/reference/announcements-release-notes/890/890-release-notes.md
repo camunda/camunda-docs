@@ -340,6 +340,15 @@ The Camunda for Microsoft Teams app is now available for Self-Managed environmen
 
 <p class="link-arrow">[Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams.md)</p>
 
+### Live task updates and assignment notifications in Microsoft Teams
+
+Camunda for Microsoft Teams now updates a notification card as its task is assigned, completed, or canceled, and notifies you when an existing task is later assigned to you. On SaaS, these capabilities require a cluster running generation `8.9 gen13` or later with **Enable app integrations extensions** turned on in the cluster settings.
+
+<ul>
+  <li><span class="link-arrow">[Enable notification delivery for your cluster](/components/camunda-integrations/ms-teams/ms-teams-notifications.md#enable-notification-delivery-for-your-cluster)</span></li>
+  <li><span class="link-arrow">[Enable app integrations extensions](/components/hub/organization/manage-clusters/settings.md#enable-app-integrations-extensions)</span></li>
+</ul>
+
 ## Migration from Camunda 7 to Camunda 8
 
 ### Conditional events support in Migration Analyzer and Diagram Converter
@@ -433,7 +442,7 @@ Orchestration Cluster enhancements in 8.9 include scheduled backups, Elasticsear
 
 <ul>
   <li><span class="link-arrow">[Scheduled backup](/self-managed/operational-guides/backup-restore/rdbms/backup.md#scheduled-backup)</span></li>
-  <li><span class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</span></li>
+  <li><span class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</span></li>
 </ul>
 
 ### Archive by ID for Elasticsearch and OpenSearch
@@ -814,7 +823,7 @@ You can now configure RocksDB memory on a per-broker basis instead of per-partit
 
 - Camunda recommends you test this out before 8.10 to find the right value, or configure the allocation strategy to `PARTITION`.
 
-<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 #### Delete processes and decisions (instances and definitions)
 
@@ -1743,7 +1752,7 @@ This enhancement ensures consistency across environments, simplifies setup for a
 
 In Camunda 8.9, RocksDB state storage uses a single shared cache and write buffer per broker instead of per partition. This behavior is controlled by the RocksDB memory allocation strategy (`PARTITION`, `BROKER`, `FRACTION`).
 
-See [resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md) for details on the available strategies and recommended settings.
+See [resource planning](/components/best-practices/architecture/sizing-self-managed.md) for details on the available strategies and recommended settings.
 
 :::note
 In Camunda 8.10, the default memory allocation strategy changes from `PARTITION` to `FRACTION`. This may result in a different amount of memory being allocated to RocksDB.

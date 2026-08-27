@@ -9,7 +9,7 @@ Camunda provides modeling tools for designing and implementing executable diagra
 
 Choose the modeler that best fits how you work:
 
-- [Camunda Hub](../hub/workspace/modeler/launch-modeler.md): Use Camunda's browser-based modeler in Hub to collaborate on diagrams in Camunda 8 SaaS or Self-Managed.
+- [Camunda Hub](../hub/workspace/modeler/index.md): Use Camunda's browser-based modeler in Hub to collaborate on diagrams in Camunda 8 SaaS or Self-Managed.
 - [Desktop Modeler](./desktop-modeler/index.md): Install the desktop application to model locally and integrate with your development environment.
 
 ## Open the modeler in Camunda Hub

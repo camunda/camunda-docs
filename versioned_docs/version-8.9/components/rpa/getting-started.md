@@ -50,10 +50,12 @@ Once you have written your script, you can test it on a local RPA worker.
 
 ### Using Web Modeler
 
-1. In a project or process application, use the **Create new** menu and select **RPA script**.
-2. **Write your RPA script using Robot Framework**: Use the editor to create your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
+1. In Web Modeler, open a project.
+2. In the project, open a process application. Storing files in a process application is required for SaaS. In preparation for [8.10](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure), it's also recommended for Self-Managed.
+3. Use the **Create new** menu, and select **RPA script**.
+4. **Write your RPA script using Robot Framework**: Use the editor to create your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
    <img src={RpaEditorWebInitial} alt="RPA editor interface showing the initial script view in Web Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
-3. In a BPMN diagram, you'll now find your new RPA script in the **Append element** menu.
+5. In a BPMN diagram, you'll now find your new RPA script in the **Append element** menu.
 
 #### Test your script
 
@@ -86,7 +88,7 @@ Once you are happy with your script and have tested it locally, you can start au
 2. **Add RPA to your process**:
    1. Open an existing BPMN file or create a new one.
    2. Add the RPA script to your process:
-      - **Web Modeler**: Search for the RPA script by name directly in the **Append element** menu — no script ID required.
+      - **Web Modeler**: Search for the RPA script by name directly in the **Append element** menu. No script ID is required.
       - **Desktop Modeler**: Add a new task and change the type to an RPA connector.
         <img src={RpaTaskAppend} alt="Appending an RPA task in Camunda Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 

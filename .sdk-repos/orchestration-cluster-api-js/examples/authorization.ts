@@ -77,12 +77,23 @@ async function deleteAuthorizationExample(authorizationKey: AuthorizationKey) {
 }
 //#endregion DeleteAuthorization
 
-// Suppress "declared but never read"
-void createAuthorizationExample;
-void getAuthorizationExample;
-void searchAuthorizationsExample;
-void updateAuthorizationExample;
-void deleteAuthorizationExample;
+//#region SearchOwnAuthorizations
+async function searchOwnAuthorizationsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchOwnAuthorizations(
+    {
+      filter: { resourceType: 'PROCESS_DEFINITION' },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const auth of result.items ?? []) {
+    console.log(`${auth.resourceId}: ${auth.permissionTypes?.join(', ')}`);
+  }
+}
+//#endregion SearchOwnAuthorizations
 
 // Suppress "declared but never read"
 void createAuthorizationExample;
@@ -90,3 +101,4 @@ void getAuthorizationExample;
 void searchAuthorizationsExample;
 void updateAuthorizationExample;
 void deleteAuthorizationExample;
+void searchOwnAuthorizationsExample;

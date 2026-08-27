@@ -35,12 +35,3 @@ Note that Camunda extends the same guarantee to Best Practices as to the core pr
 ## CI/CD guidelines
 
 <DocCardList items={section('CI/CD guidelines')}/>
-
-## Agentic orchestration
-
-Processes that hand a step to an [AI agent](/reference/glossary.md#ai-agent) run on the same engine, variables, and audit trail as fully deterministic ones, so the practices above still apply. For specific guidance on designing, tuning, and evaluating agents, see the [agentic orchestration documentation](/components/agentic-orchestration/agentic-orchestration-overview.md):
-
-- [Design and architecture](/components/agentic-orchestration/design-architecture.md) covers deciding where an agent belongs in a process, blending deterministic and AI-driven steps, and guardrail patterns such as human-in-the-loop escalation.
-- [Model recommendations](/components/agentic-orchestration/model-recommendations-agentic.md) covers writing tool descriptions, managing the context window, sanitizing tool output, and prompting.
-- [Choose the right model](/components/agentic-orchestration/choose-right-model-agentic.md) covers benchmarking candidate LLMs against your own requirements.
-- [Evaluate AI agents](/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview.md) covers testing non-deterministic flows, monitoring agents in Operate, and analyzing token and tool usage in Optimize.

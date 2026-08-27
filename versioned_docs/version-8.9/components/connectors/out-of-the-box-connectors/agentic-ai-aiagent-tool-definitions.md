@@ -247,5 +247,4 @@ Instead, each discovered tool's input schema is provided by the external source 
 For more details, see the available gateway tool implementations:
 
 - [MCP Client connectors](./agentic-ai-mcp-client.md)
-
-<!-- TODO add A2A -->
+- [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md)

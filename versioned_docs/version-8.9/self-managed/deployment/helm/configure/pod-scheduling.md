@@ -23,6 +23,43 @@ Each of the following components supports `nodeSelector`, `tolerations`, and `af
 
 By default, the chart configures a hard `podAntiAffinity` rule for the Orchestration Cluster so that no two broker pods are scheduled on the same node.
 
+## Spread Web Modeler pods across availability zones
+
+Use a stable Pod label you control to spread Web Modeler replicas without depending on labels managed by the Helm chart.
+
+Set the same label key and value in `podLabels` and `affinity`:
+
+```yaml
+webModeler:
+  enabled: true
+  restapi:
+    replicas: 2
+    podLabels:
+      scheduling.example.com/affinity-group: web-modeler-restapi
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  scheduling.example.com/affinity-group: web-modeler-restapi
+              topologyKey: topology.kubernetes.io/zone
+```
+
+Apply the same pattern to `webModeler.websockets`.
+
+The same `podLabels` and `affinity` pairing applies to every component listed in [Configure scheduling values](#configure-scheduling-values). Prefer a label you own over chart-managed labels such as `app.kubernetes.io/component`, because their values can change between chart versions.
+
+For the Orchestration Cluster, overriding `orchestration.affinity` replaces the default hard `podAntiAffinity` rule. To spread broker pods across zones, use [`orchestration.topologySpreadConstraints`](#spread-orchestration-cluster-pods-across-availability-zones) instead.
+
+Consider the following when you configure Pod anti-affinity:
+
+- Use a label key with a DNS prefix you control. If multiple Helm releases share a namespace, choose a label value unique to each component and release because Pod affinity selectors use the current namespace by default.
+- Ensure every eligible node has the label named by `topologyKey`. Managed cloud clusters normally set `topology.kubernetes.io/zone`.
+- A preferred rule is best effort and can colocate Pods when no better placement is available. A required rule can leave Pods `Pending` or stall rolling updates when the cluster lacks capacity in enough topology domains.
+- Avoid inter-Pod affinity and anti-affinity for clusters larger than several hundred nodes because they add substantial scheduler processing.
+
 ## Spread Orchestration Cluster pods across availability zones
 
 The default `podAntiAffinity` rule ensures broker pods run on distinct nodes, but does not ensure those nodes are in different zones: if the cluster has more nodes than brokers, all brokers can still be scheduled into a single availability zone. Because broker persistent volumes are bound to a single zone on most cloud providers, a zonal outage can then take down the whole Orchestration Cluster.

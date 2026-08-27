@@ -13,6 +13,12 @@ keywords:
 
 These release notes identify the new features included in 8.7, including [alpha feature releases](/components/early-access/alpha/alpha-features.md).
 
+## 8.7.38
+
+### Spring Zeebe SDK - Spring Boot 4.1 support
+
+As the [Spring Boot OSS support](https://spring.io/projects/spring-boot#support) for the bundled Spring Boot 4.0.x will end in December 2026, [Spring Boot 4.1.x compatibility](../../../../versioned_docs/version-8.7/apis-tools/spring-zeebe-sdk/getting-started.md#version-compatibility) is verified from the `8.7.38` patch onward. Spring Boot 4.0.x remains the default bundled version.
+
 ## 8.7.17
 
 ### Spring Zeebe SDK - Spring-Boot 3.5 support
@@ -120,7 +126,7 @@ We have enabled developers to manage and work with multi-file BPMN projects dire
 
 ### Process application versioning, README, and review <span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span>
 
-You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-pipeline.md#review) and approved.
+You can now track changes and deploy the right version of the process application to the right environment, keep your process documentation updated, [versioned](/components/hub/workspace/manage-projects/project-versioning.md), and [readable for everyone](/components/hub/workspace/modeler/modeling/advanced-modeling/process-documentation-with-readme-files.md), and enjoy a smooth, out-of-the-box experience ensuring all changes to processes are formally [reviewed](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) and approved.
 
 <!--- https://github.com/camunda/product-hub/issues/2016 https://github.com/camunda/product-hub/issues/2565 https://github.com/camunda/product-hub/issues/2054 --->
 
@@ -258,7 +264,7 @@ Web Modeler now supports stronger governance and change control. This ensures sa
 - Reviews cannot be performed by the user who created the process application version, and the reviewer is logged in the version history of a process application.
 - Admins can enable production deployments for reviewed process applications as an alternative to using their own deployment pipeline.
 
-To learn more about this feature, see [process governance](/components/hub/workspace/manage-projects/project-pipeline.md).
+To learn more about this feature, see [process governance](/versioned_docs/version-8.7/components/modeler/web-modeler/process-application-pipeline.md#process-governance).
 
 <!-- https://github.com/camunda/product-hub/issues/2583 -->
 
@@ -397,7 +403,7 @@ For example, you can validate your process by creating and rerunning scenarios f
 - As you save completed instances as scenarios, Play calculates the percent of elements covered by the scenario suite.
 - This is the first step towards bringing automated testing into Web Modeler, and enabling business and IT to collaborate on automated tests.
 
-To learn more about this feature, see [Play scenarios](/components/hub/workspace/modeler/validation/play-your-process.md#scenarios).
+To learn more about this feature, see [Play scenarios](/components/hub/workspace/modeler/validation/test-your-process.md#test-cases).
 
 <!-- https://github.com/camunda/product-hub/issues/2073 -->
 
