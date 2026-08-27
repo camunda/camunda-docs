@@ -21,10 +21,6 @@ In 8.10, Camunda Hub and the Orchestration Cluster authenticate through the same
 
 Management Identity is still required for Camunda Hub in 8.10. For more information, see [manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md).
 
-:::note
-Unified authorization for Camunda Hub and Optimize, which would move user, group, role, and permission management off Management Identity, is a longer-term goal and is not yet scheduled for a specific release.
-:::
-
 ## Configure OIDC authentication
 
 Camunda Hub uses the following settings to validate tokens and identify users:
