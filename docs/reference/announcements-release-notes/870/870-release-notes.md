@@ -264,7 +264,7 @@ Web Modeler now supports stronger governance and change control. This ensures sa
 - Reviews cannot be performed by the user who created the process application version, and the reviewer is logged in the version history of a process application.
 - Admins can enable production deployments for reviewed process applications as an alternative to using their own deployment pipeline.
 
-To learn more about this feature, see [process governance](../../../../versioned_docs/version-8.7/components/modeler/web-modeler/process-application-pipeline#process-governance).
+To learn more about this feature, see [process governance](/versioned_docs/version-8.7/components/modeler/web-modeler/process-application-pipeline.md#process-governance).
 
 <!-- https://github.com/camunda/product-hub/issues/2583 -->
 
