@@ -30,7 +30,7 @@ path: object;
 #### processDefinitionKey
 
 ```ts
-processDefinitionKey: ProcessDefinitionKey;
+processDefinitionKey: ProcessDefinitionKeyWritable;
 ```
 
 The assigned key of the process definition, which acts as a unique identifier for this process definition.
