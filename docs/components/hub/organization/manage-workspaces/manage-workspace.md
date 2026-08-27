@@ -38,7 +38,7 @@ Update the workspace name and description:
 Soft delete a workspace and its resources:
 
 1. In Camunda Hub, navigate to **Workspaces**.
-2. Find the workspace, and click **Manage**:
+2. Find the workspace, and click **Manage**.
 3. Under **General > Danger Zone > Delete workspace**, click **Delete**.
 
 Your workspace is moved to [**Recently deleted**](../../workspace/manage-projects/recently-deleted.md). It will be permanently deleted after the retention period.

@@ -11,7 +11,7 @@ Manage workspace members, update general information, or delete a workspace.
 In Camunda Hub, a workspace is a collaboration environment within an organization, representing a team or business domain. It groups organizational resources like members and projects so related work happens in one shared space.
 
 :::info
-You can only manage a workspace's settings at the workspace level if you're a **Workspace admin**, **Organization admin**, or **Organization owner**. You can also [manage a workspace from the organization level](../../organization/manage-workspaces/index.md).
+You can only manage a workspace's settings at the workspace level if you're a **Workspace Admin**, **Organization admin**, or **Organization owner**. You can also [manage a workspace from the organization level](../../organization/manage-workspaces/index.md).
 :::
 
 <!-- TODO: reference workspace management roles -->
