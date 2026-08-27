@@ -30,7 +30,7 @@ path: object;
 #### elementInstanceKey
 
 ```ts
-elementInstanceKey: ElementInstanceKey;
+elementInstanceKey: ElementInstanceKeyWritable;
 ```
 
 The key of the element instance to update the variables for.

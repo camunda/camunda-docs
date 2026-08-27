@@ -19,18 +19,28 @@ Identity requires a set of base configurations to operate correctly. When Identi
 | Optimize API                     | optimize-api                     | enabled          | Optimize                       |
 | Tasklist                         | tasklist                         | enabled          | Tasklist                       |
 | Tasklist API                     | tasklist-api                     | enabled          | Tasklist                       |
-| Web Modeler                      | web-modeler                      | disabled         | Web Modeler                    |
-| Web Modeler API                  | web-modeler-api                  | enabled          | Web Modeler                    |
+| Hub                              | web-modeler                      | disabled         | Hub                            |
+| Hub API                          | web-modeler-api                  | enabled          | Hub                            |
+
+The Hub client IDs (`web-modeler`, `web-modeler-api`) are retained for backward compatibility with existing Web Modeler installations.
 
 ## Roles
 
-| Name        | Created/updated with component |
-| :---------- | :----------------------------- |
-| Identity    | All                            |
-| Operate     | Operate                        |
-| Optimize    | Optimize                       |
-| Tasklist    | Tasklist                       |
-| Web Modeler | Web Modeler                    |
+Both `Web Modeler`/`Web Modeler Admin` and the equivalent `Hub`/`Hub Admin` roles are provisioned and grant identical permissions. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for details.
+
+| Name                   | Created/updated with component |
+| :--------------------- | :----------------------------- |
+| Identity               | All                            |
+| Operate                | Operate                        |
+| Optimize               | Optimize                       |
+| Tasklist               | Tasklist                       |
+| Web Modeler            | Hub                            |
+| Web Modeler Admin      | Hub                            |
+| Hub                    | Hub                            |
+| Hub Admin              | Hub                            |
+| Console                | Hub                            |
+| DevOps                 | Hub                            |
+| Hub API - Cluster Ping | Hub                            |
 
 ## Client scopes
 

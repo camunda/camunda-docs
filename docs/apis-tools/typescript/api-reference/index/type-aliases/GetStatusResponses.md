@@ -19,4 +19,4 @@ type GetStatusResponses = object;
 204: void;
 ```
 
-The cluster is UP and has at least one partition with a healthy leader.
+The default physical tenant is UP and has at least one partition with a healthy leader.
