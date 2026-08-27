@@ -53,6 +53,31 @@ Decision-making and execution are intentionally split:
 Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
 
+#### Example: an order exception agent
+
+Consider an order fulfillment process that hands off exception handling to an AI agent. The agent's ad-hoc sub-process exposes tools built from existing BPMN elements and connectors:
+
+- **Check inventory**: a REST connector call to an inventory system.
+- **Apply discount rules**: a business rule task evaluating a DMN decision.
+- **Notify customer**: a REST connector call to an email or messaging service.
+- **Escalate to support**: a user task routed to a human.
+
+Given the order details, the LLM decides which tools to call, in what order, and with what parameters. Camunda executes each selected tool as a governed BPMN activity and returns the result to the LLM, until the agent reaches a final response.
+
+```mermaid
+flowchart LR
+    Start([Order exception]) --> Agent{{AI agent<br/>ad-hoc sub-process}}
+    Agent -->|checkInventory| Inventory[Check inventory]
+    Agent -->|applyDiscountRules| Discount[Apply discount rules]
+    Agent -->|notifyCustomer| Notify[Notify customer]
+    Agent -->|escalateToSupport| Escalate[Escalate to support]
+    Inventory --> Agent
+    Discount --> Agent
+    Notify --> Agent
+    Escalate --> Agent
+    Agent --> Done([Final response])
+```
+
 ## AI agent integration features
 
 Use the following Camunda 8 features to integrate AI agents into your processes:
