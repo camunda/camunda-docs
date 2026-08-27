@@ -5,12 +5,10 @@ sidebar_label: "Isolation model"
 description: "Learn how Physical Tenants isolate execution, storage, and API routing within a single orchestration cluster."
 ---
 
-:::info
 Learn how Physical Tenants isolate execution, storage, and API routing within one orchestration cluster.
 
 :::info
 Use the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models and choose a starting point.
-:::
 :::
 
 Physical Tenants provide strong isolation within a single orchestration cluster. This page assumes one orchestration cluster with multiple Physical Tenants. Multi-region and multi-cluster topologies are separate topics.
@@ -73,7 +71,7 @@ To configure tenant defaults, per-tenant overrides, validation expectations, and
 
 To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
-Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [webapp routing](./api-routing.md#webapp-routing).
+Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
 
 ## What is not isolated in 8.10
 
