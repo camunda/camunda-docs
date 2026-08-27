@@ -60,10 +60,6 @@ Model Serving invocations are the only requests without an `/api/2.0` prefix. Ev
 
 The OAuth token endpoint is derived from the workspace URL, so it does not need to be configured separately.
 
-:::note
-OAuth U2M with PKCE is not supported. Databricks does document a manual authorization-code and PKCE flow for third-party applications — register a custom OAuth application, request `scope=all-apis offline_access` at `/oidc/v1/authorize`, then exchange the code at `/oidc/v1/token` for a refresh token. The obstacle is not a missing token endpoint: the initial authorization step requires an interactive browser redirect from a person, which a connector running unattended in a job worker cannot perform. A refresh token obtained that way would also need external rotation that this connector does not do. Use OAuth M2M for unattended production workloads instead.
-:::
-
 ## Common patterns
 
 **Run a SQL statement that takes longer than 50 seconds.** Set **Execute statement**'s `wait_timeout` to `0s` (or `CONTINUE` on timeout) to get a `statement_id` back in a non-terminal state. Loop **Get statement status and result** behind a BPMN timer until `status.state` is terminal. If the response carries `result.next_chunk_index`, page through the rest with **Get result chunk**.
