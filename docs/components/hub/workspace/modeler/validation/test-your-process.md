@@ -287,7 +287,7 @@ Test mode displays a warning badge on diagram elements with known limitations. U
 ![Warning badges on diagram elements](../img/test-warning-badges.png)
 
 - Call activities are not supported. Test cases containing call activities cannot be executed successfully.
-- Ad-hoc sub-processes are not supported. Test cases containing ad-hoc sub-processes cannot be executed successfully. This includes the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md), since it's implemented as an ad-hoc sub-process.
+- Ad-hoc sub-processes are not supported. Test cases containing ad-hoc sub-processes cannot be executed successfully.
 - Timer events can't be manually triggered. When a test case reaches a timer event, execution pauses until the timer fires automatically. To skip a timer, use [process instance modification](#modify-a-process-instance) to move the token to the next element.
 - Test case paths that include process modifications are not supported.
 - Similarly to process instances, test cases do not run in isolation. For example, if two test case paths are defined for a process and both contain the same message event or signal event, running these test cases simultaneously might lead to unintended consequences. Publishing a message or broadcasting a signal could inadvertently impact the other test case, resulting in the failure of both.

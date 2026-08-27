@@ -40,7 +40,7 @@ Clients connect to the Zeebe Gateway via a mix of REST and [gRPC](https://grpc.i
 
 ### Job workers
 
-A job worker is a Zeebe client that uses the client API to first activate jobs, and upon completion, either complete or fail the job. For example, an [AI agent](/reference/glossary.md#ai-agent) sub-process's tool calls are activated and completed the same way, since each tool inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) runs as a job like any other task.
+A job worker is a Zeebe client that uses the client API to first activate jobs, and upon completion, either complete or fail the job.
 
 ## Gateways
 

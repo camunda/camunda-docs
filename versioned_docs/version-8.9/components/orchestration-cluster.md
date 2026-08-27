@@ -15,7 +15,7 @@ The Orchestration Cluster is the core component of Camunda 8, powering the autom
 
 ## Zeebe
 
-Zeebe is the process automation engine powering Camunda 8. It executes [AI agent](/reference/glossary.md#ai-agent) tool calls the same way it executes any other job.
+Zeebe is the process automation engine powering Camunda 8.
 
 - [Learn more about Zeebe](/components/zeebe/zeebe-overview.md)
 
