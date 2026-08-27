@@ -11,7 +11,7 @@ This connector reuses the base implementation of the [REST connector](../protoco
 
 ## Prerequisites
 
-To use the **Databricks connector**, you need a Databricks workspace and, depending on the operation, a SQL warehouse, job, Model Serving endpoint, or Vector Search index to target.
+To use the **Databricks connector**, you need an active Camunda 8.9 or later cluster, and a Databricks workspace with — depending on the operation — a SQL warehouse, job, Model Serving endpoint, or Vector Search index to target.
 
 You also need credentials to authenticate against your workspace. See [configure authentication](#configure-authentication) below.
 
@@ -61,14 +61,18 @@ Model Serving invocations are the only requests without an `/api/2.0` prefix. Ev
 The OAuth token endpoint is derived from the workspace URL, so it does not need to be configured separately.
 
 :::note
-OAuth U2M with PKCE is not supported, and neither is an OAuth refresh-token option. The interactive authorization-code and PKCE flow requires a browser redirect, and a connector executes unattended in a job worker. Databricks also has no documented way to obtain a standalone refresh token for third-party use outside its own CLI, so there is no out-of-band variant either — use OAuth M2M for unattended production workloads.
+OAuth U2M with PKCE is not supported. Databricks does document a manual authorization-code and PKCE flow for third-party applications — register a custom OAuth application, request `scope=all-apis offline_access` at `/oidc/v1/authorize`, then exchange the code at `/oidc/v1/token` for a refresh token. The obstacle is not a missing token endpoint: the initial authorization step requires an interactive browser redirect from a person, which a connector running unattended in a job worker cannot perform. A refresh token obtained that way would also need external rotation that this connector does not do. Use OAuth M2M for unattended production workloads instead.
 :::
 
 ## Common patterns
 
 **Run a SQL statement that takes longer than 50 seconds.** Set **Execute statement**'s `wait_timeout` to `0s` (or `CONTINUE` on timeout) to get a `statement_id` back in a non-terminal state. Loop **Get statement status and result** behind a BPMN timer until `status.state` is terminal. If the response carries `result.next_chunk_index`, page through the rest with **Get result chunk**.
 
-**Trigger a job and wait for it.** **Run job now** returns a `run_id`. Poll **Get run** until `state.life_cycle_state` is `TERMINATED`, then branch on `state.result_state`, and read task output with **Get run output**. **Cancel run** covers BPMN-side cancellation or a boundary timer.
+**Trigger a job and wait for it.** **Run job now** returns a `run_id`. Poll **Get run** until `state.life_cycle_state` reaches one of its three terminal values — `TERMINATED`, `SKIPPED`, or `INTERNAL_ERROR`. Checking only for `TERMINATED` makes the loop poll forever when a run is skipped or fails internally. Once terminal, `state.result_state` (`SUCCESS`, `FAILED`, `TIMEDOUT`, `CANCELED`) becomes available to branch on. **Cancel run** covers BPMN-side cancellation or a boundary timer.
+
+:::note
+For a multi-task job, **Get run output** needs an individual task's `run_id`, taken from the terminal **Get run** response's `tasks[].run_id` — not the top-level `run_id` that **Run job now** returned. Databricks only accepts a single task's run there.
+:::
 
 **Avoid duplicate job runs.** The template defaults to 3 retries. A retried **Run job now** call would otherwise start the job twice, so set **Idempotency token** to a value that is stable per process instance — Databricks then returns the existing run instead of starting a new one.
 
