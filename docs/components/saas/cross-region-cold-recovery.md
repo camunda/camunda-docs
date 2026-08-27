@@ -40,15 +40,14 @@ Before you can use cross-region cold recovery, ensure the following prerequisite
 8. Update your customer-managed DNS or routing configuration to direct client traffic to the recovered cluster.
 9. Verify that your applications can connect to the recovered cluster and that requests are reaching it.
 
-## Handle the original region
+## Handle the original region after failover
 
-After failover to the recovery region is complete, the original region may become available again. Do not resume the original cluster or route traffic to it.
+After failover, use only the recovered cluster. The original cluster may still exist while the original region is unavailable. If the original region becomes reachable again, do not resume the original cluster or route traffic to it.
 
-1. Camunda SaaS attempts to suspend the original cluster on a best-effort basis if the region is reachable.
-2. Camunda SaaS deletes the original cluster after the 30-day retention period.
+Camunda SaaS automatically attempts to suspend the original cluster when the region is reachable. This is a best-effort operation, so suspension might not happen immediately if the region or cluster remains unavailable. Console deletes the original cluster after a 30-day retention period.
 
 :::warning Split-brain risk
-Do not run both clusters at the same time. The original cluster may contain stale data and does not include changes made in the recovered region.
+Do not run both clusters at the same time. The original cluster may contain stale data and does not include changes made in the recovered cluster. Using it after failover can cause conflicting writes and data loss.
 :::
 
 ## Restore private connectivity
