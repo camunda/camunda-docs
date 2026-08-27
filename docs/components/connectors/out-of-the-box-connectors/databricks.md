@@ -90,17 +90,6 @@ User-Agent: Camunda_DatabricksConnector/1.0
 
 You can supply additional headers, but this value is merged in last and cannot be overridden.
 
-## Limitations
-
-- **Polling is modelled in BPMN, not inside the connector.** Each operation is a single HTTP call. Model wait/retry loops for statements, job runs, and warehouse state with a BPMN timer and gateway.
-- **`INLINE` SQL results are capped at 25 MiB**; exceeding the cap aborts the statement without a result set. Use `EXTERNAL_LINKS` for larger results — its presigned URLs expire after 15 minutes and must be fetched **without** an `Authorization` header, which means a separate plain HTTP task rather than this connector.
-- **`format` is fixed to `JSON_ARRAY`**, which is valid with both dispositions. `ARROW_STREAM` and `CSV` require `EXTERNAL_LINKS`.
-- **`stream` is forced to `false`** for chat endpoints. A streamed `text/event-stream` response cannot be consumed by a synchronous connector.
-- **Statements expire.** Roughly 12 hours after reaching a terminal state, a statement is removed, and **Get statement status and result** / **Get result chunk** then return HTTP 404.
-- **Jobs uses API 2.2.** The older 2.1 endpoints are not exposed.
-- **The Genie Conversation API is not included.**
-- **Write and admin operations are not included**, such as creating jobs, editing warehouses, or deleting endpoints. Only the operations listed above are available.
-
 ## Appendix & FAQ
 
 ### API documentation
