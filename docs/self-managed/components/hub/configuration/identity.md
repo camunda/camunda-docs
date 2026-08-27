@@ -22,7 +22,7 @@ In 8.10, Camunda Hub and the Orchestration Cluster authenticate through the same
 Management Identity is still required for Camunda Hub in 8.10. For more information, see [manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md).
 
 :::note
-Management Identity is planned to be removed in 8.11, when authorization also moves to the Camunda Security Library.
+Unified authorization for Camunda Hub and Optimize, which would move user, group, role, and permission management off Management Identity, is a longer-term goal and is not yet scheduled for a specific release.
 :::
 
 ## Configure OIDC authentication
@@ -51,7 +51,7 @@ camunda:
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- | ------------- |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`     | URL of the token issuer, used for JWT validation. Individual endpoints are fetched from the provider's [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig).         | `https://keycloak.example.com/auth/realms/camunda-platform` | -             |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`      | Client ID of the Camunda Hub application configured in your identity provider.                                                                                                                                                 | `web-modeler`                                               | -             |
-| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`  | Client secret of the Camunda Hub application. Required unless `client-authentication-method` is changed from its default.                                                                                                      | -                                                           | -             |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`  | Client secret of the `restapi` backend's confidential client. Required unless `client-authentication-method` is changed from its default.                                                                                      | -                                                           | -             |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM` | [optional]<br/>Token claim used to assign usernames.                                                                                                                                                                           | `preferred_username`                                        | `name`        |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`     | [optional]<br/>Comma-separated list of accepted audience claim values, used for JWT validation. Includes the audiences for both user access tokens and the [public Camunda Hub API](/apis-tools/hub-api-sm/authentication.md). | `web-modeler-api,web-modeler-public-api`                    | -             |
 
@@ -59,7 +59,7 @@ camunda:
 </Tabs>
 
 :::note
-Camunda Hub's client authentication method defaults to `client_secret_basic`, which requires `camunda.security.authentication.oidc.client-secret`. To run Camunda Hub as a public client without a secret, configure your identity provider client accordingly and omit `client-secret`.
+Camunda Hub uses two OIDC clients. The browser frontend is a public client and authenticates users via PKCE, without a secret. The settings above configure the `restapi` backend's client, which defaults to the `client_secret_basic` authentication method and requires `camunda.security.authentication.oidc.client-secret`.
 :::
 
 ## Upgrading from 8.9
