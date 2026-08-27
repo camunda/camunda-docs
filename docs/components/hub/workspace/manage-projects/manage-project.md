@@ -10,7 +10,7 @@ Manage your project.
 
 To manage an existing project, you must have one of the following workspace roles:
 
-- **Workspace admin**
+- **Workspace Admin**
 - **Editor**
 
 However, any user can download a project.
