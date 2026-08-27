@@ -5,7 +5,7 @@ sidebar_label: "Logical Tenants"
 description: "Logical Tenants provide lightweight tenant-ID based isolation within a single Camunda 8 cluster."
 ---
 
-**Logical Tenants** are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
+Logical Tenants are the lightweight tenant-ID based multi-tenancy model available within Camunda 8. Logical Tenants provide data isolation through tenant identifiers (stored in the `tenantId` field) but share infrastructure with other Logical Tenants. Multiple Logical Tenants can coexist within a single Physical Tenant or cluster.
 
 Logical Tenants are best for cost-efficient sub-division of teams or departments within the same organization. See [multi-tenancy overview](index.md) to compare with other isolation models.
 
