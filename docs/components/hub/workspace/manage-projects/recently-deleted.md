@@ -12,8 +12,8 @@ When you delete a resource, it's moved to **Recently deleted**. You have 30 days
 
 - Files
 - Folders
-- Workspaces
 - Projects
+- Workspaces
 - IDP applications
 - IDP projects
 

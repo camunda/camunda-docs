@@ -302,10 +302,10 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 
 ## Sync with remote repository
 
-Organization owners/administrators, project administrators, and project editors can sync their version of Camunda Hub with the connected repository at any time.
+Organization owners/administrators, workspace administrators, and editors can sync their version of Camunda Hub with the connected repository at any time.
 
 1. In your connected project, click **Sync with _GitProvider_** button.
-2. Enter a [version number](manage-projects.md#project-versioning) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](./project-versioning.md#create-a-version) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Camunda Hub changes and the changes in the remote repository to continue.
@@ -314,7 +314,7 @@ Once the pull is complete and any merge conflicts are resolved, Camunda Hub will
 
 ## Manage existing configurations
 
-Existing Git configurations can be edited from the gear icon beside the **Sync with _GitProvider_** button. Permission to update these settings are limited to **project administrators**.
+Existing Git configurations can be edited from the gear icon beside the **Sync with _GitProvider_** button. Permission to update these settings are limited to **Workspace Admins**.
 
 ## Change Git provider
 
