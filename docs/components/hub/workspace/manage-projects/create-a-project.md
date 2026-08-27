@@ -4,9 +4,6 @@ title: Set up a new project
 description: Create a project, and select a development cluster to deploy to.
 ---
 
-import EmptyProjectImg from './img/empty-project.png'
-import FileListImg from './img/file-list.png'
-
 Create a project, and select a development cluster to deploy to.
 
 ## Prerequisites
