@@ -7,9 +7,9 @@ description: Set the Kubernetes Service appProtocol hint per port for Camunda co
 
 The Camunda Helm chart exposes an `appProtocols` value per component that sets the Kubernetes [`appProtocol`](https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol) field on a Service port. Use this when your infrastructure needs an explicit protocol hint instead of relying on protocol sniffing — for example, a GKE NEG-backed Ingress or Gateway handling HTTP/2 cleartext (`h2c`) gRPC traffic to the orchestration cluster gateway.
 
-## AppProtocol per Service port
+## `appProtocol` per Service port
 
-Each component's `service.appProtocols` value accepts a map of port name to appProtocol value. It's empty by default and doesn't change existing behavior until you set it.
+Each component's `service.appProtocols` value accepts a map of port name to `appProtocol` value. It's empty by default and doesn't change existing behavior until you set it.
 
 The following components support `appProtocols` (the accepted port names for each component are listed in the last column):
 
