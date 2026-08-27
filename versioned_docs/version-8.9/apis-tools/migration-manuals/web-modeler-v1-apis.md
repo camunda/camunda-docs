@@ -477,7 +477,7 @@ With `POST /api/v1/versions`, you can now publish a new version for process appl
 :::note
 When versioning a connector template, you may receive a `409 CONFLICT` citing a version number you never explicitly published because:
 
-- Process application versions, which are managed in the [Web Modeler user interface](/components/hub/workspace/manage-projects/project-versioning.md), operate on the same set of file versions the versions API operates on. A new process application version results in new versions for each individual file the process application contains.
+- Process application versions, which are managed in the [Web Modeler user interface](/components/modeler/web-modeler/process-applications/process-application-versioning.md), operate on the same set of file versions the versions API operates on. A new process application version results in new versions for each individual file the process application contains.
 - An element template version, which is defined in the [template metadata](/components/modeler/element-templates/template-metadata.md#identification-id-and-version), can't be created if the version already exists in Web Modeler.
 - Therefore, if a process application version is created, but the element template version hasn't been updated, you receive a `409`.
   :::
