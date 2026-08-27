@@ -713,7 +713,7 @@ With the move to CSL, the Optimize security configuration keys used through 8.9 
 
 #### `optimize.security.csl.enabled=false` fallback is temporary
 
-If CSL causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+If CSL causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11. Falling back also reverts CSRF protection, `id_token` issuer/audience validation, and the server-side session model to their 8.9 behavior.
 
 **Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
 

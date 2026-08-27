@@ -93,3 +93,9 @@ optimize:
 ```
 
 Treat this as a temporary escape hatch, not a supported long-term mode. `optimize.security.csl.enabled=false`, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11. If you rely on this fallback in 8.10, migrate to CSL before upgrading to 8.11.
+
+Falling back also reverts the security posture CSL introduced:
+
+- CSRF protection on cookie-authenticated requests is removed.
+- The `id_token` issuer and audience are no longer validated.
+- Sessions revert from server-side session state to a self-signed, stateless JWT cookie.

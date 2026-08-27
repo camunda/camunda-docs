@@ -47,7 +47,7 @@ Physical Tenant deployments use additional cluster administrator settings under 
 | `camunda.security.csrf.ignored-path-patterns` | Ant-style path patterns that CSRF protection ignores, in addition to the unprotected paths and the login and logout endpoints, which are always ignored.                                                                                                  |               |
 
 :::caution
-Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks.
+Disabling CSRF protection is not recommended for production environments as it leaves your application vulnerable to cross-site request forgery attacks. `ignored-path-patterns` has the same effect for any path it matches, so scope patterns as narrowly as possible — for example, to a specific API endpoint that doesn't rely on session-cookie authentication — rather than to a broad prefix.
 :::
 
 ### `camunda.security.http-headers`
