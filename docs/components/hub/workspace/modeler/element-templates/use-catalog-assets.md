@@ -34,7 +34,7 @@ If the CoE unpublishes an asset you already use, the template is deprecated. Ele
 
 ## Find outdated assets in a diagram
 
-When an element references a template version that isn't the latest one, Camunda Hub flags it in two places while you model:
+When an element references a template version that isn't the latest one, Camunda Hub flags it in two places in the modeler:
 
 - The problems panel reports `Element has updated template available.` as an information-level hint. Select the hint to focus the affected element on the canvas.
 - The properties panel of the focused element shows an **Update available** dropdown. It reports the version you can move to, for example `A new version of the template is available: 3`, and offers the **Update** and **Unlink** actions.
