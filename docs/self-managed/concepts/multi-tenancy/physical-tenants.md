@@ -39,14 +39,14 @@ An operation that targets a specific Physical Tenant, such as deploying a proces
 
 ## API and access patterns
 
-**Tenant-scoped APIs** are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
+Tenant-scoped APIs are accessible at `/physical-tenants/{physicalTenantId}/v2/`:
 
 - REST API: `POST /physical-tenants/mytenant/v2/process-definitions`
 - Webapps: `https://your-cluster/physical-tenants/mytenant/operate`
 
-**Cluster-wide APIs** use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
+Cluster-wide APIs use a dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require the cluster-admin role. Endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to a Physical Tenant, not the cluster.
 
-**gRPC clients** specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
+gRPC clients specify the Physical Tenant using the `Camunda-Physical-Tenant` custom header.
 
 ## Logical and Physical Tenants together
 
@@ -54,7 +54,9 @@ Logical Tenants remain available within each Physical Tenant as a lightweight su
 
 See [Logical Tenants](logical-tenants.md) for details on the lightweight tenant-ID based model.
 
-**Important:** There is no migration path from Logical Tenants to Physical Tenants. Logical Tenants created in a Physical Tenant remain associated with that tenant and cannot be migrated to another Physical Tenant.
+:::warning
+There is no migration path from Logical Tenants to Physical Tenants. Logical Tenants created in a Physical Tenant remain associated with that tenant and cannot be migrated to another Physical Tenant.
+:::
 
 ## Wording conventions
 
