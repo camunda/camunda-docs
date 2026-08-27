@@ -747,6 +747,7 @@ module.exports = {
               items: [
                 "components/hub/organization/manage-catalog/getting-started-catalog",
                 "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/track-asset-usage",
                 "components/hub/organization/manage-catalog/sync-multiple-repositories",
               ],
             },
