@@ -27,6 +27,16 @@ Let us consider the following example that defines a template for invoking a RES
       }
     },
     {
+      "label": "REST Credential",
+      "description": "Choose a credential to use for the connection",
+      "type": "Configuration",
+      "configurationTemplate": "io.camunda.examples:connection:1",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "connection"
+      }
+    },
+    {
       "label": "REST Endpoint URL",
       "description": "Specify the url of the REST API to talk to.",
       "type": "String",
@@ -80,15 +90,34 @@ Let us consider the following example that defines a template for invoking a RES
         "source": "= body"
       }
     }
+  ],
+  "configurationTemplates": [
+    {
+      "id": "io.camunda.examples:connection:1",
+      "name": "Connection",
+      "version": 1,
+      "kind": "CREDENTIAL",
+      "properties": [
+        {
+          "id": "connectionProperty",
+          "label": "Connection property",
+          "description": "A single connection value, for example an endpoint or token.",
+          "type": "String",
+          "binding": { "type": "property", "name": "connectionProperty" },
+          "constraints": { "notEmpty": true }
+        }
+      ]
+    }
   ]
 }
 ```
 
 ## How the example works
 
-The example defines five custom fields, each mapped to different technical properties:
+The example defines six custom fields, each mapped to different technical properties:
 
 - **Task type**: The value `http` is mapped to the `type` property of a `zeebe:taskDefinition` element in BPMN 2.0 XML. This field is hidden from users since it's a technical requirement.
+- **REST Credential**: A [`Configuration`](./template-properties.md#configuration-input-type) property that lets users select or create a connection, locked to the embedded `io.camunda.examples:connection:1` configuration template. The chosen configuration is injected as the `connection` job variable. The referenced configuration template is embedded under the top-level [`configurationTemplates`](./template-metadata.md#embedding-configurations-configurationtemplates) key.
 - **REST Endpoint URL**: Mapped to a `task header` with the key `url`. This field includes validation to ensure it's a valid HTTP(S) URL.
 - **REST Method**: Mapped to a `task header` with the key `method`. Uses a dropdown to provide predefined HTTP method options.
 - **Request Body**: Mapped to a local variable via an `input parameter` named `body`. This field is optional, so it won't appear in the XML if left empty.
@@ -110,5 +139,6 @@ This example showcases several important template features:
 - **Dropdown choices**: Providing predefined options for user selection.
 - **Optional bindings**: Fields that don't persist empty values in the XML.
 - **Variable mapping**: How to map data between the process and external systems.
+- **Configuration references**: Selecting a reusable configuration through an embedded configuration template.
 
 You can use this example as a starting point for creating your own element templates.
