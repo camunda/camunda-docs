@@ -14,9 +14,9 @@ Additionally, the [Camunda Marketplace](/components/modeler/web-modeler/modeling
 
 Before developing one, you'll need to decide what you would like to achieve with your connector. Currently, the options are:
 
-- Starting a BPMN process, triggered by external service - Use [inbound start event connector template](#inbound-start-event-connector-templates).
-- Continue process with an intermediate catch event emitted by external service call - Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
-- Trigger an external service - Use [outbound connector template](#outbound-connector-templates).
+- Starting a BPMN process, triggered by external service. Use [inbound start event connector template](#inbound-start-event-connector-templates).
+- Continue process with an intermediate catch event emitted by external service call. Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
+- Trigger an external service. Use [outbound connector template](#outbound-connector-templates).
 
 :::note
 Do not confuse **Connector templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
