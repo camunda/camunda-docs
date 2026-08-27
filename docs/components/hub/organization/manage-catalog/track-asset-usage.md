@@ -81,7 +81,7 @@ If an asset has no usage, the drawer shows **Not used yet**.
 
 Because the **Asset usage** tab is limited to organization administrators and owners, the drawer shows every project in your organization that uses the asset, across all workspaces — including workspaces you aren't a member of.
 
-Seeing a project in this list doesn't grant you access to it. Catalog administration and workspace membership are separate, so opening a linked project or workspace still requires access to that workspace. To reach the team responsible for a usage you can't open, contact the owner of the workspace shown in the drawer.
+Elevated organization access also applies to the projects and workspaces themselves, so you can open any entry in the drawer to inspect a usage directly.
 
 ## Drive a migration off an outdated asset
 
