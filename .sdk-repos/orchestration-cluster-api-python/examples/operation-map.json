@@ -1,4 +1,18 @@
 {
+  "get_agent_definition": [
+    {
+      "file": "agent_definition.py",
+      "region": "GetAgentDefinition",
+      "label": "Get an agent definition"
+    }
+  ],
+  "search_agent_definitions": [
+    {
+      "file": "agent_definition.py",
+      "region": "SearchAgentDefinitions",
+      "label": "Search agent definitions"
+    }
+  ],
   "get_agent_instance": [
     {
       "file": "agent_instance.py",
@@ -55,6 +69,13 @@
       "label": "Change cluster mode"
     }
   ],
+  "change_cluster_mode_as_cluster_admin": [
+    {
+      "file": "admin_operations.py",
+      "region": "ChangeClusterModeAsClusterAdmin",
+      "label": "Change cluster mode as cluster admin"
+    }
+  ],
   "restore": [
     {
       "file": "admin_operations.py",
@@ -90,6 +111,34 @@
       "label": "Delete a runtime backup"
     }
   ],
+  "take_history_backup": [
+    {
+      "file": "backup.py",
+      "region": "TakeHistoryBackup",
+      "label": "Take a history backup"
+    }
+  ],
+  "list_history_backups": [
+    {
+      "file": "backup.py",
+      "region": "ListHistoryBackups",
+      "label": "List history backups"
+    }
+  ],
+  "get_history_backup": [
+    {
+      "file": "backup.py",
+      "region": "GetHistoryBackup",
+      "label": "Get a history backup"
+    }
+  ],
+  "delete_history_backup": [
+    {
+      "file": "backup.py",
+      "region": "DeleteHistoryBackup",
+      "label": "Delete a history backup"
+    }
+  ],
   "get_runtime_backup_state": [
     {
       "file": "backup.py",
@@ -123,6 +172,13 @@
       "file": "exporting.py",
       "region": "ResumeExporting",
       "label": "Resume exporting"
+    }
+  ],
+  "get_exporting_status": [
+    {
+      "file": "exporting.py",
+      "region": "GetExportingStatus",
+      "label": "Get exporting status"
     }
   ],
   "get_status": [
@@ -354,6 +410,13 @@
       "file": "authorization.py",
       "region": "SearchAuthorizations",
       "label": "Search authorizations"
+    }
+  ],
+  "search_own_authorizations": [
+    {
+      "file": "authorization.py",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search own authorizations"
     }
   ],
   "update_authorization": [
@@ -1516,6 +1579,34 @@
       "file": "secret.py",
       "region": "ListSecrets",
       "label": "List secrets"
+    }
+  ],
+  "get_cluster_status": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetClusterStatus",
+      "label": "Get cluster status"
+    }
+  ],
+  "get_restore_status": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetRestoreStatus",
+      "label": "Get restore status"
+    }
+  ],
+  "get_cluster_topology": [
+    {
+      "file": "admin_operations.py",
+      "region": "GetClusterTopology",
+      "label": "Get cluster topology (cluster admin)"
+    }
+  ],
+  "restore_as_cluster_admin": [
+    {
+      "file": "admin_operations.py",
+      "region": "RestoreAsClusterAdmin",
+      "label": "Restore physical tenants from backup as cluster admin"
     }
   ]
 }
