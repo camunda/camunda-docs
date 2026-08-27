@@ -19,23 +19,6 @@ Create a project to work on a set of related files:
 1. In your workspace, click **New project**.
 2. Provide a project name, and click **Create project**.
 
-## Add files to a project
-
-To add files to a project, either:
-
-- Select the **Create new** dropdown on the project page to create and add a new file.
-- Drag and drop files from your local computer.
-- Move an existing file into the project from a different location in Camunda Hub.
-
-You can also create subfolders to organize files within the project.
-
-<p><img src={FileListImg} alt="Project file list" /></p>
-
-:::note
-Keep process IDs, decision IDs, form IDs, and RPA script IDs unique across all files within a project. A project with duplicate IDs will fail to deploy.
-Camunda Hub flags the conflicting resource IDs in the resource's problems panel to help you fix them.
-:::
-
 ## Connect clusters
 
 Connect clusters to which you'll deploy project files.

@@ -48,8 +48,6 @@ Once you've [validated your process](./validate-project.md), deploy your project
 
 When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle.
 
-You can also open the deployment modal from the details page of any deployable file in the project. In that case, the modal includes an additional option to select the resources to deploy.
-
 In Self-Managed, you can deploy your project to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::note
