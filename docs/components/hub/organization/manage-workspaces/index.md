@@ -22,7 +22,7 @@ You can only manage workspaces at the organization level if you're an **Organiza
 
 <AoGrid ao={[
 {
-link: "./manage-workspace",
+link: "./manage",
 title: "Manage workspace",
 image: DocsIcon,
 description: "Manage workspaces within your organization.",
