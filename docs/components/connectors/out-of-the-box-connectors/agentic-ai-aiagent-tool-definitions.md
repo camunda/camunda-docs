@@ -217,23 +217,26 @@ For supported file types and details on how documents are resolved, see [documen
 
 In the properties panel, Web Modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
 
-Assisted configuration follows three rules:
+Two affordances appear, and they apply to different fields:
 
-1. **Best-effort.** It keeps every decision you made and it can still read. A description or type you wrote is a decision; a key it cannot parse is not.
-2. **Reset when nothing can be salvaged.** A call that will not parse is unusable, so Web Modeler offers a working default and you redo the rest. Undo is always available.
-3. **It says which of the two just happened.** The button shows no preview of the value it writes, so hover it to see what will change before you accept.
+| Affordance   | Where it appears                      | What it does                                                              |
+| :----------- | :------------------------------------ | :------------------------------------------------------------------------ |
+| **Autofill** | On a blank field only                 | Seeds a correctly structured value. It never overwrites an existing value |
+| **Fix**      | On a field that already holds a value | Rewrites only the invalid part of that value and keeps the rest           |
 
-Autofill on a blank field never overwrites anything, because there is nothing there to keep.
+**Autofill** disappears as soon as a field holds any value, so it can never replace something you entered. **Fix** edits only the part it identifies as invalid, so it preserves the rest of the expression. Both actions are undoable.
 
 ### Autofill a `fromAi()` input
 
 On a tool's root node (the activity with no incoming flows), an autofill icon appears for a blank input mapping or blank FEEL-capable element-template field. Select the icon to add a correctly structured call:
 
 ```feel
-=fromAi(toolCall.parameterName, "Description of the parameter")
+=fromAi(toolCall.parameterName, "Description of the parameter", "string")
 ```
 
 Replace the placeholder key and description with values for your tool. The autofill icon appears only on a blank field, so it never replaces a value you entered.
+
+Web Modeler derives the key from the field's target and infers the type argument from the field's description or name. This inferred type is a heuristic, not a guaranteed match for the target's real shape, so check it when a tool call fails with a type mismatch.
 
 ### Autofill a `toolCallResult` output
 
@@ -247,20 +250,25 @@ If a tool-flow element does not yet produce a contract-readable result, you can 
 
 For a multi-instance tool, autofill also sets the output collection and output element so the agent collects a result for every iteration instead of returning `null`.
 
-### Accept a correction
+### Fix an invalid key
 
-When a `fromAi()` key or output key is a near-miss, for example a value close to `toolCallResult` but not exact, Web Modeler detects it locally and offers a correction you can accept in one click.
+When a `fromAi()` key or an output key is invalid, Web Modeler detects it locally by re-parsing the element's own fields and offers a **Fix** button. No modeling-guidance report is involved.
 
-Two buttons appear, and they make different promises:
+Web Modeler offers **Fix** for:
 
-| Button       | What it does                                                            | What happens to your text                           |
-| :----------- | :---------------------------------------------------------------------- | :-------------------------------------------------- |
-| **Fix**      | Corrects a part that is wrong and has exactly one valid form            | Kept. Only the invalid part is rewritten            |
-| **Autofill** | Fills in what is missing, or resets a call that cannot be parsed at all | Kept where readable, replaced by defaults where not |
+- A `fromAi()` key with a missing `toolCall.` prefix, bracket notation, a quoted string, or an over-long path.
+- A `fromAi` function name with incorrect casing, since only the exact name is recognized.
+- A description that is not a string literal.
+- An output key that is a near-miss of `toolCallResult`, such as `toolcallresult`.
+- A `fromAi()` key that cannot be recovered as written, such as a missing or numeric key. Web Modeler fills in a key derived from the field's own target.
 
-Correcting an invalid `fromAi()` key rewrites the key and preserves any description and type arguments you entered. If the call cannot be parsed at all, for example because an argument is half-written, Autofill resets the whole call to a working default and you re-enter the rest. Hover the button to see which of the two will happen, and use undo if the result is not what you wanted.
+In every case, **Fix** rewrites only the invalid key or the `fromAi(...)` span and leaves the rest of the field intact. A field such as `=concat("prefix-", fromAi(...), "-suffix")` keeps both surrounding literals, and correcting an invalid key preserves any description and type arguments you entered.
 
-If a `fromAi()` call is on an element other than the tool's root node, the AI Agent connector cannot resolve it. Web Modeler offers to move the call to the root node.
+The button is always labeled **Fix**, so hover it to see the specific change it makes before you select it.
+
+If a field's expression cannot be parsed at all, Web Modeler cannot identify what to correct and offers no fix. Repair the expression yourself.
+
+If a `fromAi()` call is on an element other than the tool's root node, the AI Agent connector cannot resolve it. Web Modeler offers a move action, labeled with the root node's name, that declares the input on the root node and rewrites only the `fromAi(...)` span on the original field.
 
 This assistance complements the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong, assisted configuration offers to fix it.
 
