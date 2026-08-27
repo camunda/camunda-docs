@@ -1131,6 +1131,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/orchestration-cluster-api",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
