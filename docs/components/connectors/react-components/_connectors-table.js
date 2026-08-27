@@ -225,6 +225,14 @@ const SearchableTable = () => {
       image: CSVImg,
     },
     {
+      name: "Databricks",
+      description:
+        "Run SQL statements, control warehouses, trigger jobs, invoke Model Serving endpoints, and query Vector Search indexes.",
+      type: "Outbound",
+      link: "../databricks/",
+      image: RestImg,
+    },
+    {
       name: "EasyPost",
       description:
         "Create EasyPost addresses, parcels, shipments from your processes.",
