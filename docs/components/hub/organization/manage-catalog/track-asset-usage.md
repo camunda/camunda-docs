@@ -21,8 +21,6 @@ To review adoption across your organization:
 
 The **Browse assets** tab shows the same catalog your delivery teams see. The **Asset usage** tab is visible to organization administrators and owners only, and adds the governance view described here.
 
-<!--- TODO: screenshot — the Organization catalog page with the "Asset usage" tab selected, showing the tab list, the toolbar (search, Status filter, Sort by), and several rows of the table with a mix of statuses. Suggested alt text: "Asset usage tab of the organization catalog, listing assets with their status, workspace and project counts". Save to `img/` alongside this file. --->
-
 ## Asset status values
 
 Camunda Hub derives a status for every catalog asset from the versions currently referenced in diagrams. The same four values are used in the usage table, the usage drawer, and the project tile.
@@ -65,9 +63,7 @@ No sort is selected on first load, and the table falls back to ordering by name 
 
 ## Find where an asset is used
 
-Select any row in the **Asset usage** table to open a drawer showing where that asset is used.
-
-<!--- TODO: screenshot — the usage drawer open next to the table, showing the asset name, status badge, the "Used in X projects across Y workspaces." summary, and at least two version groups so both the "Latest" marker and an "Update available" badge are visible. Suggested alt text: "Usage drawer showing an asset's usage grouped by version, with project and workspace entries". Save to `img/` alongside this file. --->
+Select any row in the **Asset usage** table to open a drawer on the right showing where that asset is used.
 
 The drawer header repeats the asset name as a link to its catalog detail page, shows the asset status, and summarizes the reach of the asset, for example `Used in 7 projects across 3 workspaces.`
 
@@ -83,12 +79,20 @@ If an asset has no usage, the drawer shows **Not used yet**.
 
 ### How permissions affect the results
 
-The drawer is permission-aware, so what you see depends on your access:
+Because the **Asset usage** tab is limited to organization administrators and owners, the drawer shows every project in your organization that uses the asset, across all workspaces — including workspaces you aren't a member of.
 
-- As an organization owner or administrator, you see every project in the organization that uses the asset.
-- Without elevated organization access, you see only projects in workspaces where you're a member. Projects outside your workspaces are excluded from the list rather than shown with hidden details.
+Seeing a project in this list doesn't grant you access to it. Catalog administration and workspace membership are separate, so opening a linked project or workspace still requires access to that workspace. To reach the team responsible for a usage you can't open, contact the owner of the workspace shown in the drawer.
 
-Catalog access alone does not grant you access to the workspaces and projects that appear in the results. To reach the team responsible for an outdated usage you can't open, contact the owner of the workspace shown in the drawer.
+## Drive a migration off an outdated asset
+
+To turn the overview into a prioritized list of work:
+
+1. Open the **Asset usage** tab and set the **Status** filter to **Update available** and **Deprecated** to hide assets that need no action.
+2. Select **Status** in **Sort by** to bring the most urgent assets to the top.
+3. Compare the **On latest** ratio of each asset to judge how much of the migration is left, and the **Workspaces** and **Projects** counts to judge how many teams a change affects.
+4. Select an asset to open the usage drawer, and note the projects grouped under any version other than the latest. Those are the projects that still need to migrate.
+
+You can't update a diagram from the catalog. The migration itself happens in each project, where teams [resolve outdated assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#review-catalog-updates-for-a-project) from the project page or directly in the diagram.
 
 ## Next steps
 
