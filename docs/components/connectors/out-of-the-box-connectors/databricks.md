@@ -29,23 +29,23 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 In the **Databricks API** dropdown list, select the API you want to call. In the **Operation** dropdown list, select one of the operations supported for that API. The workspace URL, endpoint path, HTTP method, and query parameters are derived automatically from this choice; only the fields the selected operation needs are shown.
 
-| API | Operation | Request |
-| --- | --- | --- |
-| SQL Statement Execution | Execute statement | `POST /api/2.0/sql/statements` |
-| SQL Statement Execution | Get statement status and result | `GET /api/2.0/sql/statements/{statement_id}` |
-| SQL Statement Execution | Get result chunk | `GET /api/2.0/sql/statements/{statement_id}/result/chunks/{chunk_index}` |
-| SQL Statement Execution | Cancel statement | `POST /api/2.0/sql/statements/{statement_id}/cancel` |
-| SQL Warehouses | Get warehouse | `GET /api/2.0/sql/warehouses/{id}` |
-| SQL Warehouses | Start warehouse | `POST /api/2.0/sql/warehouses/{id}/start` |
-| SQL Warehouses | Stop warehouse | `POST /api/2.0/sql/warehouses/{id}/stop` |
-| Jobs | Run job now | `POST /api/2.2/jobs/run-now` |
-| Jobs | Get run | `GET /api/2.2/jobs/runs/get` |
-| Jobs | Get run output | `GET /api/2.2/jobs/runs/get-output` |
-| Jobs | Cancel run | `POST /api/2.2/jobs/runs/cancel` |
-| Model Serving | Invoke chat / LLM endpoint | `POST /serving-endpoints/{name}/invocations` |
-| Model Serving | Invoke custom model (raw payload) | `POST /serving-endpoints/{name}/invocations` |
-| Model Serving | Get endpoint | `GET /api/2.0/serving-endpoints/{name}` |
-| Vector Search | Query index | `POST /api/2.0/vector-search/indexes/{index_name}/query` |
+| API                     | Operation                         | Request                                                                  |
+| ----------------------- | --------------------------------- | ------------------------------------------------------------------------ |
+| SQL Statement Execution | Execute statement                 | `POST /api/2.0/sql/statements`                                           |
+| SQL Statement Execution | Get statement status and result   | `GET /api/2.0/sql/statements/{statement_id}`                             |
+| SQL Statement Execution | Get result chunk                  | `GET /api/2.0/sql/statements/{statement_id}/result/chunks/{chunk_index}` |
+| SQL Statement Execution | Cancel statement                  | `POST /api/2.0/sql/statements/{statement_id}/cancel`                     |
+| SQL Warehouses          | Get warehouse                     | `GET /api/2.0/sql/warehouses/{id}`                                       |
+| SQL Warehouses          | Start warehouse                   | `POST /api/2.0/sql/warehouses/{id}/start`                                |
+| SQL Warehouses          | Stop warehouse                    | `POST /api/2.0/sql/warehouses/{id}/stop`                                 |
+| Jobs                    | Run job now                       | `POST /api/2.2/jobs/run-now`                                             |
+| Jobs                    | Get run                           | `GET /api/2.2/jobs/runs/get`                                             |
+| Jobs                    | Get run output                    | `GET /api/2.2/jobs/runs/get-output`                                      |
+| Jobs                    | Cancel run                        | `POST /api/2.2/jobs/runs/cancel`                                         |
+| Model Serving           | Invoke chat / LLM endpoint        | `POST /serving-endpoints/{name}/invocations`                             |
+| Model Serving           | Invoke custom model (raw payload) | `POST /serving-endpoints/{name}/invocations`                             |
+| Model Serving           | Get endpoint                      | `GET /api/2.0/serving-endpoints/{name}`                                  |
+| Vector Search           | Query index                       | `POST /api/2.0/vector-search/indexes/{index_name}/query`                 |
 
 :::note
 Model Serving invocations are the only requests without an `/api/2.0` prefix. Every other operation, including **Get endpoint**, is prefixed.
@@ -53,10 +53,10 @@ Model Serving invocations are the only requests without an `/api/2.0` prefix. Ev
 
 ## Configure authentication
 
-| Type | Use |
-| --- | --- |
-| OAuth M2M (service principal) | Recommended for production. Client credentials are sent as a Basic Auth header to `https://<workspace>/oidc/v1/token` with `scope=all-apis`. Access tokens are valid for one hour. |
-| Personal access token | Testing only. |
+| Type                          | Use                                                                                                                                                                                          |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OAuth M2M (service principal) | Recommended for production. Client credentials are sent as a Basic authentication header to `https://<workspace>/oidc/v1/token` with `scope=all-apis`. Access tokens are valid for one hour. |
+| Personal access token         | Testing only.                                                                                                                                                                                |
 
 The OAuth token endpoint is derived from the workspace URL, so it does not need to be configured separately.
 
