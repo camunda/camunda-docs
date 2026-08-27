@@ -1090,6 +1090,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/app-integrations",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/blueprism",
@@ -2270,6 +2271,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/configuration-reference",
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
+                "self-managed/concepts/physical-tenants/app-integrations",
               ],
             },
           ],
@@ -2310,6 +2312,7 @@ module.exports = {
     },
     {
       Components: [
+        "self-managed/components/identity/how-identity-works",
         {
           type: "category",
           label: "Orchestration Cluster",
