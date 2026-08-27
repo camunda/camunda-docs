@@ -156,7 +156,7 @@ This means:
 
 - The raw assignee value, whether a user name, an email address, or an external identifier, is **never sent**.
 - The digest is **stable**, so it distinguishes one individual consistently across records. It is therefore **pseudonymised data, not anonymous data**, and Camunda treats it as personal data.
-- The digest is **not salted**, so the same assignee value produces the same digest across clusters.
+- The digest is **unsalted**, so the same assignee value produces the same digest across clusters.
 - Because this signal belongs to the contractual category, it **cannot be disabled separately** from other contractual telemetry. Customers who must not send it should not enable the analytics exporter.
 
 ## Lawful basis

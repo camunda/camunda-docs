@@ -2,8 +2,12 @@
 id: analytics-exporter
 title: "Analytics exporter"
 sidebar_label: "Analytics exporter"
-description: "Understand how the analytics exporter sends product telemetry to Camunda, how to enable and configure it, and exactly what data it sends."
+description: "Understand how the analytics exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends."
 ---
+
+Understand how the analytics exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends.
+
+## About
 
 The analytics exporter sends product telemetry from your Orchestration Cluster to a Camunda-operated analytics endpoint over OTLP/HTTP.
 
@@ -41,7 +45,7 @@ camunda:
             - optional
 ```
 
-The equivalent environment variables:
+These are the equivalent environment variables:
 
 ```sh
 CAMUNDA_DATA_EXPORTERS_ANALYTICS_CLASSNAME=io.camunda.exporter.analytics.AnalyticsExporter
@@ -51,6 +55,26 @@ CAMUNDA_DATA_EXPORTERS_ANALYTICS_ARGS_CATEGORIES_1=optional
 
 No further setup is required. The exporter resolves your [cluster ID](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#cluster) and [license key](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#licensing) from the broker automatically.
 
+### Network requirements
+
+The exporter makes outbound HTTPS requests to the Camunda analytics endpoint:
+
+Allowlist this host in your egress firewall rules on every broker.
+
+:::warning
+If the endpoint is unreachable, the exporter fails **silently**. No incident is raised, no error is surfaced to operators, and the brokers continue running normally. Verify connectivity when you enable the exporter; you will not be told if it stops working.
+:::
+
+### Authentication
+
+The exporter authenticates using your Camunda 8 Self-Managed license key.
+
+There is nothing extra to configure. The exporter derives everything it needs from the license key already set on the cluster, and computes the credentials itself on startup.
+
+**The raw license key is never transmitted.** The exporter sends a SHA-256 fingerprint of the key in the `x-camunda-fingerprint` header, and uses the key as an HMAC secret to sign each batch. Camunda maps the fingerprint to your organization.
+
+If you rotate your license key, the exporter picks up the new key the next time the broker starts.
+
 ### Verify the exporter is running
 
 On broker startup, look for this log line:
@@ -59,23 +83,9 @@ On broker startup, look for this log line:
 Analytics exporter configured: endpoint=<endpoint>, clusterId=<cluster-id>, partitionId=<partition-id>
 ```
 
-## Network requirements
-
-The exporter makes outbound HTTPS requests to the Camunda analytics endpoint:
-
-:::danger BLOCKER - placeholder, do not publish
-The analytics endpoint hostname is not confirmed. `stable/8.10` compiles `https://analytics.cloud.camunda.io`, identified as a placeholder on 2026-08-17. camunda/camunda#60355 sets the default to the working Cloud Run URL but is unmerged and not backported to `stable/8.10`. Resolve before merge and delete this admonition.
-:::
-
-Allowlist this host in your egress firewall rules on every broker.
-
-:::warning
-If the endpoint is unreachable, the exporter fails **silently**. No incident is raised, no error is surfaced to operators, and the brokers continue running normally. Verify connectivity when you enable the exporter; you will not be told if it stops working.
-:::
-
 ## Choose what is sent
 
-The `categories` option controls which signals are exported:
+The [`categories`](#configuration-reference) option controls which signals are exported:
 
 | Category      | What it contains                                                                                                                                                | Why Camunda collects it                                                                      |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -100,30 +110,6 @@ camunda:
 An omitted or empty `categories` list enables all categories.
 
 The `heartbeat` event and the `camunda.telemetry.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
-
-## Configuration reference
-
-All options live under `args`. The defaults suit typical Self-Managed deployments and rarely need changing.
-
-| Option               | Type     | Description                                                                                                                                         | Default                                           |
-| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| `endpoint`           | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                                       | see [Network requirements](#network-requirements) |
-| `categories`         | list     | Signal categories to export: `contractual`, `optional`. Empty or omitted enables all.                                                               | `[contractual, optional]`                         |
-| `push-interval`      | duration | Maximum time between batch pushes, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).                                     | `PT5M`                                            |
-| `heartbeat-interval` | duration | Interval between heartbeat events carrying static cluster metadata.                                                                                 | `PT10M`                                           |
-| `max-queue-size`     | int      | Maximum number of records buffered in memory before new records are dropped.                                                                        | `2048`                                            |
-| `max-batch-size`     | int      | Maximum number of records per OTLP request. Must not exceed `max-queue-size`.                                                                       | `512`                                             |
-| `sampling-rate`      | double   | Default sampling rate for events, between `0.0` and `1.0`. Individual signals may declare a lower rate; the effective rate is the lower of the two. | `1.0`                                             |
-
-## Authentication
-
-The exporter authenticates using your Camunda 8 Self-Managed license key.
-
-There is nothing extra to configure. The exporter derives everything it needs from the license key already set on the cluster, and computes the credentials itself on startup.
-
-**The raw license key is never transmitted.** The exporter sends a SHA-256 fingerprint of the key in the `x-camunda-fingerprint` header, and uses the key as an HMAC secret to sign each batch. Camunda maps the fingerprint to your organization.
-
-If you rotate your license key, the exporter picks up the new key the next time the broker starts.
 
 ## What data is sent
 
@@ -283,6 +269,20 @@ Regardless of configuration, the exporter never sends:
 - Tenant names and descriptions
 - Agent system prompts, tool definitions, or model configuration
 - Raw user names, email addresses, or your license key
+
+## Configuration reference
+
+All options live under `args`. The defaults suit typical Self-Managed deployments and rarely need changing.
+
+| Option               | Type     | Description                                                                                                                                         | Default                                           |
+| -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `endpoint`           | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                                       | see [Network requirements](#network-requirements) |
+| `categories`         | list     | Signal categories to export: `contractual`, `optional`. Empty or omitted enables all.                                                               | `[contractual, optional]`                         |
+| `push-interval`      | duration | Maximum time between batch pushes, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).                                     | `PT5M`                                            |
+| `heartbeat-interval` | duration | Interval between heartbeat events carrying static cluster metadata.                                                                                 | `PT10M`                                           |
+| `max-queue-size`     | int      | Maximum number of records buffered in memory before new records are dropped.                                                                        | `2048`                                            |
+| `max-batch-size`     | int      | Maximum number of records per OTLP request. Must not exceed `max-queue-size`.                                                                       | `512`                                             |
+| `sampling-rate`      | double   | Default sampling rate for events, between `0.0` and `1.0`. Individual signals may declare a lower rate; the effective rate is the lower of the two. | `1.0`                                             |
 
 ## Assignee identifiers
 
