@@ -84,13 +84,14 @@ If a tenant's JDBC URL uses a prefix Camunda does not recognize, such as jTDS or
 
 Camunda validates Physical Tenant configuration at startup and fails fast with an error that names the offending tenant.
 
-| Symptom                                                        | Cause                                                                        | Resolution                                                                             |
-| :------------------------------------------------------------- | :--------------------------------------------------------------------------- | :------------------------------------------------------------------------------------- |
-| Startup fails naming two tenants that share a storage location | Two tenants resolve to the same schema, index prefix, or document store path | Give each tenant a distinct location. See [storage isolation](./storage-isolation.md). |
-| Startup fails on provider selection for a non-default tenant   | A configured tenant does not declare `providers.assigned`                    | Assign at least one cluster OIDC provider to the tenant.                               |
-| Startup fails naming an unresolvable database vendor           | The JDBC URL prefix is unrecognized and no `database-vendor-id` is set       | Set `database-vendor-id` explicitly for that tenant.                                   |
-| Schema migration fails on an identifier                        | The RDBMS table prefix is not a valid SQL identifier                         | Remove hyphens, spaces, and leading digits from the prefix.                            |
-| Per-tenant exporter settings appear to be ignored              | The exporter is declared only for the tenant and not at the root             | Declare the exporter at the root as well, then override it per tenant.                 |
+| Symptom                                                         | Cause                                                                                 | Resolution                                                                                                          |
+| :-------------------------------------------------------------- | :------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------ |
+| Startup fails naming two tenants that share a storage location  | Two tenants resolve to the same schema, index prefix, or document store path          | Give each tenant a distinct location. See [storage isolation](./storage-isolation.md).                              |
+| Startup fails on provider selection for a non-default tenant    | A configured tenant does not declare `providers.assigned`                             | Assign at least one cluster OIDC provider to the tenant.                                                            |
+| Startup fails naming an unresolvable database vendor            | The JDBC URL prefix is unrecognized and no `database-vendor-id` is set                | Set `database-vendor-id` explicitly for that tenant.                                                                |
+| Schema migration fails on an identifier                         | The RDBMS table prefix is not a valid SQL identifier                                  | Remove hyphens, spaces, and leading digits from the prefix.                                                         |
+| Startup reports an Oracle storage conflict for distinct tenants | Oracle tenants isolated by schema-per-user share one JDBC URL, so they look identical | Set `data.secondary-storage.rdbms.database-vendor-id: oracle` on each tenant. The startup error includes this hint. |
+| Per-tenant exporter settings appear to be ignored               | The exporter is declared only for the tenant and not at the root                      | Declare the exporter at the root as well, then override it per tenant.                                              |
 
 The provider selection error names the exact property path it expects:
 
@@ -158,7 +159,18 @@ Endpoints under `/cluster/v2/...` require the cluster-admin role. Brokers start 
 
 Configure cluster-admin access under `camunda.security.cluster-admin.oidc.*` for OIDC, or `camunda.security.cluster-admin.basic.users` for basic authentication.
 
-<!-- TODO: Add a backup authorization troubleshooting entry once the new `Backup` and `Exporter` authorization resource types are finalized. Early guidance is that running an ES/OS backup requires both `Backup/CREATE` and `Exporter/PAUSE`. Coordinate with Lena Schoenburg before publishing. -->
+### Backup or exporting requests are rejected
+
+Per-tenant backup and exporting endpoints are governed by two resource types, described in the [authorization model](./authorization-model.md): `BACKUP` (`CREATE`, `READ`, `DELETE`, `RESTORE`) and `EXPORTER` (`PAUSE`).
+
+An Elasticsearch or OpenSearch history backup needs **both** `BACKUP:CREATE` and `EXPORTER:PAUSE`, because exporting is paused for the duration of the backup. A role granted only `BACKUP:CREATE` fails partway through. The default **admin** role holds both; **readonly-admin** holds only `BACKUP:READ`.
+
+A `403` on a history backup endpoint has two possible causes, and the problem detail states which one applies:
+
+- The caller lacks the required `BACKUP` permission.
+- The tenant's secondary storage is neither Elasticsearch nor OpenSearch, so it cannot serve history backups at all. Granting permissions will not resolve this one.
+
+Permissions apply to the whole resource type. There is no per-backup-ID or per-exporter grant, so only the `*` resource ID is supported.
 
 ### Sessions behave unexpectedly across tenants
 
@@ -227,12 +239,11 @@ Recommended alerts:
 
 ## Known limitations in 8.10
 
-<!-- TODO: Three rows below need engineering confirmation before GA. 1) "Mixed secondary storage backends are not supported" came from alpha testing notes only, with no tracked issue - confirm the Query API still cannot span mixed backends in 8.10 GA. 2) The Oracle separate-schema false positive was reported during alpha - confirm whether it still reproduces. 3) "Tenant deletion" follows provisioning-and-lifecycle.md, but issue notes reference an explicit delete API; see the matching TODO in that file. Review with Deepthi Devaki and Houssain Barouni. -->
+<!-- TODO: Two rows below still need engineering confirmation before GA. 1) "Mixed secondary storage backends are not supported" came from alpha testing notes only, with no tracked issue - confirm the Query API still cannot span mixed backends in 8.10 GA. 2) "Tenant deletion" follows provisioning-and-lifecycle.md, but issue notes reference an explicit delete API; see the matching TODO in that file. Review with Deepthi Devaki and Houssain Barouni. -->
 
 | Limitation                                         | Impact                                                                                                                                                                                                         |
 | :------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Mixed secondary storage backends are not supported | All Physical Tenants in a cluster must use the same secondary storage type. You cannot combine RDBMS and Elasticsearch or OpenSearch across tenants.                                                           |
-| Oracle separate-schema isolation                   | Oracle supports isolation by table prefix. Separate schemas on one Oracle instance can report a false-positive startup conflict.                                                                               |
 | Deterministic schema mismatches retry indefinitely | A schema mismatch that cannot succeed on retry is treated as retryable, so the tenant stays degraded instead of failing clearly. See [camunda/camunda#61063](https://github.com/camunda/camunda/issues/61063). |
 | Per-tenant exporter configuration                  | An exporter must be declared at the root before a tenant can override it. Per-tenant arguments for the RDBMS exporter are not supported.                                                                       |
 | Tenant deletion                                    | Removing a tenant from configuration disables it and retains its data. Permanent deletion is not available.                                                                                                    |

@@ -65,7 +65,7 @@ tenanta:
 
 ### Validation and operations
 
-- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message. For Oracle, schema isolation uses distinct authenticated users rather than URL differences; a known false positive startup conflict may be reported for identical Oracle URLs in the current alpha release.
+- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message. For Oracle, schema isolation uses distinct authenticated users rather than URL differences, so set `database-vendor-id: oracle` on each tenant to avoid a false conflict on identical URLs.
 - **Pre-startup**: Ensure each tenant's schema exists, is empty, and has valid credentials
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
@@ -79,8 +79,10 @@ Camunda converts RDBMS table prefixes to uppercase before applying them, so `ten
 Earlier 8.10 alpha releases carried the prefix through verbatim, which failed the Liquibase migration at startup for a lowercase prefix. See [camunda/camunda#56093](https://github.com/camunda/camunda/issues/56093).
 :::
 
-:::note Oracle limitation in 8.10 alpha
-In the 8.10 alpha release, Oracle supports isolation by table prefix only. Using separate schemas from the same Oracle instance for multiple Physical Tenants is not supported in alpha and will be fixed in a later release.
+:::note Isolate Oracle tenants by schema-per-user
+Oracle isolates Physical Tenants by distinct authenticated database users rather than by differing JDBC URLs, so two Oracle tenants can share one URL and still be isolated. Because the URLs are identical, startup validation reports a storage-location conflict unless you tell Camunda the vendor explicitly.
+
+Set `data.secondary-storage.rdbms.database-vendor-id: oracle` on each tenant. The startup error includes this hint.
 :::
 
 ## Elasticsearch and OpenSearch storage
