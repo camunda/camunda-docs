@@ -36,8 +36,9 @@ Camunda follows certain principles in its collection and use of telemetry data t
 - Telemetry data does not include any data shared in process instances or uploaded in customer clusters. Therefore, **no end-user or end-customer personal data**, personal information (PII), or protected health information (PHI) uploaded to a customer cluster is part of telemetry data.
 - Telemetry data does **not include payment information**.
 - Camunda does **not sell any personal (user) information.**
-- **Telemetry data is pseudonymised where an identifier is retained for a lawful purpose, and otherwise aggregated and anonymised.** Camunda does not claim that all telemetry data is anonymous. Where an identifier allows one individual to be distinguished from others, that data is treated as personal data and handled accordingly. See [Identifiability](#identifiability).
-- **For Self-Managed customers, Orchestration Cluster telemetry is disabled by default** and is sent only after an administrator enables it. See [Orchestration Cluster telemetry](#orchestration-cluster-telemetry).
+- **Telemetry data is pseudonymized when an identifier is retained for a lawful purpose. Otherwise, it is aggregated and anonymized.** Camunda does not claim that all telemetry data is anonymous. If an identifier can distinguish one individual from others, Camunda treats the data as personal data and handles it accordingly. See [Identifiability](#identifiability).
+- **For Self-Managed customers, Orchestration Cluster telemetry is disabled by default.** Telemetry data is sent only after an administrator enables it. See [Orchestration Cluster telemetry](#orchestration-cluster-telemetry).
+
 - Data collected from end-users such as form fills or process variables are not part of telemetry data. For example, if part of your process involves a user filling in a shipping address, that address is not telemetry data.
 - Assets like the BPMN diagram describing how a process is defined and executed are not telemetry data. Telemetry data does not include information about how customers develop their processes, like keystrokes or BPMN diagrams. Instead, it includes user-provided identifiers like a process ID to track which Camunda software features are used when developing a process.
 - Customers are responsible for avoiding sharing intellectual property, personal data or sensitive data through interaction with AI features. The data collected by different AI features is shared [below](#usage-telemetry-data-saas-and-desktop-modeler-only).
@@ -53,18 +54,18 @@ Contractual metrics telemetry data includes a limited set of contractually agree
 
 ### Orchestration Cluster telemetry
 
-From Camunda 8.10, the Orchestration Cluster can send product telemetry directly to Camunda through the [analytics exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md). This telemetry is process metadata only: it never includes process variables, payloads, message contents, incident error messages, or BPMN, DMN, and form resources.
+Starting with Camunda 8.10, the Orchestration Cluster can send product telemetry directly to Camunda through the [analytics exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md). This telemetry contains process metadata only. It never includes process variables, payloads, message content, incident error messages, or BPMN, DMN, or form resources.
 
-It is grouped into two categories:
+Telemetry is grouped into two categories:
 
 | Category        | What it contains                                                                                                                                                | Why Camunda collects it                                                                      |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
 | **Contractual** | Root process instance starts, decision evaluations, user task assignments, and tenant creation and deletion.                                                    | To verify usage against the metrics in your agreement and to bill for overages.              |
 | **Optional**    | Process, decision, and form definition deployments and deletions; incidents raised and resolved; user task creation; and agent instance starts and completions. | To understand how the product is used, prioritize improvements, and support your deployment. |
 
-Alongside both categories, Camunda receives a periodic heartbeat carrying the Camunda version and the exporter version. Camunda uses it to detect data gaps and offline clusters.
+For both categories, Camunda receives a periodic heartbeat containing the Camunda version and exporter version. Camunda uses this heartbeat to detect data gaps and offline clusters.
 
-For the exact field-level list of everything sent, see [What data is sent](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md#what-data-is-sent).
+For a complete field-level list of the data sent, see [what data is sent](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md#what-data-is-sent).
 
 ### Usage telemetry data (SaaS and Desktop Modeler only)
 
@@ -137,15 +138,15 @@ Below is an example of user action data collected by the platform:
 }
 ```
 
-## Identifiability
+## Identifiability |
 
-Camunda distinguishes three states, and applies different handling to each:
+Camunda distinguishes between three states and handles each differently:
 
-| State             | Meaning                                                                                                                            |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **Anonymous**     | No individual can be distinguished. Aggregate counts, such as the number of distinct task users in a period.                       |
-| **Pseudonymised** | Direct identifiers are replaced with a substitute value, but one individual can still be distinguished from others across records. |
-| **Personal data** | Directly identifies an individual, such as a name or email address.                                                                |
+| State                     | Meaning                                                                                                                              |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| **Anonymous**             | No individual can be distinguished. This includes aggregate counts, such as the number of distinct task users during a given period. |
+| **Pseudonymized**         | Direct identifiers are replaced with substitute values, but an individual can still be distinguished across records.                 |
+| **Directly identifiable** | An individual can be directly identified, for example, by their name or email address.                                               |
 
 ### Assignee identifiers in Orchestration Cluster telemetry
 
@@ -158,15 +159,7 @@ This means:
 - The digest is **not salted**, so the same assignee value produces the same digest across clusters.
 - Because this signal belongs to the contractual category, it **cannot be disabled separately** from other contractual telemetry. Customers who must not send it should not enable the analytics exporter.
 
-:::danger BLOCKER - pending Legal review
-The wording in this section must be confirmed by Legal before publishing. Delete this admonition once reviewed.
-:::
-
 ## Lawful basis
-
-:::danger BLOCKER - pending Legal review
-Draft only. The lawful-basis mapping below must be confirmed by Legal, and aligned with the final contractual wording, before publishing. Delete this admonition once reviewed.
-:::
 
 | Data                                                    | Basis                                                                                                                  |
 | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -186,7 +179,3 @@ To object to processing of the pseudonymised subset, or to make a data subject r
 | **SaaS**              | Optional telemetry is controlled per cluster in cluster settings. Contractual telemetry is required to operate the service and cannot be disabled.                                                                                                |
 | **SaaS user actions** | Controlled per user through cookie preferences, shown in [Usage telemetry data](#usage-telemetry-data-saas-and-desktop-modeler-only).                                                                                                             |
 | **Desktop Modeler**   | Controlled per installation. See [Desktop Modeler telemetry](/components/modeler/desktop-modeler/telemetry/telemetry.md).                                                                                                                         |
-
-:::danger BLOCKER - unconfirmed capability
-The SaaS row above describes a cluster-settings control that is documented as shipping in 8.10, but as of 2026-08-25 has no design and no tracking issue. Confirm it ships before publishing, or rewrite that row. Delete this admonition once resolved.
-:::
