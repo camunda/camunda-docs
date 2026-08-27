@@ -45,7 +45,6 @@ In a cluster running multiple [Physical Tenants](/self-managed/concepts/physical
 | Replication factor                 | Cluster-wide | `PATCH /actuator/cluster`, without a `physicalTenant` parameter                                     |
 | Partition join, leave, or priority | Per tenant   | `POST` or `DELETE /actuator/cluster/brokers/{brokerId}/partitions/{partitionId}?physicalTenant=`    |
 | Routing state                      | Per tenant   | `PATCH /actuator/cluster/routing-state?physicalTenant={physicalTenantId}`                           |
-| Purge                              | Both         | `POST /actuator/cluster/purge`, optionally scoped with `?physicalTenant={physicalTenantId}`         |
 
 Partition ids restart at `1` in every Physical Tenant, so a partition is only identified by its id together with its tenant.
 
