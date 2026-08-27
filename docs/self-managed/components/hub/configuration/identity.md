@@ -62,7 +62,9 @@ Camunda Hub does not require a client secret. The Camunda Hub web application au
 
 ## Upgrading from 8.9
 
-If you configured Camunda Hub authentication in 8.9, no action is required to upgrade to 8.10. Camunda Hub translates your existing settings to the settings above at startup. Those 8.9 settings are deprecated, however, and are removed in 8.11, so migrate to the `camunda.security.authentication.oidc.*` settings before upgrading to 8.11.
+If you configured Camunda Hub authentication in 8.9, no action is required to upgrade to 8.10. Camunda Hub translates your existing settings to the settings above at startup, and logs a `WARN` for each translated setting, naming the 8.9 setting and the 8.10 equivalent it was translated to. Those 8.9 settings are deprecated, however, and are removed in 8.11, so migrate to the `camunda.security.authentication.oidc.*` settings before upgrading to 8.11.
+
+Check the startup log for these `WARN` messages after upgrading, particularly if you set more than one of the three 8.9 audience properties — they merge into the single `camunda.security.authentication.oidc.audiences` list, and the log shows the merged result so you can confirm it matches what you expect.
 
 For the mapping between the 8.9 and 8.10 settings, see [upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration).
 

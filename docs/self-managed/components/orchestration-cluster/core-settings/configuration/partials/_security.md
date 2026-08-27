@@ -128,6 +128,10 @@ script-src-attr 'none'.
 | `camunda.security.authentication.oidc.resource`                                              | List of resource indicators to include in token and authorization requests. Used to specify target resources as defined in [RFC 8707](https://datatracker.ietf.org/doc/html/rfc8707).                                                                                                                                                                                           |                                      |
 | `camunda.security.authentication.oidc.diagnostics.enabled`                                   | Enables additional diagnostic logging during the OIDC authentication flow to help identify common misconfigurations. Intended for troubleshooting only; disable in production environments.                                                                                                                                                                                     | `false`                              |
 
+:::caution
+Enabling `prefer-id-token-claims` changes which token's claims are trusted for authorization decisions, from the access token to the ID token and user info response. Audience semantics differ between the two: the access token's audience identifies the API it authorizes access to, while the ID token's audience identifies the client the token was issued to. Only enable this to work around an access token that Camunda cannot validate or that is missing required claims, not as a default choice.
+:::
+
 ### `camunda.security.authentication.oidc.assertion`
 
 Configuration options for the client assertion used in Bearer JWT client authentication.
