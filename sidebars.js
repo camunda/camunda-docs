@@ -713,7 +713,8 @@ module.exports = {
                 id: "components/hub/organization/manage-workspaces/manage-workspaces",
               },
               items: [
-                "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+                "components/hub/organization/manage-workspaces/manage",
+                "components/hub/organization/manage-workspaces/manage-workspace-members",
               ],
             },
             {
@@ -786,6 +787,7 @@ module.exports = {
                 },
               ],
             },
+            "components/hub/workspace/manage-projects/recently-deleted",
             {
               type: "category",
               label: "Analyze operations",
@@ -815,36 +817,12 @@ module.exports = {
                 id: "components/hub/workspace/manage-projects/manage-projects",
               },
               items: [
-                {
-                  type: "doc",
-                  label: "Lifecycle",
-                  id: "components/hub/workspace/manage-projects/project-pipeline",
-                },
-                {
-                  type: "doc",
-                  label: "Creation",
-                  id: "components/hub/workspace/manage-projects/create-a-project",
-                },
-                {
-                  type: "doc",
-                  label: "Deployment",
-                  id: "components/hub/workspace/manage-projects/deploy-project",
-                },
-                {
-                  type: "doc",
-                  label: "Versioning",
-                  id: "components/hub/workspace/manage-projects/project-versioning",
-                },
-                {
-                  type: "doc",
-                  label: "Git Sync",
-                  id: "components/hub/workspace/manage-projects/git-sync",
-                },
-                {
-                  type: "doc",
-                  label: "Recover deleted resources",
-                  id: "components/hub/workspace/manage-projects/recently-deleted",
-                },
+                "components/hub/workspace/manage-projects/create-a-project",
+                "components/hub/workspace/manage-projects/validate-project",
+                "components/hub/workspace/manage-projects/project-versioning",
+                "components/hub/workspace/manage-projects/deploy-project",
+                "components/hub/workspace/manage-projects/git-sync",
+                "components/hub/workspace/manage-projects/manage-project",
               ],
             },
             {
@@ -920,6 +898,7 @@ module.exports = {
                     id: "components/hub/workspace/modeler/collaboration/collaboration",
                   },
                   items: [
+                    "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
                     "components/hub/workspace/modeler/collaboration/collaborate-with-modes",
                     "components/hub/workspace/modeler/collaboration/design-your-process",
                     "components/hub/workspace/modeler/collaboration/implement-your-process",
