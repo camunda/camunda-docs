@@ -466,9 +466,8 @@ components:
           type: string
         projectKey:
           description: >
-            The key of the project this file belongs to. Present in single-file responses
-            (get, create, update) but null in search results; full project resolution
-            for search results is not yet supported.
+            The key of the project this file belongs to. Null only for a file with no
+            owning project (e.g. an IDP connector template at the workspace root).
           nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProjectKey"
@@ -583,6 +582,11 @@ components:
           description: Filter by file name.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        projectKey:
+          description: Filter by the key of the project the file belongs to.
+          x-semantic-type: ProjectKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
         folderKey:
           description: Filter by parent folder key.
           x-semantic-type: FolderKey
