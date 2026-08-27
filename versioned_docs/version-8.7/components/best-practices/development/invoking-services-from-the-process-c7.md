@@ -416,169 +416,168 @@ completion.
 			<td class="tableblock halign-center valign-top">
 				<p class="tableblock">
 				  BPMN Ext. Element+
-
-    				<code>
-    				  serviceTask
-    					<br />
-
-camunda:
-<br />
-connector
-</code>
-</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">
-BPMN Attributes
-<br />
-<code>
-serviceTask
-<br />
-camunda:
-<br />
-type=
-<br />
-'external' and
-<br />
-'camunda:topic'
-</code>
-</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">
-BPMN Element
-<br />
-<code>script</code> or
-<br />
-BPMN Attribute
-<br />
-<code>
-scriptTask
-<br />
-camunda:
-<br />
-resource
-</code>
-</p>
-</td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top">
-<p class="tableblock">Fault Tolerance and Retrying</p>
-</th>
-<td class="tableblock halign-center valign-top" colspan="4">
-<p class="tableblock">Handled by Camunda retry strategies and incident management.</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Lock tasks for a defined time. Use Camunda’s retry and incident management.</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Handled by Camunda retry strategies and incident management.</p>
-</td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top">
-<p class="tableblock">Scaling (having multiple Worker Threads)</p>
-</th>
-<td class="tableblock halign-center valign-top" colspan="4">
-<p class="tableblock">Via load balancer in front of service</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Multiple worker threads can be started.</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Via job executor configuration</p>
-</td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top">
-<p class="tableblock">Throttling (e.g. one request at a time)</p>
-</th>
-<td class="tableblock halign-center valign-top" colspan="4">
-<p class="tableblock">Not possible out-of-the-box, requires own throttling logic being implemented.</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Start or stop exactly as many worker threads you need.</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Not possible out-of-the-box.</p>
-</td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top">
-<p class="tableblock">Reusable Tasks</p>
-</th>
-<td class="tableblock halign-center valign-top" colspan="2">
-<p class="tableblock">
-Use <a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/delegation-code/#field-injection">field injection</a>
-</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Use method parameters.</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">
-Build your own <a href="https://docs.camunda.org/manual/7.12/reference/connect/">Connector</a>
-</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">
-Reuse <a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/external-tasks/">external task</a> topics and configure service via variables.
-</p>
-</td>
-<td class="tableblock halign-center valign-top" />
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top">
-<p class="tableblock">Use when</p>
-</th>
-<td class="tableblock halign-center valign-top" colspan="2">
-If external tasks do not work for your use case
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Defining small pieces of logic directly in BPMN</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Defining a self-contained BPMN process without Java code</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">
-<strong>Always</strong> if there is no reason against it
-</p>
-</td>
-<td class="tableblock halign-center valign-top">
-<p class="tableblock">Defining BPMN processes without Java code.</p>
-</td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top" />
-<th class="tableblock halign-center valign-top" colspan="2">
-<p class="tableblock">
-<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/delegation-code/#java-delegate">Learn more</a>
-</p>
-</th>
-<th class="tableblock halign-center valign-top">
-<p class="tableblock">
-<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/expression-language/#delegation-code">Learn more</a>
-</p>
-</th>
-<th class="tableblock halign-center valign-top">
-<p class="tableblock">
-<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/connectors/">Learn more</a>
-</p>
-</th>
-<th class="tableblock halign-center valign-top">
-<p class="tableblock">
-<a href="https://docs.camunda.org/manual/7.12/reference/rest/external-task/">Learn more</a>
-</p>
-</th>
-<th class="tableblock halign-center valign-top">
-<p class="tableblock">
-<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/scripting/">Learn more</a>
-</p>
-</th>
-</tr>
-</tbody>
+ 
+					<code>
+					  serviceTask
+						<br />
+  camunda:
+						<br />
+  connector
+					</code>
+				</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">
+				  BPMN Attributes
+					<br />
+					<code>
+					  serviceTask
+						<br />
+  camunda:
+						<br />
+  type=
+						<br />
+  'external' and
+						<br />
+  'camunda:topic'
+					</code>
+				</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">
+				  BPMN Element
+					<br />
+					<code>script</code> or
+					<br />
+ BPMN Attribute
+					<br />
+					<code>
+					  scriptTask
+						<br />
+ camunda:
+						<br />
+ resource
+					</code>
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="tableblock halign-left valign-top">
+				<p class="tableblock">Fault Tolerance and Retrying</p>
+			</th>
+			<td class="tableblock halign-center valign-top" colspan="4">
+				<p class="tableblock">Handled by Camunda retry strategies and incident management.</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Lock tasks for a defined time. Use Camunda’s retry and incident management.</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Handled by Camunda retry strategies and incident management.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="tableblock halign-left valign-top">
+				<p class="tableblock">Scaling (having multiple Worker Threads)</p>
+			</th>
+			<td class="tableblock halign-center valign-top" colspan="4">
+				<p class="tableblock">Via load balancer in front of service</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Multiple worker threads can be started.</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Via job executor configuration</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="tableblock halign-left valign-top">
+				<p class="tableblock">Throttling (e.g. one request at a time)</p>
+			</th>
+			<td class="tableblock halign-center valign-top" colspan="4">
+				<p class="tableblock">Not possible out-of-the-box, requires own throttling logic being implemented.</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Start or stop exactly as many worker threads you need.</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Not possible out-of-the-box.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="tableblock halign-left valign-top">
+				<p class="tableblock">Reusable Tasks</p>
+			</th>
+			<td class="tableblock halign-center valign-top" colspan="2">
+				<p class="tableblock">
+          Use <a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/delegation-code/#field-injection">field injection</a>
+				</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Use method parameters.</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">
+          Build your own <a href="https://docs.camunda.org/manual/7.12/reference/connect/">Connector</a>
+				</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">
+          Reuse <a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/external-tasks/">external task</a> topics and configure service via variables.
+				</p>
+			</td>
+			<td class="tableblock halign-center valign-top" />
+		</tr>
+		<tr>
+			<th class="tableblock halign-left valign-top">
+				<p class="tableblock">Use when</p>
+			</th>
+			<td class="tableblock halign-center valign-top" colspan="2">
+        If external tasks do not work for your use case
+      </td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Defining small pieces of logic directly in BPMN</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Defining a self-contained BPMN process without Java code</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">
+					<strong>Always</strong> if there is no reason against it
+				</p>
+			</td>
+			<td class="tableblock halign-center valign-top">
+				<p class="tableblock">Defining BPMN processes without Java code.</p>
+			</td>
+		</tr>
+		<tr>
+			<th class="tableblock halign-left valign-top" />
+			<th class="tableblock halign-center valign-top" colspan="2">
+				<p class="tableblock">
+					<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/delegation-code/#java-delegate">Learn more</a>
+				</p>
+			</th>
+			<th class="tableblock halign-center valign-top">
+				<p class="tableblock">
+					<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/expression-language/#delegation-code">Learn more</a>
+				</p>
+			</th>
+			<th class="tableblock halign-center valign-top">
+				<p class="tableblock">
+					<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/connectors/">Learn more</a>
+				</p>
+			</th>
+			<th class="tableblock halign-center valign-top">
+				<p class="tableblock">
+					<a href="https://docs.camunda.org/manual/7.12/reference/rest/external-task/">Learn more</a>
+				</p>
+			</th>
+			<th class="tableblock halign-center valign-top">
+				<p class="tableblock">
+					<a href="https://docs.camunda.org/manual/7.12/user-guide/process-engine/scripting/">Learn more</a>
+				</p>
+			</th>			
+		</tr>
+	</tbody>
 </table>
 
 ## Dealing with problems and exceptions
