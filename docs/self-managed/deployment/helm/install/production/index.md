@@ -156,7 +156,7 @@ You must create Kubernetes secrets for all client secrets required by your ident
 ### Connect external databases
 
 :::note
-To allow for easier testing, the Camunda Helm chart provides databases as an external dependency, such as [Bitnami Elasticsearch Helm chart](https://artifacthub.io/packages/helm/bitnami/elasticsearch) and the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead.
+To allow for easier testing, the Camunda Helm chart provides some databases as an external dependency, such as the [Bitnami PostgreSQL Helm chart](https://artifacthub.io/packages/helm/bitnami/postgresql). These dependency charts should be disabled in a production setting, and production databases should be used instead. The chart no longer bundles an Elasticsearch subchart, so you must provide an externally managed cluster if you use Elasticsearch or OpenSearch as secondary storage.
 :::
 
 This guide keeps database configuration in one flow and provides two options:
