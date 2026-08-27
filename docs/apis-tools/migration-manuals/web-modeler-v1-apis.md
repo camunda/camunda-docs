@@ -20,7 +20,7 @@ However, process applications were implicitly accessible as folders. For example
 Camunda 8.10 changes how resources are organized. Review [structure and terminology](./migrate-from-web-modeler-to-hub-api.md#structure-and-terminology) for an explanation of these changes. To support the new file hierarchy, two major changes have been introduced to Web Modeler API v1:
 
 - Process applications are no longer implicitly accessible via v1 folders, files, and project APIs.
-- New process application APIs are introduced to make access explicit.
+- New process application APIs and changes to existing APIs are introduced to make access explicit.
 
 :::note DEPRECATED
 Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [Migrate to Camunda Hub REST API v2](../migration-manuals/migrate-from-web-modeler-to-hub-api.md).
