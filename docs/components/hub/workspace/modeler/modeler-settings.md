@@ -35,8 +35,8 @@ By default, only [organization administrators](/components/hub/organization/mana
 
 You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
 
-Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
-after a collaborator has reviewed and approved the project version using the
+Here, you can permit non-admin users with deployment permissions to deploy project snapshots to production stage clusters
+after a collaborator has reviewed and approved the project snapshot using the
 [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
 This setting can only be configured by organization admins and applies to all projects in the organization.
 
@@ -49,8 +49,8 @@ clusters marked as [production stages](/components/hub/workspace/manage-projects
 
 You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
 
-Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
-after a collaborator has reviewed and approved the project version using the
+Here, you can permit non-admin users with deployment permissions to deploy project snapshots to production stage clusters
+after a collaborator has reviewed and approved the project snapshot using the
 [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
 This setting can only be configured by users with the **Web Modeler Admin** role and applies to all projects.
 
