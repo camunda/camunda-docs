@@ -112,9 +112,11 @@ Each Physical Tenant has its own path-scoped session cookie, so sessions from di
 
 :::note
 Deploy Optimize separately for each Physical Tenant and configure each instance to use that tenant's cluster connection. Native multi-tenant Helm support does not manage multiple Optimize instances.
+:::
+
 <!-- TODO: Optimize documentation for Physical Tenants is being written by the Optimize team. Coordinate with Hamza and Immi before publishing any Optimize-specific configuration or setup content for Physical Tenants. -->
 
-:::
+Learn how data scoping, session behavior, and tenant navigation work within each web app in [web apps](./web-apps.md).
 
 ## MCP routing
 
