@@ -50,6 +50,8 @@ If tenant scope is omitted in compatibility paths, requests resolve to the defau
 
 ## Disable, rename, and delete
 
+<!-- TODO: Confirm the 8.10 GA deletion story before release. This page states deletion is not supported, but the notes in camunda-docs#8899 reference an explicit delete API for permanent deletion, alongside an actuator endpoint that removes a disabled tenant without deleting its data. These cannot both be accurate. The troubleshooting page currently follows this page. Review with Deepthi Devaki or Lena Schoenburg. -->
+
 For 8.10:
 
 - Disabling and re-enabling a Physical Tenant is supported through configuration. There is no dedicated API for this operation.
