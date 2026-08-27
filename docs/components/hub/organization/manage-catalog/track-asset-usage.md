@@ -81,8 +81,6 @@ If an asset has no usage, the drawer shows **Not used yet**.
 
 Because the **Asset usage** tab is limited to organization administrators and owners, the drawer shows every project in your organization that uses the asset, across all workspaces — including workspaces you aren't a member of.
 
-Elevated organization access also applies to the projects and workspaces themselves, so you can open any entry in the drawer to inspect a usage directly.
-
 ## Drive a migration off an outdated asset
 
 To turn the overview into a prioritized list of work:
