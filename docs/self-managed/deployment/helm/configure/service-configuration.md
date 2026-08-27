@@ -13,14 +13,14 @@ Each component's `service.appProtocols` value accepts a map of port name to `app
 
 The following components support `appProtocols` (the accepted port names for each component are listed in the last column):
 
-| Component              | Value key                                    | Accepted port names                                 |
-| ---------------------- | -------------------------------------------- | --------------------------------------------------- |
-| Orchestration cluster  | `orchestration.service.appProtocols`         | `management`, `internal`, `command`, `http`, `grpc` |
-| Identity               | `identity.service.appProtocols`              | `http`, `metrics`                                   |
-| Optimize               | `optimize.service.appProtocols`              | `http`, `management`                                |
-| Connectors             | `connectors.service.appProtocols`            | `server`                                            |
-| Web Modeler REST API   | `webModeler.restapi.service.appProtocols`    | `http`, `http-management`                           |
-| Web Modeler WebSockets | `webModeler.websockets.service.appProtocols` | `http`                                              |
+| Component             | Value key                                    | Accepted port names                                 |
+| --------------------- | -------------------------------------------- | --------------------------------------------------- |
+| Orchestration cluster | `orchestration.service.appProtocols`         | `management`, `internal`, `command`, `http`, `grpc` |
+| Identity              | `identity.service.appProtocols`              | `http`, `metrics`                                   |
+| Optimize              | `optimize.service.appProtocols`              | `http`, `management`                                |
+| Connectors            | `connectors.service.appProtocols`            | `server`                                            |
+| Hub REST API          | `camundaHub.restapi.service.appProtocols`    | `http`, `http-management`                           |
+| Hub WebSockets        | `camundaHub.websockets.service.appProtocols` | `http`                                              |
 
 Example — setting the orchestration cluster gRPC gateway port to use `kubernetes.io/h2c` for HTTP/2 cleartext framing:
 
