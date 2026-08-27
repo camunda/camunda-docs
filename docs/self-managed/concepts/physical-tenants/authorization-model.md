@@ -90,14 +90,10 @@ Because each Physical Tenant is independently authorized, audit logs for tenant-
 
 ## Cluster-admin role
 
-:::note
-The cluster-admin role protects operations that span all Physical Tenants or affect the entire cluster.
-:::
-
-The cluster-admin role is intended to cover operations that span all Physical Tenants or affect the entire cluster, such as:
+The cluster-admin role protects operations that span all Physical Tenants or affect the entire cluster, such as:
 
 - Triggering cluster backups and restores
 - Viewing cluster topology
 - Assigning tenants or modifying Physical Tenant configuration at runtime
 
-Cluster-admin is resolved from JWT token claims using configurable mapping rules, a dedicated cluster-admin configuration, or explicit user assignment for Basic auth. There is no separate persisted cluster-level role binding service. Authorization is coarse-grained. Cluster-admin grants access to all cluster-level operations, with no fine-grained sub-roles.
+Cluster-admin is resolved from JWT token claims using configurable mapping rules, a dedicated cluster-admin configuration, or explicit user assignment for Basic authentication. There is no separate persisted cluster-level role binding service. Authorization is coarse-grained. Cluster-admin grants access to all cluster-level operations, with no fine-grained sub-roles.
