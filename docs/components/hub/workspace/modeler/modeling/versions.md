@@ -75,11 +75,19 @@ Select an entry to view it in the viewer next to the timeline.
 
 You can compare any two entries in the timeline, including entries that are not next to each other in the history.
 
+The version history page has two tabs:
+
+- **Versions**: the timeline of every entry for the file.
+- **Compare versions**: the comparison of two entries you select.
+
+To compare two entries:
+
 1. Open the version history for your file.
+1. Select the **Compare versions** tab.
 1. Select the first entry you want to compare.
 1. Select the second entry you want to compare.
 
-The page switches to the comparison view and shows the older entry against the newer one, ordered by time regardless of the order you selected them. The selected pair is written to the URL as `/<file-type>/<id>/versions/<entryId>...<entryId>`, so you can share or bookmark a specific comparison.
+The comparison shows the older entry against the newer one, ordered by time regardless of the order you selected them. The selected pair is written to the URL as `/<file-type>/<id>/versions/<entryId>...<entryId>`, so you can share or bookmark a specific comparison.
 
 ### Compare versions in visual view
 

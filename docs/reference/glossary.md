@@ -776,7 +776,7 @@ The state of all active [process instances](#process-instance), (these are also 
 
 ### Snapshot (project)
 
-A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, and review project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
 
 - [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
