@@ -98,8 +98,8 @@ You can supply additional headers, but this value is merged in last and cannot b
 - **`stream` is forced to `false`** for chat endpoints. A streamed `text/event-stream` response cannot be consumed by a synchronous connector.
 - **Statements expire.** Roughly 12 hours after reaching a terminal state, a statement is removed, and **Get statement status and result** / **Get result chunk** then return HTTP 404.
 - **Jobs uses API 2.2.** The older 2.1 endpoints are not exposed.
-- **The Genie Conversation API is not included.** It requires a multi-call poll-until-terminal loop over conversation state, and needs its own element template.
-- Write and admin operations beyond those listed above — creating jobs, editing warehouses, deleting endpoints — are intentionally not exposed. The template targets running work, not administering the workspace.
+- **The Genie Conversation API is not included.**
+- **Write and admin operations are not included**, such as creating jobs, editing warehouses, or deleting endpoints. Only the operations listed above are available.
 
 ## Appendix & FAQ
 
