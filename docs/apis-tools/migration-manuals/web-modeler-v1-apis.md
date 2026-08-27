@@ -12,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 In Camunda 8.9, process applications were not explicitly exposed in Web Modeler API v1. There were no process application endpoints.
 
-However, process applications were implicitly accessible. For example:
+However, process applications were implicitly accessible as folders. For example:
 
 - You could pass a process application ID to `DELETE /api/v1/folders/{folderId}` to delete the process application.
 - The response for `GET /api/v1/folders/{folderId}` returns a `parentId`, representing the folder's parent folder. If the parent is in a process application, rather than another folder, the process application ID is returned.
