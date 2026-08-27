@@ -145,7 +145,7 @@ orchestration:
       value: jdbc:postgresql://db/riskprod
 ```
 
-Environment variables and `orchestration.configuration` can be combined — use the same normalized tenant key in both. See [environment variable mapping](/self-managed/concepts/physical-tenants/configuration-reference.md#environment-variables) for the full conversion rules.
+Environment variables and `orchestration.configuration` can be combined. Use the same normalized tenant key in both. See [environment variable mapping](/self-managed/concepts/physical-tenants/configuration-reference.md#environment-variables) for the full conversion rules.
 
 ## Related pages
 
