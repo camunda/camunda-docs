@@ -45,6 +45,7 @@ From here, you can perform the following actions on a project version:
 | **View details**      | Open the version details page to review the contents of all files in the version.               |
 | **Restore as latest** | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project. |
 | **Edit**              | Edit the project version.                                                                       |
+| **Deploy**            | Deploy the project version, especially after it has been [reviewed](#request-a-review).         |
 | **Download**          | Download the project as a zip file.                                                             |
 | **Copy to**           | Create a new project with the files from the version.                                           |
 | **Delete**            | Delete the project version.                                                                     |

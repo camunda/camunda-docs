@@ -48,6 +48,8 @@ Once you've [validated your process](./validate-project.md), deploy your project
 
 When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle.
 
+You can also open the deployment modal from the details page of any deployable file in the project. In that case, the modal includes an additional option to select the resources to deploy.
+
 In Self-Managed, you can deploy your project to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::note
@@ -70,6 +72,8 @@ To run your project:
 1. Select **Deploy & run** to start a new instance.
    - Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.
    - After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](/components/operate/operate-introduction.md). Open this link to monitor the process instance.
+
+You can also open the **Deploy & run** modal from the details page of any BPMN file in the project. In that case, the current process is run and the modal includes an additional option to select the resources to deploy.
 
 If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
 

@@ -16,6 +16,10 @@ In Camunda Hub, a workspace is a collaboration environment within an organizatio
 
 You can create and manage workspaces at the organization level.
 
+:::info
+You can only manage workspaces at the organization level if you're an **Organization admin** or **Organization owner**.
+:::
+
 <AoGrid ao={[
 {
 link: "./manage-workspace",
