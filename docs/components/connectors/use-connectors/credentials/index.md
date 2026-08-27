@@ -13,7 +13,7 @@ Without credentials, you configure a connector's authentication and connection s
 
 A credential moves those settings out of the diagram:
 
-1. You create a credential once, choosing a credential type such as **AWS Credential** or **JDBC Connection**.
+1. You create a credential once, choosing a credential type such as **AWS Credential** or **REST Authentication**.
 2. You select that credential on a connector task in the properties panel.
 3. At runtime, the credential is passed to the connector as a whole, and the connector reads the fields it needs from it.
 
