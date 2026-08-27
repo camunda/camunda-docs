@@ -1,6 +1,6 @@
 ---
 id: versions
-title: Versions
+title: Manage file versions
 description: Work with versions in Web Modeler.
 ---
 

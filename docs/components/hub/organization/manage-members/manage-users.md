@@ -27,7 +27,7 @@ Starting with version 8.8, user access to clusters is managed independently. To 
 
 If cluster authorizations are disabled, the user will have full access to the cluster and its components.
 
-Users can be assigned multiple roles. For example, a user can have both **Modeler** and **Analyst** roles, giving them access to Web Modeler and Optimize.
+Users can be assigned multiple roles. For example, a user can have both **Modeler** and **Analyst** roles, giving them access to Camunda Hub and Optimize.
 
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 

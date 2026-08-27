@@ -1,57 +1,58 @@
 ---
 id: deploy-project
-title: Validate and deploy your project
-description: Validate your project in development before deploying it to testing, staging, or production.
+title: Deploy your project
+description: Deploy your project to a testing, staging, or production environment.
 ---
 
-import DeployImg from './img/deploy-process-application.png'
-import DeployFileImg from './img/deploy-file.png'
 import DeployErrorImg from './img/deploy-error.png'
-import ResourcesToDeployImg from './img/resources-to-deploy.png'
-import RunProcessApplicationImg from './img/run-process-application.png'
 
-Validate your project in development before deploying it to testing, staging, or production.
+Deploy your project to a testing, staging, or production environment.
 
-## Validate your project
+## Deployment stages
 
-Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.md) to validate your project in development.
+The deployment pipeline has the following stages:
 
-1. Open the BPMN diagram in the project that you want to validate.
-1. Select the **Test** tab to test the project using your selected cluster.
-1. Perform validation as required, for example, debug your process logic and test the project.
+| Stage       | Description                                                                                                     |
+| :---------- | :-------------------------------------------------------------------------------------------------------------- |
+| Development | Use to create and test new software features and changes.                                                       |
+| Testing     | Use for quality checks, ensuring software meets defined standards before release.                               |
+| Staging     | Use for controlled testing where changes are validated before deployment to production.                         |
+| Production  | The live system with the latest software. Only administrators and organization owners can deploy to this stage. |
 
-:::info
-To learn more about using Test mode for validation, see [Test your process](/components/hub/workspace/modeler/validation/test-your-process.md)
-:::
+To define your deployment pipeline stages, follow the [connect clusters](./create-a-project.md#connect-clusters) instructions.
+
+:::note
+
+- For each stage, an administrator must define the cluster to deploy to. Deployments can only be made to the pre-defined set of approved clusters. An **Undefined stages** warning is shown if no cluster is selected for at least one stage.
+- Each deployment action is logged with information on the user and stage it was deployed to.
+  :::
+
+### Prerequisites
+
+Make sure you've [set up a project](./create-a-project.md), including at least one cluster.
+
+Only users with correct privileges can deploy:
+
+- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, ensure deploying users have [`CREATE` permission to the `RESOURCE` resource type](/components/admin/authorization.md#create-an-authorization-in-admin).
+- Configure your [deployment settings](/components/hub/workspace/modeler/modeler-settings.md#project-deployment)
 
 ## Deploy your project
 
-### Before deploying a project
+Once you've [validated your process](./validate-project.md), deploy your project to cluster stages in your [development lifecycle](./manage-projects.md#project-development-lifecycle), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
 
-- If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure that the deploying users have `CREATE` permission to the `RESOURCE` resource type.
-
-Once validation is complete, deploy your project to cluster stages in your [development lifecycle](./project-pipeline.md), such as testing, staging, or production. For example, deploy to your testing cluster to run automated tests or make it available for testing.
-
-1. Open the [project homepage](create-a-project.md#project-homepage).
-1. Select the **Deploy latest changes** option from the **Deploy & run** combo button to open the **Deploy & run** modal.
-   <p><img src={DeployImg} alt="Deploy a project" /></p>
-1. Turn on the toggle for the cluster stage you want to deploy to. In Self-Managed, you may be prompted to enter your cluster details manually if no [configuration](/self-managed/components/hub/configuration/properties.md#clusters) is provided.
-1. Perform any other actions as required, such as:
-   - Unpausing the chosen cluster if it has been auto-paused. Select **Resume cluster** within the **Cluster Details**.
-   - Managing the cluster. Select **Manage**.
-1. Select **Deploy** to deploy the project to the selected cluster.
+1. In your workspace, open a project.
+1. At the top right of the project view, click the **Deploy & run** combo button, and select **Deploy latest changes**. This opens the deployment modal.
+1. Select the cluster stage to deploy to. The next stage is not automatically selected. You must select the stage you want to promote to.
+1. If the cluster is paused, you must resume it.
+1. Click **Deploy** to deploy the project to the selected cluster.
 
 When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle.
 
-In Self-Managed, you can deploy your project to the cluster defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
+In Self-Managed, you can deploy your project to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
 
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a project cannot be deployed incompletely or in an inconsistent state.
 :::
-
-You can also open the deployment modal from the details page of any deployable file in the project. In that case, the modal includes an additional option to select the resources to deploy.
-
-<p><img src={DeployFileImg} alt="Deploy project modal from a file details page with options to select resources to deploy" /></p>
 
 ## Run your project
 
@@ -63,15 +64,21 @@ Use [Test mode](/components/hub/workspace/modeler/validation/test-your-process.m
 
 To run your project:
 
-1. Open the [project homepage](create-a-project.md#project-homepage).
-1. Select **Deploy & run** to open the **Deploy & run** modal.
-   <p><img src={RunProcessApplicationImg} alt="Run a project" /></p>
+1. In your workspace, open a project.
+1. At the top right of the project view, click **Deploy & run** to open the **Deploy & run** modal.
 1. Select the process for which you want to start a new instance in **Process to run**.
-1. Select **Deploy & run** to start a new instance.<p><ul><li>Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.</li><li>After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](/components/operate/operate-introduction.md). Open this link to monitor the process instance. If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:<ul><li>`READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` permissions on the `PROCESS_DEFINITION` resource type</li><li>`operate` permission to the `COMPONENT` resource type</li></ul></li></ul></p>
+1. Select **Deploy & run** to start a new instance.
+   - Before the process instance starts, all resources are redeployed if required so the new instance uses their latest state.
+   - After the process instance starts, you will receive a notification with a link to the process instance view in [Operate](/components/operate/operate-introduction.md). Open this link to monitor the process instance.
 
 You can also open the **Deploy & run** modal from the details page of any BPMN file in the project. In that case, the current process is run and the modal includes an additional option to select the resources to deploy.
 
-<p><img src={ResourcesToDeployImg} alt="Resources to deploy" /></p>
+If the target cluster has [authorizations](/components/admin/authorization.md) enabled, make sure you have the following permissions to be able to view the process instance in Operate:
+
+| Resource type        | Permission                                            |
+| :------------------- | :---------------------------------------------------- |
+| `PROCESS_DEFINITION` | `READ_PROCESS_DEFINITION` and `READ_PROCESS_INSTANCE` |
+| `COMPONENT`          | `operate`                                             |
 
 ## Deployment errors
 
@@ -85,3 +92,8 @@ The message typically provides the name of the affected resource, the ID of the 
 
 You can link BPMN processes, DMN decisions, or forms that are not part of the project itself (external resources) from any process inside a project.
 When you deploy the project, linked resources located outside the project are _not_ deployed with the project, so you must deploy them separately.
+
+## Next steps
+
+- [Run or publish a process](../modeler/run-or-publish-your-process.md)
+- [Sync your Git repository](./git-sync.md)

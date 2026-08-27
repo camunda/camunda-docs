@@ -48,13 +48,13 @@ Once you have written your script, you can test it on a local RPA worker.
 
       <img src={RpaEditorResults} alt="RPA testing panel in Desktop Modeler showing execution results" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 
-### Using Web Modeler
+### Using Camunda Hub
 
-1. In Web Modeler, open a project.
-2. In the project, open a process application.
+1. In Camunda Hub, open a workspace.
+2. In the workspace, open a project.
 3. Use the **Create new** menu, and select **RPA script**.
 4. **Write your RPA script using Robot Framework**: Use the editor to create your first RPA script. Scripts use the [Robot Framework](https://robotframework.org/) syntax.
-   <img src={RpaEditorWebInitial} alt="RPA editor interface showing the initial script view in Web Modeler" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
+   <img src={RpaEditorWebInitial} alt="RPA editor interface showing the initial script view in Camunda Hub" class="img-noborder img-transparent" style={{padding:0,margin:0}} />
 5. In a BPMN diagram, you'll now find your new RPA script in the **Append element** menu.
 
 #### Test your script

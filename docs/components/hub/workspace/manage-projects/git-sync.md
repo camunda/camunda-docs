@@ -1,15 +1,15 @@
 ---
 id: git-sync
-title: Git sync
-description: Connect Web Modeler to your Git repositories to keep your projects synced.
+title: Sync your Git repository
+description: Connect Camunda Hub to your Git repositories to keep your projects synced.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Organization owners and administrators can connect their Web Modeler projects to GitHub, GitLab, and Azure DevOps, allowing users to keep their Web Modeler and Desktop Modeler projects in sync with their version control repositories.
+Organization owners and administrators can connect their Camunda Hub projects to a remote version control repository, allowing users to keep their Camunda Hub and Desktop Modeler projects in sync.
 
-Once the connection is configured by an organization owner or administrator, project administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
+Once the connection is configured by an organization owner or administrator, workspace administrators and editors can use the built-in button to pull changes from the remote repository, integrate contributions from Desktop Modeler users, and merge their own work.
 
 ## Connect to a remote repository
 
@@ -28,7 +28,7 @@ Select your Git repository host:
 
 <h3> Create a new GitHub App </h3>
 
-Web Modeler requires a GitHub App to sync changes with your GitHub repository.
+Camunda Hub requires a GitHub App to sync changes with your GitHub repository.
 
 Follow the [GitHub documentation](https://docs.github.com/en/apps/creating-github-apps/registering-a-github-app/registering-a-github-app) to create a new GitHub App for your organization or account with the following configuration:
 
@@ -43,25 +43,24 @@ Click **Create GitHub App** to finish.
 <h3> Generate a private key </h3>
 
 1. In your new application's setting page, navigate to **General > Private keys**.
-2. Select **Generate a private key**. This key is automatically downloaded as a .pem file when created, and can be opened in a text editor to copy and paste the contents into Web Modeler.
+2. Select **Generate a private key**. This key is automatically downloaded as a .pem file when created, and can be opened in a text editor to copy and paste the contents into Camunda Hub.
 
 <h3> Install the GitHub App </h3>
 
 1. In your application's setting page, navigate to **Install app**.
 2. Click on the **Install** button for your organization or account.
-3. Select **Only select repositories**, and choose the repository to sync with Web Modeler.
+3. Select **Only select repositories**, and choose the repository to sync with Camunda Hub.
 4. Once redirected to your application's installation page, copy the **Installation ID** located at the end of the page's URL: `https://github.com/settings/installations/{installation_id}`.
 
-<h3> Configure GitHub in Web Modeler </h3>
+<h3> Configure GitHub in Camunda Hub </h3>
 
-1. Within Web Modeler, navigate to the project you would like to connect to GitHub, and click **Connect repository**.
-
+1. Within Camunda Hub, navigate to the project you would like to connect to GitHub, and click **Connect repository**.
 2. Select the **GitHub** tile (if not already selected), located at the top of the modal.
 
 3. Provide the following information in the **Configure GitHub** modal:
    - **Client ID:** Found in your GitHub App's settings page. You can also use Application ID as an alternative. (If you are using GitHub Enterprise Server 3.13 or prior, Application ID is required.)
    - **Installation ID:** Found in the URL of your GitHub App's installation page.
-   - **GitHub API Base URL:** The base URL of your [GitHub installation's REST API](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls). This is optional and only required for GitHub Enterprise instances. If left empty, Web Modeler uses the default GitHub Cloud REST API URL (`https://api.github.com`).
+   - **GitHub API Base URL:** The base URL of your [GitHub installation's REST API](https://docs.github.com/en/enterprise-server@3.15/rest/enterprise-admin?apiVersion=2022-11-28#endpoint-urls). This is optional and only required for GitHub Enterprise instances. If left empty, Camunda Hub uses the default GitHub Cloud REST API URL (`https://api.github.com`).
 
      :::note
      If you're using a self-hosted GitHub instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
@@ -72,7 +71,7 @@ Click **Create GitHub App** to finish.
    - **Private Key:** The contents of the .pem file downloaded from your GitHub App's settings page.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://github.com/camunda/example-repo`. The URL cannot contain the `.git` extension or a folder path.
    - **Branch name:** The branch name to use for merging and managing changes.
-   - **Repository path:** (optional) The path to the folder containing your project files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Repository path:** (optional) The path to the folder containing your project files. If left empty, Camunda Hub syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -80,14 +79,14 @@ Click **Create GitHub App** to finish.
 
 When successful, your project will display a new **Sync with GitHub** button.
 
-![The Sync with GitHub within Web Modeler](./img/git-sync.png)
+![The Sync with GitHub within Camunda Hub](./img/git-sync.png)
 
 </TabItem>
 <TabItem value='gitlab'>
 
 <h3> Create a new access token </h3>
 
-Web Modeler requires an access token to sync changes with your GitLab repository. You can use one of the following options:
+Camunda Hub requires an access token to sync changes with your GitLab repository. You can use one of the following options:
 
 - **Project access token** (recommended)
 - Group access token
@@ -107,16 +106,16 @@ To generate a project access token, follow the [GitLab documentation](https://do
 1. Navigate to your GitLab project.
 2. Click the menu icon in the top right corner and select **Copy project ID**.
 
-<h3> Configure GitLab in Web Modeler </h3>
+<h3> Configure GitLab in Camunda Hub </h3>
 
-1. In Web Modeler, navigate to the project you want to connect to GitLab, and click **Connect repository**.
+1. In Camunda Hub, navigate to the project you want to connect to GitLab, and click **Connect repository**.
 
 2. In the modal, select the **GitLab** tile at the top.
 
 3. In the **Configure GitLab** modal, provide the following information:
    - **Access token:** The project, group, or personal access token you generated.
    - **Project ID:** The ID copied from your GitLab project settings.
-   - **GitLab API base URL:** The base URL of your [GitLab installation's REST API](https://docs.gitlab.com/api/rest/#make-a-rest-api-request), for example, `https://gitlab.example.com/api/v4`. This is optional and only required for self-hosted GitLab instances. If left empty, Web Modeler uses the default GitLab Cloud REST API URL (`https://gitlab.com/api/v4`).
+   - **GitLab API base URL:** The base URL of your [GitLab installation's REST API](https://docs.gitlab.com/api/rest/#make-a-rest-api-request), for example, `https://gitlab.example.com/api/v4`. This is optional and only required for self-hosted GitLab instances. If left empty, Camunda Hub uses the default GitLab Cloud REST API URL (`https://gitlab.com/api/v4`).
 
      :::note
      If you're using a self-hosted GitLab instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
@@ -124,7 +123,7 @@ To generate a project access token, follow the [GitLab documentation](https://do
 
    - **Repository URL:** The base URL of the repository you want to sync with (e.g., `https://gitlab.com/camunda/example-repo`). The URL must not include the `.git` extension or a folder path.
    - **Branch:** The name of the branch to use for merging and managing changes.
-   - **Repository path:** (optional) The folder path that contains your project files. If left empty, Web Modeler syncs with the root of the repository. The path is created automatically if it doesn't exist.
+   - **Repository path:** (optional) The folder path that contains your project files. If left empty, Camunda Hub syncs with the root of the repository. The path is created automatically if it doesn't exist.
 
 4. Click **Open repository** to test the configuration. The repository for the selected branch and optional path will open in a new browser tab.
 
@@ -138,14 +137,14 @@ Once connected successfully, your project will display a **Sync with GitLab** bu
 <h3> Register an App in Microsoft Entra </h3>
 
 :::note
-Web Modeler SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in Self-Managed by setting the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
+Camunda Hub SaaS supports authenticating against `Microsoft Entra ID (global service)`. Other [national clouds](https://learn.microsoft.com/en-us/entra/identity-platform/authentication-national-cloud#microsoft-entra-authentication-endpoints) can be used in Self-Managed by setting the environment variable `CAMUNDA_MODELER_GITSYNC_AZURE_AUTHORITY_BASE_PATH`.
 :::
 
-Web Modeler requires an application to be registered with Microsoft Entra ID to sync changes with your Azure repository.
+Camunda Hub requires an application to be registered with Microsoft Entra ID to sync changes with your Azure repository.
 
 1. Follow the [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app) documentation to register an application. Be sure to save your `Application (client) ID` and `Directory (tenant) ID`.
 
-2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, [PKCS#8](https://en.wikipedia.org/wiki/PKCS_8) private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Web Modeler.
+2. Configure your application to use [client-certificate credentials](https://learn.microsoft.com/en-us/entra/identity-platform/how-to-add-credentials?tabs=certificate). You need a PEM-encoded, [PKCS#8](https://en.wikipedia.org/wiki/PKCS_8) private key and a PEM-encoded certificate in `X509` format generated from that key. You will need both later when configuring the connection in Camunda Hub.
 
 3. Configure [scoped permissions](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-configure-app-access-web-apis) for your app so it can update the content of your Azure repositories. Ensure `Azure DevOps > vso.code_write` is configured, and `Admin consent required` is set to `No`.
 
@@ -159,13 +158,13 @@ Ensure the following:
 - Add this to all projects that will be using this integration.
 - _Azure DevOps Groups_ is set to `Project Contributors`.
 
-<h3> Configure Azure in Web Modeler </h3>
+<h3> Configure Azure in Camunda Hub </h3>
 
 :::note
 If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
 :::
 
-1. Within Web Modeler, navigate to the project you would like to connect to Azure, and select **Connect repository**.
+1. Within Camunda Hub, navigate to the project you would like to connect to Azure, and select **Connect repository**.
 
 2. Select the **Azure** tile, located at the top of the modal.
 
@@ -176,7 +175,7 @@ If you're using a self-hosted Azure DevOps Server instance, see [Self-Managed Gi
    - **Certificate:** The certificate used to register the application in PEM format.
    - **Repository URL:** The base URL of the repository you want to sync with, for example `https://dev.azure.com/camunda/my-project/_git/example-repo`. The URL cannot contain the `.git` extension or a folder path. By default, the first repository you create will have the same name as the project and the URL won't explicitly have the project name in it, for example `https://dev.azure.com/camunda/_git/example-repo`.
    - **Branch:** The name of the branch to use for merging and managing changes.
-   - **Repository path:** (optional) The path to the folder containing your project files. If left empty, Web Modeler syncs with the root of the repository. This path is automatically created if it does not exist.
+   - **Repository path:** (optional) The path to the folder containing your project files. If left empty, Camunda Hub syncs with the root of the repository. This path is automatically created if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the provided branch and optional path opens in a new tab.
 
@@ -186,7 +185,7 @@ When successful, your project will display a new **Sync with Azure** button.
 
 <h3> Generating a private key and certificate</h3>
 
-Follow these steps to generate a private key and self signed certificate that can be used to connect Web Modeler with your Azure repository:
+Follow these steps to generate a private key and self signed certificate that can be used to connect Camunda Hub with your Azure repository:
 
 <h4>1. Generate private key</h4>
 Generate a new RSA private key and save it to a file called `private_key.pem`.
@@ -218,7 +217,7 @@ You can now use it with the private key to register an app in Microsoft Entra, a
 
 <h3>Create a new access token</h3>
 
-Web Modeler requires an access token to sync changes with your Bitbucket Cloud repository. You can use one of the following token types:
+Camunda Hub requires an access token to sync changes with your Bitbucket Cloud repository. You can use one of the following token types:
 
 - **Repository access token** (recommended)
 - Project access token
@@ -230,9 +229,9 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
   - `repositories:read`
   - `repositories:write`
 
-<h3>Configure Bitbucket Cloud in Web Modeler</h3>
+<h3>Configure Bitbucket Cloud in Camunda Hub</h3>
 
-1. In Web Modeler, navigate to the project you want to connect to Bitbucket Cloud, and click **Connect repository**.
+1. In Camunda Hub, navigate to the project you want to connect to Bitbucket Cloud, and click **Connect repository**.
 
 2. Select the **Bitbucket** tile at the top of the modal.
 
@@ -241,7 +240,7 @@ Follow the [Bitbucket documentation](https://support.atlassian.com/bitbucket-clo
    - **Bitbucket API Base URL:** Leave empty. Only required for [Bitbucket Data Center](./git-sync.md?platform=bitbucket-data-center) instances.
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.org/camunda/example-repo`. The URL must not include the `.git` extension or any folder path.
    - **Branch name:** The branch to use for merging and managing changes.
-   - **Repository path:** (optional) The folder path containing your project files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
+   - **Repository path:** (optional) The folder path containing your project files. If left empty, Camunda Hub syncs with the repository root. This path will be created automatically if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
 
@@ -261,27 +260,27 @@ Consider migrating to Bitbucket Cloud or another supported Git provider for cont
 
 :::warning Limitations
 
-Due to [limitations in the Bitbucket Data Center API](https://jira.atlassian.com/browse/BSERV-14381), Web Modeler cannot push file deletions to Bitbucket Data Center repositories.
-If you delete, move, or rename files in Web Modeler, the original will remain in the remote repository after synchronization.
+Due to [limitations in the Bitbucket Data Center API](https://jira.atlassian.com/browse/BSERV-14381), Camunda Hub cannot push file deletions to Bitbucket Data Center repositories.
+If you delete, move, or rename files in Camunda Hub, the original will remain in the remote repository after synchronization.
 
 :::
 
 <h3>Create a new access token</h3>
 
-Web Modeler requires a **user** HTTP access token to sync changes with your Bitbucket Data Center repository.
+Camunda Hub requires a **user** HTTP access token to sync changes with your Bitbucket Data Center repository.
 Repository or project access tokens are not supported.
 
 Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html#HTTPaccesstokens-CreateHTTPaccesstokens) to generate a new user access token for your repository with the **Repository write** permission.
 
-<h3>Configure Bitbucket Data Center in Web Modeler</h3>
+<h3>Configure Bitbucket Data Center in Camunda Hub</h3>
 
-1. In Web Modeler, navigate to the project you want to connect to Bitbucket Data Center, and click **Connect repository**.
+1. In Camunda Hub, navigate to the project you want to connect to Bitbucket Data Center, and click **Connect repository**.
 
 2. Select the **Bitbucket** tile at the top of the modal.
 
 3. Fill in the **Configure Bitbucket** modal with the following information:
    - **Access token:** The user access token you generated.
-   - **Bitbucket API Base URL:** The base URL of your [Bitbucket installation's REST API](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris), for example `https://bitbucket.example.com/rest/api/latest`. This is required for Bitbucket Data Center instances. If left empty, Web Modeler uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
+   - **Bitbucket API Base URL:** The base URL of your [Bitbucket installation's REST API](https://developer.atlassian.com/server/bitbucket/rest/v1000/intro/#structure-of-the-rest-uris), for example `https://bitbucket.example.com/rest/api/latest`. This is required for Bitbucket Data Center instances. If left empty, Camunda Hub uses the default Bitbucket Cloud REST API URL (`https://api.bitbucket.org/2.0/repositories`).
 
      :::note
      If you're using a self-hosted Bitbucket Data Center instance, see [Self-Managed Git sync](/self-managed/components/hub/configuration/properties.md#git-sync) for configuration details.
@@ -291,7 +290,7 @@ Follow the [Bitbucket documentation](https://confluence.atlassian.com/bitbuckets
 
    - **Repository URL:** The base URL of the repository you want to sync with, e.g., `https://bitbucket.example.com/projects/camunda/repos/example-repo`. The URL must not include the `.git` extension or any folder path. For personal repositories, use `~{user}` as the project ID (for example, `projects/~alice/repos/example-repo`).
    - **Branch name:** The branch to use for merging and managing changes.
-   - **Repository path:** (optional) The folder path containing your project files. If left empty, Web Modeler syncs with the repository root. This path will be created automatically if it does not exist.
+   - **Repository path:** (optional) The folder path containing your project files. If left empty, Camunda Hub syncs with the repository root. This path will be created automatically if it does not exist.
 
 4. Click **Open repository** to test your configuration. The repository for the specified branch and optional path will open in a new tab.
 
@@ -303,19 +302,19 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 
 ## Sync with remote repository
 
-Organization owners/administrators, project administrators, and project editors can sync their version of Web Modeler with the connected repository at any time.
+Organization owners/administrators, workspace administrators, and editors can sync their version of Camunda Hub with the connected repository at any time.
 
 1. In your connected project, click **Sync with _GitProvider_** button.
-2. Enter a [version number](manage-projects.md#project-versioning) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
+2. Enter a [version number](./project-versioning.md#create-a-version) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
-In the case of a merge conflict, select between your local Web Modeler changes and the changes in the remote repository to continue.
+In the case of a merge conflict, select between your local Camunda Hub changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, Web Modeler will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
+Once the pull is complete and any merge conflicts are resolved, Camunda Hub will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
 
 ## Manage existing configurations
 
-Existing Git configurations can be edited from the gear icon beside the **Sync with _GitProvider_** button. Permission to update these settings are limited to **project administrators**.
+Existing Git configurations can be edited from the gear icon beside the **Sync with _GitProvider_** button. Permission to update these settings are limited to **Workspace Admins**.
 
 ## Change Git provider
 
@@ -369,12 +368,12 @@ Refer to [Configuration of the restapi component](/self-managed/components/hub/c
 
 ### File extensions
 
-- `.json` files are parsed as either a Connector template or a test scenario file. The operation will fail if the file contents are not valid for either type. If the remote repository contains any `.json` files that are not valid Web Modeler files, place them in a subfolder so they are automatically ignored during synchronization.
+- `.json` files are parsed as either a Connector template or a test scenario file. The operation will fail if the file contents are not valid for either type. If the remote repository contains any `.json` files that are not valid Camunda Hub files, place them in a subfolder so they are automatically ignored during synchronization.
 - Git Sync only supports `.md` files named exactly `README.md` (case-sensitive). Multiple `README.md` files are supported in a single repository, including in subfolders.
 
 ### Synchronization
 
-- Actions which alter the SHA of the commit to which Web Modeler is synced (for example, squash) may cause synchronization errors.
+- Actions which alter the SHA of the commit to which Camunda Hub is synced (for example, squash) may cause synchronization errors.
 - Timeouts may occur during a sync. In the event of a timeout, close the modal and retry the synchronization.
-- Using self-hosted instances of Git providers may require additional configuration. Refer to the Web Modeler configuration part for your [git host](#connect-to-a-remote-repository) and available [environment variables](#self-managed-environment-variables) for more details.
-- **(GitHub specific)** A single synchronization action is limited to incorporating a maximum of 250 commits or making changes to up to 300 files, regardless of whether these changes affect the Web Modeler files directly. Web Modeler does not provide a notification when these thresholds are exceeded. Should you encounter this limitation, it may be necessary to initiate a fresh synchronization. A fresh synchronization fetches all the files in the repository without relying on the incremental changes, thus bypassing the limitations. This can be achieved by either changing the branch or modifying the GitHub repository URL.
+- Using self-hosted instances of Git providers may require additional configuration. Refer to the Camunda Hub configuration part for your [git host](#connect-to-a-remote-repository) and available [environment variables](#self-managed-environment-variables) for more details.
+- **(GitHub specific)** A single synchronization action is limited to incorporating a maximum of 250 commits or making changes to up to 300 files, regardless of whether these changes affect the Camunda Hub files directly. Camunda Hub does not provide a notification when these thresholds are exceeded. Should you encounter this limitation, it may be necessary to initiate a fresh synchronization. A fresh synchronization fetches all the files in the repository without relying on the incremental changes, thus bypassing the limitations. This can be achieved by either changing the branch or modifying the GitHub repository URL.
