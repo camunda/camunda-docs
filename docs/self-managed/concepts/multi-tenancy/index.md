@@ -31,7 +31,7 @@ Best for: Departments or teams within the same organization with low-risk separa
 
 ## Physical Tenants
 
-**Strong physical data isolation within a single cluster** with separate data storage and independent operations per tenant. Physical Tenants still share cluster compute resources such as CPU and memory, so runtime interference is reduced but not fully eliminated.
+Strong physical data isolation within a single cluster with separate data storage and independent operations per tenant. Physical Tenants still share cluster compute resources such as CPU and memory, so runtime interference is reduced but not fully eliminated.
 
 Best for: Multiple teams or organizations needing strong isolation without the cost and complexity of separate clusters.
 
@@ -41,7 +41,7 @@ Physical Tenants and Logical Tenants can be used together. Each Physical Tenant 
 
 ## Multi-Cluster
 
-**Full isolation through dedicated infrastructure** with separate clusters per tenant. Maximum isolation and operational independence, but highest infrastructure cost and complexity.
+Full isolation through dedicated infrastructure with separate clusters per tenant. Maximum isolation and operational independence, but highest infrastructure cost and complexity.
 
 Best for: Separate organizations with maximum isolation requirements or strict data residency needs.
 
