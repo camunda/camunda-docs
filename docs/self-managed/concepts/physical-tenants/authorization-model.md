@@ -7,7 +7,7 @@ description: "Learn how cluster-wide and tenant-local authorization work for Phy
 
 Learn how Camunda 8.10 authorizes Physical Tenant operations at the cluster-wide and tenant-local scopes. For identity provider connections and token routing, see [authentication and authorization](./authentication-authorization.md).
 
-Authorization is divided into two scopes: **cluster-wide operations**, which affect the entire orchestration cluster, and **tenant-local operations**, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in 8.10.
+Authorization is divided into two scopes: cluster-wide operations, which affect the entire orchestration cluster, and tenant-local operations, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in 8.10.
 
 Two new authorization resource types were added for the per-tenant management APIs introduced alongside Physical Tenants:
 
