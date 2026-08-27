@@ -68,6 +68,10 @@ You cannot publish a new version if:
 Web Modeler also shows a warning if the template ID has changed since the last published version.
 You can still publish the new version in this case.
 
+:::note
+Template IDs must be unique across the organization, including for templates that are only published to a project. If a conflicting template ID is already published in another project, publish a new template with a different ID.
+:::
+
 As a [user with elevated access](/components/hub/workspace/modeler/collaboration/collaboration.md#elevated-access), you can publish an element template version within the organization context, enabling all organization members to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [versions list](#versioning-connector-templates).
 
