@@ -48,14 +48,14 @@ Affected endpoints:
 
 Instead of passing the process application ID to the folders endpoints, use the new process application endpoints:
 
-- `DELETE /api/v1/processApplications/{processApplicationId}`
-- `GET /api/v1/processApplications/{processApplicationId}`
-- `PATCH /api/v1/processApplications/{processApplicationId}`
+- `DELETE /api/v1/process-applications/{processApplicationId}`
+- `GET /api/v1/process-applications/{processApplicationId}`
+- `PATCH /api/v1/process-applications/{processApplicationId}`
 
 Example:
 
 ```shell
-GET /api/v1/processApplications/e005e49a-dce8-42ee-b0db-30b1d5555ebd  # must be a process application, not a folder
+GET /api/v1/process-applications/e005e49a-dce8-42ee-b0db-30b1d5555ebd  # must be a process application, not a folder
 ```
 
 ### Parent IDs reference folders
@@ -330,8 +330,17 @@ Example:
       {
         "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "name": "Process application",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "created": "2026-08-24T14:17:33.889317Z",
-        "updated": "2026-08-24T14:23:48.371161659Z"
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updated": "2026-08-24T14:23:48.371161659Z",
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
       }
     ]
   }
@@ -431,8 +440,17 @@ Example:
       {
         "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "name": "Process application",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "created": "2026-08-24T14:17:33.889317Z",
-        "updated": "2026-08-24T14:23:48.371161659Z"
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updated": "2026-08-24T14:23:48.371161659Z",
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
       }
     ]
   }
@@ -531,8 +549,17 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
       {
         "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "name": "Process application",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "created": "2026-08-24T14:17:33.889317Z",
-        "updated": "2026-08-24T14:23:48.371161659Z"
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updated": "2026-08-24T14:23:48.371161659Z",
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
       }
     ]
   }
