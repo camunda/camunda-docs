@@ -145,7 +145,7 @@ Affected endpoints:
 
 ### File paths exclude process applications
 
-In files API responses, the `simplePath` and `canonicalPath` omit the container process application. Previously, the process application was included if it was on the path.
+In files API endpoints, the `simplePath` and `canonicalPath` omit the container process application. Previously, the process application was included if it was on the path.
 
 Example:
 
@@ -185,7 +185,7 @@ Affected endpoints:
 
 - `GET /api/v1/files/{fileId}`
 - `PATCH /api/v1/files/{fileId}`
-- `POST /api/v1/files/search`
+- `POST /api/v1/files/search` (the process application is excluded from these paths in both the response and the request `filter`)
 - `POST /api/v1/files`
 
 ## Projects API
