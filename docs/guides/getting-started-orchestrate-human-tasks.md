@@ -70,7 +70,7 @@ In this step, you will design a process that demonstrates how to route the proce
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-1. In Camunda Hub, navigate to your workspace. If you don't have a workspace, ask an organization administrator to [create one](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace).
+1. In Camunda Hub, navigate to your workspace.
 2. In the workspace, click **New project**.
 3. In your project, select **Create new > BPMN diagram**.
 4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
