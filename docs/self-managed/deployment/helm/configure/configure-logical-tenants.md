@@ -9,7 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-This page describes **Logical Tenants**, the lightweight tenant-ID based multi-tenancy model. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+This page describes Logical Tenants, the lightweight tenant-ID based multi-tenancy model. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
 :::
 
 Logical Tenants let you isolate users, data, and workloads across tenants (for example, business units, departments, or customers) within the same Camunda 8 cluster. This ensures separation while reducing infrastructure overhead by running multiple tenants on a shared installation.
