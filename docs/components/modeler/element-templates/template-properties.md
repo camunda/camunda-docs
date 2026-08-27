@@ -36,7 +36,7 @@ The property object keys are divided into required and optional keys:
 
 ### Optional keys
 
-- [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden"`](#setting-the-input-type-type): Defines the input type in the properties panel.
+- [`type : "String" | "Text" | "Boolean" | "Dropdown" | "Hidden" | "Configuration"`](#setting-the-input-type-type): Defines the input type in the properties panel.
 - [`value : String | Number | Boolean`](#setting-a-default-value-value): The default value used if the bound property is not yet set by the user or if the type is `Hidden`.
 - [`generatedValue : Object`](#generating-a-value-generatedvalue): Configuration used to generate a value when the property is applied to an element.
 - [`placeholder : String`](#setting-a-text-placeholder-placeholder): Placeholder text shown in the input field when it is empty.
@@ -94,7 +94,7 @@ The key-value pairs of the property object are explained in the following sectio
 
 ## Setting the input type: `type`
 
-The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, and `Hidden` are available.
+The input types `String`, `Text`, `Number`, `Boolean`, `Dropdown`, `Hidden`, and `Configuration` are available.
 
 ### String input type
 
@@ -156,6 +156,43 @@ The `Dropdown` type allows users to select from a number of pre-defined options 
 The resulting properties panel control looks like this:
 
 ![properties panel drop down](./img/field-dropdown.png)
+
+### Configuration input type
+
+The `Configuration` type renders a chooser for a reusable, host-provided configuration selected by reference. It locks to a single [configuration template](./template-metadata.md#embedding-configurations-configurationtemplates), so only compatible configurations are offered.
+
+A configuration is stored on the cluster as a cluster variable that is created with metadata identifying its kind (for example `CREDENTIAL`), its configuration template, and its version. This metadata is what lets the chooser find compatible configurations and lock to a single template. Selection and resolution happen in two phases:
+
+- **Design time (selection)**: The modeler queries the connected cluster for configurations whose metadata matches the property's `configurationTemplate` (and `configurationTemplateVersion` floor), then serializes a FEEL reference to the chosen one into the model, for example `=camunda.vars.env.myConnection`.
+- **Runtime (resolution)**: The engine resolves that FEEL reference against the live cluster variable and injects the configuration's value — the fields defined by its configuration template — into the bound variable (`connection` in the example below). Because it resolves live, changes to a configuration's values take effect on subsequent executions without redeployment.
+
+A configuration's field values can be plain literals or secret references (`camunda.secrets.*`) that the engine resolves at runtime, so secrets are never stored in the model.
+
+:::note
+Configurations are the mechanism that powers Camunda credentials: a credential is a configuration whose template `kind` is `CREDENTIAL`. Selecting one requires cluster access from the modeler at design time, consistent with existing connector templates.
+:::
+
+It supports the following config-specific keys:
+
+- `configurationTemplate : String`: The `id` of the compatible configuration template.
+- `configurationTemplateVersion : Integer`: Optional. The minimum configuration template version a chosen configuration must satisfy (a floor). Omit for no minimum.
+
+The `Configuration` type does not introduce a new binding. It reuses the standard [`zeebe:input`](#input-mapping-zeebeinput) (outbound) or [`zeebe:property`](#extension-properties-zeebeproperty) (inbound) binding. When a configuration is chosen, the modeler writes a FEEL reference to the selected configuration plus two modeler-only display-metadata attributes that are ignored at runtime:
+
+- `modelerConfigurationTemplate`: The bound configuration template `id`.
+- `modelerConfigurationName`: The chosen configuration's display name.
+
+```xml
+<zeebe:input source="=camunda.vars.env.myConnection" target="connection"
+  modelerConfigurationTemplate="io.camunda.examples:connection:1"
+  modelerConfigurationName="My Connection" />
+```
+
+The resulting configuration chooser looks like this:
+
+![properties panel configuration chooser](./img/field-configuration.png)
+
+For a complete example, refer to the [example template](./template-example.md).
 
 ## Setting a default value: `value`
 
