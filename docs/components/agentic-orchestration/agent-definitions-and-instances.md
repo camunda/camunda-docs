@@ -57,10 +57,10 @@ For a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), the AI Agent 
 
 For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't ship an element template, so add the marker to the BPMN XML yourself. See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for the full setup, including how to package your agent as a custom element template.
 
-:::info Coming from Camunda 8.9?
-If you modeled the agent element before Camunda 8.10, the applied AI Agent Sub-process or AI Agent Task element template may predate the `zeebe:agentDefinition` marker, so the element won't show up as an agent definition or agent instance.
+:::info Update element templates created before Camunda 8.10
+If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template.
 
-To pick up the marker, open the process in Web Modeler or Desktop Modeler (from the version that ships the updated element templates), select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+Open the process in Web Modeler or Desktop Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
 :::
 
 #### Mark an element as an agent in XML
