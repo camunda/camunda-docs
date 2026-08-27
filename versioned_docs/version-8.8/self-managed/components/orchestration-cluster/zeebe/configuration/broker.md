@@ -118,16 +118,16 @@ management.server:
 
 To configure the embedded gateway, see [Gateway config docs](/self-managed/components/orchestration-cluster/zeebe/configuration/gateway.md).
 
-| Field  | Description                                                                                                                                               | Example value |
-| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enable | Enable the embedded gateway to start on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | true          |
+| Field  | Description                                                                                                                                                                   | Example value |
+| ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enable | Enable the embedded gateway to start on broker startup. Enabled by default. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | true          |
 
 #### YAML snippet
 
 ```yaml
 broker:
   gateway:
-    enable: false
+    enable: true
 ```
 
 ### camunda.cluster.network
