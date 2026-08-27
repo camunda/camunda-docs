@@ -93,6 +93,16 @@ Connectors that provide a single operation are also renamed to describe their ac
 
 <p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
 
+#### Send Microsoft Teams and Slack messages without managing credentials
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The new **App Integrations connector** sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
+
+Messages can address a Microsoft Teams channel, user, or conversation, a Slack channel or user, or a Camunda recipient — an assignee, candidate users, or candidate groups — which the connector resolves to whichever platforms those people have connected. Alongside plain text you can send an Adaptive Card, a Block Kit payload, or a Camunda form. The result reports every destination reached and every one that failed, so a process can react to a partial delivery.
+
+<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
+
 ### Modeler
 
 #### BPMN element menu improvements
@@ -128,7 +138,39 @@ In Self-Managed, you can now hide the **Add user** button on the Web Modeler **C
 
 <p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
 
+### Operate
+
+#### Business ID visibility for decision instances
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+Business ID is now visible in Operate for decision instances, in both the decision instance list and the decision instance details view. Filter decision instances by business ID using **Equals**, **Contains**, and **Is one of** in the filter UI, or the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
+
+<p class="link-arrow">[Business ID](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
+
 ### Orchestration Cluster
+
+#### FEEL context variables for the process instance
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+The process instance properties are now accessible in FEEL expressions via the `camunda.processInstance` context, resolvable anywhere in the process. `camunda.processInstance.key` returns the process instance's system-generated key, and `camunda.processInstance.businessId` returns its business ID (or `null` if none is set).
+
+<p class="link-arrow">[FEEL context variables](/components/concepts/process-instance-creation.md#feel-context-variables)</p>
+
+#### Late Business ID assignment
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+You can now assign a business ID to a running process instance that has none, using the `POST /process-instances/{processInstanceKey}/business-id-assignment` REST endpoint, the `AssignProcessInstanceBusinessId` gRPC command, or by including `businessId` in a job completion request. The assignment is single and irreversible, and only available while business ID uniqueness enforcement is disabled.
+
+<p class="link-arrow">[Late Business ID assignment](/components/concepts/process-instance-creation.md#late-business-id-assignment)</p>
 
 #### Elasticsearch 9.x and OpenSearch 3.x support
 
@@ -190,6 +232,18 @@ Document Handling now supports any S3-compatible object store such as MinIO, Clo
 Operate, Tasklist, and Admin are now accessed from a single frontend application with shared navigation, consistent design patterns, and unified deployment. Your user preferences (such as dark/light mode) are applied across all views, with consistent navigation patterns throughout the interface.
 
 <p class="link-arrow">[Operate overview](/components/operate/operate-introduction.md)</p>
+
+### Tasklist
+
+#### Business ID in Tasklist
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+Business ID is now visible in Tasklist, in both the task list and task detail views. Filter tasks by business ID using **Equals**, **Contains**, and **Is one of** in the filter dialog, or the `$neq`/`$exists`/`$notIn` operators via the API.
+
+<p class="link-arrow">[Business ID filter](/components/tasklist/userguide/using-filters.md#business-id-filter)</p>
 
 ## 8.10.0-alpha3
 
@@ -306,8 +360,6 @@ Deletion no longer corrupts process application version history, as existing sna
 
 #### Test process segments in Play
 
-<!-- https://github.com/camunda/product-hub/issues/2896 -->
-
 <div class="release"><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 When testing your process with Play in Web Modeler, you can now capture and rerun targeted sections of an agentic process as low-code integration tests:
@@ -316,7 +368,7 @@ When testing your process with Play in Web Modeler, you can now capture and reru
 - Test BPMN elements like connectors, DMN, forms, and LLM tasks without a full end-to-end run.
 - Reuse saved segment tests during iterative model changes to catch regressions earlier.
 
-<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/play-your-process.md)</p>
+<p class="link-arrow">[Play your process](/components/hub/workspace/modeler/validation/test-your-process.md)</p>
 
 #### Variables panel improvements
 
@@ -372,7 +424,7 @@ Wait state tracking is enabled by default and writes records to secondary storag
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`) via the API.
+Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
 
 <p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
 
@@ -666,7 +718,7 @@ The default RocksDB memory allocation strategy changes from `PARTITION` to `FRAC
 
 To keep the previous behavior, explicitly set the strategy to `PARTITION`. See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#rocksdb-memory-allocation-strategy) for more details.
 
-<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 ### Operate
 

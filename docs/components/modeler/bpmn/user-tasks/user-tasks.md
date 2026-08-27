@@ -12,6 +12,8 @@ When the user task instance is completed, the process instance continues.
 
 ![user-task](assets/user-task.png)
 
+Inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md), a user task is commonly the [human-in-the-loop](/reference/glossary.md#human-in-the-loop-hitl) tool an [AI agent](/reference/glossary.md#ai-agent) calls to escalate a decision or request approval before continuing. See [designing agent orchestration workflows](/components/agentic-orchestration/design-architecture.md#design-agent-orchestration-workflows) for this pattern.
+
 ## User task implementation types
 
 A default user task implementation type is the **Camunda user task** with the `zeebe:userTask` extension element.

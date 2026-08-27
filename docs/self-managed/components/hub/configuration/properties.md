@@ -76,7 +76,7 @@ server:
 To show your Orchestration Clusters in Camunda Hub, use the following configuration options available from Camunda 8.10. If you're migrating from an older version of Camunda Self-Managed, refer to the deprecated [legacy configurations](./legacy-cluster-config.md) and the [migration guide](../../../upgrade/components/890-to-8100.md#camunda-hub).
 
 :::note
-Only Web Modeler admins (users with the [`admin:*` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) can access the cluster pages in Camunda Hub.
+Access to the cluster pages in Camunda Hub depends on the user's role: `Console` and `DevOps` role holders (users with the [`admin:clusters` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) get management access to the cluster pages, Hub admins (users with the [`admin:*` permission](/self-managed/components/management-identity/access-management/access-management-overview.md#permissions)) get full access, and other Hub members get read-only access.
 :::
 
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
@@ -711,7 +711,7 @@ camunda.modeler:
 
 | Property                                                         | Description                                                                                                                                                                                                                                                                                          | Example value | Default value |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `camunda.modeler.feature.play-enabled`                           | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `true`        | `true`        |
+| `camunda.modeler.feature.play-enabled`                           | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `true`        | `true`        |
 | `camunda.modeler.feature.bpmn-deployment-enabled`                | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                                     | `false`       | `true`        |
 | `camunda.modeler.feature.dmn-deployment-enabled`                 | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                                             | `false`       | `true`        |
 | `camunda.modeler.feature.dynamic-cluster-management-enabled`     | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                        | `true`        | `false`       |
@@ -723,7 +723,7 @@ Example configuration:
 ```yaml
 camunda:
   modeler.feature:
-    play-enabled: true
+    test-mode-enabled: true
     bpmn-deployment-enabled: true
     dmn-deployment-enabled: true
     dynamic-cluster-management-enabled: false
@@ -738,7 +738,7 @@ camunda:
 
 | Environment variable                                             | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `PLAY_ENABLED`                                                   | [optional]<br/>Enables the [**Play** mode](../../../../components/hub/workspace/modeler/validation/play-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `TEST_MODE_ENABLED`                                              | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
 | `ZEEBE_BPMN_DEPLOYMENT_ENABLED`                                  | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
 | `ZEEBE_DMN_DEPLOYMENT_ENABLED`                                   | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
 | `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED`                             | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |

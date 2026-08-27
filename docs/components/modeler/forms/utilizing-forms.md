@@ -17,11 +17,16 @@ After deploying a diagram with a linked form, Tasklist imports this form schema 
 
 ### Create new form
 
-To start building a form, log in to your [Camunda 8](https://camunda.io) account or open [Desktop Modeler](/components/modeler/about-modeler.md) and take the following steps:
+To start building a form, log in to your [Camunda 8](https://camunda.io) account, and take the following steps:
 
-1. Navigate to Web Modeler or alternatively open the **File** menu in Desktop Modeler.
+1. Navigate to Web Modeler.
 2. Open any project from your Web Modeler home view.
-3. Click **Create new** and choose **Form**.
+3. In the project, create or open a process application.
+4. In the process application, click **Create new**, and choose **Form**.
+
+:::tip
+If using [Desktop Modeler](/components/modeler/about-modeler.md), under **Create a new file**, click **Form**.
+:::
 
 ### Build your form
 
@@ -51,15 +56,14 @@ To save your form in Camunda 8, you don't have to do anything. Web Modeler will 
 
 Next, let's implement a task form into a diagram. In tandem, we can link your form to a user task or start event.
 
-Navigate to Modeler and open any project from your Web Modeler home view.
-
 Take the following steps:
 
-1. Select the diagram where you'd like to apply your form.
-2. Select the user task requiring the help of a form.
-3. On the right side of the selected user task, select the overlay with the link icon to open the navigation menu.
-4. Navigate to the form you want to link and click the **Link** button.
-5. When a user task has a linked form, the overlay will always stay visible on the right side of the task.
+1. In the same project that contains your form, open any process application.
+2. In the process application, select the diagram where you'd like to apply your form.
+3. Select the user task requiring the help of a form.
+4. On the right side of the selected user task, select the overlay with the link icon to open the navigation menu.
+5. Navigate to the form you want to link and click the **Link** button.
+6. When a user task has a linked form, the overlay will always stay visible on the right side of the task.
 
 :::note
 When using Camunda Forms, any submit button present in the form schema is hidden so we can control when a user can complete a task.

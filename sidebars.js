@@ -120,6 +120,7 @@ module.exports = {
         },
         "components/agentic-orchestration/add-tool-to-ai-agent",
         "components/agentic-orchestration/rag-ai-agents",
+        "components/agentic-orchestration/connect-external-agent",
         "components/agentic-orchestration/expose-process-as-mcp-tool",
         "components/agentic-orchestration/choose-right-model-agentic",
         "components/agentic-orchestration/model-recommendations-agentic",
@@ -713,7 +714,8 @@ module.exports = {
                 id: "components/hub/organization/manage-workspaces/manage-workspaces",
               },
               items: [
-                "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+                "components/hub/organization/manage-workspaces/manage",
+                "components/hub/organization/manage-workspaces/manage-workspace-members",
               ],
             },
             {
@@ -746,6 +748,7 @@ module.exports = {
               items: [
                 "components/hub/organization/manage-catalog/getting-started-catalog",
                 "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/track-asset-usage",
                 "components/hub/organization/manage-catalog/sync-multiple-repositories",
               ],
             },
@@ -786,6 +789,7 @@ module.exports = {
                 },
               ],
             },
+            "components/hub/workspace/manage-projects/recently-deleted",
             {
               type: "category",
               label: "Analyze operations",
@@ -815,36 +819,12 @@ module.exports = {
                 id: "components/hub/workspace/manage-projects/manage-projects",
               },
               items: [
-                {
-                  type: "doc",
-                  label: "Lifecycle",
-                  id: "components/hub/workspace/manage-projects/project-pipeline",
-                },
-                {
-                  type: "doc",
-                  label: "Creation",
-                  id: "components/hub/workspace/manage-projects/create-a-project",
-                },
-                {
-                  type: "doc",
-                  label: "Deployment",
-                  id: "components/hub/workspace/manage-projects/deploy-project",
-                },
-                {
-                  type: "doc",
-                  label: "Versioning",
-                  id: "components/hub/workspace/manage-projects/project-versioning",
-                },
-                {
-                  type: "doc",
-                  label: "Git Sync",
-                  id: "components/hub/workspace/manage-projects/git-sync",
-                },
-                {
-                  type: "doc",
-                  label: "Recover deleted resources",
-                  id: "components/hub/workspace/manage-projects/recently-deleted",
-                },
+                "components/hub/workspace/manage-projects/create-a-project",
+                "components/hub/workspace/manage-projects/validate-project",
+                "components/hub/workspace/manage-projects/project-versioning",
+                "components/hub/workspace/manage-projects/deploy-project",
+                "components/hub/workspace/manage-projects/git-sync",
+                "components/hub/workspace/manage-projects/manage-project",
               ],
             },
             {
@@ -861,7 +841,6 @@ module.exports = {
               items: [
                 {
                   Model: [
-                    "components/hub/workspace/modeler/launch-modeler",
                     "components/hub/workspace/modeler/modeling/model-your-first-diagram",
                     "components/hub/workspace/modeler/run-or-publish-your-process",
                     "components/hub/workspace/modeler/process-landscape-visualization",
@@ -921,6 +900,7 @@ module.exports = {
                     id: "components/hub/workspace/modeler/collaboration/collaboration",
                   },
                   items: [
+                    "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
                     "components/hub/workspace/modeler/collaboration/collaborate-with-modes",
                     "components/hub/workspace/modeler/collaboration/design-your-process",
                     "components/hub/workspace/modeler/collaboration/implement-your-process",
@@ -929,8 +909,8 @@ module.exports = {
                 },
                 {
                   Validate: [
-                    "components/hub/workspace/modeler/validation/play-your-process",
-                    "components/hub/workspace/modeler/validation/test-scenario-files",
+                    "components/hub/workspace/modeler/validation/test-your-process",
+                    "components/hub/workspace/modeler/validation/test-files",
                     "components/hub/workspace/modeler/validation/token-simulation",
                     "components/hub/workspace/modeler/validation/task-testing",
                   ],
@@ -1091,6 +1071,7 @@ module.exports = {
                 "components/connectors/out-of-the-box-connectors/amazon-textract",
               ],
             },
+            "components/connectors/out-of-the-box-connectors/app-integrations",
             "components/connectors/out-of-the-box-connectors/asana",
             "components/connectors/out-of-the-box-connectors/automation-anywhere",
             "components/connectors/out-of-the-box-connectors/blueprism",
@@ -1131,6 +1112,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/orchestration-cluster-api",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
@@ -1819,6 +1801,7 @@ module.exports = {
                 "self-managed/deployment/helm/configure/pod-scheduling",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
+                "self-managed/deployment/helm/configure/multi-namespace",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
                   type: "category",
@@ -2270,6 +2253,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/configuration-reference",
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
+                "self-managed/concepts/physical-tenants/app-integrations",
               ],
             },
           ],
@@ -2310,6 +2294,7 @@ module.exports = {
     },
     {
       Components: [
+        "self-managed/components/identity/how-identity-works",
         {
           type: "category",
           label: "Orchestration Cluster",
@@ -2383,7 +2368,6 @@ module.exports = {
                 {
                   Operation: [
                     "self-managed/components/orchestration-cluster/zeebe/operations/zeebe-in-production",
-                    "self-managed/components/orchestration-cluster/zeebe/operations/resource-planning",
                     "self-managed/components/orchestration-cluster/zeebe/operations/network-ports",
                     "self-managed/components/orchestration-cluster/zeebe/operations/setting-up-a-cluster",
                     "self-managed/components/orchestration-cluster/zeebe/operations/health",

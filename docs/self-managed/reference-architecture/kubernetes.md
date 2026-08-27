@@ -79,13 +79,11 @@ The Orchestration Cluster exposes two services:
 
 2. A **standard service** for external applications. This service distributes traffic randomly (via `kube-proxy`) and is suitable for clients or other services connecting to the cluster.
 
-#### Web Modeler and Console
+#### Camunda Hub
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667246920582&cot=14 -->
+![Camunda Hub and Management Identity](./img/management-cluster.jpg)
 
-![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
-
-Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
+Camunda Hub and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
 Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
@@ -117,7 +115,7 @@ To further improve fault tolerance, distribute the Orchestration Cluster and oth
 Camunda 8 deployments typically separate workloads into two logical groups:
 
 - **Orchestration Cluster**
-- **Web Modeler and Console**
+- **Camunda Hub and Management Identity**
 
 We recommend deploying these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation supports multi-tenancy, improves isolation, and allows flexible scaling. However, deploying all components in a single namespace is also possible for smaller environments.
 
@@ -125,6 +123,8 @@ A **multi-namespace setup** enables:
 
 - Independent scaling of orchestration clusters based on workload
 - Shared access to centralized components (e.g., Management Identity)
+
+To implement this topology with the Helm chart, see [configure a multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace.md).
 
 #### Orchestration Cluster namespace
 
@@ -140,12 +140,11 @@ Also included in this namespace are components that are tightly integrated with 
 - [Optimize](/components/optimize/what-is-optimize.md) — reporting and analytics
 - [Connectors](/components/connectors/introduction.md) — external system integrations
 
-#### Web Modeler and Console namespace
+#### Camunda Hub namespace
 
-As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
+As shown in the [architecture diagram](#camunda-hub), this namespace contains:
 
-- Web Modeler — browser-based BPMN editor
-- Console — administrative interface
+- [Camunda Hub](/components/hub/index.md) — modeling and administrative capabilities
 - [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
 
 This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
@@ -179,7 +178,7 @@ Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, 
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md#disk-space), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores

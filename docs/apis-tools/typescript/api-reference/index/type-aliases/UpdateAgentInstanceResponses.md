@@ -13,10 +13,10 @@ type UpdateAgentInstanceResponses = object;
 
 ## Properties
 
-### 204
+### 200
 
 ```ts
-204: void;
+200: AgentInstanceUpdateResult;
 ```
 
 The agent instance was updated successfully.
