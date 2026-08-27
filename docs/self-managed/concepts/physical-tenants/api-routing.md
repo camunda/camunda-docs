@@ -116,8 +116,6 @@ Deploy Optimize separately for each Physical Tenant and configure each instance 
 
 <!-- TODO: Optimize documentation for Physical Tenants is being written by the Optimize team. Coordinate with Hamza and Immi before publishing any Optimize-specific configuration or setup content for Physical Tenants. -->
 
-Learn how data scoping, session behavior, and tenant navigation work within each web app in [web apps](./web-apps.md).
-
 ## MCP routing
 
 MCP server endpoints follow the same path convention as the REST API and webapps:
