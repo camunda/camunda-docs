@@ -1,7 +1,5 @@
 ---
 title: Doing a proper POC
-tags:
-  - POC
 description: "When evaluating your process automation approach, a POC helps check if the method and technology suit your needs."
 ---
 

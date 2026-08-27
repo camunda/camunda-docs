@@ -61,6 +61,28 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 - [Admin overview](/components/admin/admin-introduction.md)
 
+### Agent definition
+
+A first-class, queryable resource that describes an [AI agent](#ai-agent) deployed to Camunda. Camunda creates one agent definition per agent element (AI Agent sub-process, AI Agent Task, or external agent) when a process containing agents is deployed, analogous to how a [DRD](#drd-decision-requirements-diagram) deployment creates decision definitions.
+
+An agent definition is a structural descriptor (type, name, the element and process definition version it belongs to, and tenant), not a store of runtime configuration.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
+### Agent instance
+
+A specific runtime execution of an [agent definition](#agent-definition) that can be created for an active agent element. It is identified by an agent instance key, which the [Agent Instance API](/apis-tools/orchestration-cluster-api-rest/specifications/create-agent-instance.api.mdx) uses to represent the agent's state, including conversation, tool calls, and reasoning, for visibility and explainability in tools like Operate.
+
+An agent instance can be reused across several element instances within the same process instance, which is what allows an agent to continue a multi-turn conversation when the process returns to the agent element.
+
+- [Agent definitions and instances](/components/agentic-orchestration/agent-definitions-and-instances.md)
+
+### Agent loop
+
+The feedback loop an [AI agent](#ai-agent) runs to reach its goal: the model reasons over the current context, decides whether to call tools, receives the tool results, and repeats until it returns a final response or reaches a configured limit. The loop is what makes an agent an agent, and it consists of one or more [loop iterations](#loop-iteration).
+
+A [Camunda AI agent](#camunda-ai-agent) runs its loop in Camunda's engine, which activates each tool call as a BPMN activity. An [external agent](#external-agent) runs its loop in an external runtime.
+
 ### Agent orchestration
 
 Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
@@ -89,7 +111,7 @@ A broad field of computer science focused on creating machines that can perform 
 
 ### AI agent
 
-An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop.
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs an [agent loop](#agent-loop) where the model decides what to do next, which tools to invoke, and when to stop.
 
 The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
 
@@ -143,6 +165,12 @@ A collection of reusable automation assets, such as element templates. The catal
 
 - [Catalog](/components/hub/organization/manage-catalog/index.md)
 
+### Child process instance
+
+A [process instance](#process-instance) created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md) in another process instance, the [parent process instance](#parent-process-instance).
+
+See also: [Parent process instance](#parent-process-instance), [Root process instance](#root-process-instance)
+
 ### Client
 
 See [Zeebe Client](#zeebe-client).
@@ -165,7 +193,7 @@ An operation that affects the entire [Orchestration Cluster](#orchestration-clus
 
 The native [AI agent](#ai-agent) type. Tool orchestration is executed by Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events.
 
-It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
+It is implemented via the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md), which offers two implementations: the [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) and the [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
 
 :::note
 This is different from an [external agent](#external-agent), which is the non-native AI agent type.
@@ -175,14 +203,14 @@ This is different from an [external agent](#external-agent), which is the non-na
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
 
-| Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                                |
-| :--------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                          |
-| [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                          |
-| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                               |
-| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                          |
-| Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeler](/components/hub/workspace/modeler/launch-modeler.md) in the browser.</p></li></ul></p> |
-| [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub).                                                                                                                                                                                                                                                |
+| Component                                            | Description                                                                                                                                                                                                                                                                                                                                                                       |
+| :--------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Orchestration Cluster](#orchestration-cluster)      | Powers the automation and orchestration of [processes](#process).                                                                                                                                                                                                                                                                                                                 |
+| [Connectors](#connector)                             | Out-of-the-box integration with external systems.                                                                                                                                                                                                                                                                                                                                 |
+| [Optimize](/components/optimize/what-is-optimize.md) | Business intelligence tooling, allowing you to analyze bottlenecks and examine improvements in [processes](#process) automated with Camunda.                                                                                                                                                                                                                                      |
+| [Camunda Hub](/components/hub/index.md)              | Manage organizational resources, manage projects, analyze operations and business value, and deliver agentic processes at scale with Camunda Hub.                                                                                                                                                                                                                                 |
+| Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the [Camunda Hub modeler](/components/hub/workspace/modeler/index.md) in the browser.</p></li></ul></p> |
+| [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize and Camunda Hub).                                                                                                                                                                                                                                       |
 
 ### Command
 
@@ -239,6 +267,12 @@ Camunda uses `csap` to automate setup steps: it interactively or via scripted fl
 A process cannot execute unless it is known by the [broker](#zeebe-broker). Deployment is the process of pushing or deploying processes to the [broker](#zeebe-broker).
 
 - [Zeebe Deployment](/apis-tools/zeebe-api/gateway-service.md#deployresource-rpc)
+
+### DRD (Decision Requirements Diagram)
+
+The visual representation of a decision requirements graph (DRG), which models a domain of decision-making, showing the decisions involved and the dependencies between them, such as required decisions, input data, and knowledge sources. Deploying a DRD creates one decision definition per decision it contains.
+
+- [Decision requirements graph](/components/modeler/dmn/decision-requirements-graph.md)
 
 ## E
 
@@ -467,6 +501,14 @@ A [Logical Tenant](#logical-tenant) is an existing, lightweight tenant-ID based 
 - [Multi-tenancy](/components/concepts/multi-tenancy.md)
 - [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md)
 
+### Loop iteration
+
+A loop iteration is one pass through an [AI agent](#ai-agent)’s [agent loop](#agent-loop), during which the model reasons, selects tools, evaluates the result, and decides whether to continue. An AI agent run consists of one loop with one or more loop iterations.
+
+Camunda groups an agent's conversation history by loop iteration in Operate, making it easier to reference a specific point in an agent's execution. Operate's UI labels each entry simply as `iteration` as shorthand for loop iteration.
+
+- [Conversation history and loop iterations](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations)
+
 ## M
 
 ### Management Identity
@@ -568,6 +610,16 @@ Each instance represents one run of the process and carries metadata from its or
 A process instance can be active (currently running), completed, or terminated.
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
+
+A process can call another process via a [call activity](/components/modeler/bpmn/call-activities/call-activities.md), creating a hierarchy of related process instances: a [parent process instance](#parent-process-instance) that contains the call activity, the [child process instance](#child-process-instance) it creates, and the [root process instance](#root-process-instance) at the top of the hierarchy.
+
+### Parent process instance
+
+The process instance that contains the [call activity](/components/modeler/bpmn/call-activities/call-activities.md) that created a [child process instance](#child-process-instance).
+
+A process instance can be a parent to the instances it calls and, at the same time, a child of the instance that called it.
+
+See also: [Child process instance](#child-process-instance), [Root process instance](#root-process-instance)
 
 ### Process instance tag
 
@@ -684,6 +736,12 @@ Camunda can use RFC to call SAP functions directly as part of a business process
 
 The use of software robots to automate repetitive, rule-based business tasks. RPA bots emulate human actions in digital systems, enhancing speed and accuracy.
 
+### Root process instance
+
+The [process instance](#process-instance) at the top of a hierarchy of related process instances. It was started directly, not created by a [call activity](/components/modeler/bpmn/call-activities/call-activities.md).
+
+See also: [Parent process instance](#parent-process-instance), [Child process instance](#child-process-instance)
+
 ## S
 
 ### SAP
@@ -708,13 +766,13 @@ Examples of secondary storage backends include:
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
 ### Soft pause exporting
 

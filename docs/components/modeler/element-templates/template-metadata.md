@@ -241,6 +241,8 @@ Use `steps` and `presets` to offer several predefined configurations within a si
 
 When a template defines `steps`, applying the template opens a nested menu built from those steps instead of applying the template directly. Choosing a final step applies the template together with the property values of its referenced preset. While searching, the final steps surface directly so users can pick an operation without navigating the menu.
 
+Search matches a step by its `name`, `description`, and `keywords`, combined with those of its parent steps and of the template itself. Use `keywords` on a step to add the terms users search for when they think of the action rather than the product, such as `upload object` for a file storage operation.
+
 ### Defining presets with `presets`
 
 A preset is a reusable set of property values applied on top of the template's defaults. Leaf steps reference presets through `presetId`.

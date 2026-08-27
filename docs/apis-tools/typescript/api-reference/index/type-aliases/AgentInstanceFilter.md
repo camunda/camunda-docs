@@ -15,6 +15,16 @@ Agent instance search filter.
 
 ## Properties
 
+### agentDefinitionKey?
+
+```ts
+optional agentDefinitionKey?: AgentDefinitionKeyFilterProperty;
+```
+
+The key of the agent definition this agent instance is an instance of.
+
+---
+
 ### agentInstanceKey?
 
 ```ts

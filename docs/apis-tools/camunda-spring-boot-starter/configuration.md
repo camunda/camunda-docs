@@ -162,6 +162,48 @@ camunda:
 
 This does also affect the default tenant being used by all job workers, however there are [more possibilities](#control-tenant-usage) to configure them.
 
+### Multi-client configuration (Physical Tenants)
+
+A single `camunda.client.*` configuration targets exactly one [Physical Tenant](/self-managed/concepts/physical-tenants/index.md) (the default tenant, unless `physical-tenant-id` is set). To target multiple Physical Tenants from one Spring application, configure multiple named clients under `camunda.clients.<name>.*`:
+
+```yaml
+camunda:
+  clients:
+    finance:
+      physical-tenant-id: finance
+      primary: true
+    risk:
+      physical-tenant-id: risk
+```
+
+The map key is a free-form client name; it does not have to match the Physical Tenant ID. A `physical-tenant-id` must be lowercase alphanumeric and at most 64 characters — an invalid value fails application startup.
+
+Each named client is a sparse overlay on top of the base `camunda.client.*` configuration — any property you don't set per client (address, auth, and so on) falls back to the shared `camunda.client.*` value.
+
+At most one client may be marked `primary: true` — configuring more than one throws `IllegalArgumentException` at startup. If you configure only one client, it's implicitly primary. If you configure more than one client and mark none of them `primary: true`, there is no primary client at all: looking one up throws `IllegalStateException`, and the `camundaClientConfiguration` bean isn't registered.
+
+Each client's resolved `auth.method` (its own `camunda.clients.<name>.auth.method`, overlaid on the base `camunda.client.auth.method`) must be the same across all clients — mixing resolved authentication methods in one application throws an `IllegalArgumentException` at startup. An unset method normalizes to `none`, so leaving it unset on one client and setting `none` explicitly on another is fine; unset and `basic` together is a conflict. Credentials themselves (client ID, secret, and so on) can still differ per client.
+
+If you don't configure any `camunda.clients.*` entries, your application has a single, implicitly-named `default` client — existing single-client configuration is unaffected.
+
+#### Access a named client
+
+Each named client is also available as a Spring bean, named `<name>CamundaClient` (for example, `financeCamundaClient`). Kebab-case client names are camel-cased for the bean name (`camunda.clients.risk-eu` → `riskEuCamundaClient`). The primary client's bean is `@Primary`, so a plain `@Autowired CamundaClient` still resolves it, and the historical `camundaClient` bean name is preserved as an alias for the primary client — `@Qualifier("camundaClient")` and `getBean("camundaClient")` keep working.
+
+To look up clients by name at runtime, inject `CamundaClientRegistry`. Injecting the registry does not eagerly instantiate every client — beans are resolved lazily on first lookup:
+
+```java
+@Autowired
+private CamundaClientRegistry clientRegistry;
+
+public void useFinanceClient() {
+  CamundaClient financeClient = clientRegistry.get("finance");
+  // ...
+}
+```
+
+`CamundaClientRegistry` also provides `find(String)` (returns an `Optional`), `getPrimary()`, `clientNames()`, and `all()` (a `Map` of every configured client, keyed by name).
+
 ## Authentication
 
 The authentication method is determined by `camunda.client.auth.method`. If omitted, the client will try to detect the authentication method based on the provided properties.
@@ -932,6 +974,16 @@ camunda:
             - foo
 ```
 
+##### Physical Tenant fan-out for multi-client applications
+
+The `@JobWorker` annotation has no attribute to bind a worker to one named client. In a [multi-client](#multi-client-configuration-physical-tenants) application, every `@JobWorker` method registers against **all** configured clients — it fans out across the whole `CamundaClientRegistry`, not just the primary or default one.
+
+In an application with only one client, this has no visible effect — there's only one client to fan out to.
+
+Per-client worker overrides don't restrict this fan-out either: `worker.*`/`worker.override.*` properties set under `camunda.clients.<name>` have no effect, since the customizer that applies those overrides is built from the single, global `camunda.client.*` properties bean. Setting `camunda.clients.risk.worker.override.shipOrder.enabled: false`, for example, silently does nothing.
+
+If you need a worker to run against only some of your configured Physical Tenants, filter inside the handler using the tenant identifier available to you at runtime, rather than relying on annotation-level scoping or per-client worker configuration.
+
 #### Define the job timeout
 
 To define the job timeout, you can set the annotation (`long` in milliseconds):
@@ -1006,6 +1058,10 @@ public class MyRandomBean {
   // make sure this bean is registered
 }
 ```
+
+:::note Multi-client applications
+In a [multi-client](#multi-client-configuration-physical-tenants) application, every `@Deployment` resource is deployed to **all** configured clients — one `CamundaPostDeploymentSpringEvent` is published per client. For a multi-tenant application, this means your BPMN lands in every configured Physical Tenant, which is often what you want, but shouldn't come as a surprise. The same applies to `@ClusterVariables` processing.
+:::
 
 ### Specify resources to deploy
 
@@ -1192,6 +1248,8 @@ public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
 }
 ```
 
+In a [multi-client](#multi-client-configuration-physical-tenants) application, one `CamundaClientCreatedSpringEvent`/`CamundaClientClosingSpringEvent` fires per configured client, each carrying that client's name — listen for these instead if you need to tell clients apart.
+
 ### Post deployment event
 
 To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
@@ -1204,6 +1262,8 @@ public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
 ```
 
 The event will grant you access to a list of deployments that have been created.
+
+In a [multi-client](#multi-client-configuration-physical-tenants) application, one event fires per configured client, since `@Deployment` resources are deployed to every configured client.
 
 ## Observe metrics
 

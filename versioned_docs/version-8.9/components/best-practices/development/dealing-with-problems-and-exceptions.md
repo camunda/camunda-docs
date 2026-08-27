@@ -1,13 +1,5 @@
 ---
 title: Dealing with problems and exceptions
-tags:
-  - Transaction
-  - ACID Transaction
-  - Compensation
-  - Exception Handling
-  - BPMN Error Event
-  - Incident
-  - Save Point
 description: "Take a closer look at understanding workers, handling exceptions on a technical level, leveraging retries, using incidents, and more."
 ---
 
@@ -97,6 +89,8 @@ zbc.createWorker("retrieveMoney", (job) => {
 ### Using incidents
 
 Whenever a job fails with a retry count of `0`, an incident is raised. An incident requires human intervention, typically using Operate. Refer to [incidents in the Operate docs](/components/operate/userguide/resolve-incidents-update-variables.md).
+
+For example, this behavior also applies to tools called by an AI agent. Each tool the agent selects runs as an ordinary BPMN activity, so retries and incidents work as described above. See [how the feedback loop works](/components/agentic-orchestration/ai-agents.md#how-the-feedback-loop-works).
 
 ### Writing idempotent workers
 

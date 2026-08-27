@@ -5,7 +5,7 @@ sidebar_label: "API routing"
 description: "Learn how REST API requests are routed to Physical Tenants, including tenant-scoped paths, default tenant routing, and gRPC routing."
 ---
 
-This page explains how REST API requests are routed to Physical Tenants in Camunda 8.10.
+Learn how Camunda 8.10 routes REST API requests to Physical Tenants.
 
 ## Tenant-scoped REST API routing
 
@@ -51,6 +51,12 @@ Most other endpoints are scoped to a Physical Tenant, even when they are not ten
 - `/v2/topology` returns the topology for the targeted Physical Tenant (the `default` tenant when no tenant prefix is used), not a cluster-wide view. For the cluster-wide topology, use `/cluster/v2/topology`.
 - `/v2/license` returns the license status and is available per Physical Tenant, including on the default path (`/v2/license`). It is not a separate cluster-wide endpoint.
 
+### Exception: /v2/status
+
+The `/v2/status` endpoint is a deliberate exception to the general routing rule. It remains cluster-wide and unauthenticated for backward compatibility, so operators and load balancers can check overall cluster health without credentials. It is **not** exposed under the Physical Tenant prefix (`/physical-tenants/{id}/v2/status` is not a valid path).
+
+For per-tenant health information, use the `/v2/topology` endpoint, which includes partition health state per tenant.
+
 ## HTTP status codes
 
 | Scenario                                                           | HTTP status        |
@@ -59,7 +65,7 @@ Most other endpoints are scoped to a Physical Tenant, even when they are not ten
 | Request to a configured tenant with missing or invalid credentials | `401 Unauthorized` |
 | Request to an unknown or unconfigured tenant                       | `404 Not Found`    |
 
-A `404` for an unknown tenant does not indicate an authorization failure — the tenant simply does not exist in the cluster configuration. Authentication has not yet been attempted when the tenant is not found.
+A `404` for an unknown tenant does not indicate an authorization failure. The tenant does not exist in the cluster configuration, so authentication has not yet been attempted.
 
 ## Per-tenant endpoint reference
 
@@ -87,7 +93,21 @@ For example:
 https://your-cluster/physical-tenants/riskproduction/operate
 ```
 
-For how data scoping, session behavior, and tenant navigation work within each web app, see [web apps](./web-apps.md).
+Learn how data scoping, session behavior, and tenant navigation work within each web app in [web apps](./web-apps.md).
+
+## MCP routing
+
+MCP server endpoints follow the same path convention as the REST API and webapps:
+
+```
+/physical-tenants/{physicalTenantId}/mcp/...
+```
+
+There is no cluster-wide MCP endpoint planned for 8.10.
+
+## Tenant discovery
+
+There is no cross-tenant discovery endpoint. A client cannot request a list of Physical Tenants it has access to in a single call. If you need to enumerate accessible tenants, probe each tenant's endpoint individually.
 
 ## gRPC routing
 
@@ -97,7 +117,7 @@ gRPC clients specify the target Physical Tenant using the `Camunda-Physical-Tena
 
 Physical Tenants are designed to be backward-compatible for single-tenant and existing multi-tenant deployments:
 
-- All existing `/v2/...` calls continue to work without modification — they route to the `default` Physical Tenant.
+- All existing `/v2/...` calls continue to work without modification. They route to the `default` Physical Tenant.
 - There is no breaking change for single-tenant users upgrading to 8.10.
 - To access a non-default Physical Tenant, update your clients to use the tenant-prefixed path.
 

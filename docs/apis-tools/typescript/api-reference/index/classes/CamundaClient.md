@@ -488,6 +488,67 @@ Tenant
 
 ---
 
+### assignProcessInstanceBusinessId()
+
+```ts
+assignProcessInstanceBusinessId(input, options?): CancelablePromise<void>;
+```
+
+Assign business id to process instance
+
+Assigns a business id to an already-running process instance that currently has none.
+
+The assignment is single and irreversible: only artifacts created after the assignment
+(for example future jobs, user tasks, decision instances, and message subscriptions) carry
+the business id, while existing artifacts are not retroactively enriched. Re-sending the
+same business id succeeds as a no-op. This endpoint is only useful while business id
+uniqueness enforcement is disabled; when it is enabled, the request is rejected with a 409
+response.
+
+-
+
+#### Parameters
+
+##### input
+
+[`assignProcessInstanceBusinessIdInput`](../type-aliases/assignProcessInstanceBusinessIdInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Assign a business ID to a process instance**
+
+```ts
+async function assignProcessInstanceBusinessIdExample(
+  processInstanceKey: ProcessInstanceKey,
+  businessId: BusinessId
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.assignProcessInstanceBusinessId({
+    processInstanceKey,
+    businessId,
+  });
+}
+```
+
+#### Operation Id
+
+assignProcessInstanceBusinessId
+
+#### Tags
+
+Process instance
+
+---
+
 ### assignRoleToClient()
 
 ```ts
@@ -1115,6 +1176,132 @@ cancelProcessInstancesBatchOperation
 #### Tags
 
 Process instance
+
+---
+
+### changeClusterMode()
+
+```ts
+changeClusterMode(input, options?): CancelablePromise<ClusterModeChangeResponse>;
+```
+
+Change cluster mode
+
+Transitions the cluster between processing and recovery mode. This is a non-blocking operation: the request is acknowledged once the change has been accepted, before the transition itself has completed. Entering recovery mode deactivates all partitions so that only a restricted set of read-only operations remains available; exiting recovery mode returns the cluster to normal processing. Returns the planned cluster change so its progress can be monitored via the topology. *
+
+#### Parameters
+
+##### input
+
+[`changeClusterModeInput`](../type-aliases/changeClusterModeInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterModeChangeResponse`](../type-aliases/ClusterModeChangeResponse.md)\>
+
+#### Example
+
+**Change cluster mode**
+
+```ts
+async function changeClusterModeExample() {
+  const camunda = createCamundaClient();
+
+  // Transition the cluster into recovery mode. Pass `dryRun: true` to validate
+  // the request and inspect the resulting plan without applying it. Omit it (or
+  // set it to false) to actually trigger the transition.
+  const change = await camunda.changeClusterMode({
+    mode: "RECOVERING",
+    dryRun: true,
+  });
+
+  // Operations are grouped by physical tenant; a null tenant means the operation
+  // is not scoped to one, such as a broker lifecycle operation.
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
+    for (const op of group.operations) {
+      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ""}`);
+    }
+  }
+}
+```
+
+#### Operation Id
+
+changeClusterMode
+
+#### Tags
+
+Recovery
+
+---
+
+### changeClusterModeAsClusterAdmin()
+
+```ts
+changeClusterModeAsClusterAdmin(input, options?): CancelablePromise<ClusterModeChangeResponse>;
+```
+
+Change the cluster mode of one or every physical tenant
+
+Transitions physical tenants between processing and recovery mode.
+
+If the `physicalTenantId` parameter is not provided, all available physical tenants are transitioned individually.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. *
+
+#### Parameters
+
+##### input
+
+[`changeClusterModeAsClusterAdminInput`](../type-aliases/changeClusterModeAsClusterAdminInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterModeChangeResponse`](../type-aliases/ClusterModeChangeResponse.md)\>
+
+#### Example
+
+**Change cluster mode as cluster admin**
+
+```ts
+async function changeClusterModeAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // The cluster-admin variant can target a single physical tenant. Omit
+  // `physicalTenantId` to apply the change to every physical tenant.
+  const change = await camunda.changeClusterModeAsClusterAdmin({
+    mode: "RECOVERING",
+    physicalTenantId: "default",
+    dryRun: true,
+  });
+
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
+    for (const op of group.operations) {
+      console.log(`    ${op.operation}${op.mode ? ` -> ${op.mode}` : ""}`);
+    }
+  }
+}
+```
+
+#### Operation Id
+
+changeClusterModeAsClusterAdmin
+
+#### Tags
+
+Recovery
 
 ---
 
@@ -2871,6 +3058,109 @@ Group
 
 ---
 
+### deleteHistoryBackup()
+
+```ts
+deleteHistoryBackup(input, options?): CancelablePromise<void>;
+```
+
+Delete history backup
+
+Deletes the history backup with the given id, by deleting every snapshot that makes it
+up.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+-
+
+#### Parameters
+
+##### input
+
+[`deleteHistoryBackupInput`](../type-aliases/deleteHistoryBackupInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Delete a history backup**
+
+```ts
+async function deleteHistoryBackupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteHistoryBackup({ backupId: 100 });
+}
+```
+
+#### Operation Id
+
+deleteHistoryBackup
+
+#### Tags
+
+Backup
+
+---
+
+### deleteHistoryBackupAsClusterAdmin()
+
+```ts
+deleteHistoryBackupAsClusterAdmin(input, options?): CancelablePromise<void>;
+```
+
+Delete a history backup across physical tenants
+
+Deletes the history backup with the given id from every physical tenant of the cluster, or from the one named by `physicalTenantId`. A tenant that does not hold the backup has already reached the requested end state, so it counts as deleted rather than as a failure.
+
+The request is all-or-nothing: a physical tenant the backup cannot be deleted from fails the whole request, and the deletions that already succeeded on other tenants are not undone. Narrow the request with `physicalTenantId` to delete from the tenants that can still be reached.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `DELETE /v2/backups/history/{backupId}` to act as a single physical tenant. *
+
+#### Parameters
+
+##### input
+
+[`deleteHistoryBackupAsClusterAdminInput`](../type-aliases/deleteHistoryBackupAsClusterAdminInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Delete a history backup (cluster admin)**
+
+```ts
+async function deleteHistoryBackupAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Deletion fans out to every physical tenant (or a single one when
+  // `physicalTenantId` is given) and is not undone if a later tenant fails.
+  await camunda.deleteHistoryBackupAsClusterAdmin({ backupId: 100 });
+}
+```
+
+#### Operation Id
+
+deleteHistoryBackupAsClusterAdmin
+
+#### Tags
+
+Backup
+
+---
+
 ### deleteMappingRule()
 
 ```ts
@@ -3042,10 +3332,15 @@ available again, a new deployment of the resource is required.
 
 By default, only the resource itself is deleted from the runtime state. To also delete the
 historic data associated with a resource, set the `deleteHistory` flag in the request body
-to `true`. The historic data is deleted asynchronously via a batch operation. The details of
-the created batch operation are included in the response. Note that history deletion is only
-supported for process resources; for other resource types this flag is ignored and no history
-will be deleted. *
+to `true`. History deletion is supported for process definitions and decision requirements
+definitions; for other resource types (forms, generic resources) the flag is ignored and no
+history is deleted.
+
+The two supported types differ in how the history is removed. For a decision requirements
+definition the history is deleted asynchronously via a batch operation whose details are
+returned in the `batchOperation` field of the response. For a process definition the
+definition first drains its running instances and its history is deleted asynchronously once
+the definition is fully removed cluster-wide; no batch operation is returned in the response. *
 
 #### Parameters
 
@@ -3129,6 +3424,100 @@ deleteRole
 #### Tags
 
 Role
+
+---
+
+### deleteRuntimeBackup()
+
+```ts
+deleteRuntimeBackup(input, options?): CancelablePromise<void>;
+```
+
+Delete runtime backup
+
+Deletes the runtime backup with the given id. *
+
+#### Parameters
+
+##### input
+
+[`deleteRuntimeBackupInput`](../type-aliases/deleteRuntimeBackupInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Delete a runtime backup**
+
+```ts
+async function deleteRuntimeBackupExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.deleteRuntimeBackup({ backupId: 100 });
+}
+```
+
+#### Operation Id
+
+deleteRuntimeBackup
+
+#### Tags
+
+Backup
+
+---
+
+### deleteRuntimeBackupState()
+
+```ts
+deleteRuntimeBackupState(options?): CancelablePromise<void>;
+```
+
+Delete runtime backup state
+
+Resets the runtime backup state of every partition of the physical tenant, clearing
+all checkpoint info, backup info, checkpoint metadata, and backup ranges. Used when
+switching backup stores.
+
+-
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Delete the runtime backup state**
+
+```ts
+async function deleteRuntimeBackupStateExample() {
+  const camunda = createCamundaClient();
+
+  // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+  // ranges on every partition. Used when switching backup stores.
+  await camunda.deleteRuntimeBackupState();
+}
+```
+
+#### Operation Id
+
+deleteRuntimeBackupState
+
+#### Tags
+
+Backup
 
 ---
 
@@ -3583,6 +3972,72 @@ forceAuthRefresh(): Promise<string | undefined>;
 
 ---
 
+### getAgentDefinition()
+
+```ts
+getAgentDefinition(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AgentDefinitionResult>;
+```
+
+Get agent definition
+
+Returns an agent definition by key. *
+
+#### Parameters
+
+##### input
+
+[`getAgentDefinitionInput`](../type-aliases/getAgentDefinitionInput.md)
+
+##### consistencyManagement
+
+[`getAgentDefinitionConsistency`](../type-aliases/getAgentDefinitionConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentDefinitionResult`](../type-aliases/AgentDefinitionResult.md)\>
+
+#### Example
+
+**Get an agent definition**
+
+```ts
+async function getAgentDefinitionExample(
+  agentDefinitionKey: AgentDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const definition = await camunda.getAgentDefinition(
+    { agentDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  console.log(`Name: ${definition.name}`);
+  console.log(`Type: ${definition.agentType}`);
+  console.log(`Element: ${definition.elementId}`);
+}
+```
+
+#### Operation Id
+
+getAgentDefinition
+
+#### Tags
+
+Agent definition
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### getAgentInstance()
 
 ```ts
@@ -3928,6 +4383,159 @@ Batch operation
 #### Consistency
 
 eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getClusterExportingStatus()
+
+```ts
+getClusterExportingStatus(options?): CancelablePromise<ExportingStatusResponse>;
+```
+
+Get exporting status of the whole cluster
+
+Returns the exporting status of the whole cluster, folded over the exporting status of every physical tenant. Only `PAUSED` and `SOFT_PAUSED` confirm that exporting is paused cluster-wide; every other value means at least one physical tenant is not paused, so callers should keep polling. A physical tenant that itself reports `MIXED` makes the whole cluster `MIXED`.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. *
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ExportingStatusResponse`](../type-aliases/ExportingStatusResponse.md)\>
+
+#### Example
+
+**Get cluster exporting status**
+
+```ts
+async function getClusterExportingStatusExample() {
+  const camunda = createCamundaClient();
+
+  // Reports the aggregated exporting status of the whole cluster — useful to
+  // confirm exporting has paused everywhere before taking a cluster-wide backup.
+  const { status } = await camunda.getClusterExportingStatus();
+  console.log(`Cluster exporting status: ${status}`);
+}
+```
+
+#### Operation Id
+
+getClusterExportingStatus
+
+#### Tags
+
+Exporting
+
+---
+
+### getClusterStatus()
+
+```ts
+getClusterStatus(options?): CancelablePromise<ClusterStatusResponse>;
+```
+
+Get the status of the whole cluster
+
+Checks the health status of the whole cluster, aggregated over all physical tenants. Returns `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, and `DEGRADED` in every other case. No per-tenant detail is reported; use `GET /cluster/v2/topology` for that.
+
+This endpoint is public and requires no authentication, unlike `PATCH /cluster/v2/mode` below, which needs cluster-admin credentials. *
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterStatusResponse`](../type-aliases/ClusterStatusResponse.md)\>
+
+#### Example
+
+**Get cluster status**
+
+```ts
+async function getClusterStatusExample() {
+  const camunda = createCamundaClient();
+
+  const status = await camunda.getClusterStatus();
+
+  console.log(`Cluster status: ${status.status}`);
+}
+```
+
+#### Operation Id
+
+getClusterStatus
+
+#### Tags
+
+Cluster
+
+---
+
+### getClusterTopology()
+
+```ts
+getClusterTopology(options?): CancelablePromise<ClusterTopologyResponse>;
+```
+
+Get the topology of the whole cluster
+
+Obtains the topology of the whole cluster, aggregated over all physical tenants. Cluster-level information is reported once; partition layout, replication and per-partition role, health and state are reported per physical tenant.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Use `GET /v2/topology` for the topology of a single physical tenant. *
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterTopologyResponse`](../type-aliases/ClusterTopologyResponse.md)\>
+
+#### Example
+
+**Get cluster topology (v2)**
+
+```ts
+async function getClusterTopologyExample() {
+  const camunda = createCamundaClient();
+
+  // Returns the full cluster topology: brokers, physical tenants (in a
+  // multi-tenant cluster), cluster size, and gateway version.
+  const topology = await camunda.getClusterTopology();
+
+  console.log(
+    `Cluster ${topology.clusterId} — ${topology.clusterSize} broker(s), gateway ${topology.gatewayVersion}`
+  );
+  for (const broker of topology.brokers) {
+    console.log(
+      `  Broker ${broker.brokerId}: ${broker.host}:${broker.port} (${broker.version})`
+    );
+  }
+  for (const tenant of topology.physicalTenants) {
+    console.log(
+      `  Physical tenant ${tenant.physicalTenantId}: ${tenant.partitionsCount} partition(s), replication ${tenant.replicationFactor}`
+    );
+  }
+}
+```
+
+#### Operation Id
+
+getClusterTopology
+
+#### Tags
+
+Cluster
 
 ---
 
@@ -4397,6 +5005,60 @@ Internal accessor (read-only) for eventual consistency error mode.
 
 ---
 
+### getExportingStatus()
+
+```ts
+getExportingStatus(options?): CancelablePromise<ExportingStatusResponse>;
+```
+
+Get exporting status
+
+Returns the exporting status of the physical tenant, aggregated over every replica of
+every one of its partitions.
+
+Because pause and resume are applied to all replicas, the status is only a single phase
+if every replica reports that phase; otherwise it is `MIXED`, which means a pause or
+resume is still in flight or was only partially applied. Backup tooling should treat
+only `PAUSED` and `SOFT_PAUSED` as confirmation that exporting is paused.
+
+-
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ExportingStatusResponse`](../type-aliases/ExportingStatusResponse.md)\>
+
+#### Example
+
+**Get exporting status**
+
+```ts
+async function getExportingStatusExample() {
+  const camunda = createCamundaClient();
+
+  // Reports the aggregated exporting status of the physical tenant — useful to
+  // confirm exporting has actually paused before taking a backup, and that it
+  // has resumed afterwards.
+  const { status } = await camunda.getExportingStatus();
+  console.log(`Exporting status: ${status}`);
+}
+```
+
+#### Operation Id
+
+getExportingStatus
+
+#### Tags
+
+Exporting
+
+---
+
 ### getFormByKey()
 
 ```ts
@@ -4713,6 +5375,119 @@ Group
 #### Consistency
 
 eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getHistoryBackup()
+
+```ts
+getHistoryBackup(input, options?): CancelablePromise<HistoryBackupInfo>;
+```
+
+Get history backup
+
+Returns detailed status of the history backup with the given id.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+-
+
+#### Parameters
+
+##### input
+
+[`getHistoryBackupInput`](../type-aliases/getHistoryBackupInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`HistoryBackupInfo`](../type-aliases/HistoryBackupInfo.md)\>
+
+#### Example
+
+**Get a history backup**
+
+```ts
+async function getHistoryBackupExample() {
+  const camunda = createCamundaClient();
+
+  const backup = await camunda.getHistoryBackup({ backupId: 100 });
+
+  // The aggregated state is derived from the state of every expected snapshot.
+  console.log(`History backup ${backup.backupId}: ${backup.state}`);
+}
+```
+
+#### Operation Id
+
+getHistoryBackup
+
+#### Tags
+
+Backup
+
+---
+
+### getHistoryBackupAsClusterAdmin()
+
+```ts
+getHistoryBackupAsClusterAdmin(input, options?): CancelablePromise<ClusterHistoryBackupInfo>;
+```
+
+Get a history backup across physical tenants
+
+Reports what every physical tenant of the cluster, or the one named by `physicalTenantId`, holds for the given backup id. There is no aggregated cluster-level state: a tenant that was reached and does not hold this backup reports `NOT_FOUND`, which is a successful observation rather than a failure.
+
+The request is all-or-nothing: a physical tenant whose state cannot be read fails the whole request. Narrow the request with `physicalTenantId` to read the tenants that can still be reached.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `GET /v2/backups/history/{backupId}` to act as a single physical tenant. *
+
+#### Parameters
+
+##### input
+
+[`getHistoryBackupAsClusterAdminInput`](../type-aliases/getHistoryBackupAsClusterAdminInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterHistoryBackupInfo`](../type-aliases/ClusterHistoryBackupInfo.md)\>
+
+#### Example
+
+**Get a history backup (cluster admin)**
+
+```ts
+async function getHistoryBackupAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Looking a backup id up directly lists every targeted physical tenant,
+  // including the ones reporting `NOT_FOUND` — a backup that only some tenants
+  // hold is a supported outcome.
+  const backup = await camunda.getHistoryBackupAsClusterAdmin({
+    backupId: 100,
+  });
+
+  console.log(`Cluster history backup ${backup.backupId}:`);
+  for (const tenant of backup.physicalTenants) {
+    console.log(`  [${tenant.physicalTenantId}] ${tenant.state}`);
+  }
+}
+```
+
+#### Operation Id
+
+getHistoryBackupAsClusterAdmin
+
+#### Tags
+
+Backup
 
 ---
 
@@ -6275,6 +7050,55 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### getRestoreStatus()
+
+```ts
+getRestoreStatus(options?): CancelablePromise<RestoreStatusResponse>;
+```
+
+Get the status of the restore that is currently in progress
+
+Returns the status of the restore that is currently in progress, reported per broker and per partition. There is at most one restore in flight at any time. Once the restore has finished this endpoint returns 404; the per-partition detail is not retained after completion. *
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RestoreStatusResponse`](../type-aliases/RestoreStatusResponse.md)\>
+
+#### Example
+
+**Get restore status**
+
+```ts
+async function getRestoreStatusExample() {
+  const camunda = createCamundaClient();
+
+  const status = await camunda.getRestoreStatus();
+
+  console.log(`Restore status: ${status.status} (change ${status.changeId})`);
+  for (const broker of status.brokers) {
+    console.log(
+      `  Broker ${broker.brokerId}: ${broker.partitionsRestored}/${broker.partitionsToRestore} partitions restored`
+    );
+  }
+}
+```
+
+#### Operation Id
+
+getRestoreStatus
+
+#### Tags
+
+Recovery
+
+---
+
 ### getRole()
 
 ```ts
@@ -6334,6 +7158,115 @@ Role
 #### Consistency
 
 eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### getRuntimeBackup()
+
+```ts
+getRuntimeBackup(input, options?): CancelablePromise<BackupInfo>;
+```
+
+Get runtime backup
+
+Returns detailed status of the runtime backup with the given id. *
+
+#### Parameters
+
+##### input
+
+[`getRuntimeBackupInput`](../type-aliases/getRuntimeBackupInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BackupInfo`](../type-aliases/BackupInfo.md)\>
+
+#### Example
+
+**Get a runtime backup**
+
+```ts
+async function getRuntimeBackupExample() {
+  const camunda = createCamundaClient();
+
+  const backup = await camunda.getRuntimeBackup({ backupId: 100 });
+
+  console.log(`Backup ${backup.backupId}: ${backup.state}`);
+  for (const partition of backup.details) {
+    console.log(`  Partition ${partition.partitionId}: ${partition.state}`);
+  }
+}
+```
+
+#### Operation Id
+
+getRuntimeBackup
+
+#### Tags
+
+Backup
+
+---
+
+### getRuntimeBackupState()
+
+```ts
+getRuntimeBackupState(options?): CancelablePromise<RuntimeBackupState>;
+```
+
+Get runtime backup state
+
+Returns the current checkpoint and backup state of every partition of the physical
+tenant. Unlike the `backupRuntime` actuator, this fails the whole request if the
+checkpoint state or the backup ranges cannot be retrieved from any partition, instead
+of silently returning an empty section.
+
+-
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RuntimeBackupState`](../type-aliases/RuntimeBackupState.md)\>
+
+#### Example
+
+**Get the runtime backup state**
+
+```ts
+async function getRuntimeBackupStateExample() {
+  const camunda = createCamundaClient();
+
+  const state = await camunda.getRuntimeBackupState();
+
+  for (const checkpoint of state.checkpointStates) {
+    console.log(
+      `Partition ${checkpoint.partitionId} checkpoint ${checkpoint.checkpointId} (${checkpoint.checkpointType})`
+    );
+  }
+  for (const range of state.ranges) {
+    console.log(
+      `Partition ${range.partitionId} range: ${range.start?.checkpointId} -> ${range.end?.checkpointId}`
+    );
+  }
+}
+```
+
+#### Operation Id
+
+getRuntimeBackupState
+
+#### Tags
+
+Backup
 
 ---
 
@@ -6412,9 +7345,9 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 getStatus(options?): CancelablePromise<void>;
 ```
 
-Get cluster status
+Get physical tenant status
 
-Checks the health status of the cluster by verifying if there's at least one partition with a healthy leader. *
+Checks the health status of the default physical tenant by verifying if there's at least one partition of its group with a healthy leader. This endpoint is scoped to the default physical tenant only: it is available unprefixed and at `/physical-tenants/default/v2/status`, but not for any other physical tenant id (`/physical-tenants/{id}/v2/status` returns 404 for every other id, whether or not a physical tenant with that id exists). On a cluster with only the default physical tenant this endpoint answers the same question as `/cluster/v2/status`, though not with the same response: `/cluster/v2/status` reports its status in a body and so also distinguishes a degraded tenant from a healthy one. Use `/cluster/v2/status` for the aggregated status of the whole cluster, or `/physical-tenants/{id}/v2/topology` for the health of a specific physical tenant's partitions. *
 
 #### Parameters
 
@@ -7014,6 +7947,249 @@ Return a read-only snapshot of currently registered job workers.
 
 ---
 
+### listHistoryBackups()
+
+```ts
+listHistoryBackups(input, options?): CancelablePromise<HistoryBackupInfo[]>;
+```
+
+List history backups
+
+Returns a list of all available history backups of the physical tenant, with their state
+and additional info, most recent first by snapshot start time.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+-
+
+#### Parameters
+
+##### input
+
+[`listHistoryBackupsInput`](../type-aliases/listHistoryBackupsInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`HistoryBackupInfo`](../type-aliases/HistoryBackupInfo.md)[]\>
+
+#### Example
+
+**List history backups**
+
+```ts
+async function listHistoryBackupsExample() {
+  const camunda = createCamundaClient();
+
+  // `prefix` must end in a single '*'. Omit it to list every history backup.
+  const backups = await camunda.listHistoryBackups({ prefix: "10*" });
+
+  for (const backup of backups) {
+    console.log(`History backup ${backup.backupId}: ${backup.state}`);
+  }
+}
+```
+
+#### Operation Id
+
+listHistoryBackups
+
+#### Tags
+
+Backup
+
+---
+
+### listHistoryBackupsAsClusterAdmin()
+
+```ts
+listHistoryBackupsAsClusterAdmin(input, options?): CancelablePromise<ClusterHistoryBackupInfo[]>;
+```
+
+List history backups across physical tenants
+
+Lists the history backups of every physical tenant of the cluster, or of the one named by `physicalTenantId`, grouped by backup id. A backup id that only some physical tenants hold is a supported outcome rather than a degraded one, so only the tenants that hold it are listed under it.
+
+The request is all-or-nothing: a physical tenant whose backups cannot be read fails the whole request rather than silently dropping out of the listing. Narrow the request with `physicalTenantId` to list the backups of the tenants that can still be read.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `GET /v2/backups/history` to act as a single physical tenant. *
+
+#### Parameters
+
+##### input
+
+[`listHistoryBackupsAsClusterAdminInput`](../type-aliases/listHistoryBackupsAsClusterAdminInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterHistoryBackupInfo`](../type-aliases/ClusterHistoryBackupInfo.md)[]\>
+
+#### Example
+
+**List history backups (cluster admin)**
+
+```ts
+async function listHistoryBackupsAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // `prefix` must end in a single '*'. Omit `physicalTenantId` to span every
+  // physical tenant of the cluster — results are grouped by backup id, and each
+  // group lists only the tenants that hold that id.
+  const backups = await camunda.listHistoryBackupsAsClusterAdmin({
+    prefix: "10*",
+  });
+
+  for (const backup of backups) {
+    console.log(`Cluster history backup ${backup.backupId}:`);
+    for (const tenant of backup.physicalTenants) {
+      console.log(`  [${tenant.physicalTenantId}] ${tenant.state}`);
+    }
+  }
+}
+```
+
+#### Operation Id
+
+listHistoryBackupsAsClusterAdmin
+
+#### Tags
+
+Backup
+
+---
+
+### listRuntimeBackups()
+
+```ts
+listRuntimeBackups(input, options?): CancelablePromise<BackupInfo[]>;
+```
+
+List runtime backups
+
+Returns a list of all available runtime backups of the physical tenant, with their
+state and additional info, sorted in descending order of backupId.
+
+-
+
+#### Parameters
+
+##### input
+
+[`listRuntimeBackupsInput`](../type-aliases/listRuntimeBackupsInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BackupInfo`](../type-aliases/BackupInfo.md)[]\>
+
+#### Example
+
+**List runtime backups**
+
+```ts
+async function listRuntimeBackupsExample() {
+  const camunda = createCamundaClient();
+
+  // `prefix` must end in a single '*'. Omit it to list every backup.
+  const backups = await camunda.listRuntimeBackups({ prefix: "10*" });
+
+  for (const backup of backups) {
+    console.log(`Backup ${backup.backupId}: ${backup.state}`);
+  }
+}
+```
+
+#### Operation Id
+
+listRuntimeBackups
+
+#### Tags
+
+Backup
+
+---
+
+### listSecrets()
+
+```ts
+listSecrets(input, options?): CancelablePromise<SecretListResult>;
+```
+
+List secrets (alpha)
+
+List the `camunda.secrets.*` references known for the caller's physical tenant.
+
+Only references the caller holds `SECRET:READ` on are returned. This endpoint never
+returns secret values, only the reference names.
+
+The references are read from the secret stores configured for the caller's physical tenant.
+A store may hold names outside the reference name charset (for example one containing a
+dot); those are omitted, since `/secrets/resolve` would reject them and no permission can
+be granted on them.
+
+A returned reference is usable verbatim with `/secrets/resolve`. In a FEEL expression,
+however, a name that is not a bare identifier has to be backtick-escaped, since FEEL reads
+a bare dash as the minus operator: a listed `camunda.secrets.db-password` is written
+`` =camunda.secrets.`db-password` `` in a BPMN input mapping.
+
+This endpoint is an alpha feature and may be subject to change in future releases.
+
+-
+
+#### Parameters
+
+##### input
+
+[`SecretListRequest`](../type-aliases/SecretListRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SecretListResult`](../type-aliases/SecretListResult.md)\>
+
+#### Example
+
+**List secret references**
+
+```ts
+async function listSecretsExample() {
+  const camunda = createCamundaClient();
+
+  // The request body is reserved for future filtering options and currently
+  // takes no properties.
+  const result = await camunda.listSecrets({});
+
+  // Only the references are returned — never the secret values. Use
+  // `resolveSecrets` to fetch a value when one is actually needed.
+  for (const reference of result.references) {
+    console.log(`Secret available: ${reference}`);
+  }
+}
+```
+
+#### Operation Id
+
+listSecrets
+
+#### Tags
+
+Secret
+
+---
+
 ### logger()
 
 ```ts
@@ -7320,6 +8496,114 @@ onAuthHeaders(h): void;
 #### Returns
 
 `void`
+
+---
+
+### pauseClusterExporting()
+
+```ts
+pauseClusterExporting(input, options?): CancelablePromise<void>;
+```
+
+Pause exporting across the whole cluster
+
+Pauses exporting on every physical tenant of the cluster in one call. With `soft=true`, every physical tenant is soft-paused instead.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. *
+
+#### Parameters
+
+##### input
+
+[`pauseClusterExportingInput`](../type-aliases/pauseClusterExportingInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Pause cluster exporting**
+
+```ts
+async function pauseClusterExportingExample() {
+  const camunda = createCamundaClient();
+
+  // Cluster-admin variant: pauses exporting on every physical tenant of the
+  // cluster. With `soft: true` exporting keeps running but its position is not
+  // committed, so the log is still not compacted.
+  await camunda.pauseClusterExporting({ soft: true });
+}
+```
+
+#### Operation Id
+
+pauseClusterExporting
+
+#### Tags
+
+Exporting
+
+---
+
+### pauseExporting()
+
+```ts
+pauseExporting(input, options?): CancelablePromise<void>;
+```
+
+Pause exporting
+
+Pauses exporting on all partitions of the physical tenant. While paused, exported records
+are not committed, so the log is not compacted for the affected partitions.
+
+With `soft=true`, exporting continues to run but its position is not committed, so the
+state after resuming is identical to a hard pause; use this variant when exporting must
+keep progressing (e.g. to avoid falling behind) while still preventing log compaction,
+such as during a backup.
+
+-
+
+#### Parameters
+
+##### input
+
+[`pauseExportingInput`](../type-aliases/pauseExportingInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Pause exporting**
+
+```ts
+async function pauseExportingExample() {
+  const camunda = createCamundaClient();
+
+  // With `soft: true` exporting keeps running but its position is not committed,
+  // so the log is still not compacted — use it when exporting must keep
+  // progressing, for example while a backup is taken.
+  await camunda.pauseExporting({ soft: true });
+}
+```
+
+#### Operation Id
+
+pauseExporting
+
+#### Tags
+
+Exporting
 
 ---
 
@@ -7650,6 +8934,217 @@ Process instance
 
 ---
 
+### resolveSecrets()
+
+```ts
+resolveSecrets(input, options?): CancelablePromise<SecretResolveResult>;
+```
+
+Resolve secrets (alpha)
+
+Resolve a deduplicated batch of `camunda.secrets.*` references for the caller's
+physical tenant in a single round-trip.
+
+Each reference is authorized and resolved independently. For valid requests, the endpoint
+always responds with HTTP 200: successfully resolved references are returned in `resolved`,
+while references that could not be resolved (for example not found, malformed or over-long,
+or the caller lacks `SECRET:REVEAL` on that reference) are returned in `errors`. A failure of
+one reference never fails the others. Only structurally invalid requests are rejected with
+HTTP 400: a missing or non-array `references` field, more than 20 references, or a null entry.
+
+References are resolved against the secret stores configured for the caller's physical
+tenant, served from the gateway's secret cache when the value is already cached and read
+from the store otherwise.
+
+This endpoint is an alpha feature and may be subject to change in future releases.
+
+-
+
+#### Parameters
+
+##### input
+
+[`SecretResolveRequest`](../type-aliases/SecretResolveRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`SecretResolveResult`](../type-aliases/SecretResolveResult.md)\>
+
+#### Example
+
+**Resolve secrets**
+
+```ts
+async function resolveSecretsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.resolveSecrets({
+    references: ["camunda.secrets.myApiToken", "camunda.secrets.dbPassword"],
+  });
+
+  // Successfully resolved references are returned in `resolved`; references that
+  // could not be resolved are returned in `errors`, each with a typed error code.
+  // Never log a resolved value — it holds secret material. Pass it straight to the
+  // consumer that needs it (HTTP client, DB driver, ...) instead.
+  for (const resolved of result.resolved) {
+    console.log(`Resolved ${resolved.reference} (value redacted)`);
+    useSecret(resolved.value);
+  }
+
+  for (const error of result.errors) {
+    console.log(
+      `Failed to resolve ${error.reference}: ${error.code} - ${error.message}`
+    );
+  }
+}
+
+// Hands the resolved secret to whatever needs it, without logging it.
+function useSecret(_value: string) {}
+```
+
+#### Operation Id
+
+resolveSecrets
+
+#### Tags
+
+Secret
+
+---
+
+### restore()
+
+```ts
+restore(input, options?): CancelablePromise<ClusterRestoreResponse>;
+```
+
+Restore from a backup
+
+Restores the cluster from a backup. The restore is described either by a single backup ID or by a time range (`from`/`to`) that selects the backups to restore. This endpoint is only accessible while the cluster is in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously. *
+
+#### Parameters
+
+##### input
+
+[`restoreInput`](../type-aliases/restoreInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterRestoreResponse`](../type-aliases/ClusterRestoreResponse.md)\>
+
+#### Example
+
+**Restore from a backup**
+
+```ts
+async function restoreExample() {
+  const camunda = createCamundaClient();
+
+  // The cluster must be in recovery mode before a restore is accepted. Provide
+  // either a list of backup IDs (one per partition) or a time range (`from`/`to`)
+  // that selects the backups to restore, but not both.
+  const change = await camunda.restore({
+    backupIds: [100, 101],
+  });
+
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
+    for (const op of group.operations) {
+      const mode = "mode" in op ? op.mode : undefined;
+      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ""}`);
+    }
+  }
+}
+```
+
+#### Operation Id
+
+restore
+
+#### Tags
+
+Recovery
+
+---
+
+### restoreAsClusterAdmin()
+
+```ts
+restoreAsClusterAdmin(input, options?): CancelablePromise<ClusterRestoreResponse>;
+```
+
+Restore one or every physical tenant from a backup
+
+Restores physical tenants from backups. The restore is described either by a list of backup IDs or by a time range (`from`/`to`) that selects the backups to restore. Restores are only accepted while the targeted physical tenants are in recovery mode; requests are rejected otherwise. The request is validated and acknowledged, but the restore itself is performed asynchronously.
+
+If the `physicalTenantId` parameter is provided, only that physical tenant is restored and `overrides` must be omitted.
+
+If it is not provided, every physical tenant of the cluster is restored: those named in `overrides` with their own backup selection, all others with the selection at the top level of the request body.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. *
+
+#### Parameters
+
+##### input
+
+[`restoreAsClusterAdminInput`](../type-aliases/restoreAsClusterAdminInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterRestoreResponse`](../type-aliases/ClusterRestoreResponse.md)\>
+
+#### Example
+
+**Restore from a backup as cluster admin**
+
+```ts
+async function restoreAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // The cluster-admin variant can target a specific physical tenant and supports
+  // per-tenant overrides. Omit `physicalTenantId` to restore every physical
+  // tenant. Provide either backup IDs (one per partition) or a time range
+  // (`from`/`to`), but not both.
+  const change = await camunda.restoreAsClusterAdmin({
+    backupIds: [200, 201],
+    physicalTenantId: "default",
+    dryRun: true,
+  });
+
+  console.log(`Cluster change ${change.changeId}:`);
+  for (const group of change.plannedChanges) {
+    console.log(`  ${group.physicalTenantId ?? "cluster-wide"}:`);
+    for (const op of group.operations) {
+      const mode = "mode" in op ? op.mode : undefined;
+      console.log(`    ${op.operation}${mode ? ` -> ${mode}` : ""}`);
+    }
+  }
+}
+```
+
+#### Operation Id
+
+restoreAsClusterAdmin
+
+#### Tags
+
+Recovery
+
+---
+
 ### resumeBatchOperation()
 
 ```ts
@@ -7700,6 +9195,275 @@ resumeBatchOperation
 #### Tags
 
 Batch operation
+
+---
+
+### resumeClusterExporting()
+
+```ts
+resumeClusterExporting(options?): CancelablePromise<void>;
+```
+
+Resume exporting across the whole cluster
+
+Resumes exporting on every physical tenant of the cluster in one call, after a pause or soft pause.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. *
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Resume cluster exporting**
+
+```ts
+async function resumeClusterExportingExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.resumeClusterExporting();
+}
+```
+
+#### Operation Id
+
+resumeClusterExporting
+
+#### Tags
+
+Exporting
+
+---
+
+### resumeExporting()
+
+```ts
+resumeExporting(options?): CancelablePromise<void>;
+```
+
+Resume exporting
+
+Resumes exporting on all partitions of the physical tenant after a pause or soft pause.
+
+-
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Resume exporting**
+
+```ts
+async function resumeExportingExample() {
+  const camunda = createCamundaClient();
+
+  await camunda.resumeExporting();
+}
+```
+
+#### Operation Id
+
+resumeExporting
+
+#### Tags
+
+Exporting
+
+---
+
+### resumeProcessInstance()
+
+```ts
+resumeProcessInstance(input, options?): CancelablePromise<void>;
+```
+
+Resume process instance
+
+Resumes a suspended process instance, returning it to the ACTIVE state and continuing processing.
+Only process instances in the SUSPENDED state can be resumed.
+
+-
+
+#### Parameters
+
+##### input
+
+`object` & `object`
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Resume a process instance**
+
+```ts
+async function resumeProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.resumeProcessInstance({ processInstanceKey });
+}
+```
+
+#### Operation Id
+
+resumeProcessInstance
+
+#### Tags
+
+Process instance
+
+---
+
+### resumeProcessInstancesBatchOperation()
+
+```ts
+resumeProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
+```
+
+Resume process instances (batch)
+
+Resumes multiple suspended process instances.
+Since only SUSPENDED root instances can be resumed, any given
+filters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+-
+
+#### Parameters
+
+##### input
+
+[`ProcessInstanceResumptionBatchOperationRequest`](../type-aliases/ProcessInstanceResumptionBatchOperationRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+**Resume process instances in batch**
+
+```ts
+async function resumeProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.resumeProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
+
+#### Operation Id
+
+resumeProcessInstancesBatchOperation
+
+#### Tags
+
+Process instance
+
+---
+
+### searchAgentDefinitions()
+
+```ts
+searchAgentDefinitions(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AgentDefinitionSearchQueryResult>;
+```
+
+Search agent definitions
+
+Search for agent definitions based on given criteria. *
+
+#### Parameters
+
+##### input
+
+[`AgentDefinitionSearchQuery`](../type-aliases/AgentDefinitionSearchQuery.md)
+
+##### consistencyManagement
+
+[`searchAgentDefinitionsConsistency`](../type-aliases/searchAgentDefinitionsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentDefinitionSearchQueryResult`](../type-aliases/AgentDefinitionSearchQueryResult.md)\>
+
+#### Example
+
+**Search agent definitions**
+
+```ts
+async function searchAgentDefinitionsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchAgentDefinitions(
+    {
+      filter: { agentType: { $eq: "AI_AGENT_TASK" } },
+      sort: [{ field: "name", order: "ASC" }],
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const definition of result.items ?? []) {
+    console.log(
+      `${definition.agentDefinitionKey}: ${definition.name} (${definition.agentType})`
+    );
+  }
+  console.log(`Total: ${result.page.totalItems}`);
+}
+```
+
+#### Operation Id
+
+searchAgentDefinitions
+
+#### Tags
+
+Agent definition
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
 
 ---
 
@@ -9610,6 +11374,73 @@ eventual - this endpoint is backed by data that is eventually consistent with th
 
 ---
 
+### searchOwnAuthorizations()
+
+```ts
+searchOwnAuthorizations(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<AuthorizationSearchResult>;
+```
+
+Search own authorizations
+
+Search for the current authenticated principal's own authorization records — including authorizations granted directly to the user or client, as well as those granted via a group, role, or mapping rule the principal belongs to. *
+
+#### Parameters
+
+##### input
+
+[`AuthorizationSearchQuery`](../type-aliases/AuthorizationSearchQuery.md)
+
+##### consistencyManagement
+
+[`searchOwnAuthorizationsConsistency`](../type-aliases/searchOwnAuthorizationsConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AuthorizationSearchResult`](../type-aliases/AuthorizationSearchResult.md)\>
+
+#### Example
+
+**Search own authorizations**
+
+```ts
+async function searchOwnAuthorizationsExample() {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchOwnAuthorizations(
+    {
+      filter: { resourceType: "PROCESS_DEFINITION" },
+      page: { limit: 10 },
+    },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const auth of result.items ?? []) {
+    console.log(`${auth.resourceId}: ${auth.permissionTypes?.join(", ")}`);
+  }
+}
+```
+
+#### Operation Id
+
+searchOwnAuthorizations
+
+#### Tags
+
+Authentication
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
 ### searchProcessDefinitions()
 
 ```ts
@@ -9667,6 +11498,72 @@ async function searchProcessDefinitionsExample() {
 #### Operation Id
 
 searchProcessDefinitions
+
+#### Tags
+
+Process definition
+
+#### Consistency
+
+eventual - this endpoint is backed by data that is eventually consistent with the system state.
+
+---
+
+### searchProcessDefinitionVariableNames()
+
+```ts
+searchProcessDefinitionVariableNames(
+   input,
+   consistencyManagement,
+options?): CancelablePromise<ProcessDefinitionVariableNameSearchQueryResult>;
+```
+
+Search process definition variable names
+
+Search for distinct variable names defined on a process definition, optionally narrowed by the name filter. *
+
+#### Parameters
+
+##### input
+
+[`searchProcessDefinitionVariableNamesInput`](../type-aliases/searchProcessDefinitionVariableNamesInput.md)
+
+##### consistencyManagement
+
+[`searchProcessDefinitionVariableNamesConsistency`](../type-aliases/searchProcessDefinitionVariableNamesConsistency.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ProcessDefinitionVariableNameSearchQueryResult`](../type-aliases/ProcessDefinitionVariableNameSearchQueryResult.md)\>
+
+#### Example
+
+**Search process definition variable names**
+
+```ts
+async function searchProcessDefinitionVariableNamesExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.searchProcessDefinitionVariableNames(
+    { processDefinitionKey },
+    { consistency: { waitUpToMs: 5000 } }
+  );
+
+  for (const variable of result.items ?? []) {
+    console.log(`Variable name: ${variable.name}`);
+  }
+}
+```
+
+#### Operation Id
+
+searchProcessDefinitionVariableNames
 
 #### Tags
 
@@ -10936,6 +12833,347 @@ Batch operation
 
 ---
 
+### suspendProcessInstance()
+
+```ts
+suspendProcessInstance(input, options?): CancelablePromise<void>;
+```
+
+Suspend process instance
+
+Suspends a running process instance, pausing further processing until it is resumed.
+Only process instances in the ACTIVE state can be suspended.
+
+-
+
+#### Parameters
+
+##### input
+
+`object` & `object`
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+
+#### Example
+
+**Suspend a process instance**
+
+```ts
+async function suspendProcessInstanceExample(
+  processInstanceKey: ProcessInstanceKey
+) {
+  const camunda = createCamundaClient();
+
+  await camunda.suspendProcessInstance({ processInstanceKey });
+}
+```
+
+#### Operation Id
+
+suspendProcessInstance
+
+#### Tags
+
+Process instance
+
+---
+
+### suspendProcessInstancesBatchOperation()
+
+```ts
+suspendProcessInstancesBatchOperation(input, options?): CancelablePromise<BatchOperationCreatedResult>;
+```
+
+Suspend process instances (batch)
+
+Suspends multiple running process instances.
+Since only ACTIVE root instances can be suspended, any given
+filters for state and parentProcessInstanceKey are ignored and overridden during this batch operation.
+This is done asynchronously, the progress can be tracked using the batchOperationKey from the response and the batch operation status endpoint (/batch-operations/{batchOperationKey}).
+
+-
+
+#### Parameters
+
+##### input
+
+[`ProcessInstanceSuspensionBatchOperationRequest`](../type-aliases/ProcessInstanceSuspensionBatchOperationRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`BatchOperationCreatedResult`](../type-aliases/BatchOperationCreatedResult.md)\>
+
+#### Example
+
+**Suspend process instances in batch**
+
+```ts
+async function suspendProcessInstancesBatchOperationExample(
+  processDefinitionKey: ProcessDefinitionKey
+) {
+  const camunda = createCamundaClient();
+
+  const result = await camunda.suspendProcessInstancesBatchOperation({
+    filter: {
+      processDefinitionKey,
+    },
+  });
+
+  console.log(`Batch operation key: ${result.batchOperationKey}`);
+}
+```
+
+#### Operation Id
+
+suspendProcessInstancesBatchOperation
+
+#### Tags
+
+Process instance
+
+---
+
+### syncRuntimeBackupState()
+
+```ts
+syncRuntimeBackupState(options?): CancelablePromise<RuntimeBackupState>;
+```
+
+Force-write runtime backup state
+
+Force-writes the checkpoint and backup metadata of every partition of the physical
+tenant to the backup store, independent of any backup being taken or confirmed, and
+returns the updated state.
+
+-
+
+#### Parameters
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`RuntimeBackupState`](../type-aliases/RuntimeBackupState.md)\>
+
+#### Example
+
+**Force-write the runtime backup state**
+
+```ts
+async function syncRuntimeBackupStateExample() {
+  const camunda = createCamundaClient();
+
+  // Force-writes checkpoint and backup metadata of every partition to the backup
+  // store, independent of any backup being taken, and returns the updated state.
+  const state = await camunda.syncRuntimeBackupState();
+
+  console.log(`Synced ${state.backupStates.length} partition backup states`);
+}
+```
+
+#### Operation Id
+
+syncRuntimeBackupState
+
+#### Tags
+
+Backup
+
+---
+
+### takeHistoryBackup()
+
+```ts
+takeHistoryBackup(input, options?): CancelablePromise<TakeHistoryBackupResponse>;
+```
+
+Take a history backup
+
+Triggers a backup of the physical tenant's history, by scheduling a snapshot of every
+secondary storage index it owns.
+
+Unlike runtime backups, history backups have no generated-id mode: `backupId` is always
+required.
+
+Only available on clusters whose secondary storage is Elasticsearch or OpenSearch.
+
+-
+
+#### Parameters
+
+##### input
+
+[`TakeHistoryBackupRequest`](../type-aliases/TakeHistoryBackupRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TakeHistoryBackupResponse`](../type-aliases/TakeHistoryBackupResponse.md)\>
+
+#### Example
+
+**Take a history backup**
+
+```ts
+async function takeHistoryBackupExample() {
+  const camunda = createCamundaClient();
+
+  // Backups are logically ordered by id, so each successive backup must use a
+  // higher id than the previous one.
+  const backup = await camunda.takeHistoryBackup({ backupId: 100 });
+
+  console.log(`Scheduled history backup ${backup.backupId}`);
+  for (const snapshot of backup.scheduledSnapshots) {
+    console.log(`  ${snapshot}`);
+  }
+}
+```
+
+#### Operation Id
+
+takeHistoryBackup
+
+#### Tags
+
+Backup
+
+---
+
+### takeHistoryBackupAsClusterAdmin()
+
+```ts
+takeHistoryBackupAsClusterAdmin(input, options?): CancelablePromise<ClusterTakeHistoryBackupResponse>;
+```
+
+Take a history backup on one or every physical tenant
+
+Triggers a history backup on every physical tenant of the cluster, or on the one named by `physicalTenantId`. Every targeted tenant uses the same caller-supplied `backupId`, but the backups are independent: they are neither coordinated nor rolled back together.
+
+The request is all-or-nothing: the `backupId` is checked on every targeted tenant before any snapshot is scheduled, so a tenant that already holds this id, or that cannot be reached, fails the whole request and no backup is started anywhere. There is no aggregated cluster-level state in the response.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here. Only available on clusters whose secondary storage is Elasticsearch or OpenSearch. Use `POST /v2/backups/history` to act as a single physical tenant. *
+
+#### Parameters
+
+##### input
+
+[`takeHistoryBackupAsClusterAdminInput`](../type-aliases/takeHistoryBackupAsClusterAdminInput.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`ClusterTakeHistoryBackupResponse`](../type-aliases/ClusterTakeHistoryBackupResponse.md)\>
+
+#### Example
+
+**Take a history backup (cluster admin)**
+
+```ts
+async function takeHistoryBackupAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Cluster-admin variant: fans the backup out to every physical tenant of the
+  // cluster (or a single one when `physicalTenantId` is given). Requires a
+  // separate cluster-admin security chain — Orchestration Cluster user
+  // credentials are NOT accepted. Each backup must use a higher id than the last.
+  const backup = await camunda.takeHistoryBackupAsClusterAdmin({
+    backupId: 100,
+  });
+
+  console.log(`Scheduled cluster history backup ${backup.backupId}`);
+  for (const tenant of backup.physicalTenants) {
+    console.log(
+      `  [${tenant.physicalTenantId}] scheduled ${tenant.scheduledSnapshots.length} snapshots`
+    );
+  }
+}
+```
+
+#### Operation Id
+
+takeHistoryBackupAsClusterAdmin
+
+#### Tags
+
+Backup
+
+---
+
+### takeRuntimeBackup()
+
+```ts
+takeRuntimeBackup(input, options?): CancelablePromise<TakeRuntimeBackupResponse>;
+```
+
+Take a runtime backup
+
+Triggers a backup of runtime data on all partitions of the physical tenant.
+
+The `backupId` must be omitted if continuous backups and/or a backup or checkpoint
+schedule is enabled for the physical tenant, as the id is generated automatically.
+Otherwise, `backupId` is required.
+
+-
+
+#### Parameters
+
+##### input
+
+[`TakeRuntimeBackupRequest`](../type-aliases/TakeRuntimeBackupRequest.md)
+
+##### options?
+
+[`OperationOptions`](../interfaces/OperationOptions.md)
+
+#### Returns
+
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`TakeRuntimeBackupResponse`](../type-aliases/TakeRuntimeBackupResponse.md)\>
+
+#### Example
+
+**Take a runtime backup**
+
+```ts
+async function takeRuntimeBackupExample() {
+  const camunda = createCamundaClient();
+
+  // Omit `backupId` when continuous backups or a backup/checkpoint schedule is
+  // enabled for the physical tenant — the id is then generated by the cluster.
+  // Otherwise `backupId` is required and must be higher than any existing one.
+  const backup = await camunda.takeRuntimeBackup({ backupId: 100 });
+
+  console.log(`Scheduled backup ${backup.backupId}`);
+}
+```
+
+#### Operation Id
+
+takeRuntimeBackup
+
+#### Tags
+
+Backup
+
+---
+
 ### throwJobError()
 
 ```ts
@@ -11676,14 +13914,16 @@ User task
 ### updateAgentInstance()
 
 ```ts
-updateAgentInstance(input, options?): CancelablePromise<void>;
+updateAgentInstance(input, options?): CancelablePromise<AgentInstanceUpdateResult>;
 ```
 
 Update agent instance
 
-Updates the mutable fields of an agent instance: status, metric counters, and
-tools. Metric values are treated as deltas and applied immediately to the
-aggregate counters. Tool updates replace the existing tool list.
+Updates the mutable fields of an agent instance (status, metric counters, and
+tools) and appends a batch of history items to its conversation history. Metric
+values are treated as deltas and applied immediately to the aggregate counters.
+Tool updates replace the existing tool list. Each history item created for this
+request is echoed back in the response.
 
 -
 
@@ -11699,7 +13939,7 @@ aggregate counters. Tool updates replace the existing tool list.
 
 #### Returns
 
-[`CancelablePromise`](../interfaces/CancelablePromise.md)\<`void`\>
+[`CancelablePromise`](../interfaces/CancelablePromise.md)\<[`AgentInstanceUpdateResult`](../type-aliases/AgentInstanceUpdateResult.md)\>
 
 #### Example
 

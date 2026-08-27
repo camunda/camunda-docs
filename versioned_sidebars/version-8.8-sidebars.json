@@ -103,6 +103,7 @@
             "components/agentic-orchestration/evaluate-agents/analyze-ai-agents"
           ]
         },
+        "components/agentic-orchestration/add-tool-to-ai-agent",
         "components/agentic-orchestration/rag-ai-agents",
         "components/agentic-orchestration/choose-right-model-agentic",
         "components/agentic-orchestration/model-recommendations-agentic"
@@ -629,6 +630,9 @@
                 "id": "components/modeler/reference/modeling-guidance/index"
               },
               "items": [
+                "components/modeler/reference/modeling-guidance/rules/agent-fromai-contract",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-documentation",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-output-key",
                 "components/modeler/reference/modeling-guidance/rules/called-element",
                 "components/modeler/reference/modeling-guidance/rules/element-type",
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
@@ -2938,6 +2942,7 @@
               "items": [
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/pod-networking",
+                "self-managed/deployment/helm/configure/pod-scheduling",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -3303,7 +3308,6 @@
                 {
                   "Operation": [
                     "self-managed/components/orchestration-cluster/zeebe/operations/zeebe-in-production",
-                    "self-managed/components/orchestration-cluster/zeebe/operations/resource-planning",
                     "self-managed/components/orchestration-cluster/zeebe/operations/network-ports",
                     "self-managed/components/orchestration-cluster/zeebe/operations/setting-up-a-cluster",
                     "self-managed/components/orchestration-cluster/zeebe/operations/health",
