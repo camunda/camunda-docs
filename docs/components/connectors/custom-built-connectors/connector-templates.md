@@ -1177,12 +1177,10 @@ You can develop connector templates using the [`element template` feature](/comp
 
 If your connector provides several operations, define them with the [`steps` and `presets` keys](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets). Users can then find each operation through search and select it when they apply the template, instead of applying the template first and choosing the operation in a dropdown afterwards.
 
-## Providing and using connector templates
+## Make custom Connector templates available
 
 When using [Camunda Hub](/components/hub/workspace/modeler/index.md), you can create **Connector templates** [directly within the application](/components/hub/workspace/modeler/element-templates/element-template-generator.md) and share them with your respective organization.
 
 When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so Modeler will pick them up.
 
 Once available, process developers can directly [use the **Connector templates** from within the modeling canvas](/components/connectors/use-connectors/index.md).
-
-Like an out-of-the-box connector, a custom connector template can also be added as a tool an [AI agent](/reference/glossary.md#ai-agent) calls from within an ad-hoc sub-process, instead of only being wired into a fixed sequence of tasks.

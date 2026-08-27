@@ -1175,12 +1175,10 @@ You can, for example, allow the user to model and configure the following **REST
 
 You can develop connector templates using the [`element template` feature](/components/modeler/element-templates/defining-templates.md). You can also look at existing [examples](https://github.com/camunda/camunda-modeler/blob/master/resources/element-templates/cloud-samples.json).
 
-## Providing and using connector templates
+## Make custom Connector templates available
 
 When using [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md), you can create **Connector templates** [directly within the application](/components/connectors/manage-connector-templates.md) and share them with your respective organization.
 
 When using [Desktop Modeler](/components/modeler/desktop-modeler/index.md), you must place the **Connector templates** [within the file system](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) so Modeler will pick them up.
 
 Once available, process developers can directly [use the **Connector templates** from within the modeling canvas](/components/connectors/use-connectors/index.md).
-
-Like an out-of-the-box connector, a custom connector template can also be added as a tool an [AI agent](/reference/glossary.md#ai-agent) calls from within an ad-hoc sub-process, instead of only being wired into a fixed sequence of tasks.
