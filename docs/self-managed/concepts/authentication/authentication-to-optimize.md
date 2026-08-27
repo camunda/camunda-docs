@@ -68,9 +68,9 @@ The internal API is not a supported public contract. Its shape can change betwee
 
 ### OIDC id_token validation
 
-Optimize validates the login `id_token`'s issuer and audience against your configuration. Confirm that:
+Optimize always validates the login `id_token`'s audience against your configuration, and validates its issuer when `camunda.security.authentication.oidc.issuer-uri` is configured. If you migrated from a legacy setup that configured OIDC endpoints individually rather than through `issuer-uri` (for example, a Keycloak back-channel setup), no issuer validator is registered, and tokens are accepted on signature, audience, and expiry alone. Confirm that:
 
-- `camunda.security.authentication.oidc.issuer-uri` matches the issuer your IdP puts in the `id_token`.
+- If you set `camunda.security.authentication.oidc.issuer-uri`, it matches the issuer your IdP puts in the `id_token`.
 - `camunda.security.authentication.oidc.audiences` contains every value your IdP puts in the audience claim for the Optimize application, including whatever the legacy `CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE` and `CAMUNDA_OPTIMIZE_API_AUDIENCE` variables previously covered. The same list validates both the login `id_token` and any bearer token sent to Optimize, so it must also include the audience of any other application that calls Optimize on a user's behalf. For example, if Camunda Hub is enabled, its client API audience must be included, or the requests it forwards to Optimize on the signed-in user's behalf are rejected. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
 
 ## Legacy configuration keys are deprecated

@@ -39,6 +39,7 @@ camunda:
       oidc:
         issuer-uri: https://keycloak.example.com/auth/realms/camunda-platform
         client-id: web-modeler
+        client-secret: your-client-secret # required unless client-authentication-method is changed
         username-claim: name # optional, default: name
         audiences: web-modeler-api,web-modeler-public-api # optional
 ```
@@ -50,6 +51,7 @@ camunda:
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------- | ------------- |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_ISSUERURI`     | URL of the token issuer, used for JWT validation. Individual endpoints are fetched from the provider's [well-known configuration endpoint](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig).         | `https://keycloak.example.com/auth/realms/camunda-platform` | -             |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTID`      | Client ID of the Camunda Hub application configured in your identity provider.                                                                                                                                                 | `web-modeler`                                               | -             |
+| `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_CLIENTSECRET`  | Client secret of the Camunda Hub application. Required unless `client-authentication-method` is changed from its default.                                                                                                      | -                                                           | -             |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_USERNAMECLAIM` | [optional]<br/>Token claim used to assign usernames.                                                                                                                                                                           | `preferred_username`                                        | `name`        |
 | `CAMUNDA_SECURITY_AUTHENTICATION_OIDC_AUDIENCES`     | [optional]<br/>Comma-separated list of accepted audience claim values, used for JWT validation. Includes the audiences for both user access tokens and the [public Camunda Hub API](/apis-tools/hub-api-sm/authentication.md). | `web-modeler-api,web-modeler-public-api`                    | -             |
 
@@ -57,14 +59,14 @@ camunda:
 </Tabs>
 
 :::note
-Camunda Hub does not require a client secret. The Camunda Hub web application authenticates as a public client.
+Camunda Hub's client authentication method defaults to `client_secret_basic`, which requires `camunda.security.authentication.oidc.client-secret`. To run Camunda Hub as a public client without a secret, configure your identity provider client accordingly and omit `client-secret`.
 :::
 
 ## Upgrading from 8.9
 
-If you configured Camunda Hub authentication in 8.9, no action is required to upgrade to 8.10. Camunda Hub translates your existing settings to the settings above at startup, and logs a `WARN` for each translated setting, naming the 8.9 setting and the 8.10 equivalent it was translated to. Those 8.9 settings are deprecated, however, and are removed in 8.11, so migrate to the `camunda.security.authentication.oidc.*` settings before upgrading to 8.11.
+If you configured Camunda Hub authentication in 8.9, no action is required to upgrade to 8.10. Camunda Hub translates your existing settings to the settings above at startup, silently and without logging which settings were translated. Those 8.9 settings are deprecated, however, and are removed in 8.11, so migrate to the `camunda.security.authentication.oidc.*` settings before upgrading to 8.11.
 
-Check the startup log for these `WARN` messages after upgrading, particularly if you set more than one of the three 8.9 audience properties — they merge into the single `camunda.security.authentication.oidc.audiences` list, and the log shows the merged result so you can confirm it matches what you expect.
+If you set more than one of the three 8.9 audience properties, they merge into the single `camunda.security.authentication.oidc.audiences` list. Set `camunda.security.authentication.oidc.audiences` explicitly if you want to confirm the merged result rather than rely on the translation.
 
 For the mapping between the 8.9 and 8.10 settings, see [upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration).
 

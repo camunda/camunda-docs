@@ -28,10 +28,6 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 Important changes in Camunda 8.10 are summarized as follows:
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
 :::info learn more and upgrade
 
 - See [release announcements](/reference/announcements-release-notes/8100/8100-announcements.md) and [release notes](/reference/announcements-release-notes/8100/8100-release-notes.md) for a full summary of what's included in Camunda 8.10, including all breaking changes and deprecations, and supported environment changes.
@@ -48,11 +44,9 @@ Camunda Hub and Optimize both continue to accept their existing authentication s
 
 <p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
 
-<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+### Optimize's move to CSL
 
-## Optimize authentication moves to the Camunda Security Library
-
-Optimize now authenticates through the Camunda Security Library (CSL) instead of its own stateless JWT-cookie stack. A standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and Optimize validates the login `id_token`'s issuer and audience against your configuration.
+Optimize's move to CSL replaces its own stateless JWT-cookie stack. A standard session cookie replaces the self-signed JWT cookie, session state moves server-side into a new Optimize index, and Optimize validates the login `id_token`'s audience (and issuer, when `camunda.security.authentication.oidc.issuer-uri` is configured) against your configuration.
 
 The legacy `CAMUNDA_OPTIMIZE_IDENTITY_*` and `CAMUNDA_OPTIMIZE_AUTH0_*` configuration keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback.
 
