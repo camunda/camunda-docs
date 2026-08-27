@@ -47,7 +47,7 @@ The configuration name appears as the section header. Table fields show the prop
 
 For deployments, environment variables are typically easier to use. Table entries use the standalone prefix (`ZEEBE_GATEWAY_*`). For an embedded gateway, replace this prefix with `ZEEBE_BROKER_GATEWAY_*` as described earlier.
 
-If you deploy Camunda 8 with Helm (the recommended approach), you can configure the gateway using Helm chart parameters. See the [Zeebe Gateway Helm chart configuration options](https://artifacthub.io/packages/helm/camunda/camunda-platform#zeebe-gateway-parameters).
+If you deploy Camunda 8 with Helm (the recommended approach), the gateway runs embedded in the Orchestration Cluster and you configure it through the [global and orchestration cluster parameters](/self-managed/deployment/helm/chart-parameters.md#global-and-orchestration-cluster-configuration) of the chart.
 
 :::note
 The Zeebe Gateway is a Spring Boot application.
@@ -343,7 +343,7 @@ To handle many concurrent incoming requests, the user can do two things: scale t
 The Zeebe Gateway uses one thread by default, but this should be set to a higher number if the gateway doesn’t exhaust its available resources and doesn’t keep up with the load. The corresponding environment variables look like this: `ZEEBE_GATEWAY_THREADS_MANAGEMENTTHREADS`.
 During benchmarking and when increasing the thread count, it may also make sense to increase the given resources, which are quite small in the Helm chart.
 
-For high availability and redundancy, two Zeebe Gateways are deployed by default with the Helm charts. To change that amount, set `zeebe-gateway.replicas=2` to a different number. Increasing the number of gateway replicas to more than one enables the possibility for quick failover; in the case one gateway dies, the remaining gateway(s) can handle the traffic.
+With the Helm charts, the gateway is embedded in the Orchestration Cluster nodes, so the number of gateways follows `orchestration.clusterSize`. Running more than one node enables quick failover: if one node dies, the remaining nodes can handle the traffic.
 
 A separate thread pool is used to run the gRPC business logic. The thread pool is elastic (meaning it will start/stop threads dynamically), but will always keep a minimum number of threads, and only start up to a maximum number of threads. By default, this range is from one thread per core, up to two threads per core.
 

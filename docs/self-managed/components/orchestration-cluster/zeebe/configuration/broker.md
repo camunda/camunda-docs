@@ -129,7 +129,7 @@ To configure the embedded gateway, see [Gateway configuration](./gateway.md).
 
 | Field  | Description                                                                                                                                       | Example value |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enable | Enables the embedded gateway on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | false         |
+| enable | Enables the embedded gateway on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | true          |
 
 #### YAML snippet
 

@@ -28,11 +28,11 @@ To determine the current leader for the corresponding partition, the gateway mus
 
 ## Why do we have the Zeebe Gateway and what problems does it solve?
 
-The Zeebe Gateway protects the brokers from external sources. It allows the creation of a demilitarized zone ([DMZ](<https://en.wikipedia.org/wiki/DMZ_(computing)>)) and the Zeebe Gateway is the only contact point.
+The Zeebe Gateway protects the brokers from external sources. In standalone mode, it allows the creation of a demilitarized zone ([DMZ](<https://en.wikipedia.org/wiki/DMZ_(computing)>)) in which the Zeebe Gateway is the only contact point. With an embedded gateway, the Orchestration Cluster nodes are the contact point, and the DMZ boundary is usually a load balancer or reverse proxy in front of them.
 
 The Zeebe Gateway also allows you to easily create clients in your language of choice while keeping the client implementation as thin as possible. The clients can be kept thin, since the gateway takes care of the cluster topology and forwards the requests to the right partitions. There are already several client implementations available, officially-supported, and community-maintained. Check the list [here](../../../../../apis-tools/working-with-apis-tools.md).
 
-The gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications. For example, if your system encounters a spike of incoming requests, and you have set up enough partitions on the broker side up front, but not enough gateways to handle the load, you can easily scale them up.
+In standalone mode, the gateway can be run and scaled independently of the brokers, which means it translates the messages, distributes them to the correct partition leaders, and separates the concerns of the applications. For example, if your system encounters a spike of incoming requests, and you have set up enough partitions on the broker side up front, but not enough gateways to handle the load, you can easily scale them up.
 
 ## Embedded versus standalone
 
@@ -44,7 +44,9 @@ The Zeebe Gateway can be run in two different ways: embedded and standalone.
 
 Running the gateway in embedded mode means it will run as part of the Zeebe Broker. The broker will accept gRPC client messages via the embedded gateway and distribute the translated requests inside the cluster. This means the request accepted by the embedded gateway does not necessarily go to the same broker, where the embedded gateway is running.
 
-The embedded gateway is useful for development and testing purposes, and to reduce the burden of deploying and running multiple applications. For example, in [zeebe-process-test](https://github.com/camunda/zeebe-process-test) an embedded gateway is used to accept the client commands and write directly to the engine.
+The embedded gateway is the default since Camunda 8.8, where the Orchestration Cluster components are bundled into a single application and `zeebe.broker.gateway.enable` defaults to `true`. Every Orchestration Cluster node then accepts client traffic on port `26500` for gRPC and port `8080` for REST, and you distribute that traffic across the nodes with a load balancer. Both the [Kubernetes](/self-managed/reference-architecture/kubernetes.md) and [manual](/self-managed/reference-architecture/manual.md) reference architectures run in this mode.
+
+The embedded gateway also reduces the burden of deploying and running multiple applications in development and testing. For example, in [zeebe-process-test](https://github.com/camunda/zeebe-process-test) an embedded gateway is used to accept the client commands and write directly to the engine.
 
 :::note Be aware
 If the gateway is running in the embedded mode, it will consume resources from the broker, which might impact the performance of the system.
@@ -54,7 +56,14 @@ If the gateway is running in the embedded mode, it will consume resources from t
 
 <TabItem value="standalone">
 
-Running the gateway in standalone mode means the gateway will be executed as its own application. This is the recommended way for production use cases, and it is the default (and only option) in the Helm charts. As mentioned, this allows separation of concerns, especially as the gateway can be scaled independently of the broker based on the current workload.
+Running the gateway in standalone mode means the gateway will be executed as its own application, started with the `gateway` entry point of the distribution instead of `camunda`. This separates concerns and lets you scale the gateway independently of the brokers, based on the current workload.
+
+Since Camunda 8.8, standalone mode is not part of a Camunda reference architecture:
+
+- The Helm charts no longer deploy a gateway workload. They deploy a single Orchestration Cluster StatefulSet with the embedded gateway, sized with `orchestration.clusterSize`.
+- The [manual reference architecture](/self-managed/reference-architecture/manual.md) runs the same single application on every node.
+
+Use the embedded gateway unless you have a specific reason to run a standalone gateway.
 
 </TabItem>
 </Tabs>
