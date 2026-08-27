@@ -475,7 +475,9 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
 With `POST /api/v1/versions`, you can now publish a new version for process application files. Previously, this endpoint returned a `400 BAD REQUEST` because files were intended to be versioned as part of the process application. See [process application versioning model](/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) for a deeper explanation of this change.
 
 :::note
-When versioning a connector template, you may now receive a `409 CONFLICT` citing a version number you never published.
+When versioning a connector template, you may receive a `409 CONFLICT` citing a version number you never explicitly published because:
 
-When you create a new process application version, new element template versions are recorded for the process application's connector template files. Therefore, when you `POST` a new version for the file the version may collide with an existing version implicitly created in the backend.
-:::
+- Process application versions, which are managed in the [Web Modeler user interface](/components/hub/workspace/manage-projects/project-versioning.md), operate on the same set of file versions the versions API operates on. A new process application version results in new versions for each individual file the process application contains.
+- An element template version, which is defined in the [template metadata](/components/modeler/element-templates/template-metadata.md#identification-id-and-version), can't be created if the version already exists in Web Modeler.
+- Therefore, if a process application version is created, but the element template version hasn't been updated, you receive a `409`.
+  :::

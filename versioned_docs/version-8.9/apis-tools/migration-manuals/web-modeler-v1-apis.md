@@ -12,7 +12,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 Before 29 August 2026, process applications were not explicitly exposed in Web Modeler API v1. There were no process application endpoints.
 
-However, process applications were implicitly accessible. For example:
+However, process applications were implicitly accessible as folders. For example:
 
 - You could pass a process application ID to `DELETE /api/v1/folders/{folderId}` to delete the process application.
 - The response for `GET /api/v1/folders/{folderId}` returns a `parentId`, representing the folder's parent folder. If the parent is in a process application, rather than another folder, the process application ID is returned.
@@ -20,7 +20,7 @@ However, process applications were implicitly accessible. For example:
 In preparation for Camunda 8.10, file organization in Web Modeler has changed. Projects can now only contain process applications and IDP applications. Files and folders are always stored inside process applications. To support this new file hierarchy, two major changes have been introduced to Web Modeler API v1:
 
 - Process applications are no longer implicitly accessible via v1 folders, files, and project APIs.
-- New process application APIs are introduced to make access explicit.
+- New process application APIs and changes to existing APIs are introduced to make access explicit.
 
 :::note
 These changes currently only apply to the Web Modeler API running in Camunda 8 SaaS. They apply to Self-Managed starting in Camunda 8.10.
@@ -145,7 +145,7 @@ Affected endpoints:
 
 ### File paths exclude process applications
 
-In files API responses, the `simplePath` and `canonicalPath` omit the container process application. Previously, the process application was included if it was on the path.
+In files API endpoints, the `simplePath` and `canonicalPath` omit the container process application. Previously, the process application was included if it was on the path.
 
 Example:
 
@@ -185,7 +185,7 @@ Affected endpoints:
 
 - `GET /api/v1/files/{fileId}`
 - `PATCH /api/v1/files/{fileId}`
-- `POST /api/v1/files/search`
+- `POST /api/v1/files/search` (the process application is excluded from these paths in both the response and the request `filter`)
 - `POST /api/v1/files`
 
 ## Projects API
@@ -475,7 +475,9 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
 With `POST /api/v1/versions`, you can now publish a new version for process application files. Previously, this endpoint returned a `400 BAD REQUEST` because files were intended to be versioned as part of the process application. See [process application versioning model](/docs/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) for a deeper explanation of this change.
 
 :::note
-When versioning a connector template, you may now receive a `409 CONFLICT` citing a version number you never published.
+When versioning a connector template, you may receive a `409 CONFLICT` citing a version number you never explicitly published because:
 
-When you create a new process application version, new element template versions are recorded for the process application's connector template files. Therefore, when you `POST` a new version for the file the version may collide with an existing version implicitly created in the backend.
-:::
+- Process application versions, which are managed in the [Web Modeler user interface](/components/hub/workspace/manage-projects/project-versioning.md), operate on the same set of file versions the versions API operates on. A new process application version results in new versions for each individual file the process application contains.
+- An element template version, which is defined in the [template metadata](/components/modeler/element-templates/template-metadata.md#identification-id-and-version), can't be created if the version already exists in Web Modeler.
+- Therefore, if a process application version is created, but the element template version hasn't been updated, you receive a `409`.
+  :::
