@@ -8,6 +8,7 @@ import AmazonSnsImg from "../img/connector-amazon-sns.png";
 import AmazonSqsImg from "../img/connector-amazon-sqs.png";
 import AmazonLambdaImg from "../img/connector-aws-lambda.png";
 import AmazonS3Img from "../img/connector-amazon-s3.png";
+import AppIntegrationsImg from "../img/connector-app-integrations.png";
 import AsanaImg from "../img/connector-asana.png";
 import AutomationImg from "../img/connector-automation.png";
 import AzureaiImg from "../img/connector-azure-openai.png";
@@ -162,6 +163,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../amazon-textract/",
       image: AmazonBedrockImg,
+    },
+    {
+      name: "App Integrations",
+      description:
+        "Send messages to Microsoft Teams and Slack, and create channels, from your processes.",
+      type: "Outbound",
+      link: "../app-integrations/",
+      image: AppIntegrationsImg,
     },
     {
       name: "Asana",
