@@ -87,7 +87,7 @@ To compare two entries:
 1. Select the first entry you want to compare.
 1. Select the second entry you want to compare.
 
-The comparison shows the older entry against the newer one, ordered by time regardless of the order you selected them. The selected pair is written to the URL as `/<file-type>/<id>/versions/<entryId>...<entryId>`, so you can share or bookmark a specific comparison.
+The comparison shows the older entry against the newer one, ordered by time regardless of the order you selected them. The selected pair is written to the URL as `/<file-type>/<id>/versions/<olderEntryId>...<newerEntryId>`, so you can share or bookmark a specific comparison.
 
 ### Compare versions in visual view
 

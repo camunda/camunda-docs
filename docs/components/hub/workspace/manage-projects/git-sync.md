@@ -310,7 +310,7 @@ Organization owners/administrators, workspace administrators, and editors can sy
 
 In the case of a merge conflict, select between your local Camunda Hub changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, Camunda Hub will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
+Once the pull is complete and any merge conflicts are resolved, Camunda Hub will push its changes. The newly created snapshot is now accessible via the **View snapshot** button in the success notification.
 
 ## Manage existing configurations
 
