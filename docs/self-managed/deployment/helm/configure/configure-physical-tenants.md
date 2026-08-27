@@ -6,7 +6,7 @@ description: "Learn how to configure Physical Tenants in Camunda 8 using the Hel
 ---
 
 :::note
-This page describes **Physical Tenants**, the strong isolation model for separate teams or organizations within a single orchestration cluster. For the lightweight, tenant-ID based model, see [Logical Tenants](./configure-logical-tenants.md).
+This page describes Physical Tenants, the strong isolation model for separate teams or organizations within a single orchestration cluster. For the lightweight, tenant-ID based model, see [Logical Tenants](./configure-logical-tenants.md).
 :::
 
 The Helm chart does not expose a dedicated `physicalTenants.*` values schema. Configure Physical Tenants by passing the same `camunda.physical-tenants.<tenant-key>.*` properties documented in the [configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md), either as a raw `application.yaml` block, as a standalone extra configuration file, or as environment variables.
