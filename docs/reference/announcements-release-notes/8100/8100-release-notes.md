@@ -134,7 +134,7 @@ Element templates support the `steps` and `presets` keys to offer several predef
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-In Self-Managed, you can now hide the **Add user** button on the Web Modeler **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
+In Self-Managed, you can now hide the **Add user** button on the Web Modeler **Collaborators** page, preventing non-organization admins from adding collaborators via the UI. They can still add collaborators via the [modify collaborator API endpoint](https://hub.camunda.io/swagger-ui/index.html#/Collaborators/modifyCollaborator) if granted access.
 
 <p class="link-arrow">[Feature flag reference](/self-managed/components/hub/configuration/properties.md#hide-invite-member-button)</p>
 

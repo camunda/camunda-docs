@@ -210,8 +210,8 @@ RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeli
 
 # Redirects associated with Camunda Hub
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-members/manage-user-groups [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-members/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-users/manage-user-groups [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-users/ [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]

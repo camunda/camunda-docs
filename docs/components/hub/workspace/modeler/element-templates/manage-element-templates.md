@@ -87,7 +87,7 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 [Users with elevated access](/components/hub/workspace/modeler/collaboration/collaboration.md#elevated-access) can:
 
 - View additional details about the published version.
-- Open the resource's versions list (if they are in [super-user mode](/components/hub/workspace/modeler/collaboration/collaboration.md#super-user-mode) or are a [project admin or editor](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Open the resource's versions list (if they have [organization admin or owner access](/components/hub/workspace/modeler/collaboration/collaboration.md#organization-admin-and-owner-access) or are a [project admin or editor](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
 - Unpublish an element template directly from this view.
 
 ![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)
@@ -101,7 +101,9 @@ Organization members without special organization permissions can:
 
 ### Versioning element templates
 
-You can version your element templates [similar to diagrams](/components/hub/workspace/modeler/modeling/versions.md).
+Element templates use their own numbered versioning, distinct from the [file version history](/components/hub/workspace/modeler/modeling/versions.md) used by diagrams, forms, RPA scripts, README files, and test files. Each publish creates a new numbered version in the template's versions list.
+
+To restore an earlier template version, select it in the versions list and select **Restore**. Restoring publishes the earlier content as a new numbered version. It doesn't create an autosave first, since the version you're restoring from remains available in the versions list.
 
 If you publish a new version of an element template and an older version is already being used in diagrams, the user can either:
 
