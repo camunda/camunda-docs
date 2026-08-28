@@ -188,6 +188,9 @@ RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
+# IDP application renamed to IDP project (creation moved to the Projects page)
+RewriteRule ^docs/next/components/hub/workspace/modeler/idp/idp-applications/?$ /docs/next/components/hub/workspace/modeler/idp/idp-projects/ [R=301,L]
+
 # Console telemetry page removed; monitoring is the closest replacement
 RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
 
