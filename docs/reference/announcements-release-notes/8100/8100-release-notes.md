@@ -32,6 +32,12 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha5
+
+| Release date     | Changelog(s)                                                                                        | Blog |
+| :--------------- | :-------------------------------------------------------------------------------------------------- | :--- |
+| 8 September 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha5)</li></ul> | -    |
+
 ## 8.10.0-alpha4
 
 | Release date   | Changelog(s)                                                                                        | Blog |
