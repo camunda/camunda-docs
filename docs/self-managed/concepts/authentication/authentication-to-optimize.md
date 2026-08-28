@@ -34,13 +34,12 @@ If you deploy with the Camunda Helm chart, you don't need to set these directly.
 
 In 8.10, a standard session cookie replaces Optimize's self-signed JWT cookie, and session state moves from the cookie itself into a session store on the same Elasticsearch or OpenSearch cluster Optimize already uses.
 
-|                 | Optimize 8.9                                                                   | Optimize 8.10                                                                                           |
-| --------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| Session carrier | Self-signed JWT split across `X-Optimize-Authorization[_n]` cookies when large | Standard session cookie; no cookie splitting                                                            |
-| Session state   | Stateless; revocation checked against a terminated-session list                | Session document stored server-side, in a new Optimize index (Elasticsearch and OpenSearch)             |
-| Login           | Identity SDK / Auth0 login code inside Optimize                                | Spring `oauth2Login` against your configured OIDC provider                                              |
-| Logout          | Cookie cleared; session ID added to the terminated-session list                | `POST /logout` clears the server-side session and calls your IdP's end-session endpoint                 |
-| Load balancing  | Affinity-free                                                                  | Affinity-free; sessions live in the shared Elasticsearch or OpenSearch store, not in application memory |
+|                 | Optimize 8.9                                                                   | Optimize 8.10                                                                              |
+| --------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Session cookie  | Self-signed JWT split across `X-Optimize-Authorization[_n]` cookies when large | Standard session cookie                                                                    |
+| Session storage | The cookie itself                                                              | A new Optimize index on your Elasticsearch or OpenSearch cluster                           |
+| Logout          | Cookie cleared                                                                 | `POST /logout` clears the session and calls your IdP's end-session endpoint                |
+| Load balancing  | Affinity-free                                                                  | Affinity-free; sessions are shared through Elasticsearch or OpenSearch, not held in memory |
 
 The new session index is created automatically by the same schema manager that creates Optimize's other indices, using the same Elasticsearch or OpenSearch credentials. You don't need to provision it manually, run a migration, or grant additional privileges.
 
