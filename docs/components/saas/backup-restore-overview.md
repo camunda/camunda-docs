@@ -29,6 +29,8 @@ A backup captures a consistent cluster snapshot across Camunda components:
 - Optimize data
 - Exported Zeebe records stored in Elasticsearch/OpenSearch
 
+This includes process variables, such as the conversation state an [AI agent](/reference/glossary.md#ai-agent) maintains between activations.
+
 ## Restore model
 
 Restore operates within the same cluster, organization, and region only. The operation is in-place and overwrites current cluster data.

@@ -30,7 +30,7 @@ First, you need to select which part of the data you want to view. Optimize diff
 - Count: View how often each user task has been executed.
 - Duration: View how long each user task took to complete.
 
-6. Variable: View an aggregation of values for a specific numeric variable of the process definition.
+6. Variable: View an aggregation of values for a specific numeric variable of the process definition, for example, token usage recorded by an [AI agent](/reference/glossary.md#ai-agent) execution.
 
 It is possible to display both count and duration measures for a single view in the same report.
 
