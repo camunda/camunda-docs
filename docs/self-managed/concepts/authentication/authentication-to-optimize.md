@@ -9,7 +9,7 @@ description: "Learn how Optimize authenticates users and API requests in Self-Ma
 
 [Optimize](/self-managed/components/optimize/overview.md) authenticates against an external OIDC identity provider (IdP). Optimize doesn't offer Basic authentication as a login method.
 
-Starting with Camunda 8.10, Optimize authenticates through the Camunda Security Library (CSL): the same session-based OIDC login the [Orchestration Cluster](authentication-to-orchestration-cluster.md) uses.
+Starting with Camunda 8.10, Optimize uses the same session-based OIDC login as the [Orchestration Cluster](authentication-to-orchestration-cluster.md), configured with the same `camunda.security.*` settings.
 
 :::tip Recommendation
 If you've already configured [OIDC for the Orchestration Cluster](authentication-to-orchestration-cluster.md#oidc), use the same identity provider for Optimize. This gives your users a single login experience across both components.
@@ -17,7 +17,7 @@ If you've already configured [OIDC for the Orchestration Cluster](authentication
 
 ## Configure OIDC for Optimize
 
-Set the following properties, shared with the rest of the Camunda Security Library:
+Set the following properties, shared with the other Camunda components:
 
 - `camunda.security.authentication.oidc.issuer-uri`
 - `camunda.security.authentication.oidc.client-id`
@@ -67,7 +67,7 @@ The internal API is not a supported public contract. Its shape can change betwee
 
 ### OIDC id_token validation
 
-Optimize always validates the login `id_token`'s audience against your configuration, and validates its issuer when `camunda.security.authentication.oidc.issuer-uri` is configured. If you migrated from a legacy setup that configured OIDC endpoints individually rather than through `issuer-uri` (for example, a Keycloak back-channel setup), no issuer validator is registered, and tokens are accepted on signature, audience, and expiry alone. Confirm that:
+Optimize always validates the login `id_token`'s audience against your configuration. It validates the issuer as well when you set `camunda.security.authentication.oidc.issuer-uri`. If you migrated from a legacy setup that configured the OIDC endpoints individually instead of through `issuer-uri` (for example, a Keycloak back-channel setup), set `issuer-uri` as well to keep issuer validation in place. Confirm that:
 
 - If you set `camunda.security.authentication.oidc.issuer-uri`, it matches the issuer your IdP puts in the `id_token`.
 - `camunda.security.authentication.oidc.audiences` contains every value your IdP puts in the audience claim for the Optimize application, including whatever the legacy `CAMUNDA_OPTIMIZE_IDENTITY_AUDIENCE` and `CAMUNDA_OPTIMIZE_API_AUDIENCE` variables previously covered. The same list validates both the login `id_token` and any bearer token sent to Optimize, so it must also include the audience of any other application that calls Optimize on a user's behalf. For example, if Camunda Hub is enabled, its client API audience must be included, or the requests it forwards to Optimize on the signed-in user's behalf are rejected. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
@@ -82,7 +82,7 @@ See [Upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/componen
 
 ## Fall back to the 8.9 security stack
 
-If CSL causes a regression in your deployment, you can temporarily revert Optimize to the 8.9 security stack:
+If the 8.10 authentication changes cause a regression in your deployment, you can temporarily revert Optimize to its 8.9 behavior:
 
 ```yaml
 optimize:
@@ -91,9 +91,9 @@ optimize:
       enabled: false
 ```
 
-Treat this as a temporary escape hatch, not a supported long-term mode. `optimize.security.csl.enabled=false`, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11. If you rely on this fallback in 8.10, migrate to CSL before upgrading to 8.11.
+Treat this as a temporary escape hatch, not a supported long-term mode. `optimize.security.csl.enabled=false`, the 8.9 behavior it restores, and the legacy configuration keys are all removed in Camunda 8.11. If you rely on this fallback in 8.10, migrate to the `camunda.security.*` settings before upgrading to 8.11.
 
-Falling back also reverts the security posture CSL introduced:
+Falling back also reverts the security improvements 8.10 introduced:
 
 - CSRF protection on cookie-authenticated requests is removed.
 - The `id_token` issuer and audience are no longer validated.

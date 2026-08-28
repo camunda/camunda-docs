@@ -11,7 +11,7 @@ Camunda Hub authenticates users with OpenID Connect (OIDC), using the same confi
 
 ## Authentication and user management
 
-In 8.10, Camunda Hub and the Orchestration Cluster authenticate through the same shared implementation, the Camunda Security Library (CSL), configured under `camunda.security.*`. Responsibilities are split as follows:
+In 8.10, Camunda Hub authenticates users with the same `camunda.security.*` settings as the Orchestration Cluster. Responsibilities are split as follows:
 
 | Concern                                        | Handled by                                                                      |
 | :--------------------------------------------- | :------------------------------------------------------------------------------ |

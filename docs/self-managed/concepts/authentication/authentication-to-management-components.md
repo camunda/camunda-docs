@@ -8,9 +8,9 @@ description: "Learn about authentication methods for management and modeling com
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Authentication to the Camunda 8 management and modeling components uses the same mechanism as the [Orchestration Cluster](authentication-to-orchestration-cluster.md), the Camunda Security Library (CSL), configured under `camunda.security.*`. This includes components such as [Camunda Hub](/self-managed/components/hub/index.md) and [Optimize](/self-managed/components/optimize/overview.md).
+The Camunda 8 management and modeling components authenticate with the same `camunda.security.*` settings as the [Orchestration Cluster](authentication-to-orchestration-cluster.md). This includes components such as [Camunda Hub](/self-managed/components/hub/index.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
-In 8.10, CSL provides authentication only for these components. User, group, role, and permission management for Camunda Hub and Optimize stays in [Management Identity](/self-managed/components/management-identity/overview.md). The Orchestration Cluster is not affected, because it manages its own users, groups, roles, and authorizations.
+In 8.10, these shared settings cover authentication only. User, group, role, and permission management for Camunda Hub and Optimize stays in [Management Identity](/self-managed/components/management-identity/overview.md). The Orchestration Cluster is not affected, because it manages its own users, groups, roles, and authorizations.
 
 ## Authentication and user management
 
