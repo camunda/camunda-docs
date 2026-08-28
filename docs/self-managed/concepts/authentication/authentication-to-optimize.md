@@ -41,7 +41,7 @@ In 8.10, a standard session cookie replaces Optimize's self-signed JWT cookie, a
 | Logout          | Cookie cleared                                                                 | `POST /logout` clears the session and calls your IdP's end-session endpoint                |
 | Load balancing  | Affinity-free                                                                  | Affinity-free; sessions are shared through Elasticsearch or OpenSearch, not held in memory |
 
-The new session index is created automatically by the same schema manager that creates Optimize's other indices, using the same Elasticsearch or OpenSearch credentials. You don't need to provision it manually, run a migration, or grant additional privileges.
+Optimize creates the new session index automatically. You don't need to provision it manually, run a migration, or grant additional privileges.
 
 Because the session cookie format changes, an active 8.9 session isn't valid after the upgrade. Your users log in again the first time they open Optimize on 8.10.
 
