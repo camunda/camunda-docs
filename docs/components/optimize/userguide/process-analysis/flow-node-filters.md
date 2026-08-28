@@ -12,7 +12,7 @@ Retrieve only those process instances that executed certain flow nodes within yo
 
 ## Flow node selection
 
-In flow node and user tasks reports, all flow nodes are included in the result by default. This could result in many table rows or chart entries which makes the visualization hard to read. This filter allows you to specify which flow nodes are included and deselect the ones that are not relevant to the report. For example, in a process that includes an [AI agent](/reference/glossary.md#ai-agent) step, you can use this filter to isolate the tool-call flow nodes it triggers.
+In flow node and user tasks reports, all flow nodes are included in the result by default. This could result in many table rows or chart entries which makes the visualization hard to read. This filter allows you to specify which flow nodes are included and deselect the ones that are not relevant to the report.
 
 ![Specifying which nodes are included in the report](./img/flowNodeSelection.png)
 
