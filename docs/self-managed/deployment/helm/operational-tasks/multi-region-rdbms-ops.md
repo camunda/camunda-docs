@@ -8,6 +8,7 @@ description: "Handle a region loss, bring a region back, and activate a declared
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import RegionLoss from './img/multi-region-rdbms-region-loss.svg';
+import MultiRegionRdbmsCopy from '../\_partials/\_multi-region-rdbms-copy.md'
 
 This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup: losing a region, bringing it back, and activating a zone that was declared but never deployed.
 
@@ -42,13 +43,19 @@ With three or more zones, none of that applies. Every partition keeps a majority
 
 ## Prerequisites
 
+<MultiRegionRdbmsCopy />
+
 Source the environment before running any procedure. The scripts derive everything from the Terraform state, and refuse to run against an inconsistent topology:
 
 ```bash
-cd aws/kubernetes/eks-multi-region-rdbms/procedure
+cd procedure
 . ./export-terraform-outputs.sh
 . ./export_environment_prerequisites.sh
 ```
+
+The dot is required: these scripts export variables into your current shell, not into a subshell. For what each variable means, see [prepare the environment](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md#2-prepare-the-environment) in the deployment guide.
+
+You also need the credentials and the CLI tools the deployment used: `kubectl` contexts for every active region, `helm`, `jq`, and your cloud provider's CLI. The [deployment guide](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md#requirements) lists them.
 
 Verify the cluster is healthy before you start, so you can tell what the procedure changed:
 
