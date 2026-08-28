@@ -182,7 +182,6 @@ Use the following commands to manage values:
 | `./c8run secrets set <name> --stdin`   | Read a value from standard input for automation. |
 | `./c8run secrets list`                 | List secret names without showing their values.  |
 | `./c8run secrets path`                 | Show the active local secrets directory.         |
-| `./c8run secrets doctor`               | Check the local store without reading values.    |
 | `./c8run secrets delete <name>`        | Delete one secret.                               |
 | `./c8run secrets delete --all`         | Delete all local secrets after confirmation.     |
 | `./c8run secrets import [dotenv-file]` | Import `KEY=value` entries from a dotenv file.   |
@@ -213,7 +212,7 @@ C8RUN_SECRETS_DIR=./temporary-secrets ./c8run start
 
 To remove all secrets in the configured directory, run `./c8run secrets delete --all`. Interactive terminals ask for confirmation. Automation must add `--yes`.
 
-The default directory is shared across projects and c8run versions for the current operating-system user. Set a stable absolute `C8RUN_SECRETS_DIR` per project when the same secret name needs different values. c8run warns when the platform-default directory and the configured directory both contain entries. Run `./c8run secrets doctor` to check its path, permissions, filenames, and secret count without reading values.
+The default directory is shared across projects and c8run versions for the current operating-system user. Set a stable absolute `C8RUN_SECRETS_DIR` per project when the same secret name needs different values. c8run warns when the platform-default directory and the configured directory both contain entries. Run `./c8run secrets path` to confirm the active local directory.
 
 Overwritten and deleted values can remain in the running Camunda secret cache until its time to live expires. Restart c8run to apply those changes immediately.
 
