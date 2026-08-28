@@ -17,20 +17,23 @@ In this context, a [snapshot](/reference/glossary.md#snapshot-project) is a Camu
 To create a project snapshot:
 
 1. In your workspace, open a project.
-2. On the right side of the project view, under **Snapshots**, click **Create snapshot**.
+2. On the right side of the project view, under **Project snapshots**, click **Create snapshot**.
 3. Enter a **Snapshot tag** in the snapshot creation modal.
 4. Click **Create**.
 
 ## View all snapshots
 
-To view all snapshots, select **Snapshots** in the breadcrumb path at the top of a project or file within it.
+To view all snapshots:
+
+1. In your workspace, open a project.
+2. On the right side of the project view, under **Project snapshots**, click **Show full list**. This opens the **Snapshots** page.
 
 The page lists every file in the project with its status, file version, last changed date, and creator, so you can review changes at a glance without opening the comparison view.
 
 The side panel has two tabs:
 
-- **Snapshots**: the timeline of all project snapshots, including the current **Draft** state.
-- **Compare Snapshots**: the comparison of two snapshots you select.
+- **Snapshots**: View the timeline of all project snapshots, including the current **Draft** state.
+- **Compare Snapshots**: Compare two snapshots.
 
 See [manage file versions](/components/hub/workspace/modeler/modeling/versions.md) to learn about more features like comparing and restoring individual file versions.
 
@@ -39,19 +42,19 @@ See [manage file versions](/components/hub/workspace/modeler/modeling/versions.m
 To manage a project snapshot:
 
 1. In your workspace, open a project.
-2. On the right side of the project view, under **Snapshots**, open the vertical ellipsis menu.
+2. On the right side of the project view, under **Project snapshots**, next to a snapshot, open the vertical ellipsis menu.
 
 From here, you can perform the following actions on a project snapshot:
 
-| Action                | Description                                                                                     |
-| :-------------------- | :---------------------------------------------------------------------------------------------- |
-| **View details**      | Open the snapshot details page to review the contents of all files in the snapshot.             |
-| **Restore as latest** | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project. |
-| **Edit details**      | Edit the snapshot tag and description.                                                          |
-| **Download**          | Download the project as a zip file.                                                             |
-| **Copy**              | Create a new project with the files from the snapshot.                                          |
-| **Edit review**       | Update the [review](#request-a-review) status of the snapshot.                                  |
-| **Delete**            | Delete the project snapshot.                                                                    |
+| Action                | Description                                                                                                        |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| **View details**      | Open the snapshot details page to review the contents of all files in the snapshot.                                |
+| **Restore as latest** | Revert changes, make further edits, or [sync](git-sync.md), download, or validate your project.                    |
+| **Edit details**      | Edit the snapshot tag and description.                                                                             |
+| **Download**          | Download the project as a zip file.                                                                                |
+| **Edit review**       | Update the [review](#request-a-review) status of the snapshot. (Only available if the snapshot has been reviewed.) |
+| **Copy to...**        | Create a new project with the files from the snapshot.                                                             |
+| **Delete**            | Delete the project snapshot.                                                                                       |
 
 On the snapshot details page (opened via **View details**), the actions menu also includes **Deploy**, which deploys the project snapshot, especially after it has been [reviewed](#request-a-review).
 
@@ -59,8 +62,9 @@ On the snapshot details page (opened via **View details**), the actions menu als
 
 You can compare any two project snapshots, including snapshots that are not next to each other in the timeline.
 
-1. In the **Compare Snapshots** tab, select the checkbox of the first snapshot you want to compare.
-1. Select the checkbox of the second snapshot you want to compare.
+1. In your workspace, open a project.
+2. On the right side of the project view, under **Project snapshots**, click **Show full list**.
+3. On the right side of the **Snapshots** view, in the **Compare Snapshots** tab, select two snapshots you want to compare.
 
 The comparison shows the older snapshot against the newer one, ordered by time regardless of the order you selected them. The selected pair is written to the URL, so you can share or bookmark a specific comparison.
 
@@ -79,8 +83,8 @@ A file gets only one status badge, in this order of priority: **New**, then **Re
 For each file in the list, you can:
 
 - Expand the row to view an inline diff of the file.
-- Select **Open file editor** to open the file.
-- Select **Open file history** to open the [version history](/components/hub/workspace/modeler/modeling/versions.md) of the file.
+- Select the **Open file editor** icon to open the file.
+- Select **Open version history** to open the [version history](/components/hub/workspace/modeler/modeling/versions.md) of the file.
 
 ## Restore a snapshot
 
@@ -93,8 +97,9 @@ Restoring a snapshot reverts the entire project to its state at the time the sna
 
 To restore a snapshot:
 
-1. In the **Snapshots** tab, open the actions menu of the snapshot you want to restore.
-1. Select **Restore as latest**.
+1. In your workspace, open a project.
+2. On the right side of the project view, under **Project snapshots**, next to a snapshot, open the vertical ellipsis menu.
+3. Select **Restore as latest**.
 
 The project state changes to match the snapshot, and the snapshots timeline is refreshed.
 
