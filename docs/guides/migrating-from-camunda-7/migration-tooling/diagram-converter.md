@@ -203,11 +203,13 @@ The CLI supports two modes:
 
 ### Local mode
 
+The local CLI accepts a file or directory. When you provide a directory, it recursively scans the directory and its subdirectories for `.bpmn`, `.bpmn20.xml`, `.dmn`, `.dmn11.xml`, and `.form` files, then processes every supported file it finds.
+
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpmn --json --xlsx
 ```
 
-To process all diagrams and forms in a directory (including subdirectories):
+To process all BPMN, DMN, and form files in a directory and its subdirectories:
 
 <Tabs groupId="os" defaultValue="maclinux" values={[
 { label: 'Mac OS + Linux', value: 'maclinux' },
