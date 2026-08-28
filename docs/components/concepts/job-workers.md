@@ -5,7 +5,6 @@ description: "Learn more about job workers, a service that can perform a particu
 ---
 
 A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time that task needs to be performed, it is represented by a [job](/reference/glossary.md#job).
-
 For example, [AI agent](/reference/glossary.md#ai-agent) tool calls use this mechanism. Each activity inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) acts as a tool and is executed as a job, like any other task in the process.
 
 A job has the following properties:
@@ -443,6 +442,8 @@ sequenceDiagram
     Note over Z: Commits activation 2's update,<br/>discards activation 1's pending update
 ```
 
+See [connect an external agent](../agentic-orchestration/connect-external-agent.md#step-2-activate-the-job-with-a-lease) for a concrete walkthrough of activating a job with a lease and reporting history against it.
+
 ### How job leasing works
 
 To use leasing, request a lease by setting `withLease` to `true` when you activate jobs. Zeebe then returns a `leaseToken` on each activated job. This token identifies that specific activation, not the job itself.
@@ -470,10 +471,10 @@ There is currently no operation to remove a lease from a job. To recover, you ha
 - Use process instance modification to terminate and reactivate the element, which produces a fresh, unleased job.
   :::
 
-This also affects rollbacks. If you roll back a leasing worker deployment to a non-leasing version, any jobs leased in the interim stay permanently unavailable to the rolled-back version.
+This also affects rollbacks. If you roll back a leasing worker deployment to a non-leasing version, any jobs leased in the interim stay permanently unavailable to the rolled-back version. Before rolling back, drain in-flight leased jobs of that type first, so the rolled-back version doesn't start out starved of jobs it can never activate.
 
 :::tip
-Run a homogeneous fleet per job type: either all workers for a type request a lease, or none do. Mixed fleets work, but treat them as a transitional state, such as during a rollout. Keep an eye on the `skipped` jobs metric mentioned above to ensure the fleet is homonogeous.
+Run a homogeneous fleet per job type: either all workers for a type request a lease, or none do. Mixed fleets work, but treat them as a transitional state, such as during a rollout. Keep an eye on the `skipped` jobs metric mentioned above to ensure the fleet is homogeneous.
 :::
 
 ### Example
