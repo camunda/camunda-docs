@@ -144,11 +144,15 @@ Next, you'll learn how to use those results.
 
 ### Download JSON analysis results
 
-The Diagram Converter can write analysis results as a flat JSON array with one object per finding. Use this report as input to AI-assisted migration tooling or other automation.
+Download the analysis results as JSON when you want to use them with AI-assisted migration tooling or other automation.
 
 - In the web interface, click **Download JSON**.
 - In the CLI, pass `--json` to create `analysis-results.json` in the target directory. If that file already exists, the converter creates a numbered variant instead of overwriting it.
-- For web API clients, request `application/vnd.camunda.analysis+json` in the `Accept` header when calling the `/check` endpoint.
+
+<details>
+<summary>View JSON report and API details</summary>
+
+The JSON report is a flat array with one object per finding. For web API clients, request `application/vnd.camunda.analysis+json` in the `Accept` header when calling the `/check` endpoint.
 
 Each finding includes the following fields:
 
@@ -164,6 +168,8 @@ Each finding includes the following fields:
 | `link`        | Link to conversion guidance, when available |
 
 The CLI and web interface use the same flat JSON format. Use XLSX for human review and CSV when importing findings into spreadsheet tools.
+
+</details>
 
 ### Analyze results in Microsoft Excel
 
