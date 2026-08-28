@@ -33,6 +33,7 @@ If you deploy Camunda 8 Self-Managed with Helm, use the [Helm chart authenticati
   - Audience
 - A [claim name and value](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#oidc-configuration) to use for initial access.
 - Your OIDC provider must issue access tokens that contain an `aud` (audience) claim matching the configured audience, as Camunda validates this claim for auth flows. Providers that are not configured to emit, or do not emit, the `aud` claim in their access tokens are not supported. Configure your identity provider to emit this claim if supported. See [known limitations](#oidc-provider-known-limitations) for details.
+- A relational database for Identity to connect to. Connecting to an OIDC provider requires a database, regardless of feature flags. See [database configuration](/self-managed/components/management-identity/miscellaneous/configuration-variables.md#database-configuration) for connection details and supported databases.
 
 :::note
 The steps below are a general approach for the Camunda components; it is important you reference the [component-specific

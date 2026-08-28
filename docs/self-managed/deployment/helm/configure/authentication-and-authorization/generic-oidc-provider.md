@@ -23,6 +23,7 @@ Before you begin, ensure you have:
 - Access to your provider's discovery document to obtain endpoint URLs.
 - A Kubernetes cluster with the Helm CLI v4 installed.
 - kubectl configured to access your cluster.
+- A database is required for Management Identity when connecting to an OIDC provider, regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so no separate database is needed; to use an external database instead, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 :::note
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
