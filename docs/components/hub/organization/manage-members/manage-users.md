@@ -4,7 +4,7 @@ title: Manage users in your organization
 description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
 
-When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the Organization Owner of the Camunda organization. This organization owns Hub workspaces, projects, and clusters. The Organization Owner and any Organization Admins they assign can control access to these resources by managing their organization.
+When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the Organization Owner of the Camunda organization. This organization owns Camunda Hub workspaces, projects, and clusters. The Organization Owner and any Organization Admins they assign can control access to these resources by managing their organization.
 
 ## Users
 
@@ -30,9 +30,9 @@ Every user holds one organization-level role. Organization Owner, Organization A
 - **Member**: Full access to create and collaborate on workspaces and projects, plus read-only visibility into the organization and its clusters. _Formerly the **Modeler** role — existing Modeler holders keep all their modeling permissions and additionally gain organization and cluster read access._
 - **DevOps**: A specialized role for infrastructure management, not people management. Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings. _Formerly the **Operations engineer** role, reframed with the same permissions._
 
-Catalog access has two levels: **Read** (browse and use catalog items) for Member and DevOps, and **Manage** (also see usage statistics and adoption data) for Analyst, Organization Admin, and Organization Owner.
+Catalog access has two levels: **Read-only** (browse and use catalog items) for Member and DevOps, and **Manage** (also see usage statistics and adoption data) for Analyst, Organization Admin, and Organization Owner.
 
-Starting with version 8.8, user access to clusters' Operate, Tasklist, and Zeebe applications is managed independently of the organization role. To control what a user can access there, define their authorizations in the cluster's Admin. Learn more [here](/components/admin/authorization.md).
+Starting with version 8.8, user access to clusters' Operate, Tasklist, and Zeebe applications is managed independently of the organization role. To control what a user can access there, define their authorizations in the cluster's [Admin](/components/admin/authorization.md).
 
 If cluster authorizations are disabled, the user will have full access to the cluster and its components.
 

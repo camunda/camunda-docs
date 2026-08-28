@@ -28,4 +28,4 @@ The missing/orphaned projects and all contained files remain in the Web Modeler 
 
 ## Resolution
 
-To restore project access for the affected users, users with the **Hub Admin** role already have the [access](../../../../components/hub/workspace/modeler/collaboration/collaboration.md#organization-admin-and-owner-access) needed to reassign collaborators to orphaned projects.
+To restore workspace access for the affected users, users with the **Hub Admin** role already have the [access](../../../../components/hub/workspace/modeler/collaboration/collaboration.md#organization-admin-and-owner-access) needed to reassign members to projects that have no members.

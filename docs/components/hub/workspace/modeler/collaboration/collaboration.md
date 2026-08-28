@@ -28,13 +28,13 @@ There are four roles with different levels of access rights that can be assigned
 - **Commenter**: The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
-Additionally, organization admins and owners always have access to every project in the organization — see below.
+Additionally, [organization admins and owners](#organization-admin-and-owner-access) always have access to every project in the organization.
 
 #### Organization admin and owner access
 
-Organization admins and owners always have **Project Admin** access to every project in the organization, including projects they aren't explicitly a collaborator on. This access is on by default; there is no toggle to enable or disable it.
+Organization admins and owners always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
 
-The main purpose of this access is to assign collaborators to orphaned projects (which have no collaborators). Ordinarily, these projects would not be accessible or visible to any other users.
+The main purpose of this access is to assign members to workspaces that have no members. Ordinarily, these workspaces would not be accessible or visible to any other users.
 
 ##### Required roles/permissions for elevated access {#elevated-access}
 
