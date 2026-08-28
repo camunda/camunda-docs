@@ -26,7 +26,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 ## Summary of important changes
 
-Important changes in Camunda 8.10 are summarized as follows:
+Important changes in Camunda 8.10 are summarized in the following sections.
 
 :::info learn more and upgrade
 
