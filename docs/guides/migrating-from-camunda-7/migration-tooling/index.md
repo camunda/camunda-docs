@@ -75,13 +75,13 @@ The skill asks for your migration scope:
 
 ### Review forms with the migration agent
 
-The migration agent uses the Diagram Converter for static Camunda 7 form files and flags generated Task Forms for manual migration.
+The migration agent uses the Diagram Converter for static Camunda 7 form files and handles generated Task Forms during the agentic migration flow.
 
 - Every Camunda 7 or generated form must become a standard Camunda 8 form linked from the converted BPMN.
-- Generated Task Forms and unsupported validation rules remain explicit review items. The agent does not invent a conversion for unsupported behavior.
+- The agent can create or adapt a standard Camunda 8 form for generated Task Forms. Unsupported validation rules and ambiguous behavior remain explicit review items.
 - Use [Build forms with Modeler](/components/modeler/forms/utilizing-forms.md) to create and link a standard Camunda 8 form.
 
-For advanced form migrations, the agent inventories static and generated forms, carries converted form findings into the migration report, and guides you through creating a standard Camunda 8 form when automatic conversion is unsafe.
+For advanced form migrations, the agent inventories static and generated forms, carries converted form findings into the migration report, and creates or adapts a standard Camunda 8 form when automatic conversion is unsafe.
 
 The agent can consume the flat `analysis-results.json` report produced by the CLI `--json` option or the web interface's **Download JSON** action. It groups findings by category, checks the target platform version, and cross-references model findings with migrated code before suggesting fixes. See [Download JSON analysis results](./diagram-converter.md#download-json-analysis-results).
 
