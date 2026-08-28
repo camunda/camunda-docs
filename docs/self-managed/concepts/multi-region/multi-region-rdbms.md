@@ -10,6 +10,10 @@ import TopologyImg from './img/multi-region-rdbms-topology.svg';
 import QuorumImg from './img/multi-region-rdbms-quorum.svg';
 import ZoneActivationImg from './img/multi-region-rdbms-zone-activation.svg';
 
+<!-- Diagrams: edit the .excalidraw source, then export SVG and strip the embedded font block,
+     replace font-family with a monospace stack, and remove the root width/height so the SVG
+     scales to the content column. A vanilla excalidraw.app export does none of these. -->
+
 <PageDescription />
 
 Multi-Region RDBMS spreads a single Orchestration Cluster across three or more regions and backs it with one relational secondary storage whose replication is the database's responsibility. Because every partition keeps a majority of its replicas when one region disappears, the engine keeps processing through a region loss instead of stopping for an operator.
@@ -174,14 +178,9 @@ Recovery is the reverse and has no restore step: redeploy the region, and its br
 
 ### Removing a lost zone
 
-Removing a lost zone from the partition distribution is **optional** with three or more zones, and usually not worth it for a zone you expect back. It is only required when the surviving zones no longer hold a majority.
+With two zones, a zone loss leaves no majority, and processing only resumes once the lost zone is removed from the partition distribution. With three or more, the majority holds and removing the zone is optional. It is usually not worth it for a zone you expect back, because brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
 
-| Zones | After losing one                                            | Removing the zone                                                               |
-| :---- | :---------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| 2     | One replica of two, no majority, processing stops           | **Required**. Removing the zone restores a quorum the survivor can reach alone. |
-| 3+    | Two replicas of three, majority holds, processing continues | **Optional**, and cheaper to skip.                                              |
-
-The reason to leave a zone in place is failback cost. Brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
+The [operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md#4-decide-whether-to-remove-the-zone) has the decision table and the command.
 
 ## Limitations
 
