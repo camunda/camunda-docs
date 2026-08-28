@@ -592,9 +592,9 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 - `Operations Engineer` → `DevOps`, with no permission change.
 - Catalog access is now split into **Read** (Member, DevOps) and **Manage** (Analyst, Organization Admin, Organization Owner, who additionally see usage statistics and adoption data).
 
-`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-members/manage-users.md#roles-and-permissions) for their status.
+`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions) for their status.
 
-<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-members/manage-users.md#roles-and-permissions)</p>
+<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions)</p>
 
 </div>
 </div>
