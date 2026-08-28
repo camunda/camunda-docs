@@ -28,7 +28,7 @@ Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [M
 
 ## Folders API
 
-You can no longer access process applications as folders in any folders API context.
+You can no longer access process applications as folders in any folders API context. Instead, process applications are now explicitly represented.
 
 ### Folder IDs reference folders
 
@@ -113,7 +113,7 @@ Affected endpoints:
 
 ## Files API
 
-You can no longer access process applications as folders in any files API context.
+You can no longer access process applications as folders in any files API context. Instead, process applications are now explicitly represented.
 
 ### Folder ID must reference a folder
 
@@ -236,7 +236,7 @@ POST /api/v1/files/search
 
 ## Projects API
 
-You can no longer access process applications as folders in any projects API context.
+You can no longer access process applications as folders in any projects API context. Instead, process applications are now explicitly represented.
 
 ### Process applications are never returned as parent folders
 
