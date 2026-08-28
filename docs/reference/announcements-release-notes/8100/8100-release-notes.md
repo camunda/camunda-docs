@@ -38,6 +38,187 @@ import PageDescription from '@site/src/components/PageDescription';
 | :--------------- | :-------------------------------------------------------------------------------------------------- | :--- |
 | 8 September 2026 | <ul><li>[ Camunda 8 core ](https://github.com/camunda/camunda/releases/tag/8.10.0-alpha5)</li></ul> | -    |
 
+### Agentic orchestration
+
+#### Agent Tool Config Autofix
+
+<!-- https://github.com/camunda/product-hub/issues/3574 -->
+
+#### Agent Tool Config Linting
+
+<!-- https://github.com/camunda/product-hub/issues/3719 -->
+
+#### Real-Time Agent Visibility
+
+<!-- https://github.com/camunda/product-hub/issues/3462 -->
+
+Monitor AI agent behavior directly in Operate. See each agent's execution state (thinking, calling a tool, idle) highlighted on the process diagram, along with its current tool calls, usage metrics (tokens, tool calls, and model calls against the configured limit), model, and system prompt. Trace the full reasoning chain behind AI agent decisions in the conversation history - user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements - so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps. Agents built with external frameworks such as LangGraph or CrewAI get the same visibility through the new Agent Instance API.
+
+### Connectors
+
+#### Improve Storage Connector Flexibility
+
+<!-- https://github.com/camunda/product-hub/issues/3224 -->
+
+Improved storage connectors (S3, Azure Blob, GCS) to support direct object creation from variables and better content extraction for document references. Users can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store, and documents with incorrect content-types can be read using conversion options (e.g. "read as text", "read as JSON").
+
+#### Connector Observability Enhancements
+
+<!-- https://github.com/camunda/product-hub/issues/3019 -->
+
+#### Update AWS Connectors to AWS SDK for Java v2
+
+<!-- https://github.com/camunda/product-hub/issues/3581 -->
+
+Updated remaining AWS connectors to AWS SDK for Java v2 and aligned testing infrastructure accordingly. This keeps our AWS connector implementations on supported client libraries and reduces maintenance risk.
+
+### Helm chart deployment
+
+#### Self-Managed: Helm Migration & Validation Tool
+
+<!-- https://github.com/camunda/product-hub/issues/3563 -->
+
+To make it easier to move from Camunda 8.9 to 8.10 on Kubernetes with Helm, we are introducing a Helm Migration & Validation Tool.
+
+The tool:
+
+Reads your existing 8.9 Helm values (for example, values.yaml).
+
+Generates a proposed 8.10 values file reflecting:
+
+Helm 4–only support.
+
+Removal of Bitnami sub‑charts.
+
+Hub‑aware deployment patterns.
+
+Simplified application configuration.
+
+Produces a migration report that:
+
+Lists which keys were migrated automatically.
+
+Flags keys that require manual decisions (for example, infrastructure endpoints, security‑sensitive options).
+
+Suggests where to find more information in the documentation.
+
+Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
+
+The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for:
+
+Humans on the command line.
+
+CI pipelines.
+
+AI agents (for example, Claude Code, Copilot) that can call it as part of an automated migration workflow.
+
+### Optimize
+
+#### Disable Optimize object variable flattening by default (Self-Managed)
+
+<!-- https://github.com/camunda/product-hub/issues/3785 -->
+
+Optimize no longer flattens object variables by default.
+
+Starting in 8.10, Optimize (Self-Managed only) does not import object variable values by default. Object variables are no longer flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage and aligns Self-Managed with the default Camunda 8 SaaS has used for years.
+
+If you rely on object variable properties in reports, filters, or Raw Data Reports, opt in by setting zeebe.includeObjectVariableValue: true (env CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true).
+
+When the setting is not explicitly configured, Optimize logs a WARN on startup stating that object variables will not be flattened, with the one-line opt-in.
+SaaS is unaffected (it already runs with this behavior disabled).
+
+Recovery: the Optimize importer is idempotent. As long as the object variables still exist in the zeebe-record-variable\* indices (within your Zeebe retention window), you can enable the flag and reset the importer to reimport/flatten historical variables.
+
+### Orchestration Cluster
+
+#### Self-Managed: 2 Region ECS RDBMS Reference Architecture
+
+<!-- https://github.com/camunda/product-hub/issues/3552 -->
+
+Camunda 8.10 adds an official dual‑region reference architecture for running the Orchestration Cluster and Connectors on AWS ECS with an RDBMS secondary storage such as Aurora Global Database.
+
+The new self‑managed documentation explains the recommended topology, exporter configuration, and RDBMS replication setup, and includes step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
+
+#### Call Activities Support in Task Tester
+
+<!-- https://github.com/camunda/product-hub/issues/3486 -->
+
+#### Centralized Secret Resolution via Zeebe
+
+<!-- https://github.com/camunda/product-hub/issues/3040 -->
+
+Camunda introduces centralized secret resolution for connectors and job workers via Zeebe. Secrets are resolved from external stores on demand when a worker reads a referenced variable. Resolved values are never written to the variable store, the command log, exporters, Operate, Tasklist, or logs. Reference secrets in BPMN using the canonical FEEL expression camunda.secrets.MY_SECRET. This expression-based form is the preferred syntax and replaces the older string-substitution patterns. Moving secret references onto the FEEL expression surface — rather than embedded in arbitrary strings — eliminates the secret-injection class of bugs: there is no string substitution at runtime, only typed expression evaluation.
+
+The legacy `{{secrets.MY_SECRET}}` form remains supported indefinitely for backward compatibility on existing deployed BPMN. The deprecated bare secrets.MY_SECRET pattern (without braces) is removed in this Epic — it caused collisions with regular variable namespaces.
+
+Resolution works per deployment type:
+
+Camunda SaaS:The gateway resolves from the existing GCP Secret Manager backend Console already uses. No migration required — existing connector secrets continue to work during transition.
+
+**Camunda Self-Managed:**Configure an external vault in the gateway configuration via Helm upgrade. No data migration required.
+
+8.10 must-have: HashiCorp Vault.
+
+8.10 follow-on: AWS Secrets Manager, Azure Key Vault, GCP Secret Manager.
+
+Provider plug-ins ship in this order. The provider interface is stable across providers, so adding a new vault later does not require BPMN or process changes.
+
+C8Run / local development: Inject secrets via environment variables, following standard practice and without requiring a Camunda secret store.
+
+V1 supports existing connector secret formats. To get started, configure your external secret store in the gateway configuration and reference secrets using `{{secrets.MY_SECRET}}` for legacy secrets and camunda.secrets.MY_SECRET as the new format in your connectors and job workers.
+
+#### Self-Managed: Full AWS ECS Reference Architecture
+
+<!-- https://github.com/camunda/product-hub/issues/3432 -->
+
+Camunda 8 Self‑Managed now includes a reference architecture for running the full Camunda 8 stack on AWS ECS, including Orchestration Cluster, Camunda Hub, and Management Identity
+
+What’s included:
+
+A reference architecture diagram and dependency overview for ECS.
+
+A Terraform‑based reference deployment paired with step‑by‑step documentation.
+
+Guidance for:
+
+Networking, storage, secrets, and IAM (including IRSA where relevant).
+
+Basic Day‑2 operations (scaling, updates, troubleshooting entry points).
+
+This makes AWS ECS a first‑class, documented deployment option for Camunda 8 Self‑Managed, alongside Kubernetes.
+
+#### Bring your own Identity Provider per Cluster in SaaS
+
+<!-- https://github.com/camunda/product-hub/issues/3190 -->
+
+We are excited to announce a major enhancement for Camunda SaaS that shifts identity management from a centralized Auth0 organizational provider to a customer-controlled, per-cluster approach via direct OIDC connections for the Orchestration Clusters.
+
+Direct OIDC Integration:
+
+Each cluster can now be configured with its own OIDC connection to the customer’s preferred Identity Provider.
+
+This enables a direct, secure, and customizable authentication pathway that aligns with the customer’s enterprise identity policies.
+
+Enhanced Security and Compliance:
+
+By bypassing the centralized Auth0 provider, organizations can implement and enforce their own security and compliance measures.
+
+This configuration supports compliance with internal and regulatory security standards.
+
+Flexible Configuration:
+
+Administrators can configure the cluster-specific Identity Provider settings via an intuitive admin interface.
+
+Configuration options include standard OIDC parameters, custom claims mapping using mapping rules, and additional security features as required by the customer’s IdP.
+
+Seamless Transition:
+
+Migration guides and detailed documentation are provided to assist customers in transitioning from the centralized Auth0 model to their own Identity Provider.
+
+The change is designed to be as seamless as possible, with minimal disruption to existing user authentication processes.
+
+In this setup, Web Modeler + Console still continue to use Auth0 via the Identity Provider and only orchestration clusters are using your Identity Provider directly.
+
 ## 8.10.0-alpha4
 
 | Release date   | Changelog(s)                                                                                        | Blog |
