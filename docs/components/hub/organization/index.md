@@ -50,7 +50,7 @@ Manage the users, user groups, and roles in your organization:
 
 <AoGrid ao={[
 {
-link: "./manage-users/manage-users",
+link: "./manage-users",
 title: "Manage users",
 image: DocsIcon,
 description: "Manage users in your organization.",

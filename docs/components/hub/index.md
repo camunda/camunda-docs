@@ -34,7 +34,7 @@ image: DocsIcon,
 description: "Create, monitor, and assign clusters for seamless execution across all rollout stages.",
 },
 {
-link: "./organization/manage-users/manage-users",
+link: "./organization/manage-users",
 title: "Manage users",
 image: DocsIcon,
 description: "Manage the users, user groups, and roles in your organization.",
