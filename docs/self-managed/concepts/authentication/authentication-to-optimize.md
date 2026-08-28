@@ -75,7 +75,7 @@ Optimize always validates the login `id_token`'s audience against your configura
 
 ## Legacy configuration keys are deprecated
 
-The Optimize security configuration keys used through 8.9 (`CAMUNDA_OPTIMIZE_IDENTITY_*`, `CAMUNDA_OPTIMIZE_AUTH0_*`, and related keys) are deprecated in favor of `camunda.security.*`. A compatibility bridge maps recognized legacy keys automatically and logs a deprecation warning naming the replacement.
+The Optimize security configuration keys used through 8.9 (`CAMUNDA_OPTIMIZE_IDENTITY_*`, `CAMUNDA_OPTIMIZE_AUTH0_*`, and related keys) are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement.
 
 If you're deploying Camunda 8.10 for the first time, none of this applies to you: configure the `camunda.security.*` properties above and skip this section and the next one.
 
