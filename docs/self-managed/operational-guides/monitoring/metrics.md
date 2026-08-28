@@ -329,4 +329,4 @@ The dashboard provides insights into key data layer components for Camunda versi
 Configure metrics for each Camunda 8 component as follows:
 
 - [Orchestration Cluster](/self-managed/components/orchestration-cluster/core-settings/concepts/monitoring.md)
-- [Web Modeler](/self-managed/components/hub/monitoring.md)
+- [Camunda Hub](/self-managed/components/hub/monitoring.md)
