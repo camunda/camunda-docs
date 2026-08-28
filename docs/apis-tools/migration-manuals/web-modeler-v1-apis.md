@@ -28,7 +28,7 @@ Web Modeler API v1 is deprecated in Camunda 8.10 and will be removed in 8.12. [M
 
 ## Folders API
 
-You can no longer read or write process application IDs in any folders API context.
+You can no longer access process applications as folders in any folders API context.
 
 ### Folder IDs reference folders
 
@@ -113,7 +113,7 @@ Affected endpoints:
 
 ## Files API
 
-You can no longer read or write process application IDs in any files API context.
+You can no longer access process applications as folders in any files API context.
 
 ### Folder ID must reference a folder
 
@@ -236,11 +236,11 @@ POST /api/v1/files/search
 
 ## Projects API
 
-You can no longer read or write process application IDs in any projects API context.
+You can no longer access process applications as folders in any projects API context.
 
 ### Process applications are never returned as parent folders
 
-In the `GET /api/v1/projects/{projectId}` response, the `content.folders[i].parentId` and `content.files[i].folderId` are null for any folder or file stored at the root of a process application. Previously, `parentId` and `folderId` would return the process application ID.
+In the `GET /api/v1/projects/{projectId}` response, the `content.folders[i].parentId` and `content.files[i].folderId` are null for any folder or file stored at the root of a process application. Previously, `parentId` and `folderId` would return the process application ID. The process application ID is, instead, returned in a new `processApplicationId` field.
 
 Example:
 
@@ -267,6 +267,7 @@ Example:
         "name": "Root folder",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null, // null if the parent container is a process application
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
         "created": "2026-08-24T14:37:04.36503Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -285,6 +286,7 @@ Example:
         "name": "Root file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": null, // null if the parent container is a process application
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
         "simplePath": "Root file.bpmn",
         "canonicalPath": [],
         "revision": 2,
@@ -305,6 +307,7 @@ Example:
         "name": "Nested file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
         "simplePath": "Root folder/Nested file.bpmn",
         "canonicalPath": [
           {
@@ -376,6 +379,7 @@ Example:
         "name": "Root folder",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "created": "2026-08-24T14:37:04.36503Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -394,6 +398,7 @@ Example:
         "name": "Root file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root file.bpmn", // excludes process applications
         "canonicalPath": [], // excludes process applications
         "revision": 2,
@@ -414,6 +419,7 @@ Example:
         "name": "Nested file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root folder/Nested file.bpmn", // excludes process applications
         "canonicalPath": [
           // excludes process applications
@@ -485,6 +491,7 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "name": "Root folder",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "created": "2026-08-24T14:37:04.36503Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -503,6 +510,7 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "name": "Root file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root file.bpmn",
         "canonicalPath": [],
         "revision": 2,
@@ -523,6 +531,7 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "name": "Nested file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root folder/Nested file.bpmn",
         "canonicalPath": [
           {
