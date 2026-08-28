@@ -9,7 +9,7 @@ description: "Learn how Optimize authenticates users and API requests in Self-Ma
 
 [Optimize](/self-managed/components/optimize/overview.md) authenticates against an external OIDC identity provider (IdP). Optimize doesn't offer Basic authentication as a login method.
 
-Starting with Camunda 8.10, Optimize authenticates through the Camunda Security Library (CSL): the same session-based OIDC login the [Orchestration Cluster](authentication-to-orchestration-cluster.md) uses. Through 8.9, Optimize used its own stateless, self-signed JWT cookie instead. See [ADR-0038](https://github.com/camunda/camunda-security-library/blob/main/docs/adr/0038-optimize-reuses-stateful-oidc-webapp-chain.md) for the design decision behind this change.
+Starting with Camunda 8.10, Optimize authenticates through the Camunda Security Library (CSL): the same session-based OIDC login the [Orchestration Cluster](authentication-to-orchestration-cluster.md) uses.
 
 :::tip Recommendation
 If you've already configured [OIDC for the Orchestration Cluster](authentication-to-orchestration-cluster.md#oidc), use the same identity provider for Optimize. This gives your users a single login experience across both components.
