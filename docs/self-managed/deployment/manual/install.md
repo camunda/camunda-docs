@@ -425,16 +425,16 @@ curl localhost:9600/actuator/health
     "brokerStatus": {
       "status": "UP"
     },
-    "indicesCheck": {
-      "status": "UP"
-    },
     "livenessState": {
       "status": "UP"
     },
     "readinessState": {
       "status": "UP"
     },
-    "searchEngineCheck": {
+    "schemaReadinessCheck": {
+      "status": "UP"
+    },
+    "searchEngineStatus": {
       "status": "UP"
     }
   }
