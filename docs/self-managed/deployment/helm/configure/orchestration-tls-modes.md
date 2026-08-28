@@ -5,11 +5,11 @@ title: Configure Orchestration REST and gRPC TLS modes
 description: Enable REST TLS and gRPC TLS independently on the Orchestration component with first-class Helm values.
 ---
 
-Orchestration exposes a REST API (`SERVER_SSL_ENABLED`) and a gRPC API (`CAMUNDA_API_GRPC_SSL_ENABLED`) as independent server settings. The Camunda 8 Helm chart provides a first-class values surface that configures both server flags, the public NGINX ingress backend protocol, and the in-cluster client schemes used by Web Modeler and Connectors. Customers no longer need to duplicate `webModeler.restapi.clusters` or `connectors.configuration` blocks just to enable Orchestration TLS.
+Orchestration exposes a REST API (`SERVER_SSL_ENABLED`) and a gRPC API (`CAMUNDA_API_GRPC_SSL_ENABLED`) as independent server settings. The Camunda 8 Helm chart provides a first-class values surface that configures both server flags, the public NGINX Ingress backend protocol, and the in-cluster client schemes used by Web Modeler and Connectors. Customers no longer need to duplicate `webModeler.restapi.clusters` or `connectors.configuration` blocks just to enable Orchestration TLS.
 
 :::caution Trust bundle is required for self-signed and private-PKI certificates
 
-The settings on this page configure the Orchestration **server** and the **NGINX ingress** legs. They do **not** by themselves teach in-cluster Java clients (Web Modeler, Connectors) to trust the cert. If the Orchestration server certificate is self-signed or issued by a private/internal CA, you **must also** set `global.tls.caBundle.secret.existingSecret` to a Secret holding the CA bundle that signed it. Without it, the JVM default truststore is used and gRPC/REST handshakes from Web Modeler and Connectors will fail with `PKIX path building failed`. The minimal caBundle configuration is shown in the [cert-manager recipe](#recipe-cert-manager--lets-encrypt-or-internal-issuer) below.
+The settings on this page configure the Orchestration **server** and the **NGINX Ingress** legs. They do **not** by themselves teach in-cluster Java clients (Web Modeler, Connectors) to trust the cert. If the Orchestration server certificate is self-signed or issued by a private/internal CA, you **must also** set `global.tls.caBundle.secret.existingSecret` to a Secret holding the CA bundle that signed it. Without it, the JVM default truststore is used and gRPC/REST handshakes from Web Modeler and Connectors will fail with `PKIX path building failed`. The minimal caBundle configuration is shown in the [cert-manager recipe](#recipe-cert-manager--lets-encrypt-or-internal-issuer) below.
 
 Certificates issued by a public CA already present in the JVM truststore (Let's Encrypt, DigiCert, etc.) do not require this.
 
@@ -69,13 +69,11 @@ The gRPC server only accepts PEM, so the gRPC `secret` block has no `type` field
 
 ### Cert rotation
 
-`global.tls.orchestration.autoRollout` mirrors `global.tls.caBundle.autoRollout`. When `true`, the chart stamps a `checksum/orchestration-tls-{rest,grpc}` pod annotation derived from the public cert content of the configured Secret. A `helm upgrade` then rolls the Orchestration pods whenever the cert content changes.
+`global.tls.orchestration.autoRollout` mirrors `global.tls.caBundle.autoRollout`. When `true`, the chart stamps `checksum/orchestration-tls-{rest,grpc}` pod annotations derived from the configured Secret. For PEM REST and gRPC certificates, the hash covers both the certificate and private key. For PKCS12, it covers the keystore. A `helm upgrade` then rolls the Orchestration pods when this material changes.
 
-The hash covers only the cert, not the keystore password or private key. That means the annotation reveals nothing an attacker could not already learn from the TLS handshake, and it cannot be replayed against candidate passwords.
+The hash deliberately excludes the keystore password. Rotate the password with the keystore material or restart the StatefulSet manually after a password-only change.
 
 This uses Helm's `lookup`, which requires the upgrading identity to have `get` on Secrets in the release namespace. It is inert under GitOps tools that render with `helm template`. Leave `autoRollout` off in those environments and rotate manually with `kubectl rollout restart statefulset/<release>-orchestration`.
-
-One edge case: rotating **only the keystore password** without changing the cert content does not flip the hash, so autoRollout will not pick it up. In practice every modern rotation tool (cert-manager `Certificate` renewal, manual `openssl pkcs12 -export` cycles) writes a fresh keystore on each renewal, so the cert content changes too. For password-only rotation, use `kubectl rollout restart statefulset/<release>-orchestration`.
 
 ### Recipe: cert-manager + Let's Encrypt or internal Issuer
 
@@ -83,7 +81,7 @@ cert-manager produces `kubernetes.io/tls` Secrets with `tls.crt` + `tls.key`. Th
 
 This recipe assumes cert-manager v1.x is already installed in the cluster. If it is not, install it first per the [cert-manager installation guide](https://cert-manager.io/docs/installation/) (typically `helm install cert-manager jetstack/cert-manager --set crds.enabled=true`).
 
-If you are issuing certificates from a public ACME provider (Let's Encrypt, ZeroSSL, Buypass) skip directly to step 4 — your CA is already in the JVM default truststore and no `caBundle` is needed. The four-step block below covers the in-cluster CA flow that most Self-Managed installs use.
+The four-step example below creates and uses an internal CA. For a public ACME provider such as Let's Encrypt, don't apply steps one through three. In the server `Certificate` from step four, replace `issuerRef.name` and `issuerRef.kind` with the name and kind of your existing ACME `Issuer` or `ClusterIssuer`. Public CA certificates already present in the JVM default truststore don't need `global.tls.caBundle`.
 
 ```yaml
 # 1. Bootstrap Issuer. A bare selfSigned Issuer cannot issue a CA bundle on
@@ -233,9 +231,9 @@ global:
 
 The `helm upgrade` will roll the Orchestration StatefulSet because the rendered env vars and volume names change. Expect a brief outage during the rolling restart (no data loss — PVCs are unchanged). Existing hand-written `webModeler.restapi.clusters` or `connectors.configuration` blocks remain authoritative; if their `grpc-address` / `rest-address` matches what the chart would derive (visible via `helm template`), you can delete them too.
 
-### Verifying the backend cert at the ingress (NGINX)
+### Verify the REST backend certificate at the Ingress (NGINX)
 
-By default NGINX Ingress talks TLS to the upstream when `backend-protocol: HTTPS`/`GRPCS` is set, but **does not verify the upstream cert** — any cert is accepted. For Zero-Trust networks where this would leave a sidecar-interception gap, opt in via the `proxyVerify` sub-block on each protocol:
+By default, NGINX Ingress uses TLS for the REST upstream when `backend-protocol: HTTPS` is set, but it doesn't verify the upstream certificate. Enable `proxyVerify` under `global.tls.orchestration.rest` to verify the REST certificate. The chart doesn't support `proxyVerify` for gRPC because ingress-nginx applies its `proxy-ssl-*` annotations to `proxy_pass`, not the `grpc_pass` used by a GRPCS backend.
 
 ```yaml
 global:
@@ -258,36 +256,21 @@ global:
               existingSecret: orchestration-upstream-ca # PEM CA bundle
               existingSecretKey: ca.crt
           sniHost: "" # set when the cert SAN does not match the in-cluster service name
-      grpc:
-        enabled: true
-        cert:
-          secret:
-            existingSecret: orchestration-grpc-cert
-            existingSecretKey: tls.crt
-        privateKey:
-          secret:
-            existingSecretKey: tls.key
-        proxyVerify:
-          enabled: true
-          caSecret:
-            secret:
-              existingSecret: orchestration-upstream-ca
-              existingSecretKey: ca.crt
 ```
 
-This adds the following annotations to the `/orchestration` and gRPC ingresses respectively:
+This adds the following annotations to the `/orchestration` Ingress:
 
 - `nginx.ingress.kubernetes.io/proxy-ssl-verify: on`
 - `nginx.ingress.kubernetes.io/proxy-ssl-secret: <namespace>/<caSecret.secret.existingSecret>`
 - `nginx.ingress.kubernetes.io/proxy-ssl-name: <sniHost>` and `proxy-ssl-server-name: on` (only when `sniHost` is set)
 
-`proxyVerify` is opt-in independently per protocol — you can verify gRPC traffic only, REST only, or both. By default the chart expects the CA Secret to live in the same namespace as the Ingress resource (an NGINX requirement). To reference a CA Secret in a different namespace (centralised cert-management namespace), set `caSecret.namespace`; the NGINX Ingress controller must be configured with `--watch-namespace` covering that namespace for the cross-namespace reference to resolve. The chart fails template rendering if `proxyVerify.enabled: true` and `caSecret.secret.existingSecret` is empty.
+The CA Secret must contain the CA bundle under the fixed `ca.crt` key. By default, the chart expects the Secret in the same namespace as the Ingress resource. To reference a Secret in a different namespace, set `caSecret.namespace` and configure the ingress-nginx controller with `allow-cross-namespace-resources=true`. The chart fails template rendering if `proxyVerify.enabled: true` and `caSecret.secret.existingSecret` is empty.
 
 Note that `proxyVerify` covers only the NGINX → Orchestration leg. In-cluster Java clients (Web Modeler, Connectors) trust upstream certs through `global.tls.caBundle`, which is independent.
 
 ## Supported modes
 
-| Mode                | `global.tls.orchestration.rest.enabled` | `global.tls.orchestration.grpc.enabled` | `/orchestration` ingress backend | gRPC ingress backend-protocol | Web Modeler gRPC | Connectors gRPC | REST clients |
+| Mode                | `global.tls.orchestration.rest.enabled` | `global.tls.orchestration.grpc.enabled` | `/orchestration` Ingress backend | gRPC Ingress backend-protocol | Web Modeler gRPC | Connectors gRPC | REST clients |
 | ------------------- | --------------------------------------- | --------------------------------------- | -------------------------------- | ----------------------------- | ---------------- | --------------- | ------------ |
 | Plaintext (default) | `false`                                 | `false`                                 | HTTP                             | `GRPC`                        | `grpc://`        | `http://`       | `http://`    |
 | REST TLS only       | `true`                                  | `false`                                 | HTTPS                            | `GRPC`                        | `grpc://`        | `http://`       | `https://`   |
@@ -298,7 +281,7 @@ The chart derives Web Modeler and Connectors endpoints automatically. Explicit `
 
 ## Example: REST plaintext + gRPC TLS
 
-This is the SUPPORT-33090 customer shape: an internal Zero-Trust network where the gRPC API must be TLS-protected but the REST API stays on plaintext behind the cluster ingress.
+This is the SUPPORT-33090 customer shape: an internal Zero-Trust network where the gRPC API must be TLS-protected but the REST API stays on plaintext behind the cluster Ingress.
 
 ```yaml
 global:
@@ -336,7 +319,7 @@ kubectl create secret generic orchestration-grpc-cert \
 With this configuration the chart:
 
 - Sets `CAMUNDA_API_GRPC_SSL_ENABLED=true` on the Orchestration container.
-- Annotates the public gRPC ingress with `nginx.ingress.kubernetes.io/backend-protocol: GRPCS`.
+- Annotates the public gRPC Ingress with `nginx.ingress.kubernetes.io/backend-protocol: GRPCS`.
 - Renders the Web Modeler REST API ConfigMap with `grpc: grpcs://<orchestration-grpc-service>:26500`.
 - Renders the Connectors ConfigMap with `grpc-address: https://<orchestration-grpc-service>:26500`.
 
@@ -359,7 +342,7 @@ kubectl -n <namespace> get configmap <release>-web-modeler-restapi-configuration
 
 ## Connectors TLS
 
-Connectors in 8.10 runs its own Spring Boot HTTP server and is exposed through a Gateway API `HTTPRoute` (not via an NGINX ingress). `global.tls.connectors` mirrors the Orchestration REST surface and configures TLS termination at the Connectors pod.
+Connectors in 8.10 runs its own Spring Boot HTTP server. The chart can expose it through an NGINX Ingress or a Gateway API `HTTPRoute`. `global.tls.connectors` mirrors the Orchestration REST configuration and enables TLS at the Connectors pod.
 
 ### Modes
 
@@ -429,9 +412,9 @@ global:
 
 With a cert-manager `Certificate` that issues into the same namespace, the resulting `kubernetes.io/tls` Secret already carries `tls.crt` and `tls.key` — the chart picks them up automatically (when `cert.secret.existingSecretKey` is left empty in PEM mode, `tls.crt` is substituted automatically).
 
-### Gateway API caveat
+### Configure inbound routing
 
-In 8.10, Connectors is exposed via the Gateway API `HTTPRoute`, not via an NGINX `Ingress`. Backend HTTPS for Gateway API is configured at the listener / Service level on the gateway implementation — not via NGINX `backend-protocol` annotations. The `global.tls.connectors.proxyVerify` block is reserved for parity with the Orchestration surface and has no effect on the Gateway API path today. Intra-cluster TLS terminates at the Connectors pod with this configuration; backend-protocol selection for the gateway listener is a separate concern.
+The dedicated NGINX Ingress template sets its backend protocol to HTTPS when Connectors TLS is enabled. The Gateway API `HTTPRoute` still forwards plaintext unless a `BackendTLSPolicy` targets the Connectors Service. Create that policy according to your Gateway implementation and configure its certificate validation before enabling pod TLS. Without the policy, inbound Connectors traffic through the generated `HTTPRoute` fails.
 
 ### Verification
 
@@ -445,9 +428,9 @@ kubectl -n <namespace> get deployment <release>-connectors \
 
 ## Optimize TLS
 
-Optimize in 8.10 runs its own Spring Boot HTTP server and is exposed through a Gateway API `HTTPRoute` (not via an NGINX ingress). `global.tls.optimize` mirrors the Orchestration REST surface and configures TLS termination at the Optimize pod.
+Optimize in 8.10 runs its own Spring Boot HTTP server. The chart can expose it through an NGINX Ingress or a Gateway API `HTTPRoute`. `global.tls.optimize` mirrors the Orchestration REST configuration and enables TLS at the Optimize pod.
 
-This server-side TLS is independent of the existing client-side `optimize.database.elasticsearch.tls` / `optimize.database.opensearch.tls` (and legacy `global.elasticsearch.tls.existingSecret` / `global.opensearch.tls.existingSecret`) truststore wiring, which secures the Optimize → ES/OS connection direction. Both can be configured together; the chart mounts the server-side keystore as a separate `optimize-server-tls` volume that coexists with the existing client-side `keystore` truststore mount.
+This server-side TLS is independent of the existing client-side `optimize.database.elasticsearch.tls` / `optimize.database.opensearch.tls` configuration. The legacy `global.elasticsearch.tls.secret.existingSecret` and `global.opensearch.tls.secret.existingSecret` paths also configure the client truststore. Both directions can use TLS together. The chart mounts the server certificate from a regular Secret volume named `optimize-server-tls`, alongside the client-side `keystore` truststore mount.
 
 ### Modes
 
@@ -457,8 +440,8 @@ This server-side TLS is independent of the existing client-side `optimize.databa
 In both modes the chart:
 
 - Sets `SERVER_SSL_ENABLED=true` on the Optimize main container (and only the main container — the optional `migration` init container is untouched, since it does not serve HTTP).
-- Mounts the referenced Secret at `/usr/local/camunda/certificates/optimize/` as a `optimize-server-tls` projected Secret volume with mode `0440`.
-- Switches the container probes (`startupProbe` / `readinessProbe` / `livenessProbe`) to `HTTPS` when the user has left the probe `scheme` at its default `HTTP`.
+- Mounts the referenced Secret at `/usr/local/camunda/certificates/optimize/` as a regular Secret volume named `optimize-server-tls`.
+- Uses HTTPS for `startupProbe`, `readinessProbe`, and `livenessProbe` when their `scheme` values are empty, which is the default. An explicit scheme remains authoritative, including `HTTP`.
 - Stamps a `checksum/optimize-tls` pod annotation when `global.tls.optimize.autoRollout: true`, so the next `helm upgrade` rolls Optimize on cert rotation.
 
 ### Server-side vs client-side TLS in Optimize
@@ -555,9 +538,9 @@ optimize:
 
 The chart wires the inbound `optimize-server-tls` keystore for the Optimize HTTP listener AND the outbound `keystore` truststore that Optimize uses when calling Elasticsearch over HTTPS. Both paths are independent and may be enabled together.
 
-### Gateway API caveat
+### Configure inbound routing
 
-In 8.10, Optimize is exposed via the Gateway API `HTTPRoute`, not via an NGINX `Ingress`. Backend HTTPS for Gateway API is configured at the listener / Service level on the gateway implementation — not via NGINX `backend-protocol` annotations. The `global.tls.optimize.proxyVerify` block is reserved for parity with the Orchestration surface and has no effect on the Gateway API path today. Intra-cluster TLS terminates at the Optimize pod with this configuration; backend-protocol selection for the gateway listener is a separate concern.
+The dedicated NGINX Ingress template sets its backend protocol to HTTPS when Optimize TLS is enabled. The Gateway API `HTTPRoute` still forwards plaintext unless a `BackendTLSPolicy` targets the Optimize Service. Create that policy according to your Gateway implementation and configure its certificate validation before enabling pod TLS. Without the policy, inbound Optimize traffic through the generated `HTTPRoute` fails.
 
 ### Verification
 
