@@ -8,6 +8,11 @@ description: "Handle a region loss, bring a region back, and activate a declared
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import RegionLoss from './img/multi-region-rdbms-region-loss.svg';
+
+<!-- Diagrams: edit the .excalidraw source, then export SVG and strip the embedded font block,
+     replace font-family with a monospace stack, and remove the root width/height so the SVG
+     scales to the content column. A vanilla excalidraw.app export does none of these. -->
+
 import MultiRegionRdbmsCopy from '../\_partials/\_multi-region-rdbms-copy.md'
 
 This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup: losing a region, bringing it back, and activating a zone that was declared but never deployed.

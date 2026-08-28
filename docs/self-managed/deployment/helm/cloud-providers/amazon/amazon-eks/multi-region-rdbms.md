@@ -12,6 +12,11 @@ description: "Deploy three Amazon EKS clusters connected by AWS Transit Gateway 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HighLevelDesign from './assets/eks-multi-region-rdbms.svg';
+
+<!-- Diagrams: edit the .excalidraw source, then export SVG and strip the embedded font block,
+     replace font-family with a monospace stack, and remove the root width/height so the SVG
+     scales to the content column. A vanilla excalidraw.app export does none of these. -->
+
 import MultiRegionRdbmsCopy from '../../../\_partials/\_multi-region-rdbms-copy.md'
 
 This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions, using [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute, [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing, [Submariner](https://submariner.io/) for cross-cluster service discovery, and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
