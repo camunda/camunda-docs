@@ -337,6 +337,25 @@ This aligns the endpoint with the other public endpoints of the Orchestration Cl
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Broker ping configuration renamed and now requires authentication {#broker-ping-hub}
+
+The broker ping configuration namespace is renamed from `camunda.console.ping` to `camunda.hub.ping`, and the corresponding `CAMUNDA_CONSOLE_PING_*` environment variables become `CAMUNDA_HUB_PING_*`. The `POST /clusters` endpoint the ping targets now also requires an OAuth 2.0 machine-to-machine token.
+
+A cluster upgraded without these changes stops reporting license information to Camunda Hub.
+
+**Action:** Rename the configuration namespace and environment variables, then add a `camunda.hub.ping.credentials` block with your OAuth 2.0 client credentials. See the [property mapping table](/self-managed/upgrade/components/890-to-8100.md#broker-ping-configuration) in the upgrade guide.
+
+<p className="link-arrow">[Camunda Hub ping configuration](/self-managed/components/orchestration-cluster/zeebe/configuration/broker.md#camunda-hub-ping-configuration)</p>
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
