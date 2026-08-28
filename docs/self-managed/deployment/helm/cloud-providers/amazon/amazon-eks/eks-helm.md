@@ -255,7 +255,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 :::danger Exposure of the Zeebe Gateway Service
 For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised. See [required network traffic](/self-managed/deployment/helm/install/production/index.md#required-network-traffic) for the flows Camunda depends on.
 
 :::
 
@@ -306,7 +306,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 :::danger Exposure of the Zeebe Gateway Service
 For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised. See [required network traffic](/self-managed/deployment/helm/install/production/index.md#required-network-traffic) for the flows Camunda depends on.
 
 :::
 
