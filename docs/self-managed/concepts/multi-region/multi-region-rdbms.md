@@ -160,7 +160,7 @@ Zone awareness names zones instead of numbering brokers, so the zone list can ch
 
 **Activating a declared zone is online.** List every zone the cluster will ever have from the start, and deploy fewer of them. The partition layout reserves the missing zone's replicas, so each partition runs at `N - 1` of `N`, still a majority, and the cluster forms and serves normally. Deploying that zone later only fills in replicas that were already reserved: no broker is renumbered, no partition is redistributed, and the running regions are untouched.
 
-Leave **at most one** zone undeployed. With two or more missing, partitions no longer hold a majority and the cluster does not form.
+Leaving **one** zone undeployed is always safe from three zones upward, because `N - 1` of `N` is a majority for every `N >= 3`. Leaving more is only safe in larger topologies, and the reference implementation does not allow it: it rejects anything beyond a single undeployed zone at plan time, so the growth path stays the same whatever the zone count.
 
 **Adding a zone that was never declared** changes the zone list in every region and redistributes partitions. Plan the largest topology you expect up front and grow into it.
 

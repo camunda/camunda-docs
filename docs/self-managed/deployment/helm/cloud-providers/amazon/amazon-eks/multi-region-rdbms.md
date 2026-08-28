@@ -139,7 +139,7 @@ Two variables control the topology, and they are not interchangeable:
 | `regions`             | The full list of region slots the cluster will ever have. Every slot contributes a zone to the Camunda zone list. |
 | `active_region_count` | How many of those slots are actually deployed. At most one slot may be left empty.                                |
 
-Declaring a slot without deploying it is the supported growth path: its replicas are reserved, each partition runs at `N - 1` of `N`, and activating the slot later fills them in without redistributing anything. Leaving two or more slots empty is rejected at plan time, because every partition would lose its majority.
+Declaring a slot without deploying it is the supported growth path: its replicas are reserved, each partition runs at `N - 1` of `N`, and activating the slot later fills them in without redistributing anything. Leaving two or more slots empty is rejected at plan time. Within the two to four slots this module supports, a second empty slot costs every partition its majority and the cluster cannot form.
 
 ### Apply the infrastructure
 
