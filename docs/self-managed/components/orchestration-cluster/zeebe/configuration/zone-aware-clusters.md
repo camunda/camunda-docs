@@ -92,4 +92,5 @@ For the full list of properties and their environment-variable equivalents, see 
 ## Related resources
 
 - [Dual-region](../../../../concepts/multi-region/dual-region.md): synchronous two-region setup.
+- [Multi-Region RDBMS](../../../../concepts/multi-region/multi-region-rdbms.md): a three-region architecture built on zone awareness, in which a zone loss does not stop processing.
 - [Zeebe clustering](/components/zeebe/technical-concepts/clustering.md): how brokers, partitions, and replication work.
