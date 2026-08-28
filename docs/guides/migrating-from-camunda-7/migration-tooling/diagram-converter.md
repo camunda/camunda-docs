@@ -150,9 +150,9 @@ Download the analysis results as JSON when you want to use them with AI-assisted
 - In the CLI, pass `--json` to create `analysis-results.json` in the target directory. If that file already exists, the converter creates a numbered variant instead of overwriting it.
 
 <details>
-<summary>View JSON report and API details</summary>
+<summary>View JSON report details</summary>
 
-The JSON report is a flat array with one object per finding. For web API clients, request `application/vnd.camunda.analysis+json` in the `Accept` header when calling the `/check` endpoint.
+The JSON report is a flat array with one object per finding.
 
 Each finding includes the following fields:
 
