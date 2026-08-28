@@ -903,7 +903,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |
@@ -969,7 +969,7 @@ This feature enables components like the Zeebe Broker, Tasklist, Operate, and Ze
 | `enabled`                    | Enables or disables the ping to console feature. Disabled by default. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENABLED`                     | `true`                                     |
 | `endpoint`                   | Create cluster API endpoint where pings should be sent. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_ENDPOINT`.                                 | `https://hub.endpoint.com/api/v1/clusters` |
 | `clusterName`                | Cluster name sent with telemetry. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_CLUSTERNAME`.                                                    | `test_cluster_name`                        |
-| `pingPeriod`                 | Frequency of pings (for example, `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PINGPERIOD`.                                  | `1h`                                       |
+| `pingPeriod`                 | Frequency of pings (for example, `1s`, `1h`, `1d`). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PINGPERIOD`.                                   | `1h`                                       |
 | `properties`                 | Additional properties to include in the ping payload (as key-value pairs). This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_PROPERTIES`.            | `testProperty: 123`                        |
 | `retry.maxRetries`           | Maximum number of retry attempts after a failed ping. Uses exponential backoff. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MAXRETRIES`. | `1`                                        |
 | `retry.minRetryDelay`        | Minimum delay between retries. This setting can also be overridden using the environment variable `CAMUNDA_CONSOLE_PING_RETRY_MINRETRYDELAY`.                                               | `1s`                                       |

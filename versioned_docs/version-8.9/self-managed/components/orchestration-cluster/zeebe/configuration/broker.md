@@ -899,7 +899,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |
