@@ -143,6 +143,8 @@ The new self‑managed documentation explains the recommended topology, exporter
 
 <!-- https://github.com/camunda/product-hub/issues/3486 -->
 
+Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
+
 #### Centralized Secret Resolution via Zeebe
 
 <!-- https://github.com/camunda/product-hub/issues/3040 -->
