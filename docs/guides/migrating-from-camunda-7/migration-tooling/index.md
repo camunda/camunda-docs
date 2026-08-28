@@ -73,15 +73,7 @@ The skill asks for your migration scope:
 4. **Validate migration results**: Compiles, runs tests, searches for remaining C7 references, and verifies converted forms and model findings.
 5. **Fix remaining issues**: Offers to fix remaining issues, and waits for your review before each change.
 
-### Review forms with the migration agent
-
-The migration agent uses the Diagram Converter for static Camunda 7 form files and handles generated Task Forms during the agentic migration flow.
-
-- Every Camunda 7 or generated form must become a standard Camunda 8 form linked from the converted BPMN.
-- The agent can create or adapt a standard Camunda 8 form for generated Task Forms. Unsupported validation rules and ambiguous behavior remain explicit review items.
-- Use [Build forms with Modeler](/components/modeler/forms/utilizing-forms.md) to create and link a standard Camunda 8 form.
-
-For advanced form migrations, the agent inventories static and generated forms, carries converted form findings into the migration report, and creates or adapts a standard Camunda 8 form when automatic conversion is unsafe.
+The agent also handles static and generated Camunda 7 forms, creating or adapting standard Camunda 8 forms and linking them from converted BPMN. Unsupported validation rules and ambiguous behavior remain review items.
 
 The agent can consume the flat `analysis-results.json` report produced by the CLI `--json` option or the web interface's **Download JSON** action. It groups findings by category, checks the target platform version, and cross-references model findings with migrated code before suggesting fixes. See [Download JSON analysis results](./diagram-converter.md#download-json-analysis-results).
 
