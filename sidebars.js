@@ -753,13 +753,13 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Manage members",
+              label: "Manage users",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-members/manage-users",
+                id: "components/hub/organization/manage-users/manage-users",
               },
               items: [
-                "components/hub/organization/manage-members/manage-user-groups",
+                "components/hub/organization/manage-users/manage-user-groups",
               ],
             },
             {

@@ -87,7 +87,7 @@ On the Web Modeler home page, you can find an overview of all shared resources w
 [Users with elevated access](/components/hub/workspace/modeler/collaboration/collaboration.md#elevated-access) can:
 
 - View additional details about the published version.
-- Open the resource's versions list (if they are in [super-user mode](/components/hub/workspace/modeler/collaboration/collaboration.md#super-user-mode) or are a [project admin or editor](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Open the resource's versions list (if they have [organization admin or owner access](/components/hub/workspace/modeler/collaboration/collaboration.md#organization-admin-and-owner-access) or are a [project admin or editor](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
 - Unpublish an element template directly from this view.
 
 ![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)

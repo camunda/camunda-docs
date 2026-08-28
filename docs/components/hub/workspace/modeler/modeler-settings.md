@@ -30,7 +30,7 @@ Organization admins can configure the deployment policy for projects in the Web 
 
 <TabItem value='saas'>
 
-By default, only [organization administrators](/components/hub/organization/manage-members/manage-users.md) can deploy projects to clusters marked as
+By default, only [organization administrators](/components/hub/organization/manage-users/manage-users.md) can deploy projects to clusters marked as
 [production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Web Modeler.
 
 You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
@@ -44,7 +44,7 @@ This setting can only be configured by organization admins and applies to all pr
 
 <TabItem value='self-managed'>
 
-By default, only users with the **Web Modeler Admin** role can deploy projects to
+By default, only users with the **Hub Admin** role can deploy projects to
 clusters marked as [production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Web Modeler.
 
 You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
@@ -52,13 +52,12 @@ You can change this in the **Project deployment** settings. To get there, select
 Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
 after a collaborator has reviewed and approved the project version using the
 [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
-This setting can only be configured by users with the **Web Modeler Admin** role and applies to all projects.
+This setting can only be configured by users with the **Hub Admin** role and applies to all projects.
 
-If the **Web Modeler Admin** role is not pre-existing, it can be created with the following permissions:
+If the **Hub Admin** role is not pre-existing, it can be created with the following permissions:
 
-- Web Modeler Internal API - `write:*`
-- Web Modeler Internal API - `admin:*`
-- Web Modeler Internal API - `admin:*`
+- Hub Internal API - `write:*`
+- Hub Internal API - `admin:*`
 - Camunda Identity Resource Server - `read:users`
 
 Refer to the documentation pages about [assigning roles](../../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
