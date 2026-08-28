@@ -5,8 +5,13 @@ sidebar_label: "Multi-region with RDBMS"
 description: "Deploy three Amazon EKS clusters connected by AWS Transit Gateway and Submariner, backed by an Aurora Global Database, to run one Orchestration Cluster across three regions."
 ---
 
+<!-- TODO: the `reference` code blocks below point at the `feat/eks-multi-region-rdbms` branch of
+     camunda-deployment-references so they render while https://github.com/camunda/camunda-deployment-references/pull/2940
+     is open. Repoint every one of them to `main` once that pull request is merged. -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import HighLevelDesign from './assets/eks-multi-region-rdbms.svg';
 
 This guide deploys one Camunda 8 Orchestration Cluster across three AWS regions, using [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html) for compute, [AWS Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html) for inter-region routing, [Submariner](https://submariner.io/) for cross-cluster service discovery, and [Aurora Global Database](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html) as relational secondary storage.
 
@@ -15,6 +20,21 @@ Review the [Multi-Region RDBMS concept documentation](/self-managed/concepts/mul
 :::
 
 The result is a cluster in which losing a region does not stop processing, and in which bringing the region back is a redeployment rather than a data restore. For the reasoning behind the topology, see [partition placement across zones](/self-managed/concepts/multi-region/multi-region-rdbms.md#partition-placement-across-zones).
+
+## High-level design
+
+<HighLevelDesign role="img" title="Three AWS regions, each with an EKS cluster in its own VPC and a Camunda zone. A Transit Gateway per region is peered in a full mesh, Submariner publishes each region's Zeebe service under a clusterset name, and an Aurora Global Database with a writer in eu-west-2 and a reader in eu-west-3 backs all three regions through a single JDBC URL." />
+
+Each layer of the design has one job, and they are independent of each other:
+
+| Layer                    | Component                  | What it provides                                                                                |
+| :----------------------- | :------------------------- | :---------------------------------------------------------------------------------------------- |
+| Compute                  | One EKS cluster per region | Zeebe brokers, gateway, and connectors for one Camunda zone.                                    |
+| L3, inter-region routing | AWS Transit Gateway        | Carries all cross-region traffic, including Raft and the database writes, on private addresses. |
+| L7, service discovery    | Submariner                 | Publishes each region's Zeebe service under a name every other region can resolve.              |
+| Secondary storage        | Aurora Global Database     | One writer and its readers, replicated by the database, reached through a single JDBC URL.      |
+
+The database regions are deliberately **decoupled** from the compute regions: the Aurora members live in London and Paris while compute spans all three regions. That keeps the database cheaper and demonstrates that the two topologies are independent.
 
 :::tip
 New to Terraform or to running Camunda on EKS? Start with the [single-region EKS Terraform setup](./terraform-setup.md), which covers AWS authentication, Terraform state management, and the essentials of an EKS cluster. This guide assumes you have completed a single-region deployment at least once.
@@ -83,8 +103,6 @@ The default topology uses three regions and three zones:
 
 Brokers are identified as `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region; only `global.multiregion.zone` and the advertised host differ.
 
-The database regions are deliberately **decoupled** from the compute regions. Aurora Global Database members live in London and Paris while compute spans all three regions, which keeps the database cheaper and demonstrates that the two topologies are independent.
-
 ### CIDR allocation
 
 Every region owns a distinct VPC range and a distinct Kubernetes service range. Both are routed over the Transit Gateway:
@@ -102,15 +120,15 @@ There is no separate pod range, and that is deliberate. With the [AWS VPC CNI](h
 
 ### Obtain a copy of the reference architecture
 
-Download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/). This material is used throughout the rest of this guide.
+Download a copy of the reference architecture from the [GitHub repository](https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/). This material is used throughout the rest of this guide.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/get-your-copy.sh
 ```
 
 ### Review the region topology
 
-The region slots are declared in [variables.tf](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/variables.tf). Adjust the regions, short names, and CIDR blocks to your environment before applying.
+The region slots are declared in [variables.tf](https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/variables.tf). Adjust the regions, short names, and CIDR blocks to your environment before applying.
 
 Two variables control the topology, and they are not interchangeable:
 
@@ -168,7 +186,7 @@ The dot is required: these scripts export variables into your current shell, not
 `export_environment_prerequisites.sh` is the environment contract of the architecture. Every value can be overridden by exporting it beforehand, and region-indexed values are space-separated lists in slot order.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/export_environment_prerequisites.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/export_environment_prerequisites.sh
 ```
 
 The script refuses to continue if the topology is inconsistent, for example if more than one slot is left empty.
@@ -180,7 +198,7 @@ Unlike the [dual-region setup](./dual-region.md), which needs a different namesp
 ### Register the kubectl contexts
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/register-kubecontexts.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/register-kubecontexts.sh
 ```
 
 This creates one context per active region, named after the region's short name, for example `cluster-london`.
@@ -190,13 +208,13 @@ This creates one context per active region, named after the region's short name,
 Zeebe brokers need a storage class backed by fast disks. Apply it in every region:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-configure.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-configure.sh
 ```
 
 Verify it before continuing. A missing storage class leaves broker PVCs unbound and the pods pending, which is easy to misread later as a networking failure:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-verify.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-verify.sh
 ```
 
 ## 3. Connect the clusters
@@ -206,7 +224,7 @@ Two layers connect the regions, and they have different jobs. The Transit Gatewa
 ### Install subctl
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/install-subctl.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/install-subctl.sh
 ```
 
 ### Deploy the Submariner broker
@@ -214,7 +232,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 The broker stores ClusterSet metadata. Any cluster can host it, and its loss does not interrupt anything already established.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/deploy-broker.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/deploy-broker.sh
 ```
 
 Submariner is deployed with its **service-discovery component only**. It provides multi-cluster DNS and nothing else: no gateway nodes, no IPsec tunnel, no route agent. `subctl show connections` is empty by design.
@@ -235,13 +253,13 @@ What you give up is control of the encryption, not the encryption: the keys are 
 ### Join the clusters to the ClusterSet
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/join-clusters.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/join-clusters.sh
 ```
 
 Then verify:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/verify-submariner.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/verify-submariner.sh
 ```
 
 ### Verify the cross-region substrate
@@ -257,7 +275,7 @@ If this fails, the problem is routing or firewalling, not Camunda. See [troubles
 
 ### Ports open between regions
 
-The security group rules are declared explicitly in [security.tf](https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/security.tf) rather than allowing all traffic between VPCs:
+The security group rules are declared explicitly in [security.tf](https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/security.tf) rather than allowing all traffic between VPCs:
 
 | Port          | Protocol | Purpose                                                             |
 | :------------ | :------- | :------------------------------------------------------------------ |
@@ -274,7 +292,7 @@ Each rule is instantiated once per remote VPC range and once per remote service 
 ### Create the database secret
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/create-rdbms-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/create-rdbms-secret.sh
 ```
 
 ### Generate the region-dependent values
@@ -301,7 +319,7 @@ The generated contact points end with a trailing dot, which marks them as fully 
 The values file is the same in every region. Only `global.multiregion.zone` and the advertised host differ, which is what makes the topology a single description rather than one per region.
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/helm-values/camunda-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/helm-values/camunda-values.yml
 ```
 
 The parts worth reading before you install:
@@ -316,13 +334,13 @@ The parts worth reading before you install:
 ### Install the chart
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/install-chart.sh
 ```
 
 Then export the Camunda services to the ClusterSet so brokers in other regions can resolve them:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/export-services.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/export-services.sh
 ```
 
 ## 5. Verify the deployment
@@ -330,7 +348,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 Confirm that every broker joined and that the partition distribution matches the zone list:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/check-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/check-cluster-topology.sh
 ```
 
 Expect roughly 10 minutes for the Zeebe cluster to converge across regions. A healthy three-zone cluster reports six brokers, six partitions, and one replica of every partition in each zone.
@@ -338,7 +356,7 @@ Expect roughly 10 minutes for the Zeebe cluster to converge across regions. A he
 Measure the cost of the write path from each region to the database writer. Regions that are not co-located with the writer pay the inter-region round trip on every export flush, and this is what tells you whether the exporter queue is sized correctly:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/measure-rdbms-latency.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/measure-rdbms-latency.sh
 ```
 
 ## 6. Operate the cluster
@@ -384,7 +402,7 @@ kubectl --context cluster-london -n camunda get serviceexports,serviceimports
 A full diagnostic dump, including cross-cluster name resolution, is available:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/diagnose-submariner.sh
+https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/diagnose-submariner.sh
 ```
 
 ### Zeebe never reaches the expected broker count

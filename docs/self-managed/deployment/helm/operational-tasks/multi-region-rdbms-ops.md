@@ -7,6 +7,7 @@ description: "Handle a region loss, bring a region back, and activate a declared
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import RegionLoss from './img/multi-region-rdbms-region-loss.svg';
 
 This runbook covers the day-2 operations of a [Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md) setup: losing a region, bringing it back, and activating a zone that was declared but never deployed.
 
@@ -19,6 +20,8 @@ Develop, test, and rehearse these procedures in a non-production environment bef
 In a [dual-region](./dual-region-ops.md) setup, losing a region costs the Zeebe quorum. Processing stops, and the failover procedure exists to restore it: remove the lost brokers, disable the exporter to the lost region, and later restore secondary storage from a snapshot.
 
 With three or more zones, none of that applies. Every partition keeps a majority of its replicas, so **Zeebe keeps processing** and no Zeebe action is required to restore service. The failover procedure mostly reports; its only real work is the database writer, and only when the writer was in the lost region.
+
+<RegionLoss role="img" title="Side-by-side timelines of the same zone loss. In a two-zone cluster, Zeebe loses quorum and processing stops until an operator force-removes the lost brokers and disables the exporter, and failback also requires a secondary storage snapshot and restore, for four operator steps in total. In a three-zone cluster, quorum holds and processing continues, there is nothing to force-remove, disable, or restore, and two operator steps remain: promoting the database writer if it was in the lost zone, and redeploying the zone." />
 
 | Step                             | Dual-region                             | Multi-Region RDBMS                              |
 | :------------------------------- | :-------------------------------------- | :---------------------------------------------- |
