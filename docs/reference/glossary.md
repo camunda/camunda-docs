@@ -310,7 +310,7 @@ An event represents a state change associated with an aspect of an executing [pr
 
 In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
 
-The execution platform version is not a deployed process definition version, a Web Modeler version, or a SaaS cluster generation.
+The execution platform version is not a deployed process definition version, a [file version](#version-file) or [project snapshot](#snapshot-project), or a SaaS cluster generation.
 
 - [Desktop Modeler flags](/components/modeler/desktop-modeler/flags/flags.md#default-execution-platform-version)
 
@@ -374,7 +374,7 @@ Any AI system that can produce new content, such as text, images, or audio, in r
 
 In Camunda 8 SaaS, a generation is the release identifier for the version set running in a cluster. Console uses generations instead of a single engine version because the underlying component versions can change independently.
 
-A generation is not a process definition version, a version tag, or a Web Modeler version.
+A generation is not a process definition version, a version tag, or a [file version](#version-file) or [project snapshot](#snapshot-project).
 
 - [Generation names](/reference/announcements-release-notes/release-policy.md#generation-names)
 
@@ -597,7 +597,7 @@ The engine uses process definitions to start [process instances](#process-instan
 
 A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
 
-Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a Web Modeler version, which is a saved file or project snapshot.
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project), which are saved Web Modeler captures.
 
 - [Process definition](#process-definition)
 - [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
@@ -774,6 +774,12 @@ The state of all active [process instances](#process-instance), (these are also 
 
 - [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
+### Snapshot (project)
+
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
+
 ### Soft pause exporting
 
 Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
@@ -847,27 +853,24 @@ A variable stores data for a [process instance](#process-instance) or a local sc
 
 ### Version
 
-In Camunda 8, version is an overloaded term. Depending on context, it can refer to a [process definition version](#process-definition-version), a [version tag](#version-tag), a [Web Modeler version](#web-modeler-version), an [execution platform version](#execution-platform-version), or a SaaS [generation](#generation).
+In Camunda 8, version is an overloaded term. Depending on context, it can refer to a [process definition version](#process-definition-version), a [version tag](#version-tag), a [file version](#version-file) or [project snapshot](#snapshot-project), an [execution platform version](#execution-platform-version), or a SaaS [generation](#generation).
 
 ### Version tag
 
 A version tag is a user-defined string label for a specific resource or snapshot.
 
-For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Web Modeler project versioning, a version tag labels a saved project snapshot.
+For deployed BPMN, DMN, and form resources, a version tag can be used to identify a resource version and to resolve dependencies with `versionTag` binding. In Camunda Hub project snapshots, a version tag labels a saved project snapshot.
 
 A version tag is not generated automatically and does not replace the numeric process definition version.
 
 - [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
 - [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
 
-### Web Modeler version
+### Version (file)
 
-A Web Modeler version is a saved snapshot of a BPMN or DMN file, or of an entire project. Diagram versions were previously called milestones.
-
-Web Modeler versions help you compare, restore, review, and deploy snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
 
 - [Versions](/components/hub/workspace/modeler/modeling/versions.md)
-- [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
 
 ## W
 

@@ -101,7 +101,9 @@ Organization members without special organization permissions can:
 
 ### Versioning element templates
 
-You can version your element templates [similar to diagrams](/components/hub/workspace/modeler/modeling/versions.md).
+Element templates use their own numbered versioning, distinct from the [file version history](/components/hub/workspace/modeler/modeling/versions.md) used by diagrams, forms, RPA scripts, README files, and test files. Each publish creates a new numbered version in the template's versions list.
+
+To restore an earlier template version, select it in the versions list and select **Restore**. Restoring publishes the earlier content as a new numbered version. It doesn't create an autosave first, since the version you're restoring from remains available in the versions list.
 
 If you publish a new version of an element template and an older version is already being used in diagrams, the user can either:
 

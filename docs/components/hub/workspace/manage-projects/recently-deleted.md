@@ -38,7 +38,7 @@ DELETE /api/v2/files/{fileKey}/permanent
 
 ## Purge a file from versions
 
-If you delete a file within a project, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from all project version history, a client with `delete` permissions can call the public purge endpoint:
+If you delete a file within a project, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from the file's entire history, a client with `delete` permissions can call the public purge endpoint:
 
 ```bash
 DELETE /api/v2/files/{fileKey}/purge
