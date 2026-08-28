@@ -8,6 +8,7 @@ description: "Multi-Region RDBMS spreads an Orchestration Cluster across three o
 import PageDescription from '@site/src/components/PageDescription';
 import TopologyImg from './img/multi-region-rdbms-topology.svg';
 import QuorumImg from './img/multi-region-rdbms-quorum.svg';
+import ZoneActivationImg from './img/multi-region-rdbms-zone-activation.svg';
 
 <PageDescription />
 
@@ -150,6 +151,8 @@ Follow the upgrade recommendations in the [Camunda Helm chart](/self-managed/upg
 ## Growing the cluster
 
 Zone awareness names zones instead of numbering brokers, so the zone list can change without renumbering the cluster. That makes one growth path online and another one a migration.
+
+<ZoneActivationImg role="img" title="Two states of the same cluster. On the left, three zones are declared and two deployed: the third zone's replica is reserved, every partition runs at two of three replicas, a majority, and the cluster runs. On the right, the third zone has been activated and every partition holds three of three replicas. No broker is renumbered and no partition is redistributed between the two states." />
 
 **Activating a declared zone is online.** List every zone the cluster will ever have from the start, and deploy fewer of them. The partition layout reserves the missing zone's replicas, so each partition runs at `N - 1` of `N`, still a majority, and the cluster forms and serves normally. Deploying that zone later only fills in replicas that were already reserved: no broker is renumbered, no partition is redistributed, and the running regions are untouched.
 
