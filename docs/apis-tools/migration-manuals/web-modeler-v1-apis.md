@@ -588,3 +588,7 @@ When versioning a connector template, you may receive a `409 CONFLICT` citing a 
 - An element template version, which is defined in the [template metadata](/components/modeler/element-templates/template-metadata.md#identification-id-and-version), can't be created if the version already exists in Web Modeler.
 - Therefore, if a process application version is created, but the element template version hasn't been updated, you receive a `409`.
   :::
+
+## Create a process application
+
+Create process applications with the new `POST /api/v1/process-applications` endpoint.
