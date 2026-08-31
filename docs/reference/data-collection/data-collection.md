@@ -54,7 +54,7 @@ Contractual metrics telemetry data includes a limited set of contractually agree
 
 ### Orchestration Cluster telemetry
 
-Starting with Camunda 8.10, the Orchestration Cluster can send product telemetry directly to Camunda through the [analytics exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md). This telemetry contains process metadata only. It never includes process variables, payloads, message content, incident error messages, or BPMN, DMN, or form resources.
+Starting with Camunda 8.10, the Orchestration Cluster can send product telemetry directly to Camunda through the [Analytics Exporter](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md). This telemetry contains process metadata only. It never includes process variables, payloads, message content, incident error messages, or BPMN, DMN, or form resources.
 
 Telemetry is grouped into two categories:
 
@@ -155,7 +155,7 @@ Where each category of telemetry sits:
 | Telemetry                                            | State         |
 | ---------------------------------------------------- | ------------- |
 | Environment data and contractual usage metrics       | Anonymous     |
-| Orchestration Cluster telemetry (analytics exporter) | Anonymous     |
+| Orchestration Cluster telemetry (Analytics Exporter) | Anonymous     |
 | SaaS user actions and Desktop Modeler usage          | Pseudonymized |
 
 Orchestration Cluster telemetry carries no user identifier. The `camunda.user_task.assigned` signal counts assignment events and does not carry the assignee value, a hash of it, or any other value derived from it, so it cannot distinguish one individual from another.
@@ -174,7 +174,7 @@ To object to processing of the pseudonymized subset, or to make a data subject r
 
 | Deployment            | Control                                                                                                                                                                                                                                           |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Self-Managed**      | The analytics exporter is off by default. Enable it, and narrow what it sends, with the `categories` option. See [Choose what is sent](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md#choose-what-is-sent). |
+| **Self-Managed**      | The Analytics Exporter is off by default. Enable it, and narrow what it sends, with the `categories` option. See [Choose what is sent](/self-managed/components/orchestration-cluster/zeebe/exporters/analytics-exporter.md#choose-what-is-sent). |
 | **SaaS**              | Optional telemetry is controlled per cluster in cluster settings. Contractual telemetry is required to operate the service and cannot be disabled.                                                                                                |
 | **SaaS user actions** | Controlled per user through cookie preferences, shown in [Usage telemetry data](#usage-telemetry-data-saas-and-desktop-modeler-only).                                                                                                             |
 | **Desktop Modeler**   | Controlled per installation. See [Desktop Modeler telemetry](/components/modeler/desktop-modeler/telemetry/telemetry.md).                                                                                                                         |

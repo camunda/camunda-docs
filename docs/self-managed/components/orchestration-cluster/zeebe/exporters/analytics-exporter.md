@@ -1,15 +1,15 @@
 ---
 id: analytics-exporter
-title: "Analytics exporter"
-sidebar_label: "Analytics exporter"
-description: "Understand how the analytics exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends."
+title: "Analytics Exporter"
+sidebar_label: "Analytics Exporter"
+description: "Understand how the Analytics Exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends."
 ---
 
-Understand how the analytics exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends.
+Understand how the Analytics Exporter sends product telemetry from your Self-Managed Orchestration Cluster to Camunda, how to enable and configure it, and exactly what data it sends.
 
 ## About
 
-The analytics exporter sends product telemetry from your Orchestration Cluster to a Camunda-operated analytics endpoint over OTLP/HTTP.
+The Analytics Exporter sends product telemetry from your Orchestration Cluster to a Camunda-operated analytics endpoint over OTLP/HTTP.
 
 Camunda uses this data to verify contractual usage, understand how the product is used, and support your deployment. For what Camunda collects and why across all products, see [Data collection](/reference/data-collection/data-collection.md).
 
@@ -259,7 +259,7 @@ The agent definition (model, provider, system prompt), its tools, its token coun
 | ------------------------------------ | ------ | --------------------------- |
 | `event.name`                         | string | Always `heartbeat`.         |
 | `camunda.heartbeat.broker_version`   | string | Broker version.             |
-| `camunda.heartbeat.exporter_version` | string | Analytics exporter version. |
+| `camunda.heartbeat.exporter_version` | string | Analytics Exporter version. |
 
 **`camunda.telemetry.export_window`** (gauge metric) - accompanies every metrics export, carrying the window total and log position range. Camunda uses it for deduplication and gap detection.
 
