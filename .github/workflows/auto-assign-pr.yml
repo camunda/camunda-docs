@@ -10,7 +10,7 @@ jobs:
     if: startsWith(github.actor, 'renovate') == false && startsWith(github.actor, 'camunda-docs-pr-automation') == false
     runs-on: ubuntu-latest
     steps:
-      - uses: actions-ecosystem/action-add-assignees@ce5019e63cc4f35aba27308dc88d19c8f3686747  # v1.0.0
+      - uses: actions-ecosystem/action-add-assignees@ce5019e63cc4f35aba27308dc88d19c8f3686747 # v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           assignees: ${{ github.actor }}
