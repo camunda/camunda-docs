@@ -84,7 +84,7 @@ For this example, the first iteration shows:
 
 <img src={AgentConversationHistory} alt="Agent conversation history overview"/>
 
-If a tool maps to a BPMN element in your process, Operate links the tool call in the conversation history to that element on the diagram, so you can navigate straight from the decision trail to the execution step it produced. 
+If a tool maps to a BPMN element in your process, Operate links the tool call in the conversation history to that element on the diagram, so you can navigate straight from the decision trail to the execution step it produced.
 
 ## Step 5: Understand how agent memory is stored
 
