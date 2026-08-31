@@ -102,7 +102,7 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints. All validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting. There is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
+At startup, configuration validation enforces tenant-level constraints. Most validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting; the exception is secret store and cache validation (see **Secrets** below), which throws `IllegalStateException`/`IllegalArgumentException` directly. There is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
 Known constraints and behavior for 8.10:
 
@@ -117,7 +117,7 @@ Known constraints and behavior for 8.10:
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
-- **Secrets**: each physical tenant supports at most one secret store, and its id must be `default`; any other id is rejected. The cache `ttl` (minimum `1m`, whole minutes only) and `max-size` (minimum `1`) are validated per tenant. Override the root-level `camunda.secrets.*` defaults per tenant via `camunda.physical-tenants.<tenant-key>.secrets.*`. These failures surface as `IllegalStateException`/`IllegalArgumentException` from secret store construction, not `UnifiedConfigurationException`.
+- **Secrets**: each physical tenant supports at most one secret store, and its id must be `default`; any other id is rejected. The cache `ttl` (minimum `1m`, whole minutes only) and `max-size` (minimum `1`) are validated per tenant. Override the root-level `camunda.secrets.*` defaults per tenant via `camunda.physical-tenants.<tenant-key>.secrets.*`.
 
 ### Startup error message formats
 
