@@ -281,6 +281,100 @@ The `REPORT_NAME` and `REPORT_ID` labels identify the evaluated report or dashbo
 
 Report latency metrics are controlled by the `optimize.metrics.report-latency.enabled=true` configuration property. Set the property to `false` to disable report latency metrics.
 
+## Secret resolution and cache metrics
+
+Camunda emits meters for resolving secret references against a secret store, and for the in-memory
+cache that sits in front of each configured store. Together, they distinguish a secret store that
+is slow or unavailable from a cache that is simply cold, in a case that otherwise shows up only as
+jobs that fail to activate.
+
+No meter listed here is tagged by secret name: the cardinality is unbounded, and secret names are
+customer data.
+
+### Secret resolution metrics
+
+These meters cover resolving secret references against a secret store.
+
+| Metric name                             | Type    | Description                                                                                                                                                                                                                                                                                                                                                                  | Labels                        |
+| --------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `camunda.secret.resolution.duration`    | Timer   | Latency of one batch resolution call against a secret store, covering the call itself and not the follow-up commands the engine writes for its results. Split by how the call ended, so a store timing out does not distort the latency of the calls that came back.                                                                                                         | `store`, `result` (see below) |
+| `camunda.secret.resolution.outcome`     | Counter | Number of secret reference resolutions that produced an outcome, per store. Every result value is terminal for the reference it counts, so the values can be summed or divided by one another to derive rates. A reference whose store is unavailable but still has retry attempts left is not counted at all, since it has not reached a terminal outcome.                  | `store`, `result` (see below) |
+| `camunda.secret.resolution.cycle.error` | Counter | Number of resolution cycles in which a store failed in a way the engine does not model: an unexpected exception rather than a per-secret failure or an unreachable store. Counted per store. Always indicates a bug, either in the store implementation or in the engine. Counts cycles, not references, so it is a separate meter from `camunda.secret.resolution.outcome`. | `store`                       |
+
+The `store` label carries the ID of the secret store a reference belongs to.
+
+The `result` label carries different value domains depending on the meter, because
+`camunda.secret.resolution.duration` measures a whole batch call while
+`camunda.secret.resolution.outcome` measures one reference at a time:
+
+`result` values on `camunda.secret.resolution.duration`:
+
+| Value               | Description                                                                  |
+| ------------------- | ---------------------------------------------------------------------------- |
+| `RETURNED`          | The store returned, whatever the per-reference results were.                 |
+| `STORE_UNAVAILABLE` | The store could not be reached for this call.                                |
+| `ERROR`             | The store threw something the engine does not model. Always indicates a bug. |
+
+`result` values on `camunda.secret.resolution.outcome`:
+
+| Value               | Description                                                                                                                           |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `RESOLVED`          | The store returned a value for the reference.                                                                                         |
+| `NOT_FOUND`         | The store does not hold the reference.                                                                                                |
+| `ACCESS_DENIED`     | The store refused to read the reference.                                                                                              |
+| `INVALID_REF`       | The reference is not valid for the store.                                                                                             |
+| `UNREADABLE`        | The store holds the reference but could not read a value from it.                                                                     |
+| `STORE_UNAVAILABLE` | The store could not serve the reference at all: either it is not configured, or it could not be reached and no retry attempt is left. |
+
+### Secret cache metrics
+
+Each configured secret store resolves through an in-memory cache. These meters say how well that
+cache is doing its job.
+
+| Metric name                      | Type    | Description                                                                                                                                                                                                                                                                                                                          | Labels                        |
+| -------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
+| `camunda.secret.cache.result`    | Counter | Number of secret cache lookups, per store and per result, so the hit rate is `HIT / (HIT + MISS)`. Every lookup is counted exactly once. A name the store answers permanently (deleted, denied, or an invalid reference) is never cached, so it misses on every lookup for as long as it is referenced. That is not a cache to tune. | `store`, `result` (see below) |
+| `camunda.secret.cache.evictions` | Counter | Number of entries removed from a secret cache, per store and per cause.                                                                                                                                                                                                                                                              | `store`, `cause` (see below)  |
+| `camunda.secret.cache.size`      | Gauge   | Estimated number of entries a secret cache currently holds, per store. Estimated because eviction is asynchronous, so the value can briefly sit above the configured maximum: read it as a level to compare against that maximum, not as an exact count.                                                                             | `store`                       |
+
+The `store` label carries the ID of the secret store whose cache this is.
+
+`result` values on `camunda.secret.cache.result`:
+
+| Value  | Description                                                                            |
+| ------ | -------------------------------------------------------------------------------------- |
+| `HIT`  | The cache held a value for the name.                                                   |
+| `MISS` | The cache held no value for the name, so the caller had to reach the store or give up. |
+
+`cause` values on `camunda.secret.cache.evictions`:
+
+| Value       | Description                                                                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `SIZE`      | The cache was full, so it dropped an entry to make room for another.                                                                       |
+| `EXPIRED`   | The entry's time-to-live elapsed.                                                                                                          |
+| `EXPLICIT`  | Something removed the entry by name. In practice, this is a store answering a name permanently (deleted, denied, or an invalid reference). |
+| `COLLECTED` | The entry's key or value was garbage collected.                                                                                            |
+
+### Read cache and resolution metrics together
+
+`camunda.secret.cache.result` and `camunda.secret.resolution.outcome` answer different questions.
+Reading them in the wrong order can make a healthy cache look broken. A falling cache hit rate only
+means the cache is not holding what callers ask for. It does not mean the value was cacheable in the
+first place. A reference that a store answers permanently as not found, denied, or invalid is never
+cached, so it registers a `MISS` on every lookup for as long as it is referenced. Read a low hit rate
+against `camunda.secret.resolution.outcome` first: if the misses concentrate on references that never
+resolve, the fix is not in the cache.
+
+### Cache size and the configured maximum
+
+`camunda.secret.cache.size` is bounded per store by the
+[`camunda.secrets.cache.max-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camunda-secrets-cache)
+property. The bound applies per store, not as a shared budget, so the worst-case memory footprint
+across a deployment is the number of configured stores multiplied by that maximum.
+
+For how the broker resolves secret references before job activation, see
+[Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+
 ## Grafana
 
 ### Zeebe
