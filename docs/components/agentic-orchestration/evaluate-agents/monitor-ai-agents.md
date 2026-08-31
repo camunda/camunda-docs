@@ -2,14 +2,17 @@
 id: monitor-ai-agents
 title: Monitor your AI agents with Operate
 sidebar_label: Monitor with Operate
-description: "Monitor an AI agent's real-time state, usage metrics, and conversation history in Operate, including agents built with external frameworks."
+description: "Monitor and troubleshoot your AI agent process instances in real time using Operate"
 keywords:
   ["agentic ai", "AI agents", "Operate", "agent instance", "decision trail"]
 ---
 
 import ProcessInstance from '../img/process-instance-overview.png';
+import AgentState from '../img/agent-state.png';
+import AgentPanel from '../img/agent-panel.png';
+import AgentConversationHistory from '../img/agent-conversation-history.png';
 
-Monitor and troubleshoot your AI agent process instances in real time using Operate, including their decision trail.
+Monitor and troubleshoot your AI agent process instances in real time using Operate.
 
 ## About
 
@@ -48,14 +51,13 @@ For example:
 2. Locate the process instance created by your prompt. See [view a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
-Operate highlights the agent element on the diagram according to its current [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) — for example, `Thinking` while the agent reasons, or `Tool calling` while it calls the **Jokes API** tool. A simple prompt like this one moves through its loop quickly, so the agent instance may already show `Idle` or `Completed` by the time you look:
+At this point, you should see the process progressing through your model:
 
-<img src={ProcessInstance} alt="Process instance overview with the agent element highlighted by its current state"/>
+<img src={ProcessInstance} alt="Process instance overview"/>
 
-<!--
-SCREENSHOT TO UPDATE: process-instance-overview.png
-Recapture to show the agent element on the diagram highlighted with its live state (for example, `Tool calling` or `Idle`), replacing the current screenshot that predates state highlighting.
--->
+Operate highlights the agent element's current [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states). For example, `Thinking` while the agent reasons, or `Tool calling` while it calls the **Jokes API** tool. A simple prompt like this one moves through its loop quickly, so the agent instance may already show `Idle` or `Completed` by the time you look.
+
+<img src={AgentState} alt="Agent state overview" width="50%"/>
 
 ## Step 3: Inspect the agent's state and usage metrics
 
@@ -65,16 +67,14 @@ Select the agent element on the diagram. Operate shows the [data available](/com
 - The tools resolved for it.
 - Its usage metrics: token consumption, tool call count, and model call count against the configured limit.
 
-<!--
-SCREENSHOT NEEDED: agent-state-panel.png
-The agent element's details panel, showing the state, model, system prompt, tools list, and usage metrics/limits described above. Confirm the exact panel/tab name and layout when capturing this.
--->
+
+<img src={AgentPanel} alt="Agent panel overview"/>
 
 For guidance on reading these signals to catch a stuck or looping agent, see [detect off-rail agents](./detect-off-rail-agents.md).
 
 ## Step 4: Review the conversation history
 
-The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1. iteration`.
+The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1.loop iteration`.
 
 For this example, the first iteration shows:
 
@@ -82,17 +82,9 @@ For this example, the first iteration shows:
 - The assistant message where the agent selects the **Jokes API** tool, along with its reasoning.
 - The tool result containing the joke text.
 
-<!--
-SCREENSHOT NEEDED: agent-conversation-history.png
-The conversation history view for this process instance, showing at least one `iteration` group with a user prompt, an assistant message with a tool selection, and the resulting tool call/result.
--->
+<img src={AgentConversationHistory} alt="Agent conversation history overview"/>
 
-If a tool maps to a BPMN element in your process, Operate links the tool call in the conversation history to that element on the diagram, so you can navigate straight from the decision trail to the execution step it produced. See [step 4: report state transitions](/components/agentic-orchestration/connect-external-agent.md#step-4-report-state-transitions) for how this linking works.
-
-<!--
-SCREENSHOT NEEDED: agent-tool-call-detail.png
-A single tool call entry in the conversation history expanded to show its arguments and result inline, ideally also showing the link/navigation to the corresponding diagram element.
--->
+If a tool maps to a BPMN element in your process, Operate links the tool call in the conversation history to that element on the diagram, so you can navigate straight from the decision trail to the execution step it produced. 
 
 ## Step 5: Understand how agent memory is stored
 
@@ -124,7 +116,6 @@ In this case, the required action is to provide feedback on the agent results. T
 
 Now that you know how to monitor your AI agents, you can:
 
-- [Connect an external agent](/components/agentic-orchestration/connect-external-agent.md) built with a framework like LangGraph or CrewAI so it gets this same visibility.
 - [Analyze your AI agents](./analyze-ai-agents.md) with Optimize.
 - [Test your AI agents](./test-ai-agents.md) with Camunda Process Test, including handling non-deterministic flows and verifying AI-generated output.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
