@@ -36,7 +36,8 @@ Camunda follows certain principles in its collection and use of telemetry data t
 - Telemetry data does not include any data shared in process instances or uploaded in customer clusters. Therefore, **no end-user or end-customer personal data**, personal information (PII), or protected health information (PHI) uploaded to a customer cluster is part of telemetry data.
 - Telemetry data does **not include payment information**.
 - Camunda does **not sell any personal (user) information.**
-- **Telemetry data is minimized, and aggregated wherever the purpose allows.** Most telemetry carries only system-generated identifiers, such as cluster, process, and instance keys. Where a signal does retain an identifier that can distinguish an individual, such as the user ID in SaaS usage telemetry, Camunda treats it as personal data and handles it accordingly.
+- **Telemetry data is pseudonymized where identifiers are retained for a lawful purpose, and otherwise aggregated and anonymized.** Where an identifier can distinguish one individual from others, Camunda treats the data as personal data and handles it accordingly. See [Identifiability](#identifiability).
+- **Telemetry is used for product improvement, diagnostics, performance, billing, and account-level analytics.** Camunda does not use telemetry data for automated decision-making producing legal or similarly significant effects on natural persons.
 - **For Self-Managed customers, Orchestration Cluster telemetry is disabled by default.** Telemetry data is sent only after an administrator enables it. See [Orchestration Cluster telemetry](#orchestration-cluster-telemetry).
 - Data collected from end-users such as form fills or process variables are not part of telemetry data. For example, if part of your process involves a user filling in a shipping address, that address is not telemetry data.
 - Assets like the BPMN diagram describing how a process is defined and executed are not telemetry data. Telemetry data does not include information about how customers develop their processes, like keystrokes or BPMN diagrams. Instead, it includes user-provided identifiers like a process ID to track which Camunda software features are used when developing a process.
@@ -136,6 +137,38 @@ Below is an example of user action data collected by the platform:
   }
 }
 ```
+
+## Identifiability
+
+Camunda distinguishes between three states and handles each differently:
+
+| State                     | Meaning                                                                                                                           |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Anonymous**             | No individual can be distinguished, including by combining the data with other records. Aggregate counts fall into this category. |
+| **Pseudonymized**         | Direct identifiers are replaced with substitute values, but an individual can still be distinguished across records.              |
+| **Directly identifiable** | An individual can be identified directly, for example by name or email address.                                                   |
+
+Pseudonymized data is personal data. Replacing an identifier with a substitute value does not make the data anonymous, because the individual can still be singled out.
+
+Where each category of telemetry sits:
+
+| Telemetry                                            | State         |
+| ---------------------------------------------------- | ------------- |
+| Environment data and contractual usage metrics       | Anonymous     |
+| Orchestration Cluster telemetry (analytics exporter) | Anonymous     |
+| SaaS user actions and Desktop Modeler usage          | Pseudonymized |
+
+Orchestration Cluster telemetry carries no user identifier. The `camunda.user_task.assigned` signal counts assignment events and does not carry the assignee value, a hash of it, or any other value derived from it, so it cannot distinguish one individual from another.
+
+## Lawful basis
+
+| Data                                                               | Basis                                                                                                                                                            |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Environment data and contractual usage metrics                     | Not personal data, and therefore outside the scope of the GDPR. Processed under the contract between Camunda and the customer.                                   |
+| Usage telemetry that retains an identifier distinguishing a person | Personal data. Camunda's legitimate interests under Article 6(1)(f) GDPR in operating, securing, supporting, and improving the software, with a route to object. |
+| SaaS user actions and Desktop Modeler telemetry                    | Consent under Article 5(3) of the ePrivacy Directive, given through cookie and telemetry preferences.                                                            |
+
+To object to processing of the pseudonymized subset, or to make a data subject request, contact Camunda through the route described in the [Privacy Policy](https://camunda.com/legal/privacy/).
 
 ## How to control telemetry
 
