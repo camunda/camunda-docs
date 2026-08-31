@@ -50,13 +50,11 @@ If tenant scope is omitted in compatibility paths, requests resolve to the defau
 
 ## Disable, rename, and delete
 
-<!-- TODO: Confirm the 8.10 GA deletion story before release. This page states deletion is not supported, but the notes in camunda-docs#8899 reference an explicit delete API for permanent deletion, alongside an actuator endpoint that removes a disabled tenant without deleting its data. These cannot both be accurate. The troubleshooting page currently follows this page. Review with Deepthi Devaki or Lena Schoenburg. -->
-
 For 8.10:
 
 - Disabling and re-enabling a Physical Tenant is supported through configuration. There is no dedicated API for this operation.
 - Renaming a Physical Tenant is not supported.
-- Deleting a Physical Tenant is not supported.
+- Deleting a Physical Tenant is not supported. No API deletes a tenant's data.
 
 A Physical Tenant's enabled state follows its configuration directly:
 
@@ -65,6 +63,14 @@ A Physical Tenant's enabled state follows its configuration directly:
 - **Re-added to configuration:** The tenant is re-enabled with its existing data. Nothing needs to be re-created.
 
 Each of these transitions takes effect through the same rolling restart used for any other configuration change.
+
+### Logically remove a disabled tenant
+
+A disabled tenant still appears in the cluster topology, which blocks operations that require every tenant to be accounted for, such as multi-region failover.
+
+An actuator endpoint logically removes a tenant that you have already removed from configuration. It drops the tenant from the cluster topology and **deletes no data**. This is not a delete API, and it is not a way to reclaim storage. To remove a tenant's data, act on its schema, indices, or document store directly in the backend.
+
+<!-- TODO: Add the exact actuator path and required permission for logical removal. Lena Schoenburg confirmed the behavior in Slack on (no delete API; endpoint deletes no data; exists so a disabled tenant does not block multi-region failover) but did not name the endpoint. -->
 
 ## Out of scope for 8.10
 
