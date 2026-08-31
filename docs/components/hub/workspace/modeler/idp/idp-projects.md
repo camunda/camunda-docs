@@ -4,12 +4,9 @@ title: IDP projects
 description: "Create and manage your intelligent document processing document extraction and classification templates in an IDP project."
 ---
 
-import IdpProjectImg from './img/idp-project.png';
 import IdpProjectModalImg from './img/idp-project-modal.png';
 
 Create and manage your IDP document extraction and classification templates in an **IDP project**.
-
-<img src={IdpProjectImg} alt="IDP project screen" style={{marginTop: '0'}} />
 
 ## Create an IDP project
 
