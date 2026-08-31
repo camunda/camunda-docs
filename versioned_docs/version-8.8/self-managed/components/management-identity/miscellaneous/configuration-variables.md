@@ -93,8 +93,8 @@ for `WEBMODELER`, which is`web-modeler`.
 
 Identity requires a database in the following cases:
 
-- Connecting to an OIDC provider (Generic or Microsoft Entra ID) requires a database, regardless of feature flags. Identity stores roles, permissions, mapping rules, and groups in the database, and resolves authorization against it on every request. See [connect Management Identity to an identity provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
-- Using the default Keycloak-based setup and enabling the `resource-permissions` or `multi-tenancy` [feature flags](#feature-flags) requires a database.
+- Connecting to either a generic OIDC provider or Microsoft Entra ID requires a database, regardless of feature flags. Identity stores roles, permissions, mapping rules, and groups in the database, and resolves authorization against the database on every request. See [connect Management Identity to an identity provider](/self-managed/components/management-identity/configuration/connect-to-an-oidc-provider.md).
+- With the default Keycloak-based setup, Identity requires a database when you enable the `resource-permissions` or `multi-tenancy` [feature flags](#feature-flags).
 
 With the default Keycloak-based setup and no feature flags enabled, Identity does not require a database, as Keycloak stores this data separately.
 

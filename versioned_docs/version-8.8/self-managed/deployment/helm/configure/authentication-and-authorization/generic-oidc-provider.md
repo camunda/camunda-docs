@@ -23,7 +23,7 @@ Before you begin, ensure you have:
 - Access to your provider's discovery document to obtain endpoint URLs.
 - A Kubernetes cluster with Helm 3.x installed.
 - kubectl configured to access your cluster.
-- A database is required for Management Identity when connecting to an OIDC provider, regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so no separate database is needed; to use an external database instead, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
+- When you connect Management Identity to an OIDC provider, you need a database regardless of feature flags. This guide uses the chart's bundled PostgreSQL instance (`identityPostgresql`), so you don't need a separate database. To use an external database, see [use external PostgreSQL](/self-managed/deployment/helm/configure/database/using-existing-postgres.md).
 
 :::note
 This guide assumes your OIDC provider is already operational. It does not cover provider installation or basic OIDC configuration.
@@ -124,10 +124,10 @@ Camunda components request OIDC scopes when authenticating users. The default sc
 
 | Scope            | Description                         | Management Identity, Optimize, Web Modeler, Console | Orchestration Cluster (Operate, Tasklist) |
 | ---------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------- |
-| `openid`         | Required for OIDC authentication.   | ✔                                                  | ✔                                        |
-| `profile`        | Access to user profile information. | ✔                                                  | ✔                                        |
-| `email`          | Access to user email address.       | ✔                                                  |                                           |
-| `offline_access` | Enables refresh token issuance.     | ✔                                                  |                                           |
+| `openid`         | Required for OIDC authentication.   | ✔                                                   | ✔                                         |
+| `profile`        | Access to user profile information. | ✔                                                   | ✔                                         |
+| `email`          | Access to user email address.       | ✔                                                   |                                           |
+| `offline_access` | Enables refresh token issuance.     | ✔                                                   |                                           |
 
 :::info
 If your provider supports the `offline_access` scope, components will receive refresh tokens. This allows sessions to remain active longer without requiring users to re-authenticate.
