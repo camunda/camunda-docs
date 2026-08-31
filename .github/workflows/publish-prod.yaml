@@ -26,8 +26,8 @@ jobs:
     runs-on: gcp-core-16-release
     container: node:24
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020  # v7.0.0
         with:
           node-version: 24
       - name: Install Dependencies
@@ -55,7 +55,7 @@ jobs:
             secret/data/products/camunda-docs/ci/publish USER;
             secret/data/products/camunda-docs/ci/publish PRIVATE_KEY;
       - name: Publish
-        uses: burnett01/rsync-deployments@4d419d1dc46d4a8a2b6ceab2f951f0f93b2da8f5
+        uses: burnett01/rsync-deployments@4d419d1dc46d4a8a2b6ceab2f951f0f93b2da8f5  # 9.0.0
         with:
           switches: -avzr --delete
           path: build/
@@ -83,7 +83,7 @@ jobs:
             secret/data/products/camunda-docs/ci/algolia-crawl CRAWLER_API_KEY;
             secret/data/products/camunda-docs/ci/algolia-crawl CRAWLER_USER_ID;
       - name: Trigger Algolia crawl
-        uses: algolia/algoliasearch-crawler-github-actions@3ae4def15d82c60aa02b0e528b50167593cbaaf6
+        uses: algolia/algoliasearch-crawler-github-actions@3ae4def15d82c60aa02b0e528b50167593cbaaf6  # v1.1.13
         id: algolia_crawler
         with:
           crawler-user-id: ${{ steps.secrets.outputs.CRAWLER_USER_ID }}
