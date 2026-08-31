@@ -2,35 +2,32 @@
 id: monitor-ai-agents
 title: Monitor your AI agents with Operate
 sidebar_label: Monitor with Operate
-description: "Monitor and troubleshoot your AI agent process instances in real time using Operate."
-keywords: ["agentic ai", "AI agents", "Operate"]
+description: "Monitor an AI agent's real-time state, usage metrics, and conversation history in Operate, including agents built with external frameworks."
+keywords:
+  ["agentic ai", "AI agents", "Operate", "agent instance", "decision trail"]
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
 import ProcessInstance from '../img/process-instance-overview.png';
-import InstanceHistory from '../img/instance-history.png';
-import Variables from '../img/variables.png';
 
-Monitor and troubleshoot your AI agent process instances in real time using Operate.
+Monitor and troubleshoot your AI agent process instances in real time using Operate, including their decision trail.
 
 ## About
 
 In this guide, you will:
 
-- Inspect an AI agent process instance in Operate.
-- Understand the agent's tool usage and metadata, such as tool call inputs and results.
-- Analyze the agent context and how it is stored.
+- Inspect an AI agent's real-time state and usage metrics from its process instance in Operate.
+- Review the agent's decision trail: the conversation history grouped by loop iteration, including the tools it selected and the results it received.
+- Understand how the agent's conversation memory is stored.
 
 :::note
-Operate enables inspection of execution paths, tool usage, and agent metadata. However, certain runtime artifacts, such as document storage contents, may require additional configuration.
+Operate surfaces the agent's state, metrics, and conversation history directly, so you rarely need to inspect raw process variables. Some runtime artifacts, such as document storage contents, may still require additional configuration to view. See [agent context and memory](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-context-and-memory) for how the underlying data is stored.
 :::
 
-After completing this guide, you will be able to inspect, debug, and monitor AI agent executions in Camunda 8.
+After completing this guide, you will be able to monitor, debug, and troubleshoot AI agent executions in Operate, including agents built with external frameworks such as LangGraph or CrewAI. See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for how those agents report the same data.
 
 ## Prerequisites
 
-- You have access to [Operate](/components/operate/operate-introduction.md).
+- You have access to [Operate](/components/operate/operate-introduction.md) on Camunda 8.10 or later.
 - You have the [AI Agent Chat Quick Start](https://marketplace.camunda.com/en-US/apps/587865) model blueprint deployed in [Modeler](/components/modeler/about-modeler.md).
 
 :::important
@@ -51,124 +48,65 @@ For example:
 2. Locate the process instance created by your prompt. See [view a deployed process](/components/operate/userguide/basic-operate-navigation.md#view-a-deployed-process) for more details.
 3. Open your process instance view by clicking on its process instance key.
 
-At this point, you should see the process progressing through your model:
+Operate highlights the agent element on the diagram according to its current [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) — for example, `Thinking` while the agent reasons, or `Tool calling` while it calls the **Jokes API** tool. A simple prompt like this one moves through its loop quickly, so the agent instance may already show `Idle` or `Completed` by the time you look:
 
-<img src={ProcessInstance} alt="Process instance overview"/>
+<img src={ProcessInstance} alt="Process instance overview with the agent element highlighted by its current state"/>
 
-## Step 3: Understand what Operate shows
+<!--
+SCREENSHOT TO UPDATE: process-instance-overview.png
+Recapture to show the agent element on the diagram highlighted with its live state (for example, `Tool calling` or `Idle`), replacing the current screenshot that predates state highlighting.
+-->
 
-With Operate, you can track the agent activity and see which tool tasks are called.
+## Step 3: Inspect the agent's state and usage metrics
 
-1. To show how many times each BPMN element is triggered, select **Execution count** in the **Instance History** section. For this particular prompt example, you can see:
-   - The AI Agent connector was triggered once.
-   - Within it, the agent executed the **Jokes API** tool.
+Select the agent element on the diagram. Operate shows the [data available](/components/agentic-orchestration/agent-definitions-and-instances.md#data-available-in-operate) for its agent instance, including:
 
-2. Select the **Jokes API** tool element:
-   - In the bottom-left pane, you can see where the element belongs in the execution tree:
-     <img src={InstanceHistory} alt="Jokes API execution tree" width="80%"/>
+- Its current state, model, and system prompt.
+- The tools resolved for it.
+- Its usage metrics: token consumption, tool call count, and model call count against the configured limit.
 
-- In the bottom-right pane, the element details are displayed, including the [**Variables**](/components/concepts/variables.md) and [**Input/Output Mappings**](/components/concepts/variables.md#inputoutput-variable-mappings) columns, among others.
-  However, the actual tool inputs and results are stored in a **parent scope** and are accessible via the element's inner instance in the execution tree. See [Step 4: Inspect tool calls](#step-4-inspect-tool-calls) for more details.
+<!--
+SCREENSHOT NEEDED: agent-state-panel.png
+The agent element's details panel, showing the state, model, system prompt, tools list, and usage metrics/limits described above. Confirm the exact panel/tab name and layout when capturing this.
+-->
 
-## Step 4: Inspect tool calls
+For guidance on reading these signals to catch a stuck or looping agent, see [detect off-rail agents](./detect-off-rail-agents.md).
 
-Each tool execution produces an inner instance where you can find:
+## Step 4: Review the conversation history
 
-- The inputs passed into the tool.
-- The results.
+The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1. iteration`.
 
-To see the **Jokes API** tool input and results:
+For this example, the first iteration shows:
 
-1. In the execution tree, select the **AI_Agent#innerInstance** parent element of the **Jokes API** tool. You will see:
-   - The `toolCall` variable (the _input_).
-   - The `toolCallResult` variable (the _results_). See [Tool call responses](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#tool-call-responses) for more details.
+- The user prompt, "Tell me a joke."
+- The assistant message where the agent selects the **Jokes API** tool, along with its reasoning.
+- The tool result containing the joke text.
 
-  <img src={Variables} alt="Jokes API variable details"/>
+<!--
+SCREENSHOT NEEDED: agent-conversation-history.png
+The conversation history view for this process instance, showing at least one `iteration` group with a user prompt, an assistant message with a tool selection, and the resulting tool call/result.
+-->
 
-2. To better inspect the results, click the pencil icon to enter edit mode for `toolCallResult`.
-3. Click the two-arrow icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value:
+If a tool maps to a BPMN element in your process, Operate links the tool call in the conversation history to that element on the diagram, so you can navigate straight from the decision trail to the execution step it produced. See [step 4: report state transitions](/components/agentic-orchestration/connect-external-agent.md#step-4-report-state-transitions) for how this linking works.
 
-```json
-{
-  "Java and C were telling jokes. It was C's turn, so he writes something on the wall, points to it and says \"Do you get the reference?\" But Java didn't."
-}
-```
+<!--
+SCREENSHOT NEEDED: agent-tool-call-detail.png
+A single tool call entry in the conversation history expanded to show its arguments and result inline, ideally also showing the link/navigation to the corresponding diagram element.
+-->
 
-:::note
-If a tool is executed more than once, select the desired tool invocation in **Instance History**, then open the corresponding inner instance to view the actual inputs and results.
-:::
-
-## Step 5: Analyze the agent context
-
-Within the AI Agent connector, you can examine the agent context.
-To view it:
-
-1. Select the **AI Agent** element in the execution tree.
-2. To better inspect the value, click the pencil icon to enter edit mode for the `agentContext` variable.
-3. Click the two-arrow icon to open the JSON editor modal. With this, you can inspect the full payload of the variable value.
-
-In the JSON payload, you can find information about:
-
-- Defined tools.
-- The conversation, including your prompts and agent's replies.
-- Tool calls invoked by the agent.
-- Tool call inputs and results.
-- Additional metadata, such as reasoning traces and token usage.
-
-Here’s a snippet of the example conversation stored in the agent’s context:
-
-```json
-"type": "in-process",
-"conversationId": "3889288d-5904-485f-bdca-48ad1f1ef679",
-"messages": [
-  {
-    "role": "system",
-    "content": [
-      {
-        "type": "text",
-        "text": "You are a helpful, generic chat agent which can answer a wide amount of questions based on your knowledge and an optional set of available tools.\n\nIf tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don't guess any tools which were not explicitely configured. If no tool matches the request, try to generate an answer. If you're not able to find a good answer, return with a message stating why you're not able to.\n\nIf you are prompted to interact with a person, never guess contact details, but use available user/person lookup tools instead and return with an error if you're not able to look up appropriate data.\n\nThinking, step by step, before you execute your tools, you think using the template `<thinking><context></context><reflection></reflection></thinking>`"
-      }
-    ]
-  },
-  {
-    "role": "user",
-    "content": [
-      {
-        "type": "text",
-        "text": "Tell me a joke"
-      }
-    ],
-    "metadata": {
-      "timestamp": "2026-04-06T09:53:19.224987296Z"
-    }
-  },
-  {
-    "role": "assistant",
-    "content": [
-      {
-        "type": "text",
-        "text": "<thinking>\n<context>\nThe user is asking for a joke. I have access to a Jokes_API function that can fetch a random joke from a REST API. This seems like the perfect tool to use for this request. The function doesn't require any parameters, so I can call it directly.\n</context>\n<reflection>\nThis is a straightforward request that matches exactly with one of my available tools. I should use the Jokes_API function to get a random joke for the user.\n</reflection>\n</thinking>"
-      }
-    ],
-    "toolCalls": [
-      {
-        "id": "tooluse_x83f1Vaj62lgkT9PMo6oqB",
-        "name": "Jokes_API",
-        "arguments": {}
-      }
-    ],
-```
-
-## Step 6: Understand how agent memory is stored
+## Step 5: Understand how agent memory is stored
 
 In Modeler, within the AI Agent sub-process, you can define how the conversation memory is stored using the **Memory storage type** field.
 
-By default, agent memory uses the **In Process** type, which stores it as part of the agent context.
-With this option, you can view it in Operate within the agent context, as you did in the previous step, [Analyze the agent context](#step-5-analyze-the-agent-context).
+By default, agent memory uses the **In Process** type, which stores it as part of the agent context, the same underlying data the conversation history in [step 4](#step-4-review-the-conversation-history) is built from.
 
 Other available options include **Camunda Document Storage**, **AWS AgentCore Memory**, and a custom implementation. See [memory](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#memory) for more details.
 
-## Step 7: Review the results
+:::note Advanced: inspect the raw agent context
+For a Camunda AI agent, this data is stored in the `agentContext` process variable. Open the element's **Variables** tab to inspect it directly, for example to check a runtime artifact not surfaced in the conversation history. See [agent context and memory](/components/agentic-orchestration/agent-definitions-and-instances.md#agent-context-and-memory) for how it's structured.
+:::
+
+## Step 6: Review the results
 
 Go back to Operate. In the **User Feedback** element, you will see the execution count in green. This means the process instance execution is stopped there and waiting for action.
 
@@ -186,6 +124,7 @@ In this case, the required action is to provide feedback on the agent results. T
 
 Now that you know how to monitor your AI agents, you can:
 
+- [Connect an external agent](/components/agentic-orchestration/connect-external-agent.md) built with a framework like LangGraph or CrewAI so it gets this same visibility.
 - [Analyze your AI agents](./analyze-ai-agents.md) with Optimize.
 - [Test your AI agents](./test-ai-agents.md) with Camunda Process Test, including handling non-deterministic flows and verifying AI-generated output.
 - Learn more about [Camunda agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) and the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md).
