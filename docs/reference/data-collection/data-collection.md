@@ -36,9 +36,8 @@ Camunda follows certain principles in its collection and use of telemetry data t
 - Telemetry data does not include any data shared in process instances or uploaded in customer clusters. Therefore, **no end-user or end-customer personal data**, personal information (PII), or protected health information (PHI) uploaded to a customer cluster is part of telemetry data.
 - Telemetry data does **not include payment information**.
 - Camunda does **not sell any personal (user) information.**
-- **Telemetry data is pseudonymized when an identifier is retained for a lawful purpose. Otherwise, it is aggregated and anonymized.** Camunda does not claim that all telemetry data is anonymous. If an identifier can distinguish one individual from others, Camunda treats the data as personal data and handles it accordingly. See [Identifiability](#identifiability).
+- **Telemetry data is minimized, and aggregated wherever the purpose allows.** Most telemetry carries only system-generated identifiers, such as cluster, process, and instance keys. Where a signal does retain an identifier that can distinguish an individual, such as the user ID in SaaS usage telemetry, Camunda treats it as personal data and handles it accordingly.
 - **For Self-Managed customers, Orchestration Cluster telemetry is disabled by default.** Telemetry data is sent only after an administrator enables it. See [Orchestration Cluster telemetry](#orchestration-cluster-telemetry).
-
 - Data collected from end-users such as form fills or process variables are not part of telemetry data. For example, if part of your process involves a user filling in a shipping address, that address is not telemetry data.
 - Assets like the BPMN diagram describing how a process is defined and executed are not telemetry data. Telemetry data does not include information about how customers develop their processes, like keystrokes or BPMN diagrams. Instead, it includes user-provided identifiers like a process ID to track which Camunda software features are used when developing a process.
 - Customers are responsible for avoiding sharing intellectual property, personal data or sensitive data through interaction with AI features. The data collected by different AI features is shared [below](#usage-telemetry-data-saas-and-desktop-modeler-only).
@@ -137,39 +136,6 @@ Below is an example of user action data collected by the platform:
   }
 }
 ```
-
-## Identifiability |
-
-Camunda distinguishes between three states and handles each differently:
-
-| State                     | Meaning                                                                                                                              |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| **Anonymous**             | No individual can be distinguished. This includes aggregate counts, such as the number of distinct task users during a given period. |
-| **Pseudonymized**         | Direct identifiers are replaced with substitute values, but an individual can still be distinguished across records.                 |
-| **Directly identifiable** | An individual can be directly identified, for example, by their name or email address.                                               |
-
-### Assignee identifiers in Orchestration Cluster telemetry
-
-The `camunda.user_task.assigned` signal carries a SHA-256 digest of the task assignee rather than the assignee value itself. Camunda uses it to count distinct task users for the contractual task-user metric.
-
-This means:
-
-- The raw assignee value, whether a user name, an email address, or an external identifier, is **never sent**.
-- The digest is **stable**, so it distinguishes one individual consistently across records. It is therefore **pseudonymised data, not anonymous data**, and Camunda treats it as personal data.
-- The digest is **unsalted**, so the same assignee value produces the same digest across clusters.
-- Because this signal belongs to the contractual category, it **cannot be disabled separately** from other contractual telemetry. Customers who must not send it should not enable the analytics exporter.
-
-## Lawful basis
-
-| Data                                                    | Basis                                                                                                                  |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Environment and contractual usage data                  | Performance of the contract between Camunda and the customer. This data is not personal data.                          |
-| Pseudonymised usage data, including the assignee digest | Camunda's legitimate interests in operating, securing, supporting, and improving the software, with a route to object. |
-| SaaS user actions and Desktop Modeler telemetry         | Consent, given through cookie and telemetry preferences.                                                               |
-
-Camunda does not use telemetry data for automated decision-making producing legal or similarly significant effects on natural persons.
-
-To object to processing of the pseudonymised subset, or to make a data subject request, contact Camunda through the route described in the [Privacy Policy](https://camunda.com/legal/privacy/).
 
 ## How to control telemetry
 

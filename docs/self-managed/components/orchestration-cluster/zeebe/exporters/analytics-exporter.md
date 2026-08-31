@@ -57,9 +57,15 @@ No further setup is required. The exporter resolves your [cluster ID](/self-mana
 
 ### Network requirements
 
-The exporter makes outbound HTTPS requests to the Camunda analytics endpoint:
+:::danger BLOCKER - endpoint hostname unresolved, do not publish
+The customer-facing analytics endpoint is not yet available. The canonical hostname agreed with SRE, `product-telemetry.camunda.io`, does not resolve; the DNS record fronting the collector has not been created.
 
-Allowlist this host in your egress firewall rules on every broker.
+The default compiled into `stable/8.10`, `https://analytics.cloud.camunda.io`, is **not** the collector. It resolves to the Camunda SaaS control plane and rejects the exporter's OTLP requests, so a cluster enabling the exporter today sends telemetry that is silently discarded. camunda/camunda#60355 replaces the default but is unmerged and not backported.
+
+Fill in the hostname here and in the [configuration reference](#configuration-reference), then delete this admonition.
+:::
+
+The exporter makes outbound HTTPS requests to the Camunda analytics endpoint. Allowlist that host in your egress firewall rules on every broker.
 
 :::warning
 If the endpoint is unreachable, the exporter fails **silently**. No incident is raised, no error is surfaced to operators, and the brokers continue running normally. Verify connectivity when you enable the exporter; you will not be told if it stops working.
@@ -151,14 +157,13 @@ Set on every event record:
 
 Taken from activation of the root process element, the single point every process instance passes through however it was started: client API, message, timer, signal, or conditional start event. Instances started by a call activity are excluded, so this counts root instances only.
 
-**`camunda.user_task.assigned`** - a user task was assigned to a user.
+**`camunda.user_task.assigned`** - a user task was assigned to a user. This signal carries no assignee-derived data; it only counts assignment events.
 
-| Attribute                         | Type   | Description                                                                            |
-| --------------------------------- | ------ | -------------------------------------------------------------------------------------- |
-| `camunda.user_task.key`           | long   | User task key.                                                                         |
-| `camunda.user_task.assignee_hash` | string | SHA-256 hex digest of the assignee. See [Assignee identifiers](#assignee-identifiers). |
-| `camunda.process.instance_key`    | long   | Process instance key.                                                                  |
-| `camunda.tenant.id`               | string | Tenant ID.                                                                             |
+| Attribute                      | Type   | Description           |
+| ------------------------------ | ------ | --------------------- |
+| `camunda.user_task.key`        | long   | User task key.        |
+| `camunda.process.instance_key` | long   | Process instance key. |
+| `camunda.tenant.id`            | string | Tenant ID.            |
 
 Assignments with an empty assignee produce no event.
 
@@ -276,25 +281,13 @@ All options live under `args`. The defaults suit typical Self-Managed deployment
 
 | Option               | Type     | Description                                                                                                                                         | Default                                           |
 | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| `endpoint`           | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                                       | see [Network requirements](#network-requirements) |
+| `endpoint`           | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                                       | See [Network requirements](#network-requirements) |
 | `categories`         | list     | Signal categories to export: `contractual`, `optional`. Empty or omitted enables all.                                                               | `[contractual, optional]`                         |
 | `push-interval`      | duration | Maximum time between batch pushes, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).                                     | `PT5M`                                            |
 | `heartbeat-interval` | duration | Interval between heartbeat events carrying static cluster metadata.                                                                                 | `PT10M`                                           |
 | `max-queue-size`     | int      | Maximum number of records buffered in memory before new records are dropped.                                                                        | `2048`                                            |
 | `max-batch-size`     | int      | Maximum number of records per OTLP request. Must not exceed `max-queue-size`.                                                                       | `512`                                             |
 | `sampling-rate`      | double   | Default sampling rate for events, between `0.0` and `1.0`. Individual signals may declare a lower rate; the effective rate is the lower of the two. | `1.0`                                             |
-
-## Assignee identifiers
-
-`camunda.user_task.assigned` carries `camunda.user_task.assignee_hash`, a SHA-256 hex digest of the assignee. The raw assignee value is never sent. Camunda uses the digest to count distinct task users for the contractual task-user metric.
-
-Understand what this identifier is:
-
-- It is a **pseudonym, not anonymous data**. The digest is stable, so it identifies one individual consistently across events.
-- The hash is **unsalted**, so the same assignee produces the same digest on every cluster.
-- It **cannot be disabled independently** in this release. Because the signal is `contractual`, removing `optional` from `categories` does not suppress it. The only way to stop it is to not run the exporter.
-
-For how Camunda treats this data, its lawful basis, and how to raise an objection, see [Data collection](/reference/data-collection/data-collection.md).
 
 ## Failure behavior
 
