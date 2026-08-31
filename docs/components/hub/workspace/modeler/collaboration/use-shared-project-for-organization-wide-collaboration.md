@@ -81,12 +81,9 @@ You can open the process landscape view by clicking **View landscape** from any 
    :::note
    For projects, version tags represent a unified "versioned" snapshot of all project files rather than separate versions for each file as with simple BPMN files.
    :::
-   ![selected node information](../img/process-landscape-node-information.png)
 
 2. **Search**: Press `Ctrl+F` or `⌘+F` to search. Enter the name or identifier of a BPMN file to quickly find, highlight, and jump to the corresponding node.
-   ![landscape search](../img/process-landscape-search.png)
 3. **Highlight paths:** Click on a node or connection to highlight the entire chain of related connections.
-   ![landscape selected node connections](../img/process-landscape-connection.png)
 
 ### README documentation
 
