@@ -7,7 +7,7 @@ Configures the secret stores and cache used to resolve `camunda.secrets.<name>` 
 
 <!-- TODO(camunda/camunda#60326): link the secret resolution concept page here once its title, placement, and the feature's terminology are finalized. -->
 
-`camunda.secrets.*` sets the root-level defaults, applied to the `default` physical tenant. Override those defaults per physical tenant under `camunda.physical-tenants.<tenant-key>.secrets.*`. See the [Physical Tenants configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md).
+`camunda.secrets.*` sets the root-level defaults, applied to the `default` physical tenant. Override those defaults per physical tenant under `camunda.physical-tenants.<tenant-key>.secrets.*`. See [Validation and constraints](/self-managed/concepts/physical-tenants/configuration-reference.md#validation-and-constraints) in the Physical Tenants configuration reference.
 
 <Tabs>
   <TabItem value="application.yaml" label="Application properties">
