@@ -13,6 +13,11 @@ Create and manage your IDP document extraction and classification templates in a
 
 ## Create an IDP project
 
+:::important
+Ensure your cluster meets the [IDP project requirements](idp-configuration.md#cluster-requirements).
+Camunda recommends using a development (`dev`) cluster for IDP projects.
+:::
+
 To create an IDP project:
 
 1. Open a workspace in Web Modeler.
@@ -30,13 +35,6 @@ To create an IDP project:
 
 :::note
 Document classification templates require cluster version 8.9-alpha5 or later. If your cluster does not meet this requirement, only extraction templates are available.
-:::
-
-:::note
-
-- Camunda recommends using a development (dev) cluster for your IDP projects.
-- Ensure that the selected cluster meets the [IDP project cluster requirements](idp-configuration.md#cluster-requirements).
-
 :::
 
 ## Change IDP project cluster
