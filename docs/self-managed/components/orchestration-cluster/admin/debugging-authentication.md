@@ -40,11 +40,11 @@ Typical failure points:
 
 To isolate the issue, use:
 
-- [Reviewing logs](#reviewing-logs)
-- [Reviewing data](#reviewing-data)
-- [Reviewing configuration](#reviewing-configuration)
-- [Inspecting the JWT](#inspecting-the-jwt)
-- [Testing the IdP directly](#testing-the-idp-directly)
+- [Review logs](#review-logs)
+- [Review data](#review-data)
+- [Review configuration](#review-configuration)
+- [Inspect the JWT](#inspect-the-jwt)
+- [Test the IdP directly](#test-the-idp-directly)
 
 ## Review logs
 
@@ -151,7 +151,7 @@ Decode the token presented to the Orchestration Cluster and check:
 - Compare any claims your mapping rules match against with the claim name and value configured on each [mapping rule](/components/admin/mapping-rules.md). A wrong claim name, unexpected casing, or incorrect operator for an array claim can prevent a mapping rule from granting the expected role, group, or tenant.
 - Confirm the `aud` claim matches the `audience` configured for that client.
 
-## Testing the IdP directly
+## Test the IdP directly
 
 To determine whether a failure originates at your identity provider or within Camunda, request a token directly from the IdP, bypassing Camunda entirely:
 
@@ -164,6 +164,6 @@ curl -X POST '<token-endpoint>' \
 ```
 
 - If the request fails or returns an error, investigate the IdP configuration, grant type, network, or firewall. The problem isn't specific to Camunda.
-- If the request succeeds, decode the returned token as described in [Inspect the JWT](#inspecting-the-jwt) and confirm it contains the claims Camunda expects. If the token contains the expected claims but Camunda still rejects the request, check Camunda's authorization configuration, including mapping rules, roles, and authorizations.
+- If the request succeeds, decode the returned token as described in [inspect the JWT](#inspect-the-jwt) and confirm it contains the claims Camunda expects. If the token contains the expected claims but Camunda still rejects the request, check Camunda's authorization configuration, including mapping rules, roles, and authorizations.
 
 For interactive browser logins, complete the login flow directly on your IdP's hosted login page before troubleshooting Camunda. This confirms whether the user can authenticate with the IdP.

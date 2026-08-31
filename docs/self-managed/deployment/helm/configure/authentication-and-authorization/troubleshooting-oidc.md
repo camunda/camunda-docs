@@ -101,7 +101,7 @@ javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.pro
 
 **Why this happens:** Your OIDC provider's certificate (or the internal Keycloak instance's certificate) is signed by a private or internal certificate authority that isn't in the JVM truststore Camunda components use by default.
 
-**How to fix:** Add your CA to the trust bundle Camunda components use to validate the connection. See [Configure TLS](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) for the Helm chart's `global.tls.caBundle` overlay, which covers this exact scenario.
+**How to fix:** Add your CA to the trust bundle Camunda components use to validate the connection. See [configure TLS](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) for the Helm chart's `global.tls.caBundle` overlay, which covers this exact scenario.
 
 ## Pods not starting
 

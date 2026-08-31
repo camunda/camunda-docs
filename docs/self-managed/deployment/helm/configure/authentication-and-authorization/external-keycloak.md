@@ -20,8 +20,7 @@ If you prefer Camunda to also create and manage a Keycloak pod, see the [interna
 If your external Keycloak instance presents a certificate signed by a private or internal certificate authority, Camunda components won't trust it by default. Configure [TLS trust](/self-managed/deployment/helm/configure/tls.md#external-oidc-issuer-with-private-ca) before or alongside this guide to avoid `PKIX path building failed` errors.
 :::
 
-Before you begin, ensure you’re running a Keycloak version that’s supported by your Camunda release. See [Supported environments](/reference/supported-environments.md#component-requirements).
-
+Before you begin, ensure you’re running a Keycloak version that’s supported by your Camunda release. See [supported environments](/reference/supported-environments.md#component-requirements).
 
 ## Configure Keycloak
 
