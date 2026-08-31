@@ -74,3 +74,5 @@ both the gRPC stream and the REST sidecar poll. The REST worker takes the same
 option as `camunda.WithJobLease(true)`. Leases are off by default (matching the
 engine) and need an engine that supports them; older gateways ignore the flag and
 keep handing out unleased jobs.
+
+An [external agent](/reference/glossary.md#external-agent) runtime relies on the same lease to fence its reported conversation history against retried job activations; see [activate the job with a lease](/components/agentic-orchestration/connect-external-agent.md#step-2-activate-the-job-with-a-lease).
