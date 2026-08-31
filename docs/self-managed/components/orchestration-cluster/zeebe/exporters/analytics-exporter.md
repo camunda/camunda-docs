@@ -58,7 +58,7 @@ No further setup is required. The exporter resolves your [cluster ID](/self-mana
 ### Network requirements
 
 :::danger BLOCKER - endpoint hostname unresolved, do not publish
-The customer-facing analytics endpoint is not yet available. The canonical hostname agreed with SRE, `product-telemetry.camunda.io`, does not resolve; the DNS record fronting the collector has not been created.
+The customer-facing analytics endpoint is not yet available, and its hostname is not yet agreed. Candidates in play are `telemetry.camunda.io`, `product-telemetry.camunda.io`, and `analytics.camunda.io`; none of them resolves today, and SRE has not confirmed a name or created the DNS record fronting the collector.
 
 The default compiled into `stable/8.10`, `https://analytics.cloud.camunda.io`, is **not** the collector. It resolves to the Camunda SaaS control plane and rejects the exporter's OTLP requests, so a cluster enabling the exporter today sends telemetry that is silently discarded. camunda/camunda#60355 replaces the default but is unmerged and not backported.
 
