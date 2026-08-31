@@ -48,9 +48,9 @@ Affected endpoints:
 
 Instead of passing the process application ID to the folders endpoints, use the new process application endpoints:
 
-- `DELETE /api/v1/process-applications/{processApplicationId}`
-- `GET /api/v1/process-applications/{processApplicationId}`
-- `PATCH /api/v1/process-applications/{processApplicationId}`
+- [`DELETE /api/v1/process-applications/{processApplicationId}`](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/deleteProcessApplication)
+- [`GET /api/v1/process-applications/{processApplicationId}`](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/getProcessApplication)
+- [`PATCH /api/v1/process-applications/{processApplicationId}`](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/updateProcessApplication)
 
 Example:
 
@@ -588,3 +588,9 @@ When versioning a connector template, you may receive a `409 CONFLICT` citing a 
 - An element template version, which is defined in the [template metadata](/components/modeler/element-templates/template-metadata.md#identification-id-and-version), can't be created if the version already exists in Web Modeler.
 - Therefore, if a process application version is created, but the element template version hasn't been updated, you receive a `409`.
   :::
+
+## Create a process application
+
+Create process applications with the new [`POST /api/v1/process-applications` endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/createProcessApplication).
+
+Previously, you could create files and folders at the project root without a process application. Now, files and folders must be stored in a process application. With this endpoint, you can create an entire file structure with the API, including the container process application.
