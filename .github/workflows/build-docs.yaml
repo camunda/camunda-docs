@@ -26,7 +26,7 @@ jobs:
     steps:
       # SHA ref is main
       - uses: camunda/infra-global-github-actions/start-build-monitor@02b3f0e49b00b98fffc76af690ebc83c28f24dae
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Dependencies
         run: npm ci
       # Removed because it's causing build issues
@@ -37,7 +37,7 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=30720
       - name: Upload build
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: docs-build
           path: build
@@ -65,19 +65,19 @@ jobs:
     steps:
       # SHA ref is main
       - uses: camunda/infra-global-github-actions/start-build-monitor@02b3f0e49b00b98fffc76af690ebc83c28f24dae
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
       - name: Download build
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: docs-build
           path: build
       - name: Install hyperlink
         run: npm install -g @untitaker/hyperlink
       - name: Check internal links
-        uses: untitaker/hyperlink@0.3.2
+        uses: untitaker/hyperlink@9375bc4063712ad490d5eb3d54df0b6aade15e54 # 0.3.2
         with:
           args: build/
       - name: Remove https redirect
@@ -90,7 +90,7 @@ jobs:
           echo "container_ip=${container_ip}" >> $GITHUB_ENV
           echo "domain_to_test=http://${container_ip}:8080" >> $GITHUB_ENV
       - name: Wait for running docs web server
-        uses: nev7n/wait_for_response@v1
+        uses: nev7n/wait_for_response@7fef3c1a6e8939d0b09062f14fec50d3c5d15fa1 # v1.0.1
         with:
           url: ${{ env.domain_to_test }}
       - name: Download sitemap from production
@@ -113,7 +113,7 @@ jobs:
             > ${temporary_link_path}/connectors-element-template-links.html
       - name: Serve link collections
         ## Run another web server because Muffet only works against web pages, not source files.
-        uses: Eun/http-server-action@v1
+        uses: Eun/http-server-action@dadebd209d4a902eeefceb524c24c38b364c46a7 # v1.0.13
         with:
           directory: ${{ env.temporary_link_path }}
           port: 8081
@@ -151,7 +151,7 @@ jobs:
     if: failure() && fromJSON(github.run_attempt) < 3
     steps:
       - name: Retry job
-        uses: camunda/infra-global-github-actions/rerun-failed-run@main
+        uses: camunda/infra-global-github-actions/rerun-failed-run@475528365f4010480dccff71ccac554cc3352e7c # rerun-failed-run-1.1.2
         with:
           error-messages: |
             The runner has received a shutdown signal.
