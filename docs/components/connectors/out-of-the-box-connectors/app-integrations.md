@@ -2,7 +2,7 @@
 id: app-integrations
 title: App Integrations connector
 sidebar_label: App Integrations
-description: Send messages to Microsoft Teams and Slack, and create channels, from your BPMN process.
+description: Send and receive Microsoft Teams and Slack messages, and create channels, from your BPMN process.
 ---
 
 import Tabs from "@theme/Tabs";
@@ -11,13 +11,15 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 import OutboundConnectorBasics from '../../../components/react-components/\_connector-outbound-basics.md'
 import ErrorHandling from '../../../components/react-components/\_connector-error-handling.md'
 
-Send messages to Microsoft Teams and Slack, and create channels, directly from your BPMN process.
+Send messages to Microsoft Teams and Slack, receive what people write back, and create channels, directly from your BPMN process.
 
 ## About this connector
 
 The **App Integrations connector** sends messages through your organization's Camunda app integrations. The connection is configured once for the environment, so the task itself carries no credentials and no endpoint.
 
 A message can go to a Microsoft Teams channel, user, or conversation, to a Slack channel or user, or to a **Camunda recipient** — an assignee, candidate users, or candidate groups, which are resolved to whichever platforms those people have connected. Alongside the text you can send an [Adaptive Card](https://adaptivecards.io/), a [Block Kit](https://api.slack.com/block-kit) payload, or a Camunda form.
+
+Your process can also listen. When someone writes to the Camunda app, a process can start from what they typed, and a running process can wait for their reply. See [receive a chat message](#receive-a-chat-message).
 
 ### When to use this connector
 
@@ -157,7 +159,8 @@ The connector reports every destination the message reached, and every one it di
     {
       "platform": "teams",
       "conversation": "19:abc@thread.tacv2;messageid=17123456789",
-      "messageId": "17123456789"
+      "messageId": "17123456789",
+      "conversationKey": "teams:19:abc@thread.tacv2;messageid=17123456789"
     }
   ],
   "failures": [
@@ -166,23 +169,24 @@ The connector reports every destination the message reached, and every one it di
 }
 ```
 
-| Field                       | Description                                                    |
-| :-------------------------- | :------------------------------------------------------------- |
-| `deliveries`                | Every destination the message was delivered to.                |
-| `deliveries[].platform`     | `teams` or `slack`.                                            |
-| `deliveries[].conversation` | The conversation the message landed in. Use it to reply later. |
-| `deliveries[].messageId`    | The message identifier. In Slack, this is the thread anchor.   |
-| `failures`                  | Every destination that could not be reached.                   |
-| `failures[].platform`       | `teams` or `slack`.                                            |
-| `failures[].conversation`   | The conversation that could not be reached.                    |
-| `failures[].reason`         | Why that destination failed.                                   |
+| Field                          | Description                                                                                                  |
+| :----------------------------- | :----------------------------------------------------------------------------------------------------------- |
+| `deliveries`                   | Every destination the message was delivered to.                                                              |
+| `deliveries[].platform`        | `teams` or `slack`.                                                                                          |
+| `deliveries[].conversation`    | The conversation the message landed in. Use it to reply later.                                               |
+| `deliveries[].messageId`       | The message identifier. In Slack, this is the thread anchor.                                                 |
+| `deliveries[].conversationKey` | Identifies the conversation for a chat catch element. See [receive a chat message](#receive-a-chat-message). |
+| `failures`                     | Every destination that could not be reached.                                                                 |
+| `failures[].platform`          | `teams` or `slack`.                                                                                          |
+| `failures[].conversation`      | The conversation that could not be reached.                                                                  |
+| `failures[].reason`            | Why that destination failed.                                                                                 |
 
 A single delivery is a one-element list, so with a result variable of `response` you read it as `= response.deliveries[1].conversation`. FEEL lists are 1-indexed.
 
 `failures` is non-empty on a partial success. A process that must not continue on an incomplete fan-out can check `= count(response.failures) > 0`.
 
 :::tip
-To continue a conversation, feed the response back in. Pass `conversation` as the Microsoft Teams **Conversation** target, or as the Slack **Channel ID** target with `messageId` as **Thread**.
+To continue a conversation, feed the response back in. Pass `conversation` as the Microsoft Teams **Conversation** target, or as the Slack **Channel ID** target with `messageId` as **Thread**. To wait for an answer instead of sending again, pass `conversationKey` to a [chat message catch element](#receive-a-chat-message).
 :::
 
 ## Create channel
@@ -229,6 +233,102 @@ Only standard channels are supported. Private and shared channels are not yet av
 ```
 
 Read the new channel with `= response.channelId`. You can pass it straight into a **Send message** task as the channel target.
+
+## Receive a chat message
+
+Start a process when someone writes to the Camunda app in Microsoft Teams or Slack, or wait for their reply while a process runs.
+
+Receiving needs no connector task and no job worker. A chat catch element is an ordinary BPMN message event, and the App Integrations element templates fill in the message name and the correlation key for you. Apply a template to the element, and the incoming message arrives as a process variable.
+
+### Chat conversation element templates
+
+Apply one of these templates in Modeler. Each applies to a different BPMN element.
+
+| Element template                                     | Apply to                         | Purpose                                                               |
+| :--------------------------------------------------- | :------------------------------- | :-------------------------------------------------------------------- |
+| **App Integrations Chat Conversation Start Event**   | Message start event              | Start a process when someone writes to the Camunda app.               |
+| **App Integrations Chat Message Intermediate Event** | Intermediate message catch event | Wait for the next message in the conversation the process is holding. |
+| **App Integrations Chat Message Receive Task**       | Receive task                     | Wait for the next message as a task rather than an event.             |
+| **App Integrations Chat Message Boundary Event**     | Boundary message event           | Receive a message while another activity is running.                  |
+
+A conversation process usually pairs the start event with a single catch element, and loops back to that element for each turn.
+
+### The chat message variable
+
+Every chat template writes the incoming message to a `chatMessage` process variable. Rename it with the **Result variable** property.
+
+```json
+{
+  "platform": "slack",
+  "conversationKey": "slack:D0123ABCD:1712345678.000100",
+  "conversation": "D0123ABCD",
+  "threadId": "1712345678.000100",
+  "messageId": "1712345699.000200",
+  "text": "approved, ship it",
+  "user": {
+    "externalUserId": "T01ABCDEF:U02GHIJKL",
+    "email": "ada@example.com"
+  },
+  "receivedAt": "2026-08-26T09:41:02.113Z"
+}
+```
+
+| Field                 | Description                                                                                                |
+| :-------------------- | :--------------------------------------------------------------------------------------------------------- |
+| `platform`            | `teams` or `slack`.                                                                                        |
+| `conversationKey`     | Identifies the conversation. Use it as the correlation key of a catch element. Compare it, don't parse it. |
+| `conversation`        | The conversation the message came from. Pass it back to reply.                                             |
+| `threadId`            | The Slack thread anchor. Absent on Microsoft Teams, where the conversation is already the thread.          |
+| `messageId`           | This message's own identifier, not the thread anchor.                                                      |
+| `text`                | The message as typed. On Microsoft Teams, the mention of the app is removed.                               |
+| `user.externalUserId` | The sender's identifier on the chat platform.                                                              |
+| `user.email`          | The sender's Camunda email address.                                                                        |
+| `receivedAt`          | When app integrations received the message, in ISO 8601 format.                                            |
+
+Attachments, files, and edits to an existing message aren't delivered.
+
+### Correlate a message to the right conversation
+
+The catch templates set **Conversation** to `=chatMessage.conversationKey`, which is the conversation the process is already in. A process started by the chat start event has `chatMessage` in scope, so a start event and a catch element work together with nothing to configure.
+
+Change **Conversation** only when the key comes from somewhere else, such as the `conversationKey` reported by an earlier [Send message](#send-message) delivery. That is how a process that speaks first waits for the answer.
+
+### Reply to the sender
+
+Reply with a **Send message** task, using the ids from `chatMessage`.
+
+| Platform        | Recipient source | Property         | Value                       |
+| :-------------- | :--------------- | :--------------- | :-------------------------- |
+| Microsoft Teams | Microsoft Teams  | **Conversation** | `=chatMessage.conversation` |
+| Slack           | Slack            | **Channel ID**   | `=chatMessage.conversation` |
+| Slack           | Slack            | **Thread**       | `=chatMessage.threadId`     |
+
+The reply is posted by the Camunda app, in the same thread the person wrote in.
+
+### Where a process can be reached
+
+| Platform        | Messages a process receives                                 | Messages a process doesn't receive            |
+| :-------------- | :---------------------------------------------------------- | :-------------------------------------------- |
+| Slack           | Direct messages to the Camunda app.                         | Channel and group messages.                   |
+| Microsoft Teams | Personal chats, and channel messages that @mention the app. | Channel messages that don't @mention the app. |
+
+A process that expects replies in a Microsoft Teams channel should ask to be @mentioned, or use a personal chat instead.
+
+### What the sender sees
+
+| Situation                                                            | What happens                                                                               |
+| :------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
+| A process is holding the conversation.                               | The message reaches the process, and the Camunda app stays quiet so the two don't overlap. |
+| The person types a word the Camunda app understands, such as `help`. | The Camunda app answers. Commands take precedence over the process.                        |
+| The person hasn't connected their Camunda account.                   | They're prompted to connect, and no message is sent to a process.                          |
+| The person can reach more than one cluster and hasn't chosen one.    | They're asked to select an organization and cluster first.                                 |
+| No process is listening.                                             | Nothing happens, and the Camunda app doesn't answer.                                       |
+
+A reply always reaches the cluster whose process asked the question, even if the person switches to a different cluster while the conversation is open.
+
+:::note
+Tell people which words your conversation shouldn't use. Words the Camunda app already understands, such as `help`, reach the app rather than your process.
+:::
 
 ## Troubleshooting
 

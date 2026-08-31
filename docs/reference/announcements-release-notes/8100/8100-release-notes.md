@@ -103,6 +103,18 @@ Messages can address a Microsoft Teams channel, user, or conversation, a Slack c
 
 <p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
 
+#### Receive Microsoft Teams and Slack messages in a process
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The **App Integrations connector** now receives messages as well as sending them. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
+
+Receiving needs no connector task and no job worker. Element templates for a chat start event, an intermediate catch event, a receive task, and a boundary event fill in the message name and the correlation key, so a start event and a catch event are enough for a working conversation loop. A reply always reaches the cluster whose process asked the question. Processes can be reached through Slack direct messages, and through Microsoft Teams personal chats and channel messages that @mention the app.
+
+<p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
+
 ### Modeler
 
 #### BPMN element menu improvements
