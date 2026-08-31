@@ -36,14 +36,10 @@ To test a task in Camunda Hub:
 2. Open the **Details** panel on the right side of the modeling interface.
 3. Select the **Test** tab.
 4. Under **Input**, define the process variables in JSON format to simulate the process context.
-
-### Define process variables
-
-- Use the **Variables** panel to review available variables in your process.
-- Confirm that input mappings for your task are configured correctly.
-- Match variable names and types to those expected by the task.
-- Provide realistic sample data to reflect actual execution conditions.
-
+   - Use the **Variables** panel to review available variables in your process.
+   - Confirm that input mappings for your task are configured correctly.
+   - Match variable names and types to those expected by the task.
+   - Provide realistic sample data to reflect actual execution conditions.
 5. Click **Run test** to execute the task.
 
 Camunda Hub automatically deploys the process before running the test. The task executes on the connected cluster using your defined input data.
