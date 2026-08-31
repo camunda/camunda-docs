@@ -44,7 +44,7 @@ In most deployments, both subsystems share the same IdP. You create a separate O
 
 Before Camunda 8.8, [Management Identity](/self-managed/components/management-identity/overview.md) (then called just Identity) managed access for every component, including Zeebe, Operate, and Tasklist. Camunda 8.8 split identity management into two subsystems. The [Orchestration Cluster](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) began managing its own authentication and authorization through [Admin](/self-managed/components/orchestration-cluster/admin/overview.md) (formerly called Orchestration Cluster Identity). See [Identity, authentication, and authorization](/reference/announcements-release-notes/880/whats-new-in-88.md#identity) for the full migration details.
 
-Admin becomes the single source of truth for the migrated cluster's roles and authorizations after this change. Existing roles and authorizations carry over automatically during the upgrade, so nothing needs to be re-created. From that point on, manage access to Operate and Tasklist in Admin. Role or authorization changes made in Console or Management Identity no longer apply to the migrated cluster.
+Admin becomes the single source of truth for the migrated cluster's roles and authorizations after this change. Existing roles and authorizations carry over automatically during the upgrade, so nothing needs to be recreated. From that point on, manage access to Operate and Tasklist in Admin. Role or authorization changes made in Console or Management Identity no longer apply to the migrated cluster.
 
 ## Configure the identity subsystems
 
