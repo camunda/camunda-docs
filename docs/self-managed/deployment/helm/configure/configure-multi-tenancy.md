@@ -104,6 +104,4 @@ Enabling tenant checks controls whether tenant membership is enforced, but doesn
 
 Once assigned, any user or client presenting a token with `groups` containing `finance-team` is automatically treated as a member of the `finance` tenant, without a manual per-user assignment step.
 
-:::note
 This uses mapping rules in the Orchestration Cluster Admin, which are distinct from [mapping rules in Management Identity](/self-managed/components/management-identity/mapping-rules.md) (which instead control access to Console, Optimize, and Web Modeler). See [Mapping rules](/components/concepts/access-control/mapping-rules.md) for how the two relate.
-:::
