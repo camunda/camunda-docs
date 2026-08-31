@@ -15,8 +15,8 @@ jobs:
     runs-on: gcp-core-8-default
     container: node:24
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: 24
       - name: Install Dependencies
@@ -46,7 +46,7 @@ jobs:
             secret/data/products/camunda-docs/ci/publish USER;
             secret/data/products/camunda-docs/ci/publish PRIVATE_KEY;
       - name: Publish
-        uses: burnett01/rsync-deployments@v9
+        uses: burnett01/rsync-deployments@4d419d1dc46d4a8a2b6ceab2f951f0f93b2da8f5
         with:
           switches: -avzr --delete
           path: build/
@@ -64,7 +64,7 @@ jobs:
     if: failure() && fromJSON(github.run_attempt) < 3
     steps:
       - name: Retry job
-        uses: camunda/infra-global-github-actions/rerun-failed-run@main
+        uses: camunda/infra-global-github-actions/rerun-failed-run@ee746fa695a43480b4294e944a6bf6e01b4f8459
         with:
           error-messages: |
             The runner has received a shutdown signal.

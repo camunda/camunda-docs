@@ -32,7 +32,7 @@ runs:
         echo "Muffet version  : ${{ inputs.muffet_version }}"
         echo "URL to validate : ${{ inputs.url_to_validate }}"
     - name: Restore cache
-      uses: actions/cache@v6
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
       id: tool-cache-muffet
       with:
         path: ${{ runner.temp }}/muffet/${{ inputs.muffet_version }}/muffet

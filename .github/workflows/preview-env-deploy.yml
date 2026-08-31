@@ -25,7 +25,7 @@ jobs:
 
     name: build-docs
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
       - name: Import secrets from Vault
         id: secrets
@@ -40,7 +40,7 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
       - name: Upsert comment with build status
-        uses: mshick/add-pr-comment@v3
+        uses: mshick/add-pr-comment@ec328af66588ab8f77cdeb2c264f14aba45bbf59
         with:
           refresh-message-position: true
           message: |
@@ -60,7 +60,7 @@ jobs:
         run: npm run build
 
       - name: Upload build
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: docs-build
           path: build
@@ -85,21 +85,21 @@ jobs:
             secret/data/products/camunda-docs/ci/preview-environment PREVIEW_ENV_GCLOUD_SA_KEY;
 
       - name: Download build
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
         with:
           name: docs-build
           path: build
 
       - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v3
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093
         with:
           credentials_json: ${{ steps.secrets.outputs.PREVIEW_ENV_GCLOUD_SA_KEY }}
 
       - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v3
+        uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db
 
       - name: Start Deployment
-        uses: bobheadxi/deployments@v1
+        uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8
         id: deployment
         with:
           step: start
@@ -108,7 +108,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Update comment with upload status
-        uses: mshick/add-pr-comment@v3
+        uses: mshick/add-pr-comment@ec328af66588ab8f77cdeb2c264f14aba45bbf59
         with:
           refresh-message-position: true
           message: |
@@ -120,7 +120,7 @@ jobs:
         run: |
           gcloud storage rsync --gzip-in-flight-all --delete-unmatched-destination-objects --recursive build gs://$BUCKET_NAME/pr-${{ github.event.number }}
 
-      - uses: bobheadxi/deployments@v1
+      - uses: bobheadxi/deployments@648679e8e4915b27893bd7dbc35cb504dc915bc8
         with:
           step: finish
           token: ${{ github.token }}
@@ -130,7 +130,7 @@ jobs:
           env_url: https://${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}/pr-${{ github.event.number }}/index.html
 
       - name: Update comment with deployment status
-        uses: mshick/add-pr-comment@v3
+        uses: mshick/add-pr-comment@ec328af66588ab8f77cdeb2c264f14aba45bbf59
         env:
           BUCKET_NAME: ${{ steps.secrets.outputs.PREVIEW_ENV_BUCKET_NAME }}
         with:
@@ -149,7 +149,7 @@ jobs:
     if: failure() && fromJSON(github.run_attempt) < 3
     steps:
       - name: Retry job
-        uses: camunda/infra-global-github-actions/rerun-failed-run@main
+        uses: camunda/infra-global-github-actions/rerun-failed-run@ee746fa695a43480b4294e944a6bf6e01b4f8459
         with:
           error-messages: |
             The runner has received a shutdown signal.

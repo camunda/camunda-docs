@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
       - name: Get Current Date
         id: dateofday
@@ -27,7 +27,7 @@ jobs:
 
       - name: Restore lychee cache
         id: cache-restore
-        uses: actions/cache/restore@v6
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
@@ -35,7 +35,7 @@ jobs:
             cache-lychee-
 
       - name: Link Checker
-        uses: lycheeverse/lychee-action@v2.9.0
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8
         id: link-checker
         with:
           fail: false
@@ -45,7 +45,7 @@ jobs:
 
       - name: Save lychee cache
         if: always()
-        uses: actions/cache/save@v6
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: .lycheecache
           key: cache-lychee-${{ env.DATEOFDAY }}
@@ -58,7 +58,7 @@ jobs:
 
       - name: Create Issue From File
         if: ${{ failure() && github.event_name == 'schedule' && steps.link-checker.outputs.exit_code != 0 }}
-        uses: peter-evans/create-issue-from-file@v6
+        uses: peter-evans/create-issue-from-file@fca9117c27cdc29c6c4db3b86c48e4115a786710
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
