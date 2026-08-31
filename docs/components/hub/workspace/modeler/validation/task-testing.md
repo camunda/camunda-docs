@@ -1,10 +1,10 @@
 ---
 id: task-testing
 title: Task testing
-description: Test and debug a single BPMN task directly in Web Modeler using live data from your connected Camunda 8 cluster.
+description: Test and debug a single BPMN task directly in Camunda Hub using live data from your connected Camunda 8 cluster.
 ---
 
-You can test a single task directly within Web Modeler to validate its configuration and logic without executing the entire process.  
+You can test a single task directly within Camunda Hub to validate its configuration and logic without executing the entire process.  
 Task testing lets you quickly debug mappings, inputs, and outputs without leaving your implementation context.
 
 ## Task testing vs. Test mode
@@ -30,48 +30,35 @@ Before running task testing, ensure you have:
 
 ## Run a task test
 
-To test a task in Web Modeler:
+To test a task in Camunda Hub:
 
-1. Select the BPMN task you want to test.
-2. Open the **Task testing** tab in the bottom panel.
-3. In the left pane, define the process variables in JSON format to simulate the process context.
+1. In your BPMN diagram, click the task you want to test.
+2. Open the **Details** panel on the right side of the modeling interface.
+3. Select the **Test** tab.
+4. Under **Input**, define the process variables in JSON format to simulate the process context.
 
 ### Define process variables
 
-- Use the **Variables** tab to review available variables in your process.
+- Use the **Variables** panel to review available variables in your process.
 - Confirm that input mappings for your task are configured correctly.
 - Match variable names and types to those expected by the task.
 - Provide realistic sample data to reflect actual execution conditions.
 
-4. Click **Test task** to execute the task.
+5. Click **Run test** to execute the task.
 
-Web Modeler automatically deploys the process before running the test. The task executes on the connected cluster using your defined input data.
+Camunda Hub automatically deploys the process before running the test. The task executes on the connected cluster using your defined input data.
 
 During execution, the log displays each step in real time, including any states where the test is waiting for an external action to complete.
 
-![Task test showing waiting state](./img/task-testing/task-testing-waiting-state.png)
-
 ## View results
 
-After the test completes, results appear in the output panel:
+After the test completes, results appear in the **Details** panel in the **Test** tab under **Result**:
 
-### Successful execution
-
-If the task runs successfully, the output panel displays the resulting process variables and any updates.
-
-![Successful task test showing resulting process variables](./img/task-testing/task-testing-success.png)
-
-### Incident during execution
-
-If the task encounters an incident, details are shown along with the relevant variable context to help diagnose the issue.
-
-![Incident details shown for a failed task execution, including incident message and variable context](./img/task-testing/task-testing-incident.png)
-
-### Execution error
-
-If the task fails due to an error (for example, a network or configuration issue), the error message and response details are displayed.
-
-![Execution error message shown after a task test fails due to a configuration or network issue](./img/task-testing/task-testing-error.png)
+| Status                    | Result description                                                                     |
+| :------------------------ | :------------------------------------------------------------------------------------- |
+| Successful execution      | The **Result** section displays the resulting process variables and any updates.       |
+| Incident during execution | Details are shown along with the relevant variable context to help diagnose the issue. |
+| Execution error           | The error message and response details are displayed.                                  |
 
 ## Related documentation
 
