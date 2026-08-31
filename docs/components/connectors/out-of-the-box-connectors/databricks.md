@@ -25,7 +25,7 @@ import ConnectorTask from '../../../components/react-components/connector-task.m
 
 <ConnectorTask/>
 
-## Choose API and operation
+## Choose an API and operation
 
 In the **Databricks API** dropdown list, select the API you want to call. In the **Operation** dropdown list, select one of the operations supported for that API. The workspace URL, endpoint path, HTTP method, and query parameters are derived automatically from this choice; only the fields the selected operation needs are shown.
 
@@ -53,32 +53,61 @@ Model Serving invocations are the only requests without an `/api/2.0` prefix. Ev
 
 ## Configure authentication
 
-| Type                          | Use                                                                                                                                                                                          |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| OAuth M2M (service principal) | Recommended for production. Client credentials are sent as a Basic authentication header to `https://<workspace>/oidc/v1/token` with `scope=all-apis`. Access tokens are valid for one hour. |
-| Personal access token         | Testing only.                                                                                                                                                                                |
+| Type                                                    | Use                                                                                                                                                                                          |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OAuth machine-to-machine (M2M) with a service principal | Recommended for production. Client credentials are sent as a Basic authentication header to `https://<workspace>/oidc/v1/token` with `scope=all-apis`. Access tokens are valid for one hour. |
+| Personal access token                                   | Testing only.                                                                                                                                                                                |
 
 The OAuth token endpoint is derived from the workspace URL, so it does not need to be configured separately.
 
-## Common patterns
+## Handle common workflows
 
-**Run a SQL statement that takes longer than 50 seconds.** Set **Execute statement**'s `wait_timeout` to `0s` (or `CONTINUE` on timeout) to get a `statement_id` back in a non-terminal state. Loop **Get statement status and result** behind a BPMN timer until `status.state` is terminal. If the response carries `result.next_chunk_index`, page through the rest with **Get result chunk**.
+### Run a long SQL statement
 
-**Trigger a job and wait for it.** **Run job now** returns a `run_id`. Poll **Get run** until `state.life_cycle_state` reaches one of its three terminal values — `TERMINATED`, `SKIPPED`, or `INTERNAL_ERROR`. Checking only for `TERMINATED` makes the loop poll forever when a run is skipped or fails internally. Once terminal, `state.result_state` (`SUCCESS`, `FAILED`, `TIMEDOUT`, `CANCELED`) becomes available to branch on. **Cancel run** covers BPMN-side cancellation or a boundary timer.
+For SQL statements that take longer than 50 seconds, set **Execute statement**'s `wait_timeout` to `0s` (or `CONTINUE` on timeout). This returns a `statement_id` while the statement is still running.
+
+Poll **Get statement status and result** with a BPMN timer until `status.state` reaches a terminal state. If the response contains `result.next_chunk_index`, retrieve the remaining results with **Get result chunk**.
+
+### Trigger a job and wait for completion
+
+**Run job now** returns a `run_id`. Poll **Get run** until `state.life_cycle_state` reaches one of these terminal values:
+
+- `TERMINATED`
+- `SKIPPED`
+- `INTERNAL_ERROR`
+
+Do not check only for `TERMINATED`, as this causes the loop to continue indefinitely if a run is skipped or fails internally.
+
+When the run reaches a terminal state, use `state.result_state` to determine the result:
+
+- `SUCCESS`
+- `FAILED`
+- `TIMEDOUT`
+- `CANCELED`
+
+Use **Cancel run** to handle BPMN-side cancellation or a boundary timer.
 
 :::note
-For a multi-task job, **Get run output** needs an individual task's `run_id`, taken from the terminal **Get run** response's `tasks[].run_id` — not the top-level `run_id` that **Run job now** returned. Databricks only accepts a single task's run there.
+For a multi-task job, **Get run output** requires an individual task's `run_id` from `tasks[].run_id` in the terminal **Get run** response. Do not use the top-level `run_id` returned by **Run job now**, as Databricks accepts only a single task's run ID.
 :::
 
-**Avoid duplicate job runs.** The template defaults to 3 retries. A retried **Run job now** call would otherwise start the job twice, so set **Idempotency token** to a value that is stable per process instance — Databricks then returns the existing run instead of starting a new one.
+### Avoid duplicate job runs
 
-**Warm the warehouse first.** **Execute statement** against a stopped warehouse waits for it to start. To control that explicitly, call **Start warehouse** and poll **Get warehouse** until `state` is `RUNNING`. **Start warehouse** and **Stop warehouse** both return immediately and do not wait for the transition to finish.
+The template defaults to 3 retries. A retried **Run job now** call would otherwise start the job twice, so set **Idempotency token** to a value that remains stable for each process instance. Databricks then returns the existing run instead of starting a new one.
+
+### Start a warehouse before execution
+
+When you use **Execute statement** with a stopped warehouse, Databricks waits for the warehouse to start.
+
+To control this explicitly, call **Start warehouse** and poll **Get warehouse** until `state` is `RUNNING`.
+
+**Start warehouse** and **Stop warehouse** return immediately and do not wait for the state transition to finish.
 
 ## Handle SQL statement failures
 
-The Databricks SQL Statement Execution API returns **HTTP 200 with `status.state = FAILED`** when a statement fails at the warehouse, so a plain HTTP success check is not enough. The template ships a default error expression that raises a BPMN error for the terminal failure states `FAILED`, `CANCELED`, and `CLOSED`. `PENDING` and `RUNNING` are deliberately not treated as errors — they mean the statement is still executing.
+The Databricks SQL Statement Execution API returns HTTP 200 with `status.state = FAILED` when a statement fails at the warehouse, so a plain HTTP success check is not enough. The template ships a default error expression that raises a BPMN error for the terminal failure states `FAILED`, `CANCELED`, and `CLOSED`. `PENDING` and `RUNNING` are deliberately not treated as errors because they mean the statement is still executing.
 
-Job run outcomes are not covered by that expression. A failed run is reported in `state.result_state` on **Get run**, and polling loops normally branch on it with a gateway rather than throwing. Add it to the error expression yourself if you want a failed run to also raise a BPMN error.
+Job run outcomes are not covered by that expression. A failed run is reported in `state.result_state` on **Get run**, and polling loops normally branch on it with a gateway rather than throwing. Add `state.result_state` to the error expression if you want a failed run to also raise a BPMN error.
 
 ## Partner telemetry
 
@@ -90,9 +119,7 @@ User-Agent: Camunda_DatabricksConnector/1.0
 
 You can supply additional headers, but this value is merged in last and cannot be overridden.
 
-## Appendix & FAQ
-
-### API documentation
+## API documentation
 
 - [SQL Statement Execution API](https://docs.databricks.com/api/workspace/statementexecution/executestatement)
 - [SQL Warehouses API](https://docs.databricks.com/api/workspace/warehouses/get)
