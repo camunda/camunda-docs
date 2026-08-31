@@ -37,9 +37,9 @@ To create an IDP project:
 Document classification templates require cluster version 8.9-alpha5 or later. If your cluster does not meet this requirement, only extraction templates are available.
 :::
 
-## Change IDP project cluster
+## Change the IDP project cluster
 
-Open the **IDP project settings** modal to change the cluster being used by an IDP project.
+Open the **IDP project settings** modal to change the cluster used by an IDP project.
 
 1. Click **Settings** to open the IDP project settings.
 1. Change the cluster you want to use for the IDP project.
