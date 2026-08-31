@@ -10,7 +10,7 @@ When a user signs up for Camunda 8 as the first user from their organization, co
 
 The Organization Owner has all rights in an organization and can manage all settings accordingly. An organization cannot have more than one Organization Owner.
 
-To change the Organization Owner, use the user administration. The current owner selects another member of the organization and clicks **Assign as owner** from the menu. In the dialog that appears, select the role to assign to the current owner after the transfer.
+To change the Organization Owner, use the user administration. The current owner selects another user of the organization and clicks **Assign as owner** from the menu. In the dialog that appears, select the role to assign to the current owner after the transfer.
 
 ### Roles and permissions
 
