@@ -71,13 +71,13 @@ The following prerequisites apply regardless of your cloud provider:
 
 ## Cluster requirements {#cluster-requirements}
 
-The following requirements apply for IDP application clusters:
+The following requirements apply for IDP project clusters:
 
-| Requirement                                                           | Description                                                                                                                                                                                                                                                 |
-| :-------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Connector secrets](#aws-secrets)                                     | You must configure the required IDP AWS connector secrets on any cluster used with IDP.                                                                                                                                                                     |
-| [Document handling](/components/document-handling/getting-started.md) | IDP requires a cluster that supports document handling. For example, a version 8.7 or higher cluster.                                                                                                                                                       |
-| Cluster health                                                        | IDP applications and projects are only fully operational when linked to a healthy, active cluster. If needed, you can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when one is available. |
+| Requirement                                                           | Description                                                                                                                                                                                                                            |
+| :-------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Connector secrets](#aws-secrets)                                     | You must configure the required IDP AWS connector secrets on any cluster used with IDP.                                                                                                                                                |
+| [Document handling](/components/document-handling/getting-started.md) | IDP requires a cluster that supports document handling. For example, a version 8.7 or higher cluster.                                                                                                                                  |
+| Cluster health                                                        | IDP projects are only fully operational when linked to a healthy, active cluster. If needed, you can select an unstable or unhealthy cluster when first creating an IDP project, and change to a stable cluster when one is available. |
 
 :::info
 To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).

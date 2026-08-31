@@ -28,11 +28,11 @@ In this example, a process is set up with the following steps:
 
 The document extraction template used in this example uses the following extraction fields and sample document.
 
-| Field name      | Field type | Prompt                    |
-| :-------------- | :--------- | :------------------------ |
-| invoiceType     | String     | Find the type of invoice. |
-| invoiceCustomer | String     | The invoice customer.     |
-| invoiceId       | String     | The invoice ID.           |
+| Field name      | Prompt                    |
+| :-------------- | :------------------------ |
+| invoiceType     | Find the type of invoice. |
+| invoiceCustomer | The invoice customer.     |
+| invoiceId       | The invoice ID.           |
 
 <img src={IdpTemplateImg} alt="An example process diagram with three steps" />
 
