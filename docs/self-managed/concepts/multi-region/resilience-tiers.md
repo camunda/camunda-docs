@@ -32,7 +32,7 @@ First, determine how critical your workload is:
 | Recovery in **~15 minutes**, with **no data loss**, and audit-ready posture.                                      | [Dual-Region](./dual-region.md)                                 |
 | Automatic continuity after a single region loss, and no data loss under nominal database replication lag.         | [Three-region active-active (RDBMS)](#three-region-active-active-rdbms) |
 
-Dual-Region includes a reference architecture and operational runbook with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets. Cold Recovery is a manual procedure built on the [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) guide; validate it in your environment. Three-region active-active (RDBMS) relies on the database, rather than Camunda, to own secondary-storage replication.
+Dual-Region includes a reference architecture and operational runbook with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets. Cold Recovery is a manual procedure built on the [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) guide; validate it in your environment. Three-region active-active (RDBMS) relies on the database for secondary-storage replication, and the Orchestration Cluster can apply export backpressure based on replication status.
 
 ## Comparison of multi-region resilience
 
