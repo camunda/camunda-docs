@@ -10,17 +10,17 @@ import TabItem from '@theme/TabItem';
 
 The Camunda 8 management and modeling components authenticate with the same `camunda.security.*` settings as the [Orchestration Cluster](authentication-to-orchestration-cluster.md). This includes components such as [Camunda Hub](/self-managed/components/hub/index.md) and [Optimize](/self-managed/components/optimize/overview.md).
 
-In 8.10, these shared settings cover authentication only. User, group, role, and permission management for Camunda Hub and Optimize stays in [Management Identity](/self-managed/components/management-identity/overview.md). The Orchestration Cluster is not affected, because it manages its own users, groups, roles, and authorizations.
+In 8.10, these shared settings cover authentication only. User, group, role, tenant, and permission management for Camunda Hub and Optimize stays in [Management Identity](/self-managed/components/management-identity/overview.md). The Orchestration Cluster is not affected, because it manages its own users, groups, roles, and authorizations.
 
 ## Authentication and user management
 
 Authentication and user management are handled separately:
 
-| Concern                                        | Handled by                                                                      |
-| :--------------------------------------------- | :------------------------------------------------------------------------------ |
-| Authenticating users and clients               | The component itself, configured under `camunda.security.authentication.*`      |
-| Managing users, groups, roles, and permissions | [Management Identity](/self-managed/components/management-identity/overview.md) |
-| Storing user identities and issuing tokens     | Your Identity Provider (IdP)                                                    |
+| Concern                                                 | Handled by                                                                      |
+| :------------------------------------------------------ | :------------------------------------------------------------------------------ |
+| Authenticating users and clients                        | The component itself, configured under `camunda.security.authentication.*`      |
+| Managing users, groups, roles, tenants, and permissions | [Management Identity](/self-managed/components/management-identity/overview.md) |
+| Storing user identities and issuing tokens              | Your Identity Provider (IdP)                                                    |
 
 Management Identity is still required for the management and modeling components. For more information, see [manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md).
 
