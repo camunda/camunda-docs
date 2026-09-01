@@ -145,6 +145,14 @@ All AWS connectors are updated to use AWS SDK for Java v2.
 
 This ensures Camunda AWS connector implementations are using supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
 
+#### Connector Credential Manager
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3396 -->
+
+Release notes needed.
+
 #### Storage connector improvements
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
@@ -165,6 +173,23 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 Release notes required.
 
 ### Helm chart deployment
+
+#### IRSA Document store support
+
+<!-- https://github.com/camunda/product-hub/issues/3388 -->
+
+Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA) with the AWS S3 document store:
+
+- You can deploy Camunda 8 on Amazon EKS with the document store configured for S3 without providing static AWS credentials.
+- The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
+- Existing deployments using static AWS keys can migrate to IRSA following documented steps.
+
+Refer to the updated Helm configuration and secret management documentation for:
+
+- Enabling IRSA for new EKS deployments using the AWS document store.
+- Safely migrating existing deployments from static AWS keys to IRSA.
+
+<p class="link-arrow">[Camunda Helm chart](/docs/self-managed/deployment/helm/index.md)</p>
 
 #### Helm migration and validation tool
 
@@ -189,6 +214,17 @@ The tool:
   - Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
+
+### Modeler
+
+#### Runtime connection in Web Modeler
+
+<!-- https://github.com/camunda/product-hub/issues/3475 -->
+
+You can now view and choose which cluster you are connected to in Web Modeler.
+
+- Connector-credential names from the cluster autocomplete in your FEEL expressions, and task testing runs against the connected cluster.
+- Connect your cluster from the modeling toolbar to model against your real environment.
 
 ### Optimize
 
@@ -296,13 +332,31 @@ What's included:
 
 <p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
-#### Task Tester call activities support
+#### Reference architecture for multi-region Kubernetes RDBMS
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3553-->
+
+A new multi-region reference architecture details how you can design, deploy, and operate a three‑region orchestration cluster on Kubernetes where the Zeebe data plane is active‑active across all regions and the relational secondary storage is active‑standby (single global writer, replication owned by the database).
+
+What's included:
+
+- How to use a 3‑region stretch setup for Camunda’s primary storage.
+- How to combine this with a multi‑region RDBMS (asynchronous or synchronous replication) as secondary storage.
+- How to apply Kubernetes networking, scaling, and failover procedures to achieve clearly documented RTO/RPO targets.
+
+This reference architecture provides a Camunda‑supported blueprint for enterprise‑grade multi‑region resilience.
+
+#### Task testing supports call activities
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3486 -->
 
 Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
+
+<p class="link-arrow">[Task testing](/components/modeler/task-testing.md)</p>
 
 ## 8.10.0-alpha4
 
