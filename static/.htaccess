@@ -201,6 +201,10 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administr
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 
+# 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
+RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-89/?$ /docs/next/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
+RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-89/?$ /docs/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
+
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
@@ -370,7 +374,7 @@ RewriteRule ^docs/product-manuals/tasklist/userguide/camunda-forms$ /docs/compon
 RewriteRule ^docs/self-managed/operate-deployment/configuration/$ /docs/self-managed/components/orchestration-cluster/operate/operate-configuration/ [R=301,L]
 
 # APIs & tools migration guide root
-RewriteRule ^docs/apis-tools/migration-manuals/?$ /docs/apis-tools/migration-manuals/migrate-to-89/ [R=301,L]
+RewriteRule ^docs/apis-tools/migration-manuals/?$ /docs/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
 
 # 8.8 upgrade content now lives only in versioned 8.8 docs
 RewriteRule ^docs/self-managed/upgrade/components/870-to-880/?$ /docs/8.8/self-managed/upgrade/components/870-to-880/ [R=301,L]

@@ -16,7 +16,7 @@ If you are migrating from the Spring Zeebe SDK, use [migrate to Camunda Spring B
 :::
 
 :::note Have you already migrated?
-You do not need to perform this migration again if you already did this when upgrading to version 8.8. This guide remains in the 8.9 documentation for customers who did not perform this migration during their 8.8 upgrade. See [API and SDK changes to migrate before Camunda 8.10](../migration-manuals/migrate-to-89.md#api-and-sdk-changes-to-migrate-before-camunda-810).
+You do not need to perform this migration again if you already did this when upgrading to version 8.8 or 8.9.
 :::
 
 ## About
