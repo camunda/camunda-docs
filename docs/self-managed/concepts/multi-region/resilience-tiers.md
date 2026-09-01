@@ -26,11 +26,11 @@ Choosing the right recovery strategy is determined by how critical your process 
 
 First, determine how critical your workload is:
 
-| If your business can tolerate the following:                                                                      | Choose this option                  |
-| :---------------------------------------------------------------------------------------------------------------- | :---------------------------------- |
-| Recovery measured in **hours**, and **minutes to hours of data loss**.                                            | [Cold Recovery](./cold-recovery.md) |
-| Recovery in **~15 minutes**, with **no data loss**, and audit-ready posture.                                      | [Dual-Region](./dual-region.md)     |
-| No operator-initiated failover for a single region loss, and no data loss under nominal database replication lag. | Three-region active-active (RDBMS)  |
+| If your business can accept the following outcome:                                                                 | Choose this option                                              |
+| :---------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------- |
+| Recovery measured in **hours**, and **minutes to hours of data loss**.                                            | [Cold Recovery](./cold-recovery.md)                             |
+| Recovery in **~15 minutes**, with **no data loss**, and audit-ready posture.                                      | [Dual-Region](./dual-region.md)                                 |
+| Automatic continuity after a single region loss, and no data loss under nominal database replication lag.         | [Three-region active-active (RDBMS)](#three-region-active-active-rdbms) |
 
 Dual-Region includes a reference architecture and operational runbook with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets. Cold Recovery is a manual procedure built on the [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) guide; validate it in your environment. Three-region active-active (RDBMS) relies on the database, rather than Camunda, to own secondary-storage replication.
 
