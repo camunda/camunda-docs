@@ -11,6 +11,8 @@ description: "Learn how Optimize authenticates users and API requests in Self-Ma
 
 Starting with Camunda 8.10, Optimize uses the same session-based OIDC login as the [Orchestration Cluster](authentication-to-orchestration-cluster.md), configured with the same `camunda.security.*` settings.
 
+After upgrading to 8.10, your users log in again the first time they open Optimize. Sessions created on 8.9 are not carried over.
+
 :::tip Recommendation
 If you've already configured [OIDC for the Orchestration Cluster](authentication-to-orchestration-cluster.md#oidc), use the same identity provider for Optimize. This gives your users a single login experience across both components.
 :::
@@ -29,21 +31,6 @@ See the [OIDC configuration properties reference](/self-managed/components/orche
 :::note
 If you deploy with the Camunda Helm chart, you don't need to set these directly. The chart continues to read the same `global.identity.auth.optimize.*` values you already use, and renders them into the properties above for you.
 :::
-
-## Session cookie replaces the legacy JWT cookie
-
-In 8.10, a standard session cookie replaces Optimize's self-signed JWT cookie, and session state moves from the cookie itself into a session store on the same Elasticsearch or OpenSearch cluster Optimize already uses.
-
-|                 | Optimize 8.9                                                                   | Optimize 8.10                                                                              |
-| --------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| Session cookie  | Self-signed JWT split across `X-Optimize-Authorization[_n]` cookies when large | Standard session cookie                                                                    |
-| Session storage | The cookie itself                                                              | A new Optimize index on your Elasticsearch or OpenSearch cluster                           |
-| Logout          | Cookie cleared                                                                 | `POST /logout` clears the session and calls your IdP's end-session endpoint                |
-| Load balancing  | Affinity-free                                                                  | Affinity-free; sessions are shared through Elasticsearch or OpenSearch, not held in memory |
-
-Optimize creates the new session index automatically. You don't need to provision it manually, run a migration, or grant additional privileges.
-
-Because the session cookie format changes, an active 8.9 session isn't valid after the upgrade. Your users log in again the first time they open Optimize on 8.10.
 
 ## API-consumer behavior changes
 
