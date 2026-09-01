@@ -14,12 +14,12 @@ A workspace has members who manage the workspace or work on workspace resources.
 
 Workspace members are assigned one of the following roles:
 
-| Role              | Access permissions                                                                                                        |
-| :---------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| **Project Admin** | The user can edit the project itself, all folders, and diagrams within the project, and invite more users to collaborate. |
-| **Editor**        | The user can edit all folders and diagrams within the project.                                                            |
-| **Commenter**     | The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.        |
-| **Viewer**        | The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.                                  |
+| Role                | Access permissions                                                                                                            |
+| :------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
+| **Workspace Admin** | The user can edit the workspace itself, all folders, and diagrams within the workspace, and invite more users to collaborate. |
+| **Editor**          | The user can edit all folders and diagrams within the workspace.                                                              |
+| **Commenter**       | The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.            |
+| **Viewer**          | The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.                                      |
 
 :::note
 Additionally, users with the **Organization Owner** or **Organization Admin** role always have access to every workspace in the organization, even if they aren't a member.
@@ -36,13 +36,13 @@ Add members to grant access to workspace resources:
 5. Select the workspace role, and optionally provide an invitation message.
 6. Click **Add**.
 
-The members will be added to the project and notified via email. Users without email addresses will not receive any kind of notification about project invitations.
+The members will be added to the workspace and notified via email. Users without email addresses will not receive any kind of notification about workspace invitations.
 
 :::note
 If the individual is not a user in your organization, they will first receive an organization invitation. After accepting the invitation and logging into Camunda Hub, they will be added to the workspace. They will have a "pending" label in the members list until they accept.
 :::
 
-For Self-Managed non-production installations, the number of members per project is [limited to **five**](/reference/licenses.md#web-modeler), including the project administrator.
+For Self-Managed non-production installations, the number of members per workspace is [limited to **five**](/reference/licenses.md#web-modeler), including the workspace administrator.
 
 :::tip
 In Self-Managed, you can [hide the **Add members** button](/self-managed/components/hub/configuration/properties.md#feature-flags) for non-organization admins.

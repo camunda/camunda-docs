@@ -47,7 +47,7 @@ If you have [Workspace Admin, Editor, or Commenter](/docs/components/hub/organiz
 
 ### Mention others in comments
 
-When leaving a comment, type the **@** character to filter and select a project member. When submitting the comment, this member will receive an email as a notification about the new comment.
+When leaving a comment, type the **@** character to filter and select a workspace member. When submitting the comment, this member will receive an email as a notification about the new comment.
 
 :::note
 Members without email addresses will not receive any kind of notification about being mentioned in a comment.
