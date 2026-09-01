@@ -188,6 +188,9 @@ RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
+# IDP application renamed to IDP project (creation moved to the Projects page)
+RewriteRule ^docs/next/components/hub/workspace/modeler/idp/idp-applications/?$ /docs/next/components/hub/workspace/modeler/idp/idp-projects/ [R=301,L]
+
 # Console telemetry page removed; monitoring is the closest replacement
 RewriteRule ^docs/next/self-managed/components/console/telemetry/?$ /docs/next/self-managed/components/hub/monitoring/ [R=301,L]
 
@@ -210,8 +213,8 @@ RewriteRule ^docs/next/components/hub/workspace/modeler/modeling/advanced-modeli
 
 # Redirects associated with Camunda Hub
 RewriteRule ^docs/next/components/console/manage-clusters/(.*)$ /docs/next/components/hub/organization/manage-clusters/$1 [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-members/manage-user-groups [R=301,L]
-RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-members/ [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-user-groups$ /docs/next/components/hub/organization/manage-users/manage-user-groups [R=301,L]
+RewriteRule ^docs/next/components/console/manage-organization/manage-users$ /docs/next/components/hub/organization/manage-users/ [R=301,L]
 RewriteRule ^docs/next/components/console/manage-organization/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/manage-plan/(.*)$ /docs/next/components/hub/organization/manage-organization-settings/manage-plan/$1 [R=301,L]
 RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/components/hub/ [R=301,L]
@@ -220,7 +223,7 @@ RewriteRule ^docs/next/components/console/introduction-to-console/?$ /docs/next/
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/?$ /docs/next/components/hub/workspace/manage-projects/manage-projects [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/process-applications/(.*)process-application(.*)$ /docs/next/components/hub/workspace/manage-projects/$1project$2 [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/process-application-versioning/?$ /docs/next/components/hub/workspace/manage-projects/project-versioning/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/process-application-pipeline/?$ /docs/next/components/hub/workspace/manage-projects/project-pipeline/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/process-application-pipeline/?$ /docs/next/components/hub/workspace/manage-projects#project-development-lifecycle [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/save-and-deploy/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/create-a-process-application/?$ /docs/next/components/hub/workspace/manage-projects/create-a-project/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/deploy-process-application/?$ /docs/next/components/hub/workspace/manage-projects/deploy-project/ [R=301,L]

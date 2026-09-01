@@ -44,7 +44,7 @@ For Self-Managed installations, the bulk invitation only works for users who hav
 
 ## Assign workspace and organization roles to collaborators
 
-To understand what permissions each role has, review [access rights and permissions](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/hub/organization/manage-members/manage-users.md).
+To understand what permissions each role has, review [access rights and permissions](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions). You can also [assign roles specific to the entire organization](/components/hub/organization/manage-users/manage-users.md).
 
 If you previously invited collaborators to your organization _and_ workspace in the section prior, select the three vertical dots to the right of the users' name and select **Edit user**. Check which roles the user should be assigned and select **Confirm**.
 
@@ -81,12 +81,9 @@ You can open the process landscape view by clicking **View landscape** from any 
    :::note
    For projects, version tags represent a unified "versioned" snapshot of all project files rather than separate versions for each file as with simple BPMN files.
    :::
-   ![selected node information](../img/process-landscape-node-information.png)
 
 2. **Search**: Press `Ctrl+F` or `⌘+F` to search. Enter the name or identifier of a BPMN file to quickly find, highlight, and jump to the corresponding node.
-   ![landscape search](../img/process-landscape-search.png)
 3. **Highlight paths:** Click on a node or connection to highlight the entire chain of related connections.
-   ![landscape selected node connections](../img/process-landscape-connection.png)
 
 ### README documentation
 

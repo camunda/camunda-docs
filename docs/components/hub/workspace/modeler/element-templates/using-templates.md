@@ -1,6 +1,6 @@
 ---
 id: using-templates-in-modeler
-title: Using templates
+title: Using templates in Camunda Hub
 description: "Learn how to apply, remove, update, and replace templates."
 ---
 

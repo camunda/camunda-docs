@@ -5,7 +5,6 @@ description: Collaboration features and access rights for Web Modeler.
 ---
 
 import BulkAddUserImg from '../img/invite-all-organization-members.png';
-import SuperUserModeImg from '../img/super-user-mode.png';
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
@@ -29,22 +28,15 @@ There are four roles with different levels of access rights that can be assigned
 - **Commenter**: The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.
 - **Viewer**: The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.
 
-Additionally, users with elevated access have special privileges to do administrative tasks in **super-user mode**.
+Additionally, [organization admins and owners](#organization-admin-and-owner-access) always have access to every project in the organization.
 
-#### Super-user mode
+#### Organization admin and owner access
 
-Super-user mode is only available to users with elevated access and can be enabled via the user menu in Web Modeler:
+Organization admins and owners always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
 
-<p><img src={SuperUserModeImg} style={{width: 280}} alt="Enable super-user mode in Web Modeler's user menu" /></p>
+The main purpose of this access is to assign members to workspaces that have no members. Ordinarily, these workspaces would not be accessible or visible to any other users.
 
-The main purpose of this mode is to assign collaborators to orphaned projects (which have no collaborators).
-Ordinarily, these projects would not be accessible or visible to any users.
-
-When a user activates super-user mode, they are temporarily granted **Project Admin** access to all projects
-of the organization. This allows them to assign collaborators to orphaned projects and gives them
-full access when none of the ordinary collaborators are available.
-
-##### Required roles/permissions for super-user mode access {#elevated-access}
+##### Required roles/permissions for elevated access {#elevated-access}
 
 <Tabs groupId="permissions" defaultValue="saas" queryString values={
 [
@@ -54,18 +46,18 @@ full access when none of the ordinary collaborators are available.
 
 <TabItem value='saas'>
 
-The user must be assigned the organization **Owner** or **Admin** role.
+The user must be assigned the organization **Organization Owner** or **Organization Admin** role.
 
 </TabItem>
 
 <TabItem value='self-managed'>
 
-The user must be assigned the **Web Modeler Admin** role.
+The user must be assigned the **Hub Admin** role.
 
 If the role is not pre-existing, it can be created with the following permissions:
 
-- Web Modeler Internal API - `write:*`
-- Web Modeler Internal API - `admin:*`
+- Hub Internal API - `write:*`
+- Hub Internal API - `admin:*`
 - Camunda Identity Resource Server - `read:users`
 
 Refer to the documentation pages about [assigning roles](../../../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.

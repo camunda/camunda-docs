@@ -80,7 +80,7 @@ Depending on your working environment, follow the corresponding steps below.
 
 <TabItem value="saas">
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SAAS** and select or create a project to save the blueprint.
-1. The blueprint BPMN diagram opens in Web Modeler.
+1. The blueprint BPMN diagram opens in Camunda Hub.
 </TabItem>
 
 <TabItem value="self-managed">
@@ -248,7 +248,8 @@ Depending on your working environment, test your agent by following the correspo
 
 <TabItem value="saas">
 
-1. Open [Web Modeler](/components/hub/workspace/modeler/index.md).
+1. In [Camunda Hub](/components/hub/workspace/modeler/index.md), navigate to your workspace.
+1. In your workspace, open a project. Then, open a BPMN file.
 1. Select the [**Test**](/components/hub/workspace/modeler/validation/test-your-process.md) tab.
 1. Select the cluster you want to deploy and test the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
