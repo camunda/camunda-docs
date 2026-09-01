@@ -441,7 +441,18 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Secret filter
 
-The secret filter restricts connectors to resolving only the secrets they declare in their own configuration: outbound connectors through their BPMN input mappings, inbound connectors through the properties on their deployed element. This prevents a connector from resolving secrets that are available in the runtime environment but not referenced by that connector.
+The secret filter restricts connectors to resolving only the secrets they declare in their own configuration. This prevents a connector from resolving secrets that are available in the runtime environment but not referenced by that connector.
+
+### How the allow-list is built
+
+Every field you configure in a connector's properties panel is implemented as a Zeebe input mapping under the hood, whether it's an authentication field or a functional field like an email body, an HTTP header, or a query parameter. If any of these fields contains a literal `{{secrets.NAME}}` reference, `NAME` is added to that connector element's allow-list.
+
+The allow-list is built once per element, from the deployed BPMN model, by scanning the literal text of that element's own fields for `{{secrets.NAME}}` references:
+
+- **It's static, not dynamic.** The filter looks at what's literally written in the model, not at what a process variable resolves to at runtime. If a secret value already resolved by one connector task later flows into a different task's field as a plain process variable (for example, `= myVariable`), that's just data at that point. There's no `{{secrets.*}}` placeholder left for the filter to check, so the filter has no say over it either way.
+- **It's per element, not per process.** A secret referenced in one connector task's fields does **not** become available to another task. Each connector element gets its own allow-list, built only from its own fields. If a task's resolved input somehow contains the literal text `{{secrets.NAME}}` (for example, because an upstream, untrusted process variable happens to contain that exact string), the filter checks it against that task's own allow-list, not any other task's. Unless that task's own fields also reference `NAME`, the reference is left unresolved.
+
+This is the gap the filter closes: previously, a connector resolved any `{{secrets.NAME}}` pattern present in its runtime input, regardless of where that text came from. Now it only resolves names it declared itself, at modeling time.
 
 :::note
 For inbound connectors, the allow-list comes from data already held in memory on the deployed element, so there's no remote lookup that can fail. As a result, `LAX` and `STRICT` behave identically for inbound connectors: both enforce the allow-list unconditionally. The distinction between `LAX` and `STRICT` described below only affects outbound connectors, where building the allow-list requires a lookup against the process definition.
