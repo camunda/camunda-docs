@@ -15,7 +15,7 @@ import PlaygroundExampleJsonErrorImg from './assets/feel-playground-example-erro
 import PlaygroundPromptingExampleImg from './assets/feel-playground-prompting-example.png';
 import PlaygroundModelSpecificPromptingExampleImg from './assets/feel-playground-provider-specific-prompting-example.png';
 
-Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Web Modeler.
+Use the FEEL Playground to validate and troubleshoot your FEEL expressions when modeling process diagrams in Camunda Hub.
 
 ## About FEEL Playground
 

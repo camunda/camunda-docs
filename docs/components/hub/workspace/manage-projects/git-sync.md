@@ -305,12 +305,12 @@ Once successful, your project will display a new **Sync with Bitbucket** button.
 Organization owners/administrators, workspace administrators, and editors can sync their version of Camunda Hub with the connected repository at any time.
 
 1. In your connected project, click **Sync with _GitProvider_** button.
-2. Enter a [version number](./project-versioning.md#create-a-version) to create a new version for your project. The new version will be created prior to pushing your changes to the central repository.
+2. Enter a [snapshot tag](./project-versioning.md#create-a-snapshot) to create a new snapshot for your project. The new snapshot will be created prior to pushing your changes to the central repository.
 3. Click **Synchronize**.
 
 In the case of a merge conflict, select between your local Camunda Hub changes and the changes in the remote repository to continue.
 
-Once the pull is complete and any merge conflicts are resolved, Camunda Hub will push its changes. The newly created version is now accessible via the **View version** button in the success notification.
+Once the pull is complete and any merge conflicts are resolved, Camunda Hub will push its changes. The newly created snapshot is now accessible via the **View snapshot** button in the success notification.
 
 ## Manage existing configurations
 

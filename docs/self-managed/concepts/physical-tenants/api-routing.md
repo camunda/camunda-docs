@@ -83,17 +83,38 @@ This is the core isolation guarantee of Physical Tenants: no operation can read 
 
 Camunda web applications (Operate, Tasklist, and Admin) follow the same path convention:
 
-```
-/physical-tenants/{physicalTenantId}/{webapp}
+| Web app  | URL pattern                                     | Example                                                         |
+| :------- | :---------------------------------------------- | :-------------------------------------------------------------- |
+| Operate  | `/physical-tenants/{physicalTenantId}/operate`  | `https://your-cluster/physical-tenants/riskproduction/operate`  |
+| Tasklist | `/physical-tenants/{physicalTenantId}/tasklist` | `https://your-cluster/physical-tenants/riskproduction/tasklist` |
+| Admin    | `/physical-tenants/{physicalTenantId}/admin`    | `https://your-cluster/physical-tenants/riskproduction/admin`    |
+
+All data shown is scoped to that one Physical Tenant. No cross-tenant data appears within a single web app session. There is no global tenant switcher dropdown. To switch Physical Tenants, navigate to the target tenant's URL. Each tenant loads its own isolated session.
+
+### Access flow
+
+```mermaid
+flowchart LR
+    A[User navigates to\n/physical-tenants/tenantA/operate] --> B{Session cookie\nfor tenantA present?}
+    B -- Yes --> C[Operate loads\nTenant A data only]
+    B -- No --> D[OAuth redirect to\nTenant A IdP]
+    D --> E[Login and callback\nto /physical-tenants/tenantA/sso-callback]
+    E --> C
 ```
 
-For example:
+### Session behavior
 
-```
-https://your-cluster/physical-tenants/riskproduction/operate
-```
+Each Physical Tenant has its own path-scoped session cookie, so sessions from different tenants do not interfere. See [session isolation](./authentication-authorization.md#session-isolation) for the cookie-scoping details.
 
-Learn how data scoping, session behavior, and tenant navigation work within each web app in [web apps](./web-apps.md).
+- **Simultaneous access**: users can be logged into multiple Physical Tenants at once using different browser tabs.
+- **Logout**: completes per Physical Tenant. Navigate to the target tenant's logout endpoint to end that tenant's session.
+- **Role changes mid-session:** Changing a user's roles does not invalidate their Operate or Tasklist session or log them out. The resolved authentication context, including role, group, and tenant membership, is cached in the HTTP session and re-resolved after `camunda.security.authentication.authentication-refresh-interval` (default `PT30S`) elapses. Permission changes are evaluated per request and take effect as soon as they reach secondary storage. Role or group changes sourced from IdP token claims are only picked up after the access token refreshes or the user logs in again.
+
+:::note
+Deploy Optimize separately for each Physical Tenant and configure each instance to use that tenant's cluster connection. Native multi-tenant Helm support does not manage multiple Optimize instances.
+:::
+
+<!-- TODO: Optimize documentation for Physical Tenants is being written by the Optimize team. Coordinate with Hamza and Immi before publishing any Optimize-specific configuration or setup content for Physical Tenants. -->
 
 ## MCP routing
 

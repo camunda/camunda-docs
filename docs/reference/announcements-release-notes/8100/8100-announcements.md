@@ -523,6 +523,19 @@ Camunda no longer produces the following individual component Docker images in C
 </div>
 <div className="release-announcement-content">
 
+#### Operate and Tasklist health indicators replaced by a unified schema readiness check
+
+Camunda 8.10 removes the Operate- and Tasklist-specific Elasticsearch/OpenSearch health indicators (`indicesCheck` and `searchEngineCheck`). A single `schemaReadinessCheck` now backs the gateways readiness probe; it is set once at startup, after the schema is initialized and the cluster reports green or yellow. `searchEngineStatus` reflects the current health status of Elasticsearch/OpenSearch and can be fetched via `/actuator/health` (it is not part of the readiness probe group).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Unused PVC in Optimize is unmounted
 
 An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
@@ -551,22 +564,53 @@ Deployment change 1 description.
 
 ## Identity
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Identity change 1
+#### Console and Web Modeler Admin roles gain new Hub cluster access on Self-Managed
 
-Identity change 1 description.
+Starting with Camunda 8.10, Camunda Hub replaces Console and Web Modeler. Management Identity only adds roles, applications, and permissions on startup and never removes them, so two existing Self-Managed roles automatically gain access they didn't have in 8.9 — with no role reassignment or opt-in required:
+
+- Existing `Console` role holders gain management access to Hub's cluster pages through a new `admin:clusters` permission. `DevOps` is the new name for the same access.
+- Existing `Web Modeler Admin` role holders gain full access to Hub's cluster pages too, through their existing `admin:*` permission, which now additionally reaches Hub's cluster pages — a broader grant than the Console role's management-only access. `Hub Admin` is the new name for the same access.
+
+A new `Analyst` role is also introduced: Hub modeling access, management access to the catalog's usage and adoption data, and full access to Optimize, without modeler-admin or people/org management access — the Self-Managed equivalent of the SaaS Analyst role.
+
+**Action:** If you rely on least-privilege access to cluster management, review who holds the `Console` and `Web Modeler Admin` / `Hub Admin` roles before upgrading.
+
+<p className="link-arrow">[Management Identity roles and permissions in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#management-identity-roles-and-permissions)</p>
+<br />
+<p className="link-arrow">[Manage roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md)</p>
 
 </div>
-</div> -->
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### SaaS organization roles renamed and Catalog access levels introduced
+
+Starting with Camunda 8.10, SaaS organization roles are renamed to align with Camunda Hub, and Catalog access is split into two levels. These are display renames and a new access split; existing role holders keep the same effective access, with no reassignment required:
+
+- `Owner` → `Organization Owner`
+- `Admin` → `Organization Admin`
+- `Modeler` → `Member` (Member additionally gains organization and cluster read access)
+- `Analyst` stays `Analyst`.
+- `Operations Engineer` → `DevOps`, with no permission change.
+- Catalog access is now split into **Read** (Member, DevOps) and **Manage** (Analyst, Organization Admin, Organization Owner, who additionally see usage statistics and adoption data).
+
+`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions) for their status.
+
+<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions)</p>
+
+</div>
+</div>
 
 ## Modeler
 
