@@ -681,15 +681,15 @@ Behavior remains free from side effects and uses the same timeout and guardrails
 
 The deprecated Operate and Tasklist APIs are removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
 
-<p class="link-arrow">[Migrate to the Orchestration Cluster API](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
+<p class="link-arrow">[Migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</p>
 
 The Zeebe Client is removed and replaced by the [Camunda Java Client](/apis-tools/java-client/getting-started.md). This covers process deployment, message correlation, and job handling.
 
-<p class="link-arrow">[Migrate to the Camunda Java Client](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
+<p class="link-arrow">[Migrate to the Camunda Java Client](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md)</p>
 
 The Zeebe Process Test library is removed and replaced by [Camunda Process Test](/apis-tools/testing/getting-started.md). This provides richer assertions, Spring integration, and alignment with the Orchestration Cluster API surface.
 
-<p class="link-arrow">[Migrate to Camunda Process Test](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
+<p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
 
 ### Modeler
 

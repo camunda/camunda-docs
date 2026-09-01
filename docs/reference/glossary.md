@@ -835,6 +835,7 @@ With 8.7, Camunda offers job worker-based user tasks managed by Camunda, also kn
 Camunda recommends using Camunda user tasks in your process definitions. With 8.7, **job-worker** user tasks are available for querying, but Camunda Modeler automatically applies the **Camunda user task** and shows a warning message for each job worker user task.
 
 - [User tasks](/components/modeler/bpmn/user-tasks/user-tasks.md)
+- [Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)
 
 ### User task listener
 

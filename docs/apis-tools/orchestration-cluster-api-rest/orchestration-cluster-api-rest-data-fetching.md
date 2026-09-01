@@ -66,7 +66,7 @@ If your application does not account for eventual consistency, you may encounter
 
 ## User task support
 
-The Orchestration Cluster REST API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
+The Orchestration Cluster REST API only supports Camunda user tasks (previously referred to as [Zeebe user tasks](../migration-manuals/migrate-to-camunda-user-tasks.md), which may still appear as `zeebe:userTask` in your XML content).
 
 ## Search requests
 

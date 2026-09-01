@@ -217,9 +217,9 @@ The following items are removed:
 - Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
 - Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
 
-<p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
-<p><span className="link-arrow">[Migrate from Zeebe Process Test](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</span></p>
-<p><span className="link-arrow">[Migrate to Camunda user tasks](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</span></p>
+<p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
+<p><span className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</span></p>
+<p><span className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</span></p>
 
 </div>
 </div>

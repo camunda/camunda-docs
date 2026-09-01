@@ -205,16 +205,6 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage
 RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-89/?$ /docs/next/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
 RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-89/?$ /docs/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
 
-# 8.9 migration manuals removed from next docs; content is preserved permanently in the 8.9 archive
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-component-apis/?$ /docs/8.9/apis-tools/migration-manuals/migrate-component-apis/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/?$ /docs/8.9/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-camunda-java-client/?$ /docs/8.9/apis-tools/migration-manuals/migrate-to-camunda-java-client/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/?$ /docs/8.9/apis-tools/migration-manuals/migrate-to-camunda-user-tasks/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter/?$ /docs/8.9/apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-camunda-process-test/?$ /docs/8.9/apis-tools/migration-manuals/migrate-to-camunda-process-test/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api/?$ /docs/8.9/apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api/ [R=301,L]
-RewriteRule ^docs/next/apis-tools/migration-manuals/saas-orchestration-architecture/?$ /docs/8.9/apis-tools/migration-manuals/saas-orchestration-architecture/ [R=301,L]
-
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/operate-api/(.*)$ /docs/next/apis-tools/migration-manuals/migrate-to-camunda-api/ [R=301,L]

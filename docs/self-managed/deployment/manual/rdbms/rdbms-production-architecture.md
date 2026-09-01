@@ -93,7 +93,7 @@ Without Optimize: RDBMS-only stack is fully supported.
 
 ❌ **Uniform broker configuration required**: All brokers in the Orchestration Cluster must export to the same secondary storage backend for its Orchestration Cluster indices. In addition, you may run Elasticsearch/OpenSearch to support Optimize, but the Orchestration Cluster still uses a single backend for its own secondary storage.
 
-❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+❌ **v1 API not supported**: Only the v2 Orchestration Cluster REST API works with RDBMS. See [migrate to the Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 
 ## Network and security
 

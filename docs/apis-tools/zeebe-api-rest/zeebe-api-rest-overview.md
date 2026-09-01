@@ -5,7 +5,7 @@ description: "Interact with Zeebe clusters. Run user task state operations for Z
 ---
 
 :::warning
-The Zeebe REST API is **deprecated**. While it continues to function, new development should use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). See the [migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md) for details.
+The Zeebe REST API is **deprecated**. While it continues to function, new development should use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md). See the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for details.
 :::
 
 ## Introduction

@@ -5,7 +5,7 @@ description: "Describes authentication options that can be used to access Zeebe 
 ---
 
 :::warning
-The Zeebe REST API is **deprecated**. While it continues to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md).
+The Zeebe REST API is **deprecated**. While it continues to function, new development should use the Orchestration Cluster REST API by referencing the [Orchestration Cluster REST API migration documentation](/apis-tools/migration-manuals/migrate-to-camunda-api.md).
 :::
 
 The Zeebe REST API uses the same authentication mechanism as the [Orchestration Cluster REST API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md).

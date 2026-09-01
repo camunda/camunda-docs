@@ -423,7 +423,7 @@ The previous component-specific endpoints (for example, `*.zeebe.camunda.io`, `*
 
 **Action:** Update your integrations to use the new endpoint format and review the streamlined architecture documentation for details.
 
-<p className="link-arrow">[Streamlined SaaS orchestration architecture](/versioned_docs/version-8.9/apis-tools/migration-manuals/saas-orchestration-architecture.md)</p>
+<p className="link-arrow">[Streamlined SaaS orchestration architecture](../../../apis-tools/migration-manuals/saas-orchestration-architecture.md)</p>
 
 </div>
 </div>
@@ -752,7 +752,7 @@ Camunda 8 Run now uses H2 as the default secondary data storage, instead of Elas
 
 The `--disable-elasticsearch` flag is also removed, as Elasticsearch is no longer bundled. To use Elasticsearch as secondary storage, configure an external instance via `--config` and the `application.yaml`.
 
-When running with H2 (or any other RDBMS) as secondary storage, Camunda is only compatible with the V2 API. As a result, some features are not available in Operate and Tasklist. See [Migrate to the V2 Orchestration Cluster API](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
+When running with H2 (or any other RDBMS) as secondary storage, Camunda is only compatible with the V2 API. As a result, some features are not available in Operate and Tasklist. See [Migrate to the V2 Orchestration Cluster API](/apis-tools/migration-manuals/migrate-to-camunda-api.md) for more details.
 
 To continue using features exclusive to the V1 API, configure Camunda 8 Run with an external Elasticsearch instance and switch back to V1 mode.
 
