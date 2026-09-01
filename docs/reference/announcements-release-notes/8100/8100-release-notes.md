@@ -72,7 +72,18 @@ Monitor and evaluate AI agent behavior in Operate.
 
 ### Camunda design system
 
-Release notes required.
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+
+A new Camunda visual design system is introduced with this alpha for Self-Managed deployments.
+
+- The new, streamlined design system offers a cleaner, more consistent look across components.
+- Accessibility improvements are built in, and an updated navigation menu makes it easier to find your way around.
+- The new design system is enabled by default in Self-Managed for Camunda Hub, Web Modeler, Console and Operate.
+
+:::note
+
+- The new design system model will be introduced for SaaS deployments with the 8.10 minor release.
+  :::
 
 ### Camunda Hub
 
