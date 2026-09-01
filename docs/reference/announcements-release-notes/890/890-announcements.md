@@ -164,7 +164,7 @@ The following key changes were also released as part of an 8.9.x patch release o
 ## APIs & tools
 
 :::info 8.9 APIs & Tools migration guide
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/docs/8.9/apis-tools/migration-manuals/migrate-to-89/).
+Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/docs/apis-tools/migration-manuals/migrate-to-89/).
 :::
 
 :::tip Client and API compatibility
@@ -258,7 +258,7 @@ Previously, a shared `DocumentMetadata` schema was used for both creating and re
 | Generated-client users | <ul><li>Regenerate your client.</li><li>Update any code that references `DocumentMetadata` in response handling as it is now `DocumentMetadataResponse`.</li><li>Review nullable annotations on `DocumentReference.contentHash` and `DocumentMetadataResponse` fields.</li></ul> |
 | Custom integrations    | No request-side changes needed. Response fields listed above are now guaranteed to be present (though some may be `null`).                                                                                                                                                       |
 
-<p className="link-arrow">[8.9 API migration guide](/docs/8.9/apis-tools/migration-manuals/migrate-to-89/#request-response-schema-split)</p>
+<p className="link-arrow">[8.9 API migration guide](/docs/apis-tools/migration-manuals/migrate-to-89/#request-response-schema-split)</p>
 
 </div>
 </div>
@@ -310,7 +310,7 @@ Added literals include the following:
 | Generated-client users | Regenerate and add fallback/default handling for enum parsing and matching.                              |
 | Custom integrations    | Review enum branches (for example, exhaustive `switch`/pattern matches) and add handling for new values. |
 
-<p className="link-arrow">[8.9 API migration guide](/docs/8.9/apis-tools/migration-manuals/migrate-to-89/#enum-extensions)</p>
+<p className="link-arrow">[8.9 API migration guide](/docs/apis-tools/migration-manuals/migrate-to-89/#enum-extensions)</p>
 
 </div>
 </div>
@@ -349,7 +349,7 @@ Example request payload update for message subscription filtering:
 | Generated-client users | Regenerate clients and update type mappings/imports.            |
 | Custom integrations    | Update request payload construction and affected typed helpers. |
 
-<p className="link-arrow">[8.9 API migration guide](/docs/8.9/apis-tools/migration-manuals/migrate-to-89/#type-safety-enhancements)</p>
+<p className="link-arrow">[8.9 API migration guide](/docs/apis-tools/migration-manuals/migrate-to-89/#type-safety-enhancements)</p>
 
 </div>
 </div>
@@ -402,7 +402,7 @@ Previously, only the first conversion error was returned. This fix improves cons
 
 <br/>
 
-<p className="link-arrow">[8.9 API migration guide](/docs/8.9/apis-tools/migration-manuals/migrate-to-89/#search-filter-validation-errors)</p>
+<p className="link-arrow">[8.9 API migration guide](/docs/apis-tools/migration-manuals/migrate-to-89/#search-filter-validation-errors)</p>
 
 </div>
 </div>
@@ -488,7 +488,7 @@ This change is **not binary-compatible**. Code compiled against the old API will
 | Custom `TypedPageableRequest` implementations                                      | Add a pagination type parameter (1 → 2 generic params).                                                           |
 | Storing direction method returns (for example, `SearchRequestPage r = p.from(10)`) | Use `OffsetPage r = p.from(10)`, `CursorForwardPage r = p.after("c")`, or `CursorBackwardPage r = p.before("c")`. |
 
-<p className="link-arrow">[8.9 API migration guide](/docs/8.9/apis-tools/migration-manuals/migrate-to-89/#type-safe-pagination)</p>
+<p className="link-arrow">[8.9 API migration guide](/docs/apis-tools/migration-manuals/migrate-to-89/#type-safe-pagination)</p>
 
 </div>
 </div>
