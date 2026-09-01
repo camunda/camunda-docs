@@ -56,7 +56,7 @@ Release notes required.
 
 Release notes required.
 
-#### Real-time agent visibility
+#### Real-time agent visibility and monitoring
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
@@ -64,7 +64,7 @@ Release notes required.
 
 Monitor and evaluate AI agent behavior in Operate.
 
-- See each agent's execution state (thinking, calling a tool, idle) highlighted on the process diagram, along with its current tool calls, usage metrics (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
+- View each agent's execution state (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, usage metrics (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
 - Trace the full reasoning chain behind AI agent decisions in the conversation history such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
 - Agents built with external frameworks such as LangGraph or CrewAI get the same visibility through the new Agent Instance API.
 
