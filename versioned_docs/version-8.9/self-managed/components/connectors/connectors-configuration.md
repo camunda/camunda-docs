@@ -477,9 +477,9 @@ Configure the secret filter with the `camunda.connector.secret-resolver.secret-f
 
 | Mode       | Behavior                                                                                                                                                                                                                                                                                                               |
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DISABLED` | All secrets resolve freely. This is the default and matches the behavior before this feature was introduced.                                                                                                                                                                                                           |
+| `STRICT`   | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. This is the default. Choose this mode when strict secret isolation is required.                                                                                                |
 | `LAX`      | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
-| `STRICT`   | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. Choose this mode when strict secret isolation is required.                                                                                                                      |
+| `DISABLED` | All secrets resolve freely, matching the behavior before this feature was introduced. Choose this mode only for troubleshooting, or if a custom secret provider needs unrestricted access.                                                                                                                             |
 
 The allow-list is derived automatically from the BPMN input mappings of the connector element. No manual configuration of individual secrets is required.
 
@@ -515,6 +515,23 @@ The secret filter caches process definition lookups to avoid repeated API calls.
 | ---------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------- | ------- |
 | `camunda.connector.secret-resolver.secret-filter.cache.enabled`  | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_ENABLED` | Whether caching is enabled.                     | `true`  |
 | `camunda.connector.secret-resolver.secret-filter.cache.max-size` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_MAXSIZE` | Maximum number of process definitions to cache. | `1000`  |
+
+### Secure secret usage best practices
+
+- Keep the mode at `STRICT` (the default) in production environments. Reserve `LAX` for cases where a temporary process definition API outage must not block connector jobs, and reserve `DISABLED` for troubleshooting only.
+- Reference only the secrets a connector task actually needs in its input mappings. A task with fewer secrets in its input mappings has a smaller allow-list, which limits what that task can resolve even when its other input values come from untrusted process variables.
+- Scope secrets narrowly, for example one API key per integration or tenant, instead of reusing a single broad-access secret across multiple connector tasks.
+- You don't need to design BPMN diagrams defensively to keep secrets out of connector fields that process untrusted input. The runtime enforces the allow-list automatically, based on each task's own input mappings.
+
+### Troubleshooting a secret that stops resolving under STRICT
+
+If a secret that previously resolved now comes back unresolved, or the connector job fails, under `STRICT` mode, check the following:
+
+- The connector element has a Modeler element template. The secret filter derives its allow-list from element templates; tasks without one, or with an unsupported element type, are treated as declaring no secrets and deny all resolution under `STRICT`.
+- The secret is referenced in that task's input mapping, using the `{{secrets.NAME}}` syntax.
+- The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
+
+If you need to keep jobs processing while you investigate, switch to `LAX` temporarily. It falls back to allowing all secrets when the process definition lookup fails.
 
 ## HTTP proxy configuration
 
