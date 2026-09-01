@@ -257,6 +257,12 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 The secret filter restricts connectors to resolving only the secrets they declare in their own configuration. This prevents a connector from resolving secrets that are available in the runtime environment but not referenced by that connector.
 
+:::warning Requires Operate on this version
+On 8.6, the secret filter looks up process definitions through Operate (`CamundaOperateClient`), not the Orchestration Cluster REST API used from 8.8 onward. It reuses the same `camunda.connector.polling.enabled` property that already gates Operate connectivity for inbound connectors (default: `true`).
+
+If you've set `camunda.connector.polling.enabled=false` — for example, in an outbound-only deployment that doesn't run Operate — every outbound connector job that resolves a secret now fails to look up its allow-list. Under `STRICT`, the Zeebe job fails and retries; under `LAX`, the filter falls back to allowing all secrets. Before upgrading, either re-enable polling (and confirm Operate is reachable) or set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`.
+:::
+
 ### How the allow-list is built
 
 Every field you configure in a connector's properties panel is implemented as a Zeebe input mapping under the hood, whether it's an authentication field or a functional field like an email body, an HTTP header, or a query parameter. If any of these fields contains a literal `{{secrets.NAME}}` reference, `NAME` is added to that connector element's allow-list.
