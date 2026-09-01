@@ -13,7 +13,7 @@ Incidents are created in different situations, including the following:
 - A timer expression doesn't return the expected type.
 - A decision can't be evaluated.
 - A BPMN error is thrown and not caught by an error boundary event or error event subprocess.
-- A job's secret reference cannot be resolved, or its resolved value cannot be injected into the job.
+- A job's secret references cannot be resolved, or their resolved values cannot be injected into the job.
 
 :::note
 Not all errors necessarily lead to incidents. For example, unexpected errors in Zeebe do not always result in incidents.

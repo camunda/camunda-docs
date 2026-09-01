@@ -39,10 +39,10 @@ the job key, or a size, and never the value behind any of them.
 ## A secret could not be resolved
 
 Error type `SECRET_RESOLUTION_ERROR`. The broker asked the secret store for the value and the store
-either refused it permanently, or was unavailable until its retries ran out. The incident is raised
-for the jobs waiting on that reference, one incident per job. A job that already carries an incident
-from another failed reference does not get a second one, so a job that waits on two failed secrets
-shows only the first.
+either refused it permanently, or was unavailable until its retries ran out. The broker raises the
+incident for the jobs waiting on that reference, one incident per job. A job that already carries an
+incident from another failed reference does not get a second one, so a job that waits on two failed
+secrets shows only the first.
 
 ```
 Failed to resolve secret 'API_TOKEN' from the configured secret store. Ensure the secret exists and the store is available, then resolve the incident to retry.
@@ -136,8 +136,8 @@ activation past the message size, that job and every job after it are dropped fr
 is marked truncated. The dropped jobs stay activatable and the next activation picks them up. The
 visible effect is smaller batches and slightly later activation, not a stuck job.
 
-**A reference with no placeholder left to replace.** Injection is a no-op, and the job is activated
-unchanged, in two shapes. The pointer can address no value at all, for example because the worker's
+**A reference with no placeholder left to replace.** Injection is a no-op and the job is activated
+unchanged in two cases. The pointer can address no value at all, for example because the worker's
 `fetchVariables` excluded that variable, so there is nothing to replace and nothing left behind. Or
 the value at the pointer can no longer contain any `camunda.secrets.<name>` text, for example
 because a variable update replaced it with a literal, in which case the worker receives that literal
@@ -200,8 +200,13 @@ Then confirm the reference itself:
   mistake.
 - **The name matches the secret in the store.** The reference name and the secret name must match
   exactly, including case. Names that Camunda's own secret endpoints reject, such as a name holding
-  a dot, are still detected and resolved from a store when they are backtick-escaped in the
-  expression, so a store-managed name can work while the API refuses to create it.
+  a dot, are still detected and resolved from a store when they are backtick-escaped in an input
+  mapping expression, so a store-managed name can work while the API refuses to create it. That
+  escape only exists for an expression: a reference read out of a
+  [cluster variable's](/components/admin/cluster-variables.md) value is scanned as plain text
+  instead of parsed FEEL, so there its name must match `[\p{Alnum}_-]+` after the prefix, with no
+  way to escape around it. A dot, space, or any other character outside that set makes the
+  reference invisible to that scan.
 - **The reference is an expression, not a string.** In an input mapping source or a connector
   property, only a FEEL path such as `=camunda.secrets.TOKEN` is accepted. The same reference
   written as a static value, or quoted inside an expression as in `={"auth": "camunda.secrets.TOKEN"}`,
