@@ -40,7 +40,7 @@ If a single element is selected, the comments in this panel only apply to the se
 Elements with comments have a **Comment** icon in the diagram.
 :::
 
-If you have [Workspace Admin, Editor, or Commenter](/docs/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) access rights, you can:
+If you have [Workspace Admin, Editor, or Commenter](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) access rights, you can:
 
 - Add a new comment.
 - Edit or delete a comment with the vertical ellipsis menu on the comment.
