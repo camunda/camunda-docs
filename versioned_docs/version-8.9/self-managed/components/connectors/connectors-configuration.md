@@ -270,7 +270,7 @@ other mechanisms.
 
 ## Secrets
 
-Providing secrets to the runtime environment can be achieved in different ways, depending on your setup. This is also how you provide an LLM provider API key to the [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) or [MCP Client connector](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-client.md) in a Self-Managed installation.
+Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="default" queryString values={
 [

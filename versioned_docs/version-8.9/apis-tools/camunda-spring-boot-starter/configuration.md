@@ -595,7 +595,7 @@ public DocumentResult sendDocumentAsResult() {
 
 ##### Completing ad-hoc sub-process jobs with a result
 
-When your job worker handles an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when you complete the job. This is the same [job worker implementation](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#job-worker-implementation) the [AI Agent Sub-process connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) relies on for tool selection.
+When your job worker handles an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when you complete the job.
 
 Return a lambda that calls `activateElement` with the target element ID:
 
