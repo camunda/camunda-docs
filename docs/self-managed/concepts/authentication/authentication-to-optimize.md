@@ -53,18 +53,6 @@ Optimize uses the same CSRF mechanism as the Orchestration Cluster: after login,
 
 Requests that authenticate with a bearer token only, without a session cookie, are exempt from this check, so scripted API clients that don't use the session cookie are unaffected.
 
-### Bearer tokens now work against the internal API
-
-Optimize's internal API is the set of endpoints its own UI calls, such as `/api/dashboard/**`, `/api/report/**`, and `/api/collection/**`. Through 8.9, only the public API (`/api/public/**`) and ingestion endpoints accepted bearer tokens; the internal API required the session cookie. In 8.10, Optimize also accepts bearer tokens on the internal API.
-
-The token's `aud` claim must be listed in `camunda.security.authentication.oidc.audiences`.
-
-:::note
-The internal API is not a supported public contract. Its shape can change between Camunda releases, even patch releases.
-:::
-
-`/api/authentication/**` is unchanged and still serves the login callback.
-
 ### OIDC id_token validation
 
 Optimize always validates the login `id_token`'s audience against your configuration. It validates the issuer as well when you set `camunda.security.authentication.oidc.issuer-uri`. If you migrated from a legacy setup that configured the OIDC endpoints individually instead of through `issuer-uri` (for example, a Keycloak back-channel setup), set `issuer-uri` as well to keep issuer validation in place. Confirm that:
