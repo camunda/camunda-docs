@@ -213,7 +213,7 @@ You can further refine table extraction by:
 
 ## Access rights and permissions
 
-Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions).
+Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
 
 For example, users with a Viewer or Commenter role only have read-only access to IDP features, and cannot upload documents, manage extraction fields, or publish templates.
 

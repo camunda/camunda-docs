@@ -894,7 +894,6 @@ module.exports = {
                     id: "components/hub/workspace/modeler/collaboration/collaboration",
                   },
                   items: [
-                    "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
                     "components/hub/workspace/modeler/collaboration/collaborate-with-modes",
                     "components/hub/workspace/modeler/collaboration/design-your-process",
                     "components/hub/workspace/modeler/collaboration/implement-your-process",

@@ -119,7 +119,7 @@ A project snapshot restore is a single bulk operation, not a series of individua
 
 ## Request a review
 
-1. Request a review for the newest snapshot of the project from the snapshots page of the project. Collaborators with edit permission in your project will see a notification on the process diagram page once you have requested a review. Reviews cannot be performed by the user who created the project snapshot unless the user is an organization administrator.
+1. Request a review for the newest snapshot of the project from the snapshots page of the project. Members with edit permission in your project will see a notification on the process diagram page once you have requested a review. Reviews cannot be performed by the user who created the project snapshot unless the user is an organization administrator.
 2. Reviewers can view the changes, comment, request changes, or approve the project snapshot.
 3. After a user has submitted their review, the project snapshot is marked as reviewed and the review status is shown in the snapshots timeline.
    1. Any user with edit permissions can go back and edit the review at any point in time to update the assessment.

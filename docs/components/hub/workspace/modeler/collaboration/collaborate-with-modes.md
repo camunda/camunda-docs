@@ -27,4 +27,4 @@ When a process template is selected, the default mode is **Implement**.
   ![read only properties](../img/read-only-properties.png)
 - **Viewers** can access all modes with read-only permissions and cannot leave comments. This role is suitable for stakeholders who only need to view the process design and implementation without making any changes or comments.
 
-Read more about the [different roles and how to assign them](./collaboration.md#access-rights-and-permissions).
+Read more about the [different roles and how to assign them](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
