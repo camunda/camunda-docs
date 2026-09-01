@@ -253,7 +253,7 @@ The agent definition (model, provider, system prompt), its tools, its token coun
 
 ### Always-on signals
 
-**`heartbeat`** - periodic liveness signal from the partition leader.
+**`heartbeat`**: periodic liveness signal from the partition leader.
 
 | Attribute                            | Type   | Description                 |
 | ------------------------------------ | ------ | --------------------------- |
