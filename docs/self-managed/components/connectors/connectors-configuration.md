@@ -461,10 +461,10 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 
 ## Secret filter
 
-The secret filter restricts outbound connectors to resolving only the secrets they declare in their BPMN input mappings. This prevents a connector from accessing secrets that are available in the runtime environment but not referenced in the process definition.
+The secret filter restricts connectors to resolving only the secrets they declare in their own configuration: outbound connectors through their BPMN input mappings, inbound connectors through the properties on their deployed element. This prevents a connector from resolving secrets that are available in the runtime environment but not referenced by that connector.
 
 :::note
-The secret filter applies to outbound connectors only. Support for inbound connectors is planned for a future release.
+For inbound connectors, the allow-list comes from data already held in memory on the deployed element, so there's no remote lookup that can fail. As a result, `LAX` and `STRICT` behave identically for inbound connectors: both enforce the allow-list unconditionally. The distinction between `LAX` and `STRICT` described below only affects outbound connectors, where building the allow-list requires a lookup against the process definition.
 :::
 
 ### Modes
@@ -523,7 +523,7 @@ The secret filter caches process definition lookups to avoid repeated API calls.
 
 If a secret that previously resolved now comes back unresolved, or the connector job fails, under `STRICT` mode, check the following:
 
-- The connector element has a Modeler element template. The secret filter derives its allow-list from element templates; tasks without one, or with an unsupported element type, are treated as declaring no secrets and deny all resolution under `STRICT`.
+- For outbound connectors, the element has a Modeler element template. The secret filter derives an outbound task's allow-list from its element template; tasks without one, or with an unsupported element type, are treated as declaring no secrets and deny all resolution under `STRICT`.
 - The secret is referenced in that task's input mapping, using the `{{secrets.NAME}}` syntax.
 - The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
 
