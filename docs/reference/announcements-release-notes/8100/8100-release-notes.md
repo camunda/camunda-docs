@@ -42,108 +42,145 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Agent Tool Config Autofix
 
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
 <!-- https://github.com/camunda/product-hub/issues/3574 -->
+
+Release notes required.
 
 #### Agent Tool Config Linting
 
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+
 <!-- https://github.com/camunda/product-hub/issues/3719 -->
 
-#### Real-Time Agent Visibility
+Release notes required.
+
+#### Real-time agent visibility
+
+<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3462 -->
 
-Monitor AI agent behavior directly in Operate. See each agent's execution state (thinking, calling a tool, idle) highlighted on the process diagram, along with its current tool calls, usage metrics (tokens, tool calls, and model calls against the configured limit), model, and system prompt. Trace the full reasoning chain behind AI agent decisions in the conversation history - user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements - so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps. Agents built with external frameworks such as LangGraph or CrewAI get the same visibility through the new Agent Instance API.
+Monitor and evaluate AI agent behavior in Operate.
+
+- See each agent's execution state (thinking, calling a tool, idle) highlighted on the process diagram, along with its current tool calls, usage metrics (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the conversation history such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- Agents built with external frameworks such as LangGraph or CrewAI get the same visibility through the new Agent Instance API.
+
+<p class="link-arrow">[Evaluate AI agents](/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview.md)</p>
+
+### Camunda design system
+
+### Camunda Hub
+
+#### SaaS process versioning
+
+#### SaaS data migration
+
+#### New append menu and reusable assets
 
 ### Connectors
 
-#### Improve Storage Connector Flexibility
+#### AWS Connectors updated to AWS SDK for Java v2
 
-<!-- https://github.com/camunda/product-hub/issues/3224 -->
-
-Improved storage connectors (S3, Azure Blob, GCS) to support direct object creation from variables and better content extraction for document references. Users can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store, and documents with incorrect content-types can be read using conversion options (e.g. "read as text", "read as JSON").
-
-#### Connector Observability Enhancements
-
-<!-- https://github.com/camunda/product-hub/issues/3019 -->
-
-#### Update AWS Connectors to AWS SDK for Java v2
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3581 -->
 
-Updated remaining AWS connectors to AWS SDK for Java v2 and aligned testing infrastructure accordingly. This keeps our AWS connector implementations on supported client libraries and reduces maintenance risk.
+All AWS connectors are updated to use AWS SDK for Java v2.
+
+#### Storage connector improvements
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3224 -->
+
+The following improvements are made to storage connectors (S3, Azure Blob, GCS):
+
+- These connectors now support direct object creation from variables and better content extraction for document references.
+- You can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store. Documents with incorrect content-types can be read using conversion options (for example, "read as text", "read as JSON").
+
+#### Connector Observability Enhancements
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3019 -->
+
+Release notes required.
 
 ### Helm chart deployment
 
-#### Self-Managed: Helm Migration & Validation Tool
+#### Helm migration and validation tool
+
+<div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3563 -->
 
-To make it easier to move from Camunda 8.9 to 8.10 on Kubernetes with Helm, we are introducing a Helm Migration & Validation Tool.
+Use the new Helm migration and validation tool to help upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
 
 The tool:
 
-Reads your existing 8.9 Helm values (for example, values.yaml).
+- Reads your existing 8.9 Helm values (for example, values.yaml).
+- Generates a sample 8.10 values file reflecting:
+  - Helm 4-only support.
+  - Bitnami sub‑charts removal.
+  - Hub‑aware deployment patterns.
+  - Simplified application configuration.
+- Produces a migration report that:
+  - Lists the keys that were migrated automatically.
+  - Flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options).
+  - Suggests where to find more information in the documentation.
+  - Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
 
-Generates a proposed 8.10 values file reflecting:
-
-Helm 4–only support.
-
-Removal of Bitnami sub‑charts.
-
-Hub‑aware deployment patterns.
-
-Simplified application configuration.
-
-Produces a migration report that:
-
-Lists which keys were migrated automatically.
-
-Flags keys that require manual decisions (for example, infrastructure endpoints, security‑sensitive options).
-
-Suggests where to find more information in the documentation.
-
-Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
-
-The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for:
-
-Humans on the command line.
-
-CI pipelines.
-
-AI agents (for example, Claude Code, Copilot) that can call it as part of an automated migration workflow.
+The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
 
 ### Optimize
 
-#### Disable Optimize object variable flattening by default (Self-Managed)
+#### Object variables no longer flattened by default in Self-Managed
 
 <!-- https://github.com/camunda/product-hub/issues/3785 -->
 
-Optimize no longer flattens object variables by default.
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
-Starting in 8.10, Optimize (Self-Managed only) does not import object variable values by default. Object variables are no longer flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage and aligns Self-Managed with the default Camunda 8 SaaS has used for years.
+Starting in 8.10, Optimize no longer flattens object variables by default in Self-Managed deployments.
 
-If you rely on object variable properties in reports, filters, or Raw Data Reports, opt in by setting zeebe.includeObjectVariableValue: true (env CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true).
+Object variables are not flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage and aligns Self-Managed with the default Camunda 8 SaaS behavior.
 
-When the setting is not explicitly configured, Optimize logs a WARN on startup stating that object variables will not be flattened, with the one-line opt-in.
-SaaS is unaffected (it already runs with this behavior disabled).
+- If you rely on object variable properties in reports, filters, or Raw Data Reports, you can opt in by setting `zeebe.includeObjectVariableValue: true` (env `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true`).
 
-Recovery: the Optimize importer is idempotent. As long as the object variables still exist in the zeebe-record-variable\* indices (within your Zeebe retention window), you can enable the flag and reset the importer to reimport/flatten historical variables.
+- If the setting is not explicitly configured, Optimize logs a `WARN` on startup stating that object variables will not be flattened, and details the opt-in setting.
+
+- SaaS deployments are unaffected as this behavior is already disabled.
+
+**Recovery:** The Optimize importer is idempotent. As long as the object variables still exist in the `zeebe-record-variable\*` indices (within your Zeebe retention window), you can enable the flag and reset the importer to reimport/flatten historical variables.
+
+<p class="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
 
 ### Orchestration Cluster
 
-#### Self-Managed: 2 Region ECS RDBMS Reference Architecture
+#### Bring your own identity provider per cluster in SaaS
 
-<!-- https://github.com/camunda/product-hub/issues/3552 -->
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-Camunda 8.10 adds an official dual‑region reference architecture for running the Orchestration Cluster and Connectors on AWS ECS with an RDBMS secondary storage such as Aurora Global Database.
+<!-- https://github.com/camunda/product-hub/issues/3190 -->
 
-The new self‑managed documentation explains the recommended topology, exporter configuration, and RDBMS replication setup, and includes step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
+You can now connect your own identity provider to individual clusters in Camunda SaaS.
 
-#### Call Activities Support in Task Tester
+This enhancement moves identity management from a centralized Auth0 organizational provider to a customer-controlled, per-cluster approach via direct OIDC connections for the Orchestration Clusters.
 
-<!-- https://github.com/camunda/product-hub/issues/3486 -->
+| Feature                          | Description                                                                                                                                                                                                                                                                       |
+| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Direct OIDC integration          | Each cluster can now be configured with its own OIDC connection to your preferred Identity Provider. This enables a direct, secure, and customizable authentication pathway to align with your enterprise identity policies.                                                      |
+| Enhanced security and compliance | By bypassing the centralized Auth0 provider, you can implement and enforce your own security and compliance measures. This configuration supports compliance with internal and regulatory security standards.                                                                     |
+| Flexible configuration           | Administrators can configure cluster-specific identity provider settings via an intuitive admin interface. Configuration options include standard OIDC parameters, custom claims mapping using mapping rules, and additional security features as required by the customer’s IdP. |
+| Seamless Transition              | Migration guides and detailed documentation are provided to assist you in transitioning from the centralized Auth0 model to using your own identity provider.                                                                                                                     |
 
-Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
+This change is designed to be as seamless as possible, with minimal disruption to existing user authentication processes.
+
+:::note
+In this setup, Web Modeler and Console still continue to use Auth0 via the identity provider. It is only Orchestration Clusters that use your identity provider directly.
+:::
 
 #### Centralized Secret Resolution via Zeebe
 
@@ -169,57 +206,48 @@ C8Run / local development: Inject secrets via environment variables, following s
 
 V1 supports existing connector secret formats. To get started, configure your external secret store in the gateway configuration and reference secrets using `{{secrets.MY_SECRET}}` for legacy secrets and camunda.secrets.MY_SECRET as the new format in your connectors and job workers.
 
-#### Self-Managed: Full AWS ECS Reference Architecture
+#### Reference architecture for Amazon ECS
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3432 -->
 
-Camunda 8 Self‑Managed now includes a reference architecture for running the full Camunda 8 stack on AWS ECS, including Orchestration Cluster, Camunda Hub, and Management Identity
+A new reference architecture details how you can run the full Camunda 8 stack on Amazon ECS, including Orchestration Cluster, Camunda Hub, and Management Identity.
 
 What’s included:
 
-A reference architecture diagram and dependency overview for ECS.
+- A reference architecture diagram and dependency overview for ECS.
+- A Terraform‑based reference deployment paired with step‑by‑step documentation.
+- Guidance for:
+  - Networking, storage, secrets, and IAM (including IRSA where relevant).
+  - Basic Day‑2 operations (scaling, updates, troubleshooting entry points).
 
-A Terraform‑based reference deployment paired with step‑by‑step documentation.
+This helps support Amazon ECS as a first‑class, documented deployment option for Camunda 8 Self‑Managed, alongside Kubernetes.
 
-Guidance for:
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
 
-Networking, storage, secrets, and IAM (including IRSA where relevant).
+#### Reference architecture for dual-region ECS RDBMS
 
-Basic Day‑2 operations (scaling, updates, troubleshooting entry points).
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
-This makes AWS ECS a first‑class, documented deployment option for Camunda 8 Self‑Managed, alongside Kubernetes.
+<!-- https://github.com/camunda/product-hub/issues/3552 -->
 
-#### Bring your own Identity Provider per Cluster in SaaS
+A new dual‑region reference architecture details how you can run the Orchestration Cluster and Connectors on AWS ECS with RDBMS secondary storage (such as Aurora Global Database).
 
-<!-- https://github.com/camunda/product-hub/issues/3190 -->
+What's included:
 
-We are excited to announce a major enhancement for Camunda SaaS that shifts identity management from a centralized Auth0 organizational provider to a customer-controlled, per-cluster approach via direct OIDC connections for the Orchestration Clusters.
+- Recommended topology, exporter configuration, and RDBMS replication setup.
+- Step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
 
-Direct OIDC Integration:
+<p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
-Each cluster can now be configured with its own OIDC connection to the customer’s preferred Identity Provider.
+#### Task Tester call activities support
 
-This enables a direct, secure, and customizable authentication pathway that aligns with the customer’s enterprise identity policies.
+<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-Enhanced Security and Compliance:
+<!-- https://github.com/camunda/product-hub/issues/3486 -->
 
-By bypassing the centralized Auth0 provider, organizations can implement and enforce their own security and compliance measures.
-
-This configuration supports compliance with internal and regulatory security standards.
-
-Flexible Configuration:
-
-Administrators can configure the cluster-specific Identity Provider settings via an intuitive admin interface.
-
-Configuration options include standard OIDC parameters, custom claims mapping using mapping rules, and additional security features as required by the customer’s IdP.
-
-Seamless Transition:
-
-Migration guides and detailed documentation are provided to assist customers in transitioning from the centralized Auth0 model to their own Identity Provider.
-
-The change is designed to be as seamless as possible, with minimal disruption to existing user authentication processes.
-
-In this setup, Web Modeler + Console still continue to use Auth0 via the Identity Provider and only orchestration clusters are using your Identity Provider directly.
+Task testing now supports call activities in both Desktop and Web Modeler. Testing a call activity starts the deployed called process, shows its progress in the execution log with a link to open it in Operate, and reports incidents raised inside it.
 
 ## 8.10.0-alpha4
 
