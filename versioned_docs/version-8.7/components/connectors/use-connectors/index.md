@@ -25,8 +25,9 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 You can use sensitive information in your connectors without exposing it in your BPMN processes by referencing secrets.
 Use the Console component to [create and manage secrets](/components/console/manage-clusters/manage-secrets.md).
 
-You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties panel that supports this.
-Each of the [out-of-the-box connectors](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) details which fields support secrets.
+You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties panel. Secrets resolve in every field, not only in a specific subset of fields.
+
+For outbound connectors, the [secret filter](/self-managed/connectors-deployment/connectors-configuration.md#secret-filter) determines which of the secrets available in the runtime environment a connector task can actually resolve, based on the secrets referenced in that task's input mappings.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
