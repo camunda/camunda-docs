@@ -66,6 +66,8 @@ Starting with 8.7.25, the connector runtime introduces the [secret filter](/self
 
 **Action:** Before upgrading, confirm that every connector task which resolves a secret also declares that secret: in its input mappings for outbound connectors, or in its element properties for inbound connectors. If a task relies on resolving a secret it doesn't declare, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `LAX` or `DISABLED` before upgrading.
 
+On 8.7, the outbound lookup goes through Operate, reusing the `camunda.connector.polling.enabled` property (default: `true`) that already gates Operate connectivity for inbound connectors. If you run an outbound-only deployment with `camunda.connector.polling.enabled=false`, every outbound connector job that resolves a secret now fails to look up its allow-list — the job fails and retries under `STRICT`, or the filter falls back to allowing all secrets under `LAX`. Before upgrading, either re-enable polling and confirm Operate is reachable, or set the mode to `DISABLED`.
+
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
 Camunda 8.7.27 unintentionally removed the `getMessageKeys()` method (and the underlying `messageKeys` field) from the public `MessageBatchRecordValue` exporter record. Custom exporters that call `getMessageKeys()` on message batch records fail to compile against, or throw a `NoSuchMethodError` at runtime with, the updated `zeebe-protocol` dependency after upgrading to 8.7.27 or any later 8.7.x patch. The built-in Elasticsearch and OpenSearch exporters are unaffected.
