@@ -1935,7 +1935,8 @@ module.exports = {
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
-                "self-managed/deployment/helm/configure/configure-multi-tenancy",
+                "self-managed/deployment/helm/configure/configure-logical-tenants",
+                "self-managed/deployment/helm/configure/configure-physical-tenants",
               ],
             },
             {
@@ -2243,7 +2244,6 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/index",
                 "self-managed/concepts/physical-tenants/storage-isolation",
                 "self-managed/concepts/physical-tenants/api-routing",
-                "self-managed/concepts/physical-tenants/web-apps",
                 "self-managed/concepts/physical-tenants/authentication-authorization",
                 "self-managed/concepts/physical-tenants/authorization-model",
                 "self-managed/concepts/physical-tenants/configuration-reference",

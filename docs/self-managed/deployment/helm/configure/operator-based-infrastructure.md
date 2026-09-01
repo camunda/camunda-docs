@@ -70,11 +70,12 @@ This deployment approach separates infrastructure management from application de
 ## Infrastructure components
 
 This approach uses three operator-managed infrastructure components, each maintained by their respective project teams:
-| Component | Purpose | Official Documentation |
+
+| Component                                                   | Purpose                                                                                           | Official Documentation                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/) |
-| **[Elasticsearch with ECK](#elasticsearch-deployment)** | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html) |
-| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
+| **[PostgreSQL with CloudNativePG](#postgresql-deployment)** | Production-grade PostgreSQL clusters for Keycloak, Management Identity, and Web Modeler databases | [CloudNativePG Documentation](https://cloudnative-pg.io/docs/1.28/)               |
+| **[Elasticsearch with ECK](#elasticsearch-deployment)**     | Official Elasticsearch deployment for Zeebe records, Operate, Tasklist, and Optimize data storage | [ECK Guide](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)      |
+| **[Keycloak with Keycloak Operator](#keycloak-deployment)** | Automated OIDC authentication provider for Management Identity                                    | [Keycloak Operator Documentation](https://www.keycloak.org/operator/installation) |
 
 ## Quick start
 
@@ -765,5 +766,5 @@ If you're migrating from existing Bitnami sub-chart deployments:
 
 - [Configure Ingress and TLS](/self-managed/deployment/helm/configure/ingress/index.md)
 - [Set up monitoring and observability](/self-managed/deployment/helm/configure/application-configs.md)
-- [Configure multi-tenancy](/self-managed/deployment/helm/configure/configure-multi-tenancy.md)
+- [Configure Logical Tenants](/self-managed/deployment/helm/configure/configure-logical-tenants.md)
 - [Production deployment guide](/self-managed/deployment/helm/install/production/index.md)

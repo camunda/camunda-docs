@@ -185,6 +185,12 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 # The next sub-pages were removed in favor of a stub index that links to the 8.9 guide (PR #9013).
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+
+# Physical Tenants web-apps page merged into api-routing.md's "Webapp routing" section (too thin to stand alone).
+RewriteRule ^docs/next/self-managed/concepts/physical-tenants/web-apps/?$ /docs/next/self-managed/concepts/physical-tenants/api-routing/#webapp-routing [R=301,L]
+
+# configure-multi-tenancy renamed to configure-logical-tenants: "multi-tenancy" collided with Physical Tenants, which is also a multi-tenancy model.
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/configure-multi-tenancy/?$ /docs/next/self-managed/deployment/helm/configure/configure-logical-tenants/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
