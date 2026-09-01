@@ -42,7 +42,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 #### Agent Tool Config Autofix
 
-<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3574 -->
 
@@ -50,7 +50,7 @@ Release notes required.
 
 #### Agent Tool Config Linting
 
-<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3719 -->
 
@@ -58,7 +58,7 @@ Release notes required.
 
 #### Real-time agent visibility
 
-<div class="release"><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3462 -->
 
@@ -107,7 +107,7 @@ Your Web Modeler data in SaaS was updated on 29 August 2026 to support Camunda H
 
 #### AWS Connectors updated to AWS SDK for Java v2
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3581 -->
 
@@ -117,7 +117,7 @@ This ensures Camunda AWS connector implementations are using supported client li
 
 #### Storage connector improvements
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3224 -->
 
@@ -128,7 +128,7 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 
 #### Connector observability improvements
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3019 -->
 
@@ -268,7 +268,7 @@ What's included:
 
 #### Task Tester call activities support
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3486 -->
 
