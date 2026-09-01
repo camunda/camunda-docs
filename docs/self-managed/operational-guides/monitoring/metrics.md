@@ -285,8 +285,8 @@ Report latency metrics are controlled by the `optimize.metrics.report-latency.en
 
 Camunda emits meters for resolving secret references against a secret store, and for the in-memory
 cache that sits in front of each configured store. Together, they distinguish a secret store that
-is slow or unavailable from a cache that is simply cold, in a case that otherwise shows up only as
-jobs that fail to activate.
+is slow or unavailable from a cache that is simply cold, in cases that otherwise show up only as
+jobs that don't activate.
 
 No meter listed here is tagged by secret name: the cardinality is unbounded, and secret names are
 customer data.
@@ -368,7 +368,7 @@ resolve, the fix is not in the cache.
 ### Cache size and the configured maximum
 
 `camunda.secret.cache.size` is bounded per store by the
-[`camunda.secrets.cache.max-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camunda-secrets-cache)
+[`camunda.secrets.cache.max-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecretscache)
 property. The bound applies per store, not as a shared budget, so the worst-case memory footprint
 across a deployment is the number of configured stores multiplied by that maximum.
 
