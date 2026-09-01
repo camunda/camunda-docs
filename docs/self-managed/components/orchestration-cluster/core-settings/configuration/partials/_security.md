@@ -72,6 +72,10 @@ Disabling CSRF protection is not recommended for production environments as it l
 | `camunda.security.http-headers.permissions-policy.value`                  | Restricts access to browser capabilities.                                                                                                                                                                                                                               | [`Permissions-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy)                                                                                                                                                     | Disables all features by default  |
 | `camunda.security.http-headers.referrer-policy.value`                     | Controls referrer information sharing. See available values below.                                                                                                                                                                                                      | [`Referrer-Policy`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy)                                                                                                                                                           | `STRICT_ORIGIN_WHEN_CROSS_ORIGIN` |
 
+:::caution
+Setting `content-security-policy.mode` to `CUSTOM` without also setting `policy-directives` sends no `Content-Security-Policy` header at all, which leaves your application without the protection the default policy provides. Always set `policy-directives` when you use `CUSTOM`.
+:::
+
 #### Default Content Security Policy
 
 This is default value of the Content Security Policy when enabled:
