@@ -262,7 +262,7 @@ RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs
 RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/organization/manage-workspaces/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/design-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/design-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ /docs/next/components/hub/workspace/modeler/collaboration/collaborate-with-modes/ [R=301,L]
