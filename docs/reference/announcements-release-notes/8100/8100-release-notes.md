@@ -176,6 +176,8 @@ Release notes required.
 
 #### IRSA Document store support
 
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
 <!-- https://github.com/camunda/product-hub/issues/3388 -->
 
 Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA) with the AWS S3 document store:
@@ -197,23 +199,29 @@ Refer to the updated Helm configuration and secret management documentation for:
 
 <!-- https://github.com/camunda/product-hub/issues/3563 -->
 
-Use the new Helm migration and validation tool to help upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
+The new Helm migration and validation tool can help you upgrade from Camunda 8.9 to 8.10 on Kubernetes with Helm.
 
-The tool:
+Use the tool to:
 
-- Reads your existing 8.9 Helm values (for example, values.yaml).
-- Generates a sample 8.10 values file reflecting:
+- Read your existing 8.9 Helm values (for example, values.yaml).
+- Generate a sample 8.10 values file reflecting:
   - Helm 4-only support.
   - Bitnami sub‑charts removal.
   - Hub‑aware deployment patterns.
   - Simplified application configuration.
-- Produces a migration report that:
+- Produce a migration report that:
   - Lists the keys that were migrated automatically.
   - Flags keys that require manual decision (for example, infrastructure endpoints, security‑sensitive options).
   - Suggests where to find more information in the documentation.
   - Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
+
+#### REST API, RDBMS, and Document Store support for physical tenants
+
+<!-- https://github.com/camunda/product-hub/issues/3639 -->
+
+Support for physical tenant isolation in 8.10 is added for the Camunda 8 REST API, RDBMS storage, and Document Store.
 
 ### Modeler
 
@@ -223,7 +231,8 @@ The CLI is non‑interactive, with clear exit codes and optional JSON output, ma
 
 You can now view and choose which cluster you are connected to in Web Modeler.
 
-- Connector-credential names from the cluster autocomplete in your FEEL expressions, and task testing runs against the connected cluster.
+- Connector-credential names from the cluster autocomplete in your FEEL expressions.
+- Task testing runs against the connected cluster.
 - Connect your cluster from the modeling toolbar to model against your real environment.
 
 ### Optimize
