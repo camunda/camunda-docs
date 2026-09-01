@@ -286,15 +286,19 @@ In this setup, Web Modeler and Console still continue to use Auth0 via the ident
 
 <!-- https://github.com/camunda/product-hub/issues/3040 -->
 
-Camunda introduces centralized secret resolution for connectors and job workers via Zeebe. Secrets are resolved from external stores on demand when a worker reads a referenced variable. Resolved values are never written to the variable store, the command log, exporters, Operate, Tasklist, or logs. Reference secrets in BPMN using the canonical FEEL expression camunda.secrets.MY_SECRET. This expression-based form is the preferred syntax and replaces the older string-substitution patterns. Moving secret references onto the FEEL expression surface — rather than embedded in arbitrary strings — eliminates the secret-injection class of bugs: there is no string substitution at runtime, only typed expression evaluation.
+Centralized secret resolution is introduced for connectors and job workers via Zeebe with this alpha.
 
-The legacy `{{secrets.MY_SECRET}}` form remains supported indefinitely for backward compatibility on existing deployed BPMN. The deprecated bare secrets.MY_SECRET pattern (without braces) is removed in this Epic — it caused collisions with regular variable namespaces.
+Secrets are resolved from external stores on demand when a worker reads a referenced variable. Resolved values are never written to the variable store, the command log, exporters, Operate, Tasklist, or logs.
 
-Resolution works per deployment type:
+You can reference secrets in BPMN using the canonical FEEL expression `camunda.secrets.MY_SECRET`. This expression-based form is the preferred syntax and replaces the older string-substitution patterns. Moving secret references onto the FEEL expression surface instead of being embedded in arbitrary strings eliminates the secret-injection class of bugs: there is no string substitution at runtime, only typed expression evaluation.
 
-Camunda SaaS:The gateway resolves from the existing GCP Secret Manager backend Console already uses. No migration required — existing connector secrets continue to work during transition.
+The legacy `{{secrets.MY_SECRET}}` form remains supported indefinitely for backward compatibility on existing deployed BPMN. The deprecated bare `secrets.MY_SECRET` pattern (without braces) is removed.
 
-**Camunda Self-Managed:**Configure an external vault in the gateway configuration via Helm upgrade. No data migration required.
+Resolution for each deployment type works as follows:
+
+**Camunda SaaS:** The gateway resolves from the existing GCP Secret Manager backend Console already uses. No migration is required - existing connector secrets continue to work during transition.
+
+**Camunda Self-Managed:** Configure an external vault in the gateway configuration via Helm upgrade. No data migration required.
 
 8.10 must-have: HashiCorp Vault.
 
