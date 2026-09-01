@@ -76,6 +76,19 @@ Release notes required.
 
 ### Camunda Hub
 
+#### Modeling menu improvements
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
+
+When you create, append, or change an element, the menu groups what you can insert into two tabs:
+
+- **BPMN**: Standard BPMN elements, in their usual categories.
+- **Reusable assets**: Catalog assets, connectors, and templates from your project, together with resources the project already contains: forms, called processes, decisions, and RPA scripts.
+
+<p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
+
 #### Web Modeler data in SaaS
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
@@ -89,23 +102,6 @@ Your Web Modeler data in SaaS was updated on 29 August 2026 to support Camunda H
 | [Process application versioning model](/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) | The new improved process application versioning model provides more granular control.                                                                                                                                                                                             |
 
 <p class="link-arrow">[What's new in Camunda 8.10: Web Modeler data](/reference/announcements-release-notes/8100/whats-new-in-810.md#web-modeler-data)</p>
-
-#### Append menu improvements
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
-
-When you create, append, or change an element, the menu separates what you can insert into two tabs:
-
-- **BPMN**: Standard BPMN elements, in their usual categories.
-- **Reusable assets**: Catalog assets, connectors, and templates from your project, together with resources the project already contains: forms, called processes, decisions, and RPA scripts.
-
-### Find an asset quickly
-
-Type in the search field to search both tabs at once. Search matches asset names and descriptions, and also template IDs. While you search, the tabs are hidden and matches appear as a single ranked list.
-
-Within **Reusable assets**, entries are grouped: resources already in your project first, then named categories, then remaining templates, with connectors last.
 
 ### Connectors
 
@@ -130,7 +126,7 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 - These connectors now support direct object creation from variables and better content extraction for document references.
 - You can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store. Documents with incorrect content-types can be read using conversion options (for example, "read as text", "read as JSON").
 
-#### Connector Observability Enhancements
+#### Connector observability improvements
 
 <div class="release"><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
