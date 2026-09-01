@@ -72,13 +72,25 @@ Monitor and evaluate AI agent behavior in Operate.
 
 ### Camunda design system
 
+Release notes required.
+
 ### Camunda Hub
 
-#### SaaS process versioning
+#### Web Modeler data in SaaS
 
-#### SaaS data migration
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-#### New append menu and reusable assets
+Your Web Modeler data in SaaS was updated on 29 August 2026 to support Camunda Hub:
+
+| Update                                                                                                                                       | Description                                                                                                                                                                                                                                                                       |
+| :------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Data migration](/reference/announcements-release-notes/8100/whats-new-in-810.md#data-migration)                                             | Aligns your existing data with the new organizational structure.                                                                                                                                                                                                                  |
+| [Organizational structure](/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure)                         | A new file resource hierarchy is introduced in which projects only contain process applications. Everything else, including files, folders, and IDP application content, is stored inside a process application. This enforces a stricter, more scalable file resource hierarchy. |
+| [Process application versioning model](/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) | The new improved process application versioning model provides more granular control.                                                                                                                                                                                             |
+
+<p class="link-arrow">[What's new in Camunda 8.10: Web Modeler data](/reference/announcements-release-notes/8100/whats-new-in-810.md#web-modeler-data)</p>
+
+#### Append menu and reusable assets
 
 ### Connectors
 
@@ -89,6 +101,8 @@ Monitor and evaluate AI agent behavior in Operate.
 <!-- https://github.com/camunda/product-hub/issues/3581 -->
 
 All AWS connectors are updated to use AWS SDK for Java v2.
+
+This ensures Camunda AWS connector implementations are using supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
 
 #### Storage connector improvements
 
@@ -113,7 +127,7 @@ Release notes required.
 
 #### Helm migration and validation tool
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3563 -->
 
