@@ -58,6 +58,13 @@ The following key changes were also released as part of an 8.7.x patch release.
 | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
 | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27) | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
+| [8.7.25](https://github.com/camunda/camunda/releases/tag/8.7.25) | Breaking change | [Connector secret filter](#connector-secret-filter)                                                              |
+
+### Connector secret filter {#connector-secret-filter}
+
+Starting with 8.7.25, the connector runtime introduces the [secret filter](/self-managed/connectors-deployment/connectors-configuration.md#secret-filter), defaulting to `STRICT`. Outbound and inbound connectors now resolve only the secrets they declare in their own configuration: outbound connectors through their BPMN input mappings, inbound connectors through the properties on their deployed element.
+
+**Action:** Before upgrading, confirm that every connector task which resolves a secret also declares that secret: in its input mappings for outbound connectors, or in its element properties for inbound connectors. If a task relies on resolving a secret it doesn't declare, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `LAX` or `DISABLED` before upgrading.
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 

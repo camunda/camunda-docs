@@ -384,6 +384,23 @@ Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound co
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
+
+Starting with 8.10.0-alpha5, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`. Outbound and inbound connectors now resolve only the secrets they declare in their own configuration: outbound connectors through their BPMN input mappings, inbound connectors through the properties on their deployed element.
+
+**Action:** Before upgrading, confirm that every connector task which resolves a secret also declares that secret: in its input mappings for outbound connectors, or in its element properties for inbound connectors. If a task relies on resolving a secret it doesn't declare, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `LAX` or `DISABLED` before upgrading.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
+
 <!-- <div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>

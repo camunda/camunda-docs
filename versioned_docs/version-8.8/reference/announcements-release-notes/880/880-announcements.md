@@ -86,6 +86,7 @@ The following key changes were also released as part of an 8.8.x patch release.
 | [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Change     | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Regression | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
 | [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change     | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+| [8.8.19](https://github.com/camunda/camunda/releases/tag/8.8.19) | Breaking change | [Connector secret filter](#connector-secret-filter)                                                                                              |
 
 ### APIs & tools
 
@@ -544,6 +545,23 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 </div>
 
 ### Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter {#connector-secret-filter}
+
+Starting with 8.8.19, the connector runtime introduces the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter), defaulting to `STRICT`. Outbound and inbound connectors now resolve only the secrets they declare in their own configuration: outbound connectors through their BPMN input mappings, inbound connectors through the properties on their deployed element.
+
+**Action:** Before upgrading, confirm that every connector task which resolves a secret also declares that secret: in its input mappings for outbound connectors, or in its element properties for inbound connectors. If a task relies on resolving a secret it doesn't declare, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `LAX` or `DISABLED` before upgrading.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
