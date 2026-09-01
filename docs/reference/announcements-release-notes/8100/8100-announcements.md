@@ -523,6 +523,19 @@ Camunda no longer produces the following individual component Docker images in C
 </div>
 <div className="release-announcement-content">
 
+#### Operate and Tasklist health indicators replaced by a unified schema readiness check
+
+Camunda 8.10 removes the Operate- and Tasklist-specific Elasticsearch/OpenSearch health indicators (`indicesCheck` and `searchEngineCheck`). A single `schemaReadinessCheck` now backs the gateways readiness probe; it is set once at startup, after the schema is initialized and the cluster reports green or yellow. `searchEngineStatus` reflects the current health status of Elasticsearch/OpenSearch and can be fetched via `/actuator/health` (it is not part of the readiness probe group).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Unused PVC in Optimize is unmounted
 
 An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
