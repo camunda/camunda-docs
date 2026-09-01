@@ -11,13 +11,7 @@ Camunda Hub authenticates users with OpenID Connect (OIDC), using the same confi
 
 ## Authentication and user management
 
-In 8.10, Camunda Hub authenticates users with the same `camunda.security.*` settings as the Orchestration Cluster. Responsibilities are split as follows:
-
-| Concern                                        | Handled by                                                                      |
-| :--------------------------------------------- | :------------------------------------------------------------------------------ |
-| Authenticating users and clients               | Camunda Hub, configured under `camunda.security.authentication.*`               |
-| Managing users, groups, roles, and permissions | [Management Identity](/self-managed/components/management-identity/overview.md) |
-| Storing user identities and issuing tokens     | Your identity provider (the built-in Keycloak instance by default)              |
+In 8.10, Camunda Hub authenticates users with the same `camunda.security.*` settings as the Orchestration Cluster, while Management Identity keeps managing users and their access. For how the responsibilities are split, see [management and modeling component authentication](/self-managed/concepts/authentication/authentication-to-management-components.md#authentication-and-user-management).
 
 Management Identity is still required for Camunda Hub in 8.10. For more information, see [manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md).
 
