@@ -16,12 +16,12 @@ Two new authorization resource types were added for the per-tenant management AP
 
 The default **admin** role receives all four `BACKUP` permissions and `EXPORTER:PAUSE` automatically. The default **readonly-admin** role receives only `BACKUP:READ` (there is no read-only permission for `EXPORTER`, since `PAUSE` isn't a read operation).
 
-## Scope of the 8.10 authorization model
+## Scope of the authorization model
 
-In Camunda 8.10, the Physical Tenant authorization model is designed around per-engine, per-tenant role and permission management. Key design principles for 8.10:
+The Physical Tenant authorization model is designed around per-engine, per-tenant role and permission management. Key design principles:
 
 - **Per-tenant authorization is independently managed.** Each Physical Tenant defines its own roles, permissions, and mapping rules. A change in one tenant's authorization configuration does not affect other tenants.
-- **Cluster-wide management operations use cluster-admin access.** The dedicated cluster-admin security chain protects management endpoints under `/cluster/v2/...`; `/cluster/v2/status` remains public for health checks. Cross-tenant administration using Camunda Hub is not available in 8.10.
+- **Cluster-wide management operations use cluster-admin access.** The dedicated cluster-admin security chain protects management endpoints under `/cluster/v2/...`; `/cluster/v2/status` remains public for health checks. Cross-tenant administration using Camunda Hub is not available.
 - **Per-engine IdP fragmentation is not recommended.** Using a different identity provider for each Zeebe/Operate/Tasklist engine (as opposed to a single cluster-level IdP) is explicitly discouraged. See [authentication and authorization](./authentication-authorization.md) for the supported identity deployment models.
 
 ## Cluster-wide operations
@@ -78,7 +78,7 @@ An unknown tenant ID returns `404 Not Found` on the tenant-prefixed REST paths. 
 
 ## Role inheritance and override behavior
 
-In Camunda 8.10, there is **no automatic role inheritance** from the cluster level to individual Physical Tenants, or across Physical Tenants. Each tenant's role and permission configuration is independent.
+There is **no automatic role inheritance** from the cluster level to individual Physical Tenants, or across Physical Tenants. Each tenant's role and permission configuration is independent.
 
 A user with cluster-admin access does not automatically have admin rights within any specific Physical Tenant. Cluster-admin is limited to cluster-wide operations only.
 

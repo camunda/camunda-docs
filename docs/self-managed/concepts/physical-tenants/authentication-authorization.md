@@ -28,7 +28,7 @@ description: "Understand tenant-local permissions and cluster-wide management ac
 
 ## Centralized identity model
 
-In Camunda 8.10, identity is **centralized at the cluster boundary**. This means:
+Identity is **centralized at the cluster boundary**. This means:
 
 - Identity providers (IdPs) are defined once at the cluster level.
 - Each Physical Tenant selects which cluster-defined providers it accepts using `providers.assigned`.
@@ -38,7 +38,7 @@ This design keeps identity management simple and avoids per-engine IdP fragmenta
 
 ## Identity deployment models
 
-Camunda 8.10 supports two recommended identity deployment models for Physical Tenants. A third model for advanced or managed-service scenarios is available but not recommended as a baseline.
+Physical Tenants support two recommended identity deployment models. A third model for advanced or managed-service scenarios is available but not recommended as a baseline.
 
 ### Model A: Single IdP, single client
 
@@ -60,13 +60,13 @@ Use Model B when:
 - Different teams or departments require separate client configurations.
 - You want role-level client separation within one IdP.
 
-Model B is the recommended baseline for most customers deploying Physical Tenants in 8.10.
+Model B is the recommended baseline for most customers deploying Physical Tenants.
 
 ### Model C: Multiple IdPs (advanced)
 
 Each Physical Tenant uses a separate identity provider. This model is intended for managed services or advanced deployments where tenants are fully autonomous organizations with their own IdPs.
 
-Model C is not a recommended baseline for 8.10. Use it only when:
+Model C is not a recommended baseline. Use it only when:
 
 - Tenants are separate organizations that each manage their own IdP.
 - You are operating a managed service where per-tenant IdP autonomy is required.

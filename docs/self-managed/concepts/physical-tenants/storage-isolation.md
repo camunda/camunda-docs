@@ -679,10 +679,10 @@ Risks to avoid:
 | **Consolidate**  | Backup source → Create new backend → Update config → Restore → Verify         |
 | **Split tenant** | Plan data distribution → Backup → Create stores → Restore to each → Restart   |
 
-## Known limitations in 8.10
+## Known limitations
 
 :::note
-**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported in 8.10. This constraint exists in the Query API stack, not the exporter layer.
+**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported. This constraint exists in the Query API stack, not the exporter layer.
 :::
 
 :::caution Custom exporter configuration merge (alpha3)

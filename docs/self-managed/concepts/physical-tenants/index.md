@@ -100,7 +100,7 @@ Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including 
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
 
-## What is not isolated in 8.10
+## What is not isolated
 
 - Gateways are shared between tenants, so a saturated gateway can still affect multiple tenants.
 - Brokers are co-located and shared infrastructure remains part of the deployment.

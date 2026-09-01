@@ -205,7 +205,7 @@ A failure in one tenant's job workers does not affect workers registered for oth
 On the inbound side, a polling failure for one Physical Tenant is logged and does not stop the other tenants from completing their imports in the same cycle. The runtime's readiness signal is shared across tenants, however, so a persistent polling failure for a single tenant marks the whole runtime instance as not ready.
 
 :::note App integrations (MS Teams and similar)
-App integrations with Physical Tenant support are implemented and will be documented in a follow-up section once the configuration details are finalized. Multiple Keycloak (separate IdP per tenant in the connector context) is not supported in 8.10.
+App integrations with Physical Tenant support are implemented and will be documented in a follow-up section once the configuration details are finalized. Multiple Keycloak (separate IdP per tenant in the connector context) is not supported.
 :::
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>

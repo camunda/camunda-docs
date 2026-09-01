@@ -54,7 +54,7 @@ An isolated execution unit within an Orchestration Cluster. Each Physical Tenant
 
 ### Default Physical Tenant
 
-Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. In Camunda 8.10, the default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant.
+Every Orchestration Cluster automatically includes a default Physical Tenant created at provisioning time. The default Physical Tenant is immutable and cannot be renamed, disabled, or deleted. For backward compatibility, traffic not explicitly scoped to a Physical Tenant is internally routed to the default Physical Tenant.
 
 ### Cluster-wide operation
 

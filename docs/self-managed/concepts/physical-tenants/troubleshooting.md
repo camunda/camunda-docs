@@ -68,7 +68,7 @@ When you repair the underlying cause, such as restoring network access to the da
 If you have capped the retry count in your retry configuration, a tenant that exhausts the cap stays degraded until you restart the node, rather than recovering on its own.
 
 :::note
-Request rejection for degraded tenants applies to REST endpoints. gRPC and MCP requests are not rejected on this basis in 8.10.
+Request rejection for degraded tenants applies to REST endpoints. gRPC and MCP requests are not rejected on this basis.
 :::
 
 ### When a degraded tenant still takes the node down
@@ -157,7 +157,7 @@ Each Physical Tenant applies its own mapping rules independently. The same token
 
 Endpoints under `/cluster/v2/...` require the cluster-admin role. Brokers start successfully when the role is not configured, so a missing cluster-admin configuration only surfaces when someone calls a cluster-wide endpoint.
 
-Configure cluster-admin access under `camunda.security.cluster-admin.oidc.*` for OIDC, or `camunda.security.cluster-admin.basic.users` for basic authentication.
+Configure cluster-admin access under `camunda.security.cluster-admin.oidc.*` for OIDC, or `camunda.security.cluster-admin.basic.users` for Basic authentication.
 
 ### Backup or exporting requests are rejected
 
@@ -204,7 +204,7 @@ To confirm two tenants are genuinely isolated:
 
 ## Performance and noisy neighbors
 
-Full performance isolation is out of scope for 8.10. Some infrastructure is shared, so heavy load in one tenant can affect others.
+Full performance isolation is out of scope. Some infrastructure is shared, so heavy load in one tenant can affect others.
 
 | Shared resource | Effect under load                                                                 |
 | :-------------- | :-------------------------------------------------------------------------------- |
@@ -237,7 +237,7 @@ Recommended alerts:
 - Sustained `503` responses on a single tenant's REST endpoints.
 - Connection pool saturation for one tenant while others are idle.
 
-## Known limitations in 8.10
+## Known limitations
 
 <!-- TODO: The "Mixed secondary storage backends are not supported" row came from alpha testing notes only, with no tracked issue. Confirm the Query API still cannot span mixed backends in 8.10 GA. Review with Deepthi Devaki and Houssain Barouni. -->
 
