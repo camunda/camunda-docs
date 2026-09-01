@@ -89,19 +89,49 @@ When you create, append, or change an element, the menu groups what you can inse
 
 <p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
 
-#### Web Modeler data in SaaS
+#### New organizational structure for projects and process applications
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
-Your Web Modeler data in SaaS was updated on 29 August 2026 to support Camunda Hub:
+A new organizational structure for projects and process applications is introduced with this alpha for SaaS.
 
-| Update                                                                                                                                       | Description                                                                                                                                                                                                                                                                       |
-| :------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Data migration](/reference/announcements-release-notes/8100/whats-new-in-810.md#data-migration)                                             | Aligns your existing data with the new organizational structure.                                                                                                                                                                                                                  |
-| [Organizational structure](/reference/announcements-release-notes/8100/whats-new-in-810.md#organizational-structure)                         | A new file resource hierarchy is introduced in which projects only contain process applications. Everything else, including files, folders, and IDP application content, is stored inside a process application. This enforces a stricter, more scalable file resource hierarchy. |
-| [Process application versioning model](/reference/announcements-release-notes/8100/whats-new-in-810.md#process-application-versioning-model) | The new improved process application versioning model provides more granular control.                                                                                                                                                                                             |
+With this new file resource hierarchy:
 
-<p class="link-arrow">[What's new in Camunda 8.10: Web Modeler data](/reference/announcements-release-notes/8100/whats-new-in-810.md#web-modeler-data)</p>
+- Projects now **only** contain process applications and IDP applications.
+- Files and folders are stored inside process applications.
+- Previously, a project could contain process applications, folders, and files.
+
+The new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
+
+<p class="link-arrow">[Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)</p>
+
+:::note
+
+- SaaS Web Modeler data was updated during the 29 August 2026 maintenance window to support this new structure.
+- This new structure will be introduced for Self-Managed deployments with the 8.10 minor release.
+
+:::
+
+#### Project versioning model
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+A new versioning model for projects and file resources is introduced with this alpha for SaaS.
+
+**Projects:** The new project versioning model uses snapshots to save a single capture of all the project files in one action. This helps you track a project throughout its development lifecycle and ensures the correct state is referenced.
+
+<p class="link-arrow">[Manage and review project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)</p>
+
+**File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
+
+<p class="link-arrow">[Manage file versions](/components/hub/workspace/modeler/modeling/versions.md)</p>
+
+:::note
+
+- In this context, a [snapshot](/reference/glossary.md#snapshot-project) is a Camunda Hub project snapshot, not a deployed process definition version.
+- This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
+
+:::
 
 ### Connectors
 
