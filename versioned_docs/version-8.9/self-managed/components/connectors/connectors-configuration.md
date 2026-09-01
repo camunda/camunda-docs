@@ -507,6 +507,17 @@ camunda:
 </TabItem>
 </Tabs>
 
+### Configure the mode in the Helm chart
+
+The Helm chart has no dedicated value for the secret filter. Set the mode through the generic `connectors.env` value:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE
+      value: LAX
+```
+
 ### Cache configuration
 
 The secret filter caches process definition lookups to avoid repeated API calls. You can configure the cache with the following properties:
