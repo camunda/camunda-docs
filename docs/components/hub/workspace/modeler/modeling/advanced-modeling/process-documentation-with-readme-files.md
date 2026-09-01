@@ -9,7 +9,7 @@ The README feature brings project documentation directly into modeling projects 
 ## Why use READMEs
 
 Process documentation is essential, but often stored outside modeling tools. This makes it hard to find and update, and disconnected from your work.
-With README support in Web Modeler, you can:
+With README support in Camunda Hub, you can:
 
 - Document your processes **right where you build them**.
 - Keep information **versioned and automatically synced** with Git.
