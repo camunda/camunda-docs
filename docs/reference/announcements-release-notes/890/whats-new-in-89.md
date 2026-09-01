@@ -499,7 +499,7 @@ The following guides offer detailed information on how to upgrade to Camunda 8.9
     <td>Operations and platform administrators of Self-Managed installations.</td>
 </tr>
 <tr>
-    <td>[APIs & tools upgrade guide](/docs/apis-tools/migration-manuals/migrate-to-89/)</td>
+    <td>[APIs & tools upgrade guide](https://docs.camunda.io/docs/8.9/apis-tools/migration-manuals/migrate-to-89/)</td>
     <td>Plan and execute an upgrade from Camunda 8.8 to 8.9, focusing on API and tools transitions.</td>
     <td><p><ul><li>Application developers maintaining Camunda-based solutions in Self-Managed Kubernetes or VM environments.</li><li>Developers using Camunda APIs and tools.</li></ul></p></td>
 </tr>
