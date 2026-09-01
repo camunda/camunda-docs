@@ -191,7 +191,7 @@ Refer to the updated Helm configuration and secret management documentation for:
 - Enabling IRSA for new EKS deployments using the AWS document store.
 - Safely migrating existing deployments from static AWS keys to IRSA.
 
-<p class="link-arrow">[Camunda Helm chart](/docs/self-managed/deployment/helm/index.md)</p>
+<p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
 
 #### Helm migration and validation tool
 
