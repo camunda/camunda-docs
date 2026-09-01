@@ -121,8 +121,6 @@ The `heartbeat` event and the `camunda.telemetry.export_window` metric are sent 
 
 Each signal is an [OpenTelemetry log record](https://opentelemetry.io/docs/specs/semconv/general/events/) identified by its `event.name`.
 
-Most signals follow the `camunda.<namespace>.<action>` naming pattern. Two do not: `user_task_created` and `heartbeat` predate that convention and keep their original flat names.
-
 ### Resource attributes
 
 Attached to every record, metric point, and heartbeat:
