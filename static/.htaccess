@@ -203,7 +203,6 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage
 
 # 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
 RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-89/?$ /docs/next/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
-RewriteRule ^docs/apis-tools/migration-manuals/migrate-to-89/?$ /docs/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
 
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
