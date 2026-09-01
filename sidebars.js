@@ -135,7 +135,7 @@ module.exports = {
       },
       items: [
         "components/hub/workspace/modeler/idp/idp-configuration",
-        "components/hub/workspace/modeler/idp/idp-applications",
+        "components/hub/workspace/modeler/idp/idp-projects",
         "components/hub/workspace/modeler/idp/idp-document-classification",
         {
           type: "category",
@@ -848,11 +848,6 @@ module.exports = {
                     "components/hub/workspace/modeler/modeling/file-download",
                     "components/hub/workspace/modeler/modeling/camunda-marketplace",
                     {
-                      type: "doc",
-                      id: "components/hub/workspace/modeler/modeler-settings",
-                      label: "Settings",
-                    },
-                    {
                       type: "category",
                       label: "Import",
                       items: [
@@ -914,6 +909,7 @@ module.exports = {
                     "components/hub/workspace/modeler/validation/task-testing",
                   ],
                 },
+                "components/hub/workspace/modeler/modeler-settings",
               ],
             },
           ],
