@@ -33,8 +33,8 @@ The following behavior was tied to Tasklist V1 and is no longer available in 8.1
 
 - Use the [Orchestration Cluster REST API](../../apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) for task, form, and process interactions.
 - Use [user task authorization](./user-task-authorization.md) for current Tasklist access control.
-- Use the [migration guide for Camunda user tasks](../../apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md) if you still have job worker-based user tasks.
-- Use [migrating to the Orchestration Cluster REST API](../../apis-tools/migration-manuals/migrate-to-camunda-api.md) if you still have integrations that call the removed Tasklist API.
+- Use the [migration guide for Camunda user tasks](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md) if you still have job worker-based user tasks.
+- Use [migrating to the Orchestration Cluster REST API](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md) if you still have integrations that call the removed Tasklist API.
 
 ## Historical timeline
 

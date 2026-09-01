@@ -9,7 +9,7 @@ Zeebe Process Test was removed in Camunda 8.10. Use [Camunda Process Test](/apis
 
 For the release-level summary of this removal, see the [8.10 release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#removal-of-legacy-apis-tasklist-v1-dependent-features-and-zeebe-process-test).
 
-Use [Camunda Process Test](/apis-tools/testing/getting-started.md) for current process testing, and review the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) to replace old ZPT dependencies, annotations, and assertions.
+Use [Camunda Process Test](/apis-tools/testing/getting-started.md) for current process testing, and review the [migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) to replace old ZPT dependencies, annotations, and assertions.
 
 ## Examples
 

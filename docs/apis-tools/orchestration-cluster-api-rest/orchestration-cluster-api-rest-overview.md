@@ -235,5 +235,5 @@ Now that you're familiar with the Orchestration Cluster REST API, here are some 
 
 - [Build a job worker using the Spring SDK](../camunda-spring-boot-starter/getting-started.md)
 - [Test your process definitions using Camunda Process Test](../testing/getting-started.md)
-- [Migrate from v1 component REST APIs to the v2 Orchestration Cluster REST API](../migration-manuals/migrate-to-camunda-api.md)
+- [Migrate from v1 component REST APIs to the v2 Orchestration Cluster REST API](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-api.md)
 - [Download the OpenAPI spec](https://github.com/camunda/camunda/blob/main/zeebe/gateway-protocol/src/main/proto/rest-api.yaml) to generate a client or explore the raw schema

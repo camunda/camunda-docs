@@ -40,7 +40,7 @@ It supports both REST and gRPC protocols, authentication setup, and provides rob
 - The Zeebe Java Client will be **removed in version 8.10**
 - **Migrate before upgrading to 8.10** to avoid breaking changes
 
-See our [migration guide](../migration-manuals/migrate-to-camunda-java-client.md) for details.
+See our [migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-java-client.md) for details.
 :::
 
 ## What can you build with it?

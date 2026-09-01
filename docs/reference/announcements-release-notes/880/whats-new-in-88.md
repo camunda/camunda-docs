@@ -386,7 +386,7 @@ Changes to [APIs & tools](/apis-tools/working-with-apis-tools.md) in 8.8 are sum
     <td>Camunda Process Test (CPT) is a Java library to test your BPMN processes and your process application. CPT is the successor of Zeebe Process Test. Our previous testing library is deprecated and will be removed with version 8.10.</td>
 </tr>
 <tr>
-    <td>[Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</td>
+    <td>[Camunda user tasks](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</td>
     <td>Camunda user tasks replace the deprecated job-based user tasks in Camunda 8.8, providing a more robust and flexible way to handle user tasks within process models.</td>
 </tr>
 <tr>

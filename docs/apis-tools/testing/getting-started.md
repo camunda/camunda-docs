@@ -26,7 +26,7 @@ CPT is part of the Camunda 8 [public API](/reference/public-api.md) and is cover
 :::note
 CPT is the successor to Zeebe Process Test (ZPT). Our previous testing
 library was removed in Camunda 8.10. See
-the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) on how to migrate your process
+the [migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) on how to migrate your process
 tests.
 :::
 

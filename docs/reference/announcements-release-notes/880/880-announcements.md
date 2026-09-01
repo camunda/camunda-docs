@@ -407,7 +407,7 @@ With the Camunda 8.8 release, the deprecation of Zeebe Process Test is announced
 - Zeebe Process Test is scheduled for removal in the Camunda 8.10 release.
 
 :::info
-To learn more, see [migrate to Camunda Process Test](../../../apis-tools/migration-manuals/migrate-to-camunda-process-test.md) and [Introducing Camunda Process Test - The Next Generation Testing Library](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/).
+To learn more, see [migrate to Camunda Process Test](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-process-test.md) and [Introducing Camunda Process Test - The Next Generation Testing Library](https://camunda.com/blog/2025/04/camunda-process-test-the-next-generation-testing-library/).
 :::
 
 </div>
@@ -500,7 +500,7 @@ The Camunda Spring Boot Starter is based on Spring Boot 3.5, see [version compat
 
 :::
 :::info
-To learn more about migrating to the Camunda Java client, see the [migration guide](/apis-tools/migration-manuals/migrate-to-camunda-java-client.md).
+To learn more about migrating to the Camunda Java client, see the [migration guide](/versioned_docs/version-8.8/apis-tools/migration-manuals/migrate-to-camunda-java-client.md).
 :::
 
 </div>
