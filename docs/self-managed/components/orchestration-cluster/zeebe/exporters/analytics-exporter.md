@@ -144,7 +144,7 @@ Set on every event record:
 
 ### Contractual signals
 
-**`camunda.process.instance.activated`** - a root process instance was activated.
+**`camunda.process.instance.activated`**: a root process instance was activated.
 
 | Attribute                           | Type   | Description                |
 | ----------------------------------- | ------ | -------------------------- |
@@ -157,7 +157,7 @@ Set on every event record:
 
 Taken from activation of the root process element, the single point every process instance passes through however it was started: client API, message, timer, signal, or conditional start event. Instances started by a call activity are excluded, so this counts root instances only.
 
-**`camunda.user_task.assigned`** - a user task was assigned to a user. This signal carries no assignee-derived data; it only counts assignment events.
+**`camunda.user_task.assigned`**: a user task was assigned to a user. This signal carries no assignee-derived data; it only counts assignment events.
 
 | Attribute                      | Type   | Description           |
 | ------------------------------ | ------ | --------------------- |
@@ -175,13 +175,13 @@ Assignments with an empty assignee produce no event.
 
 The tenant name, description, and associated entity are not exported.
 
-**`camunda.decision.instance.evaluated`** (counter metric) - pre-aggregated count of evaluated decision instances, dimensioned by `camunda.tenant.id`.
+**`camunda.decision.instance.evaluated`** (counter metric): pre-aggregated count of evaluated decision instances, dimensioned by `camunda.tenant.id`.
 
 Counts evaluation records rather than the decisions inside them: a decision requiring sub-decisions counts once, and failed evaluations are not counted. This matches the counting rule for the decision instance usage metric.
 
 ### Optional signals
 
-**`user_task_created`** - a user task was created.
+**`user_task_created`**: a user task was created.
 
 | Attribute                        | Type   | Description                       |
 | -------------------------------- | ------ | --------------------------------- |
@@ -261,7 +261,7 @@ The agent definition (model, provider, system prompt), its tools, its token coun
 | `camunda.heartbeat.broker_version`   | string | Broker version.             |
 | `camunda.heartbeat.exporter_version` | string | Analytics Exporter version. |
 
-**`camunda.telemetry.export_window`** (gauge metric) - accompanies every metrics export, carrying the window total and log position range. Camunda uses it for deduplication and gap detection.
+**`camunda.telemetry.export_window`** (gauge metric): accompanies every metrics export, carrying the window total and log position range. Camunda uses it for deduplication and gap detection.
 
 ### What is never sent
 
