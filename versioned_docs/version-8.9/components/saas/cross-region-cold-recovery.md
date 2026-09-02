@@ -30,10 +30,10 @@ Before you can use cross-region cold recovery, ensure the following prerequisite
 
 ## Fail over
 
-1. Confirm that the primary region is unavailable and start failover in Console.
-2. Select one or more backups that are already replicated to the recovery region. Console copies them to the replacement cluster's backup storage.
+1. Confirm that the primary region is unavailable and start failover in Console or API.
+2. Select one or more backups available in the recovery region, and select the backup to restore.
 3. Select one of those backups to restore.
-4. Console creates the target cluster and submits the required restore resources.
+4. Camunda creates a replacement cluster in the recovery region and prepares it to restore the selected backup.
 5. Camunda copies and verifies the selected backup data before restore proceeds.
 6. You don't need to manually suspend or resume the target cluster during the restore process.
 7. Re-establish private connectivity to the recovered cluster. Use the endpoint service name shown in Console to create or switch your VPC endpoint.
@@ -85,7 +85,7 @@ You can configure a 15-minute backup schedule for the organization, but this sch
 
 ## Limitations
 
-- This flow restores backup buckets only. Document buckets are excluded.
+- Cluster recovery from a backup restores only the Orchestration cluster state. It does not restore Intelligent Document Processing objects.
 - Private connectivity must be re-established by the customer.
 - Recovery is cold and creates a new cluster. It is not an active-active or warm-standby configuration.
 - Failover and failback depend on backup replication and may be affected by replication lag.
