@@ -285,28 +285,6 @@ In this setup, Web Modeler and Console still continue to use Auth0 via the ident
 
 Centralized secret resolution is introduced for connectors and job workers via Zeebe with this alpha.
 
-Secrets are resolved from external stores on demand when a worker reads a referenced variable. Resolved values are never written to the variable store, the command log, exporters, Operate, Tasklist, or logs.
-
-You can reference secrets in BPMN using the canonical FEEL expression `camunda.secrets.MY_SECRET`. This expression-based form is the preferred syntax and replaces the older string-substitution patterns. Moving secret references onto the FEEL expression surface instead of being embedded in arbitrary strings eliminates the secret-injection class of bugs: there is no string substitution at runtime, only typed expression evaluation.
-
-The legacy `{{secrets.MY_SECRET}}` form remains supported indefinitely for backward compatibility on existing deployed BPMN. The deprecated bare `secrets.MY_SECRET` pattern (without braces) is removed.
-
-Resolution for each deployment type works as follows:
-
-**Camunda SaaS:** The gateway resolves from the existing GCP Secret Manager backend Console already uses. No migration is required - existing connector secrets continue to work during transition.
-
-**Camunda Self-Managed:** Configure an external vault in the gateway configuration via Helm upgrade. No data migration required.
-
-8.10 must-have: HashiCorp Vault.
-
-8.10 follow-on: AWS Secrets Manager, Azure Key Vault, GCP Secret Manager.
-
-Provider plug-ins ship in this order. The provider interface is stable across providers, so adding a new vault later does not require BPMN or process changes.
-
-C8Run / local development: Inject secrets via environment variables, following standard practice and without requiring a Camunda secret store.
-
-V1 supports existing connector secret formats. To get started, configure your external secret store in the gateway configuration and reference secrets using `{{secrets.MY_SECRET}}` for legacy secrets and camunda.secrets.MY_SECRET as the new format in your connectors and job workers.
-
 #### Coordinated leadership transfer
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
