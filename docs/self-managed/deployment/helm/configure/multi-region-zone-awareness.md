@@ -11,25 +11,27 @@ For what zones are and how the application places partition replicas across them
 
 ## Move from global.multiregion
 
-`global.multiregion` is deprecated since chart v15 (Camunda 8.10) and will be removed in v16 (Camunda 8.11). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.multiregion` with the same five field names.
+`global.multiregion` is deprecated since chart v15 (Camunda 8.10) and will be removed in v16 (Camunda 8.11). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.multiregion`.
 
-To migrate, move the block and change nothing else:
+Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the legacy numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them and change nothing else:
 
 ```yaml
 # Before
 global:
   multiregion:
-    mode: zoned
-    zone: region-a
+    regions: 2
+    regionId: 1
 
 # After
 orchestration:
   multiregion:
-    mode: zoned
-    zone: region-a
+    regions: 2
+    regionId: 1
 ```
 
-The deprecated block still works and renders exactly the same topology, with a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
+Both spellings produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
+
+Zone awareness is configured only under `orchestration.multiregion`. The `mode`, `zone`, and `zones` keys have never existed under `global.multiregion`, so there is nothing to migrate for a zoned cluster.
 
 ## Choose a multi-region mode
 
