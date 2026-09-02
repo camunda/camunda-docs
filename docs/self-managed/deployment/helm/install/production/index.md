@@ -546,8 +546,6 @@ Restrict each rule to the specific workloads involved rather than allowing unres
 Service ports can differ from the internal component ports listed above, depending on your release name and values. Confirm the ports your installation actually exposes against the rendered chart with `helm template`.
 :::
 
-<!-- TODO: Confirm whether the Camunda Helm chart ships NetworkPolicy resources or exposes a values key to generate them. The previous wording here claimed policies "can be enabled with Camunda Helm charts", but no such parameter is documented in chart-parameters.md, so the claim was removed rather than corrected. If the chart does support it, add the values example here. -->
-
 ### Observability and monitoring
 
 The following resources and configuration options are important to keep in mind regarding observability and monitoring:
