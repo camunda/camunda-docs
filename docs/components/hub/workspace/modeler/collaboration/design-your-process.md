@@ -15,3 +15,10 @@ The sidebar on the right-hand side of the screen is collapsed when switching to 
 As a business user, you can [**link decision models**](/components/hub/workspace/modeler/modeling/advanced-modeling/business-rule-task-linking.md) and [**process models**](/components/best-practices/modeling/creating-readable-process-models.md) via [call activities](/components/modeler/bpmn/call-activities/call-activities.md), and you can still be a [**Workspace Admin**](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles), even if you don't execute implementation.
 
 With the **Design** mode view, users can model a process without need for a complex development tool that does not speak their language. This provides a clear journey for the user, all while incorporating modeling, sharing, and collaborating in a user-friendly way.
+
+## Switch to Design mode
+
+To switch to **Design** mode:
+
+1. In Camunda Hub, open a BPMN diagram.
+2. In the top left of the modeling interface, click **Design**.
