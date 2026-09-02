@@ -40,21 +40,40 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ### Agentic orchestration
 
-#### Agent Tool Config Autofix
+#### Agent tool configuration assistance
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3574 -->
 
-Release notes required.
+Agent tool configuration assistance helps you more easily configure your agent tools when modeling.
 
-#### Agent Tool Config Linting
+- **Autofix**: Automatically detect and apply a safe fix to a recognized misconfiguration in your agent. Autofix only rewrites the invalid part of a field value, and is only available if the field has an existing (misconfigured) value.
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+- **Autofill**: Automatically fill in either configuration part of the agent tool contract: `fromAi()` inputs and the `toolCallResult` output. Use Input from agent to add a correctly structured agent-supplied input, and Output to agent to map a tool result back to the agent. Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).
+
+<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+
+:::note
+
+- Changes are explicit, apply only when the correction is deterministic, and can be undone.
+- Configuration assistance is only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process.
+
+:::
+
+#### Agent tool configuration linting
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3719 -->
 
-Release notes required.
+Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.
+
+- Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.
+- Configuration problems are highlighted in the Modeler. Select a surfaced error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is provided for how to resolve the error.
+- These checks are available in Web Modeler, Desktop Modeler, and headless BPMN linting.
+
+<p class="link-arrow">[Modeling guidance](/components/modeler/reference/modeling-guidance/index.md)</p>
 
 #### Real-time agent visibility and monitoring
 
@@ -72,7 +91,7 @@ Monitor and evaluate AI agent behavior in Operate.
 
 ### Camunda design system
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
 The new Camunda visual design system is introduced with this alpha for Self-Managed deployments.
 
