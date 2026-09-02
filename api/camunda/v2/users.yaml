@@ -4,9 +4,14 @@ paths:
       tags:
         - User
       operationId: createUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -48,9 +53,14 @@ paths:
       tags:
         - User
       operationId: searchUsers
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search users
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -83,9 +93,14 @@ paths:
       tags:
         - User
       operationId: getUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -123,9 +138,14 @@ paths:
       tags:
         - User
       operationId: updateUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -171,9 +191,14 @@ paths:
       tags:
         - User
       operationId: deleteUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVVNFUiIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -293,6 +318,13 @@ components:
         - username
         - name
         - email
+      x-properties-added-in-version:
+        - propertyName: username
+          addedInVersionOverride: "8.8"
+        - propertyName: name
+          addedInVersionOverride: "8.8"
+        - propertyName: email
+          addedInVersionOverride: "8.8"
     UserSearchQuerySortRequest:
       type: object
       properties:
@@ -307,6 +339,11 @@ components:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
         - field
+      x-properties-added-in-version:
+        - propertyName: field
+          addedInVersionOverride: "8.8"
+        - propertyName: order
+          addedInVersionOverride: "8.8"
     UserSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"
@@ -321,6 +358,11 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserFilter"
           description: The user search filters.
+      x-properties-added-in-version:
+        - propertyName: sort
+          addedInVersionOverride: "8.8"
+        - propertyName: filter
+          addedInVersionOverride: "8.8"
     UserFilter:
       description: User search filter.
       type: object
@@ -337,6 +379,13 @@ components:
           description: The email of the user.
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+      x-properties-added-in-version:
+        - propertyName: username
+          addedInVersionOverride: "8.8"
+        - propertyName: name
+          addedInVersionOverride: "8.8"
+        - propertyName: email
+          addedInVersionOverride: "8.8"
     UserSearchResult:
       type: object
       allOf:
@@ -349,3 +398,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/UserResult"
+      x-properties-added-in-version:
+        - propertyName: items
+          addedInVersionOverride: "8.8"

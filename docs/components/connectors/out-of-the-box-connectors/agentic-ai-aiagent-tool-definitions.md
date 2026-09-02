@@ -1,20 +1,48 @@
 ---
 id: agentic-ai-aiagent-tool-definitions
 sidebar_label: Tool definitions
-title: AI Agent tool definitions
-description: Tool definitions for AI agents using the fromAi() function syntax
+title: AI agent tool definitions
+description: Understand what an AI agent tool is, how tools are defined, and how their names, descriptions, and parameters are resolved for the LLM.
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-When resolving the available tools within an ad-hoc sub-process, the AI Agent will take all activities into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
+Understand what an AI agent tool is, how tools are defined, and how their names, descriptions, and parameters are resolved for the LLM.
 
-For example, in the following image the activities marked in green are the ones that will be considered as tools:
+## What is a tool
+
+A tool is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) that an [LLM](/reference/glossary.md#large-language-model-llm) can choose to invoke to complete a goal. Each tool has:
+
+- A **name**: the element ID, used by the LLM to identify the tool.
+- A **description**: the element's **Documentation** field, used by the LLM to decide when to call the tool.
+- **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function in input mappings.
+- A **result**: the tool's output, returned to the LLM as `toolCallResult`.
+
+The Camunda Hub modeler can help you fill in both the input parameters and the result. See [assisted tool configuration in Camunda Hub](#assisted-tool-configuration-in-web-modeler) for more details.
+
+### Which elements are resolved as tools
+
+When resolving the available tools within an ad-hoc sub-process, the AI agent will take all elements into account which **have no incoming flows** (root nodes within the ad-hoc sub-process) and **are not boundary events**.
+
+For example, in the following image the elements marked in green are the ones that will be considered as tools:
 
 ![AI Agent tool resolution](../img/ai-agent-tool-resolution.png)
 
-You can use any BPMN elements and connectors as tools and to model sub-flows within the ad-hoc sub-process.
+You can use any BPMN element or connector as a tool:
+
+| Tool type            | When to use                                                                                           |
+| :------------------- | :---------------------------------------------------------------------------------------------------- |
+| Connectors           | Call an external system, for example the [REST connector](../protocol/rest.md) to call an HTTP API.   |
+| Script task          | Execute inline logic or data transformation.                                                          |
+| User task            | Route to a human for input or approval as part of the agent's decision path.                          |
+| Call activity        | Invoke another BPMN process as a tool when the target process is on the same cluster.                 |
+| MCP client connector | Expose tools from an external [MCP server](./agentic-ai-mcp-client.md) as gateway tools to the agent. |
+| Sub-process          | Model a multi-step sub-flow that the LLM triggers as a single tool.                                   |
+
+:::note
+For instructions on adding tools to an AI agent, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
+:::
 
 ## Tool resolution
 
@@ -38,7 +66,7 @@ When using the **AI Agent Task** implementation, the connector reads the BPMN mo
 
 1. It reads the BPMN model and looks up the ad-hoc sub-process using the configured ID. If not found, the connector throws an error.
 2. Iterates over all activities within the ad-hoc sub-process and checks that they are root nodes (no incoming flows) and not boundary events.
-3. For each activity found, analyzes the input mappings and looks for the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls that define the parameters that need to be provided by the LLM.
+3. For each activity found, analyzes the input mappings and looks for the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) function calls that define the parameters that need to be provided by the LLM.
 4. Creates a tool definition for each activity found, and passes these tool definitions to the LLM as part of the prompt.
 
 </TabItem>
@@ -56,11 +84,11 @@ The AI Agent connector only considers the **root node** of the sub-flow when res
 
 A tool definition consists of the following properties which will be passed to the LLM. The tool definition is closely modeled after the [list tools response](https://modelcontextprotocol.io/specification/2025-03-26/server/tools#listing-tools) as defined in the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/).
 
-| Property    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| :---------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name        | The name of the tool. This is the **ID of the activity** in the ad-hoc sub-process.                                                                                                                                                                                                                                                                                                                                                          |
-| description | The description of the tool, used to inform the LLM of the tool purpose. If the **documentation** of the activity is set, this is used as the description, otherwise the **name** of the activity is used. Make sure you provide a meaningful description to help the LLM understand the purpose of the tool.                                                                                                                                |
-| inputSchema | The input schema of the tool, describing the input parameters of the tool. The connector will analyze all input mappings of the activity and create a [JSON Schema](https://json-schema.org/) based on the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) function calls defined in these mappings. If no `fromAi` function calls are found, an empty JSON Schema object is returned. |
+| Property    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :---------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name        | The name of the tool. This is the **ID of the activity** in the ad-hoc sub-process.                                                                                                                                                                                                                                                                                                                                                     |
+| description | The description of the tool, used to inform the LLM of the tool purpose. If the **documentation** of the activity is set, this is used as the description, otherwise the **name** of the activity is used. Make sure you provide a meaningful description to help the LLM understand the purpose of the tool.                                                                                                                           |
+| inputSchema | The input schema of the tool, describing the input parameters of the tool. The connector will analyze all input mappings of the activity and create a [JSON Schema](https://json-schema.org/) based on the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) function calls defined in these mappings. If no `fromAi` function calls are found, an empty JSON Schema object is returned. |
 
 :::note
 Provide as much context and guidance in tool definitions and input parameter definitions as you can to ensure the LLM
@@ -72,7 +100,7 @@ Refer to the [Anthropic documentation](https://docs.anthropic.com/en/docs/build-
 ### AI-generated parameters via `fromAi`
 
 Within an activity, you can define parameters which should be AI-generated by tagging them with the
-[`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function in input mappings.
+[`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) [AI agent function](/reference/glossary.md#ai-agent-function) in input mappings.
 
 The function itself does not implement any logic (it simply returns the first argument it receives), but provides a way
 to configure all the necessary metadata (for example, description, type) to generate an input schema definition. The tools
@@ -90,13 +118,17 @@ You can use the `fromAi` function in:
 - Input mappings (for example, service task, script task, user task).
 - Custom input fields provided by an element template if an element template is applied to the activity as technically these are handled as input mappings.
 
+:::note
+`fromAi` only applies to activities resolved as **static tool definitions**. [Gateway tool definitions](#gateway-tool-definitions), such as MCP Client or A2A activities, determine their input schemas dynamically from the external source they connect to. As a result, `fromAi` calls in their input mappings have no effect and are ignored.
+:::
+
 For example, the following image shows an example of `fromAi` function usage on a [REST outbound connector](../protocol/rest.md):
 
 ![AI Agent fromAi tool resolution](../img/ai-agent-tool-resolution-fromAi.png)
 
 #### `fromAi` examples
 
-The [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) FEEL function
+The [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function
 can be called with a varying number of parameters to define simple or complex inputs. The simplest form is to just pass
 a value.
 
@@ -161,7 +193,17 @@ You can combine multiple parameters within the same FEEL expression, for example
 fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.secondNumber, "The second number.", "number")
 ```
 
-For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) documentation.
+For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) documentation.
+
+In the Camunda Hub modeler, you can [autofill a starter `fromAi()` call](#autofill-a-fromai-input) into a blank input.
+
+## Message catch events as tools
+
+You can use an intermediate message catch event inside an ad-hoc sub-process as a tool. For example, to model a "wait for reply" step where the agent sends a message to an external system and waits for a response before continuing.
+
+When using this pattern, each process instance opens a message subscription. If multiple instances run concurrently, and they all subscribe with the same message name and correlation key, Zeebe delivers the reply to one instance non-deterministically. The wrong instance may receive the reply, and there is no warning when this happens.
+
+To avoid this, use a [unique correlation key per interaction](../../concepts/messages.md#request-reply-with-unique-correlation-key).
 
 ## Tool call responses
 
@@ -178,6 +220,9 @@ Depending on the used task, setting the variable content can be achieved in mult
   to a part of the `toolCallResult` variable (for example, an output mapping could be set to `toolCallResult.statusCode`)
 - A [script task](../../modeler/bpmn/script-tasks/script-tasks.md) that sets the `toolCallResult` variable
 
+If a tool consists of multiple elements (for example, a sequence of tasks with a gateway), `toolCallResult` can be set at
+any point in the flow. The variable is [read from the tool's scope when the flow completes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md#collect-output).
+
 Tool call results can be either primitive values (for example, a string) or complex ones, such as
 a [FEEL context](../../modeler/feel/language-guide/feel-context-expressions.md) that is serialized to a JSON
 string before passing it to the LLM.
@@ -185,6 +230,8 @@ string before passing it to the LLM.
 As most LLMs expect _some_ form of response to a tool call, the AI Agent will return a constant string indicating that the tool
 was executed successfully without returning a result to the LLM if the `toolCallResult` variable is not set or empty after executing
 the tool.
+
+In the Camunda Hub modeler, you can [autofill the `toolCallResult` output](#autofill-a-toolcallresult-output).
 
 ### Document support
 
@@ -194,13 +241,75 @@ content blocks.
 
 For supported file types and details on how documents are resolved, see [document support](./agentic-ai-aiagent-documents.md).
 
+## Assisted tool configuration in Camunda Hub
+
+In the properties panel, the Camunda Hub modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
+
+Two affordances appear, and they apply to different fields:
+
+| Affordance   | Where it appears                      | What it does                                                              |
+| :----------- | :------------------------------------ | :------------------------------------------------------------------------ |
+| **Autofill** | On a blank field only                 | Seeds a correctly structured value. It never overwrites an existing value |
+| **Fix**      | On a field that already holds a value | Rewrites only the invalid part of that value and keeps the rest           |
+
+**Autofill** disappears as soon as a field holds any value, so it can never replace something you entered. **Fix** edits only the part it identifies as invalid, so it preserves the rest of the expression. Both actions are undoable.
+
+### Autofill a `fromAi()` input
+
+On a tool's root node (the activity with no incoming flows), an autofill icon appears for a blank input mapping or blank FEEL-capable element-template field. Select the icon to add a correctly structured call:
+
+```feel
+=fromAi(toolCall.parameterName, "Description of the parameter", "string")
+```
+
+Replace the placeholder key and description with values for your tool. The autofill icon appears only on a blank field, so it never replaces a value you entered.
+
+The Camunda Hub modeler derives the key from the field's target and infers the type argument from the field's description or name. This inferred type is a heuristic, not a guaranteed match for the target's real shape, so check it when a tool call fails with a type mismatch.
+
+### Autofill a `toolCallResult` output
+
+If a tool-flow element does not yet produce a contract-readable result, you can use autofill to write `toolCallResult` to the element's native result field:
+
+| Element type | Field written                                                |
+| :----------- | :----------------------------------------------------------- |
+| Connector    | The connector result expression, as `={toolCallResult: ...}` |
+| Script task  | The script result variable                                   |
+| Other tasks  | An output mapping targeting `toolCallResult`                 |
+
+For a multi-instance tool, autofill also sets the output collection and output element so the agent collects a result for every iteration instead of returning `null`.
+
+### Fix an invalid key
+
+When a `fromAi()` key or an output key is invalid, the Camunda Hub modeler detects it locally by re-parsing the element's own fields and offers a **Fix** button. No modeling-guidance report is involved.
+
+The Camunda Hub modeler offers **Fix** for:
+
+- A `fromAi()` key with a missing `toolCall.` prefix, bracket notation, a quoted string, or an over-long path.
+- A `fromAi` function name with incorrect casing, since only the exact name is recognized.
+- A description that is not a string literal.
+- An output key that is a near-miss of `toolCallResult`, such as `toolcallresult`.
+- A `fromAi()` key that cannot be recovered as written, such as a missing or numeric key. The Camunda Hub modeler fills in a key derived from the field's own target.
+
+In every case, **Fix** rewrites only the invalid key or the `fromAi(...)` span and leaves the rest of the field intact. A field such as `=concat("prefix-", fromAi(...), "-suffix")` keeps both surrounding literals, and correcting an invalid key preserves any description and type arguments you entered.
+
+The button is always labeled **Fix**, so hover it to see the specific change it makes before you select it.
+
+If a field's expression cannot be parsed at all, the Camunda Hub modeler cannot identify what to correct and offers no fix. Repair the expression yourself.
+
+If a `fromAi()` call is on an element other than the tool's root node, the AI Agent connector cannot resolve it. The Camunda Hub modeler offers a move action, labeled with the root node's name, that declares the input on the root node and rewrites only the `fromAi(...)` span on the original field.
+
+This assistance complements the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong, assisted configuration offers to fix it.
+
 ## Gateway tool definitions
 
 Gateway tools are activities that expose multiple tools from an external source, such as an MCP server or an A2A agent. Unlike static tool definitions, gateway tools discover their available tools dynamically during agent initialization by calling the external source.
 
 To configure an activity as a gateway tool, set the [extension property](../../modeler/element-templates/defining-templates.md#zeebeproperty) `io.camunda.agenticai.gateway.type` on the activity. The property value specifies which gateway implementation to use (for example, `mcpClient`). The agent must also have access to a handler for the specified gateway type. Custom implementations can be made available to the agent in self-managed or hybrid setups.
 
+Because the tools behind a gateway activity are discovered dynamically rather than resolved from the BPMN model, their input schemas are not derived from [`fromAi`](#ai-generated-parameters-via-fromai) function calls in the gateway activity's input mappings.
+Instead, each discovered tool's input schema is provided by the external source itself, for example, the input schema included in the `tools/list` response returned by an MCP server. Any `fromAi` calls configured on a gateway tool activity's input mappings are ignored.
+
 For more details, see the available gateway tool implementations:
 
 - [MCP Client connectors](./agentic-ai-mcp-client.md)
-<!-- TODO add A2A -->
+- [A2A Client connector](/components/early-access/alpha/a2a-client/a2a-client.md)

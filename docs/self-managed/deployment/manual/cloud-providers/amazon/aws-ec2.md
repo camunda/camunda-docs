@@ -402,14 +402,6 @@ Follow the example in the [Orchestration Cluster REST API documentation](/apis-t
 
 ## Manage Camunda 8
 
-### Upgrade Camunda 8
-
-:::info Direct upgrade not supported
-Upgrading directly from Camunda 8.7 to 8.8 is not supported and cannot be performed.
-:::
-
-For manual installations, see the [upgrade guide](/self-managed/upgrade/manual/index.md) for detailed instructions.
-
 ### Monitoring
 
 Camunda exposes metrics in Prometheus format by default. For details on scraping Camunda 8 metrics, see [metrics](/self-managed/operational-guides/monitoring/metrics.md).

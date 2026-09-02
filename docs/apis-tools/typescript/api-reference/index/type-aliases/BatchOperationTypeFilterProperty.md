@@ -9,8 +9,7 @@ mdx:
 
 ```ts
 type BatchOperationTypeFilterProperty =
-  | BatchOperationTypeExactMatch
-  | AdvancedBatchOperationTypeFilter;
+  BatchOperationTypeExactMatch | AdvancedBatchOperationTypeFilter;
 ```
 
 BatchOperationTypeEnum property with full advanced search capabilities.

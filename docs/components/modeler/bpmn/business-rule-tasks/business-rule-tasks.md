@@ -4,7 +4,7 @@ title: "Business rule tasks"
 description: "A business rule task is used to model the evaluation of a business rule."
 ---
 
-A business rule task is used to model the evaluation of a business rule; for example, a decision
+A business rule task is used to model the evaluation of a business rule. For example, a decision
 modeled in [Decision Model and Notation](https://www.omg.org/dmn/) (DMN).
 
 ![task](assets/business-rule-task.png)
@@ -26,6 +26,8 @@ internal DMN decision engine. Once the decision is made, the process instance co
 
 If the decision evaluation is unsuccessful, an [incident](/components/concepts/incidents.md) is
 raised at the business rule task. When the incident is resolved, the decision is evaluated again.
+
+Used as a tool inside an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md), a business rule task lets an [AI agent](/reference/glossary.md#ai-agent) delegate part of its decision to a governed DMN decision instead of LLM reasoning, keeping that step deterministic. See [AI agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) for how tools are declared.
 
 ## Defining a called decision {#defining-a-task}
 
@@ -100,6 +102,13 @@ Define [variable mappings](/components/concepts/variables.md#inputoutput-variabl
 the [same way as a service task does](/components/modeler/bpmn/service-tasks/service-tasks.md#variable-mappings)
 to transform the variables passed to the job worker, or to customize how the variables of the job merge.
 
+### Job priority
+
+This task type supports `zeebe:jobPriorityDefinition` when implemented as a job worker.
+
+You can define job priority on the process as a default and override it on this task.
+For priority behavior and limitations, see [Job prioritization](../../../concepts/job-workers.md#job-prioritization).
+
 ## Additional resources
 
 ### XML representation
@@ -158,6 +167,7 @@ A business rule task with a job worker implementation and a custom header:
     <zeebe:taskHeaders>
       <zeebe:header key="decisionRef" value="risk" />
     </zeebe:taskHeaders>
+    <zeebe:jobPriorityDefinition priority="90" />
   </bpmn:extensionElements>
 </bpmn:businessRuleTask>
 ```

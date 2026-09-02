@@ -46,25 +46,25 @@ jobs:
           fi
 
       - name: Checkout camunda-docs
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/camunda-docs
           path: docs
 
       - name: Checkout Python SDK
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: camunda/orchestration-cluster-api-python
           ref: ${{ steps.resolve.outputs.sdk_ref }}
           path: python-sdk
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v8.2.0
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
         with:
           version: "latest"
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.14"
 
@@ -112,7 +112,7 @@ jobs:
           echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 24
 
@@ -159,17 +159,30 @@ jobs:
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
       - name: Generate token
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
         id: generate_token
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
-          app-id: ${{ secrets.GH_APP_API_SYNC_ID }}
-          private-key: ${{ secrets.GH_APP_API_SYNC_KEY }}
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
-        uses: peter-evans/create-pull-request@v8
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
           token: "${{ steps.generate_token.outputs.token }}"
           path: docs
@@ -195,3 +208,16 @@ jobs:
           delete-branch: true
           base: main
           labels: deploy
+  notify-failure:
+    needs:
+      - sync-python-sdk-docs
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    uses: ./.github/workflows/notify-failure.yml
+    with:
+      # If any dependent job fails, set the dependency_status to 'failure',
+      # otherwise set it to 'success'.
+      dependency_status: ${{ contains(needs.*.result, 'failure') && 'failure' || 'success' }}
+    secrets:
+      VAULT_ADDR: ${{ secrets.VAULT_ADDR }}
+      VAULT_ROLE_ID: ${{ secrets.VAULT_ROLE_ID }}
+      VAULT_SECRET_ID: ${{ secrets.VAULT_SECRET_ID }}

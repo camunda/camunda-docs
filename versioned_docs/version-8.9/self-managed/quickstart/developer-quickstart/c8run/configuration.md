@@ -132,7 +132,7 @@ For custom connectors:
 
 2. Ensure the corresponding element template is available in a valid Desktop Modeler search path.
 3. Restart Camunda 8 Run after adding or updating connectors.
-4. Check `c8run/logs/connectors.log` if the connector fails to load.
+4. Check `c8run/log/connectors.log` if the connector fails to load.
 
 For connector secrets:
 

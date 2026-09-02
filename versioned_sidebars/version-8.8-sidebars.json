@@ -9,8 +9,8 @@
       },
       "items": [
         "guides/getting-started-hello-world",
-        "guides/getting-started-example",
         "guides/getting-started-agentic-orchestration",
+        "guides/getting-started-example",
         "guides/orchestrate-human-tasks",
         "guides/orchestrate-apis"
       ]
@@ -93,7 +93,7 @@
         "components/agentic-orchestration/ao-design",
         {
           "type": "category",
-          "label": "Evaluate your AI agents",
+          "label": "Evaluate AI agents",
           "link": {
             "type": "doc",
             "id": "components/agentic-orchestration/evaluate-agents/evaluate-agents-overview"
@@ -103,6 +103,7 @@
             "components/agentic-orchestration/evaluate-agents/analyze-ai-agents"
           ]
         },
+        "components/agentic-orchestration/add-tool-to-ai-agent",
         "components/agentic-orchestration/rag-ai-agents",
         "components/agentic-orchestration/choose-right-model-agentic",
         "components/agentic-orchestration/model-recommendations-agentic"
@@ -232,6 +233,7 @@
             "components/best-practices/management/doing-a-proper-poc"
           ],
           "Architecture": [
+            "components/best-practices/architecture/data-flow",
             "components/best-practices/architecture/deciding-about-your-stack",
             {
               "type": "category",
@@ -628,6 +630,9 @@
                 "id": "components/modeler/reference/modeling-guidance/index"
               },
               "items": [
+                "components/modeler/reference/modeling-guidance/rules/agent-fromai-contract",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-documentation",
+                "components/modeler/reference/modeling-guidance/rules/agent-tool-output-key",
                 "components/modeler/reference/modeling-guidance/rules/called-element",
                 "components/modeler/reference/modeling-guidance/rules/element-type",
                 "components/modeler/reference/modeling-guidance/rules/error-reference",
@@ -759,7 +764,7 @@
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-range",
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-string",
                 "components/modeler/feel/builtin-functions/feel-built-in-functions-temporal",
-                "components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous"
+                "components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent"
               ]
             }
           ]
@@ -2937,6 +2942,7 @@
               "items": [
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/pod-networking",
+                "self-managed/deployment/helm/configure/pod-scheduling",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
                 {
@@ -3018,6 +3024,7 @@
                   ]
                 },
                 "self-managed/deployment/helm/configure/secret-management",
+                "self-managed/deployment/helm/configure/tls",
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
@@ -3301,7 +3308,6 @@
                 {
                   "Operation": [
                     "self-managed/components/orchestration-cluster/zeebe/operations/zeebe-in-production",
-                    "self-managed/components/orchestration-cluster/zeebe/operations/resource-planning",
                     "self-managed/components/orchestration-cluster/zeebe/operations/network-ports",
                     "self-managed/components/orchestration-cluster/zeebe/operations/setting-up-a-cluster",
                     "self-managed/components/orchestration-cluster/zeebe/operations/health",

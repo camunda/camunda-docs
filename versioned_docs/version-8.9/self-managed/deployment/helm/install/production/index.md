@@ -215,12 +215,13 @@ The following example `values.yaml` configures Web Modeler with an external Amaz
 
 ```yaml
 webModeler:
-  externalDatabase:
-    url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-    user: web_modeler_user
-    secret:
-      existingSecret: web-modeler-db-secret
-      existingSecretKey: database-password
+  restapi:
+    externalDatabase:
+      url: jdbc:postgresql://external-postgres-host:5432/camunda_db
+      user: web_modeler_user
+      secret:
+        existingSecret: web-modeler-db-secret
+        existingSecretKey: database-password
 ```
 
 Use the `existingSecret` parameter to specify a pre-existing Kubernetes secret containing the password. This approach allows the Camunda Helm chart to reference credentials stored securely in your cluster, rather than hardcoding sensitive data in values files or templates.
@@ -350,11 +351,11 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
               - key: app.kubernetes.io/component
                 operator: In
                 values:
-                  - zeebe
+                  - zeebe-broker
           topologyKey: kubernetes.io/hostname
   ```
 
-  This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe` are not scheduled on the same node. The primary benefits include:
+  This configuration ensures that Zeebe Pods with the default label `app.kubernetes.io/component=zeebe-broker` are not scheduled on the same node. The primary benefits include:
   - High availability: If one node fails, other nodes running the same component remain unaffected.
   - Load distribution: Balances the workload across nodes.
   - Fault tolerance: Reduces the impact of a node-level failure.
@@ -369,31 +370,88 @@ For more details, see [troubleshooting](/self-managed/operational-guides/trouble
       maxUnavailable: 1
   ```
 
-- Version management: Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
-- Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets. Create your secrets explicitly using `kubectl` or an external secret manager, then reference them in your Helm values files. For details, see the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md).
+#### Topology spread constraints
 
-  :::note
-  It is best to store secrets in an external secret manager such as [Vault by HashiCorp](https://www.vaultproject.io/) in case of a total outage.
-  :::
+Topology spread constraints control how pods are distributed across failure domains such as availability zones. The default `podAntiAffinity` configuration ensures Zeebe broker pods run on distinct nodes, but does not ensure those nodes are in different zones: if the cluster has more nodes than brokers, all brokers can still be scheduled into a single availability zone. Because broker persistent volumes are bound to a single zone on most cloud providers, a zonal outage can then take down the whole Orchestration Cluster.
 
-- When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/upgrade/components/index.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
+With `orchestration.topologySpreadConstraints`, you can spread broker pods across zones. The Orchestration Cluster is deployed as a single StatefulSet, and its pods run the Zeebe broker and gateway in the same process, so this value covers both. It does not affect separately deployed components such as Identity, Optimize, Connectors, or Web Modeler, which have no equivalent topology spread value in the current chart version.
 
-  The following is an example configuration for the Orchestration Cluster to create persistent storage:
+```yaml
+orchestration:
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/component: zeebe-broker
+```
 
-  ```yaml
-  orchestration:
-    extraVolumes:
-      - name: persistent-state
-        emptyDir: {}
-    extraVolumeMounts:
-      - name: persistent-state
-        mountPath: /mount
-  ```
+Keep the following in mind when configuring topology spread constraints:
+
+- Set a `topologyKey` that your nodes carry. `topology.kubernetes.io/zone` is standard on managed cloud clusters, but bare-metal and local clusters often have no zone label. With `whenUnsatisfiable: DoNotSchedule` and no matching node label, no broker can be scheduled at all.
+- Prefer `whenUnsatisfiable: ScheduleAnyway`. It provides best-effort spreading: Kubernetes does not guarantee an even distribution and does not rebalance existing brokers. A hard constraint (`DoNotSchedule`) combined with the default hard `podAntiAffinity` can leave broker pods permanently `Pending` when zones have uneven node counts, or stall a rolling update — use it only when every zone has enough spare capacity.
+- Broker volumes pin pods to a zone. With topology-constrained storage, `volumeBindingMode: WaitForFirstConsumer` delays volume binding or provisioning until the scheduler picks a node, so the volume matches that node's topology; `Immediate` binds or provisions the volume without considering pod scheduling constraints. Once a broker's claim is bound to a single-zone volume, every replacement pod must run in that zone: a hard zone constraint that conflicts with the volume's zone leaves the pod `Pending`, and enabling spreading on an existing cluster does not relocate existing volumes.
+- The `labelSelector` counts pods across the whole namespace. Pods with matching labels from all Helm releases in the namespace are counted together, not only the release you are configuring. To scope spreading to a single release, also match `app.kubernetes.io/instance: <release-name>`.
+
+For an overview of all pod scheduling values, see [configure pod scheduling](/self-managed/deployment/helm/configure/pod-scheduling.md).
+
+#### Secondary storage index replicas
+
+:::warning Single point of failure without replicas
+The Elasticsearch/OpenSearch Exporter defaults to zero index replicas for the Zeebe record indices it creates. Without replicas, a single node restart moves its shards to UNASSIGNED state and puts the cluster into RED health. Two consequences follow:
+
+- **Exporter backpressure builds up**: the Orchestration Cluster pauses exports when ES/OS cannot accept writes, which eventually throttles process execution throughput.
+- **Optimize analytics data goes stale**: the Optimize importer reads from these Zeebe record indices. While shards are UNASSIGNED, Optimize cannot read newly exported records, so its analytics data lags behind until the node rejoins.
+
+The cluster recovers once the node rejoins and shards are reassigned.
+:::
+
+In multi-node Elasticsearch/OpenSearch clusters, configure at least one index replica:
+
+```yaml
+camunda:
+  database:
+    index:
+      numberOfReplicas: 1
+```
+
+Each replica stores a full copy of the primary shard data, approximately doubling disk usage for those indices. Account for this when sizing your cluster. See [Managing secondary storage: Replicas](/self-managed/concepts/secondary-storage/managing-secondary-storage.md#replicas) for full guidance.
+
+#### Version management
+
+Stay on a stable Camunda and Kubernetes version. Follow Camunda’s [release notes](/reference/announcements-release-notes/870/870-release-notes.md) for security patches or critical updates.
+
+#### Secret management
+
+Secrets should be created prior to installing the Helm chart so they can be referenced as existing secrets. Create your secrets explicitly using `kubectl` or an external secret manager, then reference them in your Helm values files. For details, see the [secret management guide](/self-managed/deployment/helm/configure/secret-management.md).
+
+:::note
+It is best to store secrets in an external secret manager such as [Vault by HashiCorp](https://www.vaultproject.io/) in case of a total outage.
+:::
+
+#### Upgrades
+
+When upgrading the Camunda Helm chart, make sure to read the [upgrade guide](/self-managed/upgrade/components/index.md) and corresponding new version release notes before upgrading. Perform the upgrade on a test environment first before attempting in production.
+
+The following is an example configuration for the Orchestration Cluster to create persistent storage:
+
+```yaml
+orchestration:
+  extraVolumes:
+    - name: persistent-state
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: persistent-state
+      mountPath: /mount
+```
 
 <!-- This seems very specific to the application. I might remove this: -->
 <!-- - Mount Secrets as volumes, not environment variables -->
 
-- It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-Level Quotas apply limits to all workloads within a namespace. It ensures aggregate resource consumption by all pods in the namespace do not exceed your desired resource limits.
+#### Resource quotas
+
+It is recommended to set a memory and resource quota for your namespace. Please refer to the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) to do so. Namespace-level quotas apply limits to all workloads within a namespace and ensure aggregate resource consumption by all pods in the namespace does not exceed your desired resource limits.
 
 ### Security
 
@@ -426,8 +484,10 @@ The following resources and configuration options are important to keep in mind 
   You should only enable the auto-mounting of a service account token when the application explicitly needs access to the Kubernetes API server, or you have created a service account with the exact permissions required for the application and bound it to the pod.
   :::
 
-- [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) can be enabled with Camunda Helm charts if needed by your infrastructure requirements.
-<!--Maybe link this to customer: https://github.com/ahmetb/kubernetes-network-policy-recipes-->
+- Restrict pod-to-pod traffic with [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/). See [required network traffic](#required-network-traffic) for the flows a Camunda installation depends on.
+
+- Several in-cluster connections, including Connectors to the Orchestration Cluster gateway and Spring Boot management endpoints, are plaintext by default. `global.tls.caBundle` does not cover them. To encrypt them, run a service mesh such as Linkerd, Istio, or Cilium. See [in-cluster transport](/self-managed/deployment/helm/configure/tls.md#in-cluster-transport-service-mesh-required) for the affected connections.
+
 - It is possible to have a pod security standard that is suited to your security constraints. This is enabled by modifying the Pod Security Admission. See the [Pod Security Admission](https://kubernetes.io/docs/concepts/security/pod-security-admission/) guide in the official Kubernetes documentation for more information.
 - By default, the Camunda Helm chart is configured to use a read-only root file system for the pod. It is advisable to retain this default setting, and no modifications are required in your Helm values files.
 - Disable privileged containers. This can be achieved by implementing a pod security policy. For more information, see the official [Kubernetes documentation](https://kubernetes.io/docs/concepts/security/pod-security-admission/).
@@ -457,6 +517,30 @@ The following resources and configuration options are important to keep in mind 
 - Please refer to our [installing in an air-gapped environment guide](/self-managed/deployment/helm/configure/registry-and-images/air-gapped-installation.md) when deploying Camunda in Air-gapped environments
 
 - Open Policy Agent can also be used to [allowlist Ingress hostnames](https://www.openpolicyagent.org/docs/latest/kubernetes-tutorial/#4-define-a-policy-and-load-it-into-opa-via-kubernetes).
+
+#### Required network traffic
+
+If you enforce network policies, a default-deny posture blocks traffic Camunda depends on. Allow the following flows for a single-namespace installation.
+
+| Direction | Source                          | Destination           | Ports                    | Purpose                                              |
+| :-------- | :------------------------------ | :-------------------- | :----------------------- | :--------------------------------------------------- |
+| Ingress   | Ingress controller              | Orchestration Cluster | `8080/TCP`, `26500/TCP`  | REST API, web applications, and gRPC clients         |
+| Internal  | Orchestration Cluster           | Orchestration Cluster | `26501/TCP`, `26502/TCP` | Gateway-to-broker and inter-broker communication     |
+| Internal  | Connectors                      | Orchestration Cluster | `8080/TCP`, `26500/TCP`  | Activate jobs and call the Orchestration Cluster API |
+| Internal  | Web Modeler                     | Orchestration Cluster | `8080/TCP`, `26500/TCP`  | Deploy processes and call the API                    |
+| Internal  | Orchestration Cluster           | Management Identity   | `80/TCP`                 | Resolve users, groups, and authorizations            |
+| Egress    | All Camunda pods                | Cluster DNS           | `53/TCP`, `53/UDP`       | Resolve service names                                |
+| Egress    | Orchestration Cluster, Optimize | Secondary storage     | `9200/TCP` or `5432/TCP` | Elasticsearch/OpenSearch, or the RDBMS vendor port   |
+| Egress    | All Camunda pods                | Identity provider     | Provider HTTPS port      | Authenticate users and clients                       |
+| Egress    | Orchestration Cluster           | Document store        | Provider HTTPS port      | Store and retrieve documents                         |
+| Probes    | Kubelet, Prometheus             | Orchestration Cluster | `9600/TCP`               | Readiness, liveness, and metrics                     |
+| Probes    | Kubelet, Prometheus             | Web Modeler, Optimize | `8091/TCP`, `8092/TCP`   | Readiness, liveness, and metrics                     |
+
+Restrict each rule to the specific workloads involved rather than allowing unrestricted namespace traffic.
+
+:::note
+Service ports can differ from the internal component ports listed above, depending on your release name and values. Confirm the ports your installation actually exposes against the rendered chart with `helm template`.
+:::
 
 ### Observability and monitoring
 
@@ -520,12 +604,12 @@ webModeler:
     mail:
       # This value is required, otherwise the restapi pod wouldn't start.
       fromAddress: noreply@example.com
-  externalDatabase:
-    url: jdbc:postgresql://external-postgres-host:5432/camunda_db
-    user: camunda_user
-    secret:
-      existingSecret: camunda-db-secret
-      existingSecretKey: database-password
+    externalDatabase:
+      url: jdbc:postgresql://external-postgres-host:5432/camunda_db
+      user: camunda_user
+      secret:
+        existingSecret: camunda-db-secret
+        existingSecretKey: database-password
 
 prometheusServiceMonitor:
   enabled: true

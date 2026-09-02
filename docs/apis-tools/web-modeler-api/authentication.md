@@ -12,7 +12,7 @@ import TabItem from "@theme/TabItem";
 All Web Modeler API requests require authentication. To authenticate, generate a [JSON Web Token (JWT)](https://jwt.io/introduction/) depending on your environment and include it in each request.
 
 :::note
-Clients using a valid generated token have access to all resources within an organization, similar to [super-user mode](/components/hub/workspace/modeler/collaboration/collaboration.md#super-user-mode).
+Clients using a valid generated token have access to all resources within an organization, similar to [organization admin and owner access](/components/hub/organization/manage-users/manage-users.md#elevated-workspace-access).
 
 While there's no project-level access control enforced in the API, access is still dependent on the [CRUD operations assigned](#generate-a-token).
 :::
@@ -140,6 +140,10 @@ A successful response includes [information about the environment](https://model
   "deletePermission": false
 }
 ```
+
+## Organization-level access
+
+API tokens are granted to organization-level _applications_ (Self-Managed) or _clients_ (SaaS) rather than individual _users_. With an API token, you can read, edit, and delete all workspaces ([called "projects" before Camunda 8.10](../migration-manuals/migrate-from-web-modeler-to-hub-api.md#structure-and-terminology)) and workspace resources in the organization, as long as the application or client has the required Web Modeler API permissions. This is true even if you aren't a member of the workspace and you can't see it in the Camunda Hub user interface.
 
 ## Token expiration
 

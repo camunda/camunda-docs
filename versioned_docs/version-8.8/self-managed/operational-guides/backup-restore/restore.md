@@ -458,7 +458,7 @@ To avoid data loss:
 
 - **Preserve existing indices:** Do not delete dated usage metric indices before restoring. After the restore completes, the indices remain available.
 - **Back up manually:** Back up dated usage metric indices before restoring so you can restore them afterward.
-:::
+  :::
 
 Now that you have successfully restored the templates and stopped the components adding more indices, you must delete the existing indices to be able to successfully restore the snapshots (otherwise these will block a successful restore).
 
@@ -528,7 +528,7 @@ The following uses the [OpenSearch CAT API](https://docs.opensearch.org/docs/lat
 
 ```bash
 for index in $(curl -s "$OPENSEARCH_ENDPOINT/_cat/indices?h=index" \
-   | grep -E 'operate|tasklist|optimize|zeebe'); do
+   | grep -E 'camunda|operate|tasklist|optimize|zeebe'); do
       echo "Deleting index: $index"
       curl -X DELETE "$OPENSEARCH_ENDPOINT/$index"
 done

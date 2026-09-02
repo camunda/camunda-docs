@@ -38,6 +38,19 @@ If no exporters are configured, Zeebe automatically deletes data when it's no lo
 
 :::
 
+:::warning
+A custom exporter that does not acknowledge record positions prevents log compaction and can take down the broker.
+
+Because compaction only advances up to the **lowest** acknowledged position across all exporters, a single exporter that never advances its position pins the log indefinitely. The event log then grows without bound until it fills the disk, which stops the broker.
+
+When implementing or activating a custom exporter:
+
+- **Verify that record acknowledgment is done.** Confirm the exporter calls `controller.updateLastExportedRecordPosition(record.getPosition())` after it has successfully processed each record (see [Custom exporter to filter specific records](#custom-exporter-to-filter-specific-records)), and that the acknowledged position keeps advancing during normal operation.
+- **Check disk (PVC) sizing before activating a new exporter.** A newly configured exporter starts from the current log position and temporarily becomes the lowest acknowledged position. Until it catches up, the log cannot be compacted past that point, so ensure the broker has enough disk headroom and that the exporter keeps pace with the record stream.
+
+To detect this early, monitor the broker's disk usage and the exporter throughput metric (`zeebe_exporter_events_total`). See [metrics](../operational-guides/monitoring/metrics.md) for details.
+:::
+
 All exporters interact with the broker through the [exporter interface](https://github.com/camunda/camunda/blob/main/zeebe/exporter-api/src/main/java/io/camunda/zeebe/exporter/api/Exporter.java), regardless of whether they are loaded from an external JAR (or not).
 
 ## Loading

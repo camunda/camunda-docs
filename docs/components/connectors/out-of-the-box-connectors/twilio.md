@@ -291,7 +291,7 @@ When you click on the event with the Twilio Webhook connector applied to it, a n
 This tab displays the URL of the Twilio Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use the Twilio Webhook connector in the Desktop Modeler or with Camunda 8 Self-Managed.
 In that case, Twilio Webhook connector deployments and URLs will not be displayed in the Modeler.
 :::

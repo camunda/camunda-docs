@@ -9,6 +9,7 @@ import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 import IdentitySecret from './\_partials/\_identity-secret.md'
+import DeploymentReadinessCheck from './\_partials/\_deployment-readiness-check.md'
 
 With this guide, you'll deploy Camunda 8 Self-Managed to a local Kubernetes cluster using [kind (Kubernetes in Docker)](https://kind.sigs.k8s.io/). The setup is optimized for learning, development, and testing, with reduced resource requirements suitable for a personal machine.
 
@@ -68,7 +69,7 @@ export SECONDARY_STORAGE=postgres   # or: elasticsearch
 Before you begin, you'll need:
 
 - Terminal access with administrator/sudo privileges for modifying the hosts file (`/etc/hosts`)
-- A container runtime with at least 4 CPU cores and 8 GB RAM available:
+- A container runtime with at least 4 CPU cores and 8 GB RAM available. Allocate 12 GB or more when you set `SECONDARY_STORAGE=elasticsearch`, as the full stack then runs Elasticsearch, Keycloak, three PostgreSQL clusters, and every Camunda component:
   - [Docker Desktop](https://www.docker.com/products/docker-desktop)
   - [Docker Engine](https://docs.docker.com/engine/install/)
   - [Podman](https://podman.io/docs/installation)
@@ -426,15 +427,14 @@ kubectl get pods -n camunda -w
 
 Wait until all pods show `Running` status. This may take 5–10 minutes depending on your internet connection and system resources.
 
-You can also use the deployment readiness check script from the root directory of the `camunda-deployment-references` repository. This script requires [jq](https://jqlang.github.io/jq/) to be installed:
+You can also use the deployment readiness check script, run from the reference architecture directory `get-your-copy.sh` left you in. This script requires [jq](https://jqlang.github.io/jq/) to be installed:
 
 ```bash
 export CAMUNDA_NAMESPACE=camunda
+../../../generic/kubernetes/single-region/procedure/check-deployment-ready.sh
 ```
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck />
 
 Finally, verify the Helm release:
 
@@ -582,6 +582,29 @@ kubectl describe pod <pod-name> -n camunda
 kubectl logs <pod-name> -n camunda
 ```
 
+### Components fail OIDC discovery with 404 or 503 (Domain mode)
+
+In domain mode, Identity provisions the `camunda-platform` Keycloak realm, and every other component reads its OIDC configuration from that realm at startup. When Identity never becomes ready, the realm is never created and the rest of the platform crash-loops.
+
+The other components report the missing realm instead of the missing Identity, which makes the error misleading:
+
+| Component     | Error                                                                                   |
+| ------------- | --------------------------------------------------------------------------------------- |
+| Orchestration | `503 Service Unavailable` on `https://camunda.example.com/auth/realms/camunda-platform` |
+| Connectors    | `Failed to retrieve well known configuration ... status code 404 and message Not Found` |
+
+Check whether the realm exists, then inspect Identity:
+
+```bash
+curl https://camunda.example.com/auth/realms/camunda-platform/.well-known/openid-configuration
+kubectl get pods -n camunda
+kubectl describe pod <camunda-identity-pod> -n camunda
+```
+
+If the realm returns `{"error":"Realm does not exist"}` and the Identity pod is in `CrashLoopBackOff`, Identity is the root cause. Restarting Orchestration or Connectors doesn't help, because the realm they need still doesn't exist.
+
+A `Last State: Terminated, Reason: OOMKilled` line in the `kubectl describe pod` output means Identity ran out of memory. Give the container runtime more memory, or raise `identity.resources.limits.memory` in the Helm values before you redeploy.
+
 ### Browser shows certificate errors (Domain mode)
 
 Ensure the mkcert CA is installed:
@@ -609,11 +632,13 @@ kubectl get ingress -n camunda
 
 ### Insufficient resources
 
-Ensure your container runtime has enough resources allocated (4+ CPU cores, 8GB+ RAM).
+Ensure your container runtime has enough resources allocated: 4 or more CPU cores, and 8 GB or more of RAM (12 GB or more with `SECONDARY_STORAGE=elasticsearch`).
 
 - **Docker Desktop**: Check the [Resources settings](https://docs.docker.com/desktop/settings-and-maintenance/settings/#resources)
 - **Docker Engine**: Configure the [Docker daemon](https://docs.docker.com/engine/daemon/) (configuration varies by OS)
 - **Podman**: Resources are managed by your system; ensure sufficient resources are available
+
+A pod that restarts repeatedly and shows `Last State: Terminated, Reason: OOMKilled` in `kubectl describe pod` output has hit its memory limit rather than the host limit. Raise the `resources.limits.memory` value for that component in the Helm values.
 
 ## Next steps
 

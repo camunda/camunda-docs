@@ -4,9 +4,14 @@ paths:
       tags:
         - Clock
       operationId: pinClock
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Pin internal clock (alpha)
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -41,9 +46,14 @@ paths:
       tags:
         - Clock
       operationId: resetClock
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Reset internal clock (alpha)
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiU1lTVEVNIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.6]]
 

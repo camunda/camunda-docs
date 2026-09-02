@@ -4,9 +4,14 @@ paths:
       tags:
         - Incident
       operationId: searchIncidents
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search incidents
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV0sImVuZm9yY2VtZW50IjoiZmlsdGVyIn0]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -40,9 +45,14 @@ paths:
       tags:
         - Incident
       operationId: getIncident
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get incident
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -86,9 +96,14 @@ paths:
       tags:
         - Incident
       operationId: resolveIncident
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Resolve incident
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEVfUFJPQ0VTU19JTlNUQU5DRSJ9XX0]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -141,9 +156,14 @@ paths:
       tags:
         - Incident
       operationId: getProcessInstanceStatisticsByError
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process instance statistics by error
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -180,9 +200,14 @@ paths:
       tags:
         - Incident
       operationId: getProcessInstanceStatisticsByDefinition
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get process instance statistics by definition
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -361,6 +386,7 @@ components:
         - JOB_NO_RETRIES
         - MESSAGE_SIZE_EXCEEDED
         - RESOURCE_NOT_FOUND
+        - SECRET_RESOLUTION_ERROR
         - TASK_LISTENER_NO_RETRIES
         - UNHANDLED_ERROR_EVENT
         - UNKNOWN

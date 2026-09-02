@@ -40,9 +40,147 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 
 :::
 
+## Optimize data filters in Console
+
+On SaaS, you can now configure Optimize export filters directly in Console cluster settings. No Helm values or configuration files required. Use the **Data filters** section in cluster settings to control which process definitions (by `bpmnProcessId`) and variable names reach Optimize.
+
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
+
+<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
+## Web Modeler data
+
+On 29 August 2026, your Web Modeler data received three updates:
+
+- **[Organizational structure](#organizational-structure):** Enforces a stricter, more scalable file resource hierarchy.
+- **[Data migration](#data-migration):** Aligns your existing data with the new structure.
+- **[Process application versioning model](#process-application-versioning-model):** Provides more granular control.
+
+### Organizational structure
+
+In Camunda 8.9, a project can contain process applications, folders, and files. Camunda 8.10 introduces a new file resource hierarchy in which projects only contain process applications and IDP applications. Files and folders are stored inside process applications.
+
+For example, if this is what your data looks like in 8.9:
+
+```txt title="Camunda 8.9"
+Payments (Project)
+├─ main.bpmn
+├─ eligibility.dmn
+├─ readme.md
+├─ Forms (Folder)
+│   ├── details.form
+│   └── review.form
+├─ Archive (Folder)
+│   └── Refunds (Process application)
+│       ├── refunds.bpmn
+│       └── refund-request.form
+└─ Onboarding (Process application)
+    ├── onboarding.bpmn
+    └── kyc-checks.dmn
+```
+
+This is what the data looks like in 8.10:
+
+```txt title="Camunda 8.10"
+Payments (Project)
+├─ Payments - General (Process application - TEMPORARY PLACEMENT)
+│   ├─ main.bpmn
+│   ├─ eligibility.dmn
+│   ├─ readme.md
+│   ├─ Forms (Folder)
+│   │   ├── details.form
+│   │   └── review.form
+│   └─ Archive (Folder)
+├── Refunds (Process application - MOVED)
+│   ├── refunds.bpmn
+│   └── refund-request.form
+└─ Onboarding (Process application)
+    ├── onboarding.bpmn
+    └── kyc-checks.dmn
+```
+
+This strict new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
+
+### Data migration
+
+For Self-Managed, your data will be migrated to the new organizational structure during the upgrade to Camunda 8.10. For SaaS, this happens automatically during a scheduled maintenance window.
+
+During the migration:
+
+- Any process application nested inside a folder moves to the top level of its project.
+- Any files or folders located directly in a project, not inside a process application, are automatically grouped in a new process application, named `YOUR PROJECT NAME - General`. Once the migration is complete, you can rename this application, move content out of it, or otherwise reorganize it as with any other process application.
+- Git sync and cluster settings on existing process applications migrate unchanged along with your data.
+
+During the migration, Web Modeler is briefly unavailable. Clusters and running processes are unaffected and continue executing normally.
+
+:::note
+Even though the migration process is tested extensively ahead of release, a backup is still taken before the migration to ensure your data is recoverable in its original state, should anything go wrong. If you notice anything unexpected after the migration, contact support.
+:::
+
+The migration does not affect the following resources:
+
+| Area                                | Impact                                                                                                                                                                                    |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Running process instances           | Orchestration Clusters, engines, and running process instances continue unaffected. Web Modeler and Camunda Hub form a modeling-and-management plane independent of the runtime path.     |
+| Redeployment                        | Deployments live on your clusters, not in the project structure being reorganized. Everything already deployed keeps running; this change doesn't require redeployment.                   |
+| Clusters and configuration          | Cluster and deployment settings attached to existing process applications migrate along with the data and carry over unchanged.                                                           |
+| Files, folders, and version history | All files, folders, versions, and history are preserved; only their location within the project changes.                                                                                  |
+| Git-synced projects                 | The migration doesn't modify process applications or their contents, so anything connected through Git sync is unaffected: the same files, in the same repository, with the same history. |
+| Desktop Modeler                     | Desktop Modeler has no direct connection to Web Modeler affected by this change. Content shared via Git sync is also unaffected.                                                          |
+
+If you automate against the Web Modeler API, content moving to a new location affects you directly. Web Modeler API v1 returns files and folders from their new place, and requests that create an item at a project's root are redirected into the new `YOUR PROJECT NAME - General` application, with the response reflecting the new location.
+
+You should review any automation that relies on where files or folders are located before the migration runs. A small number of folder API integrations are affected more directly; if you rely on the folder API to work with process applications, contact support to confirm whether your integration needs updates.
+
+### Process application versioning model
+
+In addition to the Web Modeler data migration, Camunda is introducing an improved process application versioning model:
+
+- File-level versions — process applications can be versioned as a bundle, as before, but now also at the single-file level.
+- Autosave for all files, plus file-level version history for every file.
+- Decoupled versioning — process application versions and element template versions are now created independently of each other.
+
+Before the new model, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit. With the new model, you control whether you version:
+
+- Process application resources as a bundle.
+- Individual resources within the process application independently.
+
 ## Camunda 8 Run no longer requires Java
 
 Camunda 8 Run now ships with a bundled Java runtime. You no longer need to install OpenJDK or set `JAVA_HOME` before starting it.
+
+## Wait states
+
+Operate now shows what an active process instance is waiting for, so you can tell expected waiting from a stalled instance. When you inspect an active element, you can see the wait state and its details — a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+
+Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+
+<p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
+
+## Business ID
+
+Business ID is now a first-class, searchable attribute across the Orchestration Cluster. Introduced in 8.9 as an immutable domain-specific identifier, Business ID in 8.10 can be searched and filtered across process instances, decision instances, user tasks, messages, and message subscriptions. Jobs expose the Business ID in the activation response (visible, not searchable).
+
+**What's new in 8.10:**
+
+- **Search and filter** across entity types using advanced operators (`$eq`, `$neq`, `$exists`, `$like` with `*`/`?` wildcards, `$in`). Operate and Tasklist expose Equals, Contains, and Is one of in their filter UI.
+- **Message correlation** — include a Business ID in published or correlated messages as an additional filter constraint. If both a correlation key and Business ID are supplied, both fields must match the corresponding values stored on the subscription.
+- **Call Activity propagation** — child instances inherit the parent's Business ID by default. Configure a literal value or FEEL expression on the call activity to override it. Use `camunda.processInstance.businessId` in FEEL expressions to reference the parent's ID.
+- **Start with a Business ID** from Camunda Hub or Desktop Modeler.
+- **Late assignment** — assign a Business ID to a running instance that has none, when uniqueness is disabled. Assignment is forward-only: only artifacts created after the assignment carry it.
+
+<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
+
+## Connector operations
+
+Connectors are now discoverable by the operation you want to perform, not only by the product they connect to. When you search in the create, append, or change element menu, the operations of every built-in connector appear as their own entries, so searching for `upload object` or `send email` takes you straight to the connectors that can do it. Selecting an operation applies the connector with that operation preselected, and connectors with several operations present them as a nested menu.
+
+Two changes come with this:
+
+- Connectors that provide a single operation are [renamed after the operation they perform](/reference/announcements-release-notes/8100/8100-announcements.md#connectors-with-a-single-operation-are-renamed-after-the-operation). Existing process models keep running unchanged.
+- Element templates support the `steps` and `presets` keys, so your own templates can offer the same guided operation selection.
+
+<p class="link-arrow">[Predefined configurations](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets)</p>
 
 ## Helm chart deployment
 

@@ -5,6 +5,8 @@ sidebar_label: Human in the loop
 description: "Learn how to build human-in-the-loop AI workflows by combining MCP with BPMN."
 ---
 
+import HIL_example from './agentic-ai/img/mcp-client-hitl.png';
+
 Learn how to build human-in-the-loop AI workflows in Camunda by combining MCP Client tool discovery with BPMN elements like gateways, intermediate events, and user tasks to control and approve tool execution.
 
 ## About
@@ -58,4 +60,4 @@ The model requested to call the following MCP tool:
 
 See the example diagram below:
 
-![MCP Client connector human-in-the-loop example](agentic-ai/img/mcp-client-hitl.png)
+<img src={HIL_example} alt="MCP Client connector human-in-the-loop example" width="65%"/>

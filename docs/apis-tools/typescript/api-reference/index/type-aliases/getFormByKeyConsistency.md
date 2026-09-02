@@ -11,7 +11,7 @@ mdx:
 type getFormByKeyConsistency = object;
 ```
 
-Management of eventual consistency \*
+Management of eventual consistency *
 
 ## Properties
 

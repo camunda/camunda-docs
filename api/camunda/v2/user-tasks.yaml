@@ -4,9 +4,14 @@ paths:
       tags:
         - User task
       operationId: completeUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Complete user task
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJDT01QTEVURV9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn0seyJyZXNvdXJjZVR5cGUiOiJVU0VSX1RBU0siLCJwZXJtaXNzaW9uVHlwZSI6IkNPTVBMRVRFIn1dfV19]]
 
         [[ADDED_IN_VERSION:8.5]]
 
@@ -58,9 +63,14 @@ paths:
       tags:
         - User task
       operationId: assignUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign user task
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiVVNFUl9UQVNLIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19XX0]]
 
         [[ADDED_IN_VERSION:8.5]]
 
@@ -112,9 +122,14 @@ paths:
       tags:
         - User task
       operationId: getUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get user task
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -156,9 +171,14 @@ paths:
       tags:
         - User task
       operationId: updateUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update user task
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiVVNFUl9UQVNLIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19XX0]]
 
         [[ADDED_IN_VERSION:8.5]]
 
@@ -210,9 +230,14 @@ paths:
       tags:
         - User task
       operationId: getUserTaskForm
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get user task form
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -258,9 +283,14 @@ paths:
       tags:
         - User task
       operationId: unassignUserTask
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign user task
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFX1VTRVJfVEFTSyJ9LHsicmVzb3VyY2VUeXBlIjoiVVNFUl9UQVNLIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19XX0]]
 
         [[ADDED_IN_VERSION:8.5]]
 
@@ -306,9 +336,14 @@ paths:
       tags:
         - User task
       operationId: searchUserTasks
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user tasks
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.6]]
 
@@ -342,9 +377,14 @@ paths:
       tags:
         - User task
       operationId: searchUserTaskVariables
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user task variables
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -395,9 +435,14 @@ paths:
       tags:
         - User task
       operationId: searchUserTaskEffectiveVariables
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user task effective variables
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUFJPQ0VTU19ERUZJTklUSU9OIiwicGVybWlzc2lvblR5cGUiOiJSRUFEX1BST0NFU1NfSU5TVEFOQ0UifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -447,9 +492,14 @@ paths:
       tags:
         - User task
       operationId: searchUserTaskAuditLogs
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search user task audit logs
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3siYW55T2YiOlt7InJlc291cmNlVHlwZSI6IlBST0NFU1NfREVGSU5JVElPTiIsInBlcm1pc3Npb25UeXBlIjoiUkVBRF9VU0VSX1RBU0sifSx7InJlc291cmNlVHlwZSI6IlVTRVJfVEFTSyIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX1dfQ]]
 
         [[ADDED_IN_VERSION:8.9]]
 
@@ -498,6 +548,7 @@ components:
             - dueDate
             - priority
             - name
+            - businessId
         order:
           $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
       required:
@@ -529,6 +580,11 @@ components:
           allOf:
             - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
           description: The assignee of the user task.
+        businessId:
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+          description: |
+            The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don't contain this data and cannot be found.
         priority:
           allOf:
             - $ref: "filters.yaml#/components/schemas/IntegerFilterProperty"
@@ -627,6 +683,8 @@ components:
           addedInVersion: "8.8"
         - propertyName: tags
           addedInVersion: "8.9"
+        - propertyName: businessId
+          addedInVersion: "8.10"
     UserTaskSearchQueryResult:
       description: User task search query response.
       required:
@@ -648,6 +706,7 @@ components:
         - name
         - processInstanceKey
         - rootProcessInstanceKey
+        - businessId
         - processDefinitionKey
         - elementInstanceKey
         - processDefinitionId
@@ -766,6 +825,14 @@ components:
           nullable: true
           allOf:
             - $ref: "keys.yaml#/components/schemas/ProcessInstanceKey"
+        businessId:
+          description: |
+            The business ID of the owning process instance, inherited when the user task was
+            created. This is `null` for user tasks created before version 8.10, and for user tasks
+            whose owning process instance has no business ID.
+          nullable: true
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
         formKey:
           description: The key of the form.
           nullable: true
@@ -818,6 +885,8 @@ components:
           addedInVersion: "8.6"
         - propertyName: rootProcessInstanceKey
           addedInVersion: "8.9"
+        - propertyName: businessId
+          addedInVersion: "8.10"
         - propertyName: formKey
           addedInVersion: "8.6"
         - propertyName: tags
@@ -967,6 +1036,13 @@ components:
           allOf:
             - $ref: "#/components/schemas/UserTaskVariableFilter"
           description: The user task variable search filters.
+      x-properties-added-in-version:
+        - propertyName: page
+          addedInVersionOverride: "8.8"
+        - propertyName: sort
+          addedInVersionOverride: "8.8"
+        - propertyName: filter
+          addedInVersionOverride: "8.8"
     UserTaskAuditLogSearchQueryRequest:
       allOf:
         - $ref: "search-models.yaml#/components/schemas/SearchQueryRequest"

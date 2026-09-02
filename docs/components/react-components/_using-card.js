@@ -11,9 +11,10 @@ const UsingCard = ({ link, title, image, description }) => {
   );
 };
 
-const UsingGrid = ({ using }) => {
+const UsingGrid = ({ using, columns = 3 }) => {
+  const colsClass = `using-grid-cols-${columns}`;
   return (
-    <div className="using-grid">
+    <div className={`using-grid ${colsClass}`}>
       {using.map((using, index) => (
         <UsingCard
           key={index}

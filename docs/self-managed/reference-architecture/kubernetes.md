@@ -40,10 +40,10 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 
 ## Architecture
 
-The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between these components:
+The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub) explains the distinction between these components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin) with tightly integrated components (Optimize, Connectors).
-- **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
+- **Camunda Hub and Management Identity**: Management and design tools for modeling and deploying diagrams and monitoring the health of orchestration clusters.
 
 See the reference architecture for details on how these components communicate.
 
@@ -79,13 +79,11 @@ The Orchestration Cluster exposes two services:
 
 2. A **standard service** for external applications. This service distributes traffic randomly (via `kube-proxy`) and is suitable for clients or other services connecting to the cluster.
 
-#### Web Modeler and Console
+#### Camunda Hub
 
-<!-- Source: https://miro.com/app/board/uXjVL-6SrPc=/?moveToWidget=3458764667246920582&cot=14 -->
+![Camunda Hub and Management Identity](./img/management-cluster.jpg)
 
-![Web Modeler and Console](./img/k8s-cluster-view-managing.jpg)
-
-Web Modeler, Console, and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
+Camunda Hub and Management Identity are stateless and deployed as **Deployments**, with data stored in an external SQL database. This makes them easy to scale as needed.
 
 Each namespace uses its own Ingress, as Ingress resources are namespace-scoped (not cluster-wide). This requires separate subdomains for each Ingress. For more details, see the [production deployment guide](/self-managed/deployment/helm/install/production/index.md).
 
@@ -103,21 +101,21 @@ For high availability, we recommend a minimum of **four Kubernetes nodes** to en
 
 While Deployments and StatefulSets in Kubernetes can scale independently of physical hardware, four nodes are typically required to support:
 
-- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist and Admin)
-- Other Camunda 8 components (Web Modeler, Management Identity, Console, Optimize)
+- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist, and Admin)
+- Other Camunda 8 components (Camunda Hub, Management Identity, and Optimize)
 
 Depending on your specific use case, you may need to scale **horizontally** (more nodes) or **vertically** (larger nodes) to meet resource requirements.
 
 By default, node affinity rules prevent all Orchestration Cluster pods from being scheduled on the same node. This requires at least three nodes for proper operation. For details, see the [Kubernetes node affinity documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/).
 
-To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. Use affinity and anti-affinity rules to ensure workloads remain available even if a zone fails.
+To further improve fault tolerance, distribute the Orchestration Cluster and other components across **multiple availability zones**. The default anti-affinity rules ensure Orchestration Cluster pods run on distinct nodes, but do not ensure those nodes are in different zones — use the `orchestration.topologySpreadConstraints` Helm value to spread them across zones. For configuration details and caveats, see [topology spread constraints](/self-managed/deployment/helm/install/production/index.md#topology-spread-constraints).
 
 ### Components
 
 Camunda 8 deployments typically separate workloads into two logical groups:
 
 - **Orchestration Cluster**
-- **Web Modeler and Console**
+- **Camunda Hub and Management Identity**
 
 We recommend deploying these groups into separate [Kubernetes namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). This separation supports multi-tenancy, improves isolation, and allows flexible scaling. However, deploying all components in a single namespace is also possible for smaller environments.
 
@@ -125,6 +123,8 @@ A **multi-namespace setup** enables:
 
 - Independent scaling of orchestration clusters based on workload
 - Shared access to centralized components (e.g., Management Identity)
+
+To implement this topology with the Helm chart, see [configure a multi-namespace deployment](/self-managed/deployment/helm/configure/multi-namespace.md).
 
 #### Orchestration Cluster namespace
 
@@ -142,13 +142,12 @@ Also included in this namespace are components that are tightly integrated with 
 
 The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the v2 Orchestration Cluster REST API. This backend is a document store (Elasticsearch or OpenSearch) or a supported relational database management system (RDBMS). It is provisioned outside the `StatefulSet`, as a managed service or an operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use an RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
 
-#### Web Modeler and Console namespace
+#### Camunda Hub namespace
 
-As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
+As shown in the [architecture diagram](#camunda-hub), this namespace contains:
 
-- Web Modeler — browser-based BPMN editor
-- Console — administrative interface
-- [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
+- [Camunda Hub](/components/hub/index.md) — modeling and administrative capabilities
+- [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Camunda Hub and Optimize
 
 This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
 
@@ -157,7 +156,7 @@ The choice of identity provider is highly specific to each organization's securi
 :::
 
 :::warning Identity separation
-Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Admin in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
+Optimize and Camunda Hub rely on Management Identity (formerly Identity). This service is separate from the embedded Admin in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
 :::
 
 For configuration details, see:
@@ -177,11 +176,11 @@ For details on multi-region configurations, especially dual-region setups, refer
 
 We recommend using a [certified Kubernetes](https://www.cncf.io/training/certification/software-conformance/#benefits) distribution.
 
-Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deployment/helm/install/quick-install.md) that supports the Kubernetes [official support cycle](https://kubernetes.io/releases/).
+Camunda 8 is not tied to a specific Kubernetes version. To simplify deployment, we provide a [Helm chart](/self-managed/deployment/helm/install/quick-install.md). For supported Kubernetes versions, see [supported environments](/reference/supported-environments.md#deployment-options).
 
 #### Minimum cluster requirements
 
-The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Zeebe resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md), and conduct benchmarking to determine your exact needs.
+The following are suggested minimum requirements to get started. There is no one-size-fits-all configuration: sizing depends heavily on your specific use cases and workload, so treat these values as a baseline rather than a strict requirement. Refer to [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md) and [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md#disk-space), and conduct benchmarking to determine your exact needs.
 
 - **4 Kubernetes nodes**
   - CPU: 4 modern cores
@@ -197,6 +196,8 @@ The following are suggested minimum requirements to get started. There is no one
 The storage performance figures in this section and in the platform-specific sections below (for example, 3,000 IOPS and 125 MiB/s throughput) are a starting point, not hard requirements validated by benchmarking. The same targets apply across all providers (OpenShift, EKS, AKS, GKE, and generic Kubernetes); there is no provider-specific benchmark behind them. Actual needs vary with your workload, throughput, data retention, and exporter load. On providers where disk performance scales with capacity (for example, GKE `pd-ssd`), reaching the IOPS and throughput baseline can require a disk larger than the 32 GiB minimum capacity. For production sizing, see [Self-Managed resource planning](/components/best-practices/architecture/sizing-self-managed.md) and benchmark against your own workload.
 
 Storage type, however, is a strict requirement: HDD-backed volumes cannot meet Zeebe's Raft protocol disk flush requirements, which demand consistent single-digit-millisecond write latency, and are not supported.
+
+The same SSD requirement applies to secondary storage (Elasticsearch/OpenSearch) — see the [Database](#database) section for details.
 :::
 
 #### Networking
@@ -205,12 +206,11 @@ Networking is largely managed through services and load balancers. The following
 
 - Stable, high-speed connection
 - Firewall rules for:
-  - `80`: Web UI (Console, Management Identity, Web Modeler, and IdP if co-located)
+  - `80`: Web UI (Management Identity, Hub, and IdP if co-located)
   - `82`: Metrics (Management Identity)
   - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
-  - `8091`: Management (Web Modeler)
+  - `8091`: Management (Hub)
   - `8092`: Management (Optimize)
-  - `9100`: Management (Console)
   - `9600`: Management (Orchestration Cluster)
   - `26500`: gRPC endpoint
   - `26501`: Gateway-to-broker
@@ -259,10 +259,10 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-| Database                                  | Requirement                                                                                                                                           |
-| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Database                                  | Requirement                                                                                                                                          |
+| :---------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Secondary storage (Orchestration Cluster) | Elasticsearch or OpenSearch (document store) in this topology, or a supported RDBMS as an alternative. Optimize requires Elasticsearch or OpenSearch. |
-| PostgreSQL                                | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster.                                                    |
+| PostgreSQL                                | Required by Management Identity and Camunda Hub. Also required by Keycloak if deployed in-cluster.                                                    |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
@@ -271,6 +271,10 @@ Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-se
 For backend trade-offs and production guidance, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture). For more general context, see the [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#architecture).
 
 Sizing is use case dependent. It is crucial to conduct thorough load testing and benchmarking to determine the appropriate sizing for your specific environment and workload.
+
+:::note Secondary storage disk requirements
+Secondary storage (Elasticsearch/OpenSearch) is customer-managed. Provision it with sufficient resources and use performant disks — disk latency directly impacts export throughput and overall cluster performance. See [Elasticsearch scaling](/components/best-practices/architecture/sizing-self-managed.md#elasticsearch-scaling) for disk type and sizing guidance.
+:::
 
 Once deployed, the included [Grafana dashboard](/self-managed/operational-guides/monitoring/metrics.md#grafana) can be used with [Prometheus](https://prometheus.io/) to monitor for bottlenecks when exporting data from the Orchestration Cluster to your database.
 

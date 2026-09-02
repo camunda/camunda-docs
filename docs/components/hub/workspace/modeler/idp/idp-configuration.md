@@ -65,19 +65,19 @@ When using an OpenAI Compatible provider, you can bring your own model (BYOM) fo
 
 The following prerequisites apply regardless of your cloud provider:
 
-| Prerequisite                                                       | Description                                                                                                                                                                                                                                                                                                                    |
-| :----------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Web Modeler](/components/hub/workspace/modeler/launch-modeler.md) | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP applications](idp-applications.md), [document extraction](idp-document-extraction.md) templates, and [document classification](idp-document-classification.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul> |
+| Prerequisite                                              | Description                                                                                                                                                                                                                                                                                                            |
+| :-------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Web Modeler](/components/hub/workspace/modeler/index.md) | <ul><li><p>Web Modeler is required to create, manage, publish, and integrate [IDP projects](idp-projects.md), [document extraction](idp-document-extraction.md) templates, and [document classification](idp-document-classification.md) templates.</p></li><li><p>IDP does not support Desktop Modeler.</p></li></ul> |
 
 ## Cluster requirements {#cluster-requirements}
 
-The following requirements apply for IDP application clusters:
+The following requirements apply for IDP project clusters:
 
-| Requirement                                                           | Description                                                                                                                                                                                                                                                 |
-| :-------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Connector secrets](#aws-secrets)                                     | You must configure the required IDP AWS connector secrets on any cluster used with IDP.                                                                                                                                                                     |
-| [Document handling](/components/document-handling/getting-started.md) | IDP requires a cluster that supports document handling. For example, a version 8.7 or higher cluster.                                                                                                                                                       |
-| Cluster health                                                        | IDP applications and projects are only fully operational when linked to a healthy, active cluster. If needed, you can select an unstable or unhealthy cluster when first creating an IDP application, and change to a stable cluster when one is available. |
+| Requirement                                                           | Description                                                                                                                                                                                                                            |
+| :-------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Connector secrets](#aws-secrets)                                     | You must configure the required IDP AWS connector secrets on any cluster used with IDP.                                                                                                                                                |
+| [Document handling](/components/document-handling/getting-started.md) | IDP requires a cluster that supports document handling. For example, a version 8.7 or higher cluster.                                                                                                                                  |
+| Cluster health                                                        | IDP projects are only fully operational when linked to a healthy, active cluster. If needed, you can select an unstable or unhealthy cluster when first creating an IDP project, and change to a stable cluster when one is available. |
 
 :::info
 To learn more about storing, tracking, and managing documents in Camunda 8, see [document handling](/components/document-handling/getting-started.md).
@@ -197,7 +197,7 @@ To use [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) t
 1. Start Camunda 8 with Docker Compose. For example, run `docker compose up -d` in that directory.
 
 1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
-1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a Web Modeler project.
+1. Get started with IDP by creating a new [IDP project](idp-projects.md) in a Web Modeler project.
 
 :::info
 To learn more about Docker Compose configurations and commands for local development, see [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md).
@@ -232,7 +232,7 @@ To use [Docker](/self-managed/deployment/docker/docker.md) to deploy and run Cam
    ```
 
 1. Launch Web Modeler at http://localhost:8070 and log in with the username `demo` and password `demo`.
-1. Get started with IDP by creating a new [IDP application](idp-applications.md) in a Web Modeler project.
+1. Get started with IDP by creating a new [IDP project](idp-projects.md) in a Web Modeler project.
 
 :::info
 To learn more about using Docker Compose to run Camunda Self-Managed locally, see [Docker Compose](/self-managed/quickstart/developer-quickstart/docker-compose.md).

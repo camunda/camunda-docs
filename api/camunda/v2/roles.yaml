@@ -4,9 +4,14 @@ paths:
       tags:
         - Role
       operationId: createRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiQ1JFQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -47,9 +52,14 @@ paths:
       tags:
         - Role
       operationId: searchRoles
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search roles
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -83,9 +93,14 @@ paths:
       tags:
         - Role
       operationId: getRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XX0]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -123,9 +138,14 @@ paths:
       tags:
         - Role
       operationId: updateRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -171,9 +191,14 @@ paths:
       tags:
         - Role
       operationId: deleteRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete role
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiREVMRVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -208,9 +233,14 @@ paths:
       tags:
         - Role
       operationId: assignRoleToUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -258,9 +288,14 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromUser
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a user
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -303,9 +338,14 @@ paths:
       tags:
         - Role
       operationId: searchUsersForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role users
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -352,9 +392,14 @@ paths:
       tags:
         - Role
       operationId: assignRoleToClient
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a client
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -402,9 +447,14 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromClient
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a client
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -447,9 +497,14 @@ paths:
       tags:
         - Role
       operationId: searchClientsForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role clients
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -496,9 +551,14 @@ paths:
       tags:
         - Role
       operationId: assignRoleToGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -546,9 +606,14 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromGroup
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a group
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -591,9 +656,14 @@ paths:
       tags:
         - Role
       operationId: searchGroupsForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role groups
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -640,9 +710,14 @@ paths:
       tags:
         - Role
       operationId: assignRoleToMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -690,9 +765,14 @@ paths:
       tags:
         - Role
       operationId: unassignRoleFromMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiVVBEQVRFIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -735,9 +815,14 @@ paths:
       tags:
         - Role
       operationId: searchMappingRulesForRole
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search role mapping rules
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 

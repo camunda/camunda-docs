@@ -5,13 +5,77 @@ sidebar_label: Migration tools
 description: "Learn about the available migration tools."
 ---
 
-Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools.
+Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools. You can use them in two ways:
 
-All migration tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases). You can download different versions as needed for your migration.
+- **[Agentic migration](#agentic-migration)** (recommended): An AI coding agent orchestrates the tools by running diagram conversion and code refactoring automatically, so you can focus on reviewing changes and rearchitecting your solution.
+- **[Manual migration](#migration-tools)**: Run the individual tools yourself for full control or to handle specific migration tasks independently.
 
-## Migration tools
+All tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
 
-Camunda provides the following migration tools:
+## Agentic migration
+
+The **Camunda migration agent skill** is an AI-driven orchestrator that runs the migration tools on your behalf. It handles the tool calls so you can focus on rearchitecting your solution.
+
+### Install
+
+Choose the installation instructions for your AI coding agent.
+
+#### Claude Code
+
+Install the skill with Claude Code:
+
+```bash
+claude plugin marketplace add camunda/camunda-7-to-8-migration-tooling
+claude plugin install camunda-migration
+```
+
+#### GitHub Copilot CLI
+
+Install the skill with GitHub Copilot CLI:
+
+```bash
+copilot plugin marketplace add camunda/camunda-7-to-8-migration-tooling
+copilot plugin install camunda-migration@camunda
+```
+
+#### Other compatible agents
+
+Use GitHub CLI 2.90 or later to install the skill for another compatible agent:
+
+```bash
+gh skill install camunda/camunda-7-to-8-migration-tooling migrate-c7-to-c8-code --agent <tool-name>
+```
+
+Replace `<tool-name>` with the name of your agent. See the [agent-specific installation commands](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#install-commands-for-other-agents) for supported values. For manual installation paths, see the [Agentic Migration Skills README](https://github.com/camunda/camunda-7-to-8-migration-tooling/blob/main/agentic-migration-skills/README.md#manual-installation).
+
+### Run
+
+From your Camunda 7 project directory, run the migration skill:
+
+```text
+/camunda-migration:migrate-c7-to-c8-code
+```
+
+The skill asks for your migration scope:
+
+| Scope                                      | What the agent does                                                                 |
+| ------------------------------------------ | ----------------------------------------------------------------------------------- |
+| **Code + models** _(recommended, default)_ | Runs Diagram Converter CLI + OpenRewrite + AI cleanup on code and diagrams together |
+| **Code only**                              | OpenRewrite + AI on Java code                                                       |
+| **Models only**                            | Diagram Converter CLI + AI on BPMN/DMN files                                        |
+| **Assessment only**                        | Inventories files and estimates effort without changes                              |
+
+### Agent workflow
+
+1. **Assess migration scope**: Inventories BPMN/DMN diagrams and Java code files, and estimates effort.
+2. **Convert diagrams**: Runs the Diagram Converter CLI; AI resolves `REVIEW`, `WARNING`, and `TASK` findings.
+3. **Migrate code**: Runs OpenRewrite recipes; AI handles TODOs, edge cases, tests, and configuration.
+4. **Validate migration results**: Compiles, runs tests, and searches for remaining C7 references.
+5. **Fix remaining issues**: Offers to fix remaining issues, and waits for your review before each change.
+
+## Manual migration
+
+Camunda provides the following tools for manual migration:
 
 | Migration tool                                        | Description                                                                                                                                                                     | GitHub link                                                                                                                      |
 | :---------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |

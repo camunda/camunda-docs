@@ -51,11 +51,25 @@ In Camunda, ad-hoc sub-processes are the foundation for AI agent tool execution:
 
 - [Ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md)
 
+### Agent orchestration
+
+Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
+
+Agent orchestration can run inside a Camunda agentic process as one of its agents.
+
+:::note
+This is different from [agentic orchestration](#agentic-orchestration), which describes how Camunda orchestrates agents, tools, systems, and people as part of an end-to-end process.
+:::
+
 ### Agentic orchestration
 
-The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
+A hybrid orchestration model combining the power of deterministic logic with LLM-driven flexibility, allowing AI to evaluate the prompt, decide on what tools to execute, and decide when the goal is achieved, all with governance and auditability.
 
 For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
+
+:::note
+This is different from [agent orchestration](#agent-orchestration), which describes LLM-to-LLM coordination between agents.
+:::
 
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
 
@@ -65,12 +79,20 @@ A broad field of computer science focused on creating machines that can perform 
 
 ### AI agent
 
-An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop.
 
-For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad‑hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short‑term memory in a governed feedback loop.
+The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
+
+For example, you can build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
 
 - [AI agents](/components/agentic-orchestration/ai-agents.md)
-- [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
+
+### AI agent function
+
+The category of built-in [FEEL](#feel-expression) functions used to declare LLM-provided tool parameters for an [AI agent](#ai-agent). The primary function is [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue), which marks a value as supplied by the LLM at runtime, with an optional description, type, and JSON schema to guide the model.
+
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 
 ## B
 
@@ -206,6 +228,12 @@ See [Zeebe Exporter](#zeebe-exporter).
 
 ## F
 
+### FEEL expression
+
+FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
+
+- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+
 ### Fine-tuning
 
 The process of adapting a pre-trained AI model to a specific task or dataset, allowing it to specialize while leveraging prior knowledge.
@@ -270,7 +298,7 @@ Use Identity in the [Orchestration Cluster](#orchestration-cluster) to administe
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
-Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and polling.
+Inbound connectors include three subtypes: [webhooks](#webhook), [subscriptions](#subscription), and polling.
 
 Unlike [outbound connectors](#outbound-connector), inbound connectors are **stateful**. The Java code of the inbound connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
 Each element referencing an inbound connector will lead to the creation of one inbound connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.
@@ -509,13 +537,13 @@ SAP stands for Systems, Applications, and Products in Data Processing; it's an e
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
 ### Soft pause exporting
 

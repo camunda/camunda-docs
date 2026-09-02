@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 The Orchestration Cluster MCP Server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP).
 
-- It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
+- It enables [AI agents](/reference/glossary.md#ai-agent) and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
 - Similar to the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP server is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
 
 :::important Camunda 8 public API
@@ -79,13 +79,13 @@ For production environments and other deployment types, the MCP server must be e
 
 The MCP server exposes tools across the following domains:
 
-| Domain              | Capabilities                                                    |
-| :------------------ | :-------------------------------------------------------------- |
-| Cluster             | Check cluster health and retrieve topology information.         |
-| Incidents           | Search, retrieve, and resolve incidents.                        |
-| Process definitions | Search process definitions and retrieve BPMN XML.               |
-| Process instances   | Search, retrieve, and create process instances.                 |
-| User tasks          | Search, retrieve, and assign user tasks. Search task variables. |
-| Variables           | Search and retrieve variables.                                  |
+| Domain              | Capabilities                                                              |
+| :------------------ | :------------------------------------------------------------------------ |
+| Cluster             | Check cluster health and retrieve topology information.                   |
+| Incidents           | Search, retrieve, and resolve incidents.                                  |
+| Process definitions | Search process definitions and retrieve BPMN XML.                         |
+| Process instances   | Search, retrieve, and create process instances.                           |
+| User tasks          | Search, retrieve, assign, and complete user tasks. Search task variables. |
+| Variables           | Search and retrieve variables.                                            |
 
 For the full list of available tools, see [Available tools](./orchestration-cluster-api-mcp-tools.md).

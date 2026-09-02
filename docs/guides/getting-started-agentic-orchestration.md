@@ -16,15 +16,13 @@ import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
 
-Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/components/agentic-orchestration/ai-agents.md).
+Get started with Camunda [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) by building and running your first [AI agent](/reference/glossary.md#ai-agent).
 
 ## About
 
-AI agents represent the practical implementation of agentic process orchestration within Camunda, combining the flexibility of AI with the reliability of traditional process automation.
+In this guide, you will build a Camunda [AI agent](/components/agentic-orchestration/ai-agents.md): the native agent type that orchestrates tools in an [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) executed by the Camunda engine.
 
-In Camunda, an AI agent refers to an automation solution that uses [ad-hoc sub-processes](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) to perform tasks with non-deterministic behavior.
-
-In this guide, you will:
+Specifically, you will:
 
 - Run your AI agent using [Camunda 8 SaaS](https://accounts.cloud.camunda.io/signup) or locally with [Camunda 8 Self-Managed](/self-managed/about-self-managed.md).
 - Use an [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) to provide interaction and reasoning capabilities to the AI agent.
@@ -49,7 +47,11 @@ To run your agent, you must have Camunda 8 (version 8.8 or newer) running, using
 
 ### Supported models
 
-The AI Agent connector makes it easy to integrate LLMs into your process workflows, with out-of-the-box support for popular model providers such as Anthropic and Amazon Bedrock. It can also connect to any additional LLM that exposes an OpenAI-compatible API. See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for more details.
+With the AI Agent connector, you can integrate frontier models from providers like Anthropic and Amazon Bedrock, or connect to open-weight models you host yourself on any OpenAI-compatible platform. See [supported model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#model-provider) for all options.
+
+:::tip Choose the right model setup
+Frontier models are billed per token. That works well for complex reasoning, but costs scale with volume. Self-hosted open-weight models use a fixed infrastructure cost instead, so routine decisions stay affordable as volume grows. Use a frontier model where nuanced judgment matters, and use a self-hosted model where decisions are simple and high-volume.
+:::
 
 In this guide, you can try the following use cases:
 
@@ -57,10 +59,10 @@ In this guide, you can try the following use cases:
 | :----------------------- | :-------------------------------------------------------------------------------- | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | SaaS                     | [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md) | Camunda-managed model (for example, Claude Sonnet 4.6) | <p><ul><li> Camunda 8 SaaS trial or enterprise organization.</li><li><p> Camunda-provided LLM available in your organization. No additional LLM provider credentials are required to run this guide.</p></li></ul></p>                                                                                                                                                     |
 | Cloud (customer-managed) | AWS Bedrock                                                                       | Claude Sonnet 4                                        | <p><ul><li> An AWS account with permissions for the [Bedrock Converse API](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html).</li><li><p> Anthropic Claude foundation models using the AWS console. See [AWS documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.</p></li></ul></p> |
-| Local                    | Ollama                                                                            | GPT-OSS:20b                                            | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and GPT-OSS:20b installed. See [Set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                      |
+| Local                    | Ollama                                                                            | GPT-OSS:20b (any Ollama-supported model works)         | <p><ul><li> [Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md) running locally.</li><li><p> Ollama and a model installed. See [set up Ollama](#set-up-ollama) for details.</p></li></ul></p>                                                                                                                                                          |
 
-:::important
-Running LLMs locally requires substantial disk space and memory. GPT-OSS:20b requires more than 20GB of RAM to function and 14GB of free disk space to download.
+:::tip Choose a lighter model if needed
+This guide uses GPT-OSS:20b as an example, but any model supported by Ollama works with the AI Agent connector. GPT-OSS:20b requires more than 20GB of RAM and 14GB of free disk space, which may be more than needed for this guide. Consider a smaller model (for example, `llama3.2` or `qwen2.5`) if your machine has limited resources.
 :::
 
 ## Step 1: Install the model blueprint
@@ -78,7 +80,7 @@ Depending on your working environment, follow the corresponding steps below.
 
 <TabItem value="saas">
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SAAS** and select or create a project to save the blueprint.
-1. The blueprint BPMN diagram opens in Web Modeler.
+1. The blueprint BPMN diagram opens in Camunda Hub.
 </TabItem>
 
 <TabItem value="self-managed">
@@ -202,7 +204,7 @@ Configure your local LLM with Ollama.
 1. **Download and install**: Follow [Ollama's documentation](https://docs.ollama.com/quickstart) for details.
 1. **Confirm installation**: Check the installed version in a terminal or command prompt by running `ollama --version`.
 1. **Start the local server**: Start it using the application, or run `ollama serve` in a terminal or command prompt.
-1. **Pull the GPT-OSS:20b model**: If it isn't installed by default, run `ollama pull gpt-oss:20b` in a terminal or command prompt to download the model.
+1. **Pull a model**: This guide uses GPT-OSS:20b as an example. Run `ollama pull gpt-oss:20b` in a terminal or command prompt to download it. Any [model supported by Ollama](https://ollama.com/search) works with the AI Agent connector; substitute a smaller model (for example, `ollama pull llama3.2`) if you prefer a lighter download.
 1. **Test**: Ollama serves an API at `http://localhost:11434` by default. To test it, open that URL in a browser or run this command in your terminal:
 
 ```
@@ -223,7 +225,7 @@ The example blueprint downloaded in step one is preconfigured to use AWS Bedrock
 
 **Model**
 
-1. Enter `gpt-oss:20b` in the **Model** field. This field is case-sensitive, so be sure to enter it in all lowercase.
+1. Enter `gpt-oss:20b` in the **Model** field, or the name of whichever model you pulled instead. This field is case-sensitive, so be sure to enter it in all lowercase.
 
 </TabItem>
 </Tabs>
@@ -246,22 +248,24 @@ Depending on your working environment, test your agent by following the correspo
 
 <TabItem value="saas">
 
-1. Open [Web Modeler](/components/hub/workspace/modeler/index.md).
-1. Select the [**Play**](/components/hub/workspace/modeler/validation/play-your-process.md) tab.
-1. Select the cluster you want to deploy and play the process on.
+1. In [Camunda Hub](/components/hub/workspace/modeler/index.md), navigate to your workspace.
+1. In your workspace, open a project. Then, open a BPMN file.
+1. Select the [**Test**](/components/hub/workspace/modeler/validation/test-your-process.md) tab.
+1. Select the cluster you want to deploy and test the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
 1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
-:::tip
-Instead of using **Play**, you can also test the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
+:::important Test mode not supported
+Because the AI agent in this example is an ad-hoc sub-process, you can't use **Test mode** to run it (ad-hoc sub-processes are a known [limitation](/components/hub/workspace/modeler/validation/test-your-process.md#test-cases-limitations)). Instead, deploy the process within the **Implement** tab using **Deploy & Run**, and use [Tasklist](/components/tasklist/introduction-to-tasklist.md) to complete the form.
 :::
 </TabItem>
 
 <TabItem value="self-managed">
 
 1. Deploy the process model to your local Camunda 8 environment using [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
+1. Deploy the start event's linked form. Open the form in Desktop Modeler and click **Deploy**. [Linked forms are not deployed automatically with the process](/components/modeler/forms/utilizing-forms.md#deploy-a-linked-form). Skipping this step causes Tasklist to fail with "We were not able to load the form" when you try to start the process.
 1. Open Tasklist in your browser at http://localhost:8080/tasklist.
 1. On the **Processes** tab, find the `AI Agent Chat With Tools` process and click **Start process**.
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
@@ -293,7 +297,7 @@ You can customize your AI agent by adding tools. In this section, you will add a
 ### Add a REST connector task
 
 1. Inside the AI agent sub-process, add a new task element.
-1. Change the task type to [**REST Outbound Connector**](/components/connectors/protocol/rest.md) using the **Change element** menu.
+1. Change the task type to [**Send REST Request**](/components/connectors/protocol/rest.md) using the **Change element** menu.
 1. Name the task. For example, `Get current weather`. This name is visible to the LLM as the tool name.
 
 ### Write a tool description
@@ -331,7 +335,7 @@ Set up the HTTP request in the properties panel:
    }
    ```
 
-The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
+The [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) calls tell the AI Agent connector which parameters the LLM must provide. At runtime, the LLM generates the latitude and longitude values based on the user's request, while the `current` parameter is a fixed value that selects which weather fields to return.
 
 ### Map the response to `toolCallResult`
 
@@ -365,18 +369,9 @@ The LLM will recognize these as weather requests, select the **Get current weath
 
 ### Add your own tools
 
-To add more tools to your agent, follow the same pattern:
+To add more tools to your agent, follow the same pattern used above.
 
-1. Add a task inside the ad-hoc sub-process and apply a [connector](/components/connectors/introduction.md) or configure a [job worker](/components/concepts/job-workers.md).
-1. Write a clear tool name and **Documentation** description so the LLM knows when to use it.
-1. Use [`fromAi()`](../components/modeler/feel/builtin-functions/feel-built-in-functions-miscellaneous.md#fromaivalue) in input mappings to define the parameters the LLM must provide.
-1. Return `toolCallResult` in the result expression or output mapping.
-
-At runtime, each tool call produces one `toolCallResult`, and the ad-hoc multi-instance output collection aggregates them into `toolCallResults` for the AI Agent connector.
-
-:::tip
-For more examples, review the tasks already available in this blueprint and the [AI Agent tool definitions](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md) documentation.
-:::
+For more details on adding tools beyond this example, see [add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 
 ## Next steps
 

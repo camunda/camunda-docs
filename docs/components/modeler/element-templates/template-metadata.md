@@ -15,7 +15,7 @@ The application uses the `$schema` property to ensure compatibility for a given 
 The JSON schema versioning is backward-compatible, meaning that all versions including or below the current one are supported.
 
 :::info
-The Web Modeler only supports element templates pointing to the latest schema version: `https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json`
+Camunda Hub only supports element templates pointing to the latest schema version: `https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json`
 :::
 
 The Desktop Modeler ignores element templates defining a higher `$schema` version and logs a warning message.
@@ -76,7 +76,7 @@ In case you require more space to explain the template, you can also provide a `
 This is particularly useful for templates that require external dependencies, such as custom connector implementations.
 
 Another good practice is to use a custom icon for your template. This helps users to quickly identify the template in the selection modal and in the properties panel.
-If you use the Web Modeler's element template editor, you can upload an image and Web Modeler will take care of encoding it as a data URL.
+If you use the Camunda Hub's element template editor, you can upload an image and Camunda Hub will take care of encoding it as a data URL.
 
 ```json
 {
@@ -104,9 +104,9 @@ If you use the Web Modeler's element template editor, you can upload an image an
 - `engines : Object` is an optional key-value pair.
   - `camunda : SemanticVersion` is an optional key to define compatibility with Camunda Orchestration Cluster Versions.
   - `camundaDesktopModeler : SemanticVersion` is an optional key to define compatibility with Desktop Modeler versions.
-  - `camundaWebModeler : SemanticVersion` is an optional key to define compatibility with Web Modeler versions.
+  - `camundaWebModeler : SemanticVersion` is an optional key to define compatibility with Camunda Hub versions.
 
-Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda Orchestration Cluster versions) and related components (such as Web Modeler) using the `engines` key.
+Define [template compatibility](https://github.com/bpmn-io/element-templates/blob/main/docs/LIFE_CYCLE.md#compatibility) with execution platforms (Camunda Orchestration Cluster versions) and related components (such as Camunda Hub) using the `engines` key.
 
 This key has a dictionary object as its value, where the execution platform names are the keys, and the [semantic version](https://semver.org/) ranges are the values.
 
@@ -122,7 +122,7 @@ For example, the following `engines` definition specifies that the template is c
 ```
 
 Compatibility is only validated if the platform version is provided by both the template and the modeler.
-In the example below, the template is compatible with the specified versions of both Desktop and Web Modeler, but it requires Camunda version 8.6 or higher for both:
+In the example below, the template is compatible with the specified versions of both Desktop and Camunda Hub, but it requires Camunda version 8.6 or higher for both:
 
 ```json
 {
@@ -135,7 +135,7 @@ In the example below, the template is compatible with the specified versions of 
 }
 ```
 
-You can also use this feature to explicitly specify a template's incompatibility with a platform. For instance, the following template is incompatible with all versions of Web Modeler:
+You can also use this feature to explicitly specify a template's incompatibility with a platform. For instance, the following template is incompatible with all versions of Camunda Hub:
 
 ```json
 {
@@ -228,6 +228,103 @@ A property can be assigned to a group by setting the [`group` key](./template-pr
   ],
   "properties": [
     ...
+  ]
+}
+```
+
+## Predefined configurations: `steps` and `presets`
+
+- `steps` is an optional key.
+- `presets` is an optional key.
+
+Use `steps` and `presets` to offer several predefined configurations within a single template. A preset is a named set of property values, and `steps` define the menu users navigate to choose one. This is useful for templates that bundle multiple operations, such as a connector that can create an issue, list issues, or create a branch.
+
+When a template defines `steps`, applying the template opens a nested menu built from those steps instead of applying the template directly. Choosing a final step applies the template together with the property values of its referenced preset. While searching, the final steps surface directly so users can pick an operation without navigating the menu.
+
+Search matches a step by its `name`, `description`, and `keywords`, combined with those of its parent steps and of the template itself. Use `keywords` on a step to add the terms users search for when they think of the action rather than the product, such as `upload object` for a file storage operation.
+
+### Defining presets with `presets`
+
+A preset is a reusable set of property values applied on top of the template's defaults. Leaf steps reference presets through `presetId`.
+
+- `presets : Array<Object>` defines the available presets. Each preset has the following attributes:
+  - `id : String` is a required key that uniquely identifies the preset. It is referenced by a step's `presetId`.
+  - `properties : Object` is a required key that maps template property names to the values applied when the preset is selected. These values are applied on top of the template's default property values.
+
+### Defining the menu with `steps`
+
+`steps` define a hierarchical menu shown when the template is applied. A step is either a category or a final choice:
+
+- A category step has nested `steps` and groups other steps. Selecting it navigates into its child steps.
+- A leaf step references a preset through `presetId` and applies that preset when selected.
+
+A step must define either `steps` or `presetId`, but not both.
+
+- `steps : Array<Object>` defines the menu. Each step has the following attributes:
+  - `name : String` is a required key that defines the step's label in the menu.
+  - `description : String` is an optional key shown alongside the name.
+  - `keywords : Array<String>` is an optional key listing extra terms used to match the step in search.
+  - `steps : Array<Object>` is the list of nested child steps. Defining this key marks the step as a category.
+  - `presetId : String` references a preset by its `id`. Defining this key marks the step as a leaf.
+
+The following example defines a connector template with two categories, each containing two operations that map to a preset:
+
+```json
+{
+  ...,
+  "steps": [
+    {
+      "name": "Issues",
+      "description": "Manage GitHub issues",
+      "steps": [
+        {
+          "name": "Create Issue",
+          "description": "Create a new issue",
+          "keywords": ["create issue", "open ticket"],
+          "presetId": "createIssue"
+        },
+        {
+          "name": "List Issues",
+          "description": "List issues in a repository",
+          "keywords": ["list issues", "get issues"],
+          "presetId": "listIssues"
+        }
+      ]
+    },
+    {
+      "name": "Branches",
+      "description": "Manage GitHub branches",
+      "steps": [
+        {
+          "name": "List Branches",
+          "keywords": ["list branches", "get branches"],
+          "presetId": "listBranches"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "id": "createIssue",
+      "properties": {
+        "operationGroup": "issues",
+        "issueOperationType": "createIssue"
+      }
+    },
+    {
+      "id": "listIssues",
+      "properties": {
+        "operationGroup": "issues",
+        "issueOperationType": "listIssues"
+      }
+    },
+    {
+      "id": "listBranches",
+      "properties": {
+        "operationGroup": "branches",
+        "branchOperationType": "listBranches"
+      }
+    }
   ]
 }
 ```

@@ -33,11 +33,11 @@ For example, the Java configuration property `camunda.client.grpc-address` can b
 
 To connect to the Orchestration Cluster, provide the following configuration:
 
-<Tabs groupId="connection-url" defaultValue="environment-variables" queryString values={[
-{label: 'Environment variables', value: 'environment-variables' },
-{label: 'Application.yaml', value: 'application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_MODE=self-managed
@@ -46,7 +46,7 @@ CAMUNDA_CLIENT_RESTADDRESS=http://localhost:8080
 ```
 
 </TabItem>
-<TabItem value="application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -63,18 +63,18 @@ camunda:
 
 If using an HTTPS connection, you may need to provide a certificate to validate the Zeebe Gateway's certificate chain.
 
-<Tabs groupId="https-config" defaultValue="environment-variables" queryString values={[
-{label: 'Environment variables', value: 'environment-variables' },
-{label: 'Application.yaml', value: 'application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_CACERTIFICATEPATH=/path/to/certificate.pem
 ```
 
 </TabItem>
-<TabItem value="application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -183,11 +183,11 @@ See the [Camunda Spring Boot Starter documentation](../../../../apis-tools/camun
 
 To use Camunda 8 SaaS, specify the connection properties:
 
-<Tabs groupId="saas-config" defaultValue="saas-environment-variables" queryString values={[
-{label: 'Environment variables', value: 'saas-environment-variables' },
-{label: 'Application.yaml', value: 'saas-application-yaml' },
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
 ]}>
-<TabItem value="saas-environment-variables">
+<TabItem value="env">
 
 ```bash
 CAMUNDA_CLIENT_MODE=saas
@@ -198,7 +198,7 @@ CAMUNDA_CLIENT_CLOUD_CLUSTERID=xxx
 ```
 
 </TabItem>
-<TabItem value="saas-application-yaml">
+<TabItem value="application.yaml">
 
 ```yaml
 camunda:
@@ -459,6 +459,59 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 </TabItem>
 </Tabs>
 
+## Secret filter
+
+The secret filter restricts outbound connectors to resolving only the secrets they declare in their BPMN input mappings. This prevents a connector from accessing secrets that are available in the runtime environment but not referenced in the process definition.
+
+:::note
+The secret filter applies to outbound connectors only. Support for inbound connectors is planned for a future release.
+:::
+
+### Modes
+
+Configure the secret filter with the `camunda.connector.secret-resolver.secret-filter.mode` property:
+
+| Mode       | Behavior                                                                                                                                                                                                                                                                                                               |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DISABLED` | All secrets resolve freely. This is the default and matches the behavior before this feature was introduced.                                                                                                                                                                                                           |
+| `LAX`      | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
+| `STRICT`   | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. Choose this mode when strict secret isolation is required.                                                                                                                      |
+
+The allow-list is derived automatically from the BPMN input mappings of the connector element. No manual configuration of individual secrets is required.
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE=LAX
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    secret-resolver:
+      secret-filter:
+        mode: LAX
+```
+
+</TabItem>
+</Tabs>
+
+### Cache configuration
+
+The secret filter caches process definition lookups to avoid repeated API calls. You can configure the cache with the following properties:
+
+| Property                                                         | Environment variable                                          | Description                                     | Default |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------- | ------- |
+| `camunda.connector.secret-resolver.secret-filter.cache.enabled`  | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_ENABLED` | Whether caching is enabled.                     | `true`  |
+| `camunda.connector.secret-resolver.secret-filter.cache.max-size` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_MAXSIZE` | Maximum number of process definitions to cache. | `1000`  |
+
 ## HTTP proxy configuration
 
 You can configure connectors to route HTTP requests through a proxy server. See [HTTP proxy configuration](./http-proxy-configuration.md) for details.
@@ -472,6 +525,74 @@ To configure the truststore, use the following environment variables:
 - `JAVAX_NET_SSL_TRUSTSTORE`: Path to the truststore file (e.g., `/path/to/truststore.jks`)
 - `JAVAX_NET_SSL_TRUSTSTOREPASSWORD`: Password for the truststore
 
+## Configure the App Integrations connection
+
+The [App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md) sends messages to Microsoft Teams and Slack through your organization's Camunda app integrations. The runtime holds the connection, so no process model carries an endpoint or a credential.
+
+Configure this only if you have installed app integrations, as described in [Install Camunda for Microsoft Teams](/components/camunda-integrations/ms-teams/ms-teams-installation.md). Until the runtime is configured, every App Integrations job fails with `APP_INTEGRATIONS_NOT_CONFIGURED` and raises an incident.
+
+### Connection settings
+
+| Environment variable          | Helm value                             | Required       | Description                                                                                            |
+| :---------------------------- | :------------------------------------- | :------------- | :----------------------------------------------------------------------------------------------------- |
+| `APP_INTEGRATIONS_BASE_URL`   | `connectors.appIntegrations.baseUrl`   | Yes            | Base URL of your app integrations deployment.                                                          |
+| `APP_INTEGRATIONS_CLUSTER_ID` | `connectors.appIntegrations.clusterId` | With OAuth 2.0 | The cluster's UUID as declared in the app integrations `clusters` configuration, not the cluster name. |
+
+App integrations use the cluster ID to tell which cluster a call comes from. When the runtime authenticates with an API key, app integrations identify the cluster from the key instead, so the cluster ID is optional.
+
+The physical tenant is not configured here. The connector reads it from the job it is executing, as described in [how the runtime identifies the Physical Tenant](/self-managed/concepts/physical-tenants/connectors-runtime.md#how-the-runtime-identifies-the-physical-tenant).
+
+### Choose an authentication method
+
+The runtime authenticates with either OAuth 2.0 client credentials or an API key. The method is selected from the values you set, in this order:
+
+1. If the token endpoint, client ID, and client secret are all set, the runtime uses OAuth 2.0 client credentials. This wins even when an API key is also set.
+1. Otherwise, if an API key is set, the runtime uses API key authentication.
+1. Otherwise the connector is not configured, and every job fails.
+
+| Environment variable                           | Helm value                                              | Required    | Description                                                                            |
+| :--------------------------------------------- | :------------------------------------------------------ | :---------- | :------------------------------------------------------------------------------------- |
+| `APP_INTEGRATIONS_API_KEY`                     | `connectors.appIntegrations.apiKey.secret`              | For API key | Sent in the `X-API-KEY` header.                                                        |
+| `APP_INTEGRATIONS_OAUTH_TOKEN_ENDPOINT`        | `connectors.appIntegrations.oauth.tokenEndpoint`        | For OAuth   | OAuth 2.0 token endpoint.                                                              |
+| `APP_INTEGRATIONS_OAUTH_CLIENT_ID`             | `connectors.appIntegrations.oauth.clientId`             | For OAuth   | OAuth 2.0 client ID.                                                                   |
+| `APP_INTEGRATIONS_OAUTH_CLIENT_SECRET`         | `connectors.appIntegrations.oauth.secret`               | For OAuth   | OAuth 2.0 client secret.                                                               |
+| `APP_INTEGRATIONS_OAUTH_AUDIENCE`              | `connectors.appIntegrations.oauth.audience`             | No          | Identifier of the API the token is requested for.                                      |
+| `APP_INTEGRATIONS_OAUTH_SCOPES`                | `connectors.appIntegrations.oauth.scopes`               | No          | Requested token scopes.                                                                |
+| `APP_INTEGRATIONS_OAUTH_CLIENT_AUTHENTICATION` | `connectors.appIntegrations.oauth.clientAuthentication` | No          | How the credentials are transmitted: `credentialsBody` (default) or `basicAuthHeader`. |
+
+### Configure App Integrations with the Helm chart
+
+The two secret values, `apiKey` and `oauth`, take the chart's standard secret block. Reference an existing Kubernetes Secret in production, and use `inlineSecret` only for local testing.
+
+To authenticate with OAuth 2.0 client credentials:
+
+```yaml
+connectors:
+  appIntegrations:
+    baseUrl: https://app-integrations.example.com
+    clusterId: 11111111-2222-3333-4444-555555555555
+    oauth:
+      tokenEndpoint: https://idp.example.com/oauth/token
+      clientId: camunda-app-integrations
+      secret:
+        existingSecret: app-integrations-oauth
+        existingSecretKey: client-secret
+```
+
+To authenticate with an API key, where the cluster ID can be omitted:
+
+```yaml
+connectors:
+  appIntegrations:
+    baseUrl: https://app-integrations.example.com
+    apiKey:
+      secret:
+        existingSecret: app-integrations-api-key
+        existingSecretKey: api-key
+```
+
+The chart rejects a partially configured OAuth block, and OAuth without a cluster ID, at install time rather than at first job execution.
+
 ## Multi-tenancy
 
 The Connector Runtime supports multiple tenants for inbound and outbound connectors. These are configurable in [Orchestration Cluster Admin](/components/admin/tenant.md).
@@ -479,6 +600,8 @@ The Connector Runtime supports multiple tenants for inbound and outbound connect
 A single Connector Runtime can serve a single tenant or can be configured to serve
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
 Zeebe-related operations like handling jobs and publishing messages.
+
+The tenants described on this page are logical tenants. Camunda 8 Self-Managed also supports [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), which are strongly isolated execution units within a single Orchestration Cluster and are configured separately. One Connector Runtime can serve several Physical Tenants, each with its own client, job workers, and secrets. See [Connectors runtime: Physical Tenant support](/self-managed/concepts/physical-tenants/connectors-runtime.md).
 
 :::info
 Support for **outbound connectors** with multiple tenants requires a dedicated
@@ -548,7 +671,7 @@ To restrict the Connector Runtime inbound connector feature to a single tenant o
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Admin.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across all associated components [if not configured in Helm](../../deployment/helm/configure/configure-logical-tenants.md) so users can view any data from tenants for which they have authorizations configured in Admin.
 
 Find more information (including links to component-specific configuration pages) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 

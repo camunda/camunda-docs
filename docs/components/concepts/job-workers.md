@@ -1,10 +1,11 @@
 ---
 id: job-workers
 title: "Job workers"
-description: "Learn more about job workers, a service that can perform a particular task in a process. When this task needs to be performed, this is represented by a job."
+description: "Learn more about job workers, a service that can perform a particular task in a process. Each time that task needs to be performed, it is represented by a job."
 ---
 
-A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time such a task needs to be performed, this is represented by a [job](/reference/glossary.md#job).
+A [job worker](/reference/glossary.md#job-worker) is a service capable of performing a particular task in a process. Each time that task needs to be performed, it is represented by a [job](/reference/glossary.md#job).
+For example, [AI agent](/reference/glossary.md#ai-agent) tool calls use this mechanism. Each activity inside an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) acts as a tool and is executed as a job, like any other task in the process.
 
 A job has the following properties:
 
@@ -175,15 +176,50 @@ Two streams are considered logically equivalent if they would both activate the 
 
 :::
 
-On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job times out, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and pushed to it. As the job makes it way back to the gateway which owns this stream, a random client associated with it is picked, and the job is forwarded to it.
+On the broker side, whenever a job is made activate-able (e.g. a service task is activated, a job failed and is retried, etc.), if there is one or more streams for this job type, a random one is picked, the job is activated and pushed to it. As the job makes its way back to the gateway that owns this stream, a random client associated with it is picked, and the job is forwarded to it.
 
 :::note
 The RNG used to randomly pick streams and clients provides a good uniform distribution for the same underlying set, which is a cheap way of evenly distributing the load _as long as the stream set remains stable_.
 :::
 
+Job leasing also applies to streaming: a leased job only matches streams opened with a lease request, and streams opened without one only match unleased jobs. See [job leasing](#job-leasing) for details.
+
 To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo" against a cluster consisting of a single gateway and a single broker. It receives some jobs, and when it closes, one job that was pushed asynchronously is returned to the broker:
 
 ![Sample Sequence Diagram](assets/job-push-sequence.png)
+
+### How job streaming and polling deliver jobs
+
+Job streaming and polling are separate delivery paths, not two ways of draining the same queue.
+
+Zeebe queues any job that has no registered stream for its type in an internal backlog (the `ACTIVATABLE` state), and long polling (via the [`ActivateJobs` RPC](../../apis-tools/zeebe-api/gateway-service.md#activatejobs-rpc)) is the only path that serves this backlog. A pushed job bypasses the backlog only on its first delivery attempt: as soon as the job becomes `ACTIVATABLE`, Zeebe pushes it directly to a registered stream for its type, if one exists. If the push fails or the job times out before completion, the job returns to the `ACTIVATABLE` backlog like any other job.
+
+The following diagram shows both delivery paths, from the broker through the gateway to the worker’s job capacity:
+
+```mermaid
+flowchart TB
+    created["Job becomes activate-able"]
+
+    subgraph broker["Broker"]
+        created
+        backlog[["ACTIVATABLE backlog"]]
+    end
+
+    subgraph gateway["Gateway"]
+        pushFwd["Push forwarding"]
+        pollFwd["Poll forwarding<br/>(ActivateJobs)"]
+    end
+
+    subgraph worker["Worker"]
+        capacity(("Job capacity<br/>(worker-defined limit)"))
+    end
+
+    created -- "no stream registered" --> backlog
+    created -- "stream registered: pushed immediately" --> pushFwd
+    pushFwd --> capacity
+    backlog -- "drained only by polling" --> pollFwd
+    pollFwd --> capacity
+```
 
 ### Backpressure
 
@@ -256,6 +292,67 @@ For example, if jobs of a given type are not activated, but a worker is opened f
 
 If it's not present in the gateway as a client stream, restart your worker. If it's not present as a consumer in one of the brokers, this indicates a bug. As a workaround, restart your gateway, which will cause some interruption in your service, but will force all streams for this gateway to be recreated properly.
 
+## Job prioritization
+
+Use job prioritization when you have mixed-urgency workloads and want time-sensitive jobs to be activated ahead of lower-priority ones.
+
+Camunda supports job prioritization for pull-based job activation. Job priority affects the order in which jobs are activated for workers. It does not change retries, failures, or completion semantics.
+
+Priority ordering is automatic. No worker-level flag or configuration is required — once a job has a priority set, Zeebe activates higher-priority jobs first when a job pull method is used.
+
+You can define job priority:
+
+- On the process as a default.
+- On supported job-creating tasks as an override, including service tasks, send tasks, and script or business rule tasks implemented as job workers.
+
+### Process-level priority
+
+To set a default priority for all jobs created by a process, add `zeebe:jobPriorityDefinition` to the process `extensionElements`:
+
+```xml
+<bpmn:process id="my-process" isExecutable="true">
+  <bpmn:extensionElements>
+    <zeebe:jobPriorityDefinition priority="42" />
+  </bpmn:extensionElements>
+  ...
+</bpmn:process>
+```
+
+A task-level priority definition overrides this process-level default.
+
+### Task-level priority
+
+Job priority is enforced per partition, not globally across the cluster. Within a partition, higher-priority jobs are activated before lower-priority ones. Within the same priority level, jobs activate in FIFO order. If you don't set any priorities, standard FIFO behavior applies throughout.
+
+The default priority is 0.
+
+Be aware that low-priority jobs can starve if workers are consistently occupied by higher-priority work. Camunda doesn't provide starvation mitigation, fairness guarantees, or priority aging. If starvation becomes a problem, increase worker capacity or revise your priority assignments.
+
+Priority values can be static integers or FEEL expressions. FEEL expressions are evaluated when the job is created, and the resulting integer is stored on the job.
+
+Priority accepts any signed 32-bit integer. The engine does not enforce a fixed upper or lower bound such as `0-99`.
+
+Jobs created before version 8.10 do not have a stored priority value. For job execution, Camunda treats them as having the default priority of 0.
+
+:::warning
+If you use job APIs that filter or sort by priority, pre-8.10 jobs are excluded from results because no priority value is stored for them. Review any priority-based queries before upgrading.
+:::
+
+### Validation and runtime failure behavior
+
+Invalid FEEL expressions are handled differently depending on when they fail:
+
+- If the expression is invalid at deployment time, BPMN deployment fails and the process is not deployed.
+- If the expression fails at runtime, for example because a referenced variable is missing, Camunda raises an incident and the job is not created.
+
+To recover, provide the missing variable value and resolve the incident manually in Operate.
+
+### Job streaming limitation
+
+Job streaming activates jobs as they are created and ignores priorities.
+
+If you use job pulling and job streaming together for the same job type, this negates the benefits of job prioritization.
+
 ## Tags
 
 Tags provide a powerful way to add lightweight metadata to jobs.
@@ -276,3 +373,151 @@ When a BPMN element is activated and creates a job:
 - **Inherited**: Jobs inherit the complete tag set from their process instance.
 
 For detailed information about tag formats, validation rules, limits, and additional use cases, see [process instance creation tags](/components/concepts/process-instance-creation.md#tags).
+
+## Job leasing
+
+A job lease is an opt-in, opaque token that fences a specific activation of a job. It lets a worker prove its activation is still current when it interacts with Camunda.
+
+For example, consider a job worker that performs a credit check on a loan application and completes the job with its decision: approve or reject. Worker A activates the job and is on its way to approving, but a new negative evaluation appears on the applicant before it completes, and the job's deadline passes. Zeebe reassigns the job to worker B, which sees the new evaluation and decides to reject instead. Without a lease, Zeebe only checks that the job is still activated, not which activation the completion came from, so if worker A's stale approval reaches Zeebe first, it wins: funds get disbursed on outdated information, and worker B's correct rejection is discarded.
+
+```mermaid
+sequenceDiagram
+    participant A as Worker A
+    participant Z as Zeebe
+    participant B as Worker B
+
+    A->>Z: Activate job
+    Z-->>A: job
+    Note over A: Deciding: approve
+    Z->>Z: Job times out, reassigned
+    B->>Z: Activate job
+    Z-->>B: job
+    Note over B: Sees new record, decides: reject
+    A->>Z: Complete job (approve)
+    Z-->>A: Accepted
+    B->>Z: Complete job (reject)
+    Z-->>B: Rejected: job already completed
+```
+
+With leasing, worker A's completion carries its own activation's token, which becomes stale the moment worker B's activation supersedes it, so Zeebe rejects it regardless of arrival order. The outcome flips: instead of whichever completion arrives first, the most up-to-date activation's completion wins.
+
+```mermaid
+sequenceDiagram
+    participant A as Worker A
+    participant Z as Zeebe
+    participant B as Worker B
+
+    A->>Z: Activate job (withLease)
+    Z-->>A: Job with leaseToken A
+    Note over A: Deciding: approve
+    Z->>Z: Job times out, reassigned
+    B->>Z: Activate job (withLease)
+    Z-->>B: Job with leaseToken B
+    Note over B: Sees new record, decides: reject
+    A->>Z: Complete job (leaseToken A)
+    Z-->>A: Rejected: INVALID_STATE, stale lease
+    B->>Z: Complete job (leaseToken B)
+    Z-->>B: Accepted
+```
+
+Camunda's own [agentic orchestration](../agentic-orchestration/agentic-orchestration-overview.md) builds on this same guarantee for visibility into [agent instance](../agentic-orchestration/agent-definitions-and-instances.md#agent-instances)'s conversation. Before completing, an agent worker separately reports its reasoning as an [agent instance update](../../apis-tools/orchestration-cluster-api-rest/specifications/update-agent-instance.api.mdx), tied to its lease token. If a later activation supersedes it and completes instead, Zeebe discards the superseded activation's pending update and commits the winning one's, so a retry's contradicting reasoning never gets mixed with the activation that actually gets acted on.
+
+```mermaid
+sequenceDiagram
+    participant A1 as Activation 1
+    participant Z as Zeebe
+    participant A2 as Activation 2
+
+    A1->>Z: Activate job (withLease)
+    Z-->>A1: Job with leaseToken 1
+    A1->>Z: Update agent instance (leaseToken 1)
+    Z-->>A1: Update pending
+    Z->>Z: Job times out, reassigned
+    A2->>Z: Activate job (withLease)
+    Z-->>A2: Job with leaseToken 2
+    A2->>Z: Update agent instance (leaseToken 2)
+    Z-->>A2: Update pending
+    A2->>Z: Complete job (leaseToken 2)
+    Z-->>A2: Accepted
+    Note over Z: Commits activation 2's update,<br/>discards activation 1's pending update
+```
+
+See [connect an external agent](../agentic-orchestration/connect-external-agent.md#step-2-activate-the-job-with-a-lease) for a concrete walkthrough of activating a job with a lease and reporting history against it.
+
+### How job leasing works
+
+To use leasing, request a lease by setting `withLease` to `true` when you activate jobs. Zeebe then returns a `leaseToken` on each activated job. This token identifies that specific activation, not the job itself.
+
+Pass the matching lease token back when you complete, fail, or throw an error on the job. You can also include it when you update the job timeout, retries, or priority, to verify the activation is still current before the update applies.
+
+### Enforcement and rejections
+
+Complete, fail, and throw-error commands on a leased job require the matching lease token. If the token is missing or doesn't match, Zeebe rejects the command with `INVALID_STATE`.
+
+Updating a job's timeout, retries, or priority never requires a lease token, but Zeebe validates one if you supply it. This keeps operator and bulk updates of leased jobs possible without requiring a lease.
+
+A lease-mismatch rejection means another activation of the same job has already superseded yours, for example after the job timed out and was reassigned. Treat this as expected, not as an error: don't retry the command, and log it at debug level rather than as an error.
+
+### Leasing is permanent for a job
+
+Once a job has been leased by any worker, Zeebe never again serves that job to a non-leasing worker of the same type. A non-leasing poll or stream silently skips the job.
+
+The affected process instances may appear stuck with no incident indicating the problem if all leasing workers are stopped. Zeebe exposes a `skipped` action on the `zeebe.job.events.total` metric as the operator signal that a non-leasing worker attempted to activate the leased job.
+
+:::note
+There is currently no operation to remove a lease from a job. To recover, you have two options:
+
+- Redeploy any worker for the job type with `withLease` set to `true`, to drain the leased jobs.
+- Use process instance modification to terminate and reactivate the element, which produces a fresh, unleased job.
+  :::
+
+This also affects rollbacks. If you roll back a leasing worker deployment to a non-leasing version, any jobs leased in the interim stay permanently unavailable to the rolled-back version. Before rolling back, drain in-flight leased jobs of that type first, so the rolled-back version doesn't start out starved of jobs it can never activate.
+
+:::tip
+Run a homogeneous fleet per job type: either all workers for a type request a lease, or none do. Mixed fleets work, but treat them as a transitional state, such as during a rollout. Keep an eye on the `skipped` jobs metric mentioned above to ensure the fleet is homogeneous.
+:::
+
+### Example
+
+The following example activates jobs with a lease and completes the job using the matching lease token.
+
+```java
+client
+    .newWorker()
+    .jobType("process-payment")
+    .handler(
+        (jobClient, job) -> {
+            // process the job ...
+
+            jobClient
+                // highlight-start
+                .newCompleteCommand(job.getKey())
+                .withLeaseToken(job.getLeaseToken())
+                // highlight-end
+                .send();
+        })
+    // highlight-start
+    .withLease(true)
+    // highlight-end
+    .open();
+```
+
+When you build a command from the activated job itself, the client carries the job's lease token for you automatically:
+
+```java
+client
+    .newWorker()
+    .jobType("process-payment")
+    .handler(
+        (jobClient, job) -> {
+            // process the job ...
+
+            // highlight-start
+            jobClient.newCompleteCommand(job).send();
+            // highlight-end
+        })
+    // highlight-start
+    .withLease(true)
+    // highlight-end
+    .open();
+```

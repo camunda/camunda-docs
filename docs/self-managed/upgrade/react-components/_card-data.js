@@ -4,10 +4,7 @@
 import "./_card.css";
 
 import K8sIcon from "../assets/kubernetes.png";
-import JarIcon from "../assets/jar.png";
-import IconGear from "../assets/icon-prereqs.png";
-import IconCloud from "../assets/icon-backup.png";
-import IconArrow from "../manual/assets/icon-arrow.png";
+import IconArrow from "../assets/icon-arrow.png";
 
 export const overviewCards = [
   {
@@ -17,21 +14,14 @@ export const overviewCards = [
     description:
       "Upgrade a Helm-managed Camunda 8.8 deployment on Kubernetes to version 8.9.",
   },
-  {
-    link: "./manual",
-    title: "Manual",
-    image: JarIcon,
-    description:
-      "Manually upgrade a local Camunda installation from an archive distribution to version 8.9.",
-  },
 ];
 
 export const helmIndexCards = [
   {
-    link: "./880-to-890",
-    title: "Upgrade Camunda 8.8 to 8.9 using Helm",
+    link: "./890-to-8100",
+    title: "Upgrade Camunda 8.9 to 8.10 using Helm",
     image: IconArrow,
     description:
-      "Follow the main Helm upgrade guide to perform the required configuration changes and run the Helm upgrade.",
+      "Switch to the Helm v4 CLI and migrate the deprecated app-config Helm keys to extraConfiguration before running the Helm upgrade.",
   },
 ];

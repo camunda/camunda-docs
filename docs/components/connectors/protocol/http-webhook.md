@@ -178,7 +178,7 @@ When you click on the event with HTTP Webhook connector applied to it, a new **W
 This tab displays the URL of the HTTP Webhook connector for every cluster where you have deployed your BPMN diagram.
 
 :::note
-The **Webhooks** tab is only supported in Web Modeler as part of the Camunda 8 SaaS offering.
+The **Webhooks** tab is only supported in Camunda Hub as part of the Camunda 8 SaaS offering.
 You can still use HTTP Webhook connector in Desktop Modeler, or with your Camunda 8 Self-Managed.
 In that case, HTTP Webhook connector deployments and URLs will not be displayed in Modeler.
 :::
@@ -620,3 +620,5 @@ If the `documents` list is not empty, document items are returned in the followi
 :::note
 Request parts are automatically stored in the configured document store when sending a multipart request.
 :::
+
+To extract a document from a base64-encoded field in a non-multipart request body, use the [`createDocument` FEEL function](/components/connectors/use-connectors/index.md#function-createdocument) in the **Result expression** field.

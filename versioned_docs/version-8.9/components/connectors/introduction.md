@@ -19,6 +19,7 @@ import { gettingStartedCards, customConnectorCards, latestConnectorCards, latest
 
 - Use a [Slack](/components/connectors/out-of-the-box-connectors/slack.md) or [Microsoft Teams](/components/connectors/out-of-the-box-connectors/microsoft-teams.md) connector to notify people of pending or completed processes in a human task orchestration onboarding flow.
 - In microservices orchestration, use a [Kafka](/components/connectors/out-of-the-box-connectors/kafka.md) connector to add real-time messaging to your automated processes.
+- In [agentic orchestration](/reference/glossary.md#agentic-orchestration), connectors are also the [tools an AI agent calls](/components/connectors/connector-types.md#outbound-connectors) to interact with external systems.
 
 Connectors are often configured as a [BPMN process](/components/concepts/processes.md) task, with the required integration parameters already set up for easy configuration. This helps remove the need for you to write custom integration programming code.
 

@@ -4,9 +4,14 @@ paths:
       tags:
         - Mapping rule
       operationId: createMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -55,9 +60,14 @@ paths:
       tags:
         - Mapping rule
       operationId: updateMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -108,9 +118,14 @@ paths:
       tags:
         - Mapping rule
       operationId: deleteMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete a mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -144,9 +159,14 @@ paths:
       tags:
         - Mapping rule
       operationId: getMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get a mapping rule
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -183,9 +203,14 @@ paths:
       tags:
         - Mapping rule
       operationId: searchMappingRule
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search mapping rules
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 

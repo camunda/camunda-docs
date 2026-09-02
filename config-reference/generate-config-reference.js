@@ -29,6 +29,12 @@ const typeReplacements = {
     "enum[assigned, provided]",
   "java.util.Set<java.lang.Integer>": "array[integer]",
   "java.util.Map<java.lang.String,java.lang.Object>": "map[string,object]",
+  "java.util.Map<java.lang.String,java.util.Map<java.lang.String,java.lang.Object>>":
+    "map[string,map[string,object]]",
+  "java.util.Map": "map[string,object]",
+  "java.lang.Object": "object",
+  "io.camunda.client.api.search.enums.ClusterVariableKind":
+    "enum[json, secretReference]",
 };
 
 const preserveGroups = [];

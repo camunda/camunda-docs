@@ -61,6 +61,15 @@ message ActivateJobsRequest {
   int64 requestTimeout = 6;
   // a list of IDs of tenants for which to activate jobs
   repeated string tenantIds = 7;
+  // whether to activate the jobs with a lease; when true, each activated job is assigned a
+  // distinct, opaque lease token, returned as ActivatedJob.leaseToken. The lease fences the
+  // complete, fail, and throw-error commands against a superseded activation of the same job
+  // (e.g. after the job timed out or failed and was re-activated by another worker): a command
+  // carrying a stale lease token is rejected rather than racing with the newer activation. Once
+  // a job has been activated with a lease, it is served only to leasing workers of that job
+  // type; a homogeneous fleet per job type is recommended. Defaults to false, which activates
+  // jobs without a lease.
+  bool withLease = 9;
 }
 ```
 
@@ -134,6 +143,9 @@ message ActivatedJob {
   JobKind kind = 15;
   // the listener event type of the job.
   ListenerEventType listenerEventType = 16;
+  // the lease token identifying this activation; unset when the job was activated without a
+  // lease
+  optional string leaseToken = 21;
 }
 ```
 
@@ -247,6 +259,13 @@ message CompleteJobRequest {
   // The result of the completed job as determined by the worker.
   // This functionality is currently supported only by user task listeners
   optional JobResult result = 3;
+  // the token identifying a leased job's activation, obtained from ActivatedJob.leaseToken.
+  // For a leased job, the matching token must be supplied to prove the command comes from the
+  // worker that holds the current lease; a command with no token is rejected. A command carrying
+  // a stale token is likewise rejected, fencing the job against a superseded activation (e.g.
+  // after the job timed out or failed and was re-activated by another worker). A job that was
+  // activated without a lease requires no token.
+  optional string leaseToken = 4;
 }
 
 message JobResult{
@@ -382,6 +401,16 @@ message CreateProcessInstanceRequest {
   // instance during its execution
   // if empty (default), the process instance will be executed normally
   repeated ProcessInstanceCreationRuntimeInstruction runtimeInstructions = 8;
+
+  // a list of tags that can be attached as meta-data to process instances
+  repeated string tags = 9;
+
+  // an optional, user-defined string identifier that identifies the process instance
+  // within the scope of the process definition (scoped by tenant). If provided and uniqueness
+  // enforcement is enabled, the engine will reject creation if another root process instance
+  // with the same business id is already active for the same process definition.
+  // Note that any active child process instances with the same business id are not taken into account.
+  optional string businessId = 10;
 }
 
 message ProcessInstanceCreationStartInstruction {
@@ -426,6 +455,10 @@ message CreateProcessInstanceResponse {
   int64 processInstanceKey = 4;
   // the tenant identifier of the created process instance
   string tenantId = 5;
+  // tags attached to a process instance
+  repeated string tags = 6;
+  // the business id of the created process instance
+  optional string businessId = 7;
 }
 ```
 
@@ -476,6 +509,10 @@ message CreateProcessInstanceWithResultResponse {
   string variables = 5;
   // the tenant identifier of the process definition
   string tenantId = 6;
+  // tags attached to a process instance
+  repeated string tags = 7;
+  // the business id of the created process instance
+  optional string businessId = 8;
 }
 ```
 
@@ -915,6 +952,13 @@ message FailJobRequest {
   // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
   // valid argument, as the root of the JSON document is an array and not an object.
   string variables = 5;
+  // the token identifying a leased job's activation, obtained from ActivatedJob.leaseToken.
+  // For a leased job, the matching token must be supplied to prove the command comes from the
+  // worker that holds the current lease; a command with no token is rejected. A command carrying
+  // a stale token is likewise rejected, fencing the job against a superseded activation (e.g.
+  // after the job timed out or failed and was re-activated by another worker). A job that was
+  // activated without a lease requires no token.
+  optional string leaseToken = 6;
 }
 ```
 
@@ -1261,6 +1305,13 @@ message StreamActivatedJobsRequest {
   repeated string fetchVariable = 5;
   // a list of identifiers of tenants for which to stream jobs
   repeated string tenantIds = 6;
+  // whether to stream jobs with a lease; when true, each job pushed on this stream is
+  // assigned a distinct, opaque lease token, returned as ActivatedJob.leaseToken. The lease
+  // fences the complete, fail, and throw-error commands against a superseded activation of
+  // the same job (e.g. after the job timed out or failed and was re-activated by another
+  // worker): a command carrying a stale lease token is rejected rather than racing with the
+  // newer activation. Defaults to false, which pushes jobs without a lease.
+  bool withLease = 8;
 }
 ```
 
@@ -1322,6 +1373,9 @@ message ActivatedJob {
   JobKind kind = 15;
   // the listener event type of the job.
   ListenerEventType listenerEventType = 16;
+  // the lease token identifying this activation; unset when the job was activated without a
+  // lease
+  optional string leaseToken = 21;
 }
 ```
 
@@ -1364,6 +1418,13 @@ message ThrowErrorRequest {
   // "b" respectively, with their associated values. [{ "a": 1, "b": 2 }] would not be a
   // valid argument, as the root of the JSON document is an array and not an object.
   string variables = 4;
+  // the token identifying a leased job's activation, obtained from ActivatedJob.leaseToken.
+  // For a leased job, the matching token must be supplied to prove the command comes from the
+  // worker that holds the current lease; a command with no token is rejected. A command carrying
+  // a stale token is likewise rejected, fencing the job against a superseded activation (e.g.
+  // after the job timed out or failed and was re-activated by another worker). A job that was
+  // activated without a lease requires no token.
+  optional string leaseToken = 5;
 }
 ```
 
@@ -1480,6 +1541,15 @@ message UpdateJobRetriesRequest {
   int64 jobKey = 1;
   // the new amount of retries for the job; must be positive
   int32 retries = 2;
+  // the token identifying a leased job's activation, obtained from ActivatedJob.leaseToken.
+  // For a leased job, a supplied token is validated to prove the command comes from the worker
+  // that holds the current lease; a command carrying a stale token is rejected, fencing the job
+  // against a superseded activation (e.g. after the job timed out or failed and was re-activated
+  // by another worker). An update without a token always applies, to support operator and bulk
+  // updates of leased jobs; this differs from lifecycle commands like complete, fail, and
+  // throw-error, which always require a token for leased jobs. A job that was activated without a
+  // lease requires no token.
+  optional string leaseToken = 4;
 }
 ```
 
@@ -1518,6 +1588,15 @@ message UpdateJobTimeoutRequest {
   int64 jobKey = 1;
   // the duration of the new timeout in ms, starting from the current moment
   int64 timeout = 2;
+  // the token identifying a leased job's activation, obtained from ActivatedJob.leaseToken.
+  // For a leased job, a supplied token is validated to prove the command comes from the worker
+  // that holds the current lease; a command carrying a stale token is rejected, fencing the job
+  // against a superseded activation (e.g. after the job timed out or failed and was re-activated
+  // by another worker). An update without a token always applies, to support operator and bulk
+  // updates of leased jobs; this differs from lifecycle commands like complete, fail, and
+  // throw-error, which always require a token for leased jobs. A job that was activated without a
+  // lease requires no token.
+  optional string leaseToken = 4;
 }
 ```
 
@@ -1542,3 +1621,57 @@ Returned if:
 Returned if:
 
 - The job is not active.
+
+## `UpdateJobPriority` RPC
+
+Updates the priority of a job.
+
+### Input: `UpdateJobPriorityRequest`
+
+```protobuf
+message UpdateJobPriorityRequest {
+  // the unique job identifier, as obtained from ActivateJobsResponse
+  int64 jobKey = 1;
+  // the new priority value for the job
+  optional int32 priority = 2;
+  // a reference key chosen by the user and will be part of all records resulted from this operation
+  optional uint64 operationReference = 3;
+  // the token identifying a leased job's activation, obtained from ActivatedJob.leaseToken.
+  // For a leased job, a supplied token is validated to prove the command comes from the worker
+  // that holds the current lease; a command carrying a stale token is rejected, fencing the job
+  // against a superseded activation (e.g. after the job timed out or failed and was re-activated
+  // by another worker). An update without a token always applies, to support operator and bulk
+  // updates of leased jobs; this differs from lifecycle commands like complete, fail, and
+  // throw-error, which always require a token for leased jobs. A job that was activated without a
+  // lease requires no token.
+  optional string leaseToken = 4;
+}
+```
+
+### Output: `UpdateJobPriorityResponse`
+
+```protobuf
+message UpdateJobPriorityResponse {
+}
+```
+
+### Errors
+
+#### GRPC_STATUS_NOT_FOUND
+
+Returned if:
+
+- No job exists with the given key.
+- No job was found with the given key for the tenants the user is authorized to work with.
+
+#### GRPC_STATUS_INVALID_ARGUMENT
+
+Returned if:
+
+- Priority is not provided.
+
+#### GRPC_STATUS_INVALID_STATE
+
+Returned if:
+
+- The job is in a terminal state.

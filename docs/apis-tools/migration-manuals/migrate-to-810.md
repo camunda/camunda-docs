@@ -45,6 +45,7 @@ Review the actions required for the following 8.10 changes:
 | :---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------- |
 | <span className="label-highlight red">Breaking change</span>      | [Search filters: `UserTaskFilter` process filters converted into advanced search filters](#usertask-process-filter)         |
 | <span className="label-highlight red">Breaking change</span>      | [`POST /v2/message-subscriptions/search` returns start event subscriptions](#message-subscription-type)                     |
+| <span className="label-highlight red">Breaking change</span>      | [Administration API (Self-Managed) migrated](#administration-api-self-managed-migrated)                                     |
 | <span className="label-highlight orange">Behavioral change</span> | [Element instance search: advanced filters on `elementId` / `elementName` and `$or` support](#element-instance-advanced-or) |
 | <span className="label-highlight orange">Behavioral change</span> | [Resource API now uses eventual consistency](#resource-eventual-consistency)                                                |
 | <span className="label-highlight yellow">Deprecated</span>        | [Deprecated: GET resource content API](#deprecated-get-resource-content)                                                    |
@@ -157,6 +158,19 @@ This filter works correctly for both new data and legacy data (which has `NULL` 
 
 </TabItem>
 </Tabs>
+
+### Administration API (Self-Managed) migrated
+
+The Administration API endpoints for Self-Managed have been migrated to the now-deprecated [Web Modeler API v1](../web-modeler-api/index.md):
+
+| Admin API (Self-Managed)       | Web Modeler API v1                   |
+| :----------------------------- | :----------------------------------- |
+| `GET /admin-api/usage-metrics` | `GET /api/v1/clusters/usage-metrics` |
+| `GET /admin-api/clusters`      | `GET /api/v1/clusters`               |
+
+For both endpoints, you need a [token with read permissions](../web-modeler-api/authentication.md#generate-a-token).
+
+These endpoints return the same data as the original Administration APIs, but the response format matches the other Web Modeler APIs.
 
 ## Behavioral changes
 

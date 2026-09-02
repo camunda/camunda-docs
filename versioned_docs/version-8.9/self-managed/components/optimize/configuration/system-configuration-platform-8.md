@@ -22,7 +22,7 @@ The settings below control how Optimize connects to and paginates this exporter 
 
 ### Exporter-side filters and Optimize data completeness
 
-This section describes how exporter-side filters affect Optimize data imports and data completeness. For YAML configuration details and property syntax, refer to the Elasticsearch and OpenSearch exporter documentation.
+This section describes how exporter-side filters affect Optimize data imports and data completeness. For YAML configuration details and property syntax, refer to the [Elasticsearch](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration) and [OpenSearch](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration) exporter documentation.
 
 Starting from Camunda 8.9, the Elasticsearch and OpenSearch exporters provide optional filters that can reduce the amount of data written for Optimize:
 
@@ -31,7 +31,9 @@ Starting from Camunda 8.9, the Elasticsearch and OpenSearch exporters provide op
 - BPMN process IDs: Inclusion and exclusion lists by `bpmnProcessId` that drop all records tied to selected processes.
 - Optimize mode: Keeps only the record value types and intents required by Optimize and drops other record types not used by Optimize.
 
-These filters run inside the exporter and permanently drop matching records from the exported stream. Optimize cannot import data that was never exported.
+:::warning
+These filters run **inside the exporter** and permanently drop matching records from the exported stream. Optimize cannot import data that was never exported, and dropped records cannot be recovered later, even if you relax the filters.
+:::
 
 #### Non‑retroactive filters and permanent gaps
 

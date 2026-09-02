@@ -11,13 +11,24 @@ Build and integrate AI agents into your end-to-end processes.
 
 ## About AI agents
 
-An AI agent is a software program that autonomously gathers data and carries out tasks using this information, independently or on behalf of another system or person.
+An AI agent is an addressable execution of an LLM-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop. The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
 
 AI agents can perform a variety of functions, including making decisions, solving problems, interacting with external environments, and taking actions.
 
+### Agent types
+
+Camunda supports two types of agents:
+
+- **[Camunda AI agents](/reference/glossary.md#camunda-ai-agent)** are native. They run their [agent loop](/reference/glossary.md#agent-loop) in Camunda's engine, which activates each tool call as a governed BPMN activity, maintains memory across iterations, and emits lifecycle events. They are implemented using the [AI Agent connector](#the-ai-agent-connector), either as an [AI Agent Sub-process](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md) or an [AI Agent Task](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md#ai-agent-task).
+- **[External agents](/reference/glossary.md#external-agent)** run their [agent loop](/reference/glossary.md#agent-loop) in an external runtime, such as, LangGraph, Amazon Bedrock, or custom code, instead of Camunda's engine.
+
+:::note
+Camunda represents every agent with an [agent definition and agent instances](/components/agentic-orchestration/agent-definitions-and-instances.md).
+:::
+
 ## The AI Agent connector
 
-The AI Agent connector is the primary Camunda connector for building AI agents. It integrates an LLM with your BPMN process, enabling the agent to reason over context, select tools, and respond to users or process events.
+The AI Agent connector is the primary Camunda connector for building Camunda AI agents. It integrates an LLM with your BPMN process, enabling the agent to reason over context, select tools, and respond to users or process events.
 
 Key capabilities include:
 
@@ -50,7 +61,7 @@ Decision-making and execution are intentionally split:
 - **Camunda orchestrates**: Executes the selected BPMN activity, stores variables, applies retries and incident handling, and routes human tasks and events.
 
 :::tip
-Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [guide to adding a tool for an AI agent](https://camunda.com/blog/2025/05/guide-to-adding-tool-ai-agent/).
+Learn more in the [example AI Agent Sub-process connector integration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess-example.md) and [Add tools to an AI agent](/components/agentic-orchestration/add-tool-to-ai-agent.md).
 :::
 
 ## AI agent integration features

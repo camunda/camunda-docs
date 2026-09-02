@@ -4,9 +4,14 @@ paths:
       tags:
         - Tenant
       operationId: createTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Create tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJDUkVBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -52,9 +57,14 @@ paths:
       tags:
         - Tenant
       operationId: searchTenants
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search tenants
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -94,9 +104,14 @@ paths:
       tags:
         - Tenant
       operationId: getTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Get tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dfQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -136,9 +151,14 @@ paths:
       tags:
         - Tenant
       operationId: updateTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Update tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -184,9 +204,14 @@ paths:
       tags:
         - Tenant
       operationId: deleteTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Delete tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJERUxFVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -223,9 +248,14 @@ paths:
       tags:
         - Tenant
       operationId: assignUserToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a user to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -267,9 +297,14 @@ paths:
       tags:
         - Tenant
       operationId: unassignUserFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a user from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -313,9 +348,14 @@ paths:
       tags:
         - Tenant
       operationId: searchUsersForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search users for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -348,9 +388,14 @@ paths:
       tags:
         - Tenant
       operationId: assignClientToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a client to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -393,9 +438,14 @@ paths:
       tags:
         - Tenant
       operationId: unassignClientFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a client from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -439,9 +489,14 @@ paths:
       tags:
         - Tenant
       operationId: searchClientsForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search clients for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -474,9 +529,14 @@ paths:
       tags:
         - Tenant
       operationId: assignGroupToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a group to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -519,9 +579,14 @@ paths:
       tags:
         - Tenant
       operationId: unassignGroupFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a group from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -565,9 +630,14 @@ paths:
       tags:
         - Tenant
       operationId: searchGroupIdsForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search groups for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -600,9 +670,14 @@ paths:
       tags:
         - Tenant
       operationId: searchRolesForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search roles for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiUk9MRSIsInBlcm1pc3Npb25UeXBlIjoiUkVBRCJ9XSwiZW5mb3JjZW1lbnQiOiJmaWx0ZXIifQ]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -635,9 +710,14 @@ paths:
       tags:
         - Tenant
       operationId: assignRoleToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a role to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -680,9 +760,14 @@ paths:
       tags:
         - Tenant
       operationId: unassignRoleFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a role from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -727,9 +812,14 @@ paths:
       tags:
         - Tenant
       operationId: assignMappingRuleToTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Assign a mapping rule to a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -771,9 +861,14 @@ paths:
       tags:
         - Tenant
       operationId: unassignMappingRuleFromTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Unassign a mapping rule from a tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiVEVOQU5UIiwicGVybWlzc2lvblR5cGUiOiJVUERBVEUifV19]]
 
         [[ADDED_IN_VERSION:8.8]]
 
@@ -816,9 +911,14 @@ paths:
       tags:
         - Tenant
       operationId: searchMappingRulesForTenant
+      security:
+        - bearerAuth: []
+        - basicAuth: []
       summary: Search mapping rules for tenant
       description: |-
 
+
+        [[REQUIRED_PERMISSIONS:eyJwZXJtaXNzaW9ucyI6W3sicmVzb3VyY2VUeXBlIjoiTUFQUElOR19SVUxFIiwicGVybWlzc2lvblR5cGUiOiJSRUFEIn1dLCJlbmZvcmNlbWVudCI6ImZpbHRlciJ9]]
 
         [[ADDED_IN_VERSION:8.8]]
 

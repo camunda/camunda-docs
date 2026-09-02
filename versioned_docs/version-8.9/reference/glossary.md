@@ -61,25 +61,48 @@ Admin was previously named "Identity" in Camunda 8.8. The component was renamed 
 
 - [Admin overview](/components/admin/admin-introduction.md)
 
+### Agent orchestration
+
+Agent orchestration is an architectural pattern where a primary AI agent coordinates multiple specialized worker agents. In this pattern, an LLM routes tasks to sub-agents, creating LLM-to-LLM coordination.
+
+Agent orchestration can run inside a Camunda agentic process as one of its agents.
+
+:::note
+This is different from [agentic orchestration](#agentic-orchestration), which describes how Camunda orchestrates agents, tools, systems, and people as part of an end-to-end process.
+:::
+
 ### Agentic orchestration
 
-The governed coordination and management of AI agents, humans, and systems in a blended deterministic and dynamic process workflow to achieve defined goals.
+A hybrid orchestration model combining the power of deterministic logic with LLM-driven flexibility, allowing AI to evaluate the prompt, decide on what tools to execute, and decide when the goal is achieved, all with governance and auditability.
 
 For example, orchestrate when and how AI agents act within a process, what tools they can use, and how results are validated, with guardrails for reliability, auditability, and human-in-the-loop. You can build AI agents with Camunda using BPMN.
 
+:::note
+This is different from [agent orchestration](#agent-orchestration), which describes LLM-to-LLM coordination between agents.
+:::
+
 - [Agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md)
+
+### AI agent
+
+An addressable execution of an [LLM](#large-language-model-llm)-driven loop with shared memory context across iterations. An agent runs a loop where the model decides what to do next, which tools to invoke, and when to stop.
+
+The loop is what makes it an agent. A standalone LLM call with no loop and no autonomous tool selection, such as a single connector call that returns output along a fixed execution path, is not an agent.
+
+For example, you can build an invoice-processing AI agent in Camunda with BPMN, using the AI Agent Sub-process template to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
+
+- [AI agents](/components/agentic-orchestration/ai-agents.md)
+- [Build your first AI agent](/guides/getting-started-agentic-orchestration.md)
+
+### AI agent function
+
+The category of built-in [FEEL](#feel-expression) functions used to declare LLM-provided tool parameters for an [AI agent](#ai-agent). The primary function is [`fromAi()`](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue), which marks a value as supplied by the LLM at runtime, with an optional description, type, and JSON schema to guide the model.
+
+- [AI agent functions](/components/modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md)
 
 ### Artificial intelligence (AI)
 
 A broad field of computer science focused on creating machines that can perform tasks requiring human-like intelligence. In practice, AI involves programming computers to learn, reason, and self-correct when solving problems. For example, AI applications include language understanding, image recognition, decision-making, and automation of complex tasks.
-
-### AI agent
-
-An autonomous system, typically powered by an [LLM](#large-language-model-llm), that perceives its environment, makes decisions, and acts to achieve goals. AI agents can perform tasks, interact with other agents or systems, and operate with varying degrees of independence.
-For example, build an invoice-processing AI agent in Camunda with BPMN, using an ad-hoc subprocess and an AI Agent connector to provide LLM reasoning, tool calling, and short-term memory in a governed feedback loop.
-
-- [AI agents](/components/agentic-orchestration/ai-agents.md)
-- [Build your first AI Agent](/guides/getting-started-agentic-orchestration.md)
 
 ### Audit log
 
@@ -112,18 +135,6 @@ Camunda can integrate with SAP BTP to orchestrate business processes across SAP 
 
 ## C
 
-### Client
-
-See [Zeebe Client](#zeebe-client).
-
-### Cluster
-
-See [Zeebe cluster](#zeebe-cluster).
-
-### Cluster variable
-
-A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
-
 ### Camunda 8
 
 Camunda 8 is a universal process orchestrator that allows you to orchestrate and automate complex business processes that span people, systems, and devices. Camunda 8 consists of the following key components:
@@ -136,6 +147,18 @@ Camunda 8 is a universal process orchestrator that allows you to orchestrate and
 | Console                                              | Manage your [Orchestration Cluster](#orchestration-cluster) deployments, as follows:<p><ul><li><p>[Console SaaS](/components/console/introduction-to-console.md): Configure, deploy, and manage your [Orchestration cluster](#orchestration-cluster), as well as your [connectors](#connector) and Optimize deployments.</p></li><li><p>[Console Self-Managed](/self-managed/components/console/overview.md): Monitor your [orchestration cluster](#orchestration-cluster) and [connector](#connector) deployments.</p></li></ul></p> |
 | Modelers                                             | Allows business users and developers to design and implement [processes](#process), decisions, and [user task](#user-task) forms:<p><ul><li><p>Use [Desktop Modeler](/components/modeler/desktop-modeler/index.md) locally on Mac, Windows, and Linux.</p></li><li><p>Use the browser-based [Web Modeler](/components/modeler/web-modeler/launch-web-modeler.md) for process application management.</p></li></ul></p>                                                                                                                |
 | [Management Identity](#management-identity)          | Authentication and authorization for the components outside the [Orchestration Cluster](#orchestration-cluster) (Optimize, Console, and Web Modeler).                                                                                                                                                                                                                                                                                                                                                                                 |
+
+### Client
+
+See [Zeebe Client](#zeebe-client).
+
+### Cluster
+
+See [Zeebe cluster](#zeebe-cluster).
+
+### Cluster variable
+
+A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
 
 ### Command
 
@@ -179,7 +202,7 @@ A correlation is an attribute within a [message](#message) that is used to match
 
 ### CSAP CLI
 
-CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules—like the RFC connector, OData connector, and BTP plugin—for deployment.
+CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
 
 Camunda uses `csap` to automate setup steps: it interactively or via scripted flags configures connectors and plugins, resolves dependencies, and produces deployment-ready artifacts. This makes deploying SAP integrations (including BTP plugins) straightforward and repeatable in environments like Camunda SaaS.
 
@@ -244,6 +267,12 @@ An execution listener is a mechanism that allows users to execute custom logic a
 See [Zeebe Exporter](#zeebe-exporter).
 
 ## F
+
+### FEEL expression
+
+FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
+
+- [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
 
 ### Fine-tuning
 
@@ -332,7 +361,7 @@ For example, this is useful when working with services that must be isolated wit
 
 Inbound [Connectors](#connector) in Camunda 8 enable workflows to receive data or messages from external systems or services, making it possible to integrate workflows into a wider business process or system architecture.
 
-Inbound connectors include three subtypes - [webhooks](#webhook), [subscriptions](#subscription), and polling.
+Inbound connectors include three subtypes: [webhooks](#webhook-connector), [subscriptions](#subscription-inbound-connector), and polling.
 
 Unlike [outbound connectors](#outbound-connector), inbound connectors are **stateful**. The Java code of the inbound connector has a lifecycle suitable for long-running operations, such as listening for messages on a queue or waiting for a webhook to be called.
 Each element referencing an inbound connector will lead to the creation of one inbound connector instance. A process definition with one webhook start event and two additional webhooks as intermediate catch events would therefore lead to the creation of three inbound connector instances.
@@ -432,7 +461,7 @@ The Orchestration Cluster is the core component of [Camunda 8](#camunda-8), powe
 - [Zeebe](#zeebe) as the [workflow engine](#workflow-engine)
 - Operate for monitoring and troubleshooting [process instances](#process-instance) running in [Zeebe](#zeebe)
 - Tasklist for interacting with [user tasks](#user-task) (assigning, completing, and so on)
-- [Identity](#identity) for managing the integrated authentication and authorization
+- [Admin](#admin) for managing the integrated authentication and authorization
 - APIs for interacting with the Orchestration Cluster programmatically
 
 ### Outbound connector
@@ -463,7 +492,7 @@ See also: [Orchestration Cluster](#orchestration-cluster), [Log](#log), [Partiti
 
 ### Process
 
-The general business construct — what you want to automate.  
+The general business construct: what you want to automate.  
 In Camunda, a process is [modeled using BPMN](#process-model), then [deployed as a process definition](#process-definition), and finally [executed as a process instance](#process-instance).
 
 In runtime discussions, [_executing a process_](/components/concepts/processes.md) may be used as shorthand for deploying a process definition and starting an instance.
@@ -584,7 +613,7 @@ RFC stands for Remote Function Call, a protocol used by SAP to enable communicat
 
 Camunda can use RFC to call SAP functions directly as part of a business process. This allows Camunda to trigger SAP transactions, retrieve data, or update records within an SAP system, integrating SAP functionality seamlessly into broader automated workflows.
 
-- [RFC](/components/camunda-integrations/sap/csap-cli.md)
+- [RFC](/components/camunda-integrations/sap/rfc-connector.md)
 
 ### Robotic process automation (RPA)
 
@@ -614,13 +643,13 @@ Examples of secondary storage backends include:
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#event-log)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#event-log)
 
 ### Snapshot
 
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
-- [Resource planning](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#snapshots)
+- [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
 ### Soft pause exporting
 

@@ -80,6 +80,8 @@ Add an extraction field for each piece of data you want to extract from your doc
 
 :::note
 You can edit and delete extraction fields at any time. Click the three vertical dots next to the field to open the Options menu.
+
+There's currently no way to reorder existing fields directly; delete and re-add them in the order you want instead. Extraction fields and prompts are stored as part of the document extraction template in Web Modeler, not in the BPMN file, so they can't be edited outside Web Modeler (for example, in an external source control tool).
 :::
 
 ### Extract data and save as test case {#extract-data}
@@ -185,6 +187,10 @@ You can restore a version to revert to a previous snapshot of a document extract
 1. In the sidebar **Versions** list, hover over the version you want to restore.
 1. Select the three vertical dots to open the actions menu.
 1. Select **Restore as latest**.
+
+:::note
+You can't edit a previous version directly. To make changes based on an older version, restore it as the latest version first, then edit it.
+:::
 
 ### Rename a version
 

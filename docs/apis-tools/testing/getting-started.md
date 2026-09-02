@@ -266,8 +266,8 @@ CPT performs the following actions during the JUnit 5 lifecycle when running a t
   - Print the created process instances if the test failed
   - Close the client connections
   - Publish the client closed event for the Spring Boot process application to stop job workers
-  - Reset the Camunda runtime clock
-  - Delete all data in the Camunda runtime
+  - Reset the Camunda runtime clock (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
+  - Delete all data in the Camunda runtime (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
 - `afterAll` (test methods)
   - Generate the coverage report
   - Stop the test runtime
@@ -327,8 +327,8 @@ public class TestProcessApplication {}
   - Collect the data for the coverage report
   - Print the created process instances if the test failed
   - Close the client connections
-  - Reset the Camunda runtime clock
-  - Delete all data in the Camunda runtime
+  - Reset the Camunda runtime clock (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
+  - Delete all data in the Camunda runtime (can be disabled in the [configuration](configuration.md#test-cleanup-settings))
 - `afterAll` (test methods)
   - Generate the coverage report
   - Stop the test runtime
@@ -355,15 +355,19 @@ Take a look at the example project on [GitHub](https://github.com/camunda/camund
 
 ## Process Test Coverage
 
-After a test run, CPT prints the coverage of your BPMN processes to the log and generates a detailed HTML and JSON
-report. You can use the report to identify untested paths in your processes and to increase your test coverage.
+After a test run, CPT prints the coverage of your BPMN processes and DMN decision tables to the log and generates a
+detailed HTML and JSON report. You can use the report to identify untested paths in your processes and decision tables, and increase your test coverage.
 
 A link to the HTML report is printed in the log:
 
 ```
-Process coverage: io.camunda.InvoiceApprovalTest
+Coverage: io.camunda.InvoiceApprovalTest
 ========================
-- Process_InvoiceApproval: 100%
+Process coverage:
+- Process_InvoiceApproval: 96%
+
+Decision coverage:
+- auto-approve-invoice: 20%
 
  Coverage report: file:///my/home/projects/my-process-application/target/coverage-report/report.html
 ```
