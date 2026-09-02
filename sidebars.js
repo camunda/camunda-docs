@@ -1798,6 +1798,7 @@ module.exports = {
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
+                "self-managed/deployment/helm/configure/multi-region-zone-awareness",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/multi-namespace",

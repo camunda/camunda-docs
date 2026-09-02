@@ -394,7 +394,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-reg
 
 The parts worth reading before you install:
 
-- `global.multiregion.mode: zoned` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the legacy `regions` and `regionId` keys in this mode.
+- `global.multiregion.mode: zoned` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the legacy `regions` and `regionId` keys in this mode, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
 - `global.multiregion.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.
