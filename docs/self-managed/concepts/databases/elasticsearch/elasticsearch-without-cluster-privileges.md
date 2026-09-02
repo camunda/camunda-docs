@@ -235,9 +235,7 @@ orchestration:
   env:
     - name: CAMUNDA_DATABASE_SCHEMAMANAGER_CREATESCHEMA
       value: "false"
-    - name: CAMUNDA_TASKLIST_ELASTICSEARCH_HEALTHCHECKENABLED
-      value: "false"
-    - name: CAMUNDA_OPERATE_ELASTICSEARCH_HEALTHCHECKENABLED
+    - name: CAMUNDA_DATA_SECONDARYSTORAGE_ELASTICSEARCH_HEALTHCHECKENABLED
       value: "false"
     - name: ZEEBE_BROKER_EXPORTERS_CAMUNDAEXPORTER_ARGS_CREATESCHEMA
       value: "false"
@@ -262,12 +260,10 @@ orchestration:
     camunda.database:
       schema-manager:
         create-schema: false
-    camunda.tasklist:
-      elasticsearch:
-        health-check-enabled: false
-    camunda.operate:
-      elasticsearch:
-        health-check-enabled: false
+    camunda.data:
+      secondary-storage:
+        elasticsearch:
+          health-check-enabled: false
     zeebe.broker.exporters:
       camundaexporter:
         class-name: io.camunda.zeebe.exporter.CamundaExporter

@@ -32,6 +32,23 @@ When the CoE publishes a newer version of a template you already use, Hub offers
 
 If the CoE unpublishes an asset you already use, the template is deprecated. Elements that reference it keep working but show a deprecation hint in the properties panel, signaling that you should migrate to a newer version or a different template.
 
+## Find reusable assets in the modeling menus
+
+When you create, append, or change an element, the menu separates what you can insert into two tabs:
+
+- **BPMN** — the standard BPMN elements, in their usual categories.
+- **Reusable assets** — catalog assets, connectors, and templates from your project, together with resources the project already contains: forms, called processes, decisions, and RPA scripts.
+
+To insert a catalog asset, open the **Reusable assets** tab and select it. This creates a new element with the template already applied. To apply a template to an element that already exists, use **Change element** from the context pad, or follow [Apply assets while modeling](#apply-assets-while-modeling).
+
+If your project has no templates and no linked resources, no tabs appear and the menu behaves as before.
+
+### Find an asset quickly
+
+Type in the search field to search both tabs at once. Search matches asset names and descriptions, and also template IDs. While you search, the tabs are hidden and matches appear as a single ranked list.
+
+Within **Reusable assets**, entries are grouped: resources already in your project first, then named categories, then remaining templates, with connectors last.
+
 ## Find outdated assets in a diagram
 
 When an element references a template version that isn't the latest one, Camunda Hub flags it in two places in the modeler:

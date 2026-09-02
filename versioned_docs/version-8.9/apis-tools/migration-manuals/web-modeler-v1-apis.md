@@ -28,21 +28,16 @@ These changes currently only apply to the Web Modeler API running in Camunda 8 S
 
 ## Folders API
 
-You can no longer read or write process application IDs in any folders API context.
+You can no longer access process applications as folders in any folders API context. Instead, process applications are now explicitly represented.
 
-### Folder and parent IDs reference folders
+### Folder IDs reference folders
 
-In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId` or `parentId`. Previously, you could pass a process application's ID to read and write its data.
+In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID when deleting, reading, and updating folders.
 
 Example:
 
 ```shell
-PATCH /api/v1/folders/f169a3d4-056b-463c-b4c9-6c3600c2213a  # must be a folder, not a process application
-{
-  "name": "Root folder",
-  "projectId": "58a93bf7-4ea0-4e56-85fa-5c8fccc3877d",
-  "parentId": "1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676"  # must be a folder, not a process application
-}
+GET /api/v1/folders/1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676  # must be a folder, not a process application
 ```
 
 Affected endpoints:
@@ -50,11 +45,43 @@ Affected endpoints:
 - `DELETE /api/v1/folders/{folderId}`
 - `GET /api/v1/folders/{folderId}`
 - `PATCH /api/v1/folders/{folderId}`
+
+Instead of passing the process application ID to the folders endpoints, use the new process application endpoints:
+
+- [`DELETE /api/v1/process-applications/{processApplicationId}`](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/deleteProcessApplication)
+- [`GET /api/v1/process-applications/{processApplicationId}`](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/getProcessApplication)
+- [`PATCH /api/v1/process-applications/{processApplicationId}`](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/updateProcessApplication)
+
+Example:
+
+```shell
+GET /api/v1/process-applications/e005e49a-dce8-42ee-b0db-30b1d5555ebd  # must be a process application, not a folder
+```
+
+### Parent IDs reference folders
+
+In folders API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `parentId`. Previously, you could pass a process application's ID when writing data. Use the new `processApplicationId` field to specify the target process application and, optionally, the `parentId` field to specify a target folder.
+
+Example:
+
+```shell
+POST /api/v1/folders
+{
+  "name": "Nested folder",
+  "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+  "parentId": "1ef492f5-7ddc-43a7-b5e2-f5ad5c14b676",  # must be a folder, not a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd"  # new process application field
+}
+```
+
+Affected endpoints:
+
+- `PATCH /api/v1/folders/{folderId}`
 - `POST /api/v1/folders`
 
 ### Process applications are never returned as parent folders
 
-In folders API responses, the `parentId` is null for any folder stored at the root of a process application. Previously, `parentId` would return the process application ID.
+In folders API responses, the `parentId` is null for any folder stored at the root of a process application. Previously, `parentId` would return the process application ID. The process application ID is, instead, returned in a new `processApplicationId` field.
 
 Example:
 
@@ -64,6 +91,7 @@ Example:
   "name": "Root folder",
   "projectId": "58a93bf7-4ea0-4e56-85fa-5c8fccc3877d",
   "parentId": null, // null if the parent container is a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
   "created": "2026-08-24T14:17:33.889317Z",
   "createdBy": {
     "name": "Jane Doe",
@@ -85,17 +113,18 @@ Affected endpoints:
 
 ## Files API
 
-You can no longer read or write process application IDs in any files API context.
+You can no longer access process applications as folders in any files API context. Instead, process applications are now explicitly represented.
 
 ### Folder ID must reference a folder
 
-In files API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID to place the file in the process application.
+In files API requests, you'll receive a `404 NOT FOUND` if you pass a process application ID as the `folderId`. Previously, you could pass a process application's ID to place the file in the process application. Use the new `processApplicationId` field to specify the target process application and, optionally, the `folderId` field to specify a target folder.
 
 ```shell
 POST /api/v1/files
 {
   "name": "New BPMN diagram",
   "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",  # must be a folder, not a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",  # new process application field
   "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
   "content": "...",
   "fileType": "BPMN"
@@ -109,7 +138,7 @@ Affected endpoints:
 
 ### Process applications are never returned as folders
 
-In files API responses, the `folderId` is null for any file stored at the root of a process application. Previously, `folderId` would return the process application ID.
+In files API responses, the `folderId` is null for any file stored at the root of a process application. Previously, `folderId` would return the process application ID. The process application ID is, instead, returned in a new `processApplicationId` field.
 
 Example:
 
@@ -119,6 +148,7 @@ Example:
   "name": "New BPMN diagram",
   "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
   "folderId": null, // null if the parent container is a process application
+  "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
   "simplePath": "New BPMN diagram.bpmn",
   "canonicalPath": [],
   "revision": 2,
@@ -156,6 +186,7 @@ Example:
     "name": "New BPMN diagram",
     "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
     "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+    "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
     "simplePath": "Root folder/New BPMN diagram.bpmn", // excludes process applications
     "canonicalPath": [
       // excludes process applications
@@ -188,13 +219,28 @@ Affected endpoints:
 - `POST /api/v1/files/search` (the process application is excluded from these paths in both the response and the request `filter`)
 - `POST /api/v1/files`
 
+### Search for files in a process application
+
+With `POST /api/v1/files/search`, you can now use a new `processApplicationId` filter.
+
+Example:
+
+```shell
+POST /api/v1/files/search
+{
+  "filter": {
+    "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd"
+  }
+}
+```
+
 ## Projects API
 
-You can no longer read or write process application IDs in any projects API context.
+You can no longer access process applications as folders in any projects API context. Instead, process applications are now explicitly represented.
 
 ### Process applications are never returned as parent folders
 
-In the `GET /api/v1/projects/{projectId}` response, the `content.folders[i].parentId` and `content.files[i].folderId` are null for any folder or file stored at the root of a process application. Previously, `parentId` and `folderId` would return the process application ID.
+In the `GET /api/v1/projects/{projectId}` response, the `content.folders[i].parentId` and `content.files[i].folderId` are null for any folder or file stored at the root of a process application. Previously, `parentId` and `folderId` would return the process application ID. The process application ID is, instead, returned in a new `processApplicationId` field.
 
 Example:
 
@@ -221,6 +267,7 @@ Example:
         "name": "Root folder",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null, // null if the parent container is a process application
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
         "created": "2026-08-24T14:37:04.36503Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -239,6 +286,7 @@ Example:
         "name": "Root file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": null, // null if the parent container is a process application
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
         "simplePath": "Root file.bpmn",
         "canonicalPath": [],
         "revision": 2,
@@ -259,6 +307,7 @@ Example:
         "name": "Nested file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd", // new process application field
         "simplePath": "Root folder/Nested file.bpmn",
         "canonicalPath": [
           {
@@ -268,6 +317,23 @@ Example:
         ],
         "revision": 3,
         "type": "BPMN",
+        "created": "2026-08-24T14:17:33.889317Z",
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updated": "2026-08-24T14:23:48.371161659Z",
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
+      }
+    ],
+    "processApplications": [
+      {
+        "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
+        "name": "Process application",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -313,6 +379,7 @@ Example:
         "name": "Root folder",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "created": "2026-08-24T14:37:04.36503Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -331,6 +398,7 @@ Example:
         "name": "Root file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root file.bpmn", // excludes process applications
         "canonicalPath": [], // excludes process applications
         "revision": 2,
@@ -351,6 +419,7 @@ Example:
         "name": "Nested file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root folder/Nested file.bpmn", // excludes process applications
         "canonicalPath": [
           // excludes process applications
@@ -372,6 +441,23 @@ Example:
           "email": "jane.doe@email.com"
         }
       }
+    ],
+    "processApplications": [
+      {
+        "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
+        "name": "Process application",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
+        "created": "2026-08-24T14:17:33.889317Z",
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updated": "2026-08-24T14:23:48.371161659Z",
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
+      }
     ]
   }
 }
@@ -379,7 +465,7 @@ Example:
 
 ### Project folders exclude process applications
 
-In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes process applications. Previously, process applications were included in this list.
+In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes process applications. Previously, process applications were included in this list. The process applications are, instead, returned in a new `content.processApplications` field.
 
 ```json
 {
@@ -405,6 +491,7 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "name": "Root folder",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "parentId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "created": "2026-08-24T14:37:04.36503Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -423,6 +510,7 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "name": "Root file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": null,
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root file.bpmn",
         "canonicalPath": [],
         "revision": 2,
@@ -443,6 +531,7 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         "name": "Nested file",
         "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "folderId": "cdcf3895-1061-4084-b97e-c0abaab59b6f",
+        "processApplicationId": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
         "simplePath": "Root folder/Nested file.bpmn",
         "canonicalPath": [
           {
@@ -452,6 +541,24 @@ In the `GET /api/v1/projects/{projectId}` response, `content.folders` excludes p
         ],
         "revision": 3,
         "type": "BPMN",
+        "created": "2026-08-24T14:17:33.889317Z",
+        "createdBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        },
+        "updated": "2026-08-24T14:23:48.371161659Z",
+        "updatedBy": {
+          "name": "Jane Doe",
+          "email": "jane.doe@email.com"
+        }
+      }
+    ],
+    "processApplications": [
+      // new process applications list
+      {
+        "id": "e005e49a-dce8-42ee-b0db-30b1d5555ebd",
+        "name": "Process application",
+        "projectId": "fb928277-6268-44bb-b3e6-1925fa730ecf",
         "created": "2026-08-24T14:17:33.889317Z",
         "createdBy": {
           "name": "Jane Doe",
@@ -481,3 +588,9 @@ When versioning a connector template, you may receive a `409 CONFLICT` citing a 
 - An element template version, which is defined in the [template metadata](/components/modeler/element-templates/template-metadata.md#identification-id-and-version), can't be created if the version already exists in Web Modeler.
 - Therefore, if a process application version is created, but the element template version hasn't been updated, you receive a `409`.
   :::
+
+## Create a process application
+
+Create process applications with the new [`POST /api/v1/process-applications` endpoint](https://modeler.camunda.io/swagger-ui/index.html#/Process%20Applications/createProcessApplication).
+
+Previously, you could create files and folders at the project root without a process application. Now, files and folders must be stored in a process application. With this endpoint, you can create an entire file structure with the API, including the container process application.

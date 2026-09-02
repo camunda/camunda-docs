@@ -34,7 +34,7 @@ The document extraction template integrates with Camunda document handling conne
 
 1. **Amazon Textract**: Uploaded documents are analyzed by Amazon Textract, which extracts text data and returns the results. The template configuration includes specifying the document, the S3 bucket name for temporary storage during Amazon Textract analysis, and other required parameters such as extraction fields and Amazon Bedrock Converse parameters.
 
-1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#extraction-fields) prompts are used by Amazon Bedrock to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
+1. **Amazon Bedrock**: Your [extraction field](idp-key-concepts.md#fields) prompts are used by Amazon Bedrock to extract data from the document. The extracted content is mapped to process variables, and the results stored in a specified result variable.
 
 :::note
 
@@ -73,22 +73,6 @@ Language support depends on the [text extraction engine](#extraction-engines) yo
 :::note
 At the time of the 8.7 release (April 2025), Amazon Textract can detect printed text and handwriting from the Standard English alphabet and ASCII symbols, and can extract printed text, forms and tables in English, German, French, Spanish, Italian and Portuguese. Refer to [Amazon Textract FAQs](https://aws.amazon.com/textract/faqs/) for current information on supported languages.
 :::
-
-## Extraction field data types {#data-types}
-
-Specify the [extraction field](idp-key-concepts.md#extraction-fields) data type to indicate to the LLM what type of data it should be trying to extract. This helps the LLM more accurately analyze and extract the correct data.
-
-For example, if you want to extract an expected numeric value (such as a monetary value), select the `Number` data type for the extraction field.
-
-### Supported data types
-
-You can specify the following extraction field data types.
-
-| Data type | Description                                                         |
-| :-------- | :------------------------------------------------------------------ |
-| Boolean   | The LLM should expect a true or false value, such as "yes" or "no". |
-| Number    | The LLM should expect to extract a numeric value.                   |
-| String    | The LLM should expect to extract a sequence of characters.          |
 
 ## Extraction models {#extraction-models}
 
@@ -229,19 +213,19 @@ You can further refine table extraction by:
 
 ## Access rights and permissions
 
-Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions).
+Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
 
 For example, users with a Viewer or Commenter role only have read-only access to IDP features, and cannot upload documents, manage extraction fields, or publish templates.
 
-| Feature                                    |                             Viewer/Commenter                              |                         Editor/Project Admin                          |               Organization Admin or Organization Owner                |
+| Feature                                    |                             Viewer/Commenter                              |                        Editor/Workspace Admin                         |               Organization Admin or Organization Owner                |
 | :----------------------------------------- | :-----------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
-| View IDP application                       |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| View IDP project                           |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | View document extraction                   |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | View document classification               |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | View documents                             |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | View extraction fields/prompts             |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | View validate extraction                   |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
-| Create/edit/delete IDP application         | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
+| Create/edit/delete IDP project             | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | Create/edit/delete document extraction     | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | Create/edit/delete document classification | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | Add/edit/delete document types             | <img src={CrossImg} class="table-tick" alt="Cannot access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
@@ -276,5 +260,5 @@ The following example shows the results of a partially successful extraction aga
 The expanded `contract_start_date` field shows that each document returned different validation results.
 
 - The first document passed the validation, with the **Extracted value** matching the **Expected test case output**.
-- The second document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.
-- The third document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
+- The second document failed validation as the **Extracted value** did not match the **Expected test case output**. Click **Review document** to open the document again and check the prompt for this field.
+- The third document could not be validated as a test case was not found for comparison. Click **Save test case** to create a test case for the document.

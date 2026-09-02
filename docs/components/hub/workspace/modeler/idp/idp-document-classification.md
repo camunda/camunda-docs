@@ -29,7 +29,7 @@ Document classification templates require cluster version 8.9-alpha5 or later.
 
 To create a new document classification template:
 
-1. In your [IDP application](./idp-applications.md), click **Create new** and select **Classification template**.
+1. In your [IDP project](./idp-projects.md), click **Create new** and select **Classification template**.
 
 <img src={IdpClassificationCreateModalImg} alt="Create a classification template modal" width="80%" />
 
