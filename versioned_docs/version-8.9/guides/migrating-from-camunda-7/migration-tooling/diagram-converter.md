@@ -147,29 +147,7 @@ Next, you'll learn how to use those results.
 Download the analysis results as JSON when you want to use them with AI-assisted migration tooling or other automation.
 
 - In the web interface, click **Download JSON**.
-- In the CLI, pass `--json` to create `analysis-results.json` in the target directory. If that file already exists, the converter creates a numbered variant instead of overwriting it.
-
-<details>
-<summary>View JSON report details</summary>
-
-The JSON report is a flat array with one object per finding.
-
-Each finding includes the following fields:
-
-| Field         | Description                                 |
-| ------------- | ------------------------------------------- |
-| `filename`    | Name of the source file                     |
-| `elementName` | Name of the BPMN, DMN, or form element      |
-| `elementId`   | ID of the element                           |
-| `elementType` | Type of the element                         |
-| `severity`    | Finding severity                            |
-| `messageId`   | Identifier for the finding category         |
-| `message`     | Finding description                         |
-| `link`        | Link to conversion guidance, when available |
-
-The CLI and web interface use the same flat JSON format. Use XLSX for human review and CSV when importing findings into spreadsheet tools.
-
-</details>
+- In the CLI, add `--json` to your command.
 
 ### Analyze results in Microsoft Excel
 
