@@ -125,7 +125,7 @@ The Databricks SQL Statement Execution API returns HTTP 200 with `status.state =
 | ----------- | --------------------------------------------------------------------------------------------------------------- |
 | `SUCCEEDED` | Execution successful, result available for fetch.                                                               |
 | `FAILED`    | Execution failed; the reason is in `status.error.message`.                                                      |
-| `CANCELED`  | Cancelled explicitly, or by `on_wait_timeout=CANCEL`.                                                           |
+| `CANCELED`  | Canceled explicitly, or by `on_wait_timeout=CANCEL`.                                                            |
 | `CLOSED`    | **Success.** Execution was successful and the statement is closed; the result is no longer available for fetch. |
 
 `PENDING` and `RUNNING` are not terminal — they mean the statement is still executing, and you must poll the result with **Get statement status and result**.
