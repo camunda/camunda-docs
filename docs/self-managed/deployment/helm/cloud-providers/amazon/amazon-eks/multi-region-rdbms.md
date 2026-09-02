@@ -95,19 +95,19 @@ Following this guide gives you:
 
 The default topology uses three regions and three zones:
 
-| Setting                        | Default                                  | Meaning                                 |
-| :----------------------------- | :--------------------------------------- | :-------------------------------------- |
-| Regions                        | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                   |
-| Zone names                     | `london`, `paris`, `zurich`              | One zone per region                     |
-| `global.multiregion.mode`      | `zoned`                                  | Zone-aware partitioning                 |
-| `numberOfBrokers` per zone     | `2`                                      | Brokers deployed in that zone           |
-| `numberOfReplicas` per zone    | `1`                                      | One replica of every partition per zone |
-| `orchestration.clusterSize`    | `6`                                      | Sum of `numberOfBrokers` across zones   |
-| Replication factor             | `3`                                      | Sum of `numberOfReplicas` across zones  |
-| `orchestration.partitionCount` | `6`                                      | One partition per broker                |
-| Database regions               | Slots `0` and `1`                        | Aurora members, writer first            |
+| Setting                          | Default                                  | Meaning                                 |
+| :------------------------------- | :--------------------------------------- | :-------------------------------------- |
+| Regions                          | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                   |
+| Zone names                       | `london`, `paris`, `zurich`              | One zone per region                     |
+| `orchestration.multiregion.mode` | `zoned`                                  | Zone-aware partitioning                 |
+| `numberOfBrokers` per zone       | `2`                                      | Brokers deployed in that zone           |
+| `numberOfReplicas` per zone      | `1`                                      | One replica of every partition per zone |
+| `orchestration.clusterSize`      | `6`                                      | Sum of `numberOfBrokers` across zones   |
+| Replication factor               | `3`                                      | Sum of `numberOfReplicas` across zones  |
+| `orchestration.partitionCount`   | `6`                                      | One partition per broker                |
+| Database regions                 | Slots `0` and `1`                        | Aurora members, writer first            |
 
-Brokers are identified as `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region; only `global.multiregion.zone` and the advertised host differ.
+Brokers are identified as `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region; only `orchestration.multiregion.zone` and the advertised host differ.
 
 ### CIDR allocation
 
@@ -383,7 +383,7 @@ The generated contact points end with a trailing dot, which marks them as fully 
 
 ### Review the Helm values
 
-The values file is the same in every region. Only `global.multiregion.zone` and the advertised host differ, which is what makes the topology a single description rather than one per region.
+The values file is the same in every region. Only `orchestration.multiregion.zone` and the advertised host differ, which is what makes the topology a single description rather than one per region.
 
 <details>
 <summary>See the full camunda-values.yml</summary>
@@ -394,8 +394,8 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-reg
 
 The parts worth reading before you install:
 
-- `global.multiregion.mode: zoned` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the legacy `regions` and `regionId` keys in this mode, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
-- `global.multiregion.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
+- `orchestration.multiregion.mode: zoned` selects [zone-aware partitioning](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). The chart rejects the legacy `regions` and `regionId` keys in this mode, and derives the cluster size, replication factor, and broker node IDs from the zone list. See [configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md).
+- `orchestration.multiregion.zones` lists every zone with its broker count, replica count, and priority. Zone 0 has the highest priority because it hosts the database writer.
 - `orchestration.data.secondaryStorage.type: rdbms` with a single `url` shared by every broker in every region.
 - `CAMUNDA_DATA_SECONDARYSTORAGE_RDBMS_ASYNCREPLICATION_ENABLED: "true"` is required. Without it the exporter acknowledges records the standby has not received, and a writer failover loses exported data.
 - Cross-region SWIM membership timeouts are relaxed. The defaults are tuned for intra-region latency, and on a cold start brokers otherwise see remote peers as unreachable, eject them, and never converge.
