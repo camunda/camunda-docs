@@ -30,7 +30,7 @@ path: object;
 #### resourceKey
 
 ```ts
-resourceKey: ResourceKey;
+resourceKey: ResourceKeyWritable;
 ```
 
 The unique key identifying the RPA resource.

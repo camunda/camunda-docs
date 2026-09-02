@@ -3316,7 +3316,8 @@
         "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
-        "apis-tools/migration-manuals/saas-orchestration-architecture"
+        "apis-tools/migration-manuals/saas-orchestration-architecture",
+        "apis-tools/migration-manuals/web-modeler-v1-apis"
       ]
     }
   ],
@@ -3965,6 +3966,7 @@
     },
     {
       "Components": [
+        "self-managed/components/identity/how-identity-works",
         {
           "type": "category",
           "label": "Orchestration Cluster",

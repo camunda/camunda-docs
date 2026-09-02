@@ -135,14 +135,14 @@ The following key changes were also released as part of an 8.9.x patch release o
 
 | Patch release                                                    | Type            | Key change                                                                                                                    |
 | :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                               |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)              |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
 | SaaS `8.9 gen13`                                                 | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                 |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)             |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                       |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                      |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                  |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)              |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
 
 ## Agentic orchestration
 
@@ -1679,7 +1679,7 @@ You can now invite users who have not yet logged in to Web Modeler by entering t
 
 Inviting the entire organization only applies to users who have logged in at least once.
 
-<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</p>
 
 </div>
 </div>

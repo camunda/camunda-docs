@@ -57,6 +57,12 @@ For a [Camunda AI agent](/reference/glossary.md#camunda-ai-agent), the AI Agent 
 
 For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't ship an element template, so add the marker to the BPMN XML yourself. See [connect an external agent](/components/agentic-orchestration/connect-external-agent.md) for the full setup, including how to package your agent as a custom element template.
 
+:::info Update element templates created before Camunda 8.10
+If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template.
+
+Open the process in Camunda Hub or Desktop Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+:::
+
 #### Mark an element as an agent in XML
 
 The marker is an extension element on the [ad-hoc sub-process](/components/modeler/bpmn/ad-hoc-subprocesses/ad-hoc-subprocesses.md) or [service task](/components/modeler/bpmn/service-tasks/service-tasks.md) that hosts the agent. Its `agentType` attribute declares the [agent type](#what-an-agent-definition-contains), and accepts `aiAgentSubProcess`, `aiAgentTask`, or `external`.

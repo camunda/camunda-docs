@@ -13,7 +13,6 @@ import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
 import FormValuesBottom from './img/form-values-bottom.png';
 import FormId from './img/form-id.png';
-import ImplementModeImg from './img/implement-mode-active.png';
 import FormLinkingImg from './img/form-linking.png';
 import ModelerNavImg from './img/modeler-navigation.png';
 import ModelerGlobalNavImg from './img/modeler-global-nav.png';
@@ -70,9 +69,9 @@ In this step, you will design a process that demonstrates how to route the proce
 <Tabs groupId="install" className="tabs-hidden">
 <TabItem value="saas">
 
-1. Every file in Web Modeler requires a project. Within Modeler, click **New project**.
-2. In the project, create a process application. Storing files in a process application is required for SaaS.
-3. In the process application, click **Create new > BPMN diagram**.
+1. In Camunda Hub, navigate to your workspace.
+2. In the workspace, click **New project**.
+3. In your project, select **Create new > BPMN diagram**.
 4. Give your file a descriptive name. In this case, name it `Decide for Dinner`.
 5. Make sure to name the process itself as well. Click the empty canvas, and specify the process name and technical ID in the properties panel on the right side of the screen. This specifies how the process will appear in other tools of Camunda 8.
 
@@ -91,7 +90,6 @@ Within Desktop Modeler, select **BPMN diagram** under **Create a new file**.
 
 :::note
 To run this guide, make sure to be in **Implement** mode to specify the technical details of the process.
-<img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 :::
 
 </TabItem>

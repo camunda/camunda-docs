@@ -51,6 +51,12 @@ For the out-of-the-box connectors provided by Camunda, the connectors Bundle pro
 This means a developer created a template and reused one of the built-in connectors. Only for these templates is direct **Download to project** available.
 :::
 
+## Connector template versions
+
+The Camunda Marketplace always serves the **latest** version of a connector template. If that version's [`engines.camunda`](/components/modeler/element-templates/template-metadata.md#engine-compatibility-engines) range doesn't cover your cluster version, the connector is listed under **Requires newer Camunda version** and can't be applied to your diagram.
+
+To use an older version, obtain the template file from the connector's source and [upload it as an element template](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#importing-an-existing-element-template) yourself. Camunda's out-of-the-box connectors publish previous versions in the `element-templates/versioned` directory of the [`camunda/connectors`](https://github.com/camunda/connectors) repository. For partner and community connectors, availability of previous versions depends on the provider.
+
 ## Browse Marketplace blueprints
 
 1. Log in to your Camunda account and navigate to Web Modeler by clicking the Camunda components icon in the top left corner of your console, and then select Modeler.
