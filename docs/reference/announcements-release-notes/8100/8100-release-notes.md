@@ -74,74 +74,14 @@ Monitor and evaluate AI agent behavior in Operate.
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
 
-A new Camunda visual design system is introduced with this alpha for Self-Managed deployments.
+The new Camunda visual design system is introduced with this alpha for Self-Managed deployments.
 
-- The new, streamlined design system offers a cleaner, more consistent look across components.
-- Accessibility improvements are built in, and an updated navigation menu makes it easier to find your way around.
-- The new design system is enabled by default in Self-Managed for Camunda Hub, Web Modeler, Console and Operate.
-
-:::note
-
-- The new design system model will be introduced for SaaS deployments with the 8.10 minor release.
-  :::
-
-### Camunda Hub
-
-#### Modeling menu improvements
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
-
-When you create, append, or change an element, the menu groups what you can insert into two tabs:
-
-- **BPMN**: Standard BPMN elements, in their usual categories.
-- **Reusable assets**: Catalog assets, connectors, and templates from your project, together with resources the project already contains: forms, called processes, decisions, and RPA scripts.
-
-<p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
-
-#### New organizational structure for projects and process applications
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-A new organizational structure for projects and process applications is introduced with this alpha for SaaS.
-
-With this new file resource hierarchy:
-
-- Projects now **only** contain process applications and IDP applications.
-- Files and folders are stored inside process applications.
-- Previously, a project could contain process applications, folders, and files.
-
-The new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
-
-<p class="link-arrow">[Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)</p>
+- A new, streamlined design system offers a cleaner, more consistent look across components.
+- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
+- The new design system is enabled by default in Self-Managed for Web Modeler, Console and Operate.
 
 :::note
-
-- SaaS Web Modeler data was updated during the 29 August 2026 maintenance window to support this new structure.
-- This new structure will be introduced for Self-Managed deployments with the 8.10 minor release.
-
-:::
-
-#### Project versioning model
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
-
-A new versioning model for projects and file resources is introduced with this alpha for SaaS.
-
-**Projects:** The new project versioning model uses snapshots to save a single capture of all the project files in one action. This helps you track a project throughout its development lifecycle and ensures the correct state is referenced.
-
-<p class="link-arrow">[Manage and review project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)</p>
-
-**File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
-
-<p class="link-arrow">[Manage file versions](/components/hub/workspace/modeler/modeling/versions.md)</p>
-
-:::note
-
-- In this context, a [snapshot](/reference/glossary.md#snapshot-project) is a Camunda Hub project snapshot, not a deployed process definition version.
-- This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
-
+The new design system model will be introduced for SaaS deployments with the 8.10 minor release.
 :::
 
 ### Connectors
@@ -236,7 +176,54 @@ Support for physical tenant isolation in 8.10 is added for the Camunda 8 REST AP
 
 ### Modeler
 
+#### Modeling menu improvements
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3481, https://github.com/camunda/camunda-docs/pull/9764 -->
+
+When you create, append, or change an element, the menu groups insertion options into two tabs:
+
+- **BPMN**: Standard BPMN elements, organized by their usual categories.
+- **Reusable assets**: Assets, connectors, and templates from your project, along with existing project resources such as forms, called processes, decisions, and RPA scripts.
+
+<p class="link-arrow">[Find reusable assets in the modeling menus](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md#find-reusable-assets-in-the-modeling-menus)</p>
+
+#### New organizational structure for projects and process applications
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+A new organizational structure for projects and process applications is introduced with this alpha.
+
+With this new file resource hierarchy:
+
+- Projects now **only** contain process applications and IDP applications.
+- Files and folders are stored inside process applications.
+- Previously, a project could contain process applications, folders, and files.
+
+The new **Project > Process application > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
+
+:::note
+SaaS Web Modeler data was updated during the 29 August 2026 maintenance window to support this new structure.
+:::
+
+#### Project versioning model
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
+
+A new versioning model for projects, process applications and file resources is introduced with this alpha. Projects now only contain process applications and IDP applications on the root level. Folders and files are stored inside process applications.
+
+**Process applications**: The new process application versioning model uses snapshots to save the current state of all the process application files, in a single action. This helps you track a process application throughout its development lifecycle and ensures the correct state is referenced.
+
+**File versioning:** Every BPMN diagram, DMN diagram, form, RPA script, README file, and test file keeps a version history, a single timeline of the autosaves and named versions created as you work. You can open that history to view an earlier state of the file, compare any two entries, restore an entry, or copy one to another project.
+
+:::note
+This new versioning model will be introduced for Self-Managed deployments with the 8.10 minor release.
+:::
+
 #### Runtime connection in Web Modeler
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3475 -->
 
@@ -320,6 +307,33 @@ Provider plug-ins ship in this order. The provider interface is stable across pr
 C8Run / local development: Inject secrets via environment variables, following standard practice and without requiring a Camunda secret store.
 
 V1 supports existing connector secret formats. To get started, configure your external secret store in the gateway configuration and reference secrets using `{{secrets.MY_SECRET}}` for legacy secrets and camunda.secrets.MY_SECRET as the new format in your connectors and job workers.
+
+#### Coordinated leadership transfer for improved performance
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3630 -->
+
+Coordinated leadership transfer for Orchestration Clusters is introduced with this alpha.
+
+The existing rebalance endpoint asks every leader to step down at once and returns immediately, without guarantee that the intended broker wins the resulting election. The new rebalance API transfers leadership deterministically, ensuring transfer in most cases in a way that is both minimally disruptive and observable.
+
+**What's new:**
+
+- Coordinated rebalancing API: `POST /cluster/v2/rebalance` starts a rebalance, `GET /cluster/v2/rebalance` reports the cluster's balance state and the progress of each partition, and `DELETE /cluster/v2/rebalance` stops a running rebalance once the transfer in flight has finished. The endpoint requires cluster-admin credentials.
+- Deterministic transfers: Leadership is handed directly to the partition's highest-priority replica instead of being left to an open election, so a rebalance reaches the intended leader layout.
+- Minimal disruptions: Transfers are sequenced one partition at a time across the cluster, so at most one partition is affected at any moment, rather than every partition becoming leaderless simultaneously.
+- Configurable: The replication lag a desired leader is allowed to have, how long a partition may wait for that leader to catch up, and how long to wait for a leaderless partition can all be set as cluster defaults and overridden per request. When the desired leader cannot take over in time, the partition resumes under its current leader.
+- Observable:
+  - `POST /cluster/v2/rebalance?dryRun=true` returns the plan a rebalance would carry out, without pausing any partition or moving any leadership.
+  - Each partition reports how its transfer ended or why it was skipped (already led by the desired leader, replication lag too high, replication timed out, and so on), so an incomplete rebalance is can easily be diagnosed.
+
+:::important
+
+- The previous /actuator/rebalance endpoint continues to work unchanged, and is superseded by the new API.
+- There are some cases where rebalancing is still not guaranteed, notably where the desired leader is simply not available or becomes unavailable during the operation. Such cases require manual retries once the desired leader of a given partition is back online.
+
+:::
 
 #### Reference architecture for Amazon ECS
 
