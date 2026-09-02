@@ -295,17 +295,16 @@ customer data.
 
 These meters cover resolving secret references against a secret store.
 
-| Metric name                             | Type    | Description                                                                                                                                                                                                                                                                                                                                                                  | Labels                        |
-| --------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `camunda.secret.resolution.duration`    | Timer   | Latency of one batch resolution call against a secret store, covering the call itself and not the follow-up commands the engine writes for its results. Split by how the call ended, so a store timing out does not distort the latency of the calls that came back.                                                                                                         | `store`, `result` (see below) |
-| `camunda.secret.resolution.outcome`     | Counter | Number of secret reference resolutions that produced an outcome, per store. Every result value is terminal for the reference it counts, so the values can be summed or divided by one another to derive rates. A reference whose store is unavailable but still has retry attempts left is not counted at all, since it has not reached a terminal outcome.                  | `store`, `result` (see below) |
-| `camunda.secret.resolution.cycle.error` | Counter | Number of resolution cycles in which a store failed in a way the engine does not model: an unexpected exception rather than a per-secret failure or an unreachable store. Counted per store. Always indicates a bug, either in the store implementation or in the engine. Counts cycles, not references, so it is a separate meter from `camunda.secret.resolution.outcome`. | `store`                       |
+| Metric name                             | Type    | Description                                                                                                                                                                                                                                                                                                                                                                  | Labels                                                       |
+| --------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `camunda.secret.resolution.duration`    | Timer   | Latency of one batch resolution call against a secret store, covering the call itself and not the follow-up commands the engine writes for its results. Split by how the call ended, so a store timing out does not distort the latency of the calls that came back.                                                                                                         | `store`, `result` (see below), `physicalTenant`, `partition` |
+| `camunda.secret.resolution.outcome`     | Counter | Number of secret reference resolutions that produced an outcome, per store. Every result value is terminal for the reference it counts, so the values can be summed or divided by one another to derive rates. A reference whose store is unavailable but still has retry attempts left is not counted at all, since it has not reached a terminal outcome.                  | `store`, `result` (see below), `physicalTenant`, `partition` |
+| `camunda.secret.resolution.cycle.error` | Counter | Number of resolution cycles in which a store failed in a way the engine does not model: an unexpected exception rather than a per-secret failure or an unreachable store. Counted per store. Always indicates a bug, either in the store implementation or in the engine. Counts cycles, not references, so it is a separate meter from `camunda.secret.resolution.outcome`. | `store`, `physicalTenant`, `partition`                       |
+| `camunda.secret.resolution.cycle.delay` | Timer   | The delay a resolution cycle chose for the next one, tagged by why. `IDLE_BACKOFF` is the one to watch: it grows geometrically on consecutive misses, so its distribution shows directly whether that backoff is behaving as intended, rather than needing to be inferred from the cycle rate alone.                                                                         | `result` (see below), `physicalTenant`, `partition`          |
 
-The `store` label carries the ID of the secret store a reference belongs to.
+The `store` label carries the ID of the secret store a reference belongs to. `camunda.secret.resolution.cycle.delay` carries no `store` label, since a resolution cycle isn't scoped to one store. Every resolution meter also carries the `physicalTenant` and `partition` labels applied to Zeebe metrics generally.
 
-The `result` label carries different value domains depending on the meter, because
-`camunda.secret.resolution.duration` measures a whole batch call while
-`camunda.secret.resolution.outcome` measures one reference at a time:
+The `result` label carries different value domains depending on the meter:
 
 `result` values on `camunda.secret.resolution.duration`:
 
@@ -326,18 +325,27 @@ The `result` label carries different value domains depending on the meter, becau
 | `UNREADABLE`        | The store holds the reference but could not read a value from it.                                                                     |
 | `STORE_UNAVAILABLE` | The store could not serve the reference at all: either it is not configured, or it could not be reached and no retry attempt is left. |
 
+`result` values on `camunda.secret.resolution.cycle.delay` (why the cycle chose its delay, not a per-reference outcome):
+
+| Value            | Description                                                                                               |
+| ---------------- | --------------------------------------------------------------------------------------------------------- |
+| `DRAINING`       | More pending references remained than the batch cap allowed this cycle to take. The delay is always zero. |
+| `WAKE`           | This cycle resolved something, or a reference was requested since the last cycle ran.                     |
+| `IDLE_BACKOFF`   | Neither of the above, and no store is in retry cooldown.                                                  |
+| `RETRY_COOLDOWN` | Neither of the above, and a store's retry cooldown deadline set the delay instead.                        |
+
 ### Secret cache metrics
 
 Each configured secret store resolves through an in-memory cache. These meters say how well that
 cache is doing its job.
 
-| Metric name                      | Type    | Description                                                                                                                                                                                                                                                                                                                          | Labels                        |
-| -------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| `camunda.secret.cache.result`    | Counter | Number of secret cache lookups, per store and per result, so the hit rate is `HIT / (HIT + MISS)`. Every lookup is counted exactly once. A name the store answers permanently (deleted, denied, or an invalid reference) is never cached, so it misses on every lookup for as long as it is referenced. That is not a cache to tune. | `store`, `result` (see below) |
-| `camunda.secret.cache.evictions` | Counter | Number of entries removed from a secret cache, per store and per cause.                                                                                                                                                                                                                                                              | `store`, `cause` (see below)  |
-| `camunda.secret.cache.size`      | Gauge   | Estimated number of entries a secret cache currently holds, per store. Estimated because eviction is asynchronous, so the value can briefly sit above the configured maximum: read it as a level to compare against that maximum, not as an exact count.                                                                             | `store`                       |
+| Metric name                      | Type    | Description                                                                                                                                                                                                                                                                                                                          | Labels                                          |
+| -------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `camunda.secret.cache.result`    | Counter | Number of secret cache lookups, per store and per result, so the hit rate is `HIT / (HIT + MISS)`. Every lookup is counted exactly once. A name the store answers permanently (deleted, denied, or an invalid reference) is never cached, so it misses on every lookup for as long as it is referenced. That is not a cache to tune. | `store`, `result` (see below), `physicalTenant` |
+| `camunda.secret.cache.evictions` | Counter | Number of entries removed from a secret cache, per store and per cause.                                                                                                                                                                                                                                                              | `store`, `cause` (see below), `physicalTenant`  |
+| `camunda.secret.cache.size`      | Gauge   | Estimated number of entries a secret cache currently holds, per store. Estimated because eviction is asynchronous, so the value can briefly sit above the configured maximum: read it as a level to compare against that maximum, not as an exact count.                                                                             | `store`, `physicalTenant`                       |
 
-The `store` label carries the ID of the secret store whose cache this is.
+The `store` label carries the ID of the secret store whose cache this is. Every cache meter also carries `physicalTenant`, since the registry that publishes them is wrapped per tenant. None carry `partition`: a secret cache lives outside any partition.
 
 `result` values on `camunda.secret.cache.result`:
 
@@ -348,12 +356,12 @@ The `store` label carries the ID of the secret store whose cache this is.
 
 `cause` values on `camunda.secret.cache.evictions`:
 
-| Value       | Description                                                                                                                                |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `SIZE`      | The cache was full, so it dropped an entry to make room for another.                                                                       |
-| `EXPIRED`   | The entry's time-to-live elapsed.                                                                                                          |
-| `EXPLICIT`  | Something removed the entry by name. In practice, this is a store answering a name permanently (deleted, denied, or an invalid reference). |
-| `COLLECTED` | The entry's key or value was garbage collected.                                                                                            |
+| Value       | Description                                                                                                                                 |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SIZE`      | The cache was full, so it dropped an entry to make room for another.                                                                        |
+| `EXPIRED`   | The entry's time-to-live elapsed.                                                                                                           |
+| `EXPLICIT`  | Something removed the entry by name. In practice, this is a store answering a name permanently (deleted, denied, or an invalid reference).  |
+| `COLLECTED` | The entry's key or value was garbage collected. Not emitted in the current configuration: the cache uses neither weak keys nor soft values. |
 
 ### Read cache and resolution metrics together
 
@@ -371,6 +379,30 @@ resolve, the fix is not in the cache.
 [`camunda.secrets.cache.max-size`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecretscache)
 property. The bound applies per store, not as a shared budget, so the worst-case memory footprint
 across a deployment is the number of configured stores multiplied by that maximum.
+
+### Metric names in Prometheus
+
+The tables above name meters by their Micrometer meter ID. When Prometheus scrapes them, dots
+become underscores, and Micrometer appends a type suffix: `_total` for a counter, the base unit for
+a timer (plus `_count` and `_sum`; both timers here also declare fixed histogram buckets, so
+`_bucket` is always emitted for them too), and no suffix for a gauge:
+
+| Metric name                             | Prometheus metric name                          |
+| --------------------------------------- | ----------------------------------------------- |
+| `camunda.secret.resolution.duration`    | `camunda_secret_resolution_duration_seconds`    |
+| `camunda.secret.resolution.cycle.delay` | `camunda_secret_resolution_cycle_delay_seconds` |
+| `camunda.secret.resolution.outcome`     | `camunda_secret_resolution_outcome_total`       |
+| `camunda.secret.resolution.cycle.error` | `camunda_secret_resolution_cycle_error_total`   |
+| `camunda.secret.cache.result`           | `camunda_secret_cache_result_total`             |
+| `camunda.secret.cache.evictions`        | `camunda_secret_cache_evictions_total`          |
+| `camunda.secret.cache.size`             | `camunda_secret_cache_size`                     |
+
+`camunda.secret.cache.size` is the one exception with no unit suffix at all, so it stays exactly
+`camunda_secret_cache_size`. For example, the cache hit rate described above becomes:
+
+```promql
+camunda_secret_cache_result_total{result="HIT"} / ignoring(result) sum without (result) (camunda_secret_cache_result_total)
+```
 
 For how the broker resolves secret references before job activation, see
 [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
