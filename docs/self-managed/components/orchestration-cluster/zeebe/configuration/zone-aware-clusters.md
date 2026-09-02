@@ -7,6 +7,8 @@ description: "With zone awareness, a cluster distributes brokers and partition r
 
 With zone awareness, an Orchestration Cluster distributes its brokers and partition replicas across multiple zones (regions or availability zones). Spreading replicas across zones lets the cluster survive the loss of an entire zone and bias partition leadership toward a preferred zone.
 
+Zone awareness controls where the application places partition replicas among brokers. It does not control where Kubernetes schedules the broker pods themselves — on Kubernetes, also configure [topology spread constraints](/self-managed/deployment/helm/configure/pod-scheduling.md#spread-orchestration-cluster-pods-across-availability-zones) so the broker pods actually land in different zones; without it, brokers assigned to different logical zones can still be scheduled onto nodes in the same physical zone. Configure both together: topology spread constraints put each broker pod in the zone Kubernetes actually schedules it into, and zone awareness places partition replicas according to each broker's assigned zone.
+
 Zone awareness is required for topologies with three or more zones. It also simplifies managing zones: brokers are named after the zone they belong to, so you describe the topology in terms of zones rather than individual numeric node IDs.
 
 Because zones are named explicitly, zone awareness also lets you change the number of zones dynamically (for example, growing from one zone to two, or two to three), which is not possible with the legacy parity-based numbering.

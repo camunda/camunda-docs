@@ -320,6 +320,23 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize `GET /api/readyz` no longer rejects requests that carry an `Authorization` header
+
+Starting with Camunda 8.10.0-alpha5, the Optimize [health readiness endpoint](/apis-tools/optimize-api/health-readiness.md) (`GET /api/readyz`) ignores an `Authorization` header instead of rejecting the request. Previously, a request that included the header was rejected with a client error status code. It now returns the readiness status (`200` or `503`), as it does for a request without the header.
+
+This aligns the endpoint with the other public endpoints of the Orchestration Cluster, which also accept and ignore a superfluous `Authorization` header.
+
+**Action:** No action is required for Kubernetes readiness and liveness probes, as these do not send an `Authorization` header. If you have a client or monitoring check that relies on the endpoint rejecting requests that carry an `Authorization` header, update it to expect the readiness status instead.
+
+</div>
+</div>
+
 ## Connectors
 
 <div className="release-announcement-row">
@@ -417,7 +434,7 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 
 **Action:** Review your broker memory sizing before upgrading. To keep the previous behavior, explicitly set `camunda.data.primary-storage.rocksdb.memory-allocation-strategy` to `PARTITION` (environment variable `CAMUNDA_DATA_PRIMARYSTORAGE_ROCKSDB_MEMORYALLOCATIONSTRATEGY=PARTITION`). To adopt the new default, test the `FRACTION` strategy first to find the right `memory-fraction` value for your deployment.
 
-<p className="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p className="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 </div>
 </div>
@@ -437,6 +454,29 @@ This default does not apply to existing clusters. Existing clusters show data fi
 **Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
 
 <p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize Self-Managed no longer flattens object variables by default
+
+Starting with Camunda 8.10, Self-Managed Optimize no longer imports object variable values by default. Object variables are no longer flattened into per-property fields, and their raw values are no longer stored. This significantly reduces Optimize storage and CPU usage, and aligns Self-Managed with the default Camunda 8 SaaS has used for years.
+
+This change is **Self-Managed only**; SaaS is unaffected, as it already runs with this behavior disabled.
+
+- Object-heavy processes previously measured 5.9-48.8x more Optimize variable storage on Self-Managed than SaaS for identical workloads.
+- If you rely on object variable properties in reports, filters, or Raw Data Reports, opt in by setting `zeebe.includeObjectVariableValue: true` (environment variable `CAMUNDA_OPTIMIZE_ZEEBE_INCLUDE_OBJECT_VARIABLE=true`).
+- Optimize logs a `WARN` on startup whenever object variable values are not being imported. The message includes the opt-in setting.
+
+**Action:** Decide whether your Self-Managed deployment needs flattened object variables. If it does, set `zeebe.includeObjectVariableValue: true` before upgrading to 8.10.
+
+<p className="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
 
 </div>
 </div>
@@ -483,6 +523,19 @@ Camunda no longer produces the following individual component Docker images in C
 </div>
 <div className="release-announcement-content">
 
+#### Operate and Tasklist health indicators replaced by a unified schema readiness check
+
+Camunda 8.10 removes the Operate- and Tasklist-specific Elasticsearch/OpenSearch health indicators (`indicesCheck` and `searchEngineCheck`). A single `schemaReadinessCheck` now backs the gateways readiness probe; it is set once at startup, after the schema is initialized and the cluster reports green or yellow. `searchEngineStatus` reflects the current health status of Elasticsearch/OpenSearch and can be fetched via `/actuator/health` (it is not part of the readiness probe group).
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Unused PVC in Optimize is unmounted
 
 An unused volume mounted at `/camunda` in Optimize has been removed from the Helm chart. Optimize did not use this volume.
@@ -511,22 +564,53 @@ Deployment change 1 description.
 
 ## Identity
 
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
-
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Identity change 1
+#### Console and Web Modeler Admin roles gain new Hub cluster access on Self-Managed
 
-Identity change 1 description.
+Starting with Camunda 8.10, Camunda Hub replaces Console and Web Modeler. Management Identity only adds roles, applications, and permissions on startup and never removes them, so two existing Self-Managed roles automatically gain access they didn't have in 8.9 — with no role reassignment or opt-in required:
+
+- Existing `Console` role holders gain management access to Hub's cluster pages through a new `admin:clusters` permission. `DevOps` is the new name for the same access.
+- Existing `Web Modeler Admin` role holders gain full access to Hub's cluster pages too, through their existing `admin:*` permission, which now additionally reaches Hub's cluster pages — a broader grant than the Console role's management-only access. `Hub Admin` is the new name for the same access.
+
+A new `Analyst` role is also introduced: Hub modeling access, management access to the catalog's usage and adoption data, and full access to Optimize, without modeler-admin or people/org management access — the Self-Managed equivalent of the SaaS Analyst role.
+
+**Action:** If you rely on least-privilege access to cluster management, review who holds the `Console` and `Web Modeler Admin` / `Hub Admin` roles before upgrading.
+
+<p className="link-arrow">[Management Identity roles and permissions in the 8.9 to 8.10 upgrade guide](/self-managed/upgrade/components/890-to-8100.md#management-identity-roles-and-permissions)</p>
+<br />
+<p className="link-arrow">[Manage roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md)</p>
 
 </div>
-</div> -->
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### SaaS organization roles renamed and Catalog access levels introduced
+
+Starting with Camunda 8.10, SaaS organization roles are renamed to align with Camunda Hub, and Catalog access is split into two levels. These are display renames and a new access split; existing role holders keep the same effective access, with no reassignment required:
+
+- `Owner` → `Organization Owner`
+- `Admin` → `Organization Admin`
+- `Modeler` → `Member` (Member additionally gains organization and cluster read access)
+- `Analyst` stays `Analyst`.
+- `Operations Engineer` → `DevOps`, with no permission change.
+- Catalog access is now split into **Read** (Member, DevOps) and **Manage** (Analyst, Organization Admin, Organization Owner, who additionally see usage statistics and adoption data).
+
+`Developer`, `Support agent`, `Task user`, and `Visitor` are unaffected by this rename; see [manage users](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions) for their status.
+
+<p className="link-arrow">[Manage users in your organization](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions)</p>
+
+</div>
+</div>
 
 ## Modeler
 

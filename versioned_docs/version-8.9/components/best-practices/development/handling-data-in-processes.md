@@ -67,9 +67,9 @@ Camunda does not treat BPMN **data objects** (<img src="/img/bpmn-elements/data-
 
 ## Storing just the relevant data
 
-Do not excessively use process variables. As a rule of thumb, store _as few variables as possible_ within Camunda.
+Do not excessively use process variables. Process variables are subject to [size limitations](/components/concepts/variables.md#variable-size-limitation), so as a rule of thumb, store _as few variables as possible_ within Camunda.
 
-Please note the [technical limitations of variables sizes](/components/concepts/variables.md#variable-size-limitation).
+Keep this limitation in mind when designing your BPMN processes. For example, an AI agent’s context is stored in a process variable by default and counts toward this size limit. Alternatively, you can store the conversation in document storage. See [choose a memory storage backend](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-subprocess.md#choose-a-memory-storage-backend).
 
 ### Storing references only
 

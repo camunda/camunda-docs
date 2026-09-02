@@ -30,7 +30,7 @@ path: object;
 #### incidentKey
 
 ```ts
-incidentKey: IncidentKey;
+incidentKey: IncidentKeyWritable;
 ```
 
 The assigned key of the incident, which acts as a unique identifier for this incident.

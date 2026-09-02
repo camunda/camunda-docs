@@ -115,6 +115,7 @@
             "components/agentic-orchestration/evaluate-agents/test-ai-agents"
           ]
         },
+        "components/agentic-orchestration/add-tool-to-ai-agent",
         "components/agentic-orchestration/rag-ai-agents",
         "components/agentic-orchestration/choose-right-model-agentic",
         "components/agentic-orchestration/model-recommendations-agentic"
@@ -3315,7 +3316,8 @@
         "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
-        "apis-tools/migration-manuals/saas-orchestration-architecture"
+        "apis-tools/migration-manuals/saas-orchestration-architecture",
+        "apis-tools/migration-manuals/web-modeler-v1-apis"
       ]
     }
   ],
@@ -3490,6 +3492,7 @@
               "items": [
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/pod-networking",
+                "self-managed/deployment/helm/configure/pod-scheduling",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -3963,6 +3966,7 @@
     },
     {
       "Components": [
+        "self-managed/components/identity/how-identity-works",
         {
           "type": "category",
           "label": "Orchestration Cluster",
@@ -4035,7 +4039,6 @@
                 {
                   "Operation": [
                     "self-managed/components/orchestration-cluster/zeebe/operations/zeebe-in-production",
-                    "self-managed/components/orchestration-cluster/zeebe/operations/resource-planning",
                     "self-managed/components/orchestration-cluster/zeebe/operations/network-ports",
                     "self-managed/components/orchestration-cluster/zeebe/operations/setting-up-a-cluster",
                     "self-managed/components/orchestration-cluster/zeebe/operations/health",

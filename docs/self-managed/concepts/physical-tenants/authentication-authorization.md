@@ -5,11 +5,9 @@ sidebar_label: "Authentication and authorization"
 description: "Learn how identity providers, token routing, and per-tenant authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-This page explains how authentication and authorization work for Physical Tenants in Camunda 8.10 Self-Managed deployments.
+Learn how identity providers connect to Physical Tenants and how tokens are routed to the correct tenant. For the resource and permission model and cluster-wide versus tenant-local authorization, see [authorization model](./authorization-model.md).
 
-For the configuration properties used to assign identity providers to tenants, see [configuration reference](./configuration-reference.md).
-
-For how operations are authorized at the cluster and tenant level, see [authorization model](./authorization-model.md).
+For configuration properties used to assign identity providers to tenants, see [configuration reference](./configuration-reference.md).
 
 ## Centralized identity model
 
@@ -67,13 +65,13 @@ Both checks are enforced at the API security filter chain level. A token whose `
 
 ## Per-tenant authorization
 
-Roles, permissions, and mapping rules are local to each Physical Tenant — they are **not** stored or managed in the identity provider.
+Roles, permissions, and mapping rules are local to each Physical Tenant. They are **not** stored or managed in the identity provider.
 
 - Each Physical Tenant has its own roles and permission definitions.
 - Mapping rules translate IdP token claims into Camunda roles independently per tenant.
 - A user can be admin in one tenant and read-only in another, defined independently in each tenant.
 
-This means the IdP only authenticates users and supplies claims. Authorization — what a user can do within a tenant — is determined by that tenant's local mapping rules in Camunda.
+The IdP only authenticates users and supplies claims. The tenant's local mapping rules in Camunda determine what a user can do within that tenant.
 
 ## Per-tenant role and permission definitions
 
@@ -115,7 +113,7 @@ camunda:
                 - UPDATE
 ```
 
-Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant — it is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:
+Every explicitly configured Physical Tenant must declare its own `security.initialization` block when authorization is enabled for that tenant. The block is not inherited from the root configuration. Reusing the cluster-wide seed across tenants would create identical admin users and authorizations in every tenant, defeating tenant isolation. Two cases are exempt:
 
 - The **default** Physical Tenant, which keeps the top-level `camunda.security.initialization`, whether synthesized from the root or declared explicitly.
 - Any tenant with `security.authorization.enabled: false` (per-tenant override, or inherited from the root), since the initialization block only takes effect when authorization is enabled.
@@ -193,13 +191,9 @@ For example:
 
 ## Cluster-admin role
 
-:::note
-Cluster-admin role support is available starting in 8.10 alpha4. The cluster-wide operations it protects (backup, restore, topology management) are still being wired behind it and are not all complete yet.
-:::
+Cluster-wide management endpoints use the cluster-admin role. Broker startup does not fail if the role is not configured. Configure the role to restrict cluster-wide operations, such as backup, restore, and topology management, to authorized operators.
 
-Broker startup does not fail if the cluster-admin role is not configured. However, configuring the cluster-admin role is strongly recommended so that cluster-wide operations (backup, restore, topology management) can be restricted to authorized operators as cluster-wide endpoints become available.
-
-The cluster-admin role is resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service is required. Multiple mechanisms are supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for basic auth.
+The cluster-admin role is resolved from JWT token claims using configurable mapping rules. No persisted cluster-level role bindings or new cluster identity service is required. Multiple mechanisms are supported: claim-based mapping rules, a dedicated cluster-admin configuration, and explicit user assignment for Basic authentication.
 
 ## gRPC authentication
 

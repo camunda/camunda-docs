@@ -22,3 +22,16 @@ def resume_exporting_example() -> None:
 
     client.resume_exporting()
 # endregion ResumeExporting
+
+
+# region GetExportingStatus
+def get_exporting_status_example() -> None:
+    client = CamundaClient()
+
+    result = client.get_exporting_status()
+
+    # The status is aggregated over every replica of every partition, so `MIXED`
+    # means a pause or resume is still in flight or was only partially applied.
+    # Only `PAUSED` and `SOFT_PAUSED` confirm that exporting has stopped.
+    print(f"Status: {result.status}")
+# endregion GetExportingStatus

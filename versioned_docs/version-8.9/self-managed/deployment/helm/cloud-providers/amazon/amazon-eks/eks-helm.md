@@ -17,6 +17,8 @@ import NoDomainInfo from '../../\_partials/\_no-domain-info.md'
 import HelmUpgradeNote from '../../\_partials/\_helm-upgrade-note.md'
 import KubefwdTip from '../../\_partials/\_kubefwd-tip.md'
 import PortForwardServices from '../../\_partials/\_port-forward-services.md'
+import DeploymentReadinessCheck from '../../\_partials/\_deployment-readiness-check.md'
+import ZeebeGatewayNetworkPolicies from '../../\_partials/\_zeebe-gateway-network-policies.md'
 
 This guide provides a comprehensive walkthrough for installing the Camunda 8 Helm chart on your existing AWS Kubernetes EKS cluster. It also includes instructions for setting up optional DNS configurations and other optional AWS-managed services, such as OpenSearch and PostgreSQL.
 
@@ -254,7 +256,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 :::danger Exposure of the Zeebe Gateway Service
 For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+<ZeebeGatewayNetworkPolicies />
 
 :::
 
@@ -305,7 +307,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 :::danger Exposure of the Zeebe Gateway Service
 For production-grade security, keep the Zeebe Gateway on a private network (no public Ingress) and access it only from internal workloads or through a secure VPN connection. This limits the attack surface and ensures workflow and job traffic remain inside your trusted network boundary. See the [VPN module setup](./terraform-setup.md#vpn-module-setup) for guidance on establishing secure remote access to a private EKS cluster.
 
-Additionally, implement fine-grained [Kubernetes NetworkPolicies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to explicitly allow only required internal components to initiate connections to the Zeebe Gateway Service. Deny all other Ingress traffic at the network layer to reduce blast radius if another workload in the cluster is compromised.
+<ZeebeGatewayNetworkPolicies />
 
 :::
 
@@ -435,11 +437,9 @@ This command:
 
 <HelmUpgradeNote />
 
-You can track the progress of the installation using the following command:
+You can track the progress of the installation with the deployment readiness check script, which requires [jq](https://jqlang.github.io/jq/) to be installed.
 
-```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/generic/kubernetes/single-region/procedure/check-deployment-ready.sh
-```
+<DeploymentReadinessCheck download />
 
 <details>
 <summary>Understand how each component interacts with IRSA</summary>

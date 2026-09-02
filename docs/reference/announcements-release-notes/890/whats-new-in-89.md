@@ -309,7 +309,7 @@ The following usability improvements simplify collaboration and help teams keep 
 | Feature                                                                                                     | Description                                                                                                                                                                        |
 | :---------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Element templates](/components/modeler/element-templates/defining-templates.md)                            | Create templates for message, signal, and timer events, and reuse and share templates across projects to standardize message names, payloads, and timer definitions.               |
-| [Email invitations](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
+| [Email invitations](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members) | Invite new users to Web Modeler projects via email, regardless of OIDC provider, and use a consistent invitation flow across Keycloak, Entra ID, Okta, Auth0, and other providers. |
 
 ### Improved Self-Managed installation
 
@@ -386,7 +386,7 @@ This helps operations teams consolidate Camunda monitoring into existing observa
 
 You can now configure RocksDB memory on a per-broker basis instead of per-partition, simplifying capacity planning and aligning with familiar JVM-style sizing.
 
-<p class="link-arrow">[Zeebe memory allocation](/self-managed/components/orchestration-cluster/zeebe/operations/resource-planning.md#memory)</p>
+<p class="link-arrow">[Zeebe memory allocation](/components/best-practices/architecture/sizing-self-managed.md#memory)</p>
 
 ### Orchestration Cluster Identity renamed to Admin
 

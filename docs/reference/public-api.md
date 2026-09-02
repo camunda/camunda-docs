@@ -55,6 +55,8 @@ Check the API documentation before building on any alpha endpoint.
 
 The following APIs are **explicitly excluded** from the public API:
 
+- [Camunda Hub API](/apis-tools/hub-api-saas/overview.md): Manage workspaces, projects, files, folders,
+  versions, and members in Camunda Hub programmatically.
 - [Web Modeler API](/apis-tools/web-modeler-api/index.md): Used for browser-based modeling.
 - [Administration API](/apis-tools/administration-api/administration-api-reference.md): For administrative operations and system configuration.
 - [Optimize API](/apis-tools/optimize-api/overview.md): Used for analytics, reporting, and performance insights.

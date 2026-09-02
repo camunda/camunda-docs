@@ -75,23 +75,23 @@ See the [component version matrix](/reference/supported-environments.md#componen
 
 The following key changes were also released as part of an 8.8.x patch release.
 
-| Patch release                                                    | Type            | Key change                                                                                                                                            |
-| :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
-| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                                        |
-| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                                       |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
-| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
-| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
-| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Breaking change | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
-| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change          | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
+| Patch release                                                    | Type       | Key change                                                                                                                                            |
+| :--------------------------------------------------------------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                                        |
+| [8.8.34](https://github.com/camunda/camunda/releases/tag/8.8.34) | Regression | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)                                       |
+| [8.8.29](https://github.com/camunda/camunda/releases/tag/8.8.29) | Regression | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                                          |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)                                      |
+| [8.8.23](https://github.com/camunda/camunda/releases/tag/8.8.23) | Regression | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                                                |
+| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Regression | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                                               |
+| [8.8.22](https://github.com/camunda/camunda/releases/tag/8.8.22) | Change     | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                                         |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Regression | [Webhook alerts JSON format](#webhook-alerts-json-format)                                                                                             |
+| [8.8.9](https://github.com/camunda/camunda/releases/tag/8.8.9)   | Change     | [Spring Boot 4.0 support for Camunda Spring Boot Starter and Process Test ](#spring-boot-40-support-for-camunda-spring-boot-starter-and-process-test) |
 
 ### APIs & tools
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--breaking-change">Regression</span>
 </div>
 <div className="release-announcement-content">
 
@@ -145,7 +145,7 @@ You must update your clients to at least 8.7.16, as this contains the fix for th
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--breaking-change">Regression</span>
 </div>
 <div className="release-announcement-content">
 

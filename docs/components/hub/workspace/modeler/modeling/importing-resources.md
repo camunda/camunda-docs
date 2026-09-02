@@ -1,39 +1,37 @@
 ---
 id: import-resources
-title: Import resources into Web Modeler
+title: Import resources into Camunda Hub
 sidebar_label: Import resources
-description: "Learn how to import resources into Web Modeler, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors."
+description: "Learn how to import resources into Camunda Hub, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors."
 ---
 
-Learn how to import resources into Web Modeler, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors.
+Learn how to import resources into Camunda Hub, how automatic handling works for template conflicts and ignored templates, and how to troubleshoot common import errors.
 
 ## Supported import resources
 
-Using Web Modeler, you can import the following resource types into a project:
+Using Camunda Hub, you can import the following resource types into a project:
 
 - BPMN process models.
 - Forms.
 - DMN decision tables.
 - Element/connector templates.
 - Markdown files such as `README.md`.
-- Any other resource type supported by Web Modeler.
+- Any other resource type supported by Camunda Hub.
 
 ## How to add files
 
-These are the supported methods you can use to add files to Web Modeler:
+These are the supported methods you can use to add files to Camunda Hub:
 
 | Method                                                                            | Opens from                                 | Import source              | Supported resources                                                       |
 | --------------------------------------------------------------------------------- | ------------------------------------------ | -------------------------- | ------------------------------------------------------------------------- |
-| [**Import**](./preparing-resources-for-import.md)                                 | Web Modeler home page via URL              | Any publicly available URL | Any type of resource                                                      |
-| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Web Modeler project or folder page         | Camunda Marketplace only   | [Blueprints](./camunda-marketplace.md#browse-marketplace-blueprints) only |
-| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Web Modeler BPMN editor | Camunda Marketplace only   | Element templates only                                                    |
-| [**Upload files**](./import-diagram.md)                                           | Web Modeler project or folder page         | Any downloaded file        | Any type of resource                                                      |
-
-To import via a URL hosted on your Web Modeler, see [Prepare resources](./preparing-resources-for-import.md) for more information.
+| [**Import**](./preparing-resources-for-import.md)                                 | Camunda Hub `/import/resources` URL        | Any publicly available URL | Any type of resource                                                      |
+| [**Browse blueprints**](./camunda-marketplace.md#browse-marketplace-blueprints)   | Camunda Hub project or folder page         | Camunda Marketplace only   | [Blueprints](./camunda-marketplace.md#browse-marketplace-blueprints) only |
+| [**Discover connectors**](./camunda-marketplace.md#browse-marketplace-connectors) | Append menu inside Camunda Hub BPMN editor | Camunda Marketplace only   | Element templates only                                                    |
+| [**Upload files**](./import-diagram.md)                                           | Camunda Hub project or folder page         | Any downloaded file        | Any type of resource                                                      |
 
 :::important
 
-- **Import** and **Browse blueprints**: If the imported resources include at least **one BPMN**, Web Modeler treats them as a **project** and groups them accordingly.
+- **Import** and **Browse blueprints**: If the imported resources include at least **one BPMN**, Camunda Hub treats them as a **project** and groups them accordingly.
 - **Upload files** and **Discover connectors**: Always treats files as **independent files**, regardless of whether BPMN files are present.
   :::
 
@@ -41,16 +39,11 @@ To import via a URL hosted on your Web Modeler, see [Prepare resources](./prepar
 
 Element templates, including connector templates, have an associated ID, which is used to find the template when a BPMN process references it.
 
-When importing templates, Web Modeler checks for potential conflicts with existing templates already available in your project or organization. A conflict occurs when an imported template has the same ID as an existing one.
+When importing templates, Camunda Hub checks for potential conflicts with existing templates already available in your project, workspace, or organization. A conflict occurs when an imported template has the same ID as an existing one.
 
 You can resolve template conflicts using one of these two options:
 
-1. Save as copy: It creates a new file with a new, auto-generated ID.
-
-:::note
-This option is not available when importing projects.
-:::
-
+1. Save as copy: It creates a new file with a new, auto-generated ID. This option is not available when importing projects.
 2. [Replace an existing template](#replace-a-template).
 
 ### Replace a template
@@ -63,13 +56,13 @@ You can replace an existing template when:
 If an imported template **replaces** an existing template:
 
 - The **file contents** of the existing template are overwritten by the imported template.
-- Due to Web Modeler safeguards, you can only publish **higher versions** of that template in the future. Older or equal versions are blocked from publication to prevent accidentally overwriting already published versions.
+- Due to Camunda Hub safeguards, you can only publish **higher versions** of that template in the future. Older or equal versions are blocked from publication to prevent accidentally overwriting already published versions.
 
 This behavior ensures consistency for processes that already use the template, but note that historical versions cannot be republished under the same ID and version.
 
 ## Ignore templates
 
-Web Modeler ignores a template if it detects a **functionally equivalent** template already exists in your project or organization. This ensures that importing the project doesn’t break your existing setup.
+Camunda Hub ignores a template if it detects a **functionally equivalent** template already exists in your project or organization. This ensures that importing the template doesn’t break your existing setup.
 
 A template is considered functionally equivalent when, after minifying the JSON, the following fields are equal:
 
@@ -98,11 +91,11 @@ These are common reasons:
 
 - **Existing template**: A newer or equal version of the same template ID already exists, and the incoming template's contents are not available in your project.
 - **Invalid file**: The file does not conform to the expected schema. For example, malformed element template JSON.
-- **Network error**: Web Modeler could not download the file from the given URL.
+- **Network error**: Camunda Hub could not download the file from the given URL.
 - **Only one README file allowed**: You cannot add additional README files because each project allows only a single README.
-- **Too large**: The file exceeds Web Modeler’s per‑file size limit.
+- **Too large**: The file exceeds Camunda Hub’s per‑file size limit.
 - **Unknown error**: A generic error for unexpected failures.
-- **Unrecognized file**: The file type is not supported by this version of Web Modeler.
+- **Unrecognized file**: The file type is not supported by this version of Camunda Hub.
 
 ### Manually upgrade a conflicting template
 
@@ -112,8 +105,8 @@ If a project depends on a template that is being ignored or differs from your ex
    - Open the template JSON file from the import source.
    - Copy the entire template definition.
 2. Navigate to the conflicting template:
-   - In Web Modeler, open the existing template that shares the same ID and version.
-   - If you do not have access, ask your organization or project admin to open it.
+   - In Camunda Hub, open the existing template that shares the same ID and version.
+   - If you do not have access, ask your organization or workspace admin to open it.
 3. Replace the contents of the existing template with the copied JSON.
 4. Increase the `version` field to a number higher than the highest published version.
 5. Publish the updated template to the relevant project and/or organization.

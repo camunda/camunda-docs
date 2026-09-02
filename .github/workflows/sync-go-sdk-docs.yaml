@@ -1,0 +1,212 @@
+name: Sync Go SDK API Reference
+
+on:
+  schedule:
+    - cron: "0 18 * * 4" # Runs every Thursday at 6 PM UTC (1h after the Rust SDK sync)
+  workflow_dispatch:
+    inputs:
+      docs_version:
+        description: "Docs version to update (e.g. '8.10'). Leave empty for next (docs/)."
+        required: false
+        default: ""
+      sdk_ref:
+        description: "Git ref of the Go SDK repo. Ignored when docs_version is set (uses stable/<version>)."
+        required: false
+        default: "main"
+      dry_run:
+        description: "Dry run — generate docs but skip PR creation"
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  sync-go-sdk-docs:
+    runs-on: ubuntu-latest
+    env:
+      DOCS_VERSION: ${{ github.event.inputs.docs_version || '' }}
+    steps:
+      - name: Resolve refs and paths
+        id: resolve
+        run: |
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            if ! echo "$VERSION" | grep -qE '^[0-9]+\.[0-9]+$'; then
+              echo "::error::docs_version must be in X.Y format (e.g. '8.10'), got: '$VERSION'"
+              exit 1
+            fi
+            echo "sdk_ref=stable/${VERSION#*.}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=versioned_docs/version-${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-go-sdk-docs/${VERSION}" >> "$GITHUB_OUTPUT"
+            echo "version_label=${VERSION}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sdk_ref=${{ github.event.inputs.sdk_ref || 'main' }}" >> "$GITHUB_OUTPUT"
+            echo "docs_root=docs" >> "$GITHUB_OUTPUT"
+            echo "pr_branch=update-go-sdk-docs" >> "$GITHUB_OUTPUT"
+            echo "version_label=next" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout camunda-docs
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: camunda/camunda-docs
+          path: docs
+
+      - name: Checkout Go SDK
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: camunda/orchestration-cluster-api-go
+          ref: ${{ steps.resolve.outputs.sdk_ref }}
+          path: go-sdk
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+
+      # The API snapshot is produced by `cmd/docgen`, a stdlib-only program, so
+      # the toolchain pinned in the SDK's go.mod is all that is needed.
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go-sdk/go.mod
+
+      - name: Copy SDK examples for code samples
+        run: |
+          VERSION="${{ github.event.inputs.docs_version }}"
+          if [ -n "$VERSION" ]; then
+            EXAMPLES_TARGET="docs/.sdk-repos/version-${VERSION}/orchestration-cluster-api-go/examples"
+          else
+            EXAMPLES_TARGET="docs/.sdk-repos/orchestration-cluster-api-go/examples"
+          fi
+          rm -rf "$EXAMPLES_TARGET"
+          mkdir -p "$EXAMPLES_TARGET"
+          # Top-level files only: operation-map.json regions all live in the flat
+          # example files. examples/advanced/ holds runnable programs the docs
+          # site does not consume.
+          find go-sdk/examples -maxdepth 1 -type f -exec cp {} "$EXAMPLES_TARGET/" \;
+          echo "Copied Go SDK examples → $EXAMPLES_TARGET"
+
+      - name: Generate markdown docs
+        working-directory: go-sdk
+        run: make docs-md
+
+      - name: Copy docs into camunda-docs
+        run: |
+          DOCS_ROOT="docs/${{ steps.resolve.outputs.docs_root }}"
+          TARGET="$DOCS_ROOT/apis-tools/go-sdk"
+
+          # Clean previous generated docs
+          rm -rf "$TARGET"
+          rm -f "$DOCS_ROOT/apis-tools/go-sdk.md"
+          mkdir -p "$TARGET"
+
+          # Copy landing page (sibling of the directory)
+          cp go-sdk/docs-md/go-sdk.md "$DOCS_ROOT/apis-tools/go-sdk.md"
+
+          # Copy section pages + api-reference
+          cp -R go-sdk/docs-md/go-sdk/* "$TARGET/"
+
+          SECTION_COUNT=$(find "$TARGET" -maxdepth 1 -name '*.md' | wc -l | tr -d ' ')
+          API_COUNT=$(find "$TARGET/api-reference" -name '*.md' 2>/dev/null | wc -l | tr -d ' ')
+          echo "Copied landing page + ${SECTION_COUNT} section pages + ${API_COUNT} API reference files → ${{ steps.resolve.outputs.docs_root }}"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Format generated docs with Prettier
+        working-directory: docs
+        run: |
+          npm ci
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+          npx prettier --write "$DOCS_ROOT/apis-tools/go-sdk.md" "$DOCS_ROOT/apis-tools/go-sdk/"
+
+      - name: Verify SDK examples don't break docs generation
+        working-directory: docs
+        run: |
+          DOCS_VERSION="${{ steps.resolve.outputs.version_label }}"
+          DOCS_ROOT="${{ steps.resolve.outputs.docs_root }}"
+
+          if [ "$DOCS_VERSION" = "next" ]; then
+            npx docusaurus clean-api-docs camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs camunda -p api-camunda-openapi
+          else
+            npx docusaurus clean-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi || true
+            npx docusaurus gen-api-docs:version "$DOCS_VERSION" camunda -p api-camunda-openapi
+          fi
+
+          # Discard generated MDX — this step only validates, not commits
+          git checkout -- "$DOCS_ROOT/apis-tools/orchestration-cluster-api-rest/specifications/" || true
+
+      - name: Check for SDK example changes
+        working-directory: docs
+        run: |
+          if git diff --name-only | grep -q '.sdk-repos/'; then
+            echo "::notice::The SDK examples have changed. Run the Sync Camunda REST API workflow to pick up the changes for the OpenAPI documentation."
+          fi
+
+      - name: Check for changes
+        id: check_changes
+        working-directory: docs
+        run: |
+          if git diff-index --quiet HEAD; then
+            echo "No changes to commit."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@79632e33d6953d190b940ffa440bf97821cabd80
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          exportEnv: false
+          secrets: |
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_ID;
+            secret/data/products/camunda-docs/github/apps/camunda-docs-pr-automation APP_PRIVATE_KEY;
+
+      - name: Generate token
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        id: generate_token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ steps.secrets.outputs.APP_ID }}
+          private-key: ${{ steps.secrets.outputs.APP_PRIVATE_KEY }}
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.has_changes == 'true' && github.event.inputs.dry_run != 'true'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: "${{ steps.generate_token.outputs.token }}"
+          path: docs
+          title: "docs: update Go SDK API reference (${{ steps.resolve.outputs.version_label }})"
+          body: |
+            ## Description
+
+            Auto-generated PR from the [sync Go SDK docs workflow](https://github.com/camunda/camunda-docs/tree/main/.github/workflows/sync-go-sdk-docs.yaml).
+
+            Updates the Go SDK API reference documentation from [`orchestration-cluster-api-go@${{ steps.resolve.outputs.sdk_ref }}`](https://github.com/camunda/orchestration-cluster-api-go/tree/${{ steps.resolve.outputs.sdk_ref }}).
+
+            **Target:** `${{ steps.resolve.outputs.docs_root }}/apis-tools/go-sdk/api-reference/`
+
+            ## When should this change go live?
+
+            - There is **no urgency** with this change and can be released at any time.
+
+            ## PR Checklist
+
+            - My changes are in `/${{ steps.resolve.outputs.docs_root }}`.
+          branch: ${{ steps.resolve.outputs.pr_branch }}
+          commit-message: "docs: update Go SDK API reference (${{ steps.resolve.outputs.version_label }})"
+          labels: "component:docs"
+  notify-failure:
+    needs:
+      - sync-go-sdk-docs
+    if: failure() || (success() && fromJSON(github.run_attempt) > 1)
+    uses: ./.github/workflows/notify-failure.yml
