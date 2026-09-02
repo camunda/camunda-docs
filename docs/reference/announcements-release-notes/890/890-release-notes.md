@@ -547,7 +547,7 @@ Camunda 8.9 expands Web Modeler with broader event template support, email-based
 
 <ul>
   <li><span class="link-arrow">[Element templates in Modeler](/components/modeler/element-templates/defining-templates.md)</span></li>
-  <li><span class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</span></li>
+  <li><span class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</span></li>
   <li><span class="link-arrow">[Embedded web server](/versioned_docs/version-8.9/self-managed/upgrade/components/880-to-890.md#embedded-web-server)</span></li>
 </ul>
 
@@ -1367,7 +1367,7 @@ As a Self-Managed administrator, you can now invite users to Web Modeler project
 
 This enables faster project provisioning and a consistent administrator experience across identity providers.
 
-<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</p>
 
 ### Orchestration Cluster
 

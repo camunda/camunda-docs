@@ -1679,7 +1679,7 @@ You can now invite users who have not yet logged in to Web Modeler by entering t
 
 Inviting the entire organization only applies to users who have logged in at least once.
 
-<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</p>
 
 </div>
 </div>
