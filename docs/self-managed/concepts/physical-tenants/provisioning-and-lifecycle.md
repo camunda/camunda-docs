@@ -64,7 +64,7 @@ Each of these transitions takes effect through the same rolling restart used for
 
 ### Logically remove a disabled tenant
 
-A disabled tenant still appears in the cluster topology, which blocks operations that require every tenant to be accounted for, such as multi-region failover.
+A disabled tenant still appears in the persisted cluster topology, which blocks operations that require every tenant to be accounted for, such as multi-region failover.
 
 An actuator endpoint logically removes a tenant that you have already removed from configuration. It drops the tenant from the cluster topology and **deletes no data**. This is not a delete API, and it is not a way to reclaim storage. To remove a tenant's data, act on its schema, indices, or document store directly in the backend.
 
