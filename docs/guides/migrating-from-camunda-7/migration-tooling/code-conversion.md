@@ -32,7 +32,7 @@ This guide covers tools and approaches to help with code conversion:
 Additionally, you will find information about:
 
 - [Diagram Converter](#diagram-converter) for BPMN, DMN, and Camunda 7 form conversion
-- [Complete migration example](#example-adjusting-a-spring-boot-application) showing all tools in action
+- [Complete migration example](#example-adjust-a-spring-boot-application) showing all tools in action
 
 ### Choose your migration approach
 
