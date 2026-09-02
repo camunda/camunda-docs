@@ -365,7 +365,7 @@ You can upload `.form` files in the web interface or include them in a local CLI
 Form findings are included in the same analysis reports as BPMN and DMN findings. The web interface provides a read-only form preview. The CLI scans `.form` files in local directories, and `--check` analyzes forms without exporting converted form files.
 
 :::note
-Generated Task Forms are not static `.form` files, so the Diagram Converter does not process them. The [Camunda migration agent skill](./index.md#agentic-migration) handles them during agentic migration by creating or adapting a standard Camunda 8 form and linking it from the converted BPMN. Unsupported validation rules and ambiguous behavior remain review items.
+Generated task forms are not static `.form` files, so the Diagram Converter does not process them. The [Camunda migration agent skill](./index.md#agentic-migration) handles them during agentic migration by creating or adapting a standard Camunda 8 form and linking it from the converted BPMN. Unsupported validation rules and ambiguous behavior remain review items.
 :::
 
 ## Extend the conversion logic
