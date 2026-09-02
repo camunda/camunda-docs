@@ -8,7 +8,7 @@ description: "Learn about the available migration tools."
 Camunda is invested in supporting and easing your migration from Camunda 7 to Camunda 8 with migration tools. You can use them in two ways:
 
 - **[Agentic migration](#agentic-migration)** (recommended): An AI coding agent orchestrates diagram conversion, form migration, and code refactoring automatically, so you can focus on reviewing changes and rearchitecting your solution.
-- **[Manual migration](#migration-tools)**: Run the individual tools yourself for full control or to handle specific migration tasks independently.
+- **[Manual migration](#manual-migration)**: Run the individual tools yourself for full control or to handle specific migration tasks independently.
 
 All tools are available as **ready-to-use builds** from the [GitHub releases page](https://github.com/camunda/camunda-7-to-8-migration-tooling/releases).
 

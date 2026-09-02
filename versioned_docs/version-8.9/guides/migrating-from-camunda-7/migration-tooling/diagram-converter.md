@@ -8,7 +8,7 @@ description: "Learn how to use the Diagram Converter to analyze and convert Camu
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-With **Diagram Converter**, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 BPMN, DMN, and Camunda Form files (`.form`) and generates a list of tasks required for the migration.
+With **Diagram Converter**, you'll get an initial understanding of the migration tasks you'll need to perform when moving from Camunda 7 to Camunda 8. It analyzes Camunda 7 BPMN, DMN, and Camunda 7 form definition files (`.form`) and generates a list of tasks required for the migration.
 
 In a second step, it can also convert these files from the Camunda 7 format to the Camunda 8 format. For example, it updates namespaces, renames XML properties, and updates form metadata, if needed.
 
