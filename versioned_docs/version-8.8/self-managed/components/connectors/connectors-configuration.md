@@ -451,15 +451,16 @@ The secret filter restricts connectors to resolving only the secrets they declar
 
 ### How the allow-list is built
 
-Every field you configure in a connector's properties panel is implemented as a Zeebe input mapping under the hood, whether it's an authentication field or a functional field like an email body, an HTTP header, or a query parameter. If any of these fields contains a literal `{{secrets.NAME}}` reference, `NAME` is added to that connector element's allow-list.
+Every field you configure in a connector's properties panel is implemented as a Zeebe input mapping under the hood, whether it's an authentication field or a functional field like an email body, an HTTP header, or a query parameter. If a field contains a literal `{{secrets.NAME}}` reference, the filter allow-lists `NAME` for that specific field, identified by its field path — not for the connector element as a whole.
 
-The allow-list is built once per element, from the deployed BPMN model, by scanning the literal text of that element's own fields for `{{secrets.NAME}}` references:
+The allow-list is built once per element, from the deployed BPMN model, by scanning the literal text of that element's own fields for `{{secrets.NAME}}` references and recording which field each reference belongs to:
 
 - **It's static, not dynamic.** The filter looks at what's literally written in the model, not at what a process variable resolves to at runtime. If a secret value already resolved by one connector task later flows into a different task's field as a plain process variable (for example, `= myVariable`), that's just data at that point. There's no `{{secrets.*}}` placeholder left for the filter to check, so the filter has no say over it either way.
-- **It's per element, not per field.** The allow-list merges every field on a connector element into one shared list for that element — it isn't scoped to the specific field that declared a secret. If any field on a task references `{{secrets.NAME}}`, every field on that *same* task can resolve `NAME`, including a field whose own modeled text never mentions it, if that field's runtime value happens to contain the literal text `{{secrets.NAME}}` (for example, because it evaluates a process variable crafted to contain that string).
-- **It's per element, not per process.** That allow-list does not extend to *other* tasks. A secret referenced only on task A never becomes available to task B: task B's allow-list is built only from task B's own fields, so the same text arriving at task B stays unresolved unless task B also references `NAME` itself.
+- **It's scoped to the field, not just the element.** A secret declared on one field (for example, `authentication.password = {{secrets.AUTH}}`) doesn't become resolvable on a *different* field of the same task, such as an email body. If that other field's runtime value happens to contain the literal text `{{secrets.AUTH}}` — for example, because it evaluates a process variable crafted to contain that string — the filter checks it against that field's own allow-list entry, not `authentication.password`'s, and leaves it unresolved.
+- **One exception: fields the model itself chains together.** If one field's FEEL expression assigns from a name that another field's expression also references (for example, `url = baseUrl + "/path"`, where `baseUrl` is itself another input on the same element), the secret declared on the first field is also allowed on the second — the model author's own expressions connect them. This is still resolved statically, from the deployed model's FEEL expressions, not from arbitrary runtime process-variable content.
+- **It's still per element, not per process.** A secret referenced only on task A never becomes available to task B: task B's allow-list is built only from task B's own fields.
 
-This is the gap the filter closes: previously, a connector resolved any `{{secrets.NAME}}` pattern present in its runtime input, regardless of where that text came from. Now it only resolves names it declared itself, at modeling time.
+This closes the gap an element-wide allow-list would leave open: declaring a secret anywhere on a task no longer makes it resolvable from every field on that task — only from the field it was declared on (and fields the model explicitly chains to it).
 
 :::note
 For inbound connectors, the allow-list comes from data already held in memory on the deployed element, so there's no remote lookup that can fail. As a result, `LAX` and `STRICT` behave identically for inbound connectors: both enforce the allow-list unconditionally. The distinction between `LAX` and `STRICT` described below only affects outbound connectors, where building the allow-list requires a lookup against the process definition.
@@ -526,15 +527,15 @@ The secret filter caches process definition lookups to avoid repeated API calls.
 - Keep the mode at `STRICT` (the default) in production environments. Reserve `LAX` for cases where a temporary process definition API outage must not block connector jobs, and reserve `DISABLED` for troubleshooting only.
 - Reference only the secrets a connector task actually needs in its input mappings. A task with fewer secrets in its input mappings has a smaller allow-list, which limits what that task can resolve even when its other input values come from untrusted process variables.
 - Scope secrets narrowly, for example one API key per integration or tenant, instead of reusing a single broad-access secret across multiple connector tasks.
-- Avoid pairing a field that references a sensitive secret with another field on the *same* task that evaluates untrusted or attacker-influenced process-variable content. The allow-list is shared across all of a task's fields, so a secret declared anywhere on that task can be resolved by any of its fields. If a task must process untrusted input, keep it on a separate task that doesn't reference the secret.
-- The runtime still enforces the allow-list automatically between *different* tasks: you don't need to design BPMN diagrams defensively to stop one task from resolving a secret that only some other task declares.
+- You don't need to design BPMN diagrams defensively to keep a secret out of a task's other fields. The runtime enforces the allow-list per field: a secret declared on one field of a task isn't resolvable from a different field on that same task, or from a different task, unless the model itself chains them together with a FEEL expression.
 
 ### Troubleshooting a secret that stops resolving under STRICT
 
 If a secret that previously resolved now comes back unresolved, or the connector job fails, under `STRICT` mode, check the following:
 
 - For outbound connectors, the element has a Modeler element template. The secret filter derives an outbound task's allow-list from its element template; tasks without one, or with an unsupported element type, are treated as declaring no secrets and deny all resolution under `STRICT`.
-- The secret is referenced in that task's input mapping, using the `{{secrets.NAME}}` syntax.
+- The secret is referenced in that task's input mapping, using the `{{secrets.NAME}}` syntax, and in the same field where you expect it to resolve. A reference declared on one field doesn't resolve on a different field, unless the model chains the two fields together with a FEEL expression.
+- The `{{secrets.NAME}}` reference sits inside a JSON string, like any other field value. An unquoted placeholder on a non-string field (for example, `"count": {{secrets.MAX}}`) is never substituted.
 - The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
 
 If you need to keep jobs processing while you investigate, switch to `LAX` temporarily. It falls back to allowing all secrets when the process definition lookup fails.
