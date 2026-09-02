@@ -331,20 +331,9 @@ Converted files can be downloaded via the web interface or generated via the CLI
 
 ## Convert Camunda 7 forms
 
-The Diagram Converter supports Camunda 7 form definitions stored as `.form` files.
+The Diagram Converter also supports Camunda 7 form definition files (`.form`). You can upload forms in the web interface or include them in a local CLI conversion to update them for Camunda 8. The web interface provides a form preview, and the converter reports items that need review.
 
-You can upload `.form` files in the web interface or include them in a local CLI conversion. For each form, the converter:
-
-- Updates `executionPlatform` to `Camunda Cloud` and sets `executionPlatformVersion` to the selected target version.
-- Converts exact simple JUEL variable references such as `${customerName}` or `#{customerName}` in component properties to FEEL, for example `= customerName`.
-- Leaves complex expressions, interpolation, method calls, and Camunda 7 execution context references unchanged and reports them for manual migration.
-- Preserves the form schema version and deprecated component properties because changing them without schema-aware migration could alter form behavior.
-
-Form findings are included in the same analysis reports as BPMN and DMN findings. The web interface provides a read-only form preview. The CLI scans `.form` files in local directories, and `--check` analyzes forms without exporting converted form files.
-
-:::note
-Generated task forms are not static `.form` files, so the Diagram Converter does not process them. The [Camunda migration agent skill](./index.md#agentic-migration) handles them during agentic migration by creating or adapting a standard Camunda 8 form and linking it from the converted BPMN. Unsupported validation rules and ambiguous behavior remain review items.
-:::
+For generated task forms, use the [Camunda migration agent skill](./index.md#agentic-migration), which creates or adapts a standard Camunda 8 form during the agentic migration flow.
 
 ## Extend the conversion logic
 
