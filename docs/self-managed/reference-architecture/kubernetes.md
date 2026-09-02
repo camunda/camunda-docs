@@ -40,10 +40,10 @@ For common issues and mitigation strategies, refer to the [deployment troublesho
 
 ## Architecture
 
-The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-web-modeler-and-console) explains the distinction between these components:
+The [reference architecture overview](/self-managed/reference-architecture/reference-architecture.md#orchestration-cluster-vs-camunda-hub) explains the distinction between these components:
 
 - **Orchestration Cluster**: Core process execution engine (Zeebe, Operate, Tasklist, Admin) with tightly integrated components (Optimize, Connectors).
-- **Web Modeler, Console, and Management Identity**: Management and design tools (Web Modeler, Console, Management Identity) for modeling and deploying diagrams, and monitoring the health of orchestration clusters.
+- **Camunda Hub and Management Identity**: Management and design tools for modeling and deploying diagrams and monitoring the health of orchestration clusters.
 
 See the reference architecture for details on how these components communicate.
 
@@ -101,8 +101,8 @@ For high availability, we recommend a minimum of **four Kubernetes nodes** to en
 
 While Deployments and StatefulSets in Kubernetes can scale independently of physical hardware, four nodes are typically required to support:
 
-- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist and Admin)
-- Other Camunda 8 components (Web Modeler, Management Identity, Console, Optimize)
+- The default three-node Orchestration Cluster (incl. Zeebe, Operate, Tasklist, and Admin)
+- Other Camunda 8 components (Camunda Hub, Management Identity, and Optimize)
 
 Depending on your specific use case, you may need to scale **horizontally** (more nodes) or **vertically** (larger nodes) to meet resource requirements.
 
@@ -145,7 +145,7 @@ Also included in this namespace are components that are tightly integrated with 
 As shown in the [architecture diagram](#camunda-hub), this namespace contains:
 
 - [Camunda Hub](/components/hub/index.md) — modeling and administrative capabilities
-- [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Web Modeler, Console, Optimize
+- [Management Identity](/self-managed/components/management-identity/overview.md) — centralized access control for Camunda Hub and Optimize
 
 This namespace also requires an OIDC-compatible Identity Provider (IdP) for Management Identity. You can use any compatible provider (for example, Keycloak deployed via the [Keycloak Operator](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#keycloak-deployment) or Microsoft Entra ID).
 
@@ -154,7 +154,7 @@ The choice of identity provider is highly specific to each organization's securi
 :::
 
 :::warning Identity separation
-Console, Optimize, and Web Modeler rely on Management Identity (formerly Identity). This service is separate from the embedded Admin in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
+Optimize and Camunda Hub rely on Management Identity (formerly Identity). This service is separate from the embedded Admin in the Orchestration Cluster and incompatible with it. To share the same user base and API clients across both, you must use OIDC.
 :::
 
 For configuration details, see:
@@ -204,12 +204,11 @@ Networking is largely managed through services and load balancers. The following
 
 - Stable, high-speed connection
 - Firewall rules for:
-  - `80`: Web UI (Console, Management Identity, Web Modeler, and IdP if co-located)
+  - `80`: Web UI (Management Identity, Hub, and IdP if co-located)
   - `82`: Metrics (Management Identity)
   - `8080`: REST/Web UI (Connectors, Orchestration Cluster)
-  - `8091`: Management (Web Modeler)
+  - `8091`: Management (Hub)
   - `8092`: Management (Optimize)
-  - `9100`: Management (Console)
   - `9600`: Management (Orchestration Cluster)
   - `26500`: gRPC endpoint
   - `26501`: Gateway-to-broker
@@ -260,7 +259,7 @@ The following databases are required:
 | Database                         | Requirement                                                                                        |
 | :------------------------------- | :------------------------------------------------------------------------------------------------- |
 | Document-store secondary storage | Required by Orchestration Cluster and Optimize in this topology (Elasticsearch/OpenSearch).        |
-| PostgreSQL                       | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
+| PostgreSQL                       | Required by Management Identity and Camunda Hub. Also required by Keycloak if deployed in-cluster. |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.

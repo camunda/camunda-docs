@@ -27,7 +27,7 @@ For this in the context of a running AI agent, see [add your first tool](/guides
 
 ## Add an element inside the ad-hoc sub-process
 
-1. Open your process in [Web Modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
+1. Open your process in [Camunda Hub](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md).
 1. Click inside the ad-hoc sub-process to enter it.
 1. Add a new task element. You can use any BPMN element as a tool, including service tasks, script tasks, user tasks, and sub-processes.
 1. Apply the appropriate connector or task type. For example:
@@ -153,7 +153,7 @@ Whichever approach you use, the following applies:
 See [AI-generated parameters via `fromAi`](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#ai-generated-parameters-via-fromai) for more details, including parameter types, optional parameters, and JSON Schema constraints.
 
 :::note
-Modeler provides [modeling guidance](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md) that flags malformed `fromAi()` calls as you model. In Web Modeler, you can also [autofill a starter `fromAi()` call](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#autofill-a-fromai-input) into a blank input.
+Modeler provides [modeling guidance](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md) that flags malformed `fromAi()` calls as you model. In the Camunda Hub modeler, you can also [autofill a starter `fromAi()` call](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#autofill-a-fromai-input) into a blank input.
 :::
 
 ## Return the result as `toolCallResult`
@@ -164,7 +164,7 @@ At runtime, each tool call produces one `toolCallResult`. The ad-hoc sub-process
 
 :::note
 Modeler provides [modeling guidance](/components/modeler/reference/modeling-guidance/rules/agent-tool-output-key.md) that flags tools that do not set a result or set it under the wrong variable name.
-In Web Modeler, you can also [autofill the `toolCallResult` output](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#autofill-a-toolcallresult-output).
+In the Camunda Hub modeler, you can also [autofill the `toolCallResult` output](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#autofill-a-toolcallresult-output).
 :::
 
 How you set `toolCallResult` depends on the BPMN element type that implements your tool. For example, a connector task exposes a dedicated [result expression](/components/connectors/use-connectors/index.md#result-expression) field, a regular task uses [output mappings](/components/concepts/variables.md#output-mappings), and a script task uses a dedicated result variable. Use the approach that matches your tool's element type:

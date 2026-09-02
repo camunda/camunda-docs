@@ -230,5 +230,6 @@ If YAML and environment variables are used together, use the same normalized ten
 - [Physical Tenant isolation model](./index.md)
 - [Provisioning and lifecycle](./provisioning-and-lifecycle.md)
 - [Multi-tenancy overview](../multi-tenancy/index.md)
+- [Cluster admin](/components/admin/cluster-admin.md) for configuring access to cluster-wide operations
 
 :::
