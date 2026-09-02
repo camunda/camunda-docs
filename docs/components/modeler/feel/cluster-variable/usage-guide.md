@@ -78,6 +78,19 @@ For example:
 camunda.vars.env.API_BASE_URL + "/api/v" + camunda.vars.env.API_VERSION + "/resource"
 ```
 
+### Resolve secret references in a cluster variable
+
+References in a [`SECRET_REFERENCE`-kind](./data-types.md#variable-kinds) cluster variable are resolved only when the variable is read by an input mapping on an element that creates a job for a job worker, such as a service task. In the other contexts on this page, including gateway conditions, script tasks, output mappings, and call activity input, the variable resolves to its stored value, so the reference text reaches your process unchanged.
+
+The following rules apply to an input mapping that reads a `SECRET_REFERENCE`-kind variable:
+
+- The mapping source must be a FEEL expression. A static value, written without a leading `=`, is a plain string and holds no reference.
+- A trailing field path narrows what is resolved. `= camunda.vars.env.MY_VAR.a.b` resolves only the references stored inside the `a.b` part of the value.
+- If the variable does not exist, or if its kind is `JSON`, nothing is resolved and no incident is raised.
+- Execution listener and task listener jobs never carry resolved values, even when the element they run on has such an input mapping.
+
+Resolution happens at job activation, on the same path as a reference written directly into an input mapping. For what this means for when a job reaches a worker, see [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+
 ## Access using FEEL expressions
 
 You can reference cluster variables anywhere Camunda Modeler supports FEEL expressions.

@@ -72,6 +72,35 @@ camunda.vars.env.CONFIG_KEY.nested → null (trying to access property on string
 
 Tenant scope has higher priority and returns a string, so the global object is never evaluated. Accessing properties on a string yields null.
 
+### Kind collisions across scopes
+
+It happens when the same key is defined at both scopes with a different [variable kind](./data-types.md#variable-kinds).
+
+#### Scenario
+
+```
+GLOBAL: { API_CREDENTIALS: "camunda.secrets.PAYMENT_API_KEY" }  (kind SECRET_REFERENCE)
+TENANT: { API_CREDENTIALS: "camunda.secrets.PAYMENT_API_KEY" }  (kind JSON)
+```
+
+#### Result
+
+When an input mapping on a service task reads the key:
+
+```
+camunda.vars.env.API_CREDENTIALS
+→ the literal text "camunda.secrets.PAYMENT_API_KEY" (TENANT wins, kind JSON)
+
+camunda.vars.cluster.API_CREDENTIALS
+→ the resolved secret value (GLOBAL, kind SECRET_REFERENCE)
+```
+
+#### Why this happens
+
+Tenant scope has higher priority, so `camunda.vars.env` selects the tenant variable, and only that variable's kind is considered. A `JSON`-kind value is ordinary text, so its references are not resolved. The global variable's references are reachable only through `camunda.vars.cluster`, which bypasses tenant scope.
+
+To avoid this, give a key the same kind at every scope where you define it.
+
 ### Detailed collision example
 
 #### Scenario
