@@ -77,9 +77,10 @@ applyTo: "**/*.md"
 
 ### Agentic orchestration
 
-Agentic orchestration and AI-driven development are native to Camunda and are no longer presented as key features. Apply this checklist to any page edit that could plausibly mention AI agents, agentic orchestration, or agent-related concepts:
+Agentic orchestration and AI-driven development are native to Camunda. Apply this checklist to any page edit that could plausibly mention AI agents, agentic orchestration, or agent-related concepts:
 
 - **Native framing**: Don't force a mention. Agent-driven work uses the same engine, governance, and BPMN elements as any other process. Never imply the whole product is AI-driven.
+- **Example selection**: When a page needs an illustrative example, scenario, or use case, consider whether an AI agent is a natural fit as one of the actors, and prefer that framing over a purely human/fixed-step example when it's equally illustrative. Applies both when writing a new example and when reviewing content that adds one. Don't override native framing to force this; skip it if an agent-involved example would feel invented for that page.
 - **Plain language**: Avoid marketing or positioning language.
 - **Link, don't duplicate**: Link to the [glossary](/reference/glossary.md) or the [agentic orchestration overview](/components/agentic-orchestration/agentic-orchestration-overview.md) instead of re-explaining a concept already defined there.
 
