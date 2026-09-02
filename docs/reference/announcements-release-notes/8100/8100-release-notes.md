@@ -57,7 +57,7 @@ Agent tool configuration assistance helps you more easily configure your agent t
 :::note
 
 - Changes are explicit, apply only when the correction is deterministic, and can be undone.
-- Configuration assistance is only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process.
+- Configuration assistance is only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You may need to [update an element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this feature.
 
 :::
 
