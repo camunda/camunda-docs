@@ -9,11 +9,11 @@ The Camunda Helm chart exposes an `appProtocols` value per component that sets t
 
 ## `appProtocol` per Service port
 
-Each component's `service.appProtocols` value accepts a map of port name to `appProtocol` value. It's empty by default and doesn't change existing behavior until you set it.
+Each component's `service.appProtocols` value accepts a map of logical port key to `appProtocol` value. It's empty by default and doesn't change existing behavior until you set it.
 
-The following components support `appProtocols` (the accepted port names for each component are listed in the last column):
+The following components support `appProtocols` (the accepted logical port keys for each component are listed in the last column). These keys are fixed and don't change if you override a component's `*Name` value (for example, `orchestration.service.grpcName`) — always use the logical key (`grpc`), not the renamed Service port. Setting a key outside the accepted list fails the Helm render instead of being silently ignored.
 
-| Component              | Value key                                    | Accepted port names                                 |
+| Component              | Value key                                    | Accepted logical port keys                          |
 | ---------------------- | -------------------------------------------- | --------------------------------------------------- |
 | Orchestration cluster  | `orchestration.service.appProtocols`         | `management`, `internal`, `command`, `http`, `grpc` |
 | Console                | `console.service.appProtocols`               | `http`, `management`                                |
