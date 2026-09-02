@@ -166,7 +166,7 @@ Leaving **one** zone undeployed is always safe from three zones upward, because 
 
 ## Region failure and recovery
 
-Losing one region out of three or more removes one replica of every partition. The remaining replicas still form a majority, so Zeebe elects new leaders where needed and **keeps processing**. No Zeebe action is required to restore processing, which is the property this architecture exists for.
+Losing one region out of three or more removes one replica of every partition. The remaining replicas still form a majority, so the cluster keeps its quorum and **no operator step is required to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue; partitions led elsewhere are unaffected.
 
 Two things still need attention.
 
@@ -175,6 +175,24 @@ Two things still need attention.
 **Client traffic.** Route clients away from the lost region.
 
 Recovery is the reverse and has no restore step: redeploy the region, and its brokers replay from the surviving replicas exactly as they would after a node restart. For the step-by-step procedure, see [Multi-Region RDBMS operational procedure](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md).
+
+### Recovery objectives {#recovery-objectives}
+
+Neither objective is zero, and neither is a property of the architecture alone.
+
+**Data loss depends on which store you mean.** The engine's own state loses nothing: Raft commits a record only once a majority of its replicas hold it, so with one replica per zone and three zones a commit needs two, and losing one zone always leaves at least one replica that has the record.
+
+Secondary storage is different, because the database replicates asynchronously. An unplanned promotion loses whatever had not reached the standby. What brings that back to zero is not the database but Camunda: with [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) enabled, Zeebe holds back log compaction until the database acknowledges, so the lost records are replayed from the Zeebe log. That guarantee costs disk, because the retained log segments grow with the replication lag. Size the disk for it and monitor it.
+
+**Recovery time is not zero either**, even though no operator step is needed to resume processing. Three things take time:
+
+| What                      | Why it takes time                                                                                                                                                                                                         |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Raft re-election          | Partitions whose leader was in the lost zone have no leader until the cluster detects the failure and elects a new one. They do not process during that window.                                                           |
+| Client traffic rerouting  | The gateway in the lost region is unreachable. Clients pointed at it fail until you reroute them, which is your traffic management, not Camunda's.                                                                        |
+| Database writer promotion | If the writer was in the lost region, exporting stops until a surviving member is promoted. The engine keeps processing, but the APIs and web applications that read secondary storage serve stale data until it resumes. |
+
+Skewing partition leadership to the writer's zone makes the first of these worse in one specific case: losing that zone loses most partition leaders at once, so more partitions re-elect simultaneously. That is the price of avoiding an inter-region round trip on every export flush, and it is worth knowing which zone you made expensive to lose.
 
 ### Removing a lost zone
 
