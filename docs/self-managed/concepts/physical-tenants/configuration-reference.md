@@ -102,7 +102,7 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints. Most validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting. Secret store and cache validation (see **Secrets** below) is the exception: it throws an `IllegalStateException` or an `IllegalArgumentException` directly instead. There is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
+At startup, configuration validation enforces tenant-level constraints, and any failure prevents the cluster from starting. Most validation failures throw a `UnifiedConfigurationException`; secret store and cache validation (see **Secrets** below) is the exception, throwing an `IllegalStateException` or an `IllegalArgumentException` directly instead. Either way, there is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
 Known constraints and behavior for 8.10:
 

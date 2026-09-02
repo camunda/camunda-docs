@@ -30,11 +30,7 @@ The scheduler then works through the references that are still pending:
 
 Resolution records carry no secret values. Only the store's cache holds a value, and only for as long as its cache entry lives.
 
-A cached value expires a fixed time after it is written, regardless of when it was last read. The store can also evict the value earlier if its cache is full. If the value is no longer cached when the broker tries to activate a job, the broker parks the job and resolves the reference again. This re-resolution also makes rotated secrets available to workers without a restart. The cache lifetime and size are configured per store under `camunda.secrets.cache`.
-
-<!-- The cache configuration (camunda.secrets.cache.ttl, camunda.secrets.cache.max-size) is owned
-by camunda/camunda#60331. Link its cache section here once it lands, instead of restating the
-defaults. -->
+A cached value expires a fixed time after it is written, regardless of when it was last read. The store can also evict the value earlier if its cache is full. If the value is no longer cached when the broker tries to activate a job, the broker parks the job and resolves the reference again. This re-resolution also makes rotated secrets available to workers without a restart. The cache lifetime and size are configured per store under [`camunda.secrets.cache`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecretscache).
 
 Two kinds of failure are treated differently:
 
