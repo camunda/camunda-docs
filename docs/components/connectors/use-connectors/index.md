@@ -17,7 +17,7 @@ New to modeling with Camunda? The steps below assume some experience with Camund
 
 ## Using credentials
 
-Some connectors support [credentials](./credentials/index.md), which store the authentication information a connector needs to reach an external service. Create a credential once, then select it on any connector task that supports it, instead of configuring the same authentication settings in every diagram.
+Some connectors let you select a [credential](/components/hub/organization/credentials/index.md) instead of entering authentication and connection settings directly on the task. Create the credential once in Camunda Hub, [Desktop Modeler](/components/hub/organization/credentials/desktop-modeler.md), or [Web Modeler](/components/hub/organization/credentials/web-modeler.md), then select it on any connector task that supports it.
 
 ## Using secrets
 

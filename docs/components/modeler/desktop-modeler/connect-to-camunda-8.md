@@ -6,8 +6,6 @@ description: "Set up a connection from Desktop Modeler to Camunda 8 Orchestratio
 
 To deploy diagrams, start process instances, or test tasks, you must first connect Desktop Modeler to a Camunda 8 Orchestration Cluster. Follow the steps below to connect to **Camunda 8 SaaS**. To connect to a local installation, visit the [Camunda 8 Self-Managed guide](../../../self-managed/components/modeler/desktop-modeler/connect-to-self-managed.md).
 
-The credentials on this page authenticate Desktop Modeler itself. To authenticate an individual connector task, see [configure credentials in Desktop Modeler](../../connectors/use-connectors/credentials/desktop-modeler.md).
-
 1. Click the connection selector. For new installations, this will show **No connection**. If you have previously selected a connection, it will show the name of that connection.
 
    ![No connection button in status bar](./img/connection-selector-offline.png)
@@ -22,7 +20,7 @@ The credentials on this page authenticate Desktop Modeler itself. To authenticat
 
    ![Connection manager showing add button](./img/connection-manager-add.png)
 
-4. Enter a name, the cluster URL, and the credentials (client ID and client secret) for your [API client](../../hub/organization/manage-clusters/manage-api-clients.md). Optionally enter the tenant ID.
+4. Enter a name, the cluster URL, and the cluster credentials (client ID and client secret) for your [API client](../../hub/organization/manage-clusters/manage-api-clients.md). Optionally enter the tenant ID.
 
    ![Connection manager with new connection information filled in](./img/connection-manager-new-connection-loading.png)
 
