@@ -113,7 +113,7 @@ If a project depends on a template that is being ignored or differs from your ex
    - Copy the entire template definition.
 2. Navigate to the conflicting template:
    - In Web Modeler, open the existing template that shares the same ID and version.
-   - If you do not have access, ask your organization or project admin to open it.
+   - If you do not have access, ask your organization or workspace admin to open it.
 3. Replace the contents of the existing template with the copied JSON.
 4. Increase the `version` field to a number higher than the highest published version.
 5. Publish the updated template to the relevant project and/or organization.

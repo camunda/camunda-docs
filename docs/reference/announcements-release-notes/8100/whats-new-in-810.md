@@ -50,7 +50,7 @@ New SaaS clusters include a default `business_` variable include filter, which l
 
 ## Web Modeler data
 
-On 29 August 2026, your Web Modeler data will receive three updates:
+On 29 August 2026, your Web Modeler data received three updates:
 
 - **[Organizational structure](#organizational-structure):** Enforces a stricter, more scalable file resource hierarchy.
 - **[Data migration](#data-migration):** Aligns your existing data with the new structure.
@@ -58,7 +58,7 @@ On 29 August 2026, your Web Modeler data will receive three updates:
 
 ### Organizational structure
 
-In Camunda 8.9, a project can contain process applications, folders, and files. Camunda 8.10 introduces a new file resource hierarchy in which projects only contain process applications. Everything else, including files, folders, and IDP application content, is stored inside a process application.
+In Camunda 8.9, a project can contain process applications, folders, and files. Camunda 8.10 introduces a new file resource hierarchy in which projects only contain process applications and IDP applications. Files and folders are stored inside process applications.
 
 For example, if this is what your data looks like in 8.9:
 
