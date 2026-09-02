@@ -91,9 +91,13 @@ Use **Cancel run** to handle BPMN-side cancellation or a boundary timer.
 For a multi-task job, **Get run output** requires an individual task's `run_id` from `tasks[].run_id` in the terminal **Get run** response. Do not use the top-level `run_id` returned by **Run job now**, as Databricks accepts only a single task's run ID.
 :::
 
-### Avoid duplicate job runs
+### Avoid duplicate writes on retry
 
-The template defaults to 3 retries. A retried **Run job now** call would otherwise start the job twice, so set **Idempotency token** to a value that remains stable for each process instance. Databricks then returns the existing run instead of starting a new one.
+**Execute statement** and **Run job now** are non-idempotent, so **Retries** defaults to `0`. A retry would otherwise resend the identical request. The SQL Statement Execution API has no idempotency key at all, so for **Execute statement** the only mitigation is leaving **Retries** at `0`.
+
+**Run job now** does accept one: set **Idempotency token** to a value that remains stable for each process instance, and Databricks returns the existing run instead of starting a new one — but only once you've set it.
+
+It's safe to raise **Retries** on read-only operations, such as **Get run**, **Get warehouse**, or **Get statement status and result**.
 
 ### Start a warehouse before execution
 
@@ -103,11 +107,49 @@ To control this explicitly, call **Start warehouse** and poll **Get warehouse** 
 
 **Start warehouse** and **Stop warehouse** return immediately and do not wait for the state transition to finish.
 
-## Handle SQL statement failures
+### Raise the job timeout for slow calls
 
-The Databricks SQL Statement Execution API returns HTTP 200 with `status.state = FAILED` when a statement fails at the warehouse, so a plain HTTP success check is not enough. The template ships a default error expression that raises a BPMN error for the terminal failure states `FAILED`, `CANCELED`, and `CLOSED`. `PENDING` and `RUNNING` are deliberately not treated as errors because they mean the statement is still executing.
+Model Serving allows up to 597 seconds of model execution — well beyond SQL's own `wait_timeout`, which is capped at 50 seconds.
 
-Job run outcomes are not covered by that expression. A failed run is reported in `state.result_state` on **Get run**, and polling loops normally branch on it with a gateway rather than throwing. Add `state.result_state` to the error expression if you want a failed run to also raise a BPMN error.
+If **Job timeout** stays at its default while **Read timeout in seconds** is raised to cover a slow Model Serving call, Zeebe can decide the job timed out and reactivate it on another worker while the first HTTP request is still in flight. This is a duplicate non-idempotent call that **Retries** = `0` does not prevent, because it happens outside the connector entirely. Raise both settings together.
+
+### Provide the required vector search inputs
+
+**Query index** always needs **Columns**, plus exactly one of **Query text** or **Query vector** — which one depends on the index type. Supplying columns alone passes template validation, but the API rejects the request.
+
+## Handle statement and job outcomes
+
+The Databricks SQL Statement Execution API returns HTTP 200 with `status.state = FAILED` when a statement fails at the warehouse, so a plain HTTP success check is not enough. The terminal states are:
+
+| State       | Meaning                                                                                                         |
+| ----------- | --------------------------------------------------------------------------------------------------------------- |
+| `SUCCEEDED` | Execution successful, result available for fetch.                                                               |
+| `FAILED`    | Execution failed; the reason is in `status.error.message`.                                                      |
+| `CANCELED`  | Cancelled explicitly, or by `on_wait_timeout=CANCEL`.                                                           |
+| `CLOSED`    | **Success.** Execution was successful and the statement is closed; the result is no longer available for fetch. |
+
+`PENDING` and `RUNNING` are not terminal — they mean the statement is still executing, and you must poll the result with **Get statement status and result**.
+
+Branch on the state with a gateway rather than an error expression. Map the state into a variable with the **Result expression**, then route on it with an exclusive gateway:
+
+```
+Result expression:
+=response.body.status.state
+
+Gateway conditions:
+=result = "FAILED"                        -> error handling path
+=result = "CANCELED"                      -> cancellation path
+=result = "PENDING" or result = "RUNNING" -> poll loop (Get statement status and result)
+(default, i.e. SUCCEEDED or CLOSED)       -> continue
+```
+
+Routing everything except `FAILED`/`CANCELED` to `(default)` treats a still-running statement as complete, so the `PENDING`/`RUNNING` branch matters whenever `wait_timeout` is `0s`, or `CONTINUE` on a timeout.
+
+:::note
+This template ships with no default error expression. An error expression is evaluated against the mapped output, not the raw response, so once **Result variable** or **Result expression** is set — the normal way to use this task — an expression written against `response.body.status.state` sees `response.body` as `null` and never fires. A failed statement would then complete as a success. Use the gateway pattern above instead.
+:::
+
+Job run outcomes work the same way. A failed run is reported in `state.result_state` on **Get run**, available only once `state.life_cycle_state` is terminal. Map it out and branch on it with the same gateway pattern.
 
 ## Partner telemetry
 
