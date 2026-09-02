@@ -96,6 +96,14 @@ All AWS connectors are updated to use AWS SDK for Java v2.
 
 This ensures Camunda AWS connector implementations are using supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
 
+#### Observability improvements
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3019 -->
+
+Release notes required.
+
 #### Storage connector improvements
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
@@ -107,34 +115,7 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 - These connectors now support direct object creation from variables and better content extraction for document references.
 - You can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store. Documents with incorrect content-types can be read using conversion options (for example, "read as text", "read as JSON").
 
-#### Connector observability improvements
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3019 -->
-
-Release notes required.
-
 ### Helm chart deployment
-
-#### IRSA Document store support
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3388 -->
-
-Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA) with the AWS S3 document store:
-
-- You can deploy Camunda 8 on Amazon EKS with the document store configured for S3 without providing static AWS credentials.
-- The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
-- Existing deployments using static AWS keys can migrate to IRSA following documented steps.
-
-Refer to the updated Helm configuration and secret management documentation for:
-
-- Enabling IRSA for new EKS deployments using the AWS document store.
-- Safely migrating existing deployments from static AWS keys to IRSA.
-
-<p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
 
 #### Helm migration and validation tool
 
@@ -159,6 +140,25 @@ Use the tool to:
   - Can validate an existing 8.10 values file (for example, one drafted by hand or by an AI tool) against Camunda’s migration rules.
 
 The CLI is non‑interactive, with clear exit codes and optional JSON output, making it suitable for humans using the command line, CI pipelines, and AI agents (for example, Claude Code, Copilot) that can use it as part of an automated migration workflow.
+
+#### IRSA Document store support
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3388 -->
+
+Camunda 8 Self‑Managed now supports using IAM Roles for Service Accounts (IRSA) with the AWS S3 document store:
+
+- You can deploy Camunda 8 on Amazon EKS with the document store configured for S3 without providing static AWS credentials.
+- The Helm chart no longer requires AWS access keys when IRSA is in use and allows pods to rely solely on their IAM role for S3 access.
+- Existing deployments using static AWS keys can migrate to IRSA following documented steps.
+
+Refer to the updated Helm configuration and secret management documentation for:
+
+- Enabling IRSA for new EKS deployments using the AWS document store.
+- Safely migrating existing deployments from static AWS keys to IRSA.
+
+<p class="link-arrow">[Camunda Helm chart](/self-managed/deployment/helm/index.md)</p>
 
 #### REST API, RDBMS, and Document Store support for physical tenants
 
@@ -300,7 +300,7 @@ C8Run / local development: Inject secrets via environment variables, following s
 
 V1 supports existing connector secret formats. To get started, configure your external secret store in the gateway configuration and reference secrets using `{{secrets.MY_SECRET}}` for legacy secrets and camunda.secrets.MY_SECRET as the new format in your connectors and job workers.
 
-#### Coordinated leadership transfer for improved performance
+#### Coordinated leadership transfer
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
