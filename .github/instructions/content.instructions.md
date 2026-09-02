@@ -75,17 +75,15 @@ applyTo: "**/*.md"
 - Write "Elasticsearch" as one word (not "ElasticSearch" or "Elastic search").
 - Write "GitHub" with a capital H (not "Github").
 
-### Agentic orchestration: "definition of woven" checklist
+### Agentic orchestration
 
-Camunda positions agentic orchestration as native to the product, not a bolted-on feature. Apply this checklist to any page edit that could plausibly mention AI agents, agentic orchestration, or agent-related concepts:
+Agentic orchestration and AI-driven development are native to Camunda and are no longer presented as key features. Apply this checklist to any page edit that could plausibly mention AI agents, agentic orchestration, or agent-related concepts:
 
 - **Native framing**: Don't force a mention. Agent-driven work uses the same engine, governance, and BPMN elements as any other process. Never imply the whole product is AI-driven.
-- **Plain language**: No marketing or positioning language. Match terms exactly to `docs/reference/glossary.md`. Match the page's altitude — business-level pages stay conceptual; product-level pages can distinguish native vs. external agents.
+- **Plain language**: Avoid marketing or positioning language.
 - **Link, don't duplicate**: Link to the [glossary](/reference/glossary.md) or the [agentic orchestration overview](/components/agentic-orchestration/agentic-orchestration-overview.md) instead of re-explaining a concept already defined there.
-- **Review gate**: PRs touching agent-related content need a PM/engineering accuracy review in addition to the technical writing review, and a check that the change isn't parroting a marketing campaign angle.
-- Never conflate **"agentic orchestration"** (Camunda's hybrid model, combining fixed process steps with agent-driven ones) with **"agent orchestration"** (coordination between multiple LLM-based agents). Avoid "enterprise agentic automation" or "EAA" — this term is being phased out.
 
-Terminology sources of truth: the [Agent Terminology Model](https://github.com/camunda/product-development/blob/main/strategy/decisions/2026-06-23-agent-terminology-model.md) and the Handbook AI and Agentic Orchestration Glossary. `docs/reference/glossary.md` is the in-repo mirror of both — check it before introducing or changing an agent-related term.
+Terminology sources of truth: the [Agent Terminology Model](https://github.com/camunda/product-development/blob/main/strategy/decisions/2026-06-23-agent-terminology-model.md) and the Handbook AI and Agentic Orchestration Glossary. `docs/reference/glossary.md` is the in-repo mirror of both; check it before introducing or changing an agent-related term.
 
 ## 6. AI-ready content
 
