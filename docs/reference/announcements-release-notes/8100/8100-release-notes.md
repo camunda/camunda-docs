@@ -81,7 +81,7 @@ The new Camunda visual design system is introduced with this alpha for Self-Mana
 - The new design system is enabled by default in Self-Managed for Web Modeler, Console and Operate.
 
 :::note
-The new design system model will be introduced for SaaS deployments with the 8.10 minor release.
+The new design system will be introduced for SaaS deployments with the 8.10 minor release.
 :::
 
 ### Connectors
@@ -310,15 +310,13 @@ Coordinated leadership transfer for Orchestration Clusters is introduced with th
 
 The existing rebalance endpoint asks every leader to step down at once and returns immediately, without guarantee that the intended broker wins the resulting election. The new rebalance API transfers leadership deterministically, ensuring transfer in most cases in a way that is both minimally disruptive and observable.
 
-**What's new:**
-
-- Coordinated rebalancing API: `POST /cluster/v2/rebalance` starts a rebalance, `GET /cluster/v2/rebalance` reports the cluster's balance state and the progress of each partition, and `DELETE /cluster/v2/rebalance` stops a running rebalance once the transfer in flight has finished. The endpoint requires cluster-admin credentials.
-- Deterministic transfers: Leadership is handed directly to the partition's highest-priority replica instead of being left to an open election, so a rebalance reaches the intended leader layout.
-- Minimal disruptions: Transfers are sequenced one partition at a time across the cluster, so at most one partition is affected at any moment, rather than every partition becoming leaderless simultaneously.
-- Configurable: The replication lag a desired leader is allowed to have, how long a partition may wait for that leader to catch up, and how long to wait for a leaderless partition can all be set as cluster defaults and overridden per request. When the desired leader cannot take over in time, the partition resumes under its current leader.
-- Observable:
-  - `POST /cluster/v2/rebalance?dryRun=true` returns the plan a rebalance would carry out, without pausing any partition or moving any leadership.
-  - Each partition reports how its transfer ended or why it was skipped (already led by the desired leader, replication lag too high, replication timed out, and so on), so an incomplete rebalance is can easily be diagnosed.
+| Feature                     | Description                                                                                                                                                                                                                                                                                                                                                             |
+| :-------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Coordinated rebalancing API | `POST /cluster/v2/rebalance` starts a rebalance, `GET /cluster/v2/rebalance` reports the cluster's balance state and the progress of each partition, and `DELETE /cluster/v2/rebalance` stops a running rebalance once the transfer in flight has finished. The endpoint requires cluster-admin credentials.                                                            |
+| Deterministic transfers     | Leadership is handed directly to the partition's highest-priority replica instead of being left to an open election, so a rebalance reaches the intended leader layout.                                                                                                                                                                                                 |
+| Minimal disruptions         | Transfers are sequenced one partition at a time across the cluster, so at most one partition is affected at any moment, rather than every partition becoming leaderless simultaneously.                                                                                                                                                                                 |
+| Configurable                | The replication lag a desired leader is allowed to have, how long a partition may wait for that leader to catch up, and how long to wait for a leaderless partition can all be set as cluster defaults and overridden per request. When the desired leader cannot take over in time, the partition resumes under its current leader.                                    |
+| Observable                  | `POST /cluster/v2/rebalance?dryRun=true` returns the plan a rebalance would carry out, without pausing any partition or moving any leadership. Each partition reports how its transfer ended or why it was skipped (already led by the desired leader, replication lag too high, replication timed out, and so on), so an incomplete rebalance can be diagnosed easily. |
 
 :::important
 
