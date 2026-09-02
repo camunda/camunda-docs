@@ -35,7 +35,7 @@ The results are available as:
 In the following sections, you'll learn how to:
 
 - [Install the Diagram Converter](#install-the-diagram-converter)
-- [Analyze your diagrams using the web interface](#analyze-your-diagrams-using-the-web-interface)
+- [Analyze your diagrams and forms using the web interface](#analyze-your-diagrams-using-the-web-interface)
 - [Download JSON analysis results](#download-json-analysis-results)
 - [Use the CLI](#use-the-cli)
 - [Convert your diagrams](#convert-your-diagrams)
