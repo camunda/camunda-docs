@@ -44,6 +44,10 @@ Zone awareness is configured only under `orchestration.multiregion`. The `mode`,
 
 Existing deployments keep their behavior: when you don't set `mode`, the chart renders exactly as it did before zone awareness existed.
 
+## The mode is fixed for the life of the cluster
+
+Zoned brokers are identified by the composite `<zone>_<index>` and legacy brokers by a number, so switching `mode` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other. Choose the mode when you create the cluster. To move an existing cluster onto zone awareness, deploy a new one.
+
 ## Describe the topology
 
 In `zoned` mode, set the local zone and list every zone in the cluster:
@@ -95,11 +99,9 @@ The chart generates initial contact points only for a single-zone cluster, becau
 
 Contact points matter only while the cluster bootstraps. Once brokers have found each other, membership gossip carries new members, so a broker joining later does not need to appear in anyone's list.
 
-## Legacy keys are rejected in zoned mode
+## A single zone is still one cluster
 
-`orchestration.multiregion.regions` and `orchestration.multiregion.regionId` belong to the legacy numbering and cannot be combined with `zoned` mode. The chart fails the render when either carries a non-default value, that is, `regions` other than `1` or `regionId` other than `0`.
-
-Helm values give no reliable way to tell an explicitly supplied default from the chart default, so the chart rejects only non-default values and leaves the default-valued keys inert. Neither key is removed or renamed, and both keep working in `legacy` mode.
+Zone awareness with one zone describes a single cluster that biases partition leaders toward a preferred availability zone. The chart treats it as one cluster throughout: it generates the initial contact points, as described above, and it keeps the Optimize exporter that a cluster spread over several zones has to give up. Adding a second zone is what makes the deployment spread.
 
 ## Custom application configuration is not merged
 
@@ -109,13 +111,22 @@ The chart still injects `CAMUNDA_CLUSTER_ZONE` into the pod environment, because
 
 ## What the chart validates
 
-The chart checks only what it needs to render a correct topology:
+The chart rejects the inputs that would otherwise render a cluster that cannot form:
 
-- `orchestration.multiregion.zone` is set.
-- `orchestration.multiregion.zone` names one of the entries in `orchestration.multiregion.zones`.
-- Each `zones` entry declares `name`, `numberOfBrokers`, `numberOfReplicas`, and `priority`, with broker and replica counts of at least `1` and a non-negative priority.
+| Rejected                                                                                        | Why                                                                                                                                        |
+| :---------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
+| `zone` or `zones` set while `mode` is not `zoned`                                               | The topology would be ignored and the cluster would come up single-region with no bootstrap peers.                                         |
+| `zone` unset, or naming a zone absent from `zones`                                              | The release would take the broker IDs of the first zone and collide with it.                                                               |
+| A zone name that repeats                                                                        | Zone names are member ID prefixes, so a duplicate collapses two zones into one identity space.                                             |
+| A zone with more `numberOfReplicas` than `numberOfBrokers`                                      | A zone cannot hold more replicas of a partition than it has brokers to hold them.                                                          |
+| `orchestration.clusterSize` or `orchestration.replicationFactor` that contradicts the zone list | Both are derived from the zone list in zoned mode, so a stale value would be discarded in silence. Restating the derived total is allowed. |
+| `regions` or `regionId`                                                                         | They belong to the legacy numbering that zone awareness replaces.                                                                          |
 
-The application owns the semantic checks the chart cannot make, including duplicate zone names, replica counts against the resulting partition distribution, topology totals, and zone constraints.
+The schema also requires each `zones` entry to declare `name`, `numberOfBrokers`, `numberOfReplicas`, and `priority`, with counts of at least `1` and a non-negative priority.
+
+The last two are rejected only when they carry a non-default value. Helm gives no reliable way to tell a value you supplied from the chart default, so a key that happens to equal its default stays inert rather than failing the render. None of them is removed or renamed, and all keep working in `legacy` mode.
+
+The application owns the checks the chart cannot make from values alone, including replica counts against the resulting partition distribution and the remaining zone constraints.
 
 ## Related resources
 

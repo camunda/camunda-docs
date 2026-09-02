@@ -95,17 +95,17 @@ Following this guide gives you:
 
 The default topology uses three regions and three zones:
 
-| Setting                          | Default                                  | Meaning                                 |
-| :------------------------------- | :--------------------------------------- | :-------------------------------------- |
-| Regions                          | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                   |
-| Zone names                       | `london`, `paris`, `zurich`              | One zone per region                     |
-| `orchestration.multiregion.mode` | `zoned`                                  | Zone-aware partitioning                 |
-| `numberOfBrokers` per zone       | `2`                                      | Brokers deployed in that zone           |
-| `numberOfReplicas` per zone      | `1`                                      | One replica of every partition per zone |
-| `orchestration.clusterSize`      | `6`                                      | Sum of `numberOfBrokers` across zones   |
-| Replication factor               | `3`                                      | Sum of `numberOfReplicas` across zones  |
-| `orchestration.partitionCount`   | `6`                                      | One partition per broker                |
-| Database regions                 | Slots `0` and `1`                        | Aurora members, writer first            |
+| Setting                          | Default                                  | Meaning                                                                 |
+| :------------------------------- | :--------------------------------------- | :---------------------------------------------------------------------- |
+| Regions                          | `eu-west-2`, `eu-west-3`, `eu-central-2` | London, Paris, Zurich                                                   |
+| Zone names                       | `london`, `paris`, `zurich`              | One zone per region                                                     |
+| `orchestration.multiregion.mode` | `zoned`                                  | Zone-aware partitioning                                                 |
+| `numberOfBrokers` per zone       | `2`                                      | Brokers deployed in that zone                                           |
+| `numberOfReplicas` per zone      | `1`                                      | One replica of every partition per zone                                 |
+| `orchestration.clusterSize`      | `6`                                      | Sum of `numberOfBrokers` across zones; the zone list is what derives it |
+| Replication factor               | `3`                                      | Sum of `numberOfReplicas` across zones                                  |
+| `orchestration.partitionCount`   | `6`                                      | One partition per broker                                                |
+| Database regions                 | Slots `0` and `1`                        | Aurora members, writer first                                            |
 
 Brokers are identified as `<zone>_<index>`, so `paris_1` is the second broker in the Paris zone. The zone list is identical in every region; only `orchestration.multiregion.zone` and the advertised host differ.
 
