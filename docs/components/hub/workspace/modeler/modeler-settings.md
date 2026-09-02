@@ -1,26 +1,25 @@
 ---
 id: modeler-settings
-title: Web Modeler settings
-description: Configure email notifications and project deployment policies in the Web Modeler settings.
+title: Camunda Hub modeler settings
+description: Configure email notifications and project deployment policies in the Camunda Hub modeler settings.
 ---
 
-import WebModelerSettings from './img/web-modeler-settings/web-modeler-settings.png'
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-Navigate to the Web Modeler settings by clicking on your user icon in the top right corner of the Web Modeler and selecting **Settings**. Here, you can configure email notifications and the project deployment policy.
-
-<img src={WebModelerSettings} alt="Web Modeler settings" />
+Navigate to the modeler settings in Camunda Hub by clicking on your user icon in the top right corner of the Camunda Hub and selecting **Settings**. Here, you can configure email notifications and the project deployment policy.
 
 ## Email notifications
 
-Configure the projects for which you will receive email notifications when a collaborator mentions you in a comment.
+Configure the workspaces for which you will receive email notifications when a member mentions you in a comment:
 
-To do this, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Here under **Email notifications**, toggle on or off the options to receive email notifications when you are mentioned in a comment for all projects and new projects.
+1. In Camunda Hub, in the top right corner, click the user icon
+2. Select **Settings**.
+3. Under **Email notifications**, toggle the options to receive email notifications when you are mentioned in a comment.
 
 ## Project deployment
 
-Organization admins can configure the deployment policy for projects in the Web Modeler settings.
+Organization admins can configure the deployment policy for projects in the Camunda Hub modeler settings.
 
 <Tabs groupId="deployment-permissions" defaultValue="saas" queryString values={
 [
@@ -30,35 +29,35 @@ Organization admins can configure the deployment policy for projects in the Web 
 
 <TabItem value='saas'>
 
-By default, only [organization administrators](/components/hub/organization/manage-members/manage-users.md) can deploy projects to clusters marked as
-[production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Web Modeler.
+By default, only [organization administrators](/components/hub/organization/manage-users/manage-users.md) can deploy projects to clusters marked as
+[production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Camunda Hub.
 
-You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
+You can change this in the **Project deployment** settings:
 
-Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
-after a collaborator has reviewed and approved the project version using the
-[project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
+1. In Camunda Hub, in the top right corner, click the user icon
+2. Select **Settings**.
+3. Under **Project deployment settings**, you can permit non-admin users with deployment permissions to deploy project snapshots to production stage clusters after a workspace member has reviewed and approved the project snapshot using the [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
+
 This setting can only be configured by organization admins and applies to all projects in the organization.
 
 </TabItem>
 
 <TabItem value='self-managed'>
 
-By default, only users with the **Web Modeler Admin** role can deploy projects to
-clusters marked as [production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Web Modeler.
+By default, only users with the **Hub Admin** role can deploy projects to clusters marked as [production stages](/components/hub/workspace/manage-projects/deploy-project.md#deployment-stages) from Camunda Hub.
 
-You can change this in the **Project deployment** settings. To get there, select the top right **Open Settings** user icon in Web Modeler and click **Settings**. Then, select **Project deployment**.
+You can change this in the **Project deployment** settings:
 
-Here, you can permit non-admin users with deployment permissions to deploy project versions to production stage clusters
-after a collaborator has reviewed and approved the project version using the
-[project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
-This setting can only be configured by users with the **Web Modeler Admin** role and applies to all projects.
+1. In Camunda Hub, in the top right corner, click the user icon
+2. Select **Settings**.
+3. Under **Project deployment settings**, you can permit non-admin users with deployment permissions to deploy project snapshots to production stage clusters after a workspace member has reviewed and approved the project snapshot using the [project review](/components/hub/workspace/manage-projects/project-versioning.md#request-a-review) feature.
 
-If the **Web Modeler Admin** role is not pre-existing, it can be created with the following permissions:
+This setting can only be configured by users with the **Hub Admin** role and applies to all projects in the organization.
 
-- Web Modeler Internal API - `write:*`
-- Web Modeler Internal API - `admin:*`
-- Web Modeler Internal API - `admin:*`
+If the **Hub Admin** role doesn't exist, you can create it with the following permissions:
+
+- Hub Internal API - `write:*`
+- Hub Internal API - `admin:*`
 - Camunda Identity Resource Server - `read:users`
 
 Refer to the documentation pages about [assigning roles](../../../../self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
@@ -68,6 +67,6 @@ Refer to the documentation pages about [assigning roles](../../../../self-manage
 </Tabs>
 
 :::info
-The deployment policy applies only to deployments of **projects** made from Web Modeler.
+The deployment policy applies only to deployments of **projects** made from Camunda Hub.
 Deployments made from Desktop Modeler and deployments of single BPMN files, for example, are not affected by this setting.
 :::

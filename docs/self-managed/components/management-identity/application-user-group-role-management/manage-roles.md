@@ -20,17 +20,18 @@ Management Identity includes a set of default roles that are available out-of-th
 
 The following table lists the default roles and their descriptions. `Web Modeler`/`Web Modeler Admin` and `Hub`/`Hub Admin` grant identical permissions, as do `Console` and `DevOps`. See [Management Identity roles and permissions](../../../upgrade/components/890-to-8100.md#management-identity-roles-and-permissions) in the 8.9 to 8.10 upgrade guide for why both names exist:
 
-| Name                | Description                                                                                                 |
-| :------------------ | :---------------------------------------------------------------------------------------------------------- |
-| Default user role   | The role does not grant any permissions by default. It is applied to all users, including service accounts. |
-| Management Identity | Provides full access to [Management Identity](../overview.md).                                              |
-| Console             | Grants management access to Hub's cluster pages, without modeler-admin or people/org management access.     |
-| DevOps              | Grants management access to Hub's cluster pages, without modeler-admin or people/org management access.     |
-| Optimize            | Grants full access to [Optimize](../../optimize/overview.md).                                               |
-| Web Modeler         | Grants access to Hub for creating and collaborating on projects.                                            |
-| Web Modeler Admin   | Grants full access to Hub, including all projects and the ability to manage collaborators.                  |
-| Hub                 | Grants access to Hub for creating and collaborating on projects.                                            |
-| Hub Admin           | Grants full access to Hub, including all projects and the ability to manage collaborators.                  |
+| Name                | Description                                                                                                                                                                                                                                    |
+| :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default user role   | The role does not grant any permissions by default. It is applied to all users, including service accounts.                                                                                                                                    |
+| Management Identity | Provides full access to [Management Identity](../overview.md).                                                                                                                                                                                 |
+| Console             | Grants management access to Hub's cluster pages, without modeler-admin or people/org management access.                                                                                                                                        |
+| DevOps              | Grants management access to Hub's cluster pages, without modeler-admin or people/org management access.                                                                                                                                        |
+| Analyst             | Grants access to Hub for creating and collaborating on projects, management access to the catalog's usage and adoption data, and full access to [Optimize](../../optimize/overview.md), without modeler-admin or people/org management access. |
+| Optimize            | Grants full access to [Optimize](../../optimize/overview.md).                                                                                                                                                                                  |
+| Web Modeler         | Grants access to Hub for creating and collaborating on projects.                                                                                                                                                                               |
+| Web Modeler Admin   | Grants full access to Hub, including all projects and the ability to manage workspace members.                                                                                                                                                 |
+| Hub                 | Grants access to Hub for creating and collaborating on projects.                                                                                                                                                                               |
+| Hub Admin           | Grants full access to Hub, including all projects and the ability to manage workspace members.                                                                                                                                                 |
 
 ## Add a role
 

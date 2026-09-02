@@ -127,7 +127,9 @@ curl -L 'http://localhost:8080/v2/jobs/activation' \
 }'
 ```
 
-A lease is required because the conversation history you report is fenced to a single job activation. Items reported under a superseded lease are discarded instead of committed, so a retried activation can't interleave its history with the previous attempt. See [activate jobs](/apis-tools/orchestration-cluster-api-rest/specifications/activate-jobs.api.mdx) for the full activation response.
+A lease is required because the conversation history you report is fenced to a single job activation. Items reported under a superseded lease are discarded instead of committed, so a retried activation can't interleave its history with the previous attempt.
+
+See [activate jobs](/apis-tools/orchestration-cluster-api-rest/specifications/activate-jobs.api.mdx) for the full activation response, and [job leasing](/components/concepts/job-workers.md#job-leasing) for how the lease is enforced, the permanent lease-only caveat, and fleet guidance.
 
 ## Step 3: Create the agent instance
 

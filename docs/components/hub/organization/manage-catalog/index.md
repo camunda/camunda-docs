@@ -12,6 +12,7 @@ In this section, you learn how to:
 
 - [Set up a Git repository](/components/hub/organization/manage-catalog/getting-started.md) for storing, approving, and publishing catalog assets.
 - [Manage the asset lifecycle](/components/hub/organization/manage-catalog/manage-asset-lifecycle.md), including unpublishing and deleting assets.
+- [Track catalog asset usage](/components/hub/organization/manage-catalog/track-asset-usage.md) to find outdated assets and the projects that still use them.
 - [Consolidate templates](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) from multiple repositories before syncing.
 
 Delivery teams [discover published assets and apply them](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md) when modeling business processes.

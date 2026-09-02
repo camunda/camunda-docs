@@ -1,20 +1,20 @@
 ---
-id: configure-multi-tenancy
-sidebar_label: Multi-tenancy
-title: Configure multi-tenancy in Helm chart
-description: "Learn how to configure multi-tenancy in Camunda 8."
+id: configure-logical-tenants
+sidebar_label: Logical Tenants
+title: Configure Logical Tenants in Helm chart
+description: "Learn how to configure Logical Tenants, the lightweight tenant-ID based multi-tenancy model, in Camunda 8."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
 :::note
-This page describes **logical tenants**, the lightweight tenant-ID based isolation model. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
+This page describes Logical Tenants, the lightweight tenant-ID based multi-tenancy model. For strong physical isolation of separate teams or organizations within a single cluster, see [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md).
 :::
 
-Multi-tenancy lets you isolate users, data, and workloads across tenants (for example, business units, departments, or customers) within the same Camunda 8 cluster. This ensures separation while reducing infrastructure overhead by running multiple tenants on a shared installation.
+Logical Tenants let you isolate users, data, and workloads across tenants (for example, business units, departments, or customers) within the same Camunda 8 cluster. This ensures separation while reducing infrastructure overhead by running multiple tenants on a shared installation.
 
-This page explains how to configure multi-tenancy in both Management Identity and [Orchestration Cluster Admin](/self-managed/components/orchestration-cluster/admin/overview.md). It also shows the defaults, how to enable or enforce tenant checks, and how to resolve common issues.
+This page explains how to configure Logical Tenants in both Management Identity and [Orchestration Cluster Admin](/self-managed/components/orchestration-cluster/admin/overview.md). It also shows the defaults, how to enable or enforce tenant checks, and how to resolve common issues.
 
 ## Prerequisites
 
