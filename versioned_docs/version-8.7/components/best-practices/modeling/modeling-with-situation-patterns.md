@@ -29,11 +29,11 @@ We still stay optimistic. Therefore, the process again passively waits for the s
 
 **Evaluation:**
 
-- 👍 This solution explicitly shows how the two steps of this escalation are performed. Timers are modeled separately, followed by their corresponding escalation activities.
+- This solution explicitly shows how the two steps of this escalation are performed. Timers are modeled separately, followed by their corresponding escalation activities.
 
-- 👎 The usage of separate event-based gateways leads to _duplication_ (for example, of the receiving message events) and makes the model _larger_, even more so in case multiple steps of escalation need to be modeled.
+- The usage of separate event-based gateways leads to _duplication_ (for example, of the receiving message events) and makes the model _larger_, even more so in case multiple steps of escalation need to be modeled.
 
-- 👎 During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fortunately, Camunda 8 introduced [message buffering](/components/concepts/messages.md#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda 7, the message might get lost until we are at the second event-based gateway.
+- During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fortunately, Camunda 8 introduced [message buffering](/components/concepts/messages.md#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda 7, the message might get lost until we are at the second event-based gateway.
 
 :::note
 You might want to use that pattern when modeling _simple two phase escalations_. You should not execute it on Camunda 7.
@@ -53,11 +53,11 @@ We choose by means of an exclusive gateway to make a _first step of escalation_:
 
 **Evaluation:**
 
-- 👍 This model is a more _compact_ and more _generic_ modeling solution to the situation. If it comes to multiple steps of escalation, you will need such an approach to avoid huge diagrams.
+- This model is a more _compact_ and more _generic_ modeling solution to the situation. If it comes to multiple steps of escalation, you will need such an approach to avoid huge diagrams.
 
-- 👎 The solution is _less explicit_. We could not choose to label the timer with explicit durations, as a single timer is used for both durations. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two step escalation, this method of modeling is less suitable.
+- The solution is _less explicit_. We could not choose to label the timer with explicit durations, as a single timer is used for both durations. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two step escalation, this method of modeling is less suitable.
 
-- 👎 During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fortunately, Camunda 8 introduced [message buffering](/components/concepts/messages.md#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda 7, the message might get lost until we are at the second event-based gateway.
+- During the time we need to remind the dealer, we are strictly speaking not in a position to receive the goods! According to the BPMN specification, a process can handle a message event only if it is ready to receive at exactly the moment it occurs. Fortunately, Camunda 8 introduced [message buffering](/components/concepts/messages.md#message-buffering), allowing to execute this model properly without loosing messages. Using Camunda 7, the message might get lost until we are at the second event-based gateway.
 
 :::note
 You might want to use that pattern when modeling _escalations with multiple steps_. You should not execute it on Camunda 7.
@@ -81,11 +81,11 @@ However, in case this does not happen within a reasonable time, we trigger a _se
 
 **Evaluation:**
 
-- 👍 This model is even more _compact_ and a very _generic_ modeling solution to the situation. If it comes to multiple steps of escalation, the non-interrupting boundary timer event could even trigger multiple times.
+- This model is even more _compact_ and a very _generic_ modeling solution to the situation. If it comes to multiple steps of escalation, the non-interrupting boundary timer event could even trigger multiple times.
 
-- 👍 The model complies with BPMN execution semantics. Since we never leave the wait state, the process is always ready to receive incoming messages.
+- The model complies with BPMN execution semantics. Since we never leave the wait state, the process is always ready to receive incoming messages.
 
-- 👎 The solution is _less readable_ and _less intuitive_ for a less experienced reading public, because the way the interrupting and non-interrupting timers collaborate requires a profound understanding of boundary events and the consequences for token flow semantics. For communication purposes, this method of modeling is therefore typically less suitable.
+- The solution is _less readable_ and _less intuitive_ for a less experienced reading public, because the way the interrupting and non-interrupting timers collaborate requires a profound understanding of boundary events and the consequences for token flow semantics. For communication purposes, this method of modeling is therefore typically less suitable.
 
 :::note
 You might want to use that pattern when modeling _escalations with two steps_ as well as _escalations with multiple steps_ for _executable models._
@@ -117,11 +117,11 @@ A first approver looks at the loan and decides whether they approve. If they dec
 
 **Evaluation:**
 
-- 👍 This solution _explicitly_ shows how the two steps of this approval are performed. Tasks are modeled separately, followed by gateways visualizing the decision making process.
+- This solution _explicitly_ shows how the two steps of this approval are performed. Tasks are modeled separately, followed by gateways visualizing the decision making process.
 
 - Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need in case we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, observe solution [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) further below.
 
-- 👎 The usage of separate tasks leads to _duplication_ and makes the model _larger_, even more so in case multiple steps of approvals need to be modeled.
+- The usage of separate tasks leads to _duplication_ and makes the model _larger_, even more so in case multiple steps of approvals need to be modeled.
 
 You might want to use that pattern when modeling the need for a _second set_ of eyes needed in _sequential_ order, therefore _minimizing effort_ needed by the participating approvers.
 
@@ -145,11 +145,11 @@ A first approver looks at the loan and decides if they approve. If they decide n
 
 **Evaluation:**
 
-- 👍 This model is a more _compact_ modeling solution to the situation. If it comes to multiple sets of eyes needed, you will probably prefer such an approach to avoid huge diagrams.
+- This model is a more _compact_ modeling solution to the situation. If it comes to multiple sets of eyes needed, you will probably prefer such an approach to avoid huge diagrams.
 
 - Note that the approvers work in a _strictly sequential_ mode, which might be exactly what we need if we want _minimization of effort_ and, for example, display the reasonings of the first approver for the second one. However, we also might prefer _maximization of speed_. If this is the case, observe [option 3 (multi-instance)](#option-3-using-a-multi-instance-task) below.
 
-- 👎 The solution is _less explicit_. We could not choose to label the tasks with explicit references to a first and a second step of approval, as a single task is used for both approvals. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two steps needed for ultimate approval, this method of modeling is less suitable.
+- The solution is _less explicit_. We could not choose to label the tasks with explicit references to a first and a second step of approval, as a single task is used for both approvals. The solution is _less readable_ for a less experienced reading public. For a fast understanding of the two steps needed for ultimate approval, this method of modeling is less suitable.
 
 You might want to use that pattern when modeling the need for _multiple sets_ of eyes needed in _sequential_ order, therefore _minimizing effort_ needed by the participating approvers.
 
@@ -167,11 +167,11 @@ If the loan is not approved by one of the approvers, a boundary message event is
 
 **Evaluation:**
 
-- 👍 This model is a very _compact_ modeling solution to the situation. It can also easily deal with multiple sets of eyes needed.
+- This model is a very _compact_ modeling solution to the situation. It can also easily deal with multiple sets of eyes needed.
 
 - Note that the approvers work in a _parallel_ mode, which might be exactly what we need in case we want _maximization of speed_ and want the approvers to do their work independent from each other and uninfluenced by each other. However, we also might prefer _minimization of effort_. If this is the case, refer to [option 1 (separate tasks)](#option-1-using-separate-tasks) or [option 2 (loop)](#option-2-using-a-loop) above.
 
-- 👎 The solution is much _less explicit_ and _less readable_ for a less experienced reading public, because the way the boundary event interacts with a multi-instance task requires a profound understanding of BPMN. For communication purposes, this method of modeling is therefore typically less suitable.
+- The solution is much _less explicit_ and _less readable_ for a less experienced reading public, because the way the boundary event interacts with a multi-instance task requires a profound understanding of BPMN. For communication purposes, this method of modeling is therefore typically less suitable.
 
 You might want to use that pattern when modeling the need for _two_ or _multiple sets_ of eyes needed in _parallel_ order, therefore _maximising speed_ for the overall approval process.
 
