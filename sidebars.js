@@ -1357,6 +1357,7 @@ module.exports = {
             "apis-tools/optimize-api/health-readiness",
             "apis-tools/optimize-api/import-entities",
             "apis-tools/optimize-api/variable-labeling",
+            "apis-tools/optimize-api/delete-process-definition-data",
           ],
         },
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),

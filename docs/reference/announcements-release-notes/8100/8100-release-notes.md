@@ -32,6 +32,20 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+### Optimize
+
+#### Delete a process definition's data via API
+
+<!-- https://github.com/camunda/product-hub/issues/3716 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+Optimize now exposes a public API endpoint to delete all analytics data for a given process definition, so you can remove data for retired processes or respond to data removal requests without manually touching Elasticsearch or OpenSearch.
+
+The deletion runs asynchronously: the API accepts and queues the request, then processes it in the background.
+
+<p class="link-arrow">[Delete process definition data](/apis-tools/optimize-api/delete-process-definition-data.md)</p>
+
 ## 8.10.0-alpha4
 
 | Release date   | Changelog(s)                                                                                        | Blog |
