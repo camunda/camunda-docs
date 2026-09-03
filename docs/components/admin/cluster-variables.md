@@ -92,7 +92,7 @@ If a global variable with the same name exists, the tenant-level variable takes 
 
 ## Manage cluster variables of kind `SECRET_REFERENCE`
 
-A cluster variable of kind `SECRET_REFERENCE` can contain `camunda.secrets.<name>` references in its value. Camunda resolves them at job activation for a process that reads the variable in an input mapping. A `JSON`-kind variable whose value contains the same text is treated as ordinary text.
+A cluster variable of kind `SECRET_REFERENCE` can contain `camunda.secrets.<name>` references in its value. When a process reads the variable in an input mapping, Camunda resolves these references in the background ahead of activation, and injects the resolved values into the job only once it's handed to a worker. A `JSON`-kind variable whose value contains the same text is treated as ordinary text.
 
 The Admin UI create form has no kind field, so every variable you create there is a `JSON`-kind variable. To create a `SECRET_REFERENCE`-kind variable, use the Orchestration Cluster API with `"kind": "SECRET_REFERENCE"` in the request body, either [globally](/apis-tools/orchestration-cluster-api-rest/specifications/create-global-cluster-variable.api.mdx) or [for a tenant](/apis-tools/orchestration-cluster-api-rest/specifications/create-tenant-cluster-variable.api.mdx).
 
