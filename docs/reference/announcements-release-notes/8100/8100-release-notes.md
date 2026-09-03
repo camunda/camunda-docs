@@ -71,11 +71,15 @@ New agent configuration features help you more easily configure your agent tools
 
 Monitor and evaluate AI agent behavior in Operate.
 
-- View each agent's execution state (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, usage metrics (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
-- Trace the full reasoning chain behind AI agent decisions in the conversation history such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
-- Agents built with external frameworks such as LangGraph or CrewAI get the same visibility through the new Agent Instance API.
+- View each agent's execution [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states) (thinking, calling a tool, idle) highlighted on the process diagram, as well as its current tool calls, [usage metrics](/components/agentic-orchestration/agent-states-and-metrics.md#usage-metrics) (tokens, tool calls, and model calls against the configured limit), model, and system prompt.
+- Trace the full reasoning chain behind AI agent decisions in the [conversation history](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations) such as user prompts, assistant messages, tools selected with the agent's reasoning, and tool calls with navigation to the corresponding diagram elements, so you can see exactly which messages, inputs, and tool responses informed each of the agent's next steps.
+- [External agents](/components/agentic-orchestration/connect-external-agent.md) built with frameworks such as LangGraph or CrewAI get the same visibility through the new [Agent Instance API](/components/agentic-orchestration/agent-definitions-and-instances.md#visibility-for-external-agents).
 
-<p class="link-arrow">[Evaluate AI agents](/components/agentic-orchestration/evaluate-agents/evaluate-agents-overview.md)</p>
+<p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
+
+:::note
+If you modeled the agent element before Camunda 8.10, [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to the version required to enable this feature.
+:::
 
 ### Camunda design system
 
