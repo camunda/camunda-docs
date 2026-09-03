@@ -4,13 +4,8 @@ title: Extract unstructured data
 description: "Unstructured data extraction allows you to extract data from unstructured documents."
 ---
 
-import IdpUnstructuredDataExtractionImg from './img/idp-unstructured-data-extraction-screen.png';
-import IdpValidationResultsImg from './img/idp-validation-results.png';
-import IdpPublishProjectImg from './img/idp-publish-unstructured-project.png';
-import IdpPublishProjectModalImg from './img/idp-publish-modal.png';
 import IdpValidationResultsDetailImg from './img/idp-validation-results-detail.png';
 import IdpValidationResultsSummaryImg from './img/idp-summary.png';
-import IdpExtractionModelImg from './img/idp-extraction-model.png';
 import IdpVersionsLinkImg from './img/idp-versions-link.png';
 import IdpModelSelectionImg from './img/idp-model-selection.png';
 import IdpExtractionEngineSelectionImg from './img/idp-extraction-engines.png';
@@ -186,8 +181,6 @@ You can compare the change history between two template versions as JSON code in
 
 1. Ensure that the sidebar **Show changes** toggle is turned on.
 1. Select the version that you want to compare. The previous version is automatically selected for comparison.
-
-<img src={IdpVersionsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
 
 The JSON for the previous version is shown on the left, with the currently selected version shown on the right.
 
