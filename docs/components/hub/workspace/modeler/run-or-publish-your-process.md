@@ -13,7 +13,7 @@ Camunda Hub autosaves all your changes on a diagram. If you change a diagram and
 To make any change live in your cluster(s), you need to deploy it. If you deploy a process, it becomes available on the selected cluster and you can run or publish it.
 
 :::info
-Only owners with the **Organization Owner** or **Organization Admin** role in Camunda Hub can deploy to `prod` clusters.
+Only users with the **Organization Owner** or **Organization Admin** role in Camunda Hub can deploy to `prod` clusters.
 Users without admin roles can only deploy to `dev`, `test`, or `stage` clusters.
 :::
 
