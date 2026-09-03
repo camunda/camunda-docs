@@ -12,7 +12,7 @@ The dispatcher polls the job registry for queued deletion requests and executes 
 
 The dispatcher is disabled by default. Enable it on only one Optimize instance per cluster. Enabling it on more than one instance can lead to race conditions, such as the same job running more than once.
 
-See the [job registry dispatcher settings](./system-configuration.md#job-registry-dispatcher-settings) for the available configuration.
+See the [job registry dispatcher settings](./system-configuration.md#job-registry-dispatcher) for the available configuration.
 
 ## Deleted process definition cache
 
@@ -21,4 +21,4 @@ To minimize the impact of the suppression check on the import path and on Elasti
 
 If more process definitions have pending or completed deletions than fit in this cache, the oldest ones fall out of suppression and their data can be reimported.
 
-See the [deleted process definition cache settings](./system-configuration.md#deleted-process-definition-cache-settings) for the available configuration.
+See the [deleted process definition cache settings](./system-configuration.md#deleted-process-definition-cache) for the available configuration.

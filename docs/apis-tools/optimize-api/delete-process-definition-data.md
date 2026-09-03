@@ -59,13 +59,13 @@ No response body. A `202` response confirms the deletion request was accepted an
 
 Possible HTTP response status codes:
 
-| Code | Description                                                                                                                |
-| ---- | -------------------------------------------------------------------------------------------------------------------------- |
-| 202  | Request accepted. The deletion has been queued for asynchronous processing.                                                |
-| 400  | The provided `processDefinitionKey` is not numeric.                                                                        |
-| 401  | Secret incorrect or missing in HTTP Header. See [authentication](./optimize-api-authentication.md) on how to authenticate. |
-| 404  | No process definition was found for the provided `processDefinitionKey`.                                                   |
-| 409  | A deletion request for this `processDefinitionKey` is already queued.                                                      |
+| Code | Description                                                                                                              |
+| ---- | ------------------------------------------------------------------------------------------------------------------------ |
+| 202  | Request accepted. The deletion has been queued for asynchronous processing.                                              |
+| 400  | The provided `processDefinitionKey` is not numeric.                                                                      |
+| 401  | Authentication credentials are incorrect or missing. See [authentication](./optimize-api-authentication.md) for details. |
+| 404  | No process definition was found for the provided `processDefinitionKey`.                                                 |
+| 409  | A deletion request for this `processDefinitionKey` is already queued.                                                    |
 
 ## Example
 

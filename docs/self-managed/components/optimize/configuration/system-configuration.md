@@ -307,7 +307,7 @@ Settings for the background dispatcher that processes queued asynchronous jobs. 
 
 ### Deleted process definition cache
 
-Settings for the cache that suppresses reimporting data for process definitions with deletion job record. See [Process definition data deletion](./process-definition-deletion.md) for details.
+Settings for the cache that suppresses reimporting data for a process definitions with deletion job record. See [Process definition data deletion](./process-definition-deletion.md) for details.
 
 | YAML path                                         | Environment variable                                                 | Default value | Description                                                                                                  |
 | ------------------------------------------------- | -------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------ |
