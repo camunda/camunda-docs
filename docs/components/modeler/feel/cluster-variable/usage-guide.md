@@ -84,7 +84,7 @@ References in a [`SECRET_REFERENCE`-kind](./data-types.md#variable-kinds) cluste
 
 The following rules apply to an input mapping that reads a `SECRET_REFERENCE`-kind variable:
 
-- The mapping source must be a FEEL expression. A static value, written without a leading `=`, is a plain string and holds no reference.
+- The mapping source must be a FEEL expression. A static value, written without a leading `=`, is a plain string and holds no references.
 - A trailing field path narrows what is resolved. `= camunda.vars.env.MY_VAR.a.b` resolves only the references stored inside the `a.b` part of the value.
 - If the variable does not exist, or if its kind is `JSON`, nothing is resolved and no incident is raised.
 - Execution listener and task listener jobs never carry resolved values, even when the element they run on has such an input mapping.

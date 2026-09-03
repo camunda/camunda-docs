@@ -28,14 +28,14 @@ Every cluster variable has a kind, which determines how Camunda reads its value.
 
 | Kind               | Description                                                                        |
 | ------------------ | ---------------------------------------------------------------------------------- |
-| `JSON`             | The default. The value is data, and Camunda reads it exactly as stored.            |
+| `JSON`             | The default. Your value is data, and Camunda reads it exactly as you stored it.    |
 | `SECRET_REFERENCE` | The value can contain `camunda.secrets.<name>` references, which Camunda resolves. |
 
 Only a `SECRET_REFERENCE`-kind variable has its references resolved. A `JSON`-kind variable whose value contains the same text is treated as ordinary text, and that text reaches your process unchanged.
 
 ### Where references can appear in a value
 
-Camunda scans every string value in a `SECRET_REFERENCE`-kind value, including strings nested inside objects. Object keys are not scanned. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes.
+Camunda scans every string in a `SECRET_REFERENCE`-kind variable's value, including strings nested inside objects. Object keys are not scanned. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes.
 
 For example, the following value carries two references, one at the top level and one nested:
 

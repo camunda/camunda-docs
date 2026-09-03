@@ -74,7 +74,7 @@ Tenant scope has higher priority and returns a string, so the global object is n
 
 ### Kind collisions across scopes
 
-It happens when the same key is defined at both scopes with a different [variable kind](./data-types.md#variable-kinds).
+A kind collision happens when the same key is defined at both scopes with a different [variable kind](./data-types.md#variable-kinds).
 
 #### Scenario
 
