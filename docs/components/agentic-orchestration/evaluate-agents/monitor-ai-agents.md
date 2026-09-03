@@ -56,11 +56,11 @@ For example:
 
 At this point, you should see the process progressing through your model:
 
-<img src={ProcessInstance} alt="Process instance overview"/>
+<img src={ProcessInstance} alt="Process instance overview" width="90%"/>
 
 Operate highlights the agent element's current [state](/components/agentic-orchestration/agent-states-and-metrics.md#agent-states). For example, `Thinking` while the agent reasons, or `Tool calling` while it calls the **Jokes API** tool. A simple prompt like this one moves through its loop quickly, so the agent instance may already show `Idle` or `Completed` by the time you look.
 
-<img src={AgentState} alt="Agent state overview" width="50%"/>
+<img src={AgentState} alt="Agent state overview" width="40%"/>
 
 ## Step 3: Inspect the agent's state and usage metrics
 
@@ -72,7 +72,7 @@ Select the agent element on the diagram. Operate shows the [data available](/com
 - Its usage metrics: token consumption, tool call count, and model call count against the configured limit.
 
 
-<img src={AgentPanel} alt="Agent panel overview" width="80%"/>
+<img src={AgentPanel} alt="Agent panel overview" width="90%"/>
 
 :::note
 If multiple agent instances are active at the same element, use the dropdown next to the agent instance key to switch between them. Alternatively, select the relevant element instance in **Instance History**, as each element instance has only one agent instance.
@@ -94,23 +94,25 @@ For this example, the first iteration shows:
 - The user prompt, "Tell me a joke."
 - The assistant message where the agent selects the **Jokes API** tool, along with its reasoning.
 
-<img src={AgentConversationHistory} alt="Agent conversation history overview"/>
+<img src={AgentConversationHistory} alt="Agent conversation history overview" width="90%"/>
 
 :::tip
 Hover over a message's token count or duration badge to see a breakdown of its usage metrics.
 :::
 
-You can inspect a tool call, or a user or assistant message, by selecting its expand icon to open a larger view.
+### Dive deeper into messages and tool calls
+
+Every entry in the conversation history can be expanded for a closer look. Select the expand icon on a user or assistant message, or on a tool call, to open a larger view:
 
 <img src={AssistantMessageExpand} alt="Expand icon on an assistant message"/>
 
-Expanding a tool call shows the full input and output exchanged with the tool:
-
-<img src={ToolCallDetails} alt="Tool call details for the Jokes API tool"/>
-
-Expanding a message opens a **Preview** of its rendered Markdown by default. Switch to **Source** to view the raw Markdown instead:
+A user or assistant message may contain formatted text, so expanding it opens a **Preview** of its rendered Markdown by default. Switch to **Source** to view the raw Markdown instead.
 
 <img src={AssistantMessagePreview} alt="Expanded assistant message with Preview and Source tabs"/>
+
+Expanding a tool call shows the tool's description, along with the full input and output exchanged with it:
+
+<img src={ToolCallDetails} alt="Tool call details for the Jokes API tool"/>
 
 :::note
 Use the copy icon in any of these expanded views to copy its content.
