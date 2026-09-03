@@ -56,10 +56,11 @@ The date when this agent instance was created.
 ### definition
 
 ```ts
-definition: AgentInstanceDefinition;
+definition: AgentInstanceDefinitionResult;
 ```
 
-The static definition of the agent, including model, provider, and system prompt.
+The definition of the agent, including model, provider, and system prompt. Set at
+creation, but can change later via a CONFIGURATION history item.
 
 ---
 

@@ -201,6 +201,109 @@ async function deleteHistoryBackupAsClusterAdminExample() {
 }
 //#endregion DeleteHistoryBackupAsClusterAdmin
 
+//#region TakeRuntimeBackupAsClusterAdmin
+async function takeRuntimeBackupAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Cluster-admin variant: triggers a runtime backup on every physical tenant of
+  // the cluster (or a single one when `physicalTenantId` is given). Requires the
+  // separate cluster-admin security chain — Orchestration Cluster user
+  // credentials are NOT accepted. Passing an explicit `backupId` is manual-id
+  // mode: every targeted tenant must share that id (omit it for generated-id
+  // mode, where each tenant generates its own). Either way the response lists the
+  // outcome per physical tenant rather than cluster-wide.
+  const backup = await camunda.takeRuntimeBackupAsClusterAdmin({ backupId: 100 });
+
+  for (const tenant of backup.physicalTenants) {
+    console.log(`[${tenant.physicalTenantId}] ${tenant.outcome} (backupId ${tenant.backupId})`);
+  }
+}
+//#endregion TakeRuntimeBackupAsClusterAdmin
+
+//#region ListRuntimeBackupsAsClusterAdmin
+async function listRuntimeBackupsAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // `prefix` must end in a single '*'. Omit `physicalTenantId` to span every
+  // physical tenant — results are grouped by backup id, and each group reports
+  // every targeted tenant, including ones holding nothing for that id (reported
+  // as `DOES_NOT_EXIST`).
+  const backups = await camunda.listRuntimeBackupsAsClusterAdmin({ prefix: '10*' });
+
+  for (const backup of backups) {
+    console.log(`Cluster runtime backup ${backup.backupId}: ${backup.state}`);
+    for (const tenant of backup.physicalTenants) {
+      console.log(`  [${tenant.physicalTenantId}] ${tenant.state}`);
+    }
+  }
+}
+//#endregion ListRuntimeBackupsAsClusterAdmin
+
+//#region GetRuntimeBackupAsClusterAdmin
+async function getRuntimeBackupAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Looking a backup id up directly lists every targeted physical tenant,
+  // including the ones reporting `DOES_NOT_EXIST` — a backup that only some
+  // tenants hold is a supported outcome.
+  const backup = await camunda.getRuntimeBackupAsClusterAdmin({ backupId: 100 });
+
+  console.log(`Cluster runtime backup ${backup.backupId}: ${backup.state}`);
+  for (const tenant of backup.physicalTenants) {
+    console.log(`  [${tenant.physicalTenantId}] ${tenant.state}`);
+  }
+}
+//#endregion GetRuntimeBackupAsClusterAdmin
+
+//#region DeleteRuntimeBackupAsClusterAdmin
+async function deleteRuntimeBackupAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Deletion fans out to every physical tenant (or a single one when
+  // `physicalTenantId` is given) and is not undone if a later tenant fails.
+  await camunda.deleteRuntimeBackupAsClusterAdmin({ backupId: 100 });
+}
+//#endregion DeleteRuntimeBackupAsClusterAdmin
+
+//#region GetRuntimeBackupStateAsClusterAdmin
+async function getRuntimeBackupStateAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Returns the checkpoint and backup state of every targeted physical tenant.
+  // Nothing is aggregated across tenants — checkpoint ids and log positions only
+  // mean anything within one tenant's partitions.
+  const clusterState = await camunda.getRuntimeBackupStateAsClusterAdmin({});
+
+  for (const tenant of clusterState.physicalTenants) {
+    console.log(`[${tenant.physicalTenantId}] ${tenant.state.checkpointStates.length} checkpoints`);
+  }
+}
+//#endregion GetRuntimeBackupStateAsClusterAdmin
+
+//#region SyncRuntimeBackupStateAsClusterAdmin
+async function syncRuntimeBackupStateAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Force-writes checkpoint and backup metadata of every partition to the backup
+  // store on every targeted physical tenant, independent of any backup being
+  // taken, and returns the updated per-tenant state.
+  const clusterState = await camunda.syncRuntimeBackupStateAsClusterAdmin({});
+
+  console.log(`Synced ${clusterState.physicalTenants.length} physical tenants`);
+}
+//#endregion SyncRuntimeBackupStateAsClusterAdmin
+
+//#region DeleteRuntimeBackupStateAsClusterAdmin
+async function deleteRuntimeBackupStateAsClusterAdminExample() {
+  const camunda = createCamundaClient();
+
+  // Clears all checkpoint info, backup info, checkpoint metadata, and backup
+  // ranges on every partition of every targeted physical tenant (or a single one
+  // when `physicalTenantId` is given). Used when switching backup stores.
+  await camunda.deleteRuntimeBackupStateAsClusterAdmin({});
+}
+//#endregion DeleteRuntimeBackupStateAsClusterAdmin
+
 // Suppress "declared but never read"
 void takeRuntimeBackupExample;
 void listRuntimeBackupsExample;
@@ -217,3 +320,10 @@ void takeHistoryBackupAsClusterAdminExample;
 void listHistoryBackupsAsClusterAdminExample;
 void getHistoryBackupAsClusterAdminExample;
 void deleteHistoryBackupAsClusterAdminExample;
+void takeRuntimeBackupAsClusterAdminExample;
+void listRuntimeBackupsAsClusterAdminExample;
+void getRuntimeBackupAsClusterAdminExample;
+void deleteRuntimeBackupAsClusterAdminExample;
+void getRuntimeBackupStateAsClusterAdminExample;
+void syncRuntimeBackupStateAsClusterAdminExample;
+void deleteRuntimeBackupStateAsClusterAdminExample;

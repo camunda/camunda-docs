@@ -48,7 +48,7 @@ The ID of the mapping rule.
 ### name?
 
 ```ts
-optional name?: string;
+optional name?: StringFilterProperty;
 ```
 
 The name of the mapping rule.

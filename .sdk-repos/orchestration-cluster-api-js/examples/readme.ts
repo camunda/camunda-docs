@@ -6,6 +6,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import createCamundaClient, {
   createCamundaResultClient,
+  createEngineClock,
+  createTestClock,
   GroupId,
   isOk,
   isSdkError,
@@ -554,6 +556,72 @@ async function _readmeWorkerDefaultsClient() {
 }
 
 // ---------------------------------------------------------------------------
+// Deterministic Time
+// ---------------------------------------------------------------------------
+
+async function _readmeHandlerClock() {
+  const client = createCamundaClient();
+  const worker = client.createJobWorker({
+    jobType: 'example',
+    maxParallelJobs: 1,
+    jobTimeoutMs: 30_000,
+    jobHandler: async (job) => {
+      //#region ReadmeHandlerClock
+      const startedAt = job.clock.now();
+
+      // A short back-off around a flaky dependency. Waiting here rather than on
+      // setTimeout means a test that pins the client's clock also drives the handler.
+      await job.clock.sleep(250);
+
+      return job.complete({ variables: { waitedMs: job.clock.now() - startedAt } });
+      //#endregion ReadmeHandlerClock
+    },
+  });
+  void worker;
+}
+
+async function _readmeTestClock() {
+  //#region ReadmeTestClock
+  // Pin the client's clock and the SDK's own cadence runs on virtual time: poll intervals,
+  // retry backoff and backpressure decay all settle without waiting in real time.
+  const clock = createTestClock({ start: 0, autoAdvance: false });
+  const client = createCamundaClient({ clock });
+
+  // Nothing settles until the test moves time, so start the wait and advance into it.
+  const waiting = client.clock.sleep(30_000);
+  await clock.advance(30_000);
+  await waiting;
+
+  console.log(client.clock.now()); // 30000
+  console.log(clock.sleeps); // [30000] — every duration the SDK asked to wait
+  //#endregion ReadmeTestClock
+}
+
+async function _readmeEngineClock() {
+  //#region ReadmeEngineClock
+  // Bind the SDK's cadence to the engine's own clock. `sleep` no longer waits — it moves
+  // engine time forward — so a worker polling for something that never arrives advances the
+  // engine instead of burning real seconds.
+  //
+  // Two clients, deliberately. `client` issues the pins and must stay on the live clock:
+  // HTTP retry sleeps on whatever clock its client was given, so pointing the engine clock
+  // at its own driver would have a failed pin back off through `sleep`, which issues another
+  // pin, and so on.
+  const client = createCamundaClient();
+  const clock = createEngineClock(client, { start: Date.now() });
+  const pinned = createCamundaClient({ clock });
+
+  await clock.pin(Date.now());
+  try {
+    // A minute of engine time. BPMN timers due inside it fire; the test does not wait.
+    await pinned.clock.sleep(60_000);
+  } finally {
+    await clock.reset(); // hand the engine back to real time
+  }
+  //#endregion ReadmeEngineClock
+}
+
+// ---------------------------------------------------------------------------
 // Job Completion Patterns
 // ---------------------------------------------------------------------------
 
@@ -694,6 +762,9 @@ void _readmeTestingMock;
 void _readmeWorkerDefaultsEnv;
 void _readmeWorkerDefaultsClient;
 void _readmeJobCompletionPatterns;
+void _readmeHandlerClock;
+void _readmeTestClock;
+void _readmeEngineClock;
 void _readmeBackpressureState;
 void _readmeThreadedLifecycle;
 void _readmeThreadedGraceful;

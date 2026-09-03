@@ -793,6 +793,111 @@ return ack;
 const ack2 = await job.ignore();
 ```
 
+### Deterministic Time (`job.clock`)
+
+The SDK resolves its own cadence — worker poll intervals, retry backoff, eventual-consistency
+polling, backpressure decay — through an injectable clock. Pinning that clock runs all of it
+on virtual time, so tests that would otherwise wait out a 30-second poll finish immediately.
+
+The clock is configured on the client and available as `client.clock`. Handlers reach it as
+`job.clock`, a narrowed view exposing only `now()` and `sleep(ms, signal?)` — `deadline` is
+withheld because a handler that built one against a pinned clock would hang rather than time
+out:
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeHandlerClock -->
+
+```ts
+const startedAt = job.clock.now();
+
+// A short back-off around a flaky dependency. Waiting here rather than on
+// setTimeout means a test that pins the client's clock also drives the handler.
+await job.clock.sleep(250);
+
+return job.complete({ variables: { waitedMs: job.clock.now() - startedAt } });
+```
+
+Read and wait through `job.clock` rather than `Date.now()` / `setTimeout`, and a test that
+pins the client's clock drives your handler too.
+
+`job.clock.sleep` is for **short in-handler coordination** — spacing retries within one job,
+backing off around a flaky dependency. Long or business-meaningful waits belong in the
+process as BPMN timers, where they survive a crash and are visible to operations.
+
+Pass `createTestClock()` to pin the clock in your own tests:
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeTestClock -->
+
+```ts
+// Pin the client's clock and the SDK's own cadence runs on virtual time: poll intervals,
+// retry backoff and backpressure decay all settle without waiting in real time.
+const clock = createTestClock({ start: 0, autoAdvance: false });
+const client = createCamundaClient({ clock });
+
+// Nothing settles until the test moves time, so start the wait and advance into it.
+const waiting = client.clock.sleep(30_000);
+await clock.advance(30_000);
+await waiting;
+
+console.log(client.clock.now()); // 30000
+console.log(clock.sleeps); // [30000] — every duration the SDK asked to wait
+```
+
+`autoAdvance` defaults to `true`, where each sleep settles itself on the next macrotask
+having moved time to its wake point — the SDK's loops make progress without the test driving
+them. Set it to `false`, as above, when you need to assert on state _between_ two waits.
+
+#### Binding the SDK to the engine clock
+
+`createTestClock` pins the SDK in isolation: the engine carries on at real time. When you are
+testing against a live engine, `createEngineClock` binds the two together so they advance as
+one — `sleep` moves engine time forward via `PUT /clock` instead of waiting:
+
+<!-- snippet-source: examples/readme.ts | regions: ReadmeEngineClock -->
+
+```ts
+// Bind the SDK's cadence to the engine's own clock. `sleep` no longer waits — it moves
+// engine time forward — so a worker polling for something that never arrives advances the
+// engine instead of burning real seconds.
+//
+// Two clients, deliberately. `client` issues the pins and must stay on the live clock:
+// HTTP retry sleeps on whatever clock its client was given, so pointing the engine clock
+// at its own driver would have a failed pin back off through `sleep`, which issues another
+// pin, and so on.
+const client = createCamundaClient();
+const clock = createEngineClock(client, { start: Date.now() });
+const pinned = createCamundaClient({ clock });
+
+await clock.pin(Date.now());
+try {
+  // A minute of engine time. BPMN timers due inside it fire; the test does not wait.
+  await pinned.clock.sleep(60_000);
+} finally {
+  await clock.reset(); // hand the engine back to real time
+}
+```
+
+This is what makes a worker loop deterministic end to end: the poll interval _drives_ engine
+time rather than racing it, so a test that would spend a real minute waiting on something
+that never becomes ready finishes as fast as the requests complete.
+
+> [!WARNING]
+> Pinning is global to the cluster. Only point an engine clock at an engine you own —
+> never a shared environment. Always `reset()` in a `finally`.
+
+> [!IMPORTANT]
+> The client you hand to `createEngineClock` must not itself be configured with that clock.
+> HTTP retry backs off on whatever clock its client was given, so a self-referential setup
+> would have a failed `pinClock` retry through `sleep`, which issues another `pinClock`.
+> Keep the driving client on the live clock, as in the example above.
+
+Prefer `createTestClock` over hand-writing a `Clock`. The contract has clauses that are easy
+to get subtly wrong — most notably that `sleep` must not settle in a microtask, because the
+worker schedules its next poll on resolution and would otherwise spin.
+
+Two things deliberately stay on real time even when the clock is pinned, so that pinning it
+cannot hang a process: **liveness bounds** (shutdown drain, request and config-fetch
+timeouts) and **observational timestamps** (log, telemetry and support-bundle records).
+
 ### Job Corrections (User Task Listeners)
 
 When a job worker handles a [user task listener](https://docs.camunda.io/docs/components/concepts/user-task-listeners/), it can correct task properties (assignee, due date, candidate groups, etc.) by passing a `result` to `job.complete()`:
@@ -1315,7 +1420,7 @@ first-class [Effect](https://effect.website) surface — a client whose every me
 > resolution — set `"moduleResolution": "bundler"` (or `"node16"`/`"nodenext"`) in your
 > `tsconfig.json`. The Promise-first `.` entry is unaffected.
 
-<!-- snippet-exempt: uses SDK /effect subpath + optional effect peer not available in examples project -->
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectClientImport+ReadmeEffectClient -->
 
 ```ts
 import { Effect } from "effect";
@@ -1379,9 +1484,46 @@ Exports available from `.../effect`:
   the Effect `Clock`, timing out to `EventualConsistencyTimeout`).
 - Dependency injection: `CamundaEffect` (`Context.Service`) + `layer(options?)` (`Layer`) so worker /
   orchestration code composes via `Layer` and swaps a test double trivially.
+- Pagination: `.paginate(body, opts?)` on every `search*` method, returning an `EffectPaginator`
+  (`pages()` / `items()` → `Stream`, `toArray()` → `Effect`). See below.
 
 **Clock-class win:** `eventually` / `withTimeout` run on the Effect `Clock`, so `TestClock.adjust`
-advances eventual/timeout deterministically in tests — no real-clock burn.
+advances eventual/timeout deterministically in tests — no real-clock burn. The Promise surface
+has the same property via [`createTestClock`](#deterministic-time-jobclock); the difference is
+that Effect gives you `TestClock` and the rest of the ecosystem for free.
+
+### Paginated Search as a `Stream`
+
+Every `search*` operation on the Effect client carries the same `.paginate` helper the
+Promise client installs, re-expressed in Effect terms: `pages()` and `items()` are
+`Stream`s and `toArray()` is an `Effect`. Pages are fetched lazily as they are pulled,
+and interrupting the fiber cancels the in-flight page request.
+
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectPaginateImport+ReadmeEffectPaginate -->
+
+```ts
+import { Effect, Stream } from "effect";
+import { createCamundaEffectClient } from "@camunda8/orchestration-cluster-api/effect";
+
+const camunda = createCamundaEffectClient();
+
+// Walk every ACTIVE process instance, 100 per request, without ever holding more
+// than one page in memory. `Stream.take` stops pulling — and so stops fetching.
+const activeKeys = await Effect.runPromise(
+  camunda.searchProcessInstances
+    .paginate({ filter: { state: "ACTIVE" }, page: { limit: 100 } })
+    .items()
+    .pipe(
+      Stream.map((instance) => instance.processInstanceKey),
+      Stream.take(500),
+      Stream.runCollect
+    )
+);
+```
+
+Options: `maxPages` (safety cap), `mode` (`auto` | `cursor` | `offset`), and `consistency`
+(forwarded to the first page only — once paging is under way an empty page is
+end-of-results, not a stale read).
 
 ### Effect Job Workers
 
@@ -1393,7 +1535,7 @@ and a `TerminalJobError` becomes `throwJobError` (caught by a BPMN error boundar
 uncaught). Success completes the job with the returned variables. It composes over the same
 activation/backpressure runtime the Promise worker uses — it does not reimplement activation.
 
-<!-- snippet-exempt: uses SDK /effect subpath + optional effect peer not available in examples project -->
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectWorkerImport+ReadmeEffectWorker -->
 
 ```ts
 import { Effect, Schedule } from "effect";
@@ -1406,8 +1548,12 @@ import {
 
 const program = Effect.gen(function* () {
   // Forked into the current Scope: interrupted (with a best-effort lease release) when
-  // the scope closes.
-  yield* createCamundaEffectWorker<{ ok: boolean }>({
+  // the scope closes. Let both type parameters infer — supplying only the completion-
+  // variable type (`createCamundaEffectWorker<{ ok: boolean }>(…)`) makes TypeScript
+  // fall back to the *default* for the handler's requirements (`R = never`) rather
+  // than inferring it, so a handler with dependencies would stop compiling. See
+  // "Injecting Services into a Handler".
+  yield* createCamundaEffectWorker({
     type: "payment-processing",
     maxJobsToActivate: 10, // activation batch size
     concurrency: 10, // max jobs handled in parallel (backpressure)
@@ -1460,7 +1606,93 @@ Worker exports from `.../effect`:
 
 **Clock-class win:** the activation poll interval and the handler-retry `Schedule` run on the Effect
 `Clock`, so `TestClock.adjust` bounds activation/retry timing in virtual time — the whole loop is
-deterministic in tests, with no real-clock burn.
+deterministic in tests, with no real-clock burn. The Promise worker is equally drivable by pinning
+the client clock (see [Deterministic Time](#deterministic-time-jobclock)); what Effect adds here is
+`Schedule` composition over the retry policy.
+
+### Injecting Services into a Handler
+
+A handler is `(job) => Effect.Effect<A, JobError, R>`, and `R` — whatever services the handler
+depends on — is threaded out through `createCamundaEffectWorker` / `workerLayer` into the worker's
+own requirements. So a handler's dependencies are provided, and swapped for mocks, exactly like
+any other `Layer`.
+
+<!-- snippet-source: examples/effect.ts,examples/readme-imports.txt | regions: ReadmeEffectWorkerServicesImport+ReadmeEffectWorkerServices -->
+
+```ts
+import { Context, Effect, Layer } from "effect";
+import {
+  CamundaEffect,
+  type CamundaEffectClient,
+  layer,
+  workerLayer,
+} from "@camunda8/orchestration-cluster-api/effect";
+
+// A service the handler depends on. Nothing about it is Camunda-specific — it is an
+// ordinary Effect service.
+class PaymentGateway extends Context.Service<
+  PaymentGateway,
+  { readonly charge: (amount: number) => Effect.Effect<string> }
+>()("PaymentGateway") {}
+
+// The handler's requirements flow out through the worker's own requirements, so the
+// worker layer asks for `PaymentGateway` just like it asks for the Camunda client.
+const paymentWorker = workerLayer({
+  type: "payment-processing",
+  handler: (job) =>
+    Effect.gen(function* () {
+      const gateway = yield* PaymentGateway;
+      return { receipt: yield* gateway.charge(Number(job.variables.amount)) };
+    }),
+});
+// paymentWorker: Layer<never, never, CamundaEffect | PaymentGateway>
+
+// Production: the real gateway and a real client.
+const liveWorker = paymentWorker.pipe(
+  Layer.provide(
+    Layer.succeed(PaymentGateway, {
+      charge: (amount) => Effect.succeed(`live-receipt-${amount}`),
+    })
+  ),
+  Layer.provide(layer())
+);
+
+// Tests: the same worker with *both* dependencies swapped. `CamundaEffect` is a service
+// too, so the broker is mocked exactly like the gateway — the worker runs end-to-end
+// with neither a payment provider nor a broker.
+const fakeClient = {
+  activateJobs: () => Effect.succeed({ jobs: [] }),
+  completeJob: () => Effect.void,
+  failJob: () => Effect.void,
+  throwJobError: () => Effect.void,
+} as unknown as CamundaEffectClient;
+
+const mockedWorker = paymentWorker.pipe(
+  Layer.provide(
+    Layer.succeed(PaymentGateway, {
+      charge: () => Effect.succeed("mock-receipt"),
+    })
+  ),
+  Layer.provide(Layer.succeed(CamundaEffect, fakeClient))
+);
+```
+
+`Layer.succeed(CamundaEffect, fakeClient)` is what the SDK's own worker tests use; see
+[tests/effect-worker-di.test.ts](https://github.com/camunda/orchestration-cluster-api-js/blob/main/effect-worker-di.test.ts) for worked examples that mock both
+dependencies and drive the loop to a `completeJob` / `failJob` under `TestClock`.
+
+> **Gotcha — let both type parameters infer.** `createCamundaEffectWorker<A, R>` has `R = never`
+> as its default, and TypeScript does not infer a type parameter when only _some_ are supplied.
+> So `createCamundaEffectWorker<{ ok: boolean }>({ ... })` pins `R` to `never`, and a handler with
+> dependencies fails to compile with an error pointing at the handler rather than at the missing
+> type argument:
+>
+> ```
+> Type 'PaymentGateway' is not assignable to type 'never'.
+> ```
+>
+> Omit both — `A` is inferred from the handler's success value — or supply both
+> (`createCamundaEffectWorker<{ receipt: string }, PaymentGateway>({ ... })`).
 
 ## Eventual Consistency Polling
 
@@ -1791,7 +2023,58 @@ Notes:
 
 ## Pagination
 
-Search endpoints expose typed request bodies that include pagination fields. Provide the desired page object; auto‑pagination is not (yet) bundled.
+Every `search*` operation exposes a `.paginate(body, options?)` method that returns a lazy,
+cancelable async stream over **all** matching results. Cursors (or offsets) are advanced
+internally, so you never hand-write next-page bookkeeping.
+
+<!-- snippet-source: examples/pagination.ts | regions: PaginateItems -->
+
+```ts
+// Stream every matching process instance across all pages. Cursors are advanced
+// internally; the loop stops when the server runs out of pages.
+async function everyActiveInstanceExample() {
+  const camunda = createCamundaClient();
+
+  const stream = camunda.searchProcessInstances.paginate({
+    filter: { state: "ACTIVE" },
+    page: { limit: 100 },
+  });
+
+  for await (const instance of stream.items()) {
+    console.log(instance.processInstanceKey);
+  }
+}
+```
+
+Iterate a page at a time with `.pages()`, or drain a bounded result set into an array with
+`.toArray()`. Bound long streams with a `maxPages` cap and/or an `AbortSignal`:
+
+<!-- snippet-source: examples/pagination.ts | regions: PaginateBounded -->
+
+```ts
+// Bound the stream with an AbortSignal and a hard page cap. A non-zero
+// `consistency` window is applied to the first page only, so freshly-written
+// data can be waited for without the terminal empty page timing out.
+async function boundedPaginationExample(
+  processDefinitionId: ProcessDefinitionId
+) {
+  const camunda = createCamundaClient();
+  const ac = new AbortController();
+  setTimeout(() => ac.abort(), 30_000);
+
+  const stream = camunda.searchProcessInstances.paginate(
+    { filter: { processDefinitionId }, page: { limit: 100 } },
+    { signal: ac.signal, maxPages: 10, consistency: { waitUpToMs: 5000 } }
+  );
+
+  for await (const instance of stream.items()) {
+    console.log(instance.processInstanceKey);
+  }
+}
+```
+
+For advanced use, the low-level `nextPageRequest()` / `paginate()` primitives are also exported
+from the package entry point.
 
 ## Configuration Reference
 
