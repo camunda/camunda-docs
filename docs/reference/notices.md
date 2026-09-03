@@ -33,6 +33,41 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 60
+
+### Publication date
+
+September 2, 2026
+
+### Products affected
+
+- Camunda Zeebe
+- Camunda Tasklist
+- Camunda Operate
+- Camunda Optimize
+
+### Impact
+
+The application was vulnerable to [CVE-2026-71290](https://nvd.nist.gov/vuln/detail/CVE-2026-71290), where the embedded `httpclient5` library's asynchronous transport, used to connect to the Elasticsearch/OpenSearch secondary storage, skipped hostname verification during the TLS handshake. An attacker positioned to intercept network traffic between the affected component and its Elasticsearch/OpenSearch backend (for example, via DNS spoofing, BGP hijacking, or a compromised host on a shared network segment) could impersonate the backend, intercept the Basic authentication credentials sent to it, read or tamper with process data (including variables and process instance data) in transit, and inject forged responses back to the application. Exploitation requires this man-in-the-middle network position; it does not require bypassing authentication on the application's own API. Camunda is not aware of any known exploitation of this vulnerability.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Camunda Zeebe ≤ 8.7.37
+- Camunda Tasklist ≤ 8.7.37
+- Camunda Operate ≤ 8.7.37
+- Camunda Optimize ≤ 8.7.26
+
+### Solution
+
+Camunda has provided the following releases which contain the fix:
+
+- Camunda Zeebe 8.7.38
+- Camunda Tasklist 8.7.38
+- Camunda Operate 8.7.38
+- Camunda Optimize 8.7.27
+
 ## Notice 59
 
 ### Publication date
