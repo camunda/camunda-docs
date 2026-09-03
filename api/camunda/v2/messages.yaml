@@ -317,6 +317,7 @@ components:
     MessageSubscriptionResult:
       type: object
       required:
+        - businessId
         - rootProcessInstanceKey
         - correlationKey
         - elementId
@@ -336,6 +337,14 @@ components:
         - tenantId
         - toolName
       properties:
+        businessId:
+          description: |
+            The business id inherited from the subscribing process instance when this message
+            subscription was opened. It is `null` when the process instance has no business id, and
+            for message start event subscriptions, which are not tied to a process instance.
+          nullable: true
+          allOf:
+            - $ref: "identifiers.yaml#/components/schemas/BusinessId"
         messageSubscriptionKey:
           allOf:
             - $ref: "#/components/schemas/MessageSubscriptionKey"
@@ -436,6 +445,8 @@ components:
           addedInVersion: "8.10"
         - propertyName: inboundConnectorType
           addedInVersion: "8.10"
+        - propertyName: businessId
+          addedInVersion: "8.10"
     MessageSubscriptionSearchQuerySortRequest:
       type: object
       properties:
@@ -443,6 +454,7 @@ components:
           description: The field to sort by.
           type: string
           enum:
+            - businessId
             - messageSubscriptionKey
             - processDefinitionId
             - processDefinitionName
@@ -480,6 +492,13 @@ components:
       description: Message subscription search filter.
       type: object
       properties:
+        businessId:
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+          description: |
+            Filter by the business id inherited from the subscribing process instance when the
+            subscription was opened. Supports advanced string filtering, including `$like` with
+            `*`/`?` wildcards.
         messageSubscriptionKey:
           allOf:
             - $ref: "#/components/schemas/MessageSubscriptionKeyFilterProperty"
@@ -579,6 +598,8 @@ components:
         - propertyName: toolName
           addedInVersion: "8.10"
         - propertyName: inboundConnectorType
+          addedInVersion: "8.10"
+        - propertyName: businessId
           addedInVersion: "8.10"
     CorrelatedMessageSubscriptionSearchQueryResult:
       required:

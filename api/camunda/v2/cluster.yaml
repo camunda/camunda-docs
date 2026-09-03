@@ -338,6 +338,7 @@ components:
             - active
             - leaving
             - recovering
+            - learner
       x-properties-added-in-version:
         - propertyName: partitionId
           addedInVersion: "8.6"

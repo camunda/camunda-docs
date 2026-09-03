@@ -1,0 +1,330 @@
+---
+id: cancel-cluster-rebalance
+title: "Stop the running rebalance"
+sidebar_label: "Stop the running rebalance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "delete api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Stop the running rebalance"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/cluster/v2/rebalance"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Asks the running rebalance to stop once the transfer in flight has finished. Partitions already transferred keep their new leaders, and those the rebalance had not yet reached keep their current ones.
+
+Cancellation requests are idempotent and always accepted. The `wasRunning` response field can be used to distinguish a cancellation that found a running rebalance from one that did not.
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The cancellation was accepted.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Response to a rebalance cancellation request.",
+            type: "object",
+            required: ["wasRunning"],
+            properties: {
+              wasRunning: {
+                description: "Whether there was a rebalance to stop.",
+                type: "boolean",
+                example: true,
+              },
+            },
+            title: "RebalanceCancellationResponse",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "502": {
+      description:
+        "The coordinator was reached, but its response was absent or unusable.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description: "No coordinator is currently available or reachable.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "504": {
+      description: "The coordinator did not answer before the request timeout.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

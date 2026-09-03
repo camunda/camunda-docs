@@ -1,0 +1,818 @@
+---
+id: trigger-cluster-rebalance
+title: "Trigger a cluster-wide leadership rebalance"
+sidebar_label: "Trigger a cluster-wide leadership rebalance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Trigger a cluster-wide leadership rebalance"}{" "}
+  <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/cluster/v2/rebalance"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Transfers leadership of every partition that is not led by its highest-priority replica towards that replica, one partition at a time. Returns as soon as the rebalance has been accepted (poll `GET /cluster/v2/rebalance` to monitor progress).
+
+Each rebalance can specify overrides for the configured rebalance settings (e.g. maximum replication lag to allow). An absent request body means "use the configured settings".
+
+Requires the cluster-admin security chain. Although this operation lists `bearerAuth` / `basicAuth` like the rest of the Orchestration Cluster API, it does not accept an Orchestration Cluster user's credentials — only the separate cluster-admin credentials are valid here.
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "dryRun",
+      in: "query",
+      required: false,
+      schema: { type: "boolean", default: false },
+      description:
+        "If true, report the plan the rebalance would carry out without pausing any partition or transferring any leadership.",
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: false,
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            'The settings to run a given rebalance with. Every setting is optional; an absent request body is equivalent to a body with every field absent, and means "use the configured settings".',
+          type: "object",
+          properties: {
+            replicationLagThreshold: {
+              description:
+                "The highest replication lag (in bytes) that a desired leader may have for its transfer to be accepted.",
+              type: "integer",
+              format: "int64",
+              minimum: 0,
+              example: 8388608,
+            },
+            replicationTimeout: {
+              description:
+                "How long a partition may stay frozen waiting for its desired leader to catch up (as a positive ISO-8601 duration).",
+              type: "string",
+              example: "PT10S",
+            },
+            maxTransferAttempts: {
+              description:
+                "How many times a current leader may prompt the desired leader to take over leadership before giving up.",
+              type: "integer",
+              format: "int32",
+              minimum: 1,
+              example: 3,
+            },
+            leaderWaitTimeout: {
+              description:
+                "How long the coordinator waits for a partition without a leader to acquire one before reporting `NO_LEADER` and moving on (as a positive ISO-8601 duration).",
+              type: "string",
+              example: "PT1M",
+            },
+          },
+          title: "ClusterRebalanceRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "202": {
+      description:
+        "The rebalance was accepted, and its status is reported as it starts.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "The cluster's current per-partition balance state, the running rebalance, and the last completed rebalance.",
+            type: "object",
+            required: [
+              "state",
+              "partitions",
+              "runningRebalance",
+              "lastCompletedRebalance",
+            ],
+            properties: {
+              state: {
+                description:
+                  "The cluster's aggregate balance state as of the time of the request.",
+                type: "string",
+                enum: ["BALANCED", "BALANCING", "UNBALANCED"],
+                example: "UNBALANCED",
+              },
+              partitions: {
+                description:
+                  "The balance state of each partition as of the time of the request.",
+                type: "array",
+                items: {
+                  description:
+                    "One partition's leadership/balance status - its current leader, its desired leader, and whether a rebalance is currently moving it.",
+                  type: "object",
+                  required: [
+                    "partitionId",
+                    "physicalTenantId",
+                    "currentLeader",
+                    "desiredLeader",
+                    "state",
+                  ],
+                  properties: {
+                    partitionId: {
+                      description:
+                        "The unique ID of this partition, within its physical tenant.",
+                      type: "integer",
+                      format: "int32",
+                      example: 1,
+                    },
+                    physicalTenantId: {
+                      description:
+                        "The partition group this partition belongs to. Partition IDs are unique only within a group, so this is needed to identify the partition.",
+                      type: "string",
+                      example: "default",
+                    },
+                    currentLeader: {
+                      description:
+                        "The broker ID currently leading this partition, or absent if it has no leader.",
+                      type: "string",
+                      nullable: true,
+                      example: "0",
+                    },
+                    desiredLeader: {
+                      description:
+                        "The broker ID the current configuration wants to lead this partition.",
+                      type: "string",
+                      example: "0",
+                    },
+                    state: {
+                      description:
+                        "Whether this partition is being actively transferred, unbalanced, or balanced.",
+                      type: "string",
+                      enum: ["TRANSFERRING", "UNBALANCED", "BALANCED"],
+                      example: "UNBALANCED",
+                    },
+                  },
+                  title: "ClusterRebalancePartition",
+                },
+              },
+              runningRebalance: {
+                description:
+                  "Normally the rebalance currently running, or absent if no rebalance is running. For a dry-run response, this is instead the unexecuted plan of that dry run.",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "The rebalance currently running.",
+                    allOf: [
+                      {
+                        description:
+                          "The fields common to a running and a completed rebalance.",
+                        type: "object",
+                        required: ["rebalanceId", "partitions", "startedAt"],
+                        properties: {
+                          rebalanceId: {
+                            description: "The ID of this rebalance.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          partitions: {
+                            description:
+                              "Every partition in the rebalance plan and its progress within this rebalance.",
+                            type: "array",
+                            items: {
+                              description:
+                                "One partition's plan, progress, and outcome within a rebalance.",
+                              type: "object",
+                              required: [
+                                "partitionId",
+                                "physicalTenantId",
+                                "currentLeader",
+                                "desiredLeader",
+                                "progress",
+                                "result",
+                              ],
+                              properties: {
+                                partitionId: {
+                                  description:
+                                    "The unique ID of this partition, within its physical tenant.",
+                                  type: "integer",
+                                  format: "int32",
+                                  example: 1,
+                                },
+                                physicalTenantId: {
+                                  description:
+                                    "The partition group this partition belongs to.",
+                                  type: "string",
+                                  example: "default",
+                                },
+                                currentLeader: {
+                                  description:
+                                    "The leader last observed by this rebalance, or absent if there was no leader.",
+                                  type: "string",
+                                  nullable: true,
+                                  example: "0",
+                                },
+                                desiredLeader: {
+                                  description:
+                                    "The leader selected when this rebalance was planned.",
+                                  type: "string",
+                                  example: "1",
+                                },
+                                progress: {
+                                  description:
+                                    "Where this rebalance has reached for the partition.",
+                                  type: "string",
+                                  enum: [
+                                    "PENDING",
+                                    "TRANSFERRING",
+                                    "COMPLETED",
+                                  ],
+                                },
+                                result: {
+                                  description:
+                                    "The terminal outcome, present only when progress is COMPLETED.",
+                                  type: "string",
+                                  nullable: true,
+                                  enum: [
+                                    "TRANSFERRED",
+                                    "ALREADY_LEADER",
+                                    "NOT_MEMBER",
+                                    "NOT_REPLICATING",
+                                    "UNREACHABLE",
+                                    "NOT_COORDINATOR",
+                                    "STALE_CONFIGURATION",
+                                    "TRANSFER_IN_PROGRESS",
+                                    "LAG_TOO_HIGH",
+                                    "LEADER_INITIALIZING",
+                                    "CONFIGURATION_CHANGE_IN_PROGRESS",
+                                    "PAUSE_FAILED",
+                                    "REPLICATION_TIMED_OUT",
+                                    "TIMEOUT_NOW_EXHAUSTED",
+                                    "LEADER_CHANGED",
+                                    "NO_LEADER",
+                                    "NO_RESPONSE",
+                                    "CANCELLED",
+                                    "PHYSICAL_TENANT_DISABLED",
+                                  ],
+                                },
+                              },
+                              title: "ClusterRebalanceOperationPartition",
+                            },
+                          },
+                          startedAt: {
+                            description: "When this rebalance was created.",
+                            type: "string",
+                            format: "date-time",
+                          },
+                        },
+                        title: "ClusterRebalance",
+                      },
+                      {
+                        type: "object",
+                        required: ["dryRun", "cancelRequested"],
+                        properties: {
+                          dryRun: {
+                            description: "Whether this rebalance is a dry run.",
+                            type: "boolean",
+                          },
+                          cancelRequested: {
+                            description:
+                              "Whether cancellation has been requested.",
+                            type: "boolean",
+                          },
+                        },
+                      },
+                    ],
+                    title: "ClusterRunningRebalance",
+                  },
+                ],
+              },
+              lastCompletedRebalance: {
+                description:
+                  "The last completed non-dry-run rebalance this coordinator finished.",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "The last completed rebalance.",
+                    allOf: [
+                      {
+                        description:
+                          "The fields common to a running and a completed rebalance.",
+                        type: "object",
+                        required: ["rebalanceId", "partitions", "startedAt"],
+                        properties: {
+                          rebalanceId: {
+                            description: "The ID of this rebalance.",
+                            type: "integer",
+                            format: "int64",
+                          },
+                          partitions: {
+                            description:
+                              "Every partition in the rebalance plan and its progress within this rebalance.",
+                            type: "array",
+                            items: {
+                              description:
+                                "One partition's plan, progress, and outcome within a rebalance.",
+                              type: "object",
+                              required: [
+                                "partitionId",
+                                "physicalTenantId",
+                                "currentLeader",
+                                "desiredLeader",
+                                "progress",
+                                "result",
+                              ],
+                              properties: {
+                                partitionId: {
+                                  description:
+                                    "The unique ID of this partition, within its physical tenant.",
+                                  type: "integer",
+                                  format: "int32",
+                                  example: 1,
+                                },
+                                physicalTenantId: {
+                                  description:
+                                    "The partition group this partition belongs to.",
+                                  type: "string",
+                                  example: "default",
+                                },
+                                currentLeader: {
+                                  description:
+                                    "The leader last observed by this rebalance, or absent if there was no leader.",
+                                  type: "string",
+                                  nullable: true,
+                                  example: "0",
+                                },
+                                desiredLeader: {
+                                  description:
+                                    "The leader selected when this rebalance was planned.",
+                                  type: "string",
+                                  example: "1",
+                                },
+                                progress: {
+                                  description:
+                                    "Where this rebalance has reached for the partition.",
+                                  type: "string",
+                                  enum: [
+                                    "PENDING",
+                                    "TRANSFERRING",
+                                    "COMPLETED",
+                                  ],
+                                },
+                                result: {
+                                  description:
+                                    "The terminal outcome, present only when progress is COMPLETED.",
+                                  type: "string",
+                                  nullable: true,
+                                  enum: [
+                                    "TRANSFERRED",
+                                    "ALREADY_LEADER",
+                                    "NOT_MEMBER",
+                                    "NOT_REPLICATING",
+                                    "UNREACHABLE",
+                                    "NOT_COORDINATOR",
+                                    "STALE_CONFIGURATION",
+                                    "TRANSFER_IN_PROGRESS",
+                                    "LAG_TOO_HIGH",
+                                    "LEADER_INITIALIZING",
+                                    "CONFIGURATION_CHANGE_IN_PROGRESS",
+                                    "PAUSE_FAILED",
+                                    "REPLICATION_TIMED_OUT",
+                                    "TIMEOUT_NOW_EXHAUSTED",
+                                    "LEADER_CHANGED",
+                                    "NO_LEADER",
+                                    "NO_RESPONSE",
+                                    "CANCELLED",
+                                    "PHYSICAL_TENANT_DISABLED",
+                                  ],
+                                },
+                              },
+                              title: "ClusterRebalanceOperationPartition",
+                            },
+                          },
+                          startedAt: {
+                            description: "When this rebalance was created.",
+                            type: "string",
+                            format: "date-time",
+                          },
+                        },
+                        title: "ClusterRebalance",
+                      },
+                      {
+                        type: "object",
+                        required: ["finishedAt", "result"],
+                        properties: {
+                          finishedAt: {
+                            description: "When this rebalance finished.",
+                            type: "string",
+                            format: "date-time",
+                          },
+                          result: {
+                            description: "How the rebalance ended.",
+                            type: "string",
+                            enum: ["COMPLETED", "CANCELLED", "FAILED"],
+                            example: "COMPLETED",
+                          },
+                        },
+                      },
+                    ],
+                    title: "ClusterCompletedRebalance",
+                  },
+                ],
+              },
+            },
+            title: "ClusterBalanceResponse",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "A rebalance or cluster configuration change is already in progress, so there is no settled configuration to plan a rebalance against.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "502": {
+      description:
+        "The coordinator was reached, but its response was absent or unusable.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "503": {
+      description: "No coordinator is currently available or reachable.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "504": {
+      description: "The coordinator did not answer before the request timeout.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
