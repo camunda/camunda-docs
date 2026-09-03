@@ -115,7 +115,7 @@ camunda:
 
 An omitted or empty `categories` list enables all categories.
 
-The `heartbeat` event and the `camunda.telemetry.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
+The `camunda.telemetry.heartbeat` event and the `camunda.telemetry.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
 
 ## What data is sent
 
@@ -181,7 +181,7 @@ Counts evaluation records rather than the decisions inside them: a decision requ
 
 ### Optional signals
 
-**`user_task_created`**: a user task was created.
+**`camunda.user_task.created`**: a user task was created.
 
 | Attribute                        | Type   | Description                       |
 | -------------------------------- | ------ | --------------------------------- |
@@ -253,13 +253,13 @@ The agent definition (model, provider, system prompt), its tools, its token coun
 
 ### Always-on signals
 
-**`heartbeat`**: periodic liveness signal from the partition leader.
+**`camunda.telemetry.heartbeat`**: periodic liveness signal from the partition leader.
 
-| Attribute                            | Type   | Description                 |
-| ------------------------------------ | ------ | --------------------------- |
-| `event.name`                         | string | Always `heartbeat`.         |
-| `camunda.heartbeat.broker_version`   | string | Broker version.             |
-| `camunda.heartbeat.exporter_version` | string | Analytics Exporter version. |
+| Attribute                                      | Type   | Description                           |
+| ---------------------------------------------- | ------ | ------------------------------------- |
+| `event.name`                                   | string | Always `camunda.telemetry.heartbeat`. |
+| `camunda.telemetry.heartbeat.broker_version`   | string | Broker version.                       |
+| `camunda.telemetry.heartbeat.exporter_version` | string | Analytics Exporter version.           |
 
 **`camunda.telemetry.export_window`** (gauge metric): accompanies every metrics export, carrying the window total and log position range. Camunda uses it for deduplication and gap detection.
 
