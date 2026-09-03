@@ -114,33 +114,33 @@ During the migration:
 During the migration, Web Modeler was briefly unavailable. Clusters and running processes were unaffected and continued executing normally.
 
 :::note
-Even though the migration process was tested extensively ahead of release, a backup was taken before the migration to ensure your data was recoverable in its original state, had anything gone wrong. If you notice anything unexpected following the migration, contact support.
+Camunda extensively tested the migration process before release and created a backup before the migration to ensure your data was recoverable in its original state if anything went wrong. If you notice anything unexpected after the migration, contact support.
 :::
 
 The migration did not affect the following resources:
 
-| Area                                | Impact                                                                                                                                                                                    |
-| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Running process instances           | Orchestration Clusters, engines, and running process instances continue unaffected. Web Modeler and Camunda Hub form a modeling-and-management plane independent of the runtime path.     |
-| Redeployment                        | Deployments live on your clusters, not in the project structure being reorganized. Everything already deployed keeps running; this change doesn't require redeployment.                   |
-| Clusters and configuration          | Cluster and deployment settings attached to existing process applications migrated along with the data and carried over unchanged.                                                        |
-| Files, folders, and version history | All files, folders, versions, and history were preserved; only their location within the project changed.                                                                                 |
-| Git-synced projects                 | The migration didn't modify process applications or their contents, so anything connected through Git sync was unaffected: the same files, in the same repository, with the same history. |
-| Desktop Modeler                     | Desktop Modeler has no direct connection to Web Modeler affected by this change. Content shared via Git sync is also unaffected.                                                          |
+| Area                                | Impact                                                                                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Running process instances           | Orchestration Clusters, engines, and running process instances were unaffected. Web Modeler and Camunda Hub remained independent of the runtime path.        |
+| Redeployment                        | Existing deployments remained on their clusters and continued running. The migration did not require redeployment.                                           |
+| Clusters and configuration          | Cluster and deployment settings attached to existing process applications migrated with the data and remained unchanged.                                     |
+| Files, folders, and version history | All files, folders, versions, and history were preserved. Only their location within the project changed.                                                    |
+| Git-synced projects                 | The migration did not modify process applications or their contents. Files connected through Git sync remained in the same repository with the same history. |
+| Desktop Modeler                     | Desktop Modeler was unaffected because it has no direct connection to Web Modeler. Content shared through Git sync was also unaffected.                      |
 
-If you automate against the Web Modeler API, content moving to a new location affects you directly. Web Modeler API v1 returns files and folders from their new place, and requests that create an item at a project's root are redirected into the new `YOUR PROJECT NAME - General` application, with the response reflecting the new location.
+If you automate against the Web Modeler API, the migration may affect automation that relies on file or folder locations. Web Modeler API v1 returns files and folders from their new locations. Requests that create an item at a project's root are redirected to the new `YOUR PROJECT NAME - General` process application, and the response reflects the new location.
 
-You should review any automation that relies on where files or folders are located. A small number of folder API integrations were affected more directly; if you rely on the folder API to work with process applications, contact support to confirm whether your integration needs updates.
+Review any automation that relies on file or folder locations. A small number of folder API integrations were affected more directly. If you use the folder API with process applications, contact support to confirm whether your integration needs updates.
 
-#### Organizing the "General" process application
+#### Organize the "General" process application
 
-During the migration, any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named "YOUR PROJECT NAME - General". This is intended to be a temporary container for loose files and folders. Camunda recommends you organize these resources into more intentional process applications for long-term discoverability and maintainability.
+During the migration, any files or folders located directly in a project, not inside a process application, were automatically grouped in a new process application, named "YOUR PROJECT NAME - General". This process application is a temporary container for loose files and folders. Camunda recommends organizing these resources into process applications that reflect their purpose for better long-term discoverability and maintainability.
 
 To move files from the "General" process application, first create a new process application:
 
 1. Open your project.
 2. At the top right of the project view, click **Create new > Process application**.
-3. Provide a name and development cluster.
+3. Enter a name and select a development cluster.
 4. Click **Create**.
 
 Next, move the files from the "General" process application to the new one:
@@ -161,7 +161,7 @@ In addition to the Web Modeler data migration, Camunda is introducing an improve
 
 Before the new model, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit. With the new model, you have more granular control.
 
-If you're not yet familiar with process applications, the following sections provide a primer on how to:
+If you're not familiar with process applications, the following sections explain how to:
 
 - [Define deployment stages](#define-deployment-stages)
 - [Deploy a process application](#deploy-a-process-application)
@@ -189,17 +189,17 @@ To define your deployment stages:
 
 #### Deploy a process application
 
-There are two ways to deploy the process application as a bundle. With this approach, all resources in the process application are deployed together.
+You can deploy a process application as a bundle from either the process application view or a resource view. In both cases, all resources in the process application are deployed together.
 
 From the process application view:
 
 1. Open a process application.
-2. At the top right of the process application view, click **Deploy & run** or (**Deploy** from the dropdown).
+2. At the top right of the process application view, click **Deploy & run**, or select **Deploy** from the dropdown.
 3. Confirm the deployment.
 
 From the resource view:
 
-1. In your process application, open a resource, such as a BPMN diagram or Form.
+1. In your process application, open a resource, such as a BPMN diagram or form.
 2. At the top right of the modeling interface, click **Deploy**.
 3. In the deployment modal, under **Resources**, select **All resources**. (This is the default.)
 4. Confirm the deployment.
@@ -215,7 +215,7 @@ If you don't want to deploy all resources in a process application, you can depl
 
 #### Create a process application snapshot
 
-Use snapshots to save a single capture of all process application files in one action:
+Use a snapshot to capture all files in a process application at once:
 
 1. Open a process application.
 2. On the right side of the process application view, under **Snapshots** click **Create snapshot**.
@@ -224,9 +224,9 @@ Use snapshots to save a single capture of all process application files in one a
 
 #### Create a resource version
 
-In addition to process application snapshots, you can also create versions for independent resources:
+In addition to process application snapshots, you can create versions for individual resources:
 
-1. In your process application, open a resource, such as a BPMN diagram or Form.
+1. In your process application, open a resource, such as a BPMN diagram or form.
 2. At the top right of the modeling interface, click **Versions**.
 3. Click **Create version**.
 4. Enter a **Version name** in the version creation modal.
