@@ -93,11 +93,11 @@ For a multi-task job, **Get run output** requires an individual task's `run_id` 
 
 ### Avoid duplicate writes on retry
 
-**Execute statement** and **Run job now** are non-idempotent, so **Retries** defaults to `0`. A retry would otherwise resend the identical request. The SQL Statement Execution API has no idempotency key at all, so for **Execute statement** the only mitigation is leaving **Retries** at `0`.
+**Execute statement** and **Run job now** are non-idempotent, so the **Retries** field defaults to `0`. A retry would otherwise resend the identical request. The SQL Statement Execution API has no idempotency key, so keep **Retries** at `0` for **Execute statement**.
 
-**Run job now** does accept one: set **Idempotency token** to a value that remains stable for each process instance, and Databricks returns the existing run instead of starting a new one — but only once you've set it.
+**Run job now** accepts an idempotency token. Set **Idempotency token** to a value that remains stable for each process instance. Databricks then returns the existing run instead of starting a new one.
 
-It's safe to raise **Retries** on read-only operations, such as **Get run**, **Get warehouse**, or **Get statement status and result**.
+You can safely increase **Retries** for read-only operations, such as **Get run**, **Get warehouse**, or **Get statement status and result**.
 
 ### Start a warehouse before execution
 
@@ -111,7 +111,7 @@ To control this explicitly, call **Start warehouse** and poll **Get warehouse** 
 
 Model Serving allows up to 597 seconds of model execution — well beyond SQL's own `wait_timeout`, which is capped at 50 seconds.
 
-If **Job timeout** stays at its default while **Read timeout in seconds** is raised to cover a slow Model Serving call, Zeebe can decide the job timed out and reactivate it on another worker while the first HTTP request is still in flight. This is a duplicate non-idempotent call that **Retries** = `0` does not prevent, because it happens outside the connector entirely. Raise both settings together.
+If **Job timeout** stays at its default while you increase **Read timeout in seconds** for a slow Model Serving call, Zeebe can time out the job and reactivate it on another worker while the first HTTP request is still in flight. This can result in a duplicate non-idempotent call that **Retries** = `0` does not prevent because the retry happens outside the connector. Increase both settings together.
 
 ### Provide the required vector search inputs
 
@@ -126,7 +126,7 @@ The Databricks SQL Statement Execution API returns HTTP 200 with `status.state =
 | `SUCCEEDED` | Execution successful, result available for fetch.                                                               |
 | `FAILED`    | Execution failed; the reason is in `status.error.message`.                                                      |
 | `CANCELED`  | Canceled explicitly, or by `on_wait_timeout=CANCEL`.                                                            |
-| `CLOSED`    | **Success.** Execution was successful and the statement is closed; the result is no longer available for fetch. |
+| `CLOSED`    | Execution succeeded and the statement is closed; the result is no longer available for fetch.                   |
 
 `PENDING` and `RUNNING` are not terminal — they mean the statement is still executing, and you must poll the result with **Get statement status and result**.
 
@@ -143,13 +143,13 @@ Gateway conditions:
 (default, i.e. SUCCEEDED or CLOSED)       -> continue
 ```
 
-Routing everything except `FAILED`/`CANCELED` to `(default)` treats a still-running statement as complete, so the `PENDING`/`RUNNING` branch matters whenever `wait_timeout` is `0s`, or `CONTINUE` on a timeout.
+Routing everything except `FAILED` or `CANCELED` to `(default)` treats a still-running statement as complete. The `PENDING` or `RUNNING` branch is therefore required when `wait_timeout` is `0s` or the statement continues after a timeout.
 
 :::note
-This template ships with no default error expression. An error expression is evaluated against the mapped output, not the raw response, so once **Result variable** or **Result expression** is set — the normal way to use this task — an expression written against `response.body.status.state` sees `response.body` as `null` and never fires. A failed statement would then complete as a success. Use the gateway pattern above instead.
+This template ships with no default error expression. An error expression is evaluated against the mapped output, not the raw response. When you set **Result variable** or **Result expression**, an expression that uses `response.body.status.state` sees `response.body` as `null` and never fires.A failed statement would then complete as a success. Use the gateway pattern above instead.
 :::
 
-Job run outcomes work the same way. A failed run is reported in `state.result_state` on **Get run**, available only once `state.life_cycle_state` is terminal. Map it out and branch on it with the same gateway pattern.
+Use the same gateway pattern for job run outcomes. **Get run** reports a failed run in `state.result_state` after `state.life_cycle_state` reaches a terminal state. Map `state.result_state` to a variable and branch on it with the gateway.
 
 ## Partner telemetry
 
