@@ -286,9 +286,22 @@ In this setup, Web Modeler and Console still continue to use Auth0 via the ident
 
 #### Centralized Secret Resolution via Zeebe
 
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
+
 <!-- https://github.com/camunda/product-hub/issues/3040 -->
 
-Centralized secret resolution is introduced for connectors and job workers via Zeebe with this alpha.
+Centralized secret resolution through Zeebe is introduced with this alpha. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+
+- Reference secrets as `camunda.secrets.NAME` in input mappings, expressions, and output mappings. The legacy `{{secrets.NAME}}` syntax continues to work.
+- Secrets are resolved automatically for activated jobs and can also be requested through the Gateway APIs `/v2/secrets/resolve` and `/v2/secrets/list`.
+- Resolved values are not written to engine state, exports, backups, Operate, Tasklist, or application logs.
+- Self-Managed deployments support AWS Secrets Manager and GCP Secret Manager with workload identity authentication. A file-based provider is available for development and testing.
+- SaaS requires no configuration and uses Camunda’s managed secret backend.
+
+**Migration:** Existing processes continue to work without changes. For new processes, use `camunda.secrets.NAME`. To migrate hardcoded or connector-specific credentials, store the value in a supported secret store and replace it with a centralized secret reference.
+
+**Limitations:**
+This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 seconds by default.
 
 #### New rebalance API for coordinated leadership transfer
 
