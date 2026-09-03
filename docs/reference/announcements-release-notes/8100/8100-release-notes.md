@@ -211,6 +211,8 @@ Physical Tenants now support independent per-tenant authorization.
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
+<p class="link-arrow">[Set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md)</p>
+
 #### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
 <!-- https://github.com/camunda/product-hub/issues/3607 -->
@@ -567,6 +569,8 @@ Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isola
 - Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+
+<p class="link-arrow">[Set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md)</p>
 
 #### Select a DMN version with a FEEL expression
 

@@ -150,5 +150,6 @@ Environment variables and `orchestration.configuration` can be combined. Use the
 ## Related pages
 
 - [Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)
+- [Set up two isolated Physical Tenants](/self-managed/concepts/physical-tenants/getting-started.md)
 - [Configuration reference](/self-managed/concepts/physical-tenants/configuration-reference.md)
 - [Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)
