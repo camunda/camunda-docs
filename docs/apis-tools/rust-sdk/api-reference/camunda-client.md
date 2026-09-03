@@ -12,7 +12,7 @@ The primary entry point of the SDK.
 A `CamundaClient` is cheap to clone — clones share the same configuration,
 HTTP client, OAuth token cache, and worker registry.
 
-`CamundaClient` exposes **236** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
+`CamundaClient` exposes **261** methods covering the full Orchestration Cluster REST API surface, with authentication, retries, and backpressure applied automatically.
 
 ## Methods
 
@@ -38,9 +38,12 @@ HTTP client, OAuth token cache, and worker registry.
 | [`backpressure_state`](#backpressure_state)                                                                         | A snapshot of the adaptive backpressure controller's state, for observability.                                                                                                                                                                                                               |
 | [`broadcast_signal`](#broadcast_signal)                                                                             | Broadcast a signal. The configured default tenant id is applied when unset.                                                                                                                                                                                                                  |
 | [`cancel_batch_operation`](#cancel_batch_operation)                                                                 | Cancel Batch operation (`POST /batch-operations/{batchOperationKey}/cancellation`).                                                                                                                                                                                                          |
+| [`cancel_cluster_rebalance`](#cancel_cluster_rebalance)                                                             | Stop the running rebalance (`DELETE /cluster/v2/rebalance`).                                                                                                                                                                                                                                 |
 | [`cancel_process_instance`](#cancel_process_instance)                                                               | Cancel a running process instance by key.                                                                                                                                                                                                                                                    |
 | [`cancel_process_instances_batch_operation`](#cancel_process_instances_batch_operation)                             | Cancel process instances (batch) (`POST /process-instances/cancellation`).                                                                                                                                                                                                                   |
 | [`change_cluster_mode`](#change_cluster_mode)                                                                       | Change cluster mode (`PATCH /mode`).                                                                                                                                                                                                                                                         |
+| [`change_cluster_mode_as_cluster_admin`](#change_cluster_mode_as_cluster_admin)                                     | Change the cluster mode of one or every physical tenant (`PATCH /cluster/v2/mode`).                                                                                                                                                                                                          |
+| [`clock`](#clock)                                                                                                   | The clock this client's cadence resolves through.                                                                                                                                                                                                                                            |
 | [`complete_job`](#complete_job)                                                                                     | Complete a job, optionally with output variables.                                                                                                                                                                                                                                            |
 | [`complete_user_task`](#complete_user_task)                                                                         | Complete user task (`POST /user-tasks/{userTaskKey}/completion`).                                                                                                                                                                                                                            |
 | [`config`](#config)                                                                                                 | The resolved configuration.                                                                                                                                                                                                                                                                  |
@@ -72,13 +75,17 @@ HTTP client, OAuth token cache, and worker registry.
 | [`delete_global_cluster_variable`](#delete_global_cluster_variable)                                                 | Delete a global-scoped cluster variable (`DELETE /cluster-variables/global/{name}`).                                                                                                                                                                                                         |
 | [`delete_global_task_listener`](#delete_global_task_listener)                                                       | Delete global user task listener (`DELETE /global-task-listeners/{id}`).                                                                                                                                                                                                                     |
 | [`delete_group`](#delete_group)                                                                                     | Delete group (`DELETE /groups/{groupId}`).                                                                                                                                                                                                                                                   |
+| [`delete_history_backup`](#delete_history_backup)                                                                   | Delete history backup (`DELETE /backups/history/{backupId}`).                                                                                                                                                                                                                                |
+| [`delete_history_backup_as_cluster_admin`](#delete_history_backup_as_cluster_admin)                                 | Delete a history backup across physical tenants (`DELETE /cluster/v2/backups/history/{backupId}`).                                                                                                                                                                                           |
 | [`delete_mapping_rule`](#delete_mapping_rule)                                                                       | Delete a mapping rule (`DELETE /mapping-rules/{mappingRuleId}`).                                                                                                                                                                                                                             |
 | [`delete_process_instance`](#delete_process_instance)                                                               | Delete process instance (`POST /process-instances/{processInstanceKey}/deletion`).                                                                                                                                                                                                           |
 | [`delete_process_instances_batch_operation`](#delete_process_instances_batch_operation)                             | Delete process instances (batch) (`POST /process-instances/deletion`).                                                                                                                                                                                                                       |
 | [`delete_resource`](#delete_resource)                                                                               | Delete resource (`POST /resources/{resourceKey}/deletion`).                                                                                                                                                                                                                                  |
 | [`delete_role`](#delete_role)                                                                                       | Delete role (`DELETE /roles/{roleId}`).                                                                                                                                                                                                                                                      |
 | [`delete_runtime_backup`](#delete_runtime_backup)                                                                   | Delete runtime backup (`DELETE /backups/runtime/{backupId}`).                                                                                                                                                                                                                                |
+| [`delete_runtime_backup_as_cluster_admin`](#delete_runtime_backup_as_cluster_admin)                                 | Delete a runtime backup across physical tenants (`DELETE /cluster/v2/backups/runtime/{backupId}`).                                                                                                                                                                                           |
 | [`delete_runtime_backup_state`](#delete_runtime_backup_state)                                                       | Delete runtime backup state (`DELETE /backups/runtime/state`).                                                                                                                                                                                                                               |
+| [`delete_runtime_backup_state_as_cluster_admin`](#delete_runtime_backup_state_as_cluster_admin)                     | Delete runtime backup state across physical tenants (`DELETE /cluster/v2/backups/runtime/state`).                                                                                                                                                                                            |
 | [`delete_tenant`](#delete_tenant)                                                                                   | Delete tenant (`DELETE /tenants/{tenantId}`).                                                                                                                                                                                                                                                |
 | [`delete_tenant_cluster_variable`](#delete_tenant_cluster_variable)                                                 | Delete a tenant-scoped cluster variable (`DELETE /cluster-variables/tenants/{tenantId}/{name}`).                                                                                                                                                                                             |
 | [`delete_user`](#delete_user)                                                                                       | Delete user (`DELETE /users/{username}`).                                                                                                                                                                                                                                                    |
@@ -96,7 +103,10 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_authentication`](#get_authentication)                                                                         | Get current user (`GET /authentication/me`).                                                                                                                                                                                                                                                 |
 | [`get_authorization`](#get_authorization)                                                                           | Get authorization (`GET /authorizations/{authorizationKey}`).                                                                                                                                                                                                                                |
 | [`get_batch_operation`](#get_batch_operation)                                                                       | Get batch operation (`GET /batch-operations/{batchOperationKey}`).                                                                                                                                                                                                                           |
+| [`get_cluster_exporting_status`](#get_cluster_exporting_status)                                                     | Get exporting status of the whole cluster (`GET /cluster/v2/exporting`).                                                                                                                                                                                                                     |
+| [`get_cluster_rebalance`](#get_cluster_rebalance)                                                                   | Report the cluster's current leadership balance (`GET /cluster/v2/rebalance`).                                                                                                                                                                                                               |
 | [`get_cluster_status`](#get_cluster_status)                                                                         | Get the status of the whole cluster (`GET /cluster/v2/status`).                                                                                                                                                                                                                              |
+| [`get_cluster_topology`](#get_cluster_topology)                                                                     | Get the topology of the whole cluster (`GET /cluster/v2/topology`).                                                                                                                                                                                                                          |
 | [`get_decision_definition`](#get_decision_definition)                                                               | Get decision definition (`GET /decision-definitions/{decisionDefinitionKey}`).                                                                                                                                                                                                               |
 | [`get_decision_definition_xml`](#get_decision_definition_xml)                                                       | Get decision definition XML (`GET /decision-definitions/{decisionDefinitionKey}/xml`).                                                                                                                                                                                                       |
 | [`get_decision_instance`](#get_decision_instance)                                                                   | Get decision instance (`GET /decision-instances/{decisionEvaluationInstanceKey}`).                                                                                                                                                                                                           |
@@ -110,6 +120,8 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_global_job_statistics`](#get_global_job_statistics)                                                           | Global job statistics (`GET /jobs/statistics/global`).                                                                                                                                                                                                                                       |
 | [`get_global_task_listener`](#get_global_task_listener)                                                             | Get global user task listener (`GET /global-task-listeners/{id}`).                                                                                                                                                                                                                           |
 | [`get_group`](#get_group)                                                                                           | Get group (`GET /groups/{groupId}`).                                                                                                                                                                                                                                                         |
+| [`get_history_backup`](#get_history_backup)                                                                         | Get history backup (`GET /backups/history/{backupId}`).                                                                                                                                                                                                                                      |
+| [`get_history_backup_as_cluster_admin`](#get_history_backup_as_cluster_admin)                                       | Get a history backup across physical tenants (`GET /cluster/v2/backups/history/{backupId}`).                                                                                                                                                                                                 |
 | [`get_incident`](#get_incident)                                                                                     | Get incident (`GET /incidents/{incidentKey}`).                                                                                                                                                                                                                                               |
 | [`get_job_error_statistics`](#get_job_error_statistics)                                                             | Get error metrics for a job type (`POST /jobs/statistics/errors`).                                                                                                                                                                                                                           |
 | [`get_job_time_series_statistics`](#get_job_time_series_statistics)                                                 | Get time-series metrics for a job type (`POST /jobs/statistics/time-series`).                                                                                                                                                                                                                |
@@ -136,7 +148,9 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_restore_status`](#get_restore_status)                                                                         | Get the status of the restore that is currently in progress (`GET /restore`).                                                                                                                                                                                                                |
 | [`get_role`](#get_role)                                                                                             | Get role (`GET /roles/{roleId}`).                                                                                                                                                                                                                                                            |
 | [`get_runtime_backup`](#get_runtime_backup)                                                                         | Get runtime backup (`GET /backups/runtime/{backupId}`).                                                                                                                                                                                                                                      |
+| [`get_runtime_backup_as_cluster_admin`](#get_runtime_backup_as_cluster_admin)                                       | Get a runtime backup across physical tenants (`GET /cluster/v2/backups/runtime/{backupId}`).                                                                                                                                                                                                 |
 | [`get_runtime_backup_state`](#get_runtime_backup_state)                                                             | Get runtime backup state (`GET /backups/runtime/state`).                                                                                                                                                                                                                                     |
+| [`get_runtime_backup_state_as_cluster_admin`](#get_runtime_backup_state_as_cluster_admin)                           | Get runtime backup state across physical tenants (`GET /cluster/v2/backups/runtime/state`).                                                                                                                                                                                                  |
 | [`get_start_process_form`](#get_start_process_form)                                                                 | Get process start form (`GET /process-definitions/{processDefinitionKey}/form`).                                                                                                                                                                                                             |
 | [`get_status`](#get_status)                                                                                         | Get physical tenant status (`GET /status`).                                                                                                                                                                                                                                                  |
 | [`get_system_configuration`](#get_system_configuration)                                                             | System configuration (alpha) (`GET /system/configuration`).                                                                                                                                                                                                                                  |
@@ -148,13 +162,17 @@ HTTP client, OAuth token cache, and worker registry.
 | [`get_user_task_form`](#get_user_task_form)                                                                         | Get user task form (`GET /user-tasks/{userTaskKey}/form`).                                                                                                                                                                                                                                   |
 | [`get_variable`](#get_variable)                                                                                     | Get variable (`GET /variables/{variableKey}`).                                                                                                                                                                                                                                               |
 | [`init_logging`](#init_logging)                                                                                     | Install a formatting `tracing` subscriber filtered to the configured `CAMUNDA_SDK_LOG_LEVEL`. No-op if a global subscriber is already set or logging is off. Returns `true` if this call installed the subscriber.                                                                           |
+| [`list_history_backups`](#list_history_backups)                                                                     | List history backups (`GET /backups/history`).                                                                                                                                                                                                                                               |
+| [`list_history_backups_as_cluster_admin`](#list_history_backups_as_cluster_admin)                                   | List history backups across physical tenants (`GET /cluster/v2/backups/history`).                                                                                                                                                                                                            |
 | [`list_runtime_backups`](#list_runtime_backups)                                                                     | List runtime backups (`GET /backups/runtime`).                                                                                                                                                                                                                                               |
+| [`list_runtime_backups_as_cluster_admin`](#list_runtime_backups_as_cluster_admin)                                   | List runtime backups across physical tenants (`GET /cluster/v2/backups/runtime`).                                                                                                                                                                                                            |
 | [`list_secrets`](#list_secrets)                                                                                     | List secrets (alpha) (`POST /secrets/list`).                                                                                                                                                                                                                                                 |
 | [`migrate_process_instance`](#migrate_process_instance)                                                             | Migrate process instance (`POST /process-instances/{processInstanceKey}/migration`).                                                                                                                                                                                                         |
 | [`migrate_process_instances_batch_operation`](#migrate_process_instances_batch_operation)                           | Migrate process instances (batch) (`POST /process-instances/migration`).                                                                                                                                                                                                                     |
 | [`modify_process_instance`](#modify_process_instance)                                                               | Modify process instance (`POST /process-instances/{processInstanceKey}/modification`).                                                                                                                                                                                                       |
 | [`modify_process_instances_batch_operation`](#modify_process_instances_batch_operation)                             | Modify process instances (batch) (`POST /process-instances/modification`).                                                                                                                                                                                                                   |
 | [`new`](#new)                                                                                                       | Construct a client from `CamundaOptions` (environment + overrides).                                                                                                                                                                                                                          |
+| [`pause_cluster_exporting`](#pause_cluster_exporting)                                                               | Pause exporting across the whole cluster (`POST /cluster/v2/exporting/pause`).                                                                                                                                                                                                               |
 | [`pause_exporting`](#pause_exporting)                                                                               | Pause exporting (`POST /exporting/pause`).                                                                                                                                                                                                                                                   |
 | [`pin_clock`](#pin_clock)                                                                                           | Pin internal clock (alpha) (`PUT /clock`).                                                                                                                                                                                                                                                   |
 | [`publish_message`](#publish_message)                                                                               | Publish a message (no correlation key matching against active subscriptions only — buffered). The configured default tenant id is applied when unset.                                                                                                                                        |
@@ -164,7 +182,9 @@ HTTP client, OAuth token cache, and worker registry.
 | [`resolve_process_instance_incidents`](#resolve_process_instance_incidents)                                         | Resolve related incidents (`POST /process-instances/{processInstanceKey}/incident-resolution`).                                                                                                                                                                                              |
 | [`resolve_secrets`](#resolve_secrets)                                                                               | Resolve secrets (alpha) (`POST /secrets/resolve`).                                                                                                                                                                                                                                           |
 | [`restore`](#restore)                                                                                               | Restore from a backup (`POST /restore`).                                                                                                                                                                                                                                                     |
+| [`restore_as_cluster_admin`](#restore_as_cluster_admin)                                                             | Restore one or every physical tenant from a backup (`POST /cluster/v2/restore`).                                                                                                                                                                                                             |
 | [`resume_batch_operation`](#resume_batch_operation)                                                                 | Resume Batch operation (`POST /batch-operations/{batchOperationKey}/resumption`).                                                                                                                                                                                                            |
+| [`resume_cluster_exporting`](#resume_cluster_exporting)                                                             | Resume exporting across the whole cluster (`POST /cluster/v2/exporting/resume`).                                                                                                                                                                                                             |
 | [`resume_exporting`](#resume_exporting)                                                                             | Resume exporting (`POST /exporting/resume`).                                                                                                                                                                                                                                                 |
 | [`resume_process_instance`](#resume_process_instance)                                                               | Resume process instance (`POST /process-instances/{processInstanceKey}/resumption`).                                                                                                                                                                                                         |
 | [`resume_process_instances_batch_operation`](#resume_process_instances_batch_operation)                             | Resume process instances (batch) (`POST /process-instances/resumption`).                                                                                                                                                                                                                     |
@@ -224,9 +244,14 @@ HTTP client, OAuth token cache, and worker registry.
 | [`suspend_process_instance`](#suspend_process_instance)                                                             | Suspend process instance (`POST /process-instances/{processInstanceKey}/suspension`).                                                                                                                                                                                                        |
 | [`suspend_process_instances_batch_operation`](#suspend_process_instances_batch_operation)                           | Suspend process instances (batch) (`POST /process-instances/suspension`).                                                                                                                                                                                                                    |
 | [`sync_runtime_backup_state`](#sync_runtime_backup_state)                                                           | Force-write runtime backup state (`POST /backups/runtime/state/sync`).                                                                                                                                                                                                                       |
+| [`sync_runtime_backup_state_as_cluster_admin`](#sync_runtime_backup_state_as_cluster_admin)                         | Force-write runtime backup state across physical tenants (`POST /cluster/v2/backups/runtime/state/sync`).                                                                                                                                                                                    |
+| [`take_history_backup`](#take_history_backup)                                                                       | Take a history backup (`POST /backups/history`).                                                                                                                                                                                                                                             |
+| [`take_history_backup_as_cluster_admin`](#take_history_backup_as_cluster_admin)                                     | Take a history backup on one or every physical tenant (`POST /cluster/v2/backups/history`).                                                                                                                                                                                                  |
 | [`take_runtime_backup`](#take_runtime_backup)                                                                       | Take a runtime backup (`POST /backups/runtime`).                                                                                                                                                                                                                                             |
+| [`take_runtime_backup_as_cluster_admin`](#take_runtime_backup_as_cluster_admin)                                     | Take a runtime backup on one or every physical tenant (`POST /cluster/v2/backups/runtime`).                                                                                                                                                                                                  |
 | [`throw_job_error`](#throw_job_error)                                                                               | Throw a BPMN error from a job.                                                                                                                                                                                                                                                               |
 | [`topology`](#topology)                                                                                             | Fetch the cluster topology.                                                                                                                                                                                                                                                                  |
+| [`trigger_cluster_rebalance`](#trigger_cluster_rebalance)                                                           | Trigger a cluster-wide leadership rebalance (`POST /cluster/v2/rebalance`).                                                                                                                                                                                                                  |
 | [`unassign_client_from_group`](#unassign_client_from_group)                                                         | Unassign a client from a group (`DELETE /groups/{groupId}/clients/{clientId}`).                                                                                                                                                                                                              |
 | [`unassign_client_from_tenant`](#unassign_client_from_tenant)                                                       | Unassign a client from a tenant (`DELETE /tenants/{tenantId}/clients/{clientId}`).                                                                                                                                                                                                           |
 | [`unassign_group_from_tenant`](#unassign_group_from_tenant)                                                         | Unassign a group from a tenant (`DELETE /tenants/{tenantId}/groups/{groupId}`).                                                                                                                                                                                                              |
@@ -792,6 +817,27 @@ async fn cancel_batch_operation(
 }
 ```
 
+### cancel_cluster_rebalance
+
+```rust
+pub async fn cancel_cluster_rebalance(&self) -> Result<models::RebalanceCancellationResponse>
+```
+
+Stop the running rebalance (`DELETE /cluster/v2/rebalance`).
+
+**Example**
+
+```rust
+async fn cancel_cluster_rebalance() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client.cancel_cluster_rebalance().await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### cancel_process_instance
 
 ```rust
@@ -873,6 +919,42 @@ async fn change_cluster_mode() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 ```
+
+### change_cluster_mode_as_cluster_admin
+
+```rust
+pub async fn change_cluster_mode_as_cluster_admin(&self, params: ChangeClusterModeAsClusterAdminParams) -> Result<models::ClusterModeChangeResponse>
+```
+
+Change the cluster mode of one or every physical tenant (`PATCH /cluster/v2/mode`).
+
+**Example**
+
+```rust
+async fn change_cluster_mode_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // Omit `physical_tenant_id` to apply the change to every physical tenant.
+    let result = client
+        .change_cluster_mode_as_cluster_admin(ChangeClusterModeAsClusterAdminParams {
+            mode: Mode::Recovering,
+            physical_tenant_id: Some("default".to_string()),
+            dry_run: Some(true),
+        })
+        .await?;
+    println!("{}", result.change_id);
+
+    Ok(())
+}
+```
+
+### clock
+
+```rust
+pub fn clock(&self) -> &Arc<dyn Clock>
+```
+
+The clock this client's cadence resolves through.
 
 ### complete_job
 
@@ -1051,11 +1133,11 @@ async fn create_agent_instance() -> Result<(), Box<dyn std::error::Error>> {
                 element_instance_key: Box::new(ElementInstanceKey::assume_exists(
                     "my-element-instance",
                 )),
-                definition: Box::new(AgentInstanceDefinition {
+                definition: Some(Box::new(AgentInstanceDefinition {
                     model: "my-model".to_string(),
                     provider: "my-provider".to_string(),
                     system_prompt: "my-system-prompt".to_string(),
-                }),
+                })),
                 ..Default::default()
             },
         })
@@ -1752,6 +1834,55 @@ async fn delete_group(group_id: String) -> Result<(), Box<dyn std::error::Error>
 }
 ```
 
+### delete_history_backup
+
+```rust
+pub async fn delete_history_backup(&self, params: DeleteHistoryBackupParams) -> Result<()>
+```
+
+Delete history backup (`DELETE /backups/history/{backupId}`).
+
+**Example**
+
+```rust
+async fn delete_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .delete_history_backup(DeleteHistoryBackupParams { backup_id: 1 })
+        .await?;
+    println!("Delete history backup: done");
+
+    Ok(())
+}
+```
+
+### delete_history_backup_as_cluster_admin
+
+```rust
+pub async fn delete_history_backup_as_cluster_admin(&self, params: DeleteHistoryBackupAsClusterAdminParams) -> Result<()>
+```
+
+Delete a history backup across physical tenants (`DELETE /cluster/v2/backups/history/{backupId}`).
+
+**Example**
+
+```rust
+async fn delete_history_backup_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .delete_history_backup_as_cluster_admin(DeleteHistoryBackupAsClusterAdminParams {
+            backup_id: 1,
+            physical_tenant_id: None,
+        })
+        .await?;
+    println!("Delete history backup as cluster admin: done");
+
+    Ok(())
+}
+```
+
 ### delete_mapping_rule
 
 ```rust
@@ -1902,6 +2033,32 @@ async fn delete_runtime_backup() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
+### delete_runtime_backup_as_cluster_admin
+
+```rust
+pub async fn delete_runtime_backup_as_cluster_admin(&self, params: DeleteRuntimeBackupAsClusterAdminParams) -> Result<()>
+```
+
+Delete a runtime backup across physical tenants (`DELETE /cluster/v2/backups/runtime/{backupId}`).
+
+**Example**
+
+```rust
+async fn delete_runtime_backup_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .delete_runtime_backup_as_cluster_admin(DeleteRuntimeBackupAsClusterAdminParams {
+            backup_id: 1,
+            physical_tenant_id: None,
+        })
+        .await?;
+    println!("Delete runtime backup as cluster admin: done");
+
+    Ok(())
+}
+```
+
 ### delete_runtime_backup_state
 
 ```rust
@@ -1918,6 +2075,33 @@ async fn delete_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>>
 
     client.delete_runtime_backup_state().await?;
     println!("Delete runtime backup state: done");
+
+    Ok(())
+}
+```
+
+### delete_runtime_backup_state_as_cluster_admin
+
+```rust
+pub async fn delete_runtime_backup_state_as_cluster_admin(&self, params: DeleteRuntimeBackupStateAsClusterAdminParams) -> Result<()>
+```
+
+Delete runtime backup state across physical tenants (`DELETE /cluster/v2/backups/runtime/state`).
+
+**Example**
+
+```rust
+async fn delete_runtime_backup_state_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .delete_runtime_backup_state_as_cluster_admin(
+            DeleteRuntimeBackupStateAsClusterAdminParams {
+                physical_tenant_id: None,
+            },
+        )
+        .await?;
+    println!("Delete runtime backup state as cluster admin: done");
 
     Ok(())
 }
@@ -2298,6 +2482,48 @@ async fn get_batch_operation(
 }
 ```
 
+### get_cluster_exporting_status
+
+```rust
+pub async fn get_cluster_exporting_status(&self) -> Result<models::ExportingStatusResponse>
+```
+
+Get exporting status of the whole cluster (`GET /cluster/v2/exporting`).
+
+**Example**
+
+```rust
+async fn get_cluster_exporting_status() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let status = client.get_cluster_exporting_status().await?;
+    println!("{status:#?}");
+
+    Ok(())
+}
+```
+
+### get_cluster_rebalance
+
+```rust
+pub async fn get_cluster_rebalance(&self) -> Result<models::ClusterBalanceResponse>
+```
+
+Report the cluster's current leadership balance (`GET /cluster/v2/rebalance`).
+
+**Example**
+
+```rust
+async fn get_cluster_rebalance() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client.get_cluster_rebalance().await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### get_cluster_status
 
 ```rust
@@ -2314,6 +2540,34 @@ async fn get_cluster_status() -> Result<(), Box<dyn std::error::Error>> {
 
     let status = client.get_cluster_status().await?;
     println!("{status:#?}");
+
+    Ok(())
+}
+```
+
+### get_cluster_topology
+
+```rust
+pub async fn get_cluster_topology(&self) -> Result<models::ClusterTopologyResponse>
+```
+
+Get the topology of the whole cluster (`GET /cluster/v2/topology`).
+
+**Example**
+
+```rust
+async fn get_cluster_topology() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // Unlike `topology`, this reports the brokers of every physical tenant.
+    let topology = client.get_cluster_topology().await?;
+
+    println!("Cluster id:   {:?}", topology.cluster_id);
+    println!("Cluster size: {}", topology.cluster_size);
+
+    for tenant in topology.physical_tenants {
+        println!("{tenant:#?}");
+    }
 
     Ok(())
 }
@@ -2643,6 +2897,55 @@ async fn get_group(group_id: String) -> Result<(), Box<dyn std::error::Error>> {
 
     let result = client.get_group(GetGroupParams { group_id }).await?;
     println!("{}", result.group_id);
+
+    Ok(())
+}
+```
+
+### get_history_backup
+
+```rust
+pub async fn get_history_backup(&self, params: GetHistoryBackupParams) -> Result<models::HistoryBackupInfo>
+```
+
+Get history backup (`GET /backups/history/{backupId}`).
+
+**Example**
+
+```rust
+async fn get_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .get_history_backup(GetHistoryBackupParams { backup_id: 1 })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
+### get_history_backup_as_cluster_admin
+
+```rust
+pub async fn get_history_backup_as_cluster_admin(&self, params: GetHistoryBackupAsClusterAdminParams) -> Result<models::ClusterHistoryBackupInfo>
+```
+
+Get a history backup across physical tenants (`GET /cluster/v2/backups/history/{backupId}`).
+
+**Example**
+
+```rust
+async fn get_history_backup_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .get_history_backup_as_cluster_admin(GetHistoryBackupAsClusterAdminParams {
+            backup_id: 1,
+            physical_tenant_id: None,
+        })
+        .await?;
+    println!("{result:#?}");
 
     Ok(())
 }
@@ -3347,6 +3650,32 @@ async fn get_runtime_backup() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
+### get_runtime_backup_as_cluster_admin
+
+```rust
+pub async fn get_runtime_backup_as_cluster_admin(&self, params: GetRuntimeBackupAsClusterAdminParams) -> Result<models::ClusterRuntimeBackupInfo>
+```
+
+Get a runtime backup across physical tenants (`GET /cluster/v2/backups/runtime/{backupId}`).
+
+**Example**
+
+```rust
+async fn get_runtime_backup_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .get_runtime_backup_as_cluster_admin(GetRuntimeBackupAsClusterAdminParams {
+            backup_id: 1,
+            physical_tenant_id: None,
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### get_runtime_backup_state
 
 ```rust
@@ -3362,6 +3691,31 @@ async fn get_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>> {
     let client = CamundaClient::from_env()?;
 
     let state = client.get_runtime_backup_state().await?;
+    println!("{state:#?}");
+
+    Ok(())
+}
+```
+
+### get_runtime_backup_state_as_cluster_admin
+
+```rust
+pub async fn get_runtime_backup_state_as_cluster_admin(&self, params: GetRuntimeBackupStateAsClusterAdminParams) -> Result<models::ClusterRuntimeBackupState>
+```
+
+Get runtime backup state across physical tenants (`GET /cluster/v2/backups/runtime/state`).
+
+**Example**
+
+```rust
+async fn get_runtime_backup_state_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let state = client
+        .get_runtime_backup_state_as_cluster_admin(GetRuntimeBackupStateAsClusterAdminParams {
+            physical_tenant_id: None,
+        })
+        .await?;
     println!("{state:#?}");
 
     Ok(())
@@ -3612,6 +3966,67 @@ Install a formatting `tracing` subscriber filtered to the configured
 `CAMUNDA_SDK_LOG_LEVEL`. No-op if a global subscriber is already set or logging is
 off. Returns `true` if this call installed the subscriber.
 
+### list_history_backups
+
+```rust
+pub async fn list_history_backups(&self, params: ListHistoryBackupsParams) -> Result<Vec<models::HistoryBackupInfo>>
+```
+
+List history backups (`GET /backups/history`).
+
+**Example**
+
+```rust
+async fn list_history_backups() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // `prefix` must end in a single '*'. Setting `verbose` to false makes the
+    // query cheaper, at the cost of snapshot-level detail.
+    let backups = client
+        .list_history_backups(ListHistoryBackupsParams {
+            prefix: None,
+            verbose: None,
+        })
+        .await?;
+    for backup in backups {
+        println!("{backup:#?}");
+    }
+
+    Ok(())
+}
+```
+
+### list_history_backups_as_cluster_admin
+
+```rust
+pub async fn list_history_backups_as_cluster_admin(&self, params: ListHistoryBackupsAsClusterAdminParams) -> Result<Vec<models::ClusterHistoryBackupInfo>>
+```
+
+List history backups across physical tenants (`GET /cluster/v2/backups/history`).
+
+**Example**
+
+```rust
+async fn list_history_backups_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // `prefix` must end in a single '*'. Setting `verbose` to false makes the
+    // query cheaper, at the cost of snapshot-level detail.
+    let backups = client
+        .list_history_backups_as_cluster_admin(ListHistoryBackupsAsClusterAdminParams {
+            physical_tenant_id: None,
+            prefix: None,
+            verbose: None,
+        })
+        .await?;
+    for backup in backups {
+        println!("{backup:#?}");
+    }
+
+    Ok(())
+}
+```
+
 ### list_runtime_backups
 
 ```rust
@@ -3628,6 +4043,34 @@ async fn list_runtime_backups() -> Result<(), Box<dyn std::error::Error>> {
 
     let backups = client
         .list_runtime_backups(ListRuntimeBackupsParams { prefix: None })
+        .await?;
+    for backup in backups {
+        println!("{backup:#?}");
+    }
+
+    Ok(())
+}
+```
+
+### list_runtime_backups_as_cluster_admin
+
+```rust
+pub async fn list_runtime_backups_as_cluster_admin(&self, params: ListRuntimeBackupsAsClusterAdminParams) -> Result<Vec<models::ClusterRuntimeBackupInfo>>
+```
+
+List runtime backups across physical tenants (`GET /cluster/v2/backups/runtime`).
+
+**Example**
+
+```rust
+async fn list_runtime_backups_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let backups = client
+        .list_runtime_backups_as_cluster_admin(ListRuntimeBackupsAsClusterAdminParams {
+            physical_tenant_id: None,
+            prefix: None,
+        })
         .await?;
     for backup in backups {
         println!("{backup:#?}");
@@ -3803,6 +4246,29 @@ pub fn new(options: CamundaOptions) -> Result<Self>
 ```
 
 Construct a client from `CamundaOptions` (environment + overrides).
+
+### pause_cluster_exporting
+
+```rust
+pub async fn pause_cluster_exporting(&self, params: PauseClusterExportingParams) -> Result<()>
+```
+
+Pause exporting across the whole cluster (`POST /cluster/v2/exporting/pause`).
+
+**Example**
+
+```rust
+async fn pause_cluster_exporting() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client
+        .pause_cluster_exporting(PauseClusterExportingParams { soft: Some(true) })
+        .await?;
+    println!("Pause cluster exporting: done");
+
+    Ok(())
+}
+```
 
 ### pause_exporting
 
@@ -4021,7 +4487,7 @@ async fn resolve_secrets() -> Result<(), Box<dyn std::error::Error>> {
 ### restore
 
 ```rust
-pub async fn restore(&self, params: RestoreParams) -> Result<models::ClusterModeChangeResponse>
+pub async fn restore(&self, params: RestoreParams) -> Result<models::ClusterRestoreResponse>
 ```
 
 Restore from a backup (`POST /restore`).
@@ -4035,9 +4501,43 @@ async fn restore() -> Result<(), Box<dyn std::error::Error>> {
     let result = client
         .restore(RestoreParams {
             restore_request: RestoreRequest::default(),
+            dry_run: None,
         })
         .await?;
     println!("{}", result.change_id);
+
+    Ok(())
+}
+```
+
+### restore_as_cluster_admin
+
+```rust
+pub async fn restore_as_cluster_admin(&self, params: RestoreAsClusterAdminParams) -> Result<models::ClusterRestoreResponse>
+```
+
+Restore one or every physical tenant from a backup (`POST /cluster/v2/restore`).
+
+**Example**
+
+```rust
+async fn restore_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // Omitting `physical_tenant_id` restores the whole cluster. A cluster-wide
+    // restore may also set `overrides` to pick a different backup per physical
+    // tenant.
+    let result = client
+        .restore_as_cluster_admin(RestoreAsClusterAdminParams {
+            cluster_restore_request: ClusterRestoreRequest {
+                backup_ids: Some(Some(vec![1])),
+                ..Default::default()
+            },
+            physical_tenant_id: None,
+            dry_run: Some(true),
+        })
+        .await?;
+    println!("{result:#?}");
 
     Ok(())
 }
@@ -4065,6 +4565,27 @@ async fn resume_batch_operation(
         })
         .await?;
     println!("Resume Batch operation: done");
+
+    Ok(())
+}
+```
+
+### resume_cluster_exporting
+
+```rust
+pub async fn resume_cluster_exporting(&self) -> Result<()>
+```
+
+Resume exporting across the whole cluster (`POST /cluster/v2/exporting/resume`).
+
+**Example**
+
+```rust
+async fn resume_cluster_exporting() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    client.resume_cluster_exporting().await?;
+    println!("Resume cluster exporting: done");
 
     Ok(())
 }
@@ -4945,7 +5466,7 @@ async fn search_message_subscriptions() -> Result<(), Box<dyn std::error::Error>
 ### search_own_authorizations
 
 ```rust
-pub async fn search_own_authorizations(&self, params: SearchOwnAuthorizationsParams) -> Result<models::AuthorizationSearchResult>
+pub async fn search_own_authorizations(&self, params: SearchOwnAuthorizationsParams) -> Result<models::OwnAuthorizationSearchResult>
 ```
 
 Search own authorizations (`POST /authentication/me/authorizations/search`).
@@ -5608,6 +6129,82 @@ async fn sync_runtime_backup_state() -> Result<(), Box<dyn std::error::Error>> {
 }
 ```
 
+### sync_runtime_backup_state_as_cluster_admin
+
+```rust
+pub async fn sync_runtime_backup_state_as_cluster_admin(&self, params: SyncRuntimeBackupStateAsClusterAdminParams) -> Result<models::ClusterRuntimeBackupState>
+```
+
+Force-write runtime backup state across physical tenants (`POST /cluster/v2/backups/runtime/state/sync`).
+
+**Example**
+
+```rust
+async fn sync_runtime_backup_state_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let state = client
+        .sync_runtime_backup_state_as_cluster_admin(SyncRuntimeBackupStateAsClusterAdminParams {
+            physical_tenant_id: None,
+        })
+        .await?;
+    println!("{state:#?}");
+
+    Ok(())
+}
+```
+
+### take_history_backup
+
+```rust
+pub async fn take_history_backup(&self, params: TakeHistoryBackupParams) -> Result<models::TakeHistoryBackupResponse>
+```
+
+Take a history backup (`POST /backups/history`).
+
+**Example**
+
+```rust
+async fn take_history_backup() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .take_history_backup(TakeHistoryBackupParams {
+            take_history_backup_request: TakeHistoryBackupRequest { backup_id: 1 },
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
+### take_history_backup_as_cluster_admin
+
+```rust
+pub async fn take_history_backup_as_cluster_admin(&self, params: TakeHistoryBackupAsClusterAdminParams) -> Result<models::ClusterTakeHistoryBackupResponse>
+```
+
+Take a history backup on one or every physical tenant (`POST /cluster/v2/backups/history`).
+
+**Example**
+
+```rust
+async fn take_history_backup_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    let result = client
+        .take_history_backup_as_cluster_admin(TakeHistoryBackupAsClusterAdminParams {
+            take_history_backup_request: TakeHistoryBackupRequest { backup_id: 1 },
+            physical_tenant_id: None,
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
 ### take_runtime_backup
 
 ```rust
@@ -5624,6 +6221,36 @@ async fn take_runtime_backup() -> Result<(), Box<dyn std::error::Error>> {
 
     let result = client
         .take_runtime_backup(TakeRuntimeBackupParams {
+            take_runtime_backup_request: Some(TakeRuntimeBackupRequest {
+                backup_id: Some(Some(1)),
+            }),
+        })
+        .await?;
+    println!("{result:#?}");
+
+    Ok(())
+}
+```
+
+### take_runtime_backup_as_cluster_admin
+
+```rust
+pub async fn take_runtime_backup_as_cluster_admin(&self, params: TakeRuntimeBackupAsClusterAdminParams) -> Result<models::ClusterTakeRuntimeBackupResponse>
+```
+
+Take a runtime backup on one or every physical tenant (`POST /cluster/v2/backups/runtime`).
+
+**Example**
+
+```rust
+async fn take_runtime_backup_as_cluster_admin() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // Setting `physical_tenant_id` scopes the backup to one physical tenant; omit
+    // it to back up every physical tenant of the cluster.
+    let result = client
+        .take_runtime_backup_as_cluster_admin(TakeRuntimeBackupAsClusterAdminParams {
+            physical_tenant_id: Some("default".to_string()),
             take_runtime_backup_request: Some(TakeRuntimeBackupRequest {
                 backup_id: Some(Some(1)),
             }),
@@ -5695,6 +6322,37 @@ async fn get_topology() -> Result<(), Box<dyn std::error::Error>> {
             broker.node_id, broker.host, broker.port
         );
     }
+
+    Ok(())
+}
+```
+
+### trigger_cluster_rebalance
+
+```rust
+pub async fn trigger_cluster_rebalance(&self, params: TriggerClusterRebalanceParams) -> Result<models::ClusterBalanceResponse>
+```
+
+Trigger a cluster-wide leadership rebalance (`POST /cluster/v2/rebalance`).
+
+**Example**
+
+```rust
+async fn trigger_cluster_rebalance() -> Result<(), Box<dyn std::error::Error>> {
+    let client = CamundaClient::from_env()?;
+
+    // Every setting is optional; an absent request body means "use the configured
+    // settings". Set `dry_run` to report the plan without moving any leadership.
+    let result = client
+        .trigger_cluster_rebalance(TriggerClusterRebalanceParams {
+            dry_run: Some(true),
+            cluster_rebalance_request: Some(ClusterRebalanceRequest {
+                replication_timeout: Some("PT30S".to_string()),
+                ..Default::default()
+            }),
+        })
+        .await?;
+    println!("{result:#?}");
 
     Ok(())
 }
@@ -6455,17 +7113,22 @@ worker defaults (env-driven: `CAMUNDA_WORKER_*`). Builder methods override field
 
 Options for constructing a `CamundaClient`.
 
+Non-exhaustive: construct with `CamundaOptions::new` and the `with_*` builders, so that
+later additions here are not breaking changes for callers.
+
 ### Fields
 
 | Field         | Type                      | Description                                                                                                                      |
 | ------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `config`      | `HashMap<String, String>` | Programmatic overrides for `CAMUNDA_*` configuration keys. These take precedence over environment variables.                     |
 | `http_client` | `Option<Client>`          | A pre-built `reqwest::Client` to use for all requests (including OAuth token fetches). When `None`, a default client is created. |
+| `clock`       | `Option<Arc<dyn Clock>>`  | The clock the client's cadence resolves through. When `None`, real time is used.                                                 |
 
 ### Methods
 
-| Method             | Description                                      |
-| ------------------ | ------------------------------------------------ |
-| `new`              | Create empty options.                            |
-| `with`             | Add a single `CAMUNDA_*` configuration override. |
-| `with_http_client` | Use a custom `reqwest::Client`.                  |
+| Method             | Description                                                        |
+| ------------------ | ------------------------------------------------------------------ |
+| `new`              | Create empty options.                                              |
+| `with`             | Add a single `CAMUNDA_*` configuration override.                   |
+| `with_clock`       | Resolve the client's cadence through `clock` instead of real time. |
+| `with_http_client` | Use a custom `reqwest::Client`.                                    |

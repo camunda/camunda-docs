@@ -33,11 +33,11 @@ async fn create_agent_instance() -> Result<(), Box<dyn std::error::Error>> {
                 element_instance_key: Box::new(ElementInstanceKey::assume_exists(
                     "my-element-instance",
                 )),
-                definition: Box::new(AgentInstanceDefinition {
+                definition: Some(Box::new(AgentInstanceDefinition {
                     model: "my-model".to_string(),
                     provider: "my-provider".to_string(),
                     system_prompt: "my-system-prompt".to_string(),
-                }),
+                })),
                 ..Default::default()
             },
         })

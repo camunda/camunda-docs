@@ -11,10 +11,10 @@ This reference covers the hand-written ergonomic surface of the Rust SDK: the cl
 
 | Page                               | Contents                                                     |
 | ---------------------------------- | ------------------------------------------------------------ |
-| [CamundaClient](camunda-client.md) | The client and its 236 API methods.                          |
+| [CamundaClient](camunda-client.md) | The client and its 261 API methods.                          |
 | [Configuration](configuration.md)  | Client configuration, authentication, TLS, and retry policy. |
 | [Job workers](job-workers.md)      | Job worker configuration, handlers, and lifecycle.           |
 | [Runtime](runtime.md)              | Error types and adaptive backpressure.                       |
-| [Domain keys](domain-keys.md)      | 44 validated identifier newtypes.                            |
+| [Domain keys](domain-keys.md)      | 45 validated identifier newtypes.                            |
 
 The generated request and response models are not reproduced here — there are several hundred of them. Browse them on [docs.rs](https://docs.rs/camunda-orchestration-api-client/latest/camunda_orchestration_api_client/models/index.html), or use your editor's go-to-definition on any method signature.

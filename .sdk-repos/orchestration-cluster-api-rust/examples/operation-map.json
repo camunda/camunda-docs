@@ -125,6 +125,13 @@
       "label": "Cancel Batch operation"
     }
   ],
+  "cancelClusterRebalance": [
+    {
+      "file": "cluster.rs",
+      "region": "CancelClusterRebalance",
+      "label": "Cancel the current cluster rebalance"
+    }
+  ],
   "cancelProcessInstance": [
     {
       "file": "process_instance.rs",
@@ -144,6 +151,13 @@
       "file": "recovery.rs",
       "region": "ChangeClusterMode",
       "label": "Change cluster mode"
+    }
+  ],
+  "changeClusterModeAsClusterAdmin": [
+    {
+      "file": "recovery.rs",
+      "region": "ChangeClusterModeAsClusterAdmin",
+      "label": "Change cluster mode as cluster admin"
     }
   ],
   "completeJob": [
@@ -342,6 +356,20 @@
       "label": "Delete group"
     }
   ],
+  "deleteHistoryBackup": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteHistoryBackup",
+      "label": "Delete a history backup"
+    }
+  ],
+  "deleteHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteHistoryBackupAsClusterAdmin",
+      "label": "Delete a history backup as cluster admin"
+    }
+  ],
   "deleteMappingRule": [
     {
       "file": "mapping_rule.rs",
@@ -384,11 +412,25 @@
       "label": "Delete a runtime backup"
     }
   ],
+  "deleteRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteRuntimeBackupAsClusterAdmin",
+      "label": "Delete a runtime backup as cluster admin"
+    }
+  ],
   "deleteRuntimeBackupState": [
     {
       "file": "backup.rs",
       "region": "DeleteRuntimeBackupState",
       "label": "Delete the runtime backup state"
+    }
+  ],
+  "deleteRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "DeleteRuntimeBackupStateAsClusterAdmin",
+      "label": "Delete the runtime backup state as cluster admin"
     }
   ],
   "deleteTenant": [
@@ -482,11 +524,32 @@
       "label": "Get batch operation"
     }
   ],
+  "getClusterExportingStatus": [
+    {
+      "file": "exporting.rs",
+      "region": "GetClusterExportingStatus",
+      "label": "Get the cluster exporting status"
+    }
+  ],
+  "getClusterRebalance": [
+    {
+      "file": "cluster.rs",
+      "region": "GetClusterRebalance",
+      "label": "Get the status of the current cluster rebalance"
+    }
+  ],
   "getClusterStatus": [
     {
       "file": "cluster.rs",
       "region": "GetClusterStatus",
       "label": "Get the cluster status"
+    }
+  ],
+  "getClusterTopology": [
+    {
+      "file": "cluster.rs",
+      "region": "GetClusterTopology",
+      "label": "Get the cluster topology"
     }
   ],
   "getDecisionDefinition": [
@@ -578,6 +641,20 @@
       "file": "group.rs",
       "region": "GetGroup",
       "label": "Get group"
+    }
+  ],
+  "getHistoryBackup": [
+    {
+      "file": "backup.rs",
+      "region": "GetHistoryBackup",
+      "label": "Get a history backup"
+    }
+  ],
+  "getHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "GetHistoryBackupAsClusterAdmin",
+      "label": "Get a history backup as cluster admin"
     }
   ],
   "getIncident": [
@@ -762,11 +839,25 @@
       "label": "Get a runtime backup"
     }
   ],
+  "getRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "GetRuntimeBackupAsClusterAdmin",
+      "label": "Get a runtime backup as cluster admin"
+    }
+  ],
   "getRuntimeBackupState": [
     {
       "file": "backup.rs",
       "region": "GetRuntimeBackupState",
       "label": "Get the runtime backup state"
+    }
+  ],
+  "getRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "GetRuntimeBackupStateAsClusterAdmin",
+      "label": "Get the runtime backup state as cluster admin"
     }
   ],
   "getStartProcessForm": [
@@ -846,11 +937,32 @@
       "label": "Get variable"
     }
   ],
+  "listHistoryBackups": [
+    {
+      "file": "backup.rs",
+      "region": "ListHistoryBackups",
+      "label": "List history backups"
+    }
+  ],
+  "listHistoryBackupsAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "ListHistoryBackupsAsClusterAdmin",
+      "label": "List history backups as cluster admin"
+    }
+  ],
   "listRuntimeBackups": [
     {
       "file": "backup.rs",
       "region": "ListRuntimeBackups",
       "label": "List runtime backups"
+    }
+  ],
+  "listRuntimeBackupsAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "ListRuntimeBackupsAsClusterAdmin",
+      "label": "List runtime backups as cluster admin"
     }
   ],
   "listSecrets": [
@@ -886,6 +998,13 @@
       "file": "process_instance.rs",
       "region": "ModifyProcessInstancesBatchOperation",
       "label": "Modify process instances (batch)"
+    }
+  ],
+  "pauseClusterExporting": [
+    {
+      "file": "exporting.rs",
+      "region": "PauseClusterExporting",
+      "label": "Pause cluster exporting"
     }
   ],
   "pauseExporting": [
@@ -951,11 +1070,25 @@
       "label": "Restore from a backup"
     }
   ],
+  "restoreAsClusterAdmin": [
+    {
+      "file": "recovery.rs",
+      "region": "RestoreAsClusterAdmin",
+      "label": "Restore from a backup as cluster admin"
+    }
+  ],
   "resumeBatchOperation": [
     {
       "file": "batch_operation.rs",
       "region": "ResumeBatchOperation",
       "label": "Resume Batch operation"
+    }
+  ],
+  "resumeClusterExporting": [
+    {
+      "file": "exporting.rs",
+      "region": "ResumeClusterExporting",
+      "label": "Resume cluster exporting"
     }
   ],
   "resumeExporting": [
@@ -1343,6 +1476,27 @@
       "label": "Synchronize the runtime backup state"
     }
   ],
+  "syncRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "SyncRuntimeBackupStateAsClusterAdmin",
+      "label": "Synchronize the runtime backup state as cluster admin"
+    }
+  ],
+  "takeHistoryBackup": [
+    {
+      "file": "backup.rs",
+      "region": "TakeHistoryBackup",
+      "label": "Take a history backup"
+    }
+  ],
+  "takeHistoryBackupAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "TakeHistoryBackupAsClusterAdmin",
+      "label": "Take a history backup as cluster admin"
+    }
+  ],
   "takeRuntimeBackup": [
     {
       "file": "backup.rs",
@@ -1350,11 +1504,25 @@
       "label": "Take a runtime backup"
     }
   ],
+  "takeRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.rs",
+      "region": "TakeRuntimeBackupAsClusterAdmin",
+      "label": "Take a runtime backup as cluster admin"
+    }
+  ],
   "throwJobError": [
     {
       "file": "job.rs",
       "region": "ThrowJobError",
       "label": "Throw a BPMN error for a job"
+    }
+  ],
+  "triggerClusterRebalance": [
+    {
+      "file": "cluster.rs",
+      "region": "TriggerClusterRebalance",
+      "label": "Trigger a cluster rebalance"
     }
   ],
   "unassignClientFromGroup": [

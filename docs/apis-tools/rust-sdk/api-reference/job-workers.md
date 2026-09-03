@@ -16,17 +16,18 @@ accessors for variables and custom headers.
 
 ### Methods
 
-| Method                 | Description                                       |
-| ---------------------- | ------------------------------------------------- |
-| `custom_headers`       | The job custom headers.                           |
-| `element_id`           | The BPMN element id that created this job.        |
-| `job_type`             | The job type.                                     |
-| `key`                  | The job key, as a string.                         |
-| `process_instance_key` | The process instance key, as a string.            |
-| `raw`                  | The underlying generated activated-job model.     |
-| `retries`              | Remaining retries for this job.                   |
-| `variables`            | The job variables as a JSON map.                  |
-| `variables_as`         | Deserialize the job variables into a typed value. |
+| Method                 | Description                                                                                                                                                          |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `clock`                | The clock this job's worker resolves cadence through. Handlers that need to wait must use this rather than `tokio::time::sleep`, so an injected clock controls them. |
+| `custom_headers`       | The job custom headers.                                                                                                                                              |
+| `element_id`           | The BPMN element id that created this job.                                                                                                                           |
+| `job_type`             | The job type.                                                                                                                                                        |
+| `key`                  | The job key, as a string.                                                                                                                                            |
+| `process_instance_key` | The process instance key, as a string.                                                                                                                               |
+| `raw`                  | The underlying generated activated-job model.                                                                                                                        |
+| `retries`              | Remaining retries for this job.                                                                                                                                      |
+| `variables`            | The job variables as a JSON map.                                                                                                                                     |
+| `variables_as`         | Deserialize the job variables into a typed value.                                                                                                                    |
 
 ## JobAction
 
