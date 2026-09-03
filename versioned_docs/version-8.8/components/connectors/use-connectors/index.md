@@ -34,9 +34,9 @@ Use the Console component to [create and manage secrets](/components/console/man
 You can reference a secret like `MY_API_KEY` with `{{secrets.MY_API_KEY}}` in any connector field in the properties
 panel. Secrets resolve in every field, not only in a specific subset of fields.
 
-For outbound connectors, the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)
-determines which of the secrets available in the runtime environment a connector task can actually resolve, based on
-the secrets referenced in that task's input mappings.
+The [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) applies to both
+outbound and inbound connectors. In practice, this means a secret in a connector field only resolves at runtime if
+that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
 Secrets are **not variables** and must be wrapped in double quotes as follows when used in a FEEL expression:
 
