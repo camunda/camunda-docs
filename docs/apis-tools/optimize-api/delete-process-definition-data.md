@@ -4,12 +4,12 @@ title: "Delete process definition data"
 description: "The REST API to delete a process definition's analytics data from Optimize."
 ---
 
-The process definition data deletion API allows you to delete all Optimize analytics data associated with a specific process definition, identified by its numeric process definition key.
+With the process definition data deletion API, you can delete all Optimize analytics data associated with a specific process definition, identified by its numeric process definition key.
 
 ## Functionality
 
 This endpoint deletes Optimize's own data (process instances, the process definition, and cached report data) for the given process definition key.
-It does not delete the process definition from the cluster. To remove a process definition from the cluster, use the [Delete resource](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource) endpoint.
+It does not delete the process definition from the cluster. To remove a process definition from the cluster, use the [Delete resource](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) endpoint.
 It also does not delete the underlying Elasticsearch or OpenSearch indices.
 The request is processed asynchronously. The deletion is queued until a background job performs the actual data deletion.
 
