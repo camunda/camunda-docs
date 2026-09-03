@@ -69,7 +69,7 @@ Select the agent element on the diagram. Operate shows the [data available](/com
 - Its usage metrics: token consumption, tool call count, and model call count against the configured limit.
 
 
-<img src={AgentPanel} alt="Agent panel overview"/>
+<img src={AgentPanel} alt="Agent panel overview" width="80%"/>
 
 :::note
 If multiple agent instances are active at the same element, use the dropdown next to the agent instance key to switch between them. Alternatively, select the relevant element instance in **Instance History**, as each element instance has only one agent instance.
@@ -79,7 +79,7 @@ For guidance on reading these signals to catch a stuck or looping agent, see [de
 
 ## Step 4: Review the conversation history
 
-The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1.loop iteration`.
+The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1. iteration`.
 
 By default, entries are sorted by **Most recent first**. You can select **Oldest first** to read the history chronologically:
 
@@ -90,7 +90,6 @@ For this example, the first iteration shows:
 
 - The user prompt, "Tell me a joke."
 - The assistant message where the agent selects the **Jokes API** tool, along with its reasoning.
-- The tool result containing the joke text.
 
 <img src={AgentConversationHistory} alt="Agent conversation history overview"/>
 
