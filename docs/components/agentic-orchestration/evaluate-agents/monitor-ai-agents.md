@@ -100,7 +100,7 @@ For this example, the first iteration shows:
 Hover over a message's token count or duration badge to see a breakdown of its usage metrics.
 :::
 
-You can inspect a tool call, or a user or assistant message, by selecting its expand icon to open a larger view. 
+You can inspect a tool call, or a user or assistant message, by selecting its expand icon to open a larger view.
 
 <img src={AssistantMessageExpand} alt="Expand icon on an assistant message"/>
 
