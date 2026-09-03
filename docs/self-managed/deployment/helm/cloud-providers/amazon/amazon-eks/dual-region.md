@@ -629,7 +629,7 @@ This forms the base layer that contains the basic required setup, which applies 
 
 Key changes of the dual-region setup:
 
-- `global.multiregion.regions: 2`
+- `orchestration.multiregion.regions: 2` (`global.multiregion.regions` still works and is deprecated since 8.10)
   - Indicates the use for two regions
 - `global.security.authentication.method: basic`
   - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.

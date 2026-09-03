@@ -26,6 +26,7 @@ This section includes reference deployment architectures:
 
 - [Amazon EKS single-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/terraform-setup.md): Standard production setup.
 - [Amazon EKS dual-region](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/dual-region.md): Advanced multi-region setup.
+- [Amazon EKS multi-region with RDBMS](/self-managed/deployment/helm/cloud-providers/amazon/amazon-eks/multi-region-rdbms.md): Three or more regions with relational secondary storage, so a region loss does not stop processing.
 
 ### Red Hat OpenShift on AWS (ROSA)
 

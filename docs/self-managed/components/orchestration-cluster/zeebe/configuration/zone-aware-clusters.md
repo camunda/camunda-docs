@@ -11,7 +11,7 @@ Zone awareness controls where the application places partition replicas among br
 
 Zone awareness is required for topologies with three or more zones. It also simplifies managing zones: brokers are named after the zone they belong to, so you describe the topology in terms of zones rather than individual numeric node IDs.
 
-Because zones are named explicitly, zone awareness also lets you change the number of zones dynamically (for example, growing from one zone to two, or two to three), which is not possible with the legacy parity-based numbering.
+Because zones are named explicitly, zone awareness also lets you change the number of zones dynamically (for example, growing from one zone to two, or two to three), which is not possible with the parity-based broker numbering.
 
 Zone awareness is also useful in a single-region setup. By mapping zones to availability zones (AZs) and giving one AZ a higher priority, you can skew partition leaders to stay in that AZ. Keeping leaders in one AZ reduces cross-AZ traffic to the single writer instance of a relational database (RDBMS), which lowers the associated cost. This optimization matters less for Elasticsearch, which distributes load across all three zones.
 
@@ -26,7 +26,7 @@ A zone is a failure domain, typically a cloud region or availability zone, into 
 - Place partition replicas across zones, so no single zone holds all replicas of a partition.
 - Assign Raft election priorities per zone, so partition leaders are skewed toward the highest-priority zone.
 
-Compared to the legacy numbering scheme, zone awareness makes multi-region and multi-AZ setups simpler to configure across all deployment targets (Kubernetes, Amazon ECS, bare metal).
+Compared to numbering brokers by node ID, zone awareness makes multi-region and multi-AZ setups simpler to configure across all deployment targets (Kubernetes, Amazon ECS, bare metal).
 
 ## How zone awareness works
 
@@ -39,7 +39,7 @@ us-west1_0
 us-west1_1
 ```
 
-The zone is part of the name, so you can read the topology directly from the broker identifiers. Numeric node IDs still work for single-region and legacy dual-region setups.
+The zone is part of the name, so you can read the topology directly from the broker identifiers. Numeric node IDs still work for single-region and dual-region setups.
 
 ### Partitioning scheme
 
@@ -52,9 +52,9 @@ The `ZONE_AWARE` partitioning scheme drives partition distribution and leadershi
 | `number-of-replicas` | How many replicas of each replication group live in the zone.                                   |
 | `priority`           | Higher values give the zone higher Raft election priority, biasing partition leaders toward it. |
 
-### Comparison to legacy dual-region numbering
+### Comparison to dual-region broker numbering
 
-In the legacy [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which is what makes three or more zones possible.
+In the [dual-region](../../../../concepts/multi-region/dual-region.md) setup, brokers are numbered `0, 1, 2, 3, …` and the region is inferred from the parity of the node ID: even IDs (`0, 2, 4, …`) belong to one region and odd IDs (`1, 3, 5, …`) to the other. This parity-based approach only works for exactly two regions and hides the region in the numbering. Zone awareness replaces it with explicit zone names, which is what makes three or more zones possible.
 
 ## Example configuration
 
@@ -92,4 +92,6 @@ For the full list of properties and their environment-variable equivalents, see 
 ## Related resources
 
 - [Dual-region](../../../../concepts/multi-region/dual-region.md): synchronous two-region setup.
+- [Multi-Region RDBMS](../../../../concepts/multi-region/multi-region-rdbms.md): a three-region architecture built on zone awareness, in which a zone loss does not stop processing.
+- [Configure zone-aware multi-region deployments](/self-managed/deployment/helm/configure/multi-region-zone-awareness.md): set these properties through the Camunda Helm chart.
 - [Zeebe clustering](/components/zeebe/technical-concepts/clustering.md): how brokers, partitions, and replication work.
