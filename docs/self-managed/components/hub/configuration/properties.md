@@ -397,6 +397,12 @@ camunda.modeler:
 
 Camunda Hub uses Keycloak as the default authentication provider (using OAuth 2.0 + OpenID Connect) and integrates with [Management Identity](/self-managed/components/management-identity/overview.md) for user management and authorization (see [Manage access and permissions](/self-managed/components/management-identity/access-management/access-management-overview.md)).
 
+:::note
+In 8.10, Camunda Hub authentication is configured under `camunda.security.authentication.oidc.*`, using the same settings as the Orchestration Cluster. The properties listed in the mapping below continue to work and are translated to their 8.10 equivalents at startup, but they are deprecated and are removed in 8.11.
+
+See [authentication](./identity.md) for the current settings, and [upgrade Camunda components from 8.9 to 8.10](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration) for the mapping between them.
+:::
+
 <Tabs groupId="configType" defaultValue="application.yaml" queryString>
 <TabItem value="application.yaml" label="Application properties">
 
@@ -429,6 +435,7 @@ spring:
           issuer-uri: https://keycloak.example.com/auth/realms/camunda-platform
           jwk-set-uri: https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs # optional
           jws-algorithms: ES256 # optional
+          audiences: web-modeler-api,web-modeler-public-api # optional
 ```
 
 </TabItem>
@@ -444,6 +451,7 @@ spring:
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI`     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform`                               | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI`    | [optional] URL of the JWK Set endpoint (used for JWT validation). Only necessary if URL cannot be derived from the OIDC configuration endpoint.                                                                                                                                         | `https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs` | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWS_ALGORITHMS` | [optional] List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK Set response.                                                                                                                                        | `ES256`                                                                                   | -                        |
+| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_AUDIENCES`      | [optional]<br/>Comma-separated list of accepted audience claim values, validated in addition to `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_INTERNAL_API` and `CAMUNDA_MODELER_SECURITY_JWT_AUDIENCE_PUBLIC_API`.                                                                            | `web-modeler-api`                                                                         | -                        |
 | `OAUTH2_CLIENT_ID`                                         | Client ID of the Camunda Hub application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
 | `OAUTH2_CLIENT_SCOPE`                                      | [optional]<br/>OIDC scopes requested during authentication, determining what user information is included in the token.                                                                                                                                                                 | `full`                                                                                    | `openid email profile`   |
 | `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS`                  | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies.                     | `include`                                                                                 | -                        |
@@ -456,7 +464,7 @@ The `restapi` component default for `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM`
 In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_MODELER_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
 :::
 
-Refer to the [advanced Identity configuration guide](./identity.md) for additional details on how to connect a custom OpenID Connect (OIDC) authentication provider.
+Refer to the [authentication guide](./identity.md) for additional details on how Camunda Hub authenticates users, and on how to connect a custom OpenID Connect (OIDC) authentication provider.
 
 ### Camunda client
 

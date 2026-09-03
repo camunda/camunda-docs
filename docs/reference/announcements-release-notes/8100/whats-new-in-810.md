@@ -26,11 +26,7 @@ Upgrading to Camunda 8.10 delivers significant benefits and keeps your installat
 
 ## Summary of important changes
 
-Important changes in Camunda 8.10 are summarized as follows:
-
-:::note
-Changes for 8.10 will be added here as the 8.10 documentation is updated.
-:::
+Important changes in Camunda 8.10 are summarized in the following sections.
 
 :::info learn more and upgrade
 
@@ -39,6 +35,22 @@ Changes for 8.10 will be added here as the 8.10 documentation is updated.
 - Ready to upgrade? See the [upgrade guides](#upgrade-guides) to learn more about upgrading from Camunda 8.9 to 8.10.
 
 :::
+
+## Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+
+The Orchestration Cluster, Camunda Hub, and Optimize now authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces the separate identity stacks these components used previously. All three accept the same `camunda.security.authentication.*` settings, so there is one configuration surface to learn and one place to look when authentication does not behave as expected. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+
+Camunda Hub and Optimize both continue to accept their existing authentication settings in 8.10, translating the recognized properties to their new equivalents at startup, but those legacy properties are deprecated for both components and are removed in 8.11. Camunda Hub therefore requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged in 8.10 and is still handled by Management Identity.
+
+<p class="link-arrow">[Camunda Hub authentication](/self-managed/components/hub/configuration/identity.md)</p>
+
+### Optimize's move to the Camunda Security Library
+
+With the move to the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), Optimize adopts the same authentication and session handling as the Orchestration Cluster components.
+
+The legacy Optimize login and API security keys are deprecated in favor of `camunda.security.*` and removed in 8.11, along with the legacy security stack and its `optimize.security.csl.enabled=false` fallback. `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` is not deprecated and stays in use for user lookups. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full key mapping.
+
+<p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
 ## Optimize data filters in Console
 
