@@ -32,17 +32,6 @@ The results are available as:
 - **CSV**: A plain-text comma-separated file, compatible with any spreadsheet tool.
 - **JSON**: A flat, machine-readable report for AI assistants and other automation.
 
-In the following sections, you'll learn how to:
-
-- [Install the Diagram Converter](#install-the-diagram-converter)
-- [Analyze your diagrams and forms using the web interface](#analyze-your-diagrams-using-the-web-interface)
-- [Download JSON analysis results](#download-json-analysis-results)
-- [Use the CLI](#use-the-cli)
-- [Convert your diagrams](#convert-your-diagrams)
-- [Convert Camunda 7 forms](#convert-camunda-7-forms)
-- [Extend the conversion logic](#extend-the-conversion-logic)
-- [Convert expressions](#convert-expressions)
-
 ## Install the Diagram Converter
 
 ### Hosted Diagram Converter
@@ -144,7 +133,7 @@ Next, you'll learn how to use those results.
 
 ### Download JSON analysis results
 
-Download the analysis results as JSON when you want to use them with AI-assisted migration tooling or other automation.
+Download the analysis results as a JSON file to use them with AI-assisted migration tools or other automation.
 
 - In the web interface, click **Download JSON**.
 - In the CLI, add `--json` to your command.
@@ -187,7 +176,7 @@ The CLI supports two modes:
 
 ### Local mode
 
-The local CLI accepts a file or directory. When you provide a directory, it scans the directory and its subdirectories by default for `.bpmn`, `.bpmn20.xml`, `.dmn`, `.dmn11.xml`, and `.form` files, then processes every supported file it finds (use `-nr, --not-recursive` to disable recursion).
+The local CLI accepts a file or directory. When you provide a directory, it scans the directory and its subdirectories for `.bpmn`, `.bpmn20.xml`, `.dmn`, `.dmn11.xml`, and `.form` files by default, then processes every supported file it finds (use `-nr, --not-recursive` to disable recursion).
 
 ```shell
 java -jar camunda-7-to-8-diagram-converter-cli-{version}.jar local myDiagram.bpmn --json --xlsx
@@ -331,7 +320,7 @@ Converted files can be downloaded via the web interface or generated via the CLI
 
 ## Convert Camunda 7 forms
 
-The Diagram Converter also supports Camunda 7 form definition files (`.form`). You can upload forms in the web interface or include them in a local CLI conversion to update them for Camunda 8. The web interface provides a form preview, and the converter reports items that need review.
+The Diagram Converter supports Camunda 7 form definition files (`.form`). You can upload forms through the web interface or include them in a local CLI conversion to update them for Camunda 8. The web interface provides a form preview, and the converter reports items that need review.
 
 For generated task forms, use the [Camunda migration agent skill](./index.md#agentic-migration), which creates or adapts a standard Camunda 8 form during the agentic migration flow.
 
