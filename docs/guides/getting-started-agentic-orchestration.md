@@ -12,7 +12,6 @@ import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
 import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
-import AgentStateImg from '../components/agentic-orchestration/img/agent-state.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
