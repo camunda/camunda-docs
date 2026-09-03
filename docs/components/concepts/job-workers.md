@@ -186,7 +186,7 @@ The RNG used to randomly pick streams and clients provides a good uniform distri
 
 Job leasing also applies to streaming: a leased job only matches streams opened with a lease request, and streams opened without one only match unleased jobs. See [job leasing](#job-leasing) for details.
 
-A job whose variables contain secret references that are not yet resolved is not pushed. Its resolution is requested first, and the job is pushed once the references resolve. See [secret resolution and job activation](secret-resolution-and-job-activation.md).
+If a job contains unresolved secret references, the broker requests resolution before pushing the job. Once the references resolve, the broker pushes the job. See [secret resolution and job activation](secret-resolution-and-job-activation.md).
 
 To help visualize the process in general, here is a sequence diagram which shows a single worker opening a job stream for jobs of type "foo" against a cluster consisting of a single gateway and a single broker. It receives some jobs, and when it closes, one job that was pushed asynchronously is returned to the broker:
 
