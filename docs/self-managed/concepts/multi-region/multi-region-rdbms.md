@@ -110,7 +110,7 @@ Skewing partition leadership to the writer's zone through zone priority reduces 
 
 | Setting                       | Requirement                                                                                                                                  |
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
-| Partitioning scheme           | `ZONE_AWARE`. The legacy parity-based numbering only supports exactly two regions.                                                           |
+| Partitioning scheme           | `ZONE_AWARE`. The parity-based broker numbering only supports exactly two regions.                                                           |
 | Zones                         | One zone per region, three or more.                                                                                                          |
 | `number-of-replicas` per zone | `1`, so the replication factor equals the zone count and every zone holds one replica of each partition.                                     |
 | `number-of-brokers` per zone  | Declared per zone. Keep zones balanced so a zone loss removes an equal share of capacity.                                                    |

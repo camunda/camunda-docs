@@ -13,7 +13,7 @@ For what zones are and how the application places partition replicas across them
 
 `global.multiregion` is deprecated since chart v15 (Camunda 8.10) and will be removed in v16 (Camunda 8.11). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.multiregion`.
 
-Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the legacy numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them and change nothing else:
+Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them and change nothing else:
 
 ```yaml
 # Before
@@ -37,16 +37,16 @@ Zone awareness is configured only under `orchestration.multiregion`. The `mode`,
 
 `orchestration.multiregion.mode` selects how the chart numbers brokers and describes the topology.
 
-| Mode     | Behavior                                                                                           |
-| :------- | :------------------------------------------------------------------------------------------------- |
-| `legacy` | Default. Brokers get numeric node IDs and the region is inferred from parity. Two regions at most. |
-| `zoned`  | Brokers belong to named zones and are identified as `<zone>_<index>`. Any number of zones.         |
+| Mode       | Behavior                                                                                           |
+| :--------- | :------------------------------------------------------------------------------------------------- |
+| `numbered` | Default. Brokers get numeric node IDs and the region is inferred from parity. Two regions at most. |
+| `zoned`    | Brokers belong to named zones and are identified as `<zone>_<index>`. Any number of zones.         |
 
 Existing deployments keep their behavior: when you don't set `mode`, the chart renders exactly as it did before zone awareness existed.
 
 ## The mode is fixed for the life of the cluster
 
-Zoned brokers are identified by the composite `<zone>_<index>` and legacy brokers by a number, so switching `mode` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other. Choose the mode when you create the cluster. To move an existing cluster onto zone awareness, deploy a new one.
+Zoned brokers are identified by the composite `<zone>_<index>` and numbered brokers by a plain node ID, so switching `mode` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other. Choose the mode when you create the cluster. To move an existing cluster onto zone awareness, deploy a new one.
 
 ## Describe the topology
 
@@ -120,11 +120,11 @@ The chart rejects the inputs that would otherwise render a cluster that cannot f
 | A zone name that repeats                                                                        | Zone names are member ID prefixes, so a duplicate collapses two zones into one identity space.                                             |
 | A zone with more `numberOfReplicas` than `numberOfBrokers`                                      | A zone cannot hold more replicas of a partition than it has brokers to hold them.                                                          |
 | `orchestration.clusterSize` or `orchestration.replicationFactor` that contradicts the zone list | Both are derived from the zone list in zoned mode, so a stale value would be discarded in silence. Restating the derived total is allowed. |
-| `regions` or `regionId`                                                                         | They belong to the legacy numbering that zone awareness replaces.                                                                          |
+| `regions` or `regionId`                                                                         | They belong to the broker numbering that zone awareness replaces.                                                                          |
 
 The schema also requires each `zones` entry to declare `name`, `numberOfBrokers`, `numberOfReplicas`, and `priority`, with counts of at least `1` and a non-negative priority.
 
-The last two are rejected only when they carry a non-default value. Helm gives no reliable way to tell a value you supplied from the chart default, so a key that happens to equal its default stays inert rather than failing the render. None of them is removed or renamed, and all keep working in `legacy` mode.
+The last two are rejected only when they carry a non-default value. Helm gives no reliable way to tell a value you supplied from the chart default, so a key that happens to equal its default stays inert rather than failing the render. None of them is removed or renamed, and all keep working in `numbered` mode.
 
 The application owns the checks the chart cannot make from values alone, including replica counts against the resulting partition distribution and the remaining zone constraints.
 
