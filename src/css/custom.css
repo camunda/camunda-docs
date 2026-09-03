@@ -2411,6 +2411,52 @@ h3 + .release-announcement-row {
   overflow: visible;
 }
 
+/* Support "Experimental" badge on type: "doc" items */
+.sidebar-cta-experimental > .menu__link {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 0.25rem 0.5rem;
+  overflow: visible;
+  white-space: normal;
+}
+
+/* The link label renders in a <span> that clamps to a fixed line
+   count and hides overflow, which clips long titles instead of
+   wrapping them onto a new line next to the badge. Let it wrap freely. */
+.sidebar-cta-experimental > .menu__link > span {
+  display: inline;
+  overflow: visible;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  white-space: normal;
+}
+
+.sidebar-cta-experimental > .menu__link::after {
+  content: "Experimental";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--ifm-color-primary);
+  color: #fff;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+
+  padding: 2px 6px;
+  border-radius: 999px;
+
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.sidebar-cta-experimental > .menu__link.menu__link--active {
+  overflow: visible;
+}
+
 /* ---- Version switch toast notification ---- */
 .version-switch-toast {
   position: fixed;
