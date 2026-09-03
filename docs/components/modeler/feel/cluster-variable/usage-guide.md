@@ -89,7 +89,7 @@ The following rules apply to an input mapping that reads a `SECRET_REFERENCE`-ki
 - If the variable does not exist, or if its kind is `JSON`, nothing is resolved and no incident is raised.
 - Execution listener and task listener jobs never carry resolved values, even when the element they run on has such an input mapping.
 
-The reference is recorded on the job at creation, the same path as a reference written directly into an input mapping, and resolved in the background ahead of activation. The resolved value reaches the worker only once the job is handed out. For what this means for when a job reaches a worker, see [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+The reference is recorded on the job at creation, in the same way as a reference written directly into an input mapping, and resolved in the background ahead of activation. The resolved value reaches the worker only once the job is handed out. For what this means for when a job reaches a worker, see [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
 
 ## Access using FEEL expressions
 
