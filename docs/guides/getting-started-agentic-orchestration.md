@@ -279,7 +279,7 @@ Because the AI agent in this example is an ad-hoc sub-process, you can't use **T
 
 ### Monitor the process execution
 
-Open [Operate](/components/operate/operate-introduction.md) at http://localhost:8080/operate, and locate your process instance to watch the agent at work. 
+Open [Operate](/components/operate/operate-introduction.md) at http://localhost:8080/operate, and locate your process instance to watch the agent at work.
 
 Select the AI agent element to view its resolved tools, usage metrics, and full conversation history. For a hands-on walkthrough of the agent instance details available in Operate, see [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md).
 
