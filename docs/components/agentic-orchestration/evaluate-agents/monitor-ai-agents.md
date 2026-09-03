@@ -63,6 +63,7 @@ Operate highlights the agent element's current [state](/components/agentic-orche
 
 Select the agent element on the diagram. Operate shows the [data available](/components/agentic-orchestration/agent-definitions-and-instances.md#data-available-in-operate) for its agent instance, including:
 
+- Its agent instance key, displayed above the status.
 - Its current state, model, and system prompt.
 - The tools resolved for it.
 - Its usage metrics: token consumption, tool call count, and model call count against the configured limit.
@@ -70,11 +71,20 @@ Select the agent element on the diagram. Operate shows the [data available](/com
 
 <img src={AgentPanel} alt="Agent panel overview"/>
 
+:::note
+If multiple agent instances are active at the same element, use the dropdown next to the agent instance key to switch between them. Alternatively, select the relevant element instance in **Instance History**, as each element instance has only one agent instance.
+:::
+
 For guidance on reading these signals to catch a stuck or looping agent, see [detect off-rail agents](./detect-off-rail-agents.md).
 
 ## Step 4: Review the conversation history
 
 The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1.loop iteration`.
+
+By default, entries are sorted by **Most recent first**. You can select **Oldest first** to read the history chronologically:
+
+- **Most recent first** helps you quickly understand the current situation, typically when resolving a problem.
+- **Oldest first** helps you trace how the agent reached its current state, typically when building an agent for the first time.
 
 For this example, the first iteration shows:
 
@@ -84,7 +94,7 @@ For this example, the first iteration shows:
 
 <img src={AgentConversationHistory} alt="Agent conversation history overview"/>
 
-If a tool maps to a BPMN element in your process, Operate links the tool call in the conversation history to that element on the diagram, so you can navigate straight from the decision trail to the execution step it produced.
+Select a tool call entry to open its details and inspect the full input and output exchanged with the tool.
 
 ## Step 5: Understand how agent memory is stored
 
@@ -104,13 +114,12 @@ Go back to Operate. In the **User Feedback** element, you will see the execution
 
 In this case, the required action is to provide feedback on the agent results. To do so:
 
-1. Select the **User Feedback** element.
-2. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
-3. Select the user feedback task and assign to yourself by clicking **Assign to me**.
-4. Analyze the result. You will see a joke, as requested in the prompt.
-5. You can follow up with more prompts to continue testing your AI agent.
-6. Select the **Are you satisfied with the result?** checkbox when you want to finish the process, then click **Complete task**.
-7. Go back to Operate. You will see the process instance is now completed, and the end event has been triggered.
+1. Open [Tasklist](/components/tasklist/introduction-to-tasklist.md).
+2. Locate the user feedback task and assign it to yourself by clicking **Assign to me**.
+3. Analyze the result. You will see a joke, as requested in the prompt.
+4. You can follow up with more prompts to continue testing your AI agent.
+5. Select the **Are you satisfied with the result?** checkbox when you want to finish the process, then click **Complete task**.
+6. Go back to Operate. You will see the process instance is now completed, and the end event has been triggered.
 
 ## Next steps
 
