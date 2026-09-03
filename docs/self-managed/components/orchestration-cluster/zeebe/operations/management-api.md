@@ -388,7 +388,8 @@ POST actuator/cluster/zones/{zoneId}
 {
   "numberOfReplicas": <integer>,
   "priority": <integer>,
-  "numberOfBrokers": <integer>
+  "numberOfBrokers": <integer>,
+  "brokers": [<brokerId1>, <brokerId2>, ...]
 }
 ```
 
@@ -405,7 +406,7 @@ Use `brokers` when they are not: a zone that comes back with a subset of its bro
 IDs that are not contiguous, and only the explicit list can express that.
 
 <details>
-  <summary>Example request</summary>
+  <summary>Example requests</summary>
 
 ```
 curl -X 'POST' \
