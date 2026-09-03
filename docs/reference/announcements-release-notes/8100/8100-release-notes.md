@@ -54,12 +54,12 @@ New agent configuration features help you more easily configure your agent tools
 | Input from agent, Output to agent | Automatically fill in either configuration part of the agent tool contract: `fromAi()` inputs and the `toolCallResult` output. <p><ul><li><p>Use **Input from agent** to add a correctly structured agent-supplied input, and **Output to agent** to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                                                                                                          | <p><ul><li>Desktop Modeler</li><li>Web Modeler</li></ul></p>                                |
 | Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration problems are highlighted in the Modeler. Select a surfaced error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is provided for how to resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Web Modeler</li></ul></p> |
 
-<p class="link-arrow">[Modeling guidance](/components/modeler/reference/modeling-guidance/index.md)</p>
+<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
 
 :::note
 
 - Changes are explicit, apply only when the correction is deterministic, and can be undone.
-- These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You may need to [update an element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this feature.
+- These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
 
 :::
 
@@ -103,13 +103,18 @@ All AWS connectors are updated to use AWS SDK for Java v2.
 
 This ensures Camunda AWS connector implementations are using supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
 
-#### Observability improvements
+#### Connector Management observability improvements
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3019 -->
 
-Release notes required.
+Connector Management now provides a unified view of inbound and outbound connectors in Console.
+
+- The refreshed experience adds status summaries, search, filtering, sorting, per-runtime health and metrics, richer process details, clearer activity logs, and direct links to Operate.
+- Operators can also reset inbound connector executables from the UI, while webhook activity logs expose redacted request metadata and bounded body previews to make troubleshooting easier.
+
+<p class="link-arrow">[Manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md)</p>
 
 #### Storage connector improvements
 
@@ -285,7 +290,7 @@ In this setup, Web Modeler and Console still continue to use Auth0 via the ident
 
 Centralized secret resolution is introduced for connectors and job workers via Zeebe with this alpha.
 
-#### Coordinated leadership transfer
+#### New rebalance API for coordinated leadership transfer
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
