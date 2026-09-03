@@ -682,6 +682,7 @@ module.exports = {
             "components/admin/client",
             "components/admin/mapping-rules",
             "components/admin/tenant",
+            "components/admin/cluster-admin",
             "components/admin/cluster-variables",
             "components/admin/global-user-task-listeners",
             "components/admin/audit-operations",
@@ -1564,13 +1565,15 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.9",
+      label: "Upgrade to Camunda 8.10",
       className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "apis-tools/migration-manuals/migrate-to-89",
+        id: "apis-tools/migration-manuals/migrate-to-810",
       },
       items: [
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+        "apis-tools/migration-manuals/web-modeler-v1-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
         "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
@@ -1579,18 +1582,6 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
         "apis-tools/migration-manuals/saas-orchestration-architecture",
-      ],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.10",
-      link: {
-        type: "doc",
-        id: "apis-tools/migration-manuals/migrate-to-810",
-      },
-      items: [
-        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
-        "apis-tools/migration-manuals/web-modeler-v1-apis",
       ],
     },
   ],
