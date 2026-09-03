@@ -75,6 +75,15 @@ applyTo: "**/*.md"
 - Write "Elasticsearch" as one word (not "ElasticSearch" or "Elastic search").
 - Write "GitHub" with a capital H (not "Github").
 
+### Agentic orchestration
+
+Agentic orchestration and AI-driven development are native to Camunda. Apply this checklist to any page edit that could plausibly mention AI agents, agentic orchestration, or agent-related concepts:
+
+- **Native framing**: Don't force a mention. Agent-driven work uses the same engine, governance, and BPMN elements as any other process.
+- **Example selection**: When a page needs an illustrative example, scenario, or use case, consider whether an AI agent is a natural fit as one of the actors, and prefer that framing over a purely human/deterministic example when it's equally illustrative. Applies both when writing a new example and when reviewing content that adds one. Don't override native framing to force this; skip it if an agent-involved example would feel invented for that page.
+- **Plain language**: Avoid marketing or positioning language.
+- **Link, don't duplicate**: Before introducing or changing an agent-related term, check `docs/reference/glossary.md` (which reflects the [agent terminology model](https://github.com/camunda/product-development/blob/main/strategy/decisions/2026-06-23-agent-terminology-model.md) and the [Handbook's AI and agentic orchestration glossary](https://lamppost.camunda-it.rocks/handbook/#departments/marketing/terminology/references/ai-glossary.md)). Link to the [glossary](/reference/glossary.md) or the [agentic orchestration](/components/agentic-orchestration/agentic-orchestration-overview.md) pages instead of redefining concepts documented there.
+
 ## 6. AI-ready content
 
 Camunda docs are a primary input for AI assistants and RAG pipelines. These rules are covered in the style guide, but are called out here because they have the highest impact on AI extractability:
