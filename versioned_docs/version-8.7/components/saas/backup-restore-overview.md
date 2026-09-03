@@ -15,7 +15,7 @@ Backups are designed for disaster recovery, not long-term archival.
 - [How to restore a cluster](./how-to-restore.md)
 - [Restore scenarios](./restore-scenarios.md)
 - [Restore troubleshooting](./restore-troubleshooting.md)
-- [Backups](./backups.md)
+- [Backups](../concepts/backups.md)
 
 :::
 
