@@ -394,7 +394,7 @@ POST actuator/cluster/zones/{zoneId}
 ```
 
 Name the zone's brokers either by count with `numberOfBrokers`, or one by one with
-`brokers`. Exactly one of the two must be set; setting both, or neither, is rejected with
+`brokers`. Exactly one of the two must be set; setting both, or neither, is rejected with HTTP
 `400`.
 
 `numberOfBrokers` is the number of brokers deployed in the zone, from which the broker IDs
@@ -402,8 +402,8 @@ Name the zone's brokers either by count with `numberOfBrokers`, or one by one wi
 brokers of a zone-aware cluster assign themselves, so a zone whose brokers are numbered
 from zero without gaps needs nothing else.
 
-Use `brokers` when they are not: a zone that comes back with a subset of its brokers has
-IDs that are not contiguous, and only the explicit list can express that.
+Use `brokers` when the IDs are not contiguous, which is what a zone coming back with only
+some of its brokers looks like: only the explicit list can express that.
 
 <details>
   <summary>Example requests</summary>
