@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
 import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
+import AgentPanelImg from '../components/agentic-orchestration/img/agent-panel.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
@@ -281,7 +282,11 @@ Because the AI agent in this example is an ad-hoc sub-process, you can't use **T
 
 Open [Operate](/components/operate/operate-introduction.md) at http://localhost:8080/operate, and locate your process instance to watch the agent at work.
 
-Select the AI agent element to view its resolved tools, usage metrics, and full conversation history. For a hands-on walkthrough of the agent instance details available in Operate, see [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md).
+Select the AI agent element to view usage metrics, its full conversation history, available tools, and other details:
+
+<img src={AgentPanelImg} alt="Agent panel overview" width="80%"/>
+
+For a hands-on walkthrough of the agent instance details available in Operate, see [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md).
 
 When you run the AI agent process:
 
