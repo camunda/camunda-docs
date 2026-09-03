@@ -8,14 +8,14 @@ With the process definition data deletion API, you can delete all Optimize analy
 
 ## Functionality
 
-This endpoint deletes Optimize's own data (process instances, the process definition, and cached report data) for the given process definition key.
+This endpoint deletes Optimize's own data (process instances and the process definition) for the given process definition key. If this is the last remaining version of the process for its tenant, it also clears any cached process definition BPMN XML from reports that reference it.
 It does not delete the process definition from the cluster. To remove a process definition from the cluster, use the [Delete resource](/apis-tools/orchestration-cluster-api-rest/specifications/delete-resource.api.mdx) endpoint.
 It also does not delete the underlying Elasticsearch or OpenSearch indices.
 The request is processed asynchronously. The deletion is queued until a background job performs the actual data deletion.
 
 ## Configuration
 
-In Self-Managed, enable the job registry dispatcher so queued deletion requests get processed. See [Job registry dispatcher](/self-managed/components/optimize/configuration/system-configuration.md#job-registry-dispatcher) for the required configuration.
+In Self-Managed, enable the job registry dispatcher so queued deletion requests get processed. See [Process definition data deletion](/self-managed/components/optimize/configuration/process-definition-deletion.md) for the required configuration.
 
 ## Usage notes
 
@@ -33,9 +33,9 @@ Where `processDefinitionKey` is the numeric key of the process definition whose 
 
 The following request headers have to be provided with every delete request:
 
-| Header         | Constraints | Value                                                  |
-| -------------- | ----------- | ------------------------------------------------------ |
-| Authentication | REQUIRED    | See [authentication](./optimize-api-authentication.md) |
+| Header        | Constraints | Value                                                  |
+| ------------- | ----------- | ------------------------------------------------------ |
+| Authorization | REQUIRED    | See [authentication](./optimize-api-authentication.md) |
 
 ## Path parameters
 
