@@ -570,6 +570,52 @@ Deployment change 1 description.
 </div>
 <div className="release-announcement-content">
 
+#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+
+With Camunda 8.10, the Orchestration Cluster, Camunda Hub, and Optimize authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+
+Camunda Hub and Optimize accept their existing authentication settings in 8.10 and translate the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
+
+**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings before upgrading to 8.11, when their legacy authentication properties are removed.
+
+<p className="link-arrow">[Camunda Hub authentication configuration](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
+
+<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+
+<p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Legacy Camunda Hub and Optimize authentication properties deprecated
+
+The authentication properties Camunda Hub and Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Both components still accept them in 8.10 and translate the recognized properties to their new equivalents at startup, and both remove them in 8.11.
+
+**Action:** Migrate to the `camunda.security.*` settings before upgrading to 8.11.
+
+<p className="link-arrow">[Camunda Hub authentication mapping](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
+
+<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Console and Web Modeler Admin roles gain new Hub cluster access on Self-Managed
 
 Starting with Camunda 8.10, Camunda Hub replaces Console and Web Modeler. Management Identity only adds roles, applications, and permissions on startup and never removes them, so two existing Self-Managed roles automatically gain access they didn't have in 8.9 — with no role reassignment or opt-in required:
@@ -630,3 +676,56 @@ Web Modeler change 1 description.
 
 </div>
 </div> -->
+
+## Optimize
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize authentication moves to the Camunda Security Library
+
+Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), adopting the same authentication and session handling as the Orchestration Cluster components.
+
+**Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Legacy Optimize security configuration keys deprecated
+
+With the move to the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
+
+Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
+
+**Action:** Migrate to the `camunda.security.*` keys before upgrading to 8.11. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `optimize.security.csl.enabled=false` fallback is temporary
+
+If the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL) causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+
+**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
+
+</div>
+</div>
