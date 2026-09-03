@@ -11,6 +11,9 @@ import ProcessInstance from '../img/process-instance-overview.png';
 import AgentState from '../img/agent-state.png';
 import AgentPanel from '../img/agent-panel.png';
 import AgentConversationHistory from '../img/agent-conversation-history.png';
+import ToolCallDetails from '../img/tool-call-details.png';
+import AssistantMessageExpand from '../img/assistant-message-expand.png';
+import AssistantMessagePreview from '../img/assistant-message-preview.png';
 
 Monitor and troubleshoot your AI agent process instances in real time using Operate.
 
@@ -93,7 +96,25 @@ For this example, the first iteration shows:
 
 <img src={AgentConversationHistory} alt="Agent conversation history overview"/>
 
-Select a tool call entry to open its details and inspect the full input and output exchanged with the tool.
+:::tip
+Hover over a message's token count or duration badge to see a breakdown of its usage metrics.
+:::
+
+You can inspect a tool call, or a user or assistant message, by selecting its expand icon to open a larger view. 
+
+<img src={AssistantMessageExpand} alt="Expand icon on an assistant message"/>
+
+Expanding a tool call shows the full input and output exchanged with the tool:
+
+<img src={ToolCallDetails} alt="Tool call details for the Jokes API tool"/>
+
+Expanding a message opens a **Preview** of its rendered Markdown by default. Switch to **Source** to view the raw Markdown instead:
+
+<img src={AssistantMessagePreview} alt="Expanded assistant message with Preview and Source tabs"/>
+
+:::note
+Use the copy icon in any of these expanded views to copy its content.
+:::
 
 ## Step 5: Understand how agent memory is stored
 
