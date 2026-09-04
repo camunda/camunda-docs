@@ -104,7 +104,7 @@ As of Camunda 8.8, the `/actuator` endpoints for backups have been moved to `/ac
 
 To create a backup, complete the following [backup process](#back-up-process).
 
-You can also optionally [back up your Web Modeler data](#back-up-web-modeler-data).
+You can also optionally [back up your Camunda Hub data](#back-up-hub-data).
 
 :::caution before you begin
 
@@ -732,9 +732,9 @@ If the request fails, verify that all brokers are running and retry.
 If any of the steps above fail, you might have to restart with a new backup ID. Ensure Zeebe exporting is resumed if the backup process force quits in the middle of the process.
 :::
 
-## (Optional) Back up Web Modeler data {#back-up-web-modeler-data}
+## (Optional) Back up Camunda Hub data {#back-up-hub-data}
 
-To create a Web Modeler data backup, refer to the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/backup-dump.html) to back up the database that Web Modeler uses.
+To create a Camunda Hub data backup, refer to the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/backup-dump.html) to back up the database that Camunda Hub uses.
 
 For example, to create a backup of the database using `pg_dumpall`, use the following command:
 
@@ -750,7 +750,7 @@ Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a d
 :::
 
 :::info
-You can [restore a Web Modeler data backup](restore.md#optional-restore-a-web-modeler-data-backup).
+You can [restore a Camunda Hub data backup](restore.md#optional-restore-a-camunda-hub-data-backup).
 :::
 
 ## Cleaning up backups
