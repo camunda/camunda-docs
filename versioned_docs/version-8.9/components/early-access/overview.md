@@ -46,7 +46,7 @@ An Early access release is the release of a new product. By testing this release
 
 ## What to expect
 
-|                                    | Alpha features                                                                                   |
+|                                    |                                                                                    |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------ |
 | <b>Purpose</b>                     | Test maturity of a new product before GA                                                         |
 | <b>Suitable for production use</b> | No                                                                                               |
