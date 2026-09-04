@@ -249,7 +249,20 @@
         "reference/regions",
         "reference/data-locations",
         "components/concepts/encryption-at-rest",
-        "components/concepts/backups",
+        {
+          "type": "category",
+          "label": "Backup and restore",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/backup-restore-overview"
+          },
+          "items": [
+            "components/concepts/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting"
+          ]
+        },
         "components/concepts/data-retention",
         "reference/saas-ip-addresses"
       ]

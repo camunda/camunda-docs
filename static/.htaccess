@@ -185,6 +185,12 @@ RewriteRule ^docs/guides/update-guide/introduction/?$ /docs/self-managed/compone
 # The next sub-pages were removed in favor of a stub index that links to the 8.9 guide (PR #9013).
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-operators/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/bitnami-to-managed-services/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
+
+# Physical Tenants web-apps page merged into api-routing.md's "Webapp routing" section (too thin to stand alone).
+RewriteRule ^docs/next/self-managed/concepts/physical-tenants/web-apps/?$ /docs/next/self-managed/concepts/physical-tenants/api-routing/#webapp-routing [R=301,L]
+
+# configure-multi-tenancy renamed to configure-logical-tenants: "multi-tenancy" collided with Physical Tenants, which is also a multi-tenancy model.
+RewriteRule ^docs/next/self-managed/deployment/helm/configure/configure-multi-tenancy/?$ /docs/next/self-managed/deployment/helm/configure/configure-logical-tenants/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/alternatives/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 RewriteRule ^docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/zero-downtime/?$ /docs/next/self-managed/deployment/helm/operational-tasks/migration-from-bitnami/ [R=301,L]
 
@@ -200,6 +206,9 @@ RewriteRule ^docs/next/apis-tools/administration-sm-api/administration-sm-api-au
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/administration-api-self-managed/?$ /docs/next/apis-tools/web-modeler-api/overview/ [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-clusters/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
 RewriteRule ^docs/next/apis-tools/administration-sm-api/specifications/get-usage-metrics/?$ https://modeler.camunda.io/swagger-ui/index.html [R=301,L]
+
+# 8.9 API/SDK migration guide removed from next docs; migrate-to-810 is now the current guide (issue #9413)
+RewriteRule ^docs/next/apis-tools/migration-manuals/migrate-to-89/?$ /docs/next/apis-tools/migration-manuals/migrate-to-810/ [R=301,L]
 
 # Removed in 8.10: Operate API, Tasklist REST API, ZPT, public start forms, and Tasklist V1 access restrictions
 RewriteRule ^docs/next/apis-tools/operate-api/authentication/?$ /docs/next/components/concepts/access-control/access-control-overview/ [R=301,L]
@@ -256,7 +265,7 @@ RewriteRule ^docs/next/components/modeler/web-modeler/play-your-process/?$ /docs
 RewriteRule ^docs/next/components/modeler/web-modeler/task-testing/?$ /docs/next/components/hub/workspace/modeler/validation/task-testing/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/advanced-modeling/test-scenario-files/?$ /docs/next/components/hub/workspace/modeler/validation/test-files/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/token-simulation/?$ /docs/next/components/hub/workspace/modeler/validation/token-simulation/ [R=301,L]
-RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration/ [R=301,L]
+RewriteRule ^docs/next/components/modeler/web-modeler/use-shared-project-for-organization-wide-collaboration/?$ /docs/next/components/hub/organization/manage-workspaces/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/implement-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/implement-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/design-your-process/?$ /docs/next/components/hub/workspace/modeler/collaboration/design-your-process/ [R=301,L]
 RewriteRule ^docs/next/components/modeler/web-modeler/collaborate-with-modes/?$ /docs/next/components/hub/workspace/modeler/collaboration/collaborate-with-modes/ [R=301,L]

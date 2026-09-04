@@ -5,11 +5,7 @@ sidebar_label: "Isolation model"
 description: "Learn how Physical Tenants isolate execution, storage, and API routing within a single orchestration cluster."
 ---
 
-import AoGrid from "../../../components/react-components/_ao-card";
-import IconConfigImg from "../../../components/assets/icon-config.png";
-import IconOperateImg from "../../../components/assets/icon-operate.png";
-
-Learn how Physical Tenants isolate execution, storage, and API routing within one Orchestration Cluster.
+Learn how Physical Tenants isolate execution, storage, and API routing within one orchestration cluster.
 
 :::info
 Use the [Physical Tenants overview](/self-managed/concepts/multi-tenancy/physical-tenants.md) to compare tenancy models and choose a starting point.
@@ -19,7 +15,7 @@ Physical Tenants provide strong isolation within a single orchestration cluster.
 
 ## Isolation model
 
-A Physical Tenant is an isolated execution unit inside one orchestration cluster. Its partitions run on shared brokers while tenant data remains isolated.
+A Physical Tenant is an isolated execution unit inside one orchestration cluster.
 
 | Layer             | Isolation model                                                                                          | Shared or isolated    |
 | ----------------- | -------------------------------------------------------------------------------------------------------- | --------------------- |
@@ -55,14 +51,6 @@ graph TD
         cp --> tenantA
         cp --> tenantB
     end
-
-    classDef shared fill:#e4eef8,stroke:#2272c9,color:#14082c
-    classDef tenant fill:#fde8da,stroke:#fc5d0d,color:#14082c
-    classDef storage fill:#e8fdf1,stroke:#10c95d,color:#14082c
-
-    class cp,gw shared
-    class tenantA,tenantB tenant
-    class raftA,raftB,secA,secB,docA,docB storage
 ```
 
 The diagram shows one orchestration cluster boundary with shared control-plane components and tenant-specific execution and storage boundaries.
@@ -75,28 +63,17 @@ Use tenant-scoped routes for tenant-specific requests:
 - gRPC: `Camunda-Physical-Tenant` header (routes to `default` when omitted)
 - Default tenant compatibility: plain `/v2/...` requests route to the default Physical Tenant
 
-Cluster-wide endpoints use the dedicated `/cluster/v2/...` path prefix. Cluster-wide management endpoints require cluster-admin access; `/cluster/v2/status` remains public for health checks.
+Cluster-wide management endpoints use a dedicated `/cluster/v2/...` path prefix and require the cluster-admin role. Tenant-scoped endpoints use `/physical-tenants/{physicalTenantId}/v2/...`; endpoints at the standard `/v2/...` paths, including `/v2/topology`, are scoped to the default Physical Tenant. See [cluster admin](/components/admin/cluster-admin.md) for the operations served under this prefix.
 
 ## Configure and provision Physical Tenants
 
-Use these guides to configure tenant defaults and manage the Physical Tenant lifecycle.
+To configure tenant defaults, per-tenant overrides, validation expectations, and property examples, see [configuration reference](./configuration-reference.md).
 
-<AoGrid columns={2} ao={[
-{
-link: "./configuration-reference/",
-title: "Configuration reference",
-image: IconConfigImg,
-description: "Define tenant defaults, overrides, validation rules, and property examples.",
-},
-{
-link: "./provisioning-and-lifecycle/",
-title: "Provisioning and lifecycle",
-image: IconOperateImg,
-description: "Add tenants, apply configuration changes, and manage tenant availability.",
-},
-]} />
+To provision new tenants and understand lifecycle behavior in 8.10, including rolling restart expectations and unsupported operations, see [provisioning and lifecycle](./provisioning-and-lifecycle.md).
 
-Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web apps](./web-apps.md).
+Learn how Operate, Tasklist, and Optimize behave per Physical Tenant, including URL navigation, data scoping, and session behavior, in [web app routing](./api-routing.md#webapp-routing).
+
+For post-deployment operations, see [back up and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants), [in-process restore](/self-managed/operational-guides/backup-restore/in-process-restore.md#restore-a-cluster-with-multiple-physical-tenants), and [cluster scaling](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-a-cluster-with-multiple-physical-tenants).
 
 To serve several Physical Tenants from one App Integrations deployment, including per-tenant audiences and notification routing for Microsoft Teams, see [App Integrations](./app-integrations.md).
 
@@ -133,6 +110,6 @@ Document stores are declared once in the root `camunda.document.*` catalog. Each
 
 Isolation is enforced by validating the resolved `provider, bucket/container, path` tuple at startup. If two tenants resolve to the same tuple, Camunda fails startup and names the conflicting tenants in the error.
 
-For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store isolation](./configuration-reference.md#document-store-isolation) in the configuration reference.
+For configuration examples covering shared buckets with per-tenant paths, dedicated buckets per tenant, and GCP prefix isolation, see [document store storage](./storage-isolation.md#document-store-storage) in storage isolation.
 
 For the storage backends used by tenant-scoped data, see [secondary storage](../secondary-storage/index.md) and [document handling configuration](../document-handling/configuration/index.md).

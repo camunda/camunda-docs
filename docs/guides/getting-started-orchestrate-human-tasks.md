@@ -13,7 +13,6 @@ import ExpressionInputImg from './img/expression-input-example.png';
 import FormValuesTop from './img/form-values-top.png';
 import FormValuesBottom from './img/form-values-bottom.png';
 import FormId from './img/form-id.png';
-import ImplementModeImg from './img/implement-mode-active.png';
 import FormLinkingImg from './img/form-linking.png';
 import ModelerNavImg from './img/modeler-navigation.png';
 import ModelerGlobalNavImg from './img/modeler-global-nav.png';
@@ -91,7 +90,6 @@ Within Desktop Modeler, select **BPMN diagram** under **Create a new file**.
 
 :::note
 To run this guide, make sure to be in **Implement** mode to specify the technical details of the process.
-<img src={ImplementModeImg} style={{width: 250}} alt="Active implement mode tab" />
 :::
 
 </TabItem>
