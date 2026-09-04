@@ -37,7 +37,7 @@ As of Camunda 8.10, `v1` job workers already run internally on the same native p
 
 :::important
 Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the `v1` job worker until you deploy a new version with the `v2` template applied.
-:::
+  :::
 
 ## Model provider configuration mapping
 
@@ -142,7 +142,7 @@ A multi-replica connectors runtime setup means each replica acquires and caches 
   - If the header value was a `Bearer <token>`, move `<token>` into the `v2` **API key** field, and remove the `Authorization` header from `v2` **Headers**.
   - For any other scheme (for example `Basic ...`), keep the header as-is in `v2` **Headers**, and enter any non-blank placeholder value in **API key** (it's otherwise unused for authentication).
 - Otherwise, carry your `v1` **API key** value over directly. If you had neither an `Authorization` header nor an API key configured, enter any non-blank placeholder value.
-  :::
+:::
 
 Also double-check the resulting request path: `v2` appends `/chat/completions` or `/responses` to **API endpoint** depending on the selected **API**, which may differ from what your `v1` endpoint pointed at.
 

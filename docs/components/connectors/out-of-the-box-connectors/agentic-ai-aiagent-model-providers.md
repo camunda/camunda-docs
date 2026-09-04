@@ -50,6 +50,18 @@ The **Timeout** field on a provider takes precedence over the default timeout. V
 The timeout must not exceed the job worker timeout. Otherwise, the job may be reassigned by the engine while the model call is still in progress.
 :::
 
+### Tune response variation
+
+**Temperature**, **top P**, and **top K** control response variation by changing how the model selects each next token. Start with the model defaults, change one setting at a time, and evaluate the results with representative prompts. Lower values generally produce more focused, predictable responses, but don't guarantee deterministic output.
+
+Tune the settings in this order:
+
+1. **Temperature** is the primary control. It adjusts the relative probabilities of candidate tokens. Lower values favor the most likely tokens more strongly, while higher values distribute probability more evenly and increase variation.
+1. **top P** is an advanced control. It limits selection to the smallest set of likely tokens whose cumulative probability reaches the configured value. Lower values narrow that set. Adjust **top P** only if temperature alone doesn't produce the required behavior.
+1. **top K** is an advanced control configured as a positive integer. It limits selection to a fixed number of the most likely tokens. Lower values narrow the candidate set. Adjust **top K** only after temperature and **top P**, and only if the selected model supports it.
+
+Supported settings, ranges, and behavior vary by model. For example, `top P = 0.9` considers enough likely tokens to cover 90% of the probability mass, while `top K = 40` considers only the 40 most likely tokens.
+
 ### Advanced provider options
 
 Most backends also provide advanced, low-level customization fields: **HTTP headers**, **query parameters**, and **body properties**. With these fields, you can add or override values in the outgoing HTTP request.
@@ -102,9 +114,9 @@ Use this backend for any endpoint implementing the Anthropic Messages API, such 
 | **Thinking display**       | No       | Controls how extended thinking is returned when **Thinking mode** is `adaptive`: `summarized` includes a plain-text summary in the response, `omitted` leaves it out.                                                              |
 | **Enable prompt caching**  | No       | Enables Anthropic's automatic prompt caching. See the [prompt caching documentation](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#automatic-caching).                                                      |
 | **Maximum tokens**         | No       | The maximum number of tokens per request to generate before stopping.                                                                                                                                                              |
-| **Temperature**            | No       | Floating point number between 0 and 1. The higher the number, the more randomness is injected into the response.                                                                                                                   |
-| **top P**                  | No       | Floating point number between 0 and 1. Recommended for advanced use cases only.                                                                                                                                                    |
-| **top K**                  | No       | Integer greater than 0. Recommended for advanced use cases only.                                                                                                                                                                   |
+| **Temperature**            | No       | Primary response-variation control from 0 to 1. Lower values favor likely tokens more strongly; higher values increase variation.                                                                                                  |
+| **top P**                  | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                  |
+| **top K**                  | No       | Advanced sampling control configured as a positive integer. Limits selection to this number of the most likely tokens.                                                                                                             |
 
 ## AWS Bedrock Converse
 
@@ -129,8 +141,8 @@ Model availability depends on the region and model. See [supported foundation mo
 | **Model**                 | Yes      | The model ID to use. See [inference profile support](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html).                   |
 | **Enable prompt caching** | No       | Enables Bedrock's automatic prompt caching. See the [prompt caching documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html). |
 | **Maximum tokens**        | No       | The maximum number of tokens per request to generate before stopping. Leave unset to use the model default.                                                   |
-| **Temperature**           | No       | Floating point number. The higher the number, the more randomness is injected into the response. Supported ranges vary by model.                              |
-| **top P**                 | No       | Floating point number between 0 and 1. Recommended for advanced use cases only.                                                                               |
+| **Temperature**           | No       | Primary response-variation control. Lower values favor likely tokens more strongly; higher values increase variation. Supported ranges vary by model.         |
+| **top P**                 | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                             |
 
 Bedrock Converse doesn't support a **Reasoning**/**Effort** configuration or a **top K** parameter.
 
@@ -198,8 +210,8 @@ Use this backend to connect to any LLM that exposes an OpenAI-compatible API, in
 | **Model**                                                                        | Yes      | The model ID to use. See the [OpenAI models documentation](https://platform.openai.com/docs/models).                                                                                                                                                                                                                                                                              |
 | **Effort**                                                                       | No       | Controls how many tokens the model spends when responding, trading thoroughness against speed and cost. Not supported on all models. See the [Responses](https://developers.openai.com/api/reference/resources/responses/methods/create) or [Chat Completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create) API reference. |
 | **Max output tokens** (Responses) / **Max completion tokens** (Chat Completions) | No       | The maximum number of tokens per request to generate before stopping. The field name depends on the selected **API**.                                                                                                                                                                                                                                                             |
-| **Temperature**                                                                  | No       | Floating point number between 0 and 2. The higher the number, the more randomness is injected into the response.                                                                                                                                                                                                                                                                  |
-| **top P**                                                                        | No       | Recommended for advanced use cases only.                                                                                                                                                                                                                                                                                                                                          |
+| **Temperature**                                                                  | No       | Primary response-variation control from 0 to 2. Lower values favor likely tokens more strongly; higher values increase variation.                                                                                                                                                                                                                                                 |
+| **top P**                                                                        | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                                                                                                                                                                 |
 
 OpenAI doesn't support a **top K** parameter or prompt caching configuration.
 
@@ -232,9 +244,9 @@ Select this provider to use Google's Gemini models. Choose a **Backend** to spec
 | **Thinking budget (tokens)** | No       | Gemini 2.5 models: token budget for extended thinking. `-1` = dynamic, `0` = disabled. Mutually exclusive with **Thinking level**. See the [thinking documentation](https://ai.google.dev/gemini-api/docs/thinking). |
 | **Thinking level**           | No       | Gemini 3.x models: qualitative thinking effort (`default`/`minimal`/`low`/`medium`/`high`). Mutually exclusive with **Thinking budget**.                                                                             |
 | **Maximum tokens**           | No       | The maximum number of tokens to generate before stopping.                                                                                                                                                            |
-| **Temperature**              | No       | Controls the randomness of the output. The higher the number, the more randomness is injected into the response.                                                                                                     |
-| **top P**                    | No       | Floating point number between 0 and 1. Recommended for advanced use cases only.                                                                                                                                      |
-| **top K**                    | No       | Integer greater than 0. Recommended for advanced use cases only.                                                                                                                                                     |
+| **Temperature**              | No       | Primary response-variation control. Lower values favor likely tokens more strongly; higher values increase variation. Supported ranges vary by model.                                                                |
+| **top P**                    | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                    |
+| **top K**                    | No       | Advanced sampling control configured as a positive integer. Limits selection to this number of the most likely tokens.                                                                                               |
 
 :::note
 Google Gemini doesn't support prompt caching configuration.
