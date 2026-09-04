@@ -8,7 +8,7 @@ Explore new features and components currently in development by Camunda.
 
 ## What to expect
 
-|                                    | Alpha features                                                                                   |
+|                                    |                                                                                   |
 | ---------------------------------- | ------------------------------------------------------------------------------------------------ |
 | <b>Purpose</b>                     | Test upcoming features that could make it to GA                                                  |
 | <b>Suitable for production use</b> | No                                                                                               |
