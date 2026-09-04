@@ -262,7 +262,10 @@ This adds the following annotations to the `/orchestration` Ingress:
 
 - `nginx.ingress.kubernetes.io/proxy-ssl-verify: on`
 - `nginx.ingress.kubernetes.io/proxy-ssl-secret: <namespace>/<caSecret.secret.existingSecret>`
-- `nginx.ingress.kubernetes.io/proxy-ssl-name: <sniHost>` and `proxy-ssl-server-name: on` (only when `sniHost` is set)
+- `nginx.ingress.kubernetes.io/proxy-ssl-name: <sniHost-or-orchestration-service-name>`
+- `nginx.ingress.kubernetes.io/proxy-ssl-server-name: on`
+
+The chart defaults `proxy-ssl-name` to the Orchestration Service name. Set `sniHost` only when the certificate subject alternative name requires a different hostname.
 
 The CA Secret must contain the CA bundle under the fixed `ca.crt` key. By default, the chart expects the Secret in the same namespace as the Ingress resource. To reference a Secret in a different namespace, set `caSecret.namespace` and configure the Ingress-NGINX controller with `allow-cross-namespace-resources=true`. The chart fails template rendering if `proxyVerify.enabled: true` and `caSecret.secret.existingSecret` is empty.
 
@@ -430,7 +433,7 @@ kubectl -n <namespace> get deployment <release>-connectors \
 
 Optimize in 8.10 runs its own Spring Boot HTTP server. The chart can expose it through an NGINX Ingress or a Gateway API `HTTPRoute`. `global.tls.optimize` mirrors the Orchestration REST configuration and enables TLS at the Optimize pod.
 
-This server-side TLS is independent of the existing client-side `optimize.database.elasticsearch.tls` / `optimize.database.opensearch.tls` configuration. The legacy `global.elasticsearch.tls.secret.existingSecret` and `global.opensearch.tls.secret.existingSecret` paths also configure the client truststore. Both directions can use TLS together. The chart mounts the server certificate from a regular Secret volume named `optimize-server-tls`, alongside the client-side `keystore` truststore mount.
+This server-side TLS is independent of the existing client-side `optimize.database.elasticsearch.tls` / `optimize.database.opensearch.tls` configuration. Both directions can use TLS together. The chart mounts the server certificate from a regular Secret volume named `optimize-server-tls`, alongside the client-side `keystore` truststore mount when configured.
 
 ### Modes
 
@@ -453,7 +456,7 @@ The two surfaces are deliberately orthogonal:
 | Inbound (clients → Optimize)  | `global.tls.optimize.cert.secret.existingSecret`                                            | `optimize-server-tls` | Server identity cert + key for the Optimize HTTP listener (this guide).               |
 | Outbound (Optimize → ES / OS) | `optimize.database.elasticsearch.tls.secret.existingSecret` (or `…opensearch.tls.secret.…`) | `keystore`            | Truststore so Optimize trusts the ES / OS server cert when calling secondary storage. |
 
-Operators commonly need both at once (mTLS-style hardening across the whole data plane). The chart supports both simultaneously; the regression test suite asserts that the `optimize-server-tls` and `keystore` volumes coexist with their respective mounts on the Optimize main container.
+Operators commonly need TLS for both inbound and outbound connections. These are independent one-way TLS connections; neither side requires a client certificate. The chart supports both simultaneously, and the `optimize-server-tls` and `keystore` volumes can coexist with their respective mounts on the Optimize main container.
 
 ### PKCS12 example
 
@@ -529,14 +532,11 @@ optimize:
   enabled: true
   database:
     elasticsearch:
-      tls:
-        enabled: true
-        secret:
-          existingSecret: elasticsearch-ca
-          existingSecretKey: ca.crt
+      url:
+        protocol: https
 ```
 
-The chart wires the inbound `optimize-server-tls` keystore for the Optimize HTTP listener AND the outbound `keystore` truststore that Optimize uses when calling Elasticsearch over HTTPS. Both paths are independent and may be enabled together.
+The chart wires the inbound `optimize-server-tls` keystore for the Optimize HTTP listener. For the outbound connection, `url.protocol: https` enables HTTPS and `global.tls.caBundle` supplies the PEM CA that Optimize uses to trust Elasticsearch. Both paths are independent and may be enabled together.
 
 ### Configure inbound routing
 
