@@ -131,10 +131,7 @@ See the [property reference](/self-managed/components/orchestration-cluster/core
 
 ## Monitor secret resolution
 
-A store that is slow or failing shows up as jobs that do not activate, If a store is slow or unavailable, affected jobs may not activate, and the job worker does not indicate the cause. The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md).
-
-<!-- The six secret resolution and secret cache meters, their tags, and how to read them are
-owned by camunda/camunda#60963. Name and link them here once they are in the metrics reference. -->
+A store that is slow or unavailable shows up as jobs that do not activate, and the job worker does not indicate the cause. The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md#secret-resolution-and-cache-metrics).
 
 ## Related resources
 
