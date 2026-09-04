@@ -41,10 +41,11 @@ The connector only needs input variables and access to secrets so they can be us
 ## Context
 
 Every job worker implementation defines on its own how to handle input data, validating and transforming it.
-There is no unified way of using secrets in a job worker implementation either, e.g. to replace placeholders in attributes with sensitive information only at runtime.
 Plus, there is no unified modeling experience for job workers. There can be an element template for the worker, but that template might look completely different for every job worker.
 
-In contrast, connectors bring all the above out of the box. The environment brings along secret management baked-in, being flexible in how you provide those secrets.
+Secrets are the exception. The Orchestration Cluster resolves `camunda.secrets.<name>` references in a job's variables and injects the values when it activates the job. The job worker receives the sensitive values at runtime without storing them in its own configuration, regardless of its implementation language or deployment location. See [secret resolution and job activation](secret-resolution-and-job-activation.md).
+
+In contrast, connectors provide these capabilities out of the box, along with built-in secret management that lets you provide secrets in different ways.
 Element templates, called [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md), are a vital part of a connector. There are standardized best practices for developing those.
 Having used one connector template will make it easy for you to use the next one just the same.
 
