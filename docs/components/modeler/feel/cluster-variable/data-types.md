@@ -31,11 +31,13 @@ Every cluster variable has a kind, which determines how Camunda reads its value.
 | `JSON`             | The default. Your value is data, and Camunda reads it exactly as you stored it.    |
 | `SECRET_REFERENCE` | The value can contain `camunda.secrets.<name>` references, which Camunda resolves. |
 
+Resolving `SECRET_REFERENCE` references is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
+
 Only a `SECRET_REFERENCE`-kind variable has its references resolved. A `JSON`-kind variable whose value contains the same text is treated as ordinary text, and that text reaches your process unchanged.
 
 ### Where references can appear in a value
 
-Camunda scans every string in a `SECRET_REFERENCE`-kind variable's value, including strings nested inside objects. Object keys are not scanned. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes.
+Camunda scans every string in a `SECRET_REFERENCE`-kind variable's value, including strings nested inside objects and arrays. Object keys are not scanned. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes, up to 240 characters. A name that fails either limit is never resolved; see [secrets](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
 
 For example, the following value carries two references, one at the top level and one nested:
 
@@ -49,7 +51,7 @@ For example, the following value carries two references, one at the top level an
 }
 ```
 
-Do not place a reference inside an array. Camunda detects such a reference when you create the variable, but it cannot be resolved when a process reads the variable: the job is not activated and raises an incident instead. See [when a job is not activated](/components/concepts/secret-resolution-and-job-activation.md#when-a-job-is-not-activated).
+Do not place a reference inside an array. Camunda detects such a reference when you create the variable, but it cannot be resolved when a process reads the variable: the job is not activated and raises an incident instead. See [when a job is not activated](/components/concepts/secret-resolution-and-job-activation.md#understand-why-a-job-is-not-activated).
 
 ### Create a variable of kind `SECRET_REFERENCE`
 

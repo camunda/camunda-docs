@@ -80,7 +80,7 @@ camunda.vars.env.API_BASE_URL + "/api/v" + camunda.vars.env.API_VERSION + "/reso
 
 ### Resolve secret references in a cluster variable
 
-References in a [`SECRET_REFERENCE`-kind](./data-types.md#variable-kinds) cluster variable are resolved only when the variable is read by an input mapping on an element that creates a job for a job worker, such as a service task. In the other contexts on this page, including gateway conditions, script tasks, output mappings, and call activity input, the variable resolves to its stored value, so the reference text reaches your process unchanged.
+References in a [`SECRET_REFERENCE`-kind](./data-types.md#variable-kinds) cluster variable are resolved only when the variable is read by an input mapping on an element that creates a job for a job worker, such as a service task or an ad hoc sub-process. In the other contexts on this page, including gateway conditions, script tasks, output mappings, and call activity input, the variable resolves to its stored value, so the reference text reaches your process unchanged.
 
 The following rules apply to an input mapping that reads a `SECRET_REFERENCE`-kind variable:
 
