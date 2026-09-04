@@ -75,13 +75,13 @@ curl -X PUT \
   }'
 ```
 
-The priority change is asynchronous. Monitor it by polling the cluster topology every five seconds:
+The priority change is asynchronous. Use the `changeId` from the response to poll that change every five seconds:
 
 ```bash
-watch -n 5 'curl -s http://{zeebe-gateway}:9600/actuator/cluster | jq "{pending: (.pendingChange.pending // null), status: .lastChange.status}"'
+watch -n 5 'curl -s http://{zeebe-gateway}:9600/actuator/cluster/changes/{changeId} | jq "{id, status, pending}"'
 ```
 
-Wait until `pending` is `null` and `status` is `COMPLETED` before rebalancing.
+Wait until `status` is `COMPLETED` before rebalancing. `GET /actuator/cluster` can also report a pending change for a cluster with only the default Physical Tenant, but use `GET /actuator/cluster/changes/{changeId}` for clusters with multiple Physical Tenants.
 
 ## Rebalance the cluster
 
