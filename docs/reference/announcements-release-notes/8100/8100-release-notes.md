@@ -384,22 +384,6 @@ What's included:
 
 <p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
 
-#### Reference architecture for multi-region Kubernetes RDBMS
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3553 -->
-
-A new multi-region reference architecture details how you can design, deploy, and operate a three‑region orchestration cluster on Kubernetes where the Zeebe data plane is active‑active across all regions and the relational secondary storage is active‑standby (single global writer, replication owned by the database).
-
-What's included:
-
-- How to use a 3‑region stretch setup for Camunda’s primary storage.
-- How to combine this with a multi‑region RDBMS (asynchronous or synchronous replication) as secondary storage.
-- How to apply Kubernetes networking, scaling, and failover procedures to achieve clearly documented RTO/RPO targets.
-
-This reference architecture provides a Camunda‑supported blueprint for enterprise‑grade multi‑region resilience.
-
 #### Task testing supports call activities
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
