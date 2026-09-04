@@ -206,6 +206,63 @@ Examples:
 | -                                      | **source:** `"Peter"`<br/>**target:** `sender`                                                               | `sender: "Peter"`                           |
 | `customer:{"name": "John"}`            | **source:** (not provided)<br/>**target:** `customer`                                                        | `customer: null`                            |
 
+### Secret references in input mappings
+
+An input mapping's `source` can reference a secret directly, without first storing it in a process variable. Write the reference as `camunda.secrets.<name>` in a FEEL expression.
+
+This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
+
+| Process variables | Input mappings                                                                       | New variables                                                    |
+| ----------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| -                 | **source:** `=camunda.secrets.API_TOKEN`<br/>**target:** `token`                     | `token` holds the secret's value when the job reaches the worker |
+| -                 | **source:** `="Bearer " + camunda.secrets.API_TOKEN`<br/>**target:** `authorization` | `authorization` holds `"Bearer "` followed by the secret's value |
+
+Secret references are only resolved in input mappings defined on elements that create a job for a job worker (for example, service tasks, business rule tasks, and ad hoc sub-processes). See [secret resolution and job activation](secret-resolution-and-job-activation.md) for how a reference is resolved and what the worker receives once the job is handed out; until then, the variable holds the placeholder text `camunda.secrets.<name>`.
+
+A reference must be an expression, and it must be exactly `camunda.secrets.<name>` with nothing else attached:
+
+- Writing the reference as a plain string, or quoting it inside an expression, is rejected at deployment rather than passed through as literal text:
+
+  ```feel
+  ="camunda.secrets.API_TOKEN"
+  ```
+
+  ```
+  Secret reference(s) 'camunda.secrets.API_TOKEN' must be used as an expression (e.g. '=camunda.secrets.<name>'), not as a string literal, in input mapping source '="camunda.secrets.API_TOKEN"'.
+  ```
+
+- A trailing path after the name, such as `camunda.secrets.API_TOKEN.length`, is not treated as a reference. It's evaluated as an ordinary FEEL path access instead.
+
+- A reference placed inside a list, or inside a context built by an `if` branch, is rejected at deployment, because the reference is no longer a value the mapping assigns directly:
+
+  ```feel
+  =[camunda.secrets.API_TOKEN]
+  ```
+
+  ```
+  Input mapping source '=[camunda.secrets.API_TOKEN]' puts a secret reference inside a list, or inside a context built by an 'if' branch. Camunda can only replace a secret where the mapping assigns it directly to a value, so this secret would never be filled in. Assign each secret reference to its own input mapping instead.
+  ```
+
+Give each secret its own input mapping. A later mapping that reads the _variable_ created by an earlier one, rather than writing `camunda.secrets.<name>` itself, does not get the secret resolved:
+
+| Input mappings                                                                                        | New variables                                                                                     |
+| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **source:** `=camunda.secrets.API_TOKEN`<br/>**target:** `x`<br/>**source:** `=x`<br/>**target:** `y` | `x` holds the resolved secret value; `y` holds the literal placeholder text, not the secret value |
+
+#### Names with special characters
+
+A secret name containing a character FEEL doesn't allow in a bare identifier — most commonly a dash — must be backtick-escaped, the same way any other FEEL name with special characters is:
+
+```feel
+=camunda.secrets.`db-password`
+```
+
+Without the backticks, `camunda.secrets.db-password` parses as subtraction (`db` minus `password`), not as a reference.
+
+:::note
+Backtick escaping accepts any name, including a name your secret store accepts but the [`/v2/secrets`](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx) endpoints do not. Those endpoints list and resolve only names matching `[\p{Alnum}_-]+`. A name outside that set, such as `tls.crt`, can be backtick-escaped and resolved from a process model (``=camunda.secrets.`tls.crt` ``) if your secret store holds it under that name, but the same secret cannot be listed or resolved through `/v2/secrets`.
+:::
+
 ### Output mappings
 
 Output mappings can be used for several purposes:
