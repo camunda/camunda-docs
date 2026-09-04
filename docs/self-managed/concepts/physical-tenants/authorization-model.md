@@ -5,18 +5,24 @@ sidebar_label: "Authorization model"
 description: "Learn how cluster-wide and tenant-local authorization work for Physical Tenants in Camunda 8.10."
 ---
 
-Learn how Camunda 8.10 authorizes Physical Tenant operations at the cluster-wide and tenant-local scopes. For identity provider connections and token routing, see [authentication and authorization](./authentication-authorization.md).
+Learn how Camunda 8.10 authorizes Physical Tenant operations at the cluster-wide and tenant-local scopes. For identity provider connections and token routing, see [authentication and authorization](./authentication-authorization.md). For the cluster-admin role itself, see [cluster admin](/components/admin/cluster-admin.md).
 
 Authorization is divided into two scopes: cluster-wide operations, which affect the entire orchestration cluster, and tenant-local operations, which are scoped to a single Physical Tenant. Tenant-local operations are fully available in 8.10.
 
 Two new authorization resource types were added for the per-tenant management APIs introduced alongside Physical Tenants:
 
-| Resource type | Permissions                           | Backs                                                                                       |
-| ------------- | ------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `BACKUP`      | `CREATE`, `READ`, `DELETE`, `RESTORE` | Per-tenant runtime backup endpoints (`/v2/backups/runtime`)                                 |
-| `EXPORTER`    | `PAUSE`                               | Per-tenant exporting pause/resume endpoints (`/v2/exporting/pause`, `/v2/exporting/resume`) |
+| Resource type | Permissions                           | Backs                                                                                                                      |
+| ------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `BACKUP`      | `CREATE`, `READ`, `DELETE`, `RESTORE` | Per-tenant runtime and history backup endpoints (`/v2/backups/runtime`, `/v2/backups/history`) and restore (`/v2/restore`) |
+| `EXPORTER`    | `PAUSE`                               | Per-tenant exporting pause/resume endpoints (`/v2/exporting/pause`, `/v2/exporting/resume`)                                |
 
 The default **admin** role receives all four `BACKUP` permissions and `EXPORTER:PAUSE` automatically. The default **readonly-admin** role receives only `BACKUP:READ` (there is no read-only permission for `EXPORTER`, since `PAUSE` isn't a read operation).
+
+An Elasticsearch or OpenSearch history backup needs both `BACKUP:CREATE` and `EXPORTER:PAUSE`, because exporting must be paused for the duration of the backup. Grant the two together to any role that performs backups.
+
+Permissions apply to the whole resource type. Fine-grained authorization for an individual backup ID or exporter is not available; only the `*` resource ID is supported.
+
+For the operational procedures that use these permissions, see [back up a cluster with multiple Physical Tenants](/self-managed/operational-guides/backup-restore/backup-and-restore.md#back-up-a-cluster-with-multiple-physical-tenants).
 
 ## Scope of the 8.10 authorization model
 
@@ -92,8 +98,10 @@ Because each Physical Tenant is independently authorized, audit logs for tenant-
 
 The cluster-admin role protects operations that span all Physical Tenants or affect the entire cluster, such as:
 
-- Triggering cluster backups and restores
-- Viewing cluster topology
-- Assigning tenants or modifying Physical Tenant configuration at runtime
+- Viewing cluster status and topology
+- Triggering a cluster restore or a cluster mode change
+- Running runtime and history backups across every tenant
 
 Cluster-admin is resolved from JWT token claims using configurable mapping rules, a dedicated cluster-admin configuration, or explicit user assignment for Basic authentication. There is no separate persisted cluster-level role binding service. Authorization is coarse-grained. Cluster-admin grants access to all cluster-level operations, with no fine-grained sub-roles.
+
+Cluster-admin credentials are verified against an isolated user store bound to `/cluster/v2/**`, so a cluster admin cannot reach tenant-scoped `/physical-tenants/{physicalTenantId}/v2/...` endpoints. See [cluster admin](/components/admin/cluster-admin.md) for configuration examples.
