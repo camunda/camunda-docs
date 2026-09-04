@@ -248,7 +248,7 @@ The next steps focus on the Camunda application-specific configurations suitable
 
 An index lifecycle management (ILM) policy in OpenSearch is crucial for efficient management and operation of large-scale search and analytics workloads. ILM policies provide a framework for automating the management of index lifecycles, which directly impacts performance, cost efficiency, and data retention compliance.
 
-The Helm value **`orchestration.history.retention`** configures retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage (for example, `operate-process-*`, `tasklist-task-*`). Most production deployments only need this policy in Camunda 8.8 and later.
+The Helm value **`orchestration.history.retention`** configures retention for archived Operate, Tasklist, and Camunda indices stored in secondary storage (for example, `operate-process-*`, `tasklist-task-*`).
 
 The following example configures an ILM policy for the Orchestration Cluster's archived history indices and can be added to the Helm values file `orchestration-values.yaml`:
 
@@ -262,23 +262,13 @@ orchestration:
       policyName: camunda-history-retention-policy
 ```
 
-:::note
-The Helm value **`orchestration.retention`** is for Zeebe record indices written by the legacy Elasticsearch/OpenSearch exporter (for example, `zeebe-record-*`). Configure this only if you still rely on the legacy exporter, for example when Optimize reads from `zeebe-record-*` indices.
-
-For more information on configuring both retention policy types, refer to the [data retention configuration guide](/self-managed/deployment/helm/configure/data-retention.md).
+:::warning
+The `orchestration.history.rolloverInterval` value significantly affects Elasticsearch/OpenSearch performance. Review the [data retention performance](/self-managed/deployment/helm/configure/data-retention.md#performance) section to ensure the value fits your use case.
 :::
 
-#### Rollover interval and Elasticsearch/OpenSearch performance
-
-The Helm value `orchestration.history.rolloverInterval` controls how often the archiver creates a new dated index for historical data. For example, `1d` creates a new dated index every day for each archivable index type (Operate and Tasklist each have several), resulting in multiple new indices per day. This setting directly affects cluster performance:
-
-- A **shorter interval** (for example, `1d`) creates more, smaller indices. Queries, ILM/ISM operations, and deletions against a single index run faster because each index covers less data, but the cluster carries more shard and index metadata overhead overall.
-- A **longer interval** (for example, `30d`) creates fewer, larger indices. This reduces shard and metadata overhead across the cluster, but each index takes longer to query, roll over, and delete, and a spike in completed process instances can make a single index very large.
-
-Choose `rolloverInterval` based on your throughput and retention needs:
-
-- For low-to-moderate throughput clusters with long retention (more than three months), use a longer interval (for example, `7d` or longer) to avoid creating excessive numbers of small indices, which increases cluster management overhead.
-- For clusters with a strict shard count limit, prefer longer intervals to stay within your cluster's recommended shard count.
+:::note
+For more information on configuring both retention policy types, refer to the [data retention configuration guide](/self-managed/deployment/helm/configure/data-retention.md).
+:::
 
 ### Configure backups
 
