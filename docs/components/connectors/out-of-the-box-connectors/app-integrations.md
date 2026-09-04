@@ -204,7 +204,7 @@ Receiving needs no connector task and no job worker. A chat catch element is an 
 
 ### Chat conversation element templates
 
-Apply one of these templates in Modeler. Each applies to a different BPMN element.
+Apply one of these templates in the [Camunda Hub modeler](/components/hub/workspace/modeler/index.md) or [Desktop Modeler](/components/modeler/desktop-modeler/index.md). Each applies to a different BPMN element.
 
 | Element template                                     | Apply to                         | Purpose                                                               |
 | :--------------------------------------------------- | :------------------------------- | :-------------------------------------------------------------------- |
@@ -215,11 +215,13 @@ Apply one of these templates in Modeler. Each applies to a different BPMN elemen
 
 A conversation process usually pairs the start event with a single catch element, and loops back to that element for each turn.
 
+Desktop Modeler [fetches connector templates automatically](/components/modeler/desktop-modeler/use-connectors.md#automatic-connector-template-fetching), so the templates appear without any setup unless you have turned that off.
+
 ### Route a chat to the right process
 
 A **chat key** decides which process the messages in a channel or chat start. You set it in two places that must match: the start event in your model, and the channel or chat in the Camunda app.
 
-In Modeler, the **App Integrations Chat Conversation Start Event** template carries a **Chat key** property. It holds the full name of the message the process starts on, and must read `io.camunda.appIntegrations.conversationStarted.<chat key>`, for example `io.camunda.appIntegrations.conversationStarted.hr-intake`. It defaults to `io.camunda.appIntegrations.conversationStarted.default`. Modeler rejects a value in any other form, so a typo can't subscribe your process to an unrelated message.
+The **App Integrations Chat Conversation Start Event** template carries a **Chat key** property. It holds the full name of the message the process starts on, and must read `io.camunda.appIntegrations.conversationStarted.<chat key>`, for example `io.camunda.appIntegrations.conversationStarted.hr-intake`. It defaults to `io.camunda.appIntegrations.conversationStarted.default`. The template rejects a value in any other form, so a typo can't subscribe your process to an unrelated message.
 
 You don't have to type the value. Configure the channel or chat first: open the Camunda app in the channel or chat, select the **Settings** tab, and the app shows the exact string to copy into the **Chat key** property.
 
