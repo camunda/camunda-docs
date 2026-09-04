@@ -25,11 +25,9 @@ This guide provides a comprehensive walkthrough for installing the Camunda 8 Hel
 Lastly you'll verify that the connection to your Self-Managed Camunda 8 environment is working.
 
 :::note Using Amazon Aurora PostgreSQL as secondary storage
-Use this page for the EKS cluster, networking, Ingress, and AWS-managed services.
+This page covers both backends. Follow it end to end and pick the **RDBMS** tabs wherever a step offers them, which configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster. Keep the default tabs to use Amazon OpenSearch Service instead.
 
-Then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
-
-If you use Amazon OpenSearch Service for secondary storage, continue with the default path in this guide.
+For the chart-level reference behind those tabs, see [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md).
 :::
 
 ## Requirements

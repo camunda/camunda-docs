@@ -811,13 +811,7 @@ We will also use this step to verify connectivity to the database from the creat
    https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region/setup-postgres-create-db.yml
    ```
 
-   <!-- TODO: eks-single-region-rdbms snippets use the feat/eks-single-region-rdbms branch until it merges; switch to blob/stable/8.9/ (8.9 doc) and blob/main/ (next doc) once it lands (camunda/camunda-deployment-references#2711). -->
-
-   For the **RDBMS** secondary storage variant, use the manifest from the `eks-single-region-rdbms` reference instead. It also creates the `camunda_orchestration` database and `orchestration_db` user used as the secondary storage for the Orchestration Cluster, in place of an OpenSearch domain:
-
-   ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
-   ```
+   This manifest creates the component databases only. The **RDBMS** secondary storage variant needs an additional `camunda_orchestration` database and `orchestration_db` user, which this eksctl path does not provision. To run the Orchestration Cluster on Aurora PostgreSQL, follow the RDBMS variant of the [EKS Terraform setup](./terraform-setup.md#variants) instead.
 
 4. Apply the manifest:
 
