@@ -4,247 +4,201 @@ title: "Troubleshoot secret resolution failures"
 description: "Diagnose the incidents raised when a job's secret references cannot be resolved or their values cannot be injected, fix the cause, and know what happens next."
 ---
 
-<!-- Draft. The page title, file name, placement, and the name of the feature itself are owned by
-camunda/camunda#60326 and are not settled, so this page is deliberately not listed in sidebars.js
-yet and every term used for the feature here is provisional. -->
+<!-- Draft. The page title, file name, placement, and the name of the feature itself are owned by camunda/camunda#60326 and are not settled, so this page is deliberately not listed in sidebars.js yet and every term used for the feature here is provisional. -->
 
-When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the
-cluster reacts in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, it raises a
-`MESSAGE_SIZE_EXCEEDED` incident, or it defers the job silently and retries it. The three are not
-interchangeable, and only two of them need you.
+When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the cluster responds in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, raises a `MESSAGE_SIZE_EXCEEDED` incident, or defers the job and retries it without raising an incident.
 
-This page is for the operator who already has a symptom. For how resolution and activation work in
-the first place, see [secret resolution and job activation](secret-resolution-and-job-activation.md).
+Only the two incident cases require operator action.
+
+Use this page to diagnose an existing secret resolution or activation problem. To understand how secret resolution and job activation work, see [Secret resolution and job activation](secret-resolution-and-job-activation.md).
 
 ## Find your symptom
 
-| Symptom                                                                              | What happened                                                                                     | Section                                                                                                 |
-| :----------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------ |
-| An incident whose message starts with `Failed to resolve secret`                     | The secret store could not return the value, permanently or after exhausting its retries.         | [A secret could not be resolved](#a-secret-could-not-be-resolved)                                       |
-| An incident whose message names a job key and a variable path                        | The value was available, but it could not be written into the job's variables.                    | [A secret value could not be injected](#a-secret-value-could-not-be-injected)                           |
-| An incident whose message names a growth in bytes and the configured message size    | The resolved values are too large to ever fit an activation.                                      | [Secret values are too large to activate](#secret-values-are-too-large-to-activate)                     |
-| A job of a type that references secrets is never activated, and there is no incident | The references have not resolved yet, or the store is backing off.                                | [Failures that raise no incident](#failures-that-raise-no-incident)                                     |
-| Jobs activate, but later and in smaller batches than usual, and there is no incident | Injected values did not fit the batch, so jobs were dropped from it and picked up by a later one. | [Failures that raise no incident](#failures-that-raise-no-incident)                                     |
-| A job of a suspended process instance is not activated after its secret resolves     | Suspension overrides secret waiting, and secret completion does not undo it.                      | [Secret resolution does not resume a suspended job](#secret-resolution-does-not-resume-a-suspended-job) |
+| Symptom                                                                          | What happened                                                                                                | Section                                                                                           |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| An incident message starts with `Failed to resolve secret`                       | The secret store could not return the value, either permanently or after exhausting all retries.             | [Resolve secret lookup failures](#resolve-secret-lookup-failures)                                 |
+| An incident message names a job key and variable path                            | The secret value was available, but Camunda could not inject it into the job variables.                      | [Resolve secret injection failures](#resolve-secret-injection-failures)                           |
+| An incident message reports growth in bytes and the configured message size      | The resolved values are too large to fit in an activation batch.                                             | [Reduce oversized secret values](#reduce-oversized-secret-values)                                 |
+| A job that references secrets is not activated, and no incident is raised        | The references have not resolved yet, or the store is in retry backoff.                                      | [Identify failures that raise no incident](#identify-failures-that-raise-no-incident)             |
+| Jobs activate later and in smaller batches than usual, and no incident is raised | The injected values did not fit in the current batch, so the broker deferred the jobs to a later activation. | [Identify failures that raise no incident](#identify-failures-that-raise-no-incident)             |
+| A job in a suspended process instance is not activated after its secret resolves | The process instance remains suspended, so secret resolution does not make the job activatable.              | [Resume a suspended job after secret resolution](#resume-a-suspended-job-after-secret-resolution) |
 
-All of these incidents are job incidents. They appear wherever job incidents appear: in
-[Operate](/components/operate/userguide/resolve-incidents-update-variables.md), and in the
-[search incidents](/apis-tools/orchestration-cluster-api-rest/specifications/search-incidents.api.mdx)
-endpoint, where you can filter on `errorType` for `SECRET_RESOLUTION_ERROR` or
-`MESSAGE_SIZE_EXCEEDED`.
+These incidents are job incidents. You can view them in [Operate](/components/operate/userguide/resolve-incidents-update-variables.md) or retrieve them through the [search incidents](/apis-tools/orchestration-cluster-api-rest/specifications/search-incidents.api.mdx) endpoint. Filter by `errorType` for `SECRET_RESOLUTION_ERROR` or `MESSAGE_SIZE_EXCEEDED`.
 
-No incident message ever contains a secret value. A message names the reference, the variable path,
-the job key, or a size, and never the value behind any of them.
+Incident messages never contain secret values. They may include the secret reference, variable path, job key, or message size, but not the resolved value.
 
-## A secret could not be resolved
+## Resolve secret lookup failures
 
-Error type `SECRET_RESOLUTION_ERROR`. The broker asked the secret store for the value and the store
-either refused it permanently, or was unavailable until its retries ran out. The broker raises the
-incident for the jobs waiting on that reference, one incident per job. A job that already carries an
-incident from another failed reference does not get a second one, so a job that waits on two failed
-secrets shows only the first.
+A secret lookup failure raises a `SECRET_RESOLUTION_ERROR` incident. This happens when the secret store returns a permanent failure or remains unavailable until all retry attempts are exhausted.
 
-```
+The broker raises one incident per affected job. If a job already has an incident for another failed secret reference, the broker does not raise a second incident. As a result, a job waiting on multiple failed secrets shows only the first incident.
+
+```text
 Failed to resolve secret 'API_TOKEN' from the configured secret store. Ensure the secret exists and the store is available, then resolve the incident to retry.
 ```
 
-The store is named as `the configured secret store` for the default store, and as
-`secret store '<storeId>'` for any other. The `camunda.secrets.<name>` syntax carries no store
-dimension today, so every reference addresses the default store and you always see the first form.
+For the default store, the incident message uses `the configured secret store`. For any other store, it uses `secret store '<storeId>'`.
 
-The message does not say why the store refused the secret. That distinction is in the broker log,
-and [diagnose the cause](#diagnose-the-cause) maps the log lines to causes.
+The `camunda.secrets.<name>` syntax does not currently identify a store, so every reference addresses the default store. As a result, incident messages currently use the default-store wording.
 
-The job is parked and is not activatable, so no worker receives it and no further incident is
-raised for the same reference.
+The incident message does not identify the underlying store failure. Check the broker log and follow [Diagnose the cause](#diagnose-the-cause) to determine whether the secret is missing, access is denied, the store is unavailable, or another failure occurred.
 
-**What resolving does.** Resolving the incident makes the job activatable again. The next
-activation attempt finds the reference still uncached and requests its resolution, so the store is
-asked again. Fix the cause first, otherwise the same incident returns. No redeployment and no
-client change is needed, and the process instance continues where it was.
+While the incident is active, the job is not activatable and no worker receives it. The broker does not raise another incident for the same failed reference.
 
-## A secret value could not be injected
+### Retry after resolving the incident
 
-Error type `SECRET_RESOLUTION_ERROR`, the same type as above, but a different cause: the value was
-available and injecting it into the job's variables failed. Each secret reference records the JSON
-pointer of the variable it belongs to, and injection replaces the placeholder text at that pointer.
+Resolve the incident only after fixing the underlying cause. Resolving the incident makes the job activatable again. On the next activation attempt, the broker requests resolution again because the reference is still uncached.
 
-The job is not activated when the injection replaces nothing at that pointer **and** placeholder
-text is still there once every reference at the same path has been attempted. Both halves matter: a
-pointer that now addresses a list or an object still holding a `camunda.secrets.<name>` placeholder
-fails, while a pointer whose value no longer contains any placeholder at all is
-[tolerated silently](#failures-that-raise-no-incident).
+You don't need to redeploy or make client-side changes. Once the reference resolves successfully, the process instance continues from where it stopped.
 
-```
+## Resolve secret injection failures
+
+A secret injection failure also raises a `SECRET_RESOLUTION_ERROR` incident, but for a different reason. In this case, the secret value was available, but Camunda could not inject it into the job variables.
+
+Each secret reference records the JSON pointer of the variable that contains the placeholder. During activation, Camunda replaces the placeholder at that pointer with the resolved value.
+
+Injection fails when both of the following conditions apply:
+
+- Camunda cannot replace the placeholder at the recorded pointer.
+- A `camunda.secrets.<name>` placeholder still remains at that path after all references for the path have been processed.
+
+For example, injection fails if the pointer now addresses a list or object that still contains a secret placeholder. If the value at the pointer no longer contains a placeholder, Camunda [continues without raising an incident](#failures-that-raise-no-incident).
+
+```text
 The job with key '2251799813685260' can not be activated, because the secret reference 'camunda.secrets.API_TOKEN' could not be resolved at '/credentials/token'. Fix the variable's value or the input mapping that sets it, then resolve the incident, or use process instance modification to reactivate the element and create a fresh job.
 ```
 
-When the failure identifies no reference at all, for example because the job's variables cannot be
-read, you get the cause-neutral wording instead:
+If the failure does not identify a specific reference, for example because Camunda cannot read the job variables, the incident uses the following generic message:
 
-```
+```text
 The job with key '2251799813685260' can not be activated, because injecting its secret values failed. Resolve the incident, or use process instance modification to reactivate the element and create a fresh job.
 ```
 
-Both wordings are shared by long polling and job push, so the same failure reads the same way on
-either delivery path.
+Long polling and job push use the same incident messages for injection failures.
 
-Typical causes are a variable merge that overwrote the placeholder after the job was created, an
-input mapping that produces a list or a context rather than a single text value, and a cluster
-variable whose content changed between input mapping evaluation and job creation.
+Typical causes include:
 
-The job is taken out of activation until the incident is resolved, so the same failing injection is
-not retried on every poll.
+- A variable merge overwrites the placeholder after the job is created.
+- An input mapping produces a list or context instead of a single text value.
+- A cluster variable changes between input mapping evaluation and job creation.
 
-**What resolving does.** Resolving the incident makes the job activatable again, and injection is
-attempted once more against the variables as they are then. Correct the variable value or the input
-mapping that sets it before resolving. If the placeholder cannot be restored, use
-[process instance modification](process-instance-modification.md) to reactivate the element, which
-creates a fresh job with freshly detected references.
+While the incident is active, the job is not activatable, so the broker does not retry the same failed injection on every poll.
 
-## Secret values are too large to activate
+### Retry secret injection
 
-Error type `MESSAGE_SIZE_EXCEEDED`. A resolved value is usually longer than the
-`camunda.secrets.<name>` placeholder it replaces, so a job that fits with placeholders can outgrow
-the activation once the values are injected.
+Resolve the incident only after correcting the variable value or the input mapping that produced it. Resolving the incident makes the job activatable again, and Camunda retries injection against the current job variables.
 
-```
+If you cannot restore the placeholder, use [process instance modification](process-instance-modification.md) to reactivate the element. This creates a new job and detects its secret references again.
+
+## Reduce oversized secret values
+
+A `MESSAGE_SIZE_EXCEEDED` incident is raised when the resolved secret values make the job too large to fit within the configured activation message size.
+
+```text
 The job with key '2251799813685260' can not be activated, because injecting its secret values would grow the activation batch by 5.2MiB, more than any batch can grow without exceeding the configured message size (per default is 4 MB). Try to reduce the size of the secret values or of the job variables.
 ```
 
-The limit that applies is `camunda.cluster.network.max-message-size`, which defaults to `4MB`.
-There is no separate cap on secret values.
+The applicable limit is `camunda.cluster.network.max-message-size`, which defaults to `4MB`. Secret values do not have a separate size limit.
 
-This incident is raised only when the oversized job was first in the activation batch, so it had
-the whole message size to itself and its values can never fit any batch. A job whose values merely
-do not fit the batch it happened to land in is dropped without an incident and activated later, see
-[failures that raise no incident](#failures-that-raise-no-incident).
+Camunda raises this incident only when the oversized job is first in the activation batch and still cannot fit within the available message size. If a job does not fit only because of other jobs already included in the batch, Camunda removes it from that batch without raising an incident and activates it later. See [Identify failures that raise no incident](#identify-failures-that-raise-no-incident).
 
-**What resolving does.** Resolving the incident makes the job activatable again, and it fails the
-same way unless the values or the job's variables have shrunk in the meantime. Reduce the size of
-the secret value in the store, or reduce the job's other variables, before you resolve. A worker's
-`fetchVariables` list is the quickest lever on the second: variables the worker does not fetch are
-not in the activation and do not count toward the limit.
+### Retry after reducing the size
 
-## Failures that raise no incident
+Resolve the incident only after reducing the size of the secret value or the job variables. Otherwise, the next activation attempt fails in the same way.
 
-Three outcomes are silent by design. None of them needs an operator, but each is easy to mistake
-for one that does.
+To reduce the job variables included in activation, adjust the worker's `fetchVariables` list. Variables the worker does not fetch are excluded from the activation and do not count toward the message-size limit.
 
-**A job dropped from a batch it does not fit.** If injecting a job's values would push the
-activation past the message size, that job and every job after it are dropped from the batch, which
-is marked truncated. The dropped jobs stay activatable and the next activation picks them up. The
-visible effect is smaller batches and slightly later activation, not a stuck job.
+## Identify failures that raise no incident
 
-**A reference with no placeholder left to replace.** Injection is a no-op and the job is activated
-unchanged in two cases. The pointer can address no value at all, for example because the worker's
-`fetchVariables` excluded that variable, so there is nothing to replace and nothing left behind. Or
-the value at the pointer can no longer contain any `camunda.secrets.<name>` text, for example
-because a variable update replaced it with a literal, in which case the worker receives that literal
-rather than the secret. Only a placeholder that is still present and could not be replaced raises
-[an injection incident](#a-secret-value-could-not-be-injected).
+Some secret resolution outcomes do not raise incidents and do not require operator action. Their symptoms can still resemble incident conditions.
 
-**Job push does not size the injected values.** Long polling measures each job's value growth
-against the free message size and drops the job when it does not fit. Job push does not: the
-activation event it writes carries no variables, so the check it performs covers the event and not
-the pushed job. Nothing on the push path drops a job for its value size, and no
-`MESSAGE_SIZE_EXCEEDED` incident is raised there. That does not make job push a way around the
-limit: an activation that a long poll cannot carry is still larger than the transport between the
-broker, the gateway, and the worker is configured to carry, so expect it to fail there instead of
-raising an incident you can find.
+### Job does not fit in the current batch
 
-## Secret resolution does not resume a suspended job
+If injecting a job's resolved values would exceed the remaining message size in the current activation batch, Camunda removes that job and every subsequent job from the batch and marks the batch as truncated.
 
-A job waiting for an uncached secret is parked in `WAITING_FOR_SECRET_RESOLUTION`. Suspending its
-process instance overrides that state with `SUSPENDED`. When the secret resolves afterwards, the
-completion is a silent no-op: the job is not made activatable, because it is suspended, not waiting.
+The removed jobs remain activatable and can be included in a later activation. The visible effect is smaller batches and slightly delayed activation rather than a stuck job.
 
-Resume the process instance to make the job available again. Resuming makes the job activatable, and
-the next activation injects the value if it is still cached, or parks the job once more and requests
-its resolution again if it is not. Either way the job proceeds on its own, and no incident is raised
-in the meantime.
+### Reference no longer has a placeholder
+
+Camunda activates the job without changing the value when there is no placeholder left to replace.
+
+This can happen in either of the following cases:
+
+- The recorded pointer no longer addresses a value, for example because the worker's `fetchVariables` list excludes that variable.
+- The value at the pointer no longer contains `camunda.secrets.<name>`, for example because a variable update replaced the placeholder with a literal value.
+
+In the second case, the worker receives the current literal value instead of the secret. Camunda raises an [injection incident](#resolve-secret-injection-failures) only when a secret placeholder is still present but cannot be replaced.
+
+### Job push does not check injected value size
+
+Long polling checks the growth caused by injected secret values against the remaining message size in the activation batch. If the job does not fit, Camunda removes it from the batch.
+
+Job push does not perform the same size check on the pushed job because the activation event contains no variables. As a result, the push path does not raise a `MESSAGE_SIZE_EXCEEDED` incident for oversized injected values.
+
+Job push does not bypass the transport message-size limit. If the pushed job exceeds the configured transport limit between the broker, gateway, and worker, delivery can fail without raising a `MESSAGE_SIZE_EXCEEDED` incident.
+
+## Resume a suspended job after secret resolution
+
+A job waiting for an uncached secret enters `WAITING_FOR_SECRET_RESOLUTION`. If you suspend its process instance, the job enters `SUSPENDED` instead.
+
+If the secret resolves while the process instance is suspended, the job remains suspended and does not become activatable automatically.
+
+Resume the process instance to make the job available again. On the next activation attempt, Camunda injects the resolved value if it is still cached. If the value is no longer cached, Camunda parks the job again and requests secret resolution.
+
+In either case, no additional operator action is required and no incident is raised.
 
 ## Diagnose the cause
 
-Start from the incident's error type and message, then confirm the cause in the broker log. The
-store's own error category is logged and is never part of the incident message, so the log is where
-a missing secret is told apart from a rejected one.
+Start with the incident error type and message, then confirm the underlying cause in the broker log. Incident messages don't include the store's error category, so use the log to distinguish conditions such as a missing secret, denied access, or an unavailable store.
 
-1. Read the incident in Operate, or search incidents filtered by `errorType`. Note the secret
-   reference, the variable path, and the job key the message names.
-2. For `Failed to resolve secret`, search the broker log of the affected partition for the
-   reference name and match the line against the table below.
-3. For an injection failure, inspect the job's variables at the named path, in Operate or through
-   the variables of the element instance.
+1. Read the incident in Operate or search for incidents filtered by `errorType`. Note the secret reference, variable path, and job key from the message.
+2. For incidents whose message starts with `Failed to resolve secret`, search the broker log for the affected partition and reference name. Match the log entry to the table below.
+3. For injection failures, inspect the job variables at the reported path in Operate or through the element instance variables.
 
-| Broker log line                                                                                | Cause                                                                                    | Fix                                                                                                       |
-| :--------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------- |
-| `Secret store '<id>' is not configured — failing <n> pending secret refs`                      | No secret store is configured, so every reference fails.                                 | Configure a secret store.                                                                                 |
-| `Secret '<ref>' in secret store '<id>' failed permanently: NOT_FOUND — <message>`              | The store has no secret under that name.                                                 | Create the secret, or correct the reference name in the process.                                          |
-| `Secret '<ref>' in secret store '<id>' failed permanently: ACCESS_DENIED — <message>`          | The credentials the broker uses for the store are not allowed to read that secret.       | Grant read access on the store side. This is the store's own access control, not a Camunda authorization. |
-| `Secret '<ref>' in secret store '<id>' failed permanently: INVALID_REF — <message>`            | The store rejects the reference name as malformed.                                       | Rename the secret so both the store and the reference syntax accept it.                                   |
-| `Secret '<ref>' in secret store '<id>' failed permanently: UNREADABLE — <message>`             | The store holds an entry, but its value cannot be read or decoded.                       | Repair the stored value.                                                                                  |
-| `Secret store '<id>' unavailable (attempt <n>/<m>), retrying in <backoff>: <message>`          | Transient. The store is being retried with backoff and no incident exists yet.           | Nothing, unless it persists. Restore the store's availability.                                            |
-| `Secret store '<id>' unavailable after <n>/<m> attempts — failing <n> pending refs: <message>` | The store never recovered within `retry-max-attempts`, so its pending references failed. | Restore the store's availability, then resolve the incidents.                                             |
+| Broker log line                                                                                | Cause                                                                                                | Fix                                                                                                     |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `Secret store '<id>' is not configured — failing <n> pending secret refs`                      | No secret store is configured, so all pending references fail.                                       | Configure a secret store.                                                                               |
+| `Secret '<ref>' in secret store '<id>' failed permanently: NOT_FOUND — <message>`              | The store does not contain a secret with that name.                                                  | Create the secret or correct the reference name in the process.                                         |
+| `Secret '<ref>' in secret store '<id>' failed permanently: ACCESS_DENIED — <message>`          | The credentials used by the broker don't have permission to read the secret.                         | Grant read access in the secret store. This is store-level access control, not a Camunda authorization. |
+| `Secret '<ref>' in secret store '<id>' failed permanently: INVALID_REF — <message>`            | The store rejects the reference name as invalid.                                                     | Rename the secret so the store and Camunda reference syntax both accept it.                             |
+| `Secret '<ref>' in secret store '<id>' failed permanently: UNREADABLE — <message>`             | The store contains the secret, but its value cannot be read or decoded.                              | Repair the stored value.                                                                                |
+| `Secret store '<id>' unavailable (attempt <n>/<m>), retrying in <backoff>: <message>`          | The failure is transient. The broker is retrying the store with backoff, and no incident exists yet. | If the failure persists, restore the store's availability.                                              |
+| `Secret store '<id>' unavailable after <n>/<m> attempts — failing <n> pending refs: <message>` | The store remained unavailable through `retry-max-attempts`, so its pending references failed.       | Restore the store's availability, then resolve the incidents.                                           |
 
-The separator in these lines is an em dash, and `<message>` is the store's own text. Search on a
-distinctive fragment such as `failed permanently` rather than on a whole line.
+The separator in these log lines is an em dash, and `<message>` contains the store's own error text. Search for a distinctive fragment such as `failed permanently` rather than the entire line.
 
-Then confirm the reference itself:
+Then verify the reference itself:
 
-- **The reference names the secret you think it does.** In an input mapping, a reference is detected
-  from the parsed FEEL expression, so FEEL's own rules decide where the name ends. A dash is
-  subtraction to FEEL, so `=camunda.secrets.db-password` is read as the reference `db` minus the
-  variable `password`. Escape any name that is not a bare FEEL identifier with backticks, as in
-  ``=camunda.secrets.`db-password` ``. An incident naming a shorter secret than you wrote is this
-  mistake.
-- **The name matches the secret in the store.** The reference name and the secret name must match
-  exactly, including case. Names that Camunda's own secret endpoints reject, such as a name holding
-  a dot, are still detected and resolved from a store when they are backtick-escaped in an input
-  mapping expression, so a store-managed name can work while the API refuses to create it. That
-  escape only exists for an expression: a reference read out of a
-  [cluster variable's](/components/admin/cluster-variables.md) value is scanned as plain text
-  instead of parsed FEEL, so there its name must match `[\p{Alnum}_-]+` after the prefix, with no
-  way to escape around it. A dot, space, or any other character outside that set makes the
-  reference invisible to that scan.
-- **The reference is an expression, not a string.** In an input mapping source or a connector
-  property, only a FEEL path such as `=camunda.secrets.TOKEN` is accepted. The same reference
-  written as a static value, or quoted inside an expression as in `={"auth": "camunda.secrets.TOKEN"}`,
-  is rejected at deployment, so a process that deployed is not using either form.
-- **The value is small enough.** Compare the value's size against
-  `camunda.cluster.network.max-message-size` together with the job's other variables.
+- **Reference name**: Confirm the reference resolves to the intended secret name. In an input mapping, Camunda detects references from the parsed FEEL expression, so FEEL syntax determines where the name ends. For example, FEEL interprets `=camunda.secrets.db-password` as the reference `db` minus the variable `password`. Escape names that aren't valid bare FEEL identifiers with backticks, for example ``=camunda.secrets.`db-password` ``. If the incident names a shorter secret than expected, check whether FEEL interpreted part of the name as an operator.
 
-The `SECRET` resource type in
-[authorizations](access-control/authorizations.md) governs the secrets API, not the broker's
-resolution path. A `SECRET_RESOLUTION_ERROR` is never caused by a missing Camunda authorization.
+- **Secret name**: Confirm the reference name exactly matches the secret name in the store, including case. Store-managed names that the Camunda secret endpoints reject, such as names containing a period, can still resolve when you escape them with backticks in an input mapping expression.
 
-## What happens after you fix the cause
+  Escaping applies only to expressions. Camunda scans references in [cluster variable](/components/admin/cluster-variables.md) values as plain text rather than parsing them as FEEL. In this case, the name after the prefix must match `[\p{Alnum}_-]+` and cannot be escaped. A period, space, or other unsupported character prevents Camunda from detecting the reference.
 
-Resolving an incident is what retries the operation. In every case above, the job returns to the
-state it was in before the failure, and the process instance continues from there.
+- **Reference format**: Confirm the reference is a FEEL expression rather than a static string. In an input mapping source or Connector property, use a path such as `=camunda.secrets.TOKEN`. Static values and quoted references such as `={"auth": "camunda.secrets.TOKEN"}` are rejected at deployment.
 
-| You fixed                                | Resolve the incident, and then                                                                              |
-| :--------------------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| The secret in the store, or store access | The job becomes activatable, resolution is requested again, and the job activates once the value is cached. |
-| The variable or the input mapping        | The job becomes activatable and injection is attempted again against the current variables.                 |
-| The size of the value or the variables   | The job becomes activatable and is activated when its values fit.                                           |
+- **Value size**: Confirm the resolved value and other job variables fit within `camunda.cluster.network.max-message-size`.
 
-No redeployment is needed, and workers, clients, and job worker libraries need no change. Jobs
-blocked on a reference that later resolves are picked up on their own, whether they wait behind an
-incident you resolved or behind a store that recovered.
+The `SECRET` resource type in [authorizations](access-control/authorizations.md) applies to the secrets API, not broker-side secret resolution. Missing Camunda authorizations don't cause `SECRET_RESOLUTION_ERROR` incidents.
 
-<!-- The secret resolution and secret cache meters that show a store failing before it produces
-incidents are owned by camunda/camunda#60963. Link them here once they are in the metrics
-reference. -->
+## Retry after fixing the cause
 
-<!-- The camunda.secrets.* secret store configuration is owned by camunda/camunda#60331. Link the
-store configuration reference from the diagnosis steps once it lands. -->
+Resolve the incident after correcting the underlying problem. Resolving the incident retries the failed operation and makes the job activatable again.
+
+| You fixed                                     | After you resolve the incident                                                        |
+| --------------------------------------------- | ------------------------------------------------------------------------------------- |
+| The secret in the store or store access       | The broker requests resolution again, and the job activates once the value is cached. |
+| The variable or input mapping                 | Camunda retries injection against the current job variables.                          |
+| The size of the secret value or job variables | The job activates once the resolved values fit within the message-size limit.         |
+
+You don't need to redeploy or make changes to workers, clients, or job worker libraries. Jobs blocked on a reference become activatable automatically once the reference resolves, whether resolution follows an incident or store recovery.
+
+<!-- The secret resolution and secret cache meters that show a store failing before it produces incidents are owned by camunda/camunda#60963. Link them here once they are in the metrics reference. -->
+
+<!-- The camunda.secrets.* secret store configuration is owned by camunda/camunda#60331. Link the store configuration reference from the diagnosis steps once it lands. -->
 
 ## Related resources
 
-- [Secret resolution and job activation](secret-resolution-and-job-activation.md) describes how
-  references are resolved and when a job is activated, including the scheduler settings that
-  control how quickly a failing store turns into an incident.
-- [Incidents](incidents.md) explains what an incident is and how it is resolved in general.
-- [Resolve incidents and update variables](/components/operate/userguide/resolve-incidents-update-variables.md)
-  covers resolving incidents in Operate.
+- [Secret resolution and job activation](secret-resolution-and-job-activation.md) describes how Camunda resolves references and when a job becomes activatable, including the scheduler settings that control how quickly store failures become incidents.
+- [Incidents](incidents.md) explains how incidents work and how to resolve them.
+- [Resolve incidents and update variables](/components/operate/userguide/resolve-incidents-update-variables.md) explains how to resolve incidents in Operate.
