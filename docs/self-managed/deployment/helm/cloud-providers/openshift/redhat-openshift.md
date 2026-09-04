@@ -472,6 +472,14 @@ The following PostgreSQL clusters are created:
 - **pg-identity**: Database for Camunda Identity component
 - **pg-webmodeler**: Database for Web Modeler component (remove from configuration if not needed)
 
+If you use **RDBMS as the secondary storage** for the Orchestration Cluster instead of Elasticsearch, add `pg-camunda` to the filter:
+
+```bash
+CLUSTER_FILTER="pg-identity,pg-webmodeler,pg-camunda" (cd generic/kubernetes/operator-based/postgresql && ./deploy.sh)
+```
+
+- **pg-camunda**: Secondary storage for the Orchestration Cluster, defined in `postgresql-orchestration-cluster.yml`
+
 <details>
 <summary>Review the PostgreSQL cluster configuration</summary>
 
@@ -579,6 +587,23 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 ```
 
 </details>
+
+If you use **RDBMS as the secondary storage**, skip the [Elasticsearch deployment](#deploy-elasticsearch) and the overlay above, and merge the **RDBMS** overlay instead:
+
+```bash
+yq '. *+ load("generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml")' values.yml > values-merged.yml && mv values-merged.yml values.yml
+```
+
+<details>
+<summary>Review the RDBMS Helm overlay</summary>
+
+```yaml reference
+https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml
+```
+
+</details>
+
+This overlay points the Orchestration Cluster at the `pg-camunda` cluster and disables Elasticsearch. Optimize requires Elasticsearch or OpenSearch, so it is disabled as well. This path is covered by the `no-domain-rdbms` declination of the ROSA reference architecture tests.
 
 Merge the **Identity PostgreSQL** overlay:
 
