@@ -607,7 +607,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/generic/kuber
 
 </details>
 
-This overlay points the Orchestration Cluster at the `pg-camunda` cluster and disables Elasticsearch. Optimize requires Elasticsearch or OpenSearch, so it is disabled as well. The `no-domain-rdbms` declination of the ROSA reference architecture exercises this path in CI.
+This overlay points the Orchestration Cluster at the `pg-camunda` cluster and disables Elasticsearch. Optimize requires Elasticsearch or OpenSearch, so it is disabled as well.
 
 Merge the **Identity PostgreSQL** overlay:
 
