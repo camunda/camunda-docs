@@ -31,6 +31,8 @@ Here are the types of available batch operations:
 | Resolve incidents         | Resolves the [incidents](./incidents.md) associated with a batch of process instances.             |
 | Modify process instances  | [Moves](./process-instance-modification.md) a batch of process instances from one node to another. |
 | Migrate process instances | [Migrates](./process-instance-migration.md) a batch of process instances to a new process version. |
+| Suspend process instances | [Suspends](./process-instance-suspension.md) a batch of process instances.                         |
+| Resume process instances  | [Resumes](./process-instance-suspension.md) a batch of suspended process instances.                |
 | Cancel process instances  | Cancels a batch of process instances.                                                              |
 | Delete process instances  | [Deletes](./process-instance-deletion.md) a batch of process instances.                            |
 | Delete decision instances | [Deletes](./decision-instance-deletion.md) a batch of decision instances.                          |
