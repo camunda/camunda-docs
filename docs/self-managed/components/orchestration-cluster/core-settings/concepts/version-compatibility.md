@@ -23,7 +23,7 @@ Camunda 8 versions follow the `MAJOR.MINOR.PATCH` format (for example, `8.8.3`).
 
 All minor version upgrades in a Self-Managed Orchestration Cluster must follow this procedure:
 
-1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is strongly recommended for fix coverage. The compatibility check itself compares minor versions, so any patch of the source minor is accepted.
+1. **Upgrade to the latest patch version of your current minor.** For example, before upgrading from `8.7.x` to `8.8.y`, first upgrade to the latest `8.7` patch. This is strongly recommended for fix coverage. The compatibility check itself compares minor versions, so any patch of the source minor is accepted. Skipping this step can still expose you to bugs already fixed in later patches.
 
 2. **Upgrade to the next minor version.** Do not skip minor versions. For example, `8.7.x → 8.8.y` is supported, but `8.6.x → 8.8.y` is not. This rule is enforced: skipping a minor fails the compatibility check and blocks startup.
 
