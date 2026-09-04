@@ -308,6 +308,15 @@ curl -L -X PATCH 'http://localhost:8080/v2/agent-instances/4503599627370496' \
 
 Whenever you send `history`, also send the `jobKey` and `jobLease` from the job activation. Camunda records each item with a `PENDING` commit status and promotes it to `COMMITTED` when the job completes successfully. If the job fails and a later activation supersedes the lease, the items are marked `DISCARDED` instead.
 
+:::caution Unreported usage metrics can be lost
+If a competing activation completes the job before your runtime reports a call's `metrics`, those metrics are discarded with the rest of that activation's history and can't be recovered. This can happen when:
+
+- Your runtime crashes after a model call but before reporting its `metrics`.
+- Your runtime loses its connection, and the job is reactivated and completed by a competing worker before the runtime reconnects.
+
+You can still report those metrics under the new activation’s lease if you reconnect before the job is completed.
+:::
+
 The response echoes one entry per submitted item, in request order, with the `historyItemKey` Camunda assigned and an `isDuplicate` flag showing whether the item had already been recorded.
 
 ## Step 6: Complete the job
@@ -333,16 +342,3 @@ If your agent can't finish, [fail the job](/apis-tools/orchestration-cluster-api
 Start a process instance and open it in Operate. Select the agent element on the diagram to see the agent instance data you reported: its state, usage metrics, model, system prompt, tools, and conversation history grouped by loop iteration.
 
 See [monitor your AI agents](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md) to learn how to inspect and debug AI agents in Operate.
-
-## Limitations
-
-### Usage metrics can be lost if your runtime doesn't report them before a competing activation completes the job
-
-Camunda only commits the usage metrics on history items reported under the lease of the activation that completes the job. If your runtime racks up token usage or tool calls but doesn't report them before a competing job activation completes the job first, those metrics are lost, since the superseded activation's history items are discarded rather than committed.
-
-This can happen with the external worker pattern in the following cases:
-
-- Your runtime crashes after a model call but before it reports that call's `metrics` through [step 5](#step-5-report-the-conversation-history).
-- Your runtime loses its connection, and by the time it reconnects, the job has already been re-activated and completed by a competing worker.
-
-If your runtime reconnects after the job was re-activated but before a competing worker completes it, it can still report metrics on the new activation's lease. Losing metrics in a crash or an extended disconnect is expected behavior. There's no way to recover usage that was never reported under a lease Camunda ends up committing.
