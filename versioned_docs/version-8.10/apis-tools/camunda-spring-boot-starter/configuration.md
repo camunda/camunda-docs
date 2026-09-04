@@ -1,0 +1,1291 @@
+---
+id: configuration
+title: Configuration
+---
+
+This page uses YAML examples to show configuration properties. Alternate methods to [externalize or override your configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html) are provided by Spring Boot, and can be applied without rebuilding your application (properties files, Java System properties, or environment variables).
+
+:::note
+Configuration properties can be defined as environment variables using [Spring Boot conventions](https://docs.spring.io/spring-boot/reference/features/external-config.html#features.external-config.typesafe-configuration-properties.relaxed-binding.environment-variables). To define an environment variable, convert the configuration property to uppercase, remove any dashes `-`, and replace any delimiters `.` with underscore `_`.
+
+For example, the property `camunda.client.worker.defaults.max-jobs-active` is represented by the environment variable `CAMUNDA_CLIENT_WORKER_DEFAULTS_MAXJOBSACTIVE`.
+:::
+
+:::note
+For a full set of properties, head over to the [properties reference](./properties-reference.md)
+:::
+
+## Modes
+
+The Camunda Spring Boot Starter has modes with meaningful defaults aligned with the distribution's default connection details. Each mode is made for a Camunda 8 setup, and only one mode may be used at a time.
+
+:::note
+The defaults applied by the modes are overwritten by _any_ other set property, including legacy/deprecated properties. Check your configuration and logs to avoid unwanted override.
+:::
+
+### SaaS
+
+This allows you to connect to a Camunda instance in our SaaS offering as the URLs are templated.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: saas
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="SaaS mode"
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/saas.yaml
+```
+
+The only thing you need to configure then, are the connection details to your Camunda SaaS cluster:
+
+```yaml
+camunda:
+  client:
+    auth:
+      client-id: <your client id>
+      client-secret: <your client secret>
+    cloud:
+      cluster-id: <your cluster id>
+      region: <your region>
+```
+
+Other connectivity configuration does not further apply for the SaaS mode.
+
+### Self-Managed
+
+This allows you to connect to a Self-Managed instance protected with JWT authentication. The default URLs are configured to align with all Camunda distributions using `localhost` addresses.
+
+Activate by setting:
+
+```yaml
+camunda:
+  client:
+    mode: self-managed
+```
+
+This applies the following defaults:
+
+```yaml reference referenceLinkText="Source" title="Self-managed mode"
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/modes/self-managed.yaml
+```
+
+For some specific OIDC setups (for example, [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity)), you might need to define additional properties like `camunda.client.auth.scope` in addition to the defaults provided by the mode, see the [`camunda.client.auth`-Properties reference](./properties-reference.md) for a full overview.
+
+## Connectivity
+
+The connection to Camunda API is determined by `camunda.client.grpc-address` and `camunda.client.rest-address`
+
+### Camunda API connection
+
+#### gRPC address
+
+Define the address of the [gRPC API](/apis-tools/zeebe-api/grpc.md) exposed by the [Zeebe Gateway](/reference/glossary.md#zeebe-gateway):
+
+```yaml
+camunda:
+  client:
+    grpc-address: http://localhost:26500
+```
+
+:::note
+You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerException: target` error.
+:::
+
+#### REST address
+
+Define address of the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) exposed by the Zeebe Gateway:
+
+```yaml
+camunda:
+  client:
+    rest-address: http://localhost:8080
+```
+
+:::note
+You must add the `http://` scheme to the URL to avoid a `java.lang.NullPointerException: target` error.
+:::
+
+#### Prefer REST over gRPC
+
+By default, the Camunda Client will use REST instead of gRPC whenever possible to communicate with the Camunda APIs.
+
+To use the gRPC by default, you can configure this:
+
+```yaml
+camunda:
+  client:
+    prefer-rest-over-grpc: false
+```
+
+### Advanced connectivity settings
+
+```yaml
+camunda:
+  client:
+    keep-alive: PT60S
+    override-authority: host:port
+    max-message-size: 4194304
+    max-metadata-size: 4194304
+    ca-certificate-path: path/to/certificate
+    request-timeout: PT10S
+    request-timeout-offset: PT1S
+```
+
+**Keep alive:** Time interval between keep alive messages sent to the gateway (default is 45s).
+
+**Override authority:** The alternative authority to use, commonly in the form `host` or `host:port`.
+
+**Max message size:** A custom `maxMessageSize` allows the client to receive larger or smaller responses from Zeebe. Technically, it specifies the `maxInboundMessageSize` of the gRPC channel (default 5MB).
+
+**Max metadata size:** A custom `maxMetadataSize` allows the client to receive larger or smaller response headers from Camunda.
+
+**CA certificate path:** Path to a root CA certificate to be used instead of the certificate in the default store.
+
+**Request timeout:** The timeout for all requests sent to Camunda. There is an additional option to define the timeout for workers.
+
+**Request timeout offset:** The offset being added to the timeout on asynchronous requests sent to Camunda to cover the network latency.
+
+### Multi-tenancy
+
+To connect the client to a specific tenant, you can configure:
+
+```yaml
+camunda:
+  client:
+    tenant-id: myTenant
+```
+
+This does also affect the default tenant being used by all job workers, however there are [more possibilities](#control-tenant-usage) to configure them.
+
+### Multi-client configuration (Physical Tenants)
+
+A single `camunda.client.*` configuration targets exactly one [Physical Tenant](/self-managed/concepts/physical-tenants/index.md) (the default tenant, unless `physical-tenant-id` is set). To target multiple Physical Tenants from one Spring application, configure multiple named clients under `camunda.clients.<name>.*`:
+
+```yaml
+camunda:
+  clients:
+    finance:
+      physical-tenant-id: finance
+      primary: true
+    risk:
+      physical-tenant-id: risk
+```
+
+The map key is a free-form client name; it does not have to match the Physical Tenant ID. A `physical-tenant-id` must be lowercase alphanumeric and at most 64 characters — an invalid value fails application startup.
+
+Each named client is a sparse overlay on top of the base `camunda.client.*` configuration — any property you don't set per client (address, auth, and so on) falls back to the shared `camunda.client.*` value.
+
+At most one client may be marked `primary: true` — configuring more than one throws `IllegalArgumentException` at startup. If you configure only one client, it's implicitly primary. If you configure more than one client and mark none of them `primary: true`, there is no primary client at all: looking one up throws `IllegalStateException`, and the `camundaClientConfiguration` bean isn't registered.
+
+Each client's resolved `auth.method` (its own `camunda.clients.<name>.auth.method`, overlaid on the base `camunda.client.auth.method`) must be the same across all clients — mixing resolved authentication methods in one application throws an `IllegalArgumentException` at startup. An unset method normalizes to `none`, so leaving it unset on one client and setting `none` explicitly on another is fine; unset and `basic` together is a conflict. Credentials themselves (client ID, secret, and so on) can still differ per client.
+
+If you don't configure any `camunda.clients.*` entries, your application has a single, implicitly-named `default` client — existing single-client configuration is unaffected.
+
+#### Access a named client
+
+Each named client is also available as a Spring bean, named `<name>CamundaClient` (for example, `financeCamundaClient`). Kebab-case client names are camel-cased for the bean name (`camunda.clients.risk-eu` → `riskEuCamundaClient`). The primary client's bean is `@Primary`, so a plain `@Autowired CamundaClient` still resolves it, and the historical `camundaClient` bean name is preserved as an alias for the primary client — `@Qualifier("camundaClient")` and `getBean("camundaClient")` keep working.
+
+To look up clients by name at runtime, inject `CamundaClientRegistry`. Injecting the registry does not eagerly instantiate every client — beans are resolved lazily on first lookup:
+
+```java
+@Autowired
+private CamundaClientRegistry clientRegistry;
+
+public void useFinanceClient() {
+  CamundaClient financeClient = clientRegistry.get("finance");
+  // ...
+}
+```
+
+`CamundaClientRegistry` also provides `find(String)` (returns an `Optional`), `getPrimary()`, `clientNames()`, and `all()` (a `Map` of every configured client, keyed by name).
+
+## Authentication
+
+The authentication method is determined by `camunda.client.auth.method`. If omitted, the client will try to detect the authentication method based on the provided properties.
+
+Authenticate with the cluster using the following alternative methods:
+
+:::info
+When using `camunda.client.mode=saas`, the authentication method presets are not applied in favor of the properties contained in the SaaS preset.
+:::
+
+### No authentication
+
+By default, no authentication will be used.
+
+To explicitly activate this method, you can set:
+
+```yaml
+camunda:
+  client:
+    auth:
+      method: none
+```
+
+As alternative, do not provide any other property indicating an implicit authentication method.
+
+This will load this preset:
+
+```yaml reference referenceLinkText="Source" title="No authentication"
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/none.yaml
+```
+
+### Basic authentication
+
+You can authenticate with the cluster using Basic authentication, if the cluster is setup to use Basic authentication.
+
+To explicitly activate this method, you can set:
+
+```yaml
+camunda:
+  client:
+    auth:
+      method: basic
+```
+
+This authentication method will be implied if you set either `camunda.client.auth.username` or `camunda.client.auth.password`.
+
+This will load this preset:
+
+```yaml reference referenceLinkText="Source" title="Basic authentication"
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/basic.yaml
+```
+
+### OIDC authentication
+
+You can authenticate with the cluster using OpenID Connect (OIDC) with client ID and client secret.
+
+To explicitly activate this method, you can set:
+
+```yaml
+camunda:
+  client:
+    auth:
+      method: oidc
+```
+
+This authentication method will be implied if you set either `camunda.client.auth.client-id` or `camunda.client.auth.client-secret`.
+
+This will load this preset:
+
+```yaml reference referenceLinkText="Source" title="OIDC authentication"
+https://github.com/camunda/camunda/blob/main/clients/camunda-spring-boot-starter/src/main/resources/auth-methods/oidc.yaml
+```
+
+:::note
+There are three ways to define the token URL. They're prioritized as follows:
+
+1. Provide the `camunda.client.auth.token-url`.
+2. Provide the issuer's well-known configuration URL `camunda.client.auth.well-known-configuration-url`. This extracts the token URL from the `token_url` field in the loaded configuration.
+3. Provide the issuer's URL `camunda.client.auth.issuer-url`. This generates the well-known configuration URL and extracts the token URL from the `token_url` field in the loaded configuration.
+   :::
+
+#### Credentials cache path
+
+By default, the Java client caches OAuth credentials in memory only. To persist credentials across JVM restarts, opt in to a file-based cache by setting `camunda.client.auth.credentials-cache-path` to a writeable file location (directory path and file name):
+
+```yaml
+camunda:
+  client:
+    auth:
+      credentials-cache-path: /tmp/credentials
+```
+
+When this property is unset or empty, no cache file is created and tokens are fetched fresh after each restart.
+
+#### Custom identity provider security context
+
+Several identity providers, such as Keycloak, support client X.509 authorizers as an alternative to client credentials flow.
+
+As a prerequisite, ensure you have proper KeyStore and TrustStore configured, so that:
+
+- Both the Spring Camunda application and identity provider share the same CA trust certificates.
+- Both the Spring Camunda and identity provider own certificates signed by trusted CA.
+- Your Spring Camunda application own certificate has proper `Distinguished Name` (DN), e.g.
+  `CN=My Camunda Client, OU=Camunda Users, O=Best Company, C=DE`.
+- Your application DN registered in the identity provider client authorization details.
+
+Once prerequisites are satisfied, your Spring Camunda application must be configured either via global SSL context, or
+with an exclusive context which is documented below.
+
+Refer to your identity provider documentation on how to configure X.509 authentication. For example, [Keycloak](https://www.keycloak.org/server/mutual-tls).
+
+If you require configuring SSL context exclusively for your identity provider, you can use this set of properties:
+
+```yaml
+camunda:
+  client:
+    auth:
+      keystore-path: /path/to/keystore.p12
+      keystore-password: password
+      keystore-key-password: password
+      truststore-path: /path/to/truststore.jks
+      truststore-password: password
+```
+
+- **keystore-path**: Path to client's KeyStore; can be both in JKS or PKCS12 formats
+- **keystore-password**: KeyStore password
+- **keystore-key-password**: Key material password
+- **truststore-path**: Path to client's TrustStore
+- **truststore-password**: TrustStore password
+
+When the properties are not specified, the default SSL context is applied. For example, if you configure an application with
+`javax.net.ssl.*` or `spring.ssl.*`, the latter is applied. If both `camunda.client.auth.*` and either `javax.net.ssl.*`
+or `spring.ssl.*` properties are defined, the `camunda.client.auth.*` takes precedence.
+
+## Job worker configuration options
+
+### Job type
+
+By default, the **method name** is used as the job type, keeping your code self-documenting without additional configuration:
+
+```java
+@JobWorker
+public void checkPayment() {
+  // handles jobs of type 'checkPayment'
+}
+```
+
+To use a different job type, set the `type` attribute on the annotation:
+
+```java
+@JobWorker(type = "payment-check")
+public void checkPayment() {
+  // handles jobs of type 'payment-check'
+}
+```
+
+To override the job type externally without modifying the code — for example, when deploying a shared worker implementation under a different type name — use an application property:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        checkPayment:
+          type: payment-check
+```
+
+To set a fallback job type for all workers that don't define a type via annotation or property override:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        type: my-default-type
+```
+
+### Control variable fetching
+
+By default, a job worker fetches **all** process variables when activating a job. To improve performance and keep your code clean, you should fetch only the variables your worker actually needs. See [writing good workers](/components/best-practices/development/writing-good-workers.md#data-minimization-in-workers) for more guidance on minimizing data transfer.
+
+#### Using `@Variable` (recommended)
+
+The recommended approach is to declare each variable you need as a typed method parameter annotated with `@Variable`. The SDK automatically fetches only those variables and injects them directly — no type casting required:
+
+```java
+@JobWorker
+public void checkPayment(@Variable String orderId, @Variable BigDecimal amount) {
+  // only 'orderId' and 'amount' are fetched; types are enforced automatically
+}
+```
+
+With the [`-parameters` compiler flag](./getting-started.md#enable-the-java-compiler--parameters-flag) enabled, the parameter name is used as the variable name automatically. To use a different variable name, set it explicitly on the annotation:
+
+```java
+@JobWorker
+public void checkPayment(@Variable(name = "order_id") String orderId) {
+  // fetches the process variable 'order_id' into the 'orderId' parameter
+}
+```
+
+:::note
+This adds the variable name to the list of variables fetched from the process.
+:::
+
+#### Using `@VariablesAsType`
+
+For workers that operate on multiple related variables, `@VariablesAsType` maps process variables to your own class, eliminating individual type casts. Jackson's `@JsonProperty` annotation is respected. Return the updated object to write changes back to the process:
+
+```java
+@JobWorker
+public PaymentVariables checkPayment(@VariablesAsType PaymentVariables vars) {
+  // access typed fields directly — no casting needed
+  vars.setApproved(vars.getAmount().compareTo(BigDecimal.valueOf(100)) <= 0);
+  return vars; // return the object to write updated fields back to the process
+}
+```
+
+:::note
+This adds the names of the fields of the used type to the list of variables fetched from the process.
+:::
+
+#### Provide an explicit list of variables to fetch
+
+If you need access to the raw `ActivatedJob` or `JobClient` objects, you can specify an explicit list of variable names to avoid fetching all variables:
+
+```java
+@JobWorker(fetchVariables = {"orderId", "amount"})
+public void checkPayment(final JobClient client, final ActivatedJob job) {
+  String orderId = (String) job.getVariablesAsMap().get("orderId");
+  // ...
+}
+```
+
+You can also override the variables to fetch in your properties:
+
+```yml
+camunda:
+  client:
+    worker:
+      override:
+        checkPayment:
+          fetch-variables:
+            - orderId
+            - amount
+```
+
+:::caution
+Using the properties-defined way of fetching variables will override **all** other detection strategies.
+:::
+
+#### Fetch all variables
+
+If your worker genuinely needs every process variable, you can force fetching all variables:
+
+```java
+@JobWorker(fetchAllVariables = true)
+public void checkPayment(final ActivatedJob job) {
+  // all variables are available via job.getVariablesAsMap()
+}
+```
+
+You can also set this in your properties:
+
+```yml
+camunda:
+  client:
+    worker:
+      override:
+        checkPayment:
+          force-fetch-all-variables: true
+```
+
+### Define job worker function parameters
+
+The method signature you use to define job worker functions determines what data is available in your worker. For fetching process variables, use [`@Variable`](#using-variable-recommended) or [`@VariablesAsType`](#using-variablesastype) — both are covered in the [variable fetching section](#control-variable-fetching) above.
+
+Unless stated otherwise, all specified methods for fetching variables will be combined into a single list of variables to retrieve.
+
+#### `JobClient` parameter
+
+The `JobClient` is also part of the native `JobHandler` functional interface:
+
+```java
+@JobWorker
+public void processOrder(final JobClient jobClient) {
+  // ...
+}
+```
+
+#### `ActivatedJob` parameter
+
+The `ActivatedJob` is also part of the native `JobHandler` functional interface.
+
+This will **prevent** the implicit variable fetching detection as you can retrieve variables in a programmatic way now:
+
+```java
+@JobWorker
+public void processOrder(final ActivatedJob job) {
+  String orderId = (String) job.getVariablesAsMap().get("orderId");
+  // ...
+}
+```
+
+:::note
+Only explicit variable fetching will be effective when using the `ActivatedJob` as a parameter.
+:::
+
+#### Using `@Document`
+
+You can inject a `DocumentContext` by using the `@Document` annotation:
+
+```java
+@JobWorker
+public void processDocument(@Document DocumentContext doc) {
+  List<DocumentEntry> documents = doc.getDocuments();
+  // do what you need to do with the document entries
+}
+```
+
+Each `DocumentEntry` grants you access to the `DocumentReferenceResponse` that contains the reference data to the document and the `DocumentLinkResponse` that contains a link to the document.
+
+On top, you can directly retrieve the document content as `InputStream` or `byte[]`.
+
+#### Using `@CustomHeaders`
+
+You can use the `@CustomHeaders` annotation for a `Map<String, String>` parameter to retrieve [custom headers](/components/concepts/job-workers.md) for a job:
+
+```java
+@JobWorker
+public void processOrder(@CustomHeaders Map<String, String> headers) {
+  // do whatever you need to do
+}
+```
+
+:::note
+This will not have any effect on the variable fetching behavior.
+:::
+
+#### Using `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey`
+
+You can use the `@ProcessInstanceKey`, `@ElementInstanceKey`, `@JobKey`, `@ProcessDefinitionKey` and `@RootProcessInstanceKey` annotation for a `String`, `long` or `Long` parameter to retrieve the according key for a job:
+
+```java
+@JobWorker
+public void processOrder(
+  @ProcessInstanceKey String processInstanceKey,
+  @ElementInstanceKey long elementInstanceKey,
+  @JobKey Long jobKey,
+  @ProcessDefinitionKey String processDefinitionKey,
+  @RootProcessInstanceKey long rootProcessInstanceKey) {
+  // do whatever you need to do
+}
+```
+
+### Completing jobs
+
+#### Auto-completing jobs
+
+By default, the `autoComplete` attribute is set to `true` for any job worker.
+
+In this case, the Spring integration will handle job completion for you:
+
+```java
+@JobWorker
+public void processOrder() {
+  // do whatever you need to do
+  // no need to call client.newCompleteCommand()...
+}
+```
+
+:::note
+The code within the handler method needs to be synchronously executed, as the completion will be triggered right after the method has finished.
+:::
+
+##### Returning results
+
+When using `autoComplete` you can return:
+
+- a `Map<String, Object>` containing the process variables to set as result of the job
+- a `String` containing a valid JSON object
+- an `InputStream` streaming a valid JSON object
+- an `Object` that will be serialized to a JSON object
+
+```java
+@JobWorker
+public Map<String, Object> processOrder() {
+  // some work
+  if (successful) {
+    // some data is returned to be stored as process variable
+    return variablesMap;
+  } else {
+    // problem shall be indicated to the process:
+    throw new BpmnError("DOESNT_WORK", "This does not work because...");
+  }
+}
+```
+
+##### Documents as job results
+
+If you want to send a document as job result, you can do this by making a `DocumentContext` part of the response.
+
+It can be part of a `Map<String, Object>`:
+
+```java
+@JobWorker
+public Map<String, Object> sendDocumentAsResult() {
+  String resultDocumentContent = documentService.loadResult();
+  Map<String, Object> result = new HashMap<>();
+  result.put("resultDocument", DocumentContext.result()
+          .addDocument(
+              "result.json", b -> b.content(resultDocumentContent).contentType("application/json"))
+          .build());
+  return result;
+}
+```
+
+It can also be part of an `Object`:
+
+```java
+public record DocumentResult(DocumentContext responseDocument) {}
+
+@JobWorker
+public DocumentResult sendDocumentAsResult() {
+  String resultDocumentContent = documentService.loadResult();
+  DocumentContext responseDocument = DocumentContext.result()
+          .addDocument(
+              "result.json", b -> b.content(resultDocumentContent).contentType("application/json"))
+          .build());
+  return new DocumentResult(responseDocument);
+}
+```
+
+##### Completing ad-hoc sub-process jobs with a result
+
+When your job worker handles an [ad-hoc sub-process](/reference/glossary.md#ad-hoc-sub-process) job, you can return an `AdHocSubProcessResultFunction` to specify which element to activate within the sub-process. The starter automatically applies the result when you complete the job.
+
+Return a lambda that calls `activateElement` with the target element ID:
+
+```java
+@JobWorker(type = "myAdHocSubprocessJob")
+public AdHocSubProcessResultFunction handleAdHocSubprocess() {
+  return r -> r.activateElement("myElementId");
+}
+```
+
+To also submit process variables with the result, use the `AdHocSubProcessResultFunction.withVariables` factory method:
+
+```java
+@JobWorker(type = "myAdHocSubprocessJob")
+public AdHocSubProcessResultFunction handleAdHocSubprocess() {
+  Map<String, Object> variables = Map.of("decision", "approved");
+  return AdHocSubProcessResultFunction.withVariables(variables,
+      r -> r.activateElement("approvalTask"));
+}
+```
+
+##### Completing user task listener jobs with a result
+
+When your job worker handles a user task listener job, you can return a `UserTaskResultFunction` to control the outcome of the listener. The starter automatically applies the result when you complete the job.
+
+Return a lambda that configures the result, for example to correct the assignee:
+
+```java
+@JobWorker(type = "io.camunda:userTaskListener:complete")
+public UserTaskResultFunction handleUserTaskListener() {
+  return r -> r.correctAssignee("newAssignee");
+}
+```
+
+#### Programmatically completing jobs
+
+Your job worker code can also complete the job itself. This gives you more control over when you want to complete the job (for example, allowing you to move the completion to reactive callbacks):
+
+```java
+@JobWorker(autoComplete = false)
+public void processOrder(final JobClient client, final ActivatedJob job) {
+  // do whatever you need to do
+  client.newCompleteCommand(job.getKey())
+     .send()
+     .exceptionally(throwable -> { throw new RuntimeException("Could not complete job " + job, throwable); });
+}
+```
+
+You can also control auto-completion in your configuration.
+
+**Globally:**
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        auto-complete: false
+```
+
+**Per worker:**
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          auto-complete: false
+```
+
+Ideally, you **don't** use blocking behavior like `send().join()`, as this is a blocking call to wait for the issued command to be executed on the workflow engine. While this is very straightforward to use and produces easy-to-read code, blocking code is limited in terms of scalability.
+
+This is why the worker sample above shows a different pattern (using `exceptionally`). Often, you might want to use the `whenComplete` callback:
+
+```java
+send().whenComplete((result, exception) -> {})
+```
+
+This registers a callback to be executed when the command on the workflow engine was executed or resulted in an exception. This allows for parallelism. This is discussed in more detail in [this blog post about writing good workers for Camunda 8](https://blog.bernd-ruecker.com/writing-good-workers-for-camunda-cloud-61d322cad862).
+
+:::note
+When completing jobs programmatically, you must specify `autoComplete = false`. Otherwise, there is a race condition between your programmatic job completion and the Spring integration job completion, and this can lead to unpredictable results.
+:::
+
+### React to problems
+
+#### Throw a `BpmnError`
+
+If your code encounters a problem that should trigger a [BPMN error](/components/modeler/bpmn/error-events/error-events.md), throw a `BpmnError` and provide the error code defined in BPMN:
+
+```java
+@JobWorker
+public void processOrder() {
+  // some work
+  if (businessError) {
+    // problem shall be indicated to the process:
+    throw CamundaError.bpmnError("ERROR_CODE", "Some explanation why this does not work");
+    // this is a static function that returns an instance of BpmnError
+  }
+}
+```
+
+#### Fail jobs in a controlled way
+
+Whenever you want a job to fail in a controlled way, you can throw a `JobError` and provide parameters like `variables`, `retries` and `retryBackoff`:
+
+```java
+@JobWorker
+public void processOrder() {
+  try {
+    // some work
+  } catch (DynamicRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, this::calculateRetryBackoff, e);
+    // this is a static function that returns an instance of JobError with a dynamic retry backoff
+  } catch (StaticRetryException e) {
+    // problem shall be indicated to the process:
+    throw CamundaError.jobError("Error message", new ErrorVariables(), null, Duration.ofSeconds(10), e);
+    // this is a static function that returns an instance of JobError with a static retry backoff
+  }
+}
+```
+
+The JobError takes 5 parameters:
+
+- `errorMessage`: String
+- `variables`: Object _(optional)_, default `null`
+- `retries`: Integer _(optional)_, defaults to `job.getRetries() - 1`
+- `retryBackoff`: Duration _or_ `Function<Integer, Duration>` _(optional)_, defaults to the configured retry backoff; function input is the retries value that will be submitted
+- `cause`: Exception _(optional)_, defaults to `null`
+
+:::note
+The job error is sent to the engine by the SDK calling the [Fail Job API](/apis-tools/orchestration-cluster-api-rest/specifications/fail-job.api.mdx). The stacktrace of the job error will become the actual error message. The provided cause will be visible in Operate.
+:::
+
+#### Implicitly failing jobs
+
+If your handler method would throw any other exception than the ones listed above, the default Camunda Client error handling will apply, decrementing retries with a `retryBackoff` of 0.
+
+### Configuring the job worker thread pool
+
+The number of threads for invocation of job workers (default 1):
+
+```yaml
+camunda:
+  client:
+    execution-threads: 2
+```
+
+:::note
+We generally do not advise using a thread pool for workers, but rather implement asynchronous code, see [writing good workers](/components/best-practices/development/writing-good-workers.md) for additional details.
+:::
+
+### Further job worker configuration options
+
+#### Disable a job worker
+
+You can disable workers via the `enabled` parameter of the `@JobWorker` annotation:
+
+```java
+@JobWorker(enabled = false)
+public void processOrder() {
+  // worker's code - now disabled
+}
+```
+
+You can also override this setting via your `application.yaml` file:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          enabled: false
+```
+
+This is especially useful if you have a bigger code base including many workers, but want to start only some of them. Typical use cases are:
+
+- Testing: You only want one specific worker to run at a time.
+- Load balancing: You want to control which workers run on which instance of cluster nodes.
+- Migration: There are two applications, and you want to migrate a worker from one to another. With this switch, you can disable workers via configuration in the old application once they are available within the new.
+
+To disable all workers, but still have the Camunda client available, you can use:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        enabled: false
+```
+
+#### Configure jobs in flight
+
+Number of jobs for a worker that are polled from the broker to be worked on in this client:
+
+```java
+@JobWorker(maxJobsActive = 64)
+public void processOrder() {
+  // worker's code
+}
+```
+
+This can also be configured as property:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          max-jobs-active: 64
+```
+
+To configure a global default, you can set:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        max-jobs-active: 64
+```
+
+#### Enable job streaming
+
+Read more about this feature in the [job streaming documentation](/apis-tools/java-client/job-worker.md#job-streaming).
+
+Job streaming is disabled by default for job workers. To enable job streaming on the Camunda client, configure it as follows:
+
+```java
+@JobWorker(streamEnabled = true)
+public void processOrder() {
+  // worker's code
+}
+```
+
+This can also be configured as property:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          stream-enabled: true
+```
+
+To configure a global default, you can set:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        stream-enabled: true
+```
+
+#### Control tenant usage
+
+Job workers can be configured to work on jobs from specific [tenants](#multi-tenancy) using either [specific tenant IDs](#filtering-by-provided-tenant-IDs) or the [assigned tenants in the engine](#filtering-by-assigned-tenants).
+
+##### Filter by assigned tenants
+
+You can configure a job worker to use the tenants assigned to it in the engine, rather than providing explicit tenant IDs. Use the `tenantFilter` annotation property with `TenantFilter.ASSIGNED`:
+
+```java
+@JobWorker(tenantFilter = TenantFilter.ASSIGNED)
+public void processOrder() {
+  // worker's code
+}
+```
+
+When `TenantFilter.ASSIGNED` is set, any `tenant-ids` configured via the annotation or YAML are ignored.
+
+You can also override the tenant filter for a specific worker:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          tenant-filter: ASSIGNED
+```
+
+To configure a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-filter: ASSIGNED
+```
+
+##### Filter by provided tenant IDs
+
+The default behaviour is `TenantFilter.PROVIDED`, where the worker retrieves jobs for the tenant IDs explicitly configured. Configure global worker defaults for additional `tenant-ids` to be used by all workers:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        tenant-ids:
+          - <default>
+          - foo
+```
+
+Additionally, you can set `tenantIds` on the job worker level by using the annotation:
+
+```java
+@JobWorker(tenantIds="myOtherTenant")
+public void processOrder() {
+  // worker's code
+}
+```
+
+You can also override the `tenant-ids` for each worker:
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          tenants-ids:
+            - <default>
+            - foo
+```
+
+##### Physical Tenant fan-out for multi-client applications
+
+The `@JobWorker` annotation has no attribute to bind a worker to one named client. In a [multi-client](#multi-client-configuration-physical-tenants) application, every `@JobWorker` method registers against **all** configured clients — it fans out across the whole `CamundaClientRegistry`, not just the primary or default one.
+
+In an application with only one client, this has no visible effect — there's only one client to fan out to.
+
+Per-client worker overrides don't restrict this fan-out either: `worker.*`/`worker.override.*` properties set under `camunda.clients.<name>` have no effect, since the customizer that applies those overrides is built from the single, global `camunda.client.*` properties bean. Setting `camunda.clients.risk.worker.override.shipOrder.enabled: false`, for example, silently does nothing.
+
+If you need a worker to run against only some of your configured Physical Tenants, filter inside the handler using the tenant identifier available to you at runtime, rather than relying on annotation-level scoping or per-client worker configuration.
+
+#### Define the job timeout
+
+To define the job timeout, you can set the annotation (`long` in milliseconds):
+
+```java
+@JobWorker(timeout=60000)
+public void processOrder() {
+  // worker's code
+}
+```
+
+Moreover, you can override the timeout for the worker (as ISO 8601 duration expression):
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          timeout: PT1M
+```
+
+You can also set a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        timeout: PT1M
+```
+
+#### Configure the retry backoff
+
+If you want to apply a retry backoff that should be applied if a job fails without a job error, you can set the annotation (`long` in milliseconds):
+
+```java
+@JobWorker(retryBackoff=10000L)
+public void processOrder() {
+  // worker's code
+}
+```
+
+Moreover, you can override the retry backoff for the worker (as ISO 8601 duration expression):
+
+```yaml
+camunda:
+  client:
+    worker:
+      override:
+        processOrder:
+          retry-backoff: PT10S
+```
+
+You can also set a global default:
+
+```yaml
+camunda:
+  client:
+    worker:
+      defaults:
+        retry-backoff: PT10S
+```
+
+## Deploy resources on start-up
+
+To deploy process models at application startup, use the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+:::note Multi-client applications
+In a [multi-client](#multi-client-configuration-physical-tenants) application, every `@Deployment` resource is deployed to **all** configured clients — one `CamundaPostDeploymentSpringEvent` is published per client. For a multi-tenant application, this means your BPMN lands in every configured Physical Tenant, which is often what you want, but shouldn't come as a surprise. The same applies to `@ClusterVariables` processing.
+:::
+
+### Specify resources to deploy
+
+This annotation uses the [Spring resource loader](https://docs.spring.io/springframework/reference/core/resources.html) and can deploy multiple files at once. For example:
+
+```java
+@Deployment(resources = {"classpath:demoProcess.bpmn" , "classpath:demoProcess2.bpmn"})
+```
+
+Or, define wildcard patterns:
+
+```java
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn")
+```
+
+The resource loader automatically searches the entire classpath, including dependency JARs. To deploy only the resources packaged with the annotated class, use:
+
+```java
+@Deployment(resources = "classpath*:/bpmn/**/*.bpmn", ownJarOnly = true)
+```
+
+You can also set this globally:
+
+```yaml
+camunda:
+  client:
+    deployment:
+      own-jar-only: true
+```
+
+### Specify the tenant to deploy to
+
+To adjust the tenant to deploy to, set the `tenantId` property of the `@Deployment` annotation:
+
+```java
+@Deployment(resources = "classpath:demoProcess.bpmn", tenantId = "myTenant")
+public class MyRandomBean {
+  // make sure this bean is registered
+}
+```
+
+By default, the starter uses the `tenantId` from `camunda.client.tenant-id`.
+
+### Disable deployment
+
+To disable the deployment of annotations, you can set:
+
+```yaml
+camunda:
+  client:
+    deployment:
+      enabled: false
+```
+
+## Set cluster variables at startup
+
+To set cluster variables at application startup, use the `@ClusterVariables` annotation. Cluster variables are set when the Camunda client starts.
+
+There are three ways to provide the variables:
+
+### From JSON resource files
+
+Provide one or more JSON resource files using the `resources` attribute:
+
+```java
+@ClusterVariables(resources = "classpath:cluster-variables.json")
+@SpringBootApplication
+public class MyApplication { }
+```
+
+Multiple files can be provided at once:
+
+```java
+@ClusterVariables(resources = {"classpath:vars-a.json", "classpath:vars-b.json"})
+@SpringBootApplication
+public class MyApplication { }
+```
+
+### From a method
+
+Annotate a method with `@ClusterVariables`. The return value is serialized to JSON and set as cluster variables. Any type the configured `JsonMapper` can serialize is supported, for example `Map`, a POJO, or a record:
+
+```java
+@ClusterVariables
+public MyConfig clusterVariables() {
+  return new MyConfig("production", 3);
+}
+```
+
+### From application properties
+
+Define variables directly in your `application.yaml`:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      global:
+        environment: production
+        maxRetries: 3
+```
+
+Variables defined in properties are applied in addition to any annotation-defined variables.
+
+### Specify the tenant to set variables for
+
+To set cluster variables scoped to a specific tenant, use the `tenantId` property of the `@ClusterVariables` annotation:
+
+```java
+@ClusterVariables(resources = "classpath:cluster-variables.json", tenantId = "myTenant")
+@SpringBootApplication
+public class MyApplication { }
+```
+
+Or use the `tenant` property in your `application.yaml`:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      tenant:
+        myTenant:
+          environment: staging
+          maxRetries: 5
+```
+
+By default, the annotation and `global` property set variables in the global scope.
+
+### Disable cluster variable processing
+
+To disable all cluster variable processing (both annotation-based and property-based), set:
+
+```yaml
+camunda:
+  client:
+    cluster-variables:
+      enabled: false
+```
+
+## React to events
+
+The Camunda Spring Boot Starter integrates with Spring events and also publishes its own events.
+
+### Camunda client lifecycle events
+
+#### Camunda client created
+
+To react when the Camunda client is created, add an event listener:
+
+```java
+@EventListener
+public void onCamundaClientCreated(CamundaClientCreatedEvent event) {
+  // do what you need to do
+}
+```
+
+#### Camunda client closing event
+
+To react on the closing of the Camunda client, you can do this:
+
+```java
+@EventListener
+public void onCamundaClientClosing(CamundaClientClosingEvent event) {
+  // do what you need to do
+}
+```
+
+#### Lifecycle aware interface
+
+To subscribe to the Camunda client lifecycle at once, you can also use an interface:
+
+```java
+@Component
+public class CamundaLifecycleListener implements CamundaClientLifecycleAware {
+  @Override
+  public void onStart(CamundaClient client) {
+    // do what you need to do
+  }
+
+  @Override
+  public void onStop(CamundaClient client) {
+    // do what you need to do
+  }
+}
+```
+
+In a [multi-client](#multi-client-configuration-physical-tenants) application, one `CamundaClientCreatedSpringEvent`/`CamundaClientClosingSpringEvent` fires per configured client, each carrying that client's name — listen for these instead if you need to tell clients apart.
+
+### Post deployment event
+
+To react on the creation of [deployments on start-up](#deploying-resources-on-start-up), you can do this:
+
+```java
+@EventListener
+public void onDeploymentCreated(CamundaPostDeploymentEvent event) {
+  // do what you need to do
+}
+```
+
+The event will grant you access to a list of deployments that have been created.
+
+In a [multi-client](#multi-client-configuration-physical-tenants) application, one event fires per configured client, since `@Deployment` resources are deployed to every configured client.
+
+## Observe metrics
+
+The Camunda Spring Boot Starter provides some out-of-the-box metrics that can be leveraged via [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/actuator-api/htmlsingle/). Whenever actuator is on the classpath, you can access the following metrics:
+
+- `camunda.job.invocations`: Number of invocations of job workers (tagging the job type)
+
+For all of those metrics, the following actions are recorded:
+
+- `activated`: The job was activated and started to process an item.
+- `completed`: The processing was completed successfully.
+- `failed`: The processing failed with some exception.
+- `bpmn-error`: The processing completed by throwing a BPMN error (which means there was no technical problem).
+
+In a default setup, you can enable metrics to be served via http:
+
+```yaml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: metrics
+```
+
+Access them via [http://localhost:8080/actuator/metrics/](http://localhost:8080/actuator/metrics/).

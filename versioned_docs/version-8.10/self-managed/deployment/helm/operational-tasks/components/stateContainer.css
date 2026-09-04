@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: center;
+}
+
+.wrapper > * {
+  flex: 1 100%;
+}
+
+@media all and (min-width: 600px) {
+  .aside {
+    flex: 1 0 0;
+  }
+}
+
+@media all and (min-width: 800px) {
+  .left-1 {
+    order: 1;
+  }
+
+  .right-2 {
+    order: 2;
+  }
+
+  .below {
+    order: 3;
+  }
+}

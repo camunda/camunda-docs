@@ -1,0 +1,396 @@
+---
+id: evaluate-expression
+title: "Evaluate an expression"
+sidebar_label: "Evaluate an expression"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Evaluate an expression"} <MarkerAddedInVersion version="8.9" />
+</Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/expression/evaluation"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Evaluates a FEEL expression and returns the result. Supports references to tenant scoped
+cluster variables when a tenant ID is provided. Optionally, provide a `scopeKey` to make the
+variables of a specific process instance or element instance visible while evaluating the
+expression.
+
+<MarkerRequiredPermissions
+  permissions={[
+    { resourceType: "EXPRESSION", permissionType: "EVALUATE" },
+    {
+      dynamic: true,
+      note: "When the expression is evaluated in the scope of a process instance (scopeKey resolves to an instance), additionally requires READ_PROCESS_INSTANCE on PROCESS_DEFINITION for that process. Skipped when unscoped.",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          required: ["expression"],
+          properties: {
+            expression: {
+              type: "string",
+              description: 'The expression to evaluate (e.g., "=x + y")',
+              example: "=x + y",
+            },
+            tenantId: {
+              type: "string",
+              description:
+                "Required when the expression references tenant-scoped cluster variables",
+              example: "tenant_123",
+            },
+            scopeKey: {
+              allOf: [
+                {
+                  description:
+                    "System-generated key for a scope. A scope can hold variables and represents either an\nelement instance in a BPMN process or the process instance itself.\n",
+                  type: "string",
+                  format: "ScopeKey",
+                  oneOf: [
+                    {
+                      description:
+                        "System-generated key for a process instance.",
+                      format: "ProcessInstanceKey",
+                      example: "2251799813690746",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ProcessInstanceKey",
+                    },
+                    {
+                      description:
+                        "System-generated key for a element instance.",
+                      format: "ElementInstanceKey",
+                      example: "2251799813686789",
+                      type: "string",
+                      allOf: [
+                        {
+                          description:
+                            "Zeebe Engine resource key (Java long serialized as string)",
+                          type: "string",
+                          title: "LongKey",
+                        },
+                      ],
+                      title: "ElementInstanceKey",
+                    },
+                  ],
+                  title: "ScopeKey",
+                },
+              ],
+              description:
+                "Key of the process instance or element instance whose variables should be made visible\nto the expression. Use a process instance key to evaluate against the process instance\nscope, or an element instance key to evaluate against that element instance scope. If\nomitted, the expression is evaluated unscoped, using only cluster variables\nand request-body variables.\n",
+              "x-added-in-version": "8.10",
+            },
+            variables: {
+              type: "object",
+              description:
+                "Optional variables for expression evaluation. These variables are only used for the current evaluation and do not persist beyond it.",
+              example: { x: 10, y: 20 },
+              additionalProperties: true,
+              nullable: true,
+            },
+          },
+          title: "ExpressionEvaluationRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Expression evaluated successfully",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            required: ["expression", "result", "warnings"],
+            properties: {
+              expression: {
+                type: "string",
+                description: "The evaluated expression",
+                example: "=x + y",
+              },
+              result: {
+                description: "The result value. Its type can vary.",
+                example: 30,
+                nullable: true,
+              },
+              warnings: {
+                type: "array",
+                description:
+                  "List of warnings generated during expression evaluation",
+                items: {
+                  type: "object",
+                  required: ["message"],
+                  properties: {
+                    message: {
+                      type: "string",
+                      description: "The warning message",
+                      example:
+                        "No function found with name 'random' and 1 parameters",
+                    },
+                  },
+                  title: "ExpressionEvaluationWarningItem",
+                },
+                example: [],
+              },
+            },
+            title: "ExpressionEvaluationResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

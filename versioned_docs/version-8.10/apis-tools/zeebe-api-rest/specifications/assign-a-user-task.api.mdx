@@ -1,0 +1,182 @@
+---
+id: assign-a-user-task
+title: "Assign a user task"
+description: "Assigns a user task with the given key to the given assignee."
+sidebar_label: "Assign a user task"
+hide_title: true
+hide_table_of_contents: true
+api: eJztWNtuGzcQ/ZUBX5qga0lO3TTZN8d1Wre5GLbconEMmMsdSYy55IYXyQth/70YcleyLrmgzWMCGNnLcM7M8JxZjpbM86lj+TW7cmjBc3fHbjJWohNW1l4azXJ27JycagccQm8EC+ln4GcIUzlHDXfYgDcPHvC4BnHAMlZzyyv0aAloyTSvkOWMfI25u/sTG5YxSUA19zOWMYsfg7RYstzbgNvRjGcY4cwkwq1D8qZDJUwnZlhxli+Zb2qCk9rjFC3L2MTYivv06OkRa9ubBInOvzBlQ2u2IxBGe9SeXvG6VlJwCmb4wVFEy10wU3xA4Sl1a2q0XqKLa7ui0PVuUv1bmBi7mdoANt5XwXnQxkOBgFXtGzAWbnVQ6pZS72Jw3ko9ZRmjF7xQyPIJVw7bjHGlzOLtHK2V5Z5gXjRQ4oQH5bMYR6yudGCxC6EEOQHpYcEdcGWRl00fXTmAS/TgZ9LRhtxGyFu6tOiD1cA1oLXGgtTggpiB4A5dyjACxez8DDVMpHUxyaBXwN7Qg9Utn3KpB3DlMEEuaF1jAsz4PBXQQS3FndRTmFhTwdSaUCegjwEDxihri3PUHiwXCMLoUlIl3OC9XpezMEYh1xv1JHJQOUUq3HYdj0EE500FyQDmXAWKk3tYSKViIkKgc7JQmMJbszlGRDV3QflV+DFJ1GVtpPYg9dwkKg7gbBIpUVszlyWWWdwfQum2kvJ83zHwPdtIbQ9TYmZtxrz0dBu7A4k1tYIKtb9IimFtS3YWXW20SzR/Mjraz/BVdj+4bgvJU6JR+SE4j+WAtRk7Go0+J5G4aEf+ezqS4LqTiTBVrZD8w2tjEUr0XCoH3OKqZMRIWt/nAoUpm1SoT+i/tqZQWP242we2iXCeLDtcSP0BuINkWCT064uXJ/D86Odfbh7NvK9dPhwuFouBnYgDLKU3dmDsdGgngv7I7nHUjUWoeBPpVCbqcgXrzgOuRiEnUvQdugsbaPs3iPCJtpXeLnfosmqkwUq289GAq4szkCVqLycNEXgHOq6J5GQ544UJPi8U13dsTbxd0G0UF6qK29XnYBOgzZjz3Af3xQ/BT092fBPhfh+PzyG5AGHKvjdL1wNREpXUsgoVy49Go4xV/D7dPR2NWvJJO/4VmWjA+1pxHam1nY7UUK15GxOT2nmuxbfaGWPlVG7jDtjDJtCR+NeUURL+0Re1vk+YpHhS5sQE3Uv++X/wI10v2oU1ehp3CkEEa1F71XwX+3exfxf7txJ7m7EK/cyUdFI3LlKHDuw5G5JID0ikbrh8cK5vh+sPNp3J0c77ISBYxXK2TCJq8+FwOTPOt/myNta3w/khy9icW0nHkbih9DqJrSeRMoKrWQpkdzPpBU0alCSHd4gFwm/c44I3saKEs+nv2ejZaK8rMu1rlRxdnF6O4fj8DFJKiXsP+kHvkoS912Uy/pLTOJo4FMFK31zSklSLArlFexyo+Cs+dFjRczywRiOWdRcve5b88fc4bjT1sYv12HN6z+mItDmmrEm2NTKksag/+PZmkagTE4PqaLSZGm0qWpcWjQaHu3Q9P4uqE6aqgo6tV0/XnT95E4qOipbUqKRA7WLU3ViZTE7Set/Aq2QBfyVcOIyoiX59351KPwvFQJhqKHgVdMlX/xfKFMOKSz3soNzw3enpi9ODk7evX1+9ORv/c/Dq7OT0zeXpweHgcODvfSwu6aPi+kFc6eT8cIbeTn65/vL875G744THez+sFZea9iYmvexEe83WomUZyzfH8Qe6vck67V2z5bLgDq+salt6/DGgbVh+fbOWatR2KR1dl93A+Zk0H110g/Zj+Lqxfm9e3UOum9g0VKA7lrE7bLZ+Z2hv2ozNkJdoY6TJ4iTFczAmP2sPO5N+m/UrjoXA2n/CduOgQApedc3zt5djEmT3K0NlSErM8gX96MEXKWoT6xR1Hp8tmeJ6GviUbJNP+vcv8esolw==
+sidebar_class_name: "post api-method"
+info_path: versioned_docs/version-8.6/apis-tools/zeebe-api-rest/specifications/zeebe-rest-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Assign a user task"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/user-tasks/{userTaskKey}/assignment"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Assigns a user task with the given key to the given assignee.
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+  children={"Request"}
+></Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "userTaskKey",
+      in: "path",
+      required: true,
+      description: "The key of the user task to assign.",
+      schema: { type: "integer", format: "int64" },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          type: "object",
+          properties: {
+            assignee: {
+              description:
+                "The assignee for the user task. The assignee must not be empty or `null`.",
+              type: "string",
+              nullable: false,
+            },
+            allowOverride: {
+              description:
+                "By default, the task is reassigned if it was already assigned. Set this to `false` to return an error in such cases. The task must then first be unassigned to be assigned again. Use this when you have users picking from group task queues to prevent race conditions.\n",
+              type: "boolean",
+              nullable: true,
+            },
+            action: {
+              description:
+                'A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "assign".\n',
+              type: "string",
+              nullable: true,
+            },
+          },
+          title: "UserTaskAssignmentRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "204": { description: "The user task's assignment was adjusted." },
+    "400": {
+      description:
+        "The assignment of the user task with the given key cannot be completed. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": { description: "The user task with the given key was not found." },
+    "409": {
+      description:
+        "The user task with the given key is in the wrong state currently. More details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+              },
+              instance: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the origin of the problem.",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

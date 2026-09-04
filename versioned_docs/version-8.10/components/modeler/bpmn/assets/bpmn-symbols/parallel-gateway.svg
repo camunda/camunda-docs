@@ -1,0 +1,7 @@
+<svg height="60" version="1.1" width="60" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative; left: -0.75px;">
+  <path fill="#ffffff" stroke="#333333" d="M5,25L25,5L45,25L25,45L5,25" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="1" style="stroke-linecap: round; stroke-linejoin: round; stroke-opacity: 1;"></path>
+  <text x="13" y="55" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#333333" style="text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 12px; line-height: normal; font-family: Arial, Helvetica, sans-serif;" font-size="12px" font-family="Arial, Helvetica, sans-serif">
+    <tspan dy="4">AND</tspan>
+  </text>
+  <path fill="none" stroke="#333333" d="M11.25,20.5L30.25,20.5M20.5,11.25L20.5,30.25" stroke-opacity="1" stroke-width="4" transform="matrix(1,0,0,1,5,5)" style="stroke-opacity: 1;"></path>
+</svg>

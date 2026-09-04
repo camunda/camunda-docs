@@ -1,0 +1,346 @@
+---
+id: get-system-configuration
+title: "System configuration (alpha)"
+sidebar_label: "System configuration (alpha)"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"System configuration (alpha)"} <MarkerAddedInVersion version="8.9" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/system/configuration"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Returns the current system configuration. The response is an envelope
+that groups settings by feature area.
+
+:::note
+This endpoint is an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change
+in future releases.
+:::
+
+<MarkerRequiredPermissions permissions={[]} />
+
+<ParamsDetails parameters={undefined}></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "Current system configuration grouped by feature area.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "Envelope for all system configuration sections. Each property\nrepresents a feature area.\n",
+            type: "object",
+            required: [
+              "jobMetrics",
+              "components",
+              "deployment",
+              "authentication",
+              "cloud",
+            ],
+            properties: {
+              jobMetrics: {
+                description:
+                  "Configuration for job metrics collection and export.",
+                type: "object",
+                required: [
+                  "enabled",
+                  "exportInterval",
+                  "maxWorkerNameLength",
+                  "maxJobTypeLength",
+                  "maxTenantIdLength",
+                  "maxUniqueKeys",
+                ],
+                properties: {
+                  enabled: {
+                    description: "Whether job metrics export is enabled.",
+                    type: "boolean",
+                    example: true,
+                  },
+                  exportInterval: {
+                    description:
+                      "The interval at which job metrics are exported, as an ISO 8601 duration.",
+                    type: "string",
+                    example: "PT5M",
+                  },
+                  maxWorkerNameLength: {
+                    description:
+                      "The maximum length of the worker name used in job metrics labels.",
+                    type: "integer",
+                    format: "int32",
+                    example: 100,
+                  },
+                  maxJobTypeLength: {
+                    description:
+                      "The maximum length of the job type used in job metrics labels.",
+                    type: "integer",
+                    format: "int32",
+                    example: 100,
+                  },
+                  maxTenantIdLength: {
+                    description:
+                      "The maximum length of the tenant ID used in job metrics labels.",
+                    type: "integer",
+                    format: "int32",
+                    example: 30,
+                  },
+                  maxUniqueKeys: {
+                    description:
+                      "The maximum number of unique metric keys tracked for job metrics.",
+                    type: "integer",
+                    format: "int32",
+                    example: 9500,
+                  },
+                },
+                title: "JobMetricsConfigurationResponse",
+              },
+              components: {
+                description:
+                  "Configuration for active Camunda components in the deployment.",
+                type: "object",
+                required: ["active"],
+                properties: {
+                  active: {
+                    description:
+                      "List of webapp components whose UI is enabled in this deployment.",
+                    type: "array",
+                    items: {
+                      description: "A Camunda webapp component name.",
+                      type: "string",
+                      enum: ["operate", "tasklist", "admin"],
+                      title: "WebappComponent",
+                    },
+                    example: ["operate", "tasklist"],
+                  },
+                },
+                title: "ComponentsConfigurationResponse",
+                "x-added-in-version": "8.10",
+              },
+              deployment: {
+                description: "Configuration for deployment characteristics.",
+                type: "object",
+                required: ["isMultiTenancyEnabled", "maxRequestSize"],
+                properties: {
+                  isMultiTenancyEnabled: {
+                    description: "Whether multi-tenancy is enabled.",
+                    type: "boolean",
+                    example: false,
+                  },
+                  maxRequestSize: {
+                    description: "The maximum HTTP request size in bytes.",
+                    type: "integer",
+                    format: "int64",
+                    example: 4194304,
+                  },
+                },
+                title: "DeploymentConfigurationResponse",
+                "x-added-in-version": "8.10",
+              },
+              authentication: {
+                description:
+                  "Configuration for authentication and session management.",
+                type: "object",
+                required: ["canLogout", "isLoginDelegated"],
+                properties: {
+                  canLogout: {
+                    description:
+                      "Whether users can log out (false for SaaS deployments).",
+                    type: "boolean",
+                    example: true,
+                  },
+                  isLoginDelegated: {
+                    description:
+                      "Whether login is delegated to an external identity provider.",
+                    type: "boolean",
+                    example: false,
+                  },
+                },
+                title: "AuthenticationConfigurationResponse",
+                "x-added-in-version": "8.10",
+              },
+              cloud: {
+                description: "Configuration for SaaS/cloud-specific settings.",
+                type: "object",
+                required: ["stage"],
+                properties: {
+                  stage: {
+                    description: "The cloud deployment stage.",
+                    type: "string",
+                    nullable: true,
+                    allOf: [
+                      {
+                        description: "The cloud deployment stage.",
+                        type: "string",
+                        enum: ["dev", "int", "prod"],
+                        title: "CloudStage",
+                      },
+                    ],
+                    example: "prod",
+                  },
+                },
+                title: "CloudConfigurationResponse",
+                "x-added-in-version": "8.10",
+              },
+            },
+            title: "SystemConfigurationResponse",
+          },
+          examples: {
+            "example-1": {
+              value: {
+                jobMetrics: {
+                  enabled: true,
+                  exportInterval: "PT5M",
+                  maxWorkerNameLength: 100,
+                  maxJobTypeLength: 100,
+                  maxTenantIdLength: 30,
+                  maxUniqueKeys: 9500,
+                },
+                components: { active: ["operate", "tasklist"] },
+                deployment: {
+                  isMultiTenancyEnabled: false,
+                  maxRequestSize: 4194304,
+                },
+                authentication: { canLogout: true, isLoginDelegated: false },
+                cloud: { stage: "prod" },
+              },
+            },
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>
