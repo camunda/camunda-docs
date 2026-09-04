@@ -62,9 +62,9 @@ The following key changes were also released as part of an 8.7.x patch release.
 
 ### Connector secret filter {#connector-secret-filter}
 
-Starting with 8.7.25, the connector runtime introduces the [secret filter](/self-managed/connectors-deployment/connectors-configuration.md#secret-filter), defaulting to `STRICT`. Outbound and inbound connectors now resolve only the secrets they declare in their own configuration: outbound connectors through their BPMN input mappings, inbound connectors through the properties on their deployed element.
+Starting with 8.7.25, the connector runtime introduces the [secret filter](/self-managed/connectors-deployment/connectors-configuration.md#secret-filter), defaulting to `STRICT`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
-**Action:** Before upgrading, confirm that every connector task which resolves a secret also declares that secret: in its input mappings for outbound connectors, or in its element properties for inbound connectors. If a task relies on resolving a secret it doesn't declare, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `LAX` or `DISABLED` before upgrading.
+**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED` before upgrading. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
 
 On 8.7, the outbound lookup goes through Operate, reusing the `camunda.connector.polling.enabled` property (default: `true`) that already gates Operate connectivity for inbound connectors. If you run an outbound-only deployment with `camunda.connector.polling.enabled=false`, every outbound connector job that resolves a secret now fails to look up its allow-list — the job fails and retries under `STRICT`, or the filter falls back to allowing all secrets under `LAX`. Before upgrading, either re-enable polling and confirm Operate is reachable, or set the mode to `DISABLED`.
 
