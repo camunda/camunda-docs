@@ -290,7 +290,7 @@ In this setup, Web Modeler and Console still continue to use Auth0 via the ident
 
 #### Centralized Secret Resolution via Zeebe
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
 
 <!-- https://github.com/camunda/product-hub/issues/3040 -->
 
@@ -301,6 +301,7 @@ Centralized secret resolution through Zeebe is introduced with this alpha. Proce
 - Resolved values are not written to engine state, exports, backups, Operate, Tasklist, or application logs.
 - Self-Managed deployments support AWS Secrets Manager and GCP Secret Manager with workload identity authentication. A file-based provider is available for development and testing.
 - SaaS requires no configuration and uses Camunda’s managed secret backend.
+- Camunda 8 Run uses the file-based provider: create one file per secret (filename = secret name, contents = value), and set `camunda.secrets.stores.file.default.path` to that directory in the Camunda 8 Run application configuration.
 
 **Migration:** Existing processes continue to work without changes. For new processes, use `camunda.secrets.NAME`. To migrate hardcoded or connector-specific credentials, store the value in a supported secret store and replace it with a centralized secret reference.
 
