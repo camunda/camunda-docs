@@ -200,11 +200,11 @@ If you are using Optimize alongside an RDBMS-backed Orchestration Cluster, Optim
 
 See [back up and restore Optimize independently](../optimize-backup-and-restore.md) for the complete procedure.
 
-## (Optional) Back up Web Modeler data {#back-up-web-modeler-data}
+## (Optional) Back up Camunda Hub data {#back-up-web-modeler-data}
 
-If you are using Web Modeler, you can also back up its data. Web Modeler stores its data in a relational database, so you can use the same backup tools as for the RDBMS secondary storage.
+If you are using Camunda Hub, you can also back up its data. Camunda Hub stores its data in a relational database, so you can use the same backup tools as for the RDBMS secondary storage.
 
-See [backup and restore Web Modeler data](../modeler-backup-and-restore.md) for more details.
+See [backup and restore Camunda Hub data](../modeler-backup-and-restore.md) for more details.
 
 ## Primary storage retention
 

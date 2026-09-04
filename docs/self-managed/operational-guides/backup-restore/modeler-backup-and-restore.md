@@ -1,13 +1,13 @@
 ---
 id: modeler-backup-and-restore
-title: Backup and restore Web Modeler data
-description: "How to perform a backup and restore of Web Modeler data."
+title: Backup and restore Camunda Hub data
+description: "How to perform a backup and restore of Camunda Hub data."
 keywords: ["backup", "backups"]
 ---
 
 ## Create backup
 
-To create a backup of Web Modeler data, you must back up the database that Web Modeler uses by following the instructions of the official [PostgreSQL documentation](https://www.postgresql.org/docs/current/backup-dump.html).
+To create a backup of Camunda Hub data, you must back up the database that Camunda Hub uses by following the instructions of the official [PostgreSQL documentation](https://www.postgresql.org/docs/current/backup-dump.html).
 
 For example, to create a backup of the database using `pg_dumpall`, use the following command:
 
@@ -26,18 +26,18 @@ Database dumps created with `pg_dumpall`/`pg_dump` can only be restored into a d
 ## Restore
 
 Backups can only be restored with downtime.
-To restore the database dump, first ensure that Web Modeler is stopped.
+To restore the database dump, first ensure that Camunda Hub is stopped.
 Then, to restore the database use the following command:
 
 ```bash
 psql -U <DATABASE_USER> -h <DATABASE_HOST> -p <DATABASE_PORT> -f dump.psql <DATABASE_NAME>
 ```
 
-After the database has been restored, you can start Web Modeler again.
+After the database has been restored, you can start Camunda Hub again.
 
 :::danger
-When restoring Web Modeler data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
-Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](/self-managed/components/hub/troubleshooting/troubleshoot-missing-data.md)).
+When restoring Camunda Hub data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
+Otherwise, users may not be able to access their projects after the restore (see [Camunda Hub's troubleshooting guide](/self-managed/components/hub/troubleshooting/troubleshoot-missing-data.md)).
 :::
 
 :::tip
