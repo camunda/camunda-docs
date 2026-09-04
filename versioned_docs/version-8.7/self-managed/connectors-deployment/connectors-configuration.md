@@ -476,7 +476,7 @@ Configure the secret filter with the `camunda.connector.secret-resolver.secret-f
 | `LAX`      | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
 | `DISABLED` | All secrets resolve freely, matching the behavior before this feature was introduced. Choose this mode only for troubleshooting, or if a custom secret provider needs unrestricted access.                                                                                                                             |
 
-The allow-list is derived automatically from the BPMN input mappings of the connector element. No manual configuration of individual secrets is required.
+The allow-list is derived automatically from the fields of the deployed connector element. No manual configuration of individual secrets is required.
 
 <Tabs groupId="configType" defaultValue="env" queryString values={[
 {label: 'Environment variables', value: 'env' },
@@ -525,7 +525,7 @@ The secret filter caches process definition lookups to avoid repeated API calls.
 ### Secure secret usage best practices
 
 - Keep the mode at `STRICT` (the default) in production environments. Reserve `LAX` for cases where a temporary process definition API outage must not block connector jobs, and reserve `DISABLED` for troubleshooting only.
-- Reference only the secrets a connector task actually needs in its input mappings. A task with fewer secrets in its input mappings has a smaller allow-list, which limits what that task can resolve even when its other input values come from untrusted process variables.
+- Reference only the secrets a connector task actually needs, in the fields that need them. A task that references fewer secrets has a smaller allow-list, which limits what that task can resolve even when its other field values come from untrusted process variables.
 - Scope secrets narrowly, for example one API key per integration or tenant, instead of reusing a single broad-access secret across multiple connector tasks.
 - You don't need to design BPMN diagrams defensively to keep a secret out of a task's other fields. The runtime enforces the allow-list per field: a secret declared on one field of a task isn't resolvable from a different field on that same task, or from a different task, unless the model itself chains them together with a FEEL expression.
 
@@ -534,7 +534,7 @@ The secret filter caches process definition lookups to avoid repeated API calls.
 If a secret that previously resolved now comes back unresolved, or the connector job fails, under `STRICT` mode, check the following:
 
 - For outbound connectors, the element has a Modeler element template. The secret filter derives an outbound task's allow-list from its element template; tasks without one, or with an unsupported element type, are treated as declaring no secrets and deny all resolution under `STRICT`.
-- The secret is referenced in that task's input mapping, using the `{{secrets.NAME}}` syntax, and in the same field where you expect it to resolve. A reference declared on one field doesn't resolve on a different field, unless the model chains the two fields together with a FEEL expression.
+- The secret is referenced using the `{{secrets.NAME}}` syntax in the same field where you expect it to resolve. A reference declared on one field doesn't resolve on a different field, unless the model chains the two fields together with a FEEL expression.
 - The `{{secrets.NAME}}` reference sits inside a JSON string, like any other field value. An unquoted placeholder on a non-string field (for example, `"count": {{secrets.MAX}}`) is never substituted.
 - The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
 
