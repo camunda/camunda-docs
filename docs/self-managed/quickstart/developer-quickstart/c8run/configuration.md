@@ -134,12 +134,95 @@ For custom connectors:
 3. Restart Camunda 8 Run after adding or updating connectors.
 4. Check `c8run/logs/connectors.log` if the connector fails to load.
 
-For connector secrets:
-
-- In non-Docker mode, export secrets as environment variables.
-- In the Docker Compose setup, add secrets to the `connector-secrets.txt` file in the Docker Compose folder.
+For connector secrets, add the value to the local secret store and reference it with `camunda.secrets.<name>`. See [manage local secrets](#manage-local-secrets).
 
 For connector development and packaging details, see [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md).
+
+## Manage local secrets
+
+c8run stores local secret values in your platform's user data directory and configures the file secret store automatically.
+
+| Platform | Default directory                                                                                                  |
+| -------- | ------------------------------------------------------------------------------------------------------------------ |
+| Linux    | `${XDG_DATA_HOME}/camunda/c8run/secrets`, or `~/.local/share/camunda/c8run/secrets` when `XDG_DATA_HOME` isn't set |
+| macOS    | `~/Library/Application Support/Camunda/C8Run/secrets`                                                              |
+| Windows  | `%LOCALAPPDATA%\Camunda\C8Run\secrets`                                                                             |
+
+Run `./c8run secrets path` to print the directory used by the current environment.
+
+Set a secret without placing the value in your command history:
+
+```bash
+./c8run secrets set OPENAI_API_KEY
+```
+
+Enter the value at the hidden prompt. Then reference it in Process Models with:
+
+```feel
+=camunda.secrets.OPENAI_API_KEY
+```
+
+To set several secrets without creating a dotenv file, pass multiple names. Camunda 8 Run prompts for each value separately:
+
+```bash
+./c8run secrets set OPENAI_API_KEY SLACK_TOKEN
+```
+
+Secret names can contain letters, numbers, underscores, and dashes. In a FEEL expression, wrap a name containing dashes in backticks:
+
+```feel
+=camunda.secrets.`openai-api-key`
+```
+
+Use the following commands to manage values:
+
+| Command                                | Purpose                                          |
+| -------------------------------------- | ------------------------------------------------ |
+| `./c8run secrets set <name> [name...]` | Prompt for and save one or more values.          |
+| `./c8run secrets set <name> --stdin`   | Read a value from standard input for automation. |
+| `./c8run secrets list`                 | List secret names without showing their values.  |
+| `./c8run secrets path`                 | Show the active local secrets directory.         |
+| `./c8run secrets delete <name>`        | Delete one secret.                               |
+| `./c8run secrets delete --all`         | Delete all local secrets after confirmation.     |
+| `./c8run secrets import [dotenv-file]` | Import `KEY=value` entries from a dotenv file.   |
+| `./c8run secrets import -`             | Import dotenv entries from standard input.       |
+
+For example, import a local dotenv file:
+
+```bash
+./c8run secrets import .env.secrets
+```
+
+Use a dedicated dotenv file for secret values. `c8run secrets` refuses to import the c8run `.env` file because it can contain runtime, download, and packaging credentials.
+
+Camunda caches resolved values for 20 minutes by default. After rotating a value, existing cached resolutions can use the previous value until the cache entry expires. Restart Camunda 8 Run to clear the cache immediately.
+
+Set `C8RUN_SECRETS_CACHE_TTL` before starting Camunda 8 Run to change the cache duration. The minimum supported value is one minute:
+
+```bash
+C8RUN_SECRETS_CACHE_TTL=1m ./c8run start
+```
+
+Set `C8RUN_SECRETS_DIR` in your environment or the c8run `.env` file to use another directory for secret commands and startup. Relative paths resolve from the unpacked c8run directory:
+
+```bash
+C8RUN_SECRETS_DIR=./temporary-secrets ./c8run secrets set API_KEY
+C8RUN_SECRETS_DIR=./temporary-secrets ./c8run start
+```
+
+To remove all secrets in the configured directory, run `./c8run secrets delete --all`. Interactive terminals ask for confirmation. Automation must add `--yes`.
+
+The default directory is shared across projects and c8run versions for the current operating-system user. Set a stable absolute `C8RUN_SECRETS_DIR` per project when the same secret name needs different values. c8run warns when the platform-default directory and the configured directory both contain entries. Run `./c8run secrets path` to confirm the active local directory.
+
+Overwritten and deleted values can remain in the running Camunda secret cache until its time to live expires. Restart c8run to apply those changes immediately.
+
+On Windows, use PowerShell or Command Prompt for hidden interactive entry. In Git Bash, prefix the command with `winpty`, or use `--stdin`.
+
+Local secret commands manage only the c8run file store. If you start with `--config` or Spring settings that configure another file path, AWS Secrets Manager, or Google Secret Manager, use that store's management tools instead. c8run does not add its local file store when explicit store configuration is present.
+
+Set `C8RUN_SECRETS_MODE=external` when you configure `camunda.secrets.stores` through `--config`, `application.yaml`, or Spring environment settings. In the default `local` mode, `C8RUN_SECRETS_DIR` is the authoritative local file-store path. Local `c8run secrets` commands are disabled in external mode.
+
+The local secrets directory is for development only. For production, configure a supported managed secret store instead of reusing Camunda 8 Run secrets.
 
 ## Enable TLS
 
