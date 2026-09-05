@@ -1,0 +1,500 @@
+---
+id: get-variable
+title: "Get variable"
+sidebar_label: "Get variable"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "get api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerEventuallyConsistentExtension from "@site/src/mdx/MarkerEventuallyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Get variable"} <MarkerAddedInVersion version="8.8" />
+</Heading>
+
+<MethodEndpoint
+  method={"get"}
+  path={"/variables/{variableKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerEventuallyConsistentExtension />
+
+Get a variable by its key.
+
+This endpoint returns both process-level and local (element-scoped) variables.
+The variable's scopeKey indicates whether it's a process-level variable or scoped to a
+specific element instance.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "READ_PROCESS_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "variableKey",
+      in: "path",
+      required: true,
+      description: "The variable key.",
+      schema: {
+        type: "string",
+        format: "string<VariableKey>",
+        example: "2251799813683287",
+        description: "System-generated key for a variable.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The variable is successfully returned.",
+      content: {
+        "application/json": {
+          schema: {
+            description: "Variable search response item.",
+            type: "object",
+            required: ["value"],
+            allOf: [
+              {
+                description: "Variable response item.",
+                type: "object",
+                required: [
+                  "name",
+                  "processInstanceKey",
+                  "tenantId",
+                  "variableKey",
+                  "scopeKey",
+                  "rootProcessInstanceKey",
+                ],
+                properties: {
+                  name: {
+                    description: "Name of this variable.",
+                    type: "string",
+                  },
+                  tenantId: {
+                    allOf: [
+                      {
+                        example: "customer-service",
+                        description: "The unique identifier of the tenant.",
+                        format: "TenantId",
+                        type: "string",
+                        title: "TenantId",
+                      },
+                    ],
+                    description: "Tenant ID of this variable.",
+                  },
+                  variableKey: {
+                    allOf: [
+                      {
+                        description: "System-generated key for a variable.",
+                        format: "VariableKey",
+                        example: "2251799813683287",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "VariableKey",
+                      },
+                    ],
+                    description: "The key for this variable.",
+                  },
+                  scopeKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a scope. A scope can hold variables and represents either an\nelement instance in a BPMN process or the process instance itself.\n",
+                        type: "string",
+                        format: "ScopeKey",
+                        oneOf: [
+                          {
+                            description:
+                              "System-generated key for a process instance.",
+                            format: "ProcessInstanceKey",
+                            example: "2251799813690746",
+                            type: "string",
+                            allOf: [
+                              {
+                                description:
+                                  "Zeebe Engine resource key (Java long serialized as string)",
+                                type: "string",
+                                title: "LongKey",
+                              },
+                            ],
+                            title: "ProcessInstanceKey",
+                          },
+                          {
+                            description:
+                              "System-generated key for a element instance.",
+                            format: "ElementInstanceKey",
+                            example: "2251799813686789",
+                            type: "string",
+                            allOf: [
+                              {
+                                description:
+                                  "Zeebe Engine resource key (Java long serialized as string)",
+                                type: "string",
+                                title: "LongKey",
+                              },
+                            ],
+                            title: "ElementInstanceKey",
+                          },
+                        ],
+                        title: "ScopeKey",
+                      },
+                    ],
+                    description:
+                      "The key of the scope where this variable is directly defined. For process-level\nvariables, this is the process instance key. For local variables, this is the key of the\nspecific element instance (task, subprocess, gateway, event, etc.) where the variable is\ndirectly defined.\n",
+                  },
+                  processInstanceKey: {
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a process instance.",
+                        format: "ProcessInstanceKey",
+                        example: "2251799813690746",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessInstanceKey",
+                      },
+                    ],
+                    description:
+                      "The key of the process instance of this variable.",
+                  },
+                  rootProcessInstanceKey: {
+                    description:
+                      "The key of the root process instance. The root process instance is the top-level\nancestor in the process instance hierarchy. This field is only present for data\nbelonging to process instance hierarchies created in version 8.9 or later.\n",
+                    nullable: true,
+                    allOf: [
+                      {
+                        description:
+                          "System-generated key for a process instance.",
+                        format: "ProcessInstanceKey",
+                        example: "2251799813690746",
+                        type: "string",
+                        allOf: [
+                          {
+                            description:
+                              "Zeebe Engine resource key (Java long serialized as string)",
+                            type: "string",
+                            title: "LongKey",
+                          },
+                        ],
+                        title: "ProcessInstanceKey",
+                      },
+                    ],
+                    "x-added-in-version": "8.9",
+                  },
+                },
+                title: "VariableResultBase",
+              },
+            ],
+            properties: {
+              value: {
+                description: "Full value of this variable.",
+                type: "string",
+              },
+            },
+            title: "VariableResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description: "Not found",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

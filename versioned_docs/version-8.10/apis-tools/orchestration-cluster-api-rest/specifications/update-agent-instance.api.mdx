@@ -1,0 +1,1106 @@
+---
+id: update-agent-instance
+title: "Update agent instance"
+sidebar_label: "Update agent instance"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "patch api-method"
+info_path: docs/apis-tools/orchestration-cluster-api-rest/specifications/orchestration-cluster-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MarkerRequiredPermissions from "@site/src/mdx/MarkerRequiredPermissions";
+
+import MarkerAddedInVersion from "@site/src/mdx/MarkerAddedInVersion";
+
+import MarkerStronglyConsistentExtension from "@site/src/mdx/MarkerStronglyConsistentExtension";
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading as={"h1"} className={"openapi__heading"}>
+  {"Update agent instance"} <MarkerAddedInVersion version="8.10" />
+</Heading>
+
+<MethodEndpoint
+  method={"patch"}
+  path={"/agent-instances/{agentInstanceKey}"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+<MarkerStronglyConsistentExtension />
+
+Updates the mutable fields of an agent instance (status, metric counters, and
+tools) and appends a batch of history items to its conversation history. Metric
+values are treated as deltas and applied immediately to the aggregate counters.
+Tool updates replace the existing tool list. Each history item created for this
+request is echoed back in the response.
+
+<MarkerRequiredPermissions
+  permissions={[
+    {
+      resourceType: "PROCESS_DEFINITION",
+      permissionType: "UPDATE_PROCESS_INSTANCE",
+    },
+  ]}
+/>
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "agentInstanceKey",
+      in: "path",
+      required: true,
+      description: "The key of the agent instance to update.",
+      schema: {
+        type: "string",
+        format: "string<AgentInstanceKey>",
+        example: "4503599627370496",
+        description: "System-generated key for an agent instance.",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema
+  title={"Body"}
+  body={{
+    required: true,
+    content: {
+      "application/json": {
+        schema: {
+          description:
+            "Request to update the mutable state of an agent instance.\n",
+          type: "object",
+          required: ["elementInstanceKey"],
+          properties: {
+            elementInstanceKey: {
+              nullable: false,
+              description:
+                "The key of the currently-active element instance for this agent instance.\nUsed for ownership/equality validation against the stored agent instance\nand, when the supplied key differs from the previous association (re-entry\nof an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys\nwith the reverse link updated on the supplied element instance.\n",
+              allOf: [
+                {
+                  description: "System-generated key for a element instance.",
+                  format: "ElementInstanceKey",
+                  example: "2251799813686789",
+                  type: "string",
+                  allOf: [
+                    {
+                      description:
+                        "Zeebe Engine resource key (Java long serialized as string)",
+                      type: "string",
+                      title: "LongKey",
+                    },
+                  ],
+                  title: "ElementInstanceKey",
+                },
+              ],
+            },
+            status: {
+              description: "The new status of the agent instance.",
+              allOf: [
+                {
+                  description:
+                    "The status values that can be set on an agent instance via an update request.\n",
+                  type: "string",
+                  enum: ["IDLE", "THINKING", "TOOL_CALLING", "TOOL_DISCOVERY"],
+                  title: "AgentInstanceUpdateStatusEnum",
+                },
+              ],
+            },
+            metrics: {
+              description:
+                "Metric increments to apply to the aggregate counters.",
+              allOf: [
+                {
+                  description:
+                    "Metric increments to apply to the agent instance aggregate counters. The engine\naccumulates these deltas into running totals on each UPDATED event. All fields\nare optional; omit a field to leave the corresponding counter unchanged.\n",
+                  type: "object",
+                  properties: {
+                    inputTokens: {
+                      type: "integer",
+                      format: "int64",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total input token counter.",
+                    },
+                    outputTokens: {
+                      type: "integer",
+                      format: "int64",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total output token counter.",
+                    },
+                    modelCalls: {
+                      type: "integer",
+                      format: "int32",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total model call counter.",
+                    },
+                    toolCalls: {
+                      type: "integer",
+                      format: "int32",
+                      minimum: 0,
+                      description:
+                        "Increment to apply to the total tool call counter.",
+                    },
+                  },
+                  title: "AgentInstanceMetricsDelta",
+                },
+              ],
+            },
+            tools: {
+              description:
+                "The complete list of tools available to the agent, replacing any previously\nstored tools. When provided, the engine replaces the existing tool list with\nthis value.\n",
+              nullable: true,
+              type: "array",
+              items: {
+                description: "A tool available to the agent.",
+                type: "object",
+                required: ["name", "description", "elementId"],
+                properties: {
+                  name: {
+                    type: "string",
+                    description: "The tool name as visible to the LLM.",
+                  },
+                  description: {
+                    type: "string",
+                    nullable: true,
+                    description: "A human-readable description of the tool.",
+                  },
+                  elementId: {
+                    type: "string",
+                    nullable: true,
+                    description:
+                      "The BPMN element ID of the tool element within the ad-hoc sub-process.",
+                  },
+                },
+                title: "AgentTool",
+              },
+            },
+            jobKey: {
+              description:
+                "The key of the job activation during which this update is being made.\nRequired whenever history is provided.\n",
+              nullable: true,
+              allOf: [
+                {
+                  description: "System-generated key for a job.",
+                  format: "JobKey",
+                  example: "2251799813653498",
+                  type: "string",
+                  allOf: [
+                    {
+                      description:
+                        "Zeebe Engine resource key (Java long serialized as string)",
+                      type: "string",
+                      title: "LongKey",
+                    },
+                  ],
+                  title: "JobKey",
+                },
+              ],
+            },
+            jobLease: {
+              description:
+                "Opaque lease token received from the job activation response. Disambiguates\nthis activation from any other activation of the same job: if the job is\nlater retried, history items submitted under a superseded lease are discarded\nrather than committed.\n",
+              nullable: true,
+              type: "string",
+            },
+            history: {
+              description:
+                "A batch of history items to append to the agent instance's conversation\nhistory, in request order. Each created item is echoed back in the\nresponse's createdHistory, positionally correlated.\n",
+              nullable: true,
+              type: "array",
+              items: {
+                description:
+                  "A single history item to append to the agent instance's conversation history,\nsubmitted as part of the batch on an agent instance update request.\n",
+                type: "object",
+                required: [
+                  "historyItemId",
+                  "loopIteration",
+                  "role",
+                  "content",
+                  "producedAt",
+                ],
+                properties: {
+                  historyItemId: {
+                    description:
+                      "Caller-assigned identifier used to detect and dedupe retries of the same\nitem. For example, when a retried job activation resubmits history items\nit already sent in an earlier attempt, those items are not rejected; they\nare flagged via isDuplicate in the response instead. Must be non-blank.\n",
+                    type: "string",
+                  },
+                  loopIteration: {
+                    description: "The loop iteration this item belongs to.",
+                    allOf: [
+                      {
+                        description:
+                          "A client-provided sequential integer identifying a loop iteration: one pass\nthrough an AI agent's loop, during which the model reasons, selects tools,\nevaluates the result, and decides whether to continue. One iteration covers\nthe input for the LLM call, the call itself, and the tools it dispatches;\nthe results of those tool calls are input to the next iteration. Must be a\npositive integer, increasing with each loopIteration. Established by the\nconnector when appending the first history item of a loopIteration.\n",
+                        type: "integer",
+                        format: "int32",
+                        minimum: 1,
+                        example: 1,
+                        title: "LoopIterationId",
+                      },
+                    ],
+                  },
+                  role: {
+                    description:
+                      "The role of this history item in the conversation.",
+                    allOf: [
+                      {
+                        description:
+                          "The role of a history item in the agent conversation.",
+                        type: "string",
+                        enum: [
+                          "USER",
+                          "ASSISTANT",
+                          "TOOL_RESULT",
+                          "CONFIGURATION",
+                        ],
+                        title: "AgentInstanceHistoryRoleEnum",
+                      },
+                    ],
+                  },
+                  content: {
+                    description: "The content blocks of this history item.",
+                    type: "array",
+                    items: {
+                      description:
+                        "A single content block within a history item. Discriminated by `contentType`.",
+                      discriminator: {
+                        propertyName: "contentType",
+                        mapping: {
+                          TEXT: {
+                            type: "object",
+                            title: "Text content",
+                            description: "A plain-text content block.",
+                            required: ["contentType", "text"],
+                            properties: {
+                              contentType: {
+                                description: "The content type discriminator.",
+                                type: "string",
+                                example: "TEXT",
+                              },
+                              text: {
+                                description: "The text content.",
+                                type: "string",
+                              },
+                            },
+                          },
+                          DOCUMENT: {
+                            type: "object",
+                            title: "Document content",
+                            description:
+                              "A Camunda Document Store reference content block.",
+                            required: ["contentType", "documentReference"],
+                            properties: {
+                              contentType: {
+                                description: "The content type discriminator.",
+                                type: "string",
+                                example: "DOCUMENT",
+                              },
+                              documentReference: {
+                                description:
+                                  "A reference to a document stored in the Camunda Document Store.",
+                                allOf: [
+                                  {
+                                    type: "object",
+                                    required: [
+                                      "camunda.document.type",
+                                      "storeId",
+                                      "documentId",
+                                      "contentHash",
+                                      "metadata",
+                                    ],
+                                    properties: {
+                                      "camunda.document.type": {
+                                        type: "string",
+                                        description:
+                                          'Document discriminator. Always set to "camunda".',
+                                        enum: ["camunda"],
+                                      },
+                                      storeId: {
+                                        type: "string",
+                                        description:
+                                          "The ID of the document store.",
+                                      },
+                                      documentId: {
+                                        allOf: [
+                                          {
+                                            description:
+                                              "Document Id that uniquely identifies a document.",
+                                            format: "DocumentId",
+                                            type: "string",
+                                            title: "DocumentId",
+                                          },
+                                        ],
+                                        description: "The ID of the document.",
+                                      },
+                                      contentHash: {
+                                        type: "string",
+                                        description:
+                                          "The hash of the document.",
+                                        nullable: true,
+                                      },
+                                      metadata: {
+                                        description:
+                                          "Information about the document that is returned in responses.",
+                                        type: "object",
+                                        required: [
+                                          "fileName",
+                                          "expiresAt",
+                                          "size",
+                                          "contentType",
+                                          "customProperties",
+                                          "processDefinitionId",
+                                          "processInstanceKey",
+                                        ],
+                                        properties: {
+                                          contentType: {
+                                            type: "string",
+                                            description:
+                                              "The content type of the document.",
+                                          },
+                                          fileName: {
+                                            type: "string",
+                                            description:
+                                              "The name of the file.",
+                                          },
+                                          expiresAt: {
+                                            type: "string",
+                                            format: "date-time",
+                                            description:
+                                              "The date and time when the document expires.",
+                                            nullable: true,
+                                          },
+                                          size: {
+                                            type: "integer",
+                                            format: "int64",
+                                            description:
+                                              "The size of the document in bytes.",
+                                          },
+                                          processDefinitionId: {
+                                            allOf: [
+                                              {
+                                                description:
+                                                  "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                                format: "ProcessDefinitionId",
+                                                type: "string",
+                                                example:
+                                                  "new-account-onboarding-workflow",
+                                                title: "ProcessDefinitionId",
+                                              },
+                                            ],
+                                            description:
+                                              "The ID of the process definition that created the document.",
+                                            nullable: true,
+                                          },
+                                          processInstanceKey: {
+                                            allOf: [
+                                              {
+                                                description:
+                                                  "System-generated key for a process instance.",
+                                                format: "ProcessInstanceKey",
+                                                example: "2251799813690746",
+                                                type: "string",
+                                                allOf: [
+                                                  {
+                                                    description:
+                                                      "Zeebe Engine resource key (Java long serialized as string)",
+                                                    type: "string",
+                                                    title: "LongKey",
+                                                  },
+                                                ],
+                                                title: "ProcessInstanceKey",
+                                              },
+                                            ],
+                                            description:
+                                              "The key of the process instance that created the document.",
+                                            nullable: true,
+                                          },
+                                          customProperties: {
+                                            type: "object",
+                                            description:
+                                              "Custom properties of the document.",
+                                            additionalProperties: true,
+                                          },
+                                        },
+                                        "x-properties-added-in-version": [
+                                          {
+                                            propertyName: "processDefinitionId",
+                                            addedInVersion: "8.7",
+                                          },
+                                          {
+                                            propertyName: "processInstanceKey",
+                                            addedInVersion: "8.7",
+                                          },
+                                          {
+                                            propertyName: "customProperties",
+                                            addedInVersion: "8.7",
+                                          },
+                                        ],
+                                        title: "DocumentMetadataResponse",
+                                      },
+                                    },
+                                    "x-properties-added-in-version": [
+                                      {
+                                        propertyName: "camunda.document.type",
+                                        addedInVersion: "8.7",
+                                      },
+                                      {
+                                        propertyName: "storeId",
+                                        addedInVersion: "8.6",
+                                      },
+                                      {
+                                        propertyName: "documentId",
+                                        addedInVersion: "8.6",
+                                      },
+                                      {
+                                        propertyName: "contentHash",
+                                        addedInVersion: "8.7",
+                                      },
+                                      {
+                                        propertyName: "metadata",
+                                        addedInVersion: "8.6",
+                                      },
+                                    ],
+                                    title: "DocumentReference",
+                                  },
+                                ],
+                              },
+                            },
+                          },
+                          OBJECT: {
+                            type: "object",
+                            title: "Object content",
+                            description:
+                              "An arbitrary structured content block. Accepts any valid JSON value:\nobjects, arrays, numbers, booleans, or strings.\nUse TEXT content for human-readable natural language;\nuse OBJECT content for machine-readable structured data.\n",
+                            required: ["contentType", "object"],
+                            properties: {
+                              contentType: {
+                                description: "The content type discriminator.",
+                                type: "string",
+                                example: "OBJECT",
+                              },
+                              object: {
+                                description:
+                                  "Arbitrary structured content — any valid JSON value (object, array, number, boolean, or string).",
+                              },
+                            },
+                          },
+                        },
+                      },
+                      oneOf: [
+                        {
+                          type: "object",
+                          title: "Text content",
+                          description: "A plain-text content block.",
+                          required: ["contentType", "text"],
+                          properties: {
+                            contentType: {
+                              description: "The content type discriminator.",
+                              type: "string",
+                              example: "TEXT",
+                            },
+                            text: {
+                              description: "The text content.",
+                              type: "string",
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Document content",
+                          description:
+                            "A Camunda Document Store reference content block.",
+                          required: ["contentType", "documentReference"],
+                          properties: {
+                            contentType: {
+                              description: "The content type discriminator.",
+                              type: "string",
+                              example: "DOCUMENT",
+                            },
+                            documentReference: {
+                              description:
+                                "A reference to a document stored in the Camunda Document Store.",
+                              allOf: [
+                                {
+                                  type: "object",
+                                  required: [
+                                    "camunda.document.type",
+                                    "storeId",
+                                    "documentId",
+                                    "contentHash",
+                                    "metadata",
+                                  ],
+                                  properties: {
+                                    "camunda.document.type": {
+                                      type: "string",
+                                      description:
+                                        'Document discriminator. Always set to "camunda".',
+                                      enum: ["camunda"],
+                                    },
+                                    storeId: {
+                                      type: "string",
+                                      description:
+                                        "The ID of the document store.",
+                                    },
+                                    documentId: {
+                                      allOf: [
+                                        {
+                                          description:
+                                            "Document Id that uniquely identifies a document.",
+                                          format: "DocumentId",
+                                          type: "string",
+                                          title: "DocumentId",
+                                        },
+                                      ],
+                                      description: "The ID of the document.",
+                                    },
+                                    contentHash: {
+                                      type: "string",
+                                      description: "The hash of the document.",
+                                      nullable: true,
+                                    },
+                                    metadata: {
+                                      description:
+                                        "Information about the document that is returned in responses.",
+                                      type: "object",
+                                      required: [
+                                        "fileName",
+                                        "expiresAt",
+                                        "size",
+                                        "contentType",
+                                        "customProperties",
+                                        "processDefinitionId",
+                                        "processInstanceKey",
+                                      ],
+                                      properties: {
+                                        contentType: {
+                                          type: "string",
+                                          description:
+                                            "The content type of the document.",
+                                        },
+                                        fileName: {
+                                          type: "string",
+                                          description: "The name of the file.",
+                                        },
+                                        expiresAt: {
+                                          type: "string",
+                                          format: "date-time",
+                                          description:
+                                            "The date and time when the document expires.",
+                                          nullable: true,
+                                        },
+                                        size: {
+                                          type: "integer",
+                                          format: "int64",
+                                          description:
+                                            "The size of the document in bytes.",
+                                        },
+                                        processDefinitionId: {
+                                          allOf: [
+                                            {
+                                              description:
+                                                "Id of a process definition, from the model. Only ids of process definitions that are deployed are useful.",
+                                              format: "ProcessDefinitionId",
+                                              type: "string",
+                                              example:
+                                                "new-account-onboarding-workflow",
+                                              title: "ProcessDefinitionId",
+                                            },
+                                          ],
+                                          description:
+                                            "The ID of the process definition that created the document.",
+                                          nullable: true,
+                                        },
+                                        processInstanceKey: {
+                                          allOf: [
+                                            {
+                                              description:
+                                                "System-generated key for a process instance.",
+                                              format: "ProcessInstanceKey",
+                                              example: "2251799813690746",
+                                              type: "string",
+                                              allOf: [
+                                                {
+                                                  description:
+                                                    "Zeebe Engine resource key (Java long serialized as string)",
+                                                  type: "string",
+                                                  title: "LongKey",
+                                                },
+                                              ],
+                                              title: "ProcessInstanceKey",
+                                            },
+                                          ],
+                                          description:
+                                            "The key of the process instance that created the document.",
+                                          nullable: true,
+                                        },
+                                        customProperties: {
+                                          type: "object",
+                                          description:
+                                            "Custom properties of the document.",
+                                          additionalProperties: true,
+                                        },
+                                      },
+                                      title: "DocumentMetadataResponse",
+                                    },
+                                  },
+                                  title: "DocumentReference",
+                                },
+                              ],
+                            },
+                          },
+                        },
+                        {
+                          type: "object",
+                          title: "Object content",
+                          description:
+                            "An arbitrary structured content block. Accepts any valid JSON value:\nobjects, arrays, numbers, booleans, or strings.\nUse TEXT content for human-readable natural language;\nuse OBJECT content for machine-readable structured data.\n",
+                          required: ["contentType", "object"],
+                          properties: {
+                            contentType: {
+                              description: "The content type discriminator.",
+                              type: "string",
+                              example: "OBJECT",
+                            },
+                            object: {
+                              description:
+                                "Arbitrary structured content — any valid JSON value (object, array, number, boolean, or string).",
+                            },
+                          },
+                        },
+                      ],
+                      title: "AgentInstanceMessageContent",
+                    },
+                  },
+                  toolCalls: {
+                    description:
+                      "Tool calls associated with this history item.\nFor ASSISTANT items: tool calls dispatched by this LLM response.\nFor TOOL_RESULT items: single-entry array referencing the originating tool call.\nOmit for USER items.\n",
+                    type: "array",
+                    nullable: true,
+                    items: {
+                      description:
+                        "A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.\n",
+                      type: "object",
+                      required: [
+                        "toolCallId",
+                        "toolName",
+                        "elementId",
+                        "arguments",
+                      ],
+                      properties: {
+                        toolCallId: {
+                          description:
+                            "The LLM-assigned tool call ID. Correlates ASSISTANT items to their matching TOOL_RESULT items.",
+                          type: "string",
+                        },
+                        toolName: {
+                          description: "The LLM-visible tool name.",
+                          type: "string",
+                        },
+                        elementId: {
+                          description:
+                            "The BPMN element ID handling this tool.",
+                          type: "string",
+                          nullable: true,
+                        },
+                        arguments: {
+                          description:
+                            "The tool call arguments as provided by the LLM. May be null or populated on\nany item, including TOOL_RESULT.\n",
+                          type: "object",
+                          nullable: true,
+                          additionalProperties: true,
+                        },
+                      },
+                      title: "AgentInstanceToolCall",
+                    },
+                  },
+                  metrics: {
+                    description:
+                      "Per-call token and latency metrics. Present on ASSISTANT items only.",
+                    nullable: true,
+                    allOf: [
+                      {
+                        description:
+                          "Per-call token and latency metrics for an ASSISTANT history item.",
+                        type: "object",
+                        required: ["inputTokens", "outputTokens", "durationMs"],
+                        properties: {
+                          inputTokens: {
+                            description:
+                              "Input tokens consumed by this LLM call. Null when not provided.",
+                            nullable: true,
+                            type: "integer",
+                            format: "int64",
+                          },
+                          outputTokens: {
+                            description:
+                              "Output tokens produced by this LLM call. Null when not provided.",
+                            nullable: true,
+                            type: "integer",
+                            format: "int64",
+                          },
+                          durationMs: {
+                            description:
+                              "Wall-clock duration of the LLM call in milliseconds. Null when not provided.",
+                            nullable: true,
+                            type: "integer",
+                            format: "int64",
+                          },
+                        },
+                        title: "AgentInstanceHistoryItemMetrics",
+                      },
+                    ],
+                  },
+                  producedAt: {
+                    description:
+                      "The agent-side timestamp of when this message was produced.",
+                    type: "string",
+                    format: "date-time",
+                  },
+                },
+                title: "AgentInstanceHistoryItem",
+              },
+            },
+          },
+          title: "AgentInstanceUpdateRequest",
+        },
+      },
+    },
+  }}
+></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description: "The agent instance was updated successfully.",
+      content: {
+        "application/json": {
+          schema: {
+            description:
+              "Response returned after successfully updating an agent instance.",
+            type: "object",
+            required: ["createdHistory"],
+            properties: {
+              createdHistory: {
+                description:
+                  "One entry per history item submitted in the request, in request order.\nEmpty when no history items were submitted.\n",
+                type: "array",
+                items: {
+                  description:
+                    "The outcome of appending a single history item from an update request's\nhistory batch.\n",
+                  type: "object",
+                  required: ["historyItemId", "historyItemKey", "isDuplicate"],
+                  properties: {
+                    historyItemId: {
+                      description:
+                        "The historyItemId of the corresponding item in the request, echoed back\nso callers can correlate response entries with request items by id.\n",
+                      type: "string",
+                    },
+                    historyItemKey: {
+                      description:
+                        "The system-generated key for the history item. When isDuplicate is true,\nthis is the key of the original entry, not a new one.\n",
+                      allOf: [
+                        {
+                          description:
+                            "System-generated key for an agent history item.",
+                          format: "AgentHistoryItemKey",
+                          example: "6755399441055744",
+                          type: "string",
+                          allOf: [
+                            {
+                              description:
+                                "Zeebe Engine resource key (Java long serialized as string)",
+                              type: "string",
+                              title: "LongKey",
+                            },
+                          ],
+                          title: "AgentHistoryItemKey",
+                        },
+                      ],
+                    },
+                    isDuplicate: {
+                      description:
+                        "True if this item had already been recorded and no new AGENT_HISTORY event\nwas created for it; false if a new event was created.\n",
+                      type: "boolean",
+                    },
+                  },
+                  title: "AgentInstanceCreatedHistoryItem",
+                },
+              },
+            },
+            title: "AgentInstanceUpdateResult",
+          },
+        },
+      },
+    },
+    "400": {
+      description: "The provided data is not valid.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The agent instance with the given key was not found.\nMore details are provided in the response body.\n",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

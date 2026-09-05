@@ -1,0 +1,41 @@
+---
+id: introduction-to-forms
+title: "Introduction to forms"
+description: "Forms play a key role in guiding work processes, gathering necessary information, and aiding in decision-making for human task orchestration."
+---
+
+import GHIcon from "@site/src/mdx/GitHubInlineIcon";
+
+Forms play a key role in giving work instructions, collecting information and making decisions within human task orchestration. Forms are lightweight user interfaces, tailored for focused data input in specific steps of a process, rendering the orchestration of human tasks more efficient than simply routing users to the applications that are orchestrated.
+
+Forms are commonly used in [user tasks](/components/modeler/bpmn/user-tasks/user-tasks.md#user-task-forms), but also as [start forms](/components/tasklist/userguide/starting-processes.md) to start a new process instance.
+
+## Camunda Forms
+
+In Camunda 8, you can design forms using a drag'n'drop editor. The form editor is available in both Desktop and Camunda Hub. Learn more about Camunda Forms and available components in the [Camunda Forms reference documentation](/components/modeler/forms/camunda-forms-reference.md), and learn how to design a human workflow with forms in the [getting started guide](/guides/getting-started-orchestrate-human-tasks.md).
+
+## form-js
+
+Camunda Forms present a flexible, open solution to form creation. Camunda Forms are based on the [form-js library](https://github.com/bpmn-io/form-js) <GHIcon />, maintained by Camunda. As a result, the form editor and renderer are non-proprietary, open-source technology, and can be used everywhere, also outside the context of Camunda 8. This unlocks a world of use cases, and eliminates any doubt around vendor lock-in or technical barriers.
+
+Form-js is a vanilla JavaScript library with [Preact](https://preactjs.com/) in the background, and can be used in any framework, from Angular to React.
+
+The resulting forms are serialized as a JSON document. The JSON document conforms to an open form schema that allows you to render the form using both the built-in form render, or even with a custom render. The form schema is extensible, allowing you to build your own extensions or custom components.
+
+<!-- TODO link to dedicated form.js page -->
+
+:::tip Want to Contribute?
+We welcome your contributions to form-js! Whether it's fixing a bug, adding a feature or a new component, your input is valuable. You can also provide your ideas by opening issues for us or the community.
+
+**How to Contribute:**
+
+1. 🌐 Visit our [GitHub Repository](https://github.com/bpmn-io/form-js).
+2. 🛠️ Check out the issues or open a new one.
+3. 💻 Fork the repository and submit a pull request.
+
+Let's make form-js better together! 👩‍💻👨‍💻
+:::
+
+Continue reading to learn how to setup, embed, and extend form-js to build form-based task applications for any use case.
+
+<!-- TODO cards -->
