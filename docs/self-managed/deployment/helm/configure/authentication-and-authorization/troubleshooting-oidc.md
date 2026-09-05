@@ -125,15 +125,19 @@ By default, Tomcat rejects requests whose headers exceed this limit (typically 8
 
 Increase the maximum allowed HTTP request header size for the Identity service.
 
-1. Configure the Spring Boot property `server.max-http-request-header-size` (via the `SERVER_MAXHTTPREQUESTHEADERSIZE` environment variable) to a value higher than the default, for example 40KB.
+1. Configure the Spring Boot property `server.max-http-request-header-size` (via the `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` environment variable) to a value higher than the default, for example 40KB.
 
 2. If you are using the Helm chart, set this environment variable on the Identity deployment in your `values.yaml`, similar to other Identity environment variables:
 
    ```yaml
    identity:
      env:
-       - name: SERVER_MAXHTTPREQUESTHEADERSIZE
+       - name: SERVER_MAX_HTTP_REQUEST_HEADER_SIZE
          value: "40KB"
    ```
+
+:::note
+This same issue can also affect the Orchestration Cluster if its session cookies and authorization code grow large enough (for example, with Microsoft Entra ID). If Operate or Tasklist login fails with the same symptom, set `SERVER_MAX_HTTP_REQUEST_HEADER_SIZE` under `orchestration.env` instead.
+:::
 
 3. Upgrade or redeploy the release so the new environment variable takes effect.
