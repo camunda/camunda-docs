@@ -384,20 +384,32 @@ Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound co
 </div>
 </div>
 
-<!-- <div className="release-announcement-row">
+<div className="release-announcement-row">
 <div className="release-announcement-badge">
 <span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Connectors change 1
+#### Webhook `responseBodyExpression` rejected at deployment {#webhook-response-body-expression}
 
-Connectors change 1 description.
+Starting with 8.10, deploying a webhook connector that uses the deprecated `responseBodyExpression` property fails with a validation error. This property was superseded by `responseExpression` in 8.6 and removed from element templates at that time.
 
-**Action:** Description.
+The connector runtime reports the connector as **DOWN**, and the validation error is included in the connector's status message.
+
+**Action:** Replace `responseBodyExpression` with `responseExpression` in your BPMN diagrams before deploying to 8.10. Unlike `responseBodyExpression`, which set only the response body, `responseExpression` returns a full HTTP response:
+
+```json
+={
+  "body": {"myCustomKey": request.body.myDataKey1},
+  "statusCode": 201,
+  "headers": {"Content-Type": "application/json"}
+}
+```
+
+<p className="link-arrow">[Response expression](/components/connectors/protocol/http-webhook.md#response-expression)</p>
 
 </div>
-</div> -->
+</div>
 
 ## Data
 
