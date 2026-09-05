@@ -106,6 +106,14 @@ paths:
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
           $ref: "common-responses.yaml#/components/responses/NotFound"
+        "409":
+          description: >-
+            The project is the workspace's migration-created catch-all and cannot be
+            moved to another workspace.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
