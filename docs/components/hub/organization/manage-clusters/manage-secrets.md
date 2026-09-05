@@ -47,6 +47,8 @@ For more details on where secrets are supported, see the [Connectors guide](/com
 
 Now you can reference your secret in any connector as described in the [Connectors guide](/components/connectors/use-connectors/index.md#using-secrets).
 
+To reuse a complete set of authentication and connection settings, rather than a single value, see [credentials](/components/hub/organization/credentials/index.md). A credential's sensitive fields reference secrets you create here.
+
 :::note
 Find more information on managing [Connector secrets](/self-managed/components/connectors/connectors-configuration.md).
 :::

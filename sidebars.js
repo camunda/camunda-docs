@@ -740,6 +740,18 @@ module.exports = {
             },
             {
               type: "category",
+              label: "Credentials",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/credentials/credentials",
+              },
+              items: [
+                "components/hub/organization/credentials/credentials-desktop-modeler",
+                "components/hub/organization/credentials/credentials-web-modeler",
+              ],
+            },
+            {
+              type: "category",
               label: "Manage the catalog",
               link: {
                 type: "doc",
@@ -1139,6 +1151,7 @@ module.exports = {
               items: [
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
+                "components/connectors/custom-built-connectors/credential-templates",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
