@@ -212,11 +212,11 @@ The structured `secret:` pattern for TLS certificates was introduced in Camunda 
 
 ### TLS certificate secrets
 
-| **Secret**                          | **Chart values key**              | **Purpose**                                         |
-| ----------------------------------- | --------------------------------- | --------------------------------------------------- |
-| **Console TLS Certificate**         | `console.tls.secret`              | TLS certificate for Console web application         |
-| **External Elasticsearch TLS Cert** | `global.elasticsearch.tls.secret` | TLS certificate for external Elasticsearch over SSL |
-| **External OpenSearch TLS Cert**    | `global.opensearch.tls.secret`    | TLS certificate for external OpenSearch over SSL    |
+| **Secret**                          | **Chart values key**                                                                                          | **Purpose**                                         |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **Console TLS Certificate**         | `console.tls.secret`                                                                                          | TLS certificate for Console web application         |
+| **External Elasticsearch TLS Cert** | `orchestration.data.secondaryStorage.elasticsearch.tls.secret` / `optimize.database.elasticsearch.tls.secret` | TLS certificate for external Elasticsearch over SSL |
+| **External OpenSearch TLS Cert**    | `orchestration.data.secondaryStorage.opensearch.tls.secret` / `optimize.database.opensearch.tls.secret`       | TLS certificate for external OpenSearch over SSL    |
 
 **TLS Certificate Configuration**: Unlike password-based secrets, TLS certificates do not support `inlineSecret` (certificates are binary files unsuitable for inline configuration).
 
@@ -234,13 +234,15 @@ Reference them in your values:
 
 ```yaml
 # Elasticsearch/OpenSearch
-global:
-  elasticsearch:
-    tls:
-      enabled: true
-      secret:
-        existingSecret: elasticsearch-tls-secret
-        existingSecretKey: externaldb.jks
+orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        tls:
+          secret:
+            existingSecret: elasticsearch-tls-secret
+            existingSecretKey: externaldb.jks
 
 # Console
 console:

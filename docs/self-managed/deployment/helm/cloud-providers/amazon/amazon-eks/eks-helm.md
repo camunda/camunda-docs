@@ -338,33 +338,10 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 This guide includes a managed Amazon OpenSearch example path for secondary storage. Choose the backend that fits your requirements:
 
 - **Managed OpenSearch**: Use the managed Amazon OpenSearch domain provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup.
+- **Elasticsearch**: Deploy Elasticsearch with [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment), then configure the component-scoped connection values.
 - **Amazon Aurora PostgreSQL**: Use Aurora PostgreSQL as secondary storage for the Orchestration Cluster. Follow this EKS guide for the cluster, networking, Ingress, and optional AWS services, then continue with [RDBMS example deployment](/self-managed/deployment/helm/install/helm-with-rdbms.md) for the Helm workflow and [configure RDBMS in Helm](/self-managed/deployment/helm/configure/database/rdbms.md) for the values reference.
 
 RDBMS as secondary storage disables Optimize unless you also deploy Elasticsearch or OpenSearch alongside it.
-
-#### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
-
-For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
-
-:::caution Deprecated path
-The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services for long-term deployments, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) if you need operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
-:::
-
-<details>
-<summary>Show configuration changes to disable external OpenSearch usage</summary>
-
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-  opensearch:
-    enabled: false
-
-elasticsearch:
-  enabled: true
-```
-
-</details>
 
 #### Use internal PostgreSQL instead of the managed Aurora
 
