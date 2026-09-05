@@ -7,7 +7,7 @@ description: "Configure Physical Tenants with root defaults, per-tenant override
 
 Learn how to configure Physical Tenants in Camunda 8.10 Self-Managed deployments.
 
-In 8.10, configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
+Configuration is static. You define Physical Tenants in application configuration, then apply changes with a rolling restart.
 
 ## Configuration model
 
@@ -92,7 +92,7 @@ Some properties are cluster-scoped and cannot be overridden per tenant. Per-tena
 
 ## Default tenant behavior and compatibility
 
-The `default` Physical Tenant is always present in 8.10 and is immutable.
+The `default` Physical Tenant is always present and immutable.
 
 For backward compatibility:
 
@@ -104,7 +104,7 @@ For backward compatibility:
 
 At startup, configuration validation enforces tenant-level constraints, and any failure prevents the cluster from starting. Most validation failures throw a `UnifiedConfigurationException`; secret store and cache validation (see **Secrets** below) is the exception, throwing an `IllegalStateException` or an `IllegalArgumentException` directly instead. Either way, there is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
-Known constraints and behavior for 8.10:
+Known constraints and behavior:
 
 - Tenant keys in `camunda.physical-tenants.<tenant-key>` must be lowercase alphanumeric (`[a-z0-9]+`) with a maximum length of 64 characters.
 - Validation rejects unsupported or colliding storage configurations across tenants.
