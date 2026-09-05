@@ -32,6 +32,27 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0-alpha5
+
+| Release date     | Changelog(s) | Blog |
+| :--------------- | :----------- | :--- |
+| 8 September 2026 | -            | -    |
+
+### Agentic orchestration
+
+#### AI Agent connector: new native (v2) element templates
+
+<!-- https://github.com/camunda/connectors/issues/7211
+https://github.com/camunda/connectors/issues/7225 -->
+
+<div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The AI Agent Task and AI Agent Sub-process connectors are now available as new, native (`v2`) element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
+
+Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The original (`v1`) element templates are deprecated as of Camunda 8.10.
+
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-new-native-v2-element-templates-v1-deprecated) for more details.
+
 ## 8.10.0-alpha4
 
 | Release date   | Changelog(s)                                                                                        | Blog |

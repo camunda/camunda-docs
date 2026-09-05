@@ -5,8 +5,6 @@ title: AI Agent Sub-process connector
 description: AI agent connector implementation based on ad-hoc sub-processes.
 ---
 
-import ConfigurationModelProvider from './agentic-ai/aiagent/configuration/\_model-provider.md';
-import ConfigurationModel from './agentic-ai/aiagent/configuration/\_model.md';
 import ConfigurationSystemPrompt from './agentic-ai/aiagent/configuration/\_system-prompt.md';
 import ConfigurationUserPrompt from './agentic-ai/aiagent/configuration/\_user-prompt.md';
 import ConfigurationTools from './agentic-ai/aiagent/configuration/\_tools.md';
@@ -37,8 +35,18 @@ This connector implementation creates an implicit feedback loop for tool calls a
 
 ## Configuration
 
-<ConfigurationModelProvider />
-<ConfigurationModel />
+### Model provider
+
+Select and configure the LLM model **Provider** and **Model** you want to use, from the following supported providers:
+
+- Anthropic (directly, or through AWS Bedrock Mantle).
+- AWS Bedrock Converse.
+- OpenAI (directly, through Microsoft Foundry/Azure, or through a custom OpenAI-compatible endpoint).
+- Google Gemini (directly, or through Google Vertex AI).
+- Custom implementation (Self-Managed/Hybrid only).
+
+See [model providers](./agentic-ai-aiagent-model-providers.md) for the full configuration details for each provider.
+
 <ConfigurationSystemPrompt />
 <ConfigurationUserPrompt />
 <ConfigurationMemoryProcess />

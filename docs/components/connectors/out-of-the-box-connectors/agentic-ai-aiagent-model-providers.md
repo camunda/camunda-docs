@@ -1,0 +1,269 @@
+---
+id: agentic-ai-aiagent-model-providers
+sidebar_label: Model providers
+title: AI Agent model providers
+description: Configure the LLM model provider used by the AI Agent Task and AI Agent Sub-process connectors.
+---
+
+Configure the LLM model provider used by the AI Agent connectors. Both the [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) and [AI Agent Task](./agentic-ai-aiagent-task.md) connectors use the same **Model provider** configuration.
+
+:::info
+This page documents the **native provider configuration** shipped with the `v2` AI Agent element templates (Camunda 8.10+). If you are still using the original (`v1`) AI Agent element templates, see [upgrade from v1](./agentic-ai-aiagent-upgrade.md) to move to the `v2` element templates and their native providers.
+:::
+
+## Choose a provider and backend
+
+Model provider configuration consists of two independent choices:
+
+- **Provider** selects the wire format the AI Agent uses to talk to the LLM. For example, the Anthropic Messages API, or the OpenAI Responses/Chat Completions API. This determines which provider-specific capabilities are available, such as Anthropic's extended thinking or Gemini's thinking level.
+- **Backend** (where more than one is available for a provider) selects which infrastructure actually serves that API: the vendor's own hosted API, a hyperscaler platform that exposes a compatible endpoint, or a custom/self-hosted endpoint.
+
+These two choices are independent, so the same model family may be available through multiple backends. For example:
+
+- **Anthropic** Claude models are available through the native **Anthropic API** backend, or through **AWS Bedrock Mantle** (Anthropic's Claude models hosted on Amazon Bedrock, exposed through Anthropic's own Messages API rather than the Bedrock Converse API). In either case, select **Anthropic** as the provider and use the **Backend** field to specify where it's hosted.
+- **OpenAI** models are available through the native **OpenAI API**, through **Microsoft Foundry** (Azure OpenAI), or through any custom OpenAI-compatible endpoint.
+- **Google Gemini** models are available through the direct **Google Gemini API**, or through **Google Vertex AI**.
+
+Select the provider that matches the model's native wire format (for example, Anthropic for Claude models, even when hosted on Bedrock) rather than a generic hyperscaler provider. This gives you access to that provider's own configuration surface, such as Anthropic's reasoning/extended thinking settings and prompt caching, regardless of where the model is actually hosted. See [AWS Bedrock Converse](#aws-bedrock-converse) below to determine when the generic Bedrock provider is the appropriate choice.
+
+## Supported providers
+
+Select and configure the model **Provider** you want to use from the following supported providers:
+
+- [Anthropic](#anthropic) (Claude models, directly or via AWS Bedrock Mantle).
+- [AWS Bedrock Converse](#aws-bedrock-converse).
+- [OpenAI](#openai) (directly, via Microsoft Foundry/Azure, or via a custom OpenAI-compatible endpoint).
+- [Google Gemini](#google-gemini) (directly, or via Google Vertex AI).
+- [Custom implementation](#custom-implementation) (Self-Managed/Hybrid only).
+
+:::tip
+Use [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to store credentials and avoid exposing sensitive information directly in the process.
+:::
+
+### Timeout handling
+
+Every provider exposes a **Timeout** field. The default timeout for model API calls is **three minutes**, set by the runtime. Self-Managed Spring connector runtime instances can override this default by setting the `camunda.connector.agenticai.aiagent.chat-model.api.default-timeout` property.
+
+The **Timeout** field on a provider takes precedence over the default timeout. Values must be provided in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations), for example, `PT60S` for a 60-second timeout.
+
+:::important
+The timeout must not exceed the job worker timeout. Otherwise, the job may be reassigned by the engine while the model call is still in progress.
+:::
+
+### Tune response variation
+
+**Temperature**, **top P**, and **top K** control response variation by changing how the model selects each next token. Start with the model defaults, change one setting at a time, and evaluate the results with representative prompts. Lower values generally produce more focused, predictable responses, but don't guarantee deterministic output.
+
+Tune the settings in this order:
+
+1. **Temperature** is the primary control. It adjusts the relative probabilities of candidate tokens. Lower values favor the most likely tokens more strongly, while higher values distribute probability more evenly and increase variation.
+1. **top P** is an advanced control. It limits selection to the smallest set of likely tokens whose cumulative probability reaches the configured value. Lower values narrow that set. Adjust **top P** only if temperature alone doesn't produce the required behavior.
+1. **top K** is an advanced control configured as a positive integer. It limits selection to a fixed number of the most likely tokens. Lower values narrow the candidate set. Adjust **top K** only after temperature and **top P**, and only if the selected model supports it.
+
+Supported settings, ranges, and behavior vary by model. For example, `top P = 0.9` considers enough likely tokens to cover 90% of the probability mass, while `top K = 40` considers only the 40 most likely tokens.
+
+### Advanced provider options
+
+Most backends also provide advanced, low-level customization fields: **HTTP headers**, **query parameters**, and **body properties**. With these fields, you can add or override values in the outgoing HTTP request.
+
+For backends with a well-known REST-style API surface, such as the native Anthropic API, OpenAI API, and Google Gemini or Vertex AI backends, these fields are reserved for internal or future use and aren't exposed in the properties panel. For backends without a fixed request structure, such as AWS Bedrock Converse, AWS Bedrock Mantle, and custom or compatible endpoints, the fields are exposed as editable [FEEL](/components/modeler/feel/what-is-feel.md) map expressions, which you can use to adapt the request to your deployment.
+
+## Anthropic
+
+Select this provider to use an Anthropic Claude LLM model. Choose a **Backend** to specify how to access the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages):
+
+- [Anthropic API](#anthropic-api): the native, hosted Anthropic API.
+- [AWS Bedrock Mantle](#aws-bedrock-mantle): Claude models hosted on Amazon Bedrock, reached through Anthropic's own Messages API.
+- [Custom / compatible endpoint](#anthropic-custom--compatible-endpoint): any endpoint implementing the Anthropic Messages API.
+
+#### Anthropic API
+
+| Field                 | Required | Description                                                                                                                   |
+| :-------------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| **Anthropic API key** | Yes      | Your Anthropic account API key for authorization to the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages). |
+
+#### AWS Bedrock Mantle
+
+Use this backend to run Anthropic Claude models hosted on Amazon Bedrock while keeping access to Anthropic-specific configuration (reasoning/extended thinking, prompt caching) that the generic [AWS Bedrock Converse](#aws-bedrock-converse) provider doesn't expose.
+
+| Field               | Required | Description                                                                                                                                                                                                                                                                                                          |
+| :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AWS region**      | Yes      | The AWS region. For example, `eu-west-1`.                                                                                                                                                                                                                                                                            |
+| **Custom endpoint** | No       | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Must be the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). It replaces the default `https://bedrock-mantle.<region>.api.aws/anthropic` verbatim. |
+| **Authentication**  | Yes      | Select the authentication method used to authenticate with AWS: **Credentials** (access key/secret key), **API key**, or **Default Credentials Chain** (Hybrid/Self-Managed only). See [Amazon Bedrock connector authentication](./amazon-bedrock.md#authentication) for details on each method.                     |
+
+Model availability depends on the region. You may need to request access to Anthropic models available through Bedrock. See [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.
+
+#### Anthropic custom / compatible endpoint
+
+Use this backend for any endpoint implementing the Anthropic Messages API, such as a proxy or gateway in front of Anthropic.
+
+| Field              | Required | Description                                                                         |
+| :----------------- | :------- | :---------------------------------------------------------------------------------- |
+| **API endpoint**   | Yes      | Base URL of the Anthropic-compatible API. `/v1/messages` is appended automatically. |
+| **Authentication** | No       | **None**, or **API key** to send an API key with the request.                       |
+
+#### Anthropic model and parameters
+
+| Field                      | Required | Description                                                                                                                                                                                                                        |
+| :------------------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Model**                  | Yes      | The model ID to use. See the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).                                                                                                          |
+| **Effort**                 | No       | Controls how many tokens the model spends when responding, trading thoroughness against speed and cost. Not supported on all models. See the [effort documentation](https://platform.claude.com/docs/en/build-with-claude/effort). |
+| **Thinking mode**          | No       | Extended thinking mechanism: `enabled` uses a manual token budget (older models), `adaptive` lets the model manage it (newer models), `disabled` turns it off. Support varies by model.                                            |
+| **Thinking budget tokens** | Depends  | Maximum number of tokens the model may spend on extended thinking (minimum 1024). Shown only when **Thinking mode** is `enabled`.                                                                                                  |
+| **Thinking display**       | No       | Controls how extended thinking is returned when **Thinking mode** is `adaptive`: `summarized` includes a plain-text summary in the response, `omitted` leaves it out.                                                              |
+| **Enable prompt caching**  | No       | Enables Anthropic's automatic prompt caching. See the [prompt caching documentation](https://platform.claude.com/docs/en/build-with-claude/prompt-caching#automatic-caching).                                                      |
+| **Maximum tokens**         | No       | The maximum number of tokens per request to generate before stopping.                                                                                                                                                              |
+| **Temperature**            | No       | Primary response-variation control from 0 to 1. Lower values favor likely tokens more strongly; higher values increase variation.                                                                                                  |
+| **top P**                  | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                  |
+| **top K**                  | No       | Advanced sampling control configured as a positive integer. Limits selection to this number of the most likely tokens.                                                                                                             |
+
+## AWS Bedrock Converse
+
+Select this provider to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service through the generic [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
+
+:::tip
+This is the right choice for non-Anthropic model families available on Bedrock. For example, Amazon Nova, Meta Llama, or Mistral models. If you're running **Anthropic Claude** models on Bedrock, use the [Anthropic provider's AWS Bedrock Mantle backend](#aws-bedrock-mantle) to access Anthropic-specific configuration.
+:::
+
+| Field               | Required | Description                                                                                                                                                                                                                                                                                      |
+| :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AWS region**      | Yes      | The AWS region. For example, `eu-west-1`.                                                                                                                                                                                                                                                        |
+| **Custom endpoint** | No       | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Overrides the default Bedrock Runtime endpoint for the region.                                                                                                                                         |
+| **Authentication**  | Yes      | Select the authentication method used to authenticate with AWS: **Credentials** (access key/secret key), **API key**, or **Default Credentials Chain** (Hybrid/Self-Managed only). See [Amazon Bedrock connector authentication](./amazon-bedrock.md#authentication) for details on each method. |
+
+Model availability depends on the region and model. See [supported foundation models in Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html) and [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html).
+
+#### AWS Bedrock Converse model and parameters
+
+| Field                     | Required | Description                                                                                                                                                   |
+| :------------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Model**                 | Yes      | The model ID to use. See [inference profile support](https://docs.aws.amazon.com/bedrock/latest/userguide/inference-profiles-support.html).                   |
+| **Enable prompt caching** | No       | Enables Bedrock's automatic prompt caching. See the [prompt caching documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html). |
+| **Maximum tokens**        | No       | The maximum number of tokens per request to generate before stopping. Leave unset to use the model default.                                                   |
+| **Temperature**           | No       | Primary response-variation control. Lower values favor likely tokens more strongly; higher values increase variation. Supported ranges vary by model.         |
+| **top P**                 | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                             |
+
+Bedrock Converse doesn't support a **Reasoning**/**Effort** configuration or a **top K** parameter.
+
+## OpenAI
+
+Select this provider to use OpenAI models. Two independent choices apply:
+
+- **API**: which OpenAI API family to use. **Responses** (default, recommended for new configurations) or **Chat Completions**.
+- **Backend**: how the API is accessed.
+  - [OpenAI API](#openai-api): the native, hosted OpenAI API.
+  - [Microsoft Foundry (Azure)](#microsoft-foundry-azure): OpenAI models deployed through Microsoft Foundry/Azure OpenAI.
+  - [Custom / compatible endpoint](#openai-custom--compatible-endpoint): any endpoint implementing the OpenAI API.
+
+:::tip
+Use **Responses** by default. It's OpenAI's current API and designed for newer reasoning models. Use **Chat Completions** if your backend doesn't support **Responses**, such as an older Microsoft Foundry/Azure OpenAI deployment or a self-hosted OpenAI-compatible backend serving models such as Qwen, Llama, or Mistral through Ollama.
+:::
+
+#### OpenAI API
+
+| Field               | Required | Description                                                                                                                                                                                |
+| :------------------ | :------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **OpenAI API key**  | Yes      | Your OpenAI account API key for authorization.                                                                                                                                             |
+| **Organization ID** | No       | For members of multiple organizations, the organization ID to use for API requests. See the [authentication documentation](https://platform.openai.com/docs/api-reference/authentication). |
+| **Project ID**      | No       | For accounts with multiple projects, the project ID to use for API requests. See the [authentication documentation](https://platform.openai.com/docs/api-reference/authentication).        |
+
+#### Microsoft Foundry (Azure)
+
+Use this backend for OpenAI models deployed through [Microsoft Foundry](https://ai.azure.com/) or Azure OpenAI.
+
+| Field              | Required | Description                                                                                                                                                   |
+| :----------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **API endpoint**   | Yes      | The full resource endpoint, for example `https://your-resource.openai.azure.com` or a Foundry endpoint such as `https://your-resource.services.ai.azure.com`. |
+| **Authentication** | Yes      | **API key**, **Entra ID: Client credentials**, or **Entra ID: Managed identity** (Hybrid/Self-Managed only).                                                  |
+
+Authentication fields per method:
+
+- **API key**: an API key for the resource, available in the [Azure AI Foundry portal](https://ai.azure.com/).
+- **Entra ID: Client credentials**: registers an application in [Microsoft Entra ID](https://go.microsoft.com/fwlink/?linkid=2083908) and authenticates with it.
+  - **Client ID**: the Microsoft Entra application (client) ID.
+  - **Client secret**: the application's client secret.
+  - **Tenant ID**: the Microsoft Entra tenant (directory) ID.
+  - **Authority host**: (optional) overrides the Microsoft Entra authority host, for example for sovereign clouds. Leave unset for the public cloud authority.
+- **Entra ID: Managed identity** (Hybrid/Self-Managed only): authenticates using the environment's managed identity.
+  - **Client ID**: (optional) the client ID of a user-assigned managed identity. Leave unset to use the system-assigned managed identity.
+
+:::note
+To use an OpenAI model deployed through Azure, deploy it first in the Azure AI Foundry portal. See [deploy a model in Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/create-resource#deploy-a-model), and enter the deployment name in the **Model** field below.
+
+A multi-replica connectors runtime setup means each replica also acquires and caches its own Entra ID token independently. Expect multiple, parallel credential/token requests against Entra ID under load, rather than a single shared token, and size any Entra ID application throttling limits accordingly.
+:::
+
+#### OpenAI custom / compatible endpoint
+
+Use this backend to connect to any LLM that exposes an OpenAI-compatible API, including open-weight models such as Qwen, Llama, and Mistral, hosted through Ollama or any compatible inference platform.
+
+| Field            | Required | Description                                                                                                                              |
+| :--------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| **API endpoint** | Yes      | Base URL of the OpenAI-compatible API. `/chat/completions` or `/responses` is appended automatically, depending on the selected **API**. |
+| **API key**      | Yes      | The API key for authentication.                                                                                                          |
+
+#### OpenAI model and parameters
+
+| Field                                                                            | Required | Description                                                                                                                                                                                                                                                                                                                                                                       |
+| :------------------------------------------------------------------------------- | :------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Model**                                                                        | Yes      | The model ID to use. See the [OpenAI models documentation](https://platform.openai.com/docs/models).                                                                                                                                                                                                                                                                              |
+| **Effort**                                                                       | No       | Controls how many tokens the model spends when responding, trading thoroughness against speed and cost. Not supported on all models. See the [Responses](https://developers.openai.com/api/reference/resources/responses/methods/create) or [Chat Completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create) API reference. |
+| **Max output tokens** (Responses) / **Max completion tokens** (Chat Completions) | No       | The maximum number of tokens per request to generate before stopping. The field name depends on the selected **API**.                                                                                                                                                                                                                                                             |
+| **Temperature**                                                                  | No       | Primary response-variation control from 0 to 2. Lower values favor likely tokens more strongly; higher values increase variation.                                                                                                                                                                                                                                                 |
+| **top P**                                                                        | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                                                                                                                                                                 |
+
+OpenAI doesn't support a **top K** parameter or prompt caching configuration.
+
+## Google Gemini
+
+Select this provider to use Google's Gemini models. Choose a **Backend** to specify how to access the API:
+
+- [Google Gemini API](#google-gemini-api): the direct, hosted Gemini API.
+- [Google Vertex AI](#google-vertex-ai): Gemini models through Google Cloud's Vertex AI.
+
+#### Google Gemini API
+
+| Field              | Required | Description                    |
+| :----------------- | :------- | :----------------------------- |
+| **Gemini API key** | Yes      | Your Google AI Studio API key. |
+
+#### Google Vertex AI
+
+| Field              | Required | Description                                                                                                                                                                                                                                                                                                                                                                      |
+| :----------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Project ID**     | Yes      | The Google Cloud project ID.                                                                                                                                                                                                                                                                                                                                                     |
+| **Region**         | Yes      | The [region](https://cloud.google.com/vertex-ai/docs/general/locations#feature-availability) where AI inference should take place.                                                                                                                                                                                                                                               |
+| **Authentication** | Yes      | **Service account credentials** (a [service account](https://cloud.google.com/iam/docs/service-account-overview) key in JSON format), or **Application default credentials** (Hybrid/Self-Managed only; uses the default credentials available in the environment; see [setting up ADC locally](https://cloud.google.com/docs/authentication/set-up-adc-local-dev-environment)). |
+
+#### Google Gemini model and parameters
+
+| Field                        | Required | Description                                                                                                                                                                                                          |
+| :--------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Model**                    | Yes      | The model ID to use. See the [Gemini models documentation](https://ai.google.dev/gemini-api/docs/models).                                                                                                            |
+| **Thinking budget (tokens)** | No       | Gemini 2.5 models: token budget for extended thinking. `-1` = dynamic, `0` = disabled. Mutually exclusive with **Thinking level**. See the [thinking documentation](https://ai.google.dev/gemini-api/docs/thinking). |
+| **Thinking level**           | No       | Gemini 3.x models: qualitative thinking effort (`default`/`minimal`/`low`/`medium`/`high`). Mutually exclusive with **Thinking budget**.                                                                             |
+| **Maximum tokens**           | No       | The maximum number of tokens to generate before stopping.                                                                                                                                                            |
+| **Temperature**              | No       | Primary response-variation control. Lower values favor likely tokens more strongly; higher values increase variation. Supported ranges vary by model.                                                                |
+| **top P**                    | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                    |
+| **top K**                    | No       | Advanced sampling control configured as a positive integer. Limits selection to this number of the most likely tokens.                                                                                               |
+
+:::note
+Google Gemini doesn't support prompt caching configuration.
+:::
+
+## Custom implementation
+
+:::important
+Available in Self-Managed or [hybrid](/reference/glossary.md#hybrid-mode) deployments only.
+:::
+
+Select this provider to use a custom chat model provider implementation that you've registered with the connector runtime, instead of one of the built-in providers above.
+
+| Field                   | Required | Description                                                                                                        |
+| :---------------------- | :------- | :----------------------------------------------------------------------------------------------------------------- |
+| **Provider type**       | Yes      | Identifier for the custom chat model provider. Must match the identifier configured for the custom implementation. |
+| **Provider parameters** | No       | Parameters for the custom chat model provider implementation, as a FEEL context.                                   |
+| **Model**               | Yes      | Identifier of the model to use, interpreted by the custom implementation.                                          |
+
+Implementing a custom provider requires building and registering a chat model provider with your Self-Managed or hybrid connector runtime, similar to how [custom conversation storage backends](./agentic-ai-aiagent-customization.md#custom-conversation-storage) are registered.

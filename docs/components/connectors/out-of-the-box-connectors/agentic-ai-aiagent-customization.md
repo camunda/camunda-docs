@@ -1,17 +1,11 @@
 ---
 id: agentic-ai-aiagent-customization
-sidebar_label: Customization
-title: AI Agent connector customization
-description: Customization of the AI Agent connector in self-managed or hybrid deployments
+sidebar_label: Customize in Self-Managed
+title: Customize the AI Agent connector
+description: Customize the AI Agent connector in Self-Managed or hybrid deployments to suit your specific needs.
 ---
 
-In a Self-Managed or [hybrid](../../../reference/glossary.md#hybrid-mode) environment, you can customize and extend the [AI Agent connector](./agentic-ai-aiagent.md) to suit your specific needs.
-
-For example, you can:
-
-- Implement custom storage backends for conversation history
-- Add support for additional AI models
-- Inject additional logic into the agent execution flow
+Customize the [AI Agent connector](./agentic-ai-aiagent.md) in Self-Managed or [hybrid](../../../reference/glossary.md#hybrid-mode) deployments by implementing custom conversation storage, supporting additional AI models, or adding logic to the agent execution flow.
 
 ## HTTP proxy configuration
 
@@ -28,7 +22,7 @@ To disable proxy support entirely (for example, if only an HTTPS-based proxy is 
 - **Spring Boot property:** `camunda.connector.agenticai.http.proxy-support.enabled=false`.
 - **Environment variable:** `CAMUNDA_CONNECTOR_AGENTICAI_HTTP_PROXYSUPPORT_ENABLED=false`.
 
-## Extending the AI Agent connector
+## Extend the AI Agent connector
 
 ### Prerequisites
 
