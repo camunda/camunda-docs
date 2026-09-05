@@ -224,7 +224,7 @@ while [[ "$(curl -s "$OPTIMIZE_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq 
 
 ### 5. Wait for backup `x` of Operate to complete
 
-This step uses the the [Operate management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
+This step uses the [Operate management backup API](/self-managed/operational-guides/backup-restore/operate-tasklist-backup.md).
 
 ```bash
 curl -s "$OPERATE_MANAGEMENT_API/actuator/backups/$BACKUP_ID"
@@ -387,7 +387,7 @@ while [[ "$(curl -s "$TASKLIST_MANAGEMENT_API/actuator/backups/$BACKUP_ID" | jq 
 Once you have completed backing up all the WebApps, you can back up the Zeebe Cluster.
 
 :::caution
-When backing up the the Zeebe Cluster, you must execute the following sub-steps in the correct sequential order.
+When backing up the Zeebe Cluster, you must execute the following sub-steps in the correct sequential order.
 :::
 
 ### 1. Soft pause exporting in Zeebe
