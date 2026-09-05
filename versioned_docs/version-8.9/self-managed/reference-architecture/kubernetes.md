@@ -140,6 +140,8 @@ Also included in this namespace are components that are tightly integrated with 
 - [Optimize](/components/optimize/what-is-optimize.md) — reporting and analytics
 - [Connectors](/components/connectors/introduction.md) — external system integrations
 
+The Orchestration Cluster also depends on a **secondary storage** backend for Operate, Tasklist, and the v2 Orchestration Cluster REST API. This backend is a document store (Elasticsearch or OpenSearch) or a supported relational database management system (RDBMS). It is provisioned outside the `StatefulSet`, as a managed service or an operator-managed database. Optimize requires Elasticsearch or OpenSearch and cannot use an RDBMS. For the trade-offs and how to choose a backend, see [secondary storage architecture](/self-managed/reference-architecture/reference-architecture.md#secondary-storage-architecture).
+
 #### Web Modeler and Console namespace
 
 As shown in the [architecture diagram](#web-modeler-and-console), this namespace contains:
@@ -225,9 +227,10 @@ Database ports are not included here, as databases should be maintained outside 
 
 Typical defaults include:
 
-- `5432`: PostgreSQL
+- `5432`: PostgreSQL (Management Identity, Web Modeler, and PostgreSQL secondary storage when used)
 - `9200`, `9300`, `9600`: Document-store secondary storage (Elasticsearch/OpenSearch)
-  :::
+
+:::
 
 ##### Load balancer
 
@@ -258,10 +261,10 @@ Camunda maintains the required Docker images consumed by the Helm chart. These i
 
 The following databases are required:
 
-| Database                         | Requirement                                                                                        |
-| :------------------------------- | :------------------------------------------------------------------------------------------------- |
-| Document-store secondary storage | Required by Orchestration Cluster and Optimize in this topology (Elasticsearch/OpenSearch).        |
-| PostgreSQL                       | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster. |
+| Database                                  | Requirement                                                                                                                                           |
+| :---------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Secondary storage (Orchestration Cluster) | Elasticsearch or OpenSearch (document store) in this topology, or a supported RDBMS as an alternative. Optimize requires Elasticsearch or OpenSearch. |
+| PostgreSQL                                | Required by Management Identity and Web Modeler. Also required by Keycloak if deployed in-cluster.                                                    |
 
 :::info OpenSearch support
 Camunda 8 supports both [Amazon OpenSearch](https://aws.amazon.com/opensearch-service) and the open-source [OpenSearch](https://opensearch.org/) distribution.
