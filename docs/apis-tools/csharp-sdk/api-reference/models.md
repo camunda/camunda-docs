@@ -7,7 +7,7 @@ mdx:
 
 # Models
 
-Request and response model classes (644 types).
+Request and response model classes (702 types).
 
 ## Quick Reference
 
@@ -16,6 +16,8 @@ Request and response model classes (644 types).
 - [AdHocSubProcessActivateActivitiesInstruction](#adhocsubprocessactivateactivitiesinstruction) — AdHocSubProcessActivateActivitiesInstruction
 - [AdHocSubProcessActivateActivityReference](#adhocsubprocessactivateactivityreference) — AdHocSubProcessActivateActivityReference
 - [AdvancedActorTypeFilter](#advancedactortypefilter) — Advanced AuditLogActorTypeEnum filter
+- [AdvancedAgentDefinitionKeyFilter](#advancedagentdefinitionkeyfilter) — Advanced AgentDefinitionKey filter
+- [AdvancedAgentDefinitionTypeFilter](#advancedagentdefinitiontypefilter) — Advanced AgentDefinitionTypeEnum filter
 - [AdvancedAgentHistoryItemKeyFilter](#advancedagenthistoryitemkeyfilter) — Advanced AgentHistoryItemKey filter
 - [AdvancedAgentInstanceHistoryCommitStatusFilter](#advancedagentinstancehistorycommitstatusfilter) — Advanced AgentInstanceHistoryCommitStatusEnum filter
 - [AdvancedAgentInstanceHistoryRoleFilter](#advancedagentinstancehistoryrolefilter) — Advanced AgentInstanceHistoryRoleEnum filter
@@ -67,19 +69,28 @@ Request and response model classes (644 types).
 - [AdvancedVariableKeyFilter](#advancedvariablekeyfilter) — Advanced VariableKey filter
 - [AdvancedWaitStateElementTypeFilter](#advancedwaitstateelementtypefilter) — Advanced element type filter
 - [AdvancedWaitStateTypeFilter](#advancedwaitstatetypefilter) — Advanced wait state type filter
+- [AgentDefinitionFilter](#agentdefinitionfilter) — Agent definition search filter
+- [AgentDefinitionKeyExactMatch](#agentdefinitionkeyexactmatch) — Matches the value exactly
+- [AgentDefinitionKeyFilterProperty](#agentdefinitionkeyfilterproperty) — AgentDefinitionKey property with full advanced search capabilities
+- [AgentDefinitionResult](#agentdefinitionresult) — An agent definition, created at deploy time for the process element it belongs to
+- [AgentDefinitionSearchQuery](#agentdefinitionsearchquery) — Agent definition search request
+- [AgentDefinitionSearchQueryResult](#agentdefinitionsearchqueryresult) — Agent definition search response
+- [AgentDefinitionSearchQuerySortRequest](#agentdefinitionsearchquerysortrequest) — AgentDefinitionSearchQuerySortRequest
+- [AgentDefinitionTypeExactMatch](#agentdefinitiontypeexactmatch) — Matches the value exactly
+- [AgentDefinitionTypeFilterProperty](#agentdefinitiontypefilterproperty) — AgentDefinitionTypeEnum property with full advanced search capabilities
 - [AgentHistoryItemKeyExactMatch](#agenthistoryitemkeyexactmatch) — Matches the value exactly
 - [AgentHistoryItemKeyFilterProperty](#agenthistoryitemkeyfilterproperty) — AgentHistoryItemKey property with full advanced search capabilities
+- [AgentInstanceCreatedHistoryItem](#agentinstancecreatedhistoryitem) — The outcome of appending a single history item from an update request's history batch
 - [AgentInstanceCreationRequest](#agentinstancecreationrequest) — Request to create a new agent instance
 - [AgentInstanceCreationResult](#agentinstancecreationresult) — Response returned after successfully creating an agent instance
-- [AgentInstanceDefinition](#agentinstancedefinition) — The static definition of an agent instance, set once at creation
+- [AgentInstanceDefinitionResult](#agentinstancedefinitionresult) — The definition of an agent instance
 - [AgentInstanceDocumentContent](#agentinstancedocumentcontent) — A Camunda Document Store reference content block
 - [AgentInstanceFilter](#agentinstancefilter) — Agent instance search filter
 - [AgentInstanceHistoryCommitStatusExactMatch](#agentinstancehistorycommitstatusexactmatch) — Matches the value exactly
 - [AgentInstanceHistoryCommitStatusFilterProperty](#agentinstancehistorycommitstatusfilterproperty) — AgentInstanceHistoryCommitStatusEnum property with full advanced search capabilities
 - [AgentInstanceHistoryFilter](#agentinstancehistoryfilter) — Agent instance history item search filter
-- [AgentInstanceHistoryItemCreationResult](#agentinstancehistoryitemcreationresult) — Response returned after successfully appending a history item
+- [AgentInstanceHistoryItem](#agentinstancehistoryitem) — A single history item to append to the agent instance's conversation history, submitted as part of the batch on an agent instance update request
 - [AgentInstanceHistoryItemMetrics](#agentinstancehistoryitemmetrics) — Per-call token and latency metrics for an ASSISTANT history item
-- [AgentInstanceHistoryItemRequest](#agentinstancehistoryitemrequest) — Request to append a single history item to an agent instance's conversation history
 - [AgentInstanceHistoryItemResult](#agentinstancehistoryitemresult) — A single conversation history item belonging to an agent instance
 - [AgentInstanceHistoryRoleExactMatch](#agentinstancehistoryroleexactmatch) — Matches the value exactly
 - [AgentInstanceHistoryRoleFilterProperty](#agentinstancehistoryrolefilterproperty) — AgentInstanceHistoryRoleEnum property with full advanced search capabilities
@@ -91,7 +102,6 @@ Request and response model classes (644 types).
 - [AgentInstanceLimits](#agentinstancelimits) — The configured limits for an agent instance, set once at creation
 - [AgentInstanceMessageContent](#agentinstancemessagecontent) — A single content block within a history item
 - [AgentInstanceMetrics](#agentinstancemetrics) — Aggregated metrics for an agent instance across all model calls
-- [AgentInstanceMetricsDelta](#agentinstancemetricsdelta) — Metric increments to apply to the agent instance aggregate counters
 - [AgentInstanceObjectContent](#agentinstanceobjectcontent) — An arbitrary structured content block
 - [AgentInstanceResult](#agentinstanceresult) — AgentInstanceResult
 - [AgentInstanceSearchQuery](#agentinstancesearchquery) — Agent instance search request
@@ -102,6 +112,7 @@ Request and response model classes (644 types).
 - [AgentInstanceTextContent](#agentinstancetextcontent) — A plain-text content block
 - [AgentInstanceToolCall](#agentinstancetoolcall) — A tool call associated with a history item
 - [AgentInstanceUpdateRequest](#agentinstanceupdaterequest) — Request to update the mutable state of an agent instance
+- [AgentInstanceUpdateResult](#agentinstanceupdateresult) — Response returned after successfully updating an agent instance
 - [AgentTool](#agenttool) — A tool available to the agent
 - [AncestorScopeInstruction](#ancestorscopeinstruction) — Defines the ancestor scope for the created element instances
 - [AuditLogActorTypeExactMatch](#auditlogactortypeexactmatch) — Matches the value exactly
@@ -129,7 +140,7 @@ Request and response model classes (644 types).
 - [AuthorizationSearchResult](#authorizationsearchresult) — AuthorizationSearchResult
 - [BackpressureState](#backpressurestate)
 - [BackupId](#backupid) — The id of the backup
-- [BackupIdPrefix](#backupidprefix) — A prefix of a backup id, followed by a single '\*' as a wildcard, matching any backup id starting with the given prefix
+- [BackupIdPrefix](#backupidprefix) — A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id starting with the given prefix
 - [BackupInfo](#backupinfo) — Detailed status of a runtime backup
 - [BaseProcessInstanceFilterFields](#baseprocessinstancefilterfields) — Base process instance search filter
 - [BasicStringFilter](#basicstringfilter) — Basic advanced string filter
@@ -161,6 +172,7 @@ Request and response model classes (644 types).
 - [CamundaKeyValidation](#camundakeyvalidation) — Validation helpers for domain key constraints
 - [CamundaLongKeyJsonConverterFactory](#camundalongkeyjsonconverterfactory) — JSON converter factory that handles any `ICamundaLongKey` struct
 - [CamundaSdkException](#camundasdkexception) — SDK error types mirroring the JS SDK's error structure
+- [CamundaTimeProvider](#camundatimeprovider) — A `TimeProvider` decorator whose `CamundaTimeProvider
 - [CamundaUserResult](#camundauserresult) — CamundaUserResult
 - [CancelProcessInstanceRequest](#cancelprocessinstancerequest) — CancelProcessInstanceRequest
 - [CancelSdkException](#cancelsdkexception) — Thrown when a cancellable operation is cancelled
@@ -171,8 +183,38 @@ Request and response model classes (644 types).
 - [ClientId](#clientid) — The unique identifier of an OAuth client
 - [ClockPinRequest](#clockpinrequest) — ClockPinRequest
 - [CloudConfigurationResponse](#cloudconfigurationresponse) — Configuration for SaaS/cloud-specific settings
+- [ClusterBalanceResponse](#clusterbalanceresponse) — The cluster's current per-partition balance state, the running rebalance, and the last completed rebalance
+- [ClusterBrokerInfo](#clusterbrokerinfo) — Provides information on a broker node, independent of any physical tenant
+- [ClusterCompletedRebalance](#clustercompletedrebalance) — The last completed rebalance
+- [ClusterHistoryBackupInfo](#clusterhistorybackupinfo) — A history backup id and what each physical tenant reports for it
+- [ClusterHistoryBackupTakeResult](#clusterhistorybackuptakeresult) — The snapshots scheduled on a single physical tenant
+- [ClusterHistoryBackupTenantInfo](#clusterhistorybackuptenantinfo) — What a single physical tenant reports for a history backup id
 - [ClusterModeChangeOperation](#clustermodechangeoperation) — A single operation that is part of a cluster mode change
+- [ClusterModeChangePlannedChange](#clustermodechangeplannedchange) — The operations of a cluster mode change that apply to one physical tenant
 - [ClusterModeChangeResponse](#clustermodechangeresponse) — The planned changes resulting from a cluster mode transition request
+- [ClusterRebalance](#clusterrebalance) — The fields common to a running and a completed rebalance
+- [ClusterRebalanceOperationPartition](#clusterrebalanceoperationpartition) — One partition's plan, progress, and outcome within a rebalance
+- [ClusterRebalancePartition](#clusterrebalancepartition) — One partition's leadership/balance status - its current leader, its desired leader, and whether a rebalance is currently moving it
+- [ClusterRebalanceRequest](#clusterrebalancerequest) — The settings to run a given rebalance with
+- [ClusterRestoreAwaitModeChangeOperation](#clusterrestoreawaitmodechangeoperation) — The operation that awaits the transition of a broker to a mode
+- [ClusterRestoreBrokerOperation](#clusterrestorebrokeroperation) — A restore operation that applies to a broker as a whole, such as the one that updates its incarnation number
+- [ClusterRestoreModeChangeOperation](#clusterrestoremodechangeoperation) — The operation that transitions a broker to a mode once its partitions are restored
+- [ClusterRestoreOperation](#clusterrestoreoperation) — A single operation that is part of a restore
+- [ClusterRestorePartitionOperation](#clusterrestorepartitionoperation) — A restore operation that targets a single partition without restoring it, such as the one that prepares the partition for its restore
+- [ClusterRestorePartitionRestoreOperation](#clusterrestorepartitionrestoreoperation) — The operation that restores a single partition from the backups resolved for it
+- [ClusterRestorePlannedChange](#clusterrestoreplannedchange) — The operations of a restore that apply to one physical tenant
+- [ClusterRestoreRequest](#clusterrestorerequest) — Describes a restore request issued by a cluster admin
+- [ClusterRestoreResponse](#clusterrestoreresponse) — The planned changes resulting from a restore request
+- [ClusterRunningRebalance](#clusterrunningrebalance) — The rebalance currently running
+- [ClusterRuntimeBackupInfo](#clusterruntimebackupinfo) — A runtime backup id, what each physical tenant reports for it, and the state aggregated over every targeted tenant — folded from the per-tenant states by the same rules a per-tenant state is folded from its partitions
+- [ClusterRuntimeBackupState](#clusterruntimebackupstate) — The checkpoint and backup state of each physical tenant
+- [ClusterRuntimeBackupTakeResult](#clusterruntimebackuptakeresult) — Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted
+- [ClusterRuntimeBackupTenantInfo](#clusterruntimebackuptenantinfo) — What a single physical tenant reports for a runtime backup id
+- [ClusterRuntimeBackupTenantState](#clusterruntimebackuptenantstate) — The checkpoint and backup state of one physical tenant
+- [ClusterStatusResponse](#clusterstatusresponse) — The aggregated status of the whole cluster
+- [ClusterTakeHistoryBackupResponse](#clustertakehistorybackupresponse) — The snapshots scheduled on every targeted physical tenant
+- [ClusterTakeRuntimeBackupResponse](#clustertakeruntimebackupresponse) — The outcome of triggering a runtime backup on every targeted physical tenant
+- [ClusterTopologyResponse](#clustertopologyresponse) — The topology of the whole cluster, aggregated over all physical tenants
 - [ClusterVariableKindExactMatch](#clustervariablekindexactmatch) — Matches the value exactly
 - [ClusterVariableKindFilterProperty](#clustervariablekindfilterproperty) — ClusterVariableKindEnum property with full advanced search capabilities
 - [ClusterVariableName](#clustervariablename) — The name of a cluster variable
@@ -273,6 +315,7 @@ Request and response model classes (644 types).
 - [ElementInstanceWaitStateQuerySortRequest](#elementinstancewaitstatequerysortrequest) — ElementInstanceWaitStateQuerySortRequest
 - [ElementInstanceWaitStateResult](#elementinstancewaitstateresult) — An element instance waiting state
 - [EndCursor](#endcursor) — The end cursor in a search query result set
+- [EngineTimeProvider](#enginetimeprovider) — A `TimeProvider` bound to the engine's own clock, so client cadence and engine time advance together
 - [EntityTypeExactMatch](#entitytypeexactmatch) — Matches the value exactly
 - [EntityTypeFilterProperty](#entitytypefilterproperty) — AuditLogEntityTypeEnum property with full advanced search capabilities
 - [EvaluateConditionalResult](#evaluateconditionalresult) — EvaluateConditionalResult
@@ -281,9 +324,11 @@ Request and response model classes (644 types).
 - [EvaluatedDecisionOutputItem](#evaluateddecisionoutputitem) — The evaluated decision outputs
 - [EvaluatedDecisionResult](#evaluateddecisionresult) — A decision that was evaluated
 - [EventualConsistencyTimeoutException](#eventualconsistencytimeoutexception) — Thrown when an eventually consistent endpoint times out waiting for data
+- [ExportingStatusResponse](#exportingstatusresponse) — Response body for the exporting status of a physical tenant
 - [ExpressionEvaluationRequest](#expressionevaluationrequest) — ExpressionEvaluationRequest
 - [ExpressionEvaluationResult](#expressionevaluationresult) — ExpressionEvaluationResult
 - [ExpressionEvaluationWarningItem](#expressionevaluationwarningitem) — ExpressionEvaluationWarningItem
+- [ExpressionSecretReferenceItem](#expressionsecretreferenceitem) — ExpressionSecretReferenceItem
 - [ExtendedDeploymentResponse](#extendeddeploymentresponse) — Extended deployment result with typed convenience properties for direct access to deployed artifacts by category (processes, decisions, forms, etc
 - [FormId](#formid) — The user-defined id for the form
 - [FormKeyExactMatch](#formkeyexactmatch) — Matches the value exactly
@@ -322,9 +367,12 @@ Request and response model classes (644 types).
 - [GroupUserSearchQueryRequest](#groupusersearchqueryrequest) — GroupUserSearchQueryRequest
 - [GroupUserSearchQuerySortRequest](#groupusersearchquerysortrequest) — GroupUserSearchQuerySortRequest
 - [GroupUserSearchResult](#groupusersearchresult) — GroupUserSearchResult
+- [HistoryBackupInfo](#historybackupinfo) — Detailed status of a history backup
+- [HistoryBackupSnapshotInfo](#historybackupsnapshotinfo) — Detailed info of a single snapshot making up a history backup
 - [HttpSdkException](#httpsdkexception) — HTTP-specific SDK error with RFC 7807 Problem Details
 - [ICamundaKey](#icamundakey) — Marker interface for all Camunda domain key types
 - [ICamundaLongKey](#icamundalongkey) — Marker interface for Camunda domain types backed by a long (int64) value
+- [IEngineClockTarget](#iengineclocktarget) — The engine clock operations `EngineTimeProvider` drives
 - [ITenantIdSettable](#itenantidsettable) — Implemented by request body types that have an optional tenantId property
 - [ITenantIdsSettable](#itenantidssettable) — Implemented by request body types that have an optional `tenantIds` array property (e
 - [IncidentErrorTypeExactMatch](#incidenterrortypeexactmatch) — Matches the value exactly
@@ -398,7 +446,7 @@ Request and response model classes (644 types).
 - [LicenseResponse](#licenseresponse) — The response of a license request
 - [LikeFilter](#likefilter) — Checks if the property matches the provided like value
 - [LimitPagination](#limitpagination) — LimitPagination
-- [LoopIterationId](#loopiterationid) — A client-provided sequential integer identifying one pass through the agent feedback loop: one LLM call, its tool dispatches, and their results
+- [LoopIterationId](#loopiterationid) — A client-provided sequential integer identifying a loop iteration: one pass through an AI agent's loop, during which the model reasons, selects tools, evaluates the result, and decides whether to continue
 - [MappingRuleCreateRequest](#mappingrulecreaterequest) — MappingRuleCreateRequest
 - [MappingRuleCreateResult](#mappingrulecreateresult) — MappingRuleCreateResult
 - [MappingRuleCreateUpdateRequest](#mappingrulecreateupdaterequest) — MappingRuleCreateUpdateRequest
@@ -434,12 +482,15 @@ Request and response model classes (644 types).
 - [OperationReference](#operationreference) — A reference key chosen by the user that will be part of all records resulting from this operation
 - [OperationTypeExactMatch](#operationtypeexactmatch) — Matches the value exactly
 - [OperationTypeFilterProperty](#operationtypefilterproperty) — AuditLogOperationTypeEnum property with full advanced search capabilities
+- [OwnAuthorizationSearchResult](#ownauthorizationsearchresult) — OwnAuthorizationSearchResult
 - [Partition](#partition) — Provides information on a partition within a broker node
 - [PartitionBackupInfo](#partitionbackupinfo) — Detailed info of the backup for a given partition
 - [PartitionBackupRange](#partitionbackuprange) — Information about one backup range for a partition
 - [PartitionBackupState](#partitionbackupstate) — Detailed information about the backup state for a given partition
 - [PartitionCheckpointState](#partitioncheckpointstate) — Detailed information about the checkpoint state for a given partition
 - [PartitionId](#partitionid) — The id of a partition
+- [PhysicalTenantBrokerTopology](#physicaltenantbrokertopology) — The partitions of one physical tenant that one broker manages or replicates
+- [PhysicalTenantTopology](#physicaltenanttopology) — The topology of a single physical tenant
 - [ProblemDetail](#problemdetail) — A Problem detail object as described in [RFC 9457](https://www
 - [ProcessDefinitionElementStatisticsQuery](#processdefinitionelementstatisticsquery) — Process definition element statistics request
 - [ProcessDefinitionElementStatisticsQueryResult](#processdefinitionelementstatisticsqueryresult) — Process definition element statistics query response
@@ -511,6 +562,7 @@ Request and response model classes (644 types).
 - [ProcessInstanceSuspensionBatchOperationRequest](#processinstancesuspensionbatchoperationrequest) — The process instance filter that defines which process instances should be suspended
 - [ProcessInstanceWaitStateStatisticsQueryResult](#processinstancewaitstatestatisticsqueryresult) — Process instance wait state statistics query response
 - [ProcessInstanceWaitStateStatisticsResult](#processinstancewaitstatestatisticsresult) — Process instance wait state statistics response item
+- [RebalanceCancellationResponse](#rebalancecancellationresponse) — Response to a rebalance cancellation request
 - [ResolvedSecret](#resolvedsecret) — ResolvedSecret
 - [ResourceFilter](#resourcefilter) — Resource search filter
 - [ResourceKeyExactMatch](#resourcekeyexactmatch) — Matches the value exactly
@@ -519,7 +571,10 @@ Request and response model classes (644 types).
 - [ResourceSearchQuery](#resourcesearchquery) — ResourceSearchQuery
 - [ResourceSearchQueryResult](#resourcesearchqueryresult) — ResourceSearchQueryResult
 - [ResourceSearchQuerySortRequest](#resourcesearchquerysortrequest) — ResourceSearchQuerySortRequest
+- [RestoreBrokerStatus](#restorebrokerstatus) — The restore status of a single broker
+- [RestorePartitionStatus](#restorepartitionstatus) — The restore status of a single partition on a broker
 - [RestoreRequest](#restorerequest) — Describes a restore request
+- [RestoreStatusResponse](#restorestatusresponse) — The status of the restore that is currently in progress
 - [ResumeProcessInstanceRequest](#resumeprocessinstancerequest) — ResumeProcessInstanceRequest
 - [RetryDecision](#retrydecision)
 - [RoleClientResult](#roleclientresult) — RoleClientResult
@@ -571,6 +626,8 @@ Request and response model classes (644 types).
 - [SuspendProcessInstanceRequest](#suspendprocessinstancerequest) — SuspendProcessInstanceRequest
 - [SystemConfigurationResponse](#systemconfigurationresponse) — Envelope for all system configuration sections
 - [Tag](#tag) — A tag
+- [TakeHistoryBackupRequest](#takehistorybackuprequest) — Request body for taking a history backup
+- [TakeHistoryBackupResponse](#takehistorybackupresponse) — Response body for taking a history backup
 - [TakeRuntimeBackupRequest](#takeruntimebackuprequest) — Request body for taking a runtime backup
 - [TakeRuntimeBackupResponse](#takeruntimebackupresponse) — Response body for taking a runtime backup
 - [TenantClientResult](#tenantclientresult) — TenantClientResult
@@ -620,6 +677,7 @@ Request and response model classes (644 types).
 - [UserTaskCompletionRequest](#usertaskcompletionrequest) — UserTaskCompletionRequest
 - [UserTaskEffectiveVariableSearchQueryRequest](#usertaskeffectivevariablesearchqueryrequest) — User task effective variable search query request
 - [UserTaskFilter](#usertaskfilter) — User task filter request
+- [UserTaskFilterFields](#usertaskfilterfields) — User task filter fields
 - [UserTaskProperties](#usertaskproperties) — Contains properties of a user task
 - [UserTaskResult](#usertaskresult) — UserTaskResult
 - [UserTaskSearchQuery](#usertasksearchquery) — User task search query request
@@ -666,26 +724,27 @@ An activated job received from the Camunda broker, with typed variable access. T
 public sealed class ActivatedJob
 ```
 
-| Property                   | Type                       | Description                                                     |
-| -------------------------- | -------------------------- | --------------------------------------------------------------- |
-| `Type`                     | `String`                   | The job type (matches the BPMN task definition type).           |
-| `ProcessDefinitionId`      | `ProcessDefinitionId`      | The BPMN process ID of the job's process definition.            |
-| `ProcessDefinitionVersion` | `Int32`                    | The version of the job's process definition.                    |
-| `ElementId`                | `ElementId`                | The associated task element ID.                                 |
-| `CustomHeaders`            | `Object`                   | Raw custom headers (typically a `Json.JsonElement` at runtime). |
-| `Worker`                   | `String`                   | The name of the worker that activated this job.                 |
-| `Retries`                  | `Int32`                    | Retries remaining for this job.                                 |
-| `Deadline`                 | `Int64`                    | UNIX epoch timestamp (ms) when the job lock expires.            |
-| `Variables`                | `Object`                   | Raw variables (typically a `Json.JsonElement` at runtime).      |
-| `TenantId`                 | `TenantId`                 | The tenant that owns this job.                                  |
-| `JobKey`                   | `JobKey`                   | Unique identifier for this job.                                 |
-| `ProcessInstanceKey`       | `ProcessInstanceKey`       | The process instance this job belongs to.                       |
-| `ProcessDefinitionKey`     | `ProcessDefinitionKey`     | The process definition key.                                     |
-| `ElementInstanceKey`       | `ElementInstanceKey`       | The element instance key.                                       |
-| `Kind`                     | `JobKindEnum`              | The job kind.                                                   |
-| `ListenerEventType`        | `JobListenerEventTypeEnum` | The listener event type.                                        |
-| `UserTask`                 | `UserTaskProperties`       | User task properties (if this is a user task job).              |
-| `Tags`                     | `List<Tag>`                | Tags associated with this job.                                  |
+| Property                   | Type                       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Clock`                    | `TimeProvider`             | The clock the worker's own cadence runs on. Handlers should read time and wait through this rather than `DateTimeOffset.UtcNow` or `Task.Delay(ms, ct)`, so that in-handler timing is virtual whenever the client's clock is. `csharp var startedAt = job.Clock.GetUtcNow(); await Task.Delay(TimeSpan.FromMilliseconds(200), job.Clock, ct); ` This is for short in-handler coordination — poll again shortly, back off before a retry, debounce. It is not for business waits: "wait three days, then escalate" belongs in the BPMN model as a timer event, which is durable, owned by the engine, and survives worker restarts. |
+| `Type`                     | `String`                   | The job type (matches the BPMN task definition type).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `ProcessDefinitionId`      | `ProcessDefinitionId`      | The BPMN process ID of the job's process definition.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `ProcessDefinitionVersion` | `Int32`                    | The version of the job's process definition.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `ElementId`                | `ElementId`                | The associated task element ID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `CustomHeaders`            | `Object`                   | Raw custom headers (typically a `Json.JsonElement` at runtime).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `Worker`                   | `String`                   | The name of the worker that activated this job.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `Retries`                  | `Int32`                    | Retries remaining for this job.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `Deadline`                 | `Int64`                    | UNIX epoch timestamp (ms) when the job lock expires.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `Variables`                | `Object`                   | Raw variables (typically a `Json.JsonElement` at runtime).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `TenantId`                 | `TenantId`                 | The tenant that owns this job.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `JobKey`                   | `JobKey`                   | Unique identifier for this job.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `ProcessInstanceKey`       | `ProcessInstanceKey`       | The process instance this job belongs to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `ProcessDefinitionKey`     | `ProcessDefinitionKey`     | The process definition key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `ElementInstanceKey`       | `ElementInstanceKey`       | The element instance key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `Kind`                     | `JobKindEnum`              | The job kind.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `ListenerEventType`        | `JobListenerEventTypeEnum` | The listener event type.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `UserTask`                 | `UserTaskProperties`       | User task properties (if this is a user task job).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `Tags`                     | `List<Tag>`                | Tags associated with this job.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 ## ActivatedJobResult
 
@@ -761,7 +820,40 @@ public sealed class AdvancedActorTypeFilter
 | `Neq`    | `Nullable<AuditLogActorTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`               | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<AuditLogActorTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## AdvancedAgentDefinitionKeyFilter
+
+Advanced AgentDefinitionKey filter.
+
+```csharp
+public sealed class AdvancedAgentDefinitionKeyFilter
+```
+
+| Property | Type                           | Description                                                 |
+| -------- | ------------------------------ | ----------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentDefinitionKey>` | Checks for equality with the provided value.                |
+| `Neq`    | `Nullable<AgentDefinitionKey>` | Checks for inequality with the provided value.              |
+| `Exists` | `Nullable<Boolean>`            | Checks if the current property exists.                      |
+| `In`     | `List<AgentDefinitionKey>`     | Checks if the property matches any of the provided values.  |
+| `NotIn`  | `List<AgentDefinitionKey>`     | Checks if the property matches none of the provided values. |
+
+## AdvancedAgentDefinitionTypeFilter
+
+Advanced AgentDefinitionTypeEnum filter.
+
+```csharp
+public sealed class AdvancedAgentDefinitionTypeFilter
+```
+
+| Property | Type                                | Description                                                                                                                                                                                                                                               |
+| -------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Eq`     | `Nullable<AgentDefinitionTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                              |
+| `Neq`    | `Nullable<AgentDefinitionTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
+| `Exists` | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
+| `In`     | `List<AgentDefinitionTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
+| `NotIn`  | `List<AgentDefinitionTypeEnum>`     | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
+| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedAgentHistoryItemKeyFilter
 
@@ -839,7 +931,7 @@ public sealed class AdvancedAgentInstanceStatusFilter
 | `Neq`    | `Nullable<AgentInstanceStatusEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<AgentInstanceStatusEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedAuditLogEntityKeyFilter
 
@@ -887,7 +979,7 @@ public sealed class AdvancedBatchOperationItemStateFilter
 | `Neq`    | `Nullable<BatchOperationItemStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                     | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<BatchOperationItemStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedBatchOperationStateFilter
 
@@ -903,7 +995,7 @@ public sealed class AdvancedBatchOperationStateFilter
 | `Neq`    | `Nullable<BatchOperationStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<BatchOperationStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedBatchOperationTypeFilter
 
@@ -919,7 +1011,7 @@ public sealed class AdvancedBatchOperationTypeFilter
 | `Neq`    | `Nullable<BatchOperationTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<BatchOperationTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedCategoryFilter
 
@@ -935,7 +1027,7 @@ public sealed class AdvancedCategoryFilter
 | `Neq`    | `Nullable<AuditLogCategoryEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`              | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<AuditLogCategoryEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`           | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`           | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedClusterVariableKindFilter
 
@@ -951,7 +1043,7 @@ public sealed class AdvancedClusterVariableKindFilter
 | `Neq`    | `Nullable<ClusterVariableKindEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<ClusterVariableKindEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedClusterVariableScopeFilter
 
@@ -967,7 +1059,7 @@ public sealed class AdvancedClusterVariableScopeFilter
 | `Neq`    | `Nullable<ClusterVariableScopeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<ClusterVariableScopeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedDateTimeFilter
 
@@ -1051,7 +1143,7 @@ public sealed class AdvancedDecisionInstanceStateFilter
 | `Exists` | `Nullable<Boolean>`                   | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<DecisionInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`  | `List<DecisionInstanceStateEnum>`     | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`   | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedDecisionRequirementsKeyFilter
 
@@ -1100,7 +1192,7 @@ public sealed class AdvancedElementIdFilter
 | `Exists` | `Nullable<Boolean>`    | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<ElementId>`      | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`  | `List<ElementId>`      | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`   | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedElementInstanceKeyFilter
 
@@ -1132,7 +1224,7 @@ public sealed class AdvancedElementInstanceStateFilter
 | `Neq`    | `Nullable<ElementInstanceStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<ElementInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedEntityTypeFilter
 
@@ -1148,7 +1240,7 @@ public sealed class AdvancedEntityTypeFilter
 | `Neq`    | `Nullable<AuditLogEntityTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<AuditLogEntityTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedFormKeyFilter
 
@@ -1180,7 +1272,7 @@ public sealed class AdvancedGlobalListenerSourceFilter
 | `Neq`    | `Nullable<GlobalListenerSourceEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<GlobalListenerSourceEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedGlobalTaskListenerEventTypeFilter
 
@@ -1196,7 +1288,7 @@ public sealed class AdvancedGlobalTaskListenerEventTypeFilter
 | `Neq`    | `Nullable<GlobalTaskListenerEventTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                         | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<GlobalTaskListenerEventTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`                      | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`                      | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedIncidentErrorTypeFilter
 
@@ -1213,7 +1305,7 @@ public sealed class AdvancedIncidentErrorTypeFilter
 | `Exists` | `Nullable<Boolean>`               | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<IncidentErrorTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`  | `List<IncidentErrorTypeEnum>`     | Checks if the property does not match any of the provided values.                                                                                                                                                                                         |
-| `Like`   | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedIncidentStateFilter
 
@@ -1230,7 +1322,7 @@ public sealed class AdvancedIncidentStateFilter
 | `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<IncidentStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`  | `List<IncidentStateEnum>`     | Checks if the property does not match any of the provided values.                                                                                                                                                                                         |
-| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedIntegerFilter
 
@@ -1281,7 +1373,7 @@ public sealed class AdvancedJobKindFilter
 | `Neq`    | `Nullable<JobKindEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`     | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<JobKindEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`  | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedJobListenerEventTypeFilter
 
@@ -1297,7 +1389,7 @@ public sealed class AdvancedJobListenerEventTypeFilter
 | `Neq`    | `Nullable<JobListenerEventTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<JobListenerEventTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedJobStateFilter
 
@@ -1313,7 +1405,7 @@ public sealed class AdvancedJobStateFilter
 | `Neq`    | `Nullable<JobStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`      | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<JobStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`   | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`   | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedMessageSubscriptionKeyFilter
 
@@ -1345,7 +1437,7 @@ public sealed class AdvancedMessageSubscriptionStateFilter
 | `Neq`    | `Nullable<MessageSubscriptionStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                      | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<MessageSubscriptionStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`                   | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`                   | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedMessageSubscriptionTypeFilter
 
@@ -1361,7 +1453,7 @@ public sealed class AdvancedMessageSubscriptionTypeFilter
 | `Neq`    | `Nullable<MessageSubscriptionTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                     | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<MessageSubscriptionTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedMetadataValueFilter
 
@@ -1381,7 +1473,7 @@ public sealed class AdvancedMetadataValueFilter
 | `Lt`     | `Nullable<Double>`     | Lower than comparison with the provided value.                                                                                                                                                                                                            |
 | `Lte`    | `Nullable<Double>`     | Lower than or equal comparison with the provided value.                                                                                                                                                                                                   |
 | `In`     | `List<Object>`         | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedOperationTypeFilter
 
@@ -1397,7 +1489,7 @@ public sealed class AdvancedOperationTypeFilter
 | `Neq`    | `Nullable<AuditLogOperationTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                   | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<AuditLogOperationTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedProcessDefinitionIdFilter
 
@@ -1414,7 +1506,7 @@ public sealed class AdvancedProcessDefinitionIdFilter
 | `Exists` | `Nullable<Boolean>`             | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<ProcessDefinitionId>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`  | `List<ProcessDefinitionId>`     | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`   | `Nullable<LikeFilter>`          | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`          | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedProcessDefinitionKeyFilter
 
@@ -1462,7 +1554,7 @@ public sealed class AdvancedProcessInstanceStateFilter
 | `Neq`    | `Nullable<ProcessInstanceStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<ProcessInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedResourceKeyFilter
 
@@ -1494,7 +1586,7 @@ public sealed class AdvancedResultFilter
 | `Neq`    | `Nullable<AuditLogResultEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`            | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<AuditLogResultEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`         | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`         | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedScopeKeyFilter
 
@@ -1527,7 +1619,7 @@ public sealed class AdvancedStringFilter
 | `Exists` | `Nullable<Boolean>`    | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<String>`         | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`  | `List<String>`         | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`   | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedUserTaskStateFilter
 
@@ -1543,7 +1635,7 @@ public sealed class AdvancedUserTaskStateFilter
 | `Neq`    | `Nullable<UserTaskStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<UserTaskStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedVariableKeyFilter
 
@@ -1575,7 +1667,7 @@ public sealed class AdvancedWaitStateElementTypeFilter
 | `Neq`    | `Nullable<WaitStateElementTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<WaitStateElementTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AdvancedWaitStateTypeFilter
 
@@ -1591,7 +1683,146 @@ public sealed class AdvancedWaitStateTypeFilter
 | `Neq`    | `Nullable<WaitStateTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists` | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`     | `List<WaitStateTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`   | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## AgentDefinitionFilter
+
+Agent definition search filter.
+
+```csharp
+public sealed class AgentDefinitionFilter
+```
+
+| Property                      | Type                                 | Description                                                                    |
+| ----------------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
+| `AgentDefinitionKey`          | `AgentDefinitionKeyFilterProperty`   | The unique key of the agent definition.                                        |
+| `AgentType`                   | `AgentDefinitionTypeFilterProperty`  | The kind of agent this agent definition describes.                             |
+| `Name`                        | `StringFilterProperty`               | The human-readable name of the process element that owns the agent definition. |
+| `ElementId`                   | `ElementIdFilterProperty`            | The BPMN element ID of the process element that owns the agent definition.     |
+| `ProcessDefinitionId`         | `ProcessDefinitionIdFilterProperty`  | The BPMN process ID of the process definition that owns the agent definition.  |
+| `ProcessDefinitionKey`        | `ProcessDefinitionKeyFilterProperty` | The key of the process definition that owns the agent definition.              |
+| `ProcessDefinitionVersion`    | `IntegerFilterProperty`              | The version of the process definition that owns the agent definition.          |
+| `ProcessDefinitionVersionTag` | `StringFilterProperty`               | The version tag of the process definition that owns the agent definition.      |
+| `TenantId`                    | `StringFilterProperty`               | The tenant ID of the agent definition.                                         |
+
+## AgentDefinitionKeyExactMatch
+
+Matches the value exactly.
+
+```csharp
+public readonly record struct AgentDefinitionKeyExactMatch : ICamundaKey, IEquatable<AgentDefinitionKeyExactMatch>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## AgentDefinitionKeyFilterProperty
+
+AgentDefinitionKey property with full advanced search capabilities.
+
+```csharp
+public sealed class AgentDefinitionKeyFilterProperty
+```
+
+| Property     | Type                           | Description                                                                                                                      |
+| ------------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| `ExactMatch` | `Nullable<AgentDefinitionKey>` | Matches the value exactly. Serialized as the bare value — the form servers that predate advanced filtering on this field accept. |
+| `Eq`         | `Nullable<AgentDefinitionKey>` | Checks for equality with the provided value.                                                                                     |
+| `Neq`        | `Nullable<AgentDefinitionKey>` | Checks for inequality with the provided value.                                                                                   |
+| `Exists`     | `Nullable<Boolean>`            | Checks if the current property exists.                                                                                           |
+| `In`         | `List<AgentDefinitionKey>`     | Checks if the property matches any of the provided values.                                                                       |
+| `NotIn`      | `List<AgentDefinitionKey>`     | Checks if the property matches none of the provided values.                                                                      |
+
+## AgentDefinitionResult
+
+An agent definition, created at deploy time for the process element it belongs to.
+
+```csharp
+public sealed class AgentDefinitionResult
+```
+
+| Property                      | Type                      | Description                                                                                                                                          |
+| ----------------------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AgentDefinitionKey`          | `AgentDefinitionKey`      | The unique key for this agent definition. Unique across process definition versions.                                                                 |
+| `AgentType`                   | `AgentDefinitionTypeEnum` | The kind of agent an agent definition describes.                                                                                                     |
+| `Name`                        | `String`                  | The human-readable name of the process element that owns the agent definition. Falls back to elementId when the element has no BPMN name configured. |
+| `ElementId`                   | `ElementId`               | The BPMN element ID of the process element that owns the agent definition.                                                                           |
+| `ProcessDefinitionId`         | `ProcessDefinitionId`     | The BPMN process ID of the process definition that owns the agent definition.                                                                        |
+| `ProcessDefinitionKey`        | `ProcessDefinitionKey`    | The key of the process definition that owns the agent definition.                                                                                    |
+| `ProcessDefinitionVersion`    | `Int32`                   | The version of the process definition that owns the agent definition.                                                                                |
+| `ProcessDefinitionVersionTag` | `String`                  | The version tag of the process definition that owns the agent definition.                                                                            |
+| `TenantId`                    | `TenantId`                | The tenant ID of this agent definition.                                                                                                              |
+
+## AgentDefinitionSearchQuery
+
+Agent definition search request.
+
+```csharp
+public sealed class AgentDefinitionSearchQuery
+```
+
+| Property | Type                                          | Description                          |
+| -------- | --------------------------------------------- | ------------------------------------ |
+| `Sort`   | `List<AgentDefinitionSearchQuerySortRequest>` | Sort field criteria.                 |
+| `Filter` | `AgentDefinitionFilter`                       | The agent definition search filters. |
+| `Page`   | `SearchQueryPageRequest`                      | Pagination criteria.                 |
+
+## AgentDefinitionSearchQueryResult
+
+Agent definition search response.
+
+```csharp
+public sealed class AgentDefinitionSearchQueryResult
+```
+
+| Property | Type                          | Description                                      |
+| -------- | ----------------------------- | ------------------------------------------------ |
+| `Items`  | `List<AgentDefinitionResult>` | The matching agent definitions.                  |
+| `Page`   | `SearchQueryPageResponse`     | Pagination information about the search results. |
+
+## AgentDefinitionSearchQuerySortRequest
+
+AgentDefinitionSearchQuerySortRequest
+
+```csharp
+public sealed class AgentDefinitionSearchQuerySortRequest
+```
+
+| Property | Type                                         | Description                                   |
+| -------- | -------------------------------------------- | --------------------------------------------- |
+| `Field`  | `AgentDefinitionSearchQuerySortRequestField` | The field to sort by.                         |
+| `Order`  | `Nullable<SortOrderEnum>`                    | The order in which to sort the related field. |
+
+## AgentDefinitionTypeExactMatch
+
+Matches the value exactly.
+
+```csharp
+public readonly record struct AgentDefinitionTypeExactMatch : ICamundaKey, IEquatable<AgentDefinitionTypeExactMatch>
+```
+
+| Property | Type     | Description                  |
+| -------- | -------- | ---------------------------- |
+| `Value`  | `String` | The underlying string value. |
+
+## AgentDefinitionTypeFilterProperty
+
+AgentDefinitionTypeEnum property with full advanced search capabilities.
+
+```csharp
+public sealed class AgentDefinitionTypeFilterProperty
+```
+
+| Property     | Type                                | Description                                                                                                                                                                                                                                               |
+| ------------ | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ExactMatch` | `Nullable<AgentDefinitionTypeEnum>` | Matches the value exactly. Serialized as the bare value — the form servers that predate advanced filtering on this field accept.                                                                                                                          |
+| `Eq`         | `Nullable<AgentDefinitionTypeEnum>` | Checks for equality with the provided value.                                                                                                                                                                                                              |
+| `Neq`        | `Nullable<AgentDefinitionTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
+| `Exists`     | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
+| `In`         | `List<AgentDefinitionTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
+| `NotIn`      | `List<AgentDefinitionTypeEnum>`     | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
+| `Like`       | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AgentHistoryItemKeyExactMatch
 
@@ -1622,6 +1853,20 @@ public sealed class AgentHistoryItemKeyFilterProperty
 | `In`         | `List<AgentHistoryItemKey>`     | Checks if the property matches any of the provided values.                                                                       |
 | `NotIn`      | `List<AgentHistoryItemKey>`     | Checks if the property matches none of the provided values.                                                                      |
 
+## AgentInstanceCreatedHistoryItem
+
+The outcome of appending a single history item from an update request's history batch.
+
+```csharp
+public sealed class AgentInstanceCreatedHistoryItem
+```
+
+| Property         | Type                  | Description                                                                                                                                 |
+| ---------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `HistoryItemId`  | `String`              | The historyItemId of the corresponding item in the request, echoed back so callers can correlate response entries with request items by id. |
+| `HistoryItemKey` | `AgentHistoryItemKey` | The system-generated key for the history item. When isDuplicate is true, this is the key of the original entry, not a new one.              |
+| `IsDuplicate`    | `Boolean`             | True if this item had already been recorded and no new AGENT_HISTORY event was created for it; false if a new event was created.            |
+
 ## AgentInstanceCreationRequest
 
 Request to create a new agent instance.
@@ -1630,11 +1875,12 @@ Request to create a new agent instance.
 public sealed class AgentInstanceCreationRequest
 ```
 
-| Property             | Type                      | Description                                                                                                                                                                 |
-| -------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ElementInstanceKey` | `ElementInstanceKey`      | The key of the AI Agent Sub-process or AI Agent Task element instance. The engine uses this key to infer processInstanceKey, elementId, processDefinitionKey, and tenantId. |
-| `Definition`         | `AgentInstanceDefinition` | Static definition set once at creation.                                                                                                                                     |
-| `Limits`             | `AgentInstanceLimits`     | Limits for the agent execution. When omitted, all limits default to -1 (no limit).                                                                                          |
+| Property             | Type                             | Description                                                                                                                                                                                                                                                                                               |
+| -------------------- | -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ElementInstanceKey` | `ElementInstanceKey`             | The key of the AI Agent Sub-process or AI Agent Task element instance. The engine uses this key to infer processInstanceKey, elementId, processDefinitionKey, and tenantId.                                                                                                                               |
+| `JobKey`             | `JobKey`                         | The key of the job activation during which this creation is being made. A creation must always be attributed to the active job that produced it.                                                                                                                                                          |
+| `JobLease`           | `String`                         | Opaque lease token received from the job activation response. Disambiguates this activation from any other activation of the same job: if the job is later retried, history items submitted under a superseded lease are discarded rather than committed.                                                 |
+| `History`            | `List<AgentInstanceHistoryItem>` | A batch of history items to append to the agent instance's conversation history, in request order. Each created item is echoed back in the response's createdHistory, positionally correlated. Must include a CONFIGURATION item establishing model, provider, and systemPrompt (and, if needed, limits). |
 
 ## AgentInstanceCreationResult
 
@@ -1644,23 +1890,24 @@ Response returned after successfully creating an agent instance.
 public sealed class AgentInstanceCreationResult
 ```
 
-| Property           | Type               | Description                                              |
-| ------------------ | ------------------ | -------------------------------------------------------- |
-| `AgentInstanceKey` | `AgentInstanceKey` | The system-generated key for the created agent instance. |
+| Property           | Type                                    | Description                                                            |
+| ------------------ | --------------------------------------- | ---------------------------------------------------------------------- |
+| `AgentInstanceKey` | `AgentInstanceKey`                      | The system-generated key for the created agent instance.               |
+| `CreatedHistory`   | `List<AgentInstanceCreatedHistoryItem>` | One entry per history item submitted in the request, in request order. |
 
-## AgentInstanceDefinition
+## AgentInstanceDefinitionResult
 
-The static definition of an agent instance, set once at creation.
+The definition of an agent instance. Set at creation, but can change later via a CONFIGURATION history item.
 
 ```csharp
-public sealed class AgentInstanceDefinition
+public sealed class AgentInstanceDefinitionResult
 ```
 
-| Property       | Type     | Description                                           |
-| -------------- | -------- | ----------------------------------------------------- |
-| `Model`        | `String` | The LLM model identifier (for example, gpt-4o).       |
-| `Provider`     | `String` | The LLM provider (for example, openai or anthropic).  |
-| `SystemPrompt` | `String` | The system prompt configured for this agent instance. |
+| Property       | Type                                | Description                                                              |
+| -------------- | ----------------------------------- | ------------------------------------------------------------------------ |
+| `Model`        | `String`                            | The LLM model identifier (for example, gpt-4o).                          |
+| `Provider`     | `String`                            | The LLM provider (for example, openai or anthropic).                     |
+| `SystemPrompt` | `List<AgentInstanceMessageContent>` | The system prompt configured for this agent instance, as content blocks. |
 
 ## AgentInstanceDocumentContent
 
@@ -1685,6 +1932,7 @@ public sealed class AgentInstanceFilter
 | Property                      | Type                                     | Description                                                                                                                                                                                     |
 | ----------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AgentInstanceKey`            | `AgentInstanceKeyFilterProperty`         | The unique key of the agent instance.                                                                                                                                                           |
+| `AgentDefinitionKey`          | `AgentDefinitionKeyFilterProperty`       | The key of the agent definition this agent instance is an instance of.                                                                                                                          |
 | `Status`                      | `AgentInstanceStatusFilterProperty`      | The current status of the agent instance.                                                                                                                                                       |
 | `ElementId`                   | `ElementIdFilterProperty`                | The BPMN element ID of the agent task.                                                                                                                                                          |
 | `ProcessInstanceKey`          | `ProcessInstanceKeyFilterProperty`       | The key of the process instance that owns this agent instance.                                                                                                                                  |
@@ -1741,21 +1989,32 @@ public sealed class AgentInstanceHistoryFilter
 | `Role`               | `AgentInstanceHistoryRoleFilterProperty`         | The role of the history item.                                                                                                                        |
 | `ElementInstanceKey` | `ElementInstanceKeyFilterProperty`               | The key of the element instance under which the history item was produced.                                                                           |
 | `JobKey`             | `JobKeyFilterProperty`                           | The key of the job activation that produced the history item.                                                                                        |
-| `LoopIteration`      | `IntegerFilterProperty`                          | Filter by loopIteration number. A loopIteration is one pass through the agent feedback loop (one LLM call, its tool dispatches, and their results).  |
+| `LoopIteration`      | `IntegerFilterProperty`                          | Filter by loop iteration number.                                                                                                                     |
 | `CommitStatus`       | `AgentInstanceHistoryCommitStatusFilterProperty` | The commit status of the history item. Defaults to COMMITTED only. Include PENDING or DISCARDED explicitly to debug in-flight or failed activations. |
 | `ProducedAt`         | `DateTimeFilterProperty`                         | The timestamp when the history item was produced.                                                                                                    |
 
-## AgentInstanceHistoryItemCreationResult
+## AgentInstanceHistoryItem
 
-Response returned after successfully appending a history item.
+A single history item to append to the agent instance's conversation history, submitted as part of the batch on an agent instance update request.
 
 ```csharp
-public sealed class AgentInstanceHistoryItemCreationResult
+public sealed class AgentInstanceHistoryItem
 ```
 
-| Property         | Type                  | Description                                            |
-| ---------------- | --------------------- | ------------------------------------------------------ |
-| `HistoryItemKey` | `AgentHistoryItemKey` | The system-generated key for the created history item. |
+| Property        | Type                                | Description                                                                                                                                                                                                                                                                                         |
+| --------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `HistoryItemId` | `String`                            | Caller-assigned identifier used to detect and dedupe retries of the same item. For example, when a retried job activation resubmits history items it already sent in an earlier attempt, those items are not rejected; they are flagged via isDuplicate in the response instead. Must be non-blank. |
+| `LoopIteration` | `LoopIterationId`                   | The loop iteration this item belongs to.                                                                                                                                                                                                                                                            |
+| `Role`          | `AgentInstanceHistoryRoleEnum`      | The role of this history item in the conversation.                                                                                                                                                                                                                                                  |
+| `Content`       | `List<AgentInstanceMessageContent>` | The content blocks of this history item.                                                                                                                                                                                                                                                            |
+| `ToolCalls`     | `List<AgentInstanceToolCall>`       | Tool calls associated with this history item. For ASSISTANT items: tool calls dispatched by this LLM response. For TOOL_RESULT items: single-entry array referencing the originating tool call. Omit for USER items.                                                                                |
+| `Metrics`       | `AgentInstanceHistoryItemMetrics`   | Per-call token and latency metrics. Present on ASSISTANT items only.                                                                                                                                                                                                                                |
+| `ProducedAt`    | `DateTimeOffset`                    | The agent-side timestamp of when this message was produced.                                                                                                                                                                                                                                         |
+| `Tools`         | `List<AgentTool>`                   | The complete list of tools available to the agent as of this entry. CONFIGURATION items only; omit for other roles. Omit to leave the tool list unchanged; send an empty array to clear it.                                                                                                         |
+| `Model`         | `String`                            | The LLM model identifier as of this entry. CONFIGURATION items only; omit for other roles.                                                                                                                                                                                                          |
+| `Provider`      | `String`                            | The LLM provider as of this entry. CONFIGURATION items only; omit for other roles.                                                                                                                                                                                                                  |
+| `Limits`        | `AgentInstanceLimits`               | The operational limits as of this entry. CONFIGURATION items only; omit for other roles.                                                                                                                                                                                                            |
+| `SystemPrompt`  | `List<AgentInstanceMessageContent>` | The system prompt, as content blocks, as of this entry. CONFIGURATION items only; omit for other roles. Omit to leave the system prompt unchanged; when present, must be non-empty.                                                                                                                 |
 
 ## AgentInstanceHistoryItemMetrics
 
@@ -1771,26 +2030,6 @@ public sealed class AgentInstanceHistoryItemMetrics
 | `OutputTokens` | `Nullable<Int64>` | Output tokens produced by this LLM call. Null when not provided.             |
 | `DurationMs`   | `Nullable<Int64>` | Wall-clock duration of the LLM call in milliseconds. Null when not provided. |
 
-## AgentInstanceHistoryItemRequest
-
-Request to append a single history item to an agent instance's conversation history.
-
-```csharp
-public sealed class AgentInstanceHistoryItemRequest
-```
-
-| Property             | Type                                | Description                                                                                                                                                                                                                                                         |
-| -------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ElementInstanceKey` | `ElementInstanceKey`                | The key of the currently-active element instance.                                                                                                                                                                                                                   |
-| `JobKey`             | `JobKey`                            | The key of the current job activation during which this history item was produced.                                                                                                                                                                                  |
-| `JobLease`           | `String`                            | Opaque lease token received from the job activation response.                                                                                                                                                                                                       |
-| `LoopIteration`      | `Nullable<LoopIterationId>`         | The loopIteration this item belongs to. A loopIteration is one pass through the agent feedback loop: one LLM call, its tool dispatches, and their results. Omit if not grouping items by loopIteration.                                                             |
-| `Role`               | `AgentInstanceHistoryRoleEnum`      | The role of this history item in the conversation.                                                                                                                                                                                                                  |
-| `Content`            | `List<AgentInstanceMessageContent>` | The content blocks of this history item.                                                                                                                                                                                                                            |
-| `ToolCalls`          | `List<AgentInstanceToolCall>`       | Tool calls associated with this history item. For ASSISTANT items: tool calls dispatched by this LLM response, with arguments populated. For TOOL_RESULT items: single-entry array referencing the originating tool call, with arguments null. Omit for USER items. |
-| `Metrics`            | `AgentInstanceHistoryItemMetrics`   | Per-call token and latency metrics. Present on ASSISTANT items only.                                                                                                                                                                                                |
-| `ProducedAt`         | `DateTimeOffset`                    | The connector-side timestamp of when this message was produced.                                                                                                                                                                                                     |
-
 ## AgentInstanceHistoryItemResult
 
 A single conversation history item belonging to an agent instance.
@@ -1799,20 +2038,26 @@ A single conversation history item belonging to an agent instance.
 public sealed class AgentInstanceHistoryItemResult
 ```
 
-| Property             | Type                                   | Description                                                                                                                                                                                                                                                |
-| -------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `HistoryItemKey`     | `AgentHistoryItemKey`                  | The unique key for this history item. Stable and sortable by creation order.                                                                                                                                                                               |
-| `AgentInstanceKey`   | `AgentInstanceKey`                     | The key of the agent instance this item belongs to.                                                                                                                                                                                                        |
-| `ElementInstanceKey` | `ElementInstanceKey`                   | The key of the AI Agent Task or ad-hoc sub-process element instance under which this item was produced.                                                                                                                                                    |
-| `JobKey`             | `JobKey`                               | The key of the job activation during which this item was produced.                                                                                                                                                                                         |
-| `JobLease`           | `String`                               | The lease token of the activation that produced this item.                                                                                                                                                                                                 |
-| `LoopIteration`      | `Nullable<LoopIterationId>`            | The loopIteration this item belongs to. A loopIteration is one pass through the agent feedback loop: one LLM call, its tool dispatches, and their results. Null if not provided by the connector.                                                          |
-| `Role`               | `AgentInstanceHistoryRoleEnum`         | The role of this history item in the conversation.                                                                                                                                                                                                         |
-| `Content`            | `List<AgentInstanceMessageContent>`    | The content blocks of this history item.                                                                                                                                                                                                                   |
-| `ToolCalls`          | `List<AgentInstanceToolCall>`          | Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches. ASSISTANT items: dispatched tool calls with arguments populated. TOOL_RESULT items: single-entry array referencing the originating tool call (arguments null). |
-| `Metrics`            | `AgentInstanceHistoryItemMetrics`      | Per-call token and latency metrics. Null when metrics were not provided at creation time.                                                                                                                                                                  |
-| `CommitStatus`       | `AgentInstanceHistoryCommitStatusEnum` | The commit status of this history item.                                                                                                                                                                                                                    |
-| `ProducedAt`         | `DateTimeOffset`                       | The connector-side timestamp of when this message was produced.                                                                                                                                                                                            |
+| Property             | Type                                   | Description                                                                                                                                                                                                      |
+| -------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `HistoryItemKey`     | `AgentHistoryItemKey`                  | The unique key for this history item. Stable and sortable by creation order.                                                                                                                                     |
+| `HistoryItemId`      | `String`                               | The client-supplied identifier this item was created with. Empty for items that don't carry one.                                                                                                                 |
+| `AgentInstanceKey`   | `AgentInstanceKey`                     | The key of the agent instance this item belongs to.                                                                                                                                                              |
+| `ElementInstanceKey` | `ElementInstanceKey`                   | The key of the AI Agent Task or ad-hoc sub-process element instance under which this item was produced.                                                                                                          |
+| `JobKey`             | `JobKey`                               | The key of the job activation during which this item was produced.                                                                                                                                               |
+| `JobLease`           | `String`                               | The lease token of the activation that produced this item.                                                                                                                                                       |
+| `LoopIteration`      | `LoopIterationId`                      | The loop iteration this item belongs to.                                                                                                                                                                         |
+| `Role`               | `AgentInstanceHistoryRoleEnum`         | The role of this history item in the conversation.                                                                                                                                                               |
+| `Content`            | `List<AgentInstanceMessageContent>`    | The content blocks of this history item.                                                                                                                                                                         |
+| `ToolCalls`          | `List<AgentInstanceToolCall>`          | Tool calls for this item. Empty for USER items and ASSISTANT items with no tool dispatches. ASSISTANT items: dispatched tool calls. TOOL_RESULT items: single-entry array referencing the originating tool call. |
+| `Metrics`            | `AgentInstanceHistoryItemMetrics`      | Per-call token and latency metrics. Null when metrics were not provided at creation time.                                                                                                                        |
+| `CommitStatus`       | `AgentInstanceHistoryCommitStatusEnum` | The commit status of this history item.                                                                                                                                                                          |
+| `ProducedAt`         | `DateTimeOffset`                       | The agent-side timestamp of when this message was produced.                                                                                                                                                      |
+| `Tools`              | `List<AgentTool>`                      | The complete list of tools available to the agent as of this entry. CONFIGURATION items only; empty for other roles.                                                                                             |
+| `Model`              | `String`                               | The LLM model identifier as of this entry. CONFIGURATION items only; null for other roles.                                                                                                                       |
+| `Provider`           | `String`                               | The LLM provider as of this entry. CONFIGURATION items only; null for other roles.                                                                                                                               |
+| `Limits`             | `AgentInstanceLimits`                  | The operational limits as of this entry. CONFIGURATION items only; -1 on any field means "no limit configured" for other roles.                                                                                  |
+| `SystemPrompt`       | `List<AgentInstanceMessageContent>`    | The system prompt, as content blocks, as of this entry. CONFIGURATION items only; empty for other roles.                                                                                                         |
 
 ## AgentInstanceHistoryRoleExactMatch
 
@@ -1948,21 +2193,6 @@ public sealed class AgentInstanceMetrics
 | `ModelCalls`   | `Int32` | Total number of LLM calls made.                      |
 | `ToolCalls`    | `Int32` | Total number of tool calls made.                     |
 
-## AgentInstanceMetricsDelta
-
-Metric increments to apply to the agent instance aggregate counters. The engine accumulates these deltas into running totals on each UPDATED event. All fields are optional; omit a field to leave the corresponding counter unchanged.
-
-```csharp
-public sealed class AgentInstanceMetricsDelta
-```
-
-| Property       | Type              | Description                                           |
-| -------------- | ----------------- | ----------------------------------------------------- |
-| `InputTokens`  | `Nullable<Int64>` | Increment to apply to the total input token counter.  |
-| `OutputTokens` | `Nullable<Int64>` | Increment to apply to the total output token counter. |
-| `ModelCalls`   | `Nullable<Int32>` | Increment to apply to the total model call counter.   |
-| `ToolCalls`    | `Nullable<Int32>` | Increment to apply to the total tool call counter.    |
-
 ## AgentInstanceObjectContent
 
 An arbitrary structured content block. Accepts any valid JSON value: objects, arrays, numbers, booleans, or strings. Use TEXT content for human-readable natural language; use OBJECT content for machine-readable structured data.
@@ -1983,26 +2213,27 @@ AgentInstanceResult
 public sealed class AgentInstanceResult
 ```
 
-| Property                      | Type                       | Description                                                                                                                  |
-| ----------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `AgentInstanceKey`            | `AgentInstanceKey`         | The unique key for this agent instance.                                                                                      |
-| `Status`                      | `AgentInstanceStatusEnum`  | The current status of an agent instance.                                                                                     |
-| `Definition`                  | `AgentInstanceDefinition`  | The static definition of the agent, including model, provider, and system prompt.                                            |
-| `Metrics`                     | `AgentInstanceMetrics`     | Aggregated metrics across all loopIterations of this agent instance.                                                         |
-| `Limits`                      | `AgentInstanceLimits`      | The configured limits for this agent instance, set once at creation.                                                         |
-| `Tools`                       | `List<AgentTool>`          | The tools available to the agent.                                                                                            |
-| `ElementId`                   | `ElementId`                | The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.                                |
-| `ProcessInstanceKey`          | `ProcessInstanceKey`       | The key of the process instance that owns this agent instance.                                                               |
-| `RootProcessInstanceKey`      | `ProcessInstanceKey`       | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy. |
-| `ProcessDefinitionKey`        | `ProcessDefinitionKey`     | The key of the process definition associated with this agent instance.                                                       |
-| `ProcessDefinitionId`         | `ProcessDefinitionId`      | The BPMN process ID of the process definition associated with this agent instance.                                           |
-| `ProcessDefinitionVersion`    | `Int32`                    | The version of the process definition associated with this agent instance.                                                   |
-| `ProcessDefinitionVersionTag` | `String`                   | The version tag of the process definition associated with this agent instance.                                               |
-| `TenantId`                    | `TenantId`                 | The tenant ID of this agent instance.                                                                                        |
-| `CreationDate`                | `DateTimeOffset`           | The date when this agent instance was created.                                                                               |
-| `LastUpdatedDate`             | `DateTimeOffset`           | The date when this agent instance was last updated.                                                                          |
-| `CompletionDate`              | `Nullable<DateTimeOffset>` | The date when this agent instance completed. Null while the agent is still running.                                          |
-| `ElementInstanceKeys`         | `List<ElementInstanceKey>` | The keys of all element instances associated with this agent instance.                                                       |
+| Property                      | Type                            | Description                                                                                                                                        |
+| ----------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AgentInstanceKey`            | `AgentInstanceKey`              | The unique key for this agent instance.                                                                                                            |
+| `AgentDefinitionKey`          | `AgentDefinitionKey`            | The key of the agent definition this agent instance is an instance of.                                                                             |
+| `Status`                      | `AgentInstanceStatusEnum`       | The current status of an agent instance.                                                                                                           |
+| `Definition`                  | `AgentInstanceDefinitionResult` | The definition of the agent, including model, provider, and system prompt. Set at creation, but can change later via a CONFIGURATION history item. |
+| `Metrics`                     | `AgentInstanceMetrics`          | Aggregated metrics across all loopIterations of this agent instance.                                                                               |
+| `Limits`                      | `AgentInstanceLimits`           | The configured limits for this agent instance, set once at creation.                                                                               |
+| `Tools`                       | `List<AgentTool>`               | The tools available to the agent.                                                                                                                  |
+| `ElementId`                   | `ElementId`                     | The BPMN element ID of the ad-hoc sub-process or AI agent task that owns this agent instance.                                                      |
+| `ProcessInstanceKey`          | `ProcessInstanceKey`            | The key of the process instance that owns this agent instance.                                                                                     |
+| `RootProcessInstanceKey`      | `ProcessInstanceKey`            | The key of the root process instance. The root process instance is the top-level ancestor in the process instance hierarchy.                       |
+| `ProcessDefinitionKey`        | `ProcessDefinitionKey`          | The key of the process definition associated with this agent instance.                                                                             |
+| `ProcessDefinitionId`         | `ProcessDefinitionId`           | The BPMN process ID of the process definition associated with this agent instance.                                                                 |
+| `ProcessDefinitionVersion`    | `Int32`                         | The version of the process definition associated with this agent instance.                                                                         |
+| `ProcessDefinitionVersionTag` | `String`                        | The version tag of the process definition associated with this agent instance.                                                                     |
+| `TenantId`                    | `TenantId`                      | The tenant ID of this agent instance.                                                                                                              |
+| `CreationDate`                | `DateTimeOffset`                | The date when this agent instance was created.                                                                                                     |
+| `LastUpdatedDate`             | `DateTimeOffset`                | The date when this agent instance was last updated.                                                                                                |
+| `CompletionDate`              | `Nullable<DateTimeOffset>`      | The date when this agent instance completed. Null while the agent is still running.                                                                |
+| `ElementInstanceKeys`         | `List<ElementInstanceKey>`      | The keys of all element instances associated with this agent instance.                                                                             |
 
 ## AgentInstanceSearchQuery
 
@@ -2071,7 +2302,7 @@ public sealed class AgentInstanceStatusFilterProperty
 | `Neq`        | `Nullable<AgentInstanceStatusEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<AgentInstanceStatusEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AgentInstanceTextContent
 
@@ -2087,18 +2318,18 @@ public sealed class AgentInstanceTextContent : AgentInstanceMessageContent
 
 ## AgentInstanceToolCall
 
-A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items. ASSISTANT items carry arguments; TOOL_RESULT items carry arguments as null.
+A tool call associated with a history item. Used in both ASSISTANT and TOOL_RESULT items.
 
 ```csharp
 public sealed class AgentInstanceToolCall
 ```
 
-| Property     | Type     | Description                                                                                    |
-| ------------ | -------- | ---------------------------------------------------------------------------------------------- |
-| `ToolCallId` | `String` | The LLM-assigned tool call ID. Correlates ASSISTANT items to their matching TOOL_RESULT items. |
-| `ToolName`   | `String` | The LLM-visible tool name.                                                                     |
-| `ElementId`  | `String` | The BPMN element ID handling this tool.                                                        |
-| `Arguments`  | `Object` | The tool call arguments as provided by the LLM. Null on TOOL_RESULT items.                     |
+| Property     | Type     | Description                                                                                                  |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `ToolCallId` | `String` | The LLM-assigned tool call ID. Correlates ASSISTANT items to their matching TOOL_RESULT items.               |
+| `ToolName`   | `String` | The LLM-visible tool name.                                                                                   |
+| `ElementId`  | `String` | The BPMN element ID handling this tool.                                                                      |
+| `Arguments`  | `Object` | The tool call arguments as provided by the LLM. May be null or populated on any item, including TOOL_RESULT. |
 
 ## AgentInstanceUpdateRequest
 
@@ -2108,12 +2339,25 @@ Request to update the mutable state of an agent instance.
 public sealed class AgentInstanceUpdateRequest
 ```
 
-| Property             | Type                                      | Description                                                                                                                                                                                                                                                                                                                                                               |
-| -------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ElementInstanceKey` | `ElementInstanceKey`                      | The key of the currently-active element instance for this agent instance. Used for ownership/equality validation against the stored agent instance and, when the supplied key differs from the previous association (re-entry of an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys with the reverse link updated on the supplied element instance. |
-| `Status`             | `Nullable<AgentInstanceUpdateStatusEnum>` | The new status of the agent instance.                                                                                                                                                                                                                                                                                                                                     |
-| `Metrics`            | `AgentInstanceMetricsDelta`               | Metric increments to apply to the aggregate counters.                                                                                                                                                                                                                                                                                                                     |
-| `Tools`              | `List<AgentTool>`                         | The complete list of tools available to the agent, replacing any previously stored tools. When provided, the engine replaces the existing tool list with this value.                                                                                                                                                                                                      |
+| Property             | Type                                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| -------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ElementInstanceKey` | `ElementInstanceKey`                      | The key of the currently-active element instance for this agent instance. Used for ownership/equality validation against the stored agent instance and, when the supplied key differs from the previous association (re-entry of an ad-hoc sub-process or AI Agent task), appended to elementInstanceKeys with the reverse link updated on the supplied element instance. Only one element instance may hold this write claim at a time: any update from a different element instance is rejected while the current writer's job is still active. |
+| `Status`             | `Nullable<AgentInstanceUpdateStatusEnum>` | The new status of the agent instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `JobKey`             | `JobKey`                                  | The key of the job activation during which this update is being made. An update must always be attributed to the active job that produced it.                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `JobLease`           | `String`                                  | Opaque lease token received from the job activation response. Disambiguates this activation from any other activation of the same job: if the job is later retried, history items submitted under a superseded lease are discarded rather than committed.                                                                                                                                                                                                                                                                                         |
+| `History`            | `List<AgentInstanceHistoryItem>`          | A batch of history items to append to the agent instance's conversation history, in request order. Each created item is echoed back in the response's createdHistory, positionally correlated.                                                                                                                                                                                                                                                                                                                                                    |
+
+## AgentInstanceUpdateResult
+
+Response returned after successfully updating an agent instance.
+
+```csharp
+public sealed class AgentInstanceUpdateResult
+```
+
+| Property         | Type                                    | Description                                                                                                        |
+| ---------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `CreatedHistory` | `List<AgentInstanceCreatedHistoryItem>` | One entry per history item submitted in the request, in request order. Empty when no history items were submitted. |
 
 ## AgentTool
 
@@ -2164,7 +2408,7 @@ public sealed class AuditLogActorTypeFilterProperty
 | `Neq`        | `Nullable<AuditLogActorTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`               | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<AuditLogActorTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AuditLogEntityKeyExactMatch
 
@@ -2337,7 +2581,7 @@ public sealed class AuditLogResultFilterProperty
 | `Neq`        | `Nullable<AuditLogResultEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`            | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<AuditLogResultEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`         | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`         | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## AuditLogSearchQueryRequest
 
@@ -2546,7 +2790,7 @@ public readonly record struct BackupId : ICamundaLongKey, IEquatable<BackupId>
 
 ## BackupIdPrefix
 
-A prefix of a backup id, followed by a single '\*' as a wildcard, matching any backup id starting with the given prefix.
+A prefix of a backup id, followed by a single '*' as a wildcard, matching any backup id starting with the given prefix.
 
 ```csharp
 public readonly record struct BackupIdPrefix : ICamundaKey, IEquatable<BackupIdPrefix>
@@ -2785,7 +3029,7 @@ public sealed class BatchOperationItemStateFilterProperty
 | `Neq`        | `Nullable<BatchOperationItemStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                     | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<BatchOperationItemStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## BatchOperationResponse
 
@@ -2876,7 +3120,7 @@ public sealed class BatchOperationStateFilterProperty
 | `Neq`        | `Nullable<BatchOperationStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<BatchOperationStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## BatchOperationTypeExactMatch
 
@@ -2905,7 +3149,7 @@ public sealed class BatchOperationTypeFilterProperty
 | `Neq`        | `Nullable<BatchOperationTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<BatchOperationTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## BpmnErrorException
 
@@ -3011,6 +3255,26 @@ public class CamundaSdkException : Exception, ISerializable
 | `OperationId` | `String`          |             |
 | `Status`      | `Nullable<Int32>` |             |
 
+## CamundaTimeProvider
+
+A `TimeProvider` decorator whose `CamundaTimeProvider.GetUtcNow` never moves backwards.
+
+The SDK resolves all runtime cadence — worker poll loops, eventual consistency polling, retry backoff, backpressure decay, and OAuth refresh — through wall-clock time rather than a monotonic source, so that pinning the clock in a test also pins the client's own timing.
+
+Wall clocks can jump backwards (NTP correction, VM suspend and resume, manual adjustment), and a deadline computed against a backwards-moving clock waits longer than it was asked to. A backward step is absorbed and then paid back gradually out of forward progress, so readings never decrease, keep advancing immediately after a jump, and converge back to the underlying clock rather than staying ahead of it forever.
+
+This decorator wraps the live clock only. A test clock such as `FakeTimeProvider` is used as supplied, so a test remains free to move time backwards deliberately.
+
+```csharp
+public sealed class CamundaTimeProvider : TimeProvider
+```
+
+| Property             | Type                  | Description                                                                          |
+| -------------------- | --------------------- | ------------------------------------------------------------------------------------ |
+| `Live`               | `CamundaTimeProvider` | The default live clock: the system clock, made non-decreasing.                       |
+| `LocalTimeZone`      | `TimeZoneInfo`        | Gets the local time zone according to this `TimeProvider`'s notion of time.          |
+| `TimestampFrequency` | `Int64`               | Gets the frequency of `TimeProvider.GetTimestamp` as the number of ticks per second. |
+
 ## CamundaUserResult
 
 CamundaUserResult
@@ -3079,7 +3343,7 @@ public sealed class CategoryFilterProperty
 | `Neq`        | `Nullable<AuditLogCategoryEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`              | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<AuditLogCategoryEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`           | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`           | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## Changeset
 
@@ -3159,6 +3423,93 @@ public sealed class CloudConfigurationResponse
 | -------- | -------- | --------------------------- |
 | `Stage`  | `String` | The cloud deployment stage. |
 
+## ClusterBalanceResponse
+
+The cluster's current per-partition balance state, the running rebalance, and the last completed rebalance.
+
+```csharp
+public sealed class ClusterBalanceResponse
+```
+
+| Property                 | Type                              | Description                                                                                                                                                  |
+| ------------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `State`                  | `ClusterBalanceResponseState`     | The cluster's aggregate balance state as of the time of the request.                                                                                         |
+| `Partitions`             | `List<ClusterRebalancePartition>` | The balance state of each partition as of the time of the request.                                                                                           |
+| `RunningRebalance`       | `ClusterRunningRebalance`         | Normally the rebalance currently running, or absent if no rebalance is running. For a dry-run response, this is instead the unexecuted plan of that dry run. |
+| `LastCompletedRebalance` | `ClusterCompletedRebalance`       | The last completed non-dry-run rebalance this coordinator finished.                                                                                          |
+
+## ClusterBrokerInfo
+
+Provides information on a broker node, independent of any physical tenant.
+
+```csharp
+public sealed class ClusterBrokerInfo
+```
+
+| Property   | Type     | Description                                                                                                                                                                                                                                                   |
+| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BrokerId` | `String` | The unique (within a cluster) broker identifier. When the cluster is not zoned, then it's a string that represents the nodeId (an integer). When the cluster is zoned, instead, it's of the form "$zoneName_$nodeId", providing uniqueness even across zones. |
+| `Host`     | `String` | The hostname for reaching the broker.                                                                                                                                                                                                                         |
+| `Port`     | `Int32`  | The port for reaching the broker.                                                                                                                                                                                                                             |
+| `Version`  | `String` | The broker version.                                                                                                                                                                                                                                           |
+
+## ClusterCompletedRebalance
+
+The last completed rebalance.
+
+```csharp
+public sealed class ClusterCompletedRebalance
+```
+
+| Property      | Type                                       | Description                                                                   |
+| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------- |
+| `RebalanceId` | `Int64`                                    | The ID of this rebalance.                                                     |
+| `Partitions`  | `List<ClusterRebalanceOperationPartition>` | Every partition in the rebalance plan and its progress within this rebalance. |
+| `StartedAt`   | `DateTimeOffset`                           | When this rebalance was created.                                              |
+| `FinishedAt`  | `DateTimeOffset`                           | When this rebalance finished.                                                 |
+| `Result`      | `ClusterCompletedRebalanceResult`          | How the rebalance ended.                                                      |
+
+## ClusterHistoryBackupInfo
+
+A history backup id and what each physical tenant reports for it. No cluster-level state is aggregated from the per-tenant states.
+
+```csharp
+public sealed class ClusterHistoryBackupInfo
+```
+
+| Property          | Type                                   | Description                                                                                                                                                                                                                                                           |
+| ----------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BackupId`        | `BackupId`                             | The id of the backup.                                                                                                                                                                                                                                                 |
+| `PhysicalTenants` | `List<ClusterHistoryBackupTenantInfo>` | What each physical tenant reports for this backup id, ordered by physical tenant id. When looking a backup id up directly, every targeted tenant is listed, including the ones reporting `NOT_FOUND`. Within a listing, only the tenants that hold the id are listed. |
+
+## ClusterHistoryBackupTakeResult
+
+The snapshots scheduled on a single physical tenant. Only successfully scheduled tenants are reported: the request fails as a whole if any targeted tenant could not schedule the backup.
+
+```csharp
+public sealed class ClusterHistoryBackupTakeResult
+```
+
+| Property             | Type           | Description                                                   |
+| -------------------- | -------------- | ------------------------------------------------------------- |
+| `PhysicalTenantId`   | `String`       | The id of the physical tenant.                                |
+| `ScheduledSnapshots` | `List<String>` | The names of the snapshots scheduled on this physical tenant. |
+
+## ClusterHistoryBackupTenantInfo
+
+What a single physical tenant reports for a history backup id.
+
+```csharp
+public sealed class ClusterHistoryBackupTenantInfo
+```
+
+| Property           | Type                              | Description                                                                                                         |
+| ------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `PhysicalTenantId` | `String`                          | The id of the physical tenant.                                                                                      |
+| `State`            | `ClusterHistoryBackupTenantState` | The state of the backup on this physical tenant.                                                                    |
+| `FailureReason`    | `String`                          | Reason for failure if the state is 'FAILED'.                                                                        |
+| `Details`          | `List<HistoryBackupSnapshotInfo>` | Detailed status of the backup per snapshot on this physical tenant. Empty when the tenant does not hold the backup. |
+
 ## ClusterModeChangeOperation
 
 A single operation that is part of a cluster mode change.
@@ -3172,6 +3523,19 @@ public sealed class ClusterModeChangeOperation
 | `Operation` | `String` | The type of the operation.                       |
 | `Mode`      | `String` | The target mode of the operation, if applicable. |
 
+## ClusterModeChangePlannedChange
+
+The operations of a cluster mode change that apply to one physical tenant.
+
+```csharp
+public sealed class ClusterModeChangePlannedChange
+```
+
+| Property           | Type                               | Description                                                                                                                                            |
+| ------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PhysicalTenantId` | `String`                           | The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations. |
+| `Operations`       | `List<ClusterModeChangeOperation>` | The ordered list of operations that will be applied to the physical tenant.                                                                            |
+
 ## ClusterModeChangeResponse
 
 The planned changes resulting from a cluster mode transition request.
@@ -3180,10 +3544,325 @@ The planned changes resulting from a cluster mode transition request.
 public sealed class ClusterModeChangeResponse
 ```
 
-| Property         | Type                               | Description                                                                 |
-| ---------------- | ---------------------------------- | --------------------------------------------------------------------------- |
-| `ChangeId`       | `String`                           | The ID of the cluster change that was triggered by the request.             |
-| `PlannedChanges` | `List<ClusterModeChangeOperation>` | The ordered list of operations that will be applied to complete the change. |
+| Property         | Type                                   | Description                                                                                                                                                                                                   |
+| ---------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ChangeId`       | `String`                               | The ID of the cluster change that was triggered by the request.                                                                                                                                               |
+| `PlannedChanges` | `List<ClusterModeChangePlannedChange>` | The operations that will be applied to complete the change, grouped by the physical tenant they belong to. Groups are transitioned in parallel; the operations within a group are applied in the given order. |
+
+## ClusterRebalance
+
+The fields common to a running and a completed rebalance.
+
+```csharp
+public sealed class ClusterRebalance
+```
+
+| Property      | Type                                       | Description                                                                   |
+| ------------- | ------------------------------------------ | ----------------------------------------------------------------------------- |
+| `RebalanceId` | `Int64`                                    | The ID of this rebalance.                                                     |
+| `Partitions`  | `List<ClusterRebalanceOperationPartition>` | Every partition in the rebalance plan and its progress within this rebalance. |
+| `StartedAt`   | `DateTimeOffset`                           | When this rebalance was created.                                              |
+
+## ClusterRebalanceOperationPartition
+
+One partition's plan, progress, and outcome within a rebalance.
+
+```csharp
+public sealed class ClusterRebalanceOperationPartition
+```
+
+| Property           | Type                                                 | Description                                                                   |
+| ------------------ | ---------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `PartitionId`      | `Int32`                                              | The unique ID of this partition, within its physical tenant.                  |
+| `PhysicalTenantId` | `String`                                             | The partition group this partition belongs to.                                |
+| `CurrentLeader`    | `String`                                             | The leader last observed by this rebalance, or absent if there was no leader. |
+| `DesiredLeader`    | `String`                                             | The leader selected when this rebalance was planned.                          |
+| `Progress`         | `ClusterRebalanceOperationPartitionProgress`         | Where this rebalance has reached for the partition.                           |
+| `Result`           | `Nullable<ClusterRebalanceOperationPartitionResult>` | The terminal outcome, present only when progress is COMPLETED.                |
+
+## ClusterRebalancePartition
+
+One partition's leadership/balance status - its current leader, its desired leader, and whether a rebalance is currently moving it.
+
+```csharp
+public sealed class ClusterRebalancePartition
+```
+
+| Property           | Type                             | Description                                                                                                                               |
+| ------------------ | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `PartitionId`      | `Int32`                          | The unique ID of this partition, within its physical tenant.                                                                              |
+| `PhysicalTenantId` | `String`                         | The partition group this partition belongs to. Partition IDs are unique only within a group, so this is needed to identify the partition. |
+| `CurrentLeader`    | `String`                         | The broker ID currently leading this partition, or absent if it has no leader.                                                            |
+| `DesiredLeader`    | `String`                         | The broker ID the current configuration wants to lead this partition.                                                                     |
+| `State`            | `ClusterRebalancePartitionState` | Whether this partition is being actively transferred, unbalanced, or balanced.                                                            |
+
+## ClusterRebalanceRequest
+
+The settings to run a given rebalance with. Every setting is optional; an absent request body is equivalent to a body with every field absent, and means "use the configured settings".
+
+```csharp
+public sealed class ClusterRebalanceRequest
+```
+
+| Property                  | Type              | Description                                                                                                                                                  |
+| ------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ReplicationLagThreshold` | `Nullable<Int64>` | The highest replication lag (in bytes) that a desired leader may have for its transfer to be accepted.                                                       |
+| `ReplicationTimeout`      | `String`          | How long a partition may stay frozen waiting for its desired leader to catch up (as a positive ISO-8601 duration).                                           |
+| `MaxTransferAttempts`     | `Nullable<Int32>` | How many times a current leader may prompt the desired leader to take over leadership before giving up.                                                      |
+| `LeaderWaitTimeout`       | `String`          | How long the coordinator waits for a partition without a leader to acquire one before reporting `NO_LEADER` and moving on (as a positive ISO-8601 duration). |
+
+## ClusterRestoreAwaitModeChangeOperation
+
+The operation that awaits the transition of a broker to a mode.
+
+```csharp
+public sealed class ClusterRestoreAwaitModeChangeOperation : ClusterRestoreOperation
+```
+
+| Property   | Type     | Description                                                                               |
+| ---------- | -------- | ----------------------------------------------------------------------------------------- |
+| `BrokerId` | `String` | The ID of the broker that applies the operation, including its zone if it belongs to one. |
+| `Mode`     | `String` | The mode the broker is awaited to have transitioned to.                                   |
+
+## ClusterRestoreBrokerOperation
+
+A restore operation that applies to a broker as a whole, such as the one that updates its incarnation number.
+
+```csharp
+public sealed class ClusterRestoreBrokerOperation : ClusterRestoreOperation
+```
+
+| Property   | Type     | Description                                                                               |
+| ---------- | -------- | ----------------------------------------------------------------------------------------- |
+| `BrokerId` | `String` | The ID of the broker that applies the operation, including its zone if it belongs to one. |
+
+## ClusterRestoreModeChangeOperation
+
+The operation that transitions a broker to a mode once its partitions are restored.
+
+```csharp
+public sealed class ClusterRestoreModeChangeOperation : ClusterRestoreOperation
+```
+
+| Property   | Type     | Description                                                                               |
+| ---------- | -------- | ----------------------------------------------------------------------------------------- |
+| `BrokerId` | `String` | The ID of the broker that applies the operation, including its zone if it belongs to one. |
+| `Mode`     | `String` | The mode the broker is transitioned to.                                                   |
+
+## ClusterRestoreOperation
+
+A single operation that is part of a restore. Every operation names the broker that applies it; the rest of its properties depend on what the operation does, so it is reported as one of the variants below, distinguished by `operation`. A property a variant does not declare is absent from the response rather than reported as null.
+
+```csharp
+public abstract class ClusterRestoreOperation
+```
+
+## ClusterRestorePartitionOperation
+
+A restore operation that targets a single partition without restoring it, such as the one that prepares the partition for its restore.
+
+```csharp
+public sealed class ClusterRestorePartitionOperation : ClusterRestoreOperation
+```
+
+| Property      | Type     | Description                                                                               |
+| ------------- | -------- | ----------------------------------------------------------------------------------------- |
+| `BrokerId`    | `String` | The ID of the broker that applies the operation, including its zone if it belongs to one. |
+| `PartitionId` | `Int32`  | The partition the operation applies to.                                                   |
+
+## ClusterRestorePartitionRestoreOperation
+
+The operation that restores a single partition from the backups resolved for it.
+
+```csharp
+public sealed class ClusterRestorePartitionRestoreOperation : ClusterRestoreOperation
+```
+
+| Property      | Type          | Description                                                                               |
+| ------------- | ------------- | ----------------------------------------------------------------------------------------- |
+| `BrokerId`    | `String`      | The ID of the broker that applies the operation, including its zone if it belongs to one. |
+| `PartitionId` | `Int32`       | The partition the operation restores.                                                     |
+| `BackupIds`   | `List<Int64>` | The IDs of the backups the partition is restored from.                                    |
+
+## ClusterRestorePlannedChange
+
+The operations of a restore that apply to one physical tenant.
+
+```csharp
+public sealed class ClusterRestorePlannedChange
+```
+
+| Property           | Type                            | Description                                                                                                                                            |
+| ------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PhysicalTenantId` | `String`                        | The physical tenant the operations apply to; null for operations that are not scoped to a single physical tenant, such as broker lifecycle operations. |
+| `Operations`       | `List<ClusterRestoreOperation>` | The ordered list of operations that will be applied to the physical tenant.                                                                            |
+
+## ClusterRestoreRequest
+
+Describes a restore request issued by a cluster admin. The backup selection at the top level applies to every targeted physical tenant, except for the ones listed in `overrides`.
+
+```csharp
+public sealed class ClusterRestoreRequest
+```
+
+| Property    | Type                                 | Description                                                                                                                                                                                |
+| ----------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Overrides` | `Dictionary<String, RestoreRequest>` | The backup selection to apply to individual physical tenants, keyed by physical tenant id. Only allowed for a cluster-wide restore, that is when no `physicalTenantId` parameter is given. |
+| `From`      | `Nullable<DateTimeOffset>`           | The start of the time range to restore from, as an ISO 8601 timestamp.                                                                                                                     |
+| `To`        | `Nullable<DateTimeOffset>`           | The end of the time range to restore from, as an ISO 8601 timestamp.                                                                                                                       |
+| `BackupIds` | `List<Int64>`                        | The IDs of the backups to restore from, one per partition.                                                                                                                                 |
+
+## ClusterRestoreResponse
+
+The planned changes resulting from a restore request.
+
+```csharp
+public sealed class ClusterRestoreResponse
+```
+
+| Property         | Type                                | Description                                                                                                                                                                                                |
+| ---------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ChangeId`       | `String`                            | The ID of the cluster change that was triggered by the request.                                                                                                                                            |
+| `PlannedChanges` | `List<ClusterRestorePlannedChange>` | The operations that will be applied to complete the restore, grouped by the physical tenant they belong to. Groups are restored in parallel; the operations within a group are applied in the given order. |
+
+## ClusterRunningRebalance
+
+The rebalance currently running.
+
+```csharp
+public sealed class ClusterRunningRebalance
+```
+
+| Property          | Type                                       | Description                                                                   |
+| ----------------- | ------------------------------------------ | ----------------------------------------------------------------------------- |
+| `RebalanceId`     | `Int64`                                    | The ID of this rebalance.                                                     |
+| `Partitions`      | `List<ClusterRebalanceOperationPartition>` | Every partition in the rebalance plan and its progress within this rebalance. |
+| `StartedAt`       | `DateTimeOffset`                           | When this rebalance was created.                                              |
+| `DryRun`          | `Boolean`                                  | Whether this rebalance is a dry run.                                          |
+| `CancelRequested` | `Boolean`                                  | Whether cancellation has been requested.                                      |
+
+## ClusterRuntimeBackupInfo
+
+A runtime backup id, what each physical tenant reports for it, and the state aggregated over every targeted tenant — folded from the per-tenant states by the same rules a per-tenant state is folded from its partitions.
+
+```csharp
+public sealed class ClusterRuntimeBackupInfo
+```
+
+| Property          | Type                                   | Description                                                                                                                                                                                                                                                        |
+| ----------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `BackupId`        | `BackupId`                             | The id of the backup.                                                                                                                                                                                                                                              |
+| `State`           | `StateCode`                            | The state aggregated over every targeted physical tenant, whether the backup id was looked up directly or listed. A tenant holding nothing for this id counts as `DOES_NOT_EXIST`, so the aggregate is `INCOMPLETE` unless every targeted tenant holds the backup. |
+| `FailureReason`   | `String`                               | Reason for failure if the aggregated state is 'FAILED'.                                                                                                                                                                                                            |
+| `PhysicalTenants` | `List<ClusterRuntimeBackupTenantInfo>` | What each physical tenant reports for this backup id, ordered by physical tenant id. Every targeted tenant is listed, including the ones reporting `DOES_NOT_EXIST`.                                                                                               |
+
+## ClusterRuntimeBackupState
+
+The checkpoint and backup state of each physical tenant. Nothing is aggregated across tenants: checkpoint ids and log positions only mean anything within one tenant's partitions.
+
+```csharp
+public sealed class ClusterRuntimeBackupState
+```
+
+| Property          | Type                                    | Description                                                                               |
+| ----------------- | --------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `PhysicalTenants` | `List<ClusterRuntimeBackupTenantState>` | The runtime backup state of each targeted physical tenant, ordered by physical tenant id. |
+
+## ClusterRuntimeBackupTakeResult
+
+Whether one physical tenant's runtime backup was triggered, and under which id it can be monitored and deleted.
+
+```csharp
+public sealed class ClusterRuntimeBackupTakeResult
+```
+
+| Property           | Type                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------ | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PhysicalTenantId` | `String`                          | The id of the physical tenant.                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `BackupId`         | `Nullable<BackupId>`              | The id to monitor or delete this physical tenant's backup by: the id it is running under when `TRIGGERED` — the requested one, or the one the tenant generated when ids are generated — and the requested id to check when `UNKNOWN`. Null when the tenant is known to be running no backup, and also when an `UNKNOWN` tenant generates its own ids, because the id it may be running under was never reported; list that tenant's backups to find it. |
+| `Outcome`          | `ClusterRuntimeBackupTakeOutcome` | What this physical tenant did with the trigger.                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `Reason`           | `String`                          | Why this physical tenant reported no triggered backup. Null when it was triggered.                                                                                                                                                                                                                                                                                                                                                                      |
+
+## ClusterRuntimeBackupTenantInfo
+
+What a single physical tenant reports for a runtime backup id.
+
+```csharp
+public sealed class ClusterRuntimeBackupTenantInfo
+```
+
+| Property           | Type                        | Description                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------ | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PhysicalTenantId` | `String`                    | The id of the physical tenant.                                                                                                                                                                                                                                                                                                                                                      |
+| `State`            | `StateCode`                 | The state of the backup on this physical tenant, aggregated over its partitions.                                                                                                                                                                                                                                                                                                    |
+| `FailureReason`    | `String`                    | Reason for failure if the state is 'FAILED'.                                                                                                                                                                                                                                                                                                                                        |
+| `Details`          | `List<PartitionBackupInfo>` | Detailed status of the backup per partition of this physical tenant. Contains every partition of the tenant when the backup id was looked up directly, including for a tenant that holds no such backup. Empty for a tenant that holds nothing for a listed id: a listing asks each tenant for the backups it has, so there is nothing to report per partition for one it does not. |
+
+## ClusterRuntimeBackupTenantState
+
+The checkpoint and backup state of one physical tenant.
+
+```csharp
+public sealed class ClusterRuntimeBackupTenantState
+```
+
+| Property           | Type                 | Description                                                           |
+| ------------------ | -------------------- | --------------------------------------------------------------------- |
+| `PhysicalTenantId` | `String`             | The id of the physical tenant.                                        |
+| `State`            | `RuntimeBackupState` | The checkpoint and backup state of this physical tenant's partitions. |
+
+## ClusterStatusResponse
+
+The aggregated status of the whole cluster.
+
+```csharp
+public sealed class ClusterStatusResponse
+```
+
+| Property | Type                          | Description                                                                                                                       |
+| -------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `Status` | `ClusterStatusResponseStatus` | `HEALTHY` when every physical tenant is healthy, `DOWN` when no physical tenant can process work, `DEGRADED` in every other case. |
+
+## ClusterTakeHistoryBackupResponse
+
+The snapshots scheduled on every targeted physical tenant. No cluster-level state is aggregated from the per-tenant outcomes.
+
+```csharp
+public sealed class ClusterTakeHistoryBackupResponse
+```
+
+| Property          | Type                                   | Description                                                                   |
+| ----------------- | -------------------------------------- | ----------------------------------------------------------------------------- |
+| `BackupId`        | `BackupId`                             | The id requested for the backup on every targeted physical tenant.            |
+| `PhysicalTenants` | `List<ClusterHistoryBackupTakeResult>` | The outcome for each targeted physical tenant, ordered by physical tenant id. |
+
+## ClusterTakeRuntimeBackupResponse
+
+The outcome of triggering a runtime backup on every targeted physical tenant. Returned both when every tenant was triggered and when only some were, so a partial trigger is never silent: the status code says whether the request succeeded, the body says what is running.
+
+```csharp
+public sealed class ClusterTakeRuntimeBackupResponse
+```
+
+| Property          | Type                                   | Description                                                                                                                                                           |
+| ----------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PhysicalTenants` | `List<ClusterRuntimeBackupTakeResult>` | The outcome for each targeted physical tenant, ordered by physical tenant id. Carries no cluster-level backup id: in generated-id mode each tenant generates its own. |
+
+## ClusterTopologyResponse
+
+The topology of the whole cluster, aggregated over all physical tenants.
+
+```csharp
+public sealed class ClusterTopologyResponse
+```
+
+| Property          | Type                           | Description                                                             |
+| ----------------- | ------------------------------ | ----------------------------------------------------------------------- |
+| `Brokers`         | `List<ClusterBrokerInfo>`      | The brokers that are part of this cluster, across all physical tenants. |
+| `ClusterId`       | `String`                       | The cluster Id.                                                         |
+| `ClusterSize`     | `Int32`                        | The number of brokers in the cluster.                                   |
+| `GatewayVersion`  | `String`                       | The version of the Orchestration Cluster Gateway.                       |
+| `PhysicalTenants` | `List<PhysicalTenantTopology>` | The topology of each physical tenant of this cluster.                   |
 
 ## ClusterVariableKindExactMatch
 
@@ -3212,7 +3891,7 @@ public sealed class ClusterVariableKindFilterProperty
 | `Neq`        | `Nullable<ClusterVariableKindEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                 | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ClusterVariableKindEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`              | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## ClusterVariableName
 
@@ -3286,7 +3965,7 @@ public sealed class ClusterVariableScopeFilterProperty
 | `Neq`        | `Nullable<ClusterVariableScopeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ClusterVariableScopeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## ClusterVariableSearchQueryFilterRequest
 
@@ -3988,7 +4667,7 @@ public sealed class DecisionInstanceStateFilterProperty
 | `Exists`     | `Nullable<Boolean>`                   | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<DecisionInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`      | `List<DecisionInstanceStateEnum>`     | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`       | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## DecisionRequirementsFilter
 
@@ -4125,10 +4804,10 @@ DeleteResourceRequest
 public sealed class DeleteResourceRequest
 ```
 
-| Property             | Type                           | Description                                                                                                                                                                                                                                                                                                                                                            |
-| -------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OperationReference` | `Nullable<OperationReference>` | A reference key chosen by the user that will be part of all records resulting from this operation. Must be > 0 if provided.                                                                                                                                                                                                                                            |
-| `DeleteHistory`      | `Nullable<Boolean>`            | Indicates if the historic data of a process resource should be deleted via a batch operation asynchronously. This flag is only effective for process resources. For other resource types (decisions, forms, generic resources), this flag is ignored and no history will be deleted. In those cases, the `batchOperation` field in the response will not be populated. |
+| Property             | Type                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -------------------- | ------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `OperationReference` | `Nullable<OperationReference>` | A reference key chosen by the user that will be part of all records resulting from this operation. Must be > 0 if provided.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `DeleteHistory`      | `Nullable<Boolean>`            | Indicates if the historic data associated with the resource should also be deleted asynchronously. This flag is effective for process definitions and decision requirements definitions. For other resource types (forms, generic resources) it is ignored and no history is deleted. For a decision requirements definition the `batchOperation` field in the response carries the created batch operation. For a process definition the history is deleted as part of the definition's draining/deletion lifecycle and no batch operation is returned. |
 
 ## DeleteResourceResponse
 
@@ -4138,10 +4817,10 @@ DeleteResourceResponse
 public sealed class DeleteResourceResponse
 ```
 
-| Property         | Type                          | Description                                                                                                                                                                                                                                                                                    |
-| ---------------- | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ResourceKey`    | `ResourceKey`                 | The system-assigned key for this resource, requested to be deleted.                                                                                                                                                                                                                            |
-| `BatchOperation` | `BatchOperationCreatedResult` | The batch operation created for asynchronously deleting the historic data. This field is only populated when the request `deleteHistory` is set to `true` and the resource is a process definition. For other resource types (decisions, forms, generic resources), this field will be `null`. |
+| Property         | Type                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ResourceKey`    | `ResourceKey`                 | The system-assigned key for this resource, requested to be deleted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `BatchOperation` | `BatchOperationCreatedResult` | The batch operation created for asynchronously deleting the historic data. Populated when `deleteHistory` is `true` and either the resource is a decision requirements definition, or the resource is a process definition that is already fully deleted from the runtime state (its history is purged directly by a batch operation). For a process definition that still exists in the runtime state, deletion first drains the definition and its history is removed asynchronously as part of that lifecycle, so no batch operation is returned and this field is `null`. It is also `null` for forms and generic resources. |
 
 ## DeploymentConfigurationResponse
 
@@ -4467,7 +5146,7 @@ public sealed class ElementIdFilterProperty
 | `Exists`     | `Nullable<Boolean>`    | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ElementId>`      | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`      | `List<ElementId>`      | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`       | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## ElementInstanceFilter
 
@@ -4641,7 +5320,7 @@ public sealed class ElementInstanceStateFilterProperty
 | `Neq`        | `Nullable<ElementInstanceStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ElementInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## ElementInstanceWaitStateFilter
 
@@ -4731,6 +5410,22 @@ public readonly record struct EndCursor : ICamundaKey, IEquatable<EndCursor>
 | -------- | -------- | ---------------------------- |
 | `Value`  | `String` | The underlying string value. |
 
+## EngineTimeProvider
+
+A `TimeProvider` bound to the engine's own clock, so client cadence and engine time advance together.
+
+The engine has long been pinnable through `PUT /clock`, and since the injected `TimeProvider` landed the client's cadence is virtualisable too — but the two were separate. Pinning the engine left worker poll loops on their own timeline, so a worker waiting on something that never became ready burned real seconds inside a test that was otherwise deterministic.
+
+This provider closes that. Every delay taken through it — the worker poll loop, eventual-consistency polling, retry backoff, OAuth refresh — moves engine time forward instead of waiting, so cadence drives the engine rather than racing it and a test that would have taken a real minute finishes as fast as the requests complete.
+
+Intended for tests and embedded scenarios that own the engine. Pinning is global to the cluster, so never point one of these at a shared environment, and always `EngineTimeProvider.ResetAsync` when finished.
+
+The target must be a client that is not itself using this provider. HTTP retry backs off on its client's clock, so a self-referential setup would have a failed pin retry through a delay, which issues another pin.
+
+```csharp
+public sealed class EngineTimeProvider : TimeProvider, IDisposable
+```
+
 ## EntityTypeExactMatch
 
 Matches the value exactly.
@@ -4758,7 +5453,7 @@ public sealed class EntityTypeFilterProperty
 | `Neq`        | `Nullable<AuditLogEntityTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<AuditLogEntityTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`             | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## EvaluateConditionalResult
 
@@ -4861,6 +5556,18 @@ public sealed class EventualConsistencyTimeoutException : CamundaSdkException, I
 | ---------- | ------- | ----------- |
 | `WaitedMs` | `Int32` |             |
 
+## ExportingStatusResponse
+
+Response body for the exporting status of a physical tenant.
+
+```csharp
+public sealed class ExportingStatusResponse
+```
+
+| Property | Type                  | Description                                             |
+| -------- | --------------------- | ------------------------------------------------------- |
+| `Status` | `ExportingStatusCode` | The aggregated exporting status of the physical tenant. |
+
 ## ExpressionEvaluationRequest
 
 ExpressionEvaluationRequest
@@ -4884,11 +5591,12 @@ ExpressionEvaluationResult
 public sealed class ExpressionEvaluationResult
 ```
 
-| Property     | Type                                    | Description                                             |
-| ------------ | --------------------------------------- | ------------------------------------------------------- |
-| `Expression` | `String`                                | The evaluated expression                                |
-| `Result`     | `Object`                                | The result value. Its type can vary.                    |
-| `Warnings`   | `List<ExpressionEvaluationWarningItem>` | List of warnings generated during expression evaluation |
+| Property            | Type                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Expression`        | `String`                                | The evaluated expression                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `Result`            | `Object`                                | The result value. Its type can vary.                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `Warnings`          | `List<ExpressionEvaluationWarningItem>` | List of warnings generated during expression evaluation                                                                                                                                                                                                                                                                                                                                                                                          |
+| `ReferencedSecrets` | `List<ExpressionSecretReferenceItem>`   | The secret references resolved from trusted sources while evaluating the expression: a `camunda.secrets.` reference used directly in the expression, or a reference carried by a `SECRET_REFERENCE`-kind cluster variable the expression read. References appearing only in request-body variables or plain cluster variables are excluded. Callers use this to know which `camunda.secrets.` occurrences in the result they may safely resolve. |
 
 ## ExpressionEvaluationWarningItem
 
@@ -4901,6 +5609,19 @@ public sealed class ExpressionEvaluationWarningItem
 | Property  | Type     | Description         |
 | --------- | -------- | ------------------- |
 | `Message` | `String` | The warning message |
+
+## ExpressionSecretReferenceItem
+
+ExpressionSecretReferenceItem
+
+```csharp
+public sealed class ExpressionSecretReferenceItem
+```
+
+| Property     | Type     | Description                                                         |
+| ------------ | -------- | ------------------------------------------------------------------- |
+| `StoreId`    | `String` | The identifier of the secret store that holds the referenced secret |
+| `SecretName` | `String` | The secret name, e.g. "token" for "camunda.secrets.token"           |
 
 ## ExtendedDeploymentResponse
 
@@ -5048,7 +5769,7 @@ public sealed class GlobalListenerSourceFilterProperty
 | `Neq`        | `Nullable<GlobalListenerSourceEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<GlobalListenerSourceEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## GlobalTaskListenerBase
 
@@ -5093,7 +5814,7 @@ public sealed class GlobalTaskListenerEventTypeFilterProperty
 | `Neq`        | `Nullable<GlobalTaskListenerEventTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                         | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<GlobalTaskListenerEventTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`                      | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`                      | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## GlobalTaskListenerResult
 
@@ -5433,6 +6154,47 @@ public sealed class GroupUserSearchResult
 | `Items`  | `List<GroupUserResult>`   | The matching members.                            |
 | `Page`   | `SearchQueryPageResponse` | Pagination information about the search results. |
 
+## HistoryBackupInfo
+
+Detailed status of a history backup. The aggregated state is computed from the state of each of its snapshots as:
+
+- If every expected snapshot exists and all are complete, the overall state is
+
+'COMPLETED'.
+
+- If one snapshot failed or is partial, the overall state is 'FAILED'.
+- Otherwise, if one snapshot is incompatible, the overall state is 'INCOMPATIBLE'.
+- Otherwise, if one snapshot is still running, the overall state is 'IN_PROGRESS'.
+- Otherwise, if snapshots are missing and the backup has not progressed within the
+
+configured timeout, the overall state is 'INCOMPLETE'.
+
+```csharp
+public sealed class HistoryBackupInfo
+```
+
+| Property        | Type                              | Description                                                                                                                                                                       |
+| --------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BackupId`      | `BackupId`                        | The id of the backup.                                                                                                                                                             |
+| `State`         | `HistoryBackupStateCode`          | The aggregated state of the backup.                                                                                                                                               |
+| `FailureReason` | `String`                          | Reason for failure if the state is 'FAILED'.                                                                                                                                      |
+| `Details`       | `List<HistoryBackupSnapshotInfo>` | Detailed status of the backup per snapshot. Always lists every snapshot found for the backup; when the backup was read without snapshot detail, each entry carries only its name. |
+
+## HistoryBackupSnapshotInfo
+
+Detailed info of a single snapshot making up a history backup.
+
+```csharp
+public sealed class HistoryBackupSnapshotInfo
+```
+
+| Property       | Type                       | Description                                                                                                                                                                                                                                                                            |
+| -------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `SnapshotName` | `String`                   | The name of the snapshot.                                                                                                                                                                                                                                                              |
+| `State`        | `String`                   | The state of the snapshot, reported verbatim by the secondary storage (for example 'SUCCESS', 'IN_PROGRESS' or 'PARTIAL'). Deliberately not a closed set: Elasticsearch and OpenSearch report different vocabularies. Not reported when the backup was listed without snapshot detail. |
+| `StartTime`    | `Nullable<DateTimeOffset>` | The timestamp at which the snapshot was started. Not reported when the backup was listed without snapshot detail.                                                                                                                                                                      |
+| `Failures`     | `List<String>`             | The failures reported for this snapshot. Empty if there were none.                                                                                                                                                                                                                     |
+
 ## HttpSdkException
 
 HTTP-specific SDK error with RFC 7807 Problem Details.
@@ -5474,6 +6236,16 @@ public interface ICamundaLongKey
 | Property | Type    | Description                |
 | -------- | ------- | -------------------------- |
 | `Value`  | `Int64` | The underlying long value. |
+
+## IEngineClockTarget
+
+The engine clock operations `EngineTimeProvider` drives.
+
+Declared as an interface so the provider does not depend on the generated client surface; `CamundaClient` implements it with its existing methods.
+
+```csharp
+public interface IEngineClockTarget
+```
 
 ## ITenantIdSettable
 
@@ -5519,7 +6291,7 @@ public sealed class IncidentErrorTypeFilterProperty
 | `Exists`     | `Nullable<Boolean>`               | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<IncidentErrorTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`      | `List<IncidentErrorTypeEnum>`     | Checks if the property does not match any of the provided values.                                                                                                                                                                                         |
-| `Like`       | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`            | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## IncidentFilter
 
@@ -5770,7 +6542,7 @@ public sealed class IncidentStateFilterProperty
 | `Exists`     | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<IncidentStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`      | `List<IncidentStateEnum>`     | Checks if the property does not match any of the provided values.                                                                                                                                                                                         |
-| `Like`       | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## InferredAncestorKeyInstruction
 
@@ -6079,7 +6851,7 @@ public sealed class JobKindFilterProperty
 | `Neq`        | `Nullable<JobKindEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`     | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<JobKindEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`  | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## JobListenerEventTypeExactMatch
 
@@ -6108,7 +6880,7 @@ public sealed class JobListenerEventTypeFilterProperty
 | `Neq`        | `Nullable<JobListenerEventTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<JobListenerEventTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## JobMetricsConfigurationResponse
 
@@ -6202,7 +6974,7 @@ public sealed class JobResultUserTask : JobResult
 | -------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Denied`       | `Nullable<Boolean>`    | Indicates whether the worker denies the work, i.e. explicitly doesn't approve it. For example, a user task listener can deny the completion of a task by setting this flag to true. In this example, the completion of a task is represented by a job that the worker can complete as denied. As a result, the completion request is rejected and the task remains active. Defaults to false.                                                                                                                                                                                            |
 | `DeniedReason` | `String`               | The reason provided by the user task listener for denying the work.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `Corrections`  | `JobResultCorrections` | JSON object with attributes that were corrected by the worker. The following attributes can be corrected, additional attributes will be ignored: _ `assignee` - clear by providing an empty String _ `dueDate` - clear by providing an empty String _ `followUpDate` - clear by providing an empty String _ `candidateGroups` - clear by providing an empty list _ `candidateUsers` - clear by providing an empty list _ `priority` - minimum 0, maximum 100, default 50 Providing any of those attributes with a `null` value or omitting it preserves the persisted attribute's value. |
+| `Corrections`  | `JobResultCorrections` | JSON object with attributes that were corrected by the worker. The following attributes can be corrected, additional attributes will be ignored: * `assignee` - clear by providing an empty String * `dueDate` - clear by providing an empty String * `followUpDate` - clear by providing an empty String * `candidateGroups` - clear by providing an empty list * `candidateUsers` - clear by providing an empty list * `priority` - minimum 0, maximum 100, default 50 Providing any of those attributes with a `null` value or omitting it preserves the persisted attribute's value. |
 
 ## JobSearchQuery
 
@@ -6308,7 +7080,7 @@ public sealed class JobStateFilterProperty
 | `Neq`        | `Nullable<JobStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`      | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<JobStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`   | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`   | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## JobTimeSeriesStatisticsFilter
 
@@ -6571,7 +7343,7 @@ public sealed class LimitPagination : SearchQueryPageRequest
 
 ## LoopIterationId
 
-A client-provided sequential integer identifying one pass through the agent feedback loop: one LLM call, its tool dispatches, and their results. Must be a positive integer, increasing with each loopIteration. Established by the connector when appending the first history item of a loopIteration.
+A client-provided sequential integer identifying a loop iteration: one pass through an AI agent's loop, during which the model reasons, selects tools, evaluates the result, and decides whether to continue. One iteration covers the input for the LLM call, the call itself, and the tools it dispatches; the results of those tool calls are input to the next iteration. Must be a positive integer, increasing with each loopIteration. Established by the connector when appending the first history item of a loopIteration.
 
 ```csharp
 public readonly record struct LoopIterationId : ICamundaLongKey, IEquatable<LoopIterationId>
@@ -6652,7 +7424,7 @@ public sealed class MappingRuleFilter
 | --------------- | ------------------------- | ---------------------------------------- |
 | `ClaimName`     | `String`                  | The claim name to match against a token. |
 | `ClaimValue`    | `String`                  | The value of the claim to match.         |
-| `Name`          | `String`                  | The name of the mapping rule.            |
+| `Name`          | `StringFilterProperty`    | The name of the mapping rule.            |
 | `MappingRuleId` | `Nullable<MappingRuleId>` | The ID of the mapping rule.              |
 
 ## MappingRuleId
@@ -6834,24 +7606,25 @@ Message subscription search filter.
 public sealed class MessageSubscriptionFilter
 ```
 
-| Property                   | Type                                     | Description                                                                                                                                                                   |
-| -------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `MessageSubscriptionKey`   | `MessageSubscriptionKeyFilterProperty`   | The message subscription key associated with this message subscription.                                                                                                       |
-| `ProcessDefinitionKey`     | `ProcessDefinitionKeyFilterProperty`     | The process definition key associated with this correlated message subscription. This only works for data created with 8.9 and later.                                         |
-| `ProcessDefinitionId`      | `StringFilterProperty`                   | The process definition ID associated with this message subscription.                                                                                                          |
-| `ProcessInstanceKey`       | `ProcessInstanceKeyFilterProperty`       | The process instance key associated with this message subscription.                                                                                                           |
-| `ElementId`                | `StringFilterProperty`                   | The element ID associated with this message subscription.                                                                                                                     |
-| `ElementInstanceKey`       | `ElementInstanceKeyFilterProperty`       | The element instance key associated with this message subscription.                                                                                                           |
-| `MessageSubscriptionState` | `MessageSubscriptionStateFilterProperty` | The message subscription state.                                                                                                                                               |
-| `LastUpdatedDate`          | `DateTimeFilterProperty`                 | The last updated date of the message subscription.                                                                                                                            |
-| `MessageName`              | `StringFilterProperty`                   | The name of the message associated with the message subscription.                                                                                                             |
-| `CorrelationKey`           | `StringFilterProperty`                   | The correlation key of the message subscription.                                                                                                                              |
-| `TenantId`                 | `StringFilterProperty`                   | The unique external tenant ID.                                                                                                                                                |
-| `MessageSubscriptionType`  | `MessageSubscriptionTypeFilterProperty`  | The type of message subscription to filter by. When omitted, both `START_EVENT` and `PROCESS_EVENT` are returned. Only available for data created with Camunda 8.10 or later. |
-| `ProcessDefinitionName`    | `StringFilterProperty`                   | The name of the process definition associated with this message subscription.                                                                                                 |
-| `ProcessDefinitionVersion` | `IntegerFilterProperty`                  | The version of the process definition associated with this message subscription.                                                                                              |
-| `ToolName`                 | `StringFilterProperty`                   | Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property.                                                                                                 |
-| `InboundConnectorType`     | `StringFilterProperty`                   | Filter by inbound connector type extracted from the `inbound.type` zeebe:property.                                                                                            |
+| Property                   | Type                                     | Description                                                                                                                                                                               |
+| -------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BusinessId`               | `StringFilterProperty`                   | Filter by the business id inherited from the subscribing process instance when the subscription was opened. Supports advanced string filtering, including `$like` with `*`/`?` wildcards. |
+| `MessageSubscriptionKey`   | `MessageSubscriptionKeyFilterProperty`   | The message subscription key associated with this message subscription.                                                                                                                   |
+| `ProcessDefinitionKey`     | `ProcessDefinitionKeyFilterProperty`     | The process definition key associated with this correlated message subscription. This only works for data created with 8.9 and later.                                                     |
+| `ProcessDefinitionId`      | `StringFilterProperty`                   | The process definition ID associated with this message subscription.                                                                                                                      |
+| `ProcessInstanceKey`       | `ProcessInstanceKeyFilterProperty`       | The process instance key associated with this message subscription.                                                                                                                       |
+| `ElementId`                | `StringFilterProperty`                   | The element ID associated with this message subscription.                                                                                                                                 |
+| `ElementInstanceKey`       | `ElementInstanceKeyFilterProperty`       | The element instance key associated with this message subscription.                                                                                                                       |
+| `MessageSubscriptionState` | `MessageSubscriptionStateFilterProperty` | The message subscription state.                                                                                                                                                           |
+| `LastUpdatedDate`          | `DateTimeFilterProperty`                 | The last updated date of the message subscription.                                                                                                                                        |
+| `MessageName`              | `StringFilterProperty`                   | The name of the message associated with the message subscription.                                                                                                                         |
+| `CorrelationKey`           | `StringFilterProperty`                   | The correlation key of the message subscription.                                                                                                                                          |
+| `TenantId`                 | `StringFilterProperty`                   | The unique external tenant ID.                                                                                                                                                            |
+| `MessageSubscriptionType`  | `MessageSubscriptionTypeFilterProperty`  | The type of message subscription to filter by. When omitted, both `START_EVENT` and `PROCESS_EVENT` are returned. Only available for data created with Camunda 8.10 or later.             |
+| `ProcessDefinitionName`    | `StringFilterProperty`                   | The name of the process definition associated with this message subscription.                                                                                                             |
+| `ProcessDefinitionVersion` | `IntegerFilterProperty`                  | The version of the process definition associated with this message subscription.                                                                                                          |
+| `ToolName`                 | `StringFilterProperty`                   | Filter by tool name extracted from the `io.camunda.tool:name` zeebe:property.                                                                                                             |
+| `InboundConnectorType`     | `StringFilterProperty`                   | Filter by inbound connector type extracted from the `inbound.type` zeebe:property.                                                                                                        |
 
 ## MessageSubscriptionKeyExactMatch
 
@@ -6892,6 +7665,7 @@ public sealed class MessageSubscriptionResult
 
 | Property                   | Type                             | Description                                                                                                                                                                                                                                                                                                                      |
 | -------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `BusinessId`               | `Nullable<BusinessId>`           | The business id inherited from the subscribing process instance when this message subscription was opened. It is `null` when the process instance has no business id, and for message start event subscriptions, which are not tied to a process instance.                                                                       |
 | `MessageSubscriptionKey`   | `MessageSubscriptionKey`         | The message subscription key associated with this message subscription.                                                                                                                                                                                                                                                          |
 | `ProcessDefinitionId`      | `ProcessDefinitionId`            | The process definition ID associated with this message subscription.                                                                                                                                                                                                                                                             |
 | `ProcessDefinitionKey`     | `Nullable<ProcessDefinitionKey>` | The process definition key associated with this message subscription.                                                                                                                                                                                                                                                            |
@@ -6978,7 +7752,7 @@ public sealed class MessageSubscriptionStateFilterProperty
 | `Neq`        | `Nullable<MessageSubscriptionStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                      | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<MessageSubscriptionStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`                   | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`                   | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## MessageSubscriptionTypeExactMatch
 
@@ -7007,7 +7781,7 @@ public sealed class MessageSubscriptionTypeFilterProperty
 | `Neq`        | `Nullable<MessageSubscriptionTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                     | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<MessageSubscriptionTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`                  | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## MessageWaitStateDetails
 
@@ -7100,7 +7874,21 @@ public sealed class OperationTypeFilterProperty
 | `Neq`        | `Nullable<AuditLogOperationTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                   | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<AuditLogOperationTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`                | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+
+## OwnAuthorizationSearchResult
+
+OwnAuthorizationSearchResult
+
+```csharp
+public sealed class OwnAuthorizationSearchResult
+```
+
+| Property                | Type                        | Description                                                         |
+| ----------------------- | --------------------------- | ------------------------------------------------------------------- |
+| `AuthorizationsEnabled` | `Boolean`                   | Indicates whether authorization checks are enabled for the cluster. |
+| `Items`                 | `List<AuthorizationResult>` | The matching authorizations.                                        |
+| `Page`                  | `SearchQueryPageResponse`   | Pagination information about the search results.                    |
 
 ## Partition
 
@@ -7197,6 +7985,35 @@ public readonly record struct PartitionId : ICamundaLongKey, IEquatable<Partitio
 | -------- | ------- | -------------------------- |
 | `Value`  | `Int64` | The underlying long value. |
 
+## PhysicalTenantBrokerTopology
+
+The partitions of one physical tenant that one broker manages or replicates.
+
+```csharp
+public sealed class PhysicalTenantBrokerTopology
+```
+
+| Property     | Type              | Description                                                                                           |
+| ------------ | ----------------- | ----------------------------------------------------------------------------------------------------- |
+| `BrokerId`   | `String`          | The unique (within a cluster) identifier of the broker, as reported in the cluster-level broker list. |
+| `Partitions` | `List<Partition>` | The partitions of this physical tenant managed or replicated on this broker.                          |
+
+## PhysicalTenantTopology
+
+The topology of a single physical tenant.
+
+```csharp
+public sealed class PhysicalTenantTopology
+```
+
+| Property                | Type                                 | Description                                                  |
+| ----------------------- | ------------------------------------ | ------------------------------------------------------------ |
+| `PhysicalTenantId`      | `String`                             | The id of the physical tenant.                               |
+| `PartitionsCount`       | `Int32`                              | The number of partitions spread across this physical tenant. |
+| `ReplicationFactor`     | `Int32`                              | The configured replication factor for this physical tenant.  |
+| `LastCompletedChangeId` | `String`                             | ID of the last completed change of this physical tenant.     |
+| `Brokers`               | `List<PhysicalTenantBrokerTopology>` | The brokers holding partitions of this physical tenant.      |
+
 ## ProblemDetail
 
 A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.
@@ -7245,18 +8062,18 @@ Process definition search filter.
 public sealed class ProcessDefinitionFilter
 ```
 
-| Property               | Type                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ---------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Name`                 | `StringFilterProperty`                   | Name of this process definition.                                                                                                                                                                                                                                                                                                                                                                             |
-| `IsLatestVersion`      | `Nullable<Boolean>`                      | Whether to only return the latest version of each process definition. When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`. The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`. When using this filter, sorting is limited to `processDefinitionId` and `tenantId` fields only. |
-| `ResourceName`         | `String`                                 | Resource name of this process definition.                                                                                                                                                                                                                                                                                                                                                                    |
-| `Version`              | `Nullable<Int32>`                        | Version of this process definition.                                                                                                                                                                                                                                                                                                                                                                          |
-| `VersionTag`           | `String`                                 | Version tag of this process definition.                                                                                                                                                                                                                                                                                                                                                                      |
-| `ProcessDefinitionId`  | `StringFilterProperty`                   | Process definition ID of this process definition.                                                                                                                                                                                                                                                                                                                                                            |
-| `TenantId`             | `Nullable<TenantId>`                     | Tenant ID of this process definition.                                                                                                                                                                                                                                                                                                                                                                        |
-| `ProcessDefinitionKey` | `Nullable<ProcessDefinitionKey>`         | The key for this process definition.                                                                                                                                                                                                                                                                                                                                                                         |
-| `HasStartForm`         | `Nullable<Boolean>`                      | Indicates whether the start event of the process has an associated Form Key.                                                                                                                                                                                                                                                                                                                                 |
-| `State`                | `Nullable<ProcessDefinitionFilterState>` | Filter by the process definition's state. When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude deleted definitions (recommended for most use cases). Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage.                                                                                                      |
+| Property               | Type                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ---------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Name`                 | `StringFilterProperty`                   | Name of this process definition.                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `IsLatestVersion`      | `Nullable<Boolean>`                      | Whether to only return the latest version of each process definition. When using this filter, pagination functionality is limited, you can only paginate forward using `after` and `limit`. The response contains no `startCursor` in the `page`, and requests ignore the `from` and `before` in the `page`. When using this filter, sorting is limited to `processDefinitionId` and `tenantId` fields only.                               |
+| `ResourceName`         | `String`                                 | Resource name of this process definition.                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `Version`              | `Nullable<Int32>`                        | Version of this process definition.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `VersionTag`           | `String`                                 | Version tag of this process definition.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `ProcessDefinitionId`  | `StringFilterProperty`                   | Process definition ID of this process definition.                                                                                                                                                                                                                                                                                                                                                                                          |
+| `TenantId`             | `Nullable<TenantId>`                     | Tenant ID of this process definition.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `ProcessDefinitionKey` | `Nullable<ProcessDefinitionKey>`         | The key for this process definition.                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `HasStartForm`         | `Nullable<Boolean>`                      | Indicates whether the start event of the process has an associated Form Key.                                                                                                                                                                                                                                                                                                                                                               |
+| `State`                | `Nullable<ProcessDefinitionFilterState>` | Filter by the process definition's state. When not set, process definitions in any state are returned. Set to `ACTIVE` to exclude draining and deleted definitions (recommended for most use cases). Set to `DRAINING` to return only definitions that are being deleted but still have active process instances draining. Set to `DELETED` to return only definitions that have been deleted but are still retained in secondary storage. |
 
 ## ProcessDefinitionId
 
@@ -7298,7 +8115,7 @@ public sealed class ProcessDefinitionIdFilterProperty
 | `Exists`     | `Nullable<Boolean>`             | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ProcessDefinitionId>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`      | `List<ProcessDefinitionId>`     | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`       | `Nullable<LikeFilter>`          | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`          | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## ProcessDefinitionInstanceStatisticsQuery
 
@@ -7506,17 +8323,17 @@ ProcessDefinitionResult
 public sealed class ProcessDefinitionResult
 ```
 
-| Property               | Type                           | Description                                                                  |
-| ---------------------- | ------------------------------ | ---------------------------------------------------------------------------- |
-| `Name`                 | `String`                       | Name of this process definition.                                             |
-| `ResourceName`         | `String`                       | Resource name for this process definition.                                   |
-| `Version`              | `Int32`                        | Version of this process definition.                                          |
-| `VersionTag`           | `String`                       | Version tag of this process definition.                                      |
-| `ProcessDefinitionId`  | `ProcessDefinitionId`          | Process definition ID of this process definition.                            |
-| `TenantId`             | `TenantId`                     | Tenant ID of this process definition.                                        |
-| `ProcessDefinitionKey` | `ProcessDefinitionKey`         | The key for this process definition.                                         |
-| `HasStartForm`         | `Boolean`                      | Indicates whether the start event of the process has an associated Form Key. |
-| `State`                | `ProcessDefinitionResultState` | The state of this process definition.                                        |
+| Property               | Type                           | Description                                                                                                                                                      |
+| ---------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Name`                 | `String`                       | Name of this process definition.                                                                                                                                 |
+| `ResourceName`         | `String`                       | Resource name for this process definition.                                                                                                                       |
+| `Version`              | `Int32`                        | Version of this process definition.                                                                                                                              |
+| `VersionTag`           | `String`                       | Version tag of this process definition.                                                                                                                          |
+| `ProcessDefinitionId`  | `ProcessDefinitionId`          | Process definition ID of this process definition.                                                                                                                |
+| `TenantId`             | `TenantId`                     | Tenant ID of this process definition.                                                                                                                            |
+| `ProcessDefinitionKey` | `ProcessDefinitionKey`         | The key for this process definition.                                                                                                                             |
+| `HasStartForm`         | `Boolean`                      | Indicates whether the start event of the process has an associated Form Key.                                                                                     |
+| `State`                | `ProcessDefinitionResultState` | The state of this process definition. `DRAINING` indicates the definition is being deleted but still has active process instances draining before it is removed. |
 
 ## ProcessDefinitionSearchQuery
 
@@ -8216,7 +9033,7 @@ public sealed class ProcessInstanceStateFilterProperty
 | `Neq`        | `Nullable<ProcessInstanceStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<ProcessInstanceStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## ProcessInstanceSuspensionBatchOperationRequest
 
@@ -8255,6 +9072,18 @@ public sealed class ProcessInstanceWaitStateStatisticsResult
 | -------------- | ----------- | -------------------------------------------------------- |
 | `ElementId`    | `ElementId` | The element id for which the wait states are aggregated. |
 | `WaitingCount` | `Int64`     | The total number of waiting instances of the element.    |
+
+## RebalanceCancellationResponse
+
+Response to a rebalance cancellation request.
+
+```csharp
+public sealed class RebalanceCancellationResponse
+```
+
+| Property     | Type      | Description                            |
+| ------------ | --------- | -------------------------------------- |
+| `WasRunning` | `Boolean` | Whether there was a rebalance to stop. |
 
 ## ResolvedSecret
 
@@ -8373,6 +9202,36 @@ public sealed class ResourceSearchQuerySortRequest
 | `Field`  | `ResourceSearchQuerySortRequestField` | The field to sort by.                         |
 | `Order`  | `Nullable<SortOrderEnum>`             | The order in which to sort the related field. |
 
+## RestoreBrokerStatus
+
+The restore status of a single broker.
+
+```csharp
+public sealed class RestoreBrokerStatus
+```
+
+| Property              | Type                           | Description                                                           |
+| --------------------- | ------------------------------ | --------------------------------------------------------------------- |
+| `BrokerId`            | `String`                       | The ID of the broker, including its zone if it belongs to one.        |
+| `PartitionsRestored`  | `Int32`                        | The number of the broker's partitions that have been restored so far. |
+| `PartitionsToRestore` | `Int32`                        | The total number of the broker's partitions to restore.               |
+| `Partitions`          | `List<RestorePartitionStatus>` | The per-partition restore status for this broker.                     |
+
+## RestorePartitionStatus
+
+The restore status of a single partition on a broker.
+
+```csharp
+public sealed class RestorePartitionStatus
+```
+
+| Property      | Type                          | Description                                                                                                   |
+| ------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `PartitionId` | `Int32`                       | The ID of the partition.                                                                                      |
+| `State`       | `RestorePartitionStatusState` | The restore state of the partition.                                                                           |
+| `BackupIds`   | `List<Int64>`                 | The IDs of the backups this partition is restored from.                                                       |
+| `CompletedAt` | `Nullable<DateTimeOffset>`    | The time the partition was restored, as an ISO 8601 timestamp; null unless the partition state is `RESTORED`. |
+
 ## RestoreRequest
 
 Describes a restore request. Provide either a list of backup IDs or a time range (`from`/`to`) that selects the backups to restore; the two are mutually exclusive.
@@ -8386,6 +9245,21 @@ public sealed class RestoreRequest
 | `From`      | `Nullable<DateTimeOffset>` | The start of the time range to restore from, as an ISO 8601 timestamp. |
 | `To`        | `Nullable<DateTimeOffset>` | The end of the time range to restore from, as an ISO 8601 timestamp.   |
 | `BackupIds` | `List<Int64>`              | The IDs of the backups to restore from, one per partition.             |
+
+## RestoreStatusResponse
+
+The status of the restore that is currently in progress.
+
+```csharp
+public sealed class RestoreStatusResponse
+```
+
+| Property    | Type                          | Description                                             |
+| ----------- | ----------------------------- | ------------------------------------------------------- |
+| `Status`    | `RestoreStatusResponseStatus` | The overall status of the restore.                      |
+| `ChangeId`  | `String`                      | The ID of the cluster change that performs the restore. |
+| `StartedAt` | `Nullable<DateTimeOffset>`    | The time the restore started, as an ISO 8601 timestamp. |
+| `Brokers`   | `List<RestoreBrokerStatus>`   | The per-broker restore status.                          |
 
 ## ResumeProcessInstanceRequest
 
@@ -8497,10 +9371,10 @@ Role filter request
 public sealed class RoleFilter
 ```
 
-| Property | Type               | Description                   |
-| -------- | ------------------ | ----------------------------- |
-| `RoleId` | `Nullable<RoleId>` | The role ID search filters.   |
-| `Name`   | `String`           | The role name search filters. |
+| Property | Type                   | Description                   |
+| -------- | ---------------------- | ----------------------------- |
+| `RoleId` | `Nullable<RoleId>`     | The role ID search filters.   |
+| `Name`   | `StringFilterProperty` | The role name search filters. |
 
 ## RoleGroupResult
 
@@ -8812,7 +9686,7 @@ public sealed class SecretListRequest
 
 The secret references the caller is authorized to see.
 
-Unbounded for now: Phase 1's backend is mocked with at most 3 references. Pagination is expected to land here before GA, once a real secret store can return a tenant's full enumeration in one response. This is an alpha endpoint, so that is not yet a breaking-contract concern.
+Unbounded for now: the response carries the configured stores' full enumeration for the physical tenant. Pagination is expected to land here before GA. This is an alpha endpoint, so that is not yet a breaking-contract concern.
 
 ```csharp
 public sealed class SecretListResult
@@ -8830,11 +9704,11 @@ SecretResolutionError
 public sealed class SecretResolutionError
 ```
 
-| Property    | Type              | Description                                                                                                                                                                                                                     |
-| ----------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Reference` | `String`          | The secret reference that could not be resolved.                                                                                                                                                                                |
-| `Code`      | `SecretErrorCode` | The typed reason a reference could not be resolved. - `NOT_FOUND`: no secret exists for the reference. - `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference. - `INVALID_REFERENCE`: the reference is malformed. |
-| `Message`   | `String`          | A human-readable description of the failure. Never contains the secret value; only error metadata (codes, names) is included.                                                                                                   |
+| Property    | Type              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ----------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Reference` | `String`          | The secret reference that could not be resolved.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `Code`      | `SecretErrorCode` | The typed reason a reference could not be resolved. - `NOT_FOUND`: no secret exists for the reference. - `ACCESS_DENIED`: the caller lacks `SECRET:REVEAL` on the reference. - `INVALID_REFERENCE`: the reference is malformed, or the configured store rejected it as an invalid secret identifier. - `UNREADABLE`: the configured store could not return a value for the reference, for example because it rejected the cluster's own store credentials or the stored value could not be read. Whether the secret exists is not implied. |
+| `Message`   | `String`          | A human-readable description of the failure. Never contains the secret value; only error metadata (codes, names) is included.                                                                                                                                                                                                                                                                                                                                                                                                              |
 
 ## SecretResolveRequest
 
@@ -9000,7 +9874,7 @@ public sealed class StringFilterProperty
 | `Exists`     | `Nullable<Boolean>`    | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<String>`         | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
 | `NotIn`      | `List<String>`         | Checks if the property matches none of the provided values.                                                                                                                                                                                               |
-| `Like`       | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>` | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## SuspendProcessInstanceRequest
 
@@ -9041,6 +9915,31 @@ public readonly record struct Tag : ICamundaKey, IEquatable<Tag>
 | Property | Type     | Description                  |
 | -------- | -------- | ---------------------------- |
 | `Value`  | `String` | The underlying string value. |
+
+## TakeHistoryBackupRequest
+
+Request body for taking a history backup.
+
+```csharp
+public sealed class TakeHistoryBackupRequest
+```
+
+| Property   | Type       | Description                   |
+| ---------- | ---------- | ----------------------------- |
+| `BackupId` | `BackupId` | The id of the backup to take. |
+
+## TakeHistoryBackupResponse
+
+Response body for taking a history backup.
+
+```csharp
+public sealed class TakeHistoryBackupResponse
+```
+
+| Property             | Type           | Description                                                          |
+| -------------------- | -------------- | -------------------------------------------------------------------- |
+| `BackupId`           | `BackupId`     | The id of the backup that has been scheduled.                        |
+| `ScheduledSnapshots` | `List<String>` | The names of the snapshots that have been scheduled for this backup. |
 
 ## TakeRuntimeBackupRequest
 
@@ -9296,10 +10195,10 @@ TenantSearchQuerySortRequest
 public sealed class TenantSearchQuerySortRequest
 ```
 
-| Property | Type                                | Description                                   |
-| -------- | ----------------------------------- | --------------------------------------------- |
-| `Field`  | `TenantSearchQuerySortRequestField` | The field to sort by.                         |
-| `Order`  | `Nullable<SortOrderEnum>`           | The order in which to sort the related field. |
+| Property | Type                                | Description                                                               |
+| -------- | ----------------------------------- | ------------------------------------------------------------------------- |
+| `Field`  | `TenantSearchQuerySortRequestField` | The field to sort by. `key` is deprecated and should not be used anymore. |
+| `Order`  | `Nullable<SortOrderEnum>`           | The order in which to sort the related field.                             |
 
 ## TenantUpdateRequest
 
@@ -9708,6 +10607,39 @@ User task filter request.
 public sealed class UserTaskFilter
 ```
 
+| Property                   | Type                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------- | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `State`                    | `UserTaskStateFilterProperty`        | The user task state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `Assignee`                 | `StringFilterProperty`               | The assignee of the user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `BusinessId`               | `StringFilterProperty`               | The business ID of the owning process instance the user task belongs to. This only works for user tasks created with 8.10 and onwards. Tasks from prior versions don't contain this data and cannot be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `Priority`                 | `IntegerFilterProperty`              | The priority of the user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `ElementId`                | `Nullable<ElementId>`                | The element ID of the user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `Name`                     | `StringFilterProperty`               | The task name. This only works for data created with 8.8 and onwards. Instances from prior versions don't contain this data and cannot be found.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `CandidateGroup`           | `StringFilterProperty`               | The candidate group for this user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `CandidateUser`            | `StringFilterProperty`               | The candidate user for this user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `TenantId`                 | `StringFilterProperty`               | Tenant ID of this user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `ProcessDefinitionId`      | `ProcessDefinitionIdFilterProperty`  | The ID of the process definition.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `CreationDate`             | `DateTimeFilterProperty`             | The user task creation date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `CompletionDate`           | `DateTimeFilterProperty`             | The user task completion date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `FollowUpDate`             | `DateTimeFilterProperty`             | The user task follow-up date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `DueDate`                  | `DateTimeFilterProperty`             | The user task due date.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `ProcessInstanceVariables` | `List<VariableValueFilterProperty>`  | The variables of the process instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `LocalVariables`           | `List<VariableValueFilterProperty>`  | The local variables of the user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `UserTaskKey`              | `Nullable<UserTaskKey>`              | The key for this user task.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `ProcessDefinitionKey`     | `ProcessDefinitionKeyFilterProperty` | The key of the process definition.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `ProcessInstanceKey`       | `ProcessInstanceKeyFilterProperty`   | The key of the process instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `ElementInstanceKey`       | `Nullable<ElementInstanceKey>`       | The key of the element instance.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `Tags`                     | `List<Tag>`                          | List of tags. Tags need to start with a letter; then alphanumerics, `_`, `-`, `:`, or `.`; length ≤ 100.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `Or`                       | `List<UserTaskFilterFields>`         | Defines a list of alternative filter groups combined using OR logic. Each object in the array is evaluated independently, and the filter matches if any one of them is satisfied. Top-level fields and the `$or` clause are combined using AND logic — meaning: (top-level filters) AND (any of the `$or` filters) must match. <br> <em>Example:</em> `json {   "assignee": "user1",   "$or": [     { "candidateGroup": "groupA" },     { "candidateUser": "user2" }   ] } ` This matches user tasks that: <ul style="padding-left: 20px; margin-left: 20px;"> <li style="list-style-type: disc;">are assigned to <em>user1</em></li> <li style="list-style-type: disc;">and match either: <ul style="padding-left: 20px; margin-left: 20px;"> <li style="list-style-type: circle;"><code>candidateGroup</code> is <em>groupA</em>, or</li> <li style="list-style-type: circle;"><code>candidateUser</code> is <em>user2</em></li> </ul> </li> </ul> <br> <p>Note: Using complex <code>$or</code> conditions may impact performance, use with caution in high-volume environments. |
+
+## UserTaskFilterFields
+
+User task filter fields.
+
+```csharp
+public sealed class UserTaskFilterFields
+```
+
 | Property                   | Type                                 | Description                                                                                                                                                                                                   |
 | -------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `State`                    | `UserTaskStateFilterProperty`        | The user task state.                                                                                                                                                                                          |
@@ -9856,7 +10788,7 @@ public sealed class UserTaskStateFilterProperty
 | `Neq`        | `Nullable<UserTaskStateEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<UserTaskStateEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## UserTaskUpdateRequest
 
@@ -9866,10 +10798,10 @@ UserTaskUpdateRequest
 public sealed class UserTaskUpdateRequest
 ```
 
-| Property    | Type        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Changeset` | `Changeset` | JSON object with changed task attribute values. The following attributes can be adjusted with this endpoint, additional attributes will be ignored: _ `candidateGroups` - reset by providing an empty list _ `candidateUsers` - reset by providing an empty list _ `dueDate` - reset by providing an empty String _ `followUpDate` - reset by providing an empty String \* `priority` - minimum 0, maximum 100, default 50 Providing any of those attributes with a `null` value or omitting it preserves the persisted attribute's value. The assignee cannot be adjusted with this endpoint, use the Assign task endpoint. This ensures correct event emission for assignee changes. |
-| `Action`    | `String`    | A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "update".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Property    | Type        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Changeset` | `Changeset` | JSON object with changed task attribute values. The following attributes can be adjusted with this endpoint, additional attributes will be ignored: * `candidateGroups` - reset by providing an empty list * `candidateUsers` - reset by providing an empty list * `dueDate` - reset by providing an empty String * `followUpDate` - reset by providing an empty String * `priority` - minimum 0, maximum 100, default 50 Providing any of those attributes with a `null` value or omitting it preserves the persisted attribute's value. The assignee cannot be adjusted with this endpoint, use the Assign task endpoint. This ensures correct event emission for assignee changes. |
+| `Action`    | `String`    | A custom action value that will be accessible from user task events resulting from this endpoint invocation. If not provided, it will default to "update".                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 ## UserTaskVariableFilter
 
@@ -10208,7 +11140,7 @@ public sealed class WaitStateElementTypeFilterProperty
 | `Neq`        | `Nullable<WaitStateElementTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`                  | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<WaitStateElementTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`               | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## WaitStateTypeExactMatch
 
@@ -10237,7 +11169,7 @@ public sealed class WaitStateTypeFilterProperty
 | `Neq`        | `Nullable<WaitStateTypeEnum>` | Checks for inequality with the provided value.                                                                                                                                                                                                            |
 | `Exists`     | `Nullable<Boolean>`           | Checks if the current property exists.                                                                                                                                                                                                                    |
 | `In`         | `List<WaitStateTypeEnum>`     | Checks if the property matches any of the provided values.                                                                                                                                                                                                |
-| `Like`       | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: _ `_`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
+| `Like`       | `Nullable<LikeFilter>`        | Checks if the property matches the provided like value. Supported wildcard characters are: * `*`: matches zero, one, or multiple characters. * `?`: matches one, single character. Wildcard characters can be escaped with backslash, for instance: `\*`. |
 
 ## WorkerDefaultsConfig
 

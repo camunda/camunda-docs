@@ -27,13 +27,6 @@
       "label": "Update an agent instance"
     }
   ],
-  "createAgentInstanceHistoryItem": [
-    {
-      "file": "AgentInstance.cs",
-      "region": "CreateAgentInstanceHistoryItem",
-      "label": "Append an agent instance history item"
-    }
-  ],
   "searchAgentInstanceHistory": [
     {
       "file": "AgentInstance.cs",
@@ -53,6 +46,20 @@
       "file": "Client.cs",
       "region": "ChangeClusterMode",
       "label": "Change cluster mode"
+    }
+  ],
+  "changeClusterModeAsClusterAdmin": [
+    {
+      "file": "Client.cs",
+      "region": "ChangeClusterModeAsClusterAdmin",
+      "label": "Change cluster mode as cluster admin"
+    }
+  ],
+  "cancelClusterRebalance": [
+    {
+      "file": "Client.cs",
+      "region": "CancelClusterRebalance",
+      "label": "Cancel the running cluster rebalance"
     }
   ],
   "restore": [
@@ -88,6 +95,34 @@
       "file": "Backup.cs",
       "region": "DeleteRuntimeBackup",
       "label": "Delete a runtime backup"
+    }
+  ],
+  "takeHistoryBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeHistoryBackup",
+      "label": "Take a history backup"
+    }
+  ],
+  "listHistoryBackups": [
+    {
+      "file": "Backup.cs",
+      "region": "ListHistoryBackups",
+      "label": "List history backups"
+    }
+  ],
+  "getHistoryBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "GetHistoryBackup",
+      "label": "Get a history backup"
+    }
+  ],
+  "deleteHistoryBackup": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteHistoryBackup",
+      "label": "Delete a history backup"
     }
   ],
   "getRuntimeBackupState": [
@@ -1505,6 +1540,174 @@
       "file": "Secret.cs",
       "region": "ListSecrets",
       "label": "List secret references"
+    }
+  ],
+  "getClusterStatus": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterStatus",
+      "label": "Get cluster status"
+    }
+  ],
+  "getRestoreStatus": [
+    {
+      "file": "Client.cs",
+      "region": "GetRestoreStatus",
+      "label": "Get restore status"
+    }
+  ],
+  "getExportingStatus": [
+    {
+      "file": "Exporting.cs",
+      "region": "GetExportingStatus",
+      "label": "Get exporting status"
+    }
+  ],
+  "searchOwnAuthorizations": [
+    {
+      "file": "Authorization.cs",
+      "region": "SearchOwnAuthorizations",
+      "label": "Search own authorizations"
+    }
+  ],
+  "getAgentDefinition": [
+    {
+      "file": "AgentDefinition.cs",
+      "region": "GetAgentDefinition",
+      "label": "Get an agent definition"
+    }
+  ],
+  "searchAgentDefinitions": [
+    {
+      "file": "AgentDefinition.cs",
+      "region": "SearchAgentDefinitions",
+      "label": "Search agent definitions"
+    }
+  ],
+  "restoreAsClusterAdmin": [
+    {
+      "file": "Client.cs",
+      "region": "RestoreAsClusterAdmin",
+      "label": "Restore physical tenant(s) from a backup as cluster admin"
+    }
+  ],
+  "getClusterTopology": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterTopology",
+      "label": "Get the topology of the whole cluster"
+    }
+  ],
+  "getClusterRebalance": [
+    {
+      "file": "Client.cs",
+      "region": "GetClusterRebalance",
+      "label": "Get the cluster's current leadership balance"
+    }
+  ],
+  "triggerClusterRebalance": [
+    {
+      "file": "Client.cs",
+      "region": "TriggerClusterRebalance",
+      "label": "Trigger a cluster-wide leadership rebalance"
+    }
+  ],
+  "getClusterExportingStatus": [
+    {
+      "file": "Exporting.cs",
+      "region": "GetClusterExportingStatus",
+      "label": "Get cluster exporting status"
+    }
+  ],
+  "pauseClusterExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "PauseClusterExporting",
+      "label": "Pause cluster exporting"
+    }
+  ],
+  "resumeClusterExporting": [
+    {
+      "file": "Exporting.cs",
+      "region": "ResumeClusterExporting",
+      "label": "Resume cluster exporting"
+    }
+  ],
+  "takeHistoryBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeHistoryBackupAsClusterAdmin",
+      "label": "Take a history backup (cluster admin)"
+    }
+  ],
+  "listHistoryBackupsAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "ListHistoryBackupsAsClusterAdmin",
+      "label": "List history backups (cluster admin)"
+    }
+  ],
+  "getHistoryBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "GetHistoryBackupAsClusterAdmin",
+      "label": "Get a history backup (cluster admin)"
+    }
+  ],
+  "deleteHistoryBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteHistoryBackupAsClusterAdmin",
+      "label": "Delete a history backup (cluster admin)"
+    }
+  ],
+  "takeRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "TakeRuntimeBackupAsClusterAdmin",
+      "label": "Take a runtime backup (cluster admin)"
+    }
+  ],
+  "listRuntimeBackupsAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "ListRuntimeBackupsAsClusterAdmin",
+      "label": "List runtime backups (cluster admin)"
+    }
+  ],
+  "getRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackupAsClusterAdmin",
+      "label": "Get a runtime backup (cluster admin)"
+    }
+  ],
+  "deleteRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackupAsClusterAdmin",
+      "label": "Delete a runtime backup (cluster admin)"
+    }
+  ],
+  "getRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "GetRuntimeBackupStateAsClusterAdmin",
+      "label": "Get runtime backup state (cluster admin)"
+    }
+  ],
+  "syncRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "SyncRuntimeBackupStateAsClusterAdmin",
+      "label": "Sync runtime backup state (cluster admin)"
+    }
+  ],
+  "deleteRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "Backup.cs",
+      "region": "DeleteRuntimeBackupStateAsClusterAdmin",
+      "label": "Delete runtime backup state (cluster admin)"
     }
   ]
 }
