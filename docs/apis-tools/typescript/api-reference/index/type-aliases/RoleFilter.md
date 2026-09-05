@@ -18,7 +18,7 @@ Role filter request
 ### name?
 
 ```ts
-optional name?: string;
+optional name?: StringFilterProperty;
 ```
 
 The role name search filters.

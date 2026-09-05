@@ -43,6 +43,17 @@ ActivatedJobResult.businessId;
 
 ---
 
+### clock
+
+```ts
+clock: HandlerClock;
+```
+
+The clock this worker's client resolves time through. Reading and waiting through it
+means a test that pins the client's clock also drives the handler.
+
+---
+
 ### customHeaders
 
 ```ts

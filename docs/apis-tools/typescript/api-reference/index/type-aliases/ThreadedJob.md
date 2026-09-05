@@ -8,8 +8,9 @@ mdx:
 # Type Alias: ThreadedJob
 
 ```ts
-type ThreadedJob = Omit<EnrichedActivatedJob, "log">;
+type ThreadedJob = Omit<EnrichedActivatedJob, "log" | "clock">;
 ```
 
-The job object received by a threaded handler.
-Same shape as EnrichedActivatedJob but without the logger (not available across threads).
+`clock` is omitted alongside `log` for the same reason: both are live in-process objects,
+and a pinned clock cannot cross the worker-thread boundary. Threaded handlers use ambient
+time — see camunda/orchestration-cluster-api-js#450.

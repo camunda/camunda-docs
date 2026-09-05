@@ -15,16 +15,6 @@ Request to create a new agent instance.
 
 ## Properties
 
-### definition
-
-```ts
-definition: AgentInstanceDefinition;
-```
-
-Static definition set once at creation.
-
----
-
 ### elementInstanceKey
 
 ```ts
@@ -37,11 +27,38 @@ processDefinitionKey, and tenantId.
 
 ---
 
-### limits?
+### history
 
 ```ts
-optional limits?: AgentInstanceLimits;
+history: AgentInstanceHistoryItem[];
 ```
 
-Limits for the agent execution. When omitted, all limits default to -1
-(no limit).
+A batch of history items to append to the agent instance's conversation
+history, in request order. Each created item is echoed back in the
+response's createdHistory, positionally correlated. Must include a
+CONFIGURATION item establishing model, provider, and systemPrompt (and,
+if needed, limits).
+
+---
+
+### jobKey
+
+```ts
+jobKey: JobKey;
+```
+
+The key of the job activation during which this creation is being made.
+A creation must always be attributed to the active job that produced it.
+
+---
+
+### jobLease
+
+```ts
+jobLease: string;
+```
+
+Opaque lease token received from the job activation response. Disambiguates
+this activation from any other activation of the same job: if the job is
+later retried, history items submitted under a superseded lease are discarded
+rather than committed.
