@@ -72,7 +72,7 @@ After taking the backup, brokers can be started again and will automatically res
 
 ### Prepare replacement cluster
 
-:::note Caution
+:::warning
 Always use the same or the next minor version of Zeebe that you were using when taking the backup.
 Using a different version may result in data corruption or data loss.
 See the [upgrade guide](/self-managed/upgrade/components/index.md) for more details.

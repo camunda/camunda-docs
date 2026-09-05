@@ -450,6 +450,60 @@ The dashboard provides insights into key data layer components for Camunda versi
 
 ![Example panels](assets/example-panels-data-layer.png)
 
+## Troubleshoot metrics and dashboards
+
+### Grafana dashboard shows no data after import
+
+**Observed behavior:** The dashboard renders, but panels show "No data" or stay empty.
+
+**Why this happens:** The dashboard's panels aren't bound to a Prometheus data source, either because none was selected during import, or because the wrong one was selected when more than one is configured in Grafana.
+
+**How to fix:**
+
+1. Open the dashboard's settings and check the data source assigned under its variables and panels.
+2. If it's missing or wrong, re-import the dashboard and explicitly select your Prometheus data source when prompted.
+3. Confirm the data source itself can reach Prometheus by testing it from **Connections > Data sources** in Grafana.
+
+### Prometheus scraping endpoint returns no data, or the target shows as down
+
+**Observed behavior:** `/actuator/prometheus` returns an empty response or `404`, or Prometheus shows the Camunda target as down in its **Targets** page.
+
+**Why this happens:** The Prometheus endpoint is disabled and restricted by default. Both `management.endpoint.prometheus.access: unrestricted` and `management.prometheus.metrics.export.enabled: true` must be set before the endpoint exports anything. A mismatch between the scraping job's `scheme` and the management context's actual protocol (HTTP vs. HTTPS) also causes the target to show as down.
+
+**How to fix:**
+
+1. Confirm both properties above are set. See [Prometheus](#prometheus).
+2. Confirm the scraping job's `scheme` matches the management context's actual protocol, and its `targets` port matches the management port (default `9600`).
+3. Query the endpoint directly (`curl http://<host>:9600/actuator/prometheus`) to confirm it responds before checking Prometheus.
+
+### A metric you expect to see is missing
+
+**Observed behavior:** A documented metric name doesn't appear in Prometheus or Grafana, even though scraping otherwise works.
+
+**Why this happens:** One of three causes, in order of likelihood:
+
+- The metric is processing-related and only recorded when its triggering event occurs. For example, `zeebe_incident_events_total` only appears after an incident is created or resolved, see [available metrics](#available-metrics).
+- The metric was filtered out. Filtering matches by prefix, so a rule intended to filter `zeebe.foo` also filters `zeebe.foobar` and anything else starting with that prefix. See [filtering](#filtering).
+- The node role doesn't expose that metric. Brokers and gateways expose different metric sets, see the note under [available metrics](#available-metrics).
+
+**How to fix:** Trigger the underlying event and check again, then review your filter configuration for an overly broad prefix match, then confirm you're querying the node role that actually exposes that metric.
+
+### Physical Tenant filtering is missing from a panel
+
+**Observed behavior:** The `physicalTenant` variable or label isn't available on a specific Grafana panel, even though it works elsewhere in the same dashboard.
+
+**Why this happens:** Only partition-scoped Zeebe metrics carry the `physicalTenant` label today. Node-level metrics that aren't partition-scoped don't carry it, and other dashboards (API panels, gateway panels) are still being updated to add it, tracked in [camunda/camunda#56250](https://github.com/camunda/camunda/issues/56250).
+
+**How to fix:** Confirm the panel's underlying metric is partition-scoped. If it is and still lacks the label, check the linked issue for status before assuming a misconfiguration.
+
+### OTLP export fails or backend rejects the data
+
+**Observed behavior:** Metrics reach your OTLP endpoint's logs as errors, or don't appear in the target system at all.
+
+**Why this happens:** OTLP backends vary in what they require beyond a reachable `url`. Some need authentication headers (`otlp.metrics.export.headers`), and some don't support the default `cumulative` aggregation temporality and require `delta` instead (for example, Dynatrace). See [OpenTelemetry Protocol](#opentelemetry-protocol).
+
+**How to fix:** Check your target system's OTLP requirements for authentication headers and its required aggregation temporality, and set both explicitly rather than relying on Micrometer's defaults.
+
 ## Configure metrics
 
 Configure metrics for each Camunda 8 component as follows:

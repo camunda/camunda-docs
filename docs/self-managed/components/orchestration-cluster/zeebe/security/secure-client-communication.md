@@ -105,7 +105,7 @@ There is one caveat: in order for the client to accept this self-signed certific
 
 ## Troubleshooting authentication issues
 
-Here we will describe a few ways the clients and gateway could be misconfigured and what those errors look like. Hopefully, this will help you recognize these situations and provide an easy fix.
+The following are common ways clients and the gateway can be misconfigured for TLS, and how to recognize and fix each one.
 
 :::note
 `zbctl` is a [community-supported client](https://github.com/camunda-community-hub/zeebe-client-go/blob/main/cmd/zbctl/zbctl.md).
@@ -113,13 +113,13 @@ Here we will describe a few ways the clients and gateway could be misconfigured 
 
 ### TLS is enabled in `zbctl` but disabled in the gateway
 
-The client will fail with the following error:
+**Observed behavior:** The client fails with the following error:
 
 ```
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: authentication handshake failed: tls: first record does not look like a TLS handshake"
 ```
 
-The following error will be logged by Netty in the gateway:
+The gateway logs the following error via Netty:
 
 ```
 Aug 06, 2019 4:23:22 PM io.grpc.netty.NettyServerTransport notifyTerminated
@@ -148,24 +148,30 @@ io.netty.handler.codec.http2.Http2Exception: HTTP/2 client preface string missin
   at java.lang.Thread.run(Thread.java:748)
 ```
 
-**Solution:** Either enable TLS in the gateway as well or specify the `--insecure` flag when using `zbctl`.
+**Why this happens:** The client is attempting a TLS handshake, but the gateway isn't configured to accept one.
+
+**How to fix:** Either enable TLS in the gateway as well, or specify the `--insecure` flag when using `zbctl`.
 
 ### TLS is disabled in `zbctl` but enabled for the gateway
 
-`zbctl` will fail with the following error:
+**Observed behavior:** `zbctl` fails with the following error:
 
 ```
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection closed
 ```
 
-**Solution:** Either enable TLS in the client by specifying a path to a certificate or disable it in the gateway by editing the appropriate configuration file.
+**Why this happens:** The gateway expects a TLS handshake, but the client is connecting in plaintext.
+
+**How to fix:** Either enable TLS in the client by specifying a path to a certificate, or disable it in the gateway by editing the appropriate configuration file.
 
 ### TLS is enabled for both client and gateway but the CA certificate can't be found
 
-`zbctl` will fail with the following error:
+**Observed behavior:** `zbctl` fails with the following error:
 
 ```
 Error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: authentication handshake failed: x509: certificate signed by unknown authority
 ```
 
-**Solution:** Either install the CA certificate in the appropriate location for the system or specify a path to certificate using the methods described above.
+**Why this happens:** The client can't verify the gateway's certificate chain because it doesn't trust the certificate authority (CA) that issued it.
+
+**How to fix:** Either install the CA certificate in the appropriate location for the system, or specify a path to the certificate using the methods described above.
