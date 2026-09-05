@@ -566,3 +566,45 @@ def readme_v9_to_v10_migration() -> None:
             group_id=GroupId("engineering"),
         )
     # endregion V9ToV10Migration
+
+
+async def readme_engine_clock() -> None:
+    # region ReadmeEngineClock
+    from camunda_orchestration_sdk import (
+        CamundaAsyncClient,
+        ConnectedJobContext,
+        EngineClock,
+        WorkerConfig,
+    )
+
+    async def handle_job(job_context: ConnectedJobContext) -> dict[str, object]:
+        # Waiting here moves the engine's clock too, so a BPMN timer downstream fires
+        # without anyone waiting out the real duration.
+        await job_context.clock.sleep(60)
+        return {"result": "processed"}
+
+    # Drive the engine from a separate client: pinning issues a request, and that request's
+    # own backoff must not wait on the clock issuing it.
+    async with CamundaAsyncClient() as driver:
+        # Pins on entry and resets on exit -- including when the client below fails to
+        # build, or fails to shut down. Written by hand as a single `finally`, either of
+        # those leaves the cluster frozen.
+        async with EngineClock(driver) as engine:
+            async with CamundaAsyncClient(clock=engine) as client:
+                client.create_job_worker(
+                    config=WorkerConfig(job_type="payment", job_timeout_milliseconds=30_000),
+                    callback=handle_job,
+                )
+                await client.run_workers()
+    # endregion ReadmeEngineClock
+
+async def readme_handler_wait() -> None:
+    # region ReadmeHandlerWait
+    from camunda_orchestration_sdk import ConnectedJobContext
+
+    async def handle_job(job: ConnectedJobContext) -> dict[str, object]:
+        # Short coordination only -- a business wait belongs in the process as a BPMN timer.
+        await job.clock.sleep(0.5)
+        return {"result": "processed"}
+
+    # endregion ReadmeHandlerWait

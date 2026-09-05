@@ -7,6 +7,7 @@ import logging
 from camunda_orchestration_sdk import (
     CamundaAsyncClient,
     CamundaClient,
+    LiveClock,
     NullLogger,
 )
 
@@ -119,3 +120,17 @@ def disable_logging_example() -> None:
     topology = client.get_topology()
     print(f"Cluster size: {topology.cluster_size}")
 # endregion DisableLogging
+
+
+# region Clock
+def clock_example() -> None:
+    # SDK cadence -- poll loops, retry backoff, backpressure decay, token refresh --
+    # resolves through this clock. Injecting one lets a test drive that timing instead of
+    # waiting for it. Omit it and the live clock is used.
+    clock = LiveClock()
+    client = CamundaClient(clock=clock)
+
+    started = client.clock.now()
+    topology = client.get_topology()
+    print(f"Fetched {topology.cluster_size} nodes in {client.clock.now() - started:.3f}s")
+# endregion Clock
