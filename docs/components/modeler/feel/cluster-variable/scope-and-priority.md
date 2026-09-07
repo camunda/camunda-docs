@@ -49,6 +49,8 @@ From highest to lowest priority, the cluster variable resolution order is:
 2. Tenant-scope cluster variables.
 3. Global-scope cluster variables.
 
+Resolution priority is the same for every [variable kind](./data-types.md#variable-kinds). The `camunda.vars.env`, `camunda.vars.tenant`, and `camunda.vars.cluster` namespaces select a `SECRET_REFERENCE`-kind variable exactly as they select a `JSON`-kind one. The kind of the variable that wins is what decides whether its `camunda.secrets.<name>` references are resolved.
+
 ### Process variables
 
 Variables defined on the process instance always take precedence over cluster variables. This includes:

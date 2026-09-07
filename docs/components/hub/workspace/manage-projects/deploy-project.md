@@ -48,10 +48,14 @@ Once you've [validated your process](./validate-project.md), deploy your project
 
 When you deploy from the project homepage, all BPMN, DMN, and form files in the project are deployed as a single bundle.
 
-In Self-Managed, you can deploy your project to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
-
 :::note
 If any resource fails to deploy, the whole deployment [fails](#deployment-errors) and the cluster state remains unchanged. This safely ensures that a project cannot be deployed incompletely or in an inconsistent state.
+:::
+
+In Self-Managed, you can deploy your project to the cluster defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters).
+
+:::tip
+If you don't want to deploy all resources in a process application, you can [deploy an individual resource](../modeler/run-or-publish-your-process.md#deploy-a-process).
 :::
 
 ## Run your project

@@ -225,37 +225,6 @@ The AI Agent Sub-process and AI Agent Task element templates are updated in Camu
 
 ## APIs & tools
 
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
-#### Removal of legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test
-
-Starting with Camunda 8.10.0-alpha2, Camunda removes the legacy component APIs and related features that were deprecated in 8.8.
-
-The following items are removed:
-
-- The [Operate API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/operate-api/overview.md)
-- The [Tasklist API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) and Tasklist V1 mode
-- Tasklist V1-dependent features such as [user task access restrictions (8.9 documentation)](/versioned_docs/version-8.9/components/tasklist/user-task-access-restrictions.md) and [public start forms](/components/tasklist/userguide/starting-processes.md#public-start-forms)
-- [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md)
-
-**Action:** Migrate integrations and testing workflows to the current replacements:
-
-- Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) instead of the removed Operate API and Tasklist API.
-- Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) instead of user task access restrictions.
-- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
-- Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
-
-<p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
-<p><span className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</span></p>
-<p><span className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</span></p>
-
-</div>
-</div>
-
 <!-- :::info 8.10 APIs & Tools migration guide
 Migrate your API integrations, SDKs, and generated clients to Camunda 8.10 using the [8.10 APIs & Tools migration guide](/).
 :::
@@ -324,15 +293,48 @@ Starting with 8.10, the `JobIntent.COMPLETED` follow-up event is emitted without
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
+#### Optimize `GET /api/readyz` no longer rejects requests that carry an `Authorization` header
 
-Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
+Starting with Camunda 8.10.0-alpha5, the Optimize [health readiness endpoint](/apis-tools/optimize-api/health-readiness.md) (`GET /api/readyz`) ignores an `Authorization` header instead of rejecting the request. Previously, a request that included the header was rejected with a client error status code. It now returns the readiness status (`200` or `503`), as it does for a request without the header.
 
-**Action:** Migrate your application to Spring Boot 4.1.x. See the [version compatibility table](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) for details.
+This aligns the endpoint with the other public endpoints of the Orchestration Cluster, which also accept and ignore a superfluous `Authorization` header.
+
+**Action:** No action is required for Kubernetes readiness and liveness probes, as these do not send an `Authorization` header. If you have a client or monitoring check that relies on the endpoint rejecting requests that carry an `Authorization` header, update it to expect the readiness status instead.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Removal of legacy APIs, Tasklist V1-dependent features, and Zeebe Process Test
+
+Starting with Camunda 8.10.0-alpha2, Camunda removes the legacy component APIs and related features that were deprecated in 8.8.
+
+The following items are removed:
+
+- The [Operate API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/operate-api/overview.md)
+- The [Tasklist API (8.9 documentation)](/versioned_docs/version-8.9/apis-tools/tasklist-api-rest/tasklist-api-rest-overview.md) and Tasklist V1 mode
+- Tasklist V1-dependent features such as [user task access restrictions (8.9 documentation)](/versioned_docs/version-8.9/components/tasklist/user-task-access-restrictions.md) and [public start forms](/components/tasklist/userguide/starting-processes.md#public-start-forms)
+- [Zeebe Process Test](/apis-tools/testing/zeebe-process-test.md)
+
+**Action:** Migrate integrations and testing workflows to the current replacements:
+
+- Use the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) instead of the removed Operate API and Tasklist API.
+- Use [user task authorization](/components/tasklist/user-task-authorization.md) and [authorization-based access control](/components/concepts/access-control/authorizations.md) instead of user task access restrictions.
+- Use authenticated Tasklist starts or build your own application with [Camunda Forms](/components/modeler/forms/utilizing-forms.md) and the Orchestration Cluster REST API instead of public start forms.
+- Use [Camunda Process Test](/apis-tools/testing/getting-started.md) instead of Zeebe Process Test.
+
+<p><span className="link-arrow">[Migrate to the Orchestration Cluster REST API](/apis-tools/migration-manuals/migrate-to-camunda-api.md)</span></p>
+<p><span className="link-arrow">[Migrate from Zeebe Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</span></p>
+<p><span className="link-arrow">[Migrate to Camunda user tasks](/apis-tools/migration-manuals/migrate-to-camunda-user-tasks.md)</span></p>
 
 </div>
 </div>
@@ -354,17 +356,15 @@ With Camunda 8.10, the Console Self-Managed API and the Web Modeler API are depr
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
 
-#### Optimize `GET /api/readyz` no longer rejects requests that carry an `Authorization` header
+#### Camunda Spring Boot Starter now bundles Spring Boot 4.1.x
 
-Starting with Camunda 8.10.0-alpha5, the Optimize [health readiness endpoint](/apis-tools/optimize-api/health-readiness.md) (`GET /api/readyz`) ignores an `Authorization` header instead of rejecting the request. Previously, a request that included the header was rejected with a client error status code. It now returns the readiness status (`200` or `503`), as it does for a request without the header.
+Starting with Camunda 8.10, the default [Camunda Spring Boot Starter](/apis-tools/camunda-spring-boot-starter/getting-started.md) (`camunda-spring-boot-starter` & `camunda-spring-boot-4-starter`) is bundled with Spring Boot 4.1.x (up from 4.0.x in 8.9).
 
-This aligns the endpoint with the other public endpoints of the Orchestration Cluster, which also accept and ignore a superfluous `Authorization` header.
-
-**Action:** No action is required for Kubernetes readiness and liveness probes, as these do not send an `Authorization` header. If you have a client or monitoring check that relies on the endpoint rejecting requests that carry an `Authorization` header, update it to expect the readiness status instead.
+**Action:** Migrate your application to Spring Boot 4.1.x. See the [version compatibility table](/apis-tools/camunda-spring-boot-starter/getting-started.md#version-compatibility) for details.
 
 </div>
 </div>
@@ -439,27 +439,6 @@ Connectors change 1 description.
 </div>
 <div className="release-announcement-content">
 
-#### Elasticsearch and OpenSearch exporter defaults changed for Optimize mode and job records
-
-Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
-
-- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
-- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
-
-**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
-
-<p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
-<p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
-
-</div>
-</div>
-
-<div className="release-announcement-row">
-<div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
-</div>
-<div className="release-announcement-content">
-
 #### Default RocksDB memory allocation strategy changed to `FRACTION` {#rocksdb-memory-allocation-strategy}
 
 Starting with Camunda 8.10, the default RocksDB memory allocation strategy changes from `PARTITION` to `FRACTION`. With `FRACTION`, RocksDB memory is allocated as a fraction of total available memory (default `0.1`, or 10%) instead of scaling with the number of partitions per broker. This may result in a different amount of memory being allocated to RocksDB after upgrading.
@@ -473,19 +452,21 @@ Starting with Camunda 8.10, the default RocksDB memory allocation strategy chang
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--change">Change</span>
+<span className="badge badge--breaking-change">Breaking change</span>
 </div>
 <div className="release-announcement-content">
 
-#### New SaaS clusters default to `business_` variable include filter for Optimize
+#### Elasticsearch and OpenSearch exporter defaults changed for Optimize mode and job records
 
-Starting with Camunda 8.10, new SaaS clusters include a default `business_` variable include filter in Optimize data filter settings. Only variables whose names start with `business_` are exported to Optimize. Variables not matching this prefix are permanently excluded from Optimize.
+Starting with Camunda 8.10, the Elasticsearch and OpenSearch exporters ship with two updated defaults:
 
-This default does not apply to existing clusters. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+- `index.optimizeModeEnabled` is now `true` (previously `false`). The exporter restricts exported record value types to those consumed by Optimize and drops other record value types.
+- `index.job` is now `false` (previously `true`). When `index.optimizeModeEnabled` is `true`, Optimize mode controls which record value types are exported, so the individual `job` flag has no effect.
 
-**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
+**Action:** Review your exporter configuration before upgrading. If your deployment relies on record value types that Optimize mode does not cover, set `index.optimizeModeEnabled: false` and explicitly configure the record value types you need.
 
-<p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
+<p className="link-arrow">[Elasticsearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/elasticsearch-exporter.md#configuration)</p>
+<p className="link-arrow">[OpenSearch exporter configuration](/self-managed/components/orchestration-cluster/zeebe/exporters/opensearch-exporter.md#configuration)</p>
 
 </div>
 </div>
@@ -509,6 +490,25 @@ This change is **Self-Managed only**; SaaS is unaffected, as it already runs wit
 **Action:** Decide whether your Self-Managed deployment needs flattened object variables. If it does, set `zeebe.includeObjectVariableValue: true` before upgrading to 8.10.
 
 <p className="link-arrow">[Object variables configuration](/self-managed/components/optimize/configuration/object-variables.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### New SaaS clusters default to `business_` variable include filter for Optimize
+
+Starting with Camunda 8.10, new SaaS clusters include a default `business_` variable include filter in Optimize data filter settings. Only variables whose names start with `business_` are exported to Optimize. Variables not matching this prefix are permanently excluded from Optimize.
+
+This default does not apply to existing clusters. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+
+**Action:** If your Optimize reports or dashboards on new SaaS clusters rely on variables not prefixed with `business_`, update the variable include filter in Console cluster settings before creating the cluster or immediately after.
+
+<p className="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
 </div>
 </div>
@@ -598,6 +598,27 @@ Deployment change 1 description.
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Legacy Camunda Hub and Optimize authentication properties deprecated
+
+The authentication properties Camunda Hub and Optimize used through 8.9 are deprecated in favor of `camunda.security.*`. Both components still accept them in 8.10 and translate the recognized properties to their new equivalents at startup, and both remove them in 8.11.
+
+**Action:** Migrate to the `camunda.security.*` settings before upgrading to 8.11.
+
+<p className="link-arrow">[Camunda Hub authentication mapping](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
+
+<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
 <span className="badge badge--change">Change</span>
 </div>
 <div className="release-announcement-content">
@@ -644,6 +665,31 @@ Starting with Camunda 8.10, SaaS organization roles are renamed to align with Ca
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
+
+With Camunda 8.10, the Orchestration Cluster, Camunda Hub, and Optimize authenticate through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl), a shared implementation that replaces their separate identity stacks. All three components accept the same `camunda.security.authentication.*` settings. Nothing changes for the Orchestration Cluster, which already used these settings in 8.9.
+
+Camunda Hub and Optimize accept their existing authentication settings in 8.10 and translate the recognized properties to their new equivalents at startup, but those legacy properties are deprecated and are removed in 8.11. Camunda Hub requires no configuration change to upgrade to 8.10. User, group, role, tenant, and permission management for both components is unchanged and is still handled by Management Identity.
+
+**Action:** Migrate Camunda Hub and Optimize to the `camunda.security.*` settings before upgrading to 8.11, when their legacy authentication properties are removed.
+
+<p className="link-arrow">[Camunda Hub authentication configuration](/self-managed/upgrade/components/890-to-8100.md#authentication-configuration)</p>
+
+<p className="link-arrow">[Optimize legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated)</p>
+
+<p className="link-arrow">[Orchestration Cluster security properties](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#security)</p>
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
 ## Modeler
 
 :::note
@@ -662,3 +708,56 @@ Web Modeler change 1 description.
 
 </div>
 </div> -->
+
+## Optimize
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Optimize authentication moves to the Camunda Security Library
+
+Starting with Camunda 8.10, Optimize authenticates through the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), adopting the same authentication and session handling as the Orchestration Cluster components.
+
+**Action:** Confirm `camunda.security.authentication.oidc.issuer-uri` and `camunda.security.authentication.oidc.audiences` match what your IdP puts in the `id_token`. See [Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md) for the Optimize authentication configuration.
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### Legacy Optimize security configuration keys deprecated
+
+With the move to the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL), the Optimize login and API security keys used through 8.9 are deprecated in favor of `camunda.security.*`. Optimize maps recognized legacy keys automatically and logs a deprecation warning naming the replacement. The legacy keys are removed in Camunda 8.11.
+
+Keep `CAMUNDA_OPTIMIZE_IDENTITY_BASE_URL` set. It is not deprecated, and Optimize still uses it to look up users, for example when adding users to a collection.
+
+**Action:** Migrate to the `camunda.security.*` keys before upgrading to 8.11. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping and the precedence rules.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### `optimize.security.csl.enabled=false` fallback is temporary
+
+If the [Camunda Security Library](/reference/glossary.md#camunda-security-library-csl) (CSL) causes a regression in your 8.10 deployment, `optimize.security.csl.enabled=false` temporarily restores the 8.9 security stack. This fallback, the legacy security stack it restores, and the legacy configuration keys are all removed in Camunda 8.11.
+
+**Action:** Treat this as a temporary escape hatch, not a supported long-term mode. If you rely on it in 8.10, migrate to CSL before upgrading to 8.11.
+
+<p className="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md#fall-back-to-the-89-security-stack)</p>
+
+</div>
+</div>

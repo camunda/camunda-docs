@@ -1,7 +1,7 @@
 ---
 id: idp-example
 title: Example IDP integration
-description: "A worked example showing how you can integrate a published IDP document extraction template into a simple process in Web Modeler."
+description: "A worked example showing how you can integrate a published IDP document extraction template into a simple process in Camunda Hub."
 ---
 
 import IdpExampleImg from './img/idp-example-process.png';
