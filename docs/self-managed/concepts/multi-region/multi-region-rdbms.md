@@ -129,7 +129,6 @@ Each broker sets its own zone, while the zone list is identical in every region.
   - **26500**: Zeebe gateway, client and worker communication
   - **26501** and **26502**: Zeebe broker and gateway communication, including Raft
   - **8080**: Orchestration Cluster REST API
-  - **9600**: Orchestration Cluster management API
   - **53**: DNS, for cross-cluster service resolution
 
 The database is reached over the same private inter-region network. It does not need to be exposed publicly.

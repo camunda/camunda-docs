@@ -100,19 +100,15 @@ The region is still reachable, for example during a scheduled evacuation. A swit
 
 <TabItem value="unplanned">
 
-The region is gone. The surviving member is detached and promoted, and whatever had not replicated at the time of the outage is **lost**. The bound on that loss is the replication lag your [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) strategy allows.
+The region is gone. Follow the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The reference script doesn't automate this operation because detaching and promoting a member changes the global topology outside Terraform.
 
-```bash
-./failover.sh <lost-region-slot> --unplanned
-```
-
-An unplanned promotion detaches the member from the global database. The global topology must be rebuilt during failback.
+Whatever had not replicated at the time of the outage can be lost from the promoted database. The bound on that loss is the replication lag your [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) strategy allows. Restore the global database membership before running the Camunda failback procedure.
 
 </TabItem>
 
 </Tabs>
 
-Camunda needs no reconfiguration and no restart. The JDBC driver discovers the new writer, and connections in flight during the promotion are retried.
+Camunda needs no reconfiguration and no restart. The JDBC driver discovers the new writer for both established connections and brokers that start after the promotion.
 
 If the writer was not in the lost region, no database action is required.
 
@@ -160,7 +156,7 @@ The procedure does four things:
 1. **Redeploys Camunda** in the recovered region: namespace, database secret, Helm values, and chart.
 2. **Re-exports the region's services** to the ClusterSet, so brokers in other regions can resolve them again.
 3. **Re-adds the zone** if it was force-removed during failover. If the zone was left in place, its brokers rejoin and catch up from the Raft log with no membership change at all.
-4. **Reports the database state**, and rebuilds the global topology if an unplanned failover detached a member.
+4. **Reports the database state**, and stops if an unplanned recovery left the global topology incomplete.
 
 To move the writer back to the recovered region, which is worth doing if the other regions are further from the current writer:
 
@@ -171,7 +167,7 @@ To move the writer back to the recovered region, which is worth doing if the oth
 Leaving the writer where it is costs nothing but cross-region latency for the regions furthest from it.
 
 :::note After an unplanned failover
-An unplanned failover detaches the promoted member from the global database, leaving it with a single member. Rebuilding the global topology is a Terraform operation, not a script one: re-run `terraform apply` so the missing members are recreated and re-attached, then re-run the failback if you also want to switch the writer.
+An unplanned recovery can leave the promoted member detached from the global database. Restore a complete Aurora Global Database topology with the AWS recovery procedure before running `failback.sh`. The script refuses to continue while the global cluster has only one member.
 :::
 
 Verify when done:
