@@ -392,7 +392,7 @@ Inbound connectors are not renamed. For Kafka and RabbitMQ, only the outbound co
 
 #### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
 
-Starting with 8.10.0-alpha5, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+Starting with 8.10.0, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
 **Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED` before upgrading. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
 
