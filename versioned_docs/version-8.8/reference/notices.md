@@ -69,11 +69,12 @@ Camunda has provided the following releases which contain the fix:
 
 On Camunda 8 SaaS, this fix is included automatically unless you've opted out of [auto-updates](/components/saas/auto-updates.md), in which case you'll need to update your cluster manually. You can also change the mode per cluster in [cluster settings](/components/console/manage-clusters/settings.md#secret-filter-mode).
 
-**Interim mitigation**, before you can upgrade:
+**Interim mitigation**:
 
 - Review your process deployments against the preconditions above.
 - If a process may be affected, search its process instance variables for a secret-reference literal — for example, using the [Search process instances API](/apis-tools/orchestration-cluster-api-rest/specifications/search-process-instances.api.mdx) with a `$like` filter. This check is not conclusive: it only reflects the variable's current value, within your retention period.
 - Adjust the affected process so the preconditions above no longer hold, or sanitize the process variable to remove secret-reference syntax before it reaches a connector field.
+  - Sanitize the respective process variable for example by replacing `secrets` keyword: `= replace(emailBody, "secrets?\.", "secretx_", "i")`
 - Rotate any secret that may have been exposed, following your organization's secret-management procedures.
 
 ## Notice 59
