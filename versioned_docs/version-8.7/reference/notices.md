@@ -33,7 +33,7 @@ To check whether your Helm deployment is affected:
 
 ### Publication date
 
-_To be set when this notice is published._
+September 9, 2026
 
 ### Products affected
 
