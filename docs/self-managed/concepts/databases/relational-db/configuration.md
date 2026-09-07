@@ -303,6 +303,9 @@ primary replica. The exporter will only acknowledge records which have been expo
 quorum of secondary databases. The exporting will come to a stop when the lag time is exceeded and will only continue
 when the lag time is back within the configured limit.
 
+Note, that this strategy is not as precise as LSN replication monitoring and may lead to less frequent acknowledgements.
+It is recommended to use LSN replication monitoring whenever possible.
+
 ```yaml
 camunda.data.secondary-storage.rdbms.async-replication.enabled: true
 camunda.data.secondary-storage.rdbms.async-replication.type: TIME_LAG
@@ -374,13 +377,13 @@ camunda.data.secondary-storage.rdbms.async-replication.type: DELAY
 | `async-replication.queue-capacity`      | Size of the internal queue of record positions to acknowledge                     | 8192    |
 | `async-replication.queue-debounce-time` | A debounce time to not add every record to the queue but only one every X seconds | PT5S    |
 
-## Usage with AWS Aurora PostgreSQL
+## Usage with AWS Aurora PostgreSQL / MySQL
 
-Camunda supports **PostgreSQL** as a secondary storage backend. AWS Aurora PostgreSQL is a PostgreSQL-compatible managed service and works when configured like a standard PostgreSQL database.
+Camunda supports **PostgreSQL** and **MySQL** as secondary storage backends. AWS Aurora PostgreSQL and AWS Aurora MySQL are compatible managed services and work when you configure them like standard PostgreSQL or MySQL databases.
 
-In addition to the standard PostgreSQL JDBC driver, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
+In addition to the standard PostgreSQL and MySQL JDBC drivers, you can use the **AWS Advanced JDBC Wrapper** to take advantage of Aurora-specific features such as improved failover handling and IAM-based authentication.
 
-To use the AWS JDBC wrapper, configure the JDBC URL as follows:
+To use the AWS JDBC wrapper with an Aurora PostgreSQL database, configure the JDBC URL for your Aurora engine:
 
 ```yaml
 camunda:
@@ -388,7 +391,20 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda
+        url: jdbc:aws-wrapper:postgresql://aurora-postgresql-host:5432/camunda
+        username: camunda
+        password: camunda
+```
+
+To use the AWS JDBC wrapper with an Aurora MySQL database, configure the JDBC URL for your Aurora engine:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:mysql://aurora-mysql-host:3306/camunda
         username: camunda
         password: camunda
 ```
@@ -417,8 +433,13 @@ camunda:
     secondary-storage:
       type: rdbms
       rdbms:
-        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover
 ```
+
+In addition, you can override the default failoverTimeoutMs (60 seconds) by adding the `failoverTimeoutMs` parameter to
+the JDBC URL: `jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000`.
+
+````yaml
 
 The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.
 
@@ -445,7 +466,7 @@ camunda:
             url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=tenant_a_schema
             username: tenant_a_user
             password: tenant-a-secret
-```
+````
 
 For IAM authentication, the same pattern applies with the `iam` wrapper plugin and passwordless database users:
 
