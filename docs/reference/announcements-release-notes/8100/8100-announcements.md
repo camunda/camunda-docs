@@ -191,6 +191,38 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 </div>
 </div>
 
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--deprecated">Deprecated</span>
+</div>
+<div className="release-announcement-content">
+
+#### AI Agent connector: new native (v2) element templates, v1 deprecated
+
+Camunda 8.10 introduces new `v2` element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration).
+
+The original (`v1`) element templates are deprecated as of Camunda 8.10.
+
+**Action:** Use the `v2` element templates for new AI Agent implementations.
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--change">Change</span>
+</div>
+<div className="release-announcement-content">
+
+#### AI Agent Sub-process and AI Agent Task element templates updated
+
+The AI Agent Sub-process and AI Agent Task element templates are updated in Camunda 8.10 to support the new [agent visibility and monitoring](/reference/announcements-release-notes/8100/8100-release-notes.md#real-time-agent-visibility-and-monitoring) and [agent tool configuration](/reference/announcements-release-notes/8100/8100-release-notes.md#improved-agent-tool-configuration) features.
+
+**Action:** If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template. Open the process in Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+
+</div>
+</div>
+
 ## APIs & tools
 
 <!-- :::info 8.10 APIs & Tools migration guide
