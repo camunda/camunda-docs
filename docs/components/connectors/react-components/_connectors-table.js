@@ -17,6 +17,7 @@ import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
 import CSVImg from "../img/connector-csv.png";
+import DatabricksImg from "../img/connector-databricks.png";
 import EasypostImg from "../img/connector-easypost.png";
 import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
@@ -225,6 +226,14 @@ const SearchableTable = () => {
       image: CSVImg,
     },
     {
+      name: "Databricks",
+      description:
+        "Run SQL statements, control warehouses, trigger jobs, invoke Model Serving endpoints, and query Vector Search indexes.",
+      type: "Outbound",
+      link: "../databricks/",
+      image: DatabricksImg,
+    },
+    {
       name: "EasyPost",
       description:
         "Create EasyPost addresses, parcels, shipments from your processes.",
@@ -384,6 +393,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../openai/",
       image: OpenaiImg,
+    },
+    {
+      name: "Orchestration Cluster API",
+      description:
+        "Query process, decision, user task, and audit data from the Orchestration Cluster API.",
+      type: "Outbound",
+      link: "../orchestration-cluster-api/",
+      image: CamundaImg,
     },
     {
       name: "Polling",

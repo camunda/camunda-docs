@@ -24,12 +24,12 @@ To make a template available for use, complete two key steps:
    - Secrets must be configured beforehand.
    - Other dependency types (e.g., Camunda forms, RPA scripts, DMN decisions) need to be deployed to the cluster.
 
-2. **Make the template available at design time**: Ensure Web Modeler or Desktop Modeler can access the template for use in your projects.
+2. **Make the template available at design time**: Ensure Camunda Hub or Desktop Modeler can access the template for use in your projects.
 
 ## Next steps
 
 - [Defining element templates](./defining-templates.md)
-- [Publishing an element template in Web Modeler](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)
-- [Using element templates in Web Modeler](/components/hub/workspace/modeler/element-templates/using-templates.md)
+- [Publishing an element template in Camunda Hub](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#publish-an-element-template)
+- [Using element templates in Camunda Hub](/components/hub/workspace/modeler/element-templates/using-templates.md)
 - [Configuring element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/configuring-templates.md)
 - [Using element templates in Desktop Modeler](/components/modeler/desktop-modeler/element-templates/using-templates.md)

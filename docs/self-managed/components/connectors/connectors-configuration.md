@@ -601,6 +601,8 @@ A single Connector Runtime can serve a single tenant or can be configured to ser
 multiple tenants. By default, the runtime uses the tenant ID `<default>` for all
 Zeebe-related operations like handling jobs and publishing messages.
 
+The tenants described on this page are logical tenants. Camunda 8 Self-Managed also supports [Physical Tenants](/self-managed/concepts/multi-tenancy/physical-tenants.md), which are strongly isolated execution units within a single Orchestration Cluster and are configured separately. One Connector Runtime can serve several Physical Tenants, each with its own client, job workers, and secrets. See [Connectors runtime: Physical Tenant support](/self-managed/concepts/physical-tenants/connectors-runtime.md).
+
 :::info
 Support for **outbound connectors** with multiple tenants requires a dedicated
 tenant job worker config (described below). **Inbound connectors** automatically work for all tenants the configured Connector Runtime client has access to. This can be configured in Admin via the application assignment.
@@ -669,7 +671,7 @@ To restrict the Connector Runtime inbound connector feature to a single tenant o
 
 ### Troubleshooting
 
-To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across **all** associated components [if not configured in Helm](../../deployment/helm/configure/configure-multi-tenancy.md) so users can view any data from tenants for which they have authorizations configured in Admin.
+To ensure seamless integration and functionality, the multi-tenancy feature must also be enabled across all associated components [if not configured in Helm](../../deployment/helm/configure/configure-logical-tenants.md) so users can view any data from tenants for which they have authorizations configured in Admin.
 
 Find more information (including links to component-specific configuration pages) on the [multi-tenancy concepts page](/components/concepts/multi-tenancy.md).
 

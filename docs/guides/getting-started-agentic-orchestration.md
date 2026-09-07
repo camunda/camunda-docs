@@ -12,6 +12,7 @@ import TabItem from "@theme/TabItem";
 import AiAgentExampleDiagramImg from './img/ai-agent-example-diagram.png';
 import AiAgentStartFormImg from './img/ai-agent-example-start-form.png';
 import AiAgentPropertiesPanelImg from './img/ai-agent-properties.png';
+import AgentPanelImg from '../components/agentic-orchestration/img/agent-panel.png';
 
 <span class="badge badge--beginner">Beginner</span>
 <span class="badge badge--medium">Time estimate: 45 minutes</span>
@@ -80,7 +81,7 @@ Depending on your working environment, follow the corresponding steps below.
 
 <TabItem value="saas">
 1. In the [blueprint page](https://marketplace.camunda.com/en-US/apps/587865), click **For SAAS** and select or create a project to save the blueprint.
-1. The blueprint BPMN diagram opens in Web Modeler.
+1. The blueprint BPMN diagram opens in Camunda Hub.
 </TabItem>
 
 <TabItem value="self-managed">
@@ -248,12 +249,13 @@ Depending on your working environment, test your agent by following the correspo
 
 <TabItem value="saas">
 
-1. Open [Web Modeler](/components/hub/workspace/modeler/index.md).
+1. In [Camunda Hub](/components/hub/workspace/modeler/index.md), navigate to your workspace.
+1. In your workspace, open a project. Then, open a BPMN file.
 1. Select the [**Test**](/components/hub/workspace/modeler/validation/test-your-process.md) tab.
 1. Select the cluster you want to deploy and test the process on.
 1. Open the Start form and add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start instance**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer. Open the **Task form** to view the result.
-1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md).
+1. You can [monitor the process execution](#monitor-the-process-execution) in Operate.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish your testing and complete the process.
 
 :::important Test mode not supported
@@ -270,13 +272,21 @@ Because the AI agent in this example is an ad-hoc sub-process, you can't use **T
 1. In the start form, add a prompt for the AI agent. For example, enter "Tell me a joke" in the **How can I help you today?** field, and click **Start process**.
 1. The AI agent analyzes your prompt, decides what tools to use, and responds with an answer.
 1. Select the **Tasks** tab in Tasklist. When the AI agent finishes processing, you should see a `User Feedback` task waiting for you to complete.
-1. You can monitor the process execution in [Operate](/components/operate/operate-introduction.md). Open it in your browser at http://localhost:8080/operate.
+1. You can [monitor the process execution](#monitor-the-process-execution) in Operate.
 1. You can follow up with more prompts to continue testing the AI agent. Select the **Are you satisfied with the result?** checkbox when you want to finish the process.
 
 </TabItem>
 </Tabs>
 
-### What to expect during execution
+### Monitor the process execution
+
+Open [Operate](/components/operate/operate-introduction.md) at http://localhost:8080/operate, and locate your process instance to watch the agent at work.
+
+Select the AI agent element to view usage metrics, its full conversation history, available tools, and other details:
+
+<img src={AgentPanelImg} alt="Agent panel overview" width="80%"/>
+
+For a hands-on walkthrough of the agent instance details available in Operate, see [monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md).
 
 When you run the AI agent process:
 
@@ -286,8 +296,6 @@ When you run the AI agent process:
 1. Tasks can execute in parallel or sequentially, depending on the agent's decisions and process state.
 1. Process variables are updated as each tool completes its execution.
 1. The agent may iterate through multiple tool calls to handle complex requests.
-
-You can observe this dynamic behavior in real-time through Operate, where you'll see which tasks were activated and in what order.
 
 ## Step 4: Add your first tool
 

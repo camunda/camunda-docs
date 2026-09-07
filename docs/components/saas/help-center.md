@@ -42,7 +42,7 @@ The **Automation project guide** tab provides a set of recommended documentation
 
 ### Use case guide
 
-The **Use case guide** tab provides a few getting started templates, such as process modeling or human task orchestration. These tutorials link to tutorials in Web Modeler, which may take 10-15 minutes each.
+The **Use case guide** tab provides a few getting started templates, such as process modeling or human task orchestration. These tutorials link to tutorials in Camunda Hub, which may take 10-15 minutes each.
 
 ### Camunda Academy
 

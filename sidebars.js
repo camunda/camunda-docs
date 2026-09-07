@@ -135,7 +135,7 @@ module.exports = {
       },
       items: [
         "components/hub/workspace/modeler/idp/idp-configuration",
-        "components/hub/workspace/modeler/idp/idp-applications",
+        "components/hub/workspace/modeler/idp/idp-projects",
         "components/hub/workspace/modeler/idp/idp-document-classification",
         {
           type: "category",
@@ -682,6 +682,7 @@ module.exports = {
             "components/admin/client",
             "components/admin/mapping-rules",
             "components/admin/tenant",
+            "components/admin/cluster-admin",
             "components/admin/cluster-variables",
             "components/admin/global-user-task-listeners",
             "components/admin/audit-operations",
@@ -713,7 +714,8 @@ module.exports = {
                 id: "components/hub/organization/manage-workspaces/manage-workspaces",
               },
               items: [
-                "components/hub/workspace/modeler/collaboration/use-shared-project-for-organization-wide-collaboration",
+                "components/hub/organization/manage-workspaces/manage",
+                "components/hub/organization/manage-workspaces/manage-workspace-members",
               ],
             },
             {
@@ -746,18 +748,19 @@ module.exports = {
               items: [
                 "components/hub/organization/manage-catalog/getting-started-catalog",
                 "components/hub/organization/manage-catalog/manage-asset-lifecycle",
+                "components/hub/organization/manage-catalog/track-asset-usage",
                 "components/hub/organization/manage-catalog/sync-multiple-repositories",
               ],
             },
             {
               type: "category",
-              label: "Manage members",
+              label: "Manage users",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-members/manage-users",
+                id: "components/hub/organization/manage-users/manage-users",
               },
               items: [
-                "components/hub/organization/manage-members/manage-user-groups",
+                "components/hub/organization/manage-users/manage-user-groups",
               ],
             },
             {
@@ -786,6 +789,7 @@ module.exports = {
                 },
               ],
             },
+            "components/hub/workspace/manage-projects/recently-deleted",
             {
               type: "category",
               label: "Analyze operations",
@@ -815,36 +819,12 @@ module.exports = {
                 id: "components/hub/workspace/manage-projects/manage-projects",
               },
               items: [
-                {
-                  type: "doc",
-                  label: "Lifecycle",
-                  id: "components/hub/workspace/manage-projects/project-pipeline",
-                },
-                {
-                  type: "doc",
-                  label: "Creation",
-                  id: "components/hub/workspace/manage-projects/create-a-project",
-                },
-                {
-                  type: "doc",
-                  label: "Deployment",
-                  id: "components/hub/workspace/manage-projects/deploy-project",
-                },
-                {
-                  type: "doc",
-                  label: "Versioning",
-                  id: "components/hub/workspace/manage-projects/project-versioning",
-                },
-                {
-                  type: "doc",
-                  label: "Git Sync",
-                  id: "components/hub/workspace/manage-projects/git-sync",
-                },
-                {
-                  type: "doc",
-                  label: "Recover deleted resources",
-                  id: "components/hub/workspace/manage-projects/recently-deleted",
-                },
+                "components/hub/workspace/manage-projects/create-a-project",
+                "components/hub/workspace/manage-projects/validate-project",
+                "components/hub/workspace/manage-projects/project-versioning",
+                "components/hub/workspace/manage-projects/deploy-project",
+                "components/hub/workspace/manage-projects/git-sync",
+                "components/hub/workspace/manage-projects/manage-project",
               ],
             },
             {
@@ -868,11 +848,6 @@ module.exports = {
                     "components/hub/workspace/modeler/modeling/versions",
                     "components/hub/workspace/modeler/modeling/file-download",
                     "components/hub/workspace/modeler/modeling/camunda-marketplace",
-                    {
-                      type: "doc",
-                      id: "components/hub/workspace/modeler/modeler-settings",
-                      label: "Settings",
-                    },
                     {
                       type: "category",
                       label: "Import",
@@ -934,6 +909,7 @@ module.exports = {
                     "components/hub/workspace/modeler/validation/task-testing",
                   ],
                 },
+                "components/hub/workspace/modeler/modeler-settings",
               ],
             },
           ],
@@ -1133,6 +1109,7 @@ module.exports = {
               ],
             },
             "components/connectors/out-of-the-box-connectors/openai",
+            "components/connectors/out-of-the-box-connectors/orchestration-cluster-api",
             "components/connectors/out-of-the-box-connectors/rabbitmq",
             "components/connectors/protocol/rest",
             "components/connectors/out-of-the-box-connectors/salesforce",
@@ -1590,13 +1567,15 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.9",
+      label: "Upgrade to Camunda 8.10",
       className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "apis-tools/migration-manuals/migrate-to-89",
+        id: "apis-tools/migration-manuals/migrate-to-810",
       },
       items: [
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+        "apis-tools/migration-manuals/web-modeler-v1-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
         "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
@@ -1605,17 +1584,6 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
         "apis-tools/migration-manuals/saas-orchestration-architecture",
-      ],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.10",
-      link: {
-        type: "doc",
-        id: "apis-tools/migration-manuals/migrate-to-810",
-      },
-      items: [
-        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
       ],
     },
   ],
@@ -1819,6 +1787,7 @@ module.exports = {
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
+                "self-managed/deployment/helm/configure/service-configuration",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/multi-namespace",
@@ -1959,7 +1928,8 @@ module.exports = {
                 "self-managed/deployment/helm/configure/running-custom-connectors",
                 "self-managed/deployment/helm/configure/add-extra-manifests",
                 "self-managed/deployment/helm/configure/license-key",
-                "self-managed/deployment/helm/configure/configure-multi-tenancy",
+                "self-managed/deployment/helm/configure/configure-logical-tenants",
+                "self-managed/deployment/helm/configure/configure-physical-tenants",
               ],
             },
             {
@@ -2129,6 +2099,7 @@ module.exports = {
           Authentication: [
             "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
             "self-managed/concepts/authentication/authentication-to-management-components",
+            "self-managed/concepts/authentication/authentication-to-optimize",
           ],
         },
         {
@@ -2267,7 +2238,6 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/index",
                 "self-managed/concepts/physical-tenants/storage-isolation",
                 "self-managed/concepts/physical-tenants/api-routing",
-                "self-managed/concepts/physical-tenants/web-apps",
                 "self-managed/concepts/physical-tenants/authentication-authorization",
                 "self-managed/concepts/physical-tenants/authorization-model",
                 "self-managed/concepts/physical-tenants/configuration-reference",

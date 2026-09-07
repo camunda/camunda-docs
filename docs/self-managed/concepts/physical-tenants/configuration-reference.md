@@ -102,7 +102,7 @@ For backward compatibility:
 
 ## Validation and constraints
 
-At startup, configuration validation enforces tenant-level constraints. All validation failures throw a `UnifiedConfigurationException` and prevent the cluster from starting. There is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
+At startup, configuration validation enforces tenant-level constraints, and any failure prevents the cluster from starting. Most validation failures throw a `UnifiedConfigurationException`; secret store and cache validation (see **Secrets** below) is the exception, throwing an `IllegalStateException` or an `IllegalArgumentException` directly instead. Either way, there is no separate error code, and the message is reported at startup rather than logged as a warning. For the exact error message when a tenant is missing `providers.assigned`, see [IdP provider assignment](./authentication-authorization.md#idp-provider-assignment).
 
 Known constraints and behavior for 8.10:
 
@@ -117,6 +117,7 @@ Known constraints and behavior for 8.10:
   - Local filesystem: Path.
 - Validation failures are startup failures, not runtime warnings.
 - **Document store**: non-default tenants must declare `document.assigned`. Startup also fails if two tenants resolve to the same provider, bucket or container, and path. The error names the conflicting tenants.
+- **Secrets**: each physical tenant supports at most one secret store, and its id must be `default`; any other id is rejected. The cache `ttl` (minimum `1m`, whole minutes only) and `max-size` (minimum `1`) are validated per tenant. Override the root-level `camunda.secrets.*` defaults per tenant via `camunda.physical-tenants.<tenant-key>.secrets.*`.
 
 ### Startup error message formats
 
@@ -142,6 +143,41 @@ store location [provider=aws, namespace=[company-docs-bucket], keyPrefix='tenant
 ```
 
 If one tenant's path is nested inside another's rather than identical, the message instead reads: `tenant <enclosing> 's document store location [...] encloses tenant <enclosed> 's [...]`.
+
+**Secret store or cache misconfiguration:**
+
+```text
+Physical tenant 'riskprod' has 2 secret stores configured, but only one is supported at this time
+```
+
+```text
+Physical tenant 'riskprod' configures secret store 'primary', but the only supported store id is
+'default'; rename camunda.physical-tenants.riskprod.secrets.stores.file.primary to
+camunda.physical-tenants.riskprod.secrets.stores.file.default
+```
+
+```text
+Physical tenant 'riskprod' has an invalid secret cache configuration: camunda.secrets.cache.ttl must
+be at least 1 minute, but was PT30S
+```
+
+```text
+Physical tenant 'riskprod' has an invalid secret cache configuration: camunda.secrets.cache.ttl must
+be a whole number of minutes, but was PT1M30S
+```
+
+```text
+Physical tenant 'riskprod' has an invalid secret cache configuration: camunda.secrets.cache.max-size
+must be at least 1, but was 0
+```
+
+```text
+File store 'default' for physical tenant 'riskprod' has no path configured
+```
+
+The cache messages always report the canonical `camunda.secrets.cache.*` property path, even when the
+value came from a `camunda.physical-tenants.<tenant-key>.secrets.cache.*` override; the tenant name in
+the surrounding sentence is what identifies which tenant's override is at fault.
 
 ## Configuration examples
 
@@ -230,5 +266,6 @@ If YAML and environment variables are used together, use the same normalized ten
 - [Physical Tenant isolation model](./index.md)
 - [Provisioning and lifecycle](./provisioning-and-lifecycle.md)
 - [Multi-tenancy overview](../multi-tenancy/index.md)
+- [Cluster admin](/components/admin/cluster-admin.md) for configuring access to cluster-wide operations
 
 :::

@@ -14,9 +14,9 @@ Additionally, the [Camunda Marketplace](/components/hub/workspace/modeler/modeli
 
 Before developing one, you'll need to decide what you would like to achieve with your connector. Currently, the options are:
 
-- Starting a BPMN process, triggered by external service - Use [inbound start event connector template](#inbound-start-event-connector-templates).
-- Continue process with an intermediate catch event emitted by external service call - Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
-- Trigger an external service - Use [outbound connector template](#outbound-connector-templates).
+- Starting a BPMN process, triggered by external service. Use [inbound start event connector template](#inbound-start-event-connector-templates).
+- Continue process with an intermediate catch event emitted by external service call. Use [inbound intermediate catch event connector templates](#inbound-intermediate-catch-event-connector-templates).
+- Trigger an external service. Use [outbound connector template](#outbound-connector-templates).
 
 :::note
 Do not confuse **Connector templates** with the **[Connector template](https://github.com/camunda/connector-template-outbound)**,
@@ -1177,7 +1177,7 @@ You can develop connector templates using the [`element template` feature](/comp
 
 If your connector provides several operations, define them with the [`steps` and `presets` keys](/components/modeler/element-templates/template-metadata.md#predefined-configurations-steps-and-presets). Users can then find each operation through search and select it when they apply the template, instead of applying the template first and choosing the operation in a dropdown afterwards.
 
-## Providing and using connector templates
+## Make custom Connector templates available
 
 When using [Camunda Hub](/components/hub/workspace/modeler/index.md), you can create **Connector templates** [directly within the application](/components/hub/workspace/modeler/element-templates/element-template-generator.md) and share them with your respective organization.
 

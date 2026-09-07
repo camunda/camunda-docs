@@ -39,6 +39,8 @@ For the center of excellence, responsible for managing the catalog, the asset re
 - Track which diagrams still reference the template.
 - Encourage the migration of those diagrams to a newer version or a different template before the asset is removed entirely.
 
+Unpublished assets that are still in use are reported as **Deprecated** in the [asset usage overview](/components/hub/organization/manage-catalog/track-asset-usage.md), where you can see the workspaces and projects that still reference them.
+
 :::note
 Unpublishing is a catalog-level state that indicates the asset is no longer part of the current submission. Use it when an asset should no longer be offered to delivery teams—for example, when you replace a connector with a successor and want to drive migration off the old one.
 
@@ -78,5 +80,6 @@ Deletion is irreversible. Use it to correct mistakes or remove assets that shoul
 ## Next steps
 
 - [Get started with the catalog](/components/hub/organization/manage-catalog/getting-started.md) — set up the repository and CI/CD pipeline.
+- [Track catalog asset usage](/components/hub/organization/manage-catalog/track-asset-usage.md) — find outdated assets and the projects that still use them.
 - [Sync assets from multiple repositories](/components/hub/organization/manage-catalog/sync-multiple-repositories.md) — consolidate templates before syncing.
 - [Use catalog assets in Hub](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md) — learn how delivery teams apply published assets.

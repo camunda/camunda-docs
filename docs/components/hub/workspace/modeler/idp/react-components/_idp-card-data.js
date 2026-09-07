@@ -33,11 +33,11 @@ export const configCards = [
 // Getting started cards on introduction page
 export const gettingStartedCards = [
   {
-    link: "./idp-applications",
-    title: "IDP applications",
+    link: "./idp-projects",
+    title: "IDP projects",
     image: IconIdpApplication,
     description:
-      "Start by creating an IDP application in which to store and manage your IDP templates.",
+      "Start by creating an IDP project on the Projects page in which to store and manage your IDP templates.",
   },
   {
     link: "./idp-document-classification",

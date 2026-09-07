@@ -26,5 +26,5 @@ If you are the owner of the organization, you can change the name of your organi
 
 ## Next steps
 
-- [Manage users in your organization](../manage-members/manage-users.md)
+- [Manage users in your organization](../manage-users/manage-users.md)
 - [View organization activity](./view-organization-activity.md)
