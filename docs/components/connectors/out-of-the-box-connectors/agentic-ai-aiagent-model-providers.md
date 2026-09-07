@@ -68,7 +68,11 @@ Most backends also provide advanced, low-level customization fields: **HTTP head
 
 For backends with a well-known REST-style API surface, such as the native Anthropic API, OpenAI API, and Google Gemini or Vertex AI backends, these fields are reserved for internal or future use and aren't exposed in the properties panel. For backends without a fixed request structure, such as AWS Bedrock Converse, AWS Bedrock Mantle, and custom or compatible endpoints, the fields are exposed as editable [FEEL](/components/modeler/feel/what-is-feel.md) map expressions, which you can use to adapt the request to your deployment.
 
-## Anthropic
+## Detailed configuration options
+
+Use the following sections to configure each provider's available backends, authentication, model settings, and provider-specific parameters.
+
+### Anthropic
 
 Select this provider to use an Anthropic Claude LLM model. Choose a **Backend** to specify how to access the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages):
 
@@ -92,7 +96,7 @@ Use this backend to run Anthropic Claude models hosted on Amazon Bedrock while k
 | **Custom endpoint** | No       | Custom API endpoint for VPC/PrivateLink configurations or other non-standard deployments. Must be the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). It replaces the default `https://bedrock-mantle.<region>.api.aws/anthropic` verbatim. |
 | **Authentication**  | Yes      | Select the authentication method used to authenticate with AWS: **Credentials** (access key/secret key), **API key**, or **Default Credentials Chain** (Hybrid/Self-Managed only). See [Amazon Bedrock connector authentication](./amazon-bedrock.md#authentication) for details on each method.                     |
 
-Model availability depends on the region. You may need to request access to Anthropic models available through Bedrock. See [access to Amazon Bedrock foundation models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-access-modify.html) for details.
+Bedrock Mantle supports a different set of models than Bedrock Runtime, and model availability also varies by AWS Region. Before selecting a model, check [Amazon Bedrock endpoint availability](https://docs.aws.amazon.com/bedrock/latest/userguide/models-endpoint-availability.html) and the linked model details for current endpoint and regional support.
 
 #### Anthropic custom / compatible endpoint
 
@@ -118,7 +122,7 @@ Use this backend for any endpoint implementing the Anthropic Messages API, such 
 | **top P**                  | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                  |
 | **top K**                  | No       | Advanced sampling control configured as a positive integer. Limits selection to this number of the most likely tokens.                                                                                                             |
 
-## AWS Bedrock Converse
+### AWS Bedrock Converse
 
 Select this provider to use a model provided by the [Amazon Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html) service through the generic [Converse](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html) API.
 
@@ -146,7 +150,7 @@ Model availability depends on the region and model. See [supported foundation mo
 
 Bedrock Converse doesn't support a **Reasoning**/**Effort** configuration or a **top K** parameter.
 
-## OpenAI
+### OpenAI
 
 Select this provider to use OpenAI models. Two independent choices apply:
 
@@ -215,7 +219,7 @@ Use this backend to connect to any LLM that exposes an OpenAI-compatible API, in
 
 OpenAI doesn't support a **top K** parameter or prompt caching configuration.
 
-## Google Gemini
+### Google Gemini
 
 Select this provider to use Google's Gemini models. Choose a **Backend** to specify how to access the API:
 
@@ -252,7 +256,7 @@ Select this provider to use Google's Gemini models. Choose a **Backend** to spec
 Google Gemini doesn't support prompt caching configuration.
 :::
 
-## Custom implementation
+### Custom implementation
 
 :::important
 Available in Self-Managed or [hybrid](/reference/glossary.md#hybrid-mode) deployments only.

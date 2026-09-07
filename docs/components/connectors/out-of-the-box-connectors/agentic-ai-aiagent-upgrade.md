@@ -9,16 +9,16 @@ Upgrade AI Agent connectors from legacy v1 to native v2 element templates and mi
 
 ## Why upgrade
 
-Starting with Camunda 8.10, the [AI Agent Task](./agentic-ai-aiagent-task.md) and [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connectors are available as new, native (`v2`) element templates.
+Starting with Camunda 8.10, the [AI Agent Task](./agentic-ai-aiagent-task.md) and [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connectors are available as new native (`v2`) element templates.
 
-The `v2` element templates restructure the AI Agent connectors to provide native, first-class access to each LLM provider’s SDK and wire format instead of relying on a common abstraction. This unlocks capabilities unavailable in `v1` such as:
+The `v2` templates use each LLM provider's SDK and wire format instead of a common abstraction. They expose capabilities unavailable in `v1`, including:
 
-- Reasoning/extended thinking configuration (Anthropic's **Effort**/**Thinking mode**, OpenAI's **Effort**, Google Gemini's **Thinking budget**/**Thinking level**).
+- Reasoning and extended thinking configuration (Anthropic's **Effort**/**Thinking mode**, OpenAI's **Effort**, and Google Gemini's **Thinking budget**/**Thinking level**).
 - Prompt caching configuration (Anthropic, AWS Bedrock Converse).
-- New backends, such as [Microsoft Foundry](./agentic-ai-aiagent-model-providers.md#microsoft-foundry-azure) for OpenAI, and [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#aws-bedrock-mantle) for Anthropic Claude models.
-- A [custom chat model provider](./agentic-ai-aiagent-model-providers.md#custom-implementation) option, for Self-Managed/hybrid deployments.
+- New backends, including [Microsoft Foundry](./agentic-ai-aiagent-model-providers.md#microsoft-foundry-azure) for OpenAI and [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#aws-bedrock-mantle) for Anthropic Claude models.
+- A [custom chat model provider](./agentic-ai-aiagent-model-providers.md#custom-implementation) for Self-Managed or hybrid deployments.
 
-As of Camunda 8.10, `v1` job workers already run internally on the same native provider SDKs that back `v2`. This is a transparent runtime change, so existing `v1` configurations keep working and benefit from it automatically. However, the `v1` element templates' fields don't expose any of the new configuration described above. To use it, apply the `v2` element template.
+Existing `v1` configurations keep working and use the same provider SDKs internally, but their templates don't expose the new configuration. Apply a `v2` template to use it.
 
 :::important
 `v1` element templates are deprecated as of Camunda 8.10 and will not receive new provider capabilities going forward. New AI Agent implementations should use the `v2` element templates directly.
@@ -37,7 +37,7 @@ As of Camunda 8.10, `v1` job workers already run internally on the same native p
 
 :::important
 Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the `v1` job worker until you deploy a new version with the `v2` template applied.
-  :::
+:::
 
 ## Model provider configuration mapping
 
@@ -139,10 +139,10 @@ A multi-replica connectors runtime setup means each replica acquires and caches 
 `v2`'s **API key** field is required, unlike `v1`'s optional **API key**. Resolve your effective credential as follows before entering it:
 
 - If your `v1` **Headers** included an `Authorization` header, it always took precedence over the **API key** field in `v1`. Carry that behavior forward manually:
-  - If the header value was a `Bearer <token>`, move `<token>` into the `v2` **API key** field, and remove the `Authorization` header from `v2` **Headers**.
-  - For any other scheme (for example `Basic ...`), keep the header as-is in `v2` **Headers**, and enter any non-blank placeholder value in **API key** (it's otherwise unused for authentication).
-- Otherwise, carry your `v1` **API key** value over directly. If you had neither an `Authorization` header nor an API key configured, enter any non-blank placeholder value.
-:::
+  - If the header used `Bearer <token>`, move the token value without the `Bearer` prefix into the `v2` **API key** field, and remove the `Authorization` header from `v2` **Headers**.
+  - For any other scheme (for example `Basic ...`), keep the header in `v2` **Headers**, and enter any non-blank placeholder value in **API key** (it's otherwise unused for authentication).
+- Otherwise, carry your `v1` **API key** value over directly. If neither an `Authorization` header nor an API key was configured, enter any non-blank placeholder value.
+  :::
 
 Also double-check the resulting request path: `v2` appends `/chat/completions` or `/responses` to **API endpoint** depending on the selected **API**, which may differ from what your `v1` endpoint pointed at.
 
