@@ -78,7 +78,7 @@ Monitor and evaluate AI agent behavior in Operate.
 <p class="link-arrow">[Monitor your AI agents with Operate](/components/agentic-orchestration/evaluate-agents/monitor-ai-agents.md)</p>
 
 :::note
-If you modeled the agent element before Camunda 8.10, [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to the version required to enable this feature.
+If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
 ### Camunda design system
