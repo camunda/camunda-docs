@@ -802,6 +802,7 @@ module.exports = {
                 id: "components/hub/organization/analyze-operations/analyze-operations",
               },
               items: [
+                "components/hub/organization/analyze-operations/hub-dashboard",
                 "components/hub/organization/analyze-operations/job-dashboard",
               ],
             },
