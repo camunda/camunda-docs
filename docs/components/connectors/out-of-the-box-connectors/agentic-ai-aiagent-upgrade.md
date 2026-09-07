@@ -1,48 +1,47 @@
 ---
 id: agentic-ai-aiagent-upgrade
-sidebar_label: Upgrade from v1
-title: Upgrade AI Agent element templates from v1 to v2
-description: Upgrade AI Agent connectors from legacy v1 to native v2 element templates and migrate their model provider configurations.
+sidebar_label: Upgrade from the legacy connector
+title: Upgrade AI Agent element templates from the legacy connector
+description: Upgrade AI Agent connectors from the legacy element templates to the new native element templates and migrate their model provider configurations.
 ---
 
-Upgrade AI Agent connectors from legacy v1 to native v2 element templates and migrate their model provider configurations.
+Upgrade AI Agent connectors from the legacy element templates to the new native element templates, and migrate their model provider configurations.
 
 ## Why upgrade
 
-Starting with Camunda 8.10, the [AI Agent Task](./agentic-ai-aiagent-task.md) and [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connectors are available as new native (`v2`) element templates.
-
-The `v2` templates use each LLM provider's SDK and wire format instead of a common abstraction. They expose capabilities unavailable in `v1`, including:
+Starting with Camunda 8.10, the [AI Agent Task](./agentic-ai-aiagent-task.md) and [AI Agent Sub-process](./agentic-ai-aiagent-subprocess.md) connectors are available as new element templates, running on new job types. The redesign gives each LLM provider native, first-class access to its own SDK and wire format, replacing the previous common abstraction, and unlocks capabilities the legacy templates can't expose:
 
 - Reasoning and extended thinking configuration (Anthropic's **Effort**/**Thinking mode**, OpenAI's **Effort**, and Google Gemini's **Thinking budget**/**Thinking level**).
 - Prompt caching configuration (Anthropic, AWS Bedrock Converse).
-- New backends, including [Microsoft Foundry](./agentic-ai-aiagent-model-providers.md#microsoft-foundry-azure) for OpenAI and [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#aws-bedrock-mantle) for Anthropic Claude models.
-- A [custom chat model provider](./agentic-ai-aiagent-model-providers.md#custom-implementation) for Self-Managed or hybrid deployments.
+- A new backend for Anthropic Claude models: [AWS Bedrock Mantle](./agentic-ai-aiagent-model-providers.md#anthropic). Microsoft Foundry itself isn't new (it was already reachable as **Azure OpenAI** in the legacy templates), but it's now a backend of the general-purpose OpenAI provider instead of its own top-level provider.
+- A [custom chat model provider](./agentic-ai-aiagent-model-providers.md#custom-implementation) option, for Self-Managed/hybrid deployments.
 
-Existing `v1` configurations keep working and use the same provider SDKs internally, but their templates don't expose the new configuration. Apply a `v2` template to use it.
+As of Camunda 8.10, legacy job workers already run internally on the same native provider SDKs that back the new templates (the legacy templates were themselves backed by a "native" element template style; what's changed is the abstraction underneath, not that distinction). This is a transparent runtime change, so existing legacy configurations keep working and benefit from it automatically. However, the legacy element templates' fields don't expose any of the new configuration described above. To use it, apply the new element template.
 
 :::important
-`v1` element templates are deprecated as of Camunda 8.10 and will not receive new provider capabilities going forward. New AI Agent implementations should use the `v2` element templates directly.
+The legacy element templates are deprecated as of Camunda 8.10 and will not receive new provider capabilities going forward, but they keep working. New AI Agent implementations should use the new element templates directly.
 :::
 
 ## How to upgrade
 
-`v1` and `v2` are separate element templates backed by separate connector types (job types), not two versions of the same template. This means upgrading is a manual, per-element operation:
+The legacy and new element templates are separate templates backed by separate connector types (job types), not two versions of the same template. This means upgrading is a manual, per-element operation:
 
-1. Open the AI Agent Task or AI Agent Sub-process element in Camunda Modeler, and set the process' modeler/execution version to Camunda 8.10 or later, so the `v2` element template is available to select.
-2. In the element's **Template** panel, **Unlink** the applied `v1` template. This clears the template binding but keeps the element's existing field values.
-3. Select the element and choose **+ Select** on the **Template** field to apply the latest `v2` version of the same element template (**AI Agent Task**/**AI Agent Sub-process**). Since `v1` is deprecated, it's no longer selectable from the template picker; only `v2` is offered.
-4. Re-enter the model provider configuration using the [mapping tables](#model-provider-configuration-mapping) below. This is where the bulk of the migration work is, since the provider fields were restructured the most between `v1` and `v2`.
-5. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged between `v1` and `v2`, but re-check any values lost when the template was swapped.
-6. Redeploy the process definition.
+1. Open the AI Agent Task or AI Agent Sub-process element in Camunda Modeler, and set the process' modeler/execution version to Camunda 8.10 or later, so the new element template is available to select.
+2. In the element's **Template** panel, **Unlink** the applied legacy template. This clears the template binding but keeps the element's existing field values.
+3. Select the element and choose **+ Select** on the **Template** field to apply the latest version of the same element template (**AI Agent Task**/**AI Agent Sub-process**). Since the legacy template is deprecated, it's no longer selectable from the template picker; only the new one is offered.
+4. Re-enter the model provider configuration using the [mapping tables](#model-provider-configuration-mapping) below. This is where the bulk of the migration work is, since the provider fields were restructured the most.
+5. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged, but re-check any values lost when the template was swapped.
+6. Deploy the new process definition version to a non-production environment first, and run a representative prompt and tool-call path through it to confirm authentication, endpoint, and model behavior before promoting it. See [testing process definitions](/components/best-practices/development/testing-process-definitions.md) for how to structure that verification. The prior version keeps running until you deploy this one, so it stays available as a rollback path.
+7. Once verified, promote the new version to production through your normal release process.
 
 :::important
-Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the `v1` job worker until you deploy a new version with the `v2` template applied.
+Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the legacy job worker until you deploy a new version with the new template applied.
 :::
 
 ## Model provider configuration mapping
 
-Model provider configuration changed the most between `v1` and `v2`, since providers and backends are now decoupled (see [choose a provider and backend](./agentic-ai-aiagent-model-providers.md#choose-a-provider-and-backend)).
-The sections below cover only the fields that changed. Any fields not mentioned carry over unchanged under the same field label.
+Model provider configuration changed the most in this redesign, since providers and backends are now decoupled (see [choose a provider and backend](./agentic-ai-aiagent-model-providers.md#choose-a-provider-and-backend)).
+The sections below cover only the fields that changed, using `v1`/`v2` to distinguish the legacy and new template fields precisely where the mapping itself is the point. Any fields not mentioned carry over unchanged under the same field label.
 
 ### Anthropic
 
@@ -52,9 +51,9 @@ The sections below cover only the fields that changed. Any fields not mentioned 
 
 If you had a custom `v1` **Endpoint** configured:
 
-| `v1` field | What to do in `v2`                                                                                                                                                   |
-| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Endpoint   | Select **Backend**: [Custom / compatible endpoint](./agentic-ai-aiagent-model-providers.md#anthropic-custom--compatible-endpoint), and enter it as **API endpoint**. |
+| `v1` field | What to do in `v2`                                                                                                                                   |
+| :--------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Endpoint   | Select **Backend**: [Anthropic](./agentic-ai-aiagent-model-providers.md#anthropic) > Custom / compatible endpoint, and enter it as **API endpoint**. |
 
 `v2` additionally exposes **Effort**, **Thinking mode**, and **Enable prompt caching**. None of these have a `v1` equivalent.
 
@@ -78,6 +77,8 @@ If you had a custom `v1` **Endpoint** configured:
 **Custom endpoint** expects the full Bedrock Mantle base URL, including the `/anthropic` path segment (for example, `https://your-vpce-host/anthropic`). This is a different shape than the Bedrock Runtime endpoint you may have configured in `v1`.
 
 **Model** carries over the same field label, but is now interpreted by Anthropic's own model ID scheme (as used by the native Anthropic API), not the AWS Bedrock model ID format you used in `v1`. Check the model ID against the [Claude models overview](https://docs.anthropic.com/en/docs/about-claude/models/all-models).
+
+Bedrock Mantle requires a different IAM permission policy than Bedrock Runtime. Reusing your `v1` Bedrock Runtime policy as-is will surface as an authentication or permission error on the first model call, not as a silent failure, so update the policy for the new endpoint before migrating.
 :::
 
 #### Migrating to AWS Bedrock Converse
@@ -148,9 +149,9 @@ Also double-check the resulting request path: `v2` appends `/chat/completions` o
 
 ### Google Vertex AI
 
-`v1` **Provider**: Google Vertex AI → `v2` **Provider**: [Google Gemini](./agentic-ai-aiagent-model-providers.md#google-gemini), **Backend**: Google Vertex AI.
+`v1` **Provider**: Google Vertex AI → `v2` **Provider**: [Google Gemini](./agentic-ai-aiagent-model-providers.md#google-gemini), **Backend**: Enterprise Agent Platform (Vertex AI).
 
-The provider itself changes from **Google Vertex AI** to **Google Gemini**. Vertex AI is now a backend of the general-purpose Google Gemini provider. A new [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini-api) backend is also available if you'd rather not manage a Google Cloud project.
+The provider itself changes from **Google Vertex AI** to **Google Gemini**. Vertex AI is now the Enterprise Agent Platform backend of the general-purpose Google Gemini provider. A new [Google Gemini API](./agentic-ai-aiagent-model-providers.md#google-gemini) backend is also available if you'd rather not manage a Google Cloud project.
 
 **Project ID**, **Region**, **Authentication** (**Service account credentials** / **Application default credentials**), **Model**, **Temperature**, **top P**, and **top K** carry over unchanged.
 
