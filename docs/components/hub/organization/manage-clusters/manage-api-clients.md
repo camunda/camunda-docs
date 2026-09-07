@@ -65,7 +65,7 @@ To view client connection information:
    - Operate URL
    - Optimize URL
    - OAuth URL
-   - Camunda Rest API
+   - Camunda REST API
 
 ## Scopes
 
