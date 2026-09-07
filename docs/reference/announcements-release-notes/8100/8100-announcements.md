@@ -178,15 +178,15 @@ Camunda 8.10 adds support for MySQL 9.7 LTS. Supported versions are now 8.4 and 
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
-<span className="badge badge--breaking-change">Breaking change</span>
+<span className="badge badge--deprecated">Deprecated</span>
 </div>
 <div className="release-announcement-content">
 
-#### AI Agent connector: new native (v2) element templates, v1 deprecated
+#### AI Agent connector: new native element templates, legacy templates deprecated {#ai-agent-connector-new-native-v2-element-templates-v1-deprecated}
 
-Camunda 8.10 introduces new `v2` element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration). The original (`v1`) element templates are deprecated as of Camunda 8.10.
+Camunda 8.10 introduces new element templates for the AI Agent Task and AI Agent Sub-process connectors, running on new job types and giving native access to each LLM provider's own SDK and wire format (including reasoning/extended thinking and prompt caching configuration). The legacy element templates are deprecated as of Camunda 8.10, but keep working; existing implementations aren't required to migrate immediately.
 
-**Action:** Use the `v2` element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing `v1` implementation to `v2`.
+**Action:** Use the new element templates for new AI Agent implementations. See the new [model providers](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers.md) page for the redesigned provider configuration, and the [upgrade guide](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) for moving an existing legacy implementation to the new templates.
 
 </div>
 </div>

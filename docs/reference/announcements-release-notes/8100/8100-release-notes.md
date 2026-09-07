@@ -40,16 +40,18 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ### Agentic orchestration
 
-#### AI Agent connector: new native (v2) element templates
+#### AI Agent connector: new native element templates
 
 <!-- https://github.com/camunda/connectors/issues/7211
 https://github.com/camunda/connectors/issues/7225 -->
 
 <div class="release"><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--long" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
 
-The AI Agent Task and AI Agent Sub-process connectors are now available as new, native (`v2`) element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
+The AI Agent Task and AI Agent Sub-process connectors are now available as new, native element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
 
-Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The original (`v1`) element templates are deprecated as of Camunda 8.10.
+Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The legacy element templates are deprecated as of Camunda 8.10.
+
+- This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manually [migrating](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) each element from the still-functioning legacy connector.
 
 See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-new-native-v2-element-templates-v1-deprecated) for more details.
 
