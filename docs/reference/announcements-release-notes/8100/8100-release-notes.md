@@ -51,6 +51,10 @@ The AI Agent Task and AI Agent Sub-process connectors are now available as new, 
 
 Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The original (`v1`) element templates are deprecated as of Camunda 8.10.
 
+:::note
+The legacy connector is deprecated in 8.10 but not removed, and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
+:::
+
 #### Improved agent tool configuration
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
