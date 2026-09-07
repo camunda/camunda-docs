@@ -252,11 +252,11 @@ https://docs.camunda.io/docs/next/components/modeler/feel/cluster-variable/clust
 # Management Identity
 
 https://docs.camunda.io/docs/next/self-managed/components/management-identity/overview/
-https://docs.camunda.io/docs/self-managed/components/management-identity/access-management/access-management-overview/
-https://docs.camunda.io/docs/self-managed/components/management-identity/access-management/manage-permissions/
-https://docs.camunda.io/docs/self-managed/components/management-identity/access-management/manage-permissions/#assign-a-permission-to-a-role
-https://docs.camunda.io/docs/self-managed/components/management-identity/application-user-group-role-management/applications/
-https://docs.camunda.io/docs/self-managed/components/management-identity/application-user-group-role-management/manage-groups/
-https://docs.camunda.io/docs/self-managed/components/management-identity/application-user-group-role-management/manage-roles/
-https://docs.camunda.io/docs/self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview/
+https://docs.camunda.io/docs/next/self-managed/components/management-identity/access-management/access-management-overview/
+https://docs.camunda.io/docs/next/self-managed/components/management-identity/access-management/manage-permissions/
+https://docs.camunda.io/docs/next/self-managed/components/management-identity/access-management/manage-permissions/#assign-a-permission-to-a-role
+https://docs.camunda.io/docs/next/self-managed/components/management-identity/application-user-group-role-management/applications/
+https://docs.camunda.io/docs/next/self-managed/components/management-identity/application-user-group-role-management/manage-groups/
+https://docs.camunda.io/docs/next/self-managed/components/management-identity/application-user-group-role-management/manage-roles/
+https://docs.camunda.io/docs/next/self-managed/components/management-identity/application-user-group-role-management/identity-application-user-group-role-management-overview/
 https://docs.camunda.io/docs/reference/announcements-release-notes/880/whats-new-in-88/#identity-and-management-identity
