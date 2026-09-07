@@ -62,19 +62,17 @@ The Camunda Exporter is enabled by default. It creates Orchestration Cluster ind
 
 ### Legacy Zeebe Exporter
 
-The Legacy Zeebe Exporter creates `zeebe-record` indices. This exporter is disabled by default. Optimize reads from the `zeebe-record` indices. When Optimize is enabled, the Legacy Zeebe Exporter is automatically enabled to provide these indices.
+The legacy Zeebe Exporter creates `zeebe-record` indices consumed by Optimize. In the Camunda 8.10 Helm chart, the exporter requires Optimize and its Elasticsearch or OpenSearch backend to be enabled.
 
 - **Helm configuration**: `optimize.database.elasticsearch.prefix` or `optimize.database.opensearch.prefix`
 - **Default value**: `zeebe-record`
-- **Controlled by**: `orchestration.exporters.zeebe.enabled: false` (default)
+- **Required consumer**: Optimize (`optimize.enabled: true`)
 
-:::info When the Legacy Zeebe Exporter is used
-The legacy Zeebe Exporter is automatically enabled when:
+:::note When the legacy Zeebe Exporter is used
+In single-region deployments, the chart automatically enables the legacy Zeebe Exporter when Optimize and its Elasticsearch or OpenSearch backend are enabled. Setting `orchestration.exporters.zeebe.enabled: true` does not enable the exporter without Optimize.
 
-- Optimize is enabled (`optimize.enabled: true`)
-- You explicitly enable it (`orchestration.exporters.zeebe.enabled: true`)
-- Data migration from pre-8.8 versions is required
-  :::
+When Optimize is disabled, `optimize.database.elasticsearch.prefix` and `optimize.database.opensearch.prefix` have no effect. You can still configure the Camunda Exporter prefix with `orchestration.index.prefix`.
+:::
 
 ## Configuration reference
 
