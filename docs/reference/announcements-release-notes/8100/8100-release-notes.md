@@ -280,29 +280,6 @@ Object variables are not flattened into per-property fields, and their raw value
 
 ### Orchestration Cluster
 
-#### Bring your own identity provider per cluster in SaaS
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-<!-- https://github.com/camunda/product-hub/issues/3190 -->
-
-You can now connect your own identity provider to individual clusters in Camunda SaaS.
-
-This enhancement moves identity management from a centralized Auth0 organizational provider to a customer-controlled, per-cluster approach via direct OIDC connections for the Orchestration Clusters.
-
-| Feature                          | Description                                                                                                                                                                                                                                                                       |
-| :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Direct OIDC integration          | Each cluster can now be configured with its own OIDC connection to your preferred Identity Provider. This enables a direct, secure, and customizable authentication pathway to align with your enterprise identity policies.                                                      |
-| Enhanced security and compliance | By bypassing the centralized Auth0 provider, you can implement and enforce your own security and compliance measures. This configuration supports compliance with internal and regulatory security standards.                                                                     |
-| Flexible configuration           | Administrators can configure cluster-specific identity provider settings via an intuitive admin interface. Configuration options include standard OIDC parameters, custom claims mapping using mapping rules, and additional security features as required by the customer’s IdP. |
-| Seamless Transition              | Migration guides and detailed documentation are provided to assist you in transitioning from the centralized Auth0 model to using your own identity provider.                                                                                                                     |
-
-This change is designed to be as seamless as possible, with minimal disruption to existing user authentication processes.
-
-:::note
-In this setup, Web Modeler and Console still continue to use Auth0 via the identity provider. It is only Orchestration Clusters that use your identity provider directly.
-:::
-
 #### Centralized Secret Resolution via Zeebe
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
