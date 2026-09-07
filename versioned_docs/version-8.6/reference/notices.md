@@ -23,7 +23,7 @@ To learn more about security at Camunda, including our security policy, security
 
 ### Publication date
 
-_To be set when this notice is published._
+September 9, 2026
 
 ### Products affected
 
