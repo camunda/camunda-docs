@@ -739,7 +739,7 @@ module.exports = {
             },
             {
               type: "category",
-              label: "Credentials",
+              label: "Manage credentials",
               link: {
                 type: "doc",
                 id: "components/hub/organization/credentials/credentials",

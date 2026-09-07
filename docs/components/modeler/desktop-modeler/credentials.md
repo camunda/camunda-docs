@@ -5,7 +5,7 @@ description: "Select, create, edit, and upgrade a credential from the properties
 keywords: [credential, credentials, desktop modeler, authentication]
 ---
 
-Select an existing credential on a connector task in Desktop Modeler, or create a new one without leaving the properties panel. A credential stores authentication and connection configuration you create once and reuse, instead of entering the same values on every task. See [Credentials](/components/hub/organization/credentials/index.md) for the concept and for how credentials are managed centrally.
+Select an existing [credential](/components/hub/organization/credentials/index.md) on a connector task in Desktop Modeler, or create a new one without leaving the properties panel. A credential stores authentication and connection configuration you create once and reuse, instead of entering the same values on every task.
 
 :::note
 This page covers credentials that authenticate connector tasks, such as an AWS Credential. It is unrelated to the cluster credentials (client ID and client secret) you enter to [connect Desktop Modeler to a cluster](./connect-to-camunda-8.md), which authenticate Desktop Modeler itself.
@@ -57,12 +57,12 @@ Upgrading a credential opens the same form and shows the fields that the newer c
 
 ## Credential scope {#credential-scope}
 
-A credential you create from Desktop Modeler is stored on the single cluster you are connected to, and is not registered centrally. It does not appear on the **Managed** tab of the [**Credentials** page](/components/hub/organization/credentials/index.md#managed-credentials).
+A credential you create from Desktop Modeler is stored on the single cluster you are connected to, and is not registered centrally. It does not appear on the **Managed** tab of the [**Credentials** page in Camunda Hub](/components/hub/organization/credentials/index.md#managed-credentials).
 
-To manage it centrally, find it on the [**Clusters only** tab](/components/hub/organization/credentials/index.md#clusters-only-credentials) and add it.
+To manage it centrally, find it on the [**Clusters only** tab in Camunda Hub](/components/hub/organization/credentials/index.md#clusters-only-credentials) and add it.
 
 ## Additional resources
 
-- [Credentials](/components/hub/organization/credentials/index.md)
+- [Manage credentials](/components/hub/organization/credentials/index.md)
 - [Use connectors](./use-connectors.md)
 - [Connect to Camunda 8](./connect-to-camunda-8.md)

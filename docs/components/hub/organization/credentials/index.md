@@ -1,11 +1,11 @@
 ---
 id: credentials
-title: Credentials
+title: Manage credentials
 description: "Create a reusable credential in Camunda Hub, then select it wherever an element template needs authentication or connection configuration, instead of repeating the settings in every diagram."
 keywords: [credential, credentials, authentication, reusable, connection]
 ---
 
-A credential stores authentication and connection configuration you create once and reuse, instead of entering the same values every time an element template asks for them.
+A credential stores authentication and connection settings you create once and reuse, instead of entering the same values every time an element template asks for them.
 
 ## About credentials
 
@@ -82,7 +82,7 @@ Once credentials exist, this tab lists them with their name, credential type, st
 
 ### Create a credential
 
-To create a credential, select **Create credential** and complete the three steps of the wizard.
+To create a credential, select **Create credential**, and complete the three steps of the wizard.
 
 1. **Choose credential**: select the credential type for the connector you want to authenticate. Each card describes the credential type and lists the connectors that use it. Use the search field to search by credential type or by connector name.
 
