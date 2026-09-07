@@ -98,7 +98,7 @@ The native, hosted Anthropic API.
 </TabItem>
 <TabItem value="bedrock-mantle">
 
-Run Anthropic Claude models hosted on Amazon Bedrock while keeping access to Anthropic-specific configuration (reasoning/extended thinking, prompt caching) that the generic [AWS Bedrock Converse](#aws-bedrock-converse) provider doesn't expose. Model availability on Bedrock Mantle is limited to newer Claude generations (per nikonovd: 5th-generation Claude and Haiku 4.5, at time of writing; unverified against AWS docs). Check actual availability in the Bedrock console before migrating.
+Run Anthropic Claude models hosted on Amazon Bedrock while keeping access to Anthropic-specific configuration (reasoning/extended thinking, prompt caching) that the generic [AWS Bedrock Converse](#aws-bedrock-converse) provider doesn't expose.
 
 | Field               | Required | Description                                                                                                                                                                                                                                                                                                          |
 | :------------------ | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -240,7 +240,7 @@ Connect to any LLM that exposes an OpenAI-compatible API, including open-weight 
 | **Temperature**                                                                  | No       | Primary response-variation control from 0 to 2. Lower values favor likely tokens more strongly; higher values increase variation.                                                                                                                                                                                                                                                 |
 | **top P**                                                                        | No       | Advanced nucleus-sampling control from 0 to 1. Limits selection to likely tokens whose cumulative probability reaches this value.                                                                                                                                                                                                                                                 |
 
-OpenAI doesn't support a **top K** parameter or prompt caching configuration.
+OpenAI doesn't support a **top K** parameter. Prompt caching is automatic when the request meets OpenAI's caching requirements and isn't user-configurable.
 
 ### Google Gemini
 
@@ -285,7 +285,7 @@ Gemini models through Google Cloud's Enterprise Agent Platform (formerly Vertex 
 | **top K**                    | No       | Advanced sampling control configured as a positive integer. Limits selection to this number of the most likely tokens.                                                                                               |
 
 :::note
-Google Gemini doesn't support prompt caching configuration.
+Prompt caching is automatic when the request meets Gemini's caching requirements and isn't user-configurable.
 :::
 
 ### Custom implementation
