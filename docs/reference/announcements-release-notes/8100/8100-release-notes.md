@@ -40,6 +40,17 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ### Agentic orchestration
 
+#### AI Agent connector: new native (v2) element templates
+
+<!-- https://github.com/camunda/connectors/issues/7211
+https://github.com/camunda/connectors/issues/7225 -->
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span></div>
+
+The AI Agent Task and AI Agent Sub-process connectors are now available as new, native (`v2`) element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
+
+Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The original (`v1`) element templates are deprecated as of Camunda 8.10.
+
 #### Improved agent tool configuration
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span></div>
@@ -240,6 +251,10 @@ You can now view and choose which cluster you are connected to in Web Modeler.
 - Connector-credential names from the cluster autocomplete in your FEEL expressions.
 - Task testing runs against the connected cluster.
 - Connect your cluster from the modeling toolbar to model against your real environment.
+
+:::note
+This is disabled by default and behind feature flag `runtimeConnectionEnabled` (cluster selection and task testing). The properties-panel connector-credential picker additionally requires `credentialsEnabled`.
+:::
 
 ### Optimize
 
