@@ -80,16 +80,18 @@ camunda.vars.env.API_BASE_URL + "/api/v" + camunda.vars.env.API_VERSION + "/reso
 
 ### Resolve secret references in a cluster variable
 
-References in a [`SECRET_REFERENCE`-kind](./data-types.md#variable-kinds) cluster variable are resolved only when the variable is read by an input mapping on an element that creates a job for a job worker, such as a service task or an ad hoc sub-process. In the other contexts on this page, including gateway conditions, script tasks, output mappings, and call activity input, the variable resolves to its stored value, so the reference text reaches your process unchanged.
+Camunda resolves references in a [`SECRET_REFERENCE` variable](./data-types.md#variable-kinds) only when an input mapping reads the variable on an element that creates a job for a job worker, such as a service task or an ad-hoc sub-process. In other contexts described on this page, including gateway conditions, script tasks, output mappings, and call activity input, Camunda uses the stored value and passes the reference text to your process unchanged.v
 
 The following rules apply to an input mapping that reads a `SECRET_REFERENCE`-kind variable:
 
 - The mapping source must be a FEEL expression. A static value, written without a leading `=`, is a plain string and holds no references.
-- A trailing field path narrows what is resolved. `= camunda.vars.env.MY_VAR.a.b` resolves only the references stored inside the `a.b` part of the value.
-- If the variable does not exist, or if its kind is `JSON`, nothing is resolved and no incident is raised.
+- A trailing field path limits resolution to that part of the value. For example, `=camunda.vars.env.MY_VAR.a.b` resolves only references inside `a.b`.
+- If the variable does not exist or its kind is `JSON`, Camunda does not resolve any references or raise an incident.
 - Execution listener and task listener jobs never carry resolved values, even when the element they run on has such an input mapping.
 
-The reference is recorded on the job at creation, in the same way as a reference written directly into an input mapping, and resolved in the background ahead of activation. The resolved value reaches the worker only once the job is handed out. For what this means for when a job reaches a worker, see [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+When Camunda creates the job, it records the reference in the same way as a reference written directly in an input mapping. Camunda then resolves the reference in the background before activation and injects the resolved value when handing the job to a worker.
+
+To understand how secret resolution affects job activation, see [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
 
 ## Access using FEEL expressions
 

@@ -99,7 +99,7 @@ camunda.vars.cluster.API_CREDENTIALS
 
 Tenant scope has higher priority, so `camunda.vars.env` selects the tenant variable, and only that variable's kind is considered. A `JSON`-kind value is ordinary text, so its references are not resolved. The global variable's references are reachable only through `camunda.vars.cluster`, which bypasses tenant scope.
 
-This assumes the tenant variable has a non-empty value. If it's empty, `camunda.vars.env` skips it and falls through to global instead, so the global `SECRET_REFERENCE` variable wins — the opposite of the outcome above.
+This assumes the tenant variable has a non-empty value. If the tenant variable is empty, `camunda.vars.env` skips it and uses the global variable instead. In this case, Camunda selects the global `SECRET_REFERENCE` variable.
 
 To avoid this, give a key the same kind at every scope where you define it.
 

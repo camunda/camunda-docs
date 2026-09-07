@@ -28,18 +28,18 @@ Every cluster variable has a kind, which determines how Camunda reads its value.
 
 | Kind               | Description                                                                        |
 | ------------------ | ---------------------------------------------------------------------------------- |
-| `JSON`             | The default. Your value is data, and Camunda reads it exactly as you stored it.    |
+| `JSON`             | Default kind. Camunda reads the value exactly as you stored it.                    |
 | `SECRET_REFERENCE` | The value can contain `camunda.secrets.<name>` references, which Camunda resolves. |
 
-Resolving `SECRET_REFERENCE` references is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
+Secret resolution for `SECRET_REFERENCE` variables is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may change in future releases.
 
-Only a `SECRET_REFERENCE`-kind variable has its references resolved. A `JSON`-kind variable whose value contains the same text is treated as ordinary text, and that text reaches your process unchanged.
+Camunda resolves references only in variables of kind `SECRET_REFERENCE`. For variables of kind `JSON`, Camunda treats the same reference text as ordinary text and passes it to your process unchanged.
 
 ### Where references can appear in a value
 
-Camunda scans every string in a `SECRET_REFERENCE`-kind variable's value, including strings nested inside objects and arrays. Object keys are not scanned. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes, up to 240 characters. A name that fails either limit is never resolved; see [secrets](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
+Camunda scans every string in a variable of kind `SECRET_REFERENCE`, including strings nested inside objects and arrays. Camunda does not scan object keys. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes, up to 240 characters. Camunda does not resolve a name that violates either requirement.See [secrets](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) for more details.
 
-For example, the following value carries two references, one at the top level and one nested:
+For example, the following value contains two references, one at the top level and one nested:
 
 ```json
 {
@@ -51,7 +51,7 @@ For example, the following value carries two references, one at the top level an
 }
 ```
 
-Do not place a reference inside an array. Camunda detects such a reference when you create the variable, but it cannot be resolved when a process reads the variable: the job is not activated and raises an incident instead. See [when a job is not activated](/components/concepts/secret-resolution-and-job-activation.md#understand-why-a-job-is-not-activated).
+Do not place a reference inside an array. Camunda detects the reference when you create the variable but cannot resolve it when a process reads the variable. In this case, Camunda does not activate the job and raises an incident. See [when a job is not activated](/components/concepts/secret-resolution-and-job-activation.md#understand-why-a-job-is-not-activated) for more details.
 
 ### Create a variable of kind `SECRET_REFERENCE`
 
@@ -71,11 +71,11 @@ Content-Type: application/json
 }
 ```
 
-A variable's kind is fixed at creation. Update requests carry no `kind` field, so updating a `SECRET_REFERENCE`-kind variable keeps its kind and scans the new value for references. To change a variable's kind, delete it and create it again with the kind you want.
+You cannot change a variable's kind after creation. Update requests do not include a `kind` field, so a variable of kind `SECRET_REFERENCE` keeps its kind when you update its value. Camunda scans the new value for references. To change a variable's kind, delete it and create it again with the kind you want.
 
 ### Read a variable of kind `SECRET_REFERENCE`
 
-Get and search responses return the stored value, so you see the reference text rather than a resolved value. References are resolved only when a process reads the variable in an input mapping, as described in [resolve secret references in a cluster variable](./usage-guide.md#resolve-secret-references-in-a-cluster-variable). For where resolved values appear and where they do not, see [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+Get and search responses return the stored value, so you see the reference text rather than a resolved value. Camunda resolves references only when a process reads the variable in an input mapping, as described in [Resolve secret references in a cluster variable](./usage-guide.md#resolve-secret-references-in-a-cluster-variable). To understand where resolved values appear, see [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
 
 To find variables of a given kind, use the `kind` filter in [search cluster variables](/apis-tools/orchestration-cluster-api-rest/specifications/search-cluster-variables.api.mdx).
 
