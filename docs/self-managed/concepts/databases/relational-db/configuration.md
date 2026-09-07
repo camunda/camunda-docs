@@ -407,6 +407,19 @@ camunda:
         username: camunda
 ```
 
+The AWS JDBC wrapper supports automatic failover detection when using Aurora GlobalDB.
+
+To use automatic failover detection, enable the corresponding wrapper plugin and optionally configure a failover timeout:
+
+```yaml
+camunda:
+  data:
+    secondary-storage:
+      type: rdbms
+      rdbms:
+        url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000
+```
+
 The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.
 
 ### Per-physical-tenant credentials on Aurora
