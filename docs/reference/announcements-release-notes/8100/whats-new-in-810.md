@@ -105,17 +105,17 @@ Starting with 8.10, Camunda Hub replaces Web Modeler and Console, meaning these 
 
 Here's a list of Web Modeler and Console features and how to access their equivalents in Hub:
 
-| Product (8.9) | Feature                      | Hub documentation                                                                                                       |
-| :------------ | :--------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
-| Console       | Organization overview        | [Hub dashboard](/components/hub/organization/analyze-operations/hub-dashboard.md)                                       |
-| Console       | View clusters                | [View clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters)                           |
-| Console       | Organization management      | [Manage organization settings](/docs/components/hub/organization/manage-organization-settings/organization-settings.md) |
-| Web Modeler   | View projects                | [View workspaces](/docs/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
-| Web Modeler   | Create a project             | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)             |
-| Web Modeler   | Manage project collaborators | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)                  |
-| Web Modeler   | Rename/delete project        | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                                  |
-| Web Modeler   | View shared resources        | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**                |
-| Web Modeler   | Recently deleted             | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                       |
+| Product (8.9) | Feature                      | Hub documentation                                                                                                  |
+| :------------ | :--------------------------- | :----------------------------------------------------------------------------------------------------------------- |
+| Console       | Organization overview        | [Hub dashboard](/components/hub/organization/analyze-operations/hub-dashboard.md)                                  |
+| Console       | View clusters                | [View clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters)                      |
+| Console       | Organization management      | [Manage organization settings](/components/hub/organization/manage-organization-settings/organization-settings.md) |
+| Web Modeler   | View projects                | [View workspaces](/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
+| Web Modeler   | Create a project             | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)        |
+| Web Modeler   | Manage project collaborators | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)             |
+| Web Modeler   | Rename/delete project        | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                             |
+| Web Modeler   | View shared resources        | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**           |
+| Web Modeler   | Recently deleted             | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                  |
 
 ### Key features
 
