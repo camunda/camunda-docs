@@ -1,6 +1,6 @@
 ---
 id: process-landscape-visualization
-title: Process landscape visualization
+title: Visualize the process landscape
 description: "A comprehensive, hierarchical view of all processes within the project."
 ---
 

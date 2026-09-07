@@ -108,8 +108,8 @@ The project state changes to match the snapshot, and the snapshots timeline is r
 A project snapshot restore is a single bulk operation, not a series of individual [file restores](/components/hub/workspace/modeler/modeling/versions.md#restore-a-version). It affects the project, its files, and any element templates differently:
 
 - **The project snapshot itself**: if the project's live state has drifted from its most recent snapshot, a safety snapshot is created first to capture that state before restoring. If nothing has changed since the last snapshot, no safety snapshot is created.
-- **Files that still exist in the project**: for each file that is still present (in its original location or elsewhere in the project), Web Modeler moves and renames it back into place, then restores its content the same way as an individual file restore. A safety autosave entry captures the file's state just before the restore (only if it differs from the file's last saved entry), followed by a new "(restored)" entry with the snapshot's content.
-- **Files that were moved out of the project or permanently deleted**: since there's no existing file to restore into, Web Modeler creates a new file from the snapshot's content directly. This new file has no autosave step and no prior version history, since none of its own history exists yet.
+- **Files that still exist in the project**: for each file that is still present (in its original location or elsewhere in the project), Camunda Hub moves and renames it back into place, then restores its content the same way as an individual file restore. A safety autosave entry captures the file's state just before the restore (only if it differs from the file's last saved entry), followed by a new "(restored)" entry with the snapshot's content.
+- **Files that were moved out of the project or permanently deleted**: since there's no existing file to restore into, Camunda Hub creates a new file from the snapshot's content directly. This new file has no autosave step and no prior version history, since none of its own history exists yet.
 - **Files that exist now but weren't part of the snapshot**: these are soft-deleted so the project matches the snapshot's file set.
 - **Element templates**: element templates are handled differently depending on their state at the time of restore:
   - If a template is still in the project, its content is reset in place, and it's moved back to its recorded location. This does **not** publish a new numbered template version the way [restoring an element template directly](/components/hub/workspace/modeler/element-templates/manage-element-templates.md#versioning-element-templates) does.
@@ -119,7 +119,7 @@ A project snapshot restore is a single bulk operation, not a series of individua
 
 ## Request a review
 
-1. Request a review for the newest snapshot of the project from the snapshots page of the project. Collaborators with edit permission in your project will see a notification on the process diagram page once you have requested a review. Reviews cannot be performed by the user who created the project snapshot unless the user is an organization administrator.
+1. Request a review for the newest snapshot of the project from the snapshots page of the project. Members with edit permission in your project will see a notification on the process diagram page once you have requested a review. Reviews cannot be performed by the user who created the project snapshot unless the user is an organization administrator.
 2. Reviewers can view the changes, comment, request changes, or approve the project snapshot.
 3. After a user has submitted their review, the project snapshot is marked as reviewed and the review status is shown in the snapshots timeline.
    1. Any user with edit permissions can go back and edit the review at any point in time to update the assessment.

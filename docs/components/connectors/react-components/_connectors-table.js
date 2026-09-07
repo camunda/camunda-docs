@@ -17,6 +17,7 @@ import BoxImg from "../img/connector-box.png";
 import BluePrismImg from "../img/connector-blueprism.png";
 import CamundaImg from "../img/connector-camunda.png";
 import CSVImg from "../img/connector-csv.png";
+import DatabricksImg from "../img/connector-databricks.png";
 import EasypostImg from "../img/connector-easypost.png";
 import EmailImg from "../img/connector-email.png";
 import GithubImg from "../img/connector-github.png";
@@ -223,6 +224,14 @@ const SearchableTable = () => {
       type: "Outbound",
       link: "../csv/",
       image: CSVImg,
+    },
+    {
+      name: "Databricks",
+      description:
+        "Run SQL statements, control warehouses, trigger jobs, invoke Model Serving endpoints, and query Vector Search indexes.",
+      type: "Outbound",
+      link: "../databricks/",
+      image: DatabricksImg,
     },
     {
       name: "EasyPost",

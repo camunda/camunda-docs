@@ -64,6 +64,7 @@ You can restore your cluster from a selected backup directly in Console or throu
 
 - See [backup and restore overview](./backup-restore-overview.md).
 - See [restore a cluster from backup](./how-to-restore.md).
+- See [restore scenarios](./restore-scenarios.md).
 - See [restore troubleshooting](./restore-troubleshooting.md).
 
 If the restore action is not available in your organization yet, [contact Camunda support](https://camunda.com/services/support/).

@@ -31,7 +31,7 @@ jobs:
           secrets: |
             secret/data/products/camunda-docs/ci/slack DOCS_NOTIFICATION_WEBHOOK_URL;
       - id: slack
-        uses: slackapi/slack-github-action@e090a7a7c0b2d9b7ae32bd34f086e680ce260b06 # v3.0.0
+        uses: slackapi/slack-github-action@0d95c9a7becc1e6e297d76df9bc735c44f4cbcbc # v3.0.5
         with:
           webhook: ${{ steps.secrets.outputs.DOCS_NOTIFICATION_WEBHOOK_URL }}
           webhook-type: webhook-trigger

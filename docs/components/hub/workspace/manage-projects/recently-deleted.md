@@ -48,7 +48,7 @@ DELETE /api/v2/files/{fileKey}/purge
 
 Only a **Workspace Admin** at the time of the restore attempt can restore a recently deleted workspace. A **Workspace Admin** or **Editor** can restore all other resource types. The role at the time of the original deletion is not considered.
 
-Read more about [access rights and permissions](../modeler/collaboration/collaboration.md#access-rights-and-permissions).
+Read more about [access rights and permissions](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
 
 ## Browse recently deleted resources
 

@@ -4,6 +4,9 @@ title: Manage users in your organization
 description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
 
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
 When a user signs up for Camunda 8 as the first user from their organization, company, or group, they become the Organization Owner of the Camunda organization. This organization owns Camunda Hub workspaces, projects, and clusters. The Organization Owner and any Organization Admins they assign can control access to these resources by managing their organization.
 
 ## Users
@@ -35,6 +38,40 @@ Catalog access has two levels: **Read-only** (browse and use catalog items) for 
 Starting with version 8.8, user access to clusters' Operate, Tasklist, and Zeebe applications is managed independently of the organization role. To control what a user can access there, define their authorizations in the cluster's [Admin](/components/admin/authorization.md).
 
 If cluster authorizations are disabled, the user will have full access to the cluster and its components.
+
+### Elevated workspace access
+
+Organization admins and owners always have **Workspace Admin** access to every workspace in the organization, including workspaces they aren't explicitly a member of. This access is on by default and can't be changed.
+
+The main purpose of this access is to assign members to workspaces that have no members. Ordinarily, these workspaces would not be accessible or visible to any other users.
+
+<Tabs groupId="permissions" defaultValue="saas" queryString values={
+[
+{label: 'SaaS', value: 'saas' },
+{label: 'Self-Managed', value: 'self-managed' },
+]}>
+
+<TabItem value='saas'>
+
+The user must be assigned the organization **Organization Owner** or **Organization Admin** role.
+
+</TabItem>
+
+<TabItem value='self-managed'>
+
+The user must be assigned the **Hub Admin** role.
+
+If the role is not pre-existing, it can be created with the following permissions:
+
+- Hub Internal API - `write:*`
+- Hub Internal API - `admin:*`
+- Camunda Identity Resource Server - `read:users`
+
+Refer to the documentation pages about [assigning roles](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md) and [adding permissions](/self-managed/components/management-identity/access-management/access-management-overview.md) for detailed instructions.
+
+</TabItem>
+
+</Tabs>
 
 #### Other roles
 

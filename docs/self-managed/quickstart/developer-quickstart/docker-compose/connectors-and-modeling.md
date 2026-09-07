@@ -91,7 +91,7 @@ The full configuration uses Keycloak for OIDC authentication. The client credent
 ### Deploy with Camunda Hub
 
 :::note
-Non-production installations of Camunda Hub are limited to five collaborators per workspace. See [Licensing](/reference/licenses.md).
+Non-production installations of Camunda Hub are limited to five members per workspace. See [Licensing](/reference/licenses.md).
 :::
 
 [Camunda Hub](/components/hub/index.md) includes a browser-based modeler for creating and deploying BPMN, DMN, and form diagrams. Camunda Hub is included in the full configuration and can also run as a standalone setup.

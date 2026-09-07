@@ -36,12 +36,12 @@ There are two types of [cluster](/components/concepts/clusters.md) used when run
 - Camunda Hub is hosted in GCP in the _europe-west1_ [region](/components/saas/regions.md).
 - Orchestration cluster components such as Zeebe, Tasklist, Operate, Optimize, and Connectors, are hosted in GCP or Amazon Web Services (AWS) regions. An Orchestration Cluster is a provided group of production-ready nodes that run Camunda 8.
 
-Camunda 8 SaaS uses single-tenant clusters, with all data contained in a single tenant for easier administration and simpler security.
+By default, each cluster serves a single tenant, with all data associated with the `<default>` tenant.
 
 A cell-based architecture means that each cluster runs as dedicated processes in a separate cell isolated from all other clusters, allowing secure fault and workload separation. Scaling is achieved by deploying additional clusters for new use cases and/or teams.
 
 :::note
-Camunda Self-Managed also supports [multi-tenant](/components/concepts/multi-tenancy.md) clusters, where multiple tenants share the same underlying infrastructure, but with their data logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
+On clusters running generation 8.8 and later, you can enable [multi-tenancy](/components/concepts/multi-tenancy.md) to serve multiple tenants from the same cluster, with their data logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
 :::
 
 ### Zeebe

@@ -5,17 +5,13 @@ description: "Test mode lets you validate your process against a selected projec
 keywords: ["test", "test mode", "test case", "test studio", "validation"]
 ---
 
-<span class="badge badge--cloud">Camunda 8 only</span>
-
-Test mode is a Zeebe-powered testing environment within Web Modeler for validating a process at any stage of development. Select any environment configured for your project — development, test, stage, or production — and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders — all within Test mode.
+Test mode is a Zeebe-powered testing environment within Camunda Hub for validating a process at any stage of development. Select any environment configured for your project — development, test, stage, or production — and choose which version to test against. You can view, run, and modify test cases without deploying; deployment is only needed when there are changes made to the diagram. Developers can debug their process logic, testers can manually test the process, and process owners can demo to stakeholders — all within Test mode.
 
 ## Opening the Test tab
 
 To use Test mode, open a BPMN diagram and click the **Test** tab. Read the [limitations and availability section](#limitations-and-availability) if this tab is missing.
 
-![BPMN diagram top bar showing the Test tab location](../img/test-tab-location.png)
-
-Select any environment configured for your project as your test target. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Web Modeler [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
+Select any environment configured for your project as your test target. In SaaS, you can select any cluster configured for the project (development, test, stage, or production). In Self-Managed, you select from the clusters defined in your Camunda Hub [configuration](/self-managed/components/hub/configuration/properties.md#clusters); the Camunda 8 Helm and Docker Compose distributions provide one cluster configured by default.
 
 :::caution
 Test mode executes real process logic against the selected cluster, including connectors, messages, and other external actions. If you target a production cluster, this can affect live data and external systems.
@@ -166,7 +162,7 @@ For example, you can validate your process by creating and rerunning test cases 
 Although test cases are valuable for rapid validation during development, Camunda [best practices](/components/best-practices/development/testing-process-definitions.md) recommend using specialized test libraries in your CI/CD pipeline for comprehensive testing.
 :::
 
-Test cases are stored in [test files](test-files.md). You can view and edit these files directly in Web Modeler or in your Git repository using Git sync.
+Test cases are stored in [test files](test-files.md). You can view and edit these files directly in Camunda Hub or in your Git repository using Git sync.
 
 Test mode will use the test file [linked to the first executable process ID](test-files.md#link-a-process-processid) of the BPMN diagram.
 
@@ -186,7 +182,7 @@ To save a test case:
 
 1. Review the **Steps** the test case will re-run, such as **Start instance**. (Optional) Click **Add assertion** to add an assertion to a step. See [Add assertions](#assertions).
 1. Click **Save test case**.
-1. A new [test file](test-files.md) will be saved in the same Web Modeler folder as the process.
+1. A new [test file](test-files.md) will be saved in the same Camunda Hub folder as the process.
 
 ![Saving a test case](../img/test-save-test-case.png)
 
@@ -272,7 +268,7 @@ When a BPMN change removes or renames an element that an instruction or assertio
 
 ![Repair view](../img/test-repair-view.png)
 
-- For changes the graphical repair view doesn't cover, open the [test file](test-files.md) in Web Modeler's file editor and edit the JSON directly. Then, return to Test mode and rerun the test case.
+- For changes the graphical repair view doesn't cover, open the [test file](test-files.md) in Camunda Hub's file editor and edit the JSON directly. Then, return to Test mode and rerun the test case.
 
 ### Limitations {#test-cases-limitations}
 
@@ -360,14 +356,14 @@ For more information about terms, refer to our [licensing and terms page](https:
 
 ### Camunda 8 SaaS
 
-In Camunda 8 SaaS, Test mode is available to all Web Modeler users with commenter, editor, or admin permissions within a project.
+In Camunda 8 SaaS, Test mode is available to all Camunda Hub users with commenter, editor, or admin permissions within a project.
 Additionally, within their organization, users need to have a [role](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions) which has deployment privileges. [If authorizations are enabled on the cluster, users need to have specific permissions instead.](#authorizations)
 
 ### Camunda 8 Self-Managed
 
 <!-- NEEDS VERIFICATION -->
 
-In Self-Managed, Test mode is controlled by the `camunda.modeler.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Web Modeler. This is `true` by default for the Docker and Kubernetes distributions.
+In Self-Managed, Test mode is controlled by the `camunda.modeler.feature.test-mode-enabled` [configuration property](/self-managed/components/hub/configuration/properties.md#feature-flags) in Camunda Hub. This is `true` by default for the Docker and Kubernetes distributions.
 
 Prior to the 8.10 release, Test mode can be accessed by installing the 8.10.0-alpha [Helm charts](https://github.com/camunda/camunda-platform-helm/blob/camunda-platform-10.4.0/charts/camunda-platform-alpha), or running the 8.10.0-alpha [Docker Compose](https://github.com/camunda/camunda-distributions/tree/main/docker-compose) configuration.
 

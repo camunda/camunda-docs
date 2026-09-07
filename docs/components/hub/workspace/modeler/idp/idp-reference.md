@@ -10,7 +10,7 @@ import IdpIconPassImg from './img/idp-validation-icon-pass.png';
 import IdpIconCautionImg from './img/idp-validation-icon-caution.png';
 import IdpIconFailImg from './img/idp-validation-icon-fail.png';
 import IdpValidationExampleImg from './img/idp-validation-example.png';
-import IdpDocumentStorageImg from './img/idp-document-storage.png';
+import IdpDocumentStorageImg from './img/idp-document-storage.jpg';
 import IdpTableDataImg from './img/idp-table-data.png';
 import TickImg from '/static/img/icon-list-tick.png';
 import CrossImg from '/static/img/icon-list-cross.png';
@@ -46,9 +46,11 @@ The document extraction template integrates with Camunda document handling conne
 
 IDP stores documents as follows during the different extraction stages:
 
+<!-- image source: https://miro.com/app/board/uXjVIfhgnNg=/?moveToWidget=3458764620329398964&cot=14  -->
+
 <img src={IdpDocumentStorageImg} alt="IDP document storage diagram" class="img-noborder img-800"/>
 
-1. Web Modeler: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Web Modeler itself (SaaS) or the database (Self-Managed).
+1. Camunda Hub: [Uploaded sample documents](idp-unstructured-extraction.md#upload-documents) are stored within Camunda Hub itself (SaaS) or the database (Self-Managed).
 1. Cluster: During [extraction testing](idp-unstructured-extraction.md#extract-fields) (for example, when you click **Extract document**) the document is stored in the cluster using the [document handling](/components/document-handling/getting-started.md) API.
 1. Extraction: Finally, when you extract content using a document extraction template, it is stored in an [Amazon AWS S3 bucket](idp-configuration.md#prerequisites), where it can be accessed by AWS Textract.
 
@@ -213,11 +215,11 @@ You can further refine table extraction by:
 
 ## Access rights and permissions
 
-Access to IDP features is determined by your Web Modeler user role and associated [access rights and permissions](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions).
+Access to IDP features is determined by your Camunda Hub user role and associated [access rights and permissions](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
 
 For example, users with a Viewer or Commenter role only have read-only access to IDP features, and cannot upload documents, manage extraction fields, or publish templates.
 
-| Feature                                    |                             Viewer/Commenter                              |                         Editor/Project Admin                          |               Organization Admin or Organization Owner                |
+| Feature                                    |                             Viewer/Commenter                              |                        Editor/Workspace Admin                         |               Organization Admin or Organization Owner                |
 | :----------------------------------------- | :-----------------------------------------------------------------------: | :-------------------------------------------------------------------: | :-------------------------------------------------------------------: |
 | View IDP project                           |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
 | View document extraction                   |   <img src={TickImg} class="table-tick" alt="Can access" width="15px"/>   | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> | <img src={TickImg} class="table-tick" alt="Can access" width="15px"/> |
