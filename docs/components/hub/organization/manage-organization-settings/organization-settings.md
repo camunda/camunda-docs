@@ -1,6 +1,6 @@
 ---
 id: organization-settings
-title: Organization management
+title: Manage organization settings
 description: "Follow these instructions to manage your organization."
 ---
 
@@ -10,17 +10,28 @@ Manage your organization settings.
 
 In the left navigation under **Console**, click **Organization**.
 
-The overview provides a summary of the organization, including:
+The **Overview** tab provides a summary of the organization, including:
 
 - Organization name
 - Pricing plan
-- Owner of the organization
 
-Here, owners of an organization can also manage users, view organization history, and create client credentials.
+In other tabs, you can:
 
-#### Rename organization
+- Manage users
+- Manage groups
+- View activity
+- View usage
+- Grant API access credentials
+- Manage organization settings
 
-If you are the owner of the organization, you can change the name of your organization in the **Overview** tab.
+#### Manage organization settings
+
+Under the **Settings** tab, you can:
+
+- Leave the organization
+- [Enable alpha features](./enable-alpha-features.md)
+
+If you are the owner of the organization, you can change the organization name.
 
 ## Next steps
 

@@ -38,7 +38,7 @@ Important changes in Camunda 8.10 are summarized in the following sections.
 
 ## Introducing Camunda Hub
 
-Camunda Hub is a new product that combines the features of former products Web Modeler and Console.
+Camunda Hub is a new product that replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 
 In Hub:
 
@@ -53,15 +53,13 @@ Organization-level resource governance and workspace-level project delivery now 
 
 With the introduction of Camunda Hub, many terms and concepts from Web Modeler and Console have changed:
 
-[Workspace](/reference/glossary.md#workspace)
-
 | Before 8.10 (Web Modeler/Console) | Camunda 8.10 (Camunda Hub)                                                                                    |
 | :-------------------------------- | :------------------------------------------------------------------------------------------------------------ |
 | Project                           | [Workspace](/reference/glossary.md#workspace)                                                                 |
 | Process application               | [Project](/reference/glossary.md#project)                                                                     |
 | Organization member               | [Organization user](/components/hub/organization/manage-users/manage-users.md)                                |
 | Collaborator                      | [Workspace member](/components/hub/organization/manage-workspaces/manage-workspace-members.md)                |
-| Project Admin                     | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) |     |
+| Project Admin                     | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) |
 
 ### SaaS roles and permissions
 
@@ -100,6 +98,24 @@ Self-Managed roles and permissions have changed:
 The 8.9 roles are not removed in 8.10. They remain for backward compatibility.
 
 <p class="link-arrow">[Default roles in Self-Managed](/self-managed/components/management-identity/application-user-group-role-management/manage-roles.md#default-roles)</p>
+
+### Mapping Web Modeler and Console features to Hub
+
+Starting with 8.10, Camunda Hub replaces Web Modeler and Console, meaning these products are no longer included in your Camunda deployment in SaaS or Self-Managed.
+
+Here's a list of Web Modeler and Console features and how to access their equivalents in Hub:
+
+| Product (8.9) | Feature                      | Hub documentation                                                                                                       |
+| :------------ | :--------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| Console       | Organization overview        | [Hub dashboard](/components/hub/organization/analyze-operations/hub-dashboard.md)                                       |
+| Console       | View clusters                | [View clusters](/components/hub/organization/manage-clusters/manage-cluster.md#view-clusters)                           |
+| Console       | Organization management      | [Manage organization settings](/docs/components/hub/organization/manage-organization-settings/organization-settings.md) |
+| Web Modeler   | View projects                | [View workspaces](/docs/components/hub/organization/manage-workspaces/index.md#view-existing-workspaces)                |
+| Web Modeler   | Create a project             | [Create a workspace](/components/hub/organization/manage-workspaces/manage-workspace.md#create-a-workspace)             |
+| Web Modeler   | Manage project collaborators | [Manage workspace members](/components/hub/organization/manage-workspaces/manage-workspace-members.md)                  |
+| Web Modeler   | Rename/delete project        | [Manage workspace](/components/hub/organization/manage-workspaces/manage-workspace.md)                                  |
+| Web Modeler   | View shared resources        | [Manage catalog](/components/hub/organization/manage-catalog/getting-started.md) or **Shared resources**                |
+| Web Modeler   | Recently deleted             | [Recently deleted](/components/hub/workspace/manage-projects/recently-deleted.md)                                       |
 
 ### Key features
 
@@ -154,6 +170,15 @@ Payments (Workspace)
 
 This strict new **Workspace > Project > File/folder** hierarchy makes resources more discoverable and your projects more scalable.
 
+:::note SaaS Web Modeler update (29 August 2026)
+
+##### On 29 August 2026, your SaaS Web Modeler data received three updates: {#web-modeler-data}
+
+- **[Organizational structure](#new-file-structure-and-requirements):** Enforces a stricter, more scalable file resource hierarchy.
+- **[Data migration](/self-managed/upgrade/components/890-to-8100.md#data-migration):** Aligns your existing data with the new structure.
+- **[Process application versioning model](#process-application-snapshots-and-file-versioning):** Provides more granular control.
+  :::
+
 #### Recover deleted resources
 
 When you deleted a resource, such as a file or process application, in Camunda 8.9, the resource was immediately and permanently deleted, along with:
@@ -183,74 +208,11 @@ Camunda Hub introduces an improved model with more granular control over project
 
 If you're not familiar with projects, the following sections explain how to:
 
-- [Define deployment stages](#define-deployment-stages)
-- [Deploy a process application](#deploy-a-process-application)
-- [Deploy an individual resource](#deploy-an-individual-resource)
-- [Create a process application snapshot](#create-a-process-application-snapshot)
-- [Create a resource version](#create-a-resource-version)
-
-##### Define deployment stages
-
-To deploy process applications and resources, you need to connect clusters to the following deployment stages:
-
-| Stage       | Description                                                                                                         |
-| :---------- | :------------------------------------------------------------------------------------------------------------------ |
-| Development | Use to create and test new software features and changes.                                                           |
-| Testing     | Use for quality checks, ensuring software meets defined standards before release.                                   |
-| Staging     | Use for controlled testing where changes are validated before deployment to production.                             |
-| Production  | The live system with the latest software. **Only administrators and organization owners can deploy to this stage.** |
-
-To define your deployment stages:
-
-1. Open a process application.
-2. On the right side of the process application view, next to **Connected clusters** click **Configure**.
-3. For each stage, select a cluster.
-4. Click **Save**.
-
-##### Deploy a process application
-
-You can deploy a process application as a bundle from either the process application view or a resource view. In both cases, all resources in the process application are deployed together.
-
-From the process application view:
-
-1. Open a process application.
-2. At the top right of the process application view, click **Deploy & run**, or select **Deploy** from the dropdown.
-3. Confirm the deployment.
-
-From the resource view:
-
-1. In your process application, open a resource, such as a BPMN diagram or form.
-2. At the top right of the modeling interface, click **Deploy**.
-3. In the deployment modal, under **Resources**, select **All resources**. (This is the default.)
-4. Confirm the deployment.
-
-##### Deploy an individual resource
-
-If you don't want to deploy all resources in a process application, you can deploy an individual resource:
-
-1. In your process application, open a resource, such as a BPMN diagram or Form.
-2. At the top right of the modeling interface, click **Deploy**.
-3. In the deployment modal, under **Resources**, select **Only this resource**.
-4. Confirm the deployment.
-
-##### Create a process application snapshot
-
-Use a snapshot to capture all files in a process application at once:
-
-1. Open a process application.
-2. On the right side of the process application view, under **Snapshots** click **Create snapshot**.
-3. Enter a **Snapshot tag** in the snapshot creation modal.
-4. Click **Create**.
-
-##### Create a resource version
-
-In addition to process application snapshots, you can create versions for individual resources:
-
-1. In your process application, open a resource, such as a BPMN diagram or form.
-2. At the top right of the modeling interface, click **Versions**.
-3. Click **Create version**.
-4. Enter a **Version name** in the version creation modal.
-5. Click **Create**.
+- [Define deployment stages](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters)
+- [Deploy a project](/components/hub/workspace/manage-projects/deploy-project.md)
+- [Deploy an individual resource](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process)
+- [Create a project snapshot](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot)
+- [Create a resource version](/components/hub/workspace/modeler/modeling/versions.md#create-a-version)
 
 </details>
 
@@ -342,14 +304,6 @@ On SaaS, you can now configure Optimize export filters directly in Hub cluster s
 New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables whose names start with `business_`. This reduces Elasticsearch storage and shard usage significantly. Existing clusters are unaffected and can opt in with one click.
 
 <p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
-
-## SaaS Web Modeler update (29 August 2026) {#web-modeler-data}
-
-On 29 August 2026, your SaaS Web Modeler data received three updates:
-
-- **[Organizational structure](#new-file-structure-and-requirements):** Enforces a stricter, more scalable file resource hierarchy.
-- **[Data migration](/self-managed/upgrade/components/890-to-8100.md#data-migration):** Aligns your existing data with the new structure.
-- **[Process application versioning model](#process-application-snapshots-and-file-versioning):** Provides more granular control.
 
 ## Camunda 8 Run no longer requires Java
 
