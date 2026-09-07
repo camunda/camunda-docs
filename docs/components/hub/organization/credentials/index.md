@@ -21,7 +21,7 @@ A credential moves those settings out of the diagram:
 
 Only a reference to the credential is stored in your BPMN diagram. The credential's values stay on the cluster, and sensitive fields hold references to [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) rather than the secret values themselves.
 
-You can create and select credentials in Camunda Hub, [Desktop Modeler](./desktop-modeler.md), and [Web Modeler](./web-modeler.md).
+You manage credentials centrally on the Camunda Hub **Credentials** page, and you select or create them in the [modeling interface](./modeling-interface.md) while configuring a task.
 
 ## Terminology
 
@@ -128,13 +128,13 @@ Editing or deleting a credential takes effect immediately for every process that
 
 ### Clusters only credentials
 
-A credential created outside Hub, such as one created from [Desktop Modeler](./desktop-modeler.md#credential-scope), exists on its cluster but is not tracked in Hub. The **Clusters only** tab finds these credentials so you can bring them under Hub management.
+A credential created outside Hub, such as one created in Desktop Modeler or directly through the cluster API, exists on its cluster but is not tracked in Hub. The **Clusters only** tab finds these credentials so you can bring them under Hub management.
 
 1. Under **Clusters**, select the clusters you want to scan. You can select up to 10 clusters.
 2. Select **Scan clusters**. Hub scans each selected cluster for global variables that are tagged as credentials and that match a known credential type.
 3. Select **Add to Hub** on a result to manage that credential in Hub. Hub reads the credential's configuration only when you open the **Add to Hub** dialog.
 
-Select **Rescan clusters** to run the scan again, for example after creating a credential from Desktop Modeler.
+Select **Rescan clusters** to run the scan again, for example after a credential is created outside Hub.
 
 ![Clusters only tab of the Credentials page, with one cluster selected, a Rescan clusters button, and the message "No cluster-only credentials found"](./img/credentials-clusters-only.png)
 
@@ -161,5 +161,5 @@ In this release:
 
 ## Next steps
 
-- [Configure credentials in Desktop Modeler](./desktop-modeler.md)
-- [Configure credentials in Web Modeler](./web-modeler.md)
+- [Configure credentials in the modeling interface](./modeling-interface.md)
+- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)

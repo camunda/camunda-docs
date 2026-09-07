@@ -1,14 +1,14 @@
 ---
-id: credentials-desktop-modeler
-title: Configure credentials in Desktop Modeler
-description: "Select, create, edit, and upgrade connector credentials from the properties panel in Desktop Modeler."
+id: credentials
+title: Use credentials
+description: "Select, create, edit, and upgrade a credential from the properties panel in Desktop Modeler."
 keywords: [credential, credentials, desktop modeler, authentication]
 ---
 
-Select an existing [connector credential](./index.md) on a connector task in Desktop Modeler, or create a new one without leaving the properties panel.
+Select an existing credential on a connector task in Desktop Modeler, or create a new one without leaving the properties panel. A credential stores authentication and connection configuration you create once and reuse, instead of entering the same values on every task. See [Credentials](/components/hub/organization/credentials/index.md) for the concept and for how credentials are managed centrally.
 
 :::note
-This page covers credentials that authenticate connector tasks, such as an AWS Credential. It is unrelated to the client ID and client secret you enter to [connect Desktop Modeler to a cluster](/components/modeler/desktop-modeler/connect-to-camunda-8.md), which authenticate Desktop Modeler itself.
+This page covers credentials that authenticate connector tasks, such as an AWS Credential. It is unrelated to the cluster credentials (client ID and client secret) you enter to [connect Desktop Modeler to a cluster](./connect-to-camunda-8.md), which authenticate Desktop Modeler itself.
 :::
 
 ## Select a credential
@@ -57,13 +57,12 @@ Upgrading a credential opens the same form and shows the fields that the newer c
 
 ## Credential scope {#credential-scope}
 
-A credential you create from Desktop Modeler is stored on the single cluster you are connected to. It is not created in Camunda Hub and does not appear on the **Managed** tab of the Hub **Credentials** page.
+A credential you create from Desktop Modeler is stored on the single cluster you are connected to, and is not registered centrally. It does not appear on the **Managed** tab of the [**Credentials** page](/components/hub/organization/credentials/index.md#managed-credentials).
 
-To manage it in Hub, scan for it on the [**Clusters only** tab](./index.md#clusters-only-credentials) and add it to Hub.
+To manage it centrally, find it on the [**Clusters only** tab](/components/hub/organization/credentials/index.md#clusters-only-credentials) and add it.
 
 ## Additional resources
 
-- [Connector credentials](./index.md)
-- [Configure credentials in Web Modeler](./web-modeler.md)
-- [Use connectors in Desktop Modeler](/components/modeler/desktop-modeler/use-connectors.md)
-- [Connect Desktop Modeler to Camunda 8](/components/modeler/desktop-modeler/connect-to-camunda-8.md)
+- [Credentials](/components/hub/organization/credentials/index.md)
+- [Use connectors](./use-connectors.md)
+- [Connect to Camunda 8](./connect-to-camunda-8.md)

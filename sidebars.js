@@ -745,8 +745,7 @@ module.exports = {
                 id: "components/hub/organization/credentials/credentials",
               },
               items: [
-                "components/hub/organization/credentials/credentials-desktop-modeler",
-                "components/hub/organization/credentials/credentials-web-modeler",
+                "components/hub/organization/credentials/credentials-modeling-interface",
               ],
             },
             {
@@ -948,6 +947,7 @@ module.exports = {
         "components/modeler/desktop-modeler/process-applications",
         "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/desktop-modeler/use-connectors",
+        "components/modeler/desktop-modeler/credentials",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
