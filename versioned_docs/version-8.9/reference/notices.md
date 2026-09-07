@@ -33,6 +33,36 @@ To check whether your Helm deployment is affected:
 1. In the [Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/), find the component versions that the chart deploys.
 1. Compare those component versions with the affected and fixed versions listed in the notice.
 
+## Notice 62
+
+### Publication date
+
+September 8, 2026
+
+### Products affected
+
+- Camunda Web Modeler
+
+### Impact
+
+The application was vulnerable to [CVE-2026-75140](https://nvd.nist.gov/vuln/detail/CVE-2026-75140) in `jsoup`'s
+`XmlTreeBuilder` which could allow an attacker to exhaust JVM heap memory by supplying a deeply nested XML document (in
+this case a BPMN or DMN diagram) with uniquely-namespaced elements.
+
+### How to determine if the installation is affected
+
+You are using:
+
+- Web Modeler Self-Managed ≤ 8.9.7, ≤ 8.8.18, or ≤ 8.7.25
+
+### Solution
+
+Camunda has provided the following releases that contain the fix:
+
+- Web Modeler Self-Managed 8.9.8, 8.8.19, 8.7.26
+
+The fix was deployed to Web Modeler SaaS on August 29, 2026, 10:35 CET.
+
 ## Notice 61
 
 ### Publication date
