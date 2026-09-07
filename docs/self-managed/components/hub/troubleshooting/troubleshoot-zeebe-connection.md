@@ -4,7 +4,7 @@ title: "Troubleshoot Zeebe connection issues"
 sidebar_label: "Zeebe connection"
 ---
 
-You try to connect (i.e., to deploy) to a remote Zeebe cluster and Web Modeler reports an error.
+You try to connect (i.e., to deploy) to a remote Zeebe cluster and Camunda Hub reports an error.
 
 To resolve this issue, check if you can connect to Zeebe through another client.
 If that doesn't work, resolve the general connection issue first (see [the platform deployment troubleshooting section](self-managed/operational-guides/troubleshooting.md), for example.)
@@ -15,10 +15,10 @@ If that works, further debug your Zeebe connection with the help of the informat
 
 ### Increase the Zeebe client timeout
 
-Web Modeler uses the [Zeebe Java client](/apis-tools/java-client/getting-started.md) to connect to Zeebe.
+Camunda Hub uses the [Zeebe Java client](/apis-tools/java-client/getting-started.md) to connect to Zeebe.
 Depending on your infrastructure, the default timeouts configured may be too short.
 
-You can pass custom timeouts in milliseconds for Web Modeler's Zeebe client to `modeler-restapi` via three individual environment variables:
+You can pass custom timeouts in milliseconds for Camunda Hub's Zeebe client to `modeler-restapi` via three individual environment variables:
 
 ```shell
 ZEEBE_CLIENT_REQUESTTIMEOUT=30000 # limit the time to wait for a response from the Zeebe Gateway
@@ -28,7 +28,7 @@ ZEEBE_AUTH_READ_TIMEOUT=60000 # limits the time to wait for a response from the 
 
 ## Secure connection to Zeebe fails
 
-If you provide a cluster URL starting with `https`, Web Modeler will try to establish a secure connection to
+If you provide a cluster URL starting with `https`, Camunda Hub will try to establish a secure connection to
 the Zeebe instance.
 In the process, it strictly validates the server's Application-Layer Protocol Negotiation (ALPN) support and its certificates
 presented against well-known certificate authorities.
@@ -51,14 +51,14 @@ Ensure you properly [configured your Zeebe Ingress to support ALPN](self-managed
 ### Configure `modeler-restapi` to trust a custom Zeebe SSL certificate
 
 [Inspect the connection](#how-can-i-get-details-about-a-secure-remote-connection) to understand which certificates are
-being returned by the server and ensure you configure Web Modeler for [custom SSL certificates](#how-can-i-provide-a-custom-zeebe-ssl-certificate).
+being returned by the server and ensure you configure Camunda Hub for [custom SSL certificates](#how-can-i-provide-a-custom-zeebe-ssl-certificate).
 
 If intermediate signing authorities sign the server certificate, ensure the remote endpoint [serves both server and
-intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to Web Modeler.
+intermediate certificates](https://nginx.org/en/docs/http/configuring_https_servers.html#chains) to Camunda Hub.
 
 ### OAuth token cache for the `modeler-restapi` process
 
-When using the `OAuth` authentication method for deploying to Zeebe, Web Modeler caches OAuth tokens in memory by
+When using the `OAuth` authentication method for deploying to Zeebe, Camunda Hub caches OAuth tokens in memory by
 default. No filesystem access is required, so running `modeler-restapi` as a non-root user (for example, via Kubernetes'
 `securityContext.runAsUser` option) or on a read-only container filesystem works out of the box.
 
@@ -79,9 +79,9 @@ default.
 
 ## How can I provide a custom Zeebe SSL certificate?
 
-You configured a custom SSL certificate in your (remote) Zeebe deployment and want Web Modeler to accept that certificate.
-Web Modeler strictly validates the remote server certificate trust chain.
-If you use a custom SSL server certificate, you must make the signing CA certificate known to Web Modeler, not the
+You configured a custom SSL certificate in your (remote) Zeebe deployment and want Camunda Hub to accept that certificate.
+Camunda Hub strictly validates the remote server certificate trust chain.
+If you use a custom SSL server certificate, you must make the signing CA certificate known to Camunda Hub, not the
 server certificate itself.
 
 ### Provide the certificate via an environment variable
