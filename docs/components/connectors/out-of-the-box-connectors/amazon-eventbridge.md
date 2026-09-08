@@ -25,7 +25,7 @@ For more information, refer to the [Amazon EventBridge documentation](https://do
 Before using the **Amazon EventBridge connector**, ensure you have the necessary permissions in your AWS account to send events to EventBridge. You will need an access key and secret key of a user with the appropriate permissions. Refer to the [AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html) for more information.
 
 :::note
-Use Camunda secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use SaaS-managed secrets to avoid exposing your AWS IAM credentials as plain text. Refer to our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon EventBridge connector task

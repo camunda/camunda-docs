@@ -4,9 +4,8 @@ title: "Troubleshoot secret resolution failures"
 description: "Diagnose the incidents raised when a job's secret references cannot be resolved or their values cannot be injected, fix the cause, and know what happens next."
 ---
 
-<!-- Draft. The page title, file name, placement, and the name of the feature itself are owned by
-camunda/camunda#60326 and are not settled, so this page is deliberately not listed in sidebars.js
-yet and every term used for the feature here is provisional. -->
+<!-- Draft. The page title, file name, and sidebar placement are owned by camunda/camunda#60326 and
+are not settled, so this page is deliberately not listed in sidebars.js yet. -->
 
 When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the
 cluster reacts in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, it raises a

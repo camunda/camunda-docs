@@ -26,7 +26,7 @@ You also need OAuth 2.0 client credentials with permission to call the Orchestra
 Basic authentication (username and password) is not supported. Only OAuth 2.0 client credentials are accepted.
 
 :::note
-Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use SaaS-managed secrets to store credentials so you don't expose sensitive information directly from the process. See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Orchestration Cluster API connector task

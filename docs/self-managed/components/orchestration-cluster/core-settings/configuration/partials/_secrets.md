@@ -3,11 +3,11 @@ import TabItem from '@theme/TabItem';
 
 ## Secrets
 
-Configures the secret stores and cache used to resolve `camunda.secrets.<name>` references in process variables.
+Configures the secret stores and cache used for [secret resolution](/reference/glossary.md#secret-resolution) of [Orchestration Cluster secret references](/reference/glossary.md#secret-reference-orchestration-cluster), `camunda.secrets.<name>`, in process variables.
 
 This configuration is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
 
-<!-- TODO(camunda/camunda#60326): link the secret resolution concept page here once its title, placement, and the feature's terminology are finalized. -->
+<!-- TODO(camunda/camunda#60326): link the secret resolution concept page here once its title and placement are finalized. -->
 
 `camunda.secrets.*` sets the defaults inherited by every physical tenant. Override them per physical tenant under `camunda.physical-tenants.<tenant-key>.secrets.*`. See [Validation and constraints](/self-managed/concepts/physical-tenants/configuration-reference.md#validation-and-constraints) in the Physical Tenants configuration reference.
 
