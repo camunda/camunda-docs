@@ -65,6 +65,49 @@ In a dual-region setup, each Orchestration Cluster component operates as follows
 |                                      Tasklist | Active-active with Tasklist V2 (active-passive with v1) | Embedded in the Orchestration Cluster | <ul><li>Both regions maintain synchronized data state</li><li>Both regions serve users when using Tasklist V2</li><li>**Region-specific data**: Task assignments only when using v1 API</li></ul>                                                                                    | Data loss possible only when using v1 API, as changes are isolated to the initiated region |
 |         <p align="left">**Elasticsearch**</p> | Active-active                                           | Both clusters must run                | <ul><li>Independent clusters in each region</li><li>Zeebe exports identical data to both continuously and directly</li><li>Zeebe's dual export mechanism (not Elasticsearch replication) maintains data consistency</li><li>The clusters don't communicate with each other</li></ul> | Zeebe exporters may fail globally if the secondary Elasticsearch cluster is down           |
 
+## Management plane and runtime plane {#management-plane-and-runtime-plane}
+
+A dual-region deployment stretches the runtime plane across both regions and runs the management plane in a single region. The plane a component belongs to determines what happens to it when a region is lost, and how you protect it.
+
+| Plane            | Components                                                                        | Stretched across regions | On region loss                                          | Protection                     |
+| :--------------- | :-------------------------------------------------------------------------------- | :----------------------- | :------------------------------------------------------ | :----------------------------- |
+| Runtime plane    | Orchestration Cluster (Zeebe, Operate, Tasklist, Admin) and its secondary storage | Yes                      | Processing stops until failover completes, then resumes | Dual-region failover procedure |
+| Management plane | Management Identity, Web Modeler, Console, and Optimize                           | No                       | Unavailable until you restore it                        | Backup and restore             |
+
+### Deploy the management plane in a single region
+
+Deploy the management plane as a separate release in one region, next to the two Orchestration Clusters rather than inside them. Camunda doesn't stretch these components across regions, and they take no part in the dual-region failover procedure.
+
+The dual-region reference architecture doesn't deploy the management plane. It uses basic authentication, disables Management Identity, and sets `optimize.enabled: false`. That's the scope of the reference configuration, not a product restriction: you can run Optimize and Web Modeler alongside a dual-region Orchestration Cluster.
+
+Both components authenticate through Management Identity, so a management plane requires OIDC authentication rather than the basic authentication the reference configuration uses. Point each component at your Management Identity instance with `global.identity.service.url`, and give Web Modeler its own PostgreSQL database.
+
+:::note
+The Helm chart doesn't reject `optimize.enabled: true` when Management Identity is disabled. That combination installs successfully and then fails to authenticate at runtime. Confirm Management Identity is reachable before you enable Optimize.
+:::
+
+### Region loss behavior for management plane components
+
+Management plane components don't replicate across regions, so losing the region they run in makes them unavailable until you restore them. Process execution continues, because the Orchestration Cluster keeps running in both regions and deployed processes are unaffected.
+
+| Component           | State it holds                                                        | If its region is lost                                                                   |
+| :------------------ | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| Management Identity | Users, groups, roles, tenants, and OIDC clients                       | Authentication to Optimize and Web Modeler fails until you restore it                   |
+| Web Modeler         | Diagrams, projects, and collaboration history in PostgreSQL           | Modeling and deployment from Web Modeler stop until you restore it                      |
+| Optimize            | Reports, dashboards, collections, alerts, and its own import position | Reporting stops until you restore it, and content created since the last backup is lost |
+
+### Protect the management plane with backup and restore
+
+Back up each management plane component on its own schedule, and replicate those backups to a region that survives the loss of the region the management plane runs in.
+
+| Component           | Backup method                                                                                                                                                           |
+| :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                                    |
+| Web Modeler         | Back up its PostgreSQL database. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md) |
+| Optimize            | Use the Optimize backup API. See [back up and restore Optimize independently](/self-managed/operational-guides/backup-restore/optimize-backup-and-restore.md)           |
+
+The management plane's recovery point and recovery time follow from your backup interval and restore procedure. The dual-region [recovery objectives](#recovery-objectives) don't cover them, because those objectives apply to the runtime plane only.
+
 ## Active-active and active-passive modes {#active-active-and-active-passive-modes}
 
 Starting in Camunda 8.9, **active-active** is the default user traffic routing for dual-region deployments:
@@ -182,22 +225,24 @@ Certain **minor version upgrades** might require you to upgrade both regions sim
 
 ## Limitations
 
-| **Aspect**                  | **Details**                                                                                                                                                                                                                                                                                                                                                                          |
-| :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Installation methods        | Only Kubernetes with the [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) is supported. Alternative installation methods such as docker-compose aren't covered by our guides.                                                                                                                                                                            |
-| v1 API user traffic         | Deployments using v1 APIs don't support active-active user traffic routing. All user traffic must be routed to a single primary region. See [Active-active and active-passive modes](#active-active-and-active-passive-modes).                                                                                                                                                       |
-| Management Identity support | Management Identity, including multi-tenancy and role-based access control (RBAC), isn't available in this setup. The Orchestration Cluster-level Admin supports multi-tenancy and RBAC instead.                                                                                                                                                                                     |
-| Optimize support            | Not supported (requires Management Identity with specific configuration).                                                                                                                                                                                                                                                                                                            |
-| Connectors deployment       | Connectors can be deployed in a dual-region setup, but you must account for [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) to avoid event duplication. With two connector deployments running, message idempotency is critical.                                                                                                |
-| Connectors                  | If you run Connectors with an inbound connector deployed in a dual-region setup: <ul><li>To delete a process deployment, do so via Operate, otherwise the inbound connector won't deregister.</li><li>If you have multiple Operate instances running, delete the process in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
-| Zeebe cluster scaling       | Supported. See [Zeebe cluster configuration](#zeebe-cluster-configuration).                                                                                                                                                                                                                                                                                                          |
-| Web Modeler                 | Web Modeler is a standalone component not covered in this guide. Modeling applications can operate independently outside of the Orchestration Clusters. Web Modeler also depends on Management Identity.                                                                                                                                                                             |
+| **Aspect**            | **Details**                                                                                                                                                                                                                                                                                                                                                                          |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Installation methods  | Only Kubernetes with the [Camunda Helm chart](/self-managed/deployment/helm/install/quick-install.md) is supported. Alternative installation methods such as docker-compose aren't covered by our guides.                                                                                                                                                                            |
+| v1 API user traffic   | Deployments using v1 APIs don't support active-active user traffic routing. All user traffic must be routed to a single primary region. See [Active-active and active-passive modes](#active-active-and-active-passive-modes).                                                                                                                                                       |
+| Management Identity   | Not deployed by the dual-region reference configuration, which uses basic authentication. The Orchestration Cluster-level Admin provides multi-tenancy and role-based access control (RBAC) instead. Deploy Management Identity in a single region if you need Optimize or Web Modeler. See [Management plane and runtime plane](#management-plane-and-runtime-plane).               |
+| Optimize              | Runs in a single region alongside a dual-region cluster, with no multi-region guarantees. Requires OIDC authentication and Management Identity. If its region is lost, Optimize is unavailable until you restore it. See [Management plane and runtime plane](#management-plane-and-runtime-plane).                                                                                  |
+| Connectors deployment | Connectors can be deployed in a dual-region setup, but you must account for [idempotency](../../../components/connectors/use-connectors/inbound.md#creating-the-connector-event) to avoid event duplication. With two connector deployments running, message idempotency is critical.                                                                                                |
+| Connectors            | If you run Connectors with an inbound connector deployed in a dual-region setup: <ul><li>To delete a process deployment, do so via Operate, otherwise the inbound connector won't deregister.</li><li>If you have multiple Operate instances running, delete the process in both instances. This is a [known limitation](https://github.com/camunda/camunda/issues/17762).</li></ul> |
+| Zeebe cluster scaling | Supported. See [Zeebe cluster configuration](#zeebe-cluster-configuration).                                                                                                                                                                                                                                                                                                          |
+| Web Modeler           | Runs in a single region alongside a dual-region cluster, with no multi-region guarantees. Requires OIDC authentication, Management Identity, and PostgreSQL. If its region is lost, Web Modeler is unavailable until you restore it. See [Management plane and runtime plane](#management-plane-and-runtime-plane).                                                                  |
 
 ## Region failure and recovery
 
 In a dual-region setup, losing either region affects Camunda 8 processing because of Zeebe's quorum requirements.
 
 When a region becomes unavailable, the Zeebe cluster loses quorum (half of its brokers become unreachable) and **immediately stops processing** new data. All components stop processing until the failover procedure completes.
+
+This section covers the runtime plane. Failover doesn't recover Management Identity, Web Modeler, Console, or Optimize. For their behavior on region loss, see [Management plane and runtime plane](#management-plane-and-runtime-plane).
 
 :::warning Immediate impact
 Region failure causes **immediate service interruption**:
