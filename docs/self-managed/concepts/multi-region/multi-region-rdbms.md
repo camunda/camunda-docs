@@ -179,7 +179,9 @@ Recovery is the reverse and has no restore step: redeploy the region, and its br
 
 ### Recovery objectives {#recovery-objectives}
 
-Neither objective is zero, and neither is a property of the architecture alone.
+**On the engine, losing a zone is the same class of event as losing a broker.** A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. That is normal reconfiguration, not downtime. Losing a zone runs the same sequence over the same protocol. What changes is distance: the new leader's round trip may cross a region boundary, and clients move between regions instead of within one. There is no restore, no backup to replay, and no judgment call about whether the failure is temporary or permanent.
+
+That is the difference from [Dual-Region](./dual-region.md), where a region loss costs the quorum and processing stops until an operator intervenes. It is not a claim that recovery is instant. Neither objective is zero, and neither is a property of the architecture alone.
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing: Raft commits a record only once a majority of its replicas hold it, so with one replica per zone and three zones a commit needs two, and losing one zone always leaves at least one replica that has the record.
 
@@ -198,6 +200,8 @@ That makes the guarantee conditional on disk rather than on the architecture. Re
 | Database writer promotion | If the writer was in the lost region, exporting stops until a surviving member is promoted. The engine keeps processing, but the APIs and web applications that read secondary storage serve stale data until it resumes. |
 
 Skewing partition leadership to the writer's zone makes the first of these worse in one specific case: losing that zone loses most partition leaders at once, so more partitions re-elect simultaneously. That is the price of avoiding an inter-region round trip on every export flush, and it is worth knowing which zone you made expensive to lose.
+
+**Client configuration decides whether the re-election and rerouting windows are visible.** A re-election is a window a client retries through, not an outage, but only if its timeout and retry budget is set to survive one. A client that gives up on the first refused connection sees the re-election as downtime, in a single-region cluster as much as here. The window is longer here, because the new leader and the rerouted client can both be a region away. Size client timeouts and retries for a leader change that crosses a region boundary.
 
 ### Removing a lost zone
 
