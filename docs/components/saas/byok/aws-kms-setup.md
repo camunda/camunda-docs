@@ -33,7 +33,7 @@ Learn how to configure encryption at rest for your Camunda 8 SaaS Orchestration 
    ![external option encryption at rest](./img/external-encryption.png)
 6. Click **Create cluster**.
 
-After creation, note the **AWS Role ARN** displayed in the Hub for your cluster. The ARN uses the following format:
+After creation, note the **AWS Role ARN** displayed in Camunda Hub for your cluster. The ARN uses the following format:
 
 ```
 arn:aws:iam::<account-id>:role/c8-cluster/c8-apps-<uuid>
