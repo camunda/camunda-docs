@@ -62,7 +62,7 @@ Injection fails when both of the following conditions apply:
 - Camunda cannot replace the placeholder at the recorded pointer.
 - A `camunda.secrets.<name>` placeholder still remains at that path after all references for the path have been processed.
 
-For example, injection fails if the pointer now addresses a list or object that still contains a secret placeholder. If the value at the pointer no longer contains a placeholder, Camunda [continues without raising an incident](#failures-that-raise-no-incident).
+For example, injection fails if the pointer now addresses a list or object that still contains a secret placeholder. If the value at the pointer no longer contains a placeholder, Camunda [continues without raising an incident](#identify-failures-that-raise-no-incident).
 
 ```text
 The job with key '2251799813685260' can not be activated, because the secret reference 'camunda.secrets.API_TOKEN' could not be resolved at '/credentials/token'. Fix the variable's value or the input mapping that sets it, then resolve the incident, or use process instance modification to reactivate the element and create a fresh job.
