@@ -442,7 +442,7 @@ For example, given a webhook request with the payload body:
 }
 ```
 
-You can return `myValue1` in a new key `myCustomKey` with a response body expression such as:
+You can return `myValue1` in a new key `myCustomKey` with a response expression such as:
 
 ```json
 ={
