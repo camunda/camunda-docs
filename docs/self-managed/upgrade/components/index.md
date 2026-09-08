@@ -7,13 +7,6 @@ description: Upgrade individual Camunda 8 components when moving from version 8.
 
 import ZeebeGrid from '../../../components/zeebe/react-components/\_zeebe-card';
 
-:::note
-
-<!--- TODO: Remove this for the release --->
-
-This section is a work in progress for Camunda 8.10 and will be updated as upgrade requirements are finalized.
-:::
-
 Upgrade individual Camunda 8 components when moving from version 8.9 to 8.10.
 
 ## About

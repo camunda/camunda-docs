@@ -25,6 +25,10 @@ Before upgrading, verify that your current installation meets the minimum requir
 | Environment support | Ensure your platform and dependencies are supported in 8.10. See [supported environments](/reference/supported-environments.md).                                                                                                                                                                                        |
 | Customizations      | Identify non-default values in Helm values, application YAML files, Ingress configuration, exporters, and secondary storage setup (for example, Elasticsearch/OpenSearch or RDBMS).                                                                                                                                     |
 
+## Back up database
+
+When upgrading to Camunda 8.10, your Web Modeler/Camunda Hub data will be [migrated](./components/890-to-8100.md#data-migration) to the [new structure](/reference/announcements-release-notes/8100/whats-new-in-810.md#new-file-structure-and-requirements). Camunda recommends you create a backup before the migration to ensure your data is recoverable in its original state if anything goes wrong. If you notice anything unexpected after the migration, contact support.
+
 <!-- TODO: Update this when we have content
 
 ## Review pre-upgrade actions required for Camunda 8.10
