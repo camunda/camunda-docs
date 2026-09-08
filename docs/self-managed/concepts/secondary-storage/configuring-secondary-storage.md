@@ -56,24 +56,17 @@ More information about RDBMS in the Camunda Helm chart can be found on this [con
 If you choose Elasticsearch as the secondary storage backend, configure it as follows:
 
 ```yaml
-global:
-  elasticsearch:
-    enabled: true
-    external: true
-    auth:
-      username: elastic
-      secret:
-        existingSecret: camunda-db-secret
-        existingSecretKey: password
-    url:
-      protocol: http
-      host: hostname
-      port: 443
-
 orchestration:
   data:
     secondaryStorage:
       type: elasticsearch
+      elasticsearch:
+        url: http://hostname:443
+        auth:
+          username: elastic
+          secret:
+            existingSecret: camunda-db-secret
+            existingSecretKey: password
 ```
 
 More information about Elasticsearch in the Camunda Helm chart can be found in [using external Elasticsearch](/self-managed/deployment/helm/configure/database/elasticsearch/using-external-elasticsearch.md).
