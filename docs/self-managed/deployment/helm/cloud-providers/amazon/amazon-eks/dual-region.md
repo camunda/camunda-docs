@@ -634,7 +634,7 @@ Key changes of the dual-region setup:
 - `global.security.authentication.method: basic`
   - Uses Basic authentication for inter-component communication since Management Identity (Keycloak) is not deployed in dual-region.
 - `global.identity.auth.enabled: false`
-  - This reference uses basic authentication instead of Management Identity. For more details, see [Management plane and runtime plane](/self-managed/concepts/multi-region/dual-region.md#management-plane-and-runtime-plane) on the dual-region concept page.
+  - This reference uses Basic authentication instead of Management Identity. For more details, see [Management plane and runtime plane](/self-managed/concepts/multi-region/dual-region.md#management-plane-and-runtime-plane) on the dual-region concept page.
 - `identity.enabled: false`
   - This reference doesn't deploy Management Identity.
 - `optimize.enabled: false`
