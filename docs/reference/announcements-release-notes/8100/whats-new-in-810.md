@@ -38,28 +38,30 @@ Important changes in Camunda 8.10 are summarized in the following sections.
 
 ## Introducing Camunda Hub
 
-Camunda Hub is a new product that replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
+[Camunda Hub](/components/hub/index.md) is a new product that replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 
 In Hub:
 
 - **Center of excellence teams** manage organizational infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
-- **Delivery teams** collaborate in managed workspaces, discover and use approved catalog assets, and model, test, and deploy business processes.
+- **Delivery teams** collaborate in managed workspaces and model, test, and deploy business processes.
 
 Organization-level resource governance and workspace-level project delivery now happen in one product.
 
-<p class="link-arrow">[Camunda Hub documentation](/components/hub/index.md)</p>
+:::note Feature highlight: Hub Catalog
+8.10 also introduces the new [Hub catalog](/components/hub/organization/manage-catalog/getting-started.md). With the catalog, center of excellence teams manage reusable automation assets in a Git repository, and publish them to Camunda Hub. In Hub, delivery teams discover and apply approved catalog assets when modeling.
+
+Learn more about the catalog and other [key features](#key-features) of Camunda Hub.
+:::
 
 ### Terminology
 
 With the introduction of Camunda Hub, many terms and concepts from Web Modeler and Console have changed:
 
-| Before 8.10 (Web Modeler/Console) | Camunda 8.10 (Camunda Hub)                                                                                    |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------ |
-| Project                           | [Workspace](/reference/glossary.md#workspace)                                                                 |
-| Process application               | [Project](/reference/glossary.md#project)                                                                     |
-| Organization member               | [Organization user](/components/hub/organization/manage-users/manage-users.md)                                |
-| Collaborator                      | [Workspace member](/components/hub/organization/manage-workspaces/manage-workspace-members.md)                |
-| Project Admin                     | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) |
+| Before 8.10 (Web Modeler) | 8.10 (Camunda Hub)                                                                                            | Description                                                                                                                                                                              |
+| :------------------------ | :------------------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project                   | [Workspace](/reference/glossary.md#workspace)                                                                 | When upgrading to Hub, your projects automatically migrate to workspaces. Workspaces in Hub are isolated team collaboration spaces. Members can only view workspaces they're invited to. |
+| Process application       | [Project](/reference/glossary.md#project)                                                                     | When upgrading to Hub, your process applications automatically migrate to projects. Projects in Hub can be versioned as a bundle of files or used as a folder for loose files.           |
+| Project Admin             | [Workspace Admin](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) | This aligns with the project-to-workspace terminology change.                                                                                                                            |
 
 ### SaaS roles and permissions
 
@@ -121,6 +123,54 @@ Here's a list of Web Modeler and Console features and how to access their equiva
 
 In addition to providing a unified interface for existing Web Modeler and Console functionality, Camunda Hub introduces many new features. In this section, you'll learn about some of the highlights. For all changes associated with Camunda Hub, review the 8.10 [release announcements](./8100-announcements.md) and [release notes](./8100-release-notes.md).
 
+#### Catalog
+
+In Web Modeler before 8.10, you can publish shared resources to the organization. These shared resources can be used in projects across the organization. However, governance over these shared resources is decentralized, usage can't be audited, and standards can't be enforced.
+
+From 8.10, center of excellence teams can manage reusable automation assets in a Git repository and publish them to Hub. In Hub, they have visibility into where assets are being used and which processes are using outdated or deprecated assets.
+
+<p class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</p>
+
+Delivery teams can trust that catalog assets have been vetted and approved by the center of excellence. They can discover assets in the catalog, read asset documentation, and apply them when modeling.
+
+<p class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</p><br />
+
+#### Workspaces and projects
+
+Hub introduces workspaces and projects.
+
+A workspace is a collaboration environment within an organization, representing a team or business domain. A workspace is assigned members and projects so all related work happens in one shared space. When you migration to 8.10, all your Web Modeler projects become workspaces.
+
+<p class="link-arrow">[Manage workspaces](/components/hub/organization/manage-workspaces/index.md)</p><br />
+
+A project contains a set of files. You can consider a project as a bundle of related files you can version and deploy together. You can also consider a project as a container of individual files meant to be versioned and deployed independently. When you migration to 8.10, all your Web Modeler process applications become projects.
+
+<p class="link-arrow">[Manage projects](/components/hub/workspace/manage-projects/manage-projects.md)</p><br />
+
+#### Project snapshots and file versioning
+
+In Web Modeler, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit.
+
+Camunda Hub introduces an improved model with more granular control over project and file versions:
+
+- **[Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md):** You can create project snapshots to capture the current state of all project resources.
+- **[File-level versions](/components/hub/workspace/modeler/modeling/versions.md):** You can now create new versions for individual files within a project. Every file maintains its own version history.
+- **Autosave:** All files save their state automatically after edits.
+- **Decoupled element template versions:** Project versions and element template versions are now created independently of each other.
+
+<details>
+<summary>New to projects?</summary>
+
+If you're not familiar with projects, the following sections explain how to:
+
+- [Define deployment stages](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters)
+- [Deploy a project](/components/hub/workspace/manage-projects/deploy-project.md)
+- [Deploy an individual resource](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process)
+- [Create a project snapshot](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot)
+- [Create a resource version](/components/hub/workspace/modeler/modeling/versions.md#create-a-version)
+
+</details>
+
 #### New file structure and requirements
 
 In Camunda 8.9, a project can contain process applications, folders, and files. Camunda 8.10 introduces a new file resource hierarchy in which workspaces only contain projects and IDP projects. Files and folders are always stored inside projects.
@@ -179,6 +229,14 @@ This strict new **Workspace > Project > File/folder** hierarchy makes resources 
 - **[Process application versioning model](#process-application-snapshots-and-file-versioning):** Provides more granular control.
   :::
 
+#### Credentials manager
+
+Before 8.10, you configure a connector's authentication and connection settings directly on each connector task. This doesn't scale well and is hard to maintain. For example, if ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
+
+Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
+
+<!-- todo: Add link -->
+
 #### Recover deleted resources
 
 When you deleted a resource, such as a file or process application, in Camunda 8.9, the resource was immediately and permanently deleted, along with:
@@ -192,49 +250,18 @@ In Camunda Hub, when you delete a resource, it's moved to **Recently deleted**. 
 
 <p class="link-arrow">[Recover deleted resources](/components/hub/workspace/manage-projects/recently-deleted.md)</p>
 
-#### Project snapshots and file versioning
+### Camunda Hub API
 
-In Web Modeler, a process application and the resources within it were tightly coupled. You could only version and deploy the resources as a single, bundled unit.
+Before Camunda 8.10, you could interact with Web Modeler and Console resources through the following APIs:
 
-Camunda Hub introduces an improved model with more granular control over project and file versions:
+| API                | Description                                                                                                                                                                                              | Camunda 8.10 status                                 |
+| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- |
+| Web Modeler API v1 | Programmatically manage Web Modeler resources, like projects, process applications, and collaborators. This API now serves Camunda Hub resources, like workspaces, projects, and members under the hood. | Deprecated. Will be removed in 8.12.                |
+| Administration API | Retrieve cluster data, including installed apps and usage metrics                                                                                                                                        | Removed for Self-Managed. Still available for SaaS. |
 
-- **[Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md):** You can create project snapshots to capture the current state of all project resources.
-- **[File-level versions](/components/hub/workspace/modeler/modeling/versions.md):** You can now create new versions for individual files within a project. Every file maintains its own version history.
-- **Autosave:** All files save their state automatically after edits.
-- **Decoupled element template versions:** Project versions and element template versions are now created independently of each other.
+In Camunda 8.10, with Camunda Hub replacing Web Modeler and Console, the new Camunda Hub API succeeds the old Web Modeler API and, for Self-Managed, the Administration API. The Camunda Hub API unifies cluster and workspace management in a single interface. Additionally, it provides new APIs for interacting with Hub-specific features.
 
-<details>
-<summary>New to projects?</summary>
-
-If you're not familiar with projects, the following sections explain how to:
-
-- [Define deployment stages](/components/hub/workspace/manage-projects/create-a-project.md#connect-clusters)
-- [Deploy a project](/components/hub/workspace/manage-projects/deploy-project.md)
-- [Deploy an individual resource](/components/hub/workspace/modeler/run-or-publish-your-process.md#deploy-a-process)
-- [Create a project snapshot](/components/hub/workspace/manage-projects/project-versioning.md#create-a-snapshot)
-- [Create a resource version](/components/hub/workspace/modeler/modeling/versions.md#create-a-version)
-
-</details>
-
-#### Catalog
-
-In Web Modeler before 8.10, you can publish shared resources to the organization. These shared resources can be used in projects across the organization. However, governance over these shared resources is decentralized, usage can't be audited, and standards can't be enforced.
-
-From 8.10, center of excellence teams can manage reusable automation assets in a Git repository and publish them to Hub. In Hub, they have visibility into where assets are being used and which processes are using outdated or deprecated assets.
-
-<p class="link-arrow">[Manage the catalog](/components/hub/organization/manage-catalog/index.md)</p>
-
-Delivery teams can trust that catalog assets have been vetted and approved by the center of excellence. They can discover assets in the catalog, read asset documentation, and apply them when modeling.
-
-<p class="link-arrow">[Use catalog assets](/components/hub/workspace/modeler/element-templates/use-catalog-assets.md)</p><br />
-
-#### Credentials manager
-
-Before 8.10, you configure a connector's authentication and connection settings directly on each connector task. This doesn't scale well and is hard to maintain. For example, if ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
-
-Camunda Hub introduces credentials. These are authentication and connection configurations you create once and reuse wherever you need them. When you update a credential, that change is applied everywhere the credential is used.
-
-<!-- todo: Add link -->
+<p class="link-arrow">[Migrate from Web Modeler to the Camunda Hub API](/apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api.md)</p>
 
 ### Self-Managed
 
@@ -264,22 +291,9 @@ camundaHub:
         memory: 1Gi
 ```
 
-<p class="link-arrow">[Upgrade from Helm 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md)</p>
-
 Additionally, when you upgrade, your data is [migrated](/self-managed/upgrade/components/890-to-8100.md#data-migration) to the [new file structure](#new-file-structure-and-requirements).
 
-### Camunda Hub API
-
-Before Camunda 8.10, you could interact with Web Modeler and Console resources through the following APIs:
-
-| API                | Description                                                                                                                                                                                              | Camunda 8.10 status                                 |
-| :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- |
-| Web Modeler API v1 | Programmatically manage Web Modeler resources, like projects, process applications, and collaborators. This API now serves Camunda Hub resources, like workspaces, projects, and members under the hood. | Deprecated. Will be removed in 8.12.                |
-| Administration API | Retrieve cluster data, including installed apps and usage metrics                                                                                                                                        | Removed for Self-Managed. Still available for SaaS. |
-
-In Camunda 8.10, with Camunda Hub replacing Web Modeler and Console, the new Camunda Hub API succeeds the old Web Modeler API and, for Self-Managed, the Administration API. The Camunda Hub API unifies cluster and workspace management in a single interface. Additionally, it provides new APIs for interacting with Hub-specific features.
-
-<p class="link-arrow">[Migrate from Web Modeler to the Camunda Hub API](/apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api.md)</p>
+<p class="link-arrow">[Upgrade from Helm 8.9 to 8.10](/self-managed/upgrade/helm/890-to-8100.md)</p>
 
 ## Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
