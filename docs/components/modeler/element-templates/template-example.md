@@ -53,6 +53,7 @@ Let us consider the following example that defines a template for invoking a RES
       }
     },
     {
+      "id": "httpMethod",
       "label": "REST Method",
       "tooltip": "The HTTP method to use for the request.",
       "type": "Dropdown",
@@ -76,6 +77,10 @@ Let us consider the following example that defines a template for invoking a RES
       "binding": {
         "type": "zeebe:input",
         "name": "body"
+      },
+      "condition": {
+        "oneOf": ["post", "patch", "delete"],
+        "property": "httpMethod"
       }
     },
     {
@@ -119,7 +124,7 @@ The example defines six custom fields, each mapped to different technical proper
 - **REST Credential**: A [`Configuration`](./template-properties.md#configuration-input-type) property that lets users select or create a connection, locked to the embedded `io.camunda.examples:connection:1` configuration template. The chosen configuration is injected as the `connection` job variable. The referenced configuration template is embedded under the top-level [`configurationTemplates`](./template-metadata.md#embedding-configurations-configurationtemplates) key.
 - **REST Endpoint URL**: Mapped to a `task header` with the key `url`. This field includes validation to ensure it's a valid HTTP(S) URL.
 - **REST Method**: Mapped to a `task header` with the key `method`. Uses a dropdown to provide predefined HTTP method options.
-- **Request Body**: Mapped to a local variable via an `input parameter` named `body`. This field is optional, so it won't appear in the XML if left empty.
+- **Request Body**: Mapped to a local variable via an `input parameter` named `body`. This field shown conditionally only.
 - **Result Variable**: Mapped into a process variable via an `output parameter`. The response data will be stored in the specified variable name.
 
 ## Visual result
