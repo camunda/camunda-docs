@@ -187,6 +187,12 @@ Use the following commands to manage values:
 | `./c8run secrets import [dotenv-file]` | Import `KEY=value` entries from a dotenv file.   |
 | `./c8run secrets import -`             | Import dotenv entries from standard input.       |
 
+The commands have the following current safety boundaries:
+
+- Import immediately replaces values with matching names. The cache warning appears after the values are written, without advance confirmation.
+- Both `delete <name>` and `delete --all` prompt for confirmation. In noninteractive use, add `--yes`.
+- Secret names can contain dashes, but names beginning with `-` can't currently be passed to `set` or `delete <name>`.
+
 For example, import a local dotenv file:
 
 ```bash
@@ -195,32 +201,34 @@ For example, import a local dotenv file:
 
 Use a dedicated dotenv file for secret values. `c8run secrets` refuses to import the c8run `.env` file because it can contain runtime, download, and packaging credentials.
 
-Camunda caches resolved values for 20 minutes by default. After rotating a value, existing cached resolutions can use the previous value until the cache entry expires. Restart Camunda 8 Run to clear the cache immediately.
+Configure local secret management with the following environment variables. Set them in your environment or the c8run `.env` file before running secret commands or starting Camunda 8 Run.
 
-Set `C8RUN_SECRETS_CACHE_TTL` before starting Camunda 8 Run to change the cache duration. The minimum supported value is one minute:
+| Variable                  | Default                     | Valid values                                                              | Behavior                                                                                                                                                 |
+| ------------------------- | --------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `C8RUN_SECRETS_MODE`      | `local`                     | `local` or `external`                                                     | In `local` mode, c8run configures its file store. Set `external` whenever you configure another store. Local `c8run secrets` commands are then disabled. |
+| `C8RUN_SECRETS_DIR`       | Platform-specific directory | An absolute or relative directory path                                    | Sets the file-store path for local secret commands and startup. Relative paths resolve from the current working directory.                               |
+| `C8RUN_SECRETS_CACHE_TTL` | `20m`                       | A duration expressed as a whole number of minutes, with a minimum of `1m` | Sets how long Camunda caches resolved secret values.                                                                                                     |
+
+For example, set the cache duration to one minute:
 
 ```bash
 C8RUN_SECRETS_CACHE_TTL=1m ./c8run start
 ```
 
-Set `C8RUN_SECRETS_DIR` in your environment or the c8run `.env` file to use another directory for secret commands and startup. Relative paths resolve from the unpacked c8run directory:
+To use another local directory for secret commands and startup, set the same path for both commands:
 
 ```bash
 C8RUN_SECRETS_DIR=./temporary-secrets ./c8run secrets set API_KEY
 C8RUN_SECRETS_DIR=./temporary-secrets ./c8run start
 ```
 
-To remove all secrets in the configured directory, run `./c8run secrets delete --all`. Interactive terminals ask for confirmation. Automation must add `--yes`.
-
 The default directory is shared across projects and c8run versions for the current operating-system user. Set a stable absolute `C8RUN_SECRETS_DIR` per project when the same secret name needs different values. c8run warns when the platform-default directory and the configured directory both contain entries. Run `./c8run secrets path` to confirm the active local directory.
 
-Overwritten and deleted values can remain in the running Camunda secret cache until its time to live expires. Restart c8run to apply those changes immediately.
+After rotating, importing, or deleting a value, existing cached resolutions can use the previous value until the cache entry expires. Restart Camunda 8 Run to clear the cache immediately.
 
 On Windows, use PowerShell or Command Prompt for hidden interactive entry. In Git Bash, prefix the command with `winpty`, or use `--stdin`.
 
-Local secret commands manage only the c8run file store. If you start with `--config` or Spring settings that configure another file path, AWS Secrets Manager, or Google Secret Manager, use that store's management tools instead. c8run does not add its local file store when explicit store configuration is present.
-
-Set `C8RUN_SECRETS_MODE=external` when you configure `camunda.secrets.stores` through `--config`, `application.yaml`, or Spring environment settings. In the default `local` mode, `C8RUN_SECRETS_DIR` is the authoritative local file-store path. Local `c8run secrets` commands are disabled in external mode.
+Local secret commands manage only the c8run file store. Set `C8RUN_SECRETS_MODE=external` whenever you configure another file path, AWS Secrets Manager, or Google Secret Manager through `--config`, `application.yaml`, or Spring environment settings. c8run doesn't detect explicit store configuration and otherwise configures its local default store. Use the external store's management tools instead of `c8run secrets`.
 
 The local secrets directory is for development only. For production, configure a supported managed secret store instead of reusing Camunda 8 Run secrets.
 
