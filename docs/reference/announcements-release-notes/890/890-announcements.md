@@ -143,6 +143,7 @@ The following key changes were also released as part of an 8.9.x patch release o
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
 | [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Breaking change | [Connector secret filter now defaults to STRICT](#connector-secret-filter-strict-default)                                     |
 
 ## Agentic orchestration
 
@@ -599,6 +600,23 @@ In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2
 </div>
 
 ## Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
+
+Starting with 8.9.10, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+
+**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret. On Camunda 8 SaaS, you can also change this per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode) once your cluster is on 8.9.10 or later.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
