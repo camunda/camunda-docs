@@ -557,7 +557,7 @@ To learn more, see the [TypeScript SDK](/apis-tools/typescript/typescript-sdk.md
 
 Starting with 8.8.19, the connector runtime introduces the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter), defaulting to `STRICT`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
-**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, either add the reference or set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED` before upgrading. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
+**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
 
 <p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
 
