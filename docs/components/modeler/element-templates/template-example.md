@@ -73,7 +73,6 @@ Let us consider the following example that defines a template for invoking a RES
       "description": "Data to send to the endpoint.",
       "value": "",
       "type": "String",
-      "optional": true,
       "binding": {
         "type": "zeebe:input",
         "name": "body"
