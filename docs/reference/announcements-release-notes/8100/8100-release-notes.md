@@ -308,6 +308,8 @@ This feature does not yet include HashiCorp Vault or Azure Key Vault support, se
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
+<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
+
 A new comprehensive Elasticsearch configuration guide explains how to:
 
 - Size your Elasticsearch cluster for Camunda 8 workloads.
@@ -319,6 +321,8 @@ This guide helps Self‑Managed customers:
 - Avoid oversharding (too many shards per node).
 - Prevent index unavailability and related Operate/Tasklist errors.
 - Reduce Elasticsearch‑related incidents in production.
+
+<p class="link-arrow">[Configure data retention](/docs/self-managed/deployment/helm/configure/data-retention.md)</p>
 
 #### New rebalance API for coordinated leadership transfer
 
