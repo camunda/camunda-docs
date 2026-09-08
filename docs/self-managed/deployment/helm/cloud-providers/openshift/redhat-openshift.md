@@ -20,6 +20,7 @@ import PortForwardServices from '../\_partials/\_port-forward-services.md'
 import DeployECKElasticsearch from '../\_partials/\_deploy-eck-elasticsearch.md'
 import SecondaryStorageOptionsNote from '../\_partials/\_secondary-storage-options-note.md'
 import DeploymentReadinessCheck from '../\_partials/\_deployment-readiness-check.md'
+import ZeebeGatewayNetworkPolicies from '../\_partials/\_zeebe-gateway-network-policies.md'
 
 Red Hat OpenShift, a Kubernetes distribution maintained by [Red Hat](https://www.redhat.com/en/technologies/cloud-computing/openshift), provides options for both managed and on-premises hosting.
 
@@ -134,6 +135,13 @@ We strongly recommend double-checking your YAML file before applying it. You can
 #### Configuring the Ingress
 
 Before exposing services outside the cluster, we need an Ingress component. Here's how you can configure it:
+
+:::danger Exposure of the Zeebe Gateway Service
+For production-grade security, keep the Zeebe Gateway on a private network with no publicly reachable route, and access it only from internal workloads or over a secure private connection. This limits the attack surface and keeps process and job traffic inside your trusted network boundary.
+
+<ZeebeGatewayNetworkPolicies />
+
+:::
 
 <Tabs queryString="current-ingress">
 

@@ -720,7 +720,7 @@ kubectl get keycloak keycloak -n $CAMUNDA_NAMESPACE -o jsonpath='{.status.condit
 
 ### Security
 
-- **Network policies**: Implement network policies to restrict traffic between components
+- **Network policies**: Implement network policies to restrict traffic between components. See [required network traffic](/self-managed/deployment/helm/install/production/index.md#required-network-traffic).
 - **TLS encryption**: Enable TLS for all inter-component communication
 - **Secret management**: Use external secret management systems in production
 - **RBAC**: Configure proper role-based access control for infrastructure and applications

@@ -83,6 +83,10 @@ security:
 
 These values control mechanisms of Optimize related security, e.g. security headers and authentication.
 
+:::note
+In Camunda 8.10, set `camunda.security.http-headers.hsts.max-age-in-seconds` instead of `security.responseHeaders.HSTS.max-age`. The `security.auth.token.secret` and `security.responseHeaders.X-XSS-Protection` settings are no longer used, and you can remove them. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
+:::
+
 | YAML path                                        | Environment variable                                    | Default value   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ------------------------------------------------ | ------------------------------------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 |                                                  |
@@ -112,6 +116,10 @@ This section focuses on common properties related to the External REST API of Op
 mandatory to configure one of the values below if the External REST API is to be used. If neither is
 configured an error will be thrown and all requests to the External API will get rejected. If both are configured then
 the `jwtSetUri` will take precedence and the `accessToken` will be ignored.
+
+:::note
+In Camunda 8.10, set `camunda.security.authentication.oidc.jwk-set-uri` and `camunda.security.authentication.oidc.audiences` instead of `api.jwtSetUri` and `api.audience`. The `api.accessToken` setting is no longer used, and you can remove it. See [legacy configuration keys](/self-managed/upgrade/components/890-to-8100.md#legacy-security-configuration-keys-are-deprecated) for the full mapping.
+:::
 
 | YAML path       | Environment variable                                  | Default value | Description                                                                                                                                    |
 | --------------- | ----------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |

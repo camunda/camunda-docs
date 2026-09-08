@@ -174,9 +174,9 @@ For security reasons, Camunda Identity requires secure access (HTTPS) when a `co
 Due to limitations, the Identity `contextPath` approach is unavailable when using a browser in Incognito mode.
 :::
 
-## Web Modeler database schema
+## Camunda Hub database schema
 
-The Web Modeler `restapi` component requires a [database connection](/self-managed/components/hub/configuration/properties.md#database). This connection should not point to the same database as Keycloak does.
+The Camunda Hub `restapi` component requires a [database connection](/self-managed/components/hub/configuration/properties.md#database). This connection should not point to the same database as Keycloak does.
 
 ## Gateway timeout on redirect
 
@@ -343,9 +343,9 @@ Use the published per-image feed instead, which is generated from the upstream c
 
 ## Incorrect authorizations when deploying resources from Modeler
 
-If you encounter missing or invalid authorizations when deploying resources or starting process instances from Web Modeler or Desktop Modeler, review which credentials are being used:
+If you encounter missing or invalid authorizations when deploying resources or starting process instances from Camunda Hub or Desktop Modeler, review which credentials are being used:
 
-- **Web Modeler** deploys as your logged-in user, so ensure that your [user](/components/admin/user.md) has the required permissions.
+- **Camunda Hub** deploys as your logged-in user, so ensure that your [user](/components/admin/user.md) has the required permissions.
 - **Desktop Modeler** uses the client credentials you provide, so ensure that your [client](/components/admin/client.md) has the required permissions.
 
 ## Zeebe data loss after PVC deletion
