@@ -90,7 +90,9 @@ Multi-Region RDBMS adopts that constraint rather than working around it:
 Any database that presents a single endpoint following its own writer fits: a globally replicated managed database, a PostgreSQL cluster behind a floating endpoint, a connection proxy, or a DNS record you repoint during failover. The Camunda configuration does not change between them.
 
 :::warning
-Asynchronous replication monitoring is required, not a tuning option. Without it the RDBMS exporter acknowledges records the standby has not received yet, and a writer failover loses exported data. This architecture treats a writer failover as a routine operation rather than an incident, so set `camunda.data.secondary-storage.rdbms.async-replication.enabled` to `true` and choose a strategy in [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support).
+Asynchronous replication monitoring is required, not a tuning option. Without it the RDBMS exporter acknowledges records the standby has not received yet, and a writer failover loses exported data. This architecture treats a writer failover as a routine operation rather than an incident, so set `camunda.data.secondary-storage.rdbms.async-replication.enabled` to `true`.
+
+Which strategy is available to you is **vendor dependent**, and it is worth checking before you choose a database. LSN monitoring reads the database's own replication position and is the default, but only some backends support it. Everything else falls back to a static delay that carries no replication signal, needs its own delay value, and requires you to monitor the actual lag yourself. See [multi-region support](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) for the supported list and the settings.
 :::
 
 ### The database tier is active-standby
@@ -181,7 +183,11 @@ Neither objective is zero, and neither is a property of the architecture alone.
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing: Raft commits a record only once a majority of its replicas hold it, so with one replica per zone and three zones a commit needs two, and losing one zone always leaves at least one replica that has the record.
 
-Secondary storage is different, because the database replicates asynchronously. An unplanned promotion loses whatever had not reached the standby. What brings that back to zero is not the database but Camunda: with [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) enabled, Zeebe holds back log compaction until the database acknowledges, so the lost records are replayed from the Zeebe log. That guarantee costs disk, because the retained log segments grow with the replication lag. Size the disk for it and monitor it.
+Secondary storage is different, because the database replicates asynchronously. An unplanned promotion loses whatever had not reached the standby. What brings that back to zero is not the database but Camunda: with [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) enabled, the exporter acknowledges a record only once the database reports it replicated, which holds back Zeebe log compaction so the records can be replayed from the Zeebe log.
+
+That makes the guarantee conditional on disk rather than on the architecture. Retained log segments accumulate for as long as the database is behind, so the volume must hold normal retention plus `max-lag` worth of log. Size it from your own write rate, and alert on broker disk usage.
+
+`pause-on-max-lag-exceeded` decides what happens once that budget is exceeded. It does not change what gets acknowledged, so no data is lost either way. With it off, the log keeps growing until the volume fills and the broker stops writing. With it on, exporting pauses while Zeebe keeps processing, and the APIs and web applications that read secondary storage serve stale data until the database catches up.
 
 **Recovery time is not zero either**, even though no operator step is needed to resume processing. Three things take time:
 
