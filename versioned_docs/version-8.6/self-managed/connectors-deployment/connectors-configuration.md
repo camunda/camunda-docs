@@ -347,7 +347,7 @@ The secret filter caches process definition lookups to avoid repeated API calls.
 
 If a secret that previously resolved now comes back unresolved, or the connector job fails, under `STRICT` mode, check the following:
 
-- For outbound connectors, the element has a Modeler element template. The secret filter derives an outbound task's allow-list from its element template; tasks without one, or with an unsupported element type, are treated as declaring no secrets and deny all resolution under `STRICT`.
+- For outbound connectors, the element is a supported BPMN type (`ServiceTask`, `SendTask`, `ScriptTask`, `BusinessRuleTask`, `SubProcess`, `IntermediateThrowEvent`, or `EndEvent`) with a `zeebe:input` mapping that contains the secret reference. Unsupported element types and supported elements without such an input mapping are treated as declaring no secrets and deny all resolution under `STRICT`.
 - The secret is referenced using the `{{secrets.NAME}}` syntax in the same field where you expect it to resolve. A reference declared on one field doesn't resolve on a different field, unless the model chains the two fields together with a FEEL expression.
 - The `{{secrets.NAME}}` reference sits inside a JSON string, like any other field value. An unquoted placeholder on a non-string field (for example, `"count": {{secrets.MAX}}`) is never substituted.
 - The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
