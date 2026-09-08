@@ -80,7 +80,7 @@ Deploy the management plane as a separate release in one region, next to the two
 
 The dual-region reference architecture doesn't deploy the management plane. It uses Basic authentication, disables Management Identity, and sets `optimize.enabled: false`. That's the scope of the reference configuration, not a product restriction: you can run Optimize and Camunda Hub alongside a dual-region Orchestration Cluster.
 
-Both components authenticate through Management Identity, so a management plane requires OIDC authentication rather than the Basic authentication the reference configuration uses. Point each component at your Management Identity instance with `global.identity.service.url`, and give Camunda Hub its own PostgreSQL database.
+Both components authenticate through Management Identity, so a management plane requires OpenID Connect (OIDC) authentication rather than the Basic authentication the reference configuration uses. Point each component at your Management Identity instance with `global.identity.service.url`, and give Camunda Hub its own PostgreSQL database.
 
 :::note
 The Helm chart doesn't reject `optimize.enabled: true` when Management Identity is disabled. That combination installs successfully and then fails to authenticate at runtime. Confirm Management Identity is reachable before you enable Optimize.
