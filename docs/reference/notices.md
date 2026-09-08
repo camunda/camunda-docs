@@ -23,7 +23,7 @@ To learn more about security at Camunda, including our security policy, security
 
 ## Understand affected and fixed versions
 
-Each security notice lists affected and fixed versions by Camunda component (for example, Zeebe, Operate, Tasklist, Identity, Optimize, and Web Modeler), not by Helm chart version. The Helm chart has its own version, tracked separately from the component versions it deploys.
+Each security notice lists affected and fixed versions by Camunda component (for example, Zeebe, Operate, Tasklist, Identity, Optimize, and Hub), not by Helm chart version. The Helm chart has its own version, tracked separately from the component versions it deploys.
 
 For Camunda 8.8 and later, the Orchestration Cluster unifies Zeebe, Operate, and Tasklist, so these components share the same version number.
 
