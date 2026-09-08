@@ -315,7 +315,7 @@ camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
 | Property name                                 | Description                                                                   | Default |
 | --------------------------------------------- | ----------------------------------------------------------------------------- | ------- |
 | `async-replication.enabled`                   | If the async replication monitoring should be enabled                         | false   |
-| `async-replication.min-sync-replicas`         | The minimal number of replicas in sync                                        | 1       |
+| `async-replication.min-sync-replicas`         | The minimum number of replicas in sync                                        | 1       |
 | `async-replication.polling-interval`          | The interval in which to check the replicas                                   | PT15S   |
 | `async-replication.max-lag`                   | The max tolerated lag of a replication (ISO-8601 duration)                    | PT15M   |
 | `async-replication.pause-on-max-lag-exceeded` | If the exporter should pause exporting when the maximum lag limit is exceeded | false   |
@@ -324,8 +324,8 @@ camunda.data.secondary-storage.rdbms.async-replication.min-sync-replicas: 2
 
 The following databases are supported for time lag replication monitoring:
 
-- Aurora Global DB with PostgreSQL
-- Aurora Global DB with MySQL
+- Aurora Global Database with PostgreSQL
+- Aurora Global Database with MySQL
 - MSSQL
 - PostgreSQL
 
@@ -334,7 +334,7 @@ To use the time lag replication monitoring with PostgreSQL, the database user mu
 - `PG_MONITOR` role
 
 ```sql
-  GRANT PG_MONITOR TO <user>;
+GRANT PG_MONITOR TO <user>;
 ```
 
 To use the time lag replication monitoring with MSSQL, the database user must have the following additional privileges:
@@ -439,8 +439,6 @@ camunda:
 In addition, you can override the default failoverTimeoutMs (60 seconds) by adding the `failoverTimeoutMs` parameter to
 the JDBC URL: `jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?wrapperPlugins=failover&failoverTimeoutMs=30000`.
 
-````yaml
-
 The AWS JDBC wrapper JAR is shipped with the Camunda distribution alongside most of the other JDBC drivers. There is no need to provide it separately.
 
 ### Per-physical-tenant credentials on Aurora
@@ -466,7 +464,7 @@ camunda:
             url: jdbc:aws-wrapper:postgresql://aurora-host:5432/camunda?currentSchema=tenant_a_schema
             username: tenant_a_user
             password: tenant-a-secret
-````
+```
 
 For IAM authentication, the same pattern applies with the `iam` wrapper plugin and passwordless database users:
 
