@@ -32,6 +32,32 @@ import PageDescription from '@site/src/components/PageDescription';
 
 </details>
 
+## 8.10.0
+
+| Release date    | Changelog(s) | Blog |
+| :-------------- | :----------- | :--- |
+| 13 October 2026 | -            | -    |
+
+### Orchestration Cluster
+
+#### Multi-region RDBMS reference architecture
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+<!-- https://github.com/camunda/product-hub/issues/3553 -->
+
+A new multi-region reference architecture details how you can design, deploy, and operate one Orchestration Cluster stretched across three or more Kubernetes regions, where the Zeebe data plane is active-active across every region and the relational secondary storage is active-standby, with a single global writer and replication owned by the database.
+
+What's included:
+
+- A zone-aware topology for primary storage that keeps its Raft quorum when a region is lost, so processing continues without an operator step.
+- A multi-region RDBMS as secondary storage, with the asynchronous replication monitoring that lets Zeebe replay exported records after a writer failover.
+- Cross-region networking, zone activation, region loss, and failback procedures, published as a tested reference implementation on Amazon EKS.
+
+This architecture removes the recovery procedure rather than the recovery window: no operator step restores Zeebe processing after a region loss, while re-election, client rerouting, and database writer promotion still take time.
+
+<p class="link-arrow">[Multi-Region RDBMS](/self-managed/concepts/multi-region/multi-region-rdbms.md)</p>
+
 ## 8.10.0-alpha5
 
 | Release date     | Changelog(s)                                                                                        | Blog |
