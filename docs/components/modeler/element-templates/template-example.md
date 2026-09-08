@@ -38,7 +38,7 @@ Let us consider the following example that defines a template for invoking a RES
     },
     {
       "label": "REST Endpoint URL",
-      "description": "Specify the url of the REST API to talk to.",
+      "tooltip": "The url of the REST API to talk to.",
       "type": "String",
       "binding": {
         "type": "zeebe:taskHeader",
@@ -54,7 +54,7 @@ Let us consider the following example that defines a template for invoking a RES
     },
     {
       "label": "REST Method",
-      "description": "Specify the HTTP method to use.",
+      "tooltip": "The HTTP method to use for the request.",
       "type": "Dropdown",
       "value": "get",
       "choices": [
@@ -70,7 +70,7 @@ Let us consider the following example that defines a template for invoking a RES
     },
     {
       "label": "Request Body",
-      "description": "Data to send to the endpoint.",
+      "tooltip": "Data to send to the endpoint.",
       "value": "",
       "type": "String",
       "binding": {
@@ -80,7 +80,7 @@ Let us consider the following example that defines a template for invoking a RES
     },
     {
       "label": "Result Variable",
-      "description": "Name of variable to store the response data in.",
+      "tooltip": "Name of variable to store the response data in.",
       "value": "response",
       "type": "String",
       "optional": true,
