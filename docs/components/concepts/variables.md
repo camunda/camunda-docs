@@ -219,7 +219,7 @@ This is part of an [alpha feature](/components/early-access/alpha/alpha-features
 
 Secret references are only resolved in input mappings defined on elements that create a job for a job worker (for example, service tasks, business rule tasks, and ad hoc sub-processes). See [secret resolution and job activation](secret-resolution-and-job-activation.md) for how a reference is resolved and what the worker receives once the job is handed out; until then, the variable holds the placeholder text `camunda.secrets.<name>`.
 
-A reference must be an expression, and it must be exactly `camunda.secrets.<name>` with nothing else attached:
+A reference must be an expression, and the reference itself must be exactly the three-segment path `camunda.secrets.<name>`. It can still take part in a supported expression, such as the concatenation shown above, but the following rejections apply:
 
 - Writing the reference as a plain string, or quoting it inside an expression, is rejected at deployment rather than passed through as literal text:
 
@@ -227,7 +227,7 @@ A reference must be an expression, and it must be exactly `camunda.secrets.<name
   ="camunda.secrets.API_TOKEN"
   ```
 
-  ```
+  ```text
   Secret reference(s) 'camunda.secrets.API_TOKEN' must be used as an expression (e.g. '=camunda.secrets.<name>'), not as a string literal, in input mapping source '="camunda.secrets.API_TOKEN"'.
   ```
 
@@ -239,19 +239,19 @@ A reference must be an expression, and it must be exactly `camunda.secrets.<name
   =[camunda.secrets.API_TOKEN]
   ```
 
-  ```
+  ```text
   Input mapping source '=[camunda.secrets.API_TOKEN]' puts a secret reference inside a list, or inside a context built by an 'if' branch. Camunda can only replace a secret where the mapping assigns it directly to a value, so this secret would never be filled in. Assign each secret reference to its own input mapping instead.
   ```
 
 Give each secret its own input mapping. A later mapping that reads the _variable_ created by an earlier one, rather than writing `camunda.secrets.<name>` itself, does not get the secret resolved:
 
-| Input mappings                                                                                        | New variables                                                                                     |
-| ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| **source:** `=camunda.secrets.API_TOKEN`<br/>**target:** `x`<br/>**source:** `=x`<br/>**target:** `y` | `x` holds the resolved secret value; `y` holds the literal placeholder text, not the secret value |
+| Input mappings                                                                                        | New variables                                                                                                     |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **source:** `=camunda.secrets.API_TOKEN`<br/>**target:** `x`<br/>**source:** `=x`<br/>**target:** `y` | `x` exposes the resolved secret value to the worker; `y` holds the literal placeholder text, not the secret value |
 
-#### Names with special characters
+#### Escape secret names with special characters
 
-A secret name containing a character FEEL doesn't allow in a bare identifier — most commonly a dash — must be backtick-escaped, the same way any other FEEL name with special characters is:
+A secret name containing a character FEEL doesn't allow in a bare identifier (most commonly a dash) must be backtick-escaped, the same way any other FEEL name with special characters is:
 
 ```feel
 =camunda.secrets.`db-password`
