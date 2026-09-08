@@ -723,9 +723,10 @@ module.exports = {
               label: "Manage clusters",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-clusters/manage-cluster",
+                id: "components/hub/organization/manage-clusters/index",
               },
               items: [
+                "components/hub/organization/manage-clusters/manage-cluster",
                 "components/hub/organization/manage-clusters/create-cluster",
                 "components/hub/organization/manage-clusters/cluster-connectors",
                 "components/hub/organization/manage-clusters/manage-api-clients",
