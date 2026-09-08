@@ -28,7 +28,7 @@ The compiled software of these components is distributed under a proprietary lic
 
 ## Camunda Hub
 
-The source code for Hub is licensed to our users and customers under the [Camunda License v1](https://legal.camunda.com/licensing-and-other-legal-terms#camunda-license).
+The source code for Camunda Hub is licensed to our users and customers under a proprietary license and is only available to users or customers on demand.
 
 The compiled software of these components is distributed under a proprietary license, which can be either the [Camunda Self-Managed Non-Production license](https://legal.camunda.com/#self-managed-non-production-terms) or the Camunda Self-Managed Enterprise Edition license (a copy of which you obtain when you contact Camunda). To use the software in production, [purchase the Camunda Self-Managed Enterprise Edition](https://camunda.com/platform/camunda-platform-enterprise-contact/).
 
