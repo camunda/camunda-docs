@@ -35,7 +35,7 @@ In the table, you can review these details about each item in the batch operatio
 | Column               | Description                                                                             |
 | -------------------- | --------------------------------------------------------------------------------------- |
 | Process instance key | The key of the process instance. Clicking this opens the process instance details page. |
-| Operation state      | The state of the batch operation item.                                                  |
+| Batch state          | The state of the batch operation item.                                                  |
 | Date                 | The date and time when the operation was performed on this item.                        |
 
 ## Next steps

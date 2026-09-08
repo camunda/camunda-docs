@@ -24,6 +24,6 @@ Before you begin, ensure you're [authorized to update batch operations](../overv
 
 To take an action on a batch operation:
 
-1. On the **Processes** page, above the process diagram, click **View batch operations**.
+1. In the left navigation, click **Operations > Batch operations**. For more details, see [monitor batch operations](./monitor-batch-operations.md).
 2. From the **Batch Operations** page, click the operation you want to manage.
 3. On the batch operation details page, on the right side of the page header, click an action, if available.
