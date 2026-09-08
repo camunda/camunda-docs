@@ -5,8 +5,8 @@ description: "If your organization works within Camunda's Enterprise plan, you c
 keywords: [whitelist, allowlist, ip whitelist, ip allowlist]
 ---
 
-:::info Web Modeler access
-In Camunda SaaS, Web Modeler has access to clusters by default, as allowlist assignments for IP addresses used by Web Modeler are managed automatically.
+:::info Camunda Hub access
+In Camunda SaaS, Camunda Hub has access to clusters by default, as allowlist assignments for IP addresses used by Camunda Hub are managed automatically.
 :::
 
 If your organization works within Camunda's [Enterprise](https://camunda.com/pricing/) plan, you can restrict access to clusters with an IP allowlist.
