@@ -93,7 +93,7 @@ Management plane components don't replicate across regions, so losing the region
 | Component           | State it holds                                                        | If its region is lost                                                                   |
 | :------------------ | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
 | Management Identity | Users, groups, roles, tenants, and OIDC clients                       | Authentication to Optimize and Camunda Hub fails until you restore it                   |
-| Camunda Hub         | Diagrams, projects, and collaboration history in PostgreSQL           | Modeling and deployment from Hub stop until you restore it                              |
+| Camunda Hub         | Diagrams, projects, and collaboration history in PostgreSQL           | Modeling and deployment from Camunda Hub stop until you restore it                      |
 | Optimize            | Reports, dashboards, collections, alerts, and its own import position | Reporting stops until you restore it, and content created since the last backup is lost |
 
 ### Protect the management plane with backup and restore

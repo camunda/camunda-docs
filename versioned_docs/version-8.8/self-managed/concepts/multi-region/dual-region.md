@@ -174,8 +174,9 @@ Management plane components don't replicate across regions, so losing the region
 
 | Component           | State it holds                                                        | If its region is lost                                                                   |
 | :------------------ | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
-| Management Identity | Users, groups, roles, tenants, and OIDC clients                       | Authentication to Optimize and Web Modeler fails until you restore it                   |
+| Management Identity | Users, groups, roles, tenants, and OIDC clients                       | Authentication to Optimize, Web Modeler, and Console fails until you restore it         |
 | Web Modeler         | Diagrams, projects, and collaboration history in PostgreSQL           | Modeling and deployment from Web Modeler stop until you restore it                      |
+| Console             | No persistent state of its own                                        | The Console UI is unavailable until you redeploy it                                     |
 | Optimize            | Reports, dashboards, collections, alerts, and its own import position | Reporting stops until you restore it, and content created since the last backup is lost |
 
 #### Protect the management plane with backup and restore
@@ -186,6 +187,7 @@ Back up each management plane component on its own schedule, and replicate those
 | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Management Identity | Back up its PostgreSQL database using your database's native tooling                                                                                 |
 | Web Modeler         | Back up its PostgreSQL database. See [Web Modeler backup and restore](/self-managed/operational-guides/backup-restore/modeler-backup-and-restore.md) |
+| Console             | No backup required. Console is stateless, so redeploy it alongside the rest of the management plane                                                  |
 | Optimize            | Use the [Optimize backup management API](/self-managed/operational-guides/backup-restore/optimize-backup.md)                                         |
 
 The management plane's recovery point and recovery time follow from your backup interval and restore procedure. The dual-region [disaster recovery](#disaster-recovery) objectives don't cover them, because those objectives apply to the runtime plane only.
