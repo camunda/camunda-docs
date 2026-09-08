@@ -179,9 +179,11 @@ Recovery is the reverse and has no restore step: redeploy the region, and its br
 
 ### Recovery objectives {#recovery-objectives}
 
-**On the engine, losing a zone is the same class of event as losing a broker.** A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. That is normal reconfiguration, not downtime. Losing a zone runs the same sequence over the same protocol. What changes is distance: the new leader's round trip may cross a region boundary, and clients move between regions instead of within one. There is no restore, no backup to replay, and no judgment call about whether the failure is temporary or permanent.
+There is no recovery procedure. There is still a recovery window.
 
-That is the difference from [Dual-Region](./dual-region.md), where a region loss costs the quorum and processing stops until an operator intervenes. It is not a claim that recovery is instant. Neither objective is zero, and neither is a property of the architecture alone.
+**No procedure**, because on the engine a zone loss is the same class of event as a broker loss. A single-region cluster that loses a broker holds a Raft re-election for the partitions that broker led, and its clients reconnect to the new leaders. Nobody calls that downtime. Losing a zone runs the same sequence over the same protocol: no restore, no backup to replay, and no judgment call about whether the failure is temporary or permanent. That is the difference from [Dual-Region](./dual-region.md), where the same event costs the quorum and processing stops until an operator intervenes.
+
+**A window**, because reconfiguration takes time, and two thirds of it are not Camunda's to shorten. That is why this page describes the behavior instead of publishing an RTO figure: the number you would actually experience is mostly a property of your client timeouts and your traffic routing.
 
 **Data loss depends on which store you mean.** The engine's own state loses nothing: Raft commits a record only once a majority of its replicas hold it, so with one replica per zone and three zones a commit needs two, and losing one zone always leaves at least one replica that has the record.
 
@@ -191,7 +193,7 @@ That makes the guarantee conditional on disk rather than on the architecture. Re
 
 `pause-on-max-lag-exceeded` decides what happens once that budget is exceeded. It does not change what gets acknowledged, so no data is lost either way. With it off, the log keeps growing until the volume fills and the broker stops writing. With it on, exporting pauses while Zeebe keeps processing, and the APIs and web applications that read secondary storage serve stale data until the database catches up.
 
-**Recovery time is not zero either**, even though no operator step is needed to resume processing. Three things take time:
+**The window has three parts**, and only the first belongs to Camunda:
 
 | What                      | Why it takes time                                                                                                                                                                                                         |
 | :------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
