@@ -504,8 +504,7 @@ You can still use localhost ports if you prefer traditional port-forwarding. Sto
 | Admin                | http://localhost:8080/admin        | All                                  |
 | Management Identity  | http://localhost:8085              | All                                  |
 | Optimize             | http://localhost:8083              | Elasticsearch secondary storage only |
-| Web Modeler          | http://localhost:8070              | All                                  |
-| Console              | http://localhost:8087              | All                                  |
+| Camunda Hub          | http://localhost:8070              | All                                  |
 | Connectors           | http://localhost:8088              | All                                  |
 | Keycloak             | http://keycloak-service:18080/auth | All                                  |
 

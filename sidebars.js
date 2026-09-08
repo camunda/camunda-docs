@@ -2190,6 +2190,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
             "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
