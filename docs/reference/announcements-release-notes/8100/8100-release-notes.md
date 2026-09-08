@@ -148,6 +148,26 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 
 ### Helm chart deployment
 
+#### Elasticsearch index sizing and replication
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
+
+<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
+
+New comprehensive Elasticsearch configuration documentation explains how to:
+
+- Size your Elasticsearch cluster for Camunda 8 workloads.
+- Configure index replicas to achieve fault‑tolerant indices in multi‑node clusters.
+- Adjust retention and rollover intervals to avoid oversharding while meeting your data‑retention requirements.
+
+This documentation helps Self‑Managed customers:
+
+- Avoid oversharding (too many shards per node).
+- Prevent index unavailability and related Operate/Tasklist errors.
+- Reduce Elasticsearch‑related incidents in production.
+
+<p class="link-arrow">[Install Camunda for production with Helm](/self-managed/deployment/helm/install/production/index.md)</p>
+
 #### Helm migration and validation tool
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span></div>
@@ -303,26 +323,6 @@ Centralized secret resolution through Zeebe is introduced with this alpha. Proce
 
 **Limitations:**
 This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 seconds by default.
-
-#### Elasticsearch index sizing and replication guide
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-<!-- https://github.com/camunda/camunda-docs/pull/9809 -->
-
-A new comprehensive Elasticsearch configuration guide explains how to:
-
-- Size your Elasticsearch cluster for Camunda 8 workloads.
-- Configure index replicas to achieve fault‑tolerant indices in multi‑node clusters.
-- Adjust retention and rollover intervals to avoid oversharding while meeting your data‑retention requirements.
-
-This guide helps Self‑Managed customers:
-
-- Avoid oversharding (too many shards per node).
-- Prevent index unavailability and related Operate/Tasklist errors.
-- Reduce Elasticsearch‑related incidents in production.
-
-<p class="link-arrow">[Configure data retention](/docs/self-managed/deployment/helm/configure/data-retention.md)</p>
 
 #### New rebalance API for coordinated leadership transfer
 
