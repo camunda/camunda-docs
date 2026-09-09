@@ -439,6 +439,107 @@ java -cp 'connector-runtime-application-VERSION-with-dependencies.jar:...:my-sec
 </TabItem>
 </Tabs>
 
+## Secret filter
+
+The secret filter restricts connectors to resolving only the secrets they declare in their own configuration. This prevents a connector from resolving secrets that are available in the runtime environment but not referenced by that connector.
+
+:::warning Requires Operate on this version
+On 8.7, the secret filter looks up process definitions through Operate (`CamundaOperateClient`), not the Orchestration Cluster REST API used from 8.8 onward. It reuses the same `camunda.connector.polling.enabled` property that already gates Operate connectivity for inbound connectors (default: `true`).
+
+If you've set `camunda.connector.polling.enabled=false` — for example, in an outbound-only deployment that doesn't run Operate — every outbound connector job that resolves a secret now fails to look up its allow-list. Under `STRICT`, the Zeebe job fails and retries; under `LAX`, the filter falls back to allowing all secrets. Before upgrading, either re-enable polling (and confirm Operate is reachable) or set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`.
+:::
+
+### How the allow-list is built
+
+Every field you configure in a connector's properties panel is implemented as a Zeebe input mapping under the hood, whether it's an authentication field or a functional field like an email body, an HTTP header, or a query parameter. If a field contains a literal `{{secrets.NAME}}` reference, the filter allow-lists `NAME` for that specific field, identified by its field path — not for the connector element as a whole.
+
+The allow-list is built once per element, from the deployed BPMN model, by scanning the literal text of that element's own fields for `{{secrets.NAME}}` references and recording which field each reference belongs to:
+
+- **It's static, not dynamic.** The filter looks at what's literally written in the model, not at what a process variable resolves to at runtime. If a secret value already resolved by one connector task later flows into a different task's field as a plain process variable (for example, `= myVariable`), that's just data at that point. There's no `{{secrets.*}}` placeholder left for the filter to check, so the filter has no say over it either way.
+- **It's scoped to the field, not just the element.** A secret declared on one field (for example, `authentication.password = {{secrets.AUTH}}`) doesn't become resolvable on a _different_ field of the same task, such as an email body. If that other field's runtime value happens to contain the literal text `{{secrets.AUTH}}` — for example, because it evaluates a process variable crafted to contain that string — the filter checks it against that field's own allow-list entry, not `authentication.password`'s, and leaves it unresolved.
+- **One exception: fields the model itself chains together.** If one field's FEEL expression assigns from a name that another field's expression also references (for example, `url = baseUrl + "/path"`, where `baseUrl` is itself another input on the same element), the secret declared on the first field is also allowed on the second — the model author's own expressions connect them. This is still resolved statically, from the deployed model's FEEL expressions, not from arbitrary runtime process-variable content.
+- **It's still per element, not per process.** A secret referenced only on task A never becomes available to task B: task B's allow-list is built only from task B's own fields.
+
+This closes the gap an element-wide allow-list would leave open: declaring a secret anywhere on a task no longer makes it resolvable from every field on that task — only from the field it was declared on (and fields the model explicitly chains to it).
+
+:::note
+For inbound connectors, the allow-list comes from data already held in memory on the deployed element, so there's no remote lookup that can fail. As a result, `LAX` and `STRICT` behave identically for inbound connectors: both enforce the allow-list unconditionally. The distinction between `LAX` and `STRICT` described below only affects outbound connectors, where building the allow-list requires a lookup against the process definition.
+:::
+
+### Modes
+
+Configure the secret filter with the `camunda.connector.secret-resolver.secret-filter.mode` property:
+
+| Mode       | Behavior                                                                                                                                                                                                                                                                                                               |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `STRICT`   | Enforces the allow-list unconditionally. If the process definition cannot be retrieved, the Zeebe job fails and retries are triggered. This is the default. Choose this mode when strict secret isolation is required.                                                                                                 |
+| `LAX`      | Enforces the allow-list when the process definition is available. Falls back to allowing all secrets if the process definition cannot be retrieved (for example, due to an API outage or an eventual-consistency delay). Choose this mode when uninterrupted job processing matters more than strict secret isolation. |
+| `DISABLED` | All secrets resolve freely, matching the behavior before this feature was introduced. Choose this mode only for troubleshooting, or if a custom secret provider needs unrestricted access.                                                                                                                             |
+
+The allow-list is derived automatically from the fields of the deployed connector element. No manual configuration of individual secrets is required.
+
+<Tabs groupId="configType" defaultValue="env" queryString values={[
+{label: 'Environment variables', value: 'env' },
+{label: 'Application properties', value: 'application.yaml' },
+]}>
+<TabItem value="env">
+
+```bash
+CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE=LAX
+```
+
+</TabItem>
+<TabItem value="application.yaml">
+
+```yaml
+camunda:
+  connector:
+    secret-resolver:
+      secret-filter:
+        mode: LAX
+```
+
+</TabItem>
+</Tabs>
+
+### Configure the mode in the Helm chart
+
+The Helm chart has no dedicated value for the secret filter. Set the mode through the generic `connectors.env` value:
+
+```yaml
+connectors:
+  env:
+    - name: CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_MODE
+      value: LAX
+```
+
+### Cache configuration
+
+The secret filter caches process definition lookups to avoid repeated API calls. You can configure the cache with the following properties:
+
+| Property                                                         | Environment variable                                          | Description                                     | Default |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | ----------------------------------------------- | ------- |
+| `camunda.connector.secret-resolver.secret-filter.cache.enabled`  | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_ENABLED` | Whether caching is enabled.                     | `true`  |
+| `camunda.connector.secret-resolver.secret-filter.cache.max-size` | `CAMUNDA_CONNECTOR_SECRETRESOLVER_SECRETFILTER_CACHE_MAXSIZE` | Maximum number of process definitions to cache. | `1000`  |
+
+### Secure secret usage best practices
+
+- Keep the mode at `STRICT` (the default) in production environments. Reserve `LAX` for cases where a temporary process definition API outage must not block connector jobs, and reserve `DISABLED` for troubleshooting only.
+- Reference only the secrets a connector task actually needs, in the fields that need them. A task that references fewer secrets has a smaller allow-list, which limits what that task can resolve even when its other field values come from untrusted process variables.
+- Scope secrets narrowly, for example one API key per integration or tenant, instead of reusing a single broad-access secret across multiple connector tasks.
+- Under `STRICT`, you don't need to design BPMN diagrams defensively to keep a secret out of a task's other fields. The runtime enforces the allow-list per field: a secret declared on one field of a task isn't resolvable from a different field on that same task, or from a different task, unless the model itself chains them together with a FEEL expression.
+
+### Troubleshooting a secret that stops resolving under STRICT
+
+If a secret that previously resolved now comes back unresolved, or the connector job fails, under `STRICT` mode, check the following:
+
+- For outbound connectors, the element is a supported BPMN type (`ServiceTask`, `SendTask`, `ScriptTask`, `BusinessRuleTask`, `SubProcess`, `IntermediateThrowEvent`, or `EndEvent`) with a `zeebe:input` mapping that contains the secret reference. Unsupported element types and supported elements without such an input mapping are treated as declaring no secrets and deny all resolution under `STRICT`.
+- The secret is referenced using the `{{secrets.NAME}}` syntax in the same field where you expect it to resolve. A reference declared on one field doesn't resolve on a different field, unless the model chains the two fields together with a FEEL expression.
+- The `{{secrets.NAME}}` reference sits inside a JSON string, like any other field value. An unquoted placeholder on a non-string field (for example, `"count": {{secrets.MAX}}`) is never substituted.
+- The process definition is available to the connector runtime. Under `STRICT`, a Zeebe job fails and retries if the process definition can't be retrieved.
+
+If you need to keep jobs processing while you investigate, switch to `LAX` temporarily. It falls back to allowing all secrets when the process definition lookup fails.
+
 ## Truststore
 
 If your connector runtime needs to connect to external systems over HTTPS, you might need to provide a custom truststore.
@@ -537,7 +638,7 @@ Find more information (including links to individual component configuration) on
 The log level can be changed globally by setting the environment variable `LOGGING_LEVEL_IO_CAMUNDA_CONNECTOR=DEBUG`. This changes the default log level for the `io.camunda.connector` package
 to `DEBUG`.
 
-You can can use this package based log level approach also with custom connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
+You can use this package based log level approach also with custom connectors by providing your package (`my.package`) via this variable: `LOGGING_LEVEL_MY_PACKAGE=DEBUG`.
 
 To change the log level for all packages, change it for the `root` logger: `LOGGING_LEVEL_ROOT=DEBUG`.
 

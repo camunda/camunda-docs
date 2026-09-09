@@ -317,7 +317,7 @@ An event represents a state change associated with an aspect of an executing [pr
 
 ### Execution platform version
 
-In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
+In Desktop Modeler and Camunda Hub, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
 
 The execution platform version is not a deployed process definition version, a [file version](#version-file) or [project snapshot](#snapshot-project), or a SaaS cluster generation.
 
@@ -350,6 +350,12 @@ This is different from a [Camunda AI agent](#camunda-ai-agent), which is Camunda
 FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
 
 - [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+
+### File version {#version-file}
+
+A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 
 ### Fine-tuning
 
@@ -606,7 +612,7 @@ The engine uses process definitions to start [process instances](#process-instan
 
 A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
 
-Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project), which are saved Web Modeler captures.
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project) in Camunda Hub.
 
 - [Process definition](#process-definition)
 - [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
@@ -665,6 +671,12 @@ An isolated execution unit within an [Orchestration Cluster](#orchestration-clus
 A collection of related files in a Camunda Hub workspace you can work on and deploy as a single bundle. A workspace may contain multiple projects.
 
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
+
+### Project snapshot {#snapshot-project}
+
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
 ### Prompt
 
@@ -783,12 +795,6 @@ The state of all active [process instances](#process-instance), (these are also 
 
 - [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
 
-### Snapshot (project)
-
-A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
-
-- [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
-
 ### Soft pause exporting
 
 Soft pause exporting is a feature that allows you to continue exporting records from [Zeebe](#zeebe), but without deleting those [records](#record) ([log](#log) compaction) from Zeebe. This is particularly useful during hot backups.
@@ -874,12 +880,6 @@ A version tag is not generated automatically and does not replace the numeric pr
 
 - [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
 - [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
-
-### Version (file)
-
-A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
-
-- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 
 ## W
 

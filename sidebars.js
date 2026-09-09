@@ -1944,6 +1944,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
+                "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
               ],
             },
             {

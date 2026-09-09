@@ -54,11 +54,11 @@ You can add additional AWS regions to allow cross-region endpoint connections. C
 2. Optionally add additional regions to allow cross-region endpoint connections.
 3. Select **Activate service**.
 
-After activation, Console provisions a VPC endpoint service for the cluster and displays the connection details.
+After activation, Hub provisions a VPC endpoint service for the cluster and displays the connection details.
 
 ## Validation and activation requirements
 
-When configuring and activating the PrivateLink endpoint service, Console validates the provided values during each step:
+When configuring and activating the PrivateLink endpoint service, Hub validates the provided values during each step:
 
 - At least one valid AWS principal ARN must be provided.
 - Principal ARNs must follow a valid AWS ARN format.
@@ -69,7 +69,7 @@ You cannot activate the service until all required fields are completed.
 
 ## Activation behavior
 
-After selecting **Activate service**, Console provisions the VPC endpoint service for the cluster.
+After selecting **Activate service**, Hub provisions the VPC endpoint service for the cluster.
 
 The service status is displayed in the **Service details** section. Provisioning may take up to 10 minutes.
 
@@ -97,7 +97,7 @@ For detailed instructions, see the [AWS documentation on creating an interface e
 
 The **Endpoint connections** section lists VPC interface endpoint connections created in AWS that target this cluster’s VPC endpoint service.
 
-For each connection, Console displays:
+For each connection, Hub displays:
 
 - The VPC endpoint identifier.
 - The connection status (for example, Pending or Available).
@@ -131,7 +131,7 @@ Existing endpoint connections remain available.
 
 ## Create a VPC interface endpoint in AWS
 
-After activating the PrivateLink endpoint service in Console:
+After activating the PrivateLink endpoint service in Hub:
 
 1. Copy the **Service name** from the **Service details** section.
 2. In your AWS account, create a VPC interface endpoint that connects to this service.

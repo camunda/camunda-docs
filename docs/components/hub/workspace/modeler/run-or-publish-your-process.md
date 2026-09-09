@@ -59,7 +59,7 @@ If the target cluster has [authorizations](/components/admin/authorization.md) e
 
 Before you publish or run a process, you can test it manually using the [Test mode](validation/test-your-process.md). With the Test mode, you can build and test your process iteratively in small steps. To enter the Test mode, click the Test tab in the top left corner of the modeling screen.
 
-### Run manually from Modeler
+### Run manually from Hub
 
 You can also test your process thoroughly on a development cluster to observe how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
 
