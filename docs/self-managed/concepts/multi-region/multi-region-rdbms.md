@@ -10,10 +10,6 @@ import TopologyImg from './img/multi-region-rdbms-topology.svg';
 import QuorumImg from './img/multi-region-rdbms-quorum.svg';
 import ZoneActivationImg from './img/multi-region-rdbms-zone-activation.svg';
 
-<!-- Diagrams: edit the .excalidraw source, then export SVG and strip the embedded font block,
-     replace font-family with a monospace stack, and remove the root width/height so the SVG
-     scales to the content column. A vanilla excalidraw.app export does none of these. -->
-
 <PageDescription />
 
 Multi-Region RDBMS spreads a single Orchestration Cluster across three or more regions and backs it with one relational secondary storage whose replication is the database's responsibility. Because every partition keeps a majority of its replicas when one region disappears, the engine keeps processing through a region loss instead of stopping for an operator.
