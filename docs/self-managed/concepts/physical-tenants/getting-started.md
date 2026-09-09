@@ -33,7 +33,7 @@ Before starting, read [Physical Tenant isolation model](./index.md) for the conc
 
 ## Pre-flight checklist
 
-Confirm each of these before you start, every item here has caused a real setup failure:
+Confirm each of these before you start. Every item here has caused a real setup failure:
 
 | Check                                                                                       | Why it matters                                                                                                                                                                     |
 | :------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -92,7 +92,7 @@ orchestration:
                       - oidc # reuse the cluster-level OIDC provider
 ```
 
-Add an authorization block so `riskprod` has an admin role of its own, every explicitly configured tenant needs one, it isn't inherited from the cluster:
+Add an authorization block so `riskprod` has an admin role of its own. Every explicitly configured tenant needs one; authorization isn't inherited from the cluster:
 
 <details>
 <summary>Full authorization example for <code>riskprod</code></summary>
@@ -173,7 +173,23 @@ This confirms the isolation the rest of the guide assumes: two tenants, one clus
 
 To filter search results by tenant, you don't need a request parameter. The tenant is already fixed by which prefix, header, or client you used to make the call. A `riskprod`-scoped search never returns `default`'s data and vice versa.
 
-For the full REST path reference and status code meanings, see [tenant-scoped REST API routing](./api-routing.md#tenant-scoped-rest-api-routing) and [HTTP status codes](./api-routing.md#http-status-codes).
+For example, [create a process instance](/apis-tools/orchestration-cluster-api-rest/specifications/create-process-instance.api.mdx) scoped to `riskprod`:
+
+```bash
+curl -X POST https://your-cluster/physical-tenants/riskprod/v2/process-instances \
+  -H "Content-Type: application/json" \
+  -d '{"processDefinitionId": "your-process-id"}'
+```
+
+And [complete a job](/apis-tools/orchestration-cluster-api-rest/specifications/complete-job.api.mdx) for that same tenant, once a worker activates it:
+
+```bash
+curl -X POST https://your-cluster/physical-tenants/riskprod/v2/jobs/{jobKey}/completion \
+  -H "Content-Type: application/json" \
+  -d '{}'
+```
+
+Both requests use the `riskprod` prefix from the table above; the same pattern applies to any REST operation. For the full REST path reference and status code meanings, see [tenant-scoped REST API routing](./api-routing.md#tenant-scoped-rest-api-routing) and [HTTP status codes](./api-routing.md#http-status-codes).
 
 ## Web app walkthrough
 
