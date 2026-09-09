@@ -1,27 +1,17 @@
 ---
 id: credential-templates
 title: Create a credential template
-description: "Define a credential type for your custom connector, so users can create and select a credential for it in Camunda Hub and Modeler."
+description: "Define a credential type for your custom connector, so users can create and select a credential for it in Camunda Hub and Desktop Modeler."
 keywords: [credential, credential template, configuration, custom connector]
 ---
 
-<!--
-DRAFT: @chillleader please verify against current 8.10 behavior before this merges, per the
-PDP-3396 epic (https://github.com/camunda/product-hub/issues/3396) transition-to-implement
-notes assigning custom-credential guides to the Connectors team. Content below is grounded in
-camunda/connections-design (design/CONFIGURATION_TEMPLATE.md, CONFIGURATION_ELEMENT_TEMPLATE.md,
-CONFIGURATION_VERSIONING.md, CONFIGURATION_FIELD_REFERENCES.md) and the shipped REST connector
-(camunda/connectors: RestAuthenticationConfiguration.java, http-json-connector.json,
-docs/credentials-in-element-templates.md). Check it still matches what ships.
--->
-
-Define a credential type for your custom connector, so users can create and select a credential for it in Camunda Hub or Modeler, instead of configuring authentication fields directly on the connector task. See [Credentials](/components/hub/organization/credentials/index.md) for the concept this page builds on, and [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type) for the generic `Configuration` property type it uses.
+Define a credential type for your custom connector, so users can create and select a credential for it in Camunda Hub or Modeler, instead of configuring authentication fields directly on the connector task. See [credentials](/components/hub/organization/credentials/index.md) for the concept this page builds on, and [`Configuration` input type](/components/modeler/element-templates/template-properties.md#configuration-input-type) for the generic `Configuration` property type it uses.
 
 ## About credential templates
 
-A **credential template** is a [configuration template](/components/modeler/element-templates/template-metadata.md#embedding-configurations-configurationtemplates) whose `kind` is `CREDENTIAL`. It defines the fields a credential of that type has, and how they render in the credential editor in Camunda Hub and Modeler.
+A **credential template** is a [configuration template](/components/modeler/element-templates/template-metadata.md#embedding-configurations-configurationtemplates) whose `kind` is `CREDENTIAL`. It defines the fields a credential of that type has, and how they render in the credential editor in Camunda Hub and Desktop Modeler.
 
-A credential template is not an element template property. It's a separate, self-contained schema, embedded in your connector's element template under the top-level `configurationTemplates` key. Your connector's element template then declares a `Configuration`-type property that locks to it, which renders as the credential picker in the properties panel.
+A credential template is not an element template property. It's a separate, self-contained schema, embedded in your connector's element template under the top-level `configurationTemplates` key. Your connector's element template then declares a `Configuration`-type property that locks to it, which renders as the credential chooser in the properties panel.
 
 ## Define a credential template
 
@@ -30,13 +20,13 @@ A credential template has the following top-level fields:
 | Field         | Required | Description                                                                                                      |
 | ------------- | -------- | ---------------------------------------------------------------------------------------------------------------- |
 | `id`          | Yes      | Uniquely identifies the credential template. Referenced by a `Configuration` property's `configurationTemplate`. |
-| `name`        | Yes      | Display name shown in the credential editor, and the default label for the picker.                               |
+| `name`        | Yes      | Display name shown in the credential editor, and the default label for the chooser.                              |
 | `version`     | Yes      | An integer. Bump it when the credential's shape changes (see [Versioning](#versioning-a-credential-template)).   |
 | `kind`        | Yes      | The kind of configuration. Set this to `CREDENTIAL`.                                                             |
 | `description` | No       | Short description shown in the credential editor.                                                                |
 | `properties`  | Yes      | The fields that make up the credential's stored value (see below).                                               |
 
-Each property follows the same shape as an element template property, with three differences: it can only use the `property` binding, it cannot use `type: "Configuration"` (a credential cannot embed another credential), and it cannot be marked `optional`. A field is left blank instead, and blank fields are omitted from the stored value.
+Each property uses the standard [element template property](/components/modeler/element-templates/template-properties.md) shape, with three restrictions: only the `property` binding is supported, `type: "Configuration"` is not (a credential cannot embed another credential), and `optional` is not. Leave a field blank instead, and blank fields are omitted from the stored value.
 
 A property's `binding.name` is the key it contributes to the credential's stored value. Use a dotted name, such as `authentication.accessKey`, to nest fields into a sub-object matching the shape your connector expects to receive.
 
@@ -126,11 +116,15 @@ Add the credential template to your connector's element template under the top-l
 }
 ```
 
-If more than one connector uses the same credential type, embed the identical `configurationTemplates` entry (same `id` and `version`) in each. The first copy Modeler loads becomes the canonical definition; later copies are only accepted if they match it exactly. If your connector needs to support in-place upgrades of a bound credential to a newer template version, embed both versions. Modeler needs the source version to read the existing value, and the target version to render the upgraded form.
+If more than one connector uses the same credential type, embed the identical `configurationTemplates` entry (same `id` and `version`) in each. The first copy the modeler loads becomes the canonical definition; later copies are only accepted if they match it exactly. If your connector needs to support in-place upgrades of a bound credential to a newer template version, embed both versions. The modeler needs the source version to read the existing value, and the target version to render the upgraded form.
+
+:::tip
+If you build your connector in Java, you don't have to maintain these embedded schemas by hand. The [element template generator](https://github.com/camunda/connectors/tree/main/element-template-generator) generates them from your Java code and inserts them into every element template that needs them.
+:::
 
 ## Add a credential field to your element template
 
-Declare a `Configuration`-type property that locks to your credential template, and bind it to your connector's dedicated configuration input:
+Declare a `Configuration` property that locks to your credential template, and bind it to your connector's dedicated configuration input:
 
 ```json
 {
@@ -145,15 +139,19 @@ Declare a `Configuration`-type property that locks to your credential template, 
 }
 ```
 
-- `configurationTemplate` is the credential template's `id`. Modeler only offers credentials created from that template.
+- `configurationTemplate` is the credential template's `id`. The modeler only offers credentials created from that template.
 - `configurationTemplateVersion` is optional, and is a **floor**, not a fixed version: the minimum credential template version a selected credential must satisfy. A credential at or above this version is always compatible. Omit it if any version of the template is acceptable.
-- `binding` uses `zeebe:input` for an outbound connector, or `zeebe:property` for an inbound connector. Point `name` at a dedicated configuration input on your connector (for example `authentication` or `configuration`), separate from any inline fields, so a bound credential and an inline fallback can coexist.
+- `binding` uses `zeebe:input` for an outbound connector, or `zeebe:property` for an inbound connector. Point `name` at a dedicated configuration input on your connector, for example `authentication` or `configuration`.
 
 Your connector implementation reads this input as one object, and takes whatever fields it needs from it, the same fields your credential template defines.
 
-### Keep an inline fallback
+For a complete element template that puts both parts together, see the [example template](/components/modeler/element-templates/template-example.md).
 
-If your connector already has inline authentication fields, keep them. Hide them once a credential is selected, using an `isEmpty` condition on the chooser property:
+### Supporting inline fields as a fallback
+
+For a new connector, use credentials only: declare the `Configuration` property, mark it `constraints: { "notEmpty": true }`, and don't offer inline authentication fields at all. This keeps one way to authenticate the task, and keeps authentication data out of the diagram.
+
+Inline fallback fields are a backward-compatibility pattern for a connector that already shipped with inline authentication, where existing diagrams must keep working. It isn't automatic: your connector runtime has to resolve which of the two sources to use. If you need it, hide the inline fields once a credential is selected, using an `isEmpty` condition on the chooser property:
 
 ```json
 {
@@ -163,7 +161,7 @@ If your connector already has inline authentication fields, keep them. Hide them
 }
 ```
 
-Your connector should read one effective value: prefer the bound credential, and fall back to the inline field when no credential is selected. Only mark the `Configuration` property `constraints: { "notEmpty": true }` once you are ready to require a credential and remove the inline fields in a new element template version. Existing diagrams stay on their earlier version and are unaffected.
+Your connector then reads one effective value, preferring the bound credential and falling back to the inline field when no credential is selected. When you are ready to drop the inline fields, remove them in a new element template version and mark the `Configuration` property required. Existing diagrams stay on their earlier version and are unaffected.
 
 ## Secret fields
 
@@ -179,7 +177,7 @@ Mark a credential template field as holding a secret reference with `secret: tru
 }
 ```
 
-This is a rendering hint for the credential editor in Hub and Modeler. It doesn't restrict what the field can hold, but it tells the editor to treat entered values as secret references rather than literals. A user enters an existing secret's key, and the editor stores it as `camunda.secrets.<KEY>`. The engine resolves this reference when the job worker or connector task activates; your connector never sees the marker itself, only the resolved value.
+This is a rendering hint for the credential editor in Hub and Desktop Modeler. It doesn't restrict what the field can hold, but it tells the editor to treat entered values as secret references rather than literals. A user enters an existing secret's key, and the editor stores it as `camunda.secrets.<KEY>`. The engine resolves this reference when the job worker or connector task activates; your connector never sees the marker itself, only the resolved value.
 
 Your connector cannot create the secret itself from a credential field. The secret must already exist on the cluster. Don't design a credential template that requires a secret your users have no way to create ahead of time.
 
@@ -196,7 +194,8 @@ Because an in-place credential edit takes effect immediately for every process t
 ## Additional resources
 
 - [Credentials](/components/hub/organization/credentials/index.md)
-- [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type)
+- [`Configuration` input type](/components/modeler/element-templates/template-properties.md#configuration-input-type)
 - [Embedding configurations: `configurationTemplates`](/components/modeler/element-templates/template-metadata.md#embedding-configurations-configurationtemplates)
+- [Example element template](/components/modeler/element-templates/template-example.md)
 - [Connector templates](/components/connectors/custom-built-connectors/connector-templates.md)
 - [Connector SDK](/components/connectors/custom-built-connectors/connector-sdk.md)

@@ -19,16 +19,16 @@ A credential is selected as a whole: an element template never renders or edits 
 Learn more:
 
 - [Using credentials](/components/connectors/use-connectors/index.md#using-credentials): how a connector task uses a credential.
-- [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type): how an element template declares the `Configuration` property that renders the credential picker.
+- [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type): how an element template declares the `Configuration` property that renders the credential chooser.
 - [Configure credentials in the modeling interface](./modeling-interface.md): how to choose, create, edit, or upgrade a credential from the properties panel.
 
 ## Terminology
 
-| Term            | Meaning                                                                                                                                                                                                                                                   |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Credential      | The reusable object you create and then select on an element template field, such as a connector task or a job worker's configuration.                                                                                                                    |
-| Credential type | The shape of a credential, such as **AWS Credential**, **REST Authentication**, or **JDBC Connection**. A credential type defines which fields a credential of that type has.                                                                             |
-| Configuration   | The element template property type that renders the credential picker. A credential is a configuration whose kind is `CREDENTIAL`. See [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type). |
+| Term            | Meaning                                                                                                                                                                                                                                                    |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Credential      | The reusable object you create and then select on an element template field, such as a connector task or a job worker's configuration.                                                                                                                     |
+| Credential type | The shape of a credential, such as **AWS Credential**, **REST Authentication**, or **JDBC Connection**. A credential type defines which fields a credential of that type has.                                                                              |
+| Configuration   | The element template property type that renders the credential chooser. A credential is a configuration whose kind is `CREDENTIAL`. See [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type). |
 
 ## Credentials and connector secrets
 

@@ -13,15 +13,15 @@ This page covers credentials that authenticate connector tasks, such as an AWS C
 
 ## Select a credential
 
-Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential picker, which lists the credentials on the connected cluster that match the credential type the connector needs.
+Connectors that support credentials show a credential field in the properties panel, such as **AWS Credential**. Select the field to open the credential chooser, which lists the credentials on the connected cluster that match the credential type the connector needs.
 
 Selecting a credential stores only a reference to it in your diagram. The credential's values stay on the cluster.
 
-If no credential matches, the picker tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist on the cluster you are connected to, or it was created for a different credential type.
+If no credential matches, the chooser tells you so by name, for example `Cannot find AWS Credential with name AWS_PROD`. This usually means the credential does not exist on the cluster you are connected to, or it was created for a different credential type.
 
-## What you can do in the picker
+## What you can do in the chooser
 
-What the picker offers depends on whether Desktop Modeler is connected to a cluster, and on your permissions on that cluster. Desktop Modeler checks your permissions once per connection.
+What the chooser offers depends on whether Desktop Modeler is connected to a cluster, and on your permissions on that cluster. Desktop Modeler checks your permissions once per connection.
 
 | Situation                                                                                    | Available actions                                                                                                       |
 | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
