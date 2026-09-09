@@ -146,7 +146,7 @@ For Helm-managed deployments, use the Helm chart [version matrix](https://helm.c
 
 | [Orchestration Cluster](../self-managed/reference-architecture/reference-architecture.md#orchestration-cluster) | [Management](../self-managed/reference-architecture/reference-architecture.md#web-modeler-and-console) | Design                                       |
 | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------- |
-| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x<br/>Self-Managed Console 8.9.x                                               | Camunda Hub 8.10.x<br/>Desktop Modeler 5.46+ |
+| Orchestration Cluster 8.9.x<br/>Connectors 8.9.x<br/>Optimize 8.9.x                                             | Management Identity 8.9.x                                                                              | Camunda Hub 8.10.x<br/>Desktop Modeler 5.46+ |
 
 :::note
 You can use newer versions of Desktop and Camunda Hub with older versions of the Orchestration Cluster.
