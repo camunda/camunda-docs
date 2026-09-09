@@ -52,7 +52,7 @@ What's included:
 
 - A zone-aware topology for primary storage that keeps its Raft quorum when a region is lost, so processing continues without an operator step.
 - A multi-region RDBMS as secondary storage, with the asynchronous replication monitoring that lets Zeebe replay exported records after a writer failover.
-- Cross-region networking, zone activation, region loss, and failback procedures, published as a tested reference implementation on Amazon EKS.
+- Cross-region networking, zone activation, region loss, and failback procedures for a reference implementation on Amazon EKS.
 
 This architecture removes the recovery procedure rather than the recovery window: no operator step restores Zeebe processing after a region loss, while re-election, client rerouting, and database writer promotion still take time.
 
