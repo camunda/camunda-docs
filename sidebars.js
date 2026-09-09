@@ -723,10 +723,11 @@ module.exports = {
               label: "Manage clusters",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-clusters/manage-cluster",
+                id: "components/hub/organization/manage-clusters/index",
               },
               items: [
                 "components/hub/organization/manage-clusters/create-cluster",
+                "components/hub/organization/manage-clusters/manage-cluster",
                 "components/hub/organization/manage-clusters/cluster-connectors",
                 "components/hub/organization/manage-clusters/manage-api-clients",
                 "components/hub/organization/manage-clusters/manage-secrets",
@@ -768,10 +769,12 @@ module.exports = {
               label: "Manage users",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-users/manage-users",
+                id: "components/hub/organization/manage-users/index",
               },
               items: [
+                "components/hub/organization/manage-users/create-manage-users",
                 "components/hub/organization/manage-users/manage-user-groups",
+                "components/hub/organization/manage-users/resource-based-auth",
               ],
             },
             {
@@ -786,10 +789,11 @@ module.exports = {
                 "components/hub/organization/manage-organization-settings/view-organization-activity",
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
                 "components/hub/organization/manage-organization-settings/usage-history",
-                "components/hub/organization/manage-organization-settings/usage-alerts",
-                "components/hub/organization/manage-organization-settings/advanced-search",
+                // TODO: Either bring these back when we have content or remove references
+                // "components/hub/organization/manage-organization-settings/usage-alerts",
+                // "components/hub/organization/manage-organization-settings/advanced-search",
                 "components/hub/organization/manage-organization-settings/switch-organization",
-                "components/hub/organization/manage-organization-settings/delete-account",
+                // "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
                     "components/hub/organization/manage-organization-settings/manage-plan/create-account",
@@ -1084,6 +1088,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               Email: [
@@ -1796,6 +1801,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/orchestration-tls-modes",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
                 "self-managed/deployment/helm/configure/service-configuration",
@@ -2204,6 +2210,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
             "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
