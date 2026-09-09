@@ -17,22 +17,22 @@ For detailed requirements, configuration examples, and common mistakes, see
 
 ### `camunda.data.exporters`
 
-| Property                                          | Description                                                                                                                               | Default value                                       |
-| :------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- |
-| `camunda.data.exporters.elasticsearch.class-name` | <p>Fully qualified class name pointing to the class implementing the exporter interface.</p>                                              | `'io.camunda.zeebe.exporter.ElasticsearchExporter'` |
-| `camunda.data.exporters.elasticsearch.jar-path`   | <p>Path to the JAR file containing the exporter class</p><p>Optional field: if missing, will lookup the class in the zeebe classpath.</p> | `-`                                                 |
-| `camunda.data.exporters.elasticsearch.args`       | Map of arguments to use when instantiating the exporter.                                                                                  | `-`                                                 |
+| Property                                          | Description                                                                                                                               | Default value                                       | Overridable per Physical Tenant |
+| :------------------------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- | :------------------------------ |
+| `camunda.data.exporters.elasticsearch.class-name` | <p>Fully qualified class name pointing to the class implementing the exporter interface.</p>                                              | `'io.camunda.zeebe.exporter.ElasticsearchExporter'` | Yes                             |
+| `camunda.data.exporters.elasticsearch.jar-path`   | <p>Path to the JAR file containing the exporter class</p><p>Optional field: if missing, will lookup the class in the zeebe classpath.</p> | `-`                                                 | Yes                             |
+| `camunda.data.exporters.elasticsearch.args`       | Map of arguments to use when instantiating the exporter.                                                                                  | `-`                                                 | Yes                             |
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
 ### `CAMUNDA_DATA_EXPORTERS`
 
-| Property                                         | Description                                                                                                                               | Default value                                       |
-| :----------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- |
-| `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_CLASSNAME` | <p>Fully qualified class name pointing to the class implementing the exporter interface.</p>                                              | `'io.camunda.zeebe.exporter.ElasticsearchExporter'` |
-| `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_JARPATH`   | <p>Path to the JAR file containing the exporter class</p><p>Optional field: if missing, will lookup the class in the zeebe classpath.</p> | `-`                                                 |
-| `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_ARGS`      | Map of arguments to use when instantiating the exporter.                                                                                  | `-`                                                 |
+| Property                                         | Description                                                                                                                               | Default value                                       | Overridable per Physical Tenant |
+| :----------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------- | :------------------------------ |
+| `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_CLASSNAME` | <p>Fully qualified class name pointing to the class implementing the exporter interface.</p>                                              | `'io.camunda.zeebe.exporter.ElasticsearchExporter'` | Yes                             |
+| `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_JARPATH`   | <p>Path to the JAR file containing the exporter class</p><p>Optional field: if missing, will lookup the class in the zeebe classpath.</p> | `-`                                                 | Yes                             |
+| `CAMUNDA_DATA_EXPORTERS_ELASTICSEARCH_ARGS`      | Map of arguments to use when instantiating the exporter.                                                                                  | `-`                                                 | Yes                             |
 
   </TabItem>
 </Tabs>
