@@ -1072,6 +1072,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               Email: [
