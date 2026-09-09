@@ -50,23 +50,32 @@ Collectively, these changes consolidate overlapping functionality, align configu
 
 The following key changes were also released as part of an 8.7.x patch release.
 
-| Artifact   | Patch release                                                       | Type            | Key change                                                                                                       |
-| :--------- | :------------------------------------------------------------------ | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
-| Core       | [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36)    | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                   |
-| Core       | [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36)    | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)  |
-| Core       | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28)    | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
-| Core       | [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28)    | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
-| Core       | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27)    | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
-| Core       | [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27)    | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
-| Connectors | [8.7.25](https://github.com/camunda/connectors/releases/tag/8.7.25) | Breaking change | [Connector secret filter](#connector-secret-filter)                                                              |
+| Patch release                                                       | Artifact   | Type            | Key change                                                                                                       |
+| :------------------------------------------------------------------ | :--------- | :-------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)  |
+| [8.7.36](https://github.com/camunda/camunda/releases/tag/8.7.36)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                   |
+| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28)    | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression) |
+| [8.7.28](https://github.com/camunda/camunda/releases/tag/8.7.28)    | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                           |
+| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27)    | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)          |
+| [8.7.27](https://github.com/camunda/camunda/releases/tag/8.7.27)    | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                    |
+| [8.7.25](https://github.com/camunda/connectors/releases/tag/8.7.25) | Connectors | Breaking change | [Connector secret filter](#connector-secret-filter)                                                              |
 
 ### Connector secret filter {#connector-secret-filter}
 
-Starting with Connectors 8.7.25, the connector runtime introduces the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter), defaulting to `STRICT`. In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+Starting with Connectors 8.7.25, the connector runtime introduces the [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter), defaulting to `STRICT`.
 
-**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN. If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model. `LAX` doesn't help here — it only changes behavior when the process definition can't be retrieved, not when a field simply doesn't declare the secret.
+In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
-On 8.7, the outbound lookup goes through Operate, reusing the `camunda.connector.polling.enabled` property (default: `true`) that already gates Operate connectivity for inbound connectors. If you run an outbound-only deployment with `camunda.connector.polling.enabled=false`, every outbound connector job that resolves a secret now fails to look up its allow-list — the job fails and retries under `STRICT`, or the filter falls back to allowing all secrets under `LAX`. Before upgrading, either re-enable polling and confirm Operate is reachable, or set the mode to `DISABLED`.
+**Action:** Before upgrading, confirm all connector fields that resolve a secret already reference that secret in the deployed BPMN.
+
+- If a field relies on resolving a secret it doesn't reference, add the reference.
+- To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but note that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
+- Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
+
+On 8.7, the outbound lookup goes through Operate, reusing the `camunda.connector.polling.enabled` property (default: `true`) that already gates Operate connectivity for inbound connectors.
+
+- If you run an outbound-only deployment with `camunda.connector.polling.enabled=false`, every outbound connector job that resolves a secret now fails to look up its allow-list — the job fails and retries under `STRICT`, or the filter falls back to allowing all secrets under `LAX`.
+- Before upgrading, either re-enable polling and confirm Operate is reachable, or set the mode to `DISABLED`.
 
 ### `getMessageKeys()` removed from the exporter record {#getmessagekeys-removed-from-the-exporter-record}
 
