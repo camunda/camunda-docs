@@ -102,7 +102,7 @@ The region is still reachable, for example during a scheduled evacuation. A swit
 
 The region is gone. Follow the [Aurora Global Database unplanned recovery procedure](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html). The reference script doesn't automate this operation because detaching and promoting a member changes the global topology outside Terraform.
 
-Whatever had not replicated at the time of the outage can be lost from the promoted database. The bound on that loss is the replication lag your [asynchronous replication monitoring](/self-managed/concepts/databases/relational-db/configuration.md#multi-region-support) strategy allows. Restore the global database membership before running the Camunda failback procedure.
+Whatever had not replicated at the time of the outage can be missing from the promoted database. With `LOG_SEQ`, recovery depends on promoting a standby whose replication was confirmed within the configured minimum. With `DELAY`, recovery depends on the actual lag staying below the configured delay. Restore the global database membership before running the Camunda failback procedure.
 
 </TabItem>
 
@@ -195,6 +195,7 @@ Re-source the environment so `CAMUNDA_ACTIVE_REGIONS` reflects the new count, an
 
 ```bash
 cd ../../procedure
+unset CAMUNDA_ACTIVE_REGIONS
 . ./export-terraform-outputs.sh
 . ./export_environment_prerequisites.sh
 ./register-kubecontexts.sh

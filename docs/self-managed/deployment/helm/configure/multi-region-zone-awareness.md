@@ -101,7 +101,7 @@ Contact points matter only while the cluster bootstraps. Once brokers have found
 
 ## A single zone is still one cluster
 
-Zone awareness with one zone describes a single cluster that biases partition leaders toward a preferred availability zone. The chart treats it as one cluster throughout: it generates the initial contact points, as described above, and it keeps the Optimize exporter that a cluster spread over several zones has to give up. Adding a second zone is what makes the deployment spread.
+Zone awareness with one zone provides named broker identities but cannot bias leaders between failure domains because every replica has the same zone priority. The chart treats it as one cluster throughout: it generates the initial contact points, as described above, and it keeps the Optimize exporter that a cluster spread over several zones has to give up. Adding a second zone is what makes the deployment spread and lets different priorities influence leader placement.
 
 ## Custom application configuration is not merged
 
@@ -122,7 +122,7 @@ The chart rejects the inputs that would otherwise render a cluster that cannot f
 | `orchestration.clusterSize` or `orchestration.replicationFactor` that contradicts the zone list | Both are derived from the zone list in zoned mode, so a stale value would be discarded in silence. Restating the derived total is allowed. |
 | `regions` or `regionId`                                                                         | They belong to the broker numbering that zone awareness replaces.                                                                          |
 
-The schema also requires each `zones` entry to declare `name`, `numberOfBrokers`, `numberOfReplicas`, and `priority`, with counts of at least `1` and a non-negative priority.
+The schema also requires each `zones` entry to declare `name`, `numberOfBrokers`, `numberOfReplicas`, and `priority`, with each numeric value at least `1`.
 
 The last two are rejected only when they carry a non-default value. Helm gives no reliable way to tell a value you supplied from the chart default, so a key that happens to equal its default stays inert rather than failing the render. None of them is removed or renamed, and all keep working in `numbered` mode.
 
