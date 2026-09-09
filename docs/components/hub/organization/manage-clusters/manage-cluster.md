@@ -9,23 +9,19 @@ import TabItem from "@theme/TabItem";
 
 Learn how to rename, resume, update, resize, or delete your cluster.
 
-## About
-
-This guide covers managing a cluster in Camunda 8 SaaS. .
-
 ## Rename a cluster
 
 You can safely rename a cluster at any time.
 
-:::tip
-In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters)
-:::
-
 To rename a cluster in SaaS:
 
-1. In Camunda Hub, in the left navigation, under **Clusters**, select a cluster.
+1. In the left navigation, under **Clusters**, select a cluster.
 2. At the top of the view, next to the cluster name, open the vertical ellipsis menu.
 3. Click **Rename**.
+
+:::tip
+In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
+:::
 
 ## Resume a cluster
 
@@ -42,21 +38,21 @@ To resume the cluster during deployment:
 
 You can resume your paused cluster from Camunda Hub at any time.
 
-1. In Camunda Hub, in the left navigation under **Clusters**, select the paused cluster.
+1. In the left navigation under **Clusters**, select the paused cluster.
 2. In the **Overview** tab, under **Cluster details**, click **Resume cluster**.
 
 ## Update a cluster
 
-:::caution
+:::warning
 Updating a cluster is permanent. Updated clusters cannot be reverted to the previous version.
 :::
 
 To update a cluster:
 
-- In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
 - In SaaS:
   - In the cluster's **Overview** tab, find the **Cluster details** section.
   - If an update is available, you'll see a **Review Update** button in the **Generation** row.
+- In Self-Managed, review the [cluster configuration properties](/self-managed/components/hub/configuration/properties.md#clusters).
 
 Currently, updates do not automatically trigger backups. Camunda recommends [creating a manual backup](./cluster-backups.md#create-a-manual-backup) before updating.
 
@@ -83,7 +79,7 @@ In SaaS, you can enable [automated patch updates](/components/saas/auto-updates.
 
 You can increase or decrease the [cluster size](/components/concepts/clusters.md#cluster-size) at any time. For example, increase the cluster size to improve performance and add capacity, or decrease the cluster size to free up reservations for another cluster.
 
-1. In Camunda Hub, in the left navigation under **Clusters**, select your cluster.
+1. In the left navigation under **Clusters**, select your cluster.
 1. In the **Overview** tab, next to the cluster type, click **Resize cluster**.
 1. Select the new cluster size from the available sizes.
 1. Click **Confirm** to resize the cluster, or **Cancel** to close the modal without resizing the cluster.
@@ -100,6 +96,6 @@ Deleting a cluster is **permanent** and cannot be undone.
 
 You can delete a cluster at any time:
 
-1. In Camunda Hub, in the left navigation under **Clusters**, select your cluster.
+1. In the left navigation under **Clusters**, select your cluster.
 1. In the **Settings** tab, click **Delete**.
 1. If you're sure you want to _permanently_ delete the cluster, confirm the deletion.
