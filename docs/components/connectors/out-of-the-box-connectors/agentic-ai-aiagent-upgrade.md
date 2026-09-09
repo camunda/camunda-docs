@@ -24,15 +24,14 @@ The legacy element templates are deprecated as of Camunda 8.10 and will not rece
 
 ## How to upgrade
 
-The legacy and new element templates are separate templates backed by separate connector types (job types), not two versions of the same template. This means upgrading is a manual, per-element operation:
+The legacy and new element templates are separate templates, not two versions of the same template. This means upgrading is a manual, per-element operation:
 
 1. Open the AI Agent Task or AI Agent Sub-process element in Camunda Modeler, and set the process' modeler/execution version to Camunda 8.10 or later, so the new element template is available to select.
-2. In the element's **Template** panel, **Unlink** the applied legacy template. This clears the template binding but keeps the element's existing field values.
-3. Select the element and choose **+ Select** on the **Template** field to apply the latest version of the same element template (**AI Agent Task**/**AI Agent Sub-process**). Since the legacy template is deprecated, it's no longer selectable from the template picker; only the new one is offered.
-4. Re-enter the model provider configuration using the [mapping tables](#model-provider-configuration-mapping) below. This is where the bulk of the migration work is, since the provider fields were restructured the most.
-5. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged, but re-check any values lost when the template was swapped.
-6. Deploy the new process definition version to a non-production environment first, and run a representative prompt and tool-call path through it to confirm authentication, endpoint, and model behavior before promoting it. See [testing process definitions](/components/best-practices/development/testing-process-definitions.md) for how to structure that verification. The prior version keeps running until you deploy this one, so it stays available as a rollback path.
-7. Once verified, promote the new version to production through your normal release process.
+2. Select the element in the diagram, choose **Change element**, and apply the new **AI Agent Task** or **AI Agent Sub-process** template. Since the legacy template is deprecated, the template picker offers the new template for that element.
+3. Re-enter the model provider configuration using the [mapping tables](#model-provider-configuration-mapping) below. This is where the bulk of the migration work is, since the provider fields were restructured the most.
+4. Review the rest of the element's configuration. Tools, memory, limits, response, and error handling are conceptually unchanged, but re-check any values that need to be re-entered after you apply the new template.
+5. Deploy the new process definition version to a non-production environment first, and run a representative prompt and tool-call path through it to confirm authentication, endpoint, and model behavior before promoting it. See [testing process definitions](/components/best-practices/development/testing-process-definitions.md) for how to structure that verification. The prior version keeps running until you deploy this one, so it stays available as a rollback path.
+6. Once verified, promote the new version to production through your normal release process.
 
 :::important
 Swapping the element template only affects the process definition you redeploy. Already-deployed process definitions, and any process instances already running against them, keep executing on the legacy job worker until you deploy a new version with the new template applied.
