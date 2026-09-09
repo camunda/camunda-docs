@@ -468,29 +468,29 @@ const DESKTOP_MODELER = {
 };
 
 const CAMUNDA_RUN = {
-  version: "8.9.12",
-  date: "Jul 7, 2026",
-  alphaVersion: "8.10.0-alpha3",
+  version: "8.9.19",
+  date: "Sep 7, 2026",
+  alphaVersion: "8.10.0-alpha5",
   links: {
     mac: {
       stable: [
         {
           label: "Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.12/camunda8-run-8.9.12-darwin-aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-darwin-aarch64.zip",
         },
         {
           label: "Intel",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.12/camunda8-run-8.9.12-darwin-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-darwin-x86_64.zip",
         },
       ],
       experimental: [
         {
           label: "Alpha Apple Silicon",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha3/camunda8-run-8.10.0-alpha3-darwin-aarch64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-darwin-aarch64.zip",
         },
         {
           label: "Alpha Intel",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha3/camunda8-run-8.10.0-alpha3-darwin-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-darwin-x86_64.zip",
         },
       ],
     },
@@ -498,13 +498,13 @@ const CAMUNDA_RUN = {
       stable: [
         {
           label: "Windows (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.12/camunda8-run-8.9.12-windows-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-windows-x86_64.zip",
         },
       ],
       experimental: [
         {
           label: "Alpha Windows",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha3/camunda8-run-8.10.0-alpha3-windows-x86_64.zip",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-windows-x86_64.zip",
         },
       ],
     },
@@ -512,13 +512,13 @@ const CAMUNDA_RUN = {
       stable: [
         {
           label: "Linux (x64)",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.12/camunda8-run-8.9.12-linux-x86_64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.9.19/camunda8-run-8.9.19-linux-x86_64.tar.gz",
         },
       ],
       experimental: [
         {
           label: "Alpha Linux",
-          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha3/camunda8-run-8.10.0-alpha3-linux-x86_64.tar.gz",
+          url: "https://downloads.camunda.cloud/release/camunda/c8run/8.10.0-alpha5/camunda8-run-8.10.0-alpha5-linux-x86_64.tar.gz",
         },
       ],
     },
@@ -570,8 +570,8 @@ const ADDITIONAL_RELEASES = [
     title: "Camunda Orchestration Cluster",
     description:
       "Download self-managed orchestration runtime artifacts and view all release notes.",
-    version: "8.9.13",
-    date: "Jul 15, 2026",
+    version: "8.9.19",
+    date: "Sep 3, 2026",
     primaryLink: {
       label: "View latest release on GitHub",
       url: "https://github.com/camunda/camunda/releases/latest",
@@ -583,8 +583,8 @@ const ADDITIONAL_RELEASES = [
     title: "Connectors",
     description:
       "Get prebuilt connector artifacts and review release history for connector updates.",
-    version: "8.10.0-alpha3",
-    date: "Jul 7, 2026",
+    version: "8.10.0-alpha5",
+    date: "Sep 3, 2026",
     primaryLink: {
       label: "View latest release on GitHub",
       url: "https://github.com/camunda/connectors/releases/latest",
