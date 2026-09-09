@@ -559,7 +559,7 @@ Starting with Connectors 8.8.19, the connector runtime introduces the [secret fi
 
 In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
 
-**Action:** Before upgrading, confirm that every connector field which resolves a secret already references that secret in the deployed BPMN.
+**Action:** Before upgrading, confirm all connector fields that resolve a secret already reference that secret in the deployed BPMN.
 
 - If a field relies on resolving a secret it doesn't reference, add the reference.
 - To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but be aware that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
