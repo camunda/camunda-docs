@@ -1,22 +1,24 @@
 ---
 id: usage-alerts
-title: Usage alerts
+title: View usage alerts
 description: "As an organization owner or admin, set up alerts for process instances, decision instances and task users."
 ---
+
+Set up alerts for process instances, decision instances and task users.
+
+## About usage alerts
+
+In Camunda Hub, organization owners and admins can set up alerts for process instances, decision instances and task users. Usage is calculated daily. When the threshold for an alert is met, all organization owners and admins are alerted via email and in-app notification.
 
 :::note
 Usage alerts apply **only to production clusters** and are visible only to owners and admins in **Starter** and **Enterprise** organizations.
 :::
 
-Under the **Billing** tab, organization owners and admins can set up alerts for process instances, decision instances and task users.
-
-Usage is calculated daily. When the threshold for an alert is met, all organization owners and admins are alerted via email and in-app notification.
-
-## Creating a usage alert
+## Create a usage alert
 
 To create a usage alert, take the following steps:
 
-1. From the Camunda Hub, click **Organization > Billing**.
+1. In the left navigation under **Console**, click **Organization**.
 2. On the **Billing** page, select **Edit alert** next to the metric you want to configure the usage alert for (e.g. process instances).
    ![Edit Usage Alert](./img/edit_usage_alert.png)
 3. In the modal, define the percentage threshold (e.g. 80 for 80%), turn on the alert, and click **Save**. Note that the threshold can be between 1% and 4999%.
