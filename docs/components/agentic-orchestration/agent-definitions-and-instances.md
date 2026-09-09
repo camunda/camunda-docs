@@ -60,7 +60,7 @@ For an [external agent](/reference/glossary.md#external-agent), Camunda doesn't 
 :::info Update element templates created before Camunda 8.10
 If you modeled the agent element before Camunda 8.10, update to the latest AI Agent Sub-process or AI Agent Task element template.
 
-Open the process in Web Modeler or Desktop Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
+Open the process in Camunda Hub or Desktop Modeler, select the agent element, click **Update element template** in the properties panel to apply the latest template version, and redeploy the process.
 :::
 
 #### Mark an element as an agent in XML

@@ -80,7 +80,7 @@ Migrating to Camunda 8 gives you additional advantages, which might raise priori
 
 - You want to leverage a SaaS offering (for example, to reduce the effort for hardware or infrastructure setup and maintenance).
 - You need performance at scale and/or improved resilience.
-- You need certain features that can only be found in Camunda 8 (for example, BPMN message buffering, improved multi-instance handling, the new connectors framework, RPA, IDP, or the improved collaboration features in Web Modeler).
+- You need certain features that can only be found in Camunda 8 (for example, BPMN message buffering, improved multi-instance handling, the new connectors framework, RPA, IDP, or the improved collaboration features in Camunda Hub).
 
 <!-- TODO Link to conceptual differences -->
 
@@ -276,6 +276,7 @@ Typical preparation steps include:
 - **Remove the usage of internal APIs** or calls that depend on the transactionally integrated architecture of Camunda 7 (for example, querying the HistoryService within a JavaDelgate and expect it to know current changes already).
 
 - **Increase test coverage** of the solution to increase confidence that code conversions during migration do not break anything. This is especially important if your C7-based solutions lack good test coverage. To avoid migration effort on test cases, ideally **abstract the test cases from the Camunda version** used, either by using a small own abstraction layer, or by using a test framework such as [Cucumber](https://cucumber.io/) or [Sentinel](https://developer.hashicorp.com/sentinel/docs/intro).
+
 <!-- TODO: Mention Scenario Tests -->
 
 - **Structural changes in your BPMN model** to make them runnable on Camunda 8. One trigger could be that you are using constructs that are not supported in Camunda 8 (for example, execution listeners on sequence flows). Or you want to get your models into a state that allows runtime data migration (see [data migration](#migrate-data-optional)), for example by adding artificial wait states before multi-instance tasks (as multiple instance is not supported for runtime data migration).

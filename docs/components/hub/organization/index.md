@@ -44,19 +44,19 @@ Establish a Git repository with catalog assets, upload the assets in a CI/CD pip
 
 <span class="link-arrow">[Get started](./manage-catalog/index.md)</span>
 
-## Manage members
+## Manage users
 
 Manage the users, user groups, and roles in your organization:
 
 <AoGrid ao={[
 {
-link: "./manage-members/manage-users",
+link: "./manage-users",
 title: "Manage users",
 image: DocsIcon,
 description: "Manage users in your organization.",
 },
 {
-link: "./manage-members/manage-user-groups",
+link: "./manage-users/manage-user-groups",
 title: "Manage user groups",
 image: DocsIcon,
 description: "Organize users into groups within your organization.",

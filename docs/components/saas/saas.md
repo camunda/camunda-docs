@@ -36,12 +36,12 @@ There are two types of [cluster](/components/concepts/clusters.md) used when run
 - Camunda Hub is hosted in GCP in the _europe-west1_ [region](/components/saas/regions.md).
 - Orchestration cluster components such as Zeebe, Tasklist, Operate, Optimize, and Connectors, are hosted in GCP or Amazon Web Services (AWS) regions. An Orchestration Cluster is a provided group of production-ready nodes that run Camunda 8.
 
-Camunda 8 SaaS uses single-tenant clusters, with all data contained in a single tenant for easier administration and simpler security.
+By default, each cluster serves a single tenant, with all data associated with the `<default>` tenant.
 
 A cell-based architecture means that each cluster runs as dedicated processes in a separate cell isolated from all other clusters, allowing secure fault and workload separation. Scaling is achieved by deploying additional clusters for new use cases and/or teams.
 
 :::note
-Camunda Self-Managed also supports [multi-tenant](/components/concepts/multi-tenancy.md) clusters, where multiple tenants share the same underlying infrastructure, but with their data logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
+On clusters running generation 8.8 and later, you can enable [multi-tenancy](/components/concepts/multi-tenancy.md) to serve multiple tenants from the same cluster, with their data logically isolated. Each data entry (for example, process definition, process instance, job) is appended with a tenant ID to ensure separation.
 :::
 
 ### Zeebe
@@ -97,12 +97,12 @@ See [data locations](data-locations.md) to learn more about where your Camunda 8
 
 Camunda 8 SaaS supports the following access controls.
 
-| Access control type                                                                                                       | Description                                                                                                                                                                                                                                      |
-| :------------------------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Single sign-on (SSO)](/components/hub/organization/manage-organization-settings/external-sso.md)                         | SSO is available for both Starter and Enterprise plans, using Identity as a bridge between an OpenID Connect (OIDC) provider and the Camunda platform.                                                                                           |
-| [OAuth](/components/hub/organization/manage-clusters/manage-api-clients.md)                                               | The OAuth service is used to allow client applications to interact with Zeebe in SaaS from the outside. Every client application must authenticate itself using an OAuth Flow.                                                                   |
-| [Role based access (RBAC)](/components/hub/organization/manage-members/manage-users.md)                                   | <p>Camunda 8 SaaS supports RBAC through a system of roles and permissions.</p><p>Each role provides a different level of access to Camunda 8 components, allowing organizations to control user permissions based on their responsibilities.</p> |
-| [Resource-based authorization](/components/hub/organization/manage-members/manage-users.md#resource-based-authorizations) | Resource authorizations allow you to control the level of access a user has to a particular resource in the system.                                                                                                                              |
+| Access control type                                                                                                     | Description                                                                                                                                                                                                                                      |
+| :---------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Single sign-on (SSO)](/components/hub/organization/manage-organization-settings/external-sso.md)                       | SSO is available for both Starter and Enterprise plans, using Identity as a bridge between an OpenID Connect (OIDC) provider and the Camunda platform.                                                                                           |
+| [OAuth](/components/hub/organization/manage-clusters/manage-api-clients.md)                                             | The OAuth service is used to allow client applications to interact with Zeebe in SaaS from the outside. Every client application must authenticate itself using an OAuth Flow.                                                                   |
+| [Role based access (RBAC)](/components/hub/organization/manage-users/manage-users.md)                                   | <p>Camunda 8 SaaS supports RBAC through a system of roles and permissions.</p><p>Each role provides a different level of access to Camunda 8 components, allowing organizations to control user permissions based on their responsibilities.</p> |
+| [Resource-based authorization](/components/hub/organization/manage-users/manage-users.md#resource-based-authorizations) | Resource authorizations allow you to control the level of access a user has to a particular resource in the system.                                                                                                                              |
 
 :::note
 In Enterprise plans, the hostname section of the email address for invites can be restricted to meet your internal security policies. To learn more, [contact Camunda support](https://camunda.com/services/support/).

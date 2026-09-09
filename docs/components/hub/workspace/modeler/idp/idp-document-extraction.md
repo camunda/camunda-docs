@@ -15,18 +15,19 @@ Document extraction templates form the basis for using IDP in your end-to-end pr
 
 - Create a separate document extraction template for each type of document you want to categorize and extract data from, such as an invoice, a report, identity document, and so on.
 - Published document extraction templates can then be used to [integrate IDP into your processes](idp-integrate.md).
+
 <!-- - Published extraction projects can be [integrated into your processes](idp-integrate.md) or linked to a [document automation](idp-document-automation.md) project. -->
 
 ## Create document extraction template
 
 To create a new document extraction template:
 
-1. In your [IDP application](idp-applications.md), click **Create new** and select **Extraction template** to open the Create new project modal.
+1. In your [IDP project](idp-projects.md), click **Create new** and select **Extraction template** to open the Create new project modal.
    <img src={IdpExtractionProjectModalImg} alt="Create an extraction project modal" width="700px" style={{marginTop: '0'}} />
 1. Select the **Extraction method** depending on whether your documents contain structured or unstructured data.
    - **Unstructured data extraction**: Extract data from unstructured documents.
    - **Structured form extraction**: Extract data from structured documents.
-1. **Name**: Enter a descriptive name for the type of document, such as “Invoice type A” for example.
+1. **Template Name**: Enter a descriptive name for the type of document, such as “Invoice type A” for example.
 1. **Description**: Enter a description to provide more detailed information about the document type.
 1. **Provider**: Select the cloud provider you want to use for document extraction. The available providers depend on the connector secrets configured for your cluster.
 

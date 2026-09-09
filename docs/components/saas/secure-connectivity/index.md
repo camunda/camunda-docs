@@ -36,7 +36,7 @@ Secure connectivity relies on standard AWS PrivateLink functionality. For an ove
 
 At a high level:
 
-1. Enable secure connectivity for a cluster in Console.
+1. Enable secure connectivity for a cluster in Hub.
 2. Review the VPC endpoint service details provided by Camunda (for example, service name, service type, region, and private DNS name).
 3. Create one or more VPC interface endpoints in your AWS account and configure the required security groups.
 4. Optionally configure private DNS for the endpoint connection in AWS. Enabling private DNS provides a seamless HTTPS experience.

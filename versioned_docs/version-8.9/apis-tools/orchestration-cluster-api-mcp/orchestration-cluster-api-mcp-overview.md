@@ -13,7 +13,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 The Orchestration Cluster MCP Server is an API surface of the Orchestration Cluster that exposes Camunda's operational capabilities through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP).
 
-- It enables AI agents and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
+- It enables [AI agents](/reference/glossary.md#ai-agent) and LLM-powered applications to discover and invoke Camunda tools using a standardized interface, without custom API integration code.
 - Similar to the [Orchestration Cluster API](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md), the MCP server is built into the Orchestration Cluster and shares the same [authentication](../orchestration-cluster-api-rest/orchestration-cluster-api-rest-authentication.md) and [authorization](/components/concepts/access-control/authorizations.md) model. It can be enabled independently.
 
 :::important Camunda 8 public API

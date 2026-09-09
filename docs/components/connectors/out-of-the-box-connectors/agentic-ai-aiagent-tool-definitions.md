@@ -19,7 +19,7 @@ A tool is a single BPMN element, or a flow of BPMN elements, inside an [ad-hoc s
 - **Input parameters**: values the LLM must supply at call time, declared using the [`fromAi()`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) FEEL function in input mappings.
 - A **result**: the tool's output, returned to the LLM as `toolCallResult`.
 
-Web Modeler can help you fill in both the input parameters and the result. See [assisted tool configuration in Web Modeler](#assisted-tool-configuration-in-web-modeler) for more details.
+The Camunda Hub modeler can help you fill in both the input parameters and the result. See [assisted tool configuration in Camunda Hub](#assisted-tool-configuration-in-web-modeler) for more details.
 
 ### Which elements are resolved as tools
 
@@ -195,7 +195,7 @@ fromAi(toolCall.firstNumber, "The first number.", "number") + fromAi(toolCall.se
 
 For more examples, refer to the [`fromAi`](../../modeler/feel/builtin-functions/feel-built-in-functions-ai-agent.md#fromaivalue) documentation.
 
-In Web Modeler, you can [autofill a starter `fromAi()` call](#autofill-a-fromai-input) into a blank input.
+In the Camunda Hub modeler, you can [autofill a starter `fromAi()` call](#autofill-a-fromai-input) into a blank input.
 
 ## Message catch events as tools
 
@@ -231,7 +231,7 @@ As most LLMs expect _some_ form of response to a tool call, the AI Agent will re
 was executed successfully without returning a result to the LLM if the `toolCallResult` variable is not set or empty after executing
 the tool.
 
-In Web Modeler, you can [autofill the `toolCallResult` output](#autofill-a-toolcallresult-output).
+In the Camunda Hub modeler, you can [autofill the `toolCallResult` output](#autofill-a-toolcallresult-output).
 
 ### Document support
 
@@ -241,9 +241,9 @@ content blocks.
 
 For supported file types and details on how documents are resolved, see [document support](./agentic-ai-aiagent-documents.md).
 
-## Assisted tool configuration in Web Modeler
+## Assisted tool configuration in Camunda Hub
 
-In the properties panel, Web Modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
+In the properties panel, the Camunda Hub modeler helps you fill in both parts of the tool contract: [`fromAi()`](#ai-generated-parameters-via-fromai) inputs and the [`toolCallResult`](#tool-call-responses) output. This assistance appears only inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It does not appear in a plain sub-process.
 
 Two affordances appear, and they apply to different fields:
 
@@ -264,7 +264,7 @@ On a tool's root node (the activity with no incoming flows), an autofill icon ap
 
 Replace the placeholder key and description with values for your tool. The autofill icon appears only on a blank field, so it never replaces a value you entered.
 
-Web Modeler derives the key from the field's target and infers the type argument from the field's description or name. This inferred type is a heuristic, not a guaranteed match for the target's real shape, so check it when a tool call fails with a type mismatch.
+The Camunda Hub modeler derives the key from the field's target and infers the type argument from the field's description or name. This inferred type is a heuristic, not a guaranteed match for the target's real shape, so check it when a tool call fails with a type mismatch.
 
 ### Autofill a `toolCallResult` output
 
@@ -280,23 +280,23 @@ For a multi-instance tool, autofill also sets the output collection and output e
 
 ### Fix an invalid key
 
-When a `fromAi()` key or an output key is invalid, Web Modeler detects it locally by re-parsing the element's own fields and offers a **Fix** button. No modeling-guidance report is involved.
+When a `fromAi()` key or an output key is invalid, the Camunda Hub modeler detects it locally by re-parsing the element's own fields and offers a **Fix** button. No modeling-guidance report is involved.
 
-Web Modeler offers **Fix** for:
+The Camunda Hub modeler offers **Fix** for:
 
 - A `fromAi()` key with a missing `toolCall.` prefix, bracket notation, a quoted string, or an over-long path.
 - A `fromAi` function name with incorrect casing, since only the exact name is recognized.
 - A description that is not a string literal.
 - An output key that is a near-miss of `toolCallResult`, such as `toolcallresult`.
-- A `fromAi()` key that cannot be recovered as written, such as a missing or numeric key. Web Modeler fills in a key derived from the field's own target.
+- A `fromAi()` key that cannot be recovered as written, such as a missing or numeric key. The Camunda Hub modeler fills in a key derived from the field's own target.
 
 In every case, **Fix** rewrites only the invalid key or the `fromAi(...)` span and leaves the rest of the field intact. A field such as `=concat("prefix-", fromAi(...), "-suffix")` keeps both surrounding literals, and correcting an invalid key preserves any description and type arguments you entered.
 
 The button is always labeled **Fix**, so hover it to see the specific change it makes before you select it.
 
-If a field's expression cannot be parsed at all, Web Modeler cannot identify what to correct and offers no fix. Repair the expression yourself.
+If a field's expression cannot be parsed at all, the Camunda Hub modeler cannot identify what to correct and offers no fix. Repair the expression yourself.
 
-If a `fromAi()` call is on an element other than the tool's root node, the AI Agent connector cannot resolve it. Web Modeler offers a move action, labeled with the root node's name, that declares the input on the root node and rewrites only the `fromAi(...)` span on the original field.
+If a `fromAi()` call is on an element other than the tool's root node, the AI Agent connector cannot resolve it. The Camunda Hub modeler offers a move action, labeled with the root node's name, that declares the input on the root node and rewrites only the `fromAi(...)` span on the original field.
 
 This assistance complements the agent [modeling-guidance rules](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md), which flag the same contract problems. The rules report what is wrong, assisted configuration offers to fix it.
 

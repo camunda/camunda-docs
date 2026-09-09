@@ -1,12 +1,12 @@
 ---
 id: idp-integrate
 title: Integrate IDP into your processes
-description: "Integrate intelligent document processing (IDP) into your end-to-end processes in Web Modeler."
+description: "Integrate intelligent document processing (IDP) into your end-to-end processes in Camunda Hub."
 ---
 
 import IdpElementImg from './img/idp-diagram-element.png';
 
-Integrate your published document extraction and classification templates into your end-to-end processes in Web Modeler.
+Integrate your published document extraction and classification templates into your end-to-end processes in Camunda Hub.
 
 :::tip
 New to IDP integration? See the [example IDP integration](idp-example.md) for a worked example of a simple IDP process.
@@ -14,7 +14,7 @@ New to IDP integration? See the [example IDP integration](idp-example.md) for a 
 
 ## About IDP integration
 
-When you publish a [document extraction](idp-document-extraction.md) or [document classification](idp-document-classification.md) template, IDP generates a connector template that you can apply to tasks in your BPMN diagrams. Each published template appears as a selectable element template in Web Modeler.
+When you publish a [document extraction](idp-document-extraction.md) or [document classification](idp-document-classification.md) template, IDP generates a connector template that you can apply to tasks in your BPMN diagrams. Each published template appears as a selectable element template in Camunda Hub.
 
 ## Create and configure an IDP task
 

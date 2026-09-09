@@ -1,31 +1,25 @@
 ---
 id: manage-element-templates
 title: Manage element templates
-description: Manage your element templates in Web Modeler.
+description: Manage your element templates in Camunda Hub.
 ---
 
 export const UploadIcon = () => <span style={{verticalAlign: "text-top"}}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path d="M0 0h24v24H0z" fill="none"></path><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" fill="currentColor"></path></svg></span>;
-import PublishToOrganizationFromEditorImg from './img/connector-templates/publish-to-organization-from-editor.png';
-import PublishToOrganizationFromVersionsListImg from './img/connector-templates/publish-to-organization-from-versions-list.png';
 import EditConnectorTemplate1Img from './img/connector-templates/edit-connector-template-1.png';
 import EditConnectorTemplate2Img from './img/connector-templates/edit-connector-template-2.png';
 import EditConnectorTemplate3Img from './img/connector-templates/edit-connector-template-3.png';
 import UploadFilesImg from './img/connector-templates/upload-files.png';
 import ReplaceViaUploadImg from './img/connector-templates/replace-via-upload.png';
 
-<span class="badge badge--cloud">Camunda 8 only</span>
-
-You can create and manage [element templates](/components/concepts/element-templates.md) just as any other asset in a Web Modeler project.
+You can create and manage [element templates](/components/concepts/element-templates.md) just as any other asset in a Camunda Hub project.
 
 ## Create an element template
 
-To create a new element template, follow the steps described in [Generate an element template](./element-template-generator.md).
+To create a new element template, follow the steps described in [generate an element template](./element-template-generator.md).
 
 You will be taken to the **Element template editor** screen.
 In this screen, you can define the element template by writing the template JSON.
 The template editor supports you in writing the template by providing autocompletion, error highlighting, and a live preview.
-
-![Template editor](img/connector-templates/connector-template-editor.png)
 
 The components of the editor interface are as follows:
 
@@ -33,7 +27,7 @@ The components of the editor interface are as follows:
   The descriptor follows the [most recent element template schema](https://github.com/camunda/element-templates-json-schema).
 
   :::info
-  Starting with 8.8, the following properties are not managed by Web Modeler anymore, and you can freely edit them:
+  Starting with 8.8, you can freely edit the following properties:
   - `name`: Human-friendly name shown when selecting a template and in the properties panel after the template has been applied. The value can be different from the file name.
   - `id`: Identifier of the template. Changing this value creates a new template. We recommend setting a meaningful value (for example, "PaymentConnector", "CreateUserTemplate").
   - `version`: Integer-based version number. Combined with the `id`, it defines a unique template version. When [publishing](#publish-a-connector-template) a new version, you need to update the version number manually.
@@ -44,64 +38,57 @@ The components of the editor interface are as follows:
 - On the right, you observe the live **Visual Preview**. The live preview shows how the properties panel will look when you apply the template to an element. It automatically updates on every valid change, and reflects the latest valid state of the template. The preview allows you to interactively check your template before publishing it.
   You can also use the **Update JSON** button to update the template's JSON properties with the current input values from the visual preview.
 
-- In the upper right, you can **Add an icon** for your template. You can upload an image file with a maximum size of 8 KB. We recommend using squared SVG graphics. Icons appear as 18x18 pixels in the element on the modeling canvas, and as 32x32 pixels in the properties panel.
+- In the upper right, you can add an icon to your template. You can upload an image file with a maximum size of 8 KB. We recommend using squared SVG graphics. Icons appear as 18x18 pixels in the element on the modeling canvas, and as 32x32 pixels in the properties panel.
 
 On every valid change, the template is saved automatically. If there are errors in the JSON file, the template will not be saved. Ensure all [errors are resolved](#fixing-template-problems) for the template to save successfully.
 
 ## Publish an element template
 
-After finalizing your element template, click **Publish to project** to activate it within the project context. In the modal that opens:
+After finalizing your element template, click **Publish > Publish to project** to activate it within the project context. In the modal that opens:
 
 - Update the version number if necessary. You don't need to change it for the initial version or if you have updated it already in the template editor.
   The value entered here is saved to the `version` property in the JSON.
 - Assign a distinct version name for effective version management.
 - Add a description to explain what changed since the previous version.
 
-![Publishing a template](img/connector-templates/publish-version-to-project.png)
-
-Web Modeler checks the template for conflicts with already-published template versions.
+Camunda Hub checks the template for conflicts with already-published template versions.
 You cannot publish a new version if:
 
-- The template's ID is already used in a published version of a different template file.<br/>
-- The version number is equal to or lower than the last published version of the same template file with the same template ID.<br/>
+- The template's ID is already used in a published version of a different template file.
+- The version number is equal to or lower than the last published version of the same template file with the same template ID.
 
-Web Modeler also shows a warning if the template ID has changed since the last published version.
+Camunda Hub also shows a warning if the template ID has changed since the last published version.
 You can still publish the new version in this case.
 
 :::note
 Template IDs must be unique across the organization, including for templates that are only published to a project. If a conflicting template ID is already published in another project, publish a new template with a different ID.
 :::
 
-As a [user with elevated access](/components/hub/workspace/modeler/collaboration/collaboration.md#elevated-access), you can publish an element template version within the organization context, enabling all organization members to use it in their diagrams.
+As a [user with elevated access](/components/hub/workspace/modeler/collaboration/collaboration.md#elevated-access), you can publish an element template version within the organization context, enabling all organization users to use it in their diagrams.
 To do so, click **Publish > Publish to organization** on the editor screen or promote a template version via the [versions list](#versioning-connector-templates).
-
-<img src={PublishToOrganizationFromEditorImg} width="482px" alt="Publish to organization from the editor page" style={{ verticalAlign: "top" }} />
-<img src={PublishToOrganizationFromVersionsListImg} width="450px" alt="Promoting an existing template version to the organization" />
 
 ### Manage published element templates
 
 After publishing, an element template version can be applied across all models within the same project or organization, depending on its publication status. You can review the publication status of template versions in the [versions list](#versioning-connector-templates).
 
-On the Web Modeler home page, you can find an overview of all shared resources within your organization.
+At the organization level in Camunda Hub, in the left navigation, click **Shared resources**. Here, you'll can find an overview of all shared resources within your organization.
 
 [Users with elevated access](/components/hub/workspace/modeler/collaboration/collaboration.md#elevated-access) can:
 
 - View additional details about the published version.
-- Open the resource's versions list (if they are in [super-user mode](/components/hub/workspace/modeler/collaboration/collaboration.md#super-user-mode) or are a [project admin or editor](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
+- Open the resource's versions list (if they are a [Organization Admin or Organization Owner](/components/hub/organization/manage-users/manage-users.md#elevated-workspace-access) or are a [Workspace Admin or Editor](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) of the resource's workspace).
 - Unpublish an element template directly from this view.
 
-![Manage published templates - elevated access](img/connector-templates/manage-connector-templates-org-privileges.png)
-
-Organization members without special organization permissions can:
+Organization users without special organization permissions can:
 
 - View all the resources published within the organization.
-- Open the resource's versions list (if they are a [project admin or editor](/components/hub/workspace/modeler/collaboration/collaboration.md#access-rights-and-permissions) of the resource's project).
-
-![Manage published templates - no special organization permissions](img/connector-templates/manage-connector-templates-no-org-privileges.png)
+- Open the resource's versions list (if they are a [Workspace Admin or Editor](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles) of the resource's workspace).
 
 ### Versioning element templates
 
-You can version your element templates [similar to diagrams](/components/hub/workspace/modeler/modeling/versions.md).
+Element templates use their own numbered versioning, distinct from the [file version history](/components/hub/workspace/modeler/modeling/versions.md) used by diagrams, forms, RPA scripts, README files, and test files. Each publish creates a new numbered version in the template's versions list.
+
+To restore an earlier template version, select it in the versions list and select **Restore**. Restoring publishes the earlier content as a new numbered version. It doesn't create an autosave first, since the version you're restoring from remains available in the versions list.
 
 If you publish a new version of an element template and an older version is already being used in diagrams, the user can either:
 
@@ -142,9 +129,9 @@ If there are problems at the root level of the JSON (such as a missing or misspe
 
 ## Importing an existing element template
 
-If you have created templates for Desktop Modeler and want to reuse them in Web Modeler, you need to make some adjustments to the template files:
+If you have created templates for Desktop Modeler and want to reuse them in Camunda Hub, you need to make some adjustments to the template files:
 
-1. **Split the files**. Web Modeler maintains a 1:1 relation between element templates and files. Since Desktop Modeler allows you to keep multiple template definitions in a single file, you must split the file in advance to one file per template before uploading.
+1. **Split the files**. Camunda Hub maintains a 1:1 relation between element templates and files. Since Desktop Modeler allows you to keep multiple template definitions in a single file, you must split the file in advance to one file per template before uploading.
 2. **Remove the brackets**. Remove the list brackets from the element template file before uploading. Even if a template file for Desktop Modeler contains only a single template, it is always wrapped in a list.
 
 Once your file follows the requirements, you can upload it. There are two ways to do so:
@@ -156,5 +143,5 @@ Once your file follows the requirements, you can upload it. There are two ways t
    <img src={ReplaceViaUploadImg} width="675px" alt="Updating a template via file upload" style={{marginTop: 0}} />
 
 :::info Desktop Modeler support
-The element template editor is currently only available in Web Modeler. Refer to the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) for instructions on configuring element templates in Desktop Modeler.
+The element template editor is currently only available in Camunda Hub. Refer to the [Desktop Modeler documentation](/components/modeler/desktop-modeler/element-templates/configuring-templates.md) for instructions on configuring element templates in Desktop Modeler.
 :::
