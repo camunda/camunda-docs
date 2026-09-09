@@ -1,5 +1,5 @@
 ---
-id: migrate-raft-leadership
+id: move-raft-leadership
 title: "Move Raft leadership between zones"
 description: "Change zone priorities and rebalance a multi-region Zeebe cluster to move Raft partition leadership between zones."
 ---
@@ -16,19 +16,21 @@ Use this procedure to:
 
 ## Align leadership with secondary storage
 
-Raft leadership placement is especially important when the Amazon Aurora secondary storage writer and Raft leaders are in different regions. Cross-region communication with the secondary storage writer adds network round-trip latency. After the secondary storage writer moves to another region, use this procedure to move Raft leadership to the same region when possible.
+Raft leadership placement is especially important when the RDBMS secondary storage writer (for example, Amazon Aurora) and Raft leaders are in different regions. Cross-region communication with the secondary storage writer adds network round-trip latency. After the RDBMS secondary storage writer moves to another region, use this procedure to move Raft leadership to the same region when possible.
 
-The placement of Elasticsearch or OpenSearch secondary storage has less impact on this decision. In a multi-region setup, records are exported to secondary storage in both regions concurrently, so exporting has less dependency on cross-region network round-trip latency. Consider the location of the Aurora secondary storage writer first when choosing the preferred leader zone.
+The placement of Elasticsearch or OpenSearch secondary storage has less impact on this decision. In a multi-region setup, records are exported to secondary storage in both regions concurrently, so exporting has less dependency on cross-region network round-trip latency. Consider the location of the RDBMS secondary storage writer first when choosing the preferred leader zone.
 
 ## Prerequisites
 
 Before moving leadership, confirm the following conditions:
 
-- The cluster is fully zone-aware.
+- The cluster is fully [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md).
 - All brokers and partitions are healthy.
 - The target zone's replicas are caught up with the current leaders.
 - You can access the Zeebe Gateway [Management API](management-api.md) on its management port. The default port is `9600`.
 - You have identified a low-load maintenance window. Rebalancing can cause temporary unavailability while partition leaders are re-elected.
+
+The management port is typically not publicly exposed. Its access and TLS configuration are separate from the v2 REST API. If the gateway isn't reachable from the machine where you run these commands, use a private connection such as `kubectl port-forward svc/camunda-zeebe-gateway 9600:9600`, then use `localhost` for `{zeebe-gateway}`. For Amazon ECS deployments, use AWS Systems Manager port forwarding through ECS Exec, an SSH tunnel through a bastion host, or another private network path to reach port `9600`. You can also execute the commands from a broker task or pod that can reach the gateway. The examples use `http://` for a management endpoint without TLS. If your management endpoint uses TLS, use `https://` and the appropriate `curl` TLS options.
 
 ## Check the current zone priorities
 
@@ -41,7 +43,7 @@ curl \
   | jq '.partitionDistribution.zones[] | {name, priority}'
 ```
 
-The command returns each configured zone's name and priority. If `jq` isn't installed, omit the pipe to `jq` and manually inspect `partitionDistribution.zones` in the JSON response. You can also inspect `brokers[].partitions[]` in the full response to see the priority assigned to each partition replica.
+The command returns each configured zone's name and priority. If `partitionDistribution.zones` is missing or empty, the cluster isn't zone-aware and can't use this procedure. If `jq` isn't installed, omit the pipe to `jq` and manually inspect `partitionDistribution.zones` in the JSON response. You can also inspect `brokers[].partitions[]` in the full response to see the priority assigned to each partition replica.
 
 A higher priority makes a replica the preferred leader during an election. The zone with the highest configured priority is therefore the preferred zone for Raft partition leaders. Recording the current order also ensures that you preserve the relative priorities of any zones you aren't swapping.
 
@@ -49,7 +51,7 @@ A higher priority makes a replica the preferred leader during an election. The z
 
 The [Partition distribution API](management-api.md#partition-distribution-api) accepts a `zonePriorities` list. The first zone in the list receives the highest existing priority, the second zone receives the next highest priority, and so on.
 
-The request must include every currently configured zone. To exchange the priorities of two zones, reverse their positions and leave the other zones in their current order.
+The request must list exactly the currently configured zones. If the list doesn't exactly match the currently configured zones, the request is rejected. The operation is idempotent. To exchange the priorities of two zones, reverse their positions and leave the other zones in their current order.
 
 For example, if `zone-a` currently has the highest priority and `zone-b` has the next highest priority, use the following request to make `zone-b` the preferred leader zone:
 
@@ -78,7 +80,11 @@ curl -X PUT \
 The priority change is asynchronous. Use the `changeId` from the response to poll that change every five seconds:
 
 ```bash
-watch -n 5 'curl -s http://{zeebe-gateway}:9600/actuator/cluster/changes/{changeId} | jq "{id, status, pending}"'
+while true; do
+  curl -s 'http://{zeebe-gateway}:9600/actuator/cluster/changes/{changeId}'
+  echo
+  sleep 5
+done
 ```
 
 Wait until `status` is `COMPLETED` before rebalancing. `GET /actuator/cluster` can also report a pending change for a cluster with only the default Physical Tenant, but use `GET /actuator/cluster/changes/{changeId}` for clusters with multiple Physical Tenants.
