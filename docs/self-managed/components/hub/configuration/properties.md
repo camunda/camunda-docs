@@ -64,11 +64,11 @@ server:
 </TabItem>
 <TabItem value="env"  label="Environment variables">
 
-| Environment variable         | Description                                                                                                                                                   | Example value                                            | Default value |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------- |
-| `RESTAPI_SERVER_URL`         | URL at which users access Camunda Hub in the browser (used to construct redirect URLs in the client-side login flow as well as links in notification emails). | `https://hub.example.com`,<br/>`https://example.com/hub` | -             |
-| `SERVER_SERVLET_CONTEXTPATH` | [optional]<br/>Context path of the URL. Must be set if `RESTAPI_SERVER_URL` does not point to the root path of a (sub-)domain.                                | `/hub`                                                   | -             |
-| `SERVER_HTTPS_ONLY`          | [optional]<br/>Enforce the usage of HTTPS when users access Camunda Hub (by redirecting from `http://` to `https://`).                                        | `true`                                                   | `true`        |
+| Environment variable           | Description                                                                                                                                                   | Example value                                            | Default value |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | ------------- |
+| `CAMUNDA_HUB_SERVER_URL`       | URL at which users access Camunda Hub in the browser (used to construct redirect URLs in the client-side login flow as well as links in notification emails). | `https://hub.example.com`,<br/>`https://example.com/hub` | -             |
+| `SERVER_SERVLET_CONTEXTPATH`   | [optional]<br/>Context path of the URL. Must be set if `CAMUNDA_HUB_SERVER_URL` does not point to the root path of a (sub-)domain.                            | `/hub`                                                   | -             |
+| `CAMUNDA_HUB_SERVER_HTTPSONLY` | [optional]<br/>Enforce the usage of HTTPS when users access Camunda Hub (by redirecting from `http://` to `https://`).                                        | `true`                                                   | `true`        |
 
 </TabItem>
 </Tabs>
@@ -115,16 +115,16 @@ Access to the cluster pages in Camunda Hub depends on the user's role: `Console`
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                            | Description                                                                                                         | Example value                                |
-| :---------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
-| `CAMUNDA_HUB_CLUSTERS_0_ID`                     | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
-| `CAMUNDA_HUB_CLUSTERS_0_NAME`                   | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
-| `CAMUNDA_HUB_CLUSTERS_0_VERSION`                | The cluster version.                                                                                                | `8.10.0`                                     |
-| `CAMUNDA_HUB_CLUSTERS_0_TAGS`                   | A list of tags.                                                                                                     | `['dev', 'test']`                            |
-| `CAMUNDA_HUB_CLUSTERS_0_AUTHENTICATION`         | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
-| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONS_ENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
-| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
-| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS`             | A list of components for the cluster.                                                                               | See [components](#components).               |
+| Environment variable                           | Description                                                                                                         | Example value                                |
+| :--------------------------------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------- |
+| `CAMUNDA_HUB_CLUSTERS_0_ID`                    | An identifier for the cluster.                                                                                      | `camunda-platform`                           |
+| `CAMUNDA_HUB_CLUSTERS_0_NAME`                  | A readable name for the cluster.                                                                                    | `Camunda Platform`                           |
+| `CAMUNDA_HUB_CLUSTERS_0_VERSION`               | The cluster version.                                                                                                | `8.10.0`                                     |
+| `CAMUNDA_HUB_CLUSTERS_0_TAGS`                  | A list of tags.                                                                                                     | `['dev', 'test']`                            |
+| `CAMUNDA_HUB_CLUSTERS_0_AUTHENTICATION`        | The [authentication method](#available-authentication-methods).                                                     | `BEARER_TOKEN`                               |
+| `CAMUNDA_HUB_CLUSTERS_0_AUTHORIZATIONSENABLED` | Enables or disables authorizations for the cluster. If enabled, users see a hint when they deploy from Camunda Hub. | `true`                                       |
+| `CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES`      | A list of custom properties.                                                                                        | See [custom properties](#custom-properties). |
+| `CAMUNDA_HUB_CLUSTERS_0_COMPONENTS`            | A list of components for the cluster.                                                                               | See [components](#components).               |
 
 </TabItem>
 </Tabs>
@@ -173,18 +173,18 @@ camunda:
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                                      | Description                           |
-| :-------------------------------------------------------- | :------------------------------------ |
-| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES_0_DESCRIPTION`  | A description of the custom property. |
-| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_NAME` | A name for the indexed link.          |
-| `CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_URL`  | The link's URL.                       |
+| Environment variable                                     | Description                           |
+| :------------------------------------------------------- | :------------------------------------ |
+| `CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_DESCRIPTION`  | A description of the custom property. |
+| `CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_LINKS_0_NAME` | A name for the indexed link.          |
+| `CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_LINKS_0_URL`  | The link's URL.                       |
 
 Example configuration:
 
 ```bash
-CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES_0_DESCRIPTION=This is the integration environment for the Camunda platform.
-CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_NAME=Camunda
-CAMUNDA_HUB_CLUSTERS_0_CUSTOM_PROPERTIES_0_LINKS_0_URL=https://camunda.com/
+CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_DESCRIPTION=This is the integration environment for the Camunda platform.
+CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_LINKS_0_NAME=Camunda
+CAMUNDA_HUB_CLUSTERS_0_CUSTOMPROPERTIES_0_LINKS_0_URL=https://camunda.com/
 ```
 
 </TabItem>
@@ -358,15 +358,15 @@ spring:
 </TabItem>
 <TabItem value="env"  label="Environment variables">
 
-| Environment variable        | Description                                                                | Example value         | Default value |
-| --------------------------- | -------------------------------------------------------------------------- | --------------------- | ------------- |
-| `RESTAPI_MAIL_HOST`         | SMTP server host name                                                      | `smtp.example.com`    | -             |
-| `RESTAPI_MAIL_PORT`         | SMTP server port                                                           | `587`                 | -             |
-| `RESTAPI_MAIL_USER`         | [optional]<br/>SMTP user name                                              | `hub-user`            | -             |
-| `RESTAPI_MAIL_PASSWORD`     | [optional]<br/>SMTP user password                                          | \*\*\*                | -             |
-| `RESTAPI_MAIL_ENABLE_TLS`   | Enforce TLS encryption for SMTP connections (using STARTTLS).              | `true`                | `true`        |
-| `RESTAPI_MAIL_FROM_ADDRESS` | Email address used as the sender of emails sent by Camunda Hub.            | `noreply@example.com` | -             |
-| `RESTAPI_MAIL_FROM_NAME`    | [optional]<br/>Name displayed as the sender of emails sent by Camunda Hub. | `Camunda`             | `Camunda`     |
+| Environment variable                               | Description                                                                | Example value         | Default value |
+| -------------------------------------------------- | -------------------------------------------------------------------------- | --------------------- | ------------- |
+| `SPRING_MAIL_HOST`                                 | SMTP server host name                                                      | `smtp.example.com`    | -             |
+| `SPRING_MAIL_PORT`                                 | SMTP server port                                                           | `587`                 | -             |
+| `SPRING_MAIL_USERNAME`                             | [optional]<br/>SMTP user name                                              | `hub-user`            | -             |
+| `SPRING_MAIL_PASSWORD`                             | [optional]<br/>SMTP user password                                          | \*\*\*                | -             |
+| `SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE` | Enforce TLS encryption for SMTP connections (using STARTTLS).              | `true`                | `true`        |
+| `CAMUNDA_HUB_MAIL_FROMADDRESS`                     | Email address used as the sender of emails sent by Camunda Hub.            | `noreply@example.com` | -             |
+| `CAMUNDA_HUB_MAIL_FROMNAME`                        | [optional]<br/>Name displayed as the sender of emails sent by Camunda Hub. | `Camunda`             | `Camunda`     |
 
 </TabItem>
 </Tabs>
@@ -397,17 +397,17 @@ camunda.hub:
 </TabItem>
 <TabItem value="env"  label="Environment variables">
 
-| Environment variable      | Description                                                                                                                                   | Example value    | Default value |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------- |
-| `RESTAPI_PUSHER_HOST`     | [Internal](#notes-on-host-names-and-port-numbers) host name of the WebSocket server.                                                          | `hub-websockets` | -             |
-| `RESTAPI_PUSHER_PORT`     | [Internal](#notes-on-host-names-and-port-numbers) port number of the WebSocket server.                                                        | `8060`           | `8060`        |
-| `RESTAPI_PUSHER_APP_ID`   | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websocket-component)                                                            | `hub`            | -             |
-| `RESTAPI_PUSHER_KEY`      | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*           | -             |
-| `RESTAPI_PUSHER_SECRET`   | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component)                                                        | \*\*\*           | -             |
-| `CLIENT_PUSHER_HOST`      | [External](#notes-on-host-names-and-port-numbers) host name on which the Camunda Hub client accesses the WebSocket server from the browser.   | `ws.example.com` | -             |
-| `CLIENT_PUSHER_PORT`      | [External](#notes-on-host-names-and-port-numbers) port number on which the Camunda Hub client accesses the WebSocket server from the browser. | `443`            | `80`          |
-| `CLIENT_PUSHER_PATH`      | [optional]<br/>_must be the same as_ [`PUSHER_APP_PATH`](#configuration-of-the-websocket-component)                                           | `hub-ws`         | `/`           |
-| `CLIENT_PUSHER_FORCE_TLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`           | `false`       |
+| Environment variable                 | Description                                                                                                                                   | Example value    | Default value |
+| ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------------- |
+| `CAMUNDA_HUB_PUSHER_HOST`            | [Internal](#notes-on-host-names-and-port-numbers) host name of the WebSocket server.                                                          | `hub-websockets` | -             |
+| `CAMUNDA_HUB_PUSHER_PORT`            | [Internal](#notes-on-host-names-and-port-numbers) port number of the WebSocket server.                                                        | `8060`           | `8060`        |
+| `CAMUNDA_HUB_PUSHER_APPID`           | _must be the same as_ [`PUSHER_APP_ID`](#configuration-of-the-websocket-component)                                                            | `hub`            | -             |
+| `CAMUNDA_HUB_PUSHER_KEY`             | _must be the same as_ [`PUSHER_APP_KEY`](#configuration-of-the-websocket-component)                                                           | \*\*\*           | -             |
+| `CAMUNDA_HUB_PUSHER_SECRET`          | _must be the same as_ [`PUSHER_APP_SECRET`](#configuration-of-the-websocket-component)                                                        | \*\*\*           | -             |
+| `CAMUNDA_HUB_PUSHER_CLIENT_HOST`     | [External](#notes-on-host-names-and-port-numbers) host name on which the Camunda Hub client accesses the WebSocket server from the browser.   | `ws.example.com` | -             |
+| `CAMUNDA_HUB_PUSHER_CLIENT_PORT`     | [External](#notes-on-host-names-and-port-numbers) port number on which the Camunda Hub client accesses the WebSocket server from the browser. | `443`            | `80`          |
+| `CAMUNDA_HUB_PUSHER_CLIENT_PATH`     | [optional]<br/>_must be the same as_ [`PUSHER_APP_PATH`](#configuration-of-the-websocket-component)                                           | `hub-ws`         | `/`           |
+| `CAMUNDA_HUB_PUSHER_CLIENT_FORCETLS` | Enable TLS encryption for WebSocket connections initiated by the browser.                                                                     | `true`           | `false`       |
 
 </TabItem>
 </Tabs>
@@ -430,12 +430,11 @@ camunda:
   identity:
     base-url: http://identity:8080
     issuer-backend-url: http://keycloak:18080/auth/realms/camunda-platform # optional
+    username-claim: name # optional, default: name
 
   hub:
     security:
       jwt:
-        issuer:
-          backend-url: http://keycloak:18080/auth/realms/camunda-platform # optional
         audience:
           internal-api: web-modeler-api # default: web-modeler-api
           public-api: web-modeler-public-api # default: web-modeler-public-api
@@ -444,7 +443,6 @@ camunda:
       client:
         fetch-request-credentials: include # optional
         scope: openid email profile # optional
-      token.username-claim: name # optional, default: name
 
 spring:
   security:
@@ -463,24 +461,24 @@ spring:
 | Environment variable                                       | Description                                                                                                                                                                                                                                                                             | Example value                                                                             | Default value            |
 | ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------ |
 | `CAMUNDA_IDENTITY_BASEURL`                                 | [Internal](#notes-on-host-names-and-port-numbers) base URL of the Identity API (used to fetch user data).                                                                                                                                                                               | `http://identity:8080`                                                                    | -                        |
-| `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM`                   | ID token claim used to assign usernames.                                                                                                                                                                                                                                                | `preferred_username`                                                                      | `name`                   |
-| `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_INTERNAL_API`           | Expected value of the audience claim in user access tokens (used for JWT validation).                                                                                                                                                                                                   | `web-modeler-api`                                                                         | `web-modeler-api`        |
-| `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_PUBLIC_API`             | Expected value of the audience claim in M2M access tokens required for [Camunda Hub's API](/apis-tools/hub-api-sm/authentication.md) (used for JWT validation).                                                                                                                         | `web-modeler-public-api`                                                                  | `web-modeler-public-api` |
-| `RESTAPI_OAUTH2_TOKEN_ISSUER_BACKEND_URL`                  | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:18080/auth/realms/camunda-platform`                                      | -                        |
+| `CAMUNDA_IDENTITY_USERNAMECLAIM`                           | ID token claim used to assign usernames.                                                                                                                                                                                                                                                | `preferred_username`                                                                      | `name`                   |
+| `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_INTERNALAPI`            | Expected value of the audience claim in user access tokens (used for JWT validation).                                                                                                                                                                                                   | `web-modeler-api`                                                                         | `web-modeler-api`        |
+| `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_PUBLICAPI`              | Expected value of the audience claim in M2M access tokens required for [Camunda Hub's API](/apis-tools/hub-api-sm/authentication.md) (used for JWT validation).                                                                                                                         | `web-modeler-public-api`                                                                  | `web-modeler-public-api` |
+| `CAMUNDA_IDENTITY_ISSUERBACKENDURL`                        | [optional]<br/>[Internal](#notes-on-host-names-and-port-numbers) URL used to request Keycloak's [OpenID Provider Configuration](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig); if not set, `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` is used. | `http://keycloak:18080/auth/realms/camunda-platform`                                      | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI`     | URL of the token issuer (used for JWT validation).                                                                                                                                                                                                                                      | `https://keycloak.example.com/auth/realms/camunda-platform`                               | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK_SET_URI`    | [optional] URL of the JWK Set endpoint (used for JWT validation). Only necessary if URL cannot be derived from the OIDC configuration endpoint.                                                                                                                                         | `https://keycloak.example.com/auth/realms/camunda-platform/protocol/openid-connect/certs` | -                        |
 | `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWS_ALGORITHMS` | [optional] List of trusted JWS algorithms used for JWT validation. Only necessary if the algorithms cannot be derived from the JWK Set response.                                                                                                                                        | `ES256`                                                                                   | -                        |
-| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_AUDIENCES`      | [optional]<br/>Comma-separated list of accepted audience claim values, validated in addition to `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_INTERNAL_API` and `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_PUBLIC_API`.                                                                                    | `web-modeler-api`                                                                         | -                        |
-| `OAUTH2_CLIENT_ID`                                         | Client ID of the Camunda Hub application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
-| `OAUTH2_CLIENT_SCOPE`                                      | [optional]<br/>OIDC scopes requested during authentication, determining what user information is included in the token.                                                                                                                                                                 | `full`                                                                                    | `openid email profile`   |
-| `OAUTH2_CLIENT_FETCH_REQUEST_CREDENTIALS`                  | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies.                     | `include`                                                                                 | -                        |
+| `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_AUDIENCES`      | [optional]<br/>Comma-separated list of accepted audience claim values, validated in addition to `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_INTERNALAPI` and `CAMUNDA_HUB_SECURITY_JWT_AUDIENCE_PUBLICAPI`.                                                                                      | `web-modeler-api`                                                                         | -                        |
+| `CAMUNDA_HUB_OAUTH2_CLIENTID`                              | Client ID of the Camunda Hub application configured in Identity.                                                                                                                                                                                                                        | `web-modeler`                                                                             | -                        |
+| `CAMUNDA_HUB_OAUTH2_CLIENT_SCOPE`                          | [optional]<br/>OIDC scopes requested during authentication, determining what user information is included in the token.                                                                                                                                                                 | `full`                                                                                    | `openid email profile`   |
+| `CAMUNDA_HUB_OAUTH2_CLIENT_FETCHREQUESTCREDENTIALS`        | [optional]<br/>Configuration whether credentials should be sent along with requests to the OIDC provider, see [documentation](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials#value). Use this if you are using a proxy that requires cookies.                     | `include`                                                                                 | -                        |
 
 </TabItem>
 </Tabs>
 
 :::note Helm behavior
-The `restapi` component default for `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM` is `name`.
-In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_HUB_OAUTH2_TOKEN_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
+The `restapi` component default for `CAMUNDA_IDENTITY_USERNAMECLAIM` is `name`.
+In Helm-based setups, OIDC configuration commonly uses `preferred_username`, so usernames may appear as email-style identifiers unless you explicitly set `CAMUNDA_IDENTITY_USERNAMECLAIM=name` for the Camunda Hub `restapi` environment.
 :::
 
 Refer to the [authentication guide](./identity.md) for additional details on how Camunda Hub authenticates users, and on how to connect a custom OpenID Connect (OIDC) authentication provider.
@@ -541,7 +539,7 @@ logging:
 | `CAMUNDA_HUB_LOG_LEVEL`             | [optional]<br/>Defines the log level for the Camunda Hub components. | `DEBUG`                                       | `INFO`        |
 | `CAMUNDA_LOG_FILE_APPENDER_ENABLED` | [optional]<br/>To enable logging to a file.                          | `true`                                        | `false`       |
 | `CAMUNDA_HUB_LOG_APPENDER`          | [optional]<br/>Defines which appender to use for logging.            | `Stackdriver`                                 | `Console`     |
-| `LOG_LEVEL_CLIENT`                  | [optional]<br/>Log level for the client.                             | `DEBUG`                                       | `WARN`        |
+| `CAMUNDA_HUB_CLIENT_LOGGING_LEVEL`  | [optional]<br/>Log level for the client.                             | `DEBUG`                                       | `WARN`        |
 
 </TabItem>
 </Tabs>
@@ -589,7 +587,7 @@ camunda.hub:
 | `MANAGEMENT_SERVER_SSL_ENABLED`                 | [optional]<br/>Whether to enable SSL support for the management server routes.       | `true`                               | `false`       |
 | `MANAGEMENT_SERVER_SSL_CERTIFICATE`             | [optional]<br/>Path to a PEM-encoded SSL certificate file.                           | `file:/full/path/to/certificate.pem` | -             |
 | `MANAGEMENT_SERVER_SSL_CERTIFICATE_PRIVATE_KEY` | [optional]<br/>Path to a PEM-encoded private key file for the SSL certificate.       | `file:/full/path/to/key.pem`         | -             |
-| `RESTAPI_PUSHER_SSL_ENABLED`                    | [optional]<br/>Whether to enable communication via SSL to the `websocket` component. | `true`                               | `false`       |
+| `CAMUNDA_HUB_PUSHER_SSLENABLED`                 | [optional]<br/>Whether to enable communication via SSL to the `websocket` component. | `true`                               | `false`       |
 
 </TabItem>
 </Tabs>
@@ -716,17 +714,17 @@ camunda.hub:
 </TabItem>
 <TabItem value="env"  label="Environment variables">
 
-| Provider      | Environment variable                            | Description                                                                                                                   | Default value                                 |
-| ------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| All providers | `CAMUNDA_HUB_GITSYNC_MAX_FILES`                 | Maximum number of allowed files for sync operations.                                                                          | `100`                                         |
-| All providers | `CAMUNDA_HUB_GITSYNC_MAX_IN_MEMORY_SIZE`        | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
-| GitHub        | `CAMUNDA_HUB_GITSYNC_GITHUB_BASE_URL`           | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
-| GitLab        | `CAMUNDA_HUB_GITSYNC_GITLAB_BASE_URL`           | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |
-| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_BASE_URL`            | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                       |
-| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_API_VERSION`         | The Azure DevOps API versions to use.                                                                                         | `7.1`                                         |
-| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_AUTHORITY_BASE_PATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`           |
-| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_SCOPE`               | OAuth scope requested for Azure DevOps authentication.                                                                        | `https://app.vssps.visualstudio.com/.default` |
-| Bitbucket     | `CAMUNDA_HUB_GITSYNC_BITBUCKET_BASE_URL`        | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`  |
+| Provider      | Environment variable                          | Description                                                                                                                   | Default value                                 |
+| ------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| All providers | `CAMUNDA_HUB_GITSYNC_MAXFILES`                | Maximum number of allowed files for sync operations.                                                                          | `100`                                         |
+| All providers | `CAMUNDA_HUB_GITSYNC_MAXINMEMORYSIZE`         | Maximum memory size that can be processed by calls to the Git provider. This limits the maximum file size that can be synced. | `4MB`                                         |
+| GitHub        | `CAMUNDA_HUB_GITSYNC_GITHUB_BASEURL`          | The base URL of your self-hosted GitHub instance.                                                                             | `https://api.github.com`                      |
+| GitLab        | `CAMUNDA_HUB_GITSYNC_GITLAB_BASEURL`          | The base URL of your self-hosted GitLab instance.                                                                             | `https://gitlab.com/api/v4`                   |
+| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_BASEURL`           | The base URL of your self-hosted Azure DevOps Server instance.                                                                | `https://dev.azure.com`                       |
+| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_APIVERSION`        | The Azure DevOps API versions to use.                                                                                         | `7.1`                                         |
+| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_AUTHORITYBASEPATH` | URL used to access authentication and authorization services for Microsoft cloud identities.                                  | `https://login.microsoftonline.com`           |
+| Azure DevOps  | `CAMUNDA_HUB_GITSYNC_AZURE_SCOPE`             | OAuth scope requested for Azure DevOps authentication.                                                                        | `https://app.vssps.visualstudio.com/.default` |
+| Bitbucket     | `CAMUNDA_HUB_GITSYNC_BITBUCKET_BASEURL`       | The base URL of Bitbucket Cloud.                                                                                              | `https://api.bitbucket.org/2.0/repositories`  |
 
 </TabItem>
 </Tabs>
@@ -738,12 +736,12 @@ camunda.hub:
 
 | Property                                                 | Description                                                                                                                                                                                                                                                                                          | Example value | Default value |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `camunda.hub.feature.play-enabled`                       | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `true`        | `true`        |
+| `camunda.hub.feature.test-mode-enabled`                  | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                                           | `true`        | `true`        |
 | `camunda.hub.feature.bpmn-deployment-enabled`            | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                                     | `false`       | `true`        |
 | `camunda.hub.feature.dmn-deployment-enabled`             | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                                             | `false`       | `true`        |
 | `camunda.hub.feature.dynamic-cluster-management-enabled` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                                        | `true`        | `false`       |
 | `camunda.hub.feature.ui-user-invite-enabled`             | [optional]<br/>Enables the **Add members** button on the workspace **Members** page for users who aren't **Organization admins**. **Organization admins** always see the button, regardless of this setting. Adding members through the [Hub API](/apis-tools/hub-api-sm/overview.md) is unaffected. | `false`       | `true`        |
-| `camunda.marketplace.enabled`                            | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.               | `false`       | `true`        |
+| `camunda.hub.feature.marketplace-enabled`                | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub.               | `false`       | `true`        |
 
 Example configuration:
 
@@ -755,22 +753,20 @@ camunda:
     dmn-deployment-enabled: true
     dynamic-cluster-management-enabled: false
     ui-user-invite-enabled: true
-
-  marketplace:
-    enabled: true
+    marketplace-enabled: true
 ```
 
 </TabItem>
 <TabItem value="env" label="Environment variables">
 
-| Environment variable                         | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
-| -------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `TEST_MODE_ENABLED`                          | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
-| `ZEEBE_BPMN_DEPLOYMENT_ENABLED`              | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
-| `ZEEBE_DMN_DEPLOYMENT_ENABLED`               | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
-| `DYNAMIC_CLUSTER_MANAGEMENT_ENABLED`         | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
-| `CAMUNDA_HUB_FEATURE_UI_USER_INVITE_ENABLED` | [optional]<br/>[Enables the button](#hide-add-members-button) for inviting members to a workspace.                                                                                                                                                                                     | `false`       | `true`        |
-| `MARKETPLACE_ENABLED`                        | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
+| Environment variable                                  | Description                                                                                                                                                                                                                                                                            | Example value | Default value |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `CAMUNDA_HUB_FEATURE_TESTMODEENABLED`                 | [optional]<br/>Enables the [**Test** mode](../../../../components/hub/workspace/modeler/validation/test-your-process.md) in the BPMN editor, allowing users to test processes in a playground environment.                                                                             | `true`        | `true`        |
+| `CAMUNDA_HUB_FEATURE_BPMNDEPLOYMENTENABLED`           | [optional]<br/>Enables the [**Deploy** and **Run**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) actions in the BPMN editor.<br/>When disabled, it prevents users from deploying and starting instances of processes via the UI.                       | `false`       | `true`        |
+| `CAMUNDA_HUB_FEATURE_DMNDEPLOYMENTENABLED`            | [optional]<br/>Enables the [**Deploy**](../../../../components/hub/workspace/modeler/run-or-publish-your-process.md) action in the DMN editor.<br/>When disabled, it prevents users from deploying decisions via the UI.                                                               | `false`       | `true`        |
+| `CAMUNDA_HUB_FEATURE_DYNAMICCLUSTERMANAGEMENTENABLED` | [optional]<br/>Enables or disables [dynamic cluster management](#dynamic-cluster-management).                                                                                                                                                                                          | `true`        | `false`       |
+| `CAMUNDA_HUB_FEATURE_UIUSERINVITEENABLED`             | [optional]<br/>[Enables the button](#hide-add-members-button) for inviting members to a workspace.                                                                                                                                                                                     | `false`       | `true`        |
+| `CAMUNDA_HUB_FEATURE_MARKETPLACEENABLED`              | [optional]<br/>Enables the integration of the [Camunda Marketplace](https://marketplace.camunda.com). If enabled, users can browse the Marketplace and download [resources](../../../../components/hub/workspace/modeler/modeling/camunda-marketplace.md) directly inside Camunda Hub. | `false`       | `true`        |
 
 </TabItem>
 </Tabs>
@@ -816,7 +812,7 @@ camunda:
 <TabItem value="env" label="Environment variables">
 
 ```shell
-CAMUNDA_HUB_FEATURE_UI_USER_INVITE_ENABLED=false
+CAMUNDA_HUB_FEATURE_UIUSERINVITEENABLED=false
 ```
 
 </TabItem>
@@ -838,9 +834,9 @@ camunda.hub.resource-import.allow-private-ip-address: true # default: false; ena
 </TabItem>
 <TabItem value="env"  label="Environment variables">
 
-| Environment variable                                   | Description                                                                                                                                                                                                | Example value | Default value |
-| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
-| `CAMUNDA_HUB_RESOURCE_IMPORT_ALLOW_PRIVATE_IP_ADDRESS` | Allow importing resources from a host that resolves to a private IP address. Enabling this option weakens server-side request forgery (SSRF) protections and can significantly increase security exposure. | `true`        | `false`       |
+| Environment variable                               | Description                                                                                                                                                                                                | Example value | Default value |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `CAMUNDA_HUB_RESOURCEIMPORT_ALLOWPRIVATEIPADDRESS` | Allow importing resources from a host that resolves to a private IP address. Enabling this option weakens server-side request forgery (SSRF) protections and can significantly increase security exposure. | `true`        | `false`       |
 
 </TabItem>
 </Tabs>
