@@ -97,7 +97,7 @@ By the end of this tutorial, you'll have:
 - Camunda 8 Self-Managed fully deployed and accessible, connected to the operator-managed services.
 
 :::info Other installation profiles
-With this guide, you deploy the full Camunda 8 platform with all components. For lighter setups or specific use cases, see the [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md), which covers different installation profiles, such as core only, with Connectors, and with Web Modeler.
+With this guide, you deploy the full Camunda 8 platform with all components. For lighter setups or specific use cases, see the [Helm installation guide](/self-managed/deployment/helm/install/quick-install.md), which covers different installation profiles, such as core only, with Connectors, and with Camunda Hub.
 :::
 
 ## Download the reference architecture
@@ -319,7 +319,7 @@ The deployment script layers the following shared operator values before the kin
 - [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
 - [`camunda-keycloak-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-domain-values.yml): Connects Camunda to the operator-managed Keycloak (domain mode).
 - [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Camunda Hub to use the CloudNativePG PostgreSQL.
 
 </details>
 
@@ -413,7 +413,7 @@ The deployment script layers the following shared operator values before the kin
 - [`camunda-rdbms-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-rdbms-values.yml): Configures PostgreSQL RDBMS as secondary storage and disables Elasticsearch and Optimize (PostgreSQL secondary storage only).
 - [`camunda-keycloak-no-domain-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/keycloak/camunda-keycloak-no-domain-values.yml): Connects Camunda to the operator-managed Keycloak (no-domain mode).
 - [`camunda-identity-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-identity-values.yml): Configures Identity to use the CloudNativePG PostgreSQL.
-- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Web Modeler to use the CloudNativePG PostgreSQL.
+- [`camunda-webmodeler-values.yml`](https://github.com/camunda/camunda-deployment-references/blob/main/generic/kubernetes/operator-based/postgresql/camunda-webmodeler-values.yml): Configures Camunda Hub to use the CloudNativePG PostgreSQL.
 
 </details>
 
