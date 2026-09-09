@@ -73,10 +73,10 @@ Losing one zone out of three or more removes one replica of every partition. The
 Confirm this rather than assuming it, especially if more than one zone is affected:
 
 ```bash
-./failover.sh <lost-region-slot>
+./failover.sh <lost-region-slot> --dry-run
 ```
 
-The script reports the quorum state, prints the current cluster view, and warns if the surviving zones no longer hold a majority.
+With `--dry-run`, the script reports the quorum state, prints the current cluster view, and warns if the surviving zones no longer hold a majority. It changes nothing, so you can read the verdict before deciding to act.
 
 ### 2. Promote the database writer if needed
 
@@ -87,6 +87,8 @@ If the writer was in the lost region, promote a surviving member. The mode depen
 <TabItem value="planned">
 
 The region is still reachable, for example during a scheduled evacuation. A switchover completes replication before promoting, so **no data is lost**.
+
+Run the same script as in step 1, without `--dry-run`. It repeats the quorum report, then promotes a surviving member if the writer was in the lost region:
 
 ```bash
 ./failover.sh <lost-region-slot>
