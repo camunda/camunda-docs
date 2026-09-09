@@ -1034,17 +1034,17 @@ See [Microsoft AKS](/self-managed/deployment/helm/cloud-providers/azure/microsof
 
 #### Process definition draining deletion requires an 8.9.19+ upgrade target {#draining-deletion-upgrade-constraint}
 
-Before 8.8.38, deleting a process definition that still had running instances stalled the cluster-wide deployment
-distribution queue: no further process deployments or deletions were distributed until those instances finished. From
-8.8.38, the definition instead drains asynchronously — it is marked for deletion immediately and removed once its
-instances finish — so deployments are no longer held up. This draining introduces new records that older 8.9 patches
-cannot replay.
+Before 8.8.38, deleting a process definition that still had running instances stalled the cluster-wide deployment distribution queue. No further process deployments or deletions were distributed until those instances finished running.
+
+From 8.8.38, the definition drains asynchronously so deployments are no longer held up, as it is marked for deletion immediately and removed once its
+instances finish. As a result, this draining introduces new records that older 8.9 patches cannot replay.
 
 **Safe upgrade targets:** 8.9.19 or later.
 
-This constraint primarily affects Self-Managed operators, who choose their own target patch. Camunda 8 SaaS is not affected, because its upgrade path is gated to safe targets.
+- This constraint primarily affects Self-Managed operators, who choose their own target patch.
+- Camunda 8 SaaS is not affected as its upgrade path is gated to safe targets.
 
-**Action:** When upgrading a Self-Managed cluster from 8.8 to 8.9, target **8.9.19 or later**. See the [Self-Managed upgrade guide](/self-managed/upgrade/index.md).
+**Action:** When upgrading a Self-Managed cluster from 8.8 to 8.9, you must target **8.9.19 or later**. See the [Self-Managed upgrade guide](/self-managed/upgrade/index.md).
 
 </div>
 </div>
