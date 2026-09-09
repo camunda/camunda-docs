@@ -778,10 +778,10 @@ module.exports = {
                 "components/hub/organization/manage-organization-settings/view-organization-activity",
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
                 "components/hub/organization/manage-organization-settings/usage-history",
-                "components/hub/organization/manage-organization-settings/usage-alerts",
-                "components/hub/organization/manage-organization-settings/advanced-search",
+                // "components/hub/organization/manage-organization-settings/usage-alerts",
+                // "components/hub/organization/manage-organization-settings/advanced-search",
                 "components/hub/organization/manage-organization-settings/switch-organization",
-                "components/hub/organization/manage-organization-settings/delete-account",
+                // "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
                     "components/hub/organization/manage-organization-settings/manage-plan/create-account",
