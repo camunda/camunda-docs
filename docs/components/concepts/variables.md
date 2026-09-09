@@ -212,12 +212,14 @@ An input mapping's `source` can reference a secret directly, without first stori
 
 This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
 
+Using secret references requires a configured [secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) that holds the secret. Without a configured store, the reference cannot be resolved.
+
 | Process variables | Input mappings                                                                       | New variables                                                    |
 | ----------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
 | -                 | **source:** `=camunda.secrets.API_TOKEN`<br/>**target:** `token`                     | `token` holds the secret's value when the job reaches the worker |
 | -                 | **source:** `="Bearer " + camunda.secrets.API_TOKEN`<br/>**target:** `authorization` | `authorization` holds `"Bearer "` followed by the secret's value |
 
-Secret references are only resolved in input mappings defined on elements that create a job for a job worker (for example, service tasks, business rule tasks, and ad hoc sub-processes). See [secret resolution and job activation](secret-resolution-and-job-activation.md) for how a reference is resolved and what the worker receives once the job is handed out; until then, the variable holds the placeholder text `camunda.secrets.<name>`.
+Secret references are only resolved in input mappings defined on elements that create a job for a job worker (for example, service tasks, business rule tasks, and ad hoc sub-processes). See [secret resolution and job activation](secret-resolution-and-job-activation.md) for how a reference is resolved and what the worker receives once the job is handed out. The stored process variable always holds the placeholder text `camunda.secrets.<name>`; resolution replaces it only in the payload handed to the worker, not in the variable kept in the process instance's state. Any other consumer of that variable sees the placeholder.
 
 A reference must be an expression, and the reference itself must be exactly the three-segment path `camunda.secrets.<name>`. It can still take part in a supported expression, such as the concatenation shown above, but the following rejections apply:
 
@@ -249,6 +251,14 @@ Give each secret its own input mapping. A later mapping that reads the _variable
 | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | **source:** `=camunda.secrets.API_TOKEN`<br/>**target:** `x`<br/>**source:** `=x`<br/>**target:** `y` | `x` exposes the resolved secret value to the worker; `y` holds the literal placeholder text, not the secret value |
 
+:::note
+A secret reference can also come from a [cluster variable](/components/modeler/feel/cluster-variable/data-types.md) of kind `SECRET_REFERENCE`. An input mapping that selects such a variable, for example `=camunda.vars.env.MY_CONFIG`, resolves the `camunda.secrets.<name>` references embedded in its value the same way. See [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable).
+:::
+
+:::note
+Avoid using `camunda` as a process variable name. A process variable literally named `camunda` takes precedence over the secret namespace, so `camunda.secrets.<name>` resolves against that variable and no secret is injected.
+:::
+
 #### Escape secret names with special characters
 
 A secret name containing a character FEEL doesn't allow in a bare identifier (most commonly a dash) must be backtick-escaped, the same way any other FEEL name with special characters is:
@@ -257,10 +267,10 @@ A secret name containing a character FEEL doesn't allow in a bare identifier (mo
 =camunda.secrets.`db-password`
 ```
 
-Without the backticks, `camunda.secrets.db-password` parses as subtraction (`db` minus `password`), not as a reference.
+Without the backticks, `camunda.secrets.db-password` parses as a subtraction (`db` minus `password`). FEEL reads the left operand as a reference named `db`, which is not a valid secret reference, so the deployment fails at evaluation.
 
 :::note
-Backtick escaping accepts any name, including a name your secret store accepts but the [`/v2/secrets`](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx) endpoints do not. Those endpoints list and resolve only names matching `[\p{Alnum}_-]+`. A name outside that set, such as `tls.crt`, can be backtick-escaped and resolved from a process model (``=camunda.secrets.`tls.crt` ``) if your secret store holds it under that name, but the same secret cannot be listed or resolved through `/v2/secrets`.
+When a reference is written directly in an input mapping source, backtick escaping accepts any name, including a name your secret store accepts but the [`/v2/secrets`](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx) endpoints do not. Those endpoints list and resolve only names matching `[\p{Alnum}_-]+`. A name outside that set, such as `tls.crt`, can be backtick-escaped and resolved from a process model (``=camunda.secrets.`tls.crt` ``) if your secret store holds it under that name, but the same secret cannot be listed or resolved through `/v2/secrets`. This applies to references written directly in an input mapping source, not to references embedded in a [`SECRET_REFERENCE`-kind cluster variable value](/components/modeler/feel/cluster-variable/data-types.md#where-references-can-appear-in-a-value), whose names follow the restricted cluster-variable character set.
 :::
 
 ### Output mappings

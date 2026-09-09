@@ -61,10 +61,11 @@ Using this in other areas can lead to unexpected results and incidents.
 
 You can also reference a secret from a [secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) directly in a connector's input mapping, using `camunda.secrets.<name>` in a FEEL expression. This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
 
-The two forms coexist and are handled differently:
+These forms coexist and are handled differently:
 
 - `{{secrets.*}}` remains fully supported for existing process models. It's still resolved by the connector runtime itself, at execution time, exactly as described above; the runtime keeps receiving it as plain placeholder text in the job's input.
 - `camunda.secrets.<name>` is resolved before the job reaches any worker, including a connector runtime. The connector receives the value already in place, the same way whether the connector runtime is co-located with the cluster or run separately (for example, a self-managed runtime connecting to a SaaS cluster).
+- A [cluster variable](/components/modeler/feel/cluster-variable/data-types.md) of kind `SECRET_REFERENCE` can hold `camunda.secrets.<name>` references in its value. A connector field that reads such a variable, for example `=camunda.vars.env.MY_CONFIG`, receives the resolved value the same way, because the references are recorded on the job and resolved before activation. See [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable).
 
 `{{secrets.*}}` values are not scoped per [physical tenant](/self-managed/concepts/physical-tenants/connectors-runtime.md#per-tenant-secret-access) unless you opt in to `physicaltenantaware` in the connector runtime's own configuration. Physical tenant scoping of `camunda.secrets.<name>` is separate from that setting: each physical tenant resolves its own configured secret store.
 
