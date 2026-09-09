@@ -5,31 +5,30 @@ description: "Create a reusable credential in Camunda Hub, then select it wherev
 keywords: [credential, credentials, authentication, reusable, connection]
 ---
 
-A credential stores authentication and connection settings you create once and reuse, instead of entering the same values every time an element template asks for them.
+A credential is reusable configuration for a job worker, connector, or other element template, so you don't repeat the same authentication and connection settings on every task.
 
 ## About credentials
 
-Credentials are Hub infrastructure, not a connector-only feature. Any element template can declare a field that uses one, by using the `Configuration` element template property type. Connectors are the main consumer today, so this page and the credential types below are described in connector terms, but the same mechanism is available to any element template author. Element template authors can read how to declare this property type in [element template properties](/components/modeler/element-templates/template-properties.md).
+- A credential lets you define and manage reusable configuration for job workers, connectors, and other element templates, instead of entering the same settings every time one asks for them.
+- Credentials are generally usable infrastructure, available in any Camunda 8 distribution, including standalone ones that run without Hub. Camunda Hub adds an organization-wide, federated view and central management across your clusters, which is what the rest of this page covers.
+- A credential type is defined alongside an element template, through an embedded [configuration template](/components/modeler/element-templates/template-metadata.md#embedding-configurations-configurationtemplates). If you build custom connectors or job workers and want to define your own credential type, see [Create a credential template](/components/connectors/custom-built-connectors/credential-templates.md).
+- A credential is stored as a cluster variable, which makes it available by name to any job worker or connector that references it.
 
-Without credentials, you configure a connector's authentication and connection settings directly on each connector task. If ten tasks call the same REST API, you configure the same authentication ten times, and you update all ten when something changes.
+A credential is selected as a whole: an element template never renders or edits a credential's fields. It writes a reference to the chosen credential into the diagram, and the engine resolves that reference at runtime, passing the credential's values, including any secrets, to the job worker or connector.
 
-A credential moves those settings out of the diagram:
+Learn more:
 
-1. You create a credential once, choosing a credential type such as **AWS Credential** or **REST Authentication**.
-2. You select that credential on a connector task in the properties panel.
-3. At runtime, the credential is passed to the connector as a whole, and the connector reads the fields it needs from it.
-
-Only a reference to the credential is stored in your BPMN diagram. The credential's values stay on the cluster, and sensitive fields hold references to [secrets](/components/hub/organization/manage-clusters/manage-secrets.md) rather than the secret values themselves.
-
-You manage credentials centrally on the Camunda Hub **Credentials** page, and you select or create them in the [modeling interface](./modeling-interface.md) while configuring a task.
+- [Using credentials](/components/connectors/use-connectors/index.md#using-credentials): how a connector task uses a credential.
+- [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type): how an element template declares the `Configuration` property that renders the credential picker.
+- [Configure credentials in the modeling interface](./modeling-interface.md): how to choose, create, edit, or upgrade a credential from the properties panel.
 
 ## Terminology
 
-| Term            | Meaning                                                                                                                                                                                                                             |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Credential      | The reusable object you create and then select on an element template field, such as a connector task.                                                                                                                              |
-| Credential type | The shape of a credential, such as **AWS Credential**, **REST Authentication**, or **JDBC Connection**. A credential type defines which fields a credential of that type has.                                                       |
-| Configuration   | The element template property type that renders the credential picker. A credential is a configuration whose kind is `CREDENTIAL`. See [element template properties](/components/modeler/element-templates/template-properties.md). |
+| Term            | Meaning                                                                                                                                                                                                                                                   |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Credential      | The reusable object you create and then select on an element template field, such as a connector task or a job worker's configuration.                                                                                                                    |
+| Credential type | The shape of a credential, such as **AWS Credential**, **REST Authentication**, or **JDBC Connection**. A credential type defines which fields a credential of that type has.                                                                             |
+| Configuration   | The element template property type that renders the credential picker. A credential is a configuration whose kind is `CREDENTIAL`. See [Configuration input type](/components/modeler/element-templates/template-properties.md#configuration-input-type). |
 
 ## Credentials and connector secrets
 
