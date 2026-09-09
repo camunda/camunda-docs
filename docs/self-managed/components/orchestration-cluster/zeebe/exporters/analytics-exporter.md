@@ -107,7 +107,7 @@ camunda:
 
 Omit `categories` (or leave it unset) to enable both by default. Explicitly setting `categories: []` disables data-category telemetry entirely; only the heartbeat and export-window signals below continue to be sent.
 
-The `camunda.telemetry.heartbeat` event and the `camunda.telemetry.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
+The `camunda.telemetry.heartbeat` event and the `camunda.metric.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
 
 ## What data is sent
 
@@ -253,7 +253,7 @@ The agent definition (model, provider, system prompt), its tools, its token coun
 | `camunda.telemetry.heartbeat.broker_version`   | string | Broker version.                       |
 | `camunda.telemetry.heartbeat.exporter_version` | string | Analytics Exporter version.           |
 
-**`camunda.telemetry.export_window`** (gauge metric): accompanies every metrics export, carrying the window total and log position range. Camunda uses it for deduplication and gap detection.
+**`camunda.metric.export_window`** (gauge metric): accompanies every metrics export, carrying the window total and log position range. Camunda uses it for deduplication and gap detection.
 
 ### What is never sent
 
