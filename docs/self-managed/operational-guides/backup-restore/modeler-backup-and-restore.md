@@ -1,9 +1,12 @@
 ---
 id: modeler-backup-and-restore
 title: Backup and restore Camunda Hub data
+sidebar_label: Camunda Hub
 description: "How to perform a backup and restore of Camunda Hub data."
 keywords: ["backup", "backups"]
 ---
+
+Back up and restore Camunda Hub independently of the Orchestration Cluster.
 
 ## Create backup
 
