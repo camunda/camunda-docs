@@ -758,9 +758,10 @@ module.exports = {
               label: "Manage users",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-users/manage-users",
+                id: "components/hub/organization/manage-users/index",
               },
               items: [
+                "components/hub/organization/manage-users/create-manage-users",
                 "components/hub/organization/manage-users/manage-user-groups",
                 "components/hub/organization/manage-users/resource-based-auth",
               ],
