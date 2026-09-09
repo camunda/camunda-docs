@@ -375,12 +375,10 @@ console:
 
 ### Full configuration example
 
-The following example shows a full configuration to enable Microsoft Entra:
+The following example shows a full configuration to enable Microsoft Entra with an externally managed Elasticsearch cluster. Replace `<elasticsearch-host>` with the hostname of your cluster.
 
 ```yaml
 global:
-  elasticsearch:
-    enabled: true
   identity:
     auth:
       enabled: true
@@ -419,6 +417,11 @@ global:
       method: oidc
 
 orchestration:
+  data:
+    secondaryStorage:
+      type: elasticsearch
+      elasticsearch:
+        url: "https://<elasticsearch-host>:9200"
   security:
     authentication:
       oidc:
@@ -469,6 +472,14 @@ identityPostgresql:
 
 optimize:
   enabled: true
+  database:
+    elasticsearch:
+      enabled: true
+      external: true
+      url:
+        protocol: https
+        host: "<elasticsearch-host>"
+        port: 9200
 
 webModeler:
   enabled: true
@@ -485,9 +496,6 @@ webModelerPostgresql:
       userPasswordKey: "webmodeler-postgresql-user-password"
 
 console:
-  enabled: true
-
-elasticsearch:
   enabled: true
 ```
 
