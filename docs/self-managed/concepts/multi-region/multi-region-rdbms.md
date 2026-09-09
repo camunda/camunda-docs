@@ -12,7 +12,7 @@ import ZoneActivationImg from './img/multi-region-rdbms-zone-activation.svg';
 
 <PageDescription />
 
-Multi-Region RDBMS spreads a single Orchestration Cluster across three or more regions and backs it with one relational secondary storage whose replication is the database's responsibility. Because every partition keeps a majority of its replicas when one region disappears, the engine keeps processing through a region loss instead of stopping for an operator.
+Multi-Region RDBMS spreads a single Orchestration Cluster across three or more regions and uses a relational database as its secondary storage, leaving replication to that database. Because every partition keeps a majority of its replicas when one region disappears, the engine keeps processing through a region loss instead of stopping for an operator.
 
 :::caution Before you begin
 Running a multi-region setup requires you to develop, test, and execute [operational procedures](/self-managed/deployment/helm/operational-tasks/multi-region-rdbms-ops.md) specific to your environment. Review the [limitations](#limitations) and [requirements](#requirements) before you commit to this configuration.
