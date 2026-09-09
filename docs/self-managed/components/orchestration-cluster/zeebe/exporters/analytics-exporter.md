@@ -105,7 +105,7 @@ camunda:
             - contractual
 ```
 
-An omitted or empty `categories` list enables all categories.
+Omit `categories` (or leave it unset) to enable both by default. Explicitly setting `categories: []` disables data-category telemetry entirely; only the heartbeat and export-window signals below continue to be sent.
 
 The `camunda.telemetry.heartbeat` event and the `camunda.telemetry.export_window` metric are sent whenever the exporter runs, regardless of the categories you select. Camunda uses them to detect data gaps and offline clusters.
 
@@ -274,7 +274,7 @@ All options live under `args`. The defaults suit typical Self-Managed deployment
 | Option               | Type     | Description                                                                                                                                         | Default                        |
 | -------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
 | `endpoint`           | string   | OTLP/HTTP base URL for the analytics endpoint. The path `/v1/logs` is appended automatically.                                                       | `https://telemetry.camunda.io` |
-| `categories`         | list     | Signal categories to export: `contractual`, `optional`. Empty or omitted enables all.                                                               | `[contractual, optional]`      |
+| `categories`         | list     | Signal categories to export: `contractual`, `optional`. Omitted enables both (the default); an explicit empty list (`[]`) disables both.            | `[contractual, optional]`      |
 | `push-interval`      | duration | Maximum time between batch pushes, as an [ISO 8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).                                     | `PT5M`                         |
 | `heartbeat-interval` | duration | Interval between heartbeat events carrying static cluster metadata.                                                                                 | `PT10M`                        |
 | `max-queue-size`     | int      | Maximum number of records buffered in memory before new records are dropped.                                                                        | `2048`                         |
