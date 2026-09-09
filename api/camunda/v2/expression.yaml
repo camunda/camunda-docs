@@ -30,11 +30,23 @@ paths:
         - `=camunda.secrets.TEST` now returns `"camunda.secrets.TEST"`.
         - `="Bearer " + camunda.secrets.TEST` now returns `"Bearer camunda.secrets.TEST"`.
 
+        This placeholder mechanism is bypassed if the request-body `variables` include a variable
+        literally named `camunda`. In that case the request-body variable takes precedence, so
+        `camunda.secrets.<name>` resolves against it instead of producing a placeholder (typically
+        evaluating to `null`).
+
         Every secret reference the evaluation encountered from a trusted source is listed in the
-        `referencedSecrets` array of the response. To obtain the actual secret values, resolve those
-        references yourself with [`POST /v2/secrets/resolve`](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets.api.mdx).
-        For how the cluster resolves secret references in general, see
+        `referencedSecrets` array of the response. That array reports every `camunda.secrets.<name>`
+        name that was referenced, whether or not a matching secret is configured: a misspelled or
+        unconfigured name is still listed here and only surfaces as an error later, in the `errors`
+        array of the follow-up `POST /v2/secrets/resolve` call. To obtain the actual secret values,
+        resolve those references yourself with that endpoint
+        ([`POST /v2/secrets/resolve`](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets.api.mdx)).
+
+        For background on how the cluster resolves secret references in other contexts, such as
+        during job activation, see
         [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+        That page describes a different mechanism than this endpoint uses.
       requestBody:
         required: true
         content:
