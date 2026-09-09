@@ -5,10 +5,6 @@ sidebar_label: "Multi-region with RDBMS"
 description: "Deploy three Amazon EKS clusters connected by AWS Transit Gateway and Submariner, backed by an Aurora Global Database, to run one Orchestration Cluster across three regions."
 ---
 
-<!-- TODO: the `reference` code blocks below point at the `feat/eks-multi-region-rdbms` branch of
-     camunda-deployment-references so they render while https://github.com/camunda/camunda-deployment-references/pull/2940
-     is open. Repoint every one of them to `main` once that pull request is merged. -->
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HighLevelDesign from './assets/eks-multi-region-rdbms.svg';
@@ -126,7 +122,7 @@ There is no separate pod range, and that is deliberate. With the [AWS VPC CNI](h
 
 ### Review the region topology
 
-The region slots are declared in [variables.tf](https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/variables.tf). Adjust the regions, short names, and CIDR blocks to your environment before applying.
+The region slots are declared in [variables.tf](https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/variables.tf). Adjust the regions, short names, and CIDR blocks to your environment before applying.
 
 Two variables control the topology, and they are not interchangeable:
 
@@ -186,7 +182,7 @@ The dot is required: these scripts export variables into your current shell, not
 <details>
 <summary>See the export_environment_prerequisites.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/export_environment_prerequisites.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/export_environment_prerequisites.sh
 ```
 </details>
 
@@ -207,7 +203,7 @@ Create one kubectl context per active region, named after the region's short nam
 <details>
 <summary>See the register-kubecontexts.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/register-kubecontexts.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/register-kubecontexts.sh
 ```
 </details>
 
@@ -222,7 +218,7 @@ Zeebe brokers need a storage class backed by fast disks. Apply it in every regio
 <details>
 <summary>See the storageclass-configure.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-configure.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-configure.sh
 ```
 </details>
 
@@ -235,7 +231,7 @@ Verify it before continuing. A missing storage class leaves broker PVCs unbound 
 <details>
 <summary>See the storageclass-verify.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-verify.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/storageclass-verify.sh
 ```
 </details>
 
@@ -254,7 +250,7 @@ source ./submariner/install-subctl.sh
 <details>
 <summary>See the install-subctl.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/install-subctl.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/install-subctl.sh
 ```
 </details>
 
@@ -269,7 +265,7 @@ Deploy the ClusterSet broker into one region. It stores ClusterSet metadata only
 <details>
 <summary>See the deploy-broker.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/deploy-broker.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/deploy-broker.sh
 ```
 </details>
 
@@ -299,7 +295,7 @@ Join every active region to the ClusterSet, so each one can publish and resolve 
 <details>
 <summary>See the join-clusters.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/join-clusters.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/join-clusters.sh
 ```
 </details>
 
@@ -312,7 +308,7 @@ Then verify:
 <details>
 <summary>See the verify-submariner.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/verify-submariner.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/verify-submariner.sh
 ```
 </details>
 
@@ -329,7 +325,7 @@ If this fails, the problem is routing or firewalling, not Camunda. See [troubles
 
 ### Ports open between regions
 
-The security group rules are declared explicitly in [security.tf](https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/security.tf) rather than allowing all traffic between VPCs:
+The security group rules are declared explicitly in [security.tf](https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/terraform/clusters/security.tf) rather than allowing all traffic between VPCs:
 
 | Port          | Protocol | Purpose                                                             |
 | :------------ | :------- | :------------------------------------------------------------------ |
@@ -353,7 +349,7 @@ Create the Kubernetes secret holding the database password, in every active regi
 <details>
 <summary>See the create-rdbms-secret.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/create-rdbms-secret.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/create-rdbms-secret.sh
 ```
 </details>
 
@@ -383,7 +379,7 @@ The values file is the same in every region. Only `orchestration.multiregion.zon
 <details>
 <summary>See the full camunda-values.yml</summary>
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/helm-values/camunda-values.yml
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/helm-values/camunda-values.yml
 ```
 </details>
 
@@ -408,7 +404,7 @@ Install the same release in every active region, from the values assembled in th
 <details>
 <summary>See the install-chart.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/install-chart.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/install-chart.sh
 ```
 </details>
 
@@ -421,7 +417,7 @@ Then export the Camunda services to the ClusterSet so brokers in other regions c
 <details>
 <summary>See the export-services.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/export-services.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/export-services.sh
 ```
 </details>
 
@@ -436,7 +432,7 @@ Confirm that every broker joined and that the partition distribution matches the
 <details>
 <summary>See the check-cluster-topology.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/check-cluster-topology.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/check-cluster-topology.sh
 ```
 </details>
 
@@ -451,7 +447,7 @@ Measure the cost of the write path from each region to the database writer. Regi
 <details>
 <summary>See the measure-rdbms-latency.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/measure-rdbms-latency.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/measure-rdbms-latency.sh
 ```
 </details>
 
@@ -504,7 +500,7 @@ A full diagnostic dump, including cross-cluster name resolution, is available:
 <details>
 <summary>See the diagnose-submariner.sh script</summary>
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-multi-region-rdbms/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/diagnose-submariner.sh
+https://github.com/camunda/camunda-deployment-references/blob/4a574dfa79d0cc8b76d007b1986e3577a0020b7b/aws/kubernetes/eks-multi-region-rdbms/procedure/submariner/diagnose-submariner.sh
 ```
 </details>
 
