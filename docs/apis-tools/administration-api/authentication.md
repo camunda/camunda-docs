@@ -88,7 +88,7 @@ A client can have one or multiple permissions from the following groups:
 - **Hub API**: Interact with the [Camunda Hub API](../hub-api-saas/overview.md).
 - **IP allowlist**: Configure [IP allowlist](/components/hub/organization/manage-clusters/manage-ip-allowlists.md) rules.
 - **Connector Secrets**: [Manage secrets](/components/hub/organization/manage-clusters/manage-secrets.md) of your clusters.
-- **Members**: [Manage users](/components/hub/organization/manage-users/manage-users.md) in your organization.
+- **Members**: [Manage users](/components/hub/organization/manage-users/index.md) in your organization.
 - **Backups**: Manage [backups](/components/saas/backups.md) of your Camunda 8 clusters (only available to Enterprise customers).
 
 The full API description can be found [here](https://console.cloud.camunda.io/customer-api/openapi/docs/#/).

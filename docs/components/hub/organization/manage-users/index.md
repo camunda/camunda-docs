@@ -1,5 +1,4 @@
 ---
-id: manage-users
 title: Manage users in your organization
 description: "Let's take a closer look at the rights and responsibilities of users in your organization."
 ---
@@ -84,24 +83,6 @@ Beyond the roles above, an organization may show a few additional roles dependin
 Users are invited to a Camunda 8 organization via their email address, which must be accepted by the user. The user remains in the `Pending` state until the invitation is accepted.
 
 People who do not yet have a Camunda 8 account can also be invited to an organization. To access the organization, the invited individual must first create a Camunda 8 account by following the instructions in the invitation email.
-
-## Resource-based authorizations
-
-Resource authorizations control a user's access to specific resources. To create, update, or delete a user's resource authorizations, select the user's row in the users table.
-
-As of 8.8, authorizations for Orchestration Cluster applications (Zeebe, Operate, and Tasklist) are managed as part of the Orchestration Cluster and configured in [Admin](/self-managed/components/orchestration-cluster/admin/overview.md).
-
-### Creation
-
-To initiate the creation flow, click **Create resource authorization**.
-
-![User Details](./img/user-details-authorized-resources.png)
-
-### Updating and deleting
-
-To update an existing authorization, click on the **pencil icon** of the relevant row. To delete an existing authorization, click the **trash can** icon.
-
-![Authorized Resources](./img/user-details-authorized-resources-example.png)
 
 ## User task access restrictions
 
