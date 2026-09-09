@@ -8,7 +8,7 @@ description: "As an organization owner or admin, set up alerts for process insta
 Usage alerts apply **only to production clusters** and are visible only to owners and admins in **Starter** and **Enterprise** organizations.
 :::
 
-Under the **Billing** tab, organization owners and admins can set up alerts for process instances, decision instances and task users.
+On the **Billing** tab, organization owners and admins can set up alerts for process instances, decision instances and task users.
 
 Usage is calculated daily. When the threshold for an alert is met, all organization owners and admins are alerted via email and in-app notification.
 

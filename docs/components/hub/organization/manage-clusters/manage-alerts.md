@@ -22,7 +22,7 @@ This feature is only available in SaaS.
 Create a new alert in Camunda Hub SaaS:
 
 1. In the left navigation under **Clusters**, select a cluster.
-1. In the **Alerts** tab, click **Create an alert**.
+1. On the **Alerts** tab, click **Create an alert**.
 1. Choose between **Email** and **Webhook**:
    - **Email**: Click **Create**. No further information is needed.
    - **Webhook**: Provide a valid webhook URL that accepts `POST` requests.

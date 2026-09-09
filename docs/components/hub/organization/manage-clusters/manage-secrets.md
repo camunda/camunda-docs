@@ -16,7 +16,7 @@ If you deploy and the secret is missing, [Operate](../../../operate/operate-intr
 To manage secrets in SaaS:
 
 1. In the left navigation under **Clusters**, select a cluster.
-1. In the **Connector secrets** tab, click **Create new secret**.
+1. On the **Connector secrets** tab, click **Create new secret**.
 1. Provide a **Key** for your secret that you will use to reference your secret from your connector.
 1. Provide the **Value** that will be assigned to the **Key**.
 1. Click **Create** and view your new secret in the list.

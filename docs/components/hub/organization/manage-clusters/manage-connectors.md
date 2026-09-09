@@ -25,7 +25,7 @@ Use this feature to review connector status and troubleshoot issues. For example
 Manage connectors from the **Connector Management** page:
 
 1. In the left navigation under **Clusters**, select a cluster.
-1. In the **Overview** tab, on the **Connectors** component tile, click **Manage**.
+1. On the **Overview** tab, on the **Connectors** component tile, click **Manage**.
 
 The **Connector Management** page provides an overview of the connectors running on a cluster.
 

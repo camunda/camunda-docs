@@ -12,6 +12,6 @@ In Camunda SaaS, Camunda Hub has access to clusters by default, as allowlist ass
 Create an IP allowlist:
 
 1. In the left navigation under **Clusters**, select a cluster.
-1. In the **IP Allowlist** tab, click **Create an entry**.
+1. On the **IP Allowlist** tab, click **Create an entry**.
 1. Enter a list of IPs or CIDR blocks separated by commas.
 1. Enter an optional description for the allowlist.

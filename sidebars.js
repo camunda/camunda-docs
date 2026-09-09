@@ -762,6 +762,7 @@ module.exports = {
               },
               items: [
                 "components/hub/organization/manage-users/manage-user-groups",
+                "components/hub/organization/manage-users/resource-based-auth",
               ],
             },
             {

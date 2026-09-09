@@ -41,7 +41,7 @@ After creating the cluster, you can view the new entry:
 You can tag your cluster for `dev`, `test`, `stage`, or `prod`:
 
 1. In the left navigation under **Clusters**, select your cluster.
-1. In the **Overview** tab under **Cluster Details**, click **Modify tag**.
+1. On the **Overview** tab under **Cluster Details**, click **Modify tag**.
 
 Assigning a tag:
 

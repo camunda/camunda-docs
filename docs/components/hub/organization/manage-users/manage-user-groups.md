@@ -9,23 +9,16 @@ Organize users into groups within your organization.
 
 ## Creating a group
 
-To create a group, navigate to the **Organization** section of Camunda Hub and click on the **Groups** tab.
+To create a group in Camunda Hub:
 
-![Groups Management](./img/group-management.png)
-
-Click **Create a group** and enter the name of the group.
-
-![Create a group](./img/create-group.png)
+1. In the left navigation under **Console**, click **Organization**.
+1. On the **Groups** tab, select **Create group**.
 
 ## Adding users to a group
 
-To add users to a group, navigate to the **Organization** section of Camunda Hub and click **Users > Assign members**.
-
-![Groups Members](./img/group-members.png)
-
-Select the user you want to add to a group and click **Assign**.
-
-![Assign a Member](./img/assign-member.png)
+1. In the left navigation under **Console**, click **Organization**.
+1. On the **Groups** tab, select a group.
+1. Click **Assign members**.
 
 ## User task access restrictions
 
