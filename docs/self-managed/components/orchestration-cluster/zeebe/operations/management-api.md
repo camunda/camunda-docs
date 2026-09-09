@@ -18,6 +18,8 @@ The API is a custom endpoint available via [Spring Boot Actuator](https://docs.s
 For additional configurations such as security, refer to the official [Spring Boot documentation](https://spring.io/guides).
 :::
 
+The management port is typically not publicly exposed. If the gateway is not reachable from the machine where you run these commands, use a private connection such as `kubectl port-forward svc/camunda-zeebe-gateway 9600:9600`, then use `localhost` as the gateway host. The examples use `http://` for a management endpoint without TLS. If your endpoint uses TLS, use `https://` and the appropriate `curl` TLS options.
+
 ### Operations
 
 This API currently supports the following operations:
@@ -26,7 +28,9 @@ This API currently supports the following operations:
 - [Pause and resume exporting](#exporting-api)
 - [Enable and disable exporter](#exporters-api)
 - [Update partition distribution](#partition-distribution-api)
-- [Force-remove, re-add, and migrate a zone](#zones-api)
+- [Add or re-add a zone](#add-or-re-add-a-zone)
+- [Remove a zone](#remove-a-zone)
+- [Migrate a zone](#migrate-a-zone-to-a-zone-aware-topology)
 
 ## Exporting API
 
@@ -386,44 +390,13 @@ The response is a JSON object. See the [OpenAPI spec](https://github.com/camunda
 
 ### Zones API
 
-Use this endpoint to force-remove a zone from a [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) cluster, to add back a previously force-removed zone, or to migrate a zone of a bare or partially zoned cluster to a zone-aware topology.
+Use the Zones API to add, remove, or migrate zones in a [zone-aware](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) cluster. The operations update the persisted partition distribution and run asynchronously. Use the [Monitoring API](#monitoring-api) to follow each change until its status is `COMPLETED`.
 
-#### Force-remove a zone
+#### Add or re-add a zone
 
-:::caution
-This is a dangerous operation and must be used with caution. Use it only when a zone is down and its brokers are unreachable.
-:::
+To add a zone, first deploy its brokers and connect them to the existing cluster. Use zone-aware broker IDs in the form `{zone}_{n}` (see the [broker ID naming scheme](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#broker-id-naming-scheme)), and set `cluster.size` to the total number of brokers across all zones. The new brokers join cluster membership, but they do not host partitions until you add the zone through the Zones API.
 
-Force-evicts the given zone's brokers from the cluster and drops the zone from the persisted partition distribution configuration, in one atomic change.
-
-##### Request
-
-```
-DELETE actuator/cluster/zones/{zoneId}
-```
-
-<details>
-  <summary>Example request</summary>
-
-```
-curl -X 'DELETE' \
-   'http://localhost:9600/actuator/cluster/zones/zone-b' \
-   -H 'accept: application/json'
-```
-
-</details>
-
-###### Dry run
-
-You can do a dry run without executing the change by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
-
-##### Response
-
-The response is a JSON object with the same shape as the [partition distribution response](#response).
-
-#### Add back a previously force-removed zone
-
-Re-adds the zone's brokers and re-includes the given zone in the persisted partition distribution configuration, with the supplied replica count and priority, in one atomic change.
+To re-add a previously removed zone, start the operator-supplied brokers before sending the request. The request adds the brokers to the persisted partition distribution and schedules the partition-join operations needed to assign their partitions.
 
 ##### Request
 
@@ -479,7 +452,42 @@ curl -X 'POST' \
       }'
 ```
 
-Note that the IDs in `brokers` must be zone-aware, meaning they contain the zone in the name.
+</details>
+
+###### Dry run
+
+You can do a dry run without executing the change by setting the `dryRun` request parameter to `true`. By default, `dryRun` is set to `false`.
+
+##### Response
+
+The response is a JSON object with the same shape as the [partition distribution response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
+
+After the operation completes, verify that the zone appears in `partitionDistribution` and that its brokers host their assigned partitions in the `brokers` array. You can also query `/v2/topology` to verify the broker and partition assignments.
+
+#### Remove a zone
+
+By default, this operation gracefully drains the zone's partitions to the remaining zones before removing its brokers from cluster membership. Set `force=true` only if the zone is down, its brokers are unreachable, or the zone contains the coordinator. Forced removal evicts the zone's brokers without draining partitions or handing off leadership.
+
+:::caution
+Forced removal is a dangerous operation and must be used with caution. A graceful removal request is rejected if the coordinator is in the zone being removed.
+:::
+
+##### Request
+
+```
+DELETE actuator/cluster/zones/{zoneId}?force={force}
+```
+
+The `force` parameter defaults to `false`.
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl -X 'DELETE' \
+   'http://localhost:9600/actuator/cluster/zones/zone-b?force=false' \
+   -H 'accept: application/json'
+```
 
 </details>
 
@@ -489,7 +497,9 @@ You can do a dry run without executing the change by setting the `dryRun` reques
 
 ##### Response
 
-The response is a JSON object with the same shape as the [partition distribution response](#response).
+The response is a JSON object with the same shape as the [partition distribution response](#response). The `changeId` identifies the asynchronous operation. Poll the [Monitoring API](#monitoring-api) and wait until the operation is `COMPLETED` before shutting down brokers or taking further action.
+
+After the operation completes, verify that the removed zone no longer appears in `partitionDistribution` and that its brokers no longer host partitions. Only then shut down the removed zone's brokers or scale down its StatefulSet.
 
 #### Migrate a zone to a zone-aware topology
 
