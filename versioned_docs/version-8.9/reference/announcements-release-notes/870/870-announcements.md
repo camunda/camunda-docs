@@ -68,7 +68,8 @@ In practice, this means a secret in a connector field only resolves at runtime i
 
 **Action:** Before upgrading, confirm all connector fields that resolve a secret already reference that secret in the deployed BPMN.
 
-- If a field relies on resolving a secret it doesn't reference, add the reference. To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but note that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
+- If a field relies on resolving a secret it doesn't reference, add the reference.
+- To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but note that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
 - Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
 
 On 8.7, the outbound lookup goes through Operate, reusing the `camunda.connector.polling.enabled` property (default: `true`) that already gates Operate connectivity for inbound connectors.
