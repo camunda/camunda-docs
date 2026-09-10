@@ -64,7 +64,9 @@ Using this in other areas can lead to unexpected results and incidents.
 
 ### Using `camunda.secrets.*` references
 
-You can also reference a secret directly in a connector's input mapping, using `camunda.secrets.<name>` in a FEEL expression. In SaaS, these are the [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster, with no store configuration needed; in Self-Managed, an operator [configures the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
+You can also reference a secret directly in a Connector input mapping by using `camunda.secrets.<name>` in a FEEL expression.
+
+In SaaS, use the [connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname) you manage on the cluster. No secret store configuration is required. In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
 
 These forms coexist and are handled differently:
 
