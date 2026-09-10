@@ -40,7 +40,11 @@ Important changes in Camunda 8.10 are summarized in the following sections.
 
 [Camunda Hub](/components/hub/index.md) is a new product that replaces Web Modeler and Console. It [maintains the features of its predecessors](#mapping-web-modeler-and-console-features-to-hub) and implements new features, all within a unified platform.
 
-In Hub:
+Hub is a **design-time** product, not a runtime application. It's where you design, model, manage, and oversee your processes. It connects to your orchestration clusters running in dev, staging, and production, but Hub, itself, is deployed once and serves as your single point of entry across all environments.
+
+This changes how teams work. Instead of managing separate Web Modeler and Console instances per environment, you have one Hub that connects to all your clusters. You design once. You manage everything from one place.
+
+In Hub, there is a clear separation of responsibilities:
 
 - **Center of excellence teams** manage organizational infrastructure, member access, and workspaces, so delivery teams have the environments and tools they need to ship process solutions at scale.
 - **Delivery teams** collaborate in managed workspaces and model, test, and deploy business processes.
