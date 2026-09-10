@@ -267,6 +267,18 @@ A correlation is an attribute within a [message](#message) that is used to match
 
 - [Message correlation](/components/concepts/messages.md)
 
+### Credential
+
+A reusable set of authentication and connection settings for a job worker, connector, or other element template, so you don't repeat the same settings on every task that asks for them. A credential is selected as a whole on an element template field; the engine resolves the reference at runtime and passes the credential's values, including any secrets, to the job worker or connector.
+
+- [Manage credentials](/components/hub/organization/credentials/index.md)
+
+### Credential type
+
+The shape of a [credential](#credential), such as AWS Credential, REST Authentication, or JDBC Connection. A credential type defines which fields a credential of that type has, and is defined alongside an element template.
+
+- [Credential types](/components/hub/organization/credentials/index.md#credential-types)
+
 ### CSAP CLI
 
 CSAP CLI stands for Camunda SAP Integration Command-Line Interface. It's a standalone tool (`csap`) that simplifies configuring and building Camunda’s SAP integration modules (like the RFC connector, OData connector, and BTP plugin) for deployment.
