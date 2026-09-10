@@ -559,7 +559,7 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 
 Previously these maps carried `nginx.ingress.kubernetes.io/*` values. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. Deployments on Contour, Traefik, or any other controller therefore carried dead nginx configuration, and there was no way to remove it short of setting each key to `null`.
 
-**Action:** If you run [ingress-nginx](https://github.com/kubernetes/ingress-nginx), set the annotations explicitly. Two of them carry behavior rather than cosmetics: `backend-protocol: GRPC` is what makes ingress-nginx proxy Zeebe gRPC at all, and `proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
+**Action:** If you run [ingress-nginx](https://github.com/kubernetes/ingress-nginx), set the annotations explicitly. Two of them carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
 
 ```yaml
 global:
