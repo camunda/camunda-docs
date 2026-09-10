@@ -741,6 +741,17 @@ module.exports = {
             },
             {
               type: "category",
+              label: "Manage credentials",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/credentials/credentials",
+              },
+              items: [
+                "components/hub/organization/credentials/credentials-modeling-interface",
+              ],
+            },
+            {
+              type: "category",
               label: "Manage the catalog",
               link: {
                 type: "doc",
@@ -936,6 +947,7 @@ module.exports = {
         "components/modeler/desktop-modeler/process-applications",
         "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/desktop-modeler/use-connectors",
+        "components/modeler/desktop-modeler/credentials",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
@@ -1144,6 +1156,7 @@ module.exports = {
               items: [
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
+                "components/connectors/custom-built-connectors/credential-templates",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
