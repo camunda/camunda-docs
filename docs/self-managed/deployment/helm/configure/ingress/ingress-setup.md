@@ -17,6 +17,13 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. You can 
 ## Prerequisites
 
 - An Ingress controller deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `ingress.className`.
+
+:::note Controller annotations are not set for you
+From Camunda 8.10 (chart 15.x), `global.ingress.annotations` and `orchestration.ingress.grpc.annotations` default to `{}`. Earlier chart versions shipped `nginx.ingress.kubernetes.io/*` defaults and rendered them onto every `Ingress`, whatever the configured `ingressClassName`.
+
+Set the annotations your own controller needs. For ingress-nginx that includes `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` on the gRPC Ingress, without which Zeebe gRPC is not proxied at all. See [Ingress annotation defaults removed from the Helm chart](/reference/announcements-release-notes/8100/8100-announcements.md#ingress-annotation-defaults-removed) for the full set and the equivalents on other controllers.
+:::
+
 - TLS configuration is not included in the examples because it varies between different workflows. Configure TLS in one of these ways:
   - Use `ingress.tls` options directly.
   - Use an external tool such as [Cert-Manager](https://github.com/cert-manager/cert-manager) with `ingress.annotations`.  

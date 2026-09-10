@@ -553,6 +553,44 @@ Camunda 8.10 (chart 15.x) supports the Helm CLI v4 only. Camunda 8.9 (chart 14.x
 </div>
 <div className="release-announcement-content">
 
+#### Ingress annotation defaults removed from the Helm chart {#ingress-annotation-defaults-removed}
+
+`global.ingress.annotations` and `orchestration.ingress.grpc.annotations` no longer ship ingress-nginx-specific defaults. Both now default to `{}`, so the chart renders no controller-specific configuration unless you ask for it.
+
+Previously these maps carried `nginx.ingress.kubernetes.io/*` values. Helm deep-merges maps, so setting a single annotation of your own still inherited all of them, and they were written onto the `Ingress` whatever `ingressClassName` you configured. Deployments on Contour, Traefik, or any other controller therefore carried dead nginx configuration, and there was no way to remove it short of setting each key to `null`.
+
+**Action:** If you run [ingress-nginx](https://github.com/kubernetes/ingress-nginx), set the annotations explicitly. Two of them carry behavior rather than cosmetics: `backend-protocol: GRPC` is what makes ingress-nginx proxy Zeebe gRPC at all, and `proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
+
+```yaml
+global:
+  ingress:
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/proxy-buffering: "on"
+      nginx.ingress.kubernetes.io/proxy-buffer-size: "128k"
+      # keep in sync with global.config.requestBodySize
+      nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+
+orchestration:
+  ingress:
+    grpc:
+      annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+```
+
+If you run another Ingress controller, set that controller's equivalents instead. With [Contour](https://projectcontour.io/), the gRPC upstream is declared with `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster **Service**, listing the gRPC port, rather than on the Ingress.
+
+<p className="link-arrow">[Ingress setup](/self-managed/deployment/helm/configure/ingress/ingress-setup.md)</p>
+
+</div>
+</div>
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
 #### Individual component Docker images no longer produced
 
 Camunda no longer produces the following individual component Docker images in Camunda 8.10 and later, or in Camunda 8.9 from patch release 8.9.12:
