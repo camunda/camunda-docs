@@ -174,9 +174,9 @@ When updating items, if an attribute of type SET is updated, it will be overwrit
 
 **Response**
 
-| Property | Data type | Description |
-| ---------------------------------------------------------------------------------------------------------------------- | --------- | ----------- | ----------------------------- |
-| [Result](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_ResponseElements) | object | Yes | The item to add to the table. |
+| Property                                                                                                               | Data type | Required | Description                   |
+| ---------------------------------------------------------------------------------------------------------------------- | --------- | -------- | ----------------------------- |
+| [Result](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_ResponseElements) | object    | Yes      | The item to add to the table. |
 
 #### Delete item
 
