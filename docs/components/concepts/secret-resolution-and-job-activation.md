@@ -39,7 +39,7 @@ Two kinds of failure are treated differently:
 
 The broker tracks retry state per store rather than per secret and holds it in memory only. The retry state resets when the broker restarts or the partition changes leader. During backoff, the scheduler skips the store, so its references do not consume batch capacity that a healthy store can use.
 
-A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [a secret could not be resolved](secret-resolution-incidents.md#a-secret-could-not-be-resolved) for the incident message, how to tell the causes apart, and what resolving it does.
+A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [resolve secret lookup failures](secret-resolution-incidents.md#resolve-secret-lookup-failures) for the incident message, how to tell the causes apart, and what resolving it does.
 
 ## Activate a job that references secrets
 
