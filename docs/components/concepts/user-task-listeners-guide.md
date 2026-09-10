@@ -79,7 +79,7 @@ You've now defined a **creating** task listener for this user task. When a proce
 ## Step 5: Deploy and run the process
 
 1. In your diagram, click **Deploy & run**.
-2. Select your deployment stage.
+2. Select your deployment stage, then choose your target cluster.
 3. Add an `assignee` or `manager` variable as JSON data. For example, `{ "assignee": "john.doe@camunda.com" }`.
 4. Click **Deploy & run**.
 

@@ -11,7 +11,7 @@ This connector reuses the base implementation of the [REST connector](../protoco
 
 ## Prerequisites
 
-To use the **Databricks connector**, you need an active Camunda 8.9 or later cluster, and a Databricks workspace with — depending on the operation — a SQL warehouse, job, Model Serving endpoint, or Vector Search index to target.
+To use the **Databricks connector**, you need an active Camunda cluster, and a Databricks workspace with — depending on the operation — a SQL warehouse, job, Model Serving endpoint, or Vector Search index to target.
 
 You also need credentials to authenticate against your workspace. See [configure authentication](#configure-authentication) below.
 
