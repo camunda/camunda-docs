@@ -29,17 +29,17 @@ Ensure the installation is owned by `root` and accessible to all users of the ma
 
 1. Unpack the zip archive using the `tar` command:
 
-```shell
-cd /usr/bin
-sudo tar xvfz ~/Downloads/camunda-modeler-5.41.0-linux-x64.tar.gz
-```
+   ```shell
+   cd /usr/bin
+   sudo tar xvfz ~/Downloads/camunda-modeler-5.41.0-linux-x64.tar.gz
+   ```
 
 2. Ensure the access permissions of the `chrome-sandbox` file are correct and create a link to this version:
 
-```shell
-sudo chmod 4755 camunda-modeler-5.41.0-linux-x64/chrome-sandbox
-sudo ln -s camunda-modeler-5.41.0-linux-x64/camunda-modeler camunda-modeler
-```
+   ```shell
+   sudo chmod 4755 camunda-modeler-5.41.0-linux-x64/chrome-sandbox
+   sudo ln -s camunda-modeler-5.41.0-linux-x64/camunda-modeler camunda-modeler
+   ```
 
 </TabItem>
 
