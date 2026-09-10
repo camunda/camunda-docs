@@ -142,7 +142,8 @@ You must enter an **API key** in the new template. The legacy template made the 
   - If the header used `Bearer <token>`, move the token value without the `Bearer` prefix into the new template's **API key** field. Remove the `Authorization` header from **Headers**.
   - For any other scheme, such as `Basic ...`, keep the header in **Headers**. Enter any non-blank placeholder value in **API key**. The connector does not use it for authentication.
 - Otherwise, carry your legacy **API key** value over directly. If you did not configure an `Authorization` header or an API key, enter any non-blank placeholder value.
-  :::
+
+:::
 
 Also check the resulting request path. The new template appends `/chat/completions` or `/responses` to **API endpoint** for the selected **API**. This may differ from your legacy endpoint.
 
