@@ -1,0 +1,475 @@
+---
+id: restore-folder
+title: "Restore a recently deleted folder"
+description: "Restores a soft-deleted folder back to the live project, together with the descendants that were soft-deleted with it. If the folder's original parent folder was also deleted, the folder is restored into a new wrapper folder under the nearest surviving ancestor folder, or at the project root if no ancestor folder survives. The folder cannot be restored while its containing project or workspace is still deleted. Only a folder that is the root of its own deletion can be restored via this endpoint; a folder that was soft-deleted as part of an ancestor folder, project, or workspace's deletion event must be restored through the corresponding ancestor restoration endpoint instead."
+sidebar_label: "Restore a recently deleted folder"
+hide_title: true
+hide_table_of_contents: true
+api: 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
+sidebar_class_name: "post api-method"
+info_path: docs/apis-tools/hub-api-sm/specifications/hub-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Restore a recently deleted folder"}
+></Heading>
+
+<MethodEndpoint
+  method={"post"}
+  path={"/folders/{folderKey}/restoration"}
+  context={"endpoint"}
+></MethodEndpoint>
+
+Restores a soft-deleted folder back to the live project, together with the descendants that were soft-deleted with it. If the folder's original parent folder was also deleted, the folder is restored into a new wrapper folder under the nearest surviving ancestor folder, or at the project root if no ancestor folder survives. The folder cannot be restored while its containing project or workspace is still deleted. Only a folder that is the root of its own deletion can be restored via this endpoint; a folder that was soft-deleted as part of an ancestor folder, project, or workspace's deletion event must be restored through the corresponding ancestor restoration endpoint instead.
+
+<Heading id={"request"} as={"h2"} className={"openapi-tabs__heading"}>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  parameters={[
+    {
+      name: "folderKey",
+      in: "path",
+      required: true,
+      description: "The unique key identifying the folder.",
+      schema: {
+        description: "System-generated key for a folder.",
+        type: "string",
+        format: "FolderKey",
+        "x-semantic-type": "FolderKey",
+        example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+        title: "FolderKey",
+      },
+    },
+  ]}
+></ParamsDetails>
+
+<RequestSchema title={"Body"} body={undefined}></RequestSchema>
+
+<StatusCodes
+  id={undefined}
+  label={undefined}
+  responses={{
+    "200": {
+      description:
+        "The folder was restored successfully. Returns the restored folder.",
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            example: {
+              folderKey: "bccb5014-10a7-48df-bb56-81cb286594cc",
+              name: "processes",
+              projectKey: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+              parentFolderKey: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+              created: "2025-03-15T10:30:00.000Z",
+              createdBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+              updated: "2025-06-10T14:22:00.000Z",
+              updatedBy: { name: "Jane Doe", email: "jane.doe@example.com" },
+            },
+            required: [
+              "folderKey",
+              "name",
+              "projectKey",
+              "parentFolderKey",
+              "created",
+              "createdBy",
+              "updated",
+              "updatedBy",
+            ],
+            properties: {
+              folderKey: {
+                description: "The unique key identifying this folder.",
+                allOf: [
+                  {
+                    description: "System-generated key for a folder.",
+                    type: "string",
+                    format: "FolderKey",
+                    "x-semantic-type": "FolderKey",
+                    example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+                    title: "FolderKey",
+                  },
+                ],
+              },
+              name: { description: "The name of the folder.", type: "string" },
+              projectKey: {
+                description: "The key of the project this folder belongs to.",
+                allOf: [
+                  {
+                    description: "System-generated key for a project.",
+                    type: "string",
+                    format: "ProjectKey",
+                    "x-semantic-type": "ProjectKey",
+                    example: "28b47b0a-364c-4dbe-9836-41ab371c15b2",
+                    title: "ProjectKey",
+                  },
+                ],
+              },
+              parentFolderKey: {
+                description:
+                  "The key of the parent folder. Null if the folder is at project root.",
+                nullable: true,
+                allOf: [
+                  {
+                    description: "System-generated key for a folder.",
+                    type: "string",
+                    format: "FolderKey",
+                    "x-semantic-type": "FolderKey",
+                    example: "3e98d77b-799b-4f31-bfc4-4c5829fc7dee",
+                    title: "FolderKey",
+                  },
+                ],
+              },
+              created: {
+                description: "The timestamp when the folder was created.",
+                type: "string",
+                format: "date-time",
+              },
+              createdBy: {
+                description: "The user who created the folder.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+              updated: {
+                description: "The timestamp when the folder was last updated.",
+                type: "string",
+                format: "date-time",
+              },
+              updatedBy: {
+                description: "The user who last updated the folder.",
+                allOf: [
+                  {
+                    type: "object",
+                    description: "A reference to a user.",
+                    required: ["name", "email"],
+                    properties: {
+                      name: {
+                        description: "The display name of the user.",
+                        type: "string",
+                      },
+                      email: {
+                        description: "The email address of the user.",
+                        type: "string",
+                        format: "email",
+                      },
+                    },
+                    title: "UserReference",
+                  },
+                ],
+              },
+            },
+            title: "FolderResult",
+          },
+        },
+      },
+    },
+    "401": {
+      description: "The request lacks valid authentication credentials.",
+      headers: { "WWW-Authenticate": { schema: { type: "string" } } },
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Unauthorized",
+            status: 401,
+            detail:
+              "The supplied authentication is not authorized to access this resource.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+    "403": {
+      description: "Forbidden. The request is not allowed.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Forbidden",
+            status: 403,
+            detail:
+              "Operation not allowed. Ensure your API credentials have the required permissions.",
+            instance: "/api/v2/files/1eadb755-662f-43bd-81d1-cf36f39a0a03",
+          },
+        },
+      },
+    },
+    "404": {
+      description:
+        "The recently deleted folder was not found, or is not the root of its own deletion.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "409": {
+      description:
+        "The folder cannot be restored because its containing project or workspace is itself deleted. Restore that first.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+        },
+      },
+    },
+    "500": {
+      description: "An internal error occurred while processing the request.",
+      content: {
+        "application/problem+json": {
+          schema: {
+            description:
+              "A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional properties specific to the problem type.\n",
+            type: "object",
+            required: ["type", "title", "status", "detail", "instance"],
+            properties: {
+              type: {
+                type: "string",
+                format: "uri",
+                description: "A URI identifying the problem type.",
+                default: "about:blank",
+                example:
+                  "https://docs.camunda.io/api/v2.0/problem-types/bad-request",
+              },
+              title: {
+                type: "string",
+                description: "A summary of the problem type.",
+                example: "Bad Request",
+              },
+              status: {
+                type: "integer",
+                format: "int32",
+                description: "The HTTP status code for this problem.",
+                example: 400,
+                minimum: 400,
+                maximum: 600,
+              },
+              detail: {
+                type: "string",
+                description: "An explanation of the problem in more detail.",
+                example:
+                  "Request property [maxJobsToActivates] cannot be parsed",
+              },
+              instance: {
+                type: "string",
+                format: "uri-reference",
+                description:
+                  "A URI path identifying the origin of the problem.",
+                example: "/v2/jobs/activation",
+              },
+            },
+            title: "ProblemDetail",
+          },
+          example: {
+            type: "about:blank",
+            title: "Internal Server Error",
+            status: 500,
+            detail:
+              "An unexpected error occurred while processing your request. Please try again later.",
+            instance: "/api/v2/files",
+          },
+        },
+      },
+    },
+  }}
+></StatusCodes>

@@ -1,16 +1,18 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Problem Detail schema per RFC 9457
 components:
   schemas:
     ProblemDetail:
       description: >
-        A Problem detail object as described in [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457).
-        There may be additional properties specific to the problem type.
+        A Problem detail object as described in [RFC
+        9457](https://www.rfc-editor.org/rfc/rfc9457). There may be additional
+        properties specific to the problem type.
       type: object
       required:
         - type
@@ -39,9 +41,10 @@ components:
         detail:
           type: string
           description: An explanation of the problem in more detail.
-          example: "Request property [maxJobsToActivates] cannot be parsed"
+          example: Request property [maxJobsToActivates] cannot be parsed
         instance:
           type: string
           format: uri-reference
           description: A URI path identifying the origin of the problem.
           example: /v2/jobs/activation
+paths: {}

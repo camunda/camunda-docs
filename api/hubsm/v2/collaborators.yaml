@@ -13,11 +13,11 @@ paths:
       description: >
         Adds a collaborator to the workspace, or updates the role of an existing
         collaborator. The collaborator is identified by their email address.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       tags:
         - Collaborator
       parameters:
-        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+        - $ref: workspaces.yaml#/components/parameters/WorkspaceKeyPathParam
       requestBody:
         required: true
         content:
@@ -32,55 +32,54 @@ paths:
               schema:
                 $ref: "#/components/schemas/CollaboratorResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
           description: The workspace was not found.
           content:
             application/problem+json:
               schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+                $ref: problem-detail.yaml#/components/schemas/ProblemDetail
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /workspaces/{workspaceKey}/collaborators/{email}:
     delete:
       operationId: removeCollaborator
       summary: Remove a collaborator
       description: Removes a collaborator from the workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       tags:
         - Collaborator
       parameters:
-        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+        - $ref: workspaces.yaml#/components/parameters/WorkspaceKeyPathParam
         - $ref: "#/components/parameters/CollaboratorEmailPathParam"
       responses:
         "204":
           description: The collaborator was removed successfully.
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
           description: The workspace or collaborator was not found.
           content:
             application/problem+json:
               schema:
-                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+                $ref: problem-detail.yaml#/components/schemas/ProblemDetail
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /collaborators/search:
     post:
       operationId: searchCollaborators
       summary: Search collaborators
       description: >
-        Returns collaborators matching the given search criteria. A workspace key
-        filter is required — collaborators cannot be searched across workspaces.
-      x-added-in-version: "0.1.0"
+        Returns collaborators matching the given search criteria. A workspace
+        key filter is required — collaborators cannot be searched across
+        workspaces.
+      x-added-in-version: 0.1.0
       tags:
         - Collaborator
       requestBody:
@@ -97,14 +96,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/CollaboratorSearchQueryResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
 components:
   parameters:
     CollaboratorEmailPathParam:
@@ -115,10 +113,7 @@ components:
       schema:
         type: string
         format: email
-
   schemas:
-    # --- Request schemas ---
-
     CollaboratorCreateRequest:
       type: object
       additionalProperties: false
@@ -134,9 +129,6 @@ components:
           description: The role to assign to the collaborator.
           allOf:
             - $ref: "#/components/schemas/CollaboratorRole"
-
-    # --- Response schemas ---
-
     CollaboratorResult:
       type: object
       required:
@@ -159,7 +151,6 @@ components:
           description: The role of the collaborator in the workspace.
           allOf:
             - $ref: "#/components/schemas/CollaboratorRole"
-
     CollaboratorRole:
       type: string
       description: The role a collaborator can have in a workspace.
@@ -168,9 +159,6 @@ components:
         - editor
         - commenter
         - viewer
-
-    # --- Search schemas ---
-
     CollaboratorSearchQuery:
       type: object
       required:
@@ -178,10 +166,10 @@ components:
       properties:
         page:
           description: >
-            Pagination criteria. Supports offset-based pagination (from/limit) or
-            a simple limit.
+            Pagination criteria. Supports offset-based pagination (from/limit)
+            or a simple limit.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+            - $ref: search-models.yaml#/components/schemas/SearchQueryPage
         sort:
           description: Sort field criteria.
           type: array
@@ -189,10 +177,10 @@ components:
             $ref: "#/components/schemas/CollaboratorSearchQuerySortRequest"
         filter:
           description: >
-            The collaborator search filters. The workspaceKey filter is required.
+            The collaborator search filters. The workspaceKey filter is
+            required.
           allOf:
             - $ref: "#/components/schemas/CollaboratorFilter"
-
     CollaboratorSearchQuerySortRequest:
       type: object
       required:
@@ -206,8 +194,7 @@ components:
             - name
             - role
         order:
-          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
-
+          $ref: search-models.yaml#/components/schemas/SortOrderEnum
     CollaboratorFilter:
       type: object
       description: Filter criteria for searching collaborators.
@@ -219,20 +206,19 @@ components:
             Filter by workspace key. Only the `$eq` operator is supported —
             collaborators cannot be searched across workspaces.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
         email:
           description: Filter by collaborator email address.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         name:
           description: Filter by collaborator display name.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         role:
           description: Filter by collaborator role.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
-
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
     CollaboratorSearchQueryResult:
       type: object
       required:
@@ -245,4 +231,4 @@ components:
           items:
             $ref: "#/components/schemas/CollaboratorResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          $ref: search-models.yaml#/components/schemas/SearchQueryPageResponse

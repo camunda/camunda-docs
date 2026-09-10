@@ -1,14 +1,13 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Filter operator schemas for search queries
 components:
   schemas:
-    # --- Leaf filter types ---
-
     LikeFilter:
       description: |
         Checks if the property matches the provided like value.
@@ -20,7 +19,6 @@ components:
 
         Wildcard characters can be escaped with backslash, for instance: `\*`.
       type: string
-
     BasicStringFilter:
       title: Advanced filter
       description: Basic advanced string filter.
@@ -45,7 +43,6 @@ components:
           type: array
           items:
             type: string
-
     AdvancedStringFilter:
       title: Advanced filter
       description: Advanced string filter.
@@ -55,7 +52,6 @@ components:
           properties:
             $like:
               $ref: "#/components/schemas/LikeFilter"
-
     AdvancedIntegerFilter:
       title: Advanced filter
       description: Advanced integer (int32) filter.
@@ -100,7 +96,6 @@ components:
           items:
             type: integer
             format: int32
-
     AdvancedLongFilter:
       title: Advanced filter
       description: Advanced integer (int64) filter.
@@ -145,7 +140,6 @@ components:
           items:
             type: integer
             format: int64
-
     AdvancedDateTimeFilter:
       title: Advanced filter
       description: Advanced date-time filter.
@@ -190,32 +184,6 @@ components:
           items:
             type: string
             format: date-time
-
-    # --- Domain-level composite operator: $or ---
-    # The $or operator is applied per-domain on entity filter objects, not on
-    # leaf filter types.  Each domain filter composes its fields schema via
-    # allOf and adds an $or property whose items reference the fields-only
-    # variant (preventing recursive nesting).  Pattern:
-    #
-    #   MyEntityFilter:
-    #     allOf:
-    #       - $ref: '#/components/schemas/MyEntityFilterFields'
-    #       - type: object
-    #         properties:
-    #           $or:
-    #             description: |
-    #               List of alternative filter groups combined with OR logic.
-    #               Top-level fields AND (any $or item) must match.
-    #             type: array
-    #             items:
-    #               $ref: '#/components/schemas/MyEntityFilterFields'
-    #
-    # Because the items type varies per domain, $or cannot be a shared
-    # reusable schema.  Domain endpoint specs should follow this pattern
-    # when $or support is needed.
-
-    # --- Property-level filter types (oneOf shorthand or advanced) ---
-
     BasicStringFilterProperty:
       description: String property with basic advanced search capabilities.
       oneOf:
@@ -223,7 +191,6 @@ components:
           description: Matches the value exactly.
           type: string
         - $ref: "#/components/schemas/BasicStringFilter"
-
     StringFilterProperty:
       description: String property with full advanced search capabilities.
       oneOf:
@@ -231,7 +198,6 @@ components:
           description: Matches the value exactly.
           type: string
         - $ref: "#/components/schemas/AdvancedStringFilter"
-
     IntegerFilterProperty:
       description: Integer property with advanced search capabilities.
       oneOf:
@@ -240,7 +206,6 @@ components:
           type: integer
           format: int32
         - $ref: "#/components/schemas/AdvancedIntegerFilter"
-
     LongFilterProperty:
       description: Long property with advanced search capabilities.
       oneOf:
@@ -249,7 +214,6 @@ components:
           type: integer
           format: int64
         - $ref: "#/components/schemas/AdvancedLongFilter"
-
     DateTimeFilterProperty:
       description: Date-time property with full advanced search capabilities.
       oneOf:
@@ -258,3 +222,4 @@ components:
           type: string
           format: date-time
         - $ref: "#/components/schemas/AdvancedDateTimeFilter"
+paths: {}

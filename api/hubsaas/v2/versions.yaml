@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Version resource paths and schemas
 paths:
@@ -13,7 +14,7 @@ paths:
       description: >
         Creates a new version by taking a snapshot of the current content of the
         specified file.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       x-semantic-provider:
         - versionKey
       tags:
@@ -32,23 +33,22 @@ paths:
               schema:
                 $ref: "#/components/schemas/VersionResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "409":
-          $ref: "common-responses.yaml#/components/responses/Conflict"
+          $ref: common-responses.yaml#/components/responses/Conflict
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /versions/{versionKey}:
     get:
       operationId: getVersion
       summary: Get a version
-      description: >
+      description: |
         Returns the version metadata and the file content at that version.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       x-semantic-requires:
         kind: Version
         bind:
@@ -67,19 +67,18 @@ paths:
               schema:
                 $ref: "#/components/schemas/VersionDetailResult"
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
     patch:
       operationId: updateVersion
       summary: Update a version
       description: Updates the name of an existing version.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       x-semantic-requires:
         kind: Version
         bind:
@@ -104,23 +103,22 @@ paths:
               schema:
                 $ref: "#/components/schemas/VersionResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "409":
-          $ref: "common-responses.yaml#/components/responses/Conflict"
+          $ref: common-responses.yaml#/components/responses/Conflict
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
     delete:
       operationId: deleteVersion
       summary: Delete a version
       description: Deletes the specified version.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       x-semantic-requires:
         kind: Version
         bind:
@@ -135,21 +133,20 @@ paths:
         "204":
           description: The version was deleted successfully.
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /versions/search:
     post:
       operationId: searchVersions
       summary: Search versions
-      description: >
+      description: |
         Returns versions matching the given search criteria.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       tags:
         - Version
       requestBody:
@@ -166,14 +163,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/VersionSearchQueryResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /versions/{versionKey}/restoration:
     post:
       operationId: restoreVersion
@@ -182,7 +178,7 @@ paths:
         Restores the file content to the state captured in this version. A new
         version is created representing the restored state. For element template
         files, the request body must include the target version number.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       x-semantic-requires:
         kind: Version
         bind:
@@ -201,24 +197,25 @@ paths:
               $ref: "#/components/schemas/VersionRestorationRequest"
       responses:
         "200":
-          description: The version was restored successfully. Returns the newly created version.
+          description: >-
+            The version was restored successfully. Returns the newly created
+            version.
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/VersionResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "409":
-          $ref: "common-responses.yaml#/components/responses/Conflict"
+          $ref: common-responses.yaml#/components/responses/Conflict
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
 components:
   parameters:
     VersionKeyPathParam:
@@ -227,11 +224,8 @@ components:
       required: true
       description: The unique key of the version.
       schema:
-        $ref: "keys.yaml#/components/schemas/VersionKey"
-
+        $ref: keys.yaml#/components/schemas/VersionKey
   schemas:
-    # --- Request schemas ---
-
     VersionCreateRequest:
       type: object
       additionalProperties: false
@@ -239,15 +233,15 @@ components:
         - fileKey
         - name
       example:
-        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
-        name: "Release 1.0"
-        description: "First stable release of the order process."
+        fileKey: 1eadb755-662f-43bd-81d1-cf36f39a0a03
+        name: Release 1.0
+        description: First stable release of the order process.
         organizationPublic: false
       properties:
         fileKey:
           description: The key of the file to create a version for.
           allOf:
-            - $ref: "keys.yaml#/components/schemas/FileKey"
+            - $ref: keys.yaml#/components/schemas/FileKey
         name:
           description: The name for the version.
           type: string
@@ -264,15 +258,14 @@ components:
             Defaults to false.
           type: boolean
           default: false
-
     VersionUpdateRequest:
       type: object
       additionalProperties: false
       required:
         - name
       example:
-        name: "Release 1.1"
-        description: "Updated with error-handling improvements."
+        name: Release 1.1
+        description: Updated with error-handling improvements.
       properties:
         name:
           description: The new name for the version.
@@ -289,7 +282,6 @@ components:
             Whether the version is published to shared resources (visible
             organization-wide). Only applicable to element template files.
           type: boolean
-
     VersionRestorationRequest:
       type: object
       additionalProperties: false
@@ -297,30 +289,27 @@ components:
         version:
           description: >
             The target version number to set in the restored file content.
-            Required when restoring an element template file. Ignored for
-            other file types.
+            Required when restoring an element template file. Ignored for other
+            file types.
           type: integer
           format: int64
-
-    # --- Response schemas ---
-
     VersionResult:
       type: object
       example:
-        versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7"
-        name: "Release 1.0"
-        description: "First stable release of the order process."
-        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+        versionKey: 4afc38ec-ee23-49bb-9a36-92cdba3e75e7
+        name: Release 1.0
+        description: First stable release of the order process.
+        fileKey: 1eadb755-662f-43bd-81d1-cf36f39a0a03
         organizationPublic: false
         linkedToProcessApplication: false
         created: "2025-03-15T10:30:00.000Z"
         createdBy:
-          name: "Jane Doe"
-          email: "jane.doe@example.com"
+          name: Jane Doe
+          email: jane.doe@example.com
         updated: "2025-03-15T10:30:00.000Z"
         updatedBy:
-          name: "Jane Doe"
-          email: "jane.doe@example.com"
+          name: Jane Doe
+          email: jane.doe@example.com
       required:
         - versionKey
         - name
@@ -336,7 +325,7 @@ components:
         versionKey:
           description: The unique key of the version.
           allOf:
-            - $ref: "keys.yaml#/components/schemas/VersionKey"
+            - $ref: keys.yaml#/components/schemas/VersionKey
         name:
           description: The name of the version.
           type: string
@@ -347,52 +336,56 @@ components:
         fileKey:
           description: The key of the file this version belongs to.
           allOf:
-            - $ref: "keys.yaml#/components/schemas/FileKey"
+            - $ref: keys.yaml#/components/schemas/FileKey
         organizationPublic:
           description: Whether the version is published to shared resources.
           type: boolean
         linkedToProcessApplication:
           description: >-
-            Whether this version is linked to one or more process application versions.
+            Whether this version is linked to one or more process application
+            versions.
           type: boolean
         created:
           description: The timestamp when the version was created.
           type: string
           format: date-time
         createdBy:
-          description: The user who created the version. May be null for legacy or system-created versions.
+          description: >-
+            The user who created the version. May be null for legacy or
+            system-created versions.
           nullable: true
           allOf:
-            - $ref: "files.yaml#/components/schemas/UserReference"
+            - $ref: files.yaml#/components/schemas/UserReference
         updated:
           description: The timestamp when the version was last updated.
           type: string
           format: date-time
         updatedBy:
-          description: The user who last updated the version. May be null for legacy or system-created versions.
+          description: >-
+            The user who last updated the version. May be null for legacy or
+            system-created versions.
           nullable: true
           allOf:
-            - $ref: "files.yaml#/components/schemas/UserReference"
-
+            - $ref: files.yaml#/components/schemas/UserReference
     VersionDetailResult:
       type: object
       description: A version with its full metadata and file content.
       example:
-        versionKey: "4afc38ec-ee23-49bb-9a36-92cdba3e75e7"
-        name: "Release 1.0"
-        description: "First stable release of the order process."
-        fileKey: "1eadb755-662f-43bd-81d1-cf36f39a0a03"
+        versionKey: 4afc38ec-ee23-49bb-9a36-92cdba3e75e7
+        name: Release 1.0
+        description: First stable release of the order process.
+        fileKey: 1eadb755-662f-43bd-81d1-cf36f39a0a03
         organizationPublic: false
         linkedToProcessApplication: false
         created: "2025-03-15T10:30:00.000Z"
         createdBy:
-          name: "Jane Doe"
-          email: "jane.doe@example.com"
+          name: Jane Doe
+          email: jane.doe@example.com
         updated: "2025-03-15T10:30:00.000Z"
         updatedBy:
-          name: "Jane Doe"
-          email: "jane.doe@example.com"
-        content: "<?xml version='1.0' encoding='UTF-8'?>..."
+          name: Jane Doe
+          email: jane.doe@example.com
+        content: <?xml version='1.0' encoding='UTF-8'?>...
       required:
         - versionKey
         - name
@@ -409,7 +402,7 @@ components:
         versionKey:
           description: The unique key of the version.
           allOf:
-            - $ref: "keys.yaml#/components/schemas/VersionKey"
+            - $ref: keys.yaml#/components/schemas/VersionKey
         name:
           description: The name of the version.
           type: string
@@ -420,38 +413,40 @@ components:
         fileKey:
           description: The key of the file this version belongs to.
           allOf:
-            - $ref: "keys.yaml#/components/schemas/FileKey"
+            - $ref: keys.yaml#/components/schemas/FileKey
         organizationPublic:
           description: Whether the version is published to shared resources.
           type: boolean
         linkedToProcessApplication:
           description: >-
-            Whether this version is linked to one or more process application versions.
+            Whether this version is linked to one or more process application
+            versions.
           type: boolean
         created:
           description: The timestamp when the version was created.
           type: string
           format: date-time
         createdBy:
-          description: The user who created the version. May be null for legacy or system-created versions.
+          description: >-
+            The user who created the version. May be null for legacy or
+            system-created versions.
           nullable: true
           allOf:
-            - $ref: "files.yaml#/components/schemas/UserReference"
+            - $ref: files.yaml#/components/schemas/UserReference
         updated:
           description: The timestamp when the version was last updated.
           type: string
           format: date-time
         updatedBy:
-          description: The user who last updated the version. May be null for legacy or system-created versions.
+          description: >-
+            The user who last updated the version. May be null for legacy or
+            system-created versions.
           nullable: true
           allOf:
-            - $ref: "files.yaml#/components/schemas/UserReference"
+            - $ref: files.yaml#/components/schemas/UserReference
         content:
           description: The file content at this version.
           type: string
-
-    # --- Search schemas ---
-
     VersionSearchQuery:
       type: object
       required:
@@ -459,21 +454,20 @@ components:
       properties:
         page:
           description: >
-            Pagination criteria. Supports offset-based pagination (from/limit) or
-            a simple limit.
+            Pagination criteria. Supports offset-based pagination (from/limit)
+            or a simple limit.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+            - $ref: search-models.yaml#/components/schemas/SearchQueryPage
         sort:
           description: Sort field criteria.
           type: array
           items:
             $ref: "#/components/schemas/VersionSearchQuerySortRequest"
         filter:
-          description: >
+          description: |
             The version search filters. The fileKey filter is required.
           allOf:
             - $ref: "#/components/schemas/VersionFilter"
-
     VersionSearchQuerySortRequest:
       type: object
       required:
@@ -488,8 +482,7 @@ components:
         order:
           description: The sort direction. Defaults to ASC.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
-
+            - $ref: search-models.yaml#/components/schemas/SortOrderEnum
     VersionFilter:
       type: object
       description: Filter criteria for searching versions.
@@ -498,24 +491,23 @@ components:
       properties:
         fileKey:
           description: >
-            Filter by file key. This is a required filter — versions
-            cannot be searched across files.
+            Filter by file key. This is a required filter — versions cannot be
+            searched across files.
           x-semantic-type: FileKey
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         name:
           description: Filter by version name.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         created:
           description: Filter by creation date.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+            - $ref: filters.yaml#/components/schemas/DateTimeFilterProperty
         createdBy:
           description: Filter by creator email address.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
-
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
     VersionSearchQueryResult:
       type: object
       required:
@@ -530,4 +522,4 @@ components:
         page:
           description: Pagination metadata for the search results.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+            - $ref: search-models.yaml#/components/schemas/SearchQueryPageResponse

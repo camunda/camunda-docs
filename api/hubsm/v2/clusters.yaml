@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Cluster resource paths and schemas
 paths:
@@ -11,7 +12,7 @@ paths:
       operationId: getClusterRegistrations
       summary: Get all cluster registrations
       description: Returns all cluster registrations.
-      x-added-in-version: "0.4.0"
+      x-added-in-version: 0.4.0
       tags:
         - Cluster
       responses:
@@ -22,20 +23,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/ClusterListResult"
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+          $ref: common-responses.yaml#/components/responses/InternalServerError
     post:
       operationId: createClusterRegistration
       summary: Create or update a cluster registration
       description: >-
-        Creates or updates a cluster registration in Camunda Hub via discovery. This does not
-        provision infrastructure — it only creates or updates the cluster registration in Hub. This endpoint requires
-        dynamic cluster management to be enabled. If a cluster with the resolved ID already exists, its
-        registration will be updated.
-      x-added-in-version: "0.4.0"
+        Creates or updates a cluster registration in Camunda Hub via discovery.
+        This does not provision infrastructure — it only creates or updates the
+        cluster registration in Hub. This endpoint requires dynamic cluster
+        management to be enabled. If a cluster with the resolved ID already
+        exists, its registration will be updated.
+      x-added-in-version: 0.4.0
       tags:
         - Cluster
       requestBody:
@@ -48,23 +50,23 @@ paths:
         "204":
           description: The cluster registration was created or updated successfully.
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /clusters/usage-metrics:
     get:
       operationId: getClusterUsageMetrics
       summary: Get cluster usage metrics
       description: >-
-        Returns the usage metrics for a cluster. The provided token is forwarded to the Orchestration
-        Cluster API of the target cluster, so it must additionally include the read:* permission for the
-        orchestration-api audience.
-      x-added-in-version: "0.4.0"
+        Returns the usage metrics for a cluster. The provided token is forwarded
+        to the Orchestration Cluster API of the target cluster, so it must
+        additionally include the read:* permission for the orchestration-api
+        audience.
+      x-added-in-version: 0.4.0
       tags:
         - Cluster
       parameters:
@@ -96,23 +98,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/UsageMetricsResult"
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /clusters/{clusterId}:
     delete:
       operationId: removeClusterRegistration
       summary: Remove a cluster registration
       description: >-
-        Removes a cluster registration from Camunda Hub. This does not delete or deprovision the actual
-        cluster infrastructure — it only removes the cluster registration from Hub. This endpoint requires dynamic
-        cluster management to be enabled.
-      x-added-in-version: "0.4.0"
+        Removes a cluster registration from Camunda Hub. This does not delete or
+        deprovision the actual cluster infrastructure — it only removes the
+        cluster registration from Hub. This endpoint requires dynamic cluster
+        management to be enabled.
+      x-added-in-version: 0.4.0
       tags:
         - Cluster
       parameters:
@@ -121,14 +123,13 @@ paths:
         "204":
           description: The cluster registration was removed successfully.
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
 components:
   parameters:
     ClusterIdPathParam:
@@ -138,10 +139,7 @@ components:
       description: The unique ID identifying the cluster.
       schema:
         type: string
-
   schemas:
-    # --- Response schemas ---
-
     ClusterListResult:
       type: object
       required:
@@ -152,7 +150,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ClusterResult"
-
     ClusterResult:
       type: object
       required:
@@ -212,7 +209,6 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/ClusterLicense"
-
     ClusterCustomProperty:
       type: object
       required:
@@ -227,7 +223,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ClusterCustomPropertyLink"
-
     ClusterCustomPropertyLink:
       type: object
       required:
@@ -240,7 +235,6 @@ components:
         url:
           description: The URL of the link.
           type: string
-
     ClusterApp:
       type: object
       required:
@@ -278,7 +272,6 @@ components:
           description: The readiness URL of the application.
           type: string
           nullable: true
-
     ClusterAppUrls:
       type: object
       required:
@@ -293,7 +286,6 @@ components:
           description: The HTTP/REST URL.
           type: string
           nullable: true
-
     ClusterLicense:
       type: object
       required:
@@ -317,7 +309,6 @@ components:
           type: string
           format: date-time
           nullable: true
-
     UsageMetricsResult:
       type: object
       required:
@@ -347,7 +338,6 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/MetricTotal"
-
     MetricTotal:
       type: object
       required:
@@ -357,7 +347,6 @@ components:
           description: The total count.
           type: integer
           format: int64
-
     TaskUsersMetric:
       type: object
       required:
@@ -373,9 +362,6 @@ components:
           type: array
           items:
             type: string
-
-    # --- Request schemas ---
-
     CreateClusterRequest:
       type: object
       additionalProperties: false
@@ -385,7 +371,9 @@ components:
         - license
       properties:
         clusterId:
-          description: The unique identifier of the cluster. If omitted, resolved from X-Forwarded-For or remote address.
+          description: >-
+            The unique identifier of the cluster. If omitted, resolved from
+            X-Forwarded-For or remote address.
           type: string
           nullable: true
           minLength: 1
@@ -405,7 +393,9 @@ components:
           allOf:
             - $ref: "#/components/schemas/CreateClusterLicense"
         profiles:
-          description: The active component profiles of the cluster (e.g. broker, gateway, operate, tasklist).
+          description: >-
+            The active component profiles of the cluster (e.g. broker, gateway,
+            operate, tasklist).
           type: array
           nullable: true
           items:
@@ -420,7 +410,6 @@ components:
             type: string
             minLength: 1
             maxLength: 255
-
     CreateClusterLicense:
       type: object
       additionalProperties: false

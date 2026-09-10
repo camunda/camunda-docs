@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Catalog resource paths and schemas
 paths:
@@ -10,39 +11,68 @@ paths:
     put:
       operationId: ingestCatalogAssets
       summary: Ingest catalog assets
-      description: |
+      description: >
         Ingests the full set of catalog assets.
 
-        For each asset, the actual element template JSON file as well as an accompanying README file must be provided.
-        The README should provide a description of the asset and can use Markdown syntax. It must contain a YAML
-        frontmatter section with a `template` field that references the element template by its file name. Optionally,
-        the frontmatter can specify a `category` and a list of `tags` that can be used to search and filter assets in
+
+        For each asset, the actual element template JSON file as well as an
+        accompanying README file must be provided.
+
+        The README should provide a description of the asset and can use
+        Markdown syntax. It must contain a YAML
+
+        frontmatter section with a `template` field that references the element
+        template by its file name. Optionally,
+
+        the frontmatter can specify a `category` and a list of `tags` that can
+        be used to search and filter assets in
+
         the catalog.
 
+
         ```
+
         ---
+
         template: banking-system-connector.json
+
         category: Finance
+
         tags:
           - invoice
           - payment
           - transaction
         ---
+
         ## Description
+
         ...
+
 
         ## Usage
+
         ...
+
         ```
 
-        The files must be provided as `multipart/form-data` with the named parts `readme` and `template` (the part name
+
+        The files must be provided as `multipart/form-data` with the named parts
+        `readme` and `template` (the part name
+
         is the same for each file of the respective type).
 
-        Previously ingested assets that are not included in the request payload will be marked as unpublished in the
-        catalog. Unpublished assets are only accessible to administrators; regular modeling users cannot use them for
-        new diagram elements anymore. Existing diagrams using assets that get unpublished will continue to work as
+
+        Previously ingested assets that are not included in the request payload
+        will be marked as unpublished in the
+
+        catalog. Unpublished assets are only accessible to administrators;
+        regular modeling users cannot use them for
+
+        new diagram elements anymore. Existing diagrams using assets that get
+        unpublished will continue to work as
+
         before.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       tags:
         - Catalog
       requestBody:
@@ -55,20 +85,19 @@ paths:
         "204":
           description: The catalog assets were ingested successfully.
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /catalog/assets/{assetKey}:
     delete:
       operationId: deleteCatalogAsset
       summary: Delete a catalog asset
       description: Deletes the catalog asset with the given asset key.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       tags:
         - Catalog
       parameters:
@@ -77,20 +106,19 @@ paths:
         "204":
           description: The catalog asset was deleted successfully.
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /catalog/assets/search:
     post:
       operationId: searchCatalogAssets
       summary: Search catalog assets
       description: Returns catalog assets matching the given search criteria.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       tags:
         - Catalog
       requestBody:
@@ -107,14 +135,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/CatalogAssetSearchQueryResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
 components:
   parameters:
     AssetKeyPathParam:
@@ -123,8 +150,7 @@ components:
       required: true
       description: The unique key identifying the catalog asset.
       schema:
-        $ref: "keys.yaml#/components/schemas/CatalogAssetKey"
-
+        $ref: keys.yaml#/components/schemas/CatalogAssetKey
   schemas:
     CatalogAssetIngestionRequest:
       type: object
@@ -134,27 +160,32 @@ components:
         - template
       properties:
         readme:
-          description: The README files. Each README must reference an element template in its YAML frontmatter.
+          description: >-
+            The README files. Each README must reference an element template in
+            its YAML frontmatter.
           type: array
           items:
             type: string
             format: binary
           minItems: 1
         template:
-          description: The element template files. Each element template must have a corresponding README file.
+          description: >-
+            The element template files. Each element template must have a
+            corresponding README file.
           type: array
           items:
             type: string
             format: binary
           minItems: 1
-
     CatalogAssetSearchQuery:
       type: object
       properties:
         page:
-          description: Pagination criteria. Supports offset-based pagination (from/limit) or a simple limit.
+          description: >-
+            Pagination criteria. Supports offset-based pagination (from/limit)
+            or a simple limit.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+            - $ref: search-models.yaml#/components/schemas/SearchQueryPage
         sort:
           description: Sort field criteria.
           type: array
@@ -164,7 +195,6 @@ components:
           description: The catalog asset search filters.
           allOf:
             - $ref: "#/components/schemas/CatalogAssetFilter"
-
     CatalogAssetSearchQuerySortRequest:
       type: object
       required:
@@ -180,8 +210,7 @@ components:
         order:
           description: The sort direction. Defaults to ASC.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
-
+            - $ref: search-models.yaml#/components/schemas/SortOrderEnum
     CatalogAssetFilter:
       type: object
       description: Filter criteria for searching catalog assets.
@@ -189,46 +218,49 @@ components:
         name:
           description: Filter by asset name.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         resourceId:
-          description: Filter by resource ID (= `id` property of the asset's underlying element template).
+          description: >-
+            Filter by resource ID (= `id` property of the asset's underlying
+            element template).
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         category:
           description: Filter by the name of the asset's category.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
         tag:
           description: Filter by the name of a tag assigned to the asset.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
         unpublished:
           description: Filter by whether the asset has been unpublished.
           type: boolean
         created:
           description: Filter by creation date.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+            - $ref: filters.yaml#/components/schemas/DateTimeFilterProperty
         updated:
           description: Filter by last update date.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+            - $ref: filters.yaml#/components/schemas/DateTimeFilterProperty
         usage:
           description: Filter by usage metrics.
           allOf:
             - $ref: "#/components/schemas/CatalogAssetUsageFilter"
-
     CatalogAssetUsageFilter:
       type: object
       description: Filter criteria for the asset's aggregated usage metrics.
       properties:
         status:
-          description: |
-            Filter by usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED`, `UNUSED`
-            (see the description of the `usage.status` response field for their meaning).
-          allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+          description: >
+            Filter by usage status. Supported values: `UP_TO_DATE`,
+            `UPDATE_AVAILABLE`, `DEPRECATED`, `UNUSED`
 
+            (see the description of the `usage.status` response field for their
+            meaning).
+          allOf:
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
     CatalogAssetResult:
       type: object
       required:
@@ -247,12 +279,14 @@ components:
         assetKey:
           description: The unique key identifying this asset.
           allOf:
-            - $ref: "keys.yaml#/components/schemas/CatalogAssetKey"
+            - $ref: keys.yaml#/components/schemas/CatalogAssetKey
         name:
           description: The name of the asset.
           type: string
         resourceId:
-          description: The user-provided identifier of the asset (= `id` property of the asset's underlying element template).
+          description: >-
+            The user-provided identifier of the asset (= `id` property of the
+            asset's underlying element template).
           type: string
         shortDescription:
           description: The short description of the asset.
@@ -286,7 +320,6 @@ components:
           description: Aggregated usage metrics for the asset.
           allOf:
             - $ref: "#/components/schemas/CatalogAssetUsageResult"
-
     CatalogAssetUsageResult:
       type: object
       required:
@@ -296,13 +329,22 @@ components:
         - projectsOnLatestVersionCount
       properties:
         status:
-          description: |
+          description: >
             The asset's aggregated usage status:
 
-            * `UP_TO_DATE`: The asset is active (= neither unpublished nor deprecated), and only its current latest version is used.
-            * `UPDATE_AVAILABLE`: The asset is active, but at least one usage is on an older version.
-            * `DEPRECATED`: The asset is unpublished, or its latest version is deprecated, but it is still in use. Takes priority over `UPDATE_AVAILABLE` (if an older, non-deprecated version is used).
-            * `UNUSED`: The asset is not used at all. Takes priority over `DEPRECATED` (for unpublished/deprecated assets that are not used).
+
+            * `UP_TO_DATE`: The asset is active (= neither unpublished nor
+            deprecated), and only its current latest version is used.
+
+            * `UPDATE_AVAILABLE`: The asset is active, but at least one usage is
+            on an older version.
+
+            * `DEPRECATED`: The asset is unpublished, or its latest version is
+            deprecated, but it is still in use. Takes priority over
+            `UPDATE_AVAILABLE` (if an older, non-deprecated version is used).
+
+            * `UNUSED`: The asset is not used at all. Takes priority over
+            `DEPRECATED` (for unpublished/deprecated assets that are not used).
           type: string
           enum:
             - UP_TO_DATE
@@ -319,10 +361,10 @@ components:
           format: int64
         projectsOnLatestVersionCount:
           description: >
-            The number of projects (out of `projectCount`) where every usage of the asset is on its current latest version.
+            The number of projects (out of `projectCount`) where every usage of
+            the asset is on its current latest version.
           type: integer
           format: int64
-
     CatalogAssetSearchQueryResult:
       type: object
       required:
@@ -335,4 +377,4 @@ components:
           items:
             $ref: "#/components/schemas/CatalogAssetResult"
         page:
-          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+          $ref: search-models.yaml#/components/schemas/SearchQueryPageResponse

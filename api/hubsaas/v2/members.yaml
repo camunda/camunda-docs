@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Member resource paths and schemas
 paths:
@@ -12,11 +13,11 @@ paths:
       summary: Add or update a member
       description: >
         Adds a member to the workspace, or updates the role of an existing
-        member. The member is identified by their email address. If that
-        user has not logged in yet, a workspace invitation is created and an
-        email is sent instead, and the person becomes an actual member once
-        they log in for the first time.
-      x-added-in-version: "0.1.0"
+        member. The member is identified by their email address. If that user
+        has not logged in yet, a workspace invitation is created and an email is
+        sent instead, and the person becomes an actual member once they log in
+        for the first time.
+      x-added-in-version: 0.1.0
       x-semantic-establishes:
         kind: WorkspaceMemberMembership
         shape: edge
@@ -31,7 +32,7 @@ paths:
       tags:
         - Member
       parameters:
-        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+        - $ref: workspaces.yaml#/components/parameters/WorkspaceKeyPathParam
       requestBody:
         required: true
         content:
@@ -46,22 +47,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/MemberResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /workspaces/{workspaceKey}/members/{email}:
     delete:
       operationId: removeMember
       summary: Remove a member
       description: Removes a member from the workspace.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       x-semantic-requires:
         kind: WorkspaceMemberMembership
         bind:
@@ -74,20 +74,19 @@ paths:
       tags:
         - Member
       parameters:
-        - $ref: "workspaces.yaml#/components/parameters/WorkspaceKeyPathParam"
+        - $ref: workspaces.yaml#/components/parameters/WorkspaceKeyPathParam
         - $ref: "#/components/parameters/MemberEmailPathParam"
       responses:
         "204":
           description: The member was removed successfully.
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "404":
-          $ref: "common-responses.yaml#/components/responses/NotFound"
+          $ref: common-responses.yaml#/components/responses/NotFound
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
   /members/search:
     post:
       operationId: searchMembers
@@ -95,7 +94,7 @@ paths:
       description: >
         Returns members matching the given search criteria. A workspace key
         filter is required — members cannot be searched across workspaces.
-      x-added-in-version: "0.1.0"
+      x-added-in-version: 0.1.0
       x-semantic-requires:
         kind: Workspace
         bind:
@@ -118,14 +117,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/MemberSearchQueryResult"
         "400":
-          $ref: "common-responses.yaml#/components/responses/InvalidData"
+          $ref: common-responses.yaml#/components/responses/InvalidData
         "401":
-          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+          $ref: common-responses.yaml#/components/responses/Unauthorized
         "403":
-          $ref: "common-responses.yaml#/components/responses/Forbidden"
+          $ref: common-responses.yaml#/components/responses/Forbidden
         "500":
-          $ref: "common-responses.yaml#/components/responses/InternalServerError"
-
+          $ref: common-responses.yaml#/components/responses/InternalServerError
 components:
   parameters:
     MemberEmailPathParam:
@@ -135,10 +133,7 @@ components:
       description: The email address of the member.
       schema:
         $ref: "#/components/schemas/MemberEmail"
-
   schemas:
-    # --- Identifier schemas ---
-
     MemberEmail:
       description: The email address identifying a member.
       type: string
@@ -146,9 +141,6 @@ components:
       x-semantic-type: MemberEmail
       x-semantic-client-minted: true
       example: alice@example.com
-
-    # --- Request schemas ---
-
     MemberCreateRequest:
       type: object
       additionalProperties: false
@@ -156,8 +148,8 @@ components:
         - email
         - role
       example:
-        email: "alice@example.com"
-        role: "editor"
+        email: alice@example.com
+        role: editor
       properties:
         email:
           description: The email address of the member to add or update.
@@ -167,16 +159,13 @@ components:
           description: The role to assign to the member.
           allOf:
             - $ref: "#/components/schemas/MemberRole"
-
-    # --- Response schemas ---
-
     MemberResult:
       type: object
       example:
-        workspaceKey: "0108f0ef-5c76-4a75-a602-45a9f04554fd"
-        email: "alice@example.com"
-        name: "Alice Smith"
-        role: "editor"
+        workspaceKey: 0108f0ef-5c76-4a75-a602-45a9f04554fd
+        email: alice@example.com
+        name: Alice Smith
+        role: editor
       required:
         - workspaceKey
         - email
@@ -186,7 +175,7 @@ components:
         workspaceKey:
           description: The unique key of the workspace the member belongs to.
           allOf:
-            - $ref: "keys.yaml#/components/schemas/WorkspaceKey"
+            - $ref: keys.yaml#/components/schemas/WorkspaceKey
         email:
           description: The email address of the member.
           allOf:
@@ -201,7 +190,6 @@ components:
           description: The role of the member in the workspace.
           allOf:
             - $ref: "#/components/schemas/MemberRole"
-
     MemberRole:
       type: string
       description: The role a member can have in a workspace.
@@ -210,9 +198,6 @@ components:
         - editor
         - commenter
         - viewer
-
-    # --- Search schemas ---
-
     MemberSearchQuery:
       type: object
       required:
@@ -220,21 +205,20 @@ components:
       properties:
         page:
           description: >
-            Pagination criteria. Supports offset-based pagination (from/limit) or
-            a simple limit.
+            Pagination criteria. Supports offset-based pagination (from/limit)
+            or a simple limit.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+            - $ref: search-models.yaml#/components/schemas/SearchQueryPage
         sort:
           description: Sort field criteria.
           type: array
           items:
             $ref: "#/components/schemas/MemberSearchQuerySortRequest"
         filter:
-          description: >
+          description: |
             The member search filters. The workspaceKey filter is required.
           allOf:
             - $ref: "#/components/schemas/MemberFilter"
-
     MemberSearchQuerySortRequest:
       type: object
       required:
@@ -250,8 +234,7 @@ components:
         order:
           description: The sort direction. Defaults to ASC.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
-
+            - $ref: search-models.yaml#/components/schemas/SortOrderEnum
     MemberFilter:
       type: object
       description: Filter criteria for searching members.
@@ -264,20 +247,19 @@ components:
             members cannot be searched across workspaces.
           x-semantic-type: WorkspaceKey
           allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
         email:
           description: Filter by member email address.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         name:
           description: Filter by member display name.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+            - $ref: filters.yaml#/components/schemas/StringFilterProperty
         role:
           description: Filter by member role.
           allOf:
-            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
-
+            - $ref: filters.yaml#/components/schemas/BasicStringFilterProperty
     MemberSearchQueryResult:
       type: object
       required:
@@ -292,4 +274,4 @@ components:
         page:
           description: Pagination metadata for the search results.
           allOf:
-            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+            - $ref: search-models.yaml#/components/schemas/SearchQueryPageResponse

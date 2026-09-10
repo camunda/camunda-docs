@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Common search-related schemas
 components:
@@ -14,20 +15,17 @@ components:
           description: Pagination criteria.
           allOf:
             - $ref: "#/components/schemas/SearchQueryPageRequest"
-
     SearchQueryPage:
       oneOf:
         - $ref: "#/components/schemas/LimitPagination"
         - $ref: "#/components/schemas/OffsetPagination"
-
     SearchQueryPageRequest:
       x-polymorphic-schema: true
-      description: >
+      description: |
         Pagination criteria. Uses offset-based pagination (from/limit).
       oneOf:
         - $ref: "#/components/schemas/LimitPagination"
         - $ref: "#/components/schemas/OffsetPagination"
-
     LimitPagination:
       type: object
       title: Limit-based pagination
@@ -39,7 +37,6 @@ components:
           default: 100
           minimum: 1
           maximum: 10000
-
     OffsetPagination:
       type: object
       title: Offset-based pagination
@@ -58,7 +55,6 @@ components:
           default: 100
           minimum: 1
           maximum: 10000
-
     SearchQueryResponse:
       type: object
       required:
@@ -68,7 +64,6 @@ components:
           description: Pagination metadata for the search results.
           allOf:
             - $ref: "#/components/schemas/SearchQueryPageResponse"
-
     SortOrderEnum:
       description: The order in which to sort the related field.
       type: string
@@ -76,7 +71,6 @@ components:
         - ASC
         - DESC
       default: ASC
-
     SearchQueryPageResponse:
       description: Pagination information about the search results.
       type: object
@@ -89,8 +83,13 @@ components:
           type: integer
           format: int64
         hasMoreTotalItems:
-          description: |
-            Indicates whether the `totalItems` value has been capped due to system limits.
-            When true, `totalItems` is a lower bound and the actual number of matching
+          description: >
+            Indicates whether the `totalItems` value has been capped due to
+            system limits.
+
+            When true, `totalItems` is a lower bound and the actual number of
+            matching
+
             items is greater than the reported value.
           type: boolean
+paths: {}
