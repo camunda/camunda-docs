@@ -1,7 +1,7 @@
 ---
 id: idp-example
 title: Example IDP integration
-description: "A worked example showing how you can integrate a published IDP document extraction template into a simple process in Web Modeler."
+description: "A worked example showing how you can integrate a published IDP document extraction template into a simple process in Camunda Hub."
 ---
 
 import IdpExampleImg from './img/idp-example-process.png';
@@ -28,11 +28,11 @@ In this example, a process is set up with the following steps:
 
 The document extraction template used in this example uses the following extraction fields and sample document.
 
-| Field name      | Field type | Prompt                    |
-| :-------------- | :--------- | :------------------------ |
-| invoiceType     | String     | Find the type of invoice. |
-| invoiceCustomer | String     | The invoice customer.     |
-| invoiceId       | String     | The invoice ID.           |
+| Field name      | Prompt                    |
+| :-------------- | :------------------------ |
+| invoiceType     | Find the type of invoice. |
+| invoiceCustomer | The invoice customer.     |
+| invoiceId       | The invoice ID.           |
 
 <img src={IdpTemplateImg} alt="An example process diagram with three steps" />
 

@@ -28,7 +28,7 @@ Soft deletion only applies to resources deleted using the Camunda Hub user inter
 Permanent deletion occurs 30 days after a resource is deleted. This removes all associated data, including resource content, version history, metadata, and Git links.
 
 :::note
-Using the public API, a client with `delete` permissions can permanently delete a resource before the 30-day window has expired:
+Using the [public API](/apis-tools/hub-api-saas/specifications/permanently-delete-file.api.mdx), a client with `delete` permissions can permanently delete a resource before the 30-day window has expired:
 
 ```bash
 DELETE /api/v2/files/{fileKey}/permanent
@@ -38,7 +38,7 @@ DELETE /api/v2/files/{fileKey}/permanent
 
 ## Purge a file from versions
 
-If you delete a file within a project, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from all project version history, a client with `delete` permissions can call the public purge endpoint:
+If you delete a file within a project, its data is preserved in [older versions](../modeler/modeling/versions.md), if applicable. To permanently delete the file and its data from the file's entire history, a client with `delete` permissions can call the [public purge endpoint](/apis-tools/hub-api-saas/specifications/purge-file.api.mdx):
 
 ```bash
 DELETE /api/v2/files/{fileKey}/purge
@@ -48,7 +48,7 @@ DELETE /api/v2/files/{fileKey}/purge
 
 Only a **Workspace Admin** at the time of the restore attempt can restore a recently deleted workspace. A **Workspace Admin** or **Editor** can restore all other resource types. The role at the time of the original deletion is not considered.
 
-Read more about [access rights and permissions](../modeler/collaboration/collaboration.md#access-rights-and-permissions).
+Read more about [access rights and permissions](/components/hub/organization/manage-workspaces/manage-workspace-members.md#workspace-roles).
 
 ## Browse recently deleted resources
 

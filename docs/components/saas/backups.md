@@ -60,10 +60,11 @@ For detailed information on using the API, refer to the [Administration API refe
 
 ## Restore
 
-You can restore your cluster from a selected backup directly in Console or through the Administration API.
+You can restore your cluster from a selected backup directly in Camunda Hub or through the Administration API.
 
 - See [backup and restore overview](./backup-restore-overview.md).
 - See [restore a cluster from backup](./how-to-restore.md).
+- See [restore scenarios](./restore-scenarios.md).
 - See [restore troubleshooting](./restore-troubleshooting.md).
 
 If the restore action is not available in your organization yet, [contact Camunda support](https://camunda.com/services/support/).

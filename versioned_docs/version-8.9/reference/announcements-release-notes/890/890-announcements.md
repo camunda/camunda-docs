@@ -133,17 +133,18 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 The following key changes were also released as part of an 8.9.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Type            | Key change                                                                                                                    |
-| :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                 |
-| [8.9.12](https://github.com/camunda/camunda/releases/tag/8.9.12) | Breaking change | [Individual component Docker images no longer produced](#individual-component-docker-images-no-longer-produced)              |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                               |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)              |
-| SaaS `8.9 gen13`                                                 | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)             |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                       |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                      |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                |
+| Patch release                                                       | Artifact   | Type            | Key change                                                                                                                    |
+| :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
+| `8.9 gen13`                                                         | SaaS       | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
+| [8.9.12](https://github.com/camunda/camunda/releases/tag/8.9.12)    | Core       | Breaking change | [Individual component Docker images no longer produced](#individual-component-docker-images-no-longer-produced)               |
+| [8.9.10](https://github.com/camunda/connectors/releases/tag/8.9.10) | Connectors | Breaking change | [Connector secret filter now defaults to STRICT](#connector-secret-filter-strict-default)                                     |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                  |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)              |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
 
 ## Agentic orchestration
 
@@ -600,6 +601,30 @@ In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2
 </div>
 
 ## Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
+
+Starting with Connectors 8.9.10, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`.
+
+In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+
+**Action:** Before upgrading, confirm that all connector fields that resolve a secret already reference that secret in the deployed BPMN.
+
+- If a field relies on resolving a secret it doesn't reference, add the reference.
+- To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but note that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
+- Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
+- On Camunda 8 SaaS, you can also change this per cluster in [cluster settings](/components/console/manage-clusters/settings.md#secret-filter-mode) once your cluster is on 8.9.10 or later.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">

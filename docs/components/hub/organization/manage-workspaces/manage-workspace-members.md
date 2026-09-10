@@ -8,12 +8,21 @@ Manage workspace members.
 
 ## About
 
-A workspace has members who manage the workspace or work on workspace resources. The workspace can be managed at the organization or workspace level.
+A workspace has members who manage the workspace or work on workspace resources. Workspace members can be managed at the organization or [workspace](../../workspace/manage-workspace/index.md) level.
 
-<!-- TODO: reference workspace management roles -->
+## Workspace roles
 
-:::tip
-You can also [manage workspace members from within the workspace](../../workspace/manage-workspace/index.md) itself.
+Workspace members are assigned one of the following roles:
+
+| Role                | Access permissions                                                                                                            |
+| :------------------ | :---------------------------------------------------------------------------------------------------------------------------- |
+| **Workspace Admin** | The user can edit the workspace itself, all folders, and diagrams within the workspace, and invite more users to collaborate. |
+| **Editor**          | The user can edit all folders and diagrams within the workspace.                                                              |
+| **Commenter**       | The user cannot edit folders or diagrams or invite users, but can view diagrams and properties and leave comments.            |
+| **Viewer**          | The user cannot edit folders or diagrams nor leave comments, but can only view diagrams.                                      |
+
+:::note
+Additionally, users with the **Organization Owner** or **Organization Admin** role always have access to every workspace in the organization, even if they aren't a member.
 :::
 
 ## Add members
@@ -23,18 +32,21 @@ Add members to grant access to workspace resources:
 1. In Camunda Hub, navigate to **Workspaces**.
 2. Find the workspace, and click **Manage**.
 3. Under **Members**, click **Add members**.
-4. Provide names or email addresses.
+4. Provide names or email addresses. **(SaaS only)** Alternatively, click the email address input field, and select **All users in the organization**.
 5. Select the workspace role, and optionally provide an invitation message.
 6. Click **Add**.
 
-There is no limit to the amount of members you add at one time.
+The members will be added to the workspace and notified via email. Users without email addresses will not receive any kind of notification about workspace invitations.
+
+:::note
+If the individual is not a user in your organization, they will first receive an organization invitation. After accepting the invitation and logging into Camunda Hub, they will be added to the workspace. They will have a "pending" label in the members list until they accept.
+:::
+
+For Self-Managed non-production installations, the number of members per workspace is [limited to **five**](/reference/licenses.md#web-modeler), including the workspace administrator.
 
 :::tip
 In Self-Managed, you can [hide the **Add members** button](/self-managed/components/hub/configuration/properties.md#feature-flags) for non-organization admins.
 :::
-
-<!-- TODO: verify accuracy -->
-<!-- TODO: verify no bulk company invites -->
 
 ## Edit role
 

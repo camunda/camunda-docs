@@ -31,7 +31,7 @@ Learn more about CycloneDX SBOMs (International Standard for Bill of Materials) 
 | Dependencies | <p>Download reports listing all direct and transitive third-party dependencies and their respective licenses from the public portal:</p><ul><li>SBOM: [CycloneDX](https://portal.fossa.com/p/camunda/release/4918/latest)</li><li>Attribution: [TXT](https://portal.fossa.com/p/camunda/release/4917/latest)</li></ul> |
 | Source code  | Access the source code for Desktop Modeler at [github.com/camunda/camunda-modeler](https://github.com/camunda/camunda-modeler).                                                                                                                                                                                        |
 
-## Web Modeler
+## Camunda Hub
 
 | Type         | Description                                                                                                                                                                                                                                                                                                            |
 | :----------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

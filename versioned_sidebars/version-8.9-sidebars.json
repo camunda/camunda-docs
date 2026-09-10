@@ -1344,7 +1344,20 @@
             "components/saas/byok/faq-and-troubleshooting"
           ]
         },
-        "components/saas/backups",
+        {
+          "type": "category",
+          "label": "Backup and restore",
+          "link": {
+            "type": "doc",
+            "id": "components/saas/backup-restore-overview"
+          },
+          "items": [
+            "components/saas/backups",
+            "components/saas/how-to-restore",
+            "components/saas/restore-scenarios",
+            "components/saas/restore-troubleshooting"
+          ]
+        },
         "components/saas/auto-updates",
         "components/saas/data-retention",
         "components/saas/camunda-help-center",
@@ -3316,7 +3329,8 @@
         "apis-tools/migration-manuals/migrate-to-camunda-spring-boot-starter",
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
-        "apis-tools/migration-manuals/saas-orchestration-architecture"
+        "apis-tools/migration-manuals/saas-orchestration-architecture",
+        "apis-tools/migration-manuals/web-modeler-v1-apis"
       ]
     }
   ],
@@ -3492,6 +3506,7 @@
                 "self-managed/deployment/helm/configure/application-configs",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
+                "self-managed/deployment/helm/configure/service-configuration",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/data-retention",
@@ -3642,6 +3657,7 @@
                 "id": "self-managed/deployment/helm/operational-tasks/index"
               },
               "items": [
+                "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
                 {
                   "type": "category",
                   "label": "Migration from Bitnami",

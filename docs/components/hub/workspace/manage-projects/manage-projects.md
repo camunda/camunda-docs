@@ -51,9 +51,9 @@ description: "Validate your project in development before deploying it to your t
 },
 {
 link: "./project-versioning",
-title: "Manage and review project versions",
+title: "Manage and review project snapshots",
 image: DocsIcon,
-description: "Create and review distinct versions for the entire project.",
+description: "Create and review distinct snapshots for the entire project.",
 },
 {
 link: "./deploy-project",

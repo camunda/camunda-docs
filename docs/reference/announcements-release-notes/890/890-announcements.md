@@ -133,16 +133,17 @@ Camunda 8.9 now supports Elasticsearch 9.2+ and OpenSearch 3.4+, allowing you to
 
 The following key changes were also released as part of an 8.9.x patch release or a Camunda 8 SaaS generation update.
 
-| Patch release                                                    | Type            | Key change                                                                                                                    |
-| :--------------------------------------------------------------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
-| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15) | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
-| SaaS `8.9 gen13`                                                 | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
-| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10) | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                  |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)              |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
-| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)   | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
+| Patch release                                                       | Artifact   | Type            | Key change                                                                                                                    |
+| :------------------------------------------------------------------ | :--------- | :-------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Nested input mappings can silently drop sibling fields](#nested-input-mapping-sibling-fields)                                |
+| [8.9.15](https://github.com/camunda/camunda/releases/tag/8.9.15)    | Core       | Regression      | [Chained input mappings can silently drop FEEL temporal value types](#chained-input-mapping-temporal-type-loss)               |
+| `8.9 gen13`                                                         | SaaS       | Change          | [Microsoft Teams notifications require app integrations extensions](#teams-notifications-require-app-integrations-extensions) |
+| [8.9.10](https://github.com/camunda/connectors/releases/tag/8.9.10) | Connectors | Breaking change | [Connector secret filter now defaults to STRICT](#connector-secret-filter-strict-default)                                     |
+| [8.9.10](https://github.com/camunda/camunda/releases/tag/8.9.10)    | Core       | Regression      | [Tasklist V1: candidate group task visibility](#tasklist-v1-candidate-group-task-visibility)                                  |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Multi-instance sub-process output mapping variable scope regression](#multi-instance-output-mapping-regression)              |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Regression      | [Output mapping behavior change for object variables](#output-mapping-behavior-change)                                        |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Breaking change | [`getMessageKeys()` removed from the exporter record](#getmessagekeys-removed-from-the-exporter-record)                       |
+| [8.9.1](https://github.com/camunda/camunda/releases/tag/8.9.1)      | Core       | Change          | [Message TTL cleanup batch size pacing change](#message-ttl-cleanup-batch-size-pacing-change)                                 |
 
 ## Agentic orchestration
 
@@ -164,7 +165,7 @@ The following key changes were also released as part of an 8.9.x patch release o
 ## APIs & tools
 
 :::info 8.9 APIs & Tools migration guide
-Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/apis-tools/migration-manuals/migrate-to-89.md).
+Migrate your API integrations, SDKs, and generated clients to Camunda 8.9 using the [8.9 APIs & Tools migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md).
 :::
 
 :::tip Client and API compatibility
@@ -258,7 +259,7 @@ Previously, a shared `DocumentMetadata` schema was used for both creating and re
 | Generated-client users | <ul><li>Regenerate your client.</li><li>Update any code that references `DocumentMetadata` in response handling as it is now `DocumentMetadataResponse`.</li><li>Review nullable annotations on `DocumentReference.contentHash` and `DocumentMetadataResponse` fields.</li></ul> |
 | Custom integrations    | No request-side changes needed. Response fields listed above are now guaranteed to be present (though some may be `null`).                                                                                                                                                       |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#request-response-schema-split)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#request-response-schema-split)</p>
 
 </div>
 </div>
@@ -310,7 +311,7 @@ Added literals include the following:
 | Generated-client users | Regenerate and add fallback/default handling for enum parsing and matching.                              |
 | Custom integrations    | Review enum branches (for example, exhaustive `switch`/pattern matches) and add handling for new values. |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#enum-extensions)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#enum-extensions)</p>
 
 </div>
 </div>
@@ -349,7 +350,7 @@ Example request payload update for message subscription filtering:
 | Generated-client users | Regenerate clients and update type mappings/imports.            |
 | Custom integrations    | Update request payload construction and affected typed helpers. |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safety-enhancements)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#type-safety-enhancements)</p>
 
 </div>
 </div>
@@ -402,7 +403,7 @@ Previously, only the first conversion error was returned. This fix improves cons
 
 <br/>
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#search-filter-validation-errors)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#search-filter-validation-errors)</p>
 
 </div>
 </div>
@@ -488,7 +489,7 @@ This change is **not binary-compatible**. Code compiled against the old API will
 | Custom `TypedPageableRequest` implementations                                      | Add a pagination type parameter (1 → 2 generic params).                                                           |
 | Storing direction method returns (for example, `SearchRequestPage r = p.from(10)`) | Use `OffsetPage r = p.from(10)`, `CursorForwardPage r = p.after("c")`, or `CursorBackwardPage r = p.before("c")`. |
 
-<p className="link-arrow">[8.9 API migration guide](../../../apis-tools/migration-manuals/migrate-to-89.md#type-safe-pagination)</p>
+<p className="link-arrow">[8.9 API migration guide](/versioned_docs/version-8.9/apis-tools/migration-manuals/migrate-to-89.md#type-safe-pagination)</p>
 
 </div>
 </div>
@@ -599,6 +600,30 @@ In Web Modeler SaaS, the endpoints will no longer be available as of April 14, 2
 </div>
 
 ## Connectors
+
+<div className="release-announcement-row">
+<div className="release-announcement-badge">
+<span className="badge badge--breaking-change">Breaking change</span>
+</div>
+<div className="release-announcement-content">
+
+#### Connector secret filter now defaults to STRICT {#connector-secret-filter-strict-default}
+
+Starting with Connectors 8.9.10, the connector [secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter) defaults to `STRICT` instead of `DISABLED`.
+
+In practice, this means a secret in a connector field only resolves at runtime if that same secret was already referenced in that same field at modeling time, in the deployed BPMN.
+
+**Action:** Before upgrading, confirm all connector fields that resolve a secret already reference that secret in the deployed BPMN.
+
+- If a field relies on resolving a secret it doesn't reference, add the reference.
+- To temporarily unblock connector jobs while you update the model, you can set `camunda.connector.secret-resolver.secret-filter.mode` to `DISABLED`, but be aware that this restores the affected behavior described in [Notice 61](/reference/notices.md#notice-61). Return to `STRICT` after updating the model.
+- Note that `LAX` is not useful in this scenario as it only changes behavior when the process definition cannot be retrieved, not when a field simply doesn't declare the secret.
+- On Camunda 8 SaaS, you can also change this per cluster in [cluster settings](/components/hub/organization/manage-clusters/settings.md#secret-filter-mode) once your cluster is on 8.9.10 or later.
+
+<p className="link-arrow">[Secret filter](/self-managed/components/connectors/connectors-configuration.md#secret-filter)</p>
+
+</div>
+</div>
 
 <div className="release-announcement-row">
 <div className="release-announcement-badge">
@@ -1679,7 +1704,7 @@ You can now invite users who have not yet logged in to Web Modeler by entering t
 
 Inviting the entire organization only applies to users who have logged in at least once.
 
-<p class="link-arrow">[Add users to projects](/components/hub/workspace/modeler/collaboration/collaboration.md#add-users-to-projects)</p>
+<p class="link-arrow">[Add users to projects](/components/hub/organization/manage-workspaces/manage-workspace-members.md#add-members)</p>
 
 </div>
 </div>

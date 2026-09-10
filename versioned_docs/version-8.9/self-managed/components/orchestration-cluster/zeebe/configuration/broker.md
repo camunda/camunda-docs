@@ -127,9 +127,9 @@ Where a specific embedded gateway property has a unified `camunda.*` equivalent,
 
 To configure the embedded gateway, see [Gateway configuration](./gateway.md).
 
-| Field  | Description                                                                                                                                       | Example value |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| enable | Enables the embedded gateway on broker startup. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | false         |
+| Field  | Description                                                                                                                                                           | Example value |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| enable | Enables the embedded gateway on broker startup. Enabled by default. This setting can also be overridden using the environment variable `ZEEBE_BROKER_GATEWAY_ENABLE`. | true          |
 
 #### YAML snippet
 
@@ -137,7 +137,7 @@ To configure the embedded gateway, see [Gateway configuration](./gateway.md).
 zeebe:
   broker:
     gateway:
-      enable: false
+      enable: true
 ```
 
 ### camunda.cluster.network
@@ -899,7 +899,7 @@ as well.
 :::
 
 :::note
-If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md#zeebegatewaymultitenancy).
+If you are using a standalone gateway, refer to the [gateway configuration guide](./gateway.md).
 :::
 
 | Field   | Description                                                                                                                                                  | Example value |

@@ -1,19 +1,19 @@
 ---
 id: database
 title: "Database"
-description: "Learn how to configure Web Modeler to connect securely to supported databases, including PostgreSQL, H2, MariaDB, MSSQL, MySQL, and Oracle."
+description: "Learn how to configure Camunda Hub to connect securely to supported databases, including PostgreSQL, H2, MariaDB, MSSQL, MySQL, and Oracle."
 ---
 
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-This page describes advanced database connection configuration for Web Modeler. For a general setup guide, visit the [configuration overview](properties.md#database).
+This page describes advanced database connection configuration for Camunda Hub. For a general setup guide, visit the [configuration overview](properties.md#database).
 
 :::tip Need end-to-end guidance?
-For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Web Modeler, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
+For a unified setup guide covering provisioning, topology decisions, driver management, and backup strategies across both Orchestration Cluster and Camunda Hub, see the [end-to-end RDBMS setup guide](/self-managed/concepts/databases/relational-db/rdbms-setup-guide.md). This guide is useful both when starting a new setup and when harmonizing existing component configurations.
 :::
 
-Web Modeler supports multiple database vendors such as PostgreSQL, MySQL, MariaDB, and Microsoft SQL Server. You can choose the one that best fits your environment.
+Camunda Hub supports multiple database vendors such as PostgreSQL, MySQL, MariaDB, and Microsoft SQL Server. You can choose the one that best fits your environment.
 
 | Database   | Default driver included | Notes                                                                  |
 | ---------- | ----------------------- | ---------------------------------------------------------------------- |
@@ -26,7 +26,7 @@ Web Modeler supports multiple database vendors such as PostgreSQL, MySQL, MariaD
 
 ## Configuring SSL for the database connection
 
-To configure SSL between Web Modeler and the database:
+To configure SSL between Camunda Hub and the database:
 
 - Modify the JDBC URL using `SPRING_DATASOURCE_URL` and add connection parameters.
 - Provide SSL certificates and keys to the `restapi` component, if required.
@@ -50,7 +50,7 @@ No certificates are required for this mode.
 
 ### SSL mode `verify-full`
 
-Web Modeler verifies the server’s identity by checking its certificate.  
+Camunda Hub verifies the server’s identity by checking its certificate.  
 This mode prevents person-in-the-middle attacks.
 
 1. Provide the root certificate that signed the server certificate:  
@@ -63,7 +63,7 @@ This mode prevents person-in-the-middle attacks.
 
 ### SSL mode `verify-full` with client certificates
 
-In this mode, both the server and Web Modeler authenticate each other using certificates.
+In this mode, both the server and Camunda Hub authenticate each other using certificates.
 
 1. Mount client certificates:
    - `myClientCertificate.pk8 -> ~/.postgresql/postgresql.pk8`
@@ -76,9 +76,9 @@ In this mode, both the server and Web Modeler authenticate each other using cert
    ```
 4. Configure the database server to verify client certificates. See the [PostgreSQL SSL documentation](https://www.postgresql.org/docs/current/ssl-tcp.html).
 
-## Running Web Modeler on Amazon Aurora PostgreSQL
+## Running Camunda Hub on Amazon Aurora PostgreSQL
 
-Web Modeler supports connecting to **Amazon Aurora PostgreSQL**.  
+Camunda Hub supports connecting to **Amazon Aurora PostgreSQL**.  
 To connect, update the following environment variables:
 
 1. Set the JDBC URL:
@@ -110,7 +110,7 @@ To enable IAM database authentication for Aurora PostgreSQL:
    unset SPRING_DATASOURCE_PASSWORD
    ```
 
-When using IAM authentication, ensure Web Modeler has permission to generate IAM authentication tokens (for example, through an attached IAM role or access key).
+When using IAM authentication, ensure Camunda Hub has permission to generate IAM authentication tokens (for example, through an attached IAM role or access key).
 
 ## Using alternative database vendors
 
@@ -310,7 +310,7 @@ This means that if you have a field named `amount`, you cannot create another fi
 
 #### Custom schema
 
-MSSQL supports custom schemas, but this is not configurable within Web Modeler.  
+MSSQL supports custom schemas, but this is not configurable within Camunda Hub.  
 To use a custom schema, set the database user’s **default schema**.
 
 ### MySQL
