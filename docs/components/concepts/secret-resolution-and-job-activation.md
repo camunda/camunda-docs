@@ -6,7 +6,7 @@ description: "Learn how the broker resolves secret references before job activat
 
 Secret resolution lets job workers use secret values at runtime without storing those values in job variables or configuration.
 
-A job whose variables contain secret references is handed to a worker only after every reference has been resolved. The resolved values reach the worker without being written to any record, runtime state, or log.
+A job whose variables contain an [Orchestration Cluster secret reference](/reference/glossary.md#secret-reference-orchestration-cluster) is handed to a worker only after every reference has been resolved. The resolved values reach the worker without being written to any record, runtime state, or log.
 
 The broker resolves secret references in the background rather than while processing a command. It injects the resolved values into the job only when handing the job to a worker. As a result, secret resolution can affect when a job becomes available for activation, even if you don't configure a secret store yourself.
 

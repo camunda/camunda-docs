@@ -4,7 +4,7 @@ title: Manage connector secrets
 description: Create secrets and reference them in your connectors without exposing sensitive information in your BPMN processes.
 ---
 
-Create secrets and reference them in your connectors without exposing sensitive information in your BPMN processes.
+Create [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret) and reference them in your connectors without exposing sensitive information in your BPMN processes.
 
 :::warning
 **Connector secrets** are managed at the cluster level, so ensure you deploy your processes to the cluster that contains the necessary secrets.
@@ -27,7 +27,7 @@ In Self-Managed, review [connector secrets configuration](/self-managed/componen
 
 ## Use secrets in a workflow
 
-Secrets are used inside connector tasks in your BPMN model. Add a connector task, then reference the secret key in a field that supports secrets.
+Secrets are used inside connector tasks in your BPMN model. Add a connector task, then reference the secret key with a [legacy secret reference](/reference/glossary.md#secret-reference-legacy) in a field that supports secrets.
 
 Example for a plain text field (for example, an authorization header value):
 

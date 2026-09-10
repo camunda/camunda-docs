@@ -100,9 +100,9 @@ becomes `KAFKA_CONSUMER`. Therefore, to override it one would need to pass in th
 
 For a complete list of all available connectors and their types, see the [available connectors overview](/components/connectors/out-of-the-box-connectors/available-connectors-overview.md) or check the [official connectors repository](https://github.com/camunda/connectors).
 
-## Using SaaS secrets
+## Using SaaS-managed secrets
 
-If you add the `Secrets` scope to your API client, you can access cluster [secrets](/components/connectors/use-connectors/index.md#using-secrets) in a hybrid setup.
+If you add the `Secrets` scope to your API client, you can access [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret) as [legacy secret references](/components/connectors/use-connectors/index.md#using-secrets) in a hybrid setup.
 
 Enable the SaaS secret provider via an environment variable or in your application config file:
 

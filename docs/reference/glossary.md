@@ -215,6 +215,8 @@ See [Zeebe cluster](#zeebe-cluster).
 
 A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
 
+A cluster variable's value can also be an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) instead of a literal value.
+
 ### Cluster-wide operation
 
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
@@ -239,7 +241,11 @@ Connector types:
 
 ### Connector runtime
 
-The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, handling secrets, and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, resolving [secret references](#secret-reference), and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+
+### Connector secrets
+
+See [SaaS-managed secret](#saas-managed-secret).
 
 ### Connector template
 
@@ -502,6 +508,14 @@ A [Zeebe Client](#zeebe-client) that polls for and executes available [jobs](#jo
 A technically and organizationally secured mechanism that can be triggered at any time by authorized personnel to immediately place an AI use case, together with its connected tools and interfaces, into a safe state. This includes stopping ongoing and planned actions, preventing new executions, revoking or blocking access rights, and logging all measures in an auditable manner.
 
 - [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
+
+### Kubernetes Secret
+
+A Kubernetes object that stores small amounts of sensitive data, such as passwords or tokens, separately from Pod specifications and container images. The Camunda Helm chart uses Kubernetes Secrets to supply credentials to Camunda's own components at deployment time.
+
+A Kubernetes Secret is unrelated to a [secret reference](#secret-reference) or a [SaaS-managed secret](#saas-managed-secret), both of which supply values to a running process rather than to a component's own configuration.
+
+- [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
 
 ## L
 
@@ -777,6 +791,14 @@ See also: [Parent process instance](#parent-process-instance), [Child process in
 
 ## S
 
+### SaaS-managed secret
+
+A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Console, currently under the **Connector secrets** tab of a cluster.
+
+A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components, not to a running process.
+
+- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+
 ### SAP
 
 SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
@@ -794,6 +816,42 @@ Examples of secondary storage backends include:
 
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
 - [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
+
+### Secret reference
+
+A placeholder written into a [process](#process) model that stands in for a secret value, used in a [connector](#connector) field, an input mapping, or a [cluster variable](#cluster-variable). Camunda resolves a secret reference to its value at runtime instead of storing the value in the process itself.
+
+Camunda 8 supports two secret reference syntaxes, which are resolved by different components and are not interchangeable:
+
+- The [legacy secret reference](#secret-reference-legacy) syntax, `{{secrets.<name>}}`
+- The [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) syntax, `camunda.secrets.<name>`
+
+A secret reference is unrelated to a [Kubernetes Secret](#kubernetes-secret). Neither secret reference syntax reads from or resolves a Kubernetes Secret.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret reference (legacy)
+
+The `{{secrets.<name>}}` syntax used in a [connector](#connector) field to reference a secret. The [connector runtime](#connector-runtime) resolves the placeholder at execution time, replacing it with the referenced secret's value.
+
+:::note
+"Legacy" describes this syntax's age relative to the [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster), not its support status. Both syntaxes remain supported.
+:::
+
+- [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
+
+### Secret reference (Orchestration Cluster)
+
+The `camunda.secrets.<name>` syntax used in a FEEL expression, such as an input mapping or a [cluster variable](#cluster-variable), to reference a secret. Unlike a [legacy secret reference](#secret-reference-legacy), the [Orchestration Cluster](#orchestration-cluster) itself resolves this reference through [secret resolution](#secret-resolution), rather than the connector runtime resolving it at execution time.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret resolution
+
+The runtime process by which the [Orchestration Cluster](#orchestration-cluster) retrieves the value behind an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) from a configured secret store and makes it available for injection into a job. Secret resolution runs on a background scheduler ahead of job activation, not on the processing path.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+- [Troubleshoot secret resolution failures](/components/concepts/secret-resolution-incidents.md)
 
 ### Segment
 
