@@ -49,7 +49,7 @@ A name a model can reference is not guaranteed to be creatable or manageable thr
 
 The broker path resolves references in a job's variables in the background and injects the resolved values only when the job is activated. See [Secret resolution and job activation](secret-resolution-and-job-activation.md) for the scheduler, caching, and delivery mechanics, including why no resolved value reaches a record, runtime state, or log on this path.
 
-The gateway API path serves callers that have no job to wait on. An inbound connector resolves the references an expression evaluation used, in batches, through `POST /v2/secrets/resolve`. The modeller calls `POST /v2/secrets/list` to offer known reference names while you author a model. Both endpoints share a request and response contract described in [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md); for the full request and response schema of each, see [Resolve secrets](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets.api.mdx) and [List secrets](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx).
+The gateway API path serves callers that have no job to wait on. An inbound connector resolves the references an expression evaluation used, in batches, through `POST /v2/secrets/resolve`. The Web Modeler calls `POST /v2/secrets/list` to offer known reference names while you author a model. Both endpoints share a request and response contract described in [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md); for the full request and response schema of each, see [Resolve secrets](/apis-tools/orchestration-cluster-api-rest/specifications/resolve-secrets.api.mdx) and [List secrets](/apis-tools/orchestration-cluster-api-rest/specifications/list-secrets.api.mdx).
 
 ## Physical-tenant scope
 
@@ -67,7 +67,7 @@ Listing is different by design. What a store's cache holds is the values it has 
 
 - More than one secret store per physical tenant. A reference always addresses the `default` store.
 - Pinning an AWS Secrets Manager secret to a version stage other than `AWSCURRENT`, or a GCP Secret Manager secret to a version other than `latest`.
-- Filtering or paginating a `POST /v2/secrets/list` responsem, see [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets).
+- Filtering or paginating a `POST /v2/secrets/list` response, see [Secrets](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-secrets.md#list-secrets).
 - The general limitations that apply to every alpha feature, see [alpha features](/components/early-access/alpha/alpha-features.md).
 
 ## Related resources
