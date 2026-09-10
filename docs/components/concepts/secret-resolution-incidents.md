@@ -139,7 +139,7 @@ Job push does not bypass the transport message-size limit. If the pushed job exc
 
 ## Resume a suspended job after secret resolution
 
-A job waiting for an uncached secret enters `WAITING_FOR_SECRET_RESOLUTION`. If you suspend its process instance, the job enters `SUSPENDED` instead.
+A job waiting for an uncached secret is parked, as described in [activate a job that references secrets](secret-resolution-and-job-activation.md#activate-a-job-that-references-secrets). If you suspend its process instance, the job enters `SUSPENDED` instead.
 
 If the secret resolves while the process instance is suspended, the job remains suspended and does not become activatable automatically.
 
