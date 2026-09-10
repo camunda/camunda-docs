@@ -1,7 +1,6 @@
-// Filter out APIs that are only available in Self-Managed
-// Self-Managed-only endpoints are marked with x-availability: SM
-// All other endpoints, including x-availability: "SaaS" and those
-// without an x-availability property, are availabe in SaaS.
+// Keep only APIs available in SaaS: endpoints with no
+// x-availability property, or with x-availability: "SaaS".
+// This drops Self-Managed-only endpoints (x-availability: "SM").
 
 const fs = require("fs");
 const path = require("path");
@@ -17,7 +16,7 @@ function filterPaths(paths) {
           Object.entries(methods).filter(
             ([, metadata]) =>
               !Object.hasOwn(metadata, "x-availability") ||
-              metadata["x-availability"].toLowerCase() !== "sm"
+              metadata["x-availability"].toLowerCase() === "saas"
           )
         );
         return [route, filteredMethods];
