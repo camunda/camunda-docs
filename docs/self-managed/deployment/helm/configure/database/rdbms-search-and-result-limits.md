@@ -15,11 +15,11 @@ In RDBMS-backed deployments, `totalResults` is capped at **10,000** to improve p
 
 Example response:
 
-```jsonc
+```json
 {
-  "items": [/* 100 items */],
+  "items": ["...100 items..."],
   "totalResults": 10000,
-  "hasMoreTotalItems": true,
+  "hasMoreTotalItems": true
 }
 ```
 
