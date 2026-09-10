@@ -36,7 +36,7 @@ An error message that provides additional context.
 ### leaseToken?
 
 ```ts
-optional leaseToken?: string | null;
+optional leaseToken?: JobLeaseToken | null;
 ```
 
 The token identifying a leased job's activation, obtained from `ActivatedJobResult.leaseToken`.

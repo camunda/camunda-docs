@@ -20,13 +20,6 @@
       "label": "Create an agent instance"
     }
   ],
-  "createAgentInstanceHistoryItem": [
-    {
-      "file": "agent-instance.ts",
-      "region": "CreateAgentInstanceHistoryItem",
-      "label": "Append an agent instance history item"
-    }
-  ],
   "searchAgentInstanceHistory": [
     {
       "file": "agent-instance.ts",
@@ -1626,6 +1619,55 @@
       "label": "Delete a history backup (cluster admin)"
     }
   ],
+  "takeRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "TakeRuntimeBackupAsClusterAdmin",
+      "label": "Take a runtime backup (cluster admin)"
+    }
+  ],
+  "listRuntimeBackupsAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "ListRuntimeBackupsAsClusterAdmin",
+      "label": "List runtime backups (cluster admin)"
+    }
+  ],
+  "getRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "GetRuntimeBackupAsClusterAdmin",
+      "label": "Get a runtime backup (cluster admin)"
+    }
+  ],
+  "deleteRuntimeBackupAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteRuntimeBackupAsClusterAdmin",
+      "label": "Delete a runtime backup (cluster admin)"
+    }
+  ],
+  "getRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "GetRuntimeBackupStateAsClusterAdmin",
+      "label": "Get the runtime backup state (cluster admin)"
+    }
+  ],
+  "syncRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "SyncRuntimeBackupStateAsClusterAdmin",
+      "label": "Force-write the runtime backup state (cluster admin)"
+    }
+  ],
+  "deleteRuntimeBackupStateAsClusterAdmin": [
+    {
+      "file": "backup.ts",
+      "region": "DeleteRuntimeBackupStateAsClusterAdmin",
+      "label": "Delete the runtime backup state (cluster admin)"
+    }
+  ],
   "pauseClusterExporting": [
     {
       "file": "exporting.ts",
@@ -1645,6 +1687,27 @@
       "file": "exporting.ts",
       "region": "GetClusterExportingStatus",
       "label": "Get cluster exporting status"
+    }
+  ],
+  "triggerClusterRebalance": [
+    {
+      "file": "admin-operations.ts",
+      "region": "TriggerClusterRebalance",
+      "label": "Trigger a cluster-wide leadership rebalance"
+    }
+  ],
+  "getClusterRebalance": [
+    {
+      "file": "admin-operations.ts",
+      "region": "GetClusterRebalance",
+      "label": "Get cluster rebalance status"
+    }
+  ],
+  "cancelClusterRebalance": [
+    {
+      "file": "admin-operations.ts",
+      "region": "CancelClusterRebalance",
+      "label": "Cancel the running cluster rebalance"
     }
   ]
 }

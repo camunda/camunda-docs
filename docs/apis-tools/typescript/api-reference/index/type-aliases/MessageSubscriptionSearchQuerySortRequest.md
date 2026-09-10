@@ -17,6 +17,7 @@ type MessageSubscriptionSearchQuerySortRequest = object;
 
 ```ts
 field:
+  | "businessId"
   | "messageSubscriptionKey"
   | "processDefinitionId"
   | "processDefinitionName"

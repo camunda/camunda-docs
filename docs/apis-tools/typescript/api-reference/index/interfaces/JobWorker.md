@@ -83,10 +83,7 @@ stop(): void;
 ### stopGracefully()
 
 ```ts
-stopGracefully(opts?): Promise<{
-  remainingJobs: number;
-  timedOut: boolean;
-}>;
+stopGracefully(opts?): Promise<GracefulStopResult>;
 ```
 
 Gracefully stop the worker: prevent new polls, allow any in-flight activation to finish
@@ -107,7 +104,4 @@ If timeout is reached, falls back to hard stop logic (cancels activation if stil
 
 #### Returns
 
-`Promise`\<\{
-`remainingJobs`: `number`;
-`timedOut`: `boolean`;
-\}\>
+`Promise`\<`GracefulStopResult`\>

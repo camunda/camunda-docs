@@ -2,13 +2,17 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
-    "moduleResolution": "Node",
+    // `Bundler` (not `Node`) because the optional `effect` peer is an exports-map-only
+    // package with no legacy `main`/`types` — the same requirement the README states for
+    // consumers of the `/effect` subpath. Classic Node resolution cannot see its types.
+    "moduleResolution": "Bundler",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
     "paths": {
-      "@camunda8/orchestration-cluster-api": ["../src/index.ts"]
+      "@camunda8/orchestration-cluster-api": ["../src/index.ts"],
+      "@camunda8/orchestration-cluster-api/effect": ["../src/effect/index.ts"]
     }
   },
   "include": ["./*.ts"]

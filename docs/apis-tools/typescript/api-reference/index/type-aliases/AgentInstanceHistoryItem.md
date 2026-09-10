@@ -29,7 +29,7 @@ The content blocks of this history item.
 ### historyItemId
 
 ```ts
-historyItemId: string;
+historyItemId: HistoryItemId;
 ```
 
 Caller-assigned identifier used to detect and dedupe retries of the same
@@ -64,7 +64,7 @@ The loop iteration this item belongs to.
 
 ```ts
 optional metrics?:
-  | AgentInstanceHistoryItemMetrics
+  | AgentInstanceHistoryItemMetricsRequest
   | null;
 ```
 

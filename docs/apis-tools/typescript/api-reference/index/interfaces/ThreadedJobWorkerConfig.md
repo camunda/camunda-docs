@@ -49,7 +49,7 @@ Zod schema for custom headers in the activated job
 ### fetchVariables?
 
 ```ts
-optional fetchVariables?: In extends ZodType<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
+optional fetchVariables?: In extends ZodTypeAny<unknown, unknown, $ZodTypeInternals<unknown, unknown>> ? Extract<keyof output<In>, string>[] : string[];
 ```
 
 Optional list of variable names to fetch during activation
