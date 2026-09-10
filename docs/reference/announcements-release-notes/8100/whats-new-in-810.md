@@ -88,7 +88,7 @@ In 8.10, users in an organization are assigned one of the following roles in Cam
 | Organization Admin | Manages the organization, its members, and its workspaces, with full access to every workspace and project by default.                                                                                                                                                          |
 | DevOps             | Grants cluster create and update, cluster clients, connector secrets, IP allowlisting, secure connectivity, encryption, and the connector-management view, plus Member-level modeling. Cannot manage or view organization members, billing, or organization settings.           |
 
-<p class="link-arrow">[Roles and permissions](/components/hub/organization/manage-users/manage-users.md#roles-and-permissions)</p>
+<p class="link-arrow">[Roles and permissions](/components/hub/organization/manage-users/index.md#roles-and-permissions)</p>
 
 ### Self-Managed roles and permissions
 
