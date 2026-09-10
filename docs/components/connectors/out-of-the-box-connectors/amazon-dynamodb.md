@@ -12,7 +12,7 @@ The **Amazon DynamoDB connector** allows you to connect your BPMN service with A
 To use the **Amazon DynamoDB connector**, you need to have an AWS account with an access key and secret key to access DynamoDB, as well as a region where your DynamoDB instance is located. You can create an account and obtain the access and secret keys from the [AWS Console](https://aws.amazon.com/console/).
 
 :::note
-Use Camunda secrets to store credentials so you don't expose sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to store credentials so you don't expose sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon DynamoDB connector task
@@ -174,9 +174,9 @@ When updating items, if an attribute of type SET is updated, it will be overwrit
 
 **Response**
 
-| Property | Data type | Description |
-| ---------------------------------------------------------------------------------------------------------------------- | --------- | ----------- | ----------------------------- |
-| [Result](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_ResponseElements) | object | Yes | The item to add to the table. |
+| Property                                                                                                               | Data type | Description                   |
+| ---------------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------- |
+| [Result](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_PutItem.html#API_PutItem_ResponseElements) | object    | The item to add to the table. |
 
 #### Delete item
 

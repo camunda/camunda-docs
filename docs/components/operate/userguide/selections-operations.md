@@ -23,6 +23,8 @@ To create a selection and apply an operation, take the following steps:
 1. On the **Processes** page, in the **Process Instances** table, check the box next to the process instances you'd like to include.
 2. In the table header, select the operation you want to apply.
 
+![Three process instances selected in the Process Instances table, with the batch action toolbar visible above the table.](./img/selections-operations.png)
+
 ## Next steps
 
 - [Monitor the batch operation](./monitor-batch-operations.md).

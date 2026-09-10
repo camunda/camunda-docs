@@ -270,7 +270,7 @@ other mechanisms.
 
 ## Secrets
 
-Providing secrets to the runtime environment can be achieved in different ways, depending on your setup.
+Providing values for [legacy secret references](/reference/glossary.md#secret-reference-legacy) to the runtime environment can be achieved in different ways, depending on your setup.
 
 <Tabs groupId="connectorTemplateInbound" defaultValue="default" queryString values={
 [

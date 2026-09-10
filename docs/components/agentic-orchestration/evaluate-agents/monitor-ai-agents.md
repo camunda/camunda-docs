@@ -83,10 +83,10 @@ For guidance on reading these signals to catch a stuck or looping agent, see [de
 
 The conversation history is the agent's decision trail, grouped by [loop iteration](/components/agentic-orchestration/agent-definitions-and-instances.md#conversation-history-and-loop-iterations). Operate labels each group simply as `iteration`, for example `1. iteration`.
 
-By default, entries are sorted by **Most recent first**. You can select **Oldest first** to read the history chronologically:
+By default, entries are sorted by **Latest first**. You can select **Oldest first** to read the history chronologically:
 
-- **Most recent first** helps you quickly understand the current situation, typically when resolving a problem.
-- **Oldest first** helps you trace how the agent reached its current state, typically when building an agent for the first time.
+- **Latest first**: Quickly understand the current situation, typically when resolving a problem.
+- **Oldest first**: Trace how the agent reached its current state, typically when building an agent for the first time.
 
 For this example, the first iteration shows:
 

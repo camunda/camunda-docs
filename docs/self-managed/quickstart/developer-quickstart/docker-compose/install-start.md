@@ -55,7 +55,7 @@ docker compose down -v
 docker compose -f docker-compose-full.yaml down -v
 
 # or for standalone Camunda Hub:
-docker compose -f docker-compose-web-modeler.yaml down -v
+docker compose -f docker-compose-hub.yaml down -v
 ```
 
 :::caution
