@@ -155,14 +155,14 @@ troubleshoot issues with the Azure SDK. To do this, go through the following ste
 
 Zeebe requires an Ingress controller that supports `gRPC` which is built on top of `HTTP/2` transport layer. Therefore, to expose Zeebe Gateway externally, you need the following:
 
-1. An Ingress controller that supports `gRPC` ([ingress-nginx controller](https://github.com/kubernetes/ingress-nginx) supports it out of the box).
+1. An Ingress controller that supports `gRPC`. The reference architectures deploy [Contour](https://projectcontour.io/), which supports it through the `projectcontour.io/upstream-protocol.h2c` annotation on the Orchestration Cluster service. [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) supports it through the `nginx.ingress.kubernetes.io/backend-protocol: GRPC` annotation on the Ingress.
 2. TLS (HTTPS) via [Application-Layer Protocol Negotiation (ALPN)](https://www.rfc-editor.org/rfc/rfc7301.html) enabled in the Zeebe Gateway Ingress object.
 
 However, according to the official Kubernetes documentation about [Ingress TLS](https://kubernetes.io/docs/concepts/services-networking/ingress/#tls):
 
 > There is a gap between TLS features supported by various Ingress controllers. Please refer to documentation on nginx, GCE, or any other platform specific Ingress controller to understand how TLS works in your environment.
 
-Therefore, if you are not using the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), ensure you pay attention to TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deployment/helm/install/quick-install.md).
+Therefore, pay attention to the TLS configuration of the Ingress controller of your choice. Find more details about the Zeebe Ingress setup in the [Kubernetes platforms supported by Camunda](/self-managed/deployment/helm/install/quick-install.md).
 
 ## Identity `contextPath`
 
@@ -180,7 +180,7 @@ The Camunda Hub `restapi` component requires a [database connection](/self-manag
 
 ## Gateway timeout on redirect
 
-A gateway timeout can occur if the headers of a response are too big (for example, if a JWT is returned as `Set-Cookie` header). To avoid this, you can increase the `proxy-buffer-size` of your Ingress controller or Ingress. The setting for **ingress-nginx** can be found [here](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#proxy-buffer-size).
+A gateway timeout can occur if the headers of a response are too big (for example, if a JWT is returned as `Set-Cookie` header). To avoid this, you can increase the header buffer of your Ingress controller. For **ingress-nginx**, set the [`proxy-buffer-size` annotation](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/annotations.md#proxy-buffer-size). For **Contour**, the limits are enforced by Envoy and are not set through an annotation: raise `max-request-headers-kb` in the Contour configuration file, and see [Envoy connection limits](https://projectcontour.io/docs/1.33/configuration/) for the response header limit.
 
 ## Helm CLI version and installation failures
 

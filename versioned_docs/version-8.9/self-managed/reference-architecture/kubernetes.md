@@ -240,16 +240,29 @@ The Zeebe Gateway as part of the Orchestration Cluster requires gRPC, which itse
 If you do not rely on the gRPC capabilities of Camunda 8, you can safely disregard this and use the Orchestration Cluster REST API instead.
 :::
 
-By default, the Camunda 8 Helm chart is compatible with the [Ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
+The reference architectures use [Contour](https://projectcontour.io/), a CNCF Ingress controller backed by the [Envoy proxy](https://www.envoyproxy.io/), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
 
-`Ingress-nginx` deploys a Network Load Balancer (layer 4).
+Contour deploys a Network Load Balancer (layer 4).
 
-The following annotation is added by the Helm chart to enable gRPC:
+Any Ingress controller supporting gRPC and HTTP/2 works. Set the controller through `global.ingress.className`. Each controller declares the gRPC upstream differently, and not on the same object:
+
+| Ingress controller | Annotation                                           | Object                                    |
+| ------------------ | ---------------------------------------------------- | ----------------------------------------- |
+| Contour            | `projectcontour.io/upstream-protocol.h2c: "26500"`   | Orchestration Cluster `Service`           |
+| Ingress-nginx      | `nginx.ingress.kubernetes.io/backend-protocol: GRPC` | Zeebe `Ingress` (added by the Helm chart) |
+
+With Contour, set the annotation on the Orchestration Cluster service, and use `projectcontour.io/upstream-protocol.h2` instead when the upstream itself uses TLS:
 
 ```yaml
-annotations:
-  nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+orchestration:
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: "26500"
 ```
+
+:::note
+[Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures moved to Contour in 8.9.
+:::
 
 ### Application
 
@@ -372,7 +385,7 @@ If you need more than 128 streams per client, see [Network Load Balancer](#netwo
 
 ##### Network load balancer (NLB)
 
-Camunda 8 is compatible with [Ingress-nginx](https://github.com/kubernetes/ingress-nginx), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
+Camunda 8 is compatible with [Contour](https://projectcontour.io/), which deploys a Network Load Balancer. In this setup, TLS must be terminated within the Ingress, so AWS Certificate Manager (ACM) cannot be used. ACM does not allow exporting the private key required for TLS termination inside the Ingress.
 
 ### Microsoft AKS
 

@@ -37,7 +37,7 @@ Before proceeding with the setup, ensure the following requirements are met:
   If managed PostgreSQL, Elasticsearch, or an external OIDC provider are not available in your organization, you can deploy these infrastructure components on Kubernetes using official operators. See [Required infrastructure](/self-managed/deployment/helm/configure/operator-based-infrastructure.md) for instructions.
   :::
 
-- **Ingress NGINX**: Ensure the [Ingress-nginx](https://github.com/kubernetes/ingress-nginx) controller is set up in the cluster.
+- **Ingress controller**: Ensure an Ingress controller supporting gRPC and HTTP/2 is set up in the cluster. The reference architectures deploy [Contour](https://projectcontour.io/); set your choice through `global.ingress.className`.
 - **AWS OpenSearch Snapshot Repository** - To store the backups of the Camunda web applications. This repository must be configured with OpenSearch to take backups which are stored in Amazon S3. See the [official AWS guide](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/managedomains-snapshot-registerdirectory.html) for detailed steps.
 - **Amazon S3** - An additional bucket to store backup files of the Orchestration Cluster brokers.
 - **Resource Planning**: Make sure you have understood the considerations for [sizing Camunda Clusters](/components/best-practices/architecture/sizing-your-environment.md#camunda-8-self-managed), and have evaluated sufficient CPU, memory, and storage necessary for the deployment.
