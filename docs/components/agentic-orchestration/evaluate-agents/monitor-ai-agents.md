@@ -85,8 +85,8 @@ The conversation history is the agent's decision trail, grouped by [loop iterati
 
 By default, entries are sorted by **Latest first**. You can select **Oldest first** to read the history chronologically:
 
-- **Latest first** helps you quickly understand the current situation, typically when resolving a problem.
-- **Oldest first** helps you trace how the agent reached its current state, typically when building an agent for the first time.
+- **Latest first**: Quickly understand the current situation, typically when resolving a problem.
+- **Oldest first**: Trace how the agent reached its current state, typically when building an agent for the first time.
 
 For this example, the first iteration shows:
 
