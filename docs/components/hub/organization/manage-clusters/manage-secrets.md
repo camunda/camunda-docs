@@ -44,3 +44,5 @@ Example for a FEEL expression (note the double quotes around the placeholder):
 For more details on where secrets are supported, see the [Connectors guide](/components/connectors/use-connectors/index.md#using-secrets).
 
 Now you can reference your secret in any connector as described in the [Connectors guide](/components/connectors/use-connectors/index.md#using-secrets).
+
+To reuse a complete set of authentication and connection settings, rather than a single value, see [credentials](/components/hub/organization/credentials/index.md). A credential's sensitive fields reference secrets you create here.

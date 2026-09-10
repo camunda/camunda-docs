@@ -15,6 +15,10 @@ Learn how to [install connectors in Self-Managed](/self-managed/components/conne
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to model processes in Camunda Hub.
 :::
 
+## Using credentials
+
+Some connectors let you select a [credential](/components/hub/organization/credentials/index.md) instead of entering authentication and connection settings directly on the task. Create the credential once, then select it on any connector task that supports it. Learn how to select or create one in the [Camunda Hub modeling interface](/components/hub/organization/credentials/modeling-interface.md) or in [Desktop Modeler](/components/modeler/desktop-modeler/credentials.md).
+
 ## Using secrets
 
 :::warning

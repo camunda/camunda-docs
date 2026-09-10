@@ -6,11 +6,9 @@ description: "Follow these instructions to manage your organization."
 
 Manage your organization settings.
 
-## Manage organization settings
+### Access organization settings
 
-To manage your organization settings, under **Console** in the left navigation, click **Organization**.
-
-### Overview
+In the left navigation under **Console**, click **Organization**.
 
 The **Overview** tab provides a summary of the organization, including:
 

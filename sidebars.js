@@ -741,6 +741,17 @@ module.exports = {
             },
             {
               type: "category",
+              label: "Manage credentials",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/credentials/credentials",
+              },
+              items: [
+                "components/hub/organization/credentials/credentials-modeling-interface",
+              ],
+            },
+            {
+              type: "category",
               label: "Manage the catalog",
               link: {
                 type: "doc",
@@ -778,11 +789,9 @@ module.exports = {
                 "components/hub/organization/manage-organization-settings/view-organization-activity",
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
                 "components/hub/organization/manage-organization-settings/usage-history",
-                // TODO: Either bring these back when we have content or remove references
-                // "components/hub/organization/manage-organization-settings/usage-alerts",
-                // "components/hub/organization/manage-organization-settings/advanced-search",
+                "components/hub/organization/manage-organization-settings/usage-alerts",
                 "components/hub/organization/manage-organization-settings/switch-organization",
-                // "components/hub/organization/manage-organization-settings/delete-account",
+                "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
                     "components/hub/organization/manage-organization-settings/manage-plan/create-account",
@@ -937,6 +946,7 @@ module.exports = {
         "components/modeler/desktop-modeler/process-applications",
         "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/desktop-modeler/use-connectors",
+        "components/modeler/desktop-modeler/credentials",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
@@ -1145,6 +1155,7 @@ module.exports = {
               items: [
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
+                "components/connectors/custom-built-connectors/credential-templates",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
