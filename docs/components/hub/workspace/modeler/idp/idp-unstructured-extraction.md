@@ -4,17 +4,8 @@ title: Extract unstructured data
 description: "Unstructured data extraction allows you to extract data from unstructured documents."
 ---
 
-import IdpUnstructuredDataExtractionImg from './img/idp-unstructured-data-extraction-screen.png';
-import IdpUploadDocumentsUnstructuredImg from './img/idp-upload-documents-unstructured.png';
-import IdpExtractionFieldsImg from './img/idp-extraction-fields-unstructured.png';
-import IdpValidationResultsImg from './img/idp-validation-results.png';
-import IdpPublishProjectImg from './img/idp-publish-unstructured-project.png';
-import IdpPublishProjectModalImg from './img/idp-publish-modal.png';
-import IdpExtractionFieldsDetailsImg from './img/idp-extraction-fields.png';
 import IdpValidationResultsDetailImg from './img/idp-validation-results-detail.png';
 import IdpValidationResultsSummaryImg from './img/idp-summary.png';
-import IdpVersionsImg from './img/idp-versions.png';
-import IdpExtractionModelImg from './img/idp-extraction-model.png';
 import IdpVersionsLinkImg from './img/idp-versions-link.png';
 import IdpModelSelectionImg from './img/idp-model-selection.png';
 import IdpExtractionEngineSelectionImg from './img/idp-extraction-engines.png';
@@ -31,16 +22,14 @@ Complete the following steps to configure and publish an unstructured data docum
 
 ## Step 1: Upload documents {#upload-documents}
 
-Start by uploading a set of sample PDF documents that represent the specific document type you want to extract data from. You will use these documents throughout the data extraction process.
-
-<img src={IdpUploadDocumentsUnstructuredImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
-
-To upload your sample document(s):
+Start by uploading a set of sample PDF documents that represent the specific document type you want to extract data from:
 
 1. Click **Upload documents** to browse for and upload your sample document(s).
 1. Once you have finished uploading your sample document(s) and want to start testing data extraction, either:
-   - Select the **Extract fields** tab.
+   - Select the **Extract data** tab.
    - Click the **Extract** icon for the document you want to extract data from.
+
+You will use these documents throughout the data extraction process.
 
 ### Document upload guidelines {#document-upload-guidelines}
 
@@ -52,28 +41,21 @@ Start by uploading a sample document that contains all the data fields you want 
 
 - When choosing your sample documents, variation is important to ensure the system captures the full range of document types it will encounter. As a general guideline, Camunda recommends starting with three to five documents, and uploading more as needed to represent the full range of possible data types.
 
-## Step 2: Extract fields {#extract-fields}
+## Step 2: Extract data {#extract-fields}
 
-On the **Extract fields** tab, add the data [extraction fields](idp-key-concepts.md#fields) you want to populate with data from your document(s).
-
-<img src={IdpExtractionFieldsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
+On the **Extract data** tab, add the data [extraction fields](idp-key-concepts.md#fields) you want to populate with data from your document(s):
 
 - Add a separate extraction field for each piece of information you want to extract. For example, for an invoice, you might add a field for the invoice ID, date, customer name, amount, and so on.
 - You can then extract data from your sample document(s) using your chosen LLM extraction model, edit and refine your fields, and save the extracted data as a test case to compare outcomes across different extraction models.
 
 ### Add extraction fields {#add-fields}
 
-Add an extraction field for each piece of data you want to extract from your document(s).
-
-<img src={IdpExtractionFieldsDetailsImg} alt="Data extraction fields" width="700px" style={{marginTop: '0'}} />
+Add an extraction field for each piece of data you want to extract from your document(s):
 
 1. **Field name**: Enter a descriptive name for the field.
    - The name format should follow [FEEL naming convention](/components/modeler/feel/language-guide/feel-variables.md#variable-names), for example it is case sensitive and should not include spaces.
    - The **Field name** is used as an output variable in a BPMN process.
    - Example: "invoiceId” or "invoice_id".
-1. **Type**: Select the data type you want/expect the field to be populated with.
-   - This helps the LLM more accurately extract data. See [extraction field data types](idp-reference.md#data-types).
-   - Example: “Number” for a monetary field (“invoiceAmount”).
 1. **Prompt**: Enter a clear and specific prompt to guide the LLM in accurately extracting data.
    - Try to describe the expected outcome in the prompt in clear and concise terms. For guidance and best practice when writing prompts, refer to the [documentation for your chosen LLM extraction model](idp-reference.md#extraction-models).
    - Example: For an "invoiceDate" field, you might use "The date when the invoice was issued".
@@ -83,7 +65,7 @@ Add an extraction field for each piece of data you want to extract from your doc
 :::note
 You can edit and delete extraction fields at any time. Click the three vertical dots next to the field to open the Options menu.
 
-There's currently no way to reorder existing fields directly; delete and re-add them in the order you want instead. Extraction fields and prompts are stored as part of the document extraction template in Web Modeler, not in the BPMN file, so they can't be edited outside Web Modeler (for example, in an external source control tool).
+There's currently no way to reorder existing fields directly; delete and re-add them in the order you want instead. Extraction fields and prompts are stored as part of the document extraction template in Camunda Hub, not in the BPMN file, so they can't be edited outside Camunda Hub (for example, in an external source control tool).
 :::
 
 ### Extract data and save as test case {#extract-data}
@@ -170,7 +152,7 @@ To validate the data extraction:
 Publish the document extraction template to make it available for [integration into your processes](idp-integrate.md)<!-- and [document automation](idp-document-automation.md) projects -->.
 
 1. Click **Publish** and select either:
-   - **Publish to project**: Only users in the Web Modeler project can access the document extraction template.
+   - **Publish to project**: Only users in the Camunda Hub project can access the document extraction template.
    - **Publish to organization**: The document extraction template is made available as a shared resource within your organization. This option is only available for organization owners or users with the Admin role.
 
 1. On the **Publish Extraction Project** dialog, configure the publish settings.
@@ -199,8 +181,6 @@ You can compare the change history between two template versions as JSON code in
 
 1. Ensure that the sidebar **Show changes** toggle is turned on.
 1. Select the version that you want to compare. The previous version is automatically selected for comparison.
-
-<img src={IdpVersionsImg} alt="Unstructured data extraction screen" style={{marginTop: '0'}} />
 
 The JSON for the previous version is shown on the left, with the currently selected version shown on the right.
 

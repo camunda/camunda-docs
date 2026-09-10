@@ -215,6 +215,8 @@ See [Zeebe cluster](#zeebe-cluster).
 
 A cluster [variable](../../components/concepts/variables/) is a centrally managed configuration value available across a Camunda cluster. It can be defined globally or at the tenant level and is used to provide environment-specific settings, such as API endpoints, feature flags, and shared configuration.
 
+A cluster variable's value can also be an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) instead of a literal value.
+
 ### Cluster-wide operation
 
 An operation that affects the entire [Orchestration Cluster](#orchestration-cluster), such as cluster configuration updates, cluster-level health checks, or cluster backups. Cluster-wide operations are protected by the cluster-admin role and are not scoped to a specific [Physical Tenant](#physical-tenant).
@@ -239,7 +241,11 @@ Connector types:
 
 ### Connector runtime
 
-The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, handling secrets, and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+The [connector runtime](/components/connectors/custom-built-connectors/connector-sdk.md#runtime-environments) is the execution environment responsible for running connector logic, resolving authentication, resolving [secret references](#secret-reference), and communicating with external systems. In SaaS, the runtime is fully managed. In Self-Managed environments, the runtime can run inside the cluster or in hybrid mode.
+
+### Connector secrets
+
+See [SaaS-managed secret](#saas-managed-secret).
 
 ### Connector template
 
@@ -260,6 +266,18 @@ Correlation refers to the act of matching a [message](#message) with an inflight
 A correlation is an attribute within a [message](#message) that is used to match the message against a certain [variable](#process-variable) within an inflight message. If the value of the correlation key matches the value of the variable within the [process instance](#process-instance), the message is matched.
 
 - [Message correlation](/components/concepts/messages.md)
+
+### Credential
+
+A reusable set of authentication and connection settings for a job worker, connector, or other element template, so you don't repeat the same settings on every task that asks for them. A credential is selected as a whole on an element template field; the engine resolves the reference at runtime and passes the credential's values, including any secrets, to the job worker or connector.
+
+- [Manage credentials](/components/hub/organization/credentials/index.md)
+
+### Credential type
+
+The shape of a [credential](#credential), such as AWS Credential, REST Authentication, or JDBC Connection. A credential type defines which fields a credential of that type has, and is defined alongside an element template.
+
+- [Credential types](/components/hub/organization/credentials/index.md#credential-types)
 
 ### CSAP CLI
 
@@ -317,7 +335,7 @@ An event represents a state change associated with an aspect of an executing [pr
 
 ### Execution platform version
 
-In Desktop Modeler and Web Modeler, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
+In Desktop Modeler and Camunda Hub, the execution platform version is the Camunda runtime version that a diagram targets. It determines which execution semantics and validation rules are applied during modeling.
 
 The execution platform version is not a deployed process definition version, a [file version](#version-file) or [project snapshot](#snapshot-project), or a SaaS cluster generation.
 
@@ -350,6 +368,12 @@ This is different from a [Camunda AI agent](#camunda-ai-agent), which is Camunda
 FEEL (Friendly Enough Expression Language) expressions are the unit of computation written in [FEEL](/components/modeler/feel/what-is-feel.md), Camunda's expression language. Camunda evaluates FEEL expressions in BPMN diagrams, DMN tables, and Camunda Forms, for example, in gateway conditions, input/output mappings, and [process variable](#process-variable) references.
 
 - [FEEL expressions](/components/modeler/feel/language-guide/feel-expressions-introduction.md)
+
+### File version {#version-file}
+
+A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 
 ### Fine-tuning
 
@@ -485,6 +509,14 @@ A technically and organizationally secured mechanism that can be triggered at an
 
 - [AI usage guidelines](/guides/build-with-ai/ai-usage-guidelines.md#human-oversight)
 
+### Kubernetes Secret
+
+A Kubernetes object that stores small amounts of sensitive data, such as passwords or tokens, separately from Pod specifications and container images. The Camunda Helm chart uses Kubernetes Secrets to supply credentials to Camunda's own components at deployment time.
+
+A Kubernetes Secret is unrelated to a [secret reference](#secret-reference) or a [SaaS-managed secret](#saas-managed-secret), both of which supply values to a running process rather than to a component's own configuration.
+
+- [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
+
 ## L
 
 ### Large language model (LLM)
@@ -606,7 +638,7 @@ The engine uses process definitions to start [process instances](#process-instan
 
 A process definition version is the numeric version assigned by the Orchestration Cluster each time you deploy a process definition with the same process ID.
 
-Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project), which are saved Web Modeler captures.
+Operate, Optimize, and APIs often shorten this to version. A process definition version is different from a version tag, which is a user-defined label, and from a [file version](#version-file) or [project snapshot](#snapshot-project) in Camunda Hub.
 
 - [Process definition](#process-definition)
 - [Migrate process instances](/components/operate/userguide/process-instance-migration.md)
@@ -665,6 +697,12 @@ An isolated execution unit within an [Orchestration Cluster](#orchestration-clus
 A collection of related files in a Camunda Hub workspace you can work on and deploy as a single bundle. A workspace may contain multiple projects.
 
 - [Project](/components/hub/workspace/manage-projects/manage-projects.md)
+
+### Project snapshot {#snapshot-project}
+
+A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
+
+- [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
 ### Prompt
 
@@ -753,6 +791,14 @@ See also: [Parent process instance](#parent-process-instance), [Child process in
 
 ## S
 
+### SaaS-managed secret
+
+A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Console, currently under the **Connector secrets** tab of a cluster.
+
+A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components, not to a running process.
+
+- [Connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md)
+
 ### SAP
 
 SAP stands for Systems, Applications, and Products in Data Processing; it's an enterprise software platform used to manage business operations such as finance, supply chain, and HR. Camunda integrates with SAP to automate and orchestrate workflows that involve SAP systems, allowing for greater flexibility, transparency, and control over complex business processes.
@@ -771,6 +817,42 @@ Examples of secondary storage backends include:
 - [Secondary storage concepts](/self-managed/concepts/secondary-storage/index.md)
 - [Managing secondary storage](/self-managed/concepts/secondary-storage/managing-secondary-storage.md)
 
+### Secret reference
+
+A placeholder written into a [process](#process) model that stands in for a secret value, used in a [connector](#connector) field, an input mapping, or a [cluster variable](#cluster-variable). Camunda resolves a secret reference to its value at runtime instead of storing the value in the process itself.
+
+Camunda 8 supports two secret reference syntaxes, which are resolved by different components and are not interchangeable:
+
+- The [legacy secret reference](#secret-reference-legacy) syntax, `{{secrets.<name>}}`
+- The [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) syntax, `camunda.secrets.<name>`
+
+A secret reference is unrelated to a [Kubernetes Secret](#kubernetes-secret). Neither secret reference syntax reads from or resolves a Kubernetes Secret.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret reference (legacy)
+
+The `{{secrets.<name>}}` syntax used in a [connector](#connector) field to reference a secret. The [connector runtime](#connector-runtime) resolves the placeholder at execution time, replacing it with the referenced secret's value.
+
+:::note
+"Legacy" describes this syntax's age relative to the [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster), not its support status. Both syntaxes remain supported.
+:::
+
+- [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
+
+### Secret reference (Orchestration Cluster)
+
+The `camunda.secrets.<name>` syntax used in a FEEL expression, such as an input mapping or a [cluster variable](#cluster-variable), to reference a secret. Unlike a [legacy secret reference](#secret-reference-legacy), the [Orchestration Cluster](#orchestration-cluster) itself resolves this reference through [secret resolution](#secret-resolution), rather than the connector runtime resolving it at execution time.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+
+### Secret resolution
+
+The runtime process by which the [Orchestration Cluster](#orchestration-cluster) retrieves the value behind an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) from a configured secret store and makes it available for injection into a job. Secret resolution runs on a background scheduler ahead of job activation, not on the processing path.
+
+- [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
+- [Troubleshoot secret resolution failures](/components/concepts/secret-resolution-incidents.md)
+
 ### Segment
 
 The [log](#log) consists of one or more segments. Each segment is a file containing an ordered sequence records. Segments are deleted when the log is compacted.
@@ -782,12 +864,6 @@ The [log](#log) consists of one or more segments. Each segment is a file contain
 The state of all active [process instances](#process-instance), (these are also known as inflight process instances) are stored as records in an in-memory database called RocksDB. A snapshot represents a copy of all data within the in-memory database at any given point in time. Snapshots are binary images stored on disk and can be used to restore execution state of a [process](#process). The size of a snapshot is affected by the size of the data. Size of the data depends on several factors, including complexity of the [model](#bpmn-model), the size and quantity of variables in each process instance, and the total number of executing [process instances](#process-instance) in a [broker](#zeebe-broker).
 
 - [Resource planning](/components/best-practices/architecture/sizing-self-managed.md#snapshots)
-
-### Snapshot (project)
-
-A project snapshot is a saved capture of all files in a project at a specific point in time. You can compare, restore, review, and deploy project snapshots. They are distinct from deployed process definition versions in the Orchestration Cluster.
-
-- [Project snapshots](/components/hub/workspace/manage-projects/project-versioning.md)
 
 ### Soft pause exporting
 
@@ -874,12 +950,6 @@ A version tag is not generated automatically and does not replace the numeric pr
 
 - [Resource binding types](/components/best-practices/modeling/choosing-the-resource-binding-type.md#versiontag)
 - [Project versioning](/components/hub/workspace/manage-projects/project-versioning.md)
-
-### Version (file)
-
-A file version is a saved snapshot of a single file, such as a BPMN or DMN diagram, form, RPA script, README file, or test file. File versions were previously called milestones. You can compare, restore, and copy file versions. They are distinct from deployed process definition versions in the Orchestration Cluster.
-
-- [Versions](/components/hub/workspace/modeler/modeling/versions.md)
 
 ## W
 
