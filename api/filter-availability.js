@@ -13,6 +13,12 @@ function filterPaths(paths, availability) {
   return Object.fromEntries(
     Object.entries(paths)
       .map(([route, methods]) => {
+        // A path item that's just `{ $ref: ... }` points at a whole path item
+        // defined elsewhere; there's no per-method metadata here to filter on.
+        // Leave it as-is — pruneDanglingRefs() drops it later if its target
+        // ends up empty.
+        if (Object.hasOwn(methods, "$ref")) return [route, methods];
+
         const filteredMethods = Object.fromEntries(
           Object.entries(methods).filter(
             ([, metadata]) =>
@@ -24,6 +30,7 @@ function filterPaths(paths, availability) {
       })
       .filter(
         ([, methods]) =>
+          Object.hasOwn(methods, "$ref") ||
           Object.keys(methods).filter((key) => HTTP_METHODS.includes(key))
             .length > 0
       )
