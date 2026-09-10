@@ -45,7 +45,7 @@ Two kinds of failure are treated differently:
 | The store reports a secret as missing, forbidden, or invalid | Treated as permanent. The reference fails immediately, with no retry and no cache write.                                                                                                     |
 | The store itself is unavailable                              | Treated as transient. The broker retries the store with exponential backoff. After `retry-max-attempts` consecutive failures, the broker fails every reference still pending for that store. |
 
-The broker tracks retry state per store rather than per secret and holds it in memory only. The retry state resets when the broker restarts or the partition changes leader. During backoff, the scheduler skips the store, so its references do not consume batch capacity that a healthy store can use.
+The broker tracks retry state for its store rather than per secret and holds it in memory only. The retry state resets when the broker restarts or the partition changes leader. During backoff, the scheduler skips the store, so its references do not consume batch capacity that a healthy store can use.
 
 A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [resolve secret lookup failures](secret-resolution-incidents.md#resolve-secret-lookup-failures) for the incident message, how to tell the causes apart, and what resolving it does.
 
@@ -93,6 +93,8 @@ The guarantees below describe what Camunda stores, not what a worker does with t
 :::
 
 You don't need to make client-side changes. Existing workers, clients, and job worker libraries continue to work with a cluster that resolves secrets.
+
+One exception: a worker's `CompleteJob`, `FailJob`, or `ThrowError` command is rejected with `INVALID_STATE` if the job is parked for secret resolution when the command arrives; the rejection names the state. This can surface as a race: if a worker's activation times out and it completes, fails, or throws an error late, and by then the job's cached secret value has expired and the broker parked it again, that late command is rejected instead of accepted. The work of that activation is lost, and the job is resolved and handed out again once its references are cached, the same outcome as any other lost race between a timed-out worker and a new activation.
 
 ## Secret values location
 
