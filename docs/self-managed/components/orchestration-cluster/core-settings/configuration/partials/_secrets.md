@@ -8,7 +8,7 @@ Configure the secret stores and cache used to resolve `camunda.secrets.<name>` r
 This configuration is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases. See [Secret resolution](/components/concepts/secret-resolution.md) for the reference syntax and how references are resolved.
 
 :::note
-This secret store configuration applies to **Self-Managed** only. In SaaS, the secret store is provisioned and managed for you: you do not configure a store type, path, or credentials. You manage secret values on the cluster's **Connector secrets** tab, which the cluster resolves as `camunda.secrets.<key>`. See [manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
+This secret store configuration applies only to Self-Managed. In SaaS, the secret store is provisioned and managed for you, so you don't configure a store type, path, or credentials. Manage secret values on the cluster's **Connector secrets** tab and reference them as `camunda.secrets.<key>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname).
 :::
 
 `camunda.secrets.*` sets the defaults inherited by every physical tenant. Override them per physical tenant under `camunda.physical-tenants.<tenant-key>.secrets.*`. See [Validation and constraints](/self-managed/concepts/physical-tenants/configuration-reference.md#validation-and-constraints) in the Physical Tenants configuration reference.
