@@ -3,6 +3,9 @@ name: Sync Camunda Hub REST API
 on:
   schedule:
     - cron: "0 15 * * *"
+  push:
+    branches:
+      - "filter-hub-apis"
   workflow_dispatch:
 
 jobs:
