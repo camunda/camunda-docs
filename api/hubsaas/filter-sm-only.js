@@ -17,7 +17,7 @@ function filterPaths(paths) {
           Object.entries(methods).filter(
             ([, metadata]) =>
               !Object.hasOwn(metadata, "x-availability") ||
-              metadata["x-availability"].toLowerCase() == "sm"
+              metadata["x-availability"].toLowerCase() !== "sm"
           )
         );
         return [route, filteredMethods];
