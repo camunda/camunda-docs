@@ -39,7 +39,7 @@ Two kinds of failure are treated differently:
 
 The broker tracks retry state per store rather than per secret and holds it in memory only. The retry state resets when the broker restarts or the partition changes leader. During backoff, the scheduler skips the store, so its references do not consume batch capacity that a healthy store can use.
 
-A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [resolve secret lookup failures](secret-resolution-incidents.md#resolve-secret-lookup-failures) for the incident message, how to tell the causes apart, and what resolving it does.
+A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [a secret could not be resolved](secret-resolution-incidents.md#a-secret-could-not-be-resolved) for the incident message, how to tell the causes apart, and what resolving it does.
 
 ## Activate a job that references secrets
 
@@ -129,7 +129,7 @@ See the [property reference](/self-managed/components/orchestration-cluster/core
 
 ## Monitor secret resolution
 
-A store that is slow or unavailable shows up as jobs that do not activate, and the job worker does not indicate the cause. The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md).
+A store that is slow or unavailable shows up as jobs that do not activate, and the job worker does not indicate the cause. The cluster emits meters for secret resolution and secret caches. Use these meters to distinguish a cold cache from a store that is not responding. To scrape and interpret cluster meters, see the [metrics reference](/self-managed/operational-guides/monitoring/metrics.md#secret-resolution-and-cache-metrics).
 
 ## Related resources
 

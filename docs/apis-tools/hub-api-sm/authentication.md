@@ -18,7 +18,7 @@ Generate a [JSON Web Token (JWT)](https://jwt.io/introduction/), and include it 
 Create an application with Hub API permissions.
 
 1. [Add an M2M application in Management Identity](/self-managed/components/management-identity/application-user-group-role-management/applications.md#add-an-application).
-2. [Grant this application access](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the **Hub API** with the necessary permissions. This authorization also adds the required `web-modeler-public-api` audience (the internal audience name used by Hub API) to tokens issued for this application, so no `audience` parameter is needed in the token request.
+2. [Grant this application access](/self-managed/components/management-identity/access-management/manage-permissions.md#assign-a-permission-to-an-application) to the **Hub API** with the necessary permissions. This authorization also adds the required `web-modeler-public-api` audience to tokens issued for this application, so no `audience` parameter is needed in the token request.
 3. Capture the `Client ID` and `Client Secret` from the application in Management Identity.
 
 ## Generate a token

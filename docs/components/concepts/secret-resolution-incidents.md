@@ -65,13 +65,13 @@ Injection fails when both of the following conditions apply:
 For example, injection fails if the pointer now addresses a list or object that still contains a secret placeholder. If the value at the pointer no longer contains a placeholder, Camunda [continues without raising an incident](#identify-failures-that-raise-no-incident).
 
 ```text
-The job with key '2251799813685260' cannot be activated, because the secret reference 'camunda.secrets.API_TOKEN' could not be resolved at '/credentials/token'. Fix the variable's value or the input mapping that sets it, then resolve the incident, or use process instance modification to reactivate the element and create a fresh job.
+The job with key '2251799813685260' can not be activated, because the secret reference 'camunda.secrets.API_TOKEN' could not be resolved at '/credentials/token'. Fix the variable's value or the input mapping that sets it, then resolve the incident, or use process instance modification to reactivate the element and create a fresh job.
 ```
 
 If the failure does not identify a specific reference, for example because Camunda cannot read the job variables, the incident uses the following generic message:
 
 ```text
-The job with key '2251799813685260' cannot be activated, because injecting its secret values failed. Resolve the incident, or use process instance modification to reactivate the element and create a fresh job.
+The job with key '2251799813685260' can not be activated, because injecting its secret values failed. Resolve the incident, or use process instance modification to reactivate the element and create a fresh job.
 ```
 
 Long polling and job push use the same incident messages for injection failures.
@@ -95,7 +95,7 @@ If you cannot restore the placeholder, use [process instance modification](proce
 A `MESSAGE_SIZE_EXCEEDED` incident is raised when the resolved secret values make the job too large to fit within the configured activation message size.
 
 ```text
-The job with key '2251799813685260' cannot be activated, because injecting its secret values would grow the activation batch by 5.2MiB, more than any batch can grow without exceeding the configured message size (per default is 4 MB). Try to reduce the size of the secret values or of the job variables.
+The job with key '2251799813685260' can not be activated, because injecting its secret values would grow the activation batch by 5.2MiB, more than any batch can grow without exceeding the configured message size (per default is 4 MB). Try to reduce the size of the secret values or of the job variables.
 ```
 
 The applicable limit is `camunda.cluster.network.max-message-size`, which defaults to `4MB`. Secret values do not have a separate size limit.
@@ -165,7 +165,7 @@ Start with the incident error type and message, then confirm the underlying caus
 | `Secret store '<id>' unavailable (attempt <n>/<m>), retrying in <backoff>: <message>`          | The failure is transient. The broker is retrying the store with backoff, and no incident exists yet. | If the failure persists, restore the store's availability.                                              |
 | `Secret store '<id>' unavailable after <n>/<m> attempts — failing <n> pending refs: <message>` | The store remained unavailable through `retry-max-attempts`, so its pending references failed.       | Restore the store's availability, then resolve the incidents.                                           |
 
-In these log lines, `<message>` contains the store's own error text. Search for a distinctive fragment such as `failed permanently` rather than the entire line.
+The separator in these log lines is an em dash, and `<message>` contains the store's own error text. Search for a distinctive fragment such as `failed permanently` rather than the entire line.
 
 Then verify the reference itself:
 

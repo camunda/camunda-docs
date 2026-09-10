@@ -11,7 +11,7 @@ This connector reuses the base implementation of the [REST connector](../protoco
 
 ## Prerequisites
 
-To use the **Databricks connector**, you need an active Camunda cluster, and a Databricks workspace with — depending on the operation — a SQL warehouse, job, Model Serving endpoint, or Vector Search index to target.
+To use the **Databricks connector**, you need an active Camunda 8.9 or later cluster, and a Databricks workspace with — depending on the operation — a SQL warehouse, job, Model Serving endpoint, or Vector Search index to target.
 
 You also need credentials to authenticate against your workspace. See [configure authentication](#configure-authentication) below.
 
@@ -146,7 +146,7 @@ Gateway conditions:
 Routing everything except `FAILED` or `CANCELED` to `(default)` treats a still-running statement as complete. The `PENDING` or `RUNNING` branch is therefore required when `wait_timeout` is `0s` or the statement continues after a timeout.
 
 :::note
-This template ships with no default error expression. An error expression is evaluated against the mapped output, not the raw response. When you set **Result variable** or **Result expression**, an expression that uses `response.body.status.state` sees `response.body` as `null` and never fires. A failed statement would then complete as a success. Use the gateway pattern above instead.
+This template ships with no default error expression. An error expression is evaluated against the mapped output, not the raw response. When you set **Result variable** or **Result expression**, an expression that uses `response.body.status.state` sees `response.body` as `null` and never fires.A failed statement would then complete as a success. Use the gateway pattern above instead.
 :::
 
 Use the same gateway pattern for job run outcomes. **Get run** reports a failed run in `state.result_state` after `state.life_cycle_state` reaches a terminal state. Map `state.result_state` to a variable and branch on it with the gateway.
