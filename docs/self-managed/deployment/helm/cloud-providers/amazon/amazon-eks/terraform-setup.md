@@ -91,8 +91,6 @@ This guide will incur costs on your cloud provider account, specifically for the
 
 ### Variants
 
-<!-- TODO: eks-single-region-rdbms snippets use the backport-pr-2345-to-main branch, which carries the chart 8.10 shape of these files; switch to blob/main/ once it lands (camunda/camunda-deployment-references#2724). -->
-
 We support the following variants of this architecture:
 
 - **Standard installation** - Uses username and password connection for the Camunda components (or relies on network isolation for specific components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
@@ -151,7 +149,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
    <TabItem value="rdbms" label="RDBMS">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/backport-pr-2345-to-main/aws/kubernetes/eks-single-region-rdbms/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/procedure/get-your-copy.sh
 ```
 
    </TabItem>
@@ -358,7 +356,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    The RDBMS variant extends the Aurora PostgreSQL setup with an additional `camunda_orchestration` database and a dedicated `orchestration_db` user, used as the secondary storage for the Orchestration Cluster:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/backport-pr-2345-to-main/aws/kubernetes/eks-single-region-rdbms/terraform/cluster/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/terraform/cluster/db.tf
    ```
 
    </TabItem>
@@ -734,7 +732,7 @@ To authenticate and authorize access to PostgreSQL and OpenSearch, **you do not 
 The RDBMS variant exports the orchestration database variables.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/backport-pr-2345-to-main/aws/kubernetes/eks-single-region-rdbms/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/procedure/export-helm-values.sh
 ```
 
   </TabItem>
@@ -804,7 +802,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="rdbms" label="RDBMS">
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/backport-pr-2345-to-main/aws/kubernetes/eks-single-region-rdbms/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/procedure/create-setup-db-secret.sh
    ```
 
    </TabItem>
@@ -837,7 +835,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    The RDBMS variant also creates the `camunda_orchestration` database used as secondary storage for the Orchestration Cluster.
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/backport-pr-2345-to-main/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
    ```
 
    </TabItem>
