@@ -175,7 +175,9 @@ Zone awareness names zones instead of numbering brokers, so the zone list can ch
 
 **Activating a declared zone is online.** List every zone the cluster will ever have from the start, and deploy fewer of them. The partition layout reserves the missing zone's replicas, so each partition runs below full redundancy while still holding a majority, and the cluster forms and serves normally. The illustration above uses one replica per zone; with the default `2-2-1` layout the same growth path runs at four replicas of five and reaches five of five once the last zone is deployed. Deploying that zone later only fills in replicas that were already reserved: no broker is renumbered, no partition is redistributed, and the running regions are untouched.
 
-Leaving **one** zone undeployed is always safe from three zones upward, because `N - 1` of `N` is a majority for every `N >= 3`. Leaving more is only safe in larger topologies, and the reference implementation does not allow it: it rejects anything beyond a single undeployed zone at plan time, so the growth path stays the same whatever the zone count.
+Whether a zone can be left undeployed depends on the **replicas** it would have held, not on the zone count. The deployed zones have to keep a majority of the replication factor. With the default `2-2-1`, holding back either database zone leaves 3 of 5 and holding back the tie-breaker leaves 4 of 5, so any single zone can be the one you defer. A lopsided layout such as `4-1-1` does not have that property: deferring the first zone leaves 2 replicas of 6.
+
+The reference implementation checks this rather than assuming it, and refuses to deploy a topology whose undeployed zones hold the majority. It also allows at most one zone to be held back, so the growth path stays the same whatever the zone count.
 
 **Adding a zone that was never declared** changes the zone list in every region and redistributes partitions. Plan the largest topology you expect up front and grow into it.
 
