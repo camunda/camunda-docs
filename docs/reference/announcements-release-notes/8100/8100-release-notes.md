@@ -312,17 +312,17 @@ Object variables are not flattened into per-property fields, and their raw value
 
 Centralized secret resolution through Zeebe is introduced with this alpha. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
 
-- Reference secrets as `camunda.secrets.NAME` in input mappings, expressions, and output mappings. The legacy `{{secrets.NAME}}` syntax continues to work.
+- Reference secrets as `camunda.secrets.NAME` in input mappings and expressions. The legacy `{{secrets.NAME}}` syntax continues to work.
 - Secrets are resolved automatically for activated jobs and can also be requested through the Gateway APIs `/v2/secrets/resolve` and `/v2/secrets/list`.
 - Resolved values are not written to engine state, exports, backups, Operate, Tasklist, or application logs.
-- Self-Managed deployments support AWS Secrets Manager and GCP Secret Manager with workload identity authentication. A file-based provider is available for development and testing.
+- Self-Managed deployments support AWS Secrets Manager and GCP Secret Manager with workload identity authentication. A file-based provider, backed by a mounted Kubernetes secret or a local directory, is also available and can be used in production as well as for local development.
 - SaaS requires no configuration and uses Camunda’s managed secret backend.
 - Camunda 8 Run uses the file-based provider: create one file per secret (filename = secret name, contents = value), and set `camunda.secrets.stores.file.default.path` to that directory in the Camunda 8 Run application configuration.
 
 **Migration:** Existing processes continue to work without changes. For new processes, use `camunda.secrets.NAME`. To migrate hardcoded or connector-specific credentials, store the value in a supported secret store and replace it with a centralized secret reference.
 
 **Limitations:**
-This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 seconds by default.
+This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 minutes by default.
 
 #### New rebalance API for coordinated leadership transfer
 
