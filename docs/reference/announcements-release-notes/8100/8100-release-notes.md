@@ -36,7 +36,44 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## Agentic orchestration
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--medium" title="This feature is in early access">Early access</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span><span class="badge badge--medium" title="This feature affects Hub">Hub</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+
+### Agent tool configuration
+
+<!-- https://github.com/camunda/product-hub/issues/3719, https://github.com/camunda/product-hub/issues/3574 -->
+
+New features help you more easily configure your agent tools when modeling.
+
+| Feature                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Available in                                                                                |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| Fix                               | Automatically detect and apply a safe fix for an agent misconfiguration. <p><ul><li><p>If a `fromAi()` key or an output key is detected as invalid, click the **Fix** button to apply a fix.</p></li><li><p>Applying a fix only rewrites the invalid part of a field value. The **Fix** button is only shown if the field has an existing (misconfigured) value.</p></li></ul></p>                                                                                                                                                                                                            | <p><ul><li>Desktop Modeler</li><li>Hub Modeler</li></ul></p>                                |
+| Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Hub Modeler</li></ul></p>                                |
+| Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Hub Modeler</li></ul></p> |
+
+:::note
+
+- Changes are explicit, apply only when the correction is deterministic, and can be undone.
+- These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
+
+:::
+
+<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+
+### Agentic control plane
+
+<!-- https://github.com/camunda/product-hub/issues/3621 -->
+
+Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view. The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
+
+<p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
+
+### AI Agent connector: Conversation storage SPI redesign
+
+<!-- https://github.com/camunda/connectors/pull/6784 -->
+
+The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
+
+<p class="link-arrow">[Conversation storage SPI redesign](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign)</p>
 
 ### AI Agent connector: new native (v2) element templates
 
@@ -51,26 +88,61 @@ Provider and backend selection are now decoupled: for example, the Anthropic pro
 The legacy connector is deprecated in 8.10 but not removed, and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
 :::
 
-### Improved agent tool configuration
+### AI agent testing assertions in Camunda Process Test
 
-<!-- https://github.com/camunda/product-hub/issues/3719, https://github.com/camunda/product-hub/issues/3574 -->
+<!-- https://github.com/camunda/product-hub/issues/3315 -->
 
-New features help you more easily configure your agent tools when modeling.
+You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions. With this, you can validate agent behavior and output quality with clearer, more reliable test outcomes.
 
-| Feature                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Available in                                                                                |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
-| Fix                               | Automatically detect and apply a safe fix for an agent misconfiguration. <p><ul><li><p>If a `fromAi()` key or an output key is detected as invalid, click the **Fix** button to apply a fix.</p></li><li><p>Applying a fix only rewrites the invalid part of a field value. The **Fix** button is only shown if the field has an existing (misconfigured) value.</p></li></ul></p>                                                                                                                                                                                                            | <p><ul><li>Desktop Modeler</li><li>Web Modeler</li></ul></p>                                |
-| Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Web Modeler</li></ul></p>                                |
-| Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Web Modeler</li></ul></p> |
+- Define conditional behavior in tests with a `when(condition).then(action)` API for activation-based flow control.
+- Assert output quality with LLM-as-a-judge expectations when exact matching is not enough.
+- Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
+- Configure remote or local models through code and properties for both local development and CI/CD pipelines.
 
-<p class="link-arrow">[Assisted tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
 
-:::note
+### Camunda-provided LLM for SaaS
 
-- Changes are explicit, apply only when the correction is deterministic, and can be undone.
-- These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
+<!-- https://github.com/camunda/product-hub/issues/2883 -->
 
-:::
+You can now run any AI Agent on Camunda 8 SaaS in minutes using the Camunda-provided LLM, without wiring your own LLM credentials.
+
+- Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
+- The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
+- This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
+
+<p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
+
+### Judge assertions in CPT JSON Test Cases
+
+<!-- https://github.com/camunda/camunda/issues/46462 -->
+
+Camunda Process Test (CPT) now supports **judge assertions** in JSON test cases.
+
+- Define judge assertions using JSON test case instructions.
+- Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
+
+<p class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</p>
+
+### MCP start event element template
+
+<!-- https://github.com/camunda/connectors/pull/6742 -->
+
+The **MCP start event** element template is now available in Web Modeler and Desktop Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
+
+<p class="link-arrow">[MCP start event](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md)</p>
+
+### Processes MCP Server
+
+<!-- https://github.com/camunda/camunda/issues/48491 -->
+
+AI agents can use the Processes MCP Server to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
+
+- When you deploy a process with an MCP start event it is automatically registered as a callable tool.
+- MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and immediately returning the process instance key.
+- The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
+
+<p class="link-arrow">[Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md)</p>
 
 ### Real-time agent visibility and monitoring
 
@@ -88,29 +160,6 @@ Monitor and evaluate AI agent behavior in Operate.
 If you modeled the agent element before Camunda 8.10, you must [update its element template](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-sub-process-and-ai-agent-task-element-templates-updated) to at least v1 (version 13) or v2 to enable this feature.
 :::
 
-### Agentic control plane
-
-<!-- https://github.com/camunda/product-hub/issues/3621 -->
-
-Use the Optimize agentic control plane dashboard to monitor AI agent adoption, token usage, reliability, and performance across your processes in a single view.
-
-The dashboard is primarily intended to help operators, process owners, and engineering leads who manage AI-agent-powered processes, and need to keep them reliable and cost-effective.
-
-<p class="link-arrow">[Agentic control plane](/components/optimize/userguide/agentic-control-plane.md)</p>
-
-### AI agent testing assertions in Camunda Process Test
-
-<!-- https://github.com/camunda/product-hub/issues/3315 -->
-
-You can now test non-deterministic AI agent behavior in Camunda Process Test (CPT) with conditional behavior controls and evaluation-based assertions. With this, you can validate agent behavior and output quality with clearer, more reliable test outcomes.
-
-- Define conditional behavior in tests with a `when(condition).then(action)` API for activation-based flow control.
-- Assert output quality with LLM-as-a-judge expectations when exact matching is not enough.
-- Assert semantic similarity with embedding-based comparison for responses that vary in phrasing.
-- Configure remote or local models through code and properties for both local development and CI/CD pipelines.
-
-<p class="link-arrow">[Test your AI agents with CPT](/components/agentic-orchestration/evaluate-agents/test-ai-agents.md)</p>
-
 ### Skills repository for pro-code AI enablement
 
 <!-- https://github.com/camunda/product-hub/issues/3557 -->
@@ -123,51 +172,6 @@ The Camunda Skills repository toolset enables AI coding agents to build, validat
 - Create and edit DMN decision tables.
 - Run BPMN lint rules against generated diagrams.
 - Scaffold and wire Camunda Process Test (CPT) integration tests.
-
-### Judge assertions in CPT JSON Test Cases
-
-<!-- https://github.com/camunda/camunda/issues/46462 -->
-
-Camunda Process Test (CPT) now supports **judge assertions** in JSON test cases.
-
-- Define judge assertions using [JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions).
-- Use a preconfigured judge from `camunda-container-runtime.properties` or Spring application properties depending on the test execution context.
-
-### Processes MCP Server
-
-<!-- https://github.com/camunda/camunda/issues/48491 -->
-
-AI agents can use the [Processes MCP Server](/apis-tools/processes-mcp/processes-mcp-overview.md) to discover and call deployed BPMN processes as [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) tools.
-
-When you deploy a process with an MCP start event it is automatically registered as a callable tool. MCP clients connect to the `/mcp/processes` endpoint and can invoke any registered process, with the Orchestration Cluster starting a new process instance and immediately returning the process instance key.
-
-The server also exposes [static tools](/apis-tools/processes-mcp/processes-mcp-static-tools.md) for inspecting running process instances, so agents can check variables, state, and incidents without switching servers.
-
-### AI Agent connector: Conversation storage SPI redesign
-
-<!-- https://github.com/camunda/connectors/pull/6784 -->
-
-The conversation storage SPI used by [custom AI Agent storage backends](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization.md#custom-conversation-storage) has been redesigned. Built-in stores are migrated transparently; custom `ConversationStore` implementations must be updated.
-
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign) for more details.
-
-### Camunda-provided LLM for SaaS
-
-<!-- https://github.com/camunda/product-hub/issues/2883 -->
-
-You can now run any AI Agent on Camunda 8 SaaS in minutes using the [Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md), without wiring your own LLM credentials. Whether you start from a Camunda-provided agentic blueprint or build your own agent from scratch, the required credentials are populated automatically as cluster secrets, so there is little to no extra setup needed to get started.
-
-The included budget is sufficient for hundreds or thousands of agent runs even on a trial account, depending on the model used. For enterprise organizations, AI features must be enabled first; after that, Camunda-provided LLM is enabled automatically.
-
-This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup on day one.
-
-### MCP start event element template
-
-<!-- https://github.com/camunda/connectors/pull/6742 -->
-
-The **MCP start event** element template is now available in Web Modeler and Desktop Modeler. Apply it to a BPMN message start event to configure the process as an MCP tool with name, purpose, inputs, and usage guidance for LLMs.
-
-See [MCP start event](/components/connectors/out-of-the-box-connectors/agentic-ai-mcp-start-event.md) for the full property reference.
 
 ### Standalone evaluation assertions for judge and semantic similarity
 
