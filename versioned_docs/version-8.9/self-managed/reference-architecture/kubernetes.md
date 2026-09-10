@@ -249,7 +249,7 @@ Camunda 8 supports both Kubernetes traffic APIs, and you can use either:
 
 The reference architectures use the Ingress API with [Contour](https://projectcontour.io/), a CNCF Ingress controller backed by the [Envoy proxy](https://www.envoyproxy.io/), which supports gRPC and HTTP/2. This solution is applicable independent of the cloud provider.
 
-Contour deploys a Network Load Balancer (layer 4).
+Contour is exposed through a `LoadBalancer` Service, so the load balancer your cloud provider creates for it operates at layer 4 (on AWS, a Network Load Balancer).
 
 Contour is a choice, not a requirement. Camunda tests the reference architectures with Contour, so that is what the procedures install, but any Ingress controller supporting gRPC and HTTP/2 works, for example [Traefik](https://traefik.io/traefik/), [HAProxy](https://haproxy-ingress.github.io/), or [Envoy Gateway](https://gateway.envoyproxy.io/). Select your own controller through `global.ingress.className`.
 

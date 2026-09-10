@@ -16,7 +16,7 @@ Camunda 8 Self-Managed has multiple web applications and gRPC services. You can 
 
 ## Prerequisites
 
-- An Ingress controller deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `ingress.className`.
+- An Ingress controller deployed in advance. The examples below use the [ingress-nginx controller](https://github.com/kubernetes/ingress-nginx), but you can use any Ingress controller by setting `global.ingress.className` (and `orchestration.ingress.grpc.className` for the Zeebe gRPC Ingress).
 
 :::note
 [Ingress-nginx reached end of life in March 2026](https://kubernetes.io/blog/2025/11/11/ingress-nginx-retirement/). The Camunda 8 reference architectures deploy [Contour](https://projectcontour.io/) instead. The examples on this page still use ingress-nginx annotations; with another controller, translate them to its equivalents. See [Kubernetes reference architecture](/self-managed/reference-architecture/kubernetes.md#load-balancer) for the gRPC annotation each controller expects.
