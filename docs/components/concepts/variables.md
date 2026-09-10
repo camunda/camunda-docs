@@ -212,7 +212,7 @@ An input mapping's `source` can reference a secret directly, without first stori
 
 This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
 
-Using secret references requires a configured [secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) that holds the secret. Without a configured store, the reference cannot be resolved.
+Using secret references requires a secret store that holds the secret. In SaaS, this store is provisioned for you: the values you add on the cluster's **Connector secrets** tab are resolvable as `camunda.secrets.<name>` with no further setup. See [manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). In Self-Managed, an operator must [configure a secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). Without an available store, the reference cannot be resolved.
 
 | Process variables | Input mappings                                                                       | New variables                                                    |
 | ----------------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------- |
