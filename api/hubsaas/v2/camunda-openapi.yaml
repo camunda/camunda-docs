@@ -105,6 +105,8 @@ paths:
     $ref: "catalog.yaml#/paths/~1catalog~1assets~1ingestion"
   /catalog/assets/{assetKey}:
     $ref: "catalog.yaml#/paths/~1catalog~1assets~1{assetKey}"
+  /catalog/assets/search:
+    $ref: "catalog.yaml#/paths/~1catalog~1assets~1search"
   /files:
     $ref: "files.yaml#/paths/~1files"
   /files/{fileKey}:

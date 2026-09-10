@@ -22,6 +22,12 @@ const sidebar: SidebarsConfig = {
           label: "Delete a catalog asset",
           className: "api-method delete",
         },
+        {
+          type: "doc",
+          id: "apis-tools/hub-api-sm/specifications/search-catalog-assets",
+          label: "Search catalog assets",
+          className: "api-method post",
+        },
       ],
     },
     {

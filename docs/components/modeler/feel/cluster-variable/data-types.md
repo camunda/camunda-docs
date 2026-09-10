@@ -37,7 +37,7 @@ Only a `SECRET_REFERENCE`-kind variable has its references resolved. A `JSON`-ki
 
 ### Where references can appear in a value
 
-Camunda scans every string in a `SECRET_REFERENCE`-kind variable's value, including strings nested inside objects and arrays. Object keys are not scanned. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes, up to 240 characters. A name that fails either limit is never resolved; see [secrets](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
+Camunda scans every string in a `SECRET_REFERENCE`-kind variable's value, including strings nested inside objects and arrays. Object keys are not scanned. A reference has the form `camunda.secrets.<name>`, where `<name>` can contain ASCII letters, digits, underscores, and dashes, up to 240 characters. A name that fails either limit is never resolved; see [secrets](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets). This character set applies to references embedded in a cluster-variable value; a reference [written directly in an input mapping source](/components/concepts/variables.md#escape-secret-names-with-special-characters) can use other characters through backtick escaping.
 
 For example, the following value carries two references, one at the top level and one nested:
 

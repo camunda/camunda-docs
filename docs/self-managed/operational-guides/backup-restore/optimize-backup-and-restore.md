@@ -1,6 +1,6 @@
 ---
 id: optimize-backup-and-restore
-sidebar_label: "Optimize — independent backup"
+sidebar_label: "Optimize"
 title: "Back up and restore Optimize independently"
 description: "Learn how to back up and restore Optimize independently of the Orchestration Cluster, including when the Orchestration Cluster uses RDBMS as secondary storage."
 keywords:

@@ -15,6 +15,10 @@ Learn how to [install connectors in Self-Managed](/self-managed/components/conne
 New to modeling with Camunda? The steps below assume some experience with Camunda modeling tools. [Model your first diagram](/components/hub/workspace/modeler/modeling/model-your-first-diagram.md) to learn how to model processes in Camunda Hub.
 :::
 
+## Using credentials
+
+Some connectors let you select a [credential](/components/hub/organization/credentials/index.md) instead of entering authentication and connection settings directly on the task. Create the credential once, then select it on any connector task that supports it. Learn how to select or create one in the [Camunda Hub modeling interface](/components/hub/organization/credentials/modeling-interface.md) or in [Desktop Modeler](/components/modeler/desktop-modeler/credentials.md).
+
 ## Using secrets
 
 :::warning
@@ -57,6 +61,20 @@ our [Connector SDK documentation](/components/connectors/custom-built-connectors
 `secrets.*` is a reserved syntax. Don't use this for other purposes than referencing your secrets in connector fields.
 Using this in other areas can lead to unexpected results and incidents.
 :::
+
+### Using `camunda.secrets.*` references
+
+You can also reference a secret from a [secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) directly in a connector's input mapping, using `camunda.secrets.<name>` in a FEEL expression. This is part of an [alpha feature](/components/early-access/alpha/alpha-features.md). See [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings) for the syntax and its rules.
+
+These forms coexist and are handled differently:
+
+- `{{secrets.*}}` remains fully supported for existing process models. It's still resolved by the connector runtime itself, at execution time, exactly as described above; the runtime keeps receiving it as plain placeholder text in the job's input.
+- `camunda.secrets.<name>` is resolved before the job reaches any worker, including a connector runtime. The connector receives the value already in place, the same way whether the connector runtime is co-located with the cluster or run separately (for example, a self-managed runtime connecting to a SaaS cluster).
+- A [cluster variable](/components/modeler/feel/cluster-variable/data-types.md) of kind `SECRET_REFERENCE` can hold `camunda.secrets.<name>` references in its value. A connector field that reads such a variable, for example `=camunda.vars.env.MY_CONFIG`, receives the resolved value the same way, because the references are recorded on the job and resolved before activation. See [resolve secret references in a cluster variable](/components/modeler/feel/cluster-variable/usage-guide.md#resolve-secret-references-in-a-cluster-variable).
+
+`{{secrets.*}}` values are not scoped per [physical tenant](/self-managed/concepts/physical-tenants/connectors-runtime.md#per-tenant-secret-access) unless you opt in to `physicaltenantaware` in the connector runtime's own configuration. Physical tenant scoping of `camunda.secrets.<name>` is separate from that setting: each physical tenant resolves its own configured secret store.
+
+`{{secrets.*}}` and `camunda.secrets.<name>` can be migrated independently of where the value is stored. If you move a secret value into the store that `camunda.secrets.<name>` uses but keep existing process models on the legacy `{{secrets.NAME}}` syntax, set `camunda.connector.secret-resolver.legacy.mode` to `FALLBACK` on the connector runtime: a legacy-style reference whose name isn't found in a configured secret provider is then looked up in that same store. The default, `ON`, only resolves legacy references from the configured providers.
 
 ## Variable and response mapping
 
