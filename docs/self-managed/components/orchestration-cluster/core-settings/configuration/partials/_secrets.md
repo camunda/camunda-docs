@@ -134,3 +134,24 @@ One cache is created per configured store.
 
   </TabItem>
 </Tabs>
+
+### Concurrency
+
+Applies only to a store whose cost scales with the number of names requested (for example, AWS Secrets Manager without `batch-enabled`, which issues one `GetSecretValue` call per name). A store that resolves a whole request in a single call, such as the file store or a store using `container-secret-id`, is unaffected.
+
+<Tabs>
+  <TabItem value="secrets-concurrency-yaml" label="Application properties">
+
+| Property                          | Description                                                                                                                                                                                                                                                        | Default value                     |
+| :--------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------- |
+| `camunda.secrets.max-concurrency` | Maximum number of sequential backend calls in flight at once for such a store, shared by every such store this physical tenant configures. Lower it to stay within a provider's rate limit (for example, an AWS Secrets Manager or GCP Secret Manager API quota); raising it above what a single request can use has no further effect. Must be at least `1`. | `max(8, 2 × available processors)` |
+
+  </TabItem>
+  <TabItem value="secrets-concurrency-env" label="Environment variables">
+
+| Property                          | Description                                                                                                                                                                                                                                                        | Default value                     |
+| :--------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------------------- |
+| `CAMUNDA_SECRETS_MAXCONCURRENCY`  | Maximum number of sequential backend calls in flight at once for such a store, shared by every such store this physical tenant configures. Lower it to stay within a provider's rate limit (for example, an AWS Secrets Manager or GCP Secret Manager API quota); raising it above what a single request can use has no further effect. Must be at least `1`. | `max(8, 2 × available processors)` |
+
+  </TabItem>
+</Tabs>
