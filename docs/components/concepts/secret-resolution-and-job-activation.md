@@ -18,10 +18,10 @@ Secret resolution is available in both SaaS and Self-Managed.
 
 | Offering     | Secret store            | What you configure                                                                                                                                                                                                                                                                                     |
 | :----------- | :---------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SaaS         | Provisioned and managed | Nothing about the store. You manage secret values on the cluster's **Connector secrets** tab, which the cluster resolves as `camunda.secrets.<key>`. See [manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). |
+| SaaS | Provisioned and managed | No secret store configuration. Manage secret values on the cluster's **Connector secrets** tab and reference them as `camunda.secrets.<key>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). |
 | Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                                  |
 
-The AWS Secrets Manager and GCP Secret Manager store types are Self-Managed configuration surfaces and are not exposed in SaaS.
+You can configure AWS Secrets Manager and GCP Secret Manager stores only in Self-Managed.
 
 ## Resolve references before activation
 
