@@ -62,6 +62,20 @@ function pruneDanglingRefs(paths, specDir, specs) {
   );
 }
 
+// js-yaml drops comments on load/dump, so the leading comment block (e.g. the
+// license header) has to be captured separately and re-prepended after dumping.
+function extractHeaderComments(content) {
+  const lines = content.split("\n");
+  let end = 0;
+  while (
+    end < lines.length &&
+    (lines[end] === "" || lines[end].trimStart().startsWith("#"))
+  ) {
+    end++;
+  }
+  return end === 0 ? "" : lines.slice(0, end).join("\n") + "\n";
+}
+
 function filterSaaSOnly(specDir) {
   const yamlFiles = fs
     .readdirSync(specDir)
@@ -69,8 +83,10 @@ function filterSaaSOnly(specDir) {
     .map((file) => path.join(specDir, file));
 
   const specs = new Map();
+  const headers = new Map();
   for (const filePath of yamlFiles) {
     const content = fs.readFileSync(filePath, "utf8");
+    headers.set(filePath, extractHeaderComments(content));
     const spec = yaml.load(content);
     spec.paths = filterPaths(spec.paths);
     specs.set(filePath, spec);
@@ -81,7 +97,7 @@ function filterSaaSOnly(specDir) {
   }
 
   for (const [filePath, spec] of specs) {
-    fs.writeFileSync(filePath, yaml.dump(spec));
+    fs.writeFileSync(filePath, headers.get(filePath) + yaml.dump(spec));
   }
 }
 
