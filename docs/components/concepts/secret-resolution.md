@@ -12,6 +12,8 @@ The legacy form was the subject of [security notice 61](/reference/notices.md#no
 
 This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
+Secret resolution is available in both SaaS and Self-Managed. See [Availability](/components/concepts/secret-resolution-and-job-activation.md#availability) for what each offering provides and what you configure.
+
 ## Reference syntax
 
 A reference has the form `camunda.secrets.<name>`, where `<name>` is a single, non-empty token of ASCII letters, digits, `_`, and `-`.
