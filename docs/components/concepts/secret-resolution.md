@@ -28,7 +28,7 @@ An unescaped dashed name is not a reference. FEEL reads `=camunda.secrets.db-pas
 
 The engine detects a reference by parsing the FEEL abstract syntax tree, not by matching characters against a fixed set. A name written in a model can therefore be anything a FEEL identifier allows, including unicode letters, `$`, and any name that is backtick-escaped, such as `` =camunda.secrets.`tls.crt` ``.
 
-The gateway API is stricter. `POST /v2/secrets/resolve` and `POST /v2/secrets/list` both reject any name outside `[\p{Alnum}_-]+`.
+The gateway API is stricter. `POST /v2/secrets/resolve` rejects any name outside `[\p{Alnum}_-]+`, and the same charset applies to names managed through `/v2/secrets/*`.
 
 | Name                                       | Resolves in a model | Usable with `/v2/secrets/resolve` or `/v2/secrets/list` |
 | :----------------------------------------- | :-----------------: | :-----------------------------------------------------: |
