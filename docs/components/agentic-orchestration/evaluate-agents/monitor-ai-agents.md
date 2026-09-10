@@ -71,7 +71,6 @@ Select the agent element on the diagram. Operate shows the [data available](/com
 - The tools resolved for it.
 - Its usage metrics: token consumption, tool call count, and model call count against the configured limit.
 
-
 <img src={AgentPanel} alt="Agent panel overview" width="90%"/>
 
 :::note

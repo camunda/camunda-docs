@@ -86,7 +86,7 @@ If the writer was in the lost region, promote a surviving member. The mode depen
 
 <TabItem value="planned">
 
-The region is still reachable, for example during a scheduled evacuation. A switchover completes replication before promoting, so **no data is lost**.
+The region is still reachable, for example during a scheduled evacuation. A switchover completes replication before promoting, so **no data is lost** in the RDBMS. A switchover also takes considerably less time than an unplanned failover.
 
 Run the same script as in step 1, without `--dry-run`. It repeats the quorum report, then promotes a surviving member if the writer was in the lost region:
 
@@ -109,6 +109,10 @@ Whatever had not replicated at the time of the outage can be missing from the pr
 Camunda needs no reconfiguration and no restart. The JDBC driver discovers the new writer for both established connections and brokers that start after the promotion.
 
 If the writer was not in the lost region, no database action is required.
+
+#### Move the Raft leaders to the new writer region
+
+Once the writer has moved, the zone priorities still favour the region that hosted the old one, so partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Raise the priority of the zone that now hosts the writer, so leaders move next to it. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) for applying it to a running cluster.
 
 ### 3. Route client traffic away from the lost region
 
@@ -176,7 +180,9 @@ Verify when done:
 
 ## Activate a declared zone
 
-Activating a zone that was declared in the zone list but never deployed is an **online** operation. The partition layout already reserved that zone's replicas, so activating it only fills them in. No broker is renumbered, no partition is redistributed, and the running regions are not restarted.
+Activating a zone that was declared in the zone list but never deployed is an **online** operation.
+
+The distinction that makes it online is that the zone already exists as far as the cluster is concerned. It was in the zone list every region was deployed with, so the partition distribution already assigned it replicas and every partition has been running one replica short of its full count. Deploying the zone starts brokers that claim replicas already reserved for them: no broker is renumbered, no partition is redistributed, no running region is restarted, and no cluster management API call is needed.
 
 ### 1. Provision the infrastructure
 
@@ -212,6 +218,8 @@ The regions already running keep their shorter contact point list and are not re
 :::warning
 `activate-region.sh` fills a slot that already exists in the zone list. It does not add a new zone. Adding a zone that was never declared changes the zone list in every region and redistributes partitions, which is a migration rather than an online operation.
 :::
+
+The script refuses a slot that is not yet part of the deployed topology, so run the Terraform step above first: it rejects any slot at or beyond `CAMUNDA_ACTIVE_REGIONS` and reports the valid range, rather than deploying into a zone the cluster does not expect.
 
 ## Upgrade the cluster
 

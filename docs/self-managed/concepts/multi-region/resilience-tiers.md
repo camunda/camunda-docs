@@ -12,7 +12,7 @@ import OverviewImg from './img/multi-region-overview.png';
 
 Camunda provides a structured multi-region resilience framework for Self-Managed Orchestration Cluster deployments.
 
-<img src={OverviewImg} alt="High-level diagram showing Cold Recovery, Dual-Region, and three-region active-active RDBMS strategies" title="Multi-region resilience strategies" class="img-noborder img-700"/>
+<img src={OverviewImg} alt="High-level diagram showing the Cold Recovery, Dual-Region, and Multi-Region RDBMS strategies" title="Multi-region resilience strategies" class="img-noborder img-700"/>
 
 - **[Cold Recovery](./cold-recovery.md)**: Camunda's lowest-cost multi-region configuration uses scheduled cross-region backups and a manual restore procedure to recover from complete primary-region loss. Recovery measured in hours is operationally acceptable.
 
@@ -32,7 +32,11 @@ First, determine how critical your workload is:
 | Recovery in **~15 minutes**, with **no data loss**, and audit-ready posture.       | [Dual-Region](./dual-region.md)               |
 | Processing continues after a single region loss, and you can run without Optimize. | [Multi-Region RDBMS](./multi-region-rdbms.md) |
 
-Dual-Region includes a reference architecture and operational runbook with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets. Cold Recovery is a manual procedure built on the [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) guide; validate it in your environment. Multi-Region RDBMS relies on the database for secondary-storage replication and trades Optimize and a third region of capacity for continued processing through a region loss.
+What each strategy asks of you:
+
+- **Cold Recovery** is a manual procedure built on the [backup and restore](/self-managed/operational-guides/backup-restore/backup-and-restore.md) guide. There is no reference architecture; validate the procedure in your own environment.
+- **Dual-Region** includes a reference architecture and an operational runbook, with documented [Recovery Time Objective (RTO)](/reference/glossary.md#recovery-time-objective-rto) and [Recovery Point Objective (RPO)](/reference/glossary.md#recovery-point-objective-rpo) targets. A region loss stops processing until an operator runs the failover.
+- **Multi-Region RDBMS** keeps processing through a region loss with no operator step, and delegates secondary-storage replication to the database. In exchange it costs a third region of capacity, and Optimize is unavailable because Optimize requires Elasticsearch or OpenSearch rather than a relational secondary storage.
 
 ## Comparison of multi-region resilience
 

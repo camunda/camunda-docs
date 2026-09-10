@@ -82,7 +82,9 @@ Zones do not have to be equal, and making them equal is rarely what you want. A 
 | B    | yes             | 2        | 3 of 5, majority holds  |
 | C    | no              | 1        | 4 of 5, majority holds  |
 
-That is `replicationFactor: 5` across three zones. The third region carries a vote without carrying a database, which makes it cheaper than a full region while still being the one that decides a quorum when the other two disagree.
+That is `replicationFactor: 5` across three zones. The third region carries a vote without carrying a database, and it is the zone that decides a quorum when the other two disagree.
+
+It is still a full region: the brokers there hold data and process work like any others, and the region serves clients. Only the database member is absent. This is not a lightweight arbiter or a "2.5 region" topology.
 
 The only rule is that **no single zone may hold half the replicas or more**, or losing that zone stops the engine. A `4-1-1` layout across three zones fails it: losing the first leaves two replicas of six.
 

@@ -391,7 +391,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    ```
 
      </TabItem>
-     
+
      <TabItem value="irsa" label="IRSA">
 
    In addition to standard authentication, which uses anonymous users and relies on the network for access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
@@ -678,7 +678,7 @@ https://github.com/camunda/camunda-deployment-references/blob/main/aws/kubernete
 ```
 
   </TabItem>
-  
+
   <TabItem value="irsa" label="IRSA">
 
 ```bash reference

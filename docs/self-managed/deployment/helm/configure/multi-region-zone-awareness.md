@@ -11,7 +11,7 @@ For what zones are and how the application places partition replicas across them
 
 ## Move from global.multiregion
 
-`global.multiregion` is deprecated since chart v15 (Camunda 8.10) and will be removed in v16 (Camunda 8.11). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.multiregion`.
+`global.multiregion` is deprecated since chart v15 (Camunda 8.10). Only the Orchestration Cluster ever read these keys, so they now live under `orchestration.multiregion`. The deprecated keys still work and still render; move them when convenient.
 
 Two keys shipped under `global.multiregion` and still work: `regions` and `regionId`, which configure the broker numbering used by [dual-region](/self-managed/concepts/multi-region/dual-region.md) deployments. Move them and change nothing else:
 
@@ -29,7 +29,7 @@ orchestration:
     regionId: 1
 ```
 
-Both spellings produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
+Both key paths produce the same broker numbering. The deprecated one renders identically and adds a deprecation warning. Setting both blocks fails the render rather than picking one, because neither is merged into the other and the ignored block would describe a topology you don't get.
 
 Zone awareness is configured only under `orchestration.multiregion`. The `mode`, `zone`, and `zones` keys have never existed under `global.multiregion`, so there is nothing to migrate for a zoned cluster.
 
@@ -46,7 +46,7 @@ Existing deployments keep their behavior: when you don't set `mode`, the chart r
 
 ## The mode is fixed for the life of the cluster
 
-Zoned brokers are identified by the composite `<zone>_<index>` and numbered brokers by a plain node ID, so switching `mode` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other. Choose the mode when you create the cluster. To move an existing cluster onto zone awareness, deploy a new one.
+Zoned brokers are identified by the composite `<zone>_<index>` and numbered brokers by a plain node ID, so switching `mode` on a running release re-identifies every broker against Raft state written under the old identifiers, and the members stop recognizing each other. Choose the mode when you create the cluster. There is no in-place switch today, so moving an existing cluster onto zone awareness means deploying a new one; a migration procedure is planned.
 
 ## Describe the topology
 
@@ -102,6 +102,10 @@ Contact points matter only while the cluster bootstraps. Once brokers have found
 ## A single zone is still one cluster
 
 Zone awareness with one zone provides named broker identities but cannot bias leaders between failure domains because every replica has the same zone priority. The chart treats it as one cluster throughout: it generates the initial contact points, as described above, and it keeps the Optimize exporter that a cluster spread over several zones has to give up. Adding a second zone is what makes the deployment spread and lets different priorities influence leader placement.
+
+:::note
+Adding a zone that was not part of the original zone list is not a Helm-only change. The partition distribution has to be updated through the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partition-distribution-api) as well, because existing partitions have to be told about the new zone. Declaring every zone up front and deploying them progressively avoids this: the replicas are already reserved, so the brokers only have to start.
+:::
 
 ## Custom application configuration is not merged
 

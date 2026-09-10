@@ -34,9 +34,9 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## 8.10.0
 
-| Release date    | Changelog(s) | Blog |
-| :-------------- | :----------- | :--- |
-| 13 October 2026 | -            | -    |
+| Release date | Changelog(s) | Blog |
+| :----------- | :----------- | :--- |
+| -            | -            | -    |
 
 ### Orchestration Cluster
 

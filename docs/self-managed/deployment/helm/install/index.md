@@ -9,18 +9,19 @@ Install Camunda 8 Self-Managed on Kubernetes using Helm charts. Choose the path 
 
 ## Choose your installation path
 
-| Use case                  | Installation guide                         | Secondary storage                              | Complexity | Best for                                          |
-| ------------------------- | ------------------------------------------ | ---------------------------------------------- | ---------- | ------------------------------------------------- |
-| **Testing & evaluation**  | [Quick install](./quick-install)           | Embedded H2 (single-broker only)               | Low        | Local development, POCs, learning                 |
-| **Production with RDBMS** | [Install with RDBMS](./helm-with-rdbms)    | PostgreSQL, Oracle, MariaDB, MySQL, SQL Server | Medium     | RDBMS-first organizations, no ES/OS license       |
-| **High-scale production** | [Install for production](./production)     | Elasticsearch/OpenSearch or RDBMS              | High       | High-throughput, multi-team, OIDC, HA, monitoring |
+| Use case                  | Installation guide                      | Secondary storage                              | Complexity | Best for                                          |
+| ------------------------- | --------------------------------------- | ---------------------------------------------- | ---------- | ------------------------------------------------- |
+| **Testing & evaluation**  | [Quick install](./quick-install)        | Embedded H2 (single-broker only)               | Low        | Local development, POCs, learning                 |
+| **Production with RDBMS** | [Install with RDBMS](./helm-with-rdbms) | PostgreSQL, Oracle, MariaDB, MySQL, SQL Server | Medium     | RDBMS-first organizations, no ES/OS license       |
+| **High-scale production** | [Install for production](./production)  | Elasticsearch/OpenSearch or RDBMS              | High       | High-throughput, multi-team, OIDC, HA, monitoring |
 
 :::tip Decision criteria
+
 - Use **quick install** if you want to evaluate quickly without external dependencies.
 - Use **install with RDBMS** if your organization standardizes on relational databases.
 - Use **production install** if you need security, scalability, and operational features.
 - If you don’t have required infrastructure, see [deploy required dependencies](/self-managed/deployment/helm/configure/operator-based-infrastructure.md).
-:::
+  :::
 
 ## Installation guides
 

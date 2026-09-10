@@ -121,12 +121,12 @@ If **Job timeout** stays at its default while you increase **Read timeout in sec
 
 The Databricks SQL Statement Execution API returns HTTP 200 with `status.state = FAILED` when a statement fails at the warehouse, so a plain HTTP success check is not enough. The terminal states are:
 
-| State       | Meaning                                                                                                         |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| `SUCCEEDED` | Execution successful, result available for fetch.                                                               |
-| `FAILED`    | Execution failed; the reason is in `status.error.message`.                                                      |
-| `CANCELED`  | Canceled explicitly, or by `on_wait_timeout=CANCEL`.                                                            |
-| `CLOSED`    | Execution succeeded and the statement is closed; the result is no longer available for fetch.                   |
+| State       | Meaning                                                                                       |
+| ----------- | --------------------------------------------------------------------------------------------- |
+| `SUCCEEDED` | Execution successful, result available for fetch.                                             |
+| `FAILED`    | Execution failed; the reason is in `status.error.message`.                                    |
+| `CANCELED`  | Canceled explicitly, or by `on_wait_timeout=CANCEL`.                                          |
+| `CLOSED`    | Execution succeeded and the statement is closed; the result is no longer available for fetch. |
 
 `PENDING` and `RUNNING` are not terminal — they mean the statement is still executing, and you must poll the result with **Get statement status and result**.
 
