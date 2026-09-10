@@ -723,10 +723,11 @@ module.exports = {
               label: "Manage clusters",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-clusters/manage-cluster",
+                id: "components/hub/organization/manage-clusters/index",
               },
               items: [
                 "components/hub/organization/manage-clusters/create-cluster",
+                "components/hub/organization/manage-clusters/manage-cluster",
                 "components/hub/organization/manage-clusters/cluster-connectors",
                 "components/hub/organization/manage-clusters/manage-api-clients",
                 "components/hub/organization/manage-clusters/manage-secrets",
@@ -757,10 +758,12 @@ module.exports = {
               label: "Manage users",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-users/manage-users",
+                id: "components/hub/organization/manage-users/index",
               },
               items: [
+                "components/hub/organization/manage-users/create-manage-users",
                 "components/hub/organization/manage-users/manage-user-groups",
+                "components/hub/organization/manage-users/resource-based-auth",
               ],
             },
             {
@@ -775,10 +778,11 @@ module.exports = {
                 "components/hub/organization/manage-organization-settings/view-organization-activity",
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
                 "components/hub/organization/manage-organization-settings/usage-history",
-                "components/hub/organization/manage-organization-settings/usage-alerts",
-                "components/hub/organization/manage-organization-settings/advanced-search",
+                // TODO: Either bring these back when we have content or remove references
+                // "components/hub/organization/manage-organization-settings/usage-alerts",
+                // "components/hub/organization/manage-organization-settings/advanced-search",
                 "components/hub/organization/manage-organization-settings/switch-organization",
-                "components/hub/organization/manage-organization-settings/delete-account",
+                // "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
                     "components/hub/organization/manage-organization-settings/manage-plan/create-account",
@@ -1072,6 +1076,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               Email: [
@@ -1565,13 +1570,15 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Upgrade to Camunda 8.9",
+      label: "Upgrade to Camunda 8.10",
       className: "sidebar-cta",
       link: {
         type: "doc",
-        id: "apis-tools/migration-manuals/migrate-to-89",
+        id: "apis-tools/migration-manuals/migrate-to-810",
       },
       items: [
+        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
+        "apis-tools/migration-manuals/web-modeler-v1-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-api",
         "apis-tools/migration-manuals/migrate-component-apis",
         "apis-tools/migration-manuals/migrate-to-camunda-java-client",
@@ -1580,18 +1587,6 @@ module.exports = {
         "apis-tools/migration-manuals/migrate-to-camunda-process-test",
         "apis-tools/migration-manuals/migrate-from-grpc-to-orchestration-cluster-api",
         "apis-tools/migration-manuals/saas-orchestration-architecture",
-      ],
-    },
-    {
-      type: "category",
-      label: "Upgrade to Camunda 8.10",
-      link: {
-        type: "doc",
-        id: "apis-tools/migration-manuals/migrate-to-810",
-      },
-      items: [
-        "apis-tools/migration-manuals/migrate-from-web-modeler-to-hub-api",
-        "apis-tools/migration-manuals/web-modeler-v1-apis",
       ],
     },
   ],
@@ -1793,8 +1788,10 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/orchestration-tls-modes",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
+                "self-managed/deployment/helm/configure/service-configuration",
                 "self-managed/deployment/helm/configure/operator-based-infrastructure",
                 "self-managed/deployment/helm/configure/enable-additional-components",
                 "self-managed/deployment/helm/configure/multi-namespace",
@@ -1953,6 +1950,7 @@ module.exports = {
                 "self-managed/deployment/helm/operational-tasks/dual-region-operational-procedure",
                 "self-managed/deployment/helm/operational-tasks/helm-v4",
                 "self-managed/deployment/helm/operational-tasks/moving-helm-v3-to-v4",
+                "self-managed/deployment/helm/operational-tasks/camunda-helm-toolkit",
               ],
             },
             {
@@ -2106,6 +2104,7 @@ module.exports = {
           Authentication: [
             "self-managed/concepts/authentication/authentication-to-orchestration-cluster",
             "self-managed/concepts/authentication/authentication-to-management-components",
+            "self-managed/concepts/authentication/authentication-to-optimize",
           ],
         },
         {
@@ -2198,6 +2197,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
             "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
@@ -2371,6 +2371,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/zeebe/operations/disk-space",
                     "self-managed/components/orchestration-cluster/zeebe/operations/update-zeebe",
                     "self-managed/components/orchestration-cluster/zeebe/operations/rebalancing",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/move-raft-leadership",
                     "self-managed/components/orchestration-cluster/zeebe/operations/management-api",
                     "self-managed/components/orchestration-cluster/zeebe/operations/backups",
                     "self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling",

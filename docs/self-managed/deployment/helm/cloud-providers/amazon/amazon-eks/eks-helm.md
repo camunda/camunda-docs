@@ -416,29 +416,7 @@ To enable these enterprise components in an OIDC-enabled full cluster, first dep
 
 This guide supports a managed Amazon OpenSearch domain (provisioned in the [eksctl](./eksctl.md) or [Terraform](./terraform-setup.md) setup) or Amazon Aurora PostgreSQL as secondary storage. For a comparison of both backends and their reference architectures, see [Secondary storage](#secondary-storage), then select your backend using the authentication and values tabs shown earlier in this guide.
 
-#### Advanced: Use Helm-chart Elasticsearch instead of managed OpenSearch
-
-For advanced deployments, you can disable managed OpenSearch and enable the Elasticsearch deployment from the Camunda Helm chart:
-
-:::caution Deprecated path
-The Helm-chart Elasticsearch deployment uses deprecated Bitnami subcharts. Prefer managed Elasticsearch/OpenSearch services for long-term deployments, or deploy [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment) if you need operator-based Elasticsearch with automated scaling, upgrades, and built-in security.
-:::
-
-<details>
-<summary>Show configuration changes to disable external OpenSearch usage</summary>
-
-```yaml
-global:
-  elasticsearch:
-    enabled: true
-  opensearch:
-    enabled: false
-
-elasticsearch:
-  enabled: true
-```
-
-</details>
+To use Elasticsearch instead of managed OpenSearch, deploy it with [Elastic Cloud on Kubernetes (ECK)](/self-managed/deployment/helm/configure/operator-based-infrastructure.md#elasticsearch-deployment), then configure the component-scoped connection values.
 
 #### Use internal PostgreSQL instead of the managed Aurora
 

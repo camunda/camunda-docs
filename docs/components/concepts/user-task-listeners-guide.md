@@ -18,7 +18,7 @@ User task listeners facilitate the integration of custom logic into your workflo
 
 This guide walks you through:
 
-- Defining a task listener using **Camunda Modeler**
+- Defining a task listener using **Camunda Hub**
 - Implementing a task listener as a job worker
 - Verifying the result in **Operate** and **Tasklist**
 
@@ -39,35 +39,31 @@ Additionally, you need the following:
 - Java ≥ 8
 - Maven
 - IDE (IntelliJ, VSCode, or similar)
-- Download and unzip or clone the [repository](https://github.com/camunda/camunda-platform-tutorials), then navigate to:  
-  `camunda-platform-tutorials/quick-start/task-listeners/worker-java`
+- Download and unzip or clone the [repository](https://github.com/camunda/camunda-8-tutorials), then navigate to:  
+  `camunda-8-tutorials/quick-start/task-listeners/worker-java`
 
-## Step 1: Create a process with a user task in Modeler
+For all steps in this guide, refer to the following diagram:
 
-1. Launch **Camunda Modeler**.
-2. Create a new BPMN file.
-3. Add a user task named `Assigned by creating task listener`.
+<div bpmn="getting-started-guides/user-task-listener-tutorial.bpmn" />
 
-![Web modeler showing a process with user task](./assets/user-task-listeners-guide/1-process-with-user-task.png)
+## Step 1: Create a process with a user task in Hub
 
-:::note
-In this guide, you can also use the example BPMN from the repo located in `camunda-platform-tutorials/quick-start/task-listeners/worker-java/src/main/resources/Quick_Start_Task_Listeners.bpmn`.
-In that case, just explore the BPMN using the steps below, but do not adjust the model in steps 2-4.
-:::
+1. Launch **Camunda Hub**.
+2. In your workspace, open or create a project.
+3. In your project, create a new BPMN file.
+4. Add a user task named `Assigned by creating task listener`.
 
 ## Step 2: Select the user task
 
-1. Click the **user task** (e.g., “Assigned by creating task listener”).
+1. Click the **user task**.
 2. In the right-hand **properties panel**, scroll to **Task listeners**.
-
-![Properties panel shows user task details including task listeners](./assets/user-task-listeners-guide/2-user-task-selected-scrolled-to-task-listeners.png)
 
 ## Step 3: Define a task listener
 
-We'll now add a new task listener to the user task and define its properties.
+Add a new task listener to the user task and define its properties:
 
 1. Click the plus sign in the **Task listeners** section to add a new task listener.
-2. Under **Event type**, select **creating**.
+2. Under **Event type**, select **Creating**.
 3. Under **Listener type**, enter `assign_new_task`.
 
 ![Creating listener is defined with type assign_new_task](./assets/user-task-listeners-guide/3-creating-listener-defined.png)
@@ -82,35 +78,32 @@ You've now defined a **creating** task listener for this user task. When a proce
 
 ## Step 5: Deploy and run the process
 
-1. Click **Deploy & run**.
-2. Select your **Camunda 8 cluster**.
+1. In your diagram, click **Deploy & run**.
+2. Select your deployment stage.
 3. Add an `assignee` or `manager` variable as JSON data. For example, `{ "assignee": "john.doe@camunda.com" }`.
 4. Click **Deploy & run**.
-
-![Deploy and run process](./assets/user-task-listeners-guide/5-deploy-and-run.png)
 
 ## Step 6: Understand what happens to the user task
 
 Now, we'll explore what happened to the user task. We'll see that the listener blocks the creation.
 
-1. In the top left corner of the screen, click the square-shaped **Camunda components** button.
-2. Navigate to **Tasklist** and notice that there is no task in Tasklist yet.
+1. Navigate to **Tasklist** and notice that there is no task in Tasklist yet.
 
    ![No tasks found in Tasklist](./assets/user-task-listeners-guide/6.2-no-tasks-found.png)
 
-3. Navigate to **Operate** to see your process instance with a token waiting at the user task by clicking on the active process instance in the **Dashboard**.
+2. Navigate to **Operate** to see your process instance with a token waiting at the user task by clicking on the active process instance in the **Dashboard**.
 
    ![Active process instances in Operate Dashboard](./assets/user-task-listeners-guide/6.3-active-process-instances.png)
 
-4. Click the **Process instance key** to [inspect the process instance](/components/operate/userguide/basic-operate-navigation.md#inspect-a-process-instance).
+3. Click the **Process instance key** to [inspect the process instance](/components/operate/userguide/basic-operate-navigation.md#inspect-a-process-instance).
 
    ![Inspect process instance in Operate](./assets/user-task-listeners-guide/6.4-inspect-process-instance.png)
 
-5. Click the user task and then click the **Listeners** tab to see that the **Creating** listener is **Active**.
+4. Click the user task and then click the **Listeners** tab to see that the **Creating** listener is **Active**.
 
    ![Inspect listeners for user task in Operate](./assets/user-task-listeners-guide/6.5-inspect-listeners.png)
 
-6. Take a moment to understand the properties of the listener, for example verify that the listener type is what you defined in the process model. This listener is a job that can be activated and handled by a job worker.
+5. Take a moment to understand the properties of the listener, for example verify that the listener type is what you defined in the process model. This listener is a job that can be activated and handled by a job worker.
 
 ## Step 7: Implement the listener
 
@@ -124,8 +117,8 @@ Next, we'll run the listener application to execute our external logic, and comp
 
 Next, we’ll create a worker that listens to the user task's events by associating it with the **Listener type** we specified on the task listener in the BPMN diagram.
 
-1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-platform-tutorials), then `cd` into `camunda-platform-tutorials/quick-start/task-listeners/worker-java`) in your IDE.
-2. Add your credentials to `application.properties`. Your client ID and client secret are available from the previous section in the credential text file you downloaded or copied. Go to the cluster overview page to find your **region Id** and **cluster Id** (in your client credentials under the **API** tab within your cluster).
+1. Open the downloaded or cloned project ([repo](https://github.com/camunda/camunda-8-tutorials), then `cd` into `camunda-8-tutorials/quick-start/task-listeners/worker-java`) in your IDE.
+2. Add your credentials to `application.properties`. Your client ID and client secret are available from the previous section in the credential text file you downloaded or copied. [Find your **Region ID** and **Cluster ID**](/components/hub/organization/manage-clusters/manage-api-clients.md#view-connection-informationview-connection-information).
 3. In the `Listener.java` file, change the type to match what you specified in the BPMN diagram. If you followed the previous steps for this guide and entered “assign_new_task”, no action is required.
 4. After making these changes, perform a Maven install, then run the Listener.java `main` method via your favorite IDE. If you prefer using a terminal, run `mvn package exec:java`.
 

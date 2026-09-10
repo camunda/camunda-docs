@@ -22,7 +22,10 @@ Use this feature to review connector status and troubleshoot issues. For example
 
 ## Manage connectors
 
-To open the **Connector Management** page, on the cluster **Overview** tab, click **Manage** on the Connectors component tile.
+Manage connectors from the **Connector Management** page:
+
+1. In the left navigation under **Clusters**, select a cluster.
+1. On the **Overview** tab, on the **Connectors** component tile, click **Manage**.
 
 The **Connector Management** page provides an overview of the connectors running on a cluster.
 
@@ -179,7 +182,7 @@ If you are using deduplication, each connector occurrence in the BPMN diagram is
 
 ## View outbound connectors
 
-The **Outbound connectors** tab shows each active outbound connector type on a separate row.s
+The **Outbound connectors** tab shows each active outbound connector type on a separate row.
 
 <img src={OutboundConnectorManagementImg} alt="Outbound connectors on the Connector Management page" />
 

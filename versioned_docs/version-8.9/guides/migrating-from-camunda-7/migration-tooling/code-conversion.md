@@ -5,10 +5,10 @@ sidebar_label: Code Conversion
 description: "Understand patterns to convert your code written for Camunda 7 to run on Camunda 8."
 ---
 
-As Camunda 8 is a complete rewrite of Camunda 7, you must convert your models (BPMN and DMN) and some of your code to work with the Orchestration Cluster REST API.
+As Camunda 8 is a complete rewrite of Camunda 7, you must convert your BPMN and DMN models and Camunda 7 forms (`.form`) for Camunda 8, and update some of your code to use the Orchestration Cluster REST API.
 
 :::tip Easiest path: agentic migration
-The [Camunda migration agent skill](./index.md#agentic-migration) orchestrates the Diagram Converter CLI and OpenRewrite recipes for you, then uses AI to resolve what the tools flag, covering code and BPMN/DMN diagrams in a single session. You focus on reviewing changes and rearchitecting your solution.
+The [Camunda migration agent skill](./index.md#agentic-migration) orchestrates the Diagram Converter CLI and OpenRewrite recipes for you, then uses AI to resolve what the tools flag, covering code, BPMN/DMN diagrams, and Camunda 7 forms in a single session. You focus on reviewing changes and rearchitecting your solution.
 :::
 
 ## Overview
@@ -31,8 +31,8 @@ This guide covers tools and approaches to help with code conversion:
 
 Additionally, you will find information about:
 
-- [Diagram Converter](#diagram-converter) for BPMN and DMN model conversion
-- [Complete migration example](#example-adjusting-a-spring-boot-application) showing all tools in action
+- [Diagram Converter](#diagram-converter) for BPMN, DMN, and Camunda 7 form conversion
+- [Complete migration example](#example-adjust-a-spring-boot-application) showing all tools in action
 
 ### Choose your migration approach
 

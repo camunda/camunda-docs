@@ -13,7 +13,7 @@ Camunda Hub autosaves all your changes on a diagram. If you change a diagram and
 To make any change live in your cluster(s), you need to deploy it. If you deploy a process, it becomes available on the selected cluster and you can run or publish it.
 
 :::info
-Only owners with the **Organization Owner** or **Organization Admin** role in Camunda Hub can deploy to `prod` clusters.
+Only users with the **Organization Owner** or **Organization Admin** role in Camunda Hub can deploy to `prod` clusters.
 Users without admin roles can only deploy to `dev`, `test`, or `stage` clusters.
 :::
 
@@ -23,7 +23,7 @@ To deploy:
 2. Open a process file.
 3. In the top right corner of the modeling interface, click the dropdown next to **Deploy & run**.
 4. Click **Deploy**.
-5. Select a stage, optional tenant ID, and the resources to deploy.
+5. Select a stage, optional tenant ID, and the resources to deploy. You can either deploy **All resources** or **Only this resource**.
 6. Click **Deploy**.
 
 :::tip
@@ -59,7 +59,7 @@ If the target cluster has [authorizations](/components/admin/authorization.md) e
 
 Before you publish or run a process, you can test it manually using the [Test mode](validation/test-your-process.md). With the Test mode, you can build and test your process iteratively in small steps. To enter the Test mode, click the Test tab in the top left corner of the modeling screen.
 
-### Run manually from Modeler
+### Run manually from Hub
 
 You can also test your process thoroughly on a development cluster to observe how it behaves in Operate and Tasklist, in order to run your job workers, and to access your running process instances [programmatically](#deploy-to-run-programmatically). To start a process instance manually, take the following steps:
 

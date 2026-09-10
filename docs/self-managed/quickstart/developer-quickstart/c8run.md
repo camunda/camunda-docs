@@ -35,6 +35,7 @@ Step through the Camunda 8 Run guide via the following topics:
 
 - [Install and start](./c8run/install-start.md)
 - [Configure](./c8run/configuration.md)
+- [Manage local secrets](./c8run/configuration.md#manage-local-secrets)
 - [Configure secondary storage](./c8run/secondary-storage.md)
 - [Troubleshoot](./c8run-troubleshooting.md)
 
@@ -62,6 +63,10 @@ For local API endpoints, authentication expectations, and links to the canonical
 ### Use built-in and custom connectors {#use-built-in-and-custom-connectors}
 
 For local connector usage, custom connector placement, and connector secrets guidance, see [use built-in and custom connectors](./c8run/configuration.md#use-built-in-and-custom-connectors).
+
+### Manage local secrets
+
+For local `camunda.secrets.<name>` values and dotenv import, see [manage local secrets](./c8run/configuration.md#manage-local-secrets).
 
 ### Configure or switch secondary storage (H2 or Elasticsearch) {#configure-or-switch-secondary-storage-h2-or-elasticsearch}
 

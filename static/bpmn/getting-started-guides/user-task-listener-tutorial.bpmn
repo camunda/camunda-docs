@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.36.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0" camunda:diagramRelationId="5185a998-1603-4ccf-b6d0-8cbeafd0cdce">
+  <bpmn:process id="task-listener-tutorial" name="Task Listener Tutorial" isExecutable="true">
+    <bpmn:startEvent id="StartEvent" name="Task assignment needed">
+      <bpmn:extensionElements />
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent" targetRef="Auto_assigned_by_task_listener_on_creating_event" />
+    <bpmn:endEvent id="EndEvent" name="Task completed">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Auto_assigned_by_task_listener_on_creating_event" targetRef="EndEvent" />
+    <bpmn:userTask id="Auto_assigned_by_task_listener_on_creating_event" name="Assigned by creating task listener">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="task-listener-form" />
+        <zeebe:taskListeners>
+          <zeebe:taskListener eventType="creating" type="assign_new_task" />
+        </zeebe:taskListeners>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:textAnnotation id="TextAnnotation_03oqml8">
+      <bpmn:text>This user task does not specify an assignee. However, on creating a listener is triggered. The listener can externally decide upon the assignee by completing the job with a correction of the assignee. This can be useful when the assignee depends on an external system.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1u94fvl" associationDirection="None" sourceRef="Auto_assigned_by_task_listener_on_creating_event" targetRef="TextAnnotation_03oqml8" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="task-listener-tutorial">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent">
+        <dc:Bounds x="152" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="295" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_196wqsu_di" bpmnElement="EndEvent">
+        <dc:Bounds x="392" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="400" y="295" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17l1wga_di" bpmnElement="Auto_assigned_by_task_listener_on_creating_event">
+        <dc:Bounds x="240" y="230" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_03oqml8_di" bpmnElement="TextAnnotation_03oqml8">
+        <dc:Bounds x="210" y="80" width="280" height="100" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1j79dnw_di" bpmnElement="Flow_1">
+        <di:waypoint x="188" y="270" />
+        <di:waypoint x="240" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0opw5o8_di" bpmnElement="Flow_2">
+        <di:waypoint x="340" y="270" />
+        <di:waypoint x="392" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1u94fvl_di" bpmnElement="Association_1u94fvl">
+        <di:waypoint x="283" y="230" />
+        <di:waypoint x="275" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

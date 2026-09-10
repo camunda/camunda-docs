@@ -792,23 +792,23 @@ Ensure restore-only settings are not present in this final configuration (for ex
 
 - For a manual setup, execute the broker and all other components in their normal way.
 
-## (Optional) Restore a Web Modeler data backup
+## (Optional) Restore a Camunda Hub data backup
 
-If you have previously backed up your Web Modeler data, you can restore this backup.
+If you have previously backed up your Camunda Hub data, you can restore this backup.
 
 Backups can only be restored with downtime.
-To restore the database dump, first ensure that Web Modeler is stopped.
+To restore the database dump, first ensure that Camunda Hub is stopped.
 Then, to restore the database use the following command:
 
 ```bash
 psql -U <DATABASE_USER> -h <DATABASE_HOST> -p <DATABASE_PORT> -f dump.psql <DATABASE_NAME>
 ```
 
-After the database has been restored, you can start Web Modeler again.
+After the database has been restored, you can start Camunda Hub again.
 
 :::danger
-When restoring Web Modeler data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
-Otherwise, users may not be able to access their projects after the restore (see [Web Modeler's troubleshooting guide](/self-managed/components/hub/troubleshooting/troubleshoot-missing-data.md)).
+When restoring Camunda Hub data from a backup, ensure that the ids of the users stored in your OIDC provider (e.g. Keycloak) do not change in between the backup and restore.
+Otherwise, users may not be able to access their projects after the restore (see [Camunda Hub's troubleshooting guide](/self-managed/components/hub/troubleshooting/troubleshoot-missing-data.md)).
 :::
 
 :::tip
