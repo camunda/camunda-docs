@@ -4,9 +4,9 @@ title: "Troubleshoot secret resolution failures"
 description: "Diagnose the incidents raised when a job's secret references cannot be resolved or their values cannot be injected, fix the cause, and know what happens next."
 ---
 
-<!-- Draft. The page title, file name, placement, and the name of the feature itself are owned by camunda/camunda#60326 and are not settled, so this page is deliberately not listed in sidebars.js yet and every term used for the feature here is provisional. -->
-
 When a job's [secret references](secret-resolution-and-job-activation.md) cannot be delivered, the cluster responds in one of three ways: it raises a `SECRET_RESOLUTION_ERROR` incident, raises a `MESSAGE_SIZE_EXCEEDED` incident, or defers the job and retries it without raising an incident.
+
+This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
 Only the two incident cases require operator action.
 

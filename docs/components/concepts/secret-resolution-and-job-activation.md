@@ -4,17 +4,13 @@ title: "Secret resolution and job activation"
 description: "Learn how the broker resolves secret references before job activation and injects resolved values when it hands a job to a worker."
 ---
 
-<!-- Draft. The page title, file name, placement, and the name of the feature itself are owned by
-camunda/camunda#60326 and are not settled, so this page is deliberately not listed in sidebars.js
-yet and every term used for the feature here is provisional. That ticket also owns whether the
-feature is listed on components/early-access/alpha/alpha-features.md: the v2 secret endpoints are
-marked alpha, this page carries no availability marker yet, and one may be required. -->
-
 Secret resolution lets job workers use secret values at runtime without storing those values in job variables or configuration.
 
 A job whose variables contain secret references is handed to a worker only after every reference has been resolved. The resolved values reach the worker without being written to any record, runtime state, or log.
 
 The broker resolves secret references in the background rather than while processing a command. It injects the resolved values into the job only when handing the job to a worker. As a result, secret resolution can affect when a job becomes available for activation, even if you don't configure a secret store yourself.
+
+This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
 ## Resolve references before activation
 
