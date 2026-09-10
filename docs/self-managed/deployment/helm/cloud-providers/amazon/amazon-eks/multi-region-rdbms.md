@@ -81,7 +81,7 @@ Following this guide gives you:
 - A Transit Gateway per region, peered in a full mesh, routing every VPC and Kubernetes service range between regions.
 - Submariner service discovery, publishing each region's Zeebe service as `<clusterID>.<service>.<namespace>.svc.clusterset.local`.
 - An Aurora Global Database with a writer in one region and readers in the others, reached through a single JDBC URL.
-- One Orchestration Cluster with six brokers, six partitions, and a replication factor of three, with exactly one replica of every partition in each region.
+- One Orchestration Cluster with six brokers, six partitions, and a replication factor of five: two replicas of every partition in each database region and one in the third.
 
 ## Topology
 
@@ -93,9 +93,9 @@ The default topology uses three regions and three zones:
 | Zone names                       | `london`, `paris`, `zurich`              | One zone per region                                                     |
 | `orchestration.multiregion.mode` | `zoned`                                  | Zone-aware partitioning                                                 |
 | `numberOfBrokers` per zone       | `2`                                      | Brokers deployed in that zone                                           |
-| `numberOfReplicas` per zone      | `1`                                      | One replica of every partition per zone                                 |
+| `numberOfReplicas` per zone      | `2`, `2`, `1`                            | Two in each database region, one in the tie-breaker                     |
 | `orchestration.clusterSize`      | `6`                                      | Sum of `numberOfBrokers` across zones; the zone list is what derives it |
-| Replication factor               | `3`                                      | Sum of `numberOfReplicas` across zones                                  |
+| Replication factor               | `5`                                      | Sum of `numberOfReplicas` across zones                                  |
 | `orchestration.partitionCount`   | `6`                                      | One partition per broker                                                |
 | Database regions                 | Slots `0` and `1`                        | Aurora members, writer first                                            |
 
@@ -460,7 +460,7 @@ https://github.com/camunda/camunda-deployment-references/blob/fb0e87ac97909e6b61
 ```
 </details>
 
-Expect roughly 10 minutes for the Zeebe cluster to converge across regions. A healthy three-zone cluster reports six brokers, six partitions, and one replica of every partition in each zone.
+Expect roughly 10 minutes for the Zeebe cluster to converge across regions. A healthy three-zone cluster reports six brokers, six partitions, and a replication factor of five.
 
 Measure the cost of the write path from each region to the database writer. Regions that are not co-located with the writer pay the inter-region round trip on every export flush, and this is what tells you whether the exporter queue is sized correctly:
 

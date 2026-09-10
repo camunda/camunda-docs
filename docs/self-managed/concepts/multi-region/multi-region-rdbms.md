@@ -57,18 +57,34 @@ The Camunda layer sees one cluster and one database. Everything region-specific 
 
 Multi-Region RDBMS relies on [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md). Each region is one zone, and every zone declares how many brokers it holds and how many replicas of each partition live in it.
 
-Give each zone `number-of-replicas: 1` and the replication factor equals the zone count, so every zone holds exactly one replica of every partition. Losing a zone then costs one replica out of N, and a partition keeps its majority while `N - 1 > N / 2`.
+A partition survives while a majority of its **replicas** answer. Replicas are what is counted, not zones: a zone holds as many as you give it, so the replication factor is the sum across the zones rather than the number of zones.
+
+The simplest case is one replica per zone, which is what the following illustration uses. The replication factor then equals the zone count, and a partition keeps its majority while `N - 1 > N / 2`.
 
 <QuorumImg role="img" title="With two zones, losing one leaves one replica of two and no majority, so processing stops. With three zones, losing one leaves two replicas of three, a majority, so processing continues." />
 
-| Zones | Replication factor | Zone losses tolerated |
-| :---- | :----------------- | :-------------------- |
-| 2     | 2                  | 0                     |
-| 3     | 3                  | 1                     |
-| 4     | 4                  | 1                     |
-| 5     | 5                  | 2                     |
+| Zones | Replicas per zone | Replication factor | Zone losses tolerated |
+| :---- | :---------------- | :----------------- | :-------------------- |
+| 2     | 1                 | 2                  | 0                     |
+| 3     | 1                 | 3                  | 1                     |
+| 4     | 1                 | 4                  | 1                     |
+| 5     | 1                 | 5                  | 2                     |
 
 Three zones is the smallest topology in which losing one does not stop the engine. A fourth zone does not raise the tolerance, but it does give you a zone to lose while another is already down for maintenance.
+
+#### Choosing an asymmetric layout
+
+Zones do not have to be equal, and making them equal is rarely what you want. A common shape places more replicas in the regions that also host a database member, and one replica in a region that exists to break ties:
+
+| Zone | Database member | Replicas | Losing this zone leaves |
+| :--- | :-------------- | :------- | :---------------------- |
+| A    | yes             | 2        | 3 of 5, majority holds  |
+| B    | yes             | 2        | 3 of 5, majority holds  |
+| C    | no              | 1        | 4 of 5, majority holds  |
+
+That is `replicationFactor: 5` across three zones. The third region carries a vote without carrying a database, which makes it cheaper than a full region while still being the one that decides a quorum when the other two disagree.
+
+The only rule is that **no single zone may hold half the replicas or more**, or losing that zone stops the engine. A `4-1-1` layout across three zones fails it: losing the first leaves two replicas of six.
 
 Zone awareness also assigns a Raft election priority per zone. Give the zone that hosts the database writer the highest priority so partition leaders stay next to it, which avoids an inter-region round trip on every export flush.
 
@@ -110,7 +126,7 @@ Skewing partition leadership to the writer's zone through zone priority reduces 
 | :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
 | Partitioning scheme           | `ZONE_AWARE`. The parity-based broker numbering only supports exactly two regions.                                                           |
 | Zones                         | One zone per region, three or more.                                                                                                          |
-| `number-of-replicas` per zone | `1`, so the replication factor equals the zone count and every zone holds one replica of each partition.                                     |
+| `number-of-replicas` per zone | Declared per zone, and free to differ between them. No zone may hold half the replication factor or more.                                    |
 | `number-of-brokers` per zone  | Declared per zone. Keep zones balanced so a zone loss removes an equal share of capacity.                                                    |
 | `priority` per zone           | Highest for the zone hosting the database writer, to keep partition leaders next to it.                                                      |
 | `partitionCount`              | Unrestricted. Size it from your workload. See [sizing your environment](/components/best-practices/architecture/sizing-your-environment.md). |
@@ -153,9 +169,9 @@ Follow the upgrade recommendations in the [Camunda Helm chart](/self-managed/upg
 
 Zone awareness names zones instead of numbering brokers, so the zone list can change without renumbering the cluster. That makes one growth path online and another one a migration.
 
-<ZoneActivationImg role="img" title="Two states of the same cluster. On the left, three zones are declared and two deployed: the third zone's replica is reserved, every partition runs at two of three replicas, a majority, and the cluster runs. On the right, the third zone has been activated and every partition holds three of three replicas. No broker is renumbered and no partition is redistributed between the two states." />
+<ZoneActivationImg role="img" title="Two states of the same cluster, drawn with one replica per zone. On the left, three zones are declared and two deployed: the third zone's replica is reserved, every partition runs at two of three replicas, a majority, and the cluster runs. On the right, the third zone has been activated and every partition holds three of three replicas. No broker is renumbered and no partition is redistributed between the two states." />
 
-**Activating a declared zone is online.** List every zone the cluster will ever have from the start, and deploy fewer of them. The partition layout reserves the missing zone's replicas, so each partition runs at `N - 1` of `N`, still a majority, and the cluster forms and serves normally. Deploying that zone later only fills in replicas that were already reserved: no broker is renumbered, no partition is redistributed, and the running regions are untouched.
+**Activating a declared zone is online.** List every zone the cluster will ever have from the start, and deploy fewer of them. The partition layout reserves the missing zone's replicas, so each partition runs below full redundancy while still holding a majority, and the cluster forms and serves normally. The illustration above uses one replica per zone; with the default `2-2-1` layout the same growth path runs at four replicas of five and reaches five of five once the last zone is deployed. Deploying that zone later only fills in replicas that were already reserved: no broker is renumbered, no partition is redistributed, and the running regions are untouched.
 
 Leaving **one** zone undeployed is always safe from three zones upward, because `N - 1` of `N` is a majority for every `N >= 3`. Leaving more is only safe in larger topologies, and the reference implementation does not allow it: it rejects anything beyond a single undeployed zone at plan time, so the growth path stays the same whatever the zone count.
 

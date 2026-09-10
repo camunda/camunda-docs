@@ -68,7 +68,7 @@ Verify the cluster is healthy before you start, so you can tell what the procedu
 
 ### 1. Confirm the quorum is intact
 
-Losing one zone out of three or more removes one replica of every partition. The remaining replicas still form a majority, so partitions elect new leaders where needed and keep processing.
+Losing one zone removes the replicas that lived in it. With three or more zones and a layout where no zone holds half the replicas, the remaining ones still form a majority, so partitions elect new leaders where needed and keep processing. Under the default `2-2-1` that means three replicas of five after losing a database region, or four of five after losing the tie-breaker.
 
 Confirm this rather than assuming it, especially if more than one zone is affected:
 
