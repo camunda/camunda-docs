@@ -49,8 +49,12 @@ To reuse a complete set of authentication and connection settings, rather than a
 
 ## Reference connector secrets as `camunda.secrets.<name>`
 
-In SaaS, the connector secrets you create here are also resolvable through centralized secret resolution as `camunda.secrets.<key>` in your process models, in input mappings, FEEL expressions, and connector fields, in addition to the legacy `{{secrets.KEY}}` connector syntax. For how to reference them, see [secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings). For how a reference is resolved before a worker runs, see [secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
+In SaaS, you can also reference the connector secrets you create here through centralized secret resolution by using `camunda.secrets.<key>`. You can use these references in process models, input mappings, FEEL expressions, and Connector fields, in addition to the legacy `{{secrets.KEY}}` syntax.
 
-In SaaS, the secret store is provisioned and managed for you: you do not configure a store type, path, or credentials. You add and update values here on the **Connector secrets** tab, and the cluster resolves them with no further setup. This differs from Self-Managed, where an operator [configures the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets) explicitly.
+To learn how to use these references, see [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings). To understand how Camunda resolves a reference before job activation, see [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
 
-A reference name must match `[\p{Alnum}_-]+`, so only keys made of letters, digits, `_`, and `-` can be resolved as `camunda.secrets.<key>`. A key that contains a period (`.`), such as a file extension, is stored but cannot be referenced this way. A key with a `-` must be backtick-escaped in FEEL (for example, `` =camunda.secrets.`db-password` ``), because a bare `-` is FEEL's minus operator.
+In SaaS, the secret store is provisioned and managed for you. You don't configure a store type, path, or credentials. Add and update values on the **Connector secrets** tab; the cluster can resolve them without additional setup.
+
+In Self-Managed, an operator must [configure the secret store](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).
+
+A reference name must match `[\p{Alnum}_-]+`. Only keys that contain letters, digits, `_`, and `-` can therefore be referenced as `camunda.secrets.<key>`. A key that contains a period (`.`), such as one used in a file extension, is stored but cannot be referenced this way. A key with a `-` must be backtick-escaped in FEEL (for example, `` =camunda.secrets.`db-password` ``), because a bare `-` is FEEL's minus operator.
