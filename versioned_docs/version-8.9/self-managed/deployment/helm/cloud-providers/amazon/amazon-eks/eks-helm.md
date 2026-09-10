@@ -71,8 +71,6 @@ To demonstrate how to deploy with a custom domain, the following stack is also i
 
 <SingleNamespaceDeployment />
 
-<!-- TODO: the eks-single-region-rdbms snippets reference the feat/eks-single-region-rdbms branch until it merges; switch to blob/stable/8.9/ in the 8.9 doc and blob/main/ in the next doc once it lands (camunda/camunda-deployment-references#2711). -->
-
 ### Secondary storage
 
 This guide supports two [secondary storage](/self-managed/concepts/secondary-storage/index.md) backends. Select a variant using the authentication and values tabs throughout this guide.
@@ -141,7 +139,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 The RDBMS variant configures Amazon Aurora PostgreSQL as the secondary storage and requires additional orchestration database variables on top of the base configuration:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/check-env-variables.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/check-env-variables.sh
 ```
 
 </TabItem>
@@ -358,7 +356,7 @@ The annotation `kubernetes.io/tls-acme=true` will be [interpreted by cert-manage
 The RDBMS values file configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster and disables Optimize.
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/helm-values/values-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/helm-values/values-domain.yml
 ```
 
 :::danger Exposure of the Zeebe Gateway Service
@@ -375,7 +373,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>
@@ -385,7 +383,7 @@ https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-re
 The RDBMS values file configures Amazon Aurora PostgreSQL as the secondary storage for the Orchestration Cluster and disables Optimize.
 
 ```yaml reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/helm-values/values-no-domain.yml
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/helm-values/values-no-domain.yml
 ```
 
 <NoDomainInfo />
@@ -397,7 +395,7 @@ Before installing the Helm chart, create Kubernetes secrets to store the databas
 To create the secrets, run the following commands:
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/create-external-db-secrets.sh
 ```
 
   </TabItem>

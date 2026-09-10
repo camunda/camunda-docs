@@ -91,8 +91,6 @@ This guide will incur costs on your cloud provider account, specifically for the
 
 ### Variants
 
-<!-- TODO: eks-single-region-rdbms snippets use the feat/eks-single-region-rdbms branch until it merges; switch to blob/stable/8.9/ (8.9 doc) and blob/main/ (next doc) once it lands (camunda/camunda-deployment-references#2711). -->
-
 We support the following variants of this architecture:
 
 - **Standard installation** - Uses username and password connection for the Camunda components (or relies on network isolation for specific components). This option is straightforward and easier to implement, making it ideal for environments where simplicity and rapid deployment are priorities, or where network isolation provides sufficient security.
@@ -151,7 +149,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
    <TabItem value="rdbms" label="RDBMS">
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/get-your-copy.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/get-your-copy.sh
 ```
 
    </TabItem>
@@ -358,7 +356,7 @@ We separated the cluster and PostgreSQL modules to offer you more customization 
    The RDBMS variant extends the Aurora PostgreSQL setup with an additional `camunda_orchestration` database and a dedicated `orchestration_db` user, used as the secondary storage for the Orchestration Cluster:
 
    ```hcl reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/terraform/cluster/db.tf
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/terraform/cluster/db.tf
    ```
 
    </TabItem>
@@ -420,7 +418,7 @@ Using Amazon OpenSearch Service requires [setting up a new Camunda installation]
    ```
 
      </TabItem>
-     
+
      <TabItem value="irsa" label="IRSA">
 
    In addition to standard authentication, which uses anonymous users and relies on the network for access control, you can also use [**IRSA (IAM Roles for Service Accounts)**](https://aws.amazon.com/blogs/opensource/introducing-fine-grained-iam-roles-service-accounts/) to securely connect to OpenSearch. IRSA enables your Kubernetes workloads to assume IAM roles without managing AWS credentials directly.
@@ -712,7 +710,7 @@ https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kub
 ```
 
   </TabItem>
-  
+
   <TabItem value="irsa" label="IRSA">
 
 ```bash reference
@@ -734,7 +732,7 @@ To authenticate and authorize access to PostgreSQL and OpenSearch, **you do not 
 The RDBMS variant exports the orchestration database variables.
 
 ```bash reference
-https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/export-helm-values.sh
+https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/export-helm-values.sh
 ```
 
   </TabItem>
@@ -804,7 +802,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    <TabItem value="rdbms" label="RDBMS">
 
    ```bash reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/procedure/create-setup-db-secret.sh
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/procedure/create-setup-db-secret.sh
    ```
 
    </TabItem>
@@ -837,7 +835,7 @@ The choice depends on your infrastructure setup and security preferences. In thi
    The RDBMS variant also creates the `camunda_orchestration` database used as secondary storage for the Orchestration Cluster.
 
    ```yaml reference
-   https://github.com/camunda/camunda-deployment-references/blob/feat/eks-single-region-rdbms/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
+   https://github.com/camunda/camunda-deployment-references/blob/stable/8.9/aws/kubernetes/eks-single-region-rdbms/setup-postgres-create-db.yml
    ```
 
    </TabItem>
