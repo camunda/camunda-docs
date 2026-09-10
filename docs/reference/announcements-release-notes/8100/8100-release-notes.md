@@ -53,7 +53,7 @@ Provider and backend selection are now decoupled: for example, the Anthropic pro
 
 - This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manually [migrating](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) each element from the still-functioning legacy connector.
 
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-new-native-v2-element-templates-v1-deprecated) for more details.
+See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated) for more details.
 
 #### Improved agent tool configuration
 
