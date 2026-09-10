@@ -1,11 +1,13 @@
-// Keep only APIs available in SaaS: endpoints with no
-// x-availability property, or with x-availability: "SaaS".
+// Keep only APIs available for a given deployment type: endpoints with no
+// x-availability property, or whose x-availability matches the requested value.
 
 const fs = require("fs");
 const path = require("path");
 const yaml = require("js-yaml");
 
-function filterPaths(paths) {
+const HTTP_METHODS = ["get", "post", "put", "patch", "delete"];
+
+function filterPaths(paths, availability) {
   if (!paths) return {};
 
   return Object.fromEntries(
@@ -15,18 +17,22 @@ function filterPaths(paths) {
           Object.entries(methods).filter(
             ([, metadata]) =>
               !Object.hasOwn(metadata, "x-availability") ||
-              metadata["x-availability"].toLowerCase() === "saas"
+              metadata["x-availability"].toLowerCase() === availability
           )
         );
         return [route, filteredMethods];
       })
-      .filter(([, methods]) => Object.keys(methods).length > 0)
+      .filter(
+        ([, methods]) =>
+          Object.keys(methods).filter((key) => HTTP_METHODS.includes(key))
+            .length > 0
+      )
   );
 }
 
 // A path item that is just `{ $ref: "otherfile.yaml#/paths/~1foo" }` points at a
 // whole path item defined in another spec file. If filterPaths() removed that
-// path entirely from the target file (all its methods were SM-only), the ref
+// path entirely from the target file (all its methods didn't match), the ref
 // here now points at nothing, so drop it too.
 function resolveRef(ref) {
   const [file, pointer] = ref.split("#");
@@ -76,7 +82,7 @@ function extractHeaderComments(content) {
   return end === 0 ? "" : lines.slice(0, end).join("\n") + "\n";
 }
 
-function filterSaaSOnly(specDir) {
+function filterByAvailability(specDir, availability) {
   const yamlFiles = fs
     .readdirSync(specDir)
     .filter((file) => file.endsWith(".yaml") || file.endsWith(".yml"))
@@ -90,7 +96,7 @@ function filterSaaSOnly(specDir) {
     headers.set(filePath, extractHeaderComments(content));
     const spec = yaml.load(content);
     originalPaths.set(filePath, JSON.stringify(spec.paths ?? {}));
-    spec.paths = filterPaths(spec.paths);
+    spec.paths = filterPaths(spec.paths, availability);
     specs.set(filePath, spec);
   }
 
@@ -106,4 +112,4 @@ function filterSaaSOnly(specDir) {
   }
 }
 
-exports.filterSaaSOnly = filterSaaSOnly;
+exports.filterByAvailability = filterByAvailability;

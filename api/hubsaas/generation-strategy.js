@@ -1,6 +1,6 @@
 const { makeServerDynamic } = require("../make-server-dynamic");
 const removeDuplicateVersionBadge = require("../remove-duplicate-version-badge");
-const { filterSaaSOnly } = require("./filter-saas-only");
+const { filterByAvailability } = require("../filter-availability");
 const path = require("path");
 
 function preGenerateDocs(config) {
@@ -8,7 +8,7 @@ function preGenerateDocs(config) {
   const specDir = path.dirname(specFilePath);
 
   makeServerDynamic(specFilePath);
-  filterSaaSOnly(specDir);
+  filterByAvailability(specDir, "saas");
 }
 
 function postGenerateDocs(config) {
