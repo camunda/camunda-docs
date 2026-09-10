@@ -100,7 +100,7 @@ jobs:
           npm run api:generate:hubsm
 
           # Generate modifies the yaml files
-          npx prettier --write api/hubsm/v2/*.yaml
+          npx prettier --write *.yaml
 
       - name: Upload Self-Managed changes
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -164,7 +164,7 @@ jobs:
           npm run api:generate:hubsaas
 
           # Generate modifies the yaml files
-          npx prettier --write api/hubsaas/v2/*.yaml
+          npx prettier --write *.yaml
 
       - name: Upload SaaS changes
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
