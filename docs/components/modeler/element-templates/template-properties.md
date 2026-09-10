@@ -169,7 +169,7 @@ A configuration is stored on the cluster as a cluster variable that is created w
 A configuration's field values can be plain literals or secret references (`camunda.secrets.*`) that the engine resolves at runtime, so secrets are never stored in the model.
 
 :::note
-Configurations are the mechanism that powers Camunda credentials: a credential is a configuration whose template `kind` is `CREDENTIAL`. Selecting one requires cluster access from the modeler at design time, consistent with existing connector templates.
+Configurations are the mechanism that powers [Camunda credentials](/components/hub/organization/credentials/index.md): a credential is a configuration whose template `kind` is `CREDENTIAL`. Selecting one requires cluster access from the modeler at design time, consistent with existing connector templates. To define a credential type of your own, see [create a credential template](/components/connectors/custom-built-connectors/credential-templates.md).
 :::
 
 It supports the following config-specific keys:
