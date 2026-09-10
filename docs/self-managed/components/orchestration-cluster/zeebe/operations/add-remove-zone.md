@@ -144,7 +144,7 @@ Wait until `status` is `COMPLETED`, then confirm through `partitionDistribution`
 
 ### 3. Scale down the zone's brokers
 
-Remove the zone's brokers from cluster membership using the [Reconfiguration or Scale API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-down), then shut down the zone's brokers (for example, scale its StatefulSet to zero replicas).
+Remove the zone's brokers from cluster membership using the [Reconfiguration or Scale API](/self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling.md#scale-down). Capture the `changeId` from the response and poll `GET /actuator/cluster/changes/{changeId}` until `status` is `COMPLETED`. Only then shut down the zone's brokers (for example, scale its StatefulSet to zero replicas).
 
 :::note
 This removal procedure is also referenced by dual-region and other failover runbooks when a zone needs to be permanently dropped from a cluster after a planned reconfiguration.
@@ -173,4 +173,4 @@ curl -X 'DELETE' \
 
 </details>
 
-Because the zone is already down, there are no partitions to drain. This single request atomically removes the zone's brokers from cluster membership and drops the zone from the persisted partition distribution. See [force-remove a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#force-remove-a-zone) for the full API reference.
+Because the zone is already down, there are no live brokers to drain. The request returns a `changeId`; poll `GET /actuator/cluster/changes/{changeId}` until `status` is `COMPLETED` before treating the zone as removed or taking further recovery action. The completed change atomically removes the zone's brokers from cluster membership and drops the zone from the persisted partition distribution. See [force-remove a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#force-remove-a-zone) for the full API reference.
