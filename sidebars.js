@@ -224,6 +224,18 @@ module.exports = {
         },
         "components/concepts/job-workers",
         "components/concepts/outbound-connectors-job-workers",
+        {
+          type: "category",
+          label: "Secret resolution",
+          link: {
+            type: "doc",
+            id: "components/concepts/secret-resolution",
+          },
+          items: [
+            "components/concepts/secret-resolution-and-job-activation",
+            "components/concepts/secret-resolution-incidents",
+          ],
+        },
         "components/concepts/element-templates",
         {
           Listeners: [
@@ -1436,6 +1448,7 @@ module.exports = {
           items: [
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/physical-tenants",
+            "apis-tools/java-client/secrets",
             "apis-tools/java-client/logging",
           ],
         },
