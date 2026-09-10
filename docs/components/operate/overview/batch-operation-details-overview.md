@@ -14,6 +14,8 @@ On the batch operation's details page, you'll find:
 - A table with details about the items in the batch operation.
 - An option to take action on the batch operation. This is only available for some batch operations, depending on the state.
 
+![A batch operation details page showing the summary header (batch state Completed, summary of items 3, start date, end date, actor) above the items table listing three process instance keys with their batch state.](./img/batch-operation-details-overview.png)
+
 ## Summary header
 
 The summary header includes the following details about the batch operation:

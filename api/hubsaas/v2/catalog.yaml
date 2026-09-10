@@ -85,6 +85,36 @@ paths:
         "500":
           $ref: "common-responses.yaml#/components/responses/InternalServerError"
 
+  /catalog/assets/search:
+    post:
+      operationId: searchCatalogAssets
+      summary: Search catalog assets
+      description: Returns catalog assets matching the given search criteria.
+      x-added-in-version: "0.1.0"
+      tags:
+        - Catalog
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CatalogAssetSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatalogAssetSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
 components:
   parameters:
     AssetKeyPathParam:
@@ -93,7 +123,7 @@ components:
       required: true
       description: The unique key identifying the catalog asset.
       schema:
-        type: string
+        $ref: "keys.yaml#/components/schemas/CatalogAssetKey"
 
   schemas:
     CatalogAssetIngestionRequest:
@@ -117,3 +147,192 @@ components:
             type: string
             format: binary
           minItems: 1
+
+    CatalogAssetSearchQuery:
+      type: object
+      properties:
+        page:
+          description: Pagination criteria. Supports offset-based pagination (from/limit) or a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/CatalogAssetSearchQuerySortRequest"
+        filter:
+          description: The catalog asset search filters.
+          allOf:
+            - $ref: "#/components/schemas/CatalogAssetFilter"
+
+    CatalogAssetSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - created
+            - updated
+        order:
+          description: The sort direction. Defaults to ASC.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    CatalogAssetFilter:
+      type: object
+      description: Filter criteria for searching catalog assets.
+      properties:
+        name:
+          description: Filter by asset name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        resourceId:
+          description: Filter by resource ID (= `id` property of the asset's underlying element template).
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        category:
+          description: Filter by the name of the asset's category.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        tag:
+          description: Filter by the name of a tag assigned to the asset.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        unpublished:
+          description: Filter by whether the asset has been unpublished.
+          type: boolean
+        created:
+          description: Filter by creation date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        updated:
+          description: Filter by last update date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+        usage:
+          description: Filter by usage metrics.
+          allOf:
+            - $ref: "#/components/schemas/CatalogAssetUsageFilter"
+
+    CatalogAssetUsageFilter:
+      type: object
+      description: Filter criteria for the asset's aggregated usage metrics.
+      properties:
+        status:
+          description: |
+            Filter by usage status. Supported values: `UP_TO_DATE`, `UPDATE_AVAILABLE`, `DEPRECATED`, `UNUSED`
+            (see the description of the `usage.status` response field for their meaning).
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+
+    CatalogAssetResult:
+      type: object
+      required:
+        - assetKey
+        - name
+        - resourceId
+        - shortDescription
+        - category
+        - tags
+        - latestVersion
+        - unpublished
+        - created
+        - updated
+        - usage
+      properties:
+        assetKey:
+          description: The unique key identifying this asset.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/CatalogAssetKey"
+        name:
+          description: The name of the asset.
+          type: string
+        resourceId:
+          description: The user-provided identifier of the asset (= `id` property of the asset's underlying element template).
+          type: string
+        shortDescription:
+          description: The short description of the asset.
+          type: string
+          nullable: true
+        category:
+          description: The name of the category the asset is assigned to.
+          type: string
+          nullable: true
+        tags:
+          description: The names of the tags assigned to the asset.
+          type: array
+          items:
+            type: string
+        latestVersion:
+          description: The version number of the asset's latest version.
+          type: integer
+          format: int64
+        unpublished:
+          description: Whether the asset has been unpublished.
+          type: boolean
+        created:
+          description: The timestamp when the asset was created.
+          type: string
+          format: date-time
+        updated:
+          description: The timestamp when the asset was last updated.
+          type: string
+          format: date-time
+        usage:
+          description: Aggregated usage metrics for the asset.
+          allOf:
+            - $ref: "#/components/schemas/CatalogAssetUsageResult"
+
+    CatalogAssetUsageResult:
+      type: object
+      required:
+        - status
+        - workspaceCount
+        - projectCount
+        - projectsOnLatestVersionCount
+      properties:
+        status:
+          description: |
+            The asset's aggregated usage status:
+
+            * `UP_TO_DATE`: The asset is active (= neither unpublished nor deprecated), and only its current latest version is used.
+            * `UPDATE_AVAILABLE`: The asset is active, but at least one usage is on an older version.
+            * `DEPRECATED`: The asset is unpublished, or its latest version is deprecated, but it is still in use. Takes priority over `UPDATE_AVAILABLE` (if an older, non-deprecated version is used).
+            * `UNUSED`: The asset is not used at all. Takes priority over `DEPRECATED` (for unpublished/deprecated assets that are not used).
+          type: string
+          enum:
+            - UP_TO_DATE
+            - UPDATE_AVAILABLE
+            - DEPRECATED
+            - UNUSED
+        workspaceCount:
+          description: The number of distinct workspaces in which the asset is used.
+          type: integer
+          format: int64
+        projectCount:
+          description: The number of distinct projects in which the asset is used.
+          type: integer
+          format: int64
+        projectsOnLatestVersionCount:
+          description: >
+            The number of projects (out of `projectCount`) where every usage of the asset is on its current latest version.
+          type: integer
+          format: int64
+
+    CatalogAssetSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The matching catalog assets.
+          type: array
+          items:
+            $ref: "#/components/schemas/CatalogAssetResult"
+        page:
+          $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
