@@ -9,6 +9,8 @@ from camunda_orchestration_sdk import (
     AuditLogSearchQueryRequest,
     CamundaClient,
     ClockPinRequest,
+    ClusterBalanceResponse,
+    ClusterRebalanceRequest,
     ClusterRestoreRequest,
     ClusterVariableName,
     ClusterVariableSearchQueryRequest,
@@ -690,4 +692,58 @@ def restore_as_cluster_admin_example() -> None:
             suffix = f" -> {mode}" if mode else ""
             print(f"    {operation.operation}{suffix}")
 # endregion RestoreAsClusterAdmin
+
+
+# region TriggerClusterRebalance
+def trigger_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Start a dry run first to inspect the plan without transferring any leadership.
+    # Omit dry_run (or set it to False) to execute the rebalance for real.
+    result: ClusterBalanceResponse = client.trigger_cluster_rebalance(
+        data=ClusterRebalanceRequest(
+            replication_lag_threshold=8388608,
+            max_transfer_attempts=3,
+        ),
+        dry_run=True,
+    )
+
+    print(f"Cluster balance state: {result.state}")
+    if result.running_rebalance is not None:
+        print(f"Running rebalance: {result.running_rebalance}")
+    for partition in result.partitions:
+        print(f"  Partition {partition.partition_id}: {partition.state}")
+# endregion TriggerClusterRebalance
+
+
+# region GetClusterRebalance
+def get_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Poll this endpoint after triggering a rebalance to monitor progress.
+    result: ClusterBalanceResponse = client.get_cluster_rebalance()
+
+    print(f"Cluster balance state: {result.state}")
+    if result.running_rebalance is not None:
+        print(f"Running rebalance in progress: {result.running_rebalance}")
+    if result.last_completed_rebalance is not None:
+        print(f"Last completed rebalance: {result.last_completed_rebalance}")
+    for partition in result.partitions:
+        print(f"  Partition {partition.partition_id}: {partition.state}")
+# endregion GetClusterRebalance
+
+
+# region CancelClusterRebalance
+def cancel_cluster_rebalance_example() -> None:
+    client = CamundaClient()
+
+    # Asks the running rebalance to stop after the in-flight transfer finishes.
+    # Partitions already rebalanced keep their new leaders.
+    result = client.cancel_cluster_rebalance()
+
+    if result.was_running:
+        print("Rebalance was running and has been asked to stop.")
+    else:
+        print("No rebalance was running.")
+# endregion CancelClusterRebalance
 
