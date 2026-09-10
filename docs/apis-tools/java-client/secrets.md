@@ -15,7 +15,7 @@ ResolveSecretsResponse response = client.newResolveSecretsCommand()
     .join();
 ```
 
-A per-reference failure does not throw. `send()` only raises when the whole request is rejected — for example, more than 20 references in one call. Read the outcome from the response instead:
+A per-reference failure does not throw. `send()` only raises when the whole request is rejected. For example, more than 20 references in one call. Read the outcome from the response instead:
 
 ```java
 if (!response.isFullyResolved()) {
@@ -31,7 +31,7 @@ Optional<String> token = response.getValue("camunda.secrets.API_TOKEN");
 - `isFullyResolved()` is `true` only when every requested reference resolved with no errors.
 - `getValue(reference)` looks up a single resolved value without scanning `getResolved()` yourself.
 
-`ResolveSecretsResponse`, `ResolvedSecret`, and `ResolutionError` all omit resolved values and error messages from their `toString()`, so logging the response itself — or an object holding one — never prints a secret value. Log `getReference()` and `getCode()` instead of the response object.
+`ResolveSecretsResponse`, `ResolvedSecret`, and `ResolutionError` all omit resolved values and error messages from their `toString()`. Logging the response itself or an object holding one never prints a secret value. Log `getReference()` and `getCode()` instead of the response object.
 
 ## List known references
 
@@ -44,4 +44,4 @@ List<String> references = response.getReferences();
 
 ## Physical-tenant scoping
 
-Both commands resolve and list against the secret stores of the client's own [Physical Tenant](./physical-tenants.md) — neither command takes a separate tenant parameter.
+Both commands resolve and list against the secret stores of the client's own [Physical Tenant](./physical-tenants.md). Neither command takes a separate tenant parameter.
