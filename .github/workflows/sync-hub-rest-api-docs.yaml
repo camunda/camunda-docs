@@ -94,11 +94,13 @@ jobs:
 
           # Format spec files
           npm ci
-          npx prettier --write api/hubsm/v2/*.yaml
 
           cd api/hubsm/v2
           mv rest-api.yaml camunda-openapi.yaml
           npm run api:generate:hubsm
+
+          # Generate modifies the yaml files
+          npx prettier --write api/hubsm/v2/*.yaml
 
       - name: Upload Self-Managed changes
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -156,11 +158,13 @@ jobs:
 
           # Format spec files
           npm ci
-          npx prettier --write api/hubsaas/v2/*.yaml
 
           cd api/hubsaas/v2
           mv rest-api.yaml camunda-openapi.yaml
           npm run api:generate:hubsaas
+
+          # Generate modifies the yaml files
+          npx prettier --write api/hubsaas/v2/*.yaml
 
       - name: Upload SaaS changes
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
