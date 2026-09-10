@@ -15,7 +15,7 @@ The Email inbound connector allows your BPMN service to receive emails via IMAP.
 To use the **Email Inbound connector**, you must have an IMAP server available to connect to.
 
 :::note
-Use SaaS-managed secrets to avoid exposing your sensitive data as plain text.
+Use secrets to avoid exposing your sensitive data as plain text.
 See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 

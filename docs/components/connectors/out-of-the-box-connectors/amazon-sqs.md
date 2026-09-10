@@ -24,7 +24,7 @@ To use the **Amazon SQS connector**, you need to have an SQS Queue, IAM key, and
 
 :::note
 
-Use SaaS-managed secrets to avoid exposing your AWS IAM credentials as plain text. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
+Use secrets to avoid exposing your AWS IAM credentials as plain text. Refer to an [appendix entry](#how-do-i-store-aws-iam-secrets-for-my-sqs-connector) and the [SQS Developer Guide](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-basic-examples-of-iam-policies.html) to learn more.
 
 :::
 
@@ -85,7 +85,7 @@ Example of a valid message attribute as a FEEL value:
 
 ### How do I store AWS IAM Secrets for my SQS connector?
 
-Store your AWS IAM credentials as SaaS-managed secrets to avoid exposing sensitive information. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Store your AWS IAM credentials as secrets to avoid exposing sensitive information. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 
@@ -106,7 +106,7 @@ a BPMN process triggered by [Amazon Simple Queue Service (SQS)](https://aws.amaz
 Before using the Amazon SQS inbound connector, ensure you have the following:
 
 1. An active SQS Queue in your AWS account.
-2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. Use SaaS-managed secrets to store your AWS IAM credentials securely. Refer to the [SaaS-managed secrets documentation](/components/hub/organization/manage-clusters/manage-secrets.md) for more details.
+2. IAM credentials with the necessary permissions to receive messages from the SQS Queue. Use secrets to store your AWS IAM credentials securely. Refer to the [secrets documentation](/components/hub/organization/manage-clusters/manage-secrets.md) for more details.
 
 ## Create an SQS inbound connector task
 

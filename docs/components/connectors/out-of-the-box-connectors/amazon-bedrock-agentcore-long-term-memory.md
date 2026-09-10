@@ -18,7 +18,7 @@ To use the **Amazon Bedrock AgentCore Long-Term Memory connector**, you need the
 Learn more about Amazon Bedrock AgentCore Long-Term Memory in the [official documentation](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/long-term-memory-long-term.html).
 
 :::note
-Use SaaS-managed secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to store credentials and avoid exposing sensitive information directly from the process. Refer to [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 :::
 
 ## Create an Amazon Bedrock AgentCore Long-Term Memory connector task

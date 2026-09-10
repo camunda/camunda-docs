@@ -21,7 +21,7 @@ The **RabbitMQ connector** is an outbound connector that allows you to connect y
 ## Prerequisites
 
 To use the **RabbitMQ connector**, you need to have installed a RabbitMQ server and create the relevant [credentials](https://www.rabbitmq.com/passwords.html).
-Use SaaS-managed secrets to store credentials, so that you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+Use secrets to store credentials, so that you don't expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
 
 :::note
 Ensure you enter the correct exchange name and routing key, as the **RabbitMQ connector** can't throw an exception if they are incorrect.
@@ -114,7 +114,7 @@ You can use an output mapping to map the response:
 
 ### How do I store secrets for my connector?
 
-Use SaaS-managed secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 </TabItem>
 
@@ -125,7 +125,7 @@ The **RabbitMQ connector** is an inbound connector that allows you to connect yo
 ## Prerequisites
 
 To use the **RabbitMQ connector**, you need to have installed a RabbitMQ server and create the relevant [credentials](https://www.rabbitmq.com/passwords.html).
-Using SaaS-managed secrets to store credentials is recommended so you do not expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
+Using secrets to store credentials is recommended so you do not expose sensitive information directly from the process. See [this appendix entry](#how-do-i-store-secrets-for-my-connector) to learn more.
 
 ## Create a RabbitMQ connector event
 
@@ -263,7 +263,7 @@ The **Output mapping** section allows you to configure the mapping of the Rabbit
 
 ### How do I store secrets for my connector?
 
-Use SaaS-managed secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Use secrets to avoid exposing your credentials. Follow our documentation on [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### What is the output format of the RabbitMQ connector?
 

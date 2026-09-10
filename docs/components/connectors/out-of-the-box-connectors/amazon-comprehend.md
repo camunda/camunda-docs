@@ -16,7 +16,7 @@ The **Amazon Comprehend connector** allows you to integrate your BPMN service wi
 To use the **Amazon Comprehend connector**, you must have an **AWS IAM Access Key** and **Secret Key** with the appropriate Comprehend permissions. Refer to the [AWS Comprehend set up instructions](https://docs.aws.amazon.com/comprehend/latest/dg/setting-up.html).
 
 :::note
-Use **SaaS-managed secrets** to avoid exposing your AWS IAM credentials as plain text.  
+Use **secrets** to avoid exposing your AWS IAM credentials as plain text.  
 Refer to [managing secrets](components/hub/organization/manage-clusters/manage-secrets.md) for more details.
 :::
 
@@ -180,7 +180,7 @@ Mapped values **result**:
 
 ### How do I securely store AWS IAM credentials for my Comprehend connector?
 
-Store your AWS IAM credentials as **SaaS-managed secrets** to avoid exposing sensitive information. Follow our [managing secrets guide](components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
+Store your AWS IAM credentials as **secrets** to avoid exposing sensitive information. Follow our [managing secrets guide](components/hub/organization/manage-clusters/manage-secrets.md) to learn more.
 
 ### AWS authentication types
 

@@ -21,7 +21,7 @@ The key will need the following permissions:
 Learn more about Amazon S3 in the [Amazon Simple Storage Service Documentation](https://docs.aws.amazon.com/s3/).
 
 :::note
-Use SaaS-managed secrets to store credentials and avoid exposing sensitive information from the process.
+Use secrets to store credentials and avoid exposing sensitive information from the process.
 See [managing secrets](/components/hub/organization/manage-clusters/manage-secrets.md).
 :::
 
