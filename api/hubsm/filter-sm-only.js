@@ -1,6 +1,5 @@
 // Keep only APIs available in Self-Managed: endpoints with no
 // x-availability property, or with x-availability: "SM".
-// This drops SaaS-only endpoints (x-availability: "SaaS").
 
 const fs = require("fs");
 const path = require("path");
@@ -63,7 +62,7 @@ function pruneDanglingRefs(paths, specDir, specs) {
   );
 }
 
-function filterSaaSOnly(specDir) {
+function filterSelfManagedOnly(specDir) {
   const yamlFiles = fs
     .readdirSync(specDir)
     .filter((file) => file.endsWith(".yaml") || file.endsWith(".yml"))
@@ -86,4 +85,4 @@ function filterSaaSOnly(specDir) {
   }
 }
 
-exports.filterSaaSOnly = filterSaaSOnly;
+exports.filterSelfManagedOnly = filterSelfManagedOnly;
