@@ -723,10 +723,11 @@ module.exports = {
               label: "Manage clusters",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-clusters/manage-cluster",
+                id: "components/hub/organization/manage-clusters/index",
               },
               items: [
                 "components/hub/organization/manage-clusters/create-cluster",
+                "components/hub/organization/manage-clusters/manage-cluster",
                 "components/hub/organization/manage-clusters/cluster-connectors",
                 "components/hub/organization/manage-clusters/manage-api-clients",
                 "components/hub/organization/manage-clusters/manage-secrets",
@@ -736,6 +737,17 @@ module.exports = {
                 "components/hub/organization/manage-clusters/settings",
                 "components/hub/organization/manage-clusters/cluster-capacity",
                 "components/hub/organization/manage-clusters/troubleshoot-clusters",
+              ],
+            },
+            {
+              type: "category",
+              label: "Manage credentials",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/credentials/credentials",
+              },
+              items: [
+                "components/hub/organization/credentials/credentials-modeling-interface",
               ],
             },
             {
@@ -757,10 +769,12 @@ module.exports = {
               label: "Manage users",
               link: {
                 type: "doc",
-                id: "components/hub/organization/manage-users/manage-users",
+                id: "components/hub/organization/manage-users/index",
               },
               items: [
+                "components/hub/organization/manage-users/create-manage-users",
                 "components/hub/organization/manage-users/manage-user-groups",
+                "components/hub/organization/manage-users/resource-based-auth",
               ],
             },
             {
@@ -776,7 +790,6 @@ module.exports = {
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
                 "components/hub/organization/manage-organization-settings/usage-history",
                 "components/hub/organization/manage-organization-settings/usage-alerts",
-                "components/hub/organization/manage-organization-settings/advanced-search",
                 "components/hub/organization/manage-organization-settings/switch-organization",
                 "components/hub/organization/manage-organization-settings/delete-account",
                 {
@@ -932,6 +945,7 @@ module.exports = {
         "components/modeler/desktop-modeler/process-applications",
         "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/desktop-modeler/use-connectors",
+        "components/modeler/desktop-modeler/credentials",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
@@ -1072,6 +1086,7 @@ module.exports = {
             "components/connectors/out-of-the-box-connectors/blueprism",
             "components/connectors/out-of-the-box-connectors/box",
             "components/connectors/out-of-the-box-connectors/csv",
+            "components/connectors/out-of-the-box-connectors/databricks",
             "components/connectors/out-of-the-box-connectors/easy-post",
             {
               Email: [
@@ -1139,6 +1154,7 @@ module.exports = {
               items: [
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
+                "components/connectors/custom-built-connectors/credential-templates",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
@@ -1783,6 +1799,7 @@ module.exports = {
                 //   ],
                 // },
                 "self-managed/deployment/helm/configure/application-configs",
+                "self-managed/deployment/helm/configure/orchestration-tls-modes",
                 "self-managed/deployment/helm/configure/pod-networking",
                 "self-managed/deployment/helm/configure/pod-scheduling",
                 "self-managed/deployment/helm/configure/service-configuration",
@@ -2191,6 +2208,7 @@ module.exports = {
                 "self-managed/operational-guides/backup-restore/zeebe-backup-and-restore",
               ],
             },
+            "self-managed/operational-guides/backup-restore/modeler-backup-and-restore",
             "self-managed/operational-guides/backup-restore/optimize-backup-and-restore",
           ],
         },
@@ -2364,6 +2382,7 @@ module.exports = {
                     "self-managed/components/orchestration-cluster/zeebe/operations/disk-space",
                     "self-managed/components/orchestration-cluster/zeebe/operations/update-zeebe",
                     "self-managed/components/orchestration-cluster/zeebe/operations/rebalancing",
+                    "self-managed/components/orchestration-cluster/zeebe/operations/move-raft-leadership",
                     "self-managed/components/orchestration-cluster/zeebe/operations/management-api",
                     "self-managed/components/orchestration-cluster/zeebe/operations/backups",
                     "self-managed/components/orchestration-cluster/zeebe/operations/cluster-scaling",

@@ -23,7 +23,7 @@ To deploy:
 2. Open a process file.
 3. In the top right corner of the modeling interface, click the dropdown next to **Deploy & run**.
 4. Click **Deploy**.
-5. Select a stage, optional tenant ID, and the resources to deploy.
+5. Select a stage, optional tenant ID, and the resources to deploy. You can either deploy **All resources** or **Only this resource**.
 6. Click **Deploy**.
 
 :::tip
