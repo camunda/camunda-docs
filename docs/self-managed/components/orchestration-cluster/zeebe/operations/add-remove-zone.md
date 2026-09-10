@@ -9,7 +9,7 @@ This guide walks through adding a new zone to a running [zone-aware](/self-manag
 The cluster must already be zone-aware before following this guide. If your cluster is still bare or only partially zoned, first migrate it using [`PUT /cluster/partition-distribution`](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partition-distribution-api) and [`PUT /cluster/zones`](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#migrate-a-zone-to-a-zone-aware-topology).
 
 :::note
-If a zone is down and its brokers are unreachable, do not follow the removal steps below. Use [force-remove a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#force-remove-a-zone) instead — a separate, dangerous operation meant for that failure scenario.
+If a zone is down and its brokers are unreachable, do not follow the [Remove a healthy zone](#remove-a-healthy-zone) steps below. Use [Remove a down or unreachable zone](#remove-a-down-or-unreachable-zone) instead — a separate, dangerous operation meant for that failure scenario.
 :::
 
 The management port is typically not publicly exposed. If the gateway isn't reachable from the machine where you run these commands, use a private connection such as `kubectl port-forward svc/camunda-zeebe-gateway 9600:9600`, then use `localhost` for `{zeebe-gateway}` in the examples below. The examples use `http://` for a management endpoint without TLS; if yours uses TLS, use `https://` and the appropriate `curl` TLS options.
@@ -84,7 +84,7 @@ curl -s 'http://{zeebe-gateway}:9600/actuator/cluster' | jq '.partitionDistribut
 
 Check `partitionDistribution` and `brokers` in the full `GET actuator/cluster` response, or query `/v2/topology`.
 
-## Remove a zone
+## Remove a healthy zone
 
 Removing a healthy zone drains its partitions to the remaining zones before shutting down its brokers.
 
@@ -149,3 +149,28 @@ Remove the zone's brokers from cluster membership using the [Reconfiguration or 
 :::note
 This removal procedure is also referenced by dual-region and other failover runbooks when a zone needs to be permanently dropped from a cluster after a planned reconfiguration.
 :::
+
+## Remove a down or unreachable zone
+
+:::note
+Only use this procedure when the zone is down and its brokers are unreachable. It force-evicts the zone's brokers from cluster membership and drops the zone from the persisted configuration in a single step, without draining partitions or handing off leadership.
+:::
+
+Call the Zones API to force-remove the zone:
+
+```
+DELETE actuator/cluster/zones/{zoneId}
+```
+
+<details>
+  <summary>Example request</summary>
+
+```
+curl -X 'DELETE' \
+   'http://{zeebe-gateway}:9600/actuator/cluster/zones/zone-c' \
+   -H 'accept: application/json'
+```
+
+</details>
+
+Because the zone is already down, there are no partitions to drain. This single request atomically removes the zone's brokers from cluster membership and drops the zone from the persisted partition distribution. See [force-remove a zone](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#force-remove-a-zone) for the full API reference.
