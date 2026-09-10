@@ -185,34 +185,17 @@ Camunda Process Test now exposes **judge-based evaluation** and **semantic simil
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects the Java client">Java client</span><span class="badge badge--medium" title="This feature affects the Spring SDK">Spring SDK</span></div>
 
-### Public Camunda Hub API
+### Camunda Hub API
 
 <!-- https://github.com/camunda/product-hub/issues/3413 -->
 
-A new Camunda Hub API is provided under `/v2/` for programmatic access to Console and Web Modeler resources. The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+A new public Camunda Hub API is provided under `/v2/` for programmatic access to Console and Web Modeler resources.
 
-The Console Self-Managed and Web Modeler APIs are deprecated in favor of the Camunda Hub API.
-See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
+- The API aligns with the Orchestration Cluster API guidelines, with standardized error handling and data-fetching patterns.
+- The Console Self-Managed and Web Modeler APIs are deprecated in favor of the Camunda Hub API.
+- See the [release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#console-sm-and-web-modeler-apis-deprecated) for details.
 
 <p class="link-arrow">[Camunda Hub API](/apis-tools/hub-api-saas/overview.md)</p>
-
-:::note
-The Camunda Hub API is not yet exposed in Camunda 8. To access it, please reach out to [Camunda success](https://camunda.com/services/camunda-success/).
-:::
-
-### Invite collaborators through the public API who haven't logged in yet
-
-<!-- https://github.com/camunda/camunda-hub/pull/26666 -->
-
-Adding a project collaborator through the public API — `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members` — no longer requires the invitee to have already logged in to Web Modeler at least once. If the email address belongs to an organization member with no local user yet, Camunda now creates a pending invitation and sends an invitation email, the same as when inviting through the Web Modeler UI. The invitee gains project access once they accept the invitation.
-
-<p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
-
-### Camunda 8 Run no longer requires Java
-
-Camunda 8 Run now includes a bundled Java runtime. This means you no longer need to install OpenJDK or set `JAVA_HOME` before starting Camunda 8 Run.
-
-<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 ### FEEL evaluation with process instance key
 
@@ -231,6 +214,40 @@ The endpoint:
 
 Behavior remains free from side effects and uses the same timeout and guardrails as the existing cluster-scope evaluation.
 
+### Invite collaborators via the Hub API who haven't previously logged in
+
+<!-- https://github.com/camunda/camunda-hub/pull/26666 -->
+
+Adding a project collaborator via the public API no longer requires the invitee to have previously logged in to Hub Modeler.
+
+- You can use `PUT /v1/collaborators` or `POST /v2/workspaces/{workspaceKey}/members`.
+- If the email address belongs to an organization member with no local user yet, a pending invitation is created and an invitation email sent.
+- The invitee gains project access once they accept the invitation.
+
+<p class="link-arrow">[Add or update a member](/apis-tools/hub-api-saas/specifications/add-member.api.mdx)</p>
+
+### Java client in-memory OAuth credentials cached by default
+
+<!-- https://github.com/camunda/camunda/issues/13124 -->
+
+The Camunda Java client now caches OAuth credentials **in memory by default**. The file-based cache at `$HOME/.camunda/credentials` is no longer enabled out of the box and is available as an explicit opt-in.
+
+- The previous default tried to create `$HOME/.camunda/credentials` on first use. In hardened container environments — non-root users (Kubernetes `securityContext.runAsUser`, OpenShift), read-only root filesystems, immutable images — this raised `AccessDeniedException`/`IOException` at first cache write. Affected users had to apply a non-obvious workaround (mount a writable volume and point an environment variable at it) just to get a client to start.
+- Memory-only caching removes that footgun: clients work out of the box in any deployment topology, and the in-process token cache plus proactive refresh still avoid unnecessary token endpoint calls during a JVM's lifetime.
+- The file cache had also been a source of latent corruption when multiple JVMs shared the same `$HOME`; making it opt-in restricts its use to deployments where persistence across restarts is genuinely needed.
+
+How to opt in to the file-based cache (behavior identical to pre-8.10):
+
+| Configuration method | Example                                                                                                 |
+| :------------------- | :------------------------------------------------------------------------------------------------------ |
+| Java client builder  | `new OAuthCredentialsProviderBuilder().credentialsCachePath("/path/to/cache")`                          |
+| Spring property      | `camunda.client.auth.credentials-cache-path: /path/to/cache`                                            |
+| Environment variable | `CAMUNDA_CLIENT_CONFIG_PATH=/path/to/cache` (or `ZEEBE_CLIENT_CONFIG_PATH` for the legacy Zeebe client) |
+
+If you previously set `CAMUNDA_CLIENT_CONFIG_PATH` / `ZEEBE_CLIENT_CONFIG_PATH` only to work around the non-root container error, you can now remove that configuration and rely on the in-memory default.
+
+<p class="link-arrow">[Spring Boot starter configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#credentials-cache-path)</p>
+
 ### Removal of deprecated APIs, Zeebe Client, and Zeebe Process Test
 
 The deprecated Operate and Tasklist APIs are removed. Process data, task management, and operational queries are now served through the [Orchestration Cluster API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md).
@@ -245,41 +262,25 @@ The Zeebe Process Test library is removed and replaced by [Camunda Process Test]
 
 <p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
 
-### In-memory OAuth credentials cache by default for the Java client
-
-<!-- https://github.com/camunda/camunda/issues/13124 -->
-
-The Camunda Java client now caches OAuth credentials **in memory by default**. The file-based cache at `$HOME/.camunda/credentials` is no longer enabled out of the box and is available as an explicit opt-in.
-
-Why this change:
-
-- The previous default tried to create `$HOME/.camunda/credentials` on first use. In hardened container environments — non-root users (Kubernetes `securityContext.runAsUser`, OpenShift), read-only root filesystems, immutable images — this raised `AccessDeniedException`/`IOException` at first cache write. Affected users had to apply a non-obvious workaround (mount a writable volume and point an environment variable at it) just to get a client to start.
-- Memory-only caching removes that footgun: clients work out of the box in any deployment topology, and the in-process token cache plus proactive refresh still avoid unnecessary token endpoint calls during a JVM's lifetime.
-- The file cache had also been a source of latent corruption when multiple JVMs shared the same `$HOME`; making it opt-in restricts its use to deployments where persistence across restarts is genuinely needed.
-
-How to opt in to the file-based cache (behavior identical to pre-8.10):
-
-- Java client builder: `new OAuthCredentialsProviderBuilder().credentialsCachePath("/path/to/cache")`.
-- Spring property: `camunda.client.auth.credentials-cache-path: /path/to/cache`.
-- Environment variable: `CAMUNDA_CLIENT_CONFIG_PATH=/path/to/cache` (or `ZEEBE_CLIENT_CONFIG_PATH` for the legacy Zeebe client).
-
-If you previously set `CAMUNDA_CLIENT_CONFIG_PATH` / `ZEEBE_CLIENT_CONFIG_PATH` only to work around the non-root container error, you can now remove that configuration and rely on the in-memory default.
-
-<p class="link-arrow">[Spring Boot starter configuration](/apis-tools/camunda-spring-boot-starter/configuration.md#credentials-cache-path)</p>
-
 ## Camunda design system
 
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
 
-The new Camunda visual design system is introduced with this alpha for Self-Managed deployments.
+The new Camunda visual design system is introduced for Hub with the 8.10 release.
 
 - A new, streamlined design system offers a cleaner, more consistent look across components.
 - Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
-- The new design system is enabled by default in Self-Managed for Web Modeler, Console and Operate.
+- The new design system is enabled by default for Camunda Hub in both Self-Managed and SaaS.
 
-:::note
-The new design system will be introduced for SaaS deployments with the 8.10 minor release.
-:::
+## Camunda 8 Run
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
+
+### Camunda 8 Run no longer requires Java
+
+Camunda 8 Run now includes a bundled Java runtime. This means you no longer need to install OpenJDK or set `JAVA_HOME` before starting Camunda 8 Run.
+
+<p class="link-arrow">[Camunda 8 Run](/self-managed/quickstart/developer-quickstart/c8run.md)</p>
 
 ## Camunda Hub
 
