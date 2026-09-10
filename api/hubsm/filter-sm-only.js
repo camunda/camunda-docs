@@ -84,10 +84,12 @@ function filterSelfManagedOnly(specDir) {
 
   const specs = new Map();
   const headers = new Map();
+  const originalPaths = new Map();
   for (const filePath of yamlFiles) {
     const content = fs.readFileSync(filePath, "utf8");
     headers.set(filePath, extractHeaderComments(content));
     const spec = yaml.load(content);
+    originalPaths.set(filePath, JSON.stringify(spec.paths ?? {}));
     spec.paths = filterPaths(spec.paths);
     specs.set(filePath, spec);
   }
@@ -97,6 +99,9 @@ function filterSelfManagedOnly(specDir) {
   }
 
   for (const [filePath, spec] of specs) {
+    if (JSON.stringify(spec.paths ?? {}) === originalPaths.get(filePath)) {
+      continue; // no endpoints were filtered out, leave file untouched
+    }
     fs.writeFileSync(filePath, headers.get(filePath) + yaml.dump(spec));
   }
 }
