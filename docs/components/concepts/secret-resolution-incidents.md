@@ -165,7 +165,7 @@ Start with the incident error type and message, then confirm the underlying caus
 | `Secret store '<id>' unavailable (attempt <n>/<m>), retrying in <backoff>: <message>`          | The failure is transient. The broker is retrying the store with backoff, and no incident exists yet. | If the failure persists, restore the store's availability.                                              |
 | `Secret store '<id>' unavailable after <n>/<m> attempts — failing <n> pending refs: <message>` | The store remained unavailable through `retry-max-attempts`, so its pending references failed.       | Restore the store's availability, then resolve the incidents.                                           |
 
-The separator in these log lines is an em dash, and `<message>` contains the store's own error text. Search for a distinctive fragment such as `failed permanently` rather than the entire line.
+In these log lines, `<message>` contains the store's own error text. Search for a distinctive fragment such as `failed permanently` rather than the entire line.
 
 Then verify the reference itself:
 
