@@ -8,13 +8,17 @@ Secret resolution lets job workers use secret values at runtime without storing 
 
 A job whose variables contain an [Orchestration Cluster secret reference](/reference/glossary.md#secret-reference-orchestration-cluster) is handed to a worker only after every reference has been resolved. The resolved values reach the worker without being written to any record, runtime state, or log.
 
-The broker resolves secret references in the background rather than while processing a command. It injects the resolved values into the job only when handing the job to a worker. As a result, secret resolution can affect when a job becomes available for activation, even if you don't configure a secret store yourself.
+The broker resolves secret references in the background rather than while processing a command. It injects the resolved values into the job only when handing the job to a worker. As a result, secret resolution can affect when a job becomes available for activation.
+
+A cluster whose process models contain no `camunda.secrets.<name>` reference is unaffected by any of this. A model that does use a reference behaves differently depending on whether a secret store is configured: on a cluster with no store configured, every reference fails permanently as not found, and the job gets a [secret resolution error incident](secret-resolution-incidents.md#resolve-secret-lookup-failures) rather than a delay.
 
 This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
 ## Resolve references before activation
 
 The broker resolves secret references on a background scheduler, not on the processing path, so a slow or unavailable secret store cannot stall processing.
+
+Each physical tenant supports exactly one secret store, and that store's id must be `default`. A `camunda.secrets.<name>` reference always addresses it. `camunda.physical-tenants.<tenant-key>.secrets.*` can override which store backs a given tenant, but never adds a second store alongside it.
 
 When the broker creates a job, it records each secret reference together with its position in the job variables. The variable value itself keeps the placeholder text `camunda.secrets.<name>`. Nothing is read from a secret store at this point.
 
@@ -28,7 +32,7 @@ Resolution records carry no secret values. Only the store's cache holds a value,
 
 A cached value expires a fixed time after it is written, regardless of when it was last read. The store can also evict the value earlier if its cache is full. If the value is no longer cached when the broker tries to activate a job, the broker parks the job and resolves the reference again.
 
-Resolving the reference again also makes rotated secrets available to workers without a restart. Configure each store's cache lifetime and size under [`camunda.secrets.cache`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecretscache).
+Resolving the reference again also makes rotated secrets available to workers without a restart. Configure the store's cache lifetime and size under [`camunda.secrets.cache`](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#camundasecretscache).
 
 Two kinds of failure are treated differently:
 
@@ -37,9 +41,9 @@ Two kinds of failure are treated differently:
 | The store reports a secret as missing, forbidden, or invalid | Treated as permanent. The reference fails immediately, with no retry and no cache write.                                                                                                     |
 | The store itself is unavailable                              | Treated as transient. The broker retries the store with exponential backoff. After `retry-max-attempts` consecutive failures, the broker fails every reference still pending for that store. |
 
-The broker tracks retry state per store rather than per secret and holds it in memory only. The retry state resets when the broker restarts or the partition changes leader. During backoff, the scheduler skips the store, so its references do not consume batch capacity that a healthy store can use.
+The broker tracks retry state for its store rather than per secret and holds it in memory only. The retry state resets when the broker restarts or the partition changes leader. During backoff, the scheduler skips the store, so its references do not consume batch capacity that a healthy store can use.
 
-A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [a secret could not be resolved](secret-resolution-incidents.md#a-secret-could-not-be-resolved) for the incident message, how to tell the causes apart, and what resolving it does.
+A reference that fails permanently, or whose store never recovers, raises an incident for the jobs waiting on it. See [resolve secret lookup failures](secret-resolution-incidents.md#resolve-secret-lookup-failures) for the incident message, how to tell the causes apart, and what resolving it does.
 
 ## Activate a job that references secrets
 
@@ -47,7 +51,7 @@ At activation time, the broker looks up each job reference in the secret store's
 
 The broker hands a job to a worker only when every reference has a cached value. If a reference is not yet cached, the broker requests resolution instead of handing out the job. The broker does not fail the waiting job or raise an incident. Once the reference resolves, the job becomes available automatically.
 
-While it waits, the job is in the state `WAITING_FOR_SECRET_RESOLUTION`. A job in that state is not activatable, so no worker receives it on either delivery path.
+While it waits, the job is parked internally and is not activatable, so no worker receives it on either delivery path. This parked state isn't exposed through the API, Operate, or exported records. Observe it instead through its effects: the job is missing from an activation response, no `ACTIVATED` event exists for its batch, a `RESOLUTION_REQUESTED` record exists for the pending reference, and the `zeebe_job_events_total` metric counts it under `action="skipped uncached secret"`.
 
 The following sections describe this behavior for each delivery path. The broker injects the same resolved values on both paths.
 
@@ -80,11 +84,17 @@ A job worker does not need to handle secret resolution. While a job waits for a 
 
 A worker receives the job with the placeholders replaced by the resolved values. If your worker logs its input variables, the resolved secret values appear in plaintext.
 
+:::warning
+The guarantees below describe what Camunda stores, not what a worker does with the value it received. A worker can still write the resolved value back into process variables, for example through a completed job's variables, an output mapping, a connector result, or an error message. Doing so writes it to process variables and exposes it in runtime state and every exported record as plaintext, the same as any other variable value. Write resolved secret values into a worker's own request to the credential's consumer, not back into process variables.
+:::
+
 You don't need to make client-side changes. Existing workers, clients, and job worker libraries continue to work with a cluster that resolves secrets.
+
+One exception: a worker's `CompleteJob`, `FailJob`, or `ThrowError` command is rejected with `INVALID_STATE` if the job is parked for secret resolution when the command arrives; the rejection names the state. This can surface as a race: if a worker's activation times out and it completes, fails, or throws an error late, and by then the job's cached secret value has expired and the broker parked it again, that late command is rejected instead of accepted. The work of that activation is lost, and the job is resolved and handed out again once its references are cached, the same outcome as any other lost race between a timed-out worker and a new activation.
 
 ## Secret values location
 
-Resolved secret values exist only in the activation response and in the pushed job. Everywhere else, the placeholder text is what is stored.
+Resolved secret values exist only in the activation response and in the pushed job, unless a worker writes the value into a process variable itself (see the warning above). Short of that, everywhere else the placeholder text is what is stored.
 
 | Location                                   | What it contains                                              |
 | :----------------------------------------- | :------------------------------------------------------------ |
@@ -114,18 +124,27 @@ For how to inspect and resolve either incident, see [troubleshoot secret resolut
 
 Configure the scheduler under `camunda.processing.engine.secrets`. The defaults are intended for stores that respond in less than a second. The separate `camunda.secrets.cache.ttl` setting controls how long a resolved value remains cached before the reference must be resolved again.
 
-| Property                 | Default | Change it when                                                                                                                                      |
-| :----------------------- | :------ | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `interval`               | `5s`    | Jobs that reference secrets take too long to activate. A shorter interval reduces that delay and polls the stores more often.                       |
-| `batch-resolution-limit` | `20`    | A backlog of pending references builds up faster than it clears. A higher limit clears it faster at the cost of more concurrent load on the stores. |
-| `retry-max-attempts`     | `3`     | You want to tolerate brief store outages before raising incidents.                                                                                  |
-| `retry-initial-delay`    | `1s`    | You need a longer or shorter delay before the first retry.                                                                                          |
-| `retry-backoff-factor`   | `2`     | You want retry delays to increase more slowly. A value of `1` keeps the delay constant.                                                             |
-| `retry-max-delay`        | `30s`   | You want to retry an unavailable store sooner or less often.                                                                                        |
+Under a steady stream of pending references, cycles run close to `wake-delay` apart, not `interval`: `interval` only bounds how long a scheduler with nothing to resolve waits before checking again, growing there from `wake-delay` in geometric steps rather than jumping straight to it.
+
+| Property                 | Default | Change it when                                                                                                                                                                                        |
+| :----------------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `wake-delay`             | `50ms`  | Jobs that reference secrets take too long to activate under a steady stream of requests. A shorter delay reduces that latency at the cost of polling the stores more often.                           |
+| `interval`               | `5s`    | A scheduler that is genuinely idle takes too long to notice a newly pending reference, or you want its idle ceiling to be different. Under load this value is rarely reached; see `wake-delay` above. |
+| `batch-resolution-limit` | `20`    | A backlog of pending references builds up faster than it clears. A higher limit clears it faster at the cost of more concurrent load on the stores.                                                   |
+| `retry-max-attempts`     | `3`     | You want to tolerate brief store outages before raising incidents.                                                                                                                                    |
+| `retry-initial-delay`    | `1s`    | You need a longer or shorter delay before the first retry.                                                                                                                                            |
+| `retry-backoff-factor`   | `2`     | You want retry delays to increase more slowly. A value of `1` keeps the delay constant.                                                                                                               |
+| `retry-max-delay`        | `30s`   | You want to retry an unavailable store sooner or less often.                                                                                                                                          |
 
 The retry settings apply to an unavailable store as a whole. A secret the store reports as missing or forbidden is never retried, because that failure is permanent.
 
 See the [property reference](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md) for the full description of each property and its environment variable form.
+
+## Secret resolution across physical tenants
+
+The secret store, its cache, and the resolution scheduler's retry state are all scoped per [physical tenant](/self-managed/concepts/physical-tenants/configuration-reference.md). A multi-tenant cluster resolves each tenant's `camunda.secrets.<name>` references against that tenant's own store: two tenants never share a cache entry, and one tenant's store outage does not affect another tenant's resolution.
+
+`camunda.secrets.*` configures the store and cache defaults every physical tenant inherits. Override them for one tenant under `camunda.physical-tenants.<tenant-key>.secrets.*`. The tenant still supports only one store, under the same `default` id.
 
 ## Monitor secret resolution
 
