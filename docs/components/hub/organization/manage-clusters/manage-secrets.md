@@ -49,7 +49,7 @@ To reuse a complete set of authentication and connection settings, rather than a
 
 ## Reference connector secrets as `camunda.secrets.<name>`
 
-In SaaS, you can also reference the connector secrets you create here through centralized secret resolution by using `camunda.secrets.<key>`. You can use these references in process models, input mappings, FEEL expressions, and Connector fields, in addition to the legacy `{{secrets.KEY}}` syntax.
+In SaaS, you can also reference the connector secrets you create here through centralized secret resolution by using `camunda.secrets.<key>`. You can use these references in input mappings and Connector fields, in addition to the legacy `{{secrets.KEY}}` syntax.
 
 To learn how to use these references, see [Secret references in input mappings](/components/concepts/variables.md#secret-references-in-input-mappings). To understand how Camunda resolves a reference before job activation, see [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md).
 
