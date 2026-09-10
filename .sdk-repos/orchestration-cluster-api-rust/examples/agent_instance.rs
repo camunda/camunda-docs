@@ -4,15 +4,13 @@
 //! `examples/operation-map.json`, and are type-checked by `cargo build --examples`.
 #![allow(dead_code, unused_variables, unused_imports)]
 
-use camunda_orchestration_sdk::apis::agent_instance_api::CreateAgentInstanceHistoryItemParams;
 use camunda_orchestration_sdk::apis::agent_instance_api::CreateAgentInstanceParams;
 use camunda_orchestration_sdk::apis::agent_instance_api::GetAgentInstanceParams;
 use camunda_orchestration_sdk::apis::agent_instance_api::SearchAgentInstanceHistoryParams;
 use camunda_orchestration_sdk::apis::agent_instance_api::SearchAgentInstancesParams;
 use camunda_orchestration_sdk::apis::agent_instance_api::UpdateAgentInstanceParams;
 use camunda_orchestration_sdk::models::AgentInstanceCreationRequest;
-use camunda_orchestration_sdk::models::AgentInstanceDefinition;
-use camunda_orchestration_sdk::models::AgentInstanceHistoryItemRequest;
+use camunda_orchestration_sdk::models::AgentInstanceHistoryItem;
 use camunda_orchestration_sdk::models::AgentInstanceHistoryRoleEnum;
 use camunda_orchestration_sdk::models::AgentInstanceHistorySearchQuery;
 use camunda_orchestration_sdk::models::AgentInstanceMessageContent;
@@ -20,6 +18,7 @@ use camunda_orchestration_sdk::models::AgentInstanceSearchQuery;
 use camunda_orchestration_sdk::models::AgentInstanceTextContent;
 use camunda_orchestration_sdk::models::AgentInstanceUpdateRequest;
 use camunda_orchestration_sdk::models::ElementInstanceKey;
+use camunda_orchestration_sdk::models::HistoryItemId;
 use camunda_orchestration_sdk::models::JobKey;
 use camunda_orchestration_sdk::CamundaClient;
 
@@ -27,18 +26,32 @@ use camunda_orchestration_sdk::CamundaClient;
 async fn create_agent_instance() -> Result<(), Box<dyn std::error::Error>> {
     let client = CamundaClient::from_env()?;
 
+    // The batch must open with a CONFIGURATION item; it establishes the model,
+    // provider and system prompt for the instance.
     let result = client
         .create_agent_instance(CreateAgentInstanceParams {
             agent_instance_creation_request: AgentInstanceCreationRequest {
                 element_instance_key: Box::new(ElementInstanceKey::assume_exists(
                     "my-element-instance",
                 )),
-                definition: Box::new(AgentInstanceDefinition {
-                    model: "my-model".to_string(),
-                    provider: "my-provider".to_string(),
-                    system_prompt: "my-system-prompt".to_string(),
-                }),
-                ..Default::default()
+                job_key: Box::new(JobKey::assume_exists("my-job")),
+                job_lease: "my-job-lease".to_string(),
+                history: vec![AgentInstanceHistoryItem {
+                    history_item_id: HistoryItemId::assume_exists("configuration-1"),
+                    loop_iteration: 0,
+                    role: AgentInstanceHistoryRoleEnum::Configuration,
+                    content: Vec::new(),
+                    produced_at: Default::default(),
+                    model: Some("my-model".to_string()),
+                    provider: Some("my-provider".to_string()),
+                    system_prompt: Some(Some(vec![AgentInstanceMessageContent::Text(Box::new(
+                        AgentInstanceTextContent {
+                            content_type: "TEXT".to_string(),
+                            text: "my-system-prompt".to_string(),
+                        },
+                    ))])),
+                    ..Default::default()
+                }],
             },
         })
         .await?;
@@ -47,39 +60,6 @@ async fn create_agent_instance() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 // endregion CreateAgentInstance
-
-// region CreateAgentInstanceHistoryItem
-async fn create_agent_instance_history_item(
-    agent_instance_key: String,
-) -> Result<(), Box<dyn std::error::Error>> {
-    let client = CamundaClient::from_env()?;
-
-    let result = client
-        .create_agent_instance_history_item(CreateAgentInstanceHistoryItemParams {
-            agent_instance_key,
-            agent_instance_history_item_request: AgentInstanceHistoryItemRequest {
-                element_instance_key: Box::new(ElementInstanceKey::assume_exists(
-                    "my-element-instance",
-                )),
-                job_key: Box::new(JobKey::assume_exists("my-job")),
-                job_lease: "my-job-lease".to_string(),
-                role: AgentInstanceHistoryRoleEnum::User,
-                content: vec![AgentInstanceMessageContent::Text(Box::new(
-                    AgentInstanceTextContent {
-                        content_type: "TEXT".to_string(),
-                        text: "What is the status of my order?".to_string(),
-                    },
-                ))],
-                produced_at: Default::default(),
-                ..Default::default()
-            },
-        })
-        .await?;
-    println!("{result:#?}");
-
-    Ok(())
-}
-// endregion CreateAgentInstanceHistoryItem
 
 // region GetAgentInstance
 async fn get_agent_instance(agent_instance_key: String) -> Result<(), Box<dyn std::error::Error>> {
@@ -144,6 +124,8 @@ async fn update_agent_instance(
                 element_instance_key: Box::new(ElementInstanceKey::assume_exists(
                     "my-element-instance",
                 )),
+                job_key: Box::new(JobKey::assume_exists("my-job")),
+                job_lease: "my-job-lease".to_string(),
                 ..Default::default()
             },
         })
