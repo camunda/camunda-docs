@@ -297,9 +297,12 @@ test("Prune some refs", () => {
       },
       new Set(["workspaces.yaml#/paths/~1workspaces"])
     )
-  ).toEqual({
-    "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
-  });
+  ).toEqual([
+    {
+      "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
+    },
+    true,
+  ]);
 });
 
 test("Prune all refs", () => {
@@ -316,7 +319,7 @@ test("Prune all refs", () => {
         "clusters.yaml#/paths/~clusters",
       ])
     )
-  ).toEqual({});
+  ).toEqual([{}, true]);
 });
 
 test("Prune no refs", () => {
@@ -330,8 +333,11 @@ test("Prune no refs", () => {
       },
       new Set()
     )
-  ).toEqual({
-    "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
-    "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
-  });
+  ).toEqual([
+    {
+      "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
+      "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
+    },
+    false,
+  ]);
 });

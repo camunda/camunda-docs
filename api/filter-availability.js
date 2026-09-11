@@ -17,13 +17,8 @@ function isAvailableInEnvironment(metadata, environment) {
   return available;
 }
 
-function hasData(path) {
-  for (const prop in path) {
-    if (Object.hasOwn(path, prop)) {
-      return true;
-    }
-  }
-  return false;
+function hasData(pathData) {
+  return Object.keys(pathData).length > 0;
 }
 
 function filterPathDataForEnvironment(pathData, environment) {
@@ -100,14 +95,14 @@ function pruneRefs(spec, allRemovedRoutes) {
         allRemovedRoutes.has(pathData["$ref"])
       ) {
         // Drop refs to removed routes
+        changed = true;
         continue;
       } else {
         pruned[route] = pathData;
-        changed = true;
       }
     }
   } else {
-    return spec;
+    return [{}, false];
   }
 
   return [pruned, changed];
@@ -151,9 +146,7 @@ function writeFile(filePath, fileData) {
 }
 
 function filterByAvailability(specDir, environment) {
-  const files = getYamlFiles(specDir).map((filePath) =>
-    loadSpecFile(filePath, environment)
-  );
+  const files = getYamlFiles(specDir).map((filePath) => loadSpecFile(filePath));
 
   const mapping = {};
   const allRemovedRoutes = new Set();
@@ -171,7 +164,7 @@ function filterByAvailability(specDir, environment) {
       allRemovedRoutes.add(`${fileName}#/paths/${e}`)
     );
 
-    // store file, data mapping for tracking/writing file changes later later
+    // store file, data mapping for tracking/writing file changes later
     mapping[file.path] = {
       spec: file.spec,
       header: file.header,
