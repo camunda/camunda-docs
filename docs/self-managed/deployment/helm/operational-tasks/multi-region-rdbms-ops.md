@@ -106,7 +106,7 @@ Whatever had not replicated at the time of the outage can be missing from the pr
 
 </Tabs>
 
-Camunda needs no reconfiguration and no restart. The JDBC driver discovers the new writer for both established connections and brokers that start after the promotion.
+Camunda needs no reconfiguration and no restart, as long as the JDBC URL keeps resolving to the current writer. The reference implementation gets that from the [AWS Advanced JDBC Wrapper](/self-managed/concepts/databases/relational-db/configuration.md#usage-with-aws-aurora-postgresql), whose `failover` plugin follows the writer on established connections and on brokers that start after the promotion. This is not general JDBC behavior: with your own database, whether connections re-resolve the writer depends on your driver and endpoint, so confirm it or plan a restart.
 
 If the writer was not in the lost region, no database action is required.
 
@@ -122,10 +122,10 @@ Zeebe keeps processing, but the gateway in the lost region is unreachable. Updat
 
 Removing the lost zone from the partition distribution is **optional** with three or more zones, and usually not worth it for a zone you expect back.
 
-| Zones | After losing one                                            | Removing the zone                                                               |
-| :---- | :---------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| 2     | One replica of two, no majority, processing stops           | **Required**. Removing the zone restores a quorum the survivor can reach alone. |
-| 3+    | Two replicas of three, majority holds, processing continues | **Optional**, and cheaper to skip.                                              |
+| Zones | After losing one                                                                                          | Removing the zone                                                               |
+| :---- | :-------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| 2     | One replica of two, no majority, processing stops                                                         | **Required**. Removing the zone restores a quorum the survivor can reach alone. |
+| 3+    | A majority of the replicas survives, processing continues, three of five under the default `2-2-1` layout | **Optional**, and cheaper to skip.                                              |
 
 The reason to leave a zone in place is failback cost. Brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
 

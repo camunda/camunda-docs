@@ -143,7 +143,7 @@ terraform init
 terraform apply -var cluster_name=camunda
 ```
 
-For a cheaper evaluation, deploy two of the three slots and reduce the node count. This is a valid state: every partition holds two of its three replicas.
+For a cheaper evaluation, deploy two of the three slots and reduce the node count. This is a valid state: with the default `2-2-1` layout, every partition holds four of its five replicas, and the third slot's replica stays reserved until you deploy it.
 
 ```bash
 terraform apply \

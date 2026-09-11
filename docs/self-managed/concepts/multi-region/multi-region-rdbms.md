@@ -70,7 +70,7 @@ The simplest case is one replica per zone, which is what the following illustrat
 | 4     | 1                 | 4                  | 1                     |
 | 5     | 1                 | 5                  | 2                     |
 
-Three zones is the smallest topology in which losing one does not stop the engine. A fourth zone does not raise the tolerance, but it does give you a zone to lose while another is already down for maintenance.
+Three zones is the smallest topology in which losing one does not stop the engine. A fourth zone at one replica each does not change that: the replication factor becomes four, a majority is still three, and a second loss leaves two. Tolerating two losses takes five replicas.
 
 #### Choosing an asymmetric layout
 
@@ -183,7 +183,7 @@ The reference implementation checks this rather than assuming it, and refuses to
 
 ## Region failure and recovery
 
-Losing one region out of three or more removes one replica of every partition. The remaining replicas still form a majority, so the cluster keeps its quorum and **no operator step is required to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue; partitions led elsewhere are unaffected.
+Losing one region out of three or more removes that region's replicas of every partition, which is one or two under the default `2-2-1` layout. The remaining replicas still form a majority, so the cluster keeps its quorum and **no operator step is required to resume processing**, which is the property this architecture exists for. Partitions whose leader was in the lost region pause for a Raft re-election and then continue; partitions led elsewhere are unaffected.
 
 Two things still need attention.
 
