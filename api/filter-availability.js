@@ -21,37 +21,42 @@ function hasData(pathData) {
   return Object.keys(pathData).length > 0;
 }
 
-function filterPathDataForEnvironment(pathData, environment) {
-  const methods = Object.entries(pathData).filter(isHTTPMethod);
-  const methodsForEnvironment = methods.filter(([_, metadata]) =>
-    isAvailableInEnvironment(metadata, environment)
+function filterMethodsForEnvironment(pathData, environment) {
+  return Object.fromEntries(
+    Object.entries(pathData)
+      .filter(isHTTPMethod)
+      .filter(([_, metadata]) =>
+        isAvailableInEnvironment(metadata, environment)
+      )
   );
-  const methodsChanged = methods.length != methodsForEnvironment.length;
+}
 
-  if (methodsForEnvironment.length == 0) {
-    // when there are no available methods, drop all other metadata except $ref,
-    // which will be cleaned up later
-    const otherMetadata = Object.entries(pathData).filter(
-      (d) => !isHTTPMethod(d)
-    );
-    const refsOnly = otherMetadata.filter((m) => m[0] === "$ref");
-    const otherMetadataChanged = otherMetadata.length != refsOnly.length;
-
-    return [
-      Object.fromEntries(refsOnly),
-      methodsChanged || otherMetadataChanged,
-    ];
-  }
-
-  // when there are available methods, return all other metadata
-  const otherMetadata = Object.fromEntries(
+function otherMetadata(pathData) {
+  return Object.fromEntries(
     Object.entries(pathData).filter((d) => !isHTTPMethod(d))
   );
+}
 
-  return [
-    { ...Object.fromEntries(methodsForEnvironment), ...otherMetadata },
-    methodsChanged,
-  ];
+function refsOnly(metadata) {
+  return Object.fromEntries(
+    Object.entries(metadata).filter(([key]) => key === "$ref")
+  );
+}
+
+function filterPathDataForEnvironment(pathData, environment) {
+  const methodsForEnvironment = filterMethodsForEnvironment(
+    pathData,
+    environment
+  );
+
+  if (Object.keys(methodsForEnvironment).length === 0) {
+    // when there are no available methods, drop all other metadata except
+    // $ref, which will be cleaned up later
+    return refsOnly(otherMetadata(pathData));
+  }
+
+  // when there are available methods, return all other metadata too
+  return { ...methodsForEnvironment, ...otherMetadata(pathData) };
 }
 
 // we need to escape routes to match spec refs
@@ -62,16 +67,14 @@ function escapeRoute(route) {
 
 function filterPaths(paths, environment) {
   const filtered = {};
-  let pathsChanged = false;
   const removedRoutes = [];
 
   if (paths) {
-    for (const [route, metadata] of Object.entries(paths)) {
-      const [filteredPathData, changed] = filterPathDataForEnvironment(
-        metadata,
+    for (const [route, pathData] of Object.entries(paths)) {
+      const filteredPathData = filterPathDataForEnvironment(
+        pathData,
         environment
       );
-      pathsChanged = pathsChanged || changed;
 
       if (hasData(filteredPathData)) {
         filtered[route] = filteredPathData;
@@ -81,31 +84,21 @@ function filterPaths(paths, environment) {
     }
   }
 
-  return [filtered, pathsChanged, removedRoutes];
+  return [filtered, removedRoutes];
 }
 
-function pruneRefs(spec, allRemovedRoutes) {
-  const pruned = {};
-  let changed = false;
+function isDanglingRef(pathData, allRemovedRoutes) {
+  return (
+    Object.hasOwn(pathData, "$ref") && allRemovedRoutes.has(pathData["$ref"])
+  );
+}
 
-  if (spec.paths) {
-    for (const [route, pathData] of Object.entries(spec.paths)) {
-      if (
-        Object.hasOwn(pathData, "$ref") &&
-        allRemovedRoutes.has(pathData["$ref"])
-      ) {
-        // Drop refs to removed routes
-        changed = true;
-        continue;
-      } else {
-        pruned[route] = pathData;
-      }
-    }
-  } else {
-    return [{}, false];
-  }
-
-  return [pruned, changed];
+function pruneRefs(paths, allRemovedRoutes) {
+  return Object.fromEntries(
+    Object.entries(paths).filter(
+      ([, pathData]) => !isDanglingRef(pathData, allRemovedRoutes)
+    )
+  );
 }
 
 // js-yaml drops comments on load/dump, so we should capture the leading
@@ -140,9 +133,13 @@ function getYamlFiles(specDir) {
 }
 
 function writeFile(filePath, fileData) {
-  if (fileData.shouldWrite) {
-    fs.writeFileSync(filePath, fileData.header + yaml.dump(fileData.spec));
-  }
+  fs.writeFileSync(filePath, fileData.header + yaml.dump(fileData.spec));
+}
+
+// compare against the original paths to know whether a file needs rewriting,
+// instead of threading a "changed" flag through every filtering step
+function pathsChanged(before, after) {
+  return JSON.stringify(before ?? {}) !== JSON.stringify(after);
 }
 
 function filterByAvailability(specDir, environment) {
@@ -151,9 +148,11 @@ function filterByAvailability(specDir, environment) {
   const mapping = {};
   const allRemovedRoutes = new Set();
   for (const file of files) {
+    const originalPaths = file.spec.paths;
+
     // filter methods by x-availability
-    const [filteredPaths, shouldWrite, removedRoutes] = filterPaths(
-      file.spec.paths,
+    const [filteredPaths, removedRoutes] = filterPaths(
+      originalPaths,
       environment
     );
     file.spec.paths = filteredPaths;
@@ -168,24 +167,21 @@ function filterByAvailability(specDir, environment) {
     mapping[file.path] = {
       spec: file.spec,
       header: file.header,
-      shouldWrite,
+      originalPaths,
     };
   }
 
   // prune dangling refs
-  for (const [filePath, fileData] of Object.entries(mapping)) {
-    const [prunedPaths, changed] = pruneRefs(fileData.spec, allRemovedRoutes);
-
-    if (changed) {
-      mapping[filePath].spec.paths = prunedPaths;
-      fileData.shouldWrite = true;
-    }
+  for (const fileData of Object.values(mapping)) {
+    fileData.spec.paths = pruneRefs(fileData.spec.paths, allRemovedRoutes);
   }
 
-  // write files with updates
-  Object.entries(mapping).forEach(([filePath, fileData]) =>
-    writeFile(filePath, fileData)
-  );
+  // write files whose paths actually changed
+  Object.entries(mapping).forEach(([filePath, fileData]) => {
+    if (pathsChanged(fileData.originalPaths, fileData.spec.paths)) {
+      writeFile(filePath, fileData);
+    }
+  });
 }
 
 module.exports = {
@@ -196,4 +192,5 @@ module.exports = {
   extractHeaderComments,
   escapeRoute,
   pruneRefs,
+  pathsChanged,
 };

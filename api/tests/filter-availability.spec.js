@@ -5,6 +5,7 @@ const {
   extractHeaderComments,
   escapeRoute,
   pruneRefs,
+  pathsChanged,
 } = require("../filter-availability");
 
 test("Test SaaS-only method is available in SaaS", () => {
@@ -132,21 +133,18 @@ test("Ignore x-availability at the path level", () => {
       },
       "saas"
     )
-  ).toEqual([
-    {
-      post: {
-        operationId: "createWorkspace",
-        summary: "Create a workspace (SaaS-only)",
-        "x-availability": "saas",
-      },
-      delete: {
-        operationId: "deleteWorkspace",
-        summary: "Delete workspace (All environments)",
-      },
-      "x-availability": "sm", // ignored
+  ).toEqual({
+    post: {
+      operationId: "createWorkspace",
+      summary: "Create a workspace (SaaS-only)",
+      "x-availability": "saas",
     },
-    true,
-  ]);
+    delete: {
+      operationId: "deleteWorkspace",
+      summary: "Delete workspace (All environments)",
+    },
+    "x-availability": "sm", // ignored
+  });
 });
 
 test("Drop unused metadata when no available methods", () => {
@@ -162,7 +160,7 @@ test("Drop unused metadata when no available methods", () => {
       },
       "saas"
     )
-  ).toEqual([{}, true]);
+  ).toEqual({});
 });
 
 test("Ignore refs at the path level", () => {
@@ -173,10 +171,7 @@ test("Ignore refs at the path level", () => {
       },
       "saas"
     )
-  ).toEqual([
-    { $ref: "clusters.yaml#/paths/~1clusters" }, // ignored
-    false,
-  ]);
+  ).toEqual({ $ref: "clusters.yaml#/paths/~1clusters" }); // ignored
 });
 
 test("Refs should not be dropped by filterPaths", () => {
@@ -193,7 +188,6 @@ test("Refs should not be dropped by filterPaths", () => {
       "/clusters": { $ref: "clusters.yaml#/paths/~1clusters" },
       "/files": { $ref: "files.yaml#/paths/~1files" },
     },
-    false,
     [],
   ]);
 });
@@ -251,7 +245,6 @@ test("Filter out SM-only paths for SaaS", () => {
       },
       "/clusters": { $ref: "clusters.yaml#/paths/~1clusters" },
     },
-    true,
     ["~1files"],
   ]);
 });
@@ -290,54 +283,102 @@ test("Prune some refs", () => {
   expect(
     pruneRefs(
       {
-        paths: {
-          "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
-          "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
-        },
+        "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
+        "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
       },
       new Set(["workspaces.yaml#/paths/~1workspaces"])
     )
-  ).toEqual([
-    {
-      "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
-    },
-    true,
-  ]);
+  ).toEqual({
+    "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
+  });
 });
 
 test("Prune all refs", () => {
   expect(
     pruneRefs(
       {
-        paths: {
-          "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
-          "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
-        },
+        "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
+        "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
       },
       new Set([
         "workspaces.yaml#/paths/~1workspaces",
         "clusters.yaml#/paths/~clusters",
       ])
     )
-  ).toEqual([{}, true]);
+  ).toEqual({});
 });
 
 test("Prune no refs", () => {
   expect(
     pruneRefs(
       {
-        paths: {
-          "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
-          "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
-        },
+        "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
+        "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
       },
       new Set()
     )
-  ).toEqual([
-    {
-      "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
-      "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
+  ).toEqual({
+    "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
+    "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
+  });
+});
+
+test("pathsChanged detects a method filtered out by filterPaths", () => {
+  const original = {
+    "/workspaces": {
+      get: {
+        operationId: "getWorkspaces",
+        summary: "Get workspaces (SM-only)",
+        "x-availability": "sm",
+      },
+      delete: {
+        operationId: "deleteWorkspace",
+        summary: "Delete workspace (All environments)",
+      },
     },
-    false,
-  ]);
+  };
+
+  const [filtered] = filterPaths(original, "saas");
+
+  expect(pathsChanged(original, filtered)).toBe(true);
+});
+
+test("pathsChanged sees no change when no method is filtered out", () => {
+  const original = {
+    "/workspaces": {
+      delete: {
+        operationId: "deleteWorkspace",
+        summary: "Delete workspace (All environments)",
+      },
+    },
+  };
+
+  const [filtered] = filterPaths(original, "saas");
+
+  expect(pathsChanged(original, filtered)).toBe(false);
+});
+
+test("pathsChanged detects a dangling ref pruned by pruneRefs", () => {
+  const original = {
+    "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
+    "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
+  };
+
+  const pruned = pruneRefs(
+    original,
+    new Set(["workspaces.yaml#/paths/~1workspaces"])
+  );
+
+  expect(pathsChanged(original, pruned)).toBe(true);
+});
+
+test("pathsChanged sees no change when no ref is pruned", () => {
+  const original = {
+    "/workspaces": { $ref: "workspaces.yaml#/paths/~1workspaces" },
+    "/clusters": { $ref: "clusters.yaml#/paths/~clusters" },
+  };
+
+  const pruned = pruneRefs(original, new Set());
+
+  expect(pathsChanged(original, pruned)).toBe(false);
 });
