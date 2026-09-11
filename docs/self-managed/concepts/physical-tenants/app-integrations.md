@@ -13,9 +13,9 @@ Physical Tenant support in App Integrations is available in Camunda 8.10 Self-Ma
 
 :::note Related pages
 
-- **[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)** — How Physical Tenants isolate execution and storage
-- **[Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)** — Identity deployment models and token routing
-- **[Microsoft Teams installation](/components/camunda-integrations/ms-teams/ms-teams-installation.md)** — The full `config.yaml` reference
+- **[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)**: How Physical Tenants isolate execution and storage
+- **[Authentication and authorization](/self-managed/concepts/physical-tenants/authentication-authorization.md)**: Identity deployment models and token routing
+- **[Microsoft Teams installation](/components/camunda-integrations/ms-teams/ms-teams-installation.md)**: The full `config.yaml` reference
   :::
 
 ## Terminology
@@ -115,15 +115,15 @@ Note that `urls.tasklist` and `urls.operate` are required on every tenant: a ten
 
 The `default` Physical Tenant represents the cluster itself and always uses the cluster's own URLs, never a `/physical-tenants/default/…` path.
 
-- **No `physicalTenants` configured** — App Integrations synthesizes a single `default` tenant that takes the cluster's name and URLs. This is the behavior of every cluster configured before 8.10, and it needs no migration.
-- **`physicalTenants` configured** — only the tenants you declare are offered. The `default` tenant is hidden, so users cannot accidentally read from the cluster-wide endpoint.
-- **`physicalTenants` configured with `exposeDefaultTenant: true`** — the `default` tenant is added at the top of the list, in addition to the configured tenants.
+- **No `physicalTenants` configured**: App Integrations synthesizes a single `default` tenant that takes the cluster's name and URLs. This is the behavior of every cluster configured before 8.10, and it needs no migration.
+- **`physicalTenants` configured**: only the tenants you declare are offered. The `default` tenant is hidden, so users cannot accidentally read from the cluster-wide endpoint.
+- **`physicalTenants` configured with `exposeDefaultTenant: true`**: the `default` tenant is added at the top of the list, in addition to the configured tenants.
 
 ## Authentication
 
 App Integrations defines **one** identity provider for the whole deployment: a single `auth.issuer` and `auth.kind`, and one M2M/SPA client pair. Tenants are distinguished by **audience**, configured per tenant under `auth.audiences.zeebe`.
 
-This implements [Model B: single IdP, multiple role-level clients](./authentication-authorization.md#model-b-single-idp-multiple-role-level-clients). [Model C](./authentication-authorization.md#model-c-multiple-idps-advanced), a separate identity provider per Physical Tenant, is **not supported** — App Integrations cannot hold more than one issuer.
+This implements [Model B: single IdP, multiple role-level clients](./authentication-authorization.md#model-b-single-idp-multiple-role-level-clients). [Model C](./authentication-authorization.md#model-c-multiple-idps-advanced), a separate identity provider per Physical Tenant, is **not supported**, since App Integrations cannot hold more than one issuer.
 
 The audience for an outbound call is resolved in this order, first match wins:
 
@@ -185,7 +185,7 @@ Adding `physicalTenants` to a cluster that already runs App Integrations changes
 
 To keep the cluster-wide view available during a migration, set `exposeDefaultTenant: true` and remove it once every rule has been recreated.
 
-## Known limitations in 8.10
+## Known limitations
 
 - A separate identity provider per Physical Tenant ([Model C](./authentication-authorization.md#model-c-multiple-idps-advanced)) is not supported.
 - Identity linking and sign-in are deployment-wide, not per tenant.

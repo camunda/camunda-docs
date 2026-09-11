@@ -2277,6 +2277,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
                 "self-managed/concepts/physical-tenants/app-integrations",
+                "self-managed/concepts/physical-tenants/troubleshooting",
               ],
             },
           ],
