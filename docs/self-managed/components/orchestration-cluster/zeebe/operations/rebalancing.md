@@ -57,7 +57,7 @@ The default values for these parameters are configurable as broker options (see 
 
 :::note
 
-The previous `/actuator/rebalance` endpoint is deprecated but still available.
+The previous `/actuator/rebalance` endpoint is deprecated but still available. It implements a simpler and more disruptive rebalancing mechanism (triggering simultaneous elections on all unbalanced partitions). This document otherwise describes exclusively the behaviour of the new rebalancing endpoint.
 
 :::
 
