@@ -39,7 +39,7 @@ See [Trial vs. enterprise budgets](#trial-vs-enterprise-budgets) for more detail
 
 ## Set up Camunda-provided LLM
 
-Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as cluster secrets.
+Once Camunda-provided LLM is available in your organization, its credentials are populated automatically as [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret).
 
 - If you are using an AI agent blueprint, no additional configuration is needed in most cases. Explore selected AI agent blueprints in the [Camunda Marketplace](https://marketplace.camunda.com/en-US/home).
 - If you are building your own agent from scratch, enable Camunda-provided LLM by configuring your [AI Agent connector](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent.md) with the following parameters:

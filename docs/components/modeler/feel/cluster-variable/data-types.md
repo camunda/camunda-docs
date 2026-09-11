@@ -26,10 +26,10 @@ Access patterns may vary depending on how the array is used.
 
 Every cluster variable has a kind, which determines how Camunda reads its value.
 
-| Kind               | Description                                                                        |
-| ------------------ | ---------------------------------------------------------------------------------- |
-| `JSON`             | The default. Your value is data, and Camunda reads it exactly as you stored it.    |
-| `SECRET_REFERENCE` | The value can contain `camunda.secrets.<name>` references, which Camunda resolves. |
+| Kind               | Description                                                                                                                                                                         |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `JSON`             | The default. Your value is data, and Camunda reads it exactly as you stored it.                                                                                                     |
+| `SECRET_REFERENCE` | The value can contain an [Orchestration Cluster secret reference](/reference/glossary.md#secret-reference-orchestration-cluster), `camunda.secrets.<name>`, which Camunda resolves. |
 
 Resolving `SECRET_REFERENCE` references is part of an [alpha feature](/components/early-access/alpha/alpha-features.md) and may be subject to change in future releases.
 

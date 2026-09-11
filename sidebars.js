@@ -224,6 +224,18 @@ module.exports = {
         },
         "components/concepts/job-workers",
         "components/concepts/outbound-connectors-job-workers",
+        {
+          type: "category",
+          label: "Secret resolution",
+          link: {
+            type: "doc",
+            id: "components/concepts/secret-resolution",
+          },
+          items: [
+            "components/concepts/secret-resolution-and-job-activation",
+            "components/concepts/secret-resolution-incidents",
+          ],
+        },
         "components/concepts/element-templates",
         {
           Listeners: [
@@ -1038,6 +1050,8 @@ module.exports = {
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
                       ],
                     },
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
@@ -1373,6 +1387,7 @@ module.exports = {
             "apis-tools/optimize-api/health-readiness",
             "apis-tools/optimize-api/import-entities",
             "apis-tools/optimize-api/variable-labeling",
+            "apis-tools/optimize-api/delete-process-definition-data",
           ],
         },
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
@@ -1452,6 +1467,7 @@ module.exports = {
           items: [
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/physical-tenants",
+            "apis-tools/java-client/secrets",
             "apis-tools/java-client/logging",
           ],
         },
@@ -2488,6 +2504,7 @@ module.exports = {
                 "self-managed/components/optimize/configuration/security-instructions",
                 "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
                 "self-managed/components/optimize/configuration/history-cleanup",
+                "self-managed/components/optimize/configuration/process-definition-deletion",
                 "self-managed/components/optimize/configuration/localization",
                 "self-managed/components/optimize/configuration/object-variables",
                 "self-managed/components/optimize/configuration/variable-import",
