@@ -36,7 +36,7 @@ import PageDescription from '@site/src/components/PageDescription';
 
 ## Agentic orchestration
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
 
 ### Agent tool configuration
 
@@ -171,9 +171,15 @@ The Camunda Skills repository toolset enables AI coding agents to build, validat
 - Run BPMN lint rules against generated diagrams.
 - Scaffold and wire Camunda Process Test (CPT) integration tests.
 
+### Support for ABBYY as an IDP Provider
+
+<!-- https://github.com/camunda/product-hub/issues/3492 -->
+
+Intelligent document processing (IDP) now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
+
 ## APIs & tools
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects the Java client">Java client</span><span class="badge badge--medium" title="This feature affects the Spring SDK">Spring SDK</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects the C# SDK">C# SDK</span><span class="badge badge--medium" title="This feature affects the Go SDK">Go SDK</span><span class="badge badge--medium" title="This feature affects the Java client">Java client</span><span class="badge badge--medium" title="This feature affects the Rust SDK">Rust SDK</span><span class="badge badge--medium" title="This feature affects the Spring SDK">Spring SDK</span></div>
 
 ### C# SDK
 
@@ -285,16 +291,6 @@ The Zeebe Process Test library is removed and replaced by [Camunda Process Test]
 
 <p class="link-arrow">[Migrate to Camunda Process Test](/apis-tools/migration-manuals/migrate-to-camunda-process-test.md)</p>
 
-## Camunda design system
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
-
-The new Camunda visual design system is introduced for Hub with the 8.10 release.
-
-- A new, streamlined design system offers a cleaner, more consistent look across components.
-- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
-- The new design system is enabled by default for Camunda Hub in both Self-Managed and SaaS.
-
 ## Camunda 8 Run
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Camunda 8 Run">Camunda 8 Run</span></div>
@@ -308,6 +304,16 @@ Camunda 8 Run now includes a bundled Java runtime. This means you no longer need
 ## Camunda Hub
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
+
+### Camunda design system
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
+
+The new Camunda visual design system is introduced for Hub with the 8.10 release.
+
+- A new, streamlined design system offers a cleaner, more consistent look across components.
+- Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
+- The new design system is enabled by default for Camunda Hub in both Self-Managed and SaaS.
 
 ### Optimize data filters in Console
 
@@ -398,6 +404,14 @@ The following improvements are made to storage connectors (S3, Azure Blob, GCS):
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
 
+#### New AWS US West region
+
+<!-- https://github.com/camunda/product-hub/issues/3274 -->
+
+With the new Camunda 8 SaaS **AWS US West (us-west-2)** region in North America, you can deploy orchestration workloads with full US data residency and improved regional stability.
+
+<p className="link-arrow">[Supported AWS regions](/components/saas/regions.md#amazon-web-services-aws-regions)</p>
+
 ### Bespoke cluster generations for SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/3704 -->
@@ -462,6 +476,21 @@ You can now create new SaaS Orchestration Clusters on specific supported Camunda
 ## Helm chart deployment
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Helm charts">Helm charts</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
+
+### Helm chart version matrix improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3381 -->
+
+The Helm chart version information for Camunda 8 has been redesigned into a clear, tabular version matrix. This makes installation, upgrades, and troubleshooting easier and more predictable, especially in environments with frequent patch releases.
+
+You can now:
+
+- Quickly see which Helm chart version corresponds to each Camunda 8 minor and patch release, including alpha and stable tags.
+- Check the release date and support status of each Helm chart.
+- See which Helm CLI versions are supported by each chart.
+- Jump directly to change logs and related references via links in the matrix.
+
+<p class="link-arrow">[Camunda 8 Helm chart version matrix](https://helm.camunda.io/camunda-platform/version-matrix/)</p>
 
 ### Elasticsearch index sizing and replication
 
@@ -573,16 +602,6 @@ For details, see [configure pod networking](/self-managed/deployment/helm/config
 <!-- https://github.com/camunda/product-hub/issues/3424 -->
 
 Camunda for Microsoft Teams now supports routing incident and task collaboration to private channels, shared channels, and group chats. Notifications and task actions in Teams now align with Camunda assignment and access rules, ensuring that only eligible users are notified and allowed to act.
-
-## Intelligent document processing (IDP)
-
-<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
-
-### Support for ABBYY as an IDP Provider
-
-<!-- https://github.com/camunda/product-hub/issues/3492 -->
-
-Camunda IDP now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
 
 ## Modeler
 
@@ -731,15 +750,51 @@ Execution listeners now support configurable headers, aligned with service task 
 
 ## Operate
 
-<div class="release"><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
 
-### Business ID visibility for decision instances
+### Business ID visibility and filtering
 
 <!-- https://github.com/camunda/product-hub/issues/3436 -->
 
+Business ID is now a first-class searchable attribute across Operate and the Orchestration Cluster API. Operations engineers can search and filter process instances, decision instances and user tasks by Business ID, enabling fast identification and investigation of business cases.
+
+- Business ID is visible in Operate process instance lists, decision instance lists, details views, and filters.
+- Advanced filtering supports exact match, not-equal, exists, and wildcard searches.
+- Business ID participates in message correlation as an additional constraint alongside the existing correlation key.
+- Business ID is visible in Tasklist task views for task workers to identify the associated business case.
+
+#### Business ID filtering
+
+Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
+
+<p class="link-arrow">[Business ID filtering](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
+
+#### Visibility for decision instances
+
 Business ID is now visible in Operate for decision instances, in both the decision instance list and the decision instance details view. Filter decision instances by business ID using **Equals**, **Contains**, and **Is one of** in the filter UI, or the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
 
-<p class="link-arrow">[Business ID](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
+<p class="link-arrow">[Business ID for decision instances](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
+
+#### Visibility for process instances
+
+Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
+
+<p class="link-arrow">[Business ID for process instances](/components/concepts/process-instance-creation.md#business-id)</p>
+
+### JSON display in Operate
+
+<!-- https://github.com/camunda/product-hub/issues/3464 -->
+
+Camunda 8.10 introduces an update to the JSON display functionality in Operate for SaaS.
+
+You can now:
+
+- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
+- View JSON values with consistent, easier to understand formatting.
+- Copy full JSON variable values to the clipboard.
+- Use the improved in-line variables display.
+
+This change helps navigate more complex data during operations and troubleshooting.
 
 ### Multi-variable filtering
 
@@ -760,37 +815,6 @@ Operate now shows what an active process instance is waiting for. When you inspe
 Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
 
 <p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
-
-### Business ID filtering in Operate
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
-
-<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
-
-### Business ID visibility in Operate
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
-
-<p class="link-arrow">[Business ID](/components/concepts/process-instance-creation.md#business-id)</p>
-
-### JSON display in Operate
-
-<!-- https://github.com/camunda/product-hub/issues/3464 -->
-
-Camunda 8.10 introduces an update to the JSON display functionality in Operate (SaaS).
-
-You can now:
-
-- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
-- View JSON values with consistent, easier to understand formatting.
-- Copy full JSON variable values to the clipboard.
-- Use the improved in-line variables display.
-
-This change helps navigate more complex data during operations and troubleshooting.
 
 ## Optimize
 
@@ -897,37 +921,6 @@ The existing rebalance endpoint asks every leader to step down at once and retur
 
 :::
 
-### Reference architecture for Amazon ECS
-
-<!-- https://github.com/camunda/product-hub/issues/3432 -->
-
-A new reference architecture details how you can run the full Camunda 8 stack on Amazon ECS, including Orchestration Cluster, Camunda Hub, and Management Identity.
-
-What’s included:
-
-- A reference architecture diagram and dependency overview for ECS.
-- A Terraform‑based reference deployment paired with step‑by‑step documentation.
-- Guidance for:
-  - Networking, storage, secrets, and IAM (including IRSA where relevant).
-  - Basic Day‑2 operations (scaling, updates, troubleshooting entry points).
-
-This helps support Amazon ECS as a first‑class, documented deployment option for Camunda 8 Self‑Managed, alongside Kubernetes.
-
-<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
-
-### Reference architecture for dual-region ECS RDBMS
-
-<!-- https://github.com/camunda/product-hub/issues/3552 -->
-
-A new dual‑region reference architecture details how you can run the Orchestration Cluster and Connectors on AWS ECS with RDBMS secondary storage (such as Aurora Global Database).
-
-What's included:
-
-- Recommended topology, exporter configuration, and RDBMS replication setup.
-- Step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
-
-<p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
-
 ### Task testing supports call activities
 
 <!-- https://github.com/camunda/product-hub/issues/3486 -->
@@ -951,14 +944,6 @@ The process instance properties are now accessible in FEEL expressions via the `
 You can now assign a business ID to a running process instance that has none, using the `POST /process-instances/{processInstanceKey}/business-id-assignment` REST endpoint, the `AssignProcessInstanceBusinessId` gRPC command, or by including `businessId` in a job completion request. The assignment is single and irreversible, and only available while business ID uniqueness enforcement is disabled.
 
 <p class="link-arrow">[Late Business ID assignment](/components/concepts/process-instance-creation.md#late-business-id-assignment)</p>
-
-### Elasticsearch 9.x and OpenSearch 3.x support
-
-<!-- https://github.com/camunda/product-hub/issues/3588 -->
-
-Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
-
-<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
 
 ### Physical Tenant identity support
 
@@ -987,17 +972,6 @@ User, group, role, tenant, and permission management for Camunda Hub and Optimiz
 
 <p class="link-arrow">[Optimize authentication in Self-Managed](/self-managed/concepts/authentication/authentication-to-optimize.md)</p>
 
-### Rolling upgrades
-
-<!-- https://github.com/camunda/product-hub/issues/2702 -->
-
-You can now perform rolling upgrades of self-managed Camunda 8 between patch and minor versions with zero downtime across all supported secondary storage backends, including Elasticsearch, OpenSearch, and relational databases.
-
-- The cluster stays operational during a rolling upgrade: workflows continue executing, and Operate remains accessible for monitoring and incident response.
-- Schema changes between versions are strictly backwards-compatible and applied transparently.
-
-<p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
-
 ### S3-compatible object stores for Document Handling
 
 <!-- https://github.com/camunda/product-hub/issues/3507 -->
@@ -1016,26 +990,6 @@ Document Handling now supports any S3-compatible object store such as MinIO, Clo
 Operate, Tasklist, and Admin are now accessed from a single frontend application with shared navigation, consistent design patterns, and unified deployment. Your user preferences (such as dark/light mode) are applied across all views, with consistent navigation patterns throughout the interface.
 
 <p class="link-arrow">[Operate overview](/components/operate/operate-introduction.md)</p>
-
-### Archive by ID for Elasticsearch and OpenSearch
-
-<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
-
-Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default.
-
-Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving. The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
-
-<p class="link-arrow">[Data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)</p>
-
-### Async replication support for RDBMS secondary storage
-
-<!-- https://github.com/camunda/product-hub/issues/3585 -->
-
-Camunda 8.10 adds first-class support for asynchronously replicated relational databases as secondary storage, including AWS Aurora and PostgreSQL.
-
-The exporter layer detects when the active RDBMS endpoint is unreachable, including during a standby promotion or cross-region failover, and pauses export operations automatically rather than entering an error state. Export position is preserved in the Zeebe log and replayed on reconnection.
-
-After failover, a reconciliation path replays missing events from the Zeebe log to close any replication lag gap, restoring a consistent secondary storage state without manual data repair. A single-exporter configuration is now supported for deployments where the RDBMS handles cross-region replication natively.
 
 <p class="link-arrow">[RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md)</p>
 
@@ -1076,28 +1030,6 @@ Multi-tenancy is available on SaaS clusters running generation **8.8 and later**
 Multi-tenancy is enabled at the cluster level. Process definitions, instances, and decisions are scoped to the tenant they were deployed to, keeping data isolated across teams and applications sharing a single cluster.
 
 <p class="link-arrow">[Multi-tenancy](/components/concepts/multi-tenancy.md)</p>
-
-### New RDBMS version support
-
-<!-- https://github.com/camunda/product-hub/issues/3589 -->
-
-Camunda 8.10 adds support for new relational database versions. Operators running Self-Managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
-
-New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
-
-<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
-
-### Physical Tenant support
-
-<!-- https://github.com/camunda/product-hub/issues/3639 -->
-
-Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isolation across tenants.
-
-- The REST API and gRPC API are exposed per Physical Tenant, with `CamundaClient` supporting Physical Tenant selection in the gRPC API.
-- Web apps (Operate, Tasklist, and Admin) are accessible per Physical Tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
-- Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
-
-<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
 ### Select a DMN version with a FEEL expression
 
@@ -1154,6 +1086,106 @@ To keep the previous behavior, explicitly set the strategy to `PARTITION`. See t
 Execution listeners now support a `cancel` event type on the process element. Cancel listeners run when a process instance is terminated — useful for cleanup, audit logging, or notifying external systems.
 
 For details, see [`cancel` listeners](/components/concepts/execution-listeners.md#cancel-listeners).
+
+## Reference architectures
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Deployment references">Deployment references</span></div>
+
+### Reference architecture for Amazon ECS
+
+<!-- https://github.com/camunda/product-hub/issues/3432 -->
+
+A new reference architecture details how you can run the full Camunda 8 stack on Amazon ECS, including Orchestration Cluster, Camunda Hub, and Management Identity.
+
+What’s included:
+
+- A reference architecture diagram and dependency overview for ECS.
+- A Terraform‑based reference deployment paired with step‑by‑step documentation.
+- Guidance for:
+  - Networking, storage, secrets, and IAM (including IRSA where relevant).
+  - Basic Day‑2 operations (scaling, updates, troubleshooting entry points).
+
+This helps support Amazon ECS as a first‑class, documented deployment option for Camunda 8 Self‑Managed, alongside Kubernetes.
+
+<p class="link-arrow">[Deploy to Amazon ECS](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs.md)</p>
+
+### Reference architecture for dual-region ECS RDBMS
+
+<!-- https://github.com/camunda/product-hub/issues/3552 -->
+
+A new dual‑region reference architecture details how you can run the Orchestration Cluster and Connectors on AWS ECS with RDBMS secondary storage (such as Aurora Global Database).
+
+What's included:
+
+- Recommended topology, exporter configuration, and RDBMS replication setup.
+- Step‑by‑step failover and failback procedures so your platform team can design, deploy, and operate an active‑active (or active‑passive) two‑region ECS environment that meets enterprise HA/DR requirements without bespoke architecture work.
+
+<p class="link-arrow">[Dual-region setup (ECS Fargate)](/self-managed/deployment/containers/cloud-providers/amazon/aws-ecs-dual-region.md)</p>
+
+## Secondary storage
+
+<div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Data">Data</span></div>
+
+### Elasticsearch 9.x and OpenSearch 3.x support
+
+<!-- https://github.com/camunda/product-hub/issues/3588 -->
+
+Camunda 8.10 supports Elasticsearch 9.4+, Elasticsearch 8.19+, OpenSearch 3.5+, and OpenSearch 2.19+. Operators can upgrade their search layer to the latest certified versions without impact on process history, active instance visibility, or incident management.
+
+<p class="link-arrow">[Supported environments](/reference/supported-environments.md)</p>
+
+### Physical Tenant support
+
+<!-- https://github.com/camunda/product-hub/issues/3639 -->
+
+Camunda 8.10 introduces Physical Tenant support for RDBMS, enabling strong isolation across tenants.
+
+- The REST API and gRPC API are exposed per Physical Tenant, with `CamundaClient` supporting Physical Tenant selection in the gRPC API.
+- Web apps (Operate, Tasklist, and Admin) are accessible per Physical Tenant at `<baseurl>/physical-tenants/<physicalTenantId>/<webapp>`.
+- Authentication is configurable as `basic auth` or OIDC at the cluster level, with support for multiple OIDC providers assigned to individual Physical Tenants.
+
+<p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
+
+### New RDBMS version support
+
+<!-- https://github.com/camunda/product-hub/issues/3589 -->
+
+Camunda 8.10 adds support for new relational database versions. Operators running Self-Managed Camunda clusters can upgrade their database layer to the latest supported versions without disruption to running process instances.
+
+New supported versions include Amazon Aurora PostgreSQL 18, MariaDB 12.3, Microsoft SQL Server 2025, and MySQL 9.7.
+
+<p class="link-arrow">[RDBMS version support policy](/self-managed/concepts/databases/relational-db/rdbms-support-policy.md)</p>
+
+### Async replication support for RDBMS secondary storage
+
+<!-- https://github.com/camunda/product-hub/issues/3585 -->
+
+Camunda 8.10 adds first-class support for asynchronously replicated relational databases as secondary storage, including AWS Aurora and PostgreSQL.
+
+The exporter layer detects when the active RDBMS endpoint is unreachable, including during a standby promotion or cross-region failover, and pauses export operations automatically rather than entering an error state. Export position is preserved in the Zeebe log and replayed on reconnection.
+
+After failover, a reconciliation path replays missing events from the Zeebe log to close any replication lag gap, restoring a consistent secondary storage state without manual data repair. A single-exporter configuration is now supported for deployments where the RDBMS handles cross-region replication natively.
+
+### Archive by ID for Elasticsearch and OpenSearch
+
+<!-- https://github.com/camunda/camunda-docs/pull/9172 -->
+
+Archiving of finished process instance data in Elasticsearch and OpenSearch secondary storage now uses a targeted, incremental approach by default.
+
+Documents are moved in small, targeted batches rather than in a single operation, improving stability and reducing resource pressure during archiving. The `rolloverBatchSize` and `reindexBatchSize` properties control how many process instances and individual documents are processed per batch.
+
+<p class="link-arrow">[Data retention](/self-managed/components/orchestration-cluster/core-settings/concepts/data-retention.md)</p>
+
+### Rolling upgrades
+
+<!-- https://github.com/camunda/product-hub/issues/2702 -->
+
+You can now perform rolling upgrades of self-managed Camunda 8 between patch and minor versions with zero downtime across all supported secondary storage backends, including Elasticsearch, OpenSearch, and relational databases.
+
+- The cluster stays operational during a rolling upgrade: workflows continue executing, and Operate remains accessible for monitoring and incident response.
+- Schema changes between versions are strictly backwards-compatible and applied transparently.
+
+<p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
 
 ## Tasklist
 
