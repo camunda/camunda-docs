@@ -591,7 +591,14 @@ orchestration:
 
 Two of those carry behavior rather than cosmetics: `nginx.ingress.kubernetes.io/backend-protocol: "GRPC"` is what makes ingress-nginx proxy Zeebe gRPC at all, and `nginx.ingress.kubernetes.io/proxy-buffer-size` is the documented fix for gateway timeouts caused by large JWT `Set-Cookie` headers.
 
-With [Contour](https://projectcontour.io/), the gRPC upstream is declared with `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster **Service**, listing the gRPC port, rather than on the Ingress.
+With [Contour](https://projectcontour.io/), the gRPC upstream is declared with `projectcontour.io/upstream-protocol.h2c` on the Orchestration Cluster **Service**, listing the gRPC port. Set it through `orchestration.service.annotations`, not `orchestration.ingress.grpc.annotations`, which renders on the Ingress:
+
+```yaml
+orchestration:
+  service:
+    annotations:
+      projectcontour.io/upstream-protocol.h2c: "26500"
+```
 
 While the shim is active the chart emits a deprecation warning naming the flag and the removal.
 
