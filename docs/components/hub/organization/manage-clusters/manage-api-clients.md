@@ -73,7 +73,7 @@ Camunda 8 SaaS supports the following scopes:
 
 - **Orchestration Cluster API**: Access the [Orchestration Cluster REST API](/apis-tools/orchestration-cluster-api-rest/orchestration-cluster-api-rest-overview.md) and the [Zeebe gRPC API](/apis-tools/zeebe-api/grpc.md).
 - **Optimize API**: Access the [Optimize REST API](/apis-tools/optimize-api/overview.md).
-- **Administration API (Secrets resource)**: Access cluster secrets in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
+- **Administration API (Secrets resource)**: Access [SaaS-managed secrets](/reference/glossary.md#saas-managed-secret) in a [hybrid setup](/components/connectors/use-connectors-in-hybrid-mode.md).
 
 ## Rate limiting
 

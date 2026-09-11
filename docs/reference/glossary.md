@@ -245,7 +245,10 @@ The [connector runtime](/components/connectors/custom-built-connectors/connector
 
 ### Connector secrets
 
-See [SaaS-managed secret](#saas-managed-secret).
+The secret values a connector resolves through a [legacy secret reference](#secret-reference-legacy). How these values are stored and supplied depends on the environment: in SaaS, they are [SaaS-managed secrets](#saas-managed-secret) created in Console; in Self-Managed, a secret provider supplies them, for example from prefixed environment variables, a Kubernetes Secret, or a custom provider.
+
+- [Using secrets](/components/connectors/use-connectors/index.md#using-secrets)
+- [Connector secrets in Self-Managed](/self-managed/components/connectors/connectors-configuration.md#secrets)
 
 ### Connector template
 
@@ -513,7 +516,7 @@ A technically and organizationally secured mechanism that can be triggered at an
 
 A Kubernetes object that stores small amounts of sensitive data, such as passwords or tokens, separately from Pod specifications and container images. The Camunda Helm chart uses Kubernetes Secrets to supply credentials to Camunda's own components at deployment time.
 
-A Kubernetes Secret is unrelated to a [secret reference](#secret-reference) or a [SaaS-managed secret](#saas-managed-secret), both of which supply values to a running process rather than to a component's own configuration.
+A Kubernetes Secret can also store and deliver the value behind a [secret reference](#secret-reference): mounted as an environment variable for a [legacy secret reference](#secret-reference-legacy), or as a file in a file-based secret store for an [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster). Either way, the Kubernetes Secret only supplies the value; the [connector runtime](#connector-runtime) or the [Orchestration Cluster](#orchestration-cluster) still resolves the placeholder in the process. A Kubernetes Secret is unrelated to a [SaaS-managed secret](#saas-managed-secret), which supplies values to a SaaS [Orchestration Cluster](#orchestration-cluster) rather than to a Self-Managed component's configuration.
 
 - [Helm charts secret management](/self-managed/deployment/helm/configure/secret-management.md)
 
@@ -793,7 +796,7 @@ See also: [Parent process instance](#parent-process-instance), [Child process in
 
 ### SaaS-managed secret
 
-A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Console, currently under the **Connector secrets** tab of a cluster.
+A secret whose value is stored and managed for a SaaS [Orchestration Cluster](#orchestration-cluster), independent of any individual process. Create, update, and delete a SaaS-managed secret in Camunda Hub, in the left navigation under **Clusters**, currently under the **Cluster secrets** tab of a cluster.
 
 A SaaS-managed secret is unrelated to a [Kubernetes Secret](#kubernetes-secret), which supplies credentials to a Self-Managed cluster's own components, not to a running process.
 
@@ -826,7 +829,7 @@ Camunda 8 supports two secret reference syntaxes, which are resolved by differen
 - The [legacy secret reference](#secret-reference-legacy) syntax, `{{secrets.<name>}}`
 - The [Orchestration Cluster secret reference](#secret-reference-orchestration-cluster) syntax, `camunda.secrets.<name>`
 
-A secret reference is unrelated to a [Kubernetes Secret](#kubernetes-secret). Neither secret reference syntax reads from or resolves a Kubernetes Secret.
+A [Kubernetes Secret](#kubernetes-secret) can back either secret reference syntax as the underlying storage and delivery mechanism. What differs between the two syntaxes is which component resolves the placeholder, not whether a Kubernetes Secret is involved.
 
 - [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
 
@@ -842,7 +845,9 @@ The `{{secrets.<name>}}` syntax used in a [connector](#connector) field to refer
 
 ### Secret reference (Orchestration Cluster)
 
-The `camunda.secrets.<name>` syntax used in a FEEL expression, such as an input mapping or a [cluster variable](#cluster-variable), to reference a secret. Unlike a [legacy secret reference](#secret-reference-legacy), the [Orchestration Cluster](#orchestration-cluster) itself resolves this reference through [secret resolution](#secret-resolution), rather than the connector runtime resolving it at execution time.
+The `camunda.secrets.<name>` syntax used to reference a secret, written directly in an input mapping or embedded in the value of a [cluster variable](#cluster-variable) that an input mapping reads. Unlike a [legacy secret reference](#secret-reference-legacy), the [Orchestration Cluster](#orchestration-cluster) itself resolves this reference through [secret resolution](#secret-resolution), rather than the connector runtime resolving it at execution time.
+
+Resolution only happens in an input mapping defined on an element that creates a job for a job worker, such as a service task or an ad hoc sub-process. In any other FEEL expression (gateway conditions, script tasks, output mappings, call activity input, and so on), the placeholder is not resolved and reaches your process unchanged.
 
 - [Secret resolution and job activation](/components/concepts/secret-resolution-and-job-activation.md)
 
