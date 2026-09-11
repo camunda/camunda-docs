@@ -122,10 +122,10 @@ Zeebe keeps processing, but the gateway in the lost region is unreachable. Updat
 
 Removing the lost zone from the partition distribution is **optional** with three or more zones, and usually not worth it for a zone you expect back.
 
-| Zones | After losing one                                                                                          | Removing the zone                                                               |
-| :---- | :-------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
-| 2     | One replica of two, no majority, processing stops                                                         | **Required**. Removing the zone restores a quorum the survivor can reach alone. |
-| 3+    | A majority of the replicas survives, processing continues, three of five under the default `2-2-1` layout | **Optional**, and cheaper to skip.                                              |
+| Zones | After losing one                                                                         | Removing the zone                                                               |
+| :---- | :--------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| 2     | The surviving zone holds half the replicas, which is not a majority, so processing stops | **Required**. Removing the zone restores a quorum the survivor can reach alone. |
+| 3+    | A majority of the replicas survives, so processing continues                             | **Optional**, and cheaper to skip.                                              |
 
 The reason to leave a zone in place is failback cost. Brokers that stayed members rejoin and catch up from the Raft log, while a removed zone has to be added back explicitly and its brokers start from nothing.
 
