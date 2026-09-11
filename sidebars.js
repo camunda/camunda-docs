@@ -224,6 +224,18 @@ module.exports = {
         },
         "components/concepts/job-workers",
         "components/concepts/outbound-connectors-job-workers",
+        {
+          type: "category",
+          label: "Secret resolution",
+          link: {
+            type: "doc",
+            id: "components/concepts/secret-resolution",
+          },
+          items: [
+            "components/concepts/secret-resolution-and-job-activation",
+            "components/concepts/secret-resolution-incidents",
+          ],
+        },
         "components/concepts/element-templates",
         {
           Listeners: [
@@ -741,6 +753,17 @@ module.exports = {
             },
             {
               type: "category",
+              label: "Manage credentials",
+              link: {
+                type: "doc",
+                id: "components/hub/organization/credentials/credentials",
+              },
+              items: [
+                "components/hub/organization/credentials/credentials-modeling-interface",
+              ],
+            },
+            {
+              type: "category",
               label: "Manage the catalog",
               link: {
                 type: "doc",
@@ -778,11 +801,9 @@ module.exports = {
                 "components/hub/organization/manage-organization-settings/view-organization-activity",
                 "components/hub/organization/manage-organization-settings/enable-alpha-features",
                 "components/hub/organization/manage-organization-settings/usage-history",
-                // TODO: Either bring these back when we have content or remove references
-                // "components/hub/organization/manage-organization-settings/usage-alerts",
-                // "components/hub/organization/manage-organization-settings/advanced-search",
+                "components/hub/organization/manage-organization-settings/usage-alerts",
                 "components/hub/organization/manage-organization-settings/switch-organization",
-                // "components/hub/organization/manage-organization-settings/delete-account",
+                "components/hub/organization/manage-organization-settings/delete-account",
                 {
                   "Manage plan": [
                     "components/hub/organization/manage-organization-settings/manage-plan/create-account",
@@ -936,6 +957,7 @@ module.exports = {
         "components/modeler/desktop-modeler/process-applications",
         "components/modeler/using-web-and-desktop-modeler-together",
         "components/modeler/desktop-modeler/use-connectors",
+        "components/modeler/desktop-modeler/credentials",
         {
           "Element templates": [
             "components/modeler/desktop-modeler/element-templates/configuring-templates",
@@ -1028,6 +1050,8 @@ module.exports = {
                         "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-task-example",
                       ],
                     },
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade",
+                    "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-model-providers",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-documents",
                     "components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-customization",
@@ -1144,6 +1168,7 @@ module.exports = {
               items: [
                 "components/connectors/manage-connector-templates",
                 "components/connectors/custom-built-connectors/create-connector-from-rest",
+                "components/connectors/custom-built-connectors/credential-templates",
               ],
             },
             "components/connectors/custom-built-connectors/connector-sdk",
@@ -1362,6 +1387,7 @@ module.exports = {
             "apis-tools/optimize-api/health-readiness",
             "apis-tools/optimize-api/import-entities",
             "apis-tools/optimize-api/variable-labeling",
+            "apis-tools/optimize-api/delete-process-definition-data",
           ],
         },
         require("./docs/apis-tools/zeebe-api/sidebar-schema"),
@@ -1441,6 +1467,7 @@ module.exports = {
           items: [
             "apis-tools/java-client/job-worker",
             "apis-tools/java-client/physical-tenants",
+            "apis-tools/java-client/secrets",
             "apis-tools/java-client/logging",
           ],
         },
@@ -2250,6 +2277,7 @@ module.exports = {
                 "self-managed/concepts/physical-tenants/provisioning-and-lifecycle",
                 "self-managed/concepts/physical-tenants/connectors-runtime",
                 "self-managed/concepts/physical-tenants/app-integrations",
+                "self-managed/concepts/physical-tenants/troubleshooting",
               ],
             },
           ],
@@ -2477,6 +2505,7 @@ module.exports = {
                 "self-managed/components/optimize/configuration/security-instructions",
                 "self-managed/components/optimize/configuration/shared-elasticsearch-cluster",
                 "self-managed/components/optimize/configuration/history-cleanup",
+                "self-managed/components/optimize/configuration/process-definition-deletion",
                 "self-managed/components/optimize/configuration/localization",
                 "self-managed/components/optimize/configuration/object-variables",
                 "self-managed/components/optimize/configuration/variable-import",

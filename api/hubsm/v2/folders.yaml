@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # Folder resource paths and schemas
 paths:
@@ -178,6 +179,103 @@ paths:
             The folder is soft-deleted but was not itself the target of the
             soft-delete operation (it was soft-deleted as a descendant of an
             ancestor folder, project, or workspace).
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /folders/recently-deleted/search:
+    post:
+      operationId: searchRecentlyDeletedFolders
+      summary: Search recently deleted folders
+      description: >
+        Returns soft-deleted folders scoped to the caller's organization. Only
+        folders that are the root of their own deletion are listed; a folder
+        soft-deleted as part of an ancestor folder, project, or workspace's
+        deletion event is represented by that ancestor instead, and a folder
+        deleted independently before its ancestor stays listed in its own
+        right; use the respective recently-deleted search endpoint to access
+        that ancestor entity. Folders remain
+        listed until the retention period expires and the scheduled cleanup job
+        runs; they can also be restored with
+        `POST /folders/{folderKey}/restoration` or permanently removed with
+        `DELETE /folders/{folderKey}/permanent`.
+      x-added-in-version: "0.4.0"
+      tags:
+        - Folder
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecentlyDeletedFolderSearchQuery"
+      responses:
+        "200":
+          description: The search completed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecentlyDeletedFolderSearchQueryResult"
+        "400":
+          $ref: "common-responses.yaml#/components/responses/InvalidData"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "500":
+          $ref: "common-responses.yaml#/components/responses/InternalServerError"
+
+  /folders/{folderKey}/restoration:
+    post:
+      operationId: restoreFolder
+      summary: Restore a recently deleted folder
+      description: >
+        Restores a soft-deleted folder back to the live project, together with
+        the descendants that were soft-deleted with it. If the folder's
+        original parent folder was also deleted, the folder is restored into a
+        new wrapper folder under the nearest surviving ancestor folder, or at
+        the project root if no ancestor folder survives. The folder cannot be
+        restored while its containing project or workspace is still deleted.
+        Only a folder that is the root of its own deletion can be restored via
+        this endpoint; a folder that was soft-deleted as part of an ancestor
+        folder, project, or workspace's deletion event must be restored
+        through the corresponding ancestor restoration endpoint instead.
+      x-added-in-version: "0.4.0"
+      x-semantic-requires:
+        kind: Folder
+        bind:
+          folderKey:
+            from: path
+            name: folderKey
+      tags:
+        - Folder
+      parameters:
+        - $ref: "#/components/parameters/FolderKeyPathParam"
+      responses:
+        "200":
+          description: The folder was restored successfully. Returns the restored folder.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FolderResult"
+        "401":
+          $ref: "common-responses.yaml#/components/responses/Unauthorized"
+        "403":
+          $ref: "common-responses.yaml#/components/responses/Forbidden"
+        "404":
+          description: >-
+            The recently deleted folder was not found, or is not the root of
+            its own deletion.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "problem-detail.yaml#/components/schemas/ProblemDetail"
+        "409":
+          description: >-
+            The folder cannot be restored because its containing project or
+            workspace is itself deleted. Restore that first.
           content:
             application/problem+json:
               schema:
@@ -387,3 +485,107 @@ components:
           type: array
           items:
             $ref: "files.yaml#/components/schemas/FileResult"
+
+    # --- Recently deleted schemas ---
+
+    RecentlyDeletedFolderSearchQuery:
+      type: object
+      properties:
+        page:
+          description: >
+            Pagination criteria. Supports offset-based pagination (from/limit) or
+            a simple limit.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPage"
+        sort:
+          description: Sort field criteria.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedFolderSearchQuerySortRequest"
+        filter:
+          description: The recently deleted folder search filters.
+          allOf:
+            - $ref: "#/components/schemas/RecentlyDeletedFolderFilter"
+
+    RecentlyDeletedFolderFilter:
+      type: object
+      description: Filter criteria for searching recently deleted folders.
+      properties:
+        folderKey:
+          description: Filter by the key of the deleted folder.
+          x-semantic-type: FolderKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        name:
+          description: Filter by folder name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        projectKey:
+          description: Filter by the key of the project the folder belonged to.
+          x-semantic-type: ProjectKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        deleted:
+          description: Filter by deletion date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
+
+    RecentlyDeletedFolderSearchQuerySortRequest:
+      type: object
+      required:
+        - field
+      properties:
+        field:
+          description: The field to sort by.
+          type: string
+          enum:
+            - name
+            - deleted
+        order:
+          $ref: "search-models.yaml#/components/schemas/SortOrderEnum"
+
+    RecentlyDeletedFolderSearchQueryResult:
+      type: object
+      required:
+        - items
+        - page
+      properties:
+        items:
+          description: The recently deleted folders.
+          type: array
+          items:
+            $ref: "#/components/schemas/RecentlyDeletedFolderResult"
+        page:
+          description: Pagination metadata for the search results.
+          allOf:
+            - $ref: "search-models.yaml#/components/schemas/SearchQueryPageResponse"
+
+    RecentlyDeletedFolderResult:
+      type: object
+      required:
+        - folderKey
+        - name
+        - projectKey
+        - deleted
+        - deletedBy
+      properties:
+        folderKey:
+          description: The unique key identifying the deleted folder.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FolderKey"
+        name:
+          description: The name of the deleted folder.
+          type: string
+        projectKey:
+          description: The key of the project the folder belonged to.
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
+        deleted:
+          description: The timestamp when the folder was deleted.
+          type: string
+          format: date-time
+        deletedBy:
+          description: The user who deleted the folder.
+          allOf:
+            - $ref: "files.yaml#/components/schemas/UserReference"
+          nullable: true

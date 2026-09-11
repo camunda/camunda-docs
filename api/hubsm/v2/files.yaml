@@ -1,8 +1,9 @@
 # Copyright Camunda Services GmbH and/or licensed to Camunda Services GmbH under
 # one or more contributor license agreements. See the NOTICE file distributed
 # with this work for additional information regarding copyright ownership.
-# Licensed under the Camunda License 1.0. You may not use this file
-# except in compliance with the Camunda License 1.0.
+# Licensed under a proprietary license. See the LICENSE.txt file for more
+# information. You may not use this file except in compliance with the
+# proprietary license.
 
 # File resource paths and schemas
 paths:
@@ -210,9 +211,15 @@ paths:
       operationId: searchRecentlyDeletedFiles
       summary: Search recently deleted files
       description: >
-        Returns soft-deleted files scoped to the caller's organization. Files
-        remain listed until the retention period expires and the scheduled
-        cleanup job runs; they can also be restored with
+        Returns soft-deleted files scoped to the caller's organization. Only
+        files that are the root of their own deletion are listed; a file
+        soft-deleted as part of an ancestor folder, project, or workspace's
+        deletion event is represented by that ancestor instead, and a file
+        deleted independently before its ancestor stays listed in its own
+        right; use the respective recently-deleted search endpoint to access
+        that ancestor entity. Files remain
+        listed until the retention period expires and the scheduled cleanup
+        job runs; they can also be restored with
         `POST /files/{fileKey}/restoration` or permanently removed with
         `DELETE /files/{fileKey}/permanent`.
       x-added-in-version: "0.1.0"
@@ -248,7 +255,11 @@ paths:
         Restores a soft-deleted file back to the live project. If the file's
         original parent folder was also deleted, the file is restored into a
         new wrapper folder at the project root. The file cannot be restored if
-        its containing project has been deleted.
+        its containing project has been deleted. Only a file that is the root
+        of its own deletion can be restored via this endpoint; a file that was
+        soft-deleted as part of an ancestor folder, project, or workspace's
+        deletion event must be restored through the corresponding ancestor
+        restoration endpoint instead.
       x-added-in-version: "0.1.0"
       x-semantic-requires:
         kind: File
@@ -272,7 +283,9 @@ paths:
         "403":
           $ref: "common-responses.yaml#/components/responses/Forbidden"
         "404":
-          description: The recently deleted file was not found.
+          description: >-
+            The recently deleted file was not found, or is not the root of
+            its own deletion.
           content:
             application/problem+json:
               schema:
@@ -643,6 +656,37 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/RecentlyDeletedFileSearchQuerySortRequest"
+        filter:
+          description: The recently deleted file search filters.
+          allOf:
+            - $ref: "#/components/schemas/RecentlyDeletedFileFilter"
+
+    RecentlyDeletedFileFilter:
+      type: object
+      description: Filter criteria for searching recently deleted files.
+      properties:
+        fileKey:
+          description: Filter by the key of the deleted file.
+          x-semantic-type: FileKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        name:
+          description: Filter by file name.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/StringFilterProperty"
+        projectKey:
+          description: Filter by the key of the project the file belonged to.
+          x-semantic-type: ProjectKey
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        type:
+          description: Filter by file type.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/BasicStringFilterProperty"
+        deleted:
+          description: Filter by deletion date.
+          allOf:
+            - $ref: "filters.yaml#/components/schemas/DateTimeFilterProperty"
 
     RecentlyDeletedFileSearchQuerySortRequest:
       type: object
@@ -685,7 +729,8 @@ components:
       properties:
         fileKey:
           description: The unique key identifying the deleted file.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/FileKey"
         name:
           description: The name of the deleted file.
           type: string
@@ -702,7 +747,8 @@ components:
             - tests
         projectKey:
           description: The key of the project the file belonged to.
-          type: string
+          allOf:
+            - $ref: "keys.yaml#/components/schemas/ProjectKey"
         deleted:
           description: The timestamp when the file was deleted.
           type: string

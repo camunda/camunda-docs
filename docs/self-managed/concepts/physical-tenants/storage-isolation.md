@@ -65,32 +65,35 @@ tenanta:
 
 ### Validation and operations
 
-- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message. For Oracle, schema isolation uses distinct authenticated users rather than URL differences; a known false positive startup conflict may be reported for identical Oracle URLs in the current alpha release.
+- **Configuration**: Misconfiguration (duplicate schema/URL) causes a startup error with a clear message. For Oracle, schema isolation uses distinct authenticated users rather than URL differences, so set `database-vendor-id: oracle` on each tenant to avoid a false conflict on identical URLs.
 - **Pre-startup**: Ensure each tenant's schema exists, is empty, and has valid credentials
 - **Manual DDL**: If running Liquibase scripts separately, apply to every tenant's schema before each upgrade
 - **Resource scaling**: Each tenant gets its own JDBC datasource per cluster node; add memory/CPU for many tenants
 
-:::caution Table prefix must be uppercase
-RDBMS table prefixes must use uppercase characters. A lowercase prefix causes Liquibase migration to fail at startup. For example, use `TENANTA_` not `tenanta_`. See [camunda/camunda#56093](https://github.com/camunda/camunda/issues/56093).
+:::note RDBMS table prefixes are normalized to uppercase
+Camunda converts RDBMS table prefixes to uppercase before applying them, so `tenanta_` and `TENANTA_` produce the same schema objects. Two consequences follow:
+
+- Prefixes that differ only in case resolve to the same storage location. Configuring `ta_` for one tenant and `TA_` for another fails the startup uniqueness check.
+- Prefixes that are invalid SQL identifiers for other reasons, such as hyphens, spaces, or a leading digit, are still accepted at configuration time and fail later during schema migration.
+
+Earlier 8.10 alpha releases carried the prefix through verbatim, which failed the Liquibase migration at startup for a lowercase prefix. See [camunda/camunda#56093](https://github.com/camunda/camunda/issues/56093).
 :::
 
-:::note Oracle limitation in 8.10 alpha
-In the 8.10 alpha release, Oracle supports isolation by table prefix only. Using separate schemas from the same Oracle instance for multiple Physical Tenants is not supported in alpha and will be fixed in a later release.
+:::note Isolate Oracle tenants by schema-per-user
+Oracle isolates Physical Tenants by distinct authenticated database users rather than by differing JDBC URLs, so two Oracle tenants can share one URL and still be isolated. Because the URLs are identical, startup validation reports a storage-location conflict unless you tell Camunda the vendor explicitly.
+
+Set `data.secondary-storage.rdbms.database-vendor-id: oracle` on each tenant. The startup error includes this hint.
 :::
-
-## Elasticsearch/OpenSearch storage
-
-Use separate clusters or a shared cluster with per-tenant index prefixes.
-
-### Naming and collision prevention
-
-- **Prefix format**: `{tenantId}` (dash automatically appended by the application)
-- **Collision prevention**: Use the full tenant ID and avoid prefixes that are identical to another tenant's prefix. Overlapping prefixes (for example, `eu` and `eu-west`) are not caught by startup validation. Only exact duplicates fail at startup.
-- **Validation**: Cluster fails at startup if two tenants have identical index prefixes
 
 ## Elasticsearch and OpenSearch storage
 
 Each Physical Tenant can use a shared Elasticsearch or OpenSearch cluster with isolated index prefixes, or a dedicated cluster per tenant.
+
+### Naming and collision prevention
+
+Startup validation fails only when two tenants resolve to an identical index prefix. Overlapping prefixes are not detected, so `eu` and `eu-west` both pass validation even though `eu*` matches both tenants' indices.
+
+Use the full tenant ID as the prefix, and make sure no tenant's prefix is the leading substring of another tenant's prefix.
 
 ### Configuration models
 
@@ -183,7 +186,7 @@ camunda:
 
 ### IAM authentication (request signing)
 
-Alternatively, set `aws-enabled: true` to sign requests with AWS Signature Version 4 instead of Basic authentication. Credentials are resolved from the AWS SDK default provider chain — on EKS this is the pod's IAM role via IRSA, and the region is taken from the environment (for example `AWS_REGION`):
+Alternatively, set `aws-enabled: true` to sign requests with AWS Signature Version 4 instead of Basic authentication. Credentials are resolved from the AWS SDK default provider chain. On EKS this is the pod's IAM role via IRSA, and the region is taken from the environment (for example, `AWS_REGION`):
 
 ```yaml
 camunda:
@@ -197,7 +200,7 @@ camunda:
 
 With request signing, the AWS identity is also the principal that OpenSearch authorizes: all physical tenants share the pod's single IAM role, and tenant separation is provided by per-tenant index prefixes together with the instance's access policy or FGAC role mapping for that role. Per-tenant IAM identities are not supported; if tenants require authentication isolation from each other, use fine-grained access control with per-tenant internal users as described above.
 
-IAM authentication also works with a dedicated OpenSearch instance per tenant. Camunda creates a separate client per tenant, each signing requests against its own endpoint with the same pod identity — `aws-enabled` is inherited from the root configuration, so tenants only override their `url`:
+IAM authentication also works with a dedicated OpenSearch instance per tenant. Camunda creates a separate client per tenant, each signing requests against its own endpoint with the same pod identity. `aws-enabled` is inherited from the root configuration, so tenants only override their `url`:
 
 ```yaml
 camunda:
@@ -225,7 +228,7 @@ camunda:
 
 For this to authenticate correctly, two conditions must hold:
 
-- **Every instance must authorize the pod's IAM role**: attach an IAM policy to the role allowing `es:ESHttp*` on each instance's ARN, and allow the role in each instance's access policy (or map the role ARN in its fine-grained access control configuration). This also works for an instance in a different AWS account, granted through that instance's resource-based access policy — the signing identity is still the single pod role.
+- **Every instance must authorize the pod's IAM role**: attach an IAM policy to the role allowing `es:ESHttp*` on each instance's ARN, and allow the role in each instance's access policy (or map the role ARN in its fine-grained access control configuration). This also works for an instance in a different AWS account, granted through that instance's resource-based access policy. The signing identity is still the single pod role.
   :::warning
   **All instances must be in the same AWS region as the pod.** The request signature is scoped to the region resolved from the pod's environment (for example `AWS_REGION`), not derived from each endpoint. An instance in a different region rejects the signature with an authentication error.
   :::
@@ -720,10 +723,10 @@ When a tenant is degraded because its schema has not initialized, REST query API
 | **Consolidate**  | Backup source → Create new backend → Update config → Restore → Verify         |
 | **Split tenant** | Plan data distribution → Backup → Create stores → Restore to each → Restart   |
 
-## Known limitations in 8.10
+## Known limitations
 
 :::note
-**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported in 8.10. This constraint exists in the Query API stack, not the exporter layer.
+**Cannot mix secondary storage backends across tenants.** All Physical Tenants in a cluster must use the same secondary storage type. Use either RDBMS for every tenant or Elasticsearch/OpenSearch for every tenant. A cluster where tenant A uses RDBMS and tenant B uses Elasticsearch is not supported. This constraint exists in the Query API stack, not the exporter layer.
 :::
 
 :::caution Custom exporter configuration merge (alpha3)

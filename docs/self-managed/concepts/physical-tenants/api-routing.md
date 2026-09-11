@@ -124,7 +124,7 @@ MCP server endpoints follow the same path convention as the REST API and webapps
 /physical-tenants/{physicalTenantId}/mcp/...
 ```
 
-There is no cluster-wide MCP endpoint planned for 8.10.
+There is no cluster-wide MCP endpoint.
 
 ## Tenant discovery
 
