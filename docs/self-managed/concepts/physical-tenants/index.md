@@ -57,9 +57,9 @@ graph TD
 
 The diagram shows one orchestration cluster boundary with shared control-plane components and tenant-specific execution and storage boundaries.
 
-The same isolation extends to identity, web apps, and Optimize. Each Physical Tenant authenticates through its own identity provider, gets its own Operate, Tasklist, and Admin, and its own backup and restore, while Logical Tenants remain available for lightweight subdivision inside each one:
+The same isolation extends to authentication and authorization, and web apps. Each Physical Tenant authenticates through its own identity provider, gets its own Operate, Tasklist, and Admin, and its own backup and restore, while Logical Tenants remain available for lightweight subdivision inside each one:
 
-![Two Physical Tenants inside one Orchestration Cluster, each with its own identity provider, web apps, secondary storage, and a separately deployed Optimize instance.](./img/physical-tenant-architecture.png)
+![Two Physical Tenants inside one Orchestration Cluster, each with its own identity provider, web apps, and secondary storage.](./img/physical-tenant-architecture.png)
 
 ## API routing
 
