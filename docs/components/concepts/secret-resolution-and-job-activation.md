@@ -14,6 +14,17 @@ A cluster whose process models contain no `camunda.secrets.<name>` reference is 
 
 This page describes an alpha feature and may change in future releases. See [alpha features](/components/early-access/alpha/alpha-features.md).
 
+## Availability
+
+Secret resolution is available in both SaaS and Self-Managed.
+
+| Offering     | Secret store            | What you configure                                                                                                                                                                                                                                                                            |
+| :----------- | :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SaaS         | Provisioned and managed | No secret store configuration. Manage secret values on the cluster's **Cluster secrets** tab and reference them as `camunda.secrets.<key>`. See [Manage connector secrets](/components/hub/organization/manage-clusters/manage-secrets.md#reference-connector-secrets-as-camundasecretsname). |
+| Self-Managed | File, AWS, or GCP       | The store type, path, and credentials. See [secrets configuration](/self-managed/components/orchestration-cluster/core-settings/configuration/properties.md#secrets).                                                                                                                         |
+
+You can configure AWS Secrets Manager and GCP Secret Manager stores only in Self-Managed.
+
 ## Resolve references before activation
 
 The broker resolves secret references on a background scheduler, not on the processing path, so a slow or unavailable secret store cannot stall processing.
