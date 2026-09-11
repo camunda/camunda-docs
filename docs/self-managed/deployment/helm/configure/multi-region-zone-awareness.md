@@ -101,7 +101,7 @@ Contact points matter only while the cluster bootstraps. Once brokers have found
 
 ## A single zone is still one cluster
 
-Zone awareness with one zone provides named broker identities but cannot bias leaders between failure domains because every replica has the same zone priority. The chart treats it as one cluster throughout: it generates the initial contact points, as described above, and it keeps the Optimize exporter that a cluster spread over several zones has to give up. Adding a second zone is what makes the deployment spread and lets different priorities influence leader placement.
+Zone awareness with one zone provides named broker identities but cannot bias leaders between failure domains because every replica has the same zone priority. The chart treats it as one cluster throughout, generating the initial contact points as described above. Adding a second zone is what makes the deployment spread and lets different priorities influence leader placement.
 
 :::note
 Adding a zone that was not part of the original zone list is not a Helm-only change. The partition distribution has to be updated through the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md#partition-distribution-api) as well, because existing partitions have to be told about the new zone. Declaring every zone up front and deploying them progressively avoids this: the replicas are already reserved, so the brokers only have to start.

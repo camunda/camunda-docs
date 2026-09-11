@@ -112,7 +112,7 @@ If the writer was not in the lost region, no database action is required.
 
 #### Move the Raft leaders to the new writer region
 
-Once the writer has moved, the zone priorities still favor the region that hosted the old one, so partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Raise the priority of the zone that now hosts the writer, so leaders move next to it. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) for applying it to a running cluster.
+Once the writer has moved, the zone priorities still favor the region that hosted the old one, so partition leaders keep exporting across regions and pay the inter-region round trip on every flush. Raise the priority of the zone that now hosts the writer. Priorities do not move existing leaders on their own, they apply at the next election, so follow the change with a [rebalance](/self-managed/components/orchestration-cluster/zeebe/operations/rebalancing.md) to move the leaders. Check the replication lag first, because a rebalance only succeeds when the intended leader is not lagging behind the current one. See [zone-aware clusters](/self-managed/components/orchestration-cluster/zeebe/configuration/zone-aware-clusters.md) for the priority property, and the [cluster management API](/self-managed/components/orchestration-cluster/zeebe/operations/management-api.md) for applying it to a running cluster.
 
 ### 3. Route client traffic away from the lost region
 
