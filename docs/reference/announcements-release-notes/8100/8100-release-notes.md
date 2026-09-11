@@ -38,27 +38,6 @@ import PageDescription from '@site/src/components/PageDescription';
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Agentic orchestration">Agentic orchestration</span><span class="badge badge--medium" title="This feature affects AI agents">AI agents</span><span class="badge badge--medium" title="This feature affects Camunda IDP">IDP</span></div>
 
-### Agent tool configuration
-
-<!-- https://github.com/camunda/product-hub/issues/3719, https://github.com/camunda/product-hub/issues/3574 -->
-
-New features help you more easily configure your agent tools when modeling.
-
-| Feature                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Available in                                                                                |
-| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
-| Fix                               | Automatically detect and apply a safe fix for an agent misconfiguration. <p><ul><li><p>If a `fromAi()` key or an output key is detected as invalid, click the **Fix** button to apply a fix.</p></li><li><p>Applying a fix only rewrites the invalid part of a field value. The **Fix** button is only shown if the field has an existing (misconfigured) value.</p></li></ul></p>                                                                                                                                                                                                            | <p><ul><li>Desktop Modeler</li><li>Hub Modeler</li></ul></p>                                |
-| Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Hub Modeler</li></ul></p>                                |
-| Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Hub Modeler</li></ul></p> |
-
-:::note
-
-- Changes are explicit, apply only when the correction is deterministic, and can be undone.
-- These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
-
-:::
-
-<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
-
 ### Agentic control plane
 
 <!-- https://github.com/camunda/product-hub/issues/3621 -->
@@ -77,16 +56,22 @@ The conversation storage SPI used by [custom AI Agent storage backends](/compone
 
 <p class="link-arrow">[Conversation storage SPI redesign](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connector-conversation-storage-spi-redesign)</p>
 
-#### Native (v2) element templates
+#### New native element templates
 
-<!-- https://github.com/camunda/connectors/issues/7211
-https://github.com/camunda/connectors/issues/7225 -->
+<!-- https://github.com/camunda/connectors/issues/7211, https://github.com/camunda/connectors/issues/7225 -->
 
-The AI Agent Task and AI Agent Sub-process connectors are now available as new, native (`v2`) element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
+The AI Agent Task and AI Agent Sub-process connectors are now available as new, native element templates, running on new job types and giving native access to each LLM provider's own SDK and wire format, including extended thinking and prompt caching configuration where supported.
 
-Provider and backend selection are now decoupled: for example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The original (`v1`) element templates are deprecated as of Camunda 8.10.
+Provider and backend selection are now decoupled. For example, the Anthropic provider can run through AWS Bedrock Mantle, and the OpenAI provider through Microsoft Foundry (Azure), while keeping each provider's own configuration options. The legacy element templates are deprecated as of Camunda 8.10.
 
-:::note
+This is a major redesign of the AI Agent connector, available from 8.10 only, and requires manual [migration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md) of each element from the current legacy connector.
+
+<ul>
+  <li><span class="link-arrow">[Release announcement](/reference/announcements-release-notes/8100/8100-announcements.md#ai-agent-connectors-redesigned-templates-legacy-templates-deprecated)</span></li>
+  <li><span class="link-arrow">[Upgrade AI Agent element templates](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-upgrade.md)</span></li>
+</ul>
+
+:::note legacy connector deprecated in 8.10
 The legacy connector is deprecated in 8.10 but not removed, and continues to work. Adopting the new template is a manual, per-element migration, not an automatic upgrade.
 :::
 
@@ -110,6 +95,27 @@ You can now test non-deterministic AI agent behavior in Camunda Process Test wit
   <li><span class="link-arrow">[JSON test case instructions](/apis-tools/testing/json-test-cases.md#reference-instructions)</span></li>
 </ul>
 
+### Assisted agent tool configuration
+
+<!-- https://github.com/camunda/product-hub/issues/3719, https://github.com/camunda/product-hub/issues/3574 -->
+
+New features help you more easily configure your agent tools when modeling.
+
+| Feature                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Available in                                                                                |
+| :-------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------ |
+| Fix                               | Automatically detect and apply a safe fix for an agent misconfiguration. <p><ul><li><p>If a `fromAi()` key or an output key is detected as invalid, click the **Fix** button to apply a fix.</p></li><li><p>Applying a fix only rewrites the invalid part of a field value. The **Fix** button is only shown if the field has an existing (misconfigured) value.</p></li></ul></p>                                                                                                                                                                                                            | <p><ul><li>Desktop Modeler</li><li>Hub Modeler</li></ul></p>                                |
+| Input from agent, Output to agent | Automatically fill in the `fromAi()` inputs or the `toolCallResult` output configuration of an agent tool contract. <p><ul><li><p>**Input from agent**: Use to add a correctly structured agent-supplied input for a blank input mapping or blank FEEL-capable element-template field.</p></li><li><p>**Output to agent**: Use to map a tool result back to the agent.</p></li><li><p>Autofill is only available for a blank field, and becomes unavailable as soon as a field holds a value (so it can never replace your entered values).</p></li></ul></p>                                 | <p><ul><li>Desktop Modeler</li><li>Hub Modeler</li></ul></p>                                |
+| Lint rule checking                | <p>Agent tool configuration lint rule checking helps you avoid agent misconfiguration and errors when modeling.</p><p><ul><li>Linting rules identify and highlight malformed `fromAi()` inputs, missing or incorrect `toolCallResult` output mappings, and missing tool descriptions before they cause silent runtime failures.</li><li><p>Configuration errors are highlighted in the Modeler. Select an error to navigate to and highlight the affected field (including fields supplied by connector templates). Inline guidance is shown to help you resolve the error.</p></li></ul></p> | <p><ul><li>Desktop Modeler</li><li>Headless BPMN linting.</li><li>Hub Modeler</li></ul></p> |
+
+:::note
+
+- Changes are explicit, apply only when the correction is deterministic, and can be undone.
+- These configuration features are only available inside an ad-hoc sub-process marked as agentic through either the `io.camunda.agenticai.toolContainer` property or an out-of-the-box AI Agent element template. It is not available in a plain sub-process. You might need to [update your element template](/components/modeler/reference/modeling-guidance/rules/agent-fromai-contract.md#declare-a-sub-process-as-agentic) to use this new feature.
+
+:::
+
+<p class="link-arrow">[Assisted agent tool configuration](/components/connectors/out-of-the-box-connectors/agentic-ai-aiagent-tool-definitions.md#assisted-tool-configuration-in-camunda-hub)</p>
+
 ### Camunda-provided LLM for SaaS
 
 <!-- https://github.com/camunda/product-hub/issues/2883 -->
@@ -121,6 +127,14 @@ You can now run AI Agents on Camunda 8 SaaS in minutes using the Camunda-provide
 - This dramatically reduces time-to-first-running-agent by removing the need for external LLM infrastructure or credential setup.
 
 <p class="link-arrow">[Camunda-provided LLM](/components/agentic-orchestration/camunda-provided-llm.md)</p>
+
+### IDP supports ABBYY for document extraction
+
+<!-- https://github.com/camunda/product-hub/issues/3492 -->
+
+Intelligent document processing (IDP) now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
+
+<p class="link-arrow">[Intelligent document processing](/components/hub/workspace/modeler/intelligent-document-processing.md)</p>
 
 ### MCP start event element template
 
@@ -171,12 +185,6 @@ The Camunda Skills repository toolset enables AI coding agents to build, validat
 - Run BPMN lint rules against generated diagrams.
 - Scaffold and wire Camunda Process Test (CPT) integration tests.
 
-### Support for ABBYY as an IDP Provider
-
-<!-- https://github.com/camunda/product-hub/issues/3492 -->
-
-Intelligent document processing (IDP) now supports [ABBYY](https://www.abbyy.com/) as a document extraction provider.
-
 ## APIs & tools
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span><span class="badge badge--medium" title="This feature affects the C# SDK">C# SDK</span><span class="badge badge--medium" title="This feature affects the Go SDK">Go SDK</span><span class="badge badge--medium" title="This feature affects the Java client">Java client</span><span class="badge badge--medium" title="This feature affects the Rust SDK">Rust SDK</span><span class="badge badge--medium" title="This feature affects the Spring SDK">Spring SDK</span></div>
@@ -187,7 +195,7 @@ Intelligent document processing (IDP) now supports [ABBYY](https://www.abbyy.com
 
 Camunda now offers an officially supported C# Client for the Camunda 8 Orchestration Cluster REST API v2.
 
-You can authenticate with your cluster (No Auth for local, Basic Auth, or OIDC access tokens) and use C# methods to deploy resources, start and manage process instances, work with user tasks, and query processes and decisions—complete with pagination helpers and typed responses via generated models.
+You can authenticate with your cluster (No Auth for local, Basic authentication, or OIDC access tokens) and use C# methods to deploy resources, start and manage process instances, work with user tasks, and query processes and decisions, complete with pagination helpers and typed responses via generated models.
 
 <p class="link-arrow">[C# SDK](/apis-tools/csharp-sdk.md)</p>
 
@@ -317,67 +325,7 @@ The new Camunda visual design system is introduced for Hub with the 8.10 release
 - Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
 - The new design system is enabled by default for Camunda Hub in both Self-Managed and SaaS.
 
-## Connectors
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
-
-### App Integrations connector
-
-<!-- https://github.com/camunda/product-hub/issues/3542 -->
-
-Use the new App Integrations connector to send and receive messages in Microsoft Teams and Slack.
-
-**Send messages**: You can send Microsoft Teams and Slack messages without managing credentials. The connector sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
-
-**Receive messages**: You can receive Microsoft Teams and Slack messages in a process. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
-
-<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
-
-### AWS Connectors updated to AWS SDK for Java v2
-
-<!-- https://github.com/camunda/product-hub/issues/3581 -->
-
-All AWS connectors are updated to use AWS SDK for Java v2.
-
-This ensures Camunda AWS connector implementations use supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
-
-### Connector Management observability
-
-<!-- https://github.com/camunda/product-hub/issues/3019 -->
-
-Connector Management now provides a unified view of inbound and outbound connectors in Console.
-
-- The refreshed experience adds status summaries, search, filtering, sorting, per-runtime health and metrics, richer process details, clearer activity logs, and direct links to Operate.
-- Operators can also reset inbound connector executables from the UI, while webhook activity logs expose redacted request metadata and bounded body previews to make troubleshooting easier.
-
-<p class="link-arrow">[Manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md)</p>
-
-### Connector search improvements
-
-<!-- https://github.com/camunda/product-hub/issues/3403 -->
-
-You can now find a connector by the operation you want to perform. Built-in connector templates now describe their operations, so you can model by the action you want to take instead of the product that provides it.
-
-- Searching in the create, append, or change element menu for `upload object` or `send email` returns the matching operations of every connector as their own entries, and selecting one applies the connector with that operation preselected.
-- Connectors with several operations show their operations as a nested menu, and the operation selection is now the first group in the properties panel.
-- Connectors that provide a single operation are also renamed to describe their action. For example, the **REST Outbound Connector** is renamed to **Send REST Request**. Existing process models are unaffected.
-
-<p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
-
-### Storage connector improvements
-
-<!-- https://github.com/camunda/product-hub/issues/3224 -->
-
-The following improvements are made to storage connectors (S3, Azure Blob, GCS):
-
-- These connectors now support direct object creation from variables and better content extraction for document references.
-- You can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store. Documents with incorrect content-types can be read using conversion options (for example, "read as text", "read as JSON").
-
-## Console
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Console">Console</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
-
-#### New AWS US West region
+### New AWS US West region
 
 <!-- https://github.com/camunda/product-hub/issues/3274 -->
 
@@ -445,6 +393,62 @@ You can now create new SaaS Orchestration Clusters on specific supported Camunda
 
 - The latest recommended versions (latest patch of each active minor)
 - Other still-supported versions that you already run on existing clusters in the same organization.
+
+## Connectors
+
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Connectors">Connectors</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+
+### App Integrations connector
+
+<!-- https://github.com/camunda/product-hub/issues/3542 -->
+
+Use the new App Integrations connector to send and receive messages in Microsoft Teams and Slack.
+
+**Send messages**: You can send Microsoft Teams and Slack messages without managing credentials. The connector sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
+
+**Receive messages**: You can receive Microsoft Teams and Slack messages in a process. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
+
+<p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
+
+### AWS Connectors updated to AWS SDK for Java v2
+
+<!-- https://github.com/camunda/product-hub/issues/3581 -->
+
+All AWS connectors are updated to use AWS SDK for Java v2.
+
+This ensures Camunda AWS connector implementations use supported client libraries and reduces maintenance risk, as AWS SDK for Java 1.x reached end of support on 31 December 2025.
+
+### Connector Management observability
+
+<!-- https://github.com/camunda/product-hub/issues/3019 -->
+
+Connector Management now provides a unified view of inbound and outbound connectors.
+
+- The refreshed experience adds status summaries, search, filtering, sorting, per-runtime health and metrics, richer process details, clearer activity logs, and direct links to Operate.
+- Operators can also reset inbound connector executables from the UI, while webhook activity logs expose redacted request metadata and bounded body previews to make troubleshooting easier.
+
+<p class="link-arrow">[Manage your connectors](/components/hub/organization/manage-clusters/manage-connectors.md)</p>
+
+### Connector search improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3403 -->
+
+You can now find a connector by the operation you want to perform. Built-in connector templates now describe their operations, so you can model by the action you want to take instead of the product that provides it.
+
+- Searching in the create, append, or change element menu for `upload object` or `send email` returns the matching operations of every connector as their own entries, and selecting one applies the connector with that operation preselected.
+- Connectors with several operations show their operations as a nested menu, and the operation selection is now the first group in the properties panel.
+- Connectors that provide a single operation are also renamed to describe their action. For example, the **REST Outbound Connector** is renamed to **Send REST Request**. Existing process models are unaffected.
+
+<p class="link-arrow">[Integrate a built-in connector](/components/connectors/use-connectors/configuring-out-of-the-box-connector.md)</p>
+
+### Storage connector improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3224 -->
+
+The following improvements are made to storage connectors (S3, Azure Blob, GCS):
+
+- These connectors now support direct object creation from variables and better content extraction for document references.
+- You can now generate .json, .txt, .csv, or binary files inline without relying on the Document Store. Documents with incorrect content-types can be read using conversion options (for example, "read as text", "read as JSON").
 
 ## Helm chart deployment
 
@@ -536,7 +540,7 @@ Camunda for Microsoft Teams now supports routing incident and task collaboration
 
 ## Modeler
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Web Modeler">Web Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Hub Modeler">Hub Modeler</span><span class="badge badge--medium" title="This feature affects Desktop Modeler">Desktop Modeler</span></div>
 
 ### Modeling menu improvements
 
@@ -691,73 +695,6 @@ Execution listeners now support configurable headers, aligned with service task 
 - In Modeler, you can configure execution listener headers visually (name/value pairs) without editing BPMN XML.
 - Listener workers can consume these headers as metadata and configuration parameters using the same patterns as service task job workers.
 
-## Operate
-
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster API">Orchestration Cluster API</span></div>
-
-### Business ID visibility and filtering
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-Business ID is now a first-class searchable attribute across Operate and the Orchestration Cluster API. Operations engineers can search and filter process instances, decision instances and user tasks by Business ID, enabling fast identification and investigation of business cases.
-
-- Business ID is visible in Operate process instance lists, decision instance lists, details views, and filters.
-- Advanced filtering supports exact match, not-equal, exists, and wildcard searches.
-- Business ID participates in message correlation as an additional constraint alongside the existing correlation key.
-- Business ID is visible in Tasklist task views for task workers to identify the associated business case.
-
-#### Business ID filtering
-
-Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
-
-<p class="link-arrow">[Business ID filtering](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
-
-#### Visibility for decision instances
-
-Business ID is now visible in Operate for decision instances, in both the decision instance list and the decision instance details view. Filter decision instances by business ID using **Equals**, **Contains**, and **Is one of** in the filter UI, or the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
-
-<p class="link-arrow">[Business ID for decision instances](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
-
-#### Visibility for process instances
-
-Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
-
-<p class="link-arrow">[Business ID for process instances](/components/concepts/process-instance-creation.md#business-id)</p>
-
-### JSON display in Operate
-
-<!-- https://github.com/camunda/product-hub/issues/3464 -->
-
-The JSON display functionality in Operate for SaaS is updated. You can now:
-
-- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
-- View JSON values with consistent, easier to understand formatting.
-- Copy full JSON variable values to the clipboard.
-- Use the improved in-line variables display.
-
-This update helps navigate more complex data during operations and troubleshooting.
-
-### Multi-variable filtering
-
-<!-- https://github.com/camunda/product-hub/issues/3459 -->
-
-In Operate, you can now combine multiple variable filters with `AND` logic to find exactly the process instances you need.
-
-Filter by variable name, value, and comparison operators, such as `equals`, `contains`, `greater than`, and `less than`, including nested JSON paths.
-
-<p class="link-arrow">[Multi-variable filters](/components/operate/userguide/filter-process-instances.md#multi-variable-filters)</p>
-
-### Wait states
-
-<!-- https://github.com/camunda/camunda/issues/45040, https://github.com/camunda/product-hub/issues/3455 -->
-
-Operate now shows what an active process instance is waiting for.
-
-- When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
-- Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
-
-<p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
-
 ## Optimize
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
@@ -843,13 +780,15 @@ With this, you can configure setups such as:
 
 ## Orchestration Cluster
 
-<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span></div>
+<div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Orchestration Cluster">Orchestration Cluster</span><span class="badge badge--medium" title="This feature affects Operate">Operate</span><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span><span class="badge badge--medium" title="This feature affects Zeebe">Zeebe</span></div>
 
 ### Centralized Secret Resolution via Zeebe
 
 <!-- https://github.com/camunda/product-hub/issues/3040 -->
 
-Centralized secret resolution through Zeebe is introduced with this alpha. Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
+Centralized secret resolution through Zeebe is introduced in 8.10.
+
+Processes can reference credentials from customer-managed secret stores without persisting secret values in Camunda.
 
 - Reference secrets as `camunda.secrets.NAME` in input mappings, expressions, and output mappings. The legacy `{{secrets.NAME}}` syntax continues to work.
 - Secrets are resolved automatically for activated jobs and can also be requested through the Gateway APIs `/v2/secrets/resolve` and `/v2/secrets/list`.
@@ -862,6 +801,8 @@ Centralized secret resolution through Zeebe is introduced with this alpha. Proce
 
 **Limitations:**
 This feature does not yet include HashiCorp Vault or Azure Key Vault support, secret access audit logging, per-process secret restrictions, or centralized resolution for Hybrid Connector Runtimes. Cache entries expire after the configured TTL, which is 20 seconds by default.
+
+<p class="link-arrow">[Secret resolution](/components/concepts/secret-resolution.md)</p>
 
 ### Docker images
 
@@ -894,6 +835,69 @@ OIDC authentication failures now surface actionable diagnostics in application l
 
 - Enable `camunda.security.authentication.oidc.diagnostics.enabled` to log the redirect URI Camunda expects against the one your identity provider returned, and to flag a callback that arrives without a valid session, the two most common causes of a login redirect loop.
 - If you use Microsoft Entra as your identity provider, an app registration issuing v1 tokens now fails authentication with an explicit error naming the fix (`api.requestedAccessTokenVersion = 2`) instead of looping silently.
+
+### Operate Business ID visibility and filtering
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+Business ID is now a first-class searchable attribute across Operate and the Orchestration Cluster API. Operations engineers can search and filter process instances, decision instances and user tasks by Business ID, enabling fast identification and investigation of business cases.
+
+- Business ID is visible in Operate process instance lists, decision instance lists, details views, and filters.
+- Advanced filtering supports exact match, not-equal, exists, and wildcard searches.
+- Business ID participates in message correlation as an additional constraint alongside the existing correlation key.
+- Business ID is visible in Tasklist task views for task workers to identify the associated business case.
+
+#### Business ID filtering
+
+Operate now exposes business ID as a filter field for process instances. You can filter using **Equals**, **Contains** (with `*` and `?` wildcards), and **Is one of** — or use the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
+
+<p class="link-arrow">[Business ID filtering](/components/concepts/process-instance-creation.md#searching-and-filtering-by-business-id)</p>
+
+#### Visibility for decision instances
+
+Business ID is now visible in Operate for decision instances, in both the decision instance list and the decision instance details view. Filter decision instances by business ID using **Equals**, **Contains**, and **Is one of** in the filter UI, or the full operator set (`$eq`, `$neq`, `$exists`, `$like`, `$in`, `$notIn`) via the API.
+
+<p class="link-arrow">[Business ID for decision instances](/components/operate/userguide/basic-operate-navigation.md#business-id-for-decision-instances)</p>
+
+#### Visibility for process instances
+
+Business ID is now visible in Operate for process instances. The `businessId` field appears in the process instance list and the process instance details view.
+
+<p class="link-arrow">[Business ID for process instances](/components/concepts/process-instance-creation.md#business-id)</p>
+
+### Operate JSON display improvements
+
+<!-- https://github.com/camunda/product-hub/issues/3464 -->
+
+The JSON display functionality in Operate for SaaS is improved. You can now:
+
+- Open JSON variables in a dedicated JSON viewer directly from the variables panel, without entering editing mode.
+- View JSON values with consistent, easier to understand formatting.
+- Copy full JSON variable values to the clipboard.
+- Use the improved in-line variables display.
+
+These improvements help you navigate more complex data during operations and troubleshooting.
+
+### Operate multi-variable filtering
+
+<!-- https://github.com/camunda/product-hub/issues/3459 -->
+
+In Operate, you can now combine multiple variable filters with `AND` logic to find exactly the process instances you need.
+
+Filter by variable name, value, and comparison operators, such as `equals`, `contains`, `greater than`, and `less than`, including nested JSON paths.
+
+<p class="link-arrow">[Multi-variable filters](/components/operate/userguide/filter-process-instances.md#multi-variable-filters)</p>
+
+### Operate wait state visibility
+
+<!-- https://github.com/camunda/camunda/issues/45040, https://github.com/camunda/product-hub/issues/3455 -->
+
+Operate now shows what an active process instance is waiting for.
+
+- When you inspect an active element, you can see the wait state and its details, for example, a timer's due date, a receive task's message name and correlation key, a signal name, a condition expression, or a job's type and state.
+- Wait state tracking is enabled by default and writes records to secondary storage. In Camunda 8 Self-Managed, you can [disable it](/self-managed/concepts/wait-states/configure.md) if you do not want to track this data.
+
+<p class="link-arrow">[Wait states](/components/wait-states/overview.md)</p>
 
 ### Rebalance API for coordinated leadership transfer
 
@@ -939,6 +943,14 @@ Physical Tenants now support independent per-tenant authorization.
 
 <p class="link-arrow">[Physical Tenant isolation model](/self-managed/concepts/physical-tenants/index.md)</p>
 
+### Tasklist Business ID
+
+<!-- https://github.com/camunda/product-hub/issues/3436 -->
+
+Business ID is now visible in Tasklist, in both the task list and task detail views. Filter tasks by business ID using **Equals**, **Contains**, and **Is one of** in the filter dialog, or the `$neq`/`$exists`/`$notIn` operators via the API.
+
+<p class="link-arrow">[Business ID filter](/components/tasklist/userguide/using-filters.md#business-id-filter)</p>
+
 ### Unified authentication for the Orchestration Cluster, Camunda Hub, and Optimize
 
 <!-- https://github.com/camunda/product-hub/issues/3607 -->
@@ -963,16 +975,6 @@ Document Handling now supports any S3-compatible object store such as MinIO, Clo
 - No migration is required for existing AWS S3 deployments.
 
 <p class="link-arrow">[Document handling configuration](/self-managed/concepts/document-handling/configuration/index.md)</p>
-
-### Unified frontend application for Admin, Operate, and Tasklist
-
-<!-- https://github.com/camunda/product-hub/issues/3456 -->
-
-Operate, Tasklist, and Admin are now accessed from a single frontend application with shared navigation, consistent design patterns, and unified deployment. Your user preferences (such as dark/light mode) are applied across all views, with consistent navigation patterns throughout the interface.
-
-<p class="link-arrow">[Operate overview](/components/operate/operate-introduction.md)</p>
-
-<p class="link-arrow">[RDBMS configuration overview](/self-managed/concepts/databases/relational-db/configuration.md)</p>
 
 ### Cluster variable metadata
 
@@ -1177,18 +1179,6 @@ You can now perform rolling upgrades of self-managed Camunda 8 between patch and
 - Schema changes between versions are strictly backwards-compatible and applied transparently.
 
 <p class="link-arrow">[Rolling upgrades](/self-managed/deployment/helm/configure/database/rdbms-schema-management.md#rolling-upgrades)</p>
-
-## Tasklist
-
-<div class="release"><span class="badge badge--medium" title="This feature affects Tasklist">Tasklist</span></div>
-
-### Business ID in Tasklist
-
-<!-- https://github.com/camunda/product-hub/issues/3436 -->
-
-Business ID is now visible in Tasklist, in both the task list and task detail views. Filter tasks by business ID using **Equals**, **Contains**, and **Is one of** in the filter dialog, or the `$neq`/`$exists`/`$notIn` operators via the API.
-
-<p class="link-arrow">[Business ID filter](/components/tasklist/userguide/using-filters.md#business-id-filter)</p>
 
 ## 8.10.0-alpha5
 
