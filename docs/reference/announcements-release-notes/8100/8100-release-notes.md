@@ -305,6 +305,8 @@ Camunda 8 Run now includes a bundled Java runtime. This means you no longer need
 
 <div class="release"><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span></div>
 
+Release notes required.
+
 ### Camunda design system
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span><span class="badge badge--medium" title="This feature affects Camunda Hub">Camunda Hub</span></div>
@@ -314,29 +316,6 @@ The new Camunda visual design system is introduced for Hub with the 8.10 release
 - A new, streamlined design system offers a cleaner, more consistent look across components.
 - Accessibility improvements are built in, and the updated navigation menu makes it easier to find your way around.
 - The new design system is enabled by default for Camunda Hub in both Self-Managed and SaaS.
-
-### Optimize data filters in Console
-
-<!-- https://github.com/camunda/product-hub/issues/3679 -->
-
-You can now configure Optimize data filters directly in Console cluster settings, without editing Helm values or configuration files.
-
-The **Data filters** section in cluster settings lets you:
-
-- Enable or disable Optimize export filtering per cluster.
-- Include or exclude process definitions by exact `bpmnProcessId`.
-- Include or exclude variable names by prefix — for example, `business_` includes all variables whose names start with `business_`.
-- Exclusion takes precedence over inclusion when both are configured.
-
-New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables starting with `business_` to reduce Elasticsearch storage and shard usage. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
-
-Saving filter changes triggers a rolling restart of the Orchestration Cluster; the cluster is briefly unavailable while it restarts.
-
-:::warning
-Filtered records are permanently excluded from Optimize and cannot be recovered even if you relax the filters later.
-:::
-
-<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
 ## Connectors
 
@@ -348,17 +327,11 @@ Filtered records are permanently excluded from Optimize and cannot be recovered 
 
 Use the new App Integrations connector to send and receive messages in Microsoft Teams and Slack.
 
-#### Send Microsoft Teams and Slack messages without managing credentials
+**Send messages**: You can send Microsoft Teams and Slack messages without managing credentials. The connector sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
 
-The App Integrations connector sends messages to Microsoft Teams and Slack, and creates channels, through your organization's Camunda app integrations. The connection is configured once for the environment, so no endpoint or credentials appear in the process model.
+**Receive messages**: You can receive Microsoft Teams and Slack messages in a process. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
 
 <p class="link-arrow">[App Integrations connector](/components/connectors/out-of-the-box-connectors/app-integrations.md)</p>
-
-#### Receive Microsoft Teams and Slack messages in a process
-
-The App Integrations connector receives messages as well as sending them. A process can start from a message someone writes to the Camunda app in Microsoft Teams or Slack, and a process that is already holding a conversation receives the reply, so an approval, a choice, or a correction can be collected in the chat people are already in rather than in a separate form.
-
-<p class="link-arrow">[Receive a chat message](/components/connectors/out-of-the-box-connectors/app-integrations.md#receive-a-chat-message)</p>
 
 ### AWS Connectors updated to AWS SDK for Java v2
 
@@ -819,6 +792,29 @@ Wait state tracking is enabled by default and writes records to secondary storag
 ## Optimize
 
 <div class="release"><span class="badge badge--long" title="This feature affects Self-Managed">Self-Managed</span><span class="badge badge--medium" title="This feature affects Optimize">Optimize</span><span class="badge badge--long" title="This feature affects SaaS">SaaS</span></div>
+
+### Optimize data filters in Console
+
+<!-- https://github.com/camunda/product-hub/issues/3679 -->
+
+You can now configure Optimize data filters directly in cluster settings, without editing Helm values or configuration files.
+
+The **Data filters** section in cluster settings lets you:
+
+- Enable or disable Optimize export filtering per cluster.
+- Include or exclude process definitions by exact `bpmnProcessId`.
+- Include or exclude variable names by prefix — for example, `business_` includes all variables whose names start with `business_`.
+- Exclusion takes precedence over inclusion when both are configured.
+
+New SaaS clusters include a default `business_` variable include filter, which limits Optimize to variables starting with `business_` to reduce Elasticsearch storage and shard usage. Existing clusters show data filters disabled with a one-click opt-in — no automatic migration occurs.
+
+Saving filter changes triggers a rolling restart of the Orchestration Cluster; the cluster is briefly unavailable while it restarts.
+
+:::warning
+Filtered records are permanently excluded from Optimize and cannot be recovered even if you relax the filters later.
+:::
+
+<p class="link-arrow">[Configure Optimize data filters](/components/hub/organization/manage-clusters/settings.md#data-filters)</p>
 
 ### Object variables no longer flattened by default in Self-Managed
 
